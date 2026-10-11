@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Che Daily Improvement Pro</title>
+<meta name="description" content="每天讀愛爾蘭新聞學英文，用測驗成績賺金幣、買五行裝備、出征打怪升級。">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Che Pro">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#F2F5F3">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+<style>
+html{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+body{margin:0}
+[hidden]{display:none!important}
+img{max-width:100%}
+/* Layout: phone app shell — sticky masthead, one scrolling column, bottom tab bar; article set like a newspaper column */
+:root{
+  --paper:#F2F5F3; --card:#FFFFFF; --ink:#18221F; --muted:#5B6A66; --line:#D3DCD8;
+  --accent:#1D6A5A; --accent-ink:#FFFFFF; --accent-soft:#DCEDE7;
+  --gorse:#F0BE45; --gorse-soft:#FBEBC0; --good:#2E8B57; --good-soft:#DDF1E4; --bad:#C0443B; --bad-soft:#F7DEDB;
+  --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-read:"Newsreader","Iowan Old Style",Georgia,serif;
+  --f-ui:system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111816; --card:#19221F; --ink:#E4ECE9; --muted:#93A29D; --line:#2B3632;
+  --accent:#5DB6A1; --accent-ink:#0D1513; --accent-soft:#1E3530;
+  --gorse:#E2B23B; --gorse-soft:#3D3318; --good:#5CC48A; --good-soft:#1B3527; --bad:#E7756B; --bad-soft:#3E2220; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111816; --card:#19221F; --ink:#E4ECE9; --muted:#93A29D; --line:#2B3632;
+  --accent:#5DB6A1; --accent-ink:#0D1513; --accent-soft:#1E3530;
+  --gorse:#E2B23B; --gorse-soft:#3D3318; --good:#5CC48A; --good-soft:#1B3527; --bad:#E7756B; --bad-soft:#3E2220; color-scheme:dark}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--f-ui);font-size:15px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:0 calc(88px + env(safe-area-inset-bottom,0px))}
+header.mast{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line);margin-inline:-16px;padding:12px 16px 10px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand{font-family:var(--f-display);font-weight:700;font-size:18px;letter-spacing:-.01em;white-space:nowrap}
+.mast small{text-align:right}
+.brand span{color:var(--accent)}
+.mast small{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs button{background:none;border:0;padding:10px 4px 12px;font-size:12px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px}
+nav.tabs button[aria-current="page"]{color:var(--accent);font-weight:600}
+nav.tabs svg{width:22px;height:22px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.view{display:flex;flex-direction:column;gap:18px;padding-top:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.muted{color:var(--muted)}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:12px 20px;font-weight:600;font-size:15px}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+/* Today: three steps */
+.hero h1{font-size:26px;line-height:1.15;margin-top:4px}
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:left;width:100%}
+.step .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;border:1.5px solid var(--line);color:var(--muted)}
+.step.now{border-color:var(--accent)}
+.step.now .n{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.step.done .n{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.step.locked{opacity:.55}
+.step b{display:block;font-size:15px}
+.step span.s{font-size:13px;color:var(--muted)}
+.step .go{font-size:13px;color:var(--accent);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.stat b{display:block;font-family:var(--f-display);font-size:24px;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+/* Article */
+.art-head h1{font-family:var(--f-read);font-weight:600;font-size:28px;line-height:1.18;margin:6px 0 8px}
+.art-meta{font-size:12.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+.art-meta a{color:var(--accent)}
+.zh-sum{font-size:14px;color:var(--muted);border-left:3px solid var(--gorse);padding-left:10px}
+.article{font-family:var(--f-read);font-size:20px;line-height:1.62;max-width:65ch}
+.article p{margin:0 0 1em}
+.w{border-radius:3px;padding:0 1px;margin:0 -1px;cursor:pointer;transition:background .15s}
+.w:active{background:var(--accent-soft)}
+.w.known{text-decoration:underline dotted var(--accent);text-underline-offset:4px}
+.w.hit{background:var(--gorse-soft);box-shadow:inset 0 -2px 0 var(--gorse)}
+.tip{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.tip i{display:inline-block;width:18px;height:12px;background:var(--gorse-soft);box-shadow:inset 0 -2px 0 var(--gorse);border-radius:2px}
+.lock{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;padding:28px 16px}
+/* Bottom sheet */
+.scrim{position:fixed;inset:0;background:rgba(10,16,14,.35);z-index:20}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:var(--card);border-radius:18px 18px 0 0;border-top:1px solid var(--line);padding:10px 20px calc(22px + env(safe-area-inset-bottom,0px));max-width:640px;margin:0 auto;box-shadow:0 -10px 30px rgba(0,0,0,.12);animation:up .2s ease-out}
+@keyframes up{from{transform:translateY(30px);opacity:.4}}
+@media (prefers-reduced-motion:reduce){.sheet{animation:none}}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 12px}
+.sheet .wd{font-family:var(--f-read);font-size:30px;font-weight:600;display:flex;align-items:center;gap:10px}
+.sheet .zh{font-size:22px;margin:6px 0 4px;font-weight:600}
+.pos{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--muted);font-family:var(--f-ui);font-weight:500}
+.say{background:var(--accent-soft);color:var(--accent);border:0;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;flex:none}
+.say svg{width:18px;height:18px}
+.ex{font-family:var(--f-read);font-style:italic;color:var(--muted);font-size:16px;margin-top:10px}
+.ex b{font-style:normal;color:var(--ink)}
+/* Quiz */
+.qbar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.qcard{display:flex;flex-direction:column;gap:14px}
+.qprompt{font-family:var(--f-read);font-size:32px;font-weight:600;line-height:1.2}
+.qprompt.zh{font-family:var(--f-ui);font-size:26px}
+.qprompt.cloze{font-size:20px;font-weight:400;line-height:1.5}
+.qprompt.cloze u{text-decoration:none;border-bottom:2px solid var(--accent);padding:0 1.5em}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left;font-size:16px}
+.opt.en{font-family:var(--f-read);font-size:19px}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{font-size:14px;min-height:21px}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)}
+.score{font-family:var(--f-display);font-size:56px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+/* Dictionary */
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dict{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.ent{border-bottom:1px solid var(--line)}
+.ent:last-child{border-bottom:0}
+.ent>button{display:grid;grid-template-columns:1fr auto;gap:4px 12px;width:100%;background:none;border:0;padding:12px 14px;text-align:left}
+.ent .en{font-family:var(--f-read);font-size:19px;font-weight:600}
+.ent .z{grid-column:1;font-size:14px;color:var(--muted);min-width:0}
+.ent .acc{grid-row:1/3;grid-column:2;text-align:right;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;flex-direction:column;align-items:flex-end;gap:4px;justify-content:center}
+.meter{width:56px;height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%}
+.chip{font-size:11px;border-radius:999px;padding:1px 8px;font-weight:600}
+.chip.new{background:var(--gorse-soft);color:var(--ink)}
+.more{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-variant-numeric:tabular-nums}
+.empty{text-align:center;padding:32px 16px;color:var(--muted)}
+.empty h3{color:var(--ink);font-size:18px;margin-bottom:6px}
+.arch{display:flex;flex-direction:column;gap:10px}
+.arch button{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:4px}
+.arch b{font-family:var(--f-read);font-size:18px;font-weight:600;line-height:1.25}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:999px;font-size:13px;z-index:30}
+.danger{color:var(--bad);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
+.chip.done{background:var(--good-soft);color:var(--good)}
+.chip.topic{background:var(--accent-soft);color:var(--accent)}
+.optm{display:block;font-family:var(--f-ui);font-size:13px;color:var(--muted);margin-top:2px}
+.exp{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:8px;font-size:15px}
+.exp.bad{border-color:var(--bad)}
+.exp p{margin:0}
+.exp-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.exp-head .en{font-family:var(--f-read);font-size:21px;font-weight:600}
+.exp-head .z{color:var(--muted);flex:1;min-width:0}
+.mark{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;flex:none}
+.mark.ok{background:var(--good-soft);color:var(--good)} .mark.no{background:var(--bad-soft);color:var(--bad)}
+.lab{display:inline-block;font-size:11px;letter-spacing:.06em;font-weight:700;color:var(--muted);margin-right:8px;text-transform:uppercase}
+.mist{background:var(--bad-soft);border-radius:10px;padding:8px 10px}
+.en-i{font-family:var(--f-read);font-style:italic;font-size:16px}
+.en-i b{font-style:normal}
+
+/* ---- adventure ---- */
+:root{--metal:#A8861F;--wood:#3C8A4A;--water:#2A68B0;--fire:#C9461D;--earth:#8B6235;--none:#8A9592;--night:#16211E;--night-ink:#EAF2EF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--metal:#E0BE55;--wood:#6CC27A;--water:#6AA6EC;--fire:#F07A4F;--earth:#C9965F;--none:#7F8B88;--night:#0B1210;--night-ink:#E4ECE9}}
+:root[data-theme="dark"]{--metal:#E0BE55;--wood:#6CC27A;--water:#6AA6EC;--fire:#F07A4F;--earth:#C9965F;--none:#7F8B88;--night:#0B1210;--night-ink:#E4ECE9}
+.mast small b{color:var(--accent);font-variant-numeric:tabular-nums}
+.el{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:700;color:#fff;vertical-align:middle;flex:none;font-family:var(--f-ui)}
+.el.big{width:40px;height:40px;font-size:19px;border-radius:12px}
+.el-metal{background:var(--metal)}.el-wood{background:var(--wood)}.el-water{background:var(--water)}.el-fire{background:var(--fire)}.el-earth{background:var(--earth)}.el-none{background:var(--none)}
+.el-fill-metal{fill:var(--metal)}.el-fill-wood{fill:var(--wood)}.el-fill-water{fill:var(--water)}.el-fill-fire{fill:var(--fire)}.el-fill-earth{fill:var(--earth)}
+.mon-seal.el-bg-metal{--c:var(--metal)}.mon-seal.el-bg-wood{--c:var(--wood)}.mon-seal.el-bg-water{--c:var(--water)}.mon-seal.el-bg-fire{--c:var(--fire)}.mon-seal.el-bg-earth{--c:var(--earth)}
+.adv-banner{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--night);color:var(--night-ink);border:0;border-radius:var(--r);padding:14px 16px}
+.adv-banner span{display:flex;flex-direction:column;gap:2px}.adv-banner .muted{color:var(--night-ink);opacity:.7;font-size:13px}.adv-banner .go{color:var(--gorse);font-weight:700}
+.reward{background:var(--card);border:1.5px solid var(--gorse);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:6px}
+.reward.win{border-color:var(--good)}.reward.lose{border-color:var(--bad)}
+.rw-row{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}.rw-row b{font-family:var(--f-display)}
+.rw-row.lvup b{color:var(--accent);font-size:20px}
+.hero-card{background:var(--night);color:var(--night-ink);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.hero-card .eyebrow{color:var(--night-ink);opacity:.65}
+.hc-top{display:flex;align-items:flex-end;gap:16px}.hc-top>div:first-child{flex:1}.hc-top h2{font-size:30px}
+.purse{text-align:right}.purse b{display:block;font-family:var(--f-display);font-size:22px;color:var(--gorse);font-variant-numeric:tabular-nums}.purse span{font-size:11px;opacity:.7}
+.xp{height:8px;border-radius:4px;background:rgba(255,255,255,.15);overflow:hidden}.xp i{display:block;height:100%;background:var(--gorse)}
+.hero-card .muted{color:var(--night-ink);opacity:.7}
+.hc-stats{display:flex;gap:16px;font-size:14px}.hc-stats b{font-family:var(--f-display);font-size:18px;font-variant-numeric:tabular-nums}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.slot{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.07);border-radius:10px;padding:8px 10px;font-size:14px;min-width:0}
+.slot span{display:flex;flex-direction:column;min-width:0}.slot small{opacity:.6;font-size:11px}
+.rules summary{cursor:pointer;font-weight:600}.rules p{font-size:14px;margin:8px 0 0}
+.cycle{width:100%;max-width:240px;display:block;margin:8px auto 0}
+.cy-arrow{stroke:var(--muted);stroke-width:1.6}.cy-head{fill:var(--muted)}.cy-t{fill:#fff;font-weight:700;font-size:16px;font-family:var(--f-ui)}
+.region{display:flex;flex-direction:column;gap:8px}.region.locked{opacity:.5}
+.rg-head{display:flex;justify-content:space-between;align-items:flex-end}.rg-head h3{font-size:18px}
+.mons,.items{display:flex;flex-direction:column;gap:8px}
+.mon,.item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px;text-align:left;width:100%}
+.item.on{border-color:var(--accent)}
+.it-main{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;font-size:13px}.it-main b{font-size:15px}
+.tier{font-family:var(--f-display);color:var(--muted);font-size:12px}
+.go-t{color:var(--accent);font-weight:700;font-size:14px}
+.btn.sm{padding:7px 14px;font-size:13px;flex:none}.sm-t{font-size:12px;flex:none}
+.adv{font-size:11px;border-radius:999px;padding:1px 8px;background:var(--line);color:var(--muted);font-weight:600}
+.adv.good{background:var(--good-soft);color:var(--good)}.adv.bad{background:var(--bad-soft);color:var(--bad)}
+.vs{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center}
+.lore{font-family:var(--f-read);font-style:italic;color:var(--muted);margin:4px 0 0;font-size:15px}
+.mon-seal{--c:var(--none);aspect-ratio:1;max-width:100%;border-radius:22px;background:radial-gradient(circle at 50% 35%, color-mix(in srgb,var(--c) 75%,#fff), var(--c) 70%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:inset 0 0 0 3px rgba(255,255,255,.25);transition:transform .15s}
+.mon-seal.boss{box-shadow:inset 0 0 0 3px var(--gorse),0 0 18px color-mix(in srgb,var(--c) 60%,transparent)}
+.ms-el{font-size:44px;font-weight:800;line-height:1;font-family:var(--f-ui)}.ms-name{font-size:11px;font-weight:600;opacity:.9;text-align:center;padding:0 6px}
+.mon-seal.hit,.you.hit .you-card{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.mon-seal.hit,.you.hit .you-card{animation:none}}
+.arena{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end;background:var(--night);border-radius:18px;padding:16px}
+.side{display:flex;flex-direction:column;gap:8px;min-width:0}
+.you-card{background:rgba(255,255,255,.08);color:var(--night-ink);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.hp{position:relative;height:18px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
+.hp i{display:block;height:100%;transition:width .3s}.hp.m i{background:var(--bad)}.hp.p i{background:var(--good)}
+.hp span{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.blog{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px;max-height:260px;overflow:auto}
+.blog li{padding:6px 10px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.blog li.lm{color:var(--bad)} .blog li.lp b{color:var(--accent)}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><small id="mastInfo"></small></header>
+  <main id="app"><div class="view"><p class="muted">載入中…</p></div></main>
+</div>
+<nav class="tabs" aria-label="主選單">
+  <button id="tab-today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>今日</button>
+  <button id="tab-dict" data-tab="dict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>字典</button>
+  <button id="tab-adv" data-tab="adv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 3.5l6 6-9 9-3-3z"/><path d="M8.5 15.5l-5 5M5 14l5 5"/></svg>冒險</button>
+  <button id="tab-arch" data-tab="arch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg>文章</button>
+</nav>
+<div id="overlay"></div>
+
+<script>
+"use strict";
+/* ---------- utilities ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const today = () => ymd(new Date());
+const daysBetween = (a,b) => Math.round((Date.parse(b+"T12:00:00")-Date.parse(a+"T12:00:00"))/864e5);
+const WORD_RE = /[A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*/g;
+const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const keyOf = lemma => "w~" + lemma.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9_.~:@+-]/g,"_").slice(0,120);
+const fmtDate = s => { const d=new Date(s+"T12:00:00"); return d.toLocaleDateString("zh-TW",{month:"long",day:"numeric",weekday:"short"}); };
+const STOP = new Set("a an the and or but of to in on at for from with by is are was were be been it its this that these those he she they we you i his her their our my your as if than then so not no do does did have has had will would can could may might shall should must which who whom what when where there here".split(" "));
+function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.append(t); setTimeout(()=>t.remove(),1800); }
+function speak(text){ try{ const u=new SpeechSynthesisUtterance(text); u.lang="en-IE"; u.rate=.9; speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
+const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>';
+
+/* ---------- state ---------- */
+const S = {
+  tab:"today", view:"today",            // view: today | read | quiz | dict | arch
+  articles:[], articleDate:null,        // article being read
+  words:new Map(), days:new Map(),      // personal data
+  ready:{articles:false, personal:false},
+  dbOK:false, uid:null, quiz:null, dictSort:"recent", dictQ:"", open:null, sheet:null
+};
+
+/* ---------- storage layer: db when available, else this browser ---------- */
+let db=null, userCol=null, sample=null;
+const LS_KEY="che-daily-pro-v1";
+function lsLoad(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||"{}"); }catch(e){ return {}; } }
+function lsSave(){ try{ const o={}; for(const [k,v] of S.words) o[k]=v; for(const [k,v] of S.days) o[k]=v; if(S.game) o.game=S.game; localStorage.setItem(LS_KEY,JSON.stringify(o)); }catch(e){} }
+const chains = new Map();
+function persist(id, data){
+  if(id.startsWith("w~")) S.words.set(id,data); else S.days.set(id,data);
+  if(!userCol){ lsSave(); return; }
+  const prev = chains.get(id) || Promise.resolve();
+  const next = prev.then(()=>userCol && userCol.doc(id).set(data)).catch(e=>{
+    if(e && e.code==="quota_exceeded") toast("儲存空間已滿");
+    else if(e && e.code==="invalid_argument" && userCol){ userCol=null; S.dbOK=false; lsSave(); toast("改為儲存在這台裝置"); render(); }
+  });
+  chains.set(id,next);
+}
+function remove(id){
+  S.words.delete(id);
+  if(!userCol){ lsSave(); return; }
+  const prev = chains.get(id) || Promise.resolve();
+  chains.set(id, prev.then(()=>userCol.doc(id).delete()).catch(()=>{}));
+}
+function dayRec(d=today()){ return S.days.get("day~"+d) || {type:"day", date:d, preDone:false, postDone:false, read:null, lookedUp:[], lookedUpBy:{}, postBy:{}}; }
+function saveDay(rec){ persist("day~"+rec.date, rec); }
+
+/* ---------- weighting: how likely each word is drawn in the review quiz ---------- */
+function weightOf(w, ref=today()){
+  const c=w.correct||0, x=w.wrong||0;
+  const acc=(c+1)/(c+x+2);                       // smoothed accuracy, new words start at 50%
+  const since=daysBetween(w.lastTested||w.firstSeen, ref);
+  const stale=1+Math.min(Math.max(since,0),10)/10; // up to ×2 for words not seen in 10+ days
+  return ((1-acc)+0.08)*stale;
+}
+function eligible(ref=today()){ return [...S.words.values()].filter(w=>w.firstSeen < ref); }
+function probMap(){ const el=eligible(); const ws=el.map(w=>weightOf(w)); const tot=ws.reduce((a,b)=>a+b,0)||1; const m=new Map(); el.forEach((w,i)=>m.set(w.key, ws[i]/tot)); return m; }
+function weightedPick(list, n){ // Efraimidis–Spirakis weighted sampling without replacement
+  return list.map(w=>({w, k:Math.pow(Math.random(), 1/weightOf(w))})).sort((a,b)=>b.k-a.k).slice(0,n).map(o=>o.w);
+}
+
+/* ---------- article helpers ---------- */
+const mainArticle = () => S.articles[0] || null;           // latest date, rank 1
+const currentArticle = () => S.articles.find(a=>a.id===S.articleId) || mainArticle();
+const isMain = art => !!art && !!S.index[0] && art.id===S.index[0].id;
+function glossFor(art, surface){ const g=art && art.gloss || {}; return g[surface.toLowerCase()] || g[surface.toLowerCase().replace(/’/g,"'")] || null; }
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+function sentenceWith(art, surface){
+  for(const p of art.paragraphs){ for(const s of p.split(/(?<=[.!?])\s+/)){ if(new RegExp("(^|[^A-Za-zÀ-ÿ])"+reEsc(surface)+"([^A-Za-zÀ-ÿ]|$)","i").test(s)) return s; } }
+  return "";
+}
+function lookedUpFor(d, art){ return isMain(art) ? (d.lookedUp||[]) : ((d.lookedUpBy||{})[art.id]||[]); }
+function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,total:d.postTotal}:null) : ((d.postBy||{})[art.id]||null); }
+
+/* ---------- rendering ---------- */
+function setTab(t){ S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
+function render(){
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"));
+  { const g=game(); $("#mastInfo").innerHTML = `Lv ${g.lv} · <b>${g.gold}</b> 金 · ${g.tickets} 令`; }
+  const app=$("#app");
+  if(S.view==="today") app.innerHTML=viewToday();
+  else if(S.view==="read") app.innerHTML=viewRead();
+  else if(S.view==="quiz") app.innerHTML=viewQuiz();
+  else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
+  else if(S.view==="arch") app.innerHTML=viewArch();
+  else if(S.view==="adv") app.innerHTML=viewAdv();
+  else if(S.view==="battle") app.innerHTML=viewBattle();
+  renderSheet();
+}
+function artCard(a, d){
+  const lu=lookedUpFor(d,a).length, post=postFor(d,a);
+  const status = post ? `<span class="chip done">已讀 · 測驗 ${post.total?post.score+"/"+post.total:"完成"}</span>` : (lu?`<span class="chip new">讀過 · 查了 ${lu} 字</span>`:"");
+  return `<button data-artid="${esc(a.id)}"><span class="row" style="gap:8px">${a.topic?`<span class="chip topic">${esc(a.topic)}</span>`:""}<span class="eyebrow">${esc(fmtDate(a.date))}</span>${status}</span><b>${esc(a.title)}</b>${a.summaryZh?`<span class="muted" style="font-size:13px">${esc(a.summaryZh)}</span>`:""}</button>`;
+}
+
+function viewToday(){
+  const d=dayRec(), art=mainArticle(), el=eligible();
+  const preNeeded = el.length>0;
+  const preDone = d.preDone || !preNeeded;
+  const readDone = !!d.read;
+  const postDone = d.postDone;
+  if(!S.ready.articles) return `<div class="view"><p class="muted">正在載入今日文章…</p></div>`;
+  if(!art) return `<div class="view"><div class="card empty"><h3>還沒有文章</h3><p>每天早上會自動放上新的愛爾蘭新聞，請稍後再回來。</p></div></div>`;
+  const isToday = art.date===today();
+  const step=(n,cls,title,sub,act)=>`<button class="step ${cls}" ${act?`data-act="${act}"`:"disabled"}><span class="n">${cls.includes("done")?"✓":n}</span><span><b>${title}</b><span class="s">${sub}</span></span><span class="go">${act&&!cls.includes("done")?"開始 →":(act?"再看":"")}</span></button>`;
+  const total=[...S.words.values()];
+  const tested=total.reduce((a,w)=>a+(w.correct||0)+(w.wrong||0),0), right=total.reduce((a,w)=>a+(w.correct||0),0);
+  const extras=S.index.filter(a=>a.date===art.date && a.id!==art.id);
+  return `<div class="view">
+    <section class="hero"><div class="eyebrow">${isToday?"今日頭條":"最新頭條 · "+esc(fmtDate(art.date))}</div><h1>${esc(art.title)}</h1></section>
+    <div class="steps">
+      ${step(1, preDone?"done":"now", "複習測驗", preNeeded?(d.preDone?`答對 ${d.preScore}/${d.preTotal}`:`從 ${el.length} 個舊單字依熟練度抽 ${Math.min(8,el.length)} 題`):"還沒有舊單字可複習，直接開始閱讀", preNeeded&&!d.preDone?"pre":null)}
+      ${step(2, readDone?"done":(preDone?"now":"locked"), "閱讀頭條", readDone?`查了 ${(d.lookedUp||[]).length} 個字`:"點任何不會的字就會顯示中文", preDone?"read":null)}
+      ${step(3, postDone?"done":(readDone?"now":"locked"), "讀後測驗", postDone?(d.postTotal?`答對 ${d.postScore}/${d.postTotal}`:"今天沒有查字"):"測驗剛剛查過的單字，每題都有講解", readDone&&!postDone?"post":null)}
+    </div>
+    ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">還想多讀？</div><h2 style="font-size:20px">今天的其他 ${extras.length} 篇</h2></div>
+      ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">完成複習測驗後就能閱讀。</p>`}</section>`:""}
+    <button class="adv-banner" data-tab="adv"><span><b>出征令 ${game().tickets} 張 · 金幣 ${game().gold}</b><span class="muted">完成測驗賺金幣，買五行裝備去打怪</span></span><span class="go">冒險 →</span></button>
+    <div class="stats">
+      <div class="stat"><b>${S.words.size}</b><span>字典單字</span></div>
+      <div class="stat"><b>${tested?Math.round(right/tested*100)+"%":"—"}</b><span>累計正確率</span></div>
+      <div class="stat"><b>${S.index.length}</b><span>已收錄文章</span></div>
+    </div>
+    
+  </div>`;
+}
+
+function viewRead(){
+  const art=currentArticle(); if(!art) return `<div class="view"><p class="muted">找不到文章。</p></div>`;
+  const d=dayRec(); const preDone = d.preDone || eligible().length===0;
+  if(art.date===(mainArticle()||{}).date && !preDone) return `<div class="view"><div class="card lock"><h3>先完成複習測驗</h3><p class="muted">每天閱讀前，先複習前幾天查過的單字。</p><button class="btn" data-act="pre">開始複習測驗</button></div></div>`;
+  const lu=lookedUpFor(d,art), post=postFor(d,art);
+  const hits=new Set(lu);
+  const known=new Set([...S.words.values()].flatMap(w=>w.forms||[]));
+  const paras=art.paragraphs.map(p=>"<p>"+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((tok,i)=>{
+    if(i%2===0) return esc(tok);
+    const k=tok.toLowerCase(); const g=glossFor(art,tok); const lemma=(g&&g.base||k).toLowerCase();
+    const cls="w"+(hits.has(lemma)?" hit":(known.has(k)?" known":""));
+    return `<span class="${cls}" data-w="${esc(tok)}">${esc(tok)}</span>`;
+  }).join("")+"</p>").join("");
+  const src=(art.sources||[]).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("、");
+  let end;
+  if(isMain(art)) end = d.read ? (d.postDone?`<button class="btn ghost" data-act="home">回到今日</button>`:`<button class="btn" data-act="post">開始讀後測驗</button>`) : `<button class="btn" data-act="finish">讀完了，開始測驗 →</button>`;
+  else end = post ? `<p class="muted" style="font-size:14px">這篇的測驗已完成（${post.total?post.score+"/"+post.total:"沒有查字"}）。查過的字會出現在之後的複習測驗。</p><button class="btn ghost" data-act="home">回到今日</button>`
+    : `<button class="btn" data-act="finishx">讀完了，測驗這篇查過的字 →</button>`;
+  return `<div class="view">
+    <button class="btn ghost" data-act="back" style="align-self:flex-start;padding:6px 14px;font-size:13px">← 返回</button>
+    <div class="art-head"><div class="eyebrow">${art.topic?esc(art.topic)+" · ":""}${esc(fmtDate(art.date))}${art.level?" · CEFR "+esc(art.level):""}</div><h1>${esc(art.title)}</h1>
+    <div class="art-meta"><span>${art.paragraphs.join(" ").match(WORD_RE).length} 字</span>${src?`<span>改寫自 ${src}</span>`:""}</div></div>
+    ${art.summaryZh?`<div class="zh-sum">${esc(art.summaryZh)}</div>`:""}
+    <div class="tip"><i></i>點一下單字看翻譯，查過的字會標成這個顏色並存進字典</div>
+    <article class="article" id="article">${paras}</article>
+    ${end}
+  </div>`;
+}
+
+/* ---------- dictionary ---------- */
+function viewDict(){
+  const seg=(k,l)=>`<button data-sort="${k}" aria-pressed="${S.dictSort===k}">${l}</button>`;
+  return `<div class="view">
+    <div><div class="eyebrow">我的字典</div><h2 style="font-size:24px">${S.words.size} 個單字</h2></div>
+    <input id="dictSearch" class="search" type="search" placeholder="搜尋英文或中文" value="${esc(S.dictQ)}" autocomplete="off">
+    <div class="seg" role="group" aria-label="排序">${seg("recent","最近查詢")}${seg("weak","最不熟")}${seg("az","A–Z")}</div>
+    <div id="dictList">${dictList()}</div>
+    <p class="muted" style="font-size:12.5px">抽中機率依答對率計算：答錯越多、越久沒複習的字，越容易被抽到。</p>
+    <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>備份紀錄</b><span class="muted" style="font-size:13px">單字和測驗紀錄只存在這支手機的瀏覽器裡。換手機或清除 Safari 資料前，先匯出一份備份。</span>
+      <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">匯出紀錄</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">匯入紀錄</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+  </div>`;
+}
+function exportData(){
+  const o={app:"che-daily-improvement", exported:new Date().toISOString(), items:{}};
+  for(const [k,v] of S.words) o.items[k]=v; for(const [k,v] of S.days) o.items[k]=v; if(S.game) o.items.game=S.game;
+  const url=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:"application/json"}));
+  const a=document.createElement("a"); a.href=url; a.download="che-pro-backup-"+today()+".json"; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+async function importData(file){
+  try{
+    const o=JSON.parse(await file.text()); const items=o.items||{}; let n=0;
+    const score=v=>(v.correct||0)+(v.wrong||0)+(v.lookups||0);
+    for(const [k,v] of Object.entries(items)){
+      if(!v||typeof v!=="object") continue;
+      if(v.type==="word"){ const cur=S.words.get(k); if(!cur||score(v)>score(cur)){ S.words.set(k,v); n++; } }
+      else if(v.type==="day"){ if(!S.days.has(k)) S.days.set(k,v); }
+      else if(v.type==="game"){ const cur=game(); if(v.lv>cur.lv || (v.lv===cur.lv && v.exp>=cur.exp)) S.game={...G_DEFAULT, ...v}; }
+    }
+    lsSave(); toast("已匯入 "+n+" 個單字"); render();
+  }catch(e){ toast("檔案格式不正確"); }
+}
+function noteHtml(n){
+  if(!n) return "";
+  return `<div class="exp">
+    ${n.meaning?`<p><span class="lab">意思</span>${esc(n.meaning)}</p>`:""}
+    ${n.usage?`<p><span class="lab">用法</span>${esc(n.usage)}</p>`:""}
+    ${n.collocations&&n.collocations.length?`<p><span class="lab">常見搭配</span><span class="en-i">${n.collocations.map(esc).join(" · ")}</span></p>`:""}
+    ${n.example&&n.example.en?`<p><span class="lab">例句</span><span class="en-i">${esc(n.example.en)}</span><br><span class="muted">${esc(n.example.zh||"")}</span></p>`:""}
+  </div>`;
+}
+function dictList(){
+  const pm=probMap();
+  let list=[...S.words.values()];
+  const q=S.dictQ.trim().toLowerCase();
+  if(q) list=list.filter(w=>w.word.toLowerCase().includes(q)||(w.zh||"").includes(q));
+  const acc=w=>{const t=(w.correct||0)+(w.wrong||0); return t?w.correct/t:-1;};
+  if(S.dictSort==="recent") list.sort((a,b)=>(b.lastLookup||"").localeCompare(a.lastLookup||"")||a.word.localeCompare(b.word));
+  else if(S.dictSort==="weak") list.sort((a,b)=>(pm.get(b.key)||0)-(pm.get(a.key)||0));
+  else list.sort((a,b)=>a.word.localeCompare(b.word));
+  const rows=list.map(w=>{
+    const t=(w.correct||0)+(w.wrong||0), a=acc(w), p=pm.get(w.key);
+    const col=a<0?"var(--line)":(a>=.8?"var(--good)":a>=.5?"var(--gorse)":"var(--bad)");
+    const open=S.open===w.key;
+    return `<div class="ent"><button data-open="${esc(w.key)}" aria-expanded="${open}">
+      <span class="en">${esc(w.word)} <span class="pos">${esc(w.pos||"")}</span></span>
+      <span class="acc">${t?Math.round(a*100)+"% · "+t+"題":`<span class="chip new">新字</span>`}<span class="meter"><i style="width:${a<0?0:a*100}%;background:${col}"></i></span></span>
+      <span class="z">${esc(w.zh)}</span></button>
+      ${open?`<div class="more">
+        ${w.example?`<div class="ex">${highlight(w.example,w.forms)}</div>`:""}
+        ${w.note?noteHtml(w.note):""}
+        <dl class="kv"><dt>查詢次數</dt><dd>${w.lookups||1} 次</dd><dt>第一次查</dt><dd>${esc(w.firstSeen)}</dd><dt>答對 / 答錯</dt><dd>${w.correct||0} / ${w.wrong||0}</dd><dt>下次被抽中機率</dt><dd>${p!=null?(p*100).toFixed(1)+"%":"明天起加入複習"}</dd></dl>
+        <div class="row"><button class="say" data-say="${esc(w.word)}" aria-label="發音">${SPEAK_SVG}</button><span style="flex:1"></span>${S.confirmDel===w.key?`<span class="muted" style="font-size:13px">確定移除？</span><button class="danger" data-del="${esc(w.key)}">移除</button><button class="btn ghost" style="padding:6px 12px;font-size:13px" data-act="nodel">取消</button>`:`<button class="danger" data-askdel="${esc(w.key)}">從字典移除</button>`}</div>
+      </div>`:""}
+    </div>`;
+  }).join("");
+  return S.words.size?(rows?`<div class="dict">${rows}</div>`:`<div class="empty">沒有符合的單字</div>`):`<div class="card empty"><h3>字典還是空的</h3><p>閱讀文章時點一下不會的字，它就會自動存到這裡。</p></div>`;
+}
+function highlight(s, forms){ let out=esc(s); (forms||[]).forEach(f=>{ out=out.replace(new RegExp("\\b("+reEsc(f)+")\\b","gi"),"<b>$1</b>"); }); return out; }
+
+function viewArch(){
+  if(!S.index.length) return `<div class="view"><div class="card empty"><h3>還沒有文章</h3></div></div>`;
+  const d=dayRec(); const dates=[...new Set(S.index.map(a=>a.date))];
+  return `<div class="view"><div><div class="eyebrow">所有文章</div><h2 style="font-size:24px">${S.index.length} 篇</h2></div>
+    ${dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${S.index.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("")}
+    <p class="muted" style="font-size:13px">任何一篇文章查的字都會存進字典，並出現在之後的複習測驗。</p></div>`;
+}
+
+/* ---------- word sheet ---------- */
+async function lookup(surface){
+  const art=currentArticle(); if(!art) return;
+  let g=glossFor(art,surface);
+  const ex=sentenceWith(art,surface);
+  S.sheet={surface, g, ex, loading:!g};
+  renderSheet();
+  if(!g){
+    if(!sample){ S.sheet.loading=false; S.sheet.err="這個字沒有預先翻譯，且目前無法即時翻譯。"; renderSheet(); return; }
+    try{
+      const r=await sample.json(`Translate the English word "${surface}" as used in this sentence into Traditional Chinese (Taiwan). Sentence: "${ex}". Reply with only JSON: {"zh":"short meaning in context, ≤12 chars","pos":"n./v./adj./adv./prep./conj./pron./det.","base":"dictionary base form"}`,{modelTier:"quick",cache:{gcTime:86400000}});
+      g={zh:String(r.zh||"?"),pos:String(r.pos||""),base:String(r.base||surface)};
+      (art.gloss=art.gloss||{})[surface.toLowerCase()]=g;
+    }catch(e){ S.sheet.loading=false; S.sheet.err= e&&e.code==="not_granted"?"未允許翻譯功能。":"翻譯失敗，請再點一次。"; renderSheet(); return; }
+    if(!S.sheet||S.sheet.surface!==surface) return;
+    S.sheet.g=g; S.sheet.loading=false;
+  }
+  if(g && !STOP.has(surface.toLowerCase())) record(surface,g,ex,art); else if(g) S.sheet.skip=true;
+  render();
+}
+function record(surface,g,ex,art){
+  const lemma=(g.base||surface).trim(), key=keyOf(lemma), now=today();
+  const old=S.words.get(key);
+  const forms=new Set([...(old&&old.forms||[]), surface.toLowerCase(), lemma.toLowerCase()]);
+  const rec=old?{...old, forms:[...forms], lookups:(old.lookups||1)+1, lastLookup:new Date().toISOString(), example:old.example||ex, note:old.note||g.note||null}
+    :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null};
+  persist(key,rec);
+  S.sheet.rec=rec; S.sheet.isNew=!old;
+  const d=dayRec(), ll=lemma.toLowerCase();
+  if(isMain(art)){ if(!(d.lookedUp||[]).includes(ll)) saveDay({...d, lookedUp:[...(d.lookedUp||[]), ll]}); }
+  else { const by={...(d.lookedUpBy||{})}; const cur=by[art.id]||[]; if(!cur.includes(ll)){ by[art.id]=[...cur,ll]; saveDay({...d, lookedUpBy:by}); } }
+}
+function renderSheet(){
+  const o=$("#overlay");
+  if(!S.sheet){ o.innerHTML=""; return; }
+  const {surface,g,ex,loading,err,rec,isNew,skip}=S.sheet;
+  o.innerHTML=`<div class="scrim" data-act="close"></div><div class="sheet" role="dialog" aria-label="單字翻譯"><div class="grab"></div>
+    <div class="wd">${esc(surface)} ${g&&g.pos?`<span class="pos">${esc(g.pos)}</span>`:""}<span style="flex:1"></span><button class="say" data-say="${esc(surface)}" aria-label="發音">${SPEAK_SVG}</button></div>
+    ${loading?`<div class="zh muted">翻譯中…</div>`:err?`<div class="zh" style="color:var(--bad);font-size:16px">${esc(err)}</div>`:`<div class="zh">${esc(g.zh)}</div>
+    ${g.base&&g.base.toLowerCase()!==surface.toLowerCase()?`<div class="muted" style="font-size:13px">原形：<b>${esc(g.base)}</b></div>`:""}
+    ${ex?`<div class="ex">${highlight(ex,[surface])}</div>`:""}
+    <div class="muted" style="font-size:13px;margin-top:10px">${skip?"常見功能字，不會加入字典":(rec?(isNew?"已加入字典":`字典裡已有，查過 ${rec.lookups} 次`):"")}</div>`}
+  </div>`;
+}
+
+/* ---------- explanations (prepared with each article) ---------- */
+function findNote(w){
+  if(w.note) return w.note;
+  const b=w.word.toLowerCase();
+  for(const a of S.articles) for(const g of Object.values(a.gloss||{})) if(g.note && (g.base||"").toLowerCase()===b) return g.note;
+  return null;
+}
+function explainAnswer(ans){
+  const w=S.words.get(ans.w.key)||ans.w; const n=findNote(w);
+  if(n){ ans.exp={...n, mistake:""}; if(!w.note) persist(w.key,{...w, note:n}); }
+}
+function answerBlock(ans, full){
+  const w=S.words.get(ans.w.key)||ans.w;
+  const head=`<div class="exp-head"><span class="mark ${ans.ok?"ok":"no"}">${ans.ok?"✓":"✗"}</span><span class="en">${esc(w.word)}</span><span class="pos">${esc(w.pos||"")}</span><span class="z">${esc(w.zh)}</span><button class="say" data-say="${esc(w.word)}" aria-label="發音">${SPEAK_SVG}</button></div>`;
+  const wrong = !ans.ok ? `<p class="mist"><span class="lab">你選了</span>「${esc(ans.picked.label)}」${ans.picked.meaning?`，那是「${esc(ans.picked.meaning)}」的意思`:""}。正確答案是 <b>${esc(w.word)}</b>（${esc(w.zh)}）。</p>` : "";
+  const others=(w.forms||[]).filter(f=>f!==w.word.toLowerCase());
+  const basic = `<p><span class="lab">基本解釋</span>${esc(w.word)}（${esc(w.pos||"")}）在文章裡的意思是「${esc(w.zh)}」。${others.length?` 文中出現的形式：${esc(others.join("、"))}。`:""}</p>`;
+  const ex = w.example ? `<p><span class="lab">文章原句</span><span class="en-i">${highlight(w.example,w.forms)}</span></p>` : "";
+  const e=ans.exp;
+  const claude = e ? `${!ans.ok&&e.mistake?`<p class="mist"><span class="lab">為什麼選錯</span>${esc(e.mistake)}</p>`:""}${noteHtml(e).replace(/^<div class="exp">|<\/div>$/g,"")}` : (ans.expErr?`<p class="muted">${esc(ans.expErr)}</p>`:"");
+  return `<div class="exp ${ans.ok?"":"bad"}">${head}${wrong}${ans.exp?"":basic}${ex}${claude}</div>`;
+}
+
+/* ---------- quizzes ---------- */
+function distractorPool(){
+  const pool=new Map();
+  for(const w of S.words.values()) pool.set(w.word.toLowerCase(),{en:w.word, zh:w.zh});
+  for(const a of S.articles.slice(0,8)) for(const [k,g] of Object.entries(a.gloss||{})){
+    if(STOP.has(k)||!/^(n|v|adj|adv)\./.test(g.pos||"")||/[A-Z]/.test(g.base||"")) continue;
+    const b=(g.base||k).toLowerCase(); if(!pool.has(b)) pool.set(b,{en:g.base||k, zh:g.zh});
+  }
+  return [...pool.values()];
+}
+function makeQuestion(w){
+  const pool=distractorPool().filter(p=>p.en.toLowerCase()!==w.word.toLowerCase() && p.zh!==w.zh);
+  const hasForm=f=>new RegExp("\\b"+reEsc(f)+"\\b","i").test(w.example||"");
+  const types=["en2zh","zh2en"]; if(w.example && (w.forms||[]).some(hasForm)) types.push("cloze");
+  const type=types[Math.floor(Math.random()*types.length)];
+  const ds=shuffle(pool).slice(0,3);
+  if(type==="en2zh") return {type, w, prompt:w.word, opts:shuffle([{label:w.zh, meaning:w.word, ok:true}, ...ds.map(d=>({label:d.zh, meaning:d.en}))])};
+  if(type==="zh2en") return {type, w, prompt:w.zh, opts:shuffle([{label:w.word, meaning:w.zh, ok:true}, ...ds.map(d=>({label:d.en, meaning:d.zh}))])};
+  const form=(w.forms||[]).find(hasForm);
+  const m=w.example.match(new RegExp("\\b"+reEsc(form)+"\\b","i"));
+  return {type, w, prompt:w.example, blank:m[0], opts:shuffle([{label:m[0], meaning:w.zh, ok:true}, ...ds.map(d=>({label:d.en, meaning:d.zh}))])};
+}
+function startQuiz(kind, art){
+  let words;
+  const d=dayRec();
+  if(kind==="pre"){ const el=eligible(); words=weightedPick(el, Math.min(8, el.length)); }
+  else { words=shuffle(lookedUpFor(d,art).map(l=>S.words.get(keyOf(l))).filter(Boolean)); }
+  if(!words.length){
+    if(kind==="pre") saveDay({...d, preDone:true, preScore:0, preTotal:0});
+    else finishPost(art,0,0);
+    S.view="today"; S.tab="today"; render(); return;
+  }
+  S.quiz={kind, artId:art&&art.id, qs:words.map(makeQuestion), i:0, score:0, picked:null, answers:[]};
+  S.view="quiz"; render(); window.scrollTo(0,0);
+}
+function finishPost(art, score, total){
+  const d=dayRec();
+  if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
+  else saveDay({...d, postBy:{...(d.postBy||{}), [art.id]:{score,total}}});
+}
+function viewQuiz(){
+  const Q=S.quiz; if(!Q) return "";
+  const title=Q.kind==="pre"?"複習測驗":"讀後測驗";
+  if(Q.i>=Q.qs.length){
+    const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
+    const nextBtn = Q.kind==="pre" ? `<button class="btn" data-act="read">開始閱讀今日頭條 →</button>` : `<button class="btn" data-act="home">回到今日</button>`;
+    return `<div class="view"><div class="eyebrow">${title} · 完成</div>
+      <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
+      <div class="muted">${Q.score<Q.qs.length?"答錯的字排在最前面，之後也會更常出現在複習測驗。":"全對！這些字之後被抽中的機率會降低。"}</div></div>
+      ${rewardBox(Q.reward)}
+      <h2 style="font-size:20px">每個字的講解</h2>
+      <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
+      ${nextBtn}</div>`;
+  }
+  const q=Q.qs[Q.i], pickedI=Q.picked, ans=Q.answers[Q.i];
+  const prompt = q.type==="cloze" ? `<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"), "<u></u>")}</div>`
+    : `<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`;
+  const lead={en2zh:"這個字的中文意思是？",zh2en:"哪個英文字是這個意思？",cloze:"選出填入空格的字"}[q.type];
+  return `<div class="view"><div class="row" style="justify-content:space-between"><span class="eyebrow">${title}</span><span class="muted" style="font-size:13px;font-variant-numeric:tabular-nums">${Q.i+1} / ${Q.qs.length}</span></div>
+    <div class="qbar"><i style="width:${(Q.i+(pickedI!=null?1:0))/Q.qs.length*100}%"></i></div>
+    <div class="qcard"><div class="muted" style="font-size:14px">${lead}</div>${prompt}
+    <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(pickedI!=null){ if(o.ok) c+=" right"; else if(i===pickedI) c+=" wrong"; } return `<button class="${c}" data-pick="${i}" ${pickedI!=null?"disabled":""}>${esc(o.label)}${pickedI!=null&&!o.ok&&o.meaning?`<span class="optm">${esc(o.meaning)}</span>`:""}</button>`; }).join("")}</div>
+    ${ans?`<div class="fb ${ans.ok?"ok":"no"}">${ans.ok?"答對了！":"答錯了，看看講解"}</div>${answerBlock(ans,false)}<button class="btn" data-act="next">${Q.i+1<Q.qs.length?"下一題":"看結果與全部講解"}</button>`:""}</div></div>`;
+}
+function pick(i){
+  const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
+  Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
+  const w=S.words.get(q.w.key)||q.w;
+  persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today()});
+  if(ok) Q.score++;
+  const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
+  if(Q.i+1>=Q.qs.length){
+    const d=dayRec();
+    if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
+    else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art)); }
+  }
+  explainAnswer(ans);
+  render();
+}
+
+/* ================= Adventure (game) ================= */
+const ELS=[{k:"metal",z:"金"},{k:"wood",z:"木"},{k:"water",z:"水"},{k:"fire",z:"火"},{k:"earth",z:"土"}];
+const ELZ=Object.fromEntries(ELS.map(e=>[e.k,e.z]));
+// 相剋: 金剋木、木剋土、土剋水、水剋火、火剋金
+const BEATS={metal:"wood", wood:"earth", earth:"water", water:"fire", fire:"metal"};
+function elMult(att, def){ if(!att||!def) return 1; if(BEATS[att]===def) return 1.5; if(BEATS[def]===att) return 0.67; return 1; }
+const elBadge=(k,big)=>k?`<span class="el el-${k}${big?" big":""}">${ELZ[k]}</span>`:`<span class="el el-none${big?" big":""}">無</span>`;
+
+const TIER=[{n:"Ⅰ",atk:6,def:4,hp:20,price:80,lv:1},{n:"Ⅱ",atk:14,def:10,hp:50,price:300,lv:4},{n:"Ⅲ",atk:26,def:18,hp:100,price:900,lv:8},{n:"Ⅳ",atk:42,def:30,hp:180,price:2500,lv:13}];
+const WNAMES={metal:["青銅短劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂長弓","紫杉戰矛","德魯伊聖杖"],water:["漁叉","潮汐三叉戟","塞爾基長鞭","李爾海神之矛"],fire:["火把棍","熔鐵戰斧","烈焰長槍","盧神之槍"],earth:["石錘","花崗岩戰鎚","巨人之棒","達格達之棍"]};
+const ANAMES={metal:["鎖子甲","鐵板甲","銀鱗甲","戰神之鎧"],wood:["樹皮背心","藤編護甲","古橡守護甲","森林之心鎧"],water:["海豹皮衣","潮紋鎧","深海鱗甲","李爾斗篷"],fire:["皮革護甲","熔岩護甲","鳳焰鎧","不滅烈焰甲"],earth:["泥石護甲","岩石重甲","山嶺鎧","大地之心鎧"]};
+const ITEMS={};
+for(const e of ELS) TIER.forEach((t,i)=>{
+  ITEMS[`w-${e.k}-${i}`]={id:`w-${e.k}-${i}`, slot:"weapon", el:e.k, tier:i, name:WNAMES[e.k][i], atk:t.atk, price:t.price, lv:t.lv};
+  ITEMS[`a-${e.k}-${i}`]={id:`a-${e.k}-${i}`, slot:"armor", el:e.k, tier:i, name:ANAMES[e.k][i], def:t.def, hp:t.hp, price:t.price, lv:t.lv};
+});
+
+const REGIONS=[
+ {id:"r1", name:"都柏林郊野", en:"Dublin Fields", lv:1, mons:[
+  {id:"leprechaun", zh:"小矮妖", en:"Leprechaun", el:"metal", lv:1, hp:40, atk:8, def:2, exp:15, gold:10, lore:"A tiny shoemaker who hides his gold at the end of the rainbow."},
+  {id:"changeling", zh:"換生靈", en:"Changeling", el:"wood", lv:1, hp:45, atk:7, def:3, exp:15, gold:10, lore:"A fairy child secretly left in place of a human baby."},
+  {id:"merrow", zh:"梅羅人魚", en:"Merrow", el:"water", lv:2, hp:52, atk:9, def:3, exp:18, gold:12, lore:"A sea maiden who needs her red cap to return beneath the waves."}]},
+ {id:"r2", name:"威克洛山脈", en:"Wicklow Mountains", lv:4, mons:[
+  {id:"puca", zh:"普卡", en:"Púca", el:"earth", lv:4, hp:110, atk:18, def:8, exp:42, gold:25, lore:"A shape-shifter that often appears as a black goat or horse."},
+  {id:"eachuisce", zh:"水馬", en:"Each-uisce", el:"water", lv:5, hp:120, atk:20, def:8, exp:46, gold:26, lore:"A water horse that drags its riders into deep lakes."},
+  {id:"wisp", zh:"鬼火", en:"Will-o'-the-wisp", el:"fire", lv:5, hp:105, atk:22, def:7, exp:46, gold:26, lore:"A drifting light that leads travellers away from the safe path."}]},
+ {id:"r3", name:"康尼馬拉沼澤", en:"Connemara Bogs", lv:8, mons:[
+  {id:"banshee", zh:"報喪女妖", en:"Banshee", el:"metal", lv:8, hp:260, atk:44, def:18, exp:110, gold:50, lore:"Her mournful cry warns a family that death is near."},
+  {id:"sluagh", zh:"亡魂群", en:"Sluagh", el:"wood", lv:9, hp:280, atk:42, def:20, exp:115, gold:52, lore:"A flock of restless spirits that flies in from the west."},
+  {id:"feargorta", zh:"飢餓之人", en:"Fear Gorta", el:"earth", lv:10, hp:300, atk:46, def:20, exp:125, gold:55, lore:"A starving figure who rewards those who share their bread."}]},
+ {id:"r4", name:"莫赫懸崖", en:"Cliffs of Moher", lv:13, mons:[
+  {id:"dullahan", zh:"無頭騎士", en:"Dullahan", el:"metal", lv:13, hp:500, atk:75, def:32, exp:230, gold:90, lore:"A headless rider who carries his own head under his arm."},
+  {id:"abhartach", zh:"吸血侏儒", en:"Abhartach", el:"water", lv:14, hp:520, atk:72, def:34, exp:240, gold:92, lore:"A cruel chieftain who rose from his grave again and again."},
+  {id:"fomorian", zh:"弗摩爾巨人", en:"Fomorian", el:"earth", lv:15, hp:580, atk:78, def:34, exp:260, gold:95, lore:"An ancient giant from beneath the sea, enemy of the old gods."}]},
+ {id:"r5", name:"托里島", en:"Tory Island", lv:18, mons:[
+  {id:"balor", zh:"魔眼巴洛爾", en:"Balor of the Evil Eye", el:"fire", lv:18, hp:1100, atk:120, def:45, exp:650, gold:300, boss:true, lore:"The Fomorian king whose single eye burns everything it looks at."}]},
+];
+const MONS=Object.fromEntries(REGIONS.flatMap(r=>r.mons.map(m=>[m.id,{...m, region:r.id}])));
+
+const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0};
+function game(){ return S.game || (S.game={...G_DEFAULT}); }
+function saveGame(){ lsSave(); }
+const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
+function stats(g=game()){
+  const w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor];
+  return {hp:100+20*(g.lv-1)+(a?a.hp:0), atk:10+3*(g.lv-1)+(w?w.atk:0), def:5+2*(g.lv-1)+(a?a.def:0), wEl:w?w.el:null, aEl:a?a.el:null};
+}
+
+/* ----- rewards from studying ----- */
+function awardQuiz(kind, score, total, isMainPost){
+  if(!total) return null;
+  const g=game(), acc=score/total;
+  const r={base:score*10, acc:(acc>=0.8?20:0)+(acc===1?20:0), tickets:1, bonus:0, bonusTickets:0, acc100:Math.round(acc*100)};
+  if(isMainPost){
+    const d=dayRec();
+    if(!d.bonus){ r.bonus=30; r.bonusTickets=1; saveDay({...d, bonus:true}); }
+  }
+  r.gold=r.base+r.acc+r.bonus;
+  g.gold+=r.gold; g.tickets+=r.tickets+r.bonusTickets; saveGame();
+  return r;
+}
+function rewardBox(r){
+  if(!r) return "";
+  return `<div class="reward"><div class="eyebrow">戰利品</div>
+    <div class="rw-row"><span>答對 ${r.base/10} 題</span><b>+${r.base} 金</b></div>
+    ${r.acc?`<div class="rw-row"><span>正確率 ${r.acc100}% 獎勵</span><b>+${r.acc} 金</b></div>`:`<div class="rw-row muted"><span>正確率 ${r.acc100}%（80% 以上有獎勵）</span><b>+0</b></div>`}
+    ${r.bonus?`<div class="rw-row"><span>完成今日三步驟</span><b>+${r.bonus} 金</b></div>`:""}
+    <div class="rw-row"><span>出征令</span><b>+${r.tickets+r.bonusTickets} 張</b></div>
+    <button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">去冒險 →</button></div>`;
+}
+
+/* ----- shop & equipment ----- */
+function buy(id){
+  const g=game(), it=ITEMS[id]; if(!it) return;
+  if(g.inv.includes(id)) return toast("已經擁有");
+  if(g.lv<it.lv) return toast(`需要 Lv ${it.lv}`);
+  if(g.gold<it.price) return toast(`金幣不足，還差 ${it.price-g.gold}`);
+  g.gold-=it.price; g.inv.push(id); g[it.slot]=id; saveGame();
+  toast(`買下 ${it.name}，已裝備`); render();
+}
+function equip(id){
+  const g=game(), it=ITEMS[id]; if(!it||!g.inv.includes(id)) return;
+  g[it.slot]= g[it.slot]===id ? null : id; saveGame(); render();
+}
+
+/* ----- battle ----- */
+function advice(m){
+  const s=stats(), out=[];
+  const wm=elMult(s.wEl,m.el), am=elMult(m.el,s.aEl);
+  if(wm>1) out.push(`<span class="adv good">武器剋制 ×1.5</span>`); else if(wm<1) out.push(`<span class="adv bad">武器被剋 ×0.67</span>`);
+  if(am<1) out.push(`<span class="adv good">防具剋制 受傷 ×0.67</span>`); else if(am>1) out.push(`<span class="adv bad">防具被剋 受傷 ×1.5</span>`);
+  return out.join("");
+}
+function simulate(m, spellOk){
+  const s=stats();
+  let php=s.hp, mhp=m.hp; const ev=[]; let first=true;
+  const roll=()=>0.9+Math.random()*0.2;
+  for(let round=1; round<=40 && php>0 && mhp>0; round++){
+    const crit=Math.random()<0.1 || (first&&spellOk);
+    let dmg=Math.max(1, Math.round((s.atk*elMult(s.wEl,m.el) - m.def*0.5)*roll()*(crit?(first&&spellOk?2:1.5):1)));
+    mhp=Math.max(0,mhp-dmg); ev.push({who:"p", dmg, crit, spell:first&&spellOk, php, mhp}); first=false;
+    if(mhp<=0) break;
+    let taken=Math.max(1, Math.round((m.atk*elMult(m.el,s.aEl) - s.def*0.5)*roll()));
+    php=Math.max(0,php-taken); ev.push({who:"m", dmg:taken, php, mhp});
+  }
+  return {ev, win:mhp<=0 && php>0, maxP:s.hp};
+}
+function startBattle(mid){
+  const g=game(), m=MONS[mid]; if(!m) return;
+  if(g.tickets<1) return toast("出征令不足，完成測驗就能獲得");
+  S.battle={m, stage:"spell"};
+  // spell question needs at least one word in the dictionary
+  if(!S.words.size) S.battle.stage="ready";
+  else { const w=weightedPick([...S.words.values()],1)[0]; S.battle.q=makeQuestion(w); }
+  S.view="battle"; render(); window.scrollTo(0,0);
+}
+function castSpell(i){
+  const B=S.battle; if(!B||B.stage!=="spell"||B.picked!=null) return;
+  B.picked=i; const opt=B.q.opts[i]; B.spellOk=!!opt.ok;
+  const w=S.words.get(B.q.w.key)||B.q.w;
+  persist(w.key,{...w, correct:(w.correct||0)+(B.spellOk?1:0), wrong:(w.wrong||0)+(B.spellOk?0:1), lastTested:today()});
+  render();
+}
+function fight(){
+  const B=S.battle, g=game(); if(!B) return;
+  g.tickets-=1; g.battles=(g.battles||0)+1;
+  const res=simulate(B.m, !!B.spellOk);
+  B.res=res; B.stage="fight"; B.idx=0;
+  if(res.win){
+    const before=g.lv; g.exp+=B.m.exp; g.gold+=B.m.gold; g.wins[B.m.id]=(g.wins[B.m.id]||0)+1;
+    while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
+    B.lvUp=g.lv-before;
+  }
+  saveGame(); render();
+  clearInterval(S.btimer);
+  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; clearInterval(S.btimer); } renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:650);
+}
+function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
+function monArt(m, hit){
+  return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}"><span class="ms-el">${ELZ[m.el]}</span><span class="ms-name">${esc(m.en)}</span></div>`;
+}
+function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div>`; }
+function viewBattle(){
+  const B=S.battle; if(!B) return "";
+  const m=B.m, s=stats(), g=game();
+  if(B.stage==="spell"||B.stage==="ready"){
+    const q=B.q, p=B.picked;
+    const spell = B.stage==="spell" ? `<div class="card qcard"><div class="eyebrow">戰前咒語</div><div class="muted" style="font-size:14px">答對這題，第一擊造成 2 倍傷害。</div>
+      ${q.type==="cloze"?`<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"),"<u></u>")}</div>`:`<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`}
+      <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(p!=null){ if(o.ok) c+=" right"; else if(i===p) c+=" wrong"; } return `<button class="${c}" data-spell="${i}" ${p!=null?"disabled":""}>${esc(o.label)}</button>`; }).join("")}</div>
+      ${p!=null?`<div class="fb ${B.spellOk?"ok":"no"}">${B.spellOk?"咒語成功！第一擊 2 倍傷害":`咒語失敗。正確答案：${esc(q.w.word)} — ${esc(q.w.zh)}`}</div>`:""}</div>` : "";
+    return `<div class="view">
+      <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">← 撤退</button>
+      <div class="vs">${monArt(m)}<div><div class="eyebrow">Lv ${m.lv} · ${elBadge(m.el)} 屬性</div><h2 style="font-size:24px">${esc(m.zh)}</h2><p class="lore">${esc(m.lore)}</p></div></div>
+      <div class="row">${advice(m)||`<span class="adv">屬性無加成</span>`}</div>
+      <div class="stats"><div class="stat"><b>${s.hp}</b><span>你的 HP</span></div><div class="stat"><b>${s.atk}</b><span>攻擊 ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>防禦 ${elBadge(s.aEl)}</span></div></div>
+      ${spell}
+      <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?"跳過咒語，直接出征":"出征！（用 1 張出征令）"}</button>
+    </div>`;
+  }
+  const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp};
+  const log=ev.slice(0,upto).map(e=>e.who==="p"?`<li class="lp">${e.spell?"咒語加持！":e.crit?"會心一擊！":""}你造成 <b>${e.dmg}</b> 傷害</li>`:`<li class="lm">${esc(m.zh)}造成 <b>${e.dmg}</b> 傷害</li>`).reverse().join("");
+  const last=ev[upto-1];
+  const end = B.stage==="end" ? (B.res.win
+    ? `<div class="reward win"><div class="eyebrow">勝利</div><div class="rw-row"><span>經驗值</span><b>+${m.exp}</b></div><div class="rw-row"><span>金幣</span><b>+${m.gold}</b></div>${B.lvUp?`<div class="rw-row lvup"><span>升級！</span><b>Lv ${g.lv}</b></div>`:""}</div>`
+    : `<div class="reward lose"><div class="eyebrow">戰敗</div><p style="margin:0">${esc(m.zh)}太強了。試試換上剋制「${ELZ[m.el]}」屬性的武器（${ELZ[Object.keys(BEATS).find(k=>BEATS[k]===m.el)]}屬性），或先打弱一點的怪物升級。</p></div>`) : "";
+  return `<div class="view">
+    <div class="arena">
+      <div class="side">${monArt(m, last&&last.who==="p")}${hpBar(cur.mhp,m.hp,"m")}</div>
+      <div class="side you${last&&last.who==="m"?" hit":""}"><div class="you-card"><b>你 · Lv ${g.lv}</b><span>${elBadge(s.wEl)} ${elBadge(s.aEl)}</span></div>${hpBar(cur.php,B.res.maxP,"p")}</div>
+    </div>
+    ${end}
+    <ul class="blog">${log}</ul>
+    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">回到冒險</button>${g.tickets>0?`<button class="btn ghost" data-mon="${m.id}">再戰一次</button>`:""}</div>`:`<button class="btn ghost" data-act="skip">跳過動畫</button>`}
+  </div>`;
+}
+
+/* ----- adventure tab ----- */
+function cycleSvg(){
+  const pts=ELS.map((e,i)=>{ const a=-Math.PI/2+i*2*Math.PI/5; return {k:e.k,z:e.z,x:110+78*Math.cos(a),y:100+78*Math.sin(a)}; });
+  const pos=Object.fromEntries(pts.map(p=>[p.k,p]));
+  const arrows=Object.entries(BEATS).map(([a,b])=>{ const p=pos[a], q=pos[b]; const dx=q.x-p.x, dy=q.y-p.y, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
+    return `<line x1="${(p.x+ux*20).toFixed(1)}" y1="${(p.y+uy*20).toFixed(1)}" x2="${(q.x-ux*24).toFixed(1)}" y2="${(q.y-uy*24).toFixed(1)}" class="cy-arrow" marker-end="url(#ah)"/>`; }).join("");
+  return `<svg viewBox="0 0 220 200" class="cycle" role="img" aria-label="五行相剋：金剋木、木剋土、土剋水、水剋火、火剋金">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="cy-head"/></marker></defs>
+    ${arrows}${pts.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="18" class="cy-n el-fill-${p.k}"/><text x="${p.x.toFixed(1)}" y="${(p.y+6).toFixed(1)}" text-anchor="middle" class="cy-t">${p.z}</text>`).join("")}</svg>`;
+}
+function itemRow(it, mode){
+  const g=game(), own=g.inv.includes(it.id), on=g[it.slot]===it.id, locked=g.lv<it.lv;
+  const stat = it.slot==="weapon" ? `攻擊 +${it.atk}` : `防禦 +${it.def} · HP +${it.hp}`;
+  let act;
+  if(mode==="bag") act=`<button class="btn ${on?"ghost":""} sm" data-equip="${it.id}">${on?"卸下":"裝備"}</button>`;
+  else if(own) act=`<button class="btn ghost sm" data-equip="${it.id}">${on?"已裝備":"裝備"}</button>`;
+  else if(locked) act=`<span class="muted sm-t">Lv ${it.lv} 解鎖</span>`;
+  else act=`<button class="btn sm" data-buy="${it.id}" ${g.gold<it.price?"disabled":""}>${it.price} 金</button>`;
+  return `<div class="item${on?" on":""}">${elBadge(it.el,true)}<div class="it-main"><b>${esc(it.name)} <span class="tier">${TIER[it.tier].n}</span></b><span class="muted">${it.slot==="weapon"?"武器":"防具"} · ${stat}</span></div>${act}</div>`;
+}
+function viewAdv(){
+  const g=game(), s=stats(), need=expNeed(g.lv);
+  const sub=S.advTab||"go";
+  const seg=(k,l)=>`<button data-advtab="${k}" aria-pressed="${sub===k}">${l}</button>`;
+  let body="";
+  if(sub==="go"){
+    body=REGIONS.map(r=>{
+      const open=g.lv>=r.lv;
+      return `<section class="region${open?"":" locked"}"><div class="rg-head"><div><div class="eyebrow">${esc(r.en)}</div><h3>${esc(r.name)}</h3></div><span class="muted sm-t">${open?`建議 Lv ${r.lv}+`:`Lv ${r.lv} 解鎖`}</span></div>
+        ${open?`<div class="mons">${r.mons.map(m=>`<button class="mon" data-mon="${m.id}">${elBadge(m.el,true)}<span class="it-main"><b>${esc(m.zh)} <span class="muted" style="font-weight:400">${esc(m.en)}</span></b><span class="muted">Lv ${m.lv} · HP ${m.hp} · 攻 ${m.atk}${g.wins[m.id]?` · 擊敗 ${g.wins[m.id]} 次`:""}</span><span class="row" style="gap:4px">${advice(m)}</span></span><span class="go-t">出征</span></button>`).join("")}</div>`:""}</section>`;
+    }).join("");
+  } else if(sub==="shop"){
+    const f=S.shopEl||"all";
+    const fseg=`<div class="seg">${[["all","全部"],...ELS.map(e=>[e.k,e.z])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`;
+    const list=Object.values(ITEMS).filter(it=>f==="all"||it.el===f).sort((a,b)=>a.tier-b.tier||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
+    body=fseg+`<div class="items">${list.map(it=>itemRow(it,"shop")).join("")}</div>`;
+  } else {
+    const own=g.inv.map(id=>ITEMS[id]).filter(Boolean);
+    body= own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><h3>背包是空的</h3><p>完成測驗賺金幣，到商店買第一件裝備。</p></div>`;
+  }
+  return `<div class="view">
+    <section class="hero-card">
+      <div class="hc-top"><div><div class="eyebrow">冒險者</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>金幣</span></div><div class="purse"><b>${g.tickets}</b><span>出征令</span></div></div>
+      <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">經驗值 ${g.exp} / ${need}</div>
+      <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>攻擊 <b>${s.atk}</b></span><span>防禦 <b>${s.def}</b></span></div>
+      <div class="slots"><div class="slot">${elBadge(s.wEl)}<span><small>武器</small>${g.weapon?esc(ITEMS[g.weapon].name):"空手"}</span></div><div class="slot">${elBadge(s.aEl)}<span><small>防具</small>${g.armor?esc(ITEMS[g.armor].name):"布衣"}</span></div></div>
+    </section>
+    <details class="card rules"><summary>五行相剋怎麼用？</summary>${cycleSvg()}
+      <p>箭頭代表「剋」：金剋木、木剋土、土剋水、水剋火、火剋金。</p>
+      <p><b>武器</b>剋制怪物屬性，傷害 ×1.5；被怪物剋制，傷害 ×0.67。<br><b>防具</b>剋制怪物屬性，受到的傷害 ×0.67；被怪物剋制，受到的傷害 ×1.5。</p>
+      <p>金幣從測驗來：每答對一題 10 金，正確率 80% 以上再加 20，全對再加 20。每完成一次測驗得 1 張出征令，完成當天三步驟再多 30 金和 1 張。</p></details>
+    <div class="seg" role="group">${seg("go","出征")}${seg("shop","商店")}${seg("bag","背包")}</div>
+    ${body}
+  </div>`;
+}
+
+/* ---------- events ---------- */
+const ART_BASES=["../Che_daily_improvement/articles/","articles/"]; let ART_BASE=ART_BASES[0];
+async function loadArticle(id){
+  if(S.articles.some(a=>a.id===id)) return true;
+  try{ const r=await fetch(ART_BASE+encodeURIComponent(id)+".json",{cache:"no-cache"}); if(!r.ok) throw 0; const a=await r.json(); a.id=id; S.articles.push(a); S.articles.sort(byOrder); return true; }
+  catch(e){ toast("文章載入失敗，請檢查網路"); return false; }
+}
+const byOrder=(a,b)=>b.date.localeCompare(a.date)||(a.rank||1)-(b.rank||1);
+async function openArticle(id){ if(!(await loadArticle(id))) return; S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
+document.addEventListener("click", e=>{
+  const t=e.target.closest("[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  if(!t) return;
+  if(t.dataset.advtab){ S.advTab=t.dataset.advtab; return render(); }
+  if(t.dataset.shopel){ S.shopEl=t.dataset.shopel; return render(); }
+  if(t.dataset.buy) return buy(t.dataset.buy);
+  if(t.dataset.equip) return equip(t.dataset.equip);
+  if(t.dataset.mon) return startBattle(t.dataset.mon);
+  if(t.dataset.spell!=null) return castSpell(+t.dataset.spell);
+  if(t.dataset.tab){ S.quiz=null; S.battle=null; return setTab(t.dataset.tab); }
+  if(t.dataset.say){ speak(t.dataset.say); return; }
+  if(t.dataset.w){ lookup(t.dataset.w); return; }
+  if(t.dataset.pick!=null) return pick(+t.dataset.pick);
+  
+  if(t.dataset.open){ S.open=S.open===t.dataset.open?null:t.dataset.open; S.confirmDel=null; return render(); }
+  if(t.dataset.sort){ S.dictSort=t.dataset.sort; return render(); }
+  if(t.dataset.askdel){ S.confirmDel=t.dataset.askdel; return render(); }
+  if(t.dataset.del){ remove(t.dataset.del); S.open=null; S.confirmDel=null; toast("已移除"); return render(); }
+  if(t.dataset.artid){ openArticle(t.dataset.artid); return; }
+  const a=t.dataset.act;
+  if(a==="close"){ S.sheet=null; return renderSheet(); }
+  if(a==="export") return exportData();
+  if(a==="fight") return fight();
+  if(a==="skip"){ if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
+  if(a==="advback"){ clearInterval(S.btimer); S.battle=null; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
+  if(a==="nodel"){ S.confirmDel=null; return render(); }
+  if(a==="home"){ S.tab="today"; S.view="today"; S.quiz=null; render(); window.scrollTo(0,0); return; }
+  if(a==="back"){ const b=S.backTo||"today"; S.tab=b; S.view=b; render(); window.scrollTo(0,0); return; }
+  if(a==="pre") return startQuiz("pre");
+  if(a==="post") return startQuiz("post", mainArticle());
+  if(a==="read"){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle()&&mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); return; }
+  if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); return startQuiz("post", mainArticle()); }
+  if(a==="finishx") return startQuiz("post", currentArticle());
+  if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
+});
+document.addEventListener("change", e=>{ if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
+document.addEventListener("input", e=>{ if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
+
+/* ---------- boot ---------- */
+S.index=[];
+render();
+(async ()=>{
+  const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
+  S.ready.personal=true; render();
+  try{
+    let j=null;
+    for(const b of ART_BASES){ try{ const r=await fetch(b+"index.json",{cache:"no-cache"}); if(r.ok){ j=await r.json(); ART_BASE=b; break; } }catch(_){} }
+    if(!j) throw 0;
+    S.index=(j.articles||[]).slice().sort(byOrder);
+    const recent=S.index.slice(0,12);
+    const docs=await Promise.all(recent.map(a=>fetch(ART_BASE+encodeURIComponent(a.id)+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)));
+    S.articles=docs.map((d,i)=>d&&{...d, id:recent[i].id}).filter(Boolean).sort(byOrder);
+  }catch(e){ toast("文章載入失敗，請檢查網路"); }
+  S.ready.articles=true; render();
+})();
+</script>
+</body>
+</html>
