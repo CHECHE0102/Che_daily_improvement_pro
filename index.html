@@ -242,12 +242,23 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .town-card.own{border-color:var(--gorse)}
 .tc-top{display:flex;gap:12px;align-items:center}
 .mon.own{border-color:var(--gorse)}.mon.locked{opacity:.55}
+.lvl-btn{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.opt b{display:block}
+.mon-seal{position:relative;overflow:hidden}
+.ms-art{width:86%;height:86%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+.ms-badge{position:absolute;top:8px;right:8px}
+.thumb{position:relative;flex:none;width:64px;height:64px;border-radius:16px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%, color-mix(in srgb,var(--c) 70%,#fff), var(--c) 75%)}
+.thumb.sm{width:52px;height:52px;border-radius:13px}
+.thumb .mon-art{width:90%;height:90%}
+.thumb .el{position:absolute;right:-4px;bottom:-4px;box-shadow:0 0 0 2px var(--card)}
+.el-th-metal{--c:var(--metal)}.el-th-wood{--c:var(--wood)}.el-th-water{--c:var(--water)}.el-th-fire{--c:var(--fire)}.el-th-earth{--c:var(--earth)}
+.mon.locked .thumb{filter:grayscale(.85)}
 </style>
 
 </head>
 <body>
 <div class="wrap">
-  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><span class="mast-r"><small id="mastInfo"></small><button id="langBtn" class="lang-btn" data-act="lang" aria-label="Language">中</button></span></header>
+  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><span class="mast-r"><small id="mastInfo"></small><button id="levelBtn" class="lang-btn lvl-btn" data-act="level" aria-label="Level">B2</button><button id="langBtn" class="lang-btn" data-act="lang" aria-label="Language">中</button></span></header>
   <main id="app"><div class="view"><p class="muted">…</p></div></main>
 </div>
 <nav class="tabs" aria-label="Main menu">
@@ -486,8 +497,38 @@ function applyStaticText(){
   const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
   set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch"));
   const n=document.querySelector("nav.tabs"); if(n) n.setAttribute("aria-label",T("mainMenu"));
+  const vb=document.getElementById("levelBtn"); if(vb){ vb.textContent=LEVEL; vb.setAttribute("aria-label",T("level")); }
   const lb=document.getElementById("langBtn"); if(lb){ lb.textContent=LANGS.find(l=>l.k===LANG).short; lb.setAttribute("aria-label",T("language")); }
 }
+const LEVELS=[{k:"B1"},{k:"B2"},{k:"C1"},{k:"IELTS"}];
+let LEVEL=(()=>{ try{ const v=localStorage.getItem("che-pro-level"); return LEVELS.some(l=>l.k===v)?v:"B2"; }catch(e){ return "B2"; } })();
+Object.assign(STR.zh,{level:"英文程度", lvB1:"中級：日常用字、句子較短", lvB2:"中高級：一般新聞用字", lvC1:"高級：較正式、較少見的用字", lvIELTS:"雅思 7–8：學術寫作常用詞", fillTag:"文章難字", fillNote:"題目不足 10 題時，會從文章裡挑較難的字出題。答錯的難字會自動加入字典。", levelOnly:"這篇沒有 {l} 版本，顯示 {m}"});
+Object.assign(STR.en,{level:"English level", lvB1:"Intermediate: everyday words, shorter sentences", lvB2:"Upper-intermediate: standard news vocabulary", lvC1:"Advanced: more formal, less common words", lvIELTS:"IELTS 7–8: academic writing vocabulary", fillTag:"Hard word from the article", fillNote:"If you looked up fewer than 10 words, harder words from the article fill the quiz. Hard words you get wrong are added to your dictionary.", levelOnly:"No {l} version of this article — showing {m}"});
+Object.assign(STR.hi,{level:"अंग्रेज़ी स्तर", lvB1:"मध्यम: रोज़मर्रा के शब्द, छोटे वाक्य", lvB2:"उच्च-मध्यम: सामान्य समाचार शब्दावली", lvC1:"उन्नत: औपचारिक, कम प्रचलित शब्द", lvIELTS:"IELTS 7–8: अकादमिक लेखन शब्दावली", fillTag:"लेख का कठिन शब्द", fillNote:"अगर आपने 10 से कम शब्द देखे, तो लेख के कठिन शब्दों से क्विज़ पूरा होता है। ग़लत हुए कठिन शब्द शब्दकोश में जुड़ जाते हैं।", levelOnly:"इस लेख का {l} संस्करण नहीं है — {m} दिखाया जा रहा है"});
+Object.assign(STR.es,{level:"Nivel de inglés", lvB1:"Intermedio: palabras cotidianas, frases cortas", lvB2:"Intermedio alto: vocabulario habitual de prensa", lvC1:"Avanzado: palabras más formales y menos comunes", lvIELTS:"IELTS 7–8: vocabulario académico", fillTag:"Palabra difícil del artículo", fillNote:"Si consultaste menos de 10 palabras, el test se completa con palabras difíciles del artículo. Las que falles se añaden a tu diccionario.", levelOnly:"Este artículo no tiene versión {l}: se muestra {m}"});
+// article text at the chosen level (falls back to B2 / original paragraphs)
+function levelOf(art){ return art.levels&&art.levels[LEVEL]?LEVEL:(art.levels&&art.levels.B2?"B2":null); }
+function parasOf(art){ const l=levelOf(art); return l?art.levels[l].paragraphs:art.paragraphs; }
+function setLevel(k){ LEVEL=k; try{ localStorage.setItem("che-pro-level",k); }catch(e){} S.levelSheet=false; applyStaticText(); render(); }
+function levelSheet(){
+  return `<div class="scrim" data-act="closelevel"></div><div class="sheet" role="dialog" aria-label="${T("level")}"><div class="grab"></div>
+    <div class="eyebrow" style="margin-bottom:10px">${T("level")}</div>
+    <div class="opts">${LEVELS.map(l=>`<button class="opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div></div>`;
+}
+const CEFR_RANK={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6};
+const LEVEL_MIN={B1:3,B2:4,C1:5,IELTS:5};
+// harder words from the article text the learner is reading, hardest first
+function fillerWords(art, exclude, n){
+  const toks=parasOf(art).join(" ").match(WORD_RE)||[]; const seen=new Set(exclude), cand=[];
+  for(const tok of toks){ const k=tok.toLowerCase(), g=glossFor(art,tok); if(!g||!g.lvl||g.lvl==="PN"||STOP.has(k)) continue;
+    const b=(g.base||k).toLowerCase(); if(seen.has(b)) continue; seen.add(b); cand.push({tok,g,b,r:CEFR_RANK[g.lvl]||2}); }
+  let min=LEVEL_MIN[LEVEL]||4, pool=[];
+  while(pool.length<n && min>0){ pool=cand.filter(c=>c.r>=min); min--; }
+  pool=shuffle(pool).sort((a,b)=>b.r-a.r).slice(0,n);
+  return pool.map(({tok,g,b})=>{ const key=keyOf(g.base||tok); const saved=S.words.get(key); if(saved) return saved;
+    return {type:"word", key, word:g.base||tok, zh:g.zh, hi:g.hi||"", en:g.en||"", es:g.es||"", pos:g.pos||"", forms:[...new Set([tok.toLowerCase(),b])], example:sentenceWith(art,tok), articleDate:art.date, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, noteEs:g.noteEs||null, filler:true}; });
+}
+
 function langSheet(){
   return `<div class="scrim" data-act="closelang"></div><div class="sheet" role="dialog" aria-label="${T("language")}"><div class="grab"></div>
     <div class="eyebrow" style="margin-bottom:10px">Language · 語言 · भाषा · Idioma</div>
@@ -565,7 +606,7 @@ const isMain = art => !!art && !!S.index[0] && art.id===S.index[0].id;
 function glossFor(art, surface){ const g=art && art.gloss || {}; return g[surface.toLowerCase()] || g[surface.toLowerCase().replace(/’/g,"'")] || null; }
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 function sentenceWith(art, surface){
-  for(const p of art.paragraphs){ for(const s of p.split(/(?<=[.!?])\s+/)){ if(new RegExp("(^|[^A-Za-zÀ-ÿ])"+reEsc(surface)+"([^A-Za-zÀ-ÿ]|$)","i").test(s)) return s; } }
+  for(const p of parasOf(art)){ for(const s of p.split(/(?<=[.!?])\s+/)){ if(new RegExp("(^|[^A-Za-zÀ-ÿ])"+reEsc(surface)+"([^A-Za-zÀ-ÿ]|$)","i").test(s)) return s; } }
   return "";
 }
 function lookedUpFor(d, art){ return isMain(art) ? (d.lookedUp||[]) : ((d.lookedUpBy||{})[art.id]||[]); }
@@ -608,7 +649,7 @@ function viewToday(){
   return `<div class="view">
     <section class="hero"><div class="eyebrow">${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
     <div class="steps">
-      ${step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):T("preDraw",{n:el.length,k:Math.min(8,el.length)})):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
+      ${step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):T("preDraw",{n:el.length,k:Math.min(10,el.length)})):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
       ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
@@ -631,7 +672,7 @@ function viewRead(){
   const lu=lookedUpFor(d,art), post=postFor(d,art);
   const hits=new Set(lu);
   const known=new Set([...S.words.values()].flatMap(w=>w.forms||[]));
-  const paras=art.paragraphs.map(p=>"<p>"+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((tok,i)=>{
+  const paras=parasOf(art).map(p=>"<p>"+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((tok,i)=>{
     if(i%2===0) return esc(tok);
     const k=tok.toLowerCase(); const g=glossFor(art,tok); const lemma=(g&&g.base||k).toLowerCase();
     const cls="w"+(hits.has(lemma)?" hit":(known.has(k)?" known":""));
@@ -644,8 +685,8 @@ function viewRead(){
     : `<button class="btn" data-act="finishx">${T("finishExtra")}</button>`;
   return `<div class="view">
     <button class="btn ghost" data-act="back" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("back")}</button>
-    <div class="art-head"><div class="eyebrow">${art.topic?esc(topicOf(art))+" · ":""}${esc(fmtDate(art.date))}${art.level?" · CEFR "+esc(art.level):""}</div><h1>${esc(art.title)}</h1>
-    <div class="art-meta"><span>${T("words",{n:art.paragraphs.join(" ").match(WORD_RE).length})}</span>${src?`<span>${T("rewritten",{s:src})}</span>`:""}</div></div>
+    <div class="art-head"><div class="eyebrow">${art.topic?esc(topicOf(art))+" · ":""}${esc(fmtDate(art.date))}</div><h1>${esc(art.title)}</h1>
+    <div class="art-meta"><span class="chip topic">${levelOf(art)==="IELTS"?"IELTS 7–8":(levelOf(art)||art.level||"")}</span><span>${T("words",{n:parasOf(art).join(" ").match(WORD_RE).length})}</span>${src?`<span>${T("rewritten",{s:src})}</span>`:""}</div></div>
     ${sumOf(art)?`<div class="zh-sum">${esc(sumOf(art))}</div>`:""}
     <div class="tip"><i></i>${T("tip")}</div>
     <article class="article" id="article">${paras}</article>
@@ -774,6 +815,7 @@ function record(surface,g,ex,art){
 function renderSheet(){
   const o=$("#overlay");
   if(S.langSheet){ o.innerHTML=langSheet(); return; }
+  if(S.levelSheet){ o.innerHTML=levelSheet(); return; }
   if(!S.sheet){ o.innerHTML=""; return; }
   const {surface,g,ex,loading,err,rec,isNew,skip}=S.sheet;
   o.innerHTML=`<div class="scrim" data-act="close"></div><div class="sheet" role="dialog" aria-label="${T("wordTr")}"><div class="grab"></div>
@@ -845,14 +887,17 @@ function makeQuestion(w){
 function startQuiz(kind, art){
   let words;
   const d=dayRec();
-  if(kind==="pre"){ const el=eligible(); words=weightedPick(el, Math.min(8, el.length)); }
-  else { words=shuffle(lookedUpFor(d,art).map(l=>S.words.get(keyOf(l))).filter(Boolean)); }
+  if(kind==="pre"){ const el=eligible(); words=weightedPick(el, Math.min(10, el.length)); }
+  else {
+    words=shuffle(lookedUpFor(d,art).map(l=>S.words.get(keyOf(l))).filter(Boolean)).slice(0,10);
+    if(words.length<10) words=words.concat(fillerWords(art, words.map(w=>w.word.toLowerCase()), 10-words.length));
+  }
   if(!words.length){
     if(kind==="pre") saveDay({...d, preDone:true, preScore:0, preTotal:0});
     else finishPost(art,0,0);
     S.view="today"; S.tab="today"; render(); return;
   }
-  S.quiz={kind, artId:art&&art.id, qs:words.map(makeQuestion), i:0, score:0, picked:null, answers:[]};
+  S.quiz={kind, artId:art&&art.id, qs:words.map(makeQuestion), i:0, score:0, picked:null, answers:[], hasFill:words.some(w=>w.filler)};
   S.view="quiz"; render(); window.scrollTo(0,0);
 }
 function finishPost(art, score, total){
@@ -868,7 +913,7 @@ function viewQuiz(){
     const nextBtn = Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
-      <div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div></div>
+      <div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
       ${rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
@@ -880,7 +925,7 @@ function viewQuiz(){
   const lead={en2zh:T("qMeaning"),zh2en:T("qWord"),cloze:T("qCloze")}[q.type];
   return `<div class="view"><div class="row" style="justify-content:space-between"><span class="eyebrow">${title}</span><span class="muted" style="font-size:13px;font-variant-numeric:tabular-nums">${Q.i+1} / ${Q.qs.length}</span></div>
     <div class="qbar"><i style="width:${(Q.i+(pickedI!=null?1:0))/Q.qs.length*100}%"></i></div>
-    <div class="qcard"><div class="muted" style="font-size:14px">${lead}</div>${prompt}
+    <div class="qcard"><div class="muted" style="font-size:14px">${lead}${q.w.filler?` <span class="chip new">${T("fillTag")}</span>`:""}</div>${prompt}
     <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(pickedI!=null){ if(o.ok) c+=" right"; else if(i===pickedI) c+=" wrong"; } return `<button class="${c}" data-pick="${i}" ${pickedI!=null?"disabled":""}>${esc(o.label)}${pickedI!=null&&!o.ok&&o.meaning?`<span class="optm">${esc(o.meaning)}</span>`:""}</button>`; }).join("")}</div>
     ${ans?`<div class="fb ${ans.ok?"ok":"no"}">${ans.ok?T("right"):T("wrong")}</div>${answerBlock(ans,false)}<button class="btn" data-act="next">${Q.i+1<Q.qs.length?T("next"):T("seeAll")}</button>`:""}</div></div>`;
 }
@@ -888,7 +933,8 @@ function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
   Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
   const w=S.words.get(q.w.key)||q.w;
-  persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today()});
+  if(!w.filler) persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today()});
+  else if(!ok){ const {filler,...rec}=w; persist(w.key,{...rec, firstSeen:today(), lookups:0, lastLookup:new Date().toISOString(), correct:0, wrong:1, lastTested:today()}); }
   if(ok) Q.score++;
   const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
   if(Q.i+1>=Q.qs.length){
@@ -999,6 +1045,79 @@ const TOWNS=TOWN_ROWS.map((r,i)=>{
     foe:{mid:f[0], name:{zh:f[1],en:f[2],hi:f[3],es:f[4]}}, el:f[5], lore:f[6], en:f[2], boss:id==="dublin", ...st};
 });
 const MONS=Object.fromEntries(TOWNS.map(t=>[t.id,t]));
+/* ----- monster illustrations (inline SVG, 100×100) ----- */
+const INK="#1B2421";
+const eye=(x,y,r=4.2,pc=INK)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${INK}" stroke-width="1.6"/><circle cx="${x+0.6}" cy="${y+0.6}" r="${r*0.48}" fill="${pc}"/>`;
+const st=`stroke="${INK}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"`;
+const ART={
+ leprechaun:()=>`<path d="M30 92 L36 62 Q50 56 64 62 L70 92Z" fill="#2F7D3A" ${st}/><rect x="36" y="74" width="28" height="5" fill="${INK}"/><rect x="46" y="72.5" width="8" height="8" fill="#E8C547" ${st}/>
+  <circle cx="50" cy="48" r="15" fill="#F2C9A0" ${st}/><path d="M36 52 Q50 74 64 52 Q58 60 50 60 Q42 60 36 52Z" fill="#D9682B" ${st}/>${eye(44,45)}${eye(56,45)}
+  <rect x="31" y="31" width="38" height="5" rx="2" fill="#24632D" ${st}/><path d="M38 31 L40 12 L60 12 L62 31Z" fill="#2F7D3A" ${st}/><rect x="39" y="23" width="22" height="4" fill="${INK}"/><rect x="47" y="22" width="6" height="6" fill="#E8C547"/>
+  <circle cx="78" cy="84" r="7" fill="#E8C547" ${st}/><circle cx="72" cy="90" r="5" fill="#E8C547" ${st}/>`,
+ changeling:()=>`<path d="M32 94 Q34 70 50 68 Q66 70 68 94Z" fill="#6B8F5E" ${st}/><path d="M22 34 L36 44 L30 50Z" fill="#B8D4A0" ${st}/><path d="M78 34 L64 44 L70 50Z" fill="#B8D4A0" ${st}/>
+  <ellipse cx="50" cy="48" rx="22" ry="21" fill="#B8D4A0" ${st}/>${eye(41,45,5.5,"#4A7A2E")}${eye(59,45,5.5,"#4A7A2E")}<path d="M40 58 Q50 64 60 56" fill="none" ${st}/><path d="M38 30 Q44 22 50 30 Q56 22 62 30" fill="none" ${st}/>`,
+ merrow:()=>`<path d="M44 66 Q30 80 40 92 Q52 98 60 88 Q50 86 54 76 Q58 70 56 64Z" fill="#2E8C8C" ${st}/><path d="M38 92 L28 98 M40 92 L34 99" ${st}/>
+  <path d="M38 66 Q50 58 62 66 L58 74 Q50 70 42 74Z" fill="#E8B79A" ${st}/><path d="M30 44 Q28 74 40 70 L42 50Z" fill="#5A3A2E" ${st}/><path d="M70 44 Q72 74 60 70 L58 50Z" fill="#5A3A2E" ${st}/>
+  <circle cx="50" cy="46" r="14" fill="#F0C8A8" ${st}/>${eye(45,46,3.6)}${eye(55,46,3.6)}<path d="M46 53 Q50 56 54 53" fill="none" ${st}/>
+  <path d="M36 38 Q50 18 64 38Z" fill="#C8342B" ${st}/><circle cx="50" cy="24" r="3" fill="#C8342B" ${st}/>`,
+ grogoch:()=>`<path d="M26 92 L30 58 L24 60 L32 50 L28 44 L38 44 L40 34 L48 40 L54 30 L58 40 L68 34 L68 44 L76 46 L70 52 L78 60 L70 60 L74 92Z" fill="#9A6B43" ${st}/>
+  <ellipse cx="51" cy="56" rx="14" ry="12" fill="#D9B48A" ${st}/>${eye(46,54,3.6)}${eye(57,54,3.6)}<path d="M45 62 Q51 66 57 62" fill="none" ${st}/><path d="M40 92 L40 80 M60 92 L60 80" ${st}/>`,
+ feardearg:()=>`<path d="M30 94 L36 64 Q50 58 64 64 L70 94Z" fill="#C8342B" ${st}/><path d="M50 62 L50 94" ${st}/><circle cx="50" cy="72" r="2" fill="${INK}"/><circle cx="50" cy="82" r="2" fill="${INK}"/>
+  <circle cx="50" cy="50" r="14" fill="#E8B48E" ${st}/>${eye(44,48,3.8)}${eye(56,48,3.8)}<path d="M42 56 Q50 63 58 55" fill="none" ${st}/><path d="M42 41 L46 44 M58 41 L54 44" ${st}/>
+  <path d="M34 42 Q36 30 52 6 Q60 26 66 42Z" fill="#C8342B" ${st}/>`,
+ dobharchu:()=>`<path d="M14 70 Q30 52 60 56 Q78 58 86 46 L94 50 Q90 64 78 70 Q64 80 40 78 Q22 80 14 70Z" fill="#5B4636" ${st}/><path d="M14 70 Q4 74 6 86 Q12 78 20 76" fill="#5B4636" ${st}/>
+  <path d="M30 78 L28 92 M46 79 L46 93 M66 74 L70 90" ${st}/><path d="M80 46 L84 36 L88 46" fill="#5B4636" ${st}/>${eye(86,50,3.2)}<path d="M92 56 L97 55" ${st}/>
+  <path d="M10 92 Q30 86 50 94 Q70 86 92 92" fill="none" stroke="#7BB8D8" stroke-width="3" stroke-linecap="round"/>`,
+ clurichaun:()=>`<path d="M32 94 L36 62 Q50 56 64 62 L68 94Z" fill="#7A3E5C" ${st}/><circle cx="50" cy="48" r="15" fill="#E7A88A" ${st}/><circle cx="50" cy="52" r="4" fill="#D9534F"/>${eye(44,45)}${eye(56,45)}
+  <path d="M43 57 Q50 61 57 57" fill="none" ${st}/><path d="M34 37 Q50 26 66 37 L62 40 Q50 34 38 40Z" fill="#4A2A3A" ${st}/>
+  <path d="M70 60 L70 70 Q66 74 66 82 L66 92 L80 92 L80 82 Q80 74 76 70 L76 60Z" fill="#3E8C5A" ${st}/><rect x="69" y="56" width="8" height="5" fill="#C9A227" ${st}/>`,
+ catsi:()=>`<path d="M30 94 Q24 62 36 48 L30 22 L44 38 Q50 36 56 38 L70 22 L64 48 Q76 62 70 94Z" fill="#1E1E24" ${st}/><ellipse cx="50" cy="74" rx="6" ry="9" fill="#F4F4F4"/>
+  <ellipse cx="42" cy="54" rx="5" ry="4" fill="#9BE36B" ${st}/><ellipse cx="58" cy="54" rx="5" ry="4" fill="#9BE36B" ${st}/><rect x="41" y="51" width="2" height="6" fill="${INK}"/><rect x="57" y="51" width="2" height="6" fill="${INK}"/>
+  <path d="M70 90 Q90 86 86 66" fill="none" stroke="#1E1E24" stroke-width="7" stroke-linecap="round"/><path d="M46 62 L50 65 L54 62" fill="none" stroke="#F4F4F4" stroke-width="2"/>`,
+ puca:()=>`<path d="M28 94 L32 64 Q50 52 68 64 L72 94Z" fill="#25252B" ${st}/><path d="M34 38 Q20 24 16 32 Q26 34 32 46" fill="#8A7A60" ${st}/><path d="M66 38 Q80 24 84 32 Q74 34 68 46" fill="#8A7A60" ${st}/>
+  <path d="M34 40 Q50 30 66 40 L62 66 Q50 76 38 66Z" fill="#33333A" ${st}/><ellipse cx="42" cy="50" rx="4.5" ry="3.5" fill="#F2B233" ${st}/><ellipse cx="58" cy="50" rx="4.5" ry="3.5" fill="#F2B233" ${st}/>
+  <rect x="40" y="49" width="5" height="1.6" fill="${INK}"/><rect x="56" y="49" width="5" height="1.6" fill="${INK}"/><path d="M46 70 L50 82 L54 70" fill="#33333A" ${st}/>`,
+ eachuisce:()=>`<path d="M22 94 Q22 60 40 46 L36 28 L46 38 Q62 30 74 40 Q84 46 82 58 Q78 64 70 60 Q64 58 60 64 Q66 80 64 94Z" fill="#3E6E8E" ${st}/>
+  <path d="M40 46 Q30 52 30 64 M46 40 Q36 46 34 56 M52 36 Q44 40 40 50" fill="none" stroke="#2F8F5A" stroke-width="4" stroke-linecap="round"/>${eye(66,46,3.6)}<circle cx="78" cy="56" r="1.6" fill="${INK}"/>
+  <path d="M8 92 Q20 84 32 92 Q44 84 56 92 Q68 84 80 92 Q88 86 96 92" fill="none" stroke="#9FD3EE" stroke-width="3" stroke-linecap="round"/>`,
+ wisp:()=>`<circle cx="52" cy="46" r="26" fill="#FFE9A8" opacity=".35"/><path d="M52 18 Q72 34 68 52 Q64 70 52 72 Q38 72 36 56 Q34 44 44 38 Q42 50 50 52 Q48 40 52 18Z" fill="#F5B83D" ${st}/>
+  ${eye(46,56,3.4)}${eye(58,56,3.4)}<path d="M50 72 Q40 82 44 94 M54 72 Q62 84 58 96" fill="none" stroke="#F5B83D" stroke-width="3" stroke-linecap="round" opacity=".8"/>`,
+ gancanagh:()=>`<path d="M30 94 L34 62 Q50 54 66 62 L70 94Z" fill="#5A4AA0" ${st}/><path d="M50 60 L44 70 L50 74 L56 70Z" fill="#fff" ${st}/>
+  <circle cx="50" cy="46" r="14" fill="#F0C8A8" ${st}/><path d="M36 42 Q38 28 50 28 Q62 28 64 42 Q58 34 50 36 Q42 34 36 42Z" fill="#2B2B33" ${st}/>${eye(44,46,3.4)}${eye(56,46,3.4)}<path d="M44 54 Q50 58 56 54" fill="none" ${st}/>
+  <path d="M56 56 L72 60 L74 56" fill="none" ${st}/><rect x="72" y="50" width="6" height="7" rx="1" fill="#8B5A2B" ${st}/><path d="M76 46 Q80 40 76 34 Q82 30 78 22" fill="none" stroke="#C9C9C9" stroke-width="2" stroke-linecap="round"/>
+  <path d="M22 34 Q18 28 22 24 Q26 22 28 26 Q30 22 34 24 Q38 28 28 36Z" fill="#E0526A" ${st}/>`,
+ feargorta:()=>`<path d="M36 96 L40 40 Q50 22 60 40 L64 96Z" fill="#6E6A5E" ${st}/><ellipse cx="50" cy="44" rx="8" ry="10" fill="#C8B9A0" ${st}/>${eye(47,43,2.6)}${eye(53.5,43,2.6)}
+  <path d="M47 50 L53 50" ${st}/><path d="M40 64 Q30 66 28 74" fill="none" ${st}/><path d="M18 74 Q28 84 38 74Z" fill="#B08A5A" ${st}/><path d="M60 60 L72 92" ${st}/>`,
+ leannan:()=>`<path d="M30 96 Q34 60 50 56 Q66 60 70 96 Q60 88 50 96 Q40 88 30 96Z" fill="#E8E4F4" ${st}/><path d="M32 40 Q30 72 22 86 Q36 78 38 54Z" fill="#C9B6E4" ${st}/><path d="M68 40 Q70 72 78 86 Q64 78 62 54Z" fill="#C9B6E4" ${st}/>
+  <circle cx="50" cy="44" r="14" fill="#F2ECF7" ${st}/>${eye(45,44,3.2,"#7A5BB5")}${eye(55,44,3.2,"#7A5BB5")}<path d="M46 51 Q50 54 54 51" fill="none" ${st}/>
+  <path d="M50 70 Q46 64 42 68 Q40 72 50 80 Q60 72 58 68 Q54 64 50 70Z" fill="#E0526A" ${st}/>`,
+ caorthannach:()=>`<path d="M22 70 Q16 46 30 30 Q30 46 38 48 Q36 30 50 14 Q52 32 62 36 Q66 24 76 22 Q72 38 80 48 Q88 64 78 82 Q66 96 50 96 Q32 96 22 70Z" fill="#E2572B" ${st}/>
+  <path d="M34 50 L26 34 L40 44Z M66 50 L74 34 L60 44Z" fill="#3A1A12" ${st}/>${eye(42,62,4.8,"#F5D33D")}${eye(58,62,4.8,"#F5D33D")}<path d="M38 76 Q50 86 62 76 L58 80 L54 76 L50 81 L46 76 L42 80Z" fill="#3A1A12" ${st}/>`,
+ sluagh:()=>{ const g=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-12 14 Q-14 -10 0 -12 Q14 -10 12 14 L8 10 L4 14 L0 10 L-4 14 L-8 10Z" fill="#CFD8E8" ${st}/><circle cx="-4" cy="-2" r="2.4" fill="${INK}"/><circle cx="4" cy="-2" r="2.4" fill="${INK}"/><ellipse cx="0" cy="5" rx="2.4" ry="3.2" fill="${INK}"/></g>`;
+   return g(28,62,1.1)+g(72,58,1)+g(50,36,1.4)+`<path d="M8 82 Q30 72 50 80 Q70 88 92 76" fill="none" stroke="#CFD8E8" stroke-width="2" stroke-dasharray="4 4"/>`; },
+ banshee:()=>`<path d="M26 98 Q30 56 50 52 Q70 56 74 98 Q64 90 56 98 Q50 90 44 98 Q36 90 26 98Z" fill="#DDE4EE" ${st}/><path d="M30 46 Q26 80 18 90 Q34 82 36 60Z" fill="#B9C4D6" ${st}/><path d="M70 46 Q74 80 82 90 Q66 82 64 60Z" fill="#B9C4D6" ${st}/>
+  <circle cx="50" cy="42" r="15" fill="#EEF2F8" ${st}/><path d="M43 39 L47 41 M57 39 L53 41" ${st}/><ellipse cx="50" cy="50" rx="4" ry="6" fill="${INK}"/><path d="M14 30 Q8 36 12 44 M86 30 Q92 36 88 44 M20 22 Q12 28 16 36 M80 22 Q88 28 84 36" fill="none" stroke="#B9C4D6" stroke-width="2.4" stroke-linecap="round"/>`,
+ abhartach:()=>`<path d="M16 96 Q22 60 34 52 L50 62 L66 52 Q78 60 84 96 Q66 86 50 96 Q34 86 16 96Z" fill="#2B2033" ${st}/><path d="M34 52 L28 38 L42 50Z M66 52 L72 38 L58 50Z" fill="#7A1F2B" ${st}/>
+  <circle cx="50" cy="50" r="13" fill="#C9D6C3" ${st}/>${eye(45,48,3.2,"#B32D2D")}${eye(55,48,3.2,"#B32D2D")}<path d="M44 56 Q50 59 56 56" fill="none" ${st}/><path d="M46 57 L47 61 L48 57 M52 57 L53 61 L54 57" fill="#fff" stroke="${INK}" stroke-width="1"/>
+  <path d="M38 38 Q50 30 62 38 L60 42 Q50 38 40 42Z" fill="#1A141F" ${st}/>`,
+ ellen:()=>{ const h=(x,y,r)=>`<path d="M50 70 Q${(50+x)/2} ${(70+y)/2+6} ${x} ${y+6}" fill="none" stroke="#8B3A2B" stroke-width="8" stroke-linecap="round"/><circle cx="${x}" cy="${y}" r="${r}" fill="#B5492F" ${st}/>${eye(x-r*0.35,y-1,r*0.28,"#F5D33D")}${eye(x+r*0.35,y-1,r*0.28,"#F5D33D")}<path d="M${x-r*0.4} ${y+r*0.45} L${x+r*0.4} ${y+r*0.45}" ${st}/>`;
+   return `<path d="M26 96 Q24 68 50 64 Q76 68 74 96Z" fill="#8B3A2B" ${st}/>`+h(24,40,11)+h(76,40,11)+h(50,28,13)+`<path d="M44 16 L46 10 M56 16 L54 10" ${st}/>`; },
+ oilliphéist:()=>`<path d="M14 84 Q30 96 40 80 Q50 62 34 52 Q20 42 34 30 Q48 20 64 28" fill="none" stroke="${INK}" stroke-width="17" stroke-linecap="round"/><path d="M14 84 Q30 96 40 80 Q50 62 34 52 Q20 42 34 30 Q48 20 64 28" fill="none" stroke="#2F7F7A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M14 84 Q30 96 40 80 Q50 62 34 52 Q20 42 34 30 Q48 20 64 28" fill="none" stroke="#9FD9C8" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
+  <path d="M58 20 Q76 14 86 24 Q92 32 82 38 Q72 42 60 36Z" fill="#2F7F7A" ${st}/>${eye(74,26,3.6,"#F5D33D")}<path d="M86 34 L94 36 L88 38" fill="none" stroke="#C8342B" stroke-width="2"/><path d="M66 16 L70 8 L74 16" fill="#2F7F7A" ${st}/>`,
+ dullahan:()=>`<path d="M10 70 Q14 54 32 54 L66 54 Q80 50 84 40 L92 44 Q90 58 80 62 L80 80 M30 64 L26 90 M42 66 L42 92 M70 66 L72 90 M80 78 L84 92" fill="#1E1E24" ${st}/><path d="M12 70 Q28 74 66 66 L66 54 L32 54 Q14 54 12 70Z" fill="#1E1E24" ${st}/>
+  <path d="M38 54 L40 30 L58 30 L60 54Z" fill="#3A3A44" ${st}/><path d="M44 30 L54 30" stroke="#C8342B" stroke-width="3"/><path d="M58 34 L72 42" ${st}/>
+  <circle cx="74" cy="46" r="7" fill="#C9D6C3" ${st}/><circle cx="72" cy="45" r="1.3" fill="${INK}"/><circle cx="76.5" cy="45" r="1.3" fill="${INK}"/><path d="M71 50 Q74 48 77 50" fill="none" stroke="${INK}" stroke-width="1.4"/>
+  <path d="M38 34 L24 30 L22 36" fill="none" ${st}/><path d="M18 40 Q22 22 30 28" fill="none" stroke="#E8C547" stroke-width="2.4"/>`,
+ fomorian:()=>`<path d="M18 96 L22 54 Q50 38 78 54 L82 96Z" fill="#6B7A55" ${st}/><path d="M78 56 Q92 64 88 84" fill="none" stroke="${INK}" stroke-width="12" stroke-linecap="round"/><path d="M78 56 Q92 64 88 84" fill="none" stroke="#6B7A55" stroke-width="7" stroke-linecap="round"/>
+  <path d="M84 84 L96 96 L90 98 L80 88Z" fill="#7A5A3A" ${st}/><ellipse cx="50" cy="38" rx="19" ry="17" fill="#8FA070" ${st}/>${eye(50,34,7,"#B32D2D")}
+  <path d="M38 46 Q50 52 62 46 L60 50 L56 47 L52 51 L48 47 L44 51 L40 47Z" fill="#fff" ${st}/><path d="M34 24 L38 30 M66 24 L62 30" ${st}/>`,
+ balor:()=>`<circle cx="50" cy="50" r="40" fill="#F5B83D" opacity=".25"/><path d="M8 50 Q50 6 92 50 Q50 94 8 50Z" fill="#F4EBDD" ${st}/><circle cx="50" cy="50" r="17" fill="#C8342B" ${st}/><circle cx="50" cy="50" r="7" fill="${INK}"/><circle cx="45" cy="45" r="3" fill="#fff"/>
+  <path d="M8 50 Q50 18 92 50" fill="none" stroke="${INK}" stroke-width="3"/><path d="M18 34 L12 24 M32 24 L28 12 M50 20 L50 6 M68 24 L72 12 M82 34 L88 24" ${st}/>
+  <path d="M22 70 L16 80 M36 80 L34 92 M64 80 L66 92 M78 70 L84 80" stroke="#E2572B" stroke-width="3" stroke-linecap="round"/>`
+};
+function monSvg(t, cls){ const f=ART[t.foe.mid]; return f?`<svg viewBox="0 0 100 100" class="${cls||"mon-art"}" aria-hidden="true">${f()}</svg>`:""; }
+
 const townName=t=>t.name[LANG]||t.name.en;
 const monName=m=>m.foe.name[LANG]||m.foe.name.en;
 const monSub=m=>LANG==="en"?"":m.foe.name.en;
@@ -1023,7 +1142,7 @@ function mapSvg(){
 function townCard(t){
   const c=conquered(), own=!!c[t.id], open=canAttack(t);
   return `<div class="town-card${own?" own":""}">
-    <div class="tc-top">${elBadge(t.el,true)}<div class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${T("pop",{n:fmtPop(t.pop)})} · Lv ${t.lv}</span></div></div>
+    <div class="tc-top"><span class="thumb el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><div class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${T("pop",{n:fmtPop(t.pop)})} · Lv ${t.lv}</span></div></div>
     <div class="muted" style="font-size:14px">${own?T("taxLine",{n:t.tax}):T("holds",{m:esc(monName(t))})}</div>
     <div class="row" style="gap:4px">${advice(t)}</div>
     ${open?`<button class="btn ${own?"ghost":""}" data-mon="${t.id}">${own?T("trainBtn"):T("attack")}</button>`:`<span class="muted sm-t">${T("lockedCity",{n:t.lv-1})}</span>`}
@@ -1039,7 +1158,7 @@ function viewConquest(){
     <div class="map-wrap">${mapSvg()}<div class="legend"><span><i class="lg tw-own"></i>${T("conqTag")}</span><span><i class="lg lg-open"></i>${T("attack")}</span><span><i class="lg tw-lock"></i>${T("lockShort")}</span></div></div>
     ${sel?townCard(sel):`<p class="muted sm-t" style="text-align:center">${T("tapCity")}</p>`}
     <div class="mons">${TOWNS.map(t=>{ const own=!!c[t.id], open=canAttack(t);
-      return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}">${elBadge(t.el,true)}<span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span></span><span class="go-t">${own?"✓":open?T("attack"):"Lv "+(t.lv-1)}</span></button>`; }).join("")}</div>`;
+      return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span></span><span class="go-t">${own?"✓":open?T("attack"):"Lv "+(t.lv-1)}</span></button>`; }).join("")}</div>`;
 }
 
 const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null};
@@ -1143,7 +1262,7 @@ function fight(){
 }
 function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
 function monArt(m, hit){
-  return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}"><span class="ms-el">${elShort(m.el)}</span><span class="ms-name">${esc(m.en)}</span></div>`;
+  return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}">${monSvg(m,"ms-art")}<span class="ms-badge">${elBadge(m.el)}</span></div>`;
 }
 function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div>`; }
 function viewBattle(){
@@ -1243,9 +1362,10 @@ async function loadArticle(id){
 const byOrder=(a,b)=>b.date.localeCompare(a.date)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
-  const t=e.target.closest("[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  const t=e.target.closest("[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
   if(!t) return;
   if(t.dataset.lang) return setLang(t.dataset.lang);
+  if(t.dataset.level) return setLevel(t.dataset.level);
   if(t.dataset.town){ S.selTown=S.selTown===t.dataset.town?null:t.dataset.town; render(); if(S.selTown&&t.tagName==="BUTTON"){ const m=document.querySelector(".map-wrap"); if(m) m.scrollIntoView({behavior:"smooth",block:"start"}); } return; }
   if(t.dataset.advtab){ S.advTab=t.dataset.advtab; return render(); }
   if(t.dataset.shopel){ S.shopEl=t.dataset.shopel; return render(); }
@@ -1267,6 +1387,8 @@ document.addEventListener("click", e=>{
   if(a==="close"){ S.sheet=null; return renderSheet(); }
   if(a==="lang"){ S.sheet=null; S.langSheet=true; return renderSheet(); }
   if(a==="closelang"){ S.langSheet=false; return renderSheet(); }
+  if(a==="level"){ S.sheet=null; S.langSheet=false; S.levelSheet=true; return renderSheet(); }
+  if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
   if(a==="fight") return fight();
   if(a==="tax") return collectTax();
