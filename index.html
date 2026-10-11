@@ -223,6 +223,25 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .mast-r{display:flex;align-items:center;gap:10px}
 .lang-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--ink);min-width:36px}
 .el{font-size:11px}.el.big{font-size:16px}
+.conq-head{display:flex;flex-direction:column;gap:6px}
+.conq-bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden}.conq-bar i{display:block;height:100%;background:var(--gorse)}
+.map-wrap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px;display:flex;flex-direction:column;gap:6px;scroll-margin-top:70px}
+.ire-map{width:100%;max-width:380px;display:block;margin:0 auto}
+.land{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2;stroke-linejoin:round}
+.tw{cursor:pointer}.tw-hit{fill:transparent}
+.tw-own{fill:var(--gorse);stroke:var(--ink);stroke-width:1.5}
+.tw-open{stroke:#fff;stroke-width:1.5}
+.tw-lock{fill:var(--none);opacity:.55}
+.tw-ring{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:3 2}
+.tw-lab{font-size:12px;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;font-family:var(--f-ui)}
+.legend{display:flex;gap:14px;justify-content:center;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:5px}
+.lg{display:inline-block;width:11px;height:11px;border-radius:50%}
+.lg.tw-own{background:var(--gorse);border:1.5px solid var(--ink)}.lg.tw-lock{background:var(--none)}.lg-open{background:linear-gradient(90deg,var(--metal),var(--wood),var(--water),var(--fire),var(--earth))}
+.town-card{background:var(--card);border:1.5px solid var(--accent);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:8px}
+.town-card.own{border-color:var(--gorse)}
+.tc-top{display:flex;gap:12px;align-items:center}
+.mon.own{border-color:var(--gorse)}.mon.locked{opacity:.55}
 </style>
 
 </head>
@@ -242,7 +261,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 <script>
 "use strict";
 /* ================= i18n ================= */
-const LANGS=[{k:"zh",label:"繁體中文",short:"中"},{k:"en",label:"English",short:"EN"},{k:"hi",label:"हिन्दी",short:"हि"}];
+const LANGS=[{k:"zh",label:"繁體中文",short:"中"},{k:"en",label:"English",short:"EN"},{k:"hi",label:"हिन्दी",short:"हि"},{k:"es",label:"Español",short:"ES"}];
 let LANG=(()=>{ try{ const v=localStorage.getItem("che-pro-lang"); return LANGS.some(l=>l.k===v)?v:"zh"; }catch(e){ return "zh"; } })();
 const STR={
 zh:{
@@ -398,14 +417,71 @@ hi:{
  rules3:"सोना क्विज़ से मिलता है: हर सही उत्तर 10, 80%+ सटीकता पर +20, सब सही पर +20 और। हर पूरे क्विज़ पर 1 अभियान पास; दिन के तीनों चरण पूरे करने पर +30 सोना और 1 पास।",
  tabGo:"लड़ें", tabShop:"दुकान", tabBag:"थैला"
 }};
+STR.es={
+ loading:"Cargando…", tabToday:"Hoy", tabDict:"Palabras", tabAdv:"Aventura", tabArch:"Artículos", mainMenu:"Menú principal", language:"Idioma",
+ storageFull:"El almacenamiento está lleno", savedLocal:"Ahora se guarda en este dispositivo",
+ mast:"Lv {lv} · <b>{gold}</b> oro · pases {t}",
+ chipDone:"Leído · test {r}", chipDoneNone:"hecho", chipRead:"Leído · {n} consultadas",
+ loadingToday:"Cargando el artículo de hoy…", noArticles:"Aún no hay artículos", noArticlesSub:"Cada mañana se añaden noticias de Irlanda. Vuelve más tarde.",
+ start:"Empezar →", again:"Abrir", todayHead:"Titular de hoy", latestHead:"Último titular · {d}",
+ stepPre:"Test de repaso", preScore:"{s}/{t} aciertos", preDraw:"{k} preguntas de {n} palabras antiguas, según lo bien que las sabes", preNone:"Aún no hay palabras para repasar: empieza a leer",
+ stepRead:"Leer el titular", readDone:"{n} palabras consultadas", readHint:"Toca cualquier palabra que no conozcas para ver su significado",
+ stepPost:"Test después de leer", postScore:"{s}/{t} aciertos", postNone:"Hoy no has consultado palabras", postHint:"Un test con las palabras que acabas de consultar, con explicaciones",
+ moreRead:"¿Quieres leer más?", moreCount:"{n} artículos más hoy", moreLocked:"Termina el test de repaso para desbloquearlos.",
+ banner:"{t} pases de aventura · {g} oro", bannerSub:"Gana oro con los tests, compra equipo elemental y conquista Irlanda", bannerGo:"Aventura →",
+ statWords:"Palabras guardadas", statAcc:"Acierto total", statArts:"Artículos",
+ notFound:"No se encontró el artículo.", lockTitle:"Primero, el test de repaso", lockSub:"Antes de leer cada día, repasa las palabras de días anteriores.", lockBtn:"Empezar el repaso",
+ backToday:"Volver a Hoy", startPost:"Empezar el test", finishMain:"Terminado: empezar el test →",
+ extraDone:"Test de este artículo hecho ({r}). Las palabras consultadas saldrán en futuros repasos.", noLookups:"sin palabras", finishExtra:"Terminado: test con las palabras de este artículo →",
+ back:"← Volver", words:"{n} palabras", rewritten:"Reescrito a partir de {s}", tip:"Toca una palabra para ver su significado. Las que consultes se marcan con este color y se guardan en tu diccionario.",
+ myDict:"Mi diccionario", dictCount:"{n} palabras", search:"Buscar palabras o significados", sort:"Ordenar", sortRecent:"Recientes", sortWeak:"Más difíciles",
+ probNote:"La probabilidad de salir depende de tus aciertos: las palabras que fallas o que no repasas desde hace tiempo salen más.",
+ backup:"Copia de seguridad", backupSub:"Tus palabras, tests y partida solo se guardan en el navegador de este móvil. Exporta una copia antes de cambiar de móvil o borrar los datos de Safari.", export:"Exportar", import:"Importar",
+ imported:"{n} palabras importadas", badFile:"Ese archivo no es una copia válida",
+ nMeaning:"Significado", nUsage:"Uso", nColl:"Combinaciones", nEx:"Ejemplo",
+ newWord:"Nueva", qCount:"{n} preg.", kvLookups:"Consultada", kvTimes:"{n} veces", kvFirst:"Primera vez", kvRW:"Aciertos / fallos", kvProb:"Probabilidad de salir", kvTomorrow:"Entra en el repaso mañana",
+ pron:"Pronunciar", confirmDel:"¿Quitar esta palabra?", del:"Quitar", cancel:"Cancelar", delFromDict:"Quitar del diccionario", noMatch:"No hay coincidencias",
+ dictEmpty:"Tu diccionario está vacío", dictEmptySub:"Toca una palabra desconocida mientras lees y se guardará aquí.",
+ allArts:"Todos los artículos", artCount:"{n} artículos", archNote:"Las palabras que consultes en cualquier artículo van a tu diccionario y a los repasos.",
+ noGloss:"No hay significado preparado para esta palabra.", wordTr:"Significado", base:"Forma base: ", funcWord:"Palabra gramatical común: no se añade al diccionario", added:"Añadida a tu diccionario", already:"Ya está en tu diccionario · consultada {n} veces",
+ youPicked:"Elegiste", pickedMeans:"«{a}», que significa «{b}».", pickedPlain:"«{a}».", correctIs:"La respuesta es <b>{w}</b> ({m}).",
+ basic:"Significado básico", basicTxt:"En el artículo, {w} ({p}) significa «{m}».", forms:" Formas en el texto: {f}.", sentence:"Frase del artículo",
+ preTitle:"Test de repaso", postTitle:"Test después de leer", done:"{t} · terminado", readNow:"Leer el titular de hoy →",
+ sumWrong:"Las palabras falladas aparecen primero y saldrán más en los repasos.", sumAll:"¡Todo correcto! Estas palabras saldrán menos a partir de ahora.", explainAll:"Explicación de cada palabra",
+ qMeaning:"¿Qué significa esta palabra?", qWord:"¿Qué palabra inglesa tiene este significado?", qCloze:"Elige la palabra que falta",
+ right:"¡Correcto!", wrong:"Incorrecto: mira la explicación", next:"Siguiente", seeAll:"Ver resultados y explicaciones", artLoadFail:"No se pudieron cargar los artículos. Revisa la conexión.", removed:"Quitada",
+ loot:"Recompensas", lootRight:"{n} aciertos", lootAcc:"Bonus por {p}% de acierto", lootAccNo:"Acierto {p}% (bonus desde 80%)", lootDay:"Los tres pasos de hoy completados", tickets:"Pases", lootT:"+{n}", gold:"Oro", goldAmt:"+{n} oro", goAdv:"Ir de aventura →",
+ owned:"Ya lo tienes", needLv:"Requiere Lv {n}", noGold:"No tienes suficiente oro: faltan {n}", bought:"Has comprado y equipado {i}",
+ advWin:"Arma fuerte ×1.5", advWlose:"Arma débil ×0.67", advAwin:"Armadura fuerte · daño ×0.67", advAlose:"Armadura débil · daño ×1.5", advNone:"Sin bonus elemental",
+ noTicket:"No te quedan pases: termina un test para ganar uno", spell:"Hechizo de combate", spellSub:"Si aciertas, tu primer golpe hace el doble de daño.", spellOk:"¡Hechizo logrado! Primer golpe ×2", spellFail:"El hechizo falla. Respuesta: {w} — {m}",
+ retreat:"← Retirarse", elAttr:"elemento {e}", yourHp:"Tu HP", atk:"Ataque", def:"Defensa", skipSpell:"Saltar el hechizo y luchar", fight:"¡Luchar! (usa 1 pase)",
+ logSpell:"¡Con hechizo! ", logCrit:"¡Golpe crítico! ", logYou:"Haces <b>{n}</b> de daño", logMon:"{m} hace <b>{n}</b> de daño",
+ win:"Victoria", exp:"EXP", lvUp:"¡Subes de nivel!", lose:"Derrota", loseTip:"{m} era demasiado fuerte. Prueba un arma que venza a {e} (elemento {c}) o sube de nivel con enemigos más fáciles.",
+ you:"Tú · Lv {lv}", backAdv:"Volver a la aventura", fightAgain:"Luchar otra vez", skipAnim:"Saltar animación",
+ cycleAria:"Cinco elementos: Metal vence a Madera, Madera a Tierra, Tierra a Agua, Agua a Fuego, Fuego a Metal", atkPlus:"Ataque +{n}", defPlus:"Defensa +{d} · HP +{h}",
+ unequip:"Quitar", equip:"Equipar", equipped:"Equipado", unlockAt:"Desde Lv {n}", weapon:"Arma", armor:"Armadura", price:"{n} oro",
+ suggest:"Lv {n}+ recomendado", monLine:"Lv {lv} · HP {hp} · ATQ {atk}", beaten:" · vencido {n}×", go:"Luchar", all:"Todo",
+ bagEmpty:"Tu bolsa está vacía", bagEmptySub:"Gana oro con los tests y compra tu primer objeto en la tienda.", hero:"Aventurero", expLine:"EXP {e} / {n}",
+ bare:"Manos desnudas", cloth:"Ropa sencilla", rulesQ:"¿Cómo funcionan los cinco elementos?",
+ rules1:"Cada flecha significa «vence a»: Metal → Madera → Tierra → Agua → Fuego → Metal.",
+ rules2:"Si tu <b>arma</b> vence al elemento del monstruo, haces ×1.5 de daño; si el monstruo la vence, ×0.67.<br>Si tu <b>armadura</b> vence al elemento del monstruo, recibes ×0.67 de daño; si el monstruo la vence, ×1.5.",
+ rules3:"El oro viene de los tests: 10 por acierto, +20 con 80% o más, +20 más si aciertas todo. Cada test terminado da 1 pase; completar los tres pasos del día da +30 de oro y 1 pase más.",
+ tabGo:"Conquista", tabShop:"Tienda", tabBag:"Bolsa"
+};
+Object.assign(STR.zh,{conqProg:"已佔領 {n} / {t} 座城鎮", conqTag:"已佔領", conqNew:"你佔領了{c}！", allConq:"你統一了整個愛爾蘭島！", taxBtn:"領取今日稅收 +{n} 金", taxGot:"收到稅收 {n} 金", taxDone:"今日稅收已領取，明天再來", taxHint:"每佔領一座城鎮，每天都能收稅；城鎮越大，稅收越多。", taxLine:"每天稅收 {n} 金", pop:"人口約 {n}", holds:"{m}盤據在這裡", tapCity:"點地圖上的城鎮查看詳情", attack:"進攻", trainBtn:"再戰練功", lockedCity:"Lv {n} 才能進攻", lockShort:"未解鎖", mapAria:"愛爾蘭島地圖", goal:"目標：從最小的小鎮一路打到都柏林，佔領整個愛爾蘭島。城鎮越大，怪物越強。", tabGo:"征服"});
+Object.assign(STR.en,{conqProg:"{n} / {t} towns conquered", conqTag:"Conquered", conqNew:"You conquered {c}!", allConq:"You have conquered the whole island of Ireland!", taxBtn:"Collect today's taxes +{n} gold", taxGot:"Collected {n} gold in taxes", taxDone:"Taxes collected — come back tomorrow", taxHint:"Each town you conquer pays taxes once a day — bigger towns pay more.", taxLine:"Pays {n} gold in taxes a day", pop:"Pop. ~{n}", holds:"{m} holds this town", tapCity:"Tap a town on the map for details", attack:"Attack", trainBtn:"Train here", lockedCity:"Attack from Lv {n}", lockShort:"Locked", mapAria:"Map of the island of Ireland", goal:"Goal: fight your way from the smallest village to Dublin and conquer the whole island. Bigger towns have stronger monsters.", tabGo:"Conquest"});
+Object.assign(STR.hi,{conqProg:"{n} / {t} शहर जीते", conqTag:"जीता गया", conqNew:"आपने {c} जीत लिया!", allConq:"आपने पूरा आयरलैंड द्वीप जीत लिया!", taxBtn:"आज का कर लें +{n} सोना", taxGot:"{n} सोना कर मिला", taxDone:"आज का कर ले लिया — कल फिर आएँ", taxHint:"हर जीता शहर रोज़ कर देता है — बड़ा शहर ज़्यादा।", taxLine:"रोज़ {n} सोना कर", pop:"जनसंख्या ~{n}", holds:"{m} ने इस शहर पर कब्ज़ा किया है", tapCity:"जानकारी के लिए नक्शे पर शहर टैप करें", attack:"हमला", trainBtn:"यहाँ अभ्यास करें", lockedCity:"Lv {n} से हमला", lockShort:"बंद", mapAria:"आयरलैंड द्वीप का नक्शा", goal:"लक्ष्य: सबसे छोटे गाँव से डबलिन तक लड़ते हुए पूरा द्वीप जीतें। बड़े शहरों में ताक़तवर राक्षस हैं।", tabGo:"विजय"});
+Object.assign(STR.es,{conqProg:"{n} / {t} ciudades conquistadas", conqTag:"Conquistada", conqNew:"¡Has conquistado {c}!", allConq:"¡Has conquistado toda la isla de Irlanda!", taxBtn:"Cobrar impuestos de hoy +{n} oro", taxGot:"Has cobrado {n} de oro", taxDone:"Impuestos cobrados: vuelve mañana", taxHint:"Cada ciudad conquistada paga impuestos una vez al día; las más grandes pagan más.", taxLine:"Paga {n} de oro al día", pop:"Pobl. ~{n}", holds:"{m} domina esta ciudad", tapCity:"Toca una ciudad del mapa para ver detalles", attack:"Atacar", trainBtn:"Entrenar aquí", lockedCity:"Ataque desde Lv {n}", lockShort:"Bloqueada", mapAria:"Mapa de la isla de Irlanda"});
+STR.es.goal="Objetivo: avanzar desde el pueblo más pequeño hasta Dublín y conquistar toda la isla. Cuanto más grande la ciudad, más fuerte el monstruo.";
+
 function T(k, v){ let s=(STR[LANG]&&STR[LANG][k]) ?? STR.zh[k] ?? k; if(v) for(const [a,b] of Object.entries(v)) s=s.split("{"+a+"}").join(b); return s; }
-const LOCALE={zh:"zh-TW", en:"en-IE", hi:"hi-IN"};
-const TOPICS={"勞資":{en:"Labour",hi:"श्रम"},"環境":{en:"Environment",hi:"पर्यावरण"},"住房":{en:"Housing",hi:"आवास"},"觀光":{en:"Tourism",hi:"पर्यटन"},"健康":{en:"Health",hi:"स्वास्थ्य"},"經濟":{en:"Economy",hi:"अर्थव्यवस्था"},"教育":{en:"Education",hi:"शिक्षा"},"科技":{en:"Tech",hi:"तकनीक"},"文化":{en:"Culture",hi:"संस्कृति"},"社會":{en:"Society",hi:"समाज"},"政治":{en:"Politics",hi:"राजनीति"}};
+const LOCALE={zh:"zh-TW", en:"en-IE", hi:"hi-IN", es:"es-ES"};
+const TOPICS={"勞資":{en:"Labour",hi:"श्रम",es:"Trabajo"},"環境":{en:"Environment",hi:"पर्यावरण",es:"Medio ambiente"},"住房":{en:"Housing",hi:"आवास",es:"Vivienda"},"觀光":{en:"Tourism",hi:"पर्यटन",es:"Turismo"},"健康":{en:"Health",hi:"स्वास्थ्य",es:"Salud"},"經濟":{en:"Economy",hi:"अर्थव्यवस्था",es:"Economía"},"教育":{en:"Education",hi:"शिक्षा",es:"Educación"},"科技":{en:"Tech",hi:"तकनीक",es:"Tecnología"},"文化":{en:"Culture",hi:"संस्कृति",es:"Cultura"},"社會":{en:"Society",hi:"समाज",es:"Sociedad"},"政治":{en:"Politics",hi:"राजनीति",es:"Política"}};
 const topicOf=a=>!a.topic?"":LANG==="zh"?a.topic:((TOPICS[a.topic]||{})[LANG]||a.topic);
-const sumOf=a=>LANG==="hi"?(a.summaryHi||a.summaryEn||a.summaryZh):LANG==="en"?(a.summaryEn||a.summaryZh):a.summaryZh;
+const sumOf=a=>LANG==="es"?(a.summaryEs||a.summaryEn||a.summaryZh):LANG==="hi"?(a.summaryHi||a.summaryEn||a.summaryZh):LANG==="en"?(a.summaryEn||a.summaryZh):a.summaryZh;
 // meaning of a gloss entry or a saved word in the current language
-const mean=x=>!x?"":LANG==="hi"?(x.hi||x.en||x.zh):LANG==="en"?(x.en||x.zh):x.zh;
-function setLang(k){ LANG=k; try{ localStorage.setItem("che-pro-lang",k); }catch(e){} document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi"}[k]; S.langSheet=false; applyStaticText(); render(); }
+const mean=x=>!x?"":LANG==="es"?(x.es||x.en||x.zh):LANG==="hi"?(x.hi||x.en||x.zh):LANG==="en"?(x.en||x.zh):x.zh;
+function setLang(k){ LANG=k; try{ localStorage.setItem("che-pro-lang",k); }catch(e){} document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es"}[k]; S.langSheet=false; applyStaticText(); render(); }
 function applyStaticText(){
   const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
   set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch"));
@@ -414,7 +490,7 @@ function applyStaticText(){
 }
 function langSheet(){
   return `<div class="scrim" data-act="closelang"></div><div class="sheet" role="dialog" aria-label="${T("language")}"><div class="grab"></div>
-    <div class="eyebrow" style="margin-bottom:10px">Language · 語言 · भाषा</div>
+    <div class="eyebrow" style="margin-bottom:10px">Language · 語言 · भाषा · Idioma</div>
     <div class="opts">${LANGS.map(l=>`<button class="opt${l.k===LANG?" right":""}" data-lang="${l.k}">${l.label}</button>`).join("")}</div></div>`;
 }
 
@@ -612,7 +688,8 @@ async function importData(file){
 function notePack(n){
   // n: {note, noteHi, noteEn}; returns localized fields
   if(!n||!n.note) return null;
-  const z=n.note, h=n.noteHi||{}, e=n.noteEn||{};
+  const z=n.note, h=n.noteHi||{}, e=n.noteEn||{}, sp=n.noteEs||{};
+  if(LANG==="es") return {meaning:sp.meaning||e.meaning||z.meaning, usage:sp.usage||e.usage||z.usage, coll:z.collocations, exEn:z.example&&z.example.en, exTr:sp.exampleTr||""};
   if(LANG==="hi") return {meaning:h.meaning||e.meaning||z.meaning, usage:h.usage||e.usage||z.usage, coll:z.collocations, exEn:z.example&&z.example.en, exTr:h.exampleTr||""};
   if(LANG==="en") return {meaning:e.meaning||z.meaning, usage:e.usage||z.usage, coll:z.collocations, exEn:z.example&&z.example.en, exTr:""};
   return {meaning:z.meaning, usage:z.usage, coll:z.collocations, exEn:z.example&&z.example.en, exTr:z.example&&z.example.zh};
@@ -629,7 +706,7 @@ function dictList(){
   const pm=probMap();
   let list=[...S.words.values()];
   const q=S.dictQ.trim().toLowerCase();
-  if(q) list=list.filter(w=>w.word.toLowerCase().includes(q)||[w.zh,w.en,w.hi].some(x=>(x||"").toLowerCase().includes(q)));
+  if(q) list=list.filter(w=>w.word.toLowerCase().includes(q)||[w.zh,w.en,w.hi,w.es].some(x=>(x||"").toLowerCase().includes(q)));
   const acc=w=>{const t=(w.correct||0)+(w.wrong||0); return t?w.correct/t:-1;};
   if(S.dictSort==="recent") list.sort((a,b)=>(b.lastLookup||"").localeCompare(a.lastLookup||"")||a.word.localeCompare(b.word));
   else if(S.dictSort==="weak") list.sort((a,b)=>(pm.get(b.key)||0)-(pm.get(a.key)||0));
@@ -686,8 +763,8 @@ function record(surface,g,ex,art){
   const lemma=(g.base||surface).trim(), key=keyOf(lemma), now=today();
   const old=S.words.get(key);
   const forms=new Set([...(old&&old.forms||[]), surface.toLowerCase(), lemma.toLowerCase()]);
-  const rec=old?{...old, forms:[...forms], lookups:(old.lookups||1)+1, lastLookup:new Date().toISOString(), example:old.example||ex, note:old.note||g.note||null, noteHi:old.noteHi||g.noteHi||null, noteEn:old.noteEn||g.noteEn||null, hi:old.hi||g.hi||"", en:old.en||g.en||""}
-    :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, hi:g.hi||"", en:g.en||""};
+  const rec=old?{...old, forms:[...forms], lookups:(old.lookups||1)+1, lastLookup:new Date().toISOString(), example:old.example||ex, note:old.note||g.note||null, noteHi:old.noteHi||g.noteHi||null, noteEn:old.noteEn||g.noteEn||null, noteEs:old.noteEs||g.noteEs||null, hi:old.hi||g.hi||"", en:old.en||g.en||"", es:old.es||g.es||""}
+    :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, noteEs:g.noteEs||null, hi:g.hi||"", en:g.en||"", es:g.es||""};
   persist(key,rec);
   S.sheet.rec=rec; S.sheet.isNew=!old;
   const d=dayRec(), ll=lemma.toLowerCase();
@@ -716,14 +793,14 @@ function glossOf(w){
   return null;
 }
 function findNote(w){
-  if(w.note) return {note:w.note, noteHi:w.noteHi, noteEn:w.noteEn};
-  const g=glossOf(w); return g&&g.note?{note:g.note, noteHi:g.noteHi, noteEn:g.noteEn}:null;
+  if(w.note) return {note:w.note, noteHi:w.noteHi, noteEn:w.noteEn, noteEs:w.noteEs};
+  const g=glossOf(w); return g&&g.note?{note:g.note, noteHi:g.noteHi, noteEn:g.noteEn, noteEs:g.noteEs}:null;
 }
 // older saved words may lack Hindi/English meanings: fill them from loaded articles
 function fillMeanings(){
   let changed=false;
-  for(const [k,w] of S.words){ if(w.hi&&w.en&&(w.note||!glossOf(w)||!glossOf(w).note)) continue; const g=glossOf(w); if(!g) continue;
-    const nw={...w, hi:w.hi||g.hi||"", en:w.en||g.en||"", note:w.note||g.note||null, noteHi:w.noteHi||g.noteHi||null, noteEn:w.noteEn||g.noteEn||null};
+  for(const [k,w] of S.words){ if(w.hi&&w.en&&w.es&&(w.note||!glossOf(w)||!glossOf(w).note)) continue; const g=glossOf(w); if(!g) continue;
+    const nw={...w, hi:w.hi||g.hi||"", en:w.en||g.en||"", es:w.es||g.es||"", note:w.note||g.note||null, noteHi:w.noteHi||g.noteHi||null, noteEn:w.noteEn||g.noteEn||null, noteEs:w.noteEs||g.noteEs||null};
     if(JSON.stringify(nw)!==JSON.stringify(w)){ S.words.set(k,nw); changed=true; } }
   if(changed) lsSave();
 }
@@ -831,18 +908,16 @@ const BEATS={metal:"wood", wood:"earth", earth:"water", water:"fire", fire:"meta
 function elMult(att, def){ if(!att||!def) return 1; if(BEATS[att]===def) return 1.5; if(BEATS[def]===att) return 0.67; return 1; }
 const ELNAME={zh:{metal:["金","金"],wood:["木","木"],water:["水","水"],fire:["火","火"],earth:["土","土"],none:["無","無"]},
  en:{metal:["Mt","Metal"],wood:["Wd","Wood"],water:["Wa","Water"],fire:["Fi","Fire"],earth:["Ea","Earth"],none:["–","None"]},
- hi:{metal:["धा","धातु"],wood:["ल","लकड़ी"],water:["ज","जल"],fire:["अ","अग्नि"],earth:["पृ","पृथ्वी"],none:["–","कोई नहीं"]}};
+ hi:{metal:["धा","धातु"],wood:["ल","लकड़ी"],water:["ज","जल"],fire:["अ","अग्नि"],earth:["पृ","पृथ्वी"],none:["–","कोई नहीं"]},
+ es:{metal:["Me","Metal"],wood:["Ma","Madera"],water:["Ag","Agua"],fire:["Fu","Fuego"],earth:["Ti","Tierra"],none:["–","Ninguno"]}};
 const elShort=k=>ELNAME[LANG][k||"none"][0], elName=k=>ELNAME[LANG][k||"none"][1];
 const WN_L={en:{metal:["Bronze Dagger","Steel Longsword","Moonsilver Blade","Nuada's Sword of Light"],wood:["Oak Staff","Hawthorn Longbow","Yew War-Spear","Druid's Sacred Staff"],water:["Fishing Harpoon","Tidal Trident","Selkie Whip","Spear of Manannán"],fire:["Torch Club","Molten War-Axe","Blazing Lance","Spear of Lugh"],earth:["Stone Hammer","Granite Warhammer","Giant's Club","Club of the Dagda"]},
  hi:{metal:["काँसे का खंजर","इस्पात की तलवार","चंद्र-चाँदी की धार","नुआडा की प्रकाश तलवार"],wood:["ओक की लाठी","नागफनी धनुष","यू का भाला","ड्रुइड की पवित्र छड़ी"],water:["मछली भाला","ज्वार त्रिशूल","सेल्की कोड़ा","मनानान का भाला"],fire:["मशाल गदा","पिघला युद्ध-कुल्हाड़ा","धधकता भाला","लू का भाला"],earth:["पत्थर का हथौड़ा","ग्रेनाइट युद्ध-हथौड़ा","दानव की गदा","दग्दा की गदा"]}};
 const AN_L={en:{metal:["Chainmail","Iron Plate","Silver Scale Armour","War God's Mail"],wood:["Bark Vest","Woven Vine Armour","Ancient Oak Guard","Heart of the Forest"],water:["Sealskin Coat","Tide-Pattern Mail","Deep-Sea Scale","Cloak of Manannán"],fire:["Leather Armour","Lava Armour","Phoenix Mail","Undying Flame Plate"],earth:["Mud-Stone Armour","Heavy Rock Plate","Mountain Mail","Heart of the Earth"]},
  hi:{metal:["ज़ंजीर कवच","लोहे का कवच","चाँदी शल्क कवच","युद्ध देवता का कवच"],wood:["छाल की बंडी","बेल-बुना कवच","प्राचीन ओक रक्षक","वन-हृदय कवच"],water:["सील-खाल कोट","ज्वार कवच","गहरे सागर का शल्क","मनानान का लबादा"],fire:["चमड़े का कवच","लावा कवच","फ़ीनिक्स कवच","अमर ज्वाला कवच"],earth:["कीचड़-पत्थर कवच","भारी चट्टान कवच","पर्वत कवच","पृथ्वी-हृदय कवच"]}};
+WN_L.es={metal:["Daga de bronce","Espada larga de acero","Hoja de plata lunar","Espada de luz de Nuada"],wood:["Bastón de roble","Arco de espino","Lanza de tejo","Bastón sagrado druida"],water:["Arpón","Tridente de las mareas","Látigo selkie","Lanza de Manannán"],fire:["Garrote antorcha","Hacha de hierro fundido","Lanza llameante","Lanza de Lugh"],earth:["Martillo de piedra","Martillo de granito","Garrote de gigante","Garrote del Dagda"]};
+AN_L.es={metal:["Cota de malla","Placas de hierro","Escamas de plata","Malla del dios de la guerra"],wood:["Chaleco de corteza","Armadura de enredadera","Guarda del roble antiguo","Corazón del bosque"],water:["Abrigo de piel de foca","Malla de las mareas","Escamas abisales","Capa de Manannán"],fire:["Armadura de cuero","Armadura de lava","Malla de fénix","Placas de llama eterna"],earth:["Armadura de barro y piedra","Placas de roca","Malla de montaña","Corazón de la tierra"]};
 const itemName=it=>LANG==="zh"?it.name:WN_L[LANG]&&(it.slot==="weapon"?WN_L:AN_L)[LANG][it.el][it.tier];
-const MON_HI={leprechaun:"लेप्रेकॉन",changeling:"चेंजलिंग",merrow:"मेरो जलपरी",puca:"पूका",eachuisce:"जल-अश्व",wisp:"छलावा-ज्योति",banshee:"बंशी",sluagh:"स्लुआ आत्माएँ",feargorta:"भूखा प्रेत",dullahan:"बिना सिर का सवार",abhartach:"अवर्तख",fomorian:"फ़ोमोरियन दानव",balor:"बुरी आँख वाला बलोर"};
-const REG_HI={r1:"डबलिन के खेत",r2:"विकलो पर्वत",r3:"कोनेमारा दलदल",r4:"मोहर की चट्टानें",r5:"टोरी द्वीप"};
-const monName=m=>LANG==="zh"?m.zh:LANG==="hi"?(MON_HI[m.id]||m.en):m.en;
-const monSub=m=>LANG==="en"?"":m.en;
-const regName=r=>LANG==="zh"?r.name:LANG==="hi"?(REG_HI[r.id]||r.en):r.en;
 
 const elBadge=(k,big)=>`<span class="el el-${k||"none"}${big?" big":""}" title="${elName(k)}">${elShort(k)}</span>`;
 
@@ -855,29 +930,119 @@ for(const e of ELS) TIER.forEach((t,i)=>{
   ITEMS[`a-${e.k}-${i}`]={id:`a-${e.k}-${i}`, slot:"armor", el:e.k, tier:i, name:ANAMES[e.k][i], def:t.def, hp:t.hp, price:t.price, lv:t.lv};
 });
 
-const REGIONS=[
- {id:"r1", name:"都柏林郊野", en:"Dublin Fields", lv:1, mons:[
-  {id:"leprechaun", zh:"小矮妖", en:"Leprechaun", el:"metal", lv:1, hp:40, atk:8, def:2, exp:15, gold:10, lore:"A tiny shoemaker who hides his gold at the end of the rainbow."},
-  {id:"changeling", zh:"換生靈", en:"Changeling", el:"wood", lv:1, hp:45, atk:7, def:3, exp:15, gold:10, lore:"A fairy child secretly left in place of a human baby."},
-  {id:"merrow", zh:"梅羅人魚", en:"Merrow", el:"water", lv:2, hp:52, atk:9, def:3, exp:18, gold:12, lore:"A sea maiden who needs her red cap to return beneath the waves."}]},
- {id:"r2", name:"威克洛山脈", en:"Wicklow Mountains", lv:4, mons:[
-  {id:"puca", zh:"普卡", en:"Púca", el:"earth", lv:4, hp:110, atk:18, def:8, exp:42, gold:25, lore:"A shape-shifter that often appears as a black goat or horse."},
-  {id:"eachuisce", zh:"水馬", en:"Each-uisce", el:"water", lv:5, hp:120, atk:20, def:8, exp:46, gold:26, lore:"A water horse that drags its riders into deep lakes."},
-  {id:"wisp", zh:"鬼火", en:"Will-o'-the-wisp", el:"fire", lv:5, hp:105, atk:22, def:7, exp:46, gold:26, lore:"A drifting light that leads travellers away from the safe path."}]},
- {id:"r3", name:"康尼馬拉沼澤", en:"Connemara Bogs", lv:8, mons:[
-  {id:"banshee", zh:"報喪女妖", en:"Banshee", el:"metal", lv:8, hp:260, atk:44, def:18, exp:110, gold:50, lore:"Her mournful cry warns a family that death is near."},
-  {id:"sluagh", zh:"亡魂群", en:"Sluagh", el:"wood", lv:9, hp:280, atk:42, def:20, exp:115, gold:52, lore:"A flock of restless spirits that flies in from the west."},
-  {id:"feargorta", zh:"飢餓之人", en:"Fear Gorta", el:"earth", lv:10, hp:300, atk:46, def:20, exp:125, gold:55, lore:"A starving figure who rewards those who share their bread."}]},
- {id:"r4", name:"莫赫懸崖", en:"Cliffs of Moher", lv:13, mons:[
-  {id:"dullahan", zh:"無頭騎士", en:"Dullahan", el:"metal", lv:13, hp:500, atk:75, def:32, exp:230, gold:90, lore:"A headless rider who carries his own head under his arm."},
-  {id:"abhartach", zh:"吸血侏儒", en:"Abhartach", el:"water", lv:14, hp:520, atk:72, def:34, exp:240, gold:92, lore:"A cruel chieftain who rose from his grave again and again."},
-  {id:"fomorian", zh:"弗摩爾巨人", en:"Fomorian", el:"earth", lv:15, hp:580, atk:78, def:34, exp:260, gold:95, lore:"An ancient giant from beneath the sea, enemy of the old gods."}]},
- {id:"r5", name:"托里島", en:"Tory Island", lv:18, mons:[
-  {id:"balor", zh:"魔眼巴洛爾", en:"Balor of the Evil Eye", el:"fire", lv:18, hp:1100, atk:120, def:45, exp:650, gold:300, boss:true, lore:"The Fomorian king whose single eye burns everything it looks at."}]},
+/* ----- conquest of Ireland: towns ordered by population (smallest = easiest) ----- */
+// [id, zh, en, hi, es, approx. population, lon, lat]
+const TOWN_ROWS=[
+ ["dingle","丁格爾","Dingle","डिंगल","Dingle",2000,-10.27,52.14],
+ ["westport","韋斯特波特","Westport","वेस्टपोर्ट","Westport",7000,-9.52,53.80],
+ ["killarney","基拉尼","Killarney","किलार्नी","Killarney",14000,-9.51,52.06],
+ ["enniskillen","恩尼斯基林","Enniskillen","एनिस्किलन","Enniskillen",14000,-7.64,54.34],
+ ["armagh","阿馬","Armagh","आर्मा","Armagh",16000,-6.65,54.35],
+ ["sligo","斯萊戈","Sligo","स्लाइगो","Sligo",21000,-8.47,54.27],
+ ["wexford","韋克斯福德","Wexford","वेक्सफ़र्ड","Wexford",22000,-6.46,52.34],
+ ["letterkenny","萊特肯尼","Letterkenny","लेटरकेनी","Letterkenny",23000,-7.73,54.95],
+ ["athlone","阿斯隆","Athlone","एथलोन","Athlone",23000,-7.94,53.42],
+ ["tralee","特拉利","Tralee","ट्रैली","Tralee",26000,-9.70,52.27],
+ ["kilkenny","基爾肯尼","Kilkenny","किलकेनी","Kilkenny",27000,-7.25,52.65],
+ ["newry","紐里","Newry","न्यूरी","Newry",27000,-6.34,54.18],
+ ["carlow","卡洛","Carlow","कार्लो","Carlow",27000,-6.93,52.84],
+ ["ennis","恩尼斯","Ennis","एनिस","Ennis",28000,-8.98,52.84],
+ ["dundalk","鄧多克","Dundalk","डंडॉक","Dundalk",43000,-6.40,54.00],
+ ["drogheda","德羅赫達","Drogheda","ड्रोहेडा","Drogheda",44000,-6.35,53.72],
+ ["waterford","沃特福德","Waterford","वॉटरफ़र्ड","Waterford",60000,-7.11,52.26],
+ ["derry","德里","Derry","डेरी","Derry",85000,-7.31,55.00],
+ ["galway","戈爾韋","Galway","गॉलवे","Galway",86000,-9.05,53.27],
+ ["limerick","利默里克","Limerick","लिमरिक","Limerick",102000,-8.63,52.66],
+ ["cork","科克","Cork","कॉर्क","Cork",223000,-8.47,51.90],
+ ["belfast","貝爾法斯特","Belfast","बेलफ़ास्ट","Belfast",345000,-5.93,54.60],
+ ["dublin","都柏林","Dublin","डबलिन","Dublín",1260000,-6.26,53.35],
 ];
-const MONS=Object.fromEntries(REGIONS.flatMap(r=>r.mons.map(m=>[m.id,{...m, region:r.id}])));
+const TOWN_LV=[1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,9,10,11,12,13,15,17,20];
+// [id, zh, en, hi, es, element, lore]
+const FOES={
+ dingle:["merrow","梅羅人魚","Merrow","मेरो जलपरी","Merrow (sirena)","water","A sea maiden who needs her red cap to return beneath the waves."],
+ westport:["changeling","換生靈","Changeling","चेंजलिंग","Niño cambiado","wood","A fairy child secretly left in place of a human baby."],
+ killarney:["leprechaun","小矮妖","Leprechaun","लेप्रेकॉन","Leprechaun","metal","A tiny shoemaker who hides his gold at the end of the rainbow."],
+ enniskillen:["grogoch","格羅戈赫","Grogoch","ग्रोगोख","Grogoch","earth","A hairy half-human creature from Ulster tales who helps on farms."],
+ armagh:["feardearg","紅衣人","Fear Dearg","लाल कोट वाला","Fear Dearg (hombre rojo)","fire","A little man in a red coat who loves cruel practical jokes."],
+ sligo:["dobharchu","水獺犬","Dobhar-chú","जल-श्वान","Dobhar-chú (perro de agua)","water","A giant 'water hound' said to live in the lakes of Sligo and Leitrim."],
+ wexford:["clurichaun","酒窖精","Clurichaun","क्लूरिकॉन","Clurichaun","metal","A cousin of the leprechaun who guards wine cellars."],
+ letterkenny:["catsi","精靈黑貓","Cat Sí","परी बिल्ली","Cat Sí (gato hada)","wood","A large black fairy cat with a white spot on its chest."],
+ athlone:["puca","普卡","Púca","पूका","Púca","earth","A shape-shifter that often appears as a black goat or horse."],
+ tralee:["eachuisce","水馬","Each-uisce","जल-अश्व","Each-uisce (caballo de agua)","water","A water horse that drags its riders into deep lakes."],
+ kilkenny:["wisp","鬼火","Will-o'-the-wisp","छलावा-ज्योति","Fuego fatuo","fire","A drifting light that leads travellers away from the safe path."],
+ newry:["gancanagh","迷魂精","Gancanagh","गनकनाह","Gancanagh","metal","A charming fairy man whose touch makes people fall hopelessly in love."],
+ carlow:["feargorta","飢餓之人","Fear Gorta","भूखा प्रेत","Fear Gorta (hombre hambriento)","earth","A starving figure who rewards those who share their bread."],
+ ennis:["leannan","精靈情人","Leannán Sídhe","परी प्रेमिका","Leannán Sídhe","wood","A fairy lover who inspires poets but slowly drains their life."],
+ dundalk:["caorthannach","噴火魔母","Caorthannach","कोर्हानख","Caorthannach","fire","A fire-spitting demon said to have chased Saint Patrick."],
+ drogheda:["sluagh","亡魂群","Sluagh","स्लुआ आत्माएँ","Sluagh (hueste de almas)","wood","A flock of restless spirits that flies in from the west."],
+ waterford:["banshee","報喪女妖","Banshee","बंशी","Banshee","metal","Her mournful cry warns a family that death is near."],
+ derry:["abhartach","吸血侏儒","Abhartach","अवर्तख","Abhartach","water","A cruel chieftain from County Derry who kept rising from his grave."],
+ galway:["ellen","三頭怪","Ellén Trechend","त्रिशिर दानव","Ellén Trechend","fire","A three-headed monster that crawled out of a cave at Samhain."],
+ limerick:["oilliphéist","大海蛇","Oilliphéist","महासर्प","Oilliphéist (serpiente)","water","A huge serpent said to have carved out the River Shannon."],
+ cork:["dullahan","無頭騎士","Dullahan","बिना सिर का सवार","Dullahan (jinete sin cabeza)","metal","A headless rider who carries his own head under his arm."],
+ belfast:["fomorian","弗摩爾巨人","Fomorian","फ़ोमोरियन दानव","Fomoré (gigante)","earth","An ancient giant from beneath the sea, enemy of the old gods."],
+ dublin:["balor","魔眼巴洛爾","Balor of the Evil Eye","बुरी आँख वाला बलोर","Balor del Mal de Ojo","fire","The Fomorian king whose single eye burns everything it looks at."],
+};
+// stats grow with level; anchors from playtesting
+const ANCH=[[1,40,8,2,15,10],[4,110,18,8,42,25],[8,260,44,18,110,50],[13,500,75,32,230,90],[18,850,100,40,420,150]];
+function statsAt(lv){
+  let a=ANCH[0], b=ANCH[ANCH.length-1];
+  for(let i=0;i<ANCH.length-1;i++) if(lv>=ANCH[i][0]&&lv<=ANCH[i+1][0]){ a=ANCH[i]; b=ANCH[i+1]; break; }
+  const t=b[0]===a[0]?0:(lv-a[0])/(b[0]-a[0]); const f=j=>Math.round(a[j]+(b[j]-a[j])*t);
+  return {hp:f(1),atk:f(2),def:f(3),exp:f(4),gold:f(5)};
+}
+const TOWNS=TOWN_ROWS.map((r,i)=>{
+  const [id,zh,en,hi,es,pop,lon,lat]=r, f=FOES[id], lv=TOWN_LV[i];
+  const st= id==="dublin" ? {hp:1300,atk:135,def:50,exp:900,gold:400} : statsAt(lv);
+  return {id, rank:i, name:{zh,en,hi,es}, pop, lon, lat, lv, tax:2+Math.round(i*0.8),
+    foe:{mid:f[0], name:{zh:f[1],en:f[2],hi:f[3],es:f[4]}}, el:f[5], lore:f[6], en:f[2], boss:id==="dublin", ...st};
+});
+const MONS=Object.fromEntries(TOWNS.map(t=>[t.id,t]));
+const townName=t=>t.name[LANG]||t.name.en;
+const monName=m=>m.foe.name[LANG]||m.foe.name.en;
+const monSub=m=>LANG==="en"?"":m.foe.name.en;
+const canAttack=t=>game().lv>=t.lv-1;
+const fmtPop=n=>n>=1e6?(n/1e6).toFixed(2).replace(/0$/,"")+"M":n>=1e3?Math.round(n/1e3)+"k":String(n);
+function conquered(){ const g=game(); g.conq=g.conq||{}; return g.conq; }
+function taxToday(){ const c=conquered(); return TOWNS.filter(t=>c[t.id]).reduce((s,t)=>s+t.tax,0); }
+function collectTax(){ const g=game(); if(g.taxDate===today()) return; const n=taxToday(); if(!n) return; g.gold+=n; g.taxDate=today(); saveGame(); toast(T("taxGot",{n})); render(); }
 
-const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0};
+// simplified coastline of the island of Ireland (lon, lat), clockwise from Malin Head
+const COAST=[[-7.37,55.38],[-6.95,55.24],[-6.65,55.21],[-6.15,55.23],[-5.8,54.85],[-5.7,54.67],[-5.45,54.5],[-5.55,54.3],[-5.88,54.2],[-6.1,54.0],[-6.35,54.0],[-6.2,53.8],[-6.05,53.38],[-6.2,53.33],[-5.99,52.97],[-6.13,52.8],[-6.2,52.56],[-6.35,52.25],[-6.36,52.17],[-6.93,52.12],[-7.6,52.07],[-7.85,51.95],[-8.25,51.8],[-8.53,51.6],[-9.4,51.5],[-9.8,51.45],[-10.1,51.6],[-10.35,51.9],[-10.45,52.1],[-9.95,52.42],[-9.93,52.56],[-9.45,52.95],[-9.05,53.2],[-9.6,53.25],[-10.1,53.4],[-10.2,53.45],[-9.9,53.6],[-10.2,53.95],[-10.0,54.25],[-9.35,54.3],[-9.2,54.2],[-8.6,54.3],[-8.45,54.6],[-8.75,54.65],[-8.8,54.68],[-8.55,54.85],[-8.3,55.15],[-7.95,55.2],[-7.63,55.27]];
+const PX=lon=>(lon+10.75)*56.5+8, PY=lat=>(55.5-lat)*95+8;
+function mapSvg(){
+  const c=conquered(), sel=S.selTown;
+  const d="M"+COAST.map(([x,y])=>PX(x).toFixed(1)+" "+PY(y).toFixed(1)).join("L")+"Z";
+  const dots=TOWNS.map(t=>{ const x=PX(t.lon).toFixed(1), y=PY(t.lat).toFixed(1); const r=t.boss?8:t.pop>=60000?6.5:5;
+    const cls=c[t.id]?"tw-own":canAttack(t)?`tw-open el-fill-${t.el}`:"tw-lock";
+    return `<g data-town="${t.id}" class="tw${sel===t.id?" sel":""}"><circle cx="${x}" cy="${y}" r="15" class="tw-hit"/>${sel===t.id?`<circle cx="${x}" cy="${y}" r="${r+5}" class="tw-ring"/>`:""}<circle cx="${x}" cy="${y}" r="${r}" class="${cls}"/></g>`; }).join("");
+  const st=sel&&MONS[sel], lab=st?`<text x="${PX(st.lon).toFixed(1)}" y="${(PY(st.lat)-12).toFixed(1)}" text-anchor="middle" class="tw-lab">${esc(townName(st))}</text>`:"";
+  return `<svg viewBox="0 0 320 400" class="ire-map" role="img" aria-label="${T("mapAria")}"><path d="${d}" class="land"/>${dots}${lab}</svg>`;
+}
+function townCard(t){
+  const c=conquered(), own=!!c[t.id], open=canAttack(t);
+  return `<div class="town-card${own?" own":""}">
+    <div class="tc-top">${elBadge(t.el,true)}<div class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${T("pop",{n:fmtPop(t.pop)})} · Lv ${t.lv}</span></div></div>
+    <div class="muted" style="font-size:14px">${own?T("taxLine",{n:t.tax}):T("holds",{m:esc(monName(t))})}</div>
+    <div class="row" style="gap:4px">${advice(t)}</div>
+    ${open?`<button class="btn ${own?"ghost":""}" data-mon="${t.id}">${own?T("trainBtn"):T("attack")}</button>`:`<span class="muted sm-t">${T("lockedCity",{n:t.lv-1})}</span>`}
+  </div>`;
+}
+function viewConquest(){
+  const g=game(), c=conquered(), n=TOWNS.filter(t=>c[t.id]).length, tax=taxToday();
+  const sel=S.selTown&&MONS[S.selTown];
+  const next=TOWNS.find(t=>!c[t.id]);
+  return `${n===TOWNS.length?`<div class="reward win"><div class="eyebrow">${T("win")}</div><b style="font-size:18px">${T("allConq")}</b></div>`:""}
+    <div class="conq-head"><b>${T("conqProg",{n,t:TOWNS.length})}</b><div class="conq-bar"><i style="width:${n/TOWNS.length*100}%"></i></div><span class="muted sm-t">${T("goal")}</span></div>
+    ${tax?(g.taxDate===today()?`<div class="muted sm-t">${T("taxDone")}</div>`:`<button class="btn" data-act="tax">${T("taxBtn",{n:tax})}</button>`):`<div class="muted sm-t">${T("taxHint")}</div>`}
+    <div class="map-wrap">${mapSvg()}<div class="legend"><span><i class="lg tw-own"></i>${T("conqTag")}</span><span><i class="lg lg-open"></i>${T("attack")}</span><span><i class="lg tw-lock"></i>${T("lockShort")}</span></div></div>
+    ${sel?townCard(sel):`<p class="muted sm-t" style="text-align:center">${T("tapCity")}</p>`}
+    <div class="mons">${TOWNS.map(t=>{ const own=!!c[t.id], open=canAttack(t);
+      return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}">${elBadge(t.el,true)}<span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span></span><span class="go-t">${own?"✓":open?T("attack"):"Lv "+(t.lv-1)}</span></button>`; }).join("")}</div>`;
+}
+
+const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null};
 function game(){ return S.game || (S.game={...G_DEFAULT}); }
 function saveGame(){ lsSave(); }
 const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
@@ -968,6 +1133,7 @@ function fight(){
   B.res=res; B.stage="fight"; B.idx=0;
   if(res.win){
     const before=g.lv; g.exp+=B.m.exp; g.gold+=B.m.gold; g.wins[B.m.id]=(g.wins[B.m.id]||0)+1;
+    const c=conquered(); if(!c[B.m.id]){ c[B.m.id]=today(); B.conquered=true; }
     while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
     B.lvUp=g.lv-before;
   }
@@ -991,7 +1157,7 @@ function viewBattle(){
       ${p!=null?`<div class="fb ${B.spellOk?"ok":"no"}">${B.spellOk?T("spellOk"):T("spellFail",{w:esc(q.w.word),m:esc(mean(q.w))})}</div>`:""}</div>` : "";
     return `<div class="view">
       <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("retreat")}</button>
-      <div class="vs">${monArt(m)}<div><div class="eyebrow">Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
+      <div class="vs">${monArt(m)}<div><div class="eyebrow">${esc(townName(m))} · Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
       <div class="row">${advice(m)||`<span class="adv">${T("advNone")}</span>`}</div>
       <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
@@ -1002,7 +1168,7 @@ function viewBattle(){
   const log=ev.slice(0,upto).map(e=>e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
-    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}</span><b>+${m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${m.gold}</b></div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}</div>`
+    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}</span><b>+${m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${m.gold}</b></div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
     : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p></div>`) : "";
   return `<div class="view">
     <div class="arena">
@@ -1041,11 +1207,7 @@ function viewAdv(){
   const seg=(k,l)=>`<button data-advtab="${k}" aria-pressed="${sub===k}">${l}</button>`;
   let body="";
   if(sub==="go"){
-    body=REGIONS.map(r=>{
-      const open=g.lv>=r.lv;
-      return `<section class="region${open?"":" locked"}"><div class="rg-head"><div>${LANG==="en"?"":`<div class="eyebrow">${esc(r.en)}</div>`}<h3>${esc(regName(r))}</h3></div><span class="muted sm-t">${open?T("suggest",{n:r.lv}):T("unlockAt",{n:r.lv})}</span></div>
-        ${open?`<div class="mons">${r.mons.map(m=>`<button class="mon" data-mon="${m.id}">${elBadge(m.el,true)}<span class="it-main"><b>${esc(monName(m))} <span class="muted" style="font-weight:400">${esc(monSub(m))}</span></b><span class="muted">${T("monLine",{lv:m.lv,hp:m.hp,atk:m.atk})}${g.wins[m.id]?T("beaten",{n:g.wins[m.id]}):""}</span><span class="row" style="gap:4px">${advice(m)}</span></span><span class="go-t">${T("go")}</span></button>`).join("")}</div>`:""}</section>`;
-    }).join("");
+    body=viewConquest();
   } else if(sub==="shop"){
     const f=S.shopEl||"all";
     const fseg=`<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`;
@@ -1081,9 +1243,10 @@ async function loadArticle(id){
 const byOrder=(a,b)=>b.date.localeCompare(a.date)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
-  const t=e.target.closest("[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  const t=e.target.closest("[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
   if(!t) return;
   if(t.dataset.lang) return setLang(t.dataset.lang);
+  if(t.dataset.town){ S.selTown=S.selTown===t.dataset.town?null:t.dataset.town; render(); if(S.selTown&&t.tagName==="BUTTON"){ const m=document.querySelector(".map-wrap"); if(m) m.scrollIntoView({behavior:"smooth",block:"start"}); } return; }
   if(t.dataset.advtab){ S.advTab=t.dataset.advtab; return render(); }
   if(t.dataset.shopel){ S.shopEl=t.dataset.shopel; return render(); }
   if(t.dataset.buy) return buy(t.dataset.buy);
@@ -1106,6 +1269,7 @@ document.addEventListener("click", e=>{
   if(a==="closelang"){ S.langSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
   if(a==="fight") return fight();
+  if(a==="tax") return collectTax();
   if(a==="skip"){ if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
   if(a==="advback"){ clearInterval(S.btimer); S.battle=null; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
   if(a==="nodel"){ S.confirmDel=null; return render(); }
@@ -1124,7 +1288,7 @@ document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.sheet){ S.she
 
 /* ---------- boot ---------- */
 S.index=[];
-document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi"}[LANG]; applyStaticText();
+document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es"}[LANG]; applyStaticText();
 render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
