@@ -253,6 +253,15 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .thumb .el{position:absolute;right:-4px;bottom:-4px;box-shadow:0 0 0 2px var(--card)}
 .el-th-metal{--c:var(--metal)}.el-th-wood{--c:var(--wood)}.el-th-water{--c:var(--water)}.el-th-fire{--c:var(--fire)}.el-th-earth{--c:var(--earth)}
 .mon.locked .thumb{filter:grayscale(.85)}
+.wx{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.wx-row{display:flex;flex-direction:column;gap:6px}
+.wx-row .lab{margin:0}
+.wchips{display:flex;flex-wrap:wrap;gap:6px}
+.wchip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 12px;font-family:var(--f-read);font-size:16px}
+.wx-row .en-i{font-size:17px;line-height:1.5}
+.sm-say{width:30px;height:30px;align-self:flex-start}
+.sm-say svg{width:15px;height:15px}
+.sheet{max-height:85vh;overflow-y:auto}
 </style>
 
 </head>
@@ -502,6 +511,7 @@ function applyStaticText(){
 }
 const LEVELS=[{k:"B1"},{k:"B2"},{k:"C1"},{k:"IELTS"}];
 let LEVEL=(()=>{ try{ const v=localStorage.getItem("che-pro-level"); return LEVELS.some(l=>l.k===v)?v:"B2"; }catch(e){ return "B2"; } })();
+Object.assign(STR.zh,{synonyms:"相似詞", antonyms:"反義詞"}); Object.assign(STR.en,{synonyms:"Synonyms", antonyms:"Opposites"}); Object.assign(STR.hi,{synonyms:"समानार्थी", antonyms:"विलोम"}); Object.assign(STR.es,{synonyms:"Sinónimos", antonyms:"Antónimos"});
 Object.assign(STR.zh,{level:"英文程度", lvB1:"中級：日常用字、句子較短", lvB2:"中高級：一般新聞用字", lvC1:"高級：較正式、較少見的用字", lvIELTS:"雅思 7–8：學術寫作常用詞", fillTag:"文章難字", fillNote:"題目不足 10 題時，會從文章裡挑較難的字出題。答錯的難字會自動加入字典。", levelOnly:"這篇沒有 {l} 版本，顯示 {m}"});
 Object.assign(STR.en,{level:"English level", lvB1:"Intermediate: everyday words, shorter sentences", lvB2:"Upper-intermediate: standard news vocabulary", lvC1:"Advanced: more formal, less common words", lvIELTS:"IELTS 7–8: academic writing vocabulary", fillTag:"Hard word from the article", fillNote:"If you looked up fewer than 10 words, harder words from the article fill the quiz. Hard words you get wrong are added to your dictionary.", levelOnly:"No {l} version of this article — showing {m}"});
 Object.assign(STR.hi,{level:"अंग्रेज़ी स्तर", lvB1:"मध्यम: रोज़मर्रा के शब्द, छोटे वाक्य", lvB2:"उच्च-मध्यम: सामान्य समाचार शब्दावली", lvC1:"उन्नत: औपचारिक, कम प्रचलित शब्द", lvIELTS:"IELTS 7–8: अकादमिक लेखन शब्दावली", fillTag:"लेख का कठिन शब्द", fillNote:"अगर आपने 10 से कम शब्द देखे, तो लेख के कठिन शब्दों से क्विज़ पूरा होता है। ग़लत हुए कठिन शब्द शब्दकोश में जुड़ जाते हैं।", levelOnly:"इस लेख का {l} संस्करण नहीं है — {m} दिखाया जा रहा है"});
@@ -812,6 +822,16 @@ function record(surface,g,ex,art){
   if(isMain(art)){ if(!(d.lookedUp||[]).includes(ll)) saveDay({...d, lookedUp:[...(d.lookedUp||[]), ll]}); }
   else { const by={...(d.lookedUpBy||{})}; const cur=by[art.id]||[]; if(!cur.includes(ll)){ by[art.id]=[...cur,ll]; saveDay({...d, lookedUpBy:by}); } }
 }
+function wordExtras(g){
+  const chips=a=>a.map(x=>`<button class="wchip" data-say="${esc(x)}">${esc(x)}</button>`).join("");
+  const syn=(g.syn||[]).filter(Boolean), ant=(g.ant||[]).filter(Boolean);
+  if(!syn.length&&!ant.length&&!g.ex) return "";
+  return `<div class="wx">
+    ${syn.length?`<div class="wx-row"><span class="lab">${T("synonyms")}</span><div class="wchips">${chips(syn)}</div></div>`:""}
+    ${ant.length?`<div class="wx-row"><span class="lab">${T("antonyms")}</span><div class="wchips">${chips(ant)}</div></div>`:""}
+    ${g.ex?`<div class="wx-row"><span class="lab">${T("nEx")}</span><span class="en-i">${highlight(g.ex,[g.base||""])}</span><button class="say sm-say" data-say="${esc(g.ex)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>`:""}
+  </div>`;
+}
 function renderSheet(){
   const o=$("#overlay");
   if(S.langSheet){ o.innerHTML=langSheet(); return; }
@@ -822,7 +842,7 @@ function renderSheet(){
     <div class="wd">${esc(surface)} ${g&&g.pos?`<span class="pos">${esc(g.pos)}</span>`:""}<span style="flex:1"></span><button class="say" data-say="${esc(surface)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>
     ${loading?`<div class="zh muted">…</div>`:err?`<div class="zh" style="color:var(--bad);font-size:16px">${esc(err)}</div>`:`<div class="zh">${esc(mean(g))}</div>
     ${g.base&&g.base.toLowerCase()!==surface.toLowerCase()?`<div class="muted" style="font-size:13px">${T("base")}<b>${esc(g.base)}</b></div>`:""}
-    ${ex?`<div class="ex">${highlight(ex,[surface])}</div>`:""}
+    ${wordExtras(g)}
     <div class="muted" style="font-size:13px;margin-top:10px">${skip?T("funcWord"):(rec?(isNew?T("added"):T("already",{n:rec.lookups})):"")}</div>`}
   </div>`;
 }
