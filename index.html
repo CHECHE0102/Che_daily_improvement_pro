@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Che Daily Improvement Pro</title>
-<meta name="description" content="每天讀愛爾蘭新聞學英文，用測驗成績賺金幣、買五行裝備、出征打怪升級。">
+<meta name="description" content="Learn English from daily Irish news — 繁體中文 · English · हिन्दी. Earn gold from quizzes, buy elemental gear, fight Celtic monsters.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Che Pro">
@@ -26,8 +26,8 @@ img{max-width:100%}
   --accent:#1D6A5A; --accent-ink:#FFFFFF; --accent-soft:#DCEDE7;
   --gorse:#F0BE45; --gorse-soft:#FBEBC0; --good:#2E8B57; --good-soft:#DDF1E4; --bad:#C0443B; --bad-soft:#F7DEDB;
   --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
-  --f-read:"Newsreader","Iowan Old Style",Georgia,serif;
-  --f-ui:system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  --f-read:"Newsreader","Iowan Old Style",Georgia,"Kohinoor Devanagari","Noto Sans Devanagari",serif;
+  --f-ui:system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Kohinoor Devanagari","Noto Sans Devanagari",sans-serif;
   --r:14px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -220,24 +220,204 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .blog{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px;max-height:260px;overflow:auto}
 .blog li{padding:6px 10px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
 .blog li.lm{color:var(--bad)} .blog li.lp b{color:var(--accent)}
+.mast-r{display:flex;align-items:center;gap:10px}
+.lang-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--ink);min-width:36px}
+.el{font-size:11px}.el.big{font-size:16px}
 </style>
 
 </head>
 <body>
 <div class="wrap">
-  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><small id="mastInfo"></small></header>
-  <main id="app"><div class="view"><p class="muted">載入中…</p></div></main>
+  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><span class="mast-r"><small id="mastInfo"></small><button id="langBtn" class="lang-btn" data-act="lang" aria-label="Language">中</button></span></header>
+  <main id="app"><div class="view"><p class="muted">…</p></div></main>
 </div>
-<nav class="tabs" aria-label="主選單">
-  <button id="tab-today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>今日</button>
-  <button id="tab-dict" data-tab="dict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>字典</button>
-  <button id="tab-adv" data-tab="adv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 3.5l6 6-9 9-3-3z"/><path d="M8.5 15.5l-5 5M5 14l5 5"/></svg>冒險</button>
-  <button id="tab-arch" data-tab="arch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg>文章</button>
+<nav class="tabs" aria-label="Main menu">
+  <button id="tab-today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>今日</span></button>
+  <button id="tab-dict" data-tab="dict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>字典</span></button>
+  <button id="tab-adv" data-tab="adv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 3.5l6 6-9 9-3-3z"/><path d="M8.5 15.5l-5 5M5 14l5 5"/></svg><span>冒險</span></button>
+  <button id="tab-arch" data-tab="arch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg><span>文章</span></button>
 </nav>
 <div id="overlay"></div>
 
 <script>
 "use strict";
+/* ================= i18n ================= */
+const LANGS=[{k:"zh",label:"繁體中文",short:"中"},{k:"en",label:"English",short:"EN"},{k:"hi",label:"हिन्दी",short:"हि"}];
+let LANG=(()=>{ try{ const v=localStorage.getItem("che-pro-lang"); return LANGS.some(l=>l.k===v)?v:"zh"; }catch(e){ return "zh"; } })();
+const STR={
+zh:{
+ loading:"載入中…", tabToday:"今日", tabDict:"字典", tabAdv:"冒險", tabArch:"文章", mainMenu:"主選單", language:"語言",
+ storageFull:"儲存空間已滿", savedLocal:"改為儲存在這台裝置",
+ mast:"Lv {lv} · <b>{gold}</b> 金 · {t} 令",
+ chipDone:"已讀 · 測驗 {r}", chipDoneNone:"完成", chipRead:"讀過 · 查了 {n} 字",
+ loadingToday:"正在載入今日文章…", noArticles:"還沒有文章", noArticlesSub:"每天早上會自動放上新的愛爾蘭新聞，請稍後再回來。",
+ start:"開始 →", again:"再看", todayHead:"今日頭條", latestHead:"最新頭條 · {d}",
+ stepPre:"複習測驗", preScore:"答對 {s}/{t}", preDraw:"從 {n} 個舊單字依熟練度抽 {k} 題", preNone:"還沒有舊單字可複習，直接開始閱讀",
+ stepRead:"閱讀頭條", readDone:"查了 {n} 個字", readHint:"點任何不會的字就會顯示中文",
+ stepPost:"讀後測驗", postScore:"答對 {s}/{t}", postNone:"今天沒有查字", postHint:"測驗剛剛查過的單字，每題都有講解",
+ moreRead:"還想多讀？", moreCount:"今天的其他 {n} 篇", moreLocked:"完成複習測驗後就能閱讀。",
+ banner:"出征令 {t} 張 · 金幣 {g}", bannerSub:"完成測驗賺金幣，買五行裝備去打怪", bannerGo:"冒險 →",
+ statWords:"字典單字", statAcc:"累計正確率", statArts:"已收錄文章",
+ notFound:"找不到文章。", lockTitle:"先完成複習測驗", lockSub:"每天閱讀前，先複習前幾天查過的單字。", lockBtn:"開始複習測驗",
+ backToday:"回到今日", startPost:"開始讀後測驗", finishMain:"讀完了，開始測驗 →",
+ extraDone:"這篇的測驗已完成（{r}）。查過的字會出現在之後的複習測驗。", noLookups:"沒有查字", finishExtra:"讀完了，測驗這篇查過的字 →",
+ back:"← 返回", words:"{n} 字", rewritten:"改寫自 {s}", tip:"點一下單字看翻譯，查過的字會標成這個顏色並存進字典",
+ myDict:"我的字典", dictCount:"{n} 個單字", search:"搜尋英文或中文", sort:"排序", sortRecent:"最近查詢", sortWeak:"最不熟",
+ probNote:"抽中機率依答對率計算：答錯越多、越久沒複習的字，越容易被抽到。",
+ backup:"備份紀錄", backupSub:"單字、測驗和遊戲紀錄只存在這支手機的瀏覽器裡。換手機或清除 Safari 資料前，先匯出一份備份。", export:"匯出紀錄", import:"匯入紀錄",
+ imported:"已匯入 {n} 個單字", badFile:"檔案格式不正確",
+ nMeaning:"意思", nUsage:"用法", nColl:"常見搭配", nEx:"例句",
+ newWord:"新字", qCount:"{n}題", kvLookups:"查詢次數", kvTimes:"{n} 次", kvFirst:"第一次查", kvRW:"答對 / 答錯", kvProb:"下次被抽中機率", kvTomorrow:"明天起加入複習",
+ pron:"發音", confirmDel:"確定移除？", del:"移除", cancel:"取消", delFromDict:"從字典移除", noMatch:"沒有符合的單字",
+ dictEmpty:"字典還是空的", dictEmptySub:"閱讀文章時點一下不會的字，它就會自動存到這裡。",
+ allArts:"所有文章", artCount:"{n} 篇", archNote:"任何一篇文章查的字都會存進字典，並出現在之後的複習測驗。",
+ noGloss:"這個字沒有預先翻譯。", wordTr:"單字翻譯", base:"原形：", funcWord:"常見功能字，不會加入字典", added:"已加入字典", already:"字典裡已有，查過 {n} 次",
+ youPicked:"你選了", pickedMeans:"「{a}」，那是「{b}」的意思。", pickedPlain:"「{a}」。", correctIs:"正確答案是 <b>{w}</b>（{m}）。",
+ basic:"基本解釋", basicTxt:"{w}（{p}）在文章裡的意思是「{m}」。", forms:" 文中出現的形式：{f}。", sentence:"文章原句",
+ preTitle:"複習測驗", postTitle:"讀後測驗", done:"{t} · 完成", readNow:"開始閱讀今日頭條 →",
+ sumWrong:"答錯的字排在最前面，之後也會更常出現在複習測驗。", sumAll:"全對！這些字之後被抽中的機率會降低。", explainAll:"每個字的講解",
+ qMeaning:"這個字的意思是？", qWord:"哪個英文字是這個意思？", qCloze:"選出填入空格的字",
+ right:"答對了！", wrong:"答錯了，看看講解", next:"下一題", seeAll:"看結果與全部講解", artLoadFail:"文章載入失敗，請檢查網路", removed:"已移除",
+ loot:"戰利品", lootRight:"答對 {n} 題", lootAcc:"正確率 {p}% 獎勵", lootAccNo:"正確率 {p}%（80% 以上有獎勵）", lootDay:"完成今日三步驟", tickets:"出征令", lootT:"+{n} 張", gold:"金幣", goldAmt:"+{n} 金", goAdv:"去冒險 →",
+ owned:"已經擁有", needLv:"需要 Lv {n}", noGold:"金幣不足，還差 {n}", bought:"買下 {i}，已裝備",
+ advWin:"武器剋制 ×1.5", advWlose:"武器被剋 ×0.67", advAwin:"防具剋制 受傷 ×0.67", advAlose:"防具被剋 受傷 ×1.5", advNone:"屬性無加成",
+ noTicket:"出征令不足，完成測驗就能獲得", spell:"戰前咒語", spellSub:"答對這題，第一擊造成 2 倍傷害。", spellOk:"咒語成功！第一擊 2 倍傷害", spellFail:"咒語失敗。正確答案：{w} — {m}",
+ retreat:"← 撤退", elAttr:"{e} 屬性", yourHp:"你的 HP", atk:"攻擊", def:"防禦", skipSpell:"跳過咒語，直接出征", fight:"出征！（用 1 張出征令）",
+ logSpell:"咒語加持！", logCrit:"會心一擊！", logYou:"你造成 <b>{n}</b> 傷害", logMon:"{m}造成 <b>{n}</b> 傷害",
+ win:"勝利", exp:"經驗值", lvUp:"升級！", lose:"戰敗", loseTip:"{m}太強了。試試換上剋制「{e}」屬性的武器（{c}屬性），或先打弱一點的怪物升級。",
+ you:"你 · Lv {lv}", backAdv:"回到冒險", fightAgain:"再戰一次", skipAnim:"跳過動畫",
+ cycleAria:"五行相剋：金剋木、木剋土、土剋水、水剋火、火剋金", atkPlus:"攻擊 +{n}", defPlus:"防禦 +{d} · HP +{h}",
+ unequip:"卸下", equip:"裝備", equipped:"已裝備", unlockAt:"Lv {n} 解鎖", weapon:"武器", armor:"防具", price:"{n} 金",
+ suggest:"建議 Lv {n}+", monLine:"Lv {lv} · HP {hp} · 攻 {atk}", beaten:" · 擊敗 {n} 次", go:"出征", all:"全部",
+ bagEmpty:"背包是空的", bagEmptySub:"完成測驗賺金幣，到商店買第一件裝備。", hero:"冒險者", expLine:"經驗值 {e} / {n}",
+ bare:"空手", cloth:"布衣", rulesQ:"五行相剋怎麼用？",
+ rules1:"箭頭代表「剋」：金剋木、木剋土、土剋水、水剋火、火剋金。",
+ rules2:"<b>武器</b>剋制怪物屬性，傷害 ×1.5；被怪物剋制，傷害 ×0.67。<br><b>防具</b>剋制怪物屬性，受到的傷害 ×0.67；被怪物剋制，受到的傷害 ×1.5。",
+ rules3:"金幣從測驗來：每答對一題 10 金，正確率 80% 以上再加 20，全對再加 20。每完成一次測驗得 1 張出征令，完成當天三步驟再多 30 金和 1 張。",
+ tabGo:"出征", tabShop:"商店", tabBag:"背包"
+},
+en:{
+ loading:"Loading…", tabToday:"Today", tabDict:"Words", tabAdv:"Quest", tabArch:"Articles", mainMenu:"Main menu", language:"Language",
+ storageFull:"Storage is full", savedLocal:"Now saving on this device",
+ mast:"Lv {lv} · <b>{gold}</b> gold · passes {t}",
+ chipDone:"Read · quiz {r}", chipDoneNone:"done", chipRead:"Read · looked up {n}",
+ loadingToday:"Loading today's article…", noArticles:"No articles yet", noArticlesSub:"New Irish news is added every morning. Please check back later.",
+ start:"Start →", again:"Open", todayHead:"Today's headline", latestHead:"Latest headline · {d}",
+ stepPre:"Review quiz", preScore:"{s}/{t} correct", preDraw:"{k} questions drawn from {n} old words by how well you know them", preNone:"No old words to review yet — start reading",
+ stepRead:"Read the headline", readDone:"Looked up {n} words", readHint:"Tap any word you don't know to see its meaning",
+ stepPost:"After-reading quiz", postScore:"{s}/{t} correct", postNone:"No words looked up today", postHint:"A quiz on the words you just looked up, with explanations",
+ moreRead:"Want to read more?", moreCount:"{n} more articles today", moreLocked:"Finish the review quiz to unlock these.",
+ banner:"{t} quest passes · {g} gold", bannerSub:"Earn gold from quizzes, buy elemental gear, fight monsters", bannerGo:"Quest →",
+ statWords:"Words saved", statAcc:"Overall accuracy", statArts:"Articles",
+ notFound:"Article not found.", lockTitle:"Finish the review quiz first", lockSub:"Before reading each day, review the words from earlier days.", lockBtn:"Start review quiz",
+ backToday:"Back to Today", startPost:"Start the quiz", finishMain:"Finished — start the quiz →",
+ extraDone:"Quiz done for this article ({r}). Words you looked up will appear in later reviews.", noLookups:"no words", finishExtra:"Finished — quiz this article's words →",
+ back:"← Back", words:"{n} words", rewritten:"Rewritten from {s}", tip:"Tap a word to see its meaning. Words you look up turn this colour and go into your dictionary.",
+ myDict:"My dictionary", dictCount:"{n} words", search:"Search words or meanings", sort:"Sort", sortRecent:"Recent", sortWeak:"Weakest",
+ probNote:"The chance of being drawn depends on your accuracy: words you get wrong, or haven't reviewed for a while, come up more often.",
+ backup:"Back up your progress", backupSub:"Your words, quizzes and game progress are stored only in this phone's browser. Export a backup before changing phones or clearing Safari data.", export:"Export", import:"Import",
+ imported:"Imported {n} words", badFile:"That file isn't a valid backup",
+ nMeaning:"Meaning", nUsage:"Usage", nColl:"Collocations", nEx:"Example",
+ newWord:"New", qCount:"{n} Qs", kvLookups:"Looked up", kvTimes:"{n} times", kvFirst:"First seen", kvRW:"Right / wrong", kvProb:"Chance of being drawn next", kvTomorrow:"Joins reviews tomorrow",
+ pron:"Pronounce", confirmDel:"Remove this word?", del:"Remove", cancel:"Cancel", delFromDict:"Remove from dictionary", noMatch:"No matching words",
+ dictEmpty:"Your dictionary is empty", dictEmptySub:"Tap a word you don't know while reading and it will be saved here.",
+ allArts:"All articles", artCount:"{n} articles", archNote:"Words you look up in any article go into your dictionary and future reviews.",
+ noGloss:"No meaning prepared for this word.", wordTr:"Word meaning", base:"Base form: ", funcWord:"Common function word — not added to your dictionary", added:"Added to your dictionary", already:"Already in your dictionary · looked up {n} times",
+ youPicked:"You chose", pickedMeans:"\"{a}\", which means \"{b}\".", pickedPlain:"\"{a}\".", correctIs:"The answer is <b>{w}</b> ({m}).",
+ basic:"Basic meaning", basicTxt:"In the article, {w} ({p}) means \"{m}\".", forms:" Forms in the text: {f}.", sentence:"From the article",
+ preTitle:"Review quiz", postTitle:"After-reading quiz", done:"{t} · finished", readNow:"Read today's headline →",
+ sumWrong:"Words you got wrong are listed first and will come up more often in reviews.", sumAll:"All correct! These words will now be drawn less often.", explainAll:"Every word explained",
+ qMeaning:"What does this word mean?", qWord:"Which English word has this meaning?", qCloze:"Choose the word for the gap",
+ right:"Correct!", wrong:"Not quite — see the explanation", next:"Next", seeAll:"See results and all explanations", artLoadFail:"Couldn't load articles. Check your connection.", removed:"Removed",
+ loot:"Rewards", lootRight:"{n} correct", lootAcc:"Accuracy {p}% bonus", lootAccNo:"Accuracy {p}% (bonus from 80%)", lootDay:"All three steps done today", tickets:"Quest passes", lootT:"+{n}", gold:"Gold", goldAmt:"+{n} gold", goAdv:"Go questing →",
+ owned:"You already own this", needLv:"Requires Lv {n}", noGold:"Not enough gold — {n} short", bought:"Bought and equipped {i}",
+ advWin:"Weapon strong ×1.5", advWlose:"Weapon weak ×0.67", advAwin:"Armour strong · damage ×0.67", advAlose:"Armour weak · damage ×1.5", advNone:"No element bonus",
+ noTicket:"No quest passes left — finish a quiz to earn one", spell:"Battle spell", spellSub:"Answer correctly and your first hit does double damage.", spellOk:"Spell works! First hit ×2", spellFail:"The spell fizzles. Answer: {w} — {m}",
+ retreat:"← Retreat", elAttr:"{e} element", yourHp:"Your HP", atk:"Attack", def:"Defence", skipSpell:"Skip the spell and fight", fight:"Fight! (uses 1 pass)",
+ logSpell:"Spell-powered! ", logCrit:"Critical hit! ", logYou:"You deal <b>{n}</b> damage", logMon:"{m} deals <b>{n}</b> damage",
+ win:"Victory", exp:"EXP", lvUp:"Level up!", lose:"Defeat", loseTip:"{m} was too strong. Try a weapon that beats {e} ({c} element), or level up on easier monsters first.",
+ you:"You · Lv {lv}", backAdv:"Back to quests", fightAgain:"Fight again", skipAnim:"Skip animation",
+ cycleAria:"Five elements: Metal beats Wood, Wood beats Earth, Earth beats Water, Water beats Fire, Fire beats Metal", atkPlus:"Attack +{n}", defPlus:"Defence +{d} · HP +{h}",
+ unequip:"Unequip", equip:"Equip", equipped:"Equipped", unlockAt:"Unlocks at Lv {n}", weapon:"Weapon", armor:"Armour", price:"{n} gold",
+ suggest:"Lv {n}+ recommended", monLine:"Lv {lv} · HP {hp} · ATK {atk}", beaten:" · beaten {n}×", go:"Fight", all:"All",
+ bagEmpty:"Your bag is empty", bagEmptySub:"Earn gold from quizzes and buy your first item in the shop.", hero:"Adventurer", expLine:"EXP {e} / {n}",
+ bare:"Bare hands", cloth:"Plain clothes", rulesQ:"How do the five elements work?",
+ rules1:"Each arrow means \"beats\": Metal → Wood → Earth → Water → Fire → Metal.",
+ rules2:"If your <b>weapon</b> beats the monster's element, you deal ×1.5 damage; if the monster beats it, ×0.67.<br>If your <b>armour</b> beats the monster's element, you take ×0.67 damage; if the monster beats it, ×1.5.",
+ rules3:"Gold comes from quizzes: 10 per correct answer, +20 for 80%+ accuracy, +20 more for a perfect score. Each finished quiz gives 1 quest pass; finishing all three daily steps gives +30 gold and 1 more pass.",
+ tabGo:"Fight", tabShop:"Shop", tabBag:"Bag"
+},
+hi:{
+ loading:"लोड हो रहा है…", tabToday:"आज", tabDict:"शब्दकोश", tabAdv:"साहसिक", tabArch:"लेख", mainMenu:"मुख्य मेनू", language:"भाषा",
+ storageFull:"स्टोरेज भर गया है", savedLocal:"अब इसी डिवाइस पर सहेजा जा रहा है",
+ mast:"Lv {lv} · <b>{gold}</b> सोना · {t} पास",
+ chipDone:"पढ़ा · क्विज़ {r}", chipDoneNone:"पूरा", chipRead:"पढ़ा · {n} शब्द देखे",
+ loadingToday:"आज का लेख लोड हो रहा है…", noArticles:"अभी कोई लेख नहीं", noArticlesSub:"हर सुबह नई आयरिश ख़बरें जुड़ती हैं। कृपया बाद में देखें।",
+ start:"शुरू →", again:"खोलें", todayHead:"आज की मुख्य ख़बर", latestHead:"नवीनतम ख़बर · {d}",
+ stepPre:"दोहराव क्विज़", preScore:"{s}/{t} सही", preDraw:"{n} पुराने शब्दों में से आपकी पकड़ के अनुसार {k} प्रश्न", preNone:"दोहराने के लिए अभी पुराने शब्द नहीं — सीधे पढ़ें",
+ stepRead:"मुख्य ख़बर पढ़ें", readDone:"{n} शब्द देखे", readHint:"किसी भी अनजान शब्द पर टैप करें, अर्थ दिखेगा",
+ stepPost:"पढ़ने के बाद क्विज़", postScore:"{s}/{t} सही", postNone:"आज कोई शब्द नहीं देखा", postHint:"अभी देखे शब्दों पर क्विज़, हर प्रश्न की व्याख्या के साथ",
+ moreRead:"और पढ़ना है?", moreCount:"आज के {n} और लेख", moreLocked:"दोहराव क्विज़ पूरा करने के बाद पढ़ सकते हैं।",
+ banner:"{t} अभियान पास · {g} सोना", bannerSub:"क्विज़ से सोना कमाएँ, पंचतत्व हथियार ख़रीदें, राक्षसों से लड़ें", bannerGo:"साहसिक →",
+ statWords:"सहेजे शब्द", statAcc:"कुल सटीकता", statArts:"लेख",
+ notFound:"लेख नहीं मिला।", lockTitle:"पहले दोहराव क्विज़ पूरा करें", lockSub:"रोज़ पढ़ने से पहले पिछले दिनों के शब्द दोहराएँ।", lockBtn:"दोहराव क्विज़ शुरू करें",
+ backToday:"आज पर लौटें", startPost:"क्विज़ शुरू करें", finishMain:"पढ़ लिया — क्विज़ शुरू करें →",
+ extraDone:"इस लेख का क्विज़ पूरा ({r})। देखे गए शब्द आगे के दोहराव में आएँगे।", noLookups:"कोई शब्द नहीं", finishExtra:"पढ़ लिया — इस लेख के शब्दों पर क्विज़ →",
+ back:"← वापस", words:"{n} शब्द", rewritten:"{s} से पुनर्लिखित", tip:"शब्द पर टैप करें और अर्थ देखें। देखे गए शब्द इस रंग में दिखेंगे और शब्दकोश में जुड़ेंगे।",
+ myDict:"मेरा शब्दकोश", dictCount:"{n} शब्द", search:"शब्द या अर्थ खोजें", sort:"क्रम", sortRecent:"हाल के", sortWeak:"सबसे कमज़ोर",
+ probNote:"चुने जाने की संभावना आपकी सटीकता पर निर्भर है: ग़लत हुए या लंबे समय से न दोहराए शब्द ज़्यादा आते हैं।",
+ backup:"प्रगति का बैकअप", backupSub:"आपके शब्द, क्विज़ और खेल की प्रगति केवल इस फ़ोन के ब्राउज़र में हैं। फ़ोन बदलने या Safari डेटा मिटाने से पहले बैकअप निर्यात करें।", export:"निर्यात", import:"आयात",
+ imported:"{n} शब्द आयात हुए", badFile:"यह फ़ाइल सही बैकअप नहीं है",
+ nMeaning:"अर्थ", nUsage:"प्रयोग", nColl:"सामान्य संयोजन", nEx:"उदाहरण",
+ newWord:"नया", qCount:"{n} प्रश्न", kvLookups:"देखा गया", kvTimes:"{n} बार", kvFirst:"पहली बार", kvRW:"सही / ग़लत", kvProb:"अगली बार चुने जाने की संभावना", kvTomorrow:"कल से दोहराव में",
+ pron:"उच्चारण", confirmDel:"यह शब्द हटाएँ?", del:"हटाएँ", cancel:"रद्द करें", delFromDict:"शब्दकोश से हटाएँ", noMatch:"कोई मेल खाता शब्द नहीं",
+ dictEmpty:"आपका शब्दकोश ख़ाली है", dictEmptySub:"पढ़ते समय अनजान शब्द पर टैप करें, वह यहाँ सहेजा जाएगा।",
+ allArts:"सभी लेख", artCount:"{n} लेख", archNote:"किसी भी लेख में देखे गए शब्द शब्दकोश और आगे के दोहराव में जाते हैं।",
+ noGloss:"इस शब्द का अर्थ तैयार नहीं है।", wordTr:"शब्द का अर्थ", base:"मूल रूप: ", funcWord:"सामान्य सहायक शब्द — शब्दकोश में नहीं जुड़ेगा", added:"शब्दकोश में जुड़ गया", already:"पहले से शब्दकोश में · {n} बार देखा",
+ youPicked:"आपने चुना", pickedMeans:"\"{a}\", जिसका अर्थ है \"{b}\"।", pickedPlain:"\"{a}\"।", correctIs:"सही उत्तर है <b>{w}</b> ({m})।",
+ basic:"मूल अर्थ", basicTxt:"लेख में {w} ({p}) का अर्थ है \"{m}\"।", forms:" लेख में रूप: {f}।", sentence:"लेख का वाक्य",
+ preTitle:"दोहराव क्विज़", postTitle:"पढ़ने के बाद क्विज़", done:"{t} · पूरा", readNow:"आज की मुख्य ख़बर पढ़ें →",
+ sumWrong:"ग़लत शब्द सबसे ऊपर हैं और दोहराव में ज़्यादा आएँगे।", sumAll:"सब सही! ये शब्द अब कम चुने जाएँगे।", explainAll:"हर शब्द की व्याख्या",
+ qMeaning:"इस शब्द का अर्थ क्या है?", qWord:"किस अंग्रेज़ी शब्द का यह अर्थ है?", qCloze:"ख़ाली जगह के लिए शब्द चुनें",
+ right:"सही!", wrong:"ग़लत — व्याख्या देखें", next:"अगला", seeAll:"परिणाम और सभी व्याख्याएँ", artLoadFail:"लेख लोड नहीं हुए। इंटरनेट जाँचें।", removed:"हटा दिया",
+ loot:"इनाम", lootRight:"{n} सही", lootAcc:"सटीकता {p}% बोनस", lootAccNo:"सटीकता {p}% (80% से बोनस)", lootDay:"आज के तीनों चरण पूरे", tickets:"अभियान पास", lootT:"+{n}", gold:"सोना", goldAmt:"+{n} सोना", goAdv:"साहसिक पर चलें →",
+ owned:"यह पहले से आपके पास है", needLv:"Lv {n} चाहिए", noGold:"सोना कम है — {n} और चाहिए", bought:"{i} ख़रीदा और पहना",
+ advWin:"हथियार भारी ×1.5", advWlose:"हथियार कमज़ोर ×0.67", advAwin:"कवच भारी · चोट ×0.67", advAlose:"कवच कमज़ोर · चोट ×1.5", advNone:"कोई तत्व बोनस नहीं",
+ noTicket:"अभियान पास ख़त्म — क्विज़ पूरा करके पाएँ", spell:"युद्ध मंत्र", spellSub:"सही उत्तर दें, पहला वार दोगुना होगा।", spellOk:"मंत्र सफल! पहला वार ×2", spellFail:"मंत्र विफल। उत्तर: {w} — {m}",
+ retreat:"← पीछे हटें", elAttr:"{e} तत्व", yourHp:"आपका HP", atk:"आक्रमण", def:"रक्षा", skipSpell:"मंत्र छोड़ें, सीधे लड़ें", fight:"लड़ें! (1 पास लगेगा)",
+ logSpell:"मंत्र शक्ति! ", logCrit:"घातक वार! ", logYou:"आपने <b>{n}</b> चोट दी", logMon:"{m} ने <b>{n}</b> चोट दी",
+ win:"विजय", exp:"अनुभव", lvUp:"लेवल अप!", lose:"हार", loseTip:"{m} बहुत ताक़तवर था। {e} को हराने वाला हथियार ({c} तत्व) आज़माएँ, या पहले आसान राक्षसों से लेवल बढ़ाएँ।",
+ you:"आप · Lv {lv}", backAdv:"साहसिक पर लौटें", fightAgain:"फिर लड़ें", skipAnim:"एनिमेशन छोड़ें",
+ cycleAria:"पंचतत्व: धातु लकड़ी को, लकड़ी पृथ्वी को, पृथ्वी जल को, जल अग्नि को, अग्नि धातु को हराती है", atkPlus:"आक्रमण +{n}", defPlus:"रक्षा +{d} · HP +{h}",
+ unequip:"उतारें", equip:"पहनें", equipped:"पहना हुआ", unlockAt:"Lv {n} पर खुलेगा", weapon:"हथियार", armor:"कवच", price:"{n} सोना",
+ suggest:"Lv {n}+ सुझाया", monLine:"Lv {lv} · HP {hp} · आक्रमण {atk}", beaten:" · {n}× हराया", go:"लड़ें", all:"सभी",
+ bagEmpty:"आपका थैला ख़ाली है", bagEmptySub:"क्विज़ से सोना कमाएँ और दुकान से पहली चीज़ ख़रीदें।", hero:"साहसी", expLine:"अनुभव {e} / {n}",
+ bare:"ख़ाली हाथ", cloth:"साधारण कपड़े", rulesQ:"पंचतत्व कैसे काम करते हैं?",
+ rules1:"हर तीर का अर्थ है \"हराता है\": धातु → लकड़ी → पृथ्वी → जल → अग्नि → धातु।",
+ rules2:"अगर आपका <b>हथियार</b> राक्षस के तत्व को हराता है तो चोट ×1.5; उल्टा हो तो ×0.67।<br>अगर आपका <b>कवच</b> राक्षस के तत्व को हराता है तो आपको चोट ×0.67; उल्टा हो तो ×1.5।",
+ rules3:"सोना क्विज़ से मिलता है: हर सही उत्तर 10, 80%+ सटीकता पर +20, सब सही पर +20 और। हर पूरे क्विज़ पर 1 अभियान पास; दिन के तीनों चरण पूरे करने पर +30 सोना और 1 पास।",
+ tabGo:"लड़ें", tabShop:"दुकान", tabBag:"थैला"
+}};
+function T(k, v){ let s=(STR[LANG]&&STR[LANG][k]) ?? STR.zh[k] ?? k; if(v) for(const [a,b] of Object.entries(v)) s=s.split("{"+a+"}").join(b); return s; }
+const LOCALE={zh:"zh-TW", en:"en-IE", hi:"hi-IN"};
+const TOPICS={"勞資":{en:"Labour",hi:"श्रम"},"環境":{en:"Environment",hi:"पर्यावरण"},"住房":{en:"Housing",hi:"आवास"},"觀光":{en:"Tourism",hi:"पर्यटन"},"健康":{en:"Health",hi:"स्वास्थ्य"},"經濟":{en:"Economy",hi:"अर्थव्यवस्था"},"教育":{en:"Education",hi:"शिक्षा"},"科技":{en:"Tech",hi:"तकनीक"},"文化":{en:"Culture",hi:"संस्कृति"},"社會":{en:"Society",hi:"समाज"},"政治":{en:"Politics",hi:"राजनीति"}};
+const topicOf=a=>!a.topic?"":LANG==="zh"?a.topic:((TOPICS[a.topic]||{})[LANG]||a.topic);
+const sumOf=a=>LANG==="hi"?(a.summaryHi||a.summaryEn||a.summaryZh):LANG==="en"?(a.summaryEn||a.summaryZh):a.summaryZh;
+// meaning of a gloss entry or a saved word in the current language
+const mean=x=>!x?"":LANG==="hi"?(x.hi||x.en||x.zh):LANG==="en"?(x.en||x.zh):x.zh;
+function setLang(k){ LANG=k; try{ localStorage.setItem("che-pro-lang",k); }catch(e){} document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi"}[k]; S.langSheet=false; applyStaticText(); render(); }
+function applyStaticText(){
+  const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
+  set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch"));
+  const n=document.querySelector("nav.tabs"); if(n) n.setAttribute("aria-label",T("mainMenu"));
+  const lb=document.getElementById("langBtn"); if(lb){ lb.textContent=LANGS.find(l=>l.k===LANG).short; lb.setAttribute("aria-label",T("language")); }
+}
+function langSheet(){
+  return `<div class="scrim" data-act="closelang"></div><div class="sheet" role="dialog" aria-label="${T("language")}"><div class="grab"></div>
+    <div class="eyebrow" style="margin-bottom:10px">Language · 語言 · भाषा</div>
+    <div class="opts">${LANGS.map(l=>`<button class="opt${l.k===LANG?" right":""}" data-lang="${l.k}">${l.label}</button>`).join("")}</div></div>`;
+}
+
 /* ---------- utilities ---------- */
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -248,7 +428,7 @@ const daysBetween = (a,b) => Math.round((Date.parse(b+"T12:00:00")-Date.parse(a+
 const WORD_RE = /[A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*/g;
 const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
 const keyOf = lemma => "w~" + lemma.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9_.~:@+-]/g,"_").slice(0,120);
-const fmtDate = s => { const d=new Date(s+"T12:00:00"); return d.toLocaleDateString("zh-TW",{month:"long",day:"numeric",weekday:"short"}); };
+const fmtDate = s => { const d=new Date(s+"T12:00:00"); return d.toLocaleDateString(LOCALE[LANG]||"zh-TW",{month:"long",day:"numeric",weekday:"short"}); };
 const STOP = new Set("a an the and or but of to in on at for from with by is are was were be been it its this that these those he she they we you i his her their our my your as if than then so not no do does did have has had will would can could may might shall should must which who whom what when where there here".split(" "));
 function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.append(t); setTimeout(()=>t.remove(),1800); }
 function speak(text){ try{ const u=new SpeechSynthesisUtterance(text); u.lang="en-IE"; u.rate=.9; speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
@@ -274,8 +454,8 @@ function persist(id, data){
   if(!userCol){ lsSave(); return; }
   const prev = chains.get(id) || Promise.resolve();
   const next = prev.then(()=>userCol && userCol.doc(id).set(data)).catch(e=>{
-    if(e && e.code==="quota_exceeded") toast("儲存空間已滿");
-    else if(e && e.code==="invalid_argument" && userCol){ userCol=null; S.dbOK=false; lsSave(); toast("改為儲存在這台裝置"); render(); }
+    if(e && e.code==="quota_exceeded") toast(T("storageFull"));
+    else if(e && e.code==="invalid_argument" && userCol){ userCol=null; S.dbOK=false; lsSave(); toast(T("savedLocal")); render(); }
   });
   chains.set(id,next);
 }
@@ -319,7 +499,7 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 function setTab(t){ S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 function render(){
   document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"));
-  { const g=game(); $("#mastInfo").innerHTML = `Lv ${g.lv} · <b>${g.gold}</b> 金 · ${g.tickets} 令`; }
+  { const g=game(); $("#mastInfo").innerHTML = T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}); }
   const app=$("#app");
   if(S.view==="today") app.innerHTML=viewToday();
   else if(S.view==="read") app.innerHTML=viewRead();
@@ -332,8 +512,8 @@ function render(){
 }
 function artCard(a, d){
   const lu=lookedUpFor(d,a).length, post=postFor(d,a);
-  const status = post ? `<span class="chip done">已讀 · 測驗 ${post.total?post.score+"/"+post.total:"完成"}</span>` : (lu?`<span class="chip new">讀過 · 查了 ${lu} 字</span>`:"");
-  return `<button data-artid="${esc(a.id)}"><span class="row" style="gap:8px">${a.topic?`<span class="chip topic">${esc(a.topic)}</span>`:""}<span class="eyebrow">${esc(fmtDate(a.date))}</span>${status}</span><b>${esc(a.title)}</b>${a.summaryZh?`<span class="muted" style="font-size:13px">${esc(a.summaryZh)}</span>`:""}</button>`;
+  const status = post ? `<span class="chip done">${T("chipDone",{r:post.total?post.score+"/"+post.total:T("chipDoneNone")})}</span>` : (lu?`<span class="chip new">${T("chipRead",{n:lu})}</span>`:"");
+  return `<button data-artid="${esc(a.id)}"><span class="row" style="gap:8px">${a.topic?`<span class="chip topic">${esc(topicOf(a))}</span>`:""}<span class="eyebrow">${esc(fmtDate(a.date))}</span>${status}</span><b>${esc(a.title)}</b>${sumOf(a)?`<span class="muted" style="font-size:13px">${esc(sumOf(a))}</span>`:""}</button>`;
 }
 
 function viewToday(){
@@ -342,36 +522,36 @@ function viewToday(){
   const preDone = d.preDone || !preNeeded;
   const readDone = !!d.read;
   const postDone = d.postDone;
-  if(!S.ready.articles) return `<div class="view"><p class="muted">正在載入今日文章…</p></div>`;
-  if(!art) return `<div class="view"><div class="card empty"><h3>還沒有文章</h3><p>每天早上會自動放上新的愛爾蘭新聞，請稍後再回來。</p></div></div>`;
+  if(!S.ready.articles) return `<div class="view"><p class="muted">${T("loadingToday")}</p></div>`;
+  if(!art) return `<div class="view"><div class="card empty"><h3>${T("noArticles")}</h3><p>${T("noArticlesSub")}</p></div></div>`;
   const isToday = art.date===today();
-  const step=(n,cls,title,sub,act)=>`<button class="step ${cls}" ${act?`data-act="${act}"`:"disabled"}><span class="n">${cls.includes("done")?"✓":n}</span><span><b>${title}</b><span class="s">${sub}</span></span><span class="go">${act&&!cls.includes("done")?"開始 →":(act?"再看":"")}</span></button>`;
+  const step=(n,cls,title,sub,act)=>`<button class="step ${cls}" ${act?`data-act="${act}"`:"disabled"}><span class="n">${cls.includes("done")?"✓":n}</span><span><b>${title}</b><span class="s">${sub}</span></span><span class="go">${act&&!cls.includes("done")?T("start"):(act?T("again"):"")}</span></button>`;
   const total=[...S.words.values()];
   const tested=total.reduce((a,w)=>a+(w.correct||0)+(w.wrong||0),0), right=total.reduce((a,w)=>a+(w.correct||0),0);
   const extras=S.index.filter(a=>a.date===art.date && a.id!==art.id);
   return `<div class="view">
-    <section class="hero"><div class="eyebrow">${isToday?"今日頭條":"最新頭條 · "+esc(fmtDate(art.date))}</div><h1>${esc(art.title)}</h1></section>
+    <section class="hero"><div class="eyebrow">${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
     <div class="steps">
-      ${step(1, preDone?"done":"now", "複習測驗", preNeeded?(d.preDone?`答對 ${d.preScore}/${d.preTotal}`:`從 ${el.length} 個舊單字依熟練度抽 ${Math.min(8,el.length)} 題`):"還沒有舊單字可複習，直接開始閱讀", preNeeded&&!d.preDone?"pre":null)}
-      ${step(2, readDone?"done":(preDone?"now":"locked"), "閱讀頭條", readDone?`查了 ${(d.lookedUp||[]).length} 個字`:"點任何不會的字就會顯示中文", preDone?"read":null)}
-      ${step(3, postDone?"done":(readDone?"now":"locked"), "讀後測驗", postDone?(d.postTotal?`答對 ${d.postScore}/${d.postTotal}`:"今天沒有查字"):"測驗剛剛查過的單字，每題都有講解", readDone&&!postDone?"post":null)}
+      ${step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):T("preDraw",{n:el.length,k:Math.min(8,el.length)})):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
+      ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
+      ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
-    ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">還想多讀？</div><h2 style="font-size:20px">今天的其他 ${extras.length} 篇</h2></div>
-      ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">完成複習測驗後就能閱讀。</p>`}</section>`:""}
-    <button class="adv-banner" data-tab="adv"><span><b>出征令 ${game().tickets} 張 · 金幣 ${game().gold}</b><span class="muted">完成測驗賺金幣，買五行裝備去打怪</span></span><span class="go">冒險 →</span></button>
+    ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
+      ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
+    <button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>
     <div class="stats">
-      <div class="stat"><b>${S.words.size}</b><span>字典單字</span></div>
-      <div class="stat"><b>${tested?Math.round(right/tested*100)+"%":"—"}</b><span>累計正確率</span></div>
-      <div class="stat"><b>${S.index.length}</b><span>已收錄文章</span></div>
+      <div class="stat"><b>${S.words.size}</b><span>${T("statWords")}</span></div>
+      <div class="stat"><b>${tested?Math.round(right/tested*100)+"%":"—"}</b><span>${T("statAcc")}</span></div>
+      <div class="stat"><b>${S.index.length}</b><span>${T("statArts")}</span></div>
     </div>
     
   </div>`;
 }
 
 function viewRead(){
-  const art=currentArticle(); if(!art) return `<div class="view"><p class="muted">找不到文章。</p></div>`;
+  const art=currentArticle(); if(!art) return `<div class="view"><p class="muted">${T("notFound")}</p></div>`;
   const d=dayRec(); const preDone = d.preDone || eligible().length===0;
-  if(art.date===(mainArticle()||{}).date && !preDone) return `<div class="view"><div class="card lock"><h3>先完成複習測驗</h3><p class="muted">每天閱讀前，先複習前幾天查過的單字。</p><button class="btn" data-act="pre">開始複習測驗</button></div></div>`;
+  if(art.date===(mainArticle()||{}).date && !preDone) return `<div class="view"><div class="card lock"><h3>${T("lockTitle")}</h3><p class="muted">${T("lockSub")}</p><button class="btn" data-act="pre">${T("lockBtn")}</button></div></div>`;
   const lu=lookedUpFor(d,art), post=postFor(d,art);
   const hits=new Set(lu);
   const known=new Set([...S.words.values()].flatMap(w=>w.forms||[]));
@@ -383,15 +563,15 @@ function viewRead(){
   }).join("")+"</p>").join("");
   const src=(art.sources||[]).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("、");
   let end;
-  if(isMain(art)) end = d.read ? (d.postDone?`<button class="btn ghost" data-act="home">回到今日</button>`:`<button class="btn" data-act="post">開始讀後測驗</button>`) : `<button class="btn" data-act="finish">讀完了，開始測驗 →</button>`;
-  else end = post ? `<p class="muted" style="font-size:14px">這篇的測驗已完成（${post.total?post.score+"/"+post.total:"沒有查字"}）。查過的字會出現在之後的複習測驗。</p><button class="btn ghost" data-act="home">回到今日</button>`
-    : `<button class="btn" data-act="finishx">讀完了，測驗這篇查過的字 →</button>`;
+  if(isMain(art)) end = d.read ? (d.postDone?`<button class="btn ghost" data-act="home">${T("backToday")}</button>`:`<button class="btn" data-act="post">${T("startPost")}</button>`) : `<button class="btn" data-act="finish">${T("finishMain")}</button>`;
+  else end = post ? `<p class="muted" style="font-size:14px">${T("extraDone",{r:post.total?post.score+"/"+post.total:T("noLookups")})}</p><button class="btn ghost" data-act="home">${T("backToday")}</button>`
+    : `<button class="btn" data-act="finishx">${T("finishExtra")}</button>`;
   return `<div class="view">
-    <button class="btn ghost" data-act="back" style="align-self:flex-start;padding:6px 14px;font-size:13px">← 返回</button>
-    <div class="art-head"><div class="eyebrow">${art.topic?esc(art.topic)+" · ":""}${esc(fmtDate(art.date))}${art.level?" · CEFR "+esc(art.level):""}</div><h1>${esc(art.title)}</h1>
-    <div class="art-meta"><span>${art.paragraphs.join(" ").match(WORD_RE).length} 字</span>${src?`<span>改寫自 ${src}</span>`:""}</div></div>
-    ${art.summaryZh?`<div class="zh-sum">${esc(art.summaryZh)}</div>`:""}
-    <div class="tip"><i></i>點一下單字看翻譯，查過的字會標成這個顏色並存進字典</div>
+    <button class="btn ghost" data-act="back" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("back")}</button>
+    <div class="art-head"><div class="eyebrow">${art.topic?esc(topicOf(art))+" · ":""}${esc(fmtDate(art.date))}${art.level?" · CEFR "+esc(art.level):""}</div><h1>${esc(art.title)}</h1>
+    <div class="art-meta"><span>${T("words",{n:art.paragraphs.join(" ").match(WORD_RE).length})}</span>${src?`<span>${T("rewritten",{s:src})}</span>`:""}</div></div>
+    ${sumOf(art)?`<div class="zh-sum">${esc(sumOf(art))}</div>`:""}
+    <div class="tip"><i></i>${T("tip")}</div>
     <article class="article" id="article">${paras}</article>
     ${end}
   </div>`;
@@ -401,13 +581,13 @@ function viewRead(){
 function viewDict(){
   const seg=(k,l)=>`<button data-sort="${k}" aria-pressed="${S.dictSort===k}">${l}</button>`;
   return `<div class="view">
-    <div><div class="eyebrow">我的字典</div><h2 style="font-size:24px">${S.words.size} 個單字</h2></div>
-    <input id="dictSearch" class="search" type="search" placeholder="搜尋英文或中文" value="${esc(S.dictQ)}" autocomplete="off">
-    <div class="seg" role="group" aria-label="排序">${seg("recent","最近查詢")}${seg("weak","最不熟")}${seg("az","A–Z")}</div>
+    <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
+    <input id="dictSearch" class="search" type="search" placeholder="${T("search")}" value="${esc(S.dictQ)}" autocomplete="off">
+    <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
-    <p class="muted" style="font-size:12.5px">抽中機率依答對率計算：答錯越多、越久沒複習的字，越容易被抽到。</p>
-    <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>備份紀錄</b><span class="muted" style="font-size:13px">單字和測驗紀錄只存在這支手機的瀏覽器裡。換手機或清除 Safari 資料前，先匯出一份備份。</span>
-      <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">匯出紀錄</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">匯入紀錄</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    <p class="muted" style="font-size:12.5px">${T("probNote")}</p>
+    <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
+      <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
   </div>`;
 }
 function exportData(){
@@ -426,23 +606,30 @@ async function importData(file){
       else if(v.type==="day"){ if(!S.days.has(k)) S.days.set(k,v); }
       else if(v.type==="game"){ const cur=game(); if(v.lv>cur.lv || (v.lv===cur.lv && v.exp>=cur.exp)) S.game={...G_DEFAULT, ...v}; }
     }
-    lsSave(); toast("已匯入 "+n+" 個單字"); render();
-  }catch(e){ toast("檔案格式不正確"); }
+    lsSave(); toast(T("imported",{n})); render();
+  }catch(e){ toast(T("badFile")); }
 }
-function noteHtml(n){
-  if(!n) return "";
-  return `<div class="exp">
-    ${n.meaning?`<p><span class="lab">意思</span>${esc(n.meaning)}</p>`:""}
-    ${n.usage?`<p><span class="lab">用法</span>${esc(n.usage)}</p>`:""}
-    ${n.collocations&&n.collocations.length?`<p><span class="lab">常見搭配</span><span class="en-i">${n.collocations.map(esc).join(" · ")}</span></p>`:""}
-    ${n.example&&n.example.en?`<p><span class="lab">例句</span><span class="en-i">${esc(n.example.en)}</span><br><span class="muted">${esc(n.example.zh||"")}</span></p>`:""}
-  </div>`;
+function notePack(n){
+  // n: {note, noteHi, noteEn}; returns localized fields
+  if(!n||!n.note) return null;
+  const z=n.note, h=n.noteHi||{}, e=n.noteEn||{};
+  if(LANG==="hi") return {meaning:h.meaning||e.meaning||z.meaning, usage:h.usage||e.usage||z.usage, coll:z.collocations, exEn:z.example&&z.example.en, exTr:h.exampleTr||""};
+  if(LANG==="en") return {meaning:e.meaning||z.meaning, usage:e.usage||z.usage, coll:z.collocations, exEn:z.example&&z.example.en, exTr:""};
+  return {meaning:z.meaning, usage:z.usage, coll:z.collocations, exEn:z.example&&z.example.en, exTr:z.example&&z.example.zh};
+}
+function noteHtml(pack, bare){
+  const n=notePack(pack); if(!n) return "";
+  const inner=`${n.meaning?`<p><span class="lab">${T("nMeaning")}</span>${esc(n.meaning)}</p>`:""}
+    ${n.usage?`<p><span class="lab">${T("nUsage")}</span>${esc(n.usage)}</p>`:""}
+    ${n.coll&&n.coll.length?`<p><span class="lab">${T("nColl")}</span><span class="en-i">${n.coll.map(esc).join(" · ")}</span></p>`:""}
+    ${n.exEn?`<p><span class="lab">${T("nEx")}</span><span class="en-i">${esc(n.exEn)}</span>${n.exTr?`<br><span class="muted">${esc(n.exTr)}</span>`:""}</p>`:""}`;
+  return bare?inner:`<div class="exp">${inner}</div>`;
 }
 function dictList(){
   const pm=probMap();
   let list=[...S.words.values()];
   const q=S.dictQ.trim().toLowerCase();
-  if(q) list=list.filter(w=>w.word.toLowerCase().includes(q)||(w.zh||"").includes(q));
+  if(q) list=list.filter(w=>w.word.toLowerCase().includes(q)||[w.zh,w.en,w.hi].some(x=>(x||"").toLowerCase().includes(q)));
   const acc=w=>{const t=(w.correct||0)+(w.wrong||0); return t?w.correct/t:-1;};
   if(S.dictSort==="recent") list.sort((a,b)=>(b.lastLookup||"").localeCompare(a.lastLookup||"")||a.word.localeCompare(b.word));
   else if(S.dictSort==="weak") list.sort((a,b)=>(pm.get(b.key)||0)-(pm.get(a.key)||0));
@@ -453,26 +640,26 @@ function dictList(){
     const open=S.open===w.key;
     return `<div class="ent"><button data-open="${esc(w.key)}" aria-expanded="${open}">
       <span class="en">${esc(w.word)} <span class="pos">${esc(w.pos||"")}</span></span>
-      <span class="acc">${t?Math.round(a*100)+"% · "+t+"題":`<span class="chip new">新字</span>`}<span class="meter"><i style="width:${a<0?0:a*100}%;background:${col}"></i></span></span>
-      <span class="z">${esc(w.zh)}</span></button>
+      <span class="acc">${t?Math.round(a*100)+"% · "+T("qCount",{n:t}):`<span class="chip new">${T("newWord")}</span>`}<span class="meter"><i style="width:${a<0?0:a*100}%;background:${col}"></i></span></span>
+      <span class="z">${esc(mean(w))}</span></button>
       ${open?`<div class="more">
         ${w.example?`<div class="ex">${highlight(w.example,w.forms)}</div>`:""}
-        ${w.note?noteHtml(w.note):""}
-        <dl class="kv"><dt>查詢次數</dt><dd>${w.lookups||1} 次</dd><dt>第一次查</dt><dd>${esc(w.firstSeen)}</dd><dt>答對 / 答錯</dt><dd>${w.correct||0} / ${w.wrong||0}</dd><dt>下次被抽中機率</dt><dd>${p!=null?(p*100).toFixed(1)+"%":"明天起加入複習"}</dd></dl>
-        <div class="row"><button class="say" data-say="${esc(w.word)}" aria-label="發音">${SPEAK_SVG}</button><span style="flex:1"></span>${S.confirmDel===w.key?`<span class="muted" style="font-size:13px">確定移除？</span><button class="danger" data-del="${esc(w.key)}">移除</button><button class="btn ghost" style="padding:6px 12px;font-size:13px" data-act="nodel">取消</button>`:`<button class="danger" data-askdel="${esc(w.key)}">從字典移除</button>`}</div>
+        ${noteHtml(findNote(w))}
+        <dl class="kv"><dt>${T("kvLookups")}</dt><dd>${T("kvTimes",{n:w.lookups||1})}</dd><dt>${T("kvFirst")}</dt><dd>${esc(w.firstSeen)}</dd><dt>${T("kvRW")}</dt><dd>${w.correct||0} / ${w.wrong||0}</dd><dt>${T("kvProb")}</dt><dd>${p!=null?(p*100).toFixed(1)+"%":T("kvTomorrow")}</dd></dl>
+        <div class="row"><button class="say" data-say="${esc(w.word)}" aria-label="${T("pron")}">${SPEAK_SVG}</button><span style="flex:1"></span>${S.confirmDel===w.key?`<span class="muted" style="font-size:13px">${T("confirmDel")}</span><button class="danger" data-del="${esc(w.key)}">${T("del")}</button><button class="btn ghost" style="padding:6px 12px;font-size:13px" data-act="nodel">${T("cancel")}</button>`:`<button class="danger" data-askdel="${esc(w.key)}">${T("delFromDict")}</button>`}</div>
       </div>`:""}
     </div>`;
   }).join("");
-  return S.words.size?(rows?`<div class="dict">${rows}</div>`:`<div class="empty">沒有符合的單字</div>`):`<div class="card empty"><h3>字典還是空的</h3><p>閱讀文章時點一下不會的字，它就會自動存到這裡。</p></div>`;
+  return S.words.size?(rows?`<div class="dict">${rows}</div>`:`<div class="empty">${T("noMatch")}</div>`):`<div class="card empty"><h3>${T("dictEmpty")}</h3><p>${T("dictEmptySub")}</p></div>`;
 }
 function highlight(s, forms){ let out=esc(s); (forms||[]).forEach(f=>{ out=out.replace(new RegExp("\\b("+reEsc(f)+")\\b","gi"),"<b>$1</b>"); }); return out; }
 
 function viewArch(){
-  if(!S.index.length) return `<div class="view"><div class="card empty"><h3>還沒有文章</h3></div></div>`;
+  if(!S.index.length) return `<div class="view"><div class="card empty"><h3>${T("noArticles")}</h3></div></div>`;
   const d=dayRec(); const dates=[...new Set(S.index.map(a=>a.date))];
-  return `<div class="view"><div><div class="eyebrow">所有文章</div><h2 style="font-size:24px">${S.index.length} 篇</h2></div>
+  return `<div class="view"><div><div class="eyebrow">${T("allArts")}</div><h2 style="font-size:24px">${T("artCount",{n:S.index.length})}</h2></div>
     ${dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${S.index.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("")}
-    <p class="muted" style="font-size:13px">任何一篇文章查的字都會存進字典，並出現在之後的複習測驗。</p></div>`;
+    <p class="muted" style="font-size:13px">${T("archNote")}</p></div>`;
 }
 
 /* ---------- word sheet ---------- */
@@ -483,7 +670,7 @@ async function lookup(surface){
   S.sheet={surface, g, ex, loading:!g};
   renderSheet();
   if(!g){
-    if(!sample){ S.sheet.loading=false; S.sheet.err="這個字沒有預先翻譯，且目前無法即時翻譯。"; renderSheet(); return; }
+    if(!sample){ S.sheet.loading=false; S.sheet.err=T("noGloss"); renderSheet(); return; }
     try{
       const r=await sample.json(`Translate the English word "${surface}" as used in this sentence into Traditional Chinese (Taiwan). Sentence: "${ex}". Reply with only JSON: {"zh":"short meaning in context, ≤12 chars","pos":"n./v./adj./adv./prep./conj./pron./det.","base":"dictionary base form"}`,{modelTier:"quick",cache:{gcTime:86400000}});
       g={zh:String(r.zh||"?"),pos:String(r.pos||""),base:String(r.base||surface)};
@@ -499,8 +686,8 @@ function record(surface,g,ex,art){
   const lemma=(g.base||surface).trim(), key=keyOf(lemma), now=today();
   const old=S.words.get(key);
   const forms=new Set([...(old&&old.forms||[]), surface.toLowerCase(), lemma.toLowerCase()]);
-  const rec=old?{...old, forms:[...forms], lookups:(old.lookups||1)+1, lastLookup:new Date().toISOString(), example:old.example||ex, note:old.note||g.note||null}
-    :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null};
+  const rec=old?{...old, forms:[...forms], lookups:(old.lookups||1)+1, lastLookup:new Date().toISOString(), example:old.example||ex, note:old.note||g.note||null, noteHi:old.noteHi||g.noteHi||null, noteEn:old.noteEn||g.noteEn||null, hi:old.hi||g.hi||"", en:old.en||g.en||""}
+    :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, hi:g.hi||"", en:g.en||""};
   persist(key,rec);
   S.sheet.rec=rec; S.sheet.isNew=!old;
   const d=dayRec(), ll=lemma.toLowerCase();
@@ -509,61 +696,74 @@ function record(surface,g,ex,art){
 }
 function renderSheet(){
   const o=$("#overlay");
+  if(S.langSheet){ o.innerHTML=langSheet(); return; }
   if(!S.sheet){ o.innerHTML=""; return; }
   const {surface,g,ex,loading,err,rec,isNew,skip}=S.sheet;
-  o.innerHTML=`<div class="scrim" data-act="close"></div><div class="sheet" role="dialog" aria-label="單字翻譯"><div class="grab"></div>
-    <div class="wd">${esc(surface)} ${g&&g.pos?`<span class="pos">${esc(g.pos)}</span>`:""}<span style="flex:1"></span><button class="say" data-say="${esc(surface)}" aria-label="發音">${SPEAK_SVG}</button></div>
-    ${loading?`<div class="zh muted">翻譯中…</div>`:err?`<div class="zh" style="color:var(--bad);font-size:16px">${esc(err)}</div>`:`<div class="zh">${esc(g.zh)}</div>
-    ${g.base&&g.base.toLowerCase()!==surface.toLowerCase()?`<div class="muted" style="font-size:13px">原形：<b>${esc(g.base)}</b></div>`:""}
+  o.innerHTML=`<div class="scrim" data-act="close"></div><div class="sheet" role="dialog" aria-label="${T("wordTr")}"><div class="grab"></div>
+    <div class="wd">${esc(surface)} ${g&&g.pos?`<span class="pos">${esc(g.pos)}</span>`:""}<span style="flex:1"></span><button class="say" data-say="${esc(surface)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>
+    ${loading?`<div class="zh muted">…</div>`:err?`<div class="zh" style="color:var(--bad);font-size:16px">${esc(err)}</div>`:`<div class="zh">${esc(mean(g))}</div>
+    ${g.base&&g.base.toLowerCase()!==surface.toLowerCase()?`<div class="muted" style="font-size:13px">${T("base")}<b>${esc(g.base)}</b></div>`:""}
     ${ex?`<div class="ex">${highlight(ex,[surface])}</div>`:""}
-    <div class="muted" style="font-size:13px;margin-top:10px">${skip?"常見功能字，不會加入字典":(rec?(isNew?"已加入字典":`字典裡已有，查過 ${rec.lookups} 次`):"")}</div>`}
+    <div class="muted" style="font-size:13px;margin-top:10px">${skip?T("funcWord"):(rec?(isNew?T("added"):T("already",{n:rec.lookups})):"")}</div>`}
   </div>`;
 }
 
 /* ---------- explanations (prepared with each article) ---------- */
-function findNote(w){
-  if(w.note) return w.note;
+function glossOf(w){
   const b=w.word.toLowerCase();
-  for(const a of S.articles) for(const g of Object.values(a.gloss||{})) if(g.note && (g.base||"").toLowerCase()===b) return g.note;
+  for(const a of S.articles) for(const g of Object.values(a.gloss||{})) if((g.base||"").toLowerCase()===b && g.zh===w.zh) return g;
+  for(const a of S.articles) for(const g of Object.values(a.gloss||{})) if((g.base||"").toLowerCase()===b) return g;
   return null;
+}
+function findNote(w){
+  if(w.note) return {note:w.note, noteHi:w.noteHi, noteEn:w.noteEn};
+  const g=glossOf(w); return g&&g.note?{note:g.note, noteHi:g.noteHi, noteEn:g.noteEn}:null;
+}
+// older saved words may lack Hindi/English meanings: fill them from loaded articles
+function fillMeanings(){
+  let changed=false;
+  for(const [k,w] of S.words){ if(w.hi&&w.en&&(w.note||!glossOf(w)||!glossOf(w).note)) continue; const g=glossOf(w); if(!g) continue;
+    const nw={...w, hi:w.hi||g.hi||"", en:w.en||g.en||"", note:w.note||g.note||null, noteHi:w.noteHi||g.noteHi||null, noteEn:w.noteEn||g.noteEn||null};
+    if(JSON.stringify(nw)!==JSON.stringify(w)){ S.words.set(k,nw); changed=true; } }
+  if(changed) lsSave();
 }
 function explainAnswer(ans){
   const w=S.words.get(ans.w.key)||ans.w; const n=findNote(w);
-  if(n){ ans.exp={...n, mistake:""}; if(!w.note) persist(w.key,{...w, note:n}); }
+  if(n) ans.exp=n;
 }
 function answerBlock(ans, full){
   const w=S.words.get(ans.w.key)||ans.w;
-  const head=`<div class="exp-head"><span class="mark ${ans.ok?"ok":"no"}">${ans.ok?"✓":"✗"}</span><span class="en">${esc(w.word)}</span><span class="pos">${esc(w.pos||"")}</span><span class="z">${esc(w.zh)}</span><button class="say" data-say="${esc(w.word)}" aria-label="發音">${SPEAK_SVG}</button></div>`;
-  const wrong = !ans.ok ? `<p class="mist"><span class="lab">你選了</span>「${esc(ans.picked.label)}」${ans.picked.meaning?`，那是「${esc(ans.picked.meaning)}」的意思`:""}。正確答案是 <b>${esc(w.word)}</b>（${esc(w.zh)}）。</p>` : "";
+  const head=`<div class="exp-head"><span class="mark ${ans.ok?"ok":"no"}">${ans.ok?"✓":"✗"}</span><span class="en">${esc(w.word)}</span><span class="pos">${esc(w.pos||"")}</span><span class="z">${esc(mean(w))}</span><button class="say" data-say="${esc(w.word)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>`;
+  const wrong = !ans.ok ? `<p class="mist"><span class="lab">${T("youPicked")}</span>${ans.picked.meaning?T("pickedMeans",{a:esc(ans.picked.label),b:esc(ans.picked.meaning)}):T("pickedPlain",{a:esc(ans.picked.label)})} ${T("correctIs",{w:esc(w.word),m:esc(mean(w))})}</p>` : "";
   const others=(w.forms||[]).filter(f=>f!==w.word.toLowerCase());
-  const basic = `<p><span class="lab">基本解釋</span>${esc(w.word)}（${esc(w.pos||"")}）在文章裡的意思是「${esc(w.zh)}」。${others.length?` 文中出現的形式：${esc(others.join("、"))}。`:""}</p>`;
-  const ex = w.example ? `<p><span class="lab">文章原句</span><span class="en-i">${highlight(w.example,w.forms)}</span></p>` : "";
+  const basic = `<p><span class="lab">${T("basic")}</span>${T("basicTxt",{w:esc(w.word),p:esc(w.pos||""),m:esc(mean(w))})}${others.length?T("forms",{f:esc(others.join(", "))}):""}</p>`;
+  const ex = w.example ? `<p><span class="lab">${T("sentence")}</span><span class="en-i">${highlight(w.example,w.forms)}</span></p>` : "";
   const e=ans.exp;
-  const claude = e ? `${!ans.ok&&e.mistake?`<p class="mist"><span class="lab">為什麼選錯</span>${esc(e.mistake)}</p>`:""}${noteHtml(e).replace(/^<div class="exp">|<\/div>$/g,"")}` : (ans.expErr?`<p class="muted">${esc(ans.expErr)}</p>`:"");
+  const claude = e ? noteHtml(e,true) : "";
   return `<div class="exp ${ans.ok?"":"bad"}">${head}${wrong}${ans.exp?"":basic}${ex}${claude}</div>`;
 }
 
 /* ---------- quizzes ---------- */
 function distractorPool(){
   const pool=new Map();
-  for(const w of S.words.values()) pool.set(w.word.toLowerCase(),{en:w.word, zh:w.zh});
+  for(const w of S.words.values()) pool.set(w.word.toLowerCase(),{en:w.word, zh:mean(w)});
   for(const a of S.articles.slice(0,8)) for(const [k,g] of Object.entries(a.gloss||{})){
     if(STOP.has(k)||!/^(n|v|adj|adv)\./.test(g.pos||"")||/[A-Z]/.test(g.base||"")) continue;
-    const b=(g.base||k).toLowerCase(); if(!pool.has(b)) pool.set(b,{en:g.base||k, zh:g.zh});
+    const b=(g.base||k).toLowerCase(); if(!pool.has(b)) pool.set(b,{en:g.base||k, zh:mean(g)});
   }
   return [...pool.values()];
 }
 function makeQuestion(w){
-  const pool=distractorPool().filter(p=>p.en.toLowerCase()!==w.word.toLowerCase() && p.zh!==w.zh);
+  const wm=mean(w); const pool=distractorPool().filter(p=>p.en.toLowerCase()!==w.word.toLowerCase() && p.zh!==wm);
   const hasForm=f=>new RegExp("\\b"+reEsc(f)+"\\b","i").test(w.example||"");
   const types=["en2zh","zh2en"]; if(w.example && (w.forms||[]).some(hasForm)) types.push("cloze");
   const type=types[Math.floor(Math.random()*types.length)];
   const ds=shuffle(pool).slice(0,3);
-  if(type==="en2zh") return {type, w, prompt:w.word, opts:shuffle([{label:w.zh, meaning:w.word, ok:true}, ...ds.map(d=>({label:d.zh, meaning:d.en}))])};
-  if(type==="zh2en") return {type, w, prompt:w.zh, opts:shuffle([{label:w.word, meaning:w.zh, ok:true}, ...ds.map(d=>({label:d.en, meaning:d.zh}))])};
+  if(type==="en2zh") return {type, w, prompt:w.word, opts:shuffle([{label:wm, meaning:w.word, ok:true}, ...ds.map(d=>({label:d.zh, meaning:d.en}))])};
+  if(type==="zh2en") return {type, w, prompt:wm, opts:shuffle([{label:w.word, meaning:wm, ok:true}, ...ds.map(d=>({label:d.en, meaning:d.zh}))])};
   const form=(w.forms||[]).find(hasForm);
   const m=w.example.match(new RegExp("\\b"+reEsc(form)+"\\b","i"));
-  return {type, w, prompt:w.example, blank:m[0], opts:shuffle([{label:m[0], meaning:w.zh, ok:true}, ...ds.map(d=>({label:d.en, meaning:d.zh}))])};
+  return {type, w, prompt:w.example, blank:m[0], opts:shuffle([{label:m[0], meaning:wm, ok:true}, ...ds.map(d=>({label:d.en, meaning:d.zh}))])};
 }
 function startQuiz(kind, art){
   let words;
@@ -585,27 +785,27 @@ function finishPost(art, score, total){
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
-  const title=Q.kind==="pre"?"複習測驗":"讀後測驗";
+  const title=Q.kind==="pre"?T("preTitle"):T("postTitle");
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="pre" ? `<button class="btn" data-act="read">開始閱讀今日頭條 →</button>` : `<button class="btn" data-act="home">回到今日</button>`;
-    return `<div class="view"><div class="eyebrow">${title} · 完成</div>
+    const nextBtn = Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
+    return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
-      <div class="muted">${Q.score<Q.qs.length?"答錯的字排在最前面，之後也會更常出現在複習測驗。":"全對！這些字之後被抽中的機率會降低。"}</div></div>
+      <div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div></div>
       ${rewardBox(Q.reward)}
-      <h2 style="font-size:20px">每個字的講解</h2>
+      <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
   }
   const q=Q.qs[Q.i], pickedI=Q.picked, ans=Q.answers[Q.i];
   const prompt = q.type==="cloze" ? `<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"), "<u></u>")}</div>`
     : `<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`;
-  const lead={en2zh:"這個字的中文意思是？",zh2en:"哪個英文字是這個意思？",cloze:"選出填入空格的字"}[q.type];
+  const lead={en2zh:T("qMeaning"),zh2en:T("qWord"),cloze:T("qCloze")}[q.type];
   return `<div class="view"><div class="row" style="justify-content:space-between"><span class="eyebrow">${title}</span><span class="muted" style="font-size:13px;font-variant-numeric:tabular-nums">${Q.i+1} / ${Q.qs.length}</span></div>
     <div class="qbar"><i style="width:${(Q.i+(pickedI!=null?1:0))/Q.qs.length*100}%"></i></div>
     <div class="qcard"><div class="muted" style="font-size:14px">${lead}</div>${prompt}
     <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(pickedI!=null){ if(o.ok) c+=" right"; else if(i===pickedI) c+=" wrong"; } return `<button class="${c}" data-pick="${i}" ${pickedI!=null?"disabled":""}>${esc(o.label)}${pickedI!=null&&!o.ok&&o.meaning?`<span class="optm">${esc(o.meaning)}</span>`:""}</button>`; }).join("")}</div>
-    ${ans?`<div class="fb ${ans.ok?"ok":"no"}">${ans.ok?"答對了！":"答錯了，看看講解"}</div>${answerBlock(ans,false)}<button class="btn" data-act="next">${Q.i+1<Q.qs.length?"下一題":"看結果與全部講解"}</button>`:""}</div></div>`;
+    ${ans?`<div class="fb ${ans.ok?"ok":"no"}">${ans.ok?T("right"):T("wrong")}</div>${answerBlock(ans,false)}<button class="btn" data-act="next">${Q.i+1<Q.qs.length?T("next"):T("seeAll")}</button>`:""}</div></div>`;
 }
 function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
@@ -629,7 +829,22 @@ const ELZ=Object.fromEntries(ELS.map(e=>[e.k,e.z]));
 // 相剋: 金剋木、木剋土、土剋水、水剋火、火剋金
 const BEATS={metal:"wood", wood:"earth", earth:"water", water:"fire", fire:"metal"};
 function elMult(att, def){ if(!att||!def) return 1; if(BEATS[att]===def) return 1.5; if(BEATS[def]===att) return 0.67; return 1; }
-const elBadge=(k,big)=>k?`<span class="el el-${k}${big?" big":""}">${ELZ[k]}</span>`:`<span class="el el-none${big?" big":""}">無</span>`;
+const ELNAME={zh:{metal:["金","金"],wood:["木","木"],water:["水","水"],fire:["火","火"],earth:["土","土"],none:["無","無"]},
+ en:{metal:["Mt","Metal"],wood:["Wd","Wood"],water:["Wa","Water"],fire:["Fi","Fire"],earth:["Ea","Earth"],none:["–","None"]},
+ hi:{metal:["धा","धातु"],wood:["ल","लकड़ी"],water:["ज","जल"],fire:["अ","अग्नि"],earth:["पृ","पृथ्वी"],none:["–","कोई नहीं"]}};
+const elShort=k=>ELNAME[LANG][k||"none"][0], elName=k=>ELNAME[LANG][k||"none"][1];
+const WN_L={en:{metal:["Bronze Dagger","Steel Longsword","Moonsilver Blade","Nuada's Sword of Light"],wood:["Oak Staff","Hawthorn Longbow","Yew War-Spear","Druid's Sacred Staff"],water:["Fishing Harpoon","Tidal Trident","Selkie Whip","Spear of Manannán"],fire:["Torch Club","Molten War-Axe","Blazing Lance","Spear of Lugh"],earth:["Stone Hammer","Granite Warhammer","Giant's Club","Club of the Dagda"]},
+ hi:{metal:["काँसे का खंजर","इस्पात की तलवार","चंद्र-चाँदी की धार","नुआडा की प्रकाश तलवार"],wood:["ओक की लाठी","नागफनी धनुष","यू का भाला","ड्रुइड की पवित्र छड़ी"],water:["मछली भाला","ज्वार त्रिशूल","सेल्की कोड़ा","मनानान का भाला"],fire:["मशाल गदा","पिघला युद्ध-कुल्हाड़ा","धधकता भाला","लू का भाला"],earth:["पत्थर का हथौड़ा","ग्रेनाइट युद्ध-हथौड़ा","दानव की गदा","दग्दा की गदा"]}};
+const AN_L={en:{metal:["Chainmail","Iron Plate","Silver Scale Armour","War God's Mail"],wood:["Bark Vest","Woven Vine Armour","Ancient Oak Guard","Heart of the Forest"],water:["Sealskin Coat","Tide-Pattern Mail","Deep-Sea Scale","Cloak of Manannán"],fire:["Leather Armour","Lava Armour","Phoenix Mail","Undying Flame Plate"],earth:["Mud-Stone Armour","Heavy Rock Plate","Mountain Mail","Heart of the Earth"]},
+ hi:{metal:["ज़ंजीर कवच","लोहे का कवच","चाँदी शल्क कवच","युद्ध देवता का कवच"],wood:["छाल की बंडी","बेल-बुना कवच","प्राचीन ओक रक्षक","वन-हृदय कवच"],water:["सील-खाल कोट","ज्वार कवच","गहरे सागर का शल्क","मनानान का लबादा"],fire:["चमड़े का कवच","लावा कवच","फ़ीनिक्स कवच","अमर ज्वाला कवच"],earth:["कीचड़-पत्थर कवच","भारी चट्टान कवच","पर्वत कवच","पृथ्वी-हृदय कवच"]}};
+const itemName=it=>LANG==="zh"?it.name:WN_L[LANG]&&(it.slot==="weapon"?WN_L:AN_L)[LANG][it.el][it.tier];
+const MON_HI={leprechaun:"लेप्रेकॉन",changeling:"चेंजलिंग",merrow:"मेरो जलपरी",puca:"पूका",eachuisce:"जल-अश्व",wisp:"छलावा-ज्योति",banshee:"बंशी",sluagh:"स्लुआ आत्माएँ",feargorta:"भूखा प्रेत",dullahan:"बिना सिर का सवार",abhartach:"अवर्तख",fomorian:"फ़ोमोरियन दानव",balor:"बुरी आँख वाला बलोर"};
+const REG_HI={r1:"डबलिन के खेत",r2:"विकलो पर्वत",r3:"कोनेमारा दलदल",r4:"मोहर की चट्टानें",r5:"टोरी द्वीप"};
+const monName=m=>LANG==="zh"?m.zh:LANG==="hi"?(MON_HI[m.id]||m.en):m.en;
+const monSub=m=>LANG==="en"?"":m.en;
+const regName=r=>LANG==="zh"?r.name:LANG==="hi"?(REG_HI[r.id]||r.en):r.en;
+
+const elBadge=(k,big)=>`<span class="el el-${k||"none"}${big?" big":""}" title="${elName(k)}">${elShort(k)}</span>`;
 
 const TIER=[{n:"Ⅰ",atk:6,def:4,hp:20,price:80,lv:1},{n:"Ⅱ",atk:14,def:10,hp:50,price:300,lv:4},{n:"Ⅲ",atk:26,def:18,hp:100,price:900,lv:8},{n:"Ⅳ",atk:42,def:30,hp:180,price:2500,lv:13}];
 const WNAMES={metal:["青銅短劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂長弓","紫杉戰矛","德魯伊聖杖"],water:["漁叉","潮汐三叉戟","塞爾基長鞭","李爾海神之矛"],fire:["火把棍","熔鐵戰斧","烈焰長槍","盧神之槍"],earth:["石錘","花崗岩戰鎚","巨人之棒","達格達之棍"]};
@@ -686,22 +901,22 @@ function awardQuiz(kind, score, total, isMainPost){
 }
 function rewardBox(r){
   if(!r) return "";
-  return `<div class="reward"><div class="eyebrow">戰利品</div>
-    <div class="rw-row"><span>答對 ${r.base/10} 題</span><b>+${r.base} 金</b></div>
-    ${r.acc?`<div class="rw-row"><span>正確率 ${r.acc100}% 獎勵</span><b>+${r.acc} 金</b></div>`:`<div class="rw-row muted"><span>正確率 ${r.acc100}%（80% 以上有獎勵）</span><b>+0</b></div>`}
-    ${r.bonus?`<div class="rw-row"><span>完成今日三步驟</span><b>+${r.bonus} 金</b></div>`:""}
-    <div class="rw-row"><span>出征令</span><b>+${r.tickets+r.bonusTickets} 張</b></div>
-    <button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">去冒險 →</button></div>`;
+  return `<div class="reward"><div class="eyebrow">${T("loot")}</div>
+    <div class="rw-row"><span>${T("lootRight",{n:r.base/10})}</span><b>${T("goldAmt",{n:r.base})}</b></div>
+    ${r.acc?`<div class="rw-row"><span>${T("lootAcc",{p:r.acc100})}</span><b>${T("goldAmt",{n:r.acc})}</b></div>`:`<div class="rw-row muted"><span>${T("lootAccNo",{p:r.acc100})}</span><b>+0</b></div>`}
+    ${r.bonus?`<div class="rw-row"><span>${T("lootDay")}</span><b>${T("goldAmt",{n:r.bonus})}</b></div>`:""}
+    <div class="rw-row"><span>${T("tickets")}</span><b>${T("lootT",{n:r.tickets+r.bonusTickets})}</b></div>
+    <button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goAdv")}</button></div>`;
 }
 
 /* ----- shop & equipment ----- */
 function buy(id){
   const g=game(), it=ITEMS[id]; if(!it) return;
-  if(g.inv.includes(id)) return toast("已經擁有");
-  if(g.lv<it.lv) return toast(`需要 Lv ${it.lv}`);
-  if(g.gold<it.price) return toast(`金幣不足，還差 ${it.price-g.gold}`);
+  if(g.inv.includes(id)) return toast(T("owned"));
+  if(g.lv<it.lv) return toast(T("needLv",{n:it.lv}));
+  if(g.gold<it.price) return toast(T("noGold",{n:it.price-g.gold}));
   g.gold-=it.price; g.inv.push(id); g[it.slot]=id; saveGame();
-  toast(`買下 ${it.name}，已裝備`); render();
+  toast(T("bought",{i:itemName(it)})); render();
 }
 function equip(id){
   const g=game(), it=ITEMS[id]; if(!it||!g.inv.includes(id)) return;
@@ -712,8 +927,8 @@ function equip(id){
 function advice(m){
   const s=stats(), out=[];
   const wm=elMult(s.wEl,m.el), am=elMult(m.el,s.aEl);
-  if(wm>1) out.push(`<span class="adv good">武器剋制 ×1.5</span>`); else if(wm<1) out.push(`<span class="adv bad">武器被剋 ×0.67</span>`);
-  if(am<1) out.push(`<span class="adv good">防具剋制 受傷 ×0.67</span>`); else if(am>1) out.push(`<span class="adv bad">防具被剋 受傷 ×1.5</span>`);
+  if(wm>1) out.push(`<span class="adv good">${T("advWin")}</span>`); else if(wm<1) out.push(`<span class="adv bad">${T("advWlose")}</span>`);
+  if(am<1) out.push(`<span class="adv good">${T("advAwin")}</span>`); else if(am>1) out.push(`<span class="adv bad">${T("advAlose")}</span>`);
   return out.join("");
 }
 function simulate(m, spellOk){
@@ -732,7 +947,7 @@ function simulate(m, spellOk){
 }
 function startBattle(mid){
   const g=game(), m=MONS[mid]; if(!m) return;
-  if(g.tickets<1) return toast("出征令不足，完成測驗就能獲得");
+  if(g.tickets<1) return toast(T("noTicket"));
   S.battle={m, stage:"spell"};
   // spell question needs at least one word in the dictionary
   if(!S.words.size) S.battle.stage="ready";
@@ -762,7 +977,7 @@ function fight(){
 }
 function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
 function monArt(m, hit){
-  return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}"><span class="ms-el">${ELZ[m.el]}</span><span class="ms-name">${esc(m.en)}</span></div>`;
+  return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}"><span class="ms-el">${elShort(m.el)}</span><span class="ms-name">${esc(m.en)}</span></div>`;
 }
 function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div>`; }
 function viewBattle(){
@@ -770,33 +985,33 @@ function viewBattle(){
   const m=B.m, s=stats(), g=game();
   if(B.stage==="spell"||B.stage==="ready"){
     const q=B.q, p=B.picked;
-    const spell = B.stage==="spell" ? `<div class="card qcard"><div class="eyebrow">戰前咒語</div><div class="muted" style="font-size:14px">答對這題，第一擊造成 2 倍傷害。</div>
+    const spell = B.stage==="spell" ? `<div class="card qcard"><div class="eyebrow">${T("spell")}</div><div class="muted" style="font-size:14px">${T("spellSub")}</div>
       ${q.type==="cloze"?`<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"),"<u></u>")}</div>`:`<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`}
       <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(p!=null){ if(o.ok) c+=" right"; else if(i===p) c+=" wrong"; } return `<button class="${c}" data-spell="${i}" ${p!=null?"disabled":""}>${esc(o.label)}</button>`; }).join("")}</div>
-      ${p!=null?`<div class="fb ${B.spellOk?"ok":"no"}">${B.spellOk?"咒語成功！第一擊 2 倍傷害":`咒語失敗。正確答案：${esc(q.w.word)} — ${esc(q.w.zh)}`}</div>`:""}</div>` : "";
+      ${p!=null?`<div class="fb ${B.spellOk?"ok":"no"}">${B.spellOk?T("spellOk"):T("spellFail",{w:esc(q.w.word),m:esc(mean(q.w))})}</div>`:""}</div>` : "";
     return `<div class="view">
-      <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">← 撤退</button>
-      <div class="vs">${monArt(m)}<div><div class="eyebrow">Lv ${m.lv} · ${elBadge(m.el)} 屬性</div><h2 style="font-size:24px">${esc(m.zh)}</h2><p class="lore">${esc(m.lore)}</p></div></div>
-      <div class="row">${advice(m)||`<span class="adv">屬性無加成</span>`}</div>
-      <div class="stats"><div class="stat"><b>${s.hp}</b><span>你的 HP</span></div><div class="stat"><b>${s.atk}</b><span>攻擊 ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>防禦 ${elBadge(s.aEl)}</span></div></div>
+      <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("retreat")}</button>
+      <div class="vs">${monArt(m)}<div><div class="eyebrow">Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
+      <div class="row">${advice(m)||`<span class="adv">${T("advNone")}</span>`}</div>
+      <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
-      <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?"跳過咒語，直接出征":"出征！（用 1 張出征令）"}</button>
+      <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?T("skipSpell"):T("fight")}</button>
     </div>`;
   }
   const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp};
-  const log=ev.slice(0,upto).map(e=>e.who==="p"?`<li class="lp">${e.spell?"咒語加持！":e.crit?"會心一擊！":""}你造成 <b>${e.dmg}</b> 傷害</li>`:`<li class="lm">${esc(m.zh)}造成 <b>${e.dmg}</b> 傷害</li>`).reverse().join("");
+  const log=ev.slice(0,upto).map(e=>e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
-    ? `<div class="reward win"><div class="eyebrow">勝利</div><div class="rw-row"><span>經驗值</span><b>+${m.exp}</b></div><div class="rw-row"><span>金幣</span><b>+${m.gold}</b></div>${B.lvUp?`<div class="rw-row lvup"><span>升級！</span><b>Lv ${g.lv}</b></div>`:""}</div>`
-    : `<div class="reward lose"><div class="eyebrow">戰敗</div><p style="margin:0">${esc(m.zh)}太強了。試試換上剋制「${ELZ[m.el]}」屬性的武器（${ELZ[Object.keys(BEATS).find(k=>BEATS[k]===m.el)]}屬性），或先打弱一點的怪物升級。</p></div>`) : "";
+    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}</span><b>+${m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${m.gold}</b></div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}</div>`
+    : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p></div>`) : "";
   return `<div class="view">
     <div class="arena">
       <div class="side">${monArt(m, last&&last.who==="p")}${hpBar(cur.mhp,m.hp,"m")}</div>
-      <div class="side you${last&&last.who==="m"?" hit":""}"><div class="you-card"><b>你 · Lv ${g.lv}</b><span>${elBadge(s.wEl)} ${elBadge(s.aEl)}</span></div>${hpBar(cur.php,B.res.maxP,"p")}</div>
+      <div class="side you${last&&last.who==="m"?" hit":""}"><div class="you-card"><b>${T("you",{lv:g.lv})}</b><span>${elBadge(s.wEl)} ${elBadge(s.aEl)}</span></div>${hpBar(cur.php,B.res.maxP,"p")}</div>
     </div>
     ${end}
     <ul class="blog">${log}</ul>
-    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">回到冒險</button>${g.tickets>0?`<button class="btn ghost" data-mon="${m.id}">再戰一次</button>`:""}</div>`:`<button class="btn ghost" data-act="skip">跳過動畫</button>`}
+    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${g.tickets>0?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<button class="btn ghost" data-act="skip">${T("skipAnim")}</button>`}
   </div>`;
 }
 
@@ -806,19 +1021,19 @@ function cycleSvg(){
   const pos=Object.fromEntries(pts.map(p=>[p.k,p]));
   const arrows=Object.entries(BEATS).map(([a,b])=>{ const p=pos[a], q=pos[b]; const dx=q.x-p.x, dy=q.y-p.y, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
     return `<line x1="${(p.x+ux*20).toFixed(1)}" y1="${(p.y+uy*20).toFixed(1)}" x2="${(q.x-ux*24).toFixed(1)}" y2="${(q.y-uy*24).toFixed(1)}" class="cy-arrow" marker-end="url(#ah)"/>`; }).join("");
-  return `<svg viewBox="0 0 220 200" class="cycle" role="img" aria-label="五行相剋：金剋木、木剋土、土剋水、水剋火、火剋金">
+  return `<svg viewBox="0 0 220 200" class="cycle" role="img" aria-label="${T("cycleAria")}">
     <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="cy-head"/></marker></defs>
-    ${arrows}${pts.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="18" class="cy-n el-fill-${p.k}"/><text x="${p.x.toFixed(1)}" y="${(p.y+6).toFixed(1)}" text-anchor="middle" class="cy-t">${p.z}</text>`).join("")}</svg>`;
+    ${arrows}${pts.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="18" class="cy-n el-fill-${p.k}"/><text x="${p.x.toFixed(1)}" y="${(p.y+6).toFixed(1)}" text-anchor="middle" class="cy-t">${elShort(p.k)}</text>`).join("")}</svg>`;
 }
 function itemRow(it, mode){
   const g=game(), own=g.inv.includes(it.id), on=g[it.slot]===it.id, locked=g.lv<it.lv;
-  const stat = it.slot==="weapon" ? `攻擊 +${it.atk}` : `防禦 +${it.def} · HP +${it.hp}`;
+  const stat = it.slot==="weapon" ? T("atkPlus",{n:it.atk}) : T("defPlus",{d:it.def,h:it.hp});
   let act;
-  if(mode==="bag") act=`<button class="btn ${on?"ghost":""} sm" data-equip="${it.id}">${on?"卸下":"裝備"}</button>`;
-  else if(own) act=`<button class="btn ghost sm" data-equip="${it.id}">${on?"已裝備":"裝備"}</button>`;
-  else if(locked) act=`<span class="muted sm-t">Lv ${it.lv} 解鎖</span>`;
-  else act=`<button class="btn sm" data-buy="${it.id}" ${g.gold<it.price?"disabled":""}>${it.price} 金</button>`;
-  return `<div class="item${on?" on":""}">${elBadge(it.el,true)}<div class="it-main"><b>${esc(it.name)} <span class="tier">${TIER[it.tier].n}</span></b><span class="muted">${it.slot==="weapon"?"武器":"防具"} · ${stat}</span></div>${act}</div>`;
+  if(mode==="bag") act=`<button class="btn ${on?"ghost":""} sm" data-equip="${it.id}">${on?T("unequip"):T("equip")}</button>`;
+  else if(own) act=`<button class="btn ghost sm" data-equip="${it.id}">${on?T("equipped"):T("equip")}</button>`;
+  else if(locked) act=`<span class="muted sm-t">${T("unlockAt",{n:it.lv})}</span>`;
+  else act=`<button class="btn sm" data-buy="${it.id}" ${g.gold<it.price?"disabled":""}>${T("price",{n:it.price})}</button>`;
+  return `<div class="item${on?" on":""}">${elBadge(it.el,true)}<div class="it-main"><b>${esc(itemName(it))} <span class="tier">${TIER[it.tier].n}</span></b><span class="muted">${it.slot==="weapon"?T("weapon"):T("armor")} · ${stat}</span></div>${act}</div>`;
 }
 function viewAdv(){
   const g=game(), s=stats(), need=expNeed(g.lv);
@@ -828,30 +1043,30 @@ function viewAdv(){
   if(sub==="go"){
     body=REGIONS.map(r=>{
       const open=g.lv>=r.lv;
-      return `<section class="region${open?"":" locked"}"><div class="rg-head"><div><div class="eyebrow">${esc(r.en)}</div><h3>${esc(r.name)}</h3></div><span class="muted sm-t">${open?`建議 Lv ${r.lv}+`:`Lv ${r.lv} 解鎖`}</span></div>
-        ${open?`<div class="mons">${r.mons.map(m=>`<button class="mon" data-mon="${m.id}">${elBadge(m.el,true)}<span class="it-main"><b>${esc(m.zh)} <span class="muted" style="font-weight:400">${esc(m.en)}</span></b><span class="muted">Lv ${m.lv} · HP ${m.hp} · 攻 ${m.atk}${g.wins[m.id]?` · 擊敗 ${g.wins[m.id]} 次`:""}</span><span class="row" style="gap:4px">${advice(m)}</span></span><span class="go-t">出征</span></button>`).join("")}</div>`:""}</section>`;
+      return `<section class="region${open?"":" locked"}"><div class="rg-head"><div>${LANG==="en"?"":`<div class="eyebrow">${esc(r.en)}</div>`}<h3>${esc(regName(r))}</h3></div><span class="muted sm-t">${open?T("suggest",{n:r.lv}):T("unlockAt",{n:r.lv})}</span></div>
+        ${open?`<div class="mons">${r.mons.map(m=>`<button class="mon" data-mon="${m.id}">${elBadge(m.el,true)}<span class="it-main"><b>${esc(monName(m))} <span class="muted" style="font-weight:400">${esc(monSub(m))}</span></b><span class="muted">${T("monLine",{lv:m.lv,hp:m.hp,atk:m.atk})}${g.wins[m.id]?T("beaten",{n:g.wins[m.id]}):""}</span><span class="row" style="gap:4px">${advice(m)}</span></span><span class="go-t">${T("go")}</span></button>`).join("")}</div>`:""}</section>`;
     }).join("");
   } else if(sub==="shop"){
     const f=S.shopEl||"all";
-    const fseg=`<div class="seg">${[["all","全部"],...ELS.map(e=>[e.k,e.z])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`;
+    const fseg=`<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`;
     const list=Object.values(ITEMS).filter(it=>f==="all"||it.el===f).sort((a,b)=>a.tier-b.tier||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
     body=fseg+`<div class="items">${list.map(it=>itemRow(it,"shop")).join("")}</div>`;
   } else {
     const own=g.inv.map(id=>ITEMS[id]).filter(Boolean);
-    body= own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><h3>背包是空的</h3><p>完成測驗賺金幣，到商店買第一件裝備。</p></div>`;
+    body= own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
   }
   return `<div class="view">
     <section class="hero-card">
-      <div class="hc-top"><div><div class="eyebrow">冒險者</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>金幣</span></div><div class="purse"><b>${g.tickets}</b><span>出征令</span></div></div>
-      <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">經驗值 ${g.exp} / ${need}</div>
-      <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>攻擊 <b>${s.atk}</b></span><span>防禦 <b>${s.def}</b></span></div>
-      <div class="slots"><div class="slot">${elBadge(s.wEl)}<span><small>武器</small>${g.weapon?esc(ITEMS[g.weapon].name):"空手"}</span></div><div class="slot">${elBadge(s.aEl)}<span><small>防具</small>${g.armor?esc(ITEMS[g.armor].name):"布衣"}</span></div></div>
+      <div class="hc-top"><div><div class="eyebrow">${T("hero")}</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div></div>
+      <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
+      <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
+      <div class="slots"><div class="slot">${elBadge(s.wEl)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${elBadge(s.aEl)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
     </section>
-    <details class="card rules"><summary>五行相剋怎麼用？</summary>${cycleSvg()}
-      <p>箭頭代表「剋」：金剋木、木剋土、土剋水、水剋火、火剋金。</p>
-      <p><b>武器</b>剋制怪物屬性，傷害 ×1.5；被怪物剋制，傷害 ×0.67。<br><b>防具</b>剋制怪物屬性，受到的傷害 ×0.67；被怪物剋制，受到的傷害 ×1.5。</p>
-      <p>金幣從測驗來：每答對一題 10 金，正確率 80% 以上再加 20，全對再加 20。每完成一次測驗得 1 張出征令，完成當天三步驟再多 30 金和 1 張。</p></details>
-    <div class="seg" role="group">${seg("go","出征")}${seg("shop","商店")}${seg("bag","背包")}</div>
+    <details class="card rules"><summary>${T("rulesQ")}</summary>${cycleSvg()}
+      <p>${T("rules1")}</p>
+      <p>${T("rules2")}</p>
+      <p>${T("rules3")}</p></details>
+    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
     ${body}
   </div>`;
 }
@@ -861,13 +1076,14 @@ const ART_BASES=["../Che_daily_improvement/articles/","articles/"]; let ART_BASE
 async function loadArticle(id){
   if(S.articles.some(a=>a.id===id)) return true;
   try{ const r=await fetch(ART_BASE+encodeURIComponent(id)+".json",{cache:"no-cache"}); if(!r.ok) throw 0; const a=await r.json(); a.id=id; S.articles.push(a); S.articles.sort(byOrder); return true; }
-  catch(e){ toast("文章載入失敗，請檢查網路"); return false; }
+  catch(e){ toast(T("artLoadFail")); return false; }
 }
 const byOrder=(a,b)=>b.date.localeCompare(a.date)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
-  const t=e.target.closest("[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  const t=e.target.closest("[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
   if(!t) return;
+  if(t.dataset.lang) return setLang(t.dataset.lang);
   if(t.dataset.advtab){ S.advTab=t.dataset.advtab; return render(); }
   if(t.dataset.shopel){ S.shopEl=t.dataset.shopel; return render(); }
   if(t.dataset.buy) return buy(t.dataset.buy);
@@ -882,10 +1098,12 @@ document.addEventListener("click", e=>{
   if(t.dataset.open){ S.open=S.open===t.dataset.open?null:t.dataset.open; S.confirmDel=null; return render(); }
   if(t.dataset.sort){ S.dictSort=t.dataset.sort; return render(); }
   if(t.dataset.askdel){ S.confirmDel=t.dataset.askdel; return render(); }
-  if(t.dataset.del){ remove(t.dataset.del); S.open=null; S.confirmDel=null; toast("已移除"); return render(); }
+  if(t.dataset.del){ remove(t.dataset.del); S.open=null; S.confirmDel=null; toast(T("removed")); return render(); }
   if(t.dataset.artid){ openArticle(t.dataset.artid); return; }
   const a=t.dataset.act;
   if(a==="close"){ S.sheet=null; return renderSheet(); }
+  if(a==="lang"){ S.sheet=null; S.langSheet=true; return renderSheet(); }
+  if(a==="closelang"){ S.langSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
   if(a==="fight") return fight();
   if(a==="skip"){ if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
@@ -906,6 +1124,7 @@ document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.sheet){ S.she
 
 /* ---------- boot ---------- */
 S.index=[];
+document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi"}[LANG]; applyStaticText();
 render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
@@ -918,8 +1137,8 @@ render();
     const recent=S.index.slice(0,12);
     const docs=await Promise.all(recent.map(a=>fetch(ART_BASE+encodeURIComponent(a.id)+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)));
     S.articles=docs.map((d,i)=>d&&{...d, id:recent[i].id}).filter(Boolean).sort(byOrder);
-  }catch(e){ toast("文章載入失敗，請檢查網路"); }
-  S.ready.articles=true; render();
+  }catch(e){ toast(T("artLoadFail")); }
+  S.ready.articles=true; fillMeanings(); render();
 })();
 </script>
 </body>
