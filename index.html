@@ -221,6 +221,9 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .blog li{padding:6px 10px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
 .blog li.lm{color:var(--bad)} .blog li.lp b{color:var(--accent)}
 .mast-r{display:flex;align-items:center;gap:10px}
+header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::after{content:"DEV";margin-left:8px;font-size:11px;background:var(--bad);color:#fff;border-radius:6px;padding:2px 6px;vertical-align:middle}
+.dev-card{display:flex;flex-direction:column;gap:10px;border:2px solid var(--bad)}.dev-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.dev-grid .btn{padding:9px 8px;font-size:13px}
+.dev-foot{display:flex;flex-direction:column;gap:8px;align-items:center;padding:8px 0 4px}.ver{background:none;border:0;color:var(--muted);font-size:12px;padding:8px}
 .lang-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--ink);min-width:36px}
 .el{font-size:11px}.el.big{font-size:16px}
 .conq-head{display:flex;flex-direction:column;gap:6px}
@@ -820,12 +823,14 @@ function viewSettings(){
   const lvls=LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("");
   return `<div class="view">
     <div><div class="eyebrow">Che Daily Pro</div><h2 style="font-size:24px">${T("tabSet")}</h2></div>
+    ${devPanel()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
     <section class="card set-sec"><b>${T("language")} · Language</b><div class="opts">${langs}</div></section>
     <section class="card set-sec"><b>${T("level")}</b><div class="opts">${lvls}</div></section>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    ${devFooter()}
   </div>`;
 }
 function exportData(){
@@ -1701,6 +1706,60 @@ function viewLuck(){
   </div>`;
 }
 
+/* ================= Developer mode (sandbox) =================
+   Unlock: Settings → tap the version line 5 times → enter the developer code.
+   Only the SHA-256 hash of the code is stored here.
+   While on: game changes are a sandbox — the cloud keeps your real save, the leaderboard is not updated,
+   and leaving developer mode restores the save you had before. */
+const DEV_HASH="a55803e97b05ec565ac5533a6ca2628927062db712444af2663b1651267154b4";
+const DEV_KEY="che-pro-dev";
+let DEV=(()=>{ try{ return JSON.parse(localStorage.getItem(DEV_KEY)||"null"); }catch(e){ return null; } })();
+Object.assign(STR.zh,{devTitle:"開發者模式", devOn:"開發者模式已開啟", devSub:"這裡的改動都是測試用：雲端會保留你原本的進度，排行榜不會更新。離開開發者模式時，遊戲進度會還原成開啟前的樣子。", devCode:"輸入開發者密碼", devGo:"開啟", devBad:"密碼不正確", devExit:"離開開發者模式（還原原本進度）", devExited:"已離開開發者模式，進度已還原",
+ dGold:"+1000 金幣", dTickets:"+10 出征令", dLotto:"+10 彩券", dShards:"每種碎片 +5", dLvUp:"等級 +1", dLv20:"直接 Lv 20", dItems:"拿到全部裝備", dConq:"佔領全部城鎮", dUnconq:"清除佔領", dToday:"重置今天", dDone:"完成", version:"版本"});
+Object.assign(STR.en,{devTitle:"Developer mode", devOn:"Developer mode is on", devSub:"Changes here are for testing: the cloud keeps your real save and the leaderboard isn't updated. Leaving developer mode restores your game to how it was before.", devCode:"Enter the developer code", devGo:"Unlock", devBad:"Wrong code", devExit:"Leave developer mode (restore my save)", devExited:"Left developer mode. Your save has been restored",
+ dGold:"+1000 gold", dTickets:"+10 quest passes", dLotto:"+10 lucky tickets", dShards:"+5 of every shard", dLvUp:"Level +1", dLv20:"Jump to Lv 20", dItems:"Get all gear", dConq:"Conquer every town", dUnconq:"Clear conquests", dToday:"Reset today", dDone:"Done", version:"Version"});
+async function sha256(t){ const b=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
+function devSave(){ try{ if(DEV) localStorage.setItem(DEV_KEY, JSON.stringify(DEV)); else localStorage.removeItem(DEV_KEY); }catch(e){} }
+async function devUnlock(){
+  const v=(($("#devCode")||{}).value||"").trim().toLowerCase(); if(!v) return;
+  let h=""; try{ h=await sha256(v); }catch(e){}
+  if(h!==DEV_HASH){ toast(T("devBad")); return; }
+  const d=dayRec();
+  DEV={on:true, game:JSON.parse(JSON.stringify(game())), day:JSON.parse(JSON.stringify(d))}; devSave();
+  S.devAsk=false; S.devTaps=0; toast(T("devOn")); render(); applyMast();
+}
+function devExit(){
+  if(!DEV) return;
+  S.game={...G_DEFAULT, ...DEV.game}; if(DEV.day&&DEV.day.date) saveDay(DEV.day);
+  DEV=null; devSave(); saveGame(); toast(T("devExited")); render(); applyMast();
+}
+function devAct(k){
+  const g=game();
+  if(k==="gold") g.gold+=1000;
+  else if(k==="tickets") g.tickets+=10;
+  else if(k==="lotto") g.lotto=(g.lotto||0)+10;
+  else if(k==="shards"){ for(const e of ELS) for(let i=0;i<TIER.length;i++) addShard(e.k,i,5); }
+  else if(k==="lvup"){ g.lv+=1; g.exp=0; }
+  else if(k==="lv20"){ g.lv=Math.max(g.lv,20); g.exp=0; }
+  else if(k==="items"){ g.inv=[...new Set([...g.inv, ...Object.keys(ITEMS)])]; }
+  else if(k==="conq"){ g.conq=g.conq||{}; for(const t of TOWNS) g.conq[t.id]=g.conq[t.id]||today(); }
+  else if(k==="unconq"){ g.conq={}; }
+  else if(k==="today"){ const d=dayRec(); saveDay({type:"day", date:d.date, preDone:false, postDone:false, read:null, lookedUp:d.lookedUp||[], lookedUpBy:d.lookedUpBy||{}}); g.revN=0; g.revDate=null; g.taxDate=null; }
+  saveGame(); toast(T("dDone")); render();
+}
+function devPanel(){
+  if(!DEV) return "";
+  const b=(k,l)=>`<button class="btn ghost sm" data-act="dev" data-k="${k}">${T(l)}</button>`;
+  return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>
+    <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}</div>
+    <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
+}
+function devFooter(){
+  return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} 2026.10.12</button>
+    ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
+}
+function applyMast(){ const m=document.querySelector("header.mast"); if(m) m.classList.toggle("dev", !!DEV); }
+
 /* ---------- events ---------- */
 const ART_BASES=["../Che_daily_improvement/articles/","articles/"]; let ART_BASE=ART_BASES[0];
 async function loadArticle(id){
@@ -1741,6 +1800,10 @@ document.addEventListener("click", e=>{
   if(a==="level"){ S.sheet=null; S.langSheet=false; S.levelSheet=true; return renderSheet(); }
   if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
+  if(a==="devtap"){ S.devTaps=(S.devTaps||0)+1; if(S.devTaps>=5&&!DEV){ S.devAsk=true; render(); setTimeout(()=>{ const i=$("#devCode"); if(i) i.focus(); },50); } return; }
+  if(a==="devunlock") return devUnlock();
+  if(a==="devexit") return devExit();
+  if(a==="dev") return devAct(t.dataset.k);
   if(a==="rev") return startQuiz("rev");
   if(a==="goluck"){ S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
   if(a==="spin") return spinWheel();
@@ -1771,7 +1834,7 @@ document.addEventListener("click", e=>{
 });
 document.addEventListener("change", e=>{ if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
-document.addEventListener("keydown", e=>{ if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+document.addEventListener("keydown", e=>{ if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -1851,8 +1914,8 @@ async function cloudFlush(){
   CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false;
   try{
     const ops=[];
-    if(main) setTimeout(lbPush,0);
-    if(main) ops.push(b=>b.set(userRef(),{game:S.game||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
+    if(main&&!DEV) setTimeout(lbPush,0);
+    if(main) ops.push(b=>b.set(userRef(),{game:(DEV?DEV.game:S.game)||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
     for(const k of words){ const v=S.words.get(k); if(v) ops.push(b=>b.set(fsM.doc(wordsCol(),k), JSON.parse(JSON.stringify(v)))); }
     for(const k of dels) ops.push(b=>b.delete(fsM.doc(wordsCol(),k)));
     for(let i=0;i<ops.length;i+=400){ const b=fsM.writeBatch(db); ops.slice(i,i+400).forEach(f=>f(b)); await b.commit(); }
@@ -1889,6 +1952,7 @@ Object.assign(STR.es,{tabRank:"Ranking", tabCoop:"Cooperativo", rkPower:"Poder",
 const powerOf=s=>s.hp+s.atk*3+s.def*2;
 function lbEntry(){ const g=game(), s=stats(); return {name:(g.nick||"").slice(0,16), lv:g.lv|0, hp:s.hp|0, atk:s.atk|0, def:s.def|0, power:powerOf(s)|0, conq:Object.keys(g.conq||{}).length, updatedAt:new Date().toISOString()}; }
 async function lbPush(){
+  if(DEV) return;
   if(!CLOUD.user||!CLOUD.fb||!game().nick) return;
   const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:0});
   if(sig===CLOUD.lbSig) return;
@@ -2103,7 +2167,7 @@ Object.assign(STR.es,{"revTitle": "Repaso del diccionario", "revSub": "{n} pregu
 Object.assign(STR.ja,{"revTitle": "単語帳の復習", "revSub": "単語帳から{n}問。苦手な単語や、しばらく復習していない単語ほど出やすくなります。1回終えるとくじ券が1枚もらえます。", "revLeft": "今日はあと{n}枚くじ券をもらえます", "revNoMore": "今日のくじ券はもらい終えました。復習は続けられます", "revStart": "復習を始める →", "revNeed": "復習するには単語帳に{n}語以上必要です", "lottoGot": "くじ券を1枚手に入れました", "lottoCap": "復習でもらえる今日のくじ券は上限です（{n}枚）", "lotto": "くじ券", "goLuck": "運だめしへ →", "backDict": "単語帳に戻る", "tabLuck": "幸運", "luckSub": "単語帳の復習を1回終えるとくじ券が1枚（1日最大{n}枚）。1枚でルーレットを1回、2枚以上でスクラッチカードが買えます。", "wheelTitle": "幸運のルーレット", "wheelSpin": "回す（くじ券1枚）", "wheelBusy": "回転中…", "noLotto": "くじ券が足りません。単語帳の復習でもらえます", "wheelWin": "当たり：{p}", "pGold": "{n} G", "pTicket": "出撃券 ×{n}", "pLotto": "くじ券 ×{n}", "pShard": "{e}属性 ランク{t}のかけら ×{n}", "pShardAny": "ランダム属性 ランク{t}のかけら", "shardWord": "かけら", "scTitle": "スクラッチカード", "scSub": "高いカードほど、高ランクのかけらが出やすくなります。属性はランダムです。", "scBronze": "銅カード", "scSilver": "銀カード", "scGold": "金カード", "scCost": "くじ券 {n}枚", "scHint": "銀色の部分を指でけずってください", "scAll": "全部けずる", "scTake": "受け取る", "scHere": "ここをけずる", "shTitle": "属性のかけら", "shSub": "同じ属性・同じランクのかけらを{n}個集めると、その属性とランクの装備（武器か防具）をランダムに1つ合成できます。", "forge": "合成", "forged": "{i}を合成しました！バッグに入っています", "forgeDup": "この属性とランクの武器・防具はどちらも持っているので、代わりに{n} Gを受け取りました", "oddsTitle": "確率一覧", "oddsDouble": "{p}%の確率で2個", "cyGen": "生", "cyBeat": "剋", "rules1": "星形の矢印は「剋」で、戦闘のボーナスを決めます：金は木に、木は土に、土は水に、水は火に、火は金に勝ちます。外側の緑の矢印は「生」（金→水→木→火→土→金）で、五行の関係を示すだけで戦闘には影響しません。", "cycleAria": "五行。相剋：金→木、木→土、土→水、水→火、火→金。相生：金→水→木→火→土→金。"});
 Object.assign(STR.ko,{"revTitle": "단어장 복습", "revSub": "단어장에서 {n}문제. 잘 모르는 단어나 오래 복습하지 않은 단어일수록 더 자주 나와요. 한 번 끝내면 복권 1장을 받아요.", "revLeft": "오늘 복권을 {n}장 더 받을 수 있어요", "revNoMore": "오늘 받을 복권은 다 받았어요. 복습은 계속할 수 있어요", "revStart": "복습 시작 →", "revNeed": "복습하려면 단어장에 단어가 {n}개 이상 있어야 해요", "lottoGot": "복권 1장을 받았어요", "lottoCap": "오늘 복습으로 받을 수 있는 복권을 다 받았어요 ({n}장)", "lotto": "복권", "goLuck": "행운 뽑기 →", "backDict": "단어장으로", "tabLuck": "행운", "luckSub": "단어장 복습을 한 번 끝내면 복권 1장 (하루 최대 {n}장). 1장으로 룰렛을 한 번 돌리고, 2장 이상이면 긁는 복권을 살 수 있어요.", "wheelTitle": "행운의 룰렛", "wheelSpin": "돌리기 (복권 1장)", "wheelBusy": "돌아가는 중…", "noLotto": "복권이 부족해요. 단어장 복습을 끝내면 받을 수 있어요", "wheelWin": "당첨: {p}", "pGold": "{n} 골드", "pTicket": "출정권 ×{n}", "pLotto": "복권 ×{n}", "pShard": "{e} 속성 {t}등급 조각 ×{n}", "pShardAny": "무작위 속성 {t}등급 조각", "shardWord": "조각", "scTitle": "긁는 복권", "scSub": "비싼 카드일수록 높은 등급 조각이 잘 나와요. 속성은 무작위예요.", "scBronze": "동 카드", "scSilver": "은 카드", "scGold": "금 카드", "scCost": "복권 {n}장", "scHint": "손가락으로 은색 부분을 긁어 주세요", "scAll": "모두 긁기", "scTake": "받기", "scHere": "여기를 긁으세요", "shTitle": "속성 조각", "shSub": "같은 속성, 같은 등급 조각을 {n}개 모으면 그 속성과 등급의 장비(무기 또는 방어구)를 무작위로 하나 합성할 수 있어요.", "forge": "합성", "forged": "{i} 합성 성공! 가방에 넣었어요", "forgeDup": "이 속성과 등급의 무기와 방어구를 모두 갖고 있어서 대신 {n} 골드를 받았어요", "oddsTitle": "확률 보기", "oddsDouble": "{p}% 확률로 2개", "cyGen": "생", "cyBeat": "극", "rules1": "별 모양 안의 화살표는 '극'이며 전투 보너스를 정해요: 금은 나무를, 나무는 흙을, 흙은 물을, 물은 불을, 불은 금을 이겨요. 바깥의 초록 화살표는 '생'(금→물→나무→불→흙→금)으로, 오행의 관계를 보여 줄 뿐 전투에는 영향이 없어요.", "cycleAria": "오행. 상극: 금→나무, 나무→흙, 흙→물, 물→불, 불→금. 상생: 금→물→나무→불→흙→금."});
 Object.assign(STR.zh,{tabSet:"設定"});Object.assign(STR.en,{tabSet:"Settings"});Object.assign(STR.hi,{tabSet:"सेटिंग्स"});Object.assign(STR.es,{tabSet:"Ajustes"});Object.assign(STR.ja,{tabSet:"設定"});Object.assign(STR.ko,{tabSet:"설정"});
-document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText();
+document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
