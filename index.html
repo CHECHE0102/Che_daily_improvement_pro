@@ -266,6 +266,32 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .gbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #747775;align-self:flex-start}
 .avatar{width:36px;height:36px;border-radius:50%;flex:none}
 .bad-t{color:var(--bad)}
+.rk{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.rk-row{display:grid;grid-template-columns:34px 1fr auto;grid-template-rows:auto auto;column-gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);align-items:center}
+.rk-row:last-child{border-bottom:0}.rk-row.me{background:var(--accent-soft)}
+.rk-n{grid-row:1/3;font-family:var(--f-display);font-weight:700;font-size:18px;text-align:center;font-variant-numeric:tabular-nums}
+.rk-name{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rk-sub{grid-column:2;font-size:12px}
+.rk-v{grid-row:1/3;grid-column:3;font-family:var(--f-display);font-size:20px;font-variant-numeric:tabular-nums}
+.rk-me{font-weight:700;color:var(--accent)}
+.nick{display:flex;flex-direction:column;gap:8px}
+.co-box{display:flex;flex-direction:column;gap:14px}
+.co-hero{display:flex;gap:14px;align-items:center}.co-art{width:72px;height:72px;flex:none}.co-art svg{width:100%;height:100%}
+.co-wait{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.co-code{font-family:var(--f-display);font-size:52px;font-weight:700;letter-spacing:.15em;font-variant-numeric:tabular-nums;color:var(--accent)}
+.co-top{position:sticky;top:calc(env(safe-area-inset-top,0px) + 50px);z-index:3;background:var(--paper);padding-block:6px;display:flex;flex-direction:column;gap:6px}
+.co-bar{display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:center;font-size:12px;font-weight:700}
+.co-bar .hp{background:var(--line)}
+.co-text{font-size:19px}
+.cw{cursor:pointer;border-radius:4px;padding:0 1px}
+.cw:active{background:var(--accent-soft)}
+.cw.bad{background:var(--bad-soft);animation:shake .3s}
+.cw.fixed s,.cw.missed s{color:var(--muted)}
+.cw.fixed ins{text-decoration:none;font-weight:700;border-radius:4px;padding:0 3px}
+.cw.mine ins{background:var(--good-soft);color:var(--good)}.cw.mate ins{background:var(--gorse-soft);color:var(--ink)}
+.cw.missed ins{text-decoration:none;font-weight:700;color:var(--bad)}
+.co-list{display:flex;flex-direction:column;gap:8px}
+.co-err{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+@media (prefers-reduced-motion:reduce){.cw.bad{animation:none}}
 </style>
 
 </head>
@@ -1360,6 +1386,10 @@ function viewAdv(){
     const fseg=`<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`;
     const list=Object.values(ITEMS).filter(it=>f==="all"||it.el===f).sort((a,b)=>a.tier-b.tier||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
     body=fseg+`<div class="items">${list.map(it=>itemRow(it,"shop")).join("")}</div>`;
+  } else if(sub==="rank"){
+    body=viewRank();
+  } else if(sub==="coop"){
+    body=viewCoop();
   } else {
     const own=g.inv.map(id=>ITEMS[id]).filter(Boolean);
     body= own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
@@ -1375,7 +1405,7 @@ function viewAdv(){
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
       <p>${T("rules3")}</p></details>
-    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
+    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop",T("tabCoop"))}${seg("rank",T("tabRank"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
     ${body}
   </div>`;
 }
@@ -1390,12 +1420,14 @@ async function loadArticle(id){
 const byOrder=(a,b)=>b.date.localeCompare(a.date)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
-  const t=e.target.closest("[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  const t=e.target.closest("[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
   if(!t) return;
   if(t.dataset.lang) return setLang(t.dataset.lang);
   if(t.dataset.level) return setLevel(t.dataset.level);
   if(t.dataset.town){ S.selTown=S.selTown===t.dataset.town?null:t.dataset.town; render(); if(S.selTown&&t.tagName==="BUTTON"){ const m=document.querySelector(".map-wrap"); if(m) m.scrollIntoView({behavior:"smooth",block:"start"}); } return; }
-  if(t.dataset.advtab){ S.advTab=t.dataset.advtab; return render(); }
+  if(t.dataset.co!==undefined) return coTap(+t.dataset.co);
+  if(t.dataset.rkby){ S.rkBy=t.dataset.rkby; S.rk=null; return render(); }
+  if(t.dataset.advtab){ S.advTab=t.dataset.advtab; if(t.dataset.advtab==="rank") S.rk=null; return render(); }
   if(t.dataset.shopel){ S.shopEl=t.dataset.shopel; return render(); }
   if(t.dataset.buy) return buy(t.dataset.buy);
   if(t.dataset.equip) return equip(t.dataset.equip);
@@ -1419,6 +1451,11 @@ document.addEventListener("click", e=>{
   if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
   if(a==="signin") return cloudSignIn();
+  if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } game().nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render()); return; }
+  if(a==="cocreate") return coCreate();
+  if(a==="cojoin") return coJoin(($("#coCode")||{}).value);
+  if(a==="cosolo") return coStartSolo();
+  if(a==="coleave") return coLeave();
   if(a==="signout") return cloudSignOut();
   if(a==="fight") return fight();
   if(a==="tax") return collectTax();
@@ -1436,6 +1473,7 @@ document.addEventListener("click", e=>{
 });
 document.addEventListener("change", e=>{ if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
+document.addEventListener("keydown", e=>{ if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -1515,6 +1553,7 @@ async function cloudFlush(){
   CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false;
   try{
     const ops=[];
+    if(main) setTimeout(lbPush,0);
     if(main) ops.push(b=>b.set(userRef(),{game:S.game||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
     for(const k of words){ const v=S.words.get(k); if(v) ops.push(b=>b.set(fsM.doc(wordsCol(),k), JSON.parse(JSON.stringify(v)))); }
     for(const k of dels) ops.push(b=>b.delete(fsM.doc(wordsCol(),k)));
@@ -1537,6 +1576,223 @@ function accountCard(compact){
   const st={ok:T("synced"),syncing:T("syncing"),err:T("syncFail")}[CLOUD.status]||"";
   return compact?"":`<section class="card acct"><div class="row" style="gap:10px;flex-wrap:nowrap">${u.photoURL?`<img src="${esc(u.photoURL)}" alt="" class="avatar" referrerpolicy="no-referrer">`:""}<div style="min-width:0;flex:1"><b>${T("signedAs",{n:esc(u.displayName||u.email||"")})}</b><div class="muted sm-t ${CLOUD.status==="err"?"bad-t":""}">${st}</div></div><button class="btn ghost" data-act="signout" style="padding:6px 12px;font-size:13px">${T("signOut")}</button></div></section>`;
 }
+
+/* ================= Leaderboard + co-op error hunt ================= */
+Object.assign(STR.zh,{tabRank:"排行榜", tabCoop:"合作", rkPower:"戰力", rkLv:"等級", rkHp:"HP", rkAtk:"攻擊", rkTitle:"排行榜", rkYou:"你目前第 {n} 名", rkNeedLogin:"登入並取一個暱稱，就能上排行榜。", rkEmpty:"還沒有人上榜，你可以當第一個！", rkPowerNote:"戰力 = HP + 攻擊 × 3 + 防禦 × 2", nick:"暱稱", nickSet:"設定暱稱", nickSave:"儲存", nickHint:"1–16 個字，會公開顯示在排行榜上", nickBad:"暱稱要 1–16 個字", nickSaved:"暱稱已儲存", rkConq:"{n} 城", rkLoadFail:"排行榜載入失敗",
+ coTitle:"合作找錯字", coSub:"兩人一起讀同一篇文章，把藏在裡面的錯字找出來打倒魔王。每人花 1 張出征令。", coCreate:"開房間", coJoin:"加入", coCodePh:"輸入 4 位數房間碼", coSolo:"單人練習", coSoloSub:"沒有朋友在線時，自己練習（同樣花 1 張出征令）", coNeedLogin:"合作模式需要登入 Google 帳號。", coWaiting:"等朋友加入…", coShare:"把房間碼告訴朋友：", coCancel:"取消房間", coNoRoom:"找不到這個房間", coFull:"房間已經滿了", coStart:"開始！", coRead:"點出你認為有錯的字。找到一個，魔王扣血；點錯了，隊伍扣血。", coBoss:"錯字魔王", coTeam:"隊伍", coTime:"剩下 {s} 秒", coFoundBy:"{n} 找到", coWin:"勝利！所有錯字都找到了", coLose:"這次沒打倒魔王", coTimeUp:"時間到", coResults:"錯誤講解", coYouFound:"你找到 {n} 個", coMateFound:"隊友找到 {n} 個", coBack:"回到合作大廳", coPlayers:"{a} 和 {b}", coOwn:"你", coTypeSpell:"拼字錯誤", coTypeForm:"詞形錯誤", coTypeConf:"易混淆字", coExpSpell:"拼錯了，正確拼法是 {r}。", coExpForm:"這裡要用 {r}（{p}），不是 {w}。意思是「{m}」。", coExpConf:"{w} 和 {r} 很容易搞混，這裡應該用 {r}：{m}。", coWrongTap:"這個字沒有錯", coMissLeft:"還能點錯 {n} 次", coLeftRoom:"隊友離開了房間", coOpening:"正在開房間…", coJoining:"加入中…", coNoArt:"文章還在載入，請稍等再試"});
+Object.assign(STR.en,{tabRank:"Ranking", tabCoop:"Co-op", rkPower:"Power", rkLv:"Level", rkHp:"HP", rkAtk:"Attack", rkTitle:"Leaderboard", rkYou:"You are #{n}", rkNeedLogin:"Sign in and choose a nickname to join the leaderboard.", rkEmpty:"Nobody is on the board yet — be the first!", rkPowerNote:"Power = HP + Attack × 3 + Defence × 2", nick:"Nickname", nickSet:"Set nickname", nickSave:"Save", nickHint:"1–16 characters, shown publicly on the leaderboard", nickBad:"Nickname must be 1–16 characters", nickSaved:"Nickname saved", rkConq:"{n} towns", rkLoadFail:"Couldn't load the leaderboard",
+ coTitle:"Co-op error hunt", coSub:"Read the same article together and find the hidden mistakes to defeat the boss. Each player spends 1 quest pass.", coCreate:"Create room", coJoin:"Join", coCodePh:"Enter a 4-digit room code", coSolo:"Solo practice", coSoloSub:"Practise on your own when no friend is online (also uses 1 quest pass)", coNeedLogin:"Co-op needs a Google sign-in.", coWaiting:"Waiting for your friend…", coShare:"Tell your friend this room code:", coCancel:"Cancel room", coNoRoom:"Room not found", coFull:"That room is already full", coStart:"Go!", coRead:"Tap every word you think is wrong. Each find hurts the boss; each wrong tap hurts your team.", coBoss:"Error boss", coTeam:"Team", coTime:"{s}s left", coFoundBy:"found by {n}", coWin:"Victory! Every mistake found", coLose:"The boss survived this time", coTimeUp:"Time's up", coResults:"The mistakes explained", coYouFound:"You found {n}", coMateFound:"Your teammate found {n}", coBack:"Back to co-op", coPlayers:"{a} & {b}", coOwn:"You", coTypeSpell:"Spelling", coTypeForm:"Word form", coTypeConf:"Confusable word", coExpSpell:"Misspelt — the correct spelling is {r}.", coExpForm:"This needs {r} ({p}), not {w}. It means \"{m}\".", coExpConf:"{w} and {r} are easy to mix up; here it should be {r}: {m}.", coWrongTap:"That word is correct", coMissLeft:"{n} wrong taps left", coLeftRoom:"Your teammate left the room", coOpening:"Creating room…", coJoining:"Joining…", coNoArt:"Articles are still loading — try again in a moment"});
+Object.assign(STR.hi,{tabRank:"रैंकिंग", tabCoop:"साथ में", rkPower:"शक्ति", rkLv:"लेवल", rkHp:"HP", rkAtk:"आक्रमण", rkTitle:"लीडरबोर्ड", rkYou:"आप #{n} पर हैं", rkNeedLogin:"लीडरबोर्ड पर आने के लिए साइन इन करें और उपनाम चुनें।", rkEmpty:"अभी कोई नहीं है — पहले बनें!", rkPowerNote:"शक्ति = HP + आक्रमण × 3 + रक्षा × 2", nick:"उपनाम", nickSet:"उपनाम चुनें", nickSave:"सहेजें", nickHint:"1–16 अक्षर, लीडरबोर्ड पर सबको दिखेगा", nickBad:"उपनाम 1–16 अक्षर का हो", nickSaved:"उपनाम सहेजा गया", rkConq:"{n} शहर", rkLoadFail:"लीडरबोर्ड लोड नहीं हुआ",
+ coTitle:"साथ में ग़लती खोजें", coSub:"एक ही लेख साथ पढ़ें और छिपी ग़लतियाँ ढूँढकर दानव को हराएँ। हर खिलाड़ी 1 पास खर्च करता है।", coCreate:"कमरा बनाएँ", coJoin:"जुड़ें", coCodePh:"4 अंकों का कमरा कोड", coSolo:"अकेले अभ्यास", coSoloSub:"जब कोई दोस्त ऑनलाइन न हो तो अकेले अभ्यास करें (1 पास लगेगा)", coNeedLogin:"साथ में खेलने के लिए Google साइन इन ज़रूरी है।", coWaiting:"दोस्त का इंतज़ार…", coShare:"दोस्त को यह कोड बताएँ:", coCancel:"कमरा रद्द करें", coNoRoom:"कमरा नहीं मिला", coFull:"कमरा भर चुका है", coStart:"शुरू!", coRead:"हर ग़लत लगने वाले शब्द पर टैप करें। सही खोज से दानव घायल, ग़लत टैप से टीम घायल।", coBoss:"ग़लती दानव", coTeam:"टीम", coTime:"{s} सेकंड बाकी", coFoundBy:"{n} ने खोजा", coWin:"विजय! सारी ग़लतियाँ मिल गईं", coLose:"इस बार दानव बच गया", coTimeUp:"समय समाप्त", coResults:"ग़लतियों की व्याख्या", coYouFound:"आपने {n} खोजीं", coMateFound:"साथी ने {n} खोजीं", coBack:"वापस", coPlayers:"{a} और {b}", coOwn:"आप", coTypeSpell:"वर्तनी", coTypeForm:"शब्द रूप", coTypeConf:"भ्रमित शब्द", coExpSpell:"वर्तनी ग़लत है — सही है {r}।", coExpForm:"यहाँ {r} ({p}) चाहिए, {w} नहीं। अर्थ: \"{m}\"।", coExpConf:"{w} और {r} में भ्रम होता है; यहाँ {r} सही है: {m}।", coWrongTap:"यह शब्द सही है", coMissLeft:"{n} ग़लत टैप बाकी", coLeftRoom:"साथी ने कमरा छोड़ दिया", coOpening:"कमरा बन रहा है…", coJoining:"जुड़ रहे हैं…", coNoArt:"लेख लोड हो रहे हैं — थोड़ी देर में कोशिश करें"});
+Object.assign(STR.es,{tabRank:"Ranking", tabCoop:"Cooperativo", rkPower:"Poder", rkLv:"Nivel", rkHp:"HP", rkAtk:"Ataque", rkTitle:"Clasificación", rkYou:"Vas en el puesto #{n}", rkNeedLogin:"Inicia sesión y elige un apodo para entrar en la clasificación.", rkEmpty:"Aún no hay nadie: ¡sé el primero!", rkPowerNote:"Poder = HP + Ataque × 3 + Defensa × 2", nick:"Apodo", nickSet:"Elegir apodo", nickSave:"Guardar", nickHint:"1–16 caracteres, visible para todos en la clasificación", nickBad:"El apodo debe tener 1–16 caracteres", nickSaved:"Apodo guardado", rkConq:"{n} ciudades", rkLoadFail:"No se pudo cargar la clasificación",
+ coTitle:"Caza de errores en equipo", coSub:"Leed el mismo artículo y encontrad los errores escondidos para vencer al jefe. Cada jugador gasta 1 pase.", coCreate:"Crear sala", coJoin:"Unirse", coCodePh:"Código de sala de 4 cifras", coSolo:"Práctica individual", coSoloSub:"Practica a solas cuando no haya amigos conectados (también usa 1 pase)", coNeedLogin:"El modo cooperativo requiere iniciar sesión con Google.", coWaiting:"Esperando a tu amigo…", coShare:"Pásale este código a tu amigo:", coCancel:"Cancelar sala", coNoRoom:"No existe esa sala", coFull:"La sala ya está llena", coStart:"¡Vamos!", coRead:"Toca cada palabra que creas que está mal. Cada acierto daña al jefe; cada fallo daña al equipo.", coBoss:"Jefe de errores", coTeam:"Equipo", coTime:"Quedan {s} s", coFoundBy:"encontrado por {n}", coWin:"¡Victoria! Habéis encontrado todos los errores", coLose:"Esta vez el jefe ha sobrevivido", coTimeUp:"Se acabó el tiempo", coResults:"Los errores explicados", coYouFound:"Encontraste {n}", coMateFound:"Tu compañero encontró {n}", coBack:"Volver", coPlayers:"{a} y {b}", coOwn:"Tú", coTypeSpell:"Ortografía", coTypeForm:"Forma de la palabra", coTypeConf:"Palabra confusa", coExpSpell:"Mal escrita: lo correcto es {r}.", coExpForm:"Aquí va {r} ({p}), no {w}. Significa «{m}».", coExpConf:"{w} y {r} se confunden fácilmente; aquí va {r}: {m}.", coWrongTap:"Esa palabra está bien", coMissLeft:"Te quedan {n} fallos", coLeftRoom:"Tu compañero ha salido de la sala", coOpening:"Creando sala…", coJoining:"Uniéndote…", coNoArt:"Los artículos aún se están cargando; inténtalo enseguida"});
+
+/* ----- leaderboard ----- */
+const powerOf=s=>s.hp+s.atk*3+s.def*2;
+function lbEntry(){ const g=game(), s=stats(); return {name:(g.nick||"").slice(0,16), lv:g.lv|0, hp:s.hp|0, atk:s.atk|0, def:s.def|0, power:powerOf(s)|0, conq:Object.keys(g.conq||{}).length, updatedAt:new Date().toISOString()}; }
+async function lbPush(){
+  if(!CLOUD.user||!CLOUD.fb||!game().nick) return;
+  const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:0});
+  if(sig===CLOUD.lbSig) return;
+  try{ await fsM.setDoc(fsM.doc(db,"leaderboard",CLOUD.user.uid), e); CLOUD.lbSig=sig; }catch(err){ console.warn("leaderboard",err&&err.code); }
+}
+async function lbLoad(){
+  if(!CLOUD.user||!CLOUD.fb) return;
+  const {fsM,db}=CLOUD.fb; const f=S.rkBy||"power";
+  S.rk={loading:true, rows:S.rk&&S.rk.by===f?S.rk.rows:[], by:f}; render();
+  try{
+    await lbPush();
+    const q=fsM.query(fsM.collection(db,"leaderboard"), fsM.orderBy(f,"desc"), fsM.limit(50));
+    const snap=await fsM.getDocs(q); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()}));
+    let me=null; const mine=rows.findIndex(r=>r.id===CLOUD.user.uid);
+    if(mine>=0) me=mine+1;
+    else if(game().nick){ const c=await fsM.getCountFromServer(fsM.query(fsM.collection(db,"leaderboard"), fsM.where(f,">",lbEntry()[f]))); me=c.data().count+1; }
+    S.rk={rows, by:f, me};
+  }catch(e){ S.rk={rows:[], by:f, err:true}; }
+  render();
+}
+function nickForm(){ const g=game(); return `<div class="card nick"><label for="nickIn"><b>${T("nick")}</b></label><div class="row" style="flex-wrap:nowrap"><input id="nickIn" class="search" maxlength="16" value="${esc(g.nick||"")}" placeholder="${T("nickSet")}" autocomplete="off"><button class="btn" data-act="nicksave" style="flex:none">${T("nickSave")}</button></div><span class="muted sm-t">${T("nickHint")}</span></div>`; }
+function viewRank(){
+  if(!CLOUD.user) return `<div class="card empty"><p>${T("rkNeedLogin")}</p></div>${accountCard(false)}`;
+  const g=game(), f=S.rkBy||"power";
+  if(!S.rk||S.rk.by!==f){ setTimeout(lbLoad,0); }
+  const tabs=[["power",T("rkPower")],["lv",T("rkLv")],["hp",T("rkHp")],["atk",T("rkAtk")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
+  const R=S.rk||{rows:[]};
+  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
+  return `${g.nick?"":nickForm()}
+    <div class="seg" role="group">${tabs}</div>
+    ${R.me?`<div class="rk-me">${T("rkYou",{n:R.me})}</div>`:""}
+    ${R.err?`<p class="muted">${T("rkLoadFail")}</p>`:R.loading&&!R.rows.length?`<p class="muted">${T("loading")}</p>`:R.rows.length?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("rkEmpty")}</p></div>`}
+    ${f==="power"?`<p class="muted sm-t">${T("rkPowerNote")}</p>`:""}
+    ${g.nick?nickForm():""}`;
+}
+
+/* ----- error passages ----- */
+const CONF={affect:"effect",effect:"affect",their:"there",there:"their",than:"then",then:"than",lose:"loose",advice:"advise",advise:"advice",accept:"except",quite:"quiet",were:"where",where:"were",whose:"who's",rise:"raise",raise:"rise",its:"it's",economic:"economical",principal:"principle",too:"to",lead:"led",past:"passed",passed:"past",weather:"whether",whether:"weather",cite:"site",site:"sight",fewer:"less",among:"between"};
+function rng(seed){ let x=seed>>>0||1; return ()=>{ x^=x<<13; x^=x>>>17; x^=x<<5; return ((x>>>0)%100000)/100000; }; }
+function misspell(w, r){
+  const lw=w.toLowerCase();
+  const m=lw.match(/([a-z])\1/); if(m && r()<0.8) return w.slice(0,m.index)+w.slice(m.index+1);
+  if(/ie/.test(lw) && !/cie/.test(lw)) return w.replace(/ie/,"ei");
+  if(/ei/.test(lw)) return w.replace(/ei/,"ie");
+  if(/ence$/.test(lw)) return w.replace(/ence$/,"ance"); if(/ance$/.test(lw)) return w.replace(/ance$/,"ence");
+  if(/ible$/.test(lw)) return w.replace(/ible$/,"able"); if(/able$/.test(lw)&&lw.length>7) return w.replace(/able$/,"ible");
+  const i=2+Math.floor(r()*(w.length-4)); return w.slice(0,i)+w[i+1]+w[i]+w.slice(i+2);
+}
+function keepCase(src,w){ return src[0]===src[0].toUpperCase()?w[0].toUpperCase()+w.slice(1):w; }
+function makeErrorPassage(art, seed, n=8){
+  const r=rng(seed); const paras=parasOf(art).slice(0,4); const gl=art.gloss||{};
+  const forms={}; for(const [k,g] of Object.entries(gl)){ if(!g.base||g.lvl==="PN") continue; (forms[g.base.toLowerCase()]=forms[g.base.toLowerCase()]||new Set()).add(k); }
+  let idx=0; const toks=[]; const parts=paras.map(p=>p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((t,i)=>{ if(i%2){ toks.push({t, i:idx}); return {w:t, i:idx++}; } return {s:t}; }));
+  const cands=[];
+  for(const {t,i} of toks){
+    const k=t.toLowerCase(), g=gl[k]; if(!g||g.lvl==="PN"||i===0) continue;
+    if(CONF[k]) cands.push({i,type:"conf",wrong:keepCase(t,CONF[k]),right:t,g,pri:3});
+    const fs=forms[(g.base||"").toLowerCase()];
+    if(fs&&fs.size>1&&k.length>=4){ const alt=[...fs].filter(x=>x!==k&&x.slice(0,3)===k.slice(0,3)); if(alt.length) cands.push({i,type:"form",wrong:keepCase(t,alt[Math.floor(r()*alt.length)]),right:t,g,pri:2}); }
+    if(k.length>=6 && !/['’-]/.test(k)){ const w=misspell(t,r); if(w.toLowerCase()!==k && !gl[w.toLowerCase()]) cands.push({i,type:"spell",wrong:w,right:t,g,pri:1}); }
+  }
+  // spread: shuffle, then prefer variety, keep 3+ tokens apart
+  const order=cands.map(c=>({c,k:r()+c.pri*0.15})).sort((a,b)=>b.k-a.k).map(o=>o.c);
+  const picked=[], used=new Set(), cnt={conf:0,form:0,spell:0};
+  for(const c of order){ if(picked.length>=n) break; if([...used].some(u=>Math.abs(u-c.i)<4)) continue; if(cnt[c.type]>=Math.ceil(n*0.5)) continue; picked.push(c); used.add(c.i); cnt[c.type]++; }
+  picked.sort((a,b)=>a.i-b.i);
+  const byI=Object.fromEntries(picked.map(c=>[c.i,c]));
+  const text=parts.map(pp=>pp.map(x=>x.s!==undefined?x.s:(byI[x.i]?byI[x.i].wrong:x.w)).join(""));
+  const errs=picked.map(c=>({i:c.i, type:c.type, wrong:c.wrong, right:c.right, pos:c.g.pos||"", m:{zh:c.g.zh,en:c.g.en||"",hi:c.g.hi||"",es:c.g.es||""}}));
+  return {text, errs, title:art.title, artId:art.id};
+}
+function errExplain(e){ const m=(e.m&&(e.m[LANG]||e.m.en))||""; return e.type==="spell"?T("coExpSpell",{r:`<b>${esc(e.right)}</b>`}):e.type==="form"?T("coExpForm",{r:`<b>${esc(e.right)}</b>`,p:esc(e.pos),w:esc(e.wrong),m:esc(m)}):T("coExpConf",{w:esc(e.wrong),r:`<b>${esc(e.right)}</b>`,m:esc(m)}); }
+
+/* ----- co-op state ----- */
+const CO_TIME=180, CO_MISSES=5;
+const coMe=()=>CLOUD.user?CLOUD.user.uid:"solo";
+function coRoom(){ return S.co&&S.co.room; }
+function coSpendTicket(){ const g=game(); if(g.tickets<1){ toast(T("noTicket")); return false; } g.tickets--; saveGame(); return true; }
+function coNewPassage(){ const art=mainArticle(); if(!art){ toast(T("coNoArt")); return null; } const pool=S.articles.filter(a=>a.date===art.date); const pick=pool[Math.floor(Math.random()*pool.length)]||art; return makeErrorPassage(pick, Math.floor(Math.random()*1e9)); }
+function coStartSolo(){
+  const p=coNewPassage(); if(!p) return; if(!coSpendTicket()) return;
+  S.co={solo:true, room:{state:"play", host:"solo", names:{solo:game().nick||T("coOwn")}, ...p, found:{}, misses:{}, endAt:Date.now()+CO_TIME*1000}};
+  coTick(); render();
+}
+async function coCreate(){
+  if(!CLOUD.user) return; const p=coNewPassage(); if(!p) return;
+  const {fsM,db}=CLOUD.fb; S.co={busy:T("coOpening")}; render();
+  try{
+    let code, ref;
+    for(let k=0;k<6;k++){ code=String(1000+Math.floor(Math.random()*9000)); ref=fsM.doc(db,"rooms",code); const s=await fsM.getDoc(ref); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
+    if(!coSpendTicket()){ S.co=null; render(); return; }
+    await fsM.setDoc(ref,{host:CLOUD.user.uid, guest:null, names:{[CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P1"}, state:"wait", created:Date.now(), ...p, found:{}, misses:{}, endAt:0, lang:LANG});
+    coListen(code);
+  }catch(e){ S.co=null; toast(T("syncFail")); render(); }
+}
+async function coJoin(code){
+  if(!CLOUD.user) return; code=(code||"").trim(); if(!/^\d{4}$/.test(code)){ toast(T("coNoRoom")); return; }
+  const {fsM,db}=CLOUD.fb; const ref=fsM.doc(db,"rooms",code); S.co={busy:T("coJoining")}; render();
+  try{
+    const s=await fsM.getDoc(ref);
+    if(!s.exists()||s.data().state==="done"){ S.co=null; toast(T("coNoRoom")); render(); return; }
+    const d=s.data();
+    if(d.host!==CLOUD.user.uid && d.guest && d.guest!==CLOUD.user.uid){ S.co=null; toast(T("coFull")); render(); return; }
+    if(d.host!==CLOUD.user.uid && !d.guest){
+      if(game().tickets<1){ S.co=null; toast(T("noTicket")); render(); return; }
+      await fsM.updateDoc(ref,{guest:CLOUD.user.uid, ["names."+CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P2", state:"play", endAt:Date.now()+CO_TIME*1000+3000});
+      coSpendTicket();
+    }
+    coListen(code);
+  }catch(e){ S.co=null; toast(e&&e.code==="permission-denied"?T("coFull"):T("syncFail")); render(); }
+}
+function coListen(code){
+  const {fsM,db}=CLOUD.fb; coStop();
+  S.co={code, room:null};
+  S.co.unsub=fsM.onSnapshot(fsM.doc(db,"rooms",code), snap=>{
+    if(!S.co||S.co.code!==code) return;
+    if(!snap.exists()){ coStop(); S.co=null; toast(T("coLeftRoom")); render(); return; }
+    S.co.room=snap.data(); coCheckEnd(); coTick(); if(S.view==="adv"&&S.advTab==="coop") coRender();
+  }, ()=>{});
+}
+function coStop(){ if(S.co&&S.co.unsub){ S.co.unsub(); } clearInterval(S.coTimer); }
+function coTick(){ clearInterval(S.coTimer); S.coTimer=setInterval(()=>{ const R=coRoom(); if(!R||R.state!=="play"){ clearInterval(S.coTimer); return; } coCheckEnd(); const el=document.getElementById("coClock"); if(el) el.textContent=T("coTime",{s:Math.max(0,Math.ceil((R.endAt-Date.now())/1000))}); },500); }
+function coMissTotal(R){ return Object.values(R.misses||{}).reduce((a,b)=>a+b,0); }
+function coCheckEnd(){
+  const R=coRoom(); if(!R||R.state!=="play") { if(R&&R.state==="done") coReward(); return; }
+  const all=Object.keys(R.found||{}).length>=R.errs.length, dead=coMissTotal(R)>=CO_MISSES, late=R.endAt&&Date.now()>R.endAt;
+  if(all||dead||late){
+    const win=all; R.state="done"; R.win=win;
+    if(!S.co.solo){ const {fsM,db}=CLOUD.fb; fsM.updateDoc(fsM.doc(db,"rooms",S.co.code),{state:"done", win}).catch(()=>{}); }
+    coReward(); coRender();
+  }
+}
+function coReward(){
+  const R=coRoom(); const key=(S.co.solo?"solo-":"")+(S.co.code||"")+"-"+(R.created||R.endAt);
+  const g=game(); g.coopDone=g.coopDone||{}; if(g.coopDone[key]) return;
+  const mine=Object.values(R.found||{}).filter(u=>u===coMe()).length;
+  const win=R.win!==undefined?R.win:Object.keys(R.found||{}).length>=R.errs.length;
+  const gold=mine*8+(win?(S.co.solo?15:30):0), exp=6+mine*5+(win?(S.co.solo?8:20):0);
+  g.gold+=gold; g.exp+=exp; const before=g.lv; while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
+  g.coopDone[key]=1; const ks=Object.keys(g.coopDone); if(ks.length>40) delete g.coopDone[ks[0]];
+  S.co.reward={gold, exp, lvUp:g.lv-before}; saveGame();
+}
+async function coTap(i){
+  const R=coRoom(); if(!R||R.state!=="play") return;
+  if(R.found&&R.found[i]!==undefined) return;
+  const isErr=R.errs.some(e=>e.i===i);
+  if(S.co.solo){ if(isErr){ R.found[i]="solo"; } else { R.misses.solo=(R.misses.solo||0)+1; S.co.flash=i; } coCheckEnd(); coRender(); return; }
+  const {fsM,db}=CLOUD.fb; const ref=fsM.doc(db,"rooms",S.co.code);
+  if(isErr){
+    R.found={...(R.found||{}),[i]:coMe()}; coRender();
+    try{ await fsM.runTransaction(db, async tx=>{ const s=await tx.get(ref); const f=(s.data().found)||{}; if(f[i]===undefined) tx.update(ref,{["found."+i]:coMe()}); }); }catch(e){}
+  } else {
+    S.co.flash=i; toast(T("coWrongTap")); coRender();
+    fsM.updateDoc(ref,{["misses."+coMe()]:fsM.increment(1)}).catch(()=>{});
+  }
+}
+async function coLeave(){
+  const co=S.co; coStop(); S.co=null;
+  if(co&&!co.solo&&co.code&&co.room&&co.room.state==="wait"&&co.room.host===coMe()){ const {fsM,db}=CLOUD.fb; fsM.deleteDoc(fsM.doc(db,"rooms",co.code)).catch(()=>{}); game().tickets++; saveGame(); }
+  render();
+}
+function coRender(){ if(S.view==="adv"&&S.advTab==="coop"){ const el=document.getElementById("coBox"); if(el) el.innerHTML=coInner(); else render(); } }
+function bar(cur,max,cls,label){ return `<div class="co-bar ${cls}"><span>${label}</span><div class="hp ${cls==="boss"?"m":"p"}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div></div>`; }
+function coInner(){
+  const co=S.co;
+  if(co&&co.busy) return `<p class="muted">${co.busy}</p>`;
+  if(!co){
+    const login=CLOUD.user?"":`<p class="muted sm-t">${T("coNeedLogin")}</p>${accountCard(true)}`;
+    return `<div class="card co-hero"><div class="co-art">${coBossSvg()}</div><div><h3>${T("coTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("coSub")}</p></div></div>
+      ${login}
+      ${CLOUD.user?`<button class="btn" data-act="cocreate">${T("coCreate")}</button>
+      <div class="row" style="flex-wrap:nowrap"><input id="coCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("coCodePh")}" autocomplete="off"><button class="btn ghost" data-act="cojoin" style="flex:none">${T("coJoin")}</button></div>`:""}
+      <div class="card"><b>${T("coSolo")}</b><p class="muted sm-t" style="margin:4px 0 8px">${T("coSoloSub")}</p><button class="btn ghost" data-act="cosolo">${T("coSolo")}</button></div>`;
+  }
+  const R=co.room; if(!R) return `<p class="muted">${T("loading")}</p>`;
+  if(R.state==="wait") return `<div class="card co-wait"><div class="muted">${T("coShare")}</div><div class="co-code">${esc(co.code)}</div><div class="muted">${T("coWaiting")}</div><button class="btn ghost" data-act="coleave">${T("coCancel")}</button></div>`;
+  const names=R.names||{}; const nm=u=>u===coMe()?T("coOwn"):esc(names[u]||"?");
+  const found=R.found||{}, nf=Object.keys(found).length, total=R.errs.length, miss=coMissTotal(R);
+  const errAt=Object.fromEntries(R.errs.map(e=>[e.i,e]));
+  let idx=0;
+  const body=R.text.map(p=>"<p>"+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((t,j)=>{ if(j%2===0) return esc(t); const i=idx++;
+    if(found[i]!==undefined){ const e=errAt[i]; return `<span class="cw fixed ${found[i]===coMe()?"mine":"mate"}"><s>${esc(t)}</s> <ins>${esc(e?e.right:t)}</ins></span>`; }
+    if(R.state==="done"&&errAt[i]) return `<span class="cw missed"><s>${esc(t)}</s> <ins>${esc(errAt[i].right)}</ins></span>`;
+    return `<span class="cw${co.flash===i?" bad":""}" data-co="${i}">${esc(t)}</span>`; }).join("")+"</p>").join("");
+  co.flash=null;
+  const head=`<div class="co-top">${bar(total-nf,total,"boss",T("coBoss"))}${bar(CO_MISSES-miss,CO_MISSES,"team",T("coTeam"))}
+    <div class="row" style="justify-content:space-between"><span class="muted sm-t">${co.solo?esc(T("coSolo")):T("coPlayers",{a:nm(R.host),b:nm(R.guest)})}</span>${R.state==="play"?`<b id="coClock" class="sm-t">${T("coTime",{s:Math.max(0,Math.ceil((R.endAt-Date.now())/1000))})}</b>`:""}</div></div>`;
+  if(R.state==="done"){
+    const mine=Object.values(found).filter(u=>u===coMe()).length, mate=nf-mine, win=R.win!==undefined?R.win:nf>=total;
+    const rw=co.reward;
+    return head+`<div class="reward ${win?"win":"lose"}"><div class="eyebrow">${win?T("coWin"):(R.endAt&&Date.now()>R.endAt?T("coTimeUp"):T("coLose"))}</div>
+      <div class="rw-row"><span>${T("coYouFound",{n:mine})}</span>${co.solo?"":`<span class="muted">${T("coMateFound",{n:mate})}</span>`}</div>
+      ${rw?`<div class="rw-row"><span>${T("gold")}</span><b>+${rw.gold}</b></div><div class="rw-row"><span>${T("exp")}</span><b>+${rw.exp}</b></div>${rw.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${game().lv}</b></div>`:""}`:""}</div>
+      <article class="article co-text">${body}</article>
+      <h3>${T("coResults")}</h3>
+      <div class="co-list">${R.errs.map(e=>`<div class="co-err"><span class="chip ${found[e.i]!==undefined?"done":"new"}">${T(e.type==="spell"?"coTypeSpell":e.type==="form"?"coTypeForm":"coTypeConf")}</span><div><s>${esc(e.wrong)}</s> → <b>${esc(e.right)}</b>${found[e.i]!==undefined?` <span class="muted sm-t">· ${T("coFoundBy",{n:nm(found[e.i])})}</span>`:""}<div class="muted sm-t">${errExplain(e)}</div></div></div>`).join("")}</div>
+      <button class="btn" data-act="coleave">${T("coBack")}</button>`;
+  }
+  return head+`<p class="muted sm-t">${T("coRead")} · ${T("coMissLeft",{n:CO_MISSES-miss})}</p><article class="article co-text">${body}</article>`;
+}
+function coBossSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="54" r="34" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6"/><path d="M24 30 L30 12 L40 26 M76 30 L70 12 L60 26" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6" stroke-linejoin="round"/><circle cx="38" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="62" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="39" cy="49" r="3" fill="#1B2421"/><circle cx="63" cy="49" r="3" fill="#1B2421"/><path d="M34 68 Q50 60 66 68" fill="none" stroke="#1B2421" stroke-width="2.6"/><text x="50" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#F0BE45" font-family="Georgia,serif">teh</text></svg>`; }
+function viewCoop(){ return `<div id="coBox" class="co-box">${coInner()}</div>`; }
 
 /* ---------- boot ---------- */
 S.index=[];
