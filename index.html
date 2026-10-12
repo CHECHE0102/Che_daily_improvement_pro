@@ -51,7 +51,7 @@ header.mast{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;backgroun
 .mast small{text-align:right}
 .brand span{color:var(--accent)}
 .mast small{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
-nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom,0px)}
 nav.tabs button{background:none;border:0;padding:10px 4px 12px;font-size:12px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px}
 nav.tabs button[aria-current="page"]{color:var(--accent);font-weight:600}
 nav.tabs svg{width:22px;height:22px}
@@ -353,12 +353,13 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 #scCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:pointer}
 .sc-hint{text-align:center;font-size:13px;font-weight:600}
 .sc-modal>.btn{background:var(--card);color:var(--accent)}.sc-modal>.btn:not(.ghost){background:var(--accent);color:var(--accent-ink)}
+.set-sec{display:flex;flex-direction:column;gap:10px}.set-opt{display:flex;flex-direction:column;gap:2px;padding:12px 14px}
 </style>
 
 </head>
 <body>
 <div class="wrap">
-  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><span class="mast-r"><small id="mastInfo"></small><button id="levelBtn" class="lang-btn lvl-btn" data-act="level" aria-label="Level">B2</button><button id="langBtn" class="lang-btn" data-act="lang" aria-label="Language">中</button></span></header>
+  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><span class="mast-r"><small id="mastInfo"></small></span></header>
   <main id="app"><div class="view"><p class="muted">…</p></div></main>
 </div>
 <nav class="tabs" aria-label="Main menu">
@@ -366,6 +367,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
   <button id="tab-dict" data-tab="dict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>字典</span></button>
   <button id="tab-adv" data-tab="adv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 3.5l6 6-9 9-3-3z"/><path d="M8.5 15.5l-5 5M5 14l5 5"/></svg><span>冒險</span></button>
   <button id="tab-arch" data-tab="arch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg><span>文章</span></button>
+  <button id="tab-set" data-tab="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>設定</span></button>
 </nav>
 <div id="overlay"></div>
 
@@ -595,7 +597,7 @@ const mean=x=>!x?"":LANG==="ja"?(x.ja||x.en||x.zh):LANG==="ko"?(x.ko||x.en||x.zh
 function setLang(k){ LANG=k; try{ localStorage.setItem("che-pro-lang",k); }catch(e){} document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[k]; S.langSheet=false; applyStaticText(); render(); }
 function applyStaticText(){
   const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
-  set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch"));
+  set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch")); set("tab-set",T("tabSet"));
   const n=document.querySelector("nav.tabs"); if(n) n.setAttribute("aria-label",T("mainMenu"));
   const vb=document.getElementById("levelBtn"); if(vb){ vb.textContent=LEVEL; vb.setAttribute("aria-label",T("level")); }
   const lb=document.getElementById("langBtn"); if(lb){ lb.textContent=LANGS.find(l=>l.k===LANG).short; lb.setAttribute("aria-label",T("language")); }
@@ -726,6 +728,7 @@ function render(){
   else if(S.view==="quiz") app.innerHTML=viewQuiz();
   else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
   else if(S.view==="arch") app.innerHTML=viewArch();
+  else if(S.view==="set") app.innerHTML=viewSettings();
   else if(S.view==="adv") app.innerHTML=viewAdv();
   else if(S.view==="battle") app.innerHTML=viewBattle();
   renderSheet();
@@ -758,7 +761,6 @@ function viewToday(){
     </div>
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
-    ${CLOUD.ready&&!CLOUD.user?accountCard(true):""}
     <button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>
     <div class="stats">
       <div class="stat"><b>${S.words.size}</b><span>${T("statWords")}</span></div>
@@ -808,8 +810,21 @@ function viewDict(){
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
     <p class="muted" style="font-size:12.5px">${T("probNote")}</p>
-    ${accountCard(false)}
-    <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
+  </div>`;
+}
+
+/* ---------- settings ---------- */
+const LANG_EN={zh:"Traditional Chinese",en:"English",hi:"Hindi",es:"Spanish",ja:"Japanese",ko:"Korean"};
+function viewSettings(){
+  const langs=LANGS.map(l=>`<button class="opt set-opt${l.k===LANG?" right":""}" data-lang="${l.k}"><b>${l.label}</b>${l.k!=="en"?`<span class="optm">${LANG_EN[l.k]}</span>`:""}</button>`).join("");
+  const lvls=LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("");
+  return `<div class="view">
+    <div><div class="eyebrow">Che Daily Pro</div><h2 style="font-size:24px">${T("tabSet")}</h2></div>
+    ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
+    ${CLOUD.user?nickForm():""}
+    <section class="card set-sec"><b>${T("language")} · Language</b><div class="opts">${langs}</div></section>
+    <section class="card set-sec"><b>${T("level")}</b><div class="opts">${lvls}</div></section>
+        <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
   </div>`;
 }
@@ -1248,7 +1263,8 @@ const ART={
 };
 function monSvg(t, cls){ const f=ART[t.foe.mid]; return f?`<svg viewBox="0 0 100 100" class="${cls||"mon-art"}" aria-hidden="true">${f()}</svg>`:""; }
 
-const townName=t=>t.name[LANG]||t.name.en;
+const townShort=t=>t.name[LANG]||t.name.en;
+const townName=t=>{ const n=townShort(t); return LANG==="en"||n===t.name.en?n:`${n} (${t.name.en})`; };
 const monName=m=>m.foe.name[LANG]||m.foe.name.en;
 const monSub=m=>LANG==="en"?"":m.foe.name.en;
 const canAttack=t=>game().lv>=t.lv-1;
@@ -1266,7 +1282,7 @@ function mapSvg(){
   const dots=TOWNS.map(t=>{ const x=PX(t.lon).toFixed(1), y=PY(t.lat).toFixed(1); const r=t.boss?8:t.pop>=60000?6.5:5;
     const cls=c[t.id]?"tw-own":canAttack(t)?`tw-open el-fill-${t.el}`:"tw-lock";
     return `<g data-town="${t.id}" class="tw${sel===t.id?" sel":""}"><circle cx="${x}" cy="${y}" r="15" class="tw-hit"/>${sel===t.id?`<circle cx="${x}" cy="${y}" r="${r+5}" class="tw-ring"/>`:""}<circle cx="${x}" cy="${y}" r="${r}" class="${cls}"/></g>`; }).join("");
-  const st=sel&&MONS[sel], lab=st?`<text x="${PX(st.lon).toFixed(1)}" y="${(PY(st.lat)-12).toFixed(1)}" text-anchor="middle" class="tw-lab">${esc(townName(st))}</text>`:"";
+  const st=sel&&MONS[sel], lab=st?`<text x="${PX(st.lon).toFixed(1)}" y="${(PY(st.lat)-12).toFixed(1)}" text-anchor="middle" class="tw-lab">${esc(townShort(st))}</text>`:"";
   return `<svg viewBox="0 0 320 400" class="ire-map" role="img" aria-label="${T("mapAria")}"><path d="${d}" class="land"/>${dots}${lab}</svg>`;
 }
 function townCard(t){
@@ -2086,6 +2102,7 @@ Object.assign(STR.hi,{"revTitle": "शब्दकोश दोहराई", "r
 Object.assign(STR.es,{"revTitle": "Repaso del diccionario", "revSub": "{n} preguntas de tu diccionario. Salen más las palabras que menos dominas o que hace tiempo que no repasas. Termina un repaso y gana 1 boleto de la suerte.", "revLeft": "Hoy aún puedes ganar {n} boletos", "revNoMore": "Ya ganaste los boletos de hoy. Puedes seguir repasando", "revStart": "Empezar repaso →", "revNeed": "Necesitas al menos {n} palabras en tu diccionario para repasar", "lottoGot": "Has ganado 1 boleto de la suerte", "lottoCap": "Límite diario de boletos por repaso alcanzado ({n})", "lotto": "Boletos", "goLuck": "Probar suerte →", "backDict": "Volver al diccionario", "tabLuck": "Suerte", "luckSub": "Termina un repaso del diccionario para ganar 1 boleto de la suerte (máximo {n} al día). Con 1 boleto giras la ruleta; con 2 o más compras un rasca y gana.", "wheelTitle": "Ruleta de la suerte", "wheelSpin": "Girar (1 boleto)", "wheelBusy": "Girando…", "noLotto": "No tienes boletos suficientes. Termina un repaso del diccionario", "wheelWin": "Has ganado: {p}", "pGold": "{n} de oro", "pTicket": "{n} × pase", "pLotto": "{n} × boleto", "pShard": "Fragmento {e} nivel {t} ×{n}", "pShardAny": "Fragmento aleatorio nivel {t}", "shardWord": "fragmento", "scTitle": "Rasca y gana", "scSub": "Las tarjetas más caras dan más probabilidad de fragmentos de nivel alto. El elemento es aleatorio.", "scBronze": "Tarjeta de bronce", "scSilver": "Tarjeta de plata", "scGold": "Tarjeta de oro", "scCost": "{n} boletos", "scHint": "Rasca la zona plateada con el dedo", "scAll": "Destapar todo", "scTake": "Recoger", "scHere": "Rasca aquí", "shTitle": "Fragmentos de elemento", "shSub": "Junta {n} fragmentos del mismo elemento y nivel para forjar un equipo aleatorio (arma o armadura) de ese elemento y nivel.", "forge": "Forjar", "forged": "¡Has forjado {i}! Está en tu bolsa", "forgeDup": "Ya tienes las dos piezas de este elemento y nivel, así que recibes {n} de oro", "oddsTitle": "Probabilidades", "oddsDouble": "{p}% de obtener 2 fragmentos", "cyGen": "nutre", "cyBeat": "vence", "rules1": "Las flechas de la estrella significan «vence a» y dan las bonificaciones de combate: Metal vence a Madera, Madera a Tierra, Tierra a Agua, Agua a Fuego y Fuego a Metal. Las flechas verdes de fuera significan «nutre» (Metal → Agua → Madera → Fuego → Tierra → Metal). Muestran la relación entre elementos y no afectan al combate.", "cycleAria": "Cinco elementos. Vence: Metal→Madera, Madera→Tierra, Tierra→Agua, Agua→Fuego, Fuego→Metal. Nutre: Metal→Agua→Madera→Fuego→Tierra→Metal."});
 Object.assign(STR.ja,{"revTitle": "単語帳の復習", "revSub": "単語帳から{n}問。苦手な単語や、しばらく復習していない単語ほど出やすくなります。1回終えるとくじ券が1枚もらえます。", "revLeft": "今日はあと{n}枚くじ券をもらえます", "revNoMore": "今日のくじ券はもらい終えました。復習は続けられます", "revStart": "復習を始める →", "revNeed": "復習するには単語帳に{n}語以上必要です", "lottoGot": "くじ券を1枚手に入れました", "lottoCap": "復習でもらえる今日のくじ券は上限です（{n}枚）", "lotto": "くじ券", "goLuck": "運だめしへ →", "backDict": "単語帳に戻る", "tabLuck": "幸運", "luckSub": "単語帳の復習を1回終えるとくじ券が1枚（1日最大{n}枚）。1枚でルーレットを1回、2枚以上でスクラッチカードが買えます。", "wheelTitle": "幸運のルーレット", "wheelSpin": "回す（くじ券1枚）", "wheelBusy": "回転中…", "noLotto": "くじ券が足りません。単語帳の復習でもらえます", "wheelWin": "当たり：{p}", "pGold": "{n} G", "pTicket": "出撃券 ×{n}", "pLotto": "くじ券 ×{n}", "pShard": "{e}属性 ランク{t}のかけら ×{n}", "pShardAny": "ランダム属性 ランク{t}のかけら", "shardWord": "かけら", "scTitle": "スクラッチカード", "scSub": "高いカードほど、高ランクのかけらが出やすくなります。属性はランダムです。", "scBronze": "銅カード", "scSilver": "銀カード", "scGold": "金カード", "scCost": "くじ券 {n}枚", "scHint": "銀色の部分を指でけずってください", "scAll": "全部けずる", "scTake": "受け取る", "scHere": "ここをけずる", "shTitle": "属性のかけら", "shSub": "同じ属性・同じランクのかけらを{n}個集めると、その属性とランクの装備（武器か防具）をランダムに1つ合成できます。", "forge": "合成", "forged": "{i}を合成しました！バッグに入っています", "forgeDup": "この属性とランクの武器・防具はどちらも持っているので、代わりに{n} Gを受け取りました", "oddsTitle": "確率一覧", "oddsDouble": "{p}%の確率で2個", "cyGen": "生", "cyBeat": "剋", "rules1": "星形の矢印は「剋」で、戦闘のボーナスを決めます：金は木に、木は土に、土は水に、水は火に、火は金に勝ちます。外側の緑の矢印は「生」（金→水→木→火→土→金）で、五行の関係を示すだけで戦闘には影響しません。", "cycleAria": "五行。相剋：金→木、木→土、土→水、水→火、火→金。相生：金→水→木→火→土→金。"});
 Object.assign(STR.ko,{"revTitle": "단어장 복습", "revSub": "단어장에서 {n}문제. 잘 모르는 단어나 오래 복습하지 않은 단어일수록 더 자주 나와요. 한 번 끝내면 복권 1장을 받아요.", "revLeft": "오늘 복권을 {n}장 더 받을 수 있어요", "revNoMore": "오늘 받을 복권은 다 받았어요. 복습은 계속할 수 있어요", "revStart": "복습 시작 →", "revNeed": "복습하려면 단어장에 단어가 {n}개 이상 있어야 해요", "lottoGot": "복권 1장을 받았어요", "lottoCap": "오늘 복습으로 받을 수 있는 복권을 다 받았어요 ({n}장)", "lotto": "복권", "goLuck": "행운 뽑기 →", "backDict": "단어장으로", "tabLuck": "행운", "luckSub": "단어장 복습을 한 번 끝내면 복권 1장 (하루 최대 {n}장). 1장으로 룰렛을 한 번 돌리고, 2장 이상이면 긁는 복권을 살 수 있어요.", "wheelTitle": "행운의 룰렛", "wheelSpin": "돌리기 (복권 1장)", "wheelBusy": "돌아가는 중…", "noLotto": "복권이 부족해요. 단어장 복습을 끝내면 받을 수 있어요", "wheelWin": "당첨: {p}", "pGold": "{n} 골드", "pTicket": "출정권 ×{n}", "pLotto": "복권 ×{n}", "pShard": "{e} 속성 {t}등급 조각 ×{n}", "pShardAny": "무작위 속성 {t}등급 조각", "shardWord": "조각", "scTitle": "긁는 복권", "scSub": "비싼 카드일수록 높은 등급 조각이 잘 나와요. 속성은 무작위예요.", "scBronze": "동 카드", "scSilver": "은 카드", "scGold": "금 카드", "scCost": "복권 {n}장", "scHint": "손가락으로 은색 부분을 긁어 주세요", "scAll": "모두 긁기", "scTake": "받기", "scHere": "여기를 긁으세요", "shTitle": "속성 조각", "shSub": "같은 속성, 같은 등급 조각을 {n}개 모으면 그 속성과 등급의 장비(무기 또는 방어구)를 무작위로 하나 합성할 수 있어요.", "forge": "합성", "forged": "{i} 합성 성공! 가방에 넣었어요", "forgeDup": "이 속성과 등급의 무기와 방어구를 모두 갖고 있어서 대신 {n} 골드를 받았어요", "oddsTitle": "확률 보기", "oddsDouble": "{p}% 확률로 2개", "cyGen": "생", "cyBeat": "극", "rules1": "별 모양 안의 화살표는 '극'이며 전투 보너스를 정해요: 금은 나무를, 나무는 흙을, 흙은 물을, 물은 불을, 불은 금을 이겨요. 바깥의 초록 화살표는 '생'(금→물→나무→불→흙→금)으로, 오행의 관계를 보여 줄 뿐 전투에는 영향이 없어요.", "cycleAria": "오행. 상극: 금→나무, 나무→흙, 흙→물, 물→불, 불→금. 상생: 금→물→나무→불→흙→금."});
+Object.assign(STR.zh,{tabSet:"設定"});Object.assign(STR.en,{tabSet:"Settings"});Object.assign(STR.hi,{tabSet:"सेटिंग्स"});Object.assign(STR.es,{tabSet:"Ajustes"});Object.assign(STR.ja,{tabSet:"設定"});Object.assign(STR.ko,{tabSet:"설정"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText();
 render();
 (async ()=>{
