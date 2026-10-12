@@ -262,6 +262,10 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .sm-say{width:30px;height:30px;align-self:flex-start}
 .sm-say svg{width:15px;height:15px}
 .sheet{max-height:85vh;overflow-y:auto}
+.acct{display:flex;flex-direction:column;gap:10px}
+.gbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #747775;align-self:flex-start}
+.avatar{width:36px;height:36px;border-radius:50%;flex:none}
+.bad-t{color:var(--bad)}
 </style>
 
 </head>
@@ -578,6 +582,7 @@ function lsSave(){ try{ const o={}; for(const [k,v] of S.words) o[k]=v; for(cons
 const chains = new Map();
 function persist(id, data){
   if(id.startsWith("w~")) S.words.set(id,data); else S.days.set(id,data);
+  cloudMark(id);
   if(!userCol){ lsSave(); return; }
   const prev = chains.get(id) || Promise.resolve();
   const next = prev.then(()=>userCol && userCol.doc(id).set(data)).catch(e=>{
@@ -588,6 +593,7 @@ function persist(id, data){
 }
 function remove(id){
   S.words.delete(id);
+  cloudMark(id,true);
   if(!userCol){ lsSave(); return; }
   const prev = chains.get(id) || Promise.resolve();
   chains.set(id, prev.then(()=>userCol.doc(id).delete()).catch(()=>{}));
@@ -665,6 +671,7 @@ function viewToday(){
     </div>
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
+    ${CLOUD.ready&&!CLOUD.user?accountCard(true):""}
     <button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>
     <div class="stats">
       <div class="stat"><b>${S.words.size}</b><span>${T("statWords")}</span></div>
@@ -713,6 +720,7 @@ function viewDict(){
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
     <p class="muted" style="font-size:12.5px">${T("probNote")}</p>
+    ${accountCard(false)}
     <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
   </div>`;
@@ -733,7 +741,7 @@ async function importData(file){
       else if(v.type==="day"){ if(!S.days.has(k)) S.days.set(k,v); }
       else if(v.type==="game"){ const cur=game(); if(v.lv>cur.lv || (v.lv===cur.lv && v.exp>=cur.exp)) S.game={...G_DEFAULT, ...v}; }
     }
-    lsSave(); toast(T("imported",{n})); render();
+    lsSave(); if(CLOUD.user){ for(const k of S.words.keys()) CLOUD.dirtyWords.add(k); cloudMark(null); } toast(T("imported",{n})); render();
   }catch(e){ toast(T("badFile")); }
 }
 function notePack(n){
@@ -1183,7 +1191,7 @@ function viewConquest(){
 
 const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null};
 function game(){ return S.game || (S.game={...G_DEFAULT}); }
-function saveGame(){ lsSave(); }
+function saveGame(){ lsSave(); cloudMark(null); }
 const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
 function stats(g=game()){
   const w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor];
@@ -1410,6 +1418,8 @@ document.addEventListener("click", e=>{
   if(a==="level"){ S.sheet=null; S.langSheet=false; S.levelSheet=true; return renderSheet(); }
   if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
+  if(a==="signin") return cloudSignIn();
+  if(a==="signout") return cloudSignOut();
   if(a==="fight") return fight();
   if(a==="tax") return collectTax();
   if(a==="skip"){ if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
@@ -1428,6 +1438,106 @@ document.addEventListener("change", e=>{ if(e.target.id==="importFile" && e.targ
 document.addEventListener("input", e=>{ if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
+/* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
+const FB_CONFIG={apiKey:"AIzaSyCMGO6INIRITrfhTT0IPR-U0O620xKcaYE",authDomain:"che-daily-improvement-pro.firebaseapp.com",projectId:"che-daily-improvement-pro",storageBucket:"che-daily-improvement-pro.firebasestorage.app",messagingSenderId:"935084997550",appId:"1:935084997550:web:dd1a7901e357e612a5a63f"};
+const FB_V="10.12.2";
+Object.assign(STR.zh,{acctTitle:"雲端存檔", acctOff:"登入後，單字、測驗和遊戲進度會存到雲端。換手機或清除瀏覽器資料也不會不見，只要登入一次。", signIn:"用 Google 登入", signOut:"登出", signedAs:"已登入：{n}", synced:"已同步到雲端", syncing:"同步中…", syncFail:"雲端同步失敗，進度先存在這支手機，連上網路後會再試。", loginFail:"登入沒有完成，請再試一次。", merged:"已把這支手機的紀錄合併到雲端", signedOut:"已登出，進度仍保留在這支手機上", cloudOff:"目前無法連到雲端服務", acctShort:"登入保存進度"});
+Object.assign(STR.en,{acctTitle:"Cloud save", acctOff:"Sign in to save your words, quizzes and game progress to the cloud. Changing phones or clearing browser data won't lose anything, and you only sign in once.", signIn:"Sign in with Google", signOut:"Sign out", signedAs:"Signed in as {n}", synced:"Saved to the cloud", syncing:"Saving…", syncFail:"Couldn't reach the cloud. Progress is kept on this phone and will sync when you're back online.", loginFail:"Sign-in didn't finish. Please try again.", merged:"This phone's progress has been merged into your cloud save", signedOut:"Signed out. Progress stays on this phone.", cloudOff:"Cloud service is unavailable right now", acctShort:"Sign in to save progress"});
+Object.assign(STR.hi,{acctTitle:"क्लाउड सेव", acctOff:"साइन इन करें ताकि आपके शब्द, क्विज़ और खेल की प्रगति क्लाउड में सहेजी जाए। फ़ोन बदलने या ब्राउज़र डेटा मिटाने पर भी कुछ नहीं खोएगा, और साइन इन सिर्फ़ एक बार करना है।", signIn:"Google से साइन इन करें", signOut:"साइन आउट", signedAs:"{n} के रूप में साइन इन", synced:"क्लाउड में सहेजा गया", syncing:"सहेजा जा रहा है…", syncFail:"क्लाउड से कनेक्ट नहीं हो सका। प्रगति इस फ़ोन पर है और ऑनलाइन होने पर सिंक होगी।", loginFail:"साइन इन पूरा नहीं हुआ। फिर कोशिश करें।", merged:"इस फ़ोन की प्रगति क्लाउड में जोड़ दी गई", signedOut:"साइन आउट हो गया। प्रगति इस फ़ोन पर बनी है।", cloudOff:"अभी क्लाउड सेवा उपलब्ध नहीं है", acctShort:"प्रगति सहेजने के लिए साइन इन करें"});
+Object.assign(STR.es,{acctTitle:"Guardado en la nube", acctOff:"Inicia sesión para guardar tus palabras, tests y partida en la nube. Si cambias de móvil o borras los datos del navegador no perderás nada, y solo tienes que iniciar sesión una vez.", signIn:"Iniciar sesión con Google", signOut:"Cerrar sesión", signedAs:"Sesión iniciada: {n}", synced:"Guardado en la nube", syncing:"Guardando…", syncFail:"No se pudo conectar con la nube. Tu progreso está en este móvil y se sincronizará cuando haya conexión.", loginFail:"No se completó el inicio de sesión. Inténtalo de nuevo.", merged:"El progreso de este móvil se ha unido a tu partida en la nube", signedOut:"Sesión cerrada. Tu progreso sigue en este móvil.", cloudOff:"El servicio en la nube no está disponible ahora", acctShort:"Inicia sesión para guardar"});
+
+const CLOUD={ready:false, user:null, status:"idle", fb:null, dirtyWords:new Set(), delWords:new Set(), dirtyMain:false, timer:null};
+async function cloudInit(){
+  try{
+    const [appM,authM,fsM]=await Promise.all([
+      import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-app.js`),
+      import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-auth.js`),
+      import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-firestore.js`)]);
+    const app=appM.initializeApp(FB_CONFIG);
+    const auth=authM.getAuth(app);
+    const db=fsM.getFirestore(app);
+    CLOUD.fb={authM,fsM,auth,db};
+    authM.getRedirectResult(auth).catch(()=>{});
+    authM.onAuthStateChanged(auth, async u=>{
+      CLOUD.user=u; CLOUD.ready=true;
+      if(u) await cloudPull(); else { CLOUD.status="idle"; render(); }
+    });
+  }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
+}
+async function cloudSignIn(){
+  if(!CLOUD.fb){ toast(T("cloudOff")); return; }
+  const {authM,auth}=CLOUD.fb; const p=new authM.GoogleAuthProvider();
+  try{ await authM.signInWithPopup(auth,p); }
+  catch(e){
+    const c=e&&e.code||"";
+    if(c==="auth/popup-closed-by-user"||c==="auth/cancelled-popup-request") return;
+    if(c==="auth/popup-blocked"||c==="auth/operation-not-supported-in-this-environment"||c==="auth/web-storage-unsupported"){ try{ await authM.signInWithRedirect(auth,p); return; }catch(_){} }
+    toast(T("loginFail"));
+  }
+}
+async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth); toast(T("signedOut")); render(); }
+const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
+const wordsCol=()=>CLOUD.fb.fsM.collection(CLOUD.fb.db,"users",CLOUD.user.uid,"words");
+const wScore=v=>(v.correct||0)+(v.wrong||0)+(v.lookups||0);
+const dScore=v=>(v.preDone?1:0)+(v.read?1:0)+(v.postDone?1:0)+Object.keys(v.postBy||{}).length;
+function mergeDay(a,b){ if(!a) return b; if(!b) return a; const base=dScore(b)>dScore(a)?b:a, o=base===a?b:a;
+  const lb={...(o.lookedUpBy||{})}; for(const [k,v] of Object.entries(base.lookedUpBy||{})) lb[k]=[...new Set([...(lb[k]||[]),...v])];
+  return {...base, lookedUp:[...new Set([...(base.lookedUp||[]),...(o.lookedUp||[])])], lookedUpBy:lb, postBy:{...(o.postBy||{}),...(base.postBy||{})}, bonus:!!(a.bonus||b.bonus)}; }
+function mergeGame(a,b){ if(!a) return b; if(!b) return a;
+  const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
+  const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
+  return {...G_DEFAULT, ...base, inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
+    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, battles:Math.max(base.battles||0,o.battles||0)}; }
+async function cloudPull(){
+  const {fsM}=CLOUD.fb; CLOUD.status="syncing"; render();
+  try{
+    const [us,ws]=await Promise.all([fsM.getDoc(userRef()), fsM.getDocs(wordsCol())]);
+    const cloud=us.exists()?us.data():{}; const hadLocal=S.words.size>0||S.days.size>0||(S.game&&(S.game.lv>1||S.game.exp>0||S.game.gold>0));
+    const cw=new Map(); ws.forEach(d=>cw.set(d.id,d.data()));
+    // words: keep the more-practised copy of each word
+    for(const [k,v] of cw){ const l=S.words.get(k); if(!l||wScore(v)>=wScore(l)) S.words.set(k,v); }
+    for(const [k,v] of S.words) if(!cw.has(k)||wScore(v)>wScore(cw.get(k))) CLOUD.dirtyWords.add(k);
+    for(const [k,v] of Object.entries(cloud.days||{})) S.days.set(k, mergeDay(S.days.get(k),v));
+    S.game=mergeGame(S.game, cloud.game?{...G_DEFAULT,...cloud.game}:null) || S.game;
+    CLOUD.dirtyMain=true; lsSave();
+    await cloudFlush();
+    if(hadLocal && (cw.size||cloud.game)) toast(T("merged"));
+    CLOUD.status="ok";
+  }catch(e){ CLOUD.status="err"; }
+  render();
+}
+function cloudMark(id, deleted){ if(!CLOUD.user) return; if(id&&id.startsWith("w~")){ (deleted?CLOUD.delWords:CLOUD.dirtyWords).add(id); if(deleted) CLOUD.dirtyWords.delete(id); } else CLOUD.dirtyMain=true;
+  clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,1500); }
+async function cloudFlush(){
+  if(!CLOUD.user||!CLOUD.fb) return; clearTimeout(CLOUD.timer);
+  const {fsM,db}=CLOUD.fb; const words=[...CLOUD.dirtyWords], dels=[...CLOUD.delWords], main=CLOUD.dirtyMain;
+  if(!words.length&&!dels.length&&!main) return;
+  CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false;
+  try{
+    const ops=[];
+    if(main) ops.push(b=>b.set(userRef(),{game:S.game||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
+    for(const k of words){ const v=S.words.get(k); if(v) ops.push(b=>b.set(fsM.doc(wordsCol(),k), JSON.parse(JSON.stringify(v)))); }
+    for(const k of dels) ops.push(b=>b.delete(fsM.doc(wordsCol(),k)));
+    for(let i=0;i<ops.length;i+=400){ const b=fsM.writeBatch(db); ops.slice(i,i+400).forEach(f=>f(b)); await b.commit(); }
+    if(CLOUD.status!=="ok"){ CLOUD.status="ok"; render(); }
+  }catch(e){
+    words.forEach(k=>CLOUD.dirtyWords.add(k)); dels.forEach(k=>CLOUD.delWords.add(k)); if(main) CLOUD.dirtyMain=true;
+    if(CLOUD.status!=="err"){ CLOUD.status="err"; toast(T("syncFail")); render(); }
+    clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,30000);
+  }
+}
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") cloudFlush(); });
+window.addEventListener("online",()=>cloudFlush());
+const G_SVG='<svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.2-.1-2.3-.4-3.5z"/></svg>';
+function accountCard(compact){
+  if(!CLOUD.ready) return "";
+  if(CLOUD.status==="off") return compact?"":`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("cloudOff")}</span></section>`;
+  const u=CLOUD.user;
+  if(!u) return `<section class="card acct"><div><b>${T("acctTitle")}</b>${compact?"":`<p class="muted" style="margin:4px 0 0;font-size:13px">${T("acctOff")}</p>`}</div><button class="btn gbtn" data-act="signin">${G_SVG}<span>${T("signIn")}</span></button></section>`;
+  const st={ok:T("synced"),syncing:T("syncing"),err:T("syncFail")}[CLOUD.status]||"";
+  return compact?"":`<section class="card acct"><div class="row" style="gap:10px;flex-wrap:nowrap">${u.photoURL?`<img src="${esc(u.photoURL)}" alt="" class="avatar" referrerpolicy="no-referrer">`:""}<div style="min-width:0;flex:1"><b>${T("signedAs",{n:esc(u.displayName||u.email||"")})}</b><div class="muted sm-t ${CLOUD.status==="err"?"bad-t":""}">${st}</div></div><button class="btn ghost" data-act="signout" style="padding:6px 12px;font-size:13px">${T("signOut")}</button></div></section>`;
+}
+
 /* ---------- boot ---------- */
 S.index=[];
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es"}[LANG]; applyStaticText();
@@ -1435,6 +1545,7 @@ render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
   S.ready.personal=true; render();
+  cloudInit();
   try{
     let j=null;
     for(const b of ART_BASES){ try{ const r=await fetch(b+"index.json",{cache:"no-cache"}); if(r.ok){ j=await r.json(); ART_BASE=b; break; } }catch(_){} }
