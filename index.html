@@ -192,8 +192,6 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .slot{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.07);border-radius:10px;padding:8px 10px;font-size:14px;min-width:0}
 .slot span{display:flex;flex-direction:column;min-width:0}.slot small{opacity:.6;font-size:11px}
 .rules summary{cursor:pointer;font-weight:600}.rules p{font-size:14px;margin:8px 0 0}
-.cycle{width:100%;max-width:240px;display:block;margin:8px auto 0}
-.cy-arrow{stroke:var(--muted);stroke-width:1.6}.cy-head{fill:var(--muted)}.cy-t{fill:#fff;font-weight:700;font-size:16px;font-family:var(--f-ui)}
 .region{display:flex;flex-direction:column;gap:8px}.region.locked{opacity:.5}
 .rg-head{display:flex;justify-content:space-between;align-items:flex-end}.rg-head h3{font-size:18px}
 .mons,.items{display:flex;flex-direction:column;gap:8px}
@@ -294,6 +292,67 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .co-list{display:flex;flex-direction:column;gap:8px}
 .co-err{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 @media (prefers-reduced-motion:reduce){.cw.bad{animation:none}}
+/* ---- five-element chart ---- */
+:root{--gen:#2E9B45}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gen:#5CC877}}
+:root[data-theme="dark"]{--gen:#5CC877}
+.cycle{width:100%;max-width:310px;display:block;margin:10px auto 0}
+.cy-gen{fill:none;stroke:var(--gen);stroke-width:3.2}.cy-gen-h{fill:var(--gen)}
+.cy-beat{stroke-width:2.6}.cy-s-metal{stroke:var(--metal)}.cy-s-wood{stroke:var(--wood)}.cy-s-water{stroke:var(--water)}.cy-s-fire{stroke:var(--fire)}.cy-s-earth{stroke:var(--earth)}
+.cy-n{stroke:var(--card);stroke-width:3}
+.cy-t{fill:#fff;font-weight:700;font-size:11.5px;font-family:var(--f-ui)}.cy-t.big{font-size:20px}
+.cy-tag rect{fill:var(--card);stroke-width:1.8}.cy-tag text{font-size:11px;font-weight:700;font-family:var(--f-ui)}
+.cy-tag.gen rect{stroke:var(--gen)}.cy-tag.gen text{fill:var(--gen);font-size:12px}
+.cy-c-metal rect{stroke:var(--metal)}.cy-c-metal text{fill:var(--metal)}.cy-c-wood rect{stroke:var(--wood)}.cy-c-wood text{fill:var(--wood)}
+.cy-c-water rect{stroke:var(--water)}.cy-c-water text{fill:var(--water)}.cy-c-fire rect{stroke:var(--fire)}.cy-c-fire text{fill:var(--fire)}
+.cy-c-earth rect{stroke:var(--earth)}.cy-c-earth text{fill:var(--earth)}
+/* ---- dictionary review card ---- */
+.rev-card{display:flex;gap:12px;align-items:flex-start;background:var(--gorse-soft);border:1.5px solid var(--gorse);border-radius:var(--r);padding:14px}
+.rev-ic{color:var(--gorse);flex:none;padding-top:2px}.rev-ic svg{width:34px;height:34px}
+.rev-main{display:flex;flex-direction:column;gap:6px;min-width:0}.rev-main .btn{align-self:flex-start;padding:9px 18px;font-size:14px}
+.rev-left{font-size:13px;font-weight:600;color:var(--ink)}
+/* ---- lucky house ---- */
+.luck{display:flex;flex-direction:column;gap:12px}
+.luck h3{font-size:18px;margin-bottom:6px}
+.luck-head{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;background:var(--night);color:var(--night-ink);border-radius:var(--r);padding:14px 16px}
+.luck-head .eyebrow{color:var(--night-ink);opacity:.65}.luck-head p{grid-column:1/-1;margin:4px 0 0;color:var(--night-ink);opacity:.75}
+.luck-head .btn{grid-column:1/-1;justify-self:start;color:var(--gorse);border-color:rgba(255,255,255,.25)}
+.lh-ic{color:var(--gorse)}.lh-ic svg{width:40px;height:40px}.lh-n{font-family:var(--f-display);font-size:30px;color:var(--gorse);font-variant-numeric:tabular-nums;line-height:1}
+.wheel-card{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}.wheel-card h3{align-self:flex-start}
+.wheel{position:relative;width:min(280px,100%);aspect-ratio:1}
+.wheel-disc{width:100%;height:100%;transform-origin:50% 50%}.wheel-disc svg{width:100%;height:100%;display:block}
+.wheel-ptr{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:24px solid var(--ink);z-index:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+.wh-big{fill:#fff;font:800 15px var(--f-display);text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.28);stroke-width:2.4px}
+.wh-small{fill:#fff;font:600 8.5px var(--f-ui);text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.28);stroke-width:2px}
+.wheel-msg{min-height:22px;font-weight:700;color:var(--accent)}
+.sc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.sc-shop{border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;color:#2A2010;min-width:0}
+.sc-shop b{font-size:14px}.sc-shop .btn{padding:7px 8px;font-size:12px;width:100%}
+.sc-bronze{background:linear-gradient(135deg,#E9B98C,#B87333)}.sc-silver{background:linear-gradient(135deg,#F1F3F5,#AEB6BD)}.sc-gold{background:linear-gradient(135deg,#FBE38A,#D9A520)}
+.odds-tiers{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;font-variant-numeric:tabular-nums;justify-content:center}.odds-tiers em{font-style:normal;font-weight:700;margin-right:3px}
+.odds-tiers.sm{font-size:11px;gap:2px 6px}
+.sh-grid{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.sh-row{display:grid;grid-template-columns:40px repeat(4,1fr);gap:6px;align-items:center}
+.sh-head span{text-align:center;font-weight:700;font-size:13px;color:var(--muted)}
+.sh-cell{position:relative;height:40px;border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;overflow:hidden;background:var(--card)}
+.sh-cell b{font-variant-numeric:tabular-nums;z-index:1}.sh-cell i{position:absolute;left:0;bottom:0;height:4px;background:var(--gorse)}
+.sh-cell.zero{color:var(--muted);opacity:.6}
+.sh-cell.ready{background:var(--gorse);border-color:var(--gorse);color:#2A2010;font-weight:700;animation:pulse 1.6s ease-in-out infinite}.sh-cell.ready span{font-size:11px}
+@keyframes pulse{50%{transform:scale(1.05)}}
+@media (prefers-reduced-motion:reduce){.sh-cell.ready{animation:none}}
+.odds summary{cursor:pointer;font-weight:600}.odds h4{margin:12px 0 4px;font-size:14px}.odds .rw-row{font-size:13px;padding:2px 0}
+.odds-sc{display:flex;flex-direction:column;gap:3px;padding:6px 0;border-top:1px solid var(--line)}.odds-sc .odds-tiers{justify-content:flex-start}
+.sc-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:21;width:min(340px,calc(100% - 32px));display:flex;flex-direction:column;gap:12px;align-items:stretch}.sc-modal.fresh{animation:pop .2s ease-out}
+@keyframes pop{from{transform:translate(-50%,-46%);opacity:0}}
+.sc-ticket{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;color:#2A2010;box-shadow:0 14px 40px rgba(0,0,0,.3)}
+.sc-name{font:800 18px var(--f-display);text-align:center}
+.sc-win{position:relative;height:150px;border-radius:12px;background:#FFFDF6;overflow:hidden}
+.sc-prize{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:10px;color:#2A2010}
+.sc-prize b{font-size:16px}.sc-x2{position:absolute;top:8px;right:10px;font:800 16px var(--f-display);color:#C0443B}
+.sc-win.open .sc-prize{animation:pop2 .4s ease-out}@keyframes pop2{from{transform:scale(.7);opacity:0}}
+#scCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:pointer}
+.sc-hint{text-align:center;font-size:13px;font-weight:600}
+.sc-modal>.btn{background:var(--card);color:var(--accent)}.sc-modal>.btn:not(.ghost){background:var(--accent);color:var(--accent-ink)}
 </style>
 
 </head>
@@ -744,6 +803,7 @@ function viewDict(){
   const seg=(k,l)=>`<button data-sort="${k}" aria-pressed="${S.dictSort===k}">${l}</button>`;
   return `<div class="view">
     <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
+    ${reviewCard()}
     <input id="dictSearch" class="search" type="search" placeholder="${T("search")}" value="${esc(S.dictQ)}" autocomplete="off">
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
@@ -872,6 +932,8 @@ function wordExtras(g){
 }
 function renderSheet(){
   const o=$("#overlay");
+  if(S.scratch){ const key=S.scratch.uid+(S.scratch.revealed?"r":""); if(o.dataset.sc===key) return; o.dataset.sc=key; o.innerHTML=scratchModal(); requestAnimationFrame(initScratch); return; }
+  delete o.dataset.sc;
   if(S.langSheet){ o.innerHTML=langSheet(); return; }
   if(S.levelSheet){ o.innerHTML=levelSheet(); return; }
   if(!S.sheet){ o.innerHTML=""; return; }
@@ -946,6 +1008,7 @@ function startQuiz(kind, art){
   let words;
   const d=dayRec();
   if(kind==="pre"){ const el=eligible(); words=weightedPick(el, Math.min(10, el.length)); }
+  else if(kind==="rev"){ const all=[...S.words.values()]; if(all.length<LUCK.reviewMinWords) return toast(T("revNeed",{n:LUCK.reviewMinWords})); words=weightedPick(all, Math.min(LUCK.reviewQ, all.length)); }
   else {
     words=shuffle(lookedUpFor(d,art).map(l=>S.words.get(keyOf(l))).filter(Boolean)).slice(0,10);
     if(words.length<10) words=words.concat(fillerWords(art, words.map(w=>w.word.toLowerCase()), 10-words.length));
@@ -965,14 +1028,14 @@ function finishPost(art, score, total){
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
-  const title=Q.kind==="pre"?T("preTitle"):T("postTitle");
+  const title=Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
+    const nextBtn = Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
       <div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
-      ${rewardBox(Q.reward)}
+      ${Q.kind==="rev"?lottoBox(Q.reward):rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
@@ -997,7 +1060,8 @@ function pick(i){
   const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
   if(Q.i+1>=Q.qs.length){
     const d=dayRec();
-    if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
+    if(Q.kind==="rev"){ Q.reward=awardReview(); }
+    else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art)); }
   }
   explainAnswer(ans);
@@ -1227,7 +1291,7 @@ function viewConquest(){
       return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span></span><span class="go-t">${own?"✓":open?T("attack"):"Lv "+(t.lv-1)}</span></button>`; }).join("")}</div>`;
 }
 
-const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null};
+const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
 function game(){ return S.game || (S.game={...G_DEFAULT}); }
 function saveGame(){ lsSave(); cloudMark(null); }
 const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
@@ -1270,6 +1334,7 @@ function buy(id){
 }
 function equip(id){
   const g=game(), it=ITEMS[id]; if(!it||!g.inv.includes(id)) return;
+  if(g[it.slot]!==id && g.lv<it.lv) return toast(T("needLv",{n:it.lv}));
   g[it.slot]= g[it.slot]===id ? null : id; saveGame(); render();
 }
 
@@ -1368,19 +1433,31 @@ function viewBattle(){
 
 /* ----- adventure tab ----- */
 function cycleSvg(){
-  const pts=ELS.map((e,i)=>{ const a=-Math.PI/2+i*2*Math.PI/5; return {k:e.k,z:e.z,x:110+78*Math.cos(a),y:100+78*Math.sin(a)}; });
-  const pos=Object.fromEntries(pts.map(p=>[p.k,p]));
-  const arrows=Object.entries(BEATS).map(([a,b])=>{ const p=pos[a], q=pos[b]; const dx=q.x-p.x, dy=q.y-p.y, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
-    return `<line x1="${(p.x+ux*20).toFixed(1)}" y1="${(p.y+uy*20).toFixed(1)}" x2="${(q.x-ux*24).toFixed(1)}" y2="${(q.y-uy*24).toFixed(1)}" class="cy-arrow" marker-end="url(#ah)"/>`; }).join("");
-  return `<svg viewBox="0 0 220 200" class="cycle" role="img" aria-label="${T("cycleAria")}">
-    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="cy-head"/></marker></defs>
-    ${arrows}${pts.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="18" class="cy-n el-fill-${p.k}"/><text x="${p.x.toFixed(1)}" y="${(p.y+6).toFixed(1)}" text-anchor="middle" class="cy-t">${elShort(p.k)}</text>`).join("")}</svg>`;
+  // Classic layout: 生 (feeds) runs clockwise round the outside, 克 (beats) forms the star inside
+  const GEN=["metal","water","wood","fire","earth"], C=160, R=112, NR=26;
+  const ang=i=>-Math.PI/2+i*2*Math.PI/5, f=n=>n.toFixed(1);
+  const P={}; GEN.forEach((k,i)=>P[k]={x:C+R*Math.cos(ang(i)), y:C+R*Math.sin(ang(i))});
+  const cjk=/^(zh|ja|ko)$/.test(LANG);
+  const tag=(x,y,txt,cls)=>{ const w=[...txt].length<=1?22:[...txt].length*6.4+14; return `<g class="cy-tag ${cls}" transform="translate(${f(x)} ${f(y)})"><rect x="${f(-w/2)}" y="-11" width="${f(w)}" height="22" rx="11"/><text y="4.5" text-anchor="middle">${esc(txt)}</text></g>`; };
+  let gen="", genT="";
+  GEN.forEach((k,i)=>{ const gap=(NR+7)/R, a0=ang(i)+gap, a1=ang(i+1)-gap-0.03;
+    gen+=`<path d="M${f(C+R*Math.cos(a0))} ${f(C+R*Math.sin(a0))}A${R} ${R} 0 0 1 ${f(C+R*Math.cos(a1))} ${f(C+R*Math.sin(a1))}" class="cy-gen" marker-end="url(#mGen)"/>`;
+    const am=ang(i)+Math.PI/5; genT+=tag(C+(R+27)*Math.cos(am), C+(R+27)*Math.sin(am), T("cyGen"), "gen"); });
+  let beat="", beatT="";
+  for(const [a,b] of Object.entries(BEATS)){ const p=P[a], q=P[b], dx=q.x-p.x, dy=q.y-p.y, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
+    beat+=`<line x1="${f(p.x+ux*(NR+2))}" y1="${f(p.y+uy*(NR+2))}" x2="${f(q.x-ux*(NR+8))}" y2="${f(q.y-uy*(NR+8))}" class="cy-beat cy-s-${a}" marker-end="url(#mB-${a})"/>`;
+    beatT+=tag(p.x+dx*0.3, p.y+dy*0.3, T("cyBeat"), "beat cy-c-"+a); }
+  const marks=`<marker id="mGen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="cy-gen-h"/></marker>`
+    +ELS.map(e=>`<marker id="mB-${e.k}" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" class="el-fill-${e.k}"/></marker>`).join("");
+  const nodes=GEN.map(k=>`<circle cx="${f(P[k].x)}" cy="${f(P[k].y)}" r="${NR}" class="cy-n el-fill-${k}"/><text x="${f(P[k].x)}" y="${f(P[k].y+(cjk?7:4))}" text-anchor="middle" class="cy-t${cjk?" big":""}">${esc(elName(k))}</text>`).join("");
+  return `<svg viewBox="0 0 320 320" class="cycle" role="img" aria-label="${T("cycleAria")}"><defs>${marks}</defs>${gen}${beat}${genT}${beatT}${nodes}</svg>`;
 }
 function itemRow(it, mode){
   const g=game(), own=g.inv.includes(it.id), on=g[it.slot]===it.id, locked=g.lv<it.lv;
   const stat = it.slot==="weapon" ? T("atkPlus",{n:it.atk}) : T("defPlus",{d:it.def,h:it.hp});
   let act;
-  if(mode==="bag") act=`<button class="btn ${on?"ghost":""} sm" data-equip="${it.id}">${on?T("unequip"):T("equip")}</button>`;
+  if(mode==="bag"&&locked&&!on) act=`<span class="muted sm-t">${T("unlockAt",{n:it.lv})}</span>`;
+  else if(mode==="bag") act=`<button class="btn ${on?"ghost":""} sm" data-equip="${it.id}">${on?T("unequip"):T("equip")}</button>`;
   else if(own) act=`<button class="btn ghost sm" data-equip="${it.id}">${on?T("equipped"):T("equip")}</button>`;
   else if(locked) act=`<span class="muted sm-t">${T("unlockAt",{n:it.lv})}</span>`;
   else act=`<button class="btn sm" data-buy="${it.id}" ${g.gold<it.price?"disabled":""}>${T("price",{n:it.price})}</button>`;
@@ -1402,13 +1479,15 @@ function viewAdv(){
     body=viewRank();
   } else if(sub==="coop"){
     body=viewCoop();
+  } else if(sub==="luck"){
+    body=viewLuck();
   } else {
     const own=g.inv.map(id=>ITEMS[id]).filter(Boolean);
     body= own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
   }
   return `<div class="view">
     <section class="hero-card">
-      <div class="hc-top"><div><div class="eyebrow">${T("hero")}</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div></div>
+      <div class="hc-top"><div><div class="eyebrow">${T("hero")}</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
       <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${elBadge(s.wEl)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${elBadge(s.aEl)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
@@ -1417,8 +1496,192 @@ function viewAdv(){
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
       <p>${T("rules3")}</p></details>
-    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop",T("tabCoop"))}${seg("rank",T("tabRank"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
+    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop",T("tabCoop"))}${seg("rank",T("tabRank"))}${seg("luck",T("tabLuck"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
     ${body}
+  </div>`;
+}
+
+/* ================= 幸運屋 Lucky house =================
+   ★ 想調機率，只要改下面 LUCK 這一塊的數字就好 ★
+   w / odds 是「權重」：機率 = 這一項的權重 ÷ 同一組全部權重的總和。
+   例：轉盤現在的 w 加起來剛好 100，所以 w 就直接等於百分比（22 = 22%）。
+   想讓某個獎更常出現 → 把它的 w 調大；想讓它消失 → 改成 0。
+*/
+const LUCK={
+  reviewQ:10,               // 字典複習一次幾題
+  reviewMinWords:5,         // 字典至少要有幾個字才能複習
+  reviewTicketsPerDay:3,    // 每天最多從複習拿幾張彩券
+  shardsToForge:5,          // 幾個「同屬性同等級」碎片可以合成一件裝備
+  dupGoldRate:0.5,          // 合成時武器和防具都已擁有 → 換成「裝備價格 × 這個比例」的金幣
+  // 轉盤：type 可以是 gold（金幣）/ ticket（出征令）/ lotto（彩券）/ shard（碎片，tier 0=Ⅰ 1=Ⅱ 2=Ⅲ 3=Ⅳ）
+  // 轉盤上的順序就是這裡的順序（從正上方順時針）
+  wheel:[
+    {type:"gold",   n:30,  w:22},
+    {type:"shard",  tier:0, n:1, w:20},
+    {type:"ticket", n:1,   w:14},
+    {type:"gold",   n:80,  w:12},
+    {type:"lotto",  n:1,   w:10},
+    {type:"shard",  tier:1, n:1, w:10},
+    {type:"gold",   n:200, w:6},
+    {type:"shard",  tier:2, n:1, w:6}
+  ],
+  // 刮刮樂：cost = 要幾張彩券；odds = [Ⅰ, Ⅱ, Ⅲ, Ⅳ] 級碎片的權重；double = 一次拿到 2 個碎片的機率（%）
+  scratch:[
+    {id:"bronze", cost:2, odds:[70,25,5,0],   double:5},
+    {id:"silver", cost:3, odds:[40,40,17,3],  double:10},
+    {id:"gold",   cost:5, odds:[10,35,40,15], double:15}
+  ],
+  // 碎片是哪個屬性的權重（全部一樣 = 平均各 20%）
+  element:{metal:1, wood:1, water:1, fire:1, earth:1}
+};
+
+function wpick(list, wf){ const tot=list.reduce((s,x)=>s+Math.max(0,wf(x)),0); let r=Math.random()*tot; for(const x of list){ r-=Math.max(0,wf(x)); if(r<0) return x; } return list.filter(x=>wf(x)>0).pop()||list[list.length-1]; }
+const pct=(w,list,wf)=>{ const tot=list.reduce((s,x)=>s+Math.max(0,wf(x)),0)||1; const p=Math.max(0,w)/tot*100; return (p>=10||p===0?Math.round(p):Math.round(p*10)/10)+"%"; };
+function randEl(){ return wpick(Object.keys(LUCK.element), k=>LUCK.element[k]); }
+function shardsOf(){ const g=game(); g.shards=g.shards||{}; return g.shards; }
+function addShard(el,tier,n){ const s=shardsOf(), k=el+"-"+tier; s[k]=(s[k]||0)+n; }
+function prizeText(p){
+  if(p.type==="gold") return T("pGold",{n:p.n});
+  if(p.type==="ticket") return T("pTicket",{n:p.n});
+  if(p.type==="lotto") return T("pLotto",{n:p.n});
+  return p.el?T("pShard",{e:elName(p.el),t:TIER[p.tier].n,n:p.n}):T("pShardAny",{t:TIER[p.tier].n});
+}
+function applyPrize(p){
+  const g=game(), out={...p};
+  if(p.type==="gold") g.gold+=p.n;
+  else if(p.type==="ticket") g.tickets+=p.n;
+  else if(p.type==="lotto") g.lotto=(g.lotto||0)+p.n;
+  else { out.el=randEl(); addShard(out.el,p.tier,p.n); }
+  return out;
+}
+
+/* ----- dictionary review → 1 lucky ticket ----- */
+function revLeft(){ const g=game(); return g.revDate===today()?Math.max(0,LUCK.reviewTicketsPerDay-(g.revN||0)):LUCK.reviewTicketsPerDay; }
+function awardReview(){
+  const g=game(); if(g.revDate!==today()){ g.revDate=today(); g.revN=0; }
+  if((g.revN||0)<LUCK.reviewTicketsPerDay){ g.revN=(g.revN||0)+1; g.lotto=(g.lotto||0)+1; saveGame(); return {lotto:1}; }
+  saveGame(); return {lotto:0};
+}
+function reviewCard(){
+  const n=S.words.size, left=revLeft(), can=n>=LUCK.reviewMinWords;
+  return `<section class="rev-card"><div class="rev-ic" aria-hidden="true">${TICKET_SVG}</div><div class="rev-main"><b>${T("revTitle")}</b>
+    <span class="muted sm-t">${T("revSub",{n:Math.min(LUCK.reviewQ,Math.max(n,1))})}</span>
+    <span class="rev-left ${left?"":"muted"}">${left?T("revLeft",{n:left}):T("revNoMore")}</span>
+    ${can?`<button class="btn" data-act="rev">${T("revStart")}</button>`:`<span class="muted sm-t">${T("revNeed",{n:LUCK.reviewMinWords})}</span>`}</div></section>`;
+}
+function lottoBox(r){
+  if(!r) return "";
+  return `<div class="reward lotto-rw"><div class="eyebrow">${T("loot")}</div>
+    <div class="rw-row"><span>${r.lotto?T("lottoGot"):T("lottoCap",{n:LUCK.reviewTicketsPerDay})}</span><b>${r.lotto?T("lootT",{n:1}):"+0"}</b></div>
+    <div class="rw-row muted"><span>${T("lotto")}</span><b>${game().lotto||0}</b></div></div>`;
+}
+const TICKET_SVG='<svg viewBox="0 0 32 32" width="26" height="26"><path d="M4 9a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v3a3 3 0 0 0 0 6v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a3 3 0 0 0 0-6z" fill="currentColor"/><path d="M20 8v16" stroke="var(--card)" stroke-width="1.6" stroke-dasharray="2 2"/><path d="M12 12.2l1.2 2.5 2.7.4-2 1.9.5 2.7-2.4-1.3-2.4 1.3.5-2.7-2-1.9 2.7-.4z" fill="var(--card)"/></svg>';
+
+/* ----- lucky wheel ----- */
+const WHEEL_COL=["var(--metal)","var(--wood)","var(--water)","var(--fire)","var(--earth)","var(--accent)","#7E5BB5","#C2477A"];
+function wheelSvg(){
+  const W=LUCK.wheel, N=W.length, R=100, step=360/N;
+  const pt=(deg,r)=>{ const a=deg*Math.PI/180; return [(r*Math.sin(a)).toFixed(2), (-r*Math.cos(a)).toFixed(2)]; };
+  const segs=W.map((p,i)=>{ const [x1,y1]=pt(i*step,R), [x2,y2]=pt((i+1)*step,R);
+    const big=p.type==="gold"?"+"+p.n:p.type==="shard"?TIER[p.tier].n:"+"+p.n;
+    const small=p.type==="gold"?T("gold"):p.type==="ticket"?T("tickets"):p.type==="lotto"?T("lotto"):T("shardWord");
+    return `<path d="M0 0L${x1} ${y1}A${R} ${R} 0 0 1 ${x2} ${y2}Z" fill="${WHEEL_COL[i%WHEEL_COL.length]}" stroke="var(--card)" stroke-width="2"/>
+      <g transform="rotate(${(i+.5)*step})"><text y="-66" class="wh-big">${esc(big)}</text><text y="-50" class="wh-small">${esc(small)}</text></g>`; }).join("");
+  return `<svg viewBox="-104 -104 208 208" aria-hidden="true">${segs}<circle r="102" fill="none" stroke="var(--ink)" stroke-width="3"/><circle r="16" fill="var(--card)" stroke="var(--ink)" stroke-width="3"/></svg>`;
+}
+function spinWheel(){
+  if(S.wheelBusy) return;
+  const g=game(); if((g.lotto||0)<1) return toast(T("noLotto"));
+  g.lotto--; const W=LUCK.wheel, N=W.length, step=360/N;
+  const i=wpick(W.map((_,k)=>k), k=>W[k].w);
+  const res=applyPrize(W[i]); saveGame();
+  const cur=S.wheelRot||0, target=-((i+.5)*step)+(Math.random()-.5)*step*0.6;
+  const rot=cur+360*5+(((target-cur)%360)+360)%360;
+  S.wheelRot=rot; S.wheelBusy=true; S.wheelMsg=null;
+  const el=document.getElementById("wheelDisc"), btn=document.querySelector("[data-act=spin]");
+  const still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(el){ el.style.transition=still?"none":"transform 4.2s cubic-bezier(.15,.7,.2,1)"; el.style.transform=`rotate(${rot}deg)`; }
+  if(btn){ btn.disabled=true; btn.textContent=T("wheelBusy"); }
+  const pl=document.getElementById("lottoLeft"); if(pl) pl.textContent=g.lotto;
+  setTimeout(()=>{ S.wheelBusy=false; S.wheelMsg=T("wheelWin",{p:prizeText(res)}); render(); }, still||!el?50:4300);
+}
+
+/* ----- scratch cards ----- */
+function buyScratch(id){
+  const c=LUCK.scratch.find(x=>x.id===id); if(!c) return;
+  const g=game(); if((g.lotto||0)<c.cost) return toast(T("noLotto"));
+  g.lotto-=c.cost;
+  const tier=wpick([0,1,2,3], t=>c.odds[t]||0), n=Math.random()*100<c.double?2:1, el=randEl();
+  addShard(el,tier,n); saveGame();
+  S.scratch={uid:Date.now()+"", card:id, el, tier, n, revealed:false}; render();
+}
+const scName=id=>T({bronze:"scBronze",silver:"scSilver",gold:"scGold"}[id]);
+function scratchModal(){
+  const s=S.scratch;
+  return `<div class="scrim" ${s.revealed?'data-act="sctake"':""}></div><div class="sc-modal${s.revealed?"":" fresh"}" role="dialog" aria-label="${T("scTitle")}">
+    <div class="sc-ticket sc-${s.card}"><div class="sc-name">${scName(s.card)}</div>
+      <div class="sc-win${s.revealed?" open":""}"><div class="sc-prize">${elBadge(s.el,true)}<b>${esc(T("pShard",{e:elName(s.el),t:TIER[s.tier].n,n:s.n}))}</b>${s.n>1?'<span class="sc-x2">×2</span>':""}</div>
+      ${s.revealed?"":'<canvas id="scCanvas" aria-hidden="true"></canvas>'}</div>
+      <div class="sc-hint">${s.revealed?"✦ ✦ ✦":T("scHint")}</div></div>
+    ${s.revealed?`<button class="btn" data-act="sctake">${T("scTake")}</button>`:`<button class="btn ghost" data-act="scall">${T("scAll")}</button>`}</div>`;
+}
+function scratchReveal(){ if(!S.scratch||S.scratch.revealed) return; S.scratch.revealed=true; renderSheet(); }
+function initScratch(){
+  const c=document.getElementById("scCanvas"); if(!c||c.dataset.ready) return; c.dataset.ready="1";
+  const b=c.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+  c.width=Math.round(b.width*dpr); c.height=Math.round(b.height*dpr);
+  const x=c.getContext("2d"); x.scale(dpr,dpr);
+  const gr=x.createLinearGradient(0,0,b.width,b.height); gr.addColorStop(0,"#AEB6BB"); gr.addColorStop(.45,"#E8ECEE"); gr.addColorStop(.55,"#D5DADD"); gr.addColorStop(1,"#9CA5AB");
+  x.fillStyle=gr; x.fillRect(0,0,b.width,b.height);
+  x.fillStyle="rgba(40,50,55,.55)"; x.font="600 16px system-ui,sans-serif"; x.textAlign="center"; x.fillText(T("scHere"), b.width/2, b.height/2+6);
+  x.globalCompositeOperation="destination-out"; x.fillStyle="#000"; x.strokeStyle="#000"; x.lineCap="round"; x.lineJoin="round"; x.lineWidth=34;
+  let down=false, last=null, moves=0;
+  const P=e=>{ const r=c.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; };
+  const check=()=>{ const d=x.getImageData(0,0,c.width,c.height).data; let clr=0, tot=0; for(let i=3;i<d.length;i+=64){ tot++; if(d[i]<40) clr++; } if(tot&&clr/tot>0.55) scratchReveal(); };
+  c.addEventListener("pointerdown",e=>{ down=true; last=P(e); try{ c.setPointerCapture(e.pointerId); }catch(_){} x.beginPath(); x.arc(last[0],last[1],17,0,Math.PI*2); x.fill(); e.preventDefault(); });
+  c.addEventListener("pointermove",e=>{ if(!down) return; const p=P(e); x.beginPath(); x.moveTo(last[0],last[1]); x.lineTo(p[0],p[1]); x.stroke(); last=p; if(++moves%6===0) check(); });
+  const up=()=>{ if(down){ down=false; check(); } }; c.addEventListener("pointerup",up); c.addEventListener("pointercancel",up);
+}
+
+/* ----- shards → gear ----- */
+function forge(k){
+  const s=shardsOf(); if((s[k]||0)<LUCK.shardsToForge) return;
+  const [el,ti]=k.split("-"), tier=+ti, g=game();
+  s[k]-=LUCK.shardsToForge; if(!s[k]) delete s[k];
+  const opts=[`w-${el}-${tier}`,`a-${el}-${tier}`].filter(id=>!g.inv.includes(id));
+  if(opts.length){ const id=opts[Math.floor(Math.random()*opts.length)]; g.inv.push(id); saveGame(); toast(T("forged",{i:itemName(ITEMS[id])+" "+TIER[tier].n})); }
+  else { const n=Math.round(TIER[tier].price*LUCK.dupGoldRate); g.gold+=n; saveGame(); toast(T("forgeDup",{n})); }
+  render();
+}
+function shardGrid(){
+  const s=shardsOf(), need=LUCK.shardsToForge;
+  const head=`<div class="sh-row sh-head"><span></span>${TIER.map(t=>`<span>${t.n}</span>`).join("")}</div>`;
+  const rows=ELS.map(e=>`<div class="sh-row">${elBadge(e.k,true)}${TIER.map((t,i)=>{ const k=e.k+"-"+i, n=s[k]||0;
+    return n>=need?`<button class="sh-cell ready" data-act="forge" data-k="${k}"><b>${n}/${need}</b><span>${T("forge")}</span></button>`
+      :`<div class="sh-cell${n?"":" zero"}"><b>${n}/${need}</b><i style="width:${n/need*100}%"></i></div>`; }).join("")}</div>`).join("");
+  return `<div class="sh-grid">${head}${rows}</div>`;
+}
+function oddsHtml(){
+  const W=LUCK.wheel;
+  const wheel=W.map(p=>`<div class="rw-row"><span>${esc(prizeText(p))}</span><b>${pct(p.w,W,x=>x.w)}</b></div>`).join("");
+  const sc=LUCK.scratch.map(c=>{ const o=c.odds.map((w,i)=>({w,i})); return `<div class="odds-sc"><b>${scName(c.id)} · ${T("scCost",{n:c.cost})}</b>
+    <div class="odds-tiers">${o.map(t=>`<span><em>${TIER[t.i].n}</em>${pct(t.w,o,x=>x.w)}</span>`).join("")}</div><span class="muted sm-t">${T("oddsDouble",{p:c.double})}</span></div>`; }).join("");
+  return `<details class="card odds"><summary>${T("oddsTitle")}</summary><h4>${T("wheelTitle")}</h4>${wheel}<h4>${T("scTitle")}</h4>${sc}</details>`;
+}
+function viewLuck(){
+  const g=game(), L=g.lotto||0;
+  const cards=LUCK.scratch.map(c=>`<div class="sc-shop sc-${c.id}"><b>${scName(c.id)}</b><div class="odds-tiers sm">${c.odds.map((w,i)=>w?`<span><em>${TIER[i].n}</em>${pct(w,c.odds,x=>x)}</span>`:"").join("")}</div>
+    <button class="btn sm" data-act="scbuy" data-k="${c.id}" ${L<c.cost?"disabled":""}>${T("scCost",{n:c.cost})}</button></div>`).join("");
+  return `<div class="luck">
+    <section class="luck-head"><div class="lh-ic">${TICKET_SVG}</div><div><div class="eyebrow">${T("lotto")}</div><b id="lottoLeft" class="lh-n">${L}</b></div><p class="muted sm-t">${T("luckSub",{n:LUCK.reviewTicketsPerDay})}</p>
+      ${L<1?`<button class="btn ghost sm" data-tab="dict">${T("revStart")}</button>`:""}</section>
+    <section class="card wheel-card"><h3>${T("wheelTitle")}</h3>
+      <div class="wheel"><div class="wheel-ptr" aria-hidden="true"></div><div id="wheelDisc" class="wheel-disc" style="transform:rotate(${S.wheelRot||0}deg)">${wheelSvg()}</div></div>
+      <div class="wheel-msg" aria-live="polite">${S.wheelMsg?esc(S.wheelMsg):"&nbsp;"}</div>
+      <button class="btn" data-act="spin" ${L<1||S.wheelBusy?"disabled":""}>${S.wheelBusy?T("wheelBusy"):T("wheelSpin")}</button></section>
+    <section class="card"><h3>${T("scTitle")}</h3><p class="muted sm-t">${T("scSub")}</p><div class="sc-row">${cards}</div></section>
+    <section class="card"><h3>${T("shTitle")}</h3><p class="muted sm-t">${T("shSub",{n:LUCK.shardsToForge})}</p>${shardGrid()}</section>
+    ${oddsHtml()}
   </div>`;
 }
 
@@ -1462,6 +1725,13 @@ document.addEventListener("click", e=>{
   if(a==="level"){ S.sheet=null; S.langSheet=false; S.levelSheet=true; return renderSheet(); }
   if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
+  if(a==="rev") return startQuiz("rev");
+  if(a==="goluck"){ S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
+  if(a==="spin") return spinWheel();
+  if(a==="scbuy") return buyScratch(t.dataset.k);
+  if(a==="scall") return scratchReveal();
+  if(a==="sctake"){ S.scratch=null; return render(); }
+  if(a==="forge") return forge(t.dataset.k);
   if(a==="signin") return cloudSignIn();
   if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } game().nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render()); return; }
   if(a==="cocreate") return coCreate();
@@ -1810,6 +2080,12 @@ function viewCoop(){ return `<div id="coBox" class="co-box">${coInner()}</div>`;
 S.index=[];
 STR.ja={"loading": "読み込み中…", "tabToday": "今日", "tabDict": "単語帳", "tabAdv": "冒険", "tabArch": "記事", "mainMenu": "メインメニュー", "language": "言語", "storageFull": "保存容量がいっぱいです", "savedLocal": "この端末に保存しています", "mast": "Lv {lv} · <b>{gold}<\/b> G · 出撃券 {t}", "chipDone": "読了 · テスト {r}", "chipDoneNone": "完了", "chipRead": "読了 · {n}語を調べた", "loadingToday": "今日の記事を読み込み中…", "noArticles": "まだ記事がありません", "noArticlesSub": "毎朝アイルランドの新しいニュースが追加されます。後でもう一度見てください。", "start": "始める →", "again": "開く", "todayHead": "今日のトップ記事", "latestHead": "最新のトップ記事 · {d}", "stepPre": "復習テスト", "preScore": "{t}問中{s}問正解", "preDraw": "覚えた{n}語から習熟度に応じて{k}問出題", "preNone": "まだ復習する単語がありません。すぐに読み始めましょう", "stepRead": "トップ記事を読む", "readDone": "{n}語を調べた", "readHint": "わからない単語をタップすると意味が表示されます", "stepPost": "読後テスト", "postScore": "{t}問中{s}問正解", "postNone": "今日は単語を調べていません", "postHint": "調べたばかりの単語のテスト（全問解説付き）", "moreRead": "もっと読みたい？", "moreCount": "今日のほかの記事 {n}本", "moreLocked": "復習テストを終えると読めます。", "banner": "出撃券 {t}枚 · {g} G", "bannerSub": "テストでゴールドを稼ぎ、五行の装備を買って魔物と戦おう", "bannerGo": "冒険へ →", "statWords": "保存した単語", "statAcc": "累計正答率", "statArts": "記事数", "notFound": "記事が見つかりません。", "lockTitle": "先に復習テストを終えてください", "lockSub": "毎日読む前に、前の日に調べた単語を復習します。", "lockBtn": "復習テストを始める", "backToday": "今日に戻る", "startPost": "テストを始める", "finishMain": "読み終えた — テストへ →", "extraDone": "この記事のテストは完了しました（{r}）。調べた単語は今後の復習に出ます。", "noLookups": "単語なし", "finishExtra": "読み終えた — この記事の単語でテスト →", "back": "← 戻る", "words": "{n}語", "rewritten": "{s} をもとに書き直し", "tip": "単語をタップすると意味が出ます。調べた単語はこの色になり、単語帳に保存されます。", "myDict": "マイ単語帳", "dictCount": "{n}語", "search": "単語や意味を検索", "sort": "並べ替え", "sortRecent": "最近", "sortWeak": "苦手順", "probNote": "出題される確率は正答率で決まります。間違えた単語や長く復習していない単語ほど出やすくなります。", "backup": "データのバックアップ", "backupSub": "単語、テスト、ゲームの進行状況はこの端末のブラウザにだけ保存されています。機種変更やSafariのデータ削除の前にバックアップを書き出してください。", "export": "書き出す", "import": "読み込む", "imported": "{n}語を読み込みました", "badFile": "有効なバックアップファイルではありません", "nMeaning": "意味", "nUsage": "使い方", "nColl": "よく使う組み合わせ", "nEx": "例文", "newWord": "新出", "qCount": "{n}問", "kvLookups": "調べた回数", "kvTimes": "{n}回", "kvFirst": "初めて調べた日", "kvRW": "正解 / 不正解", "kvProb": "次に出題される確率", "kvTomorrow": "明日から復習に追加", "pron": "発音", "confirmDel": "この単語を削除しますか？", "del": "削除", "cancel": "キャンセル", "delFromDict": "単語帳から削除", "noMatch": "該当する単語がありません", "dictEmpty": "単語帳はまだ空です", "dictEmptySub": "読みながらわからない単語をタップすると、ここに保存されます。", "allArts": "すべての記事", "artCount": "{n}本", "archNote": "どの記事で調べた単語も単語帳と今後の復習に入ります。", "noGloss": "この単語の意味は用意されていません。", "wordTr": "単語の意味", "base": "原形：", "funcWord": "よく使う機能語なので単語帳には追加しません", "added": "単語帳に追加しました", "already": "単語帳に登録済み · {n}回調べた", "youPicked": "あなたの答え", "pickedMeans": "「{a}」は「{b}」という意味です。", "pickedPlain": "「{a}」。", "correctIs": "正解は <b>{w}<\/b>（{m}）です。", "basic": "基本の意味", "basicTxt": "記事の中で {w}（{p}）は「{m}」という意味です。", "forms": " 文中の形：{f}。", "sentence": "記事の文", "preTitle": "復習テスト", "postTitle": "読後テスト", "done": "{t} · 完了", "readNow": "今日のトップ記事を読む →", "sumWrong": "間違えた単語が先頭に並び、今後の復習でも出やすくなります。", "sumAll": "全問正解！これらの単語は今後出題されにくくなります。", "explainAll": "全単語の解説", "qMeaning": "この単語の意味は？", "qWord": "この意味の英単語はどれ？", "qCloze": "空欄に入る単語を選んでください", "right": "正解！", "wrong": "不正解 — 解説を見てみよう", "next": "次へ", "seeAll": "結果と全解説を見る", "artLoadFail": "記事を読み込めませんでした。通信状況を確認してください。", "removed": "削除しました", "loot": "獲得品", "lootRight": "{n}問正解", "lootAcc": "正答率{p}%ボーナス", "lootAccNo": "正答率{p}%（80%以上でボーナス）", "lootDay": "今日の3ステップ達成", "tickets": "出撃券", "lootT": "+{n}枚", "gold": "ゴールド", "goldAmt": "+{n} G", "goAdv": "冒険へ →", "owned": "すでに持っています", "needLv": "Lv {n} が必要です", "noGold": "ゴールドが {n} 足りません", "bought": "{i} を買って装備しました", "advWin": "武器が有利 ×1.5", "advWlose": "武器が不利 ×0.67", "advAwin": "防具が有利 · 被ダメージ ×0.67", "advAlose": "防具が不利 · 被ダメージ ×1.5", "advNone": "属性ボーナスなし", "noTicket": "出撃券がありません。テストを終えると手に入ります", "spell": "戦闘前の呪文", "spellSub": "正解すると最初の攻撃が2倍のダメージになります。", "spellOk": "呪文成功！最初の一撃が2倍", "spellFail": "呪文失敗。正解：{w} — {m}", "retreat": "← 撤退", "elAttr": "{e}属性", "yourHp": "あなたのHP", "atk": "攻撃", "def": "防御", "skipSpell": "呪文を飛ばして戦う", "fight": "出撃！（出撃券1枚）", "logSpell": "呪文の力！", "logCrit": "会心の一撃！", "logYou": "あなたは <b>{n}<\/b> のダメージを与えた", "logMon": "{m}は <b>{n}<\/b> のダメージを与えた", "win": "勝利", "exp": "経験値", "lvUp": "レベルアップ！", "lose": "敗北", "loseTip": "{m}は強すぎました。{e}属性に有利な武器（{c}属性）を試すか、弱い魔物で先にレベルを上げましょう。", "you": "あなた · Lv {lv}", "backAdv": "冒険に戻る", "fightAgain": "もう一度戦う", "skipAnim": "アニメを飛ばす", "cycleAria": "五行の相克：金は木に、木は土に、土は水に、水は火に、火は金に勝つ", "atkPlus": "攻撃 +{n}", "defPlus": "防御 +{d} · HP +{h}", "unequip": "外す", "equip": "装備", "equipped": "装備中", "unlockAt": "Lv {n} で解放", "weapon": "武器", "armor": "防具", "price": "{n} G", "suggest": "推奨 Lv {n}+", "monLine": "Lv {lv} · HP {hp} · 攻 {atk}", "beaten": " · {n}回撃破", "go": "戦う", "all": "すべて", "bagEmpty": "バッグは空です", "bagEmptySub": "テストでゴールドを稼ぎ、ショップで最初の装備を買いましょう。", "hero": "冒険者", "expLine": "経験値 {e} / {n}", "bare": "素手", "cloth": "普段着", "rulesQ": "五行の相克とは？", "rules1": "矢印は「勝つ」を表します：金 → 木 → 土 → 水 → 火 → 金。", "rules2": "<b>武器<\/b>が魔物の属性に勝つとダメージ ×1.5、負けると ×0.67。<br><b>防具<\/b>が魔物の属性に勝つと被ダメージ ×0.67、負けると ×1.5。", "rules3": "ゴールドはテストで手に入ります：1問正解ごとに10 G、正答率80%以上で+20、全問正解でさらに+20。テストを1回終えるごとに出撃券1枚、今日の3ステップを達成するとさらに30 Gと1枚。", "tabGo": "征服", "tabShop": "ショップ", "tabBag": "バッグ", "conqProg": "{t}の町のうち{n}を征服", "conqTag": "征服済み", "conqNew": "{c}を征服した！", "allConq": "アイルランド島を統一した！", "taxBtn": "今日の税金を受け取る +{n} G", "taxGot": "税金 {n} G を受け取った", "taxDone": "今日の税金は受け取り済み。また明日", "taxHint": "征服した町からは毎日税金が入ります。大きな町ほど多くなります。", "taxLine": "毎日の税収 {n} G", "pop": "人口 約{n}", "holds": "{m}がこの町を支配している", "tapCity": "地図の町をタップすると詳細が見られます", "attack": "攻撃", "trainBtn": "ここで修行", "lockedCity": "Lv {n} から攻撃可能", "lockShort": "未解放", "mapAria": "アイルランド島の地図", "goal": "目標：いちばん小さな村からダブリンまで攻め上がり、島全体を征服しよう。大きな町ほど魔物が強くなります。", "synonyms": "類義語", "antonyms": "反意語", "level": "英語レベル", "lvB1": "中級：日常的な語彙、短めの文", "lvB2": "中上級：一般的なニュースの語彙", "lvC1": "上級：よりフォーマルで珍しい語彙", "lvIELTS": "IELTS 7–8：アカデミックな語彙", "fillTag": "記事の難単語", "fillNote": "調べた単語が10語未満の場合、記事の中の難しい単語で問題を補います。間違えた難単語は単語帳に追加されます。", "levelOnly": "この記事には{l}版がないため{m}版を表示しています", "acctTitle": "クラウド保存", "acctOff": "ログインすると、単語・テスト・ゲームの進行がクラウドに保存されます。機種変更やブラウザのデータ削除をしても消えません。ログインは一度だけです。", "signIn": "Google でログイン", "signOut": "ログアウト", "signedAs": "{n} としてログイン中", "synced": "クラウドに保存しました", "syncing": "保存中…", "syncFail": "クラウドに接続できませんでした。進行状況はこの端末に保存され、オンラインに戻ると同期されます。", "loginFail": "ログインが完了しませんでした。もう一度お試しください。", "merged": "この端末の記録をクラウドの記録と統合しました", "signedOut": "ログアウトしました。記録はこの端末に残っています。", "cloudOff": "現在クラウドサービスを利用できません", "acctShort": "ログインして進行を保存", "tabRank": "ランキング", "tabCoop": "協力", "rkPower": "戦力", "rkLv": "レベル", "rkHp": "HP", "rkAtk": "攻撃", "rkTitle": "ランキング", "rkYou": "あなたは {n} 位", "rkNeedLogin": "ログインしてニックネームを決めるとランキングに参加できます。", "rkEmpty": "まだ誰もいません。最初の一人になろう！", "rkPowerNote": "戦力 = HP + 攻撃 × 3 + 防御 × 2", "nick": "ニックネーム", "nickSet": "ニックネームを決める", "nickSave": "保存", "nickHint": "1〜16文字。ランキングに公開されます", "nickBad": "ニックネームは1〜16文字にしてください", "nickSaved": "ニックネームを保存しました", "rkConq": "{n}町", "rkLoadFail": "ランキングを読み込めませんでした", "coTitle": "協力まちがい探し", "coSub": "同じ記事を一緒に読み、隠れた間違いを見つけてボスを倒そう。1人につき出撃券1枚を使います。", "coCreate": "部屋を作る", "coJoin": "参加", "coCodePh": "4桁のルームコードを入力", "coSolo": "ひとりで練習", "coSoloSub": "友達がオンラインでないときにひとりで練習（出撃券1枚を使用）", "coNeedLogin": "協力モードには Google ログインが必要です。", "coWaiting": "友達を待っています…", "coShare": "このルームコードを友達に伝えてください：", "coCancel": "部屋を閉じる", "coNoRoom": "部屋が見つかりません", "coFull": "その部屋は満員です", "coStart": "スタート！", "coRead": "間違っていると思う単語をタップしよう。見つけるとボスにダメージ、外すとチームにダメージ。", "coBoss": "まちがいボス", "coTeam": "チーム", "coTime": "残り{s}秒", "coFoundBy": "{n}が発見", "coWin": "勝利！すべての間違いを発見", "coLose": "今回はボスを倒せなかった", "coTimeUp": "時間切れ", "coResults": "間違いの解説", "coYouFound": "あなたは{n}個発見", "coMateFound": "仲間は{n}個発見", "coBack": "協力ロビーに戻る", "coPlayers": "{a} と {b}", "coOwn": "あなた", "coTypeSpell": "スペルミス", "coTypeForm": "語形の誤り", "coTypeConf": "混同しやすい語", "coExpSpell": "つづりの誤り。正しくは {r} です。", "coExpForm": "ここは {w} ではなく {r}（{p}）を使います。意味は「{m}」。", "coExpConf": "{w} と {r} は混同しやすい語です。ここでは {r}：{m}。", "coWrongTap": "その単語は正しいです", "coMissLeft": "あと{n}回まで間違えられます", "coLeftRoom": "仲間が部屋を出ました", "coOpening": "部屋を作成中…", "coJoining": "参加中…", "coNoArt": "記事を読み込み中です。少し待ってからもう一度お試しください"};
 STR.ko={"loading": "불러오는 중…", "tabToday": "오늘", "tabDict": "단어장", "tabAdv": "모험", "tabArch": "기사", "mainMenu": "메인 메뉴", "language": "언어", "storageFull": "저장 공간이 가득 찼습니다", "savedLocal": "이 기기에 저장하고 있습니다", "mast": "Lv {lv} · <b>{gold}<\/b> 골드 · 출정권 {t}", "chipDone": "읽음 · 퀴즈 {r}", "chipDoneNone": "완료", "chipRead": "읽음 · {n}단어 찾음", "loadingToday": "오늘의 기사를 불러오는 중…", "noArticles": "아직 기사가 없습니다", "noArticlesSub": "매일 아침 새로운 아일랜드 뉴스가 추가됩니다. 나중에 다시 확인해 주세요.", "start": "시작 →", "again": "열기", "todayHead": "오늘의 헤드라인", "latestHead": "최신 헤드라인 · {d}", "stepPre": "복습 퀴즈", "preScore": "{t}문제 중 {s}개 정답", "preDraw": "예전 단어 {n}개 중 숙련도에 따라 {k}문제 출제", "preNone": "아직 복습할 단어가 없어요. 바로 읽어 보세요", "stepRead": "헤드라인 읽기", "readDone": "{n}단어 찾음", "readHint": "모르는 단어를 누르면 뜻이 나와요", "stepPost": "읽은 후 퀴즈", "postScore": "{t}문제 중 {s}개 정답", "postNone": "오늘은 찾은 단어가 없어요", "postHint": "방금 찾은 단어로 퀴즈, 모든 문제에 해설 포함", "moreRead": "더 읽고 싶나요?", "moreCount": "오늘의 다른 기사 {n}편", "moreLocked": "복습 퀴즈를 마치면 읽을 수 있어요.", "banner": "출정권 {t}장 · {g} 골드", "bannerSub": "퀴즈로 골드를 모아 오행 장비를 사고 괴물과 싸우세요", "bannerGo": "모험 →", "statWords": "저장한 단어", "statAcc": "누적 정답률", "statArts": "기사 수", "notFound": "기사를 찾을 수 없습니다.", "lockTitle": "먼저 복습 퀴즈를 마치세요", "lockSub": "매일 읽기 전에 이전에 찾은 단어를 복습해요.", "lockBtn": "복습 퀴즈 시작", "backToday": "오늘로 돌아가기", "startPost": "퀴즈 시작", "finishMain": "다 읽었어요 — 퀴즈 시작 →", "extraDone": "이 기사의 퀴즈를 마쳤어요 ({r}). 찾은 단어는 이후 복습에 나와요.", "noLookups": "단어 없음", "finishExtra": "다 읽었어요 — 이 기사 단어로 퀴즈 →", "back": "← 뒤로", "words": "{n}단어", "rewritten": "{s} 기사를 바탕으로 다시 씀", "tip": "단어를 누르면 뜻이 나와요. 찾은 단어는 이 색으로 표시되고 단어장에 저장돼요.", "myDict": "내 단어장", "dictCount": "{n}단어", "search": "단어나 뜻 검색", "sort": "정렬", "sortRecent": "최근", "sortWeak": "약한 단어", "probNote": "출제 확률은 정답률에 따라 정해져요. 자주 틀리거나 오래 복습하지 않은 단어일수록 더 자주 나와요.", "backup": "기록 백업", "backupSub": "단어, 퀴즈, 게임 진행 상황은 이 휴대폰 브라우저에만 저장돼요. 휴대폰을 바꾸거나 Safari 데이터를 지우기 전에 백업을 내보내세요.", "export": "내보내기", "import": "가져오기", "imported": "{n}단어를 가져왔어요", "badFile": "올바른 백업 파일이 아니에요", "nMeaning": "뜻", "nUsage": "용법", "nColl": "자주 쓰는 표현", "nEx": "예문", "newWord": "새 단어", "qCount": "{n}문제", "kvLookups": "찾은 횟수", "kvTimes": "{n}회", "kvFirst": "처음 찾은 날", "kvRW": "정답 / 오답", "kvProb": "다음 출제 확률", "kvTomorrow": "내일부터 복습에 추가", "pron": "발음", "confirmDel": "이 단어를 삭제할까요?", "del": "삭제", "cancel": "취소", "delFromDict": "단어장에서 삭제", "noMatch": "일치하는 단어가 없어요", "dictEmpty": "단어장이 비어 있어요", "dictEmptySub": "읽다가 모르는 단어를 누르면 여기에 저장돼요.", "allArts": "전체 기사", "artCount": "{n}편", "archNote": "어느 기사에서 찾은 단어든 단어장과 이후 복습에 들어가요.", "noGloss": "이 단어의 뜻이 준비되어 있지 않아요.", "wordTr": "단어 뜻", "base": "원형: ", "funcWord": "자주 쓰는 기능어라 단어장에 추가하지 않아요", "added": "단어장에 추가했어요", "already": "이미 단어장에 있어요 · {n}번 찾음", "youPicked": "선택한 답", "pickedMeans": "\"{a}\"는 \"{b}\"라는 뜻이에요.", "pickedPlain": "\"{a}\".", "correctIs": "정답은 <b>{w}<\/b> ({m})예요.", "basic": "기본 뜻", "basicTxt": "기사에서 {w} ({p})는 \"{m}\"라는 뜻이에요.", "forms": " 기사 속 형태: {f}.", "sentence": "기사 문장", "preTitle": "복습 퀴즈", "postTitle": "읽은 후 퀴즈", "done": "{t} · 완료", "readNow": "오늘의 헤드라인 읽기 →", "sumWrong": "틀린 단어가 맨 위에 나오고, 이후 복습에도 더 자주 나와요.", "sumAll": "모두 정답! 이 단어들은 앞으로 덜 출제돼요.", "explainAll": "모든 단어 해설", "qMeaning": "이 단어의 뜻은?", "qWord": "이 뜻을 가진 영어 단어는?", "qCloze": "빈칸에 들어갈 단어를 고르세요", "right": "정답!", "wrong": "아쉬워요 — 해설을 보세요", "next": "다음", "seeAll": "결과와 전체 해설 보기", "artLoadFail": "기사를 불러오지 못했어요. 인터넷 연결을 확인하세요.", "removed": "삭제했어요", "loot": "전리품", "lootRight": "{n}문제 정답", "lootAcc": "정답률 {p}% 보너스", "lootAccNo": "정답률 {p}% (80% 이상이면 보너스)", "lootDay": "오늘의 3단계 완료", "tickets": "출정권", "lootT": "+{n}장", "gold": "골드", "goldAmt": "+{n} 골드", "goAdv": "모험하러 가기 →", "owned": "이미 가지고 있어요", "needLv": "Lv {n} 필요", "noGold": "골드가 {n} 부족해요", "bought": "{i}을(를) 사서 장착했어요", "advWin": "무기 유리 ×1.5", "advWlose": "무기 불리 ×0.67", "advAwin": "방어구 유리 · 피해 ×0.67", "advAlose": "방어구 불리 · 피해 ×1.5", "advNone": "속성 보너스 없음", "noTicket": "출정권이 없어요. 퀴즈를 마치면 받을 수 있어요", "spell": "전투 주문", "spellSub": "맞히면 첫 공격이 두 배 피해를 줘요.", "spellOk": "주문 성공! 첫 공격 ×2", "spellFail": "주문 실패. 정답: {w} — {m}", "retreat": "← 후퇴", "elAttr": "{e} 속성", "yourHp": "내 HP", "atk": "공격", "def": "방어", "skipSpell": "주문 건너뛰고 싸우기", "fight": "출정! (출정권 1장)", "logSpell": "주문의 힘! ", "logCrit": "치명타! ", "logYou": "당신이 <b>{n}<\/b>의 피해를 줬다", "logMon": "{m}이(가) <b>{n}<\/b>의 피해를 줬다", "win": "승리", "exp": "경험치", "lvUp": "레벨 업!", "lose": "패배", "loseTip": "{m}은(는) 너무 강했어요. {e} 속성을 이기는 무기({c} 속성)를 써 보거나, 약한 괴물로 먼저 레벨을 올리세요.", "you": "나 · Lv {lv}", "backAdv": "모험으로 돌아가기", "fightAgain": "다시 싸우기", "skipAnim": "애니메이션 건너뛰기", "cycleAria": "오행 상극: 금은 목을, 목은 토를, 토는 수를, 수는 화를, 화는 금을 이긴다", "atkPlus": "공격 +{n}", "defPlus": "방어 +{d} · HP +{h}", "unequip": "해제", "equip": "장착", "equipped": "장착 중", "unlockAt": "Lv {n}에 해금", "weapon": "무기", "armor": "방어구", "price": "{n} 골드", "suggest": "권장 Lv {n}+", "monLine": "Lv {lv} · HP {hp} · 공격 {atk}", "beaten": " · {n}번 격파", "go": "싸우기", "all": "전체", "bagEmpty": "가방이 비어 있어요", "bagEmptySub": "퀴즈로 골드를 모아 상점에서 첫 장비를 사세요.", "hero": "모험가", "expLine": "경험치 {e} / {n}", "bare": "맨손", "cloth": "평상복", "rulesQ": "오행 상극은 어떻게 작동하나요?", "rules1": "화살표는 '이긴다'는 뜻이에요: 금 → 목 → 토 → 수 → 화 → 금.", "rules2": "<b>무기<\/b>가 괴물 속성을 이기면 피해 ×1.5, 지면 ×0.67.<br><b>방어구<\/b>가 괴물 속성을 이기면 받는 피해 ×0.67, 지면 ×1.5.", "rules3": "골드는 퀴즈로 얻어요: 정답 하나당 10골드, 정답률 80% 이상이면 +20, 만점이면 +20 추가. 퀴즈를 한 번 마칠 때마다 출정권 1장, 하루 3단계를 모두 마치면 30골드와 출정권 1장을 더 받아요.", "tabGo": "정복", "tabShop": "상점", "tabBag": "가방", "conqProg": "{t}개 마을 중 {n}곳 정복", "conqTag": "정복함", "conqNew": "{c}을(를) 정복했어요!", "allConq": "아일랜드 섬 전체를 정복했어요!", "taxBtn": "오늘 세금 받기 +{n} 골드", "taxGot": "세금 {n} 골드를 받았어요", "taxDone": "오늘 세금은 이미 받았어요. 내일 다시 오세요", "taxHint": "정복한 마을은 매일 세금을 내요. 큰 마을일수록 더 많이 내요.", "taxLine": "매일 세금 {n} 골드", "pop": "인구 약 {n}", "holds": "{m}이(가) 이 마을을 지배하고 있다", "tapCity": "지도에서 마을을 누르면 자세히 볼 수 있어요", "attack": "공격", "trainBtn": "여기서 수련", "lockedCity": "Lv {n}부터 공격 가능", "lockShort": "잠김", "mapAria": "아일랜드 섬 지도", "goal": "목표: 가장 작은 마을부터 더블린까지 싸워 나가 섬 전체를 정복하세요. 큰 마을일수록 괴물이 강해요.", "synonyms": "비슷한 말", "antonyms": "반대말", "level": "영어 수준", "lvB1": "중급: 일상 단어, 짧은 문장", "lvB2": "중상급: 일반 뉴스 어휘", "lvC1": "고급: 더 격식 있고 드문 단어", "lvIELTS": "IELTS 7–8: 학술 어휘", "fillTag": "기사 속 어려운 단어", "fillNote": "찾은 단어가 10개보다 적으면 기사 속 어려운 단어로 문제를 채워요. 틀린 어려운 단어는 단어장에 추가돼요.", "levelOnly": "이 기사에는 {l} 버전이 없어 {m} 버전을 보여 줘요", "acctTitle": "클라우드 저장", "acctOff": "로그인하면 단어, 퀴즈, 게임 진행 상황이 클라우드에 저장돼요. 휴대폰을 바꾸거나 브라우저 데이터를 지워도 사라지지 않고, 로그인은 한 번만 하면 돼요.", "signIn": "Google로 로그인", "signOut": "로그아웃", "signedAs": "{n}(으)로 로그인됨", "synced": "클라우드에 저장됨", "syncing": "저장 중…", "syncFail": "클라우드에 연결하지 못했어요. 진행 상황은 이 휴대폰에 저장되고 다시 온라인이 되면 동기화돼요.", "loginFail": "로그인이 완료되지 않았어요. 다시 시도해 주세요.", "merged": "이 휴대폰의 기록을 클라우드 기록과 합쳤어요", "signedOut": "로그아웃했어요. 기록은 이 휴대폰에 남아 있어요.", "cloudOff": "지금은 클라우드 서비스를 사용할 수 없어요", "acctShort": "로그인해서 진행 상황 저장", "tabRank": "랭킹", "tabCoop": "협동", "rkPower": "전투력", "rkLv": "레벨", "rkHp": "HP", "rkAtk": "공격", "rkTitle": "랭킹", "rkYou": "현재 {n}위", "rkNeedLogin": "로그인하고 닉네임을 정하면 랭킹에 참여할 수 있어요.", "rkEmpty": "아직 아무도 없어요. 첫 번째가 되어 보세요!", "rkPowerNote": "전투력 = HP + 공격 × 3 + 방어 × 2", "nick": "닉네임", "nickSet": "닉네임 정하기", "nickSave": "저장", "nickHint": "1~16자, 랭킹에 공개돼요", "nickBad": "닉네임은 1~16자여야 해요", "nickSaved": "닉네임을 저장했어요", "rkConq": "{n}개 마을", "rkLoadFail": "랭킹을 불러오지 못했어요", "coTitle": "협동 틀린 글자 찾기", "coSub": "같은 기사를 함께 읽고 숨은 오류를 찾아 보스를 물리치세요. 한 사람당 출정권 1장을 써요.", "coCreate": "방 만들기", "coJoin": "참가", "coCodePh": "4자리 방 코드 입력", "coSolo": "혼자 연습", "coSoloSub": "온라인인 친구가 없을 때 혼자 연습해요 (출정권 1장 사용)", "coNeedLogin": "협동 모드는 Google 로그인이 필요해요.", "coWaiting": "친구를 기다리는 중…", "coShare": "친구에게 이 방 코드를 알려 주세요:", "coCancel": "방 취소", "coNoRoom": "방을 찾을 수 없어요", "coFull": "이미 꽉 찬 방이에요", "coStart": "시작!", "coRead": "틀렸다고 생각하는 단어를 누르세요. 찾으면 보스에게 피해, 잘못 누르면 팀에게 피해.", "coBoss": "오류 보스", "coTeam": "팀", "coTime": "{s}초 남음", "coFoundBy": "{n}이(가) 찾음", "coWin": "승리! 모든 오류를 찾았어요", "coLose": "이번에는 보스가 살아남았어요", "coTimeUp": "시간 종료", "coResults": "오류 해설", "coYouFound": "내가 찾은 개수 {n}", "coMateFound": "팀원이 찾은 개수 {n}", "coBack": "협동 로비로 돌아가기", "coPlayers": "{a} & {b}", "coOwn": "나", "coTypeSpell": "철자 오류", "coTypeForm": "어형 오류", "coTypeConf": "헷갈리는 단어", "coExpSpell": "철자가 틀렸어요. 올바른 철자는 {r}예요.", "coExpForm": "여기에는 {w}가 아니라 {r} ({p})를 써야 해요. 뜻: \"{m}\".", "coExpConf": "{w}와 {r}는 헷갈리기 쉬워요. 여기서는 {r}: {m}.", "coWrongTap": "그 단어는 맞아요", "coMissLeft": "앞으로 {n}번 더 틀릴 수 있어요", "coLeftRoom": "팀원이 방을 나갔어요", "coOpening": "방을 만드는 중…", "coJoining": "참가하는 중…", "coNoArt": "기사를 불러오는 중이에요. 잠시 후 다시 시도해 주세요"};
+Object.assign(STR.zh,{"revTitle": "字典複習", "revSub": "從字典抽 {n} 題，越不熟、越久沒複習的字越容易被抽到。完成一次可以拿 1 張彩券。", "revLeft": "今天還能拿 {n} 張彩券", "revNoMore": "今天的彩券已經領完，還是可以繼續複習", "revStart": "開始複習 →", "revNeed": "字典至少要有 {n} 個字才能複習", "lottoGot": "獲得 1 張彩券", "lottoCap": "今天從複習拿到的彩券已達上限（{n} 張）", "lotto": "彩券", "goLuck": "去抽獎 →", "backDict": "回到字典", "tabLuck": "幸運屋", "luckSub": "在字典完成一次複習就能拿 1 張彩券（每天最多 {n} 張）。1 張可以轉一次轉盤，2 張以上可以買刮刮樂。", "wheelTitle": "幸運轉盤", "wheelSpin": "轉一次（1 張彩券）", "wheelBusy": "轉動中…", "noLotto": "彩券不足，到字典完成複習就能拿到", "wheelWin": "轉到了：{p}", "pGold": "{n} 金幣", "pTicket": "{n} 張出征令", "pLotto": "{n} 張彩券", "pShard": "{e}屬性 {t} 級碎片 ×{n}", "pShardAny": "隨機屬性 {t} 級碎片", "shardWord": "碎片", "scTitle": "刮刮樂", "scSub": "越貴的卡，越容易刮到高等級碎片。屬性是隨機的。", "scBronze": "銅卡", "scSilver": "銀卡", "scGold": "金卡", "scCost": "{n} 張彩券", "scHint": "用手指刮開銀色的部分", "scAll": "全部刮開", "scTake": "收下", "scHere": "刮開這裡", "shTitle": "元素碎片", "shSub": "同屬性、同等級的碎片集滿 {n} 個，就能合成一件隨機的同屬性同等級裝備（武器或防具）。", "forge": "合成", "forged": "合成成功：{i}，已放進背包", "forgeDup": "這個屬性和等級的武器、防具你都有了，改換成 {n} 金幣", "oddsTitle": "機率一覽", "oddsDouble": "{p}% 機率一次拿 2 個", "cyGen": "生", "cyBeat": "克", "rules1": "星形裡的箭頭是「克」，決定戰鬥加成：金克木、木克土、土克水、水克火、火克金。外圈綠色箭頭是「生」：金生水、水生木、木生火、火生土、土生金，用來看懂五行關係，不影響戰鬥。", "cycleAria": "五行。相克：金克木、木克土、土克水、水克火、火克金。相生：金生水、水生木、木生火、火生土、土生金。"});
+Object.assign(STR.en,{"revTitle": "Dictionary review", "revSub": "{n} questions from your dictionary. Words you know least, or haven't reviewed for a while, come up more. Finish one to earn 1 lucky ticket.", "revLeft": "{n} lucky tickets left to earn today", "revNoMore": "You've earned today's lucky tickets. You can still keep reviewing", "revStart": "Start review →", "revNeed": "You need at least {n} words in your dictionary to review", "lottoGot": "You got 1 lucky ticket", "lottoCap": "Daily limit of lucky tickets from reviews reached ({n})", "lotto": "Lucky tickets", "goLuck": "Try your luck →", "backDict": "Back to dictionary", "tabLuck": "Luck", "luckSub": "Finish a dictionary review to earn 1 lucky ticket (up to {n} a day). 1 ticket spins the wheel once; 2 or more buy a scratch card.", "wheelTitle": "Lucky wheel", "wheelSpin": "Spin (1 lucky ticket)", "wheelBusy": "Spinning…", "noLotto": "Not enough lucky tickets. Finish a dictionary review to earn one", "wheelWin": "You won: {p}", "pGold": "{n} gold", "pTicket": "{n} × quest pass", "pLotto": "{n} × lucky ticket", "pShard": "{e} tier {t} shard ×{n}", "pShardAny": "Random tier {t} shard", "shardWord": "shard", "scTitle": "Scratch cards", "scSub": "Pricier cards give better odds of high-tier shards. The element is random.", "scBronze": "Bronze card", "scSilver": "Silver card", "scGold": "Gold card", "scCost": "{n} lucky tickets", "scHint": "Scratch the silver panel with your finger", "scAll": "Reveal all", "scTake": "Collect", "scHere": "Scratch here", "shTitle": "Element shards", "shSub": "Collect {n} shards of the same element and tier to forge a random piece of gear (weapon or armour) of that element and tier.", "forge": "Forge", "forged": "Forged {i}! It's in your bag", "forgeDup": "You already own both pieces of this element and tier, so you get {n} gold instead", "oddsTitle": "Odds", "oddsDouble": "{p}% chance of 2 shards", "cyGen": "feeds", "cyBeat": "beats", "rules1": "Arrows inside the star mean \"beats\" and set battle bonuses: Metal beats Wood, Wood beats Earth, Earth beats Water, Water beats Fire, Fire beats Metal. The green outer arrows mean \"feeds\" (Metal → Water → Wood → Fire → Earth → Metal). They show how the elements relate and don't affect battles.", "cycleAria": "Five elements. Beats: Metal→Wood, Wood→Earth, Earth→Water, Water→Fire, Fire→Metal. Feeds: Metal→Water→Wood→Fire→Earth→Metal."});
+Object.assign(STR.hi,{"revTitle": "शब्दकोश दोहराई", "revSub": "आपके शब्दकोश से {n} प्रश्न। जो शब्द कम आते हैं या लंबे समय से नहीं दोहराए, वे ज़्यादा आते हैं। एक दोहराई पूरी करने पर 1 लकी टिकट मिलता है।", "revLeft": "आज {n} लकी टिकट और मिल सकते हैं", "revNoMore": "आज के लकी टिकट मिल चुके हैं। आप दोहराई जारी रख सकते हैं", "revStart": "दोहराई शुरू करें →", "revNeed": "दोहराई के लिए शब्दकोश में कम से कम {n} शब्द चाहिए", "lottoGot": "1 लकी टिकट मिला", "lottoCap": "दोहराई से आज की लकी टिकट सीमा पूरी ({n})", "lotto": "लकी टिकट", "goLuck": "किस्मत आज़माएँ →", "backDict": "शब्दकोश पर वापस", "tabLuck": "किस्मत", "luckSub": "शब्दकोश दोहराई पूरी करें और 1 लकी टिकट पाएँ (दिन में अधिकतम {n})। 1 टिकट से पहिया एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड खरीदें।", "wheelTitle": "किस्मत का पहिया", "wheelSpin": "घुमाएँ (1 लकी टिकट)", "wheelBusy": "घूम रहा है…", "noLotto": "लकी टिकट कम हैं। शब्दकोश दोहराई पूरी करके पाएँ", "wheelWin": "आपको मिला: {p}", "pGold": "{n} सोना", "pTicket": "{n} × अभियान पास", "pLotto": "{n} × लकी टिकट", "pShard": "{e} स्तर {t} टुकड़ा ×{n}", "pShardAny": "यादृच्छिक स्तर {t} टुकड़ा", "shardWord": "टुकड़ा", "scTitle": "स्क्रैच कार्ड", "scSub": "महँगे कार्ड में ऊँचे स्तर के टुकड़े मिलने की संभावना ज़्यादा है। तत्व यादृच्छिक है।", "scBronze": "काँसा कार्ड", "scSilver": "चाँदी कार्ड", "scGold": "सोना कार्ड", "scCost": "{n} लकी टिकट", "scHint": "उँगली से चाँदी वाला हिस्सा खुरचें", "scAll": "सब खोलें", "scTake": "लें", "scHere": "यहाँ खुरचें", "shTitle": "तत्व टुकड़े", "shSub": "एक ही तत्व और स्तर के {n} टुकड़े जमा करें और उसी तत्व व स्तर का एक यादृच्छिक उपकरण (हथियार या कवच) बनाएँ।", "forge": "बनाएँ", "forged": "{i} बन गया! यह आपके बैग में है", "forgeDup": "इस तत्व और स्तर के दोनों उपकरण आपके पास हैं, इसलिए बदले में {n} सोना मिला", "oddsTitle": "संभावनाएँ", "oddsDouble": "{p}% संभावना 2 टुकड़े मिलने की", "cyGen": "पोषण", "cyBeat": "हराता", "rules1": "तारे के अंदर के तीर \"हराता है\" दिखाते हैं और युद्ध बोनस तय करते हैं: धातु लकड़ी को, लकड़ी पृथ्वी को, पृथ्वी जल को, जल अग्नि को, अग्नि धातु को हराती है। बाहर के हरे तीर \"पोषण\" दिखाते हैं (धातु → जल → लकड़ी → अग्नि → पृथ्वी → धातु)। ये केवल संबंध बताते हैं, युद्ध पर असर नहीं डालते।", "cycleAria": "पंचतत्व। हराता है: धातु→लकड़ी, लकड़ी→पृथ्वी, पृथ्वी→जल, जल→अग्नि, अग्नि→धातु। पोषण: धातु→जल→लकड़ी→अग्नि→पृथ्वी→धातु।"});
+Object.assign(STR.es,{"revTitle": "Repaso del diccionario", "revSub": "{n} preguntas de tu diccionario. Salen más las palabras que menos dominas o que hace tiempo que no repasas. Termina un repaso y gana 1 boleto de la suerte.", "revLeft": "Hoy aún puedes ganar {n} boletos", "revNoMore": "Ya ganaste los boletos de hoy. Puedes seguir repasando", "revStart": "Empezar repaso →", "revNeed": "Necesitas al menos {n} palabras en tu diccionario para repasar", "lottoGot": "Has ganado 1 boleto de la suerte", "lottoCap": "Límite diario de boletos por repaso alcanzado ({n})", "lotto": "Boletos", "goLuck": "Probar suerte →", "backDict": "Volver al diccionario", "tabLuck": "Suerte", "luckSub": "Termina un repaso del diccionario para ganar 1 boleto de la suerte (máximo {n} al día). Con 1 boleto giras la ruleta; con 2 o más compras un rasca y gana.", "wheelTitle": "Ruleta de la suerte", "wheelSpin": "Girar (1 boleto)", "wheelBusy": "Girando…", "noLotto": "No tienes boletos suficientes. Termina un repaso del diccionario", "wheelWin": "Has ganado: {p}", "pGold": "{n} de oro", "pTicket": "{n} × pase", "pLotto": "{n} × boleto", "pShard": "Fragmento {e} nivel {t} ×{n}", "pShardAny": "Fragmento aleatorio nivel {t}", "shardWord": "fragmento", "scTitle": "Rasca y gana", "scSub": "Las tarjetas más caras dan más probabilidad de fragmentos de nivel alto. El elemento es aleatorio.", "scBronze": "Tarjeta de bronce", "scSilver": "Tarjeta de plata", "scGold": "Tarjeta de oro", "scCost": "{n} boletos", "scHint": "Rasca la zona plateada con el dedo", "scAll": "Destapar todo", "scTake": "Recoger", "scHere": "Rasca aquí", "shTitle": "Fragmentos de elemento", "shSub": "Junta {n} fragmentos del mismo elemento y nivel para forjar un equipo aleatorio (arma o armadura) de ese elemento y nivel.", "forge": "Forjar", "forged": "¡Has forjado {i}! Está en tu bolsa", "forgeDup": "Ya tienes las dos piezas de este elemento y nivel, así que recibes {n} de oro", "oddsTitle": "Probabilidades", "oddsDouble": "{p}% de obtener 2 fragmentos", "cyGen": "nutre", "cyBeat": "vence", "rules1": "Las flechas de la estrella significan «vence a» y dan las bonificaciones de combate: Metal vence a Madera, Madera a Tierra, Tierra a Agua, Agua a Fuego y Fuego a Metal. Las flechas verdes de fuera significan «nutre» (Metal → Agua → Madera → Fuego → Tierra → Metal). Muestran la relación entre elementos y no afectan al combate.", "cycleAria": "Cinco elementos. Vence: Metal→Madera, Madera→Tierra, Tierra→Agua, Agua→Fuego, Fuego→Metal. Nutre: Metal→Agua→Madera→Fuego→Tierra→Metal."});
+Object.assign(STR.ja,{"revTitle": "単語帳の復習", "revSub": "単語帳から{n}問。苦手な単語や、しばらく復習していない単語ほど出やすくなります。1回終えるとくじ券が1枚もらえます。", "revLeft": "今日はあと{n}枚くじ券をもらえます", "revNoMore": "今日のくじ券はもらい終えました。復習は続けられます", "revStart": "復習を始める →", "revNeed": "復習するには単語帳に{n}語以上必要です", "lottoGot": "くじ券を1枚手に入れました", "lottoCap": "復習でもらえる今日のくじ券は上限です（{n}枚）", "lotto": "くじ券", "goLuck": "運だめしへ →", "backDict": "単語帳に戻る", "tabLuck": "幸運", "luckSub": "単語帳の復習を1回終えるとくじ券が1枚（1日最大{n}枚）。1枚でルーレットを1回、2枚以上でスクラッチカードが買えます。", "wheelTitle": "幸運のルーレット", "wheelSpin": "回す（くじ券1枚）", "wheelBusy": "回転中…", "noLotto": "くじ券が足りません。単語帳の復習でもらえます", "wheelWin": "当たり：{p}", "pGold": "{n} G", "pTicket": "出撃券 ×{n}", "pLotto": "くじ券 ×{n}", "pShard": "{e}属性 ランク{t}のかけら ×{n}", "pShardAny": "ランダム属性 ランク{t}のかけら", "shardWord": "かけら", "scTitle": "スクラッチカード", "scSub": "高いカードほど、高ランクのかけらが出やすくなります。属性はランダムです。", "scBronze": "銅カード", "scSilver": "銀カード", "scGold": "金カード", "scCost": "くじ券 {n}枚", "scHint": "銀色の部分を指でけずってください", "scAll": "全部けずる", "scTake": "受け取る", "scHere": "ここをけずる", "shTitle": "属性のかけら", "shSub": "同じ属性・同じランクのかけらを{n}個集めると、その属性とランクの装備（武器か防具）をランダムに1つ合成できます。", "forge": "合成", "forged": "{i}を合成しました！バッグに入っています", "forgeDup": "この属性とランクの武器・防具はどちらも持っているので、代わりに{n} Gを受け取りました", "oddsTitle": "確率一覧", "oddsDouble": "{p}%の確率で2個", "cyGen": "生", "cyBeat": "剋", "rules1": "星形の矢印は「剋」で、戦闘のボーナスを決めます：金は木に、木は土に、土は水に、水は火に、火は金に勝ちます。外側の緑の矢印は「生」（金→水→木→火→土→金）で、五行の関係を示すだけで戦闘には影響しません。", "cycleAria": "五行。相剋：金→木、木→土、土→水、水→火、火→金。相生：金→水→木→火→土→金。"});
+Object.assign(STR.ko,{"revTitle": "단어장 복습", "revSub": "단어장에서 {n}문제. 잘 모르는 단어나 오래 복습하지 않은 단어일수록 더 자주 나와요. 한 번 끝내면 복권 1장을 받아요.", "revLeft": "오늘 복권을 {n}장 더 받을 수 있어요", "revNoMore": "오늘 받을 복권은 다 받았어요. 복습은 계속할 수 있어요", "revStart": "복습 시작 →", "revNeed": "복습하려면 단어장에 단어가 {n}개 이상 있어야 해요", "lottoGot": "복권 1장을 받았어요", "lottoCap": "오늘 복습으로 받을 수 있는 복권을 다 받았어요 ({n}장)", "lotto": "복권", "goLuck": "행운 뽑기 →", "backDict": "단어장으로", "tabLuck": "행운", "luckSub": "단어장 복습을 한 번 끝내면 복권 1장 (하루 최대 {n}장). 1장으로 룰렛을 한 번 돌리고, 2장 이상이면 긁는 복권을 살 수 있어요.", "wheelTitle": "행운의 룰렛", "wheelSpin": "돌리기 (복권 1장)", "wheelBusy": "돌아가는 중…", "noLotto": "복권이 부족해요. 단어장 복습을 끝내면 받을 수 있어요", "wheelWin": "당첨: {p}", "pGold": "{n} 골드", "pTicket": "출정권 ×{n}", "pLotto": "복권 ×{n}", "pShard": "{e} 속성 {t}등급 조각 ×{n}", "pShardAny": "무작위 속성 {t}등급 조각", "shardWord": "조각", "scTitle": "긁는 복권", "scSub": "비싼 카드일수록 높은 등급 조각이 잘 나와요. 속성은 무작위예요.", "scBronze": "동 카드", "scSilver": "은 카드", "scGold": "금 카드", "scCost": "복권 {n}장", "scHint": "손가락으로 은색 부분을 긁어 주세요", "scAll": "모두 긁기", "scTake": "받기", "scHere": "여기를 긁으세요", "shTitle": "속성 조각", "shSub": "같은 속성, 같은 등급 조각을 {n}개 모으면 그 속성과 등급의 장비(무기 또는 방어구)를 무작위로 하나 합성할 수 있어요.", "forge": "합성", "forged": "{i} 합성 성공! 가방에 넣었어요", "forgeDup": "이 속성과 등급의 무기와 방어구를 모두 갖고 있어서 대신 {n} 골드를 받았어요", "oddsTitle": "확률 보기", "oddsDouble": "{p}% 확률로 2개", "cyGen": "생", "cyBeat": "극", "rules1": "별 모양 안의 화살표는 '극'이며 전투 보너스를 정해요: 금은 나무를, 나무는 흙을, 흙은 물을, 물은 불을, 불은 금을 이겨요. 바깥의 초록 화살표는 '생'(금→물→나무→불→흙→금)으로, 오행의 관계를 보여 줄 뿐 전투에는 영향이 없어요.", "cycleAria": "오행. 상극: 금→나무, 나무→흙, 흙→물, 물→불, 불→금. 상생: 금→물→나무→불→흙→금."});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText();
 render();
 (async ()=>{
