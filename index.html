@@ -357,6 +357,7 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .sc-hint{text-align:center;font-size:13px;font-weight:600}
 .sc-modal>.btn{background:var(--card);color:var(--accent)}.sc-modal>.btn:not(.ghost){background:var(--accent);color:var(--accent-ink)}
 .set-sec{display:flex;flex-direction:column;gap:10px}.set-opt{display:flex;flex-direction:column;gap:2px;padding:12px 14px}
+.sup{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--gorse);background:var(--gorse-soft)}.sup-cup{font-size:30px;line-height:1}.sup-main{display:flex;flex-direction:column;gap:6px}.sup-main .btn{align-self:flex-start;text-decoration:none;padding:8px 16px;font-size:14px}
 </style>
 
 </head>
@@ -653,7 +654,7 @@ const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floo
 const keyOf = lemma => "w~" + lemma.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9_.~:@+-]/g,"_").slice(0,120);
 const fmtDate = s => { const d=new Date(s+"T12:00:00"); return d.toLocaleDateString(LOCALE[LANG]||"zh-TW",{month:"long",day:"numeric",weekday:"short"}); };
 const STOP = new Set("a an the and or but of to in on at for from with by is are was were be been it its this that these those he she they we you i his her their our my your as if than then so not no do does did have has had will would can could may might shall should must which who whom what when where there here".split(" "));
-function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.append(t); setTimeout(()=>t.remove(),1800); }
+function toast(msg){ document.querySelectorAll(".toast").forEach(x=>x.remove()); const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.append(t); setTimeout(()=>t.remove(),1800); }
 function speak(text){ try{ const u=new SpeechSynthesisUtterance(text); u.lang="en-IE"; u.rate=.9; speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
 const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>';
 
@@ -830,6 +831,8 @@ function viewSettings(){
     <section class="card set-sec"><b>${T("level")}</b><div class="opts">${lvls}</div></section>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    <section class="card sup"><div class="sup-cup" aria-hidden="true">☕</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
+      <a class="btn sm" href="https://revolut.me/chingche" target="_blank" rel="noopener noreferrer">${T("supBtn")}</a></div></section>
     ${devFooter()}
   </div>`;
 }
@@ -1484,6 +1487,7 @@ function itemRow(it, mode){
   else act=`<button class="btn sm" data-buy="${it.id}" ${g.gold<it.price?"disabled":""}>${T("price",{n:it.price})}</button>`;
   return `<div class="item${on?" on":""}">${elBadge(it.el,true)}<div class="it-main"><b>${esc(itemName(it))} <span class="tier">${TIER[it.tier].n}</span></b><span class="muted">${it.slot==="weapon"?T("weapon"):T("armor")} · ${stat}</span></div>${act}</div>`;
 }
+function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`; }
 function viewAdv(){
   const g=game(), s=stats(), need=expNeed(g.lv);
   const sub=S.advTab||"go";
@@ -1493,7 +1497,7 @@ function viewAdv(){
     body=viewConquest();
   } else if(sub==="shop"){
     const f=S.shopEl||"all";
-    const fseg=`<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`;
+    const fseg=elFilterSeg();
     const list=Object.values(ITEMS).filter(it=>f==="all"||it.el===f).sort((a,b)=>a.tier-b.tier||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
     body=fseg+`<div class="items">${list.map(it=>itemRow(it,"shop")).join("")}</div>`;
   } else if(sub==="rank"){
@@ -1503,8 +1507,9 @@ function viewAdv(){
   } else if(sub==="luck"){
     body=viewLuck();
   } else {
-    const own=g.inv.map(id=>ITEMS[id]).filter(Boolean);
-    body= own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
+    const f=S.shopEl||"all", all=g.inv.map(id=>ITEMS[id]).filter(Boolean);
+    const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>a.tier-b.tier||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
+    body= all.length?elFilterSeg()+(own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><p>${T("bagNone")}</p></div>`):`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
   }
   return `<div class="view">
     <section class="hero-card">
@@ -1711,7 +1716,7 @@ function viewLuck(){
    Only the SHA-256 hash of the code is stored here.
    While on: game changes are a sandbox — the cloud keeps your real save, the leaderboard is not updated,
    and leaving developer mode restores the save you had before. */
-const DEV_HASH="a55803e97b05ec565ac5533a6ca2628927062db712444af2663b1651267154b4";
+const DEV_HASH="9eaa14fe306fdc8a07a426770efb0d1a70d91504e62a51e644d02690b0e1a5dc";
 const DEV_KEY="che-pro-dev";
 let DEV=(()=>{ try{ return JSON.parse(localStorage.getItem(DEV_KEY)||"null"); }catch(e){ return null; } })();
 Object.assign(STR.zh,{devTitle:"開發者模式", devOn:"開發者模式已開啟", devSub:"這裡的改動都是測試用：雲端會保留你原本的進度，排行榜不會更新。離開開發者模式時，遊戲進度會還原成開啟前的樣子。", devCode:"輸入開發者密碼", devGo:"開啟", devBad:"密碼不正確", devExit:"離開開發者模式（還原原本進度）", devExited:"已離開開發者模式，進度已還原",
@@ -1981,12 +1986,11 @@ function viewRank(){
   const tabs=[["power",T("rkPower")],["lv",T("rkLv")],["hp",T("rkHp")],["atk",T("rkAtk")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
   const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
-  return `${g.nick?"":nickForm()}
+  return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
     <div class="seg" role="group">${tabs}</div>
     ${R.me?`<div class="rk-me">${T("rkYou",{n:R.me})}</div>`:""}
     ${R.err?`<p class="muted">${T("rkLoadFail")}</p>`:R.loading&&!R.rows.length?`<p class="muted">${T("loading")}</p>`:R.rows.length?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("rkEmpty")}</p></div>`}
-    ${f==="power"?`<p class="muted sm-t">${T("rkPowerNote")}</p>`:""}
-    ${g.nick?nickForm():""}`;
+    ${f==="power"?`<p class="muted sm-t">${T("rkPowerNote")}</p>`:""}`;
 }
 
 /* ----- error passages ----- */
@@ -2167,6 +2171,7 @@ Object.assign(STR.es,{"revTitle": "Repaso del diccionario", "revSub": "{n} pregu
 Object.assign(STR.ja,{"revTitle": "単語帳の復習", "revSub": "単語帳から{n}問。苦手な単語や、しばらく復習していない単語ほど出やすくなります。1回終えるとくじ券が1枚もらえます。", "revLeft": "今日はあと{n}枚くじ券をもらえます", "revNoMore": "今日のくじ券はもらい終えました。復習は続けられます", "revStart": "復習を始める →", "revNeed": "復習するには単語帳に{n}語以上必要です", "lottoGot": "くじ券を1枚手に入れました", "lottoCap": "復習でもらえる今日のくじ券は上限です（{n}枚）", "lotto": "くじ券", "goLuck": "運だめしへ →", "backDict": "単語帳に戻る", "tabLuck": "幸運", "luckSub": "単語帳の復習を1回終えるとくじ券が1枚（1日最大{n}枚）。1枚でルーレットを1回、2枚以上でスクラッチカードが買えます。", "wheelTitle": "幸運のルーレット", "wheelSpin": "回す（くじ券1枚）", "wheelBusy": "回転中…", "noLotto": "くじ券が足りません。単語帳の復習でもらえます", "wheelWin": "当たり：{p}", "pGold": "{n} G", "pTicket": "出撃券 ×{n}", "pLotto": "くじ券 ×{n}", "pShard": "{e}属性 ランク{t}のかけら ×{n}", "pShardAny": "ランダム属性 ランク{t}のかけら", "shardWord": "かけら", "scTitle": "スクラッチカード", "scSub": "高いカードほど、高ランクのかけらが出やすくなります。属性はランダムです。", "scBronze": "銅カード", "scSilver": "銀カード", "scGold": "金カード", "scCost": "くじ券 {n}枚", "scHint": "銀色の部分を指でけずってください", "scAll": "全部けずる", "scTake": "受け取る", "scHere": "ここをけずる", "shTitle": "属性のかけら", "shSub": "同じ属性・同じランクのかけらを{n}個集めると、その属性とランクの装備（武器か防具）をランダムに1つ合成できます。", "forge": "合成", "forged": "{i}を合成しました！バッグに入っています", "forgeDup": "この属性とランクの武器・防具はどちらも持っているので、代わりに{n} Gを受け取りました", "oddsTitle": "確率一覧", "oddsDouble": "{p}%の確率で2個", "cyGen": "生", "cyBeat": "剋", "rules1": "星形の矢印は「剋」で、戦闘のボーナスを決めます：金は木に、木は土に、土は水に、水は火に、火は金に勝ちます。外側の緑の矢印は「生」（金→水→木→火→土→金）で、五行の関係を示すだけで戦闘には影響しません。", "cycleAria": "五行。相剋：金→木、木→土、土→水、水→火、火→金。相生：金→水→木→火→土→金。"});
 Object.assign(STR.ko,{"revTitle": "단어장 복습", "revSub": "단어장에서 {n}문제. 잘 모르는 단어나 오래 복습하지 않은 단어일수록 더 자주 나와요. 한 번 끝내면 복권 1장을 받아요.", "revLeft": "오늘 복권을 {n}장 더 받을 수 있어요", "revNoMore": "오늘 받을 복권은 다 받았어요. 복습은 계속할 수 있어요", "revStart": "복습 시작 →", "revNeed": "복습하려면 단어장에 단어가 {n}개 이상 있어야 해요", "lottoGot": "복권 1장을 받았어요", "lottoCap": "오늘 복습으로 받을 수 있는 복권을 다 받았어요 ({n}장)", "lotto": "복권", "goLuck": "행운 뽑기 →", "backDict": "단어장으로", "tabLuck": "행운", "luckSub": "단어장 복습을 한 번 끝내면 복권 1장 (하루 최대 {n}장). 1장으로 룰렛을 한 번 돌리고, 2장 이상이면 긁는 복권을 살 수 있어요.", "wheelTitle": "행운의 룰렛", "wheelSpin": "돌리기 (복권 1장)", "wheelBusy": "돌아가는 중…", "noLotto": "복권이 부족해요. 단어장 복습을 끝내면 받을 수 있어요", "wheelWin": "당첨: {p}", "pGold": "{n} 골드", "pTicket": "출정권 ×{n}", "pLotto": "복권 ×{n}", "pShard": "{e} 속성 {t}등급 조각 ×{n}", "pShardAny": "무작위 속성 {t}등급 조각", "shardWord": "조각", "scTitle": "긁는 복권", "scSub": "비싼 카드일수록 높은 등급 조각이 잘 나와요. 속성은 무작위예요.", "scBronze": "동 카드", "scSilver": "은 카드", "scGold": "금 카드", "scCost": "복권 {n}장", "scHint": "손가락으로 은색 부분을 긁어 주세요", "scAll": "모두 긁기", "scTake": "받기", "scHere": "여기를 긁으세요", "shTitle": "속성 조각", "shSub": "같은 속성, 같은 등급 조각을 {n}개 모으면 그 속성과 등급의 장비(무기 또는 방어구)를 무작위로 하나 합성할 수 있어요.", "forge": "합성", "forged": "{i} 합성 성공! 가방에 넣었어요", "forgeDup": "이 속성과 등급의 무기와 방어구를 모두 갖고 있어서 대신 {n} 골드를 받았어요", "oddsTitle": "확률 보기", "oddsDouble": "{p}% 확률로 2개", "cyGen": "생", "cyBeat": "극", "rules1": "별 모양 안의 화살표는 '극'이며 전투 보너스를 정해요: 금은 나무를, 나무는 흙을, 흙은 물을, 물은 불을, 불은 금을 이겨요. 바깥의 초록 화살표는 '생'(금→물→나무→불→흙→금)으로, 오행의 관계를 보여 줄 뿐 전투에는 영향이 없어요.", "cycleAria": "오행. 상극: 금→나무, 나무→흙, 흙→물, 물→불, 불→금. 상생: 금→물→나무→불→흙→금."});
 Object.assign(STR.zh,{tabSet:"設定"});Object.assign(STR.en,{tabSet:"Settings"});Object.assign(STR.hi,{tabSet:"सेटिंग्स"});Object.assign(STR.es,{tabSet:"Ajustes"});Object.assign(STR.ja,{tabSet:"設定"});Object.assign(STR.ko,{tabSet:"설정"});
+Object.assign(STR.zh,{"rkNickHint": "還沒有暱稱。到「設定」取一個暱稱，就會出現在排行榜上。", "bagNone": "這個屬性還沒有裝備", "supTitle": "請開發者喝杯咖啡", "supSub": "如果這個 App 有幫到你學英文，歡迎透過 Revolut 請我喝一杯咖啡，支持我繼續更新新功能和每天的新聞 🙏", "supBtn": "用 Revolut 贊助 ☕"});Object.assign(STR.en,{"rkNickHint": "You don't have a nickname yet. Set one in Settings to appear on the leaderboard.", "bagNone": "No gear of this element yet", "supTitle": "Buy me a coffee", "supSub": "If this app helps your English, you can buy me a coffee on Revolut. It keeps the new features and daily news coming 🙏", "supBtn": "Support on Revolut ☕"});Object.assign(STR.hi,{"rkNickHint": "अभी आपका कोई उपनाम नहीं है। लीडरबोर्ड पर आने के लिए सेटिंग्स में उपनाम चुनें।", "bagNone": "इस तत्व का अभी कोई उपकरण नहीं", "supTitle": "मुझे एक कॉफ़ी पिलाएँ", "supSub": "अगर यह ऐप आपकी अंग्रेज़ी में मदद करता है, तो Revolut पर मुझे एक कॉफ़ी पिला सकते हैं। इससे नई सुविधाएँ और रोज़ की ख़बरें जारी रहती हैं 🙏", "supBtn": "Revolut से सहयोग करें ☕"});Object.assign(STR.es,{"rkNickHint": "Aún no tienes apodo. Elige uno en Ajustes para aparecer en la clasificación.", "bagNone": "Aún no tienes equipo de este elemento", "supTitle": "Invítame a un café", "supSub": "Si esta app te ayuda con el inglés, puedes invitarme a un café por Revolut. Así sigo añadiendo funciones y noticias cada día 🙏", "supBtn": "Apoyar con Revolut ☕"});Object.assign(STR.ja,{"rkNickHint": "まだニックネームがありません。設定でニックネームを決めるとランキングに表示されます。", "bagNone": "この属性の装備はまだありません", "supTitle": "開発者にコーヒーを1杯", "supSub": "このアプリが英語の勉強に役立ったら、Revolut でコーヒー1杯分の応援をいただけるとうれしいです。新機能と毎日のニュース更新の励みになります 🙏", "supBtn": "Revolut で応援する ☕"});Object.assign(STR.ko,{"rkNickHint": "아직 닉네임이 없어요. 설정에서 닉네임을 정하면 랭킹에 표시돼요.", "bagNone": "이 속성의 장비가 아직 없어요", "supTitle": "개발자에게 커피 한 잔", "supSub": "이 앱이 영어 공부에 도움이 됐다면 Revolut으로 커피 한 잔 후원해 주세요. 새 기능과 매일 뉴스 업데이트에 큰 힘이 돼요 🙏", "supBtn": "Revolut으로 후원하기 ☕"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
