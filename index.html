@@ -410,6 +410,7 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .boss-rules{border:1.5px solid var(--bad);display:flex;flex-direction:column;gap:4px}.boss-rules p{margin:0;font-size:14px}
 .dmg.eye{color:#FF5A5A;font-size:30px}
 .eye-fx{position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(255,40,40,.55),transparent 65%);animation:fade .6s ease-out forwards;pointer-events:none}
+select.search{appearance:auto;-webkit-appearance:menulist}.reg-note{font-size:13px;border-color:var(--gorse);background:var(--gorse-soft)}.chip.reg{background:var(--accent-soft);color:var(--accent)}
 </style>
 
 </head>
@@ -793,7 +794,7 @@ function render(){
 function artCard(a, d){
   const lu=lookedUpFor(d,a).length, post=postFor(d,a);
   const status = post ? `<span class="chip done">${T("chipDone",{r:post.total?post.score+"/"+post.total:T("chipDoneNone")})}</span>` : (lu?`<span class="chip new">${T("chipRead",{n:lu})}</span>`:"");
-  return `<button data-artid="${esc(a.id)}"><span class="row" style="gap:8px">${a.topic?`<span class="chip topic">${esc(topicOf(a))}</span>`:""}<span class="eyebrow">${esc(fmtDate(a.date))}</span>${status}</span><b>${esc(a.title)}</b>${sumOf(a)?`<span class="muted" style="font-size:13px">${esc(sumOf(a))}</span>`:""}</button>`;
+  return `<button data-artid="${esc(a.id)}"><span class="row" style="gap:8px">${a.region?`<span class="chip reg">📍 ${esc(regionLabel(a.region))}</span>`:""}${a.topic?`<span class="chip topic">${esc(topicOf(a))}</span>`:""}<span class="eyebrow">${esc(fmtDate(a.date))}</span>${status}</span><b>${esc(a.title)}</b>${sumOf(a)?`<span class="muted" style="font-size:13px">${esc(sumOf(a))}</span>`:""}</button>`;
 }
 
 function viewToday(){
@@ -808,9 +809,10 @@ function viewToday(){
   const step=(n,cls,title,sub,act)=>`<button class="step ${cls}" ${act?`data-act="${act}"`:"disabled"}><span class="n">${cls.includes("done")?"✓":n}</span><span><b>${title}</b><span class="s">${sub}</span></span><span class="go">${act&&!cls.includes("done")?T("start"):(act?T("again"):"")}</span></button>`;
   const total=[...S.words.values()];
   const tested=total.reduce((a,w)=>a+(w.correct||0)+(w.wrong||0),0), right=total.reduce((a,w)=>a+(w.correct||0),0);
-  const extras=S.index.filter(a=>a.date===art.date && a.id!==art.id);
+  const extras=S.index.filter(a=>a.date===art.date && a.id!==art.id && !(regionKey().startsWith("IE-")&&!a.region&&(a.rank||1)>2));
   return `<div class="view">
-    <section class="hero"><div class="eyebrow">${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
+    ${regionNotice()}
+    <section class="hero"><div class="eyebrow">${art.region?`📍 ${esc(regionLabel(art.region))} · `:""}${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
     <div class="steps">
       ${step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):T("preDraw",{n:el.length,k:Math.min(10,el.length)})):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
       ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
@@ -880,6 +882,7 @@ function viewSettings(){
     ${devPanel()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
+    ${regionSection()}
     <section class="card set-sec"><b>${T("language")} · Language</b><div class="opts">${langs}</div></section>
     <section class="card set-sec"><b>${T("level")}</b><div class="opts">${lvls}</div></section>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
@@ -1917,6 +1920,53 @@ function heroSvg(){
   </svg>`;
 }
 
+
+/* ---------- news region ---------- */
+const COUNTRIES=["IE","GB","US","CA","AU","NZ","IN","TW","HK","SG","JP","KR","ES","MX"];
+const COUNTIES=["Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim","Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"];
+let REGION=(()=>{ try{ const r=JSON.parse(localStorage.getItem("che-pro-region")||"null"); if(r&&COUNTRIES.includes(r.c)) return {c:r.c, county:r.c==="IE"&&COUNTIES.includes(r.county)?r.county:""}; }catch(e){} return {c:"IE",county:""}; })();
+const regionKey=()=>REGION.c==="IE"?(REGION.county?"IE-"+REGION.county.toLowerCase():"IE"):REGION.c;
+function countryName(c){ try{ return new Intl.DisplayNames([LOCALE[LANG]||"en"],{type:"region"}).of(c); }catch(e){ return c; } }
+function regionLabel(key){ key=key||regionKey(); if(key.startsWith("IE-")){ const c=COUNTIES.find(x=>x.toLowerCase()===key.slice(3))||key.slice(3); return T("countyOf",{c}); } return countryName(key); }
+function artPrio(a){ // lower = shown first on the same day
+  const key=regionKey();
+  if(a.region) return a.region===key?1+(a.rank||1)*0.1:99;
+  if(key==="IE") return a.rank||1;
+  if(key.startsWith("IE-")) return a.rank===1?0:a.rank===2?2:3;
+  return 5+(a.rank||1)*0.1;
+}
+function setRegion(c, county){
+  REGION={c, county:c==="IE"?(county||""):""};
+  try{ localStorage.setItem("che-pro-region", JSON.stringify(REGION)); }catch(e){}
+  regionPing(true); rebuildIndex(); render();
+}
+async function regionPing(force){
+  const key=regionKey(), stamp=today()+"|"+key;
+  try{ if(!force&&localStorage.getItem("che-pro-ping")===stamp) return; }catch(e){}
+  if(!CLOUD.fb) return;
+  try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"stats","regions"), {[key]:today()}, {merge:true}); try{ localStorage.setItem("che-pro-ping",stamp); }catch(e){} }catch(e){ console.warn("region ping", e&&e.code); }
+}
+let RAW_INDEX=[];
+function rebuildIndex(){
+  const key=regionKey();
+  S.index=RAW_INDEX.filter(a=>!a.region||a.region===key).slice().sort(byOrder);
+  S.articles=S.articles.filter(a=>!a.region||a.region===key).sort(byOrder);
+  const need=S.index.filter(a=>a.date===(S.index[0]||{}).date && !S.articles.some(x=>x.id===a.id));
+  if(need.length) Promise.all(need.map(a=>loadArticleQuiet(a.id))).then(()=>render());
+}
+async function loadArticleQuiet(id){ if(S.articles.some(a=>a.id===id)) return; try{ const r=await fetch(ART_BASE+encodeURIComponent(id)+".json",{cache:"no-cache"}); if(r.ok){ const a=await r.json(); a.id=id; S.articles.push(a); S.articles.sort(byOrder); } }catch(e){} }
+function regionSection(){
+  const opts=COUNTRIES.map(c=>`<option value="${c}"${c===REGION.c?" selected":""}>${esc(countryName(c))}${c!=="IE"&&LANG!=="en"?"":""}</option>`).join("");
+  const counties=`<option value="">${T("regNational")}</option>`+COUNTIES.map(c=>`<option value="${c}"${c===REGION.county?" selected":""}>${T("countyOf",{c})}</option>`).join("");
+  return `<section class="card set-sec"><b>${T("regTitle")}</b><span class="muted sm-t">${T("regSub")}</span>
+    <select id="regCountry" class="search">${opts}</select>
+    ${REGION.c==="IE"?`<select id="regCounty" class="search">${counties}</select><span class="muted sm-t">${T("regIEnote")}</span>`:""}</section>`;
+}
+function regionNotice(){
+  const key=regionKey(); if(key==="IE") return "";
+  const has=RAW_INDEX.some(a=>a.region===key);
+  return has?"":`<div class="card reg-note">📍 ${T("regPending",{r:esc(regionLabel(key))})}</div>`;
+}
 /* ---------- events ---------- */
 const ART_BASES=["../Che_daily_improvement/articles/","articles/"]; let ART_BASE=ART_BASES[0];
 async function loadArticle(id){
@@ -1924,7 +1974,7 @@ async function loadArticle(id){
   try{ const r=await fetch(ART_BASE+encodeURIComponent(id)+".json",{cache:"no-cache"}); if(!r.ok) throw 0; const a=await r.json(); a.id=id; S.articles.push(a); S.articles.sort(byOrder); return true; }
   catch(e){ toast(T("artLoadFail")); return false; }
 }
-const byOrder=(a,b)=>b.date.localeCompare(a.date)||(a.rank||1)-(b.rank||1);
+const byOrder=(a,b)=>b.date.localeCompare(a.date)||artPrio(a)-artPrio(b)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
   const t=e.target.closest("[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
@@ -1991,7 +2041,7 @@ document.addEventListener("click", e=>{
   if(a==="finishx") return startQuiz("post", currentArticle());
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
-document.addEventListener("change", e=>{ if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
+document.addEventListener("change", e=>{ if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
 document.addEventListener("keydown", e=>{ if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
@@ -2014,7 +2064,7 @@ async function cloudInit(){
     const app=appM.initializeApp(FB_CONFIG);
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
-    CLOUD.fb={authM,fsM,auth,db};
+    CLOUD.fb={authM,fsM,auth,db}; setTimeout(()=>regionPing(false),1500);
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true;
@@ -2327,6 +2377,7 @@ Object.assign(STR.ko,{"revTitle": "단어장 복습", "revSub": "단어장에서
 Object.assign(STR.zh,{tabSet:"設定"});Object.assign(STR.en,{tabSet:"Settings"});Object.assign(STR.hi,{tabSet:"सेटिंग्स"});Object.assign(STR.es,{tabSet:"Ajustes"});Object.assign(STR.ja,{tabSet:"設定"});Object.assign(STR.ko,{tabSet:"설정"});
 Object.assign(STR.zh,{"rkNickHint": "還沒有暱稱。到「設定」取一個暱稱，就會出現在排行榜上。", "bagNone": "這個屬性還沒有裝備", "supTitle": "請開發者喝杯咖啡", "supSub": "如果這個 App 有幫到你學英文，歡迎透過 Revolut 請我喝一杯咖啡，支持我繼續更新新功能和每天的新聞 🙏", "supBtn": "用 Revolut 贊助 ☕"});Object.assign(STR.en,{"rkNickHint": "You don't have a nickname yet. Set one in Settings to appear on the leaderboard.", "bagNone": "No gear of this element yet", "supTitle": "Buy me a coffee", "supSub": "If this app helps your English, you can buy me a coffee on Revolut. It keeps the new features and daily news coming 🙏", "supBtn": "Support on Revolut ☕"});Object.assign(STR.hi,{"rkNickHint": "अभी आपका कोई उपनाम नहीं है। लीडरबोर्ड पर आने के लिए सेटिंग्स में उपनाम चुनें।", "bagNone": "इस तत्व का अभी कोई उपकरण नहीं", "supTitle": "मुझे एक कॉफ़ी पिलाएँ", "supSub": "अगर यह ऐप आपकी अंग्रेज़ी में मदद करता है, तो Revolut पर मुझे एक कॉफ़ी पिला सकते हैं। इससे नई सुविधाएँ और रोज़ की ख़बरें जारी रहती हैं 🙏", "supBtn": "Revolut से सहयोग करें ☕"});Object.assign(STR.es,{"rkNickHint": "Aún no tienes apodo. Elige uno en Ajustes para aparecer en la clasificación.", "bagNone": "Aún no tienes equipo de este elemento", "supTitle": "Invítame a un café", "supSub": "Si esta app te ayuda con el inglés, puedes invitarme a un café por Revolut. Así sigo añadiendo funciones y noticias cada día 🙏", "supBtn": "Apoyar con Revolut ☕"});Object.assign(STR.ja,{"rkNickHint": "まだニックネームがありません。設定でニックネームを決めるとランキングに表示されます。", "bagNone": "この属性の装備はまだありません", "supTitle": "開発者にコーヒーを1杯", "supSub": "このアプリが英語の勉強に役立ったら、Revolut でコーヒー1杯分の応援をいただけるとうれしいです。新機能と毎日のニュース更新の励みになります 🙏", "supBtn": "Revolut で応援する ☕"});Object.assign(STR.ko,{"rkNickHint": "아직 닉네임이 없어요. 설정에서 닉네임을 정하면 랭킹에 표시돼요.", "bagNone": "이 속성의 장비가 아직 없어요", "supTitle": "개발자에게 커피 한 잔", "supSub": "이 앱이 영어 공부에 도움이 됐다면 Revolut으로 커피 한 잔 후원해 주세요. 새 기능과 매일 뉴스 업데이트에 큰 힘이 돼요 🙏", "supBtn": "Revolut으로 후원하기 ☕"});
 Object.assign(STR.zh,{"bossTitle": "⚠️ 最終魔王特性", "bossShield": "火焰護體：武器屬性克制只有 ×1.25（一般怪物是 ×1.5）", "bossEye": "魔眼：每 {n} 回合發動一次強力攻擊，無視防具屬性、只算一半防禦", "bossRage": "狂暴：血量低於 {p}% 時攻擊力 ×1.25", "bossTip": "建議至少 Lv 20、穿上 Ⅳ 級剋制裝備，戰前咒語一定要答對。", "bossEyeLog": "{m}睜開魔眼！造成 <b>{n}</b> 傷害", "bossRageLog": "{m}狂暴了！", "bossEyeShort": "魔眼"});Object.assign(STR.en,{"bossTitle": "⚠️ Final boss rules", "bossShield": "Flame ward: element advantage only gives ×1.25 (×1.5 against normal monsters)", "bossEye": "Evil Eye: every {n} turns a heavy attack that ignores armour element and half your defence", "bossRage": "Rage: below {p}% HP its attack ×1.25", "bossTip": "Go in at Lv 20 or higher with tier Ⅳ counter gear, and get the spell question right.", "bossEyeLog": "{m} opens the Evil Eye! <b>{n}</b> damage", "bossRageLog": "{m} is enraged!", "bossEyeShort": "Evil Eye"});Object.assign(STR.hi,{"bossTitle": "⚠️ अंतिम दानव के नियम", "bossShield": "अग्नि कवच: तत्व बढ़त केवल ×1.25 (सामान्य दानवों पर ×1.5)", "bossEye": "बुरी आँख: हर {n} बारी में एक भारी वार, जो कवच का तत्व और आधी रक्षा अनदेखा करता है", "bossRage": "क्रोध: {p}% HP से कम होने पर आक्रमण ×1.25", "bossTip": "कम से कम Lv 20, स्तर Ⅳ के सही तत्व वाले उपकरण, और मंत्र प्रश्न का सही उत्तर ज़रूरी है।", "bossEyeLog": "{m} ने बुरी आँख खोली! <b>{n}</b> नुकसान", "bossRageLog": "{m} क्रोधित हो गया!", "bossEyeShort": "बुरी आँख"});Object.assign(STR.es,{"bossTitle": "⚠️ Reglas del jefe final", "bossShield": "Escudo de llamas: la ventaja de elemento solo da ×1,25 (×1,5 contra monstruos normales)", "bossEye": "Mal de Ojo: cada {n} turnos un ataque fuerte que ignora el elemento de la armadura y la mitad de tu defensa", "bossRage": "Furia: por debajo del {p}% de HP su ataque ×1,25", "bossTip": "Entra con Lv 20 o más, equipo de nivel Ⅳ que lo contrarreste, y acierta la pregunta del hechizo.", "bossEyeLog": "¡{m} abre el Mal de Ojo! <b>{n}</b> de daño", "bossRageLog": "¡{m} se enfurece!", "bossEyeShort": "Mal de Ojo"});Object.assign(STR.ja,{"bossTitle": "⚠️ ラスボスの特性", "bossShield": "炎の守り：属性有利でも武器は ×1.25 のみ（通常の魔物は ×1.5）", "bossEye": "魔眼：{n} ターンごとに強力な攻撃。防具の属性を無視し、防御も半分しか効かない", "bossRage": "激怒：HP が {p}% を切ると攻撃力 ×1.25", "bossTip": "Lv 20 以上、ランクⅣの有利装備で挑み、戦前の呪文は必ず正解しよう。", "bossEyeLog": "{m}が魔眼を開いた！<b>{n}</b> ダメージ", "bossRageLog": "{m}が激怒した！", "bossEyeShort": "魔眼"});Object.assign(STR.ko,{"bossTitle": "⚠️ 최종 보스 특성", "bossShield": "화염 수호: 속성 유리여도 무기는 ×1.25 (일반 괴물은 ×1.5)", "bossEye": "마안: {n}턴마다 강력한 공격. 방어구 속성을 무시하고 방어력도 절반만 적용", "bossRage": "광폭화: HP가 {p}% 아래로 떨어지면 공격력 ×1.25", "bossTip": "Lv 20 이상, Ⅳ등급 유리 속성 장비를 갖추고 전투 전 주문 문제를 꼭 맞히세요.", "bossEyeLog": "{m}이(가) 마안을 떴다! <b>{n}</b> 피해", "bossRageLog": "{m}이(가) 광폭화했다!", "bossEyeShort": "마안"});
+Object.assign(STR.zh,{"regTitle": "新聞地區", "regSub": "選擇想讀哪個國家的英文新聞。我們會為最近 7 天有打開 App 的地區，每天準備 2 篇當地新聞。", "regNational": "全國新聞（不選郡）", "regIEnote": "選了郡之後，每天固定有 2 篇愛爾蘭全國新聞，加上 2 篇你所在郡的新聞。", "countyOf": "{c} 郡", "regPending": "你選了「{r}」。這個地區的新聞會從明天早上開始提供，今天先讀愛爾蘭的新聞。"});Object.assign(STR.en,{"regTitle": "News region", "regSub": "Choose which country's English news you want to read. Every region opened in the last 7 days gets 2 local stories a day.", "regNational": "National news (no county)", "regIEnote": "With a county chosen you get 2 national Irish stories every day plus 2 from your county.", "countyOf": "County {c}", "regPending": "You chose {r}. Local stories for it start tomorrow morning; for today, here's the Irish news."});Object.assign(STR.hi,{"regTitle": "ख़बरों का क्षेत्र", "regSub": "चुनें कि आप किस देश की अंग्रेज़ी ख़बरें पढ़ना चाहते हैं। पिछले 7 दिनों में खोले गए हर क्षेत्र के लिए रोज़ 2 स्थानीय ख़बरें तैयार होती हैं।", "regNational": "राष्ट्रीय ख़बरें (कोई काउंटी नहीं)", "regIEnote": "काउंटी चुनने पर रोज़ आयरलैंड की 2 राष्ट्रीय और आपकी काउंटी की 2 ख़बरें मिलेंगी।", "countyOf": "काउंटी {c}", "regPending": "आपने {r} चुना। इसकी स्थानीय ख़बरें कल सुबह से मिलेंगी; आज आयरलैंड की ख़बरें पढ़ें।"});Object.assign(STR.es,{"regTitle": "Región de noticias", "regSub": "Elige de qué país quieres leer noticias en inglés. Cada región abierta en los últimos 7 días recibe 2 noticias locales al día.", "regNational": "Noticias nacionales (sin condado)", "regIEnote": "Con un condado elegido tendrás cada día 2 noticias nacionales de Irlanda y 2 de tu condado.", "countyOf": "Condado de {c}", "regPending": "Elegiste {r}. Sus noticias locales empiezan mañana por la mañana; hoy puedes leer las de Irlanda."});Object.assign(STR.ja,{"regTitle": "ニュースの地域", "regSub": "どの国の英語ニュースを読むか選べます。過去 7 日以内に開かれた地域には、毎日 2 本の地元ニュースを用意します。", "regNational": "全国ニュース（州を選ばない）", "regIEnote": "州を選ぶと、毎日アイルランド全国のニュース 2 本と、その州のニュース 2 本が届きます。", "countyOf": "{c} 州", "regPending": "「{r}」を選びました。この地域のニュースは明日の朝から届きます。今日はアイルランドのニュースを読みましょう。"});Object.assign(STR.ko,{"regTitle": "뉴스 지역", "regSub": "어느 나라의 영어 뉴스를 읽을지 고르세요. 최근 7일 안에 열린 지역에는 매일 지역 뉴스 2편을 준비해요.", "regNational": "전국 뉴스 (카운티 선택 안 함)", "regIEnote": "카운티를 고르면 매일 아일랜드 전국 뉴스 2편과 그 카운티 뉴스 2편을 받아요.", "countyOf": "{c} 카운티", "regPending": "'{r}'을(를) 선택했어요. 이 지역 뉴스는 내일 아침부터 제공돼요. 오늘은 아일랜드 뉴스를 읽어 보세요."});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
@@ -2337,7 +2388,9 @@ render();
     let j=null;
     for(const b of ART_BASES){ try{ const r=await fetch(b+"index.json",{cache:"no-cache"}); if(r.ok){ j=await r.json(); ART_BASE=b; break; } }catch(_){} }
     if(!j) throw 0;
-    S.index=(j.articles||[]).slice().sort(byOrder);
+    let rj=null; try{ const r=await fetch(ART_BASE+"regional.json",{cache:"no-cache"}); if(r.ok) rj=await r.json(); }catch(_){}
+    RAW_INDEX=[...(j.articles||[]), ...((rj&&rj.articles)||[])];
+    S.index=RAW_INDEX.filter(a=>!a.region||a.region===regionKey()).sort(byOrder);
     const recent=S.index.slice(0,12);
     const docs=await Promise.all(recent.map(a=>fetch(ART_BASE+encodeURIComponent(a.id)+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)));
     S.articles=docs.map((d,i)=>d&&{...d, id:recent[i].id}).filter(Boolean).sort(byOrder);
