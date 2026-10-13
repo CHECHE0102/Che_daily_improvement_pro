@@ -1943,7 +1943,7 @@ function setRegion(c, county){
 async function regionPing(force){
   const key=regionKey(), stamp=today()+"|"+key;
   try{ if(!force&&localStorage.getItem("che-pro-ping")===stamp) return; }catch(e){}
-  if(!CLOUD.fb) return;
+  if(!CLOUD.fb||!CLOUD.user) return;
   try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"stats","regions"), {[key]:today()}, {merge:true}); try{ localStorage.setItem("che-pro-ping",stamp); }catch(e){} }catch(e){ console.warn("region ping", e&&e.code); }
 }
 let RAW_INDEX=[];
@@ -2064,11 +2064,11 @@ async function cloudInit(){
     const app=appM.initializeApp(FB_CONFIG);
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
-    CLOUD.fb={authM,fsM,auth,db}; setTimeout(()=>regionPing(false),1500);
+    CLOUD.fb={authM,fsM,auth,db};
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true;
-      if(u) await cloudPull(); else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
