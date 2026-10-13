@@ -182,7 +182,11 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .rw-row{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}.rw-row b{font-family:var(--f-display)}
 .rw-row.lvup b{color:var(--accent);font-size:20px}
 .hero-card{background:var(--night);color:var(--night-ink);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.hero-card .eyebrow{color:var(--night-ink);opacity:.65}.hero-nick{color:var(--gorse);opacity:1;font-size:13px;letter-spacing:0;text-transform:none}
+.hero-card .eyebrow{color:var(--night-ink);opacity:.65}.hero-nick{opacity:1;font-size:13px;letter-spacing:0;text-transform:none}
+.nk{font-weight:800}.nk0{color:#9AA3A0}.nk1{color:#F2F5F3}.nk2{color:#5CD685;text-shadow:0 0 4px rgba(92,214,133,.35)}.nk3{color:#5AA9FF;text-shadow:0 0 5px rgba(90,169,255,.45)}
+.nk4{color:#C08BFF;text-shadow:0 0 6px rgba(192,139,255,.55)}.nk5{color:#FFA24A;text-shadow:0 0 7px rgba(255,162,74,.6)}.nk6{color:#FF5E5E;text-shadow:0 0 8px rgba(255,94,94,.7),0 0 2px #fff}
+.nk7{background:linear-gradient(90deg,#FF5E5E,#FFD25A,#5CD685,#5AA9FF,#C08BFF,#FF5E5E);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 6px rgba(255,210,90,.6));animation:nkflow 3s linear infinite}
+@keyframes nkflow{to{background-position:200% 0}}@media (prefers-reduced-motion:reduce){.nk7{animation:none}}
 .hc-top{display:flex;align-items:flex-end;gap:16px}.hc-top>div:first-child{flex:1}.hc-top h2{font-size:30px}
 .purse{text-align:right}.purse b{display:block;font-family:var(--f-display);font-size:22px;color:var(--gorse);font-variant-numeric:tabular-nums}.purse span{font-size:11px;opacity:.7}
 .xp{height:8px;border-radius:4px;background:rgba(255,255,255,.15);overflow:hidden}.xp i{display:block;height:100%;background:var(--gorse)}
@@ -1482,13 +1486,16 @@ function monArt(m, hit){
   return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}">${monSvg(m,"ms-art")}<span class="ms-badge">${elBadge(m.el)}</span></div>`;
 }
 function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div>`; }
+/* nickname colour grows with level: grey → white → green → blue → purple → orange → red → rainbow (Lv 20+) */
+const NICK_STEPS=[3,6,9,12,15,18,20];
+function nickTier(lv){ let i=0; while(i<NICK_STEPS.length&&lv>=NICK_STEPS[i]) i++; return "nk nk"+i; }
 function arenaScene(B, last, cur){
   const m=B.m, g=game(), pAtk=last&&last.who==="p", mAtk=last&&last.who==="m", fin=B.stage==="end";
   const pop=(e,cls)=>e?`<span class="dmg ${cls}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:e.eye?`<small>👁 ${T("bossEyeShort")}</small>`:""}</span>`:"";
   const showAnim=!fin||B.justEnded;
   const heroCls=showAnim?(pAtk?" atk":mAtk?" def hurt":""):"", foeCls=showAnim?(mAtk?" atk":pAtk?" hurt":""):"";
   return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}">
-    <div class="fighter hero${heroCls}"><div class="f-name">${esc(g.nick||T("hero"))} · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}
+    <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}
       <div class="f-stage">${heroSvg()}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
       <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`<svg class="slash" viewBox="0 0 100 100"><path d="M12 84Q46 54 90 14"/>${last.crit?'<path d="M14 20Q50 46 88 84"/>':""}</svg>${pop(last,"foe-hit")}`:""}</div></div>
@@ -1585,7 +1592,7 @@ function viewAdv(){
   }
   return `<div class="view">
     <section class="hero-card">
-      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick">${esc(g.nick)}</b>`:""}</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
+      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>`:""}</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
       <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
