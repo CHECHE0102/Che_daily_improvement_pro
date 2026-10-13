@@ -403,6 +403,9 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .arena2.win .foe .mon-seal{animation:none;filter:grayscale(1) brightness(.7);transform:rotate(8deg) translateY(8%);transition:all .6s}
 .arena2.lose .hero-svg{filter:grayscale(1) brightness(.7);transform:rotate(-10deg) translateY(6%);transition:all .6s}
 @media (prefers-reduced-motion:reduce){.fighter *,.slash path,.dmg{animation:none!important}.slash{display:none}}
+.boss-rules{border:1.5px solid var(--bad);display:flex;flex-direction:column;gap:4px}.boss-rules p{margin:0;font-size:14px}
+.dmg.eye{color:#FF5A5A;font-size:30px}
+.eye-fx{position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(255,40,40,.55),transparent 65%);animation:fade .6s ease-out forwards;pointer-events:none}
 </style>
 
 </head>
@@ -1240,7 +1243,7 @@ const TJK={dingle:["ディングル","딩글"],westport:["ウェストポート"
 const FJK={dingle:["人魚メロウ","인어 메로우"],westport:["チェンジリング","체인질링"],killarney:["レプラコーン","레프리콘"],enniskillen:["グロゴッホ","그로고흐"],armagh:["赤服の男フィア・ジャルグ","붉은 옷의 피어 다르그"],sligo:["水の猟犬ドバルクー","물의 사냥개 도바르쿠"],wexford:["クルーラホーン","클루리컨"],letterkenny:["妖精猫キャット・シー","요정 고양이 캣 시"],athlone:["プーカ","푸카"],tralee:["水馬アッハ・イシュカ","물말 아흐 이슈카"],kilkenny:["ウィル・オ・ウィスプ","도깨비불"],newry:["ガンコナー","간커나"],carlow:["飢えた男フィア・ゴルタ","굶주린 자 피어 고르타"],ennis:["リャナン・シー","리아난 시"],dundalk:["火吐く魔女カオラナッハ","불을 뿜는 케어해너흐"],drogheda:["亡霊の群れスルーア","망령 무리 슬루아"],waterford:["バンシー","밴시"],derry:["吸血王アバルタッハ","흡혈 군주 아바르타흐"],galway:["三つ首のエレン","머리 셋 엘렌"],limerick:["大海蛇オリフィースト","거대 뱀 올리페이스트"],cork:["首なし騎士デュラハン","목 없는 기사 듀라한"],belfast:["フォモールの巨人","포모르 거인"],dublin:["魔眼のバロール","마안의 발로르"]};
 const TOWNS=TOWN_ROWS.map((r,i)=>{
   const [id,zh,en,hi,es,pop,lon,lat]=r, f=FOES[id], lv=TOWN_LV[i];
-  const st= id==="dublin" ? {hp:1300,atk:135,def:50,exp:900,gold:400} : statsAt(lv);
+  const st= id==="dublin" ? {hp:1200,atk:108,def:45,exp:900,gold:400} : statsAt(lv);
   return {id, rank:i, name:{zh,en,hi,es,ja:TJK[id][0],ko:TJK[id][1]}, pop, lon, lat, lv, tax:2+Math.round(i*0.8),
     foe:{mid:f[0], name:{zh:f[1],en:f[2],hi:f[3],es:f[4],ja:FJK[id][0],ko:FJK[id][1]}}, el:f[5], lore:f[6], en:f[2], boss:id==="dublin", ...st};
 });
@@ -1322,7 +1325,8 @@ const townShort=t=>t.name[LANG]||t.name.en;
 const townName=t=>{ const n=townShort(t); return LANG==="en"||n===t.name.en?n:`${n} (${t.name.en})`; };
 const monName=m=>m.foe.name[LANG]||m.foe.name.en;
 const monSub=m=>LANG==="en"?"":m.foe.name.en;
-const canAttack=t=>game().lv>=t.lv-1;
+const needLvOf=t=>t.boss?t.lv:t.lv-1;
+const canAttack=t=>game().lv>=needLvOf(t);
 const fmtPop=n=>n>=1e6?(n/1e6).toFixed(2).replace(/0$/,"")+"M":n>=1e3?Math.round(n/1e3)+"k":String(n);
 function conquered(){ const g=game(); g.conq=g.conq||{}; return g.conq; }
 function taxToday(){ const c=conquered(); return TOWNS.filter(t=>c[t.id]).reduce((s,t)=>s+t.tax,0); }
@@ -1346,7 +1350,7 @@ function townCard(t){
     <div class="tc-top"><span class="thumb el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><div class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${T("pop",{n:fmtPop(t.pop)})} · Lv ${t.lv}</span></div></div>
     <div class="muted" style="font-size:14px">${own?T("taxLine",{n:t.tax}):T("holds",{m:esc(monName(t))})}</div>
     <div class="row" style="gap:4px">${advice(t)}</div>
-    ${open?`<button class="btn ${own?"ghost":""}" data-mon="${t.id}">${own?T("trainBtn"):T("attack")}</button>`:`<span class="muted sm-t">${T("lockedCity",{n:t.lv-1})}</span>`}
+    ${open?`<button class="btn ${own?"ghost":""}" data-mon="${t.id}">${own?T("trainBtn"):T("attack")}</button>`:`<span class="muted sm-t">${T("lockedCity",{n:needLvOf(t)})}</span>`}
   </div>`;
 }
 function viewConquest(){
@@ -1359,7 +1363,7 @@ function viewConquest(){
     <div class="map-wrap">${mapSvg()}<div class="legend"><span><i class="lg tw-own"></i>${T("conqTag")}</span><span><i class="lg lg-open"></i>${T("attack")}</span><span><i class="lg tw-lock"></i>${T("lockShort")}</span></div></div>
     ${sel?townCard(sel):`<p class="muted sm-t" style="text-align:center">${T("tapCity")}</p>`}
     <div class="mons">${TOWNS.map(t=>{ const own=!!c[t.id], open=canAttack(t);
-      return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span></span><span class="go-t">${own?"✓":open?T("attack"):"Lv "+(t.lv-1)}</span></button>`; }).join("")}</div>`;
+      return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span></span><span class="go-t">${own?"✓":open?T("attack"):"Lv "+needLvOf(t)}</span></button>`; }).join("")}</div>`;
 }
 
 const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
@@ -1413,21 +1417,32 @@ function equip(id){
 function advice(m){
   const s=stats(), out=[];
   const wm=elMult(s.wEl,m.el), am=elMult(m.el,s.aEl);
-  if(wm>1) out.push(`<span class="adv good">${T("advWin")}</span>`); else if(wm<1) out.push(`<span class="adv bad">${T("advWlose")}</span>`);
+  if(wm>1) out.push(`<span class="adv good">${m.boss?T("advWin").replace(/×\s?1[.,]5/,"×1.25"):T("advWin")}</span>`); else if(wm<1) out.push(`<span class="adv bad">${T("advWlose")}</span>`);
   if(am<1) out.push(`<span class="adv good">${T("advAwin")}</span>`); else if(am>1) out.push(`<span class="adv bad">${T("advAlose")}</span>`);
   return out.join("");
 }
+/* Final boss (Dublin · Balor) rules — tweak here:
+   BOSS.wAdv  weapon advantage multiplier vs the boss (normal monsters 1.5)
+   BOSS.eyeEvery / BOSS.eye  every N boss turns the Evil Eye hits for atk × eye, ignoring armour element and half your defence
+   BOSS.rageAt / BOSS.rage  below this share of HP the boss's attack is multiplied by rage */
+const BOSS={wAdv:1.25, eyeEvery:3, eye:1.3, rageAt:0.35, rage:1.25};
 function simulate(m, spellOk){
   const s=stats();
-  let php=s.hp, mhp=m.hp; const ev=[]; let first=true;
+  let php=s.hp, mhp=m.hp; const ev=[]; let first=true, mt=0, raged=false;
   const roll=()=>0.9+Math.random()*0.2;
+  let wm=elMult(s.wEl,m.el); if(m.boss&&wm>1) wm=BOSS.wAdv;
   for(let round=1; round<=40 && php>0 && mhp>0; round++){
     const crit=Math.random()<0.1 || (first&&spellOk);
-    let dmg=Math.max(1, Math.round((s.atk*elMult(s.wEl,m.el) - m.def*0.5)*roll()*(crit?(first&&spellOk?2:1.5):1)));
+    let dmg=Math.max(1, Math.round((s.atk*wm - m.def*0.5)*roll()*(crit?(first&&spellOk?2:1.5):1)));
     mhp=Math.max(0,mhp-dmg); ev.push({who:"p", dmg, crit, spell:first&&spellOk, php, mhp}); first=false;
     if(mhp<=0) break;
-    let taken=Math.max(1, Math.round((m.atk*elMult(m.el,s.aEl) - s.def*0.5)*roll()));
-    php=Math.max(0,php-taken); ev.push({who:"m", dmg:taken, php, mhp});
+    mt++;
+    let rage=1, rageNow=false;
+    if(m.boss&&mhp<m.hp*BOSS.rageAt){ rage=BOSS.rage; if(!raged){ raged=true; rageNow=true; } }
+    const eye=m.boss&&mt%BOSS.eyeEvery===0;
+    let taken= eye ? Math.max(1, Math.round((m.atk*rage*BOSS.eye - s.def*0.25)*roll()))
+                   : Math.max(1, Math.round((m.atk*rage*elMult(m.el,s.aEl) - s.def*0.5)*roll()));
+    php=Math.max(0,php-taken); ev.push({who:"m", dmg:taken, eye, rage:rageNow, php, mhp});
   }
   return {ev, win:mhp<=0 && php>0, maxP:s.hp};
 }
@@ -1469,12 +1484,12 @@ function monArt(m, hit){
 function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div>`; }
 function arenaScene(B, last, cur){
   const m=B.m, g=game(), pAtk=last&&last.who==="p", mAtk=last&&last.who==="m", fin=B.stage==="end";
-  const pop=(e,cls)=>e?`<span class="dmg ${cls}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:""}</span>`:"";
+  const pop=(e,cls)=>e?`<span class="dmg ${cls}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:e.eye?`<small>👁 ${T("bossEyeShort")}</small>`:""}</span>`:"";
   const showAnim=!fin||B.justEnded;
   const heroCls=showAnim?(pAtk?" atk":mAtk?" def hurt":""):"", foeCls=showAnim?(mAtk?" atk":pAtk?" hurt":""):"";
   return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}">
     <div class="fighter hero${heroCls}"><div class="f-name">${esc(g.nick||T("hero"))} · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}
-      <div class="f-stage">${heroSvg()}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,"")}`:""}</div></div>
+      <div class="f-stage">${heroSvg()}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
       <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`<svg class="slash" viewBox="0 0 100 100"><path d="M12 84Q46 54 90 14"/>${last.crit?'<path d="M14 20Q50 46 88 84"/>':""}</svg>${pop(last,"foe-hit")}`:""}</div></div>
   </div>`;
@@ -1492,13 +1507,14 @@ function viewBattle(){
       <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("retreat")}</button>
       <div class="vs">${monArt(m)}<div><div class="eyebrow">${esc(townName(m))} · Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
       <div class="row">${advice(m)||`<span class="adv">${T("advNone")}</span>`}</div>
+      ${m.boss?`<div class="card boss-rules"><b>${T("bossTitle")}</b><p>🔥 ${T("bossShield")}</p><p>👁 ${T("bossEye",{n:BOSS.eyeEvery})}</p><p>💢 ${T("bossRage",{p:Math.round(BOSS.rageAt*100)})}</p><p class="muted sm-t">${T("bossTip")}</p></div>`:""}
       <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
       <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?T("skipSpell"):T("fight")}</button>
     </div>`;
   }
   const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp};
-  const log=ev.slice(0,upto).map(e=>e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
+  const log=ev.slice(0,upto).map(e=>e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${e.rage?`<b>${T("bossRageLog",{m:esc(monName(m))})}</b> `:""}${e.eye?T("bossEyeLog",{m:esc(monName(m)),n:e.dmg}):T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
     ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}</span><b>+${m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${m.gold}</b></div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
@@ -2303,6 +2319,7 @@ Object.assign(STR.ja,{"revTitle": "単語帳の復習", "revSub": "単語帳か�
 Object.assign(STR.ko,{"revTitle": "단어장 복습", "revSub": "단어장에서 {n}문제. 잘 모르는 단어나 오래 복습하지 않은 단어일수록 더 자주 나와요. 한 번 끝내면 복권 1장을 받아요.", "revLeft": "오늘 복권을 {n}장 더 받을 수 있어요", "revNoMore": "오늘 받을 복권은 다 받았어요. 복습은 계속할 수 있어요", "revStart": "복습 시작 →", "revNeed": "복습하려면 단어장에 단어가 {n}개 이상 있어야 해요", "lottoGot": "복권 1장을 받았어요", "lottoCap": "오늘 복습으로 받을 수 있는 복권을 다 받았어요 ({n}장)", "lotto": "복권", "goLuck": "행운 뽑기 →", "backDict": "단어장으로", "tabLuck": "행운", "luckSub": "단어장 복습을 한 번 끝내면 복권 1장 (하루 최대 {n}장). 1장으로 룰렛을 한 번 돌리고, 2장 이상이면 긁는 복권을 살 수 있어요.", "wheelTitle": "행운의 룰렛", "wheelSpin": "돌리기 (복권 1장)", "wheelBusy": "돌아가는 중…", "noLotto": "복권이 부족해요. 단어장 복습을 끝내면 받을 수 있어요", "wheelWin": "당첨: {p}", "pGold": "{n} 골드", "pTicket": "출정권 ×{n}", "pLotto": "복권 ×{n}", "pShard": "{e} 속성 {t}등급 조각 ×{n}", "pShardAny": "무작위 속성 {t}등급 조각", "shardWord": "조각", "scTitle": "긁는 복권", "scSub": "비싼 카드일수록 높은 등급 조각이 잘 나와요. 속성은 무작위예요.", "scBronze": "동 카드", "scSilver": "은 카드", "scGold": "금 카드", "scCost": "복권 {n}장", "scHint": "손가락으로 은색 부분을 긁어 주세요", "scAll": "모두 긁기", "scTake": "받기", "scHere": "여기를 긁으세요", "shTitle": "속성 조각", "shSub": "같은 속성, 같은 등급 조각을 {n}개 모으면 그 속성과 등급의 장비(무기 또는 방어구)를 무작위로 하나 합성할 수 있어요.", "forge": "합성", "forged": "{i} 합성 성공! 가방에 넣었어요", "forgeDup": "이 속성과 등급의 무기와 방어구를 모두 갖고 있어서 대신 {n} 골드를 받았어요", "oddsTitle": "확률 보기", "oddsDouble": "{p}% 확률로 2개", "cyGen": "생", "cyBeat": "극", "rules1": "별 모양 안의 화살표는 '극'이며 전투 보너스를 정해요: 금은 나무를, 나무는 흙을, 흙은 물을, 물은 불을, 불은 금을 이겨요. 바깥의 초록 화살표는 '생'(금→물→나무→불→흙→금)으로, 오행의 관계를 보여 줄 뿐 전투에는 영향이 없어요.", "cycleAria": "오행. 상극: 금→나무, 나무→흙, 흙→물, 물→불, 불→금. 상생: 금→물→나무→불→흙→금."});
 Object.assign(STR.zh,{tabSet:"設定"});Object.assign(STR.en,{tabSet:"Settings"});Object.assign(STR.hi,{tabSet:"सेटिंग्स"});Object.assign(STR.es,{tabSet:"Ajustes"});Object.assign(STR.ja,{tabSet:"設定"});Object.assign(STR.ko,{tabSet:"설정"});
 Object.assign(STR.zh,{"rkNickHint": "還沒有暱稱。到「設定」取一個暱稱，就會出現在排行榜上。", "bagNone": "這個屬性還沒有裝備", "supTitle": "請開發者喝杯咖啡", "supSub": "如果這個 App 有幫到你學英文，歡迎透過 Revolut 請我喝一杯咖啡，支持我繼續更新新功能和每天的新聞 🙏", "supBtn": "用 Revolut 贊助 ☕"});Object.assign(STR.en,{"rkNickHint": "You don't have a nickname yet. Set one in Settings to appear on the leaderboard.", "bagNone": "No gear of this element yet", "supTitle": "Buy me a coffee", "supSub": "If this app helps your English, you can buy me a coffee on Revolut. It keeps the new features and daily news coming 🙏", "supBtn": "Support on Revolut ☕"});Object.assign(STR.hi,{"rkNickHint": "अभी आपका कोई उपनाम नहीं है। लीडरबोर्ड पर आने के लिए सेटिंग्स में उपनाम चुनें।", "bagNone": "इस तत्व का अभी कोई उपकरण नहीं", "supTitle": "मुझे एक कॉफ़ी पिलाएँ", "supSub": "अगर यह ऐप आपकी अंग्रेज़ी में मदद करता है, तो Revolut पर मुझे एक कॉफ़ी पिला सकते हैं। इससे नई सुविधाएँ और रोज़ की ख़बरें जारी रहती हैं 🙏", "supBtn": "Revolut से सहयोग करें ☕"});Object.assign(STR.es,{"rkNickHint": "Aún no tienes apodo. Elige uno en Ajustes para aparecer en la clasificación.", "bagNone": "Aún no tienes equipo de este elemento", "supTitle": "Invítame a un café", "supSub": "Si esta app te ayuda con el inglés, puedes invitarme a un café por Revolut. Así sigo añadiendo funciones y noticias cada día 🙏", "supBtn": "Apoyar con Revolut ☕"});Object.assign(STR.ja,{"rkNickHint": "まだニックネームがありません。設定でニックネームを決めるとランキングに表示されます。", "bagNone": "この属性の装備はまだありません", "supTitle": "開発者にコーヒーを1杯", "supSub": "このアプリが英語の勉強に役立ったら、Revolut でコーヒー1杯分の応援をいただけるとうれしいです。新機能と毎日のニュース更新の励みになります 🙏", "supBtn": "Revolut で応援する ☕"});Object.assign(STR.ko,{"rkNickHint": "아직 닉네임이 없어요. 설정에서 닉네임을 정하면 랭킹에 표시돼요.", "bagNone": "이 속성의 장비가 아직 없어요", "supTitle": "개발자에게 커피 한 잔", "supSub": "이 앱이 영어 공부에 도움이 됐다면 Revolut으로 커피 한 잔 후원해 주세요. 새 기능과 매일 뉴스 업데이트에 큰 힘이 돼요 🙏", "supBtn": "Revolut으로 후원하기 ☕"});
+Object.assign(STR.zh,{"bossTitle": "⚠️ 最終魔王特性", "bossShield": "火焰護體：武器屬性克制只有 ×1.25（一般怪物是 ×1.5）", "bossEye": "魔眼：每 {n} 回合發動一次強力攻擊，無視防具屬性、只算一半防禦", "bossRage": "狂暴：血量低於 {p}% 時攻擊力 ×1.25", "bossTip": "建議至少 Lv 20、穿上 Ⅳ 級剋制裝備，戰前咒語一定要答對。", "bossEyeLog": "{m}睜開魔眼！造成 <b>{n}</b> 傷害", "bossRageLog": "{m}狂暴了！", "bossEyeShort": "魔眼"});Object.assign(STR.en,{"bossTitle": "⚠️ Final boss rules", "bossShield": "Flame ward: element advantage only gives ×1.25 (×1.5 against normal monsters)", "bossEye": "Evil Eye: every {n} turns a heavy attack that ignores armour element and half your defence", "bossRage": "Rage: below {p}% HP its attack ×1.25", "bossTip": "Go in at Lv 20 or higher with tier Ⅳ counter gear, and get the spell question right.", "bossEyeLog": "{m} opens the Evil Eye! <b>{n}</b> damage", "bossRageLog": "{m} is enraged!", "bossEyeShort": "Evil Eye"});Object.assign(STR.hi,{"bossTitle": "⚠️ अंतिम दानव के नियम", "bossShield": "अग्नि कवच: तत्व बढ़त केवल ×1.25 (सामान्य दानवों पर ×1.5)", "bossEye": "बुरी आँख: हर {n} बारी में एक भारी वार, जो कवच का तत्व और आधी रक्षा अनदेखा करता है", "bossRage": "क्रोध: {p}% HP से कम होने पर आक्रमण ×1.25", "bossTip": "कम से कम Lv 20, स्तर Ⅳ के सही तत्व वाले उपकरण, और मंत्र प्रश्न का सही उत्तर ज़रूरी है।", "bossEyeLog": "{m} ने बुरी आँख खोली! <b>{n}</b> नुकसान", "bossRageLog": "{m} क्रोधित हो गया!", "bossEyeShort": "बुरी आँख"});Object.assign(STR.es,{"bossTitle": "⚠️ Reglas del jefe final", "bossShield": "Escudo de llamas: la ventaja de elemento solo da ×1,25 (×1,5 contra monstruos normales)", "bossEye": "Mal de Ojo: cada {n} turnos un ataque fuerte que ignora el elemento de la armadura y la mitad de tu defensa", "bossRage": "Furia: por debajo del {p}% de HP su ataque ×1,25", "bossTip": "Entra con Lv 20 o más, equipo de nivel Ⅳ que lo contrarreste, y acierta la pregunta del hechizo.", "bossEyeLog": "¡{m} abre el Mal de Ojo! <b>{n}</b> de daño", "bossRageLog": "¡{m} se enfurece!", "bossEyeShort": "Mal de Ojo"});Object.assign(STR.ja,{"bossTitle": "⚠️ ラスボスの特性", "bossShield": "炎の守り：属性有利でも武器は ×1.25 のみ（通常の魔物は ×1.5）", "bossEye": "魔眼：{n} ターンごとに強力な攻撃。防具の属性を無視し、防御も半分しか効かない", "bossRage": "激怒：HP が {p}% を切ると攻撃力 ×1.25", "bossTip": "Lv 20 以上、ランクⅣの有利装備で挑み、戦前の呪文は必ず正解しよう。", "bossEyeLog": "{m}が魔眼を開いた！<b>{n}</b> ダメージ", "bossRageLog": "{m}が激怒した！", "bossEyeShort": "魔眼"});Object.assign(STR.ko,{"bossTitle": "⚠️ 최종 보스 특성", "bossShield": "화염 수호: 속성 유리여도 무기는 ×1.25 (일반 괴물은 ×1.5)", "bossEye": "마안: {n}턴마다 강력한 공격. 방어구 속성을 무시하고 방어력도 절반만 적용", "bossRage": "광폭화: HP가 {p}% 아래로 떨어지면 공격력 ×1.25", "bossTip": "Lv 20 이상, Ⅳ등급 유리 속성 장비를 갖추고 전투 전 주문 문제를 꼭 맞히세요.", "bossEyeLog": "{m}이(가) 마안을 떴다! <b>{n}</b> 피해", "bossRageLog": "{m}이(가) 광폭화했다!", "bossEyeShort": "마안"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
