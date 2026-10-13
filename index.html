@@ -411,6 +411,8 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .dmg.eye{color:#FF5A5A;font-size:30px}
 .eye-fx{position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(255,40,40,.55),transparent 65%);animation:fade .6s ease-out forwards;pointer-events:none}
 select.search{appearance:auto;-webkit-appearance:menulist}.reg-note{font-size:13px;border-color:var(--gorse);background:var(--gorse-soft)}.chip.reg{background:var(--accent-soft);color:var(--accent)}
+.ds{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:10px}.ds-tiles{grid-template-columns:repeat(3,1fr)}.ds-tiles .stat b{font-size:20px}.ds-tiles .stat span{font-size:11px}
+.ds-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.ds-t{border-collapse:collapse;font-size:12px;width:100%;white-space:nowrap}.ds-t th,.ds-t td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}.ds-t th{color:var(--muted);font-weight:600}
 </style>
 
 </head>
@@ -660,7 +662,7 @@ function applyStaticText(){
   const vb=document.getElementById("levelBtn"); if(vb){ vb.textContent=LEVEL; vb.setAttribute("aria-label",T("level")); }
   const lb=document.getElementById("langBtn"); if(lb){ lb.textContent=LANGS.find(l=>l.k===LANG).short; lb.setAttribute("aria-label",T("language")); }
 }
-const LEVELS=[{k:"B1"},{k:"B2"},{k:"C1"},{k:"IELTS"}];
+const LEVELS=[{k:"A2"},{k:"B1"},{k:"B2"},{k:"C1"},{k:"IELTS"}];
 let LEVEL=(()=>{ try{ const v=localStorage.getItem("che-pro-level"); return LEVELS.some(l=>l.k===v)?v:"B2"; }catch(e){ return "B2"; } })();
 Object.assign(STR.zh,{synonyms:"相似詞", antonyms:"反義詞"}); Object.assign(STR.en,{synonyms:"Synonyms", antonyms:"Opposites"}); Object.assign(STR.hi,{synonyms:"समानार्थी", antonyms:"विलोम"}); Object.assign(STR.es,{synonyms:"Sinónimos", antonyms:"Antónimos"});
 Object.assign(STR.zh,{level:"英文程度", lvB1:"中級：日常用字、句子較短", lvB2:"中高級：一般新聞用字", lvC1:"高級：較正式、較少見的用字", lvIELTS:"雅思 7–8：學術寫作常用詞", fillTag:"文章難字", fillNote:"題目不足 10 題時，會從文章裡挑較難的字出題。答錯的難字會自動加入字典。", levelOnly:"這篇沒有 {l} 版本，顯示 {m}"});
@@ -668,7 +670,7 @@ Object.assign(STR.en,{level:"English level", lvB1:"Intermediate: everyday words,
 Object.assign(STR.hi,{level:"अंग्रेज़ी स्तर", lvB1:"मध्यम: रोज़मर्रा के शब्द, छोटे वाक्य", lvB2:"उच्च-मध्यम: सामान्य समाचार शब्दावली", lvC1:"उन्नत: औपचारिक, कम प्रचलित शब्द", lvIELTS:"IELTS 7–8: अकादमिक लेखन शब्दावली", fillTag:"लेख का कठिन शब्द", fillNote:"अगर आपने 10 से कम शब्द देखे, तो लेख के कठिन शब्दों से क्विज़ पूरा होता है। ग़लत हुए कठिन शब्द शब्दकोश में जुड़ जाते हैं।", levelOnly:"इस लेख का {l} संस्करण नहीं है — {m} दिखाया जा रहा है"});
 Object.assign(STR.es,{level:"Nivel de inglés", lvB1:"Intermedio: palabras cotidianas, frases cortas", lvB2:"Intermedio alto: vocabulario habitual de prensa", lvC1:"Avanzado: palabras más formales y menos comunes", lvIELTS:"IELTS 7–8: vocabulario académico", fillTag:"Palabra difícil del artículo", fillNote:"Si consultaste menos de 10 palabras, el test se completa con palabras difíciles del artículo. Las que falles se añaden a tu diccionario.", levelOnly:"Este artículo no tiene versión {l}: se muestra {m}"});
 // article text at the chosen level (falls back to B2 / original paragraphs)
-function levelOf(art){ return art.levels&&art.levels[LEVEL]?LEVEL:(art.levels&&art.levels.B2?"B2":null); }
+function levelOf(art){ const L=art.levels; if(!L) return null; if(L[LEVEL]) return LEVEL; if(LEVEL==="A2"&&L.B1) return "B1"; return L.B2?"B2":null; }
 function parasOf(art){ const l=levelOf(art); return l?art.levels[l].paragraphs:art.paragraphs; }
 function setLevel(k){ LEVEL=k; try{ localStorage.setItem("che-pro-level",k); }catch(e){} S.levelSheet=false; applyStaticText(); render(); }
 function levelSheet(){
@@ -677,7 +679,7 @@ function levelSheet(){
     <div class="opts">${LEVELS.map(l=>`<button class="opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div></div>`;
 }
 const CEFR_RANK={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6};
-const LEVEL_MIN={B1:3,B2:4,C1:5,IELTS:5};
+const LEVEL_MIN={A2:3,B1:3,B2:4,C1:5,IELTS:5};
 // harder words from the article text the learner is reading, hardest first
 function fillerWords(art, exclude, n){
   const toks=parasOf(art).join(" ").match(WORD_RE)||[]; const seen=new Set(exclude), cand=[];
@@ -852,6 +854,7 @@ function viewRead(){
     <button class="btn ghost" data-act="back" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("back")}</button>
     <div class="art-head"><div class="eyebrow">${art.topic?esc(topicOf(art))+" · ":""}${esc(fmtDate(art.date))}</div><h1>${esc(art.title)}</h1>
     <div class="art-meta"><span class="chip topic">${levelOf(art)==="IELTS"?"IELTS 7–8":(levelOf(art)||art.level||"")}</span><span>${T("words",{n:parasOf(art).join(" ").match(WORD_RE).length})}</span>${src?`<span>${T("rewritten",{s:src})}</span>`:""}</div></div>
+    ${art.levels&&levelOf(art)!==LEVEL?`<div class="muted sm-t">${T("levelOnly",{l:LEVEL,m:levelOf(art)})}</div>`:""}
     ${sumOf(art)?`<div class="zh-sum">${esc(sumOf(art))}</div>`:""}
     <div class="tip"><i></i>${T("tip")}</div>
     <article class="article" id="article">${paras}</article>
@@ -1834,11 +1837,56 @@ function devAct(k){
   else if(k==="today"){ const d=dayRec(); saveDay({type:"day", date:d.date, preDone:false, postDone:false, read:null, lookedUp:d.lookedUp||[], lookedUpBy:d.lookedUpBy||{}}); g.revN=0; g.revDate=null; g.taxDate=null; }
   saveGame(); toast(T("dDone")); render();
 }
+
+/* ----- developer: player data & system stats (needs admin rule in Firestore) ----- */
+async function devLoadStats(){
+  if(!CLOUD.user||!CLOUD.fb){ S.devStats={err:T("dsLogin")}; return render(); }
+  const {fsM,db}=CLOUD.fb; S.devStats={loading:true}; render();
+  try{
+    const us=await fsM.getDocs(fsM.collection(db,"users"));
+    const users=[]; us.forEach(d=>users.push({id:d.id, ...d.data()}));
+    const counts=await Promise.all(users.slice(0,300).map(u=>fsM.getCountFromServer(fsM.collection(db,"users",u.id,"words")).then(c=>c.data().count).catch(()=>null)));
+    users.forEach((u,i)=>u.words=counts[i]);
+    let lbN=null; try{ lbN=(await fsM.getCountFromServer(fsM.collection(db,"leaderboard"))).data().count; }catch(e){}
+    let regions={}; try{ const r=await fsM.getDoc(fsM.doc(db,"stats","regions")); if(r.exists()) regions=r.data(); }catch(e){}
+    let rooms=0; try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); rs.forEach(d=>{ const x=d.data(); if(x.state!=="done"&&Date.now()-(x.created||0)<3600e3) rooms++; }); }catch(e){}
+    S.devStats={users, lbN, regions, rooms, at:new Date()};
+  }catch(e){ S.devStats={err:e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")}; }
+  render();
+}
+function devStatsHtml(){
+  const D=S.devStats;
+  if(!D) return `<button class="btn ghost" data-act="devstats">📊 ${T("dsLoad")}</button>`;
+  if(D.loading) return `<p class="muted">${T("loading")}</p>`;
+  if(D.err) return `<p class="muted sm-t">${esc(D.err)}</p><button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button>`;
+  const t=today(), day=s=>(s||"").slice(0,10), since=n=>{ const d=new Date(); d.setDate(d.getDate()-n); return ymd(d); };
+  const U=D.users, act1=U.filter(u=>day(u.updatedAt)===t).length, act7=U.filter(u=>day(u.updatedAt)>=since(6)).length;
+  const lv=U.map(u=>(u.game&&u.game.lv)||1), avgLv=U.length?(lv.reduce((a,b)=>a+b,0)/U.length).toFixed(1):"–";
+  const words=U.reduce((a,u)=>a+(u.words||0),0), daysPlayed=U.reduce((a,u)=>a+Object.keys(u.days||{}).length,0);
+  const quizzes=U.reduce((a,u)=>a+Object.values(u.days||{}).reduce((b,d)=>b+(d.preDone?1:0)+(d.postDone?1:0)+Object.keys(d.postBy||{}).length,0),0);
+  const conqAll=U.filter(u=>u.game&&Object.keys(u.game.conq||{}).length>=23).length;
+  const regs=Object.entries(D.regions||{}).sort((a,b)=>String(b[1]).localeCompare(String(a[1])));
+  const regional=RAW_INDEX.filter(a=>a.region).length, latest=(S.index[0]||{}).date||"–";
+  const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
+  const rows=U.slice().sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).map(u=>{ const g=u.game||{};
+    return `<tr><td><b>${esc(g.nick||u.name||u.id.slice(0,6))}</b>${g.nick&&u.name?`<br><span class="muted">${esc(u.name)}</span>`:""}</td><td>${g.lv||1}</td><td>${g.gold||0}</td><td>${u.words??"–"}</td><td>${Object.keys(u.days||{}).length}</td><td>${Object.keys(g.conq||{}).length}</td><td>${esc(u.region||"–")}</td><td>${esc(day(u.updatedAt)||"–")}</td></tr>`; }).join("");
+  return `<div class="ds">
+    <div class="eyebrow">${T("dsSys")}</div>
+    <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
+    <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
+    <div class="eyebrow">${T("dsRegions")}</div>
+    ${regs.length?`<table class="ds-t"><tr><th>${T("dsRegion")}</th><th>${T("dsLast")}</th><th></th></tr>${regs.map(([k,v])=>`<tr><td>${esc(regionLabel(k))} <span class="muted">${esc(k)}</span></td><td>${esc(v)}</td><td>${String(v)>=since(6)?"🟢":"⚪"}</td></tr>`).join("")}</table>`:`<p class="muted sm-t">–</p>`}
+    <div class="eyebrow">${T("dsPlayers",{n:U.length})}</div>
+    <div class="ds-scroll"><table class="ds-t"><tr><th>${T("nick")}</th><th>Lv</th><th>${T("gold")}</th><th>${T("dsW")}</th><th>${T("dsD")}</th><th>${T("dsC")}</th><th>${T("dsRegion")}</th><th>${T("dsLast")}</th></tr>${rows}</table></div>
+    <p class="muted sm-t">${T("dsNote",{t:D.at.toLocaleTimeString()})}</p>
+    <button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button></div>`;
+}
 function devPanel(){
   if(!DEV) return "";
   const b=(k,l)=>`<button class="btn ghost sm" data-act="dev" data-k="${k}">${T(l)}</button>`;
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}</div>
+    ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
 function devFooter(){
@@ -2012,6 +2060,7 @@ document.addEventListener("click", e=>{
   if(a==="devtap"){ S.devTaps=(S.devTaps||0)+1; if(S.devTaps>=5&&!DEV){ S.devAsk=true; render(); setTimeout(()=>{ const i=$("#devCode"); if(i) i.focus(); },50); } return; }
   if(a==="devunlock") return devUnlock();
   if(a==="devexit") return devExit();
+  if(a==="devstats") return devLoadStats();
   if(a==="dev") return devAct(t.dataset.k);
   if(a==="rev") return startQuiz("rev");
   if(a==="goluck"){ S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
@@ -2124,7 +2173,7 @@ async function cloudFlush(){
   try{
     const ops=[];
     if(main&&!DEV) setTimeout(lbPush,0);
-    if(main) ops.push(b=>b.set(userRef(),{game:(DEV?DEV.game:S.game)||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
+    if(main) ops.push(b=>b.set(userRef(),{name:(CLOUD.user&&CLOUD.user.displayName)||"", region:regionKey(), game:(DEV?DEV.game:S.game)||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
     for(const k of words){ const v=S.words.get(k); if(v) ops.push(b=>b.set(fsM.doc(wordsCol(),k), JSON.parse(JSON.stringify(v)))); }
     for(const k of dels) ops.push(b=>b.delete(fsM.doc(wordsCol(),k)));
     for(let i=0;i<ops.length;i+=400){ const b=fsM.writeBatch(db); ops.slice(i,i+400).forEach(f=>f(b)); await b.commit(); }
@@ -2378,6 +2427,7 @@ Object.assign(STR.zh,{tabSet:"設定"});Object.assign(STR.en,{tabSet:"Settings"}
 Object.assign(STR.zh,{"rkNickHint": "還沒有暱稱。到「設定」取一個暱稱，就會出現在排行榜上。", "bagNone": "這個屬性還沒有裝備", "supTitle": "請開發者喝杯咖啡", "supSub": "如果這個 App 有幫到你學英文，歡迎透過 Revolut 請我喝一杯咖啡，支持我繼續更新新功能和每天的新聞 🙏", "supBtn": "用 Revolut 贊助 ☕"});Object.assign(STR.en,{"rkNickHint": "You don't have a nickname yet. Set one in Settings to appear on the leaderboard.", "bagNone": "No gear of this element yet", "supTitle": "Buy me a coffee", "supSub": "If this app helps your English, you can buy me a coffee on Revolut. It keeps the new features and daily news coming 🙏", "supBtn": "Support on Revolut ☕"});Object.assign(STR.hi,{"rkNickHint": "अभी आपका कोई उपनाम नहीं है। लीडरबोर्ड पर आने के लिए सेटिंग्स में उपनाम चुनें।", "bagNone": "इस तत्व का अभी कोई उपकरण नहीं", "supTitle": "मुझे एक कॉफ़ी पिलाएँ", "supSub": "अगर यह ऐप आपकी अंग्रेज़ी में मदद करता है, तो Revolut पर मुझे एक कॉफ़ी पिला सकते हैं। इससे नई सुविधाएँ और रोज़ की ख़बरें जारी रहती हैं 🙏", "supBtn": "Revolut से सहयोग करें ☕"});Object.assign(STR.es,{"rkNickHint": "Aún no tienes apodo. Elige uno en Ajustes para aparecer en la clasificación.", "bagNone": "Aún no tienes equipo de este elemento", "supTitle": "Invítame a un café", "supSub": "Si esta app te ayuda con el inglés, puedes invitarme a un café por Revolut. Así sigo añadiendo funciones y noticias cada día 🙏", "supBtn": "Apoyar con Revolut ☕"});Object.assign(STR.ja,{"rkNickHint": "まだニックネームがありません。設定でニックネームを決めるとランキングに表示されます。", "bagNone": "この属性の装備はまだありません", "supTitle": "開発者にコーヒーを1杯", "supSub": "このアプリが英語の勉強に役立ったら、Revolut でコーヒー1杯分の応援をいただけるとうれしいです。新機能と毎日のニュース更新の励みになります 🙏", "supBtn": "Revolut で応援する ☕"});Object.assign(STR.ko,{"rkNickHint": "아직 닉네임이 없어요. 설정에서 닉네임을 정하면 랭킹에 표시돼요.", "bagNone": "이 속성의 장비가 아직 없어요", "supTitle": "개발자에게 커피 한 잔", "supSub": "이 앱이 영어 공부에 도움이 됐다면 Revolut으로 커피 한 잔 후원해 주세요. 새 기능과 매일 뉴스 업데이트에 큰 힘이 돼요 🙏", "supBtn": "Revolut으로 후원하기 ☕"});
 Object.assign(STR.zh,{"bossTitle": "⚠️ 最終魔王特性", "bossShield": "火焰護體：武器屬性克制只有 ×1.25（一般怪物是 ×1.5）", "bossEye": "魔眼：每 {n} 回合發動一次強力攻擊，無視防具屬性、只算一半防禦", "bossRage": "狂暴：血量低於 {p}% 時攻擊力 ×1.25", "bossTip": "建議至少 Lv 20、穿上 Ⅳ 級剋制裝備，戰前咒語一定要答對。", "bossEyeLog": "{m}睜開魔眼！造成 <b>{n}</b> 傷害", "bossRageLog": "{m}狂暴了！", "bossEyeShort": "魔眼"});Object.assign(STR.en,{"bossTitle": "⚠️ Final boss rules", "bossShield": "Flame ward: element advantage only gives ×1.25 (×1.5 against normal monsters)", "bossEye": "Evil Eye: every {n} turns a heavy attack that ignores armour element and half your defence", "bossRage": "Rage: below {p}% HP its attack ×1.25", "bossTip": "Go in at Lv 20 or higher with tier Ⅳ counter gear, and get the spell question right.", "bossEyeLog": "{m} opens the Evil Eye! <b>{n}</b> damage", "bossRageLog": "{m} is enraged!", "bossEyeShort": "Evil Eye"});Object.assign(STR.hi,{"bossTitle": "⚠️ अंतिम दानव के नियम", "bossShield": "अग्नि कवच: तत्व बढ़त केवल ×1.25 (सामान्य दानवों पर ×1.5)", "bossEye": "बुरी आँख: हर {n} बारी में एक भारी वार, जो कवच का तत्व और आधी रक्षा अनदेखा करता है", "bossRage": "क्रोध: {p}% HP से कम होने पर आक्रमण ×1.25", "bossTip": "कम से कम Lv 20, स्तर Ⅳ के सही तत्व वाले उपकरण, और मंत्र प्रश्न का सही उत्तर ज़रूरी है।", "bossEyeLog": "{m} ने बुरी आँख खोली! <b>{n}</b> नुकसान", "bossRageLog": "{m} क्रोधित हो गया!", "bossEyeShort": "बुरी आँख"});Object.assign(STR.es,{"bossTitle": "⚠️ Reglas del jefe final", "bossShield": "Escudo de llamas: la ventaja de elemento solo da ×1,25 (×1,5 contra monstruos normales)", "bossEye": "Mal de Ojo: cada {n} turnos un ataque fuerte que ignora el elemento de la armadura y la mitad de tu defensa", "bossRage": "Furia: por debajo del {p}% de HP su ataque ×1,25", "bossTip": "Entra con Lv 20 o más, equipo de nivel Ⅳ que lo contrarreste, y acierta la pregunta del hechizo.", "bossEyeLog": "¡{m} abre el Mal de Ojo! <b>{n}</b> de daño", "bossRageLog": "¡{m} se enfurece!", "bossEyeShort": "Mal de Ojo"});Object.assign(STR.ja,{"bossTitle": "⚠️ ラスボスの特性", "bossShield": "炎の守り：属性有利でも武器は ×1.25 のみ（通常の魔物は ×1.5）", "bossEye": "魔眼：{n} ターンごとに強力な攻撃。防具の属性を無視し、防御も半分しか効かない", "bossRage": "激怒：HP が {p}% を切ると攻撃力 ×1.25", "bossTip": "Lv 20 以上、ランクⅣの有利装備で挑み、戦前の呪文は必ず正解しよう。", "bossEyeLog": "{m}が魔眼を開いた！<b>{n}</b> ダメージ", "bossRageLog": "{m}が激怒した！", "bossEyeShort": "魔眼"});Object.assign(STR.ko,{"bossTitle": "⚠️ 최종 보스 특성", "bossShield": "화염 수호: 속성 유리여도 무기는 ×1.25 (일반 괴물은 ×1.5)", "bossEye": "마안: {n}턴마다 강력한 공격. 방어구 속성을 무시하고 방어력도 절반만 적용", "bossRage": "광폭화: HP가 {p}% 아래로 떨어지면 공격력 ×1.25", "bossTip": "Lv 20 이상, Ⅳ등급 유리 속성 장비를 갖추고 전투 전 주문 문제를 꼭 맞히세요.", "bossEyeLog": "{m}이(가) 마안을 떴다! <b>{n}</b> 피해", "bossRageLog": "{m}이(가) 광폭화했다!", "bossEyeShort": "마안"});
 Object.assign(STR.zh,{"regTitle": "新聞地區", "regSub": "選擇想讀哪個國家的英文新聞。我們會為最近 7 天有打開 App 的地區，每天準備 2 篇當地新聞。", "regNational": "全國新聞（不選郡）", "regIEnote": "選了郡之後，每天固定有 2 篇愛爾蘭全國新聞，加上 2 篇你所在郡的新聞。", "countyOf": "{c} 郡", "regPending": "你選了「{r}」。這個地區的新聞會從明天早上開始提供，今天先讀愛爾蘭的新聞。"});Object.assign(STR.en,{"regTitle": "News region", "regSub": "Choose which country's English news you want to read. Every region opened in the last 7 days gets 2 local stories a day.", "regNational": "National news (no county)", "regIEnote": "With a county chosen you get 2 national Irish stories every day plus 2 from your county.", "countyOf": "County {c}", "regPending": "You chose {r}. Local stories for it start tomorrow morning; for today, here's the Irish news."});Object.assign(STR.hi,{"regTitle": "ख़बरों का क्षेत्र", "regSub": "चुनें कि आप किस देश की अंग्रेज़ी ख़बरें पढ़ना चाहते हैं। पिछले 7 दिनों में खोले गए हर क्षेत्र के लिए रोज़ 2 स्थानीय ख़बरें तैयार होती हैं।", "regNational": "राष्ट्रीय ख़बरें (कोई काउंटी नहीं)", "regIEnote": "काउंटी चुनने पर रोज़ आयरलैंड की 2 राष्ट्रीय और आपकी काउंटी की 2 ख़बरें मिलेंगी।", "countyOf": "काउंटी {c}", "regPending": "आपने {r} चुना। इसकी स्थानीय ख़बरें कल सुबह से मिलेंगी; आज आयरलैंड की ख़बरें पढ़ें।"});Object.assign(STR.es,{"regTitle": "Región de noticias", "regSub": "Elige de qué país quieres leer noticias en inglés. Cada región abierta en los últimos 7 días recibe 2 noticias locales al día.", "regNational": "Noticias nacionales (sin condado)", "regIEnote": "Con un condado elegido tendrás cada día 2 noticias nacionales de Irlanda y 2 de tu condado.", "countyOf": "Condado de {c}", "regPending": "Elegiste {r}. Sus noticias locales empiezan mañana por la mañana; hoy puedes leer las de Irlanda."});Object.assign(STR.ja,{"regTitle": "ニュースの地域", "regSub": "どの国の英語ニュースを読むか選べます。過去 7 日以内に開かれた地域には、毎日 2 本の地元ニュースを用意します。", "regNational": "全国ニュース（州を選ばない）", "regIEnote": "州を選ぶと、毎日アイルランド全国のニュース 2 本と、その州のニュース 2 本が届きます。", "countyOf": "{c} 州", "regPending": "「{r}」を選びました。この地域のニュースは明日の朝から届きます。今日はアイルランドのニュースを読みましょう。"});Object.assign(STR.ko,{"regTitle": "뉴스 지역", "regSub": "어느 나라의 영어 뉴스를 읽을지 고르세요. 최근 7일 안에 열린 지역에는 매일 지역 뉴스 2편을 준비해요.", "regNational": "전국 뉴스 (카운티 선택 안 함)", "regIEnote": "카운티를 고르면 매일 아일랜드 전국 뉴스 2편과 그 카운티 뉴스 2편을 받아요.", "countyOf": "{c} 카운티", "regPending": "'{r}'을(를) 선택했어요. 이 지역 뉴스는 내일 아침부터 제공돼요. 오늘은 아일랜드 뉴스를 읽어 보세요."});
+Object.assign(STR.zh,{"lvA2": "初級：最簡單的字、很短的句子", "dsLoad": "查看用戶資料與系統統計", "dsReload": "重新整理", "dsLogin": "要先登入 Google 才能查看", "dsDenied": "沒有權限：請到 Firebase 規則加入管理員權限", "dsSys": "系統統計", "dsUsers": "註冊玩家", "dsToday": "今日活躍", "dsWeek": "7 日活躍", "dsAvgLv": "平均等級", "dsWords": "字典單字總數", "dsDays": "總學習天數", "dsQuiz": "完成測驗數", "dsLb": "排行榜人數", "dsRooms": "進行中房間", "dsConq": "統一全島", "dsArts": "全國文章", "dsRegArts": "地區文章", "dsLatest": "最新文章日期：{d}", "dsRegions": "地區活躍狀態（🟢 = 7 天內有人用，會產生新聞）", "dsRegion": "地區", "dsLast": "最後使用", "dsPlayers": "玩家列表（{n} 人）", "dsW": "單字", "dsD": "天數", "dsC": "佔領", "dsNote": "資料時間 {t}。只統計有登入 Google 的玩家。"});Object.assign(STR.en,{"lvA2": "Elementary: the simplest words, very short sentences", "dsLoad": "View player data & system stats", "dsReload": "Refresh", "dsLogin": "Sign in with Google first", "dsDenied": "No permission: add the admin rule in Firebase", "dsSys": "System stats", "dsUsers": "Players", "dsToday": "Active today", "dsWeek": "Active 7 days", "dsAvgLv": "Average level", "dsWords": "Dictionary words", "dsDays": "Study days", "dsQuiz": "Quizzes done", "dsLb": "On leaderboard", "dsRooms": "Open rooms", "dsConq": "Conquered all", "dsArts": "National articles", "dsRegArts": "Regional articles", "dsLatest": "Latest article: {d}", "dsRegions": "Region activity (🟢 = used in last 7 days, gets news)", "dsRegion": "Region", "dsLast": "Last used", "dsPlayers": "Players ({n})", "dsW": "Words", "dsD": "Days", "dsC": "Towns", "dsNote": "Data as of {t}. Only players signed in with Google are counted."});Object.assign(STR.hi,{"lvA2": "प्रारंभिक: सबसे आसान शब्द, बहुत छोटे वाक्य"});Object.assign(STR.es,{"lvA2": "Elemental: las palabras más sencillas, frases muy cortas"});Object.assign(STR.ja,{"lvA2": "初級：いちばんやさしい単語、とても短い文"});Object.assign(STR.ko,{"lvA2": "초급: 가장 쉬운 단어, 아주 짧은 문장"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
