@@ -2143,7 +2143,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.39";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.40";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2902,9 +2902,10 @@ function coReward(){
   const mine=Object.values(R.found||{}).filter(u=>u===coMe()).length;
   const win=R.win!==undefined?R.win:Object.keys(R.found||{}).length>=R.errs.length;
   const gold=mine*8+(win?(S.co.solo?15:30):0), exp=6+mine*5+(win?(S.co.solo?8:20):0);
+  const lotto=win&&!S.co.solo?1:0; g.lotto=(g.lotto||0)+lotto;
   g.gold+=gold; g.exp+=exp; const before=g.lv; while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
   g.coopDone[key]=1; const ks=Object.keys(g.coopDone); if(ks.length>40) delete g.coopDone[ks[0]];
-  S.co.reward={gold, exp, lvUp:g.lv-before}; saveGame();
+  S.co.reward={gold, exp, lotto, lvUp:g.lv-before}; saveGame();
 }
 async function coTap(i){
   const R=coRoom(); if(!R||R.state!=="play") return;
@@ -2956,7 +2957,7 @@ function coInner(){
     const rw=co.reward;
     return head+`<div class="reward ${win?"win":"lose"}"><div class="eyebrow">${win?T("coWin"):(R.endAt&&Date.now()>R.endAt?T("coTimeUp"):T("coLose"))}</div>
       <div class="rw-row"><span>${T("coYouFound",{n:mine})}</span>${co.solo?"":`<span class="muted">${T("coMateFound",{n:mate})}</span>`}</div>
-      ${rw?`<div class="rw-row"><span>${T("gold")}</span><b>+${rw.gold}</b></div><div class="rw-row"><span>${T("exp")}</span><b>+${rw.exp}</b></div>${rw.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${game().lv}</b></div>`:""}`:""}</div>
+      ${rw?`<div class="rw-row"><span>${T("gold")}</span><b>+${rw.gold}</b></div><div class="rw-row"><span>${T("exp")}</span><b>+${rw.exp}</b></div>${rw.lotto?`<div class="rw-row"><span>🎟 ${T("lotto")}</span><b>+${rw.lotto}</b></div>`:""}${rw.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${game().lv}</b></div>`:""}`:""}</div>
       <article class="article co-text">${body}</article>
       <h3>${T("coResults")}</h3>
       <div class="co-list">${R.errs.map(e=>`<div class="co-err"><span class="chip ${found[e.i]!==undefined?"done":"new"}">${T(e.type==="spell"?"coTypeSpell":e.type==="form"?"coTypeForm":"coTypeConf")}</span><div><s>${esc(e.wrong)}</s> → <b>${esc(e.right)}</b>${found[e.i]!==undefined?` <span class="muted sm-t">· ${T("coFoundBy",{n:nm(found[e.i])})}</span>`:""}<div class="muted sm-t">${errExplain(e)}</div></div></div>`).join("")}</div>
