@@ -608,6 +608,7 @@ body.pg-lock .toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px));z-
 body.maint-lock{overflow:hidden}
 .maint-bn{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:99;background:var(--bad);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;pointer-events:none;opacity:.92;white-space:nowrap}
 .dev-maint{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--bad);border-radius:12px;margin:8px 0}
+.sup-note{margin:6px 0 2px;padding:8px 10px;border-radius:10px;background:var(--gorse-soft);border:1px solid var(--gorse);line-height:1.5}
 </style>
 
 </head>
@@ -1088,6 +1089,7 @@ function viewSettings(){
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     ${feedbackCard()}
     <section class="card sup"><div class="sup-cup" aria-hidden="true">☕</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
+      <p class="sup-note sm-t">${T("supNote",{n:game().nick?`<b>${esc(game().nick)}</b>`:T("supNoNick")})}</p>
       <a class="btn sm" href="https://revolut.me/chingche" target="_blank" rel="noopener noreferrer">${T("supBtn")}</a>
       <details class="sup-bank"><summary>🏦 ${T("supBank")}</summary>
         <p class="sm-t">${T("supBankSub")}</p>
@@ -2140,7 +2142,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.35";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.36";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2565,7 +2567,7 @@ document.addEventListener("click", e=>{
   if(a==="sctake"){ S.scratch=null; return render(); }
   if(a==="forge") return forge(t.dataset.k);
   if(a==="signin") return cloudSignIn();
-  if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } game().nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render()); return; }
+  if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } nickClaim(n); return; }
   if(a==="cocreate") return coCreate();
   if(a==="cojoin") return coJoin(($("#coCode")||{}).value);
   if(a==="cosolo") return coStartSolo();
@@ -2613,7 +2615,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -2628,7 +2630,29 @@ async function cloudSignIn(){
     toast(T("loginFail"));
   }
 }
-async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth); toast(T("signedOut")); render(); }
+const nickKey=n=>encodeURIComponent(n.trim().toLowerCase()).replace(/\./g,"%2E").slice(0,200);
+async function nickClaim(n){
+  if(CLOUD.fb&&!CLOUD.user) return toast(T("nickLogin"));
+  if(DEV){ game().nick=n; saveGame(); toast(T("nickSaved")); return render(); }
+  if(CLOUD.fb&&CLOUD.user){
+    const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, old=game().nick, ref=fsM.doc(db,"nicks",nickKey(n));
+    try{
+      await fsM.runTransaction(db, async tx=>{ const d=await tx.get(ref); if(d.exists()&&d.data().uid!==me) throw {code:"taken"}; tx.set(ref,{uid:me, n, at:Date.now()}); });
+      if(old&&nickKey(old)!==nickKey(n)){ const oref=fsM.doc(db,"nicks",nickKey(old)); try{ const od=await fsM.getDoc(oref); if(od.exists()&&od.data().uid===me) await fsM.deleteDoc(oref); }catch(e){} }
+    }catch(e){ return toast(e&&e.code==="taken"?T("nickTaken"):T("syncFail")); }
+  }
+  game().nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render());
+}
+async function nickVerify(){
+  const n=game().nick; if(!n||!CLOUD.user||!CLOUD.fb||DEV) return;
+  const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"nicks",nickKey(n));
+  try{ let taken=false; await fsM.runTransaction(db, async tx=>{ const d=await tx.get(ref); if(d.exists()&&d.data().uid!==CLOUD.user.uid){ taken=true; return; } if(!d.exists()) tx.set(ref,{uid:CLOUD.user.uid, n, at:Date.now()}); });
+    if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
+}
+const OWNER_KEY="che-pro-owner";
+function localReset(){ S.words.clear(); S.days.clear(); S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
+  localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
 const wordsCol=()=>CLOUD.fb.fsM.collection(CLOUD.fb.db,"users",CLOUD.user.uid,"words");
 const wScore=v=>(v.correct||0)+(v.wrong||0)+(v.lookups||0);
@@ -2645,8 +2669,14 @@ async function cloudPull(){
   const {fsM}=CLOUD.fb; CLOUD.status="syncing"; render();
   try{
     const [us,ws]=await Promise.all([fsM.getDoc(userRef()), fsM.getDocs(wordsCol())]);
-    const cloud=us.exists()?us.data():{}; const hadLocal=S.words.size>0||S.days.size>0||(S.game&&(S.game.lv>1||S.game.exp>0||S.game.gold>0));
+    const cloud=us.exists()?us.data():{};
     const cw=new Map(); ws.forEach(d=>cw.set(d.id,d.data()));
+    // each Google account has its own progress: never mix another account's (or a guest's) data into an existing account
+    let owner=null; try{ owner=localStorage.getItem(OWNER_KEY); }catch(e){}
+    const cloudHas=!!(cloud.game||cw.size||Object.keys(cloud.days||{}).length);
+    if((owner&&owner!==CLOUD.user.uid)||(!owner&&cloudHas)) localReset();
+    try{ localStorage.setItem(OWNER_KEY,CLOUD.user.uid); }catch(e){}
+    const hadLocal=S.words.size>0||S.days.size>0||(S.game&&(S.game.lv>1||S.game.exp>0||S.game.gold>0));
     // words: keep the more-practised copy of each word
     for(const [k,v] of cw){ const l=S.words.get(k); if(!l||wScore(v)>=wScore(l)) S.words.set(k,v); }
     for(const [k,v] of S.words) if(!cw.has(k)||wScore(v)>wScore(cw.get(k))) CLOUD.dirtyWords.add(k);
@@ -3494,6 +3524,12 @@ Object.assign(STR.hi,{"mtTitle": "रखरखाव चल रहा है", "
 Object.assign(STR.es,{"mtTitle": "En mantenimiento", "mtBody": "Estamos actualizando cosas. ¡Volvemos pronto!", "mtUntil": "Volvemos hacia las {t}", "mtReload": "Actualizar", "mtSafe": "Tu progreso está guardado y seguro.", "mtBanner": "🚧 Modo mantenimiento activado: solo tú ves el sitio", "mtDev": "Mantenimiento del sitio", "mtOn": "Iniciar mantenimiento", "mtOff": "Terminar y reabrir", "mtMsgPh": "Mensaje para los jugadores (opcional)", "mtDur": "Tiempo previsto", "mtNone": "Sin definir", "mtNeedAdmin": "Inicia sesión con la cuenta de Google de administrador para cambiarlo", "mtOnNow": "En mantenimiento", "mtOffNow": "Abierto"});
 Object.assign(STR.ja,{"mtTitle": "メンテナンス中", "mtBody": "ただいま更新中です。すぐに戻ります！", "mtUntil": "{t} ごろ再開予定", "mtReload": "再読み込み", "mtSafe": "学習の進み具合は安全に保存されています。", "mtBanner": "🚧 メンテナンスモード中：サイトはあなたにだけ見えています", "mtDev": "サイトのメンテナンス", "mtOn": "メンテナンス開始", "mtOff": "メンテナンス終了・再開", "mtMsgPh": "プレイヤーへのメッセージ（任意）", "mtDur": "予定時間", "mtNone": "指定なし", "mtNeedAdmin": "切り替えるには管理者の Google アカウントでログインしてください", "mtOnNow": "メンテナンス中", "mtOffNow": "通常運営"});
 Object.assign(STR.ko,{"mtTitle": "점검 중", "mtBody": "업데이트하고 있어요. 곧 돌아올게요!", "mtUntil": "{t}쯤 재개 예정", "mtReload": "새로고침", "mtSafe": "학습 기록은 안전하게 저장되어 있어요.", "mtBanner": "🚧 점검 모드 켜짐: 사이트는 나에게만 보여요", "mtDev": "사이트 점검", "mtOn": "점검 시작", "mtOff": "점검 끝내고 다시 열기", "mtMsgPh": "플레이어에게 보낼 메시지 (선택)", "mtDur": "예상 시간", "mtNone": "지정 안 함", "mtNeedAdmin": "전환하려면 관리자 Google 계정으로 로그인하세요", "mtOnNow": "점검 중", "mtOffNow": "정상 운영"});
+Object.assign(STR.zh,{"nickLogin": "請先用 Google 登入才能設定暱稱", "nickTaken": "這個暱稱已經有人用了，換一個吧", "nickTakenOld": "你的暱稱已被其他玩家使用，請到設定重新取一個", "supNote": "📝 轉帳時請在備註寫上你的遊戲暱稱（{n}）。之後我會在有贊助的玩家名字旁邊加上專屬的贊助徽章，未來有新的更新也會提前告訴你！", "supNoNick": "請先在上方設定暱稱"});
+Object.assign(STR.en,{"nickLogin": "Sign in with Google to set a nickname", "nickTaken": "That nickname is taken. Try another one", "nickTakenOld": "Another player already uses your nickname. Please pick a new one in Settings", "supNote": "📝 Please put your game nickname ({n}) in the payment note. Supporters will get a special badge next to their name, and you'll hear about new updates before anyone else!", "supNoNick": "set a nickname above first"});
+Object.assign(STR.hi,{"nickLogin": "उपनाम चुनने के लिए Google से साइन इन करें", "nickTaken": "यह उपनाम पहले से लिया गया है, कोई और चुनें", "nickTakenOld": "आपका उपनाम किसी और खिलाड़ी के पास है, सेटिंग्स में नया चुनें", "supNote": "📝 भुगतान नोट में अपना गेम उपनाम ({n}) लिखें। समर्थकों के नाम के पास खास बैज लगेगा, और नए अपडेट की ख़बर आपको पहले मिलेगी!", "supNoNick": "पहले ऊपर उपनाम चुनें"});
+Object.assign(STR.es,{"nickLogin": "Inicia sesión con Google para elegir un apodo", "nickTaken": "Ese apodo ya está en uso. Prueba otro", "nickTakenOld": "Otro jugador ya usa tu apodo. Elige uno nuevo en Ajustes", "supNote": "📝 Escribe tu apodo del juego ({n}) en el concepto de la transferencia. Quienes apoyen tendrán una insignia especial junto a su nombre, ¡y sabrán de las novedades antes que nadie!", "supNoNick": "elige primero un apodo arriba"});
+Object.assign(STR.ja,{"nickLogin": "ニックネームを決めるには Google でログインしてください", "nickTaken": "そのニックネームはもう使われています。別の名前にしてください", "nickTakenOld": "あなたのニックネームは他のプレイヤーが使っています。設定で新しく決めてください", "supNote": "📝 送金のメモ欄にゲームのニックネーム（{n}）を書いてください。支援してくれた方の名前の横には特別なバッジを付けます。新しいアップデートも先にお知らせします！", "supNoNick": "先に上でニックネームを設定"});
+Object.assign(STR.ko,{"nickLogin": "닉네임을 정하려면 Google로 로그인하세요", "nickTaken": "이미 사용 중인 닉네임이에요. 다른 걸로 해 주세요", "nickTakenOld": "다른 플레이어가 이미 내 닉네임을 쓰고 있어요. 설정에서 새로 정해 주세요", "supNote": "📝 송금 메모에 게임 닉네임({n})을 적어 주세요. 후원해 주신 분 이름 옆에는 특별 배지를 달아 드리고, 새 업데이트 소식도 먼저 알려 드릴게요!", "supNoNick": "먼저 위에서 닉네임을 정하세요"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
