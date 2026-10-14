@@ -2143,7 +2143,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.38";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.39";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2274,7 +2274,9 @@ function regionNotice(){
 const IE_MIN=20;                       // test length in minutes
 let IE_TESTS=null, IE_PRAC=[], IE_ALL=[], IE_WEEKLY=false;
 const ieFind=id=>IE_ALL.concat(IE_TESTS||[],IE_PRAC).find(x=>x.id===id);
+let IE_AUDIO={tests:{}};
 async function ieLoad(){ if(IE_TESTS) return IE_TESTS;
+  fetch("ielts/audio/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{ if(j&&j.tests){ IE_AUDIO=j; if(S.view==="adv") render(); } }).catch(()=>{});
   let base={tests:[],practice:[]};
   try{ const r=await fetch("ielts/tests.json",{cache:"no-cache"}); base=await r.json(); }catch(e){}
   IE_TESTS=base.tests||[]; IE_PRAC=base.practice||[]; IE_ALL=IE_TESTS.concat(IE_PRAC);
@@ -2326,6 +2328,10 @@ function voiceCard(){
   if(!window.speechSynthesis) return "";
   const list=ieVoiceList(), V=ieVoices();
   const opt=sel=>list.map(v=>`<option value="${esc(v.name)}"${sel&&sel.name===v.name?" selected":""}>${ieVoiceScore(v)>=60?"★ ":""}${esc(v.name)} (${esc(v.lang)})</option>`).join("");
+  const hasRec=Object.keys(IE_AUDIO.tests||{}).length>0;
+  if(hasRec) return `<section class="card ie-voice"><b>🎧 ${T("ieVoiceTitle")}</b><p class="sm-t" style="margin:4px 0">🎙 ${T("ieRecOn")}</p>
+    <details><summary class="muted sm-t">${T("ieRecFallback")}</summary>${list.length?`<label class="vrow"><span>${T("ieVoiceF")}</span><select id="ieVoiceF" class="search">${opt(V.F)}</select><button class="btn ghost sm" data-act="ievtry" data-k="F">${T("ieVoiceTry")}</button></label>
+    <label class="vrow"><span>${T("ieVoiceM")}</span><select id="ieVoiceM" class="search">${opt(V.M)}</select><button class="btn ghost sm" data-act="ievtry" data-k="M">${T("ieVoiceTry")}</button></label>`:""}<p class="muted sm-t">${T("ieVoiceHint")}</p></details></section>`;
   return `<section class="card ie-voice"><b>🎧 ${T("ieVoiceTitle")}</b>
     ${list.length?`<label class="vrow"><span>${T("ieVoiceF")}</span><select id="ieVoiceF" class="search">${opt(V.F)}</select><button class="btn ghost sm" data-act="ievtry" data-k="F">${T("ieVoiceTry")}</button></label>
     <label class="vrow"><span>${T("ieVoiceM")}</span><select id="ieVoiceM" class="search">${opt(V.M)}</select><button class="btn ghost sm" data-act="ievtry" data-k="M">${T("ieVoiceTry")}</button></label>`:`<p class="muted sm-t">${T("ieVoiceNone")}</p>`}
@@ -2334,6 +2340,8 @@ function voiceCard(){
 function iePlay(pi){
   const R=game().ieltsRun; if(!R) return; const t=ieFind(R.test), part=t.listening[pi];
   if(R.ranked&&R.played[pi]) return;
+  const rec=(IE_AUDIO.tests||{})[t.id], files=rec&&rec.parts&&rec.parts[pi];
+  if(files&&files.length===part.script.length) return iePlayRec(pi, part, files);
   if(!window.speechSynthesis){ R.played[pi]="nots"; saveGame(); return render(); }
   speechSynthesis.cancel(); const V=ieVoices(); const lines=part.script; let i=0;
   R.played[pi]=true; saveGame(); S.iePlaying={pi,i:0,n:lines.length}; render();
@@ -2342,7 +2350,20 @@ function iePlay(pi){
     ieSay(text, V[sp]||V.F, sp, V.same, ()=>{ i++; S.iePlaying&&(S.iePlaying.i=i); const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,lines.length),n:lines.length}); setTimeout(next,450); }); };
   next();
 }
-function ieStopAudio(){ try{ speechSynthesis.cancel(); }catch(e){} S.iePlaying=null; }
+function iePlayRec(pi, part, files){
+  const R=game().ieltsRun; ieStopAudio();
+  const au=S.ieAudioEl||(S.ieAudioEl=new Audio()); au.preload="auto";
+  const pre=new Audio(); pre.preload="auto";
+  let i=0; R.played[pi]=true; saveGame(); S.iePlaying={pi,i:0,n:files.length,rec:true}; render();
+  const url=k=>"ielts/audio/"+k+".mp3";
+  const fallback=()=>{ const V=ieVoices(), [sp,text]=part.script[i]; if(window.speechSynthesis) ieSay(text, V[sp]||V.F, sp, V.same, step); else step(); };
+  const step=()=>{ i++; if(S.iePlaying) S.iePlaying.i=i; const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,files.length),n:files.length}); setTimeout(next,380); };
+  const next=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; if(i>=files.length){ S.iePlaying=null; render(); return; }
+    au.onended=step; au.onerror=fallback; au.src=url(files[i]); const pr=au.play(); if(pr&&pr.catch) pr.catch(fallback);
+    if(files[i+1]) pre.src=url(files[i+1]); };
+  next();
+}
+function ieStopAudio(){ try{ speechSynthesis.cancel(); }catch(e){} try{ if(S.ieAudioEl){ S.ieAudioEl.onended=null; S.ieAudioEl.onerror=null; S.ieAudioEl.pause(); } }catch(e){} S.iePlaying=null; }
 
 function ieQHtml(item, R, review){
   const {key,q}=item, a=R.ans[key], num=item.num;
@@ -3540,6 +3561,12 @@ Object.assign(STR.ko,{upNew:"새 버전이 있어요",upBtn:"지금 업데이트
 /* ----- auto update check: compare the deployed APP_VERSION with this one ----- */
 async function upCheck(){ try{ const t=await (await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"})).text(); const m=t.match(/const APP_VERSION="([^"]+)"/); if(m&&m[1]!==APP_VERSION&&!document.getElementById("upBar")){ const b=document.createElement("div"); b.id="upBar"; b.className="up-bar"; b.innerHTML=`<span>🔄 ${T("upNew")} (${esc(m[1])})</span><button class="btn sm" onclick="location.replace(location.pathname+'?v='+Date.now())">${T("upBtn")}</button>`; document.body.append(b); } }catch(e){} }
 setTimeout(upCheck,4000); setInterval(upCheck,5*60e3); document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") upCheck(); });
+Object.assign(STR.zh,{"ieRecOn": "聽力已改用高品質錄音（英國、愛爾蘭、澳洲口音的神經語音），每支手機聽到的都一樣自然。", "ieRecFallback": "沒有錄音時使用的手機聲音", "ieVoiceHint": "iPhone 的網頁只能用手機內建的聲音，你另外下載的「增強版」聲音網頁用不到（Apple 的限制）。有錄音的題目會自動播放高品質錄音；只有還沒錄好的才會用這裡選的聲音，建議選 Moira 或 Daniel。電腦版 Chrome 可選「Google UK English」。"});
+Object.assign(STR.en,{"ieRecOn": "Listening now uses high-quality recordings (neural voices with British, Irish and Australian accents), so it sounds natural on every phone.", "ieRecFallback": "Phone voice used when there's no recording", "ieVoiceHint": "On iPhone, web pages can only use the built-in voices; enhanced voices you download aren't available to websites (an Apple limit). Tests with recordings play them automatically; only tests not recorded yet use the voice chosen here. Moira or Daniel sound best. On a computer, Chrome offers “Google UK English”."});
+Object.assign(STR.hi,{"ieRecOn": "सुनने के प्रश्न अब उच्च गुणवत्ता की रिकॉर्डिंग (ब्रिटिश, आयरिश, ऑस्ट्रेलियाई लहजे की न्यूरल आवाज़ें) से चलते हैं, हर फ़ोन पर स्वाभाविक।", "ieRecFallback": "रिकॉर्डिंग न होने पर फ़ोन की आवाज़", "ieVoiceHint": "iPhone पर वेब पेज सिर्फ़ अंतर्निहित आवाज़ें इस्तेमाल कर सकते हैं; डाउनलोड की गई बेहतर आवाज़ें वेबसाइटों को नहीं मिलतीं (Apple की सीमा)। रिकॉर्डिंग वाले टेस्ट अपने-आप चलेंगे; बाकी में यहाँ चुनी आवाज़ लगेगी। Moira या Daniel सबसे अच्छी हैं।"});
+Object.assign(STR.es,{"ieRecOn": "La comprensión auditiva usa ahora grabaciones de alta calidad (voces neuronales con acento británico, irlandés y australiano), naturales en cualquier móvil.", "ieRecFallback": "Voz del móvil cuando no hay grabación", "ieVoiceHint": "En iPhone las páginas web solo pueden usar las voces integradas; las voces mejoradas que descargas no están disponibles para los sitios web (límite de Apple). Los tests con grabación la reproducen solos; solo los que aún no tienen usan la voz elegida aquí. Moira o Daniel suenan mejor."});
+Object.assign(STR.ja,{"ieRecOn": "リスニングは高品質の録音（イギリス・アイルランド・オーストラリア英語のニューラル音声）になりました。どのスマホでも自然に聞こえます。", "ieRecFallback": "録音がないときに使うスマホの声", "ieVoiceHint": "iPhone のウェブページは本体に最初から入っている声しか使えず、追加でダウンロードした「拡張」音声は使えません（Apple の制限）。録音のある問題は自動で録音を再生し、まだ録音がない問題だけここで選んだ声を使います。Moira か Daniel がおすすめです。"});
+Object.assign(STR.ko,{"ieRecOn": "듣기는 이제 고품질 녹음(영국·아일랜드·호주 억양의 뉴럴 음성)으로 재생돼요. 어떤 휴대폰에서도 자연스럽게 들려요.", "ieRecFallback": "녹음이 없을 때 쓰는 휴대폰 음성", "ieVoiceHint": "iPhone 웹페이지는 기본 내장 음성만 쓸 수 있고, 따로 내려받은 '향상된' 음성은 웹사이트에서 쓸 수 없어요 (Apple의 제한). 녹음이 있는 문제는 자동으로 녹음을 재생하고, 아직 녹음이 없는 문제만 여기서 고른 음성을 써요. Moira나 Daniel을 추천해요."});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
