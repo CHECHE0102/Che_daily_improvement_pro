@@ -1611,10 +1611,12 @@ const ART={
      Lv 4–6   need equipment, but win even if one piece is countered by the monster's element
      Lv 7–8   need equipment that is not countered (neutral is enough)
      Lv 9–10  need both weapon and armour to beat the monster's element
-     Lv 11–20 the same curve again, fighting together with the daily ally (11–12 easy → 18–20 both pieces must counter)
+     Lv 11–20 the same curve again together with the daily ally (both always equipped):
+       11–12 win even if you AND your ally are both fully countered · 13–14 one piece countered is OK
+       15–17 nothing may be countered · 18–20 weapon and armour must both counter
    [level, hp, atk, def] */
 const WILD_STATS=[[1,48,21,4],[2,60,27,5],[3,75,31,7],[4,113,43,9],[5,111,55,11],[6,134,50,12],[7,200,66,14],[8,338,73,16],[9,484,128,17],[10,622,111,19],
-  [11,442,77,21],[12,400,93,22],[13,986,100,24],[14,1088,88,26],[15,1426,115,28],[16,1296,134,29],[17,1538,125,31],[18,1702,204,33],[19,1340,248,34],[20,1344,270,36]];
+  [11,332,73,21],[12,354,74,22],[13,854,102,24],[14,847,102,26],[15,893,162,28],[16,858,177,29],[17,933,165,31],[18,1503,242,33],[19,1533,259,34],[20,1384,293,36]];
 const ALLY_LV=10, ALLY_HIT=0.7, ALLY_AGGRO=0.45;   // ally deals 70% damage; monster targets the ally 45% of the time
 // creature: [key, minLv, maxLv, zh, en, hi, es, ja, ko, lore]
 const CREATURES=[
@@ -2500,7 +2502,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.48";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.49";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
