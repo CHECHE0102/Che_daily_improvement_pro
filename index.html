@@ -609,6 +609,7 @@ body.maint-lock{overflow:hidden}
 .maint-bn{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:99;background:var(--bad);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;pointer-events:none;opacity:.92;white-space:nowrap}
 .dev-maint{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--bad);border-radius:12px;margin:8px 0}
 .sup-note{margin:6px 0 2px;padding:8px 10px;border-radius:10px;background:var(--gorse-soft);border:1px solid var(--gorse);line-height:1.5}
+.up-bar{position:fixed;left:12px;right:12px;top:calc(10px + env(safe-area-inset-top,0px));z-index:98;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px 8px 14px;border-radius:14px;background:var(--ink);color:var(--paper);font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:600px;margin:0 auto}
 </style>
 
 </head>
@@ -2142,7 +2143,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.37";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.38";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -3530,6 +3531,15 @@ Object.assign(STR.hi,{"nickLogin": "उपनाम चुनने के ल�
 Object.assign(STR.es,{"nickLogin": "Inicia sesión con Google para elegir un apodo", "nickTaken": "Ese apodo ya está en uso. Prueba otro", "nickTakenOld": "Otro jugador ya usa tu apodo. Elige uno nuevo en Ajustes", "supNote": "📝 Después de la transferencia, dinos tu apodo del juego ({n}) en «Comentarios», más arriba. Quienes apoyen tendrán una insignia especial junto a su nombre ¡y podrán probar las grandes novedades antes que nadie!", "supNoNick": "elige primero un apodo arriba"});
 Object.assign(STR.ja,{"nickLogin": "ニックネームを決めるには Google でログインしてください", "nickTaken": "そのニックネームはもう使われています。別の名前にしてください", "nickTakenOld": "あなたのニックネームは他のプレイヤーが使っています。設定で新しく決めてください", "supNote": "📝 送金後、上の「ご意見」からゲームのニックネーム（{n}）を教えてください。支援してくれた方の名前の横には特別なバッジを付けます。大きなアップデートは先に体験していただけます！", "supNoNick": "先に上でニックネームを設定"});
 Object.assign(STR.ko,{"nickLogin": "닉네임을 정하려면 Google로 로그인하세요", "nickTaken": "이미 사용 중인 닉네임이에요. 다른 걸로 해 주세요", "nickTakenOld": "다른 플레이어가 이미 내 닉네임을 쓰고 있어요. 설정에서 새로 정해 주세요", "supNote": "📝 송금 후 위의 「의견 보내기」에서 게임 닉네임({n})을 알려 주세요. 후원해 주신 분 이름 옆에는 특별 배지를 달아 드리고, 큰 업데이트는 먼저 체험하실 수 있어요!", "supNoNick": "먼저 위에서 닉네임을 정하세요"});
+Object.assign(STR.zh,{upNew:"有新版本可以更新",upBtn:"立即更新"});
+Object.assign(STR.en,{upNew:"A new version is available",upBtn:"Update now"});
+Object.assign(STR.hi,{upNew:"नया संस्करण उपलब्ध है",upBtn:"अभी अपडेट करें"});
+Object.assign(STR.es,{upNew:"Hay una versión nueva",upBtn:"Actualizar"});
+Object.assign(STR.ja,{upNew:"新しいバージョンがあります",upBtn:"今すぐ更新"});
+Object.assign(STR.ko,{upNew:"새 버전이 있어요",upBtn:"지금 업데이트"});
+/* ----- auto update check: compare the deployed APP_VERSION with this one ----- */
+async function upCheck(){ try{ const t=await (await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"})).text(); const m=t.match(/const APP_VERSION="([^"]+)"/); if(m&&m[1]!==APP_VERSION&&!document.getElementById("upBar")){ const b=document.createElement("div"); b.id="upBar"; b.className="up-bar"; b.innerHTML=`<span>🔄 ${T("upNew")} (${esc(m[1])})</span><button class="btn sm" onclick="location.replace(location.pathname+'?v='+Date.now())">${T("upBtn")}</button>`; document.body.append(b); } }catch(e){} }
+setTimeout(upCheck,4000); setInterval(upCheck,5*60e3); document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") upCheck(); });
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
