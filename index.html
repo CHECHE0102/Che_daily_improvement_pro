@@ -658,6 +658,13 @@ body.maint-lock{overflow:hidden}
 .ally-av i{position:absolute;right:-6px;bottom:-4px;font-style:normal;font-size:18px}
 .ally-hp{margin-top:6px;font-size:11px;color:#fff;font-weight:700;width:100%}.ally-bar{height:6px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden;margin-top:2px}.ally-bar i{display:block;height:100%;background:#5BD484}.ally-pre{font-size:14px;padding:10px 14px}
 .ally-gear{display:grid;gap:6px}.ally-gear label{display:flex;flex-direction:column;gap:4px}.ally-sel{font-size:14px;padding:8px 10px}
+.f-stage.with-ally .hero-svg{position:relative;z-index:2;transform:translateX(22%) scale(.92);transform-origin:bottom center}
+.ally-fig{position:absolute;left:-14%;bottom:2%;width:66%;z-index:3}
+.ally-fig .ally-svg{width:100%;height:auto;display:block}
+.ally-tag{position:absolute;left:0;right:0;bottom:-14px;text-align:center;font-size:10px;font-weight:800;color:#fff;text-shadow:0 1px 2px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ally-fig.a-atk .ally-svg{animation:lungeR .55s ease-out}.ally-fig.a-atk .a-arm{animation:swing .55s ease-out;transform-origin:80px 78px}
+.ally-fig.a-hurt .ally-svg{animation:hurt .45s ease-out .15s}.ally-fig.a-down{filter:grayscale(1) brightness(.6);transform:rotate(-12deg) translateY(8%);transition:all .5s}
+.ally-fig .slash{z-index:3}.ally-fig .dmg{z-index:4}
 </style>
 
 </head>
@@ -2005,14 +2012,29 @@ function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Ma
 /* nickname colour grows with level: grey → white → green → blue → purple → orange → red → rainbow (Lv 20+) */
 const NICK_STEPS=[3,6,9,12,15,18,20];
 function nickTier(lv){ let i=0; while(i<NICK_STEPS.length&&lv>=NICK_STEPS[i]) i++; return "nk nk"+i; }
+// ally figure: same body as the hero, coloured by the ally's own weapon / armour elements
+function allySvg(al){
+  const t=tierOfLv(Math.max(1,(al.gl||al.lv||1))), w=al.wEl?{el:al.wEl,tier:t,slot:"weapon"}:null, aE=al.aEl;
+  const body=aE?ARMC[aE][t]:"#C8B89A", trim=t===3?GOLD:GK, hair=["#3B2A1E","#C7742E","#E8C547","#1B1B1B","#8A4B2B"][(al.n||"").length%5];
+  const wg=w?(WKIND[w.el][t]==="bow"?`<g transform="translate(96 66) scale(.9) translate(-28 -32)">${weaponGlyph(w)}</g>`:`<g transform="translate(97 66) rotate(20) scale(.95) translate(-32 -50)">${weaponGlyph(w)}</g>`):"";
+  return `<svg viewBox="0 0 140 150" class="ally-svg" aria-hidden="true">
+    <ellipse cx="62" cy="142" rx="34" ry="5" fill="#000" opacity=".22"/>
+    <path d="M48 112L46 138H58L60 114M66 114L68 138H80L76 112" fill="#3E3A4E" ${sk}/>
+    <path d="M40 72Q62 60 84 72L82 116Q62 124 42 116Z" fill="${body}" ${sk}/><path d="M42 102H82" stroke="${trim}" stroke-width="3"/>
+    <circle cx="62" cy="48" r="20" fill="#E9BE96" ${sk}/><path d="M40 50Q38 22 62 22Q86 22 84 50L78 40Q62 30 46 40Z" fill="${hair}" ${sk}/>
+    <circle cx="68" cy="50" r="2.6" fill="${GK}"/><circle cx="56" cy="50" r="2.6" fill="${GK}"/><path d="M57 58Q62 62 67 58" fill="none" stroke="${GK}" stroke-width="2" stroke-linecap="round"/>
+    <g class="a-arm"><path d="M80 78L96 66" stroke="${GK}" stroke-width="11" stroke-linecap="round"/><path d="M80 78L96 66" stroke="${body}" stroke-width="7" stroke-linecap="round"/>${wg}<circle cx="97" cy="66" r="5" fill="#E9BE96" ${sk}/></g>
+  </svg>`;
+}
 function arenaScene(B, last, cur){
-  const m=B.m, g=game(), pAtk=last&&last.who==="p", mAtk=last&&last.who==="m", fin=B.stage==="end";
+  const m=B.m, g=game(), aAtk=last&&last.who==="a", aHit=last&&last.who==="m"&&last.tgt==="a", pAtk=last&&(last.who==="p"||aAtk), mAtk=last&&last.who==="m"&&!aHit, fin=B.stage==="end", al=B.res.ally, aDown=al&&cur.ahp!=null&&cur.ahp<=0;
   const pop=(e,cls)=>e?`<span class="dmg ${cls}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:e.eye?`<small>👁 ${T("bossEyeShort")}</small>`:""}</span>`:"";
   const showAnim=!fin||B.justEnded;
-  const heroCls=showAnim?(pAtk?" atk":mAtk?" def hurt":""):"", foeCls=showAnim?(mAtk?" atk":pAtk?" hurt":""):"";
+  const heroCls=showAnim?(pAtk&&!aAtk?" atk":mAtk?" def hurt":""):"", foeCls=showAnim?(mAtk||aHit?" atk":pAtk?" hurt":""):"";
+  const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allySvg(al)}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
   return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}">
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
-      <div class="f-stage">${heroSvg()}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
+      <div class="f-stage${al?" with-ally":""}">${allyFig}${heroSvg()}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
       <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`<svg class="slash" viewBox="0 0 100 100"><path d="M12 84Q46 54 90 14"/>${last.crit?'<path d="M14 20Q50 46 88 84"/>':""}</svg>${pop(last,"foe-hit")}`:""}</div></div>
   </div>`;
@@ -2030,7 +2052,7 @@ function viewBattle(){
       <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("retreat")}</button>
       <div class="vs">${monArt(m)}<div><div class="eyebrow">${esc(townName(m))} · Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
       <div class="row">${advice(m)||`<span class="adv">${T("advNone")}</span>`}</div>
-      ${m.wild&&m.lv>ALLY_LV&&todayAlly()?`<div class="card ally-pre">🤝 ${T("alWith",{n:esc(todayAlly().n)})} · Lv ${todayAlly().lv} ${elBadge(todayAlly().wEl)} ${elBadge(todayAlly().aEl)}</div>`:""}
+      ${m.wild&&m.lv>ALLY_LV&&todayAlly()?`<div class="card ally-pre">🤝 ${T("alWith",{n:esc(todayAlly().n)})} · Lv ${todayAlly().lv} ${elBadge(todayAlly().wEl)} ${elBadge(todayAlly().aEl)}</div>`:g.lv>=ALLY_LV?`<div class="card ally-pre muted">🤝 ${m.wild?T("alNoLow",{n:ALLY_LV+1}):T("alNoTown")}</div>`:""}
       ${m.boss?`<div class="card boss-rules"><b>${T("bossTitle")}</b><p>🔥 ${T("bossShield")}</p><p>👁 ${T("bossEye",{n:BOSS.eyeEvery})}</p><p>💢 ${T("bossRage",{p:Math.round(BOSS.rageAt*100)})}</p><p class="muted sm-t">${T("bossTip")}</p></div>`:""}
       <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
@@ -2526,7 +2548,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.50";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.51";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -4034,6 +4056,12 @@ Object.assign(STR.hi,{"shopHint": "हर लेवल पर अलग-अल�
 Object.assign(STR.es,{"shopHint": "Cada nivel vende 3 armas y 3 armaduras de elementos distintos; cuanto más nivel, más fuertes. Se muestra el equipo cerca de tu nivel.", "shopAll": "Ver todos los niveles", "shopNear": "Solo cerca de mi nivel", "alOwnGear": "Equipo propio del aliado ({e})", "alLend": "Prestar", "alGearHint": "Puedes prestar equipo de tu bolsa a tu aliado de la máquina (tú también lo conservas). Solo por hoy."});
 Object.assign(STR.ja,{"shopHint": "各レベルで属性の違う武器3つと防具3つを販売。レベルが高いほど強くなります。今のレベルに近い装備を表示しています。", "shopAll": "全レベルを表示", "shopNear": "今のレベル付近だけ", "alOwnGear": "仲間の元の装備（{e}）", "alLend": "貸す", "alGearHint": "バッグの装備をコンピューターの仲間に貸せます（自分も使えます）。今日だけ有効です。"});
 Object.assign(STR.ko,{"shopHint": "레벨마다 속성이 다른 무기 3개와 방어구 3개를 팔아요. 레벨이 높을수록 강해요. 지금 레벨 근처 장비를 보여 줘요.", "shopAll": "모든 레벨 보기", "shopNear": "내 레벨 근처만", "alOwnGear": "동료의 원래 장비 ({e})", "alLend": "빌려주기", "alGearHint": "가방의 장비를 컴퓨터 동료에게 빌려줄 수 있어요 (나도 계속 사용). 오늘만 유효해요."});
+Object.assign(STR.zh,{alNoLow:"盟友只會參加 Lv {n} 以上野怪的戰鬥，這隻要自己打",alNoTown:"盟友不參加城鎮攻城戰，這場要自己打"});
+Object.assign(STR.en,{alNoLow:"Your ally only joins fights against Lv {n}+ wild monsters, so this one is yours alone",alNoTown:"Your ally doesn't join town sieges, so this one is yours alone"});
+Object.assign(STR.hi,{alNoLow:"साथी सिर्फ़ Lv {n}+ जंगली दानवों से लड़ता है, यह लड़ाई अकेले है",alNoTown:"साथी शहर पर हमले में नहीं आता, यह लड़ाई अकेले है"});
+Object.assign(STR.es,{alNoLow:"Tu aliado solo lucha contra monstruos salvajes de Lv {n}+; esta la luchas solo",alNoTown:"Tu aliado no participa en asedios; esta la luchas solo"});
+Object.assign(STR.ja,{alNoLow:"仲間は Lv {n} 以上の野外の魔物との戦いにだけ参加します。この戦いは一人で",alNoTown:"仲間は町の攻略戦には参加しません。この戦いは一人で"});
+Object.assign(STR.ko,{alNoLow:"동료는 Lv {n} 이상 야생 몬스터 전투에만 참여해요. 이번엔 혼자 싸워요",alNoTown:"동료는 마을 공성전에 참여하지 않아요. 이번엔 혼자 싸워요"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
