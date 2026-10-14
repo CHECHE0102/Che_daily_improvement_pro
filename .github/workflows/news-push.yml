@@ -1,0 +1,25 @@
+name: News reminders (push)
+on:
+  schedule:
+    - cron: "1 * * * *"   # hourly; the script picks players whose local time is 07:xx or 19:xx
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: news-push
+  cancel-in-progress: false
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/push.mjs
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
+          VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
