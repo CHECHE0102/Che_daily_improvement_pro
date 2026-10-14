@@ -2240,7 +2240,7 @@ function ieLobby(){
 
 /* ================= Feedback (→ Google Sheet via Apps Script, plus a Firestore copy) ================= */
 // Paste the Apps Script "Web app" URL here once it is deployed (see instructions from Claude).
-const FEEDBACK_URL="";
+const FEEDBACK_URL="https://script.google.com/macros/s/AKfycbxL21sHbIGaY4OSAwQUGEYL6bw_Dnpv2b6gn8kSMtkG0_7tauCTLIuH4nEZg6vG93X2/exec";
 function feedbackCard(){
   const types=[["idea",T("fbIdea")],["bug",T("fbBug")],["news",T("fbNews")],["other",T("fbOther")]];
   const ty=S.fbType||"idea";
