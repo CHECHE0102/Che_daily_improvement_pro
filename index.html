@@ -658,8 +658,30 @@ body.maint-lock{overflow:hidden}
 <script>
 "use strict";
 /* ================= i18n ================= */
-const LANGS=[{k:"zh",label:"繁體中文",short:"中"},{k:"en",label:"English",short:"EN"},{k:"hi",label:"हिन्दी",short:"हि"},{k:"es",label:"Español",short:"ES"},{k:"ja",label:"日本語",short:"日"},{k:"ko",label:"한국어",short:"한"}];
-let LANG=(()=>{ try{ const v=localStorage.getItem("che-pro-lang"); return LANGS.some(l=>l.k===v)?v:"zh"; }catch(e){ return "zh"; } })();
+const LANGS=[{k:"zh",label:"繁體中文",short:"繁"},{k:"cn",label:"简体中文",short:"简"},{k:"en",label:"English",short:"EN"},{k:"hi",label:"हिन्दी",short:"हि"},{k:"es",label:"Español",short:"ES"},{k:"ja",label:"日本語",short:"日"},{k:"ko",label:"한국어",short:"한"}];
+// Simplified Chinese ("cn") runs on the Traditional Chinese texts (LANG stays "zh") and converts what is shown on screen
+let SC=false;
+let LANG=(()=>{ try{ const v=localStorage.getItem("che-pro-lang"); if(v==="cn"){ SC=true; return "zh"; } return LANGS.some(l=>l.k===v)?v:"zh"; }catch(e){ return "zh"; } })();
+const langKey=()=>SC&&LANG==="zh"?"cn":LANG;
+const HTML_LANG={zh:"zh-Hant",cn:"zh-Hans",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"};
+let SC_MAP=null, SC_OBS=null;
+async function scLoad(){ if(SC_MAP) return; try{ const j=await (await fetch("assets/zh-cn.json")).json(); const c={}, cs=Array.from(j.c); for(let i=0;i+1<cs.length;i+=2) c[cs[i]]=cs[i+1]; SC_MAP={c, p:j.p, max:Math.max(...Object.keys(j.p).map(k=>k.length))}; }catch(e){ SC_MAP={c:{},p:{},max:1}; } }
+function toSC(t){ if(!SC_MAP||!t||!/[\u3400-\u9fff]/.test(t)) return t; const {c,p,max}=SC_MAP; let r="", i=0;
+  while(i<t.length){ let hit=0; for(let L=Math.min(max,t.length-i);L>1;L--){ const v=p[t.substr(i,L)]; if(v!==undefined){ r+=v; i+=L; hit=1; break; } } if(!hit){ const cp=t.codePointAt(i), ch=String.fromCodePoint(cp); r+=c[ch]||ch; i+=ch.length; } } return r; }
+function scNode(n){
+  if(n.nodeType===3){ const pe=n.parentElement; if(!pe||pe.closest("[data-nosc],script,style,textarea")) return; const v=toSC(n.nodeValue); if(v!==n.nodeValue) n.nodeValue=v; return; }
+  if(n.nodeType!==1||n.closest&&n.closest("[data-nosc]")) return;
+  for(const a of ["placeholder","title","aria-label"]){ const v=n.getAttribute&&n.getAttribute(a); if(v){ const w=toSC(v); if(w!==v) n.setAttribute(a,w); } }
+  if(/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.tagName)) return;
+  const tw=document.createTreeWalker(n, NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT); let x; while((x=tw.nextNode())) scNode1(x);
+}
+function scNode1(x){ if(x.nodeType===3){ const pe=x.parentElement; if(!pe||pe.closest("[data-nosc],script,style,textarea")) return; const v=toSC(x.nodeValue); if(v!==x.nodeValue) x.nodeValue=v; } else for(const a of ["placeholder","title","aria-label"]){ const v=x.getAttribute(a); if(v){ const w=toSC(v); if(w!==v) x.setAttribute(a,w); } } }
+async function scApply(){
+  if(!(SC&&LANG==="zh")){ if(SC_OBS){ SC_OBS.disconnect(); SC_OBS=null; } return; }
+  await scLoad(); scNode(document.body); document.title=toSC(document.title);
+  if(!SC_OBS){ SC_OBS=new MutationObserver(ms=>{ if(!(SC&&LANG==="zh")) return; for(const m of ms){ if(m.type==="characterData") scNode(m.target); else if(m.type==="attributes") scNode1(m.target); else m.addedNodes.forEach(scNode); } });
+    SC_OBS.observe(document.body,{subtree:true, childList:true, characterData:true, attributes:true, attributeFilter:["placeholder","title","aria-label"]}); }
+}
 const STR={
 zh:{
  loading:"載入中…", tabToday:"今日", tabDict:"字典", tabAdv:"冒險", tabArch:"文章", mainMenu:"主選單", language:"語言",
@@ -878,14 +900,15 @@ const topicOf=a=>!a.topic?"":LANG==="zh"?a.topic:((TOPICS[a.topic]||{})[LANG]||a
 const sumOf=a=>LANG==="ja"?(a.summaryJa||a.summaryEn||a.summaryZh):LANG==="ko"?(a.summaryKo||a.summaryEn||a.summaryZh):LANG==="es"?(a.summaryEs||a.summaryEn||a.summaryZh):LANG==="hi"?(a.summaryHi||a.summaryEn||a.summaryZh):LANG==="en"?(a.summaryEn||a.summaryZh):a.summaryZh;
 // meaning of a gloss entry or a saved word in the current language
 const mean=x=>!x?"":LANG==="ja"?(x.ja||x.en||x.zh):LANG==="ko"?(x.ko||x.en||x.zh):LANG==="es"?(x.es||x.en||x.zh):LANG==="hi"?(x.hi||x.en||x.zh):LANG==="en"?(x.en||x.zh):x.zh;
-function setLang(k){ LANG=k; try{ localStorage.setItem("che-pro-lang",k); }catch(e){} document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[k]; S.langSheet=false; applyStaticText(); render(); }
+function setLang(k){ const was=SC; SC=k==="cn"; LANG=SC?"zh":k; try{ localStorage.setItem("che-pro-lang",k); }catch(e){} document.documentElement.lang=HTML_LANG[k]; S.langSheet=false;
+  if(was&&!SC){ location.reload(); return; } applyStaticText(); render(); scApply(); }
 function applyStaticText(){
   const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
   set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch")); set("tab-set",T("tabSet"));
   { const hb=document.getElementById("helpBtn"); if(hb) hb.setAttribute("aria-label",(HELP[LANG]||HELP.en).title); }
   const n=document.querySelector("nav.tabs"); if(n) n.setAttribute("aria-label",T("mainMenu"));
   const vb=document.getElementById("levelBtn"); if(vb){ vb.textContent=LEVEL; vb.setAttribute("aria-label",T("level")); }
-  const lb=document.getElementById("langBtn"); if(lb){ lb.textContent=LANGS.find(l=>l.k===LANG).short; lb.setAttribute("aria-label",T("language")); }
+  const lb=document.getElementById("langBtn"); if(lb){ lb.textContent=LANGS.find(l=>l.k===langKey()).short; lb.setAttribute("data-nosc",""); lb.setAttribute("aria-label",T("language")); }
 }
 const LEVELS=[{k:"A2"},{k:"B1"},{k:"B2"},{k:"C1"},{k:"IELTS"}];
 let LEVEL=(()=>{ try{ const v=localStorage.getItem("che-pro-level"); return LEVELS.some(l=>l.k===v)?v:"B2"; }catch(e){ return "B2"; } })();
@@ -920,7 +943,7 @@ function fillerWords(art, exclude, n){
 function langSheet(){
   return `<div class="scrim" data-act="closelang"></div><div class="sheet" role="dialog" aria-label="${T("language")}"><div class="grab"></div>
     <div class="eyebrow" style="margin-bottom:10px">Language · 語言 · भाषा · Idioma</div>
-    <div class="opts">${LANGS.map(l=>`<button class="opt${l.k===LANG?" right":""}" data-lang="${l.k}">${l.label}</button>`).join("")}</div></div>`;
+    <div class="opts">${LANGS.map(l=>`<button class="opt${l.k===langKey()?" right":""}" data-lang="${l.k}" data-nosc>${l.label}</button>`).join("")}</div></div>`;
 }
 
 /* ---------- utilities ---------- */
@@ -1102,9 +1125,9 @@ function viewDict(){
 }
 
 /* ---------- settings ---------- */
-const LANG_EN={zh:"Traditional Chinese",en:"English",hi:"Hindi",es:"Spanish",ja:"Japanese",ko:"Korean"};
+const LANG_EN={zh:"Traditional Chinese",cn:"Simplified Chinese",en:"English",hi:"Hindi",es:"Spanish",ja:"Japanese",ko:"Korean"};
 function viewSettings(){
-  const langs=LANGS.map(l=>`<button class="opt set-opt${l.k===LANG?" right":""}" data-lang="${l.k}"><b>${l.label}</b>${l.k!=="en"?`<span class="optm">${LANG_EN[l.k]}</span>`:""}</button>`).join("");
+  const langs=LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-lang="${l.k}" data-nosc><b>${l.label}</b>${l.k!=="en"?`<span class="optm">${LANG_EN[l.k]}</span>`:""}</button>`).join("");
   const lvls=LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("");
   return `<div class="view">
     <div><div class="eyebrow">Che Daily Pro</div><h2 style="font-size:24px">${T("tabSet")}</h2></div>
@@ -2246,7 +2269,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.45";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.46";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -3702,7 +3725,7 @@ Object.assign(STR.hi,{nickChars:"उपनाम में सिर्फ़ �
 Object.assign(STR.es,{nickChars:"El apodo solo puede tener letras, números, espacios y _ . - (sin emojis)",nickCharsOld:"Tu apodo tiene emojis o símbolos. Elige uno nuevo en Ajustes"});
 Object.assign(STR.ja,{nickChars:"ニックネームは文字・数字・スペースと _ . - だけ使えます（絵文字は不可）",nickCharsOld:"ニックネームに絵文字や記号が入っています。設定で新しく決めてください"});
 Object.assign(STR.ko,{nickChars:"닉네임은 글자, 숫자, 공백과 _ . - 만 쓸 수 있어요 (이모지 불가)",nickCharsOld:"닉네임에 이모지나 기호가 있어요. 설정에서 새로 정해 주세요"});
-document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
+document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
