@@ -665,6 +665,7 @@ body.maint-lock{overflow:hidden}
 .ally-fig.a-atk .ally-svg{animation:lungeR .55s ease-out}.ally-fig.a-atk .a-arm{animation:swing .55s ease-out;transform-origin:80px 78px}
 .ally-fig.a-hurt .ally-svg{animation:hurt .45s ease-out .15s}.ally-fig.a-down{filter:grayscale(1) brightness(.6);transform:rotate(-12deg) translateY(8%);transition:all .5s}
 .ally-fig .slash{z-index:3}.ally-fig .dmg{z-index:4}
+.ally-items{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ally-it{display:flex;gap:8px;align-items:center;min-width:0}.ally-it>span{display:flex;flex-direction:column;min-width:0}.ally-it b{font-size:13px;line-height:1.25}
 </style>
 
 </head>
@@ -1728,20 +1729,22 @@ const yesterday=()=>{ const d=new Date(); d.setDate(d.getDate()-1); return ymd(d
 function allyStatsOf(lv,wEl,aEl){ const gl=Math.max(1,lv-1); return {hp:100+20*(lv-1)+GEAR_H(gl), atk:10+3*(lv-1)+GEAR_W(gl), def:5+2*(lv-1)+GEAR_D(gl), wEl, aEl, gl}; }
 function cpuAlly(){
   const g=game(), td=today(); g.allyLog=g.allyLog||{};
-  if(g.allyLog[td]&&g.allyLog[td].cpu) return g.allyLog[td].cpu;
+  if(g.allyLog[td]&&g.allyLog[td].cpu&&g.allyLog[td].cpu.wId) return g.allyLog[td].cpu;
   const seed=hashStr((CLOUD.user?CLOUD.user.uid:"guest")+td); let i=seed%ALLY_POOL.length;
   const y=g.allyLog[yesterday()]; if(y&&y.id==="cpu-"+i) i=(i+1)%ALLY_POOL.length;
-  const lv=Math.max(ALLY_LV, g.lv+((seed>>5)%3)-1), wEl=ELS[(seed>>8)%5].k, aEl=ELS[(seed>>11)%5].k;
-  const a={kind:"cpu", id:"cpu-"+i, n:ALLY_POOL[i][0], flag:ALLY_POOL[i][1], lv, ...allyStatsOf(lv,wEl,aEl)};
+  const lv=Math.max(ALLY_LV, g.lv+((seed>>5)%3)-1), gl=Math.max(1,lv-1);
+  const shop=slot=>Object.values(ITEMS).filter(it=>!it.legacy&&it.slot===slot&&it.lv>=gl-1&&it.lv<=gl);
+  const ws=shop("weapon"), as=shop("armor"), wi=ws[(seed>>8)%ws.length], ai=as[(seed>>11)%as.length];
+  const a={kind:"cpu", id:"cpu-"+i, n:ALLY_POOL[i][0], flag:ALLY_POOL[i][1], lv, hp:100+20*(lv-1)+ai.hp, atk:10+3*(lv-1)+wi.atk, def:5+2*(lv-1)+ai.def, wEl:wi.el, aEl:ai.el, wId:wi.id, aId:ai.id, gl};
   g.allyLog[td]={...(g.allyLog[td]||{}), cpu:a, id:a.id}; const ks=Object.keys(g.allyLog).sort(); while(ks.length>7) delete g.allyLog[ks.shift()]; saveGame();
   return a;
 }
 function todayAlly(){ const g=game(); if(g.lv<ALLY_LV) return null; const f=S.allyFriend; if(f&&f.date===today()) return f;
   const c=cpuAlly(), lend=g.allyGear&&g.allyGear.date===today()?g.allyGear:null; if(!lend) return c;
   const a={...c}, base={hp:100+20*(c.lv-1), atk:10+3*(c.lv-1), def:5+2*(c.lv-1)}, gl=Math.max(1,c.lv-1);
-  const w=lend.w&&g.inv.includes(lend.w)&&ITEMS[lend.w], ar=lend.a&&g.inv.includes(lend.a)&&ITEMS[lend.a];
-  if(w){ a.atk=base.atk+w.atk; a.wEl=w.el; a.lentW=w.id; }
-  if(ar){ a.def=base.def+ar.def; a.hp=base.hp+ar.hp; a.aEl=ar.el; a.lentA=ar.id; }
+  const w=lend.w&&lend.w!==g.weapon&&g.inv.includes(lend.w)&&ITEMS[lend.w], ar=lend.a&&lend.a!==g.armor&&g.inv.includes(lend.a)&&ITEMS[lend.a];
+  if(w){ a.atk=base.atk+w.atk; a.wEl=w.el; a.wId=w.id; a.lentW=w.id; }
+  if(ar){ a.def=base.def+ar.def; a.hp=base.hp+ar.hp; a.aEl=ar.el; a.aId=ar.id; a.lentA=ar.id; }
   return a; }
 // --- friend binding through Firestore: allies/{uid} = {snap, req:{from,n,date}, bond:{with,n,date}}
 const allyRef=uid=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"allies",uid);
@@ -1749,7 +1752,7 @@ async function allySync(force){
   if(!CLOUD.user||!CLOUD.fb||game().lv<ALLY_LV||DEV) return;
   if(S.allySynced&&!force&&Date.now()-S.allySynced<60e3) return; S.allySynced=Date.now();
   const {fsM}=CLOUD.fb, me=CLOUD.user.uid, g=game(), s=stats();
-  const snap={n:g.nick||(CLOUD.user.displayName||"").slice(0,16), lv:g.lv, hp:s.hp, atk:s.atk, def:s.def, wEl:s.wEl||"", aEl:s.aEl||"", flag:myFlag(), at:Date.now()};
+  const snap={n:g.nick||(CLOUD.user.displayName||"").slice(0,16), lv:g.lv, hp:s.hp, atk:s.atk, def:s.def, wEl:s.wEl||"", aEl:s.aEl||"", w:g.weapon||"", a:g.armor||"", flag:myFlag(), at:Date.now()};
   try{
     await fsM.setDoc(allyRef(me),{snap},{merge:true});
     const d=(await fsM.getDoc(allyRef(me))).data()||{}; S.allyDoc=d;
@@ -1761,7 +1764,7 @@ async function allySync(force){
     }
     if(d.bond&&d.bond.date===today()){
       const fd=(await fsM.getDoc(allyRef(d.bond.with))).data()||{}; const sp=fd.snap||{};
-      S.allyFriend={kind:"friend", id:d.bond.with, n:sp.n||d.bond.n, flag:sp.flag||"", lv:sp.lv||g.lv, hp:sp.hp||s.hp, atk:sp.atk||s.atk, def:sp.def||s.def, wEl:sp.wEl||null, aEl:sp.aEl||null, date:today()};
+      S.allyFriend={kind:"friend", id:d.bond.with, n:sp.n||d.bond.n, flag:sp.flag||"", lv:sp.lv||g.lv, hp:sp.hp||s.hp, atk:sp.atk||s.atk, def:sp.def||s.def, wEl:sp.wEl||null, aEl:sp.aEl||null, wId:sp.w&&ITEMS[sp.w]?sp.w:null, aId:sp.a&&ITEMS[sp.a]?sp.a:null, date:today()};
       g.allyLog=g.allyLog||{}; g.allyLog[today()]={...(g.allyLog[today()]||{}), id:d.bond.with}; saveGame();
     }
   }catch(e){ console.warn("ally",e&&e.code); }
@@ -1803,10 +1806,11 @@ function allyCard(){
   const ini=(a.n||"?").slice(0,1).toUpperCase();
   return `<div class="card ally-card"><div class="row" style="justify-content:space-between"><b>🤝 ${T("alTitle")}</b><span class="chip ${friend?"done":""}">${friend?T("alFriend"):T("alCpu")}</span></div>
     <div class="ally-row"><span class="ally-av" style="background:${(EL_PAL[a.wEl]||["#888","#555"])[1]}">${ini}<i>${flagOf(a.flag)}</i></span><div class="it-main"><b>${esc(a.n)}${friend?supB(a.id,16):""}</b><span class="muted sm-t">Lv ${a.lv} · HP ${a.hp} · ${T("atk")} ${a.atk} · ${T("def")} ${a.def}</span>
-      <span class="sm-t">${T("weapon")} ${elBadge(a.wEl)} · ${T("armor")} ${elBadge(a.aEl)}</span></div></div>
+      </div></div>
+    <div class="ally-items">${[["weapon",a.wId,a.wEl,a.lentW],["armor",a.aId,a.aEl,a.lentA]].map(([sl,id,el,lent])=>{ const it=id&&ITEMS[id]; return `<div class="ally-it">${it?itemTile(it,true):elBadge(el)}<span><small class="muted">${T(sl)}${lent?" · "+T("alLent"):""}</small><b>${it?esc(itemName(it)):elName(el)}</b><small class="muted">${it?(sl==="weapon"?T("atkPlus",{n:it.atk}):T("defPlus",{d:it.def,h:it.hp}))+" · "+tierLab(it):""}</small></span></div>`; }).join("")}</div>
     ${friend?"":(()=>{ const own=g.inv.map(id=>ITEMS[id]).filter(Boolean), c=cpuAlly(), lend=g.allyGear&&g.allyGear.date===today()?g.allyGear:{};
-      const sel=(slot,cur,origEl)=>`<select class="search ally-sel" data-allygear="${slot}"><option value="">${T("alOwnGear",{e:elName(origEl)})}</option>${own.filter(it=>it.slot===slot).sort((x,y)=>y.lv-x.lv).map(it=>`<option value="${it.id}"${cur===it.id?" selected":""}>${T("alLend")}: ${esc(itemName(it))} (${elName(it.el)} · ${tierLab(it)})</option>`).join("")}</select>`;
-      return `<div class="ally-gear"><label class="sm-t">${T("weapon")}${sel("weapon",lend.w,c.wEl)}</label><label class="sm-t">${T("armor")}${sel("armor",lend.a,c.aEl)}</label><span class="muted sm-t">${T("alGearHint")}</span></div>`; })()}
+      const sel=(slot,cur,origId)=>`<select class="search ally-sel" data-allygear="${slot}"><option value="">${T("alOwnGear",{e:origId&&ITEMS[origId]?itemName(ITEMS[origId]):""})}</option>${own.filter(it=>it.slot===slot&&it.id!==g[slot]).sort((x,y)=>y.lv-x.lv).map(it=>`<option value="${it.id}"${cur===it.id?" selected":""}>${T("alLend")}: ${esc(itemName(it))} (${elName(it.el)} · ${tierLab(it)})</option>`).join("")}</select>`;
+      return `<div class="ally-gear"><label class="sm-t">${T("alLendW")}${sel("weapon",lend.w,c.wId)}</label><label class="sm-t">${T("alLendA")}${sel("armor",lend.a,c.aId)}</label><span class="muted sm-t">${T("alGearHint")}</span></div>`; })()}
     <p class="muted sm-t" style="margin:2px 0">${T("alHow")}</p>
     ${req?`<div class="ie-exitask"><b>${T("alReq",{n:esc(req.n||"?")})}</b><div class="row"><button class="btn sm" data-act="alyes">${T("alAccept")}</button><button class="btn ghost sm" data-act="alno">${T("alDecline")}</button></div></div>`:""}
     ${!CLOUD.user?`<p class="muted sm-t">${T("alLogin")}</p>`:friend?"":out?`<p class="sm-t">⏳ ${T("alWaiting",{n:esc(out.n)})}</p>`:`<div class="row" style="flex-wrap:nowrap;gap:6px"><input id="allyNick" class="search" maxlength="16" placeholder="${T("alNickPh")}" autocomplete="off"><button class="btn sm" data-act="alinvite" style="flex:none">${T("alInvite")}</button></div>`}
@@ -2014,9 +2018,9 @@ const NICK_STEPS=[3,6,9,12,15,18,20];
 function nickTier(lv){ let i=0; while(i<NICK_STEPS.length&&lv>=NICK_STEPS[i]) i++; return "nk nk"+i; }
 // ally figure: same body as the hero, coloured by the ally's own weapon / armour elements
 function allySvg(al){
-  const t=tierOfLv(Math.max(1,(al.gl||al.lv||1))), w=al.wEl?{el:al.wEl,tier:t,slot:"weapon"}:null, aE=al.aEl;
+  const wi=al.wId&&ITEMS[al.wId], ai=al.aId&&ITEMS[al.aId], t=ai?ai.tier:tierOfLv(Math.max(1,(al.gl||al.lv||1))), w=wi||(al.wEl?{el:al.wEl,tier:t,slot:"weapon"}:null), aE=al.aEl;
   const body=aE?ARMC[aE][t]:"#C8B89A", trim=t===3?GOLD:GK, hair=["#3B2A1E","#C7742E","#E8C547","#1B1B1B","#8A4B2B"][(al.n||"").length%5];
-  const wg=w?(WKIND[w.el][t]==="bow"?`<g transform="translate(96 66) scale(.9) translate(-28 -32)">${weaponGlyph(w)}</g>`:`<g transform="translate(97 66) rotate(20) scale(.95) translate(-32 -50)">${weaponGlyph(w)}</g>`):"";
+  const wt=w?w.tier:t, wg=w?(WKIND[w.el][wt]==="bow"?`<g transform="translate(96 66) scale(.9) translate(-28 -32)">${weaponGlyph(w)}</g>`:`<g transform="translate(97 66) rotate(20) scale(.95) translate(-32 -50)">${weaponGlyph(w)}</g>`):"";
   return `<svg viewBox="0 0 140 150" class="ally-svg" aria-hidden="true">
     <ellipse cx="62" cy="142" rx="34" ry="5" fill="#000" opacity=".22"/>
     <path d="M48 112L46 138H58L60 114M66 114L68 138H80L76 112" fill="#3E3A4E" ${sk}/>
@@ -2052,7 +2056,7 @@ function viewBattle(){
       <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("retreat")}</button>
       <div class="vs">${monArt(m)}<div><div class="eyebrow">${esc(townName(m))} · Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
       <div class="row">${advice(m)||`<span class="adv">${T("advNone")}</span>`}</div>
-      ${m.wild&&m.lv>ALLY_LV&&todayAlly()?`<div class="card ally-pre">🤝 ${T("alWith",{n:esc(todayAlly().n)})} · Lv ${todayAlly().lv} ${elBadge(todayAlly().wEl)} ${elBadge(todayAlly().aEl)}</div>`:g.lv>=ALLY_LV?`<div class="card ally-pre muted">🤝 ${m.wild?T("alNoLow",{n:ALLY_LV+1}):T("alNoTown")}</div>`:""}
+      ${m.wild&&m.lv>ALLY_LV&&todayAlly()?(()=>{ const A=todayAlly(), wi=A.wId&&ITEMS[A.wId], ai=A.aId&&ITEMS[A.aId]; return `<div class="card ally-pre">🤝 ${T("alWith",{n:esc(A.n)})} · Lv ${A.lv}<div class="sm-t muted">${elBadge(A.wEl)} ${wi?esc(itemName(wi)):""} · ${elBadge(A.aEl)} ${ai?esc(itemName(ai)):""}</div></div>`; })():g.lv>=ALLY_LV?`<div class="card ally-pre muted">🤝 ${m.wild?T("alNoLow",{n:ALLY_LV+1}):T("alNoTown")}</div>`:""}
       ${m.boss?`<div class="card boss-rules"><b>${T("bossTitle")}</b><p>🔥 ${T("bossShield")}</p><p>👁 ${T("bossEye",{n:BOSS.eyeEvery})}</p><p>💢 ${T("bossRage",{p:Math.round(BOSS.rageAt*100)})}</p><p class="muted sm-t">${T("bossTip")}</p></div>`:""}
       <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
@@ -2548,7 +2552,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.51";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.52";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -4062,6 +4066,12 @@ Object.assign(STR.hi,{alNoLow:"साथी सिर्फ़ Lv {n}+ जंग
 Object.assign(STR.es,{alNoLow:"Tu aliado solo lucha contra monstruos salvajes de Lv {n}+; esta la luchas solo",alNoTown:"Tu aliado no participa en asedios; esta la luchas solo"});
 Object.assign(STR.ja,{alNoLow:"仲間は Lv {n} 以上の野外の魔物との戦いにだけ参加します。この戦いは一人で",alNoTown:"仲間は町の攻略戦には参加しません。この戦いは一人で"});
 Object.assign(STR.ko,{alNoLow:"동료는 Lv {n} 이상 야생 몬스터 전투에만 참여해요. 이번엔 혼자 싸워요",alNoTown:"동료는 마을 공성전에 참여하지 않아요. 이번엔 혼자 싸워요"});
+Object.assign(STR.zh,{"alLendW": "借武器給盟友（身上裝備的不能借）", "alLendA": "借防具給盟友（身上裝備的不能借）", "alLent": "借來的", "alOwnGear": "用盟友原本的：{e}", "alGearHint": "可以把背包裡「沒有穿在身上」的備用裝備借給電腦盟友（你不會失去它），只在今天有效。"});
+Object.assign(STR.en,{"alLendW": "Lend a weapon (not the one you're wearing)", "alLendA": "Lend armour (not the one you're wearing)", "alLent": "lent", "alOwnGear": "Ally's own: {e}", "alGearHint": "You can lend spare gear from your bag (not what you're wearing) to your computer ally. You keep it; it lasts for today only."});
+Object.assign(STR.hi,{"alLendW": "हथियार उधार दें (जो पहना है वह नहीं)", "alLendA": "कवच उधार दें (जो पहना है वह नहीं)", "alLent": "उधार", "alOwnGear": "साथी का अपना: {e}", "alGearHint": "बैग का अतिरिक्त सामान (जो पहना नहीं है) कंप्यूटर साथी को उधार दें। वह आपके पास भी रहेगा; सिर्फ़ आज के लिए।"});
+Object.assign(STR.es,{"alLendW": "Prestar arma (no la que llevas puesta)", "alLendA": "Prestar armadura (no la que llevas puesta)", "alLent": "prestado", "alOwnGear": "Propio del aliado: {e}", "alGearHint": "Puedes prestar equipo de repuesto de tu bolsa (no lo que llevas puesto) a tu aliado. Lo conservas; solo por hoy."});
+Object.assign(STR.ja,{"alLendW": "武器を貸す（装備中のものは不可）", "alLendA": "防具を貸す（装備中のものは不可）", "alLent": "貸出中", "alOwnGear": "仲間の元の装備：{e}", "alGearHint": "バッグにある予備の装備（今身につけていないもの）を仲間に貸せます。なくなりません。今日だけ有効です。"});
+Object.assign(STR.ko,{"alLendW": "무기 빌려주기 (착용 중인 것은 불가)", "alLendA": "방어구 빌려주기 (착용 중인 것은 불가)", "alLent": "빌린 장비", "alOwnGear": "동료 원래 장비: {e}", "alGearHint": "가방에 있는 여분 장비(지금 착용하지 않은 것)를 컴퓨터 동료에게 빌려줄 수 있어요. 없어지지 않고 오늘만 유효해요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
