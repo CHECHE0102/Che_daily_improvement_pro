@@ -415,6 +415,53 @@ select.search{appearance:auto;-webkit-appearance:menulist}.reg-note{font-size:13
 .ds-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}.ds-t{border-collapse:collapse;font-size:12px;width:100%;white-space:nowrap}.ds-t th,.ds-t td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}.ds-t th{color:var(--muted);font-weight:600}
 .sup-bank{border-top:1px dashed var(--gorse);padding-top:8px;margin-top:2px}.sup-bank summary{cursor:pointer;font-weight:600;font-size:14px}.sup-bank p{margin:6px 0}
 .bank-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;margin:4px 0}.bank-row .acct{font-variant-numeric:tabular-nums;letter-spacing:.04em}.bank-qr{display:block;width:min(220px,100%);margin:8px auto 0;border-radius:10px;border:1px solid var(--line)}
+
+/* ---- competition / IELTS ---- */
+.comp-seg button{font-size:14px;padding:8px 14px}
+.ie-lobby{display:flex;flex-direction:column;gap:12px}
+.ie-hero{display:flex;flex-direction:column;gap:10px;border:1.5px solid var(--accent)}
+.ie-hero-top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.ie-hero h3{font-size:19px}
+.ie-week{display:flex;flex-direction:column;gap:2px}
+.ie-done{font:800 18px var(--f-display);color:var(--accent)}
+.ie-prac{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.badge-shelf{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.badge{flex:none;overflow:visible}.badge.glow{filter:drop-shadow(0 0 6px rgba(255,210,90,.75))}
+.badge.rainbow{animation:bglow 2.4s ease-in-out infinite}@keyframes bglow{0%,100%{filter:drop-shadow(0 0 4px #FFD25A)}50%{filter:drop-shadow(0 0 12px #FF7AB8) drop-shadow(0 0 4px #7FD3F7)}}
+@media (prefers-reduced-motion:reduce){.badge.rainbow{animation:none}}
+.hero-badge{display:inline-block;vertical-align:middle;margin-left:4px}
+.ie-view{gap:12px}
+.ie-top{position:sticky;top:52px;z-index:4;display:flex;justify-content:space-between;align-items:center;background:var(--paper);padding:8px 0;border-bottom:1px solid var(--line)}
+.ie-clock{font:800 22px var(--f-display);font-variant-numeric:tabular-nums;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:4px 10px}.ie-clock.low{color:var(--bad);border-color:var(--bad)}
+.ie-tabs button{font-size:13px}
+.ie-part{display:flex;flex-direction:column;gap:12px}.ie-part h3{font-size:18px}
+.ie-instr{margin:0;font-weight:600;font-size:14px}
+.ie-audio{display:flex;flex-direction:column;gap:6px;align-items:flex-start;background:var(--accent-soft);border-radius:12px;padding:12px}
+.ie-audio.playing{flex-direction:row;align-items:center;gap:10px;font-weight:700;color:var(--accent)}.ie-audio.done{color:var(--good);font-weight:700}
+.eq{display:inline-flex;gap:3px;align-items:flex-end;height:18px}.eq i{width:4px;background:var(--accent);border-radius:2px;animation:eq .9s ease-in-out infinite}.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:4px}50%{height:18px}}
+.ie-script{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.ie-script summary{cursor:pointer;font-weight:600}.ie-script p{margin:6px 0;font-size:14px}
+.ie-passage{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-family:var(--f-read);font-size:17px;line-height:1.6}.ie-passage p{margin:0 0 10px}
+.ie-q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.ie-q.ok{border-color:var(--good)}.ie-q.no{border-color:var(--bad)}
+.ie-qh{display:flex;gap:8px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ie-n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:800;display:grid;place-items:center}
+u.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--accent);text-decoration:none}
+.ie-gap{padding:9px 12px}
+.ie-opts{display:flex;flex-direction:column;gap:6px}.ie-opts.row{flex-direction:row;flex-wrap:wrap}
+.ie-opt{text-align:left;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 12px;font-size:14px}
+.ie-opt.tf{flex:1;text-align:center;font-weight:700;font-size:12px;padding:9px 4px}
+.ie-opt.on{border-color:var(--accent);background:var(--accent-soft)}.ie-opt.right{border-color:var(--good);background:var(--good-soft)}.ie-opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ie-ans{font-weight:700}.ie-exp{font-size:13px;display:flex;flex-direction:column;gap:4px}
+.ie-score{background:var(--night);color:var(--night-ink);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.ie-big{display:flex;flex-direction:column;align-items:center}.ie-big span{opacity:.7;font-size:13px}.ie-big b{font:900 64px var(--f-display);color:var(--gorse);line-height:1}
+.ie-sub{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ie-sub div{background:rgba(255,255,255,.07);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center}
+.ie-sub span{font-size:12px;opacity:.7}.ie-sub b{font:800 28px var(--f-display)}.ie-sub small{opacity:.7}
+.ie-badge-new{display:flex;gap:14px;align-items:center;border:1.5px solid var(--gorse);background:var(--gorse-soft)}
+.ie-badge-new .badge{animation:pop2 .6s ease-out}
+.btn.danger{background:var(--bad)}
+.rk-row .badge{margin-left:auto}
+.fb-text{resize:vertical;min-height:90px;font-family:inherit}
+.fb-list{display:flex;flex-direction:column;gap:6px;max-height:420px;overflow:auto}.fb-item{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;display:flex;flex-direction:column;gap:3px}
 </style>
 
 </head>
@@ -793,6 +840,7 @@ function render(){
   else if(S.view==="set") app.innerHTML=viewSettings();
   else if(S.view==="adv") app.innerHTML=viewAdv();
   else if(S.view==="battle") app.innerHTML=viewBattle();
+  else if(S.view==="ielts") app.innerHTML=viewIelts();
   renderSheet();
 }
 function artCard(a, d){
@@ -892,6 +940,7 @@ function viewSettings(){
     <section class="card set-sec"><b>${T("level")}</b><div class="opts">${lvls}</div></section>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    ${feedbackCard()}
     <section class="card sup"><div class="sup-cup" aria-hidden="true">☕</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
       <a class="btn sm" href="https://revolut.me/chingche" target="_blank" rel="noopener noreferrer">${T("supBtn")}</a>
       <details class="sup-bank"><summary>🏦 ${T("supBank")}</summary>
@@ -1605,7 +1654,7 @@ function viewAdv(){
   }
   return `<div class="view">
     <section class="hero-card">
-      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>`:""}</div><h2>Lv ${g.lv}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
+      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),1,30)}</span>`:""; })()}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
       <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
@@ -1857,7 +1906,8 @@ async function devLoadStats(){
     let lbN=null; try{ lbN=(await fsM.getCountFromServer(fsM.collection(db,"leaderboard"))).data().count; }catch(e){}
     let regions={}; try{ const r=await fsM.getDoc(fsM.doc(db,"stats","regions")); if(r.exists()) regions=r.data(); }catch(e){}
     let rooms=0; try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); rs.forEach(d=>{ const x=d.data(); if(x.state!=="done"&&Date.now()-(x.created||0)<3600e3) rooms++; }); }catch(e){}
-    S.devStats={users, lbN, regions, rooms, at:new Date()};
+    const fb=await devLoadFeedback();
+    S.devStats={users, lbN, regions, rooms, fb, at:new Date()};
   }catch(e){ S.devStats={err:e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")}; }
   render();
 }
@@ -1885,6 +1935,8 @@ function devStatsHtml(){
     ${regs.length?`<table class="ds-t"><tr><th>${T("dsRegion")}</th><th>${T("dsLast")}</th><th></th></tr>${regs.map(([k,v])=>`<tr><td>${esc(regionLabel(k))} <span class="muted">${esc(k)}</span></td><td>${esc(v)}</td><td>${String(v)>=since(6)?"🟢":"⚪"}</td></tr>`).join("")}</table>`:`<p class="muted sm-t">–</p>`}
     <div class="eyebrow">${T("dsPlayers",{n:U.length})}</div>
     <div class="ds-scroll"><table class="ds-t"><tr><th>${T("nick")}</th><th>Lv</th><th>${T("gold")}</th><th>${T("dsW")}</th><th>${T("dsD")}</th><th>${T("dsC")}</th><th>${T("dsRegion")}</th><th>${T("dsLast")}</th></tr>${rows}</table></div>
+    <div class="eyebrow">${T("dsFeedback",{n:D.fb?D.fb.length:"–"})}</div>
+    ${D.fb&&D.fb.length?`<div class="fb-list">${D.fb.map(f=>`<div class="fb-item"><div class="muted sm-t">${esc((f.at||"").slice(0,16).replace("T"," "))} · ${esc(f.type||"")} · ${esc(f.nick||f.name||"–")} · Lv ${f.lv||"?"} · ${esc(f.lang||"")}/${esc(f.region||"")}</div><div>${esc(f.msg||"")}</div>${f.contact?`<div class="muted sm-t">✉ ${esc(f.contact)}</div>`:""}</div>`).join("")}</div>`:`<p class="muted sm-t">${D.fb===null?T("dsDenied"):"–"}</p>`}
     <p class="muted sm-t">${T("dsNote",{t:D.at.toLocaleTimeString()})}</p>
     <button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button></div>`;
 }
@@ -2022,6 +2074,196 @@ function regionNotice(){
   const has=RAW_INDEX.some(a=>a.region===key);
   return has?"":`<div class="card reg-note">📍 ${T("regPending",{r:esc(regionLabel(key))})}</div>`;
 }
+/* ================= IELTS mock test (listening + reading) ================= */
+const IE_MIN=20;                       // test length in minutes
+let IE_TESTS=null;
+async function ieLoad(){ if(IE_TESTS) return IE_TESTS; try{ const r=await fetch("ielts/tests.json",{cache:"no-cache"}); IE_TESTS=(await r.json()).tests; }catch(e){ IE_TESTS=[]; } return IE_TESTS; }
+function isoWeek(d=new Date()){ const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); const day=t.getUTCDay()||7; t.setUTCDate(t.getUTCDate()+4-day); const y0=new Date(Date.UTC(t.getUTCFullYear(),0,1)); const w=Math.ceil(((t-y0)/864e5+1)/7); return {id:t.getUTCFullYear()+"-W"+String(w).padStart(2,"0"), n:t.getUTCFullYear()*53+w}; }
+function weekTest(){ const w=isoWeek(); return IE_TESTS&&IE_TESTS.length?IE_TESTS[w.n%IE_TESTS.length]:null; }
+function untilReset(){ const now=new Date(), d=new Date(now); const add=((8-(now.getDay()||7))%7)||7; d.setDate(now.getDate()+add); d.setHours(0,0,0,0); const ms=d-now; return {d:Math.floor(ms/864e5), h:Math.floor(ms%864e5/36e5)}; }
+// raw score (scaled to 40 questions) → band, after the usual IELTS conversion tables
+const IE_TABLE=[[39,9],[37,8.5],[35,8],[32,7.5],[30,7],[26,6.5],[23,6],[18,5.5],[16,5],[13,4.5],[10,4],[6,3.5],[4,3],[2,2.5],[1,2],[0,0]];
+function ieBand(c,t){ if(!t) return 0; const s=Math.round(c/t*40); for(const [m,b] of IE_TABLE) if(s>=m) return b; return 0; }
+const fmtBand=b=>Number(b).toFixed(1).replace(/\.0$/,".0");
+function ieState(){ const g=game(); g.ielts=g.ielts||{best:null,hist:[],badges:{},weeks:{}}; return g.ielts; }
+function ieQuestions(t){ const out=[]; t.listening.forEach((p,pi)=>p.questions.forEach((q,qi)=>out.push({key:`L${pi}-${qi}`,sec:"L",part:pi,q}))); t.reading.questions.forEach((q,qi)=>out.push({key:`R-${qi}`,sec:"R",q})); return out; }
+const ieNorm=s=>String(s||"").toLowerCase().replace(/[€$£.,!?'"’]/g,"").replace(/\s+/g," ").trim();
+function ieCorrect(q,a){ if(a==null||a==="") return false; if(q.type==="gap") return q.a.some(x=>ieNorm(x)===ieNorm(a)); if(q.type==="mcq") return +a===q.a; return a===q.a; }
+function ieRunLeft(){ const R=game().ieltsRun; return R?Math.max(0,Math.round((R.start+IE_MIN*60e3-Date.now())/1000)):0; }
+
+async function ieStart(testId, ranked){
+  await ieLoad(); const t=IE_TESTS.find(x=>x.id===testId); if(!t) return;
+  const g=game(), st=ieState(), wk=isoWeek().id;
+  if(ranked){ if(st.weeks[wk]!==undefined) return toast(T("ieDone",{b:fmtBand(st.weeks[wk])})); st.weeks[wk]="started"; }
+  g.ieltsRun={test:t.id, week:wk, ranked:!!ranked, start:Date.now(), ans:{}, played:{}, sec:0};
+  saveGame(); S.view="ielts"; S.ieConfirm=false; render(); window.scrollTo(0,0); ieTick();
+}
+function ieResume(){ if(!game().ieltsRun) return; S.view="ielts"; render(); ieTick(); }
+function ieTick(){ clearInterval(S.ieTimer); S.ieTimer=setInterval(()=>{ const R=game().ieltsRun; if(!R||S.view!=="ielts"){ clearInterval(S.ieTimer); return; } const left=ieRunLeft(); const el=document.getElementById("ieClock"); if(el){ el.textContent=`${Math.floor(left/60)}:${String(left%60).padStart(2,"0")}`; el.classList.toggle("low",left<120); } if(left<=0){ clearInterval(S.ieTimer); toast(T("ieTimeUp")); ieSubmit(); } },1000); }
+
+/* speech for the listening parts */
+function ieVoices(){ const vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[]; const en=vs.filter(v=>/^en[-_](GB|IE|AU|NZ)/i.test(v.lang)); const pool=en.length?en:vs.filter(v=>/^en/i.test(v.lang)); const fem=pool.find(v=>/female|kate|serena|martha|moira|karen|libby|sonia|susan|fiona|tessa/i.test(v.name)); const mal=pool.find(v=>/male|daniel|arthur|oliver|ryan|george|rishi|thomas/i.test(v.name)&&!/female/i.test(v.name)); return {F:fem||pool[0]||null, M:mal||pool[1]||pool[0]||null}; }
+function iePlay(pi){
+  const R=game().ieltsRun; if(!R) return; const t=IE_TESTS.find(x=>x.id===R.test), part=t.listening[pi];
+  if(R.ranked&&R.played[pi]) return;
+  if(!window.speechSynthesis){ R.played[pi]="nots"; saveGame(); return render(); }
+  speechSynthesis.cancel(); const V=ieVoices(); const lines=part.script; let i=0;
+  R.played[pi]=true; saveGame(); S.iePlaying={pi,i:0,n:lines.length}; render();
+  const next=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; if(i>=lines.length){ S.iePlaying=null; render(); return; }
+    const [sp,text]=lines[i]; const u=new SpeechSynthesisUtterance(text); u.lang="en-GB"; const v=V[sp]||V.F; if(v) u.voice=v; u.rate=0.92; u.pitch=sp==="F"?1.1:0.9;
+    u.onend=()=>{ i++; S.iePlaying&&(S.iePlaying.i=i); const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,lines.length),n:lines.length}); setTimeout(next,350); };
+    u.onerror=u.onend; speechSynthesis.speak(u); };
+  next();
+}
+function ieStopAudio(){ try{ speechSynthesis.cancel(); }catch(e){} S.iePlaying=null; }
+
+function ieQHtml(item, R, review){
+  const {key,q}=item, a=R.ans[key], num=item.num;
+  const mark=review?(ieCorrect(q,a)?'<span class="mark ok">✓</span>':'<span class="mark no">✗</span>'):"";
+  let input="";
+  if(q.type==="gap") input=review?`<span class="ie-ans">${a?esc(a):`<i class="muted">${T("ieBlank")}</i>`}</span>`:`<input class="search ie-gap" data-iq="${key}" value="${esc(a||"")}" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+  else if(q.type==="mcq") input=`<div class="ie-opts">${q.opts.map((o,i)=>`<button class="ie-opt${+a===i&&a!==undefined&&a!==""?" on":""}${review&&i===q.a?" right":""}${review&&+a===i&&i!==q.a?" wrong":""}" ${review?"disabled":`data-iqk="${key}" data-iqv="${i}"`}><b>${"ABCD"[i]}</b> ${esc(o)}</button>`).join("")}</div>`;
+  else input=`<div class="ie-opts row">${[["T","TRUE"],["F","FALSE"],["NG","NOT GIVEN"]].map(([v,l])=>`<button class="ie-opt tf${a===v?" on":""}${review&&v===q.a?" right":""}${review&&a===v&&v!==q.a?" wrong":""}" ${review?"disabled":`data-iqk="${key}" data-iqv="${v}"`}>${l}</button>`).join("")}</div>`;
+  const exp=review?`<div class="ie-exp">${!ieCorrect(q,a)?`<div><span class="lab">${T("ieAns")}</span><b>${esc(q.type==="gap"?q.a[0]:q.type==="mcq"?"ABCD"[q.a]+" "+q.opts[q.a]:({T:"TRUE",F:"FALSE",NG:"NOT GIVEN"})[q.a])}</b></div>`:""}<div class="muted">${esc(q.exp)}</div></div>`:"";
+  return `<div class="ie-q${review?(ieCorrect(q,a)?" ok":" no"):""}"><div class="ie-qh"><span class="ie-n">${num}</span>${mark}<span>${esc(q.q).replace("______",'<u class="blank"></u>')}</span></div>${input}${exp}</div>`;
+}
+function ieSectionHtml(t,R,review){
+  const items=ieQuestions(t); items.forEach((it,i)=>it.num=i+1);
+  const tab=R.sec||0;
+  const tabs=[...t.listening.map((p,i)=>`${T("ieListen")} ${i+1}`),T("ieRead")].map((l,i)=>`<button data-iesec="${i}" aria-pressed="${tab===i}">${l}</button>`).join("");
+  let body="";
+  if(tab<t.listening.length){
+    const p=t.listening[tab], pi=tab, played=R.played[pi], playing=S.iePlaying&&S.iePlaying.pi===pi;
+    const noTTS=!window.speechSynthesis||played==="nots";
+    const audio=review||noTTS?"":playing?`<div class="ie-audio playing"><span class="eq"><i></i><i></i><i></i></span><span id="iePlayState">${T("iePlaying",{i:S.iePlaying.i+1,n:p.script.length})}</span></div>`
+      :played&&R.ranked?`<div class="ie-audio done">✓ ${T("iePlayed")}</div>`
+      :`<div class="ie-audio"><button class="btn" data-act="ieplay" data-k="${pi}">${played?T("ieReplay"):T("iePlay")}</button>${R.ranked?`<span class="muted sm-t">${T("iePlayOnce")}</span>`:""}</div>`;
+    const script=(review||noTTS)?`<details class="ie-script"${noTTS&&!review?" open":""}><summary>${T("ieScript")}</summary>${noTTS&&!review?`<p class="muted sm-t">${T("ieNoTTS")}</p>`:""}${p.script.map(([sp,x])=>`<p><b>${sp==="F"?"♀":"♂"}</b> ${esc(x)}</p>`).join("")}</details>`:"";
+    body=`<div class="ie-part"><h3>${esc(p.title)}</h3><p class="ie-instr">${esc(p.instr)}</p>${audio}${script}${items.filter(x=>x.sec==="L"&&x.part===pi).map(x=>ieQHtml(x,R,review)).join("")}</div>`;
+  } else {
+    const rd=t.reading, rq=items.filter(x=>x.sec==="R");
+    const grp=(type,instr)=>{ const qs=rq.filter(x=>x.q.type===type); return qs.length?`<p class="ie-instr">${instr}</p>${qs.map(x=>ieQHtml(x,R,review)).join("")}`:""; };
+    body=`<div class="ie-part"><h3>${esc(rd.title)}</h3><div class="ie-passage">${rd.paragraphs.map(p=>`<p>${esc(p)}</p>`).join("")}</div>
+      ${grp("tfng","Do the statements agree with the information in the passage? Choose TRUE, FALSE or NOT GIVEN.<br><span class='muted sm-t'>"+T("ieTFNG")+"</span>")}
+      ${grp("mcq","Choose the correct letter, A, B, C or D.")}
+      ${grp("gap",esc(rd.gapInstr||"Complete the sentences."))}</div>`;
+  }
+  return `<div class="seg ie-tabs">${tabs}</div>${body}`;
+}
+function viewIelts(){
+  const R=game().ieltsRun;
+  if(S.ieResult) return ieResultHtml();
+  if(!R||!IE_TESTS){ return `<div class="view"><p class="muted">${T("loading")}</p></div>`; }
+  const t=IE_TESTS.find(x=>x.id===R.test); const left=ieRunLeft();
+  const unanswered=ieQuestions(t).filter(x=>R.ans[x.key]===undefined||R.ans[x.key]==="").length;
+  return `<div class="view ie-view">
+    <div class="ie-top"><div><div class="eyebrow">${R.ranked?esc(R.week):T("iePracticeTag")}</div><b>${esc(t.title)}</b></div><span id="ieClock" class="ie-clock${left<120?" low":""}">${Math.floor(left/60)}:${String(left%60).padStart(2,"0")}</span></div>
+    ${ieSectionHtml(t,R,false)}
+    <button class="btn${S.ieConfirm?" danger":""}" data-act="iesubmit">${S.ieConfirm?T("ieConfirm2",{n:unanswered}):T("ieSubmit")}</button>
+  </div>`;
+}
+function ieSubmit(){
+  const g=game(), R=g.ieltsRun; if(!R) return; ieStopAudio(); clearInterval(S.ieTimer);
+  const t=IE_TESTS.find(x=>x.id===R.test), items=ieQuestions(t);
+  const L=items.filter(x=>x.sec==="L"), Rd=items.filter(x=>x.sec==="R");
+  const lc=L.filter(x=>ieCorrect(x.q,R.ans[x.key])).length, rc=Rd.filter(x=>ieCorrect(x.q,R.ans[x.key])).length;
+  const lb=ieBand(lc,L.length), rb=ieBand(rc,Rd.length), ob=Math.round((lb+rb))/2;
+  const st=ieState(), res={test:t.id, week:R.week, ranked:R.ranked, lc, rc, lt:L.length, rt:Rd.length, lb, rb, band:ob, ans:R.ans, date:today()};
+  const gold=(lc+rc)*(R.ranked?4:1); g.gold+=gold; res.gold=gold;
+  if(R.ranked){
+    st.weeks[R.week]=ob; st.hist=(st.hist||[]).concat({week:R.week,band:ob,l:lb,r:rb,date:today()}).slice(-52);
+    if(!st.best||ob>st.best.band){ st.best={band:ob,week:R.week,date:today()}; res.newBest=true; }
+    if(ob>=6){ const k=fmtBand(ob); st.badges[k]=(st.badges[k]||0)+1; res.badge=k; res.badgeN=st.badges[k]; }
+    iePush(ob,lb,rb,R.week);
+  }
+  g.ieltsRun=null; saveGame(); S.ieResult=res; S.ieReviewSec=0; render(); window.scrollTo(0,0);
+}
+async function iePush(band,l,r,week){
+  if(DEV||!CLOUD.user||!CLOUD.fb) return; const g=game(); const name=(g.nick||CLOUD.user.displayName||"").slice(0,16); if(!name) return;
+  try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"ieltsWeeks",week,"scores",CLOUD.user.uid),{name, band, l, r, best:(ieState().best||{}).band||band, at:new Date().toISOString()}); }catch(e){ console.warn("ielts push",e&&e.code); }
+}
+/* badges: Band 6 bronze → 9 rainbow; repeated bands add stars */
+const BADGE_STYLE={"6.0":["#B87333","#E3A16B"],"6.5":["#8E99A3","#E3E8EC"],"7.0":["#C9A227","#FFE58A"],"7.5":["#1F9E74","#7FE0B8"],"8.0":["#2563C9","#8EC1FF"],"8.5":["#7B3FC4","#D3A8FF"],"9.0":["#E0457B","#FFD25A"]};
+function badgeSvg(k, count, size){
+  const [c1,c2]=BADGE_STYLE[k]||BADGE_STYLE["6.0"], b=parseFloat(k), glow=b>=8, rainbow=b>=9, id="bg"+k.replace(".","")+Math.random().toString(36).slice(2,6);
+  const stars=Math.max(0,(count||1)-1), shown=Math.min(stars,6);
+  const starEls=Array.from({length:shown},(_,i)=>{ const a=-Math.PI/2+(i-(shown-1)/2)*0.45; const x=50+44*Math.cos(a), y=48+44*Math.sin(a); return `<path transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(.6)" d="M0-10L2.9-3.1L10.5-3.1L4.3 1.6L6.6 9L0 4.6L-6.6 9L-4.3 1.6L-10.5-3.1L-2.9-3.1Z" fill="#FFD25A" stroke="#7A5A00" stroke-width="1.2"/>`; }).join("");
+  return `<svg viewBox="-6 -6 112 118" width="${size||56}" height="${(size||56)*1.05}" class="badge${glow?" glow":""}${rainbow?" rainbow":""}" aria-label="IELTS Band ${k}${stars?` +${stars}★`:""}">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c2}"/><stop offset="1" stop-color="${c1}"/></linearGradient></defs>
+    <path d="M30 70L22 104L38 96L46 108L50 78Z" fill="${c1}" opacity=".85"/><path d="M70 70L78 104L62 96L54 108L50 78Z" fill="${c1}" opacity=".85"/>
+    <circle cx="50" cy="48" r="38" fill="url(#${id})" stroke="${c1}" stroke-width="4"/>
+    <circle cx="50" cy="48" r="30" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-dasharray="${b>=7?"4 3":"0"}"/>
+    <text x="50" y="44" text-anchor="middle" font-size="11" font-weight="800" fill="#fff" style="letter-spacing:.08em">BAND</text>
+    <text x="50" y="66" text-anchor="middle" font-size="24" font-weight="900" fill="#fff" paint-order="stroke" stroke="${c1}" stroke-width="3">${k}</text>
+    ${starEls}${stars>6?`<text x="96" y="12" font-size="12" font-weight="800" fill="#7A5A00">×${stars}</text>`:""}
+  </svg>`;
+}
+function badgeShelf(){
+  const st=ieState(), ks=Object.keys(st.badges||{}).sort((a,b)=>parseFloat(b)-parseFloat(a));
+  return ks.length?`<div class="badge-shelf">${ks.map(k=>`<div class="bs-item">${badgeSvg(k,st.badges[k],64)}</div>`).join("")}</div>`:`<p class="muted sm-t">${T("ieNoBadge")}</p>`;
+}
+function ieResultHtml(){
+  const r=S.ieResult, t=IE_TESTS.find(x=>x.id===r.test);
+  const fake={ans:r.ans, played:{0:true,1:true}, sec:S.ieReviewSec||0, ranked:false};
+  return `<div class="view ie-view">
+    <div class="eyebrow">${T("ieResult")}${r.ranked?` · ${esc(r.week)}`:` · ${T("iePracticeTag")}`}</div>
+    <section class="ie-score">
+      <div class="ie-big"><span>${T("ieOverall")}</span><b>${fmtBand(r.band)}</b></div>
+      <div class="ie-sub"><div><span>${T("ieListen")}</span><b>${fmtBand(r.lb)}</b><small>${T("ieCorrect",{c:r.lc,t:r.lt})}</small></div><div><span>${T("ieRead")}</span><b>${fmtBand(r.rb)}</b><small>${T("ieCorrect",{c:r.rc,t:r.rt})}</small></div></div>
+    </section>
+    ${r.badge?`<section class="card ie-badge-new">${badgeSvg(r.badge,r.badgeN,96)}<div><b>${T("ieBadgeGot",{b:r.badge})}</b>${r.badgeN>1?`<p class="muted sm-t">${T("ieBadgeStar",{b:r.badge,n:r.badgeN})}</p>`:""}</div></section>`:""}
+    ${r.newBest?`<div class="rk-me">🏆 ${T("ieNewBest")}</div>`:""}
+    <div class="muted sm-t">${T("ieGold",{n:r.gold})} · ${T("ieEst")}</div>
+    <h2 style="font-size:20px">${T("ieReview")}</h2>
+    ${ieSectionHtml(t,fake,true)}
+    <button class="btn" data-act="ieback">${T("ieBack")}</button></div>`;
+}
+let IE_TOP=null;
+async function ieLoadTop(){
+  if(!CLOUD.user||!CLOUD.fb) return; const {fsM,db}=CLOUD.fb, wk=isoWeek().id;
+  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"ieltsWeeks",wk,"scores"), fsM.orderBy("band","desc"), fsM.limit(50))); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()})); IE_TOP={week:wk, rows}; }catch(e){ IE_TOP={week:wk, rows:[], err:true}; }
+  render();
+}
+function ieLobby(){
+  if(!IE_TESTS){ ieLoad().then(()=>render()); return `<p class="muted">${T("loading")}</p>`; }
+  const st=ieState(), wk=isoWeek().id, t=weekTest(), done=st.weeks[wk], run=game().ieltsRun, u=untilReset();
+  const runBtn=run?`<button class="btn" data-act="ieresume">${T("ieContinue",{m:Math.ceil(ieRunLeft()/60)})}</button>`:"";
+  const ranked=run?"":done!==undefined&&done!=="started"?`<div class="ie-done">${T("ieDone",{b:fmtBand(done)})}</div>`:done==="started"?`<div class="ie-done">${T("ieDone",{b:"–"})}</div>`:`<button class="btn" data-act="ieranked">${T("ieRanked")}</button><p class="muted sm-t">${T("ieRankedNote")}</p>`;
+  return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>${T("ieTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("ieSub")}</p></div>${st.best?badgeSvg(fmtBand(st.best.band),1,52):""}</div>
+      <div class="ie-week"><b>${T("ieWeek",{t:esc(t?t.title:"–")})}</b><span class="muted sm-t">${T("ieReset",{d:u.d,h:u.h})}</span></div>
+      ${runBtn}${ranked}
+      ${st.best?`<div class="muted sm-t">${T("ieBest",{b:fmtBand(st.best.band)})}</div>`:""}
+      ${CLOUD.user&&game().nick?"":`<p class="muted sm-t">${T("ieLogin")}</p>`}</section>
+    <section class="card"><b>${T("ieBadges")}</b>${badgeShelf()}</section>
+    <section class="card"><b>${T("iePractice")}</b><p class="muted sm-t" style="margin:4px 0 8px">${T("iePracticeSub")}</p><div class="ie-prac">${IE_TESTS.map(x=>`<button class="btn ghost sm" data-act="iepractice" data-k="${x.id}" ${run?"disabled":""}>${T("iePractBtn",{t:esc(x.title)})}</button>`).join("")}</div></section>`;
+}
+
+/* ================= Feedback (→ Google Sheet via Apps Script, plus a Firestore copy) ================= */
+// Paste the Apps Script "Web app" URL here once it is deployed (see instructions from Claude).
+const FEEDBACK_URL="";
+function feedbackCard(){
+  const types=[["idea",T("fbIdea")],["bug",T("fbBug")],["news",T("fbNews")],["other",T("fbOther")]];
+  const ty=S.fbType||"idea";
+  return `<section class="card set-sec"><b>💬 ${T("fbTitle")}</b><span class="muted sm-t">${T("fbSub")}</span>
+    <div class="seg">${types.map(([k,l])=>`<button data-act="fbtype" data-k="${k}" aria-pressed="${ty===k}">${l}</button>`).join("")}</div>
+    <textarea id="fbText" class="search fb-text" maxlength="1000" rows="4" placeholder="${T("fbPh")}">${esc(S.fbDraft||"")}</textarea>
+    <input id="fbContact" class="search" maxlength="120" placeholder="${T("fbContact")}" value="${esc(S.fbContactV||"")}">
+    <button class="btn" data-act="fbsend" style="align-self:flex-start">${T("fbSend")}</button></section>`;
+}
+async function sendFeedback(){
+  const msg=(($("#fbText")||{}).value||"").trim(), contact=(($("#fbContact")||{}).value||"").trim().slice(0,120);
+  if(!msg) return toast(T("fbEmpty"));
+  try{ const last=+localStorage.getItem("che-pro-fb")||0; if(Date.now()-last<60e3) return toast(T("fbWait")); localStorage.setItem("che-pro-fb",String(Date.now())); }catch(e){}
+  const g=game(), d={type:S.fbType||"idea", msg:msg.slice(0,1000), contact, nick:g.nick||"", name:(CLOUD.user&&CLOUD.user.displayName)||"", lv:g.lv, lang:LANG, level:LEVEL, region:regionKey(), uid:(CLOUD.user&&CLOUD.user.uid)||"", ua:navigator.userAgent.slice(0,120), at:new Date().toISOString()};
+  if(FEEDBACK_URL){ try{ fetch(FEEDBACK_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)}); }catch(e){} }
+  if(CLOUD.fb){ try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"feedback",Date.now()+"-"+Math.random().toString(36).slice(2,8)), d); }catch(e){ console.warn("feedback",e&&e.code); } }
+  S.fbDraft=""; S.fbContactV=""; toast(T("fbThanks")); render();
+}
+async function devLoadFeedback(){
+  if(!CLOUD.fb) return []; const {fsM,db}=CLOUD.fb;
+  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"feedback"), fsM.orderBy("at","desc"), fsM.limit(100))); const rows=[]; snap.forEach(d=>rows.push(d.data())); return rows; }catch(e){ return null; }
+}
+
 /* ---------- events ---------- */
 const ART_BASES=["../Che_daily_improvement/articles/","articles/"]; let ART_BASE=ART_BASES[0];
 async function loadArticle(id){
@@ -2032,8 +2274,10 @@ async function loadArticle(id){
 const byOrder=(a,b)=>b.date.localeCompare(a.date)||artPrio(a)-artPrio(b)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
-  const t=e.target.closest("[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  const t=e.target.closest("[data-iqk],[data-iesec],[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
   if(!t) return;
+  if(t.dataset.iqk){ const R=game().ieltsRun; if(R){ const v=t.dataset.iqv; R.ans[t.dataset.iqk]=/^\d+$/.test(v)?+v:v; S.ieConfirm=false; lsSave(); render(); } return; }
+  if(t.dataset.iesec!==undefined){ const i=+t.dataset.iesec; if(S.ieResult) S.ieReviewSec=i; else if(game().ieltsRun){ game().ieltsRun.sec=i; lsSave(); } render(); window.scrollTo(0,0); return; }
   if(t.dataset.lang) return setLang(t.dataset.lang);
   if(t.dataset.level) return setLevel(t.dataset.level);
   if(t.dataset.town){ S.selTown=S.selTown===t.dataset.town?null:t.dataset.town; render(); if(S.selTown&&t.tagName==="BUTTON"){ const m=document.querySelector(".map-wrap"); if(m) m.scrollIntoView({behavior:"smooth",block:"start"}); } return; }
@@ -2045,7 +2289,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.equip) return equip(t.dataset.equip);
   if(t.dataset.mon) return startBattle(t.dataset.mon);
   if(t.dataset.spell!=null) return castSpell(+t.dataset.spell);
-  if(t.dataset.tab){ S.quiz=null; S.battle=null; return setTab(t.dataset.tab); }
+  if(t.dataset.tab){ S.quiz=null; S.battle=null; if(S.view==="ielts"){ ieStopAudio(); S.ieResult=null; } return setTab(t.dataset.tab); }
   if(t.dataset.say){ speak(t.dataset.say); return; }
   if(t.dataset.w){ lookup(t.dataset.w); return; }
   if(t.dataset.pick!=null) return pick(+t.dataset.pick);
@@ -2062,6 +2306,15 @@ document.addEventListener("click", e=>{
   if(a==="level"){ S.sheet=null; S.langSheet=false; S.levelSheet=true; return renderSheet(); }
   if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
+  if(a==="compmode"){ S.compMode=t.dataset.k; return render(); }
+  if(a==="ieranked"){ const w=weekTest(); if(w) ieStart(w.id,true); return; }
+  if(a==="iepractice") return ieStart(t.dataset.k,false);
+  if(a==="ieresume") return ieResume();
+  if(a==="ieplay") return iePlay(+t.dataset.k);
+  if(a==="iesubmit"){ if(!S.ieConfirm){ S.ieConfirm=true; return render(); } S.ieConfirm=false; return ieSubmit(); }
+  if(a==="ieback"){ S.ieResult=null; S.view="adv"; S.tab="adv"; S.advTab="coop"; S.compMode="ielts"; IE_TOP=null; render(); window.scrollTo(0,0); return; }
+  if(a==="fbtype"){ S.fbDraft=($("#fbText")||{}).value||S.fbDraft; S.fbContactV=($("#fbContact")||{}).value||S.fbContactV; S.fbType=t.dataset.k; return render(); }
+  if(a==="fbsend") return sendFeedback();
   if(a==="copyacct"){ const v="116506030607"; (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(T("supCopied")),()=>toast(v)); return; }
   if(a==="help"){ S.sheet=null; S.helpSheet=true; return renderSheet(); }
   if(a==="closehelp"){ S.helpSheet=false; return renderSheet(); }
@@ -2099,7 +2352,7 @@ document.addEventListener("click", e=>{
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
 document.addEventListener("change", e=>{ if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
-document.addEventListener("input", e=>{ if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
+document.addEventListener("input", e=>{ if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
 document.addEventListener("keydown", e=>{ if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
@@ -2243,8 +2496,14 @@ function nickForm(){ const g=game(); return `<div class="card nick"><label for="
 function viewRank(){
   if(!CLOUD.user) return `<div class="card empty"><p>${T("rkNeedLogin")}</p></div>${accountCard(false)}`;
   const g=game(), f=S.rkBy||"power";
-  if(!S.rk||S.rk.by!==f){ setTimeout(lbLoad,0); }
-  const tabs=[["power",T("rkPower")],["lv",T("rkLv")],["hp",T("rkHp")],["atk",T("rkAtk")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
+  if(f==="ielts"){ if(!IE_TOP||IE_TOP.week!==isoWeek().id){ IE_TOP={week:isoWeek().id,rows:[],loading:true}; setTimeout(ieLoadTop,0); } }
+  else if(!S.rk||S.rk.by!==f){ setTimeout(lbLoad,0); }
+  if(f==="ielts"){ const tabsH=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
+    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),1,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
+    const u=untilReset();
+    return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieReset",{d:u.d,h:u.h})}</div>
+      ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
+  const tabs=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
   const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
   return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
@@ -2419,7 +2678,11 @@ function coInner(){
   return head+`<p class="muted sm-t">${T("coRead")} · ${T("coMissLeft",{n:CO_MISSES-miss})}</p><article class="article co-text">${body}</article>`;
 }
 function coBossSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="54" r="34" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6"/><path d="M24 30 L30 12 L40 26 M76 30 L70 12 L60 26" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6" stroke-linejoin="round"/><circle cx="38" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="62" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="39" cy="49" r="3" fill="#1B2421"/><circle cx="63" cy="49" r="3" fill="#1B2421"/><path d="M34 68 Q50 60 66 68" fill="none" stroke="#1B2421" stroke-width="2.6"/><text x="50" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#F0BE45" font-family="Georgia,serif">teh</text></svg>`; }
-function viewCoop(){ return `<div id="coBox" class="co-box">${coInner()}</div>`; }
+function viewCoop(){
+  const m=S.compMode||"ielts";
+  const seg=`<div class="seg comp-seg">${[["ielts","🎓 "+T("cmIelts")],["coop","🤝 "+T("cmCoop")]].map(([k,l])=>`<button data-act="compmode" data-k="${k}" aria-pressed="${m===k}">${l}</button>`).join("")}</div>`;
+  return seg+(m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:`<div class="ie-lobby">${ieLobby()}</div>`);
+}
 
 /* ---------- boot ---------- */
 S.index=[];
@@ -2437,6 +2700,7 @@ Object.assign(STR.zh,{"bossTitle": "⚠️ 最終魔王特性", "bossShield": "�
 Object.assign(STR.zh,{"regTitle": "新聞地區", "regSub": "選擇想讀哪個國家的英文新聞。我們會為最近 7 天有打開 App 的地區，每天準備 2 篇當地新聞。", "regNational": "全國新聞（不選郡）", "regIEnote": "選了郡之後，每天固定有 2 篇愛爾蘭全國新聞，加上 2 篇你所在郡的新聞。", "countyOf": "{c} 郡", "regPending": "你選了「{r}」。這個地區的新聞會從明天早上開始提供，今天先讀愛爾蘭的新聞。"});Object.assign(STR.en,{"regTitle": "News region", "regSub": "Choose which country's English news you want to read. Every region opened in the last 7 days gets 2 local stories a day.", "regNational": "National news (no county)", "regIEnote": "With a county chosen you get 2 national Irish stories every day plus 2 from your county.", "countyOf": "County {c}", "regPending": "You chose {r}. Local stories for it start tomorrow morning; for today, here's the Irish news."});Object.assign(STR.hi,{"regTitle": "ख़बरों का क्षेत्र", "regSub": "चुनें कि आप किस देश की अंग्रेज़ी ख़बरें पढ़ना चाहते हैं। पिछले 7 दिनों में खोले गए हर क्षेत्र के लिए रोज़ 2 स्थानीय ख़बरें तैयार होती हैं।", "regNational": "राष्ट्रीय ख़बरें (कोई काउंटी नहीं)", "regIEnote": "काउंटी चुनने पर रोज़ आयरलैंड की 2 राष्ट्रीय और आपकी काउंटी की 2 ख़बरें मिलेंगी।", "countyOf": "काउंटी {c}", "regPending": "आपने {r} चुना। इसकी स्थानीय ख़बरें कल सुबह से मिलेंगी; आज आयरलैंड की ख़बरें पढ़ें।"});Object.assign(STR.es,{"regTitle": "Región de noticias", "regSub": "Elige de qué país quieres leer noticias en inglés. Cada región abierta en los últimos 7 días recibe 2 noticias locales al día.", "regNational": "Noticias nacionales (sin condado)", "regIEnote": "Con un condado elegido tendrás cada día 2 noticias nacionales de Irlanda y 2 de tu condado.", "countyOf": "Condado de {c}", "regPending": "Elegiste {r}. Sus noticias locales empiezan mañana por la mañana; hoy puedes leer las de Irlanda."});Object.assign(STR.ja,{"regTitle": "ニュースの地域", "regSub": "どの国の英語ニュースを読むか選べます。過去 7 日以内に開かれた地域には、毎日 2 本の地元ニュースを用意します。", "regNational": "全国ニュース（州を選ばない）", "regIEnote": "州を選ぶと、毎日アイルランド全国のニュース 2 本と、その州のニュース 2 本が届きます。", "countyOf": "{c} 州", "regPending": "「{r}」を選びました。この地域のニュースは明日の朝から届きます。今日はアイルランドのニュースを読みましょう。"});Object.assign(STR.ko,{"regTitle": "뉴스 지역", "regSub": "어느 나라의 영어 뉴스를 읽을지 고르세요. 최근 7일 안에 열린 지역에는 매일 지역 뉴스 2편을 준비해요.", "regNational": "전국 뉴스 (카운티 선택 안 함)", "regIEnote": "카운티를 고르면 매일 아일랜드 전국 뉴스 2편과 그 카운티 뉴스 2편을 받아요.", "countyOf": "{c} 카운티", "regPending": "'{r}'을(를) 선택했어요. 이 지역 뉴스는 내일 아침부터 제공돼요. 오늘은 아일랜드 뉴스를 읽어 보세요."});
 Object.assign(STR.zh,{"lvA2": "初級：最簡單的字、很短的句子", "dsLoad": "查看用戶資料與系統統計", "dsReload": "重新整理", "dsLogin": "要先登入 Google 才能查看", "dsDenied": "沒有權限：請到 Firebase 規則加入管理員權限", "dsSys": "系統統計", "dsUsers": "註冊玩家", "dsToday": "今日活躍", "dsWeek": "7 日活躍", "dsAvgLv": "平均等級", "dsWords": "字典單字總數", "dsDays": "總學習天數", "dsQuiz": "完成測驗數", "dsLb": "排行榜人數", "dsRooms": "進行中房間", "dsConq": "統一全島", "dsArts": "全國文章", "dsRegArts": "地區文章", "dsLatest": "最新文章日期：{d}", "dsRegions": "地區活躍狀態（🟢 = 7 天內有人用，會產生新聞）", "dsRegion": "地區", "dsLast": "最後使用", "dsPlayers": "玩家列表（{n} 人）", "dsW": "單字", "dsD": "天數", "dsC": "佔領", "dsNote": "資料時間 {t}。只統計有登入 Google 的玩家。"});Object.assign(STR.en,{"lvA2": "Elementary: the simplest words, very short sentences", "dsLoad": "View player data & system stats", "dsReload": "Refresh", "dsLogin": "Sign in with Google first", "dsDenied": "No permission: add the admin rule in Firebase", "dsSys": "System stats", "dsUsers": "Players", "dsToday": "Active today", "dsWeek": "Active 7 days", "dsAvgLv": "Average level", "dsWords": "Dictionary words", "dsDays": "Study days", "dsQuiz": "Quizzes done", "dsLb": "On leaderboard", "dsRooms": "Open rooms", "dsConq": "Conquered all", "dsArts": "National articles", "dsRegArts": "Regional articles", "dsLatest": "Latest article: {d}", "dsRegions": "Region activity (🟢 = used in last 7 days, gets news)", "dsRegion": "Region", "dsLast": "Last used", "dsPlayers": "Players ({n})", "dsW": "Words", "dsD": "Days", "dsC": "Towns", "dsNote": "Data as of {t}. Only players signed in with Google are counted."});Object.assign(STR.hi,{"lvA2": "प्रारंभिक: सबसे आसान शब्द, बहुत छोटे वाक्य"});Object.assign(STR.es,{"lvA2": "Elemental: las palabras más sencillas, frases muy cortas"});Object.assign(STR.ja,{"lvA2": "初級：いちばんやさしい単語、とても短い文"});Object.assign(STR.ko,{"lvA2": "초급: 가장 쉬운 단어, 아주 짧은 문장"});
 Object.assign(STR.zh,{"supBank": "台灣銀行轉帳", "supBankSub": "在台灣的朋友也可以直接轉帳到我的國泰世華帳戶，或用銀行 App 掃描下方 QR Code：", "supCode": "銀行代碼", "supAcct": "帳號", "supCopy": "複製", "supCopied": "已複製帳號"});Object.assign(STR.en,{"supBank": "Bank transfer (Taiwan)", "supBankSub": "If you're in Taiwan, you can transfer to my Cathay United Bank account, or scan the QR code with your banking app:", "supCode": "Bank code", "supAcct": "Account", "supCopy": "Copy", "supCopied": "Account number copied"});Object.assign(STR.hi,{"supBank": "बैंक ट्रांसफ़र (ताइवान)", "supBankSub": "ताइवान में हों तो मेरे Cathay United Bank खाते में ट्रांसफ़र करें या बैंक ऐप से QR कोड स्कैन करें:", "supCode": "बैंक कोड", "supAcct": "खाता", "supCopy": "कॉपी", "supCopied": "खाता संख्या कॉपी हो गई"});Object.assign(STR.es,{"supBank": "Transferencia bancaria (Taiwán)", "supBankSub": "Si estás en Taiwán, puedes transferir a mi cuenta de Cathay United Bank o escanear el código QR con tu app del banco:", "supCode": "Código del banco", "supAcct": "Cuenta", "supCopy": "Copiar", "supCopied": "Número de cuenta copiado"});Object.assign(STR.ja,{"supBank": "銀行振込（台湾）", "supBankSub": "台湾にお住まいの方は、国泰世華銀行の口座へ振り込むか、銀行アプリで下の QR コードを読み取ってください：", "supCode": "銀行コード", "supAcct": "口座番号", "supCopy": "コピー", "supCopied": "口座番号をコピーしました"});Object.assign(STR.ko,{"supBank": "계좌 이체 (대만)", "supBankSub": "대만에 계신다면 국태세화은행 계좌로 이체하거나 은행 앱으로 아래 QR 코드를 스캔해 주세요:", "supCode": "은행 코드", "supAcct": "계좌번호", "supCopy": "복사", "supCopied": "계좌번호를 복사했어요"});
+Object.assign(STR.zh,{"tabCoop": "線上競賽", "cmCoop": "合作找錯字", "cmIelts": "IELTS 模擬測驗", "ieTitle": "IELTS 模擬測驗", "ieSub": "聽力＋閱讀，約 20 分鐘。交卷後馬上看到預估的 IELTS 分數，Band 6 以上可以拿到徽章。", "ieWeek": "本週試題：{t}", "ieReset": "{d} 天 {h} 小時後換新試題、本週排行重置", "ieRanked": "開始本週正式測驗", "ieRankedNote": "每週只有第一次作答會計入排行榜和徽章，開始後就算一次。", "ieDone": "本週成績：Band {b}", "iePractice": "練習模式", "iePracticeSub": "可以重複作答任何一份試題，不計入排行、不給徽章。", "iePractBtn": "練習：{t}", "ieBest": "個人最佳：Band {b}", "ieBadges": "我的徽章", "ieNoBadge": "考到 Band 6 以上就能拿到第一個徽章。同一個分數再拿一次，徽章旁會多一顆星。", "ieTop": "本週 IELTS 排行", "ieContinue": "繼續作答（剩 {m} 分鐘）", "ieLogin": "登入 Google 並在設定取暱稱，成績才會上本週排行（不登入也能作答）。", "ieListen": "聽力", "ieRead": "閱讀", "iePlay": "▶ 播放錄音", "iePlayOnce": "正式測驗的錄音只能播放一次，準備好再按。", "iePlaying": "播放中… {i}/{n}", "iePlayed": "錄音已播放完畢", "ieReplay": "再播一次（練習模式）", "ieNoTTS": "你的瀏覽器不支援語音朗讀，改為顯示文字稿。", "ieSubmit": "交卷", "ieConfirm2": "再按一次確認交卷（還有 {n} 題未答）", "ieTimeUp": "時間到，已自動交卷", "ieTFNG": "TRUE = 與文章相符；FALSE = 與文章相反；NOT GIVEN = 文章沒有提到", "ieResult": "測驗結果", "ieOverall": "預估整體 Band", "ieCorrect": "答對 {c} / {t}", "ieNewBest": "新的個人最佳！", "ieBadgeGot": "獲得 Band {b} 徽章！", "ieBadgeStar": "這個分數第 {n} 次達成，徽章多了一顆星 ⭐", "ieGold": "獲得 {n} 金幣", "ieReview": "答案與解析", "ieYour": "你的答案", "ieAns": "正確答案", "ieBlank": "（未作答）", "ieScript": "錄音文字稿", "ieBack": "回到線上競賽", "ieEst": "分數是依照答對率換算的預估值，僅供參考，和正式考試可能有差距。", "iePracticeTag": "練習", "rkIelts": "IELTS", "ieNoScore": "本週還沒有人完成正式測驗，搶第一吧！", "fbTitle": "意見回饋", "fbSub": "有任何建議、遇到的問題或想要的新功能，都歡迎告訴開發者！", "fbIdea": "建議", "fbBug": "問題回報", "fbNews": "新聞內容", "fbOther": "其他", "fbPh": "寫下你的想法…", "fbSend": "送出", "fbThanks": "謝謝你的回饋！開發者會看到。", "fbEmpty": "請先寫點內容", "fbWait": "剛剛才送出過，請一分鐘後再試", "fbContact": "聯絡方式（選填，例如 email）", "dsFeedback": "玩家回饋（{n}）"});Object.assign(STR.en,{"tabCoop": "Online contests", "cmCoop": "Co-op error hunt", "cmIelts": "IELTS mock test", "ieTitle": "IELTS mock test", "ieSub": "Listening + reading, about 20 minutes. See your estimated IELTS band as soon as you finish; Band 6+ earns a badge.", "ieWeek": "This week's test: {t}", "ieReset": "New test and ranking reset in {d} d {h} h", "ieRanked": "Start this week's ranked test", "ieRankedNote": "Only your first attempt each week counts for the ranking and badges, and it counts as soon as you start.", "ieDone": "This week: Band {b}", "iePractice": "Practice mode", "iePracticeSub": "Retake any test as often as you like. No ranking, no badges.", "iePractBtn": "Practise: {t}", "ieBest": "Personal best: Band {b}", "ieBadges": "My badges", "ieNoBadge": "Score Band 6 or above to earn your first badge. Earn the same band again and the badge gets a star.", "ieTop": "This week's IELTS ranking", "ieContinue": "Continue ({m} min left)", "ieLogin": "Sign in with Google and set a nickname in Settings to appear in the weekly ranking (you can take the test without signing in).", "ieListen": "Listening", "ieRead": "Reading", "iePlay": "▶ Play recording", "iePlayOnce": "In the ranked test each recording plays only once, so press play when you're ready.", "iePlaying": "Playing… {i}/{n}", "iePlayed": "Recording finished", "ieReplay": "Play again (practice)", "ieNoTTS": "Your browser can't read aloud, so here is the transcript instead.", "ieSubmit": "Submit", "ieConfirm2": "Tap again to submit ({n} unanswered)", "ieTimeUp": "Time's up: your answers were submitted", "ieTFNG": "TRUE = agrees with the passage; FALSE = contradicts it; NOT GIVEN = no information", "ieResult": "Your result", "ieOverall": "Estimated overall band", "ieCorrect": "{c} / {t} correct", "ieNewBest": "New personal best!", "ieBadgeGot": "You earned the Band {b} badge!", "ieBadgeStar": "Band {b} reached for time #{n}: your badge gets a star ⭐", "ieGold": "+{n} gold", "ieReview": "Answers and explanations", "ieYour": "Your answer", "ieAns": "Correct answer", "ieBlank": "(no answer)", "ieScript": "Transcript", "ieBack": "Back to contests", "ieEst": "Bands are estimated from your accuracy and are only a guide; a real exam may differ.", "iePracticeTag": "Practice", "rkIelts": "IELTS", "ieNoScore": "Nobody has finished this week's ranked test yet. Be the first!", "fbTitle": "Feedback", "fbSub": "Ideas, problems or features you'd like? Tell the developer!", "fbIdea": "Idea", "fbBug": "Bug report", "fbNews": "News content", "fbOther": "Other", "fbPh": "Write your thoughts…", "fbSend": "Send", "fbThanks": "Thanks for your feedback! The developer will read it.", "fbEmpty": "Please write something first", "fbWait": "You just sent one. Try again in a minute", "fbContact": "Contact (optional, e.g. email)", "dsFeedback": "Player feedback ({n})"});Object.assign(STR.hi,{"tabCoop": "ऑनलाइन प्रतियोगिता", "cmCoop": "साथ में ग़लती खोजें", "cmIelts": "IELTS मॉक टेस्ट", "ieTitle": "IELTS मॉक टेस्ट", "ieSub": "लिसनिंग + रीडिंग, लगभग 20 मिनट। ख़त्म करते ही अनुमानित IELTS बैंड देखें; बैंड 6+ पर बैज मिलता है।", "ieWeek": "इस हफ़्ते का टेस्ट: {t}", "ieReset": "{d} दिन {h} घंटे में नया टेस्ट और रैंकिंग रीसेट", "ieRanked": "इस हफ़्ते का रैंक वाला टेस्ट शुरू करें", "ieRankedNote": "हर हफ़्ते केवल पहला प्रयास रैंकिंग और बैज में गिना जाता है, और शुरू करते ही गिना जाता है।", "ieDone": "इस हफ़्ते: बैंड {b}", "iePractice": "अभ्यास मोड", "iePracticeSub": "कोई भी टेस्ट जितनी बार चाहें दें। न रैंकिंग, न बैज।", "iePractBtn": "अभ्यास: {t}", "ieBest": "सर्वश्रेष्ठ: बैंड {b}", "ieBadges": "मेरे बैज", "ieNoBadge": "पहला बैज पाने के लिए बैंड 6 या ऊपर लाएँ। वही बैंड दोबारा लाने पर बैज में एक तारा जुड़ता है।", "ieTop": "इस हफ़्ते की IELTS रैंकिंग", "ieContinue": "जारी रखें ({m} मिनट बाकी)", "ieLogin": "साप्ताहिक रैंकिंग में आने के लिए Google से साइन इन करें और सेटिंग्स में उपनाम चुनें (बिना साइन इन के भी टेस्ट दे सकते हैं)।", "ieListen": "लिसनिंग", "ieRead": "रीडिंग", "iePlay": "▶ रिकॉर्डिंग चलाएँ", "iePlayOnce": "रैंक वाले टेस्ट में हर रिकॉर्डिंग एक ही बार चलती है, तैयार होने पर दबाएँ।", "iePlaying": "चल रहा है… {i}/{n}", "iePlayed": "रिकॉर्डिंग समाप्त", "ieReplay": "फिर से चलाएँ (अभ्यास)", "ieNoTTS": "आपका ब्राउज़र पढ़कर नहीं सुना सकता, इसलिए लिखित पाठ दिखाया गया है।", "ieSubmit": "जमा करें", "ieConfirm2": "जमा करने के लिए फिर दबाएँ ({n} बिना उत्तर)", "ieTimeUp": "समय समाप्त: उत्तर जमा हो गए", "ieTFNG": "TRUE = लेख से मेल; FALSE = लेख के विपरीत; NOT GIVEN = जानकारी नहीं", "ieResult": "आपका परिणाम", "ieOverall": "अनुमानित कुल बैंड", "ieCorrect": "{t} में से {c} सही", "ieNewBest": "नया व्यक्तिगत सर्वश्रेष्ठ!", "ieBadgeGot": "आपको बैंड {b} बैज मिला!", "ieBadgeStar": "बैंड {b} {n}वीं बार: बैज में एक तारा ⭐", "ieGold": "+{n} सोना", "ieReview": "उत्तर और व्याख्या", "ieYour": "आपका उत्तर", "ieAns": "सही उत्तर", "ieBlank": "(कोई उत्तर नहीं)", "ieScript": "लिखित पाठ", "ieBack": "प्रतियोगिता पर वापस", "ieEst": "बैंड आपकी सटीकता से अनुमानित है और केवल मार्गदर्शन है; असली परीक्षा अलग हो सकती है।", "iePracticeTag": "अभ्यास", "rkIelts": "IELTS", "ieNoScore": "इस हफ़्ते अभी किसी ने रैंक वाला टेस्ट पूरा नहीं किया। पहले बनें!", "fbTitle": "प्रतिक्रिया", "fbSub": "सुझाव, समस्या या कोई नई सुविधा चाहिए? डेवलपर को बताएँ!", "fbIdea": "सुझाव", "fbBug": "समस्या", "fbNews": "ख़बरों की सामग्री", "fbOther": "अन्य", "fbPh": "अपने विचार लिखें…", "fbSend": "भेजें", "fbThanks": "धन्यवाद! डेवलपर इसे पढ़ेगा।", "fbEmpty": "पहले कुछ लिखें", "fbWait": "आपने अभी भेजा है। एक मिनट बाद कोशिश करें", "fbContact": "संपर्क (वैकल्पिक, जैसे email)", "dsFeedback": "खिलाड़ियों की प्रतिक्रिया ({n})"});Object.assign(STR.es,{"tabCoop": "Competiciones", "cmCoop": "Caza de errores", "cmIelts": "Simulacro IELTS", "ieTitle": "Simulacro IELTS", "ieSub": "Listening + reading, unos 20 minutos. Al terminar verás tu banda IELTS estimada; con Band 6 o más ganas una insignia.", "ieWeek": "Examen de esta semana: {t}", "ieReset": "Nuevo examen y ranking en {d} d {h} h", "ieRanked": "Empezar el examen oficial de la semana", "ieRankedNote": "Solo cuenta tu primer intento de cada semana para el ranking y las insignias, y cuenta en cuanto empiezas.", "ieDone": "Esta semana: Band {b}", "iePractice": "Modo práctica", "iePracticeSub": "Repite cualquier examen cuantas veces quieras. Sin ranking ni insignias.", "iePractBtn": "Practicar: {t}", "ieBest": "Mejor marca: Band {b}", "ieBadges": "Mis insignias", "ieNoBadge": "Consigue Band 6 o más para tu primera insignia. Si repites la misma banda, la insignia gana una estrella.", "ieTop": "Ranking IELTS de la semana", "ieContinue": "Continuar (quedan {m} min)", "ieLogin": "Inicia sesión con Google y elige un apodo en Ajustes para salir en el ranking semanal (puedes hacer el examen sin iniciar sesión).", "ieListen": "Listening", "ieRead": "Reading", "iePlay": "▶ Reproducir audio", "iePlayOnce": "En el examen oficial cada audio suena una sola vez; pulsa cuando estés listo.", "iePlaying": "Reproduciendo… {i}/{n}", "iePlayed": "Audio terminado", "ieReplay": "Repetir (práctica)", "ieNoTTS": "Tu navegador no puede leer en voz alta; aquí tienes la transcripción.", "ieSubmit": "Entregar", "ieConfirm2": "Pulsa otra vez para entregar ({n} sin responder)", "ieTimeUp": "Se acabó el tiempo: respuestas entregadas", "ieTFNG": "TRUE = coincide con el texto; FALSE = lo contradice; NOT GIVEN = no se menciona", "ieResult": "Tu resultado", "ieOverall": "Banda global estimada", "ieCorrect": "{c} / {t} correctas", "ieNewBest": "¡Nueva mejor marca!", "ieBadgeGot": "¡Has ganado la insignia Band {b}!", "ieBadgeStar": "Band {b} por {n}.ª vez: tu insignia gana una estrella ⭐", "ieGold": "+{n} de oro", "ieReview": "Respuestas y explicaciones", "ieYour": "Tu respuesta", "ieAns": "Respuesta correcta", "ieBlank": "(sin respuesta)", "ieScript": "Transcripción", "ieBack": "Volver a competiciones", "ieEst": "La banda se estima según tus aciertos y es solo orientativa; el examen real puede variar.", "iePracticeTag": "Práctica", "rkIelts": "IELTS", "ieNoScore": "Nadie ha terminado aún el examen oficial de esta semana. ¡Sé el primero!", "fbTitle": "Comentarios", "fbSub": "¿Ideas, problemas o funciones que te gustaría tener? ¡Cuéntaselo al desarrollador!", "fbIdea": "Idea", "fbBug": "Problema", "fbNews": "Noticias", "fbOther": "Otro", "fbPh": "Escribe lo que piensas…", "fbSend": "Enviar", "fbThanks": "¡Gracias por tu comentario! El desarrollador lo leerá.", "fbEmpty": "Escribe algo primero", "fbWait": "Acabas de enviar uno. Inténtalo en un minuto", "fbContact": "Contacto (opcional, p. ej. email)", "dsFeedback": "Comentarios de jugadores ({n})"});Object.assign(STR.ja,{"tabCoop": "オンライン対戦", "cmCoop": "協力まちがい探し", "cmIelts": "IELTS 模擬テスト", "ieTitle": "IELTS 模擬テスト", "ieSub": "リスニング＋リーディング、約 20 分。終わるとすぐに推定 IELTS バンドがわかります。Band 6 以上でバッジ獲得。", "ieWeek": "今週のテスト：{t}", "ieReset": "{d} 日 {h} 時間後に新しいテストとランキングに切り替わります", "ieRanked": "今週の本番テストを始める", "ieRankedNote": "ランキングとバッジに反映されるのは毎週最初の 1 回だけで、開始した時点で 1 回と数えます。", "ieDone": "今週の成績：Band {b}", "iePractice": "練習モード", "iePracticeSub": "どのテストも何度でも受けられます。ランキング・バッジ対象外。", "iePractBtn": "練習：{t}", "ieBest": "自己ベスト：Band {b}", "ieBadges": "マイバッジ", "ieNoBadge": "Band 6 以上で最初のバッジ。同じバンドをもう一度取るとバッジに星が付きます。", "ieTop": "今週の IELTS ランキング", "ieContinue": "続ける（残り {m} 分）", "ieLogin": "週間ランキングに載るには Google でログインし、設定でニックネームを決めてください（ログインしなくても受験できます）。", "ieListen": "リスニング", "ieRead": "リーディング", "iePlay": "▶ 音声を再生", "iePlayOnce": "本番テストでは各音声は 1 回しか再生できません。準備ができたら押してください。", "iePlaying": "再生中… {i}/{n}", "iePlayed": "再生が終わりました", "ieReplay": "もう一度再生（練習）", "ieNoTTS": "お使いのブラウザは読み上げに対応していないため、スクリプトを表示します。", "ieSubmit": "提出", "ieConfirm2": "もう一度押して提出（未回答 {n} 問）", "ieTimeUp": "時間切れ：解答を提出しました", "ieTFNG": "TRUE＝本文と一致／FALSE＝本文と矛盾／NOT GIVEN＝本文に記述なし", "ieResult": "結果", "ieOverall": "推定オーバーオール", "ieCorrect": "{t} 問中 {c} 問正解", "ieNewBest": "自己ベスト更新！", "ieBadgeGot": "Band {b} バッジを獲得！", "ieBadgeStar": "Band {b} を {n} 回目達成：バッジに星が付きました ⭐", "ieGold": "+{n} G", "ieReview": "解答と解説", "ieYour": "あなたの答え", "ieAns": "正解", "ieBlank": "（未回答）", "ieScript": "スクリプト", "ieBack": "オンライン対戦に戻る", "ieEst": "バンドは正答率から推定した目安です。実際の試験とは異なる場合があります。", "iePracticeTag": "練習", "rkIelts": "IELTS", "ieNoScore": "今週の本番テストを終えた人はまだいません。一番乗りしよう！", "fbTitle": "ご意見", "fbSub": "アイデア、不具合、ほしい機能などを開発者に教えてください！", "fbIdea": "アイデア", "fbBug": "不具合", "fbNews": "ニュースの内容", "fbOther": "その他", "fbPh": "ご意見を書いてください…", "fbSend": "送信", "fbThanks": "ご意見ありがとうございます！開発者が確認します。", "fbEmpty": "まず内容を書いてください", "fbWait": "先ほど送信しました。1 分後にもう一度どうぞ", "fbContact": "連絡先（任意・メールなど）", "dsFeedback": "プレイヤーの意見（{n}）"});Object.assign(STR.ko,{"tabCoop": "온라인 대회", "cmCoop": "협동 틀린 곳 찾기", "cmIelts": "IELTS 모의고사", "ieTitle": "IELTS 모의고사", "ieSub": "듣기 + 읽기, 약 20분. 끝나면 바로 예상 IELTS 밴드를 볼 수 있어요. Band 6 이상이면 배지 획득!", "ieWeek": "이번 주 시험: {t}", "ieReset": "{d}일 {h}시간 후 새 시험·랭킹 초기화", "ieRanked": "이번 주 정식 시험 시작", "ieRankedNote": "매주 첫 번째 응시만 랭킹과 배지에 반영되며, 시작하는 순간 1회로 계산돼요.", "ieDone": "이번 주 성적: Band {b}", "iePractice": "연습 모드", "iePracticeSub": "어떤 시험이든 몇 번이고 다시 풀 수 있어요. 랭킹·배지 없음.", "iePractBtn": "연습: {t}", "ieBest": "개인 최고: Band {b}", "ieBadges": "내 배지", "ieNoBadge": "Band 6 이상을 받으면 첫 배지를 받아요. 같은 밴드를 다시 받으면 배지에 별이 붙어요.", "ieTop": "이번 주 IELTS 랭킹", "ieContinue": "이어서 풀기 ({m}분 남음)", "ieLogin": "주간 랭킹에 오르려면 Google로 로그인하고 설정에서 닉네임을 정하세요 (로그인 없이도 응시 가능).", "ieListen": "듣기", "ieRead": "읽기", "iePlay": "▶ 음성 재생", "iePlayOnce": "정식 시험에서는 각 음성을 한 번만 재생할 수 있어요. 준비되면 누르세요.", "iePlaying": "재생 중… {i}/{n}", "iePlayed": "재생 완료", "ieReplay": "다시 재생 (연습)", "ieNoTTS": "브라우저가 음성 읽기를 지원하지 않아 대본을 보여 드려요.", "ieSubmit": "제출", "ieConfirm2": "한 번 더 눌러 제출 (미응답 {n}문제)", "ieTimeUp": "시간 종료: 답안이 제출되었어요", "ieTFNG": "TRUE = 본문과 일치 / FALSE = 본문과 반대 / NOT GIVEN = 언급 없음", "ieResult": "결과", "ieOverall": "예상 종합 밴드", "ieCorrect": "{t}문제 중 {c}문제 정답", "ieNewBest": "개인 최고 기록 경신!", "ieBadgeGot": "Band {b} 배지 획득!", "ieBadgeStar": "Band {b} {n}번째 달성: 배지에 별 추가 ⭐", "ieGold": "+{n} 골드", "ieReview": "정답과 해설", "ieYour": "내 답", "ieAns": "정답", "ieBlank": "(미응답)", "ieScript": "음성 대본", "ieBack": "온라인 대회로", "ieEst": "밴드는 정답률로 추정한 참고용이며 실제 시험과 다를 수 있어요.", "iePracticeTag": "연습", "rkIelts": "IELTS", "ieNoScore": "이번 주 정식 시험을 끝낸 사람이 아직 없어요. 첫 번째가 되어 보세요!", "fbTitle": "의견 보내기", "fbSub": "아이디어, 문제점, 원하는 기능이 있으면 개발자에게 알려 주세요!", "fbIdea": "아이디어", "fbBug": "문제 신고", "fbNews": "뉴스 내용", "fbOther": "기타", "fbPh": "생각을 적어 주세요…", "fbSend": "보내기", "fbThanks": "의견 감사합니다! 개발자가 확인할게요.", "fbEmpty": "먼저 내용을 적어 주세요", "fbWait": "방금 보냈어요. 1분 후에 다시 시도해 주세요", "fbContact": "연락처 (선택, 예: email)", "dsFeedback": "플레이어 의견 ({n})"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
