@@ -598,7 +598,7 @@ body.pg-lock .toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px));z-
 .qz-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .qz-opt{min-height:64px;border-radius:14px;border:0;font-size:16px;font-weight:700;color:#fff;cursor:pointer;padding:8px;font-family:inherit;line-height:1.25}
 .qz-opt:nth-child(1){background:#2563C9}.qz-opt:nth-child(2){background:#C0443B}.qz-opt:nth-child(3){background:#C9A227}.qz-opt:nth-child(4){background:#2E8B57}
-.qz-opt.dim{opacity:.3}.qz-opt.right{outline:4px solid var(--good);outline-offset:2px}.qz-opt.wrong{outline:4px solid var(--ink);outline-offset:2px;opacity:.6}
+.qz-opt.dim{opacity:.3}.qz-opt.right{box-shadow:inset 0 0 0 4px #fff,0 0 0 3px var(--good);transform:scale(1.03)}.qz-opt.wrong{box-shadow:inset 0 0 0 4px rgba(0,0,0,.45);opacity:.6}.qz-opts{isolation:isolate;transform:translateZ(0)}.qz-opt{-webkit-tap-highlight-color:transparent;transition:none}
 .qz-shop{display:flex;flex-direction:column;gap:8px;overflow:auto}
 .qz-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
 .qz-targets{display:flex;flex-wrap:wrap;gap:6px;padding:0 6px}
@@ -2143,7 +2143,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.40";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.41";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
