@@ -2246,7 +2246,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.43";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.44";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2694,7 +2694,7 @@ document.addEventListener("click", e=>{
   if(a==="sctake"){ S.scratch=null; return render(); }
   if(a==="forge") return forge(t.dataset.k);
   if(a==="signin") return cloudSignIn();
-  if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } nickClaim(n); return; }
+  if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } if(!nickOk(n)){ toast(T("nickChars")); return; } nickClaim(n); return; }
   if(a==="cocreate") return coCreate();
   if(a==="cojoin") return coJoin(($("#coCode")||{}).value);
   if(a==="cosolo") return coStartSolo();
@@ -2758,6 +2758,8 @@ async function cloudSignIn(){
     toast(T("loginFail"));
   }
 }
+// nicknames: letters (any language), numbers, space, _ . - only; no emoji or symbols
+const nickOk=n=>/^[\p{L}\p{M}\p{N} _.\-]{1,16}$/u.test(n)&&/[\p{L}\p{N}]/u.test(n);
 const nickKey=n=>encodeURIComponent(n.trim().toLowerCase()).replace(/\./g,"%2E").slice(0,200);
 async function nickClaim(n){
   if(CLOUD.fb&&!CLOUD.user) return toast(T("nickLogin"));
@@ -2773,6 +2775,7 @@ async function nickClaim(n){
 }
 async function nickVerify(){
   const n=game().nick; if(!n||!CLOUD.user||!CLOUD.fb||DEV) return;
+  if(!nickOk(n)){ game().nick=""; saveGame(); toast(T("nickCharsOld")); render(); return; }
   const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"nicks",nickKey(n));
   try{ let taken=false; await fsM.runTransaction(db, async tx=>{ const d=await tx.get(ref); if(d.exists()&&d.data().uid!==CLOUD.user.uid){ taken=true; return; } if(!d.exists()) tx.set(ref,{uid:CLOUD.user.uid, n, at:Date.now()}); });
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
@@ -3693,6 +3696,12 @@ Object.assign(STR.hi,{"ticketsL": "अभियान पास", "sb1": "गर
 Object.assign(STR.es,{"ticketsL": "Pases", "sb1": "Taza cálida", "sb2": "Trébol de la suerte", "sb3": "Arpa dorada", "sb4": "Corona de amatista", "sb5": "Fénix arcoíris", "sbR1": "menos de €5", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100+", "sbMine": "Tu insignia de mecenas: {b}", "sbThanks": "¡Gracias por tu apoyo! Esta insignia aparece junto a tu nombre para que todos la vean.", "sbDev": "Insignias de mecenas", "sbNickPh": "Apodo del jugador", "sbRemove": "Quitar insignia", "sbGive": "Dar insignia", "sbNone": "Aún no hay mecenas", "sbNoNick": "No hay ningún jugador con ese apodo", "sbGiven": "Le diste a {n} la insignia «{b}»", "sbRemoved": "Insignia quitada", "dsGames": "Estadísticas de juego", "dsGame": "Juego", "dsGPlayers": "Jugadores", "dsGPlays": "Partidas", "dsGIelts": "IELTS (oficial)", "dsGIeltsP": "IELTS práctica", "dsGBattle": "Batallas", "supTitle": "Apoya al desarrollador", "supSub": "Hago esta app yo solo, por las tardes y los fines de semana. Las noticias diarias, las grabaciones, los juegos nuevos y los servidores requieren tiempo y algo de dinero. Si alguna vez te ayudó a aprender una palabra más o a entender una noticia más, te agradecería mucho tu apoyo. Cualquier cantidad me ayuda de verdad a seguir mejorándola 🙏", "supBtn": "Apoyar con Revolut"});
 Object.assign(STR.ja,{"ticketsL": "出撃券", "sb1": "ほっこりカップ", "sb2": "幸運のクローバー", "sb3": "黄金のハープ", "sb4": "アメジストの王冠", "sb5": "虹色フェニックス", "sbR1": "€5 未満", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100 以上", "sbMine": "あなたのサポーターバッジ：{b}", "sbThanks": "応援ありがとうございます！このバッジはずっとあなたの名前の横に表示され、みんなに見えます。", "sbDev": "サポーターバッジ", "sbNickPh": "プレイヤーのニックネーム", "sbRemove": "バッジを外す", "sbGive": "バッジを付与", "sbNone": "まだサポーターはいません", "sbNoNick": "そのニックネームのプレイヤーが見つかりません", "sbGiven": "{n} に「{b}」バッジを付与しました", "sbRemoved": "バッジを外しました", "dsGames": "ゲームのプレイ統計", "dsGame": "ゲーム", "dsGPlayers": "プレイ人数", "dsGPlays": "合計回数", "dsGIelts": "IELTS（本番）", "dsGIeltsP": "IELTS 練習", "dsGBattle": "冒険バトル", "supTitle": "開発者を応援する", "supSub": "このアプリは、私が一人で仕事のあとや週末に少しずつ作っています。毎日のニュース、リスニング音声、新しいゲーム、サーバーには時間と費用がかかります。もし一つでも多く単語を覚えたり、ニュースを読めたりするお役に立てていたら、応援していただけるとうれしいです。金額に関わらず心から感謝しています 🙏", "supBtn": "Revolut で応援する"});
 Object.assign(STR.ko,{"ticketsL": "출정권", "sb1": "따뜻한 컵", "sb2": "행운의 클로버", "sb3": "황금 하프", "sb4": "자수정 왕관", "sb5": "무지개 불사조", "sbR1": "€5 미만", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100 이상", "sbMine": "내 후원 배지: {b}", "sbThanks": "후원해 주셔서 감사합니다! 이 배지는 항상 이름 옆에 표시되어 모두가 볼 수 있어요.", "sbDev": "후원 배지", "sbNickPh": "플레이어 닉네임", "sbRemove": "배지 제거", "sbGive": "배지 주기", "sbNone": "아직 후원자가 없어요", "sbNoNick": "그 닉네임의 플레이어를 찾을 수 없어요", "sbGiven": "{n}님에게 「{b}」 배지를 줬어요", "sbRemoved": "배지를 제거했어요", "dsGames": "게임 플레이 통계", "dsGame": "게임", "dsGPlayers": "플레이한 사람", "dsGPlays": "총 횟수", "dsGIelts": "IELTS (정식)", "dsGIeltsP": "IELTS 연습", "dsGBattle": "모험 전투", "supTitle": "개발자 후원하기", "supSub": "이 앱은 제가 혼자 퇴근 후와 주말에 조금씩 만들고 있어요. 매일의 뉴스, 듣기 녹음, 새 게임, 서버에는 시간과 비용이 들어요. 단어 하나, 뉴스 한 편이라도 더 이해하는 데 도움이 됐다면 후원으로 응원해 주세요. 금액과 상관없이 진심으로 감사하고, 더 좋게 만드는 큰 힘이 돼요 🙏", "supBtn": "Revolut으로 후원하기"});
+Object.assign(STR.zh,{nickChars:"暱稱只能用文字、數字、空格和 _ . -，不能用表情符號",nickCharsOld:"你的暱稱含有表情符號或特殊符號，請到設定重新取一個"});
+Object.assign(STR.en,{nickChars:"Nicknames can only use letters, numbers, spaces and _ . - (no emoji)",nickCharsOld:"Your nickname has emoji or symbols. Please choose a new one in Settings"});
+Object.assign(STR.hi,{nickChars:"उपनाम में सिर्फ़ अक्षर, अंक, स्पेस और _ . - हो सकते हैं (इमोजी नहीं)",nickCharsOld:"आपके उपनाम में इमोजी या चिह्न हैं, कृपया सेटिंग्स में नया चुनें"});
+Object.assign(STR.es,{nickChars:"El apodo solo puede tener letras, números, espacios y _ . - (sin emojis)",nickCharsOld:"Tu apodo tiene emojis o símbolos. Elige uno nuevo en Ajustes"});
+Object.assign(STR.ja,{nickChars:"ニックネームは文字・数字・スペースと _ . - だけ使えます（絵文字は不可）",nickCharsOld:"ニックネームに絵文字や記号が入っています。設定で新しく決めてください"});
+Object.assign(STR.ko,{nickChars:"닉네임은 글자, 숫자, 공백과 _ . - 만 쓸 수 있어요 (이모지 불가)",nickCharsOld:"닉네임에 이모지나 기호가 있어요. 설정에서 새로 정해 주세요"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
