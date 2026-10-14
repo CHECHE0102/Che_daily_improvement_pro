@@ -657,6 +657,7 @@ body.maint-lock{overflow:hidden}
 .ally-av{position:relative;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:900;color:#fff;flex:none;border:2px solid var(--ink)}
 .ally-av i{position:absolute;right:-6px;bottom:-4px;font-style:normal;font-size:18px}
 .ally-hp{margin-top:6px;font-size:11px;color:#fff;font-weight:700;width:100%}.ally-bar{height:6px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden;margin-top:2px}.ally-bar i{display:block;height:100%;background:#5BD484}.ally-pre{font-size:14px;padding:10px 14px}
+.ally-gear{display:grid;gap:6px}.ally-gear label{display:flex;flex-direction:column;gap:4px}.ally-sel{font-size:14px;padding:8px 10px}
 </style>
 
 </head>
@@ -1450,7 +1451,8 @@ WN_L.ja={metal:["青銅の短剣","鋼の長剣","月銀の刃","ヌアザの光
 AN_L.ja={metal:["鎖かたびら","鉄の板金鎧","銀鱗の鎧","軍神の鎧"],wood:["樹皮のベスト","蔓編みの鎧","古樫の守り","森の心臓"],water:["アザラシ皮のコート","潮紋の鎧","深海の鱗","マナナンのマント"],fire:["革の鎧","溶岩の鎧","不死鳥の鎧","不滅の炎の鎧"],earth:["泥石の鎧","重岩の鎧","山岳の鎧","大地の心臓"]};
 WN_L.ko={metal:["청동 단검","강철 장검","월은의 칼날","누아다의 빛의 검"],wood:["참나무 지팡이","산사나무 장궁","주목 전투창","드루이드의 성스러운 지팡이"],water:["작살","조수의 삼지창","셀키의 채찍","마나난의 창"],fire:["횃불 곤봉","용철 전투도끼","불타는 기창","루의 창"],earth:["돌망치","화강암 전투망치","거인의 곤봉","다그다의 곤봉"]};
 AN_L.ko={metal:["사슬 갑옷","철판 갑옷","은비늘 갑옷","전쟁신의 갑옷"],wood:["나무껍질 조끼","덩굴 갑옷","고목 참나무 수호구","숲의 심장"],water:["물개 가죽 코트","조수 무늬 갑옷","심해 비늘","마나난의 망토"],fire:["가죽 갑옷","용암 갑옷","불사조 갑옷","불멸의 화염 갑옷"],earth:["진흙돌 갑옷","무거운 바위 갑옷","산악 갑옷","대지의 심장"]};
-const itemName=it=>LANG==="zh"?it.name:WN_L[LANG]&&(it.slot==="weapon"?WN_L:AN_L)[LANG][it.el][it.tier];
+const itemName=it=>(LANG==="zh"?it.name:WN_L[LANG]&&(it.slot==="weapon"?WN_L:AN_L)[LANG][it.el][it.tier])+(it.plus?` +${it.plus}`:"");
+const tierLab=it=>it.legacy?TIER[it.tier].n:"Lv"+it.lv;
 
 const elBadge=(k,big)=>`<span class="el el-${k||"none"}${big?" big":""}" title="${elName(k)}">${elShort(k)}</span>`;
 
@@ -1458,10 +1460,21 @@ const TIER=[{n:"Ⅰ",atk:6,def:4,hp:20,price:80,lv:1},{n:"Ⅱ",atk:14,def:10,hp:
 const WNAMES={metal:["青銅短劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂長弓","紫杉戰矛","德魯伊聖杖"],water:["漁叉","潮汐三叉戟","塞爾基長鞭","李爾海神之矛"],fire:["火把棍","熔鐵戰斧","烈焰長槍","盧神之槍"],earth:["石錘","花崗岩戰鎚","巨人之棒","達格達之棍"]};
 const ANAMES={metal:["鎖子甲","鐵板甲","銀鱗甲","戰神之鎧"],wood:["樹皮背心","藤編護甲","古橡守護甲","森林之心鎧"],water:["海豹皮衣","潮紋鎧","深海鱗甲","李爾斗篷"],fire:["皮革護甲","熔岩護甲","鳳焰鎧","不滅烈焰甲"],earth:["泥石護甲","岩石重甲","山嶺鎧","大地之心鎧"]};
 const ITEMS={};
+// legacy tier items (still owned / forged from shards, no longer sold in the shop)
 for(const e of ELS) TIER.forEach((t,i)=>{
-  ITEMS[`w-${e.k}-${i}`]={id:`w-${e.k}-${i}`, slot:"weapon", el:e.k, tier:i, name:WNAMES[e.k][i], atk:t.atk, price:t.price, lv:t.lv};
-  ITEMS[`a-${e.k}-${i}`]={id:`a-${e.k}-${i}`, slot:"armor", el:e.k, tier:i, name:ANAMES[e.k][i], def:t.def, hp:t.hp, price:t.price, lv:t.lv};
+  ITEMS[`w-${e.k}-${i}`]={id:`w-${e.k}-${i}`, slot:"weapon", el:e.k, tier:i, name:WNAMES[e.k][i], atk:t.atk, price:t.price, lv:t.lv, legacy:true};
+  ITEMS[`a-${e.k}-${i}`]={id:`a-${e.k}-${i}`, slot:"armor", el:e.k, tier:i, name:ANAMES[e.k][i], def:t.def, hp:t.hp, price:t.price, lv:t.lv, legacy:true};
 });
+/* shop gear: every level Lv1–20 sells 3 weapons + 3 armours of different elements; stats grow a little each level
+   (the wild monsters were tuned assuming gear of your level − 1) */
+const GEAR_W=L=>Math.round(4+2.4*L+0.06*L*L), GEAR_D=L=>Math.round(2.5+1.6*L+0.04*L*L), GEAR_H=L=>Math.round(10+8*L+0.45*L*L);
+const GEAR_PRICE=L=>{ const A=[[1,80],[4,300],[8,900],[13,2500],[20,5500]]; for(let i=0;i<A.length-1;i++){ const [a,pa]=A[i],[b,pb]=A[i+1]; if(L>=a&&L<=b) return Math.round((pa+(pb-pa)*(L-a)/(b-a))/10)*10; } return 5500; };
+const tierOfLv=L=>{ let t=0; TIER.forEach((x,i)=>{ if(L>=x.lv) t=i; }); return t; };
+for(let L=1;L<=20;L++) for(let k=0;k<3;k++){
+  const t=tierOfLv(L), plus=L-TIER[t].lv, we=ELS[(L*3+k)%5].k, ae=ELS[(L*3+k+2)%5].k;
+  ITEMS[`W${L}-${we}`]={id:`W${L}-${we}`, slot:"weapon", el:we, tier:t, plus, name:WNAMES[we][t], atk:GEAR_W(L), price:GEAR_PRICE(L), lv:L};
+  ITEMS[`A${L}-${ae}`]={id:`A${L}-${ae}`, slot:"armor", el:ae, tier:t, plus, name:ANAMES[ae][t], def:GEAR_D(L), hp:GEAR_H(L), price:GEAR_PRICE(L), lv:L};
+}
 
 /* ----- conquest of Ireland: towns ordered by population (smallest = easiest) ----- */
 // [id, zh, en, hi, es, approx. population, lon, lat]
@@ -1615,8 +1628,8 @@ const ART={
        11–12 win even if you AND your ally are both fully countered · 13–14 one piece countered is OK
        15–17 nothing may be countered · 18–20 weapon and armour must both counter
    [level, hp, atk, def] */
-const WILD_STATS=[[1,48,21,4],[2,60,27,5],[3,75,31,7],[4,113,43,9],[5,111,55,11],[6,134,50,12],[7,200,66,14],[8,338,73,16],[9,484,128,17],[10,622,111,19],
-  [11,332,73,21],[12,354,74,22],[13,854,102,24],[14,847,102,26],[15,893,162,28],[16,858,177,29],[17,933,165,31],[18,1503,242,33],[19,1533,259,34],[20,1384,293,36]];
+const WILD_STATS=[[1,50,19,4],[2,63,26,5],[3,75,30,7],[4,101,42,9],[5,138,44,11],[6,142,57,12],[7,246,71,14],[8,282,74,16],[9,538,118,17],[10,536,148,19],
+  [11,354,88,21],[12,443,90,22],[13,827,95,24],[14,899,99,26],[15,948,172,28],[16,1030,176,29],[17,1120,191,31],[18,1797,282,33],[19,1886,293,34],[20,1921,358,36]];
 const ALLY_LV=10, ALLY_HIT=0.7, ALLY_AGGRO=0.45;   // ally deals 70% damage; monster targets the ally 45% of the time
 // creature: [key, minLv, maxLv, zh, en, hi, es, ja, ko, lore]
 const CREATURES=[
@@ -1705,7 +1718,7 @@ const ALLY_POOL=[["Aoife","IE"],["Cian","IE"],["Niamh","IE"],["Oisín","IE"],["S
 const tierFor=lv=>{ let t=0; TIER.forEach((x,i)=>{ if(lv>=x.lv) t=i; }); return t; };
 const hashStr=s=>{ let h=2166136261; for(const c of s){ h^=c.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; };
 const yesterday=()=>{ const d=new Date(); d.setDate(d.getDate()-1); return ymd(d); };
-function allyStatsOf(lv,wEl,aEl,tier){ const T_=TIER[tier==null?tierFor(lv):tier]; return {hp:100+20*(lv-1)+T_.hp, atk:10+3*(lv-1)+T_.atk, def:5+2*(lv-1)+T_.def, wEl, aEl}; }
+function allyStatsOf(lv,wEl,aEl){ const gl=Math.max(1,lv-1); return {hp:100+20*(lv-1)+GEAR_H(gl), atk:10+3*(lv-1)+GEAR_W(gl), def:5+2*(lv-1)+GEAR_D(gl), wEl, aEl, gl}; }
 function cpuAlly(){
   const g=game(), td=today(); g.allyLog=g.allyLog||{};
   if(g.allyLog[td]&&g.allyLog[td].cpu) return g.allyLog[td].cpu;
@@ -1716,7 +1729,13 @@ function cpuAlly(){
   g.allyLog[td]={...(g.allyLog[td]||{}), cpu:a, id:a.id}; const ks=Object.keys(g.allyLog).sort(); while(ks.length>7) delete g.allyLog[ks.shift()]; saveGame();
   return a;
 }
-function todayAlly(){ const g=game(); if(g.lv<ALLY_LV) return null; const f=S.allyFriend; if(f&&f.date===today()) return f; return cpuAlly(); }
+function todayAlly(){ const g=game(); if(g.lv<ALLY_LV) return null; const f=S.allyFriend; if(f&&f.date===today()) return f;
+  const c=cpuAlly(), lend=g.allyGear&&g.allyGear.date===today()?g.allyGear:null; if(!lend) return c;
+  const a={...c}, base={hp:100+20*(c.lv-1), atk:10+3*(c.lv-1), def:5+2*(c.lv-1)}, gl=Math.max(1,c.lv-1);
+  const w=lend.w&&g.inv.includes(lend.w)&&ITEMS[lend.w], ar=lend.a&&g.inv.includes(lend.a)&&ITEMS[lend.a];
+  if(w){ a.atk=base.atk+w.atk; a.wEl=w.el; a.lentW=w.id; }
+  if(ar){ a.def=base.def+ar.def; a.hp=base.hp+ar.hp; a.aEl=ar.el; a.lentA=ar.id; }
+  return a; }
 // --- friend binding through Firestore: allies/{uid} = {snap, req:{from,n,date}, bond:{with,n,date}}
 const allyRef=uid=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"allies",uid);
 async function allySync(force){
@@ -1778,6 +1797,9 @@ function allyCard(){
   return `<div class="card ally-card"><div class="row" style="justify-content:space-between"><b>🤝 ${T("alTitle")}</b><span class="chip ${friend?"done":""}">${friend?T("alFriend"):T("alCpu")}</span></div>
     <div class="ally-row"><span class="ally-av" style="background:${(EL_PAL[a.wEl]||["#888","#555"])[1]}">${ini}<i>${flagOf(a.flag)}</i></span><div class="it-main"><b>${esc(a.n)}${friend?supB(a.id,16):""}</b><span class="muted sm-t">Lv ${a.lv} · HP ${a.hp} · ${T("atk")} ${a.atk} · ${T("def")} ${a.def}</span>
       <span class="sm-t">${T("weapon")} ${elBadge(a.wEl)} · ${T("armor")} ${elBadge(a.aEl)}</span></div></div>
+    ${friend?"":(()=>{ const own=g.inv.map(id=>ITEMS[id]).filter(Boolean), c=cpuAlly(), lend=g.allyGear&&g.allyGear.date===today()?g.allyGear:{};
+      const sel=(slot,cur,origEl)=>`<select class="search ally-sel" data-allygear="${slot}"><option value="">${T("alOwnGear",{e:elName(origEl)})}</option>${own.filter(it=>it.slot===slot).sort((x,y)=>y.lv-x.lv).map(it=>`<option value="${it.id}"${cur===it.id?" selected":""}>${T("alLend")}: ${esc(itemName(it))} (${elName(it.el)} · ${tierLab(it)})</option>`).join("")}</select>`;
+      return `<div class="ally-gear"><label class="sm-t">${T("weapon")}${sel("weapon",lend.w,c.wEl)}</label><label class="sm-t">${T("armor")}${sel("armor",lend.a,c.aEl)}</label><span class="muted sm-t">${T("alGearHint")}</span></div>`; })()}
     <p class="muted sm-t" style="margin:2px 0">${T("alHow")}</p>
     ${req?`<div class="ie-exitask"><b>${T("alReq",{n:esc(req.n||"?")})}</b><div class="row"><button class="btn sm" data-act="alyes">${T("alAccept")}</button><button class="btn ghost sm" data-act="alno">${T("alDecline")}</button></div></div>`:""}
     ${!CLOUD.user?`<p class="muted sm-t">${T("alLogin")}</p>`:friend?"":out?`<p class="sm-t">⏳ ${T("alWaiting",{n:esc(out.n)})}</p>`:`<div class="row" style="flex-wrap:nowrap;gap:6px"><input id="allyNick" class="search" maxlength="16" placeholder="${T("alNickPh")}" autocomplete="off"><button class="btn sm" data-act="alinvite" style="flex:none">${T("alInvite")}</button></div>`}
@@ -2060,7 +2082,7 @@ function itemRow(it, mode){
   else if(own) act=`<button class="btn ghost sm" data-equip="${it.id}">${on?T("equipped"):T("equip")}</button>`;
   else if(locked) act=`<span class="muted sm-t">${T("unlockAt",{n:it.lv})}</span>`;
   else act=`<button class="btn sm" data-buy="${it.id}" ${g.gold<it.price?"disabled":""}>${T("price",{n:it.price})}</button>`;
-  return `<div class="item${on?" on":""}">${itemTile(it)}<div class="it-main"><b>${esc(itemName(it))} <span class="tier">${TIER[it.tier].n}</span></b><span class="muted">${it.slot==="weapon"?T("weapon"):T("armor")} · ${stat}</span></div>${act}</div>`;
+  return `<div class="item${on?" on":""}">${itemTile(it)}<div class="it-main"><b>${esc(itemName(it))} <span class="tier">${tierLab(it)}</span></b><span class="muted">${it.slot==="weapon"?T("weapon"):T("armor")} · ${stat}</span></div>${act}</div>`;
 }
 function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`; }
 function viewAdv(){
@@ -2073,8 +2095,10 @@ function viewAdv(){
   } else if(sub==="shop"){
     const f=S.shopEl||"all";
     const fseg=elFilterSeg();
-    const list=Object.values(ITEMS).filter(it=>f==="all"||it.el===f).sort((a,b)=>a.tier-b.tier||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
-    body=fseg+`<div class="items">${list.map(it=>itemRow(it,"shop")).join("")}</div>`;
+    const all=!!S.shopAll, lo=g.lv-3, hi=g.lv+2;
+    const list=Object.values(ITEMS).filter(it=>!it.legacy&&(f==="all"||it.el===f)&&(all||(it.lv>=lo&&it.lv<=hi))).sort((a,b)=>b.lv-a.lv||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
+    const lvls=[...new Set(list.map(it=>it.lv))];
+    body=fseg+`<p class="muted sm-t" style="margin:0">${T("shopHint")}</p>`+lvls.map(L=>`<div class="eyebrow">Lv ${L}${L>g.lv?" 🔒":""}</div><div class="items">${list.filter(it=>it.lv===L).map(it=>itemRow(it,"shop")).join("")}</div>`).join("")+`<button class="btn ghost sm" data-act="shopall">${all?T("shopNear"):T("shopAll")}</button>`;
   } else if(sub==="rank"){
     body=viewRank();
   } else if(sub==="coop"){
@@ -2083,7 +2107,7 @@ function viewAdv(){
     body=viewLuck();
   } else {
     const f=S.shopEl||"all", all=g.inv.map(id=>ITEMS[id]).filter(Boolean);
-    const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>a.tier-b.tier||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
+    const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>b.lv-a.lv||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
     body= all.length?elFilterSeg()+(own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><p>${T("bagNone")}</p></div>`):`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
   }
   return `<div class="view">
@@ -2502,7 +2526,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.49";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.50";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2564,7 +2588,7 @@ function itemSvg(it, cls){
   const inner=it.slot==="weapon"?(WKIND[it.el][it.tier]==="bow"?weaponGlyph(it):`<g transform="rotate(40 32 32)">${weaponGlyph(it)}</g>`):armorBody(it.el,it.tier);
   return `<svg viewBox="0 0 64 64" class="${cls||"it-art"}" aria-hidden="true"><defs><radialGradient id="gl-${it.el}"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>${glow}${inner}</svg>`;
 }
-function itemTile(it, sm){ return `<span class="it-tile el-${it.el}${sm?" sm":""}">${itemSvg(it)}<span class="it-tier">${TIER[it.tier].n}</span></span>`; }
+function itemTile(it, sm){ return `<span class="it-tile el-${it.el}${sm?" sm":""}">${itemSvg(it)}<span class="it-tier">${tierLab(it)}</span></span>`; }
 
 /* ----- hero figure for the battle scene ----- */
 function heroSvg(){
@@ -2900,6 +2924,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.buy) return buy(t.dataset.buy);
   if(t.dataset.equip) return equip(t.dataset.equip);
   if(t.dataset.mon) return startBattle(t.dataset.mon);
+  if(t.dataset.act==="shopall"){ S.shopAll=!S.shopAll; return render(); }
   if(t.dataset.act==="nbtab"){ S.nbTab=t.dataset.k; return render(); }
   if(t.dataset.act==="alinvite") return allyInvite();
   if(t.dataset.act==="alyes") return allyAnswer(true);
@@ -2977,7 +3002,7 @@ document.addEventListener("click", e=>{
   if(a==="finishx") return startQuiz("post", currentArticle());
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
-document.addEventListener("change", e=>{ if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
+document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
 document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
@@ -4003,6 +4028,12 @@ Object.assign(STR.hi,{"huntTitle": "अभी लड़ सकते हैं",
 Object.assign(STR.es,{"huntTitle": "Listos para luchar", "wildTitle": "Caza salvaje", "wildDone": "¡Has vencido a todos los monstruos de tu nivel! Aparecen nuevos al subir de nivel, o vuelve a luchar desde el cuaderno.", "wdBeaten": "Vencido", "nbTitle": "Cuaderno de monstruos", "nbBeaten": "Vencidos {n}", "nbLocked": "Bloqueados {n}", "nbTowns": "Guardianes de ciudades", "nbWild": "Monstruos salvajes", "nbEmpty": "Aún no has vencido a ningún monstruo", "nbAllOpen": "¡Todo desbloqueado!", "alTitle": "Aliado de hoy", "alLocked": "Los aliados se desbloquean en Lv {n}: cada día un compañero de fuerza parecida caza contigo.", "alFriend": "Amigo", "alCpu": "Aliado de la máquina", "alHow": "Tu aliado lucha contigo contra monstruos salvajes (no en asedios). Desde Lv 11 son muy fuertes y necesitarás a tu aliado.", "alReq": "{n} quiere ser tu aliado hoy", "alAccept": "Aceptar", "alDecline": "Rechazar", "alLogin": "Inicia sesión con Google para invitar a un amigo como aliado.", "alWaiting": "Has invitado a {n}. Esperando respuesta…", "alNickPh": "Apodo del amigo", "alInvite": "Invitar", "alRule": "Cada día recibes un aliado de la máquina, o puedes aliarte con un amigo. No puedes repetir aliado dos días seguidos.", "alBound": "¡{n} es tu aliado hoy!", "alSelf": "No puedes invitarte a ti mismo", "alHave": "Ya tienes aliado hoy", "alTwice": "No puedes aliarte con la misma persona dos días seguidos", "alLow": "Ese jugador aún no es Lv 10 o no ha abierto la Aventura", "alBusy": "{n} ya tiene aliado hoy", "alSent": "Invitación enviada a {n}", "alWith": "Tu aliado {n} luchará a tu lado", "logAlly": "{a} causa {n} de daño", "logMonAlly": "{m} ataca a {a}: {n} de daño"});
 Object.assign(STR.ja,{"huntTitle": "今すぐ挑戦できる", "wildTitle": "野外の狩り", "wildDone": "今のレベルの魔物は全部倒した！レベルが上がると新しい魔物が出ます。「魔物ノート」から再戦もできます。", "wdBeaten": "撃破済み", "nbTitle": "魔物ノート", "nbBeaten": "撃破 {n}", "nbLocked": "未解放 {n}", "nbTowns": "町の守護者", "nbWild": "野外の魔物", "nbEmpty": "まだ魔物を倒していません", "nbAllOpen": "すべて解放済み！", "alTitle": "今日の仲間", "alLocked": "Lv {n} で仲間システムが解放：毎日、同じくらいの強さの仲間が狩りに同行します。", "alFriend": "フレンド", "alCpu": "コンピューターの仲間", "alHow": "仲間は野外の魔物との戦いに参加します（町の攻略戦には参加しません）。Lv 11 からの魔物は強いので、仲間の力が必要です。", "alReq": "{n} が今日の仲間になりたがっています", "alAccept": "受ける", "alDecline": "断る", "alLogin": "Google でログインすると友達を仲間に招待できます。", "alWaiting": "{n} を招待しました。返事を待っています…", "alNickPh": "友達のニックネーム", "alInvite": "招待", "alRule": "毎日コンピューターの仲間が自動で付きます。友達と仲間になることもできます。同じ人とは2日連続で組めません。", "alBound": "{n} が今日の仲間になりました！", "alSelf": "自分は招待できません", "alHave": "今日はもう仲間がいます", "alTwice": "同じ人とは2日連続で組めません", "alLow": "その人はまだ Lv 10 未満か、冒険ページを開いていません", "alBusy": "{n} は今日もう仲間がいます", "alSent": "{n} に招待を送りました", "alWith": "仲間の {n} が一緒に戦います", "logAlly": "{a} が {n} のダメージ", "logMonAlly": "{m} が {a} を攻撃、{n} のダメージ"});
 Object.assign(STR.ko,{"huntTitle": "지금 도전 가능", "wildTitle": "야생 사냥", "wildDone": "내 레벨의 몬스터를 모두 쓰러뜨렸어요! 레벨이 오르면 새 몬스터가 나와요. '몬스터 노트'에서 다시 싸울 수도 있어요.", "wdBeaten": "처치함", "nbTitle": "몬스터 노트", "nbBeaten": "처치 {n}", "nbLocked": "잠김 {n}", "nbTowns": "마을 수호자", "nbWild": "야생 몬스터", "nbEmpty": "아직 처치한 몬스터가 없어요", "nbAllOpen": "모두 열렸어요!", "alTitle": "오늘의 동료", "alLocked": "Lv {n}에 동료 시스템이 열려요: 매일 비슷한 실력의 동료가 사냥에 함께해요.", "alFriend": "친구", "alCpu": "컴퓨터 동료", "alHow": "동료는 야생 몬스터와의 전투에 함께해요 (마을 공성전 제외). Lv 11부터 몬스터가 강해서 동료가 꼭 필요해요.", "alReq": "{n}님이 오늘 동료가 되고 싶어 해요", "alAccept": "수락", "alDecline": "거절", "alLogin": "Google로 로그인하면 친구를 동료로 초대할 수 있어요.", "alWaiting": "{n}님을 초대했어요. 수락을 기다리는 중…", "alNickPh": "친구 닉네임", "alInvite": "초대", "alRule": "매일 컴퓨터 동료가 자동으로 배정돼요. 친구와 서로 묶을 수도 있어요. 같은 사람과는 이틀 연속 동료가 될 수 없어요.", "alBound": "{n}님이 오늘의 동료가 됐어요!", "alSelf": "자기 자신은 초대할 수 없어요", "alHave": "오늘은 이미 동료가 있어요", "alTwice": "같은 사람과 이틀 연속은 안 돼요", "alLow": "그 플레이어는 아직 Lv 10이 아니거나 모험 페이지를 열지 않았어요", "alBusy": "{n}님은 오늘 이미 동료가 있어요", "alSent": "{n}님에게 초대를 보냈어요", "alWith": "동료 {n}님이 함께 싸워요", "logAlly": "{a}의 공격, {n} 피해", "logMonAlly": "{m}이(가) {a}를 공격, {n} 피해"});
+Object.assign(STR.zh,{"shopHint": "每個等級都有 3 件不同屬性的武器和 3 件防具，等級越高數值越強。這裡顯示你目前等級附近的裝備。", "shopAll": "顯示所有等級", "shopNear": "只顯示目前等級附近", "alOwnGear": "用盟友原本的裝備（{e}）", "alLend": "借給盟友", "alGearHint": "可以把你背包裡的裝備借給電腦盟友（不會從你身上拿走），只在今天有效。"});
+Object.assign(STR.en,{"shopHint": "Every level sells 3 weapons and 3 armours of different elements; higher levels are stronger. Showing gear near your level.", "shopAll": "Show all levels", "shopNear": "Show only near my level", "alOwnGear": "Ally's own gear ({e})", "alLend": "Lend", "alGearHint": "You can lend gear from your bag to your computer ally (you keep it too). Lasts for today only."});
+Object.assign(STR.hi,{"shopHint": "हर लेवल पर अलग-अलग तत्वों के 3 हथियार और 3 कवच मिलते हैं; ऊँचे लेवल ज़्यादा ताक़तवर। आपके लेवल के पास का सामान दिखाया गया है।", "shopAll": "सभी लेवल दिखाएँ", "shopNear": "सिर्फ़ मेरे लेवल के पास", "alOwnGear": "साथी का अपना सामान ({e})", "alLend": "उधार दें", "alGearHint": "अपने बैग का सामान कंप्यूटर साथी को उधार दे सकते हैं (आपके पास भी रहेगा)। सिर्फ़ आज के लिए।"});
+Object.assign(STR.es,{"shopHint": "Cada nivel vende 3 armas y 3 armaduras de elementos distintos; cuanto más nivel, más fuertes. Se muestra el equipo cerca de tu nivel.", "shopAll": "Ver todos los niveles", "shopNear": "Solo cerca de mi nivel", "alOwnGear": "Equipo propio del aliado ({e})", "alLend": "Prestar", "alGearHint": "Puedes prestar equipo de tu bolsa a tu aliado de la máquina (tú también lo conservas). Solo por hoy."});
+Object.assign(STR.ja,{"shopHint": "各レベルで属性の違う武器3つと防具3つを販売。レベルが高いほど強くなります。今のレベルに近い装備を表示しています。", "shopAll": "全レベルを表示", "shopNear": "今のレベル付近だけ", "alOwnGear": "仲間の元の装備（{e}）", "alLend": "貸す", "alGearHint": "バッグの装備をコンピューターの仲間に貸せます（自分も使えます）。今日だけ有効です。"});
+Object.assign(STR.ko,{"shopHint": "레벨마다 속성이 다른 무기 3개와 방어구 3개를 팔아요. 레벨이 높을수록 강해요. 지금 레벨 근처 장비를 보여 줘요.", "shopAll": "모든 레벨 보기", "shopNear": "내 레벨 근처만", "alOwnGear": "동료의 원래 장비 ({e})", "alLend": "빌려주기", "alGearHint": "가방의 장비를 컴퓨터 동료에게 빌려줄 수 있어요 (나도 계속 사용). 오늘만 유효해요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
