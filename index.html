@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Che Daily Improvement Pro</title>
 <meta name="description" content="Learn English from daily Irish news — 繁體中文 · English · हिन्दी · Español · 日本語 · 한국어. Earn gold from quizzes, buy elemental gear, fight Celtic monsters.">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -497,7 +497,7 @@ u.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--accent
 .dp-acts{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 .dp-word{min-height:48px;margin:8px 0;border-radius:12px;border:2px solid var(--line);display:grid;place-items:center;font-size:26px;font-weight:800;letter-spacing:.18em;background:var(--card)}
 .dp-word.ok{border-color:var(--good);background:var(--good-soft)}
-.dp-hand{display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:6px}
+.dp-hand{display:grid;grid-template-columns:repeat(8,1fr);gap:5px}
 .dp-tile{position:relative;height:50px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-size:24px;font-weight:800;cursor:pointer;font-family:inherit}
 .dp-tile.sel{border-color:var(--accent);background:var(--accent);color:var(--accent-ink);transform:translateY(-3px)}
 .dp-tile i{position:absolute;top:2px;right:5px;font-size:10px;font-style:normal}
@@ -547,6 +547,36 @@ u.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--accent
 .wd-status{text-align:center;font-weight:700;margin:6px 0}.wd-status.win{color:var(--good)}.wd-status.lose{color:var(--bad)}
 .wd-emo{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;font-size:10px;line-height:1.15}
 @media (max-width:360px){.wd-row{grid-template-columns:repeat(5,46px)}.wd-c{height:46px;font-size:22px}}
+html{touch-action:manipulation}button,a,input,select,textarea{touch-action:manipulation}
+body.pg-lock{overflow:hidden;overscroll-behavior:none}
+body.pg-lock .toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px));z-index:40}
+.pg-full{position:fixed;inset:0;z-index:25;background:var(--paper);display:flex;flex-direction:column;gap:6px;padding:calc(8px + env(safe-area-inset-top,0px)) 12px calc(8px + env(safe-area-inset-bottom,0px));overflow:hidden;max-width:640px;margin:0 auto;-webkit-user-select:none;user-select:none;
+  --t:clamp(30px,calc((100dvh - 430px)/6.3),56px);--kh:clamp(38px,6.2dvh,52px)}
+.pg-full>div{flex:none;min-height:0}
+.pg-full .pg-board{margin:0;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}
+.pg-full .pg-chip{flex:none;padding:3px 9px}
+.pg-full #pgGrid{flex:1;display:flex;flex-direction:column;justify-content:center}
+.pg-full .wd-row{grid-template-columns:repeat(5,var(--t))}
+.pg-full .wd-c{height:var(--t);font-size:calc(var(--t)*.5)}
+.pg-full .wd-grid.mini .wd-row{grid-template-columns:repeat(5,8px)}.pg-full .wd-grid.mini .wd-c{height:8px}
+.pg-full .wd-others{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin:0}
+.pg-full .wd-op{flex:none;min-width:64px;padding:4px 6px}
+.pg-full .wd-kb{margin:0;gap:5px}.pg-full .wd-k{height:var(--kh)}
+.pg-full .sp-mean{font-size:14px}
+.pg-full #pgStage{flex:1;display:flex;flex-direction:column;justify-content:center;overflow:auto}
+.pg-full #pgFall{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;overflow:auto}
+.pg-full .dp-team{margin:4px 0;grid-template-columns:repeat(3,1fr)}
+.pg-full .dp-mate{padding:4px 6px}
+.pg-full .dp-word{margin:4px 0;min-height:42px}
+.pg-full .dp-btns{margin:6px 0 0}
+.pg-full #pgHand p{margin:4px 0 0;max-height:2.8em;overflow:hidden}
+.dp-life{height:10px;border-radius:999px;background:var(--line);overflow:hidden;margin:4px 0}.dp-life i{display:block;height:100%;background:var(--good);border-radius:999px;transition:width .3s linear}.dp-life.low i{background:var(--bad)}
+.dp-watch .dp-letter{animation:none}
+.dp-tile{min-width:0;padding:0}
+.dp-watch{display:flex;flex-direction:column;gap:6px}
+.dp-wtabs{flex-wrap:nowrap;overflow-x:auto}
+.dp-fall.sm{min-height:70px}.dp-fall.sm .dp-letter{width:46px;height:50px;font-size:26px}
+.dp-watch .dp-tile{display:grid;place-items:center;cursor:default}
 </style>
 
 </head>
@@ -2048,7 +2078,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.32";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.33";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2820,9 +2850,9 @@ function coInner(){
 }
 function coBossSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="54" r="34" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6"/><path d="M24 30 L30 12 L40 26 M76 30 L70 12 L60 26" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6" stroke-linejoin="round"/><circle cx="38" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="62" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="39" cy="49" r="3" fill="#1B2421"/><circle cx="63" cy="49" r="3" fill="#1B2421"/><path d="M34 68 Q50 60 66 68" fill="none" stroke="#1B2421" stroke-width="2.6"/><text x="50" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#F0BE45" font-family="Georgia,serif">teh</text></svg>`; }
 function viewCoop(){
-  const m=S.compMode||"ielts";
+  const m=S.compMode||"ielts"; setTimeout(pgLockSync,0);
   const seg=`<div class="seg comp-seg">${[["ielts","🎓 "+T("cmIelts")],["party","🎮 "+T("cmParty")],["coop","🤝 "+T("cmCoop")]].map(([k,l])=>`<button data-act="compmode" data-k="${k}" aria-pressed="${m===k}">${l}</button>`).join("")}</div>`;
-  return seg+(m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:m==="party"?`<div id="pgBox" class="co-box">${pgInner()}</div>`:`<div class="ie-lobby">${ieLobby()}</div>`);
+  return seg+(m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:m==="party"?`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`:`<div class="ie-lobby">${ieLobby()}</div>`);
 }
 
 /* ---------- party games (2–6 players): spelling race & letter rain ---------- */
@@ -3011,7 +3041,7 @@ function pgDropTick(){
   const ids=Object.keys(P.players), allOut=ids.every(u=>u===pgMe()?L.out:dpOut(pg.ps[u],now));
   if(now>P.start+PG.total*1000||allOut) pgEndGame();
 }
-function pgPushMe(){ const pg=S.pg, L=pg&&pg.L; if(!L) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hand:L.hand.join(""), words:L.words, bad:L.bad.slice(-30), pts:L.pts, last:L.last, out:L.out},{merge:true}).catch(()=>{}); },250); }
+function pgPushMe(){ const pg=S.pg, L=pg&&pg.L; if(!L) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hand:L.hand.join(""), words:L.words, bad:L.bad.slice(-30), pts:L.pts, last:L.last, out:L.out, fall:L.fall?L.fall.l:"", cur:L.sel.map(k=>L.hand[k]).join("")},{merge:true}).catch(()=>{}); },250); }
 function pgGifts(){ const pg=S.pg; if(!pg||!pg.L) return; const L=pg.L, gs=(pg.ps[pgMe()]||{}).gifts||{};
   for(const [id,g] of Object.entries(gs)){ if(L.gifted[id]) continue; L.gifted[id]=1; if(L.out) continue; if(L.hand.length<PG.giftMax){ L.hand.push(g.l); toast(T("pgGift",{n:pgNm(g.f), l:g.l.toUpperCase()})); } else toast(T("pgHandFull")); }
 }
@@ -3020,8 +3050,8 @@ function pgFallPass(to){ const pg=S.pg, L=pg&&pg.L; if(!L||!L.fall) return; cons
   if(dpOut(pg.ps[to],now)) return toast(T("pgOutTag"));
   const id=pgMe().slice(0,6)+"-"+(++L.sent)+"-"+now; const l=L.fall.l; L.fall=null;
   CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",to),{["gifts."+id]:{l, f:pgMe(), at:now}}).then(()=>toast(T("pgSent",{n:pgNm(to)}))).catch(()=>toast(T("syncFail"))); pgRender(); }
-function pgPick(k){ const L=S.pg&&S.pg.L; if(!L||L.out) return; const j=L.sel.indexOf(k); if(j>=0) L.sel.splice(j,1); else L.sel.push(k); pgRender(); }
-function pgClearSel(){ const L=S.pg&&S.pg.L; if(L){ L.sel=[]; pgRender(); } }
+function pgPick(k){ const L=S.pg&&S.pg.L; if(!L||L.out) return; const j=L.sel.indexOf(k); if(j>=0) L.sel.splice(j,1); else L.sel.push(k); pgPushMe(); pgRender(); }
+function pgClearSel(){ const L=S.pg&&S.pg.L; if(L){ L.sel=[]; pgPushMe(); pgRender(); } }
 function pgDiscard(){ const L=S.pg&&S.pg.L; if(!L||!L.sel.length) return; L.hand=L.hand.filter((_,k)=>!L.sel.includes(k)); L.sel=[]; pgPushMe(); pgRender(); }
 function pgSubmitWord(){
   const pg=S.pg, L=pg&&pg.L; if(!L||L.out) return;
@@ -3032,6 +3062,20 @@ function pgSubmitWord(){
   else { if(!L.bad.includes(w)) L.bad.push(w); pg.shake=Date.now(); toast(T("pgInvalid")); }
   L.sel=[]; pgPushMe(); pgRender();
 }
+function dpWatch(now){
+  const pg=S.pg, P=pg.party, mates=Object.keys(P.players).filter(u=>u!==pgMe()), alive=mates.filter(u=>!dpOut(pg.ps[u],now));
+  if(!alive.length) return `<div class="dp-watch"><p class="muted">${T("pgAllOut")}</p></div>`;
+  if(!alive.includes(pg.watch)) pg.watch=alive[0];
+  const u=pg.watch, p=pg.ps[u]||{}, life=Math.max(0,Math.ceil(((p.last||P.start)+PG.life*1000-now)/1000)), hand=[...(p.hand||"")], cur=p.cur||"";
+  return `<div class="dp-watch"><div class="eyebrow">👀 ${T("pgWatching")}</div>
+    <div class="seg dp-wtabs">${alive.map(x=>`<button data-act="pgwatch" data-k="${esc(x)}" aria-pressed="${x===u}">${esc(pgNm(x))}</button>`).join("")}</div>
+    <div class="row" style="justify-content:space-between"><b>${esc(pgNm(u))}</b><span class="sm-t ${life<=8?"bad-t":""}">${T("pgLife",{s:life})}</span></div>
+    <div class="dp-fall sm">${p.fall?`<span class="dp-letter" data-l="${esc(p.fall)}">${esc(p.fall.toUpperCase())}</span>`:`<span class="muted sm-t">${T("pgNextDrop")}</span>`}</div>
+    <div class="dp-word">${cur?esc(cur.toUpperCase()):"&nbsp;"}</div>
+    <div class="dp-hand">${hand.map(c=>`<span class="dp-tile">${esc(c.toUpperCase())}</span>`).join("")}</div>
+    ${(p.words||[]).length?`<p class="sm-t">✅ ${(p.words||[]).map(w=>`<b>${esc(w)}</b>`).join(" · ")} <span class="muted">(${p.pts||0})</span></p>`:""}
+    <p class="muted sm-t">${T("pgOut")}</p></div>`;
+}
 function dpSections(){
   const pg=S.pg, P=pg.party, now=Date.now();
   if(now<P.start||!pg.L) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("pgDropSub",{s:PG.life})}</p></div>`]];
@@ -3040,8 +3084,9 @@ function dpSections(){
   const team=Object.keys(P.players).map(u=>{ const p=u===pgMe()?{hand:L.hand.join(""),words:L.words,out:L.out}:(pg.ps[u]||{}); const out=u===pgMe()?L.out:dpOut(p,now);
     return `<div class="dp-mate${out?" out":""}${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b><span class="dp-mini">${esc((p.hand||"").toUpperCase())||"·"}</span><small>${out?T("pgOutTag"):T("pgWordsN",{n:(p.words||[]).length})}</small></div>`; }).join("");
   const top=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgTotal",{s:left})}</span><b class="sm-t ${life<=8&&!L.out?"bad-t":""}">${L.out?T("pgOutTag"):T("pgLife",{s:life})}</b></div>
-    <div class="co-bar ${life<=8?"boss":"team"}"><div class="hp ${life<=8?"m":"p"}"><i style="width:${L.out?0:life/PG.life*100}%"></i></div></div><div class="dp-team">${team}</div>`;
-  const fall=L.out?`<p class="muted">${T("pgOut")}</p>`:L.fall?`<div class="dp-fall" data-f="${L.fall.id}"><span class="dp-letter">${esc(L.fall.l.toUpperCase())}</span><div class="dp-acts"><button class="btn sm" data-act="pgkeep">${T("pgKeep")}</button>${mates.filter(u=>!dpOut(pg.ps[u],now)).map(u=>`<button class="btn ghost sm" data-act="pgpass" data-k="${esc(u)}">${T("pgPassTo",{n:esc(pgNm(u))})}</button>`).join("")}</div></div>`:`<div class="dp-fall wait"><span class="muted sm-t">${T("pgNextDrop")}</span></div>`;
+    <div class="dp-life${life<=8?" low":""}"><i style="width:${L.out?0:life/PG.life*100}%"></i></div><div class="dp-team">${team}</div>`;
+  if(L.out) return [["pgTop",top],["pgFall",dpWatch(now)],["pgHand",""]];
+  const fall=L.fall?`<div class="dp-fall" data-f="${L.fall.id}"><span class="dp-letter">${esc(L.fall.l.toUpperCase())}</span><div class="dp-acts"><button class="btn sm" data-act="pgkeep">${T("pgKeep")}</button>${mates.filter(u=>!dpOut(pg.ps[u],now)).map(u=>`<button class="btn ghost sm" data-act="pgpass" data-k="${esc(u)}">${T("pgPassTo",{n:esc(pgNm(u))})}</button>`).join("")}</div></div>`:`<div class="dp-fall wait"><span class="muted sm-t">${T("pgNextDrop")}</span></div>`;
   const word=L.sel.map(k=>L.hand[k]).join("");
   const hand=`<div class="dp-word${pg.shake&&now-pg.shake<500?" shake":""}${pg.flashOk&&now-pg.flashOk<600?" ok":""}">${word?esc(word.toUpperCase()):`<span class="muted sm-t">${T("pgTapLetters")}</span>`}</div>
     <div class="dp-hand">${L.hand.map((c,k)=>`<button class="dp-tile${L.sel.includes(k)?" sel":""}" data-act="pgpick" data-k="${k}" ${L.out?"disabled":""}>${esc(c.toUpperCase())}${L.sel.includes(k)?`<i>${L.sel.indexOf(k)+1}</i>`:""}</button>`).join("")}${Array.from({length:Math.max(0,PG.handMax-L.hand.length)},()=>`<span class="dp-tile empty"></span>`).join("")}</div>
@@ -3119,9 +3164,12 @@ function pgSections(){
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
+const pgPlaying=()=>!!(S.pg&&S.pg.party&&S.pg.party.state==="play"&&S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party");
+function pgLockSync(){ const on=pgPlaying(); document.body.classList.toggle("pg-lock",on); const box=document.getElementById("pgBox"); if(box) box.classList.toggle("pg-full",on); if(on) window.scrollTo(0,0); }
 function pgRender(force){
-  if(!(S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party")) return;
+  if(!(S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party")){ document.body.classList.remove("pg-lock"); return; }
   const box=document.getElementById("pgBox"); if(!box) return render();
+  if(box.classList.contains("pg-full")!==pgPlaying()) pgLockSync();
   const secs=pgSections(), key=secs.map(s=>s[0]).join(",");
   if(force||box.dataset.k!==key){ box.innerHTML=secs.map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); box.dataset.k=key; box._c={}; secs.forEach(([id,h])=>box._c[id]=h); return; }
   box._c=box._c||{};
@@ -3135,6 +3183,7 @@ function pgAct(a,t){
   if(a==="pgquit"){ S.pgQuitAsk=true; return pgRender(); }
   if(a==="pgquitno"){ S.pgQuitAsk=false; return pgRender(); }
   if(a==="pgkey") return wdKey(t.dataset.k);
+  if(a==="pgwatch"){ if(S.pg) S.pg.watch=t.dataset.k; return pgRender(); }
   if(a==="pgkeep") return pgFallKeep();
   if(a==="pgpass") return pgFallPass(t.dataset.k);
   if(a==="pgpick") return pgPick(+t.dataset.k);
@@ -3180,6 +3229,12 @@ Object.assign(STR.hi,{"pgSpell": "🟩 शब्द दौड़ (Wordle)", "pgS
 Object.assign(STR.es,{"pgSpell": "🟩 Carrera de palabras (Wordle)", "pgSpellSub": "Todos adivinan a la vez la misma palabra de 5 letras, con 6 intentos cada uno. 🟩 letra correcta en su sitio; 🟨 la letra está pero en otro sitio; ⬜ no está. Menos intentos dan más puntos y quien la resuelve primero gana +5. 5 rondas.", "pgHits": "Resueltas", "wdShort": "Usa exactamente {n} letras", "wdWin": "¡Resuelta en {n}!", "wdLose": "Esta vez no. La palabra era {w}", "wdEnter": "Enviar", "wdWaitOthers": "Esperando a los demás…", "wdAnswer": "La palabra era", "wdHint": "Pista del significado:", "wdRate": "Tasa de acierto", "wdFirst": "{n} la resolvió primero"});
 Object.assign(STR.ja,{"pgSpell": "🟩 ワードレース（Wordle）", "pgSpellSub": "全員が同時に同じ5文字の単語を当てます。チャンスは1人6回。🟩 文字も位置も正しい、🟨 文字はあるが位置がちがう、⬜ その文字はない。少ない回数で当てるほど高得点、いちばん早く当てた人は+5点。全5問。", "pgHits": "正解", "wdShort": "ちょうど{n}文字で入力", "wdWin": "{n}回で正解！", "wdLose": "残念、答えは {w}", "wdEnter": "決定", "wdWaitOthers": "ほかの人を待っています…", "wdAnswer": "答えは", "wdHint": "意味のヒント：", "wdRate": "正解率", "wdFirst": "{n} がいちばん早く正解"});
 Object.assign(STR.ko,{"pgSpell": "🟩 단어 레이스 (Wordle)", "pgSpellSub": "모두 동시에 같은 5글자 단어를 맞혀요. 1인당 6번 기회. 🟩 글자와 위치가 맞음, 🟨 글자는 있지만 위치가 다름, ⬜ 없는 글자. 적은 횟수로 맞힐수록 점수가 높고, 가장 먼저 맞힌 사람은 +5점. 총 5문제.", "pgHits": "정답", "wdShort": "정확히 {n}글자로 입력하세요", "wdWin": "{n}번 만에 정답!", "wdLose": "아쉬워요. 정답은 {w}", "wdEnter": "입력", "wdWaitOthers": "다른 사람을 기다리는 중…", "wdAnswer": "정답은", "wdHint": "뜻 힌트:", "wdRate": "정답률", "wdFirst": "{n}님이 가장 먼저 맞혔어요"});
+Object.assign(STR.zh,{"pgWatching": "你出局了，正在觀看隊友", "pgAllOut": "大家都出局了，等待結算…"});
+Object.assign(STR.en,{"pgWatching": "You're out. Watching a teammate", "pgAllOut": "Everyone is out. Waiting for results…"});
+Object.assign(STR.hi,{"pgWatching": "आप बाहर हैं, साथी को देख रहे हैं", "pgAllOut": "सब बाहर हो गए, नतीजों का इंतज़ार…"});
+Object.assign(STR.es,{"pgWatching": "Estás fuera. Mirando a un compañero", "pgAllOut": "Todos están fuera. Esperando resultados…"});
+Object.assign(STR.ja,{"pgWatching": "脱落しました。仲間を観戦中", "pgAllOut": "全員脱落、結果を待っています…"});
+Object.assign(STR.ko,{"pgWatching": "탈락했어요. 팀원을 관전 중", "pgAllOut": "모두 탈락했어요. 결과를 기다리는 중…"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
