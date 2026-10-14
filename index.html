@@ -563,7 +563,7 @@ body.pg-lock .toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px));z-
 .pg-full .wd-op{flex:none;min-width:64px;padding:4px 6px}
 .pg-full .wd-kb{margin:0;gap:5px}.pg-full .wd-k{height:var(--kh)}
 .pg-full .sp-mean{font-size:14px}
-.pg-full #pgStage{flex:1;display:flex;flex-direction:column;justify-content:center;overflow:auto}
+.pg-full #pgStage{flex:1;display:flex;flex-direction:column;justify-content:flex-start;overflow:auto}.pg-full #pgStage>.sp-wait,.pg-full #pgStage>.bm-center,.pg-full #pgStage>.qz-frozen{margin:auto 0}.pg-full #pgStage>.qz-card{margin-top:8px}
 .pg-full #pgFall{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;overflow:auto}
 .pg-full .dp-team{margin:4px 0;grid-template-columns:repeat(3,1fr)}
 .pg-full .dp-mate{padding:4px 6px}
@@ -577,6 +577,32 @@ body.pg-lock .toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px));z-
 .dp-wtabs{flex-wrap:nowrap;overflow-x:auto}
 .dp-fall.sm{min-height:70px}.dp-fall.sm .dp-letter{width:46px;height:50px;font-size:26px}
 .dp-watch .dp-tile{display:grid;place-items:center;cursor:default}
+.bm-ring{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.bm-p{display:flex;flex-direction:column;align-items:center;padding:5px 10px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-size:12px;min-width:70px;transition:transform .2s}
+.bm-p.hold{border-color:var(--bad);background:var(--bad-soft);transform:scale(1.08)}.bm-p.out{opacity:.4}.bm-p.me b{color:var(--accent)}
+.bm-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:10px}
+.bm-bomb{font-size:64px;line-height:1;animation:bmpulse 1s ease-in-out infinite}.bm-bomb.urgent{animation-duration:.3s}
+@keyframes bmpulse{0%,100%{transform:scale(1) rotate(-4deg)}50%{transform:scale(1.12) rotate(4deg)}}
+.bm-syl{font-family:var(--f-display);font-size:44px;font-weight:900;letter-spacing:.15em;color:var(--bad);padding:2px 16px;border-radius:14px;background:var(--bad-soft)}
+.bm-type{min-height:44px;font-size:28px;font-weight:800;letter-spacing:.1em}.bm-type u{text-decoration:none;color:var(--bad)}.bm-type.ok{color:var(--good)}
+.bm-last{font-size:13px;color:var(--muted)}
+.bm-bang{font-size:90px;line-height:1;animation:pop .5s}.bm-msg{font-size:22px;font-weight:800;color:var(--bad)}
+.bm-abc{display:flex;flex-wrap:wrap;gap:3px;justify-content:center}.bm-abc span{width:18px;height:20px;border-radius:4px;font-size:11px;font-weight:700;display:grid;place-items:center;background:var(--line);color:var(--muted)}.bm-abc span.on{background:var(--good);color:#fff}
+.wd-kb.off{opacity:.35}
+.qz-gold{font-size:24px;font-weight:900;color:#B8860B}
+.qz-stat{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.qz-shopbtn{margin-left:auto}
+.qz-card{border:2px solid var(--line);border-radius:16px;background:var(--card);padding:14px;text-align:center;display:flex;flex-direction:column;gap:8px}
+.qz-card.ok{border-color:var(--good);background:var(--good-soft)}.qz-card.ng{border-color:var(--bad);background:var(--bad-soft)}
+.qz-prompt{font-size:19px;line-height:1.4}.qz-word{font-size:28px}.qz-ex{font-size:17px}
+.qz-fb{font-weight:800}.qz-fb.ok{color:var(--good)}.qz-fb.ng{color:var(--bad)}
+.qz-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.qz-opt{min-height:64px;border-radius:14px;border:0;font-size:16px;font-weight:700;color:#fff;cursor:pointer;padding:8px;font-family:inherit;line-height:1.25}
+.qz-opt:nth-child(1){background:#2563C9}.qz-opt:nth-child(2){background:#C0443B}.qz-opt:nth-child(3){background:#C9A227}.qz-opt:nth-child(4){background:#2E8B57}
+.qz-opt.dim{opacity:.3}.qz-opt.right{outline:4px solid var(--good);outline-offset:2px}.qz-opt.wrong{outline:4px solid var(--ink);outline-offset:2px;opacity:.6}
+.qz-shop{display:flex;flex-direction:column;gap:8px;overflow:auto}
+.qz-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.qz-targets{display:flex;flex-wrap:wrap;gap:6px;padding:0 6px}
+.qz-frozen{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;border-radius:16px;background:linear-gradient(#DDF0FF,#F4FBFF);color:#1B3A57;text-align:center}.qz-ice{font-size:70px;animation:pop .5s}
 </style>
 
 </head>
@@ -2078,7 +2104,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.33";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.34";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2466,7 +2492,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.del){ remove(t.dataset.del); S.open=null; S.confirmDel=null; toast(T("removed")); return render(); }
   if(t.dataset.artid){ openArticle(t.dataset.artid); return; }
   const a=t.dataset.act;
-  if(a&&a.startsWith("pg")) return pgAct(a,t);
+  if(a&&/^(pg|qz)/.test(a)) return pgAct(a,t);
   if(a==="close"){ S.sheet=null; return renderSheet(); }
   if(a==="lang"){ S.sheet=null; S.langSheet=true; return renderSheet(); }
   if(a==="closelang"){ S.langSheet=false; return renderSheet(); }
@@ -2524,7 +2550,7 @@ document.addEventListener("click", e=>{
 });
 document.addEventListener("change", e=>{ if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
-document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&wdKey(k)){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -2912,7 +2938,7 @@ function pgListen(code){
     if(!snap.exists()){ pgStop(); S.pg=null; toast(T("coLeftRoom")); return pgRender(); }
     me.party=snap.data();
     for(const u of Object.keys(me.party.players||{})) if(!me.subbed[u]){ me.subbed[u]=1; me.unsubs.push(fsM.onSnapshot(pgRef(code,"p",u), s=>{ if(S.pg!==me) return; me.ps[u]=s.exists()?s.data():{}; if(u===pgMe()) pgGifts(); pgRender(); }, ()=>{})); }
-    if(me.party.state==="play") pgLoadWords();
+    if(me.party.state==="play"){ pgLoadWords(); if(me.party.game==="bomb") pgLoadSyl(); if(me.party.game==="quiz") pgLoadQuiz(); }
     if(me.party.state==="done") pgFinish();
     pgTickStart(); pgRender();
   }, ()=>{}));
@@ -2937,6 +2963,7 @@ async function pgStartGame(){
     up.words=pgShuffle(pool.slice()).slice(0,WD.rounds).map(o=>({w:o.w, pos:o.pos, m:{zh:o.zh,hi:o.hi,es:o.es,ja:o.ja,ko:o.ko,en:o.en}}));
     up.rounds={};
   }
+  if(P.game==="bomb") Object.assign(up, await bmInit(P));
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
 }
 
@@ -2945,7 +2972,7 @@ function pgTickStart(){ if(S.pgTimer) return; S.pgTimer=setInterval(pgTick,250);
 function pgTick(){
   const pg=S.pg; if(!pg||!pg.party){ clearInterval(S.pgTimer); S.pgTimer=null; return; }
   const P=pg.party; if(P.state!=="play"){ if(P.state==="done"){ clearInterval(S.pgTimer); S.pgTimer=null; } return; }
-  if(P.game==="spell") pgSpellTick(); else pgDropTick();
+  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick}[P.game]||pgDropTick)();
   pgRender();
 }
 function pgEndGame(){ const pg=S.pg; if(!pg||pg.ending) return; pg.ending=1; if(pg.L){ pg.L.fall=null; pgPushMe(); } CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{state:"done", end:Date.now()}).catch(()=>{ pg.ending=0; }); }
@@ -3042,7 +3069,7 @@ function pgDropTick(){
   if(now>P.start+PG.total*1000||allOut) pgEndGame();
 }
 function pgPushMe(){ const pg=S.pg, L=pg&&pg.L; if(!L) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hand:L.hand.join(""), words:L.words, bad:L.bad.slice(-30), pts:L.pts, last:L.last, out:L.out, fall:L.fall?L.fall.l:"", cur:L.sel.map(k=>L.hand[k]).join("")},{merge:true}).catch(()=>{}); },250); }
-function pgGifts(){ const pg=S.pg; if(!pg||!pg.L) return; const L=pg.L, gs=(pg.ps[pgMe()]||{}).gifts||{};
+function pgGifts(){ const pg=S.pg; if(pg&&pg.party&&pg.party.game==="quiz"&&pg.party.state==="play") return qzGifts(); if(!pg||!pg.L) return; const L=pg.L, gs=(pg.ps[pgMe()]||{}).gifts||{};
   for(const [id,g] of Object.entries(gs)){ if(L.gifted[id]) continue; L.gifted[id]=1; if(L.out) continue; if(L.hand.length<PG.giftMax){ L.hand.push(g.l); toast(T("pgGift",{n:pgNm(g.f), l:g.l.toUpperCase()})); } else toast(T("pgHandFull")); }
 }
 function pgFallKeep(){ const L=S.pg&&S.pg.L; if(!L||!L.fall) return; if(L.hand.length>=PG.handMax) return toast(T("pgHandFull")); L.hand.push(L.fall.l); L.fall=null; pgPushMe(); pgRender(); }
@@ -3095,11 +3122,172 @@ function dpSections(){
   return [["pgTop",top],["pgFall",fall],["pgHand",hand]];
 }
 
+/* ----- game 3: word bomb (BombParty style) ----- */
+const BM={lives:2, maxLives:3, intro:2500, fuseMin:10000, fuseMax:22000, abc:"abcdefghilmnoprstuvwy"};
+let PG_SYL=null;
+async function pgLoadSyl(){ if(PG_SYL) return PG_SYL; try{ PG_SYL=await (await fetch("games/syl.json")).json(); }catch(e){ PG_SYL={easy:["in","er","an","re","on","at","en","es"],mid:[],hard:[]}; } return PG_SYL; }
+function bmPickSyl(k){ const L=PG_SYL||{easy:["in","er","an","re"]}, r=Math.random(); const tier=k<6?"easy":k<16?(r<0.6?"easy":"mid"):(r<0.3?"easy":r<0.7?"mid":"hard"); const a=(L[tier]&&L[tier].length?L[tier]:L.easy); return a[Math.floor(Math.random()*a.length)]; }
+const bmFuse=()=>BM.fuseMin+Math.random()*(BM.fuseMax-BM.fuseMin);
+function bmAlive(P){ return (P.order||Object.keys(P.players)).filter(u=>(P.lives||{})[u]>0); }
+function bmNext(P,u){ const o=P.order||Object.keys(P.players), al=o.filter(x=>(P.lives||{})[x]>0&&x!==u); if(!al.length) return u; let i=o.indexOf(u); for(let k=1;k<=o.length;k++){ const x=o[(i+k)%o.length]; if(al.includes(x)) return x; } return al[0]; }
+async function bmInit(P){ await pgLoadSyl(); const order=pgShuffle(Object.keys(P.players)); const now=Date.now()+3500; const lives={}; order.forEach(u=>lives[u]=BM.lives);
+  return {order, lives, out:{}, used:{}, ty:{u:"",s:""}, last:null, boom:null, bomb:{h:order[0], syl:bmPickSyl(0), n:0, k:0, ts:now+BM.intro, end:now+BM.intro+bmFuse()}}; }
+function bmTick(){
+  const pg=S.pg, P=pg.party, B=P.bomb, now=Date.now(); if(!B) return;
+  if(pg.bk!==B.k){ pg.bk=B.k; pg.bcur=""; }
+  if(now>B.end+300&&pg.boomFor!==B.n){ pg.boomFor=B.n; const {fsM,db}=CLOUD.fb, ref=pgRef(pg.code), n=B.n;
+    fsM.runTransaction(db, async tx=>{ const d=(await tx.get(ref)).data(); const b=d.bomb; if(!b||b.n!==n||d.state!=="play") return;
+      const lives={...d.lives}; lives[b.h]=Math.max(0,(lives[b.h]||0)-1); const up={["lives."+b.h]:lives[b.h], boom:{u:b.h, at:Date.now(), syl:b.syl}};
+      if(lives[b.h]===0) up["out."+b.h]=Date.now();
+      const alive=(d.order||[]).filter(u=>lives[u]>0), solo=(d.order||[]).length<2;
+      if(alive.length===0||(!solo&&alive.length<=1)){ up.state="done"; up.end=Date.now(); }
+      else { const D={...d, lives}; const h=lives[b.h]>0?bmNext(D,b.h):bmNext(D,b.h); const t=Date.now()+BM.intro; up.bomb={h, syl:bmPickSyl(b.k+1), n:b.n+1, k:b.k+1, ts:t, end:t+bmFuse()}; up.ty={u:"",s:""}; }
+      tx.update(ref,up); }).catch(()=>{ pg.boomFor=null; });
+  }
+}
+function bmPushTy(){ const pg=S.pg; clearTimeout(pg.tyT); pg.tyT=setTimeout(()=>{ CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{ty:{u:pgMe(), s:(pg.bcur||"").slice(0,20)}}).catch(()=>{}); },220); }
+function bmKey(k){
+  const pg=S.pg; if(!pg||!pg.party||pg.party.state!=="play"||pg.party.game!=="bomb") return false;
+  const B=pg.party.bomb; if(!B||B.h!==pgMe()||Date.now()<B.ts) return true;
+  if(pg.bk!==B.k){ pg.bk=B.k; pg.bcur=""; }
+  if(k==="enter") { bmSubmit(); return true; }
+  if(k==="back") pg.bcur=(pg.bcur||"").slice(0,-1); else if(/^[a-z]$/.test(k)&&(pg.bcur||"").length<20) pg.bcur=(pg.bcur||"")+k; else return true;
+  bmPushTy(); pgRender(); return true;
+}
+function bmMe(){ const pg=S.pg; if(!pg.B){ const p=pg.ps[pgMe()]||{}; pg.B={words:[...(p.words||[])], bad:[...(p.bad||[])], abc:p.abc||""}; } return pg.B; }
+function bmSave(){ const pg=S.pg, M=bmMe(); CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), words:M.words, bad:M.bad.slice(-30), abc:M.abc},{merge:true}).catch(()=>{}); }
+async function bmSubmit(){
+  const pg=S.pg, P=pg.party, B=P.bomb, w=(pg.bcur||"").toLowerCase(), M=bmMe();
+  if(w.length<3){ pg.shake=Date.now(); pgRender(); return toast(T("pgTooShort")); }
+  if(!w.includes(B.syl)){ pg.shake=Date.now(); pgRender(); return toast(T("bmNeed",{s:B.syl.toUpperCase()})); }
+  if(!PG_WORDS||!PG_WORDS.size){ pgLoadWords(); return toast(T("loading")); }
+  if((P.used||{})[w]){ pg.shake=Date.now(); pg.bcur=""; bmPushTy(); pgRender(); return toast(T("bmUsed")); }
+  if(!PG_WORDS.has(w)){ pg.shake=Date.now(); if(!M.bad.includes(w)) M.bad.push(w); bmSave(); pg.bcur=""; bmPushTy(); pgRender(); return toast(T("pgInvalid")); }
+  const {fsM,db}=CLOUD.fb, ref=pgRef(pg.code); let ok=false, lifeUp=false;
+  let abc=M.abc; for(const c of w) if(BM.abc.includes(c)&&!abc.includes(c)) abc+=c;
+  if([...BM.abc].every(c=>abc.includes(c))){ lifeUp=true; }
+  try{ await fsM.runTransaction(db, async tx=>{ const d=(await tx.get(ref)).data(); const b=d.bomb; if(!b||b.k!==B.k||b.h!==pgMe()||d.state!=="play"||Date.now()>b.end) return;
+    const up={["used."+w]:pgMe(), last:{u:pgMe(), w, at:Date.now()}, ty:{u:"",s:""}};
+    const lives={...d.lives}; if(lifeUp&&lives[pgMe()]<BM.maxLives){ lives[pgMe()]++; up["lives."+pgMe()]=lives[pgMe()]; }
+    up.bomb={...b, h:bmNext({...d,lives},pgMe()), syl:bmPickSyl(b.k+1), k:b.k+1, ts:Date.now()};
+    tx.update(ref,up); ok=true; }); }catch(e){}
+  if(ok){ M.words.push(w); M.abc=lifeUp?"":abc; if(lifeUp) toast(T("bmLifeUp")); pg.flashOk=Date.now(); bmSave(); }
+  pg.bcur=""; pgRender();
+}
+function bmKeyboard(active){ return `<div class="wd-kb${active?"":" off"}">${WD_KB.map(row=>`<div class="wd-kr">${[...row].map(ch=>ch==="+"?`<button class="wd-k wide" data-act="pgkey" data-k="enter" ${active?"":"disabled"}>${T("wdEnter")}</button>`:ch==="-"?`<button class="wd-k wide" data-act="pgkey" data-k="back" aria-label="back" ${active?"":"disabled"}>⌫</button>`:`<button class="wd-k" data-act="pgkey" data-k="${ch}" ${active?"":"disabled"}>${ch.toUpperCase()}</button>`).join("")}</div>`).join("")}</div>`; }
+function bmSections(){
+  const pg=S.pg, P=pg.party, B=P.bomb, now=Date.now(); if(!B) return [["pgStage",`<p class="muted">${T("loading")}</p>`]];
+  if(pg.bk!==B.k){ pg.bk=B.k; pg.bcur=""; }
+  const mine=B.h===pgMe(), lives=P.lives||{}, order=P.order||Object.keys(P.players), M=bmMe();
+  const ring=`<div class="bm-ring">${order.map(u=>{ const l=lives[u]||0; return `<div class="bm-p${u===B.h?" hold":""}${l<=0?" out":""}${u===pgMe()?" me":""}"><b>${u===B.h?"💣 ":""}${esc(pgNm(u))}</b><span>${l<=0?"💀":"❤️".repeat(l)}</span></div>`; }).join("")}</div>`;
+  const boom=P.boom&&now-P.boom.at<1600;
+  const typing=mine?(pg.bcur||""):((P.ty&&P.ty.u===B.h)?P.ty.s:"");
+  const intro=now<B.ts, urgent=B.end-now<4000&&!intro;
+  const hl=s=>{ const i=s.indexOf(B.syl); return i<0?esc(s.toUpperCase()):esc(s.slice(0,i).toUpperCase())+`<u>${esc(B.syl.toUpperCase())}</u>`+esc(s.slice(i+B.syl.length).toUpperCase()); };
+  const last=P.last&&now-P.last.at<6000?`<div class="bm-last">✅ ${esc(pgNm(P.last.u))}: <b>${esc(P.last.w)}</b></div>`:`<div class="bm-last">&nbsp;</div>`;
+  const center=`<div class="bm-center${boom?" boom":""}">${boom?`<div class="bm-bang">💥</div><div class="bm-msg">${T("bmBoom",{n:esc(pgNm(P.boom.u))})}</div>`:`
+    <div class="bm-bomb${urgent?" urgent":""}">💣</div>
+    <div class="bm-syl">${esc(B.syl.toUpperCase())}</div>
+    <div class="bm-type${pg.shake&&now-pg.shake<500&&mine?" shake":""}${pg.flashOk&&now-pg.flashOk<600?" ok":""}">${typing?hl(typing):`<span class="muted sm-t">${intro?T("pgGetReady"):mine?T("bmTurn"):T("bmWait",{n:esc(pgNm(B.h))})}</span>`}</div>`}${last}</div>`;
+  const abc=`<div class="bm-abc" title="${T("bmAbc")}">${[...BM.abc].map(c=>`<span class="${M.abc.includes(c)?"on":""}">${c.toUpperCase()}</span>`).join("")}</div>`;
+  const alive=(lives[pgMe()]||0)>0;
+  return [["pgBoard",ring],["pgStage",center],["pgAbc",alive?abc:`<p class="muted sm-t" style="text-align:center">${T("pgOut")}</p>`],["pgKb",alive?bmKeyboard(mine&&!intro):""]];
+}
+
+/* ----- game 4: quiz gold rush (Gimkit style) ----- */
+const QZ={sec:180, inc:[10,20,40,80,150], incCost:[0,60,200,600,1500], mult:[1,1.5,2,3], multCost:[0,150,500,1500], freeze:120, steal:200, shield:100, freezeMs:6000, stealPct:0.15};
+let PG_QUIZ=null;
+async function pgLoadQuiz(){ if(PG_QUIZ) return PG_QUIZ; try{ PG_QUIZ=(await (await fetch("games/quiz.json")).json()).q||[]; }catch(e){ PG_QUIZ=[]; } return PG_QUIZ; }
+function qzMine(){ const pg=S.pg; if(!pg.Q){ const p=pg.ps[pgMe()]||{}; pg.Q={gold:p.gold||0, ok:p.ok||0, ng:p.ng||0, streak:0, best:p.best||0, inc:p.inc||0, mult:p.mult||0, shield:p.shield||0, frozen:0, frozenBy:"", miss:[...(p.miss||[])], seen:{}, q:null, fb:null, gifted:Object.fromEntries(Object.keys(p.gifts||{}).map(k=>[k,1])), sent:0}; } return pg.Q; }
+function qzSave(){ const pg=S.pg, Q=qzMine(); clearTimeout(pg.qT); pg.qT=setTimeout(()=>CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), gold:Math.round(Q.gold), ok:Q.ok, ng:Q.ng, best:Q.best, inc:Q.inc, mult:Q.mult, shield:Q.shield, miss:Q.miss.slice(-40)},{merge:true}).catch(()=>{}),200); }
+const qzMean=o=>o.m[PG_LI[LANG]]||o.m[5];
+function qzNew(){
+  const Q=qzMine(), all=PG_QUIZ||[]; if(all.length<8) return null;
+  let o, tries=0; do{ o=all[Math.floor(Math.random()*all.length)]; tries++; }while(Q.seen[o.w]&&tries<40); Q.seen[o.w]=1;
+  const same=all.filter(x=>x.w!==o.w&&x.p===o.p), pool=same.length>=6?same:all.filter(x=>x.w!==o.w);
+  const pick3=(f)=>{ const out=[], used=new Set(); let g=0; while(out.length<3&&g<200){ const x=pool[Math.floor(Math.random()*pool.length)]; g++; const v=f(x); if(!v||used.has(v)||v===f(o)) continue; used.add(v); out.push(v); } return out; };
+  const types=["m2w","w2m"]; if(o.s&&o.s.length) types.push("syn"); if(o.x) types.push("blank");
+  const t=types[Math.floor(Math.random()*types.length)];
+  let prompt, right, wrong;
+  if(t==="m2w"){ prompt=`<span class="chip">${esc(o.p)}</span> ${esc(qzMean(o))}`; right=o.w; wrong=pick3(x=>x.w); }
+  else if(t==="w2m"){ prompt=`<b class="qz-word">${esc(o.w)}</b> <span class="chip">${esc(o.p)}</span>`; right=qzMean(o); wrong=pick3(x=>qzMean(x)); }
+  else if(t==="syn"){ prompt=`<b class="qz-word">${esc(o.w)}</b>`; right=o.s[0]; wrong=pick3(x=>(o.s.includes(x.w)?null:x.w)); }
+  else { prompt=`<span class="qz-ex">${esc(o.x).replace(new RegExp("\\b"+o.w+"\\b","i"),"<b>_____</b>")}</span>`; right=o.w; wrong=pick3(x=>x.w); }
+  const opts=pgShuffle([right,...wrong]);
+  Q.q={o, t, prompt, opts, a:opts.indexOf(right)}; return Q.q;
+}
+const qzEarn=Q=>Math.round(QZ.inc[Q.inc]*QZ.mult[Q.mult]*(1+Math.min(Q.streak,5)*0.1));
+function qzAnswer(i){
+  const pg=S.pg, Q=qzMine(), now=Date.now(); if(!Q.q||Q.fb||now<Q.frozen||pg.party.state!=="play") return;
+  const q=Q.q, ok=i===q.a;
+  if(ok){ Q.streak++; Q.best=Math.max(Q.best,Q.streak); const g=qzEarn(Q); Q.gold+=g; Q.ok++; Q.fb={ok:true, i, g, at:now}; }
+  else { Q.streak=0; const lose=Math.round(QZ.inc[Q.inc]/2); Q.gold=Math.max(0,Q.gold-lose); Q.ng++; if(!Q.miss.includes(q.o.w)) Q.miss.push(q.o.w); Q.fb={ok:false, i, g:-lose, at:now}; }
+  qzSave(); pgRender();
+  setTimeout(()=>{ if(S.pg!==pg) return; Q.fb=null; qzNew(); pgRender(); }, ok?650:1600);
+}
+function qzBuy(k){
+  const Q=qzMine();
+  const cost=k==="inc"?QZ.incCost[Q.inc+1]:k==="mult"?QZ.multCost[Q.mult+1]:k==="shield"?QZ.shield:null;
+  if(cost==null) return toast(T("qzMax"));
+  if(Q.gold<cost) return toast(T("qzNoMoney"));
+  Q.gold-=cost; if(k==="inc") Q.inc++; else if(k==="mult") Q.mult++; else Q.shield++;
+  toast(T("qzBought")); qzSave(); pgRender();
+}
+function qzAttack(kind,to){
+  const pg=S.pg, Q=qzMine(), cost=kind==="freeze"?QZ.freeze:QZ.steal;
+  if(Q.gold<cost) return toast(T("qzNoMoney"));
+  Q.gold-=cost; qzSave(); const id=pgMe().slice(0,6)+"-q"+(++Q.sent)+"-"+Date.now();
+  CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",to),{["gifts."+id]:{k:kind, f:pgMe(), at:Date.now()}}).then(()=>toast(T("qzSentAtk",{n:pgNm(to)}))).catch(()=>toast(T("syncFail")));
+  pg.qzPick=null; pg.qzShop=false; pgRender();
+}
+function qzGifts(){
+  const pg=S.pg; if(!pg||!pg.party) return; const Q=qzMine(), gs=(pg.ps[pgMe()]||{}).gifts||{};
+  for(const [id,g] of Object.entries(gs)){ if(Q.gifted[id]) continue; Q.gifted[id]=1;
+    if(g.k==="loot"){ Q.gold+=g.amt||0; toast(T("qzLoot",{a:g.amt||0})); continue; }
+    if(g.k!=="freeze"&&g.k!=="steal") continue;
+    if(Q.shield>0){ Q.shield--; toast(T("qzBlocked",{n:pgNm(g.f)})); continue; }
+    if(g.k==="freeze"){ Q.frozen=Date.now()+QZ.freezeMs; Q.frozenBy=g.f; toast(T("qzFrozen",{n:pgNm(g.f)})); }
+    else { const amt=Math.floor(Q.gold*QZ.stealPct); Q.gold-=amt; toast(T("qzStolen",{n:pgNm(g.f),a:amt})); if(amt>0){ const lid=pgMe().slice(0,6)+"-l"+(++Q.sent)+"-"+Date.now(); CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",g.f),{["gifts."+lid]:{k:"loot", f:pgMe(), amt, at:Date.now()}}).catch(()=>{}); } }
+  }
+  qzSave(); pgRender();
+}
+function qzTick(){ const pg=S.pg, P=pg.party, now=Date.now(); if(now<P.start) return; if(!PG_QUIZ){ pgLoadQuiz(); return; } const Q=qzMine(); if(!Q.q&&!Q.fb) qzNew(); if(now>P.start+QZ.sec*1000+500) pgEndGame(); }
+function qzSections(){
+  const pg=S.pg, P=pg.party, now=Date.now();
+  if(now<P.start||!PG_QUIZ) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("qzSub")}</p></div>`]];
+  const Q=qzMine(), left=Math.max(0,Math.ceil((P.start+QZ.sec*1000-now)/1000));
+  const golds=Object.keys(P.players).map(u=>({u, g:u===pgMe()?Math.round(Q.gold):((pg.ps[u]||{}).gold||0)})).sort((a,b)=>b.g-a.g);
+  const board=`<div class="pg-board">${golds.map(x=>`<div class="pg-chip${x.u===pgMe()?" me":""}"><b>${esc(pgNm(x.u))}</b><span>🪙${x.g}</span></div>`).join("")}</div>`;
+  const top=`<div class="row" style="justify-content:space-between;align-items:center"><span class="eyebrow">${T("pgTotal",{s:left})}</span><span class="qz-gold">🪙 ${Math.round(Q.gold)}</span></div>
+    <div class="dp-life"><i style="width:${left/QZ.sec*100}%"></i></div>
+    <div class="qz-stat sm-t"><span>+${qzEarn(Q)}/${T("qzPerQ")}</span><span>×${QZ.mult[Q.mult]}</span><span>🔥 ${Q.streak}</span>${Q.shield?`<span>🛡×${Q.shield}</span>`:""}<button class="btn sm qz-shopbtn" data-act="qzshop">🛒 ${T("qzShop")}</button></div>`;
+  let main;
+  if(pg.qzShop){
+    const mates=Object.keys(P.players).filter(u=>u!==pgMe());
+    const up=(k,lab,lv,costs,vals)=>{ const nx=costs[lv+1]; return `<div class="qz-item"><div><b>${lab}</b><div class="muted sm-t">${vals[lv]} ${nx!=null?`→ ${vals[lv+1]}`:""}</div></div>${nx!=null?`<button class="btn sm" data-act="qzbuy" data-k="${k}" ${Q.gold<nx?"disabled":""}>🪙${nx}</button>`:`<span class="chip done">${T("qzMax")}</span>`}</div>`; };
+    const atk=(k,lab,c)=>`<div class="qz-item"><div><b>${lab}</b></div>${mates.length?`<button class="btn sm" data-act="qzpick" data-k="${k}" ${Q.gold<c?"disabled":""}>🪙${c}</button>`:`<span class="muted sm-t">–</span>`}</div>${pg.qzPick===k?`<div class="qz-targets">${mates.map(u=>`<button class="btn ghost sm" data-act="qzatk" data-k="${esc(u)}">${esc(pgNm(u))} 🪙${(pg.ps[u]||{}).gold||0}</button>`).join("")}</div>`:""}`;
+    main=`<div class="qz-shop"><div class="row" style="justify-content:space-between"><b>🛒 ${T("qzShop")}</b><button class="btn ghost sm" data-act="qzshop">${T("qzClose")}</button></div>
+      ${up("inc",T("qzUpInc"),Q.inc,QZ.incCost,QZ.inc.map(x=>"+"+x))}${up("mult",T("qzUpMult"),Q.mult,QZ.multCost,QZ.mult.map(x=>"×"+x))}
+      <div class="qz-item"><div><b>${T("qzShield")}</b><div class="muted sm-t">🛡×${Q.shield}</div></div><button class="btn sm" data-act="qzbuy" data-k="shield" ${Q.gold<QZ.shield?"disabled":""}>🪙${QZ.shield}</button></div>
+      ${atk("freeze",T("qzFreeze"),QZ.freeze)}${atk("steal",T("qzSteal"),QZ.steal)}</div>`;
+  } else if(now<Q.frozen){
+    main=`<div class="qz-frozen"><div class="qz-ice">❄️</div><b>${T("qzFrozen",{n:esc(pgNm(Q.frozenBy))})}</b><div class="sp-count">${Math.ceil((Q.frozen-now)/1000)}</div></div>`;
+  } else if(Q.q){
+    const q=Q.q, fb=Q.fb, title={m2w:T("qzQ1"),w2m:T("qzQ2"),syn:T("qzQ3"),blank:T("qzQ4")}[q.t];
+    main=`<div class="qz-card${fb?(fb.ok?" ok":" ng"):""}"><div class="eyebrow">${title}</div><div class="qz-prompt">${q.prompt}</div>
+      ${fb?`<div class="qz-fb ${fb.ok?"ok":"ng"}">${fb.ok?T("qzRight",{g:fb.g}):`${T("qzWrongA",{w:esc(q.opts[q.a])})} · <span class="sm-t">${esc(q.o.w)} = ${esc(qzMean(q.o))}</span>`}</div>`:""}</div>
+      <div class="qz-opts">${q.opts.map((t,i)=>`<button class="qz-opt${fb?(i===q.a?" right":i===fb.i?" wrong":" dim"):""}" data-act="qzans" data-k="${i}" ${fb?"disabled":""}>${esc(t)}</button>`).join("")}</div>`;
+  } else main=`<p class="muted">${T("loading")}</p>`;
+  return [["pgBoard",board],["pgTop",top],["pgStage",main]];
+}
+
 /* ----- results ----- */
 function pgRows(){
   const pg=S.pg, P=pg.party, ids=Object.keys(P.players);
   if(P.game==="spell"){ const sc=spScores(P), n=(P.words||[]).length||1;
     return ids.map(u=>{ let tries=0, hits=0; for(let i=0;i<n;i++){ const r=wdRec(u,i); tries+=(r.g||[]).length; if(r.done==="win") hits++; } return {u, score:sc[u]||0, tries, hits, misses:tries-hits, acc:Math.round(hits/n*100)}; }).sort((a,b)=>b.score-a.score||b.hits-a.hits||a.tries-b.tries); }
+  if(P.game==="bomb") return ids.map(u=>{ const p=u===pgMe()&&pg.B?pg.B:(pg.ps[u]||{}), words=p.words||[], alive=((P.lives||{})[u]||0)>0; return {u, words, bad:p.bad||[], n:words.length, alive, lives:(P.lives||{})[u]||0, outAt:(P.out||{})[u]||0, longest:words.reduce((a,w)=>w.length>a.length?w:a,""), score:words.length*5+(alive?20:0)}; }).sort((a,b)=>(b.alive-a.alive)||(b.outAt-a.outAt)||(b.n-a.n));
+  if(P.game==="quiz") return ids.map(u=>{ const p=u===pgMe()&&pg.Q?pg.Q:(pg.ps[u]||{}), gold=Math.round(p.gold||0), ok=p.ok||0, ng=p.ng||0; return {u, gold, ok, ng, best:p.best||0, acc:ok+ng?Math.round(ok/(ok+ng)*100):0, miss:p.miss||[], score:Math.min(120,Math.round(gold/25))}; }).sort((a,b)=>b.gold-a.gold||b.acc-a.acc);
   return ids.map(u=>{ const p=u===pgMe()&&pg.L?{words:pg.L.words,bad:pg.L.bad,pts:pg.L.pts,last:pg.L.last}:(pg.ps[u]||{}); return {u, words:p.words||[], bad:p.bad||[], score:p.pts||0, n:(p.words||[]).length}; }).sort((a,b)=>b.n-a.n||b.score-a.score);
 }
 function pgFinish(){
@@ -3114,7 +3302,7 @@ function pgFinish(){
 }
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
-  const sp=S.pg.party.game==="spell", lab=r=>sp?T("pgPtsN",{n:r.score}):T("pgWordsN",{n:r.n});
+  const gm=S.pg.party.game, lab=r=>gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
   const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
@@ -3127,6 +3315,16 @@ function pgResults(){
   if(P.game==="spell"){
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgScore")}</th><th>${T("pgTries")}</th><th>${T("pgHits")}</th><th>${T("pgMisses")}</th><th>${T("wdRate")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.score}</td><td>${r.tries}</td><td>${r.hits}</td><td>${r.misses}</td><td>${r.acc}%</td></tr>`).join("")}</table>`;
     extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${(P.words||[]).map((W,k)=>{ const first=wdFirstT(P,k), fu=Object.keys(P.players).find(u=>wdRec(u,k).done==="win"&&wdRec(u,k).t===first); return `<div class="co-err"><span class="chip ${fu?"done":"new"}">${k+1}</span><div style="flex:1"><b>${esc(W.w)}</b> <span class="muted sm-t">${esc(W.pos||"")}</span> · ${spMeaning(W)}<div class="muted sm-t">${fu?T("wdFirst",{n:esc(pgNm(fu))}):T("pgNobody")}</div><div class="wd-emo">${Object.keys(P.players).map(u=>{ const r=wdRec(u,k); return `<div><small>${esc(pgNm(u))} ${r.done==="win"?r.g.length:"X"}/${WD.tries}</small><div>${wdEmoji(r,W.w)||"–"}</div></div>`; }).join("")}</div></div></div>`; }).join("")}</div>`;
+  } else if(P.game==="quiz"){
+    stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>🪙</th><th>${T("qzOk")}</th><th>${T("qzNg")}</th><th>${T("pgAcc")}</th><th>${T("qzBest")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.gold}</td><td>${r.ok}</td><td>${r.ng}</td><td>${r.acc}%</td><td>${r.best}</td></tr>`).join("")}</table>`;
+    const mine=(rows.find(r=>r.u===pgMe())||{miss:[]}).miss, byW=Object.fromEntries((PG_QUIZ||[]).map(o=>[o.w,o]));
+    extra=`<h3>${T("qzMissed")}</h3>${mine.length?`<div class="co-list">${mine.map(w=>{ const o=byW[w]; return `<div class="co-err"><span class="chip new">✗</span><div><b>${esc(w)}</b> ${o?`<span class="muted sm-t">${esc(o.p)}</span> · ${esc(qzMean(o))}${o.s&&o.s.length?`<div class="muted sm-t">≈ ${esc(o.s.join(", "))}</div>`:""}${o.x?`<div class="sm-t"><i>${esc(o.x)}</i></div>`:""}`:""}</div></div>`; }).join("")}</div>`:`<p class="muted sm-t">${T("qzNoMissed")}</p>`}`;
+  } else if(P.game==="bomb"){
+    pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
+    stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgValidN")}</th><th>${T("bmLongest")}</th><th>${T("pgBadN")}</th><th>❤️</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.n}</td><td>${esc(r.longest||"–")}</td><td>${r.bad.length}</td><td>${r.alive?"❤️".repeat(r.lives):"💀"}</td></tr>`).join("")}</table>`;
+    const all=Object.entries(P.used||{}), weird=rows.flatMap(r=>r.bad.map(w=>({w,u:r.u})));
+    extra=`<h3>${T("pgAllWords")}</h3>${all.length?`<div class="co-list">${all.map(([w,u])=>{ const m=pgMeanOf(w); return `<div class="co-err"><span class="chip done">${esc(w.length)}</span><div><b>${esc(w)}</b> <span class="muted sm-t">· ${esc(pgNm(u))}</span><div class="sm-t">${m||`<a href="${pgLookup(w)}" target="_blank" rel="noopener">${T("pgLookup")} ↗</a>`}</div></div></div>`; }).join("")}</div>`:`<p class="muted sm-t">–</p>`}
+      <h3>${T("pgWeird")}</h3>${weird.length?`<div class="pg-weird">${weird.map(x=>`<span class="chip new"><s>${esc(pgMask(x.w))}</s> <small>${esc(pgNm(x.u))}</small></span>`).join("")}</div>`:`<p class="muted sm-t">${T("pgNoWeird")}</p>`}`;
   } else {
     pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgValidN")}</th><th>${T("pgScore")}</th><th>${T("pgBadN")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.n}</td><td>${r.score}</td><td>${r.bad.length}</td></tr>`).join("")}</table>`;
@@ -3144,13 +3342,13 @@ function pgSections(){
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T(k==="spell"?"pgSpell":"pgDrop")}</b><p class="muted sm-t" style="margin:4px 0 8px">${T(k==="spell"?"pgSpellSub":"pgDropSub",{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName"}[k])}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
     return [["pgMain",`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>${login}
-      ${card("spell","🔤")}${card("drop","🌧")}
+      ${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}
       ${CLOUD.user?`<div class="row" style="flex-wrap:nowrap"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn ghost" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div>`:""}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
-  const kind=P.game==="spell"?T("pgSpell"):T("pgDrop");
+  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName"}[P.game]||"pgDrop");
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
@@ -3160,7 +3358,7 @@ function pgSections(){
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
   if(P.state==="done") return [["pgMain",pgResults()]];
-  const secs=P.game==="spell"?spSections():dpSections();
+  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections}[P.game]||dpSections)();
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
@@ -3182,7 +3380,12 @@ function pgAct(a,t){
   if(a==="pgleave"){ S.pgQuitAsk=false; return pgLeave(); }
   if(a==="pgquit"){ S.pgQuitAsk=true; return pgRender(); }
   if(a==="pgquitno"){ S.pgQuitAsk=false; return pgRender(); }
-  if(a==="pgkey") return wdKey(t.dataset.k);
+  if(a==="pgkey"){ if(!wdKey(t.dataset.k)) bmKey(t.dataset.k); return; }
+  if(a==="qzans") return qzAnswer(+t.dataset.k);
+  if(a==="qzshop"){ S.pg.qzShop=!S.pg.qzShop; S.pg.qzPick=null; return pgRender(); }
+  if(a==="qzbuy") return qzBuy(t.dataset.k);
+  if(a==="qzpick"){ S.pg.qzPick=S.pg.qzPick===t.dataset.k?null:t.dataset.k; return pgRender(); }
+  if(a==="qzatk") return qzAttack(S.pg.qzPick,t.dataset.k);
   if(a==="pgwatch"){ if(S.pg) S.pg.watch=t.dataset.k; return pgRender(); }
   if(a==="pgkeep") return pgFallKeep();
   if(a==="pgpass") return pgFallPass(t.dataset.k);
@@ -3222,7 +3425,7 @@ Object.assign(STR.hi,{"cmParty": "पार्टी गेम", "pgTitle": "श
 Object.assign(STR.es,{"cmParty": "Juegos en grupo", "pgTitle": "Fiesta de palabras", "pgSub": "¡Juega con 2–6 personas! Crea una sala y comparte el código de 4 cifras con tus amigos.", "pgSpell": "🔤 Carrera de deletreo", "pgSpellSub": "En cada ronda solo ves dos letras y el significado. Quien escriba primero la palabra completa gana puntos. 10 rondas; cuanto antes, más puntos.", "pgDrop": "🌧 Lluvia de letras", "pgDropSub": "Cada 3 segundos cae una letra sobre tu cabeza. Quédatela o pásasela a un compañero. Forma una palabra y envíala; si no formas una palabra real en {s} segundos, quedas fuera.", "pgCreate": "Crear sala", "pgJoin": "Unirse", "pgCodePh": "Código de sala", "pgNeedLogin": "Inicia sesión con Google para jugar con otros.", "pgWaiting": "Esperando jugadores… ({n}/6)", "pgStart": "Empezar", "pgStartSolo": "Practicar solo primero", "pgHostStarts": "Esperando a que el anfitrión empiece…", "pgLeave": "Salir", "pgQuitQ": "¿Salir de esta partida?", "pgFull": "La sala está llena (máx. 6)", "pgNoRoom": "No se encontró la sala", "pgStarted": "La partida ya empezó. ¡Únete a la próxima!", "pgGetReady": "¡Prepárate!", "pgRound": "Ronda {i} / {n}", "pgGuessPh": "Escribe tu respuesta", "pgGuess": "¡Probar!", "pgRight": "¡Correcto! +{p} puntos", "pgLate": "Correcto, pero alguien fue más rápido", "pgWrong": "No, inténtalo otra vez", "pgWonBy": "¡{n} la acertó!", "pgNobody": "Se acabó el tiempo, nadie la acertó", "pgLeft": "Quedan {s} s", "pgHintOn": "Mitad del tiempo: una letra más", "pgYourTries": "Tus intentos:", "pgScore": "Puntos", "pgTries": "Intentos", "pgHits": "Aciertos", "pgMisses": "Fallos", "pgAcc": "Precisión", "pgPodium": "🏆 Podio", "pgStats": "Estadísticas", "pgWordsReview": "Palabras de esta partida", "pgAgain": "Volver al lobby", "pgRewardNone": "Practicar solo no da premios. ¡Invita a tus amigos!", "pgYou": "Tú", "pgPlayers": "Jugador", "pgPtsN": "{n} pts", "pgLife": "Fuera en {s} s", "pgTotal": "Quedan {s} s", "pgKeep": "Quedármela", "pgPassTo": "Pasar a {n}", "pgHandFull": "Tienes la mano llena", "pgDropped": "Mano llena, la letra se cayó", "pgGift": "{n} te pasó «{l}»", "pgSent": "Pasada a {n}", "pgSubmit": "Enviar", "pgClear": "Borrar", "pgDiscard": "Descartar", "pgTooShort": "Mínimo 3 letras", "pgUsed": "Ya usaste esta palabra", "pgValid": "¡Buena palabra! +{p} puntos", "pgInvalid": "Esa palabra no está en el diccionario", "pgOut": "¡Quedaste fuera! Sigue mirando a tu equipo", "pgOutTag": "Fuera", "pgWordsN": "{n} palabras", "pgValidN": "Válidas", "pgBadN": "Erróneas", "pgAllWords": "Palabras de todos", "pgWeird": "Palabras raras inventadas", "pgNoWeird": "¡Nadie se equivocó, increíble!", "pgLookup": "Buscar", "pgTapLetters": "Toca letras para formar una palabra", "pgNextDrop": "La siguiente letra está a punto de caer…"});
 Object.assign(STR.ja,{"cmParty": "パーティーゲーム", "pgTitle": "単語パーティー", "pgSub": "2〜6人で遊べます！ルームを作って、4桁のコードを友達に送ろう。", "pgSpell": "🔤 スペル早押し", "pgSpellSub": "毎問、2文字と意味だけが表示されます。最初に単語を全部つづった人が得点。全10問、早いほど高得点。", "pgDrop": "🌧 文字の雨", "pgDropSub": "3秒ごとに頭の上に文字が落ちてきます。自分で持つか、仲間に渡すか選ぼう。単語を作って送信。{s}秒以内に正しい単語を作れないと脱落。", "pgCreate": "ルームを作る", "pgJoin": "参加", "pgCodePh": "ルームコード", "pgNeedLogin": "みんなで遊ぶには Google でログインしてください。", "pgWaiting": "参加者を待っています…（{n}/6）", "pgStart": "ゲーム開始", "pgStartSolo": "まず一人で練習", "pgHostStarts": "ホストの開始を待っています…", "pgLeave": "退出", "pgQuitQ": "このゲームから退出しますか？", "pgFull": "ルームが満員です（最大6人）", "pgNoRoom": "ルームが見つかりません", "pgStarted": "ゲームはもう始まっています。次のゲームに参加しよう！", "pgGetReady": "準備して！", "pgRound": "第 {i} / {n} 問", "pgGuessPh": "答えを入力", "pgGuess": "答える！", "pgRight": "正解！+{p}点", "pgLate": "正解、でも一歩遅かった", "pgWrong": "ちがいます、もう一度", "pgWonBy": "{n} が正解！", "pgNobody": "時間切れ、だれも当てられませんでした", "pgLeft": "残り {s} 秒", "pgHintOn": "半分経過：もう1文字ヒント", "pgYourTries": "あなたの回答：", "pgScore": "得点", "pgTries": "回答数", "pgHits": "正解", "pgMisses": "不正解", "pgAcc": "正答率", "pgPodium": "🏆 表彰台", "pgStats": "全体の成績", "pgWordsReview": "今回の単語", "pgAgain": "ロビーへ戻る", "pgRewardNone": "一人練習では報酬はありません。友達を誘おう！", "pgYou": "あなた", "pgPlayers": "プレイヤー", "pgPtsN": "{n}点", "pgLife": "脱落まで {s} 秒", "pgTotal": "残り {s} 秒", "pgKeep": "持つ", "pgPassTo": "{n} に渡す", "pgHandFull": "手札がいっぱいです", "pgDropped": "手札がいっぱいで文字が落ちました", "pgGift": "{n} から「{l}」が届いた", "pgSent": "{n} に渡しました", "pgSubmit": "送信", "pgClear": "クリア", "pgDiscard": "捨てる", "pgTooShort": "3文字以上", "pgUsed": "その単語はもう使いました", "pgValid": "いい単語！+{p}点", "pgInvalid": "辞書にない単語です", "pgOut": "脱落しました！仲間の応援をしよう", "pgOutTag": "脱落", "pgWordsN": "{n} 語", "pgValidN": "正しい", "pgBadN": "まちがい", "pgAllWords": "みんなの単語", "pgWeird": "へんな造語", "pgNoWeird": "だれもまちがえなかった、すごい！", "pgLookup": "辞書で調べる", "pgTapLetters": "文字をタップして単語を作ろう", "pgNextDrop": "次の文字がもうすぐ落ちてくる…"});
 Object.assign(STR.ko,{"cmParty": "파티 게임", "pgTitle": "단어 파티", "pgSub": "2~6명이 함께 놀아요! 방을 만들고 4자리 코드를 친구에게 보내세요.", "pgSpell": "🔤 철자 맞히기", "pgSpellSub": "매 문제마다 글자 두 개와 뜻만 보여요. 단어 전체를 가장 먼저 쓴 사람이 점수를 받아요. 총 10문제, 빠를수록 점수가 높아요.", "pgDrop": "🌧 글자 비", "pgDropSub": "3초마다 머리 위로 글자가 떨어져요. 가질지 팀원에게 넘길지 고르세요. 단어를 만들어 보내고, {s}초 안에 올바른 단어를 못 만들면 탈락이에요.", "pgCreate": "방 만들기", "pgJoin": "참가", "pgCodePh": "방 코드", "pgNeedLogin": "다른 사람과 하려면 Google로 로그인하세요.", "pgWaiting": "플레이어 기다리는 중… ({n}/6)", "pgStart": "게임 시작", "pgStartSolo": "먼저 혼자 연습", "pgHostStarts": "방장이 시작하기를 기다리는 중…", "pgLeave": "나가기", "pgQuitQ": "이 게임에서 나갈까요?", "pgFull": "방이 꽉 찼어요 (최대 6명)", "pgNoRoom": "방을 찾을 수 없어요", "pgStarted": "게임이 이미 시작됐어요. 다음 판에 참가하세요!", "pgGetReady": "준비!", "pgRound": "{i} / {n} 문제", "pgGuessPh": "답을 입력하세요", "pgGuess": "맞히기!", "pgRight": "정답! +{p}점", "pgLate": "정답이지만 한발 늦었어요", "pgWrong": "틀렸어요, 다시 해 보세요", "pgWonBy": "{n} 정답!", "pgNobody": "시간 끝, 아무도 못 맞혔어요", "pgLeft": "{s}초 남음", "pgHintOn": "절반 지남: 글자 하나 더", "pgYourTries": "내가 쓴 답:", "pgScore": "점수", "pgTries": "시도", "pgHits": "정답", "pgMisses": "오답", "pgAcc": "정확도", "pgPodium": "🏆 시상대", "pgStats": "전체 통계", "pgWordsReview": "이번 게임의 단어", "pgAgain": "로비로", "pgRewardNone": "혼자 연습은 보상이 없어요. 친구를 불러 보세요!", "pgYou": "나", "pgPlayers": "플레이어", "pgPtsN": "{n}점", "pgLife": "탈락까지 {s}초", "pgTotal": "{s}초 남음", "pgKeep": "갖기", "pgPassTo": "{n}에게 넘기기", "pgHandFull": "손패가 가득 찼어요", "pgDropped": "손패가 가득 차서 글자가 떨어졌어요", "pgGift": "{n}님이 「{l}」를 보냈어요", "pgSent": "{n}에게 넘겼어요", "pgSubmit": "보내기", "pgClear": "지우기", "pgDiscard": "버리기", "pgTooShort": "최소 3글자", "pgUsed": "이미 쓴 단어예요", "pgValid": "좋은 단어! +{p}점", "pgInvalid": "사전에 없는 단어예요", "pgOut": "탈락했어요! 팀원을 응원하세요", "pgOutTag": "탈락", "pgWordsN": "{n}단어", "pgValidN": "정답", "pgBadN": "오답", "pgAllWords": "모두의 단어", "pgWeird": "이상한 단어들", "pgNoWeird": "아무도 틀리지 않았어요, 대단해요!", "pgLookup": "사전 찾기", "pgTapLetters": "글자를 눌러 단어를 만드세요", "pgNextDrop": "다음 글자가 곧 떨어져요…"});
-(()=>{ const PH={zh:["🎮","線上競賽：多人遊戲（2–6 人）","登入後建立房間，把 4 位數房號給朋友。🟩 單字猜猜（Wordle）：大家同時猜同一個 5 個字母的單字，每人 6 次，越少次猜中分數越高，5 題後頒獎。 🌧 字母雨：每 3 秒掉下一個字母，留著或傳給隊友，拼出單字送出，30 秒內沒拼出就出局；結束後會解釋大家拼的字，也會列出奇怪的錯字。"],en:["🎮","Contests: party games (2–6 players)","Sign in, create a room and give friends the 4-digit code. 🟩 Word race (Wordle): everyone guesses the same 5-letter word at once with 6 tries; fewer guesses score more, with a podium after 5 rounds. 🌧 Letter rain: a letter drops every 3 seconds; keep it or pass it to a teammate, and send real words. No word for 30 seconds and you're out. At the end you'll see everyone's words explained and the strange made-up ones."],hi:["🎮","प्रतियोगिता: पार्टी गेम (2–6 खिलाड़ी)","साइन इन करके कमरा बनाएँ और दोस्तों को 4 अंकों का कोड दें। 🟩 शब्द दौड़ (Wordle): सब एक साथ एक ही 5 अक्षर का शब्द 6 मौकों में बूझते हैं; कम कोशिश = ज़्यादा अंक, 5 राउंड के बाद विजेता मंच। 🌧 अक्षरों की बारिश: हर 3 सेकंड एक अक्षर गिरता है; रखें या साथी को दें, सही शब्द भेजें। 30 सेकंड तक शब्द नहीं तो बाहर।"],es:["🎮","Concursos: juegos en grupo (2–6 jugadores)","Inicia sesión, crea una sala y da a tus amigos el código de 4 cifras. 🟩 Carrera de palabras (Wordle): todos adivinan a la vez la misma palabra de 5 letras con 6 intentos; menos intentos dan más puntos, y hay podio tras 5 rondas. 🌧 Lluvia de letras: cae una letra cada 3 segundos; quédatela o pásala y envía palabras reales. 30 segundos sin palabra y quedas fuera."],ja:["🎮","オンライン対戦：パーティーゲーム（2〜6人）","ログインしてルームを作り、4桁のコードを友達に送ろう。🟩 ワードレース（Wordle）：全員で同じ5文字の単語を6回以内に当てる。少ない回数ほど高得点、5問のあと表彰式。 🌧 文字の雨：3秒ごとに文字が落ちてくるので、持つか仲間に渡して単語を作ろう。30秒単語を作れないと脱落。最後にみんなの単語の意味と、へんな造語が表示されます。"],ko:["🎮","온라인 대회: 파티 게임 (2~6명)","로그인 후 방을 만들고 4자리 코드를 친구에게 주세요. 🟩 단어 레이스 (Wordle): 모두 같은 5글자 단어를 6번 안에 맞혀요. 적은 횟수일수록 고득점, 5문제 후 시상식. 🌧 글자 비: 3초마다 글자가 떨어지면 갖거나 팀원에게 넘기고 단어를 만들어 보내요. 30초 동안 단어를 못 만들면 탈락. 끝나면 모두의 단어 뜻과 이상한 단어들을 보여 줘요."]}; for(const k in HELP){ const secs=HELP[k].secs; const j=secs.findIndex(x=>x[0]==="⚙️"); if(j>=0) secs.splice(j,0,PH[k]||PH.en); } })();
+(()=>{ const PH={zh:["🎮","線上競賽：多人遊戲（2–6 人）","登入後建立房間，把 4 位數房號給朋友。🟩 單字猜猜（Wordle）：大家同時猜同一個 5 個字母的單字，每人 6 次，越少次猜中分數越高，5 題後頒獎。 🌧 字母雨：每 3 秒掉下一個字母，留著或傳給隊友，拼出單字送出，30 秒內沒拼出就出局；結束後會解釋大家拼的字，也會列出奇怪的錯字。 💣 單字炸彈：輪到你時打出含有指定字母組合的單字把炸彈傳走，爆炸時拿著的人扣命。🎯 單字搶金賽：3 分鐘答題賺金幣，可以升級、冰凍或偷別人的金幣。"],en:["🎮","Contests: party games (2–6 players)","Sign in, create a room and give friends the 4-digit code. 🟩 Word race (Wordle): everyone guesses the same 5-letter word at once with 6 tries; fewer guesses score more, with a podium after 5 rounds. 🌧 Letter rain: a letter drops every 3 seconds; keep it or pass it to a teammate, and send real words. No word for 30 seconds and you're out. At the end you'll see everyone's words explained and the strange made-up ones. 💣 Word bomb: on your turn, type a word containing the given letters to pass the bomb; whoever holds it when it blows loses a life. 🎯 Quiz gold rush: answer for 3 minutes to earn gold, upgrade, and freeze or rob your rivals."],hi:["🎮","प्रतियोगिता: पार्टी गेम (2–6 खिलाड़ी)","साइन इन करके कमरा बनाएँ और दोस्तों को 4 अंकों का कोड दें। 🟩 शब्द दौड़ (Wordle): सब एक साथ एक ही 5 अक्षर का शब्द 6 मौकों में बूझते हैं; कम कोशिश = ज़्यादा अंक, 5 राउंड के बाद विजेता मंच। 🌧 अक्षरों की बारिश: हर 3 सेकंड एक अक्षर गिरता है; रखें या साथी को दें, सही शब्द भेजें। 30 सेकंड तक शब्द नहीं तो बाहर। 💣 शब्द बम: अपनी बारी पर दिए गए अक्षरों वाला शब्द लिखकर बम आगे भेजें; फटने पर जिसके पास हो उसकी जान जाती है। 🎯 क्विज़ सोना दौड़: 3 मिनट जवाब देकर सोना कमाएँ, अपग्रेड करें, विरोधियों को जमाएँ या लूटें।"],es:["🎮","Concursos: juegos en grupo (2–6 jugadores)","Inicia sesión, crea una sala y da a tus amigos el código de 4 cifras. 🟩 Carrera de palabras (Wordle): todos adivinan a la vez la misma palabra de 5 letras con 6 intentos; menos intentos dan más puntos, y hay podio tras 5 rondas. 🌧 Lluvia de letras: cae una letra cada 3 segundos; quédatela o pásala y envía palabras reales. 30 segundos sin palabra y quedas fuera. 💣 Bomba de palabras: en tu turno escribe una palabra con las letras indicadas para pasar la bomba; quien la tenga al explotar pierde una vida. 🎯 Fiebre del oro: responde 3 minutos para ganar oro, mejorar y congelar o robar a tus rivales."],ja:["🎮","オンライン対戦：パーティーゲーム（2〜6人）","ログインしてルームを作り、4桁のコードを友達に送ろう。🟩 ワードレース（Wordle）：全員で同じ5文字の単語を6回以内に当てる。少ない回数ほど高得点、5問のあと表彰式。 🌧 文字の雨：3秒ごとに文字が落ちてくるので、持つか仲間に渡して単語を作ろう。30秒単語を作れないと脱落。最後にみんなの単語の意味と、へんな造語が表示されます。 💣 単語ボム：自分の番に指定の文字を含む単語を入力して爆弾を回す。爆発時に持っている人はライフ−1。🎯 単語ゴールドラッシュ：3分間答えてゴールドを稼ぎ、強化したり相手を凍らせたり盗んだり。"],ko:["🎮","온라인 대회: 파티 게임 (2~6명)","로그인 후 방을 만들고 4자리 코드를 친구에게 주세요. 🟩 단어 레이스 (Wordle): 모두 같은 5글자 단어를 6번 안에 맞혀요. 적은 횟수일수록 고득점, 5문제 후 시상식. 🌧 글자 비: 3초마다 글자가 떨어지면 갖거나 팀원에게 넘기고 단어를 만들어 보내요. 30초 동안 단어를 못 만들면 탈락. 끝나면 모두의 단어 뜻과 이상한 단어들을 보여 줘요. 💣 단어 폭탄: 내 차례에 주어진 글자가 들어간 단어를 입력해 폭탄을 넘겨요. 터질 때 들고 있으면 생명 −1. 🎯 단어 골드 러시: 3분 동안 문제를 풀어 골드를 벌고, 업그레이드하거나 상대를 얼리고 훔쳐요."]}; for(const k in HELP){ const secs=HELP[k].secs; const j=secs.findIndex(x=>x[0]==="⚙️"); if(j>=0) secs.splice(j,0,PH[k]||PH.en); } })();
 Object.assign(STR.zh,{"pgSpell": "🟩 單字猜猜（Wordle）", "pgSpellSub": "大家同時猜同一個 5 個字母的單字，每人 6 次機會。🟩 字母和位置都對、🟨 有這個字母但位置不對、⬜ 沒有這個字母。越少次猜中分數越高，最先猜中的人再加 5 分。共 5 題。", "pgHits": "解出", "wdShort": "要剛好 {n} 個字母", "wdWin": "答對了！用了 {n} 次", "wdLose": "沒猜到，答案是 {w}", "wdEnter": "送出", "wdWaitOthers": "等其他人完成…", "wdAnswer": "答案是", "wdHint": "意思提示：", "wdRate": "解出率", "wdFirst": "{n} 最先猜中"});
 Object.assign(STR.en,{"pgSpell": "🟩 Word race (Wordle)", "pgSpellSub": "Everyone guesses the same 5-letter word at the same time, with 6 tries each. 🟩 right letter, right spot; 🟨 the letter is in the word but in another spot; ⬜ not in the word. Fewer guesses score more, and the first to solve gets +5. 5 rounds.", "pgHits": "Solved", "wdShort": "Use exactly {n} letters", "wdWin": "Solved in {n}!", "wdLose": "Not this time. The word was {w}", "wdEnter": "Enter", "wdWaitOthers": "Waiting for the others…", "wdAnswer": "The word was", "wdHint": "Meaning hint:", "wdRate": "Solve rate", "wdFirst": "{n} solved it first"});
 Object.assign(STR.hi,{"pgSpell": "🟩 शब्द दौड़ (Wordle)", "pgSpellSub": "सब एक साथ एक ही 5 अक्षर का शब्द बूझते हैं, हर किसी के 6 मौके। 🟩 सही अक्षर, सही जगह; 🟨 अक्षर शब्द में है पर दूसरी जगह; ⬜ शब्द में नहीं। कम कोशिश = ज़्यादा अंक, सबसे पहले बूझने वाले को +5। 5 राउंड।", "pgHits": "हल किए", "wdShort": "ठीक {n} अक्षर लिखें", "wdWin": "{n} कोशिशों में हल!", "wdLose": "इस बार नहीं। शब्द था {w}", "wdEnter": "भेजें", "wdWaitOthers": "बाकी खिलाड़ियों का इंतज़ार…", "wdAnswer": "शब्द था", "wdHint": "अर्थ संकेत:", "wdRate": "हल दर", "wdFirst": "{n} ने सबसे पहले हल किया"});
@@ -3235,6 +3438,18 @@ Object.assign(STR.hi,{"pgWatching": "आप बाहर हैं, साथी
 Object.assign(STR.es,{"pgWatching": "Estás fuera. Mirando a un compañero", "pgAllOut": "Todos están fuera. Esperando resultados…"});
 Object.assign(STR.ja,{"pgWatching": "脱落しました。仲間を観戦中", "pgAllOut": "全員脱落、結果を待っています…"});
 Object.assign(STR.ko,{"pgWatching": "탈락했어요. 팀원을 관전 중", "pgAllOut": "모두 탈락했어요. 결과를 기다리는 중…"});
+Object.assign(STR.zh,{"bmName": "💣 單字炸彈", "bmSub": "炸彈在大家手上傳來傳去。輪到你時，打出一個「包含指定字母組合」的英文單字就能把炸彈傳出去；炸彈爆炸時拿在手上的人扣一條命。用遍字母表可以多一條命，最後存活的人獲勝！", "bmTurn": "輪到你！打出包含這組字母的單字", "bmWait": "等待 {n} 回答…", "bmNeed": "單字要包含「{s}」", "bmUsed": "這個字已經有人用過了", "bmBoom": "💥 {n} 爆炸了！", "bmAbc": "把這些字母都用過一次可以多一條命", "bmLifeUp": "集滿字母！+1 ❤️", "bmLongest": "最長單字", "bmSurvive": "存活", "qzName": "🎯 單字搶金賽", "qzSub": "3 分鐘內盡量答對單字題賺金幣：選意思、選同義字、填空。用金幣升級獎金和倍率，還能冰凍對手或偷走他們的金幣！最後金幣最多的人獲勝。", "qzPerQ": "題", "qzShop": "商店", "qzClose": "關閉", "qzUpInc": "每題獎金", "qzUpMult": "獎金倍率", "qzShield": "🛡 護盾（擋下一次攻擊）", "qzFreeze": "❄️ 冰凍對手 6 秒", "qzSteal": "🧲 偷走對手 15% 金幣", "qzMax": "已滿級", "qzNoMoney": "金幣不夠", "qzBought": "購買成功", "qzSentAtk": "已攻擊 {n}！", "qzFrozen": "❄️ 你被 {n} 冰凍了！", "qzBlocked": "🛡 擋下了 {n} 的攻擊", "qzStolen": "🧲 {n} 偷走你 {a} 金幣", "qzLoot": "🧲 偷到 {a} 金幣！", "qzQ1": "哪個英文單字是這個意思？", "qzQ2": "這個字是什麼意思？", "qzQ3": "哪個字的意思最接近？", "qzQ4": "選出最適合填空的字", "qzRight": "答對！+{g} 金幣", "qzWrongA": "答案是 {w}", "qzBest": "最高連對", "qzMissed": "你答錯的單字", "qzNoMissed": "全部答對，太厲害了！"});
+Object.assign(STR.en,{"bmName": "💣 Word bomb", "bmSub": "The bomb goes round the group. On your turn, type an English word that contains the given letters to pass it on; whoever holds it when it explodes loses a life. Use every letter of the alphabet for an extra life. Last one standing wins!", "bmTurn": "Your turn! Type a word containing these letters", "bmWait": "Waiting for {n}…", "bmNeed": "The word must contain “{s}”", "bmUsed": "Someone already used that word", "bmBoom": "💥 {n} exploded!", "bmAbc": "Use each of these letters once to earn an extra life", "bmLifeUp": "Alphabet complete! +1 ❤️", "bmLongest": "Longest word", "bmSurvive": "Survivor", "qzName": "🎯 Quiz gold rush", "qzSub": "Answer as many word questions as you can in 3 minutes to earn gold: meanings, synonyms, fill the gap. Spend gold on bigger rewards and multipliers, or freeze rivals and steal their gold! Most gold wins.", "qzPerQ": "Q", "qzShop": "Shop", "qzClose": "Close", "qzUpInc": "Gold per answer", "qzUpMult": "Multiplier", "qzShield": "🛡 Shield (blocks one attack)", "qzFreeze": "❄️ Freeze a rival for 6s", "qzSteal": "🧲 Steal 15% of a rival's gold", "qzMax": "Maxed", "qzNoMoney": "Not enough gold", "qzBought": "Bought!", "qzSentAtk": "Attacked {n}!", "qzFrozen": "❄️ {n} froze you!", "qzBlocked": "🛡 Blocked {n}'s attack", "qzStolen": "🧲 {n} stole {a} gold from you", "qzLoot": "🧲 You stole {a} gold!", "qzQ1": "Which English word has this meaning?", "qzQ2": "What does this word mean?", "qzQ3": "Which word is closest in meaning?", "qzQ4": "Choose the word that fits the gap", "qzRight": "Correct! +{g} gold", "qzWrongA": "The answer was {w}", "qzBest": "Best streak", "qzMissed": "Words you got wrong", "qzNoMissed": "All correct. Amazing!"});
+Object.assign(STR.hi,{"bmName": "💣 शब्द बम", "bmSub": "बम सबके बीच घूमता है। अपनी बारी पर दिए गए अक्षरों वाला अंग्रेज़ी शब्द लिखें और बम आगे भेजें; फटने पर जिसके हाथ में बम हो उसकी एक जान जाती है। पूरी वर्णमाला इस्तेमाल करने पर एक जान और मिलती है। आख़िर तक बचे रहने वाला जीतता है!", "bmTurn": "आपकी बारी! इन अक्षरों वाला शब्द लिखें", "bmWait": "{n} का इंतज़ार…", "bmNeed": "शब्द में “{s}” होना चाहिए", "bmUsed": "यह शब्द पहले ही इस्तेमाल हो चुका है", "bmBoom": "💥 {n} फट गया!", "bmAbc": "इन सभी अक्षरों को एक बार इस्तेमाल करें, एक जान और मिलेगी", "bmLifeUp": "वर्णमाला पूरी! +1 ❤️", "bmLongest": "सबसे लंबा शब्द", "bmSurvive": "विजेता", "qzName": "🎯 क्विज़ सोना दौड़", "qzSub": "3 मिनट में ज़्यादा से ज़्यादा शब्द प्रश्नों के सही उत्तर देकर सोना कमाएँ: अर्थ, समानार्थी, रिक्त स्थान। सोने से इनाम और गुणक बढ़ाएँ, या विरोधियों को जमा दें और उनका सोना चुरा लें! सबसे ज़्यादा सोना जीतता है।", "qzPerQ": "प्रश्न", "qzShop": "दुकान", "qzClose": "बंद करें", "qzUpInc": "हर उत्तर का इनाम", "qzUpMult": "गुणक", "qzShield": "🛡 ढाल (एक हमला रोकती है)", "qzFreeze": "❄️ विरोधी को 6 से. जमा दें", "qzSteal": "🧲 विरोधी का 15% सोना चुराएँ", "qzMax": "अधिकतम", "qzNoMoney": "सोना काफ़ी नहीं", "qzBought": "खरीद लिया!", "qzSentAtk": "{n} पर हमला किया!", "qzFrozen": "❄️ {n} ने आपको जमा दिया!", "qzBlocked": "🛡 {n} का हमला रोका", "qzStolen": "🧲 {n} ने आपका {a} सोना चुराया", "qzLoot": "🧲 आपने {a} सोना चुराया!", "qzQ1": "किस अंग्रेज़ी शब्द का यह अर्थ है?", "qzQ2": "इस शब्द का अर्थ क्या है?", "qzQ3": "किस शब्द का अर्थ सबसे निकट है?", "qzQ4": "रिक्त स्थान के लिए सही शब्द चुनें", "qzRight": "सही! +{g} सोना", "qzWrongA": "उत्तर था {w}", "qzBest": "सबसे लंबी सही लड़ी", "qzMissed": "आपके ग़लत शब्द", "qzNoMissed": "सब सही, कमाल!"});
+Object.assign(STR.es,{"bmName": "💣 Bomba de palabras", "bmSub": "La bomba pasa de mano en mano. En tu turno, escribe una palabra en inglés que contenga las letras indicadas para pasarla; quien la tenga cuando explote pierde una vida. Usa todas las letras del abecedario para ganar una vida extra. ¡Gana quien sobreviva!", "bmTurn": "¡Tu turno! Escribe una palabra con estas letras", "bmWait": "Esperando a {n}…", "bmNeed": "La palabra debe contener «{s}»", "bmUsed": "Esa palabra ya se usó", "bmBoom": "💥 ¡{n} explotó!", "bmAbc": "Usa cada una de estas letras una vez para ganar una vida extra", "bmLifeUp": "¡Abecedario completo! +1 ❤️", "bmLongest": "Palabra más larga", "bmSurvive": "Superviviente", "qzName": "🎯 Fiebre del oro", "qzSub": "Responde todas las preguntas de vocabulario que puedas en 3 minutos para ganar oro: significados, sinónimos, huecos. Gasta oro en mejoras y multiplicadores, o congela a tus rivales y róbales oro. ¡Gana quien tenga más oro!", "qzPerQ": "preg.", "qzShop": "Tienda", "qzClose": "Cerrar", "qzUpInc": "Oro por respuesta", "qzUpMult": "Multiplicador", "qzShield": "🛡 Escudo (bloquea un ataque)", "qzFreeze": "❄️ Congelar a un rival 6 s", "qzSteal": "🧲 Robar el 15% del oro de un rival", "qzMax": "Máximo", "qzNoMoney": "No tienes suficiente oro", "qzBought": "¡Comprado!", "qzSentAtk": "¡Atacaste a {n}!", "qzFrozen": "❄️ ¡{n} te congeló!", "qzBlocked": "🛡 Bloqueaste el ataque de {n}", "qzStolen": "🧲 {n} te robó {a} de oro", "qzLoot": "🧲 ¡Robaste {a} de oro!", "qzQ1": "¿Qué palabra inglesa tiene este significado?", "qzQ2": "¿Qué significa esta palabra?", "qzQ3": "¿Qué palabra tiene un significado más parecido?", "qzQ4": "Elige la palabra que encaja en el hueco", "qzRight": "¡Correcto! +{g} de oro", "qzWrongA": "La respuesta era {w}", "qzBest": "Mejor racha", "qzMissed": "Palabras que fallaste", "qzNoMissed": "¡Todo correcto, increíble!"});
+Object.assign(STR.ja,{"bmName": "💣 単語ボム", "bmSub": "爆弾をみんなで回します。自分の番になったら、指定された文字の組み合わせを含む英単語を入力して爆弾を次の人へ。爆発したときに持っていた人はライフが1減ります。アルファベットを全部使うとライフ+1。最後まで生き残った人の勝ち！", "bmTurn": "あなたの番！この文字を含む単語を入力", "bmWait": "{n} の回答を待っています…", "bmNeed": "単語に「{s}」を含めてください", "bmUsed": "その単語はもう使われています", "bmBoom": "💥 {n} が爆発！", "bmAbc": "これらの文字を一度ずつ使うとライフ+1", "bmLifeUp": "アルファベット制覇！+1 ❤️", "bmLongest": "最長の単語", "bmSurvive": "生存", "qzName": "🎯 単語ゴールドラッシュ", "qzSub": "3分間で単語問題にできるだけ正解してゴールドを稼ごう：意味・類義語・穴埋め。ゴールドで報酬や倍率をアップしたり、相手を凍らせたりゴールドを盗んだりできる！ゴールドが一番多い人の勝ち。", "qzPerQ": "問", "qzShop": "ショップ", "qzClose": "閉じる", "qzUpInc": "1問の報酬", "qzUpMult": "倍率", "qzShield": "🛡 シールド（攻撃を1回防ぐ）", "qzFreeze": "❄️ 相手を6秒凍らせる", "qzSteal": "🧲 相手のゴールドを15%盗む", "qzMax": "最大", "qzNoMoney": "ゴールドが足りません", "qzBought": "購入しました！", "qzSentAtk": "{n} を攻撃した！", "qzFrozen": "❄️ {n} に凍らされた！", "qzBlocked": "🛡 {n} の攻撃を防いだ", "qzStolen": "🧲 {n} に {a} ゴールド盗まれた", "qzLoot": "🧲 {a} ゴールド盗んだ！", "qzQ1": "この意味の英単語はどれ？", "qzQ2": "この単語の意味は？", "qzQ3": "意味がいちばん近い単語は？", "qzQ4": "空欄に入る単語を選ぼう", "qzRight": "正解！+{g} ゴールド", "qzWrongA": "答えは {w}", "qzBest": "最高連続正解", "qzMissed": "まちがえた単語", "qzNoMissed": "全問正解、すごい！"});
+Object.assign(STR.ko,{"bmName": "💣 단어 폭탄", "bmSub": "폭탄이 사람들 사이를 돌아요. 내 차례에 주어진 글자 조합이 들어간 영어 단어를 입력하면 폭탄을 넘길 수 있어요. 터질 때 들고 있던 사람은 생명 1개를 잃어요. 알파벳을 모두 쓰면 생명 +1. 마지막까지 살아남으면 승리!", "bmTurn": "내 차례! 이 글자가 들어간 단어를 입력하세요", "bmWait": "{n}님의 답을 기다리는 중…", "bmNeed": "단어에 「{s}」가 들어가야 해요", "bmUsed": "이미 누가 쓴 단어예요", "bmBoom": "💥 {n} 폭발!", "bmAbc": "이 글자들을 한 번씩 쓰면 생명 +1", "bmLifeUp": "알파벳 완성! +1 ❤️", "bmLongest": "가장 긴 단어", "bmSurvive": "생존", "qzName": "🎯 단어 골드 러시", "qzSub": "3분 동안 단어 문제를 최대한 맞혀 골드를 모으세요: 뜻, 유의어, 빈칸. 골드로 보상과 배율을 올리거나 상대를 얼리고 골드를 훔칠 수 있어요! 골드가 가장 많은 사람이 승리.", "qzPerQ": "문제", "qzShop": "상점", "qzClose": "닫기", "qzUpInc": "문제당 보상", "qzUpMult": "배율", "qzShield": "🛡 방패 (공격 1회 막기)", "qzFreeze": "❄️ 상대 6초 얼리기", "qzSteal": "🧲 상대 골드 15% 훔치기", "qzMax": "최대", "qzNoMoney": "골드가 부족해요", "qzBought": "구매 완료!", "qzSentAtk": "{n}님을 공격했어요!", "qzFrozen": "❄️ {n}님이 나를 얼렸어요!", "qzBlocked": "🛡 {n}님의 공격을 막았어요", "qzStolen": "🧲 {n}님이 골드 {a}를 훔쳐 갔어요", "qzLoot": "🧲 골드 {a}를 훔쳤어요!", "qzQ1": "이 뜻의 영어 단어는?", "qzQ2": "이 단어의 뜻은?", "qzQ3": "뜻이 가장 가까운 단어는?", "qzQ4": "빈칸에 알맞은 단어를 고르세요", "qzRight": "정답! +{g} 골드", "qzWrongA": "정답은 {w}", "qzBest": "최고 연속 정답", "qzMissed": "틀린 단어", "qzNoMissed": "모두 정답, 대단해요!"});
+Object.assign(STR.zh,{qzOk:"答對",qzNg:"答錯"});
+Object.assign(STR.en,{qzOk:"Correct",qzNg:"Wrong"});
+Object.assign(STR.hi,{qzOk:"सही",qzNg:"ग़लत"});
+Object.assign(STR.es,{qzOk:"Aciertos",qzNg:"Fallos"});
+Object.assign(STR.ja,{qzOk:"正解",qzNg:"不正解"});
+Object.assign(STR.ko,{qzOk:"정답",qzNg:"오답"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
