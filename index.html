@@ -638,6 +638,15 @@ body.maint-lock{overflow:hidden}
 .sb-list{display:flex;flex-direction:column;gap:4px}.sb-li{display:flex;align-items:center;gap:6px}
 .sup-mine{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,var(--gorse-soft),var(--card))}.sup-mine-b{flex:none}
 @media (prefers-reduced-motion:reduce){.sb4,.sb5,.sb .sb-tw{animation:none}}
+.set-fold{display:block}.set-fold[open]>*:not(summary){display:block;margin-top:8px}.set-fold[open]>.opts{display:grid}
+.set-fold>summary{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;list-style:none}
+.set-fold>summary::-webkit-details-marker{display:none}
+.set-fold>summary::after{content:"›";font-size:22px;color:var(--muted);transform:rotate(90deg);transition:transform .2s;margin-left:4px}
+.set-fold[open]>summary::after{transform:rotate(-90deg)}
+.set-fold>summary .fold-v{margin-left:auto;color:var(--accent);font-weight:700;font-size:14px;text-align:right}
+.set-fold[open]>summary{margin-bottom:10px}
+.flag-row{display:flex;flex-direction:column;gap:6px;margin-top:6px}.flag-now{font-size:18px}
+.rk-flag{margin-right:5px;font-size:1.05em}
 </style>
 
 </head>
@@ -1136,8 +1145,8 @@ function viewSettings(){
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
     ${regionSection()}
-    <section class="card set-sec"><b>${T("language")} · Language</b><div class="opts">${langs}</div></section>
-    <section class="card set-sec"><b>${T("level")}</b><div class="opts">${lvls}</div></section>
+    <details class="card set-sec set-fold" data-fold="lang"${S.fold&&S.fold.lang?" open":""}><summary><b>${T("language")} · Language</b><span class="fold-v" data-nosc>${(LANGS.find(l=>l.k===langKey())||{}).label}</span></summary><div class="opts">${langs}</div></details>
+    <details class="card set-sec set-fold" data-fold="lvl"${S.fold&&S.fold.lvl?" open":""}><summary><b>${T("level")}</b><span class="fold-v">${LEVEL==="IELTS"?"IELTS 7–8":esc(LEVEL)}</span></summary><div class="opts">${lvls}</div></details>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     ${feedbackCard()}
@@ -2269,7 +2278,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.46";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.47";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2387,9 +2396,9 @@ async function loadArticleQuiet(id){ if(S.articles.some(a=>a.id===id)) return; t
 function regionSection(){
   const opts=COUNTRIES.map(c=>`<option value="${c}"${c===REGION.c?" selected":""}>${esc(countryName(c))}${c!=="IE"&&LANG!=="en"?"":""}</option>`).join("");
   const counties=`<option value="">${T("regNational")}</option>`+COUNTIES.map(c=>`<option value="${c}"${c===REGION.county?" selected":""}>${T("countyOf",{c})}</option>`).join("");
-  return `<section class="card set-sec"><b>${T("regTitle")}</b><span class="muted sm-t">${T("regSub")}</span>
+  return `<details class="card set-sec set-fold" data-fold="reg"${S.fold&&S.fold.reg?" open":""}><summary><b>${T("regTitle")}</b><span class="fold-v">${esc(regionLabel(regionKey()))}</span></summary><span class="muted sm-t">${T("regSub")}</span>
     <select id="regCountry" class="search">${opts}</select>
-    ${REGION.c==="IE"?`<select id="regCounty" class="search">${counties}</select><span class="muted sm-t">${T("regIEnote")}</span>`:""}</section>`;
+    ${REGION.c==="IE"?`<select id="regCounty" class="search">${counties}</select><span class="muted sm-t">${T("regIEnote")}</span>`:""}</details>`;
 }
 function regionNotice(){
   const key=regionKey(); if(key==="IE") return "";
@@ -2717,7 +2726,10 @@ document.addEventListener("click", e=>{
   if(a==="sctake"){ S.scratch=null; return render(); }
   if(a==="forge") return forge(t.dataset.k);
   if(a==="signin") return cloudSignIn();
-  if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } if(!nickOk(n)){ toast(T("nickChars")); return; } nickClaim(n); return; }
+  if(a==="nicksave"){ const v=($("#nickIn")||{}).value||""; const n=v.trim().replace(/\s+/g," "); if(n.length<1||n.length>16){ toast(T("nickBad")); return; } if(!nickOk(n)){ toast(T("nickChars")); return; }
+    if(n===game().nick) return toast(T("nickSaved")); const w=nickWait(); if(w) return toast(T("nickWait",{h:Math.ceil(w/3600e3)})); S.nickAsk=n; S.nickDraft=n; return render(); }
+  if(a==="nickyes"){ const n=S.nickAsk; S.nickAsk=null; S.nickDraft=null; if(n) nickClaim(n); return; }
+  if(a==="nickno"){ S.nickAsk=null; S.nickDraft=null; return render(); }
   if(a==="cocreate") return coCreate();
   if(a==="cojoin") return coJoin(($("#coCode")||{}).value);
   if(a==="cosolo") return coStartSolo();
@@ -2737,7 +2749,7 @@ document.addEventListener("click", e=>{
   if(a==="finishx") return startQuiz("post", currentArticle());
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
-document.addEventListener("change", e=>{ if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
+document.addEventListener("change", e=>{ if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
 document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
@@ -2794,7 +2806,7 @@ async function nickClaim(n){
       if(old&&nickKey(old)!==nickKey(n)){ const oref=fsM.doc(db,"nicks",nickKey(old)); try{ const od=await fsM.getDoc(oref); if(od.exists()&&od.data().uid===me) await fsM.deleteDoc(oref); }catch(e){} }
     }catch(e){ return toast(e&&e.code==="taken"?T("nickTaken"):T("syncFail")); }
   }
-  game().nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render());
+  const g=game(); if(g.nick) g.nickAt=Date.now(); else g.nickAt=Date.now(); g.nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render());
 }
 async function nickVerify(){
   const n=game().nick; if(!n||!CLOUD.user||!CLOUD.fb||DEV) return;
@@ -2888,7 +2900,7 @@ Object.assign(STR.es,{tabRank:"Ranking", tabCoop:"Cooperativo", rkPower:"Poder",
 
 /* ----- leaderboard ----- */
 const powerOf=s=>s.hp+s.atk*3+s.def*2;
-function lbEntry(){ const g=game(), s=stats(); return {name:(g.nick||"").slice(0,16), lv:g.lv|0, hp:s.hp|0, atk:s.atk|0, def:s.def|0, power:powerOf(s)|0, conq:Object.keys(g.conq||{}).length, updatedAt:new Date().toISOString()}; }
+function lbEntry(){ const g=game(), s=stats(); return {name:(g.nick||"").slice(0,16), lv:g.lv|0, hp:s.hp|0, atk:s.atk|0, def:s.def|0, power:powerOf(s)|0, conq:Object.keys(g.conq||{}).length, flag:myFlag(), updatedAt:new Date().toISOString()}; }
 async function lbPush(){
   if(DEV) return;
   if(!CLOUD.user||!CLOUD.fb||!game().nick) return;
@@ -2911,20 +2923,39 @@ async function lbLoad(){
   }catch(e){ S.rk={rows:[], by:f, err:true}; }
   render();
 }
-function nickForm(){ const g=game(); return `<div class="card nick"><label for="nickIn"><b>${T("nick")}</b></label><div class="row" style="flex-wrap:nowrap"><input id="nickIn" class="search" maxlength="16" value="${esc(g.nick||"")}" placeholder="${T("nickSet")}" autocomplete="off"><button class="btn" data-act="nicksave" style="flex:none">${T("nickSave")}</button></div><span class="muted sm-t">${T("nickHint")}</span></div>`; }
+const NICK_GAP=24*3600e3;
+const nickWait=()=>{ const g=game(); return g.nick&&g.nickAt&&!DEV?Math.max(0,g.nickAt+NICK_GAP-Date.now()):0; };
+/* leaderboard flags: auto-detected from the device's language/region (Google sign-in doesn't share a country) */
+const CC_ALL="AD AE AF AG AI AL AM AO AR AT AU AW AZ BA BB BD BE BF BG BH BI BJ BM BN BO BR BS BT BW BY BZ CA CD CF CG CH CI CK CL CM CN CO CR CU CV CY CZ DE DJ DK DM DO DZ EC EE EG ER ES ET FI FJ FM FO FR GA GB GD GE GH GI GL GM GN GQ GR GT GU GW GY HK HN HR HT HU ID IE IL IN IQ IR IS IT JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MG MH MK ML MM MN MO MR MT MU MV MW MX MY MZ NA NE NG NI NL NO NP NR NZ OM PA PE PG PH PK PL PR PS PT PW PY QA RO RS RU RW SA SB SC SD SE SG SI SK SL SM SN SO SR SS ST SV SY SZ TD TG TH TJ TL TM TN TO TR TT TV TW TZ UA UG US UY UZ VA VC VE VN VU WS YE ZA ZM ZW".split(" ");
+const TZ_CC={"Europe/Dublin":"IE","Europe/London":"GB","Asia/Taipei":"TW","Asia/Hong_Kong":"HK","Asia/Shanghai":"CN","Asia/Tokyo":"JP","Asia/Seoul":"KR","Asia/Kolkata":"IN","Asia/Calcutta":"IN","Asia/Singapore":"SG","Europe/Madrid":"ES","America/Mexico_City":"MX","Australia/Sydney":"AU","Australia/Melbourne":"AU","Pacific/Auckland":"NZ","America/New_York":"US","America/Los_Angeles":"US","America/Chicago":"US","America/Toronto":"CA"};
+function ccDetect(){ try{ for(const l of (navigator.languages||[navigator.language])){ const m=/[-_]([A-Za-z]{2})$/.exec(l||""); if(m&&CC_ALL.includes(m[1].toUpperCase())) return m[1].toUpperCase(); } }catch(e){}
+  try{ const tz=Intl.DateTimeFormat().resolvedOptions().timeZone; if(TZ_CC[tz]) return TZ_CC[tz]; }catch(e){} return ""; }
+const flagOf=cc=>/^[A-Z]{2}$/.test(cc||"")?String.fromCodePoint(...[...cc].map(c=>0x1F1E6+c.charCodeAt(0)-65)):"";
+const ccName=cc=>{ try{ return new Intl.DisplayNames([({zh:SC?"zh-Hans":"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"})[LANG]||"en"],{type:"region"}).of(cc); }catch(e){ return cc; } };
+const myFlag=()=>{ const f=game().flag; return f==="none"?"":(f&&f!=="auto")?f:ccDetect(); };
+function nickForm(){ const g=game(), w=nickWait(), auto=ccDetect(), f=g.flag||"auto";
+  const list=CC_ALL.map(c=>[c,ccName(c)]).sort((a,b)=>a[1].localeCompare(b[1]));
+  return `<div class="card nick"><label for="nickIn"><b>${T("nick")}</b></label><div class="row" style="flex-wrap:nowrap"><input id="nickIn" class="search" maxlength="16" value="${esc(S.nickDraft!=null?S.nickDraft:(g.nick||""))}" placeholder="${T("nickSet")}" autocomplete="off" ${w?"disabled":""}><button class="btn" data-act="nicksave" style="flex:none" ${w?"disabled":""}>${T("nickSave")}</button></div>
+    ${S.nickAsk?`<div class="ie-exitask"><b>${T("nickConfirmQ",{n:esc(S.nickAsk)})}</b><p class="sm-t" style="margin:4px 0 8px">${T("nickConfirmSub")}</p><div class="row"><button class="btn sm" data-act="nickyes">${T("nickYes")}</button><button class="btn ghost sm" data-act="nickno">${T("nickNo")}</button></div></div>`:""}
+    <span class="muted sm-t">${w?T("nickWait",{h:Math.ceil(w/3600e3)}):T("nickHint")+" "+T("nickOnce")}</span>
+    <label class="sm-t flag-row"><span>${T("flagLabel")} <b class="flag-now">${flagOf(myFlag())||"—"}</b></span><select id="flagSel" class="search">
+      <option value="auto"${f==="auto"?" selected":""}>${T("flagAuto")}${auto?` (${flagOf(auto)} ${esc(ccName(auto))})`:""}</option>
+      <option value="none"${f==="none"?" selected":""}>${T("flagNone")}</option>
+      ${list.map(([c,n])=>`<option value="${c}"${f===c?" selected":""}>${flagOf(c)} ${esc(n)}</option>`).join("")}</select></label>
+    <span class="muted sm-t">${T("flagHint")}</span></div>`; }
 function viewRank(){
   if(!CLOUD.user) return `<div class="card empty"><p>${T("rkNeedLogin")}</p></div>${accountCard(false)}`;
   const g=game(), f=S.rkBy||"power";
   if(f==="ielts"){ if(!IE_TOP||IE_TOP.week!==isoWeek().id){ IE_TOP={week:isoWeek().id,rows:[],loading:true}; setTimeout(ieLoadTop,0); } }
   else if(!S.rk||S.rk.by!==f){ setTimeout(lbLoad,0); }
   if(f==="ielts"){ const tabsH=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
-    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
+    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
     const u=untilReset();
     return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieWeekReset",{d:u.d,h:u.h})}</div>
       ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
   const tabs=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
-  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
+  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
   return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
     <div class="seg" role="group">${tabs}</div>
     ${R.me?`<div class="rk-me">${T("rkYou",{n:R.me})}</div>`:""}
@@ -3692,10 +3723,10 @@ Object.assign(STR.hi,{"mtTitle": "रखरखाव चल रहा है", "
 Object.assign(STR.es,{"mtTitle": "En mantenimiento", "mtBody": "Estamos actualizando cosas. ¡Volvemos pronto!", "mtUntil": "Volvemos hacia las {t}", "mtReload": "Actualizar", "mtSafe": "Tu progreso está guardado y seguro.", "mtBanner": "🚧 Modo mantenimiento activado: solo tú ves el sitio", "mtDev": "Mantenimiento del sitio", "mtOn": "Iniciar mantenimiento", "mtOff": "Terminar y reabrir", "mtMsgPh": "Mensaje para los jugadores (opcional)", "mtDur": "Tiempo previsto", "mtNone": "Sin definir", "mtNeedAdmin": "Inicia sesión con la cuenta de Google de administrador para cambiarlo", "mtOnNow": "En mantenimiento", "mtOffNow": "Abierto"});
 Object.assign(STR.ja,{"mtTitle": "メンテナンス中", "mtBody": "ただいま更新中です。すぐに戻ります！", "mtUntil": "{t} ごろ再開予定", "mtReload": "再読み込み", "mtSafe": "学習の進み具合は安全に保存されています。", "mtBanner": "🚧 メンテナンスモード中：サイトはあなたにだけ見えています", "mtDev": "サイトのメンテナンス", "mtOn": "メンテナンス開始", "mtOff": "メンテナンス終了・再開", "mtMsgPh": "プレイヤーへのメッセージ（任意）", "mtDur": "予定時間", "mtNone": "指定なし", "mtNeedAdmin": "切り替えるには管理者の Google アカウントでログインしてください", "mtOnNow": "メンテナンス中", "mtOffNow": "通常運営"});
 Object.assign(STR.ko,{"mtTitle": "점검 중", "mtBody": "업데이트하고 있어요. 곧 돌아올게요!", "mtUntil": "{t}쯤 재개 예정", "mtReload": "새로고침", "mtSafe": "학습 기록은 안전하게 저장되어 있어요.", "mtBanner": "🚧 점검 모드 켜짐: 사이트는 나에게만 보여요", "mtDev": "사이트 점검", "mtOn": "점검 시작", "mtOff": "점검 끝내고 다시 열기", "mtMsgPh": "플레이어에게 보낼 메시지 (선택)", "mtDur": "예상 시간", "mtNone": "지정 안 함", "mtNeedAdmin": "전환하려면 관리자 Google 계정으로 로그인하세요", "mtOnNow": "점검 중", "mtOffNow": "정상 운영"});
-Object.assign(STR.zh,{"nickLogin": "請先用 Google 登入才能設定暱稱", "nickTaken": "這個暱稱已經有人用了，換一個吧", "nickTakenOld": "你的暱稱已被其他玩家使用，請到設定重新取一個", "supNote": "📝 轉帳後請在上方「意見回饋」告訴我們你的遊戲暱稱（{n}）。之後我會在有贊助的玩家名字旁邊加上專屬的贊助徽章，未來有新的重大更新也會提前讓你們體驗！", "supNoNick": "請先在上方設定暱稱"});
-Object.assign(STR.en,{"nickLogin": "Sign in with Google to set a nickname", "nickTaken": "That nickname is taken. Try another one", "nickTakenOld": "Another player already uses your nickname. Please pick a new one in Settings", "supNote": "📝 After your transfer, please tell us your game nickname ({n}) in Feedback above. Supporters will get a special badge next to their name, and you'll get to try major new updates before anyone else!", "supNoNick": "set a nickname above first"});
+Object.assign(STR.zh,{"nickLogin": "請先用 Google 登入才能設定暱稱", "nickTaken": "這個暱稱已經有人用了，換一個吧", "nickTakenOld": "你的暱稱已被其他玩家使用，請到設定重新取一個", "supNote": "📝 轉帳後請在上方「意見回饋」告訴我你的遊戲暱稱（{n}）。之後我會在有贊助的玩家名字旁邊加上專屬的贊助徽章，未來有新的重大更新也會提前讓你們體驗！", "supNoNick": "請先在上方設定暱稱"});
+Object.assign(STR.en,{"nickLogin": "Sign in with Google to set a nickname", "nickTaken": "That nickname is taken. Try another one", "nickTakenOld": "Another player already uses your nickname. Please pick a new one in Settings", "supNote": "📝 After your transfer, please tell me your game nickname ({n}) in Feedback above. Supporters will get a special badge next to their name, and you'll get to try major new updates before anyone else!", "supNoNick": "set a nickname above first"});
 Object.assign(STR.hi,{"nickLogin": "उपनाम चुनने के लिए Google से साइन इन करें", "nickTaken": "यह उपनाम पहले से लिया गया है, कोई और चुनें", "nickTakenOld": "आपका उपनाम किसी और खिलाड़ी के पास है, सेटिंग्स में नया चुनें", "supNote": "📝 भुगतान के बाद ऊपर “प्रतिक्रिया” में अपना गेम उपनाम ({n}) बताएँ। समर्थकों के नाम के पास खास बैज लगेगा, और बड़े नए अपडेट आप सबसे पहले आज़मा सकेंगे!", "supNoNick": "पहले ऊपर उपनाम चुनें"});
-Object.assign(STR.es,{"nickLogin": "Inicia sesión con Google para elegir un apodo", "nickTaken": "Ese apodo ya está en uso. Prueba otro", "nickTakenOld": "Otro jugador ya usa tu apodo. Elige uno nuevo en Ajustes", "supNote": "📝 Después de la transferencia, dinos tu apodo del juego ({n}) en «Comentarios», más arriba. Quienes apoyen tendrán una insignia especial junto a su nombre ¡y podrán probar las grandes novedades antes que nadie!", "supNoNick": "elige primero un apodo arriba"});
+Object.assign(STR.es,{"nickLogin": "Inicia sesión con Google para elegir un apodo", "nickTaken": "Ese apodo ya está en uso. Prueba otro", "nickTakenOld": "Otro jugador ya usa tu apodo. Elige uno nuevo en Ajustes", "supNote": "📝 Después de la transferencia, dime tu apodo del juego ({n}) en «Comentarios», más arriba. Quienes apoyen tendrán una insignia especial junto a su nombre ¡y podrán probar las grandes novedades antes que nadie!", "supNoNick": "elige primero un apodo arriba"});
 Object.assign(STR.ja,{"nickLogin": "ニックネームを決めるには Google でログインしてください", "nickTaken": "そのニックネームはもう使われています。別の名前にしてください", "nickTakenOld": "あなたのニックネームは他のプレイヤーが使っています。設定で新しく決めてください", "supNote": "📝 送金後、上の「ご意見」からゲームのニックネーム（{n}）を教えてください。支援してくれた方の名前の横には特別なバッジを付けます。大きなアップデートは先に体験していただけます！", "supNoNick": "先に上でニックネームを設定"});
 Object.assign(STR.ko,{"nickLogin": "닉네임을 정하려면 Google로 로그인하세요", "nickTaken": "이미 사용 중인 닉네임이에요. 다른 걸로 해 주세요", "nickTakenOld": "다른 플레이어가 이미 내 닉네임을 쓰고 있어요. 설정에서 새로 정해 주세요", "supNote": "📝 송금 후 위의 「의견 보내기」에서 게임 닉네임({n})을 알려 주세요. 후원해 주신 분 이름 옆에는 특별 배지를 달아 드리고, 큰 업데이트는 먼저 체험하실 수 있어요!", "supNoNick": "먼저 위에서 닉네임을 정하세요"});
 Object.assign(STR.zh,{upNew:"有新版本可以更新",upBtn:"立即更新"});
@@ -3725,6 +3756,19 @@ Object.assign(STR.hi,{nickChars:"उपनाम में सिर्फ़ �
 Object.assign(STR.es,{nickChars:"El apodo solo puede tener letras, números, espacios y _ . - (sin emojis)",nickCharsOld:"Tu apodo tiene emojis o símbolos. Elige uno nuevo en Ajustes"});
 Object.assign(STR.ja,{nickChars:"ニックネームは文字・数字・スペースと _ . - だけ使えます（絵文字は不可）",nickCharsOld:"ニックネームに絵文字や記号が入っています。設定で新しく決めてください"});
 Object.assign(STR.ko,{nickChars:"닉네임은 글자, 숫자, 공백과 _ . - 만 쓸 수 있어요 (이모지 불가)",nickCharsOld:"닉네임에 이모지나 기호가 있어요. 설정에서 새로 정해 주세요"});
+Object.assign(STR.zh,{"nickConfirmQ": "確定要把暱稱改成「{n}」嗎？", "nickConfirmSub": "改了之後 24 小時內不能再修改，請確認沒有打錯字。", "nickYes": "確定修改", "nickWait": "暱稱 1 天只能改一次，約 {h} 小時後可以再修改", "nickOnce": "（每 24 小時只能改一次）", "flagLabel": "排行榜國旗", "flagAuto": "自動偵測", "flagNone": "不顯示國旗", "flagHint": "國旗只會顯示在排行榜上你的名字前面。自動偵測是依照手機的語言和地區設定。"});
+Object.assign(STR.en,{"nickConfirmQ": "Change your nickname to “{n}”?", "nickConfirmSub": "You won't be able to change it again for 24 hours, so check the spelling.", "nickYes": "Yes, change it", "nickWait": "You can change your nickname once a day. Try again in about {h} h", "nickOnce": "(can be changed once every 24 hours)", "flagLabel": "Leaderboard flag", "flagAuto": "Detect automatically", "flagNone": "Don't show a flag", "flagHint": "The flag only appears before your name on the leaderboard. Automatic detection uses your phone's language and region settings."});
+Object.assign(STR.hi,{"nickConfirmQ": "उपनाम “{n}” करना है?", "nickConfirmSub": "बदलने के बाद 24 घंटे तक दोबारा नहीं बदल सकेंगे, वर्तनी जाँच लें।", "nickYes": "हाँ, बदलें", "nickWait": "उपनाम दिन में एक बार बदल सकते हैं। लगभग {h} घंटे बाद फिर कोशिश करें", "nickOnce": "(24 घंटे में एक बार बदल सकते हैं)", "flagLabel": "लीडरबोर्ड झंडा", "flagAuto": "अपने-आप पहचानें", "flagNone": "झंडा न दिखाएँ", "flagHint": "झंडा सिर्फ़ लीडरबोर्ड पर आपके नाम से पहले दिखता है। अपने-आप पहचान फ़ोन की भाषा और क्षेत्र सेटिंग से होती है।"});
+Object.assign(STR.es,{"nickConfirmQ": "¿Cambiar tu apodo a «{n}»?", "nickConfirmSub": "No podrás volver a cambiarlo en 24 horas, así que revisa cómo está escrito.", "nickYes": "Sí, cambiar", "nickWait": "Solo puedes cambiar el apodo una vez al día. Vuelve a intentarlo en unas {h} h", "nickOnce": "(se puede cambiar una vez cada 24 horas)", "flagLabel": "Bandera en la clasificación", "flagAuto": "Detectar automáticamente", "flagNone": "No mostrar bandera", "flagHint": "La bandera solo aparece delante de tu nombre en la clasificación. La detección automática usa el idioma y la región de tu móvil."});
+Object.assign(STR.ja,{"nickConfirmQ": "ニックネームを「{n}」に変更しますか？", "nickConfirmSub": "変更後 24 時間は再変更できません。つづりを確認してください。", "nickYes": "変更する", "nickWait": "ニックネームは 1 日 1 回だけ変更できます。約 {h} 時間後にもう一度どうぞ", "nickOnce": "（24 時間に 1 回だけ変更可）", "flagLabel": "ランキングの国旗", "flagAuto": "自動で判別", "flagNone": "国旗を表示しない", "flagHint": "国旗はランキングの名前の前にだけ表示されます。自動判別はスマホの言語と地域の設定を使います。"});
+Object.assign(STR.ko,{"nickConfirmQ": "닉네임을 「{n}」(으)로 바꿀까요?", "nickConfirmSub": "바꾼 뒤 24시간 동안 다시 바꿀 수 없으니 철자를 확인하세요.", "nickYes": "네, 바꿀게요", "nickWait": "닉네임은 하루에 한 번만 바꿀 수 있어요. 약 {h}시간 후에 다시 해 주세요", "nickOnce": "(24시간에 한 번만 변경 가능)", "flagLabel": "랭킹 국기", "flagAuto": "자동 감지", "flagNone": "국기 표시 안 함", "flagHint": "국기는 랭킹에서 내 이름 앞에만 보여요. 자동 감지는 휴대폰의 언어와 지역 설정을 사용해요."});
+document.addEventListener("toggle", e=>{ const d=e.target; if(d&&d.dataset&&d.dataset.fold){ S.fold=S.fold||{}; S.fold[d.dataset.fold]=d.open; } }, true);
+Object.assign(STR.zh,{nickNo:"取消"});
+Object.assign(STR.en,{nickNo:"Cancel"});
+Object.assign(STR.hi,{nickNo:"रद्द करें"});
+Object.assign(STR.es,{nickNo:"Cancelar"});
+Object.assign(STR.ja,{nickNo:"キャンセル"});
+Object.assign(STR.ko,{nickNo:"취소"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
