@@ -620,11 +620,24 @@ body.maint-lock{overflow:hidden}
 .bm-fuse.crit i{background:linear-gradient(90deg,var(--bad),#FF7A59)}
 .bm-spark{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:16px;animation:bmspark .3s steps(2) infinite}
 @keyframes bmspark{50%{opacity:.4;transform:translate(-50%,-50%) scale(1.3)}}
-.bm-plus{position:absolute;right:16%;top:6px;font-weight:900;color:var(--good);font-size:22px;animation:bmplus 1.2s ease-out forwards}
+.bm-plus{position:absolute;right:14%;top:6px;font-weight:900;color:#E07B00;font-size:20px;animation:bmplus 1.2s ease-out forwards}
 @keyframes bmplus{0%{opacity:0;transform:translateY(10px) scale(.6)}20%{opacity:1;transform:translateY(0) scale(1.2)}100%{opacity:0;transform:translateY(-24px)}}
 .bm-bomb.warn{animation-duration:.55s}.bm-bomb.urgent{animation:bmshake .12s linear infinite}
 @keyframes bmshake{0%{transform:translate(0,0) rotate(-6deg) scale(1.1)}25%{transform:translate(3px,-2px) rotate(6deg) scale(1.15)}50%{transform:translate(-3px,2px) rotate(-6deg) scale(1.1)}75%{transform:translate(2px,2px) rotate(5deg) scale(1.15)}100%{transform:translate(0,0) rotate(-6deg) scale(1.1)}}
 .pg-full #pgClock{flex:none}
+.sb-wrap{display:inline-flex;vertical-align:middle;margin-left:4px;line-height:0}
+.sb{flex:none;overflow:visible}.sb4{filter:drop-shadow(0 0 3px rgba(180,76,255,.7));animation:sbglow 2.2s ease-in-out infinite}
+.sb5{filter:drop-shadow(0 0 4px rgba(255,200,80,.85));animation:sbrainbow 4s linear infinite}
+@keyframes sbglow{0%,100%{filter:drop-shadow(0 0 2px rgba(180,76,255,.5))}50%{filter:drop-shadow(0 0 7px rgba(200,120,255,.95))}}
+@keyframes sbrainbow{0%{filter:drop-shadow(0 0 4px #FF5C8A) hue-rotate(0deg)}50%{filter:drop-shadow(0 0 7px #36C5F0) hue-rotate(180deg)}100%{filter:drop-shadow(0 0 4px #FF5C8A) hue-rotate(360deg)}}
+.sb .sb-tw{animation:sbtw 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.sb .sb-tw.d2{animation-delay:.5s}.sb .sb-tw.d3{animation-delay:1s}
+@keyframes sbtw{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.2)}}
+.sb3{filter:drop-shadow(0 1px 2px rgba(168,111,18,.5))}
+.dev-sup{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed #B44CFF;border-radius:12px;margin:8px 0}
+.sb-preview{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center}.sb-preview>div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;line-height:1.2}
+.sb-list{display:flex;flex-direction:column;gap:4px}.sb-li{display:flex;align-items:center;gap:6px}
+.sup-mine{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,var(--gorse-soft),var(--card))}.sup-mine-b{flex:none}
+@media (prefers-reduced-motion:reduce){.sb4,.sb5,.sb .sb-tw{animation:none}}
 </style>
 
 </head>
@@ -1103,8 +1116,9 @@ function viewSettings(){
     <section class="card set-sec"><b>${T("level")}</b><div class="opts">${lvls}</div></section>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    ${supMineCard()}
     ${feedbackCard()}
-    <section class="card sup"><div class="sup-cup" aria-hidden="true">☕</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
+    <section class="card sup"><div class="sup-cup" aria-hidden="true">💝</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
       <p class="sup-note sm-t">${T("supNote",{n:game().nick?`<b>${esc(game().nick)}</b>`:T("supNoNick")})}</p>
       <a class="btn sm" href="https://revolut.me/chingche" target="_blank" rel="noopener noreferrer">${T("supBtn")}</a>
       <details class="sup-bank"><summary>🏦 ${T("supBank")}</summary>
@@ -1818,7 +1832,7 @@ function viewAdv(){
   }
   return `<div class="view">
     <section class="hero-card">
-      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),0,30)}</span>`:""; })()}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
+      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>${CLOUD.user?supB(CLOUD.user.uid,20):""}`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),0,30)}</span>`:""; })()}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
       <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
@@ -2074,7 +2088,14 @@ async function devLoadStats(){
     let regions={}; try{ const r=await fsM.getDoc(fsM.doc(db,"stats","regions")); if(r.exists()) regions=r.data(); }catch(e){}
     let rooms=0; try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); rs.forEach(d=>{ const x=d.data(); if(x.state!=="done"&&Date.now()-(x.created||0)<3600e3) rooms++; }); }catch(e){}
     const fb=await devLoadFeedback();
-    S.devStats={users, lbN, regions, rooms, fb, at:new Date()};
+    // game play stats: per-user counters (game.plays) merged with room history (parties / rooms)
+    const per={}; const bump=(u,k,n)=>{ per[k]=per[k]||{}; per[k][u]=Math.max(per[k][u]||0,n); };
+    users.forEach(u=>{ const g=u.game||{}, pl=g.plays||{}; for(const [k,n] of Object.entries(pl)) bump(u.id,k,n);
+      if(g.ielts&&g.ielts.days) bump(u.id,"ielts",Object.keys(g.ielts.days).length); if(g.battles) bump(u.id,"battle",g.battles); });
+    try{ const ps=await fsM.getDocs(fsM.collection(db,"parties")); const cnt={}; ps.forEach(d=>{ const x=d.data(); if(x.state!=="done") return; for(const u of Object.keys(x.players||{})){ const k=x.game+"|"+u; cnt[k]=(cnt[k]||0)+1; } }); for(const [k,n] of Object.entries(cnt)){ const [g,u]=k.split("|"); bump(u,g,n); } }catch(e){}
+    try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); const cnt={}; rs.forEach(d=>{ const x=d.data(); if(x.state!=="done") return; [x.host,x.guest].filter(Boolean).forEach(u=>cnt[u]=(cnt[u]||0)+1); }); for(const [u,n] of Object.entries(cnt)) bump(u,"coop",n); }catch(e){}
+    const games=Object.fromEntries(Object.entries(per).map(([k,m])=>[k,{players:Object.keys(m).length, plays:Object.values(m).reduce((a,b)=>a+b,0)}]));
+    S.devStats={users, lbN, regions, rooms, fb, games, at:new Date()};
   }catch(e){ S.devStats={err:e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")}; }
   render();
 }
@@ -2098,6 +2119,8 @@ function devStatsHtml(){
     <div class="eyebrow">${T("dsSys")}</div>
     <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
+    <div class="eyebrow">🎮 ${T("dsGames")}</div>
+    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
     <div class="eyebrow">${T("dsRegions")}</div>
     ${regs.length?`<table class="ds-t"><tr><th>${T("dsRegion")}</th><th>${T("dsLast")}</th><th></th></tr>${regs.map(([k,v])=>`<tr><td>${esc(regionLabel(k))} <span class="muted">${esc(k)}</span></td><td>${esc(v)}</td><td>${String(v)>=since(6)?"🟢":"⚪"}</td></tr>`).join("")}</table>`:`<p class="muted sm-t">–</p>`}
     <div class="eyebrow">${T("dsPlayers",{n:U.length})}</div>
@@ -2117,6 +2140,70 @@ function devBadgeHtml(){
         <label class="sm-t">${T("dBadgeStars")} <b id="devBadgeNv">${P.n}</b><input id="devBadgeN" type="range" min="0" max="10" value="${P.n}" style="width:100%"></label>
       </div></div>
     <div class="dev-grid"><button class="btn ghost sm" data-act="dev" data-k="badgeadd">${T("dBadgeAdd")}</button><button class="btn ghost sm" data-act="dev" data-k="badgeclr">${T("dBadgeClr")}</button><button class="btn ghost sm" data-act="dev" data-k="ieday">${T("dIeDay")}</button></div></div>`;
+}
+
+/* ----- supporter badges (supporters/{uid} in Firestore, set by the admin in developer mode) ----- */
+let SUP={}, SUP_N=0;
+const SUP_TIERS=[1,2,3,4,5];
+async function supLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDocs(fsM.collection(db,"supporters")); const m={}; sn.forEach(d=>{ const x=d.data(); if(x&&x.tier>=1&&x.tier<=5) m[d.id]={tier:x.tier, n:x.n||""}; }); SUP=m; render(); }catch(e){} }
+function supSvg(t,size){
+  const id="sp"+t+"_"+(++SUP_N), z=size||22;
+  const wrap=(inner,defs="")=>`<svg class="sb sb${t}" viewBox="0 0 40 40" width="${z}" height="${z}" aria-label="${esc(T("sb"+t))}" role="img"><defs>${defs}</defs>${inner}</svg>`;
+  if(t===1) return wrap(`<circle cx="20" cy="20" r="18.5" fill="url(#${id})" stroke="#B9835A" stroke-width="2"/>
+    <path d="M15 8.5c-1.8 1.8 1.8 2.8 0 4.6M20 6.5c-1.8 1.8 1.8 2.8 0 4.6M25 8.5c-1.8 1.8 1.8 2.8 0 4.6" stroke="#C89B7B" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M10 16h18v6.5a9 9 0 0 1-18 0z" fill="#8B5A3C"/><path d="M28 18h2.2a3.2 3.2 0 0 1 0 6.4H27.4" stroke="#8B5A3C" stroke-width="2.4" fill="none"/>
+    <circle cx="15.5" cy="21.2" r="1.35" fill="#2B1A10"/><circle cx="22.5" cy="21.2" r="1.35" fill="#2B1A10"/><circle cx="16" cy="20.7" r=".45" fill="#fff"/><circle cx="23" cy="20.7" r=".45" fill="#fff"/>
+    <path d="M17.3 24q1.7 1.8 3.4 0" stroke="#2B1A10" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle cx="13.2" cy="23.6" r="1.5" fill="#F28B82" opacity=".85"/><circle cx="24.8" cy="23.6" r="1.5" fill="#F28B82" opacity=".85"/>
+    <ellipse cx="19" cy="31.6" rx="11.5" ry="2.2" fill="#B9835A"/>`,
+    `<radialGradient id="${id}" cx=".5" cy=".35" r=".7"><stop offset="0" stop-color="#FFF8EE"/><stop offset="1" stop-color="#F6D9B5"/></radialGradient>`);
+  if(t===2){ const leaf="M0 0C-6.5-4-8.5-11.5-3.8-12.6-1.7-13.1 0-11.6 0-10 0-11.6 1.7-13.1 3.8-12.6 8.5-11.5 6.5-4 0 0Z";
+    return wrap(`<circle cx="20" cy="20" r="18.5" fill="#E9F8EE" stroke="#D4A63A" stroke-width="2.2"/>
+    <path d="M20.5 21q2.5 7 8 11" stroke="#1F7A40" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    ${[0,120,240].map(a=>`<path d="${leaf}" transform="translate(20 20) rotate(${a})" fill="url(#${id})" stroke="#1F7A40" stroke-width=".8"/><path d="M0-1.5 0-9" transform="translate(20 20) rotate(${a})" stroke="#BDF0CC" stroke-width=".9" stroke-linecap="round" opacity=".8"/>`).join("")}
+    <circle cx="20" cy="20" r="1.8" fill="#1F7A40"/><path class="sb-tw" d="M31 6l1 2.6 2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1z" fill="#F5C842"/>`,
+    `<linearGradient id="${id}" x1="0" y1="-12" x2="0" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5BD484"/><stop offset="1" stop-color="#22964F"/></linearGradient>`); }
+  if(t===3) return wrap(`<path d="M20 1.8 35.5 7v12c0 9.4-7 15.7-15.5 19.4C11.5 34.7 4.5 28.4 4.5 19V7z" fill="url(#${id}b)" stroke="url(#${id})" stroke-width="2.4"/>
+    <path d="M13.5 30V12.5c0-2.2 1.6-3 3.3-2.3 5.7 2.2 9.3 6.6 10.6 12.6.6 2.8-.6 5.3-3 7.2z" fill="none" stroke="url(#${id})" stroke-width="2.4" stroke-linejoin="round"/>
+    ${[16.3,18.8,21.3,23.8].map((x,i)=>`<line x1="${x}" y1="${[11.8,13.2,15.4,18.6][i]}" x2="${x}" y2="29.3" stroke="#FDE7A6" stroke-width=".9"/>`).join("")}
+    <line x1="12" y1="30.2" x2="25.5" y2="30.2" stroke="url(#${id})" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="5.6" r="1.3" fill="#FDE7A6"/>`,
+    `<linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"/><stop offset=".5" stop-color="#E7B530"/><stop offset="1" stop-color="#A86F12"/></linearGradient><linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23408F"/><stop offset="1" stop-color="#0F1E4A"/></linearGradient>`);
+  if(t===4) return wrap(`<circle cx="20" cy="20" r="18.5" fill="url(#${id}b)" stroke="#C9A2FF" stroke-width="1.8"/>
+    <path d="M8.5 27.5 6.5 13.5l7.3 6.2L20 8.5l6.2 11.2 7.3-6.2-2 14z" fill="url(#${id})" stroke="#8A5A00" stroke-width="1" stroke-linejoin="round"/>
+    <rect x="8.3" y="27" width="23.4" height="4.6" rx="1.6" fill="url(#${id})" stroke="#8A5A00" stroke-width="1"/>
+    <circle cx="20" cy="29.3" r="1.9" fill="#B44CFF" stroke="#fff" stroke-width=".6"/><circle cx="13.5" cy="29.3" r="1.2" fill="#FF5C8A"/><circle cx="26.5" cy="29.3" r="1.2" fill="#36C5F0"/>
+    <circle cx="6.5" cy="13.5" r="1.6" fill="#E6D2FF"/><circle cx="20" cy="8.5" r="1.9" fill="#E6D2FF"/><circle cx="33.5" cy="13.5" r="1.6" fill="#E6D2FF"/>
+    <path d="M20 15.5l2.4 3.6L20 23l-2.4-3.9z" fill="#B44CFF" stroke="#fff" stroke-width=".6"/><path class="sb-tw" d="M31.5 4.5l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9z" fill="#fff"/>`,
+    `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4C2"/><stop offset=".55" stop-color="#F2C230"/><stop offset="1" stop-color="#C98A10"/></linearGradient><radialGradient id="${id}b" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#8E4DE8"/><stop offset="1" stop-color="#3A1475"/></radialGradient>`);
+  return wrap(`<circle cx="20" cy="20" r="18.5" fill="url(#${id}b)"/>
+    <path d="M18 22C10.5 22 4.5 16.5 3 9c4.5 3.6 8.6 3.9 11.8 3C11.3 15.8 13 19.5 18 20.4z" fill="url(#${id})" stroke="#fff" stroke-width=".8"/>
+    <path d="M22 22c7.5 0 13.5-5.5 15-13-4.5 3.6-8.6 3.9-11.8 3 3.5 3.8 1.8 7.5-3.2 8.4z" fill="url(#${id})" stroke="#fff" stroke-width=".8"/>
+    <path d="M17 26.5Q15 33 11.5 35.5 19 34.5 20 28.5 21 34.5 28.5 35.5 25 33 23 26.5z" fill="url(#${id})" stroke="#fff" stroke-width=".8"/>
+    <path d="M20 12.3l2.3 4.7 5.2.8-3.8 3.6.9 5.1-4.6-2.4-4.6 2.4.9-5.1-3.8-3.6 5.2-.8z" fill="#FFF7D6" stroke="#FFC93C" stroke-width="1"/>
+    <path d="M17 9.5l1.4-4 1.6 3 1.6-3 1.4 4" fill="none" stroke="#FFD95A" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle class="sb-tw" cx="7" cy="27" r="1.1" fill="#fff"/><circle class="sb-tw d2" cx="33" cy="26" r="1" fill="#fff"/><circle class="sb-tw d3" cx="30" cy="6" r=".9" fill="#fff"/>`,
+    `<linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF5C8A"/><stop offset=".25" stop-color="#FFB33C"/><stop offset=".5" stop-color="#5BD484"/><stop offset=".75" stop-color="#36C5F0"/><stop offset="1" stop-color="#B44CFF"/></linearGradient><radialGradient id="${id}b" cx=".5" cy=".45" r=".7"><stop offset="0" stop-color="#2A2560"/><stop offset="1" stop-color="#0C0A24"/></radialGradient>`);
+}
+const supTier=uid=>(SUP[uid]||{}).tier||0;
+const supB=(uid,size)=>{ const t=supTier(uid); return t?`<span class="sb-wrap" title="${esc(T("sb"+t))}">${supSvg(t,size||18)}</span>`:""; };
+function supMineCard(){ const u=CLOUD.user; const t=u?supTier(u.uid):0; if(!t) return ""; return `<section class="card sup-mine"><div class="sup-mine-b">${supSvg(t,72)}</div><div><b>${T("sbMine",{b:esc(T("sb"+t))})}</b><p class="muted sm-t" style="margin:4px 0 0">${T("sbThanks")}</p></div></section>`; }
+function devSupHtml(){
+  const list=Object.entries(SUP).sort((a,b)=>b[1].tier-a[1].tier);
+  return `<div class="dev-sup"><div class="eyebrow">💝 ${T("sbDev")}</div>
+    <div class="sb-preview">${SUP_TIERS.map(t=>`<div>${supSvg(t,46)}<small>${esc(T("sb"+t))}</small><small class="muted">${T("sbR"+t)}</small></div>`).join("")}</div>
+    <div class="row" style="flex-wrap:nowrap;gap:6px"><input id="supNick" class="search" maxlength="16" placeholder="${T("sbNickPh")}" autocomplete="off"><select id="supTier" class="search" style="max-width:140px">${SUP_TIERS.map(t=>`<option value="${t}">${t}. ${esc(T("sbR"+t))}</option>`).join("")}<option value="0">✕ ${T("sbRemove")}</option></select></div>
+    <button class="btn sm" data-act="supgive">${T("sbGive")}</button>
+    ${list.length?`<div class="sb-list">${list.map(([u,x])=>`<div class="sb-li">${supSvg(x.tier,22)} <b>${esc(x.n||u.slice(0,6))}</b> <span class="muted sm-t">${esc(T("sb"+x.tier))}</span></div>`).join("")}</div>`:`<p class="muted sm-t">${T("sbNone")}</p>`}</div>`;
+}
+async function supGive(){
+  if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const n=((document.getElementById("supNick")||{}).value||"").trim(), tier=+((document.getElementById("supTier")||{}).value||0);
+  if(!n) return toast(T("sbNickPh"));
+  const {fsM,db}=CLOUD.fb;
+  try{ const d=await fsM.getDoc(fsM.doc(db,"nicks",nickKey(n))); if(!d.exists()) return toast(T("sbNoNick"));
+    const uid=d.data().uid, ref=fsM.doc(db,"supporters",uid);
+    if(tier) await fsM.setDoc(ref,{tier, n:d.data().n||n, at:Date.now()}); else await fsM.deleteDoc(ref);
+    toast(tier?T("sbGiven",{n, b:T("sb"+tier)}):T("sbRemoved")); await supLoad(); }
+  catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); }
 }
 /* ----- maintenance switch (config/site in Firestore; admin & dev mode bypass) ----- */
 const ADMIN_EMAIL="a0932717669@gmail.com";
@@ -2154,11 +2241,12 @@ function devPanel(){
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}</div>
     <div id="devMaint" class="dev-maint">${devMaintInner()}</div>
+    ${devSupHtml()}
     ${devBadgeHtml()}
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.42";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.43";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -2426,8 +2514,9 @@ function viewIelts(){
     <button class="btn${S.ieConfirm?" danger":""}" data-act="iesubmit">${S.ieConfirm?T("ieConfirm2",{n:unanswered}):T("ieSubmit")}</button>
   </div>`;
 }
+function trackPlay(k){ if(DEV) return; const g=game(); g.plays=g.plays||{}; g.plays[k]=(g.plays[k]||0)+1; }
 function ieSubmit(){
-  const g=game(), R=g.ieltsRun; if(!R) return; ieStopAudio(); clearInterval(S.ieTimer);
+  const g=game(), R=g.ieltsRun; if(!R) return; ieStopAudio(); clearInterval(S.ieTimer); trackPlay(R.ranked?"ielts":"ieltsPrac");
   const t=ieFind(R.test), items=ieQuestions(t);
   const L=items.filter(x=>x.sec==="L"), Rd=items.filter(x=>x.sec==="R");
   const lc=L.filter(x=>ieCorrect(x.q,R.ans[x.key])).length, rc=Rd.filter(x=>ieCorrect(x.q,R.ans[x.key])).length;
@@ -2594,6 +2683,7 @@ document.addEventListener("click", e=>{
   if(a==="devunlock") return devUnlock();
   if(a==="devexit") return devExit();
   if(a==="maint") return maintSet(t.dataset.k==="1");
+  if(a==="supgive") return supGive();
   if(a==="devstats") return devLoadStats();
   if(a==="dev") return devAct(t.dataset.k);
   if(a==="rev") return startQuiz("rev");
@@ -2648,6 +2738,7 @@ async function cloudInit(){
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
     CLOUD.fb={authM,fsM,auth,db};
+    setTimeout(supLoad,0);
     try{ fsM.onSnapshot(fsM.doc(db,"config","site"), sn=>{ S.maint=sn.exists()?sn.data():null; maintApply(); }, ()=>{}); }catch(e){}
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
@@ -2801,13 +2892,13 @@ function viewRank(){
   if(f==="ielts"){ if(!IE_TOP||IE_TOP.week!==isoWeek().id){ IE_TOP={week:isoWeek().id,rows:[],loading:true}; setTimeout(ieLoadTop,0); } }
   else if(!S.rk||S.rk.by!==f){ setTimeout(lbLoad,0); }
   if(f==="ielts"){ const tabsH=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
-    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
+    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
     const u=untilReset();
     return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieWeekReset",{d:u.d,h:u.h})}</div>
       ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
   const tabs=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
-  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
+  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
   return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
     <div class="seg" role="group">${tabs}</div>
     ${R.me?`<div class="rk-me">${T("rkYou",{n:R.me})}</div>`:""}
@@ -2917,10 +3008,11 @@ function coReward(){
   const mine=Object.values(R.found||{}).filter(u=>u===coMe()).length;
   const win=R.win!==undefined?R.win:Object.keys(R.found||{}).length>=R.errs.length;
   const gold=mine*8+(win?(S.co.solo?15:30):0), exp=6+mine*5+(win?(S.co.solo?8:20):0);
-  const lotto=win&&!S.co.solo?1:0; g.lotto=(g.lotto||0)+lotto;
+  trackPlay(S.co.solo?"coopSolo":"coop");
+  const lotto=win&&!S.co.solo?2:0, pass=win&&!S.co.solo?1:0; g.lotto=(g.lotto||0)+lotto; g.tickets+=pass;
   g.gold+=gold; g.exp+=exp; const before=g.lv; while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
   g.coopDone[key]=1; const ks=Object.keys(g.coopDone); if(ks.length>40) delete g.coopDone[ks[0]];
-  S.co.reward={gold, exp, lotto, lvUp:g.lv-before}; saveGame();
+  S.co.reward={gold, exp, lotto, pass, lvUp:g.lv-before}; saveGame();
 }
 async function coTap(i){
   const R=coRoom(); if(!R||R.state!=="play") return;
@@ -2972,7 +3064,7 @@ function coInner(){
     const rw=co.reward;
     return head+`<div class="reward ${win?"win":"lose"}"><div class="eyebrow">${win?T("coWin"):(R.endAt&&Date.now()>R.endAt?T("coTimeUp"):T("coLose"))}</div>
       <div class="rw-row"><span>${T("coYouFound",{n:mine})}</span>${co.solo?"":`<span class="muted">${T("coMateFound",{n:mate})}</span>`}</div>
-      ${rw?`<div class="rw-row"><span>${T("gold")}</span><b>+${rw.gold}</b></div><div class="rw-row"><span>${T("exp")}</span><b>+${rw.exp}</b></div>${rw.lotto?`<div class="rw-row"><span>🎟 ${T("lotto")}</span><b>+${rw.lotto}</b></div>`:""}${rw.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${game().lv}</b></div>`:""}`:""}</div>
+      ${rw?`<div class="rw-row"><span>${T("gold")}</span><b>+${rw.gold}</b></div><div class="rw-row"><span>${T("exp")}</span><b>+${rw.exp}</b></div>${rw.pass?`<div class="rw-row"><span>🎫 ${T("ticketsL")}</span><b>+${rw.pass}</b></div>`:""}${rw.lotto?`<div class="rw-row"><span>🎟 ${T("lotto")}</span><b>+${rw.lotto}</b></div>`:""}${rw.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${game().lv}</b></div>`:""}`:""}</div>
       <article class="article co-text">${body}</article>
       <h3>${T("coResults")}</h3>
       <div class="co-list">${R.errs.map(e=>`<div class="co-err"><span class="chip ${found[e.i]!==undefined?"done":"new"}">${T(e.type==="spell"?"coTypeSpell":e.type==="form"?"coTypeForm":"coTypeConf")}</span><div><s>${esc(e.wrong)}</s> → <b>${esc(e.right)}</b>${found[e.i]!==undefined?` <span class="muted sm-t">· ${T("coFoundBy",{n:nm(found[e.i])})}</span>`:""}<div class="muted sm-t">${errExplain(e)}</div></div></div>`).join("")}</div>
@@ -3229,7 +3321,7 @@ function dpSections(){
 }
 
 /* ----- game 3: word bomb (BombParty style) ----- */
-const BM={lives:3, maxLives:4, intro:2500, fuse:12000, add:3000, cap:20000, abc:"abcdefghilmnoprstuvwy"};
+const BM={lives:3, maxLives:4, intro:2500, fuse:15000, step:1000, min:4000, cap:15000, abc:"abcdefghilmnoprstuvwy"};
 /* tiny sound effects (WebAudio, unlocked on the first tap) */
 function sfxUnlock(){ try{ if(!S.ac){ const C=window.AudioContext||window.webkitAudioContext; if(C) S.ac=new C(); } if(S.ac&&S.ac.state==="suspended") S.ac.resume(); }catch(e){} }
 function sfx(freq,dur,type,vol,slide){ const ac=S.ac; if(!ac||ac.state!=="running") return; try{ const o=ac.createOscillator(), g=ac.createGain(), t=ac.currentTime; o.type=type||"square"; o.frequency.setValueAtTime(freq,t); if(slide) o.frequency.exponentialRampToValueAtTime(slide,t+dur); g.gain.setValueAtTime(vol||0.08,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur); o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t+dur+0.02); }catch(e){} }
@@ -3240,7 +3332,7 @@ const bmFuse=()=>BM.fuse;
 function bmAlive(P){ return (P.order||Object.keys(P.players)).filter(u=>(P.lives||{})[u]>0); }
 function bmNext(P,u){ const o=P.order||Object.keys(P.players), al=o.filter(x=>(P.lives||{})[x]>0&&x!==u); if(!al.length) return u; let i=o.indexOf(u); for(let k=1;k<=o.length;k++){ const x=o[(i+k)%o.length]; if(al.includes(x)) return x; } return al[0]; }
 async function bmInit(P){ await pgLoadSyl(); const order=pgShuffle(Object.keys(P.players)); const now=Date.now()+3500; const lives={}; order.forEach(u=>lives[u]=BM.lives);
-  return {order, lives, out:{}, used:{}, ty:{u:"",s:""}, last:null, boom:null, bomb:{h:order[0], syl:bmPickSyl(0), n:0, k:0, ts:now+BM.intro, end:now+BM.intro+bmFuse()}}; }
+  return {order, lives, out:{}, used:{}, ty:{u:"",s:""}, last:null, boom:null, bomb:{h:order[0], syl:bmPickSyl(0), n:0, k:0, p:0, ts:now+BM.intro, end:now+BM.intro+bmFuse()}}; }
 function bmTick(){
   const pg=S.pg, P=pg.party, B=P.bomb, now=Date.now(); if(!B) return;
   if(pg.bk!==B.k){ pg.bk=B.k; pg.bcur=""; }
@@ -3254,7 +3346,7 @@ function bmTick(){
       if(lives[b.h]===0) up["out."+b.h]=Date.now();
       const alive=(d.order||[]).filter(u=>lives[u]>0), solo=(d.order||[]).length<2;
       if(alive.length===0||(!solo&&alive.length<=1)){ up.state="done"; up.end=Date.now(); }
-      else { const D={...d, lives}; const h=lives[b.h]>0?bmNext(D,b.h):bmNext(D,b.h); const t=Date.now()+BM.intro; up.bomb={h, syl:bmPickSyl(b.k+1), n:b.n+1, k:b.k+1, ts:t, end:t+bmFuse()}; up.ty={u:"",s:""}; }
+      else { const D={...d, lives}; const h=lives[b.h]>0?bmNext(D,b.h):bmNext(D,b.h); const t=Date.now()+BM.intro; up.bomb={h, syl:bmPickSyl(b.k+1), n:b.n+1, k:b.k+1, p:0, ts:t, end:t+bmFuse()}; up.ty={u:"",s:""}; }
       tx.update(ref,up); }).catch(()=>{ pg.boomFor=null; });
   }
 }
@@ -3282,7 +3374,7 @@ async function bmSubmit(){
   try{ await fsM.runTransaction(db, async tx=>{ const d=(await tx.get(ref)).data(); const b=d.bomb; if(!b||b.k!==B.k||b.h!==pgMe()||d.state!=="play"||Date.now()>b.end) return;
     const up={["used."+w]:pgMe(), last:{u:pgMe(), w, at:Date.now()}, ty:{u:"",s:""}};
     const lives={...d.lives}; if(lifeUp&&lives[pgMe()]<BM.maxLives){ lives[pgMe()]++; up["lives."+pgMe()]=lives[pgMe()]; }
-    up.bomb={...b, h:bmNext({...d,lives},pgMe()), syl:bmPickSyl(b.k+1), k:b.k+1, ts:Date.now(), end:Math.min(b.end+BM.add, Date.now()+BM.cap)};
+    up.bomb={...b, h:bmNext({...d,lives},pgMe()), syl:bmPickSyl(b.k+1), k:b.k+1, p:(b.p||0)+1, ts:Date.now(), end:Date.now()+Math.max(BM.min, BM.fuse-((b.p||0)+1)*BM.step)};
     tx.update(ref,up); ok=true; }); }catch(e){}
   if(ok){ M.words.push(w); M.abc=lifeUp?"":abc; if(lifeUp) toast(T("bmLifeUp")); pg.flashOk=Date.now(); bmSave(); }
   pg.bcur=""; pgRender();
@@ -3304,9 +3396,9 @@ function bmSections(){
     <div class="bm-type${pg.shake&&now-pg.shake<500&&mine?" shake":""}${pg.flashOk&&now-pg.flashOk<600?" ok":""}">${typing?hl(typing):`<span class="muted sm-t">${intro?T("pgGetReady"):mine?T("bmTurn"):T("bmWait",{n:esc(pgNm(B.h))})}</span>`}</div>`}${last}</div>`;
   const abc=`<div class="bm-abc" title="${T("bmAbc")}">${[...BM.abc].map(c=>`<span class="${M.abc.includes(c)?"on":""}">${c.toUpperCase()}</span>`).join("")}</div>`;
   const alive=(lives[pgMe()]||0)>0;
-  const sec=leftMs/1000, plus=P.last&&now-P.last.at<1300&&!boom;
-  const clock=boom?`<div class="bm-clockbox"></div>`:`<div class="bm-clockbox"><div class="bm-clock${intro?"":sec<=3?" crit":sec<=6?" warn":""}">${intro?Math.round(BM.fuse/1000):sec<5?sec.toFixed(1):Math.ceil(sec)}</div>${plus?`<div class="bm-plus">+${BM.add/1000}s</div>`:""}
-    <div class="bm-fuse${sec<=3&&!intro?" crit":""}"><i style="width:${intro?BM.fuse/BM.cap*100:Math.min(100,leftMs/BM.cap*100)}%"></i><span class="bm-spark" style="left:${intro?BM.fuse/BM.cap*100:Math.min(100,leftMs/BM.cap*100)}%">✨</span></div></div>`;
+  const sec=leftMs/1000, turnMs=Math.max(BM.min,BM.fuse-(B.p||0)*BM.step), plus=P.last&&now-P.last.at<1300&&!boom&&(B.p||0)>0;
+  const clock=boom?`<div class="bm-clockbox"></div>`:`<div class="bm-clockbox"><div class="bm-clock${intro?"":sec<=3?" crit":sec<=6?" warn":""}">${intro?Math.round(turnMs/1000):sec<5?sec.toFixed(1):Math.ceil(sec)}</div>${plus?`<div class="bm-plus">${Math.round(turnMs/1000)}s</div>`:""}
+    <div class="bm-fuse${sec<=3&&!intro?" crit":""}"><i style="width:${intro?100:Math.min(100,leftMs/turnMs*100)}%"></i><span class="bm-spark" style="left:${intro?100:Math.min(100,leftMs/turnMs*100)}%">✨</span></div></div>`;
   return [["pgBoard",ring],["pgClock",clock],["pgStage",center],["pgAbc",alive?abc:`<p class="muted sm-t" style="text-align:center">${T("pgOut")}</p>`],["pgKb",alive?bmKeyboard(mine&&!intro):""]];
 }
 
@@ -3409,6 +3501,7 @@ function pgRows(){
 function pgFinish(){
   const pg=S.pg; if(!pg||pg.rewarded) return; const P=pg.party; pg.rewarded=1;
   const g=game(); g.partyDone=g.partyDone||{}; const key=pg.code+"-"+P.created; if(g.partyDone[key]) return;
+  trackPlay(P.game); if(Object.keys(P.players).length<2) { g.partyDone[key]=1; saveGame(); }
   const n=Object.keys(P.players).length; if(n<2){ pg.reward={none:true}; return; }
   const rows=pgRows(), rank=rows.findIndex(r=>r.u===pgMe()), r=rows[rank]||{score:0};
   const gold=10+Math.round(r.score/2)+([40,25,15][rank]||0), exp=12+Math.round(r.score/3)+(rank===0?20:0);
@@ -3419,7 +3512,7 @@ function pgFinish(){
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
   const gm=S.pg.party.game, lab=r=>gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
-  const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
+  const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
 function pgLookup(w){ const d={zh:"english-chinese-traditional",es:"english-spanish",ja:"english-japanese",ko:"english-korean"}[LANG]; return `https://dictionary.cambridge.org/dictionary/${d||"english"}/${encodeURIComponent(w)}`; }
@@ -3468,7 +3561,7 @@ function pgSections(){
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
-      <div class="pg-board">${ids.map(u=>`<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${u===P.host?"<span>👑</span>":""}</div>`).join("")}</div>
+      <div class="pg-board">${ids.map(u=>`<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div>`).join("")}</div>
       <div class="muted">${T("pgWaiting",{n:ids.length})}</div>
       ${host?`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`:`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
@@ -3555,12 +3648,12 @@ Object.assign(STR.hi,{"pgWatching": "आप बाहर हैं, साथी
 Object.assign(STR.es,{"pgWatching": "Estás fuera. Mirando a un compañero", "pgAllOut": "Todos están fuera. Esperando resultados…"});
 Object.assign(STR.ja,{"pgWatching": "脱落しました。仲間を観戦中", "pgAllOut": "全員脱落、結果を待っています…"});
 Object.assign(STR.ko,{"pgWatching": "탈락했어요. 팀원을 관전 중", "pgAllOut": "모두 탈락했어요. 결과를 기다리는 중…"});
-Object.assign(STR.zh,{"bmName": "💣 單字炸彈", "bmSub": "炸彈在大家手上傳來傳去。輪到你時，打出一個「包含指定字母組合」的英文單字就能把炸彈傳出去；炸彈爆炸時拿在手上的人扣一條命。用遍字母表可以多一條命，最後存活的人獲勝！ 傳出去炸彈會多 3 秒，每人有 3 條命。", "bmTurn": "輪到你！打出包含這組字母的單字", "bmWait": "等待 {n} 回答…", "bmNeed": "單字要包含「{s}」", "bmUsed": "這個字已經有人用過了", "bmBoom": "💥 {n} 爆炸了！", "bmAbc": "把這些字母都用過一次可以多一條命", "bmLifeUp": "集滿字母！+1 ❤️", "bmLongest": "最長單字", "bmSurvive": "存活", "qzName": "🎯 單字搶金賽", "qzSub": "3 分鐘內盡量答對單字題賺金幣：選意思、選同義字、填空。用金幣升級獎金和倍率，還能冰凍對手或偷走他們的金幣！最後金幣最多的人獲勝。", "qzPerQ": "題", "qzShop": "商店", "qzClose": "關閉", "qzUpInc": "每題獎金", "qzUpMult": "獎金倍率", "qzShield": "🛡 護盾（擋下一次攻擊）", "qzFreeze": "❄️ 冰凍對手 6 秒", "qzSteal": "🧲 偷走對手 15% 金幣", "qzMax": "已滿級", "qzNoMoney": "金幣不夠", "qzBought": "購買成功", "qzSentAtk": "已攻擊 {n}！", "qzFrozen": "❄️ 你被 {n} 冰凍了！", "qzBlocked": "🛡 擋下了 {n} 的攻擊", "qzStolen": "🧲 {n} 偷走你 {a} 金幣", "qzLoot": "🧲 偷到 {a} 金幣！", "qzQ1": "哪個英文單字是這個意思？", "qzQ2": "這個字是什麼意思？", "qzQ3": "哪個字的意思最接近？", "qzQ4": "選出最適合填空的字", "qzRight": "答對！+{g} 金幣", "qzWrongA": "答案是 {w}", "qzBest": "最高連對", "qzMissed": "你答錯的單字", "qzNoMissed": "全部答對，太厲害了！"});
-Object.assign(STR.en,{"bmName": "💣 Word bomb", "bmSub": "The bomb goes round the group. On your turn, type an English word that contains the given letters to pass it on; whoever holds it when it explodes loses a life. Use every letter of the alphabet for an extra life. Last one standing wins! Each pass adds 3 seconds to the bomb; everyone has 3 lives.", "bmTurn": "Your turn! Type a word containing these letters", "bmWait": "Waiting for {n}…", "bmNeed": "The word must contain “{s}”", "bmUsed": "Someone already used that word", "bmBoom": "💥 {n} exploded!", "bmAbc": "Use each of these letters once to earn an extra life", "bmLifeUp": "Alphabet complete! +1 ❤️", "bmLongest": "Longest word", "bmSurvive": "Survivor", "qzName": "🎯 Quiz gold rush", "qzSub": "Answer as many word questions as you can in 3 minutes to earn gold: meanings, synonyms, fill the gap. Spend gold on bigger rewards and multipliers, or freeze rivals and steal their gold! Most gold wins.", "qzPerQ": "Q", "qzShop": "Shop", "qzClose": "Close", "qzUpInc": "Gold per answer", "qzUpMult": "Multiplier", "qzShield": "🛡 Shield (blocks one attack)", "qzFreeze": "❄️ Freeze a rival for 6s", "qzSteal": "🧲 Steal 15% of a rival's gold", "qzMax": "Maxed", "qzNoMoney": "Not enough gold", "qzBought": "Bought!", "qzSentAtk": "Attacked {n}!", "qzFrozen": "❄️ {n} froze you!", "qzBlocked": "🛡 Blocked {n}'s attack", "qzStolen": "🧲 {n} stole {a} gold from you", "qzLoot": "🧲 You stole {a} gold!", "qzQ1": "Which English word has this meaning?", "qzQ2": "What does this word mean?", "qzQ3": "Which word is closest in meaning?", "qzQ4": "Choose the word that fits the gap", "qzRight": "Correct! +{g} gold", "qzWrongA": "The answer was {w}", "qzBest": "Best streak", "qzMissed": "Words you got wrong", "qzNoMissed": "All correct. Amazing!"});
-Object.assign(STR.hi,{"bmName": "💣 शब्द बम", "bmSub": "बम सबके बीच घूमता है। अपनी बारी पर दिए गए अक्षरों वाला अंग्रेज़ी शब्द लिखें और बम आगे भेजें; फटने पर जिसके हाथ में बम हो उसकी एक जान जाती है। पूरी वर्णमाला इस्तेमाल करने पर एक जान और मिलती है। आख़िर तक बचे रहने वाला जीतता है! हर बार आगे भेजने पर बम में 3 सेकंड जुड़ते हैं; सबके पास 3 जानें हैं।", "bmTurn": "आपकी बारी! इन अक्षरों वाला शब्द लिखें", "bmWait": "{n} का इंतज़ार…", "bmNeed": "शब्द में “{s}” होना चाहिए", "bmUsed": "यह शब्द पहले ही इस्तेमाल हो चुका है", "bmBoom": "💥 {n} फट गया!", "bmAbc": "इन सभी अक्षरों को एक बार इस्तेमाल करें, एक जान और मिलेगी", "bmLifeUp": "वर्णमाला पूरी! +1 ❤️", "bmLongest": "सबसे लंबा शब्द", "bmSurvive": "विजेता", "qzName": "🎯 क्विज़ सोना दौड़", "qzSub": "3 मिनट में ज़्यादा से ज़्यादा शब्द प्रश्नों के सही उत्तर देकर सोना कमाएँ: अर्थ, समानार्थी, रिक्त स्थान। सोने से इनाम और गुणक बढ़ाएँ, या विरोधियों को जमा दें और उनका सोना चुरा लें! सबसे ज़्यादा सोना जीतता है।", "qzPerQ": "प्रश्न", "qzShop": "दुकान", "qzClose": "बंद करें", "qzUpInc": "हर उत्तर का इनाम", "qzUpMult": "गुणक", "qzShield": "🛡 ढाल (एक हमला रोकती है)", "qzFreeze": "❄️ विरोधी को 6 से. जमा दें", "qzSteal": "🧲 विरोधी का 15% सोना चुराएँ", "qzMax": "अधिकतम", "qzNoMoney": "सोना काफ़ी नहीं", "qzBought": "खरीद लिया!", "qzSentAtk": "{n} पर हमला किया!", "qzFrozen": "❄️ {n} ने आपको जमा दिया!", "qzBlocked": "🛡 {n} का हमला रोका", "qzStolen": "🧲 {n} ने आपका {a} सोना चुराया", "qzLoot": "🧲 आपने {a} सोना चुराया!", "qzQ1": "किस अंग्रेज़ी शब्द का यह अर्थ है?", "qzQ2": "इस शब्द का अर्थ क्या है?", "qzQ3": "किस शब्द का अर्थ सबसे निकट है?", "qzQ4": "रिक्त स्थान के लिए सही शब्द चुनें", "qzRight": "सही! +{g} सोना", "qzWrongA": "उत्तर था {w}", "qzBest": "सबसे लंबी सही लड़ी", "qzMissed": "आपके ग़लत शब्द", "qzNoMissed": "सब सही, कमाल!"});
-Object.assign(STR.es,{"bmName": "💣 Bomba de palabras", "bmSub": "La bomba pasa de mano en mano. En tu turno, escribe una palabra en inglés que contenga las letras indicadas para pasarla; quien la tenga cuando explote pierde una vida. Usa todas las letras del abecedario para ganar una vida extra. ¡Gana quien sobreviva! Cada pase suma 3 segundos a la bomba; todos tienen 3 vidas.", "bmTurn": "¡Tu turno! Escribe una palabra con estas letras", "bmWait": "Esperando a {n}…", "bmNeed": "La palabra debe contener «{s}»", "bmUsed": "Esa palabra ya se usó", "bmBoom": "💥 ¡{n} explotó!", "bmAbc": "Usa cada una de estas letras una vez para ganar una vida extra", "bmLifeUp": "¡Abecedario completo! +1 ❤️", "bmLongest": "Palabra más larga", "bmSurvive": "Superviviente", "qzName": "🎯 Fiebre del oro", "qzSub": "Responde todas las preguntas de vocabulario que puedas en 3 minutos para ganar oro: significados, sinónimos, huecos. Gasta oro en mejoras y multiplicadores, o congela a tus rivales y róbales oro. ¡Gana quien tenga más oro!", "qzPerQ": "preg.", "qzShop": "Tienda", "qzClose": "Cerrar", "qzUpInc": "Oro por respuesta", "qzUpMult": "Multiplicador", "qzShield": "🛡 Escudo (bloquea un ataque)", "qzFreeze": "❄️ Congelar a un rival 6 s", "qzSteal": "🧲 Robar el 15% del oro de un rival", "qzMax": "Máximo", "qzNoMoney": "No tienes suficiente oro", "qzBought": "¡Comprado!", "qzSentAtk": "¡Atacaste a {n}!", "qzFrozen": "❄️ ¡{n} te congeló!", "qzBlocked": "🛡 Bloqueaste el ataque de {n}", "qzStolen": "🧲 {n} te robó {a} de oro", "qzLoot": "🧲 ¡Robaste {a} de oro!", "qzQ1": "¿Qué palabra inglesa tiene este significado?", "qzQ2": "¿Qué significa esta palabra?", "qzQ3": "¿Qué palabra tiene un significado más parecido?", "qzQ4": "Elige la palabra que encaja en el hueco", "qzRight": "¡Correcto! +{g} de oro", "qzWrongA": "La respuesta era {w}", "qzBest": "Mejor racha", "qzMissed": "Palabras que fallaste", "qzNoMissed": "¡Todo correcto, increíble!"});
-Object.assign(STR.ja,{"bmName": "💣 単語ボム", "bmSub": "爆弾をみんなで回します。自分の番になったら、指定された文字の組み合わせを含む英単語を入力して爆弾を次の人へ。爆発したときに持っていた人はライフが1減ります。アルファベットを全部使うとライフ+1。最後まで生き残った人の勝ち！ 爆弾を渡すたびに3秒追加。ライフは1人3つ。", "bmTurn": "あなたの番！この文字を含む単語を入力", "bmWait": "{n} の回答を待っています…", "bmNeed": "単語に「{s}」を含めてください", "bmUsed": "その単語はもう使われています", "bmBoom": "💥 {n} が爆発！", "bmAbc": "これらの文字を一度ずつ使うとライフ+1", "bmLifeUp": "アルファベット制覇！+1 ❤️", "bmLongest": "最長の単語", "bmSurvive": "生存", "qzName": "🎯 単語ゴールドラッシュ", "qzSub": "3分間で単語問題にできるだけ正解してゴールドを稼ごう：意味・類義語・穴埋め。ゴールドで報酬や倍率をアップしたり、相手を凍らせたりゴールドを盗んだりできる！ゴールドが一番多い人の勝ち。", "qzPerQ": "問", "qzShop": "ショップ", "qzClose": "閉じる", "qzUpInc": "1問の報酬", "qzUpMult": "倍率", "qzShield": "🛡 シールド（攻撃を1回防ぐ）", "qzFreeze": "❄️ 相手を6秒凍らせる", "qzSteal": "🧲 相手のゴールドを15%盗む", "qzMax": "最大", "qzNoMoney": "ゴールドが足りません", "qzBought": "購入しました！", "qzSentAtk": "{n} を攻撃した！", "qzFrozen": "❄️ {n} に凍らされた！", "qzBlocked": "🛡 {n} の攻撃を防いだ", "qzStolen": "🧲 {n} に {a} ゴールド盗まれた", "qzLoot": "🧲 {a} ゴールド盗んだ！", "qzQ1": "この意味の英単語はどれ？", "qzQ2": "この単語の意味は？", "qzQ3": "意味がいちばん近い単語は？", "qzQ4": "空欄に入る単語を選ぼう", "qzRight": "正解！+{g} ゴールド", "qzWrongA": "答えは {w}", "qzBest": "最高連続正解", "qzMissed": "まちがえた単語", "qzNoMissed": "全問正解、すごい！"});
-Object.assign(STR.ko,{"bmName": "💣 단어 폭탄", "bmSub": "폭탄이 사람들 사이를 돌아요. 내 차례에 주어진 글자 조합이 들어간 영어 단어를 입력하면 폭탄을 넘길 수 있어요. 터질 때 들고 있던 사람은 생명 1개를 잃어요. 알파벳을 모두 쓰면 생명 +1. 마지막까지 살아남으면 승리! 폭탄을 넘길 때마다 3초가 늘어나요. 생명은 1인당 3개.", "bmTurn": "내 차례! 이 글자가 들어간 단어를 입력하세요", "bmWait": "{n}님의 답을 기다리는 중…", "bmNeed": "단어에 「{s}」가 들어가야 해요", "bmUsed": "이미 누가 쓴 단어예요", "bmBoom": "💥 {n} 폭발!", "bmAbc": "이 글자들을 한 번씩 쓰면 생명 +1", "bmLifeUp": "알파벳 완성! +1 ❤️", "bmLongest": "가장 긴 단어", "bmSurvive": "생존", "qzName": "🎯 단어 골드 러시", "qzSub": "3분 동안 단어 문제를 최대한 맞혀 골드를 모으세요: 뜻, 유의어, 빈칸. 골드로 보상과 배율을 올리거나 상대를 얼리고 골드를 훔칠 수 있어요! 골드가 가장 많은 사람이 승리.", "qzPerQ": "문제", "qzShop": "상점", "qzClose": "닫기", "qzUpInc": "문제당 보상", "qzUpMult": "배율", "qzShield": "🛡 방패 (공격 1회 막기)", "qzFreeze": "❄️ 상대 6초 얼리기", "qzSteal": "🧲 상대 골드 15% 훔치기", "qzMax": "최대", "qzNoMoney": "골드가 부족해요", "qzBought": "구매 완료!", "qzSentAtk": "{n}님을 공격했어요!", "qzFrozen": "❄️ {n}님이 나를 얼렸어요!", "qzBlocked": "🛡 {n}님의 공격을 막았어요", "qzStolen": "🧲 {n}님이 골드 {a}를 훔쳐 갔어요", "qzLoot": "🧲 골드 {a}를 훔쳤어요!", "qzQ1": "이 뜻의 영어 단어는?", "qzQ2": "이 단어의 뜻은?", "qzQ3": "뜻이 가장 가까운 단어는?", "qzQ4": "빈칸에 알맞은 단어를 고르세요", "qzRight": "정답! +{g} 골드", "qzWrongA": "정답은 {w}", "qzBest": "최고 연속 정답", "qzMissed": "틀린 단어", "qzNoMissed": "모두 정답, 대단해요!"});
+Object.assign(STR.zh,{"bmName": "💣 單字炸彈", "bmSub": "炸彈在大家手上傳來傳去。輪到你時，打出一個「包含指定字母組合」的英文單字就能把炸彈傳出去；炸彈爆炸時拿在手上的人扣一條命。用遍字母表可以多一條命，最後存活的人獲勝！ 炸彈一開始有 15 秒，每傳給下一個人就少 1 秒（15→14→13…），每人有 3 條命。", "bmTurn": "輪到你！打出包含這組字母的單字", "bmWait": "等待 {n} 回答…", "bmNeed": "單字要包含「{s}」", "bmUsed": "這個字已經有人用過了", "bmBoom": "💥 {n} 爆炸了！", "bmAbc": "把這些字母都用過一次可以多一條命", "bmLifeUp": "集滿字母！+1 ❤️", "bmLongest": "最長單字", "bmSurvive": "存活", "qzName": "🎯 單字搶金賽", "qzSub": "3 分鐘內盡量答對單字題賺金幣：選意思、選同義字、填空。用金幣升級獎金和倍率，還能冰凍對手或偷走他們的金幣！最後金幣最多的人獲勝。", "qzPerQ": "題", "qzShop": "商店", "qzClose": "關閉", "qzUpInc": "每題獎金", "qzUpMult": "獎金倍率", "qzShield": "🛡 護盾（擋下一次攻擊）", "qzFreeze": "❄️ 冰凍對手 6 秒", "qzSteal": "🧲 偷走對手 15% 金幣", "qzMax": "已滿級", "qzNoMoney": "金幣不夠", "qzBought": "購買成功", "qzSentAtk": "已攻擊 {n}！", "qzFrozen": "❄️ 你被 {n} 冰凍了！", "qzBlocked": "🛡 擋下了 {n} 的攻擊", "qzStolen": "🧲 {n} 偷走你 {a} 金幣", "qzLoot": "🧲 偷到 {a} 金幣！", "qzQ1": "哪個英文單字是這個意思？", "qzQ2": "這個字是什麼意思？", "qzQ3": "哪個字的意思最接近？", "qzQ4": "選出最適合填空的字", "qzRight": "答對！+{g} 金幣", "qzWrongA": "答案是 {w}", "qzBest": "最高連對", "qzMissed": "你答錯的單字", "qzNoMissed": "全部答對，太厲害了！"});
+Object.assign(STR.en,{"bmName": "💣 Word bomb", "bmSub": "The bomb goes round the group. On your turn, type an English word that contains the given letters to pass it on; whoever holds it when it explodes loses a life. Use every letter of the alphabet for an extra life. Last one standing wins! The bomb starts at 15 seconds and each pass gives the next player 1 second less (15→14→13…); everyone has 3 lives.", "bmTurn": "Your turn! Type a word containing these letters", "bmWait": "Waiting for {n}…", "bmNeed": "The word must contain “{s}”", "bmUsed": "Someone already used that word", "bmBoom": "💥 {n} exploded!", "bmAbc": "Use each of these letters once to earn an extra life", "bmLifeUp": "Alphabet complete! +1 ❤️", "bmLongest": "Longest word", "bmSurvive": "Survivor", "qzName": "🎯 Quiz gold rush", "qzSub": "Answer as many word questions as you can in 3 minutes to earn gold: meanings, synonyms, fill the gap. Spend gold on bigger rewards and multipliers, or freeze rivals and steal their gold! Most gold wins.", "qzPerQ": "Q", "qzShop": "Shop", "qzClose": "Close", "qzUpInc": "Gold per answer", "qzUpMult": "Multiplier", "qzShield": "🛡 Shield (blocks one attack)", "qzFreeze": "❄️ Freeze a rival for 6s", "qzSteal": "🧲 Steal 15% of a rival's gold", "qzMax": "Maxed", "qzNoMoney": "Not enough gold", "qzBought": "Bought!", "qzSentAtk": "Attacked {n}!", "qzFrozen": "❄️ {n} froze you!", "qzBlocked": "🛡 Blocked {n}'s attack", "qzStolen": "🧲 {n} stole {a} gold from you", "qzLoot": "🧲 You stole {a} gold!", "qzQ1": "Which English word has this meaning?", "qzQ2": "What does this word mean?", "qzQ3": "Which word is closest in meaning?", "qzQ4": "Choose the word that fits the gap", "qzRight": "Correct! +{g} gold", "qzWrongA": "The answer was {w}", "qzBest": "Best streak", "qzMissed": "Words you got wrong", "qzNoMissed": "All correct. Amazing!"});
+Object.assign(STR.hi,{"bmName": "💣 शब्द बम", "bmSub": "बम सबके बीच घूमता है। अपनी बारी पर दिए गए अक्षरों वाला अंग्रेज़ी शब्द लिखें और बम आगे भेजें; फटने पर जिसके हाथ में बम हो उसकी एक जान जाती है। पूरी वर्णमाला इस्तेमाल करने पर एक जान और मिलती है। आख़िर तक बचे रहने वाला जीतता है! बम 15 सेकंड से शुरू होता है और हर बार आगे भेजने पर अगले खिलाड़ी को 1 सेकंड कम मिलता है (15→14→13…); सबके पास 3 जानें हैं।", "bmTurn": "आपकी बारी! इन अक्षरों वाला शब्द लिखें", "bmWait": "{n} का इंतज़ार…", "bmNeed": "शब्द में “{s}” होना चाहिए", "bmUsed": "यह शब्द पहले ही इस्तेमाल हो चुका है", "bmBoom": "💥 {n} फट गया!", "bmAbc": "इन सभी अक्षरों को एक बार इस्तेमाल करें, एक जान और मिलेगी", "bmLifeUp": "वर्णमाला पूरी! +1 ❤️", "bmLongest": "सबसे लंबा शब्द", "bmSurvive": "विजेता", "qzName": "🎯 क्विज़ सोना दौड़", "qzSub": "3 मिनट में ज़्यादा से ज़्यादा शब्द प्रश्नों के सही उत्तर देकर सोना कमाएँ: अर्थ, समानार्थी, रिक्त स्थान। सोने से इनाम और गुणक बढ़ाएँ, या विरोधियों को जमा दें और उनका सोना चुरा लें! सबसे ज़्यादा सोना जीतता है।", "qzPerQ": "प्रश्न", "qzShop": "दुकान", "qzClose": "बंद करें", "qzUpInc": "हर उत्तर का इनाम", "qzUpMult": "गुणक", "qzShield": "🛡 ढाल (एक हमला रोकती है)", "qzFreeze": "❄️ विरोधी को 6 से. जमा दें", "qzSteal": "🧲 विरोधी का 15% सोना चुराएँ", "qzMax": "अधिकतम", "qzNoMoney": "सोना काफ़ी नहीं", "qzBought": "खरीद लिया!", "qzSentAtk": "{n} पर हमला किया!", "qzFrozen": "❄️ {n} ने आपको जमा दिया!", "qzBlocked": "🛡 {n} का हमला रोका", "qzStolen": "🧲 {n} ने आपका {a} सोना चुराया", "qzLoot": "🧲 आपने {a} सोना चुराया!", "qzQ1": "किस अंग्रेज़ी शब्द का यह अर्थ है?", "qzQ2": "इस शब्द का अर्थ क्या है?", "qzQ3": "किस शब्द का अर्थ सबसे निकट है?", "qzQ4": "रिक्त स्थान के लिए सही शब्द चुनें", "qzRight": "सही! +{g} सोना", "qzWrongA": "उत्तर था {w}", "qzBest": "सबसे लंबी सही लड़ी", "qzMissed": "आपके ग़लत शब्द", "qzNoMissed": "सब सही, कमाल!"});
+Object.assign(STR.es,{"bmName": "💣 Bomba de palabras", "bmSub": "La bomba pasa de mano en mano. En tu turno, escribe una palabra en inglés que contenga las letras indicadas para pasarla; quien la tenga cuando explote pierde una vida. Usa todas las letras del abecedario para ganar una vida extra. ¡Gana quien sobreviva! La bomba empieza con 15 segundos y con cada pase el siguiente tiene 1 segundo menos (15→14→13…); todos tienen 3 vidas.", "bmTurn": "¡Tu turno! Escribe una palabra con estas letras", "bmWait": "Esperando a {n}…", "bmNeed": "La palabra debe contener «{s}»", "bmUsed": "Esa palabra ya se usó", "bmBoom": "💥 ¡{n} explotó!", "bmAbc": "Usa cada una de estas letras una vez para ganar una vida extra", "bmLifeUp": "¡Abecedario completo! +1 ❤️", "bmLongest": "Palabra más larga", "bmSurvive": "Superviviente", "qzName": "🎯 Fiebre del oro", "qzSub": "Responde todas las preguntas de vocabulario que puedas en 3 minutos para ganar oro: significados, sinónimos, huecos. Gasta oro en mejoras y multiplicadores, o congela a tus rivales y róbales oro. ¡Gana quien tenga más oro!", "qzPerQ": "preg.", "qzShop": "Tienda", "qzClose": "Cerrar", "qzUpInc": "Oro por respuesta", "qzUpMult": "Multiplicador", "qzShield": "🛡 Escudo (bloquea un ataque)", "qzFreeze": "❄️ Congelar a un rival 6 s", "qzSteal": "🧲 Robar el 15% del oro de un rival", "qzMax": "Máximo", "qzNoMoney": "No tienes suficiente oro", "qzBought": "¡Comprado!", "qzSentAtk": "¡Atacaste a {n}!", "qzFrozen": "❄️ ¡{n} te congeló!", "qzBlocked": "🛡 Bloqueaste el ataque de {n}", "qzStolen": "🧲 {n} te robó {a} de oro", "qzLoot": "🧲 ¡Robaste {a} de oro!", "qzQ1": "¿Qué palabra inglesa tiene este significado?", "qzQ2": "¿Qué significa esta palabra?", "qzQ3": "¿Qué palabra tiene un significado más parecido?", "qzQ4": "Elige la palabra que encaja en el hueco", "qzRight": "¡Correcto! +{g} de oro", "qzWrongA": "La respuesta era {w}", "qzBest": "Mejor racha", "qzMissed": "Palabras que fallaste", "qzNoMissed": "¡Todo correcto, increíble!"});
+Object.assign(STR.ja,{"bmName": "💣 単語ボム", "bmSub": "爆弾をみんなで回します。自分の番になったら、指定された文字の組み合わせを含む英単語を入力して爆弾を次の人へ。爆発したときに持っていた人はライフが1減ります。アルファベットを全部使うとライフ+1。最後まで生き残った人の勝ち！ 爆弾は15秒から始まり、渡すたびに次の人は1秒ずつ短くなります（15→14→13…）。ライフは1人3つ。", "bmTurn": "あなたの番！この文字を含む単語を入力", "bmWait": "{n} の回答を待っています…", "bmNeed": "単語に「{s}」を含めてください", "bmUsed": "その単語はもう使われています", "bmBoom": "💥 {n} が爆発！", "bmAbc": "これらの文字を一度ずつ使うとライフ+1", "bmLifeUp": "アルファベット制覇！+1 ❤️", "bmLongest": "最長の単語", "bmSurvive": "生存", "qzName": "🎯 単語ゴールドラッシュ", "qzSub": "3分間で単語問題にできるだけ正解してゴールドを稼ごう：意味・類義語・穴埋め。ゴールドで報酬や倍率をアップしたり、相手を凍らせたりゴールドを盗んだりできる！ゴールドが一番多い人の勝ち。", "qzPerQ": "問", "qzShop": "ショップ", "qzClose": "閉じる", "qzUpInc": "1問の報酬", "qzUpMult": "倍率", "qzShield": "🛡 シールド（攻撃を1回防ぐ）", "qzFreeze": "❄️ 相手を6秒凍らせる", "qzSteal": "🧲 相手のゴールドを15%盗む", "qzMax": "最大", "qzNoMoney": "ゴールドが足りません", "qzBought": "購入しました！", "qzSentAtk": "{n} を攻撃した！", "qzFrozen": "❄️ {n} に凍らされた！", "qzBlocked": "🛡 {n} の攻撃を防いだ", "qzStolen": "🧲 {n} に {a} ゴールド盗まれた", "qzLoot": "🧲 {a} ゴールド盗んだ！", "qzQ1": "この意味の英単語はどれ？", "qzQ2": "この単語の意味は？", "qzQ3": "意味がいちばん近い単語は？", "qzQ4": "空欄に入る単語を選ぼう", "qzRight": "正解！+{g} ゴールド", "qzWrongA": "答えは {w}", "qzBest": "最高連続正解", "qzMissed": "まちがえた単語", "qzNoMissed": "全問正解、すごい！"});
+Object.assign(STR.ko,{"bmName": "💣 단어 폭탄", "bmSub": "폭탄이 사람들 사이를 돌아요. 내 차례에 주어진 글자 조합이 들어간 영어 단어를 입력하면 폭탄을 넘길 수 있어요. 터질 때 들고 있던 사람은 생명 1개를 잃어요. 알파벳을 모두 쓰면 생명 +1. 마지막까지 살아남으면 승리! 폭탄은 15초에서 시작하고, 넘길 때마다 다음 사람은 1초씩 줄어요 (15→14→13…). 생명은 1인당 3개.", "bmTurn": "내 차례! 이 글자가 들어간 단어를 입력하세요", "bmWait": "{n}님의 답을 기다리는 중…", "bmNeed": "단어에 「{s}」가 들어가야 해요", "bmUsed": "이미 누가 쓴 단어예요", "bmBoom": "💥 {n} 폭발!", "bmAbc": "이 글자들을 한 번씩 쓰면 생명 +1", "bmLifeUp": "알파벳 완성! +1 ❤️", "bmLongest": "가장 긴 단어", "bmSurvive": "생존", "qzName": "🎯 단어 골드 러시", "qzSub": "3분 동안 단어 문제를 최대한 맞혀 골드를 모으세요: 뜻, 유의어, 빈칸. 골드로 보상과 배율을 올리거나 상대를 얼리고 골드를 훔칠 수 있어요! 골드가 가장 많은 사람이 승리.", "qzPerQ": "문제", "qzShop": "상점", "qzClose": "닫기", "qzUpInc": "문제당 보상", "qzUpMult": "배율", "qzShield": "🛡 방패 (공격 1회 막기)", "qzFreeze": "❄️ 상대 6초 얼리기", "qzSteal": "🧲 상대 골드 15% 훔치기", "qzMax": "최대", "qzNoMoney": "골드가 부족해요", "qzBought": "구매 완료!", "qzSentAtk": "{n}님을 공격했어요!", "qzFrozen": "❄️ {n}님이 나를 얼렸어요!", "qzBlocked": "🛡 {n}님의 공격을 막았어요", "qzStolen": "🧲 {n}님이 골드 {a}를 훔쳐 갔어요", "qzLoot": "🧲 골드 {a}를 훔쳤어요!", "qzQ1": "이 뜻의 영어 단어는?", "qzQ2": "이 단어의 뜻은?", "qzQ3": "뜻이 가장 가까운 단어는?", "qzQ4": "빈칸에 알맞은 단어를 고르세요", "qzRight": "정답! +{g} 골드", "qzWrongA": "정답은 {w}", "qzBest": "최고 연속 정답", "qzMissed": "틀린 단어", "qzNoMissed": "모두 정답, 대단해요!"});
 Object.assign(STR.zh,{qzOk:"答對",qzNg:"答錯"});
 Object.assign(STR.en,{qzOk:"Correct",qzNg:"Wrong"});
 Object.assign(STR.hi,{qzOk:"सही",qzNg:"ग़लत"});
@@ -3594,6 +3687,12 @@ Object.assign(STR.hi,{"ieRecOn": "सुनने के प्रश्न अ�
 Object.assign(STR.es,{"ieRecOn": "La comprensión auditiva usa ahora grabaciones de alta calidad (voces neuronales con acento británico, irlandés y australiano), naturales en cualquier móvil.", "ieRecFallback": "Voz del móvil cuando no hay grabación", "ieVoiceHint": "En iPhone las páginas web solo pueden usar las voces integradas; las voces mejoradas que descargas no están disponibles para los sitios web (límite de Apple). Los tests con grabación la reproducen solos; solo los que aún no tienen usan la voz elegida aquí. Moira o Daniel suenan mejor."});
 Object.assign(STR.ja,{"ieRecOn": "リスニングは高品質の録音（イギリス・アイルランド・オーストラリア英語のニューラル音声）になりました。どのスマホでも自然に聞こえます。", "ieRecFallback": "録音がないときに使うスマホの声", "ieVoiceHint": "iPhone のウェブページは本体に最初から入っている声しか使えず、追加でダウンロードした「拡張」音声は使えません（Apple の制限）。録音のある問題は自動で録音を再生し、まだ録音がない問題だけここで選んだ声を使います。Moira か Daniel がおすすめです。"});
 Object.assign(STR.ko,{"ieRecOn": "듣기는 이제 고품질 녹음(영국·아일랜드·호주 억양의 뉴럴 음성)으로 재생돼요. 어떤 휴대폰에서도 자연스럽게 들려요.", "ieRecFallback": "녹음이 없을 때 쓰는 휴대폰 음성", "ieVoiceHint": "iPhone 웹페이지는 기본 내장 음성만 쓸 수 있고, 따로 내려받은 '향상된' 음성은 웹사이트에서 쓸 수 없어요 (Apple의 제한). 녹음이 있는 문제는 자동으로 녹음을 재생하고, 아직 녹음이 없는 문제만 여기서 고른 음성을 써요. Moira나 Daniel을 추천해요."});
+Object.assign(STR.zh,{"ticketsL": "出征令", "sb1": "暖心咖啡", "sb2": "幸運草", "sb3": "金色豎琴", "sb4": "紫晶皇冠", "sb5": "彩虹鳳凰", "sbR1": "€5 以下", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100 以上", "sbMine": "你的贊助徽章：{b}", "sbThanks": "謝謝你的支持！這個徽章會一直顯示在你的名字旁邊，大家都看得到。", "sbDev": "贊助徽章", "sbNickPh": "玩家暱稱", "sbRemove": "移除徽章", "sbGive": "給予徽章", "sbNone": "目前還沒有贊助者", "sbNoNick": "找不到這個暱稱的玩家", "sbGiven": "已給 {n}「{b}」徽章", "sbRemoved": "已移除徽章", "dsGames": "遊戲遊玩統計", "dsGame": "遊戲", "dsGPlayers": "玩過的人數", "dsGPlays": "總場數", "dsGIelts": "IELTS 正式測驗", "dsGIeltsP": "IELTS 練習", "dsGBattle": "冒險戰鬥", "supTitle": "贊助開發者", "supSub": "這個 App 是我一個人利用下班和週末慢慢做出來的。每天的新聞、聽力錄音、新遊戲和伺服器，都需要時間和一些費用。如果它曾經陪你多學會一個單字、多讀懂一篇新聞，歡迎支持我繼續做下去。任何金額我都真心感謝，也會是我把它做得更好的最大動力 🙏", "supBtn": "用 Revolut 贊助"});
+Object.assign(STR.en,{"ticketsL": "Quest passes", "sb1": "Warm Cup", "sb2": "Lucky Clover", "sb3": "Golden Harp", "sb4": "Amethyst Crown", "sb5": "Rainbow Phoenix", "sbR1": "under €5", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100+", "sbMine": "Your supporter badge: {b}", "sbThanks": "Thank you for your support! This badge stays next to your name for everyone to see.", "sbDev": "Supporter badges", "sbNickPh": "Player nickname", "sbRemove": "Remove badge", "sbGive": "Give badge", "sbNone": "No supporters yet", "sbNoNick": "No player with that nickname", "sbGiven": "Gave {n} the “{b}” badge", "sbRemoved": "Badge removed", "dsGames": "Game play stats", "dsGame": "Game", "dsGPlayers": "Players", "dsGPlays": "Total plays", "dsGIelts": "IELTS (ranked)", "dsGIeltsP": "IELTS practice", "dsGBattle": "Quest battles", "supTitle": "Support the developer", "supSub": "I build this app on my own, in evenings and at weekends. The daily news, listening recordings, new games and servers all take time and some money. If it has ever helped you learn one more word or understand one more news story, I'd be grateful for your support. Any amount truly means a lot and keeps me making it better 🙏", "supBtn": "Support on Revolut"});
+Object.assign(STR.hi,{"ticketsL": "अभियान पास", "sb1": "गर्म प्याला", "sb2": "भाग्यशाली तिपतिया", "sb3": "सुनहरी वीणा", "sb4": "नीलम मुकुट", "sb5": "इंद्रधनुष फ़ीनिक्स", "sbR1": "€5 से कम", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100+", "sbMine": "आपका समर्थक बैज: {b}", "sbThanks": "आपके समर्थन के लिए धन्यवाद! यह बैज सबको आपके नाम के पास दिखेगा।", "sbDev": "समर्थक बैज", "sbNickPh": "खिलाड़ी का उपनाम", "sbRemove": "बैज हटाएँ", "sbGive": "बैज दें", "sbNone": "अभी कोई समर्थक नहीं", "sbNoNick": "इस उपनाम का कोई खिलाड़ी नहीं मिला", "sbGiven": "{n} को “{b}” बैज दिया", "sbRemoved": "बैज हटाया", "dsGames": "खेल आँकड़े", "dsGame": "खेल", "dsGPlayers": "खिलाड़ी", "dsGPlays": "कुल बार", "dsGIelts": "IELTS (रैंक्ड)", "dsGIeltsP": "IELTS अभ्यास", "dsGBattle": "साहसिक लड़ाइयाँ", "supTitle": "डेवलपर का समर्थन करें", "supSub": "यह ऐप मैं अकेले, शाम और सप्ताहांत में बनाता हूँ। रोज़ की ख़बरें, सुनने की रिकॉर्डिंग, नए खेल और सर्वर—सबमें समय और कुछ ख़र्च लगता है। अगर इसने आपको एक भी नया शब्द सीखने में मदद की है, तो आपका समर्थन बहुत मायने रखेगा। कोई भी राशि सच में मदद करती है 🙏", "supBtn": "Revolut से सहयोग करें"});
+Object.assign(STR.es,{"ticketsL": "Pases", "sb1": "Taza cálida", "sb2": "Trébol de la suerte", "sb3": "Arpa dorada", "sb4": "Corona de amatista", "sb5": "Fénix arcoíris", "sbR1": "menos de €5", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100+", "sbMine": "Tu insignia de mecenas: {b}", "sbThanks": "¡Gracias por tu apoyo! Esta insignia aparece junto a tu nombre para que todos la vean.", "sbDev": "Insignias de mecenas", "sbNickPh": "Apodo del jugador", "sbRemove": "Quitar insignia", "sbGive": "Dar insignia", "sbNone": "Aún no hay mecenas", "sbNoNick": "No hay ningún jugador con ese apodo", "sbGiven": "Le diste a {n} la insignia «{b}»", "sbRemoved": "Insignia quitada", "dsGames": "Estadísticas de juego", "dsGame": "Juego", "dsGPlayers": "Jugadores", "dsGPlays": "Partidas", "dsGIelts": "IELTS (oficial)", "dsGIeltsP": "IELTS práctica", "dsGBattle": "Batallas", "supTitle": "Apoya al desarrollador", "supSub": "Hago esta app yo solo, por las tardes y los fines de semana. Las noticias diarias, las grabaciones, los juegos nuevos y los servidores requieren tiempo y algo de dinero. Si alguna vez te ayudó a aprender una palabra más o a entender una noticia más, te agradecería mucho tu apoyo. Cualquier cantidad me ayuda de verdad a seguir mejorándola 🙏", "supBtn": "Apoyar con Revolut"});
+Object.assign(STR.ja,{"ticketsL": "出撃券", "sb1": "ほっこりカップ", "sb2": "幸運のクローバー", "sb3": "黄金のハープ", "sb4": "アメジストの王冠", "sb5": "虹色フェニックス", "sbR1": "€5 未満", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100 以上", "sbMine": "あなたのサポーターバッジ：{b}", "sbThanks": "応援ありがとうございます！このバッジはずっとあなたの名前の横に表示され、みんなに見えます。", "sbDev": "サポーターバッジ", "sbNickPh": "プレイヤーのニックネーム", "sbRemove": "バッジを外す", "sbGive": "バッジを付与", "sbNone": "まだサポーターはいません", "sbNoNick": "そのニックネームのプレイヤーが見つかりません", "sbGiven": "{n} に「{b}」バッジを付与しました", "sbRemoved": "バッジを外しました", "dsGames": "ゲームのプレイ統計", "dsGame": "ゲーム", "dsGPlayers": "プレイ人数", "dsGPlays": "合計回数", "dsGIelts": "IELTS（本番）", "dsGIeltsP": "IELTS 練習", "dsGBattle": "冒険バトル", "supTitle": "開発者を応援する", "supSub": "このアプリは、私が一人で仕事のあとや週末に少しずつ作っています。毎日のニュース、リスニング音声、新しいゲーム、サーバーには時間と費用がかかります。もし一つでも多く単語を覚えたり、ニュースを読めたりするお役に立てていたら、応援していただけるとうれしいです。金額に関わらず心から感謝しています 🙏", "supBtn": "Revolut で応援する"});
+Object.assign(STR.ko,{"ticketsL": "출정권", "sb1": "따뜻한 컵", "sb2": "행운의 클로버", "sb3": "황금 하프", "sb4": "자수정 왕관", "sb5": "무지개 불사조", "sbR1": "€5 미만", "sbR2": "€5–10", "sbR3": "€10–50", "sbR4": "€50–100", "sbR5": "€100 이상", "sbMine": "내 후원 배지: {b}", "sbThanks": "후원해 주셔서 감사합니다! 이 배지는 항상 이름 옆에 표시되어 모두가 볼 수 있어요.", "sbDev": "후원 배지", "sbNickPh": "플레이어 닉네임", "sbRemove": "배지 제거", "sbGive": "배지 주기", "sbNone": "아직 후원자가 없어요", "sbNoNick": "그 닉네임의 플레이어를 찾을 수 없어요", "sbGiven": "{n}님에게 「{b}」 배지를 줬어요", "sbRemoved": "배지를 제거했어요", "dsGames": "게임 플레이 통계", "dsGame": "게임", "dsGPlayers": "플레이한 사람", "dsGPlays": "총 횟수", "dsGIelts": "IELTS (정식)", "dsGIeltsP": "IELTS 연습", "dsGBattle": "모험 전투", "supTitle": "개발자 후원하기", "supSub": "이 앱은 제가 혼자 퇴근 후와 주말에 조금씩 만들고 있어요. 매일의 뉴스, 듣기 녹음, 새 게임, 서버에는 시간과 비용이 들어요. 단어 하나, 뉴스 한 편이라도 더 이해하는 데 도움이 됐다면 후원으로 응원해 주세요. 금액과 상관없이 진심으로 감사하고, 더 좋게 만드는 큰 힘이 돼요 🙏", "supBtn": "Revolut으로 후원하기"});
 document.documentElement.lang={zh:"zh-Hant",en:"en",hi:"hi",es:"es",ja:"ja",ko:"ko"}[LANG]; applyStaticText(); applyMast();
 render();
 (async ()=>{
