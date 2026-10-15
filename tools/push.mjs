@@ -99,7 +99,7 @@ export async function saveStats(tok, subs, add) {
   for (const k of Object.keys(days).sort().slice(0, -14)) delete days[k];
   const doc = { subs, updatedAt: new Date().toISOString(), days };
   const r = await fetch(url, { method: "PATCH", headers: { ...H, "Content-Type": "application/json" }, body: JSON.stringify({ fields: toV(doc).mapValue.fields }) });
-  if (!r.ok) console.log("stats save failed", r.status, await r.text());
+  if (!r.ok) console.log("::warning::stats save failed " + r.status + " " + (await r.text()).slice(0, 200)); else console.log("::notice::stats saved");
 }
 
 /* ---------- messages ---------- */
