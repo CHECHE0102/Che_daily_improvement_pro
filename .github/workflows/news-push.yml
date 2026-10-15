@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "1 * * * *"   # hourly; the script picks players whose local time is 07:xx or 19:xx
   workflow_dispatch:
+    inputs:
+      test:
+        description: "Send a test notification to phones that turned notifications on in the last 3 hours"
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -23,3 +28,4 @@ jobs:
         env:
           FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
           VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
+          PUSH_TEST: ${{ inputs.test }}

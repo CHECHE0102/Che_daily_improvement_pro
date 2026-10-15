@@ -87,6 +87,7 @@ const del = (tok, name) => fetch(`https://firestore.googleapis.com/v1/${name}`, 
 /* ---------- messages ---------- */
 const MSG = {
   zh: { am: "📰 今天的新聞來了", amB: "{t}\n點開來讀讀看，順便學幾個新單字吧！", pm: "📖 今天的新聞還沒看喔", pmB: "花 5 分鐘讀一篇，今天的英文就不會斷掉！" },
+  test: { zh: ["🔔 測試通知", "通知設定成功！之後每天早上 7 點會提醒你看新聞 📰"], en: ["🔔 Test notification", "It works! You'll get a news reminder every morning at 7 📰"] },
   sc: { am: "📰 今天的新闻来了", amB: "{t}\n点开来读读看，顺便学几个新单词吧！", pm: "📖 今天的新闻还没看哦", pmB: "花 5 分钟读一篇，今天的英文就不会断掉！" },
   en: { am: "📰 Today's news is here", amB: "{t}\nTap to read it and pick up a few new words!", pm: "📖 You haven't read today's news yet", pmB: "Five minutes with one story keeps your English going today!" },
   hi: { am: "📰 आज की ख़बरें आ गई हैं", amB: "{t}\nपढ़ने के लिए टैप करें और कुछ नए शब्द सीखें!", pm: "📖 आपने आज की ख़बर अभी तक नहीं पढ़ी", pmB: "बस 5 मिनट में एक ख़बर पढ़ें और आज की अंग्रेज़ी पूरी करें!" },
@@ -113,13 +114,24 @@ export function plan(s, news, now = new Date()) {
 
 async function main() {
   const saRaw = process.env.FIREBASE_SA, vpriv = process.env.VAPID_PRIVATE;
-  if (!saRaw || !vpriv) { console.log("FIREBASE_SA or VAPID_PRIVATE secret is not set yet — nothing sent."); return; }
+  if (!saRaw || !vpriv) { console.log("::warning::FIREBASE_SA or VAPID_PRIVATE missing"); console.log("FIREBASE_SA or VAPID_PRIVATE secret is not set yet — nothing sent."); return; }
   const sa = JSON.parse(saRaw), key = vapidKey(vpriv.trim());
   let news = null;
   try { const j = await (await fetch(NEWS_INDEX + "?t=" + Date.now())).json();
     const top = (j.articles || []).filter(a => (a.rank || 1) === 1).sort((a, b) => b.date.localeCompare(a.date))[0];
     if (top) news = { date: top.date, title: top.title }; } catch (e) { console.log("news index:", e.message); }
   const tok = await googleToken(sa), subs = await listSubs(tok);
+  if (process.env.PUSH_TEST === "true") { // manual test: only phones that turned notifications on in the last 3 hours
+    let ok = 0, bad = [];
+    for (const s of subs) {
+      if (!s.endpoint || Date.now() - Number(s.ts || 0) > 3 * 3600e3) continue;
+      const [title, body] = (s.lang === "zh" ? MSG.test.zh : MSG.test.en);
+      try { const st = await sendPush(s, { title, body, tag: "test", url: "./" }, key); if (st >= 200 && st < 300) ok++; else bad.push(st + "@" + new URL(s.endpoint).host); }
+      catch (e) { bad.push(e.message); }
+    }
+    const line = `TEST · subscribers ${subs.length} · recent ${subs.filter(s => Date.now() - Number(s.ts || 0) <= 3 * 3600e3).length} · sent ${ok} · failed ${bad.join(", ") || 0}`;
+    console.log(line); console.log("::notice::" + line); return;
+  }
   let sent = { am: 0, pm: 0 }, gone = 0, fail = 0;
   for (const s of subs) {
     if (!s.endpoint || !s.p256dh || !s.auth || s.on === false || s.on === "false") continue;
@@ -130,6 +142,7 @@ async function main() {
       if (st >= 200 && st < 300) { await patch(tok, s.name, p.set); sent[p.kind]++; } else { fail++; console.log("push", st, new URL(s.endpoint).host); }
     } catch (e) { fail++; console.log("push error", e.message); }
   }
+  console.log(`::notice::subscribers ${subs.length} · morning ${sent.am} · evening ${sent.pm} · expired ${gone} · failed ${fail}`);
   console.log(`subscribers ${subs.length} · morning ${sent.am} · evening ${sent.pm} · expired ${gone} · failed ${fail} · latest news ${news ? news.date : "none"}`);
 }
 if (import.meta.url === `file://${process.argv[1]}`) main().catch(e => { console.error(e); process.exit(1); });
