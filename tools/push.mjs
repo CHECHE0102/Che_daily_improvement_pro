@@ -84,6 +84,24 @@ async function patch(tok, name, fields) {
 }
 const del = (tok, name) => fetch(`https://firestore.googleapis.com/v1/${name}`, { method: "DELETE", headers: { Authorization: "Bearer " + tok } });
 
+/* ---------- daily stats for the app's developer panel (config/pushStats) ---------- */
+const toV = v => typeof v === "number" ? { integerValue: String(Math.round(v)) } : typeof v === "string" ? { stringValue: v }
+  : { mapValue: { fields: Object.fromEntries(Object.entries(v).map(([k, x]) => [k, toV(x)])) } };
+const fromV = v => v.mapValue ? Object.fromEntries(Object.entries(v.mapValue.fields || {}).map(([k, x]) => [k, fromV(x)]))
+  : v.integerValue !== undefined ? Number(v.integerValue) : v.doubleValue ?? v.stringValue ?? v.booleanValue ?? null;
+export async function saveStats(tok, subs, add) {
+  const url = `${FS}/config/pushStats`, H = { Authorization: "Bearer " + tok };
+  let cur = {}; try { const j = await (await fetch(url, { headers: H })).json(); if (j.fields) cur = fromV({ mapValue: { fields: j.fields } }); } catch {}
+  const day = localNow("Europe/Dublin").date, days = cur.days || {};
+  const d = days[day] || { am: 0, pm: 0, gone: 0, fail: 0, test: 0 };
+  for (const k of Object.keys(add)) d[k] = (d[k] || 0) + add[k];
+  days[day] = d;
+  for (const k of Object.keys(days).sort().slice(0, -14)) delete days[k];
+  const doc = { subs, updatedAt: new Date().toISOString(), days };
+  const r = await fetch(url, { method: "PATCH", headers: { ...H, "Content-Type": "application/json" }, body: JSON.stringify({ fields: toV(doc).mapValue.fields }) });
+  if (!r.ok) console.log("stats save failed", r.status, await r.text());
+}
+
 /* ---------- messages ---------- */
 const MSG = {
   zh: { am: "📰 今天的新聞來了", amB: "{t}\n點開來讀讀看，順便學幾個新單字吧！", pm: "📖 今天的新聞還沒看喔", pmB: "花 5 分鐘讀一篇，今天的英文就不會斷掉！" },
@@ -130,6 +148,7 @@ async function main() {
       catch (e) { bad.push(e.message); }
     }
     const line = `TEST · subscribers ${subs.length} · recent ${subs.filter(s => Date.now() - Number(s.ts || 0) <= 3 * 3600e3).length} · sent ${ok} · failed ${bad.join(", ") || 0}`;
+    await saveStats(tok, subs.length, { test: ok, fail: bad.length });
     console.log(line); console.log("::notice::" + line); return;
   }
   let sent = { am: 0, pm: 0 }, gone = 0, fail = 0;
@@ -142,6 +161,7 @@ async function main() {
       if (st >= 200 && st < 300) { await patch(tok, s.name, p.set); sent[p.kind]++; } else { fail++; console.log("push", st, new URL(s.endpoint).host); }
     } catch (e) { fail++; console.log("push error", e.message); }
   }
+  await saveStats(tok, subs.length - gone, { am: sent.am, pm: sent.pm, gone, fail });
   console.log(`::notice::subscribers ${subs.length} · morning ${sent.am} · evening ${sent.pm} · expired ${gone} · failed ${fail}`);
   console.log(`subscribers ${subs.length} · morning ${sent.am} · evening ${sent.pm} · expired ${gone} · failed ${fail} · latest news ${news ? news.date : "none"}`);
 }
