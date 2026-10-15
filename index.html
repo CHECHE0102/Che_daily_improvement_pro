@@ -670,6 +670,7 @@ body.maint-lock{overflow:hidden}
 .push-note{margin:10px 0 0;white-space:pre-line;line-height:1.55}.push-note.ok{color:var(--ink);font-weight:600}.push-card .row{margin-top:12px}
 .push-steps{margin:10px 0 0;padding-left:20px;font-size:13px;line-height:1.7}
 .push-tip{display:flex;align-items:center;gap:10px;padding:12px 14px}.push-tip .t{flex:1;font-size:14px}.push-tip .x{background:none;border:0;color:var(--muted);font-size:20px;padding:4px 6px;line-height:1}
+.sup-hidden{position:absolute;top:8px;right:12px;color:var(--muted)}.card.sup{position:relative}
 </style>
 
 </head>
@@ -1175,14 +1176,14 @@ function viewSettings(){
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     ${feedbackCard()}
-    <section class="card sup"><div class="sup-cup" aria-hidden="true">💝</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
+    ${SUPPORT_ON||DEV?`<section class="card sup">${!SUPPORT_ON?`<span class="sup-hidden sm-t">🙈 ${T("supHiddenNote")}</span>`:""}<div class="sup-cup" aria-hidden="true">💝</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
       <p class="sup-note sm-t">${T("supNote",{n:game().nick?`<b>${esc(game().nick)}</b>`:T("supNoNick")})}</p>
       <a class="btn sm" href="https://revolut.me/chingche" target="_blank" rel="noopener noreferrer">${T("supBtn")}</a>
       <details class="sup-bank"><summary>🏦 ${T("supBank")}</summary>
         <p class="sm-t">${T("supBankSub")}</p>
         <div class="bank-row"><span class="muted">${T("supCode")}</span><b>(013) 國泰世華銀行</b></div>
         <div class="bank-row"><span class="muted">${T("supAcct")}</span><b class="acct">116506030607</b><button class="btn ghost sm" data-act="copyacct">${T("supCopy")}</button></div>
-        <img src="assets/cathay-qr.jpg" alt="QR code" class="bank-qr" loading="lazy"></details></div></section>
+        <img src="assets/cathay-qr.jpg" alt="QR code" class="bank-qr" loading="lazy"></details></div></section>`:""}
     ${devFooter()}
   </div>`;
 }
@@ -2560,7 +2561,8 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.55";   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
+const APP_VERSION="2026.10.56";
+const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
@@ -4172,6 +4174,7 @@ function devPushHtml(P){
 Object.assign(STR.zh,{dpTitle:"推播通知", dpNone:"還沒有推播紀錄（GitHub 每小時更新一次）。", dpSubs:"訂閱的手機", dpAm:"今天早上已發", dpPm:"今天晚上已發", dpDate:"日期", dpAmS:"早上", dpPmS:"晚上", dpGone:"已失效", dpFail:"失敗", dpUpd:"最後更新：{t}（以愛爾蘭日期計，每小時更新）"});
 Object.assign(STR.en,{dpTitle:"Push notifications", dpNone:"No push records yet (GitHub updates them every hour).", dpSubs:"Subscribed phones", dpAm:"Morning sent today", dpPm:"Evening sent today", dpDate:"Date", dpAmS:"Morning", dpPmS:"Evening", dpGone:"Expired", dpFail:"Failed", dpUpd:"Last updated: {t} (Irish dates, updated hourly)"});
 for(const k of ["hi","es","ja","ko"]) Object.assign(STR[k],{dpTitle:STR.en.dpTitle, dpNone:STR.en.dpNone, dpSubs:STR.en.dpSubs, dpAm:STR.en.dpAm, dpPm:STR.en.dpPm, dpDate:STR.en.dpDate, dpAmS:STR.en.dpAmS, dpPmS:STR.en.dpPmS, dpGone:STR.en.dpGone, dpFail:STR.en.dpFail, dpUpd:STR.en.dpUpd});
+Object.assign(STR.zh,{supHiddenNote:"玩家看不到"}); for(const k of ["en","hi","es","ja","ko"]) Object.assign(STR[k],{supHiddenNote:"Hidden from players"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
