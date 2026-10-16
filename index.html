@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Che Daily Improvement Pro</title>
+<title>BinBin daily</title>
 <meta name="description" content="Learn English from daily Irish news — 繁體中文 · English · हिन्दी · Español · 日本語 · 한국어. Earn gold from quizzes, buy elemental gear, fight Celtic monsters.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Che Pro">
+<meta name="apple-mobile-web-app-title" content="BinBin">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#F2F5F3">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -678,12 +678,47 @@ body.maint-lock{overflow:hidden}
 .hs-side small{color:var(--muted);font-size:11px}.hs-side b{font-size:12.5px;overflow-wrap:anywhere}.hs-side .tile,.hs-side svg{max-width:44px}
 @keyframes hsidle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px) scale(1.01)}}
 @media (prefers-reduced-motion:reduce){.hs-fig .hero-svg{animation:none}}
+.mast-l{display:flex;align-items:center;gap:8px;min-width:0}
+.set-btn{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;padding:0}
+.set-btn svg{width:19px;height:19px}.set-btn[aria-current="page"]{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
+.brand{display:flex;align-items:center;gap:2px}.brand span{margin-left:.25em}
+.brand-dog{height:36px;width:auto;margin:-8px 0 -6px 4px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12))}
+header.mast{align-items:center}
+@media (max-width:370px){.mast small{display:none}}
+.onb{position:fixed;inset:0;z-index:60;background:rgba(20,28,26,.55);display:flex;align-items:flex-end;justify-content:center;padding:16px;padding-bottom:max(16px,env(safe-area-inset-bottom))}
+@media (min-height:640px){.onb{align-items:center}}
+body.onb-open{overflow:hidden}
+.onb-card{position:relative;width:100%;max-width:420px;max-height:calc(100dvh - 32px);overflow:auto;background:var(--paper);border-radius:22px;padding:28px 20px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;animation:up .35s ease-out}
+.onb-card h2{font-size:22px;margin:4px 0 0}.onb-card p{margin:0;color:var(--muted);line-height:1.6}
+.onb-dog{width:150px;height:auto;margin-top:6px}.onb-ic{font-size:44px;line-height:1}
+.onb-opts{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:6px;text-align:left}
+.onb-steps{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:10px;width:100%;text-align:left}
+.onb-steps li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:15px;line-height:1.45}.onb-steps b{font-size:20px}
+.onb-dots{display:flex;gap:6px;margin-top:8px}.onb-dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}.onb-dots i.on{background:var(--accent);width:20px;border-radius:4px}
+.onb-nav{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:4px}.onb-nav .btn{width:100%}
+.onb-skip{position:absolute;top:12px;right:14px;background:none;border:0;color:var(--muted);font-size:14px;padding:6px}
+.onb-back{position:absolute;top:8px;left:10px;background:none;border:0;color:var(--muted);font-size:28px;line-height:1;padding:4px 10px}
+.onb-coach{background:color-mix(in srgb,var(--accent) 12%,var(--card));border-color:color-mix(in srgb,var(--accent) 40%,var(--line));font-weight:600;font-size:14px}
+.ds-tiles .stat small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+.srs-card{display:flex;flex-direction:column;gap:8px}.srs-top{display:flex;align-items:center;gap:12px}.srs-top>div:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.srs-ic{font-size:28px}
+.srs-boxes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:74px;margin-top:4px}
+.srs-boxes span{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:11px}
+.srs-boxes i{display:block;width:100%;height:var(--h);border-radius:6px 6px 3px 3px;background:color-mix(in srgb,var(--accent) 70%,var(--card));opacity:.85}
+.srs-boxes span:first-child i{background:var(--line)}.srs-boxes small{color:var(--muted);margin-top:3px}.srs-boxes b{position:absolute;top:0;font-size:12px}
+.srs-after{font-size:14px}
+.read-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:60px;z-index:3;background:var(--paper);padding:6px 0}
+.article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
+.priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
+.btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
+.del-ask{border:1.5px solid color-mix(in srgb,var(--bad) 50%,var(--line));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--bad) 6%,var(--card))}.del-ask p{margin:6px 0 10px;line-height:1.55}
+.priv-view .card{display:flex;flex-direction:column;gap:6px}.priv-view p,.priv-view li{font-size:14px;line-height:1.65;margin:0}.priv-view ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.ie-disc{line-height:1.5;margin:4px 2px 0}
 </style>
 
 </head>
 <body>
 <div class="wrap">
-  <header class="mast"><div class="brand">Che <span>Daily Pro</span></div><span class="mast-r"><small id="mastInfo"></small><button id="helpBtn" class="help-btn" data-act="help" aria-label="Help">?</button></span></header>
+  <header class="mast"><div class="mast-l"><button id="setBtn" class="set-btn" data-tab="set" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><div class="brand">BinBin <span>daily</span><img src="assets/binbin-head.webp" class="brand-dog" alt="" width="48" height="36"></div></div><span class="mast-r"><small id="mastInfo"></small><button id="helpBtn" class="help-btn" data-act="help" aria-label="Help">?</button></span></header>
   <main id="app"><div class="view"><p class="muted">…</p></div></main>
 </div>
 <nav class="tabs" aria-label="Main menu">
@@ -691,7 +726,7 @@ body.maint-lock{overflow:hidden}
   <button id="tab-dict" data-tab="dict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>字典</span></button>
   <button id="tab-adv" data-tab="adv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 3.5l6 6-9 9-3-3z"/><path d="M8.5 15.5l-5 5M5 14l5 5"/></svg><span>冒險</span></button>
   <button id="tab-arch" data-tab="arch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg><span>文章</span></button>
-  <button id="tab-set" data-tab="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>設定</span></button>
+  <button id="tab-play" data-tab="play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 8h10a4 4 0 0 1 3.9 4.9l-.8 3.4a2.5 2.5 0 0 1-4.3 1.1L14 15.5h-4l-1.8 1.9a2.5 2.5 0 0 1-4.3-1.1l-.8-3.4A4 4 0 0 1 7 8z"/><path d="M8 11v3M6.5 12.5h3"/><circle cx="15.5" cy="11.5" r=".9" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".9" fill="currentColor"/></svg><span>多人遊戲</span></button>
 </nav>
 <div id="overlay"></div>
 
@@ -944,7 +979,7 @@ function setLang(k){ const was=SC; SC=k==="cn"; LANG=SC?"zh":k; try{ localStorag
   if(was&&!SC){ location.reload(); return; } applyStaticText(); render(); scApply(); }
 function applyStaticText(){
   const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
-  set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch")); set("tab-set",T("tabSet"));
+  set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch")); set("tab-play",T("tabPlay")); { const sb=document.getElementById("setBtn"); if(sb) sb.setAttribute("aria-label",T("tabSet")); }
   { const hb=document.getElementById("helpBtn"); if(hb) hb.setAttribute("aria-label",(HELP[LANG]||HELP.en).title); }
   const n=document.querySelector("nav.tabs"); if(n) n.setAttribute("aria-label",T("mainMenu"));
   const vb=document.getElementById("levelBtn"); if(vb){ vb.textContent=LEVEL; vb.setAttribute("aria-label",T("level")); }
@@ -1068,7 +1103,8 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 /* ---------- rendering ---------- */
 function setTab(t){ S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 function render(){
-  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"));
+  document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"));
+  if(typeof readStopIfLeft==="function") readStopIfLeft(); setTimeout(()=>{ if(typeof pgLockSync==="function") pgLockSync(); },0);
   { const g=game(); $("#mastInfo").innerHTML = T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}); }
   const app=$("#app");
   if(S.view==="today") app.innerHTML=viewToday();
@@ -1077,6 +1113,8 @@ function render(){
   else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
   else if(S.view==="arch") app.innerHTML=viewArch();
   else if(S.view==="set") app.innerHTML=viewSettings();
+  else if(S.view==="play") app.innerHTML=viewPlay();
+  else if(S.view==="privacy") app.innerHTML=viewPrivacy();
   else if(S.view==="adv") app.innerHTML=viewAdv();
   else if(S.view==="battle") app.innerHTML=viewBattle();
   else if(S.view==="ielts") app.innerHTML=viewIelts();
@@ -1104,11 +1142,13 @@ function viewToday(){
   return `<div class="view">
     ${regionNotice()}
     <section class="hero"><div class="eyebrow">${art.region?`📍 ${esc(regionLabel(art.region))} · `:""}${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
+    ${onbCoach()}
     <div class="steps">
       ${step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):T("preDraw",{n:el.length,k:Math.min(10,el.length)})):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
       ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
+    ${srsCard()}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
     ${pushPrompt()}
@@ -1129,7 +1169,7 @@ function viewRead(){
   const lu=lookedUpFor(d,art), post=postFor(d,art);
   const hits=new Set(lu);
   const known=new Set([...S.words.values()].flatMap(w=>w.forms||[]));
-  const paras=parasOf(art).map(p=>"<p>"+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((tok,i)=>{
+  const paras=parasOf(art).map((p,pi)=>`<p${READ.on&&READ.art===art.id&&READ.cur===pi?' class="reading"':""}>`+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((tok,i)=>{
     if(i%2===0) return esc(tok);
     const k=tok.toLowerCase(); const g=glossFor(art,tok); const lemma=(g&&g.base||k).toLowerCase();
     const cls="w"+(hits.has(lemma)?" hit":(known.has(k)?" known":""));
@@ -1147,6 +1187,7 @@ function viewRead(){
     ${art.levels&&levelOf(art)!==LEVEL?`<div class="muted sm-t">${T("levelOnly",{l:LEVEL,m:levelOf(art)})}</div>`:""}
     ${sumOf(art)?`<div class="zh-sum">${esc(sumOf(art))}</div>`:""}
     <div class="tip"><i></i>${T("tip")}</div>
+    ${window.speechSynthesis?`<div class="read-bar" id="readBar">${readBarInner()}</div>`:""}
     <article class="article" id="article">${paras}</article>
     ${end}
   </div>`;
@@ -1157,6 +1198,7 @@ function viewDict(){
   const seg=(k,l)=>`<button data-sort="${k}" aria-pressed="${S.dictSort===k}">${l}</button>`;
   return `<div class="view">
     <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
+    ${srsCard()}
     ${reviewCard()}
     <input id="dictSearch" class="search" type="search" placeholder="${T("search")}" value="${esc(S.dictQ)}" autocomplete="off">
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
@@ -1171,7 +1213,7 @@ function viewSettings(){
   const langs=LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-lang="${l.k}" data-nosc><b>${l.label}</b>${l.k!=="en"?`<span class="optm">${LANG_EN[l.k]}</span>`:""}</button>`).join("");
   const lvls=LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("");
   return `<div class="view">
-    <div><div class="eyebrow">Che Daily Pro</div><h2 style="font-size:24px">${T("tabSet")}</h2></div>
+    <div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabSet")}</h2></div>
     ${supMineCard()}
     ${devPanel()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
@@ -1183,6 +1225,7 @@ function viewSettings(){
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     ${feedbackCard()}
+    ${privacyCard()}
     ${SUPPORT_ON||DEV?`<section class="card sup">${!SUPPORT_ON?`<span class="sup-hidden sm-t">🙈 ${T("supHiddenNote")}</span>`:""}<div class="sup-cup" aria-hidden="true">💝</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
       <p class="sup-note sm-t">${T("supNote",{n:game().nick?`<b>${esc(game().nick)}</b>`:T("supNoNick")})}</p>
       <a class="btn sm" href="https://revolut.me/chingche" target="_blank" rel="noopener noreferrer">${T("supBtn")}</a>
@@ -1390,6 +1433,7 @@ function startQuiz(kind, art){
   let words;
   const d=dayRec();
   if(kind==="pre"){ const el=eligible(); words=weightedPick(el, Math.min(10, el.length)); }
+  else if(kind==="srs"){ words=srsDueList().slice(0,SRS_MAX); if(!words.length) return toast(T("srsNone")); }
   else if(kind==="rev"){ const all=[...S.words.values()]; if(all.length<LUCK.reviewMinWords) return toast(T("revNeed",{n:LUCK.reviewMinWords})); words=weightedPick(all, Math.min(LUCK.reviewQ, all.length)); }
   else {
     words=shuffle(lookedUpFor(d,art).map(l=>S.words.get(keyOf(l))).filter(Boolean)).slice(0,10);
@@ -1411,14 +1455,14 @@ function finishPost(art, score, total){
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
-  const title=Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
+  const title=Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
     const nextBtn = Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
       <div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
-      ${Q.kind==="rev"?lottoBox(Q.reward):rewardBox(Q.reward)}
+      ${Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
@@ -1437,13 +1481,14 @@ function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
   Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
   const w=S.words.get(q.w.key)||q.w;
-  if(!w.filler) persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today()});
-  else if(!ok){ const {filler,...rec}=w; persist(w.key,{...rec, firstSeen:today(), lookups:0, lastLookup:new Date().toISOString(), correct:0, wrong:1, lastTested:today()}); }
+  if(!w.filler) persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
+  else if(!ok){ const {filler,...rec}=w; persist(w.key,{...rec, firstSeen:today(), lookups:0, lastLookup:new Date().toISOString(), correct:0, wrong:1, lastTested:today(), srsB:1, srsDue:srsAdd(today(),1)}); }
   if(ok) Q.score++;
   const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
   if(Q.i+1>=Q.qs.length){
     const d=dayRec();
-    if(Q.kind==="rev"){ Q.reward=awardReview(); }
+    if(Q.kind==="srs"){ Q.reward=null; }
+    else if(Q.kind==="rev"){ Q.reward=awardReview(); }
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art)); }
   }
@@ -2005,7 +2050,7 @@ function castSpell(i){
   const B=S.battle; if(!B||B.stage!=="spell"||B.picked!=null) return;
   B.picked=i; const opt=B.q.opts[i]; B.spellOk=!!opt.ok;
   const w=S.words.get(B.q.w.key)||B.q.w;
-  persist(w.key,{...w, correct:(w.correct||0)+(B.spellOk?1:0), wrong:(w.wrong||0)+(B.spellOk?0:1), lastTested:today()});
+  persist(w.key,{...w, correct:(w.correct||0)+(B.spellOk?1:0), wrong:(w.wrong||0)+(B.spellOk?0:1), lastTested:today(), ...srsNext(w,B.spellOk)});
   render();
 }
 function fight(){
@@ -2163,7 +2208,7 @@ function viewAdv(){
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
       <p>${T("rules3")}</p></details>
-    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop",T("tabCoop"))}${seg("rank",T("tabRank"))}${seg("luck",T("tabLuck"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
+    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop","🎓 IELTS")}${seg("rank",T("tabRank"))}${seg("luck",T("tabLuck"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
     ${body}
   </div>`;
 }
@@ -2418,7 +2463,8 @@ async function devLoadStats(){
     try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); const cnt={}; rs.forEach(d=>{ const x=d.data(); if(x.state!=="done") return; [x.host,x.guest].filter(Boolean).forEach(u=>cnt[u]=(cnt[u]||0)+1); }); for(const [u,n] of Object.entries(cnt)) bump(u,"coop",n); }catch(e){}
     const games=Object.fromEntries(Object.entries(per).map(([k,m])=>[k,{players:Object.keys(m).length, plays:Object.values(m).reduce((a,b)=>a+b,0)}]));
     let push=null; try{ const r=await fsM.getDoc(fsM.doc(db,"config","pushStats")); if(r.exists()) push=r.data(); }catch(e){}
-    S.devStats={users, lbN, regions, rooms, fb, games, push, at:new Date()};
+    let act=null; try{ const r=await fsM.getDocs(fsM.collection(db,"act")); const a=[]; r.forEach(d=>a.push(d.data())); act=a.length?a:null; }catch(e){}
+    S.devStats={users, lbN, regions, rooms, fb, games, push, act, at:new Date()};
   }catch(e){ S.devStats={err:e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")}; }
   render();
 }
@@ -2444,6 +2490,7 @@ function devStatsHtml(){
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
     <div class="eyebrow">🎮 ${T("dsGames")}</div>
     <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
+    ${devRetHtml(D.act)}
     ${devPushHtml(D.push)}
     <div class="eyebrow">${T("dsRegions")}</div>
     ${regs.length?`<table class="ds-t"><tr><th>${T("dsRegion")}</th><th>${T("dsLast")}</th><th></th></tr>${regs.map(([k,v])=>`<tr><td>${esc(regionLabel(k))} <span class="muted">${esc(k)}</span></td><td>${esc(v)}</td><td>${String(v)>=since(6)?"🟢":"⚪"}</td></tr>`).join("")}</table>`:`<p class="muted sm-t">–</p>`}
@@ -2570,7 +2617,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.60";
+const APP_VERSION="2026.10.61";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2583,7 +2630,7 @@ const HELP={"zh": {"title": "使用說明", "intro": "每天花 10–15 分鐘�
 function helpSheet(){
   const h=HELP[LANG]||HELP.en;
   return `<div class="scrim" data-act="closehelp"></div><div class="sheet help-sheet" role="dialog" aria-label="${esc(h.title)}"><div class="grab"></div>
-    <div class="eyebrow">Che Daily Pro</div><h2>${esc(h.title)}</h2><p class="muted" style="margin:0 0 6px">${esc(h.intro)}</p>
+    <div class="eyebrow">BinBin daily</div><h2>${esc(h.title)}</h2><p class="muted" style="margin:0 0 6px">${esc(h.intro)}</p>
     ${h.secs.map(([i,t,p])=>`<div class="help-sec"><span class="hi" aria-hidden="true">${i}</span><b>${esc(t)}</b><p>${esc(p)}</p></div>`).join("")}
     <div class="help-close">${esc(h.close)}<i>${esc(h.sign)}</i></div>
     <button class="btn" data-act="closehelp" style="width:100%">${esc(h.ok)}</button></div>`;
@@ -2917,7 +2964,8 @@ function ieLobby(){
       ${CLOUD.user&&game().nick?"":`<p class="muted sm-t">${T("ieLogin")}</p>`}</section>
     <section class="card"><b>${T("ieBadges")}</b>${badgeShelf()}</section>
     <section class="card"><b>${T("iePractice")}</b><p class="muted sm-t" style="margin:4px 0 8px">${T("iePracticeSub")}</p><div class="ie-prac">${IE_PRAC.map(x=>`<button class="btn ghost sm" data-act="iepractice" data-k="${x.id}" ${run?"disabled":""}>${T("iePractBtn",{t:esc(x.title)})}</button>`).join("")}</div></section>
-    ${voiceCard()}`;
+    ${voiceCard()}
+    <p class="muted sm-t ie-disc">ⓘ ${T("ieDisclaimer")}</p>`;
 }
 
 /* ================= Feedback (→ Google Sheet via Apps Script, plus a Firestore copy) ================= */
@@ -2995,6 +3043,15 @@ document.addEventListener("click", e=>{
   if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
   if(a==="compmode"){ S.compMode=t.dataset.k; return render(); }
+  if(a==="playmode"){ S.playMode=t.dataset.k; return render(); }
+  if(a==="privacy"){ S.view="privacy"; S.tab="set"; render(); window.scrollTo(0,0); return; }
+  if(a==="privback"){ S.view="set"; S.tab="set"; render(); return; }
+  if(a==="delask"){ S.delAsk=!S.delAsk; return render(); }
+  if(a==="delgo") return deleteAccount();
+  if(a==="srs") return startQuiz("srs");
+  if(a==="readgo") return READ.on?(READ.paused?readResume():readPause()):readStart();
+  if(a==="readstop") return readStop();
+  if(a==="readrate"){ const i=(READ_RATES.indexOf(READ.rate)+1)%READ_RATES.length; READ.rate=READ_RATES[i]; try{ localStorage.setItem("che-pro-rrate",READ.rate); }catch(e){} if(READ.on&&!READ.paused){ readPause(); readResume(); } return readUi(); }
   if(a==="ieranked"){ const w=weekTest(); if(w) ieStart(w.id,true); return; }
   if(a==="iepractice") return ieStart(t.dataset.k,false);
   if(a==="ieresume") return ieResume();
@@ -3048,13 +3105,13 @@ document.addEventListener("click", e=>{
   if(a==="pre") return startQuiz("pre");
   if(a==="post") return startQuiz("post", mainArticle());
   if(a==="read"){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle()&&mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); return; }
-  if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); setTimeout(rdPush,500); return startQuiz("post", mainArticle()); }
+  if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); setTimeout(rdPush,500); actFirstRead(); return startQuiz("post", mainArticle()); }
   if(a==="finishx") return startQuiz("post", currentArticle());
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
-document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="play"&&(S.playMode||"party")==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -3076,6 +3133,7 @@ async function cloudInit(){
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
     CLOUD.fb={authM,fsM,auth,db};
+    setTimeout(()=>actPing(),2500);
     setTimeout(pushRefresh,1200);
     setTimeout(supLoad,0);
     try{ fsM.onSnapshot(fsM.doc(db,"config","site"), sn=>{ S.maint=sn.exists()?sn.data():null; maintApply(); }, ()=>{}); }catch(e){}
@@ -3178,7 +3236,7 @@ async function cloudPull(){
 function cloudMark(id, deleted){ if(!CLOUD.user) return; if(id&&id.startsWith("w~")){ (deleted?CLOUD.delWords:CLOUD.dirtyWords).add(id); if(deleted) CLOUD.dirtyWords.delete(id); else CLOUD.delWords.delete(id); dirtySave(); } else { CLOUD.dirtyMain=true; if(CLOUD.dirtyWords.size) dirtySave(); }
   clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,1500); }
 async function cloudFlush(){
-  if(!CLOUD.user||!CLOUD.fb) return; clearTimeout(CLOUD.timer);
+  if(!CLOUD.user||!CLOUD.fb||CLOUD.deleting) return; clearTimeout(CLOUD.timer);
   const {fsM,db}=CLOUD.fb; const words=[...CLOUD.dirtyWords], dels=[...CLOUD.delWords], main=CLOUD.dirtyMain;
   if(!words.length&&!dels.length&&!main) return;
   CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false; dirtySave();
@@ -3223,7 +3281,7 @@ Object.assign(STR.es,{tabRank:"Ranking", tabCoop:"Cooperativo", rkPower:"Poder",
 const powerOf=s=>s.hp+s.atk*3+s.def*2;
 function lbEntry(){ const g=game(), s=stats(); return {name:(g.nick||"").slice(0,16), lv:g.lv|0, hp:s.hp|0, atk:s.atk|0, def:s.def|0, power:powerOf(s)|0, conq:Object.keys(g.conq||{}).length, flag:myFlag(), updatedAt:new Date().toISOString()}; }
 async function lbPush(){
-  if(DEV) return;
+  if(DEV||CLOUD.deleting) return;
   if(!CLOUD.user||!CLOUD.fb||!game().nick) return;
   const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:0});
   if(sig===CLOUD.lbSig) return;
@@ -3369,7 +3427,7 @@ function coListen(code){
   S.co.unsub=fsM.onSnapshot(fsM.doc(db,"rooms",code), snap=>{
     if(!S.co||S.co.code!==code) return;
     if(!snap.exists()){ coStop(); S.co=null; toast(T("coLeftRoom")); render(); return; }
-    S.co.room=snap.data(); coCheckEnd(); coTick(); if(S.view==="adv"&&S.advTab==="coop") coRender();
+    S.co.room=snap.data(); coCheckEnd(); coTick(); if(S.view==="play"&&S.playMode==="coop") coRender();
   }, ()=>{});
 }
 function coStop(){ if(S.co&&S.co.unsub){ S.co.unsub(); } clearInterval(S.coTimer); }
@@ -3415,7 +3473,7 @@ async function coLeave(){
   if(co&&!co.solo&&co.code&&co.room&&co.room.state==="wait"&&co.room.host===coMe()){ const {fsM,db}=CLOUD.fb; fsM.deleteDoc(fsM.doc(db,"rooms",co.code)).catch(()=>{}); game().tickets++; saveGame(); }
   render();
 }
-function coRender(){ if(S.view==="adv"&&S.advTab==="coop"){ const el=document.getElementById("coBox"); if(el) el.innerHTML=coInner(); else render(); } }
+function coRender(){ if(S.view==="play"&&S.playMode==="coop"){ const el=document.getElementById("coBox"); if(el) el.innerHTML=coInner(); else render(); } }
 function bar(cur,max,cls,label){ return `<div class="co-bar ${cls}"><span>${label}</span><div class="hp ${cls==="boss"?"m":"p"}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div></div>`; }
 function coInner(){
   const co=S.co;
@@ -3455,10 +3513,12 @@ function coInner(){
   return head+`<p class="muted sm-t">${T("coRead")} · ${T("coMissLeft",{n:CO_MISSES-miss})}</p><article class="article co-text">${body}</article>`;
 }
 function coBossSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="54" r="34" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6"/><path d="M24 30 L30 12 L40 26 M76 30 L70 12 L60 26" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6" stroke-linejoin="round"/><circle cx="38" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="62" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="39" cy="49" r="3" fill="#1B2421"/><circle cx="63" cy="49" r="3" fill="#1B2421"/><path d="M34 68 Q50 60 66 68" fill="none" stroke="#1B2421" stroke-width="2.6"/><text x="50" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#F0BE45" font-family="Georgia,serif">teh</text></svg>`; }
-function viewCoop(){
-  const m=S.compMode||"ielts"; setTimeout(pgLockSync,0);
-  const seg=`<div class="seg comp-seg">${[["ielts","🎓 "+T("cmIelts")],["party","🎮 "+T("cmParty")],["coop","🤝 "+T("cmCoop")]].map(([k,l])=>`<button data-act="compmode" data-k="${k}" aria-pressed="${m===k}">${l}</button>`).join("")}</div>`;
-  return seg+(m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:m==="party"?`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`:`<div class="ie-lobby">${ieLobby()}</div>`);
+function viewCoop(){ return `<div class="ie-lobby">${ieLobby()}</div>`; }
+// multiplayer games get their own bottom tab (open to everyone from day one)
+function viewPlay(){
+  const m=S.playMode||"party";
+  const seg=`<div class="seg comp-seg">${[["party","🎮 "+T("pgTitle")],["coop","🤝 "+T("cmCoop")]].map(([k,l])=>`<button data-act="playmode" data-k="${k}" aria-pressed="${m===k}">${l}</button>`).join("")}</div>`;
+  return `<div class="view play-view">${pgPlaying()?"":`<div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabPlay")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T("playSub")}</p></div>`}${seg}${m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
 }
 
 /* ---------- party games (2–6 players): spelling race & letter rain ---------- */
@@ -3953,10 +4013,10 @@ function pgSections(){
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
-const pgPlaying=()=>!!(S.pg&&S.pg.party&&S.pg.party.state==="play"&&S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party");
+const pgPlaying=()=>!!(S.pg&&S.pg.party&&S.pg.party.state==="play"&&S.view==="play"&&(S.playMode||"party")==="party");
 function pgLockSync(){ const on=pgPlaying(); document.body.classList.toggle("pg-lock",on); const box=document.getElementById("pgBox"); if(box) box.classList.toggle("pg-full",on); if(on) window.scrollTo(0,0); }
 function pgRender(force){
-  if(!(S.view==="adv"&&S.advTab==="coop"&&S.compMode==="party")){ document.body.classList.remove("pg-lock"); return; }
+  if(!(S.view==="play"&&(S.playMode||"party")==="party")){ document.body.classList.remove("pg-lock"); return; }
   const box=document.getElementById("pgBox"); if(!box) return render();
   if(box.classList.contains("pg-full")!==pgPlaying()) pgLockSync();
   const secs=pgSections(), key=secs.map(s=>s[0]).join(",");
@@ -4186,12 +4246,12 @@ function pushPrompt(){
   const st=pushState(); if(PUSH.hide||(st!=="off"&&st!=="ios")) return "";
   return `<div class="card push-tip"><span class="push-ic" aria-hidden="true">🔔</span><span class="t">${T("pushAsk")}</span>${st==="off"?`<button class="btn sm" data-act="pushon">${T("pushOn")}</button>`:`<button class="btn sm ghost" data-act="pushhow">${T("pushHow")}</button>`}<button class="x" data-act="pushhide" aria-label="close">×</button></div>`;
 }
-Object.assign(STR.zh,{pushTitle:"每日新聞提醒", pushSub:"每天早上 7:00 通知你新聞來了；晚上 7:00 如果你今天還沒看新聞，會再提醒你一次。", pushOn:"開啟通知", pushOff:"關閉通知", pushBusy:"設定中…", pushIsOn:"已開啟。這支手機會收到每日新聞提醒（時間依你手機的時區）。", pushOnToast:"通知已開啟！明天早上 7 點見 📰", pushOffToast:"已關閉通知", pushDenied:"沒有允許通知，所以無法開啟", pushDeniedHelp:"這個瀏覽器的通知被封鎖了。請到手機或瀏覽器的設定裡，允許這個網站的通知，再回來按開啟。", pushNo:"這個瀏覽器不支援通知。請改用 Chrome、Edge 或 Firefox；iPhone 請看下面的步驟。", pushFail:"開啟失敗，請確認網路後再試一次", pushIos:"iPhone 要先把 app 加到主畫面，才能收到通知：", pushIos1:"用 Safari 打開這個網站，點下方的「分享」按鈕", pushIos2:"選「加入主畫面」", pushIos3:"從主畫面的 Che Pro 圖示打開，再到「設定」按「開啟通知」", pushAsk:"要不要每天早上 7 點提醒你看新聞？", pushHow:"怎麼開啟"});
-Object.assign(STR.en,{pushTitle:"Daily news reminders", pushSub:"At 7:00 every morning you'll get a note that the news is here. At 7:00 in the evening, if you haven't read any news today, you'll get one more reminder.", pushOn:"Turn on notifications", pushOff:"Turn off notifications", pushBusy:"Setting up…", pushIsOn:"On. This phone will get daily news reminders (times follow your phone's time zone).", pushOnToast:"Notifications are on! See you at 7 tomorrow morning 📰", pushOffToast:"Notifications turned off", pushDenied:"Notifications weren't allowed, so they couldn't be turned on", pushDeniedHelp:"Notifications are blocked for this site. Allow them in your phone or browser settings, then come back and turn them on.", pushNo:"This browser doesn't support notifications. Try Chrome, Edge or Firefox; on iPhone, see the steps below.", pushFail:"Couldn't turn them on. Check your connection and try again", pushIos:"On iPhone, add the app to your Home Screen first to get notifications:", pushIos1:"Open this site in Safari and tap the Share button", pushIos2:"Choose “Add to Home Screen”", pushIos3:"Open Che Pro from the Home Screen icon, then go to Settings and tap “Turn on notifications”", pushAsk:"Want a reminder to read the news at 7 every morning?", pushHow:"How to turn on"});
-Object.assign(STR.hi,{pushTitle:"रोज़ की ख़बरों का रिमाइंडर", pushSub:"हर सुबह 7:00 बजे आपको बताया जाएगा कि ख़बरें आ गई हैं। शाम 7:00 बजे, अगर आपने आज कोई ख़बर नहीं पढ़ी, तो एक और रिमाइंडर आएगा।", pushOn:"नोटिफ़िकेशन चालू करें", pushOff:"नोटिफ़िकेशन बंद करें", pushBusy:"सेट हो रहा है…", pushIsOn:"चालू है। इस फ़ोन पर रोज़ ख़बरों का रिमाइंडर आएगा (समय आपके फ़ोन के टाइम ज़ोन के अनुसार)।", pushOnToast:"नोटिफ़िकेशन चालू! कल सुबह 7 बजे मिलते हैं 📰", pushOffToast:"नोटिफ़िकेशन बंद कर दिए गए", pushDenied:"नोटिफ़िकेशन की अनुमति नहीं मिली, इसलिए चालू नहीं हो सके", pushDeniedHelp:"इस साइट के नोटिफ़िकेशन ब्लॉक हैं। फ़ोन या ब्राउज़र की सेटिंग में अनुमति दें, फिर वापस आकर चालू करें।", pushNo:"यह ब्राउज़र नोटिफ़िकेशन सपोर्ट नहीं करता। Chrome, Edge या Firefox आज़माएँ; iPhone पर नीचे के स्टेप देखें।", pushFail:"चालू नहीं हो सका। इंटरनेट जाँचकर फिर कोशिश करें", pushIos:"iPhone पर नोटिफ़िकेशन के लिए पहले ऐप को होम स्क्रीन पर जोड़ें:", pushIos1:"Safari में यह साइट खोलें और Share बटन दबाएँ", pushIos2:"“Add to Home Screen” चुनें", pushIos3:"होम स्क्रीन के Che Pro आइकन से खोलें, फिर सेटिंग में “नोटिफ़िकेशन चालू करें” दबाएँ", pushAsk:"क्या हर सुबह 7 बजे ख़बरें पढ़ने का रिमाइंडर चाहिए?", pushHow:"कैसे चालू करें"});
-Object.assign(STR.es,{pushTitle:"Recordatorio diario de noticias", pushSub:"Cada mañana a las 7:00 te avisamos de que ya están las noticias. A las 7:00 de la tarde, si hoy no has leído ninguna, te lo recordamos otra vez.", pushOn:"Activar notificaciones", pushOff:"Desactivar notificaciones", pushBusy:"Configurando…", pushIsOn:"Activadas. Este móvil recibirá el recordatorio diario (la hora sigue la zona horaria del móvil).", pushOnToast:"¡Notificaciones activadas! Nos vemos mañana a las 7 📰", pushOffToast:"Notificaciones desactivadas", pushDenied:"No se permitieron las notificaciones, así que no se pudieron activar", pushDeniedHelp:"Las notificaciones de este sitio están bloqueadas. Permítelas en los ajustes del móvil o del navegador y vuelve a activarlas.", pushNo:"Este navegador no admite notificaciones. Prueba con Chrome, Edge o Firefox; en iPhone, mira los pasos de abajo.", pushFail:"No se pudieron activar. Revisa la conexión e inténtalo de nuevo", pushIos:"En iPhone, primero añade la app a la pantalla de inicio para recibir notificaciones:", pushIos1:"Abre este sitio en Safari y toca el botón Compartir", pushIos2:"Elige «Añadir a pantalla de inicio»", pushIos3:"Abre Che Pro desde el icono de la pantalla de inicio, ve a Ajustes y toca «Activar notificaciones»", pushAsk:"¿Quieres un recordatorio para leer las noticias cada mañana a las 7?", pushHow:"Cómo activarlo"});
-Object.assign(STR.ja,{pushTitle:"毎日のニュース通知", pushSub:"毎朝7:00にニュースが届いたことをお知らせします。夜7:00になっても今日まだニュースを読んでいなければ、もう一度お知らせします。", pushOn:"通知をオンにする", pushOff:"通知をオフにする", pushBusy:"設定中…", pushIsOn:"オンです。このスマホに毎日ニュース通知が届きます（時刻はスマホのタイムゾーンに合わせます）。", pushOnToast:"通知をオンにしました！明日の朝7時にお届けします 📰", pushOffToast:"通知をオフにしました", pushDenied:"通知が許可されなかったため、オンにできませんでした", pushDeniedHelp:"このサイトの通知がブロックされています。スマホかブラウザの設定で許可してから、もう一度オンにしてください。", pushNo:"このブラウザは通知に対応していません。Chrome、Edge、Firefox をお試しください。iPhone は下の手順を見てください。", pushFail:"オンにできませんでした。接続を確認してもう一度お試しください", pushIos:"iPhone で通知を受け取るには、まずアプリをホーム画面に追加してください：", pushIos1:"Safari でこのサイトを開き、「共有」ボタンをタップ", pushIos2:"「ホーム画面に追加」を選ぶ", pushIos3:"ホーム画面の Che Pro アイコンから開き、「設定」で「通知をオンにする」をタップ", pushAsk:"毎朝7時にニュースのお知らせを受け取りますか？", pushHow:"設定方法"});
-Object.assign(STR.ko,{pushTitle:"매일 뉴스 알림", pushSub:"매일 아침 7:00에 뉴스가 도착했다고 알려 드려요. 저녁 7:00까지 오늘 뉴스를 안 읽었다면 한 번 더 알려 드려요.", pushOn:"알림 켜기", pushOff:"알림 끄기", pushBusy:"설정 중…", pushIsOn:"켜져 있어요. 이 휴대폰으로 매일 뉴스 알림이 와요 (시간은 휴대폰 시간대 기준).", pushOnToast:"알림을 켰어요! 내일 아침 7시에 만나요 📰", pushOffToast:"알림을 껐어요", pushDenied:"알림이 허용되지 않아 켤 수 없어요", pushDeniedHelp:"이 사이트의 알림이 차단되어 있어요. 휴대폰이나 브라우저 설정에서 허용한 뒤 다시 켜 주세요.", pushNo:"이 브라우저는 알림을 지원하지 않아요. Chrome, Edge, Firefox를 사용해 보세요. iPhone은 아래 단계를 보세요.", pushFail:"켜지 못했어요. 인터넷 연결을 확인하고 다시 시도해 주세요", pushIos:"iPhone에서 알림을 받으려면 먼저 앱을 홈 화면에 추가하세요:", pushIos1:"Safari에서 이 사이트를 열고 ‘공유’ 버튼을 누르기", pushIos2:"‘홈 화면에 추가’ 선택", pushIos3:"홈 화면의 Che Pro 아이콘으로 열고 ‘설정’에서 ‘알림 켜기’ 누르기", pushAsk:"매일 아침 7시에 뉴스 알림을 받을까요?", pushHow:"켜는 방법"});
+Object.assign(STR.zh,{pushTitle:"每日新聞提醒", pushSub:"每天早上 7:00 通知你新聞來了；晚上 7:00 如果你今天還沒看新聞，會再提醒你一次。", pushOn:"開啟通知", pushOff:"關閉通知", pushBusy:"設定中…", pushIsOn:"已開啟。這支手機會收到每日新聞提醒（時間依你手機的時區）。", pushOnToast:"通知已開啟！明天早上 7 點見 📰", pushOffToast:"已關閉通知", pushDenied:"沒有允許通知，所以無法開啟", pushDeniedHelp:"這個瀏覽器的通知被封鎖了。請到手機或瀏覽器的設定裡，允許這個網站的通知，再回來按開啟。", pushNo:"這個瀏覽器不支援通知。請改用 Chrome、Edge 或 Firefox；iPhone 請看下面的步驟。", pushFail:"開啟失敗，請確認網路後再試一次", pushIos:"iPhone 要先把 app 加到主畫面，才能收到通知：", pushIos1:"用 Safari 打開這個網站，點下方的「分享」按鈕", pushIos2:"選「加入主畫面」", pushIos3:"從主畫面的 BinBin 圖示打開，再到「設定」按「開啟通知」", pushAsk:"要不要每天早上 7 點提醒你看新聞？", pushHow:"怎麼開啟"});
+Object.assign(STR.en,{pushTitle:"Daily news reminders", pushSub:"At 7:00 every morning you'll get a note that the news is here. At 7:00 in the evening, if you haven't read any news today, you'll get one more reminder.", pushOn:"Turn on notifications", pushOff:"Turn off notifications", pushBusy:"Setting up…", pushIsOn:"On. This phone will get daily news reminders (times follow your phone's time zone).", pushOnToast:"Notifications are on! See you at 7 tomorrow morning 📰", pushOffToast:"Notifications turned off", pushDenied:"Notifications weren't allowed, so they couldn't be turned on", pushDeniedHelp:"Notifications are blocked for this site. Allow them in your phone or browser settings, then come back and turn them on.", pushNo:"This browser doesn't support notifications. Try Chrome, Edge or Firefox; on iPhone, see the steps below.", pushFail:"Couldn't turn them on. Check your connection and try again", pushIos:"On iPhone, add the app to your Home Screen first to get notifications:", pushIos1:"Open this site in Safari and tap the Share button", pushIos2:"Choose “Add to Home Screen”", pushIos3:"Open BinBin from the Home Screen icon, then go to Settings and tap “Turn on notifications”", pushAsk:"Want a reminder to read the news at 7 every morning?", pushHow:"How to turn on"});
+Object.assign(STR.hi,{pushTitle:"रोज़ की ख़बरों का रिमाइंडर", pushSub:"हर सुबह 7:00 बजे आपको बताया जाएगा कि ख़बरें आ गई हैं। शाम 7:00 बजे, अगर आपने आज कोई ख़बर नहीं पढ़ी, तो एक और रिमाइंडर आएगा।", pushOn:"नोटिफ़िकेशन चालू करें", pushOff:"नोटिफ़िकेशन बंद करें", pushBusy:"सेट हो रहा है…", pushIsOn:"चालू है। इस फ़ोन पर रोज़ ख़बरों का रिमाइंडर आएगा (समय आपके फ़ोन के टाइम ज़ोन के अनुसार)।", pushOnToast:"नोटिफ़िकेशन चालू! कल सुबह 7 बजे मिलते हैं 📰", pushOffToast:"नोटिफ़िकेशन बंद कर दिए गए", pushDenied:"नोटिफ़िकेशन की अनुमति नहीं मिली, इसलिए चालू नहीं हो सके", pushDeniedHelp:"इस साइट के नोटिफ़िकेशन ब्लॉक हैं। फ़ोन या ब्राउज़र की सेटिंग में अनुमति दें, फिर वापस आकर चालू करें।", pushNo:"यह ब्राउज़र नोटिफ़िकेशन सपोर्ट नहीं करता। Chrome, Edge या Firefox आज़माएँ; iPhone पर नीचे के स्टेप देखें।", pushFail:"चालू नहीं हो सका। इंटरनेट जाँचकर फिर कोशिश करें", pushIos:"iPhone पर नोटिफ़िकेशन के लिए पहले ऐप को होम स्क्रीन पर जोड़ें:", pushIos1:"Safari में यह साइट खोलें और Share बटन दबाएँ", pushIos2:"“Add to Home Screen” चुनें", pushIos3:"होम स्क्रीन के BinBin आइकन से खोलें, फिर सेटिंग में “नोटिफ़िकेशन चालू करें” दबाएँ", pushAsk:"क्या हर सुबह 7 बजे ख़बरें पढ़ने का रिमाइंडर चाहिए?", pushHow:"कैसे चालू करें"});
+Object.assign(STR.es,{pushTitle:"Recordatorio diario de noticias", pushSub:"Cada mañana a las 7:00 te avisamos de que ya están las noticias. A las 7:00 de la tarde, si hoy no has leído ninguna, te lo recordamos otra vez.", pushOn:"Activar notificaciones", pushOff:"Desactivar notificaciones", pushBusy:"Configurando…", pushIsOn:"Activadas. Este móvil recibirá el recordatorio diario (la hora sigue la zona horaria del móvil).", pushOnToast:"¡Notificaciones activadas! Nos vemos mañana a las 7 📰", pushOffToast:"Notificaciones desactivadas", pushDenied:"No se permitieron las notificaciones, así que no se pudieron activar", pushDeniedHelp:"Las notificaciones de este sitio están bloqueadas. Permítelas en los ajustes del móvil o del navegador y vuelve a activarlas.", pushNo:"Este navegador no admite notificaciones. Prueba con Chrome, Edge o Firefox; en iPhone, mira los pasos de abajo.", pushFail:"No se pudieron activar. Revisa la conexión e inténtalo de nuevo", pushIos:"En iPhone, primero añade la app a la pantalla de inicio para recibir notificaciones:", pushIos1:"Abre este sitio en Safari y toca el botón Compartir", pushIos2:"Elige «Añadir a pantalla de inicio»", pushIos3:"Abre BinBin desde el icono de la pantalla de inicio, ve a Ajustes y toca «Activar notificaciones»", pushAsk:"¿Quieres un recordatorio para leer las noticias cada mañana a las 7?", pushHow:"Cómo activarlo"});
+Object.assign(STR.ja,{pushTitle:"毎日のニュース通知", pushSub:"毎朝7:00にニュースが届いたことをお知らせします。夜7:00になっても今日まだニュースを読んでいなければ、もう一度お知らせします。", pushOn:"通知をオンにする", pushOff:"通知をオフにする", pushBusy:"設定中…", pushIsOn:"オンです。このスマホに毎日ニュース通知が届きます（時刻はスマホのタイムゾーンに合わせます）。", pushOnToast:"通知をオンにしました！明日の朝7時にお届けします 📰", pushOffToast:"通知をオフにしました", pushDenied:"通知が許可されなかったため、オンにできませんでした", pushDeniedHelp:"このサイトの通知がブロックされています。スマホかブラウザの設定で許可してから、もう一度オンにしてください。", pushNo:"このブラウザは通知に対応していません。Chrome、Edge、Firefox をお試しください。iPhone は下の手順を見てください。", pushFail:"オンにできませんでした。接続を確認してもう一度お試しください", pushIos:"iPhone で通知を受け取るには、まずアプリをホーム画面に追加してください：", pushIos1:"Safari でこのサイトを開き、「共有」ボタンをタップ", pushIos2:"「ホーム画面に追加」を選ぶ", pushIos3:"ホーム画面の BinBin アイコンから開き、「設定」で「通知をオンにする」をタップ", pushAsk:"毎朝7時にニュースのお知らせを受け取りますか？", pushHow:"設定方法"});
+Object.assign(STR.ko,{pushTitle:"매일 뉴스 알림", pushSub:"매일 아침 7:00에 뉴스가 도착했다고 알려 드려요. 저녁 7:00까지 오늘 뉴스를 안 읽었다면 한 번 더 알려 드려요.", pushOn:"알림 켜기", pushOff:"알림 끄기", pushBusy:"설정 중…", pushIsOn:"켜져 있어요. 이 휴대폰으로 매일 뉴스 알림이 와요 (시간은 휴대폰 시간대 기준).", pushOnToast:"알림을 켰어요! 내일 아침 7시에 만나요 📰", pushOffToast:"알림을 껐어요", pushDenied:"알림이 허용되지 않아 켤 수 없어요", pushDeniedHelp:"이 사이트의 알림이 차단되어 있어요. 휴대폰이나 브라우저 설정에서 허용한 뒤 다시 켜 주세요.", pushNo:"이 브라우저는 알림을 지원하지 않아요. Chrome, Edge, Firefox를 사용해 보세요. iPhone은 아래 단계를 보세요.", pushFail:"켜지 못했어요. 인터넷 연결을 확인하고 다시 시도해 주세요", pushIos:"iPhone에서 알림을 받으려면 먼저 앱을 홈 화면에 추가하세요:", pushIos1:"Safari에서 이 사이트를 열고 ‘공유’ 버튼을 누르기", pushIos2:"‘홈 화면에 추가’ 선택", pushIos3:"홈 화면의 BinBin 아이콘으로 열고 ‘설정’에서 ‘알림 켜기’ 누르기", pushAsk:"매일 아침 7시에 뉴스 알림을 받을까요?", pushHow:"켜는 방법"});
 function devPushHtml(P){
   const head=`<div class="eyebrow">🔔 ${T("dpTitle")}</div>`;
   if(!P) return head+`<p class="muted sm-t">${T("dpNone")}</p>`;
@@ -4221,7 +4281,7 @@ function readsThisMonth(){ const m=monthKey(), ids=new Set();
 function untilMonthEnd(){ const now=new Date(), e=new Date(now.getFullYear(), now.getMonth()+1, 1); const ms=e-now; return {d:Math.floor(ms/864e5), h:Math.floor(ms%864e5/36e5)}; }
 let RD_SIG=null;
 async function rdPush(){
-  if(DEV||!CLOUD.user||!CLOUD.fb||!game().nick) return;
+  if(DEV||CLOUD.deleting||!CLOUD.user||!CLOUD.fb||!game().nick) return;
   const m=monthKey(), n=Math.min(400,readsThisMonth()); if(!n) return;
   const e={name:game().nick.slice(0,16), n, flag:myFlag(), lv:game().lv|0, at:new Date().toISOString()};
   const sig=m+JSON.stringify({...e,at:0}); if(sig===RD_SIG) return;
@@ -4239,11 +4299,216 @@ Object.assign(STR.hi,{ieMonthReset:"मासिक रैंकिंग {d} �
 Object.assign(STR.es,{ieMonthReset:"El ranking mensual se reinicia en {d} d {h} h", ieMonthBest:"Mejor de este mes: Band {b}", ieTop:"Ranking IELTS de este mes", ieNoScore:"Nadie ha terminado un test oficial este mes: ¡ve a por el primer puesto!", ieLogin:"Inicia sesión con Google y elige un apodo en Ajustes para salir en el ranking del mes (puedes hacer el test sin iniciar sesión).", ieRankedNote:"Solo cuenta tu primer intento de cada día (puntuación e insignias), y cuenta en cuanto empiezas. El ranking guarda tu mejor nota del mes y se reinicia el día 1. El modo práctica es ilimitado."});
 Object.assign(STR.ja,{ieMonthReset:"月間ランキングは {d} 日 {h} 時間後にリセット", ieMonthBest:"今月のベスト：Band {b}", ieTop:"今月の IELTS ランキング", ieNoScore:"今月はまだ本番テストを終えた人がいません。一番乗りしよう！", ieLogin:"今月のランキングに載るには Google でログインし、設定でニックネームを決めてください（ログインしなくても受験できます）。", ieRankedNote:"採点とバッジの対象は毎日最初の 1 回だけで、開始した時点で 1 回と数えます。ランキングは今月のベストを記録し、毎月 1 日にリセットされます。練習モードは何回でもできます。"});
 Object.assign(STR.ko,{ieMonthReset:"월간 랭킹 초기화까지 {d}일 {h}시간", ieMonthBest:"이번 달 최고: Band {b}", ieTop:"이번 달 IELTS 랭킹", ieNoScore:"이번 달엔 아직 정식 테스트를 끝낸 사람이 없어요. 1등에 도전하세요!", ieLogin:"이번 달 랭킹에 오르려면 Google로 로그인하고 설정에서 닉네임을 정하세요 (로그인하지 않아도 응시할 수 있어요).", ieRankedNote:"매일 첫 응시만 채점되고 배지에 반영되며, 시작하는 순간 1회로 계산돼요. 랭킹은 이번 달 최고 점수를 기록하고 매월 1일에 초기화돼요. 연습 모드는 무제한이에요."});
+Object.assign(STR.zh,{tabPlay:"多人遊戲", playSub:"跟朋友一起玩！建立房間、分享房號就能開始，不用先升級。"});
+Object.assign(STR.en,{tabPlay:"Games", playSub:"Play with friends! Create a room and share the code — no need to level up first."});
+Object.assign(STR.hi,{tabPlay:"खेल", playSub:"दोस्तों के साथ खेलें! कमरा बनाएँ और कोड शेयर करें — पहले लेवल बढ़ाने की ज़रूरत नहीं।"});
+Object.assign(STR.es,{tabPlay:"Juegos", playSub:"¡Juega con amigos! Crea una sala y comparte el código; no hace falta subir de nivel antes."});
+Object.assign(STR.ja,{tabPlay:"みんなで遊ぶ", playSub:"友だちと遊ぼう！部屋を作ってコードを送るだけ。レベル上げは不要です。"});
+Object.assign(STR.ko,{tabPlay:"함께 놀기", playSub:"친구와 함께 놀아요! 방을 만들고 코드를 공유하면 바로 시작, 레벨업은 필요 없어요."});
+/* ================= onboarding (first launch) ================= */
+const ONB_KEY="che-pro-onb";
+function onbMaybe(){
+  let done=null; try{ done=localStorage.getItem(ONB_KEY); }catch(e){}
+  const g=S.game, fresh=!S.words.size&&!S.days.size&&(!g||((g.lv||1)<=1&&!g.exp));
+  if(!done&&fresh){ S.onb={step:0}; onbRender(); }
+  else if(!done){ try{ localStorage.setItem(ONB_KEY,"old"); }catch(e){} }
+}
+function onbClose(start){
+  try{ localStorage.setItem(ONB_KEY,"1"); }catch(e){}
+  actPing({o:S.onb?S.onb.step:0});
+  S.onb=null; onbRender();
+  if(start&&mainArticle()){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); } else { S.tab="today"; S.view="today"; render(); }
+}
+function onbRender(){
+  let el=document.getElementById("onb");
+  if(!S.onb){ if(el) el.remove(); document.body.classList.remove("onb-open"); return; }
+  if(!el){ el=document.createElement("div"); el.id="onb"; el.className="onb"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); document.body.append(el); }
+  document.body.classList.add("onb-open");
+  const st=S.onb.step, N=4, dots=`<div class="onb-dots">${Array.from({length:N},(_,i)=>`<i class="${i===st?"on":""}"></i>`).join("")}</div>`;
+  let body="";
+  if(st===0) body=`<img src="assets/binbin-head.webp" alt="" class="onb-dog"><h2>${T("onbHi")}</h2><p>${T("onbHiSub")}</p>`;
+  else if(st===1) body=`<div class="onb-ic">🌏</div><h2>${T("onbLang")}</h2><div class="onb-opts">${LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-act="onblang" data-k="${l.k}" data-nosc><b>${l.label}</b></button>`).join("")}</div>`;
+  else if(st===2) body=`<div class="onb-ic">🎯</div><h2>${T("onbLevel")}</h2><p class="sm-t">${T("onbLevelSub")}</p><div class="onb-opts">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-act="onblvl" data-k="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div>`;
+  else body=`<div class="onb-ic">🐶</div><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>`;
+  const nav=st<N-1?`<button class="btn" data-act="onbnext">${T("onbNext")}</button>`:`<button class="btn" data-act="onbstart">${T("onbStart")}</button><button class="btn ghost" data-act="onblook">${T("onbLook")}</button>`;
+  el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
+  scApply&&scApply();
+}
+function onbCoach(){
+  let done=null; try{ done=localStorage.getItem(ONB_KEY); }catch(e){}
+  if(done!=="1") return "";
+  const everRead=[...S.days.values()].some(d=>d&&(d.read||Object.keys(d.postBy||{}).length));
+  return everRead?"":`<div class="card onb-coach">👇 ${T("onbCoach")}</div>`;
+}
+document.addEventListener("click",e=>{ const t=e.target.closest("#onb [data-act]"); if(!t||!S.onb) return; const a=t.dataset.act; e.stopPropagation();
+  if(a==="onbnext"){ S.onb.step=Math.min(3,S.onb.step+1); actPing({o:S.onb.step}); return onbRender(); }
+  if(a==="onbback"){ S.onb.step=Math.max(0,S.onb.step-1); return onbRender(); }
+  if(a==="onbskip"||a==="onblook") return onbClose(false);
+  if(a==="onbstart") return onbClose(true);
+  if(a==="onblang"){ setLang(t.dataset.k); return onbRender(); }
+  if(a==="onblvl"){ setLevel(t.dataset.k); return onbRender(); }
+}, true);
+
+/* ================= retention: anonymous per-device activity (act/{deviceId}) ================= */
+function devId(){ let v=null; try{ v=localStorage.getItem("che-pro-did"); if(!v){ v=Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,"0")).join(""); localStorage.setItem("che-pro-did",v); } }catch(e){ v=null; } return v; }
+function firstDay(){ let f=null; try{ f=localStorage.getItem("che-pro-first"); if(!f){ const ds=[...S.days.values()].map(d=>d&&d.date).filter(Boolean).sort(); f=ds[0]||today(); localStorage.setItem("che-pro-first",f); } }catch(e){ f=today(); } return f; }
+async function actPing(extra){
+  if(!CLOUD.fb||DEV||CLOUD.deleting) return; const id=devId(); if(!id) return; const t=today();
+  let sent=null; try{ sent=localStorage.getItem("che-pro-actday"); }catch(e){}
+  if(sent===t&&!extra) return;
+  const {fsM,db}=CLOUD.fb;
+  try{ await fsM.setDoc(fsM.doc(db,"act",id),{f:firstDay(), d:{[t]:1}, lang:langKey(), lvl:LEVEL, u:!!CLOUD.user, ...(extra||{})},{merge:true}); try{ localStorage.setItem("che-pro-actday",t); }catch(e){} }catch(e){}
+}
+function actFirstRead(){ let r=null; try{ r=localStorage.getItem("che-pro-actr"); }catch(e){} if(r) return; try{ localStorage.setItem("che-pro-actr",today()); }catch(e){} actPing({r:today()}); }
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") actPing(); });
+function devRetHtml(A){
+  const head=`<div class="eyebrow">📈 ${T("drTitle")}</div>`;
+  if(!A) return head+`<p class="muted sm-t">${T("drNone")}</p>`;
+  const t=today(), add=(d,n)=>{ const x=new Date(d+"T12:00:00"); x.setDate(x.getDate()+n); return ymd(x); };
+  const act=(a,d)=>!!(a.d&&a.d[d]);
+  const N=A.length, newT=A.filter(a=>a.f===t).length, dau=A.filter(a=>act(a,t)).length;
+  const wau=A.filter(a=>Object.keys(a.d||{}).some(d=>d>add(t,-7))).length;
+  const ret=n=>{ const c=A.filter(a=>a.f&&a.f<=add(t,-n)); const r=c.filter(a=>act(a,add(a.f,n))); return c.length?`${Math.round(r.length/c.length*100)}%<small> ${r.length}/${c.length}</small>`:"–"; };
+  const back=(()=>{ const c=A.filter(a=>a.f&&a.f<t); const r=c.filter(a=>Object.keys(a.d||{}).some(d=>d>a.f)); return c.length?`${Math.round(r.length/c.length*100)}%<small> ${r.length}/${c.length}</small>`:"–"; })();
+  const onb=A.filter(a=>(a.o||0)>=3).length, rd=A.filter(a=>a.r).length;
+  const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
+  return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(newT,T("drNew"))}${tile(dau,T("drDau"))}${tile(wau,T("drWau"))}${tile(ret(1),"D1")}${tile(ret(7),"D7")}${tile(ret(30),"D30")}${tile(back,T("drBack"))}${tile(`${onb}/${N}`,T("drOnb"))}${tile(`${rd}/${N}`,T("drRead"))}</div><p class="muted sm-t">${T("drNote")}</p>`;
+}
+Object.assign(STR.zh,{onbHi:"歡迎來到 BinBin daily！", onbHiSub:"每天讀一篇真實的英文新聞，點不會的字就有翻譯。邊學英文，邊升級冒險、跟朋友玩遊戲。", onbLang:"你習慣用哪種語言看翻譯？", onbLevel:"你的英文程度大概是？", onbLevelSub:"之後隨時可以在設定裡改。不確定就選 B1。", onbHow:"每天這樣玩", onbHow1:"讀今天的新聞，點不會的字就看得到意思", onbHow2:"讀完做小測驗，拿金幣和出征令", onbHow3:"查過的字會在對的時間自動提醒你複習", onbHow4:"去冒險打怪升級，或跟朋友玩多人遊戲", onbNext:"下一步", onbStart:"開始讀第一篇新聞 →", onbLook:"先自己逛逛", onbSkip:"略過", onbCoach:"第一次來嗎？從下面的「閱讀頭條」開始，點不會的字就有翻譯！",
+ drTitle:"留存率", drNone:"還沒有資料（每台裝置每天打開會記錄一次）。", drDevices:"裝置總數", drNew:"今天新來", drDau:"今天活躍", drWau:"7 天內活躍", drBack:"有回來過", drOnb:"完成新手引導", drRead:"讀完第一篇", drNote:"D1／D7／D30：第一次打開後的第 1／7／30 天有再回來的比例。以裝置計算，不需要登入；只記錄日期、語言和程度，不含個人資料。"});
+Object.assign(STR.en,{onbHi:"Welcome to BinBin daily!", onbHiSub:"Read one real English news story a day and tap any word to see what it means. Learn English while you level up, go on adventures and play games with friends.", onbLang:"Which language do you want translations in?", onbLevel:"What's your English level?", onbLevelSub:"You can change it any time in Settings. Not sure? Pick B1.", onbHow:"How each day works", onbHow1:"Read today's news — tap any word you don't know", onbHow2:"Take a short quiz to earn gold and quest passes", onbHow3:"Words you looked up come back for review at just the right time", onbHow4:"Level up on adventures, or play games with friends", onbNext:"Next", onbStart:"Read my first story →", onbLook:"Look around first", onbSkip:"Skip", onbCoach:"New here? Start with “Read the headline” below — tap any word to see its meaning!",
+ drTitle:"Retention", drNone:"No data yet (each device is counted once per day it opens the app).", drDevices:"Devices", drNew:"New today", drDau:"Active today", drWau:"Active in 7 days", drBack:"Came back", drOnb:"Finished intro", drRead:"Read first story", drNote:"D1 / D7 / D30: share of devices that came back exactly 1 / 7 / 30 days after their first visit. Counted per device without sign-in; only dates, language and level are stored."});
+Object.assign(STR.hi,{onbHi:"BinBin daily में आपका स्वागत है!", onbHiSub:"हर दिन एक असली अंग्रेज़ी ख़बर पढ़ें और किसी भी शब्द पर टैप करके उसका मतलब देखें। अंग्रेज़ी सीखते हुए लेवल बढ़ाएँ और दोस्तों के साथ खेलें।", onbLang:"अनुवाद किस भाषा में चाहिए?", onbLevel:"आपकी अंग्रेज़ी का स्तर क्या है?", onbLevelSub:"इसे कभी भी सेटिंग में बदल सकते हैं। पक्का नहीं? B1 चुनें।", onbHow:"हर दिन ऐसे खेलें", onbHow1:"आज की ख़बर पढ़ें — अनजान शब्द पर टैप करें", onbHow2:"छोटा क्विज़ देकर सोना और पास कमाएँ", onbHow3:"खोजे गए शब्द सही समय पर दोहराने के लिए लौटते हैं", onbHow4:"रोमांच में लेवल बढ़ाएँ या दोस्तों के साथ खेलें", onbNext:"आगे", onbStart:"पहली ख़बर पढ़ें →", onbLook:"पहले देख लूँ", onbSkip:"छोड़ें", onbCoach:"पहली बार? नीचे “हेडलाइन पढ़ें” से शुरू करें!"});
+Object.assign(STR.es,{onbHi:"¡Bienvenido a BinBin daily!", onbHiSub:"Lee una noticia real en inglés cada día y toca cualquier palabra para ver su significado. Aprende inglés mientras subes de nivel y juegas con amigos.", onbLang:"¿En qué idioma quieres las traducciones?", onbLevel:"¿Cuál es tu nivel de inglés?", onbLevelSub:"Puedes cambiarlo cuando quieras en Ajustes. ¿No estás seguro? Elige B1.", onbHow:"Así funciona cada día", onbHow1:"Lee la noticia de hoy y toca las palabras que no conozcas", onbHow2:"Haz un test corto para ganar oro y pases", onbHow3:"Las palabras que buscaste vuelven para repasarlas en el momento justo", onbHow4:"Sube de nivel en aventuras o juega con amigos", onbNext:"Siguiente", onbStart:"Leer mi primera noticia →", onbLook:"Echar un vistazo primero", onbSkip:"Saltar", onbCoach:"¿Primera vez? Empieza por «Leer el titular» aquí abajo."});
+Object.assign(STR.ja,{onbHi:"BinBin daily へようこそ！", onbHiSub:"毎日1本、本物の英語ニュースを読もう。わからない単語はタップするだけで意味が出ます。英語を学びながら冒険でレベルアップ、友だちとゲームも。", onbLang:"翻訳は何語で表示しますか？", onbLevel:"英語のレベルは？", onbLevelSub:"あとから設定でいつでも変えられます。迷ったら B1 を。", onbHow:"毎日の遊び方", onbHow1:"今日のニュースを読む（わからない単語をタップ）", onbHow2:"読後の小テストで金貨と出撃券をゲット", onbHow3:"調べた単語はちょうどいいタイミングで復習に出てきます", onbHow4:"冒険でレベルアップ、友だちとゲーム", onbNext:"次へ", onbStart:"最初の記事を読む →", onbLook:"まず見てまわる", onbSkip:"スキップ", onbCoach:"はじめて？下の「見出しを読む」から始めよう！"});
+Object.assign(STR.ko,{onbHi:"BinBin daily에 오신 걸 환영해요!", onbHiSub:"매일 진짜 영어 뉴스 한 편을 읽고, 모르는 단어는 눌러서 뜻을 확인하세요. 영어를 배우면서 모험으로 레벨업하고 친구와 게임도 해요.", onbLang:"번역은 어떤 언어로 볼까요?", onbLevel:"영어 실력은 어느 정도인가요?", onbLevelSub:"설정에서 언제든 바꿀 수 있어요. 잘 모르겠으면 B1을 고르세요.", onbHow:"하루는 이렇게", onbHow1:"오늘의 뉴스 읽기 — 모르는 단어를 눌러 보세요", onbHow2:"짧은 퀴즈로 골드와 출정권 받기", onbHow3:"찾아본 단어는 딱 좋은 때에 복습으로 돌아와요", onbHow4:"모험으로 레벨업하거나 친구와 게임하기", onbNext:"다음", onbStart:"첫 기사 읽기 →", onbLook:"먼저 둘러보기", onbSkip:"건너뛰기", onbCoach:"처음이세요? 아래 ‘헤드라인 읽기’부터 시작하세요!"});
+for(const k of ["hi","es","ja","ko"]) for(const x of ["drTitle","drNone","drDevices","drNew","drDau","drWau","drBack","drOnb","drRead","drNote"]) if(!STR[k][x]) STR[k][x]=STR.en[x];
+/* ================= spaced repetition: each word has a box (1–6) and a due date ================= */
+const SRS_INT=[0,1,2,4,7,15,30], SRS_MAX=15;
+function srsAdd(d,n){ const x=new Date(d+"T12:00:00"); x.setDate(x.getDate()+n); return ymd(x); }
+const srsDue=w=>w.srsDue||srsAdd(w.firstSeen||today(),1);
+function srsNext(w,ok){ const b=ok?Math.min(6,(w.srsB||0)+1):1; return {srsB:b, srsDue:srsAdd(today(), ok?SRS_INT[b]:1)}; }
+function srsDueList(){ const t=today(); return [...S.words.values()].filter(w=>!w.filler&&srsDue(w)<=t).sort((a,b)=>srsDue(a).localeCompare(srsDue(b))||(a.srsB||0)-(b.srsB||0)); }
+const srsCountOn=d=>[...S.words.values()].filter(w=>!w.filler&&srsDue(w)===d).length;
+function srsCard(){
+  if(!S.words.size) return "";
+  const due=srsDueList().length, tm=srsCountOn(srsAdd(today(),1));
+  const boxes=[1,2,3,4,5,6].map(b=>[...S.words.values()].filter(w=>(w.srsB||0)===b).length), fresh=[...S.words.values()].filter(w=>!w.srsB).length;
+  const bar=`<div class="srs-boxes" title="${esc(T("srsBoxes"))}">${(()=>{ const all=[fresh,...boxes], mx=Math.max(1,...all); return all; })().map((n,i,all)=>`<span style="--h:${n?Math.round(12+70*n/Math.max(1,...all)):4}%"><i></i><small>${i?SRS_INT[i]+"d":"new"}</small><b>${n}</b></span>`).join("")}</div>`;
+  return `<section class="card srs-card"><div class="srs-top"><div class="srs-ic" aria-hidden="true">🧠</div><div><b>${T("srsTitle")}</b><span class="muted sm-t">${due?T("srsDueN",{n:due}):T("srsClear",{n:tm})}</span></div>${due?`<button class="btn sm" data-act="srs">${T("srsStart",{n:Math.min(SRS_MAX,due)})}</button>`:""}</div>${bar}<p class="muted sm-t" style="margin:6px 0 0">${T("srsHow")}</p></section>`;
+}
+
+/* ================= read-aloud (speech synthesis, sentence by sentence) ================= */
+const READ_RATES=[0.8,1,1.2];
+const READ={on:false,paused:false,i:0,cur:-1,chunks:[],art:null,tok:0,rate:(()=>{ try{ const r=parseFloat(localStorage.getItem("che-pro-rrate")); return READ_RATES.includes(r)?r:1; }catch(e){ return 1; } })()};
+function readBarInner(){
+  const playing=READ.on&&!READ.paused;
+  return `<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
+}
+function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); }
+function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi)); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
+function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
+function readStart(){
+  if(!window.speechSynthesis) return toast(T("readNoTts"));
+  try{ speechSynthesis.cancel(); }catch(e){}
+  READ.chunks=readChunks(); READ.i=0; READ.on=true; READ.paused=false; READ.art=S.articleId||(currentArticle()||{}).id; READ.lastPi=-1;
+  readNext(); readUi();
+}
+function readNext(){
+  if(!READ.on||READ.paused) return; const c=READ.chunks[READ.i]; if(!c){ readStop(); return; }
+  readMark(c.pi); const tok=++READ.tok, u=new SpeechSynthesisUtterance(c.t), v=ieVoices().F;
+  if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB"; u.rate=READ.rate;
+  const go=()=>{ if(tok!==READ.tok||!READ.on||READ.paused) return; READ.i++; readUi(); readNext(); };
+  u.onend=go; u.onerror=go; speechSynthesis.speak(u);
+}
+function readPause(){ READ.paused=true; READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} readUi(); }
+function readResume(){ READ.paused=false; readNext(); readUi(); }
+function readStop(){ READ.on=false; READ.paused=false; READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
+function readStopIfLeft(){ if(READ.on&&(S.view!=="read"||(S.articleId&&S.articleId!==READ.art))) readStop(); }
+Object.assign(STR.zh,{srsTitle:"間隔複習", srsDueN:"今天有 {n} 個字該複習了", srsClear:"今天的字都複習完了 ✅ 明天有 {n} 個", srsStart:"複習 {n} 個字", srsNone:"今天沒有要複習的字 🎉", srsHow:"答對的字會隔越來越久才再出現（1→2→4→7→15→30 天），答錯就從明天重新開始。", srsBoxes:"每個格子代表多久複習一次", srsAfter:"還有 {n} 個字今天到期 · 明天預計 {t} 個", readAloud:"朗讀全文", readPause:"暫停", readResume:"繼續", readStop:"停止", readSpeed:"{r}x", readNoTts:"這個瀏覽器不支援朗讀"});
+Object.assign(STR.en,{srsTitle:"Spaced review", srsDueN:"{n} words are due for review today", srsClear:"All caught up today ✅ {n} due tomorrow", srsStart:"Review {n}", srsNone:"Nothing to review today 🎉", srsHow:"Words you get right come back after longer and longer gaps (1→2→4→7→15→30 days); miss one and it starts again tomorrow.", srsBoxes:"Each box is how often a word comes back", srsAfter:"{n} words still due today · about {t} tomorrow", readAloud:"Read aloud", readPause:"Pause", readResume:"Resume", readStop:"Stop", readSpeed:"{r}x", readNoTts:"This browser can't read text aloud"});
+Object.assign(STR.hi,{srsTitle:"अंतराल दोहराव", srsDueN:"आज {n} शब्द दोहराने हैं", srsClear:"आज के सब शब्द हो गए ✅ कल {n}", srsStart:"{n} दोहराएँ", srsNone:"आज दोहराने को कुछ नहीं 🎉", srsHow:"सही जवाब वाले शब्द लंबे अंतराल पर लौटते हैं (1→2→4→7→15→30 दिन); गलत होने पर कल फिर से।", srsBoxes:"हर खाना बताता है शब्द कितने दिन में लौटेगा", srsAfter:"आज अभी {n} बाकी · कल लगभग {t}", readAloud:"ज़ोर से पढ़ें", readPause:"रोकें", readResume:"जारी रखें", readStop:"बंद", readSpeed:"{r}x", readNoTts:"यह ब्राउज़र पढ़कर नहीं सुना सकता"});
+Object.assign(STR.es,{srsTitle:"Repaso espaciado", srsDueN:"Hoy toca repasar {n} palabras", srsClear:"Todo al día ✅ mañana tocan {n}", srsStart:"Repasar {n}", srsNone:"Hoy no hay nada que repasar 🎉", srsHow:"Las palabras que aciertas vuelven cada vez más tarde (1→2→4→7→15→30 días); si fallas, empieza otra vez mañana.", srsBoxes:"Cada caja indica cada cuánto vuelve la palabra", srsAfter:"Quedan {n} para hoy · unas {t} mañana", readAloud:"Leer en voz alta", readPause:"Pausa", readResume:"Seguir", readStop:"Parar", readSpeed:"{r}x", readNoTts:"Este navegador no puede leer en voz alta"});
+Object.assign(STR.ja,{srsTitle:"間隔反復", srsDueN:"今日復習する単語が {n} 個あります", srsClear:"今日の分は完了 ✅ 明日は {n} 個", srsStart:"{n} 個を復習", srsNone:"今日は復習する単語がありません 🎉", srsHow:"正解した単語は間隔をあけて出てきます（1→2→4→7→15→30日）。間違えたら翌日からやり直し。", srsBoxes:"箱ごとに次の復習までの日数", srsAfter:"今日まだ {n} 個 · 明日は約 {t} 個", readAloud:"音声で読む", readPause:"一時停止", readResume:"再開", readStop:"停止", readSpeed:"{r}x", readNoTts:"このブラウザは読み上げに対応していません"});
+Object.assign(STR.ko,{srsTitle:"간격 복습", srsDueN:"오늘 복습할 단어 {n}개", srsClear:"오늘 복습 끝 ✅ 내일 {n}개", srsStart:"{n}개 복습", srsNone:"오늘은 복습할 단어가 없어요 🎉", srsHow:"맞힌 단어는 점점 긴 간격으로 돌아와요 (1→2→4→7→15→30일). 틀리면 내일부터 다시 시작해요.", srsBoxes:"칸마다 단어가 돌아오는 주기", srsAfter:"오늘 남은 단어 {n}개 · 내일 약 {t}개", readAloud:"소리 내어 읽기", readPause:"일시정지", readResume:"계속", readStop:"정지", readSpeed:"{r}x", readNoTts:"이 브라우저는 읽어 주기를 지원하지 않아요"});
+/* ================= privacy, account deletion ================= */
+function privacyCard(){
+  const u=CLOUD.user;
+  return `<section class="card priv-card"><b>🔒 ${T("pvCard")}</b><span class="muted sm-t">${T("pvCardSub")}</span>
+    <div class="row"><button class="btn ghost sm" data-act="privacy">${T("pvOpen")}</button><button class="btn ghost sm del-btn" data-act="delask">${u?T("delBtn"):T("delBtnLocal")}</button></div>
+    ${S.delAsk?`<div class="del-ask"><b>⚠️ ${T("delQ")}</b><p class="sm-t">${u?T("delWhat"):T("delWhatLocal")}</p><div class="row"><button class="btn sm danger-solid" data-act="delgo" ${S.delBusy?"disabled":""}>${S.delBusy?T("delBusy"):T("delYes")}</button><button class="btn ghost sm" data-act="delask">${T("nickNo")}</button></div></div>`:""}</section>`;
+}
+async function deleteAccount(){
+  if(S.delBusy) return; S.delBusy=true; render();
+  const wipeLocal=()=>{ try{ Object.keys(localStorage).filter(k=>/^che-(pro|daily-pro)/.test(k)).forEach(k=>localStorage.removeItem(k)); }catch(e){} };
+  try{
+    if(CLOUD.user&&CLOUD.fb){
+      const {fsM,db,authM,auth}=CLOUD.fb, uid=CLOUD.user.uid, g=game();
+      // Google requires a recent sign-in before an account can be deleted: ask first, while we still have the tap
+      const last=Date.parse((auth.currentUser&&auth.currentUser.metadata&&auth.currentUser.metadata.lastSignInTime)||0);
+      if(authM.reauthenticateWithPopup&&!(Date.now()-last<4*60e3)){ await authM.reauthenticateWithPopup(auth.currentUser,new authM.GoogleAuthProvider()); }
+      CLOUD.deleting=true; clearTimeout(CLOUD.timer); CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false;
+      const del=async ref=>{ try{ await fsM.deleteDoc(ref); }catch(e){} };
+      const ws=await fsM.getDocs(wordsCol()); const ids=[]; ws.forEach(d=>ids.push(d.id));
+      for(let i=0;i<ids.length;i+=400){ const b=fsM.writeBatch(db); ids.slice(i,i+400).forEach(id=>b.delete(fsM.doc(wordsCol(),id))); await b.commit(); }
+      await del(userRef()); await del(fsM.doc(db,"leaderboard",uid)); await del(fsM.doc(db,"allies",uid));
+      if(g.nick){ try{ const r=fsM.doc(db,"nicks",nickKey(g.nick)), d=await fsM.getDoc(r); if(d.exists()&&d.data().uid===uid) await fsM.deleteDoc(r); }catch(e){} }
+      const pm=(()=>{ const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()-1); return ymd(d).slice(0,7); })();
+      for(const m of [monthKey(),pm]){ await del(fsM.doc(db,"readMonths",m,"u",uid)); await del(fsM.doc(db,"ieltsMonths",m,"scores",uid)); }
+      await del(fsM.doc(db,"ieltsWeeks",isoWeek().id,"scores",uid));
+      if(PUSH.id) await del(fsM.doc(db,"push",PUSH.id));
+      const did=devId(); if(did) await del(fsM.doc(db,"act",did));
+      try{ const reg=await navigator.serviceWorker.getRegistration(); const sub=reg&&await reg.pushManager.getSubscription(); if(sub) await sub.unsubscribe(); }catch(e){}
+      if(authM.deleteUser) await authM.deleteUser(auth.currentUser);
+    } else if(CLOUD.fb){ const {fsM,db}=CLOUD.fb; const did=devId(); try{ if(PUSH.id) await fsM.deleteDoc(fsM.doc(db,"push",PUSH.id)); if(did) await fsM.deleteDoc(fsM.doc(db,"act",did)); }catch(e){} }
+    wipeLocal(); toast(T("delDone")); setTimeout(()=>location.reload(),1200);
+  }catch(e){
+    CLOUD.deleting=false; S.delBusy=false;
+    const c=e&&e.code||""; toast(c==="auth/popup-closed-by-user"||c==="auth/cancelled-popup-request"?T("delCancel"):T("delFail")); render();
+  }
+}
+const PRIV={
+zh:{t:"隱私權政策", upd:"最後更新：2026 年 10 月 16 日", secs:[
+ ["我們是誰","BinBin daily 是一位個人開發者（CheChe）在愛爾蘭製作的英文學習 app。有任何隱私問題，請用「設定 → 意見回饋」告訴我。"],
+ ["我們收集哪些資料",["不登入也能使用：學習紀錄、單字、遊戲進度只存在你的手機（瀏覽器的本機儲存空間）。","用 Google 登入時：你的 Google 帳號編號、顯示名稱與大頭貼，以及你的單字、閱讀與測驗紀錄、遊戲進度、新聞地區設定，會存到雲端，讓你換手機也不會不見。","你自己設定的暱稱、國旗，以及排行榜成績（戰力、IELTS、閱讀篇數），其他登入的玩家看得到。","多人遊戲與盟友：房間內的暱稱與遊戲狀態，其他玩家看得到。","開啟通知時：推播訂閱資訊、時區、語言，以及你當天是否讀過新聞（只用來決定要不要提醒你）。","使用統計：一組隨機產生的裝置編號，記錄你哪幾天打開 app、語言和程度設定，用來計算留存率；不含姓名或聯絡方式。","你主動送出的意見回饋內容。"]],
+ ["我們用資料做什麼","只用來提供 app 的功能：同步進度、排行榜、多人遊戲、提醒通知，以及了解 app 哪裡需要改進。我們不放廣告、不賣資料，也不把資料分享給行銷公司。"],
+ ["資料存在哪裡",["Google Firebase（帳號登入與雲端資料庫）：伺服器可能位於歐盟以外，Google 依其資料保護條款處理。","GitHub Pages（網站主機）、Google Fonts（字型）：會看到你的 IP 位址等一般連線資訊。","推播服務（Apple、Google、Mozilla）：負責把通知送到你的裝置。","意見回饋會存到開發者的 Google 試算表。"]],
+ ["保存多久","你的資料會保存到你刪除帳號為止。關閉通知時，推播資訊會立即刪除；失效的推播訂閱也會自動移除。"],
+ ["你的權利","依照歐盟 GDPR，你可以查看、匯出、更正或刪除你的資料：「設定 → 備份」可以匯出所有學習紀錄；下方的「刪除我的帳號與資料」會永久刪除雲端與這支手機上的資料。若你對資料處理有疑慮，也可以向愛爾蘭資料保護委員會（Data Protection Commission）申訴。"],
+ ["兒童","未滿 16 歲的使用者，請在家長或監護人同意下登入使用。"],
+ ["Cookie 與本機儲存","我們不使用追蹤型 Cookie。app 只用瀏覽器的本機儲存空間保存你的設定與進度。"],
+ ["IELTS 聲明","IELTS™ 是 British Council、IDP: IELTS Australia 與 Cambridge University Press & Assessment 的註冊商標。BinBin daily 與上述機構沒有任何關係，也未經其認可或核准。app 內的模擬試題皆為原創，分數僅為估計，不代表正式成績。"],
+ ["政策更新","政策有重大變更時，會在 app 內通知。"]]},
+en:{t:"Privacy policy", upd:"Last updated: 16 October 2026", secs:[
+ ["Who we are","BinBin daily is an English-learning app made by an independent developer (CheChe) in Ireland. For any privacy question, use Settings → Feedback."],
+ ["What we collect",["Without signing in: your progress, words and game data stay on your phone (the browser's local storage).","When you sign in with Google: your Google account ID, display name and profile photo, plus your words, reading and quiz history, game progress and news region, are stored in the cloud so they follow you to a new phone.","The nickname and flag you choose and your leaderboard results (power, IELTS, articles read) are visible to other signed-in players.","Party games and allies: your nickname and game state in a room are visible to the other players.","If you turn on notifications: your push subscription, time zone, language and whether you've read the news today (only to decide whether to remind you).","Usage statistics: a randomly generated device ID with the days you opened the app and your language/level settings, used to measure retention. It contains no name or contact details.","Any feedback you send us."]],
+ ["How we use it","Only to run the app: syncing progress, leaderboards, party games, reminders, and understanding what to improve. We show no ads, never sell data and never share it with marketers."],
+ ["Where it is stored",["Google Firebase (sign-in and cloud database); servers may be outside the EU and Google processes data under its data-protection terms.","GitHub Pages (hosting) and Google Fonts (fonts) see normal connection data such as your IP address.","Push services (Apple, Google, Mozilla) deliver notifications to your device.","Feedback is stored in the developer's Google Sheet."]],
+ ["How long we keep it","Until you delete your account. Push details are deleted as soon as you turn notifications off, and expired subscriptions are removed automatically."],
+ ["Your rights","Under the EU GDPR you can access, export, correct or delete your data: Settings → Backup exports all your learning records, and “Delete my account and data” below permanently erases your data from the cloud and this phone. You can also complain to Ireland's Data Protection Commission."],
+ ["Children","If you are under 16, please sign in only with a parent's or guardian's permission."],
+ ["Cookies and local storage","We use no tracking cookies. The app only uses your browser's local storage to keep your settings and progress."],
+ ["IELTS notice","IELTS™ is a registered trademark of the British Council, IDP: IELTS Australia and Cambridge University Press & Assessment. BinBin daily is not affiliated with, endorsed or approved by them. All practice tests are original and scores are estimates only."],
+ ["Changes","We'll let you know in the app if this policy changes in an important way."]]}};
+function viewPrivacy(){
+  const P=PRIV[LANG]||PRIV.en, note=PRIV[LANG]?"":`<p class="muted sm-t">${T("pvEnOnly")}</p>`;
+  return `<div class="view priv-view"><button class="btn ghost" data-act="privback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("back")}</button>
+    <div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${esc(P.t)}</h2><p class="muted sm-t">${esc(P.upd)}</p></div>${note}
+    ${P.secs.map(([h,b])=>`<section class="card"><b>${esc(h)}</b>${Array.isArray(b)?`<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<p>${esc(b)}</p>`}</section>`).join("")}
+    ${privacyCard()}</div>`;
+}
+Object.assign(STR.zh,{pvCard:"隱私與帳號", pvCardSub:"了解我們收集哪些資料，或永久刪除你的帳號。", pvOpen:"隱私權政策", delBtn:"刪除我的帳號與資料", delBtnLocal:"清除這支手機上的資料", delQ:"確定要永久刪除嗎？", delWhat:"會刪除你在雲端與這支手機上的所有資料：單字、閱讀與測驗紀錄、遊戲進度、暱稱、排行榜成績、盟友與通知設定，以及你的 BinBin 帳號。刪除後無法復原。可能會請你再用 Google 登入一次確認身分。", delWhatLocal:"會清除這支手機上的所有學習紀錄、單字與遊戲進度，無法復原。", delYes:"永久刪除", delBusy:"刪除中…", delDone:"已刪除，謝謝你使用 BinBin daily", delFail:"刪除沒有完成，請確認網路後再試一次", delCancel:"已取消，沒有刪除任何資料", pvEnOnly:"", ieDisclaimer:"非官方練習：IELTS™ 是 British Council、IDP 與 Cambridge University Press & Assessment 的註冊商標，本 app 與其無關、也未經認可。試題為原創，分數僅供參考。"});
+Object.assign(STR.en,{pvCard:"Privacy & account", pvCardSub:"See what data we keep, or permanently delete your account.", pvOpen:"Privacy policy", delBtn:"Delete my account and data", delBtnLocal:"Clear the data on this phone", delQ:"Permanently delete everything?", delWhat:"This erases all your data in the cloud and on this phone — words, reading and quiz history, game progress, nickname, leaderboard results, allies and notification settings — and your BinBin account. It can't be undone. You may be asked to sign in with Google once more to confirm.", delWhatLocal:"This clears all learning records, words and game progress on this phone. It can't be undone.", delYes:"Delete permanently", delBusy:"Deleting…", delDone:"Deleted. Thank you for using BinBin daily", delFail:"Couldn't finish deleting. Check your connection and try again", delCancel:"Cancelled — nothing was deleted", pvEnOnly:"", ieDisclaimer:"Unofficial practice: IELTS™ is a registered trademark of the British Council, IDP and Cambridge University Press & Assessment. This app is not affiliated with or endorsed by them. Tests are original and scores are estimates only."});
+for(const k of ["hi","es","ja","ko"]) for(const x of ["pvCard","pvCardSub","pvOpen","delBtn","delBtnLocal","delQ","delWhat","delWhatLocal","delYes","delBusy","delDone","delFail","delCancel","ieDisclaimer"]) if(!STR[k][x]) STR[k][x]=STR.en[x];
+Object.assign(STR.hi,{pvCard:"गोपनीयता और खाता", pvOpen:"गोपनीयता नीति", delBtn:"मेरा खाता और डेटा हटाएँ", delYes:"हमेशा के लिए हटाएँ", pvEnOnly:"यह नीति अभी अंग्रेज़ी में उपलब्ध है।"});
+Object.assign(STR.es,{pvCard:"Privacidad y cuenta", pvOpen:"Política de privacidad", delBtn:"Eliminar mi cuenta y mis datos", delYes:"Eliminar para siempre", pvEnOnly:"Por ahora esta política está disponible en inglés."});
+Object.assign(STR.ja,{pvCard:"プライバシーとアカウント", pvOpen:"プライバシーポリシー", delBtn:"アカウントとデータを削除", delYes:"完全に削除する", pvEnOnly:"このポリシーは現在英語のみです。"});
+Object.assign(STR.ko,{pvCard:"개인정보와 계정", pvOpen:"개인정보 처리방침", delBtn:"내 계정과 데이터 삭제", delYes:"영구 삭제", pvEnOnly:"현재 이 방침은 영어로만 제공돼요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
-  S.ready.personal=true; render();
+  S.ready.personal=true; render(); onbMaybe();
   cloudInit();
   try{
     let j=null;
