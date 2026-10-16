@@ -2561,7 +2561,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.56";
+const APP_VERSION="2026.10.57";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3110,7 +3110,7 @@ async function nickVerify(){
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
 }
 const OWNER_KEY="che-pro-owner";
-function localReset(){ S.words.clear(); S.days.clear(); S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+function localReset(){ S.words.clear(); S.days.clear(); try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
 async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
   localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
@@ -3125,47 +3125,64 @@ function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
   return {...G_DEFAULT, ...base, inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
     taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, battles:Math.max(base.battles||0,o.battles||0)}; }
+/* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
+   tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
+const WSYNC_KEY="che-pro-wsync", DIRTY_KEY="che-pro-dirty", WSYNC_FULL=7*864e5, WSYNC_MARGIN=15*60e3;
+function wsyncGet(){ try{ const v=JSON.parse(localStorage.getItem(WSYNC_KEY)||"null"); return v&&CLOUD.user&&v.uid===CLOUD.user.uid?v:null; }catch(e){ return null; } }
+function wsyncSet(o){ try{ localStorage.setItem(WSYNC_KEY,JSON.stringify({uid:CLOUD.user.uid,...o})); }catch(e){} }
+function dirtySave(){ if(!CLOUD.user) return; try{ localStorage.setItem(DIRTY_KEY,JSON.stringify({uid:CLOUD.user.uid,w:[...CLOUD.dirtyWords],d:[...CLOUD.delWords]})); }catch(e){} }
+function dirtyLoad(){ try{ const v=JSON.parse(localStorage.getItem(DIRTY_KEY)||"null"); if(v&&v.uid===CLOUD.user.uid){ (v.w||[]).forEach(k=>CLOUD.dirtyWords.add(k)); (v.d||[]).forEach(k=>CLOUD.delWords.add(k)); } }catch(e){} }
 async function cloudPull(){
   const {fsM}=CLOUD.fb; CLOUD.status="syncing"; render();
   try{
-    const [us,ws]=await Promise.all([fsM.getDoc(userRef()), fsM.getDocs(wordsCol())]);
-    const cloud=us.exists()?us.data():{};
-    const cw=new Map(); ws.forEach(d=>cw.set(d.id,d.data()));
     // each Google account has its own progress: never mix another account's (or a guest's) data into an existing account
     let owner=null; try{ owner=localStorage.getItem(OWNER_KEY); }catch(e){}
+    const info=wsyncGet(), started=Date.now();
+    const delta=!!(info&&owner===CLOUD.user.uid&&started-(info.full||0)<WSYNC_FULL);
+    const wq=delta?fsM.query(wordsCol(), fsM.where("_u",">",(info.at||0)-WSYNC_MARGIN)):wordsCol();
+    const [us,ws]=await Promise.all([fsM.getDoc(userRef()), fsM.getDocs(wq)]);
+    const cloud=us.exists()?us.data():{};
+    const cw=new Map(), tomb=new Set(); ws.forEach(d=>{ const v=d.data(); if(v&&v._del) tomb.add(d.id); else if(v){ const {_u,...w}=v; cw.set(d.id,w); } });
+    CLOUD.lastPull={delta, n:cw.size+tomb.size};
     const cloudHas=!!(cloud.game||cw.size||Object.keys(cloud.days||{}).length);
     if((owner&&owner!==CLOUD.user.uid)||(!owner&&cloudHas)) localReset();
     try{ localStorage.setItem(OWNER_KEY,CLOUD.user.uid); }catch(e){}
     const hadLocal=S.words.size>0||S.days.size>0||(S.game&&(S.game.lv>1||S.game.exp>0||S.game.gold>0));
+    dirtyLoad();
+    // words deleted on another device
+    for(const k of tomb) if(!CLOUD.dirtyWords.has(k)) S.words.delete(k);
     // words: keep the more-practised copy of each word
     for(const [k,v] of cw){ const l=S.words.get(k); if(!l||wScore(v)>=wScore(l)) S.words.set(k,v); }
-    for(const [k,v] of S.words) if(!cw.has(k)||wScore(v)>wScore(cw.get(k))) CLOUD.dirtyWords.add(k);
+    if(delta){ for(const [k,v] of cw){ const l=S.words.get(k); if(l&&wScore(l)>wScore(v)) CLOUD.dirtyWords.add(k); } }
+    else for(const [k,v] of S.words) if(!tomb.has(k)&&(!cw.has(k)||wScore(v)>wScore(cw.get(k)))) CLOUD.dirtyWords.add(k);
     for(const [k,v] of Object.entries(cloud.days||{})) S.days.set(k, mergeDay(S.days.get(k),v));
     S.game=mergeGame(S.game, cloud.game?{...G_DEFAULT,...cloud.game}:null) || S.game;
     CLOUD.dirtyMain=true; lsSave();
     await cloudFlush();
-    if(hadLocal && (cw.size||cloud.game)) toast(T("merged"));
+    wsyncSet({at:started, full:delta?info.full:started});
+    if(hadLocal && !delta && (cw.size||cloud.game)) toast(T("merged"));
     CLOUD.status="ok";
   }catch(e){ CLOUD.status="err"; }
   render();
 }
-function cloudMark(id, deleted){ if(!CLOUD.user) return; if(id&&id.startsWith("w~")){ (deleted?CLOUD.delWords:CLOUD.dirtyWords).add(id); if(deleted) CLOUD.dirtyWords.delete(id); } else CLOUD.dirtyMain=true;
+function cloudMark(id, deleted){ if(!CLOUD.user) return; if(id&&id.startsWith("w~")){ (deleted?CLOUD.delWords:CLOUD.dirtyWords).add(id); if(deleted) CLOUD.dirtyWords.delete(id); else CLOUD.delWords.delete(id); dirtySave(); } else { CLOUD.dirtyMain=true; if(CLOUD.dirtyWords.size) dirtySave(); }
   clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,1500); }
 async function cloudFlush(){
   if(!CLOUD.user||!CLOUD.fb) return; clearTimeout(CLOUD.timer);
   const {fsM,db}=CLOUD.fb; const words=[...CLOUD.dirtyWords], dels=[...CLOUD.delWords], main=CLOUD.dirtyMain;
   if(!words.length&&!dels.length&&!main) return;
-  CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false;
+  CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false; dirtySave();
   try{
     const ops=[];
     if(main&&!DEV) setTimeout(lbPush,0);
     if(main) ops.push(b=>b.set(userRef(),{name:(CLOUD.user&&CLOUD.user.displayName)||"", region:regionKey(), game:(DEV?DEV.game:S.game)||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
-    for(const k of words){ const v=S.words.get(k); if(v) ops.push(b=>b.set(fsM.doc(wordsCol(),k), JSON.parse(JSON.stringify(v)))); }
-    for(const k of dels) ops.push(b=>b.delete(fsM.doc(wordsCol(),k)));
+    const now=Date.now();
+    for(const k of words){ const v=S.words.get(k); if(v) ops.push(b=>b.set(fsM.doc(wordsCol(),k), {...JSON.parse(JSON.stringify(v)), _u:now})); }
+    for(const k of dels) ops.push(b=>b.set(fsM.doc(wordsCol(),k), {_del:1, _u:now}));
     for(let i=0;i<ops.length;i+=400){ const b=fsM.writeBatch(db); ops.slice(i,i+400).forEach(f=>f(b)); await b.commit(); }
     if(CLOUD.status!=="ok"){ CLOUD.status="ok"; render(); }
   }catch(e){
-    words.forEach(k=>CLOUD.dirtyWords.add(k)); dels.forEach(k=>CLOUD.delWords.add(k)); if(main) CLOUD.dirtyMain=true;
+    words.forEach(k=>CLOUD.dirtyWords.add(k)); dels.forEach(k=>CLOUD.delWords.add(k)); if(main) CLOUD.dirtyMain=true; dirtySave();
     if(CLOUD.status!=="err"){ CLOUD.status="err"; toast(T("syncFail")); render(); }
     clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,30000);
   }
