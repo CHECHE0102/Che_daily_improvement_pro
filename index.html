@@ -1407,6 +1407,7 @@ function finishPost(art, score, total){
   const d=dayRec();
   if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
   else saveDay({...d, postBy:{...(d.postBy||{}), [art.id]:{score,total}}});
+  setTimeout(rdPush,500);
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
@@ -2569,7 +2570,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.58";
+const APP_VERSION="2026.10.59";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3046,7 +3047,7 @@ document.addEventListener("click", e=>{
   if(a==="pre") return startQuiz("pre");
   if(a==="post") return startQuiz("post", mainArticle());
   if(a==="read"){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle()&&mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); return; }
-  if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); return startQuiz("post", mainArticle()); }
+  if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); setTimeout(rdPush,500); return startQuiz("post", mainArticle()); }
   if(a==="finishx") return startQuiz("post", currentArticle());
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
@@ -3232,12 +3233,13 @@ async function lbLoad(){
   const {fsM,db}=CLOUD.fb; const f=S.rkBy||"power";
   S.rk={loading:true, rows:S.rk&&S.rk.by===f?S.rk.rows:[], by:f}; render();
   try{
-    await lbPush();
-    const q=fsM.query(fsM.collection(db,"leaderboard"), fsM.orderBy(f,"desc"), fsM.limit(50));
+    const rd=f==="read", fld=rd?"n":f, col=rd?fsM.collection(db,"readMonths",monthKey(),"u"):fsM.collection(db,"leaderboard");
+    if(rd) await rdPush(); else await lbPush();
+    const q=fsM.query(col, fsM.orderBy(fld,"desc"), fsM.limit(50));
     const snap=await fsM.getDocs(q); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()}));
-    let me=null; const mine=rows.findIndex(r=>r.id===CLOUD.user.uid);
+    let me=null; const mine=rows.findIndex(r=>r.id===CLOUD.user.uid), myV=rd?readsThisMonth():lbEntry()[f];
     if(mine>=0) me=mine+1;
-    else if(game().nick){ const c=await fsM.getCountFromServer(fsM.query(fsM.collection(db,"leaderboard"), fsM.where(f,">",lbEntry()[f]))); me=c.data().count+1; }
+    else if(game().nick&&myV>0){ const c=await fsM.getCountFromServer(fsM.query(col, fsM.where(fld,">",myV))); me=c.data().count+1; }
     S.rk={rows, by:f, me};
   }catch(e){ S.rk={rows:[], by:f, err:true}; }
   render();
@@ -3267,18 +3269,21 @@ function viewRank(){
   const g=game(), f=S.rkBy||"power";
   if(f==="ielts"){ if(!IE_TOP||IE_TOP.week!==isoWeek().id){ IE_TOP={week:isoWeek().id,rows:[],loading:true}; setTimeout(ieLoadTop,0); } }
   else if(!S.rk||S.rk.by!==f){ setTimeout(lbLoad,0); }
-  if(f==="ielts"){ const tabsH=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
+  if(f==="ielts"){ const tabsH=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
     const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
     const u=untilReset();
     return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieWeekReset",{d:u.d,h:u.h})}</div>
       ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
-  const tabs=[["power",T("rkPower")],["lv",T("rkLv")],["ielts","🎓 "+T("rkIelts")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
+  const tabs=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
-  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv} · ${T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${r[f]}</b></li>`).join("");
+  const rd=f==="read";
+  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv||1}${rd?"":" · "+T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${rd?T("rkArtsN",{n:r.n}):r[f]}</b></li>`).join("");
+  const mu=untilMonthEnd();
   return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
     <div class="seg" role="group">${tabs}</div>
+    ${rd?`<div class="muted sm-t">${T("rkReadNote",{m:esc(monthKey()),d:mu.d,h:mu.h,n:readsThisMonth()})}</div>`:""}
     ${R.me?`<div class="rk-me">${T("rkYou",{n:R.me})}</div>`:""}
-    ${R.err?`<p class="muted">${T("rkLoadFail")}</p>`:R.loading&&!R.rows.length?`<p class="muted">${T("loading")}</p>`:R.rows.length?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("rkEmpty")}</p></div>`}
+    ${R.err?`<p class="muted">${T("rkLoadFail")}</p>`:R.loading&&!R.rows.length?`<p class="muted">${T("loading")}</p>`:R.rows.length?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${rd?T("rkReadEmpty"):T("rkEmpty")}</p></div>`}
     ${f==="power"?`<p class="muted sm-t">${T("rkPowerNote")}</p>`:""}`;
 }
 
@@ -4207,6 +4212,26 @@ function heroStage(){
   const tint=a?ARMC[a.el][1]:"#C8B89A";
   return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroSvg()}</div>${side(a,"armor","cloth")}</section>`;
 }
+/* ----- monthly reading leaderboard: articles finished this calendar month (readMonths/{YYYY-MM}/u/{uid}) ----- */
+const monthKey=()=>today().slice(0,7);
+function readsThisMonth(){ const m=monthKey(), ids=new Set();
+  for(const [k,d] of S.days){ const dt=(d&&d.date)||k.slice(4); if(!d||!dt.startsWith(m)) continue; if(d.read) ids.add(d.read); for(const id of Object.keys(d.postBy||{})) ids.add(id); }
+  return ids.size; }
+function untilMonthEnd(){ const now=new Date(), e=new Date(now.getFullYear(), now.getMonth()+1, 1); const ms=e-now; return {d:Math.floor(ms/864e5), h:Math.floor(ms%864e5/36e5)}; }
+let RD_SIG=null;
+async function rdPush(){
+  if(DEV||!CLOUD.user||!CLOUD.fb||!game().nick) return;
+  const m=monthKey(), n=Math.min(400,readsThisMonth()); if(!n) return;
+  const e={name:game().nick.slice(0,16), n, flag:myFlag(), lv:game().lv|0, at:new Date().toISOString()};
+  const sig=m+JSON.stringify({...e,at:0}); if(sig===RD_SIG) return;
+  const {fsM,db}=CLOUD.fb; try{ await fsM.setDoc(fsM.doc(db,"readMonths",m,"u",CLOUD.user.uid), e); RD_SIG=sig; }catch(err){ console.warn("readrank",err&&err.code); }
+}
+Object.assign(STR.zh,{rkRead:"閱讀", rkArtsN:"{n} 篇", rkReadNote:"{m} · 本月讀完的文章數· 你本月 {n} 篇 · {d} 天 {h} 小時後重置", rkReadEmpty:"這個月還沒有人上榜，讀完一篇文章就能搶第一！"});
+Object.assign(STR.en,{rkRead:"Reading", rkArtsN:"{n}", rkReadNote:"{m} · Articles finished this month · You: {n} · resets in {d} d {h} h", rkReadEmpty:"Nobody's on the board this month yet — finish one article to take first place!"});
+Object.assign(STR.hi,{rkRead:"पढ़ाई", rkArtsN:"{n}", rkReadNote:"{m} · इस महीने पूरे किए लेख · आप: {n} · {d} दिन {h} घंटे में रीसेट", rkReadEmpty:"इस महीने अभी कोई नहीं है — एक लेख पूरा करें और पहले नंबर पर आएँ!"});
+Object.assign(STR.es,{rkRead:"Lectura", rkArtsN:"{n}", rkReadNote:"{m} · Artículos terminados este mes · Tú: {n} · se reinicia en {d} d {h} h", rkReadEmpty:"Aún no hay nadie este mes: ¡termina un artículo y ponte primero!"});
+Object.assign(STR.ja,{rkRead:"読書", rkArtsN:"{n}本", rkReadNote:"{m} · 今月読み終えた記事数· あなた：{n}本 · あと{d}日{h}時間でリセット", rkReadEmpty:"今月はまだ誰もいません。1本読み終えて1位を取ろう！"});
+Object.assign(STR.ko,{rkRead:"읽기", rkArtsN:"{n}편", rkReadNote:"{m} · 이번 달 끝까지 읽은 기사 수 · 나: {n}편 · {d}일 {h}시간 후 초기화", rkReadEmpty:"이번 달엔 아직 아무도 없어요. 한 편 읽고 1등 해 보세요!"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
