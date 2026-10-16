@@ -383,11 +383,11 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .h-arm{transform-box:view-box;transform-origin:80px 78px}
 .h-shield{transform-box:view-box;transform-origin:34px 92px}
 .foe .mon-seal{width:86%;margin:0 auto 6%}
-.fighter.atk.hero .hero-svg{animation:lungeR .55s ease-out}
-.fighter.atk.hero .h-arm{animation:swing .55s ease-out}
-.fighter.atk.foe .mon-seal{animation:lungeL .55s ease-out}
+.fighter.atk.hero .hero-svg{animation:lungeR .8s ease-out}
+.fighter.atk.hero .h-arm{animation:swing .8s ease-out}
+.fighter.atk.foe .mon-seal{animation:lungeL .8s ease-out}
 .fighter.def .h-shield{animation:guard .55s ease-out}
-.fighter.hurt .hero-svg,.fighter.hurt .mon-seal{animation:hurt .45s ease-out .15s}
+.fighter.hurt .hero-svg,.fighter.hurt .mon-seal{animation:hurt .6s ease-out .3s}
 .fighter.atk.hero.hurt .hero-svg{animation:none}
 @keyframes lungeR{40%{transform:translateX(26%)}100%{transform:none}}
 @keyframes lungeL{40%{transform:translateX(-30%) scale(1.05)}100%{transform:none}}
@@ -395,10 +395,10 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 @keyframes guard{0%,70%{transform:translateX(26px) scale(1.15)}100%{transform:none}}
 @keyframes hurt{0%{filter:brightness(2.2) saturate(.3)}30%{transform:translateX(7px)}60%{transform:translateX(-5px)}100%{transform:none;filter:none}}
 .slash{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-.slash path{fill:none;stroke:#FFF8D6;stroke-width:7;stroke-linecap:round;stroke-dasharray:160;stroke-dashoffset:160;filter:drop-shadow(0 0 6px #FFD25A);animation:cut .4s ease-out .15s forwards,fade .3s .55s forwards}
+.slash path{fill:none;stroke:#FFF8D6;stroke-width:7;stroke-linecap:round;stroke-dasharray:160;stroke-dashoffset:160;filter:drop-shadow(0 0 6px #FFD25A);animation:cut .5s ease-out .25s forwards,fade .4s .85s forwards}
 .slash.claw path{stroke:#FF6B5A;stroke-width:5;filter:drop-shadow(0 0 5px #FF6B5A)}
 @keyframes cut{to{stroke-dashoffset:0}}@keyframes fade{to{opacity:0}}
-.dmg{position:absolute;left:50%;top:18%;transform:translateX(-50%);font:800 24px var(--f-display);color:#fff;text-shadow:0 2px 0 #0008,0 0 8px #000a;animation:float .8s ease-out forwards;pointer-events:none;white-space:nowrap}
+.dmg{position:absolute;left:50%;top:18%;transform:translateX(-50%);font:800 24px var(--f-display);color:#fff;text-shadow:0 2px 0 #0008,0 0 8px #000a;animation:float 1.1s ease-out .2s both;pointer-events:none;white-space:nowrap}
 .dmg.crit{color:#FFD25A;font-size:30px}.dmg.foe-hit{color:#FF8A7A}
 .dmg small{display:block;font-size:11px;text-align:center;letter-spacing:.05em}
 @keyframes float{0%{opacity:0;transform:translate(-50%,10px) scale(.7)}20%{opacity:1;transform:translate(-50%,0) scale(1.15)}100%{opacity:0;transform:translate(-50%,-34px) scale(1)}}
@@ -662,8 +662,8 @@ body.maint-lock{overflow:hidden}
 .ally-fig{position:absolute;left:-14%;bottom:2%;width:66%;z-index:3}
 .ally-fig .ally-svg{width:100%;height:auto;display:block}
 .ally-tag{position:absolute;left:0;right:0;bottom:-14px;text-align:center;font-size:10px;font-weight:800;color:#fff;text-shadow:0 1px 2px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ally-fig.a-atk .ally-svg{animation:lungeR .55s ease-out}.ally-fig.a-atk .a-arm{animation:swing .55s ease-out;transform-origin:80px 78px}
-.ally-fig.a-hurt .ally-svg{animation:hurt .45s ease-out .15s}.ally-fig.a-down{filter:grayscale(1) brightness(.6);transform:rotate(-12deg) translateY(8%);transition:all .5s}
+.ally-fig.a-atk .ally-svg{animation:lungeR .8s ease-out}.ally-fig.a-atk .a-arm{animation:swing .8s ease-out;transform-origin:80px 78px}
+.ally-fig.a-hurt .ally-svg{animation:hurt .6s ease-out .3s}.ally-fig.a-down{filter:grayscale(1) brightness(.6);transform:rotate(-12deg) translateY(8%);transition:all .5s}
 .ally-fig .slash{z-index:3}.ally-fig .dmg{z-index:4}
 .ally-items{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ally-it{display:flex;gap:8px;align-items:center;min-width:0}.ally-it>span{display:flex;flex-direction:column;min-width:0}.ally-it b{font-size:13px;line-height:1.25}
 .push-h{display:flex;gap:12px;align-items:flex-start}.push-h>div{display:flex;flex-direction:column;gap:4px}.push-ic{font-size:26px;line-height:1}
@@ -747,11 +747,11 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 .slash.fx.t2 .fx-main{stroke-width:7;filter:drop-shadow(0 0 6px var(--c2))}
 .slash.fx.t3 .fx-main{stroke-width:8;filter:drop-shadow(0 0 8px var(--c2)) drop-shadow(0 0 2px #fff)}
 .slash.fx .fx-trail{stroke:var(--c2);stroke-width:18;opacity:.35;filter:blur(3px)}
-.slash.fx.a-thrust .fx-main{stroke-dasharray:100;stroke-dashoffset:100;animation-duration:.25s,.3s}
-.slash.fx .fx-ring{stroke:var(--c2);stroke-width:3;opacity:0;transform-origin:50px 72px;animation:fxring .45s ease-out .38s}
-.slash.fx .fx-orb{fill:var(--c1);stroke:var(--c2);stroke-width:2;opacity:0;transform-origin:56px 50px;animation:fxorb .5s ease-out .3s;filter:drop-shadow(0 0 6px var(--c2))}
-.slash.fx .fx-spark{fill:var(--c1);opacity:0;animation:fxspark .45s ease-out forwards;filter:drop-shadow(0 0 3px var(--c2))}
-.slash.fx .fx-star{fill:#fff;opacity:0;transform-origin:56px 50px;animation:fxstar .5s ease-out .34s;filter:drop-shadow(0 0 5px var(--c2))}
+.slash.fx.a-thrust .fx-main,.slash.fx.a-bow .fx-main{stroke-dasharray:100;stroke-dashoffset:100;animation-duration:.3s,.4s}
+.slash.fx .fx-ring{stroke:var(--c2);stroke-width:3;opacity:0;transform-origin:50px 72px;animation:fxring .6s ease-out .55s}
+.slash.fx .fx-orb{fill:var(--c1);stroke:var(--c2);stroke-width:2;opacity:0;transform-origin:56px 50px;animation:fxorb .65s ease-out .45s;filter:drop-shadow(0 0 6px var(--c2))}
+.slash.fx .fx-spark{fill:var(--c1);opacity:0;animation:fxspark .6s ease-out forwards;filter:drop-shadow(0 0 3px var(--c2))}
+.slash.fx .fx-star{fill:#fff;opacity:0;transform-origin:56px 50px;animation:fxstar .6s ease-out .5s;filter:drop-shadow(0 0 5px var(--c2))}
 @keyframes fxring{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(3.2)}}
 @keyframes fxorb{0%{opacity:0;transform:scale(.3)}40%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1.8)}}
 @keyframes fxspark{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
@@ -1564,15 +1564,15 @@ const ELNAME={zh:{metal:["金","金"],wood:["木","木"],water:["水","水"],fir
  ja:{metal:["金","金"],wood:["木","木"],water:["水","水"],fire:["火","火"],earth:["土","土"],none:["–","なし"]},
  ko:{metal:["금","금"],wood:["목","나무"],water:["수","물"],fire:["화","불"],earth:["토","흙"],none:["–","없음"]}};
 const elShort=k=>ELNAME[LANG][k||"none"][0], elName=k=>ELNAME[LANG][k||"none"][1];
-const WN_L={en:{metal:["Bronze Sword","Steel Longsword","Moonsilver Blade","Nuada's Sword of Light"],wood:["Oak Staff","Hawthorn Staff","Yew Rune Staff","Druid's Sacred Staff"],water:["Fisher's Trident","Tidal Trident","Selkie Trident","Trident of Manannán"],fire:["Ember Spear","Molten Spear","Blazing Spear","Spear of Lugh"],earth:["Stone Hammer","Granite Warhammer","Giant's Hammer","Hammer of the Dagda"]},
- hi:{metal:["काँसे की तलवार","इस्पात की तलवार","चंद्र-चाँदी की धार","नुआडा की प्रकाश तलवार"],wood:["ओक की लाठी","नागफनी की छड़ी","यू की रून छड़ी","ड्रुइड की पवित्र छड़ी"],water:["मछुआरे का त्रिशूल","ज्वार त्रिशूल","सेल्की त्रिशूल","मनानान का त्रिशूल"],fire:["अंगार भाला","पिघला भाला","धधकता भाला","लू का भाला"],earth:["पत्थर का हथौड़ा","ग्रेनाइट युद्ध-हथौड़ा","दानव का हथौड़ा","दग्दा का हथौड़ा"]}};
+const WN_L={en:{metal:["Bronze Sword","Steel Longsword","Moonsilver Blade","Nuada's Sword of Light"],wood:["Oak Staff","Hawthorn Staff","Yew Rune Staff","Druid's Sacred Staff"],water:["Fisher's Trident","Tidal Trident","Selkie Trident","Trident of Manannán"],fire:["Ember Shortbow","Molten Longbow","Blazing Warbow","Bow of Lugh"],earth:["Stone Hammer","Granite Warhammer","Giant's Hammer","Hammer of the Dagda"]},
+ hi:{metal:["काँसे की तलवार","इस्पात की तलवार","चंद्र-चाँदी की धार","नुआडा की प्रकाश तलवार"],wood:["ओक की लाठी","नागफनी की छड़ी","यू की रून छड़ी","ड्रुइड की पवित्र छड़ी"],water:["मछुआरे का त्रिशूल","ज्वार त्रिशूल","सेल्की त्रिशूल","मनानान का त्रिशूल"],fire:["अंगार धनुष","पिघला लंबा धनुष","धधकता युद्ध-धनुष","लू का धनुष"],earth:["पत्थर का हथौड़ा","ग्रेनाइट युद्ध-हथौड़ा","दानव का हथौड़ा","दग्दा का हथौड़ा"]}};
 const AN_L={en:{metal:["Chainmail","Iron Plate","Silver Scale Armour","War God's Mail"],wood:["Bark Vest","Woven Vine Armour","Ancient Oak Guard","Heart of the Forest"],water:["Sealskin Coat","Tide-Pattern Mail","Deep-Sea Scale","Cloak of Manannán"],fire:["Leather Armour","Lava Armour","Phoenix Mail","Undying Flame Plate"],earth:["Mud-Stone Armour","Heavy Rock Plate","Mountain Mail","Heart of the Earth"]},
  hi:{metal:["ज़ंजीर कवच","लोहे का कवच","चाँदी शल्क कवच","युद्ध देवता का कवच"],wood:["छाल की बंडी","बेल-बुना कवच","प्राचीन ओक रक्षक","वन-हृदय कवच"],water:["सील-खाल कोट","ज्वार कवच","गहरे सागर का शल्क","मनानान का लबादा"],fire:["चमड़े का कवच","लावा कवच","फ़ीनिक्स कवच","अमर ज्वाला कवच"],earth:["कीचड़-पत्थर कवच","भारी चट्टान कवच","पर्वत कवच","पृथ्वी-हृदय कवच"]}};
-WN_L.es={metal:["Espada de bronce","Espada larga de acero","Hoja de plata lunar","Espada de luz de Nuada"],wood:["Bastón de roble","Bastón de espino","Bastón rúnico de tejo","Bastón sagrado druida"],water:["Tridente de pescador","Tridente de las mareas","Tridente selkie","Tridente de Manannán"],fire:["Lanza de brasa","Lanza de hierro fundido","Lanza llameante","Lanza de Lugh"],earth:["Martillo de piedra","Martillo de granito","Martillo de gigante","Martillo del Dagda"]};
+WN_L.es={metal:["Espada de bronce","Espada larga de acero","Hoja de plata lunar","Espada de luz de Nuada"],wood:["Bastón de roble","Bastón de espino","Bastón rúnico de tejo","Bastón sagrado druida"],water:["Tridente de pescador","Tridente de las mareas","Tridente selkie","Tridente de Manannán"],fire:["Arco corto de brasa","Arco largo fundido","Arco de guerra llameante","Arco de Lugh"],earth:["Martillo de piedra","Martillo de granito","Martillo de gigante","Martillo del Dagda"]};
 AN_L.es={metal:["Cota de malla","Placas de hierro","Escamas de plata","Malla del dios de la guerra"],wood:["Chaleco de corteza","Armadura de enredadera","Guarda del roble antiguo","Corazón del bosque"],water:["Abrigo de piel de foca","Malla de las mareas","Escamas abisales","Capa de Manannán"],fire:["Armadura de cuero","Armadura de lava","Malla de fénix","Placas de llama eterna"],earth:["Armadura de barro y piedra","Placas de roca","Malla de montaña","Corazón de la tierra"]};
-WN_L.ja={metal:["青銅の剣","鋼の長剣","月銀の刃","ヌアザの光の剣"],wood:["樫の杖","サンザシの杖","イチイのルーン杖","ドルイドの聖杖"],water:["漁師の三叉槍","潮の三叉槍","セルキーの三叉槍","マナナンの三叉槍"],fire:["残り火の槍","溶鉄の槍","炎の槍","ルーの槍"],earth:["石の槌","花崗岩の戦槌","巨人の槌","ダグザの槌"]};
+WN_L.ja={metal:["青銅の剣","鋼の長剣","月銀の刃","ヌアザの光の剣"],wood:["樫の杖","サンザシの杖","イチイのルーン杖","ドルイドの聖杖"],water:["漁師の三叉槍","潮の三叉槍","セルキーの三叉槍","マナナンの三叉槍"],fire:["残り火の短弓","溶鉄の長弓","炎の戦弓","ルーの弓"],earth:["石の槌","花崗岩の戦槌","巨人の槌","ダグザの槌"]};
 AN_L.ja={metal:["鎖かたびら","鉄の板金鎧","銀鱗の鎧","軍神の鎧"],wood:["樹皮のベスト","蔓編みの鎧","古樫の守り","森の心臓"],water:["アザラシ皮のコート","潮紋の鎧","深海の鱗","マナナンのマント"],fire:["革の鎧","溶岩の鎧","不死鳥の鎧","不滅の炎の鎧"],earth:["泥石の鎧","重岩の鎧","山岳の鎧","大地の心臓"]};
-WN_L.ko={metal:["청동 검","강철 장검","월은의 칼날","누아다의 빛의 검"],wood:["참나무 지팡이","산사나무 지팡이","주목 룬 지팡이","드루이드의 성스러운 지팡이"],water:["어부의 삼지창","조수의 삼지창","셀키의 삼지창","마나난의 삼지창"],fire:["잉걸불 창","용철 창","불타는 창","루의 창"],earth:["돌망치","화강암 전투망치","거인의 망치","다그다의 망치"]};
+WN_L.ko={metal:["청동 검","강철 장검","월은의 칼날","누아다의 빛의 검"],wood:["참나무 지팡이","산사나무 지팡이","주목 룬 지팡이","드루이드의 성스러운 지팡이"],water:["어부의 삼지창","조수의 삼지창","셀키의 삼지창","마나난의 삼지창"],fire:["잉걸불 단궁","용철 장궁","불타는 전투활","루의 활"],earth:["돌망치","화강암 전투망치","거인의 망치","다그다의 망치"]};
 AN_L.ko={metal:["사슬 갑옷","철판 갑옷","은비늘 갑옷","전쟁신의 갑옷"],wood:["나무껍질 조끼","덩굴 갑옷","고목 참나무 수호구","숲의 심장"],water:["물개 가죽 코트","조수 무늬 갑옷","심해 비늘","마나난의 망토"],fire:["가죽 갑옷","용암 갑옷","불사조 갑옷","불멸의 화염 갑옷"],earth:["진흙돌 갑옷","무거운 바위 갑옷","산악 갑옷","대지의 심장"]};
 const itemName=it=>(LANG==="zh"?it.name:WN_L[LANG]&&(it.slot==="weapon"?WN_L:AN_L)[LANG][it.el][it.tier])+(it.plus?` +${it.plus}`:"");
 const tierLab=it=>it.legacy?TIER[it.tier].n:"Lv"+it.lv;
@@ -1580,7 +1580,7 @@ const tierLab=it=>it.legacy?TIER[it.tier].n:"Lv"+it.lv;
 const elBadge=(k,big)=>`<span class="el el-${k||"none"}${big?" big":""}" title="${elName(k)}">${elShort(k)}</span>`;
 
 const TIER=[{n:"Ⅰ",atk:6,def:4,hp:20,price:80,lv:1},{n:"Ⅱ",atk:14,def:10,hp:50,price:300,lv:4},{n:"Ⅲ",atk:26,def:18,hp:100,price:900,lv:8},{n:"Ⅳ",atk:42,def:30,hp:180,price:2500,lv:13}];
-const WNAMES={metal:["青銅劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂木杖","紫杉符文杖","德魯伊聖杖"],water:["漁夫三叉戟","潮汐三叉戟","塞爾基三叉戟","李爾海神三叉戟"],fire:["餘燼長槍","熔鐵長槍","烈焰長槍","盧神之槍"],earth:["石錘","花崗岩戰鎚","巨人之鎚","達格達之鎚"]};
+const WNAMES={metal:["青銅劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂木杖","紫杉符文杖","德魯伊聖杖"],water:["漁夫三叉戟","潮汐三叉戟","塞爾基三叉戟","李爾海神三叉戟"],fire:["餘燼短弓","熔鐵長弓","烈焰戰弓","盧神之弓"],earth:["石錘","花崗岩戰鎚","巨人之鎚","達格達之鎚"]};
 const ANAMES={metal:["鎖子甲","鐵板甲","銀鱗甲","戰神之鎧"],wood:["樹皮背心","藤編護甲","古橡守護甲","森林之心鎧"],water:["海豹皮衣","潮紋鎧","深海鱗甲","李爾斗篷"],fire:["皮革護甲","熔岩護甲","鳳焰鎧","不滅烈焰甲"],earth:["泥石護甲","岩石重甲","山嶺鎧","大地之心鎧"]};
 const ITEMS={};
 // legacy tier items (still owned / forged from shards, no longer sold in the shop)
@@ -2127,7 +2127,7 @@ function fight(){
   }
   saveGame(); render();
   clearInterval(S.btimer);
-  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); } renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:650);
+  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); } renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:1150);
 }
 function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
 function monArt(m, hit){
@@ -2679,7 +2679,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.74";
+const APP_VERSION="2026.10.75";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2719,7 +2719,7 @@ const WSHAPE={
   hammer:t=>`<path d="M31 22H34V60H31Z" fill="${WOODC}" ${sk}/><rect x="22" y="10" width="21" height="13" rx="2.5" fill="#A8A49A" ${sk}/><path d="M25 14H40" stroke="#D8D4CA" stroke-width="1.6"/>`,
   warhammer:t=>`<path d="M31 22H34V60H31Z" fill="${WOODC}" ${sk}/><path d="M18 8H47V24H18Z" fill="#B8A78E" ${sk}/><path d="M18 12L13 16L18 20M47 12L52 16L47 20" fill="#8E7E66" ${sk}/><path d="M24 12L28 20M36 12L40 20" stroke="${GK}" stroke-width="1.4"/>`
 };
-const WKIND={metal:["sword","sword","sword","sword"], wood:["staff","staff","orbstaff","orbstaff"], water:["trident","trident","trident","trident"], fire:["firespear","firespear","firespear","firespear"], earth:["hammer","warhammer","warhammer","warhammer"]};
+const WKIND={metal:["sword","sword","sword","sword"], wood:["staff","staff","orbstaff","orbstaff"], water:["trident","trident","trident","trident"], fire:["bow","bow","bow","bow"], earth:["hammer","warhammer","warhammer","warhammer"]};
 const ARMC={metal:["#C9D0D6","#B9C2C9","#E3E8EC","#F2D58A"], wood:["#9A6332","#6E9B4A","#7B5A36","#4E8F3E"], water:["#8B6B52","#7FB8D8","#5AA6CF","#2D6FA3"], fire:["#9C5B2E","#3B2A26","#E0703A","#C93A1E"], earth:["#9C8566","#8A8174","#7C8A6A","#A0784A"]};
 function armorPattern(el,t){
   if(el==="metal") return t===0?[0,1,2,3].map(r=>[0,1,2,3,4].map(c=>`<circle cx="${22+c*5}" cy="${24+r*7}" r="1.6" fill="none" stroke="${GK}" stroke-width="1"/>`).join("")).join(""):t===1?`<path d="M20 30H44M20 38H44M20 46H44" stroke="${GK}" stroke-width="1.4"/>`:`<path d="M21 28q3 4 6 0q3 4 6 0q3 4 6 0q3 4 6 0M21 36q3 4 6 0q3 4 6 0q3 4 6 0q3 4 6 0M21 44q3 4 6 0q3 4 6 0q3 4 6 0q3 4 6 0" fill="none" stroke="${GK}" stroke-width="1.2"/>`;
@@ -4657,7 +4657,7 @@ function atkFx(w,crit){
   if(act==="smash"&&t>=1) g+=`<ellipse class="fx-ring" cx="50" cy="72" rx="8" ry="3"/>`;
   if(act==="cast") g+=`<circle class="fx-orb" cx="56" cy="50" r="${6+t*2}"/>`;
   if(t>=2){ const n=t>=3?7:4; for(let i=0;i<n;i++){ const a=i/n*Math.PI*2+.4, r=20+(i%2)*9;
-      g+=`<circle class="fx-spark" cx="56" cy="50" r="${t>=3?3:2.4}" style="--dx:${(Math.cos(a)*r).toFixed(1)}px;--dy:${(Math.sin(a)*r).toFixed(1)}px;animation-delay:${.32+i*.02}s"/>`; } }
+      g+=`<circle class="fx-spark" cx="56" cy="50" r="${t>=3?3:2.4}" style="--dx:${(Math.cos(a)*r).toFixed(1)}px;--dy:${(Math.sin(a)*r).toFixed(1)}px;animation-delay:${.5+i*.025}s"/>`; } }
   if(t>=3) g+=`<path class="fx-star" d="M56 40l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/>`;
   return `<svg class="slash fx t${t} a-${act}" viewBox="0 0 100 100" style="--c1:${c1};--c2:${c2}">${g}</svg>`;
 }
