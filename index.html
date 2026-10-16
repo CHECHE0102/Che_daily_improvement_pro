@@ -757,6 +757,21 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 @keyframes fxspark{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
 @keyframes fxstar{0%{opacity:0;transform:scale(.2) rotate(0)}40%{opacity:1;transform:scale(1.1) rotate(20deg)}100%{opacity:0;transform:scale(.6) rotate(45deg)}}
 @media (prefers-reduced-motion:reduce){.slash.fx *{animation:none!important}}
+.hit-burst{position:absolute;left:50%;top:48%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;overflow:visible;z-index:3;opacity:0;animation:hb .55s ease-out .45s}
+.hit-burst path{stroke:#FFF3C4;stroke-width:3.4;stroke-linecap:round}.hit-burst .hb-core{fill:#FFF8E0;opacity:.85}.hit-burst .hb-ring{fill:none;stroke:#FFD25A;stroke-width:2.4}
+.hit-burst.by-foe path{stroke:#FFC2B8}.hit-burst.by-foe .hb-core{fill:#FFD9D2}.hit-burst.by-foe .hb-ring{stroke:#FF6B5A}
+.hit-burst.s3{width:85%;filter:drop-shadow(0 0 6px #FFD25A)}.hit-burst.s4{width:100%;filter:drop-shadow(0 0 10px #FFD25A)}
+@keyframes hb{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.25)}}
+.ko-flash{position:absolute;inset:-6%;border-radius:18px;background:radial-gradient(circle,#fff9 0,#fff0 70%);pointer-events:none;opacity:0;animation:koflash .6s ease-out .45s;z-index:2}
+@keyframes koflash{20%{opacity:1}100%{opacity:0}}
+.dmg.s1{font-size:20px}.dmg.s2{font-size:26px}.dmg.s3{font-size:32px;color:#FFD25A}.dmg.s4{font-size:38px;color:#FFE07A;text-shadow:0 2px 0 #0008,0 0 12px #FF8A3D}
+.dmg.foe-hit.s3,.dmg.foe-hit.s4{color:#FFD25A}
+.fighter.hurt.hs2 .hero-svg,.fighter.hurt.hs2 .mon-seal{animation:hurt2 .65s ease-out .3s}
+.fighter.hurt.hs3 .hero-svg,.fighter.hurt.hs3 .mon-seal,.fighter.hurt.hs4 .hero-svg,.fighter.hurt.hs4 .mon-seal{animation:hurt3 .75s ease-out .3s}
+@keyframes hurt2{0%{filter:brightness(2.4) saturate(.3)}25%{transform:translateX(12px)}55%{transform:translateX(-8px)}80%{transform:translateX(4px)}100%{transform:none;filter:none}}
+@keyframes hurt3{0%{filter:brightness(3) saturate(.2)}20%{transform:translateX(18px) rotate(4deg)}45%{transform:translateX(-12px) rotate(-3deg)}70%{transform:translateX(6px)}100%{transform:none;filter:none}}
+.fighter.hero.hurt.hs2 .hero-svg{animation-name:hurt2}.fighter.hero.hurt.hs3 .hero-svg,.fighter.hero.hurt.hs4 .hero-svg{animation-name:hurt3}
+@media (prefers-reduced-motion:reduce){.hit-burst,.ko-flash{display:none}}
 </style>
 
 </head>
@@ -2153,15 +2168,16 @@ function allySvg(al){
 }
 function arenaScene(B, last, cur){
   const m=B.m, g=game(), aAtk=last&&last.who==="a", aHit=last&&last.who==="m"&&last.tgt==="a", pAtk=last&&(last.who==="p"||aAtk), mAtk=last&&last.who==="m"&&!aHit, fin=B.stage==="end", al=B.res.ally, aDown=al&&cur.ahp!=null&&cur.ahp<=0;
-  const pop=(e,cls)=>e?`<span class="dmg ${cls}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:e.eye?`<small>👁 ${T("bossEyeShort")}</small>`:""}</span>`:"";
+  const hl=last?hitLv(last,last.who==="m"?(last.tgt==="a"?al.hp:B.res.maxP):m.hp):0;
+  const pop=(e,cls)=>e?`<span class="dmg ${cls} s${hl}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:e.eye?`<small>👁 ${T("bossEyeShort")}</small>`:hl===4?`<small>${T("hitKO")}</small>`:hl===3?`<small>${T("hitBig")}</small>`:""}</span>`:"";
   const showAnim=!fin||B.justEnded;
-  const heroCls=showAnim?(pAtk&&!aAtk?" atk":mAtk?" def hurt":""):"", foeCls=showAnim?(mAtk||aHit?" atk":pAtk?" hurt":""):"";
+  const heroCls=showAnim?(pAtk&&!aAtk?" atk":mAtk?" def hurt hs"+hl:""):"", foeCls=showAnim?(mAtk||aHit?" atk":pAtk?" hurt hs"+hl:""):"";
   const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allySvg(al)}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
   return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}">
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
-      <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
+      <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${hitBurst(hl,"foe")}${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
-      <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`${atkFx(ITEMS[game().weapon],last.crit)}${pop(last,"foe-hit")}`:""}</div></div>
+      <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`${atkFx(ITEMS[game().weapon],last.crit)}${hitBurst(hl,"you")}${pop(last,"foe-hit")}`:""}</div></div>
   </div>`;
 }
 function viewBattle(){
@@ -2679,7 +2695,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.75";
+const APP_VERSION="2026.10.76";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4661,6 +4677,25 @@ function atkFx(w,crit){
   if(t>=3) g+=`<path class="fx-star" d="M56 40l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/>`;
   return `<svg class="slash fx t${t} a-${act}" viewBox="0 0 100 100" style="--c1:${c1};--c2:${c2}">${g}</svg>`;
 }
+/* ----- hit strength → effect size. 1 light (<10% of max HP), 2 solid (10–22%), 3 heavy (22%+, crit or spell), 4 knock-out blow ----- */
+function hitLv(e,max){
+  if(!e||!max) return 0;
+  if(e.who==="m"?(e.tgt==="a"?e.ahp<=0:e.php<=0):e.mhp<=0) return 4;
+  const r=e.dmg/max; return (r>=.22||e.crit||e.spell)?3:r>=.10?2:1;
+}
+function hitBurst(lv,by){
+  if(lv<2) return "";
+  const n=lv===2?6:lv===3?10:14, R=lv===2?16:lv===3?24:32;
+  let rays=""; for(let i=0;i<n;i++){ const a=i/n*Math.PI*2, r1=R*.45, r2=R*(i%2?.8:1);
+    rays+=`<path d="M${(50+Math.cos(a)*r1).toFixed(1)} ${(50+Math.sin(a)*r1).toFixed(1)}L${(50+Math.cos(a)*r2).toFixed(1)} ${(50+Math.sin(a)*r2).toFixed(1)}"/>`; }
+  return `<svg class="hit-burst s${lv} by-${by}" viewBox="0 0 100 100" aria-hidden="true"><circle class="hb-core" cx="50" cy="50" r="${R*.35}"/>${rays}${lv>=3?`<circle class="hb-ring" cx="50" cy="50" r="${R*.6}"/>`:""}</svg>${lv===4?'<span class="ko-flash"></span>':""}`;
+}
+Object.assign(STR.zh,{hitBig:"強力一擊！",hitKO:"擊倒！"});
+Object.assign(STR.en,{hitBig:"Heavy hit!",hitKO:"K.O.!"});
+Object.assign(STR.hi,{hitBig:"ज़ोरदार वार!",hitKO:"नॉकआउट!"});
+Object.assign(STR.es,{hitBig:"¡Golpe fuerte!",hitKO:"¡K.O.!"});
+Object.assign(STR.ja,{hitBig:"強烈な一撃！",hitKO:"ノックアウト！"});
+Object.assign(STR.ko,{hitBig:"강력한 일격!",hitKO:"K.O.!"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
