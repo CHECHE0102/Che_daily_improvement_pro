@@ -719,6 +719,15 @@ body.onb-open{overflow:hidden}
 .gen-opt.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
 .gen-fig{width:110px;height:118px}.gen-fig .hero-svg{width:100%;height:100%}
 .gen-ask{border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.hero-art{position:relative;display:block}.hero-art .ha-in{position:relative;width:100%;height:100%;transform:scaleX(-1)}
+.hero-art img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+.hero-art .ha-wpn{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.hero-stage .hs-fig .hero-art{position:relative;z-index:1;width:100%;height:100%}
+.onb-art{width:200px;max-width:70%;height:auto;margin-top:4px}.onb-art.sm{width:150px}
+.play-head{display:flex;align-items:center;gap:10px}.play-head>div{flex:1;min-width:0}.play-art{width:110px;height:auto;flex:none}
+.push-art{width:64px;height:64px;flex:none;object-fit:contain}
+.quiz-done{display:flex;flex-direction:column;gap:10px;align-items:flex-start}.qd-art{width:150px;height:auto;align-self:center}
+.empty-art{width:180px;max-width:60%;height:auto;margin:0 auto 6px;display:block}
 </style>
 
 </head>
@@ -1139,7 +1148,7 @@ function viewToday(){
   const readDone = !!d.read;
   const postDone = d.postDone;
   if(!S.ready.articles) return `<div class="view"><p class="muted">${T("loadingToday")}</p></div>`;
-  if(!art) return `<div class="view"><div class="card empty"><h3>${T("noArticles")}</h3><p>${T("noArticlesSub")}</p></div></div>`;
+  if(!art) return `<div class="view"><div class="card empty"><img src="assets/art/scene-rest.webp" alt="" class="empty-art"><h3>${T("noArticles")}</h3><p>${T("noArticlesSub")}</p></div></div>`;
   const isToday = art.date===today();
   const step=(n,cls,title,sub,act)=>`<button class="step ${cls}" ${act?`data-act="${act}"`:"disabled"}><span class="n">${cls.includes("done")?"✓":n}</span><span><b>${title}</b><span class="s">${sub}</span></span><span class="go">${act&&!cls.includes("done")?T("start"):(act?T("again"):"")}</span></button>`;
   const total=[...S.words.values()];
@@ -1310,7 +1319,7 @@ function dictList(){
 function highlight(s, forms){ let out=esc(s); (forms||[]).forEach(f=>{ out=out.replace(new RegExp("\\b("+reEsc(f)+")\\b","gi"),"<b>$1</b>"); }); return out; }
 
 function viewArch(){
-  if(!S.index.length) return `<div class="view"><div class="card empty"><h3>${T("noArticles")}</h3></div></div>`;
+  if(!S.index.length) return `<div class="view"><div class="card empty"><img src="assets/art/scene-rest.webp" alt="" class="empty-art"><h3>${T("noArticles")}</h3></div></div>`;
   const d=dayRec(); const dates=[...new Set(S.index.map(a=>a.date))];
   return `<div class="view"><div><div class="eyebrow">${T("allArts")}</div><h2 style="font-size:24px">${T("artCount",{n:S.index.length})}</h2></div>
     ${dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${S.index.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("")}
@@ -1477,7 +1486,7 @@ function viewQuiz(){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
     const nextBtn = Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
-      <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
+      <div class="card quiz-done"><img src="assets/art/${Q.score>=Q.qs.length*0.7?"scene-win":"scene-quiz"}.webp" alt="" class="qd-art"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
       <div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
       ${Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
@@ -2115,7 +2124,7 @@ function arenaScene(B, last, cur){
   const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allySvg(al)}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
   return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}">
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
-      <div class="f-stage${al?" with-ally":""}">${allyFig}${heroSvg()}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
+      <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
       <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`<svg class="slash" viewBox="0 0 100 100"><path d="M12 84Q46 54 90 14"/>${last.crit?'<path d="M14 20Q50 46 88 84"/>':""}</svg>${pop(last,"foe-hit")}`:""}</div></div>
   </div>`;
@@ -2634,7 +2643,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.67";
+const APP_VERSION="2026.10.68";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3536,7 +3545,7 @@ function viewCoop(){ return `<div class="ie-lobby">${ieLobby()}</div>`; }
 function viewPlay(){
   const m=S.playMode||"party";
   const seg=`<div class="seg comp-seg">${[["party","🎮 "+T("pgTitle")],["coop","🤝 "+T("cmCoop")]].map(([k,l])=>`<button data-act="playmode" data-k="${k}" aria-pressed="${m===k}">${l}</button>`).join("")}</div>`;
-  return `<div class="view play-view">${pgPlaying()?"":`<div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabPlay")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T("playSub")}</p></div>`}${seg}${m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
+  return `<div class="view play-view">${pgPlaying()?"":`<div class="play-head"><div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabPlay")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T("playSub")}</p></div><img src="assets/art/scene-party.webp" alt="" class="play-art"></div>`}${seg}${m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
 }
 
 /* ---------- party games (2–6 players): spelling race & letter rain ---------- */
@@ -4258,7 +4267,7 @@ function pushCard(){
   const note=st==="on"?`<p class="sm-t push-note ok">✅ ${T("pushIsOn")}</p>`
     :st==="ios"?`<p class="sm-t push-note">${T("pushIos")}</p><ol class="push-steps"><li>${T("pushIos1")}</li><li>${T("pushIos2")}</li><li>${T("pushIos3")}</li></ol>`
     :st==="denied"?`<p class="sm-t push-note">${T("pushDeniedHelp")}</p>`:st==="no"?`<p class="sm-t push-note">${T("pushNo")}</p>`:"";
-  return `<section class="card push-card" id="pushCard"><div class="push-h"><span class="push-ic" aria-hidden="true">🔔</span><div><b>${T("pushTitle")}</b><span class="muted sm-t">${T("pushSub")}</span></div></div>${note}${btn?`<div class="row">${btn}</div>`:""}</section>`;
+  return `<section class="card push-card" id="pushCard"><div class="push-h"><img src="assets/art/scene-bell.webp" alt="" class="push-art"><div><b>${T("pushTitle")}</b><span class="muted sm-t">${T("pushSub")}</span></div></div>${note}${btn?`<div class="row">${btn}</div>`:""}</section>`;
 }
 function pushPrompt(){
   const st=pushState(); if(PUSH.hide||(st!=="off"&&st!=="ios")) return "";
@@ -4289,7 +4298,7 @@ function heroStage(){
   const g=game(), w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor];
   const side=(it,slot,none)=>`<div class="hs-side"><small>${T(slot)}</small>${it?`${itemTile(it,true)}<b>${esc(itemName(it))}</b><span class="hs-el">${elBadge(it.el)}</span>`:`${elBadge(null)}<b class="muted">${T(none)}</b>`}</div>`;
   const tint=a?ARMC[a.el][1]:"#C8B89A";
-  return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroSvg()}</div>${side(a,"armor","cloth")}</section>`;
+  return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroArt("idle")}</div>${side(a,"armor","cloth")}</section>`;
 }
 /* ----- monthly reading leaderboard: articles finished this calendar month (readMonths/{YYYY-MM}/u/{uid}) ----- */
 const monthKey=()=>today().slice(0,7);
@@ -4344,11 +4353,11 @@ function onbRender(){
   document.body.classList.add("onb-open");
   const st=S.onb.step, N=5, dots=`<div class="onb-dots">${Array.from({length:N},(_,i)=>`<i class="${i===st?"on":""}"></i>`).join("")}</div>`;
   let body="";
-  if(st===0) body=`<img src="assets/binbin-head.webp" alt="" class="onb-dog"><h2>${T("onbHi")}</h2><p>${T("onbHiSub")}</p>`;
-  else if(st===1) body=`<div class="onb-ic">🌏</div><h2>${T("onbLang")}</h2><div class="onb-opts">${LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-act="onblang" data-k="${l.k}" data-nosc><b>${l.label}</b></button>`).join("")}</div>`;
-  else if(st===2) body=`<div class="onb-ic">🎯</div><h2>${T("onbLevel")}</h2><p class="sm-t">${T("onbLevelSub")}</p><div class="onb-opts">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-act="onblvl" data-k="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div>`;
+  if(st===0) body=`<img src="assets/art/scene-welcome.webp" alt="" class="onb-art"><h2>${T("onbHi")}</h2><p>${T("onbHiSub")}</p>`;
+  else if(st===1) body=`<img src="assets/art/scene-read.webp" alt="" class="onb-art sm"><h2>${T("onbLang")}</h2><div class="onb-opts">${LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-act="onblang" data-k="${l.k}" data-nosc><b>${l.label}</b></button>`).join("")}</div>`;
+  else if(st===2) body=`<img src="assets/art/scene-study.webp" alt="" class="onb-art sm"><h2>${T("onbLevel")}</h2><p class="sm-t">${T("onbLevelSub")}</p><div class="onb-opts">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-act="onblvl" data-k="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div>`;
   else if(st===3) body=`<h2>${T("onbGender")}</h2>${genderPick(true)}`;
-  else body=`<div class="onb-ic">🗺️</div><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>`;
+  else body=`<img src="assets/art/scene-party.webp" alt="" class="onb-art sm"><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>`;
   const nav=st<N-1?`<button class="btn" data-act="onbnext">${T("onbNext")}</button>`:`<button class="btn" data-act="onbstart">${T("onbStart")}</button><button class="btn ghost" data-act="onblook">${T("onbLook")}</button>`;
   el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
   scApply&&scApply();
@@ -4544,7 +4553,7 @@ Object.assign(STR.zh,{readRec:"錄音版"}); Object.assign(STR.en,{readRec:"Reco
 /* ----- one-time character choice (boy / girl); cannot be changed afterwards ----- */
 function genderPick(inOnb){
   const sel=S.genPick||null;
-  const opt=k=>`<button class="gen-opt${sel===k?" on":""}" data-act="genpick" data-k="${k}" aria-pressed="${sel===k}"><div class="gen-fig">${heroSvg(k)}</div><b>${T(k==="m"?"genM":"genF")}</b></button>`;
+  const opt=k=>`<button class="gen-opt${sel===k?" on":""}" data-act="genpick" data-k="${k}" aria-pressed="${sel===k}"><div class="gen-fig">${heroArt("idle",k)}</div><b>${T(k==="m"?"genM":"genF")}</b></button>`;
   return `<section class="${inOnb?"":"card "}gen-card">${inOnb?"":`<b>${T("genTitle")}</b>`}<p class="muted sm-t" style="margin:0">${T("genSub")}</p><div class="gen-opts">${opt("m")}${opt("f")}</div>
     ${sel&&!inOnb?`<div class="gen-ask"><b>${T("genConfirm",{g:T(sel==="m"?"genM":"genF")})}</b><div class="row"><button class="btn sm" data-act="genyes">${T("genYes")}</button><button class="btn ghost sm" data-act="genno">${T("nickNo")}</button></div></div>`:""}</section>`;
 }
@@ -4557,6 +4566,17 @@ Object.assign(STR.hi,{genTitle:"अपना किरदार चुनें"
 Object.assign(STR.es,{genTitle:"Elige tu personaje", genSub:"¡Elige el aventurero que más te guste!", genM:"Chico", genF:"Chica", genConfirm:"¿Elegir «{g}»?", genYes:"Confirmar", genDone:"¡Tu personaje está listo!", onbGender:"Elige tu aventurero", onbGenderNeed:"Elige un personaje primero"});
 Object.assign(STR.ja,{genTitle:"キャラクターを選ぶ", genSub:"好きな冒険キャラクターを選ぼう！", genM:"男の子", genF:"女の子", genConfirm:"「{g}」にしますか？", genYes:"決定", genDone:"キャラクターが決まりました！", onbGender:"冒険するキャラクターを選ぼう", onbGenderNeed:"先にキャラクターを選んでください"});
 Object.assign(STR.ko,{genTitle:"캐릭터 선택", genSub:"마음에 드는 모험가를 골라 보세요!", genM:"남자", genF:"여자", genConfirm:"“{g}”(으)로 할까요?", genYes:"확인", genDone:"캐릭터가 정해졌어요!", onbGender:"모험할 캐릭터를 고르세요", onbGenderNeed:"먼저 캐릭터를 골라 주세요"});
+/* ----- hero pictures (assets/art/hero-<m|f>-<pose>.webp); the equipped weapon is drawn in the hand ----- */
+const HERO_HAND={idle:[[0.33,0.62,150],[0.33,0.645,150]], attack:[[0.215,0.40,-35],[0.215,0.425,-35]]};
+function heroArt(pose, gOverride){
+  const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
+  const w=!gOverride&&g.weapon&&ITEMS[g.weapon], hand=HERO_HAND[pose];
+  let wpn="";
+  if(w&&hand){ const [x,y,r]=hand[gen==="f"?1:0], bow=WKIND[w.el][w.tier]==="bow";
+    wpn=`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${r}) scale(.42) translate(${bow?"-28 -32":"-32 -50"})">${weaponGlyph(w)}</g></svg>`; }
+  return `<div class="hero-svg hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero-${gen}-${pose}.webp" alt="" draggable="false">${wpn}</div></div>`;
+}
+setTimeout(()=>{ const g=game(); if(g&&g.gender) ["idle","attack","hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero-${g.gender}-${p}.webp`; }); },3000);
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
