@@ -731,6 +731,16 @@ body.onb-open{overflow:hidden}
 img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 .it-tile img.pic{width:86%;height:86%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
 .mon-seal img.pic{width:88%;height:88%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+.slots-future{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.slot.fut{opacity:.55;font-size:12px;padding:6px 8px;gap:6px;border:1px dashed rgba(255,255,255,.25);background:transparent}
+.slot.fut small{display:block;font-size:11px}.fut-ic svg{width:20px;height:20px;display:block}
+.ch-tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.ch2{display:flex;flex-direction:column;gap:8px;border:1.5px dashed var(--line);background:color-mix(in srgb,var(--card) 70%,var(--bg))}
+.ch2.open{border-style:solid;border-color:var(--gorse)}
+.ch2-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.ch2-title{font-size:20px;font-family:var(--f-display)}.ch2-lock{font-size:26px}
+.ch2-req{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px}.ch2-req li.ok{color:var(--muted)}
+.ch2-new{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.ch2-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--ink)}.ch2-chip svg{width:15px;height:15px}
 </style>
 
 </head>
@@ -1978,16 +1988,18 @@ function viewConquest(){
   const sel=S.selTown&&MONS[S.selTown];
   const next=TOWNS.find(t=>!c[t.id]);
   return `${n===TOWNS.length?`<div class="reward win"><div class="eyebrow">${T("win")}</div><b style="font-size:18px">${T("allConq")}</b></div>`:""}
+    <div class="ch-tag">📖 ${T("ch1")}</div>
     <div class="conq-head"><b>${T("conqProg",{n,t:TOWNS.length})}</b><div class="conq-bar"><i style="width:${n/TOWNS.length*100}%"></i></div><span class="muted sm-t">${T("goal")}</span></div>
     ${tax?(g.taxDate===today()?`<div class="muted sm-t">${T("taxDone")}</div>`:`<button class="btn" data-act="tax">${T("taxBtn",{n:tax})}</button>`):`<div class="muted sm-t">${T("taxHint")}</div>`}
     <div class="map-wrap">${mapSvg()}<div class="legend"><span><i class="lg tw-own"></i>${T("conqTag")}</span><span><i class="lg lg-open"></i>${T("attack")}</span><span><i class="lg tw-lock"></i>${T("lockShort")}</span></div></div>
     ${sel?townCard(sel):`<p class="muted sm-t" style="text-align:center">${T("tapCity")}</p>`}
+    ${chapter2Card()}
     ${allyCard()}
     ${huntHtml()}
     ${notebookHtml()}`;
 }
 
-const G_DEFAULT={type:"game", gender:null, gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
+const G_DEFAULT={type:"game", gender:null, shield:null, helmet:null, boots:null, gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
 function game(){ return S.game || (S.game={...G_DEFAULT}); }
 function saveGame(){ lsSave(); cloudMark(null); }
 const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
@@ -2235,6 +2247,7 @@ function viewAdv(){
       <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
+      ${futureSlots()}
     </section>
     ${game().gender?heroStage():genderPick()}
     <details class="card rules"><summary>${T("rulesQ")}</summary>${cycleSvg()}
@@ -2650,7 +2663,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.71";
+const APP_VERSION="2026.10.72";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4588,6 +4601,31 @@ function heroArt(pose, gOverride){
   return `<div class="hero-svg hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero-${gen}-${pose}.webp?v=2" alt="" draggable="false">${wpn}</div></div>`;
 }
 setTimeout(()=>{ const g=game(); if(g&&g.gender) ["idle","attack","hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero-${g.gender}-${p}.webp`; }); },3000);
+/* ----- Chapter 2 (Great Britain) placeholder: unlocks after Balor of Dublin is defeated at Lv 20 ----- */
+const CH2_LV=20;
+const FUTURE_SLOTS=[["shield",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>'],
+ ["helmet",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 15a8 8 0 0 1 16 0v3H4z"/><path d="M12 7v8M4 15h16"/></svg>'],
+ ["boots",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h5v9l6 3a2 2 0 0 1 2 2v2H5v-3l2-2z"/></svg>']];
+function ch2Open(){ const g=game(); return !!(conquered().dublin && g.lv>=CH2_LV); }
+function futureSlots(){
+  return `<div class="slots-future">${FUTURE_SLOTS.map(([k,ic])=>`<div class="slot fut" title="${esc(T("ch2Slot"))}"><span class="fut-ic">${ic}</span><span><small>${T("slot_"+k)}</small>🔒 ${T("ch2Short")}</span></div>`).join("")}</div>`;
+}
+function chapter2Card(){
+  const g=game(), beat=!!conquered().dublin, lvOk=g.lv>=CH2_LV, open=beat&&lvOk;
+  const req=(ok,txt)=>`<li class="${ok?"ok":""}">${ok?"✅":"⬜"} ${txt}</li>`;
+  return `<section class="card ch2${open?" open":""}">
+    <div class="ch2-head"><div><div class="eyebrow">📖 ${T("ch2")}</div><b class="ch2-title">${T("ch2Title")}</b></div><span class="ch2-lock">${open?"✨":"🔒"}</span></div>
+    <p class="muted sm-t" style="margin:0">${open?T("ch2Soon"):T("ch2Sub")}</p>
+    ${open?"":`<ul class="ch2-req">${req(lvOk,T("ch2ReqLv",{n:CH2_LV,lv:g.lv}))}${req(beat,T("ch2ReqBoss"))}</ul>`}
+    <div class="ch2-new"><span>${T("ch2New")}</span>${FUTURE_SLOTS.map(([k,ic])=>`<span class="ch2-chip">${ic}${T("slot_"+k)}</span>`).join("")}<span class="ch2-chip">🗺️ ${T("ch2Region")}</span></div>
+  </section>`;
+}
+Object.assign(STR.zh,{ch1:"第一章 · 愛爾蘭", ch2:"第二章", ch2Title:"大不列顛", ch2Sub:"征服整個愛爾蘭之後，新的冒險在海的另一邊等著你。", ch2Soon:"恭喜你完成第一章！第二章即將開放，敬請期待。", ch2ReqLv:"達到 Lv {n}（目前 Lv {lv}）", ch2ReqBoss:"打敗都柏林的魔眼巴洛爾", ch2New:"將開放：", ch2Region:"英國地區", ch2Short:"第二章", ch2Slot:"第二章開放", slot_shield:"盾牌", slot_helmet:"頭盔", slot_boots:"鞋子"});
+Object.assign(STR.en,{ch1:"Chapter 1 · Ireland", ch2:"Chapter 2", ch2Title:"Great Britain", ch2Sub:"Once all of Ireland is yours, a new adventure waits across the sea.", ch2Soon:"You've finished Chapter 1! Chapter 2 is coming soon.", ch2ReqLv:"Reach Lv {n} (now Lv {lv})", ch2ReqBoss:"Defeat Balor of the Evil Eye in Dublin", ch2New:"Coming:", ch2Region:"Great Britain", ch2Short:"Chapter 2", ch2Slot:"Opens in Chapter 2", slot_shield:"Shield", slot_helmet:"Helmet", slot_boots:"Boots"});
+Object.assign(STR.hi,{ch1:"अध्याय 1 · आयरलैंड", ch2:"अध्याय 2", ch2Title:"ग्रेट ब्रिटेन", ch2Sub:"पूरा आयरलैंड जीतने के बाद, समुद्र पार एक नया रोमांच इंतज़ार कर रहा है।", ch2Soon:"आपने अध्याय 1 पूरा किया! अध्याय 2 जल्द आ रहा है।", ch2ReqLv:"Lv {n} तक पहुँचें (अभी Lv {lv})", ch2ReqBoss:"डबलिन में बुरी आँख वाले बलोर को हराएँ", ch2New:"आने वाला:", ch2Region:"ग्रेट ब्रिटेन", ch2Short:"अध्याय 2", ch2Slot:"अध्याय 2 में खुलेगा", slot_shield:"ढाल", slot_helmet:"हेलमेट", slot_boots:"जूते"});
+Object.assign(STR.es,{ch1:"Capítulo 1 · Irlanda", ch2:"Capítulo 2", ch2Title:"Gran Bretaña", ch2Sub:"Cuando conquistes toda Irlanda, una nueva aventura te espera al otro lado del mar.", ch2Soon:"¡Has terminado el capítulo 1! El capítulo 2 llegará pronto.", ch2ReqLv:"Llega al Lv {n} (ahora Lv {lv})", ch2ReqBoss:"Derrota a Balor del Mal de Ojo en Dublín", ch2New:"Próximamente:", ch2Region:"Gran Bretaña", ch2Short:"Capítulo 2", ch2Slot:"Se abre en el capítulo 2", slot_shield:"Escudo", slot_helmet:"Casco", slot_boots:"Botas"});
+Object.assign(STR.ja,{ch1:"第1章 · アイルランド", ch2:"第2章", ch2Title:"グレートブリテン", ch2Sub:"アイルランド全土を制覇したら、海の向こうで新しい冒険が待っています。", ch2Soon:"第1章クリアおめでとう！第2章はもうすぐ公開です。", ch2ReqLv:"Lv {n} に到達（現在 Lv {lv}）", ch2ReqBoss:"ダブリンの魔眼バロールを倒す", ch2New:"追加予定：", ch2Region:"イギリス", ch2Short:"第2章", ch2Slot:"第2章で解放", slot_shield:"盾", slot_helmet:"兜", slot_boots:"靴"});
+Object.assign(STR.ko,{ch1:"1장 · 아일랜드", ch2:"2장", ch2Title:"그레이트브리튼", ch2Sub:"아일랜드 전체를 정복하면 바다 건너 새로운 모험이 기다려요.", ch2Soon:"1장을 완료했어요! 2장이 곧 열립니다.", ch2ReqLv:"Lv {n} 달성 (현재 Lv {lv})", ch2ReqBoss:"더블린의 마안 발로르 처치", ch2New:"추가 예정:", ch2Region:"영국", ch2Short:"2장", ch2Slot:"2장에서 열림", slot_shield:"방패", slot_helmet:"투구", slot_boots:"신발"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
