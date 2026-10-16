@@ -774,6 +774,7 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 @media (prefers-reduced-motion:reduce){.hit-burst,.ko-flash{display:none}}
 .err-card{border:1.5px solid var(--bad);display:flex;flex-direction:column;gap:6px}.err-card details summary{cursor:pointer}.err-pre{margin-top:6px!important;white-space:pre-wrap;word-break:break-all;font-size:11px;margin:0;background:#0003;padding:8px;border-radius:8px;max-height:260px;overflow:auto}
 .dev-errs{display:flex;flex-direction:column;gap:6px;border:1px dashed var(--line);border-radius:12px;padding:10px}.dev-err summary{font-size:13px;cursor:pointer;word-break:break-word}
+.onb-en{display:block;font-size:.72em;font-weight:500;opacity:.75;margin-top:4px}
 </style>
 
 </head>
@@ -1515,7 +1516,9 @@ function makeQuestion(w){
 function startQuiz(kind, art){
   let words;
   const d=dayRec();
-  if(kind==="pre"){ const el=eligible(), due=srsDueList().filter(w=>w.firstSeen<today()).slice(0,10), dk=new Set(due.map(w=>w.key)); words=due.concat(weightedPick(el.filter(w=>!dk.has(w.key)), Math.max(0,Math.min(10,el.length)-due.length))); }
+  if(kind==="pre"){ const el=eligible(), due=srsDueList().filter(w=>w.firstSeen<today()).slice(0,10), dk=new Set(due.map(w=>w.key)); words=due.concat(weightedPick(el.filter(w=>!dk.has(w.key)), Math.max(0,Math.min(10,el.length)-due.length)));
+    // a short dictionary should not mean an easy reward: top up to 10 with hard words from today's headline
+    const ma=mainArticle(); if(words.length&&words.length<10&&ma) words=words.concat(fillerWords(ma, words.map(w=>(w.word||"").toLowerCase()), 10-words.length)); }
   else if(kind==="srs"){ words=srsDueList().slice(0,SRS_MAX); if(!words.length) return toast(T("srsNone")); }
   else if(kind==="rev"){ const all=[...S.words.values()]; if(all.length<LUCK.reviewMinWords) return toast(T("revNeed",{n:LUCK.reviewMinWords})); words=weightedPick(all, Math.min(LUCK.reviewQ, all.length)); }
   else {
@@ -1570,7 +1573,7 @@ function pick(i){
   const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
   if(Q.i+1>=Q.qs.length){
     const d=dayRec();
-    if(Q.kind==="srs"){ Q.reward=awardReview(); }   // spaced review replaces the old dictionary review: same lucky-ticket reward
+    if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardReview():null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art)); }
@@ -2360,6 +2363,7 @@ function applyPrize(p){
 }
 
 /* ----- dictionary review → 1 lucky ticket ----- */
+const SRS_TICKET_MIN=5;   // a spaced review needs at least this many words to earn a lucky ticket
 function revLeft(){ const g=game(); return g.revDate===today()?Math.max(0,LUCK.reviewTicketsPerDay-(g.revN||0)):LUCK.reviewTicketsPerDay; }
 function awardReview(){
   const g=game(); if(g.revDate!==today()){ g.revDate=today(); g.revN=0; }
@@ -2710,7 +2714,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.86";
+const APP_VERSION="2026.10.87";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4422,13 +4426,14 @@ function onbRender(){
   document.body.classList.add("onb-open");
   const st=S.onb.step, N=5, dots=`<div class="onb-dots">${Array.from({length:N},(_,i)=>`<i class="${i===st?"on":""}"></i>`).join("")}</div>`;
   let body="";
-  if(st===0) body=`<img src="assets/art/scene-welcome.webp" alt="" class="onb-art"><h2>${T("onbHi")}</h2><p>${T("onbHiSub")}</p>`;
+  const bi=k=>`${STR.zh[k]}<span class="onb-en">${STR.en[k]}</span>`;   // first page: Chinese + English, before a language is chosen
+  if(st===0) body=`<img src="assets/art/scene-welcome.webp" alt="" class="onb-art"><h2>${bi("onbHi")}</h2><p>${bi("onbHiSub")}</p>`;
   else if(st===1) body=`<img src="assets/art/scene-read.webp" alt="" class="onb-art sm"><h2>${T("onbLang")}</h2><div class="onb-opts">${LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-act="onblang" data-k="${l.k}" data-nosc><b>${l.label}</b></button>`).join("")}</div>`;
   else if(st===2) body=`<img src="assets/art/scene-study.webp" alt="" class="onb-art sm"><h2>${T("onbLevel")}</h2><p class="sm-t">${T("onbLevelSub")}</p><div class="onb-opts">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-act="onblvl" data-k="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div>`;
   else if(st===3) body=`<h2>${T("onbGender")}</h2>${genderPick(true)}`;
   else body=`<img src="assets/art/scene-party.webp" alt="" class="onb-art sm"><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>`;
-  const nav=st<N-1?`<button class="btn" data-act="onbnext">${T("onbNext")}</button>`:`<button class="btn" data-act="onbstart">${T("onbStart")}</button><button class="btn ghost" data-act="onblook">${T("onbLook")}</button>`;
-  el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
+  const nav=st===0?`<button class="btn" data-act="onbnext">${STR.zh.onbNext} · ${STR.en.onbNext}</button>`:st<N-1?`<button class="btn" data-act="onbnext">${T("onbNext")}</button>`:`<button class="btn" data-act="onbstart">${T("onbStart")}</button><button class="btn ghost" data-act="onblook">${T("onbLook")}</button>`;
+  el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${st===0?`${STR.zh.onbSkip} · ${STR.en.onbSkip}`:T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
   scApply&&scApply();
 }
 function onbCoach(){
@@ -4493,7 +4498,7 @@ function srsCard(){
   const due=srsDueList().length, tm=srsCountOn(srsAdd(today(),1));
   const boxes=[1,2,3,4,5,6].map(b=>[...S.words.values()].filter(w=>(w.srsB||0)===b).length), fresh=[...S.words.values()].filter(w=>!w.srsB).length;
   const bar=`<div class="srs-boxes" title="${esc(T("srsBoxes"))}">${(()=>{ const all=[fresh,...boxes], mx=Math.max(1,...all); return all; })().map((n,i,all)=>`<span style="--h:${n?Math.round(12+70*n/Math.max(1,...all)):4}%"><i></i><small>${i?SRS_INT[i]+"d":"new"}</small><b>${n}</b></span>`).join("")}</div>`;
-  return `<section class="card srs-card"><div class="srs-top"><div class="srs-ic" aria-hidden="true">🧠</div><div><b>${T("srsTitle")}</b><span class="muted sm-t">${due?T("srsDueN",{n:due}):T("srsClear",{n:tm})}</span>${due?(()=>{ const l=revLeft(); return `<span class="rev-left sm-t ${l?"":"muted"}">🎟 ${l?T("srsTicket",{n:l}):T("revNoMore")}</span>`; })():""}</div>${due?`<button class="btn sm" data-act="srs">${T("srsStart",{n:Math.min(SRS_MAX,due)})}</button>`:""}</div>${bar}<p class="muted sm-t" style="margin:6px 0 0">${T("srsHow")}</p></section>`;
+  return `<section class="card srs-card"><div class="srs-top"><div class="srs-ic" aria-hidden="true">🧠</div><div><b>${T("srsTitle")}</b><span class="muted sm-t">${due?T("srsDueN",{n:due}):T("srsClear",{n:tm})}</span>${due?(()=>{ const l=revLeft(); return due<SRS_TICKET_MIN?`<span class="rev-left sm-t muted">🎟 ${T("srsTicketMin",{n:SRS_TICKET_MIN})}</span>`:`<span class="rev-left sm-t ${l?"":"muted"}">🎟 ${l?T("srsTicket",{n:l}):T("revNoMore")}</span>`; })():""}</div>${due?`<button class="btn sm" data-act="srs">${T("srsStart",{n:Math.min(SRS_MAX,due)})}</button>`:""}</div>${bar}<p class="muted sm-t" style="margin:6px 0 0">${T("srsHow")}</p></section>`;
 }
 
 /* ================= read-aloud (speech synthesis, sentence by sentence) ================= */
@@ -4538,12 +4543,12 @@ function readPause(){ READ.paused=true; if(READ.audio){ READ.audio.pause(); retu
 function readResume(){ READ.paused=false; if(READ.audio){ READ.audio.play().catch(()=>{}); return readUi(); } readNext(); readUi(); }
 function readStop(){ READ.on=false; READ.paused=false; READ.tok++; if(READ.audio){ try{ READ.audio.pause(); }catch(e){} READ.audio=null; } try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
 function readStopIfLeft(){ if(READ.on&&(S.view!=="read"||(S.articleId&&S.articleId!==READ.art))) readStop(); }
-Object.assign(STR.zh,{srsTicket:"完成一次拿 1 張彩券 · 今天還能拿 {n} 張", srsTitle:"間隔複習", srsDueN:"今天有 {n} 個字該複習了", srsClear:"今天的字都複習完了 ✅ 明天有 {n} 個", srsStart:"複習 {n} 個字", srsNone:"今天沒有要複習的字 🎉", srsHow:"答對的字會隔越來越久才再出現（1→2→4→7→15→30 天），答錯就從明天重新開始。", srsBoxes:"每個格子代表多久複習一次", srsAfter:"還有 {n} 個字今天到期 · 明天預計 {t} 個", readAloud:"朗讀全文", readPause:"暫停", readResume:"繼續", readStop:"停止", readSpeed:"{r}x", readNoTts:"這個瀏覽器不支援朗讀"});
-Object.assign(STR.en,{srsTicket:"Finish a review for 1 lucky ticket · {n} left today", srsTitle:"Spaced review", srsDueN:"{n} words are due for review today", srsClear:"All caught up today ✅ {n} due tomorrow", srsStart:"Review {n}", srsNone:"Nothing to review today 🎉", srsHow:"Words you get right come back after longer and longer gaps (1→2→4→7→15→30 days); miss one and it starts again tomorrow.", srsBoxes:"Each box is how often a word comes back", srsAfter:"{n} words still due today · about {t} tomorrow", readAloud:"Read aloud", readPause:"Pause", readResume:"Resume", readStop:"Stop", readSpeed:"{r}x", readNoTts:"This browser can't read text aloud"});
-Object.assign(STR.hi,{srsTicket:"एक दोहराई पूरी करें, 1 लकी टिकट पाएँ · आज {n} बाकी", srsTitle:"अंतराल दोहराव", srsDueN:"आज {n} शब्द दोहराने हैं", srsClear:"आज के सब शब्द हो गए ✅ कल {n}", srsStart:"{n} दोहराएँ", srsNone:"आज दोहराने को कुछ नहीं 🎉", srsHow:"सही जवाब वाले शब्द लंबे अंतराल पर लौटते हैं (1→2→4→7→15→30 दिन); गलत होने पर कल फिर से।", srsBoxes:"हर खाना बताता है शब्द कितने दिन में लौटेगा", srsAfter:"आज अभी {n} बाकी · कल लगभग {t}", readAloud:"ज़ोर से पढ़ें", readPause:"रोकें", readResume:"जारी रखें", readStop:"बंद", readSpeed:"{r}x", readNoTts:"यह ब्राउज़र पढ़कर नहीं सुना सकता"});
-Object.assign(STR.es,{srsTicket:"Termina un repaso y gana 1 boleto · quedan {n} hoy", srsTitle:"Repaso espaciado", srsDueN:"Hoy toca repasar {n} palabras", srsClear:"Todo al día ✅ mañana tocan {n}", srsStart:"Repasar {n}", srsNone:"Hoy no hay nada que repasar 🎉", srsHow:"Las palabras que aciertas vuelven cada vez más tarde (1→2→4→7→15→30 días); si fallas, empieza otra vez mañana.", srsBoxes:"Cada caja indica cada cuánto vuelve la palabra", srsAfter:"Quedan {n} para hoy · unas {t} mañana", readAloud:"Leer en voz alta", readPause:"Pausa", readResume:"Seguir", readStop:"Parar", readSpeed:"{r}x", readNoTts:"Este navegador no puede leer en voz alta"});
-Object.assign(STR.ja,{srsTicket:"1回終えるとくじ券1枚 · 今日はあと{n}枚", srsTitle:"間隔反復", srsDueN:"今日復習する単語が {n} 個あります", srsClear:"今日の分は完了 ✅ 明日は {n} 個", srsStart:"{n} 個を復習", srsNone:"今日は復習する単語がありません 🎉", srsHow:"正解した単語は間隔をあけて出てきます（1→2→4→7→15→30日）。間違えたら翌日からやり直し。", srsBoxes:"箱ごとに次の復習までの日数", srsAfter:"今日まだ {n} 個 · 明日は約 {t} 個", readAloud:"音声で読む", readPause:"一時停止", readResume:"再開", readStop:"停止", readSpeed:"{r}x", readNoTts:"このブラウザは読み上げに対応していません"});
-Object.assign(STR.ko,{srsTicket:"한 번 끝내면 복권 1장 · 오늘 {n}장 남음", srsTitle:"간격 복습", srsDueN:"오늘 복습할 단어 {n}개", srsClear:"오늘 복습 끝 ✅ 내일 {n}개", srsStart:"{n}개 복습", srsNone:"오늘은 복습할 단어가 없어요 🎉", srsHow:"맞힌 단어는 점점 긴 간격으로 돌아와요 (1→2→4→7→15→30일). 틀리면 내일부터 다시 시작해요.", srsBoxes:"칸마다 단어가 돌아오는 주기", srsAfter:"오늘 남은 단어 {n}개 · 내일 약 {t}개", readAloud:"소리 내어 읽기", readPause:"일시정지", readResume:"계속", readStop:"정지", readSpeed:"{r}x", readNoTts:"이 브라우저는 읽어 주기를 지원하지 않아요"});
+Object.assign(STR.zh,{srsTicketMin:"複習 {n} 個字以上才能拿彩券", srsTicket:"完成一次拿 1 張彩券 · 今天還能拿 {n} 張", srsTitle:"間隔複習", srsDueN:"今天有 {n} 個字該複習了", srsClear:"今天的字都複習完了 ✅ 明天有 {n} 個", srsStart:"複習 {n} 個字", srsNone:"今天沒有要複習的字 🎉", srsHow:"答對的字會隔越來越久才再出現（1→2→4→7→15→30 天），答錯就從明天重新開始。", srsBoxes:"每個格子代表多久複習一次", srsAfter:"還有 {n} 個字今天到期 · 明天預計 {t} 個", readAloud:"朗讀全文", readPause:"暫停", readResume:"繼續", readStop:"停止", readSpeed:"{r}x", readNoTts:"這個瀏覽器不支援朗讀"});
+Object.assign(STR.en,{srsTicketMin:"Review at least {n} words to earn a lucky ticket", srsTicket:"Finish a review for 1 lucky ticket · {n} left today", srsTitle:"Spaced review", srsDueN:"{n} words are due for review today", srsClear:"All caught up today ✅ {n} due tomorrow", srsStart:"Review {n}", srsNone:"Nothing to review today 🎉", srsHow:"Words you get right come back after longer and longer gaps (1→2→4→7→15→30 days); miss one and it starts again tomorrow.", srsBoxes:"Each box is how often a word comes back", srsAfter:"{n} words still due today · about {t} tomorrow", readAloud:"Read aloud", readPause:"Pause", readResume:"Resume", readStop:"Stop", readSpeed:"{r}x", readNoTts:"This browser can't read text aloud"});
+Object.assign(STR.hi,{srsTicketMin:"लकी टिकट के लिए कम से कम {n} शब्द दोहराएँ", srsTicket:"एक दोहराई पूरी करें, 1 लकी टिकट पाएँ · आज {n} बाकी", srsTitle:"अंतराल दोहराव", srsDueN:"आज {n} शब्द दोहराने हैं", srsClear:"आज के सब शब्द हो गए ✅ कल {n}", srsStart:"{n} दोहराएँ", srsNone:"आज दोहराने को कुछ नहीं 🎉", srsHow:"सही जवाब वाले शब्द लंबे अंतराल पर लौटते हैं (1→2→4→7→15→30 दिन); गलत होने पर कल फिर से।", srsBoxes:"हर खाना बताता है शब्द कितने दिन में लौटेगा", srsAfter:"आज अभी {n} बाकी · कल लगभग {t}", readAloud:"ज़ोर से पढ़ें", readPause:"रोकें", readResume:"जारी रखें", readStop:"बंद", readSpeed:"{r}x", readNoTts:"यह ब्राउज़र पढ़कर नहीं सुना सकता"});
+Object.assign(STR.es,{srsTicketMin:"Repasa al menos {n} palabras para ganar un boleto", srsTicket:"Termina un repaso y gana 1 boleto · quedan {n} hoy", srsTitle:"Repaso espaciado", srsDueN:"Hoy toca repasar {n} palabras", srsClear:"Todo al día ✅ mañana tocan {n}", srsStart:"Repasar {n}", srsNone:"Hoy no hay nada que repasar 🎉", srsHow:"Las palabras que aciertas vuelven cada vez más tarde (1→2→4→7→15→30 días); si fallas, empieza otra vez mañana.", srsBoxes:"Cada caja indica cada cuánto vuelve la palabra", srsAfter:"Quedan {n} para hoy · unas {t} mañana", readAloud:"Leer en voz alta", readPause:"Pausa", readResume:"Seguir", readStop:"Parar", readSpeed:"{r}x", readNoTts:"Este navegador no puede leer en voz alta"});
+Object.assign(STR.ja,{srsTicketMin:"{n}語以上復習するとくじ券がもらえます", srsTicket:"1回終えるとくじ券1枚 · 今日はあと{n}枚", srsTitle:"間隔反復", srsDueN:"今日復習する単語が {n} 個あります", srsClear:"今日の分は完了 ✅ 明日は {n} 個", srsStart:"{n} 個を復習", srsNone:"今日は復習する単語がありません 🎉", srsHow:"正解した単語は間隔をあけて出てきます（1→2→4→7→15→30日）。間違えたら翌日からやり直し。", srsBoxes:"箱ごとに次の復習までの日数", srsAfter:"今日まだ {n} 個 · 明日は約 {t} 個", readAloud:"音声で読む", readPause:"一時停止", readResume:"再開", readStop:"停止", readSpeed:"{r}x", readNoTts:"このブラウザは読み上げに対応していません"});
+Object.assign(STR.ko,{srsTicketMin:"{n}단어 이상 복습하면 복권을 받아요", srsTicket:"한 번 끝내면 복권 1장 · 오늘 {n}장 남음", srsTitle:"간격 복습", srsDueN:"오늘 복습할 단어 {n}개", srsClear:"오늘 복습 끝 ✅ 내일 {n}개", srsStart:"{n}개 복습", srsNone:"오늘은 복습할 단어가 없어요 🎉", srsHow:"맞힌 단어는 점점 긴 간격으로 돌아와요 (1→2→4→7→15→30일). 틀리면 내일부터 다시 시작해요.", srsBoxes:"칸마다 단어가 돌아오는 주기", srsAfter:"오늘 남은 단어 {n}개 · 내일 약 {t}개", readAloud:"소리 내어 읽기", readPause:"일시정지", readResume:"계속", readStop:"정지", readSpeed:"{r}x", readNoTts:"이 브라우저는 읽어 주기를 지원하지 않아요"});
 /* ================= privacy, account deletion ================= */
 function privacyCard(){
   const u=CLOUD.user;
