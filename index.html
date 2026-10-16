@@ -2186,7 +2186,7 @@ function arenaScene(B, last, cur){
   const pop=(e,cls)=>e?`<span class="dmg ${cls} s${hl}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:e.eye?`<small>👁 ${T("bossEyeShort")}</small>`:hl===4?`<small>${T("hitKO")}</small>`:hl===3?`<small>${T("hitBig")}</small>`:""}</span>`:"";
   const showAnim=!fin||B.justEnded;
   const heroCls=showAnim?(pAtk&&!aAtk?" atk":mAtk?" def hurt hs"+hl:""):"", foeCls=showAnim?(mAtk||aHit?" atk":pAtk?" hurt hs"+hl:""):"";
-  const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allySvg(al)}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
+  const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allyArt(al, fin?(B.res.win&&!aDown?"win":"hurt"):showAnim&&aAtk?"attack":showAnim&&aHit?"hurt":"idle")}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
   return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}">
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
       <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${hitBurst(hl,"foe")}${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
@@ -2710,7 +2710,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.85";
+const APP_VERSION="2026.10.86";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4644,20 +4644,29 @@ const HERO_GRIP={m:{"idle-hold":[.64,.66,100],"idle-plant":[.66,.42,-90],"idle-s
                  f:{"idle-hold":[.64,.64,100],"idle-plant":[.66,.40,-90],"idle-shoulder":[.58,.30,-150],idle:[.64,.67,-75], slash:[.40,.27,-115], thrust:[.78,.63,-4], smash:[.45,.15,-95], bow:[.78,.50,90], cast:[.30,.28,-88]}};
 /* where the hand holds each weapon picture (fraction of the item image, drawn tip up-right) and how big it is */
 const KIND_GRIP={sword:[.24,.76,.42], staff:[.40,.62,.52], orbstaff:[.40,.62,.55], trident:[.45,.56,.58], bow:[.5,.5,.46], hammer:[.24,.76,.42], warhammer:[.24,.76,.46]};
-function heroOutfit(gen){ const a=game().armor&&ITEMS[game().armor], k=a?`${a.el}${a.tier+1}`:"cloth"; return HERO_FILES.has(`${gen}-${k}-idle`)?k:"cloth"; }
+function outfitKey(gen,a){ const k=a?`${a.el}${a.tier+1}`:"cloth"; return HERO_FILES.has(`${gen}-${k}-idle`)?k:"cloth"; }
+function heroOutfit(gen){ return outfitKey(gen, game().armor&&ITEMS[game().armor]); }
 function heroAct(w){ return w?(KIND_ACT[WKIND[w.el][w.tier]]||"slash"):"slash"; }
-function heroArt(pose, gOverride){
-  const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
-  const w=!gOverride&&g.weapon&&ITEMS[g.weapon], out=gOverride?"cloth":heroOutfit(gen);
-  let act=pose==="attack"?heroAct(w):pose;
+/* one drawing routine for the hero (gen m/f) and the ally (gen "a", the blond boy): body picture by outfit + pose, weapon picture laid over the hand */
+function charArt(gen, pose, w, armor, cls){
+  const out=outfitKey(gen,armor); let act=pose==="attack"?heroAct(w):pose;
   if(pose==="idle"&&w){ const v="idle-"+(KIND_IDLE[WKIND[w.el][w.tier]]||"hold"); if(HERO_FILES.has(`${gen}-${out}-${v}`)) act=v; }
   const key=HERO_FILES.has(`${gen}-${out}-${act}`)?`${gen}-${out}-${act}`:`${gen}-cloth-${act}`;
-  const grip=HERO_GRIP[gen][act]; let wpn="";
+  const grip=(HERO_GRIP[gen]||HERO_GRIP.m)[act]; let wpn="";
   if(w&&grip){ const [x,y,d]=grip, kind=WKIND[w.el][w.tier], [gx,gy,L]=KIND_GRIP[kind]||[.25,.75,.45], pk=picOfItem(w);
     wpn=`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${d+45})">${pk
       ?`<image href="assets/art/${pk}.webp" x="${-gx*L*100}" y="${-gy*L*100}" width="${L*100}" height="${L*100}"/>`
       :`<g transform="rotate(45) scale(.5) translate(-32 -54)">${weaponGlyph(w)}</g>`}</g></svg>`; }
-  return `<div class="hero-svg hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero/${key}.webp" alt="" draggable="false">${wpn}</div></div>`;
+  return `<div class="${cls||"hero-svg"} hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero/${key}.webp" alt="" draggable="false">${wpn}</div></div>`;
+}
+function heroArt(pose, gOverride){
+  const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
+  return charArt(gen, pose, !gOverride&&g.weapon&&ITEMS[g.weapon], !gOverride&&g.armor&&ITEMS[g.armor]);
+}
+/* the ally uses its own drawings once they exist (assets/art/hero/a-*); until then the old vector figure */
+function allyArt(al, pose){
+  if(!HERO_FILES.has("a-cloth-idle")) return allySvg(al);
+  return charArt("a", pose, al.wId&&ITEMS[al.wId], al.aId&&ITEMS[al.aId], "ally-svg");
 }
 setTimeout(()=>{ const g=game(); if(!g||!g.gender) return; const o=heroOutfit(g.gender), w=g.weapon&&ITEMS[g.weapon];
   ["idle",heroAct(w),"hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero/${g.gender}-${HERO_FILES.has(`${g.gender}-${o}-${p}`)?o:"cloth"}-${p}.webp`; }); },3000);
