@@ -2634,7 +2634,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.66";
+const APP_VERSION="2026.10.67";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4551,12 +4551,12 @@ function genderPick(inOnb){
 function genderSet(k){ const g=game(); if(g.gender||!(k==="m"||k==="f")) return; g.gender=k; S.genPick=null; saveGame(); toast(T("genDone")); render(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("[data-act=genpick],[data-act=genyes],[data-act=genno]"); if(!t||t.closest("#onb")) return; e.stopPropagation();
   const a=t.dataset.act; if(a==="genpick"){ S.genPick=t.dataset.k; return render(); } if(a==="genno"){ S.genPick=null; return render(); } if(a==="genyes") return genderSet(S.genPick); }, true);
-Object.assign(STR.zh,{genTitle:"選擇你的角色", genSub:"只能選一次，之後不能更改喔！", genM:"男孩", genF:"女孩", genConfirm:"確定選擇「{g}」嗎？選了之後就不能再改了。", genYes:"確定", genDone:"角色決定好了！", onbGender:"選擇你的冒險角色", onbGenderNeed:"請先選一個角色"});
-Object.assign(STR.en,{genTitle:"Choose your character", genSub:"You can only choose once — it can't be changed later!", genM:"Boy", genF:"Girl", genConfirm:"Choose “{g}”? You won't be able to change it later.", genYes:"Confirm", genDone:"Your character is ready!", onbGender:"Choose your adventurer", onbGenderNeed:"Pick a character first"});
-Object.assign(STR.hi,{genTitle:"अपना किरदार चुनें", genSub:"सिर्फ़ एक बार चुन सकते हैं — बाद में बदल नहीं सकते!", genM:"लड़का", genF:"लड़की", genConfirm:"“{g}” चुनें? बाद में बदल नहीं पाएँगे।", genYes:"पक्का", genDone:"आपका किरदार तैयार है!", onbGender:"अपना साहसी चुनें", onbGenderNeed:"पहले एक किरदार चुनें"});
-Object.assign(STR.es,{genTitle:"Elige tu personaje", genSub:"Solo puedes elegir una vez: ¡no se puede cambiar después!", genM:"Chico", genF:"Chica", genConfirm:"¿Elegir «{g}»? No podrás cambiarlo después.", genYes:"Confirmar", genDone:"¡Tu personaje está listo!", onbGender:"Elige tu aventurero", onbGenderNeed:"Elige un personaje primero"});
-Object.assign(STR.ja,{genTitle:"キャラクターを選ぶ", genSub:"選べるのは1回だけ。あとから変更できません！", genM:"男の子", genF:"女の子", genConfirm:"「{g}」にしますか？あとから変更できません。", genYes:"決定", genDone:"キャラクターが決まりました！", onbGender:"冒険するキャラクターを選ぼう", onbGenderNeed:"先にキャラクターを選んでください"});
-Object.assign(STR.ko,{genTitle:"캐릭터 선택", genSub:"한 번만 고를 수 있고 나중에 바꿀 수 없어요!", genM:"남자", genF:"여자", genConfirm:"“{g}”(으)로 할까요? 나중에 바꿀 수 없어요.", genYes:"확인", genDone:"캐릭터가 정해졌어요!", onbGender:"모험할 캐릭터를 고르세요", onbGenderNeed:"먼저 캐릭터를 골라 주세요"});
+Object.assign(STR.zh,{genTitle:"選擇你的角色", genSub:"選一個你喜歡的冒險角色！", genM:"男孩", genF:"女孩", genConfirm:"確定選擇「{g}」嗎？", genYes:"確定", genDone:"角色決定好了！", onbGender:"選擇你的冒險角色", onbGenderNeed:"請先選一個角色"});
+Object.assign(STR.en,{genTitle:"Choose your character", genSub:"Pick the adventurer you like!", genM:"Boy", genF:"Girl", genConfirm:"Choose “{g}”?", genYes:"Confirm", genDone:"Your character is ready!", onbGender:"Choose your adventurer", onbGenderNeed:"Pick a character first"});
+Object.assign(STR.hi,{genTitle:"अपना किरदार चुनें", genSub:"अपना पसंदीदा साहसी चुनें!", genM:"लड़का", genF:"लड़की", genConfirm:"“{g}” चुनें?", genYes:"पक्का", genDone:"आपका किरदार तैयार है!", onbGender:"अपना साहसी चुनें", onbGenderNeed:"पहले एक किरदार चुनें"});
+Object.assign(STR.es,{genTitle:"Elige tu personaje", genSub:"¡Elige el aventurero que más te guste!", genM:"Chico", genF:"Chica", genConfirm:"¿Elegir «{g}»?", genYes:"Confirmar", genDone:"¡Tu personaje está listo!", onbGender:"Elige tu aventurero", onbGenderNeed:"Elige un personaje primero"});
+Object.assign(STR.ja,{genTitle:"キャラクターを選ぶ", genSub:"好きな冒険キャラクターを選ぼう！", genM:"男の子", genF:"女の子", genConfirm:"「{g}」にしますか？", genYes:"決定", genDone:"キャラクターが決まりました！", onbGender:"冒険するキャラクターを選ぼう", onbGenderNeed:"先にキャラクターを選んでください"});
+Object.assign(STR.ko,{genTitle:"캐릭터 선택", genSub:"마음에 드는 모험가를 골라 보세요!", genM:"남자", genF:"여자", genConfirm:"“{g}”(으)로 할까요?", genYes:"확인", genDone:"캐릭터가 정해졌어요!", onbGender:"모험할 캐릭터를 고르세요", onbGenderNeed:"먼저 캐릭터를 골라 주세요"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
