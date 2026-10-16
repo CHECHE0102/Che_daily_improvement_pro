@@ -741,6 +741,22 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 .ch2-req{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px}.ch2-req li.ok{color:var(--muted)}
 .ch2-new{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
 .ch2-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--ink)}.ch2-chip svg{width:15px;height:15px}
+.slash.fx path,.slash.fx ellipse,.slash.fx circle{fill:none}
+.slash.fx .fx-main{stroke:var(--c1);stroke-width:5;filter:none}
+.slash.fx.t1 .fx-main{stroke-width:6;filter:drop-shadow(0 0 4px var(--c2))}
+.slash.fx.t2 .fx-main{stroke-width:7;filter:drop-shadow(0 0 6px var(--c2))}
+.slash.fx.t3 .fx-main{stroke-width:8;filter:drop-shadow(0 0 8px var(--c2)) drop-shadow(0 0 2px #fff)}
+.slash.fx .fx-trail{stroke:var(--c2);stroke-width:18;opacity:.35;filter:blur(3px)}
+.slash.fx.a-thrust .fx-main{stroke-dasharray:100;stroke-dashoffset:100;animation-duration:.25s,.3s}
+.slash.fx .fx-ring{stroke:var(--c2);stroke-width:3;opacity:0;transform-origin:50px 72px;animation:fxring .45s ease-out .38s}
+.slash.fx .fx-orb{fill:var(--c1);stroke:var(--c2);stroke-width:2;opacity:0;transform-origin:56px 50px;animation:fxorb .5s ease-out .3s;filter:drop-shadow(0 0 6px var(--c2))}
+.slash.fx .fx-spark{fill:var(--c1);opacity:0;animation:fxspark .45s ease-out forwards;filter:drop-shadow(0 0 3px var(--c2))}
+.slash.fx .fx-star{fill:#fff;opacity:0;transform-origin:56px 50px;animation:fxstar .5s ease-out .34s;filter:drop-shadow(0 0 5px var(--c2))}
+@keyframes fxring{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(3.2)}}
+@keyframes fxorb{0%{opacity:0;transform:scale(.3)}40%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1.8)}}
+@keyframes fxspark{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
+@keyframes fxstar{0%{opacity:0;transform:scale(.2) rotate(0)}40%{opacity:1;transform:scale(1.1) rotate(20deg)}100%{opacity:0;transform:scale(.6) rotate(45deg)}}
+@media (prefers-reduced-motion:reduce){.slash.fx *{animation:none!important}}
 </style>
 
 </head>
@@ -2145,7 +2161,7 @@ function arenaScene(B, last, cur){
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
       <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
-      <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`<svg class="slash" viewBox="0 0 100 100"><path d="M12 84Q46 54 90 14"/>${last.crit?'<path d="M14 20Q50 46 88 84"/>':""}</svg>${pop(last,"foe-hit")}`:""}</div></div>
+      <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`${atkFx(ITEMS[game().weapon],last.crit)}${pop(last,"foe-hit")}`:""}</div></div>
   </div>`;
 }
 function viewBattle(){
@@ -2663,7 +2679,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.73";
+const APP_VERSION="2026.10.74";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4626,6 +4642,25 @@ Object.assign(STR.hi,{ch1:"अध्याय 1 · आयरलैंड", ch2:"
 Object.assign(STR.es,{ch1:"Capítulo 1 · Irlanda", ch2:"Capítulo 2", ch2Title:"Gran Bretaña", ch2Sub:"Cuando conquistes toda Irlanda, una nueva aventura te espera al otro lado del mar.", ch2Soon:"¡Has terminado el capítulo 1! El capítulo 2 llegará pronto.", ch2ReqLv:"Llega al Lv {n} (ahora Lv {lv})", ch2ReqBoss:"Derrota a Balor del Mal de Ojo en Dublín", ch2New:"Próximamente:", ch2Region:"Gran Bretaña", ch2Short:"Capítulo 2", ch2Slot:"Se abre en el capítulo 2", slot_shield:"Escudo", slot_helmet:"Casco", slot_boots:"Botas"});
 Object.assign(STR.ja,{ch1:"第1章 · アイルランド", ch2:"第2章", ch2Title:"グレートブリテン", ch2Sub:"アイルランド全土を制覇したら、海の向こうで新しい冒険が待っています。", ch2Soon:"第1章クリアおめでとう！第2章はもうすぐ公開です。", ch2ReqLv:"Lv {n} に到達（現在 Lv {lv}）", ch2ReqBoss:"ダブリンの魔眼バロールを倒す", ch2New:"追加予定：", ch2Region:"イギリス", ch2Short:"第2章", ch2Slot:"第2章で解放", slot_shield:"盾", slot_helmet:"兜", slot_boots:"靴"});
 Object.assign(STR.ko,{ch1:"1장 · 아일랜드", ch2:"2장", ch2Title:"그레이트브리튼", ch2Sub:"아일랜드 전체를 정복하면 바다 건너 새로운 모험이 기다려요.", ch2Soon:"1장을 완료했어요! 2장이 곧 열립니다.", ch2ReqLv:"Lv {n} 달성 (현재 Lv {lv})", ch2ReqBoss:"더블린의 마안 발로르 처치", ch2New:"추가 예정:", ch2Region:"영국", ch2Short:"2장", ch2Slot:"2장에서 열림", slot_shield:"방패", slot_helmet:"투구", slot_boots:"신발"});
+/* ----- player attack effect: grows with weapon tier (I plain → IV glowing with sparks). Kept moderate on purpose:
+   screen shake, full-screen flashes and big particle bursts are saved for later chapters' gear. ----- */
+const FX_COL={metal:["#F4F7FB","#BFD0E6"],wood:["#B6F09A","#4FBF4A"],water:["#BDEBFF","#3FA8F0"],fire:["#FFE07A","#FF6A2A"],earth:["#F6DDA6","#C99A5B"]};
+const KIND_ACT={sword:"slash",dagger:"slash",curved:"slash",axe:"slash",whip:"slash",spear:"thrust",trident:"thrust",harpoon:"thrust",lance:"thrust",firespear:"thrust",hammer:"smash",warhammer:"smash",club:"smash",torch:"smash",bow:"bow",staff:"cast",orbstaff:"cast"};
+function atkFx(w,crit){
+  if(!w) return `<svg class="slash" viewBox="0 0 100 100"><path d="M12 84Q46 54 90 14"/>${crit?'<path d="M14 20Q50 46 88 84"/>':""}</svg>`;
+  const t=w.tier, [c1,c2]=FX_COL[w.el]||FX_COL.metal, act=KIND_ACT[WKIND[w.el][t]]||"slash";
+  const main={slash:"M12 84Q46 54 90 14", thrust:"M2 52L96 48", smash:"M50 4L50 70", cast:"M10 60Q30 40 50 50", bow:"M2 50L96 50"}[act];
+  const second={slash:"M14 20Q50 46 88 84", thrust:"M4 38L92 58", smash:"M30 10L60 72", cast:"M10 40Q32 64 52 50", bow:"M2 42L96 56"}[act];
+  let g=`<path class="fx-main" d="${main}"/>`;
+  if(t>=3) g=`<path class="fx-trail" d="${main}"/>`+g;               // tier IV: wide soft afterglow behind the stroke
+  if(crit) g+=`<path class="fx-main" d="${second}"/>`;
+  if(act==="smash"&&t>=1) g+=`<ellipse class="fx-ring" cx="50" cy="72" rx="8" ry="3"/>`;
+  if(act==="cast") g+=`<circle class="fx-orb" cx="56" cy="50" r="${6+t*2}"/>`;
+  if(t>=2){ const n=t>=3?7:4; for(let i=0;i<n;i++){ const a=i/n*Math.PI*2+.4, r=20+(i%2)*9;
+      g+=`<circle class="fx-spark" cx="56" cy="50" r="${t>=3?3:2.4}" style="--dx:${(Math.cos(a)*r).toFixed(1)}px;--dy:${(Math.sin(a)*r).toFixed(1)}px;animation-delay:${.32+i*.02}s"/>`; } }
+  if(t>=3) g+=`<path class="fx-star" d="M56 40l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/>`;
+  return `<svg class="slash fx t${t} a-${act}" viewBox="0 0 100 100" style="--c1:${c1};--c2:${c2}">${g}</svg>`;
+}
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
