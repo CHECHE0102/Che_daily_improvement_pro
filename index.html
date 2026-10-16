@@ -671,6 +671,13 @@ body.maint-lock{overflow:hidden}
 .push-steps{margin:10px 0 0;padding-left:20px;font-size:13px;line-height:1.7}
 .push-tip{display:flex;align-items:center;gap:10px;padding:12px 14px}.push-tip .t{flex:1;font-size:14px}.push-tip .x{background:none;border:0;color:var(--muted);font-size:20px;padding:4px 6px;line-height:1}
 .sup-hidden{position:absolute;top:8px;right:12px;color:var(--muted)}.card.sup{position:relative}
+.hero-stage{display:grid;grid-template-columns:1fr 132px 1fr;align-items:center;gap:6px;padding:12px 10px;background:linear-gradient(180deg,var(--paper) 55%,color-mix(in srgb,var(--hs-tint) 22%,var(--paper)))}
+.hs-fig{position:relative;height:150px}.hs-fig .hero-svg{position:relative;z-index:1;animation:hsidle 3.2s ease-in-out infinite;transform-origin:50% 95%}
+.hs-ground{position:absolute;left:8%;right:8%;bottom:4px;height:22px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--hs-tint) 55%,transparent),transparent)}
+.hs-side{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;min-width:0;font-size:12px;line-height:1.3}
+.hs-side small{color:var(--muted);font-size:11px}.hs-side b{font-size:12.5px;overflow-wrap:anywhere}.hs-side .tile,.hs-side svg{max-width:44px}
+@keyframes hsidle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px) scale(1.01)}}
+@media (prefers-reduced-motion:reduce){.hs-fig .hero-svg{animation:none}}
 </style>
 
 </head>
@@ -2150,6 +2157,7 @@ function viewAdv(){
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
     </section>
+    ${heroStage()}
     <details class="card rules"><summary>${T("rulesQ")}</summary>${cycleSvg()}
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
@@ -2561,7 +2569,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.57";
+const APP_VERSION="2026.10.58";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4192,6 +4200,13 @@ Object.assign(STR.zh,{dpTitle:"推播通知", dpNone:"還沒有推播紀錄（Gi
 Object.assign(STR.en,{dpTitle:"Push notifications", dpNone:"No push records yet (GitHub updates them every hour).", dpSubs:"Subscribed phones", dpAm:"Morning sent today", dpPm:"Evening sent today", dpDate:"Date", dpAmS:"Morning", dpPmS:"Evening", dpGone:"Expired", dpFail:"Failed", dpUpd:"Last updated: {t} (Irish dates, updated hourly)"});
 for(const k of ["hi","es","ja","ko"]) Object.assign(STR[k],{dpTitle:STR.en.dpTitle, dpNone:STR.en.dpNone, dpSubs:STR.en.dpSubs, dpAm:STR.en.dpAm, dpPm:STR.en.dpPm, dpDate:STR.en.dpDate, dpAmS:STR.en.dpAmS, dpPmS:STR.en.dpPmS, dpGone:STR.en.dpGone, dpFail:STR.en.dpFail, dpUpd:STR.en.dpUpd});
 Object.assign(STR.zh,{supHiddenNote:"玩家看不到"}); for(const k of ["en","hi","es","ja","ko"]) Object.assign(STR[k],{supHiddenNote:"Hidden from players"});
+// the player's hero, dressed in the equipped weapon and armour (shown above the element guide)
+function heroStage(){
+  const g=game(), w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor];
+  const side=(it,slot,none)=>`<div class="hs-side"><small>${T(slot)}</small>${it?`${itemTile(it,true)}<b>${esc(itemName(it))}</b><span class="hs-el">${elBadge(it.el)}</span>`:`${elBadge(null)}<b class="muted">${T(none)}</b>`}</div>`;
+  const tint=a?ARMC[a.el][1]:"#C8B89A";
+  return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroSvg()}</div>${side(a,"armor","cloth")}</section>`;
+}
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
