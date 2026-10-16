@@ -721,7 +721,7 @@ body.onb-open{overflow:hidden}
 .gen-ask{border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
 .hero-art{position:relative;display:block}.hero-art .ha-in{position:relative;width:100%;height:100%}
 .hero-art img{position:relative;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
-.hero-art .ha-wpn{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;transform:scaleX(-1)}
+.hero-art .ha-wpn{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .hero-stage .hs-fig .hero-art{position:relative;z-index:1;width:100%;height:100%}
 .onb-art{width:200px;max-width:70%;height:auto;margin-top:4px}.onb-art.sm{width:150px}
 .play-head{display:flex;align-items:center;gap:10px}.play-head>div{flex:1;min-width:0}.play-art{width:110px;height:auto;flex:none}
@@ -1977,7 +1977,7 @@ function huntHtml(){
 }
 
 // hand-drawn pictures in assets/art (add the name here when a new picture is uploaded)
-const PICS=new Set(["armor-metal-1", "armor-metal-2", "town-changeling", "town-leprechaun", "town-merrow", "weapon-metal-1", "weapon-metal-2"]);
+const PICS=new Set(["armor-earth-1", "armor-earth-2", "armor-earth-3", "armor-earth-4", "armor-fire-1", "armor-fire-2", "armor-fire-3", "armor-fire-4", "armor-metal-1", "armor-metal-2", "armor-metal-3", "armor-metal-4", "armor-water-1", "armor-water-2", "armor-water-3", "armor-water-4", "armor-wood-1", "armor-wood-2", "armor-wood-3", "armor-wood-4", "town-changeling", "town-leprechaun", "town-merrow", "weapon-earth-1", "weapon-earth-2", "weapon-earth-3", "weapon-earth-4", "weapon-fire-1", "weapon-fire-2", "weapon-fire-3", "weapon-fire-4", "weapon-metal-1", "weapon-metal-2", "weapon-metal-3", "weapon-metal-4", "weapon-water-1", "weapon-water-2", "weapon-water-3", "weapon-water-4", "weapon-wood-1", "weapon-wood-2", "weapon-wood-3", "weapon-wood-4"]);
 const picOfMon=t=>{ const mid=t&&t.foe&&t.foe.mid; if(!mid) return null; const k=mid.startsWith("w_")?"wild-"+mid.slice(2).replace(/_/g,"-"):"town-"+mid; return PICS.has(k)?k:null; };
 const picOfItem=it=>{ if(!it||it.tier==null) return null; const k=`${it.slot==="weapon"?"weapon":"armor"}-${it.el}-${it.tier+1}`; return PICS.has(k)?k:null; };
 function monSvg(t, cls){ const pk=picOfMon(t); if(pk) return `<img src="assets/art/${pk}.webp" class="${cls||"mon-art"} pic" alt="" draggable="false">`; const f=ART[t.foe.mid]; return f?`<svg viewBox="0 0 100 100" class="${cls||"mon-art"}" aria-hidden="true">${f()}</svg>`:""; }
@@ -2695,7 +2695,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.76";
+const APP_VERSION="2026.10.77";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4620,19 +4620,27 @@ Object.assign(STR.es,{genTitle:"Elige tu personaje", genSub:"¡Elige el aventure
 Object.assign(STR.ja,{genTitle:"キャラクターを選ぶ", genSub:"好きな冒険キャラクターを選ぼう！", genM:"男の子", genF:"女の子", genConfirm:"「{g}」にしますか？", genYes:"決定", genDone:"キャラクターが決まりました！", onbGender:"冒険するキャラクターを選ぼう", onbGenderNeed:"先にキャラクターを選んでください"});
 Object.assign(STR.ko,{genTitle:"캐릭터 선택", genSub:"마음에 드는 모험가를 골라 보세요!", genM:"남자", genF:"여자", genConfirm:"“{g}”(으)로 할까요?", genYes:"확인", genDone:"캐릭터가 정해졌어요!", onbGender:"모험할 캐릭터를 고르세요", onbGenderNeed:"먼저 캐릭터를 골라 주세요"});
 /* ----- hero pictures (assets/art/hero-<m|f>-<pose>.webp); the equipped weapon is drawn in the hand ----- */
-const HERO_HAND={idle:[[0.12,0.57,-180],[0.12,0.57,-180]], attack:[[0.215,0.40,-35],[0.215,0.425,-35]]};
+const HERO_FILES=new Set(["f-cloth-bow","f-cloth-cast","f-cloth-hurt","f-cloth-idle","f-cloth-slash","f-cloth-smash","f-cloth-thrust","f-cloth-win","f-metal1-bow","f-metal1-cast","f-metal1-hurt","f-metal1-idle","f-metal1-slash","f-metal1-smash","f-metal1-thrust","f-metal1-win","f-metal2-bow","f-metal2-cast","f-metal2-hurt","f-metal2-idle","f-metal2-slash","f-metal2-smash","f-metal2-thrust","f-metal2-win","f-metal3-bow","f-metal3-cast","f-metal3-hurt","f-metal3-idle","f-metal3-slash","f-metal3-smash","f-metal3-thrust","f-metal3-win","f-metal4-bow","f-metal4-cast","f-metal4-hurt","f-metal4-idle","f-metal4-slash","f-metal4-smash","f-metal4-thrust","f-metal4-win","f-wood1-bow","f-wood1-cast","f-wood1-hurt","f-wood1-idle","f-wood1-slash","f-wood1-smash","f-wood1-thrust","f-wood1-win","f-wood2-bow","f-wood2-cast","f-wood2-hurt","f-wood2-idle","f-wood2-slash","f-wood2-smash","f-wood2-thrust","f-wood2-win","f-wood3-bow","f-wood3-cast","f-wood3-hurt","f-wood3-idle","f-wood3-slash","f-wood3-smash","f-wood3-thrust","f-wood3-win","f-wood4-hurt","f-wood4-idle","f-wood4-slash","f-wood4-win","m-cloth-bow","m-cloth-cast","m-cloth-hurt","m-cloth-idle","m-cloth-slash","m-cloth-smash","m-cloth-thrust","m-cloth-win","m-metal1-bow","m-metal1-cast","m-metal1-hurt","m-metal1-idle","m-metal1-slash","m-metal1-smash","m-metal1-thrust","m-metal1-win","m-metal2-bow","m-metal2-cast","m-metal2-hurt","m-metal2-idle","m-metal2-slash","m-metal2-smash","m-metal2-thrust","m-metal2-win","m-metal3-bow","m-metal3-cast","m-metal3-hurt","m-metal3-idle","m-metal3-slash","m-metal3-smash","m-metal3-thrust","m-metal3-win","m-metal4-bow","m-metal4-cast","m-metal4-hurt","m-metal4-idle","m-metal4-slash","m-metal4-smash","m-metal4-thrust","m-metal4-win","m-wood1-bow","m-wood1-cast","m-wood1-hurt","m-wood1-idle","m-wood1-slash","m-wood1-smash","m-wood1-thrust","m-wood1-win","m-wood2-bow","m-wood2-cast","m-wood2-hurt","m-wood2-idle","m-wood2-slash","m-wood2-smash","m-wood2-thrust","m-wood2-win","m-wood3-bow","m-wood3-cast","m-wood3-hurt","m-wood3-idle","m-wood3-slash","m-wood3-smash","m-wood3-thrust","m-wood3-win","m-wood4-bow","m-wood4-cast","m-wood4-hurt","m-wood4-idle","m-wood4-slash","m-wood4-smash","m-wood4-thrust","m-wood4-win"]); /*HERO_FILES*/
+/* where the gripping hand is in each pose (fraction of the 512 canvas) and which way the weapon points (degrees, 0 = right, -90 = up) */
+const HERO_GRIP={m:{idle:[.63,.71,-75], slash:[.40,.25,-115], thrust:[.83,.63,-4], smash:[.45,.15,-95], bow:[.82,.53,90], cast:[.22,.41,-88]},
+                 f:{idle:[.64,.67,-75], slash:[.40,.27,-115], thrust:[.78,.63,-4], smash:[.45,.15,-95], bow:[.78,.50,90], cast:[.30,.28,-88]}};
+/* where the hand holds each weapon picture (fraction of the item image, drawn tip up-right) and how big it is */
+const KIND_GRIP={sword:[.24,.76,.42], staff:[.40,.62,.52], orbstaff:[.40,.62,.55], trident:[.45,.56,.58], bow:[.5,.5,.46], hammer:[.24,.76,.42], warhammer:[.24,.76,.46]};
+function heroOutfit(gen){ const a=game().armor&&ITEMS[game().armor], k=a?`${a.el}${a.tier+1}`:"cloth"; return HERO_FILES.has(`${gen}-${k}-idle`)?k:"cloth"; }
+function heroAct(w){ return w?(KIND_ACT[WKIND[w.el][w.tier]]||"slash"):"slash"; }
 function heroArt(pose, gOverride){
   const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
-  const w=!gOverride&&g.weapon&&ITEMS[g.weapon], hand=HERO_HAND[pose];
-  let wpn="";
-  if(w&&hand){ const [x,y,r]=hand[gen==="f"?1:0], bow=WKIND[w.el][w.tier]==="bow";
-    const pk=picOfItem(w);
-    wpn=pk?`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${r+45}) scale(-1 1)"><image href="assets/art/${pk}.webp" x="-9.2" y="-32.8" width="42" height="42"/></g></svg>`
-      :`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${(pose==="idle"?0.645:y)*100}) rotate(${pose==="idle"?0:r}) scale(${pose==="idle"?.55:.42}) translate(${bow?"-28 -32":"-32 -50"})">${weaponGlyph(w)}</g></svg>`; }
-  // idle: weapon planted in the ground beside the hero; attack: held in the hand
-  return `<div class="hero-svg hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero-${gen}-${pose}.webp?v=2" alt="" draggable="false">${wpn}</div></div>`;
+  const w=!gOverride&&g.weapon&&ITEMS[g.weapon], act=pose==="attack"?heroAct(w):pose, out=gOverride?"cloth":heroOutfit(gen);
+  const key=HERO_FILES.has(`${gen}-${out}-${act}`)?`${gen}-${out}-${act}`:`${gen}-cloth-${act}`;
+  const grip=HERO_GRIP[gen][act]; let wpn="";
+  if(w&&grip){ const [x,y,d]=grip, kind=WKIND[w.el][w.tier], [gx,gy,L]=KIND_GRIP[kind]||[.25,.75,.45], pk=picOfItem(w);
+    wpn=`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${d+45})">${pk
+      ?`<image href="assets/art/${pk}.webp" x="${-gx*L*100}" y="${-gy*L*100}" width="${L*100}" height="${L*100}"/>`
+      :`<g transform="rotate(45) scale(.5) translate(-32 -54)">${weaponGlyph(w)}</g>`}</g></svg>`; }
+  return `<div class="hero-svg hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero/${key}.webp" alt="" draggable="false">${wpn}</div></div>`;
 }
-setTimeout(()=>{ const g=game(); if(g&&g.gender) ["idle","attack","hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero-${g.gender}-${p}.webp`; }); },3000);
+setTimeout(()=>{ const g=game(); if(!g||!g.gender) return; const o=heroOutfit(g.gender), w=g.weapon&&ITEMS[g.weapon];
+  ["idle",heroAct(w),"hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero/${g.gender}-${HERO_FILES.has(`${g.gender}-${o}-${p}`)?o:"cloth"}-${p}.webp`; }); },3000);
 /* ----- Chapter 2 (Great Britain) placeholder: unlocks after Balor of Dublin is defeated at Lv 20 ----- */
 const CH2_LV=20;
 const FUTURE_SLOTS=[["shield",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>'],
