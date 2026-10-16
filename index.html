@@ -714,6 +714,11 @@ body.onb-open{overflow:hidden}
 .priv-view .card{display:flex;flex-direction:column;gap:6px}.priv-view p,.priv-view li{font-size:14px;line-height:1.65;margin:0}.priv-view ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .ie-disc{line-height:1.5;margin:4px 2px 0}
 .read-rec{font-size:12px;font-weight:700;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:99px;padding:4px 10px}
+.gen-card{display:flex;flex-direction:column;gap:10px}.gen-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.gen-opt{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:10px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink);font:inherit}
+.gen-opt.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.gen-fig{width:110px;height:118px}.gen-fig .hero-svg{width:100%;height:100%}
+.gen-ask{border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
 </style>
 
 </head>
@@ -1966,7 +1971,7 @@ function viewConquest(){
     ${notebookHtml()}`;
 }
 
-const G_DEFAULT={type:"game", gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
+const G_DEFAULT={type:"game", gender:null, gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
 function game(){ return S.game || (S.game={...G_DEFAULT}); }
 function saveGame(){ lsSave(); cloudMark(null); }
 const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
@@ -2215,7 +2220,7 @@ function viewAdv(){
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
     </section>
-    ${heroStage()}
+    ${game().gender?heroStage():genderPick()}
     <details class="card rules"><summary>${T("rulesQ")}</summary>${cycleSvg()}
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
@@ -2629,7 +2634,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.65";
+const APP_VERSION="2026.10.66";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2695,15 +2700,16 @@ function itemSvg(it, cls){
 function itemTile(it, sm){ return `<span class="it-tile el-${it.el}${sm?" sm":""}">${itemSvg(it)}<span class="it-tier">${tierLab(it)}</span></span>`; }
 
 /* ----- hero figure for the battle scene ----- */
-function heroSvg(){
-  const g=game(), w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor];
+function heroSvg(gOverride){
+  const g=game(), gen=gOverride||g.gender, w=g.weapon&&ITEMS[g.weapon], a=gOverride?null:g.armor&&ITEMS[g.armor];
   const body=a?ARMC[a.el][a.tier]:"#C8B89A", trim=a&&a.tier===3?GOLD:GK;
   const wg=(w?(WKIND[w.el][w.tier]==="bow"?`<g transform="translate(96 66) scale(.9) translate(-28 -32)">${weaponGlyph(w)}</g>`:`<g transform="translate(97 66) rotate(20) scale(.95) translate(-32 -50)">${weaponGlyph(w)}</g>`):"")+`<circle cx="97" cy="66" r="5" fill="#F2C9A0" ${sk}/>`;
   return `<svg viewBox="0 0 140 150" class="hero-svg" aria-hidden="true">
     <ellipse cx="62" cy="142" rx="38" ry="6" fill="#000" opacity=".25"/>
     <g class="h-legs"><path d="M48 112L46 138H58L60 114M66 114L68 138H80L76 112" fill="#4A3A2E" ${sk}/></g>
     <g class="h-body"><path d="M40 72Q62 60 84 72L82 116Q62 124 42 116Z" fill="${body}" ${sk}/><path d="M42 102H82" stroke="${trim}" stroke-width="3"/>
-      <circle cx="62" cy="48" r="20" fill="#F2C9A0" ${sk}/><path d="M42 46Q42 24 62 24Q82 24 82 46L76 44Q62 36 48 44Z" fill="${a?body:"#6B4A2E"}" ${sk}/>
+      ${gen==="f"?`<path d="M41 44Q36 64 42 78L50 76Q45 62 47 48ZM83 44Q88 64 82 78L74 76Q79 62 77 48Z" fill="#6B4A2E" ${sk}/>`:""}
+      <circle cx="62" cy="48" r="20" fill="#F2C9A0" ${sk}/><path d="${gen==="f"?"M41 47Q40 23 62 23Q84 23 83 47L77 42Q66 34 56 40Q50 44 46 42Z":"M42 46Q42 24 62 24Q82 24 82 46L76 44Q62 36 48 44Z"}" fill="${a?body:"#6B4A2E"}" ${sk}/>${gen==="f"?`<path d="M73 31l-7-5v10zM73 31l7-5v10z" fill="#E8846B" ${sk}/><circle cx="73" cy="31" r="2.6" fill="#F2C14E" ${sk}/>`:""}
       <circle cx="68" cy="50" r="2.6" fill="${GK}"/><circle cx="56" cy="50" r="2.6" fill="${GK}"/><path d="M58 58Q62 61 66 58" fill="none" stroke="${GK}" stroke-width="2" stroke-linecap="round"/></g>
     <g class="h-shield"><path d="M22 74H46V92Q46 106 34 112Q22 106 22 92Z" fill="${a?ARMC[a.el][Math.min(3,a.tier+1)]:"#A07850"}" ${sk}/><path d="M34 80V104M26 90H42" stroke="${trim}" stroke-width="2.4"/></g>
     <g class="h-arm"><path d="M80 78L96 66" stroke="${GK}" stroke-width="11" stroke-linecap="round"/><path d="M80 78L96 66" stroke="${body}" stroke-width="7" stroke-linecap="round"/>${wg}</g>
@@ -3204,7 +3210,7 @@ function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
   return {...G_DEFAULT, ...base, inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
-    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, battles:Math.max(base.battles||0,o.battles||0)}; }
+    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null}; }
 /* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
    tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
 const WSYNC_KEY="che-pro-wsync", DIRTY_KEY="che-pro-dirty", WSYNC_FULL=7*864e5, WSYNC_MARGIN=15*60e3;
@@ -4336,12 +4342,13 @@ function onbRender(){
   if(!S.onb){ if(el) el.remove(); document.body.classList.remove("onb-open"); return; }
   if(!el){ el=document.createElement("div"); el.id="onb"; el.className="onb"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); document.body.append(el); }
   document.body.classList.add("onb-open");
-  const st=S.onb.step, N=4, dots=`<div class="onb-dots">${Array.from({length:N},(_,i)=>`<i class="${i===st?"on":""}"></i>`).join("")}</div>`;
+  const st=S.onb.step, N=5, dots=`<div class="onb-dots">${Array.from({length:N},(_,i)=>`<i class="${i===st?"on":""}"></i>`).join("")}</div>`;
   let body="";
   if(st===0) body=`<img src="assets/binbin-head.webp" alt="" class="onb-dog"><h2>${T("onbHi")}</h2><p>${T("onbHiSub")}</p>`;
   else if(st===1) body=`<div class="onb-ic">🌏</div><h2>${T("onbLang")}</h2><div class="onb-opts">${LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-act="onblang" data-k="${l.k}" data-nosc><b>${l.label}</b></button>`).join("")}</div>`;
   else if(st===2) body=`<div class="onb-ic">🎯</div><h2>${T("onbLevel")}</h2><p class="sm-t">${T("onbLevelSub")}</p><div class="onb-opts">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-act="onblvl" data-k="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div>`;
-  else body=`<div class="onb-ic">🐶</div><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>`;
+  else if(st===3) body=`<h2>${T("onbGender")}</h2>${genderPick(true)}`;
+  else body=`<div class="onb-ic">🗺️</div><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>`;
   const nav=st<N-1?`<button class="btn" data-act="onbnext">${T("onbNext")}</button>`:`<button class="btn" data-act="onbstart">${T("onbStart")}</button><button class="btn ghost" data-act="onblook">${T("onbLook")}</button>`;
   el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
   scApply&&scApply();
@@ -4353,7 +4360,8 @@ function onbCoach(){
   return everRead?"":`<div class="card onb-coach">👇 ${T("onbCoach")}</div>`;
 }
 document.addEventListener("click",e=>{ const t=e.target.closest("#onb [data-act]"); if(!t||!S.onb) return; const a=t.dataset.act; e.stopPropagation();
-  if(a==="onbnext"){ S.onb.step=Math.min(3,S.onb.step+1); actPing({o:S.onb.step}); return onbRender(); }
+  if(a==="onbnext"){ if(S.onb.step===3){ if(!S.genPick&&!game().gender) return toast(T("onbGenderNeed")); if(S.genPick) genderSet(S.genPick); } S.onb.step=Math.min(4,S.onb.step+1); actPing({o:S.onb.step}); return onbRender(); }
+  if(a==="genpick"){ S.genPick=t.dataset.k; return onbRender(); }
   if(a==="onbback"){ S.onb.step=Math.max(0,S.onb.step-1); return onbRender(); }
   if(a==="onbskip"||a==="onblook") return onbClose(false);
   if(a==="onbstart") return onbClose(true);
@@ -4382,7 +4390,7 @@ function devRetHtml(A){
   const wau=A.filter(a=>Object.keys(a.d||{}).some(d=>d>add(t,-7))).length;
   const ret=n=>{ const c=A.filter(a=>a.f&&a.f<=add(t,-n)); const r=c.filter(a=>act(a,add(a.f,n))); return c.length?`${Math.round(r.length/c.length*100)}%<small> ${r.length}/${c.length}</small>`:"–"; };
   const back=(()=>{ const c=A.filter(a=>a.f&&a.f<t); const r=c.filter(a=>Object.keys(a.d||{}).some(d=>d>a.f)); return c.length?`${Math.round(r.length/c.length*100)}%<small> ${r.length}/${c.length}</small>`:"–"; })();
-  const onb=A.filter(a=>(a.o||0)>=3).length, rd=A.filter(a=>a.r).length;
+  const onb=A.filter(a=>(a.o||0)>=4).length, rd=A.filter(a=>a.r).length;
   const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
   return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(newT,T("drNew"))}${tile(dau,T("drDau"))}${tile(wau,T("drWau"))}${tile(ret(1),"D1")}${tile(ret(7),"D7")}${tile(ret(30),"D30")}${tile(back,T("drBack"))}${tile(`${onb}/${N}`,T("drOnb"))}${tile(`${rd}/${N}`,T("drRead"))}</div><p class="muted sm-t">${T("drNote")}</p>`;
 }
@@ -4533,6 +4541,22 @@ Object.assign(STR.ja,{pvCard:"プライバシーとアカウント", pvOpen:"プ
 Object.assign(STR.ko,{pvCard:"개인정보와 계정", pvOpen:"개인정보 처리방침", delBtn:"내 계정과 데이터 삭제", delYes:"영구 삭제", pvEnOnly:"현재 이 방침은 영어로만 제공돼요."});
 Object.assign(STR.zh,{preDue:"{d} 個今天該複習的字優先，共 {k} 題（間隔複習）"}); Object.assign(STR.en,{preDue:"{d} words due today come first · {k} questions (spaced review)"}); Object.assign(STR.hi,{preDue:"आज के {d} शब्द पहले · कुल {k} प्रश्न"}); Object.assign(STR.es,{preDue:"Primero {d} palabras que tocan hoy · {k} preguntas"}); Object.assign(STR.ja,{preDue:"今日の復習 {d} 語を優先 · 全 {k} 問"}); Object.assign(STR.ko,{preDue:"오늘 복습할 {d}개 먼저 · 총 {k}문제"});
 Object.assign(STR.zh,{readRec:"錄音版"}); Object.assign(STR.en,{readRec:"Recorded"}); Object.assign(STR.hi,{readRec:"रिकॉर्डेड"}); Object.assign(STR.es,{readRec:"Grabado"}); Object.assign(STR.ja,{readRec:"録音版"}); Object.assign(STR.ko,{readRec:"녹음본"});
+/* ----- one-time character choice (boy / girl); cannot be changed afterwards ----- */
+function genderPick(inOnb){
+  const sel=S.genPick||null;
+  const opt=k=>`<button class="gen-opt${sel===k?" on":""}" data-act="genpick" data-k="${k}" aria-pressed="${sel===k}"><div class="gen-fig">${heroSvg(k)}</div><b>${T(k==="m"?"genM":"genF")}</b></button>`;
+  return `<section class="${inOnb?"":"card "}gen-card">${inOnb?"":`<b>${T("genTitle")}</b>`}<p class="muted sm-t" style="margin:0">${T("genSub")}</p><div class="gen-opts">${opt("m")}${opt("f")}</div>
+    ${sel&&!inOnb?`<div class="gen-ask"><b>${T("genConfirm",{g:T(sel==="m"?"genM":"genF")})}</b><div class="row"><button class="btn sm" data-act="genyes">${T("genYes")}</button><button class="btn ghost sm" data-act="genno">${T("nickNo")}</button></div></div>`:""}</section>`;
+}
+function genderSet(k){ const g=game(); if(g.gender||!(k==="m"||k==="f")) return; g.gender=k; S.genPick=null; saveGame(); toast(T("genDone")); render(); }
+document.addEventListener("click",e=>{ const t=e.target.closest("[data-act=genpick],[data-act=genyes],[data-act=genno]"); if(!t||t.closest("#onb")) return; e.stopPropagation();
+  const a=t.dataset.act; if(a==="genpick"){ S.genPick=t.dataset.k; return render(); } if(a==="genno"){ S.genPick=null; return render(); } if(a==="genyes") return genderSet(S.genPick); }, true);
+Object.assign(STR.zh,{genTitle:"選擇你的角色", genSub:"只能選一次，之後不能更改喔！", genM:"男孩", genF:"女孩", genConfirm:"確定選擇「{g}」嗎？選了之後就不能再改了。", genYes:"確定", genDone:"角色決定好了！", onbGender:"選擇你的冒險角色", onbGenderNeed:"請先選一個角色"});
+Object.assign(STR.en,{genTitle:"Choose your character", genSub:"You can only choose once — it can't be changed later!", genM:"Boy", genF:"Girl", genConfirm:"Choose “{g}”? You won't be able to change it later.", genYes:"Confirm", genDone:"Your character is ready!", onbGender:"Choose your adventurer", onbGenderNeed:"Pick a character first"});
+Object.assign(STR.hi,{genTitle:"अपना किरदार चुनें", genSub:"सिर्फ़ एक बार चुन सकते हैं — बाद में बदल नहीं सकते!", genM:"लड़का", genF:"लड़की", genConfirm:"“{g}” चुनें? बाद में बदल नहीं पाएँगे।", genYes:"पक्का", genDone:"आपका किरदार तैयार है!", onbGender:"अपना साहसी चुनें", onbGenderNeed:"पहले एक किरदार चुनें"});
+Object.assign(STR.es,{genTitle:"Elige tu personaje", genSub:"Solo puedes elegir una vez: ¡no se puede cambiar después!", genM:"Chico", genF:"Chica", genConfirm:"¿Elegir «{g}»? No podrás cambiarlo después.", genYes:"Confirmar", genDone:"¡Tu personaje está listo!", onbGender:"Elige tu aventurero", onbGenderNeed:"Elige un personaje primero"});
+Object.assign(STR.ja,{genTitle:"キャラクターを選ぶ", genSub:"選べるのは1回だけ。あとから変更できません！", genM:"男の子", genF:"女の子", genConfirm:"「{g}」にしますか？あとから変更できません。", genYes:"決定", genDone:"キャラクターが決まりました！", onbGender:"冒険するキャラクターを選ぼう", onbGenderNeed:"先にキャラクターを選んでください"});
+Object.assign(STR.ko,{genTitle:"캐릭터 선택", genSub:"한 번만 고를 수 있고 나중에 바꿀 수 없어요!", genM:"남자", genF:"여자", genConfirm:"“{g}”(으)로 할까요? 나중에 바꿀 수 없어요.", genYes:"확인", genDone:"캐릭터가 정해졌어요!", onbGender:"모험할 캐릭터를 고르세요", onbGenderNeed:"먼저 캐릭터를 골라 주세요"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
