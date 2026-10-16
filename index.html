@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" id="vpMeta" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>BinBin daily</title>
 <meta name="description" content="Learn English from daily Irish news — 繁體中文 · English · हिन्दी · Español · 日本語 · 한국어. Earn gold from quizzes, buy elemental gear, fight Celtic monsters.">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -775,6 +775,7 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 .err-card{border:1.5px solid var(--bad);display:flex;flex-direction:column;gap:6px}.err-card details summary{cursor:pointer}.err-pre{margin-top:6px!important;white-space:pre-wrap;word-break:break-all;font-size:11px;margin:0;background:#0003;padding:8px;border-radius:8px;max-height:260px;overflow:auto}
 .dev-errs{display:flex;flex-direction:column;gap:6px;border:1px dashed var(--line);border-radius:12px;padding:10px}.dev-err summary{font-size:13px;cursor:pointer;word-break:break-word}
 .onb-en{display:block;font-size:.72em;font-weight:500;opacity:.75;margin-top:4px}
+body.vp-lock{touch-action:pan-x pan-y}
 </style>
 
 </head>
@@ -1176,7 +1177,13 @@ function errReport(e,where){ try{
 }catch(_){} }
 window.addEventListener("error",e=>{ try{ errReport(e.error||e.message,"global:"+(e.lineno||"")); if(DEV) toast("⚠️ "+(e.message||"error")+" @"+String(e.lineno||"")); }catch(_){} });
 window.addEventListener("unhandledrejection",e=>{ try{ const r=e.reason; if(r&&/permission|network|offline|unavailable|quota/i.test(String(r.code||r.message||""))) return; errReport(r,"promise"); if(DEV) toast("⚠️ "+String(r&&r.message||r).slice(0,140)); }catch(_){} });
+/* pinch-zoom is allowed everywhere (easier reading) except in the multiplayer games, where quick taps must not zoom the page */
+let VP_LOCK=null;
+function vpApply(){ const lock=S.view==="play"; if(lock===VP_LOCK) return; VP_LOCK=lock; const m=document.getElementById("vpMeta");
+  if(m) m.setAttribute("content","width=device-width,initial-scale=1,viewport-fit=cover"+(lock?",maximum-scale=1,user-scalable=no":"")); document.body.classList.toggle("vp-lock",lock); }
+["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{ if(VP_LOCK) e.preventDefault(); },{passive:false}));   // iOS Safari ignores user-scalable=no
 function renderInner(){
+  vpApply();
   document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"));
   if(typeof readStopIfLeft==="function") readStopIfLeft(); setTimeout(()=>{ if(typeof pgLockSync==="function") pgLockSync(); },0);
   { const g=game(); $("#mastInfo").innerHTML = T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}); }
@@ -1256,7 +1263,7 @@ function viewRead(){
   return `<div class="view">
     <button class="btn ghost" data-act="back" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("back")}</button>
     <div class="art-head"><div class="eyebrow">${art.topic?esc(topicOf(art))+" · ":""}${esc(fmtDate(art.date))}</div><h1>${esc(art.title)}</h1>
-    <div class="art-meta"><span class="chip topic">${levelOf(art)==="IELTS"?"IELTS 7–8":(levelOf(art)||art.level||"")}</span><span>${T("words",{n:parasOf(art).join(" ").match(WORD_RE).length})}</span>${src?`<span>${T("rewritten",{s:src})}</span>`:""}</div></div>
+    <div class="art-meta"><span class="chip topic">${levelOf(art)==="IELTS"?"IELTS 7–8":(levelOf(art)||art.level||"")}</span><span>${T("words",{n:(parasOf(art).join(" ").match(WORD_RE)||[]).length})}</span>${src?`<span>${T("rewritten",{s:src})}</span>`:""}</div></div>
     ${art.levels&&levelOf(art)!==LEVEL?`<div class="muted sm-t">${T("levelOnly",{l:LEVEL,m:levelOf(art)})}</div>`:""}
     ${sumOf(art)?`<div class="zh-sum">${esc(sumOf(art))}</div>`:""}
     <div class="tip"><i></i>${T("tip")}</div>
@@ -1323,7 +1330,7 @@ async function importData(file){
       if(!v||typeof v!=="object") continue;
       if(v.type==="word"){ const cur=S.words.get(k); if(!cur||score(v)>score(cur)){ S.words.set(k,v); n++; } }
       else if(v.type==="day"){ if(!S.days.has(k)) S.days.set(k,v); }
-      else if(v.type==="game"){ const cur=game(); if(v.lv>cur.lv || (v.lv===cur.lv && v.exp>=cur.exp)) S.game={...G_DEFAULT, ...v}; }
+      else if(v.type==="game"){ const cur=game(); if(v.lv>cur.lv || (v.lv===cur.lv && v.exp>=cur.exp)) S.game=newGame(v); }
     }
     lsSave(); if(CLOUD.user){ for(const k of S.words.keys()) CLOUD.dirtyWords.add(k); cloudMark(null); } toast(T("imported",{n})); render();
   }catch(e){ toast(T("badFile")); }
@@ -1870,6 +1877,15 @@ const wildOpen=m=>game().lv>=m.lv;
 const ALLY_POOL=[["Aoife","IE"],["Cian","IE"],["Niamh","IE"],["Oisín","IE"],["Saoirse","IE"],["Fionn","IE"],["Ciara","IE"],["Darragh","IE"],["Mei","TW"],["Yu-chen","TW"],["Haruto","JP"],["Sakura","JP"],
   ["Ji-woo","KR"],["Min-jun","KR"],["Priya","IN"],["Arjun","IN"],["Lucía","ES"],["Mateo","MX"],["Chloé","FR"],["Noah","GB"],["Emma","US"],["Liam","CA"],["Olivia","AU"],["Lukas","DE"]];
 const tierFor=lv=>{ let t=0; TIER.forEach((x,i)=>{ if(lv>=x.lv) t=i; }); return t; };
+/* Data that other players can write (leaderboards, rooms, allies, feedback…) is cleaned when it arrives:
+   angle brackets in any text are replaced, so even a field that is printed without esc() cannot inject HTML. */
+function safeDoc(o, depth=0){
+  if(o==null||depth>6) return o;
+  if(typeof o==="string") return o.replace(/[<>]/g,c=>c==="<"?"‹":"›");
+  if(Array.isArray(o)) return o.map(v=>safeDoc(v,depth+1));
+  if(typeof o==="object"&&!(o instanceof Date)&&!(o.toMillis)){ const r={}; for(const k of Object.keys(o)) r[k]=safeDoc(o[k],depth+1); return r; }
+  return o;
+}
 const hashStr=s=>{ let h=2166136261; for(const c of s){ h^=c.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; };
 const yesterday=()=>{ const d=new Date(); d.setDate(d.getDate()-1); return ymd(d); };
 function allyStatsOf(lv,wEl,aEl){ const gl=Math.max(1,lv-1); return {hp:100+20*(lv-1)+GEAR_H(gl), atk:10+3*(lv-1)+GEAR_W(gl), def:5+2*(lv-1)+GEAR_D(gl), wEl, aEl, gl}; }
@@ -1902,15 +1918,15 @@ async function allySync(force){
   const snap={n:g.nick||(CLOUD.user.displayName||"").slice(0,16), lv:g.lv, hp:s.hp, atk:s.atk, def:s.def, wEl:s.wEl||"", aEl:s.aEl||"", w:g.weapon||"", a:g.armor||"", flag:myFlag(), at:Date.now()};
   try{
     await fsM.setDoc(allyRef(me),{snap},{merge:true});
-    const d=(await fsM.getDoc(allyRef(me))).data()||{}; S.allyDoc=d;
+    const d=safeDoc((await fsM.getDoc(allyRef(me))).data()||{}); S.allyDoc=d;
     // finish a binding I requested if my friend accepted it
     const out=g.allyOut;
     if(out&&out.date===today()&&!(d.bond&&d.bond.date===today())){
-      const fd=(await fsM.getDoc(allyRef(out.to))).data()||{};
+      const fd=safeDoc((await fsM.getDoc(allyRef(out.to))).data()||{});
       if(fd.bond&&fd.bond.date===today()&&fd.bond.with===me){ await fsM.setDoc(allyRef(me),{bond:{with:out.to, n:out.n, date:today()}},{merge:true}); d.bond={with:out.to,n:out.n,date:today()}; g.allyOut=null; saveGame(); toast(T("alBound",{n:out.n})); }
     }
     if(d.bond&&d.bond.date===today()){
-      const fd=(await fsM.getDoc(allyRef(d.bond.with))).data()||{}; const sp=fd.snap||{};
+      const fd=safeDoc((await fsM.getDoc(allyRef(d.bond.with))).data()||{}); const sp=fd.snap||{};
       S.allyFriend={kind:"friend", id:d.bond.with, n:sp.n||d.bond.n, flag:sp.flag||"", lv:sp.lv||g.lv, hp:sp.hp||s.hp, atk:sp.atk||s.atk, def:sp.def||s.def, wEl:sp.wEl||null, aEl:sp.aEl||null, wId:sp.w&&ITEMS[sp.w]?sp.w:null, aId:sp.a&&ITEMS[sp.a]?sp.a:null, date:today()};
       g.allyLog=g.allyLog||{}; g.allyLog[today()]={...(g.allyLog[today()]||{}), id:d.bond.with}; saveGame();
     }
@@ -2048,7 +2064,8 @@ function viewConquest(){
 }
 
 const G_DEFAULT={type:"game", gender:null, shield:null, helmet:null, gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
-function game(){ return S.game || (S.game={...G_DEFAULT}); }
+function newGame(over){ return {...JSON.parse(JSON.stringify(G_DEFAULT)), ...(over||{})}; }   // deep copy so no two saves share arrays or maps
+function game(){ return S.game || (S.game=newGame()); }
 function saveGame(){ lsSave(); cloudMark(null); }
 const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
 function stats(g=game()){
@@ -2147,8 +2164,9 @@ function castSpell(i){
   render();
 }
 function fight(){
-  const B=S.battle, g=game(); if(!B) return;
-  g.tickets-=1; g.battles=(g.battles||0)+1;
+  const B=S.battle, g=game(); if(!B||B.stage==="fight"||B.stage==="end"||B.started) return;   // never settle the same battle twice
+  if(g.tickets<1){ toast(T("noTicket")); return; }
+  B.started=true; g.tickets-=1; g.battles=(g.battles||0)+1;
   const res=simulate(B.m, !!B.spellOk);
   B.res=res; B.stage="fight"; B.idx=0;
   if(res.win){
@@ -2517,7 +2535,7 @@ async function devUnlock(){
 }
 function devExit(){
   if(!DEV) return;
-  S.game={...G_DEFAULT, ...DEV.game}; if(DEV.day&&DEV.day.date) saveDay(DEV.day);
+  S.game=newGame(DEV.game); if(DEV.day&&DEV.day.date) saveDay(DEV.day);
   DEV=null; devSave(); saveGame(); toast(T("devExited")); render(); applyMast();
 }
 function devAct(k){
@@ -2544,7 +2562,7 @@ async function devLoadStats(){
   const {fsM,db}=CLOUD.fb; S.devStats={loading:true}; render();
   try{
     const us=await fsM.getDocs(fsM.collection(db,"users"));
-    const users=[]; us.forEach(d=>users.push({id:d.id, ...d.data()}));
+    const users=[]; us.forEach(d=>users.push({id:d.id, ...safeDoc(d.data())}));
     const counts=await Promise.all(users.slice(0,300).map(u=>fsM.getCountFromServer(fsM.collection(db,"users",u.id,"words")).then(c=>c.data().count).catch(()=>null)));
     users.forEach((u,i)=>u.words=counts[i]);
     let lbN=null; try{ lbN=(await fsM.getCountFromServer(fsM.collection(db,"leaderboard"))).data().count; }catch(e){}
@@ -2559,11 +2577,12 @@ async function devLoadStats(){
     try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); const cnt={}; rs.forEach(d=>{ const x=d.data(); if(x.state!=="done") return; [x.host,x.guest].filter(Boolean).forEach(u=>cnt[u]=(cnt[u]||0)+1); }); for(const [u,n] of Object.entries(cnt)) bump(u,"coop",n); }catch(e){}
     const games=Object.fromEntries(Object.entries(per).map(([k,m])=>[k,{players:Object.keys(m).length, plays:Object.values(m).reduce((a,b)=>a+b,0)}]));
     let push=null; try{ const r=await fsM.getDoc(fsM.doc(db,"config","pushStats")); if(r.exists()) push=r.data(); }catch(e){}
-    let act=null; try{ const r=await fsM.getDocs(fsM.collection(db,"act")); const a=[]; r.forEach(d=>a.push(d.data())); act=a.length?a:null; }catch(e){}
+    let act=null; try{ const r=await fsM.getDocs(fsM.collection(db,"act")); const a=[]; r.forEach(d=>a.push(safeDoc(d.data()))); act=a.length?a:null; }catch(e){}
     S.devStats={users, lbN, regions, rooms, fb, games, push, act, at:new Date()};
   }catch(e){ S.devStats={err:e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")}; }
   render();
 }
+const num=v=>Number.isFinite(+v)?+v:"?";   // numbers from other people's documents: never insert raw values into HTML
 function devStatsHtml(){
   const D=S.devStats;
   if(!D) return `<button class="btn ghost" data-act="devstats">📊 ${T("dsLoad")}</button>`;
@@ -2579,7 +2598,7 @@ function devStatsHtml(){
   const regional=RAW_INDEX.filter(a=>a.region).length, latest=(S.index[0]||{}).date||"–";
   const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
   const rows=U.slice().sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).map(u=>{ const g=u.game||{};
-    return `<tr><td><b>${esc(g.nick||u.name||u.id.slice(0,6))}</b>${g.nick&&u.name?`<br><span class="muted">${esc(u.name)}</span>`:""}</td><td>${g.lv||1}</td><td>${g.gold||0}</td><td>${u.words??"–"}</td><td>${Object.keys(u.days||{}).length}</td><td>${Object.keys(g.conq||{}).length}</td><td>${esc(u.region||"–")}</td><td>${esc(day(u.updatedAt)||"–")}</td></tr>`; }).join("");
+    return `<tr><td><b>${esc(g.nick||u.name||u.id.slice(0,6))}</b>${g.nick&&u.name?`<br><span class="muted">${esc(u.name)}</span>`:""}</td><td>${num(g.lv||1)}</td><td>${num(g.gold||0)}</td><td>${u.words==null?"–":num(u.words)}</td><td>${Object.keys(u.days||{}).length}</td><td>${Object.keys(g.conq||{}).length}</td><td>${esc(u.region||"–")}</td><td>${esc(day(u.updatedAt)||"–")}</td></tr>`; }).join("");
   return `<div class="ds">
     <div class="eyebrow">${T("dsSys")}</div>
     <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
@@ -2593,7 +2612,7 @@ function devStatsHtml(){
     <div class="eyebrow">${T("dsPlayers",{n:U.length})}</div>
     <div class="ds-scroll"><table class="ds-t"><tr><th>${T("nick")}</th><th>Lv</th><th>${T("gold")}</th><th>${T("dsW")}</th><th>${T("dsD")}</th><th>${T("dsC")}</th><th>${T("dsRegion")}</th><th>${T("dsLast")}</th></tr>${rows}</table></div>
     <div class="eyebrow">${T("dsFeedback",{n:D.fb?D.fb.length:"–"})}</div>
-    ${D.fb&&D.fb.length?`<div class="fb-list">${D.fb.map(f=>`<div class="fb-item"><div class="muted sm-t">${esc((f.at||"").slice(0,16).replace("T"," "))} · ${esc(f.type||"")} · ${esc(f.nick||f.name||"–")} · Lv ${f.lv||"?"} · ${esc(f.lang||"")}/${esc(f.region||"")}</div><div>${esc(f.msg||"")}</div>${f.contact?`<div class="muted sm-t">✉ ${esc(f.contact)}</div>`:""}</div>`).join("")}</div>`:`<p class="muted sm-t">${D.fb===null?T("dsDenied"):"–"}</p>`}
+    ${D.fb&&D.fb.length?`<div class="fb-list">${D.fb.map(f=>`<div class="fb-item"><div class="muted sm-t">${esc(String(f.at||"").slice(0,16).replace("T"," "))} · ${esc(f.type||"")} · ${esc(f.nick||f.name||"–")} · Lv ${num(f.lv)} · ${esc(f.lang||"")}/${esc(f.region||"")}</div><div>${esc(f.msg||"")}</div>${f.contact?`<div class="muted sm-t">✉ ${esc(f.contact)}</div>`:""}</div>`).join("")}</div>`:`<p class="muted sm-t">${D.fb===null?T("dsDenied"):"–"}</p>`}
     <p class="muted sm-t">${T("dsNote",{t:D.at.toLocaleTimeString()})}</p>
     <button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button></div>`;
 }
@@ -2714,7 +2733,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.87";
+const APP_VERSION="2026.10.88";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3047,7 +3066,7 @@ function ieResultHtml(){
 let IE_TOP=null;
 async function ieLoadTop(){
   if(!CLOUD.user||!CLOUD.fb) return; const {fsM,db}=CLOUD.fb, wk=monthKey();
-  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"ieltsMonths",wk,"scores"), fsM.orderBy("band","desc"), fsM.limit(50))); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()})); IE_TOP={week:wk, rows}; }catch(e){ IE_TOP={week:wk, rows:[], err:true}; }
+  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"ieltsMonths",wk,"scores"), fsM.orderBy("band","desc"), fsM.limit(50))); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...safeDoc(d.data())})); IE_TOP={week:wk, rows}; }catch(e){ IE_TOP={week:wk, rows:[], err:true}; }
   render();
 }
 function ieLobby(){
@@ -3084,13 +3103,16 @@ async function sendFeedback(){
   if(!msg) return toast(T("fbEmpty"));
   try{ const last=+localStorage.getItem("che-pro-fb")||0; if(Date.now()-last<60e3) return toast(T("fbWait")); localStorage.setItem("che-pro-fb",String(Date.now())); }catch(e){}
   const g=game(), d={type:S.fbType||"idea", msg:msg.slice(0,1000), contact, nick:g.nick||"", name:(CLOUD.user&&CLOUD.user.displayName)||"", lv:g.lv, lang:LANG, level:LEVEL, region:regionKey(), uid:(CLOUD.user&&CLOUD.user.uid)||"", ua:navigator.userAgent.slice(0,120), at:new Date().toISOString()};
-  if(FEEDBACK_URL){ try{ fetch(FEEDBACK_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)}); }catch(e){} }
-  if(CLOUD.fb){ try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"feedback",Date.now()+"-"+Math.random().toString(36).slice(2,8)), d); }catch(e){ console.warn("feedback",e&&e.code); } }
+  if(FEEDBACK_URL){ try{ fetch(FEEDBACK_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)}).catch(()=>{}); }catch(e){} }
+  // the Firestore copy is the one we can confirm: keep the draft unless it was really saved
+  let ok=false;
+  if(CLOUD.fb){ try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"feedback",Date.now()+"-"+Math.random().toString(36).slice(2,8)), d); ok=true; }catch(e){ console.warn("feedback",e&&e.code); } }
+  if(!ok){ S.fbDraft=msg; S.fbContactV=contact; try{ localStorage.removeItem("che-pro-fb"); }catch(e){} toast(T("fbFail")); return render(); }
   S.fbDraft=""; S.fbContactV=""; toast(T("fbThanks")); render();
 }
 async function devLoadFeedback(){
   if(!CLOUD.fb) return []; const {fsM,db}=CLOUD.fb;
-  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"feedback"), fsM.orderBy("at","desc"), fsM.limit(100))); const rows=[]; snap.forEach(d=>rows.push(d.data())); return rows; }catch(e){ return null; }
+  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"feedback"), fsM.orderBy("at","desc"), fsM.limit(100))); const rows=[]; snap.forEach(d=>rows.push(safeDoc(d.data()))); return rows; }catch(e){ return null; }
 }
 
 /* ---------- events ---------- */
@@ -3287,11 +3309,14 @@ const wScore=v=>(v.correct||0)+(v.wrong||0)+(v.lookups||0);
 const dScore=v=>(v.preDone?1:0)+(v.read?1:0)+(v.postDone?1:0)+Object.keys(v.postBy||{}).length;
 function mergeDay(a,b){ if(!a) return b; if(!b) return a; const base=dScore(b)>dScore(a)?b:a, o=base===a?b:a;
   const lb={...(o.lookedUpBy||{})}; for(const [k,v] of Object.entries(base.lookedUpBy||{})) lb[k]=[...new Set([...(lb[k]||[]),...v])];
-  return {...base, lookedUp:[...new Set([...(base.lookedUp||[]),...(o.lookedUp||[])])], lookedUpBy:lb, postBy:{...(o.postBy||{}),...(base.postBy||{})}, bonus:!!(a.bonus||b.bonus)}; }
+  // each step is kept if either device finished it (done flags are OR-ed, the score goes with whichever device did that step)
+  const pre=base.preDone?base:o.preDone?o:base, post=base.postDone?base:o.postDone?o:base;
+  return {...base, preDone:!!(a.preDone||b.preDone), preScore:pre.preScore, preTotal:pre.preTotal, postDone:!!(a.postDone||b.postDone), postScore:post.postScore, postTotal:post.postTotal,
+    read:base.read||o.read||null, lookedUp:[...new Set([...(base.lookedUp||[]),...(o.lookedUp||[])])], lookedUpBy:lb, postBy:{...(o.postBy||{}),...(base.postBy||{})}, bonus:!!(a.bonus||b.bonus)}; }
 function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
-  return {...G_DEFAULT, ...base, inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
+  return {...newGame(base), inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
     taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null}; }
 /* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
    tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
@@ -3324,7 +3349,7 @@ async function cloudPull(){
     if(delta){ for(const [k,v] of cw){ const l=S.words.get(k); if(l&&wScore(l)>wScore(v)) CLOUD.dirtyWords.add(k); } }
     else for(const [k,v] of S.words) if(!tomb.has(k)&&(!cw.has(k)||wScore(v)>wScore(cw.get(k)))) CLOUD.dirtyWords.add(k);
     for(const [k,v] of Object.entries(cloud.days||{})) S.days.set(k, mergeDay(S.days.get(k),v));
-    S.game=mergeGame(S.game, cloud.game?{...G_DEFAULT,...cloud.game}:null) || S.game;
+    S.game=mergeGame(S.game, cloud.game?newGame(cloud.game):null) || S.game;
     CLOUD.dirtyMain=true; lsSave();
     await cloudFlush();
     wsyncSet({at:started, full:delta?info.full:started});
@@ -3395,7 +3420,7 @@ async function lbLoad(){
     const rd=f==="read", fld=rd?"n":f, col=rd?fsM.collection(db,"readMonths",monthKey(),"u"):fsM.collection(db,"leaderboard");
     if(rd) await rdPush(); else await lbPush();
     const q=fsM.query(col, fsM.orderBy(fld,"desc"), fsM.limit(50));
-    const snap=await fsM.getDocs(q); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()}));
+    const snap=await fsM.getDocs(q); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...safeDoc(d.data())}));
     let me=null; const mine=rows.findIndex(r=>r.id===CLOUD.user.uid), myV=rd?readsThisMonth():lbEntry()[f];
     if(mine>=0) me=mine+1;
     else if(game().nick&&myV>0){ const c=await fsM.getCountFromServer(fsM.query(col, fsM.where(fld,">",myV))); me=c.data().count+1; }
@@ -3527,7 +3552,7 @@ function coListen(code){
   S.co.unsub=fsM.onSnapshot(fsM.doc(db,"rooms",code), snap=>{
     if(!S.co||S.co.code!==code) return;
     if(!snap.exists()){ coStop(); S.co=null; toast(T("coLeftRoom")); render(); return; }
-    S.co.room=snap.data(); coCheckEnd(); coTick(); if(S.view==="play"&&S.playMode==="coop") coRender();
+    S.co.room=safeDoc(snap.data()); coCheckEnd(); coTick(); if(S.view==="play"&&S.playMode==="coop") coRender();
   }, ()=>{});
 }
 function coStop(){ if(S.co&&S.co.unsub){ S.co.unsub(); } clearInterval(S.coTimer); }
@@ -3676,8 +3701,8 @@ function pgListen(code){
   me.unsubs.push(fsM.onSnapshot(pgRef(code), snap=>{
     if(S.pg!==me) return;
     if(!snap.exists()){ pgStop(); S.pg=null; toast(T("coLeftRoom")); return pgRender(); }
-    me.party=snap.data();
-    for(const u of Object.keys(me.party.players||{})) if(!me.subbed[u]){ me.subbed[u]=1; me.unsubs.push(fsM.onSnapshot(pgRef(code,"p",u), s=>{ if(S.pg!==me) return; me.ps[u]=s.exists()?s.data():{}; if(u===pgMe()) pgGifts(); pgRender(); }, ()=>{})); }
+    me.party=safeDoc(snap.data());
+    for(const u of Object.keys(me.party.players||{})) if(!me.subbed[u]){ me.subbed[u]=1; me.unsubs.push(fsM.onSnapshot(pgRef(code,"p",u), s=>{ if(S.pg!==me) return; me.ps[u]=s.exists()?safeDoc(s.data()):{}; if(u===pgMe()) pgGifts(); pgRender(); }, ()=>{})); }
     if(me.party.state==="play"){ pgLoadWords(); if(me.party.game==="bomb") pgLoadSyl(); if(me.party.game==="quiz") pgLoadQuiz(); }
     if(me.party.state==="done") pgFinish();
     pgTickStart(); pgRender();
@@ -4221,7 +4246,8 @@ Object.assign(STR.es,{upNew:"Hay una versión nueva",upBtn:"Actualizar"});
 Object.assign(STR.ja,{upNew:"新しいバージョンがあります",upBtn:"今すぐ更新"});
 Object.assign(STR.ko,{upNew:"새 버전이 있어요",upBtn:"지금 업데이트"});
 /* ----- auto update check: compare the deployed APP_VERSION with this one ----- */
-async function upCheck(){ try{ const t=await (await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"})).text(); const m=t.match(/const APP_VERSION="([^"]+)"/); if(m&&m[1]!==APP_VERSION&&!document.getElementById("upBar")){ const b=document.createElement("div"); b.id="upBar"; b.className="up-bar"; b.innerHTML=`<span>🔄 ${T("upNew")} (${esc(m[1])})</span><button class="btn sm" onclick="location.replace(location.pathname+'?v='+Date.now())">${T("upBtn")}</button>`; document.body.append(b); } }catch(e){} }
+/* new-version check reads the tiny version.json (kept in sync with APP_VERSION on every commit) instead of the whole 740 KB page */
+async function upCheck(){ try{ const j=await (await fetch("version.json?t="+Date.now(),{cache:"no-store"})).json(); const m=j&&typeof j.v==="string"?[null,j.v.slice(0,20)]:null; if(m&&m[1]!==APP_VERSION&&!document.getElementById("upBar")){ const b=document.createElement("div"); b.id="upBar"; b.className="up-bar"; b.innerHTML=`<span>🔄 ${T("upNew")} (${esc(m[1])})</span><button class="btn sm" onclick="location.replace(location.pathname+'?v='+Date.now())">${T("upBtn")}</button>`; document.body.append(b); } }catch(e){} }
 setTimeout(upCheck,4000); setInterval(upCheck,5*60e3); document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") upCheck(); });
 Object.assign(STR.zh,{"ieRecOn": "聽力已改用高品質錄音（英國、愛爾蘭、澳洲口音的神經語音），每支手機聽到的都一樣自然。", "ieRecFallback": "沒有錄音時使用的手機聲音", "ieVoiceHint": "iPhone 的網頁只能用手機內建的聲音，你另外下載的「增強版」聲音網頁用不到（Apple 的限制）。有錄音的題目會自動播放高品質錄音；只有還沒錄好的才會用這裡選的聲音，建議選 Moira 或 Daniel。電腦版 Chrome 可選「Google UK English」。"});
 Object.assign(STR.en,{"ieRecOn": "Listening now uses high-quality recordings (neural voices with British, Irish and Australian accents), so it sounds natural on every phone.", "ieRecFallback": "Phone voice used when there's no recording", "ieVoiceHint": "On iPhone, web pages can only use the built-in voices; enhanced voices you download aren't available to websites (an Apple limit). Tests with recordings play them automatically; only tests not recorded yet use the voice chosen here. Moira or Daniel sound best. On a computer, Chrome offers “Google UK English”."});
@@ -4768,10 +4794,11 @@ Object.assign(STR.hi,{errTitle:"यह पेज खोलते समय स�
 Object.assign(STR.es,{errTitle:"Hubo un problema al abrir esta página",deLoad:"Ver registro de errores",deTitle:"Últimos {n} errores",deUsers:"{n} jugadores",deNone:"No hay errores 🎉"});
 Object.assign(STR.ja,{errTitle:"このページを開くときに問題が起きました",deLoad:"エラー記録を見る",deTitle:"最新 {n} 件のエラー",deUsers:"{n} 人",deNone:"エラーはありません 🎉"});
 Object.assign(STR.ko,{errTitle:"이 페이지를 여는 중 문제가 생겼어요",deLoad:"오류 기록 보기",deTitle:"최근 오류 {n}건",deUsers:"{n}명",deNone:"오류 기록이 없어요 🎉"});
+Object.assign(STR.zh,{fbFail:"送出失敗，內容已保留，請稍後再試"}); Object.assign(STR.en,{fbFail:"Couldn't send. Your message is kept, please try again later"}); Object.assign(STR.hi,{fbFail:"भेजा नहीं जा सका। आपका संदेश सुरक्षित है, बाद में फिर कोशिश करें"}); Object.assign(STR.es,{fbFail:"No se pudo enviar. Tu mensaje se ha guardado, inténtalo más tarde"}); Object.assign(STR.ja,{fbFail:"送信できませんでした。内容は保存されています。後でもう一度お試しください"}); Object.assign(STR.ko,{fbFail:"보내지 못했어요. 내용은 저장되어 있으니 잠시 후 다시 시도해 주세요"}); 
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
-  const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game={...G_DEFAULT, ...v}; }
+  const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game=newGame(v); }
   S.ready.personal=true; render(); onbMaybe();
   cloudInit();
   try{

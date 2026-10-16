@@ -46,8 +46,12 @@ export function vapidAuth(endpoint, key) {
   const sig = crypto.sign("sha256", Buffer.from(h + "." + c), { key, dsaEncoding: "ieee-p1363" });
   return `vapid t=${h}.${c}.${b64u(sig)}, k=${VAPID_PUBLIC}`;
 }
+// only real browser push services are contacted (anyone can write a subscription, so never POST to arbitrary hosts)
+const PUSH_HOSTS = [/^fcm\.googleapis\.com$/, /^android\.googleapis\.com$/, /(^|\.)push\.apple\.com$/, /^updates\.push\.services\.mozilla\.com$/, /(^|\.)notify\.windows\.com$/, /(^|\.)push\.services\.mozilla\.com$/];
+export const pushHostOk = ep => { try { const u = new URL(ep); return u.protocol === "https:" && PUSH_HOSTS.some(r => r.test(u.hostname)); } catch { return false; } };
 async function sendPush(sub, msg, key) {
   const r = await fetch(sub.endpoint, {
+    signal: AbortSignal.timeout(10000), redirect: "manual",
     method: "POST",
     headers: { "Content-Encoding": "aes128gcm", "Content-Type": "application/octet-stream", TTL: "14400", Urgency: "normal", Authorization: vapidAuth(sub.endpoint, key) },
     body: encrypt(JSON.stringify(msg), sub.p256dh, sub.auth),
@@ -77,12 +81,21 @@ async function listSubs(tok) {
   } while (page);
   return out;
 }
+// returns true only when Firestore confirmed the write (retries temporary errors)
 async function patch(tok, name, fields) {
   const q = Object.keys(fields).map(k => "updateMask.fieldPaths=" + k).join("&");
   const body = { fields: Object.fromEntries(Object.entries(fields).map(([k, v]) => [k, { stringValue: String(v) }])) };
-  await fetch(`https://firestore.googleapis.com/v1/${name}?${q}&currentDocument.exists=true`, { method: "PATCH", headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  for (let i = 0; i < 3; i++) {
+    try {
+      const r = await fetch(`https://firestore.googleapis.com/v1/${name}?${q}&currentDocument.exists=true`, { method: "PATCH", signal: AbortSignal.timeout(10000), headers: { Authorization: "Bearer " + tok, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      if (r.ok) return true;
+      if (r.status < 500 && r.status !== 429) return false;
+    } catch {}
+    await new Promise(res => setTimeout(res, 1000 * (i + 1)));
+  }
+  return false;
 }
-const del = (tok, name) => fetch(`https://firestore.googleapis.com/v1/${name}`, { method: "DELETE", headers: { Authorization: "Bearer " + tok } });
+const del = (tok, name) => fetch(`https://firestore.googleapis.com/v1/${name}`, { method: "DELETE", signal: AbortSignal.timeout(10000), headers: { Authorization: "Bearer " + tok } }).catch(() => null);
 
 /* ---------- daily stats for the app's developer panel (config/pushStats) ---------- */
 const toV = v => typeof v === "number" ? { integerValue: String(Math.round(v)) } : typeof v === "string" ? { stringValue: v }
@@ -132,7 +145,7 @@ export function plan(s, news, now = new Date()) {
 
 async function main() {
   const saRaw = process.env.FIREBASE_SA, vpriv = process.env.VAPID_PRIVATE;
-  if (!saRaw || !vpriv) { console.log("::warning::FIREBASE_SA or VAPID_PRIVATE missing"); console.log("FIREBASE_SA or VAPID_PRIVATE secret is not set yet — nothing sent."); return; }
+  if (!saRaw || !vpriv) { console.log("::error::FIREBASE_SA or VAPID_PRIVATE secret is missing — nothing sent."); process.exit(1); }
   const sa = JSON.parse(saRaw), key = vapidKey(vpriv.trim());
   let news = null;
   try { const j = await (await fetch(NEWS_INDEX + "?t=" + Date.now())).json();
@@ -142,7 +155,7 @@ async function main() {
   if (process.env.PUSH_TEST === "true") { // manual test: only phones that turned notifications on in the last 3 hours
     let ok = 0, bad = [];
     for (const s of subs) {
-      if (!s.endpoint || Date.now() - Number(s.ts || 0) > 3 * 3600e3) continue;
+      if (!s.endpoint || !pushHostOk(s.endpoint) || Date.now() - Number(s.ts || 0) > 3 * 3600e3) continue;
       const [title, body] = (s.lang === "zh" ? MSG.test.zh : MSG.test.en);
       try { const st = await sendPush(s, { title, body, tag: "test", url: "./" }, key); if (st >= 200 && st < 300) ok++; else bad.push(st + "@" + new URL(s.endpoint).host); }
       catch (e) { bad.push(e.message); }
@@ -151,18 +164,26 @@ async function main() {
     await saveStats(tok, subs.length, { test: ok, fail: bad.length });
     console.log(line); console.log("::notice::" + line); return;
   }
-  let sent = { am: 0, pm: 0 }, gone = 0, fail = 0;
+  let sent = { am: 0, pm: 0 }, gone = 0, fail = 0, tried = 0, bad = 0;
+  const t0 = Date.now();
   for (const s of subs) {
     if (!s.endpoint || !s.p256dh || !s.auth || s.on === false || s.on === "false") continue;
+    if (!pushHostOk(s.endpoint) || String(s.p256dh).length > 200 || String(s.auth).length > 60) { await del(tok, s.name); bad++; continue; }
+    if (Date.now() - t0 > 8 * 60e3) { console.log("::warning::time budget reached, the rest will be sent next hour"); break; }
     const p = plan(s, news); if (!p) continue;
+    // claim first: mark this notification as sent before sending, so a failed write can never cause a duplicate
+    if (!(await patch(tok, s.name, p.set))) { fail++; console.log("claim failed", s.name.split("/").pop()); continue; }
+    tried++;
     try {
       const st = await sendPush(s, p.msg, key);
       if (st === 404 || st === 410) { await del(tok, s.name); gone++; continue; }
-      if (st >= 200 && st < 300) { await patch(tok, s.name, p.set); sent[p.kind]++; } else { fail++; console.log("push", st, new URL(s.endpoint).host); }
+      if (st >= 200 && st < 300) sent[p.kind]++; else { fail++; console.log("push", st, new URL(s.endpoint).host); }
     } catch (e) { fail++; console.log("push error", e.message); }
   }
+  if (bad) console.log(`removed ${bad} subscriptions with unknown push hosts`);
   await saveStats(tok, subs.length - gone, { am: sent.am, pm: sent.pm, gone, fail });
   console.log(`::notice::subscribers ${subs.length} · morning ${sent.am} · evening ${sent.pm} · expired ${gone} · failed ${fail}`);
   console.log(`subscribers ${subs.length} · morning ${sent.am} · evening ${sent.pm} · expired ${gone} · failed ${fail} · latest news ${news ? news.date : "none"}`);
+  if (tried >= 3 && sent.am + sent.pm === 0) { console.log("::error::every notification failed this run"); process.exit(1); }
 }
 if (import.meta.url === `file://${process.argv[1]}`) main().catch(e => { console.error(e); process.exit(1); });
