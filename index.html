@@ -2710,7 +2710,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.84";
+const APP_VERSION="2026.10.85";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4638,15 +4638,19 @@ Object.assign(STR.ko,{genTitle:"캐릭터 선택", genSub:"마음에 드는 모�
 /* ----- hero pictures (assets/art/hero-<m|f>-<pose>.webp); the equipped weapon is drawn in the hand ----- */
 const HERO_FILES=new Set(["f-cloth-bow","f-cloth-cast","f-cloth-hurt","f-cloth-idle","f-cloth-slash","f-cloth-smash","f-cloth-thrust","f-cloth-win","f-metal1-bow","f-metal1-cast","f-metal1-hurt","f-metal1-idle","f-metal1-slash","f-metal1-smash","f-metal1-thrust","f-metal1-win","f-metal2-bow","f-metal2-cast","f-metal2-hurt","f-metal2-idle","f-metal2-slash","f-metal2-smash","f-metal2-thrust","f-metal2-win","f-metal3-bow","f-metal3-cast","f-metal3-hurt","f-metal3-idle","f-metal3-slash","f-metal3-smash","f-metal3-thrust","f-metal3-win","f-metal4-bow","f-metal4-cast","f-metal4-hurt","f-metal4-idle","f-metal4-slash","f-metal4-smash","f-metal4-thrust","f-metal4-win","f-wood1-bow","f-wood1-cast","f-wood1-hurt","f-wood1-idle","f-wood1-slash","f-wood1-smash","f-wood1-thrust","f-wood1-win","f-wood2-bow","f-wood2-cast","f-wood2-hurt","f-wood2-idle","f-wood2-slash","f-wood2-smash","f-wood2-thrust","f-wood2-win","f-wood3-bow","f-wood3-cast","f-wood3-hurt","f-wood3-idle","f-wood3-slash","f-wood3-smash","f-wood3-thrust","f-wood3-win","f-wood4-hurt","f-wood4-idle","f-wood4-slash","f-wood4-win","m-cloth-bow","m-cloth-cast","m-cloth-hurt","m-cloth-idle","m-cloth-slash","m-cloth-smash","m-cloth-thrust","m-cloth-win","m-metal1-bow","m-metal1-cast","m-metal1-hurt","m-metal1-idle","m-metal1-slash","m-metal1-smash","m-metal1-thrust","m-metal1-win","m-metal2-bow","m-metal2-cast","m-metal2-hurt","m-metal2-idle","m-metal2-slash","m-metal2-smash","m-metal2-thrust","m-metal2-win","m-metal3-bow","m-metal3-cast","m-metal3-hurt","m-metal3-idle","m-metal3-slash","m-metal3-smash","m-metal3-thrust","m-metal3-win","m-metal4-bow","m-metal4-cast","m-metal4-hurt","m-metal4-idle","m-metal4-slash","m-metal4-smash","m-metal4-thrust","m-metal4-win","m-wood1-bow","m-wood1-cast","m-wood1-hurt","m-wood1-idle","m-wood1-slash","m-wood1-smash","m-wood1-thrust","m-wood1-win","m-wood2-bow","m-wood2-cast","m-wood2-hurt","m-wood2-idle","m-wood2-slash","m-wood2-smash","m-wood2-thrust","m-wood2-win","m-wood3-bow","m-wood3-cast","m-wood3-hurt","m-wood3-idle","m-wood3-slash","m-wood3-smash","m-wood3-thrust","m-wood3-win","m-wood4-bow","m-wood4-cast","m-wood4-hurt","m-wood4-idle","m-wood4-slash","m-wood4-smash","m-wood4-thrust","m-wood4-win"]); /*HERO_FILES*/
 /* where the gripping hand is in each pose (fraction of the 512 canvas) and which way the weapon points (degrees, 0 = right, -90 = up) */
-const HERO_GRIP={m:{idle:[.63,.71,-75], slash:[.40,.25,-115], thrust:[.83,.63,-4], smash:[.45,.15,-95], bow:[.82,.53,90], cast:[.22,.41,-88]},
-                 f:{idle:[.64,.67,-75], slash:[.40,.27,-115], thrust:[.78,.63,-4], smash:[.45,.15,-95], bow:[.78,.50,90], cast:[.30,.28,-88]}};
+/* waiting pose depends on the weapon: hold (sword, bow) · plant (staff, trident) · shoulder (hammer). Used once the art exists. */
+const KIND_IDLE={sword:"hold",dagger:"hold",curved:"hold",bow:"hold",staff:"plant",orbstaff:"plant",trident:"plant",spear:"plant",hammer:"shoulder",warhammer:"shoulder",club:"shoulder"};
+const HERO_GRIP={m:{"idle-hold":[.64,.66,100],"idle-plant":[.66,.42,-90],"idle-shoulder":[.58,.30,-150],idle:[.63,.71,-75], slash:[.40,.25,-115], thrust:[.83,.63,-4], smash:[.45,.15,-95], bow:[.82,.53,90], cast:[.22,.41,-88]},
+                 f:{"idle-hold":[.64,.64,100],"idle-plant":[.66,.40,-90],"idle-shoulder":[.58,.30,-150],idle:[.64,.67,-75], slash:[.40,.27,-115], thrust:[.78,.63,-4], smash:[.45,.15,-95], bow:[.78,.50,90], cast:[.30,.28,-88]}};
 /* where the hand holds each weapon picture (fraction of the item image, drawn tip up-right) and how big it is */
 const KIND_GRIP={sword:[.24,.76,.42], staff:[.40,.62,.52], orbstaff:[.40,.62,.55], trident:[.45,.56,.58], bow:[.5,.5,.46], hammer:[.24,.76,.42], warhammer:[.24,.76,.46]};
 function heroOutfit(gen){ const a=game().armor&&ITEMS[game().armor], k=a?`${a.el}${a.tier+1}`:"cloth"; return HERO_FILES.has(`${gen}-${k}-idle`)?k:"cloth"; }
 function heroAct(w){ return w?(KIND_ACT[WKIND[w.el][w.tier]]||"slash"):"slash"; }
 function heroArt(pose, gOverride){
   const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
-  const w=!gOverride&&g.weapon&&ITEMS[g.weapon], act=pose==="attack"?heroAct(w):pose, out=gOverride?"cloth":heroOutfit(gen);
+  const w=!gOverride&&g.weapon&&ITEMS[g.weapon], out=gOverride?"cloth":heroOutfit(gen);
+  let act=pose==="attack"?heroAct(w):pose;
+  if(pose==="idle"&&w){ const v="idle-"+(KIND_IDLE[WKIND[w.el][w.tier]]||"hold"); if(HERO_FILES.has(`${gen}-${out}-${v}`)) act=v; }
   const key=HERO_FILES.has(`${gen}-${out}-${act}`)?`${gen}-${out}-${act}`:`${gen}-cloth-${act}`;
   const grip=HERO_GRIP[gen][act]; let wpn="";
   if(w&&grip){ const [x,y,d]=grip, kind=WKIND[w.el][w.tier], [gx,gy,L]=KIND_GRIP[kind]||[.25,.75,.45], pk=picOfItem(w);
