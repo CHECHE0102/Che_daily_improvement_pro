@@ -773,6 +773,7 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 .fighter.hero.hurt.hs2 .hero-svg{animation-name:hurt2}.fighter.hero.hurt.hs3 .hero-svg,.fighter.hero.hurt.hs4 .hero-svg{animation-name:hurt3}
 @media (prefers-reduced-motion:reduce){.hit-burst,.ko-flash{display:none}}
 .err-card{border:1.5px solid var(--bad);display:flex;flex-direction:column;gap:6px}.err-card details summary{cursor:pointer}.err-pre{margin-top:6px!important;white-space:pre-wrap;word-break:break-all;font-size:11px;margin:0;background:#0003;padding:8px;border-radius:8px;max-height:260px;overflow:auto}
+.dev-errs{display:flex;flex-direction:column;gap:6px;border:1px dashed var(--line);border-radius:12px;padding:10px}.dev-err summary{font-size:13px;cursor:pointer;word-break:break-word}
 </style>
 
 </head>
@@ -1163,9 +1164,17 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 /* ---------- rendering ---------- */
 function setTab(t){ S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); }catch(e){ console.error(e); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><p class="muted sm-t" style="margin:0">${T("errSub")}</p><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button><details ${DEV?"open":""}><summary class="muted sm-t">${T("errMore")}</summary><pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre></details></section></div>`; } }
-window.addEventListener("error",e=>{ try{ if(DEV) toast("⚠️ "+(e.message||"error")+" @"+String(e.lineno||"")); }catch(_){} });
-window.addEventListener("unhandledrejection",e=>{ try{ if(DEV) toast("⚠️ "+String(e.reason&&e.reason.message||e.reason).slice(0,140)); }catch(_){} });
+function render(){ try{ renderInner(); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
+/* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
+const ERR_SENT=new Set();
+function errReport(e,where){ try{
+  const msg=String(e&&e.message||e||"error").slice(0,300), key=msg+"|"+where; if(ERR_SENT.has(key)) return; ERR_SENT.add(key);
+  let n=0; try{ const r=JSON.parse(localStorage.getItem("che-pro-errn")||"{}"); n=r.d===today()?r.n:0; if(n>=10) return; localStorage.setItem("che-pro-errn",JSON.stringify({d:today(),n:n+1})); }catch(_){}
+  if(!CLOUD.fb||DEV) return; const {fsM,db}=CLOUD.fb;
+  fsM.setDoc(fsM.doc(db,"errors",Date.now()+"-"+Math.random().toString(36).slice(2,8)),{msg, stack:String(e&&e.stack||"").slice(0,1500), where:String(where||"").slice(0,80), v:APP_VERSION, ua:navigator.userAgent.slice(0,160), uid:(CLOUD.user&&CLOUD.user.uid)||"", at:Date.now()}).catch(()=>{});
+}catch(_){} }
+window.addEventListener("error",e=>{ try{ errReport(e.error||e.message,"global:"+(e.lineno||"")); if(DEV) toast("⚠️ "+(e.message||"error")+" @"+String(e.lineno||"")); }catch(_){} });
+window.addEventListener("unhandledrejection",e=>{ try{ const r=e.reason; if(r&&/permission|network|offline|unavailable|quota/i.test(String(r.code||r.message||""))) return; errReport(r,"promise"); if(DEV) toast("⚠️ "+String(r&&r.message||r).slice(0,140)); }catch(_){} });
 function renderInner(){
   document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"));
   if(typeof readStopIfLeft==="function") readStopIfLeft(); setTimeout(()=>{ if(typeof pgLockSync==="function") pgLockSync(); },0);
@@ -2699,9 +2708,10 @@ function devPanel(){
     ${devSupHtml()}
     ${devBadgeHtml()}
     ${devStatsHtml()}
+    ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.82";
+const APP_VERSION="2026.10.83";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3163,6 +3173,7 @@ document.addEventListener("click", e=>{
   if(a==="maint") return maintSet(t.dataset.k==="1");
   if(a==="supgive") return supGive();
   if(a==="devstats") return devLoadStats();
+  if(a==="deverr") return devLoadErrors();
   if(a==="dev") return devAct(t.dataset.k);
   if(a==="rev") return startQuiz("rev");
   if(a==="goluck"){ S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
@@ -4715,6 +4726,31 @@ Object.assign(STR.hi,{errTitle:"यह पेज अभी नहीं खु�
 Object.assign(STR.es,{errTitle:"No se pudo abrir esta página",errSub:"Puedes seguir usando las demás pestañas. Si vuelve a pasar, envía al desarrollador una captura de los detalles del error.",errBack:"Volver a Hoy",errMore:"Detalles del error"});
 Object.assign(STR.ja,{errTitle:"このページを開けませんでした",errSub:"ほかのタブはそのまま使えます。何度も起きる場合は、下のエラー詳細のスクリーンショットを開発者に送ってください。",errBack:"今日に戻る",errMore:"エラーの詳細"});
 Object.assign(STR.ko,{errTitle:"이 페이지를 열 수 없어요",errSub:"다른 탭은 계속 사용할 수 있어요. 계속 그러면 아래 오류 정보를 캡처해서 개발자에게 보내 주세요.",errBack:"오늘로 돌아가기",errMore:"오류 정보"});
+async function devLoadErrors(){
+  S.devErr={loading:true}; render();
+  if(!CLOUD.fb||!isAdminUser()){ S.devErr={err:T("mtNeedAdmin")}; return render(); }
+  const {fsM,db}=CLOUD.fb;
+  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"errors"), fsM.orderBy("at","desc"), fsM.limit(200))); const rows=[]; snap.forEach(d=>rows.push(d.data()));
+    const g={}; for(const r of rows){ const k=r.msg+"|"+r.where; const x=g[k]||(g[k]={msg:r.msg,where:r.where,stack:r.stack,n:0,users:new Set(),last:0,v:r.v}); x.n++; if(r.uid) x.users.add(r.uid); if(r.at>x.last){ x.last=r.at; x.v=r.v; x.stack=r.stack; } }
+    S.devErr={rows:Object.values(g).sort((a,b)=>b.last-a.last), total:rows.length}; }
+  catch(e){ S.devErr={err:String(e&&e.code||e)}; }
+  render();
+}
+function devErrHtml(){
+  const E=S.devErr;
+  if(!E) return `<button class="btn ghost" data-act="deverr">🐞 ${T("deLoad")}</button>`;
+  if(E.loading) return `<p class="muted">${T("loading")}</p>`;
+  if(E.err) return `<p class="muted sm-t">🐞 ${esc(E.err)}</p><button class="btn ghost sm" data-act="deverr">${T("deLoad")}</button>`;
+  const ago=t=>{ const m=Math.round((Date.now()-t)/60000); return m<60?m+"m":m<1440?Math.round(m/60)+"h":Math.round(m/1440)+"d"; };
+  return `<div class="dev-errs"><b>🐞 ${T("deTitle",{n:E.total})}</b>${E.rows.length?E.rows.map(r=>`<details class="dev-err"><summary><b>×${r.n}</b> ${esc(r.msg)} <span class="muted">· ${esc(r.where)} · ${T("deUsers",{n:r.users.size})} · ${ago(r.last)} · v${esc(r.v||"")}</span></summary><pre class="err-pre">${esc((r.stack||"").split("\n").slice(0,6).join("\n"))}</pre></details>`).join(""):`<p class="muted sm-t">${T("deNone")}</p>`}
+    <button class="btn ghost sm" data-act="deverr">${T("dsReload")}</button></div>`;
+}
+Object.assign(STR.zh,{errTitle:"開啟這個頁面時出現問題",deLoad:"查看錯誤紀錄",deTitle:"最近 {n} 筆錯誤",deUsers:"{n} 位玩家",deNone:"目前沒有錯誤紀錄 🎉"});
+Object.assign(STR.en,{errTitle:"There was a problem opening this page",deLoad:"View error log",deTitle:"Latest {n} errors",deUsers:"{n} players",deNone:"No errors logged 🎉"});
+Object.assign(STR.hi,{errTitle:"यह पेज खोलते समय समस्या हुई",deLoad:"त्रुटि लॉग देखें",deTitle:"हाल की {n} त्रुटियाँ",deUsers:"{n} खिलाड़ी",deNone:"कोई त्रुटि नहीं 🎉"});
+Object.assign(STR.es,{errTitle:"Hubo un problema al abrir esta página",deLoad:"Ver registro de errores",deTitle:"Últimos {n} errores",deUsers:"{n} jugadores",deNone:"No hay errores 🎉"});
+Object.assign(STR.ja,{errTitle:"このページを開くときに問題が起きました",deLoad:"エラー記録を見る",deTitle:"最新 {n} 件のエラー",deUsers:"{n} 人",deNone:"エラーはありません 🎉"});
+Object.assign(STR.ko,{errTitle:"이 페이지를 여는 중 문제가 생겼어요",deLoad:"오류 기록 보기",deTitle:"최근 오류 {n}건",deUsers:"{n}명",deNone:"오류 기록이 없어요 🎉"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
