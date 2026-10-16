@@ -2570,7 +2570,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.59";
+const APP_VERSION="2026.10.60";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2720,7 +2720,7 @@ function untilReset(){ const now=new Date(), d=new Date(now); const add=((8-(now
 const IE_TABLE=[[39,9],[37,8.5],[35,8],[32,7.5],[30,7],[26,6.5],[23,6],[18,5.5],[16,5],[13,4.5],[10,4],[6,3.5],[4,3],[2,2.5],[1,2],[0,0]];
 function ieBand(c,t){ if(!t) return 0; const s=Math.round(c/t*40); for(const [m,b] of IE_TABLE) if(s>=m) return b; return 0; }
 const fmtBand=b=>Number(b).toFixed(1).replace(/\.0$/,".0");
-function ieState(){ const g=game(); g.ielts=g.ielts||{best:null,hist:[],badges:{},weeks:{}}; g.ielts.days=g.ielts.days||{}; return g.ielts; }
+function ieState(){ const g=game(); g.ielts=g.ielts||{best:null,hist:[],badges:{},weeks:{}}; g.ielts.days=g.ielts.days||{}; g.ielts.months=g.ielts.months||{}; return g.ielts; }
 function ieQuestions(t){ const out=[]; t.listening.forEach((p,pi)=>p.questions.forEach((q,qi)=>out.push({key:`L${pi}-${qi}`,sec:"L",part:pi,q}))); t.reading.questions.forEach((q,qi)=>out.push({key:`R-${qi}`,sec:"R",q})); return out; }
 const ieNorm=s=>String(s||"").toLowerCase().replace(/[€$£.,!?'"’]/g,"").replace(/\s+/g," ").trim();
 function ieCorrect(q,a){ if(a==null||a==="") return false; if(q.type==="gap") return q.a.some(x=>ieNorm(x)===ieNorm(a)); if(q.type==="mcq") return +a===q.a; return a===q.a; }
@@ -2853,13 +2853,14 @@ function ieSubmit(){
     st.hist=(st.hist||[]).concat({week:R.week,band:ob,l:lb,r:rb,date:today()}).slice(-120);
     if(!st.best||ob>st.best.band){ st.best={band:ob,week:R.week,date:today()}; res.newBest=true; }
     if(ob>=6){ const k=fmtBand(ob); st.badges[k]=(st.badges[k]||0)+1; res.badge=k; res.badgeN=st.badges[k]; }
-    if(ob>prevWeek) iePush(ob,lb,rb,R.week);
+    const mk=monthKey(), prevMonth=typeof st.months[mk]==="number"?st.months[mk]:-1; st.months[mk]=Math.max(prevMonth,ob); res.monthBest=st.months[mk];
+    if(ob>prevMonth) iePush(ob,lb,rb,mk);
   }
   g.ieltsRun=null; saveGame(); S.ieResult=res; S.ieReviewSec=0; render(); window.scrollTo(0,0);
 }
 async function iePush(band,l,r,week){
   if(DEV||!CLOUD.user||!CLOUD.fb) return; const g=game(); const name=(g.nick||CLOUD.user.displayName||"").slice(0,16); if(!name) return;
-  try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"ieltsWeeks",week,"scores",CLOUD.user.uid),{name, band, l, r, best:(ieState().best||{}).band||band, at:new Date().toISOString()}); }catch(e){ console.warn("ielts push",e&&e.code); }
+  try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"ieltsMonths",week,"scores",CLOUD.user.uid),{name, band, l, r, best:(ieState().best||{}).band||band, at:new Date().toISOString()}); }catch(e){ console.warn("ielts push",e&&e.code); }
 }
 /* badges: Band 6 bronze → 9 rainbow; repeated bands add stars */
 const BADGE_STYLE={"6.0":["#B87333","#E3A16B"],"6.5":["#8E99A3","#E3E8EC"],"7.0":["#C9A227","#FFE58A"],"7.5":["#1F9E74","#7FE0B8"],"8.0":["#2563C9","#8EC1FF"],"8.5":["#7B3FC4","#D3A8FF"],"9.0":["#E0457B","#FFD25A"]};
@@ -2899,19 +2900,19 @@ function ieResultHtml(){
 }
 let IE_TOP=null;
 async function ieLoadTop(){
-  if(!CLOUD.user||!CLOUD.fb) return; const {fsM,db}=CLOUD.fb, wk=isoWeek().id;
-  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"ieltsWeeks",wk,"scores"), fsM.orderBy("band","desc"), fsM.limit(50))); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()})); IE_TOP={week:wk, rows}; }catch(e){ IE_TOP={week:wk, rows:[], err:true}; }
+  if(!CLOUD.user||!CLOUD.fb) return; const {fsM,db}=CLOUD.fb, wk=monthKey();
+  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"ieltsMonths",wk,"scores"), fsM.orderBy("band","desc"), fsM.limit(50))); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...d.data()})); IE_TOP={week:wk, rows}; }catch(e){ IE_TOP={week:wk, rows:[], err:true}; }
   render();
 }
 function ieLobby(){
   if(!IE_TESTS){ ieLoad().then(()=>render()); return `<p class="muted">${T("loading")}</p>`; }
-  const st=ieState(), wk=isoWeek().id, t=weekTest(), done=st.days[today()], run=game().ieltsRun, u=untilTomorrow(), wb=st.weeks[wk];
+  const st=ieState(), wk=isoWeek().id, t=weekTest(), done=st.days[today()], run=game().ieltsRun, u=untilTomorrow(), wb=st.months[monthKey()];
   const runBtn=run?`<button class="btn" data-act="ieresume">${T("ieContinue",{m:Math.ceil(ieRunLeft()/60)})}</button>`:"";
   const ranked=run?"":done!==undefined?`<div class="ie-done">${T("ieDone",{b:typeof done==="number"?fmtBand(done):"–"})}</div>`:`<button class="btn" data-act="ieranked">${T("ieRanked")}</button><p class="muted sm-t">${T("ieRankedNote")}</p>`;
   return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>${T("ieTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("ieSub")}</p></div>${st.best&&st.best.band>=6?badgeSvg(fmtBand(st.best.band),0,52):""}</div>
       <div class="ie-week"><b>${T("ieWeek",{t:esc(t?t.title:"–")})}</b><span class="muted sm-t">${T("ieReset",{h:u.h,m:u.m})}</span></div>
       ${runBtn}${ranked}
-      ${typeof wb==="number"?`<div class="muted sm-t">${T("ieWeekBest",{b:fmtBand(wb)})}</div>`:""}
+      ${typeof wb==="number"?`<div class="muted sm-t">${T("ieMonthBest",{b:fmtBand(wb)})}</div>`:""}
       ${st.best?`<div class="muted sm-t">${T("ieBest",{b:fmtBand(st.best.band)})}</div>`:""}
       ${CLOUD.user&&game().nick?"":`<p class="muted sm-t">${T("ieLogin")}</p>`}</section>
     <section class="card"><b>${T("ieBadges")}</b>${badgeShelf()}</section>
@@ -3267,12 +3268,12 @@ function nickForm(){ const g=game(), w=nickWait(), auto=ccDetect(), f=g.flag||"a
 function viewRank(){
   if(!CLOUD.user) return `<div class="card empty"><p>${T("rkNeedLogin")}</p></div>${accountCard(false)}`;
   const g=game(), f=S.rkBy||"power";
-  if(f==="ielts"){ if(!IE_TOP||IE_TOP.week!==isoWeek().id){ IE_TOP={week:isoWeek().id,rows:[],loading:true}; setTimeout(ieLoadTop,0); } }
+  if(f==="ielts"){ if(!IE_TOP||IE_TOP.week!==monthKey()){ IE_TOP={week:monthKey(),rows:[],loading:true}; setTimeout(ieLoadTop,0); } }
   else if(!S.rk||S.rk.by!==f){ setTimeout(lbLoad,0); }
   if(f==="ielts"){ const tabsH=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
     const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
-    const u=untilReset();
-    return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieWeekReset",{d:u.d,h:u.h})}</div>
+    const u=untilMonthEnd();
+    return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieMonthReset",{d:u.d,h:u.h})}</div>
       ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
   const tabs=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
@@ -4232,6 +4233,12 @@ Object.assign(STR.hi,{rkRead:"पढ़ाई", rkArtsN:"{n}", rkReadNote:"{m} �
 Object.assign(STR.es,{rkRead:"Lectura", rkArtsN:"{n}", rkReadNote:"{m} · Artículos terminados este mes · Tú: {n} · se reinicia en {d} d {h} h", rkReadEmpty:"Aún no hay nadie este mes: ¡termina un artículo y ponte primero!"});
 Object.assign(STR.ja,{rkRead:"読書", rkArtsN:"{n}本", rkReadNote:"{m} · 今月読み終えた記事数· あなた：{n}本 · あと{d}日{h}時間でリセット", rkReadEmpty:"今月はまだ誰もいません。1本読み終えて1位を取ろう！"});
 Object.assign(STR.ko,{rkRead:"읽기", rkArtsN:"{n}편", rkReadNote:"{m} · 이번 달 끝까지 읽은 기사 수 · 나: {n}편 · {d}일 {h}시간 후 초기화", rkReadEmpty:"이번 달엔 아직 아무도 없어요. 한 편 읽고 1등 해 보세요!"});
+Object.assign(STR.zh,{ieMonthReset:"{d} 天 {h} 小時後本月排行重置", ieMonthBest:"本月最佳：Band {b}", ieTop:"本月 IELTS 排行", ieNoScore:"本月還沒有人完成正式測驗，搶第一吧！", ieLogin:"登入 Google 並在設定取暱稱，成績才會上本月排行（不登入也能作答）。", ieRankedNote:"每天只有第一次作答會計分、算徽章，開始後就算一次。排行榜記錄你本月的最佳成績，每月 1 號重置。練習模式不限次數。"});
+Object.assign(STR.en,{ieMonthReset:"Monthly ranking resets in {d} d {h} h", ieMonthBest:"Best this month: Band {b}", ieTop:"IELTS ranking this month", ieNoScore:"Nobody has finished a ranked test this month yet — go for first place!", ieLogin:"Sign in with Google and choose a nickname in Settings to appear on this month's ranking (you can still take the test without signing in).", ieRankedNote:"Only your first attempt each day is scored and counts for badges, and it counts as soon as you start. The ranking keeps your best score this month and resets on the 1st. Practice mode is unlimited."});
+Object.assign(STR.hi,{ieMonthReset:"मासिक रैंकिंग {d} दिन {h} घंटे में रीसेट", ieMonthBest:"इस महीने का सर्वश्रेष्ठ: Band {b}", ieTop:"इस महीने की IELTS रैंकिंग", ieNoScore:"इस महीने अभी किसी ने रैंक्ड टेस्ट पूरा नहीं किया — पहले नंबर के लिए कोशिश करें!", ieLogin:"इस महीने की रैंकिंग में आने के लिए Google से साइन इन करें और सेटिंग में निकनेम चुनें (बिना साइन इन के भी टेस्ट दे सकते हैं)।", ieRankedNote:"हर दिन सिर्फ़ पहली कोशिश गिनी जाती है और बैज मिलता है; शुरू करते ही गिन ली जाती है। रैंकिंग इस महीने का आपका सबसे अच्छा स्कोर रखती है और हर महीने की 1 तारीख़ को रीसेट होती है। अभ्यास मोड असीमित है।"});
+Object.assign(STR.es,{ieMonthReset:"El ranking mensual se reinicia en {d} d {h} h", ieMonthBest:"Mejor de este mes: Band {b}", ieTop:"Ranking IELTS de este mes", ieNoScore:"Nadie ha terminado un test oficial este mes: ¡ve a por el primer puesto!", ieLogin:"Inicia sesión con Google y elige un apodo en Ajustes para salir en el ranking del mes (puedes hacer el test sin iniciar sesión).", ieRankedNote:"Solo cuenta tu primer intento de cada día (puntuación e insignias), y cuenta en cuanto empiezas. El ranking guarda tu mejor nota del mes y se reinicia el día 1. El modo práctica es ilimitado."});
+Object.assign(STR.ja,{ieMonthReset:"月間ランキングは {d} 日 {h} 時間後にリセット", ieMonthBest:"今月のベスト：Band {b}", ieTop:"今月の IELTS ランキング", ieNoScore:"今月はまだ本番テストを終えた人がいません。一番乗りしよう！", ieLogin:"今月のランキングに載るには Google でログインし、設定でニックネームを決めてください（ログインしなくても受験できます）。", ieRankedNote:"採点とバッジの対象は毎日最初の 1 回だけで、開始した時点で 1 回と数えます。ランキングは今月のベストを記録し、毎月 1 日にリセットされます。練習モードは何回でもできます。"});
+Object.assign(STR.ko,{ieMonthReset:"월간 랭킹 초기화까지 {d}일 {h}시간", ieMonthBest:"이번 달 최고: Band {b}", ieTop:"이번 달 IELTS 랭킹", ieNoScore:"이번 달엔 아직 정식 테스트를 끝낸 사람이 없어요. 1등에 도전하세요!", ieLogin:"이번 달 랭킹에 오르려면 Google로 로그인하고 설정에서 닉네임을 정하세요 (로그인하지 않아도 응시할 수 있어요).", ieRankedNote:"매일 첫 응시만 채점되고 배지에 반영되며, 시작하는 순간 1회로 계산돼요. 랭킹은 이번 달 최고 점수를 기록하고 매월 1일에 초기화돼요. 연습 모드는 무제한이에요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
