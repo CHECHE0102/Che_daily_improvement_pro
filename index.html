@@ -2030,7 +2030,7 @@ function viewConquest(){
     ${notebookHtml()}`;
 }
 
-const G_DEFAULT={type:"game", gender:null, shield:null, helmet:null, boots:null, gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
+const G_DEFAULT={type:"game", gender:null, shield:null, helmet:null, gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
 function game(){ return S.game || (S.game={...G_DEFAULT}); }
 function saveGame(){ lsSave(); cloudMark(null); }
 const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
@@ -2695,7 +2695,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.77";
+const APP_VERSION="2026.10.78";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4644,8 +4644,7 @@ setTimeout(()=>{ const g=game(); if(!g||!g.gender) return; const o=heroOutfit(g.
 /* ----- Chapter 2 (Great Britain) placeholder: unlocks after Balor of Dublin is defeated at Lv 20 ----- */
 const CH2_LV=20;
 const FUTURE_SLOTS=[["shield",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>'],
- ["helmet",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 15a8 8 0 0 1 16 0v3H4z"/><path d="M12 7v8M4 15h16"/></svg>'],
- ["boots",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h5v9l6 3a2 2 0 0 1 2 2v2H5v-3l2-2z"/></svg>']];
+ ["helmet",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 15a8 8 0 0 1 16 0v3H4z"/><path d="M12 7v8M4 15h16"/></svg>']];
 function ch2Open(){ const g=game(); return !!(conquered().dublin && g.lv>=CH2_LV); }
 function futureSlots(){
   return `<div class="slots-future">${FUTURE_SLOTS.map(([k,ic])=>`<div class="slot fut" title="${esc(T("ch2Slot"))}"><span class="fut-ic">${ic}</span><span><small>${T("slot_"+k)}</small>🔒 ${T("ch2Short")}</span></div>`).join("")}</div>`;
