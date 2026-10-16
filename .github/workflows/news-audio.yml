@@ -1,0 +1,58 @@
+name: News read-aloud audio
+on:
+  push:
+    branches: [main]
+    paths: ['articles/**', 'tools/make_news_audio.py', '.github/workflows/news-audio.yml']
+  schedule:
+    - cron: '40 7 * * *'   # backup run after the daily articles land
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: news-audio
+  cancel-in-progress: false
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install "edge-tts>=6.1,<8"
+      - name: Fetch previous recordings
+        run: |
+          mkdir -p prev
+          if git fetch -q --depth=1 origin audio 2>/dev/null; then git --work-tree=prev checkout FETCH_HEAD -- . && git reset -q; fi
+          ls prev | head
+      - run: python tools/make_news_audio.py prev out
+      - name: Publish recordings (branch "audio", replaced every run so the repo stays small)
+        id: pub
+        run: |
+          cd out
+          git init -q -b audio
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git add -A
+          git commit -q -m "News audio $(date -u +%F)"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" audio
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Update news-audio.json on main
+        run: |
+          python - <<'PY'
+          import json
+          m = json.load(open("out/manifest.json"))
+          m["repo"] = "${{ github.repository }}"; m["sha"] = "${{ steps.pub.outputs.sha }}"
+          json.dump(m, open("news-audio.json", "w"), separators=(",", ":"), sort_keys=True)
+          PY
+          rm -rf prev out
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git add news-audio.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -q -m "Update news audio manifest"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1
+      - name: Summary
+        run: echo "::notice::$(python -c "import json;m=json.load(open('news-audio.json'));print(len(m['items']),'recordings')")"

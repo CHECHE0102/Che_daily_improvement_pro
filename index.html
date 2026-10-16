@@ -713,6 +713,7 @@ body.onb-open{overflow:hidden}
 .del-ask{border:1.5px solid color-mix(in srgb,var(--bad) 50%,var(--line));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--bad) 6%,var(--card))}.del-ask p{margin:6px 0 10px;line-height:1.55}
 .priv-view .card{display:flex;flex-direction:column;gap:6px}.priv-view p,.priv-view li{font-size:14px;line-height:1.65;margin:0}.priv-view ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .ie-disc{line-height:1.5;margin:4px 2px 0}
+.read-rec{font-size:12px;font-weight:700;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:99px;padding:4px 10px}
 </style>
 
 </head>
@@ -2616,7 +2617,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.62";
+const APP_VERSION="2026.10.63";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3050,7 +3051,7 @@ document.addEventListener("click", e=>{
   if(a==="srs") return startQuiz("srs");
   if(a==="readgo") return READ.on?(READ.paused?readResume():readPause()):readStart();
   if(a==="readstop") return readStop();
-  if(a==="readrate"){ const i=(READ_RATES.indexOf(READ.rate)+1)%READ_RATES.length; READ.rate=READ_RATES[i]; try{ localStorage.setItem("che-pro-rrate",READ.rate); }catch(e){} if(READ.on&&!READ.paused){ readPause(); readResume(); } return readUi(); }
+  if(a==="readrate"){ const i=(READ_RATES.indexOf(READ.rate)+1)%READ_RATES.length; READ.rate=READ_RATES[i]; try{ localStorage.setItem("che-pro-rrate",READ.rate); }catch(e){} if(READ.audio) READ.audio.playbackRate=READ.rate; else if(READ.on&&!READ.paused){ readPause(); readResume(); } return readUi(); }
   if(a==="ieranked"){ const w=weekTest(); if(w) ieStart(w.id,true); return; }
   if(a==="iepractice") return ieStart(t.dataset.k,false);
   if(a==="ieresume") return ieResume();
@@ -4400,9 +4401,14 @@ function srsCard(){
 /* ================= read-aloud (speech synthesis, sentence by sentence) ================= */
 const READ_RATES=[0.8,1,1.2];
 const READ={on:false,paused:false,i:0,cur:-1,chunks:[],art:null,tok:0,rate:(()=>{ try{ const r=parseFloat(localStorage.getItem("che-pro-rrate")); return READ_RATES.includes(r)?r:1; }catch(e){ return 1; } })()};
+// recorded news audio (made daily by .github/workflows/news-audio.yml, served from the "audio" branch via jsDelivr)
+let NEWS_AUDIO=null;
+fetch("news-audio.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{ NEWS_AUDIO=j; if(S.view==="read") readUi(); }).catch(()=>{});
+function readRec(){ const art=currentArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDIO.sha) return null;
+  const it=(NEWS_AUDIO.items||{})[art.id+"|"+(levelOf(art)||"base")]; return it?{...it, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
 function readBarInner(){
-  const playing=READ.on&&!READ.paused;
-  return `<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
+  const playing=READ.on&&!READ.paused, rec=READ.on?!!READ.audio:!!readRec();
+  return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
 }
 function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); }
 function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi)); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
@@ -4411,7 +4417,17 @@ function readStart(){
   if(!window.speechSynthesis) return toast(T("readNoTts"));
   try{ speechSynthesis.cancel(); }catch(e){}
   READ.chunks=readChunks(); READ.i=0; READ.on=true; READ.paused=false; READ.art=S.articleId||(currentArticle()||{}).id; READ.lastPi=-1;
+  const rec=readRec();
+  if(rec&&rec.t&&rec.t.length===READ.chunks.length){ readAudio(rec); readUi(); return; }
   readNext(); readUi();
+}
+function readAudio(rec){
+  const a=new Audio(rec.url); READ.audio=a; READ.times=rec.t; a.preload="auto"; a.playbackRate=READ.rate;
+  const tok=++READ.tok; readMark(READ.chunks[0].pi);
+  a.ontimeupdate=()=>{ if(tok!==READ.tok) return; const ct=a.currentTime+0.05; let i=0; while(i+1<READ.times.length&&READ.times[i+1]<=ct) i++; if(i!==READ.i){ READ.i=i; readMark(READ.chunks[i].pi); readUi(); } };
+  a.onended=()=>{ if(tok===READ.tok) readStop(); };
+  const fallback=()=>{ if(tok!==READ.tok||!READ.on) return; READ.audio=null; try{ a.pause(); }catch(e){} readNext(); readUi(); };   // recording unavailable → phone voice from the same sentence
+  a.onerror=fallback; a.play().catch(err=>{ if(err&&err.name==="NotAllowedError"){ READ.paused=true; readUi(); } else fallback(); });
 }
 function readNext(){
   if(!READ.on||READ.paused) return; const c=READ.chunks[READ.i]; if(!c){ readStop(); return; }
@@ -4420,9 +4436,9 @@ function readNext(){
   const go=()=>{ if(tok!==READ.tok||!READ.on||READ.paused) return; READ.i++; readUi(); readNext(); };
   u.onend=go; u.onerror=go; speechSynthesis.speak(u);
 }
-function readPause(){ READ.paused=true; READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} readUi(); }
-function readResume(){ READ.paused=false; readNext(); readUi(); }
-function readStop(){ READ.on=false; READ.paused=false; READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
+function readPause(){ READ.paused=true; if(READ.audio){ READ.audio.pause(); return readUi(); } READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} readUi(); }
+function readResume(){ READ.paused=false; if(READ.audio){ READ.audio.play().catch(()=>{}); return readUi(); } readNext(); readUi(); }
+function readStop(){ READ.on=false; READ.paused=false; READ.tok++; if(READ.audio){ try{ READ.audio.pause(); }catch(e){} READ.audio=null; } try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
 function readStopIfLeft(){ if(READ.on&&(S.view!=="read"||(S.articleId&&S.articleId!==READ.art))) readStop(); }
 Object.assign(STR.zh,{srsTitle:"間隔複習", srsDueN:"今天有 {n} 個字該複習了", srsClear:"今天的字都複習完了 ✅ 明天有 {n} 個", srsStart:"複習 {n} 個字", srsNone:"今天沒有要複習的字 🎉", srsHow:"答對的字會隔越來越久才再出現（1→2→4→7→15→30 天），答錯就從明天重新開始。", srsBoxes:"每個格子代表多久複習一次", srsAfter:"還有 {n} 個字今天到期 · 明天預計 {t} 個", readAloud:"朗讀全文", readPause:"暫停", readResume:"繼續", readStop:"停止", readSpeed:"{r}x", readNoTts:"這個瀏覽器不支援朗讀"});
 Object.assign(STR.en,{srsTitle:"Spaced review", srsDueN:"{n} words are due for review today", srsClear:"All caught up today ✅ {n} due tomorrow", srsStart:"Review {n}", srsNone:"Nothing to review today 🎉", srsHow:"Words you get right come back after longer and longer gaps (1→2→4→7→15→30 days); miss one and it starts again tomorrow.", srsBoxes:"Each box is how often a word comes back", srsAfter:"{n} words still due today · about {t} tomorrow", readAloud:"Read aloud", readPause:"Pause", readResume:"Resume", readStop:"Stop", readSpeed:"{r}x", readNoTts:"This browser can't read text aloud"});
@@ -4504,6 +4520,7 @@ Object.assign(STR.es,{pvCard:"Privacidad y cuenta", pvOpen:"Política de privaci
 Object.assign(STR.ja,{pvCard:"プライバシーとアカウント", pvOpen:"プライバシーポリシー", delBtn:"アカウントとデータを削除", delYes:"完全に削除する", pvEnOnly:"このポリシーは現在英語のみです。"});
 Object.assign(STR.ko,{pvCard:"개인정보와 계정", pvOpen:"개인정보 처리방침", delBtn:"내 계정과 데이터 삭제", delYes:"영구 삭제", pvEnOnly:"현재 이 방침은 영어로만 제공돼요."});
 Object.assign(STR.zh,{preDue:"{d} 個今天該複習的字優先，共 {k} 題（間隔複習）"}); Object.assign(STR.en,{preDue:"{d} words due today come first · {k} questions (spaced review)"}); Object.assign(STR.hi,{preDue:"आज के {d} शब्द पहले · कुल {k} प्रश्न"}); Object.assign(STR.es,{preDue:"Primero {d} palabras que tocan hoy · {k} preguntas"}); Object.assign(STR.ja,{preDue:"今日の復習 {d} 語を優先 · 全 {k} 問"}); Object.assign(STR.ko,{preDue:"오늘 복습할 {d}개 먼저 · 총 {k}문제"});
+Object.assign(STR.zh,{readRec:"錄音版"}); Object.assign(STR.en,{readRec:"Recorded"}); Object.assign(STR.hi,{readRec:"रिकॉर्डेड"}); Object.assign(STR.es,{readRec:"Grabado"}); Object.assign(STR.ja,{readRec:"録音版"}); Object.assign(STR.ko,{readRec:"녹음본"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
