@@ -1863,7 +1863,8 @@ function cpuAlly(){
   const seed=hashStr((CLOUD.user?CLOUD.user.uid:"guest")+td); let i=seed%ALLY_POOL.length;
   const y=g.allyLog[yesterday()]; if(y&&y.id==="cpu-"+i) i=(i+1)%ALLY_POOL.length;
   const lv=Math.max(ALLY_LV, g.lv+((seed>>5)%3)-1), gl=Math.max(1,lv-1);
-  const shop=slot=>Object.values(ITEMS).filter(it=>!it.legacy&&it.slot===slot&&it.lv>=gl-1&&it.lv<=gl);
+  const topLv=Math.max(...Object.values(ITEMS).filter(it=>!it.legacy).map(it=>it.lv)), gq=Math.min(gl,topLv);   // above the strongest gear, ally still uses the best items
+  const shop=slot=>Object.values(ITEMS).filter(it=>!it.legacy&&it.slot===slot&&it.lv>=gq-1&&it.lv<=gq);
   const ws=shop("weapon"), as=shop("armor"), wi=ws[(seed>>8)%ws.length], ai=as[(seed>>11)%as.length];
   const a={kind:"cpu", id:"cpu-"+i, n:ALLY_POOL[i][0], flag:ALLY_POOL[i][1], lv, hp:100+20*(lv-1)+ai.hp, atk:10+3*(lv-1)+wi.atk, def:5+2*(lv-1)+ai.def, wEl:wi.el, aEl:ai.el, wId:wi.id, aId:ai.id, gl};
   g.allyLog[td]={...(g.allyLog[td]||{}), cpu:a, id:a.id}; const ks=Object.keys(g.allyLog).sort(); while(ks.length>7) delete g.allyLog[ks.shift()]; saveGame();
@@ -2695,7 +2696,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.78";
+const APP_VERSION="2026.10.79";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
