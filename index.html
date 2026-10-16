@@ -720,7 +720,7 @@ body.onb-open{overflow:hidden}
 .gen-fig{width:110px;height:118px}.gen-fig .hero-svg{width:100%;height:100%}
 .gen-ask{border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
 .hero-art{position:relative;display:block}.hero-art .ha-in{position:relative;width:100%;height:100%;transform:scaleX(-1)}
-.hero-art img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+.hero-art img{position:relative;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
 .hero-art .ha-wpn{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .hero-stage .hs-fig .hero-art{position:relative;z-index:1;width:100%;height:100%}
 .onb-art{width:200px;max-width:70%;height:auto;margin-top:4px}.onb-art.sm{width:150px}
@@ -2650,7 +2650,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.69";
+const APP_VERSION="2026.10.70";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4575,7 +4575,7 @@ Object.assign(STR.es,{genTitle:"Elige tu personaje", genSub:"¡Elige el aventure
 Object.assign(STR.ja,{genTitle:"キャラクターを選ぶ", genSub:"好きな冒険キャラクターを選ぼう！", genM:"男の子", genF:"女の子", genConfirm:"「{g}」にしますか？", genYes:"決定", genDone:"キャラクターが決まりました！", onbGender:"冒険するキャラクターを選ぼう", onbGenderNeed:"先にキャラクターを選んでください"});
 Object.assign(STR.ko,{genTitle:"캐릭터 선택", genSub:"마음에 드는 모험가를 골라 보세요!", genM:"남자", genF:"여자", genConfirm:"“{g}”(으)로 할까요?", genYes:"확인", genDone:"캐릭터가 정해졌어요!", onbGender:"모험할 캐릭터를 고르세요", onbGenderNeed:"먼저 캐릭터를 골라 주세요"});
 /* ----- hero pictures (assets/art/hero-<m|f>-<pose>.webp); the equipped weapon is drawn in the hand ----- */
-const HERO_HAND={idle:[[0.33,0.62,150],[0.33,0.645,150]], attack:[[0.215,0.40,-35],[0.215,0.425,-35]]};
+const HERO_HAND={idle:[[0.12,0.57,-180],[0.12,0.57,-180]], attack:[[0.215,0.40,-35],[0.215,0.425,-35]]};
 function heroArt(pose, gOverride){
   const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
   const w=!gOverride&&g.weapon&&ITEMS[g.weapon], hand=HERO_HAND[pose];
@@ -4583,7 +4583,8 @@ function heroArt(pose, gOverride){
   if(w&&hand){ const [x,y,r]=hand[gen==="f"?1:0], bow=WKIND[w.el][w.tier]==="bow";
     const pk=picOfItem(w);
     wpn=pk?`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${r+45}) scale(-1 1)"><image href="assets/art/${pk}.webp" x="-9.2" y="-32.8" width="42" height="42"/></g></svg>`
-      :`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${r}) scale(.42) translate(${bow?"-28 -32":"-32 -50"})">${weaponGlyph(w)}</g></svg>`; }
+      :`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${(pose==="idle"?0.645:y)*100}) rotate(${pose==="idle"?0:r}) scale(${pose==="idle"?.55:.42}) translate(${bow?"-28 -32":"-32 -50"})">${weaponGlyph(w)}</g></svg>`; }
+  // idle: weapon planted in the ground beside the hero; attack: held in the hand
   return `<div class="hero-svg hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero-${gen}-${pose}.webp" alt="" draggable="false">${wpn}</div></div>`;
 }
 setTimeout(()=>{ const g=game(); if(g&&g.gender) ["idle","attack","hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero-${g.gender}-${p}.webp`; }); },3000);
