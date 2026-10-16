@@ -1548,15 +1548,15 @@ const ELNAME={zh:{metal:["金","金"],wood:["木","木"],water:["水","水"],fir
  ja:{metal:["金","金"],wood:["木","木"],water:["水","水"],fire:["火","火"],earth:["土","土"],none:["–","なし"]},
  ko:{metal:["금","금"],wood:["목","나무"],water:["수","물"],fire:["화","불"],earth:["토","흙"],none:["–","없음"]}};
 const elShort=k=>ELNAME[LANG][k||"none"][0], elName=k=>ELNAME[LANG][k||"none"][1];
-const WN_L={en:{metal:["Bronze Dagger","Steel Longsword","Moonsilver Blade","Nuada's Sword of Light"],wood:["Oak Staff","Hawthorn Longbow","Yew War-Spear","Druid's Sacred Staff"],water:["Fishing Harpoon","Tidal Trident","Selkie Whip","Spear of Manannán"],fire:["Torch Club","Molten War-Axe","Blazing Lance","Spear of Lugh"],earth:["Stone Hammer","Granite Warhammer","Giant's Club","Club of the Dagda"]},
- hi:{metal:["काँसे का खंजर","इस्पात की तलवार","चंद्र-चाँदी की धार","नुआडा की प्रकाश तलवार"],wood:["ओक की लाठी","नागफनी धनुष","यू का भाला","ड्रुइड की पवित्र छड़ी"],water:["मछली भाला","ज्वार त्रिशूल","सेल्की कोड़ा","मनानान का भाला"],fire:["मशाल गदा","पिघला युद्ध-कुल्हाड़ा","धधकता भाला","लू का भाला"],earth:["पत्थर का हथौड़ा","ग्रेनाइट युद्ध-हथौड़ा","दानव की गदा","दग्दा की गदा"]}};
+const WN_L={en:{metal:["Bronze Sword","Steel Longsword","Moonsilver Blade","Nuada's Sword of Light"],wood:["Oak Staff","Hawthorn Staff","Yew Rune Staff","Druid's Sacred Staff"],water:["Fisher's Trident","Tidal Trident","Selkie Trident","Trident of Manannán"],fire:["Ember Spear","Molten Spear","Blazing Spear","Spear of Lugh"],earth:["Stone Hammer","Granite Warhammer","Giant's Hammer","Hammer of the Dagda"]},
+ hi:{metal:["काँसे की तलवार","इस्पात की तलवार","चंद्र-चाँदी की धार","नुआडा की प्रकाश तलवार"],wood:["ओक की लाठी","नागफनी की छड़ी","यू की रून छड़ी","ड्रुइड की पवित्र छड़ी"],water:["मछुआरे का त्रिशूल","ज्वार त्रिशूल","सेल्की त्रिशूल","मनानान का त्रिशूल"],fire:["अंगार भाला","पिघला भाला","धधकता भाला","लू का भाला"],earth:["पत्थर का हथौड़ा","ग्रेनाइट युद्ध-हथौड़ा","दानव का हथौड़ा","दग्दा का हथौड़ा"]}};
 const AN_L={en:{metal:["Chainmail","Iron Plate","Silver Scale Armour","War God's Mail"],wood:["Bark Vest","Woven Vine Armour","Ancient Oak Guard","Heart of the Forest"],water:["Sealskin Coat","Tide-Pattern Mail","Deep-Sea Scale","Cloak of Manannán"],fire:["Leather Armour","Lava Armour","Phoenix Mail","Undying Flame Plate"],earth:["Mud-Stone Armour","Heavy Rock Plate","Mountain Mail","Heart of the Earth"]},
  hi:{metal:["ज़ंजीर कवच","लोहे का कवच","चाँदी शल्क कवच","युद्ध देवता का कवच"],wood:["छाल की बंडी","बेल-बुना कवच","प्राचीन ओक रक्षक","वन-हृदय कवच"],water:["सील-खाल कोट","ज्वार कवच","गहरे सागर का शल्क","मनानान का लबादा"],fire:["चमड़े का कवच","लावा कवच","फ़ीनिक्स कवच","अमर ज्वाला कवच"],earth:["कीचड़-पत्थर कवच","भारी चट्टान कवच","पर्वत कवच","पृथ्वी-हृदय कवच"]}};
-WN_L.es={metal:["Daga de bronce","Espada larga de acero","Hoja de plata lunar","Espada de luz de Nuada"],wood:["Bastón de roble","Arco de espino","Lanza de tejo","Bastón sagrado druida"],water:["Arpón","Tridente de las mareas","Látigo selkie","Lanza de Manannán"],fire:["Garrote antorcha","Hacha de hierro fundido","Lanza llameante","Lanza de Lugh"],earth:["Martillo de piedra","Martillo de granito","Garrote de gigante","Garrote del Dagda"]};
+WN_L.es={metal:["Espada de bronce","Espada larga de acero","Hoja de plata lunar","Espada de luz de Nuada"],wood:["Bastón de roble","Bastón de espino","Bastón rúnico de tejo","Bastón sagrado druida"],water:["Tridente de pescador","Tridente de las mareas","Tridente selkie","Tridente de Manannán"],fire:["Lanza de brasa","Lanza de hierro fundido","Lanza llameante","Lanza de Lugh"],earth:["Martillo de piedra","Martillo de granito","Martillo de gigante","Martillo del Dagda"]};
 AN_L.es={metal:["Cota de malla","Placas de hierro","Escamas de plata","Malla del dios de la guerra"],wood:["Chaleco de corteza","Armadura de enredadera","Guarda del roble antiguo","Corazón del bosque"],water:["Abrigo de piel de foca","Malla de las mareas","Escamas abisales","Capa de Manannán"],fire:["Armadura de cuero","Armadura de lava","Malla de fénix","Placas de llama eterna"],earth:["Armadura de barro y piedra","Placas de roca","Malla de montaña","Corazón de la tierra"]};
-WN_L.ja={metal:["青銅の短剣","鋼の長剣","月銀の刃","ヌアザの光の剣"],wood:["樫の杖","サンザシの長弓","イチイの槍","ドルイドの聖杖"],water:["漁の銛","潮の三叉槍","セルキーの鞭","マナナンの槍"],fire:["松明の棍棒","溶鉄の戦斧","炎の騎槍","ルーの槍"],earth:["石の槌","花崗岩の戦槌","巨人の棍棒","ダグザの棍棒"]};
+WN_L.ja={metal:["青銅の剣","鋼の長剣","月銀の刃","ヌアザの光の剣"],wood:["樫の杖","サンザシの杖","イチイのルーン杖","ドルイドの聖杖"],water:["漁師の三叉槍","潮の三叉槍","セルキーの三叉槍","マナナンの三叉槍"],fire:["残り火の槍","溶鉄の槍","炎の槍","ルーの槍"],earth:["石の槌","花崗岩の戦槌","巨人の槌","ダグザの槌"]};
 AN_L.ja={metal:["鎖かたびら","鉄の板金鎧","銀鱗の鎧","軍神の鎧"],wood:["樹皮のベスト","蔓編みの鎧","古樫の守り","森の心臓"],water:["アザラシ皮のコート","潮紋の鎧","深海の鱗","マナナンのマント"],fire:["革の鎧","溶岩の鎧","不死鳥の鎧","不滅の炎の鎧"],earth:["泥石の鎧","重岩の鎧","山岳の鎧","大地の心臓"]};
-WN_L.ko={metal:["청동 단검","강철 장검","월은의 칼날","누아다의 빛의 검"],wood:["참나무 지팡이","산사나무 장궁","주목 전투창","드루이드의 성스러운 지팡이"],water:["작살","조수의 삼지창","셀키의 채찍","마나난의 창"],fire:["횃불 곤봉","용철 전투도끼","불타는 기창","루의 창"],earth:["돌망치","화강암 전투망치","거인의 곤봉","다그다의 곤봉"]};
+WN_L.ko={metal:["청동 검","강철 장검","월은의 칼날","누아다의 빛의 검"],wood:["참나무 지팡이","산사나무 지팡이","주목 룬 지팡이","드루이드의 성스러운 지팡이"],water:["어부의 삼지창","조수의 삼지창","셀키의 삼지창","마나난의 삼지창"],fire:["잉걸불 창","용철 창","불타는 창","루의 창"],earth:["돌망치","화강암 전투망치","거인의 망치","다그다의 망치"]};
 AN_L.ko={metal:["사슬 갑옷","철판 갑옷","은비늘 갑옷","전쟁신의 갑옷"],wood:["나무껍질 조끼","덩굴 갑옷","고목 참나무 수호구","숲의 심장"],water:["물개 가죽 코트","조수 무늬 갑옷","심해 비늘","마나난의 망토"],fire:["가죽 갑옷","용암 갑옷","불사조 갑옷","불멸의 화염 갑옷"],earth:["진흙돌 갑옷","무거운 바위 갑옷","산악 갑옷","대지의 심장"]};
 const itemName=it=>(LANG==="zh"?it.name:WN_L[LANG]&&(it.slot==="weapon"?WN_L:AN_L)[LANG][it.el][it.tier])+(it.plus?` +${it.plus}`:"");
 const tierLab=it=>it.legacy?TIER[it.tier].n:"Lv"+it.lv;
@@ -1564,7 +1564,7 @@ const tierLab=it=>it.legacy?TIER[it.tier].n:"Lv"+it.lv;
 const elBadge=(k,big)=>`<span class="el el-${k||"none"}${big?" big":""}" title="${elName(k)}">${elShort(k)}</span>`;
 
 const TIER=[{n:"Ⅰ",atk:6,def:4,hp:20,price:80,lv:1},{n:"Ⅱ",atk:14,def:10,hp:50,price:300,lv:4},{n:"Ⅲ",atk:26,def:18,hp:100,price:900,lv:8},{n:"Ⅳ",atk:42,def:30,hp:180,price:2500,lv:13}];
-const WNAMES={metal:["青銅短劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂長弓","紫杉戰矛","德魯伊聖杖"],water:["漁叉","潮汐三叉戟","塞爾基長鞭","李爾海神之矛"],fire:["火把棍","熔鐵戰斧","烈焰長槍","盧神之槍"],earth:["石錘","花崗岩戰鎚","巨人之棒","達格達之棍"]};
+const WNAMES={metal:["青銅劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂木杖","紫杉符文杖","德魯伊聖杖"],water:["漁夫三叉戟","潮汐三叉戟","塞爾基三叉戟","李爾海神三叉戟"],fire:["餘燼長槍","熔鐵長槍","烈焰長槍","盧神之槍"],earth:["石錘","花崗岩戰鎚","巨人之鎚","達格達之鎚"]};
 const ANAMES={metal:["鎖子甲","鐵板甲","銀鱗甲","戰神之鎧"],wood:["樹皮背心","藤編護甲","古橡守護甲","森林之心鎧"],water:["海豹皮衣","潮紋鎧","深海鱗甲","李爾斗篷"],fire:["皮革護甲","熔岩護甲","鳳焰鎧","不滅烈焰甲"],earth:["泥石護甲","岩石重甲","山嶺鎧","大地之心鎧"]};
 const ITEMS={};
 // legacy tier items (still owned / forged from shards, no longer sold in the shop)
@@ -2663,7 +2663,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.72";
+const APP_VERSION="2026.10.73";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2703,7 +2703,7 @@ const WSHAPE={
   hammer:t=>`<path d="M31 22H34V60H31Z" fill="${WOODC}" ${sk}/><rect x="22" y="10" width="21" height="13" rx="2.5" fill="#A8A49A" ${sk}/><path d="M25 14H40" stroke="#D8D4CA" stroke-width="1.6"/>`,
   warhammer:t=>`<path d="M31 22H34V60H31Z" fill="${WOODC}" ${sk}/><path d="M18 8H47V24H18Z" fill="#B8A78E" ${sk}/><path d="M18 12L13 16L18 20M47 12L52 16L47 20" fill="#8E7E66" ${sk}/><path d="M24 12L28 20M36 12L40 20" stroke="${GK}" stroke-width="1.4"/>`
 };
-const WKIND={metal:["dagger","sword","curved","sword"], wood:["staff","bow","spear","orbstaff"], water:["harpoon","trident","whip","spear"], fire:["torch","axe","lance","firespear"], earth:["hammer","warhammer","club","club"]};
+const WKIND={metal:["sword","sword","sword","sword"], wood:["staff","staff","orbstaff","orbstaff"], water:["trident","trident","trident","trident"], fire:["firespear","firespear","firespear","firespear"], earth:["hammer","warhammer","warhammer","warhammer"]};
 const ARMC={metal:["#C9D0D6","#B9C2C9","#E3E8EC","#F2D58A"], wood:["#9A6332","#6E9B4A","#7B5A36","#4E8F3E"], water:["#8B6B52","#7FB8D8","#5AA6CF","#2D6FA3"], fire:["#9C5B2E","#3B2A26","#E0703A","#C93A1E"], earth:["#9C8566","#8A8174","#7C8A6A","#A0784A"]};
 function armorPattern(el,t){
   if(el==="metal") return t===0?[0,1,2,3].map(r=>[0,1,2,3,4].map(c=>`<circle cx="${22+c*5}" cy="${24+r*7}" r="1.6" fill="none" stroke="${GK}" stroke-width="1"/>`).join("")).join(""):t===1?`<path d="M20 30H44M20 38H44M20 46H44" stroke="${GK}" stroke-width="1.4"/>`:`<path d="M21 28q3 4 6 0q3 4 6 0q3 4 6 0q3 4 6 0M21 36q3 4 6 0q3 4 6 0q3 4 6 0q3 4 6 0M21 44q3 4 6 0q3 4 6 0q3 4 6 0q3 4 6 0" fill="none" stroke="${GK}" stroke-width="1.2"/>`;
