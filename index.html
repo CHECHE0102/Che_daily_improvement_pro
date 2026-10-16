@@ -1417,8 +1417,20 @@ function distractorPool(){
   }
   return [...pool.values()];
 }
+// Quiz options must not give the answer away: glossary meanings often carry the English phrase
+// ("事務（European affairs：歐洲事務）", "according to：根據"). Strip those notes from prompts and options.
+function qMean(m, word){
+  if(!m) return m||"";
+  const latinOk=LANG==="en"||LANG==="es", stem=(word||"").toLowerCase().slice(0,Math.max(4,(word||"").length-2));
+  const bad=x=>latinOk?(!!stem&&x.toLowerCase().includes(stem)):/[A-Za-z]/.test(x);
+  let t=m.replace(/[（(][^（）()]*[）)]/g, x=>bad(x)?"":x);
+  t=t.split(/[；;]/).map(seg=>{ const i=Math.max(seg.lastIndexOf("："), latinOk?-1:seg.lastIndexOf(":")); return i>=0&&bad(seg.slice(0,i))?seg.slice(i+1):seg; }).map(x=>x.trim()).filter(Boolean).join("；");
+  t=t.replace(/^[；;，、:：\s]+|[；;，、:：\s]+$/g,"").trim();
+  return t || (latinOk?m:m.replace(/[A-Za-z]+/g,"").replace(/[（()）：:]/g,"").trim()) || m;
+}
 function makeQuestion(w){
-  const wm=mean(w); const pool=distractorPool().filter(p=>p.en.toLowerCase()!==w.word.toLowerCase() && p.zh!==wm);
+  const wm=qMean(mean(w),w.word); const seen=new Set([wm]);
+  const pool=distractorPool().map(p=>({...p, zh:qMean(p.zh,p.en)})).filter(p=>p.en.toLowerCase()!==w.word.toLowerCase() && !seen.has(p.zh) && p.zh && (seen.add(p.zh),true));
   const hasForm=f=>new RegExp("\\b"+reEsc(f)+"\\b","i").test(w.example||"");
   const types=["en2zh","zh2en"]; if(w.example && (w.forms||[]).some(hasForm)) types.push("cloze");
   const type=types[Math.floor(Math.random()*types.length)];
@@ -2617,7 +2629,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.63";
+const APP_VERSION="2026.10.64";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
