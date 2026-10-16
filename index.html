@@ -772,7 +772,7 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 @keyframes hurt3{0%{filter:brightness(3) saturate(.2)}20%{transform:translateX(18px) rotate(4deg)}45%{transform:translateX(-12px) rotate(-3deg)}70%{transform:translateX(6px)}100%{transform:none;filter:none}}
 .fighter.hero.hurt.hs2 .hero-svg{animation-name:hurt2}.fighter.hero.hurt.hs3 .hero-svg,.fighter.hero.hurt.hs4 .hero-svg{animation-name:hurt3}
 @media (prefers-reduced-motion:reduce){.hit-burst,.ko-flash{display:none}}
-.err-card{border:1.5px solid var(--bad);display:flex;flex-direction:column;gap:6px}.err-pre{white-space:pre-wrap;word-break:break-all;font-size:11px;margin:0;background:#0003;padding:8px;border-radius:8px;max-height:260px;overflow:auto}
+.err-card{border:1.5px solid var(--bad);display:flex;flex-direction:column;gap:6px}.err-card details summary{cursor:pointer}.err-pre{margin-top:6px!important;white-space:pre-wrap;word-break:break-all;font-size:11px;margin:0;background:#0003;padding:8px;border-radius:8px;max-height:260px;overflow:auto}
 </style>
 
 </head>
@@ -1163,7 +1163,7 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 /* ---------- rendering ---------- */
 function setTab(t){ S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); }catch(e){ console.error(e); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><p class="muted sm-t" style="margin:0">${T("errSub")}</p><pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre></section></div>`; } }
+function render(){ try{ renderInner(); }catch(e){ console.error(e); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><p class="muted sm-t" style="margin:0">${T("errSub")}</p><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button><details ${DEV?"open":""}><summary class="muted sm-t">${T("errMore")}</summary><pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre></details></section></div>`; } }
 window.addEventListener("error",e=>{ try{ if(DEV) toast("⚠️ "+(e.message||"error")+" @"+String(e.lineno||"")); }catch(_){} });
 window.addEventListener("unhandledrejection",e=>{ try{ if(DEV) toast("⚠️ "+String(e.reason&&e.reason.message||e.reason).slice(0,140)); }catch(_){} });
 function renderInner(){
@@ -2701,7 +2701,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.81";
+const APP_VERSION="2026.10.82";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4709,12 +4709,12 @@ Object.assign(STR.hi,{hitBig:"ज़ोरदार वार!",hitKO:"नॉक
 Object.assign(STR.es,{hitBig:"¡Golpe fuerte!",hitKO:"¡K.O.!"});
 Object.assign(STR.ja,{hitBig:"強烈な一撃！",hitKO:"ノックアウト！"});
 Object.assign(STR.ko,{hitBig:"강력한 일격!",hitKO:"K.O.!"});
-Object.assign(STR.zh,{errTitle:"這個頁面出了點問題",errSub:"請把這個畫面截圖給開發者，先切到其他分頁還能正常使用。"});
-Object.assign(STR.en,{errTitle:"Something went wrong on this page",errSub:"Please send a screenshot of this to the developer. Other tabs still work."});
-Object.assign(STR.hi,{errTitle:"इस पेज में कुछ गड़बड़ हुई",errSub:"कृपया इसका स्क्रीनशॉट डेवलपर को भेजें। बाकी टैब ठीक चलते हैं।"});
-Object.assign(STR.es,{errTitle:"Algo salió mal en esta página",errSub:"Envía una captura de esto al desarrollador. Las demás pestañas siguen funcionando."});
-Object.assign(STR.ja,{errTitle:"このページで問題が起きました",errSub:"この画面のスクリーンショットを開発者に送ってください。ほかのタブは使えます。"});
-Object.assign(STR.ko,{errTitle:"이 페이지에 문제가 생겼어요",errSub:"이 화면을 캡처해서 개발자에게 보내 주세요. 다른 탭은 정상적으로 쓸 수 있어요."});
+Object.assign(STR.zh,{errTitle:"這個頁面暫時打不開",errSub:"我們已經知道可能有問題了。你可以先回到其他頁面繼續使用；如果一直發生，請截圖下面的「錯誤細節」給開發者。",errBack:"回到今日",errMore:"錯誤細節"});
+Object.assign(STR.en,{errTitle:"This page couldn't open",errSub:"You can keep using the other tabs. If it keeps happening, please send a screenshot of the error details below to the developer.",errBack:"Back to Today",errMore:"Error details"});
+Object.assign(STR.hi,{errTitle:"यह पेज अभी नहीं खुल सका",errSub:"आप बाकी टैब इस्तेमाल करते रहें। अगर बार-बार हो, तो नीचे की त्रुटि जानकारी का स्क्रीनशॉट डेवलपर को भेजें।",errBack:"आज पर लौटें",errMore:"त्रुटि जानकारी"});
+Object.assign(STR.es,{errTitle:"No se pudo abrir esta página",errSub:"Puedes seguir usando las demás pestañas. Si vuelve a pasar, envía al desarrollador una captura de los detalles del error.",errBack:"Volver a Hoy",errMore:"Detalles del error"});
+Object.assign(STR.ja,{errTitle:"このページを開けませんでした",errSub:"ほかのタブはそのまま使えます。何度も起きる場合は、下のエラー詳細のスクリーンショットを開発者に送ってください。",errBack:"今日に戻る",errMore:"エラーの詳細"});
+Object.assign(STR.ko,{errTitle:"이 페이지를 열 수 없어요",errSub:"다른 탭은 계속 사용할 수 있어요. 계속 그러면 아래 오류 정보를 캡처해서 개발자에게 보내 주세요.",errBack:"오늘로 돌아가기",errMore:"오류 정보"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
