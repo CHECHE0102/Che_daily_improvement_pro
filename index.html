@@ -728,6 +728,9 @@ body.onb-open{overflow:hidden}
 .push-art{width:64px;height:64px;flex:none;object-fit:contain}
 .quiz-done{display:flex;flex-direction:column;gap:10px;align-items:flex-start}.qd-art{width:150px;height:auto;align-self:center}
 .empty-art{width:180px;max-width:60%;height:auto;margin:0 auto 6px;display:block}
+img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
+.it-tile img.pic{width:86%;height:86%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
+.mon-seal img.pic{width:88%;height:88%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
 </style>
 
 </head>
@@ -1932,7 +1935,11 @@ function huntHtml(){
     ${wild.length?`<div class="mons">${wild.map(m=>wildCard(m)).join("")}</div>`:`<p class="muted sm-t">${T("wildDone")}</p>`}</div>`;
 }
 
-function monSvg(t, cls){ const f=ART[t.foe.mid]; return f?`<svg viewBox="0 0 100 100" class="${cls||"mon-art"}" aria-hidden="true">${f()}</svg>`:""; }
+// hand-drawn pictures in assets/art (add the name here when a new picture is uploaded)
+const PICS=new Set(["armor-metal-1", "armor-metal-2", "town-changeling", "town-leprechaun", "town-merrow", "weapon-metal-1", "weapon-metal-2"]);
+const picOfMon=t=>{ const mid=t&&t.foe&&t.foe.mid; if(!mid) return null; const k=mid.startsWith("w_")?"wild-"+mid.slice(2).replace(/_/g,"-"):"town-"+mid; return PICS.has(k)?k:null; };
+const picOfItem=it=>{ if(!it||it.tier==null) return null; const k=`${it.slot==="weapon"?"weapon":"armor"}-${it.el}-${it.tier+1}`; return PICS.has(k)?k:null; };
+function monSvg(t, cls){ const pk=picOfMon(t); if(pk) return `<img src="assets/art/${pk}.webp" class="${cls||"mon-art"} pic" alt="" draggable="false">`; const f=ART[t.foe.mid]; return f?`<svg viewBox="0 0 100 100" class="${cls||"mon-art"}" aria-hidden="true">${f()}</svg>`:""; }
 
 const townShort=t=>t.name[LANG]||t.name.en;
 const townName=t=>{ const n=townShort(t); return LANG==="en"||n===t.name.en?n:`${n} (${t.name.en})`; };
@@ -2643,7 +2650,7 @@ function devPanel(){
     ${devStatsHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.68";
+const APP_VERSION="2026.10.69";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2702,6 +2709,7 @@ function armorBody(el,t){
 }
 function weaponGlyph(it){ return WSHAPE[WKIND[it.el][it.tier]](it.tier); }
 function itemSvg(it, cls){
+  { const pk=picOfItem(it); if(pk) return `<img src="assets/art/${pk}.webp" class="${cls||"it-art"} pic" alt="" draggable="false">`; }
   const glow=it.tier===3?`<circle cx="32" cy="32" r="27" fill="url(#gl-${it.el})" opacity=".9"/>`:"";
   const inner=it.slot==="weapon"?(WKIND[it.el][it.tier]==="bow"?weaponGlyph(it):`<g transform="rotate(40 32 32)">${weaponGlyph(it)}</g>`):armorBody(it.el,it.tier);
   return `<svg viewBox="0 0 64 64" class="${cls||"it-art"}" aria-hidden="true"><defs><radialGradient id="gl-${it.el}"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>${glow}${inner}</svg>`;
@@ -4573,7 +4581,9 @@ function heroArt(pose, gOverride){
   const w=!gOverride&&g.weapon&&ITEMS[g.weapon], hand=HERO_HAND[pose];
   let wpn="";
   if(w&&hand){ const [x,y,r]=hand[gen==="f"?1:0], bow=WKIND[w.el][w.tier]==="bow";
-    wpn=`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${r}) scale(.42) translate(${bow?"-28 -32":"-32 -50"})">${weaponGlyph(w)}</g></svg>`; }
+    const pk=picOfItem(w);
+    wpn=pk?`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${r+45}) scale(-1 1)"><image href="assets/art/${pk}.webp" x="-9.2" y="-32.8" width="42" height="42"/></g></svg>`
+      :`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${r}) scale(.42) translate(${bow?"-28 -32":"-32 -50"})">${weaponGlyph(w)}</g></svg>`; }
   return `<div class="hero-svg hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero-${gen}-${pose}.webp" alt="" draggable="false">${wpn}</div></div>`;
 }
 setTimeout(()=>{ const g=game(); if(g&&g.gender) ["idle","attack","hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero-${g.gender}-${p}.webp`; }); },3000);
