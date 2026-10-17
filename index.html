@@ -1116,8 +1116,10 @@ const S = {
 /* ---------- storage layer: db when available, else this browser ---------- */
 let db=null, userCol=null, sample=null;
 const LS_KEY="che-daily-pro-v1";
-function lsLoad(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||"{}"); }catch(e){ return {}; } }
-function lsSave(){ try{ const o={}; for(const [k,v] of S.words) o[k]=v; for(const [k,v] of S.days) o[k]=v; if(S.game) o.game=S.game; localStorage.setItem(LS_KEY,JSON.stringify(o)); }catch(e){} }
+/* dev "new player" sandbox: everything (words, days, game) lives under its own key, cloud sync is off; the real save is never touched */
+const SAND_KEY="che-pro-sandbox"; function SANDBOX(){ try{ return !!(DEV&&DEV.fresh); }catch(e){ return false; } }
+function lsLoad(){ try{ return JSON.parse(localStorage.getItem(SANDBOX()?SAND_KEY:LS_KEY)||"{}"); }catch(e){ return {}; } }
+function lsSave(){ try{ const o={}; for(const [k,v] of S.words) o[k]=v; for(const [k,v] of S.days) o[k]=v; if(S.game) o.game=S.game; localStorage.setItem(SANDBOX()?SAND_KEY:LS_KEY,JSON.stringify(o)); }catch(e){} }
 const chains = new Map();
 function persist(id, data){
   if(id.startsWith("w~")) S.words.set(id,data); else S.days.set(id,data);
@@ -1213,7 +1215,7 @@ function artCard(a, d){
 
 function viewToday(){
   const d=dayRec(), art=mainArticle(), el=eligible();
-  const preNeeded = el.length>0 && !(DEV&&DEV.fresh);
+  const preNeeded = el.length>0;
   const preDone = d.preDone || !preNeeded;
   const readDone = !!d.read;
   const postDone = d.postDone;
@@ -1526,7 +1528,8 @@ function makeQuestion(w){
 }
 /* ---------- placement test for new players: 12 words from easy (A2) to very hard (C2) ---------- */
 const LVT_KEY="che-pro-lvtest", LVT_PLAN=[["A2",2],["B1",3],["B2",3],["C1",2],["C2",2]];
-function lvtDone(){ try{ return localStorage.getItem(LVT_KEY); }catch(e){ return null; } }
+function lvtKey(){ return SANDBOX()?LVT_KEY+"-sb":LVT_KEY; }
+function lvtDone(){ try{ return localStorage.getItem(lvtKey()); }catch(e){ return null; } }
 function startLvTest(){
   const byLvl={}, seen=new Set();
   for(const art of S.articles.slice(0,8)) for(const tok of (parasOf(art).join(" ").match(WORD_RE)||[])){
@@ -1603,7 +1606,7 @@ function viewQuiz(){
 function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
   if(Q.kind==="lvl"){ const o=q.opts[i]||{}, ok=!!o.ok; if(ok) Q.score++; Q.answers[Q.i]={w:q.w, ok, picked:o};
-    if(Q.i+1>=Q.qs.length){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(LVT_KEY,Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
+    if(Q.i+1>=Q.qs.length){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     Q.i++; render(); window.scrollTo(0,0); return; }
   Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
   const w=S.words.get(q.w.key)||q.w;
@@ -1614,7 +1617,7 @@ function pick(i){
   const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
   if(Q.i+1>=Q.qs.length){
     const d=dayRec();
-    if(Q.kind==="lvl"){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(LVT_KEY,Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
+    if(Q.kind==="lvl"){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     else if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardReview():null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
@@ -2642,6 +2645,11 @@ async function devUnlock(){
 }
 function devExit(){
   if(!DEV) return;
+  if(DEV.fresh){   // leave the sandbox: put the real game back into the real save (words/days there were never touched) and reload
+    try{ const o=JSON.parse(localStorage.getItem(LS_KEY)||"{}"); o.game=DEV.game; if(DEV.day&&DEV.day.date) o["day~"+DEV.day.date]=DEV.day; localStorage.setItem(LS_KEY,JSON.stringify(o));
+      const r=DEV.real||{}; r.lang?localStorage.setItem("che-pro-lang",r.lang):localStorage.removeItem("che-pro-lang"); r.level?localStorage.setItem("che-pro-level",r.level):localStorage.removeItem("che-pro-level");
+      localStorage.removeItem(SAND_KEY); localStorage.removeItem(LVT_KEY+"-sb"); }catch(e){}
+    DEV=null; devSave(); location.reload(); return; }
   S.game=newGame(DEV.game); if(DEV.day&&DEV.day.date) saveDay(DEV.day);
   DEV=null; devSave(); saveGame(); toast(T("devExited")); render(); applyMast();
 }
@@ -2660,10 +2668,11 @@ function devAct(k){
   else if(k==="badgeclr"){ const st=ieState(); st.badges={}; }
   else if(k==="ieday"){ const st=ieState(); delete st.days[today()]; g.ieltsRun=null; }
   else if(k==="today"){ const d=dayRec(); saveDay({type:"day", date:d.date, preDone:false, postDone:false, read:null, lookedUp:d.lookedUp||[], lookedUpBy:d.lookedUpBy||{}}); g.revN=0; g.revDate=null; g.taxDate=null; }
-  else if(k==="fresh"){   // see the app as a brand-new player: empty game, today's steps not started, welcome pages again (real save comes back on leaving dev mode)
-    S.game=newGame(); DEV.fresh=true; devSave(); try{ localStorage.removeItem(LVT_KEY); }catch(e){} saveDay({type:"day", date:today(), preDone:false, postDone:false, read:null, lookedUp:[], lookedUpBy:{}});
-    S.story=null; if(typeof storyRender==="function") storyRender(); S.tab="today"; S.view="today"; S.articleId=null; S.quiz=null;
-    saveGame(); render(); window.scrollTo(0,0); S.onb={step:0}; onbRender(); return; }
+  else if(k==="fresh"){   // brand-new player sandbox: empty dictionary, no history, welcome pages; leaving dev mode brings the real save back
+    try{ cloudFlush(); }catch(e){}
+    DEV.fresh=true; DEV.real=DEV.real||{lang:localStorage.getItem("che-pro-lang"), level:localStorage.getItem("che-pro-level")}; DEV.onbDone=false; devSave();
+    try{ localStorage.removeItem(SAND_KEY); localStorage.removeItem(LVT_KEY+"-sb"); }catch(e){}
+    location.reload(); return; }
   saveGame(); toast(T("dDone")); render();
 }
 
@@ -2844,7 +2853,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.99";
+const APP_VERSION="2026.10.100";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3470,10 +3479,10 @@ async function cloudPull(){
   }catch(e){ CLOUD.status="err"; }
   render();
 }
-function cloudMark(id, deleted){ if(!CLOUD.user) return; if(id&&id.startsWith("w~")){ (deleted?CLOUD.delWords:CLOUD.dirtyWords).add(id); if(deleted) CLOUD.dirtyWords.delete(id); else CLOUD.delWords.delete(id); dirtySave(); } else { CLOUD.dirtyMain=true; if(CLOUD.dirtyWords.size) dirtySave(); }
+function cloudMark(id, deleted){ if(!CLOUD.user||SANDBOX()) return; if(id&&id.startsWith("w~")){ (deleted?CLOUD.delWords:CLOUD.dirtyWords).add(id); if(deleted) CLOUD.dirtyWords.delete(id); else CLOUD.delWords.delete(id); dirtySave(); } else { CLOUD.dirtyMain=true; if(CLOUD.dirtyWords.size) dirtySave(); }
   clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,1500); }
 async function cloudFlush(){
-  if(!CLOUD.user||!CLOUD.fb||CLOUD.deleting) return; clearTimeout(CLOUD.timer);
+  if(!CLOUD.user||!CLOUD.fb||CLOUD.deleting||SANDBOX()) return; clearTimeout(CLOUD.timer);
   const {fsM,db}=CLOUD.fb; const words=[...CLOUD.dirtyWords], dels=[...CLOUD.delWords], main=CLOUD.dirtyMain;
   if(!words.length&&!dels.length&&!main) return;
   CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false; dirtySave();
@@ -4566,7 +4575,7 @@ function onbMaybe(){
   else if(!done){ try{ localStorage.setItem(ONB_KEY,"old"); }catch(e){} }
 }
 function onbClose(start){
-  try{ localStorage.setItem(ONB_KEY,"1"); }catch(e){}
+  if(SANDBOX()){ DEV.onbDone=true; devSave(); } else try{ localStorage.setItem(ONB_KEY,"1"); }catch(e){}
   actPing({o:S.onb?S.onb.step:0});
   S.onb=null; onbRender();
   if(start&&mainArticle()){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); } else { S.tab="today"; S.view="today"; render(); }
@@ -5023,8 +5032,9 @@ document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast
 render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game=newGame(v); }
-  S.ready.personal=true; render(); onbMaybe();
-  cloudInit();
+  S.ready.personal=true; render();
+  if(SANDBOX()){ if(!DEV.onbDone){ S.onb={step:0}; onbRender(); } }
+  else { onbMaybe(); cloudInit(); }
   await loadArticles();
 })();
 </script>
