@@ -2628,6 +2628,10 @@ function devAct(k){
   else if(k==="badgeclr"){ const st=ieState(); st.badges={}; }
   else if(k==="ieday"){ const st=ieState(); delete st.days[today()]; g.ieltsRun=null; }
   else if(k==="today"){ const d=dayRec(); saveDay({type:"day", date:d.date, preDone:false, postDone:false, read:null, lookedUp:d.lookedUp||[], lookedUpBy:d.lookedUpBy||{}}); g.revN=0; g.revDate=null; g.taxDate=null; }
+  else if(k==="fresh"){   // see the app as a brand-new player: empty game, today's steps not started, welcome pages again (real save comes back on leaving dev mode)
+    S.game=newGame(); saveDay({type:"day", date:today(), preDone:false, postDone:false, read:null, lookedUp:[], lookedUpBy:{}});
+    S.story=null; if(typeof storyRender==="function") storyRender(); S.tab="today"; S.view="today"; S.articleId=null; S.quiz=null;
+    saveGame(); render(); window.scrollTo(0,0); S.onb={step:0}; onbRender(); return; }
   saveGame(); toast(T("dDone")); render();
 }
 
@@ -2800,7 +2804,7 @@ function devPanel(){
   if(!DEV) return "";
   const b=(k,l)=>`<button class="btn ghost sm" data-act="dev" data-k="${k}">${T(l)}</button>`;
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>
-    <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}</div>
+    <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
     <div id="devMaint" class="dev-maint">${devMaintInner()}</div>
     ${devSupHtml()}
     ${devBadgeHtml()}
@@ -2808,7 +2812,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.95";
+const APP_VERSION="2026.10.96";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4958,6 +4962,12 @@ Object.assign(STR.hi,{artRetry:"फिर से कोशिश करें"})
 Object.assign(STR.es,{artRetry:"Reintentar"});
 Object.assign(STR.ja,{artRetry:"再読み込み"});
 Object.assign(STR.ko,{artRetry:"다시 시도"});
+Object.assign(STR.zh,{dFresh:"回到新玩家狀態（重看新手引導）"});
+Object.assign(STR.en,{dFresh:"Start over as a new player"});
+Object.assign(STR.hi,{dFresh:"नए खिलाड़ी की तरह फिर से शुरू करें"});
+Object.assign(STR.es,{dFresh:"Empezar como jugador nuevo"});
+Object.assign(STR.ja,{dFresh:"新しいプレイヤーとして最初から"});
+Object.assign(STR.ko,{dFresh:"새 플레이어로 처음부터"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
