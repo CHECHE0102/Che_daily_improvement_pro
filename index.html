@@ -779,6 +779,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
 .st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
 .st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
+.lvt-res{text-align:center;padding:22px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 </style>
 
 </head>
@@ -1228,7 +1229,7 @@ function viewToday(){
     <section class="hero"><div class="eyebrow">${art.region?`📍 ${esc(regionLabel(art.region))} · `:""}${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
     ${onbCoach()}
     <div class="steps">
-      ${step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):(()=>{ const due=srsDueList().filter(w=>w.firstSeen<today()).length; return due?T("preDue",{d:Math.min(10,due),k:Math.min(10,el.length)}):T("preDraw",{n:el.length,k:Math.min(10,el.length)}); })()):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
+      ${!preNeeded&&!d.preDone?(lvtDone()?step(1,"done",T("lvtTitle"),T("lvtDone",{l:lvtDone()==="IELTS"?"IELTS 7–8":lvtDone()}),"lvtest"):step(1,"now",T("lvtTitle"),T("lvtSub"),"lvtest")):step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):(()=>{ const due=srsDueList().filter(w=>w.firstSeen<today()).length; return due?T("preDue",{d:Math.min(10,due),k:Math.min(10,el.length)}):T("preDraw",{n:el.length,k:Math.min(10,el.length)}); })()):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
       ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
@@ -1523,6 +1524,25 @@ function makeQuestion(w){
   const m=w.example.match(new RegExp("\\b"+reEsc(form)+"\\b","i"));
   return {type, w, prompt:w.example, blank:m[0], opts:shuffle([{label:m[0], meaning:wm, ok:true}, ...ds.map(d=>({label:d.en, meaning:d.zh}))])};
 }
+/* ---------- placement test for new players: 12 words from easy (A2) to very hard (C2) ---------- */
+const LVT_KEY="che-pro-lvtest", LVT_PLAN=[["A2",2],["B1",3],["B2",3],["C1",2],["C2",2]];
+function lvtDone(){ try{ return localStorage.getItem(LVT_KEY); }catch(e){ return null; } }
+function startLvTest(){
+  const byLvl={}, seen=new Set();
+  for(const art of S.articles.slice(0,8)) for(const tok of (parasOf(art).join(" ").match(WORD_RE)||[])){
+    const k=tok.toLowerCase(), g=glossFor(art,tok); if(!g||!g.lvl||g.lvl==="PN"||STOP.has(k)||!/^(n|v|adj|adv)\./.test(g.pos||"")) continue;
+    const b=(g.base||k).toLowerCase(); if(seen.has(b)) continue; seen.add(b);
+    (byLvl[g.lvl]=byLvl[g.lvl]||[]).push({type:"word", key:keyOf(g.base||tok), word:g.base||tok, zh:g.zh, hi:g.hi||"", en:g.en||"", es:g.es||"", ja:g.ja||"", ko:g.ko||"", pos:g.pos||"", forms:[], example:sentenceWith(art,tok), lvTest:g.lvl}); }
+  let words=[]; for(const [l,n] of LVT_PLAN) words=words.concat(shuffle(byLvl[l]||[]).slice(0,n));
+  if(words.length<8) return toast(T("artLoadFail"));
+  S.quiz={kind:"lvl", qs:words.map(makeQuestion), i:0, score:0, picked:null, answers:[]};
+  S.view="quiz"; render(); window.scrollTo(0,0);
+}
+function lvtResult(Q){   // highest band where at least half the words were right, climbing from A2
+  const tot={}, ok={}; Q.answers.forEach(a=>{ const l=a.w.lvTest; tot[l]=(tot[l]||0)+1; if(a.ok) ok[l]=(ok[l]||0)+1; });
+  let res="A2"; for(const [l] of LVT_PLAN){ if(!tot[l]) continue; if((ok[l]||0)/tot[l]>=0.5) res=l==="C2"?"IELTS":l==="A2"?"A2":l; else break; }
+  return res;
+}
 function startQuiz(kind, art){
   let words;
   const d=dayRec();
@@ -1551,14 +1571,14 @@ function finishPost(art, score, total){
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
-  const title=Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
+  const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
+    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card quiz-done"><img src="assets/art/${Q.score>=Q.qs.length*0.7?"scene-win":"scene-quiz"}.webp" alt="" class="qd-art"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
-      <div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
-      ${Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
+      ${Q.kind==="lvl"?"":`<div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>`}${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
+      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
@@ -1577,13 +1597,15 @@ function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
   Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
   const w=S.words.get(q.w.key)||q.w;
-  if(!w.filler) persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
+  if(w.lvTest){}
+  else if(!w.filler) persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
   else if(!ok){ const {filler,...rec}=w; persist(w.key,{...rec, firstSeen:today(), lookups:0, lastLookup:new Date().toISOString(), correct:0, wrong:1, lastTested:today(), srsB:1, srsDue:srsAdd(today(),1)}); }
   if(ok) Q.score++;
   const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
   if(Q.i+1>=Q.qs.length){
     const d=dayRec();
-    if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardReview():null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
+    if(Q.kind==="lvl"){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(LVT_KEY,Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
+    else if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardReview():null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art),art); }
@@ -2812,7 +2834,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.96";
+const APP_VERSION="2026.10.97";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3304,6 +3326,7 @@ document.addEventListener("click", e=>{
   if(a==="home"){ S.tab="today"; S.view="today"; S.quiz=null; render(); window.scrollTo(0,0); return; }
   if(a==="back"){ const b=S.backTo||"today"; S.tab=b; S.view=b; render(); window.scrollTo(0,0); return; }
   if(a==="pre") return startQuiz("pre");
+  if(a==="lvtest") return startLvTest();
   if(a==="post") return startQuiz("post", mainArticle());
   if(a==="read"){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle()&&mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); return; }
   if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); setTimeout(rdPush,500); actFirstRead(); return startQuiz("post", mainArticle()); }
@@ -4596,9 +4619,9 @@ function devRetHtml(A){
   const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
   return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(newT,T("drNew"))}${tile(dau,T("drDau"))}${tile(wau,T("drWau"))}${tile(ret(1),"D1")}${tile(ret(7),"D7")}${tile(ret(30),"D30")}${tile(back,T("drBack"))}${tile(`${onb}/${N}`,T("drOnb"))}${tile(`${rd}/${N}`,T("drRead"))}</div><p class="muted sm-t">${T("drNote")}</p>`;
 }
-Object.assign(STR.zh,{onbHi:"歡迎來到 BinBin daily！", onbHiSub:"每天讀一篇真實的英文新聞，點不會的字就有翻譯。邊學英文，邊升級冒險、跟朋友玩遊戲。", onbLang:"你習慣用哪種語言看翻譯？", onbLevel:"你的英文程度大概是？", onbLevelSub:"之後隨時可以在設定裡改。不確定就選 B1。", onbHow:"每天這樣玩", onbHow1:"讀今天的新聞，點不會的字就看得到意思", onbHow2:"讀完做小測驗，拿金幣和出征令", onbHow3:"查過的字會在對的時間自動提醒你複習", onbHow4:"去冒險打怪升級，或跟朋友玩多人遊戲", onbNext:"下一步", onbStart:"開始讀第一篇新聞 →", onbLook:"先自己逛逛", onbSkip:"略過", onbCoach:"第一次來嗎？從下面的「閱讀頭條」開始，點不會的字就有翻譯！",
+Object.assign(STR.zh,{onbHi:"歡迎來到 BinBin daily！", onbHiSub:"每天讀一篇真實的英文新聞，點不會的字就有翻譯。掌握時事，跟同事也有話題聊！邊學英文，邊升級冒險、跟朋友玩遊戲。", onbLang:"你習慣用哪種語言看翻譯？", onbLevel:"你的英文程度大概是？", onbLevelSub:"之後隨時可以在設定裡改。不確定就選 B1。", onbHow:"每天這樣玩", onbHow1:"讀今天的新聞，點不會的字就看得到意思", onbHow2:"讀完做小測驗，拿金幣和出征令", onbHow3:"查過的字會在對的時間自動提醒你複習", onbHow4:"去冒險打怪升級，或跟朋友玩多人遊戲", onbNext:"下一步", onbStart:"開始讀第一篇新聞 →", onbLook:"先自己逛逛", onbSkip:"略過", onbCoach:"第一次來嗎？從下面的「閱讀頭條」開始，點不會的字就有翻譯！",
  drTitle:"留存率", drNone:"還沒有資料（每台裝置每天打開會記錄一次）。", drDevices:"裝置總數", drNew:"今天新來", drDau:"今天活躍", drWau:"7 天內活躍", drBack:"有回來過", drOnb:"完成新手引導", drRead:"讀完第一篇", drNote:"D1／D7／D30：第一次打開後的第 1／7／30 天有再回來的比例。以裝置計算，不需要登入；只記錄日期、語言和程度，不含個人資料。"});
-Object.assign(STR.en,{onbHi:"Welcome to BinBin daily!", onbHiSub:"Read one real English news story a day and tap any word to see what it means. Learn English while you level up, go on adventures and play games with friends.", onbLang:"Which language do you want translations in?", onbLevel:"What's your English level?", onbLevelSub:"You can change it any time in Settings. Not sure? Pick B1.", onbHow:"How each day works", onbHow1:"Read today's news — tap any word you don't know", onbHow2:"Take a short quiz to earn gold and quest passes", onbHow3:"Words you looked up come back for review at just the right time", onbHow4:"Level up on adventures, or play games with friends", onbNext:"Next", onbStart:"Read my first story →", onbLook:"Look around first", onbSkip:"Skip", onbCoach:"New here? Start with “Read the headline” below — tap any word to see its meaning!",
+Object.assign(STR.en,{onbHi:"Welcome to BinBin daily!", onbHiSub:"Read one real English news story a day and tap any word to see what it means. Keep up with what's happening and always have something to talk about with colleagues! Learn English while you level up, go on adventures and play games with friends.", onbLang:"Which language do you want translations in?", onbLevel:"What's your English level?", onbLevelSub:"You can change it any time in Settings. Not sure? Pick B1.", onbHow:"How each day works", onbHow1:"Read today's news — tap any word you don't know", onbHow2:"Take a short quiz to earn gold and quest passes", onbHow3:"Words you looked up come back for review at just the right time", onbHow4:"Level up on adventures, or play games with friends", onbNext:"Next", onbStart:"Read my first story →", onbLook:"Look around first", onbSkip:"Skip", onbCoach:"New here? Start with “Read the headline” below — tap any word to see its meaning!",
  drTitle:"Retention", drNone:"No data yet (each device is counted once per day it opens the app).", drDevices:"Devices", drNew:"New today", drDau:"Active today", drWau:"Active in 7 days", drBack:"Came back", drOnb:"Finished intro", drRead:"Read first story", drNote:"D1 / D7 / D30: share of devices that came back exactly 1 / 7 / 30 days after their first visit. Counted per device without sign-in; only dates, language and level are stored."});
 Object.assign(STR.hi,{onbHi:"BinBin daily में आपका स्वागत है!", onbHiSub:"हर दिन एक असली अंग्रेज़ी ख़बर पढ़ें और किसी भी शब्द पर टैप करके उसका मतलब देखें। अंग्रेज़ी सीखते हुए लेवल बढ़ाएँ और दोस्तों के साथ खेलें।", onbLang:"अनुवाद किस भाषा में चाहिए?", onbLevel:"आपकी अंग्रेज़ी का स्तर क्या है?", onbLevelSub:"इसे कभी भी सेटिंग में बदल सकते हैं। पक्का नहीं? B1 चुनें।", onbHow:"हर दिन ऐसे खेलें", onbHow1:"आज की ख़बर पढ़ें — अनजान शब्द पर टैप करें", onbHow2:"छोटा क्विज़ देकर सोना और पास कमाएँ", onbHow3:"खोजे गए शब्द सही समय पर दोहराने के लिए लौटते हैं", onbHow4:"रोमांच में लेवल बढ़ाएँ या दोस्तों के साथ खेलें", onbNext:"आगे", onbStart:"पहली ख़बर पढ़ें →", onbLook:"पहले देख लूँ", onbSkip:"छोड़ें", onbCoach:"पहली बार? नीचे “हेडलाइन पढ़ें” से शुरू करें!"});
 Object.assign(STR.es,{onbHi:"¡Bienvenido a BinBin daily!", onbHiSub:"Lee una noticia real en inglés cada día y toca cualquier palabra para ver su significado. Aprende inglés mientras subes de nivel y juegas con amigos.", onbLang:"¿En qué idioma quieres las traducciones?", onbLevel:"¿Cuál es tu nivel de inglés?", onbLevelSub:"Puedes cambiarlo cuando quieras en Ajustes. ¿No estás seguro? Elige B1.", onbHow:"Así funciona cada día", onbHow1:"Lee la noticia de hoy y toca las palabras que no conozcas", onbHow2:"Haz un test corto para ganar oro y pases", onbHow3:"Las palabras que buscaste vuelven para repasarlas en el momento justo", onbHow4:"Sube de nivel en aventuras o juega con amigos", onbNext:"Siguiente", onbStart:"Leer mi primera noticia →", onbLook:"Echar un vistazo primero", onbSkip:"Saltar", onbCoach:"¿Primera vez? Empieza por «Leer el titular» aquí abajo."});
@@ -4968,6 +4991,12 @@ Object.assign(STR.hi,{dFresh:"नए खिलाड़ी की तरह फ�
 Object.assign(STR.es,{dFresh:"Empezar como jugador nuevo"});
 Object.assign(STR.ja,{dFresh:"新しいプレイヤーとして最初から"});
 Object.assign(STR.ko,{dFresh:"새 플레이어로 처음부터"});
+Object.assign(STR.zh,{"lvtTitle": "英文程度測驗", "lvtSub": "不確定自己的程度？花 1 分鐘測一下，文章會自動調成適合你的難度", "lvtDone": "你的程度：{l}（可以再測一次）", "lvtYour": "你的英文程度", "lvtSet": "已經把文章難度調成這個程度，之後隨時可以在設定裡改。"});
+Object.assign(STR.en,{"lvtTitle": "English level test", "lvtSub": "Not sure of your level? Take a 1-minute test and stories will match your level", "lvtDone": "Your level: {l} (tap to retake)", "lvtYour": "Your English level", "lvtSet": "Stories are now shown at this level. You can change it any time in Settings."});
+Object.assign(STR.hi,{"lvtTitle": "अंग्रेज़ी स्तर टेस्ट", "lvtSub": "अपना स्तर पक्का नहीं? 1 मिनट का टेस्ट दें, ख़बरें आपके स्तर पर दिखेंगी", "lvtDone": "आपका स्तर: {l} (फिर से दें)", "lvtYour": "आपका अंग्रेज़ी स्तर", "lvtSet": "अब ख़बरें इसी स्तर पर दिखेंगी। सेटिंग में कभी भी बदल सकते हैं।"});
+Object.assign(STR.es,{"lvtTitle": "Test de nivel de inglés", "lvtSub": "¿No sabes tu nivel? Haz un test de 1 minuto y las noticias se ajustarán a ti", "lvtDone": "Tu nivel: {l} (puedes repetirlo)", "lvtYour": "Tu nivel de inglés", "lvtSet": "Las noticias ya se muestran en este nivel. Puedes cambiarlo en Ajustes."});
+Object.assign(STR.ja,{"lvtTitle": "英語レベルテスト", "lvtSub": "自分のレベルがわからない？1分のテストで記事の難しさを合わせます", "lvtDone": "あなたのレベル：{l}（もう一度受けられます）", "lvtYour": "あなたの英語レベル", "lvtSet": "記事をこのレベルで表示します。設定でいつでも変更できます。"});
+Object.assign(STR.ko,{"lvtTitle": "영어 레벨 테스트", "lvtSub": "내 실력을 잘 모르겠다면? 1분 테스트로 기사 난이도를 맞춰 드려요", "lvtDone": "내 레벨: {l} (다시 테스트 가능)", "lvtYour": "나의 영어 레벨", "lvtSet": "이제 기사가 이 레벨로 보여요. 설정에서 언제든 바꿀 수 있어요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
