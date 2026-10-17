@@ -2808,7 +2808,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.93";
+const APP_VERSION="2026.10.94";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3441,17 +3441,27 @@ async function cloudFlush(){
   if(!words.length&&!dels.length&&!main) return;
   CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false; dirtySave();
   try{
-    const ops=[];
+    const ops=[];   // each op: {k, ref, data}
     if(main&&!DEV) setTimeout(lbPush,0);
-    if(main) ops.push(b=>b.set(userRef(),{name:(CLOUD.user&&CLOUD.user.displayName)||"", region:regionKey(), game:(DEV?DEV.game:S.game)||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1}));
-    const now=Date.now();
-    for(const k of words){ const v=S.words.get(k); if(v) ops.push(b=>b.set(fsM.doc(wordsCol(),k), {...JSON.parse(JSON.stringify(v)), _u:now})); }
-    for(const k of dels) ops.push(b=>b.set(fsM.doc(wordsCol(),k), {_del:1, _u:now}));
-    for(let i=0;i<ops.length;i+=400){ const b=fsM.writeBatch(db); ops.slice(i,i+400).forEach(f=>f(b)); await b.commit(); }
+    const clean=o=>JSON.parse(JSON.stringify(o,(k,v)=>typeof v==="number"&&!isFinite(v)?0:v));   // Firestore rejects undefined
+    if(main) ops.push({k:"", ref:userRef(), data:clean({name:(CLOUD.user&&CLOUD.user.displayName)||"", region:regionKey(), game:(DEV?DEV.game:S.game)||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1})});
+    const now=Date.now(), okId=k=>k&&k.length<700&&!k.includes("/")&&k!=="."&&k!==".."&&!/^__.*__$/.test(k);
+    for(const k of words){ const v=S.words.get(k); if(v&&okId(k)) ops.push({k, ref:fsM.doc(wordsCol(),k), data:{...clean(v), _u:now}}); }
+    for(const k of dels) if(okId(k)) ops.push({k, ref:fsM.doc(wordsCol(),k), data:{_del:1, _u:now}});
+    try{ for(let i=0;i<ops.length;i+=400){ const b=fsM.writeBatch(db); ops.slice(i,i+400).forEach(o=>b.set(o.ref,o.data)); await b.commit(); } }
+    catch(e0){
+      if(e0&&/unavailable|network|offline|deadline/i.test(String(e0.code||e0.message))) throw e0;
+      // one bad document must not block every save: write them one by one and drop the ones the server refuses
+      const res=await Promise.allSettled(ops.map(o=>fsM.setDoc(o.ref,o.data)));
+      const bad=res.map((r,i)=>r.status==="rejected"?[ops[i],r.reason]:null).filter(Boolean);
+      if(bad.length){ const [o,err]=bad[0]; errReport({message:"sync "+(o.k||"main")+": "+String(err&&(err.code||"")+" "+(err&&err.message||"")).slice(0,200), stack:JSON.stringify(o.data).length+" bytes"},"cloudFlush");
+        if(bad.some(([o])=>!o.k)) throw bad.find(([o])=>!o.k)[1]; }
+    }
     if(CLOUD.status!=="ok"){ CLOUD.status="ok"; render(); }
   }catch(e){
+    CLOUD.lastErr=String(e&&(e.code||e.message)||e).slice(0,80);
     words.forEach(k=>CLOUD.dirtyWords.add(k)); dels.forEach(k=>CLOUD.delWords.add(k)); if(main) CLOUD.dirtyMain=true; dirtySave();
-    if(CLOUD.status!=="err"){ CLOUD.status="err"; toast(T("syncFail")); render(); }
+    if(CLOUD.status!=="err"){ CLOUD.status="err"; toast(T("syncFail")+" ["+CLOUD.lastErr+"]"); render(); }
     clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,30000);
   }
 }
@@ -3463,7 +3473,7 @@ function accountCard(compact){
   if(CLOUD.status==="off") return compact?"":`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("cloudOff")}</span></section>`;
   const u=CLOUD.user;
   if(!u) return `<section class="card acct"><div><b>${T("acctTitle")}</b>${compact?"":`<p class="muted" style="margin:4px 0 0;font-size:13px">${T("acctOff")}</p>`}</div><button class="btn gbtn" data-act="signin">${G_SVG}<span>${T("signIn")}</span></button></section>`;
-  const st={ok:T("synced"),syncing:T("syncing"),err:T("syncFail")}[CLOUD.status]||"";
+  const st=({ok:T("synced"),syncing:T("syncing"),err:T("syncFail")+(CLOUD.lastErr?` (${esc(CLOUD.lastErr)})`:"")})[CLOUD.status]||"";
   return compact?"":`<section class="card acct"><div class="row" style="gap:10px;flex-wrap:nowrap">${u.photoURL?`<img src="${esc(u.photoURL)}" alt="" class="avatar" referrerpolicy="no-referrer">`:""}<div style="min-width:0;flex:1"><b>${T("signedAs",{n:esc(u.displayName||u.email||"")})}</b><div class="muted sm-t ${CLOUD.status==="err"?"bad-t":""}">${st}</div></div><button class="btn ghost" data-act="signout" style="padding:6px 12px;font-size:13px">${T("signOut")}</button></div></section>`;
 }
 
