@@ -779,7 +779,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
 .st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
 .st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
-.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
+.lvt-link{width:100%;margin-top:10px}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 </style>
 
 </head>
@@ -1066,7 +1066,7 @@ function setLevel(k){ LEVEL=k; try{ localStorage.setItem("che-pro-level",k); }ca
 function levelSheet(){
   return `<div class="scrim" data-act="closelevel"></div><div class="sheet" role="dialog" aria-label="${T("level")}"><div class="grab"></div>
     <div class="eyebrow" style="margin-bottom:10px">${T("level")}</div>
-    <div class="opts">${LEVELS.map(l=>`<button class="opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div></div>`;
+    <div class="opts">${LEVELS.map(l=>`<button class="opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div><button class="btn ghost sm lvt-link" data-act="lvtest">🧭 ${T("lvtLink")}</button></div>`;
 }
 const CEFR_RANK={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6};
 const LEVEL_MIN={A2:3,B1:3,B2:4,C1:5,IELTS:5};
@@ -1213,7 +1213,7 @@ function artCard(a, d){
 
 function viewToday(){
   const d=dayRec(), art=mainArticle(), el=eligible();
-  const preNeeded = el.length>0;
+  const preNeeded = el.length>0 && !(DEV&&DEV.fresh);
   const preDone = d.preDone || !preNeeded;
   const readDone = !!d.read;
   const postDone = d.postDone;
@@ -1304,7 +1304,7 @@ function viewSettings(){
     ${regionSection()}
     ${pushCard()}
     <details class="card set-sec set-fold" data-fold="lang"${S.fold&&S.fold.lang?" open":""}><summary><b>${T("language")} · Language</b><span class="fold-v" data-nosc>${(LANGS.find(l=>l.k===langKey())||{}).label}</span></summary><div class="opts">${langs}</div></details>
-    <details class="card set-sec set-fold" data-fold="lvl"${S.fold&&S.fold.lvl?" open":""}><summary><b>${T("level")}</b><span class="fold-v">${LEVEL==="IELTS"?"IELTS 7–8":esc(LEVEL)}</span></summary><div class="opts">${lvls}</div></details>
+    <details class="card set-sec set-fold" data-fold="lvl"${S.fold&&S.fold.lvl?" open":""}><summary><b>${T("level")}</b><span class="fold-v">${LEVEL==="IELTS"?"IELTS 7–8":esc(LEVEL)}</span></summary><div class="opts">${lvls}</div><button class="btn ghost sm lvt-link" data-act="lvtest">🧭 ${T("lvtLink")}</button></details>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     ${feedbackCard()}
@@ -2661,7 +2661,7 @@ function devAct(k){
   else if(k==="ieday"){ const st=ieState(); delete st.days[today()]; g.ieltsRun=null; }
   else if(k==="today"){ const d=dayRec(); saveDay({type:"day", date:d.date, preDone:false, postDone:false, read:null, lookedUp:d.lookedUp||[], lookedUpBy:d.lookedUpBy||{}}); g.revN=0; g.revDate=null; g.taxDate=null; }
   else if(k==="fresh"){   // see the app as a brand-new player: empty game, today's steps not started, welcome pages again (real save comes back on leaving dev mode)
-    S.game=newGame(); saveDay({type:"day", date:today(), preDone:false, postDone:false, read:null, lookedUp:[], lookedUpBy:{}});
+    S.game=newGame(); DEV.fresh=true; devSave(); try{ localStorage.removeItem(LVT_KEY); }catch(e){} saveDay({type:"day", date:today(), preDone:false, postDone:false, read:null, lookedUp:[], lookedUpBy:{}});
     S.story=null; if(typeof storyRender==="function") storyRender(); S.tab="today"; S.view="today"; S.articleId=null; S.quiz=null;
     saveGame(); render(); window.scrollTo(0,0); S.onb={step:0}; onbRender(); return; }
   saveGame(); toast(T("dDone")); render();
@@ -2844,7 +2844,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.98";
+const APP_VERSION="2026.10.99";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3336,7 +3336,7 @@ document.addEventListener("click", e=>{
   if(a==="home"){ S.tab="today"; S.view="today"; S.quiz=null; render(); window.scrollTo(0,0); return; }
   if(a==="back"){ const b=S.backTo||"today"; S.tab=b; S.view=b; render(); window.scrollTo(0,0); return; }
   if(a==="pre") return startQuiz("pre");
-  if(a==="lvtest") return startLvTest();
+  if(a==="lvtest"){ S.levelSheet=false; renderSheet&&renderSheet(); return startLvTest(); }
   if(a==="post") return startQuiz("post", mainArticle());
   if(a==="read"){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle()&&mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); return; }
   if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); setTimeout(rdPush,500); actFirstRead(); return startQuiz("post", mainArticle()); }
@@ -5013,6 +5013,12 @@ Object.assign(STR.hi,{"lvtYour": "आपके लिए सुझाया ग�
 Object.assign(STR.es,{"lvtYour": "Tu nivel de inglés recomendado", "lvtSet": "Las noticias empezarán en este nivel. Es solo una sugerencia, ¡sin presión!", "lvtTry": "¿Quieres más reto o algo más fácil? Elige cualquier nivel (puedes cambiarlo en Ajustes)", "lvtRec": "recomendado", "lvtDone": "Nivel recomendado: {l} (puedes repetirlo)", "lvtSkip": "No estoy seguro", "lvtCalm": "Sin presión: si no sabes una palabra, elige «No estoy seguro» 😊"});
 Object.assign(STR.ja,{"lvtYour": "おすすめの英語レベル", "lvtSet": "記事はこのレベルから始まります。あくまで目安なので気楽にどうぞ！", "lvtTry": "もっと挑戦したい？もう少し易しくしたい？好きなレベルを選べます（設定でいつでも変更可）", "lvtRec": "おすすめ", "lvtDone": "おすすめレベル：{l}（もう一度受けられます）", "lvtSkip": "わからない", "lvtCalm": "気楽にどうぞ。わからない単語は「わからない」を選んでね 😊"});
 Object.assign(STR.ko,{"lvtYour": "추천 영어 레벨", "lvtSet": "기사는 이 레벨로 시작해요. 그냥 추천일 뿐이니 부담 갖지 마세요!", "lvtTry": "더 도전하고 싶거나 좀 쉽게 하고 싶다면? 원하는 레벨을 고르세요 (설정에서 언제든 변경 가능)", "lvtRec": "추천", "lvtDone": "추천 레벨: {l} (다시 테스트 가능)", "lvtSkip": "잘 모르겠어요", "lvtCalm": "부담 없이! 모르는 단어는 ‘잘 모르겠어요’를 고르세요 😊"});
+Object.assign(STR.zh,{lvtLink:"不確定自己的程度？做 1 分鐘程度測驗"});
+Object.assign(STR.en,{lvtLink:"Not sure? Take the 1-minute level test"});
+Object.assign(STR.hi,{lvtLink:"पक्का नहीं? 1 मिनट का स्तर टेस्ट दें"});
+Object.assign(STR.es,{lvtLink:"¿No estás seguro? Haz el test de nivel de 1 minuto"});
+Object.assign(STR.ja,{lvtLink:"迷ったら1分のレベルテストへ"});
+Object.assign(STR.ko,{lvtLink:"잘 모르겠다면? 1분 레벨 테스트 하기"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
