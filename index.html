@@ -776,6 +776,9 @@ img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 .dev-errs{display:flex;flex-direction:column;gap:6px;border:1px dashed var(--line);border-radius:12px;padding:10px}.dev-err summary{font-size:13px;cursor:pointer;word-break:break-word}
 .onb-en{display:block;font-size:.72em;font-weight:500;opacity:.75;margin-top:4px}
 body.vp-lock{touch-action:pan-x pan-y}
+.stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
+.st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
+.st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
 </style>
 
 </head>
@@ -1166,7 +1169,7 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 /* ---------- rendering ---------- */
 function setTab(t){ S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
+function render(){ try{ renderInner(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
 const ERR_SENT=new Set();
 function errReport(e,where){ try{
@@ -1583,7 +1586,7 @@ function pick(i){
     if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardReview():null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
-    else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art)); }
+    else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art),art); }
   }
   explainAnswer(ans);
   render();
@@ -1620,6 +1623,13 @@ const elBadge=(k,big)=>`<span class="el el-${k||"none"}${big?" big":""}" title="
 const TIER=[{n:"Ⅰ",atk:6,def:4,hp:20,price:80,lv:1},{n:"Ⅱ",atk:14,def:10,hp:50,price:300,lv:4},{n:"Ⅲ",atk:26,def:18,hp:100,price:900,lv:8},{n:"Ⅳ",atk:42,def:30,hp:180,price:2500,lv:13}];
 const WNAMES={metal:["青銅劍","鋼鐵長劍","銀月之刃","努阿達光之劍"],wood:["橡木杖","山楂木杖","紫杉符文杖","德魯伊聖杖"],water:["漁夫三叉戟","潮汐三叉戟","塞爾基三叉戟","李爾海神三叉戟"],fire:["餘燼短弓","熔鐵長弓","烈焰戰弓","盧神之弓"],earth:["石錘","花崗岩戰鎚","巨人之鎚","達格達之鎚"]};
 const ANAMES={metal:["鎖子甲","鐵板甲","銀鱗甲","戰神之鎧"],wood:["樹皮背心","藤編護甲","古橡守護甲","森林之心鎧"],water:["海豹皮衣","潮紋鎧","深海鱗甲","李爾斗篷"],fire:["皮革護甲","熔岩護甲","鳳焰鎧","不滅烈焰甲"],earth:["泥石護甲","岩石重甲","山嶺鎧","大地之心鎧"]};
+/* ===== Level cap 50 (was 20). All stat tables are still written on the old 1–20 scale ("power level");
+   pl(L) maps a real level 1–50 onto it, so Lv 50 is as strong as the old Lv 20 and every level is a smaller step. ===== */
+const LV_MAX=50, OLD_MAX=20;
+const pl=L=>1+(Math.min(LV_MAX,Math.max(1,L))-1)*(OLD_MAX-1)/(LV_MAX-1);
+const lvFromOld=o=>Math.round(1+(o-1)*(LV_MAX-1)/(OLD_MAX-1));
+const TIER_LV=[1,13,26,39];   // armour/weapon looks: Ⅰ Lv1–12 · Ⅱ 13–25 · Ⅲ 26–38 · Ⅳ 39–50
+function baseStats(lv){ const q=pl(lv); return {hp:Math.round(100+20*(q-1)), atk:Math.round(10+3*(q-1)), def:Math.round(5+2*(q-1))}; }
 const ITEMS={};
 // legacy tier items (still owned / forged from shards, no longer sold in the shop)
 for(const e of ELS) TIER.forEach((t,i)=>{
@@ -1630,33 +1640,42 @@ for(const e of ELS) TIER.forEach((t,i)=>{
    (the wild monsters were tuned assuming gear of your level − 1) */
 const GEAR_W=L=>Math.round(4+2.4*L+0.06*L*L), GEAR_D=L=>Math.round(2.5+1.6*L+0.04*L*L), GEAR_H=L=>Math.round(10+8*L+0.45*L*L);
 const GEAR_PRICE=L=>{ const A=[[1,80],[4,300],[8,900],[13,2500],[20,5500]]; for(let i=0;i<A.length-1;i++){ const [a,pa]=A[i],[b,pb]=A[i+1]; if(L>=a&&L<=b) return Math.round((pa+(pb-pa)*(L-a)/(b-a))/10)*10; } return 5500; };
-const tierOfLv=L=>{ let t=0; TIER.forEach((x,i)=>{ if(L>=x.lv) t=i; }); return t; };
-for(let L=1;L<=20;L++) for(let k=0;k<3;k++){
-  const t=tierOfLv(L), plus=L-TIER[t].lv, we=ELS[(L*3+k)%5].k, ae=ELS[(L*3+k+2)%5].k;
-  ITEMS[`W${L}-${we}`]={id:`W${L}-${we}`, slot:"weapon", el:we, tier:t, plus, name:WNAMES[we][t], atk:GEAR_W(L), price:GEAR_PRICE(L), lv:L};
-  ITEMS[`A${L}-${ae}`]={id:`A${L}-${ae}`, slot:"armor", el:ae, tier:t, plus, name:ANAMES[ae][t], def:GEAR_D(L), hp:GEAR_H(L), price:GEAR_PRICE(L), lv:L};
+const tierOfLv=L=>{ let t=0; TIER_LV.forEach((x,i)=>{ if(L>=x) t=i; }); return t; };
+for(let L=1;L<=LV_MAX;L++) for(let k=0;k<3;k++){
+  const t=tierOfLv(L), plus=L-TIER_LV[t], we=ELS[(L*3+k)%5].k, ae=ELS[(L*3+k+2)%5].k, q=pl(L);
+  ITEMS[`W${L}-${we}`]={id:`W${L}-${we}`, slot:"weapon", el:we, tier:t, plus, name:WNAMES[we][t], atk:GEAR_W(q), price:GEAR_PRICE(q), lv:L};
+  ITEMS[`A${L}-${ae}`]={id:`A${L}-${ae}`, slot:"armor", el:ae, tier:t, plus, name:ANAMES[ae][t], def:GEAR_D(q), hp:GEAR_H(q), price:GEAR_PRICE(q), lv:L};
 }
 
 /* ----- conquest of Ireland: towns ordered by population (smallest = easiest) ----- */
 // [id, zh, en, hi, es, approx. population, lon, lat]
 const TOWN_ROWS=[
  ["dingle","丁格爾","Dingle","डिंगल","Dingle",2000,-10.27,52.14],
+ ["donegal","多尼戈爾","Donegal","डोनेगल","Donegal",3000,-8.11,54.65],
+ ["kinsale","金塞爾","Kinsale","किनसेल","Kinsale",5000,-8.52,51.71],
  ["westport","韋斯特波特","Westport","वेस्टपोर्ट","Westport",7000,-9.52,53.80],
+ ["castlebar","卡斯爾巴","Castlebar","कैसलबार","Castlebar",13000,-9.30,53.86],
  ["killarney","基拉尼","Killarney","किलार्नी","Killarney",14000,-9.51,52.06],
  ["enniskillen","恩尼斯基林","Enniskillen","एनिस्किलन","Enniskillen",14000,-7.64,54.34],
  ["armagh","阿馬","Armagh","आर्मा","Armagh",16000,-6.65,54.35],
+ ["clonmel","克朗梅爾","Clonmel","क्लोनमेल","Clonmel",18000,-7.70,52.35],
  ["sligo","斯萊戈","Sligo","स्लाइगो","Sligo",21000,-8.47,54.27],
  ["wexford","韋克斯福德","Wexford","वेक्सफ़र्ड","Wexford",22000,-6.46,52.34],
+ ["mullingar","穆林加","Mullingar","मुलिंगर","Mullingar",22500,-7.34,53.53],
  ["letterkenny","萊特肯尼","Letterkenny","लेटरकेनी","Letterkenny",23000,-7.73,54.95],
  ["athlone","阿斯隆","Athlone","एथलोन","Athlone",23000,-7.94,53.42],
+ ["portlaoise","波特萊歐斯","Portlaoise","पोर्टलीश","Portlaoise",23500,-7.30,53.03],
+ ["coleraine","科爾雷恩","Coleraine","कोलरेन","Coleraine",25000,-6.67,55.13],
  ["tralee","特拉利","Tralee","ट्रैली","Tralee",26000,-9.70,52.27],
  ["kilkenny","基爾肯尼","Kilkenny","किलकेनी","Kilkenny",27000,-7.25,52.65],
  ["newry","紐里","Newry","न्यूरी","Newry",27000,-6.34,54.18],
  ["carlow","卡洛","Carlow","कार्लो","Carlow",27000,-6.93,52.84],
  ["ennis","恩尼斯","Ennis","एनिस","Ennis",28000,-8.98,52.84],
+ ["navan","納文","Navan","नवन","Navan",31000,-6.68,53.65],
  ["dundalk","鄧多克","Dundalk","डंडॉक","Dundalk",43000,-6.40,54.00],
  ["drogheda","德羅赫達","Drogheda","ड्रोहेडा","Drogheda",44000,-6.35,53.72],
  ["waterford","沃特福德","Waterford","वॉटरफ़र्ड","Waterford",60000,-7.11,52.26],
+ ["bangor","班戈","Bangor","बैंगर","Bangor",64000,-5.67,54.66],
  ["derry","德里","Derry","डेरी","Derry",85000,-7.31,55.00],
  ["galway","戈爾韋","Galway","गॉलवे","Galway",86000,-9.05,53.27],
  ["limerick","利默里克","Limerick","लिमरिक","Limerick",102000,-8.63,52.66],
@@ -1664,9 +1683,18 @@ const TOWN_ROWS=[
  ["belfast","貝爾法斯特","Belfast","बेलफ़ास्ट","Belfast",345000,-5.93,54.60],
  ["dublin","都柏林","Dublin","डबलिन","Dublín",1260000,-6.26,53.35],
 ];
-const TOWN_LV=[1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,9,10,11,12,13,15,17,20];
+const TOWN_LV=[1,2,3,4,6,7,8,10,11,13,14,16,17,19,21,22,24,26,27,29,31,32,34,36,38,39,41,43,45,46,48,50];   // Lv 1–50, Balor of Dublin at 50
 // [id, zh, en, hi, es, element, lore]
 const FOES={
+ donegal:["selkie","海豹人","Selkie","सेल्की","Selkie","water","A seal who sheds her skin to walk on land as a woman."],
+ kinsale:["cusith","精靈獵犬","Cú Sídhe","परी श्वान","Cú Sídhe (perro hada)","wood","A huge green fairy hound whose three barks call souls away."],
+ castlebar:["bodach","夜行怪","Bodach","बोडाख","Bodach","earth","A creepy old trickster who slips down chimneys at night."],
+ clonmel:["bananach","戰場女妖","Bánánach","बानानख","Bánánach","metal","Shrieking spirits that haunt ancient battlefields."],
+ mullingar:["aossi","精靈大軍","Aos Sí","परी सेना","Aos Sí (hueste feérica)","wood","The fairy host that rides out from the hollow hills."],
+ portlaoise:["cailleach","冬之老嫗","Cailleach","कैलियख","Cailleach","water","The hag of winter who shapes mountains and brings the storms."],
+ coleraine:["aillen","噴火怪人","Aillén","आइलेन","Aillén","fire","He lulled Tara to sleep with music, then burned it every Samhain."],
+ navan:["cromcruach","克羅姆神像","Crom Cruach","क्रॉम क्रूआख","Crom Cruach","earth","A golden idol of an old dark god, once worshipped near Navan."],
+ bangor:["morrigan","莫莉甘","The Morrígan","मॉरिगन","La Morrígan","metal","The war goddess who flies over battle as a raven."],
  dingle:["merrow","梅羅人魚","Merrow","मेरो जलपरी","Merrow (sirena)","water","A sea maiden who needs her red cap to return beneath the waves."],
  westport:["changeling","換生靈","Changeling","चेंजलिंग","Niño cambiado","wood","A fairy child secretly left in place of a human baby."],
  killarney:["leprechaun","小矮妖","Leprechaun","लेप्रेकॉन","Leprechaun","metal","A tiny shoemaker who hides his gold at the end of the rainbow."],
@@ -1699,11 +1727,11 @@ function statsAt(lv){
   const t=b[0]===a[0]?0:(lv-a[0])/(b[0]-a[0]); const f=j=>Math.round(a[j]+(b[j]-a[j])*t);
   return {hp:f(1),atk:f(2),def:f(3),exp:f(4),gold:f(5)};
 }
-const TJK={dingle:["ディングル","딩글"],westport:["ウェストポート","웨스트포트"],killarney:["キラーニー","킬라니"],enniskillen:["エニスキレン","에니스킬렌"],armagh:["アーマー","아마"],sligo:["スライゴ","슬라이고"],wexford:["ウェックスフォード","웩스퍼드"],letterkenny:["レターケニー","레터케니"],athlone:["アスローン","애슬론"],tralee:["トラリー","트랄리"],kilkenny:["キルケニー","킬케니"],newry:["ニューリー","뉴리"],carlow:["カーロウ","칼로"],ennis:["エニス","에니스"],dundalk:["ダンドーク","던독"],drogheda:["ドロヘダ","드로이다"],waterford:["ウォーターフォード","워터퍼드"],derry:["デリー","데리"],galway:["ゴールウェイ","골웨이"],limerick:["リムリック","리머릭"],cork:["コーク","코크"],belfast:["ベルファスト","벨파스트"],dublin:["ダブリン","더블린"]};
-const FJK={dingle:["人魚メロウ","인어 메로우"],westport:["チェンジリング","체인질링"],killarney:["レプラコーン","레프리콘"],enniskillen:["グロゴッホ","그로고흐"],armagh:["赤服の男フィア・ジャルグ","붉은 옷의 피어 다르그"],sligo:["水の猟犬ドバルクー","물의 사냥개 도바르쿠"],wexford:["クルーラホーン","클루리컨"],letterkenny:["妖精猫キャット・シー","요정 고양이 캣 시"],athlone:["プーカ","푸카"],tralee:["水馬アッハ・イシュカ","물말 아흐 이슈카"],kilkenny:["ウィル・オ・ウィスプ","도깨비불"],newry:["ガンコナー","간커나"],carlow:["飢えた男フィア・ゴルタ","굶주린 자 피어 고르타"],ennis:["リャナン・シー","리아난 시"],dundalk:["火吐く魔女カオラナッハ","불을 뿜는 케어해너흐"],drogheda:["亡霊の群れスルーア","망령 무리 슬루아"],waterford:["バンシー","밴시"],derry:["吸血王アバルタッハ","흡혈 군주 아바르타흐"],galway:["三つ首のエレン","머리 셋 엘렌"],limerick:["大海蛇オリフィースト","거대 뱀 올리페이스트"],cork:["首なし騎士デュラハン","목 없는 기사 듀라한"],belfast:["フォモールの巨人","포모르 거인"],dublin:["魔眼のバロール","마안의 발로르"]};
+const TJK={donegal:["ドニゴール","도니골"],kinsale:["キンセール","킨세일"],castlebar:["キャッスルバー","캐슬바"],clonmel:["クロンメル","클론멜"],mullingar:["マリンガー","멀링가"],portlaoise:["ポートリーシュ","포틀리시"],coleraine:["コールレーン","콜레인"],navan:["ナヴァン","나반"],bangor:["バンガー","뱅거"],dingle:["ディングル","딩글"],westport:["ウェストポート","웨스트포트"],killarney:["キラーニー","킬라니"],enniskillen:["エニスキレン","에니스킬렌"],armagh:["アーマー","아마"],sligo:["スライゴ","슬라이고"],wexford:["ウェックスフォード","웩스퍼드"],letterkenny:["レターケニー","레터케니"],athlone:["アスローン","애슬론"],tralee:["トラリー","트랄리"],kilkenny:["キルケニー","킬케니"],newry:["ニューリー","뉴리"],carlow:["カーロウ","칼로"],ennis:["エニス","에니스"],dundalk:["ダンドーク","던독"],drogheda:["ドロヘダ","드로이다"],waterford:["ウォーターフォード","워터퍼드"],derry:["デリー","데리"],galway:["ゴールウェイ","골웨이"],limerick:["リムリック","리머릭"],cork:["コーク","코크"],belfast:["ベルファスト","벨파스트"],dublin:["ダブリン","더블린"]};
+const FJK={donegal:["セルキー","셀키"],kinsale:["妖精犬クー・シー","요정견 쿠시"],castlebar:["ボダッハ","보다흐"],clonmel:["バーナーナッハ","바나나흐"],mullingar:["妖精の軍勢アオス・シー","요정 군대 아오스 시"],portlaoise:["冬の老婆カリャッハ","겨울 노파 칼리아흐"],coleraine:["火吹きアレン","불 뿜는 알렌"],navan:["クロム・クルアッハ","크롬 크루아흐"],bangor:["モリガン","모리안"],dingle:["人魚メロウ","인어 메로우"],westport:["チェンジリング","체인질링"],killarney:["レプラコーン","레프리콘"],enniskillen:["グロゴッホ","그로고흐"],armagh:["赤服の男フィア・ジャルグ","붉은 옷의 피어 다르그"],sligo:["水の猟犬ドバルクー","물의 사냥개 도바르쿠"],wexford:["クルーラホーン","클루리컨"],letterkenny:["妖精猫キャット・シー","요정 고양이 캣 시"],athlone:["プーカ","푸카"],tralee:["水馬アッハ・イシュカ","물말 아흐 이슈카"],kilkenny:["ウィル・オ・ウィスプ","도깨비불"],newry:["ガンコナー","간커나"],carlow:["飢えた男フィア・ゴルタ","굶주린 자 피어 고르타"],ennis:["リャナン・シー","리아난 시"],dundalk:["火吐く魔女カオラナッハ","불을 뿜는 케어해너흐"],drogheda:["亡霊の群れスルーア","망령 무리 슬루아"],waterford:["バンシー","밴시"],derry:["吸血王アバルタッハ","흡혈 군주 아바르타흐"],galway:["三つ首のエレン","머리 셋 엘렌"],limerick:["大海蛇オリフィースト","거대 뱀 올리페이스트"],cork:["首なし騎士デュラハン","목 없는 기사 듀라한"],belfast:["フォモールの巨人","포모르 거인"],dublin:["魔眼のバロール","마안의 발로르"]};
 const TOWNS=TOWN_ROWS.map((r,i)=>{
   const [id,zh,en,hi,es,pop,lon,lat]=r, f=FOES[id], lv=TOWN_LV[i];
-  const st= id==="dublin" ? {hp:1200,atk:108,def:45,exp:900,gold:400} : statsAt(lv);
+  const st= id==="dublin" ? {hp:1200,atk:108,def:45,exp:900,gold:400} : statsAt(pl(lv));
   return {id, rank:i, name:{zh,en,hi,es,ja:TJK[id][0],ko:TJK[id][1]}, pop, lon, lat, lv, tax:2+Math.round(i*0.8),
     foe:{mid:f[0], name:{zh:f[1],en:f[2],hi:f[3],es:f[4],ja:FJK[id][0],ko:FJK[id][1]}}, el:f[5], lore:f[6], en:f[2], boss:id==="dublin", ...st};
 });
@@ -1791,22 +1819,30 @@ const ART={
    [level, hp, atk, def] */
 const WILD_STATS=[[1,50,19,4],[2,63,26,5],[3,75,30,7],[4,101,42,9],[5,138,44,11],[6,142,57,12],[7,246,71,14],[8,282,74,16],[9,538,118,17],[10,536,148,19],
   [11,354,88,21],[12,443,90,22],[13,827,95,24],[14,899,99,26],[15,948,172,28],[16,1030,176,29],[17,1120,191,31],[18,1797,282,33],[19,1886,293,34],[20,1921,358,36]];
-const ALLY_LV=10, ALLY_HIT=0.7, ALLY_AGGRO=0.45;   // ally deals 70% damage; monster targets the ally 45% of the time
-// creature: [key, minLv, maxLv, zh, en, hi, es, ja, ko, lore]
+const ALLY_LV=lvFromOld(10), ALLY_HIT=0.7, ALLY_AGGRO=0.45;   // ally deals 70% damage; monster targets the ally 45% of the time
+// creature: [key, minLv, maxLv (real levels 1–50), zh, en, hi, es, ja, ko, lore]
 const CREATURES=[
- ["hare",1,3,"野兔","Hare","खरगोश","Liebre","ノウサギ","산토끼","Irish hares box in the spring fields and were once thought to be witches in disguise."],
- ["badger",1,4,"獾","Badger","बिज्जू","Tejón","アナグマ","오소리","Badgers dig huge setts under Irish hedgerows that families use for generations."],
- ["raven",1,5,"渡鴉","Raven","काला कौआ","Cuervo","ワタリガラス","큰까마귀","The war goddess Morrígan often took the shape of a raven over the battlefield."],
- ["fox",2,7,"狐狸","Fox","लोमड़ी","Zorro","キツネ","여우","Clever and quick, the red fox is the trickster of many Irish fireside stories."],
- ["eel",4,8,"鰻魚","Eel","ईल मछली","Anguila","ウナギ","장어","Lough Neagh eels travel thousands of kilometres to the Sargasso Sea and back."],
- ["boar",5,10,"野豬","Boar","जंगली सूअर","Jabalí","イノシシ","멧돼지","Torc Triath, the great boar of legend, was hunted across Ireland by Arthur's men."],
- ["wolf",7,12,"灰狼","Wolf","भेड़िया","Lobo","オオカミ","늑대","Ireland was once called 'Wolf-land'; the last wild wolf was seen in 1786."],
- ["stag",9,14,"雄鹿","Stag","बारहसिंगा","Ciervo","オスジカ","수사슴","The giant Irish elk had antlers more than three metres wide."],
- ["crab",11,17,"巨蟹","Giant Crab","विशाल केकड़ा","Cangrejo gigante","オオガニ","왕게","Fishermen tell of crabs as big as currachs hiding off the Atlantic coast."],
- ["bear",13,20,"棕熊","Bear","भालू","Oso","ヒグマ","불곰","Brown bears roamed Ireland until about 2,500 years ago."],
- ["serpent",15,20,"大蛇","Serpent","महानाग","Serpiente","オオヘビ","큰뱀","Saint Patrick is said to have driven every serpent into the sea."],
- ["golem",17,20,"石巨人","Stone Giant","पत्थर दानव","Gigante de piedra","岩の巨人","돌거인","A giant of standing stones, woken when someone moves a fairy ring."],
-];
+ ["hare",1,6,"野兔","Hare","खरगोश","Liebre","ノウサギ","산토끼","Irish hares box in the spring fields and were once thought to be witches in disguise."],
+ ["badger",1,9,"獾","Badger","बिज्जू","Tejón","アナグマ","오소리","Badgers dig huge setts under Irish hedgerows that families use for generations."],
+ ["raven",1,11,"渡鴉","Raven","काला कौआ","Cuervo","ワタリガラス","큰까마귀","The war goddess Morrígan often took the shape of a raven over the battlefield."],
+ ["fox",4,16,"狐狸","Fox","लोमड़ी","Zorro","キツネ","여우","Clever and quick, the red fox is the trickster of many Irish fireside stories."],
+ ["eel",9,19,"鰻魚","Eel","ईल मछली","Anguila","ウナギ","장어","Lough Neagh eels travel thousands of kilometres to the Sargasso Sea and back."],
+ ["boar",11,24,"野豬","Boar","जंगली सूअर","Jabalí","イノシシ","멧돼지","Torc Triath, the great boar of legend, was hunted across Ireland by Arthur's men."],
+ ["wolf",16,29,"灰狼","Wolf","भेड़िया","Lobo","オオカミ","늑대","Ireland was once called 'Wolf-land'; the last wild wolf was seen in 1786."],
+ ["stag",22,35,"雄鹿","Stag","बारहसिंगा","Ciervo","オスジカ","수사슴","The giant Irish elk had antlers more than three metres wide."],
+ ["crab",27,42,"巨蟹","Giant Crab","विशाल केकड़ा","Cangrejo gigante","オオガニ","왕게","Fishermen tell of crabs as big as currachs hiding off the Atlantic coast."],
+ ["bear",32,50,"棕熊","Bear","भालू","Oso","ヒグマ","불곰","Brown bears roamed Ireland until about 2,500 years ago."],
+ ["serpent",37,50,"大蛇","Serpent","महानाग","Serpiente","オオヘビ","큰뱀","Saint Patrick is said to have driven every serpent into the sea."],
+ ["golem",42,50,"石巨人","Stone Giant","पत्थर दानव","Gigante de piedra","岩の巨人","돌거인","A giant of standing stones, woken when someone moves a fairy ring."],
+
+ ["heron",8,18,"蒼鷺","Grey Heron","बगुला","Garza","アオサギ","왜가리","Herons stand so still in Irish rivers that people called them the old men of the water."],
+ ["seal",12,26,"海豹","Seal","सील","Foca","アザラシ","물범","Grey seals sing on the rocks of the west coast, and some say they are selkies in disguise."],
+ ["salmon",16,30,"智慧鮭魚","Salmon of Knowledge","ज्ञान की सैल्मन","Salmón del saber","知恵の鮭","지혜의 연어","Fionn burned his thumb cooking the Salmon of Knowledge and learned everything in the world."],
+ ["wildcat",20,34,"野貓","Wildcat","जंगली बिल्ली","Gato montés","ヤマネコ","들고양이","Wildcats once prowled Irish woods; old tales tell of a cat king who ruled them all."],
+ ["elk",26,40,"巨角鹿","Giant Elk","विशाल एल्क","Alce gigante","オオツノジカ","큰뿔사슴","Skeletons of the giant Irish elk, with antlers wider than a car, are still dug out of the bogs."],
+ ["shark",32,46,"姥鯊","Basking Shark","बास्किंग शार्क","Tiburón peregrino","ウバザメ","돌묵상어","The second-largest fish in the world glides along the Irish coast every summer."],
+ ["troll",36,50,"沼地巨魔","Bog Troll","दलदली दानव","Trol del pantano","沼のトロル","늪 트롤","Turf cutters whisper about a troll who sleeps under the bog and hates being woken."],
+ ["wyrm",40,50,"古龍","Ancient Wyrm","प्राचीन अजगर","Sierpe antigua","古竜","고대 용","A wingless dragon said to sleep coiled beneath an Irish lake since before the first kings."],];
 const EL_PRE={zh:{metal:"鋼鐵",wood:"青苔",water:"寒潮",fire:"赤焰",earth:"岩甲"},en:{metal:"Iron",wood:"Moss",water:"Tide",fire:"Ember",earth:"Stone"},
   hi:{metal:"लौह",wood:"काई",water:"ज्वार",fire:"अंगार",earth:"पाषाण"},es:{metal:"de hierro",wood:"de musgo",water:"de marea",fire:"de brasa",earth:"de piedra"},
   ja:{metal:"鋼の",wood:"苔の",water:"潮の",fire:"炎の",earth:"岩の"},ko:{metal:"강철",wood:"이끼",water:"물결",fire:"불꽃",earth:"바위"}};
@@ -1855,11 +1891,15 @@ function creatureArt(k, el){
      <rect x="34" y="82" width="12" height="10" rx="3" fill="${d}" ${st}/><rect x="54" y="82" width="12" height="10" rx="3" fill="${d}" ${st}/>
      <circle cx="44" cy="30" r="3.4" fill="#FFE27A"/><circle cx="56" cy="30" r="3.4" fill="#FFE27A"/><path d="M42 38 L58 38" ${st}/><path d="M38 58 L46 64 L40 72 M62 52 L56 60" fill="none" stroke="${d}" stroke-width="2.4"/>`,
   };
-  return A[k]||A.hare;
+  return A[k]||A[{heron:"raven",seal:"eel",salmon:"eel",wildcat:"fox",elk:"stag",shark:"eel",troll:"golem",wyrm:"serpent"}[k]]||A.hare;
 }
 const WILD=[];
-for(const [L,hp,atk,def] of WILD_STATS){
-  const pool=CREATURES.filter(c=>L>=c[1]&&L<=c[2]), st0=statsAt(L), rank=L<=4?"young":L>=15?"ancient":"";
+// wild stats for any real level: interpolate the tuned 1–20 table at power level pl(L)
+function wildStatsAt(L){ const q=pl(L), i=Math.min(WILD_STATS.length-2,Math.floor(q)-1), t=q-(i+1), A=WILD_STATS[i], B=WILD_STATS[i+1];
+  return [L, ...[1,2,3].map(j=>Math.round(A[j]+(B[j]-A[j])*t))]; }
+for(let LL=1; LL<=LV_MAX; LL++){
+  const [L,hp,atk,def]=wildStatsAt(LL);
+  const pool=CREATURES.filter(c=>L>=c[1]&&L<=c[2]), st0=statsAt(pl(L)), rank=L<=9?"young":L>=37?"ancient":"";
   for(let k=0;k<3;k++){
     const cr=pool[(L+k)%pool.length], el=ELS[(L*2+k)%5].k;
     const nm={}; for(const lg of ["zh","en","hi","es","ja","ko"]){ const base=cr[{zh:3,en:4,hi:5,es:6,ja:7,ko:8}[lg]], p=EL_PRE[lg][el], r=rank?RANK_PRE[rank][lg]:"";
@@ -1876,7 +1916,7 @@ const wildOpen=m=>game().lv>=m.lv;
 /* ===== Allies (Lv 10+): a daily computer ally, or a friend you bind with (not the same person two days running) ===== */
 const ALLY_POOL=[["Aoife","IE"],["Cian","IE"],["Niamh","IE"],["Oisín","IE"],["Saoirse","IE"],["Fionn","IE"],["Ciara","IE"],["Darragh","IE"],["Mei","TW"],["Yu-chen","TW"],["Haruto","JP"],["Sakura","JP"],
   ["Ji-woo","KR"],["Min-jun","KR"],["Priya","IN"],["Arjun","IN"],["Lucía","ES"],["Mateo","MX"],["Chloé","FR"],["Noah","GB"],["Emma","US"],["Liam","CA"],["Olivia","AU"],["Lukas","DE"]];
-const tierFor=lv=>{ let t=0; TIER.forEach((x,i)=>{ if(lv>=x.lv) t=i; }); return t; };
+const tierFor=lv=>tierOfLv(lv);
 /* Data that other players can write (leaderboards, rooms, allies, feedback…) is cleaned when it arrives:
    angle brackets in any text are replaced, so even a field that is printed without esc() cannot inject HTML. */
 function safeDoc(o, depth=0){
@@ -1888,7 +1928,7 @@ function safeDoc(o, depth=0){
 }
 const hashStr=s=>{ let h=2166136261; for(const c of s){ h^=c.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; };
 const yesterday=()=>{ const d=new Date(); d.setDate(d.getDate()-1); return ymd(d); };
-function allyStatsOf(lv,wEl,aEl){ const gl=Math.max(1,lv-1); return {hp:100+20*(lv-1)+GEAR_H(gl), atk:10+3*(lv-1)+GEAR_W(gl), def:5+2*(lv-1)+GEAR_D(gl), wEl, aEl, gl}; }
+function allyStatsOf(lv,wEl,aEl){ const gl=Math.max(1,lv-1), b=baseStats(lv), q=pl(gl); return {hp:b.hp+GEAR_H(q), atk:b.atk+GEAR_W(q), def:b.def+GEAR_D(q), wEl, aEl, gl}; }
 function cpuAlly(){
   const g=game(), td=today(); g.allyLog=g.allyLog||{};
   if(g.allyLog[td]&&g.allyLog[td].cpu&&g.allyLog[td].cpu.wId) return g.allyLog[td].cpu;
@@ -1898,13 +1938,13 @@ function cpuAlly(){
   const topLv=Math.max(...Object.values(ITEMS).filter(it=>!it.legacy).map(it=>it.lv)), gq=Math.min(gl,topLv);   // above the strongest gear, ally still uses the best items
   const shop=slot=>Object.values(ITEMS).filter(it=>!it.legacy&&it.slot===slot&&it.lv>=gq-1&&it.lv<=gq);
   const ws=shop("weapon"), as=shop("armor"), wi=ws[(seed>>>8)%ws.length], ai=as[(seed>>>11)%as.length];
-  const a={kind:"cpu", id:"cpu-"+i, n:ALLY_POOL[i][0], flag:ALLY_POOL[i][1], lv, hp:100+20*(lv-1)+ai.hp, atk:10+3*(lv-1)+wi.atk, def:5+2*(lv-1)+ai.def, wEl:wi.el, aEl:ai.el, wId:wi.id, aId:ai.id, gl};
+  const a={kind:"cpu", id:"cpu-"+i, n:ALLY_POOL[i][0], flag:ALLY_POOL[i][1], lv, hp:baseStats(lv).hp+ai.hp, atk:baseStats(lv).atk+wi.atk, def:baseStats(lv).def+ai.def, wEl:wi.el, aEl:ai.el, wId:wi.id, aId:ai.id, gl};
   g.allyLog[td]={...(g.allyLog[td]||{}), cpu:a, id:a.id}; const ks=Object.keys(g.allyLog).sort(); while(ks.length>7) delete g.allyLog[ks.shift()]; saveGame();
   return a;
 }
 function todayAlly(){ const g=game(); if(g.lv<ALLY_LV) return null; const f=S.allyFriend; if(f&&f.date===today()) return f;
   const c=cpuAlly(), lend=g.allyGear&&g.allyGear.date===today()?g.allyGear:null; if(!lend) return c;
-  const a={...c}, base={hp:100+20*(c.lv-1), atk:10+3*(c.lv-1), def:5+2*(c.lv-1)}, gl=Math.max(1,c.lv-1);
+  const a={...c}, base=baseStats(c.lv), gl=Math.max(1,c.lv-1);
   const w=lend.w&&lend.w!==g.weapon&&g.inv.includes(lend.w)&&ITEMS[lend.w], ar=lend.a&&lend.a!==g.armor&&g.inv.includes(lend.a)&&ITEMS[lend.a];
   if(w){ a.atk=base.atk+w.atk; a.wEl=w.el; a.wId=w.id; a.lentW=w.id; }
   if(ar){ a.def=base.def+ar.def; a.hp=base.hp+ar.hp; a.aEl=ar.el; a.aId=ar.id; a.lentA=ar.id; }
@@ -2006,6 +2046,7 @@ function huntHtml(){
   return `<div class="hunt"><div class="eyebrow">⚔️ ${T("huntTitle")}</div>
     ${towns.length?`<div class="mons">${towns.map(townRow).join("")}</div>`:""}
     <div class="eyebrow">🐾 ${T("wildTitle")}</div>
+    ${(()=>{ const st=stamina(), nm=stamNextMin(); return `<div class="stam-bar" title="${esc(T("stamHint",{h:STAM_HOURS}))}"><span>⚡ ${T("stam")}</span><span class="stam-pips">${Array.from({length:STAM_MAX},(_,i)=>`<i class="${i<st.v?"on":""}"></i>`).join("")}</span><b>${st.v}/${STAM_MAX}</b>${nm?`<span class="muted sm-t">${T("stamNext",{m:nm>=60?Math.floor(nm/60)+"h"+String(nm%60).padStart(2,"0"):nm+"m"})}</span>`:""}</div>`; })()}
     ${wild.length?`<div class="mons">${wild.map(m=>wildCard(m)).join("")}</div>`:`<p class="muted sm-t">${T("wildDone")}</p>`}</div>`;
 }
 
@@ -2013,7 +2054,9 @@ function huntHtml(){
 const PICS=new Set(["armor-earth-1", "armor-earth-2", "armor-earth-3", "armor-earth-4", "armor-fire-1", "armor-fire-2", "armor-fire-3", "armor-fire-4", "armor-metal-1", "armor-metal-2", "armor-metal-3", "armor-metal-4", "armor-water-1", "armor-water-2", "armor-water-3", "armor-water-4", "armor-wood-1", "armor-wood-2", "armor-wood-3", "armor-wood-4", "town-changeling", "town-leprechaun", "town-merrow", "weapon-earth-1", "weapon-earth-2", "weapon-earth-3", "weapon-earth-4", "weapon-fire-1", "weapon-fire-2", "weapon-fire-3", "weapon-fire-4", "weapon-metal-1", "weapon-metal-2", "weapon-metal-3", "weapon-metal-4", "weapon-water-1", "weapon-water-2", "weapon-water-3", "weapon-water-4", "weapon-wood-1", "weapon-wood-2", "weapon-wood-3", "weapon-wood-4"]);
 const picOfMon=t=>{ const mid=t&&t.foe&&t.foe.mid; if(!mid) return null; const k=mid.startsWith("w_")?"wild-"+mid.slice(2).replace(/_/g,"-"):"town-"+mid; return PICS.has(k)?k:null; };
 const picOfItem=it=>{ if(!it||it.tier==null) return null; const k=`${it.slot==="weapon"?"weapon":"armor"}-${it.el}-${it.tier+1}`; return PICS.has(k)?k:null; };
-function monSvg(t, cls){ const pk=picOfMon(t); if(pk) return `<img src="assets/art/${pk}.webp" class="${cls||"mon-art"} pic" alt="" draggable="false">`; const f=ART[t.foe.mid]; return f?`<svg viewBox="0 0 100 100" class="${cls||"mon-art"}" aria-hidden="true">${f()}</svg>`:""; }
+// until the new monsters are drawn, borrow the closest existing figure
+const ART_STANDIN={selkie:"merrow",cusith:"catsi",bodach:"grogoch",bananach:"banshee",aossi:"sluagh",cailleach:"feargorta",aillen:"caorthannach",cromcruach:"fomorian",morrigan:"banshee"};
+function monSvg(t, cls){ const pk=picOfMon(t); if(pk) return `<img src="assets/art/${pk}.webp" class="${cls||"mon-art"} pic" alt="" draggable="false">`; const f=ART[t.foe.mid]||ART[ART_STANDIN[t.foe.mid]]; return f?`<svg viewBox="0 0 100 100" class="${cls||"mon-art"}" aria-hidden="true">${f()}</svg>`:""; }
 
 const townShort=t=>t.name[LANG]||t.name.en;
 const townName=t=>{ const n=townShort(t); return LANG==="en"||n===t.name.en?n:`${n} (${t.name.en})`; };
@@ -2063,24 +2106,41 @@ function viewConquest(){
     ${notebookHtml()}`;
 }
 
-const G_DEFAULT={type:"game", gender:null, shield:null, helmet:null, gold:0, tickets:1, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
-function newGame(over){ return {...JSON.parse(JSON.stringify(G_DEFAULT)), ...(over||{})}; }   // deep copy so no two saves share arrays or maps
+const G_DEFAULT={type:"game", lvScale:LV_MAX, gender:null, shield:null, helmet:null, gold:0, tickets:0, lv:1, exp:0, inv:[], weapon:null, armor:null, wins:{}, battles:0, conq:{}, taxDate:null, lotto:0, shards:{}, revDate:null, revN:0};
+function newGame(over){ const o=over||{}, g={...JSON.parse(JSON.stringify(G_DEFAULT)), ...o}; if(o.lvScale!==LV_MAX) delete g.lvScale; return migrateLv50(g); }
+/* saves from before the Lv 50 update: move level, gear and wild records onto the new scale once (same strength as before) */
+function migrateLv50(g){
+  if(g.lvScale===LV_MAX) return g;
+  if(g.lv>1||(g.inv&&g.inv.length)){
+    const mapItem=id=>{ const m=/^([WA])(\d+)-(\w+)$/.exec(id||""); if(!m) return id; const L=lvFromOld(+m[2]), el=m[3];
+      for(const d of [0,-1,1,-2,2,-3,3]){ const k=`${m[1]}${L+d}-${el}`; if(ITEMS[k]) return k; } return id; };
+    g.lv=lvFromOld(g.lv||1); g.exp=0;
+    g.inv=[...new Set((g.inv||[]).map(mapItem))]; g.weapon=g.weapon&&mapItem(g.weapon); g.armor=g.armor&&mapItem(g.armor);
+    const w={}; for(const [k,v] of Object.entries(g.wins||{})){ const m=/^wd(\d+)-(\d)$/.exec(k); w[m?`wd${lvFromOld(+m[1])}-${m[2]}`:k]=v; } g.wins=w;
+  }
+  g.lvScale=LV_MAX; return g;
+}   // deep copy so no two saves share arrays or maps
 function game(){ return S.game || (S.game=newGame()); }
 function saveGame(){ lsSave(); cloudMark(null); }
-const expNeed=lv=>Math.round(40*Math.pow(lv,1.6));
+const EXP_CURVE={k:50,p:1.6};   // EXP needed for the next level = k × lv^p (tuned by simulation: fastest full conquest ≈ 6 months)
+const expNeed=lv=>Math.round(EXP_CURVE.k*Math.pow(lv,EXP_CURVE.p));
 function stats(g=game()){
   const w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor];
-  return {hp:100+20*(g.lv-1)+(a?a.hp:0), atk:10+3*(g.lv-1)+(w?w.atk:0), def:5+2*(g.lv-1)+(a?a.def:0), wEl:w?w.el:null, aEl:a?a.el:null};
+  const b=baseStats(g.lv); return {hp:b.hp+(a?a.hp:0), atk:b.atk+(w?w.atk:0), def:b.def+(a?a.def:0), wEl:w?w.el:null, aEl:a?a.el:null};
 }
 
 /* ----- rewards from studying ----- */
-function awardQuiz(kind, score, total, isMainPost){
+/* 出征令 come only from the quiz after reading one of TODAY's news stories (the newest day in the index, so a day without
+   new articles still works), plus 1 for finishing the daily three steps. Older articles and the review quiz give gold only. */
+const newestArtDate=()=>S.index.reduce((m,a)=>a.date>m?a.date:m,"");
+const isTicketArt=art=>!!(art&&art.date&&art.date===newestArtDate());
+function awardQuiz(kind, score, total, isMainPost, art){
   if(!total) return null;
   const g=game(), acc=score/total;
-  const r={base:score*10, acc:(acc>=0.8?20:0)+(acc===1?20:0), tickets:1, bonus:0, bonusTickets:0, acc100:Math.round(acc*100)};
+  const r={base:score*10, acc:(acc>=0.8?20:0)+(acc===1?20:0), tickets:kind==="post"&&isTicketArt(art)?1:0, bonus:0, bonusTickets:0, acc100:Math.round(acc*100), old:kind==="post"&&!isTicketArt(art)};
   if(isMainPost){
     const d=dayRec();
-    if(!d.bonus){ r.bonus=30; r.bonusTickets=1; saveDay({...d, bonus:true}); }
+    if(!d.bonus){ r.bonus=30; r.bonusTickets=2; saveDay({...d, bonus:true}); }
   }
   r.gold=r.base+r.acc+r.bonus;
   g.gold+=r.gold; g.tickets+=r.tickets+r.bonusTickets; saveGame();
@@ -2092,7 +2152,7 @@ function rewardBox(r){
     <div class="rw-row"><span>${T("lootRight",{n:r.base/10})}</span><b>${T("goldAmt",{n:r.base})}</b></div>
     ${r.acc?`<div class="rw-row"><span>${T("lootAcc",{p:r.acc100})}</span><b>${T("goldAmt",{n:r.acc})}</b></div>`:`<div class="rw-row muted"><span>${T("lootAccNo",{p:r.acc100})}</span><b>+0</b></div>`}
     ${r.bonus?`<div class="rw-row"><span>${T("lootDay")}</span><b>${T("goldAmt",{n:r.bonus})}</b></div>`:""}
-    <div class="rw-row"><span>${T("tickets")}</span><b>${T("lootT",{n:r.tickets+r.bonusTickets})}</b></div>
+    ${r.tickets+r.bonusTickets?`<div class="rw-row"><span>${T("tickets")}</span><b>${T("lootT",{n:r.tickets+r.bonusTickets})}</b></div>`:`<div class="rw-row muted"><span>${T("tickets")}</span><b>${T(r.old?"lootOld":"lootPre")}</b></div>`}
     <button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goAdv")}</button></div>`;
 }
 
@@ -2147,9 +2207,18 @@ function simulate(m, spellOk){
   }
   return {ev, win:mhp<=0 && php>0, maxP:s.hp, ally:al};
 }
+/* stamina for wild hunting: up to STAM_MAX, refills 1 point every STAM_HOURS hours */
+const STAM_MAX=6, STAM_HOURS=4;
+function stamina(){ const g=game(); const st=g.stam||(g.stam={v:STAM_MAX,t:Date.now()}); const step=STAM_HOURS*3600e3;
+  if(st.v>=STAM_MAX){ st.t=Date.now(); return st; }
+  const k=Math.floor((Date.now()-st.t)/step); if(k>0){ st.v=Math.min(STAM_MAX,st.v+k); st.t=st.v>=STAM_MAX?Date.now():st.t+k*step; }
+  return st; }
+function stamNextMin(){ const st=stamina(); return st.v>=STAM_MAX?0:Math.max(1,Math.ceil((st.t+STAM_HOURS*3600e3-Date.now())/60000)); }
+function wildGoldFactor(id){ const g=game(), d=g.wildDay&&g.wildDay.date===today()?g.wildDay:{n:{}}; return Math.max(0.3,Math.pow(0.7,d.n[id]||0)); }
 function startBattle(mid){
   const g=game(), m=MONS[mid]; if(!m) return;
-  if(g.tickets<1) return toast(T("noTicket"));
+  if(m.wild){ if(stamina().v<1) return toast(T("noStam",{m:stamNextMin()})); }
+  else if(g.tickets<1) return toast(T("noTicket"));
   S.battle={m, stage:"spell"};
   // spell question needs at least one word in the dictionary
   if(!S.words.size) S.battle.stage="ready";
@@ -2165,14 +2234,17 @@ function castSpell(i){
 }
 function fight(){
   const B=S.battle, g=game(); if(!B||B.stage==="fight"||B.stage==="end"||B.started) return;   // never settle the same battle twice
-  if(g.tickets<1){ toast(T("noTicket")); return; }
-  B.started=true; g.tickets-=1; g.battles=(g.battles||0)+1;
+  if(B.m.wild){ const st=stamina(); if(st.v<1){ toast(T("noStam",{m:stamNextMin()})); return; } B.started=true; if(st.v>=STAM_MAX) st.t=Date.now(); st.v-=1; }
+  else { if(g.tickets<1){ toast(T("noTicket")); return; } B.started=true; g.tickets-=1; }
+  g.battles=(g.battles||0)+1;
   const res=simulate(B.m, !!B.spellOk);
   B.res=res; B.stage="fight"; B.idx=0;
   if(res.win){
-    const before=g.lv; g.exp+=B.m.exp; g.gold+=B.m.gold; g.wins[B.m.id]=(g.wins[B.m.id]||0)+1;
+    let gold=B.m.gold;
+    if(B.m.wild){ gold=Math.round(gold*wildGoldFactor(B.m.id)); if(!g.wildDay||g.wildDay.date!==today()) g.wildDay={date:today(),n:{}}; g.wildDay.n[B.m.id]=(g.wildDay.n[B.m.id]||0)+1; }
+    B.gold=gold; const before=g.lv; g.exp+=B.m.exp; g.gold+=gold; g.wins[B.m.id]=(g.wins[B.m.id]||0)+1;
     const c=conquered(); if(!B.m.wild&&!c[B.m.id]){ c[B.m.id]=today(); B.conquered=true; }
-    while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
+    while(g.lv<LV_MAX&&g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; } if(g.lv>=LV_MAX) g.exp=Math.min(g.exp,expNeed(LV_MAX));
     B.lvUp=g.lv-before;
   }
   saveGame(); render();
@@ -2185,7 +2257,7 @@ function monArt(m, hit){
 }
 function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div>`; }
 /* nickname colour grows with level: grey → white → green → blue → purple → orange → red → rainbow (Lv 20+) */
-const NICK_STEPS=[3,6,9,12,15,18,20];
+const NICK_STEPS=[7,14,21,28,35,42,50];
 function nickTier(lv){ let i=0; while(i<NICK_STEPS.length&&lv>=NICK_STEPS[i]) i++; return "nk nk"+i; }
 // ally figure: same body as the hero, coloured by the ally's own weapon / armour elements
 function allySvg(al){
@@ -2232,7 +2304,7 @@ function viewBattle(){
       ${m.boss?`<div class="card boss-rules"><b>${T("bossTitle")}</b><p>🔥 ${T("bossShield")}</p><p>👁 ${T("bossEye",{n:BOSS.eyeEvery})}</p><p>💢 ${T("bossRage",{p:Math.round(BOSS.rageAt*100)})}</p><p class="muted sm-t">${T("bossTip")}</p></div>`:""}
       <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
-      <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?T("skipSpell"):T("fight")}</button>
+      <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?T("skipSpell"):T(m.wild?"fightWild":"fight",{s:stamina().v,mx:STAM_MAX})}</button>
     </div>`;
   }
   const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp};
@@ -2240,13 +2312,13 @@ function viewBattle(){
   const log=ev.slice(0,upto).map(e=>e.who==="a"?`<li class="lp">🤝 ${T("logAlly",{a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="m"&&e.tgt==="a"?`<li class="lm">${T("logMonAlly",{m:esc(monName(m)),a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${e.rage?`<b>${T("bossRageLog",{m:esc(monName(m))})}</b> `:""}${e.eye?T("bossEyeLog",{m:esc(monName(m)),n:e.dmg}):T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
-    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}</span><b>+${m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${m.gold}</b></div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
+    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}</span><b>+${m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
     : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p></div>`) : "";
   return `<div class="view">
     ${arenaScene(B, last, cur)}
     ${end}
     <ul class="blog">${log}</ul>
-    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${g.tickets>0?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<button class="btn ghost" data-act="skip">${T("skipAnim")}</button>`}
+    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${(m.wild?stamina().v>0:g.tickets>0)?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<button class="btn ghost" data-act="skip">${T("skipAnim")}</button>`}
   </div>`;
 }
 
@@ -2336,7 +2408,7 @@ const LUCK={
   reviewQ:10,               // 字典複習一次幾題
   reviewMinWords:5,         // 字典至少要有幾個字才能複習
   reviewTicketsPerDay:3,    // 每天最多從複習拿幾張彩券
-  shardsToForge:5,          // 幾個「同屬性同等級」碎片可以合成一件裝備
+  shardsToForge:3,          // 幾個「同屬性同等級」碎片可以合成一件裝備
   dupGoldRate:0.5,          // 合成時武器和防具都已擁有 → 換成「裝備價格 × 這個比例」的金幣
   // 轉盤：type 可以是 gold（金幣）/ ticket（出征令）/ lotto（彩券）/ shard（碎片，tier 0=Ⅰ 1=Ⅱ 2=Ⅲ 3=Ⅳ）
   // 轉盤上的順序就是這裡的順序（從正上方順時針）
@@ -2474,9 +2546,12 @@ function forge(k){
   const s=shardsOf(); if((s[k]||0)<LUCK.shardsToForge) return;
   const [el,ti]=k.split("-"), tier=+ti, g=game();
   s[k]-=LUCK.shardsToForge; if(!s[k]) delete s[k];
-  const opts=[`w-${el}-${tier}`,`a-${el}-${tier}`].filter(id=>!g.inv.includes(id));
-  if(opts.length){ const id=opts[Math.floor(Math.random()*opts.length)]; g.inv.push(id); saveGame(); toast(T("forged",{i:itemName(ITEMS[id])+" "+TIER[tier].n})); }
-  else { const n=Math.round(TIER[tier].price*LUCK.dupGoldRate); g.gold+=n; saveGame(); toast(T("forgeDup",{n})); }
+  // shard tier Ⅰ–Ⅳ = gear 8 / 5 / 2 / 0 levels below yours, in the shard's element (weapon or armour, whichever you don't own yet)
+  const target=Math.max(1,g.lv-[8,5,2,0][tier]);
+  const pick=slot=>Object.values(ITEMS).filter(it=>!it.legacy&&it.slot===slot&&it.el===el&&it.lv<=target).sort((a,b)=>b.lv-a.lv)[0];
+  const opts=["weapon","armor"].map(pick).filter(it=>it&&!g.inv.includes(it.id));
+  if(opts.length){ const it=opts[Math.floor(Math.random()*opts.length)]; g.inv.push(it.id); saveGame(); toast(T("forged",{i:itemName(it)+" Lv"+it.lv})); }
+  else { const best=pick("weapon")||pick("armor"), n=Math.round((best?best.price:TIER[tier].price)*LUCK.dupGoldRate); g.gold+=n; saveGame(); toast(T("forgeDup",{n})); }
   render();
 }
 function shardGrid(){
@@ -2520,9 +2595,9 @@ const DEV_HASH="9eaa14fe306fdc8a07a426770efb0d1a70d91504e62a51e644d02690b0e1a5dc
 const DEV_KEY="che-pro-dev";
 let DEV=(()=>{ try{ return JSON.parse(localStorage.getItem(DEV_KEY)||"null"); }catch(e){ return null; } })();
 Object.assign(STR.zh,{devTitle:"開發者模式", devOn:"開發者模式已開啟", devSub:"這裡的改動都是測試用：雲端會保留你原本的進度，排行榜不會更新。離開開發者模式時，遊戲進度會還原成開啟前的樣子。", devCode:"輸入開發者密碼", devGo:"開啟", devBad:"密碼不正確", devExit:"離開開發者模式（還原原本進度）", devExited:"已離開開發者模式，進度已還原",
- dGold:"+1000 金幣", dTickets:"+10 出征令", dLotto:"+10 彩券", dShards:"每種碎片 +5", dLvUp:"等級 +1", dLv20:"直接 Lv 20", dItems:"拿到全部裝備", dConq:"佔領全部城鎮", dUnconq:"清除佔領", dToday:"重置今天", dDone:"完成", version:"版本"});
+ dGold:"+1000 金幣", dTickets:"+10 出征令", dLotto:"+10 彩券", dShards:"每種碎片 +5", dLvUp:"等級 +1", dLv20:"直接 Lv 50", dItems:"拿到全部裝備", dConq:"佔領全部城鎮", dUnconq:"清除佔領", dToday:"重置今天", dDone:"完成", version:"版本"});
 Object.assign(STR.en,{devTitle:"Developer mode", devOn:"Developer mode is on", devSub:"Changes here are for testing: the cloud keeps your real save and the leaderboard isn't updated. Leaving developer mode restores your game to how it was before.", devCode:"Enter the developer code", devGo:"Unlock", devBad:"Wrong code", devExit:"Leave developer mode (restore my save)", devExited:"Left developer mode. Your save has been restored",
- dGold:"+1000 gold", dTickets:"+10 quest passes", dLotto:"+10 lucky tickets", dShards:"+5 of every shard", dLvUp:"Level +1", dLv20:"Jump to Lv 20", dItems:"Get all gear", dConq:"Conquer every town", dUnconq:"Clear conquests", dToday:"Reset today", dDone:"Done", version:"Version"});
+ dGold:"+1000 gold", dTickets:"+10 quest passes", dLotto:"+10 lucky tickets", dShards:"+5 of every shard", dLvUp:"Level +1", dLv20:"Jump to Lv 50", dItems:"Get all gear", dConq:"Conquer every town", dUnconq:"Clear conquests", dToday:"Reset today", dDone:"Done", version:"Version"});
 async function sha256(t){ const b=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
 function devSave(){ try{ if(DEV) localStorage.setItem(DEV_KEY, JSON.stringify(DEV)); else localStorage.removeItem(DEV_KEY); }catch(e){} }
 async function devUnlock(){
@@ -2544,8 +2619,8 @@ function devAct(k){
   else if(k==="tickets") g.tickets+=10;
   else if(k==="lotto") g.lotto=(g.lotto||0)+10;
   else if(k==="shards"){ for(const e of ELS) for(let i=0;i<TIER.length;i++) addShard(e.k,i,5); }
-  else if(k==="lvup"){ g.lv+=1; g.exp=0; }
-  else if(k==="lv20"){ g.lv=Math.max(g.lv,20); g.exp=0; }
+  else if(k==="lvup"){ g.lv=Math.min(LV_MAX,g.lv+1); g.exp=0; }
+  else if(k==="lv20"){ g.lv=Math.max(g.lv,LV_MAX); g.exp=0; }
   else if(k==="items"){ g.inv=[...new Set([...g.inv, ...Object.keys(ITEMS)])]; }
   else if(k==="conq"){ g.conq=g.conq||{}; for(const t of TOWNS) g.conq[t.id]=g.conq[t.id]||today(); }
   else if(k==="unconq"){ g.conq={}; }
@@ -2733,7 +2808,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.88";
+const APP_VERSION="2026.10.90";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2742,7 +2817,7 @@ function devFooter(){
 function applyMast(){ const m=document.querySelector("header.mast"); if(m) m.classList.toggle("dev", !!DEV); if(typeof maintApply==="function") maintApply(); }
 
 
-const HELP={"zh": {"title": "使用說明", "intro": "每天花 10–15 分鐘讀一篇愛爾蘭新聞，邊學英文邊玩遊戲。", "close": "💚 做這個 App，是希望能幫助每一個想學好英文的人。每天進步一點點，英文就會越來越好。祝你學習愉快！", "sign": "— CheChe", "ok": "開始使用", "secs": [["📰", "每日三步驟", "① 複習測驗：抽考前幾天查過的單字，越不熟的字越容易被抽到。② 閱讀頭條：看不懂的字直接點，會顯示翻譯、相似詞、反義詞和例句，並自動存進字典。③ 讀後測驗：固定 10 題，每題都有講解，答錯的更要看。"], ["📚", "字典", "查過的字都會存在這裡，可以搜尋，也可以依「最不熟」排序。上方的「間隔複習」每完成一次可以拿 1 張彩券（每天最多 3 張）。"], ["🎯", "英文程度", "到「設定」選 B1、B2、C1 或 IELTS 7–8，文章會換成對應難度的版本。"], ["⚔️", "冒險", "測驗答對就能賺金幣和出征令。到商店買五行裝備，用出征令攻打愛爾蘭各城鎮的怪物，打贏就能佔領城鎮、每天收稅。武器屬性克制怪物時傷害 ×1.5，出征前記得看五行圖挑裝備。目標：從最小的小鎮一路打到都柏林，佔領整座島！"], ["🍀", "幸運屋", "1 張彩券可以轉一次幸運轉盤，2 張以上可以買刮刮樂。刮到的元素碎片，同屬性、同等級集滿 5 個就能合成一件裝備。"], ["🤝", "合作與排行榜", "登入後可以和朋友開房間，一起找文章裡的錯字打倒魔王。在設定取個暱稱，就能用等級、HP、攻擊力和大家比排名。"], ["⚙️", "設定", "用 Google 登入一次，進度就會存到雲端，換手機也不會不見。語言、英文程度和備份也都在這裡。"], ["📱", "小技巧", "在 Safari 按「分享」→「加入主畫面」，就能像 App 一樣從主畫面打開。"]]}, "en": {"title": "How to use", "intro": "Spend 10–15 minutes a day reading one Irish news story, and play a game while you learn.", "close": "💚 I made this app hoping it helps everyone who wants to learn English. A little progress every day adds up. Enjoy learning!", "sign": "— CheChe", "ok": "Let's go", "secs": [["📰", "Three steps a day", "① Review quiz: words you looked up on earlier days, and the ones you know least come up most. ② Read the headline: tap any word you don't know to see its meaning, synonyms, opposites and an example; it's saved to your dictionary. ③ After-reading quiz: always 10 questions, each with an explanation, especially the ones you get wrong."], ["📚", "Words", "Every word you look up is saved here. Search it or sort by \"Weakest\". Each finished Spaced review at the top earns 1 lucky ticket (up to 3 a day)."], ["🎯", "English level", "In Settings choose B1, B2, C1 or IELTS 7–8 and articles switch to a version at that level."], ["⚔️", "Quest", "Correct answers earn gold and quest passes. Buy elemental gear in the shop and use passes to fight the monsters in Ireland's towns. Win to conquer a town and collect taxes every day. A weapon whose element beats the monster deals ×1.5 damage, so check the five-element chart first. Goal: fight from the smallest village all the way to Dublin and conquer the whole island!"], ["🍀", "Luck", "1 lucky ticket spins the wheel once; 2 or more buy a scratch card. Collect 5 element shards of the same element and tier to forge a piece of gear."], ["🤝", "Co-op & ranking", "Once signed in, open a room with a friend and hunt for the mistakes in an article together to beat the boss. Set a nickname in Settings to compare level, HP and attack on the leaderboard."], ["⚙️", "Settings", "Sign in with Google once and your progress is saved to the cloud, so a new phone won't lose anything. Language, English level and backups are here too."], ["📱", "Tip", "In Safari tap Share → Add to Home Screen to open it from your home screen like an app."]]}, "hi": {"title": "कैसे इस्तेमाल करें", "intro": "रोज़ 10–15 मिनट एक आयरिश ख़बर पढ़ें, और सीखते हुए खेल भी खेलें।", "close": "💚 मैंने यह ऐप इस उम्मीद में बनाया है कि यह अंग्रेज़ी सीखना चाहने वाले हर व्यक्ति की मदद करे। रोज़ थोड़ा-थोड़ा सुधार बड़ा फ़र्क़ लाता है। सीखने का आनंद लें!", "sign": "— CheChe", "ok": "शुरू करें", "secs": [["📰", "रोज़ के तीन चरण", "① दोहराई क्विज़: पिछले दिनों देखे गए शब्द; जो कम आते हैं वे ज़्यादा पूछे जाते हैं। ② मुख्य ख़बर पढ़ें: न समझ आने वाले शब्द पर टैप करें; अर्थ, समानार्थी, विलोम और उदाहरण दिखेंगे और शब्द शब्दकोश में सहेजा जाएगा। ③ पढ़ने के बाद क्विज़: हमेशा 10 प्रश्न, हर एक की व्याख्या के साथ।"], ["📚", "शब्दकोश", "देखे गए सभी शब्द यहाँ सहेजे जाते हैं। खोजें या \"सबसे कमज़ोर\" से क्रम लगाएँ। ऊपर की अंतराल दोहराव पूरी करने पर 1 लकी टिकट मिलता है (दिन में अधिकतम 3)।"], ["🎯", "अंग्रेज़ी स्तर", "सेटिंग्स में B1, B2, C1 या IELTS 7–8 चुनें; लेख उसी स्तर के संस्करण में बदल जाएँगे।"], ["⚔️", "साहसिक", "सही उत्तरों से सोना और अभियान पास मिलते हैं। दुकान से तत्व वाले उपकरण खरीदें और पास से आयरलैंड के शहरों के दानवों से लड़ें। जीतने पर शहर आपका, और रोज़ कर मिलेगा। जो हथियार दानव के तत्व को हराता है वह ×1.5 नुकसान करता है, इसलिए पहले पंचतत्व चार्ट देखें। लक्ष्य: सबसे छोटे गाँव से डबलिन तक जीतकर पूरा द्वीप जीतना!"], ["🍀", "किस्मत", "1 लकी टिकट से पहिया एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड। एक ही तत्व और स्तर के 5 टुकड़े जमा करके उपकरण बनाएँ।"], ["🤝", "साथ में और रैंकिंग", "साइन इन के बाद दोस्त के साथ कमरा बनाएँ और लेख की ग़लतियाँ साथ ढूँढकर दानव को हराएँ। सेटिंग्स में उपनाम चुनें और लीडरबोर्ड पर लेवल, HP व आक्रमण की तुलना करें।"], ["⚙️", "सेटिंग्स", "एक बार Google से साइन इन करें, प्रगति क्लाउड में सहेजी जाएगी और फ़ोन बदलने पर भी नहीं खोएगी। भाषा, अंग्रेज़ी स्तर और बैकअप भी यहीं हैं।"], ["📱", "सुझाव", "Safari में शेयर → होम स्क्रीन में जोड़ें दबाएँ, फिर इसे ऐप की तरह होम स्क्रीन से खोलें।"]]}, "es": {"title": "Cómo se usa", "intro": "Dedica 10–15 minutos al día a leer una noticia irlandesa y juega mientras aprendes.", "close": "💚 Hice esta app con la esperanza de ayudar a todas las personas que quieren aprender inglés. Un poco cada día marca la diferencia. ¡Disfruta aprendiendo!", "sign": "— CheChe", "ok": "¡Vamos!", "secs": [["📰", "Tres pasos al día", "① Test de repaso: palabras que consultaste otros días; las que menos dominas salen más. ② Lee el titular: toca cualquier palabra que no entiendas para ver su significado, sinónimos, antónimos y un ejemplo; se guarda en tu diccionario. ③ Test después de leer: siempre 10 preguntas, cada una con su explicación."], ["📚", "Diccionario", "Aquí se guardan todas las palabras que consultas. Puedes buscarlas u ordenarlas por «Más débiles». Cada «Repaso espaciado» terminado da 1 boleto de la suerte (máximo 3 al día)."], ["🎯", "Nivel de inglés", "En Ajustes elige B1, B2, C1 o IELTS 7–8 y los artículos cambian a la versión de ese nivel."], ["⚔️", "Aventura", "Las respuestas correctas dan oro y pases. Compra equipo elemental en la tienda y usa los pases para luchar contra los monstruos de las ciudades de Irlanda. Si ganas, conquistas la ciudad y cobras impuestos cada día. Un arma cuyo elemento vence al del monstruo hace ×1,5 de daño, así que mira primero el gráfico de los cinco elementos. Objetivo: llegar desde el pueblo más pequeño hasta Dublín y conquistar toda la isla."], ["🍀", "Suerte", "Con 1 boleto giras la ruleta; con 2 o más compras un rasca y gana. Junta 5 fragmentos del mismo elemento y nivel para forjar un equipo."], ["🤝", "Cooperativo y ranking", "Con la sesión iniciada, abre una sala con un amigo y buscad juntos los errores de un artículo para vencer al jefe. Elige un apodo en Ajustes para comparar nivel, HP y ataque en la clasificación."], ["⚙️", "Ajustes", "Inicia sesión con Google una vez y tu progreso se guarda en la nube; si cambias de móvil no pierdes nada. Aquí también están el idioma, el nivel de inglés y las copias de seguridad."], ["📱", "Consejo", "En Safari toca Compartir → Añadir a pantalla de inicio para abrirla como una app."]]}, "ja": {"title": "使い方", "intro": "1日10〜15分、アイルランドのニュースを1本読んで、ゲームも楽しみながら英語を学びましょう。", "close": "💚 このアプリは、英語を学びたいすべての人の役に立てたらと思って作りました。毎日少しずつの積み重ねが力になります。楽しく学んでください！", "sign": "— CheChe", "ok": "はじめる", "secs": [["📰", "毎日の3ステップ", "① 復習テスト：前の日に調べた単語から出題。苦手な単語ほど出やすくなります。② トップ記事を読む：わからない単語をタップすると、意味・類義語・反対語・例文が表示され、単語帳に保存されます。③ 読後テスト：いつも10問、全問に解説付き。"], ["📚", "単語帳", "調べた単語はすべてここに保存されます。検索や「苦手順」での並べ替えもできます。上の「間隔反復」を1回終えるとくじ券が1枚（1日最大3枚）。"], ["🎯", "英語レベル", "設定で B1・B2・C1・IELTS 7–8 を選ぶと、記事がそのレベルの版に切り替わります。"], ["⚔️", "冒険", "正解するとゴールドと出撃券がもらえます。ショップで五行の装備を買い、出撃券でアイルランド各地の魔物に挑みましょう。勝てばその町を征服し、毎日税金が入ります。武器の属性が魔物に勝っているとダメージ×1.5なので、出撃前に五行の図を確認しましょう。目標：いちばん小さな村からダブリンまで攻め上がり、島全体を征服！"], ["🍀", "幸運", "くじ券1枚でルーレットを1回、2枚以上でスクラッチカードが買えます。同じ属性・ランクのかけらを5個集めると装備を合成できます。"], ["🤝", "協力とランキング", "ログインすると友達とルームを作り、記事の間違いを一緒に探してボスを倒せます。設定でニックネームを決めると、レベル・HP・攻撃力でランキングに参加できます。"], ["⚙️", "設定", "Google で一度ログインすると進行状況がクラウドに保存され、機種変更しても消えません。言語・英語レベル・バックアップもここにあります。"], ["📱", "ヒント", "Safari で「共有」→「ホーム画面に追加」を押すと、アプリのようにホーム画面から開けます。"]]}, "ko": {"title": "사용 방법", "intro": "하루 10~15분, 아일랜드 뉴스 한 편을 읽고 게임도 즐기며 영어를 배워 보세요.", "close": "💚 영어를 배우고 싶은 모든 분께 도움이 되길 바라며 이 앱을 만들었어요. 매일 조금씩 쌓이면 영어가 점점 늘어요. 즐겁게 공부하세요!", "sign": "— CheChe", "ok": "시작하기", "secs": [["📰", "매일 3단계", "① 복습 퀴즈: 전에 찾아본 단어가 나와요. 잘 모르는 단어일수록 더 자주 나와요. ② 헤드라인 읽기: 모르는 단어를 누르면 뜻, 비슷한 말, 반대말, 예문이 나오고 단어장에 저장돼요. ③ 읽은 후 퀴즈: 항상 10문제, 모든 문제에 해설이 있어요."], ["📚", "단어장", "찾아본 단어는 모두 여기에 저장돼요. 검색하거나 '약한 순'으로 정렬할 수 있어요. 위의 '간격 복습'을 한 번 끝낼 때마다 복권 1장 (하루 최대 3장)."], ["🎯", "영어 수준", "설정에서 B1, B2, C1, IELTS 7–8 중에서 고르면 기사가 그 수준의 버전으로 바뀌어요."], ["⚔️", "모험", "정답을 맞히면 골드와 출정권을 받아요. 상점에서 오행 장비를 사고, 출정권으로 아일랜드 마을의 괴물과 싸우세요. 이기면 마을을 정복하고 매일 세금을 받아요. 무기 속성이 괴물을 이기면 피해 ×1.5이니 출정 전에 오행 그림을 확인하세요. 목표: 가장 작은 마을부터 더블린까지 정복해 섬 전체를 차지하기!"], ["🍀", "행운", "복권 1장으로 룰렛을 한 번, 2장 이상이면 긁는 복권을 살 수 있어요. 같은 속성·등급 조각 5개를 모으면 장비를 합성할 수 있어요."], ["🤝", "협동과 랭킹", "로그인하면 친구와 방을 만들어 기사 속 틀린 곳을 함께 찾아 보스를 물리칠 수 있어요. 설정에서 닉네임을 정하면 레벨·HP·공격력으로 랭킹에 참여해요."], ["⚙️", "설정", "Google로 한 번 로그인하면 진행 상황이 클라우드에 저장돼 휴대폰을 바꿔도 사라지지 않아요. 언어, 영어 수준, 백업도 여기에 있어요."], ["📱", "팁", "Safari에서 '공유' → '홈 화면에 추가'를 누르면 앱처럼 홈 화면에서 열 수 있어요."]]}};
+const HELP={"zh": {"title": "使用說明", "intro": "每天花 10–15 分鐘讀一篇愛爾蘭新聞，邊學英文邊玩遊戲。", "close": "💚 做這個 App，是希望能幫助每一個想學好英文的人。每天進步一點點，英文就會越來越好。祝你學習愉快！", "sign": "— CheChe", "ok": "開始使用", "secs": [["📰", "每日三步驟", "① 複習測驗：抽考前幾天查過的單字，越不熟的字越容易被抽到。② 閱讀頭條：看不懂的字直接點，會顯示翻譯、相似詞、反義詞和例句，並自動存進字典。③ 讀後測驗：固定 10 題，每題都有講解，答錯的更要看。"], ["📚", "字典", "查過的字都會存在這裡，可以搜尋，也可以依「最不熟」排序。上方的「間隔複習」每完成一次可以拿 1 片幸運草（每天最多 3 張）。"], ["🎯", "英文程度", "到「設定」選 B1、B2、C1 或 IELTS 7–8，文章會換成對應難度的版本。"], ["⚔️", "冒險", "測驗答對就能賺金幣和出征令。到商店買五行裝備，用出征令攻打愛爾蘭各城鎮的怪物，打贏就能佔領城鎮、每天收稅。武器屬性克制怪物時傷害 ×1.5，出征前記得看五行圖挑裝備。目標：從最小的小鎮一路打到都柏林，佔領整座島！"], ["🍀", "幸運屋", "1 片幸運草可以轉一次命運輪盤，2 片以上可以買刮刮樂。刮到的元素碎片，同屬性、同等級集滿 3 個就能合成一件裝備。"], ["🤝", "合作與排行榜", "登入後可以和朋友開房間，一起找文章裡的錯字打倒魔王。在設定取個暱稱，就能用等級、HP、攻擊力和大家比排名。"], ["⚙️", "設定", "用 Google 登入一次，進度就會存到雲端，換手機也不會不見。語言、英文程度和備份也都在這裡。"], ["📱", "小技巧", "在 Safari 按「分享」→「加入主畫面」，就能像 App 一樣從主畫面打開。"]]}, "en": {"title": "How to use", "intro": "Spend 10–15 minutes a day reading one Irish news story, and play a game while you learn.", "close": "💚 I made this app hoping it helps everyone who wants to learn English. A little progress every day adds up. Enjoy learning!", "sign": "— CheChe", "ok": "Let's go", "secs": [["📰", "Three steps a day", "① Review quiz: words you looked up on earlier days, and the ones you know least come up most. ② Read the headline: tap any word you don't know to see its meaning, synonyms, opposites and an example; it's saved to your dictionary. ③ After-reading quiz: always 10 questions, each with an explanation, especially the ones you get wrong."], ["📚", "Words", "Every word you look up is saved here. Search it or sort by \"Weakest\". Each finished Spaced review at the top earns 1 shamrock (up to 3 a day)."], ["🎯", "English level", "In Settings choose B1, B2, C1 or IELTS 7–8 and articles switch to a version at that level."], ["⚔️", "Quest", "Correct answers earn gold and quest passes. Buy elemental gear in the shop and use passes to fight the monsters in Ireland's towns. Win to conquer a town and collect taxes every day. A weapon whose element beats the monster deals ×1.5 damage, so check the five-element chart first. Goal: fight from the smallest village all the way to Dublin and conquer the whole island!"], ["🍀", "Luck", "1 shamrock spins the Wheel of Fate once; 2 or more buy a scratch card. Collect 3 element shards of the same element and tier to forge a piece of gear."], ["🤝", "Co-op & ranking", "Once signed in, open a room with a friend and hunt for the mistakes in an article together to beat the boss. Set a nickname in Settings to compare level, HP and attack on the leaderboard."], ["⚙️", "Settings", "Sign in with Google once and your progress is saved to the cloud, so a new phone won't lose anything. Language, English level and backups are here too."], ["📱", "Tip", "In Safari tap Share → Add to Home Screen to open it from your home screen like an app."]]}, "hi": {"title": "कैसे इस्तेमाल करें", "intro": "रोज़ 10–15 मिनट एक आयरिश ख़बर पढ़ें, और सीखते हुए खेल भी खेलें।", "close": "💚 मैंने यह ऐप इस उम्मीद में बनाया है कि यह अंग्रेज़ी सीखना चाहने वाले हर व्यक्ति की मदद करे। रोज़ थोड़ा-थोड़ा सुधार बड़ा फ़र्क़ लाता है। सीखने का आनंद लें!", "sign": "— CheChe", "ok": "शुरू करें", "secs": [["📰", "रोज़ के तीन चरण", "① दोहराई क्विज़: पिछले दिनों देखे गए शब्द; जो कम आते हैं वे ज़्यादा पूछे जाते हैं। ② मुख्य ख़बर पढ़ें: न समझ आने वाले शब्द पर टैप करें; अर्थ, समानार्थी, विलोम और उदाहरण दिखेंगे और शब्द शब्दकोश में सहेजा जाएगा। ③ पढ़ने के बाद क्विज़: हमेशा 10 प्रश्न, हर एक की व्याख्या के साथ।"], ["📚", "शब्दकोश", "देखे गए सभी शब्द यहाँ सहेजे जाते हैं। खोजें या \"सबसे कमज़ोर\" से क्रम लगाएँ। ऊपर की अंतराल दोहराव पूरी करने पर 1 शैमरॉक मिलता है (दिन में अधिकतम 3)।"], ["🎯", "अंग्रेज़ी स्तर", "सेटिंग्स में B1, B2, C1 या IELTS 7–8 चुनें; लेख उसी स्तर के संस्करण में बदल जाएँगे।"], ["⚔️", "साहसिक", "सही उत्तरों से सोना और अभियान पास मिलते हैं। दुकान से तत्व वाले उपकरण खरीदें और पास से आयरलैंड के शहरों के दानवों से लड़ें। जीतने पर शहर आपका, और रोज़ कर मिलेगा। जो हथियार दानव के तत्व को हराता है वह ×1.5 नुकसान करता है, इसलिए पहले पंचतत्व चार्ट देखें। लक्ष्य: सबसे छोटे गाँव से डबलिन तक जीतकर पूरा द्वीप जीतना!"], ["🍀", "किस्मत", "1 शैमरॉक से पहिया एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड। एक ही तत्व और स्तर के 3 टुकड़े जमा करके उपकरण बनाएँ।"], ["🤝", "साथ में और रैंकिंग", "साइन इन के बाद दोस्त के साथ कमरा बनाएँ और लेख की ग़लतियाँ साथ ढूँढकर दानव को हराएँ। सेटिंग्स में उपनाम चुनें और लीडरबोर्ड पर लेवल, HP व आक्रमण की तुलना करें।"], ["⚙️", "सेटिंग्स", "एक बार Google से साइन इन करें, प्रगति क्लाउड में सहेजी जाएगी और फ़ोन बदलने पर भी नहीं खोएगी। भाषा, अंग्रेज़ी स्तर और बैकअप भी यहीं हैं।"], ["📱", "सुझाव", "Safari में शेयर → होम स्क्रीन में जोड़ें दबाएँ, फिर इसे ऐप की तरह होम स्क्रीन से खोलें।"]]}, "es": {"title": "Cómo se usa", "intro": "Dedica 10–15 minutos al día a leer una noticia irlandesa y juega mientras aprendes.", "close": "💚 Hice esta app con la esperanza de ayudar a todas las personas que quieren aprender inglés. Un poco cada día marca la diferencia. ¡Disfruta aprendiendo!", "sign": "— CheChe", "ok": "¡Vamos!", "secs": [["📰", "Tres pasos al día", "① Test de repaso: palabras que consultaste otros días; las que menos dominas salen más. ② Lee el titular: toca cualquier palabra que no entiendas para ver su significado, sinónimos, antónimos y un ejemplo; se guarda en tu diccionario. ③ Test después de leer: siempre 10 preguntas, cada una con su explicación."], ["📚", "Diccionario", "Aquí se guardan todas las palabras que consultas. Puedes buscarlas u ordenarlas por «Más débiles». Cada «Repaso espaciado» terminado da 1 trébol (máximo 3 al día)."], ["🎯", "Nivel de inglés", "En Ajustes elige B1, B2, C1 o IELTS 7–8 y los artículos cambian a la versión de ese nivel."], ["⚔️", "Aventura", "Las respuestas correctas dan oro y pases. Compra equipo elemental en la tienda y usa los pases para luchar contra los monstruos de las ciudades de Irlanda. Si ganas, conquistas la ciudad y cobras impuestos cada día. Un arma cuyo elemento vence al del monstruo hace ×1,5 de daño, así que mira primero el gráfico de los cinco elementos. Objetivo: llegar desde el pueblo más pequeño hasta Dublín y conquistar toda la isla."], ["🍀", "Suerte", "Con 1 trébol giras la Rueda del destino; con 2 o más compras un rasca y gana. Junta 3 fragmentos del mismo elemento y nivel para forjar un equipo."], ["🤝", "Cooperativo y ranking", "Con la sesión iniciada, abre una sala con un amigo y buscad juntos los errores de un artículo para vencer al jefe. Elige un apodo en Ajustes para comparar nivel, HP y ataque en la clasificación."], ["⚙️", "Ajustes", "Inicia sesión con Google una vez y tu progreso se guarda en la nube; si cambias de móvil no pierdes nada. Aquí también están el idioma, el nivel de inglés y las copias de seguridad."], ["📱", "Consejo", "En Safari toca Compartir → Añadir a pantalla de inicio para abrirla como una app."]]}, "ja": {"title": "使い方", "intro": "1日10〜15分、アイルランドのニュースを1本読んで、ゲームも楽しみながら英語を学びましょう。", "close": "💚 このアプリは、英語を学びたいすべての人の役に立てたらと思って作りました。毎日少しずつの積み重ねが力になります。楽しく学んでください！", "sign": "— CheChe", "ok": "はじめる", "secs": [["📰", "毎日の3ステップ", "① 復習テスト：前の日に調べた単語から出題。苦手な単語ほど出やすくなります。② トップ記事を読む：わからない単語をタップすると、意味・類義語・反対語・例文が表示され、単語帳に保存されます。③ 読後テスト：いつも10問、全問に解説付き。"], ["📚", "単語帳", "調べた単語はすべてここに保存されます。検索や「苦手順」での並べ替えもできます。上の「間隔反復」を1回終えるとクローバーが1枚（1日最大3枚）。"], ["🎯", "英語レベル", "設定で B1・B2・C1・IELTS 7–8 を選ぶと、記事がそのレベルの版に切り替わります。"], ["⚔️", "冒険", "正解するとゴールドと出撃券がもらえます。ショップで五行の装備を買い、出撃券でアイルランド各地の魔物に挑みましょう。勝てばその町を征服し、毎日税金が入ります。武器の属性が魔物に勝っているとダメージ×1.5なので、出撃前に五行の図を確認しましょう。目標：いちばん小さな村からダブリンまで攻め上がり、島全体を征服！"], ["🍀", "幸運", "クローバー1枚で運命のルーレットを1回、2枚以上でスクラッチカードが買えます。同じ属性・ランクのかけらを3個集めると装備を合成できます。"], ["🤝", "協力とランキング", "ログインすると友達とルームを作り、記事の間違いを一緒に探してボスを倒せます。設定でニックネームを決めると、レベル・HP・攻撃力でランキングに参加できます。"], ["⚙️", "設定", "Google で一度ログインすると進行状況がクラウドに保存され、機種変更しても消えません。言語・英語レベル・バックアップもここにあります。"], ["📱", "ヒント", "Safari で「共有」→「ホーム画面に追加」を押すと、アプリのようにホーム画面から開けます。"]]}, "ko": {"title": "사용 방법", "intro": "하루 10~15분, 아일랜드 뉴스 한 편을 읽고 게임도 즐기며 영어를 배워 보세요.", "close": "💚 영어를 배우고 싶은 모든 분께 도움이 되길 바라며 이 앱을 만들었어요. 매일 조금씩 쌓이면 영어가 점점 늘어요. 즐겁게 공부하세요!", "sign": "— CheChe", "ok": "시작하기", "secs": [["📰", "매일 3단계", "① 복습 퀴즈: 전에 찾아본 단어가 나와요. 잘 모르는 단어일수록 더 자주 나와요. ② 헤드라인 읽기: 모르는 단어를 누르면 뜻, 비슷한 말, 반대말, 예문이 나오고 단어장에 저장돼요. ③ 읽은 후 퀴즈: 항상 10문제, 모든 문제에 해설이 있어요."], ["📚", "단어장", "찾아본 단어는 모두 여기에 저장돼요. 검색하거나 '약한 순'으로 정렬할 수 있어요. 위의 '간격 복습'을 한 번 끝낼 때마다 클로버 1장 (하루 최대 3장)."], ["🎯", "영어 수준", "설정에서 B1, B2, C1, IELTS 7–8 중에서 고르면 기사가 그 수준의 버전으로 바뀌어요."], ["⚔️", "모험", "정답을 맞히면 골드와 출정권을 받아요. 상점에서 오행 장비를 사고, 출정권으로 아일랜드 마을의 괴물과 싸우세요. 이기면 마을을 정복하고 매일 세금을 받아요. 무기 속성이 괴물을 이기면 피해 ×1.5이니 출정 전에 오행 그림을 확인하세요. 목표: 가장 작은 마을부터 더블린까지 정복해 섬 전체를 차지하기!"], ["🍀", "행운", "클로버 1장으로 운명의 룰렛을 한 번, 2장 이상이면 스크래치 카드를 살 수 있어요. 같은 속성·등급 조각 3개를 모으면 장비를 합성할 수 있어요."], ["🤝", "협동과 랭킹", "로그인하면 친구와 방을 만들어 기사 속 틀린 곳을 함께 찾아 보스를 물리칠 수 있어요. 설정에서 닉네임을 정하면 레벨·HP·공격력으로 랭킹에 참여해요."], ["⚙️", "설정", "Google로 한 번 로그인하면 진행 상황이 클라우드에 저장돼 휴대폰을 바꿔도 사라지지 않아요. 언어, 영어 수준, 백업도 여기에 있어요."], ["📱", "팁", "Safari에서 '공유' → '홈 화면에 추가'를 누르면 앱처럼 홈 화면에서 열 수 있어요."]]}};
 function helpSheet(){
   const h=HELP[LANG]||HELP.en;
   return `<div class="scrim" data-act="closehelp"></div><div class="sheet help-sheet" role="dialog" aria-label="${esc(h.title)}"><div class="grab"></div>
@@ -3512,7 +3587,10 @@ function errExplain(e){ const m=(e.m&&(e.m[LANG]||e.m.en))||""; return e.type===
 const CO_TIME=180, CO_MISSES=5;
 const coMe=()=>CLOUD.user?CLOUD.user.uid:"solo";
 function coRoom(){ return S.co&&S.co.room; }
-function coSpendTicket(){ const g=game(); if(g.tickets<1){ toast(T("noTicket")); return false; } g.tickets--; saveGame(); return true; }
+/* multiplayer is for fun when you are bored: it costs nothing and gives only small rewards (not part of the main progress) */
+function coSpendTicket(){ return true; }
+const MP_DAILY=5;   // games per day that still give their small reward
+function mpCount(){ const g=game(); if(!g.mpDay||g.mpDay.date!==today()) g.mpDay={date:today(),n:0,clover:0}; return g.mpDay; }
 function coNewPassage(){ const art=mainArticle(); if(!art){ toast(T("coNoArt")); return null; } const pool=S.articles.filter(a=>a.date===art.date); const pick=pool[Math.floor(Math.random()*pool.length)]||art; return makeErrorPassage(pick, Math.floor(Math.random()*1e9)); }
 function coStartSolo(){
   const p=coNewPassage(); if(!p) return; if(!coSpendTicket()) return;
@@ -3539,7 +3617,6 @@ async function coJoin(code){
     const d=s.data();
     if(d.host!==CLOUD.user.uid && d.guest && d.guest!==CLOUD.user.uid){ S.co=null; toast(T("coFull")); render(); return; }
     if(d.host!==CLOUD.user.uid && !d.guest){
-      if(game().tickets<1){ S.co=null; toast(T("noTicket")); render(); return; }
       await fsM.updateDoc(ref,{guest:CLOUD.user.uid, ["names."+CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P2", state:"play", endAt:Date.now()+CO_TIME*1000+3000});
       coSpendTicket();
     }
@@ -3572,10 +3649,11 @@ function coReward(){
   const g=game(); g.coopDone=g.coopDone||{}; if(g.coopDone[key]) return;
   const mine=Object.values(R.found||{}).filter(u=>u===coMe()).length;
   const win=R.win!==undefined?R.win:Object.keys(R.found||{}).length>=R.errs.length;
-  const gold=mine*8+(win?(S.co.solo?15:30):0), exp=6+mine*5+(win?(S.co.solo?8:20):0);
+  const mc=mpCount(), paid=mc.n<MP_DAILY; mc.n++;
+  const gold=paid?mine*3+(win?10:0):0, exp=paid?2+mine+(win?3:0):0;
   trackPlay(S.co.solo?"coopSolo":"coop");
-  const lotto=win&&!S.co.solo?2:0, pass=win&&!S.co.solo?1:0; g.lotto=(g.lotto||0)+lotto; g.tickets+=pass;
-  g.gold+=gold; g.exp+=exp; const before=g.lv; while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
+  const lotto=paid&&win&&!S.co.solo&&mc.clover<2?1:0, pass=0; mc.clover+=lotto; g.lotto=(g.lotto||0)+lotto;
+  g.gold+=gold; g.exp+=exp; const before=g.lv; while(g.lv<LV_MAX&&g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; } if(g.lv>=LV_MAX) g.exp=Math.min(g.exp,expNeed(LV_MAX));
   g.coopDone[key]=1; const ks=Object.keys(g.coopDone); if(ks.length>40) delete g.coopDone[ks[0]];
   S.co.reward={gold, exp, lotto, pass, lvUp:g.lv-before}; saveGame();
 }
@@ -3595,7 +3673,7 @@ async function coTap(i){
 }
 async function coLeave(){
   const co=S.co; coStop(); S.co=null;
-  if(co&&!co.solo&&co.code&&co.room&&co.room.state==="wait"&&co.room.host===coMe()){ const {fsM,db}=CLOUD.fb; fsM.deleteDoc(fsM.doc(db,"rooms",co.code)).catch(()=>{}); game().tickets++; saveGame(); }
+  if(co&&!co.solo&&co.code&&co.room&&co.room.state==="wait"&&co.room.host===coMe()){ const {fsM,db}=CLOUD.fb; fsM.deleteDoc(fsM.doc(db,"rooms",co.code)).catch(()=>{}); saveGame(); }
   render();
 }
 function coRender(){ if(S.view==="play"&&S.playMode==="coop"){ const el=document.getElementById("coBox"); if(el) el.innerHTML=coInner(); else render(); } }
@@ -4071,8 +4149,9 @@ function pgFinish(){
   trackPlay(P.game); if(Object.keys(P.players).length<2) { g.partyDone[key]=1; saveGame(); }
   const n=Object.keys(P.players).length; if(n<2){ pg.reward={none:true}; return; }
   const rows=pgRows(), rank=rows.findIndex(r=>r.u===pgMe()), r=rows[rank]||{score:0};
-  const gold=10+Math.round(r.score/2)+([40,25,15][rank]||0), exp=12+Math.round(r.score/3)+(rank===0?20:0);
-  g.gold+=gold; g.exp+=exp; const before=g.lv; while(g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; }
+  const mc=mpCount(), paid=mc.n<MP_DAILY; mc.n++;
+  const gold=paid?5+Math.min(15,Math.round(r.score/6))+([10,6,3][rank]||0):0, exp=paid?3+(rank===0?3:0):0;
+  g.gold+=gold; g.exp+=exp; const before=g.lv; while(g.lv<LV_MAX&&g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; } if(g.lv>=LV_MAX) g.exp=Math.min(g.exp,expNeed(LV_MAX));
   g.partyDone[key]=1; const ks=Object.keys(g.partyDone); if(ks.length>40) delete g.partyDone[ks[0]];
   pg.reward={gold, exp, lvUp:g.lv-before}; saveGame();
 }
@@ -4184,7 +4263,7 @@ Object.assign(STR.ja,{"revTitle": "単語帳の復習", "revSub": "単語帳か�
 Object.assign(STR.ko,{"revTitle": "단어장 복습", "revSub": "단어장에서 {n}문제. 잘 모르는 단어나 오래 복습하지 않은 단어일수록 더 자주 나와요. 한 번 끝내면 복권 1장을 받아요.", "revLeft": "오늘 복권을 {n}장 더 받을 수 있어요", "revNoMore": "오늘 받을 복권은 다 받았어요. 복습은 계속할 수 있어요", "revStart": "복습 시작 →", "revNeed": "복습하려면 단어장에 단어가 {n}개 이상 있어야 해요", "lottoGot": "복권 1장을 받았어요", "lottoCap": "오늘 복습으로 받을 수 있는 복권을 다 받았어요 ({n}장)", "lotto": "복권", "goLuck": "행운 뽑기 →", "backDict": "단어장으로", "tabLuck": "행운", "luckSub": "단어장 복습을 한 번 끝내면 복권 1장 (하루 최대 {n}장). 1장으로 룰렛을 한 번 돌리고, 2장 이상이면 긁는 복권을 살 수 있어요.", "wheelTitle": "행운의 룰렛", "wheelSpin": "돌리기 (복권 1장)", "wheelBusy": "돌아가는 중…", "noLotto": "복권이 부족해요. 단어장 복습을 끝내면 받을 수 있어요", "wheelWin": "당첨: {p}", "pGold": "{n} 골드", "pTicket": "출정권 ×{n}", "pLotto": "복권 ×{n}", "pShard": "{e} 속성 {t}등급 조각 ×{n}", "pShardAny": "무작위 속성 {t}등급 조각", "shardWord": "조각", "scTitle": "긁는 복권", "scSub": "비싼 카드일수록 높은 등급 조각이 잘 나와요. 속성은 무작위예요.", "scBronze": "동 카드", "scSilver": "은 카드", "scGold": "금 카드", "scCost": "복권 {n}장", "scHint": "손가락으로 은색 부분을 긁어 주세요", "scAll": "모두 긁기", "scTake": "받기", "scHere": "여기를 긁으세요", "shTitle": "속성 조각", "shSub": "같은 속성, 같은 등급 조각을 {n}개 모으면 그 속성과 등급의 장비(무기 또는 방어구)를 무작위로 하나 합성할 수 있어요.", "forge": "합성", "forged": "{i} 합성 성공! 가방에 넣었어요", "forgeDup": "이 속성과 등급의 무기와 방어구를 모두 갖고 있어서 대신 {n} 골드를 받았어요", "oddsTitle": "확률 보기", "oddsDouble": "{p}% 확률로 2개", "cyGen": "생", "cyBeat": "극", "rules1": "별 모양 안의 화살표는 '극'이며 전투 보너스를 정해요: 금은 나무를, 나무는 흙을, 흙은 물을, 물은 불을, 불은 금을 이겨요. 바깥의 초록 화살표는 '생'(금→물→나무→불→흙→금)으로, 오행의 관계를 보여 줄 뿐 전투에는 영향이 없어요.", "cycleAria": "오행. 상극: 금→나무, 나무→흙, 흙→물, 물→불, 불→금. 상생: 금→물→나무→불→흙→금."});
 Object.assign(STR.zh,{tabSet:"設定"});Object.assign(STR.en,{tabSet:"Settings"});Object.assign(STR.hi,{tabSet:"सेटिंग्स"});Object.assign(STR.es,{tabSet:"Ajustes"});Object.assign(STR.ja,{tabSet:"設定"});Object.assign(STR.ko,{tabSet:"설정"});
 Object.assign(STR.zh,{"rkNickHint": "還沒有暱稱。到「設定」取一個暱稱，就會出現在排行榜上。", "bagNone": "這個屬性還沒有裝備", "supTitle": "請開發者喝杯咖啡", "supSub": "如果這個 App 有幫到你學英文，歡迎透過 Revolut 請我喝一杯咖啡，支持我繼續更新新功能和每天的新聞 🙏", "supBtn": "用 Revolut 贊助 ☕"});Object.assign(STR.en,{"rkNickHint": "You don't have a nickname yet. Set one in Settings to appear on the leaderboard.", "bagNone": "No gear of this element yet", "supTitle": "Buy me a coffee", "supSub": "If this app helps your English, you can buy me a coffee on Revolut. It keeps the new features and daily news coming 🙏", "supBtn": "Support on Revolut ☕"});Object.assign(STR.hi,{"rkNickHint": "अभी आपका कोई उपनाम नहीं है। लीडरबोर्ड पर आने के लिए सेटिंग्स में उपनाम चुनें।", "bagNone": "इस तत्व का अभी कोई उपकरण नहीं", "supTitle": "मुझे एक कॉफ़ी पिलाएँ", "supSub": "अगर यह ऐप आपकी अंग्रेज़ी में मदद करता है, तो Revolut पर मुझे एक कॉफ़ी पिला सकते हैं। इससे नई सुविधाएँ और रोज़ की ख़बरें जारी रहती हैं 🙏", "supBtn": "Revolut से सहयोग करें ☕"});Object.assign(STR.es,{"rkNickHint": "Aún no tienes apodo. Elige uno en Ajustes para aparecer en la clasificación.", "bagNone": "Aún no tienes equipo de este elemento", "supTitle": "Invítame a un café", "supSub": "Si esta app te ayuda con el inglés, puedes invitarme a un café por Revolut. Así sigo añadiendo funciones y noticias cada día 🙏", "supBtn": "Apoyar con Revolut ☕"});Object.assign(STR.ja,{"rkNickHint": "まだニックネームがありません。設定でニックネームを決めるとランキングに表示されます。", "bagNone": "この属性の装備はまだありません", "supTitle": "開発者にコーヒーを1杯", "supSub": "このアプリが英語の勉強に役立ったら、Revolut でコーヒー1杯分の応援をいただけるとうれしいです。新機能と毎日のニュース更新の励みになります 🙏", "supBtn": "Revolut で応援する ☕"});Object.assign(STR.ko,{"rkNickHint": "아직 닉네임이 없어요. 설정에서 닉네임을 정하면 랭킹에 표시돼요.", "bagNone": "이 속성의 장비가 아직 없어요", "supTitle": "개발자에게 커피 한 잔", "supSub": "이 앱이 영어 공부에 도움이 됐다면 Revolut으로 커피 한 잔 후원해 주세요. 새 기능과 매일 뉴스 업데이트에 큰 힘이 돼요 🙏", "supBtn": "Revolut으로 후원하기 ☕"});
-Object.assign(STR.zh,{"bossTitle": "⚠️ 最終魔王特性", "bossShield": "火焰護體：武器屬性克制只有 ×1.25（一般怪物是 ×1.5）", "bossEye": "魔眼：每 {n} 回合發動一次強力攻擊，無視防具屬性、只算一半防禦", "bossRage": "狂暴：血量低於 {p}% 時攻擊力 ×1.25", "bossTip": "建議至少 Lv 20、穿上 Ⅳ 級剋制裝備，戰前咒語一定要答對。", "bossEyeLog": "{m}睜開魔眼！造成 <b>{n}</b> 傷害", "bossRageLog": "{m}狂暴了！", "bossEyeShort": "魔眼"});Object.assign(STR.en,{"bossTitle": "⚠️ Final boss rules", "bossShield": "Flame ward: element advantage only gives ×1.25 (×1.5 against normal monsters)", "bossEye": "Evil Eye: every {n} turns a heavy attack that ignores armour element and half your defence", "bossRage": "Rage: below {p}% HP its attack ×1.25", "bossTip": "Go in at Lv 20 or higher with tier Ⅳ counter gear, and get the spell question right.", "bossEyeLog": "{m} opens the Evil Eye! <b>{n}</b> damage", "bossRageLog": "{m} is enraged!", "bossEyeShort": "Evil Eye"});Object.assign(STR.hi,{"bossTitle": "⚠️ अंतिम दानव के नियम", "bossShield": "अग्नि कवच: तत्व बढ़त केवल ×1.25 (सामान्य दानवों पर ×1.5)", "bossEye": "बुरी आँख: हर {n} बारी में एक भारी वार, जो कवच का तत्व और आधी रक्षा अनदेखा करता है", "bossRage": "क्रोध: {p}% HP से कम होने पर आक्रमण ×1.25", "bossTip": "कम से कम Lv 20, स्तर Ⅳ के सही तत्व वाले उपकरण, और मंत्र प्रश्न का सही उत्तर ज़रूरी है।", "bossEyeLog": "{m} ने बुरी आँख खोली! <b>{n}</b> नुकसान", "bossRageLog": "{m} क्रोधित हो गया!", "bossEyeShort": "बुरी आँख"});Object.assign(STR.es,{"bossTitle": "⚠️ Reglas del jefe final", "bossShield": "Escudo de llamas: la ventaja de elemento solo da ×1,25 (×1,5 contra monstruos normales)", "bossEye": "Mal de Ojo: cada {n} turnos un ataque fuerte que ignora el elemento de la armadura y la mitad de tu defensa", "bossRage": "Furia: por debajo del {p}% de HP su ataque ×1,25", "bossTip": "Entra con Lv 20 o más, equipo de nivel Ⅳ que lo contrarreste, y acierta la pregunta del hechizo.", "bossEyeLog": "¡{m} abre el Mal de Ojo! <b>{n}</b> de daño", "bossRageLog": "¡{m} se enfurece!", "bossEyeShort": "Mal de Ojo"});Object.assign(STR.ja,{"bossTitle": "⚠️ ラスボスの特性", "bossShield": "炎の守り：属性有利でも武器は ×1.25 のみ（通常の魔物は ×1.5）", "bossEye": "魔眼：{n} ターンごとに強力な攻撃。防具の属性を無視し、防御も半分しか効かない", "bossRage": "激怒：HP が {p}% を切ると攻撃力 ×1.25", "bossTip": "Lv 20 以上、ランクⅣの有利装備で挑み、戦前の呪文は必ず正解しよう。", "bossEyeLog": "{m}が魔眼を開いた！<b>{n}</b> ダメージ", "bossRageLog": "{m}が激怒した！", "bossEyeShort": "魔眼"});Object.assign(STR.ko,{"bossTitle": "⚠️ 최종 보스 특성", "bossShield": "화염 수호: 속성 유리여도 무기는 ×1.25 (일반 괴물은 ×1.5)", "bossEye": "마안: {n}턴마다 강력한 공격. 방어구 속성을 무시하고 방어력도 절반만 적용", "bossRage": "광폭화: HP가 {p}% 아래로 떨어지면 공격력 ×1.25", "bossTip": "Lv 20 이상, Ⅳ등급 유리 속성 장비를 갖추고 전투 전 주문 문제를 꼭 맞히세요.", "bossEyeLog": "{m}이(가) 마안을 떴다! <b>{n}</b> 피해", "bossRageLog": "{m}이(가) 광폭화했다!", "bossEyeShort": "마안"});
+Object.assign(STR.zh,{"bossTitle": "⚠️ 最終魔王特性", "bossShield": "火焰護體：武器屬性克制只有 ×1.25（一般怪物是 ×1.5）", "bossEye": "魔眼：每 {n} 回合發動一次強力攻擊，無視防具屬性、只算一半防禦", "bossRage": "狂暴：血量低於 {p}% 時攻擊力 ×1.25", "bossTip": "建議至少 Lv 50、穿上 Ⅳ 級剋制裝備，戰前咒語一定要答對。", "bossEyeLog": "{m}睜開魔眼！造成 <b>{n}</b> 傷害", "bossRageLog": "{m}狂暴了！", "bossEyeShort": "魔眼"});Object.assign(STR.en,{"bossTitle": "⚠️ Final boss rules", "bossShield": "Flame ward: element advantage only gives ×1.25 (×1.5 against normal monsters)", "bossEye": "Evil Eye: every {n} turns a heavy attack that ignores armour element and half your defence", "bossRage": "Rage: below {p}% HP its attack ×1.25", "bossTip": "Go in at Lv 50 or higher with tier Ⅳ counter gear, and get the spell question right.", "bossEyeLog": "{m} opens the Evil Eye! <b>{n}</b> damage", "bossRageLog": "{m} is enraged!", "bossEyeShort": "Evil Eye"});Object.assign(STR.hi,{"bossTitle": "⚠️ अंतिम दानव के नियम", "bossShield": "अग्नि कवच: तत्व बढ़त केवल ×1.25 (सामान्य दानवों पर ×1.5)", "bossEye": "बुरी आँख: हर {n} बारी में एक भारी वार, जो कवच का तत्व और आधी रक्षा अनदेखा करता है", "bossRage": "क्रोध: {p}% HP से कम होने पर आक्रमण ×1.25", "bossTip": "कम से कम Lv 50, स्तर Ⅳ के सही तत्व वाले उपकरण, और मंत्र प्रश्न का सही उत्तर ज़रूरी है।", "bossEyeLog": "{m} ने बुरी आँख खोली! <b>{n}</b> नुकसान", "bossRageLog": "{m} क्रोधित हो गया!", "bossEyeShort": "बुरी आँख"});Object.assign(STR.es,{"bossTitle": "⚠️ Reglas del jefe final", "bossShield": "Escudo de llamas: la ventaja de elemento solo da ×1,25 (×1,5 contra monstruos normales)", "bossEye": "Mal de Ojo: cada {n} turnos un ataque fuerte que ignora el elemento de la armadura y la mitad de tu defensa", "bossRage": "Furia: por debajo del {p}% de HP su ataque ×1,25", "bossTip": "Entra con Lv 50 o más, equipo de nivel Ⅳ que lo contrarreste, y acierta la pregunta del hechizo.", "bossEyeLog": "¡{m} abre el Mal de Ojo! <b>{n}</b> de daño", "bossRageLog": "¡{m} se enfurece!", "bossEyeShort": "Mal de Ojo"});Object.assign(STR.ja,{"bossTitle": "⚠️ ラスボスの特性", "bossShield": "炎の守り：属性有利でも武器は ×1.25 のみ（通常の魔物は ×1.5）", "bossEye": "魔眼：{n} ターンごとに強力な攻撃。防具の属性を無視し、防御も半分しか効かない", "bossRage": "激怒：HP が {p}% を切ると攻撃力 ×1.25", "bossTip": "Lv 50 以上、ランクⅣの有利装備で挑み、戦前の呪文は必ず正解しよう。", "bossEyeLog": "{m}が魔眼を開いた！<b>{n}</b> ダメージ", "bossRageLog": "{m}が激怒した！", "bossEyeShort": "魔眼"});Object.assign(STR.ko,{"bossTitle": "⚠️ 최종 보스 특성", "bossShield": "화염 수호: 속성 유리여도 무기는 ×1.25 (일반 괴물은 ×1.5)", "bossEye": "마안: {n}턴마다 강력한 공격. 방어구 속성을 무시하고 방어력도 절반만 적용", "bossRage": "광폭화: HP가 {p}% 아래로 떨어지면 공격력 ×1.25", "bossTip": "Lv 50 이상, Ⅳ등급 유리 속성 장비를 갖추고 전투 전 주문 문제를 꼭 맞히세요.", "bossEyeLog": "{m}이(가) 마안을 떴다! <b>{n}</b> 피해", "bossRageLog": "{m}이(가) 광폭화했다!", "bossEyeShort": "마안"});
 Object.assign(STR.zh,{"regTitle": "新聞地區", "regSub": "選擇想讀哪個國家的英文新聞。我們會為最近 7 天有打開 App 的地區，每天準備 2 篇當地新聞。", "regNational": "全國新聞（不選郡）", "regIEnote": "選了郡之後，每天固定有 2 篇愛爾蘭全國新聞，加上 2 篇你所在郡的新聞。", "countyOf": "{c} 郡", "regPending": "你選了「{r}」。這個地區的新聞會從明天早上開始提供，今天先讀愛爾蘭的新聞。"});Object.assign(STR.en,{"regTitle": "News region", "regSub": "Choose which country's English news you want to read. Every region opened in the last 7 days gets 2 local stories a day.", "regNational": "National news (no county)", "regIEnote": "With a county chosen you get 2 national Irish stories every day plus 2 from your county.", "countyOf": "County {c}", "regPending": "You chose {r}. Local stories for it start tomorrow morning; for today, here's the Irish news."});Object.assign(STR.hi,{"regTitle": "ख़बरों का क्षेत्र", "regSub": "चुनें कि आप किस देश की अंग्रेज़ी ख़बरें पढ़ना चाहते हैं। पिछले 7 दिनों में खोले गए हर क्षेत्र के लिए रोज़ 2 स्थानीय ख़बरें तैयार होती हैं।", "regNational": "राष्ट्रीय ख़बरें (कोई काउंटी नहीं)", "regIEnote": "काउंटी चुनने पर रोज़ आयरलैंड की 2 राष्ट्रीय और आपकी काउंटी की 2 ख़बरें मिलेंगी।", "countyOf": "काउंटी {c}", "regPending": "आपने {r} चुना। इसकी स्थानीय ख़बरें कल सुबह से मिलेंगी; आज आयरलैंड की ख़बरें पढ़ें।"});Object.assign(STR.es,{"regTitle": "Región de noticias", "regSub": "Elige de qué país quieres leer noticias en inglés. Cada región abierta en los últimos 7 días recibe 2 noticias locales al día.", "regNational": "Noticias nacionales (sin condado)", "regIEnote": "Con un condado elegido tendrás cada día 2 noticias nacionales de Irlanda y 2 de tu condado.", "countyOf": "Condado de {c}", "regPending": "Elegiste {r}. Sus noticias locales empiezan mañana por la mañana; hoy puedes leer las de Irlanda."});Object.assign(STR.ja,{"regTitle": "ニュースの地域", "regSub": "どの国の英語ニュースを読むか選べます。過去 7 日以内に開かれた地域には、毎日 2 本の地元ニュースを用意します。", "regNational": "全国ニュース（州を選ばない）", "regIEnote": "州を選ぶと、毎日アイルランド全国のニュース 2 本と、その州のニュース 2 本が届きます。", "countyOf": "{c} 州", "regPending": "「{r}」を選びました。この地域のニュースは明日の朝から届きます。今日はアイルランドのニュースを読みましょう。"});Object.assign(STR.ko,{"regTitle": "뉴스 지역", "regSub": "어느 나라의 영어 뉴스를 읽을지 고르세요. 최근 7일 안에 열린 지역에는 매일 지역 뉴스 2편을 준비해요.", "regNational": "전국 뉴스 (카운티 선택 안 함)", "regIEnote": "카운티를 고르면 매일 아일랜드 전국 뉴스 2편과 그 카운티 뉴스 2편을 받아요.", "countyOf": "{c} 카운티", "regPending": "'{r}'을(를) 선택했어요. 이 지역 뉴스는 내일 아침부터 제공돼요. 오늘은 아일랜드 뉴스를 읽어 보세요."});
 Object.assign(STR.zh,{"lvA2": "初級：最簡單的字、很短的句子", "dsLoad": "查看用戶資料與系統統計", "dsReload": "重新整理", "dsLogin": "要先登入 Google 才能查看", "dsDenied": "沒有權限：請到 Firebase 規則加入管理員權限", "dsSys": "系統統計", "dsUsers": "註冊玩家", "dsToday": "今日活躍", "dsWeek": "7 日活躍", "dsAvgLv": "平均等級", "dsWords": "字典單字總數", "dsDays": "總學習天數", "dsQuiz": "完成測驗數", "dsLb": "排行榜人數", "dsRooms": "進行中房間", "dsConq": "統一全島", "dsArts": "全國文章", "dsRegArts": "地區文章", "dsLatest": "最新文章日期：{d}", "dsRegions": "地區活躍狀態（🟢 = 7 天內有人用，會產生新聞）", "dsRegion": "地區", "dsLast": "最後使用", "dsPlayers": "玩家列表（{n} 人）", "dsW": "單字", "dsD": "天數", "dsC": "佔領", "dsNote": "資料時間 {t}。只統計有登入 Google 的玩家。"});Object.assign(STR.en,{"lvA2": "Elementary: the simplest words, very short sentences", "dsLoad": "View player data & system stats", "dsReload": "Refresh", "dsLogin": "Sign in with Google first", "dsDenied": "No permission: add the admin rule in Firebase", "dsSys": "System stats", "dsUsers": "Players", "dsToday": "Active today", "dsWeek": "Active 7 days", "dsAvgLv": "Average level", "dsWords": "Dictionary words", "dsDays": "Study days", "dsQuiz": "Quizzes done", "dsLb": "On leaderboard", "dsRooms": "Open rooms", "dsConq": "Conquered all", "dsArts": "National articles", "dsRegArts": "Regional articles", "dsLatest": "Latest article: {d}", "dsRegions": "Region activity (🟢 = used in last 7 days, gets news)", "dsRegion": "Region", "dsLast": "Last used", "dsPlayers": "Players ({n})", "dsW": "Words", "dsD": "Days", "dsC": "Towns", "dsNote": "Data as of {t}. Only players signed in with Google are counted."});Object.assign(STR.hi,{"lvA2": "प्रारंभिक: सबसे आसान शब्द, बहुत छोटे वाक्य"});Object.assign(STR.es,{"lvA2": "Elemental: las palabras más sencillas, frases muy cortas"});Object.assign(STR.ja,{"lvA2": "初級：いちばんやさしい単語、とても短い文"});Object.assign(STR.ko,{"lvA2": "초급: 가장 쉬운 단어, 아주 짧은 문장"});
 Object.assign(STR.zh,{"supBank": "台灣銀行轉帳", "supBankSub": "在台灣的朋友也可以直接轉帳到我的國泰世華帳戶，或用銀行 App 掃描下方 QR Code：", "supCode": "銀行代碼", "supAcct": "帳號", "supCopy": "複製", "supCopied": "已複製帳號"});Object.assign(STR.en,{"supBank": "Bank transfer (Taiwan)", "supBankSub": "If you're in Taiwan, you can transfer to my Cathay United Bank account, or scan the QR code with your banking app:", "supCode": "Bank code", "supAcct": "Account", "supCopy": "Copy", "supCopied": "Account number copied"});Object.assign(STR.hi,{"supBank": "बैंक ट्रांसफ़र (ताइवान)", "supBankSub": "ताइवान में हों तो मेरे Cathay United Bank खाते में ट्रांसफ़र करें या बैंक ऐप से QR कोड स्कैन करें:", "supCode": "बैंक कोड", "supAcct": "खाता", "supCopy": "कॉपी", "supCopied": "खाता संख्या कॉपी हो गई"});Object.assign(STR.es,{"supBank": "Transferencia bancaria (Taiwán)", "supBankSub": "Si estás en Taiwán, puedes transferir a mi cuenta de Cathay United Bank o escanear el código QR con tu app del banco:", "supCode": "Código del banco", "supAcct": "Cuenta", "supCopy": "Copiar", "supCopied": "Número de cuenta copiado"});Object.assign(STR.ja,{"supBank": "銀行振込（台湾）", "supBankSub": "台湾にお住まいの方は、国泰世華銀行の口座へ振り込むか、銀行アプリで下の QR コードを読み取ってください：", "supCode": "銀行コード", "supAcct": "口座番号", "supCopy": "コピー", "supCopied": "口座番号をコピーしました"});Object.assign(STR.ko,{"supBank": "계좌 이체 (대만)", "supBankSub": "대만에 계신다면 국태세화은행 계좌로 이체하거나 은행 앱으로 아래 QR 코드를 스캔해 주세요:", "supCode": "은행 코드", "supAcct": "계좌번호", "supCopy": "복사", "supCopied": "계좌번호를 복사했어요"});
@@ -4702,7 +4781,7 @@ function allyArt(al, pose){
 setTimeout(()=>{ const g=game(); if(!g||!g.gender) return; const o=heroOutfit(g.gender), w=g.weapon&&ITEMS[g.weapon];
   ["idle",heroAct(w),"hurt","win"].forEach(p=>{ const i=new Image(); i.src=`assets/art/hero/${g.gender}-${HERO_FILES.has(`${g.gender}-${o}-${p}`)?o:"cloth"}-${p}.webp`; }); },3000);
 /* ----- Chapter 2 (Great Britain) placeholder: unlocks after Balor of Dublin is defeated at Lv 20 ----- */
-const CH2_LV=20;
+const CH2_LV=LV_MAX;
 const FUTURE_SLOTS=[["shield",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>'],
  ["helmet",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 15a8 8 0 0 1 16 0v3H4z"/><path d="M12 7v8M4 15h16"/></svg>']];
 function ch2Open(){ const g=game(); return !!(conquered().dublin && g.lv>=CH2_LV); }
@@ -4795,6 +4874,52 @@ Object.assign(STR.es,{errTitle:"Hubo un problema al abrir esta página",deLoad:"
 Object.assign(STR.ja,{errTitle:"このページを開くときに問題が起きました",deLoad:"エラー記録を見る",deTitle:"最新 {n} 件のエラー",deUsers:"{n} 人",deNone:"エラーはありません 🎉"});
 Object.assign(STR.ko,{errTitle:"이 페이지를 여는 중 문제가 생겼어요",deLoad:"오류 기록 보기",deTitle:"최근 오류 {n}건",deUsers:"{n}명",deNone:"오류 기록이 없어요 🎉"});
 Object.assign(STR.zh,{fbFail:"送出失敗，內容已保留，請稍後再試"}); Object.assign(STR.en,{fbFail:"Couldn't send. Your message is kept, please try again later"}); Object.assign(STR.hi,{fbFail:"भेजा नहीं जा सका। आपका संदेश सुरक्षित है, बाद में फिर कोशिश करें"}); Object.assign(STR.es,{fbFail:"No se pudo enviar. Tu mensaje se ha guardado, inténtalo más tarde"}); Object.assign(STR.ja,{fbFail:"送信できませんでした。内容は保存されています。後でもう一度お試しください"}); Object.assign(STR.ko,{fbFail:"보내지 못했어요. 내용은 저장되어 있으니 잠시 후 다시 시도해 주세요"}); 
+Object.assign(STR.zh,{"lootOld": "舊文章不給出征令（只有今天的新聞給）", "lootPre": "讀前複習不給出征令，讀完今天的新聞再來拿", "noStam": "體力用完了，{m} 分鐘後恢復 1 點", "fightWild": "出發狩獵！（消耗 1 點體力 · 剩 {s}/{mx}）", "wildLess": "同一隻今天打越多次，金幣越少", "stam": "體力", "stamHint": "野外狩獵消耗體力，每 {h} 小時恢復 1 點", "stamNext": "{m} 後 +1", "rules3": "出征令：讀完「今天」的新聞並完成讀後測驗，每篇得 1 張（每天最多 4 篇），完成當天三步驟再多 2 張和 30 金。舊文章和讀前複習只給金幣。攻打城鎮花出征令；野外狩獵花體力（最多 6 點，每 4 小時恢復 1 點）。金幣：每答對一題 10 金，正確率 80% 以上再加 20，全對再加 20。", "noTicket": "出征令不足：讀完今天的新聞並完成測驗就能獲得", "coSub": "兩人一起讀同一篇文章，把藏在裡面的錯字找出來打倒魔王。免費遊玩，每天前 5 場有少量金幣和經驗。", "coSoloSub": "沒有朋友在線時，自己練習（免費）"});
+Object.assign(STR.en,{"lootOld": "Older articles don't give quest passes (only today's news does)", "lootPre": "The review quiz gives no quest pass — read today's news to earn them", "noStam": "Out of stamina — 1 point back in {m} min", "fightWild": "Go hunting! (1 stamina · {s}/{mx} left)", "wildLess": "The same monster gives less gold each time today", "stam": "Stamina", "stamHint": "Wild hunts use stamina; 1 point comes back every {h} hours", "stamNext": "+1 in {m}", "rules3": "Quest passes: finish the quiz after reading one of TODAY's news stories to earn 1 (up to 4 a day), plus 2 more and 30 gold for completing the day's three steps. Older articles and the review quiz give gold only. Attacking towns costs quest passes; wild hunts cost stamina (max 6, 1 point back every 4 hours). Gold: 10 per correct answer, +20 for 80% or more, +20 more for a perfect score.", "noTicket": "No quest passes — read today's news and finish the quiz to earn one", "coSub": "Read the same article together and find the hidden mistakes to defeat the boss. Free to play; your first 5 games each day give a little gold and EXP.", "coSoloSub": "Practise alone when no friend is online (free)"});
+Object.assign(STR.hi,{"lootOld": "पुराने लेख अभियान पास नहीं देते (सिर्फ़ आज की ख़बर देती है)", "lootPre": "दोहराव क्विज़ पास नहीं देता — आज की ख़बर पढ़कर पास पाएँ", "noStam": "स्टैमिना ख़त्म — {m} मिनट में 1 पॉइंट वापस", "fightWild": "शिकार पर चलें! (1 स्टैमिना · {s}/{mx} बाकी)", "wildLess": "आज एक ही दानव से बार-बार कम सोना मिलता है", "stam": "स्टैमिना", "stamHint": "जंगली शिकार में स्टैमिना लगता है; हर {h} घंटे में 1 पॉइंट वापस", "stamNext": "{m} में +1", "rules3": "अभियान पास: आज की किसी ख़बर को पढ़कर क्विज़ पूरा करें, हर लेख पर 1 पास (दिन में अधिकतम 4), और दिन के तीनों चरण पूरे करने पर 2 पास और 30 सोना। पुराने लेख और दोहराव क्विज़ सिर्फ़ सोना देते हैं। शहरों पर हमले में पास लगते हैं; जंगली शिकार में स्टैमिना (अधिकतम 6, हर 4 घंटे में 1)। सोना: हर सही उत्तर पर 10, 80% या ज़्यादा पर +20, पूरे सही पर +20 और।", "noTicket": "अभियान पास नहीं हैं — आज की ख़बर पढ़कर क्विज़ पूरा करें", "coSub": "एक ही लेख साथ पढ़ें और छिपी ग़लतियाँ ढूँढकर दानव को हराएँ। मुफ़्त; हर दिन के पहले 5 खेलों में थोड़ा सोना और EXP।", "coSoloSub": "कोई दोस्त ऑनलाइन न हो तो अकेले अभ्यास करें (मुफ़्त)"});
+Object.assign(STR.es,{"lootOld": "Los artículos antiguos no dan pases (solo las noticias de hoy)", "lootPre": "El repaso no da pases: lee la noticia de hoy para ganarlos", "noStam": "Sin energía: recuperas 1 punto en {m} min", "fightWild": "¡A cazar! (1 de energía · quedan {s}/{mx})", "wildLess": "El mismo monstruo da menos oro cada vez hoy", "stam": "Energía", "stamHint": "La caza salvaje gasta energía; recuperas 1 punto cada {h} horas", "stamNext": "+1 en {m}", "rules3": "Pases de expedición: termina el test tras leer una noticia de HOY y ganas 1 (hasta 4 al día), y 2 más y 30 de oro al completar los tres pasos del día. Los artículos antiguos y el repaso solo dan oro. Atacar ciudades cuesta pases; la caza salvaje cuesta energía (máx. 6, 1 punto cada 4 horas). Oro: 10 por acierto, +20 con 80 % o más, +20 más si aciertas todo.", "noTicket": "No tienes pases: lee la noticia de hoy y termina el test para ganarlos", "coSub": "Leed el mismo artículo y encontrad los errores ocultos para vencer al jefe. Gratis; las primeras 5 partidas del día dan un poco de oro y EXP.", "coSoloSub": "Practica a solas cuando no haya amigos conectados (gratis)"});
+Object.assign(STR.ja,{"lootOld": "古い記事では出撃券はもらえません（今日のニュースだけ）", "lootPre": "復習テストでは出撃券はもらえません。今日のニュースを読んで手に入れよう", "noStam": "体力がありません。{m} 分後に 1 回復します", "fightWild": "狩りに出発！（体力 1 · 残り {s}/{mx}）", "wildLess": "同じ魔物は今日倒すたびにゴールドが減ります", "stam": "体力", "stamHint": "野外の狩りは体力を使います。{h} 時間ごとに 1 回復", "stamNext": "{m} 後 +1", "rules3": "出撃券：「今日」のニュースを読んで読後テストを終えると 1 枚（1日最大4本）、その日の3ステップを達成するとさらに2枚と30 G。古い記事と復習テストはゴールドのみ。町への攻撃は出撃券、野外の狩りは体力（最大6、4時間ごとに1回復）を使います。ゴールド：1問正解で10 G、正答率80%以上で+20、全問正解でさらに+20。", "noTicket": "出撃券がありません。今日のニュースを読んでテストを終えると手に入ります", "coSub": "同じ記事を一緒に読み、隠れた間違いを見つけてボスを倒そう。無料。毎日最初の5回は少しのゴールドと経験値がもらえます。", "coSoloSub": "友達がいないときにひとりで練習（無料）"});
+Object.assign(STR.ko,{"lootOld": "지난 기사로는 출정권을 받을 수 없어요 (오늘 뉴스만 가능)", "lootPre": "복습 퀴즈는 출정권을 주지 않아요. 오늘 뉴스를 읽고 받으세요", "noStam": "체력이 없어요. {m}분 뒤 1 회복돼요", "fightWild": "사냥 출발! (체력 1 · 남은 {s}/{mx})", "wildLess": "같은 괴물은 오늘 잡을수록 골드가 줄어요", "stam": "체력", "stamHint": "야생 사냥은 체력을 써요. {h}시간마다 1 회복", "stamNext": "{m} 뒤 +1", "rules3": "출정권: '오늘' 뉴스를 읽고 퀴즈를 마치면 기사마다 1장 (하루 최대 4장), 하루 3단계를 모두 마치면 2장과 30골드를 더 받아요. 지난 기사와 복습 퀴즈는 골드만 줘요. 마을 공격에는 출정권, 야생 사냥에는 체력 (최대 6, 4시간마다 1 회복)이 들어요. 골드: 정답 하나당 10, 정답률 80% 이상이면 +20, 만점이면 +20 추가.", "noTicket": "출정권이 없어요. 오늘 뉴스를 읽고 퀴즈를 마치면 받을 수 있어요", "coSub": "같은 기사를 함께 읽고 숨은 오류를 찾아 보스를 물리치세요. 무료이며, 매일 처음 5판은 골드와 경험치를 조금 줘요.", "coSoloSub": "친구가 없을 때 혼자 연습 (무료)"});
+Object.assign(STR.zh,{"lotto": "幸運草", "lottoCap": "今天從複習拿到的幸運草已達上限（{n} 片）", "lottoGot": "獲得 1 片幸運草 ☘️", "luckSub": "完成一次間隔複習（5 個字以上）就能拿 1 片幸運草（每天最多 {n} 片）。1 片可以轉一次命運輪盤，2 片以上可以買刮刮卡。", "noLotto": "幸運草不足，到字典完成間隔複習就能拿到", "pLotto": "{n} 片幸運草", "scCost": "{n} 片幸運草", "wheelSpin": "轉一次（1 片幸運草）", "wheelTitle": "命運輪盤", "dLotto": "+10 幸運草", "srsTicket": "完成一次拿 1 片幸運草 · 今天還能拿 {n} 片", "srsTicketMin": "複習 {n} 個字以上才能拿幸運草"});
+Object.assign(STR.en,{"lotto": "Shamrocks", "lottoCap": "You've already earned today's shamrocks from reviews ({n})", "lottoGot": "You got 1 shamrock ☘️", "luckSub": "Finish a spaced review (5+ words) to earn 1 shamrock (up to {n} a day). 1 shamrock spins the Wheel of Fate once; 2 or more buy a scratch card.", "noLotto": "Not enough shamrocks. Finish a spaced review in the dictionary to earn one", "pLotto": "{n} × shamrock", "scCost": "{n} shamrocks", "wheelSpin": "Spin (1 shamrock)", "wheelTitle": "Wheel of Fate", "dLotto": "+10 shamrocks", "srsTicket": "Finish a review for 1 shamrock · {n} left today", "srsTicketMin": "Review at least {n} words to earn a shamrock"});
+Object.assign(STR.hi,{"lotto": "शैमरॉक", "lottoCap": "आज दोहराव से मिलने वाले शैमरॉक पूरे हो गए ({n})", "lottoGot": "1 शैमरॉक मिला ☘️", "luckSub": "एक अंतराल दोहराव (5+ शब्द) पूरा करें और 1 शैमरॉक पाएँ (दिन में अधिकतम {n})। 1 शैमरॉक से भाग्य चक्र एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड।", "noLotto": "शैमरॉक कम हैं। शब्दकोश में अंतराल दोहराव पूरा करके पाएँ", "pLotto": "{n} × शैमरॉक", "scCost": "{n} शैमरॉक", "wheelSpin": "घुमाएँ (1 शैमरॉक)", "wheelTitle": "भाग्य चक्र", "dLotto": "+10 शैमरॉक", "srsTicket": "एक दोहराव पूरा करें, 1 शैमरॉक पाएँ · आज {n} बाकी", "srsTicketMin": "शैमरॉक के लिए कम से कम {n} शब्द दोहराएँ"});
+Object.assign(STR.es,{"lotto": "Tréboles", "lottoCap": "Ya has ganado los tréboles de hoy con los repasos ({n})", "lottoGot": "Has ganado 1 trébol ☘️", "luckSub": "Termina un repaso espaciado (5+ palabras) para ganar 1 trébol (máximo {n} al día). Con 1 trébol giras la Rueda del destino; con 2 o más compras un rasca y gana.", "noLotto": "No tienes tréboles suficientes. Termina un repaso espaciado en el diccionario", "pLotto": "{n} × trébol", "scCost": "{n} tréboles", "wheelSpin": "Girar (1 trébol)", "wheelTitle": "Rueda del destino", "dLotto": "+10 tréboles", "srsTicket": "Termina un repaso y gana 1 trébol · quedan {n} hoy", "srsTicketMin": "Repasa al menos {n} palabras para ganar un trébol"});
+Object.assign(STR.ja,{"lotto": "クローバー", "lottoCap": "今日の復習でもらえるクローバーは上限に達しました（{n}枚）", "lottoGot": "クローバーを1枚手に入れました ☘️", "luckSub": "間隔反復の復習（5語以上）を1回終えるとクローバーが1枚（1日最大{n}枚）。1枚で運命のルーレットを1回、2枚以上でスクラッチカードが買えます。", "noLotto": "クローバーが足りません。単語帳の間隔反復でもらえます", "pLotto": "クローバー ×{n}", "scCost": "クローバー {n}枚", "wheelSpin": "回す（クローバー1枚）", "wheelTitle": "運命のルーレット", "dLotto": "+10 クローバー", "srsTicket": "1回終えるとクローバー1枚 · 今日はあと{n}枚", "srsTicketMin": "{n}語以上復習するとクローバーがもらえます"});
+Object.assign(STR.ko,{"lotto": "클로버", "lottoCap": "오늘 복습으로 받을 수 있는 클로버를 모두 받았어요 ({n}장)", "lottoGot": "클로버 1장을 받았어요 ☘️", "luckSub": "간격 복습 (5단어 이상)을 한 번 끝내면 클로버 1장 (하루 최대 {n}장). 1장으로 운명의 룰렛을 한 번 돌리고, 2장 이상이면 스크래치 카드를 살 수 있어요.", "noLotto": "클로버가 부족해요. 단어장에서 간격 복습을 끝내면 받을 수 있어요", "pLotto": "클로버 ×{n}", "scCost": "클로버 {n}장", "wheelSpin": "돌리기 (클로버 1장)", "wheelTitle": "운명의 룰렛", "dLotto": "+10 클로버", "srsTicket": "한 번 끝내면 클로버 1장 · 오늘 {n}장 남음", "srsTicketMin": "{n}단어 이상 복습하면 클로버를 받아요"});
+Object.assign(STR.zh,{"stName": "德魯伊長老 基蘭", "stNext": "繼續", "stGift": "收下 5 張出征令", "stOk": "我知道了", "stGo": "出發吧！", "stSkip": "略過", "in1": "年輕的旅人，你終於來了！我是守護這座島的德魯伊長老基蘭。魔眼巴洛爾從海底醒來，帶著妖怪佔領了愛爾蘭的城鎮，我們需要一位挑戰者！", "in2": "妖怪最怕知識的力量。每天讀「今天」的英文新聞，完成讀後測驗，每篇就能拿到 1 張出征令（一天最多 4 篇）；把當天三個步驟都做完，我再多送你 2 張。", "in3": "用出征令攻打城鎮，打贏就能佔領，每天還會收到稅金。記住五行相剋：金剋木、木剋土、土剋水、水剋火、火剋金。選對屬性的裝備，事半功倍！", "in4": "野外的野獸不用出征令，只會消耗體力（最多 6 點，每 4 小時恢復 1 點）。打牠們可以練等、賺金幣；同一隻打太多次，金幣會越來越少。到商店買的鎧甲，會直接穿在你身上。", "in5": "這 5 張出征令先送給你，去打下第一座城鎮丁格爾吧！從 1 級一路變強到 50 級，最後打敗都柏林的巴洛爾，拯救整個愛爾蘭！", "d21": "歡迎回來！今天教你一個好東西：幸運草 ☘️。到字典完成一次間隔複習（5 個字以上），就能拿 1 片，每天最多 3 片。", "d22": "幸運草可以拿到「幸運屋」轉命運輪盤，有機會拿到金幣、出征令或裝備碎片；2 片以上還能買刮刮卡，刮出更高級的碎片。", "d23": "同屬性、同等級的碎片集滿 3 個，就能合成一件你等級附近的裝備。好好收集，說不定能省下一大筆金幣！", "d31": "你已經是個像樣的冒險者了！到 24 級，會有盟友陪你挑戰野外的強敵，你也可以邀請朋友當盟友。", "d32": "無聊的時候，可以到「多人遊戲」和朋友連線玩，免費但獎勵不多。真正變強的路只有一條：每天讀新聞。我在都柏林等你的好消息！", "stGot": "收到 5 張出征令！"});
+Object.assign(STR.en,{"stName": "Ciarán the Druid Elder", "stNext": "Next", "stGift": "Take the 5 quest passes", "stOk": "Got it", "stGo": "Let's go!", "stSkip": "Skip", "in1": "Young traveller, you've finally come! I am Ciarán, the druid elder who watches over this island. Balor of the Evil Eye has woken beneath the sea, and his monsters have taken the towns of Ireland. We need a challenger!", "in2": "Monsters fear the power of knowledge. Each day, read TODAY's English news and finish the quiz after it: every story gives you 1 quest pass (up to 4 a day). Finish all three daily steps and I'll add 2 more.", "in3": "Use quest passes to attack towns. Win, and the town is yours and pays you tax every day. Remember the five elements: metal beats wood, wood beats earth, earth beats water, water beats fire, fire beats metal.", "in4": "Wild beasts don't need quest passes, only stamina (up to 6, one point back every 4 hours). Hunt them to level up and earn gold, but the same beast pays less each time. Armour you buy in the shop is worn by your hero.", "in5": "Take these 5 quest passes and free Dingle, the first town! Grow from Lv 1 all the way to Lv 50, defeat Balor in Dublin and save all of Ireland!", "d21": "Welcome back! Today I'll show you something lucky: shamrocks ☘️. Finish a spaced review in your dictionary (5+ words) to earn one, up to 3 a day.", "d22": "Take your shamrocks to the Lucky House and spin the Wheel of Fate for gold, quest passes or gear shards. With 2 or more you can buy a scratch card for better shards.", "d23": "Collect 3 shards of the same element and tier to forge gear close to your level. Collect them well and you can save a lot of gold!", "d31": "You're becoming a real adventurer! At Lv 24 an ally will join you against strong wild beasts, and you can invite a friend as your ally.", "d32": "When you're bored, play with friends in Multiplayer. It's free, but the rewards are small. The only real road to strength is reading the news every day. I'll be waiting for good news from Dublin!", "stGot": "You received 5 quest passes!"});
+Object.assign(STR.hi,{"stName": "ड्रुइड बुज़ुर्ग कीरान", "stNext": "आगे", "stGift": "5 अभियान पास लें", "stOk": "समझ गया", "stGo": "चलो!", "stSkip": "छोड़ें", "in1": "युवा यात्री, आख़िर तुम आ गए! मैं कीरान हूँ, इस द्वीप का रखवाला ड्रुइड बुज़ुर्ग। बुरी आँख वाला बलोर समुद्र के नीचे जाग गया है और उसके दानवों ने आयरलैंड के शहर छीन लिए हैं। हमें एक योद्धा चाहिए!", "in2": "दानव ज्ञान की शक्ति से डरते हैं। हर दिन आज की अंग्रेज़ी ख़बर पढ़ो और उसके बाद का क्विज़ पूरा करो: हर ख़बर पर 1 अभियान पास (दिन में अधिकतम 4)। दिन के तीनों चरण पूरे करो तो मैं 2 और दूँगा।", "in3": "अभियान पास से शहरों पर हमला करो। जीतोगे तो शहर तुम्हारा, और हर दिन कर मिलेगा। पाँच तत्व याद रखो: धातु लकड़ी को, लकड़ी पृथ्वी को, पृथ्वी जल को, जल अग्नि को, अग्नि धातु को हराती है।", "in4": "जंगली जानवरों के लिए पास नहीं, सिर्फ़ स्टैमिना चाहिए (अधिकतम 6, हर 4 घंटे में 1)। उनका शिकार करके स्तर बढ़ाओ और सोना कमाओ, पर एक ही जानवर से बार-बार कम सोना मिलता है। दुकान का कवच तुम्हारा नायक पहनता है।", "in5": "ये 5 अभियान पास लो और पहला शहर डिंगल आज़ाद करो! Lv 1 से Lv 50 तक बढ़ो, डबलिन में बलोर को हराओ और पूरे आयरलैंड को बचाओ!", "d21": "फिर से स्वागत है! आज तुम्हें कुछ भाग्यशाली दिखाता हूँ: शैमरॉक ☘️। शब्दकोश में एक अंतराल दोहराव (5+ शब्द) पूरा करो और एक पाओ, दिन में अधिकतम 3।", "d22": "शैमरॉक लेकर भाग्य घर जाओ और भाग्य चक्र घुमाओ: सोना, अभियान पास या उपकरण के टुकड़े मिल सकते हैं। 2 या ज़्यादा हों तो स्क्रैच कार्ड भी ले सकते हो।", "d23": "एक ही तत्व और स्तर के 3 टुकड़े जमा करके अपने स्तर के पास का उपकरण बनाओ। अच्छे से जमा करो, बहुत सोना बचेगा!", "d31": "तुम सच्चे साहसी बन रहे हो! Lv 24 पर एक साथी जंगल के ताक़तवर जानवरों से लड़ने आएगा, और तुम किसी दोस्त को भी साथी बना सकते हो।", "d32": "बोर हो तो मल्टीप्लेयर में दोस्तों के साथ खेलो — मुफ़्त है, पर इनाम कम हैं। ताक़तवर बनने का असली रास्ता एक ही है: हर दिन ख़बर पढ़ना। डबलिन से अच्छी ख़बर का इंतज़ार रहेगा!", "stGot": "तुम्हें 5 अभियान पास मिले!"});
+Object.assign(STR.es,{"stName": "Ciarán, el anciano druida", "stNext": "Siguiente", "stGift": "Aceptar 5 pases", "stOk": "Entendido", "stGo": "¡Vamos!", "stSkip": "Saltar", "in1": "¡Joven viajero, por fin has llegado! Soy Ciarán, el anciano druida que protege esta isla. Balor del Mal de Ojo ha despertado bajo el mar y sus monstruos han tomado las ciudades de Irlanda. ¡Necesitamos un retador!", "in2": "Los monstruos temen el poder del saber. Cada día lee la noticia en inglés de HOY y termina el test: cada noticia te da 1 pase de expedición (hasta 4 al día). Completa los tres pasos del día y te daré 2 más.", "in3": "Usa los pases para atacar ciudades. Si ganas, la ciudad es tuya y te paga impuestos cada día. Recuerda los cinco elementos: metal vence a madera, madera a tierra, tierra a agua, agua a fuego y fuego a metal.", "in4": "Las bestias salvajes no necesitan pases, solo energía (máx. 6, recuperas 1 punto cada 4 horas). Cázalas para subir de nivel y ganar oro, pero la misma bestia da menos cada vez. La armadura que compres la lleva puesta tu héroe.", "in5": "Toma estos 5 pases y libera Dingle, la primera ciudad. ¡Crece del Lv 1 al Lv 50, derrota a Balor en Dublín y salva toda Irlanda!", "d21": "¡Bienvenido de nuevo! Hoy te enseño algo de suerte: los tréboles ☘️. Termina un repaso espaciado en tu diccionario (5+ palabras) para ganar uno, hasta 3 al día.", "d22": "Lleva tus tréboles a la Casa de la suerte y gira la Rueda del destino: oro, pases o fragmentos de equipo. Con 2 o más puedes comprar un rasca y gana con mejores fragmentos.", "d23": "Junta 3 fragmentos del mismo elemento y nivel para forjar equipo cerca de tu nivel. ¡Si los juntas bien, ahorrarás mucho oro!", "d31": "¡Ya eres todo un aventurero! En el Lv 24 un aliado te acompañará contra las bestias más fuertes, y también puedes invitar a un amigo como aliado.", "d32": "Cuando te aburras, juega con amigos en Multijugador: es gratis, pero las recompensas son pequeñas. El único camino para hacerse fuerte es leer las noticias cada día. ¡Espero buenas noticias desde Dublín!", "stGot": "¡Has recibido 5 pases!"});
+Object.assign(STR.ja,{"stName": "ドルイドの長老キーラン", "stNext": "次へ", "stGift": "出撃券5枚を受け取る", "stOk": "わかった", "stGo": "出発！", "stSkip": "スキップ", "in1": "若き旅人よ、よく来てくれた！わしはこの島を守るドルイドの長老キーラン。魔眼のバロールが海の底で目を覚まし、魔物たちがアイルランドの町を占領してしまった。挑戦者が必要なのじゃ！", "in2": "魔物は知識の力を恐れる。毎日「今日」の英語ニュースを読んで読後テストを終えれば、1本ごとに出撃券が1枚（1日最大4枚）。その日の3ステップを全部終えたら、さらに2枚あげよう。", "in3": "出撃券で町を攻めるのじゃ。勝てば町はおぬしのもの、毎日税金も入る。五行の相克を忘れるな：金は木に、木は土に、土は水に、水は火に、火は金に勝つ。", "in4": "野外の獣には出撃券はいらん。体力を使うだけじゃ（最大6、4時間ごとに1回復）。狩ってレベルを上げ、ゴールドを稼げ。ただし同じ獣ばかり狩るとゴールドは減っていく。店で買った鎧はおぬしが身につけるぞ。", "in5": "この出撃券5枚を持って、最初の町ディングルを取り戻すのじゃ！Lv 1 から Lv 50 まで強くなり、ダブリンのバロールを倒してアイルランドを救え！", "d21": "おかえり！今日は幸運のしるし、クローバー ☘️ を教えよう。単語帳で間隔反復（5語以上）を1回終えると1枚、1日最大3枚もらえる。", "d22": "クローバーは「幸運の家」で運命のルーレットを回すのに使う。ゴールド、出撃券、装備のかけらが当たるぞ。2枚以上あればスクラッチカードも買える。", "d23": "同じ属性・ランクのかけらを3個集めると、今のレベルに近い装備を作れる。上手に集めれば、ゴールドの節約になるぞ！", "d31": "立派な冒険者になってきたな！Lv 24 になると、野外の強敵と戦う仲間が加わる。友達を仲間に誘うこともできるぞ。", "d32": "退屈なときは「マルチプレイ」で友達と遊ぶといい。無料じゃが、報酬は少なめじゃ。本当に強くなる道はただ一つ、毎日ニュースを読むこと。ダブリンからの吉報を待っておるぞ！", "stGot": "出撃券を5枚手に入れた！"});
+Object.assign(STR.ko,{"stName": "드루이드 장로 키어런", "stNext": "다음", "stGift": "출정권 5장 받기", "stOk": "알겠어요", "stGo": "출발!", "stSkip": "건너뛰기", "in1": "젊은 여행자여, 드디어 왔구나! 나는 이 섬을 지키는 드루이드 장로 키어런이다. 마안의 발로르가 바다 밑에서 깨어나 괴물들이 아일랜드의 마을을 점령했어. 도전자가 필요하단다!", "in2": "괴물들은 지식의 힘을 두려워해. 매일 '오늘'의 영어 뉴스를 읽고 퀴즈를 마치면 기사마다 출정권 1장 (하루 최대 4장). 하루 3단계를 모두 마치면 내가 2장을 더 주마.", "in3": "출정권으로 마을을 공격하렴. 이기면 마을은 네 것이 되고 매일 세금도 들어온다. 오행 상극을 기억해: 금은 목을, 목은 토를, 토는 수를, 수는 화를, 화는 금을 이긴다.", "in4": "야생 짐승에게는 출정권이 필요 없고 체력만 든단다 (최대 6, 4시간마다 1 회복). 사냥해서 레벨을 올리고 골드를 벌어. 단, 같은 짐승은 잡을수록 골드가 줄어. 상점에서 산 갑옷은 네가 직접 입게 된다.", "in5": "이 출정권 5장으로 첫 번째 마을 딩글을 되찾으렴! Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "d21": "다시 왔구나! 오늘은 행운의 클로버 ☘️를 알려 주마. 단어장에서 간격 복습 (5단어 이상)을 한 번 끝내면 1장, 하루 최대 3장 받을 수 있어.", "d22": "클로버는 '행운의 집'에서 운명의 룰렛을 돌리는 데 쓴단다. 골드, 출정권, 장비 조각이 나와. 2장 이상이면 스크래치 카드도 살 수 있지.", "d23": "같은 속성·등급의 조각 3개를 모으면 네 레벨에 가까운 장비를 만들 수 있어. 잘 모으면 골드를 많이 아낄 수 있단다!", "d31": "제법 모험가다워졌구나! Lv 24가 되면 야생의 강적과 함께 싸울 동료가 생겨. 친구를 동료로 초대할 수도 있단다.", "d32": "심심할 땐 '멀티플레이'에서 친구들과 놀아 보렴. 무료지만 보상은 적어. 진짜 강해지는 길은 하나뿐, 매일 뉴스를 읽는 거야. 더블린에서 좋은 소식을 기다리마!", "stGot": "출정권 5장을 받았어요!"});
+/* ===== Story: Ciarán the druid elder. Day 1 (first visit to Adventure): the quest + basics + 5 quest passes.
+   Later days: shamrocks & the Wheel of Fate, then allies & multiplayer. ===== */
+const STORY={intro:["in1","in2","in3","in4","in5"], d2:["d21","d22","d23"], d3:["d31","d32"]};
+function elderArt(mood){ const k="elder-"+(mood||"talk"); return PICS.has(k)?`<img src="assets/art/${k}.webp" alt="" class="st-elder">`:`<div class="st-elder st-elder-ph" aria-hidden="true">🧙‍♂️</div>`; }
+function storyDue(){
+  const g=game(), st=g.story||{};
+  if(!st.intro) return S.view==="adv"&&g.gender?"intro":null;
+  if(!st.d2&&st.intro<today()) return "d2";
+  if(st.d2&&!st.d3&&st.d2<today()) return "d3";
+  return null;
+}
+function storyCheck(){ if(S.onb||S.story) return; const k=storyDue(); if(k){ S.story={k,step:0}; storyRender(); } }
+function storyRender(){
+  let el=document.getElementById("story");
+  if(!S.story){ if(el) el.remove(); return; }
+  if(!el){ el=document.createElement("div"); el.id="story"; el.className="onb st-wrap"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); document.body.append(el); }
+  const P=STORY[S.story.k], i=S.story.step, last=i===P.length-1, mood=last?"happy":i===0?"wave":"talk";
+  const btn=last?(S.story.k==="intro"?T("stGift"):S.story.k==="d2"?T("stOk"):T("stGo")):T("stNext");
+  el.innerHTML=`<div class="onb-card st-card">${S.story.k!=="intro"?`<button class="onb-skip" data-st="skip">${T("stSkip")}</button>`:""}
+    ${elderArt(mood)}<div class="st-name">${T("stName")}</div><p class="st-text">${T(P[i])}</p>
+    <div class="onb-dots">${P.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("")}</div>
+    <div class="onb-nav"><button class="btn" data-st="${last?"done":"next"}">${btn}</button>${i>0?`<button class="btn ghost" data-st="back">‹</button>`:""}</div></div>`;
+}
+function storyDone(){ const g=game(); g.story=g.story||{}; const k=S.story.k;
+  g.story[k]=today(); if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5; toast(T("stGot")); }
+  saveGame(); S.story=null; storyRender(); render(); }
+document.addEventListener("click",e=>{ const t=e.target.closest("#story [data-st]"); if(!t||!S.story) return; e.stopPropagation(); const a=t.dataset.st;
+  if(a==="next"){ S.story.step++; storyRender(); } else if(a==="back"){ S.story.step=Math.max(0,S.story.step-1); storyRender(); } else storyDone(); });
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
