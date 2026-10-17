@@ -553,6 +553,7 @@ body.pg-lock .toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px));z-
 .pg-full{position:fixed;inset:0;z-index:25;background:var(--paper);display:flex;flex-direction:column;gap:6px;padding:calc(8px + env(safe-area-inset-top,0px)) 12px calc(8px + env(safe-area-inset-bottom,0px));overflow:hidden;max-width:640px;margin:0 auto;-webkit-user-select:none;user-select:none;
   --t:clamp(30px,calc((100dvh - 430px)/6.3),56px);--kh:clamp(38px,6.2dvh,52px)}
 .pg-full>div{flex:none;min-height:0}
+.pg-full #pgHuBody{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:24px}
 .pg-full .pg-board{margin:0;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}
 .pg-full .pg-chip{flex:none;padding:3px 9px}
 .pg-full #pgGrid{flex:1;display:flex;flex-direction:column;justify-content:center}
@@ -2855,7 +2856,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.104";
+const APP_VERSION="2026.10.105";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3929,7 +3930,7 @@ function wdKeyboard(r,ans){ const best={}; const rank={g:3,y:2,b:1};
   for(const g of r.g){ const c=wdColors(g,ans); [...g].forEach((ch,j)=>{ if((rank[c[j]]||0)>(rank[best[ch]]||0)) best[ch]=c[j]; }); }
   return `<div class="wd-kb">${WD_KB.map(row=>`<div class="wd-kr">${[...row].map(ch=>ch==="+"?`<button class="wd-k wide" data-act="pgkey" data-k="enter">${T("wdEnter")}</button>`:ch==="-"?`<button class="wd-k wide" data-act="pgkey" data-k="back" aria-label="back">⌫</button>`:`<button class="wd-k ${best[ch]||""}" data-act="pgkey" data-k="${ch}">${ch.toUpperCase()}</button>`).join("")}</div>`).join("")}</div>`; }
 function wdEmoji(r,ans){ return r.g.map(g=>wdColors(g,ans).map(c=>c==="g"?"🟩":c==="y"?"🟨":"⬜").join("")).join("<br>"); }
-function spMeaning(W){ return esc((W.m&&(W.m[LANG]||W.m.en))||""); }
+function spMeaning(W, hide){ const m=(W.m&&(W.m[LANG]||W.m.en))||""; return esc(hide?qHide(m,W.w):m); }   // hide: strip English notes that give the answer away
 function spSections(){
   const pg=S.pg, P=pg.party, i=spRound(P), now=Date.now(), sc=spScores(P), n=(P.words||[]).length;
   const board=Object.keys(P.players).sort((a,b)=>(sc[b]||0)-(sc[a]||0)).map(u=>`<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b><span>${sc[u]||0}</span></div>`).join("");
@@ -3943,7 +3944,7 @@ function spSections(){
   }
   const me=wdMine(i), left=Math.max(0,Math.ceil((st+WD.sec*1000-now)/1000)), shake=pg.shake&&now-pg.shake<500, flip=pg.flip&&pg.flip.i===i&&now-pg.flip.at<1200?pg.flip.row:-1;
   const head=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgRound",{i:i+1,n})}</span><b class="sm-t ${left<=20?"bad-t":""}">${T("pgLeft",{s:left})}</b></div>
-    <p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${me.done?spMeaning(W):`<span class="muted">${T("wdHint")}</span> ${left<=WD.sec/2||me.g.length>=3?spMeaning(W):"🔒"}`}</p>`;
+    <p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${me.done?spMeaning(W):`<span class="muted">${T("wdHint")}</span> ${left<=WD.sec/2||me.g.length>=3?spMeaning(W,true):"🔒"}`}</p>`;
   const others=`<div class="wd-others">${Object.keys(P.players).filter(u=>u!==pgMe()).map(u=>{ const r=wdRec(u,i); return `<div class="wd-op"><b>${esc(pgNm(u))}</b>${wdGrid(r,W.w,{mini:1})}<small>${r.done==="win"?"✅":r.done?"❌":"⏳ "+(r.g||[]).length+"/"+WD.tries}</small></div>`; }).join("")}</div>`;
   const status=me.done?`<p class="wd-status ${me.done}">${me.done==="win"?T("wdWin",{n:me.g.length}):T("wdLose",{w:esc(W.w.toUpperCase())})} · ${T("wdWaitOthers")}</p>`:"";
   return [["pgBoard",`<div class="pg-board">${board}</div>`],["pgHead2",head],["pgOthers",others],
@@ -4113,6 +4114,12 @@ async function pgLoadQuiz(){ if(PG_QUIZ) return PG_QUIZ; try{ PG_QUIZ=(await (aw
 function qzMine(){ const pg=S.pg; if(!pg.Q){ const p=pg.ps[pgMe()]||{}; pg.Q={gold:p.gold||0, ok:p.ok||0, ng:p.ng||0, streak:0, best:p.best||0, inc:p.inc||0, mult:p.mult||0, shield:p.shield||0, frozen:0, frozenBy:"", miss:[...(p.miss||[])], seen:{}, q:null, fb:null, gifted:Object.fromEntries(Object.keys(p.gifts||{}).map(k=>[k,1])), sent:0}; } return pg.Q; }
 function qzSave(){ const pg=S.pg, Q=qzMine(); clearTimeout(pg.qT); pg.qT=setTimeout(()=>CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), gold:Math.round(Q.gold), ok:Q.ok, ng:Q.ng, best:Q.best, inc:Q.inc, mult:Q.mult, shield:Q.shield, miss:Q.miss.slice(-40)},{merge:true}).catch(()=>{}),200); }
 const qzMean=o=>o.m[PG_LI[LANG]]||o.m[5];
+function qHide(m, word){   // qMean, then also unwrap "(phrase with the word: meaning)" and blank a quoted copy of the word
+  let t=qMean(m, word); const w=(word||"").toLowerCase(); if(!w) return t;
+  t=t.replace(/[（(]([^:：)）]*)[:：]\s*([^)）]*)[)）]/g,(x,a,b)=>a.toLowerCase().includes(w)?b:x).replace(new RegExp("[\"“”']"+reEsc(word)+"[\"“”']","ig"),"“…”").trim();
+  if(LANG!=="en"&&LANG!=="es") t=t.replace(new RegExp("\\b"+reEsc(word)+"\\b","ig"),"…");
+  return t||m; }
+const qzMeanQ=o=>qHide(qzMean(o),o.w);   // in questions and options: no English hints that contain the answer
 function qzNew(){
   const Q=qzMine(), all=PG_QUIZ||[]; if(all.length<8) return null;
   let o, tries=0; do{ o=all[Math.floor(Math.random()*all.length)]; tries++; }while(Q.seen[o.w]&&tries<40); Q.seen[o.w]=1;
@@ -4121,8 +4128,8 @@ function qzNew(){
   const types=["m2w","w2m"]; if(o.s&&o.s.length) types.push("syn"); if(o.x) types.push("blank");
   const t=types[Math.floor(Math.random()*types.length)];
   let prompt, right, wrong;
-  if(t==="m2w"){ prompt=`<span class="chip">${esc(o.p)}</span> ${esc(qzMean(o))}`; right=o.w; wrong=pick3(x=>x.w); }
-  else if(t==="w2m"){ prompt=`<b class="qz-word">${esc(o.w)}</b> <span class="chip">${esc(o.p)}</span>`; right=qzMean(o); wrong=pick3(x=>qzMean(x)); }
+  if(t==="m2w"){ prompt=`<span class="chip">${esc(o.p)}</span> ${esc(qzMeanQ(o))}`; right=o.w; wrong=pick3(x=>x.w); }
+  else if(t==="w2m"){ prompt=`<b class="qz-word">${esc(o.w)}</b> <span class="chip">${esc(o.p)}</span>`; right=qzMeanQ(o); wrong=pick3(x=>qzMeanQ(x)); }
   else if(t==="syn"){ prompt=`<b class="qz-word">${esc(o.w)}</b>`; right=o.s[0]; wrong=pick3(x=>(o.s.includes(x.w)?null:x.w)); }
   else { prompt=`<span class="qz-ex">${esc(o.x).replace(new RegExp("\\b"+o.w+"\\b","i"),"<b>_____</b>")}</span>`; right=o.w; wrong=pick3(x=>x.w); }
   const opts=pgShuffle([right,...wrong]);
