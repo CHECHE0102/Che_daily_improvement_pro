@@ -779,7 +779,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
 .st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
 .st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
-.lvt-res{text-align:center;padding:22px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
+.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 </style>
 
 </head>
@@ -1572,6 +1572,12 @@ function finishPost(art, score, total){
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
   const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
+  if(Q.i>=Q.qs.length&&Q.kind==="lvl"){
+    const nm=k=>k==="IELTS"?"IELTS 7–8":k;
+    return `<div class="view"><div class="card lvt-res"><img src="assets/art/scene-win.webp" alt="" class="qd-art"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${esc(nm(Q.lvl))}</div><div>${T("lv"+Q.lvl)}</div><p class="muted sm-t">${T("lvtSet")}</p></div>
+      <div class="card"><b>${T("lvtTry")}</b><div class="lvt-pick">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${esc(nm(l.k))}</b><span class="optm">${T("lv"+l.k)}${l.k===Q.lvl?` · ${T("lvtRec")}`:""}</span></button>`).join("")}</div></div>
+      <button class="btn" data-act="read">${T("readNow")}</button></div>`;
+  }
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
     const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
@@ -1590,11 +1596,15 @@ function viewQuiz(){
   return `<div class="view"><div class="row" style="justify-content:space-between"><span class="eyebrow">${title}</span><span class="muted" style="font-size:13px;font-variant-numeric:tabular-nums">${Q.i+1} / ${Q.qs.length}</span></div>
     <div class="qbar"><i style="width:${(Q.i+(pickedI!=null?1:0))/Q.qs.length*100}%"></i></div>
     <div class="qcard"><div class="muted" style="font-size:14px">${lead}${q.w.filler?` <span class="chip new">${T("fillTag")}</span>`:""}</div>${prompt}
-    <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(pickedI!=null){ if(o.ok) c+=" right"; else if(i===pickedI) c+=" wrong"; } return `<button class="${c}" data-pick="${i}" ${pickedI!=null?"disabled":""}>${esc(o.label)}${pickedI!=null&&!o.ok&&o.meaning?`<span class="optm">${esc(o.meaning)}</span>`:""}</button>`; }).join("")}</div>
+    ${Q.kind==="lvl"?`<div class="muted sm-t" style="margin-top:6px">${T("lvtCalm")}</div>`:""}
+    <div class="opts">${(Q.kind==="lvl"?[...q.opts,{label:T("lvtSkip")}]:q.opts).map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(pickedI!=null){ if(o.ok) c+=" right"; else if(i===pickedI) c+=" wrong"; } return `<button class="${c}" data-pick="${i}" ${pickedI!=null?"disabled":""}>${esc(o.label)}${pickedI!=null&&!o.ok&&o.meaning?`<span class="optm">${esc(o.meaning)}</span>`:""}</button>`; }).join("")}</div>
     ${ans?`<div class="fb ${ans.ok?"ok":"no"}">${ans.ok?T("right"):T("wrong")}</div>${answerBlock(ans,false)}<button class="btn" data-act="next">${Q.i+1<Q.qs.length?T("next"):T("seeAll")}</button>`:""}</div></div>`;
 }
 function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
+  if(Q.kind==="lvl"){ const o=q.opts[i]||{}, ok=!!o.ok; if(ok) Q.score++; Q.answers[Q.i]={w:q.w, ok, picked:o};
+    if(Q.i+1>=Q.qs.length){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(LVT_KEY,Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
+    Q.i++; render(); window.scrollTo(0,0); return; }
   Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
   const w=S.words.get(q.w.key)||q.w;
   if(w.lvTest){}
@@ -2834,7 +2844,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.97";
+const APP_VERSION="2026.10.98";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4997,6 +5007,12 @@ Object.assign(STR.hi,{"lvtTitle": "अंग्रेज़ी स्तर ट�
 Object.assign(STR.es,{"lvtTitle": "Test de nivel de inglés", "lvtSub": "¿No sabes tu nivel? Haz un test de 1 minuto y las noticias se ajustarán a ti", "lvtDone": "Tu nivel: {l} (puedes repetirlo)", "lvtYour": "Tu nivel de inglés", "lvtSet": "Las noticias ya se muestran en este nivel. Puedes cambiarlo en Ajustes."});
 Object.assign(STR.ja,{"lvtTitle": "英語レベルテスト", "lvtSub": "自分のレベルがわからない？1分のテストで記事の難しさを合わせます", "lvtDone": "あなたのレベル：{l}（もう一度受けられます）", "lvtYour": "あなたの英語レベル", "lvtSet": "記事をこのレベルで表示します。設定でいつでも変更できます。"});
 Object.assign(STR.ko,{"lvtTitle": "영어 레벨 테스트", "lvtSub": "내 실력을 잘 모르겠다면? 1분 테스트로 기사 난이도를 맞춰 드려요", "lvtDone": "내 레벨: {l} (다시 테스트 가능)", "lvtYour": "나의 영어 레벨", "lvtSet": "이제 기사가 이 레벨로 보여요. 설정에서 언제든 바꿀 수 있어요."});
+Object.assign(STR.zh,{"lvtYour": "推薦你的英文程度", "lvtSet": "文章會先用這個程度顯示。這只是建議，不用有壓力！", "lvtTry": "想挑戰看看，或輕鬆一點？也可以選其他程度（之後在設定裡隨時能換）", "lvtRec": "推薦", "lvtDone": "推薦程度：{l}（可以再測一次）", "lvtSkip": "不確定", "lvtCalm": "沒有對錯壓力，不會的就選「不確定」 😊"});
+Object.assign(STR.en,{"lvtYour": "Your recommended English level", "lvtSet": "Stories will start at this level. It's just a suggestion, no pressure!", "lvtTry": "Want more of a challenge, or something lighter? Pick any level (you can change it any time in Settings)", "lvtRec": "recommended", "lvtDone": "Recommended level: {l} (tap to retake)", "lvtSkip": "Not sure", "lvtCalm": "No pressure: if you don't know a word, just pick “Not sure” 😊"});
+Object.assign(STR.hi,{"lvtYour": "आपके लिए सुझाया गया अंग्रेज़ी स्तर", "lvtSet": "ख़बरें इसी स्तर से शुरू होंगी। यह सिर्फ़ सुझाव है, कोई दबाव नहीं!", "lvtTry": "चुनौती चाहिए या कुछ आसान? कोई भी स्तर चुनें (सेटिंग में कभी भी बदलें)", "lvtRec": "सुझाया गया", "lvtDone": "सुझाया स्तर: {l} (फिर से दें)", "lvtSkip": "पक्का नहीं", "lvtCalm": "कोई दबाव नहीं: शब्द नहीं पता तो “पक्का नहीं” चुनें 😊"});
+Object.assign(STR.es,{"lvtYour": "Tu nivel de inglés recomendado", "lvtSet": "Las noticias empezarán en este nivel. Es solo una sugerencia, ¡sin presión!", "lvtTry": "¿Quieres más reto o algo más fácil? Elige cualquier nivel (puedes cambiarlo en Ajustes)", "lvtRec": "recomendado", "lvtDone": "Nivel recomendado: {l} (puedes repetirlo)", "lvtSkip": "No estoy seguro", "lvtCalm": "Sin presión: si no sabes una palabra, elige «No estoy seguro» 😊"});
+Object.assign(STR.ja,{"lvtYour": "おすすめの英語レベル", "lvtSet": "記事はこのレベルから始まります。あくまで目安なので気楽にどうぞ！", "lvtTry": "もっと挑戦したい？もう少し易しくしたい？好きなレベルを選べます（設定でいつでも変更可）", "lvtRec": "おすすめ", "lvtDone": "おすすめレベル：{l}（もう一度受けられます）", "lvtSkip": "わからない", "lvtCalm": "気楽にどうぞ。わからない単語は「わからない」を選んでね 😊"});
+Object.assign(STR.ko,{"lvtYour": "추천 영어 레벨", "lvtSet": "기사는 이 레벨로 시작해요. 그냥 추천일 뿐이니 부담 갖지 마세요!", "lvtTry": "더 도전하고 싶거나 좀 쉽게 하고 싶다면? 원하는 레벨을 고르세요 (설정에서 언제든 변경 가능)", "lvtRec": "추천", "lvtDone": "추천 레벨: {l} (다시 테스트 가능)", "lvtSkip": "잘 모르겠어요", "lvtCalm": "부담 없이! 모르는 단어는 ‘잘 모르겠어요’를 고르세요 😊"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
