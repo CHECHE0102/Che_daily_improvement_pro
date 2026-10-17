@@ -1171,8 +1171,8 @@ function lookedUpFor(d, art){ return isMain(art) ? (d.lookedUp||[]) : ((d.looked
 function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,total:d.postTotal}:null) : ((d.postBy||{})[art.id]||null); }
 
 /* ---------- rendering ---------- */
-/* new players: features the elder hasn't introduced yet stay locked (Lucky House until the day-2 talk, multiplayer until the day-3 talk) */
-function featLock(k){ const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; if(k==="play"&&!st.d3) return "lockPlay"; return null; }
+/* new players: the Lucky House stays locked until the elder introduces it (day-2 talk); everything else is open from the start */
+function featLock(k){ const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
 function render(){ try{ renderInner(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
@@ -2858,7 +2858,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.109";
+const APP_VERSION="2026.10.110";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -5044,7 +5044,7 @@ Object.assign(STR.ja,{"stName": "ドルイドの長老キーラン", "stNext": "
 Object.assign(STR.ko,{"stName": "드루이드 장로 키어런", "stNext": "다음", "stGift": "출정권 5장 받기", "stOk": "알겠어요", "stGo": "출발!", "stSkip": "건너뛰기", "in1": "젊은 여행자여, 드디어 왔구나! 나는 이 섬을 지키는 드루이드 장로 키어런이다. 마안의 발로르가 바다 밑에서 깨어나 괴물들이 아일랜드의 마을을 점령했어. 도전자가 필요하단다!", "in2": "괴물들은 지식의 힘을 두려워해. 매일 '오늘'의 영어 뉴스를 읽고 퀴즈를 마치면 기사마다 출정권 1장 (하루 최대 4장). 하루 3단계를 모두 마치면 내가 2장을 더 주마.", "in3": "출정권으로 마을을 공격하렴. 이기면 마을은 네 것이 되고 매일 세금도 들어온다. 오행 상극을 기억해: 금은 목을, 목은 토를, 토는 수를, 수는 화를, 화는 금을 이긴다.", "in4": "야생 짐승에게는 출정권이 필요 없고 체력만 든단다 (최대 6, 4시간마다 1 회복). 사냥해서 레벨을 올리고 골드를 벌어. 단, 같은 짐승은 잡을수록 골드가 줄어.", "in5": "이 출정권 5장으로 첫 번째 마을 딩글을 되찾으렴! Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "d21": "다시 왔구나! 오늘은 행운의 클로버 ☘️를 알려 주마. 단어장에서 간격 복습 (5단어 이상)을 한 번 끝내면 1장, 하루 최대 3장 받을 수 있어.", "d22": "클로버는 '행운의 집'에서 운명의 룰렛을 돌리는 데 쓴단다. 골드, 출정권, 장비 조각이 나와. 2장 이상이면 스크래치 카드도 살 수 있지.", "d23": "같은 속성·등급의 조각 3개를 모으면 네 레벨에 가까운 장비를 만들 수 있어. 잘 모으면 골드를 많이 아낄 수 있단다!", "d31": "제법 모험가다워졌구나! Lv 24가 되면 야생의 강적과 함께 싸울 동료가 생겨. 친구를 동료로 초대할 수도 있단다.", "d32": "심심할 땐 '멀티플레이'에서 친구들과 놀아 보렴. 무료지만 보상은 적어. 진짜 강해지는 길은 하나뿐, 매일 뉴스를 읽는 거야. 더블린에서 좋은 소식을 기다리마!", "stGot": "출정권 5장을 받았어요!"});
 /* ===== Story: Ciarán the druid elder. Day 1 (first visit to Adventure): the quest + basics + 5 quest passes.
    Later days: shamrocks & the Wheel of Fate, then allies & multiplayer. ===== */
-const STORY={intro:["in1","in2","in3","in4","in5"], d2:["d21","d22","d23"], d3:["d31","d32"]};
+const STORY={intro:["in1","in2","in3","in4","in5"], d2:["d21","d22","d23"], d3:["d31","d32","d33"]};
 function elderArt(mood){ const k="elder-"+(mood||"talk"); return PICS.has(k)?`<img src="assets/art/${k}.webp" alt="" class="st-elder">`:`<div class="st-elder st-elder-ph" aria-hidden="true">🧙‍♂️</div>`; }
 function storyDue(){
   const g=game(), st=g.story||{};
@@ -5149,6 +5149,12 @@ Object.assign(STR.hi,{"lockLuck": "लकी हाउस अभी बंद �
 Object.assign(STR.es,{"lockLuck": "La Casa de la Suerte aún no está abierta. Vuelve mañana y el anciano te enseñará a usar los tréboles.", "lockPlay": "El modo multijugador aún no está abierto. El día después de conocer la Casa de la Suerte, el anciano te lo presentará."});
 Object.assign(STR.ja,{"lockLuck": "ラッキーハウスはまだ開いていません。明日またログインすると、長老がクローバーの使い方を教えてくれます！", "lockPlay": "マルチプレイはまだ開いていません。長老がラッキーハウスを紹介した次の日に案内してくれます！"});
 Object.assign(STR.ko,{"lockLuck": "행운의 집은 아직 열리지 않았어요. 내일 다시 오면 장로가 클로버 사용법을 알려 줄 거예요!", "lockPlay": "멀티플레이는 아직 열리지 않았어요. 장로가 행운의 집을 소개한 다음 날 알려 줄 거예요!"});
+Object.assign(STR.zh,{"d32": "無聊的時候，可以到「多人遊戲」和朋友連線玩，免費但獎勵不多。在「排行榜」能看到大家的戰力、雅思成績和閱讀量，每個月重新比一次。", "d33": "想挑戰雅思的話，冒險頁的「IELTS」有模擬測驗，聽力加閱讀約 20 分鐘，交卷馬上看到預估分數。不過真正變強的路只有一條：每天讀新聞。我在都柏林等你的好消息！"});
+Object.assign(STR.en,{"d32": "When you're bored, play with friends in Multiplayer. It's free, but the rewards are small. The Leaderboard shows everyone's power, IELTS scores and how much they've read, and it starts fresh every month.", "d33": "If you're aiming for IELTS, the IELTS tab in Adventure has practice tests: listening and reading in about 20 minutes, with an estimated band straight away. But the only real road to strength is reading the news every day. I'll be waiting for good news from Dublin!"});
+Object.assign(STR.hi,{"d32": "बोर हो तो मल्टीप्लेयर में दोस्तों के साथ खेलो — मुफ़्त है, पर इनाम कम हैं। लीडरबोर्ड पर सबकी ताक़त, IELTS स्कोर और पढ़ाई दिखती है, और हर महीने नई शुरुआत होती है।", "d33": "अगर IELTS की तैयारी है, तो रोमांच में IELTS टैब पर अभ्यास टेस्ट हैं — लगभग 20 मिनट की सुनना और पढ़ना, और तुरंत अनुमानित बैंड। पर ताक़तवर बनने का असली रास्ता एक ही है: हर दिन ख़बर पढ़ना। डबलिन से अच्छी ख़बर का इंतज़ार रहेगा!"});
+Object.assign(STR.es,{"d32": "Cuando te aburras, juega con amigos en Multijugador: es gratis, pero las recompensas son pequeñas. En la Clasificación verás el poder, las notas de IELTS y lo que lee cada uno, y cada mes empieza de nuevo.", "d33": "Si te preparas para el IELTS, en la pestaña IELTS de Aventura hay exámenes de práctica: comprensión auditiva y lectura en unos 20 minutos, con una nota estimada al instante. Pero el único camino para hacerse fuerte es leer las noticias cada día. ¡Espero buenas noticias desde Dublín!"});
+Object.assign(STR.ja,{"d32": "退屈なときは「マルチプレイ」で友達と遊ぶといい。無料じゃが、報酬は少なめじゃ。「ランキング」ではみんなの戦力やIELTSの成績、読んだ量が見られる。毎月リセットされるぞ。", "d33": "IELTSを目指すなら、冒険ページの「IELTS」に模擬テストがある。リスニングとリーディングで約20分、終わればすぐに予想スコアがわかる。じゃが本当に強くなる道はただ一つ、毎日ニュースを読むこと。ダブリンからの吉報を待っておるぞ！"});
+Object.assign(STR.ko,{"d32": "심심할 땐 '멀티플레이'에서 친구들과 놀아 보렴. 무료지만 보상은 적어. '랭킹'에서는 모두의 전투력, IELTS 점수, 읽은 양을 볼 수 있고 매달 새로 시작한단다.", "d33": "IELTS를 준비한다면 모험 페이지의 'IELTS'에 모의고사가 있어. 듣기와 읽기 약 20분, 끝나면 바로 예상 점수를 볼 수 있지. 하지만 진짜 강해지는 길은 하나뿐, 매일 뉴스를 읽는 거야. 더블린에서 좋은 소식을 기다리마!"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
