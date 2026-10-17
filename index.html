@@ -1217,7 +1217,7 @@ function viewToday(){
   const readDone = !!d.read;
   const postDone = d.postDone;
   if(!S.ready.articles) return `<div class="view"><p class="muted">${T("loadingToday")}</p></div>`;
-  if(!art) return `<div class="view"><div class="card empty"><img src="assets/art/scene-rest.webp" alt="" class="empty-art"><h3>${T("noArticles")}</h3><p>${T("noArticlesSub")}</p></div></div>`;
+  if(!art) return `<div class="view"><div class="card empty"><img src="assets/art/scene-rest.webp" alt="" class="empty-art"><h3>${S.artFail?T("artLoadFail"):T("noArticles")}</h3><p>${S.artFail?"":T("noArticlesSub")}</p>${S.artFail?`<button class="btn" data-act="artRetry">${T("artRetry")}</button>`:""}</div></div>`;
   const isToday = art.date===today();
   const step=(n,cls,title,sub,act)=>`<button class="step ${cls}" ${act?`data-act="${act}"`:"disabled"}><span class="n">${cls.includes("done")?"✓":n}</span><span><b>${title}</b><span class="s">${sub}</span></span><span class="go">${act&&!cls.includes("done")?T("start"):(act?T("again"):"")}</span></button>`;
   const total=[...S.words.values()];
@@ -2808,7 +2808,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.92";
+const APP_VERSION="2026.10.93";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4920,24 +4920,38 @@ function storyDone(){ const g=game(); g.story=g.story||{}; const k=S.story.k;
   saveGame(); S.story=null; storyRender(); render(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("#story [data-st]"); if(!t||!S.story) return; e.stopPropagation(); const a=t.dataset.st;
   if(a==="next"){ S.story.step++; storyRender(); } else if(a==="back"){ S.story.step=Math.max(0,S.story.step-1); storyRender(); } else storyDone(); });
+async function fetchT(url,ms){ const c=new AbortController(), t=setTimeout(()=>c.abort(),ms||12000); try{ return await fetch(url,{cache:"no-cache",signal:c.signal}); } finally{ clearTimeout(t); } }
+async function loadArticles(){
+  S.artFail=false;
+  try{
+    let j=null;
+    for(const b of ART_BASES){ try{ const r=await fetchT(b+"index.json"); if(r.ok){ j=await r.json(); ART_BASE=b; break; } }catch(_){} }
+    if(!j) throw 0;
+    let rj=null; try{ const r=await fetchT(ART_BASE+"regional.json"); if(r.ok) rj=await r.json(); }catch(_){}
+    RAW_INDEX=[...(j.articles||[]), ...((rj&&rj.articles)||[])];
+    S.index=RAW_INDEX.filter(a=>!a.region||a.region===regionKey()).sort(byOrder);
+    const recent=S.index.slice(0,12);
+    const docs=await Promise.all(recent.map(a=>fetchT(ART_BASE+encodeURIComponent(a.id)+".json",20000).then(r=>r.ok?r.json():null).catch(()=>null)));
+    S.articles=docs.map((d,i)=>d&&{...d, id:recent[i].id}).filter(Boolean).sort(byOrder);
+    if(!S.articles.length) throw 0;
+  }catch(e){ S.artFail=true; toast(T("artLoadFail")); }
+  S.ready.articles=true; try{ fillMeanings(); }catch(_){} render();
+}
+document.addEventListener("click",e=>{ if(e.target.closest('[data-act="artRetry"]')){ S.ready.articles=false; render(); loadArticles(); } });
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible"&&S.artFail){ loadArticles(); } });
+Object.assign(STR.zh,{artRetry:"重新載入"});
+Object.assign(STR.en,{artRetry:"Try again"});
+Object.assign(STR.hi,{artRetry:"फिर से कोशिश करें"});
+Object.assign(STR.es,{artRetry:"Reintentar"});
+Object.assign(STR.ja,{artRetry:"再読み込み"});
+Object.assign(STR.ko,{artRetry:"다시 시도"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game=newGame(v); }
   S.ready.personal=true; render(); onbMaybe();
   cloudInit();
-  try{
-    let j=null;
-    for(const b of ART_BASES){ try{ const r=await fetch(b+"index.json",{cache:"no-cache"}); if(r.ok){ j=await r.json(); ART_BASE=b; break; } }catch(_){} }
-    if(!j) throw 0;
-    let rj=null; try{ const r=await fetch(ART_BASE+"regional.json",{cache:"no-cache"}); if(r.ok) rj=await r.json(); }catch(_){}
-    RAW_INDEX=[...(j.articles||[]), ...((rj&&rj.articles)||[])];
-    S.index=RAW_INDEX.filter(a=>!a.region||a.region===regionKey()).sort(byOrder);
-    const recent=S.index.slice(0,12);
-    const docs=await Promise.all(recent.map(a=>fetch(ART_BASE+encodeURIComponent(a.id)+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)));
-    S.articles=docs.map((d,i)=>d&&{...d, id:recent[i].id}).filter(Boolean).sort(byOrder);
-  }catch(e){ toast(T("artLoadFail")); }
-  S.ready.articles=true; fillMeanings(); render();
+  await loadArticles();
 })();
 </script>
 </body>
