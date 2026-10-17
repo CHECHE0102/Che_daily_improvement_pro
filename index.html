@@ -779,7 +779,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
 .st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
 .st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
-.lvt-link{width:100%;margin-top:10px}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
+.lvt-link{width:100%;margin-top:10px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 </style>
 
 </head>
@@ -1579,7 +1579,9 @@ function viewQuiz(){
     const nm=k=>k==="IELTS"?"IELTS 7–8":k;
     return `<div class="view"><div class="card lvt-res"><img src="assets/art/scene-win.webp" alt="" class="qd-art"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${esc(nm(Q.lvl))}</div><div>${T("lv"+Q.lvl)}</div><p class="muted sm-t">${T("lvtSet")}</p></div>
       <div class="card"><b>${T("lvtTry")}</b><div class="lvt-pick">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-level="${l.k}"><b>${esc(nm(l.k))}</b><span class="optm">${T("lv"+l.k)}${l.k===Q.lvl?` · ${T("lvtRec")}`:""}</span></button>`).join("")}</div></div>
-      <button class="btn" data-act="read">${T("readNow")}</button></div>`;
+      <button class="btn" data-act="read">${T("readNow")}</button>
+      <details class="card lvt-ans"><summary><b>${T("lvtSee")}</b><span class="muted sm-t"> · ${T("lvtSeeN",{n:Q.score,t:Q.qs.length})}</span></summary>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">${Q.answers.map(a=>answerBlock(a,true)).join("")}</div></details></div>`;
   }
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
@@ -1605,7 +1607,7 @@ function viewQuiz(){
 }
 function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
-  if(Q.kind==="lvl"){ const o=q.opts[i]||{}, ok=!!o.ok; if(ok) Q.score++; Q.answers[Q.i]={w:q.w, ok, picked:o};
+  if(Q.kind==="lvl"){ const o=q.opts[i]||{label:T("lvtSkip")}, ok=!!o.ok; if(ok) Q.score++; Q.answers[Q.i]={w:q.w, ok, picked:o};
     if(Q.i+1>=Q.qs.length){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     Q.i++; render(); window.scrollTo(0,0); return; }
   Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
@@ -2853,7 +2855,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.101";
+const APP_VERSION="2026.10.102";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -5035,6 +5037,12 @@ Object.assign(STR.hi,{onbLvt:"छोटा अंग्रेज़ी स्त
 Object.assign(STR.es,{onbLvt:"Test rápido de nivel de inglés"});
 Object.assign(STR.ja,{onbLvt:"英語レベルのミニテスト"});
 Object.assign(STR.ko,{onbLvt:"영어 레벨 미니 테스트"});
+Object.assign(STR.zh,{"lvtSee": "看看剛剛的答題結果", "lvtSeeN": "認得 {n} / {t} 個字"});
+Object.assign(STR.en,{"lvtSee": "See how you answered", "lvtSeeN": "knew {n} of {t} words"});
+Object.assign(STR.hi,{"lvtSee": "अपने जवाब देखें", "lvtSeeN": "{t} में से {n} शब्द आते थे"});
+Object.assign(STR.es,{"lvtSee": "Ver tus respuestas", "lvtSeeN": "conocías {n} de {t} palabras"});
+Object.assign(STR.ja,{"lvtSee": "さっきの答えを見る", "lvtSeeN": "{t}語中{n}語わかった"});
+Object.assign(STR.ko,{"lvtSee": "방금 답한 결과 보기", "lvtSeeN": "{t}개 중 {n}개 알았어요"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
