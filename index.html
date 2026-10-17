@@ -2855,7 +2855,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.103";
+const APP_VERSION="2026.10.104";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3823,11 +3823,11 @@ async function pgJoin(code){
     if(!inRoom){
       if(d.state!=="wait"){ S.pgBusy=null; pgRender(); return toast(T("pgStarted")); }
       if(Object.keys(d.players||{}).length>=PG.max){ S.pgBusy=null; pgRender(); return toast(T("pgFull")); }
-      await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName()});
       await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
+      await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName()});
     }
     S.pgBusy=null; pgListen(code);
-  }catch(e){ S.pgBusy=null; toast(e&&e.code==="permission-denied"?T("pgFull"):T("syncFail")); pgRender(); }
+  }catch(e){ S.pgBusy=null; errReport({message:"pgJoin "+String(e&&(e.code||e.message)||e)},"pgJoin"); toast(T("pgJoinFail")); pgRender(); }
 }
 function pgStop(){ if(S.pg){ (S.pg.unsubs||[]).forEach(f=>{ try{ f(); }catch(e){} }); } clearInterval(S.pgTimer); S.pgTimer=null; }
 function pgListen(code){
@@ -4323,9 +4323,9 @@ function pgSections(){
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
     const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName"}[k])}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
-    return [["pgMain",`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>${login}
-      ${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}
-      ${CLOUD.user?`<div class="row" style="flex-wrap:nowrap"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn ghost" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div>`:""}`]];
+    const joinBox=CLOUD.user?`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
+    return [["pgMain",`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>${login}${joinBox}
+      ${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
   const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName"}[P.game]||"pgDrop");
@@ -5117,6 +5117,12 @@ Object.assign(STR.hi,{"huName": "साथ में ग़लती खोज�
 Object.assign(STR.es,{"huName": "Caza de errores en equipo", "huSub": "De 2 a 6 jugadores leen juntos una breve historia irlandesa (leyendas, lugares, historia) y buscan los errores escondidos. Más jugadores: más errores y más vidas para el equipo.", "huErrs": "Errores", "huLives": "Vida del equipo", "huLivesN": "{n} jugadores · {l} vidas", "huRead": "Toca las palabras que creas que están mal. Fallar quita vida al equipo.", "huWin": "¡Lo lograsteis! Todos los errores encontrados 🎉", "huLose": "El equipo se quedó sin vidas", "huList": "Soluciones", "huMissed": "nadie lo encontró", "huExpSpell": "Ortografía: lo correcto es {r}", "huExpForm": "Gramática: {w} debe ser {r}", "huExpConf": "{w} y {r} se confunden fácilmente; aquí va {r}", "huCat_legend": "Leyenda", "huCat_place": "Lugar", "huCat_history": "Historia"});
 Object.assign(STR.ja,{"huName": "みんなで間違い探し", "huSub": "2〜6人でアイルランドの短いお話（伝説・名所・歴史）を読んで、隠れた間違いを見つけよう！人数が多いほど間違いもチームのライフも増えます。", "huErrs": "間違い", "huLives": "チームのライフ", "huLivesN": "{n}人 · ライフ {l}", "huRead": "間違っていると思う単語をタップ。外すとチームのライフが減ります。", "huWin": "成功！間違いを全部見つけた 🎉", "huLose": "チームのライフが尽きた", "huList": "答え", "huMissed": "誰も見つけられなかった", "huExpSpell": "スペル：正しくは {r}", "huExpForm": "文法：{w} は {r} が正しい", "huExpConf": "{w} と {r} は紛らわしい。ここは {r}", "huCat_legend": "伝説", "huCat_place": "名所", "huCat_history": "歴史"});
 Object.assign(STR.ko,{"huName": "함께 틀린 글자 찾기", "huSub": "2~6명이 아일랜드의 짧은 이야기(전설·명소·역사)를 함께 읽고 숨은 오류를 찾아요! 인원이 많을수록 오류도, 팀 생명도 늘어나요.", "huErrs": "오류", "huLives": "팀 생명", "huLivesN": "{n}명 · 생명 {l}", "huRead": "틀렸다고 생각하는 단어를 누르세요. 잘못 누르면 팀 생명이 줄어요.", "huWin": "성공! 오류를 모두 찾았어요 🎉", "huLose": "팀 생명이 다 떨어졌어요", "huList": "정답", "huMissed": "아무도 못 찾음", "huExpSpell": "철자: 올바른 단어는 {r}", "huExpForm": "문법: {w} → {r}", "huExpConf": "{w}와 {r}은 헷갈리기 쉬워요. 여기서는 {r}", "huCat_legend": "전설", "huCat_place": "명소", "huCat_history": "역사"});
+Object.assign(STR.zh,{"pgJoinTitle": "朋友開好房間了？輸入房號加入", "pgJoinFail": "加入房間失敗，請確認房號後再試一次"});
+Object.assign(STR.en,{"pgJoinTitle": "Friend already made a room? Enter the code to join", "pgJoinFail": "Couldn't join the room. Check the code and try again."});
+Object.assign(STR.hi,{"pgJoinTitle": "दोस्त ने कमरा बना लिया? कोड डालकर जुड़ें", "pgJoinFail": "कमरे में नहीं जुड़ पाए। कोड जाँचकर फिर कोशिश करें।"});
+Object.assign(STR.es,{"pgJoinTitle": "¿Tu amigo ya creó una sala? Escribe el código para unirte", "pgJoinFail": "No se pudo entrar en la sala. Revisa el código e inténtalo de nuevo."});
+Object.assign(STR.ja,{"pgJoinTitle": "友だちが部屋を作った？番号を入力して参加", "pgJoinFail": "部屋に参加できませんでした。番号を確認してもう一度どうぞ。"});
+Object.assign(STR.ko,{"pgJoinTitle": "친구가 방을 만들었나요? 방 번호로 참가하기", "pgJoinFail": "방에 참가하지 못했어요. 번호를 확인하고 다시 시도해 주세요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
