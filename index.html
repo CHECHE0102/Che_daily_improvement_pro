@@ -2856,7 +2856,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.105";
+const APP_VERSION="2026.10.106";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3787,6 +3787,9 @@ function viewPlay(){
 const PG={max:6, rounds:10, roundSec:40, gap:3500, dropMs:3000, startN:3, handMax:8, giftMax:10, life:30, total:180};
 const PG_BLOCK=new Set(atob("YW5hbCBhc3MgYmFuZ2J1cyBiYncgYmRzbSBiZXN0aWFsaXR5IGJpdGNoIGJsb3dqb2IgYmxvd2pvYnMgYm9vYiBib29icyBidWtrYWtlIGJ1c3R5IGNvY2sgY29ja3MgY3VtIGN1bXNob3QgY3Vtc2hvdHMgY3VudCBkaWNrIGRpY2tzIGRpbGRvIGRpbGRvcyBmaXN0aW5nIGZ1Y2sgZnVja2VkIGZ1Y2tpbmcgZ2FuZ2JhbmcgaGFuZGpvYiBoYW5kam9icyBoZW50YWkgaG9ybnkgaW5jZXN0IGxpdmVzZXggbG9saXRhIG1pbGYgbWlsZmh1bnRlciBtaWxmcyBvcmdhc20gb3JneSBwYW50aWVzIHBlbmlzIHBpc3MgcGlzc2luZyBwbGF5Ym95IHBvcm4gcG9ybm8gcHVzc3kgcmFwZSBzZXggc2V4Y2FtIHNleG8gc2V4eSBzaGVtYWxlIHNoZW1hbGVzIHNoaXQgc2x1dCBzbHV0cyB0aHJlZXNvbWUgdGl0IHRpdHMgdG9wbGVzcyB0cmFubnkgdHdpbmtzIHVwc2tpcnQgdXBza2lydHMgdmFnaW5hIHZpYWdyYSB2aWJyYXRvciB2aWJyYXRvcnMgdm95ZXVyIHdob3JlIHdvcmxkc2V4IHhueHggeHh4IHpvb3BoaWxpYQ==").split(" "));
 let PG_WORDS=null, PG_SPELL=null, PG_MEAN=null;
+const PGSEEN_KEY="che-pro-pgseen";
+function pgSeen(){ try{ const o=JSON.parse(localStorage.getItem(PGSEEN_KEY)||"{}"); return {sp:o.sp||[], qz:o.qz||[]}; }catch(e){ return {sp:[],qz:[]}; } }
+function pgSeenAdd(k, words, max){ try{ const o=pgSeen(); o[k]=[...o[k].filter(w=>!words.includes(w)), ...words].slice(-max); localStorage.setItem(PGSEEN_KEY,JSON.stringify(o)); }catch(e){} }
 async function pgLoadWords(){ if(PG_WORDS) return; try{ const t=await (await fetch("games/words.txt")).text(); PG_WORDS=new Set(t.split("\n").map(x=>x.trim()).filter(Boolean)); }catch(e){ PG_WORDS=new Set(); } }
 async function pgLoadSpell(){ if(PG_SPELL) return PG_SPELL; try{ PG_SPELL=(await (await fetch("games/spell.json")).json()).words||[]; }catch(e){ PG_SPELL=[]; } return PG_SPELL; }
 async function pgLoadMean(){ if(PG_MEAN) return; try{ PG_MEAN=await (await fetch("games/meanings.json")).json(); }catch(e){ PG_MEAN={}; } }
@@ -3809,7 +3812,7 @@ async function pgCreate(kind){
     let code;
     for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await fsM.getDoc(pgRef(code)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
     await fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}});
-    await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName()});
+    await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
     S.pgBusy=null; pgListen(code);
   }catch(e){ S.pgBusy=null; toast(T("syncFail")); pgRender(); }
 }
@@ -3825,7 +3828,7 @@ async function pgJoin(code){
       if(d.state!=="wait"){ S.pgBusy=null; pgRender(); return toast(T("pgStarted")); }
       if(Object.keys(d.players||{}).length>=PG.max){ S.pgBusy=null; pgRender(); return toast(T("pgFull")); }
       await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
-      await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName()});
+      await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
     }
     S.pgBusy=null; pgListen(code);
   }catch(e){ S.pgBusy=null; errReport({message:"pgJoin "+String(e&&(e.code||e.message)||e)},"pgJoin"); toast(T("pgJoinFail")); pgRender(); }
@@ -3840,6 +3843,7 @@ function pgListen(code){
     if(!snap.exists()){ pgStop(); S.pg=null; toast(T("coLeftRoom")); return pgRender(); }
     me.party=safeDoc(snap.data());
     for(const u of Object.keys(me.party.players||{})) if(!me.subbed[u]){ me.subbed[u]=1; me.unsubs.push(fsM.onSnapshot(pgRef(code,"p",u), s=>{ if(S.pg!==me) return; me.ps[u]=s.exists()?safeDoc(s.data()):{}; if(u===pgMe()) pgGifts(); pgRender(); }, ()=>{})); }
+    if(me.party.state==="play"&&me.party.game==="spell"&&me.party.words&&!me.seenSaved){ me.seenSaved=1; pgSeenAdd("sp",me.party.words.map(o=>o.w),300); }
     if(me.party.state==="play"){ pgLoadWords(); if(me.party.game==="bomb") pgLoadSyl(); if(me.party.game==="quiz") pgLoadQuiz(); }
     if(me.party.state==="done") pgFinish();
     pgTickStart(); pgRender();
@@ -3860,9 +3864,15 @@ async function pgStartGame(){
   const pg=S.pg; if(!pg||!pg.party||pg.party.host!==pgMe()||pg.party.state!=="wait") return;
   const {fsM}=CLOUD.fb; const P=pg.party, up={state:"play", start:Date.now()+3500, seed:String(Math.floor(Math.random()*1e9))};
   if(P.game==="spell"){
-    const pool=(await pgLoadSpell()).filter(w=>w.w.length===WD.len&&!/s$/.test(w.w));
-    if(pool.length<WD.rounds) return toast(T("loading"));
-    up.words=pgShuffle(pool.slice()).slice(0,WD.rounds).map(o=>({w:o.w, pos:o.pos, m:{zh:o.zh,hi:o.hi,es:o.es,ja:o.ja,ko:o.ko,en:o.en}}));
+    await pgLoadMean();
+    const byW=new Map();
+    for(const o of await pgLoadSpell()) if(o.w.length===WD.len&&!/s$/.test(o.w)) byW.set(o.w,{w:o.w, pos:o.pos, m:{zh:o.zh,hi:o.hi,es:o.es,ja:o.ja,ko:o.ko,en:o.en}});
+    for(const [w,m] of Object.entries(PG_MEAN||{})) if(w.length===WD.len&&/^[a-z]+$/.test(w)&&!/s$/.test(w)&&!byW.has(w)&&!PG_BLOCK.has(w)&&m&&m[0]) byW.set(w,{w, pos:"", m:{zh:m[0],hi:m[1],es:m[2],ja:m[3],ko:m[4],en:m[5]}});
+    const pool=[...byW.values()]; if(pool.length<WD.rounds) return toast(T("loading"));
+    // avoid words anyone in the room has played recently (each player shares their recent list when joining)
+    const seen=new Set(pgSeen().sp); for(const u of Object.keys(P.players||{})) for(const w of ((pg.ps[u]||{}).seenSp||[])) seen.add(w);
+    const fresh=pgShuffle(pool.filter(o=>!seen.has(o.w))), old=pgShuffle(pool.filter(o=>seen.has(o.w)));
+    up.words=[...fresh, ...old].slice(0,WD.rounds);
     up.rounds={};
   }
   if(P.game==="bomb") Object.assign(up, await bmInit(P));
@@ -3938,13 +3948,13 @@ function spSections(){
   const st=spStartOf(P,i), W=P.words[i];
   if(now<st){
     const pw=i>0?P.words[i-1]:null;
-    const recap=pw?`<div class="eyebrow">${T("wdAnswer")}</div><div class="wd-ans">${esc(pw.w.toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(pw.pos||"")}</span> ${spMeaning(pw)}</p>
+    const recap=pw?`<div class="eyebrow">${T("wdAnswer")}</div><div class="wd-ans">${esc(pw.w.toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(pw.pos||"")}</span> ${spMeaning(pw,true)}</p>
       <div class="wd-others">${Object.keys(P.players).map(u=>{ const r=wdRec(u,i-1); return `<div class="wd-op"><b>${esc(pgNm(u))}</b>${wdGrid(r,pw.w,{mini:1})}<small>${r.done==="win"?`✅ ${r.g.length}/${WD.tries}`:`❌`}</small></div>`; }).join("")}</div>`:`<div class="eyebrow">${T("pgGetReady")}</div>`;
     return [["pgBoard",`<div class="pg-board">${board}</div>`],["pgStage",`<div class="sp-wait">${recap}<div class="sp-count">${Math.ceil((st-now)/1000)}</div><p class="muted sm-t">${T("pgRound",{i:i+1,n})}</p></div>`]];
   }
   const me=wdMine(i), left=Math.max(0,Math.ceil((st+WD.sec*1000-now)/1000)), shake=pg.shake&&now-pg.shake<500, flip=pg.flip&&pg.flip.i===i&&now-pg.flip.at<1200?pg.flip.row:-1;
   const head=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgRound",{i:i+1,n})}</span><b class="sm-t ${left<=20?"bad-t":""}">${T("pgLeft",{s:left})}</b></div>
-    <p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${me.done?spMeaning(W):`<span class="muted">${T("wdHint")}</span> ${left<=WD.sec/2||me.g.length>=3?spMeaning(W,true):"🔒"}`}</p>`;
+    <p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${me.done?spMeaning(W,true):`<span class="muted">${T("wdHint")}</span> ${left<=WD.sec/2||me.g.length>=3?spMeaning(W,true):"🔒"}`}</p>`;
   const others=`<div class="wd-others">${Object.keys(P.players).filter(u=>u!==pgMe()).map(u=>{ const r=wdRec(u,i); return `<div class="wd-op"><b>${esc(pgNm(u))}</b>${wdGrid(r,W.w,{mini:1})}<small>${r.done==="win"?"✅":r.done?"❌":"⏳ "+(r.g||[]).length+"/"+WD.tries}</small></div>`; }).join("")}</div>`;
   const status=me.done?`<p class="wd-status ${me.done}">${me.done==="win"?T("wdWin",{n:me.g.length}):T("wdLose",{w:esc(W.w.toUpperCase())})} · ${T("wdWaitOthers")}</p>`:"";
   return [["pgBoard",`<div class="pg-board">${board}</div>`],["pgHead2",head],["pgOthers",others],
@@ -4122,7 +4132,8 @@ function qHide(m, word){   // qMean, then also unwrap "(phrase with the word: me
 const qzMeanQ=o=>qHide(qzMean(o),o.w);   // in questions and options: no English hints that contain the answer
 function qzNew(){
   const Q=qzMine(), all=PG_QUIZ||[]; if(all.length<8) return null;
-  let o, tries=0; do{ o=all[Math.floor(Math.random()*all.length)]; tries++; }while(Q.seen[o.w]&&tries<40); Q.seen[o.w]=1;
+  if(!Q.hist) Q.hist=new Set(pgSeen().qz);
+  let o, tries=0; do{ o=all[Math.floor(Math.random()*all.length)]; tries++; }while((Q.seen[o.w]||(Q.hist.has(o.w)&&tries<60))&&tries<80); Q.seen[o.w]=1; pgSeenAdd("qz",[o.w],700);
   const same=all.filter(x=>x.w!==o.w&&x.p===o.p), pool=same.length>=6?same:all.filter(x=>x.w!==o.w);
   const pick3=(f)=>{ const out=[], used=new Set(); let g=0; while(out.length<3&&g<200){ const x=pool[Math.floor(Math.random()*pool.length)]; g++; const v=f(x); if(!v||used.has(v)||v===f(o)) continue; used.add(v); out.push(v); } return out; };
   const types=["m2w","w2m"]; if(o.s&&o.s.length) types.push("syn"); if(o.x) types.push("blank");
