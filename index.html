@@ -779,7 +779,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
 .st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
 .st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
-.lvt-link{width:100%;margin-top:10px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
+.lvt-link{width:100%;margin-top:10px}.hu-title{margin:10px 0 4px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 </style>
 
 </head>
@@ -2726,7 +2726,7 @@ function devStatsHtml(){
     <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
     <div class="eyebrow">🎮 ${T("dsGames")}</div>
-    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
+    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
     ${devRetHtml(D.act)}
     ${devPushHtml(D.push)}
     <div class="eyebrow">${T("dsRegions")}</div>
@@ -2855,7 +2855,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.102";
+const APP_VERSION="2026.10.103";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3777,9 +3777,9 @@ function coBossSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><cir
 function viewCoop(){ return `<div class="ie-lobby">${ieLobby()}</div>`; }
 // multiplayer games get their own bottom tab (open to everyone from day one)
 function viewPlay(){
-  const m=S.playMode||"party";
-  const seg=`<div class="seg comp-seg">${[["party","🎮 "+T("pgTitle")],["coop","🤝 "+T("cmCoop")]].map(([k,l])=>`<button data-act="playmode" data-k="${k}" aria-pressed="${m===k}">${l}</button>`).join("")}</div>`;
-  return `<div class="view play-view">${pgPlaying()?"":`<div class="play-head"><div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabPlay")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T("playSub")}</p></div><img src="assets/art/scene-party.webp" alt="" class="play-art"></div>`}${seg}${m==="coop"?`<div id="coBox" class="co-box">${coInner()}</div>`:`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
+  const m="party"; S.playMode="party";
+  const seg="";
+  return `<div class="view play-view">${pgPlaying()?"":`<div class="play-head"><div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabPlay")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T("playSub")}</p></div><img src="assets/art/scene-party.webp" alt="" class="play-art"></div>`}${seg}${`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
 }
 
 /* ---------- party games (2–6 players): spelling race & letter rain ---------- */
@@ -3865,6 +3865,7 @@ async function pgStartGame(){
     up.rounds={};
   }
   if(P.game==="bomb") Object.assign(up, await bmInit(P));
+  if(P.game==="hunt"){ const h=await huInit(P, up); if(!h.hu) return toast(T("loading")); Object.assign(up, h); }
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
 }
 
@@ -3873,7 +3874,7 @@ function pgTickStart(){ if(S.pgTimer) return; S.pgTimer=setInterval(pgTick,250);
 function pgTick(){
   const pg=S.pg; if(!pg||!pg.party){ clearInterval(S.pgTimer); S.pgTimer=null; return; }
   const P=pg.party; if(P.state!=="play"){ if(P.state==="done"){ clearInterval(S.pgTimer); S.pgTimer=null; } return; }
-  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick}[P.game]||pgDropTick)();
+  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick}[P.game]||pgDropTick)();
   pgRender();
 }
 function pgEndGame(){ const pg=S.pg; if(!pg||pg.ending) return; pg.ending=1; if(pg.L){ pg.L.fall=null; pgPushMe(); } CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{state:"done", end:Date.now()}).catch(()=>{ pg.ending=0; }); }
@@ -4198,6 +4199,7 @@ function pgRows(){
   if(P.game==="spell"){ const sc=spScores(P), n=(P.words||[]).length||1;
     return ids.map(u=>{ let tries=0, hits=0; for(let i=0;i<n;i++){ const r=wdRec(u,i); tries+=(r.g||[]).length; if(r.done==="win") hits++; } return {u, score:sc[u]||0, tries, hits, misses:tries-hits, acc:Math.round(hits/n*100)}; }).sort((a,b)=>b.score-a.score||b.hits-a.hits||a.tries-b.tries); }
   if(P.game==="bomb") return ids.map(u=>{ const p=u===pgMe()&&pg.B?pg.B:(pg.ps[u]||{}), words=p.words||[], alive=((P.lives||{})[u]||0)>0; return {u, words, bad:p.bad||[], n:words.length, alive, lives:(P.lives||{})[u]||0, outAt:(P.out||{})[u]||0, longest:words.reduce((a,w)=>w.length>a.length?w:a,""), score:words.length*5+(alive?20:0)}; }).sort((a,b)=>(b.alive-a.alive)||(b.outAt-a.outAt)||(b.n-a.n));
+  if(P.game==="hunt"){ const st=huState(); return ids.map(u=>{ const r=huRec(u), n=Object.values(st.found).filter(f=>f.u===u).length, m=r.hm||0; return {u, n, miss:m, score:Math.max(0,n*10-m*3)}; }).sort((a,b)=>b.score-a.score||b.n-a.n); }
   if(P.game==="quiz") return ids.map(u=>{ const p=u===pgMe()&&pg.Q?pg.Q:(pg.ps[u]||{}), gold=Math.round(p.gold||0), ok=p.ok||0, ng=p.ng||0; return {u, gold, ok, ng, best:p.best||0, acc:ok+ng?Math.round(ok/(ok+ng)*100):0, miss:p.miss||[], score:Math.min(120,Math.round(gold/25))}; }).sort((a,b)=>b.gold-a.gold||b.acc-a.acc);
   return ids.map(u=>{ const p=u===pgMe()&&pg.L?{words:pg.L.words,bad:pg.L.bad,pts:pg.L.pts,last:pg.L.last}:(pg.ps[u]||{}); return {u, words:p.words||[], bad:p.bad||[], score:p.pts||0, n:(p.words||[]).length}; }).sort((a,b)=>b.n-a.n||b.score-a.score);
 }
@@ -4215,7 +4217,7 @@ function pgFinish(){
 }
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
-  const gm=S.pg.party.game, lab=r=>gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
+  const gm=S.pg.party.game, lab=r=>gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
   const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
@@ -4228,6 +4230,10 @@ function pgResults(){
   if(P.game==="spell"){
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgScore")}</th><th>${T("pgTries")}</th><th>${T("pgHits")}</th><th>${T("pgMisses")}</th><th>${T("wdRate")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.score}</td><td>${r.tries}</td><td>${r.hits}</td><td>${r.misses}</td><td>${r.acc}%</td></tr>`).join("")}</table>`;
     extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${(P.words||[]).map((W,k)=>{ const first=wdFirstT(P,k), fu=Object.keys(P.players).find(u=>wdRec(u,k).done==="win"&&wdRec(u,k).t===first); return `<div class="co-err"><span class="chip ${fu?"done":"new"}">${k+1}</span><div style="flex:1"><b>${esc(W.w)}</b> <span class="muted sm-t">${esc(W.pos||"")}</span> · ${spMeaning(W)}<div class="muted sm-t">${fu?T("wdFirst",{n:esc(pgNm(fu))}):T("pgNobody")}</div><div class="wd-emo">${Object.keys(P.players).map(u=>{ const r=wdRec(u,k); return `<div><small>${esc(pgNm(u))} ${r.done==="win"?r.g.length:"X"}/${WD.tries}</small><div>${wdEmoji(r,W.w)||"–"}</div></div>`; }).join("")}</div></div></div>`; }).join("")}</div>`;
+  } else if(P.game==="hunt"){
+    pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
+    stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>🔍</th><th>✗</th><th>${T("pgScore")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.n}</td><td>${r.miss}</td><td>${r.score}</td></tr>`).join("")}</table>`;
+    extra=huResults();
   } else if(P.game==="quiz"){
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>🪙</th><th>${T("qzOk")}</th><th>${T("qzNg")}</th><th>${T("pgAcc")}</th><th>${T("qzBest")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.gold}</td><td>${r.ok}</td><td>${r.ng}</td><td>${r.acc}%</td><td>${r.best}</td></tr>`).join("")}</table>`;
     const mine=(rows.find(r=>r.u===pgMe())||{miss:[]}).miss, byW=Object.fromEntries((PG_QUIZ||[]).map(o=>[o.w,o]));
@@ -4249,19 +4255,80 @@ function pgResults(){
   return `<div class="pg-result"><div class="eyebrow">${T("pgPodium")}</div>${pgPodium(rows)}${reward}<h3>${T("pgStats")}</h3><div class="ds-scroll">${stats}</div>${extra}<button class="btn" data-act="pgleave">${T("pgAgain")}</button></div>`;
 }
 
+
+/* ----- game 5: team error hunt (2–6 players) — a short Irish legend / place / history story with a few planted mistakes ----- */
+const HU={sec:180};
+let HU_LIB=null;
+async function huLoad(){ if(HU_LIB) return HU_LIB; try{ HU_LIB=(await (await fetch("games/hunt.json")).json()).p||[]; }catch(e){ HU_LIB=[]; } return HU_LIB; }
+const HU_RE=/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/;
+const huErrN=n=>Math.min(9,4+Math.max(1,n)), huLives=n=>3+Math.max(1,n);   // more players: more mistakes to find and a longer team life bar
+function huBuild(ps, seed, n){
+  const r=rng(seed); let idx=0; const toks=[];
+  ps.p.forEach(par=>par.split(HU_RE).forEach((t,j)=>{ if(j%2) toks.push({t,i:idx++}); }));
+  const alt=ps.alt||{}, cands=[];
+  toks.forEach(({t,i},k)=>{ const lo=t.toLowerCase(), cap=t[0]!==lo[0];
+    if(i===0) return;
+    if(alt[lo]) cands.push({i,type:"form",wrong:keepCase(t,alt[lo]),right:t,pri:3});
+    if(cap) return;   // never touch names
+    if(CONF[lo]) cands.push({i,type:"conf",wrong:CONF[lo],right:t,pri:2});
+    if(lo.length>=6&&/^[a-z]+$/.test(lo)){ const w=misspell(t,r); if(w.toLowerCase()!==lo&&!(PG_WORDS&&PG_WORDS.has(w.toLowerCase()))) cands.push({i,type:"spell",wrong:w,right:t,pri:1}); } });
+  const order=cands.map(c=>({c,k:r()+c.pri*0.2})).sort((a,b)=>b.k-a.k).map(o=>o.c), picked=[], used=new Set(), cnt={conf:0,form:0,spell:0};
+  for(const c of order){ if(picked.length>=n) break; if([...used].some(u=>Math.abs(u-c.i)<5)) continue; if(cnt[c.type]>=Math.ceil(n*0.6)) continue; picked.push(c); used.add(c.i); cnt[c.type]++; }
+  picked.sort((a,b)=>a.i-b.i);
+  return {id:ps.id, cat:ps.cat, t:ps.t, p:ps.p, errs:picked.map(c=>({i:c.i,type:c.type,wrong:c.wrong,right:c.right}))};
+}
+async function huInit(P, up){
+  const lib=await huLoad(); await pgLoadWords(); if(!lib.length) return {};
+  const n=Object.keys(P.players||{}).length, ps=lib[Math.floor(Math.random()*lib.length)];
+  return {hu:huBuild(ps, Math.floor(Math.random()*1e9), huErrN(n)), lives:huLives(n), endAt:up.start+HU.sec*1000};
+}
+function huMine(){ const pg=S.pg; if(!pg.H){ const p=pg.ps[pgMe()]||{}; pg.H={hf:{...(p.hf||{})}, hm:p.hm||0}; } return pg.H; }
+function huRec(u){ return u===pgMe()?huMine():(S.pg.ps[u]||{}); }
+function huState(){ const P=S.pg.party, H=P.hu||{errs:[]}, found={}, ids=Object.keys(P.players||{});
+  let miss=0; for(const u of ids){ const r=huRec(u); miss+=r.hm||0; for(const [i,t] of Object.entries(r.hf||{})) if(found[i]===undefined||t<found[i].t) found[i]={u,t}; }
+  const nf=H.errs.filter(e=>found[e.i]).length, lives=P.lives||huLives(ids.length);
+  return {found, miss, nf, total:H.errs.length, lives, win:H.errs.length>0&&nf>=H.errs.length, dead:miss>=lives, late:Date.now()>(P.endAt||Infinity)}; }
+function huPush(){ const pg=S.pg, H=huMine(); clearTimeout(pg.huT); pg.huT=setTimeout(()=>CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hf:H.hf, hm:H.hm},{merge:true}).catch(()=>{}),120); }
+function huTap(i){ const pg=S.pg, P=pg&&pg.party; if(!P||P.state!=="play"||Date.now()<P.start) return; const st=huState(); if(st.win||st.dead||st.late) return;
+  if(st.found[i]) return; const H=huMine();
+  if((P.hu.errs||[]).some(e=>e.i===i)){ H.hf[i]=Date.now(); sfx(880,0.12,"triangle",0.08,1320); }
+  else { H.hm++; pg.huFlash=i; sfx(180,0.18,"sawtooth",0.06,120); }
+  huPush(); pgRender(); }
+function huTick(){ const pg=S.pg, P=pg.party; if(Date.now()<P.start) return; if(!P.hu) return; const st=huState();
+  if((st.win||st.dead||st.late)&&(P.host===pgMe()||Date.now()>(P.endAt||0)+6000)) pgEndGame(); }
+function huText(st, done){ const P=S.pg.party, H=P.hu, errAt=Object.fromEntries(H.errs.map(e=>[e.i,e])); let idx=0; const fl=S.pg.huFlash; S.pg.huFlash=null;
+  return H.p.map(par=>"<p>"+par.split(HU_RE).map((t,j)=>{ if(j%2===0) return esc(t); const i=idx++, e=errAt[i], shown=e?e.wrong:t, f=st.found[i];
+    if(e&&f) return `<span class="cw fixed ${f.u===pgMe()?"mine":"mate"}"><s>${esc(shown)}</s> <ins>${esc(e.right)}</ins></span>`;
+    if(e&&done) return `<span class="cw missed"><s>${esc(shown)}</s> <ins>${esc(e.right)}</ins></span>`;
+    return done?`<span class="cw">${esc(shown)}</span>`:`<span class="cw${fl===i?" bad":""}" data-act="pghutap" data-k="${i}">${esc(shown)}</span>`; }).join("")+"</p>").join(""); }
+function huTitle(H){ return `<span class="chip topic">${T("huCat_"+H.cat)}</span> <b>${esc((H.t&&(H.t[LANG]||H.t.en))||"")}</b>${LANG!=="en"&&H.t?` <span class="muted sm-t">${esc(H.t.en)}</span>`:""}`; }
+function huExplain(e){ const m=pgMeanOf((e.right||"").toLowerCase()); return (e.type==="spell"?T("huExpSpell",{r:`<b>${esc(e.right)}</b>`}):e.type==="form"?T("huExpForm",{w:esc(e.wrong),r:`<b>${esc(e.right)}</b>`}):T("huExpConf",{w:esc(e.wrong),r:`<b>${esc(e.right)}</b>`}))+(m?` · ${m}`:""); }
+function huSections(){
+  const pg=S.pg, P=pg.party, now=Date.now();
+  if(now<P.start||!P.hu) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("huRead")}</p></div>`]];
+  const st=huState(), left=Math.max(0,Math.ceil(((P.endAt||now)-now)/1000)), ids=Object.keys(P.players);
+  const board=`<div class="pg-board">${ids.map(u=>{ const r=huRec(u), n=Object.keys(r.hf||{}).filter(i=>st.found[i]&&st.found[i].u===u).length; return `<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b><span>🔍${n}${r.hm?` · ✗${r.hm}`:""}</span></div>`; }).join("")}</div>`;
+  const top=`<div class="co-top">${bar(st.total-st.nf,st.total,"boss",T("huErrs"))}${bar(Math.max(0,st.lives-st.miss),st.lives,"team",T("huLives"))}<div class="row" style="justify-content:space-between"><span class="muted sm-t">${T("huLivesN",{n:ids.length,l:st.lives})}</span><b class="sm-t">${T("coTime",{s:left})}</b></div></div>`;
+  return [["pgHuTop",top+board],["pgHuBody",`<div class="hu-title">${huTitle(P.hu)}</div><p class="muted sm-t">${T("huRead")}</p><article class="article co-text">${huText(st,false)}</article>`]];
+}
+function huResults(){ const P=S.pg.party, H=P.hu||{errs:[],p:[]}, st=huState();
+  return `<div class="reward ${st.win?"win":"lose"}"><div class="eyebrow">${st.win?T("huWin"):st.dead?T("huLose"):T("coTimeUp")}</div><div class="rw-row"><span>${T("huErrs")}</span><b>${st.nf} / ${st.total}</b></div></div>
+    <div class="hu-title">${huTitle(H)}</div><article class="article co-text">${huText(st,true)}</article>
+    <h3>${T("huList")}</h3><div class="co-list">${H.errs.map(e=>{ const f=st.found[e.i]; return `<div class="co-err"><span class="chip ${f?"done":"new"}">${T(e.type==="spell"?"coTypeSpell":e.type==="form"?"coTypeForm":"coTypeConf")}</span><div><s>${esc(e.wrong)}</s> → <b>${esc(e.right)}</b>${f?` <span class="muted sm-t">· ${T("coFoundBy",{n:esc(pgNm(f.u))})}</span>`:` <span class="muted sm-t">· ${T("huMissed")}</span>`}<div class="muted sm-t">${huExplain(e)}</div></div></div>`; }).join("")}</div>`; }
+
 /* ----- view ----- */
 function pgSections(){
   if(S.pgBusy) return [["pgMain",`<p class="muted">${S.pgBusy}</p>`]];
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName"}[k])}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName"}[k])}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
     return [["pgMain",`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>${login}
-      ${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}
+      ${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}
       ${CLOUD.user?`<div class="row" style="flex-wrap:nowrap"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn ghost" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div>`:""}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
-  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName"}[P.game]||"pgDrop");
+  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName"}[P.game]||"pgDrop");
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
@@ -4271,7 +4338,7 @@ function pgSections(){
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
   if(P.state==="done") return [["pgMain",pgResults()]];
-  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections}[P.game]||dpSections)();
+  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections}[P.game]||dpSections)();
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
@@ -4296,6 +4363,7 @@ function pgAct(a,t){
   if(a==="pgquitno"){ S.pgQuitAsk=false; return pgRender(); }
   if(a==="pgkey"){ if(!wdKey(t.dataset.k)) bmKey(t.dataset.k); return; }
   if(a==="qzans") return qzAnswer(+t.dataset.k);
+  if(a==="pghutap") return huTap(+t.dataset.k);
   if(a==="qzshop"){ S.pg.qzShop=!S.pg.qzShop; S.pg.qzPick=null; return pgRender(); }
   if(a==="qzbuy") return qzBuy(t.dataset.k);
   if(a==="qzpick"){ S.pg.qzPick=S.pg.qzPick===t.dataset.k?null:t.dataset.k; return pgRender(); }
@@ -5043,6 +5111,12 @@ Object.assign(STR.hi,{"lvtSee": "अपने जवाब देखें", "lv
 Object.assign(STR.es,{"lvtSee": "Ver tus respuestas", "lvtSeeN": "conocías {n} de {t} palabras"});
 Object.assign(STR.ja,{"lvtSee": "さっきの答えを見る", "lvtSeeN": "{t}語中{n}語わかった"});
 Object.assign(STR.ko,{"lvtSee": "방금 답한 결과 보기", "lvtSeeN": "{t}개 중 {n}개 알았어요"});
+Object.assign(STR.zh,{"huName": "合作找錯字", "huSub": "2–6 人一起讀一篇愛爾蘭小故事（傳說、景點、歷史），把藏在裡面的錯字找出來！人越多，錯字越多，團隊生命也越長。", "huErrs": "錯字", "huLives": "團隊生命", "huLivesN": "{n} 人 · 生命 {l}", "huRead": "點你覺得寫錯的字。點錯會扣團隊生命。", "huWin": "成功！全部錯字都找到了 🎉", "huLose": "團隊生命用完了", "huList": "錯字解答", "huMissed": "沒人找到", "huExpSpell": "拼字錯誤，正確拼法是 {r}", "huExpForm": "文法錯誤：{w} 要改成 {r}", "huExpConf": "{w} 和 {r} 容易搞混，這裡要用 {r}", "huCat_legend": "傳說", "huCat_place": "景點", "huCat_history": "歷史"});
+Object.assign(STR.en,{"huName": "Team error hunt", "huSub": "2–6 players read a short Irish story (legends, places, history) together and find the hidden mistakes! More players means more mistakes and a longer team life bar.", "huErrs": "Mistakes", "huLives": "Team life", "huLivesN": "{n} players · {l} lives", "huRead": "Tap the words you think are wrong. Wrong taps cost team life.", "huWin": "Success! Every mistake found 🎉", "huLose": "The team ran out of lives", "huList": "Answers", "huMissed": "nobody found it", "huExpSpell": "Spelling: the correct word is {r}", "huExpForm": "Grammar: {w} should be {r}", "huExpConf": "{w} and {r} are easy to mix up; here it should be {r}", "huCat_legend": "Legend", "huCat_place": "Place", "huCat_history": "History"});
+Object.assign(STR.hi,{"huName": "साथ में ग़लती खोजें", "huSub": "2–6 खिलाड़ी साथ में एक छोटी आयरिश कहानी (लोककथा, जगह, इतिहास) पढ़ें और छिपी ग़लतियाँ ढूँढें! जितने ज़्यादा खिलाड़ी, उतनी ज़्यादा ग़लतियाँ और लंबी टीम-जान।", "huErrs": "ग़लतियाँ", "huLives": "टीम की जान", "huLivesN": "{n} खिलाड़ी · {l} जान", "huRead": "जो शब्द ग़लत लगे उस पर टैप करें। ग़लत टैप से टीम की जान घटती है।", "huWin": "शाबाश! सारी ग़लतियाँ मिल गईं 🎉", "huLose": "टीम की जान ख़त्म", "huList": "उत्तर", "huMissed": "किसी को नहीं मिली", "huExpSpell": "वर्तनी: सही शब्द {r} है", "huExpForm": "व्याकरण: {w} की जगह {r}", "huExpConf": "{w} और {r} में भ्रम होता है; यहाँ {r} होना चाहिए", "huCat_legend": "लोककथा", "huCat_place": "जगह", "huCat_history": "इतिहास"});
+Object.assign(STR.es,{"huName": "Caza de errores en equipo", "huSub": "De 2 a 6 jugadores leen juntos una breve historia irlandesa (leyendas, lugares, historia) y buscan los errores escondidos. Más jugadores: más errores y más vidas para el equipo.", "huErrs": "Errores", "huLives": "Vida del equipo", "huLivesN": "{n} jugadores · {l} vidas", "huRead": "Toca las palabras que creas que están mal. Fallar quita vida al equipo.", "huWin": "¡Lo lograsteis! Todos los errores encontrados 🎉", "huLose": "El equipo se quedó sin vidas", "huList": "Soluciones", "huMissed": "nadie lo encontró", "huExpSpell": "Ortografía: lo correcto es {r}", "huExpForm": "Gramática: {w} debe ser {r}", "huExpConf": "{w} y {r} se confunden fácilmente; aquí va {r}", "huCat_legend": "Leyenda", "huCat_place": "Lugar", "huCat_history": "Historia"});
+Object.assign(STR.ja,{"huName": "みんなで間違い探し", "huSub": "2〜6人でアイルランドの短いお話（伝説・名所・歴史）を読んで、隠れた間違いを見つけよう！人数が多いほど間違いもチームのライフも増えます。", "huErrs": "間違い", "huLives": "チームのライフ", "huLivesN": "{n}人 · ライフ {l}", "huRead": "間違っていると思う単語をタップ。外すとチームのライフが減ります。", "huWin": "成功！間違いを全部見つけた 🎉", "huLose": "チームのライフが尽きた", "huList": "答え", "huMissed": "誰も見つけられなかった", "huExpSpell": "スペル：正しくは {r}", "huExpForm": "文法：{w} は {r} が正しい", "huExpConf": "{w} と {r} は紛らわしい。ここは {r}", "huCat_legend": "伝説", "huCat_place": "名所", "huCat_history": "歴史"});
+Object.assign(STR.ko,{"huName": "함께 틀린 글자 찾기", "huSub": "2~6명이 아일랜드의 짧은 이야기(전설·명소·역사)를 함께 읽고 숨은 오류를 찾아요! 인원이 많을수록 오류도, 팀 생명도 늘어나요.", "huErrs": "오류", "huLives": "팀 생명", "huLivesN": "{n}명 · 생명 {l}", "huRead": "틀렸다고 생각하는 단어를 누르세요. 잘못 누르면 팀 생명이 줄어요.", "huWin": "성공! 오류를 모두 찾았어요 🎉", "huLose": "팀 생명이 다 떨어졌어요", "huList": "정답", "huMissed": "아무도 못 찾음", "huExpSpell": "철자: 올바른 단어는 {r}", "huExpForm": "문법: {w} → {r}", "huExpConf": "{w}와 {r}은 헷갈리기 쉬워요. 여기서는 {r}", "huCat_legend": "전설", "huCat_place": "명소", "huCat_history": "역사"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
