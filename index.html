@@ -780,7 +780,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
 .st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
 .st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
-.lvt-link{width:100%;margin-top:10px}.hu-title{margin:10px 0 4px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
+.lvt-link{width:100%;margin-top:10px}nav.tabs button.locked{opacity:.45}button.locked{opacity:.55}.hu-title{margin:10px 0 4px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 </style>
 
 </head>
@@ -1171,7 +1171,9 @@ function lookedUpFor(d, art){ return isMain(art) ? (d.lookedUp||[]) : ((d.looked
 function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,total:d.postTotal}:null) : ((d.postBy||{})[art.id]||null); }
 
 /* ---------- rendering ---------- */
-function setTab(t){ S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
+/* new players: features the elder hasn't introduced yet stay locked (Lucky House until the day-2 talk, multiplayer until the day-3 talk) */
+function featLock(k){ const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; if(k==="play"&&!st.d3) return "lockPlay"; return null; }
+function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
 function render(){ try{ renderInner(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
@@ -1191,7 +1193,7 @@ function vpApply(){ const lock=S.view==="play"; if(lock===VP_LOCK) return; VP_LO
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{ if(VP_LOCK) e.preventDefault(); },{passive:false}));   // iOS Safari ignores user-scalable=no
 function renderInner(){
   vpApply();
-  document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"));
+  document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>{ b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"); b.classList.toggle("locked", !!(b.dataset.tab&&featLock(b.dataset.tab))); });
   if(typeof readStopIfLeft==="function") readStopIfLeft(); setTimeout(()=>{ if(typeof pgLockSync==="function") pgLockSync(); },0);
   { const g=game(); $("#mastInfo").innerHTML = T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}); }
   const app=$("#app");
@@ -2396,7 +2398,7 @@ function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["a
 function viewAdv(){
   const g=game(), s=stats(), need=expNeed(g.lv);
   const sub=S.advTab||"go";
-  const seg=(k,l)=>`<button data-advtab="${k}" aria-pressed="${sub===k}">${l}</button>`;
+  const seg=(k,l)=>`<button data-advtab="${k}" aria-pressed="${sub===k}"${featLock(k)?' class="locked"':""}>${featLock(k)?"🔒 ":""}${l}</button>`;
   let body="";
   if(sub==="go"){
     body=viewConquest();
@@ -2856,7 +2858,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.108";
+const APP_VERSION="2026.10.109";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3257,7 +3259,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.town){ S.selTown=S.selTown===t.dataset.town?null:t.dataset.town; render(); if(S.selTown&&t.tagName==="BUTTON"){ const m=document.querySelector(".map-wrap"); if(m) m.scrollIntoView({behavior:"smooth",block:"start"}); } return; }
   if(t.dataset.co!==undefined) return coTap(+t.dataset.co);
   if(t.dataset.rkby){ S.rkBy=t.dataset.rkby; S.rk=null; return render(); }
-  if(t.dataset.advtab){ S.advTab=t.dataset.advtab; if(t.dataset.advtab==="rank") S.rk=null; return render(); }
+  if(t.dataset.advtab){ const lk=featLock(t.dataset.advtab); if(lk) return toast("🔒 "+T(lk)); S.advTab=t.dataset.advtab; if(t.dataset.advtab==="rank") S.rk=null; return render(); }
   if(t.dataset.shopel){ S.shopEl=t.dataset.shopel; return render(); }
   if(t.dataset.buy) return buy(t.dataset.buy);
   if(t.dataset.equip) return equip(t.dataset.equip);
@@ -3324,7 +3326,7 @@ document.addEventListener("click", e=>{
   if(a==="deverr") return devLoadErrors();
   if(a==="dev") return devAct(t.dataset.k);
   if(a==="rev") return startQuiz("rev");
-  if(a==="goluck"){ S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
+  if(a==="goluck"){ if(featLock("luck")) return toast("🔒 "+T("lockLuck")); S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
   if(a==="spin") return spinWheel();
   if(a==="scbuy") return buyScratch(t.dataset.k);
   if(a==="scall") return scratchReveal();
@@ -5064,7 +5066,7 @@ function storyRender(){
     <div class="onb-nav"><button class="btn" data-st="${last?"done":"next"}">${btn}</button>${i>0?`<button class="btn ghost" data-st="back">‹</button>`:""}</div></div>`;
 }
 function storyDone(){ const g=game(); g.story=g.story||{}; const k=S.story.k;
-  g.story[k]=today(); if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5; toast(T("stGot")); }
+  g.story[k]=today(); if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5; toast(T("stGot")); if(!S.words.size&&(g.lv||1)<=1) g.story.lock=1; }
   saveGame(); S.story=null; storyRender(); render(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("#story [data-st]"); if(!t||!S.story) return; e.stopPropagation(); const a=t.dataset.st;
   if(a==="next"){ S.story.step++; storyRender(); } else if(a==="back"){ S.story.step=Math.max(0,S.story.step-1); storyRender(); } else storyDone(); });
@@ -5141,6 +5143,12 @@ Object.assign(STR.hi,{"pgJoinTitle": "दोस्त ने कमरा बन
 Object.assign(STR.es,{"pgJoinTitle": "¿Tu amigo ya creó una sala? Escribe el código para unirte", "pgJoinFail": "No se pudo entrar en la sala. Revisa el código e inténtalo de nuevo."});
 Object.assign(STR.ja,{"pgJoinTitle": "友だちが部屋を作った？番号を入力して参加", "pgJoinFail": "部屋に参加できませんでした。番号を確認してもう一度どうぞ。"});
 Object.assign(STR.ko,{"pgJoinTitle": "친구가 방을 만들었나요? 방 번호로 참가하기", "pgJoinFail": "방에 참가하지 못했어요. 번호를 확인하고 다시 시도해 주세요."});
+Object.assign(STR.zh,{"lockLuck": "幸運屋還沒開放：明天再登入，長老會教你怎麼用幸運草！", "lockPlay": "多人遊戲還沒開放：等長老介紹完幸運屋的隔天，就會帶你認識多人遊戲！"});
+Object.assign(STR.en,{"lockLuck": "The Lucky House isn't open yet. Come back tomorrow and the elder will show you how shamrocks work!", "lockPlay": "Multiplayer isn't open yet. The day after the elder shows you the Lucky House, he'll introduce multiplayer!"});
+Object.assign(STR.hi,{"lockLuck": "लकी हाउस अभी बंद है। कल फिर आएँ, बुज़ुर्ग आपको शैमरॉक के बारे में बताएँगे!", "lockPlay": "मल्टीप्लेयर अभी बंद है। लकी हाउस के परिचय के अगले दिन बुज़ुर्ग इसे दिखाएँगे!"});
+Object.assign(STR.es,{"lockLuck": "La Casa de la Suerte aún no está abierta. Vuelve mañana y el anciano te enseñará a usar los tréboles.", "lockPlay": "El modo multijugador aún no está abierto. El día después de conocer la Casa de la Suerte, el anciano te lo presentará."});
+Object.assign(STR.ja,{"lockLuck": "ラッキーハウスはまだ開いていません。明日またログインすると、長老がクローバーの使い方を教えてくれます！", "lockPlay": "マルチプレイはまだ開いていません。長老がラッキーハウスを紹介した次の日に案内してくれます！"});
+Object.assign(STR.ko,{"lockLuck": "행운의 집은 아직 열리지 않았어요. 내일 다시 오면 장로가 클로버 사용법을 알려 줄 거예요!", "lockPlay": "멀티플레이는 아직 열리지 않았어요. 장로가 행운의 집을 소개한 다음 날 알려 줄 거예요!"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
