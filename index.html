@@ -2856,7 +2856,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.107";
+const APP_VERSION="2026.10.108";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3866,8 +3866,8 @@ async function pgStartGame(){
   if(P.game==="spell"){
     await pgLoadMean();
     const byW=new Map();
-    for(const o of await pgLoadSpell()) if(o.w.length===WD.len&&!/s$/.test(o.w)) byW.set(o.w,{w:o.w, pos:o.pos, m:{zh:o.zh,hi:o.hi,es:o.es,ja:o.ja,ko:o.ko,en:o.en}});
-    for(const [w,m] of Object.entries(PG_MEAN||{})) if(w.length===WD.len&&/^[a-z]+$/.test(w)&&!/s$/.test(w)&&!byW.has(w)&&!PG_BLOCK.has(w)&&m&&m[0]) byW.set(w,{w, pos:"", m:{zh:m[0],hi:m[1],es:m[2],ja:m[3],ko:m[4],en:m[5]}});
+    // Wordle uses only the curated list; "h" holds hints rewritten so they never contain or look like the answer
+    for(const o of await pgLoadSpell()) if(o.w.length===WD.len&&!/s$/.test(o.w)) byW.set(o.w,{w:o.w, pos:o.pos, m:{zh:o.zh,hi:o.hi,es:o.es,ja:o.ja,ko:o.ko,en:o.en, ...(o.h||{})}});
     const pool=[...byW.values()]; if(pool.length<WD.rounds) return toast(T("loading"));
     // avoid words anyone in the room has played recently (each player shares their recent list when joining)
     const seen=new Set(pgSeen().sp); for(const u of Object.keys(P.players||{})) for(const w of ((pg.ps[u]||{}).seenSp||[])) seen.add(w);
