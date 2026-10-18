@@ -355,7 +355,7 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .pd-card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:41;width:min(340px,calc(100% - 32px));background:var(--card);border-radius:22px;padding:22px 20px 18px;box-shadow:0 20px 50px rgba(0,0,0,.3);text-align:center;display:flex;flex-direction:column;gap:10px;animation:popMid .25s ease-out}
 .pd-card h2{margin:0}.pd-hero{width:150px;height:150px;object-fit:contain;margin:-60px auto 0;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}.pd-hero-ph{display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:50%}.pd-hero-ph svg{width:96px;height:96px}
 .pd-list{display:flex;flex-direction:column;gap:8px;margin:4px 0 6px}.pd-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:14px;background:color-mix(in srgb,#F2C14E 18%,var(--paper));text-align:left}.pd-pic{width:52px;height:52px;object-fit:contain}.pd-ic{font-size:34px;width:52px;text-align:center}
-.vt-pic{width:64px;height:64px;object-fit:contain}
+.vt-pic{width:64px;height:64px;object-fit:contain}.vt-legal{margin:10px 0 0;font-size:12px}
 .sc-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:21;width:min(340px,calc(100% - 32px));display:flex;flex-direction:column;gap:12px;align-items:stretch}.sc-modal.fresh{animation:popMid .2s ease-out}
 @keyframes popMid{from{transform:translate(-50%,-46%);opacity:0}}
 .sc-ticket{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;color:#2A2010;box-shadow:0 14px 40px rgba(0,0,0,.3)}
@@ -1365,6 +1365,7 @@ function viewSettings(){
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     ${soundCard()}
+    <section class="card set-sec"><b>📄 ${T("legalT")}</b><span class="muted sm-t">${T("legalSub")}</span><div class="row"><a class="btn sm ghost" href="legal.html${langKey()==="zh"||langKey()==="cn"?"?lang=zh":""}" target="_blank" rel="noopener">${T("legalOpen")}</a><a class="btn sm ghost" href="mailto:binbindaily.help@gmail.com">✉️ binbindaily.help@gmail.com</a></div></section>
     ${feedbackCard()}
     ${privacyCard()}
     ${SUPPORT_ON||DEV?`<section class="card sup">${!SUPPORT_ON?`<span class="sup-hidden sm-t">🙈 ${T("supHiddenNote")}</span>`:""}<div class="sup-cup" aria-hidden="true">💝</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
@@ -3020,7 +3021,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.137";
+const APP_VERSION="2026.10.138";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -5017,7 +5018,7 @@ async function deleteAccount(){
 }
 const PRIV={
 zh:{t:"隱私權政策", upd:"最後更新：2026 年 10 月 16 日", secs:[
- ["我們是誰","BinBin daily 是一位個人開發者（CheChe）在愛爾蘭製作的英文學習 app。有任何隱私問題，請用「設定 → 意見回饋」告訴我。"],
+ ["我們是誰","BinBin daily 是一位個人開發者（CheChe）在愛爾蘭製作的英文學習 app。有任何隱私問題，請寄信到 binbindaily.help@gmail.com，或用「設定 → 意見回饋」告訴我。完整的條款、退款與隱私權政策請見「設定 → 關於、條款與退款」。"],
  ["我們收集哪些資料",["不登入也能使用：學習紀錄、單字、遊戲進度只存在你的手機（瀏覽器的本機儲存空間）。","用 Google 登入時：你的 Google 帳號編號、顯示名稱與大頭貼，以及你的單字、閱讀與測驗紀錄、遊戲進度、新聞地區設定，會存到雲端，讓你換手機也不會不見。","你自己設定的暱稱、國旗，以及排行榜成績（戰力、IELTS、閱讀篇數），其他登入的玩家看得到。","多人遊戲與盟友：房間內的暱稱與遊戲狀態，其他玩家看得到。","開啟通知時：推播訂閱資訊、時區、語言，以及你當天是否讀過新聞（只用來決定要不要提醒你）。","使用統計：一組隨機產生的裝置編號，記錄你哪幾天打開 app、語言和程度設定，用來計算留存率；不含姓名或聯絡方式。","你主動送出的意見回饋內容。"]],
  ["我們用資料做什麼","只用來提供 app 的功能：同步進度、排行榜、多人遊戲、提醒通知，以及了解 app 哪裡需要改進。我們不放廣告、不賣資料，也不把資料分享給行銷公司。"],
  ["資料存在哪裡",["Google Firebase（帳號登入與雲端資料庫）：伺服器可能位於歐盟以外，Google 依其資料保護條款處理。","GitHub Pages（網站主機）、Google Fonts（字型）：會看到你的 IP 位址等一般連線資訊。","推播服務（Apple、Google、Mozilla）：負責把通知送到你的裝置。","意見回饋會存到開發者的 Google 試算表。"]],
@@ -5028,7 +5029,7 @@ zh:{t:"隱私權政策", upd:"最後更新：2026 年 10 月 16 日", secs:[
  ["IELTS 聲明","IELTS™ 是 British Council、IDP: IELTS Australia 與 Cambridge University Press & Assessment 的註冊商標。BinBin daily 與上述機構沒有任何關係，也未經其認可或核准。app 內的模擬試題皆為原創，分數僅為估計，不代表正式成績。"],
  ["政策更新","政策有重大變更時，會在 app 內通知。"]]},
 en:{t:"Privacy policy", upd:"Last updated: 16 October 2026", secs:[
- ["Who we are","BinBin daily is an English-learning app made by an independent developer (CheChe) in Ireland. For any privacy question, use Settings → Feedback."],
+ ["Who we are","BinBin daily is an English-learning app made by an independent developer (CheChe) in Ireland. For any privacy question, write to binbindaily.help@gmail.com or use Settings → Feedback. The full terms, refund and privacy policy are under Settings → About, terms and refunds."],
  ["What we collect",["Without signing in: your progress, words and game data stay on your phone (the browser's local storage).","When you sign in with Google: your Google account ID, display name and profile photo, plus your words, reading and quiz history, game progress and news region, are stored in the cloud so they follow you to a new phone.","The nickname and flag you choose and your leaderboard results (power, IELTS, articles read) are visible to other signed-in players.","Party games and allies: your nickname and game state in a room are visible to the other players.","If you turn on notifications: your push subscription, time zone, language and whether you've read the news today (only to decide whether to remind you).","Usage statistics: a randomly generated device ID with the days you opened the app and your language/level settings, used to measure retention. It contains no name or contact details.","Any feedback you send us."]],
  ["How we use it","Only to run the app: syncing progress, leaderboards, party games, reminders, and understanding what to improve. We show no ads, never sell data and never share it with marketers."],
  ["Where it is stored",["Google Firebase (sign-in and cloud database); servers may be outside the EU and Google processes data under its data-protection terms.","GitHub Pages (hosting) and Google Fonts (fonts) see normal connection data such as your IP address.","Push services (Apple, Google, Mozilla) deliver notifications to your device.","Feedback is stored in the developer's Google Sheet."]],
@@ -5919,7 +5920,7 @@ function viewVault(){
   const inbox=CLOUD.user?`<section class="card"><h3>📬 ${T("giftInbox")}</h3>${recv.length?recv.slice(0,10).map(x=>card(x,false)).join(""):`<p class="muted sm-t">${T("giftNoneIn")}</p>`}
     ${sent.length?`<h4>${T("giftSentT")}</h4>${sent.slice(0,10).map(x=>card(x,true)).join("")}`:""}</section>`:"";
   return `<section class="vault-hero"><div class="vh-ic">${VAULT_ICON}</div><div><div class="eyebrow">${T("vaultEyebrow")}</div><h2>${T("vaultName")}</h2><p class="sm-t">${T("vaultSub")}</p></div></section>
-    <section class="card"><h3>✨ ${T("vaultShopT")}</h3><p class="muted sm-t">${T("vaultShopSub")}</p><div class="vt-grid">${shop}</div></section>
+    <section class="card"><h3>✨ ${T("vaultShopT")}</h3><p class="muted sm-t">${T("vaultShopSub")}</p><div class="vt-grid">${shop}</div><p class="muted sm-t vt-legal">${T("vtLegal")} <a href="legal.html${langKey()==="zh"||langKey()==="cn"?"?lang=zh":""}#refunds" target="_blank" rel="noopener">${T("vtLegalLink")}</a></p></section>
     ${hist.length?`<section class="card"><h3>🧾 ${T("payHistT")}</h3>${hist.map(x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return `<div class="rw-row"><span>${v?v.ic:"🛒"} ${v?(v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()})):esc(x.item)}${x.test?` <small class="muted">${T("vtTestTag")}</small>`:""}</span><b class="sm-t">${T("paySt_"+x.status)||esc(x.status)}</b></div>`; }).join("")}</section>`:""}
     <section class="card"><h3>🎁 ${T("giftTitle")}</h3><p class="muted sm-t">${T("giftSub")}</p>${gift}</section>
     ${inbox}`;
@@ -6076,6 +6077,12 @@ Object.assign(STR.hi,{"payDoneT": "खरीद सफल!", "payDoneSub": "आ�
 Object.assign(STR.es,{"payDoneT": "¡Compra completada!", "payDoneSub": "Gracias por tu apoyo. Los objetos ya están en tu bolsa.", "payDoneOk": "¡Genial!"});
 Object.assign(STR.ja,{"payDoneT": "購入完了！", "payDoneSub": "ご支援ありがとうございます。アイテムはバッグに入りました。", "payDoneOk": "やった！"});
 Object.assign(STR.ko,{"payDoneT": "구매 완료!", "payDoneSub": "응원해 주셔서 고마워요. 아이템이 가방에 들어갔어요.", "payDoneOk": "좋아요!"});
+Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
+Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
+Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
+Object.assign(STR.es,{"legalT": "Información, condiciones y reembolsos", "legalSub": "Quién gestiona la app, artículos y precios de la Cámara del Arcoíris, política de pagos y reembolsos, condiciones de uso y privacidad.", "legalOpen": "Abrir", "vtLegal": "Al comprar pides la entrega inmediata y aceptas que el derecho de desistimiento de 14 días termina al entregarse los artículos. Si no llegan o se te cobra dos veces, siempre te reembolsamos.", "vtLegalLink": "Política de pagos y reembolsos"});
+Object.assign(STR.ja,{"legalT": "運営者情報・規約・返金", "legalSub": "運営者、虹の宝庫の商品と価格、支払いと返金のポリシー、利用規約、プライバシーポリシー。", "legalOpen": "見る", "vtLegal": "購入すると即時の引き渡しに同意し、引き渡し後は14日間の撤回権がなくなることを了承したものとみなされます。届かない・二重請求の場合は必ず返金します。", "vtLegalLink": "支払いと返金のポリシー"});
+Object.assign(STR.ko,{"legalT": "소개, 약관 및 환불", "legalSub": "운영자 정보, 무지개 보물고 상품과 가격, 결제 및 환불 정책, 이용약관, 개인정보처리방침.", "legalOpen": "보기", "vtLegal": "구매하면 즉시 지급에 동의하고, 지급 후에는 14일 청약철회권이 적용되지 않음을 확인한 것으로 봅니다. 아이템을 받지 못했거나 이중 결제된 경우 반드시 환불해 드려요.", "vtLegalLink": "결제 및 환불 정책"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
