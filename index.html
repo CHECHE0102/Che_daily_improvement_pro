@@ -2528,7 +2528,7 @@ function gemOut(id,i){ const g=game(), a=socketsOf(id), key=a[i]; if(!key) retur
 function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`; }
 const ADV_PAGES={coop:["🎓","tabExam"], think:["🧠","tabThink"], rank:["🏆","tabRank"]};
 /* the 冒險 tab in the bottom bar opens a small menu: adventure, exams, reasoning, leaderboard */
-const ADV_MENU=[["go","⚔️","tabAdv"],["coop","🎓","tabExam"],["think","🧠","tabThink"],["rank","🏆","tabRank"]];
+const ADV_MENU=[["go","⚔️","tabAdv"],["rank","🏆","tabRank"],["coop","🎓","tabExam"],["think","🧠","tabThink"]];
 function advMenuHtml(){ const cur=S.tab==="adv"?(ADV_PAGES[S.advTab]?S.advTab:"go"):null;
   return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu" role="menu">${ADV_MENU.map(([k,ic,l])=>{ const lk=featLock(k);
     return `<button role="menuitem" class="am-item${cur===k?" on":""}${lk?" locked":""}" data-act="amgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${lk?"🔒 ":""}${T(l)}</span></button>`; }).join("")}
@@ -3013,7 +3013,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.129";
+const APP_VERSION="2026.10.130";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
