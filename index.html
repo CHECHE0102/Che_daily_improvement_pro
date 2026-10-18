@@ -3103,7 +3103,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.143";
+const APP_VERSION="2026.10.144";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3613,7 +3613,7 @@ document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="play"&&(S.playMode|
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
-const FB_CONFIG={apiKey:"AIzaSyCMGO6INIRITrfhTT0IPR-U0O620xKcaYE",authDomain:"che-daily-improvement-pro.firebaseapp.com",projectId:"che-daily-improvement-pro",storageBucket:"che-daily-improvement-pro.firebasestorage.app",messagingSenderId:"935084997550",appId:"1:935084997550:web:dd1a7901e357e612a5a63f"};
+const FB_CONFIG={apiKey:"AIzaSyCMGO6INIRITrfhTT0IPR-U0O620xKcaYE",authDomain:location.hostname==="binbindaily.com"?"binbindaily.com":"che-daily-improvement-pro.firebaseapp.com",projectId:"che-daily-improvement-pro",storageBucket:"che-daily-improvement-pro.firebasestorage.app",messagingSenderId:"935084997550",appId:"1:935084997550:web:dd1a7901e357e612a5a63f"};
 const FB_V="10.12.2";
 Object.assign(STR.zh,{acctTitle:"雲端存檔", acctOff:"登入後，單字、測驗和遊戲進度會存到雲端。換手機或清除瀏覽器資料也不會不見，只要登入一次。", signIn:"用 Google 登入", signOut:"登出", signedAs:"已登入：{n}", synced:"已同步到雲端", syncing:"同步中…", syncFail:"雲端同步失敗，進度先存在這支手機，連上網路後會再試。", loginFail:"登入沒有完成，請再試一次。", merged:"已把這支手機的紀錄合併到雲端", signedOut:"已登出，進度仍保留在這支手機上", cloudOff:"目前無法連到雲端服務", acctShort:"登入保存進度"});
 Object.assign(STR.en,{acctTitle:"Cloud save", acctOff:"Sign in to save your words, quizzes and game progress to the cloud. Changing phones or clearing browser data won't lose anything, and you only sign in once.", signIn:"Sign in with Google", signOut:"Sign out", signedAs:"Signed in as {n}", synced:"Saved to the cloud", syncing:"Saving…", syncFail:"Couldn't reach the cloud. Progress is kept on this phone and will sync when you're back online.", loginFail:"Sign-in didn't finish. Please try again.", merged:"This phone's progress has been merged into your cloud save", signedOut:"Signed out. Progress stays on this phone.", cloudOff:"Cloud service is unavailable right now", acctShort:"Sign in to save progress"});
