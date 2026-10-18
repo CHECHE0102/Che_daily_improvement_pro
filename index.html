@@ -3013,7 +3013,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.128";
+const APP_VERSION="2026.10.129";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4203,7 +4203,7 @@ function dpSections(){
 const BM={lives:3, maxLives:4, intro:2500, fuse:15000, step:1000, min:4000, cap:15000, abc:"abcdefghilmnoprstuvwy"};
 /* tiny sound effects (WebAudio, unlocked on the first tap) */
 function sfxUnlock(){ try{ if(!S.ac){ const C=window.AudioContext||window.webkitAudioContext; if(C) S.ac=new C(); } if(S.ac&&S.ac.state==="suspended") S.ac.resume(); }catch(e){} }
-function sfx(freq,dur,type,vol,slide){ const ac=S.ac; if(!ac||ac.state!=="running") return; try{ const o=ac.createOscillator(), g=ac.createGain(), t=ac.currentTime; o.type=type||"square"; o.frequency.setValueAtTime(freq,t); if(slide) o.frequency.exponentialRampToValueAtTime(slide,t+dur); g.gain.setValueAtTime(vol||0.08,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur); o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t+dur+0.02); }catch(e){} }
+function sfxTone(freq,dur,type,vol,slide){ const ac=S.ac; if(!ac||ac.state!=="running") return; try{ const o=ac.createOscillator(), g=ac.createGain(), t=ac.currentTime; o.type=type||"square"; o.frequency.setValueAtTime(freq,t); if(slide) o.frequency.exponentialRampToValueAtTime(slide,t+dur); g.gain.setValueAtTime(vol||0.08,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur); o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t+dur+0.02); }catch(e){} }
 let PG_SYL=null;
 async function pgLoadSyl(){ if(PG_SYL) return PG_SYL; try{ PG_SYL=await (await fetch("games/syl.json")).json(); }catch(e){ PG_SYL={easy:["in","er","an","re","on","at","en","es"],mid:[],hard:[]}; } return PG_SYL; }
 function bmPickSyl(k){ const L=PG_SYL||{easy:["in","er","an","re"]}, r=Math.random(); const tier=k<6?"easy":k<16?(r<0.6?"easy":"mid"):(r<0.3?"easy":r<0.7?"mid":"hard"); const a=(L[tier]&&L[tier].length?L[tier]:L.easy); return a[Math.floor(Math.random()*a.length)]; }
@@ -4936,7 +4936,7 @@ function readBarInner(){
   const playing=READ.on&&!READ.paused, rec=READ.on?!!READ.audio:!!readRec();
   return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
 }
-function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)); }
+function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
 function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi)); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
 function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
 function readStart(){
@@ -5931,7 +5931,7 @@ function musicPlay(name){
   SND.track=name; SND.step=0; SND.next=SND.ctx.currentTime+0.1;
   const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(0.0001,now); g.exponentialRampToValueAtTime(musicLevel(), now+1.2);
   SND.timer=setInterval(musicSchedule, 80); musicSchedule(); }
-function musicForView(){ musicPlay(S.view==="battle"?"battle":"town"); musicDuck(!!(READ.on&&!READ.paused)); }
+function musicForView(){ musicPlay(S.view==="battle"?"battle":"town"); musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
 const musicLevel=()=>SND.duck?0.0001:(SND.track==="battle"?0.14:0.16);
 function musicDuck(on){ if(SND.duck===on) return; SND.duck=on; if(!SND.ctx||!SND.track) return;
   const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(Math.max(g.value,0.0001),now); g.exponentialRampToValueAtTime(musicLevel(), now+(on?0.35:1.5)); }
@@ -5957,7 +5957,8 @@ const SFX={
   right:t=>{ tone(SND.fx,t,hz(81),0.12,{type:"sine",v:0.2}); tone(SND.fx,t+0.09,hz(88),0.25,{type:"sine",v:0.2}); },
   wrong:t=>tone(SND.fx,t,150,0.22,{type:"square",v:0.1}),
   conquer:t=>{ SFX.win(t); [86,90,93].forEach((m,i)=>tone(SND.fx,t+0.75+i*0.1,hz(m),0.5,{type:"triangle",v:0.18})); }};
-function sfx(name){ if(!SND.opt.sfx) return; const c=sndInit(); if(!c||!SFX[name]) return; try{ SFX[name](c.currentTime+0.01); }catch(e){} }
+const examOn=()=>S.view==="ielts"||S.view==="toeic";   // IELTS / TOEIC test in progress: no music, no effects
+function sfx(name){ if(!SND.opt.sfx||examOn()) return; if(typeof name==="number") return sfxTone(...arguments); const c=sndInit(); if(!c||!SFX[name]) return; try{ SFX[name](c.currentTime+0.01); }catch(e){} }
 function sndToggle(k){ SND.opt[k]=!SND.opt[k]; sndSave(); if(k==="music"){ if(SND.opt.music){ SND.track=null; musicForView(); } else musicPlay(null); } else if(SND.opt.sfx) sfx("tap"); }
 function soundCard(){ return `<section class="card set-sec"><b>🔊 ${T("sndTitle")}</b><span class="muted sm-t">${T("sndSub")}</span>
   <div class="row"><button class="btn sm ${SND.opt.music?"":"ghost"}" data-act="sndmusic">🎵 ${T("sndMusic")}：${SND.opt.music?T("sndOn"):T("sndOff")}</button><button class="btn sm ${SND.opt.sfx?"":"ghost"}" data-act="sndsfx">💥 ${T("sndSfx")}：${SND.opt.sfx?T("sndOn"):T("sndOff")}</button></div></section>`; }
@@ -5986,6 +5987,12 @@ Object.assign(STR.hi,{"sndSub": "संगीत हमेशा बजता �
 Object.assign(STR.es,{"sndSub": "La música suena siempre y solo se apaga mientras se lee en voz alta una noticia."});
 Object.assign(STR.ja,{"sndSub": "BGM は常に流れ、ニュースの読み上げ中だけ自動で止まります。"});
 Object.assign(STR.ko,{"sndSub": "배경음악은 항상 나오고, 뉴스 읽어 주기를 들을 때만 자동으로 멈춰요."});
+Object.assign(STR.zh,{"sndSub": "背景音樂會一直播放，只有按「朗讀」聽新聞時會自動暫停；IELTS 和多益考試開始後，音樂和音效都會關掉。"});
+Object.assign(STR.en,{"sndSub": "Music plays all the time and fades out while a news article is read aloud. During an IELTS or TOEIC test, music and sound effects are off."});
+Object.assign(STR.hi,{"sndSub": "संगीत हमेशा बजता है, समाचार \"पढ़कर सुनाएँ\" चलने पर धीमा होकर रुक जाता है। IELTS या TOEIC टेस्ट के दौरान संगीत और ध्वनि प्रभाव बंद रहते हैं।"});
+Object.assign(STR.es,{"sndSub": "La música suena siempre y se apaga mientras se lee en voz alta una noticia. Durante un examen IELTS o TOEIC, la música y los efectos se desactivan."});
+Object.assign(STR.ja,{"sndSub": "BGM は常に流れ、ニュースの読み上げ中は自動で止まります。IELTS・TOEIC の試験中は BGM も効果音もオフになります。"});
+Object.assign(STR.ko,{"sndSub": "배경음악은 항상 나오고, 뉴스 읽어 주기를 들을 때는 자동으로 멈춰요. IELTS·토익 시험 중에는 음악과 효과음이 모두 꺼져요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
