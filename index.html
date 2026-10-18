@@ -780,6 +780,11 @@ body.vp-lock{touch-action:pan-x pan-y}
 .stam-bar{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}.stam-pips{display:inline-flex;gap:3px}.stam-pips i{width:14px;height:8px;border-radius:3px;background:var(--line)}.stam-pips i.on{background:#F2C14E}
 .st-card{gap:10px}.st-elder{width:150px;height:150px;object-fit:contain}.st-elder-ph{display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:50%;background:var(--card);border:2px solid var(--line)}
 .st-name{font-weight:800;color:var(--accent);font-size:15px}.st-text{font-size:16px!important;color:var(--ink)!important;line-height:1.7!important;text-align:left}
+.df{font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;display:inline-block;margin-top:2px;align-self:flex-start;width:max-content}.df.dfEasy{background:color-mix(in srgb,var(--wood) 18%,transparent);color:var(--wood)}.df.dfEven{background:color-mix(in srgb,var(--metal) 20%,transparent);color:var(--metal)}.df.dfHard{background:color-mix(in srgb,var(--fire) 18%,transparent);color:var(--fire)}
+.rest-bar{background:color-mix(in srgb,var(--water) 14%,transparent);color:var(--ink,inherit);border-radius:12px;padding:8px 12px;font-size:14px;margin-bottom:8px}.chip.rest{font-size:11px}
+.scar-tip{margin:0;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--fire) 10%,transparent)}
+.elder-tip{margin:0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--water) 12%,transparent)}
+.ex-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;width:100%;margin-top:6px}.ex-row .btn{margin-left:auto}.gem-opt.cur{opacity:.85}
 .sock-row{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.sock{width:28px;height:28px;border-radius:50%;border:2px dashed var(--line,#9aa);background:transparent;color:var(--muted,#789);font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:15px}
 .sock.full{border-style:solid;border-color:transparent}.gem{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:30% 30% 50% 50%;color:#fff;font-size:11px;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
 .gem-pick{margin:-4px 0 10px}.gem-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gem-opt{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line,#ccd);border-radius:12px;padding:8px 10px;text-align:left;color:inherit;font:inherit}.gem-opt small{margin-left:auto;color:var(--muted,#789)}
@@ -1687,7 +1692,7 @@ for(const e of ELS) TIER_LV.forEach((L,t)=>{ const q=pl(L);
 });
 /* element gems: 3 shards of one element and tier → 1 gem. A weapon gem adds attack, an armour gem adds defence and HP;
    a gem whose element matches the piece counts 1.5x. Gems stay in the piece they are set in; an unsocketing charm takes one out. */
-const GEM={atk:[5,6,7,8], def:[3,3,4,4], hp:[15,20,25,30], same:1.5, shards:3, wildDrop:0.15};
+const GEM={atk:[5,6,7,8], def:[3,3,4,4], hp:[15,20,25,30], same:1.5, shards:3, wildDrop:0.15, fee:[30,80,200,450]};   // fee: gold to craft a gem of tier Ⅰ–Ⅳ
 function gemsOf(){ const g=game(); g.gems=g.gems||{}; return g.gems; }
 function socketsOf(id){ const g=game(), it=ITEMS[id]; g.sock=g.sock||{}; const a=g.sock[id]||[]; return Array.from({length:it?it.sockets:0},(_,i)=>a[i]||null); }
 function gemVal(it, key){ if(!it||!key) return {}; const [el,ti]=key.split("-"), t=+ti, m=el===it.el?GEM.same:1;
@@ -1774,11 +1779,20 @@ function statsAt(lv){
   const t=b[0]===a[0]?0:(lv-a[0])/(b[0]-a[0]); const f=j=>Math.round(a[j]+(b[j]-a[j])*t);
   return {hp:f(1),atk:f(2),def:f(3),exp:f(4),gold:f(5)};
 }
+/* Town and wild monster strength = statsAt(level) × a multiplier per town / per level, fitted by simulation:
+   a town can be attacked TOWN_EARLY levels before its own level; at that point a player with plain gear of their tier
+   (no gems, no element advantage) wins about 60% of the time, with gems or the right element about 90%.
+   A wild monster of your own level: about 70% with plain gear, 95%+ with gems. */
+const TOWN_EARLY=3;
+const TOWN_K=[2.44,2.06,1.77,1.6,1.82,1.82,1.91,1.83,1.77,1.72,1.72,2.03,2,1.92,1.84,1.81,1.71,1.55,1.49,1.63,1.51,1.47,1.37,1.27,1.2,1.17,1.1,1.25,1.19,1.16,1.12,1];
+const WILD_K=[2.56,2.5,2.39,2.46,2.47,2.54,2.39,2.5,2.41,2.31,2.19,2.13,2.5,2.47,2.34,2.29,2.22,2.18,2.12,2.08,1.97,1.87,1.78,2.15,2.16,2.25,2.25,2.12,2.05,2.07,1.94,1.96,1.84,1.79,1.83,1.7,1.75,1.65,1.82,1.84,1.74,1.79,1.7,1.65,1.7,1.59,1.64,1.56,1.51,1.57];
+const BALOR={hp:1394,atk:125,def:52,exp:900,gold:400};   // fully gemmed Lv 50 with a neutral element wins ~70%; water gear with half the sockets ~95%
+const scaleSt=(st,k)=>({...st, hp:Math.round(st.hp*k), atk:Math.round(st.atk*k), def:Math.round(st.def*k)});
 const TJK={donegal:["ドニゴール","도니골"],kinsale:["キンセール","킨세일"],castlebar:["キャッスルバー","캐슬바"],clonmel:["クロンメル","클론멜"],mullingar:["マリンガー","멀링가"],portlaoise:["ポートリーシュ","포틀리시"],coleraine:["コールレーン","콜레인"],navan:["ナヴァン","나반"],bangor:["バンガー","뱅거"],dingle:["ディングル","딩글"],westport:["ウェストポート","웨스트포트"],killarney:["キラーニー","킬라니"],enniskillen:["エニスキレン","에니스킬렌"],armagh:["アーマー","아마"],sligo:["スライゴ","슬라이고"],wexford:["ウェックスフォード","웩스퍼드"],letterkenny:["レターケニー","레터케니"],athlone:["アスローン","애슬론"],tralee:["トラリー","트랄리"],kilkenny:["キルケニー","킬케니"],newry:["ニューリー","뉴리"],carlow:["カーロウ","칼로"],ennis:["エニス","에니스"],dundalk:["ダンドーク","던독"],drogheda:["ドロヘダ","드로이다"],waterford:["ウォーターフォード","워터퍼드"],derry:["デリー","데리"],galway:["ゴールウェイ","골웨이"],limerick:["リムリック","리머릭"],cork:["コーク","코크"],belfast:["ベルファスト","벨파스트"],dublin:["ダブリン","더블린"]};
 const FJK={donegal:["セルキー","셀키"],kinsale:["妖精犬クー・シー","요정견 쿠시"],castlebar:["ボダッハ","보다흐"],clonmel:["バーナーナッハ","바나나흐"],mullingar:["妖精の軍勢アオス・シー","요정 군대 아오스 시"],portlaoise:["冬の老婆カリャッハ","겨울 노파 칼리아흐"],coleraine:["火吹きアレン","불 뿜는 알렌"],navan:["クロム・クルアッハ","크롬 크루아흐"],bangor:["モリガン","모리안"],dingle:["人魚メロウ","인어 메로우"],westport:["チェンジリング","체인질링"],killarney:["レプラコーン","레프리콘"],enniskillen:["グロゴッホ","그로고흐"],armagh:["赤服の男フィア・ジャルグ","붉은 옷의 피어 다르그"],sligo:["水の猟犬ドバルクー","물의 사냥개 도바르쿠"],wexford:["クルーラホーン","클루리컨"],letterkenny:["妖精猫キャット・シー","요정 고양이 캣 시"],athlone:["プーカ","푸카"],tralee:["水馬アッハ・イシュカ","물말 아흐 이슈카"],kilkenny:["ウィル・オ・ウィスプ","도깨비불"],newry:["ガンコナー","간커나"],carlow:["飢えた男フィア・ゴルタ","굶주린 자 피어 고르타"],ennis:["リャナン・シー","리아난 시"],dundalk:["火吐く魔女カオラナッハ","불을 뿜는 케어해너흐"],drogheda:["亡霊の群れスルーア","망령 무리 슬루아"],waterford:["バンシー","밴시"],derry:["吸血王アバルタッハ","흡혈 군주 아바르타흐"],galway:["三つ首のエレン","머리 셋 엘렌"],limerick:["大海蛇オリフィースト","거대 뱀 올리페이스트"],cork:["首なし騎士デュラハン","목 없는 기사 듀라한"],belfast:["フォモールの巨人","포모르 거인"],dublin:["魔眼のバロール","마안의 발로르"]};
 const TOWNS=TOWN_ROWS.map((r,i)=>{
   const [id,zh,en,hi,es,pop,lon,lat]=r, f=FOES[id], lv=TOWN_LV[i];
-  const st= id==="dublin" ? {hp:1200,atk:108,def:45,exp:900,gold:400} : statsAt(pl(lv));
+  const st= id==="dublin" ? {...BALOR} : scaleSt(statsAt(pl(lv)), TOWN_K[i]);
   return {id, rank:i, name:{zh,en,hi,es,ja:TJK[id][0],ko:TJK[id][1]}, pop, lon, lat, lv, tax:2+Math.round(i*0.8),
     foe:{mid:f[0], name:{zh:f[1],en:f[2],hi:f[3],es:f[4],ja:FJK[id][0],ko:FJK[id][1]}}, el:f[5], lore:f[6], en:f[2], boss:id==="dublin", ...st};
 });
@@ -1945,7 +1959,7 @@ const WILD=[];
 function wildStatsAt(L){ const q=pl(L), i=Math.min(WILD_STATS.length-2,Math.floor(q)-1), t=q-(i+1), A=WILD_STATS[i], B=WILD_STATS[i+1];
   return [L, ...[1,2,3].map(j=>Math.round(A[j]+(B[j]-A[j])*t))]; }
 for(let LL=1; LL<=LV_MAX; LL++){
-  const [L,hp,atk,def]=wildStatsAt(LL);
+  const L=LL, {hp,atk,def}=scaleSt(statsAt(pl(LL)), WILD_K[LL-1]);
   const pool=CREATURES.filter(c=>L>=c[1]&&L<=c[2]), st0=statsAt(pl(L)), rank=L<=9?"young":L>=37?"ancient":"";
   for(let k=0;k<3;k++){
     const cr=pool[(L+k)%pool.length], el=ELS[(L*2+k)%5].k;
@@ -2070,11 +2084,17 @@ function allyCard(){
 /* ===== conquest page: available fights on top, beaten + locked ones in the monster notebook ===== */
 function wildCard(m, again){
   const beaten=wildBeaten(m), open=wildOpen(m);
-  return `<div class="mon wild${beaten?" own":""}${open?"":" locked"}"><span class="thumb sm el-th-${m.el}">${monSvg(m)}${elBadge(m.el)}</span><span class="it-main"><b>${esc(monName(m))}${beaten?` <span class="chip done">${T("wdBeaten")}</span>`:""}</b><span class="muted">Lv ${m.lv} · ${elName(m.el)} · HP ${m.hp}</span><span class="row" style="gap:4px">${open?advice(m):""}</span></span>
+  return `<div class="mon wild${beaten?" own":""}${open?"":" locked"}"><span class="thumb sm el-th-${m.el}">${monSvg(m)}${elBadge(m.el)}</span><span class="it-main"><b>${esc(monName(m))}${beaten?` <span class="chip done">${T("wdBeaten")}</span>`:""}</b><span class="muted">Lv ${m.lv} · ${elName(m.el)} · HP ${m.hp}</span><span class="row" style="gap:4px">${open?diffTag(m)+advice(m):""}</span></span>
     ${open?`<button class="btn sm ${beaten?"ghost":""}" data-mon="${m.id}">${beaten?T("trainBtn"):T("attack")}</button>`:`<span class="muted sm-t">${T("needLv",{n:m.lv})}</span>`}</div>`;
 }
+/* difficulty label: a quick simulation with your current gear (and today's ally) */
+function diffOf(m){ const g=game(), s=stats(), key=[m.id,g.lv,g.weapon,g.armor,JSON.stringify(g.sock&&[g.sock[g.weapon],g.sock[g.armor]]),(todayAlly()||{}).lv||0].join("|");
+  S.dfCache=S.dfCache||{}; if(S.dfCache[key]!=null) return S.dfCache[key];
+  const f=foeOf(m); let w=0; const N=60; for(let i=0;i<N;i++) if(simulate(f, i%10<7).win) w++;
+  const p=Math.round(w/N*100); S.dfCache[key]=p; return p; }
+function diffTag(m){ const p=diffOf(m), k=p>=85?"dfEasy":p>=50?"dfEven":"dfHard"; return `<span class="df ${k}" title="${esc(T("dfTip",{p}))}">${T(k)}</span>`; }
 function townRow(t){ const c=conquered(), own=!!c[t.id], open=canAttack(t);
-  return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span></span><span class="go-t">${own?"✓":open?"›":"🔒"}</span></button>`; }
+  return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span>${open&&!own?diffTag(t):""}</span><span class="go-t">${own?"✓":open?"›":"🔒"}</span></button>`; }
 function notebookHtml(){
   const g=game(), c=conquered();
   const wB=WILD.filter(m=>wildBeaten(m)).sort((a,b)=>b.lv-a.lv), wL=WILD.filter(m=>!wildOpen(m)), tB=TOWNS.filter(t=>c[t.id]), tL=TOWNS.filter(t=>!c[t.id]&&!canAttack(t));
@@ -2090,7 +2110,8 @@ function huntHtml(){
   const g=game(), c=conquered();
   const towns=TOWNS.filter(t=>!c[t.id]&&canAttack(t));
   const wild=WILD.filter(m=>wildOpen(m)&&!wildBeaten(m)).sort((a,b)=>a.lv-b.lv);
-  return `<div class="hunt"><div class="eyebrow">⚔️ ${T("huntTitle")}</div>
+  restCheck();
+  return `<div class="hunt">${g.rest>0?`<div class="rest-bar">😴 ${T("restBar",{n:g.rest,x:REST.mult})}</div>`:""}<div class="eyebrow">⚔️ ${T("huntTitle")}</div>
     ${towns.length?`<div class="mons">${towns.map(townRow).join("")}</div>`:""}
     <div class="eyebrow">🐾 ${T("wildTitle")}</div>
     ${(()=>{ const st=stamina(), nm=stamNextMin(); return `<div class="stam-bar" title="${esc(T("stamHint",{h:STAM_HOURS}))}"><span>⚡ ${T("stam")}</span><span class="stam-pips">${Array.from({length:STAM_MAX},(_,i)=>`<i class="${i<st.v?"on":""}"></i>`).join("")}</span><b>${st.v}/${STAM_MAX}</b>${nm?`<span class="muted sm-t">${T("stamNext",{m:nm>=60?Math.floor(nm/60)+"h"+String(nm%60).padStart(2,"0"):nm+"m"})}</span>`:""}</div>`; })()}
@@ -2109,7 +2130,7 @@ const townShort=t=>t.name[LANG]||t.name.en;
 const townName=t=>{ const n=townShort(t); return LANG==="en"||n===t.name.en?n:`${n} (${t.name.en})`; };
 const monName=m=>m.foe.name[LANG]||m.foe.name.en;
 const monSub=m=>LANG==="en"?"":m.foe.name.en;
-const needLvOf=t=>t.boss?t.lv:t.lv-1;
+const needLvOf=t=>t.boss?t.lv:Math.max(1,t.lv-TOWN_EARLY);
 const canAttack=t=>game().lv>=needLvOf(t);
 const fmtPop=n=>n>=1e6?(n/1e6).toFixed(2).replace(/0$/,"")+"M":n>=1e3?Math.round(n/1e3)+"k":String(n);
 function conquered(){ const g=game(); g.conq=g.conq||{}; return g.conq; }
@@ -2133,7 +2154,9 @@ function townCard(t){
   return `<div class="town-card${own?" own":""}">
     <div class="tc-top"><span class="thumb el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><div class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${T("pop",{n:fmtPop(t.pop)})} · Lv ${t.lv}</span></div></div>
     <div class="muted" style="font-size:14px">${own?T("taxLine",{n:t.tax}):T("holds",{m:esc(monName(t))})}</div>
-    <div class="row" style="gap:4px">${advice(t)}</div>
+    <div class="row" style="gap:4px">${open?diffTag(t):""}${advice(t)}</div>
+    ${t.boss&&!own?`<p class="sm-t elder-tip">🧙 ${T("balorHint")}</p>`:""}
+    ${scarOf(t)?`<p class="sm-t scar-tip">🩹 ${T("scarLine",{m:esc(monName(t)),p:Math.round(scarOf(t)*100)})}</p>`:""}
     ${open?`<button class="btn ${own?"ghost":""}" data-mon="${t.id}">${own?T("trainBtn"):T("attack")}</button>`:`<span class="muted sm-t">${T("lockedCity",{n:needLvOf(t)})}</span>`}
   </div>`;
 }
@@ -2185,7 +2208,7 @@ function migrateLv50(g){
 }   // deep copy so no two saves share arrays or maps
 function game(){ return S.game || (S.game=newGame()); }
 function saveGame(){ lsSave(); cloudMark(null); }
-const EXP_CURVE={k:50,p:1.6};   // EXP needed for the next level = k × lv^p (tuned by simulation: fastest full conquest ≈ 6 months)
+const EXP_CURVE={k:50,p:1.52};   // EXP needed for the next level = k × lv^p (tuned by simulation: a regular player ≈ 7 months, a very keen one ≈ 4.5)
 const expNeed=lv=>Math.round(EXP_CURVE.k*Math.pow(lv,EXP_CURVE.p));
 function stats(g=game()){
   const w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor], wt=w?itemTotal(w):{}, at=a?itemTotal(a):{};
@@ -2238,21 +2261,25 @@ function equip(id){
 function advice(m){
   const s=stats(), out=[];
   const wm=elMult(s.wEl,m.el), am=elMult(m.el,s.aEl);
-  if(wm>1) out.push(`<span class="adv good">${m.boss?T("advWin").replace(/×\s?1[.,]5/,"×1.25"):T("advWin")}</span>`); else if(wm<1) out.push(`<span class="adv bad">${T("advWlose")}</span>`);
-  if(am<1) out.push(`<span class="adv good">${T("advAwin")}</span>`); else if(am>1) out.push(`<span class="adv bad">${T("advAlose")}</span>`);
+  const bx=(k,a,b)=>m.boss?T(k).replace(new RegExp("×\\s?"+a.replace(".","[.,]")),"×"+b):T(k);
+  if(wm>1) out.push(`<span class="adv good">${bx("advWin","1.5",BOSS.wAdv)}</span>`); else if(wm<1) out.push(`<span class="adv bad">${bx("advWlose","0.67",BOSS.wDis)}</span>`);
+  if(am<1) out.push(`<span class="adv good">${bx("advAwin","0.67",BOSS.aAdv)}</span>`); else if(am>1) out.push(`<span class="adv bad">${bx("advAlose","1.5",BOSS.aDis)}</span>`);
   return out.join("");
 }
 /* Final boss (Dublin · Balor) rules — tweak here:
    BOSS.wAdv  weapon advantage multiplier vs the boss (normal monsters 1.5)
    BOSS.eyeEvery / BOSS.eye  every N boss turns the Evil Eye hits for atk × eye, ignoring armour element and half your defence
    BOSS.rageAt / BOSS.rage  below this share of HP the boss's attack is multiplied by rage */
-const BOSS={wAdv:1.25, eyeEvery:3, eye:1.3, rageAt:0.35, rage:1.25};
+/* battle randomness: damage varies ±roll, monsters land a critical hit (×1.5) with chance mCrit */
+const BATTLE_RNG={roll:0.2, mCrit:0.12};
+const BOSS={wAdv:1.25, wDis:0.85, aAdv:0.8, aDis:1.2, eyeEvery:3, eye:1.3, rageAt:0.35, rage:1.25};   // wDis/aAdv/aDis: the boss's own element counts less (normal monsters 0.67 / 0.67 / 1.5)
 function simulate(m, spellOk){
   const s=stats(), al=m.wild&&m.lv>=ALLY_LV?todayAlly():null;
   let php=s.hp, mhp=m.hp, ahp=al?al.hp:0; const ev=[]; let first=true, mt=0, raged=false;
   const awm=al?elMult(al.wEl,m.el):1, aam=al?elMult(m.el,al.aEl):1;
-  const roll=()=>0.9+Math.random()*0.2;
-  let wm=elMult(s.wEl,m.el); if(m.boss&&wm>1) wm=BOSS.wAdv;
+  const roll=()=>1-BATTLE_RNG.roll+Math.random()*BATTLE_RNG.roll*2, mcrit=()=>Math.random()<BATTLE_RNG.mCrit;
+  let wm=elMult(s.wEl,m.el); if(m.boss) wm= wm>1?BOSS.wAdv: wm<1?BOSS.wDis: 1;
+  const pam0=elMult(m.el,s.aEl), pam= m.boss ? (pam0<1?BOSS.aAdv: pam0>1?BOSS.aDis: 1) : pam0;
   for(let round=1; round<=40 && php>0 && mhp>0; round++){
     const crit=Math.random()<0.1 || (first&&spellOk);
     let dmg=Math.max(1, Math.round((s.atk*wm - m.def*0.5)*roll()*(crit?(first&&spellOk?2:1.5):1)));
@@ -2264,13 +2291,22 @@ function simulate(m, spellOk){
     if(m.boss&&mhp<m.hp*BOSS.rageAt){ rage=BOSS.rage; if(!raged){ raged=true; rageNow=true; } }
     const eye=m.boss&&mt%BOSS.eyeEvery===0;
     if(al&&ahp>0&&Math.random()<ALLY_AGGRO){ const t2=Math.max(1, Math.round((m.atk*aam - al.def*0.5)*roll())); ahp=Math.max(0,ahp-t2); ev.push({who:"m", tgt:"a", dmg:t2, php, mhp, ahp}); continue; }
+    const mc=!eye&&mcrit();
     let taken= eye ? Math.max(1, Math.round((m.atk*rage*BOSS.eye - s.def*0.25)*roll()))
-                   : Math.max(1, Math.round((m.atk*rage*elMult(m.el,s.aEl) - s.def*0.5)*roll()));
-    php=Math.max(0,php-taken); ev.push({who:"m", dmg:taken, eye, rage:rageNow, php, mhp, ahp});
+                   : Math.max(1, Math.round((m.atk*rage*pam - s.def*0.5)*roll()*(mc?1.5:1)));
+    php=Math.max(0,php-taken); ev.push({who:"m", dmg:taken, eye, crit:mc, rage:rageNow, php, mhp, ahp});
   }
   return {ev, win:mhp<=0 && php>0, maxP:s.hp, ally:al};
 }
 /* stamina for wild hunting: up to STAM_MAX, refills 1 point every STAM_HOURS hours */
+/* rested bonus: for every day away (after the first), the next REST.perDay winning battles give EXP × REST.mult, up to REST.max */
+const REST={perDay:3, max:9, mult:2};
+function restCheck(){ const g=game(), td=today(); if(g.lastDay===td) return; if(g.lastDay){ const gap=Math.round((Date.parse(td)-Date.parse(g.lastDay))/864e5); if(gap>=2) g.rest=Math.min(REST.max,(g.rest||0)+(gap-1)*REST.perDay); } g.lastDay=td; }
+/* lasting wounds: every lost attack on a town you have not taken yet leaves its monster with SCAR.per less HP (up to SCAR.max);
+   the wounds are gone once the town is conquered */
+const SCAR={per:0.06, max:0.3};
+function scarOf(m){ if(!m||m.wild) return 0; const g=game(); if(conquered()[m.id]) return 0; return Math.min(SCAR.max, SCAR.per*((g.scar||{})[m.id]||0)); }
+function foeOf(m){ const f=scarOf(m); return f?{...m, hp:Math.round(m.hp*(1-f)), scar:f}:m; }
 const STAM_MAX=6, STAM_HOURS=4;
 function stamina(){ const g=game(); const st=g.stam||(g.stam={v:STAM_MAX,t:Date.now()}); const step=STAM_HOURS*3600e3;
   if(st.v>=STAM_MAX){ st.t=Date.now(); return st; }
@@ -2282,7 +2318,7 @@ function startBattle(mid){
   const g=game(), m=MONS[mid]; if(!m) return;
   if(m.wild){ if(stamina().v<1) return toast(T("noStam",{m:stamNextMin()})); }
   else if(g.tickets<1) return toast(T("noTicket"));
-  S.battle={m, stage:"spell"};
+  S.battle={m:foeOf(m), stage:"spell"};
   // spell question needs at least one word in the dictionary
   if(!S.words.size) S.battle.stage="ready";
   else { const w=weightedPick([...S.words.values()],1)[0]; S.battle.q=makeQuestion(w); }
@@ -2305,16 +2341,23 @@ function fight(){
   if(res.win){
     let gold=B.m.gold;
     if(B.m.wild){ gold=Math.round(gold*wildGoldFactor(B.m.id)); if(!g.wildDay||g.wildDay.date!==today()) g.wildDay={date:today(),n:{}}; g.wildDay.n[B.m.id]=(g.wildDay.n[B.m.id]||0)+1; }
-    B.gold=gold; const before=g.lv; g.exp+=B.m.exp; g.gold+=gold; g.wins[B.m.id]=(g.wins[B.m.id]||0)+1;
+    restCheck(); const rest=(g.rest||0)>0; B.exp=B.m.exp*(rest?REST.mult:1); B.rest=rest; if(rest) g.rest--;
+    B.gold=gold; const before=g.lv; g.exp+=B.exp; g.gold+=gold; g.wins[B.m.id]=(g.wins[B.m.id]||0)+1;
     if(B.m.wild&&Math.random()<GEM.wildDrop){ const t=tierOfLv(B.m.lv); addShard(B.m.el,t,1); B.shard={el:B.m.el,t}; }
-    const c=conquered(); if(!B.m.wild&&!c[B.m.id]){ c[B.m.id]=today(); B.conquered=true; }
+    const c=conquered(); if(!B.m.wild&&!c[B.m.id]){ c[B.m.id]=today(); B.conquered=true; if(g.scar) delete g.scar[B.m.id]; }
     while(g.lv<LV_MAX&&g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; } if(g.lv>=LV_MAX) g.exp=Math.min(g.exp,expNeed(LV_MAX));
     B.lvUp=g.lv-before;
   }
+  if(!res.win&&!B.m.wild&&!conquered()[B.m.id]){ g.scar=g.scar||{}; const n0=g.scar[B.m.id]||0; if(SCAR.per*n0<SCAR.max-1e-9){ g.scar[B.m.id]=n0+1; B.scarNew=Math.round(Math.min(SCAR.max,SCAR.per*(n0+1))*100); } }
   saveGame(); render();
   clearInterval(S.btimer);
-  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); } renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:1150);
+  battleTimer();
 }
+function battleTimer(){
+  clearInterval(S.btimer);
+  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); } renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:(battleFast()?520:1150));
+}
+function battleFast(){ if(S.fastMem!=null) return S.fastMem; try{ return localStorage.getItem("che-pro-fast")==="1"; }catch(e){ return false; } }
 function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
 function monArt(m, hit){
   return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}">${monSvg(m,"ms-art")}<span class="ms-badge">${elBadge(m.el)}</span></div>`;
@@ -2364,7 +2407,8 @@ function viewBattle(){
       <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("retreat")}</button>
       <div class="vs">${monArt(m)}<div><div class="eyebrow">${esc(townName(m))} · Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
       <div class="row">${advice(m)||`<span class="adv">${T("advNone")}</span>`}</div>
-      ${m.wild&&m.lv>=ALLY_LV&&todayAlly()?(()=>{ const A=todayAlly(), wi=A.wId&&ITEMS[A.wId], ai=A.aId&&ITEMS[A.aId]; return `<div class="card ally-pre">🤝 ${T("alWith",{n:esc(A.n)})} · Lv ${A.lv}<div class="sm-t muted">${elBadge(A.wEl)} ${wi?esc(itemName(wi)):""} · ${elBadge(A.aEl)} ${ai?esc(itemName(ai)):""}</div></div>`; })():g.lv>=ALLY_LV?`<div class="card ally-pre muted">🤝 ${m.wild?T("alNoLow",{n:ALLY_LV+1}):T("alNoTown")}</div>`:""}
+      ${m.scar?`<p class="sm-t scar-tip">🩹 ${T("scarLine",{m:esc(monName(m)),p:Math.round(m.scar*100)})}</p>`:""}
+      ${m.wild&&m.lv>=ALLY_LV&&todayAlly()?(()=>{ const A=todayAlly(), wi=A.wId&&ITEMS[A.wId], ai=A.aId&&ITEMS[A.aId]; return `<div class="card ally-pre">🤝 ${T("alWith",{n:esc(A.n)})} · Lv ${A.lv}<div class="sm-t muted">${elBadge(A.wEl)} ${wi?esc(itemName(wi)):""} · ${elBadge(A.aEl)} ${ai?esc(itemName(ai)):""}</div></div>`; })():g.lv>=ALLY_LV?`<div class="card ally-pre muted">🤝 ${m.wild?T("alNoLow",{n:ALLY_LV}):T("alNoTown")}</div>`:""}
       ${m.boss?`<div class="card boss-rules"><b>${T("bossTitle")}</b><p>🔥 ${T("bossShield")}</p><p>👁 ${T("bossEye",{n:BOSS.eyeEvery})}</p><p>💢 ${T("bossRage",{p:Math.round(BOSS.rageAt*100)})}</p><p class="muted sm-t">${T("bossTip")}</p></div>`:""}
       <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
@@ -2373,16 +2417,16 @@ function viewBattle(){
   }
   const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp};
   const al=B.res.ally;
-  const log=ev.slice(0,upto).map(e=>e.who==="a"?`<li class="lp">🤝 ${T("logAlly",{a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="m"&&e.tgt==="a"?`<li class="lm">${T("logMonAlly",{m:esc(monName(m)),a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${e.rage?`<b>${T("bossRageLog",{m:esc(monName(m))})}</b> `:""}${e.eye?T("bossEyeLog",{m:esc(monName(m)),n:e.dmg}):T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
+  const log=ev.slice(0,upto).map(e=>e.who==="a"?`<li class="lp">🤝 ${T("logAlly",{a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="m"&&e.tgt==="a"?`<li class="lm">${T("logMonAlly",{m:esc(monName(m)),a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${e.rage?`<b>${T("bossRageLog",{m:esc(monName(m))})}</b> `:""}${e.crit?T("logCrit"):""}${e.eye?T("bossEyeLog",{m:esc(monName(m)),n:e.dmg}):T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
-    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}</span><b>+${m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.shard?`<div class="rw-row lvup"><span>💎 ${esc(T("pShard",{e:elName(B.shard.el),t:TIER[B.shard.t].n,n:1}))}</span></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
-    : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p></div>`) : "";
+    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}${B.rest?` <small class="chip rest">😴 ×${REST.mult}</small>`:""}</span><b>+${B.exp||m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.shard?`<div class="rw-row lvup"><span>💎 ${esc(T("pShard",{e:elName(B.shard.el),t:TIER[B.shard.t].n,n:1}))}</span></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
+    : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p>${B.scarNew?`<p class="sm-t" style="margin:6px 0 0">🩹 ${T("scarNew",{m:esc(monName(m)),p:B.scarNew})}</p>`:""}</div>`) : "";
   return `<div class="view">
     ${arenaScene(B, last, cur)}
     ${end}
     <ul class="blog">${log}</ul>
-    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${(m.wild?stamina().v>0:g.tickets>0)?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<button class="btn ghost" data-act="skip">${T("skipAnim")}</button>`}
+    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${(m.wild?stamina().v>0:g.tickets>0)?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<div class="row"><button class="btn ghost" data-act="bspeed" aria-pressed="${battleFast()}">⏩ ${battleFast()?T("spd1"):T("spd2")}</button><button class="btn ghost" data-act="skip">${T("skipAnim")}</button></div>`}
   </div>`;
 }
 
@@ -2422,17 +2466,21 @@ function itemRow(it, mode){
 /* ----- gem sockets ----- */
 const gemName=k=>{ const [el,t]=k.split("-"); return T("gemName",{e:elName(el),t:TIER[+t].n}); };
 const gemDot=k=>{ const [el,t]=k.split("-"); return `<span class="gem" style="background:var(--${el})" title="${esc(gemName(k))}">${TIER[+t].n}</span>`; };
-function sockHtml(it){ return `<div class="sock-row">${socketsOf(it.id).map((k,i)=>k?`<button class="sock full" data-act="gemout" data-k="${it.id}|${i}" aria-label="${esc(gemName(k))}">${gemDot(k)}</button>`:`<button class="sock" data-act="gempick" data-k="${it.id}|${i}" aria-label="${T("gemAdd")}">+</button>`).join("")}</div>`; }
-function gemPicker(it){ const gs=Object.entries(gemsOf()).filter(([k,n])=>n>0);
-  return `<div class="card gem-pick"><b>${T("gemPickT")}</b>${gs.length?`<div class="gem-list">${gs.map(([k,n])=>{ const v=gemVal(it,k); return `<button class="gem-opt" data-act="gemin" data-k="${k}">${gemDot(k)}<span>${esc(gemName(k))} ×${n}</span><small>${it.slot==="weapon"?T("atkPlus",{n:v.atk}):T("defPlus",{d:v.def,h:v.hp})}</small></button>`; }).join("")}</div>`:`<p class="muted sm-t">${T("gemNone")}</p>`}<button class="btn ghost sm" data-act="gempickx">✕</button></div>`; }
+function sockHtml(it){ return `<div class="sock-row">${socketsOf(it.id).map((k,i)=>k?`<button class="sock full" data-act="gempick" data-k="${it.id}|${i}" aria-label="${esc(gemName(k))}">${gemDot(k)}</button>`:`<button class="sock" data-act="gempick" data-k="${it.id}|${i}" aria-label="${T("gemAdd")}">+</button>`).join("")}</div>`; }
+function gemPicker(it){ const gs=Object.entries(gemsOf()).filter(([k,n])=>n>0), P=S.sockPick, cur=P&&socketsOf(it.id)[P.i], g=game();
+  const top=cur?`<b>${T("gemRepT")}</b><div class="gem-opt cur">${gemDot(cur)}<span>${esc(gemName(cur))}</span></div><p class="muted sm-t">${T("gemRepSub",{g:esc(gemName(cur))})}</p>
+    <button class="btn ghost sm" data-act="gemout" data-k="${it.id}|${P.i}" ${(g.charms||0)<1?"disabled":""}>🪄 ${T("gemOutBtn",{n:g.charms||0})}</button>`:`<b>${T("gemPickT")}</b>`;
+  return `<div class="card gem-pick">${top}${gs.length?`<div class="gem-list">${gs.map(([k,n])=>{ const v=gemVal(it,k); return `<button class="gem-opt" data-act="gemin" data-k="${k}">${gemDot(k)}<span>${esc(gemName(k))} ×${n}</span><small>${it.slot==="weapon"?T("atkPlus",{n:v.atk}):T("defPlus",{d:v.def,h:v.hp})}</small></button>`; }).join("")}</div>`:`<p class="muted sm-t">${T("gemNone")}</p>`}<button class="btn ghost sm" data-act="gempickx">✕</button></div>`; }
 function gemIn(key){ const P=S.sockPick, g=game(); if(!P) return; const gs=gemsOf(); if(!(gs[key]>0)) return;
-  const a=socketsOf(P.id); if(a[P.i]) return; a[P.i]=key; g.sock[P.id]=a; gs[key]--; if(!gs[key]) delete gs[key]; S.sockPick=null; saveGame(); toast(T("gemSet",{g:gemName(key)})); render(); }
+  const a=socketsOf(P.id), old=a[P.i];
+  if(old){ const ask=P.id+"|"+P.i+"|"+key; if(S.gemRepAsk!==ask){ S.gemRepAsk=ask; return toast(T("gemRepAsk",{g:gemName(old)})); } S.gemRepAsk=null; }
+  a[P.i]=key; g.sock[P.id]=a; gs[key]--; if(!gs[key]) delete gs[key]; S.sockPick=null; saveGame(); toast(T("gemSet",{g:gemName(key)})); render(); }
 function gemOut(id,i){ const g=game(), a=socketsOf(id), key=a[i]; if(!key) return;
   if((g.charms||0)<1) return toast(T("gemNoCharm"));
   if(S.gemOutAsk!==id+"|"+i){ S.gemOutAsk=id+"|"+i; return toast(T("gemOutAsk",{g:gemName(key)})); }
   S.gemOutAsk=null; g.charms--; a[i]=null; g.sock[id]=a; const gs=gemsOf(); gs[key]=(gs[key]||0)+1; saveGame(); toast(T("gemOut",{g:gemName(key)})); render(); }
 function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`; }
-function viewAdv(){
+function viewAdv(){ restCheck();
   const g=game(), s=stats(), need=expNeed(g.lv);
   const sub=S.advTab||"go";
   const seg=(k,l)=>`<button data-advtab="${k}" aria-pressed="${sub===k}"${featLock(k)?' class="locked"':""}>${featLock(k)?"🔒 ":""}${l}</button>`;
@@ -2489,15 +2537,16 @@ const LUCK={
   // 轉盤上的順序就是這裡的順序（從正上方順時針）
   wheel:[
     {type:"gold",   n:30,  w:22},
-    {type:"charm",  n:1,   w:20},
+    {type:"charm",  n:1,   w:6},
     {type:"ticket", n:1,   w:14},
     {type:"gold",   n:80,  w:12},
     {type:"lotto",  n:1,   w:10},
-    {type:"charm",  n:1,   w:10},
+    {type:"charm",  n:1,   w:4},
     {type:"gold",   n:200, w:6},
-    {type:"charm",  n:2,   w:6}
+    {type:"charm",  n:2,   w:1}
   ],
   // 刮刮樂：cost = 要幾張彩券；odds = [Ⅰ, Ⅱ, Ⅲ, Ⅳ] 級碎片的權重；double = 一次拿到 2 個碎片的機率（%）
+  goldLotto:{price:300, perDay:3},   // 金幣換幸運草：價格、每天上限
   scratch:[
     {id:"bronze", cost:2, odds:[70,25,5,0],   double:5},
     {id:"silver", cost:3, odds:[40,40,17,3],  double:10},
@@ -2582,6 +2631,9 @@ function spinWheel(){
 }
 
 /* ----- scratch cards ----- */
+function exLeft(){ const g=game(); return g.exDate===today()?Math.max(0,LUCK.goldLotto.perDay-(g.exN||0)):LUCK.goldLotto.perDay; }
+function goldToLotto(){ const g=game(), c=LUCK.goldLotto.price; if(exLeft()<1) return toast(T("exNone")); if(g.gold<c) return toast(T("noGold",{n:c-g.gold}));
+  if(g.exDate!==today()){ g.exDate=today(); g.exN=0; } g.exN++; g.gold-=c; g.lotto=(g.lotto||0)+1; saveGame(); toast(T("exDone")); render(); }
 function buyScratch(id){
   const c=LUCK.scratch.find(x=>x.id===id); if(!c) return;
   const g=game(); if((g.lotto||0)<c.cost) return toast(T("noLotto"));
@@ -2619,7 +2671,8 @@ function initScratch(){
 }
 
 /* ----- shards → gems ----- */
-function craftGem(k){ const s=shardsOf(); if((s[k]||0)<GEM.shards) return; s[k]-=GEM.shards; if(!s[k]) delete s[k]; const gs=gemsOf(); gs[k]=(gs[k]||0)+1; saveGame(); toast(T("gemMade",{g:gemName(k)})); render(); }
+function craftGem(k){ const s=shardsOf(), g=game(); if((s[k]||0)<GEM.shards) return; const fee=GEM.fee[+k.split("-")[1]]||0;
+  if(g.gold<fee) return toast(T("noGold",{n:fee-g.gold})); g.gold-=fee; s[k]-=GEM.shards; if(!s[k]) delete s[k]; const gs=gemsOf(); gs[k]=(gs[k]||0)+1; saveGame(); toast(T("gemMade",{g:gemName(k)})); render(); }
 function gemBag(){ const g=game(), gs=Object.entries(gemsOf()).filter(([k,n])=>n>0);
   return `<section class="card"><h3>${T("gemBagT")}</h3><p class="muted sm-t">${T("gemBagSub")}</p>${gs.length?`<div class="gem-list">${gs.map(([k,n])=>`<span class="gem-opt">${gemDot(k)}<span>${esc(gemName(k))} ×${n}</span></span>`).join("")}</div>`:`<p class="muted sm-t">${T("gemNone")}</p>`}
     <div class="rw-row"><span>🪄 ${T("charmName")}</span><b>${g.charms||0}</b></div></section>`; }
@@ -2627,7 +2680,7 @@ function shardGrid(){
   const s=shardsOf(), need=GEM.shards;
   const head=`<div class="sh-row sh-head"><span></span>${TIER.map(t=>`<span>${t.n}</span>`).join("")}</div>`;
   const rows=ELS.map(e=>`<div class="sh-row">${elBadge(e.k,true)}${TIER.map((t,i)=>{ const k=e.k+"-"+i, n=s[k]||0;
-    return n>=need?`<button class="sh-cell ready" data-act="gemcraft" data-k="${k}"><b>${n}/${need}</b><span>${T("gemCraft")}</span></button>`
+    return n>=need?`<button class="sh-cell ready" data-act="gemcraft" data-k="${k}"><b>${n}/${need}</b><span>${T("gemCraft")} · ${GEM.fee[i]}${T("goldShort")}</span></button>`
       :`<div class="sh-cell${n?"":" zero"}"><b>${n}/${need}</b><i style="width:${n/need*100}%"></i></div>`; }).join("")}</div>`).join("");
   return `<div class="sh-grid">${head}${rows}</div>`;
 }
@@ -2644,7 +2697,8 @@ function viewLuck(){
     <button class="btn sm" data-act="scbuy" data-k="${c.id}" ${L<c.cost?"disabled":""}>${T("scCost",{n:c.cost})}</button></div>`).join("");
   return `<div class="luck">
     <section class="luck-head"><div class="lh-ic">${TICKET_SVG}</div><div><div class="eyebrow">${T("lotto")}</div><b id="lottoLeft" class="lh-n">${L}</b></div><p class="muted sm-t">${T("luckSub",{n:LUCK.reviewTicketsPerDay})}</p>
-      ${L<1?`<button class="btn ghost sm" data-tab="dict">${T("revStart")}</button>`:""}</section>
+      ${L<1?`<button class="btn ghost sm" data-tab="dict">${T("revStart")}</button>`:""}
+      <div class="ex-row"><span class="sm-t">🪙 ${T("exSub",{c:LUCK.goldLotto.price,n:exLeft(),m:LUCK.goldLotto.perDay})}</span><button class="btn ghost sm" data-act="goldlotto" ${exLeft()<1||g.gold<LUCK.goldLotto.price?"disabled":""}>${T("exBtn",{c:LUCK.goldLotto.price})}</button></div></section>
     <section class="card wheel-card"><h3>${T("wheelTitle")}</h3>
       <div class="wheel"><div class="wheel-ptr" aria-hidden="true"></div><div id="wheelDisc" class="wheel-disc" style="transform:rotate(${S.wheelRot||0}deg)">${wheelSvg()}</div></div>
       <div class="wheel-msg" aria-live="polite">${S.wheelMsg?esc(S.wheelMsg):"&nbsp;"}</div>
@@ -2887,7 +2941,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.113";
+const APP_VERSION="2026.10.114";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -2896,7 +2950,7 @@ function devFooter(){
 function applyMast(){ const m=document.querySelector("header.mast"); if(m) m.classList.toggle("dev", !!DEV); if(typeof maintApply==="function") maintApply(); }
 
 
-const HELP={"zh": {"title": "使用說明", "intro": "每天花 10–15 分鐘讀一篇愛爾蘭新聞，邊學英文邊玩遊戲。", "close": "💚 做這個 App，是希望能幫助每一個想學好英文的人。每天進步一點點，英文就會越來越好。祝你學習愉快！", "sign": "— CheChe", "ok": "開始使用", "secs": [["📰", "每日三步驟", "① 複習測驗：抽考前幾天查過的單字，越不熟的字越容易被抽到。② 閱讀頭條：看不懂的字直接點，會顯示翻譯、相似詞、反義詞和例句，並自動存進字典。③ 讀後測驗：固定 10 題，每題都有講解，答錯的更要看。"], ["📚", "字典", "查過的字都會存在這裡，可以搜尋，也可以依「最不熟」排序。上方的「間隔複習」每完成一次可以拿 1 片幸運草（每天最多 3 張）。"], ["🎯", "英文程度", "到「設定」選 B1、B2、C1 或 IELTS 7–8，文章會換成對應難度的版本。"], ["⚔️", "冒險", "測驗答對就能賺金幣和出征令。到商店買五行裝備，用出征令攻打愛爾蘭各城鎮的怪物，打贏就能佔領城鎮、每天收稅。武器屬性克制怪物時傷害 ×1.5，出征前記得看五行圖挑裝備。目標：從最小的小鎮一路打到都柏林，佔領整座島！"], ["🍀", "幸運屋", "1 片幸運草可以轉一次命運輪盤，2 片以上可以買刮刮樂。刮到的元素碎片，同屬性、同等級集滿 3 個就能合成元素寶石，鑲在武器或防具上變強。"], ["🤝", "合作與排行榜", "登入後可以和朋友開房間，一起找文章裡的錯字打倒魔王。在設定取個暱稱，就能用等級、HP、攻擊力和大家比排名。"], ["⚙️", "設定", "用 Google 登入一次，進度就會存到雲端，換手機也不會不見。語言、英文程度和備份也都在這裡。"], ["📱", "小技巧", "在 Safari 按「分享」→「加入主畫面」，就能像 App 一樣從主畫面打開。"]]}, "en": {"title": "How to use", "intro": "Spend 10–15 minutes a day reading one Irish news story, and play a game while you learn.", "close": "💚 I made this app hoping it helps everyone who wants to learn English. A little progress every day adds up. Enjoy learning!", "sign": "— CheChe", "ok": "Let's go", "secs": [["📰", "Three steps a day", "① Review quiz: words you looked up on earlier days, and the ones you know least come up most. ② Read the headline: tap any word you don't know to see its meaning, synonyms, opposites and an example; it's saved to your dictionary. ③ After-reading quiz: always 10 questions, each with an explanation, especially the ones you get wrong."], ["📚", "Words", "Every word you look up is saved here. Search it or sort by \"Weakest\". Each finished Spaced review at the top earns 1 shamrock (up to 3 a day)."], ["🎯", "English level", "In Settings choose B1, B2, C1 or IELTS 7–8 and articles switch to a version at that level."], ["⚔️", "Quest", "Correct answers earn gold and quest passes. Buy elemental gear in the shop and use passes to fight the monsters in Ireland's towns. Win to conquer a town and collect taxes every day. A weapon whose element beats the monster deals ×1.5 damage, so check the five-element chart first. Goal: fight from the smallest village all the way to Dublin and conquer the whole island!"], ["🍀", "Luck", "1 shamrock spins the Wheel of Fate once; 2 or more buy a scratch card. Collect 3 element shards of the same element and tier to forge a piece of gear."], ["🤝", "Co-op & ranking", "Once signed in, open a room with a friend and hunt for the mistakes in an article together to beat the boss. Set a nickname in Settings to compare level, HP and attack on the leaderboard."], ["⚙️", "Settings", "Sign in with Google once and your progress is saved to the cloud, so a new phone won't lose anything. Language, English level and backups are here too."], ["📱", "Tip", "In Safari tap Share → Add to Home Screen to open it from your home screen like an app."]]}, "hi": {"title": "कैसे इस्तेमाल करें", "intro": "रोज़ 10–15 मिनट एक आयरिश ख़बर पढ़ें, और सीखते हुए खेल भी खेलें।", "close": "💚 मैंने यह ऐप इस उम्मीद में बनाया है कि यह अंग्रेज़ी सीखना चाहने वाले हर व्यक्ति की मदद करे। रोज़ थोड़ा-थोड़ा सुधार बड़ा फ़र्क़ लाता है। सीखने का आनंद लें!", "sign": "— CheChe", "ok": "शुरू करें", "secs": [["📰", "रोज़ के तीन चरण", "① दोहराई क्विज़: पिछले दिनों देखे गए शब्द; जो कम आते हैं वे ज़्यादा पूछे जाते हैं। ② मुख्य ख़बर पढ़ें: न समझ आने वाले शब्द पर टैप करें; अर्थ, समानार्थी, विलोम और उदाहरण दिखेंगे और शब्द शब्दकोश में सहेजा जाएगा। ③ पढ़ने के बाद क्विज़: हमेशा 10 प्रश्न, हर एक की व्याख्या के साथ।"], ["📚", "शब्दकोश", "देखे गए सभी शब्द यहाँ सहेजे जाते हैं। खोजें या \"सबसे कमज़ोर\" से क्रम लगाएँ। ऊपर की अंतराल दोहराव पूरी करने पर 1 शैमरॉक मिलता है (दिन में अधिकतम 3)।"], ["🎯", "अंग्रेज़ी स्तर", "सेटिंग्स में B1, B2, C1 या IELTS 7–8 चुनें; लेख उसी स्तर के संस्करण में बदल जाएँगे।"], ["⚔️", "साहसिक", "सही उत्तरों से सोना और अभियान पास मिलते हैं। दुकान से तत्व वाले उपकरण खरीदें और पास से आयरलैंड के शहरों के दानवों से लड़ें। जीतने पर शहर आपका, और रोज़ कर मिलेगा। जो हथियार दानव के तत्व को हराता है वह ×1.5 नुकसान करता है, इसलिए पहले पंचतत्व चार्ट देखें। लक्ष्य: सबसे छोटे गाँव से डबलिन तक जीतकर पूरा द्वीप जीतना!"], ["🍀", "किस्मत", "1 शैमरॉक से पहिया एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड। एक ही तत्व और स्तर के 3 टुकड़े जमा करके उपकरण बनाएँ।"], ["🤝", "साथ में और रैंकिंग", "साइन इन के बाद दोस्त के साथ कमरा बनाएँ और लेख की ग़लतियाँ साथ ढूँढकर दानव को हराएँ। सेटिंग्स में उपनाम चुनें और लीडरबोर्ड पर लेवल, HP व आक्रमण की तुलना करें।"], ["⚙️", "सेटिंग्स", "एक बार Google से साइन इन करें, प्रगति क्लाउड में सहेजी जाएगी और फ़ोन बदलने पर भी नहीं खोएगी। भाषा, अंग्रेज़ी स्तर और बैकअप भी यहीं हैं।"], ["📱", "सुझाव", "Safari में शेयर → होम स्क्रीन में जोड़ें दबाएँ, फिर इसे ऐप की तरह होम स्क्रीन से खोलें।"]]}, "es": {"title": "Cómo se usa", "intro": "Dedica 10–15 minutos al día a leer una noticia irlandesa y juega mientras aprendes.", "close": "💚 Hice esta app con la esperanza de ayudar a todas las personas que quieren aprender inglés. Un poco cada día marca la diferencia. ¡Disfruta aprendiendo!", "sign": "— CheChe", "ok": "¡Vamos!", "secs": [["📰", "Tres pasos al día", "① Test de repaso: palabras que consultaste otros días; las que menos dominas salen más. ② Lee el titular: toca cualquier palabra que no entiendas para ver su significado, sinónimos, antónimos y un ejemplo; se guarda en tu diccionario. ③ Test después de leer: siempre 10 preguntas, cada una con su explicación."], ["📚", "Diccionario", "Aquí se guardan todas las palabras que consultas. Puedes buscarlas u ordenarlas por «Más débiles». Cada «Repaso espaciado» terminado da 1 trébol (máximo 3 al día)."], ["🎯", "Nivel de inglés", "En Ajustes elige B1, B2, C1 o IELTS 7–8 y los artículos cambian a la versión de ese nivel."], ["⚔️", "Aventura", "Las respuestas correctas dan oro y pases. Compra equipo elemental en la tienda y usa los pases para luchar contra los monstruos de las ciudades de Irlanda. Si ganas, conquistas la ciudad y cobras impuestos cada día. Un arma cuyo elemento vence al del monstruo hace ×1,5 de daño, así que mira primero el gráfico de los cinco elementos. Objetivo: llegar desde el pueblo más pequeño hasta Dublín y conquistar toda la isla."], ["🍀", "Suerte", "Con 1 trébol giras la Rueda del destino; con 2 o más compras un rasca y gana. Junta 3 fragmentos del mismo elemento y nivel para forjar un equipo."], ["🤝", "Cooperativo y ranking", "Con la sesión iniciada, abre una sala con un amigo y buscad juntos los errores de un artículo para vencer al jefe. Elige un apodo en Ajustes para comparar nivel, HP y ataque en la clasificación."], ["⚙️", "Ajustes", "Inicia sesión con Google una vez y tu progreso se guarda en la nube; si cambias de móvil no pierdes nada. Aquí también están el idioma, el nivel de inglés y las copias de seguridad."], ["📱", "Consejo", "En Safari toca Compartir → Añadir a pantalla de inicio para abrirla como una app."]]}, "ja": {"title": "使い方", "intro": "1日10〜15分、アイルランドのニュースを1本読んで、ゲームも楽しみながら英語を学びましょう。", "close": "💚 このアプリは、英語を学びたいすべての人の役に立てたらと思って作りました。毎日少しずつの積み重ねが力になります。楽しく学んでください！", "sign": "— CheChe", "ok": "はじめる", "secs": [["📰", "毎日の3ステップ", "① 復習テスト：前の日に調べた単語から出題。苦手な単語ほど出やすくなります。② トップ記事を読む：わからない単語をタップすると、意味・類義語・反対語・例文が表示され、単語帳に保存されます。③ 読後テスト：いつも10問、全問に解説付き。"], ["📚", "単語帳", "調べた単語はすべてここに保存されます。検索や「苦手順」での並べ替えもできます。上の「間隔反復」を1回終えるとクローバーが1枚（1日最大3枚）。"], ["🎯", "英語レベル", "設定で B1・B2・C1・IELTS 7–8 を選ぶと、記事がそのレベルの版に切り替わります。"], ["⚔️", "冒険", "正解するとゴールドと出撃券がもらえます。ショップで五行の装備を買い、出撃券でアイルランド各地の魔物に挑みましょう。勝てばその町を征服し、毎日税金が入ります。武器の属性が魔物に勝っているとダメージ×1.5なので、出撃前に五行の図を確認しましょう。目標：いちばん小さな村からダブリンまで攻め上がり、島全体を征服！"], ["🍀", "幸運", "クローバー1枚で運命のルーレットを1回、2枚以上でスクラッチカードが買えます。同じ属性・ランクのかけらを3個集めると装備を合成できます。"], ["🤝", "協力とランキング", "ログインすると友達とルームを作り、記事の間違いを一緒に探してボスを倒せます。設定でニックネームを決めると、レベル・HP・攻撃力でランキングに参加できます。"], ["⚙️", "設定", "Google で一度ログインすると進行状況がクラウドに保存され、機種変更しても消えません。言語・英語レベル・バックアップもここにあります。"], ["📱", "ヒント", "Safari で「共有」→「ホーム画面に追加」を押すと、アプリのようにホーム画面から開けます。"]]}, "ko": {"title": "사용 방법", "intro": "하루 10~15분, 아일랜드 뉴스 한 편을 읽고 게임도 즐기며 영어를 배워 보세요.", "close": "💚 영어를 배우고 싶은 모든 분께 도움이 되길 바라며 이 앱을 만들었어요. 매일 조금씩 쌓이면 영어가 점점 늘어요. 즐겁게 공부하세요!", "sign": "— CheChe", "ok": "시작하기", "secs": [["📰", "매일 3단계", "① 복습 퀴즈: 전에 찾아본 단어가 나와요. 잘 모르는 단어일수록 더 자주 나와요. ② 헤드라인 읽기: 모르는 단어를 누르면 뜻, 비슷한 말, 반대말, 예문이 나오고 단어장에 저장돼요. ③ 읽은 후 퀴즈: 항상 10문제, 모든 문제에 해설이 있어요."], ["📚", "단어장", "찾아본 단어는 모두 여기에 저장돼요. 검색하거나 '약한 순'으로 정렬할 수 있어요. 위의 '간격 복습'을 한 번 끝낼 때마다 클로버 1장 (하루 최대 3장)."], ["🎯", "영어 수준", "설정에서 B1, B2, C1, IELTS 7–8 중에서 고르면 기사가 그 수준의 버전으로 바뀌어요."], ["⚔️", "모험", "정답을 맞히면 골드와 출정권을 받아요. 상점에서 오행 장비를 사고, 출정권으로 아일랜드 마을의 괴물과 싸우세요. 이기면 마을을 정복하고 매일 세금을 받아요. 무기 속성이 괴물을 이기면 피해 ×1.5이니 출정 전에 오행 그림을 확인하세요. 목표: 가장 작은 마을부터 더블린까지 정복해 섬 전체를 차지하기!"], ["🍀", "행운", "클로버 1장으로 운명의 룰렛을 한 번, 2장 이상이면 스크래치 카드를 살 수 있어요. 같은 속성·등급 조각 3개를 모으면 장비를 합성할 수 있어요."], ["🤝", "협동과 랭킹", "로그인하면 친구와 방을 만들어 기사 속 틀린 곳을 함께 찾아 보스를 물리칠 수 있어요. 설정에서 닉네임을 정하면 레벨·HP·공격력으로 랭킹에 참여해요."], ["⚙️", "설정", "Google로 한 번 로그인하면 진행 상황이 클라우드에 저장돼 휴대폰을 바꿔도 사라지지 않아요. 언어, 영어 수준, 백업도 여기에 있어요."], ["📱", "팁", "Safari에서 '공유' → '홈 화면에 추가'를 누르면 앱처럼 홈 화면에서 열 수 있어요."]]}};
+const HELP={"zh": {"title": "使用說明", "intro": "每天花 10–15 分鐘讀一篇愛爾蘭新聞，邊學英文邊玩遊戲。", "close": "💚 做這個 App，是希望能幫助每一個想學好英文的人。每天進步一點點，英文就會越來越好。祝你學習愉快！", "sign": "— CheChe", "ok": "開始使用", "secs": [["📰", "每日三步驟", "① 複習測驗：抽考前幾天查過的單字，越不熟的字越容易被抽到。② 閱讀頭條：看不懂的字直接點，會顯示翻譯、相似詞、反義詞和例句，並自動存進字典。③ 讀後測驗：固定 10 題，每題都有講解，答錯的更要看。"], ["📚", "字典", "查過的字都會存在這裡，可以搜尋，也可以依「最不熟」排序。上方的「間隔複習」每完成一次可以拿 1 片幸運草（每天最多 3 張）。"], ["🎯", "英文程度", "到「設定」選 B1、B2、C1 或 IELTS 7–8，文章會換成對應難度的版本。"], ["⚔️", "冒險", "測驗答對就能賺金幣和出征令。到商店買五行裝備，用出征令攻打愛爾蘭各城鎮的怪物，打贏就能佔領城鎮、每天收稅。武器屬性克制怪物時傷害 ×1.5，出征前記得看五行圖挑裝備。目標：從最小的小鎮一路打到都柏林，佔領整座島！ 城鎮可以比你的等級早 3 級挑戰，每隻怪物都會標「輕鬆／勢均力敵／危險」，那是用你現在的裝備預估的勝率。打輸了也不是白打：還沒佔領的城鎮，怪物會帶著傷，下次 HP 會少一點。隔幾天沒來，回來後前幾場勝利經驗值 ×2。"], ["🍀", "幸運屋", "1 片幸運草可以轉一次命運輪盤，2 片以上可以買刮刮樂。刮到的元素碎片，同屬性、同等級集滿 3 個就能合成元素寶石，鑲在武器或防具上變強。 合成寶石要付一點金幣；寶石可以直接換掉（舊的會碎掉），想留著舊寶石就用解鑲符取下。金幣也能換幸運草，每天最多 3 次。"], ["🤝", "合作與排行榜", "登入後可以和朋友開房間，一起找文章裡的錯字打倒魔王。在設定取個暱稱，就能用等級、HP、攻擊力和大家比排名。"], ["⚙️", "設定", "用 Google 登入一次，進度就會存到雲端，換手機也不會不見。語言、英文程度和備份也都在這裡。"], ["📱", "小技巧", "在 Safari 按「分享」→「加入主畫面」，就能像 App 一樣從主畫面打開。"]]}, "en": {"title": "How to use", "intro": "Spend 10–15 minutes a day reading one Irish news story, and play a game while you learn.", "close": "💚 I made this app hoping it helps everyone who wants to learn English. A little progress every day adds up. Enjoy learning!", "sign": "— CheChe", "ok": "Let's go", "secs": [["📰", "Three steps a day", "① Review quiz: words you looked up on earlier days, and the ones you know least come up most. ② Read the headline: tap any word you don't know to see its meaning, synonyms, opposites and an example; it's saved to your dictionary. ③ After-reading quiz: always 10 questions, each with an explanation, especially the ones you get wrong."], ["📚", "Words", "Every word you look up is saved here. Search it or sort by \"Weakest\". Each finished Spaced review at the top earns 1 shamrock (up to 3 a day)."], ["🎯", "English level", "In Settings choose B1, B2, C1 or IELTS 7–8 and articles switch to a version at that level."], ["⚔️", "Quest", "Correct answers earn gold and quest passes. Buy elemental gear in the shop and use passes to fight the monsters in Ireland's towns. Win to conquer a town and collect taxes every day. A weapon whose element beats the monster deals ×1.5 damage, so check the five-element chart first. Goal: fight from the smallest village all the way to Dublin and conquer the whole island! You can attack a town up to 3 levels early, and every monster is tagged Easy, Even fight or Risky based on your current gear. Losing still helps: a monster in a town you have not taken stays wounded, with less HP next time. If you miss a few days, your next wins give double EXP."], ["🍀", "Luck", "1 shamrock spins the Wheel of Fate once; 2 or more buy a scratch card. Collect 3 element shards of the same element and tier to forge a piece of gear. Making a gem costs a little gold. You can swap a gem straight away (the old one breaks), or keep it by taking it out with an unsocketing charm. You can also trade gold for shamrocks, up to 3 times a day."], ["🤝", "Co-op & ranking", "Once signed in, open a room with a friend and hunt for the mistakes in an article together to beat the boss. Set a nickname in Settings to compare level, HP and attack on the leaderboard."], ["⚙️", "Settings", "Sign in with Google once and your progress is saved to the cloud, so a new phone won't lose anything. Language, English level and backups are here too."], ["📱", "Tip", "In Safari tap Share → Add to Home Screen to open it from your home screen like an app."]]}, "hi": {"title": "कैसे इस्तेमाल करें", "intro": "रोज़ 10–15 मिनट एक आयरिश ख़बर पढ़ें, और सीखते हुए खेल भी खेलें।", "close": "💚 मैंने यह ऐप इस उम्मीद में बनाया है कि यह अंग्रेज़ी सीखना चाहने वाले हर व्यक्ति की मदद करे। रोज़ थोड़ा-थोड़ा सुधार बड़ा फ़र्क़ लाता है। सीखने का आनंद लें!", "sign": "— CheChe", "ok": "शुरू करें", "secs": [["📰", "रोज़ के तीन चरण", "① दोहराई क्विज़: पिछले दिनों देखे गए शब्द; जो कम आते हैं वे ज़्यादा पूछे जाते हैं। ② मुख्य ख़बर पढ़ें: न समझ आने वाले शब्द पर टैप करें; अर्थ, समानार्थी, विलोम और उदाहरण दिखेंगे और शब्द शब्दकोश में सहेजा जाएगा। ③ पढ़ने के बाद क्विज़: हमेशा 10 प्रश्न, हर एक की व्याख्या के साथ।"], ["📚", "शब्दकोश", "देखे गए सभी शब्द यहाँ सहेजे जाते हैं। खोजें या \"सबसे कमज़ोर\" से क्रम लगाएँ। ऊपर की अंतराल दोहराव पूरी करने पर 1 शैमरॉक मिलता है (दिन में अधिकतम 3)।"], ["🎯", "अंग्रेज़ी स्तर", "सेटिंग्स में B1, B2, C1 या IELTS 7–8 चुनें; लेख उसी स्तर के संस्करण में बदल जाएँगे।"], ["⚔️", "साहसिक", "सही उत्तरों से सोना और अभियान पास मिलते हैं। दुकान से तत्व वाले उपकरण खरीदें और पास से आयरलैंड के शहरों के दानवों से लड़ें। जीतने पर शहर आपका, और रोज़ कर मिलेगा। जो हथियार दानव के तत्व को हराता है वह ×1.5 नुकसान करता है, इसलिए पहले पंचतत्व चार्ट देखें। लक्ष्य: सबसे छोटे गाँव से डबलिन तक जीतकर पूरा द्वीप जीतना! आप किसी शहर पर अपने स्तर से 3 स्तर पहले भी हमला कर सकते हैं, और हर राक्षस पर आपके उपकरणों के हिसाब से आसान, बराबर की टक्कर या ख़तरनाक लिखा होता है। हारना भी बेकार नहीं: जिस शहर पर अभी क़ब्ज़ा नहीं हुआ, उसका राक्षस घायल रहता है और अगली बार उसका HP कम होता है। कुछ दिन न आएँ, तो लौटने पर अगली जीतों में EXP दोगुना मिलता है।"], ["🍀", "किस्मत", "1 शैमरॉक से पहिया एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड। एक ही तत्व और स्तर के 3 टुकड़े जमा करके उपकरण बनाएँ। रत्न बनाने में थोड़ा सोना लगता है। रत्न सीधे बदल सकते हैं (पुराना टूट जाएगा), या मुक्ति-ताबीज़ से निकालकर रख सकते हैं। सोने से शैमरॉक भी ले सकते हैं, दिन में 3 बार तक।"], ["🤝", "साथ में और रैंकिंग", "साइन इन के बाद दोस्त के साथ कमरा बनाएँ और लेख की ग़लतियाँ साथ ढूँढकर दानव को हराएँ। सेटिंग्स में उपनाम चुनें और लीडरबोर्ड पर लेवल, HP व आक्रमण की तुलना करें।"], ["⚙️", "सेटिंग्स", "एक बार Google से साइन इन करें, प्रगति क्लाउड में सहेजी जाएगी और फ़ोन बदलने पर भी नहीं खोएगी। भाषा, अंग्रेज़ी स्तर और बैकअप भी यहीं हैं।"], ["📱", "सुझाव", "Safari में शेयर → होम स्क्रीन में जोड़ें दबाएँ, फिर इसे ऐप की तरह होम स्क्रीन से खोलें।"]]}, "es": {"title": "Cómo se usa", "intro": "Dedica 10–15 minutos al día a leer una noticia irlandesa y juega mientras aprendes.", "close": "💚 Hice esta app con la esperanza de ayudar a todas las personas que quieren aprender inglés. Un poco cada día marca la diferencia. ¡Disfruta aprendiendo!", "sign": "— CheChe", "ok": "¡Vamos!", "secs": [["📰", "Tres pasos al día", "① Test de repaso: palabras que consultaste otros días; las que menos dominas salen más. ② Lee el titular: toca cualquier palabra que no entiendas para ver su significado, sinónimos, antónimos y un ejemplo; se guarda en tu diccionario. ③ Test después de leer: siempre 10 preguntas, cada una con su explicación."], ["📚", "Diccionario", "Aquí se guardan todas las palabras que consultas. Puedes buscarlas u ordenarlas por «Más débiles». Cada «Repaso espaciado» terminado da 1 trébol (máximo 3 al día)."], ["🎯", "Nivel de inglés", "En Ajustes elige B1, B2, C1 o IELTS 7–8 y los artículos cambian a la versión de ese nivel."], ["⚔️", "Aventura", "Las respuestas correctas dan oro y pases. Compra equipo elemental en la tienda y usa los pases para luchar contra los monstruos de las ciudades de Irlanda. Si ganas, conquistas la ciudad y cobras impuestos cada día. Un arma cuyo elemento vence al del monstruo hace ×1,5 de daño, así que mira primero el gráfico de los cinco elementos. Objetivo: llegar desde el pueblo más pequeño hasta Dublín y conquistar toda la isla. Puedes atacar una ciudad hasta 3 niveles antes, y cada monstruo lleva la etiqueta Fácil, Igualado o Peligroso según tu equipo actual. Perder también ayuda: el monstruo de una ciudad que aún no has tomado sigue herido y tendrá menos PV la próxima vez. Si faltas unos días, tus siguientes victorias dan EXP doble."], ["🍀", "Suerte", "Con 1 trébol giras la Rueda del destino; con 2 o más compras un rasca y gana. Junta 3 fragmentos del mismo elemento y nivel para forjar un equipo. Crear una gema cuesta un poco de oro. Puedes cambiar una gema directamente (la antigua se rompe) o conservarla sacándola con un amuleto de desengaste. También puedes cambiar oro por tréboles, hasta 3 veces al día."], ["🤝", "Cooperativo y ranking", "Con la sesión iniciada, abre una sala con un amigo y buscad juntos los errores de un artículo para vencer al jefe. Elige un apodo en Ajustes para comparar nivel, HP y ataque en la clasificación."], ["⚙️", "Ajustes", "Inicia sesión con Google una vez y tu progreso se guarda en la nube; si cambias de móvil no pierdes nada. Aquí también están el idioma, el nivel de inglés y las copias de seguridad."], ["📱", "Consejo", "En Safari toca Compartir → Añadir a pantalla de inicio para abrirla como una app."]]}, "ja": {"title": "使い方", "intro": "1日10〜15分、アイルランドのニュースを1本読んで、ゲームも楽しみながら英語を学びましょう。", "close": "💚 このアプリは、英語を学びたいすべての人の役に立てたらと思って作りました。毎日少しずつの積み重ねが力になります。楽しく学んでください！", "sign": "— CheChe", "ok": "はじめる", "secs": [["📰", "毎日の3ステップ", "① 復習テスト：前の日に調べた単語から出題。苦手な単語ほど出やすくなります。② トップ記事を読む：わからない単語をタップすると、意味・類義語・反対語・例文が表示され、単語帳に保存されます。③ 読後テスト：いつも10問、全問に解説付き。"], ["📚", "単語帳", "調べた単語はすべてここに保存されます。検索や「苦手順」での並べ替えもできます。上の「間隔反復」を1回終えるとクローバーが1枚（1日最大3枚）。"], ["🎯", "英語レベル", "設定で B1・B2・C1・IELTS 7–8 を選ぶと、記事がそのレベルの版に切り替わります。"], ["⚔️", "冒険", "正解するとゴールドと出撃券がもらえます。ショップで五行の装備を買い、出撃券でアイルランド各地の魔物に挑みましょう。勝てばその町を征服し、毎日税金が入ります。武器の属性が魔物に勝っているとダメージ×1.5なので、出撃前に五行の図を確認しましょう。目標：いちばん小さな村からダブリンまで攻め上がり、島全体を征服！ 町は自分のレベルより3つ早く挑戦できます。どのモンスターにも、今の装備から予想した「楽勝／互角／危険」が表示されます。負けても無駄にはなりません。まだ占領していない町のモンスターは傷が残り、次はHPが少し減っています。何日か休んだあとは、次の何回かの勝利で経験値が2倍になります。"], ["🍀", "幸運", "クローバー1枚で運命のルーレットを1回、2枚以上でスクラッチカードが買えます。同じ属性・ランクのかけらを3個集めると装備を合成できます。 宝石を作るには金貨が少し必要です。宝石はそのまま入れ替えられ（古い宝石は砕けます）、残したいときは外しの護符で外せます。金貨でクローバーを交換することもでき、1日3回までです。"], ["🤝", "協力とランキング", "ログインすると友達とルームを作り、記事の間違いを一緒に探してボスを倒せます。設定でニックネームを決めると、レベル・HP・攻撃力でランキングに参加できます。"], ["⚙️", "設定", "Google で一度ログインすると進行状況がクラウドに保存され、機種変更しても消えません。言語・英語レベル・バックアップもここにあります。"], ["📱", "ヒント", "Safari で「共有」→「ホーム画面に追加」を押すと、アプリのようにホーム画面から開けます。"]]}, "ko": {"title": "사용 방법", "intro": "하루 10~15분, 아일랜드 뉴스 한 편을 읽고 게임도 즐기며 영어를 배워 보세요.", "close": "💚 영어를 배우고 싶은 모든 분께 도움이 되길 바라며 이 앱을 만들었어요. 매일 조금씩 쌓이면 영어가 점점 늘어요. 즐겁게 공부하세요!", "sign": "— CheChe", "ok": "시작하기", "secs": [["📰", "매일 3단계", "① 복습 퀴즈: 전에 찾아본 단어가 나와요. 잘 모르는 단어일수록 더 자주 나와요. ② 헤드라인 읽기: 모르는 단어를 누르면 뜻, 비슷한 말, 반대말, 예문이 나오고 단어장에 저장돼요. ③ 읽은 후 퀴즈: 항상 10문제, 모든 문제에 해설이 있어요."], ["📚", "단어장", "찾아본 단어는 모두 여기에 저장돼요. 검색하거나 '약한 순'으로 정렬할 수 있어요. 위의 '간격 복습'을 한 번 끝낼 때마다 클로버 1장 (하루 최대 3장)."], ["🎯", "영어 수준", "설정에서 B1, B2, C1, IELTS 7–8 중에서 고르면 기사가 그 수준의 버전으로 바뀌어요."], ["⚔️", "모험", "정답을 맞히면 골드와 출정권을 받아요. 상점에서 오행 장비를 사고, 출정권으로 아일랜드 마을의 괴물과 싸우세요. 이기면 마을을 정복하고 매일 세금을 받아요. 무기 속성이 괴물을 이기면 피해 ×1.5이니 출정 전에 오행 그림을 확인하세요. 목표: 가장 작은 마을부터 더블린까지 정복해 섬 전체를 차지하기! 마을은 내 레벨보다 3레벨 먼저 공격할 수 있고, 모든 몬스터에는 지금 장비로 예상한 '쉬움/막상막하/위험'이 표시돼요. 져도 헛수고가 아니에요. 아직 점령하지 않은 마을의 몬스터는 상처가 남아 다음엔 HP가 줄어 있어요. 며칠 쉬었다 돌아오면 다음 몇 번의 승리는 경험치가 2배예요."], ["🍀", "행운", "클로버 1장으로 운명의 룰렛을 한 번, 2장 이상이면 스크래치 카드를 살 수 있어요. 같은 속성·등급 조각 3개를 모으면 장비를 합성할 수 있어요. 보석을 만들려면 골드가 조금 들어요. 보석은 바로 바꿔 끼울 수 있고(예전 보석은 깨져요), 남기고 싶으면 해제 부적으로 빼면 돼요. 골드로 클로버를 교환할 수도 있어요. 하루 3번까지."], ["🤝", "협동과 랭킹", "로그인하면 친구와 방을 만들어 기사 속 틀린 곳을 함께 찾아 보스를 물리칠 수 있어요. 설정에서 닉네임을 정하면 레벨·HP·공격력으로 랭킹에 참여해요."], ["⚙️", "설정", "Google로 한 번 로그인하면 진행 상황이 클라우드에 저장돼 휴대폰을 바꿔도 사라지지 않아요. 언어, 영어 수준, 백업도 여기에 있어요."], ["📱", "팁", "Safari에서 '공유' → '홈 화면에 추가'를 누르면 앱처럼 홈 화면에서 열 수 있어요."]]}};
 function helpSheet(){
   const h=HELP[LANG]||HELP.en;
   return `<div class="scrim" data-act="closehelp"></div><div class="sheet help-sheet" role="dialog" aria-label="${esc(h.title)}"><div class="grab"></div>
@@ -3360,6 +3414,7 @@ document.addEventListener("click", e=>{
   if(a==="scall") return scratchReveal();
   if(a==="sctake"){ S.scratch=null; return render(); }
   if(a==="gemcraft") return craftGem(t.dataset.k);
+  if(a==="goldlotto") return goldToLotto();
   if(a==="gempick"){ const [id,i]=t.dataset.k.split("|"); S.sockPick={id,i:+i}; return render(); }
   if(a==="gempickx"){ S.sockPick=null; return render(); }
   if(a==="gemin") return gemIn(t.dataset.k);
@@ -3376,6 +3431,7 @@ document.addEventListener("click", e=>{
   if(a==="signout") return cloudSignOut();
   if(a==="fight") return fight();
   if(a==="tax") return collectTax();
+  if(a==="bspeed"){ const f=!battleFast(); try{ localStorage.setItem("che-pro-fast", f?"1":"0"); }catch(e){} S.fastMem=f; if(S.battle&&S.battle.stage==="fight") battleTimer(); renderBattleOnly(); return; }
   if(a==="skip"){ if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
   if(a==="advback"){ clearInterval(S.btimer); S.battle=null; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
   if(a==="nodel"){ S.confirmDel=null; return render(); }
@@ -5193,6 +5249,8 @@ Object.assign(STR.hi,{"shopHint2": "दुकान में सिर्फ़
 Object.assign(STR.es,{"shopHint2": "La tienda solo vende equipo básico. Para ser más fuerte, convierte fragmentos en gemas de elemento en la Casa de la Suerte y engástalas en tu arma o armadura.", "sockN": "{n} huecos para gemas", "gemName": "Gema de {e} {t}", "gemAdd": "Engastar gema", "gemPickT": "Elige una gema para engastar", "gemNone": "Aún no tienes gemas. Junta 3 fragmentos del mismo elemento y nivel en la Casa de la Suerte.", "gemSet": "{g} engastada", "gemNoCharm": "Necesitas 1 amuleto de desengaste para sacar una gema (puedes ganarlo en la Rueda del destino)", "gemOutAsk": "Toca otra vez para usar 1 amuleto y sacar {g}", "gemOut": "{g} sacada y guardada en tu bolsa de gemas", "gemMade": "¡Has creado {g}! Engástala desde la Mochila", "gemBagT": "Bolsa de gemas", "gemBagSub": "Las gemas en el arma suman ataque; en la armadura, defensa y PV. Si la gema es del mismo elemento que la pieza, cuenta ×1,5. Al cambiar de equipo, las gemas se quedan en su pieza.", "charmName": "Amuleto de desengaste", "charmShort": "Amuleto", "pCharm": "Amuleto de desengaste ×{n}", "gemCraft": "Crear gema", "gemShSub": "Junta {n} fragmentos del mismo elemento y nivel para crear una gema. Los fragmentos salen de los rasca y gana, y a veces los sueltan los monstruos salvajes.", "d22": "Usa un trébol en la Casa de la Suerte para girar la Rueda del destino: oro, pases o un amuleto de desengaste. Con 2 o más puedes comprar rasca y gana con fragmentos de elemento.", "d23": "Con 3 fragmentos del mismo elemento y nivel creas una gema de elemento. ¡Engástala en tu arma o armadura para hacerte más fuerte! Los monstruos salvajes a veces sueltan fragmentos."});
 Object.assign(STR.ja,{"shopHint2": "ショップで売っているのは基本の装備だけ。もっと強くなるには、ラッキーハウスでかけらから属性の宝石を作り、武器や防具にはめよう。", "sockN": "宝石穴 {n} 個", "gemName": "{e}の宝石 {t}", "gemAdd": "宝石をはめる", "gemPickT": "はめる宝石を選ぶ", "gemNone": "まだ宝石がありません。ラッキーハウスで同じ属性・同じ等級のかけらを3つ合成しよう。", "gemSet": "{g}をはめました", "gemNoCharm": "宝石を外すには「外しの護符」が1枚必要です（運命のルーレットで当たります）", "gemOutAsk": "もう一度タップすると、護符1枚で{g}を外します", "gemOut": "{g}を外して宝石袋に戻しました", "gemMade": "{g}を作りました！バッグから装備にはめよう", "gemBagT": "宝石袋", "gemBagSub": "武器の宝石は攻撃、防具の宝石は防御とHPを上げます。装備と同じ属性の宝石は効果×1.5。装備を替えても宝石は元の装備に残ります。", "charmName": "外しの護符", "charmShort": "護符", "pCharm": "外しの護符 ×{n}", "gemCraft": "宝石を作る", "gemShSub": "同じ属性・同じ等級のかけらを{n}個集めると属性の宝石になります。かけらはスクラッチで手に入り、野生のモンスターが落とすこともあります。", "d22": "クローバーはラッキーハウスで運命のルーレットに使える。金貨や出撃券、「外しの護符」が当たるぞ。2枚以上あればスクラッチで属性のかけらも狙えるのじゃ。", "d23": "同じ属性・同じ等級のかけらを3つ集めると属性の宝石になる。宝石を武器や防具にはめれば強くなれるぞ！野生のモンスターもたまにかけらを落とすのじゃ。"});
 Object.assign(STR.ko,{"shopHint2": "상점은 기본 장비만 팔아요. 더 강해지려면 행운의 집에서 조각으로 속성 보석을 만들어 무기나 방어구에 박으세요.", "sockN": "보석 홈 {n}개", "gemName": "{e} 보석 {t}", "gemAdd": "보석 박기", "gemPickT": "박을 보석을 고르세요", "gemNone": "아직 보석이 없어요. 행운의 집에서 같은 속성·같은 등급 조각 3개를 합성하세요.", "gemSet": "{g}을(를) 박았어요", "gemNoCharm": "보석을 빼려면 해제 부적 1장이 필요해요 (운명의 룰렛에서 얻을 수 있어요)", "gemOutAsk": "한 번 더 누르면 부적 1장으로 {g}을(를) 빼요", "gemOut": "{g}을(를) 빼서 보석 주머니에 넣었어요", "gemMade": "{g}을(를) 만들었어요! 가방에서 장비에 박아 보세요", "gemBagT": "보석 주머니", "gemBagSub": "무기에 박은 보석은 공격력, 방어구에 박은 보석은 방어력과 HP를 올려요. 장비와 같은 속성이면 효과 ×1.5. 장비를 바꿔도 보석은 원래 장비에 남아요.", "charmName": "해제 부적", "charmShort": "부적", "pCharm": "해제 부적 ×{n}", "gemCraft": "보석 만들기", "gemShSub": "같은 속성·같은 등급 조각 {n}개를 모으면 속성 보석을 만들 수 있어요. 조각은 스크래치 카드에서 나오고, 야생 몬스터가 떨어뜨리기도 해요.", "d22": "클로버로 행운의 집에서 운명의 룰렛을 돌리면 골드, 출정권, '해제 부적'이 나온단다. 2장 이상이면 스크래치 카드로 속성 조각도 얻을 수 있지.", "d23": "같은 속성·같은 등급 조각 3개를 모으면 속성 보석이 돼. 보석을 무기나 방어구에 박으면 더 강해진단다! 야생 몬스터도 가끔 조각을 떨어뜨려."});
+Object.assign(STR.zh,{"dfEasy": "輕鬆", "dfEven": "勢均力敵", "dfHard": "危險", "dfTip": "用你現在的裝備預估，勝率約 {p}%", "balorHint": "長老：巴洛爾是火屬性，帶水屬性的武器和防具最有利；寶石鑲越滿越穩。", "restBar": "休息加成：接下來 {n} 場勝利，經驗值 ×{x}", "spd1": "一般速度", "spd2": "2 倍速", "gemRepT": "這個孔已經有寶石", "gemRepSub": "從下面選一顆直接換上，舊的「{g}」會碎掉。想留著舊寶石，就用解鑲符取下。", "gemRepAsk": "再點一次確認換上，舊的 {g} 會碎掉", "gemOutBtn": "用解鑲符取下（剩 {n} 張）", "exSub": "{c} 金幣可以換 1 片幸運草，今天還能換 {n}/{m} 次", "exBtn": "用 {c} 金換", "exDone": "換到 1 片幸運草！", "exNone": "今天已經換完了，明天再來", "goldShort": "金", "gemShSub": "同屬性、同等級的碎片集滿 {n} 個，付一點金幣就能合成一顆元素寶石。碎片可以從刮刮樂拿到，打野怪也有機會掉落。", "bossShield": "火焰護體：五行相剋的效果變小（武器克制 ×1.25、防具克制受傷 ×0.8）"});Object.assign(STR.en,{"dfEasy": "Easy", "dfEven": "Even fight", "dfHard": "Risky", "dfTip": "With your current gear you win about {p}% of the time", "balorHint": "Elder: Balor is a fire monster, so water weapons and armour help most. The more gems you set, the safer you are.", "restBar": "Rested bonus: your next {n} wins give ×{x} EXP", "spd1": "Normal speed", "spd2": "2× speed", "gemRepT": "This socket already has a gem", "gemRepSub": "Pick a gem below to swap it in; the old {g} will break. To keep the old gem, take it out with an unsocketing charm.", "gemRepAsk": "Tap again to swap. The old {g} will break", "gemOutBtn": "Take out with a charm ({n} left)", "exSub": "Trade {c} gold for 1 shamrock · {n}/{m} trades left today", "exBtn": "Trade {c} gold", "exDone": "You got 1 shamrock!", "exNone": "No trades left today. Come back tomorrow", "goldShort": "g", "gemShSub": "Collect {n} shards of the same element and tier, then pay a little gold to make an element gem. Shards come from scratch cards, and wild monsters sometimes drop them.", "bossShield": "Flame ward: elements matter less (weapon advantage ×1.25, armour advantage: damage ×0.8)"});Object.assign(STR.hi,{"dfEasy": "आसान", "dfEven": "बराबर की टक्कर", "dfHard": "ख़तरनाक", "dfTip": "अभी के उपकरणों से जीतने की संभावना लगभग {p}%", "balorHint": "बुज़ुर्ग: बलोर अग्नि तत्व का है, इसलिए जल तत्व के हथियार और कवच सबसे काम आते हैं। जितने ज़्यादा रत्न, उतना सुरक्षित।", "restBar": "आराम बोनस: अगली {n} जीत पर EXP ×{x}", "spd1": "सामान्य गति", "spd2": "2× गति", "gemRepT": "इस खाँचे में पहले से रत्न है", "gemRepSub": "नीचे से कोई रत्न चुनकर बदलें; पुराना {g} टूट जाएगा। पुराना रत्न रखना हो तो मुक्ति-ताबीज़ से निकालें।", "gemRepAsk": "बदलने के लिए फिर टैप करें। पुराना {g} टूट जाएगा", "gemOutBtn": "ताबीज़ से निकालें ({n} बचे)", "exSub": "{c} सोने में 1 शैमरॉक · आज {n}/{m} बार बचे", "exBtn": "{c} सोना दें", "exDone": "1 शैमरॉक मिला!", "exNone": "आज के बदलाव ख़त्म। कल फिर आएँ", "goldShort": " सोना", "gemShSub": "एक ही तत्व और स्तर के {n} टुकड़े जमा करें, फिर थोड़ा सोना देकर तत्व-रत्न बनाएँ। टुकड़े स्क्रैच कार्ड से मिलते हैं, और जंगली राक्षस भी कभी-कभी गिराते हैं।", "bossShield": "अग्नि कवच: तत्वों का असर कम (हथियार बढ़त ×1.25, कवच बढ़त पर नुकसान ×0.8)"});Object.assign(STR.es,{"dfEasy": "Fácil", "dfEven": "Igualado", "dfHard": "Peligroso", "dfTip": "Con tu equipo actual ganas aproximadamente el {p}% de las veces", "balorHint": "Anciano: Balor es de fuego, así que las armas y armaduras de agua son las que más ayudan. Cuantas más gemas engastes, más seguro irás.", "restBar": "Bonus de descanso: tus próximas {n} victorias dan EXP ×{x}", "spd1": "Velocidad normal", "spd2": "Velocidad ×2", "gemRepT": "Este hueco ya tiene una gema", "gemRepSub": "Elige una gema abajo para cambiarla; la antigua {g} se romperá. Para conservarla, sácala con un amuleto de desengaste.", "gemRepAsk": "Toca otra vez para cambiarla. La antigua {g} se romperá", "gemOutBtn": "Sacar con un amuleto (quedan {n})", "exSub": "Cambia {c} de oro por 1 trébol · te quedan {n}/{m} cambios hoy", "exBtn": "Dar {c} de oro", "exDone": "¡Has conseguido 1 trébol!", "exNone": "Ya no quedan cambios hoy. Vuelve mañana", "goldShort": " oro", "gemShSub": "Junta {n} fragmentos del mismo elemento y nivel y paga un poco de oro para crear una gema. Los fragmentos salen de los rasca y gana, y a veces los sueltan los monstruos salvajes.", "bossShield": "Escudo de llamas: los elementos cuentan menos (ventaja de arma ×1,25; ventaja de armadura: daño ×0,8)"});Object.assign(STR.ja,{"dfEasy": "楽勝", "dfEven": "互角", "dfHard": "危険", "dfTip": "今の装備で勝てる確率はおよそ {p}%", "balorHint": "長老：バロールは火属性じゃ。水属性の武器と防具がいちばん有利。宝石をたくさんはめるほど安心じゃぞ。", "restBar": "休息ボーナス：次の {n} 勝は経験値 ×{x}", "spd1": "通常速度", "spd2": "2倍速", "gemRepT": "この穴にはもう宝石があります", "gemRepSub": "下から宝石を選ぶとそのまま入れ替わり、古い{g}は砕けます。古い宝石を残したいときは外しの護符で外してください。", "gemRepAsk": "もう一度タップで入れ替え。古い{g}は砕けます", "gemOutBtn": "護符で外す（残り {n} 枚）", "exSub": "金貨 {c} でクローバー1枚と交換 · 今日はあと {n}/{m} 回", "exBtn": "金貨 {c} で交換", "exDone": "クローバーを1枚手に入れた！", "exNone": "今日の交換はおしまい。また明日", "goldShort": "G", "gemShSub": "同じ属性・同じ等級のかけらを{n}個集め、金貨を少し払うと属性の宝石になります。かけらはスクラッチで手に入り、野生のモンスターが落とすこともあります。", "bossShield": "炎の守り：属性の相性が弱まる（武器有利 ×1.25、防具有利で被ダメージ ×0.8）"});Object.assign(STR.ko,{"dfEasy": "쉬움", "dfEven": "막상막하", "dfHard": "위험", "dfTip": "지금 장비로 이길 확률은 약 {p}%", "balorHint": "장로: 발로르는 불 속성이야. 물 속성 무기와 방어구가 가장 유리하지. 보석을 많이 박을수록 든든하단다.", "restBar": "휴식 보너스: 다음 {n}번 승리는 경험치 ×{x}", "spd1": "보통 속도", "spd2": "2배속", "gemRepT": "이 홈에는 이미 보석이 있어요", "gemRepSub": "아래에서 보석을 고르면 바로 바뀌고, 예전 {g}은(는) 깨져요. 예전 보석을 남기려면 해제 부적으로 빼세요.", "gemRepAsk": "한 번 더 누르면 교체돼요. 예전 {g}은(는) 깨져요", "gemOutBtn": "부적으로 빼기 ({n}장 남음)", "exSub": "골드 {c}로 클로버 1장 교환 · 오늘 {n}/{m}번 남음", "exBtn": "골드 {c}로 교환", "exDone": "클로버 1장을 얻었어요!", "exNone": "오늘 교환은 끝났어요. 내일 다시 와요", "goldShort": "G", "gemShSub": "같은 속성·같은 등급 조각 {n}개를 모으고 골드를 조금 내면 속성 보석을 만들 수 있어요. 조각은 스크래치 카드에서 나오고, 야생 몬스터가 떨어뜨리기도 해요.", "bossShield": "화염의 가호: 속성 상성 효과가 줄어요 (무기 유리 ×1.25, 방어구 유리 시 피해 ×0.8)"});
+Object.assign(STR.zh,{"scarLine": "{m}還帶著上次的傷：HP −{p}%", "scarNew": "雖然輸了，{m}也受了傷！下次進攻時牠的 HP −{p}%。"});Object.assign(STR.en,{"scarLine": "{m} is still wounded from your last attack: HP −{p}%", "scarNew": "You lost, but {m} got hurt too! Next time its HP is −{p}%."});Object.assign(STR.hi,{"scarLine": "{m} पिछले हमले से अब भी घायल है: HP −{p}%", "scarNew": "आप हारे, पर {m} भी घायल हुआ! अगली बार उसका HP −{p}% होगा।"});Object.assign(STR.es,{"scarLine": "{m} sigue herido de tu último ataque: PV −{p}%", "scarNew": "Has perdido, ¡pero {m} también quedó herido! La próxima vez tendrá PV −{p}%."});Object.assign(STR.ja,{"scarLine": "{m}は前回の傷がまだ癒えていない：HP −{p}%", "scarNew": "負けたけれど、{m}も傷を負った！次はHP −{p}%で戦える。"});Object.assign(STR.ko,{"scarLine": "{m}은(는) 지난 공격의 상처가 아직 남아 있어요: HP −{p}%", "scarNew": "졌지만 {m}도 다쳤어요! 다음엔 HP −{p}%로 싸워요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
