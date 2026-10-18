@@ -351,8 +351,8 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 @media (prefers-reduced-motion:reduce){.sh-cell.ready{animation:none}}
 .odds summary{cursor:pointer;font-weight:600}.odds h4{margin:12px 0 4px;font-size:14px}.odds .rw-row{font-size:13px;padding:2px 0}
 .odds-sc{display:flex;flex-direction:column;gap:3px;padding:6px 0;border-top:1px solid var(--line)}.odds-sc .odds-tiers{justify-content:flex-start}
-.sc-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:21;width:min(340px,calc(100% - 32px));display:flex;flex-direction:column;gap:12px;align-items:stretch}.sc-modal.fresh{animation:pop .2s ease-out}
-@keyframes pop{from{transform:translate(-50%,-46%);opacity:0}}
+.sc-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:21;width:min(340px,calc(100% - 32px));display:flex;flex-direction:column;gap:12px;align-items:stretch}.sc-modal.fresh{animation:popMid .2s ease-out}
+@keyframes popMid{from{transform:translate(-50%,-46%);opacity:0}}
 .sc-ticket{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;color:#2A2010;box-shadow:0 14px 40px rgba(0,0,0,.3)}
 .sc-name{font:800 18px var(--f-display);text-align:center}
 .sc-win{position:relative;height:150px;border-radius:12px;background:#FFFDF6;overflow:hidden}
@@ -816,8 +816,8 @@ body.vp-lock{touch-action:pan-x pan-y}
 .gift-find input{flex:1;min-width:0}.gift-to{font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.gift-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gift-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;border:1px solid var(--line,#ccd);border-radius:10px}.gift-lab{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.gift-step{display:flex;align-items:center;gap:6px}.gift-step b{min-width:20px;text-align:center}.gift-step .btn{padding:4px 10px}
 .gift-fee{margin:6px 0;font-weight:700}.gift-confirm{border:2px solid var(--fire);border-radius:12px;padding:10px;margin:8px 0;background:color-mix(in srgb,var(--fire) 8%,transparent)}
 .gift-card{border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;margin:8px 0;display:flex;flex-direction:column;gap:6px}.gift-card.pending{border-color:#E3B341}.gift-card.accepted{border-color:#2f9e6e}.gift-doneq{font-weight:600}.gift-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.am-scrim{position:fixed;inset:0;z-index:30;background:rgba(10,16,14,.25)}
-.adv-menu{position:fixed;z-index:31;left:50%;transform:translateX(-50%);bottom:calc(66px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 32px));background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.22);padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;animation:pop .16s ease-out}
+.am-scrim{position:fixed;inset:0;bottom:calc(65px + env(safe-area-inset-bottom,0px));z-index:30;background:rgba(10,16,14,.25);animation:amFade .22s ease-out both}#advMenu.closing .am-scrim{animation:amFadeOut .18s ease-in both}@keyframes amFade{from{opacity:0}}@keyframes amFadeOut{to{opacity:0}}
+.adv-menu{position:fixed;z-index:31;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 32px));background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.22);padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;transform-origin:50% calc(100% + 14px);animation:amIn .28s cubic-bezier(.2,.9,.25,1.12) both;will-change:transform,opacity}.adv-menu::after{content:"";position:absolute;left:50%;bottom:-7px;width:14px;height:14px;margin-left:-7px;background:var(--card);border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}#advMenu.closing .adv-menu{animation:amOut .18s cubic-bezier(.4,0,1,1) both}@keyframes amIn{from{opacity:0;transform:translateX(-50%) translateY(18px) scale(.4)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}@keyframes amOut{from{opacity:1;transform:translateX(-50%) scale(1)}to{opacity:0;transform:translateX(-50%) translateY(14px) scale(.5)}}@media (prefers-reduced-motion:reduce){.adv-menu,#advMenu.closing .adv-menu{animation-duration:.01s}}
 .am-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:inherit;font:inherit;font-weight:700;font-size:14px}.am-ic{font-size:24px}.am-item.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--paper))}.am-item.locked{opacity:.5}
 .page-h h2{margin:4px 0 2px;font-size:24px}.sub-h{display:flex;align-items:center;justify-content:space-between;gap:8px}.sub-h b{font-size:18px}
 .am-snd{grid-column:1/-1;display:flex;gap:6px}.am-snd button{flex:1;border:1px dashed var(--line);border-radius:10px;padding:8px 4px;background:none;color:var(--muted);font:inherit;font-size:13px;font-weight:700}.am-snd button.on{border-style:solid;color:var(--accent);border-color:var(--accent)}
@@ -2532,12 +2532,13 @@ const ADV_MENU=[["go","⚔️","tabAdv"],["coop","🎓","tabExam"],["think","�
 function advMenuHtml(){ const cur=S.tab==="adv"?(ADV_PAGES[S.advTab]?S.advTab:"go"):null;
   return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu" role="menu">${ADV_MENU.map(([k,ic,l])=>{ const lk=featLock(k);
     return `<button role="menuitem" class="am-item${cur===k?" on":""}${lk?" locked":""}" data-act="amgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${lk?"🔒 ":""}${T(l)}</span></button>`; }).join("")}
-    <div class="am-snd"><button class="${SND.opt.music?"on":""}" data-act="sndmusic">🎵 ${T("sndMusic")} ${SND.opt.music?T("sndOn"):T("sndOff")}</button><button class="${SND.opt.sfx?"on":""}" data-act="sndsfx">💥 ${T("sndSfx")} ${SND.opt.sfx?T("sndOn"):T("sndOff")}</button></div></div>`; }
-function advMenuToggle(open){ let el=document.getElementById("advMenu"); const on=open!=null?open:!el;
-  if(!on){ if(el) el.remove(); return; }
-  if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.innerHTML=advMenuHtml(); }
+    </div>`; }
+function advMenuToggle(open){ let el=document.getElementById("advMenu"); const shown=el&&!el.classList.contains("closing"), on=open!=null?open:!shown;
+  if(!on){ if(el&&!el.classList.contains("closing")){ el.classList.add("closing"); setTimeout(()=>{ if(el.classList.contains("closing")) el.remove(); },190); } return; }
+  if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.classList.remove("closing"); el.innerHTML=advMenuHtml(); }
 document.addEventListener("click",e=>{
   const nav=e.target.closest("#tab-adv"); if(nav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(); return; }
+  if(e.target.closest("[data-tab]")) advMenuToggle(false);   // another bottom tab: close the menu and go there
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
   if(a==="amclose"){ e.stopPropagation(); advMenuToggle(false); return; }
   if(a==="amgo"){ e.stopPropagation(); const k=t.dataset.k, lk=featLock(k); if(lk){ toast("🔒 "+T(lk)); return; } advMenuToggle(false);
@@ -3012,7 +3013,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.127";
+const APP_VERSION="2026.10.128";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4935,7 +4936,7 @@ function readBarInner(){
   const playing=READ.on&&!READ.paused, rec=READ.on?!!READ.audio:!!readRec();
   return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
 }
-function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); }
+function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)); }
 function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi)); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
 function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
 function readStart(){
@@ -5928,9 +5929,12 @@ function musicPlay(name){
   clearInterval(SND.timer); SND.timer=null; SND.track=null;
   if(!name||!sndInit()) return;
   SND.track=name; SND.step=0; SND.next=SND.ctx.currentTime+0.1;
-  const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(0.0001,now); g.exponentialRampToValueAtTime(name==="battle"?0.14:0.16, now+1.2);
+  const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(0.0001,now); g.exponentialRampToValueAtTime(musicLevel(), now+1.2);
   SND.timer=setInterval(musicSchedule, 80); musicSchedule(); }
-function musicForView(){ const v=S.view; musicPlay(v==="battle"?"battle":(v==="adv"||v==="think")?"town":null); }
+function musicForView(){ musicPlay(S.view==="battle"?"battle":"town"); musicDuck(!!(READ.on&&!READ.paused)); }
+const musicLevel=()=>SND.duck?0.0001:(SND.track==="battle"?0.14:0.16);
+function musicDuck(on){ if(SND.duck===on) return; SND.duck=on; if(!SND.ctx||!SND.track) return;
+  const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(Math.max(g.value,0.0001),now); g.exponentialRampToValueAtTime(musicLevel(), now+(on?0.35:1.5)); }
 /* ---- effects ---- */
 const SFX={
   tap:t=>tone(SND.fx,t,880,0.05,{type:"sine",v:0.12}),
@@ -5961,7 +5965,7 @@ function soundCard(){ return `<section class="card set-sec"><b>🔊 ${T("sndTitl
 document.addEventListener("pointerdown",()=>{ if(!SND.ctx&&(SND.opt.music||SND.opt.sfx)){ sndInit(); musicForView(); } else if(SND.ctx&&SND.ctx.state==="suspended") SND.ctx.resume().catch(()=>{}); },{capture:true});
 document.addEventListener("visibilitychange",()=>{ if(!SND.ctx) return; if(document.hidden) SND.ctx.suspend().catch(()=>{}); else SND.ctx.resume().catch(()=>{}); });
 document.addEventListener("click",e=>{ const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
-  if(a==="sndmusic"||a==="sndsfx"){ e.stopPropagation(); sndToggle(a==="sndmusic"?"music":"sfx"); render(); const m=document.getElementById("advMenu"); if(m) m.innerHTML=advMenuHtml(); } }, true);
+  if(a==="sndmusic"||a==="sndsfx"){ e.stopPropagation(); sndToggle(a==="sndmusic"?"music":"sfx"); render(); } }, true);
 
 Object.assign(STR.zh,{"sndTitle": "聲音", "sndSub": "冒險和戰鬥時會播背景音樂，讀文章和查字典時不會。", "sndMusic": "音樂", "sndSfx": "音效", "sndOn": "開", "sndOff": "關"});Object.assign(STR.en,{"sndTitle": "Sound", "sndSub": "Music plays on adventure and battle screens, not while you read or use the dictionary.", "sndMusic": "Music", "sndSfx": "Effects", "sndOn": "on", "sndOff": "off"});Object.assign(STR.hi,{"sndTitle": "आवाज़", "sndSub": "संगीत साहसिक और लड़ाई की स्क्रीन पर बजता है, पढ़ते या शब्दकोश इस्तेमाल करते समय नहीं।", "sndMusic": "संगीत", "sndSfx": "ध्वनि प्रभाव", "sndOn": "चालू", "sndOff": "बंद"});Object.assign(STR.es,{"sndTitle": "Sonido", "sndSub": "La música suena en las pantallas de aventura y combate, no mientras lees o usas el diccionario.", "sndMusic": "Música", "sndSfx": "Efectos", "sndOn": "sí", "sndOff": "no"});Object.assign(STR.ja,{"sndTitle": "サウンド", "sndSub": "BGM は冒険とバトルの画面で流れます。記事や単語帳の画面では流れません。", "sndMusic": "BGM", "sndSfx": "効果音", "sndOn": "オン", "sndOff": "オフ"});Object.assign(STR.ko,{"sndTitle": "소리", "sndSub": "배경음악은 모험과 전투 화면에서만 나와요. 기사 읽기나 단어장에서는 나오지 않아요.", "sndMusic": "음악", "sndSfx": "효과음", "sndOn": "켜짐", "sndOff": "꺼짐"});
 Object.assign(STR.zh,{"giftSub": "把寶石、寶石碎片或解鑲符送給其他玩家。送出前要再確認一次；對方按「收下」後，你還要按「完成」東西才會真的送過去，避免打錯名字送錯人。每次贈送都要付一點金幣手續費。", "giftCheck2": "送出後這些東西會先離開你的背包，並扣 {n} 金手續費。對方收下後，你要再按「完成」才會送過去；在那之前或對方拒絕時都可以取回，但手續費不退。", "giftSent": "已送出，等 {n} 收下", "giftSt_pending": "等對方收下", "giftSt_accepted": "等送禮人完成", "giftSt_acceptedMine": "對方已收下，等你按完成", "giftSt_done": "已送出", "giftSt_claimed": "已送達", "giftBtn_complete": "完成", "giftSure_complete": "確定送出", "giftAcceptQ": "再按一次「確定收下」。送禮的人按「完成」後，禮物才會放進你的背包。", "giftWaitQ": "你已收下，等 {n} 按「完成」後東西就會進你的背包。", "giftDoneQ": "{n} 已經收下了。確認這是你要送的人再按「完成」，東西才會送出；送錯人就按「取回」。", "giftAccepted": "已收下，等 {n} 按完成", "giftCompleted": "已送給 {n}！"});
@@ -5976,6 +5980,12 @@ Object.assign(STR.hi,{"lockVault": "इंद्रधनुष ख़ज़ा�
 Object.assign(STR.es,{"lockVault": "La Cámara del Arcoíris abrirá pronto"});
 Object.assign(STR.ja,{"lockVault": "虹の宝庫はまもなくオープン"});
 Object.assign(STR.ko,{"lockVault": "무지개 보물고는 곧 열려요"});
+Object.assign(STR.zh,{"sndSub": "背景音樂會一直播放，只有按「朗讀」聽新聞時會自動暫停。"});
+Object.assign(STR.en,{"sndSub": "Music plays all the time and fades out only while a news article is being read aloud."});
+Object.assign(STR.hi,{"sndSub": "संगीत हमेशा बजता है, बस समाचार को \"पढ़कर सुनाएँ\" चलने पर अपने-आप धीमा होकर रुक जाता है।"});
+Object.assign(STR.es,{"sndSub": "La música suena siempre y solo se apaga mientras se lee en voz alta una noticia."});
+Object.assign(STR.ja,{"sndSub": "BGM は常に流れ、ニュースの読み上げ中だけ自動で止まります。"});
+Object.assign(STR.ko,{"sndSub": "배경음악은 항상 나오고, 뉴스 읽어 주기를 들을 때만 자동으로 멈춰요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
