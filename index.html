@@ -1683,6 +1683,8 @@ function pick(i){
 /* ================= Adventure (game) ================= */
 const ELS=[{k:"metal",z:"金"},{k:"wood",z:"木"},{k:"water",z:"水"},{k:"fire",z:"火"},{k:"earth",z:"土"}];
 const ELZ=Object.fromEntries(ELS.map(e=>[e.k,e.z]));
+// display order follows the overcoming cycle 金剋木 → 木剋土 → 土剋水 → 水剋火 → 火剋金 (ELS itself keeps its order: monster elements are derived from it)
+const EL_KE=["metal","wood","earth","water","fire"], ELS_KE=EL_KE.map(k=>ELS.find(e=>e.k===k)), elRank=k=>EL_KE.indexOf(k), gemSort=([a],[b])=>elRank(a.split("-")[0])-elRank(b.split("-")[0])||(+a.split("-")[1])-(+b.split("-")[1]);
 // 相剋: 金剋木、木剋土、土剋水、水剋火、火剋金
 const BEATS={metal:"wood", wood:"earth", earth:"water", water:"fire", fire:"metal"};
 function elMult(att, def){ if(!att||!def) return 1; if(BEATS[att]===def) return 1.5; if(BEATS[def]===att) return 0.67; return 1; }
@@ -2513,7 +2515,7 @@ const gemName=k=>{ const [el,t]=k.split("-"); return T("gemName",{e:elName(el),t
 const GEM_PICS=new Set([]);
 const gemDot=k=>{ const [el,t]=k.split("-"), pk=`gem-${el}-${+t+1}`; if(GEM_PICS.has(pk)) return `<img class="gem pic" src="assets/art/${pk}.webp" alt="" title="${esc(gemName(k))}" draggable="false">`; return `<span class="gem" style="background:var(--${el})" title="${esc(gemName(k))}">${TIER[+t].n}</span>`; };
 function sockHtml(it){ return `<div class="sock-row">${socketsOf(it.id).map((k,i)=>k?`<button class="sock full" data-act="gempick" data-k="${it.id}|${i}" aria-label="${esc(gemName(k))}">${gemDot(k)}</button>`:`<button class="sock" data-act="gempick" data-k="${it.id}|${i}" aria-label="${T("gemAdd")}">+</button>`).join("")}</div>`; }
-function gemPicker(it){ const gs=Object.entries(gemsOf()).filter(([k,n])=>n>0), P=S.sockPick, cur=P&&socketsOf(it.id)[P.i], g=game();
+function gemPicker(it){ const gs=Object.entries(gemsOf()).filter(([k,n])=>n>0).sort(gemSort), P=S.sockPick, cur=P&&socketsOf(it.id)[P.i], g=game();
   const top=cur?`<b>${T("gemRepT")}</b><div class="gem-opt cur">${gemDot(cur)}<span>${esc(gemName(cur))}</span></div><p class="muted sm-t">${T("gemRepSub",{g:esc(gemName(cur))})}</p>
     <button class="btn ghost sm" data-act="gemout" data-k="${it.id}|${P.i}" ${(g.charms||0)<1?"disabled":""}>🪄 ${T("gemOutBtn",{n:g.charms||0})}</button>`:`<b>${T("gemPickT")}</b>`;
   return `<div class="card gem-pick">${top}${gs.length?`<div class="gem-list">${gs.map(([k,n])=>{ const v=gemVal(it,k); const mm=gemMult(k.split("-")[0],it.el); return `<button class="gem-opt" data-act="gemin" data-k="${k}">${gemDot(k)}<span>${esc(gemName(k))} ×${n}${mm>1?` <em class="gem-bonus">${mm===GEM.same?T("gemSame"):T("gemSheng")}</em>`:""}</span><small>${it.slot==="weapon"?T("atkPlus",{n:v.atk}):T("defPlus",{d:v.def,h:v.hp})}</small></button>`; }).join("")}</div>`:`<p class="muted sm-t">${T("gemNone")}</p>`}<button class="btn ghost sm" data-act="gempickx">✕</button></div>`; }
@@ -2525,7 +2527,7 @@ function gemOut(id,i){ const g=game(), a=socketsOf(id), key=a[i]; if(!key) retur
   if((g.charms||0)<1) return toast(T("gemNoCharm"));
   if(S.gemOutAsk!==id+"|"+i){ S.gemOutAsk=id+"|"+i; return toast(T("gemOutAsk",{g:gemName(key)})); }
   S.gemOutAsk=null; g.charms--; a[i]=null; g.sock[id]=a; const gs=gemsOf(); gs[key]=(gs[key]||0)+1; saveGame(); toast(T("gemOut",{g:gemName(key)})); render(); }
-function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`; }
+function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["all",T("all")],...ELS_KE.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`; }
 const ADV_PAGES={coop:["🎓","tabExam"], think:["🧠","tabThink"], rank:["🏆","tabRank"]};
 /* the 冒險 tab in the bottom bar opens a small menu: adventure, exams, reasoning, leaderboard */
 const ADV_MENU=[["go","⚔️","tabAdv"],["rank","🏆","tabRank"],["coop","🎓","tabExam"],["think","🧠","tabThink"]];
@@ -2555,7 +2557,7 @@ function viewAdv(){ restCheck();
   } else if(sub==="shop"){
     const f=S.shopEl||"all";
     const fseg=elFilterSeg();
-    const list=Object.values(ITEMS).filter(it=>f==="all"||it.el===f).sort((a,b)=>a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
+    const list=Object.values(ITEMS).filter(it=>f==="all"||it.el===f).sort((a,b)=>a.slot.localeCompare(b.slot)||elRank(a.el)-elRank(b.el));
     body=fseg+`<p class="muted sm-t" style="margin:0">${T("shopHint2")}</p>`+TIER_LV.map((L,t)=>`<div class="eyebrow">${TIER[t].n} · Lv ${L}${L>g.lv?" 🔒":""} · ${T("sockN",{n:t+1})}</div><div class="items">${list.filter(it=>it.tier===t).map(it=>itemRow(it,"shop")).join("")}</div>`).join("");
   } else if(sub==="rank"){
     body=viewRank();
@@ -2569,7 +2571,7 @@ function viewAdv(){ restCheck();
     body=viewLuck();
   } else {
     const f=S.shopEl||"all", all=g.inv.map(id=>ITEMS[id]).filter(Boolean);
-    const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>b.lv-a.lv||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
+    const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>b.lv-a.lv||a.slot.localeCompare(b.slot)||elRank(a.el)-elRank(b.el));
     body= all.length?elFilterSeg()+(own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><p>${T("bagNone")}</p></div>`):`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
   }
   if(ADV_PAGES[sub]) return `<div class="view adv-page"><div class="page-h"><h2>${ADV_PAGES[sub][0]} ${T(ADV_PAGES[sub][1])}</h2></div>${body}</div>`;
@@ -2745,13 +2747,13 @@ function initScratch(){
 /* ----- shards → gems ----- */
 function craftGem(k){ const s=shardsOf(), g=game(); if((s[k]||0)<GEM.shards) return; const fee=GEM.fee[+k.split("-")[1]]||0;
   if(g.gold<fee) return toast(T("noGold",{n:fee-g.gold})); g.gold-=fee; s[k]-=GEM.shards; if(!s[k]) delete s[k]; const gs=gemsOf(); gs[k]=(gs[k]||0)+1; sfx("gem"); saveGame(); toast(T("gemMade",{g:gemName(k)})); render(); }
-function gemBag(){ const g=game(), gs=Object.entries(gemsOf()).filter(([k,n])=>n>0);
+function gemBag(){ const g=game(), gs=Object.entries(gemsOf()).filter(([k,n])=>n>0).sort(gemSort);
   return `<section class="card"><h3>${T("gemBagT")}</h3><p class="muted sm-t">${T("gemBagSub")}</p>${gs.length?`<div class="gem-list">${gs.map(([k,n])=>`<span class="gem-opt">${gemDot(k)}<span>${esc(gemName(k))} ×${n}</span></span>`).join("")}</div>`:`<p class="muted sm-t">${T("gemNone")}</p>`}
     <div class="rw-row"><span>🪄 ${T("charmName")}</span><b>${g.charms||0}</b></div></section>`; }
 function shardGrid(){
   const s=shardsOf(), need=GEM.shards;
   const head=`<div class="sh-row sh-head"><span></span>${TIER.map(t=>`<span>${t.n}</span>`).join("")}</div>`;
-  const rows=ELS.map(e=>`<div class="sh-row">${elBadge(e.k,true)}${TIER.map((t,i)=>{ const k=e.k+"-"+i, n=s[k]||0;
+  const rows=ELS_KE.map(e=>`<div class="sh-row">${elBadge(e.k,true)}${TIER.map((t,i)=>{ const k=e.k+"-"+i, n=s[k]||0;
     return n>=need?`<button class="sh-cell ready" data-act="gemcraft" data-k="${k}"><b>${n}/${need}</b><span>${T("gemCraft")}</span><small>${GEM.fee[i]}${T("goldShort")}</small></button>`
       :`<div class="sh-cell${n?"":" zero"}"><b>${n}/${need}</b><i style="width:${n/need*100}%"></i></div>`; }).join("")}</div>`).join("");
   return `<div class="sh-grid">${head}${rows}</div>`;
@@ -3013,7 +3015,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.130";
+const APP_VERSION="2026.10.131";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -5829,7 +5831,7 @@ function viewVault(){
   if(!CLOUD.user) gift=`<p class="muted sm-t">${T("giftLogin")}</p>`;
   else if(!G||!G.to) gift=`<div class="row gift-find"><input id="giftNick" class="search" maxlength="16" placeholder="${T("sbNickPh")}" value="${esc((G&&G.nick)||"")}"><button class="btn sm" data-act="vtfind">${T("giftFind")}</button></div>`;
   else {
-    const it=G.items, gs=Object.entries(gemsOf()).filter(([,n])=>n>0), sh=Object.entries(shardsOf()).filter(([,n])=>n>0), fee=giftFee(it);
+    const it=G.items, gs=Object.entries(gemsOf()).filter(([,n])=>n>0).sort(gemSort), sh=Object.entries(shardsOf()).filter(([,n])=>n>0).sort(gemSort), fee=giftFee(it);
     const row=(kind,k,label,have,cur)=>`<div class="gift-row"><span class="gift-lab">${label}<small class="muted"> · ${T("giftHave",{n:have})}</small></span><span class="gift-step"><button class="btn ghost sm" data-act="vtstep" data-k="${kind}|${k}|-1" ${cur?"":"disabled"}>−</button><b>${cur||0}</b><button class="btn ghost sm" data-act="vtstep" data-k="${kind}|${k}|1" ${cur>=Math.min(have,GIFT.maxEach)?"disabled":""}>＋</button></span></div>`;
     const rows=[...gs.map(([k,n])=>row("gem",k,`${gemDot(k)} ${esc(gemName(k))}`,n,it.gems[k])), ...sh.map(([k,n])=>row("shard",k,`💠 ${esc(shardName(k))}`,n,it.shards[k])), ...((g.charms||0)>0?[row("charm","x",`🪄 ${esc(T("charmName"))}`,g.charms,it.charms)]:[])].join("");
     gift=`<div class="gift-to">🎁 ${T("giftTo",{n:esc(G.toName)})} <button class="btn ghost sm" data-act="vtreset">${T("giftChange")}</button></div>
