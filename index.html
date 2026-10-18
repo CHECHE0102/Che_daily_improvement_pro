@@ -4,6 +4,77 @@
 <meta charset="utf-8">
 <meta name="viewport" id="vpMeta" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>BinBin daily</title>
+<script>
+/* Moving house: the game now lives at binbindaily.com. Saved progress sits in localStorage, which belongs to one address,
+   so the old address (github.io) packs it into the URL fragment (never sent to any server) and the new address unpacks it.
+   The old address only moves players once the new one answers, so nobody is sent to a dead page. */
+(function(){
+  "use strict";
+  var NEW="https://binbindaily.com/", OLD="cheche0102.github.io", BASE="/Che_daily_improvement_pro/";
+  var KEEP=/^(che-daily-pro-v1$|che-pro-)/, SKIP=/^che-pro-(push|errn|fb|ping|moved)$/, MAIN="che-daily-pro-v1";
+  var keep=function(k){ return KEEP.test(k)&&!SKIP.test(k); };
+  function b64u(u8){ var s=""; for(var i=0;i<u8.length;i+=32768) s+=String.fromCharCode.apply(null,u8.subarray(i,i+32768)); return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); }
+  function unb64u(s){ var b=atob(s.replace(/-/g,"+").replace(/_/g,"/")), u=new Uint8Array(b.length); for(var i=0;i<b.length;i++) u[i]=b.charCodeAt(i); return u; }
+  function flate(u8,T){ return new Response(new Blob([u8]).stream().pipeThrough(new T("deflate-raw"))).arrayBuffer().then(function(b){ return new Uint8Array(b); }); }
+  var hash=location.hash, search=location.search;
+
+  // ---- new address: unpack the progress handed over by the old one, then reload without the fragment
+  if(hash.indexOf("#mig=")===0){
+    try{ window.stop(); }catch(e){}            // the game must not boot (and save) before the progress is in place
+    (async function(){
+      try{
+        var p=hash.slice(5), u=unb64u(p.slice(1));
+        if(p[0]==="z") u=await flate(u,DecompressionStream);
+        var data=JSON.parse(new TextDecoder().decode(u)), cur=localStorage.getItem(MAIN)||"", inc=data[MAIN]||"";
+        if(inc.length>cur.length){ for(var k in data) if(keep(k)) localStorage.setItem(k,String(data[k])); localStorage.setItem("che-pro-moved","1"); }
+      }catch(e){}
+      location.replace(location.pathname+location.search);
+    })();
+    return;
+  }
+
+  // ---- old address: once the new address is up, move the player there with their progress
+  if(location.hostname!==OLD||location.pathname.indexOf(BASE)!==0||/[?&]stay=1(&|$)/.test(search)) return;
+  var standalone=navigator.standalone===true||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
+  function pack(){
+    var data={}, n=0;
+    try{ for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(keep(k)){ data[k]=localStorage.getItem(k); n++; } } }catch(e){}
+    if(!n) return Promise.resolve("");
+    var raw=new TextEncoder().encode(JSON.stringify(data));
+    if(typeof CompressionStream!=="function") return Promise.resolve("#mig=j"+b64u(raw));
+    return flate(raw,CompressionStream).then(function(z){ return "#mig=z"+b64u(z); }, function(){ return "#mig=j"+b64u(raw); });
+  }
+  function target(){ return pack().then(function(f){ return NEW+location.pathname.slice(BASE.length)+search+f; }); }
+  function dropPush(){   // the push subscription belongs to the old address; let it go (the sender cleans up dead ones)
+    var p=navigator.serviceWorker?navigator.serviceWorker.getRegistration().then(function(r){ return r&&r.pushManager.getSubscription(); }).then(function(s){ return s&&s.unsubscribe(); }).catch(function(){}):Promise.resolve();
+    return Promise.race([p,new Promise(function(r){ setTimeout(r,1500); })]);
+  }
+  var TX={
+    zh:["BinBin daily 搬家了 🏠","新網址是 binbindaily.com。按下面的按鈕，會帶著你的進度打開新網址，之後請在新網址重新「加入主畫面」。","帶著進度前往","稍後"],
+    cn:["BinBin daily 搬家了 🏠","新网址是 binbindaily.com。按下面的按钮，会带着你的进度打开新网址，之后请在新网址重新「添加到主屏幕」。","带着进度前往","稍后"],
+    en:["BinBin daily has moved 🏠","The new address is binbindaily.com. Tap the button to open it with your progress, then add it to your Home Screen again from there.","Take my progress there","Later"],
+    hi:["BinBin daily नए पते पर 🏠","नया पता binbindaily.com है। अपनी प्रगति के साथ इसे खोलने के लिए बटन दबाएँ, फिर वहाँ से इसे दोबारा होम स्क्रीन पर जोड़ें।","प्रगति के साथ जाएँ","बाद में"],
+    es:["BinBin daily se ha mudado 🏠","La nueva dirección es binbindaily.com. Toca el botón para abrirla con tu progreso y luego vuelve a añadirla a la pantalla de inicio desde allí.","Llevar mi progreso","Más tarde"],
+    ja:["BinBin daily は引っ越しました 🏠","新しいアドレスは binbindaily.com です。ボタンを押すと進行状況ごと新しいアドレスが開きます。その後、そこからもう一度ホーム画面に追加してください。","進行状況ごと移動","あとで"],
+    ko:["BinBin daily가 이사했어요 🏠","새 주소는 binbindaily.com 입니다. 버튼을 누르면 진행 상황과 함께 새 주소가 열립니다. 그다음 거기서 홈 화면에 다시 추가해 주세요.","진행 상황 가지고 이동","나중에"]
+  };
+  function box(){
+    var l="zh"; try{ l=localStorage.getItem("che-pro-lang")||"zh"; }catch(e){} var t=TX[l]||TX.zh;
+    var d=document.createElement("div");
+    d.style.cssText="position:fixed;inset:0;z-index:99999;background:rgba(10,20,15,.55);display:flex;align-items:center;justify-content:center;padding:20px;font-family:system-ui,sans-serif";
+    d.innerHTML='<div style="background:#fff;color:#1d2a24;border-radius:18px;max-width:360px;width:100%;padding:22px 20px;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center"><div style="font-size:19px;font-weight:700;margin-bottom:10px"></div><div style="font-size:15px;line-height:1.55;margin-bottom:18px"></div><button type="button" style="display:block;width:100%;padding:13px;border:0;border-radius:12px;background:#1f7a4d;color:#fff;font-size:16px;font-weight:700;margin-bottom:8px"></button><button type="button" style="display:block;width:100%;padding:10px;border:0;background:none;color:#5b6b63;font-size:14px"></button></div>';
+    var c=d.firstChild.children; c[0].textContent=t[0]; c[1].textContent=t[1]; c[2].textContent=t[2]; c[3].textContent=t[3];
+    c[2].onclick=function(){ target().then(function(url){ dropPush().then(function(){ var w=window.open(url,"_blank"); if(!w) location.href=url; }); }); };
+    c[3].onclick=function(){ d.remove(); };
+    document.body.appendChild(d);
+  }
+  fetch(NEW+"version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){ return r.ok?r.json():null; }).then(function(j){
+    if(!j||!j.v) return;
+    if(standalone){ if(document.body) box(); else document.addEventListener("DOMContentLoaded",box); return; }
+    target().then(function(url){ dropPush().then(function(){ location.replace(url); }); });
+  }).catch(function(){});
+})();
+</script>
 <meta name="description" content="Learn English from daily Irish news — 繁體中文 · English · हिन्दी · Español · 日本語 · 한국어. Earn gold from quizzes, buy elemental gear, fight Celtic monsters.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3032,7 +3103,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.142";
+const APP_VERSION="2026.10.143";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>

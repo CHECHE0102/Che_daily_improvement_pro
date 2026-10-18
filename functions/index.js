@@ -25,7 +25,7 @@ const WEBHOOK_SECRET = defineSecret("STRIPE_WEBHOOK_SECRET");
 const REGION = "europe-west1";
 const STRIPE_VERSION = "2026-04-22.dahlia";
 const SITE = "https://cheche0102.github.io/Che_daily_improvement_pro/";
-const ORIGINS = ["https://cheche0102.github.io", "http://localhost:8765"];
+const ORIGINS = ["https://binbindaily.com", "https://www.binbindaily.com", "https://cheche0102.github.io", "http://localhost:8765"];
 
 // What each vault item gives. Prices are created in the Stripe dashboard; only the ID lives here.
 // test=true: sandbox item, only testers may buy it.
