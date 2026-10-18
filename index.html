@@ -3020,7 +3020,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.136";
+const APP_VERSION="2026.10.137";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -5832,7 +5832,7 @@ const PAY_FN="https://europe-west1-che-daily-improvement-pro.cloudfunctions.net"
 const PAY_TESTERS=new Set(["d64a281160d50a9cd12426bc8ee395a2315b913497c840ed9c65feb367d56fc0"]);   // sha256 of tester e-mails (sandbox)
 let PAY_IN=null, PAY_BUSY=false;
 const PAY_RET=(()=>{ try{ const q=new URLSearchParams(location.search), p=q.get("pay"); if(!p) return null;
-  history.replaceState(null,"",location.pathname+location.hash); S.tab="adv"; S.view="adv"; S.advTab="vault"; return {pay:p, sid:q.get("sid")}; }catch(e){ return null; } })();
+  history.replaceState(null,"",location.pathname+location.hash); S.tab="adv"; S.view="adv"; S.advTab="vault"; setTimeout(()=>{ const v=document.querySelector(".vault-hero"); if(v) v.scrollIntoView({behavior:"smooth",block:"start"}); },1200); return {pay:p, sid:q.get("sid")}; }catch(e){ return null; } })();
 async function payTesterCheck(u){ try{ if(!u||!u.email||!u.emailVerified||!crypto.subtle) return;
   const h=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(u.email.toLowerCase())))].map(b=>b.toString(16).padStart(2,"0")).join("");
   if(PAY_TESTERS.has(h)&&!S.payTester){ S.payTester=true; render(); } }catch(e){} }
