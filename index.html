@@ -784,7 +784,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .rest-bar{background:color-mix(in srgb,var(--water) 14%,transparent);color:var(--ink,inherit);border-radius:12px;padding:8px 12px;font-size:14px;margin-bottom:8px}.chip.rest{font-size:11px}
 .scar-tip{margin:0;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--fire) 10%,transparent)}
 .elder-tip{margin:0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--water) 12%,transparent)}
-.ex-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;width:100%;margin-top:6px}.ex-row .btn{margin-left:auto}.gem-opt.cur{opacity:.85}
+.ex-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;width:100%;margin-top:6px;grid-column:1/-1}.ex-row .btn{margin-left:auto}.gem-opt.cur{opacity:.85}
 .tk-home h3{margin:2px 0}.tk-done{background:color-mix(in srgb,var(--wood) 14%,transparent);border-radius:10px;padding:8px 12px;font-size:14px}
 .tk-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}.tk-type{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:var(--paper);border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;text-align:left;color:inherit;font:inherit}.tk-type small{color:var(--muted,#789);font-size:12px}.tk-type:disabled{opacity:.45}.tk-ic{font-size:20px}
 .tk-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.tk-q{font-weight:700;margin:0 0 6px}.tk-card{display:flex;flex-direction:column;gap:8px}
@@ -799,6 +799,11 @@ body.vp-lock{touch-action:pan-x pan-y}
 .exam-seg{margin-bottom:10px}.to-chip{display:inline-flex;align-items:baseline;gap:6px;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--tc) 18%,transparent);border:2px solid var(--tc)}.to-chip b{color:var(--tc);font-size:16px}.to-chip small{font-size:11px;color:var(--tc);font-weight:700}.to-chip.big{padding:8px 16px}.to-chip.big b{font-size:34px}
 .to-tiers{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.to-tier{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 9px;border-radius:99px;border:1px solid var(--line,#ccd)}.to-tier i{width:12px;height:12px;border-radius:50%;background:var(--tc)}
 .to-grp{display:flex;flex-direction:column;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line,#ccd)}.to-doc{border-left:3px solid var(--accent);padding-left:12px}.to-doc .eyebrow{margin-bottom:2px}.to-blank{font-weight:800;color:var(--accent);text-decoration:underline}.to-tabs{flex-wrap:wrap}
+.adv-quick{grid-column:1/-1;display:flex;justify-content:center;gap:14px;margin-top:6px;padding-top:10px;border-top:1px dashed color-mix(in srgb,var(--hs-tint,#C8B89A) 45%,transparent)}.aq-card .adv-quick{border-top:0;margin:0;padding:0}
+.aq-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 6px;color:inherit;font:inherit;font-size:13px;font-weight:700;min-width:64px;cursor:pointer}
+.aq-ic{position:relative;width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--card,#fff);border:1.5px solid var(--line,#d6dcd9);box-shadow:0 2px 0 rgba(0,0,0,.06);transition:transform .12s}.aq-ic svg{width:32px;height:32px}
+.aq-btn:active .aq-ic{transform:scale(.94)}.aq-btn.on .aq-ic{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--card,#fff));box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}.aq-btn.on{color:var(--accent)}
+.aq-btn.locked .aq-ic svg{filter:grayscale(1);opacity:.5}.aq-lock{position:absolute;right:-4px;bottom:-4px;font-style:normal;font-size:14px}
 .sock-row{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.sock{width:28px;height:28px;border-radius:50%;border:2px dashed var(--line,#9aa);background:transparent;color:var(--muted,#789);font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:15px}
 .sock.full{border-style:solid;border-color:transparent}.gem{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:30% 30% 50% 50%;color:#fff;font-size:11px;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
 .gem-pick{margin:-4px 0 10px}.gem-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gem-opt{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line,#ccd);border-radius:12px;padding:8px 10px;text-align:left;color:inherit;font:inherit}.gem-opt small{margin-left:auto;color:var(--muted,#789)}
@@ -2529,12 +2534,12 @@ function viewAdv(){ restCheck();
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
       ${futureSlots()}
     </section>
-    ${game().gender?heroStage():genderPick()}
+    ${game().gender?heroStage():genderPick()+`<section class="card aq-card">${advQuick()}</section>`}
     <details class="card rules"><summary>${T("rulesQ")}</summary>${cycleSvg()}
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
       <p>${T("rules3")}</p></details>
-    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop","🎓 "+T("tabExam"))}${seg("think","🧠 "+T("tabThink"))}${seg("rank",T("tabRank"))}${seg("luck",T("tabLuck"))}${seg("shop",T("tabShop"))}${seg("bag",T("tabBag"))}</div>
+    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop","🎓 "+T("tabExam"))}${seg("think","🧠 "+T("tabThink"))}${seg("rank",T("tabRank"))}</div>
     ${body}
   </div>`;
 }
@@ -2959,7 +2964,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.121";
+const APP_VERSION="2026.10.122";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -4730,8 +4735,16 @@ function heroStage(){
   const g=game(), w=g.weapon&&ITEMS[g.weapon], a=g.armor&&ITEMS[g.armor];
   const side=(it,slot,none)=>`<div class="hs-side"><small>${T(slot)}</small>${it?`${itemTile(it,true)}<b>${esc(itemName(it))}</b><span class="hs-el">${elBadge(it.el)}</span>`:`${elBadge(null)}<b class="muted">${T(none)}</b>`}</div>`;
   const tint=a?ARMC[a.el][1]:"#C8B89A";
-  return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroArt("idle")}</div>${side(a,"armor","cloth")}</section>`;
+  return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroArt("idle")}</div>${side(a,"armor","cloth")}${advQuick()}</section>`;
 }
+/* shop · lucky house · bag: small icon buttons under the hero */
+const AQ_ICON={
+  shop:`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12h22v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" fill="#F4E3C1" stroke="#7A4E1E" stroke-width="1.8"/><path d="M3 12l3-7h20l3 7z" fill="#E0573B" stroke="#8A2E1C" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 5L7 12M13 5l-.7 7M19 5l.7 7M23.5 5L25 12" stroke="#FFF4E0" stroke-width="2"/><path d="M3 12a3.3 3.3 0 0 0 6.5 0a3.3 3.3 0 0 0 6.5 0a3.3 3.3 0 0 0 6.5 0a3.3 3.3 0 0 0 6.5 0" fill="#E0573B" stroke="#8A2E1C" stroke-width="1.6"/><rect x="13" y="18" width="6" height="10" rx="1" fill="#A86A2E" stroke="#7A4E1E" stroke-width="1.6"/><circle cx="23.5" cy="20" r="2.2" fill="#F2C94C" stroke="#9A7212" stroke-width="1.2"/></svg>`,
+  luck:`<svg viewBox="0 0 32 32" aria-hidden="true"><g stroke="#1F6B37" stroke-width="1.6" fill="#3FA65A"><path d="M16 15c-4-1-8-4-6.5-7.5S15.5 6 16 10c.5-4 4.5-6 6.5-2.5S20 14 16 15z"/><path d="M16 15c-4 1-8 4-6.5 7.5S15.5 24 16 20c.5 4 4.5 6 6.5 2.5S20 16 16 15z" transform="rotate(90 16 15)"/><path d="M16 15c-4 1-8 4-6.5 7.5S15.5 24 16 20c.5 4 4.5 6 6.5 2.5S20 16 16 15z"/><path d="M16 15c-4-1-8-4-6.5-7.5S15.5 6 16 10c.5-4 4.5-6 6.5-2.5S20 14 16 15z" transform="rotate(90 16 15)"/></g><path d="M16 15c1 5 2 9 5 13" fill="none" stroke="#1F6B37" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="15" r="1.8" fill="#F2C94C"/></svg>`,
+  bag:`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 8V6a4 4 0 0 1 8 0v2" fill="none" stroke="#6B4423" stroke-width="2"/><rect x="6" y="8" width="20" height="20" rx="6" fill="#C98B4B" stroke="#6B4423" stroke-width="1.8"/><path d="M6 16h20" stroke="#6B4423" stroke-width="1.6"/><rect x="11" y="18" width="10" height="7" rx="2" fill="#A86A2E" stroke="#6B4423" stroke-width="1.6"/><rect x="14.5" y="14" width="3" height="5" rx="1" fill="#F2C94C" stroke="#9A7212" stroke-width="1.2"/></svg>`};
+function advQuick(){ const sub=S.advTab||"go";
+  return `<div class="adv-quick" role="group">${[["shop","tabShop"],["luck","tabLuck"],["bag","tabBag"]].map(([k,l])=>{ const lk=featLock(k);
+    return `<button class="aq-btn${sub===k?" on":""}${lk?" locked":""}" data-advtab="${k}" aria-pressed="${sub===k}"><span class="aq-ic">${AQ_ICON[k]}${lk?'<i class="aq-lock">🔒</i>':""}</span><span>${T(l)}</span></button>`; }).join("")}</div>`; }
 /* ----- monthly reading leaderboard: articles finished this calendar month (readMonths/{YYYY-MM}/u/{uid}) ----- */
 const monthKey=()=>today().slice(0,7);
 function readsThisMonth(){ const m=monthKey(), ids=new Set();
