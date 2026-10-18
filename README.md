@@ -1,11 +1,8 @@
-# Che Daily Improvement Pro
+# BinBin daily
 
-Che Daily Improvement 的遊戲版：讀愛爾蘭新聞學英文，用測驗成績賺金幣，買五行裝備，出征打愛爾蘭傳說怪物升級。
+An English-learning game built on daily Irish news: read articles at your level, build a personal dictionary, take IELTS / TOEIC practice tests, and power up a hero who conquers Ireland town by town.
 
-- 金幣：每答對一題 10 金；正確率 80% 以上 +20，全對再 +20；完成當天三步驟 +30
-- 出征令：每完成一次測驗 +1 張，出征一次用 1 張
-- 五行相剋：金剋木、木剋土、土剋水、水剋火、火剋金。武器剋制怪物傷害 ×1.5，防具剋制怪物受傷 ×0.67
-- 戰前咒語：答對一題單字，第一擊 2 倍傷害
+App: https://cheche0102.github.io/Che_daily_improvement_pro/
+Terms, refunds and privacy: https://cheche0102.github.io/Che_daily_improvement_pro/legal.html
 
-文章直接讀取 Che_daily_improvement 每天更新的 `articles/`；這裡的 `articles/` 只是備用。
-學習與遊戲紀錄存在各自瀏覽器的 localStorage，可在「字典」頁匯出／匯入。
+**© 2026 BinBin daily. All rights reserved.** The code, artwork and learning content in this repository are not open source. No permission is given to copy, reuse or redistribute any part of it. See [LICENSE](LICENSE).

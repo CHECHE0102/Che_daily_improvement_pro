@@ -1376,6 +1376,7 @@ function viewSettings(){
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
     ${soundCard()}
     <section class="card set-sec"><b>📄 ${T("legalT")}</b><span class="muted sm-t">${T("legalSub")}</span><div class="row"><a class="btn sm ghost" href="legal.html${langKey()==="zh"||langKey()==="cn"?"?lang=zh":""}" target="_blank" rel="noopener">${T("legalOpen")}</a><a class="btn sm ghost" href="mailto:binbindaily.help@gmail.com">✉️ binbindaily.help@gmail.com</a></div></section>
+    <p class="muted sm-t" style="text-align:center;margin:4px 0 12px">© 2026 BinBin daily · All rights reserved · ${esc(APP_VERSION)}</p>
     ${feedbackCard()}
     ${privacyCard()}
     ${SUPPORT_ON||DEV?`<section class="card sup">${!SUPPORT_ON?`<span class="sup-hidden sm-t">🙈 ${T("supHiddenNote")}</span>`:""}<div class="sup-cup" aria-hidden="true">💝</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
@@ -3031,7 +3032,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.140";
+const APP_VERSION="2026.10.141";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
