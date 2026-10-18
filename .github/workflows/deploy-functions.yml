@@ -39,7 +39,7 @@ jobs:
           out="$RUNNER_TEMP/out.txt"
           if ! "$@" > "$out" 2>&1; then
             cat "$out"
-            grep -v -E "sk_(test|live)_|whsec_|VAPID" "$out" | grep -i -E "error|denied|permission|api|enable|403|fail|billing|scheduler" | tail -n 15 | while IFS= read -r l; do echo "::error::${l:0:400}"; done
+            sed 's/\x1b\[[0-9;]*m//g' "$out" | grep -v -E "sk_(test|live)_|whsec_|VAPID" | grep -v -E "ensuring required API|is enabled|service identity" | tail -n 18 | while IFS= read -r l; do echo "::error::${l:0:400}"; done
             exit 1
           fi
           cat "$out"
