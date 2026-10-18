@@ -33,6 +33,18 @@ jobs:
           [ -n "$FIREBASE_SA" ] || { echo "::error::FIREBASE_SA secret is missing"; exit 1; }
           printf '%s' "$FIREBASE_SA" > "$RUNNER_TEMP/sa.json"
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+          echo "::notice::Deploying as $(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).client_email)' "$RUNNER_TEMP/sa.json")"
+          cat > "$RUNNER_TEMP/run.sh" <<'SH'
+          # run a command; on failure turn its last lines into annotations
+          out="$RUNNER_TEMP/out.txt"
+          if ! "$@" > "$out" 2>&1; then
+            cat "$out"
+            grep -v -E "sk_(test|live)_|whsec_" "$out" | grep -i -E "error|denied|permission|api|enable|403|fail|billing" | tail -n 15 | while IFS= read -r l; do echo "::error::${l:0:400}"; done
+            exit 1
+          fi
+          cat "$out"
+          SH
+          chmod +x "$RUNNER_TEMP/run.sh"
       - name: Store Stripe secrets in Secret Manager
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
@@ -45,11 +57,11 @@ jobs:
           umask 077
           printf '%s' "$STRIPE_SECRET_KEY" > "$RUNNER_TEMP/k1"
           printf '%s' "${STRIPE_WEBHOOK_SECRET:-whsec_placeholder_not_set}" > "$RUNNER_TEMP/k2"
-          npx -y firebase-tools@latest functions:secrets:set STRIPE_SECRET_KEY --data-file "$RUNNER_TEMP/k1" --project "$PROJECT" --non-interactive
-          npx -y firebase-tools@latest functions:secrets:set STRIPE_WEBHOOK_SECRET --data-file "$RUNNER_TEMP/k2" --project "$PROJECT" --non-interactive
+          "$RUNNER_TEMP/run.sh" npx -y firebase-tools@latest functions:secrets:set STRIPE_SECRET_KEY --data-file "$RUNNER_TEMP/k1" --project "$PROJECT" --non-interactive
+          "$RUNNER_TEMP/run.sh" npx -y firebase-tools@latest functions:secrets:set STRIPE_WEBHOOK_SECRET --data-file "$RUNNER_TEMP/k2" --project "$PROJECT" --non-interactive
           rm -f "$RUNNER_TEMP/k1" "$RUNNER_TEMP/k2"
       - name: Deploy
-        run: npx -y firebase-tools@latest deploy --only functions --project "$PROJECT" --non-interactive --force
+        run: '"$RUNNER_TEMP/run.sh" npx -y firebase-tools@latest deploy --only functions --project "$PROJECT" --non-interactive --force'
       - name: Endpoints
         if: success()
         run: |
