@@ -815,7 +815,12 @@ body.vp-lock{touch-action:pan-x pan-y}
 .vt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px}.vt-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border-radius:14px;border:1px solid #E3B341;background:linear-gradient(180deg,color-mix(in srgb,#FFE58A 18%,var(--card,#fff)),var(--card,#fff));text-align:center}.vt-ic{font-size:28px}.vt-soon{font-size:12px;font-weight:700;color:var(--muted);border:1px dashed var(--line,#ccd);border-radius:99px;padding:3px 10px}
 .gift-find input{flex:1;min-width:0}.gift-to{font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.gift-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gift-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;border:1px solid var(--line,#ccd);border-radius:10px}.gift-lab{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.gift-step{display:flex;align-items:center;gap:6px}.gift-step b{min-width:20px;text-align:center}.gift-step .btn{padding:4px 10px}
 .gift-fee{margin:6px 0;font-weight:700}.gift-confirm{border:2px solid var(--fire);border-radius:12px;padding:10px;margin:8px 0;background:color-mix(in srgb,var(--fire) 8%,transparent)}
-.gift-card{border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;margin:8px 0;display:flex;flex-direction:column;gap:6px}.gift-card.pending{border-color:#E3B341}.gift-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gift-card{border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;margin:8px 0;display:flex;flex-direction:column;gap:6px}.gift-card.pending{border-color:#E3B341}.gift-card.accepted{border-color:#2f9e6e}.gift-doneq{font-weight:600}.gift-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.am-scrim{position:fixed;inset:0;z-index:30;background:rgba(10,16,14,.25)}
+.adv-menu{position:fixed;z-index:31;left:50%;transform:translateX(-50%);bottom:calc(66px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 32px));background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.22);padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;animation:pop .16s ease-out}
+.am-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:inherit;font:inherit;font-weight:700;font-size:14px}.am-ic{font-size:24px}.am-item.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--paper))}.am-item.locked{opacity:.5}
+.page-h h2{margin:4px 0 2px;font-size:24px}.sub-h{display:flex;align-items:center;justify-content:space-between;gap:8px}.sub-h b{font-size:18px}
+.am-snd{grid-column:1/-1;display:flex;gap:6px}.am-snd button{flex:1;border:1px dashed var(--line);border-radius:10px;padding:8px 4px;background:none;color:var(--muted);font:inherit;font-size:13px;font-weight:700}.am-snd button.on{border-style:solid;color:var(--accent);border-color:var(--accent)}
 .sock-row{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.sock{width:28px;height:28px;border-radius:50%;border:2px dashed var(--line,#9aa);background:transparent;color:var(--muted,#789);font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:15px}
 .sock.full{border-style:solid;border-color:transparent}.gem{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:30% 30% 50% 50%;color:#fff;font-size:11px;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
 .gem-pick{margin:-4px 0 10px}.gem-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gem-opt{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line,#ccd);border-radius:12px;padding:8px 10px;text-align:left;color:inherit;font:inherit}.gem-opt small{margin-left:auto;color:var(--muted,#789)}
@@ -1211,10 +1216,11 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 
 /* ---------- rendering ---------- */
 /* new players: the Lucky House stays locked until the elder introduces it (day-2 talk); everything else is open from the start */
-function featLock(k){ const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
+function featLock(k){ if(k==="vault"&&!DEV) return "lockVault";   // Rainbow Vault stays closed to players until paid items launch
+  const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
+function render(){ try{ renderInner(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
 const ERR_SENT=new Set();
 function errReport(e,where){ try{
@@ -1353,6 +1359,7 @@ function viewSettings(){
     <details class="card set-sec set-fold" data-fold="lvl"${S.fold&&S.fold.lvl?" open":""}><summary><b>${T("level")}</b><span class="fold-v">${LEVEL==="IELTS"?"IELTS 7–8":esc(LEVEL)}</span></summary><div class="opts">${lvls}</div><button class="btn ghost sm lvt-link" data-act="lvtest">🧭 ${T("lvtLink")}</button></details>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
       <div class="row"><button class="btn ghost" data-act="export" style="padding:8px 16px;font-size:14px">${T("export")}</button><label class="btn ghost" for="importFile" style="padding:8px 16px;font-size:14px">${T("import")}</label><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+    ${soundCard()}
     ${feedbackCard()}
     ${privacyCard()}
     ${SUPPORT_ON||DEV?`<section class="card sup">${!SUPPORT_ON?`<span class="sup-hidden sm-t">🙈 ${T("supHiddenNote")}</span>`:""}<div class="sup-cup" aria-hidden="true">💝</div><div class="sup-main"><b>${T("supTitle")}</b><span class="muted sm-t">${T("supSub")}</span>
@@ -1654,7 +1661,7 @@ function pick(i){
   if(Q.kind==="lvl"){ const o=q.opts[i]||{label:T("lvtSkip")}, ok=!!o.ok; if(ok) Q.score++; Q.answers[Q.i]={w:q.w, ok, picked:o};
     if(Q.i+1>=Q.qs.length){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     Q.i++; render(); window.scrollTo(0,0); return; }
-  Q.picked=i; const opt=q.opts[i], ok=!!opt.ok;
+  Q.picked=i; const opt=q.opts[i], ok=!!opt.ok; sfx(ok?"right":"wrong");
   const w=S.words.get(q.w.key)||q.w;
   if(w.lvTest){}
   else if(!w.filler) persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
@@ -2283,7 +2290,7 @@ function buy(id){
   if(g.inv.includes(id)) return toast(T("owned"));
   if(g.lv<it.lv) return toast(T("needLv",{n:it.lv}));
   if(g.gold<it.price) return toast(T("noGold",{n:it.price-g.gold}));
-  g.gold-=it.price; g.inv.push(id); g[it.slot]=id; saveGame();
+  g.gold-=it.price; g.inv.push(id); g[it.slot]=id; sfx("coin"); saveGame();
   toast(T("bought",{i:itemName(it)})); render();
 }
 function equip(id){
@@ -2361,7 +2368,7 @@ function startBattle(mid){
 }
 function castSpell(i){
   const B=S.battle; if(!B||B.stage!=="spell"||B.picked!=null) return;
-  B.picked=i; const opt=B.q.opts[i]; B.spellOk=!!opt.ok;
+  B.picked=i; const opt=B.q.opts[i]; B.spellOk=!!opt.ok; sfx(B.spellOk?"spellOk":"spellNo");
   const w=S.words.get(B.q.w.key)||B.q.w;
   persist(w.key,{...w, correct:(w.correct||0)+(B.spellOk?1:0), wrong:(w.wrong||0)+(B.spellOk?0:1), lastTested:today(), ...srsNext(w,B.spellOk)});
   render();
@@ -2372,7 +2379,7 @@ function fight(){
   else { if(g.tickets<1){ toast(T("noTicket")); return; } B.started=true; g.tickets-=1; }
   g.battles=(g.battles||0)+1;
   const res=simulate(B.m, !!B.spellOk);
-  B.res=res; B.stage="fight"; B.idx=0;
+  B.res=res; B.stage="fight"; B.idx=0; evSfx(res.ev[0]);
   if(res.win){
     let gold=B.m.gold;
     if(B.m.wild){ gold=Math.round(gold*wildGoldFactor(B.m.id)); if(!g.wildDay||g.wildDay.date!==today()) g.wildDay={date:today(),n:{}}; g.wildDay.n[B.m.id]=(g.wildDay.n[B.m.id]||0)+1; }
@@ -2388,9 +2395,11 @@ function fight(){
   clearInterval(S.btimer);
   battleTimer();
 }
+function evSfx(e){ if(!e) return; if(e.who==="p") sfx(e.crit||e.spell?"crit":"hit"); else if(e.who==="a") sfx("ally"); else if(e.eye) sfx("eye"); else if(e.tgt==="a") sfx("hurt"); else sfx(e.crit?"mcrit":"hurt"); }
+function battleEndSfx(){ const B=S.battle; if(!B||!B.res) return; if(!B.res.win) return sfx("lose"); sfx(B.conquered?"conquer":"win"); if(B.lvUp) setTimeout(()=>sfx("lvup"),900); }
 function battleTimer(){
   clearInterval(S.btimer);
-  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); } renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:(battleFast()?520:1150));
+  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); battleEndSfx(); } else evSfx(S.battle.res.ev[S.battle.idx]); renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:(battleFast()?520:1150));
 }
 function battleFast(){ if(S.fastMem!=null) return S.fastMem; try{ return localStorage.getItem("che-pro-fast")==="1"; }catch(e){ return false; } }
 function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
@@ -2511,12 +2520,30 @@ function gemPicker(it){ const gs=Object.entries(gemsOf()).filter(([k,n])=>n>0), 
 function gemIn(key){ const P=S.sockPick, g=game(); if(!P) return; const gs=gemsOf(); if(!(gs[key]>0)) return;
   const a=socketsOf(P.id), old=a[P.i];
   if(old){ const ask=P.id+"|"+P.i+"|"+key; if(S.gemRepAsk!==ask){ S.gemRepAsk=ask; return toast(T("gemRepAsk",{g:gemName(old)})); } S.gemRepAsk=null; }
-  a[P.i]=key; g.sock[P.id]=a; gs[key]--; if(!gs[key]) delete gs[key]; S.sockPick=null; saveGame(); toast(T("gemSet",{g:gemName(key)})); render(); }
+  a[P.i]=key; sfx("gem"); g.sock[P.id]=a; gs[key]--; if(!gs[key]) delete gs[key]; S.sockPick=null; saveGame(); toast(T("gemSet",{g:gemName(key)})); render(); }
 function gemOut(id,i){ const g=game(), a=socketsOf(id), key=a[i]; if(!key) return;
   if((g.charms||0)<1) return toast(T("gemNoCharm"));
   if(S.gemOutAsk!==id+"|"+i){ S.gemOutAsk=id+"|"+i; return toast(T("gemOutAsk",{g:gemName(key)})); }
   S.gemOutAsk=null; g.charms--; a[i]=null; g.sock[id]=a; const gs=gemsOf(); gs[key]=(gs[key]||0)+1; saveGame(); toast(T("gemOut",{g:gemName(key)})); render(); }
 function elFilterSeg(){ const f=S.shopEl||"all"; return `<div class="seg">${[["all",T("all")],...ELS.map(e=>[e.k,elName(e.k)])].map(([k,l])=>`<button data-shopel="${k}" aria-pressed="${f===k}">${l}</button>`).join("")}</div>`; }
+const ADV_PAGES={coop:["🎓","tabExam"], think:["🧠","tabThink"], rank:["🏆","tabRank"]};
+/* the 冒險 tab in the bottom bar opens a small menu: adventure, exams, reasoning, leaderboard */
+const ADV_MENU=[["go","⚔️","tabAdv"],["coop","🎓","tabExam"],["think","🧠","tabThink"],["rank","🏆","tabRank"]];
+function advMenuHtml(){ const cur=S.tab==="adv"?(ADV_PAGES[S.advTab]?S.advTab:"go"):null;
+  return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu" role="menu">${ADV_MENU.map(([k,ic,l])=>{ const lk=featLock(k);
+    return `<button role="menuitem" class="am-item${cur===k?" on":""}${lk?" locked":""}" data-act="amgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${lk?"🔒 ":""}${T(l)}</span></button>`; }).join("")}
+    <div class="am-snd"><button class="${SND.opt.music?"on":""}" data-act="sndmusic">🎵 ${T("sndMusic")} ${SND.opt.music?T("sndOn"):T("sndOff")}</button><button class="${SND.opt.sfx?"on":""}" data-act="sndsfx">💥 ${T("sndSfx")} ${SND.opt.sfx?T("sndOn"):T("sndOff")}</button></div></div>`; }
+function advMenuToggle(open){ let el=document.getElementById("advMenu"); const on=open!=null?open:!el;
+  if(!on){ if(el) el.remove(); return; }
+  if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.innerHTML=advMenuHtml(); }
+document.addEventListener("click",e=>{
+  const nav=e.target.closest("#tab-adv"); if(nav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(); return; }
+  const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
+  if(a==="amclose"){ e.stopPropagation(); advMenuToggle(false); return; }
+  if(a==="amgo"){ e.stopPropagation(); const k=t.dataset.k, lk=featLock(k); if(lk){ toast("🔒 "+T(lk)); return; } advMenuToggle(false);
+    S.quiz=null; S.battle=null; if(S.view==="ielts"){ ieStopAudio(); S.ieResult=null; } if(S.view==="toeic"){ toStop(); S.toResult=null; }
+    S.advTab=k; setTab("adv"); return; }
+}, true);
 function viewAdv(){ restCheck();
   const g=game(), s=stats(), need=expNeed(g.lv);
   const sub=S.advTab||"go";
@@ -2536,7 +2563,7 @@ function viewAdv(){ restCheck();
   } else if(sub==="think"){
     body=viewThink();
   } else if(sub==="vault"){
-    body=viewVault();
+    body=featLock("vault")?`<section class="card"><p class="muted">🔒 ${T("lockVault")}</p></section>`:viewVault();
   } else if(sub==="luck"){
     body=viewLuck();
   } else {
@@ -2544,6 +2571,7 @@ function viewAdv(){ restCheck();
     const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>b.lv-a.lv||a.slot.localeCompare(b.slot)||ELS.findIndex(e=>e.k===a.el)-ELS.findIndex(e=>e.k===b.el));
     body= all.length?elFilterSeg()+(own.length?`<div class="items">${own.map(it=>itemRow(it,"bag")).join("")}</div>`:`<div class="card empty"><p>${T("bagNone")}</p></div>`):`<div class="card empty"><h3>${T("bagEmpty")}</h3><p>${T("bagEmptySub")}</p></div>`;
   }
+  if(ADV_PAGES[sub]) return `<div class="view adv-page"><div class="page-h"><h2>${ADV_PAGES[sub][0]} ${T(ADV_PAGES[sub][1])}</h2></div>${body}</div>`;
   return `<div class="view">
     <section class="hero-card">
       <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>${CLOUD.user?supB(CLOUD.user.uid,20):""}`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),0,30)}</span>`:""; })()}</h2></div><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div>
@@ -2557,7 +2585,7 @@ function viewAdv(){ restCheck();
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
       <p>${T("rules3")}</p></details>
-    <div class="seg" role="group">${seg("go",T("tabGo"))}${seg("coop","🎓 "+T("tabExam"))}${seg("think","🧠 "+T("tabThink"))}${seg("rank",T("tabRank"))}</div>
+    ${sub!=="go"?`<div class="sub-h"><b>${({shop:"🏪 ",luck:"🍀 ",bag:"🎒 ",vault:"🌈 "})[sub]||""}${T(({shop:"tabShop",luck:"tabLuck",bag:"tabBag",vault:"tabVault"})[sub]||"tabGo")}</b><button class="btn ghost sm" data-advtab="go">${T("advBack")}</button></div>`:""}
     ${body}
   </div>`;
 }
@@ -2670,13 +2698,13 @@ function spinWheel(){
   if(el){ el.style.transition=still?"none":"transform 4.2s cubic-bezier(.15,.7,.2,1)"; el.style.transform=`rotate(${rot}deg)`; }
   if(btn){ btn.disabled=true; btn.textContent=T("wheelBusy"); }
   const pl=document.getElementById("lottoLeft"); if(pl) pl.textContent=g.lotto;
-  setTimeout(()=>{ S.wheelBusy=false; S.wheelMsg=T("wheelWin",{p:prizeText(res)}); render(); }, still||!el?50:4300);
+  sfx("spin"); setTimeout(()=>{ S.wheelBusy=false; S.wheelMsg=T("wheelWin",{p:prizeText(res)}); sfx("prize"); render(); }, still||!el?50:4300);
 }
 
 /* ----- scratch cards ----- */
 function exLeft(){ const g=game(); return g.exDate===today()?Math.max(0,LUCK.goldLotto.perDay-(g.exN||0)):LUCK.goldLotto.perDay; }
 function goldToLotto(){ const g=game(), c=LUCK.goldLotto.price; if(exLeft()<1) return toast(T("exNone")); if(g.gold<c) return toast(T("noGold",{n:c-g.gold}));
-  if(g.exDate!==today()){ g.exDate=today(); g.exN=0; } g.exN++; g.gold-=c; g.lotto=(g.lotto||0)+1; saveGame(); toast(T("exDone")); render(); }
+  if(g.exDate!==today()){ g.exDate=today(); g.exN=0; } g.exN++; g.gold-=c; g.lotto=(g.lotto||0)+1; sfx("coin"); saveGame(); toast(T("exDone")); render(); }
 function buyScratch(id){
   const c=LUCK.scratch.find(x=>x.id===id); if(!c) return;
   const g=game(); if((g.lotto||0)<c.cost) return toast(T("noLotto"));
@@ -2695,7 +2723,7 @@ function scratchModal(){
       <div class="sc-hint">${s.revealed?"✦ ✦ ✦":T("scHint")}</div></div>
     ${s.revealed?`<button class="btn" data-act="sctake">${T("scTake")}</button>`:`<button class="btn ghost" data-act="scall">${T("scAll")}</button>`}</div>`;
 }
-function scratchReveal(){ if(!S.scratch||S.scratch.revealed) return; S.scratch.revealed=true; renderSheet(); }
+function scratchReveal(){ if(!S.scratch||S.scratch.revealed) return; S.scratch.revealed=true; sfx("scratch"); renderSheet(); }
 function initScratch(){
   const c=document.getElementById("scCanvas"); if(!c||c.dataset.ready) return; c.dataset.ready="1";
   const b=c.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
@@ -2715,7 +2743,7 @@ function initScratch(){
 
 /* ----- shards → gems ----- */
 function craftGem(k){ const s=shardsOf(), g=game(); if((s[k]||0)<GEM.shards) return; const fee=GEM.fee[+k.split("-")[1]]||0;
-  if(g.gold<fee) return toast(T("noGold",{n:fee-g.gold})); g.gold-=fee; s[k]-=GEM.shards; if(!s[k]) delete s[k]; const gs=gemsOf(); gs[k]=(gs[k]||0)+1; saveGame(); toast(T("gemMade",{g:gemName(k)})); render(); }
+  if(g.gold<fee) return toast(T("noGold",{n:fee-g.gold})); g.gold-=fee; s[k]-=GEM.shards; if(!s[k]) delete s[k]; const gs=gemsOf(); gs[k]=(gs[k]||0)+1; sfx("gem"); saveGame(); toast(T("gemMade",{g:gemName(k)})); render(); }
 function gemBag(){ const g=game(), gs=Object.entries(gemsOf()).filter(([k,n])=>n>0);
   return `<section class="card"><h3>${T("gemBagT")}</h3><p class="muted sm-t">${T("gemBagSub")}</p>${gs.length?`<div class="gem-list">${gs.map(([k,n])=>`<span class="gem-opt">${gemDot(k)}<span>${esc(gemName(k))} ×${n}</span></span>`).join("")}</div>`:`<p class="muted sm-t">${T("gemNone")}</p>`}
     <div class="rw-row"><span>🪄 ${T("charmName")}</span><b>${g.charms||0}</b></div></section>`; }
@@ -2984,7 +3012,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.124";
+const APP_VERSION="2026.10.126";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3475,7 +3503,7 @@ document.addEventListener("click", e=>{
   if(a==="fight") return fight();
   if(a==="tax") return collectTax();
   if(a==="bspeed"){ const f=!battleFast(); try{ localStorage.setItem("che-pro-fast", f?"1":"0"); }catch(e){} S.fastMem=f; if(S.battle&&S.battle.stage==="fight") battleTimer(); renderBattleOnly(); return; }
-  if(a==="skip"){ if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
+  if(a==="skip"){ if(S.battle&&S.battle.stage==="fight") battleEndSfx(); if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
   if(a==="advback"){ clearInterval(S.btimer); S.battle=null; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
   if(a==="nodel"){ S.confirmDel=null; return render(); }
   if(a==="home"){ S.tab="today"; S.view="today"; S.quiz=null; render(); window.scrollTo(0,0); return; }
@@ -4763,8 +4791,8 @@ const AQ_ICON={
   luck:`<svg viewBox="0 0 32 32" aria-hidden="true"><g stroke="#1F6B37" stroke-width="1.6" fill="#3FA65A"><path d="M16 15c-4-1-8-4-6.5-7.5S15.5 6 16 10c.5-4 4.5-6 6.5-2.5S20 14 16 15z"/><path d="M16 15c-4 1-8 4-6.5 7.5S15.5 24 16 20c.5 4 4.5 6 6.5 2.5S20 16 16 15z" transform="rotate(90 16 15)"/><path d="M16 15c-4 1-8 4-6.5 7.5S15.5 24 16 20c.5 4 4.5 6 6.5 2.5S20 16 16 15z"/><path d="M16 15c-4-1-8-4-6.5-7.5S15.5 6 16 10c.5-4 4.5-6 6.5-2.5S20 14 16 15z" transform="rotate(90 16 15)"/></g><path d="M16 15c1 5 2 9 5 13" fill="none" stroke="#1F6B37" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="15" r="1.8" fill="#F2C94C"/></svg>`,
   bag:`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 8V6a4 4 0 0 1 8 0v2" fill="none" stroke="#6B4423" stroke-width="2"/><rect x="6" y="8" width="20" height="20" rx="6" fill="#C98B4B" stroke="#6B4423" stroke-width="1.8"/><path d="M6 16h20" stroke="#6B4423" stroke-width="1.6"/><rect x="11" y="18" width="10" height="7" rx="2" fill="#A86A2E" stroke="#6B4423" stroke-width="1.6"/><rect x="14.5" y="14" width="3" height="5" rx="1" fill="#F2C94C" stroke="#9A7212" stroke-width="1.2"/></svg>`};
 function advQuick(){ const sub=S.advTab||"go";
-  setTimeout(()=>{ if(typeof giftLoad==="function") giftLoad(false); },0);
-  return `<div class="adv-quick" role="group">${[["vault","tabVault"],["shop","tabShop"],["luck","tabLuck"],["bag","tabBag"]].map(([k,l])=>{ const lk=featLock(k), dot=k==="vault"&&typeof giftPending==="function"&&giftPending();
+  if(!featLock("vault")) setTimeout(()=>{ if(typeof giftLoad==="function") giftLoad(false); },0);
+  return `<div class="adv-quick" role="group">${[["vault","tabVault"],["shop","tabShop"],["luck","tabLuck"],["bag","tabBag"]].map(([k,l])=>{ const lk=featLock(k), dot=k==="vault"&&!lk&&typeof giftPending==="function"&&giftPending();
     return `<button class="aq-btn${sub===k?" on":""}${lk?" locked":""}${k==="vault"?" vault":""}" data-advtab="${k}" aria-pressed="${sub===k}"><span class="aq-ic">${k==="vault"?VAULT_ICON:AQ_ICON[k]}${lk?'<i class="aq-lock">🔒</i>':""}${dot?`<i class="aq-dot">${dot}</i>`:""}</span><span>${T(l)}</span></button>`; }).join("")}</div>`; }
 /* ----- monthly reading leaderboard: articles finished this calendar month (readMonths/{YYYY-MM}/u/{uid}) ----- */
 const monthKey=()=>today().slice(0,7);
@@ -5435,7 +5463,7 @@ const TK_LET="ABCDE";
 function tkCheck(q, pick){ if(q.type==="order") return Array.isArray(pick)&&pick.join()===q.ans.join(); return pick===(q.type==="odd"||q.type==="insert"?q.ans:q.a); }
 function tkAnswer(pick){
   const R=S.tk, q=R.qs[R.i]; if(R.picks[R.i]!=null) return;
-  const ok=tkCheck(q,pick); R.picks[R.i]=pick; R.ok[R.i]=ok; tkSeenAdd(q.key);
+  const ok=tkCheck(q,pick); R.picks[R.i]=pick; R.ok[R.i]=ok; tkSeenAdd(q.key); sfx(ok?"right":"wrong");
   const st=tkState(), sk=tkKind(q.type); const s=st.stat[sk]||(st.stat[sk]={ok:0,n:0}); s.n++; if(ok) s.ok++; saveGame(); render();
 }
 function tkNext(){ const R=S.tk; if(R.i<R.qs.length-1){ R.i++; R.sel=[]; render(); window.scrollTo(0,0); return; } tkFinish(); }
@@ -5729,9 +5757,20 @@ async function giftLoad(force){
   try{ const [a,b]=await Promise.all([fsM.getDocs(q("to",me)), fsM.getDocs(q("from",me))]); const recv=[], sent=[];
     a.forEach(d=>{ const x={id:d.id,...safeDoc(d.data())}; if(x.to===me) recv.push(x); }); b.forEach(d=>{ const x={id:d.id,...safeDoc(d.data())}; if(x.from===me) sent.push(x); });
     const by=(x,y)=>String(y.at||"").localeCompare(String(x.at||"")); recv.sort(by); sent.sort(by);
-    GIFT_IN={at:Date.now(), recv, sent}; }catch(e){ console.warn("gifts",e&&e.code); GIFT_IN={at:Date.now(), recv:[], sent:[], err:true}; }
+    GIFT_IN={at:Date.now(), recv, sent}; recv.filter(x=>x.status==="done").forEach(giftClaim); }catch(e){ console.warn("gifts",e&&e.code); GIFT_IN={at:Date.now(), recv:[], sent:[], err:true}; }
   if(S.view==="adv") render(); }
-const giftPending=()=>GIFT_IN?GIFT_IN.recv.filter(x=>x.status==="pending").length:0;
+const giftPending=()=>GIFT_IN?GIFT_IN.recv.filter(x=>x.status==="pending").length+GIFT_IN.sent.filter(x=>x.status==="accepted").length:0;
+// the receiver collects a gift only after the sender taps Complete (status "done" -> "claimed", once, in a transaction)
+const GIFT_CLAIMING=new Set();
+async function giftClaim(x){
+  if(!CLOUD.fb||!CLOUD.user||GIFT_CLAIMING.has(x.id)) return; GIFT_CLAIMING.add(x.id);
+  const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"gifts",x.id), me=CLOUD.user.uid;
+  try{ await fsM.runTransaction(db, async tx=>{ const snap=await tx.get(ref); const d=snap.exists()?snap.data():null;
+      if(!d||d.status!=="done"||d.to!==me) throw new Error("state");
+      tx.update(ref,{status:"claimed", doneAt:new Date().toISOString()}); });
+    giftApply(x.items||{},1); x.status="claimed"; saveGame(); toast(T("giftGot",{n:x.fromName||"?"})); if(S.view==="adv") render(); }
+  catch(e){ console.warn("gift claim",e&&(e.code||e.message)); }
+  GIFT_CLAIMING.delete(x.id); }
 async function giftFind(){
   const n=(($("#giftNick")||{}).value||"").trim(); if(!n) return toast(T("sbNickPh"));
   if(!CLOUD.user||!CLOUD.fb) return toast(T("giftLogin"));
@@ -5763,14 +5802,15 @@ async function giftAct(id, act){
   const x=GIFT_IN&&(GIFT_IN.recv.concat(GIFT_IN.sent)).find(y=>y.id===id); if(!x||!CLOUD.fb) return;
   const ask=id+"|"+act; if(S.giftAsk!==ask){ S.giftAsk=ask; render(); return; }   // every action needs a second tap
   S.giftAsk=null;
-  const next={accept:"accepted", decline:"declined", cancel:"cancelled", reclaim:"returned"}[act];
-  const need={accept:"pending", decline:"pending", cancel:"pending", reclaim:"declined"}[act], me=CLOUD.user&&CLOUD.user.uid;
+  const next={accept:"accepted", decline:"declined", cancel:"cancelled", reclaim:"returned", complete:"done"}[act];
+  const need={accept:["pending"], decline:["pending"], cancel:["pending","accepted"], reclaim:["declined"], complete:["accepted"]}[act], me=CLOUD.user&&CLOUD.user.uid;
   const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"gifts",id);
   try{ // read the latest status inside a transaction so a gift can only change state once (the Firestore rules check this too)
     await fsM.runTransaction(db, async tx=>{ const snap=await tx.get(ref); const d=snap.exists()?snap.data():null;
-      if(!d||d.status!==need||((act==="accept"||act==="decline")?d.to!==me:d.from!==me)) throw new Error("state");
+      if(!d||!need.includes(d.status)||((act==="accept"||act==="decline")?d.to!==me:d.from!==me)) throw new Error("state");
       tx.update(ref,{status:next, doneAt:new Date().toISOString()}); });
-    if(act==="accept"){ giftApply(x.items,1); toast(T("giftGot",{n:x.fromName||"?"})); }
+    if(act==="accept") toast(T("giftAccepted",{n:x.fromName||"?"}));   // items move only after the sender taps Complete
+    if(act==="complete") toast(T("giftCompleted",{n:x.toName||"?"}));
     if(act==="cancel"||act==="reclaim"){ giftApply(x.items,1); toast(T("giftBack")); }
     if(act==="decline") toast(T("giftDeclined"));
     x.status=next; saveGame(); }
@@ -5798,11 +5838,13 @@ function viewVault(){
       <button class="btn${G.ask?" danger":""}" data-act="vtsend" ${giftCount(it)?"":"disabled"}>${G.ask?T("giftSendSure"):T("giftSend")}</button>`;
   }
   // inbox
-  const st=x=>T("giftSt_"+x.status), ask=(id,a)=>S.giftAsk===id+"|"+a;
+  const st=(x,mine)=>T("giftSt_"+x.status+(mine&&x.status==="accepted"?"Mine":"")), ask=(id,a)=>S.giftAsk===id+"|"+a;
   const btn=(x,a,cls)=>`<button class="btn sm ${cls||""}${ask(x.id,a)?" danger":""}" data-act="vtgift" data-k="${x.id}|${a}">${ask(x.id,a)?T("giftSure_"+a):T("giftBtn_"+a)}</button>`;
   const recv=(GIFT_IN&&GIFT_IN.recv)||[], sent=(GIFT_IN&&GIFT_IN.sent)||[];
-  const card=(x,mine)=>`<div class="gift-card ${x.status}"><div class="gift-h"><b>${mine?T("giftToShort",{n:esc(x.toName||"?")}):T("giftFrom",{n:esc(x.fromName||"?")})}</b><span class="chip">${st(x)}</span></div><div class="sm-t">${giftLines(x.items||{}).join(" · ")}</div>
+  const card=(x,mine)=>`<div class="gift-card ${x.status}"><div class="gift-h"><b>${mine?T("giftToShort",{n:esc(x.toName||"?")}):T("giftFrom",{n:esc(x.fromName||"?")})}</b><span class="chip">${st(x,mine)}</span></div><div class="sm-t">${giftLines(x.items||{}).join(" · ")}</div>
     ${!mine&&x.status==="pending"?`<div class="row">${btn(x,"accept")}${btn(x,"decline","ghost")}</div>${ask(x.id,"accept")?`<p class="sm-t">${T("giftAcceptQ")}</p>`:""}`:""}
+    ${!mine&&x.status==="accepted"?`<p class="sm-t muted">${T("giftWaitQ",{n:esc(x.fromName||"?")})}</p>`:""}
+    ${mine&&x.status==="accepted"?`<p class="sm-t gift-doneq">${T("giftDoneQ",{n:esc(x.toName||"?")})}</p><div class="row">${btn(x,"complete")}${btn(x,"cancel","ghost")}</div>`:""}
     ${mine&&x.status==="pending"?`<div class="row">${btn(x,"cancel","ghost")}</div>`:""}${mine&&x.status==="declined"?`<div class="row">${btn(x,"reclaim")}</div>`:""}</div>`;
   const inbox=CLOUD.user?`<section class="card"><h3>📬 ${T("giftInbox")}</h3>${recv.length?recv.slice(0,10).map(x=>card(x,false)).join(""):`<p class="muted sm-t">${T("giftNoneIn")}</p>`}
     ${sent.length?`<h4>${T("giftSentT")}</h4>${sent.slice(0,10).map(x=>card(x,true)).join("")}`:""}</section>`:"";
@@ -5823,6 +5865,117 @@ document.addEventListener("click",e=>{
 
 Object.assign(STR.zh,{"tabVault": "彩虹寶庫", "vaultEyebrow": "小矮妖藏在彩虹盡頭的寶藏", "vaultName": "彩虹寶庫", "vaultSub": "傳說小矮妖把金子藏在彩虹的盡頭。這裡之後會販售特別道具，也可以把寶物送給朋友。", "vaultShopT": "寶庫商品", "vaultShopSub": "之後會開放用真實貨幣購買。", "vtCharm": "解鑲符 ×{n}", "vtGold": "{n} 金幣", "vaultSoon": "即將推出", "vaultTest": "測試領取", "vaultTestGot": "（開發者測試）已領取", "giftTitle": "贈禮", "giftSub": "把寶石、寶石碎片或解鑲符送給其他玩家。送出前要再確認一次，對方也要確認後才會收下；每次贈送都要付一點金幣手續費。", "giftLogin": "要先用 Google 登入，才能贈送或收禮。", "giftFind": "找玩家", "giftSelf": "不能送給自己喔", "giftFail": "沒有成功，請稍後再試", "giftTo": "送給 {n}", "giftChange": "換人", "giftHave": "擁有 {n}", "giftNothing": "你現在沒有可以送的寶石、碎片或解鑲符。", "giftFee": "手續費：{n} 金", "giftFeeRule": "每個碎片 10–80 金、每顆寶石 40–320 金（依等級）、每張解鑲符 60 金", "giftCheck1": "確定要送給 {n} 嗎？", "giftCheck2": "送出後這些東西會先離開你的背包，並扣 {n} 金手續費。對方接受後就收不回來；對方拒絕的話可以取回，但手續費不退。", "giftSend": "送出", "giftSendSure": "確定送出", "giftEmpty": "先選要送的東西", "giftNotEnough": "你的數量不夠了", "giftSent": "已送出，等 {n} 確認收下", "giftInbox": "禮物箱", "giftNoneIn": "還沒有收到禮物。", "giftSentT": "我送出的", "giftFrom": "來自 {n}", "giftToShort": "送給 {n}", "giftSt_pending": "等待確認", "giftSt_accepted": "已收下", "giftSt_declined": "對方拒絕", "giftSt_cancelled": "已取回", "giftSt_returned": "已取回", "giftBtn_accept": "收下", "giftBtn_decline": "拒絕", "giftBtn_cancel": "取回", "giftBtn_reclaim": "取回", "giftSure_accept": "確定收下", "giftSure_decline": "確定拒絕", "giftSure_cancel": "確定取回", "giftSure_reclaim": "確定取回", "giftAcceptQ": "再按一次「確定收下」，禮物就會放進你的背包。", "giftGot": "收到 {n} 的禮物！", "giftBack": "東西已經回到你的背包", "giftDeclined": "已拒絕，禮物會退回給對方", "gemSame": "同屬性 ×1.5", "gemSheng": "相生 ×1.25", "gemBagSub": "武器鑲寶石加攻擊，防具鑲寶石加防禦和 HP。寶石和裝備同屬性效果 ×1.5；寶石屬性「生」裝備屬性時（木生火、火生土、土生金、金生水、水生木）×1.25。換裝備時寶石會留在原本的裝備上。"});Object.assign(STR.en,{"tabVault": "Rainbow Vault", "vaultEyebrow": "The leprechaun's treasure at the end of the rainbow", "vaultName": "Rainbow Vault", "vaultSub": "Legend says the leprechaun hides his gold at the end of the rainbow. Special items will be sold here later, and you can send treasures to friends.", "vaultShopT": "Vault items", "vaultShopSub": "These will be available to buy with real money later.", "vtCharm": "Unsocketing charm ×{n}", "vtGold": "{n} gold", "vaultSoon": "Coming soon", "vaultTest": "Test claim", "vaultTestGot": "(Developer test) Claimed", "giftTitle": "Gifts", "giftSub": "Send gems, shards or unsocketing charms to another player. You confirm twice before sending, and they confirm before accepting. Each gift costs a small gold fee.", "giftLogin": "Sign in with Google to send or receive gifts.", "giftFind": "Find player", "giftSelf": "You can't send a gift to yourself", "giftFail": "That didn't work. Please try again later", "giftTo": "Gift to {n}", "giftChange": "Change", "giftHave": "you have {n}", "giftNothing": "You have no gems, shards or charms to give right now.", "giftFee": "Fee: {n} gold", "giftFeeRule": "10–80 per shard, 40–320 per gem (by tier), 60 per charm", "giftCheck1": "Send this to {n}?", "giftCheck2": "These items leave your bag now and {n} gold is charged. Once they accept, it can't be undone; if they decline you can take the items back, but the fee is not refunded.", "giftSend": "Send", "giftSendSure": "Yes, send it", "giftEmpty": "Choose something to send first", "giftNotEnough": "You don't have enough", "giftSent": "Sent! Waiting for {n} to accept", "giftInbox": "Gift box", "giftNoneIn": "No gifts yet.", "giftSentT": "Sent by me", "giftFrom": "From {n}", "giftToShort": "To {n}", "giftSt_pending": "Waiting", "giftSt_accepted": "Accepted", "giftSt_declined": "Declined", "giftSt_cancelled": "Taken back", "giftSt_returned": "Taken back", "giftBtn_accept": "Accept", "giftBtn_decline": "Decline", "giftBtn_cancel": "Take back", "giftBtn_reclaim": "Take back", "giftSure_accept": "Yes, accept", "giftSure_decline": "Yes, decline", "giftSure_cancel": "Yes, take back", "giftSure_reclaim": "Yes, take back", "giftAcceptQ": "Tap \"Yes, accept\" and the gift goes into your bag.", "giftGot": "You got a gift from {n}!", "giftBack": "The items are back in your bag", "giftDeclined": "Declined. The gift goes back to the sender", "gemSame": "same element ×1.5", "gemSheng": "generating ×1.25", "gemBagSub": "Weapon gems add attack; armour gems add defence and HP. A gem of the same element counts ×1.5; a gem whose element generates the piece's (wood→fire→earth→metal→water→wood) counts ×1.25. Gems stay in their piece when you change gear."});Object.assign(STR.hi,{"tabVault": "इंद्रधनुष ख़ज़ाना", "vaultEyebrow": "इंद्रधनुष के छोर पर लेप्रेकॉन का ख़ज़ाना", "vaultName": "इंद्रधनुष ख़ज़ाना", "vaultSub": "कहते हैं लेप्रेकॉन अपना सोना इंद्रधनुष के छोर पर छिपाता है। बाद में यहाँ ख़ास चीज़ें बिकेंगी, और आप दोस्तों को ख़ज़ाना भेज सकते हैं।", "vaultShopT": "ख़ज़ाने की चीज़ें", "vaultShopSub": "ये बाद में असली पैसों से ख़रीदी जा सकेंगी।", "vtCharm": "मुक्ति-ताबीज़ ×{n}", "vtGold": "{n} सोना", "vaultSoon": "जल्द आ रहा है", "vaultTest": "टेस्ट लें", "vaultTestGot": "(डेवलपर टेस्ट) मिल गया", "giftTitle": "उपहार", "giftSub": "दूसरे खिलाड़ी को रत्न, टुकड़े या मुक्ति-ताबीज़ भेजें। भेजने से पहले आप दो बार पुष्टि करते हैं, और वे स्वीकार करने से पहले पुष्टि करते हैं। हर उपहार पर थोड़ा सोना शुल्क लगता है।", "giftLogin": "उपहार भेजने या पाने के लिए Google से साइन इन करें।", "giftFind": "खिलाड़ी खोजें", "giftSelf": "आप ख़ुद को उपहार नहीं भेज सकते", "giftFail": "नहीं हो पाया। बाद में फिर कोशिश करें", "giftTo": "{n} को उपहार", "giftChange": "बदलें", "giftHave": "आपके पास {n}", "giftNothing": "अभी आपके पास देने के लिए रत्न, टुकड़े या ताबीज़ नहीं हैं।", "giftFee": "शुल्क: {n} सोना", "giftFeeRule": "हर टुकड़ा 10–80, हर रत्न 40–320 (स्तर के अनुसार), हर ताबीज़ 60", "giftCheck1": "{n} को भेजें?", "giftCheck2": "ये चीज़ें अभी आपके बैग से निकल जाएँगी और {n} सोना कटेगा। उनके स्वीकार करने के बाद वापस नहीं होगा; वे मना करें तो आप चीज़ें वापस ले सकते हैं, पर शुल्क वापस नहीं मिलेगा।", "giftSend": "भेजें", "giftSendSure": "हाँ, भेजें", "giftEmpty": "पहले भेजने के लिए कुछ चुनें", "giftNotEnough": "आपके पास पर्याप्त नहीं है", "giftSent": "भेज दिया! {n} के स्वीकार करने का इंतज़ार", "giftInbox": "उपहार बक्सा", "giftNoneIn": "अभी कोई उपहार नहीं।", "giftSentT": "मेरे भेजे हुए", "giftFrom": "{n} से", "giftToShort": "{n} को", "giftSt_pending": "इंतज़ार", "giftSt_accepted": "स्वीकार", "giftSt_declined": "अस्वीकार", "giftSt_cancelled": "वापस लिया", "giftSt_returned": "वापस लिया", "giftBtn_accept": "स्वीकार करें", "giftBtn_decline": "मना करें", "giftBtn_cancel": "वापस लें", "giftBtn_reclaim": "वापस लें", "giftSure_accept": "हाँ, स्वीकार", "giftSure_decline": "हाँ, मना", "giftSure_cancel": "हाँ, वापस लें", "giftSure_reclaim": "हाँ, वापस लें", "giftAcceptQ": "\"हाँ, स्वीकार\" दबाएँ और उपहार आपके बैग में आ जाएगा।", "giftGot": "{n} से उपहार मिला!", "giftBack": "चीज़ें आपके बैग में वापस आ गईं", "giftDeclined": "मना कर दिया। उपहार भेजने वाले को लौट जाएगा", "gemSame": "समान तत्व ×1.5", "gemSheng": "पोषक तत्व ×1.25", "gemBagSub": "हथियार के रत्न हमला बढ़ाते हैं; कवच के रत्न रक्षा और HP बढ़ाते हैं। समान तत्व का रत्न ×1.5; जो रत्न उपकरण के तत्व को जन्म देता है (लकड़ी→अग्नि→पृथ्वी→धातु→जल→लकड़ी) ×1.25। उपकरण बदलने पर रत्न उसी उपकरण में रहते हैं।"});Object.assign(STR.es,{"tabVault": "Cámara del Arcoíris", "vaultEyebrow": "El tesoro del leprechaun al final del arcoíris", "vaultName": "Cámara del Arcoíris", "vaultSub": "Dice la leyenda que el leprechaun esconde su oro al final del arcoíris. Más adelante aquí se venderán objetos especiales, y puedes enviar tesoros a tus amigos.", "vaultShopT": "Objetos de la cámara", "vaultShopSub": "Más adelante se podrán comprar con dinero real.", "vtCharm": "Amuleto de desengaste ×{n}", "vtGold": "{n} de oro", "vaultSoon": "Próximamente", "vaultTest": "Prueba", "vaultTestGot": "(Prueba de desarrollador) Recibido", "giftTitle": "Regalos", "giftSub": "Envía gemas, fragmentos o amuletos a otro jugador. Confirmas dos veces antes de enviar y la otra persona confirma antes de aceptar. Cada regalo cuesta una pequeña comisión en oro.", "giftLogin": "Inicia sesión con Google para enviar o recibir regalos.", "giftFind": "Buscar jugador", "giftSelf": "No puedes enviarte un regalo a ti mismo", "giftFail": "No ha funcionado. Inténtalo más tarde", "giftTo": "Regalo para {n}", "giftChange": "Cambiar", "giftHave": "tienes {n}", "giftNothing": "Ahora no tienes gemas, fragmentos ni amuletos para regalar.", "giftFee": "Comisión: {n} de oro", "giftFeeRule": "10–80 por fragmento, 40–320 por gema (según nivel), 60 por amuleto", "giftCheck1": "¿Enviar esto a {n}?", "giftCheck2": "Estos objetos salen ahora de tu bolsa y se cobran {n} de oro. Cuando la otra persona acepte no se puede deshacer; si lo rechaza, puedes recuperarlos, pero la comisión no se devuelve.", "giftSend": "Enviar", "giftSendSure": "Sí, enviar", "giftEmpty": "Elige primero qué enviar", "giftNotEnough": "No tienes suficientes", "giftSent": "¡Enviado! Esperando a que {n} lo acepte", "giftInbox": "Buzón de regalos", "giftNoneIn": "Aún no hay regalos.", "giftSentT": "Enviados por mí", "giftFrom": "De {n}", "giftToShort": "Para {n}", "giftSt_pending": "Pendiente", "giftSt_accepted": "Aceptado", "giftSt_declined": "Rechazado", "giftSt_cancelled": "Recuperado", "giftSt_returned": "Recuperado", "giftBtn_accept": "Aceptar", "giftBtn_decline": "Rechazar", "giftBtn_cancel": "Recuperar", "giftBtn_reclaim": "Recuperar", "giftSure_accept": "Sí, aceptar", "giftSure_decline": "Sí, rechazar", "giftSure_cancel": "Sí, recuperar", "giftSure_reclaim": "Sí, recuperar", "giftAcceptQ": "Pulsa «Sí, aceptar» y el regalo irá a tu bolsa.", "giftGot": "¡Has recibido un regalo de {n}!", "giftBack": "Los objetos han vuelto a tu bolsa", "giftDeclined": "Rechazado. El regalo vuelve a quien lo envió", "gemSame": "mismo elemento ×1,5", "gemSheng": "generación ×1,25", "gemBagSub": "Las gemas del arma suman ataque; las de la armadura, defensa y PV. Una gema del mismo elemento cuenta ×1,5; una gema cuyo elemento genera el de la pieza (madera→fuego→tierra→metal→agua→madera) cuenta ×1,25. Las gemas se quedan en su pieza al cambiar de equipo."});Object.assign(STR.ja,{"tabVault": "虹の宝物庫", "vaultEyebrow": "虹のふもとに隠されたレプラコーンの宝", "vaultName": "虹の宝物庫", "vaultSub": "レプラコーンは虹のふもとに金貨を隠すと言われています。今後ここで特別なアイテムを販売予定。友だちに宝物を贈ることもできます。", "vaultShopT": "宝物庫のアイテム", "vaultShopSub": "今後、現金で購入できるようになります。", "vtCharm": "外しの護符 ×{n}", "vtGold": "金貨 {n}", "vaultSoon": "近日公開", "vaultTest": "テスト受取", "vaultTestGot": "（開発者テスト）受け取りました", "giftTitle": "贈り物", "giftSub": "宝石・かけら・外しの護符をほかのプレイヤーに贈れます。送る前に2回確認し、相手も確認してから受け取ります。贈るたびに少しの金貨手数料がかかります。", "giftLogin": "贈り物の送受信には Google でログインしてください。", "giftFind": "プレイヤーを探す", "giftSelf": "自分には贈れません", "giftFail": "うまくいきませんでした。しばらくしてからもう一度どうぞ", "giftTo": "{n} へ贈る", "giftChange": "変更", "giftHave": "所持 {n}", "giftNothing": "今は贈れる宝石・かけら・護符がありません。", "giftFee": "手数料：金貨 {n}", "giftFeeRule": "かけら 10〜80・宝石 40〜320（等級による）・護符 60 ずつ", "giftCheck1": "{n} に贈りますか？", "giftCheck2": "これらのアイテムはすぐにバッグから出て、金貨 {n} の手数料がかかります。相手が受け取ると取り消せません。断られた場合はアイテムを取り戻せますが、手数料は戻りません。", "giftSend": "贈る", "giftSendSure": "はい、贈る", "giftEmpty": "まず贈るものを選んでください", "giftNotEnough": "数が足りません", "giftSent": "贈りました！{n} の受け取りを待っています", "giftInbox": "ギフトボックス", "giftNoneIn": "まだ贈り物はありません。", "giftSentT": "自分が贈ったもの", "giftFrom": "{n} から", "giftToShort": "{n} へ", "giftSt_pending": "確認待ち", "giftSt_accepted": "受け取り済み", "giftSt_declined": "辞退", "giftSt_cancelled": "取り戻し済み", "giftSt_returned": "取り戻し済み", "giftBtn_accept": "受け取る", "giftBtn_decline": "断る", "giftBtn_cancel": "取り戻す", "giftBtn_reclaim": "取り戻す", "giftSure_accept": "はい、受け取る", "giftSure_decline": "はい、断る", "giftSure_cancel": "はい、取り戻す", "giftSure_reclaim": "はい、取り戻す", "giftAcceptQ": "「はい、受け取る」を押すと、贈り物がバッグに入ります。", "giftGot": "{n} から贈り物が届きました！", "giftBack": "アイテムがバッグに戻りました", "giftDeclined": "断りました。贈り物は送り主に戻ります", "gemSame": "同属性 ×1.5", "gemSheng": "相生 ×1.25", "gemBagSub": "武器の宝石は攻撃力、防具の宝石は防御力と HP を上げます。同じ属性なら ×1.5、宝石の属性が装備の属性を「生む」とき（木→火→土→金→水→木）は ×1.25。装備を替えても宝石は元の装備に残ります。"});Object.assign(STR.ko,{"tabVault": "무지개 보물고", "vaultEyebrow": "무지개 끝에 숨긴 레프러콘의 보물", "vaultName": "무지개 보물고", "vaultSub": "레프러콘은 무지개 끝에 금을 숨긴다고 해요. 앞으로 이곳에서 특별한 아이템을 판매하고, 친구에게 보물을 선물할 수도 있어요.", "vaultShopT": "보물고 아이템", "vaultShopSub": "나중에 실제 돈으로 구매할 수 있게 될 예정이에요.", "vtCharm": "해제 부적 ×{n}", "vtGold": "골드 {n}", "vaultSoon": "출시 예정", "vaultTest": "테스트 받기", "vaultTestGot": "(개발자 테스트) 받았어요", "giftTitle": "선물", "giftSub": "보석, 조각, 해제 부적을 다른 플레이어에게 보낼 수 있어요. 보내기 전에 두 번 확인하고, 상대도 확인한 뒤에 받아요. 선물할 때마다 골드 수수료가 조금 들어요.", "giftLogin": "선물을 주고받으려면 Google로 로그인하세요.", "giftFind": "플레이어 찾기", "giftSelf": "자신에게는 선물할 수 없어요", "giftFail": "실패했어요. 잠시 후 다시 시도하세요", "giftTo": "{n}에게 선물", "giftChange": "변경", "giftHave": "보유 {n}", "giftNothing": "지금은 선물할 보석, 조각, 부적이 없어요.", "giftFee": "수수료: 골드 {n}", "giftFeeRule": "조각 10–80, 보석 40–320(등급별), 부적 60씩", "giftCheck1": "{n}에게 보낼까요?", "giftCheck2": "이 아이템들은 바로 가방에서 빠지고 골드 {n}이 차감돼요. 상대가 받으면 되돌릴 수 없고, 거절하면 아이템을 되찾을 수 있지만 수수료는 돌려받지 못해요.", "giftSend": "보내기", "giftSendSure": "네, 보내기", "giftEmpty": "먼저 보낼 것을 고르세요", "giftNotEnough": "수량이 부족해요", "giftSent": "보냈어요! {n}의 수락을 기다리는 중", "giftInbox": "선물함", "giftNoneIn": "아직 받은 선물이 없어요.", "giftSentT": "내가 보낸 선물", "giftFrom": "{n}의 선물", "giftToShort": "{n}에게", "giftSt_pending": "확인 대기", "giftSt_accepted": "받음", "giftSt_declined": "거절됨", "giftSt_cancelled": "되찾음", "giftSt_returned": "되찾음", "giftBtn_accept": "받기", "giftBtn_decline": "거절", "giftBtn_cancel": "되찾기", "giftBtn_reclaim": "되찾기", "giftSure_accept": "네, 받기", "giftSure_decline": "네, 거절", "giftSure_cancel": "네, 되찾기", "giftSure_reclaim": "네, 되찾기", "giftAcceptQ": "\"네, 받기\"를 누르면 선물이 가방에 들어가요.", "giftGot": "{n}에게서 선물이 왔어요!", "giftBack": "아이템이 가방으로 돌아왔어요", "giftDeclined": "거절했어요. 선물은 보낸 사람에게 돌아가요", "gemSame": "같은 속성 ×1.5", "gemSheng": "상생 ×1.25", "gemBagSub": "무기 보석은 공격력, 방어구 보석은 방어력과 HP를 올려요. 같은 속성이면 ×1.5, 보석 속성이 장비 속성을 '생'할 때(목→화→토→금→수→목) ×1.25예요. 장비를 바꿔도 보석은 원래 장비에 남아요."});
 Object.assign(STR.zh,{"giftChanged": "這份禮物的狀態已經變了，已重新整理"});Object.assign(STR.en,{"giftChanged": "This gift has already changed. Refreshed"});Object.assign(STR.hi,{"giftChanged": "यह उपहार पहले ही बदल चुका है। रीफ़्रेश किया गया"});Object.assign(STR.es,{"giftChanged": "Este regalo ya ha cambiado. Se ha actualizado"});Object.assign(STR.ja,{"giftChanged": "この贈り物の状態はすでに変わっています。更新しました"});Object.assign(STR.ko,{"giftChanged": "이 선물의 상태가 이미 바뀌었어요. 새로고침했어요"});
+Object.assign(STR.zh,{"advBack": "← 回冒險"});Object.assign(STR.en,{"advBack": "← Adventure"});Object.assign(STR.hi,{"advBack": "← साहसिक"});Object.assign(STR.es,{"advBack": "← Aventura"});Object.assign(STR.ja,{"advBack": "← 冒険へ"});Object.assign(STR.ko,{"advBack": "← 모험으로"});
+/* ================= Sound: background music + effects, all synthesised with Web Audio (no audio files) =================
+   Music: "town" (a gentle jig in D, tin whistle + harp + bodhrán) on adventure screens, "battle" (a driving reel in E minor) in fights.
+   Effects: sfx(name). Settings in localStorage "che-pro-snd" = {music, sfx}. The audio starts after the first tap (browser rule). */
+const SND={ctx:null, master:null, mus:null, fx:null, track:null, timer:null, next:0, step:0, opt:{music:true, sfx:true}};
+try{ Object.assign(SND.opt, JSON.parse(localStorage.getItem("che-pro-snd")||"{}")); }catch(e){}
+function sndSave(){ try{ localStorage.setItem("che-pro-snd", JSON.stringify(SND.opt)); }catch(e){} }
+function sndInit(){ if(SND.ctx) { if(SND.ctx.state==="suspended") SND.ctx.resume().catch(()=>{}); return SND.ctx; }
+  const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return null;
+  const c=SND.ctx=new AC(); SND.master=c.createGain(); SND.master.gain.value=0.9; SND.master.connect(c.destination);
+  SND.mus=c.createGain(); SND.mus.gain.value=0.16; SND.mus.connect(SND.master);
+  SND.fx=c.createGain(); SND.fx.gain.value=0.5; SND.fx.connect(SND.master);
+  return c; }
+const hz=m=>440*Math.pow(2,(m-69)/12);
+function tone(dest, t, f, d, o){ const c=SND.ctx; o=o||{}; const osc=c.createOscillator(), g=c.createGain();
+  osc.type=o.type||"triangle"; osc.frequency.setValueAtTime(f,t); if(o.to) osc.frequency.exponentialRampToValueAtTime(o.to,t+d);
+  if(o.vib){ const l=c.createOscillator(), lg=c.createGain(); l.frequency.value=5.5; lg.gain.value=f*0.012; l.connect(lg).connect(osc.frequency); l.start(t+0.06); l.stop(t+d+0.05); }
+  const v=o.v==null?0.3:o.v, a=o.a||0.008, r=o.r==null?d*0.9:o.r;
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+a); g.gain.exponentialRampToValueAtTime(0.0001,t+Math.max(a+0.01,r));
+  osc.connect(g).connect(dest); osc.start(t); osc.stop(t+d+0.05); }
+function noise(dest, t, d, o){ const c=SND.ctx; o=o||{}; const n=Math.floor(c.sampleRate*d), b=c.createBuffer(1,n,c.sampleRate), x=b.getChannelData(0);
+  for(let i=0;i<n;i++) x[i]=(Math.random()*2-1)*(1-i/n);
+  const s=c.createBufferSource(); s.buffer=b; const f=c.createBiquadFilter(); f.type=o.ft||"lowpass"; f.frequency.value=o.f||1200; const g=c.createGain(); g.gain.value=o.v==null?0.3:o.v;
+  s.connect(f).connect(g).connect(dest); s.start(t); }
+/* ---- music ---- each step = one eighth note; notes are [midi or 0 for rest, length in steps] */
+const TRACKS={
+  town:{bpm:112, swing:0.0, mel:[
+    [74,1],[69,1],[66,1],[69,2],[74,1], [78,1],[76,1],[74,1],[76,2],[69,1], [71,1],[74,1],[71,1],[67,2],[71,1], [69,3],[66,3],
+    [74,1],[69,1],[66,1],[69,2],[74,1], [78,1],[79,1],[81,1],[78,2],[76,1], [74,1],[76,1],[78,1],[76,1],[74,1],[73,1], [74,3],[0,3],
+    [78,1],[79,1],[81,1],[83,2],[81,1], [79,1],[78,1],[76,1],[78,2],[74,1], [76,1],[78,1],[79,1],[76,2],[73,1], [74,3],[69,3],
+    [78,1],[79,1],[81,1],[83,2],[81,1], [79,2],[78,1],[76,2],[74,1], [73,1],[74,1],[76,1],[69,1],[73,1],[76,1], [74,3],[0,3]],
+    bass:[[50,6],[45,6],[43,6],[45,6],[50,6],[45,6],[43,3],[45,3],[50,6],[50,6],[43,6],[45,6],[50,6],[50,6],[43,6],[45,3],[50,3]],
+    drum:"K..t.. k..t..", lead:{type:"triangle", vib:true, v:0.22}, bassV:0.16},
+  battle:{bpm:168, mel:[
+    [64,1],[71,1],[71,1],[67,1],[71,1],[67,1],[69,1],[71,1], [64,1],[71,1],[71,1],[67,1],[74,1],[71,1],[69,1],[67,1],
+    [64,1],[71,1],[71,1],[69,1],[71,1],[74,1],[76,1],[74,1], [71,1],[69,1],[67,1],[69,1],[71,2],[0,2],
+    [76,1],[79,1],[76,1],[74,1],[71,1],[74,1],[76,1],[78,1], [79,1],[78,1],[76,1],[74,1],[71,1],[69,1],[67,1],[69,1],
+    [71,1],[74,1],[71,1],[69,1],[67,1],[69,1],[71,1],[69,1], [67,1],[66,1],[64,1],[66,1],[64,2],[0,2]],
+    bass:[[40,4],[40,4],[38,4],[40,4],[40,4],[40,4],[43,4],[38,4],[40,4],[43,4],[45,4],[47,4],[43,4],[38,4],[40,4],[40,4]],
+    drum:"K.t.K.tt K.t.Kktt", lead:{type:"square", vib:false, v:0.13}, bassV:0.2}};
+function musicSchedule(){
+  const c=SND.ctx, T0=TRACKS[SND.track]; if(!c||!T0) return; const st=60/T0.bpm/2;   // seconds per eighth
+  const melLen=T0.mel.reduce((a,n)=>a+n[1],0);
+  const melAt={}; let p=0; for(const [m,l] of T0.mel){ melAt[p]=[m,l]; p+=l; }
+  const bassAt={}; p=0; for(const [m,l] of T0.bass){ bassAt[p]=[m,l]; p+=l; } const bassLen=p;
+  const dr=T0.drum.replace(/ /g,"");
+  while(SND.next<c.currentTime+0.25){
+    const t=SND.next, i=SND.step%melLen, n=melAt[i];
+    if(n&&n[0]) tone(SND.mus, t, hz(n[0]), n[1]*st*0.95, {type:T0.lead.type, vib:T0.lead.vib, v:T0.lead.v, a:0.012});
+    if(n&&n[0]&&SND.track==="town"&&i%6===0) tone(SND.mus, t, hz(n[0]-12), st*2.5, {type:"sine", v:0.08, r:st*2.4});   // harp-like doubling
+    const b=bassAt[SND.step%bassLen]; if(b) tone(SND.mus, t, hz(b[0]), b[1]*st*0.9, {type:"sine", v:T0.bassV, a:0.01, r:b[1]*st*0.8});
+    const d=dr[SND.step%dr.length];
+    if(d==="K") { tone(SND.mus, t, 120, 0.18, {type:"sine", to:45, v:0.5, a:0.002, r:0.17}); }
+    else if(d==="k") { tone(SND.mus, t, 110, 0.12, {type:"sine", to:50, v:0.3, a:0.002, r:0.11}); }
+    else if(d==="t") noise(SND.mus, t, 0.05, {f:3500, ft:"highpass", v:0.12});
+    SND.next+=st; SND.step++;
+  } }
+function musicPlay(name){
+  if(!SND.opt.music) name=null;
+  if(name===SND.track) return;
+  clearInterval(SND.timer); SND.timer=null; SND.track=null;
+  if(!name||!sndInit()) return;
+  SND.track=name; SND.step=0; SND.next=SND.ctx.currentTime+0.1;
+  const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(0.0001,now); g.exponentialRampToValueAtTime(name==="battle"?0.14:0.16, now+1.2);
+  SND.timer=setInterval(musicSchedule, 80); musicSchedule(); }
+function musicForView(){ const v=S.view; musicPlay(v==="battle"?"battle":(v==="adv"||v==="think")?"town":null); }
+/* ---- effects ---- */
+const SFX={
+  tap:t=>tone(SND.fx,t,880,0.05,{type:"sine",v:0.12}),
+  hit:t=>{ noise(SND.fx,t,0.12,{f:1800,v:0.35}); tone(SND.fx,t,160,0.12,{type:"sine",to:60,v:0.45,a:0.002}); },
+  crit:t=>{ SFX.hit(t); tone(SND.fx,t+0.03,1320,0.18,{type:"square",v:0.12}); tone(SND.fx,t+0.08,1760,0.2,{type:"square",v:0.1}); },
+  ally:t=>{ noise(SND.fx,t,0.09,{f:2600,v:0.25}); tone(SND.fx,t,240,0.1,{type:"sine",to:90,v:0.3,a:0.002}); },
+  hurt:t=>{ tone(SND.fx,t,220,0.22,{type:"sawtooth",to:90,v:0.2,a:0.004}); noise(SND.fx,t,0.1,{f:700,v:0.3}); },
+  mcrit:t=>{ SFX.hurt(t); tone(SND.fx,t+0.05,110,0.3,{type:"square",to:55,v:0.18}); },
+  eye:t=>{ tone(SND.fx,t,330,0.5,{type:"sawtooth",to:110,v:0.22,vib:true}); noise(SND.fx,t,0.4,{f:500,v:0.3}); },
+  spellOk:t=>[0,4,7,12].forEach((s,i)=>tone(SND.fx,t+i*0.06,hz(76+s),0.25,{type:"triangle",v:0.22})),
+  spellNo:t=>{ tone(SND.fx,t,180,0.25,{type:"square",v:0.12}); tone(SND.fx,t+0.12,140,0.3,{type:"square",v:0.12}); },
+  win:t=>[[74,0],[78,0.12],[81,0.24],[86,0.36]].forEach(([m,d],i)=>tone(SND.fx,t+d,hz(m),i===3?0.6:0.16,{type:"triangle",v:0.3,vib:i===3})),
+  lose:t=>[[69,0],[65,0.18],[62,0.36],[57,0.54]].forEach(([m,d])=>tone(SND.fx,t+d,hz(m),0.3,{type:"triangle",v:0.22})),
+  lvup:t=>{ [62,66,69,74,78,81].forEach((m,i)=>tone(SND.fx,t+i*0.07,hz(m),0.3,{type:"square",v:0.1})); for(let i=0;i<6;i++) tone(SND.fx,t+0.45+i*0.04,hz(93+i%3*2),0.15,{type:"sine",v:0.08}); },
+  coin:t=>{ tone(SND.fx,t,hz(88),0.08,{type:"square",v:0.12}); tone(SND.fx,t+0.07,hz(95),0.25,{type:"square",v:0.12}); },
+  gem:t=>[0,7,12,19].forEach((s,i)=>tone(SND.fx,t+i*0.05,hz(84+s),0.4,{type:"sine",v:0.16})),
+  spin:t=>{ for(let i=0;i<28;i++){ const d=0.02+i*i*0.0052; tone(SND.fx,t+d*i*0.18+i*0.06,1200,0.02,{type:"square",v:0.05}); } },
+  prize:t=>[0,4,7,11,14].forEach((s,i)=>tone(SND.fx,t+i*0.07,hz(79+s),0.35,{type:"triangle",v:0.18})),
+  scratch:t=>{ noise(SND.fx,t,0.25,{f:5000,ft:"highpass",v:0.12}); SFX.prize(t+0.15); },
+  right:t=>{ tone(SND.fx,t,hz(81),0.12,{type:"sine",v:0.2}); tone(SND.fx,t+0.09,hz(88),0.25,{type:"sine",v:0.2}); },
+  wrong:t=>tone(SND.fx,t,150,0.22,{type:"square",v:0.1}),
+  conquer:t=>{ SFX.win(t); [86,90,93].forEach((m,i)=>tone(SND.fx,t+0.75+i*0.1,hz(m),0.5,{type:"triangle",v:0.18})); }};
+function sfx(name){ if(!SND.opt.sfx) return; const c=sndInit(); if(!c||!SFX[name]) return; try{ SFX[name](c.currentTime+0.01); }catch(e){} }
+function sndToggle(k){ SND.opt[k]=!SND.opt[k]; sndSave(); if(k==="music"){ if(SND.opt.music){ SND.track=null; musicForView(); } else musicPlay(null); } else if(SND.opt.sfx) sfx("tap"); }
+function soundCard(){ return `<section class="card set-sec"><b>🔊 ${T("sndTitle")}</b><span class="muted sm-t">${T("sndSub")}</span>
+  <div class="row"><button class="btn sm ${SND.opt.music?"":"ghost"}" data-act="sndmusic">🎵 ${T("sndMusic")}：${SND.opt.music?T("sndOn"):T("sndOff")}</button><button class="btn sm ${SND.opt.sfx?"":"ghost"}" data-act="sndsfx">💥 ${T("sndSfx")}：${SND.opt.sfx?T("sndOn"):T("sndOff")}</button></div></section>`; }
+// the browser only allows sound after a tap: unlock on the first one, then start the right music
+document.addEventListener("pointerdown",()=>{ if(!SND.ctx&&(SND.opt.music||SND.opt.sfx)){ sndInit(); musicForView(); } else if(SND.ctx&&SND.ctx.state==="suspended") SND.ctx.resume().catch(()=>{}); },{capture:true});
+document.addEventListener("visibilitychange",()=>{ if(!SND.ctx) return; if(document.hidden) SND.ctx.suspend().catch(()=>{}); else SND.ctx.resume().catch(()=>{}); });
+document.addEventListener("click",e=>{ const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
+  if(a==="sndmusic"||a==="sndsfx"){ e.stopPropagation(); sndToggle(a==="sndmusic"?"music":"sfx"); render(); const m=document.getElementById("advMenu"); if(m) m.innerHTML=advMenuHtml(); } }, true);
+
+Object.assign(STR.zh,{"sndTitle": "聲音", "sndSub": "冒險和戰鬥時會播背景音樂，讀文章和查字典時不會。", "sndMusic": "音樂", "sndSfx": "音效", "sndOn": "開", "sndOff": "關"});Object.assign(STR.en,{"sndTitle": "Sound", "sndSub": "Music plays on adventure and battle screens, not while you read or use the dictionary.", "sndMusic": "Music", "sndSfx": "Effects", "sndOn": "on", "sndOff": "off"});Object.assign(STR.hi,{"sndTitle": "आवाज़", "sndSub": "संगीत साहसिक और लड़ाई की स्क्रीन पर बजता है, पढ़ते या शब्दकोश इस्तेमाल करते समय नहीं।", "sndMusic": "संगीत", "sndSfx": "ध्वनि प्रभाव", "sndOn": "चालू", "sndOff": "बंद"});Object.assign(STR.es,{"sndTitle": "Sonido", "sndSub": "La música suena en las pantallas de aventura y combate, no mientras lees o usas el diccionario.", "sndMusic": "Música", "sndSfx": "Efectos", "sndOn": "sí", "sndOff": "no"});Object.assign(STR.ja,{"sndTitle": "サウンド", "sndSub": "BGM は冒険とバトルの画面で流れます。記事や単語帳の画面では流れません。", "sndMusic": "BGM", "sndSfx": "効果音", "sndOn": "オン", "sndOff": "オフ"});Object.assign(STR.ko,{"sndTitle": "소리", "sndSub": "배경음악은 모험과 전투 화면에서만 나와요. 기사 읽기나 단어장에서는 나오지 않아요.", "sndMusic": "음악", "sndSfx": "효과음", "sndOn": "켜짐", "sndOff": "꺼짐"});
+Object.assign(STR.zh,{"giftSub": "把寶石、寶石碎片或解鑲符送給其他玩家。送出前要再確認一次；對方按「收下」後，你還要按「完成」東西才會真的送過去，避免打錯名字送錯人。每次贈送都要付一點金幣手續費。", "giftCheck2": "送出後這些東西會先離開你的背包，並扣 {n} 金手續費。對方收下後，你要再按「完成」才會送過去；在那之前或對方拒絕時都可以取回，但手續費不退。", "giftSent": "已送出，等 {n} 收下", "giftSt_pending": "等對方收下", "giftSt_accepted": "等送禮人完成", "giftSt_acceptedMine": "對方已收下，等你按完成", "giftSt_done": "已送出", "giftSt_claimed": "已送達", "giftBtn_complete": "完成", "giftSure_complete": "確定送出", "giftAcceptQ": "再按一次「確定收下」。送禮的人按「完成」後，禮物才會放進你的背包。", "giftWaitQ": "你已收下，等 {n} 按「完成」後東西就會進你的背包。", "giftDoneQ": "{n} 已經收下了。確認這是你要送的人再按「完成」，東西才會送出；送錯人就按「取回」。", "giftAccepted": "已收下，等 {n} 按完成", "giftCompleted": "已送給 {n}！"});
+Object.assign(STR.en,{"giftSub": "Send gems, shards or unsocketing charms to another player. You confirm before sending; after they accept, you tap \"Complete\" before anything actually moves, so a typo in the name can't send it to the wrong person. Each gift costs a small gold fee.", "giftCheck2": "These items leave your bag now and {n} gold is charged. After they accept, tap Complete to hand them over. Until then, or if they decline, you can take the items back, but the fee is not refunded.", "giftSent": "Sent! Waiting for {n} to accept", "giftSt_pending": "Waiting for them", "giftSt_accepted": "Waiting for sender", "giftSt_acceptedMine": "Accepted: tap Complete", "giftSt_done": "Sent", "giftSt_claimed": "Delivered", "giftBtn_complete": "Complete", "giftSure_complete": "Yes, send it", "giftAcceptQ": "Tap \"Yes, accept\". The gift reaches your bag once the sender taps Complete.", "giftWaitQ": "You accepted. It lands in your bag once {n} taps Complete.", "giftDoneQ": "{n} accepted. If that's the right person, tap Complete to hand it over. Wrong person? Tap Take back.", "giftAccepted": "Accepted. Waiting for {n} to complete", "giftCompleted": "Sent to {n}!"});
+Object.assign(STR.hi,{"giftSub": "दूसरे खिलाड़ी को रत्न, टुकड़े या मुक्ति-ताबीज़ भेजें। भेजने से पहले आप पुष्टि करते हैं; उनके स्वीकार करने के बाद आप \"पूरा करें\" दबाते हैं, तभी चीज़ें जाती हैं, ताकि गलत नाम लिखने पर गलत व्यक्ति को न जाएँ। हर उपहार पर थोड़ा सोना शुल्क लगता है।", "giftCheck2": "ये चीज़ें अभी आपके बैग से निकलेंगी और {n} सोना शुल्क कटेगा। उनके स्वीकार करने के बाद \"पूरा करें\" दबाने पर ही चीज़ें जाएँगी। तब तक, या मना करने पर, आप चीज़ें वापस ले सकते हैं, पर शुल्क वापस नहीं होगा।", "giftSent": "भेजा! {n} के स्वीकार करने का इंतज़ार", "giftSt_pending": "स्वीकार का इंतज़ार", "giftSt_accepted": "भेजने वाले का इंतज़ार", "giftSt_acceptedMine": "स्वीकार किया: पूरा करें", "giftSt_done": "भेजा गया", "giftSt_claimed": "पहुँच गया", "giftBtn_complete": "पूरा करें", "giftSure_complete": "हाँ, भेजें", "giftAcceptQ": "\"हाँ, स्वीकार\" दबाएँ। भेजने वाले के \"पूरा करें\" दबाने पर उपहार आपके बैग में आएगा।", "giftWaitQ": "आपने स्वीकार किया। {n} के \"पूरा करें\" दबाते ही यह आपके बैग में आ जाएगा।", "giftDoneQ": "{n} ने स्वीकार किया। सही व्यक्ति है तो \"पूरा करें\" दबाएँ; गलत व्यक्ति है तो \"वापस लें\" दबाएँ।", "giftAccepted": "स्वीकार किया। {n} के पूरा करने का इंतज़ार", "giftCompleted": "{n} को भेज दिया!"});
+Object.assign(STR.es,{"giftSub": "Envía gemas, fragmentos o amuletos a otro jugador. Confirmas antes de enviar; cuando la otra persona acepta, pulsas «Completar» y solo entonces se entrega, así un error en el nombre no lo manda a quien no es. Cada regalo cuesta una pequeña comisión en oro.", "giftCheck2": "Estos objetos salen ahora de tu bolsa y se cobran {n} de oro. Cuando acepten, pulsa «Completar» para entregarlos. Hasta entonces, o si lo rechazan, puedes recuperarlos, pero la comisión no se devuelve.", "giftSent": "¡Enviado! Esperando a que {n} acepte", "giftSt_pending": "Esperando que acepte", "giftSt_accepted": "Esperando al remitente", "giftSt_acceptedMine": "Aceptado: pulsa Completar", "giftSt_done": "Enviado", "giftSt_claimed": "Entregado", "giftBtn_complete": "Completar", "giftSure_complete": "Sí, entregar", "giftAcceptQ": "Pulsa «Sí, aceptar». El regalo llegará a tu bolsa cuando quien lo envía pulse «Completar».", "giftWaitQ": "Lo has aceptado. Llegará a tu bolsa cuando {n} pulse «Completar».", "giftDoneQ": "{n} lo ha aceptado. Si es la persona correcta, pulsa «Completar» para entregarlo; si no, pulsa «Recuperar».", "giftAccepted": "Aceptado. Esperando a que {n} complete", "giftCompleted": "¡Enviado a {n}!"});
+Object.assign(STR.ja,{"giftSub": "宝石・かけら・外しの護符をほかのプレイヤーに贈れます。送る前に確認し、相手が受け取ったあとにあなたが「完了」を押すと届きます。名前の打ち間違いで別の人に届くのを防ぎます。贈るたびに少しの金貨手数料がかかります。", "giftCheck2": "送るとアイテムはバッグから出て、手数料 {n} 金がかかります。相手が受け取ったら「完了」を押して渡します。それまで、または断られたら取り戻せますが、手数料は戻りません。", "giftSent": "送りました。{n} の受け取り待ち", "giftSt_pending": "受け取り待ち", "giftSt_accepted": "送り主の完了待ち", "giftSt_acceptedMine": "受け取り済み：完了を押して", "giftSt_done": "送信済み", "giftSt_claimed": "お届け済み", "giftBtn_complete": "完了", "giftSure_complete": "はい、渡す", "giftAcceptQ": "「はい、受け取る」を押してください。送り主が「完了」を押すとバッグに入ります。", "giftWaitQ": "受け取りました。{n} が「完了」を押すとバッグに入ります。", "giftDoneQ": "{n} が受け取りました。正しい相手なら「完了」で渡します。違う人なら「取り戻す」を押してください。", "giftAccepted": "受け取りました。{n} の完了待ち", "giftCompleted": "{n} に渡しました！"});
+Object.assign(STR.ko,{"giftSub": "보석, 조각, 해제 부적을 다른 플레이어에게 보낼 수 있어요. 보내기 전에 확인하고, 상대가 받은 뒤 내가 '완료'를 눌러야 실제로 전달돼요. 이름을 잘못 입력해 엉뚱한 사람에게 가는 걸 막아 줘요. 선물할 때마다 골드 수수료가 조금 들어요.", "giftCheck2": "아이템이 지금 가방에서 빠지고 수수료 {n} 골드가 들어요. 상대가 받으면 '완료'를 눌러 전달해요. 그 전이나 상대가 거절하면 되찾을 수 있지만 수수료는 돌려받지 못해요.", "giftSent": "보냈어요! {n}님이 받기를 기다리는 중", "giftSt_pending": "받기 대기", "giftSt_accepted": "보낸 사람 완료 대기", "giftSt_acceptedMine": "받음: 완료를 눌러요", "giftSt_done": "보냄", "giftSt_claimed": "전달됨", "giftBtn_complete": "완료", "giftSure_complete": "네, 전달", "giftAcceptQ": "'네, 받기'를 눌러요. 보낸 사람이 '완료'를 누르면 가방에 들어와요.", "giftWaitQ": "받았어요. {n}님이 '완료'를 누르면 가방에 들어와요.", "giftDoneQ": "{n}님이 받았어요. 맞는 사람이면 '완료'를 눌러 전달하고, 아니면 '되찾기'를 눌러요.", "giftAccepted": "받았어요. {n}님의 완료를 기다리는 중", "giftCompleted": "{n}님에게 보냈어요!"});
+Object.assign(STR.zh,{"lockVault": "彩虹寶庫即將開放"});
+Object.assign(STR.en,{"lockVault": "The Rainbow Vault opens soon"});
+Object.assign(STR.hi,{"lockVault": "इंद्रधनुष ख़ज़ाना जल्द खुलेगा"});
+Object.assign(STR.es,{"lockVault": "La Cámara del Arcoíris abrirá pronto"});
+Object.assign(STR.ja,{"lockVault": "虹の宝庫はまもなくオープン"});
+Object.assign(STR.ko,{"lockVault": "무지개 보물고는 곧 열려요"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
