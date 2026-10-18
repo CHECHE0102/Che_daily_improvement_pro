@@ -1,5 +1,6 @@
-// Daily news reminders (Web Push). Runs hourly from .github/workflows/push.yml.
-// Morning: from 07:00 local time, once a day, when a news article the player hasn't been told about is out.
+// News reminders (Web Push), manual jobs only: test notification / purge (.github/workflows/news-push.yml).
+// The daily reminders are sent by the newsPush Cloud Function (functions/push.js), same rules as below.
+// Morning: from 08:00 local time, once a day, when a news article the player hasn't been told about is out.
 // Evening: from 19:00 local time, if the player hasn't opened any article today (their local date).
 // No npm packages: VAPID (RFC 8292) + aes128gcm (RFC 8291) + Firestore REST with a service account.
 import crypto from "node:crypto";
@@ -8,7 +9,7 @@ const PROJECT = "che-daily-improvement-pro";
 const SITE = "https://cheche0102.github.io/Che_daily_improvement_pro/";
 const NEWS_INDEX = "https://cheche0102.github.io/Che_daily_improvement_pro/articles/index.json";
 export const VAPID_PUBLIC = "BG8pT7pCPH1boxpKEe_fFinoQBJQDHonJyA7E-4Rf-5Wkxv0hM6cphsBOzz9M3ulvp6za-IVA6zItxjqXUV_zsw";
-const AM = [7, 12], PM = [19, 23]; // [from, before) local hours
+const AM = [8, 12], PM = [19, 23]; // [from, before) local hours
 
 const b64u = b => Buffer.from(b).toString("base64url");
 const unb64u = s => Buffer.from(String(s).replace(/=+$/, ""), "base64url");
@@ -118,7 +119,7 @@ export async function saveStats(tok, subs, add) {
 /* ---------- messages ---------- */
 const MSG = {
   zh: { am: "📰 今天的新聞來了", amB: "{t}\n點開來讀讀看，順便學幾個新單字吧！", pm: "📖 今天的新聞還沒看喔", pmB: "花 5 分鐘讀一篇，今天的英文就不會斷掉！" },
-  test: { zh: ["🔔 測試通知", "通知設定成功！之後每天早上 7 點會提醒你看新聞 📰"], en: ["🔔 Test notification", "It works! You'll get a news reminder every morning at 7 📰"] },
+  test: { zh: ["🔔 測試通知", "通知設定成功！之後每天早上新聞一出來（約 8 點）就會提醒你 📰"], en: ["🔔 Test notification", "It works! You'll get a reminder every morning as soon as the news is out (about 8am) 📰"] },
   sc: { am: "📰 今天的新闻来了", amB: "{t}\n点开来读读看，顺便学几个新单词吧！", pm: "📖 今天的新闻还没看哦", pmB: "花 5 分钟读一篇，今天的英文就不会断掉！" },
   en: { am: "📰 Today's news is here", amB: "{t}\nTap to read it and pick up a few new words!", pm: "📖 You haven't read today's news yet", pmB: "Five minutes with one story keeps your English going today!" },
   hi: { am: "📰 आज की ख़बरें आ गई हैं", amB: "{t}\nपढ़ने के लिए टैप करें और कुछ नए शब्द सीखें!", pm: "📖 आपने आज की ख़बर अभी तक नहीं पढ़ी", pmB: "बस 5 मिनट में एक ख़बर पढ़ें और आज की अंग्रेज़ी पूरी करें!" },
@@ -152,6 +153,11 @@ async function main() {
     const top = (j.articles || []).filter(a => (a.rank || 1) === 1).sort((a, b) => b.date.localeCompare(a.date))[0];
     if (top) news = { date: top.date, title: top.title }; } catch (e) { console.log("news index:", e.message); }
   const tok = await googleToken(sa), subs = await listSubs(tok);
+  if (process.env.PUSH_PURGE === "true") { // manual: remove every subscription
+    let n = 0; for (const x of subs) { const r = await del(tok, x.name); if (r && r.ok) n++; }
+    await saveStats(tok, subs.length - n, {});
+    console.log(`::notice::PURGE · removed ${n} of ${subs.length} subscriptions`); return;
+  }
   if (process.env.PUSH_TEST === "true") { // manual test: only phones that turned notifications on in the last 3 hours
     let ok = 0, bad = [];
     for (const s of subs) {

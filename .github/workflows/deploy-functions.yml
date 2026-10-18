@@ -39,7 +39,7 @@ jobs:
           out="$RUNNER_TEMP/out.txt"
           if ! "$@" > "$out" 2>&1; then
             cat "$out"
-            grep -v -E "sk_(test|live)_|whsec_" "$out" | grep -i -E "error|denied|permission|api|enable|403|fail|billing" | tail -n 15 | while IFS= read -r l; do echo "::error::${l:0:400}"; done
+            grep -v -E "sk_(test|live)_|whsec_|VAPID" "$out" | grep -i -E "error|denied|permission|api|enable|403|fail|billing|scheduler" | tail -n 15 | while IFS= read -r l; do echo "::error::${l:0:400}"; done
             exit 1
           fi
           cat "$out"
@@ -49,6 +49,7 @@ jobs:
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
         run: |
           set -e
           [ -n "$STRIPE_SECRET_KEY" ] || { echo "::error::STRIPE_SECRET_KEY secret is missing"; exit 1; }
@@ -59,7 +60,10 @@ jobs:
           printf '%s' "${STRIPE_WEBHOOK_SECRET:-whsec_placeholder_not_set}" > "$RUNNER_TEMP/k2"
           "$RUNNER_TEMP/run.sh" npx -y firebase-tools@latest functions:secrets:set STRIPE_SECRET_KEY --data-file "$RUNNER_TEMP/k1" --project "$PROJECT" --non-interactive
           "$RUNNER_TEMP/run.sh" npx -y firebase-tools@latest functions:secrets:set STRIPE_WEBHOOK_SECRET --data-file "$RUNNER_TEMP/k2" --project "$PROJECT" --non-interactive
-          rm -f "$RUNNER_TEMP/k1" "$RUNNER_TEMP/k2"
+          [ -n "$VAPID_PRIVATE" ] || { echo "::error::VAPID_PRIVATE secret is missing (needed for news reminders)"; exit 1; }
+          printf '%s' "$VAPID_PRIVATE" > "$RUNNER_TEMP/k3"
+          "$RUNNER_TEMP/run.sh" npx -y firebase-tools@latest functions:secrets:set VAPID_PRIVATE --data-file "$RUNNER_TEMP/k3" --project "$PROJECT" --non-interactive
+          rm -f "$RUNNER_TEMP/k1" "$RUNNER_TEMP/k2" "$RUNNER_TEMP/k3"
       - name: Deploy
         run: '"$RUNNER_TEMP/run.sh" npx -y firebase-tools@latest deploy --only functions --project "$PROJECT" --non-interactive --force'
       - name: Endpoints
@@ -70,4 +74,4 @@ jobs:
           echo "- stripeWebhook (put this in Stripe → Webhooks): https://europe-west1-$PROJECT.cloudfunctions.net/stripeWebhook" >> "$GITHUB_STEP_SUMMARY"
       - name: Clean up
         if: always()
-        run: rm -f "$RUNNER_TEMP/sa.json" "$RUNNER_TEMP/k1" "$RUNNER_TEMP/k2"
+        run: rm -f "$RUNNER_TEMP/sa.json" "$RUNNER_TEMP/k1" "$RUNNER_TEMP/k2" "$RUNNER_TEMP/k3"

@@ -1,11 +1,15 @@
-name: News reminders (push)
+name: News reminders (test / purge)
+# The daily reminders themselves are sent by the newsPush Cloud Function (Cloud Scheduler, every 15 minutes).
+# This workflow is only for manual jobs: a test notification, or removing every subscription.
 on:
-  schedule:
-    - cron: "1 * * * *"   # hourly; the script picks players whose local time is 07:xx or 19:xx
   workflow_dispatch:
     inputs:
       test:
         description: "Send a test notification to phones that turned notifications on in the last 3 hours"
+        type: boolean
+        default: false
+      purge:
+        description: "Delete ALL push subscriptions (everyone has to turn notifications on again)"
         type: boolean
         default: false
 permissions:
@@ -29,3 +33,4 @@ jobs:
           FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
           VAPID_PRIVATE: ${{ secrets.VAPID_PRIVATE }}
           PUSH_TEST: ${{ inputs.test }}
+          PUSH_PURGE: ${{ inputs.purge }}

@@ -11,6 +11,8 @@
  *   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET. Nothing secret is in this file.
  */
 import { onRequest } from "firebase-functions/v2/https";
+import { onSchedule } from "firebase-functions/v2/scheduler";
+import { runPush } from "./push.js";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
@@ -22,6 +24,7 @@ initializeApp();
 const db = getFirestore();
 const STRIPE_KEY = defineSecret("STRIPE_SECRET_KEY");
 const WEBHOOK_SECRET = defineSecret("STRIPE_WEBHOOK_SECRET");
+const VAPID_PRIVATE = defineSecret("VAPID_PRIVATE");
 const REGION = "europe-west1";
 const STRIPE_VERSION = "2026-04-22.dahlia";
 const SITE = "https://binbindaily.com/";
@@ -125,4 +128,11 @@ export const stripeWebhook = onRequest({ region: REGION, secrets: [STRIPE_KEY, W
     logger.error("webhook", ev.type, e.message);
     res.status(500).send("error");   // Stripe retries
   }
+});
+
+// Daily news reminders. Cloud Scheduler calls this every 15 minutes, so the morning reminder goes out
+// right after the news is published (08:00 Dublin) and the evening one at 19:00, every day.
+export const newsPush = onSchedule({ schedule: "every 15 minutes", timeZone: "Europe/Dublin", region: REGION, secrets: [VAPID_PRIVATE], timeoutSeconds: 300, retryCount: 0, maxInstances: 1 }, async () => {
+  const r = await runPush(db, VAPID_PRIVATE.value(), (...a) => logger.info(...a));
+  if (r.am || r.pm || r.gone || r.fail || r.bad) logger.info("newsPush", r);
 });
