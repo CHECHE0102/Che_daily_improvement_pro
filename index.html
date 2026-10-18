@@ -765,6 +765,14 @@ body.maint-lock{overflow:hidden}
 @keyframes hsidle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px) scale(1.01)}}
 @media (prefers-reduced-motion:reduce){.hs-fig .hero-svg{animation:none}}
 .mast-l{display:flex;align-items:center;gap:8px;min-width:0}
+.login-hint{position:absolute;top:calc(100% + 10px);left:10px;z-index:6;max-width:min(300px,calc(100vw - 40px));display:flex;align-items:flex-start;gap:8px;padding:11px 10px 11px 14px;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-size:14px;line-height:1.45;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;animation:lhIn .35s ease-out both}
+.login-hint::before{content:"";position:absolute;top:-7px;left:14px;width:14px;height:14px;background:inherit;transform:rotate(45deg);border-radius:3px 0 0 0}
+.login-hint span{position:relative}
+.login-hint button{position:relative;flex:none;border:0;background:transparent;color:inherit;opacity:.75;border:1.5px solid currentColor;width:24px;height:24px;border-radius:50%;font-size:15px;line-height:1;padding:0;cursor:pointer}
+.set-btn.hint-on{box-shadow:0 0 0 3px var(--accent);animation:lhPulse 1.6s ease-in-out infinite}
+@keyframes lhIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes lhPulse{50%{box-shadow:0 0 0 6px transparent}}
+@media (prefers-reduced-motion:reduce){.login-hint,.set-btn.hint-on{animation:none}}
 .set-btn{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;padding:0}
 .set-btn svg{width:19px;height:19px}.set-btn[aria-current="page"]{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
 .brand{display:flex;align-items:center;gap:2px}.brand span{margin-left:.25em}
@@ -1307,7 +1315,7 @@ function featLock(k){ if(k==="vault"&&!DEV&&!S.payTester) return "lockVault";   
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
+function render(){ try{ renderInner(); loginHint(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
 const ERR_SENT=new Set();
 function errReport(e,where){ try{
@@ -3103,7 +3111,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.147";
+const APP_VERSION="2026.10.148";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4984,6 +4992,21 @@ function onbRender(){
   el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${st===0?`${STR.zh.onbSkip} · ${STR.en.onbSkip}`:T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
   scApply&&scApply();
 }
+/* new players: a speech bubble under the gear says that signing in lives in Settings (hidden once signed in or closed) */
+const LH_KEY="che-pro-loginhint";
+function loginHint(){
+  const mast=document.querySelector("header.mast"), btn=document.getElementById("setBtn"); if(!mast||!btn) return;
+  let off=null, onb=null; try{ off=localStorage.getItem(LH_KEY); onb=localStorage.getItem(ONB_KEY); }catch(e){}
+  if(CLOUD.user&&!off){ off="1"; try{ localStorage.setItem(LH_KEY,"1"); }catch(e){} }
+  const show=CLOUD.ready&&!CLOUD.user&&!off&&!S.onb&&!!onb&&S.tab==="today"&&!SANDBOX();
+  let el=document.getElementById("loginHint");
+  btn.classList.toggle("hint-on",show);
+  if(!show){ if(el) el.remove(); return; }
+  if(!el){ el=document.createElement("div"); el.id="loginHint"; el.className="login-hint"; el.setAttribute("role","note"); el.dataset.tab="set"; mast.append(el); }
+  el.innerHTML=`<span>${T("loginHint")}</span><button type="button" data-act="loginhintx" aria-label="close">×</button>`;
+  if(typeof scApply==="function") scApply();
+}
+document.addEventListener("click",e=>{ if(!e.target.closest("[data-act=loginhintx]")) return; e.stopPropagation(); e.preventDefault(); try{ localStorage.setItem(LH_KEY,"x"); }catch(_){} loginHint(); },true);
 function onbCoach(){
   let done=null; try{ done=localStorage.getItem(ONB_KEY); }catch(e){}
   if(done!=="1") return "";
@@ -5026,6 +5049,12 @@ function devRetHtml(A){
   const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
   return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(newT,T("drNew"))}${tile(dau,T("drDau"))}${tile(wau,T("drWau"))}${tile(ret(1),"D1")}${tile(ret(7),"D7")}${tile(ret(30),"D30")}${tile(back,T("drBack"))}${tile(`${onb}/${N}`,T("drOnb"))}${tile(`${rd}/${N}`,T("drRead"))}</div><p class="muted sm-t">${T("drNote")}</p>`;
 }
+Object.assign(STR.zh,{loginHint:"🔐 點這裡用 Google 登入，進度會存到雲端，換手機也不會不見！"});
+Object.assign(STR.en,{loginHint:"🔐 Tap here to sign in with Google: your progress is saved to the cloud, so it stays with you even on a new phone!"});
+Object.assign(STR.hi,{loginHint:"🔐 Google से साइन इन करने के लिए यहाँ टैप करें: आपकी प्रगति क्लाउड में सेव होगी, फ़ोन बदलने पर भी!"});
+Object.assign(STR.es,{loginHint:"🔐 Toca aquí para iniciar sesión con Google: tu progreso se guarda en la nube, ¡aunque cambies de móvil!"});
+Object.assign(STR.ja,{loginHint:"🔐 ここから Google でログイン。進行状況がクラウドに保存され、機種変更しても消えません！"});
+Object.assign(STR.ko,{loginHint:"🔐 여기서 Google로 로그인하세요. 진행 상황이 클라우드에 저장돼서 폰을 바꿔도 사라지지 않아요!"});
 Object.assign(STR.zh,{onbHi:"歡迎來到 BinBin daily！", onbHiSub:"每天讀一篇真實的英文新聞，點不會的字就有翻譯。掌握時事，跟同事也有話題聊！邊學英文，邊升級冒險、跟朋友玩遊戲。", onbLang:"你習慣用哪種語言看翻譯？", onbLevel:"你的英文程度大概是？", onbLevelSub:"之後隨時可以在設定裡改。不確定也沒關係，等一下可以做個英文程度小測驗！", onbHow:"每天這樣玩", onbHow1:"讀今天的新聞，點不會的字就看得到意思", onbHow2:"讀完做小測驗，拿金幣和出征令", onbHow3:"查過的字會在對的時間自動提醒你複習", onbHow4:"去冒險打怪升級，或跟朋友玩多人遊戲", onbNext:"下一步", onbStart:"開始讀第一篇新聞 →", onbLook:"先自己逛逛", onbSkip:"略過", onbCoach:"第一次來嗎？從下面的「閱讀頭條」開始，點不會的字就有翻譯！",
  drTitle:"留存率", drNone:"還沒有資料（每台裝置每天打開會記錄一次）。", drDevices:"裝置總數", drNew:"今天新來", drDau:"今天活躍", drWau:"7 天內活躍", drBack:"有回來過", drOnb:"完成新手引導", drRead:"讀完第一篇", drNote:"D1／D7／D30：第一次打開後的第 1／7／30 天有再回來的比例。以裝置計算，不需要登入；只記錄日期、語言和程度，不含個人資料。"});
 Object.assign(STR.en,{onbHi:"Welcome to BinBin daily!", onbHiSub:"Read one real English news story a day and tap any word to see what it means. Keep up with what's happening and always have something to talk about with colleagues! Learn English while you level up, go on adventures and play games with friends.", onbLang:"Which language do you want translations in?", onbLevel:"What's your English level?", onbLevelSub:"You can change it any time in Settings. Not sure? No problem: you can take a quick level test in a moment!", onbHow:"How each day works", onbHow1:"Read today's news — tap any word you don't know", onbHow2:"Take a short quiz to earn gold and quest passes", onbHow3:"Words you looked up come back for review at just the right time", onbHow4:"Level up on adventures, or play games with friends", onbNext:"Next", onbStart:"Read my first story →", onbLook:"Look around first", onbSkip:"Skip", onbCoach:"New here? Start with “Read the headline” below — tap any word to see its meaning!",
