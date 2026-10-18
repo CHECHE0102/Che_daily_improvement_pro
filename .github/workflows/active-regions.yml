@@ -1,0 +1,38 @@
+name: Export active news regions
+# Reads the app's region activity from Firestore (public doc stats/regions)
+# and saves it to articles/active-regions.json so the daily regional news task can read it.
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: publish-articles
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Fetch stats/regions
+        run: |
+          curl -sf "https://firestore.googleapis.com/v1/projects/che-daily-improvement-pro/databases/(default)/documents/stats/regions" -o raw.json || echo '{}' > raw.json
+          python3 - <<'PY'
+          import json, datetime
+          raw = json.load(open("raw.json"))
+          fields = raw.get("fields", {})
+          regions = {k: v.get("stringValue", "") for k, v in fields.items()}
+          cutoff = (datetime.date.today() - datetime.timedelta(days=6)).isoformat()
+          active = sorted([k for k, d in regions.items() if d >= cutoff and k != "IE"], key=lambda k: regions[k], reverse=True)
+          out = {"updated": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"), "ok": bool(raw), "regions": regions, "active": active}
+          json.dump(out, open("articles/active-regions.json", "w"), indent=1, ensure_ascii=False)
+          print(out)
+          PY
+          rm raw.json
+      - name: Commit
+        run: |
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git add articles/active-regions.json
+          git diff --cached --quiet || (git commit -m "Update active regions" && git push origin main)

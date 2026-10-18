@@ -2955,7 +2955,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.119";
+const APP_VERSION="2026.10.120";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3338,7 +3338,7 @@ async function devLoadFeedback(){
 }
 
 /* ---------- events ---------- */
-const ART_BASES=["../Che_daily_improvement/articles/","articles/"]; let ART_BASE=ART_BASES[0];
+const ART_BASES=["articles/"]; let ART_BASE=ART_BASES[0];   // articles live in this repo (the old Che_daily_improvement site is retired)
 async function loadArticle(id){
   if(S.articles.some(a=>a.id===id)) return true;
   try{ const r=await fetch(ART_BASE+encodeURIComponent(id)+".json",{cache:"no-cache"}); if(!r.ok) throw 0; const a=await r.json(); a.id=id; S.articles.push(a); S.articles.sort(byOrder); return true; }

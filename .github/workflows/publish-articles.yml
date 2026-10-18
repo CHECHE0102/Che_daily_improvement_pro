@@ -1,0 +1,30 @@
+name: Publish daily articles
+# The daily task pushes new articles to a branch named claude/articles-YYYY-MM-DD.
+# This merges that branch into main (which GitHub Pages serves) and then deletes it.
+on:
+  push:
+    branches: ['claude/articles-**']
+permissions:
+  contents: write
+concurrency: publish-articles
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Merge article branch into main
+        run: |
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          BR="${GITHUB_REF#refs/heads/}"
+          git fetch origin "$BR"
+          # only article files may come in this way
+          CHANGED=$(git diff --name-only origin/main "origin/$BR")
+          echo "$CHANGED"
+          if [ -n "$CHANGED" ] && echo "$CHANGED" | grep -qv '^articles/'; then echo "Branch changes files outside articles/ — refusing"; exit 1; fi
+          git merge --no-edit "origin/$BR"
+          git push origin main
+          git push origin --delete "$BR"

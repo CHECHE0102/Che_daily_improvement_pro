@@ -6,7 +6,7 @@ import crypto from "node:crypto";
 
 const PROJECT = "che-daily-improvement-pro";
 const SITE = "https://cheche0102.github.io/Che_daily_improvement_pro/";
-const NEWS_INDEX = "https://cheche0102.github.io/Che_daily_improvement/articles/index.json";
+const NEWS_INDEX = "https://cheche0102.github.io/Che_daily_improvement_pro/articles/index.json";
 export const VAPID_PUBLIC = "BG8pT7pCPH1boxpKEe_fFinoQBJQDHonJyA7E-4Rf-5Wkxv0hM6cphsBOzz9M3ulvp6za-IVA6zItxjqXUV_zsw";
 const AM = [7, 12], PM = [19, 23]; // [from, before) local hours
 
