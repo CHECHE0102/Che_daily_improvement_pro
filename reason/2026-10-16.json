@@ -1,0 +1,157 @@
+{
+"date": "2026-10-16",
+"items": {
+"2026-10-16": [
+{
+"type": "main",
+"q": "Which of the following best captures the main point of the passage?",
+"opts": [
+"Visa changes are the main reason Irish universities are running out of money.",
+"Irish universities are asking students to pay higher fees to cover a €250 million shortfall.",
+"Irish universities say long-term underfunding has left them close to a crisis, and recent budget measures do not close the gap.",
+"The Government has refused to acknowledge that Irish universities are underfunded."
+],
+"a": 2,
+"exp": "The passage is built around the \"cliff edge\" warning, the €250 million annual gap and the small €10 million budget response. Fees were actually cut (B is wrong), the Government \"has acknowledged the issue\" (D), and visa changes are only one of several pressures (A)."
+},
+{
+"type": "infer",
+"q": "What can be inferred about the €34 million student support package?",
+"opts": [
+"It helps students directly but does little for the universities' core funding problem.",
+"It was designed by the universities themselves.",
+"It will end the shortage of student accommodation.",
+"It was larger than the core funding the universities had asked for."
+],
+"a": 0,
+"exp": "Farrell \"acknowledged the value of these measures\" but said institutions were only \"treading water\", so the package eases costs for students without fixing the core gap. It is far smaller than the €190 million requested (D), and nothing links it to housing (C)."
+},
+{
+"type": "tone",
+"q": "The attitude of the university leaders quoted in the passage is best described as:",
+"opts": [
+"celebratory",
+"indifferent",
+"openly hostile to students",
+"concerned and insistent"
+],
+"a": 3,
+"exp": "They warn of a \"cliff edge\", say they are \"treading water\" and at \"maximum capacity\", and keep urging the State to act: concerned and insistent, not hostile or indifferent."
+}
+],
+"2026-10-16-2": [
+{
+"type": "main",
+"q": "What is the central claim reported in the passage?",
+"opts": [
+"Waiting lists in Ireland have fallen below one million.",
+"Ireland is still far from universal healthcare, and doctors want sustained investment and a legal right to care.",
+"Sláintecare has already delivered universal healthcare in Ireland.",
+"Private health insurance should be made compulsory for everyone."
+],
+"a": 1,
+"exp": "The opening sentence states the claim, and the rest supports it with waiting lists, trolleys and the public–private overlap, ending with calls for investment and legislation. A contradicts the text; the waiting list \"exceeded one million\" (A)."
+},
+{
+"type": "infer",
+"q": "Why does the speaker mention that about half of the population sees private health insurance as a necessity?",
+"opts": [
+"To argue that public hospitals should be closed.",
+"To show that the public system is not trusted to provide timely care for everyone.",
+"To praise insurance companies for their efficiency.",
+"To prove that GP care is already free for all."
+],
+"a": 1,
+"exp": "If people feel they must buy insurance, the public system is not meeting everyone's needs — the point of a passage about the lack of universal care. GP care is explicitly not free for all (D)."
+},
+{
+"type": "tone",
+"q": "How does committee chair Padraig Rice's view differ from the doctors' description?",
+"opts": [
+"He says reform should be abandoned because of its cost.",
+"He blames doctors for the waiting lists.",
+"He denies that there are any problems.",
+"He accepts reform is expensive at first but is optimistic about its long-term benefits."
+],
+"a": 3,
+"exp": "\"Nevertheless\" signals a shift: reform is \"costly in the short term\" but \"would ultimately prove beneficial\" — a cautiously optimistic note after the critical evidence."
+}
+],
+"2026-10-16-3": [
+{
+"type": "main",
+"q": "Which statement best summarises the committee's report?",
+"opts": [
+"It wants addictive design features switched off by default and safety built in from the start, rather than a blanket ban.",
+"It focuses only on regulating toys and films.",
+"It concludes that technology companies already protect children well.",
+"It calls for a total ban on social media for everyone under 16."
+],
+"a": 0,
+"exp": "The report recommends disabling infinite scroll, autoplay and profiling by default and \"safety by design\"; it explicitly says a full under-16 ban \"would be unlikely to resolve the issue\" (D)."
+},
+{
+"type": "infer",
+"q": "The comparison with toys and films suggests that the committee wants digital products to be:",
+"opts": [
+"produced only by Irish companies",
+"banned for all children",
+"made more expensive",
+"given age ratings that tell parents who they are suitable for"
+],
+"a": 3,
+"exp": "A \"mandatory age classification system ... analogous to existing frameworks for toys and films\" means age ratings, like a film's certificate."
+},
+{
+"type": "purpose",
+"q": "What is the purpose of the final sentence about Nessa Cosgrove?",
+"opts": [
+"To show that the committee rejected its own report.",
+"To announce that technology companies have already agreed.",
+"To add a note of caution about how hard the plan will be to carry out.",
+"To explain how infinite scroll works."
+],
+"a": 2,
+"exp": "\"However ... would present a considerable challenge\" introduces a practical doubt: getting technology companies to cooperate will be difficult."
+}
+],
+"2026-10-16-4": [
+{
+"type": "main",
+"q": "What is the passage mainly about?",
+"opts": [
+"The discovery of active volcanoes off the Irish coast.",
+"A comparison between Irish canyons and the Grand Canyon.",
+"Plans to ban fishing in all Irish waters.",
+"A new, complete map of Ireland's deep seabed and the uses it will have."
+],
+"a": 3,
+"exp": "It reports the first comprehensive mapping, what it revealed and how the atlas will help with planning and protection. The volcanoes are extinct (A), and the Grand Canyon is only one comparison (B)."
+},
+{
+"type": "infer",
+"q": "Why did the researchers need to \"enhance and integrate\" earlier datasets?",
+"opts": [
+"Because the Grand Canyon data had to be added.",
+"Because the earlier surveys had been lost.",
+"Because they were collected bit by bit over 25 years with different technologies, so they did not form a single consistent picture.",
+"Because the sea had changed shape since then."
+],
+"a": 2,
+"exp": "\"Conducted incrementally over approximately 25 years using a variety of technologies; consequently...\" — the cause–effect link gives the reason."
+},
+{
+"type": "purpose",
+"q": "Why does the writer mention bottom trawling in the last paragraph?",
+"opts": [
+"To describe a type of volcano.",
+"To recommend a new fishing method.",
+"To explain how the maps were made.",
+"To show why marine protected areas are needed."
+],
+"a": 3,
+"exp": "Coral reefs \"severely damaged by bottom trawling\" are an example of the vulnerable habitats that protected areas, planned with the atlas, would safeguard."
+}
+]
+}
+}

@@ -1,0 +1,157 @@
+{
+"date": "2026-10-18",
+"items": {
+"2026-10-18": [
+{
+"type": "main",
+"q": "Which statement best captures the main point of the passage?",
+"opts": [
+"The Rotunda Hospital has lost its funding.",
+"The HSE says consultants have stopped private work in public hospitals, though questions remain about enforcement and cost.",
+"Consultants have been banned from all private work in Ireland.",
+"Private maternity hospitals are being built to replace public ones."
+],
+"a": 1,
+"exp": "The passage reports the HSE's finding, then raises Rice's doubts about enforcement and the €145 million shortfall. The ban applies only in public settings (C); the Rotunda board conceded (A)."
+},
+{
+"type": "infer",
+"q": "Why is maternity care \"disproportionately affected\" by the shortfall?",
+"opts": [
+"Because insurers stopped covering pregnancy.",
+"Because maternity consultants refused the new contract.",
+"Because the Rotunda was closed.",
+"Because women who want private maternity care have no private hospital to go to, so that income was earned in public hospitals."
+],
+"a": 3,
+"exp": "\"There are no private maternity hospitals in the State\", so private maternity income came only from public hospitals — and that income is now lost."
+},
+{
+"type": "purpose",
+"q": "What is the function of the paragraph about the Rotunda Hospital?",
+"opts": [
+"It gives an example of the non-compliance the review was checking and shows how it was resolved.",
+"It argues that the Minister acted illegally.",
+"It explains how the POCC began in 2023.",
+"It proves that every hospital broke the rules."
+],
+"a": 0,
+"exp": "It describes a case where consultants on public-only contracts still treated private patients and how pressure made the board concede — a concrete example of the issue."
+}
+],
+"2026-10-18-2": [
+{
+"type": "main",
+"q": "Which of the following best summarises the passage?",
+"opts": [
+"Because a ministerial order was never approved by the Oireachtas, the old, lower merger threshold has returned, and recent deals may need to be reported.",
+"The CCPC has fined companies for completing mergers without approval.",
+"The Government has abolished the merger reporting rules.",
+"The threshold for reporting mergers has permanently risen to €100 million."
+],
+"a": 0,
+"exp": "The order lapsed on 30 September, so the €60 million threshold applies again. The CCPC promised not to take action (B), and the €100 million level lapsed (D)."
+},
+{
+"type": "infer",
+"q": "Why can the department not fix the problem immediately?",
+"opts": [
+"Because the CCPC refuses to cooperate.",
+"Because the minister has resigned.",
+"Because companies have objected.",
+"Because the law allows the thresholds to be changed only once a year."
+],
+"a": 3,
+"exp": "New thresholds will come \"as early as possible in 2027, given that the legislation permits only one adjustment annually\"."
+},
+{
+"type": "tone",
+"q": "How would you describe the way the passage presents the Government's mistake?",
+"opts": [
+"Angry and mocking.",
+"Neutral and factual, explaining what went wrong and its consequences.",
+"Full of praise for the department.",
+"Humorous."
+],
+"a": 1,
+"exp": "The passage reports the facts — the order, the missed approval, the review, the consequences — without emotional language."
+}
+],
+"2026-10-18-3": [
+{
+"type": "main",
+"q": "What is the main point of the passage?",
+"opts": [
+"Kilmeaden residents voted to support the development.",
+"The Government has approved a new technology campus near Waterford.",
+"TikTok plans to build its own data centre in Kilmeaden.",
+"After a large data-centre campus in Co Waterford was refused permission, politicians and campaigners called for limits on data centres not powered by renewable energy."
+],
+"a": 3,
+"exp": "The refusal triggered calls for a moratorium and a national framework. Echelon, not TikTok, was the developer (C), and over 500 people objected (A)."
+},
+{
+"type": "infer",
+"q": "Why did the proposal include a café, shop, pharmacy, gym and childcare facility?",
+"opts": [
+"Most likely to offer benefits to the local community and make the project more acceptable.",
+"Because the planners required a pharmacy.",
+"Because data centres need shops to operate.",
+"Because TikTok asked for a gym."
+],
+"a": 0,
+"exp": "A new village centre offers obvious community benefits; given the strong local opposition, it is reasonable to infer it was meant to make the plan more attractive. Nothing suggests the other reasons."
+},
+{
+"type": "tone",
+"q": "How do Roderic O'Gorman's and David Cullinane's positions differ?",
+"opts": [
+"Neither mentions energy.",
+"Both want all data centres closed.",
+"O'Gorman wants the moratorium brought back, while Cullinane calls for a broader national plan that balances different needs.",
+"O'Gorman supports the Kilmeaden plan; Cullinane opposes it."
+],
+"a": 2,
+"exp": "O'Gorman \"advocated the reintroduction of the moratorium\"; Cullinane stressed \"a coherent national framework that balances electricity demand and climate commitments against the impact on local communities\"."
+}
+],
+"2026-10-18-4": [
+{
+"type": "main",
+"q": "Which statement best summarises the passage?",
+"opts": [
+"Courts have banned objections to infrastructure projects.",
+"Objectors must now pay the State to bring a case.",
+"State bodies are paying large sums to settle legal challenges to infrastructure, which saves delays but may encourage more challenges.",
+"The Dart+ West project has been cancelled."
+],
+"a": 2,
+"exp": "The passage weighs both sides: settlements cost less than long delays (the official's view) but may \"incentivise further litigation\" (the critics' view)."
+},
+{
+"type": "infer",
+"q": "Why is the word \"ransom\" placed in quotation marks?",
+"opts": [
+"Because a real kidnapping took place.",
+"Because it is the official legal term for a settlement.",
+"Because it is a critical description used by others, not a literal ransom.",
+"Because Irish Rail used the word."
+],
+"a": 2,
+"exp": "The quotation marks show it is a loaded, borrowed word from critics; settlements are legal agreements, not literal ransoms."
+},
+{
+"type": "purpose",
+"q": "Why does the writer mention the Greater Dublin Drainage scheme?",
+"opts": [
+"To show that drainage projects are never delayed.",
+"To give an example of a project bought by objectors.",
+"To illustrate how long disputes can multiply a project's cost, supporting the official's argument for settling.",
+"To argue that the State should never settle."
+],
+"a": 2,
+"exp": "It is introduced as \"illustrative\": its cost rose from about €500 million to as much as €2.3 billion after extended disputes, backing the claim that delays are more expensive than settlements."
+}
+]
+}
+}

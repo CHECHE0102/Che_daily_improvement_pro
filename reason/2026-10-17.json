@@ -1,0 +1,157 @@
+{
+"date": "2026-10-17",
+"items": {
+"2026-10-17": [
+{
+"type": "main",
+"q": "Which statement best captures the main point?",
+"opts": [
+"The Government has refused to talk to the unions.",
+"More than 300,000 workers will strike next Wednesday.",
+"The public sector pay dispute has been settled with a new agreement.",
+"A planned strike has been paused while a small team prepares the ground for formal pay talks, but it could still go ahead."
+],
+"a": 3,
+"exp": "The strike is \"suspended rather than cancelled\" and depends on the preliminary talks. No deal exists yet (C), the strike is off for now (B), and talks are starting (A)."
+},
+{
+"type": "infer",
+"q": "What does the passage suggest about the days of confidential contact before the decision?",
+"opts": [
+"The unions wanted the strike to go ahead.",
+"The WRC had been abolished.",
+"Both sides were keen to avoid a long conflict.",
+"The Government had already agreed to all pay demands."
+],
+"a": 2,
+"exp": "The writer says this contact \"indicates a mutual reluctance to prolong the conflict\"."
+},
+{
+"type": "tone",
+"q": "The tone of the final paragraph is best described as:",
+"opts": [
+"cautious",
+"indifferent",
+"sarcastic",
+"triumphant"
+],
+"a": 0,
+"exp": "\"It should be emphasised that the strike has been suspended rather than cancelled\" and its future is \"contingent\" on the talks — a careful, cautious warning against assuming the dispute is over."
+}
+],
+"2026-10-17-2": [
+{
+"type": "main",
+"q": "What is the passage mainly about?",
+"opts": [
+"The planned sale of Ireland's biggest GP network to a US healthcare group, and what it means for patients.",
+"A new law that bans foreign companies from owning GP practices.",
+"The closure of GP practices in the Netherlands and Germany.",
+"Problems with Bon Secours hospitals in Ireland."
+],
+"a": 0,
+"exp": "The passage reports the agreed acquisition, the buyer, Centric's size, the approval still needed and the reassurance to patients."
+},
+{
+"type": "infer",
+"q": "Why is the deal not yet certain?",
+"opts": [
+"Because the price has not been agreed.",
+"Because patients must vote on it.",
+"Because it still needs approval from the competition regulator and others.",
+"Because Dr Maurice Cox has resigned."
+],
+"a": 2,
+"exp": "\"The acquisition is contingent upon approval from the Competition and Consumer Protection Commission and other relevant regulators.\" The price is undisclosed, not unagreed (A)."
+},
+{
+"type": "purpose",
+"q": "What is the main purpose of the final paragraph?",
+"opts": [
+"To explain Centric's history.",
+"To criticise the new owners.",
+"To reassure patients that their care will continue as before.",
+"To announce new fees for patients."
+],
+"a": 2,
+"exp": "Patients need take \"no action\", and practices keep their brand and clinical independence — reassurance."
+}
+],
+"2026-10-17-3": [
+{
+"type": "main",
+"q": "Which of the following best summarises the passage?",
+"opts": [
+"Farmers are paid to plough food back into the soil.",
+"Ireland has solved its food waste problem.",
+"Supermarkets in Ireland are being fined for wasting food.",
+"A new Government-backed declaration aims to get more surplus food shared instead of wasted, as a charity says far more could be saved."
+],
+"a": 3,
+"exp": "The passage centres on the declaration launched at the summit and FoodCloud's argument that much more surplus could be redistributed."
+},
+{
+"type": "infer",
+"q": "Why do farmers sometimes return produce to the soil?",
+"opts": [
+"Because charities refuse to accept vegetables.",
+"Because it does not meet buyers' rules on size and shape, or exceeds what their contracts need, and they have no other outlet.",
+"Because the Government requires it.",
+"Because it is not safe to eat."
+],
+"a": 1,
+"exp": "Surplus arises when farmers \"produce more than their contracts require\" or produce \"fails to satisfy buyers' specifications regarding size and shape\"; in such cases they often have \"no alternative\"."
+},
+{
+"type": "purpose",
+"q": "Why does the writer mention that saving 3 per cent of surplus could provide 50 million meals?",
+"opts": [
+"To show how large the benefit of even a small improvement could be.",
+"To criticise the size of Irish meals.",
+"To prove that FoodCloud already saves 3 per cent.",
+"To explain the COP31 summit."
+],
+"a": 0,
+"exp": "A small percentage producing a very large number of meals underlines the potential gain — a persuasive use of a statistic."
+}
+],
+"2026-10-17-4": [
+{
+"type": "main",
+"q": "What is the passage mainly about?",
+"opts": [
+"A new opera house opening in Dublin next year.",
+"Irish National Opera buying a former church in Dublin as its first permanent home, and its plans for the building.",
+"Problems with gift shops on Dame Street.",
+"The history of Methodist churches in Ireland."
+],
+"a": 1,
+"exp": "It covers the purchase, its cost and funding, why INO needs space, and the planned uses. An opera house is only a long-term hope (A)."
+},
+{
+"type": "infer",
+"q": "Why was there little commercial interest in the building?",
+"opts": [
+"Because it had no upstairs hall.",
+"Because it is far from the city centre.",
+"Because the price was too high.",
+"Because it is a protected structure, which limits how it can be changed."
+],
+"a": 3,
+"exp": "\"The building ... is a protected structure; consequently, commercial interest was limited.\" It is near O'Connell Street (B) and sold below the guide price (C)."
+},
+{
+"type": "purpose",
+"q": "Why does the writer mention that Dublin is one of very few European capitals without an opera house?",
+"opts": [
+"To show that opera is not popular in Ireland.",
+"To explain why INO sees this purchase as only a first step towards a bigger goal.",
+"To compare ticket prices.",
+"To criticise other European capitals."
+],
+"a": 1,
+"exp": "The point supports INO's view of the project as \"an initial step towards establishing a dedicated opera house\"."
+}
+]
+}
+}
