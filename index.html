@@ -3012,7 +3012,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.126";
+const APP_VERSION="2026.10.127";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -5800,7 +5800,7 @@ async function giftSend(){
   render(); }
 async function giftAct(id, act){
   const x=GIFT_IN&&(GIFT_IN.recv.concat(GIFT_IN.sent)).find(y=>y.id===id); if(!x||!CLOUD.fb) return;
-  const ask=id+"|"+act; if(S.giftAsk!==ask){ S.giftAsk=ask; render(); return; }   // every action needs a second tap
+  const ask=id+"|"+act; if(act!=="accept"&&S.giftAsk!==ask){ S.giftAsk=ask; render(); return; }   // one tap to accept (the sender still has to Complete); everything else needs a second tap
   S.giftAsk=null;
   const next={accept:"accepted", decline:"declined", cancel:"cancelled", reclaim:"returned", complete:"done"}[act];
   const need={accept:["pending"], decline:["pending"], cancel:["pending","accepted"], reclaim:["declined"], complete:["accepted"]}[act], me=CLOUD.user&&CLOUD.user.uid;
@@ -5842,7 +5842,7 @@ function viewVault(){
   const btn=(x,a,cls)=>`<button class="btn sm ${cls||""}${ask(x.id,a)?" danger":""}" data-act="vtgift" data-k="${x.id}|${a}">${ask(x.id,a)?T("giftSure_"+a):T("giftBtn_"+a)}</button>`;
   const recv=(GIFT_IN&&GIFT_IN.recv)||[], sent=(GIFT_IN&&GIFT_IN.sent)||[];
   const card=(x,mine)=>`<div class="gift-card ${x.status}"><div class="gift-h"><b>${mine?T("giftToShort",{n:esc(x.toName||"?")}):T("giftFrom",{n:esc(x.fromName||"?")})}</b><span class="chip">${st(x,mine)}</span></div><div class="sm-t">${giftLines(x.items||{}).join(" · ")}</div>
-    ${!mine&&x.status==="pending"?`<div class="row">${btn(x,"accept")}${btn(x,"decline","ghost")}</div>${ask(x.id,"accept")?`<p class="sm-t">${T("giftAcceptQ")}</p>`:""}`:""}
+    ${!mine&&x.status==="pending"?`<div class="row">${btn(x,"accept")}${btn(x,"decline","ghost")}</div>`:""}
     ${!mine&&x.status==="accepted"?`<p class="sm-t muted">${T("giftWaitQ",{n:esc(x.fromName||"?")})}</p>`:""}
     ${mine&&x.status==="accepted"?`<p class="sm-t gift-doneq">${T("giftDoneQ",{n:esc(x.toName||"?")})}</p><div class="row">${btn(x,"complete")}${btn(x,"cancel","ghost")}</div>`:""}
     ${mine&&x.status==="pending"?`<div class="row">${btn(x,"cancel","ghost")}</div>`:""}${mine&&x.status==="declined"?`<div class="row">${btn(x,"reclaim")}</div>`:""}</div>`;
