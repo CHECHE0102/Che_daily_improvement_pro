@@ -807,7 +807,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .sh-cell{height:auto;min-height:44px;padding:4px 2px;line-height:1.2;text-align:center}.sh-cell.ready{min-height:58px;gap:1px}.sh-cell.ready span{font-size:11px;white-space:nowrap}.sh-cell.ready small{font-size:10.5px;font-weight:600;opacity:.85;white-space:nowrap}
 .sc-plat{background:linear-gradient(135deg,#F7FAFC 0%,#D5DEE8 40%,#F2F5F8 55%,#A9B8C9 100%)}
 .sc-diamond{background:linear-gradient(135deg,#E8FBFF 0%,#9BE0F5 35%,#E3D7FF 60%,#7CC4F2 100%);position:relative;overflow:hidden}.sc-diamond b::before{content:"💎 "}.sc-plat b::before{content:"✦ "}
-.gem.pic{background:none;box-shadow:none;object-fit:contain;border-radius:0}
+.gem.pic{background:none;box-shadow:none;object-fit:contain;border-radius:0;width:30px;height:30px}
 .gem-bonus{font-style:normal;font-size:11px;font-weight:700;color:var(--wood);background:color-mix(in srgb,var(--wood) 14%,transparent);padding:1px 6px;border-radius:99px;margin-left:4px;white-space:nowrap}
 .adv-quick{gap:8px}.aq-btn{min-width:58px}.aq-dot{position:absolute;right:-6px;top:-6px;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:#E0457B;color:#fff;font:800 11px/18px system-ui;font-style:normal}
 .aq-btn.vault .aq-ic{background:linear-gradient(135deg,#FFF5D6,#FFE1F0 45%,#DDF0FF);border-color:#E3B341}.aq-btn.vault>span:last-child{background:linear-gradient(90deg,#E0573B,#D9A520,#3FA65A,#2A68B0,#7E5BB5);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -2512,7 +2512,7 @@ function itemRow(it, mode){
 /* ----- gem sockets ----- */
 const gemName=k=>{ const [el,t]=k.split("-"); return T("gemName",{e:elName(el),t:TIER[+t].n}); };
 /* gem pictures: add "gem-<el>-<tier 1-4>" here once assets/art/gem-*.webp exist; until then a coloured badge is shown */
-const GEM_PICS=new Set([]);
+const GEM_PICS=new Set(["metal","wood","water","fire","earth"].flatMap(e=>[1,2,3,4].map(t=>`gem-${e}-${t}`)));   // hand-drawn icons (Codex) in assets/art/
 const gemDot=k=>{ const [el,t]=k.split("-"), pk=`gem-${el}-${+t+1}`; if(GEM_PICS.has(pk)) return `<img class="gem pic" src="assets/art/${pk}.webp" alt="" title="${esc(gemName(k))}" draggable="false">`; return `<span class="gem" style="background:var(--${el})" title="${esc(gemName(k))}">${TIER[+t].n}</span>`; };
 function sockHtml(it){ return `<div class="sock-row">${socketsOf(it.id).map((k,i)=>k?`<button class="sock full" data-act="gempick" data-k="${it.id}|${i}" aria-label="${esc(gemName(k))}">${gemDot(k)}</button>`:`<button class="sock" data-act="gempick" data-k="${it.id}|${i}" aria-label="${T("gemAdd")}">+</button>`).join("")}</div>`; }
 function gemPicker(it){ const gs=Object.entries(gemsOf()).filter(([k,n])=>n>0).sort(gemSort), P=S.sockPick, cur=P&&socketsOf(it.id)[P.i], g=game();
@@ -3015,7 +3015,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.131";
+const APP_VERSION="2026.10.132";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
