@@ -351,6 +351,11 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 @media (prefers-reduced-motion:reduce){.sh-cell.ready{animation:none}}
 .odds summary{cursor:pointer;font-weight:600}.odds h4{margin:12px 0 4px;font-size:14px}.odds .rw-row{font-size:13px;padding:2px 0}
 .odds-sc{display:flex;flex-direction:column;gap:3px;padding:6px 0;border-top:1px solid var(--line)}.odds-sc .odds-tiers{justify-content:flex-start}
+.pd-scrim{z-index:40;animation:amFade .2s ease-out both}
+.pd-card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:41;width:min(340px,calc(100% - 32px));background:var(--card);border-radius:22px;padding:22px 20px 18px;box-shadow:0 20px 50px rgba(0,0,0,.3);text-align:center;display:flex;flex-direction:column;gap:10px;animation:popMid .25s ease-out}
+.pd-card h2{margin:0}.pd-hero{width:150px;height:150px;object-fit:contain;margin:-60px auto 0;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}.pd-hero-ph{display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:50%}.pd-hero-ph svg{width:96px;height:96px}
+.pd-list{display:flex;flex-direction:column;gap:8px;margin:4px 0 6px}.pd-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:14px;background:color-mix(in srgb,#F2C14E 18%,var(--paper));text-align:left}.pd-pic{width:52px;height:52px;object-fit:contain}.pd-ic{font-size:34px;width:52px;text-align:center}
+.vt-pic{width:64px;height:64px;object-fit:contain}
 .sc-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:21;width:min(340px,calc(100% - 32px));display:flex;flex-direction:column;gap:12px;align-items:stretch}.sc-modal.fresh{animation:popMid .2s ease-out}
 @keyframes popMid{from{transform:translate(-50%,-46%);opacity:0}}
 .sc-ticket{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;color:#2A2010;box-shadow:0 14px 40px rgba(0,0,0,.3)}
@@ -3015,7 +3020,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.135";
+const APP_VERSION="2026.10.136";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -5827,11 +5832,22 @@ const PAY_FN="https://europe-west1-che-daily-improvement-pro.cloudfunctions.net"
 const PAY_TESTERS=new Set(["d64a281160d50a9cd12426bc8ee395a2315b913497c840ed9c65feb367d56fc0"]);   // sha256 of tester e-mails (sandbox)
 let PAY_IN=null, PAY_BUSY=false;
 const PAY_RET=(()=>{ try{ const q=new URLSearchParams(location.search), p=q.get("pay"); if(!p) return null;
-  history.replaceState(null,"",location.pathname+location.hash); return {pay:p, sid:q.get("sid")}; }catch(e){ return null; } })();
+  history.replaceState(null,"",location.pathname+location.hash); S.tab="adv"; S.view="adv"; S.advTab="vault"; return {pay:p, sid:q.get("sid")}; }catch(e){ return null; } })();
 async function payTesterCheck(u){ try{ if(!u||!u.email||!u.emailVerified||!crypto.subtle) return;
   const h=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(u.email.toLowerCase())))].map(b=>b.toString(16).padStart(2,"0")).join("");
   if(PAY_TESTERS.has(h)&&!S.payTester){ S.payTester=true; render(); } }catch(e){} }
 function payGrant(g,sign){ const G=game(); if(!g) return; if(g.charms) G.charms=Math.max(0,(G.charms||0)+sign*g.charms); if(g.gold) G.gold=Math.max(0,(G.gold||0)+sign*g.gold); }
+const vaultPic=(id,cls)=>PICS.has("icon-vault-"+id)?`<img src="assets/art/icon-vault-${id}.webp" alt="" class="${cls||"vt-pic"}">`:null;
+const vaultName=v=>v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
+// "purchase complete" pop-up: what was bought, with pictures
+function payShowDone(x){
+  const v=VAULT_ITEMS.find(i=>i.id===x.item); let el=document.getElementById("payDone");
+  if(!el){ el=document.createElement("div"); el.id="payDone"; document.body.appendChild(el); el.dataset.items="[]"; }
+  const items=JSON.parse(el.dataset.items||"[]"); items.push(x.item); el.dataset.items=JSON.stringify(items);
+  const rows=items.map(id=>{ const it=VAULT_ITEMS.find(i=>i.id===id); if(!it) return ""; return `<div class="pd-item">${vaultPic(it.id,"pd-pic")||`<span class="pd-ic">${it.ic}</span>`}<b>${esc(vaultName(it))}</b></div>`; }).join("");
+  const hero=PICS.has("icon-vault-thanks")?`<img src="assets/art/icon-vault-thanks.webp" alt="" class="pd-hero">`:`<div class="pd-hero pd-hero-ph">${VAULT_ICON}</div>`;
+  el.innerHTML=`<div class="scrim pd-scrim" data-act="paydoneclose"></div><div class="pd-card" role="dialog" aria-modal="true">${hero}<h2>${T("payDoneT")}</h2><p class="sm-t muted">${T("payDoneSub")}</p><div class="pd-list">${rows}</div><button class="btn" data-act="paydoneclose">${T("payDoneOk")}</button></div>`; }
+document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="paydoneclose"]'); if(!t) return; e.stopPropagation(); const el=document.getElementById("payDone"); if(el) el.remove(); render(); }, true);
 const payName=x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return v?(v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()})):x.item; };
 async function payBuy(id){
   const v=VAULT_ITEMS.find(i=>i.id===id); if(!v||PAY_BUSY) return;
@@ -5864,7 +5880,7 @@ async function payClaim(x, mode){
       if(!d||d.uid!==CLOUD.user.uid) throw new Error("state");
       if(mode==="claim"){ if(d.status!=="paid"||d.claimed) throw new Error("state"); tx.update(ref,{claimed:true, claimedAt:new Date().toISOString()}); }
       else { if(!d.claimed||d.revoked||!(d.status==="refunded"||d.status==="disputed")) throw new Error("state"); tx.update(ref,{revoked:true, revokedAt:new Date().toISOString()}); } });
-    if(mode==="claim"){ payGrant(x.grant,1); x.claimed=true; toast(T("payGot",{x:payName(x)})); if(typeof sfx==="function") sfx("prize"); }
+    if(mode==="claim"){ payGrant(x.grant,1); x.claimed=true; payShowDone(x); if(typeof sfx==="function") sfx("prize"); }
     else { payGrant(x.grant,-1); x.revoked=true; toast(T("payRevoked")); }
     saveGame(); }
   catch(e){ if(e&&e.message!=="state") console.warn("purchase claim",e&&(e.code||e.message)); } }
@@ -5873,7 +5889,7 @@ function viewVault(){
   setTimeout(()=>{ giftLoad(false); if(PAY_IN===null){ PAY_IN=[]; payLoad(); } },0);
   const g=game(), G=S.gift;
   const buyable=v=>v.pay&&CLOUD.user&&(!v.test||S.payTester);
-  const shop=VAULT_ITEMS.map(v=>`<div class="vt-item"><span class="vt-ic">${v.ic}</span><b>${v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()})}</b>
+  const shop=VAULT_ITEMS.map(v=>`<div class="vt-item">${vaultPic(v.id)||`<span class="vt-ic">${v.ic}</span>`}<b>${v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()})}</b>
     ${buyable(v)?`<button class="btn sm" data-act="vtbuy" data-k="${v.id}" ${PAY_BUSY?"disabled":""}>${T("vtBuy",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
       :DEV?`<button class="btn sm ghost" data-act="vttest" data-k="${v.id}">${T("vaultTest")}</button>`:`<span class="vt-soon">${T("vaultSoon")}</span>`}</div>`).join("");
   const hist=(PAY_IN||[]).filter(x=>x.status!=="open").slice(0,8);
@@ -6054,6 +6070,12 @@ Object.assign(STR.hi,{"vtBuy": "{p} में खरीदें", "vtTestTag": 
 Object.assign(STR.es,{"vtBuy": "Comprar {p}", "vtTestTag": "(prueba)", "payGo": "Abriendo la página de pago…", "payGot": "Compra completada: {x}", "payCancel": "Pago cancelado. No se te ha cobrado", "payFail": "Los pagos no están disponibles ahora. Inténtalo más tarde", "payLogin": "Inicia sesión para comprar", "payRevoked": "Se procesó un reembolso y se retiraron los objetos", "payPending": "Confirmando tu pago…", "payHistT": "Compras", "paySt_paid": "Pagado", "paySt_refunded": "Reembolsado", "paySt_disputed": "En disputa", "paySt_failed": "No completado"});
 Object.assign(STR.ja,{"vtBuy": "{p} で購入", "vtTestTag": "（テスト）", "payGo": "支払いページを開いています…", "payGot": "購入完了：{x}", "payCancel": "支払いをキャンセルしました。請求はありません", "payFail": "現在お支払いを利用できません。後でもう一度お試しください", "payLogin": "購入するにはログインしてください", "payRevoked": "返金が処理され、アイテムが回収されました", "payPending": "お支払いを確認しています…", "payHistT": "購入履歴", "paySt_paid": "支払い済み", "paySt_refunded": "返金済み", "paySt_disputed": "異議申し立て中", "paySt_failed": "未完了"});
 Object.assign(STR.ko,{"vtBuy": "{p}에 구매", "vtTestTag": "(테스트)", "payGo": "결제 페이지로 이동 중…", "payGot": "구매 완료: {x}", "payCancel": "결제를 취소했어요. 청구되지 않았어요", "payFail": "지금은 결제를 사용할 수 없어요. 나중에 다시 시도해 주세요", "payLogin": "구매하려면 먼저 로그인하세요", "payRevoked": "환불이 처리되어 아이템을 회수했어요", "payPending": "결제를 확인하고 있어요…", "payHistT": "구매 기록", "paySt_paid": "결제 완료", "paySt_refunded": "환불됨", "paySt_disputed": "분쟁 처리 중", "paySt_failed": "미완료"});
+Object.assign(STR.zh,{"payDoneT": "購買成功！", "payDoneSub": "謝謝你的支持，道具已經放進你的背包。", "payDoneOk": "太好了！"});
+Object.assign(STR.en,{"payDoneT": "Purchase complete!", "payDoneSub": "Thank you for your support. The items are in your bag.", "payDoneOk": "Great!"});
+Object.assign(STR.hi,{"payDoneT": "खरीद सफल!", "payDoneSub": "आपके साथ के लिए धन्यवाद। चीज़ें आपके बैग में आ गई हैं।", "payDoneOk": "बढ़िया!"});
+Object.assign(STR.es,{"payDoneT": "¡Compra completada!", "payDoneSub": "Gracias por tu apoyo. Los objetos ya están en tu bolsa.", "payDoneOk": "¡Genial!"});
+Object.assign(STR.ja,{"payDoneT": "購入完了！", "payDoneSub": "ご支援ありがとうございます。アイテムはバッグに入りました。", "payDoneOk": "やった！"});
+Object.assign(STR.ko,{"payDoneT": "구매 완료!", "payDoneSub": "응원해 주셔서 고마워요. 아이템이 가방에 들어갔어요.", "payDoneOk": "좋아요!"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
