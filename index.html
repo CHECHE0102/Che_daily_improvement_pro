@@ -1216,7 +1216,7 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 
 /* ---------- rendering ---------- */
 /* new players: the Lucky House stays locked until the elder introduces it (day-2 talk); everything else is open from the start */
-function featLock(k){ if(k==="vault"&&!DEV) return "lockVault";   // Rainbow Vault stays closed to players until paid items launch
+function featLock(k){ if(k==="vault"&&!DEV&&!S.payTester) return "lockVault";   // Rainbow Vault stays closed to players until paid items launch
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
@@ -3015,7 +3015,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.134";
+const APP_VERSION="2026.10.135";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3550,7 +3550,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -5738,7 +5738,7 @@ Object.assign(STR.zh,{"scPlat": "白金卡", "scDiamond": "鑽石卡"});Object.a
    The receiver checks twice and accepts (items added) or declines (the sender can take them back; the fee is not refunded).
    The sender may also take back a gift that is still pending. */
 const VAULT_ITEMS=[
-  {id:"charm3", kind:"charm", n:3, ic:"🪄"}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
+  {id:"charm3", kind:"charm", n:3, ic:"🪄", pay:"charm3", price:"€1", test:true}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
   {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
 const GIFT={feeShard:[10,20,40,80], feeGem:[40,80,160,320], feeCharm:60, minFee:20, maxEach:20};
 function giftFee(it){ let f=0; for(const [k,n] of Object.entries(it.gems||{})) f+=n*GIFT.feeGem[+k.split("-")[1]]; for(const [k,n] of Object.entries(it.shards||{})) f+=n*GIFT.feeShard[+k.split("-")[1]]; f+=(it.charms||0)*GIFT.feeCharm; return f?Math.max(GIFT.minFee,f):0; }
@@ -5821,11 +5821,62 @@ async function giftAct(id, act){
   render(); }
 function vaultTest(id){ if(!DEV) return; const v=VAULT_ITEMS.find(x=>x.id===id), g=game(); if(!v) return;
   if(v.kind==="charm") g.charms=(g.charms||0)+v.n; else g.gold+=v.n; saveGame(); toast(T("vaultTestGot")); render(); }
+/* ----- real-money purchases (Stripe Checkout, see functions/index.js). The server records each paid
+   checkout in purchases/{sessionId}; the game hands the items out once (claimed) and takes them back after a refund. ----- */
+const PAY_FN="https://europe-west1-che-daily-improvement-pro.cloudfunctions.net";
+const PAY_TESTERS=new Set(["d64a281160d50a9cd12426bc8ee395a2315b913497c840ed9c65feb367d56fc0"]);   // sha256 of tester e-mails (sandbox)
+let PAY_IN=null, PAY_BUSY=false;
+const PAY_RET=(()=>{ try{ const q=new URLSearchParams(location.search), p=q.get("pay"); if(!p) return null;
+  history.replaceState(null,"",location.pathname+location.hash); return {pay:p, sid:q.get("sid")}; }catch(e){ return null; } })();
+async function payTesterCheck(u){ try{ if(!u||!u.email||!u.emailVerified||!crypto.subtle) return;
+  const h=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(u.email.toLowerCase())))].map(b=>b.toString(16).padStart(2,"0")).join("");
+  if(PAY_TESTERS.has(h)&&!S.payTester){ S.payTester=true; render(); } }catch(e){} }
+function payGrant(g,sign){ const G=game(); if(!g) return; if(g.charms) G.charms=Math.max(0,(G.charms||0)+sign*g.charms); if(g.gold) G.gold=Math.max(0,(G.gold||0)+sign*g.gold); }
+const payName=x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return v?(v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()})):x.item; };
+async function payBuy(id){
+  const v=VAULT_ITEMS.find(i=>i.id===id); if(!v||PAY_BUSY) return;
+  if(!CLOUD.user) return toast(T("payLogin"));
+  PAY_BUSY=true; render(); toast(T("payGo"));
+  try{ const tok=await CLOUD.user.getIdToken();
+    const r=await fetch(PAY_FN+"/createCheckout",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:JSON.stringify({item:v.pay,lang:({zh:"zh-TW",cn:"zh"})[langKey()]||langKey()})});
+    const j=await r.json().catch(()=>({}));
+    if(r.ok&&j.url){ location.href=j.url; return; }
+    toast(j.error==="closed"?T("vaultSoon"):T("payFail")); console.warn("checkout",r.status,j); }
+  catch(e){ toast(T("payFail")); console.warn("checkout",e); }
+  PAY_BUSY=false; render(); }
+async function payLoad(waitSid, tries){
+  if(!CLOUD.user||!CLOUD.fb||SANDBOX()) return;
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const q=await fsM.getDocs(fsM.query(fsM.collection(db,"purchases"),fsM.where("uid","==",me),fsM.limit(40)));
+    const L=[]; q.forEach(d=>{ const x={id:d.id,...d.data()}; if(x.uid===me) L.push(x); });
+    L.sort((a,b)=>String(b.id).localeCompare(String(a.id))); PAY_IN=L;
+    for(const x of L){
+      if(x.status==="paid"&&!x.claimed) await payClaim(x,"claim");
+      else if((x.status==="refunded"||x.status==="disputed")&&x.claimed&&!x.revoked) await payClaim(x,"revoke");
+    }
+    // just came back from Stripe: the webhook can take a few seconds
+    if(waitSid){ const w=L.find(x=>x.id===waitSid); if(!w||w.status==="open"){ if((tries||0)<12){ if(!tries) toast(T("payPending")); setTimeout(()=>payLoad(waitSid,(tries||0)+1),3000); } else toast(T("payFail")); } }
+  }catch(e){ console.warn("purchases",e&&e.code); }
+  if(S.view==="adv") render(); }
+async function payClaim(x, mode){
+  const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"purchases",x.id);
+  try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():null;
+      if(!d||d.uid!==CLOUD.user.uid) throw new Error("state");
+      if(mode==="claim"){ if(d.status!=="paid"||d.claimed) throw new Error("state"); tx.update(ref,{claimed:true, claimedAt:new Date().toISOString()}); }
+      else { if(!d.claimed||d.revoked||!(d.status==="refunded"||d.status==="disputed")) throw new Error("state"); tx.update(ref,{revoked:true, revokedAt:new Date().toISOString()}); } });
+    if(mode==="claim"){ payGrant(x.grant,1); x.claimed=true; toast(T("payGot",{x:payName(x)})); if(typeof sfx==="function") sfx("prize"); }
+    else { payGrant(x.grant,-1); x.revoked=true; toast(T("payRevoked")); }
+    saveGame(); }
+  catch(e){ if(e&&e.message!=="state") console.warn("purchase claim",e&&(e.code||e.message)); } }
+if(PAY_RET&&PAY_RET.pay==="cancel") setTimeout(()=>toast(T("payCancel")),1500);
 function viewVault(){
-  setTimeout(()=>giftLoad(false),0);
+  setTimeout(()=>{ giftLoad(false); if(PAY_IN===null){ PAY_IN=[]; payLoad(); } },0);
   const g=game(), G=S.gift;
+  const buyable=v=>v.pay&&CLOUD.user&&(!v.test||S.payTester);
   const shop=VAULT_ITEMS.map(v=>`<div class="vt-item"><span class="vt-ic">${v.ic}</span><b>${v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()})}</b>
-    ${DEV?`<button class="btn sm ghost" data-act="vttest" data-k="${v.id}">${T("vaultTest")}</button>`:`<span class="vt-soon">${T("vaultSoon")}</span>`}</div>`).join("");
+    ${buyable(v)?`<button class="btn sm" data-act="vtbuy" data-k="${v.id}" ${PAY_BUSY?"disabled":""}>${T("vtBuy",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
+      :DEV?`<button class="btn sm ghost" data-act="vttest" data-k="${v.id}">${T("vaultTest")}</button>`:`<span class="vt-soon">${T("vaultSoon")}</span>`}</div>`).join("");
+  const hist=(PAY_IN||[]).filter(x=>x.status!=="open").slice(0,8);
   // gifting
   let gift;
   if(!CLOUD.user) gift=`<p class="muted sm-t">${T("giftLogin")}</p>`;
@@ -5853,12 +5904,14 @@ function viewVault(){
     ${sent.length?`<h4>${T("giftSentT")}</h4>${sent.slice(0,10).map(x=>card(x,true)).join("")}`:""}</section>`:"";
   return `<section class="vault-hero"><div class="vh-ic">${VAULT_ICON}</div><div><div class="eyebrow">${T("vaultEyebrow")}</div><h2>${T("vaultName")}</h2><p class="sm-t">${T("vaultSub")}</p></div></section>
     <section class="card"><h3>✨ ${T("vaultShopT")}</h3><p class="muted sm-t">${T("vaultShopSub")}</p><div class="vt-grid">${shop}</div></section>
+    ${hist.length?`<section class="card"><h3>🧾 ${T("payHistT")}</h3>${hist.map(x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return `<div class="rw-row"><span>${v?v.ic:"🛒"} ${v?(v.kind==="charm"?T("vtCharm",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()})):esc(x.item)}${x.test?` <small class="muted">${T("vtTestTag")}</small>`:""}</span><b class="sm-t">${T("paySt_"+x.status)||esc(x.status)}</b></div>`; }).join("")}</section>`:""}
     <section class="card"><h3>🎁 ${T("giftTitle")}</h3><p class="muted sm-t">${T("giftSub")}</p>${gift}</section>
     ${inbox}`;
 }
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^vt/.test(a)) return; e.stopPropagation();
   if(a==="vttest") return vaultTest(t.dataset.k);
+  if(a==="vtbuy") return payBuy(t.dataset.k);
   if(a==="vtfind") return giftFind();
   if(a==="vtreset"){ S.gift=null; return render(); }
   if(a==="vtstep"){ const [kind,k,d]=t.dataset.k.split("|"); return giftStep(kind,k,+d); }
@@ -5995,6 +6048,12 @@ Object.assign(STR.hi,{"sndSub": "संगीत हमेशा बजता �
 Object.assign(STR.es,{"sndSub": "La música suena siempre y se apaga mientras se lee en voz alta una noticia. Durante un examen IELTS o TOEIC, la música y los efectos se desactivan."});
 Object.assign(STR.ja,{"sndSub": "BGM は常に流れ、ニュースの読み上げ中は自動で止まります。IELTS・TOEIC の試験中は BGM も効果音もオフになります。"});
 Object.assign(STR.ko,{"sndSub": "배경음악은 항상 나오고, 뉴스 읽어 주기를 들을 때는 자동으로 멈춰요. IELTS·토익 시험 중에는 음악과 효과음이 모두 꺼져요."});
+Object.assign(STR.zh,{"vtBuy": "購買 {p}", "vtTestTag": "（測試）", "payGo": "正在前往付款頁…", "payGot": "購買完成，已收到：{x}", "payCancel": "已取消付款，沒有扣款", "payFail": "付款服務暫時無法使用，請稍後再試", "payLogin": "請先登入才能購買", "payRevoked": "退款已處理，相關道具已收回", "payPending": "付款確認中，請稍候…", "payHistT": "購買紀錄", "paySt_paid": "已付款", "paySt_refunded": "已退款", "paySt_disputed": "爭議處理中", "paySt_failed": "未完成"});
+Object.assign(STR.en,{"vtBuy": "Buy {p}", "vtTestTag": "(test)", "payGo": "Opening the payment page…", "payGot": "Purchase complete: {x}", "payCancel": "Payment cancelled. You were not charged", "payFail": "Payments aren't available right now. Please try again later", "payLogin": "Please sign in to buy", "payRevoked": "A refund was processed and the items were taken back", "payPending": "Confirming your payment…", "payHistT": "Purchases", "paySt_paid": "Paid", "paySt_refunded": "Refunded", "paySt_disputed": "Disputed", "paySt_failed": "Not completed"});
+Object.assign(STR.hi,{"vtBuy": "{p} में खरीदें", "vtTestTag": "(टेस्ट)", "payGo": "भुगतान पेज खुल रहा है…", "payGot": "खरीद पूरी हुई: {x}", "payCancel": "भुगतान रद्द हुआ, कोई पैसा नहीं कटा", "payFail": "भुगतान अभी उपलब्ध नहीं है, बाद में कोशिश करें", "payLogin": "खरीदने के लिए पहले साइन इन करें", "payRevoked": "रिफ़ंड हो गया, संबंधित चीज़ें वापस ले ली गईं", "payPending": "आपका भुगतान जाँचा जा रहा है…", "payHistT": "खरीद इतिहास", "paySt_paid": "भुगतान हुआ", "paySt_refunded": "रिफ़ंड हुआ", "paySt_disputed": "विवाद में", "paySt_failed": "पूरा नहीं हुआ"});
+Object.assign(STR.es,{"vtBuy": "Comprar {p}", "vtTestTag": "(prueba)", "payGo": "Abriendo la página de pago…", "payGot": "Compra completada: {x}", "payCancel": "Pago cancelado. No se te ha cobrado", "payFail": "Los pagos no están disponibles ahora. Inténtalo más tarde", "payLogin": "Inicia sesión para comprar", "payRevoked": "Se procesó un reembolso y se retiraron los objetos", "payPending": "Confirmando tu pago…", "payHistT": "Compras", "paySt_paid": "Pagado", "paySt_refunded": "Reembolsado", "paySt_disputed": "En disputa", "paySt_failed": "No completado"});
+Object.assign(STR.ja,{"vtBuy": "{p} で購入", "vtTestTag": "（テスト）", "payGo": "支払いページを開いています…", "payGot": "購入完了：{x}", "payCancel": "支払いをキャンセルしました。請求はありません", "payFail": "現在お支払いを利用できません。後でもう一度お試しください", "payLogin": "購入するにはログインしてください", "payRevoked": "返金が処理され、アイテムが回収されました", "payPending": "お支払いを確認しています…", "payHistT": "購入履歴", "paySt_paid": "支払い済み", "paySt_refunded": "返金済み", "paySt_disputed": "異議申し立て中", "paySt_failed": "未完了"});
+Object.assign(STR.ko,{"vtBuy": "{p}에 구매", "vtTestTag": "(테스트)", "payGo": "결제 페이지로 이동 중…", "payGot": "구매 완료: {x}", "payCancel": "결제를 취소했어요. 청구되지 않았어요", "payFail": "지금은 결제를 사용할 수 없어요. 나중에 다시 시도해 주세요", "payLogin": "구매하려면 먼저 로그인하세요", "payRevoked": "환불이 처리되어 아이템을 회수했어요", "payPending": "결제를 확인하고 있어요…", "payHistT": "구매 기록", "paySt_paid": "결제 완료", "paySt_refunded": "환불됨", "paySt_disputed": "분쟁 처리 중", "paySt_failed": "미완료"});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{

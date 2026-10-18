@@ -1,0 +1,61 @@
+name: Deploy payment functions
+# Deploys functions/ (Stripe Checkout + webhook) to Firebase Cloud Functions.
+# Needs repo secrets: FIREBASE_SA (service account JSON), STRIPE_SECRET_KEY,
+# and later STRIPE_WEBHOOK_SECRET (until it exists a placeholder is stored, so the webhook rejects everything).
+on:
+  push:
+    branches: [main]
+    paths: ["functions/**", "firebase.json", ".github/workflows/deploy-functions.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deploy-functions
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PROJECT: che-daily-improvement-pro
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install function dependencies
+        working-directory: functions
+        run: npm install --no-audit --no-fund
+      - name: Service account
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
+        run: |
+          [ -n "$FIREBASE_SA" ] || { echo "::error::FIREBASE_SA secret is missing"; exit 1; }
+          printf '%s' "$FIREBASE_SA" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+      - name: Store Stripe secrets in Secret Manager
+        env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+        run: |
+          set -e
+          [ -n "$STRIPE_SECRET_KEY" ] || { echo "::error::STRIPE_SECRET_KEY secret is missing"; exit 1; }
+          case "$STRIPE_SECRET_KEY" in sk_test_*) echo "Stripe key: test mode";; sk_live_*|rk_live_*) echo "::warning::Stripe key is LIVE";; *) echo "::error::STRIPE_SECRET_KEY does not look like a Stripe secret key"; exit 1;; esac
+          [ -n "$STRIPE_WEBHOOK_SECRET" ] && echo "Webhook secret: set" || echo "::warning::STRIPE_WEBHOOK_SECRET not set yet (placeholder stored; payments will not be fulfilled)"
+          umask 077
+          printf '%s' "$STRIPE_SECRET_KEY" > "$RUNNER_TEMP/k1"
+          printf '%s' "${STRIPE_WEBHOOK_SECRET:-whsec_placeholder_not_set}" > "$RUNNER_TEMP/k2"
+          npx -y firebase-tools@latest functions:secrets:set STRIPE_SECRET_KEY --data-file "$RUNNER_TEMP/k1" --project "$PROJECT" --non-interactive
+          npx -y firebase-tools@latest functions:secrets:set STRIPE_WEBHOOK_SECRET --data-file "$RUNNER_TEMP/k2" --project "$PROJECT" --non-interactive
+          rm -f "$RUNNER_TEMP/k1" "$RUNNER_TEMP/k2"
+      - name: Deploy
+        run: npx -y firebase-tools@latest deploy --only functions --project "$PROJECT" --non-interactive --force
+      - name: Endpoints
+        if: success()
+        run: |
+          echo "### Deployed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- createCheckout: https://europe-west1-$PROJECT.cloudfunctions.net/createCheckout" >> "$GITHUB_STEP_SUMMARY"
+          echo "- stripeWebhook (put this in Stripe → Webhooks): https://europe-west1-$PROJECT.cloudfunctions.net/stripeWebhook" >> "$GITHUB_STEP_SUMMARY"
+      - name: Clean up
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json" "$RUNNER_TEMP/k1" "$RUNNER_TEMP/k2"
