@@ -356,6 +356,14 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .pd-card h2{margin:0}.pd-hero{width:150px;height:150px;object-fit:contain;margin:-60px auto 0;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}.pd-hero-ph{display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:50%}.pd-hero-ph svg{width:96px;height:96px}
 .pd-list{display:flex;flex-direction:column;gap:8px;margin:4px 0 6px}.pd-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:14px;background:color-mix(in srgb,#F2C14E 18%,var(--paper));text-align:left}.pd-pic{width:52px;height:52px;object-fit:contain}.pd-ic{font-size:34px;width:52px;text-align:center}
 .vt-pic{width:64px;height:64px;object-fit:contain}.vt-legal{margin:10px 0 0;font-size:12px}
+.ha-glow{filter:var(--glow)}.ha-glow[data-gt="2"],.ha-glow[data-gt="3"]{animation:haGlow 2.6s ease-in-out infinite}
+@keyframes haGlow{50%{filter:var(--glow2)}}@media (prefers-reduced-motion:reduce){.ha-glow{animation:none!important}}
+.rk-row.rk-has-look{grid-template-columns:34px 46px 1fr auto;cursor:pointer}.rk-row.rk-has-look .rk-sub,.rk-row.rk-has-look .rk-name{grid-column:3}.rk-row.rk-has-look .rk-v{grid-column:4}.rk-row.rk-has-look .rk-fig{grid-column:2;grid-row:1/3}
+.rk-fig{width:46px;height:46px;grid-row:span 2;overflow:visible}.rk-fig .ha-in,.pg-fig .ha-in,.rk-big .ha-in{width:100%;height:100%}
+.look-ph{display:flex;align-items:center;justify-content:center;font-size:24px;opacity:.5}
+.rk-look{gap:6px}.rk-look-fig{display:flex;justify-content:center;margin-top:-80px}.rk-big{width:190px;height:190px}
+.rk-gear{display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left;margin:6px 0}.rk-gear>div{display:flex;flex-direction:column;gap:3px;padding:8px 10px;border-radius:12px;background:var(--paper);font-size:14px}.rk-gear .gem.pic{width:22px;height:22px}
+.pg-lobby{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.pg-pl{display:flex;flex-direction:column;align-items:center;gap:2px}.pg-fig{width:84px;height:84px}
 .sc-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:21;width:min(340px,calc(100% - 32px));display:flex;flex-direction:column;gap:12px;align-items:stretch}.sc-modal.fresh{animation:popMid .2s ease-out}
 @keyframes popMid{from{transform:translate(-50%,-46%);opacity:0}}
 .sc-ticket{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;color:#2A2010;box-shadow:0 14px 40px rgba(0,0,0,.3)}
@@ -3021,7 +3029,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.138";
+const APP_VERSION="2026.10.139";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
@@ -3708,13 +3716,30 @@ Object.assign(STR.es,{tabRank:"Ranking", tabCoop:"Cooperativo", rkPower:"Poder",
 
 /* ----- leaderboard ----- */
 const powerOf=s=>s.hp+s.atk*3+s.def*2;
-function lbEntry(){ const g=game(), s=stats(); return {name:(g.nick||"").slice(0,16), lv:g.lv|0, hp:s.hp|0, atk:s.atk|0, def:s.def|0, power:powerOf(s)|0, conq:Object.keys(g.conq||{}).length, flag:myFlag(), updatedAt:new Date().toISOString()}; }
+/* "look": how my character appears to others — gender | weapon | armour | weapon gems | armour gems */
+function myLook(){ const g=game(); if(!g||!g.gender) return "";
+  const sk=id=>id?socketsOf(id).filter(Boolean).join("."):"";
+  return [g.gender, g.weapon||"", g.armor||"", sk(g.weapon), sk(g.armor)].join("|").slice(0,100); }
+function parseLook(str){ if(typeof str!=="string") return null; const [g,w,a,ws,as]=str.split("|");
+  if(g!=="m"&&g!=="f") return null; const gem=x=>(x||"").split(".").filter(k=>/^(metal|wood|water|fire|earth)-[0-3]$/.test(k)).slice(0,4);
+  return {g, w:ITEMS[w]?w:null, a:ITEMS[a]?a:null, ws:gem(ws), as:gem(as)}; }
+function lookArt(str, cls, pose){ const L=parseLook(str); if(!L) return `<div class="${cls} look-ph">🙂</div>`;
+  return charArt(L.g, pose||"idle", L.w&&ITEMS[L.w], L.a&&ITEMS[L.a], cls, {ws:L.ws, as:L.as, lazy:true}); }
+const LOOKS={};   // uid → look string (from leaderboard docs), for party lobbies
+async function lookFetch(uids){ if(!CLOUD.fb) return; const {fsM,db}=CLOUD.fb; let got=false;
+  await Promise.all(uids.filter(u=>!(u in LOOKS)).map(async u=>{ LOOKS[u]=""; try{ const d=await fsM.getDoc(fsM.doc(db,"leaderboard",u)); if(d.exists()&&d.data().look){ LOOKS[u]=String(d.data().look); got=true; } }catch(e){} }));
+  if(got) render(); }
+function lbEntry(){ const g=game(), s=stats(); const e={name:(g.nick||"").slice(0,16), lv:g.lv|0, hp:s.hp|0, atk:s.atk|0, def:s.def|0, power:powerOf(s)|0, conq:Object.keys(g.conq||{}).length, flag:myFlag(), updatedAt:new Date().toISOString()};
+  const lk=myLook(); if(lk&&!CLOUD.lbNoLook) e.look=lk; return e; }
 async function lbPush(){
   if(DEV||CLOUD.deleting) return;
   if(!CLOUD.user||!CLOUD.fb||!game().nick) return;
   const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:0});
   if(sig===CLOUD.lbSig) return;
-  try{ await fsM.setDoc(fsM.doc(db,"leaderboard",CLOUD.user.uid), e); CLOUD.lbSig=sig; }catch(err){ console.warn("leaderboard",err&&err.code); }
+  try{ await fsM.setDoc(fsM.doc(db,"leaderboard",CLOUD.user.uid), e); CLOUD.lbSig=sig; }
+  catch(err){ // older security rules don't know "look" yet: save without it
+    if(e.look&&err&&err.code==="permission-denied"){ CLOUD.lbNoLook=true; delete e.look; try{ await fsM.setDoc(fsM.doc(db,"leaderboard",CLOUD.user.uid), e); CLOUD.lbSig=sig; }catch(e2){ console.warn("leaderboard",e2&&e2.code); } }
+    else console.warn("leaderboard",err&&err.code); }
 }
 async function lbLoad(){
   if(!CLOUD.user||!CLOUD.fb) return;
@@ -3752,6 +3777,17 @@ function nickForm(){ const g=game(), w=nickWait(), auto=ccDetect(), f=g.flag||"a
       <option value="none"${f==="none"?" selected":""}>${T("flagNone")}</option>
       ${list.map(([c,n])=>`<option value="${c}"${f===c?" selected":""}>${flagOf(c)} ${esc(n)}</option>`).join("")}</select></label>
     <span class="muted sm-t">${T("flagHint")}</span></div>`; }
+function rkLookOpen(i){ const r=S.rk&&S.rk.rows&&S.rk.rows[i]; if(!r) return; const me=r.id===(CLOUD.user&&CLOUD.user.uid);
+  const L=parseLook(me?myLook():r.look), gear=(id,socks)=>{ const it=id&&ITEMS[id]; if(!it) return `<span class="muted">—</span>`; return `<span>${esc(itemName(it)||it.name)}</span> ${socks.map(gemDot).join("")}`; };
+  let el=document.getElementById("rkLook"); if(!el){ el=document.createElement("div"); el.id="rkLook"; document.body.appendChild(el); }
+  el.innerHTML=`<div class="scrim pd-scrim" data-act="rklookclose"></div><div class="pd-card rk-look" role="dialog" aria-modal="true">
+    <div class="rk-look-fig">${lookArt(me?myLook():r.look,"rk-big")}</div>
+    <h2>${/^[A-Z]{2}$/.test(r.flag||"")?flagOf(r.flag)+" ":""}${esc(r.name||"?")}</h2>
+    <div class="muted sm-t">Lv ${r.lv||1} · ${T("rkPower")} ${r.power||0} · ${T("rkConq",{n:r.conq||0})}</div>
+    ${L?`<div class="rk-gear"><div><small class="muted">${T("weapon")}</small>${gear(L.w,L.ws)}</div><div><small class="muted">${T("armor")}</small>${gear(L.a,L.as)}</div></div>`:`<p class="muted sm-t">${T("rkNoLook")}</p>`}
+    <button class="btn" data-act="rklookclose">${T("genYes")}</button></div>`; }
+document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="rklook"],[data-act="rklookclose"]'); if(!t) return; e.stopPropagation();
+  if(t.dataset.act==="rklook") return rkLookOpen(+t.dataset.k); const el=document.getElementById("rkLook"); if(el) el.remove(); }, true);
 function viewRank(){
   if(!CLOUD.user) return `<div class="card empty"><p>${T("rkNeedLogin")}</p></div>${accountCard(false)}`;
   const g=game(), f=S.rkBy||"power";
@@ -3766,7 +3802,7 @@ function viewRank(){
   const tabs=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
   const rd=f==="read";
-  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv||1}${rd?"":" · "+T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${rd?T("rkArtsN",{n:r.n}):r[f]}</b></li>`).join("");
+  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}${!rd?" rk-has-look":""}"${!rd?` data-act="rklook" data-k="${i}"`:""}><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span>${!rd?lookArt(r.id===CLOUD.user.uid?myLook():r.look,"rk-fig"):""}<span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv||1}${rd?"":" · "+T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${rd?T("rkArtsN",{n:r.n}):r[f]}</b></li>`).join("");
   const mu=untilMonthEnd();
   return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
     <div class="seg" role="group">${tabs}</div>
@@ -4522,7 +4558,7 @@ function pgSections(){
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
-      <div class="pg-board">${ids.map(u=>`<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div>`).join("")}</div>
+      ${(setTimeout(()=>lookFetch(ids.filter(u=>u!==pgMe())),0),"")}<div class="pg-lobby">${ids.map(u=>`<div class="pg-pl${u===pgMe()?" me":""}">${lookArt(u===pgMe()?myLook():LOOKS[u],"pg-fig")}<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div></div>`).join("")}</div>
       <div class="muted">${T("pgWaiting",{n:ids.length})}</div>
       ${host?`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`:`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
@@ -5086,17 +5122,28 @@ function outfitKey(gen,a){ const k=a?`${a.el}${a.tier+1}`:"cloth"; return HERO_F
 function heroOutfit(gen){ return outfitKey(gen, game().armor&&ITEMS[game().armor]); }
 function heroAct(w){ return w?(KIND_ACT[WKIND[w.el][w.tier]]||"slash"):"slash"; }
 /* one drawing routine for the hero (gen m/f) and the ally (gen "a", the blond boy): body picture by outfit + pose, weapon picture laid over the hand */
-function charArt(gen, pose, w, armor, cls){
+/* socketed gear glows on the character: colour = gem element(s), brightness = highest gem tier (and a little more per extra gem) */
+const GLOW_RGB={metal:"255,206,64",wood:"88,226,120",water:"80,176,255",fire:"255,104,44",earth:"222,140,88"};
+function glowCss(socks, body){
+  const gs=(socks||[]).filter(k=>typeof k==="string"&&/^(metal|wood|water|fire|earth)-[0-3]$/.test(k)); if(!gs.length) return "";
+  const top=Math.max(...gs.map(k=>+k.split("-")[1])), els=[...new Set(gs.slice().sort((a,b)=>b.split("-")[1]-a.split("-")[1]).map(k=>k.split("-")[0]))].slice(0,2);
+  const B=body?[4,6,9,12]:[3,5,8,12], A=body?[.35,.45,.6,.75]:[.6,.75,.9,1], extra=Math.min(.15,(gs.length-1)*.05);
+  const f=(k)=>els.map((e,i)=>`drop-shadow(0 0 ${Math.round(B[top]*k*(i?1.6:1))}px rgba(${GLOW_RGB[e]},${Math.min(1,(A[top]+extra)*(i?.8:1)).toFixed(2)}))`).join(" ");
+  return ` style="--glow:${f(1)};--glow2:${f(1.6)}" data-gt="${top}"`;
+}
+function charArt(gen, pose, w, armor, cls, glow){
   const out=outfitKey(gen,armor); let act=pose==="attack"?heroAct(w):pose;
   if(pose==="idle"&&w){ const v="idle-"+(KIND_IDLE[WKIND[w.el][w.tier]]||"hold"); if(HERO_FILES.has(`${gen}-${out}-${v}`)) act=v; }
   const key=HERO_FILES.has(`${gen}-${out}-${act}`)?`${gen}-${out}-${act}`:`${gen}-cloth-${act}`;
   let grip=(HERO_GRIP[gen]||HERO_GRIP.m)[act]; let wpn="";
   const off=act==="idle"&&key===`${gen}-${out}-idle`&&IDLE_OFF[`${gen}-${out}`]; if(grip&&off) grip=[grip[0]+off[0],grip[1]+off[1],grip[2]];
   if(w&&grip){ const [x,y,d]=grip, kind=WKIND[w.el][w.tier], [gx,gy,L]=KIND_GRIP[kind]||[.25,.75,.45], pk=picOfItem(w);
-    wpn=`<svg class="ha-wpn" viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${d+45})">${pk
+    const wg=w&&glowCss(glow?glow.ws:socketsOf(w.id));
+    wpn=`<svg class="ha-wpn${wg?" ha-glow":""}"${wg||""} viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(${x*100} ${y*100}) rotate(${d+45})">${pk
       ?`<image href="assets/art/${pk}.webp" x="${-gx*L*100}" y="${-gy*L*100}" width="${L*100}" height="${L*100}"/>`
       :`<g transform="rotate(45) scale(.5) translate(-32 -54)">${weaponGlyph(w)}</g>`}</g></svg>`; }
-  return `<div class="${cls||"hero-svg"} hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero/${key}.webp" alt="" draggable="false">${wpn}</div></div>`;
+  const ag=armor&&glowCss(glow?glow.as:socketsOf(armor.id),true);
+  return `<div class="${cls||"hero-svg"} hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero/${key}.webp" alt="" draggable="false"${ag?` class="ha-glow"${ag}`:""}${glow&&glow.lazy?' loading="lazy"':""}>${wpn}</div></div>`;
 }
 function heroArt(pose, gOverride){
   const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
@@ -6083,6 +6130,12 @@ Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और र�
 Object.assign(STR.es,{"legalT": "Información, condiciones y reembolsos", "legalSub": "Quién gestiona la app, artículos y precios de la Cámara del Arcoíris, política de pagos y reembolsos, condiciones de uso y privacidad.", "legalOpen": "Abrir", "vtLegal": "Al comprar pides la entrega inmediata y aceptas que el derecho de desistimiento de 14 días termina al entregarse los artículos. Si no llegan o se te cobra dos veces, siempre te reembolsamos.", "vtLegalLink": "Política de pagos y reembolsos"});
 Object.assign(STR.ja,{"legalT": "運営者情報・規約・返金", "legalSub": "運営者、虹の宝庫の商品と価格、支払いと返金のポリシー、利用規約、プライバシーポリシー。", "legalOpen": "見る", "vtLegal": "購入すると即時の引き渡しに同意し、引き渡し後は14日間の撤回権がなくなることを了承したものとみなされます。届かない・二重請求の場合は必ず返金します。", "vtLegalLink": "支払いと返金のポリシー"});
 Object.assign(STR.ko,{"legalT": "소개, 약관 및 환불", "legalSub": "운영자 정보, 무지개 보물고 상품과 가격, 결제 및 환불 정책, 이용약관, 개인정보처리방침.", "legalOpen": "보기", "vtLegal": "구매하면 즉시 지급에 동의하고, 지급 후에는 14일 청약철회권이 적용되지 않음을 확인한 것으로 봅니다. 아이템을 받지 못했거나 이중 결제된 경우 반드시 환불해 드려요.", "vtLegalLink": "결제 및 환불 정책"});
+Object.assign(STR.zh,{"rkNoLook": "這位玩家還沒有展示角色。"});
+Object.assign(STR.en,{"rkNoLook": "This player hasn't shown their character yet."});
+Object.assign(STR.hi,{"rkNoLook": "इस खिलाड़ी ने अभी अपना किरदार नहीं दिखाया है।"});
+Object.assign(STR.es,{"rkNoLook": "Este jugador aún no muestra su personaje."});
+Object.assign(STR.ja,{"rkNoLook": "このプレイヤーはまだキャラクターを公開していません。"});
+Object.assign(STR.ko,{"rkNoLook": "이 플레이어는 아직 캐릭터를 공개하지 않았어요."});
 document.documentElement.lang=HTML_LANG[langKey()]; applyStaticText(); applyMast(); scApply();
 render();
 (async ()=>{
