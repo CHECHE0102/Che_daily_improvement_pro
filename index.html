@@ -811,7 +811,7 @@ body.onb-open{overflow:hidden}
 /* standing still the hand closes around the handle: weapon goes behind the body picture so the fist covers the grip */
 .ha-idle .ha-wpn{z-index:0}.ha-idle .ha-in>img{z-index:1}
 .hero-stage .hs-fig .hero-art{position:relative;z-index:1;width:100%;height:100%}
-.onb-art{width:200px;max-width:70%;height:auto;margin-top:4px}.onb-art.sm{width:150px}
+.onb-art{width:200px;max-width:70%;height:auto;aspect-ratio:1/1;margin-top:4px}.onb-art.sm{width:150px}
 .play-head{display:flex;align-items:center;gap:10px}.play-head>div{flex:1;min-width:0}.play-art{width:110px;height:auto;flex:none}
 .push-art{width:64px;height:64px;flex:none;object-fit:contain}
 .quiz-done{display:flex;flex-direction:column;gap:10px;align-items:flex-start}.qd-art{width:150px;height:auto;align-self:center}
@@ -3103,7 +3103,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.146";
+const APP_VERSION="2026.10.147";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4950,8 +4950,16 @@ const ONB_KEY="che-pro-onb";
 function onbMaybe(){
   let done=null; try{ done=localStorage.getItem(ONB_KEY); }catch(e){}
   const g=S.game, fresh=!S.words.size&&!S.days.size&&(!g||((g.lv||1)<=1&&!g.exp));
-  if(!done&&fresh){ S.onb={step:0}; onbRender(); }
+  if(!done&&fresh){ S.onb={step:0}; onbPreload(); onbRender(); }
   else if(!done){ try{ localStorage.setItem(ONB_KEY,"old"); }catch(e){} }
+}
+// fetch and decode every picture of the tour up front, so each page shows its picture together with its text
+const ONB_IMGS=[];
+function onbPreload(){
+  if(ONB_IMGS.length) return;
+  const srcs=["welcome","read","study","party"].map(n=>"assets/art/scene-"+n+".webp");
+  try{ (genderPick(true).match(/src="([^"]+)"/g)||[]).forEach(m=>srcs.push(m.slice(5,-1))); }catch(e){}
+  for(const src of new Set(srcs)){ const im=new Image(); im.decoding="async"; im.src=src; ONB_IMGS.push(im); if(im.decode) im.decode().catch(()=>{}); }
 }
 function onbClose(start){
   if(SANDBOX()){ DEV.onbDone=true; devSave(); } else try{ localStorage.setItem(ONB_KEY,"1"); }catch(e){}
@@ -6215,7 +6223,7 @@ render();
 (async ()=>{
   const o=lsLoad(); for(const [k,v] of Object.entries(o)){ if(v.type==="word") S.words.set(k,v); else if(v.type==="day") S.days.set(k,v); else if(v.type==="game") S.game=newGame(v); }
   S.ready.personal=true; render();
-  if(SANDBOX()){ if(!DEV.onbDone){ S.onb={step:0}; onbRender(); } }
+  if(SANDBOX()){ if(!DEV.onbDone){ S.onb={step:0}; onbPreload(); onbRender(); } }
   else { onbMaybe(); cloudInit(); }
   await loadArticles();
 })();
