@@ -1,0 +1,2405 @@
+{
+ "tests": [
+  {
+   "id": "base-1",
+   "title": "Mini Test 1 · Moving Offices",
+   "listening": [
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "When will the new printers be delivered?"
+      ],
+      [
+       "F",
+       "A. Sometime on Thursday morning."
+      ],
+      [
+       "F",
+       "B. On the third floor."
+      ],
+      [
+       "F",
+       "C. Yes, I printed them."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 0,
+       "exp": "'When' asks for a time, and only \"Sometime on Thursday morning\" gives one.",
+       "opts": [
+        "Sometime on Thursday morning.",
+        "On the third floor.",
+        "Yes, I printed them."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "Who's leading the training session this afternoon?"
+      ],
+      [
+       "M",
+       "A. It lasts about two hours."
+      ],
+      [
+       "M",
+       "B. In the large meeting room."
+      ],
+      [
+       "M",
+       "C. Ms Patel from Human Resources."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 2,
+       "exp": "'Who' asks for a person, so the answer names Ms Patel.",
+       "opts": [
+        "It lasts about two hours.",
+        "In the large meeting room.",
+        "Ms Patel from Human Resources."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "Should we book the train or drive to the client's office?"
+      ],
+      [
+       "F",
+       "A. I'd rather take the train."
+      ],
+      [
+       "F",
+       "B. We booked it last week."
+      ],
+      [
+       "F",
+       "C. The client was very happy."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 0,
+       "exp": "It is an either/or question; the best response chooses one option (the train).",
+       "opts": [
+        "I'd rather take the train.",
+        "We booked it last week.",
+        "The client was very happy."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "Haven't the boxes for the move arrived yet?"
+      ],
+      [
+       "M",
+       "A. Yes, I moved there in May."
+      ],
+      [
+       "M",
+       "B. A box of pens, please."
+      ],
+      [
+       "M",
+       "C. They're coming tomorrow, I'm told."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 2,
+       "exp": "The answer explains the boxes are coming tomorrow. \"A box of pens\" repeats 'box' as a trap.",
+       "opts": [
+        "Yes, I moved there in May.",
+        "A box of pens, please.",
+        "They're coming tomorrow, I'm told."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "I can't find the key to the storage room."
+      ],
+      [
+       "F",
+       "A. Try asking the security desk."
+      ],
+      [
+       "F",
+       "B. The store opens at nine."
+      ],
+      [
+       "F",
+       "C. It's a key decision."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 0,
+       "exp": "The speaker states a problem; suggesting the security desk offers a solution. 'Store' and 'key decision' are sound-alike traps.",
+       "opts": [
+        "Try asking the security desk.",
+        "The store opens at nine.",
+        "It's a key decision."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "How much will the new desks cost?"
+      ],
+      [
+       "M",
+       "A. About two hundred euros each."
+      ],
+      [
+       "M",
+       "B. Next to the window."
+      ],
+      [
+       "M",
+       "C. They were very comfortable."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 0,
+       "exp": "'How much' asks for a price: about two hundred euros each.",
+       "opts": [
+        "About two hundred euros each.",
+        "Next to the window.",
+        "They were very comfortable."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 3,
+     "script": [
+      [
+       "F",
+       "Hi Tom, have you finished packing your files for the office move on Friday?"
+      ],
+      [
+       "M",
+       "Almost. But I'm worried the moving company won't take the filing cabinets. They said they only move sealed boxes."
+      ],
+      [
+       "F",
+       "Really? Then we'd better empty the cabinets and put everything in boxes. I'll ask facilities for twenty more."
+      ],
+      [
+       "M",
+       "Thanks. Also, do you know where our team will sit in the new building?"
+      ],
+      [
+       "F",
+       "Yes, the floor plan was e-mailed this morning. We're on the fifth floor, next to the kitchen."
+      ],
+      [
+       "M",
+       "Great. I'll print a copy so everyone knows on Monday."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the man worried about?",
+       "opts": [
+        "The movers will not carry the cabinets.",
+        "His files have been lost.",
+        "The new office is too small.",
+        "The move has been delayed."
+       ],
+       "a": 0,
+       "exp": "He says the company 'only move sealed boxes', so they might not take the filing cabinets."
+      },
+      {
+       "type": "mcq",
+       "q": "What will the woman request?",
+       "opts": [
+        "Extra staff",
+        "A later moving date",
+        "More boxes",
+        "A new filing cabinet"
+       ],
+       "a": 2,
+       "exp": "'I'll ask facilities for twenty more' — more boxes."
+      },
+      {
+       "type": "mcq",
+       "q": "What does the man say he will do?",
+       "opts": [
+        "Call the moving company",
+        "Send an e-mail to facilities",
+        "Print the floor plan",
+        "Book the kitchen"
+       ],
+       "a": 2,
+       "exp": "'I'll print a copy' of the floor plan."
+      }
+     ]
+    },
+    {
+     "part": 3,
+     "script": [
+      [
+       "M",
+       "Good morning, City Office Supplies. How can I help you?"
+      ],
+      [
+       "F",
+       "Hello, I ordered fifty chairs last week, order number 4471, but only thirty arrived this morning."
+      ],
+      [
+       "M",
+       "I'm sorry about that. Let me check... Yes, the other twenty were sent from our second warehouse, so they'll come separately."
+      ],
+      [
+       "F",
+       "When can I expect them? Our new office opens on Monday."
+      ],
+      [
+       "M",
+       "They're scheduled for Saturday. And because of the inconvenience, we'll take ten percent off your invoice."
+      ],
+      [
+       "F",
+       "That's very kind. Saturday works, as long as someone calls before the delivery."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Why is the woman calling?",
+       "opts": [
+        "To cancel an order",
+        "To ask for a catalogue",
+        "To change her address",
+        "To report an incomplete delivery"
+       ],
+       "a": 3,
+       "exp": "Only thirty of fifty chairs arrived."
+      },
+      {
+       "type": "mcq",
+       "q": "Why did part of the order arrive later?",
+       "opts": [
+        "The driver got lost.",
+        "The chairs were damaged.",
+        "The woman paid late.",
+        "It was sent from another warehouse."
+       ],
+       "a": 3,
+       "exp": "'The other twenty were sent from our second warehouse.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What does the man offer?",
+       "opts": [
+        "A full refund",
+        "Free delivery next time",
+        "A discount",
+        "A different model"
+       ],
+       "a": 2,
+       "exp": "'We'll take ten percent off your invoice.'"
+      }
+     ]
+    },
+    {
+     "part": 4,
+     "script": [
+      [
+       "F",
+       "Good morning, everyone. As you know, we move into the Harbour Street building this Friday."
+      ],
+      [
+       "F",
+       "On Thursday, please take home any personal items from your desk. Anything left behind may be thrown away."
+      ],
+      [
+       "F",
+       "The IT team will disconnect all computers at four p.m. on Thursday, so save your work before then."
+      ],
+      [
+       "F",
+       "On Monday, you'll receive a new security card at the reception desk. You won't be able to use the lifts without it."
+      ],
+      [
+       "F",
+       "If you have questions, contact Daniel in facilities. Thank you."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the talk mainly about?",
+       "opts": [
+        "A computer upgrade",
+        "A new security policy",
+        "A change in working hours",
+        "Plans for an office move"
+       ],
+       "a": 3,
+       "exp": "The speaker explains what will happen before and after the move."
+      },
+      {
+       "type": "mcq",
+       "q": "What should listeners do before four p.m. on Thursday?",
+       "opts": [
+        "Collect a security card",
+        "Contact Daniel",
+        "Pack the computers",
+        "Save their work"
+       ],
+       "a": 3,
+       "exp": "The computers will be disconnected at four, 'so save your work before then'."
+      },
+      {
+       "type": "mcq",
+       "q": "Why will listeners need a security card?",
+       "opts": [
+        "To enter the car park",
+        "To order supplies",
+        "To use the lifts",
+        "To log in to computers"
+       ],
+       "a": 2,
+       "exp": "'You won't be able to use the lifts without it.'"
+      }
+     ]
+    },
+    {
+     "part": 4,
+     "script": [
+      [
+       "M",
+       "You're listening to Business Today on Radio Dublin."
+      ],
+      [
+       "M",
+       "Northway Bank announced yesterday that it will open twelve new branches next year, mostly in smaller towns."
+      ],
+      [
+       "M",
+       "The bank says that many customers still prefer to speak to staff in person, especially when applying for loans."
+      ],
+      [
+       "M",
+       "The expansion will create around three hundred jobs. Applications open on the bank's website next month."
+      ],
+      [
+       "M",
+       "After the break, we'll look at this week's property prices."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What did Northway Bank announce?",
+       "opts": [
+        "It will stop offering loans.",
+        "It will open new branches.",
+        "It has a new chief executive.",
+        "It will close several branches."
+       ],
+       "a": 1,
+       "exp": "It 'will open twelve new branches next year'."
+      },
+      {
+       "type": "mcq",
+       "q": "According to the speaker, why do some customers visit branches?",
+       "opts": [
+        "To open online accounts",
+        "To get lower fees",
+        "To speak to staff in person",
+        "To use cash machines"
+       ],
+       "a": 2,
+       "exp": "'Many customers still prefer to speak to staff in person.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What will listeners hear next?",
+       "opts": [
+        "A weather report",
+        "An interview with a banker",
+        "A job advertisement",
+        "Information about property prices"
+       ],
+       "a": 3,
+       "exp": "'After the break, we'll look at this week's property prices.'"
+      }
+     ]
+    }
+   ],
+   "reading": [
+    {
+     "part": 5,
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "All employees must ______ their security cards at the front desk on Monday.",
+       "opts": [
+        "collector",
+        "collect",
+        "collecting",
+        "collection"
+       ],
+       "a": 1,
+       "exp": "After 'must' we need the base verb: collect."
+      },
+      {
+       "type": "mcq",
+       "q": "The new office is ______ larger than the old one, so each team will have its own meeting room.",
+       "opts": [
+        "significantly",
+        "signify",
+        "significance",
+        "significant"
+       ],
+       "a": 0,
+       "exp": "An adverb modifies the comparative 'larger'."
+      },
+      {
+       "type": "mcq",
+       "q": "Please send the signed contract to Ms Byrne ______ Friday at the latest.",
+       "opts": [
+        "by",
+        "during",
+        "until",
+        "since"
+       ],
+       "a": 0,
+       "exp": "'By' + deadline: no later than Friday."
+      },
+      {
+       "type": "mcq",
+       "q": "The marketing team, ______ manager joined last month, has already met its targets.",
+       "opts": [
+        "which",
+        "whose",
+        "whom",
+        "who"
+       ],
+       "a": 1,
+       "exp": "'Whose' shows possession: the team's manager."
+      },
+      {
+       "type": "mcq",
+       "q": "Customers who ______ before 31 May will receive a free gift.",
+       "opts": [
+        "register",
+        "registers",
+        "registering",
+        "to register"
+       ],
+       "a": 0,
+       "exp": "Plural subject 'customers who' takes 'register'."
+      },
+      {
+       "type": "mcq",
+       "q": "Due to the heavy rain, the outdoor event has been ______ until next Saturday.",
+       "opts": [
+        "postponed",
+        "proposed",
+        "presented",
+        "prevented"
+       ],
+       "a": 0,
+       "exp": "An event is 'postponed' (moved later) until a new date."
+      },
+      {
+       "type": "mcq",
+       "q": "Mr Kelly will be out of the office this week; ______, please contact his assistant.",
+       "opts": [
+        "however",
+        "otherwise",
+        "meanwhile",
+        "therefore"
+       ],
+       "a": 3,
+       "exp": "'Therefore' shows the result: because he's away, contact the assistant."
+      },
+      {
+       "type": "mcq",
+       "q": "The survey results were ______ positive, with 92% of guests rating their stay as excellent.",
+       "opts": [
+        "overwhelming",
+        "overwhelmed",
+        "overwhelmingly",
+        "overwhelm"
+       ],
+       "a": 2,
+       "exp": "An adverb is needed before the adjective 'positive'."
+      }
+     ]
+    },
+    {
+     "part": 6,
+     "title": "E-mail",
+     "text": [
+      "To: All staff",
+      "From: Facilities",
+      "Subject: Parking at Harbour Street",
+      "From Monday, staff parking at our new building will be located in the underground car park. Each employee ___1___ one parking space, which can be booked through the staff website.",
+      "Spaces are limited, ___2___ we encourage everyone to cycle or use public transport where possible. ___3___",
+      "If you have any problems booking a space, please ___4___ the facilities team at extension 210."
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Blank 1",
+       "opts": [
+        "allowed",
+        "allows",
+        "is allowing",
+        "will be allowed"
+       ],
+       "a": 3,
+       "exp": "Future passive: each employee will be allowed one space from Monday."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 2",
+       "opts": [
+        "although",
+        "so",
+        "because",
+        "unless"
+       ],
+       "a": 1,
+       "exp": "'So' introduces the result of limited spaces."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 3",
+       "opts": [
+        "The cafeteria will serve hot meals every day.",
+        "Thank you for attending the meeting.",
+        "Secure bicycle racks are available near the main entrance.",
+        "Our previous office was in the city centre."
+       ],
+       "a": 2,
+       "exp": "This sentence continues the idea of cycling, so it fits best."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 4",
+       "opts": [
+        "contacts",
+        "contacted",
+        "contacting",
+        "contact"
+       ],
+       "a": 3,
+       "exp": "After 'please' we use the base verb."
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "Notice",
+     "texts": [
+      {
+       "kind": "Notice",
+       "title": "Harbour Street Building — Opening Week",
+       "body": [
+        "The staff cafeteria on the ground floor will open on Tuesday, 4 November, one day after staff move in.",
+        "On Monday, free sandwiches and coffee will be available in the fifth-floor kitchen from 12:00 to 2:00.",
+        "The building's gym will open the following week. Membership is free for all employees, but you must register at reception."
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "When will the cafeteria open?",
+       "opts": [
+        "One day after the move",
+        "It is already open",
+        "On the day staff move in",
+        "One week after the move"
+       ],
+       "a": 0,
+       "exp": "It opens on Tuesday, 'one day after staff move in'."
+      },
+      {
+       "type": "mcq",
+       "q": "What will be provided on Monday?",
+       "opts": [
+        "Parking permits",
+        "A gym membership",
+        "A free lunch",
+        "A building tour"
+       ],
+       "a": 2,
+       "exp": "Free sandwiches and coffee at lunchtime."
+      },
+      {
+       "type": "mcq",
+       "q": "What must employees do to use the gym?",
+       "opts": [
+        "Pay a small fee",
+        "Register at reception",
+        "Wait one month",
+        "Bring a doctor's note"
+       ],
+       "a": 1,
+       "exp": "'You must register at reception.'"
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "Advertisement",
+     "texts": [
+      {
+       "kind": "Advertisement",
+       "title": "QuickMove Office Relocation",
+       "body": [
+        "Moving offices? QuickMove has helped more than 500 Irish businesses relocate since 2012.",
+        "We pack, transport and set up furniture and IT equipment, usually over a single weekend, so your business keeps working.",
+        "Book before 30 November and receive free storage for one month. Call 01 555 0190 for a free quote."
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is suggested about QuickMove?",
+       "opts": [
+        "It only moves furniture.",
+        "It is a new company.",
+        "It works only in Dublin.",
+        "It often finishes moves over a weekend."
+       ],
+       "a": 3,
+       "exp": "'Usually over a single weekend.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What do customers receive if they book before 30 November?",
+       "opts": [
+        "A discount on packing",
+        "Weekend delivery",
+        "A free computer",
+        "Free storage"
+       ],
+       "a": 3,
+       "exp": "'Free storage for one month.'"
+      },
+      {
+       "type": "mcq",
+       "q": "The word 'quote' in the last sentence is closest in meaning to",
+       "opts": [
+        "saying",
+        "price estimate",
+        "receipt",
+        "contract"
+       ],
+       "a": 1,
+       "exp": "A 'quote' here is a statement of how much the service will cost."
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "E-mail and schedule",
+     "texts": [
+      {
+       "kind": "E-mail",
+       "title": "From: Aoife Burke · To: Team leaders · Subject: Welcome tours",
+       "body": [
+        "Hi all, to help everyone settle in, we will run short welcome tours of the Harbour Street building next week. Each tour takes about 30 minutes.",
+        "Please choose one time for your team and reply by Thursday. Note that the Wednesday tours are only in the morning because of the board meeting."
+       ]
+      },
+      {
+       "kind": "Schedule",
+       "title": "Welcome tours",
+       "body": [
+        "Monday — 10:00, 14:00",
+        "Tuesday — 10:00, 15:00",
+        "Wednesday — 09:30, 11:00",
+        "Thursday — 14:00, 16:00"
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the purpose of the e-mail?",
+       "opts": [
+        "To ask team leaders to choose a tour time",
+        "To cancel the welcome tours",
+        "To invite team leaders to a board meeting",
+        "To announce a new team leader"
+       ],
+       "a": 0,
+       "exp": "'Please choose one time for your team and reply by Thursday.'"
+      },
+      {
+       "type": "mcq",
+       "q": "How long is each tour?",
+       "opts": [
+        "30 minutes",
+        "One hour",
+        "15 minutes",
+        "Half a day"
+       ],
+       "a": 0,
+       "exp": "'Each tour takes about 30 minutes.'"
+      },
+      {
+       "type": "mcq",
+       "q": "Why are there no afternoon tours on Wednesday?",
+       "opts": [
+        "There is a board meeting.",
+        "Ms Burke is away.",
+        "The lifts are being repaired.",
+        "The building is closed."
+       ],
+       "a": 0,
+       "exp": "'Because of the board meeting.'"
+      },
+      {
+       "type": "mcq",
+       "q": "A team leader wants an afternoon tour as late as possible in the week. Which time should she choose?",
+       "opts": [
+        "Tuesday 15:00",
+        "Monday 14:00",
+        "Wednesday 11:00",
+        "Thursday 16:00"
+       ],
+       "a": 3,
+       "exp": "Thursday is the latest day, and 16:00 is the latest afternoon slot."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "base-2",
+   "title": "Mini Test 2 · Business Travel",
+   "listening": [
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "Where should I leave my suitcase?"
+      ],
+      [
+       "F",
+       "A. At the front desk, please."
+      ],
+      [
+       "F",
+       "B. Around six o'clock."
+      ],
+      [
+       "F",
+       "C. It's a new suitcase."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 0,
+       "exp": "'Where' asks for a place: at the front desk.",
+       "opts": [
+        "At the front desk, please.",
+        "Around six o'clock.",
+        "It's a new suitcase."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "Would you like a window or an aisle seat?"
+      ],
+      [
+       "M",
+       "A. I'll take the aisle, thanks."
+      ],
+      [
+       "M",
+       "B. The flight is delayed."
+      ],
+      [
+       "M",
+       "C. Yes, I would."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 0,
+       "exp": "An either/or question needs a choice (the aisle). \"Yes, I would\" does not answer it.",
+       "opts": [
+        "I'll take the aisle, thanks.",
+        "The flight is delayed.",
+        "Yes, I would."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "Why was the meeting moved to Tuesday?"
+      ],
+      [
+       "F",
+       "A. In conference room B."
+      ],
+      [
+       "F",
+       "B. Because the director is travelling on Monday."
+      ],
+      [
+       "F",
+       "C. I'll move it for you."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 1,
+       "exp": "'Why' asks for a reason: the director is travelling on Monday.",
+       "opts": [
+        "In conference room B.",
+        "Because the director is travelling on Monday.",
+        "I'll move it for you."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "You've booked the hotel for the sales conference, haven't you?"
+      ],
+      [
+       "M",
+       "A. The conference was useful."
+      ],
+      [
+       "M",
+       "B. Yes, three nights at the Grand."
+      ],
+      [
+       "M",
+       "C. I'll read the book later."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 1,
+       "exp": "A tag question; the answer confirms and adds details (three nights at the Grand).",
+       "opts": [
+        "The conference was useful.",
+        "Yes, three nights at the Grand.",
+        "I'll read the book later."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "How long does it take to get to the airport from here?"
+      ],
+      [
+       "F",
+       "A. Two tickets, please."
+      ],
+      [
+       "F",
+       "B. About forty minutes by taxi."
+      ],
+      [
+       "F",
+       "C. It's a long flight."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 1,
+       "exp": "'How long' asks about time: about forty minutes by taxi.",
+       "opts": [
+        "Two tickets, please.",
+        "About forty minutes by taxi.",
+        "It's a long flight."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "Let's have lunch before the presentation."
+      ],
+      [
+       "M",
+       "A. The presentation went well."
+      ],
+      [
+       "M",
+       "B. Good idea — there's a café downstairs."
+      ],
+      [
+       "M",
+       "C. He presented the award."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 1,
+       "exp": "A suggestion; the best reply agrees and adds a useful detail about the café.",
+       "opts": [
+        "The presentation went well.",
+        "Good idea — there's a café downstairs.",
+        "He presented the award."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 3,
+     "script": [
+      [
+       "M",
+       "Hi, I'm checking in. The reservation is under Martin Doyle."
+      ],
+      [
+       "F",
+       "Welcome, Mr Doyle. I see you've booked a single room for three nights."
+      ],
+      [
+       "M",
+       "That's right. Actually, my colleague is joining me tomorrow. Could I change to a twin room?"
+      ],
+      [
+       "F",
+       "Let me see... We have a twin room available from tomorrow, but not tonight. You could move rooms in the morning."
+      ],
+      [
+       "M",
+       "That's fine. Also, is breakfast included?"
+      ],
+      [
+       "F",
+       "Yes, breakfast is served from seven to ten in the garden restaurant."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Where are the speakers?",
+       "opts": [
+        "At a train station",
+        "At a hotel",
+        "At an airport",
+        "At a restaurant"
+       ],
+       "a": 1,
+       "exp": "He is checking in and booking rooms."
+      },
+      {
+       "type": "mcq",
+       "q": "Why does the man want to change rooms?",
+       "opts": [
+        "He wants a cheaper room.",
+        "A colleague is joining him.",
+        "His room is too noisy.",
+        "He is staying longer."
+       ],
+       "a": 1,
+       "exp": "'My colleague is joining me tomorrow.'"
+      },
+      {
+       "type": "mcq",
+       "q": "When will the man change rooms?",
+       "opts": [
+        "He will not change rooms.",
+        "Tomorrow morning",
+        "In three days",
+        "Tonight"
+       ],
+       "a": 1,
+       "exp": "'You could move rooms in the morning.'"
+      }
+     ]
+    },
+    {
+     "part": 3,
+     "script": [
+      [
+       "F",
+       "Rob, the flight to Berlin on Thursday has been cancelled."
+      ],
+      [
+       "M",
+       "Oh no. Our workshop there starts on Thursday afternoon."
+      ],
+      [
+       "F",
+       "I know. There's a later flight on Wednesday evening, but it's more expensive."
+      ],
+      [
+       "M",
+       "I think it's worth it. If we arrive Wednesday, we can also prepare the room in the morning."
+      ],
+      [
+       "F",
+       "OK, I'll book it now and ask finance to approve the extra cost."
+      ],
+      [
+       "M",
+       "Thanks. I'll tell the hotel we're arriving a day early."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What problem does the woman mention?",
+       "opts": [
+        "A colleague is ill.",
+        "A hotel is fully booked.",
+        "A workshop is postponed.",
+        "A flight has been cancelled."
+       ],
+       "a": 3,
+       "exp": "'The flight ... has been cancelled.'"
+      },
+      {
+       "type": "mcq",
+       "q": "Why does the man prefer the Wednesday flight?",
+       "opts": [
+        "It is shorter.",
+        "It is cheaper.",
+        "They can visit the city.",
+        "They can prepare the room before the workshop."
+       ],
+       "a": 3,
+       "exp": "'We can also prepare the room in the morning.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What will the man do?",
+       "opts": [
+        "Cancel the workshop",
+        "Contact the hotel",
+        "Book a taxi",
+        "Ask finance for approval"
+       ],
+       "a": 1,
+       "exp": "'I'll tell the hotel we're arriving a day early.' The woman will ask finance."
+      }
+     ]
+    },
+    {
+     "part": 4,
+     "script": [
+      [
+       "F",
+       "Attention, passengers on flight EI 208 to Madrid."
+      ],
+      [
+       "F",
+       "Because of strong winds in Madrid, this flight will now depart at 3:45 instead of 2:15."
+      ],
+      [
+       "F",
+       "We apologise for the delay. Passengers can collect a meal voucher worth ten euros at the information desk."
+      ],
+      [
+       "F",
+       "Boarding will now take place at gate 22, not gate 14. Please check the screens for further updates."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the reason for the delay?",
+       "opts": [
+        "Heavy traffic",
+        "Bad weather",
+        "A missing crew member",
+        "A technical problem"
+       ],
+       "a": 1,
+       "exp": "'Because of strong winds in Madrid.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What can passengers get at the information desk?",
+       "opts": [
+        "A meal voucher",
+        "A hotel room",
+        "A new ticket",
+        "A seat upgrade"
+       ],
+       "a": 0,
+       "exp": "'A meal voucher worth ten euros.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What has changed besides the time?",
+       "opts": [
+        "The flight number",
+        "The destination",
+        "The airline",
+        "The gate"
+       ],
+       "a": 3,
+       "exp": "Boarding is now at gate 22, not gate 14."
+      }
+     ]
+    },
+    {
+     "part": 4,
+     "script": [
+      [
+       "M",
+       "Hello, this is a message for Clara Moore. It's Paul from Lakeside Conference Centre."
+      ],
+      [
+       "M",
+       "You asked about room prices for your company's event in March. The main hall holds two hundred people and costs fifteen hundred euros per day."
+      ],
+      [
+       "M",
+       "That includes projectors and microphones. Lunch can be added for eighteen euros per person."
+      ],
+      [
+       "M",
+       "We only have two free dates left in March, so I'd recommend deciding soon. Please call me back on 087 432 1100."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Why is the man calling?",
+       "opts": [
+        "To give information about room prices",
+        "To cancel a booking",
+        "To invite Ms Moore to a conference",
+        "To confirm a payment"
+       ],
+       "a": 0,
+       "exp": "She 'asked about room prices'."
+      },
+      {
+       "type": "mcq",
+       "q": "What is included in the daily price?",
+       "opts": [
+        "Hotel rooms",
+        "Equipment such as projectors",
+        "Parking",
+        "Lunch for all guests"
+       ],
+       "a": 1,
+       "exp": "'That includes projectors and microphones.'"
+      },
+      {
+       "type": "mcq",
+       "q": "Why does the man recommend deciding soon?",
+       "opts": [
+        "Few dates are still available.",
+        "He is going on holiday.",
+        "The centre will close for repairs.",
+        "Prices will rise in March."
+       ],
+       "a": 0,
+       "exp": "'We only have two free dates left in March.'"
+      }
+     ]
+    }
+   ],
+   "reading": [
+    {
+     "part": 5,
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Travel expenses must be ______ within thirty days of the trip.",
+       "opts": [
+        "submit",
+        "submission",
+        "submitting",
+        "submitted"
+       ],
+       "a": 3,
+       "exp": "Passive: expenses must be submitted."
+      },
+      {
+       "type": "mcq",
+       "q": "The hotel is ______ located near the convention centre.",
+       "opts": [
+        "convenient",
+        "convenience",
+        "more convenient",
+        "conveniently"
+       ],
+       "a": 3,
+       "exp": "An adverb modifies 'located'."
+      },
+      {
+       "type": "mcq",
+       "q": "Ms Lynch has worked in the sales department ______ 2019.",
+       "opts": [
+        "during",
+        "for",
+        "from",
+        "since"
+       ],
+       "a": 3,
+       "exp": "'Since' + a point in time with the present perfect."
+      },
+      {
+       "type": "mcq",
+       "q": "Please ______ us know if you need assistance with your booking.",
+       "opts": [
+        "let",
+        "allow",
+        "make",
+        "have"
+       ],
+       "a": 0,
+       "exp": "Fixed phrase: let us know."
+      },
+      {
+       "type": "mcq",
+       "q": "The keynote speech was so ______ that many attendees asked for a copy.",
+       "opts": [
+        "inform",
+        "informative",
+        "information",
+        "informatively"
+       ],
+       "a": 1,
+       "exp": "An adjective after 'so ... that'."
+      },
+      {
+       "type": "mcq",
+       "q": "Neither the manager ______ her assistant was available to sign the form.",
+       "opts": [
+        "nor",
+        "and",
+        "but",
+        "or"
+       ],
+       "a": 0,
+       "exp": "'Neither ... nor'."
+      },
+      {
+       "type": "mcq",
+       "q": "Flights booked through the company portal are ______ for a full refund up to 24 hours before departure.",
+       "opts": [
+        "possible",
+        "responsible",
+        "capable",
+        "eligible"
+       ],
+       "a": 3,
+       "exp": "'Eligible for' a refund = allowed to receive it."
+      },
+      {
+       "type": "mcq",
+       "q": "______ the train was delayed, the team still arrived on time for the meeting.",
+       "opts": [
+        "Unless",
+        "Despite",
+        "Because",
+        "Although"
+       ],
+       "a": 3,
+       "exp": "'Although' + a clause shows contrast; 'Despite' needs a noun."
+      }
+     ]
+    },
+    {
+     "part": 6,
+     "title": "Letter",
+     "text": [
+      "Dear Ms Ryan,",
+      "Thank you for staying at the Riverside Hotel last week. We hope you ___1___ your visit.",
+      "We noticed that you left a black umbrella in Room 312. Our staff have kept it safely at reception. ___2___",
+      "If you would prefer us to send it to you, please reply with your postal address. There is no ___3___ for this service.",
+      "We look forward to ___4___ you again soon.",
+      "Yours sincerely, Mark Doran, Front Office Manager"
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Blank 1",
+       "opts": [
+        "enjoyed",
+        "will enjoy",
+        "enjoying",
+        "enjoy"
+       ],
+       "a": 0,
+       "exp": "The visit is in the past: 'enjoyed'."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 2",
+       "opts": [
+        "Check-out is at eleven.",
+        "The room rate includes breakfast.",
+        "You may collect it at any time.",
+        "Our restaurant is open until ten."
+       ],
+       "a": 2,
+       "exp": "This sentence follows naturally from the umbrella being kept at reception."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 3",
+       "opts": [
+        "change",
+        "choice",
+        "charge",
+        "chance"
+       ],
+       "a": 2,
+       "exp": "'There is no charge' = it's free."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 4",
+       "opts": [
+        "welcome",
+        "welcomed",
+        "to welcome",
+        "welcoming"
+       ],
+       "a": 3,
+       "exp": "'Look forward to' is followed by a gerund: welcoming."
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "Policy",
+     "texts": [
+      {
+       "kind": "Policy",
+       "title": "Greenfield Ltd — Business Travel Rules",
+       "body": [
+        "Employees must book all flights through the company travel portal at least 14 days before departure, unless the trip is urgent.",
+        "Economy class must be used for flights under six hours. For longer flights, employees may choose premium economy.",
+        "Taxi receipts must be kept and uploaded with the expense claim. Claims without receipts will not be paid."
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "When can an employee book a flight less than 14 days ahead?",
+       "opts": [
+        "Never",
+        "When the flight is long",
+        "When a manager travels",
+        "When the trip is urgent"
+       ],
+       "a": 3,
+       "exp": "'Unless the trip is urgent.'"
+      },
+      {
+       "type": "mcq",
+       "q": "Who may travel in premium economy?",
+       "opts": [
+        "Employees who book early",
+        "Employees on flights over six hours",
+        "All managers",
+        "Nobody"
+       ],
+       "a": 1,
+       "exp": "'For longer flights' (six hours or more)."
+      },
+      {
+       "type": "mcq",
+       "q": "What will happen if an employee does not upload a taxi receipt?",
+       "opts": [
+        "The claim will not be paid.",
+        "The employee must call finance.",
+        "The claim will be paid later.",
+        "The cost will be halved."
+       ],
+       "a": 0,
+       "exp": "'Claims without receipts will not be paid.'"
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "Article",
+     "texts": [
+      {
+       "kind": "Article",
+       "title": "Business travellers return to the rails",
+       "body": [
+        "More business travellers in Ireland are choosing trains over short flights, according to a survey by the Irish Business Travel Association.",
+        "Forty percent of respondents said they had taken a train instead of a plane for at least one work trip this year, mostly to save time on security checks.",
+        "However, many said that train tickets are still expensive when booked late, and that Wi-Fi on some routes is unreliable."
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the article mainly about?",
+       "opts": [
+        "Airport security",
+        "A trend in business travel",
+        "New train routes",
+        "Higher airline prices"
+       ],
+       "a": 1,
+       "exp": "More business travellers choosing trains — a trend."
+      },
+      {
+       "type": "mcq",
+       "q": "Why do most travellers choose trains, according to the survey?",
+       "opts": [
+        "They are cheaper.",
+        "Companies require it.",
+        "They avoid security checks.",
+        "They have better Wi-Fi."
+       ],
+       "a": 2,
+       "exp": "'Mostly to save time on security checks.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What complaint is mentioned about trains?",
+       "opts": [
+        "Late tickets are expensive.",
+        "They are often late.",
+        "Seats are uncomfortable.",
+        "There is no food."
+       ],
+       "a": 0,
+       "exp": "'Train tickets are still expensive when booked late.'"
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "E-mail and invoice",
+     "texts": [
+      {
+       "kind": "E-mail",
+       "title": "From: Niamh Walsh · To: Billing, Harbour Hotel · Subject: Invoice 5521",
+       "body": [
+        "Hello, I stayed at your hotel from 12 to 14 October for a conference. My invoice shows three nights, but I only stayed two.",
+        "Could you please correct the invoice and send it to my company, Corrib Software, rather than to me personally? Thank you."
+       ]
+      },
+      {
+       "kind": "Invoice",
+       "title": "Harbour Hotel — Invoice 5521",
+       "body": [
+        "Guest: Niamh Walsh",
+        "Room: Standard double — 3 nights × €140 = €420",
+        "Breakfast — 2 × €15 = €30",
+        "Total: €450"
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Why did Ms Walsh write the e-mail?",
+       "opts": [
+        "To complain about breakfast",
+        "To report an error on an invoice",
+        "To change her room",
+        "To book a room"
+       ],
+       "a": 1,
+       "exp": "The invoice shows three nights instead of two."
+      },
+      {
+       "type": "mcq",
+       "q": "How much was Ms Walsh overcharged for the room?",
+       "opts": [
+        "€30",
+        "€420",
+        "€15",
+        "€140"
+       ],
+       "a": 3,
+       "exp": "One extra night at €140."
+      },
+      {
+       "type": "mcq",
+       "q": "What does Ms Walsh ask the hotel to do?",
+       "opts": [
+        "Add another breakfast",
+        "Call her manager",
+        "Send the invoice to her company",
+        "Give her a discount"
+       ],
+       "a": 2,
+       "exp": "'Send it to my company ... rather than to me.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What will the correct total probably be?",
+       "opts": [
+        "€420",
+        "€280",
+        "€450",
+        "€310"
+       ],
+       "a": 3,
+       "exp": "Two nights (€280) plus breakfast (€30) = €310."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "practice": [
+  {
+   "id": "base-p1",
+   "title": "Practice 1 · Product Launch",
+   "listening": [
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "Has the new catalogue been printed?"
+      ],
+      [
+       "F",
+       "A. Yes, it came back from the printer today."
+      ],
+      [
+       "F",
+       "B. I'll catch the bus."
+      ],
+      [
+       "F",
+       "C. The print is too small."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 0,
+       "exp": "A yes/no question; the answer says yes and adds when it came back.",
+       "opts": [
+        "Yes, it came back from the printer today.",
+        "I'll catch the bus.",
+        "The print is too small."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "Which colour should we use for the logo?"
+      ],
+      [
+       "M",
+       "A. At the launch event."
+      ],
+      [
+       "M",
+       "B. I'll call them."
+      ],
+      [
+       "M",
+       "C. Navy blue looks the most professional."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 2,
+       "exp": "'Which colour' needs a colour: navy blue.",
+       "opts": [
+        "At the launch event.",
+        "I'll call them.",
+        "Navy blue looks the most professional."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "Could you send me the sales figures?"
+      ],
+      [
+       "F",
+       "A. The figure is on page two."
+      ],
+      [
+       "F",
+       "B. They sold out quickly."
+      ],
+      [
+       "F",
+       "C. Sure, I'll e-mail them right now."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 2,
+       "exp": "A request; the natural reply agrees to e-mail them.",
+       "opts": [
+        "The figure is on page two.",
+        "They sold out quickly.",
+        "Sure, I'll e-mail them right now."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "Isn't the product launch next week?"
+      ],
+      [
+       "M",
+       "A. Lunch is ready."
+      ],
+      [
+       "M",
+       "B. A new product line."
+      ],
+      [
+       "M",
+       "C. No, it was moved to the 20th."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 2,
+       "exp": "The answer corrects the date. \"Lunch is ready\" is a sound-alike trap for 'launch'.",
+       "opts": [
+        "Lunch is ready.",
+        "A new product line.",
+        "No, it was moved to the 20th."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "M",
+       "Who designed the packaging?"
+      ],
+      [
+       "F",
+       "A. It's recyclable."
+      ],
+      [
+       "F",
+       "B. Two hundred boxes."
+      ],
+      [
+       "F",
+       "C. An agency in Galway."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 2,
+       "exp": "'Who' asks for a person or company: an agency in Galway.",
+       "opts": [
+        "It's recyclable.",
+        "Two hundred boxes.",
+        "An agency in Galway."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 2,
+     "script": [
+      [
+       "F",
+       "We're running out of brochures."
+      ],
+      [
+       "M",
+       "A. The brochure is colourful."
+      ],
+      [
+       "M",
+       "B. She runs every morning."
+      ],
+      [
+       "M",
+       "C. I'll order more this afternoon."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "abc",
+       "a": 2,
+       "exp": "A problem is stated; the reply offers to order more.",
+       "opts": [
+        "The brochure is colourful.",
+        "She runs every morning.",
+        "I'll order more this afternoon."
+       ]
+      }
+     ]
+    },
+    {
+     "part": 3,
+     "script": [
+      [
+       "F",
+       "Kevin, have you seen the reviews of our new coffee machine?"
+      ],
+      [
+       "M",
+       "Yes, most of them are positive. People love the design."
+      ],
+      [
+       "F",
+       "But several customers say the instructions are hard to follow."
+      ],
+      [
+       "M",
+       "Then let's make a short video showing how to use it. We could post it on our website."
+      ],
+      [
+       "F",
+       "Good idea. I'll ask the design team to start on Monday."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What product are the speakers discussing?",
+       "opts": [
+        "A camera",
+        "A coffee machine",
+        "A website",
+        "A printer"
+       ],
+       "a": 1,
+       "exp": "'Our new coffee machine.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What problem do some customers mention?",
+       "opts": [
+        "The colour",
+        "The instructions",
+        "The price",
+        "The size"
+       ],
+       "a": 1,
+       "exp": "'The instructions are hard to follow.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What does the man suggest?",
+       "opts": [
+        "Changing the design",
+        "Making a video",
+        "Lowering the price",
+        "Writing new reviews"
+       ],
+       "a": 1,
+       "exp": "'Let's make a short video showing how to use it.'"
+      }
+     ]
+    },
+    {
+     "part": 3,
+     "script": [
+      [
+       "M",
+       "Hi Sarah, how many people have registered for the launch event?"
+      ],
+      [
+       "F",
+       "About one hundred and twenty so far, which is more than we expected."
+      ],
+      [
+       "M",
+       "The room only holds one hundred. Should we look for a bigger venue?"
+      ],
+      [
+       "F",
+       "I already asked the hotel. They can give us the ballroom for the same price."
+      ],
+      [
+       "M",
+       "Perfect. Please update the invitation with the new room name."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is surprising about the event?",
+       "opts": [
+        "It has been cancelled.",
+        "The speaker is famous.",
+        "More people registered than expected.",
+        "It is free."
+       ],
+       "a": 2,
+       "exp": "'More than we expected.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What has the hotel offered?",
+       "opts": [
+        "A discount on food",
+        "A larger room at the same price",
+        "Free parking",
+        "A different date"
+       ],
+       "a": 1,
+       "exp": "'The ballroom for the same price.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What does the man ask the woman to do?",
+       "opts": [
+        "Call the hotel",
+        "Print name tags",
+        "Cancel some registrations",
+        "Update the invitation"
+       ],
+       "a": 3,
+       "exp": "'Please update the invitation with the new room name.'"
+      }
+     ]
+    },
+    {
+     "part": 4,
+     "script": [
+      [
+       "M",
+       "Thank you all for coming to the launch of the Breeze Two air purifier."
+      ],
+      [
+       "M",
+       "Breeze Two is thirty percent quieter than our first model and uses less electricity."
+      ],
+      [
+       "M",
+       "It will be available in shops from the first of December, and online orders open today."
+      ],
+      [
+       "M",
+       "Everyone here tonight will receive a voucher for fifteen percent off. Please collect it at the exit."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is being introduced?",
+       "opts": [
+        "An electricity plan",
+        "A cleaning service",
+        "A new air purifier",
+        "A new shop"
+       ],
+       "a": 2,
+       "exp": "'The launch of the Breeze Two air purifier.'"
+      },
+      {
+       "type": "mcq",
+       "q": "How is Breeze Two better than the first model?",
+       "opts": [
+        "It is quieter.",
+        "It is lighter.",
+        "It is cheaper.",
+        "It is smaller."
+       ],
+       "a": 0,
+       "exp": "'Thirty percent quieter.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What will listeners receive?",
+       "opts": [
+        "A discount voucher",
+        "A free product",
+        "A catalogue",
+        "A gift card for a shop"
+       ],
+       "a": 0,
+       "exp": "'A voucher for fifteen percent off.'"
+      }
+     ]
+    },
+    {
+     "part": 4,
+     "script": [
+      [
+       "F",
+       "Hi team, a quick update on the online advertising campaign for our new running shoes."
+      ],
+      [
+       "F",
+       "In the first week, our video ads were viewed over eighty thousand times."
+      ],
+      [
+       "F",
+       "However, most sales came from the photo ads on social media, not the videos."
+      ],
+      [
+       "F",
+       "So next week we'll spend more of the budget on photo ads. Please send me any new photos by Wednesday."
+      ]
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the speaker reporting on?",
+       "opts": [
+        "An advertising campaign",
+        "A customer survey",
+        "A new store opening",
+        "A sales conference"
+       ],
+       "a": 0,
+       "exp": "'The online advertising campaign.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What led to the most sales?",
+       "opts": [
+        "E-mail offers",
+        "TV ads",
+        "Video ads",
+        "Photo ads"
+       ],
+       "a": 3,
+       "exp": "'Most sales came from the photo ads.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What does the speaker ask listeners to do?",
+       "opts": [
+        "Reduce the budget",
+        "Watch the videos",
+        "Write a report",
+        "Send new photos"
+       ],
+       "a": 3,
+       "exp": "'Please send me any new photos by Wednesday.'"
+      }
+     ]
+    }
+   ],
+   "reading": [
+    {
+     "part": 5,
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "The launch event was a great ______ thanks to the hard work of the whole team.",
+       "opts": [
+        "successfully",
+        "success",
+        "successful",
+        "succeed"
+       ],
+       "a": 1,
+       "exp": "A noun after 'a great'."
+      },
+      {
+       "type": "mcq",
+       "q": "Orders placed after 3 p.m. will be ______ the following business day.",
+       "opts": [
+        "shipment",
+        "shipping",
+        "shipped",
+        "ship"
+       ],
+       "a": 2,
+       "exp": "Passive: will be shipped."
+      },
+      {
+       "type": "mcq",
+       "q": "Our new model is ______ than any other phone in its price range.",
+       "opts": [
+        "more light",
+        "lighter",
+        "light",
+        "lightest"
+       ],
+       "a": 1,
+       "exp": "Comparative with 'than'."
+      },
+      {
+       "type": "mcq",
+       "q": "Ms Grant is responsible ______ managing the product launch.",
+       "opts": [
+        "of",
+        "for",
+        "with",
+        "to"
+       ],
+       "a": 1,
+       "exp": "'Responsible for'."
+      },
+      {
+       "type": "mcq",
+       "q": "Customers can return the product ______ thirty days if they are not satisfied.",
+       "opts": [
+        "within",
+        "along",
+        "between",
+        "among"
+       ],
+       "a": 0,
+       "exp": "'Within thirty days' = inside that period."
+      },
+      {
+       "type": "mcq",
+       "q": "The marketing budget was increased ______ the board's approval.",
+       "opts": [
+        "followed",
+        "follow",
+        "following",
+        "follows"
+       ],
+       "a": 2,
+       "exp": "'Following' = after."
+      },
+      {
+       "type": "mcq",
+       "q": "All new staff must ______ a two-day training course.",
+       "opts": [
+        "attending",
+        "attended",
+        "attendance",
+        "attend"
+       ],
+       "a": 3,
+       "exp": "Base verb after 'must'."
+      },
+      {
+       "type": "mcq",
+       "q": "The company has ______ expanded into three new European markets.",
+       "opts": [
+        "recently",
+        "more recent",
+        "recentness",
+        "recent"
+       ],
+       "a": 0,
+       "exp": "An adverb before the past participle."
+      }
+     ]
+    },
+    {
+     "part": 6,
+     "title": "Press release",
+     "text": [
+      "DUBLIN — Lumen Lighting today ___1___ its first range of solar-powered garden lamps.",
+      "The lamps charge during the day and switch on automatically at night. ___2___",
+      "The range will be sold in garden centres across Ireland ___3___ November.",
+      "\"We wanted to offer customers an easy way to ___4___ their energy bills,\" said chief executive Orla Fahy."
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "Blank 1",
+       "opts": [
+        "announcing",
+        "announced",
+        "announces",
+        "will announce"
+       ],
+       "a": 1,
+       "exp": "'Today' with a completed action in a news report: announced."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 2",
+       "opts": [
+        "Ms Fahy studied engineering.",
+        "The company was founded in 1998.",
+        "Garden centres are busy in spring.",
+        "A full charge provides up to ten hours of light."
+       ],
+       "a": 3,
+       "exp": "This sentence adds detail about how the lamps work."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 3",
+       "opts": [
+        "of",
+        "at",
+        "from",
+        "on"
+       ],
+       "a": 2,
+       "exp": "'From November' = starting in November."
+      },
+      {
+       "type": "mcq",
+       "q": "Blank 4",
+       "opts": [
+        "reduction",
+        "reduce",
+        "reducing",
+        "reduced"
+       ],
+       "a": 1,
+       "exp": "'A way to' + base verb."
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "Text message chain",
+     "texts": [
+      {
+       "kind": "Text messages",
+       "title": "Chat",
+       "body": [
+        "Liam (9:12): The banners for the launch haven't arrived. The event starts at 11.",
+        "Ciara (9:14): I just called the printer. They're sending them by courier — should be there by 10.",
+        "Liam (9:15): That works. Can you bring extra tape?",
+        "Ciara (9:16): Sure, I'll pick some up on the way."
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the problem?",
+       "opts": [
+        "The banners have not been delivered.",
+        "The event is cancelled.",
+        "Ciara is late.",
+        "The printer is broken."
+       ],
+       "a": 0,
+       "exp": "'The banners ... haven't arrived.'"
+      },
+      {
+       "type": "mcq",
+       "q": "When should the banners arrive?",
+       "opts": [
+        "By 11:00",
+        "By 9:15",
+        "Tomorrow",
+        "By 10:00"
+       ],
+       "a": 3,
+       "exp": "'Should be there by 10.'"
+      },
+      {
+       "type": "mcq",
+       "q": "At 9:15, what does Liam mean when he writes 'That works'?",
+       "opts": [
+        "The plan is acceptable.",
+        "The tape is strong enough.",
+        "He has finished his work.",
+        "The printer is working again."
+       ],
+       "a": 0,
+       "exp": "He accepts the new arrangement."
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "Review",
+     "texts": [
+      {
+       "kind": "Customer review",
+       "title": "★★★★☆ Breeze Two air purifier",
+       "body": [
+        "I bought the Breeze Two last month and it's much quieter than my old purifier — I can leave it on at night.",
+        "The app is easy to use, and I like that it shows the air quality in each room.",
+        "My only complaint is the filter: replacements cost €40 and need changing every three months."
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What does the reviewer like about the product?",
+       "opts": [
+        "It is small.",
+        "It is cheap to run.",
+        "It is quiet.",
+        "The filter lasts a long time."
+       ],
+       "a": 2,
+       "exp": "'Much quieter than my old purifier.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What does the app show?",
+       "opts": [
+        "Delivery times",
+        "Air quality in each room",
+        "The price of filters",
+        "The weather"
+       ],
+       "a": 1,
+       "exp": "'Shows the air quality in each room.'"
+      },
+      {
+       "type": "mcq",
+       "q": "How much would the reviewer spend on filters in a year?",
+       "opts": [
+        "€120",
+        "€40",
+        "€80",
+        "€160"
+       ],
+       "a": 3,
+       "exp": "€40 every three months = four times a year = €160."
+      }
+     ]
+    },
+    {
+     "part": 7,
+     "title": "Notice and e-mail",
+     "texts": [
+      {
+       "kind": "Notice",
+       "title": "Staff discount — Breeze Two",
+       "body": [
+        "Employees can buy one Breeze Two at 30% off until 31 December.",
+        "Orders must be placed through the staff shop page. Discounts cannot be added after an order is placed."
+       ]
+      },
+      {
+       "kind": "E-mail",
+       "title": "From: Dara Quinn · To: Staff shop · Subject: Discount",
+       "body": [
+        "Hi, I ordered a Breeze Two on the main website yesterday and forgot to use the staff page. Can the 30% discount still be applied? I'd also like to buy a second one for my sister."
+       ]
+      }
+     ],
+     "questions": [
+      {
+       "type": "mcq",
+       "q": "What is the notice about?",
+       "opts": [
+        "A price increase",
+        "A staff discount",
+        "A new staff shop",
+        "A product recall"
+       ],
+       "a": 1,
+       "exp": "A 30% discount for employees."
+      },
+      {
+       "type": "mcq",
+       "q": "What mistake did Mr Quinn make?",
+       "opts": [
+        "He did not use the staff shop page.",
+        "He ordered after 31 December.",
+        "He ordered the wrong model.",
+        "He paid twice."
+       ],
+       "a": 0,
+       "exp": "He ordered on the main website."
+      },
+      {
+       "type": "mcq",
+       "q": "What will the staff shop most likely tell Mr Quinn?",
+       "opts": [
+        "He must return the product.",
+        "The discount cannot be added to his order.",
+        "The discount can be added.",
+        "He will get 50% off."
+       ],
+       "a": 1,
+       "exp": "'Discounts cannot be added after an order is placed.'"
+      },
+      {
+       "type": "mcq",
+       "q": "What is true about Mr Quinn's request for a second purifier?",
+       "opts": [
+        "He can buy two at the staff price.",
+        "The second one is free.",
+        "His sister must work for the company.",
+        "Only one can be bought at the discount."
+       ],
+       "a": 3,
+       "exp": "'Employees can buy one Breeze Two at 30% off.'"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
