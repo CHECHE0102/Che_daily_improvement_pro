@@ -736,6 +736,8 @@ body.onb-open{overflow:hidden}
 .hero-art{position:relative;display:block}.hero-art .ha-in{position:relative;width:100%;height:100%}
 .hero-art img{position:relative;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
 .hero-art .ha-wpn{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+/* standing still the hand closes around the handle: weapon goes behind the body picture so the fist covers the grip */
+.ha-idle .ha-wpn{z-index:0}.ha-idle .ha-in>img{z-index:1}
 .hero-stage .hs-fig .hero-art{position:relative;z-index:1;width:100%;height:100%}
 .onb-art{width:200px;max-width:70%;height:auto;margin-top:4px}.onb-art.sm{width:150px}
 .play-head{display:flex;align-items:center;gap:10px}.play-head>div{flex:1;min-width:0}.play-art{width:110px;height:auto;flex:none}
@@ -3029,7 +3031,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.139";
+const APP_VERSION="2026.10.140";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button>
