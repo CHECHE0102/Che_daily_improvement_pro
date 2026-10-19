@@ -925,6 +925,75 @@ body.vp-lock{touch-action:pan-x pan-y}
 .sock.full{border-style:solid;border-color:transparent}.gem{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:30% 30% 50% 50%;color:#fff;font-size:11px;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
 .gem-pick{margin:-4px 0 10px}.gem-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gem-opt{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line,#ccd);border-radius:12px;padding:8px 10px;text-align:left;color:inherit;font:inherit}.gem-opt small{margin-left:auto;color:var(--muted,#789)}
 .lvt-link{width:100%;margin-top:10px}nav.tabs button.locked{opacity:.45}button.locked{opacity:.55}.hu-title{margin:10px 0 4px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
+/* ----- plans, cosmetics, completion card, weekly review, close listening ----- */
+.plan-tag{display:inline-block;font-size:11px;font-weight:800;padding:1px 8px;border-radius:99px;background:color-mix(in srgb,#E3B341 22%,transparent);color:#8A6410;white-space:nowrap;vertical-align:middle}.plan-tag.plus{background:linear-gradient(90deg,#FFE58A,#FFC8E6);color:#7A3E00}
+.sty-ic{width:18px;height:18px;vertical-align:-4px;flex:none}
+.hero-art .cos-back{position:absolute;left:46%;top:46%;width:86%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
+.cos-back .ring{position:absolute;inset:6%;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 8%,var(--c1) 12%,transparent 20% 33%,var(--c2) 38%,transparent 45% 58%,var(--c1) 63%,transparent 70% 83%,var(--c2) 88%,transparent 95%);-webkit-mask:radial-gradient(closest-side,transparent 74%,#000 76% 88%,transparent 92%);mask:radial-gradient(closest-side,transparent 74%,#000 76% 88%,transparent 92%);filter:drop-shadow(0 0 6px var(--c1));animation:cosspin 6s linear infinite}
+.cos-back .ring.r2{inset:18%;animation-duration:9s;animation-direction:reverse;opacity:.75}
+.cos-back.cb-b-halo::before{content:"";position:absolute;inset:14%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c1) 45%,transparent),transparent 75%);animation:cospulse 2.6s ease-in-out infinite}
+.cos-back svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;animation:cosspin 14s linear infinite;filter:drop-shadow(0 0 4px var(--c1))}
+.cos-back .rw-o,.cos-back .rw-i{fill:none;stroke:var(--c1);stroke-width:1.4}.cos-back .rw-i{stroke-dasharray:3 4;opacity:.8}.cos-back .rw-g path{fill:none;stroke:var(--c2);stroke-width:1.6;stroke-linecap:round}.cos-back .rw-k{fill:color-mix(in srgb,var(--c1) 22%,transparent);stroke:var(--c1);stroke-width:.8}
+.cos-back.cb-b-wings{top:44%;width:112%}.cos-back .wg{position:absolute;top:8%;width:46%;height:70%;filter:drop-shadow(0 0 7px var(--c1))}.cos-back .wg svg{animation:none;position:static;width:100%;height:100%;filter:none}
+.cos-back .wg path{fill:color-mix(in srgb,var(--c2) 70%,var(--c1));stroke:var(--c1);stroke-width:1.4;stroke-linejoin:round}.cos-back .wg path.wf{fill:none;stroke:#fff;stroke-width:1;opacity:.8}
+.cos-back .wg.l{left:2%;transform-origin:100% 40%;animation:coswingl 2.4s ease-in-out infinite}.cos-back .wg.r{right:2%;transform-origin:0 40%;animation:coswingr 2.4s ease-in-out infinite}.cos-back .wg.r svg{transform:scaleX(-1)}
+.hero-art .cos-feet{position:absolute;left:46%;bottom:-6%;width:74%;aspect-ratio:1;transform:translateX(-50%) scaleY(.3);transform-origin:50% 100%;pointer-events:none}
+.cos-feet .disc{position:absolute;inset:0;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c1) 40%,transparent),transparent 72%)}
+.cos-feet .spin{position:absolute;inset:4%;border-radius:50%;background:conic-gradient(var(--c1),var(--c2),transparent 30%,var(--c1) 50%,var(--c2),transparent 80%,var(--c1));-webkit-mask:radial-gradient(closest-side,transparent 70%,#000 73% 90%,transparent 94%);mask:radial-gradient(closest-side,transparent 70%,#000 73% 90%,transparent 94%);filter:drop-shadow(0 0 5px var(--c1));animation:cosspin 3s linear infinite}
+.cos-feet.cf-f-rainbow .spin{background:conic-gradient(#FF5E7E,#FFB347,#FFE66D,#6EE7A0,#5EC8FF,#9B7BFF,#FF5E7E)}
+.cos-feet b{position:absolute;left:50%;bottom:50%;width:6%;aspect-ratio:1;border-radius:50%;background:var(--c2);box-shadow:0 0 6px var(--c1);transform:scaleY(3.3);opacity:0;animation:cosrise 2.4s ease-out infinite}
+.cos-feet b:nth-of-type(1){left:22%}.cos-feet b:nth-of-type(2){left:62%;animation-delay:.8s}.cos-feet b:nth-of-type(3){left:80%;animation-delay:1.6s}
+.hero-art .cos-neck{position:absolute;left:48%;top:55%;width:8.5%;aspect-ratio:1;transform:translate(-50%,-50%) rotate(45deg);pointer-events:none;z-index:2}
+.cos-neck i{position:absolute;inset:0;border-radius:3px;background:linear-gradient(135deg,var(--c2),var(--c1));box-shadow:0 0 8px 3px var(--c1),0 0 2px 1px #fff;animation:cospulse 1.8s ease-in-out infinite}
+.cos-neck.cn-star i{border-radius:50%}.ha-attack .cos-neck,.ha-hurt .cos-neck{display:none}
+.cos-burst{position:absolute;left:50%;top:48%;width:0;height:0;z-index:9;pointer-events:none}
+.cos-burst b{position:absolute;left:-55px;top:-55px;width:110px;height:110px;border-radius:50%;border:4px solid var(--c1);box-shadow:0 0 14px var(--c1),inset 0 0 12px var(--c2);animation:cosring .6s ease-out forwards}
+.cos-burst i{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,var(--c2),var(--c1) 60%,transparent 70%);transform:rotate(var(--a)) translateY(0);animation:cosfly .65s ease-out var(--d) forwards}
+.cbx-frost i{border-radius:2px;width:6px;height:16px;left:-3px;top:-8px;background:linear-gradient(var(--c2),var(--c1))}
+.cbx-star i{background:none;width:16px;height:16px;left:-8px;top:-8px}.cbx-star i::before{content:"✦";position:absolute;inset:0;color:var(--c1);font-size:16px;line-height:16px;text-shadow:0 0 6px var(--c2)}
+@keyframes cosspin{to{transform:rotate(360deg)}}
+@keyframes cospulse{50%{opacity:.6;filter:brightness(1.35)}}
+@keyframes cosrise{0%{opacity:0;transform:scaleY(3.3) translateY(0)}20%{opacity:1}100%{opacity:0;transform:scaleY(3.3) translateY(-60%)}}
+@keyframes coswingl{50%{transform:rotate(-9deg)}}@keyframes coswingr{50%{transform:rotate(9deg)}}
+@keyframes cosring{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.25);opacity:0}}
+@keyframes cosfly{0%{transform:rotate(var(--a)) translateY(0) scale(1);opacity:1}100%{transform:rotate(var(--a)) translateY(-70px) scale(.4);opacity:0}}
+@media (prefers-reduced-motion:reduce){.cos-back .ring,.cos-back svg,.cos-back .wg,.cos-feet .spin,.cos-feet b,.cos-neck i,.cos-back::before{animation:none}.cos-burst i,.cos-burst b{animation-duration:.01s}}
+.sty-card{display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center}
+.sty-stage{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:4px;width:100%;max-width:340px;height:190px;border-radius:16px;background:radial-gradient(ellipse at 50% 85%,color-mix(in srgb,#B98CFF 22%,transparent),transparent 60%),linear-gradient(180deg,color-mix(in srgb,#2B1A3F 8%,var(--paper)),var(--paper))}
+.sty-fig{width:170px;height:170px;margin-bottom:6px}.sty-fig .hero-svg{width:100%;height:100%}.sty-fig.hitting{transform:translateX(18px);transition:transform .15s}
+.sty-dummy{position:relative;width:70px;height:120px;display:flex;align-items:flex-end;justify-content:center}.sty-dummy .dm{font-size:42px;margin-bottom:20px}.sty-dummy .cos-burst{top:62%}
+.sty-bal{display:flex;flex-direction:column;align-items:center}.sty-bal span{display:flex;align-items:center;gap:6px;font-size:26px;font-weight:800}.sty-bal .sty-ic{width:26px;height:26px}
+.sty-trying{margin:0;font-size:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.cos-seg{flex-wrap:wrap}.cos-list{display:flex;flex-direction:column;gap:8px}
+.cos-item{display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:14px;background:var(--card,#fff)}.cos-item.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 20%,transparent)}.cos-item.trying{border-style:dashed;border-color:#9B7BFF}.cos-item.plus{background:linear-gradient(160deg,color-mix(in srgb,#FFE58A 12%,var(--card,#fff)),var(--card,#fff) 60%)}
+.cos-txt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px;align-items:flex-start}.cos-txt b{font-size:15px}.cos-on{color:var(--accent);font-weight:700}
+.cos-btns{display:flex;flex-direction:column;gap:6px;align-items:stretch;flex:none}.cos-btns .btn{white-space:nowrap;display:inline-flex;gap:4px;align-items:center;justify-content:center}
+.cos-ic{position:relative;flex:none;width:58px;height:58px;border-radius:14px;background:#22183A;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cos-ic .cos-back{position:absolute;inset:4px;width:auto;transform:none;left:4px;top:4px}.cos-ic .cos-feet{position:absolute;left:4px;right:4px;bottom:4px;width:auto;height:50px;transform:scaleY(.42);transform-origin:50% 100%}
+.cos-ic .cos-back.cb-b-wings{inset:6px 0;width:auto}
+.cos-ic.sfx{font-size:28px;background:color-mix(in srgb,#B98CFF 18%,var(--card,#fff))}
+.cos-neck.solo{position:static;display:block;width:20px;height:20px;transform:rotate(45deg)}.cos-neck.solo i{position:absolute;inset:0}
+.sty-earn{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}.sty-earn li.mine{font-weight:800;color:var(--accent)}
+.done-card{display:flex;flex-direction:column;gap:10px;border:2px solid color-mix(in srgb,var(--wood) 45%,transparent);background:linear-gradient(170deg,color-mix(in srgb,var(--wood) 10%,var(--card,#fff)),var(--card,#fff) 55%)}
+.dc-top{display:flex;gap:12px;align-items:center}.dc-top h3{margin:2px 0 0}.dc-art{width:64px;height:64px;object-fit:cover;border-radius:14px;flex:none}
+.dc-ws{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.dc-w{display:inline-flex;flex-direction:column;padding:4px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 10%,transparent);max-width:100%}.dc-w b{font-size:14px}.dc-w small{font-size:11.5px;opacity:.8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.dc-w.no{background:color-mix(in srgb,var(--fire) 12%,transparent)}
+.dc-fixed{margin:0}.dc-stats{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px}
+.dc-rw{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,#B98CFF 14%,transparent)}.dc-bonus{font-size:12px;font-weight:700;color:#6E44B0}
+.dc-bye{margin:0;font-weight:700}
+.wk-card{display:flex;flex-direction:column;gap:8px}.wk-card.locked{opacity:.92;background:repeating-linear-gradient(135deg,transparent 0 10px,color-mix(in srgb,var(--line) 25%,transparent) 10px 11px),var(--card,#fff)}
+.wk-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.wk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.wk-box{display:flex;flex-direction:column;padding:8px 10px;border-radius:12px;background:color-mix(in srgb,var(--accent) 7%,transparent)}.wk-box b{font-size:22px}.wk-box span{font-size:13px;font-weight:700}
+.wk-box i{font-style:normal;font-size:12px;margin-left:4px}.wk-box i.up{color:var(--wood)}.wk-box i.dn{color:var(--fire)}
+.wk-tips{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.read-bar .btn.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.ls-panel{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;border:1.5px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:var(--card,#fff)}.ls-panel.locked{border-style:dashed}
+.ls-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ls-cur{font-family:var(--serif,Georgia,serif);font-size:17px;line-height:1.5;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 6%,transparent);overflow-wrap:anywhere}.ls-cur.on{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.ls-ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.ls-ctl .btn{flex:1 1 auto}.ls-ctl.ab .btn{flex:0 0 auto}.ls-ctl .btn.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.ls-wait{display:flex;flex-direction:column;gap:4px}.ls-wait b{color:var(--accent)}.ls-wait i{display:block;height:6px;border-radius:99px;background:var(--accent);transform-origin:0 50%;animation:lswait linear forwards}
+@keyframes lswait{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.dev-plan{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:12px;background:color-mix(in srgb,#B98CFF 12%,transparent)}.dev-plan .seg{flex-wrap:wrap}
+@media (max-width:400px){.adv-quick{gap:4px}.aq-btn{min-width:0;flex:1 1 0;padding:4px 0;font-size:12px;text-align:center;line-height:1.2}.aq-ic{width:44px;height:44px}.aq-ic svg{width:29px;height:29px}}@media (max-width:330px){.aq-ic{width:40px;height:40px;border-radius:13px}.aq-btn{font-size:11px}}
 </style>
 
 </head>
@@ -1247,14 +1316,24 @@ const fmtDate = s => { const d=new Date(s+"T12:00:00"); return d.toLocaleDateStr
 const STOP = new Set("a an the and or but of to in on at for from with by is are was were be been it its this that these those he she they we you i his her their our my your as if than then so not no do does did have has had will would can could may might shall should must which who whom what when where there here".split(" "));
 function toast(msg){ document.querySelectorAll(".toast").forEach(x=>x.remove()); const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.append(t); setTimeout(()=>t.remove(),1800); }
 let SAY_NOTE=false;
+/* recorded word pronunciations (same neural voice as the news; made by .github/workflows/word-audio.yml on the "words" branch) */
+let WORD_AUDIO=null, WA_SET=null, SAY_AUDIO=null;
+function waLoad(){ if(WORD_AUDIO!==null) return; WORD_AUDIO=false; fetch("word-audio.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{ if(j&&j.sha&&j.w){ WORD_AUDIO=j; WA_SET=new Set(j.w.split(",")); } }).catch(()=>{}); }
+function waUrl(text){ const t=String(text||"").trim().toLowerCase().replace(/’/g,"'"); if(!WA_SET||!/^[a-z][a-z'-]{0,30}$/.test(t)) return null; const k=t.replace(/'/g,"_");
+  return WA_SET.has(k)?`https://cdn.jsdelivr.net/gh/${WORD_AUDIO.repo}@${WORD_AUDIO.sha}/w/${encodeURIComponent(k)}.mp3`:null; }
 function speak(text){ try{
-  const u=new SpeechSynthesisUtterance(text), v=ieVoices().F; if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-IE"; u.rate=.92;
-  if(!v&&!SAY_NOTE&&speechSynthesis.getVoices().length){ SAY_NOTE=true; toast(T("noEnVoice")); }
   // news being read aloud: pause it for the word, then carry on from the same place
   const held=typeof READ!=="undefined"&&READ.on&&!READ.paused; if(held){ readPause(); READ.heldBySay=true; }
   const back=()=>{ if(READ.heldBySay){ READ.heldBySay=false; if(READ.on&&READ.paused) readResume(); } };
-  u.onend=back; u.onerror=back;
-  speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
+  if(SAY_AUDIO){ try{ SAY_AUDIO.pause(); }catch(e){} SAY_AUDIO=null; }
+  const tts=()=>{ if(!window.speechSynthesis) return back();
+    const u=new SpeechSynthesisUtterance(text), v=ieVoices().F; if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-IE"; u.rate=.92;
+    if(!v&&!SAY_NOTE&&speechSynthesis.getVoices().length){ SAY_NOTE=true; toast(T("noEnVoice")); }
+    u.onend=back; u.onerror=back; speechSynthesis.cancel(); speechSynthesis.speak(u); };
+  const url=waUrl(text);
+  if(url){ const a=new Audio(url); SAY_AUDIO=a; let done=false; const fb=()=>{ if(done) return; done=true; if(SAY_AUDIO===a) SAY_AUDIO=null; tts(); };
+    a.onended=()=>{ done=true; if(SAY_AUDIO===a) SAY_AUDIO=null; back(); }; a.onerror=fb; try{ speechSynthesis.cancel(); }catch(e){} a.play().catch(fb); return; }
+  tts(); }catch(e){} }
 const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>';
 
 /* ---------- state ---------- */
@@ -1393,6 +1472,7 @@ function viewToday(){
       ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
+    ${preDone&&readDone&&postDone?doneCard(d):""}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
     ${pushPrompt()}
@@ -1402,6 +1482,7 @@ function viewToday(){
       <div class="stat"><b>${tested?Math.round(right/tested*100)+"%":"—"}</b><span>${T("statAcc")}</span></div>
       <div class="stat"><b>${S.index.length}</b><span>${T("statArts")}</span></div>
     </div>
+    ${weekCard()}
     
   </div>`;
 }
@@ -1431,7 +1512,7 @@ function viewRead(){
     ${art.levels&&levelOf(art)!==LEVEL?`<div class="muted sm-t">${T("levelOnly",{l:LEVEL,m:levelOf(art)})}</div>`:""}
     ${sumOf(art)?`<div class="zh-sum">${esc(sumOf(art))}</div>`:""}
     <div class="tip"><i></i>${T("tip")}</div>
-    ${window.speechSynthesis?`<div class="read-bar" id="readBar">${readBarInner()}</div>`:""}
+    ${window.speechSynthesis?`<div class="read-bar" id="readBar">${readBarInner()}</div><div id="lsBox">${window.LS?lsInner():""}</div>`:""}
     <article class="article" id="article">${paras}</article>
     ${end}
   </div>`;
@@ -1736,6 +1817,7 @@ function startQuiz(kind, art){
 function finishPost(art, score, total){
   const d=dayRec();
   if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
+  if(isMain(art)) styleDaily();
   else saveDay({...d, postBy:{...(d.postBy||{}), [art.id]:{score,total}}});
   setTimeout(rdPush,500);
 }
@@ -2522,7 +2604,7 @@ function fight(){
   clearInterval(S.btimer);
   battleTimer();
 }
-function evSfx(e){ if(!e) return; if(e.who==="p") sfx(e.crit||e.spell?"crit":"hit"); else if(e.who==="a") sfx("ally"); else if(e.eye) sfx("eye"); else if(e.tgt==="a") sfx("hurt"); else sfx(e.crit?"mcrit":"hurt"); }
+function evSfx(e){ if(!e) return; if(e.who==="p") sfx(cosSfxName(e)||(e.crit||e.spell?"crit":"hit")); else if(e.who==="a") sfx("ally"); else if(e.eye) sfx("eye"); else if(e.tgt==="a") sfx("hurt"); else sfx(e.crit?"mcrit":"hurt"); }
 function battleEndSfx(){ const B=S.battle; if(!B||!B.res) return; if(!B.res.win) return sfx("lose"); sfx(B.conquered?"conquer":"win"); if(B.lvUp) setTimeout(()=>sfx("lvup"),900); }
 function battleTimer(){
   clearInterval(S.btimer);
@@ -2562,7 +2644,7 @@ function arenaScene(B, last, cur){
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
       <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${hitBurst(hl,"foe")}${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
-      <div class="f-stage">${monArt(m)}${showAnim&&pAtk?`${atkFx(ITEMS[game().weapon],last.crit)}${hitBurst(hl,"you")}${pop(last,"foe-hit")}`:""}</div></div>
+      <div class="f-stage">${monArt(m)}${showAnim&&pAtk&&!aAtk?cosBurst():""}${showAnim&&pAtk?`${atkFx(ITEMS[game().weapon],last.crit)}${hitBurst(hl,"you")}${pop(last,"foe-hit")}`:""}</div></div>
   </div>`;
 }
 function viewBattle(){
@@ -2694,6 +2776,8 @@ function viewAdv(){ restCheck();
     body=featLock("vault")?`<section class="card"><p class="muted">🔒 ${T("lockVault")}</p></section>`:viewVault();
   } else if(sub==="luck"){
     body=viewLuck();
+  } else if(sub==="style"){
+    body=viewStyle();
   } else {
     const f=S.shopEl||"all", all=g.inv.map(id=>ITEMS[id]).filter(Boolean);
     const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>b.lv-a.lv||a.slot.localeCompare(b.slot)||elRank(a.el)-elRank(b.el));
@@ -2713,7 +2797,7 @@ function viewAdv(){ restCheck();
       <p>${T("rules1")}</p>
       <p>${T("rules2")}</p>
       <p>${T("rules3")}</p></details>
-    ${sub!=="go"?`<div class="sub-h"><b>${({shop:"🏪 ",luck:"🍀 ",bag:"🎒 ",vault:"🌈 "})[sub]||""}${T(({shop:"tabShop",luck:"tabLuck",bag:"tabBag",vault:"tabVault"})[sub]||"tabGo")}</b><button class="btn ghost sm" data-advtab="go">${T("advBack")}</button></div>`:""}
+    ${sub!=="go"?`<div class="sub-h"><b>${({shop:"🏪 ",luck:"🍀 ",bag:"🎒 ",vault:"🌈 ",style:"✨ "})[sub]||""}${T(({shop:"tabShop",luck:"tabLuck",bag:"tabBag",vault:"tabVault",style:"tabStyle"})[sub]||"tabGo")}</b><button class="btn ghost sm" data-advtab="go">${T("advBack")}</button></div>`:""}
     ${body}
   </div>`;
 }
@@ -2942,7 +3026,10 @@ function devExit(){
 }
 function devAct(k){
   const g=game();
-  if(k==="gold") g.gold+=1000;
+  if(k.startsWith("plan-")){ DEV.plan=k.slice(5); devSave(); toast(T("dDone")); return render(); }
+  if(k.startsWith("planm-")){ DEV.planM=+k.slice(6); devSave(); return render(); }
+  if(k==="style") g.style=(g.style||0)+500;
+  else if(k==="gold") g.gold+=1000;
   else if(k==="tickets") g.tickets+=10;
   else if(k==="lotto") g.lotto=(g.lotto||0)+10;
   else if(k==="shards"){ for(const e of ELS) for(let i=0;i<TIER.length;i++) addShard(e.k,i,5); }
@@ -3135,8 +3222,10 @@ async function maintSet(on){
 function devPanel(){
   if(!DEV) return "";
   const b=(k,l)=>`<button class="btn ghost sm" data-act="dev" data-k="${k}">${T(l)}</button>`;
-  return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>
-    <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
+  const pl=DEV.plan||"free";
+  const planSel=`<div class="dev-plan"><b>${T("devPlanT")}</b><div class="seg" role="group">${["free","sub","plus"].map(k=>`<button data-act="dev" data-k="plan-${k}" aria-pressed="${pl===k}">${T(k==="free"?"planFree":k==="sub"?"planSub":"planPlus")}</button>`).join("")}</div>${pl!=="free"?`<div class="seg" role="group">${[1,3,6,12,24].map(n=>`<button data-act="dev" data-k="planm-${n}" aria-pressed="${(DEV.planM||3)===n}">${n}</button>`).join("")}</div><span class="muted sm-t">${T("devPlanM",{n:DEV.planM||3})}</span>`:""}<span class="muted sm-t">${T("devPlanNote")}</span></div>`;
+  return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${planSel}
+    <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}${b("style","dStyle")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
     <div id="devMaint" class="dev-maint">${devMaintInner()}</div>
     ${devSupHtml()}
     ${devBadgeHtml()}
@@ -3144,7 +3233,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.157";
+const APP_VERSION="2026.10.158";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3739,7 +3828,7 @@ function mergeDay(a,b){ if(!a) return b; if(!b) return a; const base=dScore(b)>d
 function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
-  return {...newGame(base), inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
+  return {...newGame(base), inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], cosOwn:[...new Set([...(base.cosOwn||[]),...(o.cosOwn||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
     taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null}; }
 /* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
    tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
@@ -4952,14 +5041,15 @@ function heroStage(){
   return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroArt("idle")}</div>${side(a,"armor","cloth")}${advQuick()}</section>`;
 }
 /* shop · lucky house · bag: small icon buttons under the hero */
+const STYLE_AQ=`<svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="25" rx="11" ry="3.6" fill="none" stroke="#B98CFF" stroke-width="2.2"/><ellipse cx="16" cy="25" rx="7" ry="2.2" fill="#E9DDFF"/><path d="M16 4l2.6 6.6 7 .5-5.4 4.5 1.7 6.9L16 18.7l-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#FFD75E" stroke="#B07D12" stroke-width="1.5" stroke-linejoin="round"/><circle cx="26" cy="6" r="1.6" fill="#FF8AC8"/><circle cx="6" cy="9" r="1.2" fill="#7FD3FF"/></svg>`;
 const AQ_ICON={
   shop:`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12h22v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" fill="#F4E3C1" stroke="#7A4E1E" stroke-width="1.8"/><path d="M3 12l3-7h20l3 7z" fill="#E0573B" stroke="#8A2E1C" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 5L7 12M13 5l-.7 7M19 5l.7 7M23.5 5L25 12" stroke="#FFF4E0" stroke-width="2"/><path d="M3 12a3.3 3.3 0 0 0 6.5 0a3.3 3.3 0 0 0 6.5 0a3.3 3.3 0 0 0 6.5 0a3.3 3.3 0 0 0 6.5 0" fill="#E0573B" stroke="#8A2E1C" stroke-width="1.6"/><rect x="13" y="18" width="6" height="10" rx="1" fill="#A86A2E" stroke="#7A4E1E" stroke-width="1.6"/><circle cx="23.5" cy="20" r="2.2" fill="#F2C94C" stroke="#9A7212" stroke-width="1.2"/></svg>`,
   luck:`<svg viewBox="0 0 32 32" aria-hidden="true"><g stroke="#1F6B37" stroke-width="1.6" fill="#3FA65A"><path d="M16 15c-4-1-8-4-6.5-7.5S15.5 6 16 10c.5-4 4.5-6 6.5-2.5S20 14 16 15z"/><path d="M16 15c-4 1-8 4-6.5 7.5S15.5 24 16 20c.5 4 4.5 6 6.5 2.5S20 16 16 15z" transform="rotate(90 16 15)"/><path d="M16 15c-4 1-8 4-6.5 7.5S15.5 24 16 20c.5 4 4.5 6 6.5 2.5S20 16 16 15z"/><path d="M16 15c-4-1-8-4-6.5-7.5S15.5 6 16 10c.5-4 4.5-6 6.5-2.5S20 14 16 15z" transform="rotate(90 16 15)"/></g><path d="M16 15c1 5 2 9 5 13" fill="none" stroke="#1F6B37" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="15" r="1.8" fill="#F2C94C"/></svg>`,
   bag:`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 8V6a4 4 0 0 1 8 0v2" fill="none" stroke="#6B4423" stroke-width="2"/><rect x="6" y="8" width="20" height="20" rx="6" fill="#C98B4B" stroke="#6B4423" stroke-width="1.8"/><path d="M6 16h20" stroke="#6B4423" stroke-width="1.6"/><rect x="11" y="18" width="10" height="7" rx="2" fill="#A86A2E" stroke="#6B4423" stroke-width="1.6"/><rect x="14.5" y="14" width="3" height="5" rx="1" fill="#F2C94C" stroke="#9A7212" stroke-width="1.2"/></svg>`};
 function advQuick(){ const sub=S.advTab||"go";
   if(!featLock("vault")) setTimeout(()=>{ if(typeof giftLoad==="function") giftLoad(false); },0);
-  return `<div class="adv-quick" role="group">${[["vault","tabVault"],["shop","tabShop"],["luck","tabLuck"],["bag","tabBag"]].map(([k,l])=>{ const lk=featLock(k), dot=k==="vault"&&!lk&&typeof giftPending==="function"&&giftPending();
-    return `<button class="aq-btn${sub===k?" on":""}${lk?" locked":""}${k==="vault"?" vault":""}" data-advtab="${k}" aria-pressed="${sub===k}"><span class="aq-ic">${k==="vault"?VAULT_ICON:AQ_ICON[k]}${lk?'<i class="aq-lock">🔒</i>':""}${dot?`<i class="aq-dot">${dot}</i>`:""}</span><span>${T(l)}</span></button>`; }).join("")}</div>`; }
+  return `<div class="adv-quick" role="group">${[["vault","tabVault"],["style","tabStyle"],["shop","tabShop"],["luck","tabLuck"],["bag","tabBag"]].map(([k,l])=>{ const lk=featLock(k), dot=k==="vault"&&!lk&&typeof giftPending==="function"&&giftPending();
+    return `<button class="aq-btn${sub===k?" on":""}${lk?" locked":""}${k==="vault"?" vault":""}" data-advtab="${k}" aria-pressed="${sub===k}"><span class="aq-ic">${k==="vault"?VAULT_ICON:k==="style"?STYLE_AQ:AQ_ICON[k]}${lk?'<i class="aq-lock">🔒</i>':""}${dot?`<i class="aq-dot">${dot}</i>`:""}</span><span>${T(l)}</span></button>`; }).join("")}</div>`; }
 /* ----- monthly reading leaderboard: articles finished this calendar month (readMonths/{YYYY-MM}/u/{uid}) ----- */
 const monthKey=()=>today().slice(0,7);
 function readsThisMonth(){ const m=monthKey(), ids=new Set();
@@ -5128,13 +5218,14 @@ function readRec(){ const art=currentArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDI
   const it=(NEWS_AUDIO.items||{})[art.id+"|"+(levelOf(art)||"base")]; return it?{...it, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
 function readBarInner(){
   const playing=READ.on&&!READ.paused, rec=READ.on?!!READ.audio:!!readRec();
-  return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
+  return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${window.LS?`<button class="btn ghost sm${LS.on?" on":""}" data-act="lstoggle" aria-pressed="${LS.on}">🎧 ${T("lsBtn")}${planHas("sub")?"":" 🔒"}</button>`:""}${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
 }
 function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
 function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi)); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
 function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
 function readStart(){
   if(!window.speechSynthesis) return toast(T("readNoTts"));
+  if(window.LS&&(LS.playing||LS.wait)) lsHalt();
   try{ speechSynthesis.cancel(); }catch(e){}
   READ.chunks=readChunks(); READ.i=0; READ.on=true; READ.paused=false; READ.art=S.articleId||(currentArticle()||{}).id; READ.lastPi=-1;
   const rec=readRec();
@@ -5159,7 +5250,7 @@ function readNext(){
 function readPause(){ READ.paused=true; if(READ.audio){ READ.audio.pause(); return readUi(); } READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} readUi(); }
 function readResume(){ READ.paused=false; if(READ.audio){ READ.audio.play().catch(()=>{}); return readUi(); } readNext(); readUi(); }
 function readStop(){ READ.on=false; READ.paused=false; READ.tok++; if(READ.audio){ try{ READ.audio.pause(); }catch(e){} READ.audio=null; } try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
-function readStopIfLeft(){ if(READ.on&&(S.view!=="read"||(S.articleId&&S.articleId!==READ.art))) readStop(); }
+function readStopIfLeft(){ if(READ.on&&(S.view!=="read"||(S.articleId&&S.articleId!==READ.art))) readStop(); if(window.LS&&(LS.playing||LS.wait)&&S.view!=="read") lsHalt(); if(window.LS&&S.articleId!==LS.art){ LS.art=S.articleId; LS.i=0; LS.a=LS.b=null; } }
 Object.assign(STR.zh,{srsTicketMin:"複習 {n} 個字以上才能拿彩券", srsTicket:"完成一次拿 1 張彩券 · 今天還能拿 {n} 張", srsTitle:"間隔複習", srsDueN:"今天有 {n} 個字該複習了", srsClear:"今天的字都複習完了 ✅ 明天有 {n} 個", srsStart:"複習 {n} 個字", srsNone:"今天沒有要複習的字 🎉", srsHow:"答對的字會隔越來越久才再出現（1→2→4→7→15→30 天），答錯就從明天重新開始。", srsBoxes:"每個格子代表多久複習一次", srsAfter:"還有 {n} 個字今天到期 · 明天預計 {t} 個", readAloud:"朗讀全文", readPause:"暫停", readResume:"繼續", readStop:"停止", readSpeed:"{r}x", readNoTts:"這個瀏覽器不支援朗讀"});
 Object.assign(STR.en,{srsTicketMin:"Review at least {n} words to earn a lucky ticket", srsTicket:"Finish a review for 1 lucky ticket · {n} left today", srsTitle:"Spaced review", srsDueN:"{n} words are due for review today", srsClear:"All caught up today ✅ {n} due tomorrow", srsStart:"Review {n}", srsNone:"Nothing to review today 🎉", srsHow:"Words you get right come back after longer and longer gaps (1→2→4→7→15→30 days); miss one and it starts again tomorrow.", srsBoxes:"Each box is how often a word comes back", srsAfter:"{n} words still due today · about {t} tomorrow", readAloud:"Read aloud", readPause:"Pause", readResume:"Resume", readStop:"Stop", readSpeed:"{r}x", readNoTts:"This browser can't read text aloud"});
 Object.assign(STR.hi,{srsTicketMin:"लकी टिकट के लिए कम से कम {n} शब्द दोहराएँ", srsTicket:"एक दोहराई पूरी करें, 1 लकी टिकट पाएँ · आज {n} बाकी", srsTitle:"अंतराल दोहराव", srsDueN:"आज {n} शब्द दोहराने हैं", srsClear:"आज के सब शब्द हो गए ✅ कल {n}", srsStart:"{n} दोहराएँ", srsNone:"आज दोहराने को कुछ नहीं 🎉", srsHow:"सही जवाब वाले शब्द लंबे अंतराल पर लौटते हैं (1→2→4→7→15→30 दिन); गलत होने पर कल फिर से।", srsBoxes:"हर खाना बताता है शब्द कितने दिन में लौटेगा", srsAfter:"आज अभी {n} बाकी · कल लगभग {t}", readAloud:"ज़ोर से पढ़ें", readPause:"रोकें", readResume:"जारी रखें", readStop:"बंद", readSpeed:"{r}x", readNoTts:"यह ब्राउज़र पढ़कर नहीं सुना सकता"});
@@ -5282,7 +5373,7 @@ function glowCss(socks, body){
   const f=(k)=>els.map((e,i)=>`drop-shadow(0 0 ${Math.round(B[top]*k*(i?1.6:1))}px rgba(${GLOW_RGB[e]},${Math.min(1,(A[top]+extra)*(i?.8:1)).toFixed(2)}))`).join(" ");
   return ` style="--glow:${f(1)};--glow2:${f(1.6)}" data-gt="${top}"`;
 }
-function charArt(gen, pose, w, armor, cls, glow){
+function charArt(gen, pose, w, armor, cls, glow, cos){
   const out=outfitKey(gen,armor); let act=pose==="attack"?heroAct(w):pose;
   if(pose==="idle"&&w){ const v="idle-"+(KIND_IDLE[WKIND[w.el][w.tier]]||"hold"); if(HERO_FILES.has(`${gen}-${out}-${v}`)) act=v; }
   const key=HERO_FILES.has(`${gen}-${out}-${act}`)?`${gen}-${out}-${act}`:`${gen}-cloth-${act}`;
@@ -5294,11 +5385,11 @@ function charArt(gen, pose, w, armor, cls, glow){
       ?`<image href="assets/art/${pk}.webp" x="${-gx*L*100}" y="${-gy*L*100}" width="${L*100}" height="${L*100}"/>`
       :`<g transform="rotate(45) scale(.5) translate(-32 -54)">${weaponGlyph(w)}</g>`}</g></svg>`; }
   const ag=armor&&glowCss(glow?glow.as:socketsOf(armor.id),true);
-  return `<div class="${cls||"hero-svg"} hero-art ha-${pose}"><div class="ha-in"><img src="assets/art/hero/${key}.webp" alt="" draggable="false"${ag?` class="ha-glow"${ag}`:""}${glow&&glow.lazy?' loading="lazy"':""}>${wpn}</div></div>`;
+  return `<div class="${cls||"hero-svg"} hero-art ha-${pose}"><div class="ha-in">${cos?cos.under:""}<img src="assets/art/hero/${key}.webp" alt="" draggable="false"${ag?` class="ha-glow"${ag}`:""}${glow&&glow.lazy?' loading="lazy"':""}>${wpn}${cos?cos.over:""}</div></div>`;
 }
 function heroArt(pose, gOverride){
   const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
-  return charArt(gen, pose, !gOverride&&g.weapon&&ITEMS[g.weapon], !gOverride&&g.armor&&ITEMS[g.armor]);
+  return charArt(gen, pose, !gOverride&&g.weapon&&ITEMS[g.weapon], !gOverride&&g.armor&&ITEMS[g.armor], null, null, gOverride?null:cosLayers(cosWorn()));
 }
 /* the ally uses its own drawings once they exist (assets/art/hero/a-*); until then the old vector figure */
 function allyArt(al, pose){
@@ -5955,7 +6046,7 @@ Object.assign(STR.zh,{"scPlat": "白金卡", "scDiamond": "鑽石卡"});Object.a
 const VAULT_ITEMS=[
   {id:"charm3", kind:"charm", n:3, ic:"🪄", pay:"charm3", price:"€1", test:true}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
   {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"€5", test:true}, {id:"plus", kind:"sub", n:1, ic:"👑", pay:"plus", price:"€12", test:true, plus:true},
-  {id:"plusgift", kind:"gift", n:1, ic:"🎁"}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
+  {id:"plusgift", kind:"gift", n:1, ic:"🎁"}, {id:"subgift", kind:"gift", n:1, ic:"🎁"}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
 const GIFT={feeShard:[10,20,40,80], feeGem:[40,80,160,320], feeCharm:60, minFee:20, maxEach:20};
 function giftFee(it){ let f=0; for(const [k,n] of Object.entries(it.gems||{})) f+=n*GIFT.feeGem[+k.split("-")[1]]; for(const [k,n] of Object.entries(it.shards||{})) f+=n*GIFT.feeShard[+k.split("-")[1]]; f+=(it.charms||0)*GIFT.feeCharm; return f?Math.max(GIFT.minFee,f):0; }
 function giftCount(it){ return Object.values(it.gems||{}).reduce((a,b)=>a+b,0)+Object.values(it.shards||{}).reduce((a,b)=>a+b,0)+(it.charms||0); }
@@ -6047,15 +6138,15 @@ const PAY_RET=(()=>{ try{ const q=new URLSearchParams(location.search), p=q.get(
 async function payTesterCheck(u){ try{ if(!u||!u.email||!u.emailVerified||!crypto.subtle) return;
   const h=[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(u.email.toLowerCase())))].map(b=>b.toString(16).padStart(2,"0")).join("");
   if(PAY_TESTERS.has(h)&&!S.payTester){ S.payTester=true; render(); } }catch(e){} }
-function payGrant(g,sign){ const G=game(); if(!g) return; if(g.charms) G.charms=Math.max(0,(G.charms||0)+sign*g.charms); if(g.renames) G.renames=Math.max(0,(G.renames||0)+sign*g.renames); if(g.gold) G.gold=Math.max(0,(G.gold||0)+sign*g.gold); }
+function payGrant(g,sign){ const G=game(); if(!g) return; if(g.style) G.style=Math.max(0,(G.style||0)+sign*g.style); if(g.charms) G.charms=Math.max(0,(G.charms||0)+sign*g.charms); if(g.renames) G.renames=Math.max(0,(G.renames||0)+sign*g.renames); if(g.gold) G.gold=Math.max(0,(G.gold||0)+sign*g.gold); }
 const vaultPic=(id,cls)=>PICS.has("icon-vault-"+id)?`<img src="assets/art/icon-vault-${id}.webp" alt="" class="${cls||"vt-pic"}">`:null;
-const vaultName=v=>v.kind==="gift"?T("plusGiftT"):v.kind==="sub"?T(v.plus?"plusT":"subT"):v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
+const vaultName=v=>v.kind==="gift"?T(v.id==="subgift"?"subGiftT":"plusGiftT"):v.kind==="sub"?T(v.plus?"plusT":"subT"):v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
 // "purchase complete" pop-up: what was bought, with pictures
 function payShowDone(x){
   const v=VAULT_ITEMS.find(i=>i.id===x.item); let el=document.getElementById("payDone");
   if(!el){ el=document.createElement("div"); el.id="payDone"; document.body.appendChild(el); el.dataset.items="[]"; }
   const items=JSON.parse(el.dataset.items||"[]"); items.push(x.item); el.dataset.items=JSON.stringify(items);
-  const rows=items.map(id=>{ const it=VAULT_ITEMS.find(i=>i.id===id); if(!it) return ""; return `<div class="pd-item">${vaultPic(it.id,"pd-pic")||`<span class="pd-ic">${it.ic}</span>`}<b>${esc(vaultName(it))}</b>${it.kind==="gift"?`<small class="muted">${T("plusGiftIn")}</small>`:""}</div>`; }).join("");
+  const rows=items.map(id=>{ const it=VAULT_ITEMS.find(i=>i.id===id); if(!it) return ""; return `<div class="pd-item">${vaultPic(it.id,"pd-pic")||`<span class="pd-ic">${it.ic}</span>`}<b>${esc(vaultName(it))}</b>${it.kind==="gift"?`<small class="muted">${T(it.id==="subgift"?"subGiftIn":"plusGiftIn")}</small>`:""}</div>`; }).join("");
   const hero=PICS.has("icon-vault-thanks")?`<img src="assets/art/icon-vault-thanks.webp" alt="" class="pd-hero">`:`<div class="pd-hero pd-hero-ph">${VAULT_ICON}</div>`;
   el.innerHTML=`<div class="scrim pd-scrim" data-act="paydoneclose"></div><div class="pd-card" role="dialog" aria-modal="true">${hero}<h2>${T("payDoneT")}</h2><p class="sm-t muted">${T("payDoneSub")}</p><div class="pd-list">${rows}</div><button class="btn" data-act="paydoneclose">${T("payDoneOk")}</button></div>`; }
 document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="paydoneclose"]'); if(!t) return; e.stopPropagation(); const el=document.getElementById("payDone"); if(el) el.remove(); render(); }, true);
@@ -6099,13 +6190,13 @@ if(PAY_RET&&PAY_RET.pay==="cancel") setTimeout(()=>toast(T("payCancel")),1500);
 /* membership card: monthly subscription, badge grows with the months (supporters/{uid}: sub, months, tier; written by the server) */
 const SUB_STEPS=[[1,1],[3,2],[6,3],[12,4],[24,5]];
 function subCard(buyable){
-  const me=CLOUD.user&&SUP[CLOUD.user.uid], on=!!(me&&me.sub), m=on?me.months||1:0, cur=on?me.tier:0, next=SUB_STEPS.find(([n])=>n>m);
+  const me=mySup(), on=!!(me&&me.sub), m=on?me.months||1:0, cur=on?me.tier:0, next=SUB_STEPS.find(([n])=>n>m);
   const plan=(v)=>{ const pl=!!v.plus, mine=on&&!!me.plus===pl;
     const ladder=SUB_STEPS.map(([n,t])=>`<div class="sub-step${mine&&cur>=t?" got":""}${mine&&cur===t?" now":""}">${sbArt(t,30,pl)}<b>${esc(sbName(t,pl))}</b><span class="muted">${T("subM",{n})}</span></div>`).join("");
     const btn=mine?`<span class="sub-mine">✓ ${T("subYours")}</span>`:on?"":buyable(v)?`<button class="btn${pl?"":" ghost"}" data-act="vtbuy" data-k="${v.id}" ${PAY_BUSY?"disabled":""}>${T("subBtn",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
       :!CLOUD.user?"":`<span class="vt-soon">${T("vaultSoon")}</span>`;
     return `<div class="sub-plan${pl?" plus":""}${mine?" mine":""}"><div class="sub-head"><b>${v.ic} ${T(pl?"plusT":"subT")}</b>${v.price?`<span class="sub-price">${T("subPer",{p:v.price})}</span>`:""}</div>
-      <ul class="sub-perks"><li>${T(pl?"plusPerk1":"subPerk1")}</li>${pl?`<li>${T("plusPerk2")}</li>`:""}</ul><div class="sub-ladder">${ladder}</div>${btn}</div>`; };
+      <ul class="sub-perks">${(pl?["plusPerk0","plusPerk1","plusPerk2","plusPerk3"]:["subPerk1","subPerk2","subPerk3","subPerk4"]).map(k=>`<li>${T(k)}</li>`).join("")}</ul><div class="sub-ladder">${ladder}</div>${btn}</div>`; };
   const plans=VAULT_ITEMS.filter(i=>i.kind==="sub").map(plan).join("");
   const status=on?`<p class="sm-t"><b>${T("subNow",{n:m})}</b>${next?` · ${T("subNext",{n:next[0]-m,b:sbName(next[1],me.plus)})}`:""}</p><button class="btn ghost sm" data-act="subportal" ${PAY_BUSY?"disabled":""}>${T("subManage")}</button>`
     :!CLOUD.user?`<p class="muted sm-t">${T("payLogin")}</p>`:"";
@@ -6238,7 +6329,7 @@ function musicPlay(name){
   SND.track=name; SND.step=0; SND.next=SND.ctx.currentTime+0.1;
   const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(0.0001,now); g.exponentialRampToValueAtTime(musicLevel(), now+1.2);
   SND.timer=setInterval(musicSchedule, 80); musicSchedule(); }
-function musicForView(){ musicPlay(S.view==="battle"?"battle":"town"); musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
+function musicForView(){ musicPlay(S.view==="battle"?"battle":"town"); musicDuck(!!(READ.on&&!READ.paused)||!!(window.LS&&(LS.playing||LS.wait))||examOn()); }
 const musicLevel=()=>SND.duck?0.0001:(SND.track==="battle"?0.14:0.16);
 function musicDuck(on){ if(SND.duck===on) return; SND.duck=on; if(!SND.ctx||!SND.track) return;
   const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(Math.max(g.value,0.0001),now); g.exponentialRampToValueAtTime(musicLevel(), now+(on?0.35:1.5)); if(on) g.setValueAtTime(0, now+0.4); }
@@ -6348,6 +6439,235 @@ Object.assign(STR.hi,{"in5": "ये 5 अभियान पास और श�
 Object.assign(STR.es,{"in5": "¡Toma estos 5 pases y un equipo de principiante! Calienta con algunas bestias pequeñas en las Tierras salvajes y luego libera Dingle, la primera ciudad. ¡Crece del Lv 1 al Lv 50, derrota a Balor en Dublín y salva toda Irlanda!", "stGot": "¡Has recibido 5 pases y un equipo de principiante!"});
 Object.assign(STR.ja,{"in5": "この出撃券5枚と初心者装備をやろう！まずは荒野で小さな獣を相手に腕を慣らし、それから最初の町ディングルを取り戻すのじゃ。Lv 1 から Lv 50 まで強くなり、ダブリンのバロールを倒してアイルランドを救え！", "stGot": "出撃券5枚と初心者装備を手に入れた！"});
 Object.assign(STR.ko,{"in5": "이 출정권 5장과 초보자 장비를 받으렴! 먼저 야생에서 작은 짐승들로 몸을 풀고, 첫 번째 마을 딩글을 되찾으렴. Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "stGot": "출정권 5장과 초보자 장비를 받았어요!"});
+/* ================= plans: free / member (€5) / premium (€12). Developer mode can preview any plan. ================= */
+const PLAN_RANK={free:0,sub:1,plus:2};
+function myPlan(){ if(DEV&&DEV.plan) return DEV.plan; const me=CLOUD.user&&SUP[CLOUD.user.uid]; return me&&me.sub?(me.plus?"plus":"sub"):"free"; }
+const planHas=need=>PLAN_RANK[myPlan()]>=PLAN_RANK[need];
+// the supporter record the membership card reads; in developer preview a pretend one so every screen can be seen
+function mySup(){ if(DEV&&DEV.plan){ if(DEV.plan==="free") return null; const m=DEV.planM||3; let t=1; for(const [n,tt] of SUB_STEPS) if(m>=n) t=tt; return {tier:t, sub:true, plus:DEV.plan==="plus", months:m, n:game().nick||""}; }
+  return CLOUD.user&&SUP[CLOUD.user.uid]||null; }
+const planTag=need=>`<span class="plan-tag ${need}">${T(need==="plus"?"planPlus":"planSub")}</span>`;
+
+/* ================= 造型幣 style coins & cosmetics: looks, effects and sounds only, never stats ================= */
+const STYLE_EARN={day:3, week:5, weekDays:5, sub:300, plus:800};
+const STYLE_IC=`<svg class="sty-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#B98CFF" stroke="#6E44B0" stroke-width="1.6"/><circle cx="12" cy="12" r="7.2" fill="#D9B8FF"/><path d="M12 6.2l1.5 3.9 4.1.3-3.2 2.6 1 4L12 14.8l-3.4 2.2 1-4-3.2-2.6 4.1-.3z" fill="#fff"/></svg>`;
+const COSMETICS=[
+  {id:"f-leaf",    slot:"feet", price:90,  c1:"#5CCB6A", c2:"#E4FFB0"},
+  {id:"f-gold",    slot:"feet", price:180, c1:"#F5B72E", c2:"#FFF3B0"},
+  {id:"f-rainbow", slot:"feet", price:360, c1:"#FF7AB6", c2:"#7FE3FF", plus:true},
+  {id:"b-halo",    slot:"back", price:240, c1:"#FFD75E", c2:"#FFFFFF"},
+  {id:"b-rune",    slot:"back", price:360, c1:"#3FD9C0", c2:"#D4FFF5"},
+  {id:"b-wings",   slot:"back", price:600, c1:"#9FD8FF", c2:"#FFFFFF", plus:true},
+  {id:"n-fire",    slot:"neck", price:300, c1:"#FF6A2B", c2:"#FFD36B", fx:"fire"},
+  {id:"n-frost",   slot:"neck", price:300, c1:"#4FC3F7", c2:"#E6FBFF", fx:"frost"},
+  {id:"n-star",    slot:"neck", price:480, c1:"#FFD54A", c2:"#FFFFFF", fx:"star", plus:true},
+  {id:"s-chime",   slot:"sfx",  price:120},
+  {id:"s-taiko",   slot:"sfx",  price:120},
+  {id:"s-retro",   slot:"sfx",  price:120}];
+const COS_SLOTS=["feet","back","neck","sfx"];
+const cosOf=id=>COSMETICS.find(c=>c.id===id);
+const cosOwned=id=>(game().cosOwn||[]).includes(id);
+const cosStyleCss=c=>`--c1:${c.c1||"#fff"};--c2:${c.c2||"#fff"}`;
+function cosWorn(){ const w={...(game().cos||{})}; if(S.view==="adv"&&S.advTab==="style"&&S.cosTry) for(const [k,v] of Object.entries(S.cosTry)) w[k]=v; return w; }
+// small runes drawn as strokes (no font needed): the wheel spins behind the hero
+const RUNES=["M0-5V5M0-5L3.5-2","M0-5V5M0-1L3.5-4.5","M-2.5-5V5M-2.5-5L2.5 0L-2.5 5","M0-5V5M-3-2L3 2M3-2L-3 2","M-3-5L3 5M3-5L-3 5","M0-5V5M0 0L3.5 4"];
+function runeWheel(){ let g=""; for(let i=0;i<12;i++){ const a=i*30; g+=`<path transform="rotate(${a} 50 50) translate(50 9)" d="${RUNES[i%RUNES.length]}"/>`; } return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" class="rw-o"/><circle cx="50" cy="50" r="34" class="rw-i"/><g class="rw-g">${g}</g><path class="rw-k" d="M50 18L56 44L82 50L56 56L50 82L44 56L18 50L44 44Z"/></svg>`; }
+const WING=`<svg viewBox="0 0 60 80" aria-hidden="true"><path d="M58 30C40 4 14 0 2 6c10 6 14 12 16 18C8 24 3 30 2 36c9-1 15 1 19 5-8 4-11 10-12 16 10-4 20-5 29-1C42 46 52 38 58 30z"/><path class="wf" d="M56 31C42 16 26 10 12 10M54 33C40 26 26 26 14 30M52 36C42 36 32 40 24 48"/></svg>`;
+function cosLayers(w){
+  let under="", over="";
+  const f=w.feet&&cosOf(w.feet), b=w.back&&cosOf(w.back), n=w.neck&&cosOf(w.neck);
+  if(b) under+=`<span class="cos-back cb-${b.id}" style="${cosStyleCss(b)}">${b.id==="b-rune"?runeWheel():b.id==="b-wings"?`<i class="wg l">${WING}</i><i class="wg r">${WING}</i>`:`<i class="ring"></i><i class="ring r2"></i>`}</span>`;
+  if(f) under+=`<span class="cos-feet cf-${f.id}" style="${cosStyleCss(f)}"><i class="disc"><i class="spin"></i></i><b></b><b></b><b></b></span>`;
+  if(n) over+=`<span class="cos-neck cn-${n.fx}" style="${cosStyleCss(n)}"><i></i></span>`;
+  return {under,over};
+}
+// the burst a necklace adds on the monster when you hit it
+function cosBurst(){ const n=cosWorn().neck&&cosOf(cosWorn().neck); if(!n) return "";
+  let p=""; for(let i=0;i<10;i++) p+=`<i style="--a:${i*36}deg;--d:${(i%3)*40}ms"></i>`;
+  return `<span class="cos-burst cbx-${n.fx}" style="${cosStyleCss(n)}" aria-hidden="true"><b></b>${p}</span>`; }
+function cosSfxName(e){ const s=cosWorn().sfx; if(!s||!SFX[s+(e&&(e.crit||e.spell)?"C":"")]) return null; return s+(e&&(e.crit||e.spell)?"C":""); }
+// extra hit sounds for the sound packs
+Object.assign(SFX,{
+  "s-chime":t=>{ tone(SND.fx,t,1568,0.35,{type:"sine",v:0.22}); tone(SND.fx,t+0.01,2349,0.25,{type:"sine",v:0.1}); noise(SND.fx,t,0.04,{f:5000,v:0.12}); },
+  "s-chimeC":t=>{ [0,0.06,0.12].forEach((d,i)=>tone(SND.fx,t+d,[1568,1976,2637][i],0.4,{type:"sine",v:0.2})); },
+  "s-taiko":t=>{ tone(SND.fx,t,120,0.28,{type:"sine",to:55,v:0.6,a:0.002}); noise(SND.fx,t,0.06,{f:400,v:0.35}); },
+  "s-taikoC":t=>{ SFX["s-taiko"](t); SFX["s-taiko"](t+0.13); noise(SND.fx,t+0.13,0.05,{f:3000,v:0.18}); },
+  "s-retro":t=>{ tone(SND.fx,t,880,0.09,{type:"square",to:220,v:0.13}); },
+  "s-retroC":t=>{ tone(SND.fx,t,988,0.07,{type:"square",v:0.13}); tone(SND.fx,t+0.07,1319,0.22,{type:"square",v:0.13}); }});
+const monWeek=d=>{ const x=new Date(d+"T12:00:00"); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return x.toISOString().slice(0,10); };
+function weekStudyDays(d){ const wk=monWeek(d||today()); let n=0; for(const [k,v] of S.days) if(k.startsWith("day~")&&v.postDone&&monWeek(v.date)===wk) n++; return n; }
+// called when the third daily step is done: a few style coins for the day, a small bonus for a steady week
+function styleDaily(){ const g=game(), t=today(); if(g.styleDay===t) return null;
+  g.styleDay=t; let n=STYLE_EARN.day, bonus=0; const wk=monWeek(t);
+  if(g.styleWeek!==wk&&weekStudyDays(t)>=STYLE_EARN.weekDays){ g.styleWeek=wk; bonus=STYLE_EARN.week; }
+  g.style=(g.style||0)+n+bonus; g.styleGot={date:t,n,bonus}; saveGame(); return g.styleGot; }
+
+function cosPreviewIc(c){
+  if(c.slot==="sfx") return `<span class="cos-ic sfx">${({"s-chime":"🔔","s-taiko":"🥁","s-retro":"👾"})[c.id]}</span>`;
+  const L=cosLayers({[c.slot]:c.id});
+  return `<span class="cos-ic ${c.slot}" style="${cosStyleCss(c)}">${c.slot==="neck"?`<span class="cos-neck solo cn-${c.fx}" style="${cosStyleCss(c)}"><i></i></span>`:L.under}</span>`; }
+function viewStyle(){
+  const g=game(), slot=S.cosSlot||"feet", worn=cosWorn(), tryOn=S.cosTry||{}, plan=myPlan();
+  const anyTry=Object.keys(tryOn).some(k=>tryOn[k]&&tryOn[k]!==(g.cos||{})[k]);
+  const stage=`<div class="sty-stage"><div class="sty-fig${S.cosHit?" hitting":""}">${heroArt(S.cosHit?"attack":"idle")}</div><div class="sty-dummy">${S.cosHit?cosBurst():""}<span class="dm">🎯</span></div></div>`;
+  const items=COSMETICS.filter(c=>c.slot===slot).map(c=>{
+    const own=cosOwned(c.id), on=(g.cos||{})[slot]===c.id, trying=tryOn[slot]===c.id&&!on, lockPlus=c.plus&&!planHas("plus")&&!own;
+    const btns=[];
+    if(own) btns.push(on?`<button class="btn ghost sm" data-act="csoff" data-k="${slot}">${T("cosOff")}</button>`:`<button class="btn sm" data-act="cswear" data-k="${c.id}">${T("cosWear")}</button>`);
+    else { btns.push(`<button class="btn ghost sm" data-act="cstry" data-k="${c.id}">${trying?T("cosTryOff"):T(c.slot==="sfx"?"cosListen":"cosTry")}</button>`);
+      if(!lockPlus) btns.push(`<button class="btn sm" data-act="csbuy" data-k="${c.id}" ${(g.style||0)<c.price?"disabled":""}>${STYLE_IC} ${c.price}</button>`); }
+    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${c.plus?`<span class="plan-tag plus">${T("cosPlusOnly")}</span>`:""}<small class="muted">${T(c.id==="b-wings"?"cosD_wings":"cosD_"+c.slot)}</small>${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
+  const earn=[["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}],["styEarn3",{n:STYLE_EARN.sub}],["styEarn4",{n:STYLE_EARN.plus}]]
+    .map(([k,o],i)=>`<li class="${(i===2&&plan==="sub")||(i===3&&plan==="plus")?"mine":""}">${T(k,o)}</li>`).join("");
+  return `<section class="card sty-card">
+      ${stage}
+      <div class="sty-bal"><span>${STYLE_IC}<b>${(g.style||0).toLocaleString()}</b></span><small class="muted">${T("styHead")}</small></div>
+      <p class="muted sm-t" style="margin:0">${T("stySub")}</p>
+      ${anyTry?`<p class="sty-trying">👀 ${T("cosTrying")} <button class="btn ghost sm" data-act="cstryclr">${T("cosTryClr")}</button></p>`:""}
+      ${worn.neck||worn.sfx?`<button class="btn ghost sm" data-act="cstest">${T("cosTest")}</button>`:""}
+    </section>
+    <div class="seg cos-seg" role="group">${COS_SLOTS.map(k=>`<button data-act="csslot" data-k="${k}" aria-pressed="${slot===k}">${T("slot_"+k)}</button>`).join("")}</div>
+    <div class="cos-list">${items}</div>
+    <section class="card"><h3>${T("styEarnT")}</h3><ul class="sty-earn">${earn}</ul></section>`;
+}
+function cosTest(){ const e={who:"p"}; S.cosHit=true; const n=cosSfxName(e); sfx(n||"hit"); render(); clearTimeout(S.cosHitT); S.cosHitT=setTimeout(()=>{ S.cosHit=false; render(); },900); }
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^cs/.test(a)) return; e.stopPropagation();
+  const g=game(), k=t.dataset.k;
+  if(a==="csslot"){ S.cosSlot=k; return render(); }
+  if(a==="cstry"){ const c=cosOf(k); S.cosTry=S.cosTry||{}; if(S.cosTry[c.slot]===k){ delete S.cosTry[c.slot]; return render(); } S.cosTry[c.slot]=k; if(c.slot==="sfx"||c.slot==="neck") return cosTest(); return render(); }
+  if(a==="cstryclr"){ S.cosTry={}; return render(); }
+  if(a==="cstest") return cosTest();
+  if(a==="csbuy"){ const c=cosOf(k); if(!c||cosOwned(k)) return; if(c.plus&&!planHas("plus")) return toast(T("cosPlusOnly"));
+    if((g.style||0)<c.price) return toast(T("cosNoCoin",{n:c.price-(g.style||0)}));
+    g.style-=c.price; g.cosOwn=[...(g.cosOwn||[]),k]; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); sfx("prize"); toast(T("cosBought")); return render(); }
+  if(a==="cswear"){ const c=cosOf(k); if(!c||!cosOwned(k)) return; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); if(c.slot==="sfx"||c.slot==="neck") return cosTest(); return render(); }
+  if(a==="csoff"){ g.cos={...(g.cos||{})}; delete g.cos[k]; saveGame(); return render(); }
+});
+
+/* ================= daily "what I learned today" card (free for everyone) ================= */
+function wordOf(k){ return S.words.get(k)||[...S.words.values()].find(w=>(w.word||"").toLowerCase()===k||(w.forms||[]).includes(k)); }
+function doneCard(d){
+  const g=game(), lu=(d.lookedUp||[]).map(wordOf).filter(Boolean);
+  const fixed=[...S.words.values()].filter(w=>w.lastTested===today()&&(w.wrong||0)>0&&(w.correct||0)>0&&w.firstSeen<today()).slice(0,6);
+  const got=g.styleGot&&g.styleGot.date===today()?g.styleGot:null;
+  const chips=lu.slice(0,12).map(w=>`<span class="dc-w"><b>${esc(w.word||w.key)}</b>${mean(w)?`<small>${esc(String(mean(w)).slice(0,24))}</small>`:""}</span>`).join("");
+  return `<section class="card done-card">
+    <div class="dc-top">${PICS.has("scene-party")?`<img src="assets/art/scene-party.webp" alt="" class="dc-art">`:""}<div><div class="eyebrow">${T("dcEyebrow")}</div><h3>${T("dcTitle")}</h3></div></div>
+    <div class="dc-sec"><div class="muted sm-t">${T("dcWords")}</div>${chips?`<div class="dc-ws">${chips}</div>`:`<p class="sm-t">${T("dcNoWords")}</p>`}</div>
+    ${fixed.length?`<p class="sm-t dc-fixed">💪 ${T("dcFixed",{w:fixed.map(w=>esc(w.word||w.key)).join(", ")})}</p>`:""}
+    <div class="dc-stats">${d.preTotal?`<span>📝 ${T("dcPre",{s:d.preScore,t:d.preTotal})}</span>`:""}${d.postTotal?`<span>✅ ${T("dcPost",{s:d.postScore,t:d.postTotal})}</span>`:""}<span>📅 ${T("dcWeek",{n:weekStudyDays()})}</span></div>
+    ${got?`<div class="dc-rw">${STYLE_IC}<b>${T("dcStyle",{n:got.n})}</b>${got.bonus?`<span class="dc-bonus">${T("dcBonus",{d:STYLE_EARN.weekDays,n:got.bonus})}</span>`:""}</div>`:""}
+    <p class="dc-bye">${T("dcBye")}</p></section>`;
+}
+
+/* ================= weekly review (members) ================= */
+function weekStats(endOffset){
+  const end=new Date(today()+"T12:00:00"); end.setDate(end.getDate()-endOffset); const from=new Date(end); from.setDate(from.getDate()-6);
+  const f=from.toISOString().slice(0,10), e=end.toISOString().slice(0,10), inR=x=>x&&x>=f&&x<=e;
+  let days=0, arts=0, sc=0, tot=0;
+  for(const [k,v] of S.days){ if(!k.startsWith("day~")||!inR(v.date)) continue; const ds=(v.preDone?1:0)+(v.read?1:0)+(v.postDone?1:0)+Object.keys(v.postBy||{}).length; if(ds) days++;
+    arts+=(v.read?1:0)+Object.keys(v.postBy||{}).length;
+    if(v.preTotal){ sc+=v.preScore||0; tot+=v.preTotal; } if(v.postTotal){ sc+=v.postScore||0; tot+=v.postTotal; }
+    for(const p of Object.values(v.postBy||{})) if(p&&p.total){ sc+=p.score||0; tot+=p.total; } }
+  const W=[...S.words.values()].filter(w=>!w.filler);
+  return {f,e,days,arts,acc:tot?Math.round(sc/tot*100):null,newW:W.filter(w=>inR(w.firstSeen)).length,
+    weak:W.filter(w=>inR(w.lastTested)&&(w.wrong||0)>(w.correct||0)).sort((a,b)=>(b.wrong||0)-(a.wrong||0)).slice(0,6)}; }
+function weekCard(){
+  if(!planHas("sub")) return `<section class="card wk-card locked"><div class="wk-h"><b>📈 ${T("wkT")}</b>${planTag("sub")}</div><p class="muted sm-t" style="margin:0">${T("wkTeaser")}</p></section>`;
+  const a=weekStats(0), b=weekStats(7), kept=[...S.words.values()].filter(w=>!w.filler&&(w.srsB||0)>=3).length, due=srsDueList().length;
+  const cmp=(x,y)=>y==null||x==null?"":x>y?`<i class="up">▲</i>`:x<y?`<i class="dn">▼</i>`:"";
+  const box=(l,v,pv,suf)=>`<div class="wk-box"><b>${v==null?"—":v+(suf||"")}${cmp(v,pv)}</b><span>${T(l)}</span><small class="muted">${T("wkVs",{n:pv==null?"—":pv+(suf||"")})}</small></div>`;
+  const tips=[]; if(a.days<4) tips.push(T("wkTipDays",{n:4})); if(a.acc!=null&&a.acc<70) tips.push(T("wkTipAcc")); if(due>=10) tips.push(T("wkTipDue",{n:due}));
+  if(a.newW<15) tips.push(T("wkTipNew")); tips.push(T("wkTipListen")); if(tips.length<3) tips.push(T("wkTipGood"));
+  return `<section class="card wk-card"><div class="wk-h"><b>📈 ${T("wkT")}</b><span class="muted sm-t">${esc(fmtDate(a.f))} – ${esc(fmtDate(a.e))}</span></div>
+    ${a.days||a.newW?`<div class="wk-grid">${box("wkDays",a.days,b.days)}${box("wkArts",a.arts,b.arts)}${box("wkNew",a.newW,b.newW)}${box("wkAcc",a.acc,b.acc,"%")}</div>
+    <p class="sm-t">🧠 ${T("wkKept",{n:kept})}</p>
+    ${a.weak.length?`<div class="muted sm-t">${T("wkWeak")}</div><div class="dc-ws">${a.weak.map(w=>`<span class="dc-w no"><b>${esc(w.word||w.key)}</b><small>${esc(String(mean(w)||"").slice(0,20))}</small></span>`).join("")}</div>`:""}`
+    :`<p class="muted sm-t">${T("wkNone")}</p>`}
+    <div class="muted sm-t" style="margin-top:6px">${T("wkTipsT")}</div><ol class="wk-tips">${tips.slice(0,3).map(x=>`<li>${x}</li>`).join("")}</ol></section>`;
+}
+
+/* ================= 精聽 close-listening tool (members): one sentence at a time, A–B loop, shadowing ================= */
+var LS={on:false,i:0,a:null,b:null,shadow:false,playing:false,wait:0,tok:0,audio:null};
+function lsChunks(){ if(!READ.chunks.length||READ.art!==(S.articleId||(currentArticle()||{}).id)){ READ.chunks=readChunks(); READ.art=S.articleId||(currentArticle()||{}).id; } return READ.chunks; }
+function lsInner(){
+  if(!LS.on) return "";
+  if(!planHas("sub")) return `<div class="ls-panel locked"><b>🎧 ${T("lsT")}</b> ${planTag("sub")}<p class="sm-t" style="margin:4px 0 0">${T("lsWhat")}</p><p class="muted sm-t" style="margin:4px 0 0">${T("lsLocked")}</p></div>`;
+  const C=lsChunks(), n=C.length, i=Math.min(LS.i,n-1), c=C[i]||{t:""};
+  const ab=LS.a!=null&&LS.b!=null;
+  return `<div class="ls-panel"><div class="ls-h"><b>🎧 ${T("lsT")}</b><span class="muted sm-t">${T("lsN",{i:i+1,n})}</span></div>
+    <div class="ls-cur${LS.playing?" on":""}">${esc(c.t)}</div>
+    ${LS.wait?`<div class="ls-wait"><b>🗣 ${T("lsYour")}</b><i style="animation-duration:${LS.wait}ms"></i></div>`:""}
+    <div class="ls-ctl"><button class="btn ghost sm" data-act="lsprev">${T("lsPrev")}</button><button class="btn sm" data-act="lsrep">${LS.playing||LS.wait?T("lsStop"):T("lsRep")}</button><button class="btn ghost sm" data-act="lsnext">${T("lsNext")}</button></div>
+    <div class="ls-ctl"><button class="btn ghost sm" data-act="lsplay">${T("lsPlay")}</button><button class="btn ghost sm${LS.shadow?" on":""}" data-act="lsshadow" aria-pressed="${LS.shadow}">${T("lsShadow")}</button></div>
+    <div class="ls-ctl ab"><button class="btn ghost sm${LS.a!=null?" on":""}" data-act="lsa">A${LS.a!=null?" · "+(LS.a+1):""}</button><button class="btn ghost sm${LS.b!=null?" on":""}" data-act="lsb">B${LS.b!=null?" · "+(LS.b+1):""}</button>${ab?`<span class="sm-t">🔁 ${T("lsAB",{a:LS.a+1,b:LS.b+1})}</span><button class="btn ghost sm" data-act="lsabx">✕</button>`:`<span class="muted sm-t">${T("lsABhint")}</span>`}</div>
+    <p class="muted sm-t" style="margin:0">${T("lsWhat")}</p></div>`;
+}
+function lsUi(){ const el=document.getElementById("lsBox"); if(el) el.innerHTML=lsInner(); const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(LS.playing||!!LS.wait||!!(READ.on&&!READ.paused)||examOn()); }
+function lsMark(){ const c=lsChunks()[LS.i]; if(c) readMark(c.pi); }
+function lsHalt(){ LS.tok++; LS.playing=false; LS.wait=0; clearTimeout(LS.wt); if(LS.audio){ try{ LS.audio.pause(); }catch(e){} } try{ speechSynthesis.cancel(); }catch(e){} }
+// play sentence i once, then call done(ms it took)
+function lsSay(i, done){
+  const C=lsChunks(), c=C[i]; if(!c) return done(0); const tok=LS.tok, t0=Date.now(), rec=readRec();
+  LS.playing=true; lsMark(); lsUi();
+  const fin=()=>{ if(tok!==LS.tok) return; LS.playing=false; done(Date.now()-t0); };
+  if(rec&&rec.t&&rec.t.length===C.length){
+    let a=LS.audio; if(!a||a.dataset.u!==rec.url){ a=new Audio(rec.url); a.preload="auto"; a.dataset.u=rec.url; LS.audio=a; }
+    a.playbackRate=READ.rate; const st=rec.t[i], en=i+1<rec.t.length?rec.t[i+1]:Infinity;
+    a.ontimeupdate=()=>{ if(tok!==LS.tok) return; if(a.currentTime>=en-0.04){ a.pause(); fin(); } }; a.onended=fin;
+    const go=()=>{ try{ a.currentTime=st; }catch(e){} a.play().catch(()=>ttsSay()); };
+    if(a.readyState>=1) go(); else { a.onloadedmetadata=go; a.onerror=()=>ttsSay(); }
+    return; }
+  ttsSay();
+  function ttsSay(){ if(!window.speechSynthesis) return fin(); const u=new SpeechSynthesisUtterance(c.t), v=ieVoices().F; if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB"; u.rate=READ.rate; u.onend=fin; u.onerror=fin; try{ speechSynthesis.cancel(); }catch(e){} speechSynthesis.speak(u); }
+}
+// mode: "one" = this sentence only; "run" = keep going (and loop A–B when set)
+function lsRun(mode){
+  if(READ.on) readStop(); lsHalt(); LS.mode=mode; const tok=LS.tok;
+  const step=()=>lsSay(LS.i, ms=>{ if(tok!==LS.tok) return;
+    const next=()=>{ if(tok!==LS.tok) return; LS.wait=0;
+      if(mode==="one"){ lsUi(); return; }
+      const n=lsChunks().length, ab=LS.a!=null&&LS.b!=null;
+      if(ab&&LS.i>=LS.b) LS.i=LS.a; else if(LS.i+1<n) LS.i++; else { lsUi(); return; }
+      step(); };
+    if(LS.shadow){ LS.wait=Math.max(1600,Math.round(ms*1.15)+500); lsUi(); LS.wt=setTimeout(next,LS.wait); } else next(); });
+  step();
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^ls/.test(a)) return; e.stopPropagation();
+  const n=lsChunks().length;
+  if(a==="lstoggle"){ LS.on=!LS.on; if(!LS.on) lsHalt(); else { if(READ.on){ LS.i=Math.max(0,READ.i); readStop(); } } return lsUi(); }
+  if(!planHas("sub")) return;
+  if(a==="lsrep"){ if(LS.playing||LS.wait){ lsHalt(); return lsUi(); } return lsRun(LS.a!=null&&LS.b!=null?"run":"one"); }
+  if(a==="lsprev"){ LS.i=Math.max(0,LS.i-1); return lsRun("one"); }
+  if(a==="lsnext"){ LS.i=Math.min(n-1,LS.i+1); return lsRun("one"); }
+  if(a==="lsplay") return lsRun("run");
+  if(a==="lsshadow"){ LS.shadow=!LS.shadow; return lsUi(); }
+  if(a==="lsa"){ LS.a=LS.i; if(LS.b!=null&&LS.b<LS.a) LS.b=null; return lsUi(); }
+  if(a==="lsb"){ if(LS.a==null) LS.a=0; LS.b=Math.max(LS.a,LS.i); return lsUi(); }
+  if(a==="lsabx"){ LS.a=LS.b=null; return lsUi(); }
+});
+
+// in close-listening mode, tapping a word in the story also moves to its sentence
+document.addEventListener("click",e=>{ if(!LS.on||!planHas("sub")) return; const w=e.target.closest("#article [data-w]"); if(!w) return;
+  const p=w.closest("p"), pi=[...document.querySelectorAll("#article p")].indexOf(p); if(pi<0) return;
+  const r=document.createRange(); r.setStart(p,0); r.setEndBefore(w); const off=r.toString().length, txt=p.textContent, C=lsChunks(); let pos=0, idx=-1;
+  for(let i=0;i<C.length;i++){ if(C[i].pi!==pi) continue; const at=txt.indexOf(C[i].t,pos); if(at<0) continue; if(at<=off) idx=i; pos=at+C[i].t.length; }
+  if(idx>=0){ lsHalt(); LS.i=idx; lsUi(); lsMark(); } }, true);
+
+Object.assign(STR.zh,{"tabStyle": "造型屋", "styHead": "造型幣", "stySub": "造型只改變外觀、特效和聲音，不會影響戰力。", "styEarnT": "怎麼得到造型幣", "styEarn1": "每天完成三個步驟 +{n}", "styEarn2": "一週學滿 {d} 天，再 +{n}", "styEarn3": "🌟 一般會員：每月 +{n}", "styEarn4": "👑 高級會員：每月 +{n}", "slot_feet": "腳底旋光", "slot_back": "背飾", "slot_neck": "項鍊", "slot_sfx": "打擊音效", "cos_f-leaf": "嫩葉旋光", "cos_f-gold": "金色旋光", "cos_f-rainbow": "彩虹旋光", "cos_b-halo": "旋轉光環", "cos_b-rune": "凱爾特符文輪", "cos_b-wings": "光之翼", "cos_n-fire": "火焰項鍊", "cos_n-frost": "冰霜項鍊", "cos_n-star": "星光項鍊", "cos_s-chime": "鈴鐺打擊", "cos_s-taiko": "太鼓打擊", "cos_s-retro": "復古像素音", "cosD_feet": "腳下轉著一圈光", "cosD_back": "在背後慢慢旋轉發光", "cosD_neck": "出手時在怪物身上爆出特效", "cosD_sfx": "你出手時換成這組聲音", "cosTry": "試穿", "cosListen": "試聽", "cosTryOff": "取消試穿", "cosTryClr": "全部脫下", "cosTrying": "試穿中（還沒買）", "cosWear": "穿上", "cosOff": "卸下", "cosWorn": "穿著中", "cosOwn": "已擁有", "cosPlusOnly": "👑 高級會員限定", "cosNoCoin": "造型幣不夠，還差 {n}", "cosBought": "買到了！已經幫你穿上", "cosTest": "⚔️ 試打一下", "dStyle": "+500 造型幣", "devPlanT": "👀 預覽不同方案看到的畫面", "planFree": "免費", "planSub": "🌟 一般會員", "planPlus": "👑 高級會員", "devPlanNote": "只改變這台裝置上看到的畫面，不會真的訂閱或扣款。", "devPlanM": "假裝訂閱了 {n} 個月", "dcEyebrow": "今天完成了 🎉", "dcTitle": "今天你學到了這些", "dcWords": "今天查過的字", "dcNoWords": "今天一個字都沒查，全部看得懂！", "dcFixed": "以前錯過、今天答對了：{w}", "dcPre": "讀前測驗 {s}/{t}", "dcPost": "讀後測驗 {s}/{t}", "dcWeek": "這週第 {n} 天", "dcStyle": "+{n} 造型幣", "dcBonus": "一週學滿 {d} 天 +{n}", "dcBye": "明天見！明天早上會有新的新聞。", "wkT": "每週學習回顧", "wkTeaser": "每週看看讀了多少、記住了多少、哪些字常錯，還有下週的三個建議。", "wkDays": "學習天數", "wkArts": "讀完文章", "wkNew": "新單字", "wkAcc": "測驗答對率", "wkVs": "上週 {n}", "wkKept": "已經記得牢的字（隔 4 天以上還答對）：{n} 個", "wkWeak": "這週常錯的字", "wkTipsT": "下週建議", "wkNone": "這週還沒有紀錄，讀一篇就會開始統計。", "wkTipDays": "試著一週讀 {n} 天，每天 10 分鐘就夠。", "wkTipAcc": "答對率低於 70%：讀文章前先把到期的字複習一次。", "wkTipDue": "有 {n} 個字到期了，先清掉間隔複習。", "wkTipNew": "遇到不懂的字就點一下，一週查 15 個字以上最有感。", "wkTipListen": "用 🎧 精聽工具跟讀 3 句，練習把文章說出口。", "wkTipGood": "保持得很好！可以挑戰 IELTS / TOEIC 練習。", "lsBtn": "精聽", "lsT": "精聽工具", "lsWhat": "一句一句聽清楚：重播單句、A–B 段落循環、跟讀（聽完一句，換你照著說一次）。點文章裡的字也會跳到那一句。", "lsPrev": "⏮ 上一句", "lsRep": "🔁 重播這句", "lsStop": "⏹ 停", "lsNext": "下一句 ⏭", "lsPlay": "▶ 從這句一直播", "lsShadow": "🗣 跟讀模式", "lsYour": "換你說！", "lsN": "第 {i} / {n} 句", "lsAB": "循環第 {a}–{b} 句", "lsABhint": "在一句按 A，到另一句按 B，就會一直循環這段", "lsLocked": "精聽工具是 🌟 一般會員的功能。", "subPerk2": "每月 300 造型幣", "subPerk3": "🎧 精聽工具：單句重播、A–B 循環、跟讀", "subPerk4": "📈 每週學習回顧", "plusPerk0": "一般會員的全部功能", "plusPerk2": "每月 800 造型幣", "plusPerk3": "高級限定造型：彩虹旋光、光之翼、星光項鍊", "subGiftT": "會員每月造型幣", "subGiftIn": "造型幣 ×300", "plusGiftT": "高級會員每月造型幣", "plusGiftIn": "造型幣 ×800"});
+Object.assign(STR.en,{"tabStyle": "Style", "styHead": "Style coins", "stySub": "Style changes looks, effects and sounds only — never your stats.", "styEarnT": "How to earn style coins", "styEarn1": "Finish the 3 daily steps: +{n}", "styEarn2": "Study {d} days in a week: +{n} more", "styEarn3": "🌟 Members: +{n} every month", "styEarn4": "👑 Premium: +{n} every month", "slot_feet": "Foot aura", "slot_back": "Back piece", "slot_neck": "Necklace", "slot_sfx": "Hit sounds", "cos_f-leaf": "Leaf whirl", "cos_f-gold": "Golden whirl", "cos_f-rainbow": "Rainbow whirl", "cos_b-halo": "Spinning halo", "cos_b-rune": "Celtic rune wheel", "cos_b-wings": "Wings of light", "cos_n-fire": "Flame necklace", "cos_n-frost": "Frost necklace", "cos_n-star": "Starlight necklace", "cos_s-chime": "Chime hits", "cos_s-taiko": "Taiko hits", "cos_s-retro": "Retro 8-bit hits", "cosD_feet": "A ring of light turns under your feet", "cosD_back": "Glows and turns slowly behind you", "cosD_neck": "Bursts with an effect on the monster when you strike", "cosD_sfx": "Your hits use these sounds", "cosTry": "Try on", "cosListen": "Listen", "cosTryOff": "Stop trying", "cosTryClr": "Take all off", "cosTrying": "Trying on (not bought)", "cosWear": "Wear", "cosOff": "Remove", "cosWorn": "Wearing", "cosOwn": "Owned", "cosPlusOnly": "👑 Premium only", "cosNoCoin": "Not enough style coins — {n} short", "cosBought": "Bought and put on!", "cosTest": "⚔️ Test a strike", "dStyle": "+500 style coins", "devPlanT": "👀 Preview what each plan sees", "planFree": "Free", "planSub": "🌟 Member", "planPlus": "👑 Premium", "devPlanNote": "Only changes what this device shows. Nothing is subscribed or charged.", "devPlanM": "Pretend {n} months subscribed", "dcEyebrow": "All done today 🎉", "dcTitle": "Here's what you learned today", "dcWords": "Words you looked up", "dcNoWords": "No lookups today — you understood it all!", "dcFixed": "Missed before, right today: {w}", "dcPre": "Before-reading quiz {s}/{t}", "dcPost": "After-reading quiz {s}/{t}", "dcWeek": "Day {n} this week", "dcStyle": "+{n} style coins", "dcBonus": "{d} days this week +{n}", "dcBye": "See you tomorrow — a new story arrives in the morning.", "wkT": "Weekly review", "wkTeaser": "Each week: how much you read, how much stuck, which words keep tripping you up, and three tips for next week.", "wkDays": "Study days", "wkArts": "Articles finished", "wkNew": "New words", "wkAcc": "Quiz accuracy", "wkVs": "last week {n}", "wkKept": "Words that have stuck (right after 4+ days): {n}", "wkWeak": "Tricky words this week", "wkTipsT": "For next week", "wkNone": "Nothing yet this week — read one story and the numbers start.", "wkTipDays": "Try reading {n} days a week; 10 minutes a day is enough.", "wkTipAcc": "Accuracy under 70%: review your due words before reading.", "wkTipDue": "{n} words are due — clear your spaced review first.", "wkTipNew": "Tap every word you're unsure of; 15+ lookups a week is where it starts to show.", "wkTipListen": "Shadow 3 sentences with 🎧 close listening to practise saying them.", "wkTipGood": "Going strong! Try an IELTS / TOEIC practice set.", "lsBtn": "Listen", "lsT": "Close listening", "lsWhat": "Hear it one sentence at a time: replay a sentence, loop a section A–B, or shadow (listen, then say it yourself). Tapping a word in the story jumps to its sentence.", "lsPrev": "⏮ Back", "lsRep": "🔁 Replay", "lsStop": "⏹ Stop", "lsNext": "Next ⏭", "lsPlay": "▶ Play on from here", "lsShadow": "🗣 Shadowing", "lsYour": "Your turn — say it!", "lsN": "Sentence {i} / {n}", "lsAB": "Looping sentences {a}–{b}", "lsABhint": "Press A on one sentence and B on another to loop that part", "lsLocked": "Close listening is a 🌟 member feature.", "subPerk2": "300 style coins every month", "subPerk3": "🎧 Close listening: replay, A–B loop, shadowing", "subPerk4": "📈 Weekly review", "plusPerk0": "Everything in Member", "plusPerk2": "800 style coins every month", "plusPerk3": "Premium-only styles: rainbow whirl, wings of light, starlight necklace", "subGiftT": "Member monthly style coins", "subGiftIn": "Style coins ×300", "plusGiftT": "Premium monthly style coins", "plusGiftIn": "Style coins ×800"});
+Object.assign(STR.hi,{"tabStyle": "स्टाइल", "styHead": "स्टाइल सिक्के", "stySub": "स्टाइल सिर्फ़ रूप, इफ़ेक्ट और आवाज़ बदलता है — ताक़त नहीं।", "styEarnT": "स्टाइल सिक्के कैसे मिलें", "styEarn1": "रोज़ के 3 कदम पूरे करें: +{n}", "styEarn2": "हफ़्ते में {d} दिन पढ़ें: और +{n}", "styEarn3": "🌟 सदस्य: हर महीने +{n}", "styEarn4": "👑 प्रीमियम: हर महीने +{n}", "slot_feet": "पैरों की आभा", "slot_back": "पीठ सजावट", "slot_neck": "हार", "slot_sfx": "वार की आवाज़", "cos_f-leaf": "पत्ती चक्र", "cos_f-gold": "सुनहरा चक्र", "cos_f-rainbow": "इंद्रधनुष चक्र", "cos_b-halo": "घूमता प्रभामंडल", "cos_b-rune": "केल्टिक रून चक्र", "cos_b-wings": "रोशनी के पंख", "cos_n-fire": "ज्वाला हार", "cos_n-frost": "हिम हार", "cos_n-star": "तारों का हार", "cos_s-chime": "घंटी वार", "cos_s-taiko": "ताइको वार", "cos_s-retro": "रेट्रो 8-बिट", "cosD_feet": "पैरों के नीचे रोशनी का घूमता घेरा", "cosD_back": "पीछे धीरे-धीरे घूमती चमक", "cosD_neck": "वार करते ही राक्षस पर इफ़ेक्ट फूटता है", "cosD_sfx": "आपके वार ये आवाज़ें करते हैं", "cosTry": "पहनकर देखें", "cosListen": "सुनें", "cosTryOff": "हटाएँ", "cosTryClr": "सब उतारें", "cosTrying": "आज़मा रहे हैं (खरीदा नहीं)", "cosWear": "पहनें", "cosOff": "उतारें", "cosWorn": "पहना है", "cosOwn": "आपका है", "cosPlusOnly": "👑 सिर्फ़ प्रीमियम", "cosNoCoin": "स्टाइल सिक्के कम हैं — {n} और चाहिए", "cosBought": "खरीदा और पहना दिया!", "cosTest": "⚔️ एक वार आज़माएँ", "dStyle": "+500 स्टाइल सिक्के", "devPlanT": "👀 हर प्लान की स्क्रीन देखें", "planFree": "मुफ़्त", "planSub": "🌟 सदस्य", "planPlus": "👑 प्रीमियम", "devPlanNote": "सिर्फ़ इस डिवाइस पर दिखने वाली स्क्रीन बदलती है। कोई सदस्यता या भुगतान नहीं।", "devPlanM": "मानें {n} महीने से सदस्य", "dcEyebrow": "आज का सब पूरा 🎉", "dcTitle": "आज आपने यह सीखा", "dcWords": "आज देखे गए शब्द", "dcNoWords": "आज कोई शब्द नहीं देखा — सब समझ आया!", "dcFixed": "पहले गलत, आज सही: {w}", "dcPre": "पढ़ने से पहले {s}/{t}", "dcPost": "पढ़ने के बाद {s}/{t}", "dcWeek": "इस हफ़्ते का दिन {n}", "dcStyle": "+{n} स्टाइल सिक्के", "dcBonus": "हफ़्ते में {d} दिन +{n}", "dcBye": "कल मिलते हैं — सुबह नई ख़बर आएगी।", "wkT": "साप्ताहिक समीक्षा", "wkTeaser": "हर हफ़्ते: कितना पढ़ा, कितना याद रहा, कौन से शब्द बार-बार गलत, और अगले हफ़्ते के तीन सुझाव।", "wkDays": "पढ़ाई के दिन", "wkArts": "पूरे लेख", "wkNew": "नए शब्द", "wkAcc": "क्विज़ सटीकता", "wkVs": "पिछला हफ़्ता {n}", "wkKept": "पक्के याद शब्द (4+ दिन बाद भी सही): {n}", "wkWeak": "इस हफ़्ते के कठिन शब्द", "wkTipsT": "अगले हफ़्ते के लिए", "wkNone": "इस हफ़्ते अभी कुछ नहीं — एक लेख पढ़ें, गिनती शुरू हो जाएगी।", "wkTipDays": "हफ़्ते में {n} दिन पढ़ने की कोशिश करें; रोज़ 10 मिनट काफ़ी हैं।", "wkTipAcc": "सटीकता 70% से कम: पढ़ने से पहले बकाया शब्द दोहराएँ।", "wkTipDue": "{n} शब्द बकाया हैं — पहले दोहराई पूरी करें।", "wkTipNew": "अनिश्चित हर शब्द पर टैप करें; हफ़्ते में 15+ से फ़र्क दिखता है।", "wkTipListen": "🎧 ध्यान से सुनें टूल से 3 वाक्य दोहराकर बोलें।", "wkTipGood": "बहुत बढ़िया! IELTS / TOEIC अभ्यास आज़माएँ।", "lsBtn": "सुनें", "lsT": "ध्यान से सुनें", "lsWhat": "एक-एक वाक्य सुनें: वाक्य दोहराएँ, A–B हिस्सा लूप करें, या शैडोइंग (सुनें, फिर खुद बोलें)। लेख में किसी शब्द पर टैप करने से उसका वाक्य चुना जाता है।", "lsPrev": "⏮ पिछला", "lsRep": "🔁 फिर से", "lsStop": "⏹ रुकें", "lsNext": "अगला ⏭", "lsPlay": "▶ यहाँ से चलाएँ", "lsShadow": "🗣 शैडोइंग", "lsYour": "अब आप बोलें!", "lsN": "वाक्य {i} / {n}", "lsAB": "वाक्य {a}–{b} लूप में", "lsABhint": "एक वाक्य पर A, दूसरे पर B दबाएँ — वह हिस्सा लूप होगा", "lsLocked": "ध्यान से सुनें 🌟 सदस्य सुविधा है।", "subPerk2": "हर महीने 300 स्टाइल सिक्के", "subPerk3": "🎧 ध्यान से सुनें: दोहराएँ, A–B लूप, शैडोइंग", "subPerk4": "📈 साप्ताहिक समीक्षा", "plusPerk0": "सदस्य की सारी सुविधाएँ", "plusPerk2": "हर महीने 800 स्टाइल सिक्के", "plusPerk3": "सिर्फ़ प्रीमियम स्टाइल: इंद्रधनुष चक्र, रोशनी के पंख, तारों का हार", "subGiftT": "सदस्य के मासिक स्टाइल सिक्के", "subGiftIn": "स्टाइल सिक्के ×300", "plusGiftT": "प्रीमियम के मासिक स्टाइल सिक्के", "plusGiftIn": "स्टाइल सिक्के ×800"});
+Object.assign(STR.es,{"tabStyle": "Estilo", "styHead": "Monedas de estilo", "stySub": "El estilo cambia solo el aspecto, los efectos y los sonidos, nunca tus estadísticas.", "styEarnT": "Cómo ganar monedas de estilo", "styEarn1": "Completa los 3 pasos del día: +{n}", "styEarn2": "Estudia {d} días en una semana: +{n} más", "styEarn3": "🌟 Miembros: +{n} cada mes", "styEarn4": "👑 Prémium: +{n} cada mes", "slot_feet": "Aura de pies", "slot_back": "Adorno de espalda", "slot_neck": "Collar", "slot_sfx": "Sonidos de golpe", "cos_f-leaf": "Remolino de hojas", "cos_f-gold": "Remolino dorado", "cos_f-rainbow": "Remolino arcoíris", "cos_b-halo": "Halo giratorio", "cos_b-rune": "Rueda de runas celta", "cos_b-wings": "Alas de luz", "cos_n-fire": "Collar de llamas", "cos_n-frost": "Collar de escarcha", "cos_n-star": "Collar estelar", "cos_s-chime": "Golpes de campana", "cos_s-taiko": "Golpes de taiko", "cos_s-retro": "Retro 8 bits", "cosD_feet": "Un anillo de luz gira bajo tus pies", "cosD_back": "Brilla y gira despacio a tu espalda", "cosD_neck": "Estalla un efecto sobre el monstruo al golpear", "cosD_sfx": "Tus golpes suenan así", "cosTry": "Probar", "cosListen": "Escuchar", "cosTryOff": "Quitar prueba", "cosTryClr": "Quitar todo", "cosTrying": "Probándote (sin comprar)", "cosWear": "Ponerse", "cosOff": "Quitar", "cosWorn": "Puesto", "cosOwn": "Tuyo", "cosPlusOnly": "👑 Solo prémium", "cosNoCoin": "Faltan {n} monedas de estilo", "cosBought": "¡Comprado y puesto!", "cosTest": "⚔️ Probar un golpe", "dStyle": "+500 monedas de estilo", "devPlanT": "👀 Ver la pantalla de cada plan", "planFree": "Gratis", "planSub": "🌟 Miembro", "planPlus": "👑 Prémium", "devPlanNote": "Solo cambia lo que ves en este dispositivo. No se suscribe ni se cobra nada.", "devPlanM": "Simular {n} meses suscrito", "dcEyebrow": "Todo hecho hoy 🎉", "dcTitle": "Esto es lo que aprendiste hoy", "dcWords": "Palabras que buscaste", "dcNoWords": "Hoy no buscaste ninguna: ¡lo entendiste todo!", "dcFixed": "Fallaste antes, acertaste hoy: {w}", "dcPre": "Prueba previa {s}/{t}", "dcPost": "Prueba posterior {s}/{t}", "dcWeek": "Día {n} de esta semana", "dcStyle": "+{n} monedas de estilo", "dcBonus": "{d} días esta semana +{n}", "dcBye": "¡Hasta mañana! Por la mañana llega una noticia nueva.", "wkT": "Resumen semanal", "wkTeaser": "Cada semana: cuánto leíste, cuánto recuerdas, qué palabras se te resisten y tres consejos para la próxima.", "wkDays": "Días de estudio", "wkArts": "Artículos leídos", "wkNew": "Palabras nuevas", "wkAcc": "Aciertos en pruebas", "wkVs": "semana pasada {n}", "wkKept": "Palabras ya asentadas (bien tras 4+ días): {n}", "wkWeak": "Palabras difíciles esta semana", "wkTipsT": "Para la próxima semana", "wkNone": "Aún nada esta semana: lee una noticia y empiezan los datos.", "wkTipDays": "Intenta leer {n} días a la semana; 10 minutos al día bastan.", "wkTipAcc": "Aciertos por debajo del 70 %: repasa las palabras pendientes antes de leer.", "wkTipDue": "Tienes {n} palabras pendientes: termina el repaso espaciado primero.", "wkTipNew": "Toca cada palabra que dudes; con 15+ por semana se nota.", "wkTipListen": "Repite 3 frases con 🎧 escucha atenta para practicar decirlas.", "wkTipGood": "¡Vas muy bien! Prueba una práctica de IELTS / TOEIC.", "lsBtn": "Escuchar", "lsT": "Escucha atenta", "lsWhat": "Escucha frase a frase: repite una frase, repite en bucle un tramo A–B o haz shadowing (escucha y luego dila tú). Tocar una palabra del texto salta a su frase.", "lsPrev": "⏮ Anterior", "lsRep": "🔁 Repetir", "lsStop": "⏹ Parar", "lsNext": "Siguiente ⏭", "lsPlay": "▶ Seguir desde aquí", "lsShadow": "🗣 Shadowing", "lsYour": "¡Te toca, dilo tú!", "lsN": "Frase {i} / {n}", "lsAB": "Bucle de frases {a}–{b}", "lsABhint": "Pulsa A en una frase y B en otra para repetir ese tramo", "lsLocked": "La escucha atenta es para 🌟 miembros.", "subPerk2": "300 monedas de estilo al mes", "subPerk3": "🎧 Escucha atenta: repetir, bucle A–B, shadowing", "subPerk4": "📈 Resumen semanal", "plusPerk0": "Todo lo de Miembro", "plusPerk2": "800 monedas de estilo al mes", "plusPerk3": "Estilos solo prémium: remolino arcoíris, alas de luz, collar estelar", "subGiftT": "Monedas de estilo mensuales (miembro)", "subGiftIn": "Monedas de estilo ×300", "plusGiftT": "Monedas de estilo mensuales (prémium)", "plusGiftIn": "Monedas de estilo ×800"});
+Object.assign(STR.ja,{"tabStyle": "おしゃれ", "styHead": "スタイルコイン", "stySub": "見た目・エフェクト・音だけが変わります。強さは変わりません。", "styEarnT": "スタイルコインのもらい方", "styEarn1": "毎日の3ステップを完了：+{n}", "styEarn2": "1週間に{d}日学習：さらに +{n}", "styEarn3": "🌟 メンバー：毎月 +{n}", "styEarn4": "👑 プレミアム：毎月 +{n}", "slot_feet": "足もとオーラ", "slot_back": "背中アクセ", "slot_neck": "ネックレス", "slot_sfx": "攻撃サウンド", "cos_f-leaf": "若葉のオーラ", "cos_f-gold": "黄金のオーラ", "cos_f-rainbow": "虹のオーラ", "cos_b-halo": "回る光輪", "cos_b-rune": "ケルトのルーン輪", "cos_b-wings": "光の翼", "cos_n-fire": "炎のネックレス", "cos_n-frost": "氷のネックレス", "cos_n-star": "星のネックレス", "cos_s-chime": "鈴の音", "cos_s-taiko": "太鼓の音", "cos_s-retro": "レトロ8ビット", "cosD_feet": "足もとで光の輪が回る", "cosD_back": "背中でゆっくり回って光る", "cosD_neck": "攻撃するとモンスターにエフェクトが弾ける", "cosD_sfx": "攻撃の音がこのセットに変わる", "cosTry": "試着", "cosListen": "試聴", "cosTryOff": "試着をやめる", "cosTryClr": "全部はずす", "cosTrying": "試着中（未購入）", "cosWear": "つける", "cosOff": "はずす", "cosWorn": "装着中", "cosOwn": "所持", "cosPlusOnly": "👑 プレミアム限定", "cosNoCoin": "スタイルコインがあと {n} 足りません", "cosBought": "購入して装着しました！", "cosTest": "⚔️ ためし打ち", "dStyle": "+500 スタイルコイン", "devPlanT": "👀 プランごとの画面をプレビュー", "planFree": "無料", "planSub": "🌟 メンバー", "planPlus": "👑 プレミアム", "devPlanNote": "この端末の表示だけが変わります。実際の登録や課金はありません。", "devPlanM": "{n}か月登録した想定", "dcEyebrow": "今日は全部できた 🎉", "dcTitle": "今日学んだこと", "dcWords": "今日調べた単語", "dcNoWords": "今日は調べずに全部わかりました！", "dcFixed": "前に間違えて今日正解：{w}", "dcPre": "読む前テスト {s}/{t}", "dcPost": "読んだ後テスト {s}/{t}", "dcWeek": "今週{n}日目", "dcStyle": "+{n} スタイルコイン", "dcBonus": "今週{d}日 +{n}", "dcBye": "また明日！明日の朝、新しいニュースが届きます。", "wkT": "週間ふりかえり", "wkTeaser": "毎週、読んだ量・覚えた量・よく間違える単語と、来週への3つのアドバイスを表示します。", "wkDays": "学習日数", "wkArts": "読んだ記事", "wkNew": "新しい単語", "wkAcc": "テスト正答率", "wkVs": "先週 {n}", "wkKept": "定着した単語（4日以上あけても正解）：{n}", "wkWeak": "今週よく間違えた単語", "wkTipsT": "来週へのアドバイス", "wkNone": "今週の記録はまだありません。1本読むと集計が始まります。", "wkTipDays": "週{n}日を目指しましょう。1日10分で十分です。", "wkTipAcc": "正答率70%未満：読む前に期限の単語を復習しましょう。", "wkTipDue": "期限の単語が{n}個あります。まず間隔復習を。", "wkTipNew": "わからない単語は全部タップ。週15個以上で効果を実感できます。", "wkTipListen": "🎧 精聴ツールで3文シャドーイングして、口に出す練習を。", "wkTipGood": "順調です！IELTS / TOEIC 練習にも挑戦しましょう。", "lsBtn": "精聴", "lsT": "精聴ツール", "lsWhat": "1文ずつしっかり聞く：1文リピート、A–B区間ループ、シャドーイング（聞いたあと自分で言う）。本文の単語をタップするとその文に移動します。", "lsPrev": "⏮ 前の文", "lsRep": "🔁 もう一度", "lsStop": "⏹ 止める", "lsNext": "次の文 ⏭", "lsPlay": "▶ ここから再生", "lsShadow": "🗣 シャドーイング", "lsYour": "あなたの番！", "lsN": "{i} / {n} 文目", "lsAB": "{a}–{b}文目をループ中", "lsABhint": "ある文でA、別の文でBを押すとその区間をループします", "lsLocked": "精聴ツールは 🌟 メンバー機能です。", "subPerk2": "毎月300スタイルコイン", "subPerk3": "🎧 精聴ツール：リピート・A–Bループ・シャドーイング", "subPerk4": "📈 週間ふりかえり", "plusPerk0": "メンバーの全機能", "plusPerk2": "毎月800スタイルコイン", "plusPerk3": "プレミアム限定スタイル：虹のオーラ・光の翼・星のネックレス", "subGiftT": "メンバー月間スタイルコイン", "subGiftIn": "スタイルコイン ×300", "plusGiftT": "プレミアム月間スタイルコイン", "plusGiftIn": "スタイルコイン ×800"});
+Object.assign(STR.ko,{"tabStyle": "꾸미기", "styHead": "스타일 코인", "stySub": "외형·효과·소리만 바뀌고 능력치는 바뀌지 않아요.", "styEarnT": "스타일 코인 얻는 법", "styEarn1": "매일 3단계 완료: +{n}", "styEarn2": "한 주에 {d}일 공부: 추가 +{n}", "styEarn3": "🌟 멤버: 매달 +{n}", "styEarn4": "👑 프리미엄: 매달 +{n}", "slot_feet": "발밑 오라", "slot_back": "등 장식", "slot_neck": "목걸이", "slot_sfx": "타격음", "cos_f-leaf": "새싹 오라", "cos_f-gold": "황금 오라", "cos_f-rainbow": "무지개 오라", "cos_b-halo": "회전 후광", "cos_b-rune": "켈트 룬 바퀴", "cos_b-wings": "빛의 날개", "cos_n-fire": "불꽃 목걸이", "cos_n-frost": "서리 목걸이", "cos_n-star": "별빛 목걸이", "cos_s-chime": "방울 타격", "cos_s-taiko": "북 타격", "cos_s-retro": "레트로 8비트", "cosD_feet": "발밑에서 빛의 고리가 돌아요", "cosD_back": "등 뒤에서 천천히 돌며 빛나요", "cosD_neck": "공격하면 몬스터에 효과가 터져요", "cosD_sfx": "공격할 때 이 소리로 바뀌어요", "cosTry": "입어 보기", "cosListen": "들어 보기", "cosTryOff": "입어 보기 취소", "cosTryClr": "모두 벗기", "cosTrying": "입어 보는 중(구매 전)", "cosWear": "착용", "cosOff": "해제", "cosWorn": "착용 중", "cosOwn": "보유", "cosPlusOnly": "👑 프리미엄 전용", "cosNoCoin": "스타일 코인이 {n} 부족해요", "cosBought": "구매하고 착용했어요!", "cosTest": "⚔️ 시험 타격", "dStyle": "+500 스타일 코인", "devPlanT": "👀 플랜별 화면 미리 보기", "planFree": "무료", "planSub": "🌟 멤버", "planPlus": "👑 프리미엄", "devPlanNote": "이 기기에서 보이는 화면만 바뀌어요. 실제 구독이나 결제는 없어요.", "devPlanM": "{n}개월 구독했다고 가정", "dcEyebrow": "오늘 다 했어요 🎉", "dcTitle": "오늘 배운 것", "dcWords": "오늘 찾아본 단어", "dcNoWords": "오늘은 하나도 안 찾았어요. 다 이해했네요!", "dcFixed": "전에 틀렸는데 오늘 맞힘: {w}", "dcPre": "읽기 전 퀴즈 {s}/{t}", "dcPost": "읽은 후 퀴즈 {s}/{t}", "dcWeek": "이번 주 {n}일째", "dcStyle": "+{n} 스타일 코인", "dcBonus": "이번 주 {d}일 +{n}", "dcBye": "내일 만나요! 아침에 새 뉴스가 와요.", "wkT": "주간 돌아보기", "wkTeaser": "매주 얼마나 읽고 얼마나 기억했는지, 자주 틀리는 단어와 다음 주를 위한 세 가지 팁을 보여 줘요.", "wkDays": "공부한 날", "wkArts": "다 읽은 기사", "wkNew": "새 단어", "wkAcc": "퀴즈 정답률", "wkVs": "지난주 {n}", "wkKept": "확실히 외운 단어(4일 이상 지나도 정답): {n}개", "wkWeak": "이번 주 자주 틀린 단어", "wkTipsT": "다음 주 팁", "wkNone": "이번 주 기록이 아직 없어요. 한 편 읽으면 집계가 시작돼요.", "wkTipDays": "한 주에 {n}일 읽어 보세요. 하루 10분이면 충분해요.", "wkTipAcc": "정답률 70% 미만: 읽기 전에 복습할 단어부터 보세요.", "wkTipDue": "복습할 단어가 {n}개 있어요. 간격 복습부터 끝내요.", "wkTipNew": "모르는 단어는 다 눌러 보세요. 주 15개 이상이면 효과가 느껴져요.", "wkTipListen": "🎧 정밀 듣기로 3문장 섀도잉하며 말해 보세요.", "wkTipGood": "아주 잘하고 있어요! IELTS / TOEIC 연습도 도전해 보세요.", "lsBtn": "정밀 듣기", "lsT": "정밀 듣기", "lsWhat": "한 문장씩 또렷하게: 문장 다시 듣기, A–B 구간 반복, 섀도잉(듣고 나서 직접 말하기). 본문 단어를 누르면 그 문장으로 이동해요.", "lsPrev": "⏮ 이전", "lsRep": "🔁 다시 듣기", "lsStop": "⏹ 멈춤", "lsNext": "다음 ⏭", "lsPlay": "▶ 여기서부터 재생", "lsShadow": "🗣 섀도잉", "lsYour": "이제 말해 보세요!", "lsN": "{i} / {n} 문장", "lsAB": "{a}–{b} 문장 반복 중", "lsABhint": "한 문장에서 A, 다른 문장에서 B를 누르면 그 구간을 반복해요", "lsLocked": "정밀 듣기는 🌟 멤버 기능이에요.", "subPerk2": "매달 스타일 코인 300", "subPerk3": "🎧 정밀 듣기: 다시 듣기, A–B 반복, 섀도잉", "subPerk4": "📈 주간 돌아보기", "plusPerk0": "멤버 기능 전부", "plusPerk2": "매달 스타일 코인 800", "plusPerk3": "프리미엄 전용 스타일: 무지개 오라, 빛의 날개, 별빛 목걸이", "subGiftT": "멤버 월간 스타일 코인", "subGiftIn": "스타일 코인 ×300", "plusGiftT": "프리미엄 월간 스타일 코인", "plusGiftIn": "스타일 코인 ×800"});
+Object.assign(STR.zh,{"cosD_wings":"在背後輕輕拍動發光"});
+Object.assign(STR.en,{"cosD_wings":"Glows and gently beats behind you"});
+Object.assign(STR.hi,{"cosD_wings":"पीछे धीरे-धीरे फड़फड़ाते चमकते पंख"});
+Object.assign(STR.es,{"cosD_wings":"Brillan y aletean suavemente a tu espalda"});
+Object.assign(STR.ja,{"cosD_wings":"背中でやさしく羽ばたいて光る"});
+Object.assign(STR.ko,{"cosD_wings":"등 뒤에서 살랑살랑 날갯짓하며 빛나요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
@@ -6369,6 +6689,7 @@ render();
   else { onbMaybe(); cloudInit(); }
   await loadArticles();
   quizRestore();
+  setTimeout(waLoad,1500);
 })();
 </script>
 </body>

@@ -35,11 +35,12 @@ const ORIGINS = ["https://binbindaily.com", "https://www.binbindaily.com", "http
 const CATALOG = {
   charm3: { price: "price_1URwQO8z3lVUqS5jPxa6225l", grant: { charms: 3 }, test: true },
   // monthly memberships: a supporter badge that gets finer the longer you stay (monthly recurring Stripe prices).
-  // plus = premium: radiant badges and a gift of items every paid month (PLUS_GIFT)
+  // plus = premium: radiant badges and more style coins every paid month (PLUS_GIFT vs SUB_GIFT)
   sub: { price: "price_1USDPd8z3lVUqS5jraN2B4s7", grant: {}, mode: "subscription", plan: "sub", test: true },
   plus: { price: "price_1USC5g8z3lVUqS5jVO8jvv5J", grant: {}, mode: "subscription", plan: "plus", test: true },
 };
-const PLUS_GIFT = { charms: 3, gold: 5000 };
+// monthly gift = style coins only (looks, effects, sounds): no gold or battle items, so paying never buys strength
+const SUB_GIFT = { style: 300 }, PLUS_GIFT = { style: 800 };
 const planOfPrice = id => Object.values(CATALOG).find(c => c.mode === "subscription" && c.price && c.price === id)?.plan || null;
 // months subscribed → badge tier (same five badges as the old supporter badges)
 const SUB_TIERS = [[24, 5], [12, 4], [6, 3], [3, 2], [1, 1]];
@@ -133,8 +134,8 @@ async function subPaid(inv) {
     const pref = db.doc("supporters/" + uid), p = await tx.get(pref), pd = p.exists ? p.data() : {};
     const manual = pd.manual ?? (pd.sub ? 0 : pd.tier || 0);
     const end = inv.lines?.data?.[0]?.period?.end || null;
-    if (plan === "plus") // the premium monthly gift is handed out like a purchase (the game claims it once)
-      tx.set(db.doc("purchases/" + inv.id), { uid, item: "plusgift", grant: PLUS_GIFT, status: "paid", claimed: false, revoked: false,
+    // the monthly style-coin gift is handed out like a purchase (the game claims it once)
+    tx.set(db.doc("purchases/" + inv.id), { uid, item: plan === "plus" ? "plusgift" : "subgift", grant: plan === "plus" ? PLUS_GIFT : SUB_GIFT, status: "paid", claimed: false, revoked: false,
         pi: inv.payment_intent || null, amount: 0, currency: inv.currency || null, test: !inv.livemode, paidAt: FieldValue.serverTimestamp() });
     tx.set(sref, { uid, plan, status: "active", months, invoices: [...seen, inv.id].slice(-40), periodEnd: end, customer: inv.customer || d.customer || null, test: !inv.livemode }, { merge: true });
     tx.set(pref, { tier: Math.max(subTier(months), manual), manual, sub: true, plus: plan === "plus", months, n: sd.metadata?.nick || pd.n || "", at: Date.now() }, { merge: true });

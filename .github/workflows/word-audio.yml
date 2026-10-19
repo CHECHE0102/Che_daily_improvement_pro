@@ -1,0 +1,56 @@
+name: Word pronunciation audio
+on:
+  push:
+    branches: [main]
+    paths: ['tools/make_word_audio.py', '.github/workflows/word-audio.yml']
+  schedule:
+    - cron: '55 7 * * *'   # after the daily articles and their news audio
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: word-audio
+  cancel-in-progress: false
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install "edge-tts>=6.1,<8"
+      - name: Check out the "words" branch (files are only added, so history grows by new words only)
+        run: |
+          url="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          if git ls-remote --exit-code --heads "$url" words >/dev/null 2>&1; then git clone -q --depth 1 --branch words "$url" wa;
+          else mkdir wa && cd wa && git init -q -b words && git remote add origin "$url"; fi
+      - run: python tools/make_word_audio.py wa
+      - name: Publish new recordings
+        id: pub
+        run: |
+          cd wa
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then git commit -q -m "Word audio $(date -u +%F)"; git push -q origin HEAD:words; fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Update word-audio.json on main
+        run: |
+          python - <<'PY'
+          import json
+          m = json.load(open("wa/manifest.json"))
+          json.dump({"repo": "${{ github.repository }}", "sha": "${{ steps.pub.outputs.sha }}", "voice": m["voice"], "w": ",".join(m["w"])},
+                    open("word-audio.json", "w"), separators=(",", ":"))
+          PY
+          rm -rf wa
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git add word-audio.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -q -m "Update word audio manifest"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1
+      - name: Summary
+        run: echo "::notice::$(python -c "import json;m=json.load(open('word-audio.json'));print(len(m['w'].split(',')),'words recorded')")"
