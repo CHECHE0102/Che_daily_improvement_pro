@@ -732,7 +732,7 @@ body.maint-lock{overflow:hidden}
 .set-fold[open]>summary::after{transform:rotate(-90deg)}
 .set-fold>summary .fold-v{margin-left:auto;color:var(--accent);font-weight:700;font-size:14px;text-align:right}
 .set-fold[open]>summary{margin-bottom:10px}
-.flag-row{display:flex;flex-direction:column;gap:6px;margin-top:6px}.flag-now{font-size:18px}
+.nick-show{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 0}.nick-name{font-size:22px;font-weight:800;overflow-wrap:anywhere}.flag-row{display:flex;flex-direction:column;gap:6px;margin-top:6px}.flag-now{font-size:18px}
 .rk-flag{margin-right:5px;font-size:1.05em}
 .hunt{display:flex;flex-direction:column;gap:8px}
 .mon.wild{display:flex;align-items:center;gap:10px;text-align:left}.mon.wild .it-main{flex:1;min-width:0}
@@ -944,13 +944,8 @@ body.vp-lock{touch-action:pan-x pan-y}
 .cos-feet b{position:absolute;left:50%;bottom:50%;width:6%;aspect-ratio:1;border-radius:50%;background:var(--c2);box-shadow:0 0 6px var(--c1);transform:scaleY(3.3);opacity:0;animation:cosrise 2.4s ease-out infinite}
 .cos-feet b:nth-of-type(1){left:22%}.cos-feet b:nth-of-type(2){left:62%;animation-delay:.8s}.cos-feet b:nth-of-type(3){left:80%;animation-delay:1.6s}
 .hero-art .cos-neck{position:absolute;left:48%;top:55%;width:8.5%;aspect-ratio:1;transform:translate(-50%,-50%) rotate(45deg);pointer-events:none;z-index:2}
-.cos-neck i{position:absolute;inset:0;border-radius:3px;background:linear-gradient(135deg,var(--c2),var(--c1));box-shadow:0 0 8px 3px var(--c1),0 0 2px 1px #fff;animation:cospulse 1.8s ease-in-out infinite}
-.cos-neck.cn-star i{border-radius:50%}.ha-attack .cos-neck,.ha-hurt .cos-neck{display:none}
+.ha-attack .cos-neck,.ha-hurt .cos-neck{display:none}
 .cos-burst{position:absolute;left:50%;top:48%;width:0;height:0;z-index:9;pointer-events:none}
-.cos-burst b{position:absolute;left:-55px;top:-55px;width:110px;height:110px;border-radius:50%;border:4px solid var(--c1);box-shadow:0 0 14px var(--c1),inset 0 0 12px var(--c2);animation:cosring .6s ease-out forwards}
-.cos-burst i{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,var(--c2),var(--c1) 60%,transparent 70%);transform:rotate(var(--a)) translateY(0);animation:cosfly .65s ease-out var(--d) forwards}
-.cbx-frost i{border-radius:2px;width:6px;height:16px;left:-3px;top:-8px;background:linear-gradient(var(--c2),var(--c1))}
-.cbx-star i{background:none;width:16px;height:16px;left:-8px;top:-8px}.cbx-star i::before{content:"✦";position:absolute;inset:0;color:var(--c1);font-size:16px;line-height:16px;text-shadow:0 0 6px var(--c2)}
 @keyframes cosspin{to{transform:rotate(360deg)}}
 @keyframes cospulse{50%{opacity:.6;filter:brightness(1.35)}}
 @keyframes cosrise{0%{opacity:0;transform:scaleY(3.3) translateY(0)}20%{opacity:1}100%{opacity:0;transform:scaleY(3.3) translateY(-60%)}}
@@ -972,7 +967,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .cos-ic .cos-back{position:absolute;inset:4px;width:auto;transform:none;left:4px;top:4px}.cos-ic .cos-feet{position:absolute;left:4px;right:4px;bottom:4px;width:auto;height:50px;transform:scaleY(.42);transform-origin:50% 100%}
 .cos-ic .cos-back.cb-b-wings{inset:6px 0;width:auto}
 .cos-ic.sfx{font-size:28px;background:color-mix(in srgb,#B98CFF 18%,var(--card,#fff))}
-.cos-neck.solo{position:static;display:block;width:20px;height:20px;transform:rotate(45deg)}.cos-neck.solo i{position:absolute;inset:0}
+.cos-neck.solo{position:static;display:block}
 .sty-earn{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}.sty-earn li.mine{font-weight:800;color:var(--accent)}
 .done-card{display:flex;flex-direction:column;gap:10px;border:2px solid color-mix(in srgb,var(--wood) 45%,transparent);background:linear-gradient(170deg,color-mix(in srgb,var(--wood) 10%,var(--card,#fff)),var(--card,#fff) 55%)}
 .dc-top{display:flex;gap:12px;align-items:center}.dc-top h3{margin:2px 0 0}.dc-art{width:64px;height:64px;object-fit:cover;border-radius:14px;flex:none}
@@ -994,6 +989,98 @@ body.vp-lock{touch-action:pan-x pan-y}
 @keyframes lswait{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 .dev-plan{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:12px;background:color-mix(in srgb,#B98CFF 12%,transparent)}.dev-plan .seg{flex-wrap:wrap}
 @media (max-width:400px){.adv-quick{gap:4px}.aq-btn{min-width:0;flex:1 1 0;padding:4px 0;font-size:12px;text-align:center;line-height:1.2}.aq-ic{width:44px;height:44px}.aq-ic svg{width:29px;height:29px}}@media (max-width:330px){.aq-ic{width:40px;height:40px;border-radius:13px}.aq-btn{font-size:11px}}
+/* ----- cosmetics v2: 3D foot auras, more back pieces, necklaces with their own strikes ----- */
+.hero-art{isolation:isolate}
+.cos-col,.cos-helix,.cos-orbit,.cos-orbs,.cos-sparks,.cos-crys{position:absolute;inset:0;pointer-events:none}
+.cos-col{left:22%;right:28%;top:4%;bottom:0;border-radius:45%;background:linear-gradient(to top,color-mix(in srgb,var(--c1) 75%,transparent),color-mix(in srgb,var(--c2) 30%,transparent) 55%,transparent 90%);filter:blur(8px);opacity:.85;animation:cospulse 2.2s ease-in-out infinite}
+.cos-helix .hx{position:absolute;left:10%;width:72%;aspect-ratio:1;top:100%;margin-top:-36%;opacity:0;animation:hxrise 2.6s linear infinite;animation-delay:var(--d)}
+.cos-helix.back .hx{clip-path:inset(0 0 50% 0)}.cos-helix.front .hx{clip-path:inset(50% 0 0 0)}
+.cos-helix .hx b{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#FFFFFF,#FFD54A 15%,#FFB300 30%,rgba(255,200,60,.25) 42%,#FFF3B0 55%,#FFC93C 70%,rgba(255,200,60,.25) 85%,#FFFFFF);-webkit-mask:radial-gradient(closest-side,transparent 68%,#000 72% 94%,transparent 98%);mask:radial-gradient(closest-side,transparent 68%,#000 72% 94%,transparent 98%);animation:cosspin .9s linear infinite}
+@keyframes hxrise{0%{transform:translateY(0) scale(1,.26);opacity:0}12%{opacity:1}75%{opacity:.95}100%{transform:translateY(-118%) scale(.5,.13);opacity:0}}
+.cos-sparks b{position:absolute;left:var(--x);bottom:4%;width:4px;height:4px;border-radius:50%;background:#FFF6C8;box-shadow:0 0 6px 2px #FFC93C;opacity:0;animation:sprise 2.4s ease-out infinite;animation-delay:var(--d)}
+@keyframes sprise{0%{opacity:0;transform:translateY(0)}15%{opacity:1}100%{opacity:0;transform:translateY(-150px)}}
+.cos-orbit .ob{position:absolute;left:46%;top:60%;width:100%;aspect-ratio:1;transform:translate(-50%,-50%) rotate(var(--t,14deg)) scaleY(.28)}.cos-orbit .o2{--t:-14deg}
+.cos-orbit.back .ob{clip-path:inset(0 0 50% 0)}.cos-orbit.front .ob{clip-path:inset(50% 0 0 0)}
+.cos-orbit .ob b{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#FF5E7E,#FFB347,#FFE66D,#6EE7A0,#5EC8FF,#9B7BFF,#FF5E7E);-webkit-mask:radial-gradient(closest-side,transparent 84%,#000 87% 96%,transparent 99%);mask:radial-gradient(closest-side,transparent 84%,#000 87% 96%,transparent 99%);animation:cosspin 3s linear infinite}.cos-orbit .o2 b{animation-direction:reverse;animation-duration:4.2s}
+.cos-orbs em{position:absolute;width:11%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#FFE66D 35%,#FF7AB6 70%,transparent 72%);box-shadow:0 0 10px 3px rgba(255,180,230,.8);animation:orbA 3s linear infinite}
+.cos-orbs em.orbB{width:8%;background:radial-gradient(circle at 35% 35%,#fff,#7FE3FF 40%,#9B7BFF 70%,transparent 72%);box-shadow:0 0 10px 3px rgba(130,200,255,.8);animation:orbB 4.2s linear infinite reverse}
+@keyframes orbA{0.00%{left:94.5%;top:72.1%;z-index:-1;transform:translate(-50%,-50%) scale(1.00)}6.25%{left:89.5%;top:76.4%;z-index:3;transform:translate(-50%,-50%) scale(1.10)}12.50%{left:77.9%;top:78.2%;z-index:3;transform:translate(-50%,-50%) scale(1.18)}18.75%{left:61.4%;top:77.2%;z-index:3;transform:translate(-50%,-50%) scale(1.23)}25.00%{left:42.6%;top:73.6%;z-index:3;transform:translate(-50%,-50%) scale(1.25)}31.25%{left:24.3%;top:67.9%;z-index:3;transform:translate(-50%,-50%) scale(1.23)}37.50%{left:9.3%;top:61.1%;z-index:3;transform:translate(-50%,-50%) scale(1.18)}43.75%{left:-0.1%;top:54.0%;z-index:3;transform:translate(-50%,-50%) scale(1.10)}50.00%{left:-2.5%;top:47.9%;z-index:3;transform:translate(-50%,-50%) scale(1.00)}56.25%{left:2.5%;top:43.6%;z-index:-1;transform:translate(-50%,-50%) scale(0.90)}62.50%{left:14.1%;top:41.8%;z-index:-1;transform:translate(-50%,-50%) scale(0.82)}68.75%{left:30.6%;top:42.8%;z-index:-1;transform:translate(-50%,-50%) scale(0.77)}75.00%{left:49.4%;top:46.4%;z-index:-1;transform:translate(-50%,-50%) scale(0.75)}81.25%{left:67.7%;top:52.1%;z-index:-1;transform:translate(-50%,-50%) scale(0.77)}87.50%{left:82.7%;top:58.9%;z-index:-1;transform:translate(-50%,-50%) scale(0.82)}93.75%{left:92.1%;top:66.0%;z-index:-1;transform:translate(-50%,-50%) scale(0.90)}100.00%{left:94.5%;top:72.1%;z-index:-1;transform:translate(-50%,-50%) scale(1.00)}}
+@keyframes orbB{0.00%{left:94.5%;top:47.9%;z-index:-1;transform:translate(-50%,-50%) scale(1.00)}6.25%{left:92.1%;top:54.0%;z-index:3;transform:translate(-50%,-50%) scale(1.10)}12.50%{left:82.7%;top:61.1%;z-index:3;transform:translate(-50%,-50%) scale(1.18)}18.75%{left:67.7%;top:67.9%;z-index:3;transform:translate(-50%,-50%) scale(1.23)}25.00%{left:49.4%;top:73.6%;z-index:3;transform:translate(-50%,-50%) scale(1.25)}31.25%{left:30.6%;top:77.2%;z-index:3;transform:translate(-50%,-50%) scale(1.23)}37.50%{left:14.1%;top:78.2%;z-index:3;transform:translate(-50%,-50%) scale(1.18)}43.75%{left:2.5%;top:76.4%;z-index:3;transform:translate(-50%,-50%) scale(1.10)}50.00%{left:-2.5%;top:72.1%;z-index:3;transform:translate(-50%,-50%) scale(1.00)}56.25%{left:-0.1%;top:66.0%;z-index:-1;transform:translate(-50%,-50%) scale(0.90)}62.50%{left:9.3%;top:58.9%;z-index:-1;transform:translate(-50%,-50%) scale(0.82)}68.75%{left:24.3%;top:52.1%;z-index:-1;transform:translate(-50%,-50%) scale(0.77)}75.00%{left:42.6%;top:46.4%;z-index:-1;transform:translate(-50%,-50%) scale(0.75)}81.25%{left:61.4%;top:42.8%;z-index:-1;transform:translate(-50%,-50%) scale(0.77)}87.50%{left:77.9%;top:41.8%;z-index:-1;transform:translate(-50%,-50%) scale(0.82)}93.75%{left:89.5%;top:43.6%;z-index:-1;transform:translate(-50%,-50%) scale(0.90)}100.00%{left:94.5%;top:47.9%;z-index:-1;transform:translate(-50%,-50%) scale(1.00)}}
+.cos-crys .cr{position:absolute;left:46%;top:47%;width:104%;aspect-ratio:1;transform:translate(-50%,-50%) scaleY(.3)}
+.cos-crys.back .cr{clip-path:inset(0 0 50% 0)}.cos-crys.front .cr{clip-path:inset(50% 0 0 0)}
+.cos-crys .rot{position:absolute;inset:0;border-radius:50%;border:2px solid color-mix(in srgb,var(--c1) 55%,transparent);animation:cosspin 7s linear infinite}
+.cos-crys .sh{position:absolute;width:9%;height:13%;background:linear-gradient(160deg,#fff,var(--c1) 45%,#B58CFF);clip-path:polygon(50% 0,100% 45%,50% 100%,0 45%);filter:drop-shadow(0 0 4px var(--c1));animation:crshard 7s linear infinite}
+@keyframes crshard{from{transform:translate(-50%,-50%) rotate(0) scaleY(3.33)}to{transform:translate(-50%,-50%) rotate(-360deg) scaleY(3.33)}}
+.cos-back .gr{position:absolute;filter:drop-shadow(0 0 5px var(--c1))}.cos-back .gr svg{position:static;width:100%;height:100%;animation:none;filter:none}
+.cos-back .gr .gt{fill:#B07A26;stroke:#5E3B0A;stroke-width:2}.cos-back .gr .gi{fill:#E6B95A;stroke:#5E3B0A;stroke-width:1.5}.cos-back .gr .gh{fill:var(--c2)}
+.cos-back .g1{left:18%;top:10%;width:62%;height:62%;animation:cosspin 12s linear infinite}.cos-back .g2{right:0;top:-2%;width:40%;height:40%;animation:cosspin 8.4s linear infinite reverse}.cos-back .g3{left:4%;top:52%;width:34%;height:34%;animation:cosspin 7.5s linear infinite reverse}
+.cos-back .mn{position:absolute;left:-14%;top:-10%;width:66%;height:66%;filter:drop-shadow(0 0 10px var(--c1)) drop-shadow(0 0 3px #fff);animation:moonsway 5s ease-in-out infinite}.cos-back .mn svg{position:static;width:100%;height:100%;animation:none;filter:none}.cos-back .mn path{fill:#EAF2FF;stroke:#8EA9D9;stroke-width:1.5}
+@keyframes moonsway{50%{transform:rotate(-8deg) translateY(-3%)}}
+.cos-back .stars{position:absolute;inset:0;animation:cosspin 16s linear infinite}.cos-back .stars b{position:absolute;color:#fff;text-shadow:0 0 6px var(--c1);font-size:12px;animation:cospulse 1.6s ease-in-out infinite}
+.cos-back .stars b:nth-child(1){left:48%;top:0}.cos-back .stars b:nth-child(2){left:90%;top:30%;animation-delay:.3s}.cos-back .stars b:nth-child(3){left:84%;top:78%;animation-delay:.6s}.cos-back .stars b:nth-child(4){left:40%;top:94%;animation-delay:.9s}.cos-back .stars b:nth-child(5){left:2%;top:66%;animation-delay:1.2s}.cos-back .stars b:nth-child(6){left:6%;top:18%;animation-delay:1.5s}
+.cos-back .ab{position:absolute;inset:4%}.cos-back .ab svg{animation:cosspin 18s linear infinite;filter:drop-shadow(0 0 6px var(--c1)) drop-shadow(0 0 14px #3A0A5C)}.cos-back .a2{inset:22%;opacity:.8}.cos-back .a2 svg{animation-direction:reverse;animation-duration:9s}
+.cos-back .ab-o{fill:none;stroke:var(--c1);stroke-width:1.6;stroke-dasharray:6 3}.cos-back .ab-d{fill:radial-gradient(#000,#000);fill:rgba(20,3,31,.55)}.cos-back .ab-s{fill:none;stroke:#C58BFF;stroke-width:1.8;stroke-linejoin:round}.cos-back .ab-c{fill:#0A0110;stroke:var(--c1);stroke-width:2}
+.cos-back.cb-b-abyss s{position:absolute;bottom:30%;width:22%;height:22%;border-radius:50%;background:radial-gradient(circle,rgba(70,15,110,.85),rgba(20,3,31,0) 70%);filter:blur(3px);animation:smoke 3s ease-out infinite}
+.cos-back.cb-b-abyss s:nth-of-type(1){left:6%}.cos-back.cb-b-abyss s:nth-of-type(2){left:28%;animation-delay:.6s}.cos-back.cb-b-abyss s:nth-of-type(3){left:52%;animation-delay:1.2s}.cos-back.cb-b-abyss s:nth-of-type(4){left:74%;animation-delay:1.8s}.cos-back.cb-b-abyss s:nth-of-type(5){left:40%;animation-delay:2.4s}
+@keyframes smoke{0%{transform:translateY(0) scale(.6);opacity:0}25%{opacity:1}100%{transform:translateY(-120%) scale(1.6);opacity:0}}
+.cos-back.cb-b-phoenix .ring{inset:12%;background:conic-gradient(#FF3D1F,#FF8A1F,#FFE066,#FF8A1F,#FF3D1F,#FF8A1F,#FFE066,#FF3D1F);-webkit-mask:radial-gradient(closest-side,transparent 70%,#000 74% 90%,transparent 95%);mask:radial-gradient(closest-side,transparent 70%,#000 74% 90%,transparent 95%);filter:drop-shadow(0 0 8px #FF6A2B);animation-duration:4s}
+.cos-back.cb-b-phoenix em{position:absolute;left:50%;top:50%;width:9%;height:16%;margin:-8% 0 0 -4.5%;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:linear-gradient(to top,#FF3D1F,#FF8A1F 50%,#FFE066);transform:rotate(var(--a)) translateY(-290%);transform-origin:50% 50%;filter:drop-shadow(0 0 4px #FF6A2B);animation:flick .7s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes flick{from{transform:rotate(var(--a)) translateY(-290%) scaleY(.75)}to{transform:rotate(var(--a)) translateY(-300%) scaleY(1.25)}}
+.cos-back.cb-b-phoenix{animation:cosspin 20s linear infinite}
+.cos-back.cb-b-phoenix s{position:absolute;bottom:40%;width:4%;height:4%;border-radius:50%;background:#FFE066;box-shadow:0 0 6px 2px #FF6A2B;animation:sprise 2s ease-out infinite}.cos-back.cb-b-phoenix s:nth-of-type(odd){left:30%}.cos-back.cb-b-phoenix s:nth-of-type(even){left:66%;animation-delay:.7s}.cos-back.cb-b-phoenix s:nth-of-type(3n){left:48%;animation-delay:1.3s}
+.hero-art .cos-neck{width:9%;aspect-ratio:auto;transform:translate(-50%,-30%)}.cos-neck svg{display:block;width:100%;height:auto;filter:drop-shadow(0 0 4px var(--c1)) drop-shadow(0 0 1px #fff);animation:cospulse 1.8s ease-in-out infinite}
+.cos-neck.cn-dark svg{filter:drop-shadow(0 0 5px var(--c1)) drop-shadow(0 0 10px #3A0A5C)}
+.cos-neck.solo{width:26px;height:auto;transform:none}
+/* strikes */
+.cos-burst>*{position:absolute}
+.cbx-fire .core{left:-50px;top:-50px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,#FFF6C8,#FFB347 35%,rgba(255,90,30,.6) 55%,transparent 70%);animation:corepop .5s ease-out forwards}
+.cbx-fire .fl{left:-10px;top:-46px;width:20px;height:46px;transform-origin:50% 100%;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:linear-gradient(to top,#FF3D1F,#FF8A1F 55%,#FFE066);transform:rotate(var(--a)) scaleY(0);animation:flame .55s ease-out var(--d) forwards}
+@keyframes flame{0%{transform:rotate(var(--a)) translateY(0) scaleY(.2);opacity:1}60%{transform:rotate(var(--a)) translateY(-18px) scaleY(1.2);opacity:1}100%{transform:rotate(var(--a)) translateY(-34px) scaleY(.6);opacity:0}}
+.cbx-fire s{left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#FFE066;box-shadow:0 0 6px 2px #FF6A2B;animation:ember .8s ease-out var(--d) forwards}
+@keyframes ember{0%{transform:rotate(var(--a)) translateY(0);opacity:1}100%{transform:rotate(var(--a)) translateY(calc(-1*var(--r))) translateX(10px);opacity:0}}
+@keyframes corepop{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.3);opacity:0}}
+.cbx-frost u{left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(200,240,255,.75),rgba(80,180,255,.35) 60%,transparent 72%);animation:frosttint .9s ease-out forwards}
+@keyframes frosttint{0%{opacity:0;transform:scale(.6)}25%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.05)}}
+.cbx-frost .ring{left:-56px;top:-56px;width:112px;height:112px;border-radius:50%;border:3px dashed #E6FBFF;box-shadow:0 0 12px #4FC3F7;animation:cosring .7s ease-out forwards}
+.cbx-frost .sp{left:-5px;top:calc(-1*var(--l));width:10px;height:var(--l);background:linear-gradient(to top,rgba(255,255,255,.2),#E6FBFF 40%,#4FC3F7);clip-path:polygon(50% 0,100% 85%,50% 100%,0 85%);transform-origin:50% 100%;transform:rotate(var(--a)) scaleY(0);filter:drop-shadow(0 0 3px #4FC3F7);animation:spike .75s ease-out forwards}
+@keyframes spike{0%{transform:rotate(var(--a)) scaleY(0)}30%{transform:rotate(var(--a)) scaleY(1.1)}70%{transform:rotate(var(--a)) scaleY(1);opacity:1}100%{transform:rotate(var(--a)) scaleY(1) translateY(-12px);opacity:0}}
+.cbx-frost s{left:-8px;top:-8px;font-size:16px;line-height:16px;color:#fff;text-decoration:none;text-shadow:0 0 6px #4FC3F7;animation:cosfly .9s ease-out var(--d) forwards}
+.cbx-thunder .core{left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#fff,#FFF27A 30%,rgba(255,225,77,.4) 55%,transparent 70%);animation:corepop .45s ease-out .1s both}
+.cbx-thunder .bolt{left:calc(var(--x) - 15px);top:-160px;width:30px;height:160px;overflow:visible;opacity:0;animation:bolt .5s steps(2) var(--d) forwards}.cbx-thunder .bolt path{fill:#FFF8B0;stroke:#FFE14D;stroke-width:2;filter:drop-shadow(0 0 6px #FFE14D) drop-shadow(0 0 2px #fff)}
+@keyframes bolt{0%{opacity:1}30%{opacity:.2}50%{opacity:1}100%{opacity:0}}
+.cbx-thunder .sk{left:-2px;top:-26px;width:4px;height:26px;background:linear-gradient(#fff,#FFE14D);transform-origin:50% 100%;transform:rotate(var(--a)) translateY(-20px);opacity:0;animation:spark .45s ease-out .15s forwards}
+@keyframes spark{0%{opacity:1;transform:rotate(var(--a)) translateY(-8px) scaleY(.4)}100%{opacity:0;transform:rotate(var(--a)) translateY(-44px) scaleY(1)}}
+.cbx-dark .void{left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#000 0,#14031F 45%,rgba(155,77,255,.6) 62%,transparent 72%);box-shadow:0 0 24px #9B4DFF;animation:void .95s cubic-bezier(.3,.8,.4,1) forwards}
+@keyframes void{0%{transform:scale(.1);opacity:1}45%{transform:scale(1.25);opacity:1}80%{transform:scale(.25);opacity:1}100%{transform:scale(1.8);opacity:0}}
+.cbx-dark .swirl{left:-70px;top:-70px;width:140px;height:140px;border-radius:50%;background:conic-gradient(transparent,#9B4DFF,transparent 30%,#C58BFF 50%,transparent 60%,#6A1FB0 80%,transparent);-webkit-mask:radial-gradient(closest-side,transparent 45%,#000 55% 85%,transparent 95%);mask:radial-gradient(closest-side,transparent 45%,#000 55% 85%,transparent 95%);animation:swirl .95s ease-in forwards}
+@keyframes swirl{0%{transform:rotate(0) scale(1.3);opacity:0}30%{opacity:1}100%{transform:rotate(-540deg) scale(.2);opacity:0}}
+.cbx-dark .td{left:-4px;top:-70px;width:8px;height:70px;transform-origin:50% 100%;border-radius:50%;background:linear-gradient(to top,#14031F,#6A1FB0 60%,transparent);transform:rotate(var(--a)) scaleY(0);animation:tendril .9s ease-out var(--d) forwards}
+@keyframes tendril{0%{transform:rotate(var(--a)) scaleY(0) skewX(0)}50%{transform:rotate(var(--a)) scaleY(1) skewX(14deg)}100%{transform:rotate(var(--a)) scaleY(1.2) skewX(-10deg);opacity:0}}
+.cbx-dark .crack{left:-60px;top:-60px;width:120px;height:120px;overflow:visible;opacity:0;animation:crack .9s ease-out .3s forwards}.cbx-dark .crack path{fill:none;stroke:#E2C2FF;stroke-width:2.2;filter:drop-shadow(0 0 4px #9B4DFF)}
+@keyframes crack{0%{opacity:1;stroke-dashoffset:0}100%{opacity:0}}
+.cbx-star .fall{left:calc(var(--x) - 120px);top:-150px;font-size:34px;line-height:34px;color:#FFE27A;text-decoration:none;text-shadow:0 0 8px #FFD54A,0 0 18px #fff;opacity:0;animation:starfall .42s ease-in var(--d) forwards}
+@keyframes starfall{0%{opacity:1;transform:translate(0,0) scale(.6)}100%{opacity:1;transform:translate(calc(120px - var(--x)),150px) scale(1.2)}}
+.cbx-star .big{left:-75px;top:-75px;width:150px;height:150px;opacity:0;animation:bigstar .8s ease-out .38s forwards}.cbx-star .big svg{width:100%;height:100%;fill:#FFF6C8;filter:drop-shadow(0 0 10px #FFD54A) drop-shadow(0 0 22px #FFB300)}
+@keyframes bigstar{0%{opacity:1;transform:scale(.1) rotate(0)}40%{opacity:1;transform:scale(1.15) rotate(25deg)}100%{opacity:0;transform:scale(1.5) rotate(45deg)}}
+.cbx-star .sw{left:-70px;top:-70px;width:140px;height:140px;border-radius:50%;border:5px solid #FFE27A;box-shadow:0 0 18px #FFD54A,inset 0 0 14px #fff;opacity:0;animation:cosring .7s ease-out .4s forwards}.cbx-star .sw.s2{border-width:3px;animation-delay:.55s;animation-duration:.85s}
+.cbx-star em{left:-4px;top:-4px;width:8px;height:8px;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:0;animation:starspk .8s ease-out .42s forwards}
+@keyframes starspk{0%{opacity:1;transform:rotate(var(--a)) translateY(0) scale(1.4)}100%{opacity:0;transform:rotate(var(--a)) translateY(calc(-1*var(--r))) scale(.4)}}
+/* whole-arena layer of the strikes: thunder flashes, the abyss darkens, starlight flashes gold and shakes */
+.cfx-fl{position:absolute;inset:0;pointer-events:none;z-index:8;opacity:0}
+.cfx-thunder .cfx-fl{background:#FFFBE0;animation:aflash .5s steps(4) .05s}
+.cfx-dark .cfx-fl{background:radial-gradient(ellipse at 70% 55%,transparent 20%,rgba(20,3,31,.88) 75%);animation:adark 1s ease-out}
+.cfx-star .cfx-fl{background:radial-gradient(circle at 72% 55%,rgba(255,246,200,.95),rgba(255,213,74,.5) 40%,transparent 75%);animation:aflash2 .8s ease-out .38s}
+.cfx-fire .cfx-fl{background:radial-gradient(circle at 72% 55%,rgba(255,138,31,.35),transparent 60%);animation:aflash2 .5s ease-out}
+.cfx-frost .cfx-fl{background:radial-gradient(circle at 72% 55%,rgba(130,210,255,.35),transparent 60%);animation:aflash2 .6s ease-out}
+@keyframes aflash{0%{opacity:.9}25%{opacity:0}50%{opacity:.7}100%{opacity:0}}
+@keyframes adark{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+@keyframes aflash2{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+.arena2.cfx-dark,.sty-stage.cfx-dark{animation:ashake .45s ease-in-out .25s}.arena2.cfx-star,.sty-stage.cfx-star{animation:ashake2 .6s ease-in-out .4s}
+@keyframes ashake{20%,60%{transform:translate(-3px,1px)}40%,80%{transform:translate(3px,-1px)}}
+@keyframes ashake2{15%{transform:translate(-6px,3px)}30%{transform:translate(6px,-3px)}45%{transform:translate(-5px,-2px)}60%{transform:translate(4px,3px)}80%{transform:translate(-2px,0)}}
+.sty-stage{overflow:hidden}
+.cos-pow{font-size:12px;color:#C9921A;letter-spacing:1px}.cos-pow i{font-style:normal;color:var(--line)}
+@media (prefers-reduced-motion:reduce){.cos-helix .hx,.cos-sparks b,.cos-orbit .ob b,.cos-orbs em,.cos-crys .rot,.cos-crys .sh,.cos-back .gr,.cos-back .mn,.cos-back .stars,.cos-back .ab svg,.cos-back s,.cos-back em,.cos-back.cb-b-phoenix,.cos-col,.cos-neck svg{animation:none!important}.cos-helix .hx{opacity:.8;transform:scale(1,.26)}.arena2.cfx,.sty-stage.cfx-dark,.sty-stage.cfx-star{animation:none!important}}
 </style>
 
 </head>
@@ -2604,7 +2691,7 @@ function fight(){
   clearInterval(S.btimer);
   battleTimer();
 }
-function evSfx(e){ if(!e) return; if(e.who==="p") sfx(cosSfxName(e)||(e.crit||e.spell?"crit":"hit")); else if(e.who==="a") sfx("ally"); else if(e.eye) sfx("eye"); else if(e.tgt==="a") sfx("hurt"); else sfx(e.crit?"mcrit":"hurt"); }
+function evSfx(e){ if(!e) return; if(e.who==="p"){ const nk=cosWorn().neck&&cosOf(cosWorn().neck); if(nk) sfx("nx-"+nk.fx); } if(e.who==="p") sfx(cosSfxName(e)||(e.crit||e.spell?"crit":"hit")); else if(e.who==="a") sfx("ally"); else if(e.eye) sfx("eye"); else if(e.tgt==="a") sfx("hurt"); else sfx(e.crit?"mcrit":"hurt"); }
 function battleEndSfx(){ const B=S.battle; if(!B||!B.res) return; if(!B.res.win) return sfx("lose"); sfx(B.conquered?"conquer":"win"); if(B.lvUp) setTimeout(()=>sfx("lvup"),900); }
 function battleTimer(){
   clearInterval(S.btimer);
@@ -2640,7 +2727,8 @@ function arenaScene(B, last, cur){
   const showAnim=!fin||B.justEnded;
   const heroCls=showAnim?(pAtk&&!aAtk?" atk":mAtk?" def hurt hs"+hl:""):"", foeCls=showAnim?(mAtk||aHit?" atk":pAtk?" hurt hs"+hl:""):"";
   const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allyArt(al, fin?(B.res.win&&!aDown?"win":"hurt"):showAnim&&aAtk?"attack":showAnim&&aHit?"hurt":"idle")}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
-  return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}">
+  const cfx=showAnim&&pAtk&&!aAtk;
+  return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}${cfx?cosArenaFx():""}">${cfx?cosFlash():""}
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
       <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${hitBurst(hl,"foe")}${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
@@ -3233,7 +3321,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.160";
+const APP_VERSION="2026.10.161";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3668,6 +3756,7 @@ document.addEventListener("click", e=>{
   if(a==="privback"){ S.view="set"; S.tab="set"; render(); return; }
   if(a==="delask"){ S.delAsk=!S.delAsk; return render(); }
   if(a==="delgo") return deleteAccount();
+  if(a==="nickedit"){ S.nickEdit=true; return render(); }
   if(a==="srs") return startQuiz("srs");
   if(a==="readgo") return READ.on?(READ.paused?readResume():readPause()):readStart();
   if(a==="readstop") return readStop();
@@ -3802,7 +3891,7 @@ async function nickClaim(n){
       if(old&&nickKey(old)!==nickKey(n)){ const oref=fsM.doc(db,"nicks",nickKey(old)); try{ const od=await fsM.getDoc(oref); if(od.exists()&&od.data().uid===me) await fsM.deleteDoc(oref); }catch(e){} }
     }catch(e){ toast(e&&e.code==="taken"?T("nickTaken"):T("syncFail")); return false; }
   }
-  const g=game(); if(paid) g.renames=Math.max(0,(g.renames||0)-1); g.nickAt=Date.now(); g.nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render()); return true;
+  const g=game(); if(paid) g.renames=Math.max(0,(g.renames||0)-1); g.nickAt=Date.now(); g.nick=n; S.nickEdit=false; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render()); return true;
 }
 async function nickVerify(){
   const n=game().nick; if(!n||!CLOUD.user||!CLOUD.fb||DEV) return;
@@ -3979,6 +4068,14 @@ const ccName=cc=>{ try{ return new Intl.DisplayNames([({zh:SC?"zh-Hans":"zh-Hant
 const myFlag=()=>{ const f=game().flag; return f==="none"?"":(f&&f!=="auto")?f:ccDetect(); };
 function nickForm(){ const g=game(), w=nickLocked(), auto=ccDetect(), f=g.flag||"auto", tk=g.renames||0, vaultOpen=!featLock("vault");
   const list=CC_ALL.map(c=>[c,ccName(c)]).sort((a,b)=>a[1].localeCompare(b[1]));
+  // once a nickname is set (and a change would need a rename ticket) just show it; the box only comes back to use a ticket
+  const shown=g.nick&&nickNeedsTicket()&&!S.nickEdit&&!S.nickAsk;
+  if(shown) return `<div class="card nick"><b>${T("nick")}</b><div class="nick-show"><span class="nick-name">${esc(g.nick)}</span>${tk>0?`<button class="btn ghost sm" data-act="nickedit">🏷️ ${T("nickUseTicket",{n:tk})}</button>`:""}</div>
+    <label class="sm-t flag-row"><span>${T("flagLabel")} <b class="flag-now">${flagOf(myFlag())||"—"}</b></span><select id="flagSel" class="search">
+      <option value="auto"${f==="auto"?" selected":""}>${T("flagAuto")}${auto?` (${flagOf(auto)} ${esc(ccName(auto))})`:""}</option>
+      <option value="none"${f==="none"?" selected":""}>${T("flagNone")}</option>
+      ${list.map(([c,n])=>`<option value="${c}"${f===c?" selected":""}>${flagOf(c)} ${esc(n)}</option>`).join("")}</select></label>
+    <span class="muted sm-t">${T("flagHint")}</span></div>`;
   return `<div class="card nick"><label for="nickIn"><b>${T("nick")}</b></label><div class="row" style="flex-wrap:nowrap"><input id="nickIn" class="search" maxlength="16" value="${esc(S.nickDraft!=null?S.nickDraft:(g.nick||""))}" placeholder="${T("nickSet")}" autocomplete="off" ${w?"disabled":""}><button class="btn" data-act="nicksave" style="flex:none" ${w?"disabled":""}>${T("nickSave")}</button></div>
     ${S.nickAsk?`<div class="ie-exitask"><b>${T("nickConfirmQ",{n:esc(S.nickAsk)})}</b><p class="sm-t" style="margin:4px 0 8px">${nickNeedsTicket()?T("nickUseSub",{n:Math.max(0,tk-1)}):T("nickFirstSub")}</p><div class="row"><button class="btn sm" data-act="nickyes">${T("nickYes")}</button><button class="btn ghost sm" data-act="nickno">${T("nickNo")}</button></div></div>`:""}
     <span class="muted sm-t">${w?`🏷️ ${T("nickTicketNeed")}`:nickNeedsTicket()?`🏷️ ${T("nickTicketHave",{n:tk})}`:T("nickHint")+" "+T("nickFirstNote")}</span>
@@ -6463,13 +6560,22 @@ const STYLE_IC=`<svg class="sty-ic" viewBox="0 0 24 24" aria-hidden="true"><circ
 const COSMETICS=[
   {id:"f-leaf",    slot:"feet", price:90,  c1:"#5CCB6A", c2:"#E4FFB0"},
   {id:"f-gold",    slot:"feet", price:180, c1:"#F5B72E", c2:"#FFF3B0"},
+  {id:"f-helix",   slot:"feet", price:320, c1:"#FFC93C", c2:"#FFF6C8", d3:true},
   {id:"f-rainbow", slot:"feet", price:360, c1:"#FF7AB6", c2:"#7FE3FF", plus:true},
+  {id:"f-orbit",   slot:"feet", price:560, c1:"#B98CFF", c2:"#FFFFFF", plus:true, d3:true},
   {id:"b-halo",    slot:"back", price:240, c1:"#FFD75E", c2:"#FFFFFF"},
+  {id:"b-gears",   slot:"back", price:300, c1:"#D9A441", c2:"#FFE9A8"},
   {id:"b-rune",    slot:"back", price:360, c1:"#3FD9C0", c2:"#D4FFF5"},
+  {id:"b-moon",    slot:"back", price:380, c1:"#BFD7FF", c2:"#FFFFFF"},
+  {id:"b-crystal", slot:"back", price:450, c1:"#8FD3FF", c2:"#F2E6FF", d3:true},
+  {id:"b-abyss",   slot:"back", price:520, c1:"#9B4DFF", c2:"#1A0626"},
   {id:"b-wings",   slot:"back", price:600, c1:"#9FD8FF", c2:"#FFFFFF", plus:true},
-  {id:"n-fire",    slot:"neck", price:300, c1:"#FF6A2B", c2:"#FFD36B", fx:"fire"},
-  {id:"n-frost",   slot:"neck", price:300, c1:"#4FC3F7", c2:"#E6FBFF", fx:"frost"},
-  {id:"n-star",    slot:"neck", price:480, c1:"#FFD54A", c2:"#FFFFFF", fx:"star", plus:true},
+  {id:"b-phoenix", slot:"back", price:720, c1:"#FF6A2B", c2:"#FFE066", plus:true},
+  {id:"n-fire",    slot:"neck", price:300, c1:"#FF6A2B", c2:"#FFD36B", fx:"fire",    pow:2},
+  {id:"n-frost",   slot:"neck", price:300, c1:"#4FC3F7", c2:"#E6FBFF", fx:"frost",   pow:2},
+  {id:"n-thunder", slot:"neck", price:420, c1:"#FFE14D", c2:"#FFFFFF", fx:"thunder", pow:3},
+  {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4},
+  {id:"n-star",    slot:"neck", price:800, c1:"#FFD54A", c2:"#FFFFFF", fx:"star",    pow:5, plus:true},
   {id:"s-chime",   slot:"sfx",  price:120},
   {id:"s-taiko",   slot:"sfx",  price:120},
   {id:"s-retro",   slot:"sfx",  price:120}];
@@ -6482,18 +6588,53 @@ function cosWorn(){ const w={...(game().cos||{})}; if(S.view==="adv"&&S.advTab==
 const RUNES=["M0-5V5M0-5L3.5-2","M0-5V5M0-1L3.5-4.5","M-2.5-5V5M-2.5-5L2.5 0L-2.5 5","M0-5V5M-3-2L3 2M3-2L-3 2","M-3-5L3 5M3-5L-3 5","M0-5V5M0 0L3.5 4"];
 function runeWheel(){ let g=""; for(let i=0;i<12;i++){ const a=i*30; g+=`<path transform="rotate(${a} 50 50) translate(50 9)" d="${RUNES[i%RUNES.length]}"/>`; } return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" class="rw-o"/><circle cx="50" cy="50" r="34" class="rw-i"/><g class="rw-g">${g}</g><path class="rw-k" d="M50 18L56 44L82 50L56 56L50 82L44 56L18 50L44 44Z"/></svg>`; }
 const WING=`<svg viewBox="0 0 60 80" aria-hidden="true"><path d="M58 30C40 4 14 0 2 6c10 6 14 12 16 18C8 24 3 30 2 36c9-1 15 1 19 5-8 4-11 10-12 16 10-4 20-5 29-1C42 46 52 38 58 30z"/><path class="wf" d="M56 31C42 16 26 10 12 10M54 33C40 26 26 26 14 30M52 36C42 36 32 40 24 48"/></svg>`;
+function gearSvg(n,R,r){ let d=""; const w=Math.PI/n;
+  for(let i=0;i<n;i++){ const a=i/n*2*Math.PI; [[r,a-w*.62],[R,a-w*.38],[R,a+w*.38],[r,a+w*.62]].forEach(([rr,aa],j)=>{ d+=(i||j?"L":"M")+(50+rr*Math.cos(aa)).toFixed(1)+" "+(50+rr*Math.sin(aa)).toFixed(1); }); }
+  return `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="${d}Z" class="gt"/><circle cx="50" cy="50" r="${(r*.66).toFixed(1)}" class="gi"/><circle cx="50" cy="50" r="7" class="gh"/></svg>`; }
+const MOON=`<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M62 10A40 40 0 1 0 62 90A48 48 0 0 1 62 10Z"/></svg>`;
+function abyssSvg(){ let sp=""; for(let i=0;i<10;i++){ const a=i*36*Math.PI/180, b=(i*36+18)*Math.PI/180; sp+=(i?"L":"M")+(50+40*Math.cos(a)).toFixed(1)+" "+(50+40*Math.sin(a)).toFixed(1)+"L"+(50+22*Math.cos(b)).toFixed(1)+" "+(50+22*Math.sin(b)).toFixed(1); }
+  return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" class="ab-o"/><circle cx="50" cy="50" r="44" class="ab-d"/><path d="${sp}Z" class="ab-s"/><circle cx="50" cy="50" r="13" class="ab-c"/></svg>`; }
+// pendants: each necklace has its own shape
+const PENDANT={
+  fire:`<svg viewBox="0 0 20 24"><path d="M10 1C13 7 18 10 18 15a8 8 0 0 1-16 0c0-4 3-6 4-9 1 3 2 4 3 4 0-3 0-6 1-9z" fill="var(--c1)" stroke="#5a1800" stroke-width="1.2"/><path d="M10 10c2 3 4 4 4 7a4 4 0 0 1-8 0c0-2 2-3 2-5 1 1 1 1 2 1z" fill="var(--c2)"/></svg>`,
+  frost:`<svg viewBox="0 0 20 24"><path d="M10 1L17 12L10 23L3 12Z" fill="var(--c1)" stroke="#0b4a6e" stroke-width="1.2"/><path d="M10 4L13 12L10 20L7 12Z" fill="var(--c2)" opacity=".85"/></svg>`,
+  thunder:`<svg viewBox="0 0 20 24"><path d="M12 1L3 14h6l-2 9 10-14h-6l3-8z" fill="var(--c1)" stroke="#6b5200" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+  dark:`<svg viewBox="0 0 20 24"><path d="M10 1L18 9L10 23L2 9Z" fill="#14031F" stroke="var(--c1)" stroke-width="1.6"/><path d="M10 6L14 10L10 17L6 10Z" fill="var(--c1)" opacity=".75"/></svg>`,
+  star:`<svg viewBox="0 0 24 24"><path d="M12 1L14.5 9.5L23 12L14.5 14.5L12 23L9.5 14.5L1 12L9.5 9.5Z" fill="var(--c1)" stroke="#7a5a00" stroke-width="1"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>`};
+// a ring seen in 3D: the back half is drawn behind the hero, the front half in front (same animation, so the halves stay in step)
+const split=(cls,inner)=>({under:`<span class="${cls} back">${inner}</span>`, over:`<span class="${cls} front">${inner}</span>`});
 function cosLayers(w){
   let under="", over="";
   const f=w.feet&&cosOf(w.feet), b=w.back&&cosOf(w.back), n=w.neck&&cosOf(w.neck);
-  if(b) under+=`<span class="cos-back cb-${b.id}" style="${cosStyleCss(b)}">${b.id==="b-rune"?runeWheel():b.id==="b-wings"?`<i class="wg l">${WING}</i><i class="wg r">${WING}</i>`:`<i class="ring"></i><i class="ring r2"></i>`}</span>`;
-  if(f) under+=`<span class="cos-feet cf-${f.id}" style="${cosStyleCss(f)}"><i class="disc"><i class="spin"></i></i><b></b><b></b><b></b></span>`;
-  if(n) over+=`<span class="cos-neck cn-${n.fx}" style="${cosStyleCss(n)}"><i></i></span>`;
+  if(b){ const st=cosStyleCss(b);
+    if(b.id==="b-crystal"){ let sh=""; for(let i=0;i<6;i++){ const a=i*60*Math.PI/180; sh+=`<i class="sh" style="left:${(50+46*Math.cos(a)).toFixed(1)}%;top:${(50+46*Math.sin(a)).toFixed(1)}%"></i>`; }
+      const L=split("cos-crys",`<span class="cr" style="${st}"><span class="rot">${sh}</span></span>`); under+=L.under; over+=L.over; }
+    else { const inner=b.id==="b-rune"?runeWheel():b.id==="b-wings"?`<i class="wg l">${WING}</i><i class="wg r">${WING}</i>`
+        :b.id==="b-gears"?`<i class="gr g1">${gearSvg(12,46,38)}</i><i class="gr g2">${gearSvg(9,46,36)}</i><i class="gr g3">${gearSvg(8,46,35)}</i>`
+        :b.id==="b-moon"?`<i class="mn">${MOON}</i><i class="stars">${"<b>✦</b>".repeat(6)}</i>`
+        :b.id==="b-abyss"?`<i class="ab a1">${abyssSvg()}</i><i class="ab a2">${abyssSvg()}</i>${"<s></s>".repeat(5)}`
+        :b.id==="b-phoenix"?`<i class="ring"></i>${Array.from({length:12},(_,i)=>`<em style="--a:${i*30}deg;--d:${-(i%4)*.18}s"></em>`).join("")}${"<s></s>".repeat(6)}`
+        :`<i class="ring"></i><i class="ring r2"></i>`;
+      under+=`<span class="cos-back cb-${b.id}" style="${st}">${inner}</span>`; } }
+  if(f){ const st=cosStyleCss(f);
+    if(f.id==="f-helix"){ const L=split("cos-helix",Array.from({length:4},(_,i)=>`<i class="hx" style="--d:${(-i*.65).toFixed(2)}s"><b></b></i>`).join("")); under+=`<span class="cos-col" style="${st}"></span>`+L.under; over+=L.over+`<span class="cos-sparks">${Array.from({length:6},(_,i)=>`<b style="--x:${18+i*12}%;--d:${(-i*.4).toFixed(1)}s"></b>`).join("")}</span>`; }
+    else if(f.id==="f-orbit"){ const L=split("cos-orbit",`<i class="ob o1"><b></b></i><i class="ob o2"><b></b></i>`); under+=L.under; over+=L.over+`<span class="cos-orbs"><em class="orbA"></em><em class="orbB"></em></span>`; }
+    else under+=`<span class="cos-feet cf-${f.id}" style="${st}"><i class="disc"><i class="spin"></i></i><b></b><b></b><b></b></span>`; }
+  if(n) over+=`<span class="cos-neck cn-${n.fx}" style="${cosStyleCss(n)}">${PENDANT[n.fx]}</span>`;
   return {under,over};
 }
-// the burst a necklace adds on the monster when you hit it
+// the burst a necklace adds on the monster when you hit it: each one different, and stronger the dearer it is
 function cosBurst(){ const n=cosWorn().neck&&cosOf(cosWorn().neck); if(!n) return "";
-  let p=""; for(let i=0;i<10;i++) p+=`<i style="--a:${i*36}deg;--d:${(i%3)*40}ms"></i>`;
-  return `<span class="cos-burst cbx-${n.fx}" style="${cosStyleCss(n)}" aria-hidden="true"><b></b>${p}</span>`; }
+  const R=(k,f)=>Array.from({length:k},(_,i)=>f(i)).join(""); let h="";
+  if(n.fx==="fire") h=`<b class="core"></b>${R(8,i=>`<i class="fl" style="--a:${i*45}deg;--d:${(i%2)*60}ms"></i>`)}${R(12,i=>`<s style="--a:${i*30+10}deg;--r:${50+(i%3)*18}px;--d:${(i%4)*50}ms"></s>`)}`;
+  else if(n.fx==="frost") h=`<u></u><b class="ring"></b>${R(7,i=>`<i class="sp" style="--a:${i*51}deg;--l:${40+(i%3)*14}px"></i>`)}${R(6,i=>`<s style="--a:${i*60+30}deg;--d:${(i%3)*80}ms">❄</s>`)}`;
+  else if(n.fx==="thunder") h=`<b class="core"></b>${R(3,i=>`<svg class="bolt" viewBox="0 0 30 120" style="--x:${[-34,0,30][i]}px;--d:${[0,90,170][i]}ms"><path d="M18 0L6 46h12L4 120l24-70H16L26 0z"/></svg>`)}${R(10,i=>`<i class="sk" style="--a:${i*36}deg"></i>`)}`;
+  else if(n.fx==="dark") h=`<b class="void"></b><b class="swirl"></b>${R(8,i=>`<i class="td" style="--a:${i*45}deg;--d:${(i%2)*70}ms"></i>`)}<svg class="crack" viewBox="0 0 100 100"><path d="M50 50L22 30L12 34M50 50L80 22M50 50L74 78L88 80M50 50L30 82M50 50L90 52"/></svg>`;
+  else h=`${R(5,i=>`<s class="fall" style="--x:${-80+i*34}px;--d:${i*70}ms">✦</s>`)}<b class="big"><svg viewBox="0 0 100 100"><path d="M50 0L58 38L96 26L64 50L96 74L58 62L50 100L42 62L4 74L36 50L4 26L42 38Z"/></svg></b><i class="sw"></i><i class="sw s2"></i>${R(14,i=>`<em style="--a:${i*26}deg;--r:${70+(i%3)*22}px"></em>`)}`;
+  return `<span class="cos-burst cbx-${n.fx}${game().lv&&n.pow>=4?" big":""}" style="${cosStyleCss(n)}" aria-hidden="true">${h}</span>`; }
+// whole-arena part of the stronger necklaces: flash, darkening, shake
+function cosArenaFx(){ const n=cosWorn().neck&&cosOf(cosWorn().neck); return n?` cfx cfx-${n.fx}`:""; }
+const cosFlash=()=>{ const n=cosWorn().neck&&cosOf(cosWorn().neck); return n?`<span class="cfx-fl" aria-hidden="true"></span>`:""; };
 function cosSfxName(e){ const s=cosWorn().sfx; if(!s||!SFX[s+(e&&(e.crit||e.spell)?"C":"")]) return null; return s+(e&&(e.crit||e.spell)?"C":""); }
 // extra hit sounds for the sound packs
 Object.assign(SFX,{
@@ -6502,6 +6643,11 @@ Object.assign(SFX,{
   "s-taiko":t=>{ tone(SND.fx,t,120,0.28,{type:"sine",to:55,v:0.6,a:0.002}); noise(SND.fx,t,0.06,{f:400,v:0.35}); },
   "s-taikoC":t=>{ SFX["s-taiko"](t); SFX["s-taiko"](t+0.13); noise(SND.fx,t+0.13,0.05,{f:3000,v:0.18}); },
   "s-retro":t=>{ tone(SND.fx,t,880,0.09,{type:"square",to:220,v:0.13}); },
+  "nx-fire":t=>{ noise(SND.fx,t,0.35,{f:900,v:0.28}); tone(SND.fx,t,200,0.3,{type:"sawtooth",to:90,v:0.1}); },
+  "nx-frost":t=>{ tone(SND.fx,t,2637,0.3,{type:"sine",v:0.1}); tone(SND.fx,t+0.06,3136,0.3,{type:"sine",v:0.08}); noise(SND.fx,t,0.22,{f:6000,v:0.12}); },
+  "nx-thunder":t=>{ noise(SND.fx,t,0.07,{f:4000,v:0.4}); noise(SND.fx,t+0.02,0.6,{f:300,v:0.5}); tone(SND.fx,t,80,0.55,{type:"sawtooth",to:38,v:0.2}); },
+  "nx-dark":t=>{ tone(SND.fx,t,140,0.8,{type:"sawtooth",to:42,v:0.2,vib:true}); tone(SND.fx,t+0.05,55,0.9,{type:"sine",v:0.32}); noise(SND.fx,t+0.3,0.5,{f:250,v:0.32}); },
+  "nx-star":t=>{ [76,80,83,88,92].forEach((m,i)=>tone(SND.fx,t+i*0.07,hz(m),0.3,{type:"square",v:0.08})); tone(SND.fx,t+0.38,2093,0.6,{type:"sine",v:0.14}); noise(SND.fx,t+0.38,0.5,{f:500,v:0.4}); noise(SND.fx,t+0.4,0.4,{f:7000,v:0.12}); },
   "s-retroC":t=>{ tone(SND.fx,t,988,0.07,{type:"square",v:0.13}); tone(SND.fx,t+0.07,1319,0.22,{type:"square",v:0.13}); }});
 const monWeek=d=>{ const x=new Date(d+"T12:00:00"); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return x.toISOString().slice(0,10); };
 function weekStudyDays(d){ const wk=monWeek(d||today()); let n=0; for(const [k,v] of S.days) if(k.startsWith("day~")&&v.postDone&&monWeek(v.date)===wk) n++; return n; }
@@ -6514,18 +6660,18 @@ function styleDaily(){ const g=game(), t=today(); if(g.styleDay===t) return null
 function cosPreviewIc(c){
   if(c.slot==="sfx") return `<span class="cos-ic sfx">${({"s-chime":"🔔","s-taiko":"🥁","s-retro":"👾"})[c.id]}</span>`;
   const L=cosLayers({[c.slot]:c.id});
-  return `<span class="cos-ic ${c.slot}" style="${cosStyleCss(c)}">${c.slot==="neck"?`<span class="cos-neck solo cn-${c.fx}" style="${cosStyleCss(c)}"><i></i></span>`:L.under}</span>`; }
+  return `<span class="cos-ic ${c.slot}${c.d3?" d3":""}" style="${cosStyleCss(c)}">${c.slot==="neck"?`<span class="cos-neck solo cn-${c.fx}" style="${cosStyleCss(c)}">${PENDANT[c.fx]}</span>`:L.under+L.over}</span>`; }
 function viewStyle(){
   const g=game(), slot=S.cosSlot||"feet", worn=cosWorn(), tryOn=S.cosTry||{}, plan=myPlan();
   const anyTry=Object.keys(tryOn).some(k=>tryOn[k]&&tryOn[k]!==(g.cos||{})[k]);
-  const stage=`<div class="sty-stage"><div class="sty-fig${S.cosHit?" hitting":""}">${heroArt(S.cosHit?"attack":"idle")}</div><div class="sty-dummy">${S.cosHit?cosBurst():""}<span class="dm">🎯</span></div></div>`;
+  const stage=`<div class="sty-stage${S.cosHit?cosArenaFx():""}">${S.cosHit?cosFlash():""}<div class="sty-fig${S.cosHit?" hitting":""}">${heroArt(S.cosHit?"attack":"idle")}</div><div class="sty-dummy">${S.cosHit?cosBurst():""}<span class="dm">🎯</span></div></div>`;
   const items=COSMETICS.filter(c=>c.slot===slot).map(c=>{
     const own=cosOwned(c.id), on=(g.cos||{})[slot]===c.id, trying=tryOn[slot]===c.id&&!on, lockPlus=c.plus&&!planHas("plus")&&!own;
     const btns=[];
     if(own) btns.push(on?`<button class="btn ghost sm" data-act="csoff" data-k="${slot}">${T("cosOff")}</button>`:`<button class="btn sm" data-act="cswear" data-k="${c.id}">${T("cosWear")}</button>`);
     else { btns.push(`<button class="btn ghost sm" data-act="cstry" data-k="${c.id}">${trying?T("cosTryOff"):T(c.slot==="sfx"?"cosListen":"cosTry")}</button>`);
       if(!lockPlus) btns.push(`<button class="btn sm" data-act="csbuy" data-k="${c.id}" ${(g.style||0)<c.price?"disabled":""}>${STYLE_IC} ${c.price}</button>`); }
-    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${c.plus?`<span class="plan-tag plus">${T("cosPlusOnly")}</span>`:""}<small class="muted">${T(c.id==="b-wings"?"cosD_wings":"cosD_"+c.slot)}</small>${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
+    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${c.plus?`<span class="plan-tag plus">${T("cosPlusOnly")}</span>`:""}<small class="muted">${T("cosDi_"+c.id)}</small>${c.pow?`<small class="cos-pow">${T("cosPow")} ${"★".repeat(c.pow)}<i>${"★".repeat(5-c.pow)}</i></small>`:""}${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
   const earn=[["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}],["styEarn3",{n:STYLE_EARN.sub}],["styEarn4",{n:STYLE_EARN.plus}]]
     .map(([k,o],i)=>`<li class="${(i===2&&plan==="sub")||(i===3&&plan==="plus")?"mine":""}">${T(k,o)}</li>`).join("");
   return `<section class="card sty-card">
@@ -6539,7 +6685,7 @@ function viewStyle(){
     <div class="cos-list">${items}</div>
     <section class="card"><h3>${T("styEarnT")}</h3><ul class="sty-earn">${earn}</ul></section>`;
 }
-function cosTest(){ const e={who:"p"}; S.cosHit=true; const n=cosSfxName(e); sfx(n||"hit"); render(); clearTimeout(S.cosHitT); S.cosHitT=setTimeout(()=>{ S.cosHit=false; render(); },900); }
+function cosTest(){ const e={who:"p"}; S.cosHit=true; const n=cosSfxName(e); sfx(n||"hit"); const nk=cosWorn().neck&&cosOf(cosWorn().neck); if(nk) sfx("nx-"+nk.fx); render(); clearTimeout(S.cosHitT); S.cosHitT=setTimeout(()=>{ S.cosHit=false; render(); },1400); }
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^cs/.test(a)) return; e.stopPropagation();
   const g=game(), k=t.dataset.k;
@@ -6683,6 +6829,18 @@ Object.assign(STR.hi,{"payBack": "भुगतान पूरा नहीं �
 Object.assign(STR.es,{"payBack": "El pago no se completó y no se cobró nada. Toca de nuevo para volver a intentarlo.", "subPortalGo": "Abriendo la gestión de la suscripción…", "subPortalPreview": "Es una vista previa de desarrollador sin suscripción real, así que no hay nada que gestionar."});
 Object.assign(STR.ja,{"payBack": "支払いは完了しておらず、請求もされていません。もう一度タップすると再試行できます。", "subPortalGo": "サブスク管理を開いています…", "subPortalPreview": "開発者プレビューのため実際の登録はなく、管理できるものはありません。"});
 Object.assign(STR.ko,{"payBack": "결제가 완료되지 않았고 청구되지 않았어요. 다시 누르면 다시 시도할 수 있어요.", "subPortalGo": "구독 관리를 여는 중…", "subPortalPreview": "개발자 미리 보기라 실제 구독이 없어서 관리할 수 없어요."});
+Object.assign(STR.zh,{"nickUseTicket":"用改名卷修改（剩 {n} 張）"});
+Object.assign(STR.en,{"nickUseTicket":"Change with a rename ticket ({n} left)"});
+Object.assign(STR.hi,{"nickUseTicket":"नाम-बदल टिकट से बदलें ({n} बाकी)"});
+Object.assign(STR.es,{"nickUseTicket":"Cambiar con un bono de nombre (quedan {n})"});
+Object.assign(STR.ja,{"nickUseTicket":"改名チケットで変更（残り{n}枚）"});
+Object.assign(STR.ko,{"nickUseTicket":"이름 변경권으로 바꾸기 ({n}장 남음)"});
+Object.assign(STR.zh,{"cos_f-helix": "金色螺旋光柱", "cos_f-orbit": "彩虹星環", "cos_b-gears": "時之齒輪", "cos_b-moon": "新月與星", "cos_b-crystal": "水晶環繞", "cos_b-abyss": "深淵魔紋", "cos_b-phoenix": "鳳凰火輪", "cos_n-thunder": "雷霆項鍊", "cos_n-dark": "暗黑深淵項鍊", "cosPow": "打擊強度", "cosDi_f-leaf": "腳下轉著一圈嫩綠的光", "cosDi_f-gold": "腳下轉著一圈金光", "cosDi_f-rainbow": "腳下轉著一圈彩虹", "cosDi_f-helix": "一圈圈金光從腳下螺旋往上升，立體繞著身體", "cosDi_f-orbit": "兩道彩虹光環斜斜繞著身體轉，星球在你前後穿梭", "cosDi_b-halo": "背後兩圈光環慢慢旋轉", "cosDi_b-gears": "三個金色齒輪在背後咬合轉動", "cosDi_b-rune": "凱爾特符文輪在背後旋轉發光", "cosDi_b-moon": "一彎新月在背後輕輕擺動，小星星繞著轉", "cosDi_b-crystal": "六顆水晶繞著身體轉，會從你前面和後面經過", "cosDi_b-abyss": "暗紫色魔紋在背後轉動，冒出黑色煙霧", "cosDi_b-wings": "一對光之翼在背後輕輕拍動", "cosDi_b-phoenix": "燃燒的火輪在背後轉，火苗不停跳動", "cosDi_n-fire": "火焰爆開，火星四散", "cosDi_n-frost": "冰刺從怪物身上炸開，凍成一片藍", "cosDi_n-thunder": "三道閃電劈下來，整個畫面閃白光", "cosDi_n-dark": "黑洞把怪物吸進去再炸開，畫面變暗、震動", "cosDi_n-star": "流星雨砸下來，巨大星光爆炸，金光閃爍、畫面大震動", "cosDi_s-chime": "清脆的鈴鐺聲", "cosDi_s-taiko": "咚咚的太鼓聲", "cosDi_s-retro": "復古遊戲機的像素音效"});
+Object.assign(STR.en,{"cos_f-helix": "Golden helix", "cos_f-orbit": "Rainbow orbit", "cos_b-gears": "Clockwork gears", "cos_b-moon": "Crescent and stars", "cos_b-crystal": "Crystal orbit", "cos_b-abyss": "Abyss sigil", "cos_b-phoenix": "Phoenix fire wheel", "cos_n-thunder": "Thunder necklace", "cos_n-dark": "Abyss necklace", "cosPow": "Strike power", "cosDi_f-leaf": "A ring of green light turns under your feet", "cosDi_f-gold": "A ring of gold turns under your feet", "cosDi_f-rainbow": "A rainbow ring turns under your feet", "cosDi_f-helix": "Rings of gold spiral up from your feet and wrap around you", "cosDi_f-orbit": "Two rainbow rings circle you at a tilt, with little planets passing in front and behind", "cosDi_b-halo": "Two halos turn slowly behind you", "cosDi_b-gears": "Three golden gears mesh and turn behind you", "cosDi_b-rune": "A Celtic rune wheel glows and turns behind you", "cosDi_b-moon": "A crescent moon sways behind you with stars circling", "cosDi_b-crystal": "Six crystals circle your body, passing in front and behind", "cosDi_b-abyss": "A dark purple sigil turns behind you, trailing black smoke", "cosDi_b-wings": "Wings of light gently beat behind you", "cosDi_b-phoenix": "A wheel of fire turns behind you, flames flickering", "cosDi_n-fire": "A burst of flame and flying embers", "cosDi_n-frost": "Ice spikes burst out and frost the monster blue", "cosDi_n-thunder": "Three lightning bolts strike and the screen flashes white", "cosDi_n-dark": "A black hole pulls the monster in and blows apart; the screen darkens and shakes", "cosDi_n-star": "A meteor shower crashes down into a huge starburst, a golden flash and a big shake", "cosDi_s-chime": "Bright little bells", "cosDi_s-taiko": "Booming taiko drums", "cosDi_s-retro": "Old-school game console bleeps"});
+Object.assign(STR.hi,{"cos_f-helix": "सुनहरा सर्पिल", "cos_f-orbit": "इंद्रधनुष कक्षा", "cos_b-gears": "घड़ी के गियर", "cos_b-moon": "अर्धचंद्र और तारे", "cos_b-crystal": "क्रिस्टल कक्षा", "cos_b-abyss": "अथाह चिह्न", "cos_b-phoenix": "फ़ीनिक्स अग्नि चक्र", "cos_n-thunder": "वज्र हार", "cos_n-dark": "अथाह हार", "cosPow": "वार की ताक़त", "cosDi_f-leaf": "पैरों के नीचे हरी रोशनी का घेरा", "cosDi_f-gold": "पैरों के नीचे सुनहरा घेरा", "cosDi_f-rainbow": "पैरों के नीचे इंद्रधनुषी घेरा", "cosDi_f-helix": "सुनहरे घेरे पैरों से सर्पिल बनकर ऊपर उठते हैं", "cosDi_f-orbit": "दो इंद्रधनुषी घेरे तिरछे घूमते हैं, छोटे ग्रह आगे-पीछे से गुज़रते हैं", "cosDi_b-halo": "पीछे दो प्रभामंडल धीरे घूमते हैं", "cosDi_b-gears": "पीछे तीन सुनहरे गियर आपस में घूमते हैं", "cosDi_b-rune": "पीछे केल्टिक रून चक्र चमकता है", "cosDi_b-moon": "पीछे अर्धचंद्र झूलता है, तारे घूमते हैं", "cosDi_b-crystal": "छह क्रिस्टल शरीर के चारों ओर आगे-पीछे घूमते हैं", "cosDi_b-abyss": "पीछे गहरा बैंगनी चिह्न घूमता है, काला धुआँ उठता है", "cosDi_b-wings": "पीछे रोशनी के पंख धीरे फड़फड़ाते हैं", "cosDi_b-phoenix": "पीछे आग का चक्र घूमता है, लपटें नाचती हैं", "cosDi_n-fire": "आग का विस्फोट और उड़ती चिंगारियाँ", "cosDi_n-frost": "बर्फ़ के काँटे फूटते हैं, राक्षस नीला जम जाता है", "cosDi_n-thunder": "तीन बिजलियाँ गिरती हैं, स्क्रीन सफ़ेद चमकती है", "cosDi_n-dark": "ब्लैक होल राक्षस को खींचकर फटता है; स्क्रीन अँधेरी होकर हिलती है", "cosDi_n-star": "उल्का वर्षा, विशाल तारा विस्फोट, सुनहरी चमक और ज़ोर का झटका", "cosDi_s-chime": "खनकती घंटियाँ", "cosDi_s-taiko": "गूँजते ताइको ढोल", "cosDi_s-retro": "पुराने गेम कंसोल की आवाज़ें"});
+Object.assign(STR.es,{"cos_f-helix": "Hélice dorada", "cos_f-orbit": "Órbita arcoíris", "cos_b-gears": "Engranajes del tiempo", "cos_b-moon": "Luna creciente y estrellas", "cos_b-crystal": "Órbita de cristales", "cos_b-abyss": "Sello del abismo", "cos_b-phoenix": "Rueda de fuego fénix", "cos_n-thunder": "Collar del trueno", "cos_n-dark": "Collar del abismo", "cosPow": "Fuerza del golpe", "cosDi_f-leaf": "Un anillo de luz verde gira a tus pies", "cosDi_f-gold": "Un anillo dorado gira a tus pies", "cosDi_f-rainbow": "Un anillo arcoíris gira a tus pies", "cosDi_f-helix": "Anillos dorados suben en espiral desde tus pies y te rodean", "cosDi_f-orbit": "Dos anillos arcoíris giran inclinados a tu alrededor; pequeños planetas pasan por delante y por detrás", "cosDi_b-halo": "Dos halos giran despacio a tu espalda", "cosDi_b-gears": "Tres engranajes dorados encajan y giran a tu espalda", "cosDi_b-rune": "Una rueda de runas celtas brilla y gira a tu espalda", "cosDi_b-moon": "Una luna creciente se mece con estrellas girando", "cosDi_b-crystal": "Seis cristales giran a tu alrededor, por delante y por detrás", "cosDi_b-abyss": "Un sello morado oscuro gira a tu espalda y suelta humo negro", "cosDi_b-wings": "Unas alas de luz aletean suavemente", "cosDi_b-phoenix": "Una rueda de fuego gira a tu espalda con llamas danzantes", "cosDi_n-fire": "Una explosión de llamas y chispas", "cosDi_n-frost": "Estallan púas de hielo y el monstruo queda azul", "cosDi_n-thunder": "Caen tres rayos y la pantalla destella en blanco", "cosDi_n-dark": "Un agujero negro atrae al monstruo y estalla; la pantalla se oscurece y tiembla", "cosDi_n-star": "Lluvia de meteoros, gran estallido estelar, destello dorado y temblor fuerte", "cosDi_s-chime": "Campanillas brillantes", "cosDi_s-taiko": "Tambores taiko retumbantes", "cosDi_s-retro": "Pitidos de consola retro"});
+Object.assign(STR.ja,{"cos_f-helix": "黄金のらせん光", "cos_f-orbit": "虹の星環", "cos_b-gears": "時の歯車", "cos_b-moon": "三日月と星", "cos_b-crystal": "クリスタルの輪", "cos_b-abyss": "深淵の紋章", "cos_b-phoenix": "鳳凰の炎輪", "cos_n-thunder": "雷のネックレス", "cos_n-dark": "深淵のネックレス", "cosPow": "攻撃演出の強さ", "cosDi_f-leaf": "足もとで若葉色の光の輪が回る", "cosDi_f-gold": "足もとで金色の輪が回る", "cosDi_f-rainbow": "足もとで虹の輪が回る", "cosDi_f-helix": "金色の輪が足もとかららせん状に立ちのぼる", "cosDi_f-orbit": "2本の虹の輪が斜めに体を回り、小さな星が前後を通る", "cosDi_b-halo": "背中で2つの光輪がゆっくり回る", "cosDi_b-gears": "背中で3つの金の歯車がかみ合って回る", "cosDi_b-rune": "背中でケルトのルーン輪が光って回る", "cosDi_b-moon": "背中で三日月がゆれ、星が周りを回る", "cosDi_b-crystal": "6つのクリスタルが体の前後を回る", "cosDi_b-abyss": "背中で暗い紫の紋章が回り、黒い煙が上がる", "cosDi_b-wings": "背中で光の翼がやさしく羽ばたく", "cosDi_b-phoenix": "背中で炎の輪が回り、炎がゆらめく", "cosDi_n-fire": "炎がはじけて火の粉が飛ぶ", "cosDi_n-frost": "氷のトゲが飛び出し、モンスターが青く凍る", "cosDi_n-thunder": "雷が3本落ち、画面が白く光る", "cosDi_n-dark": "ブラックホールが吸い込んで爆発、画面が暗くなって揺れる", "cosDi_n-star": "流星群が降り注ぎ、巨大な星が爆発、金色に光って大きく揺れる", "cosDi_s-chime": "澄んだ鈴の音", "cosDi_s-taiko": "ドンと響く太鼓", "cosDi_s-retro": "レトロゲーム機のピコピコ音"});
+Object.assign(STR.ko,{"cos_f-helix": "황금 나선 빛기둥", "cos_f-orbit": "무지개 별고리", "cos_b-gears": "시간의 톱니바퀴", "cos_b-moon": "초승달과 별", "cos_b-crystal": "수정 고리", "cos_b-abyss": "심연의 문양", "cos_b-phoenix": "불사조 화염륜", "cos_n-thunder": "번개 목걸이", "cos_n-dark": "심연 목걸이", "cosPow": "타격 연출 강도", "cosDi_f-leaf": "발밑에서 연두빛 고리가 돌아요", "cosDi_f-gold": "발밑에서 금빛 고리가 돌아요", "cosDi_f-rainbow": "발밑에서 무지개 고리가 돌아요", "cosDi_f-helix": "금빛 고리가 발밑에서 나선으로 올라가며 몸을 감싸요", "cosDi_f-orbit": "무지개 고리 두 개가 비스듬히 몸을 돌고, 작은 행성이 앞뒤로 지나가요", "cosDi_b-halo": "등 뒤에서 후광 두 개가 천천히 돌아요", "cosDi_b-gears": "등 뒤에서 금빛 톱니바퀴 세 개가 맞물려 돌아요", "cosDi_b-rune": "등 뒤에서 켈트 룬 바퀴가 빛나며 돌아요", "cosDi_b-moon": "등 뒤에서 초승달이 흔들리고 별이 돌아요", "cosDi_b-crystal": "수정 여섯 개가 몸 앞뒤로 빙글빙글 돌아요", "cosDi_b-abyss": "등 뒤에서 어두운 보라 문양이 돌며 검은 연기가 피어올라요", "cosDi_b-wings": "등 뒤에서 빛의 날개가 살랑 날갯짓해요", "cosDi_b-phoenix": "등 뒤에서 불의 바퀴가 돌며 불꽃이 일렁여요", "cosDi_n-fire": "불꽃이 터지고 불티가 흩날려요", "cosDi_n-frost": "얼음 가시가 터지며 몬스터가 파랗게 얼어요", "cosDi_n-thunder": "번개 세 줄기가 내리치고 화면이 하얗게 번쩍여요", "cosDi_n-dark": "블랙홀이 몬스터를 빨아들였다 터지며 화면이 어두워지고 흔들려요", "cosDi_n-star": "유성우가 쏟아지고 거대한 별이 터지며 금빛 섬광과 큰 진동", "cosDi_s-chime": "맑은 방울 소리", "cosDi_s-taiko": "둥둥 울리는 북소리", "cosDi_s-retro": "레트로 게임기 효과음"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
