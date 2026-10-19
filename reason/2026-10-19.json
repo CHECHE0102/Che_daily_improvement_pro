@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-19",
+ "items": {
+  "2026-10-19": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The HSE has cut its use of agency staff to save money.",
+     "An overpayment of 30 million euro is the main cause of the HSE's deficit.",
+     "The HSE has overspent heavily on agency staff while its income has fallen and demand has kept rising, leaving a large deficit.",
+     "The Sláintecare reforms have increased the HSE's private income."
+    ],
+    "a": 2,
+    "exp": "The passage centres on the 250 million euro agency overrun, the \"deficit of almost 660 million euro\", the 44 per cent drop in private income and rising demand. The 30 million overpayment (B) is a minor addition."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from spending on directly employed staff being 220 million euro below its allocation?",
+    "opts": [
+     "The HSE has recruited too many permanent staff.",
+     "Vacant permanent posts are being covered by agency workers, who cost considerably more.",
+     "Directly employed staff have accepted a pay cut.",
+     "Agency workers are cheaper than permanent employees."
+    ],
+    "a": 1,
+    "exp": "The writer says this \"implies that permanent vacancies are increasingly being filled by temporary workers\", and agency staff \"can cost roughly 40 per cent more than directly recruited employees\"."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention emergency department attendances and cancer services?",
+    "opts": [
+     "To show that the HSE has met all of its budget targets.",
+     "To argue that agency staff should be dismissed.",
+     "To explain why income from private practice fell.",
+     "To show that demand for services kept rising despite the financial problems."
+    ],
+    "a": 3,
+    "exp": "The paragraph opens with \"Nevertheless, demand for services has continued to rise\" and gives a 7.2 per cent rise in attendances and 44 per cent more surge capacity."
+   }
+  ],
+  "2026-10-19-2": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Met Éireann is trying to keep about 150 amateur weather stations running after the platform that collects their data is shut down.",
+     "Met Éireann is closing its 25 official weather stations.",
+     "The UK Met Office is building a new EU weather platform.",
+     "Amateur weather observations have now been made official."
+    ],
+    "a": 0,
+    "exp": "The passage opens with Met Éireann \"endeavouring to preserve a network of approximately 150 amateur weather stations\" because Wow \"is to be discontinued\". The new platform is being built by EU member states, not the UK Met Office (C)."
+   },
+   {
+    "type": "infer",
+    "q": "Why are the amateur observations \"not classified as official\"?",
+    "opts": [
+     "Because schools are not allowed to record weather data.",
+     "Because the Wow platform uses outdated technology.",
+     "Because they are only collected in winter.",
+     "Because the equipment varies a lot between stations, so the readings are less consistent."
+    ],
+    "a": 3,
+    "exp": "They are not official \"owing to substantial variation in equipment\". Outdated technology (B) is the reason the platform is closing, not the reason the data is unofficial."
+   },
+   {
+    "type": "tone",
+    "q": "What is the writer's attitude towards the amateur network?",
+    "opts": [
+     "Dismissive: it is unreliable and unnecessary.",
+     "Broadly positive, but cautious about its future.",
+     "Angry with the UK Met Office.",
+     "Enthusiastic and certain that it will grow."
+    ],
+    "a": 1,
+    "exp": "The stations are \"a valuable supplement\" that \"compensate for gaps in coverage\", yet \"the long-term viability of the network will be contingent upon\" the new platform."
+   }
+  ],
+  "2026-10-19-3": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Storm Babet caused new flooding in Midleton on Saturday.",
+     "Residents protested because flood protection promised after Storm Babet has still not been delivered, despite the Government pointing to its funding.",
+     "Cork County Council has completed a scheme that protects 750 properties.",
+     "The protest group is demanding 200 million euro in compensation."
+    ],
+    "a": 1,
+    "exp": "About 500 people protested over \"the lack of adequate flood protection in the three years since Storm Babet\"; the Government \"maintains that substantial investment is under way\". The flooding was in 2023 (A) and the 750-property scheme is not yet submitted (C)."
+   },
+   {
+    "type": "infer",
+    "q": "Why has \"public confidence in the process ... diminished considerably\"?",
+    "opts": [
+     "Because the protest attracted too few people.",
+     "Because the Government has refused all funding.",
+     "Because promised deadlines were missed, such as the September planning submission, and the timeline has been revised four times.",
+     "Because the preliminary works will protect only 135 properties."
+    ],
+    "a": 2,
+    "exp": "The group was told the scheme \"would be submitted for planning in September; however, this did not occur, and the timeline has subsequently been revised on four occasions. Consequently, public confidence ... has diminished\"."
+   },
+   {
+    "type": "purpose",
+    "q": "What is the function of the paragraph beginning \"The Government maintains...\"?",
+    "opts": [
+     "To show that the protesters' concerns have been fully resolved.",
+     "To describe the damage caused in 2023.",
+     "To list the communities whose residents joined the protest.",
+     "To give the official response, while noting that the full scheme still depends on planning approval."
+    ],
+    "a": 3,
+    "exp": "It sets out the Government's figures (14 million euro, 135 and 750 properties) but ends: \"its eventual completion remains contingent upon planning approval\"."
+   }
+  ],
+  "2026-10-19-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "A national Catholic assembly ended a five-year consultation by voting on proposals for the bishops, including narrow support for examining women's role in ministry.",
+     "The bishops approved the ordination of women as deacons.",
+     "Most delegates voted to set up a national office for women.",
+     "The assembly rejected every proposal about LGBT+ people."
+    ],
+    "a": 0,
+    "exp": "The assembly \"concluded a consultation process lasting five years\" and voted on 35 proposals; the women-in-ministry proposal won 54 per cent. The office for women was rejected (C) and the LGBT+ request was supported (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the vote on women in ministry suggest?",
+    "opts": [
+     "The delegates were almost unanimous.",
+     "Most delegates opposed any discussion of the issue.",
+     "Support was real but far from overwhelming, since nearly half of the delegates did not back it outright.",
+     "The proposal will now automatically become church law."
+    ],
+    "a": 2,
+    "exp": "It received \"the support of 54 per cent of delegates; nevertheless, 19 per cent considered that further discernment was required, and 27 per cent were opposed\". The proposals only go to the bishops \"as formal recommendations\" (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer quote Archbishop Eamon Martin?",
+    "opts": [
+     "To show that church leaders see change as necessary because many parishes cannot continue as they are.",
+     "To show that the archbishop opposed the assembly.",
+     "To explain how the delegates were chosen.",
+     "To report the bishops' final decision."
+    ],
+    "a": 0,
+    "exp": "He said the process \"had been essential, since a substantial number of parishes and dioceses are unsustainable in their current form\". The bishops have not yet decided; they \"meet next week\" (D)."
+   }
+  ]
+ }
+}
