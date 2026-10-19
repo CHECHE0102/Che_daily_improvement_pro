@@ -3335,7 +3335,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.167";
+const APP_VERSION="2026.10.168";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4032,12 +4032,17 @@ const powerOf=s=>s.hp+s.atk*3+s.def*2;
 /* "look": how my character appears to others — gender | weapon | armour | weapon gems | armour gems */
 function myLook(){ const g=game(); if(!g||!g.gender) return "";
   const sk=id=>id?socketsOf(id).filter(Boolean).join("."):"";
-  return [g.gender, g.weapon||"", g.armor||"", sk(g.weapon), sk(g.armor)].join("|").slice(0,100); }
-function parseLook(str){ if(typeof str!=="string") return null; const [g,w,a,ws,as]=str.split("|");
+  const c=g.cos||{}, cc=["feet","back","neck"].map(k=>COS_CODE[c[k]]||"").join("");
+  return [g.gender, g.weapon||"", g.armor||"", sk(g.weapon), sk(g.armor), cc].join("|").slice(0,100); }
+// styles travel to the leaderboard as two-letter codes (the look field is limited to 100 characters)
+const COS_CODE={"f-leaf":"fl","f-gold":"fg","f-helix":"fh","f-rainbow":"fr","f-rhelix":"fx","b-halo":"bh","b-gears":"bg","b-rune":"br","b-moon":"bm","b-abyss":"ba","b-wings":"bw","b-phoenix":"bp","n-fire":"nf","n-frost":"ni","n-thunder":"nt","n-dark":"nd","n-star":"ns"};
+const COS_DECODE=Object.fromEntries(Object.entries(COS_CODE).map(([k,v])=>[v,k]));
+function parseLook(str){ if(typeof str!=="string") return null; const [g,w,a,ws,as,cc]=str.split("|");
   if(g!=="m"&&g!=="f") return null; const gem=x=>(x||"").split(".").filter(k=>/^(metal|wood|water|fire|earth)-[0-3]$/.test(k)).slice(0,4);
-  return {g, w:ITEMS[w]?w:null, a:ITEMS[a]?a:null, ws:gem(ws), as:gem(as)}; }
+  const cos={}; for(const m of (cc||"").match(/[a-z]{2}/g)||[]){ const id=COS_DECODE[m], c=id&&cosOf(id); if(c) cos[c.slot]=id; }
+  return {g, w:ITEMS[w]?w:null, a:ITEMS[a]?a:null, ws:gem(ws), as:gem(as), cos}; }
 function lookArt(str, cls, pose){ const L=parseLook(str); if(!L) return `<div class="${cls} look-ph">🙂</div>`;
-  return charArt(L.g, pose||"idle", L.w&&ITEMS[L.w], L.a&&ITEMS[L.a], cls, {ws:L.ws, as:L.as, lazy:true}); }
+  return charArt(L.g, pose||"idle", L.w&&ITEMS[L.w], L.a&&ITEMS[L.a], cls, {ws:L.ws, as:L.as, lazy:true}, Object.keys(L.cos).length?cosLayers(L.cos):null); }
 const LOOKS={};   // uid → look string (from leaderboard docs), for party lobbies
 async function lookFetch(uids){ if(!CLOUD.fb) return; const {fsM,db}=CLOUD.fb; let got=false;
   await Promise.all(uids.filter(u=>!(u in LOOKS)).map(async u=>{ LOOKS[u]=""; try{ const d=await fsM.getDoc(fsM.doc(db,"leaderboard",u)); if(d.exists()&&d.data().look){ LOOKS[u]=String(d.data().look); got=true; } }catch(e){} }));
@@ -6722,6 +6727,8 @@ function viewStyle(){
     <div class="cos-list">${items}</div>
     <section class="card"><h3>${T("styEarnT")}</h3><ul class="sty-earn">${earn}</ul></section>`;
 }
+// what you wear shows on the leaderboard too
+function cosPush(){ try{ if(CLOUD.user&&!SANDBOX()&&typeof lbPush==="function"){ S.rk=null; lbPush(); } }catch(e){} }
 function cosTest(){ const e={who:"p"}; S.cosHit=true; const n=cosSfxName(e); sfx(n||"hit"); const nk=cosWorn().neck&&cosOf(cosWorn().neck); if(nk) sfx("nx-"+nk.fx); render(); clearTimeout(S.cosHitT); S.cosHitT=setTimeout(()=>{ S.cosHit=false; render(); },1400); }
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^cs/.test(a)) return; e.stopPropagation();
@@ -6732,9 +6739,9 @@ document.addEventListener("click",e=>{
   if(a==="cstest") return cosTest();
   if(a==="csbuy"){ const c=cosOf(k); if(!c||cosOwned(k)) return; if(cosNeed(c)&&!planHas(cosNeed(c))) return toast(T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly"));
     if((g.style||0)<c.price) return toast(T("cosNoCoin",{n:c.price-(g.style||0)}));
-    g.style-=c.price; g.cosOwn=[...(g.cosOwn||[]),k]; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); sfx("prize"); toast(T("cosBought")); return render(); }
-  if(a==="cswear"){ const c=cosOf(k); if(!c||!cosOwned(k)) return; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); if(c.slot==="sfx"||c.slot==="neck") return cosTest(); return render(); }
-  if(a==="csoff"){ g.cos={...(g.cos||{})}; delete g.cos[k]; saveGame(); return render(); }
+    g.style-=c.price; g.cosOwn=[...(g.cosOwn||[]),k]; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); cosPush(); sfx("prize"); toast(T("cosBought")); return render(); }
+  if(a==="cswear"){ const c=cosOf(k); if(!c||!cosOwned(k)) return; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); cosPush(); if(c.slot==="sfx"||c.slot==="neck") return cosTest(); return render(); }
+  if(a==="csoff"){ g.cos={...(g.cos||{})}; delete g.cos[k]; saveGame(); cosPush(); return render(); }
 });
 
 /* ================= daily "what I learned today" card (free for everyone) ================= */
