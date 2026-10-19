@@ -3233,7 +3233,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.159";
+const APP_VERSION="2026.10.160";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6151,6 +6151,13 @@ function payShowDone(x){
   el.innerHTML=`<div class="scrim pd-scrim" data-act="paydoneclose"></div><div class="pd-card" role="dialog" aria-modal="true">${hero}<h2>${T("payDoneT")}</h2><p class="sm-t muted">${T("payDoneSub")}</p><div class="pd-list">${rows}</div><button class="btn" data-act="paydoneclose">${T("payDoneOk")}</button></div>`; }
 document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="paydoneclose"]'); if(!t) return; e.stopPropagation(); const el=document.getElementById("payDone"); if(el) el.remove(); render(); }, true);
 const payName=x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return v?vaultName(v):x.item; };
+// we left for Stripe; if this same page comes back (back button, the in-app browser closed, page restored from cache), unlock the buttons and say so
+let PAY_LEFT=0;
+function payLeave(){ PAY_LEFT=Date.now(); clearTimeout(payLeave.t); payLeave.t=setTimeout(()=>payBack(true),20000); }
+function payBack(quiet){ if(!PAY_BUSY&&!PAY_LEFT) return; const was=PAY_LEFT; PAY_LEFT=0; clearTimeout(payLeave.t); PAY_BUSY=false; render(); if(was&&!quiet) toast(T("payBack")); }
+window.addEventListener("pageshow",e=>{ if(e.persisted&&(PAY_BUSY||PAY_LEFT)) payBack(); });
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible"&&PAY_LEFT&&Date.now()-PAY_LEFT>1500) payBack(); });
+window.addEventListener("focus",()=>{ if(PAY_LEFT&&Date.now()-PAY_LEFT>1500) payBack(); });
 async function payBuy(id){
   const v=VAULT_ITEMS.find(i=>i.id===id); if(!v||PAY_BUSY) return;
   if(!CLOUD.user) return toast(T("payLogin"));
@@ -6158,7 +6165,7 @@ async function payBuy(id){
   try{ const tok=await CLOUD.user.getIdToken();
     const r=await fetch(PAY_FN+"/createCheckout",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:JSON.stringify({item:v.pay,nick:game().nick||"",lang:({zh:"zh-TW",cn:"zh"})[langKey()]||langKey()})});
     const j=await r.json().catch(()=>({}));
-    if(r.ok&&j.url){ location.href=j.url; return; }
+    if(r.ok&&j.url){ payLeave(); location.href=j.url; return; }
     toast(j.error==="closed"?T("vaultSoon"):j.error==="already"?T("subAlready"):T("payFail")); console.warn("checkout",r.status,j); }
   catch(e){ toast(T("payFail")); console.warn("checkout",e); }
   PAY_BUSY=false; render(); }
@@ -6198,15 +6205,17 @@ function subCard(buyable){
     return `<div class="sub-plan${pl?" plus":""}${mine?" mine":""}"><div class="sub-head"><b>${v.ic} ${T(pl?"plusT":"subT")}</b>${v.price?`<span class="sub-price">${T("subPer",{p:v.price})}</span>`:""}</div>
       <ul class="sub-perks">${(pl?["plusPerk0","plusPerk1","plusPerk2","plusPerk3"]:["subPerk1","subPerk2","subPerk3","subPerk4"]).map(k=>`<li>${T(k)}</li>`).join("")}</ul><div class="sub-ladder">${ladder}</div>${btn}</div>`; };
   const plans=VAULT_ITEMS.filter(i=>i.kind==="sub").map(plan).join("");
-  const status=on?`<p class="sm-t"><b>${T("subNow",{n:m})}</b>${next?` · ${T("subNext",{n:next[0]-m,b:sbName(next[1],me.plus)})}`:""}</p><button class="btn ghost sm" data-act="subportal" ${PAY_BUSY?"disabled":""}>${T("subManage")}</button>`
+  const status=on?`<p class="sm-t"><b>${T("subNow",{n:m})}</b>${next?` · ${T("subNext",{n:next[0]-m,b:sbName(next[1],me.plus)})}`:""}</p><button class="btn ghost sm" data-act="vtportal" ${PAY_BUSY?"disabled":""}>${T("subManage")}</button>`
     :!CLOUD.user?`<p class="muted sm-t">${T("payLogin")}</p>`:"";
   return `<section class="card sub-card"><h3>🌟 ${T("subHead")}</h3><p class="muted sm-t">${T("subSub")}</p><div class="sub-plans">${plans}</div>${status}</section>`;
 }
 async function subPortal(){
-  if(!CLOUD.user||PAY_BUSY) return; PAY_BUSY=true; render();
+  if(!CLOUD.user) return toast(T("payLogin"));
+  const real=SUP[CLOUD.user.uid]; if(DEV&&DEV.plan&&!(real&&real.sub)) return toast(T("subPortalPreview"));
+  if(PAY_BUSY) return; PAY_BUSY=true; render(); toast(T("subPortalGo"));
   try{ const tok=await CLOUD.user.getIdToken();
     const r=await fetch(PAY_FN+"/subPortal",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:"{}"});
-    const j=await r.json().catch(()=>({})); if(r.ok&&j.url){ location.href=j.url; return; } toast(T("subPortalFail")); console.warn("portal",r.status,j); }
+    const j=await r.json().catch(()=>({})); if(r.ok&&j.url){ payLeave(); location.href=j.url; return; } toast(T("subPortalFail")); console.warn("portal",r.status,j); }
   catch(e){ toast(T("subPortalFail")); }
   PAY_BUSY=false; render(); }
 function viewVault(){
@@ -6253,7 +6262,7 @@ document.addEventListener("click",e=>{
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^vt/.test(a)) return; e.stopPropagation();
   if(a==="vttest") return vaultTest(t.dataset.k);
   if(a==="vtbuy") return payBuy(t.dataset.k);
-  if(a==="subportal") return subPortal();
+  if(a==="vtportal") return subPortal();
   if(a==="vtfind") return giftFind();
   if(a==="vtreset"){ S.gift=null; return render(); }
   if(a==="vtstep"){ const [kind,k,d]=t.dataset.k.split("|"); return giftStep(kind,k,+d); }
@@ -6668,6 +6677,12 @@ Object.assign(STR.hi,{"cosD_wings":"पीछे धीरे-धीरे फ�
 Object.assign(STR.es,{"cosD_wings":"Brillan y aletean suavemente a tu espalda"});
 Object.assign(STR.ja,{"cosD_wings":"背中でやさしく羽ばたいて光る"});
 Object.assign(STR.ko,{"cosD_wings":"등 뒤에서 살랑살랑 날갯짓하며 빛나요"});
+Object.assign(STR.zh,{"payBack": "付款沒有完成，也沒有扣款。想買的話可以再按一次。", "subPortalGo": "正在打開訂閱管理…", "subPortalPreview": "這是開發者預覽畫面，沒有真的訂閱，所以不能管理。"});
+Object.assign(STR.en,{"payBack": "The payment wasn't finished and nothing was charged. Tap again to try once more.", "subPortalGo": "Opening subscription settings…", "subPortalPreview": "This is a developer preview with no real subscription, so there's nothing to manage."});
+Object.assign(STR.hi,{"payBack": "भुगतान पूरा नहीं हुआ, कोई पैसा नहीं कटा। फिर से कोशिश करने के लिए दोबारा टैप करें।", "subPortalGo": "सदस्यता सेटिंग खुल रही है…", "subPortalPreview": "यह डेवलपर पूर्वावलोकन है, असली सदस्यता नहीं, इसलिए प्रबंधित करने को कुछ नहीं।"});
+Object.assign(STR.es,{"payBack": "El pago no se completó y no se cobró nada. Toca de nuevo para volver a intentarlo.", "subPortalGo": "Abriendo la gestión de la suscripción…", "subPortalPreview": "Es una vista previa de desarrollador sin suscripción real, así que no hay nada que gestionar."});
+Object.assign(STR.ja,{"payBack": "支払いは完了しておらず、請求もされていません。もう一度タップすると再試行できます。", "subPortalGo": "サブスク管理を開いています…", "subPortalPreview": "開発者プレビューのため実際の登録はなく、管理できるものはありません。"});
+Object.assign(STR.ko,{"payBack": "결제가 완료되지 않았고 청구되지 않았어요. 다시 누르면 다시 시도할 수 있어요.", "subPortalGo": "구독 관리를 여는 중…", "subPortalPreview": "개발자 미리 보기라 실제 구독이 없어서 관리할 수 없어요."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
