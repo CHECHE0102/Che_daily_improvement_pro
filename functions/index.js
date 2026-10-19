@@ -34,7 +34,12 @@ const ORIGINS = ["https://binbindaily.com", "https://www.binbindaily.com", "http
 // test=true: sandbox item, only testers may buy it.
 const CATALOG = {
   charm3: { price: "price_1URwQO8z3lVUqS5jPxa6225l", grant: { charms: 3 }, test: true },
+  // monthly membership: a supporter badge that gets finer the longer you stay (price: a monthly recurring Stripe price)
+  sub: { price: "", grant: {}, mode: "subscription", test: true },
 };
+// months subscribed → badge tier (same five badges as the old supporter badges)
+const SUB_TIERS = [[24, 5], [12, 4], [6, 3], [3, 2], [1, 1]];
+const subTier = m => (SUB_TIERS.find(([n]) => m >= n) || [0, 0])[1];
 // sha256 of tester e-mail addresses (sandbox only; keeps the address itself out of this public repo)
 const TESTERS = new Set(["d64a281160d50a9cd12426bc8ee395a2315b913497c840ed9c65feb367d56fc0"]);
 const sha = s => crypto.createHash("sha256").update(String(s || "").toLowerCase()).digest("hex");
@@ -61,11 +66,19 @@ export const createCheckout = onRequest({ region: REGION, secrets: [STRIPE_KEY],
     if (!user) return res.status(401).json({ error: "login" });
     const id = String(req.body?.item || ""), it = CATALOG[id];
     if (!it) return res.status(400).json({ error: "item" });
+    if (!it.price) return res.status(403).json({ error: "closed" });
     const testMode = STRIPE_KEY.value().startsWith("sk_test_");
     if ((testMode || it.test) && !(user.email_verified && TESTERS.has(sha(user.email)))) return res.status(403).json({ error: "closed" });
     const lang = String(req.body?.lang || "auto").slice(0, 5);
+    const sub = it.mode === "subscription";
+    if (sub) {
+      const cur = await db.doc("supporters/" + user.uid).get();
+      if (cur.exists && cur.data().sub === true) return res.status(409).json({ error: "already" });
+    }
+    const nick = String(req.body?.nick || "").slice(0, 16);
     const s = await stripe("checkout/sessions", {
-      mode: "payment",
+      mode: sub ? "subscription" : "payment",
+      ...(sub ? { subscription_data: { metadata: { uid: user.uid, nick } } } : {}),
       line_items: { 0: { price: it.price, quantity: 1 } },
       managed_payments: { enabled: true },
       client_reference_id: user.uid,
@@ -99,6 +112,54 @@ async function markByPaymentIntent(pi, data) {
   return q.size;
 }
 
+/* ----- membership (subscription) ----- */
+// every paid invoice adds a month; the badge tier follows the months. Admin-given badges (field "manual") are never lowered.
+async function subPaid(inv) {
+  const sd = inv.parent?.subscription_details || inv.subscription_details || {};
+  const subId = sd.subscription || inv.subscription;
+  if (!subId || !(inv.amount_paid > 0 || inv.status === "paid")) return;
+  const sref = db.doc("subscriptions/" + subId);
+  await db.runTransaction(async tx => {
+    const cur = await tx.get(sref), d = cur.exists ? cur.data() : {};
+    const uid = d.uid || sd.metadata?.uid; if (!uid) { logger.warn("invoice without uid", inv.id); return; }
+    const seen = d.invoices || []; if (seen.includes(inv.id)) return;   // Stripe can resend events
+    const months = (d.months || 0) + 1;
+    const pref = db.doc("supporters/" + uid), p = await tx.get(pref), pd = p.exists ? p.data() : {};
+    const manual = pd.manual ?? (pd.sub ? 0 : pd.tier || 0);
+    const end = inv.lines?.data?.[0]?.period?.end || null;
+    tx.set(sref, { uid, status: "active", months, invoices: [...seen, inv.id].slice(-40), periodEnd: end, customer: inv.customer || d.customer || null, test: !inv.livemode }, { merge: true });
+    tx.set(pref, { tier: Math.max(subTier(months), manual), manual, sub: true, months, n: sd.metadata?.nick || pd.n || "", at: Date.now() }, { merge: true });
+  });
+}
+async function subStatus(sub) {
+  const sref = db.doc("subscriptions/" + sub.id), cur = await sref.get();
+  const uid = (cur.exists && cur.data().uid) || sub.metadata?.uid; if (!uid) return;
+  const ended = ["canceled", "unpaid", "incomplete_expired"].includes(sub.status);
+  await sref.set({ uid, status: sub.status, cancelAtEnd: !!sub.cancel_at_period_end }, { merge: true });
+  if (!ended) return;
+  const pref = db.doc("supporters/" + uid), p = await pref.get(); if (!p.exists) return;
+  const pd = p.data(), manual = pd.manual || 0;
+  if (manual) await pref.set({ tier: manual, sub: false }, { merge: true }); else await pref.delete();
+}
+
+// opens Stripe's page where a member can cancel or change their card
+export const subPortal = onRequest({ region: REGION, secrets: [STRIPE_KEY], cors: ORIGINS, maxInstances: 5 }, async (req, res) => {
+  if (req.method !== "POST") return res.status(405).json({ error: "method" });
+  try {
+    const tok = (req.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+    const user = await getAuth().verifyIdToken(tok).catch(() => null);
+    if (!user) return res.status(401).json({ error: "login" });
+    const q = await db.collection("subscriptions").where("uid", "==", user.uid).limit(10).get();
+    const d = q.docs.map(x => x.data()).find(x => x.customer);
+    if (!d) return res.status(404).json({ error: "none" });
+    const p = await stripe("billing_portal/sessions", { customer: d.customer, return_url: SITE + "?pay=portal" });
+    res.json({ url: p.url });
+  } catch (e) {
+    logger.error("subPortal", e.message, e.code);
+    res.status(500).json({ error: "server", detail: e.message });
+  }
+});
+
 export const stripeWebhook = onRequest({ region: REGION, secrets: [STRIPE_KEY, WEBHOOK_SECRET], maxInstances: 5 }, async (req, res) => {
   const raw = req.rawBody ? req.rawBody.toString("utf8") : "";
   if (!verifySig(raw, req.get("Stripe-Signature"), WEBHOOK_SECRET.value())) { logger.warn("bad signature"); return res.status(400).send("bad signature"); }
@@ -107,6 +168,9 @@ export const stripeWebhook = onRequest({ region: REGION, secrets: [STRIPE_KEY, W
     const o = ev.data?.object || {};
     if ((ev.type === "checkout.session.completed" || ev.type === "checkout.session.async_payment_succeeded") && o.payment_status === "paid") {
       const uid = o.metadata?.uid || o.client_reference_id, item = o.metadata?.item, it = CATALOG[item];
+      if (uid && it && o.mode === "subscription" && o.subscription) {
+        await db.doc("subscriptions/" + o.subscription).set({ uid, customer: o.customer || null, test: !o.livemode, startedAt: FieldValue.serverTimestamp() }, { merge: true });
+      }
       if (uid && it) {
         const ref = db.doc("purchases/" + o.id);
         await db.runTransaction(async tx => {
@@ -116,6 +180,10 @@ export const stripeWebhook = onRequest({ region: REGION, secrets: [STRIPE_KEY, W
             amount: o.amount_total ?? null, currency: o.currency || null, test: !o.livemode, paidAt: FieldValue.serverTimestamp() }, { merge: true });
         });
       } else logger.warn("session without uid/item", o.id);
+    } else if (ev.type === "invoice.paid") {
+      await subPaid(o);
+    } else if (ev.type === "customer.subscription.deleted" || ev.type === "customer.subscription.updated") {
+      await subStatus(o);
     } else if (ev.type === "checkout.session.expired" || ev.type === "checkout.session.async_payment_failed") {
       await db.doc("purchases/" + o.id).set({ status: "failed" }, { merge: true });
     } else if (ev.type === "charge.refunded") {

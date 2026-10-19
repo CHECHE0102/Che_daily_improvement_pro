@@ -765,6 +765,7 @@ body.maint-lock{overflow:hidden}
 @keyframes hsidle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px) scale(1.01)}}
 @media (prefers-reduced-motion:reduce){.hs-fig .hero-svg{animation:none}}
 .mast-l{display:flex;align-items:center;gap:8px;min-width:0}
+.st-nick{display:flex;gap:8px;margin:4px 0 2px}.st-nick .search{flex:1;min-width:0}.st-nick .btn{flex:none}.st-nick-note{margin:4px 0 6px;color:var(--muted);text-align:center}.st-signin{align-self:center;margin-bottom:6px}
 .login-hint{position:absolute;top:calc(100% + 10px);left:10px;z-index:6;max-width:min(300px,calc(100vw - 40px));display:flex;align-items:flex-start;gap:8px;padding:11px 10px 11px 14px;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-size:14px;line-height:1.45;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;animation:lhIn .35s ease-out both}
 .login-hint::before{content:"";position:absolute;top:-7px;left:14px;width:14px;height:14px;background:inherit;transform:rotate(45deg);border-radius:3px 0 0 0}
 .login-hint span{position:relative}
@@ -907,6 +908,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .adv-quick{gap:8px}.aq-btn{min-width:58px}.aq-dot{position:absolute;right:-6px;top:-6px;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:#E0457B;color:#fff;font:800 11px/18px system-ui;font-style:normal}
 .aq-btn.vault .aq-ic{background:linear-gradient(135deg,#FFF5D6,#FFE1F0 45%,#DDF0FF);border-color:#E3B341}.aq-btn.vault>span:last-child{background:linear-gradient(90deg,#E0573B,#D9A520,#3FA65A,#2A68B0,#7E5BB5);-webkit-background-clip:text;background-clip:text;color:transparent}
 .vault-hero{display:flex;gap:14px;align-items:center;border-radius:var(--r);padding:16px;background:linear-gradient(135deg,#2B1A3F,#1B2A4A 55%,#123D33);color:#FFF6DA;box-shadow:inset 0 0 0 1px rgba(255,215,120,.35)}.vault-hero h2{margin:2px 0 4px;font-size:24px;background:linear-gradient(90deg,#FF8A65,#FFD54F,#81C784,#64B5F6,#BA68C8);-webkit-background-clip:text;background-clip:text;color:transparent}.vault-hero p{margin:0;opacity:.85}.vault-hero .eyebrow{color:#FFD54F}.vh-ic{width:64px;height:64px;flex:none;border-radius:18px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}.vh-ic svg{width:48px;height:48px}
+.sub-ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:10px 0 12px}.sub-step{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;font-size:11px;line-height:1.25;padding:6px 2px;border-radius:12px;opacity:.55}.sub-step.got{opacity:1}.sub-step.now{background:color-mix(in srgb,var(--accent) 16%,transparent);outline:1.5px solid var(--accent)}.sub-step b{font-size:11px}
 .vt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px}.vt-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border-radius:14px;border:1px solid #E3B341;background:linear-gradient(180deg,color-mix(in srgb,#FFE58A 18%,var(--card,#fff)),var(--card,#fff));text-align:center}.vt-ic{font-size:28px}.vt-soon{font-size:12px;font-weight:700;color:var(--muted);border:1px dashed var(--line,#ccd);border-radius:99px;padding:3px 10px}
 .gift-find input{flex:1;min-width:0}.gift-to{font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.gift-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gift-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;border:1px solid var(--line,#ccd);border-radius:10px}.gift-lab{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.gift-step{display:flex;align-items:center;gap:6px}.gift-step b{min-width:20px;text-align:center}.gift-step .btn{padding:4px 10px}
 .gift-fee{margin:6px 0;font-weight:700}.gift-confirm{border:2px solid var(--fire);border-radius:12px;padding:10px;margin:8px 0;background:color-mix(in srgb,var(--fire) 8%,transparent)}
@@ -1315,7 +1317,7 @@ function featLock(k){ if(k==="vault"&&!DEV&&!S.payTester) return "lockVault";   
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); loginHint(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
+function render(){ try{ renderInner(); loginHint(); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
 const ERR_SENT=new Set();
 function errReport(e,where){ try{
@@ -3008,7 +3010,7 @@ function devBadgeHtml(){
 /* ----- supporter badges (supporters/{uid} in Firestore, set by the admin in developer mode) ----- */
 let SUP={}, SUP_N=0;
 const SUP_TIERS=[1,2,3,4,5];
-async function supLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDocs(fsM.collection(db,"supporters")); const m={}; sn.forEach(d=>{ const x=d.data(); if(x&&x.tier>=1&&x.tier<=5) m[d.id]={tier:x.tier, n:x.n||""}; }); SUP=m; render(); }catch(e){} }
+async function supLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDocs(fsM.collection(db,"supporters")); const m={}; sn.forEach(d=>{ const x=d.data(); if(x&&x.tier>=1&&x.tier<=5) m[d.id]={tier:x.tier, n:x.n||"", sub:x.sub===true, months:x.months||0}; }); SUP=m; render(); }catch(e){} }
 function supSvg(t,size){
   const id="sp"+t+"_"+(++SUP_N), z=size||22;
   const wrap=(inner,defs="")=>`<svg class="sb sb${t}" viewBox="0 0 40 40" width="${z}" height="${z}" aria-label="${esc(T("sb"+t))}" role="img"><defs>${defs}</defs>${inner}</svg>`;
@@ -3110,7 +3112,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.149";
+const APP_VERSION="2026.10.150";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3677,9 +3679,9 @@ async function nickClaim(n){
     try{
       await fsM.runTransaction(db, async tx=>{ const d=await tx.get(ref); if(d.exists()&&d.data().uid!==me) throw {code:"taken"}; tx.set(ref,{uid:me, n, at:Date.now()}); });
       if(old&&nickKey(old)!==nickKey(n)){ const oref=fsM.doc(db,"nicks",nickKey(old)); try{ const od=await fsM.getDoc(oref); if(od.exists()&&od.data().uid===me) await fsM.deleteDoc(oref); }catch(e){} }
-    }catch(e){ return toast(e&&e.code==="taken"?T("nickTaken"):T("syncFail")); }
+    }catch(e){ toast(e&&e.code==="taken"?T("nickTaken"):T("syncFail")); return false; }
   }
-  const g=game(); if(paid) g.renames=Math.max(0,(g.renames||0)-1); g.nickAt=Date.now(); g.nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render());
+  const g=game(); if(paid) g.renames=Math.max(0,(g.renames||0)-1); g.nickAt=Date.now(); g.nick=n; saveGame(); CLOUD.lbSig=null; toast(T("nickSaved")); S.rk=null; lbPush().then(()=>render()); return true;
 }
 async function nickVerify(){
   const n=game().nick; if(!n||!CLOUD.user||!CLOUD.fb||DEV) return;
@@ -3858,7 +3860,7 @@ function nickForm(){ const g=game(), w=nickLocked(), auto=ccDetect(), f=g.flag||
   const list=CC_ALL.map(c=>[c,ccName(c)]).sort((a,b)=>a[1].localeCompare(b[1]));
   return `<div class="card nick"><label for="nickIn"><b>${T("nick")}</b></label><div class="row" style="flex-wrap:nowrap"><input id="nickIn" class="search" maxlength="16" value="${esc(S.nickDraft!=null?S.nickDraft:(g.nick||""))}" placeholder="${T("nickSet")}" autocomplete="off" ${w?"disabled":""}><button class="btn" data-act="nicksave" style="flex:none" ${w?"disabled":""}>${T("nickSave")}</button></div>
     ${S.nickAsk?`<div class="ie-exitask"><b>${T("nickConfirmQ",{n:esc(S.nickAsk)})}</b><p class="sm-t" style="margin:4px 0 8px">${nickNeedsTicket()?T("nickUseSub",{n:Math.max(0,tk-1)}):T("nickFirstSub")}</p><div class="row"><button class="btn sm" data-act="nickyes">${T("nickYes")}</button><button class="btn ghost sm" data-act="nickno">${T("nickNo")}</button></div></div>`:""}
-    <span class="muted sm-t">${w?`🏷️ ${T("nickTicketNeed")}${vaultOpen?"":" "+T("nickTicketSoon")}`:nickNeedsTicket()?`🏷️ ${T("nickTicketHave",{n:tk})}`:T("nickHint")+" "+T("nickFirstNote")}</span>${w&&vaultOpen?`<button class="btn ghost sm" data-act="govault" style="align-self:flex-start">🌈 ${T("nickGoVault")}</button>`:""}
+    <span class="muted sm-t">${w?`🏷️ ${T("nickTicketNeed")}`:nickNeedsTicket()?`🏷️ ${T("nickTicketHave",{n:tk})}`:T("nickHint")+" "+T("nickFirstNote")}</span>
     <label class="sm-t flag-row"><span>${T("flagLabel")} <b class="flag-now">${flagOf(myFlag())||"—"}</b></span><select id="flagSel" class="search">
       <option value="auto"${f==="auto"?" selected":""}>${T("flagAuto")}${auto?` (${flagOf(auto)} ${esc(ccName(auto))})`:""}</option>
       <option value="none"${f==="none"?" selected":""}>${T("flagNone")}</option>
@@ -5387,7 +5389,9 @@ Object.assign(STR.ja,{"stName": "ドルイドの長老キーラン", "stNext": "
 Object.assign(STR.ko,{"stName": "드루이드 장로 키어런", "stNext": "다음", "stGift": "출정권 5장 받기", "stOk": "알겠어요", "stGo": "출발!", "stSkip": "건너뛰기", "in1": "젊은 여행자여, 드디어 왔구나! 나는 이 섬을 지키는 드루이드 장로 키어런이다. 마안의 발로르가 바다 밑에서 깨어나 괴물들이 아일랜드의 마을을 점령했어. 도전자가 필요하단다!", "in2": "괴물들은 지식의 힘을 두려워해. 매일 '오늘'의 영어 뉴스를 읽고 퀴즈를 마치면 기사마다 출정권 1장 (하루 최대 4장). 하루 3단계를 모두 마치면 내가 2장을 더 주마.", "in3": "출정권으로 마을을 공격하렴. 이기면 마을은 네 것이 되고 매일 세금도 들어온다. 오행 상극을 기억해: 금은 목을, 목은 토를, 토는 수를, 수는 화를, 화는 금을 이긴다.", "in4": "야생 짐승에게는 출정권이 필요 없고 체력만 든단다 (최대 6, 4시간마다 1 회복). 사냥해서 레벨을 올리고 골드를 벌어. 단, 같은 짐승은 잡을수록 골드가 줄어.", "in5": "이 출정권 5장으로 첫 번째 마을 딩글을 되찾으렴! Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "d21": "다시 왔구나! 오늘은 행운의 클로버 ☘️를 알려 주마. 단어장에서 간격 복습 (5단어 이상)을 한 번 끝내면 1장, 하루 최대 3장 받을 수 있어.", "d22": "클로버는 '행운의 집'에서 운명의 룰렛을 돌리는 데 쓴단다. 골드, 출정권, 장비 조각이 나와. 2장 이상이면 스크래치 카드도 살 수 있지.", "d23": "같은 속성·등급의 조각 3개를 모으면 네 레벨에 가까운 장비를 만들 수 있어. 잘 모으면 골드를 많이 아낄 수 있단다!", "d31": "제법 모험가다워졌구나! Lv 24가 되면 야생의 강적과 함께 싸울 동료가 생겨. 친구를 동료로 초대할 수도 있단다.", "d32": "심심할 땐 '멀티플레이'에서 친구들과 놀아 보렴. 무료지만 보상은 적어. 진짜 강해지는 길은 하나뿐, 매일 뉴스를 읽는 거야. 더블린에서 좋은 소식을 기다리마!", "stGot": "출정권 5장을 받았어요!"});
 /* ===== Story: Ciarán the druid elder. Day 1 (first visit to Adventure): the quest + basics + 5 quest passes.
    Later days: shamrocks & the Wheel of Fate, then allies & multiplayer. ===== */
-const STORY={intro:["in1","in2","in3","in4","in5"], d2:["d21","d22","d23"], d3:["d31","d32","d33"]};
+const STORY={intro:["in1","in2","in3","in4","in5"], d2:["d21","d22","d23"], d3:["d31","d3n","d32","d33"]};
+// day 3: the elder introduces the leaderboard and asks for a nickname (skipped if the player already has one)
+const storySteps=k=>STORY[k].filter(x=>x!=="d3n"||!S.story||!S.story.hadNick);
 function elderArt(mood){ const k="elder-"+(mood||"talk"); return PICS.has(k)?`<img src="assets/art/${k}.webp" alt="" class="st-elder">`:`<div class="st-elder st-elder-ph" aria-hidden="true">🧙‍♂️</div>`; }
 function storyDue(){
   const g=game(), st=g.story||{};
@@ -5396,22 +5400,29 @@ function storyDue(){
   if(st.d2&&!st.d3&&st.d2<today()) return "d3";
   return null;
 }
-function storyCheck(){ if(S.onb||S.story) return; const k=storyDue(); if(k){ S.story={k,step:0}; storyRender(); } }
+function storyCheck(){ if(S.onb||S.story) return; const k=storyDue(); if(k){ S.story={k,step:0,hadNick:!!game().nick}; storyRender(); } }
 function storyRender(){
   let el=document.getElementById("story");
   if(!S.story){ if(el) el.remove(); return; }
   if(!el){ el=document.createElement("div"); el.id="story"; el.className="onb st-wrap"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); document.body.append(el); }
-  const P=STORY[S.story.k], i=S.story.step, last=i===P.length-1, mood=last?"happy":i===0?"wave":"talk";
-  const btn=last?(S.story.k==="intro"?T("stGift"):S.story.k==="d2"?T("stOk"):T("stGo")):T("stNext");
+  const P=storySteps(S.story.k), i=S.story.step, last=i===P.length-1, mood=last?"happy":i===0?"wave":"talk";
+  S.story.u=!!CLOUD.user;
+  const nickStep=P[i]==="d3n"&&!game().nick;
+  const nickBox=!nickStep?"":CLOUD.user?`<div class="st-nick"><input id="stNick" class="search" maxlength="16" placeholder="${T("nickSet")}" autocomplete="off" value="${esc(S.story.draft||"")}"><button class="btn" data-st="nick">${T("stNickSave")}</button></div><p class="sm-t st-nick-note">🏷️ ${T("stNickNote")}</p>`
+    :`<p class="sm-t st-nick-note">${T("stNickLogin")}</p><button class="btn gbtn st-signin" data-act="signin">${G_SVG}<span>${T("signIn")}</span></button>`;
+  const btn=nickStep?T("stNickLater"):last?(S.story.k==="intro"?T("stGift"):S.story.k==="d2"?T("stOk"):T("stGo")):T("stNext");
   el.innerHTML=`<div class="onb-card st-card">${S.story.k!=="intro"?`<button class="onb-skip" data-st="skip">${T("stSkip")}</button>`:""}
-    ${elderArt(mood)}<div class="st-name">${T("stName")}</div><p class="st-text">${T(P[i])}</p>
+    ${elderArt(mood)}<div class="st-name">${T("stName")}</div><p class="st-text">${T(P[i])}</p>${nickBox}
     <div class="onb-dots">${P.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("")}</div>
-    <div class="onb-nav"><button class="btn" data-st="${last?"done":"next"}">${btn}</button>${i>0?`<button class="btn ghost" data-st="back">‹</button>`:""}</div></div>`;
+    <div class="onb-nav"><button class="btn${nickStep?" ghost":""}" data-st="${last?"done":"next"}">${btn}</button>${i>0?`<button class="btn ghost" data-st="back">‹</button>`:""}</div></div>`;
 }
 function storyDone(){ const g=game(); g.story=g.story||{}; const k=S.story.k;
   g.story[k]=today(); if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5; toast(T("stGot")); if(!S.words.size&&(g.lv||1)<=1) g.story.lock=1; }
   saveGame(); S.story=null; storyRender(); render(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("#story [data-st]"); if(!t||!S.story) return; e.stopPropagation(); const a=t.dataset.st;
+  if(a==="nick"){ const inp=document.getElementById("stNick"), n=((inp&&inp.value)||"").trim().replace(/\s+/g," "); S.story.draft=n;
+    if(n.length<1||n.length>16) return toast(T("nickBad")); if(!nickOk(n)) return toast(T("nickChars"));
+    t.disabled=true; nickClaim(n).then(ok=>{ if(!S.story) return; if(ok){ S.story.step++; } storyRender(); }); return; }
   if(a==="next"){ S.story.step++; storyRender(); } else if(a==="back"){ S.story.step=Math.max(0,S.story.step-1); storyRender(); } else storyDone(); });
 async function fetchT(url,ms){ const c=new AbortController(), t=setTimeout(()=>c.abort(),ms||12000); try{ return await fetch(url,{cache:"no-cache",signal:c.signal}); } finally{ clearTimeout(t); } }
 async function loadArticles(){
@@ -5909,7 +5920,7 @@ Object.assign(STR.zh,{"scPlat": "白金卡", "scDiamond": "鑽石卡"});Object.a
    The sender may also take back a gift that is still pending. */
 const VAULT_ITEMS=[
   {id:"charm3", kind:"charm", n:3, ic:"🪄", pay:"charm3", price:"€1", test:true}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
-  {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
+  {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"", test:true}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
 const GIFT={feeShard:[10,20,40,80], feeGem:[40,80,160,320], feeCharm:60, minFee:20, maxEach:20};
 function giftFee(it){ let f=0; for(const [k,n] of Object.entries(it.gems||{})) f+=n*GIFT.feeGem[+k.split("-")[1]]; for(const [k,n] of Object.entries(it.shards||{})) f+=n*GIFT.feeShard[+k.split("-")[1]]; f+=(it.charms||0)*GIFT.feeCharm; return f?Math.max(GIFT.minFee,f):0; }
 function giftCount(it){ return Object.values(it.gems||{}).reduce((a,b)=>a+b,0)+Object.values(it.shards||{}).reduce((a,b)=>a+b,0)+(it.charms||0); }
@@ -6003,7 +6014,7 @@ async function payTesterCheck(u){ try{ if(!u||!u.email||!u.emailVerified||!crypt
   if(PAY_TESTERS.has(h)&&!S.payTester){ S.payTester=true; render(); } }catch(e){} }
 function payGrant(g,sign){ const G=game(); if(!g) return; if(g.charms) G.charms=Math.max(0,(G.charms||0)+sign*g.charms); if(g.renames) G.renames=Math.max(0,(G.renames||0)+sign*g.renames); if(g.gold) G.gold=Math.max(0,(G.gold||0)+sign*g.gold); }
 const vaultPic=(id,cls)=>PICS.has("icon-vault-"+id)?`<img src="assets/art/icon-vault-${id}.webp" alt="" class="${cls||"vt-pic"}">`:null;
-const vaultName=v=>v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
+const vaultName=v=>v.kind==="sub"?T("subT"):v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
 // "purchase complete" pop-up: what was bought, with pictures
 function payShowDone(x){
   const v=VAULT_ITEMS.find(i=>i.id===x.item); let el=document.getElementById("payDone");
@@ -6019,10 +6030,10 @@ async function payBuy(id){
   if(!CLOUD.user) return toast(T("payLogin"));
   PAY_BUSY=true; render(); toast(T("payGo"));
   try{ const tok=await CLOUD.user.getIdToken();
-    const r=await fetch(PAY_FN+"/createCheckout",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:JSON.stringify({item:v.pay,lang:({zh:"zh-TW",cn:"zh"})[langKey()]||langKey()})});
+    const r=await fetch(PAY_FN+"/createCheckout",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:JSON.stringify({item:v.pay,nick:game().nick||"",lang:({zh:"zh-TW",cn:"zh"})[langKey()]||langKey()})});
     const j=await r.json().catch(()=>({}));
     if(r.ok&&j.url){ location.href=j.url; return; }
-    toast(j.error==="closed"?T("vaultSoon"):T("payFail")); console.warn("checkout",r.status,j); }
+    toast(j.error==="closed"?T("vaultSoon"):j.error==="already"?T("subAlready"):T("payFail")); console.warn("checkout",r.status,j); }
   catch(e){ toast(T("payFail")); console.warn("checkout",e); }
   PAY_BUSY=false; render(); }
 async function payLoad(waitSid, tries){
@@ -6045,16 +6056,34 @@ async function payClaim(x, mode){
       if(!d||d.uid!==CLOUD.user.uid) throw new Error("state");
       if(mode==="claim"){ if(d.status!=="paid"||d.claimed) throw new Error("state"); tx.update(ref,{claimed:true, claimedAt:new Date().toISOString()}); }
       else { if(!d.claimed||d.revoked||!(d.status==="refunded"||d.status==="disputed")) throw new Error("state"); tx.update(ref,{revoked:true, revokedAt:new Date().toISOString()}); } });
-    if(mode==="claim"){ payGrant(x.grant,1); x.claimed=true; payShowDone(x); if(typeof sfx==="function") sfx("prize"); }
+    if(mode==="claim"){ payGrant(x.grant,1); x.claimed=true; payShowDone(x); if(x.item==="sub") setTimeout(supLoad,4000); if(typeof sfx==="function") sfx("prize"); }
     else { payGrant(x.grant,-1); x.revoked=true; toast(T("payRevoked")); }
     saveGame(); }
   catch(e){ if(e&&e.message!=="state") console.warn("purchase claim",e&&(e.code||e.message)); } }
 if(PAY_RET&&PAY_RET.pay==="cancel") setTimeout(()=>toast(T("payCancel")),1500);
+/* membership card: monthly subscription, badge grows with the months (supporters/{uid}: sub, months, tier; written by the server) */
+const SUB_STEPS=[[1,1],[3,2],[6,3],[12,4],[24,5]];
+function subCard(buyable){
+  const v=VAULT_ITEMS.find(i=>i.kind==="sub"), me=CLOUD.user&&SUP[CLOUD.user.uid], on=!!(me&&me.sub), m=on?me.months||1:0;
+  const cur=on?me.tier:0, next=SUB_STEPS.find(([n])=>n>m);
+  const ladder=SUB_STEPS.map(([n,t])=>`<div class="sub-step${cur>=t?" got":""}${on&&cur===t?" now":""}">${supSvg(t,34)}<b>${esc(T("sb"+t))}</b><span class="muted">${T("subM",{n})}</span></div>`).join("");
+  const act=on?`<p class="sm-t"><b>${T("subNow",{n:m})}</b>${next?` · ${T("subNext",{n:next[0]-m,b:T("sb"+next[1])})}`:""}</p><button class="btn ghost sm" data-act="subportal" ${PAY_BUSY?"disabled":""}>${T("subManage")}</button>`
+    :buyable(v)?`<button class="btn" data-act="vtbuy" data-k="sub" ${PAY_BUSY?"disabled":""}>${T("subBtn",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
+    :!CLOUD.user?`<p class="muted sm-t">${T("payLogin")}</p>`:`<span class="vt-soon">${T("vaultSoon")}</span>`;
+  return `<section class="card sub-card"><h3>🌟 ${T("subT")}</h3><p class="muted sm-t">${T("subSub")}</p><div class="sub-ladder">${ladder}</div>${act}</section>`;
+}
+async function subPortal(){
+  if(!CLOUD.user||PAY_BUSY) return; PAY_BUSY=true; render();
+  try{ const tok=await CLOUD.user.getIdToken();
+    const r=await fetch(PAY_FN+"/subPortal",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:"{}"});
+    const j=await r.json().catch(()=>({})); if(r.ok&&j.url){ location.href=j.url; return; } toast(T("subPortalFail")); console.warn("portal",r.status,j); }
+  catch(e){ toast(T("subPortalFail")); }
+  PAY_BUSY=false; render(); }
 function viewVault(){
   setTimeout(()=>{ giftLoad(false); if(PAY_IN===null){ PAY_IN=[]; payLoad(); } },0);
   const g=game(), G=S.gift;
-  const buyable=v=>v.pay&&CLOUD.user&&(!v.test||S.payTester);
-  const shop=VAULT_ITEMS.map(v=>`<div class="vt-item">${vaultPic(v.id)||`<span class="vt-ic">${v.ic}</span>`}<b>${vaultName(v)}</b>
+  const buyable=v=>v.pay&&v.price&&CLOUD.user&&(!v.test||S.payTester);
+  const shop=VAULT_ITEMS.filter(v=>v.kind!=="sub").map(v=>`<div class="vt-item">${vaultPic(v.id)||`<span class="vt-ic">${v.ic}</span>`}<b>${vaultName(v)}</b>
     ${buyable(v)?`<button class="btn sm" data-act="vtbuy" data-k="${v.id}" ${PAY_BUSY?"disabled":""}>${T("vtBuy",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
       :DEV?`<button class="btn sm ghost" data-act="vttest" data-k="${v.id}">${T("vaultTest")}</button>`:`<span class="vt-soon">${T("vaultSoon")}</span>`}</div>`).join("");
   const hist=(PAY_IN||[]).filter(x=>x.status!=="open").slice(0,8);
@@ -6084,6 +6113,7 @@ function viewVault(){
   const inbox=CLOUD.user?`<section class="card"><h3>📬 ${T("giftInbox")}</h3>${recv.length?recv.slice(0,10).map(x=>card(x,false)).join(""):`<p class="muted sm-t">${T("giftNoneIn")}</p>`}
     ${sent.length?`<h4>${T("giftSentT")}</h4>${sent.slice(0,10).map(x=>card(x,true)).join("")}`:""}</section>`:"";
   return `<section class="vault-hero"><div class="vh-ic">${VAULT_ICON}</div><div><div class="eyebrow">${T("vaultEyebrow")}</div><h2>${T("vaultName")}</h2><p class="sm-t">${T("vaultSub")}</p></div></section>
+    ${subCard(buyable)}
     <section class="card"><h3>✨ ${T("vaultShopT")}</h3><p class="muted sm-t">${T("vaultShopSub")}</p><div class="vt-grid">${shop}</div><p class="muted sm-t vt-legal">${T("vtLegal")} <a href="legal.html${langKey()==="zh"||langKey()==="cn"?"?lang=zh":""}#refunds" target="_blank" rel="noopener">${T("vtLegalLink")}</a></p></section>
     ${hist.length?`<section class="card"><h3>🧾 ${T("payHistT")}</h3>${hist.map(x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return `<div class="rw-row"><span>${v?v.ic:"🛒"} ${v?vaultName(v):esc(x.item)}${x.test?` <small class="muted">${T("vtTestTag")}</small>`:""}</span><b class="sm-t">${T("paySt_"+x.status)||esc(x.status)}</b></div>`; }).join("")}</section>`:""}
     <section class="card"><h3>🎁 ${T("giftTitle")}</h3><p class="muted sm-t">${T("giftSub")}</p>${gift}</section>
@@ -6093,6 +6123,7 @@ document.addEventListener("click",e=>{
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^vt/.test(a)) return; e.stopPropagation();
   if(a==="vttest") return vaultTest(t.dataset.k);
   if(a==="vtbuy") return payBuy(t.dataset.k);
+  if(a==="subportal") return subPortal();
   if(a==="vtfind") return giftFind();
   if(a==="vtreset"){ S.gift=null; return render(); }
   if(a==="vtstep"){ const [kind,k,d]=t.dataset.k.split("|"); return giftStep(kind,k,+d); }
@@ -6247,6 +6278,12 @@ Object.assign(STR.hi,{"pvLegalT": "परिचय, शर्तें और �
 Object.assign(STR.es,{"pvLegalT": "Información, condiciones y privacidad", "pvLegalSub": "Quién gestiona la app, artículos y precios de la Cámara del Arcoíris, pagos y reembolsos, condiciones de uso, privacidad, o borrar tu cuenta para siempre.", "pvLegalOpen": "Condiciones y reembolsos", "vtRename": "Ticket de cambio de nombre ×{n}", "nickFirstNote": "(después, cambiarlo requiere un ticket de cambio de nombre)", "nickFirstSub": "Después, cambiar el apodo requiere un ticket de cambio de nombre, así que revisa cómo está escrito.", "nickUseSub": "Se usará 1 ticket de cambio de nombre (te quedarán {n}).", "nickTicketNeed": "Una vez elegido el apodo, cambiarlo requiere un ticket de cambio de nombre.", "nickTicketSoon": "Los tickets de cambio de nombre llegarán pronto a la Cámara del Arcoíris.", "nickTicketHave": "Tienes {n} ticket(s) de cambio de nombre. Cambiar el apodo usa 1.", "nickGoVault": "Conseguir un ticket en la Cámara del Arcoíris"});
 Object.assign(STR.ja,{"pvLegalT": "運営者情報・規約・プライバシー", "pvLegalSub": "運営者、虹の宝庫の商品と価格、支払いと返金、利用規約、プライバシーポリシー、アカウントの完全削除。", "pvLegalOpen": "規約と返金", "vtRename": "改名チケット ×{n}", "nickFirstNote": "（設定後の変更には改名チケットが必要です）", "nickFirstSub": "設定後にニックネームを変えるには改名チケットが必要です。綴りを確認してください。", "nickUseSub": "改名チケットを 1 枚使います（残り {n} 枚）。", "nickTicketNeed": "ニックネームを設定した後は、改名チケットがないと変更できません。", "nickTicketSoon": "改名チケットはまもなく虹の宝庫に登場します。", "nickTicketHave": "改名チケットを {n} 枚持っています。変更すると 1 枚使います。", "nickGoVault": "虹の宝庫で改名チケットを入手"});
 Object.assign(STR.ko,{"pvLegalT": "소개, 약관 및 개인정보", "pvLegalSub": "운영자 정보, 무지개 보물고 상품과 가격, 결제 및 환불, 이용약관, 개인정보처리방침, 또는 계정 영구 삭제.", "pvLegalOpen": "약관 및 환불", "vtRename": "이름 변경권 ×{n}", "nickFirstNote": "(설정 후에는 이름 변경권이 있어야 바꿀 수 있어요)", "nickFirstSub": "설정한 뒤에는 이름 변경권이 있어야 닉네임을 바꿀 수 있어요. 철자를 확인하세요.", "nickUseSub": "이름 변경권 1장을 사용해요 (변경 후 {n}장 남음).", "nickTicketNeed": "닉네임을 정한 뒤에는 이름 변경권이 있어야 바꿀 수 있어요.", "nickTicketSoon": "이름 변경권은 곧 무지개 보물고에 나와요.", "nickTicketHave": "이름 변경권 {n}장이 있어요. 닉네임을 바꾸면 1장을 사용해요.", "nickGoVault": "무지개 보물고에서 이름 변경권 받기"});
+Object.assign(STR.zh,{"subT": "BinBin 會員", "subSub": "每月訂閱，你的名字旁邊會出現會員徽章，大家都看得到。訂閱越久，徽章越漂亮！隨時可以取消。", "subM": "{n} 個月", "subNow": "你已經是第 {n} 個月的會員", "subNext": "再 {n} 個月升級成「{b}」", "subBtn": "訂閱 {p} / 月", "subManage": "管理或取消訂閱", "subAlready": "你已經是會員了", "subPortalFail": "目前無法打開訂閱管理，請寫信到 binbindaily.help@gmail.com", "d3n": "對了，冒險旁邊的「排行榜」可以跟全世界的冒險者比等級和戰力！上榜要先有一個暱稱，現在就幫自己取一個吧。", "stNickSave": "就叫這個！", "stNickLater": "之後再取", "stNickNote": "暱稱會公開顯示在排行榜上。取好之後，以後要用「改名卷」才能再修改，請想清楚再決定喔！", "stNickLogin": "要先用 Google 登入，才能取暱稱、上排行榜。"});
+Object.assign(STR.en,{"subT": "BinBin membership", "subSub": "A monthly subscription that puts a member badge next to your name for everyone to see. The longer you stay, the finer the badge! Cancel any time.", "subM": "{n} mo", "subNow": "Month {n} of your membership", "subNext": "{n} more month(s) to “{b}”", "subBtn": "Subscribe {p} / month", "subManage": "Manage or cancel", "subAlready": "You're already a member", "subPortalFail": "Couldn't open subscription settings. Please email binbindaily.help@gmail.com", "d3n": "Oh, and the Leaderboard next to Adventure lets you compare level and power with adventurers all over the world! You need a nickname to appear on it, so pick one now.", "stNickSave": "That's my name!", "stNickLater": "Maybe later", "stNickNote": "Your nickname is shown publicly on the leaderboard. Once it's set, changing it needs a rename ticket, so choose carefully!", "stNickLogin": "Sign in with Google first to choose a nickname and join the leaderboard."});
+Object.assign(STR.hi,{"subT": "BinBin सदस्यता", "subSub": "मासिक सदस्यता: आपके नाम के पास सदस्य बैज दिखेगा, सबको दिखेगा। जितना लंबा साथ, उतना सुंदर बैज! कभी भी रद्द करें।", "subM": "{n} माह", "subNow": "सदस्यता का {n}वाँ महीना", "subNext": "“{b}” तक {n} महीने और", "subBtn": "सदस्यता {p} / माह", "subManage": "सदस्यता बदलें या रद्द करें", "subAlready": "आप पहले से सदस्य हैं", "subPortalFail": "सदस्यता सेटिंग नहीं खुली। कृपया binbindaily.help@gmail.com पर लिखें", "d3n": "और हाँ, रोमांच के पास वाले “लीडरबोर्ड” पर दुनिया भर के साहसियों से लेवल और ताक़त की तुलना कर सकते हो! उस पर आने के लिए एक उपनाम चाहिए, अभी चुन लो।", "stNickSave": "यही नाम!", "stNickLater": "बाद में", "stNickNote": "उपनाम लीडरबोर्ड पर सबको दिखता है। एक बार रखने के बाद बदलने के लिए नाम-टिकट चाहिए, सोच-समझकर चुनें!", "stNickLogin": "उपनाम चुनने और लीडरबोर्ड पर आने के लिए पहले Google से साइन इन करें।"});
+Object.assign(STR.es,{"subT": "Membresía BinBin", "subSub": "Una suscripción mensual que pone una insignia de miembro junto a tu nombre, visible para todos. ¡Cuanto más tiempo, más bonita! Cancela cuando quieras.", "subM": "{n} mes(es)", "subNow": "Mes {n} de tu membresía", "subNext": "{n} mes(es) más para «{b}»", "subBtn": "Suscribirse {p} / mes", "subManage": "Gestionar o cancelar", "subAlready": "Ya eres miembro", "subPortalFail": "No se pudo abrir la gestión de la suscripción. Escribe a binbindaily.help@gmail.com", "d3n": "Por cierto, en la Clasificación, junto a Aventura, puedes comparar tu nivel y poder con aventureros de todo el mundo. Para aparecer necesitas un apodo, así que elige uno ahora.", "stNickSave": "¡Ese es mi nombre!", "stNickLater": "Más tarde", "stNickNote": "Tu apodo se muestra en la clasificación. Una vez elegido, cambiarlo requiere un ticket de cambio de nombre, ¡elige bien!", "stNickLogin": "Inicia sesión con Google para elegir un apodo y entrar en la clasificación."});
+Object.assign(STR.ja,{"subT": "BinBin メンバーシップ", "subSub": "月額サブスクで、名前の横にメンバーバッジが表示されます。長く続けるほどバッジが豪華に！いつでも解約できます。", "subM": "{n} か月", "subNow": "メンバー {n} か月目", "subNext": "あと {n} か月で「{b}」", "subBtn": "{p} / 月で登録", "subManage": "管理・解約", "subAlready": "すでにメンバーです", "subPortalFail": "サブスクの管理画面を開けませんでした。binbindaily.help@gmail.com までご連絡ください", "d3n": "そうそう、冒険の隣の「ランキング」では世界中の冒険者とレベルや戦力を比べられるぞ！載るにはニックネームが必要じゃ。今ここで決めておくがよい。", "stNickSave": "この名前にする！", "stNickLater": "あとで", "stNickNote": "ニックネームはランキングで公開されます。一度決めると、変更には改名チケットが必要です。よく考えて決めてね！", "stNickLogin": "ニックネームを決めてランキングに載るには、まず Google でログインしてください。"});
+Object.assign(STR.ko,{"subT": "BinBin 멤버십", "subSub": "월 구독으로 이름 옆에 멤버 배지가 표시돼요. 오래 할수록 배지가 더 멋져져요! 언제든 해지할 수 있어요.", "subM": "{n}개월", "subNow": "멤버십 {n}개월째", "subNext": "{n}개월 더 하면 ‘{b}’", "subBtn": "월 {p} 구독", "subManage": "구독 관리·해지", "subAlready": "이미 멤버예요", "subPortalFail": "구독 관리를 열 수 없어요. binbindaily.help@gmail.com 으로 문의해 주세요", "d3n": "참, 모험 옆의 ‘랭킹’에서는 전 세계 모험가들과 레벨과 전투력을 겨룰 수 있지! 랭킹에 오르려면 닉네임이 필요하니 지금 하나 정해 보거라.", "stNickSave": "이 이름으로!", "stNickLater": "나중에", "stNickNote": "닉네임은 랭킹에 공개돼요. 한 번 정하면 바꿀 때 이름 변경권이 필요하니 신중하게 정하세요!", "stNickLogin": "닉네임을 정하고 랭킹에 오르려면 먼저 Google로 로그인하세요."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
