@@ -881,7 +881,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .rest-bar{background:color-mix(in srgb,var(--water) 14%,transparent);color:var(--ink,inherit);border-radius:12px;padding:8px 12px;font-size:14px;margin-bottom:8px}.chip.rest{font-size:11px}
 .scar-tip{margin:0;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--fire) 10%,transparent)}
 .elder-tip{margin:0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--water) 12%,transparent)}
-.ex-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;width:100%;margin-top:6px;grid-column:1/-1}.ex-row .btn{margin-left:auto}.gem-opt.cur{opacity:.85}
+.ex-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;width:100%;margin-top:6px;grid-column:1/-1}.ex-row>.sm-t{flex:1 1 100%;min-width:0;overflow-wrap:anywhere}.ex-row .btn{margin-left:auto}.gem-opt.cur{opacity:.85}
 .tk-home h3{margin:2px 0}.tk-done{background:color-mix(in srgb,var(--wood) 14%,transparent);border-radius:10px;padding:8px 12px;font-size:14px}
 .tk-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}.tk-type{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:var(--paper);border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;text-align:left;color:inherit;font:inherit}.tk-type small{color:var(--muted,#789);font-size:12px}.tk-type:disabled{opacity:.45}.tk-ic{font-size:20px}
 .tk-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.tk-q{font-weight:700;margin:0 0 6px}.tk-card{display:flex;flex-direction:column;gap:8px}
@@ -1246,7 +1246,15 @@ const keyOf = lemma => "w~" + lemma.toLowerCase().normalize("NFD").replace(/[\u0
 const fmtDate = s => { const d=new Date(s+"T12:00:00"); return d.toLocaleDateString(LOCALE[LANG]||"zh-TW",{month:"long",day:"numeric",weekday:"short"}); };
 const STOP = new Set("a an the and or but of to in on at for from with by is are was were be been it its this that these those he she they we you i his her their our my your as if than then so not no do does did have has had will would can could may might shall should must which who whom what when where there here".split(" "));
 function toast(msg){ document.querySelectorAll(".toast").forEach(x=>x.remove()); const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.append(t); setTimeout(()=>t.remove(),1800); }
-function speak(text){ try{ const u=new SpeechSynthesisUtterance(text), v=ieVoices().F; if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-IE"; u.rate=.92; speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
+let SAY_NOTE=false;
+function speak(text){ try{
+  const u=new SpeechSynthesisUtterance(text), v=ieVoices().F; if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-IE"; u.rate=.92;
+  if(!v&&!SAY_NOTE&&speechSynthesis.getVoices().length){ SAY_NOTE=true; toast(T("noEnVoice")); }
+  // news being read aloud: pause it for the word, then carry on from the same place
+  const held=typeof READ!=="undefined"&&READ.on&&!READ.paused; if(held){ readPause(); READ.heldBySay=true; }
+  const back=()=>{ if(READ.heldBySay){ READ.heldBySay=false; if(READ.on&&READ.paused) readResume(); } };
+  u.onend=back; u.onerror=back;
+  speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){} }
 const SPEAK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>';
 
 /* ---------- state ---------- */
@@ -3127,7 +3135,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.155";
+const APP_VERSION="2026.10.156";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3344,7 +3352,7 @@ function iePlayRec(pi, part, files){
   let i=0; R.played[pi]=true; saveGame(); S.iePlaying={pi,i:0,n:files.length,rec:true}; render();
   const url=k=>"ielts/audio/"+k+".mp3";
   const fallback=()=>{ const V=ieVoices(), [sp,text]=part.script[i]; if(window.speechSynthesis) ieSay(text, V[sp]||V.F, sp, V.same, step); else step(); };
-  const step=()=>{ i++; if(S.iePlaying) S.iePlaying.i=i; const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,files.length),n:files.length}); setTimeout(next,380); };
+  const step=()=>{ i++; if(S.iePlaying) S.iePlaying.i=i; const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,files.length),n:files.length}); setTimeout(next,120); };
   const next=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; if(i>=files.length){ S.iePlaying=null; render(); return; }
     au.onended=step; au.onerror=fallback; au.src=url(files[i]); const pr=au.play(); if(pr&&pr.catch) pr.catch(fallback);
     if(files[i+1]) pre.src=url(files[i+1]); };
@@ -5798,7 +5806,7 @@ function toPlay(gi){
   const V=window.speechSynthesis?ieVoices():{};
   const au=S.ieAudioEl||(S.ieAudioEl=new Audio()); au.preload="auto";
   const upd=()=>{ const el=document.getElementById("toPlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,lines.length),n:lines.length}); };
-  const step=()=>{ i++; if(S.toPlaying) S.toPlaying.i=i; upd(); setTimeout(next,grp.part===2?650:380); };
+  const step=()=>{ i++; if(S.toPlaying) S.toPlaying.i=i; upd(); setTimeout(next,grp.part===2?400:120); };
   const tts=()=>{ const [sp,text]=lines[i]; if(window.speechSynthesis) ieSay(text, V[sp]||V.F, sp, V.same, step); else step(); };
   const next=()=>{ if(!S.toPlaying||S.toPlaying.gi!==gi) return; if(i>=lines.length){ S.toPlaying=null; render(); return; }
     if(files&&files.length===lines.length){ au.onended=step; au.onerror=tts; au.src="toeic/audio/"+files[i]+".mp3"; const p=au.play(); if(p&&p.catch) p.catch(tts); } else tts(); };
@@ -6317,6 +6325,12 @@ Object.assign(STR.hi,{"quizResumed": "आपका क्विज़ वही�
 Object.assign(STR.es,{"quizResumed": "Seguimos tu test donde lo dejaste"});
 Object.assign(STR.ja,{"quizResumed": "中断したテストの続きから再開しました"});
 Object.assign(STR.ko,{"quizResumed": "하던 퀴즈를 이어서 시작했어요"});
+Object.assign(STR.zh,{"noEnVoice": "這台裝置沒有英文語音，發音可能不自然。可以在系統設定加裝英文語音，或改用 Chrome／Edge／Safari。"});
+Object.assign(STR.en,{"noEnVoice": "This device has no English voice, so pronunciation may sound odd. Add an English voice in your system settings, or try Chrome, Edge or Safari."});
+Object.assign(STR.hi,{"noEnVoice": "इस डिवाइस में अंग्रेज़ी आवाज़ नहीं है, इसलिए उच्चारण अजीब लग सकता है। सिस्टम सेटिंग में अंग्रेज़ी आवाज़ जोड़ें या Chrome, Edge या Safari आज़माएँ।"});
+Object.assign(STR.es,{"noEnVoice": "Este dispositivo no tiene voz en inglés y la pronunciación puede sonar rara. Añade una voz inglesa en los ajustes del sistema o prueba Chrome, Edge o Safari."});
+Object.assign(STR.ja,{"noEnVoice": "この端末には英語の音声がないため、発音が不自然になることがあります。システム設定で英語の音声を追加するか、Chrome・Edge・Safari をお試しください。"});
+Object.assign(STR.ko,{"noEnVoice": "이 기기에는 영어 음성이 없어 발음이 어색할 수 있어요. 시스템 설정에서 영어 음성을 추가하거나 Chrome, Edge, Safari를 사용해 보세요."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
