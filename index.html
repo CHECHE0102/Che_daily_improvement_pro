@@ -3321,7 +3321,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.161";
+const APP_VERSION="2026.10.162";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3858,7 +3858,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -6250,8 +6250,16 @@ document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="payd
 const payName=x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return v?vaultName(v):x.item; };
 // we left for Stripe; if this same page comes back (back button, the in-app browser closed, page restored from cache), unlock the buttons and say so
 let PAY_LEFT=0;
-function payLeave(){ PAY_LEFT=Date.now(); clearTimeout(payLeave.t); payLeave.t=setTimeout(()=>payBack(true),20000); }
-function payBack(quiet){ if(!PAY_BUSY&&!PAY_LEFT) return; const was=PAY_LEFT; PAY_LEFT=0; clearTimeout(payLeave.t); PAY_BUSY=false; render(); if(was&&!quiet) toast(T("payBack")); }
+let PAY_KIND="pay";
+function payLeave(kind){ PAY_KIND=kind||"pay"; PAY_LEFT=Date.now(); clearTimeout(payLeave.t); payLeave.t=setTimeout(()=>payBack(true),20000); }
+function payBack(quiet){ if(!PAY_BUSY&&!PAY_LEFT) return; const was=PAY_LEFT; PAY_LEFT=0; clearTimeout(payLeave.t); PAY_BUSY=false; render();
+  if(was&&!quiet){ if(PAY_KIND==="portal") subSyncNow(); else toast(T("payBack")); } }
+// back from the subscription portal: ask the server to re-read the plan from Stripe (the webhook may still be on its way), then refresh badges
+async function subSyncNow(){ if(!CLOUD.user) return; toast(T("subSyncing"));
+  try{ const tok=await CLOUD.user.getIdToken(); const r=await fetch(PAY_FN+"/subSync",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:"{}"});
+    const j=await r.json().catch(()=>({})); await supLoad();
+    if(r.ok&&j.plan){ toast(j.status==="active"||j.status==="trialing"?T("subSynced",{p:T(j.plan==="plus"?"plusT":"subT"),n:j.months||1}):T("subSyncedEnd")); } }
+  catch(e){ console.warn("subSync",e); } }
 window.addEventListener("pageshow",e=>{ if(e.persisted&&(PAY_BUSY||PAY_LEFT)) payBack(); });
 document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible"&&PAY_LEFT&&Date.now()-PAY_LEFT>1500) payBack(); });
 window.addEventListener("focus",()=>{ if(PAY_LEFT&&Date.now()-PAY_LEFT>1500) payBack(); });
@@ -6312,7 +6320,7 @@ async function subPortal(){
   if(PAY_BUSY) return; PAY_BUSY=true; render(); toast(T("subPortalGo"));
   try{ const tok=await CLOUD.user.getIdToken();
     const r=await fetch(PAY_FN+"/subPortal",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:"{}"});
-    const j=await r.json().catch(()=>({})); if(r.ok&&j.url){ payLeave(); location.href=j.url; return; } toast(T("subPortalFail")); console.warn("portal",r.status,j); }
+    const j=await r.json().catch(()=>({})); if(r.ok&&j.url){ payLeave("portal"); location.href=j.url; return; } toast(T("subPortalFail")); console.warn("portal",r.status,j); }
   catch(e){ toast(T("subPortalFail")); }
   PAY_BUSY=false; render(); }
 function viewVault(){
@@ -6841,6 +6849,12 @@ Object.assign(STR.hi,{"cos_f-helix": "सुनहरा सर्पिल", "c
 Object.assign(STR.es,{"cos_f-helix": "Hélice dorada", "cos_f-orbit": "Órbita arcoíris", "cos_b-gears": "Engranajes del tiempo", "cos_b-moon": "Luna creciente y estrellas", "cos_b-crystal": "Órbita de cristales", "cos_b-abyss": "Sello del abismo", "cos_b-phoenix": "Rueda de fuego fénix", "cos_n-thunder": "Collar del trueno", "cos_n-dark": "Collar del abismo", "cosPow": "Fuerza del golpe", "cosDi_f-leaf": "Un anillo de luz verde gira a tus pies", "cosDi_f-gold": "Un anillo dorado gira a tus pies", "cosDi_f-rainbow": "Un anillo arcoíris gira a tus pies", "cosDi_f-helix": "Anillos dorados suben en espiral desde tus pies y te rodean", "cosDi_f-orbit": "Dos anillos arcoíris giran inclinados a tu alrededor; pequeños planetas pasan por delante y por detrás", "cosDi_b-halo": "Dos halos giran despacio a tu espalda", "cosDi_b-gears": "Tres engranajes dorados encajan y giran a tu espalda", "cosDi_b-rune": "Una rueda de runas celtas brilla y gira a tu espalda", "cosDi_b-moon": "Una luna creciente se mece con estrellas girando", "cosDi_b-crystal": "Seis cristales giran a tu alrededor, por delante y por detrás", "cosDi_b-abyss": "Un sello morado oscuro gira a tu espalda y suelta humo negro", "cosDi_b-wings": "Unas alas de luz aletean suavemente", "cosDi_b-phoenix": "Una rueda de fuego gira a tu espalda con llamas danzantes", "cosDi_n-fire": "Una explosión de llamas y chispas", "cosDi_n-frost": "Estallan púas de hielo y el monstruo queda azul", "cosDi_n-thunder": "Caen tres rayos y la pantalla destella en blanco", "cosDi_n-dark": "Un agujero negro atrae al monstruo y estalla; la pantalla se oscurece y tiembla", "cosDi_n-star": "Lluvia de meteoros, gran estallido estelar, destello dorado y temblor fuerte", "cosDi_s-chime": "Campanillas brillantes", "cosDi_s-taiko": "Tambores taiko retumbantes", "cosDi_s-retro": "Pitidos de consola retro"});
 Object.assign(STR.ja,{"cos_f-helix": "黄金のらせん光", "cos_f-orbit": "虹の星環", "cos_b-gears": "時の歯車", "cos_b-moon": "三日月と星", "cos_b-crystal": "クリスタルの輪", "cos_b-abyss": "深淵の紋章", "cos_b-phoenix": "鳳凰の炎輪", "cos_n-thunder": "雷のネックレス", "cos_n-dark": "深淵のネックレス", "cosPow": "攻撃演出の強さ", "cosDi_f-leaf": "足もとで若葉色の光の輪が回る", "cosDi_f-gold": "足もとで金色の輪が回る", "cosDi_f-rainbow": "足もとで虹の輪が回る", "cosDi_f-helix": "金色の輪が足もとかららせん状に立ちのぼる", "cosDi_f-orbit": "2本の虹の輪が斜めに体を回り、小さな星が前後を通る", "cosDi_b-halo": "背中で2つの光輪がゆっくり回る", "cosDi_b-gears": "背中で3つの金の歯車がかみ合って回る", "cosDi_b-rune": "背中でケルトのルーン輪が光って回る", "cosDi_b-moon": "背中で三日月がゆれ、星が周りを回る", "cosDi_b-crystal": "6つのクリスタルが体の前後を回る", "cosDi_b-abyss": "背中で暗い紫の紋章が回り、黒い煙が上がる", "cosDi_b-wings": "背中で光の翼がやさしく羽ばたく", "cosDi_b-phoenix": "背中で炎の輪が回り、炎がゆらめく", "cosDi_n-fire": "炎がはじけて火の粉が飛ぶ", "cosDi_n-frost": "氷のトゲが飛び出し、モンスターが青く凍る", "cosDi_n-thunder": "雷が3本落ち、画面が白く光る", "cosDi_n-dark": "ブラックホールが吸い込んで爆発、画面が暗くなって揺れる", "cosDi_n-star": "流星群が降り注ぎ、巨大な星が爆発、金色に光って大きく揺れる", "cosDi_s-chime": "澄んだ鈴の音", "cosDi_s-taiko": "ドンと響く太鼓", "cosDi_s-retro": "レトロゲーム機のピコピコ音"});
 Object.assign(STR.ko,{"cos_f-helix": "황금 나선 빛기둥", "cos_f-orbit": "무지개 별고리", "cos_b-gears": "시간의 톱니바퀴", "cos_b-moon": "초승달과 별", "cos_b-crystal": "수정 고리", "cos_b-abyss": "심연의 문양", "cos_b-phoenix": "불사조 화염륜", "cos_n-thunder": "번개 목걸이", "cos_n-dark": "심연 목걸이", "cosPow": "타격 연출 강도", "cosDi_f-leaf": "발밑에서 연두빛 고리가 돌아요", "cosDi_f-gold": "발밑에서 금빛 고리가 돌아요", "cosDi_f-rainbow": "발밑에서 무지개 고리가 돌아요", "cosDi_f-helix": "금빛 고리가 발밑에서 나선으로 올라가며 몸을 감싸요", "cosDi_f-orbit": "무지개 고리 두 개가 비스듬히 몸을 돌고, 작은 행성이 앞뒤로 지나가요", "cosDi_b-halo": "등 뒤에서 후광 두 개가 천천히 돌아요", "cosDi_b-gears": "등 뒤에서 금빛 톱니바퀴 세 개가 맞물려 돌아요", "cosDi_b-rune": "등 뒤에서 켈트 룬 바퀴가 빛나며 돌아요", "cosDi_b-moon": "등 뒤에서 초승달이 흔들리고 별이 돌아요", "cosDi_b-crystal": "수정 여섯 개가 몸 앞뒤로 빙글빙글 돌아요", "cosDi_b-abyss": "등 뒤에서 어두운 보라 문양이 돌며 검은 연기가 피어올라요", "cosDi_b-wings": "등 뒤에서 빛의 날개가 살랑 날갯짓해요", "cosDi_b-phoenix": "등 뒤에서 불의 바퀴가 돌며 불꽃이 일렁여요", "cosDi_n-fire": "불꽃이 터지고 불티가 흩날려요", "cosDi_n-frost": "얼음 가시가 터지며 몬스터가 파랗게 얼어요", "cosDi_n-thunder": "번개 세 줄기가 내리치고 화면이 하얗게 번쩍여요", "cosDi_n-dark": "블랙홀이 몬스터를 빨아들였다 터지며 화면이 어두워지고 흔들려요", "cosDi_n-star": "유성우가 쏟아지고 거대한 별이 터지며 금빛 섬광과 큰 진동", "cosDi_s-chime": "맑은 방울 소리", "cosDi_s-taiko": "둥둥 울리는 북소리", "cosDi_s-retro": "레트로 게임기 효과음"});
+Object.assign(STR.zh,{"subSyncing": "正在更新你的訂閱狀態…", "subSynced": "已更新：你現在是{p}，第 {n} 個月", "subSyncedEnd": "已更新：你的訂閱已結束"});
+Object.assign(STR.en,{"subSyncing": "Updating your membership…", "subSynced": "Updated: you're a {p}, month {n}", "subSyncedEnd": "Updated: your membership has ended"});
+Object.assign(STR.hi,{"subSyncing": "आपकी सदस्यता अपडेट हो रही है…", "subSynced": "अपडेट: आप {p} हैं, महीना {n}", "subSyncedEnd": "अपडेट: आपकी सदस्यता समाप्त हो गई"});
+Object.assign(STR.es,{"subSyncing": "Actualizando tu membresía…", "subSynced": "Actualizado: eres {p}, mes {n}", "subSyncedEnd": "Actualizado: tu membresía ha terminado"});
+Object.assign(STR.ja,{"subSyncing": "メンバーシップを更新しています…", "subSynced": "更新しました：{p}・{n}か月目", "subSyncedEnd": "更新しました：メンバーシップは終了しています"});
+Object.assign(STR.ko,{"subSyncing": "멤버십 상태를 업데이트하는 중…", "subSynced": "업데이트됨: 현재 {p}, {n}개월째", "subSyncedEnd": "업데이트됨: 멤버십이 끝났어요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});

@@ -118,7 +118,13 @@ async function markByPaymentIntent(pi, data) {
 }
 
 /* ----- membership (subscription) ----- */
-// every paid invoice adds a month; the badge tier follows the months. Admin-given badges (field "manual") are never lowered.
+// a paid month = the first bill or a monthly renewal. Switching plans in the portal makes a proration bill
+// (billing_reason "subscription_update"): it is not a new month and gets no gift (else switching back and forth would farm coins).
+const COUNTS = new Set(["subscription_create", "subscription_cycle"]);
+const counts = inv => !inv.billing_reason || COUNTS.has(inv.billing_reason);
+// the plan an invoice is for: its charged line (a proration bill also has a credit line for the old plan)
+const planOfInvoice = inv => { const L = inv.lines?.data || []; const l = L.find(x => (x.amount || 0) > 0) || L[0] || {}; return planOfPrice(l.pricing?.price_details?.price || l.price?.id); };
+// every counted paid invoice adds a month; the badge tier follows the months. Admin-given badges (field "manual") are never lowered.
 async function subPaid(inv) {
   const sd = inv.parent?.subscription_details || inv.subscription_details || {};
   const subId = sd.subscription || inv.subscription;
@@ -128,9 +134,9 @@ async function subPaid(inv) {
     const cur = await tx.get(sref), d = cur.exists ? cur.data() : {};
     const uid = d.uid || sd.metadata?.uid; if (!uid) { logger.warn("invoice without uid", inv.id); return; }
     const seen = d.invoices || []; if (seen.includes(inv.id)) return;   // Stripe can resend events
+    if (!counts(inv)) { tx.set(sref, { invoices: [...seen, inv.id].slice(-40) }, { merge: true }); return; }   // plan comes from customer.subscription.updated
     const months = (d.months || 0) + 1;
-    const line = inv.lines?.data?.[0] || {};
-    const plan = planOfPrice(line.pricing?.price_details?.price || line.price?.id) || d.plan || sd.metadata?.plan || "sub";
+    const plan = planOfInvoice(inv) || d.plan || sd.metadata?.plan || "sub";
     const pref = db.doc("supporters/" + uid), p = await tx.get(pref), pd = p.exists ? p.data() : {};
     const manual = pd.manual ?? (pd.sub ? 0 : pd.tier || 0);
     const end = inv.lines?.data?.[0]?.period?.end || null;
@@ -147,14 +153,39 @@ async function subStatus(sub) {
   const ended = ["canceled", "unpaid", "incomplete_expired"].includes(sub.status);
   const plan = planOfPrice(sub.items?.data?.[0]?.price?.id);
   await sref.set({ uid, status: sub.status, cancelAtEnd: !!sub.cancel_at_period_end, ...(plan ? { plan } : {}) }, { merge: true });
-  if (!ended) {   // switched between the two memberships (customer portal)
-    if (plan) { const pref = db.doc("supporters/" + uid), p = await pref.get(); if (p.exists && p.data().sub) await pref.set({ plus: plan === "plus" }, { merge: true }); }
-    return;
+  if (!ended) {   // switched between the two memberships (customer portal): plan from the subscription itself, months recounted from Stripe's paid bills
+    let months = cur.exists ? cur.data().months || 0 : 0;
+    try { const L = await stripe(`invoices?subscription=${sub.id}&status=paid&limit=100`); const n = (L.data || []).filter(counts).length; if (n) months = n; }
+    catch (e) { logger.warn("recount", sub.id, e.message); }
+    await sref.set({ months }, { merge: true });
+    const pref = db.doc("supporters/" + uid), p = await pref.get();
+    if (p.exists && p.data().sub) { const manual = p.data().manual || 0; await pref.set({ ...(plan ? { plus: plan === "plus" } : {}), months, tier: Math.max(subTier(months), manual), at: Date.now() }, { merge: true }); }
+    return { plan, months, status: sub.status };
   }
   const pref = db.doc("supporters/" + uid), p = await pref.get(); if (!p.exists) return;
   const pd = p.data(), manual = pd.manual || 0;
   if (manual) await pref.set({ tier: manual, sub: false, plus: false }, { merge: true }); else await pref.delete();
 }
+
+// re-reads the player's subscriptions from Stripe and fixes plan / months (called when coming back from the portal)
+export const subSync = onRequest({ region: REGION, secrets: [STRIPE_KEY], cors: ORIGINS, maxInstances: 5 }, async (req, res) => {
+  if (req.method !== "POST") return res.status(405).json({ error: "method" });
+  try {
+    const tok = (req.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+    const user = await getAuth().verifyIdToken(tok).catch(() => null);
+    if (!user) return res.status(401).json({ error: "login" });
+    const q = await db.collection("subscriptions").where("uid", "==", user.uid).limit(10).get();
+    let out = null;
+    for (const doc of q.docs) {
+      const sub = await stripe("subscriptions/" + doc.id).catch(() => null); if (!sub) continue;
+      const r = await subStatus(sub); if (r && !out) out = r;
+    }
+    res.json(out || { plan: null });
+  } catch (e) {
+    logger.error("subSync", e.message, e.code);
+    res.status(500).json({ error: "server", detail: e.message });
+  }
+});
 
 // opens Stripe's page where a member can cancel or change their card
 export const subPortal = onRequest({ region: REGION, secrets: [STRIPE_KEY], cors: ORIGINS, maxInstances: 5 }, async (req, res) => {
