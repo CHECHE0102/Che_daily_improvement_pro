@@ -36,7 +36,7 @@ const CATALOG = {
   charm3: { price: "price_1URwQO8z3lVUqS5jPxa6225l", grant: { charms: 3 }, test: true },
   // monthly memberships: a supporter badge that gets finer the longer you stay (monthly recurring Stripe prices).
   // plus = premium: radiant badges and a gift of items every paid month (PLUS_GIFT)
-  sub: { price: "", grant: {}, mode: "subscription", plan: "sub", test: true },
+  sub: { price: "price_1USDPd8z3lVUqS5jraN2B4s7", grant: {}, mode: "subscription", plan: "sub", test: true },
   plus: { price: "price_1USC5g8z3lVUqS5jVO8jvv5J", grant: {}, mode: "subscription", plan: "plus", test: true },
 };
 const PLUS_GIFT = { charms: 3, gold: 5000 };
