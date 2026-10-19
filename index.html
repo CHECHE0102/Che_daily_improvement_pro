@@ -2130,6 +2130,15 @@ for(let LL=1; LL<=LV_MAX; LL++){
       name:{zh:"野外",en:"The Wilds",hi:"जंगल",es:"Tierras salvajes",ja:"荒野",ko:"야생"}, foe:{mid:key, name:nm}, lore:cr[9]});
   }
 }
+// Lv 0: two little beasts a brand-new adventurer can beat on day one, even empty-handed
+for(const [k,kind,el,hp,atk,def] of [[0,"hare","wood",42,13,1],[1,"raven","earth",64,15,2]]){
+  const cr=CREATURES.find(c=>c[0]===kind), nm={};
+  for(const lg of ["zh","en","hi","es","ja","ko"]){ const base=cr[{zh:3,en:4,hi:5,es:6,ja:7,ko:8}[lg]], p=EL_PRE[lg][el], r=RANK_PRE.young[lg];
+    nm[lg]= lg==="es"?`${base}${r} ${p}`: lg==="zh"?`${r}${p}${base}`: lg==="ja"?`${p}${r}${base}`: `${r}${p} ${base}`.replace(/\s+/g," ").trim(); }
+  const key=`w_${kind}_${el}`; if(!ART[key]) ART[key]=()=>creatureArt(kind,el);
+  WILD.unshift({id:`wd0-${k}`, wild:true, lv:0, el, hp, atk, def, exp:Math.max(8,Math.round(statsAt(pl(1)).exp*0.6)), gold:6, kind,
+    name:{zh:"野外",en:"The Wilds",hi:"जंगल",es:"Tierras salvajes",ja:"荒野",ko:"야생"}, foe:{mid:key, name:nm}, lore:cr[9]});
+}
 for(const m of WILD) MONS[m.id]=m;
 const wildBeaten=m=>!!((game().wins||{})[m.id]);
 const wildOpen=m=>game().lv>=m.lv;
@@ -3135,7 +3144,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.156";
+const APP_VERSION="2026.10.157";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5440,7 +5449,9 @@ function storyRender(){
     <div class="onb-nav"><button class="btn${nickStep?" ghost":""}" data-st="${last?"done":"next"}">${btn}</button>${i>0?`<button class="btn ghost" data-st="back">‹</button>`:""}</div></div>`;
 }
 function storyDone(){ const g=game(); g.story=g.story||{}; const k=S.story.k;
-  g.story[k]=today(); if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5; toast(T("stGot")); if(!S.words.size&&(g.lv||1)<=1) g.story.lock=1; }
+  g.story[k]=today(); if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5;
+    for(const [slot,id] of [["weapon","w-metal-0"],["armor","a-water-0"]]){ if(!ITEMS[id]) continue; if(!(g.inv||[]).includes(id)) (g.inv=g.inv||[]).push(id); if(!g[slot]) g[slot]=id; }
+    toast(T("stGot")); if(!S.words.size&&(g.lv||1)<=1) g.story.lock=1; }
   saveGame(); S.story=null; storyRender(); render(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("#story [data-st]"); if(!t||!S.story) return; e.stopPropagation(); const a=t.dataset.st;
   if(a==="nick"){ const inp=document.getElementById("stNick"), n=((inp&&inp.value)||"").trim().replace(/\s+/g," "); S.story.draft=n;
@@ -6331,6 +6342,12 @@ Object.assign(STR.hi,{"noEnVoice": "इस डिवाइस में अं�
 Object.assign(STR.es,{"noEnVoice": "Este dispositivo no tiene voz en inglés y la pronunciación puede sonar rara. Añade una voz inglesa en los ajustes del sistema o prueba Chrome, Edge o Safari."});
 Object.assign(STR.ja,{"noEnVoice": "この端末には英語の音声がないため、発音が不自然になることがあります。システム設定で英語の音声を追加するか、Chrome・Edge・Safari をお試しください。"});
 Object.assign(STR.ko,{"noEnVoice": "이 기기에는 영어 음성이 없어 발음이 어색할 수 있어요. 시스템 설정에서 영어 음성을 추가하거나 Chrome, Edge, Safari를 사용해 보세요."});
+Object.assign(STR.zh,{"in5": "這 5 張出征令和一套新手裝備（鐵劍、水紋布甲）先送給你！先到野外打幾隻小野獸練練手，再去打下第一座城鎮丁格爾吧！從 1 級一路變強到 50 級，最後打敗都柏林的巴洛爾，拯救整個愛爾蘭！", "stGot": "收到 5 張出征令和一套新手裝備！"});
+Object.assign(STR.en,{"in5": "Take these 5 quest passes and a starter set of gear! Warm up on a few little beasts in the Wilds, then free Dingle, the first town. Grow from Lv 1 all the way to Lv 50, defeat Balor in Dublin and save all of Ireland!", "stGot": "You received 5 quest passes and a starter set of gear!"});
+Object.assign(STR.hi,{"in5": "ये 5 अभियान पास और शुरुआती हथियार-कवच लो! पहले जंगल में छोटे जानवरों से अभ्यास करो, फिर पहला शहर डिंगल आज़ाद करो। Lv 1 से Lv 50 तक बढ़ो, डबलिन में बलोर को हराओ और पूरे आयरलैंड को बचाओ!", "stGot": "तुम्हें 5 अभियान पास और शुरुआती उपकरण मिले!"});
+Object.assign(STR.es,{"in5": "¡Toma estos 5 pases y un equipo de principiante! Calienta con algunas bestias pequeñas en las Tierras salvajes y luego libera Dingle, la primera ciudad. ¡Crece del Lv 1 al Lv 50, derrota a Balor en Dublín y salva toda Irlanda!", "stGot": "¡Has recibido 5 pases y un equipo de principiante!"});
+Object.assign(STR.ja,{"in5": "この出撃券5枚と初心者装備をやろう！まずは荒野で小さな獣を相手に腕を慣らし、それから最初の町ディングルを取り戻すのじゃ。Lv 1 から Lv 50 まで強くなり、ダブリンのバロールを倒してアイルランドを救え！", "stGot": "出撃券5枚と初心者装備を手に入れた！"});
+Object.assign(STR.ko,{"in5": "이 출정권 5장과 초보자 장비를 받으렴! 먼저 야생에서 작은 짐승들로 몸을 풀고, 첫 번째 마을 딩글을 되찾으렴. Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "stGot": "출정권 5장과 초보자 장비를 받았어요!"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
