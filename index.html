@@ -3112,7 +3112,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.151";
+const APP_VERSION="2026.10.152";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5920,7 +5920,7 @@ Object.assign(STR.zh,{"scPlat": "白金卡", "scDiamond": "鑽石卡"});Object.a
    The sender may also take back a gift that is still pending. */
 const VAULT_ITEMS=[
   {id:"charm3", kind:"charm", n:3, ic:"🪄", pay:"charm3", price:"€1", test:true}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
-  {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"", test:true}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
+  {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"€12", test:true}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
 const GIFT={feeShard:[10,20,40,80], feeGem:[40,80,160,320], feeCharm:60, minFee:20, maxEach:20};
 function giftFee(it){ let f=0; for(const [k,n] of Object.entries(it.gems||{})) f+=n*GIFT.feeGem[+k.split("-")[1]]; for(const [k,n] of Object.entries(it.shards||{})) f+=n*GIFT.feeShard[+k.split("-")[1]]; f+=(it.charms||0)*GIFT.feeCharm; return f?Math.max(GIFT.minFee,f):0; }
 function giftCount(it){ return Object.values(it.gems||{}).reduce((a,b)=>a+b,0)+Object.values(it.shards||{}).reduce((a,b)=>a+b,0)+(it.charms||0); }

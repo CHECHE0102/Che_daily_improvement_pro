@@ -35,7 +35,7 @@ const ORIGINS = ["https://binbindaily.com", "https://www.binbindaily.com", "http
 const CATALOG = {
   charm3: { price: "price_1URwQO8z3lVUqS5jPxa6225l", grant: { charms: 3 }, test: true },
   // monthly membership: a supporter badge that gets finer the longer you stay (price: a monthly recurring Stripe price)
-  sub: { price: "", grant: {}, mode: "subscription", test: true },
+  sub: { price: "price_1USC5g8z3lVUqS5jVO8jvv5J", grant: {}, mode: "subscription", test: true },
 };
 // months subscribed → badge tier (same five badges as the old supporter badges)
 const SUB_TIERS = [[24, 5], [12, 4], [6, 3], [3, 2], [1, 1]];
