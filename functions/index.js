@@ -38,6 +38,10 @@ const CATALOG = {
   // plus = premium: radiant badges and more style coins every paid month (PLUS_GIFT vs SUB_GIFT)
   sub: { price: "price_1USDPd8z3lVUqS5jraN2B4s7", grant: {}, mode: "subscription", plan: "sub", test: true },
   plus: { price: "price_1USC5g8z3lVUqS5jVO8jvv5J", grant: {}, mode: "subscription", plan: "plus", test: true },
+  // style-coin packs (looks only). price: null = not on sale yet (needs a one-time price in Stripe)
+  style250: { price: null, grant: { style: 250 }, test: true },
+  style700: { price: null, grant: { style: 700 }, test: true },
+  style1600: { price: null, grant: { style: 1600 }, test: true },
 };
 // monthly gift = style coins only (looks, effects, sounds): no gold or battle items, so paying never buys strength
 const SUB_GIFT = { style: 300 }, PLUS_GIFT = { style: 800 };

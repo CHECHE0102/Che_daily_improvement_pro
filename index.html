@@ -927,7 +927,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .lvt-link{width:100%;margin-top:10px}nav.tabs button.locked{opacity:.45}button.locked{opacity:.55}.hu-title{margin:10px 0 4px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 /* ----- plans, cosmetics, completion card, weekly review, close listening ----- */
 .plan-tag{display:inline-block;font-size:11px;font-weight:800;padding:1px 8px;border-radius:99px;background:color-mix(in srgb,#E3B341 22%,transparent);color:#8A6410;white-space:nowrap;vertical-align:middle}.plan-tag.plus{background:linear-gradient(90deg,#FFE58A,#FFC8E6);color:#7A3E00}
-.sty-ic{width:18px;height:18px;vertical-align:-4px;flex:none}
+.sty-ic{width:18px;height:18px;vertical-align:-4px;flex:none}.vt-style .vt-ic .sty-ic{width:40px;height:40px}
 .hero-art .cos-back{position:absolute;left:46%;top:46%;width:86%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
 .cos-back .ring{position:absolute;inset:6%;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 8%,var(--c1) 12%,transparent 20% 33%,var(--c2) 38%,transparent 45% 58%,var(--c1) 63%,transparent 70% 83%,var(--c2) 88%,transparent 95%);-webkit-mask:radial-gradient(closest-side,transparent 74%,#000 76% 88%,transparent 92%);mask:radial-gradient(closest-side,transparent 74%,#000 76% 88%,transparent 92%);filter:drop-shadow(0 0 6px var(--c1));animation:cosspin 6s linear infinite}
 .cos-back .ring.r2{inset:18%;animation-duration:9s;animation-direction:reverse;opacity:.75}
@@ -3335,7 +3335,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.166";
+const APP_VERSION="2026.10.167";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6157,7 +6157,7 @@ Object.assign(STR.zh,{"scPlat": "白金卡", "scDiamond": "鑽石卡"});Object.a
 const VAULT_ITEMS=[
   {id:"charm3", kind:"charm", n:3, ic:"🪄", pay:"charm3", price:"€1", test:true}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
   {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"€5", test:true}, {id:"plus", kind:"sub", n:1, ic:"👑", pay:"plus", price:"€12", test:true, plus:true},
-  {id:"plusgift", kind:"gift", n:1, ic:"🎁"}, {id:"subgift", kind:"gift", n:1, ic:"🎁"}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
+  {id:"plusgift", kind:"gift", n:1, ic:"🎁"}, {id:"subgift", kind:"gift", n:1, ic:"🎁"}, {id:"style250", kind:"style", n:250, ic:"✨", pay:"style250", test:true}, {id:"style700", kind:"style", n:700, ic:"✨", pay:"style700", test:true}, {id:"style1600", kind:"style", n:1600, ic:"✨", pay:"style1600", test:true}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
 const GIFT={feeShard:[10,20,40,80], feeGem:[40,80,160,320], feeCharm:60, minFee:20, maxEach:20};
 function giftFee(it){ let f=0; for(const [k,n] of Object.entries(it.gems||{})) f+=n*GIFT.feeGem[+k.split("-")[1]]; for(const [k,n] of Object.entries(it.shards||{})) f+=n*GIFT.feeShard[+k.split("-")[1]]; f+=(it.charms||0)*GIFT.feeCharm; return f?Math.max(GIFT.minFee,f):0; }
 function giftCount(it){ return Object.values(it.gems||{}).reduce((a,b)=>a+b,0)+Object.values(it.shards||{}).reduce((a,b)=>a+b,0)+(it.charms||0); }
@@ -6238,7 +6238,7 @@ async function giftAct(id, act){
   catch(e){ toast(e&&e.message==="state"?T("giftChanged"):T("giftFail")); console.warn("gift act",e&&(e.code||e.message)); giftLoad(true); }
   render(); }
 function vaultTest(id){ if(!DEV) return; const v=VAULT_ITEMS.find(x=>x.id===id), g=game(); if(!v) return;
-  if(v.kind==="charm") g.charms=(g.charms||0)+v.n; else if(v.kind==="rename") g.renames=(g.renames||0)+v.n; else g.gold+=v.n; saveGame(); toast(T("vaultTestGot")); render(); }
+  if(v.kind==="style") g.style=(g.style||0)+v.n; else if(v.kind==="charm") g.charms=(g.charms||0)+v.n; else if(v.kind==="rename") g.renames=(g.renames||0)+v.n; else g.gold+=v.n; saveGame(); toast(T("vaultTestGot")); render(); }
 /* ----- real-money purchases (Stripe Checkout, see functions/index.js). The server records each paid
    checkout in purchases/{sessionId}; the game hands the items out once (claimed) and takes them back after a refund. ----- */
 const PAY_FN="https://europe-west1-che-daily-improvement-pro.cloudfunctions.net";
@@ -6251,7 +6251,7 @@ async function payTesterCheck(u){ try{ if(!u||!u.email||!u.emailVerified||!crypt
   if(PAY_TESTERS.has(h)&&!S.payTester){ S.payTester=true; render(); } }catch(e){} }
 function payGrant(g,sign){ const G=game(); if(!g) return; if(g.style) G.style=Math.max(0,(G.style||0)+sign*g.style); if(g.charms) G.charms=Math.max(0,(G.charms||0)+sign*g.charms); if(g.renames) G.renames=Math.max(0,(G.renames||0)+sign*g.renames); if(g.gold) G.gold=Math.max(0,(G.gold||0)+sign*g.gold); }
 const vaultPic=(id,cls)=>PICS.has("icon-vault-"+id)?`<img src="assets/art/icon-vault-${id}.webp" alt="" class="${cls||"vt-pic"}">`:null;
-const vaultName=v=>v.kind==="gift"?T(v.id==="subgift"?"subGiftT":"plusGiftT"):v.kind==="sub"?T(v.plus?"plusT":"subT"):v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
+const vaultName=v=>v.kind==="style"?T("vtStyle",{n:v.n.toLocaleString()}):v.kind==="gift"?T(v.id==="subgift"?"subGiftT":"plusGiftT"):v.kind==="sub"?T(v.plus?"plusT":"subT"):v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
 // "purchase complete" pop-up: what was bought, with pictures
 function payShowDone(x){
   const v=VAULT_ITEMS.find(i=>i.id===x.item); let el=document.getElementById("payDone");
@@ -6341,7 +6341,7 @@ function viewVault(){
   setTimeout(()=>{ giftLoad(false); if(PAY_IN===null){ PAY_IN=[]; payLoad(); } },0);
   const g=game(), G=S.gift;
   const buyable=v=>v.pay&&v.price&&CLOUD.user&&(!v.test||S.payTester);
-  const shop=VAULT_ITEMS.filter(v=>v.kind!=="sub"&&v.kind!=="gift").map(v=>`<div class="vt-item">${vaultPic(v.id)||`<span class="vt-ic">${v.ic}</span>`}<b>${vaultName(v)}</b>
+  const shop=VAULT_ITEMS.filter(v=>v.kind!=="sub"&&v.kind!=="gift").map(v=>`<div class="vt-item${v.kind==="style"?" vt-style":""}">${vaultPic(v.id)||(v.kind==="style"?`<span class="vt-ic">${STYLE_IC}</span>`:`<span class="vt-ic">${v.ic}</span>`)}<b>${vaultName(v)}</b>
     ${buyable(v)?`<button class="btn sm" data-act="vtbuy" data-k="${v.id}" ${PAY_BUSY?"disabled":""}>${T("vtBuy",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
       :DEV?`<button class="btn sm ghost" data-act="vttest" data-k="${v.id}">${T("vaultTest")}</button>`:`<span class="vt-soon">${T("vaultSoon")}</span>`}</div>`).join("");
   const hist=(PAY_IN||[]).filter(x=>x.status!=="open").slice(0,8);
@@ -6582,20 +6582,20 @@ const STYLE_IC=`<svg class="sty-ic" viewBox="0 0 24 24" aria-hidden="true"><circ
 const COSMETICS=[
   {id:"f-leaf",    slot:"feet", price:90,  c1:"#5CCB6A", c2:"#E4FFB0"},
   {id:"f-gold",    slot:"feet", price:180, c1:"#F5B72E", c2:"#FFF3B0"},
-  {id:"f-helix",   slot:"feet", price:320, c1:"#FFC93C", c2:"#FFF6C8", d3:true},
-  {id:"f-rainbow", slot:"feet", price:360, c1:"#FF7AB6", c2:"#7FE3FF", need:"sub"},
+  {id:"f-helix",   slot:"feet", price:320, c1:"#FFC93C", c2:"#FFF6C8", d3:true, need:"sub"},
+  {id:"f-rainbow", slot:"feet", price:360, c1:"#FF7AB6", c2:"#7FE3FF"},
   {id:"f-rhelix",  slot:"feet", price:640, c1:"#B98CFF", c2:"#FFFFFF", plus:true, d3:true},
   {id:"b-halo",    slot:"back", price:240, c1:"#FFD75E", c2:"#FFFFFF"},
   {id:"b-gears",   slot:"back", price:300, c1:"#D9A441", c2:"#FFE9A8"},
-  {id:"b-rune",    slot:"back", price:360, c1:"#3FD9C0", c2:"#D4FFF5"},
+  {id:"b-rune",    slot:"back", price:360, c1:"#3FD9C0", c2:"#D4FFF5", need:"sub"},
   {id:"b-moon",    slot:"back", price:380, c1:"#BFD7FF", c2:"#FFFFFF"},
-  {id:"b-abyss",   slot:"back", price:520, c1:"#9B4DFF", c2:"#1A0626"},
+  {id:"b-abyss",   slot:"back", price:520, c1:"#9B4DFF", c2:"#1A0626", need:"sub"},
   {id:"b-wings",   slot:"back", price:600, c1:"#9FD8FF", c2:"#FFFFFF", plus:true},
   {id:"b-phoenix", slot:"back", price:720, c1:"#FF6A2B", c2:"#FFE066", plus:true},
   {id:"n-fire",    slot:"neck", price:300, c1:"#FF6A2B", c2:"#FFD36B", fx:"fire",    pow:2},
   {id:"n-frost",   slot:"neck", price:300, c1:"#4FC3F7", c2:"#E6FBFF", fx:"frost",   pow:2},
   {id:"n-thunder", slot:"neck", price:420, c1:"#FFE14D", c2:"#FFFFFF", fx:"thunder", pow:3},
-  {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4},
+  {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4, need:"sub"},
   {id:"n-star",    slot:"neck", price:800, c1:"#FFD54A", c2:"#FFFFFF", fx:"star",    pow:5, plus:true},
   {id:"s-chime",   slot:"sfx",  price:120},
   {id:"s-taiko",   slot:"sfx",  price:120},
@@ -6896,6 +6896,12 @@ Object.assign(STR.hi,{"cos_f-rhelix": "इंद्रधनुष सर्प�
 Object.assign(STR.es,{"cos_f-rhelix": "Hélice arcoíris", "cosDi_f-rhelix": "Chispas de todos los colores suben en espiral a tu alrededor dentro de una columna que cambia de color", "cosSubOnly": "🌟 Miembros o más", "subPerk5": "🌈 Estilo de miembro: remolino arcoíris", "plusPerk3": "Estilos solo prémium: hélice arcoíris, alas de luz, rueda de fuego fénix, collar estelar", "cosRefund": "Los cinturones se retiraron por ahora; te devolvimos {n} monedas de estilo"});
 Object.assign(STR.ja,{"cos_f-rhelix": "虹のらせん光柱", "cosDi_f-rhelix": "七色の光の粒が体をぐるぐる回りながら昇り、光の柱の色が移り変わる", "cosSubOnly": "🌟 メンバー以上", "subPerk5": "🌈 メンバー限定スタイル：虹のオーラ", "plusPerk3": "プレミアム限定スタイル：虹のらせん光柱・光の翼・鳳凰の炎輪・星のネックレス", "cosRefund": "ベルトはいったん取り下げました。{n} スタイルコインを返しました"});
 Object.assign(STR.ko,{"cos_f-rhelix": "무지개 나선 빛기둥", "cosDi_f-rhelix": "일곱 빛깔 불티가 몸을 빙글빙글 감으며 올라가고, 빛기둥 색이 천천히 바뀌어요", "cosSubOnly": "🌟 멤버 이상", "subPerk5": "🌈 멤버 스타일: 무지개 오라", "plusPerk3": "프리미엄 전용 스타일: 무지개 나선 빛기둥, 빛의 날개, 불사조 화염륜, 별빛 목걸이", "cosRefund": "허리띠는 잠시 내렸어요. 스타일 코인 {n}을 돌려드렸어요"});
+Object.assign(STR.zh,{"vtStyle":"{n} 造型幣"});
+Object.assign(STR.en,{"vtStyle":"{n} style coins"});
+Object.assign(STR.hi,{"vtStyle":"{n} स्टाइल सिक्के"});
+Object.assign(STR.es,{"vtStyle":"{n} monedas de estilo"});
+Object.assign(STR.ja,{"vtStyle":"スタイルコイン {n}"});
+Object.assign(STR.ko,{"vtStyle":"스타일 코인 {n}"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
