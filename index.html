@@ -1039,7 +1039,10 @@ body.vp-lock{touch-action:pan-x pan-y}
 @keyframes flick{from{transform:rotate(var(--a)) translateY(-290%) scaleY(.75)}to{transform:rotate(var(--a)) translateY(-300%) scaleY(1.25)}}
 .cos-back.cb-b-phoenix .fw{position:absolute;inset:0;animation:cosspin 20s linear infinite}
 .cos-back.cb-b-phoenix s{position:absolute;bottom:40%;width:4%;height:4%;border-radius:50%;background:#FFE066;box-shadow:0 0 6px 2px #FF6A2B;animation:sprise 2s ease-out infinite}.cos-back.cb-b-phoenix s:nth-of-type(odd){left:30%}.cos-back.cb-b-phoenix s:nth-of-type(even){left:66%;animation-delay:.7s}.cos-back.cb-b-phoenix s:nth-of-type(3n){left:48%;animation-delay:1.3s}
-.hero-art .cos-neck{width:9%;aspect-ratio:auto;transform:translate(-50%,-30%)}.cos-neck svg{display:block;width:100%;height:auto;filter:drop-shadow(0 0 4px var(--c1)) drop-shadow(0 0 1px #fff);animation:cospulse 1.8s ease-in-out infinite}
+.hero-art .cos-neck{width:7.5%;aspect-ratio:auto;left:51.5%;top:51%;transform:translate(-50%,0)}
+.hero-art .ha-a-idle-hold .cos-neck{left:51%;top:50.5%}.hero-art .ha-a-idle-plant .cos-neck{left:50%;top:50%}.hero-art .ha-a-idle-shoulder .cos-neck{left:50.5%;top:56.5%}.hero-art .ha-a-win .cos-neck{left:51.5%;top:53.5%}
+.cos-neck .chain{position:absolute;left:-90%;bottom:78%;width:280%;height:auto;overflow:visible;animation:none!important;filter:none!important}.cos-neck .chain path{fill:none;stroke:#E8C15A;stroke-width:1.6;stroke-dasharray:2 1.4;stroke-linecap:round}
+.cos-neck.solo .chain{display:none}.cos-neck svg{display:block;width:100%;height:auto;filter:drop-shadow(0 0 4px var(--c1)) drop-shadow(0 0 1px #fff);animation:cospulse 1.8s ease-in-out infinite}
 .cos-neck.cn-dark svg{filter:drop-shadow(0 0 5px var(--c1)) drop-shadow(0 0 10px #3A0A5C)}
 .cos-neck.solo{width:26px;height:auto;transform:none}
 /* strikes */
@@ -3332,7 +3335,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.165";
+const APP_VERSION="2026.10.166";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5493,7 +5496,7 @@ function charArt(gen, pose, w, armor, cls, glow, cos){
       ?`<image href="assets/art/${pk}.webp" x="${-gx*L*100}" y="${-gy*L*100}" width="${L*100}" height="${L*100}"/>`
       :`<g transform="rotate(45) scale(.5) translate(-32 -54)">${weaponGlyph(w)}</g>`}</g></svg>`; }
   const ag=armor&&glowCss(glow?glow.as:socketsOf(armor.id),true);
-  return `<div class="${cls||"hero-svg"} hero-art ha-${pose}"><div class="ha-in${act.startsWith("idle-")?" wfront":""}">${cos?cos.under:""}<img src="assets/art/hero/${key}.webp" alt="" draggable="false"${ag?` class="ha-glow"${ag}`:""}${glow&&glow.lazy?' loading="lazy"':""}>${wpn}${cos?cos.over:""}</div></div>`;
+  return `<div class="${cls||"hero-svg"} hero-art ha-${pose}"><div class="ha-in ha-a-${act}${act.startsWith("idle-")?" wfront":""}">${cos?cos.under:""}<img src="assets/art/hero/${key}.webp" alt="" draggable="false"${ag?` class="ha-glow"${ag}`:""}${glow&&glow.lazy?' loading="lazy"':""}>${wpn}${cos?cos.over:""}</div></div>`;
 }
 function heroArt(pose, gOverride){
   const g=game(), gen=gOverride||g.gender; if(!gen) return heroSvg(gOverride);
@@ -6654,7 +6657,7 @@ function cosLayers(w){
     if(wa.id==="w-crystal"){ let sh=""; for(let i=0;i<6;i++){ const a=i*60*Math.PI/180; sh+=`<i class="sh" style="left:${(50+46*Math.cos(a)).toFixed(1)}%;top:${(50+46*Math.sin(a)).toFixed(1)}%"></i>`; }
       const L=split("cos-crys",`<span class="cr" style="${st}"><span class="rot">${sh}</span></span>`); under+=L.under; over+=L.over; }
     else { const L=split("cos-orbit",`<i class="ob o1"><b></b><b class="rr"><u></u></b></i><i class="ob o2"><b></b><b class="rr"><u></u></b></i>`); under+=L.under; over+=L.over; } }
-  if(n) over+=`<span class="cos-neck cn-${n.fx}" style="${cosStyleCss(n)}">${PENDANT[n.fx]}</span>`;
+  if(n) over+=`<span class="cos-neck cn-${n.fx}" style="${cosStyleCss(n)}"><svg class="chain" viewBox="0 0 40 16" aria-hidden="true"><path d="M3 1Q20 19 37 1"/></svg>${PENDANT[n.fx]}</span>`;
   return {under,over};
 }
 // the burst a necklace adds on the monster when you hit it: each one different, and stronger the dearer it is
