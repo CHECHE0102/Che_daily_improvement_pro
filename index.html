@@ -908,7 +908,9 @@ body.vp-lock{touch-action:pan-x pan-y}
 .adv-quick{gap:8px}.aq-btn{min-width:58px}.aq-dot{position:absolute;right:-6px;top:-6px;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:#E0457B;color:#fff;font:800 11px/18px system-ui;font-style:normal}
 .aq-btn.vault .aq-ic{background:linear-gradient(135deg,#FFF5D6,#FFE1F0 45%,#DDF0FF);border-color:#E3B341}.aq-btn.vault>span:last-child{background:linear-gradient(90deg,#E0573B,#D9A520,#3FA65A,#2A68B0,#7E5BB5);-webkit-background-clip:text;background-clip:text;color:transparent}
 .vault-hero{display:flex;gap:14px;align-items:center;border-radius:var(--r);padding:16px;background:linear-gradient(135deg,#2B1A3F,#1B2A4A 55%,#123D33);color:#FFF6DA;box-shadow:inset 0 0 0 1px rgba(255,215,120,.35)}.vault-hero h2{margin:2px 0 4px;font-size:24px;background:linear-gradient(90deg,#FF8A65,#FFD54F,#81C784,#64B5F6,#BA68C8);-webkit-background-clip:text;background-clip:text;color:transparent}.vault-hero p{margin:0;opacity:.85}.vault-hero .eyebrow{color:#FFD54F}.vh-ic{width:64px;height:64px;flex:none;border-radius:18px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}.vh-ic svg{width:48px;height:48px}
-.sub-ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:10px 0 12px}.sub-step{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;font-size:11px;line-height:1.25;padding:6px 2px;border-radius:12px;opacity:.55}.sub-step.got{opacity:1}.sub-step.now{background:color-mix(in srgb,var(--accent) 16%,transparent);outline:1.5px solid var(--accent)}.sub-step b{font-size:11px}
+.sub-plans{display:grid;gap:10px;margin:10px 0}.sub-plan{border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px}.sub-plan.plus{border-color:#E3B341;background:linear-gradient(160deg,color-mix(in srgb,#FFE58A 16%,var(--card,#fff)),var(--card,#fff) 60%)}.sub-plan.mine{outline:2px solid var(--accent)}.sub-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.sub-price{font-weight:700;color:var(--accent)}.sub-plan.plus .sub-price{color:#C99A1E}.sub-perks{margin:0;padding-left:18px;font-size:13px;line-height:1.5}.sub-mine{font-weight:700;color:var(--accent);font-size:14px}
+.sbp{position:relative;display:inline-grid;place-items:center;border-radius:50%;padding:2px;background:conic-gradient(from 0deg,#F7D774,#FFF6C8,#D9A21B,#FFF6C8,#F7D774);box-shadow:0 0 6px 1px rgba(255,196,0,.65);vertical-align:middle;line-height:0}.sbp>svg{display:block;border-radius:50%}.sbp::after{content:"✦";position:absolute;top:-5px;right:-4px;font-size:9px;line-height:1;color:#FFD54A;text-shadow:0 0 3px #fff;animation:sbTw 2.2s ease-in-out infinite}@keyframes sbTw{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}}@media (prefers-reduced-motion:reduce){.sbp::after{animation:none}}
+.sub-ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:6px 0 4px}.sub-step{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;font-size:11px;line-height:1.25;padding:6px 2px;border-radius:12px;opacity:.55}.sub-step.got{opacity:1}.sub-step.now{background:color-mix(in srgb,var(--accent) 16%,transparent);outline:1.5px solid var(--accent)}.sub-step b{font-size:11px}
 .vt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px}.vt-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border-radius:14px;border:1px solid #E3B341;background:linear-gradient(180deg,color-mix(in srgb,#FFE58A 18%,var(--card,#fff)),var(--card,#fff));text-align:center}.vt-ic{font-size:28px}.vt-soon{font-size:12px;font-weight:700;color:var(--muted);border:1px dashed var(--line,#ccd);border-radius:99px;padding:3px 10px}
 .gift-find input{flex:1;min-width:0}.gift-to{font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.gift-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gift-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;border:1px solid var(--line,#ccd);border-radius:10px}.gift-lab{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.gift-step{display:flex;align-items:center;gap:6px}.gift-step b{min-width:20px;text-align:center}.gift-step .btn{padding:4px 10px}
 .gift-fee{margin:6px 0;font-weight:700}.gift-confirm{border:2px solid var(--fire);border-radius:12px;padding:10px;margin:8px 0;background:color-mix(in srgb,var(--fire) 8%,transparent)}
@@ -3010,7 +3012,7 @@ function devBadgeHtml(){
 /* ----- supporter badges (supporters/{uid} in Firestore, set by the admin in developer mode) ----- */
 let SUP={}, SUP_N=0;
 const SUP_TIERS=[1,2,3,4,5];
-async function supLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDocs(fsM.collection(db,"supporters")); const m={}; sn.forEach(d=>{ const x=d.data(); if(x&&x.tier>=1&&x.tier<=5) m[d.id]={tier:x.tier, n:x.n||"", sub:x.sub===true, months:x.months||0}; }); SUP=m; render(); }catch(e){} }
+async function supLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDocs(fsM.collection(db,"supporters")); const m={}; sn.forEach(d=>{ const x=d.data(); if(x&&x.tier>=1&&x.tier<=5) m[d.id]={tier:x.tier, n:x.n||"", sub:x.sub===true, plus:x.plus===true, months:x.months||0}; }); SUP=m; render(); }catch(e){} }
 function supSvg(t,size){
   const id="sp"+t+"_"+(++SUP_N), z=size||22;
   const wrap=(inner,defs="")=>`<svg class="sb sb${t}" viewBox="0 0 40 40" width="${z}" height="${z}" aria-label="${esc(T("sb"+t))}" role="img"><defs>${defs}</defs>${inner}</svg>`;
@@ -3049,8 +3051,12 @@ function supSvg(t,size){
     `<linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF5C8A"/><stop offset=".25" stop-color="#FFB33C"/><stop offset=".5" stop-color="#5BD484"/><stop offset=".75" stop-color="#36C5F0"/><stop offset="1" stop-color="#B44CFF"/></linearGradient><radialGradient id="${id}b" cx=".5" cy=".45" r=".7"><stop offset="0" stop-color="#2A2560"/><stop offset="1" stop-color="#0C0A24"/></radialGradient>`);
 }
 const supTier=uid=>(SUP[uid]||{}).tier||0;
-const supB=(uid,size)=>{ const t=supTier(uid); return t?`<span class="sb-wrap" title="${esc(T("sb"+t))}">${supSvg(t,size||18)}</span>`:""; };
-function supMineCard(){ const u=CLOUD.user; const t=u?supTier(u.uid):0; if(!t) return ""; return `<section class="card sup-mine"><div class="sup-mine-b">${supSvg(t,72)}</div><div><b>${T("sbMine",{b:esc(T("sb"+t))})}</b><p class="muted sm-t" style="margin:4px 0 0">${T("sbThanks")}</p></div></section>`; }
+// premium members (plus) get the radiant version: gold ring, glow and a twinkle
+const sbArt=(t,size,plus)=>plus?`<span class="sbp">${supSvg(t,size)}</span>`:supSvg(t,size);
+const sbName=(t,plus)=>plus?T("sbPlus",{b:T("sb"+t)}):T("sb"+t);
+const supPlus=uid=>!!(SUP[uid]&&SUP[uid].plus);
+const supB=(uid,size)=>{ const t=supTier(uid), pl=supPlus(uid); return t?`<span class="sb-wrap" title="${esc(sbName(t,pl))}">${sbArt(t,size||18,pl)}</span>`:""; };
+function supMineCard(){ const u=CLOUD.user; const t=u?supTier(u.uid):0; if(!t) return ""; const pl=supPlus(u.uid); return `<section class="card sup-mine"><div class="sup-mine-b">${sbArt(t,72,pl)}</div><div><b>${T("sbMine",{b:esc(sbName(t,pl))})}</b><p class="muted sm-t" style="margin:4px 0 0">${T("sbThanks")}</p></div></section>`; }
 function devSupHtml(){
   const list=Object.entries(SUP).sort((a,b)=>b[1].tier-a[1].tier);
   return `<div class="dev-sup"><div class="eyebrow">💝 ${T("sbDev")}</div>
@@ -3112,7 +3118,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.152";
+const APP_VERSION="2026.10.153";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5920,7 +5926,8 @@ Object.assign(STR.zh,{"scPlat": "白金卡", "scDiamond": "鑽石卡"});Object.a
    The sender may also take back a gift that is still pending. */
 const VAULT_ITEMS=[
   {id:"charm3", kind:"charm", n:3, ic:"🪄", pay:"charm3", price:"€1", test:true}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
-  {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"€12", test:true}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
+  {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"", test:true}, {id:"plus", kind:"sub", n:1, ic:"👑", pay:"plus", price:"€12", test:true, plus:true},
+  {id:"plusgift", kind:"gift", n:1, ic:"🎁"}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
 const GIFT={feeShard:[10,20,40,80], feeGem:[40,80,160,320], feeCharm:60, minFee:20, maxEach:20};
 function giftFee(it){ let f=0; for(const [k,n] of Object.entries(it.gems||{})) f+=n*GIFT.feeGem[+k.split("-")[1]]; for(const [k,n] of Object.entries(it.shards||{})) f+=n*GIFT.feeShard[+k.split("-")[1]]; f+=(it.charms||0)*GIFT.feeCharm; return f?Math.max(GIFT.minFee,f):0; }
 function giftCount(it){ return Object.values(it.gems||{}).reduce((a,b)=>a+b,0)+Object.values(it.shards||{}).reduce((a,b)=>a+b,0)+(it.charms||0); }
@@ -6014,13 +6021,13 @@ async function payTesterCheck(u){ try{ if(!u||!u.email||!u.emailVerified||!crypt
   if(PAY_TESTERS.has(h)&&!S.payTester){ S.payTester=true; render(); } }catch(e){} }
 function payGrant(g,sign){ const G=game(); if(!g) return; if(g.charms) G.charms=Math.max(0,(G.charms||0)+sign*g.charms); if(g.renames) G.renames=Math.max(0,(G.renames||0)+sign*g.renames); if(g.gold) G.gold=Math.max(0,(G.gold||0)+sign*g.gold); }
 const vaultPic=(id,cls)=>PICS.has("icon-vault-"+id)?`<img src="assets/art/icon-vault-${id}.webp" alt="" class="${cls||"vt-pic"}">`:null;
-const vaultName=v=>v.kind==="sub"?T("subT"):v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
+const vaultName=v=>v.kind==="gift"?T("plusGiftT"):v.kind==="sub"?T(v.plus?"plusT":"subT"):v.kind==="charm"?T("vtCharm",{n:v.n}):v.kind==="rename"?T("vtRename",{n:v.n}):T("vtGold",{n:v.n.toLocaleString()});
 // "purchase complete" pop-up: what was bought, with pictures
 function payShowDone(x){
   const v=VAULT_ITEMS.find(i=>i.id===x.item); let el=document.getElementById("payDone");
   if(!el){ el=document.createElement("div"); el.id="payDone"; document.body.appendChild(el); el.dataset.items="[]"; }
   const items=JSON.parse(el.dataset.items||"[]"); items.push(x.item); el.dataset.items=JSON.stringify(items);
-  const rows=items.map(id=>{ const it=VAULT_ITEMS.find(i=>i.id===id); if(!it) return ""; return `<div class="pd-item">${vaultPic(it.id,"pd-pic")||`<span class="pd-ic">${it.ic}</span>`}<b>${esc(vaultName(it))}</b></div>`; }).join("");
+  const rows=items.map(id=>{ const it=VAULT_ITEMS.find(i=>i.id===id); if(!it) return ""; return `<div class="pd-item">${vaultPic(it.id,"pd-pic")||`<span class="pd-ic">${it.ic}</span>`}<b>${esc(vaultName(it))}</b>${it.kind==="gift"?`<small class="muted">${T("plusGiftIn")}</small>`:""}</div>`; }).join("");
   const hero=PICS.has("icon-vault-thanks")?`<img src="assets/art/icon-vault-thanks.webp" alt="" class="pd-hero">`:`<div class="pd-hero pd-hero-ph">${VAULT_ICON}</div>`;
   el.innerHTML=`<div class="scrim pd-scrim" data-act="paydoneclose"></div><div class="pd-card" role="dialog" aria-modal="true">${hero}<h2>${T("payDoneT")}</h2><p class="sm-t muted">${T("payDoneSub")}</p><div class="pd-list">${rows}</div><button class="btn" data-act="paydoneclose">${T("payDoneOk")}</button></div>`; }
 document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="paydoneclose"]'); if(!t) return; e.stopPropagation(); const el=document.getElementById("payDone"); if(el) el.remove(); render(); }, true);
@@ -6056,7 +6063,7 @@ async function payClaim(x, mode){
       if(!d||d.uid!==CLOUD.user.uid) throw new Error("state");
       if(mode==="claim"){ if(d.status!=="paid"||d.claimed) throw new Error("state"); tx.update(ref,{claimed:true, claimedAt:new Date().toISOString()}); }
       else { if(!d.claimed||d.revoked||!(d.status==="refunded"||d.status==="disputed")) throw new Error("state"); tx.update(ref,{revoked:true, revokedAt:new Date().toISOString()}); } });
-    if(mode==="claim"){ payGrant(x.grant,1); x.claimed=true; payShowDone(x); if(x.item==="sub") setTimeout(supLoad,4000); if(typeof sfx==="function") sfx("prize"); }
+    if(mode==="claim"){ payGrant(x.grant,1); x.claimed=true; payShowDone(x); if(x.item==="sub"||x.item==="plus") setTimeout(supLoad,4000); if(typeof sfx==="function") sfx("prize"); }
     else { payGrant(x.grant,-1); x.revoked=true; toast(T("payRevoked")); }
     saveGame(); }
   catch(e){ if(e&&e.message!=="state") console.warn("purchase claim",e&&(e.code||e.message)); } }
@@ -6064,13 +6071,17 @@ if(PAY_RET&&PAY_RET.pay==="cancel") setTimeout(()=>toast(T("payCancel")),1500);
 /* membership card: monthly subscription, badge grows with the months (supporters/{uid}: sub, months, tier; written by the server) */
 const SUB_STEPS=[[1,1],[3,2],[6,3],[12,4],[24,5]];
 function subCard(buyable){
-  const v=VAULT_ITEMS.find(i=>i.kind==="sub"), me=CLOUD.user&&SUP[CLOUD.user.uid], on=!!(me&&me.sub), m=on?me.months||1:0;
-  const cur=on?me.tier:0, next=SUB_STEPS.find(([n])=>n>m);
-  const ladder=SUB_STEPS.map(([n,t])=>`<div class="sub-step${cur>=t?" got":""}${on&&cur===t?" now":""}">${supSvg(t,34)}<b>${esc(T("sb"+t))}</b><span class="muted">${T("subM",{n})}</span></div>`).join("");
-  const act=on?`<p class="sm-t"><b>${T("subNow",{n:m})}</b>${next?` · ${T("subNext",{n:next[0]-m,b:T("sb"+next[1])})}`:""}</p><button class="btn ghost sm" data-act="subportal" ${PAY_BUSY?"disabled":""}>${T("subManage")}</button>`
-    :buyable(v)?`<button class="btn" data-act="vtbuy" data-k="sub" ${PAY_BUSY?"disabled":""}>${T("subBtn",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
-    :!CLOUD.user?`<p class="muted sm-t">${T("payLogin")}</p>`:`<span class="vt-soon">${T("vaultSoon")}</span>`;
-  return `<section class="card sub-card"><h3>🌟 ${T("subT")}</h3><p class="muted sm-t">${T("subSub")}</p><div class="sub-ladder">${ladder}</div>${act}</section>`;
+  const me=CLOUD.user&&SUP[CLOUD.user.uid], on=!!(me&&me.sub), m=on?me.months||1:0, cur=on?me.tier:0, next=SUB_STEPS.find(([n])=>n>m);
+  const plan=(v)=>{ const pl=!!v.plus, mine=on&&!!me.plus===pl;
+    const ladder=SUB_STEPS.map(([n,t])=>`<div class="sub-step${mine&&cur>=t?" got":""}${mine&&cur===t?" now":""}">${sbArt(t,30,pl)}<b>${esc(sbName(t,pl))}</b><span class="muted">${T("subM",{n})}</span></div>`).join("");
+    const btn=mine?`<span class="sub-mine">✓ ${T("subYours")}</span>`:on?"":buyable(v)?`<button class="btn${pl?"":" ghost"}" data-act="vtbuy" data-k="${v.id}" ${PAY_BUSY?"disabled":""}>${T("subBtn",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
+      :!CLOUD.user?"":`<span class="vt-soon">${T("vaultSoon")}</span>`;
+    return `<div class="sub-plan${pl?" plus":""}${mine?" mine":""}"><div class="sub-head"><b>${v.ic} ${T(pl?"plusT":"subT")}</b>${v.price?`<span class="sub-price">${T("subPer",{p:v.price})}</span>`:""}</div>
+      <ul class="sub-perks"><li>${T(pl?"plusPerk1":"subPerk1")}</li>${pl?`<li>${T("plusPerk2")}</li>`:""}</ul><div class="sub-ladder">${ladder}</div>${btn}</div>`; };
+  const plans=VAULT_ITEMS.filter(i=>i.kind==="sub").map(plan).join("");
+  const status=on?`<p class="sm-t"><b>${T("subNow",{n:m})}</b>${next?` · ${T("subNext",{n:next[0]-m,b:sbName(next[1],me.plus)})}`:""}</p><button class="btn ghost sm" data-act="subportal" ${PAY_BUSY?"disabled":""}>${T("subManage")}</button>`
+    :!CLOUD.user?`<p class="muted sm-t">${T("payLogin")}</p>`:"";
+  return `<section class="card sub-card"><h3>🌟 ${T("subHead")}</h3><p class="muted sm-t">${T("subSub")}</p><div class="sub-plans">${plans}</div>${status}</section>`;
 }
 async function subPortal(){
   if(!CLOUD.user||PAY_BUSY) return; PAY_BUSY=true; render();
@@ -6083,7 +6094,7 @@ function viewVault(){
   setTimeout(()=>{ giftLoad(false); if(PAY_IN===null){ PAY_IN=[]; payLoad(); } },0);
   const g=game(), G=S.gift;
   const buyable=v=>v.pay&&v.price&&CLOUD.user&&(!v.test||S.payTester);
-  const shop=VAULT_ITEMS.filter(v=>v.kind!=="sub").map(v=>`<div class="vt-item">${vaultPic(v.id)||`<span class="vt-ic">${v.ic}</span>`}<b>${vaultName(v)}</b>
+  const shop=VAULT_ITEMS.filter(v=>v.kind!=="sub"&&v.kind!=="gift").map(v=>`<div class="vt-item">${vaultPic(v.id)||`<span class="vt-ic">${v.ic}</span>`}<b>${vaultName(v)}</b>
     ${buyable(v)?`<button class="btn sm" data-act="vtbuy" data-k="${v.id}" ${PAY_BUSY?"disabled":""}>${T("vtBuy",{p:v.price})}${v.test?` <small>${T("vtTestTag")}</small>`:""}</button>`
       :DEV?`<button class="btn sm ghost" data-act="vttest" data-k="${v.id}">${T("vaultTest")}</button>`:`<span class="vt-soon">${T("vaultSoon")}</span>`}</div>`).join("");
   const hist=(PAY_IN||[]).filter(x=>x.status!=="open").slice(0,8);
@@ -6284,6 +6295,12 @@ Object.assign(STR.hi,{"subT": "BinBin सदस्यता", "subSub": "मा�
 Object.assign(STR.es,{"subT": "Membresía BinBin", "subSub": "Una suscripción mensual que pone una insignia de miembro junto a tu nombre, visible para todos. ¡Cuanto más tiempo, más bonita! Cancela cuando quieras.", "subM": "{n} mes(es)", "subNow": "Mes {n} de tu membresía", "subNext": "{n} mes(es) más para «{b}»", "subBtn": "Suscribirse {p} / mes", "subManage": "Gestionar o cancelar", "subAlready": "Ya eres miembro", "subPortalFail": "No se pudo abrir la gestión de la suscripción. Escribe a binbindaily.help@gmail.com", "d3n": "Por cierto, en la Clasificación, junto a Aventura, puedes comparar tu nivel y poder con aventureros de todo el mundo. Para aparecer necesitas un apodo, así que elige uno ahora.", "stNickSave": "¡Ese es mi nombre!", "stNickLater": "Más tarde", "stNickNote": "Tu apodo se muestra en la clasificación. Una vez elegido, cambiarlo requiere un ticket de cambio de nombre, ¡elige bien!", "stNickLogin": "Inicia sesión con Google para elegir un apodo y entrar en la clasificación."});
 Object.assign(STR.ja,{"subT": "BinBin メンバーシップ", "subSub": "月額サブスクで、名前の横にメンバーバッジが表示されます。長く続けるほどバッジが豪華に！いつでも解約できます。", "subM": "{n} か月", "subNow": "メンバー {n} か月目", "subNext": "あと {n} か月で「{b}」", "subBtn": "{p} / 月で登録", "subManage": "管理・解約", "subAlready": "すでにメンバーです", "subPortalFail": "サブスクの管理画面を開けませんでした。binbindaily.help@gmail.com までご連絡ください", "d3n": "そうそう、冒険の隣の「ランキング」では世界中の冒険者とレベルや戦力を比べられるぞ！載るにはニックネームが必要じゃ。今ここで決めておくがよい。", "stNickSave": "この名前にする！", "stNickLater": "あとで", "stNickNote": "ニックネームはランキングで公開されます。一度決めると、変更には改名チケットが必要です。よく考えて決めてね！", "stNickLogin": "ニックネームを決めてランキングに載るには、まず Google でログインしてください。"});
 Object.assign(STR.ko,{"subT": "BinBin 멤버십", "subSub": "월 구독으로 이름 옆에 멤버 배지가 표시돼요. 오래 할수록 배지가 더 멋져져요! 언제든 해지할 수 있어요.", "subM": "{n}개월", "subNow": "멤버십 {n}개월째", "subNext": "{n}개월 더 하면 ‘{b}’", "subBtn": "월 {p} 구독", "subManage": "구독 관리·해지", "subAlready": "이미 멤버예요", "subPortalFail": "구독 관리를 열 수 없어요. binbindaily.help@gmail.com 으로 문의해 주세요", "d3n": "참, 모험 옆의 ‘랭킹’에서는 전 세계 모험가들과 레벨과 전투력을 겨룰 수 있지! 랭킹에 오르려면 닉네임이 필요하니 지금 하나 정해 보거라.", "stNickSave": "이 이름으로!", "stNickLater": "나중에", "stNickNote": "닉네임은 랭킹에 공개돼요. 한 번 정하면 바꿀 때 이름 변경권이 필요하니 신중하게 정하세요!", "stNickLogin": "닉네임을 정하고 랭킹에 오르려면 먼저 Google로 로그인하세요."});
+Object.assign(STR.zh,{"subHead": "BinBin 會員", "subSub": "每月訂閱，你的名字旁邊會出現會員徽章，大家都看得到。訂閱越久，徽章越漂亮！隨時可以取消。", "subT": "一般會員", "plusT": "高級會員", "subPer": "{p} / 月", "subPerk1": "會員徽章，訂閱越久越漂亮", "plusPerk1": "璀璨金框的專屬高級徽章", "plusPerk2": "每月送解鑲符 ×3、金幣 ×5,000", "subYours": "你目前的方案", "subBtn": "訂閱 {p} / 月", "sbPlus": "璀璨{b}", "plusGiftT": "高級會員每月禮物", "plusGiftIn": "解鑲符 ×3、金幣 ×5,000"});
+Object.assign(STR.en,{"subHead": "BinBin membership", "subSub": "A monthly subscription that puts a member badge next to your name for everyone to see. The longer you stay, the finer the badge! Cancel any time.", "subT": "Member", "plusT": "Premium member", "subPer": "{p} / month", "subPerk1": "Member badge that grows finer every few months", "plusPerk1": "Exclusive radiant badge with a golden frame", "plusPerk2": "Every month: unsocketing charm ×3 and 5,000 gold", "subYours": "Your plan", "subBtn": "Subscribe {p} / month", "sbPlus": "Radiant {b}", "plusGiftT": "Premium monthly gift", "plusGiftIn": "Unsocketing charm ×3, 5,000 gold"});
+Object.assign(STR.hi,{"subHead": "BinBin सदस्यता", "subSub": "मासिक सदस्यता: आपके नाम के पास सदस्य बैज दिखेगा, सबको दिखेगा। जितना लंबा साथ, उतना सुंदर बैज! कभी भी रद्द करें।", "subT": "सदस्य", "plusT": "प्रीमियम सदस्य", "subPer": "{p} / माह", "subPerk1": "सदस्य बैज, समय के साथ और सुंदर", "plusPerk1": "सुनहरे फ्रेम वाला ख़ास चमकदार बैज", "plusPerk2": "हर महीने: मुक्ति-ताबीज़ ×3 और 5,000 सोना", "subYours": "आपका प्लान", "subBtn": "सदस्यता {p} / माह", "sbPlus": "चमकता {b}", "plusGiftT": "प्रीमियम मासिक उपहार", "plusGiftIn": "मुक्ति-ताबीज़ ×3, 5,000 सोना"});
+Object.assign(STR.es,{"subHead": "Membresía BinBin", "subSub": "Una suscripción mensual que pone una insignia de miembro junto a tu nombre, visible para todos. ¡Cuanto más tiempo, más bonita! Cancela cuando quieras.", "subT": "Miembro", "plusT": "Miembro prémium", "subPer": "{p} / mes", "subPerk1": "Insignia de miembro que mejora con los meses", "plusPerk1": "Insignia radiante exclusiva con marco dorado", "plusPerk2": "Cada mes: amuleto de desengaste ×3 y 5.000 de oro", "subYours": "Tu plan", "subBtn": "Suscribirse {p} / mes", "sbPlus": "{b} radiante", "plusGiftT": "Regalo mensual prémium", "plusGiftIn": "Amuleto de desengaste ×3, 5.000 de oro"});
+Object.assign(STR.ja,{"subHead": "BinBin メンバーシップ", "subSub": "月額サブスクで、名前の横にメンバーバッジが表示されます。長く続けるほどバッジが豪華に！いつでも解約できます。", "subT": "メンバー", "plusT": "プレミアムメンバー", "subPer": "{p} / 月", "subPerk1": "続けるほど豪華になるメンバーバッジ", "plusPerk1": "金の縁取りの限定プレミアムバッジ", "plusPerk2": "毎月：外しの護符 ×3・金貨 5,000", "subYours": "現在のプラン", "subBtn": "{p} / 月で登録", "sbPlus": "輝く{b}", "plusGiftT": "プレミアム月間ギフト", "plusGiftIn": "外しの護符 ×3・金貨 5,000"});
+Object.assign(STR.ko,{"subHead": "BinBin 멤버십", "subSub": "월 구독으로 이름 옆에 멤버 배지가 표시돼요. 오래 할수록 배지가 더 멋져져요! 언제든 해지할 수 있어요.", "subT": "일반 멤버", "plusT": "프리미엄 멤버", "subPer": "{p} / 월", "subPerk1": "오래 할수록 멋져지는 멤버 배지", "plusPerk1": "금테를 두른 프리미엄 전용 배지", "plusPerk2": "매달 해제 부적 ×3, 골드 5,000", "subYours": "현재 플랜", "subBtn": "월 {p} 구독", "sbPlus": "빛나는 {b}", "plusGiftT": "프리미엄 월간 선물", "plusGiftIn": "해제 부적 ×3, 골드 5,000"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});

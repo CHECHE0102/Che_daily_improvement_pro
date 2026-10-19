@@ -34,9 +34,13 @@ const ORIGINS = ["https://binbindaily.com", "https://www.binbindaily.com", "http
 // test=true: sandbox item, only testers may buy it.
 const CATALOG = {
   charm3: { price: "price_1URwQO8z3lVUqS5jPxa6225l", grant: { charms: 3 }, test: true },
-  // monthly membership: a supporter badge that gets finer the longer you stay (price: a monthly recurring Stripe price)
-  sub: { price: "price_1USC5g8z3lVUqS5jVO8jvv5J", grant: {}, mode: "subscription", test: true },
+  // monthly memberships: a supporter badge that gets finer the longer you stay (monthly recurring Stripe prices).
+  // plus = premium: radiant badges and a gift of items every paid month (PLUS_GIFT)
+  sub: { price: "", grant: {}, mode: "subscription", plan: "sub", test: true },
+  plus: { price: "price_1USC5g8z3lVUqS5jVO8jvv5J", grant: {}, mode: "subscription", plan: "plus", test: true },
 };
+const PLUS_GIFT = { charms: 3, gold: 5000 };
+const planOfPrice = id => Object.values(CATALOG).find(c => c.mode === "subscription" && c.price && c.price === id)?.plan || null;
 // months subscribed → badge tier (same five badges as the old supporter badges)
 const SUB_TIERS = [[24, 5], [12, 4], [6, 3], [3, 2], [1, 1]];
 const subTier = m => (SUB_TIERS.find(([n]) => m >= n) || [0, 0])[1];
@@ -78,7 +82,7 @@ export const createCheckout = onRequest({ region: REGION, secrets: [STRIPE_KEY],
     const nick = String(req.body?.nick || "").slice(0, 16);
     const s = await stripe("checkout/sessions", {
       mode: sub ? "subscription" : "payment",
-      ...(sub ? { subscription_data: { metadata: { uid: user.uid, nick } } } : {}),
+      ...(sub ? { subscription_data: { metadata: { uid: user.uid, nick, plan: it.plan } } } : {}),
       line_items: { 0: { price: it.price, quantity: 1 } },
       managed_payments: { enabled: true },
       client_reference_id: user.uid,
@@ -124,22 +128,31 @@ async function subPaid(inv) {
     const uid = d.uid || sd.metadata?.uid; if (!uid) { logger.warn("invoice without uid", inv.id); return; }
     const seen = d.invoices || []; if (seen.includes(inv.id)) return;   // Stripe can resend events
     const months = (d.months || 0) + 1;
+    const line = inv.lines?.data?.[0] || {};
+    const plan = planOfPrice(line.pricing?.price_details?.price || line.price?.id) || d.plan || sd.metadata?.plan || "sub";
     const pref = db.doc("supporters/" + uid), p = await tx.get(pref), pd = p.exists ? p.data() : {};
     const manual = pd.manual ?? (pd.sub ? 0 : pd.tier || 0);
     const end = inv.lines?.data?.[0]?.period?.end || null;
-    tx.set(sref, { uid, status: "active", months, invoices: [...seen, inv.id].slice(-40), periodEnd: end, customer: inv.customer || d.customer || null, test: !inv.livemode }, { merge: true });
-    tx.set(pref, { tier: Math.max(subTier(months), manual), manual, sub: true, months, n: sd.metadata?.nick || pd.n || "", at: Date.now() }, { merge: true });
+    if (plan === "plus") // the premium monthly gift is handed out like a purchase (the game claims it once)
+      tx.set(db.doc("purchases/" + inv.id), { uid, item: "plusgift", grant: PLUS_GIFT, status: "paid", claimed: false, revoked: false,
+        pi: inv.payment_intent || null, amount: 0, currency: inv.currency || null, test: !inv.livemode, paidAt: FieldValue.serverTimestamp() });
+    tx.set(sref, { uid, plan, status: "active", months, invoices: [...seen, inv.id].slice(-40), periodEnd: end, customer: inv.customer || d.customer || null, test: !inv.livemode }, { merge: true });
+    tx.set(pref, { tier: Math.max(subTier(months), manual), manual, sub: true, plus: plan === "plus", months, n: sd.metadata?.nick || pd.n || "", at: Date.now() }, { merge: true });
   });
 }
 async function subStatus(sub) {
   const sref = db.doc("subscriptions/" + sub.id), cur = await sref.get();
   const uid = (cur.exists && cur.data().uid) || sub.metadata?.uid; if (!uid) return;
   const ended = ["canceled", "unpaid", "incomplete_expired"].includes(sub.status);
-  await sref.set({ uid, status: sub.status, cancelAtEnd: !!sub.cancel_at_period_end }, { merge: true });
-  if (!ended) return;
+  const plan = planOfPrice(sub.items?.data?.[0]?.price?.id);
+  await sref.set({ uid, status: sub.status, cancelAtEnd: !!sub.cancel_at_period_end, ...(plan ? { plan } : {}) }, { merge: true });
+  if (!ended) {   // switched between the two memberships (customer portal)
+    if (plan) { const pref = db.doc("supporters/" + uid), p = await pref.get(); if (p.exists && p.data().sub) await pref.set({ plus: plan === "plus" }, { merge: true }); }
+    return;
+  }
   const pref = db.doc("supporters/" + uid), p = await pref.get(); if (!p.exists) return;
   const pd = p.data(), manual = pd.manual || 0;
-  if (manual) await pref.set({ tier: manual, sub: false }, { merge: true }); else await pref.delete();
+  if (manual) await pref.set({ tier: manual, sub: false, plus: false }, { merge: true }); else await pref.delete();
 }
 
 // opens Stripe's page where a member can cancel or change their card
