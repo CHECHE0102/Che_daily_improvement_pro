@@ -987,8 +987,9 @@ body.vp-lock{touch-action:pan-x pan-y}
 .ls-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .ls-cur{font-family:var(--serif,Georgia,serif);font-size:17px;line-height:1.5;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 6%,transparent);overflow-wrap:anywhere}.ls-cur.on{background:color-mix(in srgb,var(--accent) 16%,transparent)}
 .ls-ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.ls-ctl .btn{flex:1 1 auto}.ls-ctl.ab .btn{flex:0 0 auto}.ls-ctl .btn.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
-::highlight(ls-cur){background-color:rgba(255,213,74,.55);color:inherit}::highlight(ls-ab){background-color:rgba(120,190,255,.25)}
-#article .w.ls-on{background:rgba(255,213,74,.55);border-radius:3px}
+::highlight(ls-cur){background-color:rgba(64,190,150,.32);color:inherit}::highlight(ls-ab){background-color:rgba(120,190,255,.25)}
+#article .w.ls-on{background:rgba(64,190,150,.32);border-radius:3px}
+.ls-mini{flex:1 1 100%;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ls-mini .btn{min-width:42px;padding:6px 10px;font-size:15px}.ls-mini .btn.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}.ls-wait.mini{flex:1 1 100%}
 .ls-tip{margin:0;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 8%,transparent)}.ls-ab{display:flex;flex-direction:column;gap:3px;font-size:13px;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,#5EC8FF 12%,transparent)}
 .ls-wait{display:flex;flex-direction:column;gap:4px}.ls-wait b{color:var(--accent)}.ls-wait i{display:block;height:6px;border-radius:99px;background:var(--accent);transform-origin:0 50%;animation:lswait linear forwards}
 @keyframes lswait{from{transform:scaleX(1)}to{transform:scaleX(0)}}
@@ -3366,7 +3367,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.173";
+const APP_VERSION="2026.10.174";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5367,10 +5368,10 @@ function readRec(){ const art=currentArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDI
   const it=(NEWS_AUDIO.items||{})[art.id+"|"+(levelOf(art)||"base")]; return it?{...it, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
 function readBarInner(){
   const playing=READ.on&&!READ.paused, rec=READ.on?!!READ.audio:!!readRec();
-  return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${window.LS?`<button class="btn ghost sm${LS.on?" on":""}" data-act="lstoggle" aria-pressed="${LS.on}">🎧 ${T("lsBtn")}${planHas("sub")?"":" 🔒"}</button>`:""}${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
+  return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${window.LS?`<button class="btn ghost sm${LS.on?" on":""}" data-act="lstoggle" aria-pressed="${LS.on}">🎧 ${T("lsBtn")}${planHas("sub")?"":" 🔒"}</button>${lsMini()}`:""}${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
 }
 function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
-function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi&&!(window.LS&&LS.on))); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
+function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi&&!(window.LS&&LS.on))); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi&&!(window.LS&&LS.on)){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
 function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
 function readStart(){
   if(!window.speechSynthesis) return toast(T("readNoTts"));
@@ -6840,7 +6841,13 @@ function lsInner(){
     <p class="muted sm-t" style="margin:0">${T("lsWhat")}</p></div>`;
 }
 function lsUi(){ const el=document.getElementById("lsBox"); if(el) el.innerHTML=lsInner(); setTimeout(lsHighlight,0); const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(LS.playing||!!LS.wait||!!(READ.on&&!READ.paused)||examOn()); }
-function lsMark(){ const c=lsChunks()[LS.i]; if(c) readMark(c.pi); lsHighlight(); }
+function lsMark(){ const c=lsChunks()[LS.i]; if(c) readMark(c.pi); lsHighlight(); lsReveal(); }
+// keep the sentence visible just below the sticky bar, scrolling only as much as needed
+function lsReveal(){ const r=lsRange(LS.i), dr=r&&lsDomRange(r); if(!dr) return; const box=dr.getBoundingClientRect(), bar=document.getElementById("readBar");
+  const top=(bar?bar.getBoundingClientRect().bottom:70)+12, bottom=window.innerHeight-90;
+  if(box.top<top) window.scrollBy({top:box.top-top,behavior:"smooth"}); else if(box.bottom>bottom) window.scrollBy({top:Math.min(box.bottom-bottom, box.top-top),behavior:"smooth"}); }
+function lsMini(){ if(!LS.on||!planHas("sub")) return ""; const n=lsChunks().length, busy=LS.playing||LS.wait;
+  return `<div class="ls-mini"><button class="btn ghost sm" data-act="lsprev" aria-label="${esc(T("lsPrev"))}">⏮</button><button class="btn sm" data-act="lsrep" aria-label="${esc(T("lsRep"))}">${busy?"⏹":"🔁"}</button><button class="btn ghost sm" data-act="lsnext" aria-label="${esc(T("lsNext"))}">⏭</button><button class="btn ghost sm" data-act="lsplay" aria-label="${esc(T("lsPlay"))}">▶︎⤵</button><button class="btn ghost sm${LS.shadow?" on":""}" data-act="lsshadow" aria-label="${esc(T("lsShadow"))}">🗣</button><span class="muted sm-t">${Math.min(LS.i,n-1)+1}/${n}${LS.a!=null&&LS.b!=null?` · 🔁${LS.a+1}–${LS.b+1}`:""}</span></div>${LS.wait?`<div class="ls-wait mini"><b>🗣 ${T("lsYour")}</b><i style="animation-duration:${LS.wait}ms"></i></div>`:""}`; }
 // highlight the sentence itself inside its paragraph (and the A–B part when a loop is set)
 function lsRange(i){ const C=lsChunks(), c=C[i]; if(!c) return null; const ps=document.querySelectorAll("#article p"), p=ps[c.pi]; if(!p) return null;
   let pos=0; for(let j=0;j<i;j++) if(C[j].pi===c.pi){ const at=p.textContent.indexOf(C[j].t,pos); if(at>=0) pos=at+C[j].t.length; }
