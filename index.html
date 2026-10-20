@@ -226,6 +226,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .exp{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:8px;font-size:15px}
 .exp.bad{border-color:var(--bad)}
 .exp p{margin:0}
+.wchips.inl{display:inline-flex;flex-wrap:wrap;gap:6px;vertical-align:middle}
 .exp-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .exp-head .en{font-family:var(--f-read);font-size:21px;font-weight:600}
 .exp-head .z{color:var(--muted);flex:1;min-width:0}
@@ -1827,11 +1828,19 @@ function answerBlock(ans, full){
   const head=`<div class="exp-head"><span class="mark ${ans.ok?"ok":"no"}">${ans.ok?"✓":"✗"}</span><span class="en">${esc(w.word)}</span><span class="pos">${esc(w.pos||"")}</span><span class="z">${esc(mean(w))}</span><button class="say" data-say="${esc(w.word)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>`;
   const wrong = !ans.ok ? `<p class="mist"><span class="lab">${T("youPicked")}</span>${ans.picked.meaning?T("pickedMeans",{a:esc(ans.picked.label),b:esc(ans.picked.meaning)}):T("pickedPlain",{a:esc(ans.picked.label)})} ${T("correctIs",{w:esc(w.word),m:esc(mean(w))})}</p>` : "";
   const others=(w.forms||[]).filter(f=>f!==w.word.toLowerCase());
-  const basic = `<p><span class="lab">${T("basic")}</span>${T("basicTxt",{w:esc(w.word),p:esc(w.pos||""),m:esc(mean(w))})}${others.length?T("forms",{f:esc(others.join(", "))}):""}</p>`;
-  const ex = w.example ? `<p><span class="lab">${T("sentence")}</span><span class="en-i">${highlight(w.example,w.forms)}</span></p>` : "";
-  const e=ans.exp;
-  const claude = e ? noteHtml(e,true) : "";
-  return `<div class="exp ${ans.ok?"":"bad"}">${head}${wrong}${ans.exp?"":basic}${ex}${claude}</div>`;
+  const n=ans.exp?notePack(ans.exp):null, g=glossOf(w)||{};
+  const row=(lab,html)=>html?`<p><span class="lab">${T(lab)}</span>${html}</p>`:"";
+  const chips=a=>`<span class="wchips inl">${a.map(x=>`<button class="wchip" data-say="${esc(x)}">${esc(x)}</button>`).join("")}</span>`;
+  const syn=(g.syn||[]).filter(Boolean), ant=(g.ant||[]).filter(Boolean), col=(n&&n.coll&&n.coll.length?n.coll:(g.col||[])).filter(Boolean);
+  const exEn=n&&n.exEn||g.ex||"", exTr=n&&n.exTr||"";
+  const body=row("nMeaning",n&&n.meaning?esc(n.meaning):T("basicTxt",{w:esc(w.word),p:esc(w.pos||""),m:esc(mean(w))})+(others.length?T("forms",{f:esc(others.join(", "))}):""))
+    +(w.example?row("sentence",`<span class="en-i">${highlight(w.example,w.forms)}</span>`):"")
+    +row("nUsage",n&&n.usage?esc(n.usage):"")
+    +row("nColl",col.length?`<span class="en-i">${col.map(esc).join(" · ")}</span>`:"")
+    +row("nEx",exEn?`<span class="en-i">${highlight(exEn,[g.base||w.word,...(w.forms||[])])}</span><button class="say sm-say" data-say="${esc(exEn)}" aria-label="${T("pron")}">${SPEAK_SVG}</button>${exTr?`<br><span class="muted">${esc(exTr)}</span>`:""}`:"")
+    +row("synonyms",syn.length?chips(syn):"")
+    +row("antonyms",ant.length?chips(ant):"");
+  return `<div class="exp ${ans.ok?"":"bad"}">${head}${wrong}${body}</div>`;
 }
 
 /* ---------- quizzes ---------- */
@@ -2576,7 +2585,7 @@ const isTicketArt=art=>!!(art&&art.date&&art.date===newestArtDate());
 function awardQuiz(kind, score, total, isMainPost, art){
   if(!total) return null;
   const g=game(), acc=score/total;
-  const r={base:score*10, acc:(acc>=0.8?20:0)+(acc===1?20:0), tickets:kind==="post"&&isTicketArt(art)?1:0, bonus:0, bonusTickets:0, acc100:Math.round(acc*100), old:kind==="post"&&!isTicketArt(art)};
+  const r={kind, base:score*10, acc:(acc>=0.8?20:0)+(acc===1?20:0), tickets:kind==="post"&&isTicketArt(art)?1:0, bonus:0, bonusTickets:0, acc100:Math.round(acc*100), old:kind==="post"&&!isTicketArt(art)};
   if(isMainPost){
     const d=dayRec();
     if(!d.bonus){ r.bonus=30; r.bonusTickets=2; saveDay({...d, bonus:true}); }
@@ -2591,8 +2600,8 @@ function rewardBox(r){
     <div class="rw-row"><span>${T("lootRight",{n:r.base/10})}</span><b>${T("goldAmt",{n:r.base})}</b></div>
     ${r.acc?`<div class="rw-row"><span>${T("lootAcc",{p:r.acc100})}</span><b>${T("goldAmt",{n:r.acc})}</b></div>`:`<div class="rw-row muted"><span>${T("lootAccNo",{p:r.acc100})}</span><b>+0</b></div>`}
     ${r.bonus?`<div class="rw-row"><span>${T("lootDay")}</span><b>${T("goldAmt",{n:r.bonus})}</b></div>`:""}
-    ${r.tickets+r.bonusTickets?`<div class="rw-row"><span>${T("tickets")}</span><b>${T("lootT",{n:r.tickets+r.bonusTickets})}</b></div>`:`<div class="rw-row muted"><span>${T("tickets")}</span><b>${T(r.old?"lootOld":"lootPre")}</b></div>`}
-    <button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goAdv")}</button></div>`;
+    ${r.tickets+r.bonusTickets?`<div class="rw-row"><span>${T("tickets")}</span><b>${T("lootT",{n:r.tickets+r.bonusTickets})}</b></div>`:""}
+    ${r.kind==="pre"?`<button class="btn ghost" data-act="read" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goFirstNews")}</button>`:`<button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goAdv")}</button>`}</div>`;
 }
 
 /* ----- shop & equipment ----- */
@@ -3344,7 +3353,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.171";
+const APP_VERSION="2026.10.172";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6925,6 +6934,12 @@ Object.assign(STR.hi,{"buyAskQ": "क्या आप इसे खरीदन�
 Object.assign(STR.es,{"buyAskQ": "¿Comprar esto?", "buyAskCost": "Precio", "buyAskLeft": "Te quedará", "buyAskNo": "Cancelar", "buyAskYes": "Comprar"});
 Object.assign(STR.ja,{"buyAskQ": "購入しますか？", "buyAskCost": "価格", "buyAskLeft": "購入後の残り", "buyAskNo": "キャンセル", "buyAskYes": "購入する"});
 Object.assign(STR.ko,{"buyAskQ": "구매할까요?", "buyAskCost": "가격", "buyAskLeft": "구매 후 남는 양", "buyAskNo": "취소", "buyAskYes": "구매하기"});
+Object.assign(STR.zh,{"goFirstNews":"去看看今天第一篇新聞 →"});
+Object.assign(STR.en,{"goFirstNews":"Read today's first story →"});
+Object.assign(STR.hi,{"goFirstNews":"आज की पहली ख़बर पढ़ें →"});
+Object.assign(STR.es,{"goFirstNews":"Lee la primera noticia de hoy →"});
+Object.assign(STR.ja,{"goFirstNews":"今日の1本目のニュースを読む →"});
+Object.assign(STR.ko,{"goFirstNews":"오늘의 첫 뉴스 보러 가기 →"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
