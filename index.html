@@ -990,6 +990,10 @@ body.vp-lock{touch-action:pan-x pan-y}
 ::highlight(ls-cur){background-color:rgba(64,190,150,.32);color:inherit}::highlight(ls-ab){background-color:rgba(120,190,255,.25)}
 #article .w.ls-on{background:rgba(64,190,150,.32);border-radius:3px}
 .ls-mini{flex:1 1 100%;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ls-mini .btn{min-width:42px;padding:6px 10px;font-size:15px}.ls-mini .btn.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}.ls-wait.mini{flex:1 1 100%}
+.sr-live{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,#E0457B 10%,transparent)}.sr-live b{color:#C2185B}
+.sr-res{display:flex;flex-direction:column;gap:6px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 6%,transparent)}.sr-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sr-chip{display:inline-block;padding:2px 10px;border-radius:99px;font-weight:800;font-size:13px}.sr-chip.good{background:color-mix(in srgb,var(--wood) 22%,transparent);color:var(--wood)}.sr-chip.mid{background:color-mix(in srgb,#E3B341 25%,transparent);color:#8A6410}.sr-chip.low{background:color-mix(in srgb,var(--fire) 18%,transparent);color:var(--fire)}
+.sr-words{font-family:var(--serif,Georgia,serif);font-size:17px;line-height:1.7}.sr-words .ok{color:var(--wood);font-weight:600}.sr-words .no{color:var(--fire);text-decoration:underline wavy;text-decoration-thickness:1px}
 .ls-tip{margin:0;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 8%,transparent)}.ls-ab{display:flex;flex-direction:column;gap:3px;font-size:13px;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,#5EC8FF 12%,transparent)}
 .ls-wait{display:flex;flex-direction:column;gap:4px}.ls-wait b{color:var(--accent)}.ls-wait i{display:block;height:6px;border-radius:99px;background:var(--accent);transform-origin:0 50%;animation:lswait linear forwards}
 @keyframes lswait{from{transform:scaleX(1)}to{transform:scaleX(0)}}
@@ -3367,7 +3371,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.174";
+const APP_VERSION="2026.10.175";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6834,6 +6838,8 @@ function lsInner(){
     <div class="ls-cur${LS.playing?" on":""}">${esc(c.t)}</div>
     ${LS.wait?`<div class="ls-wait"><b>🗣 ${T("lsYour")}</b><i style="animation-duration:${LS.wait}ms"></i></div>`:""}
     <div class="ls-ctl"><button class="btn ghost sm" data-act="lsprev">${T("lsPrev")}</button><button class="btn sm" data-act="lsrep">${LS.playing||LS.wait?T("lsStop"):T("lsRep")}</button><button class="btn ghost sm" data-act="lsnext">${T("lsNext")}</button></div>
+    ${LS.listening?`<div class="sr-live"><b>🎙 ${T("srListening")}</b><span class="en-i">${esc(LS.live||"…")}</span><button class="btn ghost sm" data-act="lsmicstop">${T("srDone")}</button></div>`:LS.res&&LS.res.i===i?sayResHtml():""}
+    <div class="ls-ctl"><button class="btn ghost sm" data-act="lsmic">${T("srBtn")}</button></div>
     <div class="ls-ctl"><button class="btn ghost sm" data-act="lsplay">${T("lsPlay")}</button><button class="btn ghost sm${LS.shadow?" on":""}" data-act="lsshadow" aria-pressed="${LS.shadow}">${T("lsShadow")}${LS.shadow?" ✓":""}</button></div>
     ${LS.shadow?`<p class="sm-t ls-tip">🗣 ${T("lsShadowOn")}</p>`:""}
     <div class="ls-ctl ab"><button class="btn ghost sm${LS.a!=null?" on":""}" data-act="lsa">A${LS.a!=null?" · "+(LS.a+1):""}</button><button class="btn ghost sm${LS.b!=null?" on":""}" data-act="lsb">B${LS.b!=null?" · "+(LS.b+1):""}</button>${ab?`<span class="sm-t">🔁 ${T("lsAB",{a:LS.a+1,b:LS.b+1})}</span><button class="btn ghost sm" data-act="lsabx">✕</button>`:`<span class="muted sm-t">${T("lsABhint")}</span>`}</div>
@@ -6847,7 +6853,7 @@ function lsReveal(){ const r=lsRange(LS.i), dr=r&&lsDomRange(r); if(!dr) return;
   const top=(bar?bar.getBoundingClientRect().bottom:70)+12, bottom=window.innerHeight-90;
   if(box.top<top) window.scrollBy({top:box.top-top,behavior:"smooth"}); else if(box.bottom>bottom) window.scrollBy({top:Math.min(box.bottom-bottom, box.top-top),behavior:"smooth"}); }
 function lsMini(){ if(!LS.on||!planHas("sub")) return ""; const n=lsChunks().length, busy=LS.playing||LS.wait;
-  return `<div class="ls-mini"><button class="btn ghost sm" data-act="lsprev" aria-label="${esc(T("lsPrev"))}">⏮</button><button class="btn sm" data-act="lsrep" aria-label="${esc(T("lsRep"))}">${busy?"⏹":"🔁"}</button><button class="btn ghost sm" data-act="lsnext" aria-label="${esc(T("lsNext"))}">⏭</button><button class="btn ghost sm" data-act="lsplay" aria-label="${esc(T("lsPlay"))}">▶︎⤵</button><button class="btn ghost sm${LS.shadow?" on":""}" data-act="lsshadow" aria-label="${esc(T("lsShadow"))}">🗣</button><span class="muted sm-t">${Math.min(LS.i,n-1)+1}/${n}${LS.a!=null&&LS.b!=null?` · 🔁${LS.a+1}–${LS.b+1}`:""}</span></div>${LS.wait?`<div class="ls-wait mini"><b>🗣 ${T("lsYour")}</b><i style="animation-duration:${LS.wait}ms"></i></div>`:""}`; }
+  return `<div class="ls-mini"><button class="btn ghost sm" data-act="lsprev" aria-label="${esc(T("lsPrev"))}">⏮</button><button class="btn sm" data-act="lsrep" aria-label="${esc(T("lsRep"))}">${busy?"⏹":"🔁"}</button><button class="btn ghost sm" data-act="lsnext" aria-label="${esc(T("lsNext"))}">⏭</button><button class="btn ghost sm" data-act="lsplay" aria-label="${esc(T("lsPlay"))}">▶︎⤵</button><button class="btn ghost sm${LS.shadow?" on":""}" data-act="lsshadow" aria-label="${esc(T("lsShadow"))}">🗣</button><button class="btn ghost sm${LS.listening?" on":""}" data-act="lsmic" aria-label="${esc(T("srBtn"))}">🎙</button>${LS.res&&LS.res.i===LS.i?sayResHtml(true):""}<span class="muted sm-t">${Math.min(LS.i,n-1)+1}/${n}${LS.a!=null&&LS.b!=null?` · 🔁${LS.a+1}–${LS.b+1}`:""}</span></div>${LS.wait?`<div class="ls-wait mini"><b>🗣 ${T("lsYour")}</b><i style="animation-duration:${LS.wait}ms"></i></div>`:""}`; }
 // highlight the sentence itself inside its paragraph (and the A–B part when a loop is set)
 function lsRange(i){ const C=lsChunks(), c=C[i]; if(!c) return null; const ps=document.querySelectorAll("#article p"), p=ps[c.pi]; if(!p) return null;
   let pos=0; for(let j=0;j<i;j++) if(C[j].pi===c.pi){ const at=p.textContent.indexOf(C[j].t,pos); if(at>=0) pos=at+C[j].t.length; }
@@ -6862,7 +6868,37 @@ function lsHighlight(){ document.querySelectorAll("#article p.reading").forEach(
   // older browsers: colour the words of the sentence
   document.querySelectorAll("#article .w.ls-on").forEach(e=>e.classList.remove("ls-on")); if(!ok) return;
   const r=lsRange(LS.i); if(!r) return; let n=0; for(const node of r.p.childNodes){ const L=node.textContent.length; if(node.nodeType===1&&n>=r.start&&n<r.end) node.classList.add("ls-on"); n+=L; } }
-function lsHalt(){ LS.tok++; LS.playing=false; LS.wait=0; clearTimeout(LS.wt); if(LS.audio){ try{ LS.audio.pause(); }catch(e){} } try{ speechSynthesis.cancel(); }catch(e){} }
+/* ----- pronunciation check: the phone's speech recognition writes down what it heard, and we compare it with the sentence word by word ----- */
+const SRC=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+const NUMW={"0":"zero","1":"one","2":"two","3":"three","4":"four","5":"five","6":"six","7":"seven","8":"eight","9":"nine","10":"ten","11":"eleven","12":"twelve","20":"twenty","100":"hundred","percent":"per cent"};
+function sayWords(t){ return String(t||"").toLowerCase().replace(/[’']/g,"").replace(/€/g," euro ").replace(/%/g," per cent ").replace(/(\d),(\d)/g,"$1$2").split(/[^a-z0-9]+/).filter(Boolean).flatMap(w=>(NUMW[w]||w).split(" ")); }
+// longest common subsequence: which words of the sentence were heard, in order
+function sayCompare(target, heard){ const T0=String(target).split(/\s+/).filter(Boolean), tw=T0.map(w=>sayWords(w)), flat=[], owner=[];
+  tw.forEach((ws,i)=>ws.forEach(w=>{ flat.push(w); owner.push(i); })); const h=sayWords(heard), n=flat.length, m=h.length;
+  const D=Array.from({length:n+1},()=>new Uint16Array(m+1)); for(let i=n-1;i>=0;i--) for(let j=m-1;j>=0;j--) D[i][j]=flat[i]===h[j]?D[i+1][j+1]+1:Math.max(D[i+1][j],D[i][j+1]);
+  const hit=new Array(n).fill(false); let i=0,j=0; while(i<n&&j<m){ if(flat[i]===h[j]){ hit[i]=true; i++; j++; } else if(D[i+1][j]>=D[i][j+1]) i++; else j++; }
+  const okW=T0.map((w,k)=>{ const idx=owner.map((o,x)=>o===k?x:-1).filter(x=>x>=0); return {w, ok:!idx.length||idx.every(x=>hit[x])}; });
+  const scored=okW.filter((x,k)=>tw[k].length); return {words:okW, pct:scored.length?Math.round(scored.filter(x=>x.ok).length/scored.length*100):0, heard}; }
+function sayListen(i, done){
+  if(!SRC){ if(!LS.noSR){ LS.noSR=true; toast(T("srNone")); } return done(null); }
+  const C=lsChunks(), c=C[i]; if(!c) return done(null);
+  let r; try{ r=new SRC(); }catch(e){ return done(null); }
+  r.lang="en-GB"; r.interimResults=true; r.continuous=false; r.maxAlternatives=3;
+  let best="", fin=false; const tok=LS.tok;
+  const end=()=>{ if(fin) return; fin=true; clearTimeout(LS.srT); LS.listening=false; try{ r.stop(); }catch(e){} if(tok!==LS.tok) return; done(best?sayCompare(c.t,best):{words:c.t.split(/\s+/).map(w=>({w,ok:false})),pct:0,heard:""}); };
+  r.onresult=e=>{ let txt=""; for(let k=0;k<e.results.length;k++){ const alts=[...e.results[k]]; const top=alts.map(a=>a.transcript).sort((x,y)=>sayCompare(c.t,y).pct-sayCompare(c.t,x).pct)[0]||""; txt+=" "+top; } best=txt.trim(); LS.live=best; lsUi(); };
+  r.onerror=e=>{ if(e.error==="not-allowed"||e.error==="service-not-allowed") toast(T("srDenied")); else if(e.error!=="no-speech"&&e.error!=="aborted") console.warn("speech",e.error); end(); };
+  r.onend=end;
+  LS.listening=true; LS.live=""; LS.res=null; LS.stopSR=()=>{ try{ r.stop(); }catch(e){} }; lsUi();
+  try{ r.start(); }catch(e){ return end(); }
+  LS.srT=setTimeout(()=>{ try{ r.stop(); }catch(e){} }, Math.max(5000, c.t.split(/\s+/).length*650+2500)); }
+function sayResHtml(mini){ const R=LS.res; if(!R) return "";
+  const col=R.pct>=85?"good":R.pct>=60?"mid":"low";
+  if(mini) return `<span class="sr-chip ${col}">${R.pct}%</span>`;
+  return `<div class="sr-res"><div class="sr-head"><b class="sr-chip ${col}">${T("srScore",{p:R.pct})}</b><span class="muted sm-t">${T(R.pct>=85?"srGood":R.pct>=60?"srOk":"srTry")}</span></div>
+    <div class="sr-words">${R.words.map(x=>`<span class="${x.ok?"ok":"no"}">${esc(x.w)}</span>`).join(" ")}</div>
+    ${R.heard?`<div class="muted sm-t">${T("srHeard")}：<span class="en-i">${esc(R.heard)}</span></div>`:`<div class="muted sm-t">${T("srNothing")}</div>`}</div>`; }
+function lsHalt(){ LS.tok++; LS.playing=false; LS.wait=0; clearTimeout(LS.wt); clearTimeout(LS.srT); if(LS.listening&&LS.stopSR){ LS.listening=false; try{ LS.stopSR(); }catch(e){} } if(LS.audio){ try{ LS.audio.pause(); }catch(e){} } try{ speechSynthesis.cancel(); }catch(e){} }
 // play sentence i once, then call done(ms it took)
 function lsSay(i, done){
   const C=lsChunks(), c=C[i]; if(!c) return done(0); const tok=LS.tok, t0=Date.now(), rec=readRec();
@@ -6887,7 +6923,8 @@ function lsRun(mode){
       const n=lsChunks().length, ab=LS.a!=null&&LS.b!=null;
       if(ab&&LS.i>=LS.b) LS.i=LS.a; else if(LS.i+1<n) LS.i++; else { lsUi(); return; }
       step(); };
-    if(LS.shadow){ LS.wait=Math.max(1600,Math.round(ms*1.15)+500); lsUi(); LS.wt=setTimeout(next,LS.wait); } else next(); });
+    if(LS.shadow&&SRC&&LS.mic!==false){ sayListen(LS.i, R=>{ if(tok!==LS.tok) return; LS.res=R?{...R,i:LS.i}:null; lsUi(); LS.wt=setTimeout(next, R?2600:600); }); }
+    else if(LS.shadow){ LS.wait=Math.max(1600,Math.round(ms*1.15)+500); lsUi(); LS.wt=setTimeout(next,LS.wait); } else next(); });
   step();
 }
 document.addEventListener("click",e=>{
@@ -6899,6 +6936,8 @@ document.addEventListener("click",e=>{
   if(a==="lsprev"){ LS.i=Math.max(0,LS.i-1); return lsRun("one"); }
   if(a==="lsnext"){ LS.i=Math.min(n-1,LS.i+1); return lsRun("one"); }
   if(a==="lsplay") return lsRun("run");
+  if(a==="lsmic"){ if(LS.listening){ LS.stopSR&&LS.stopSR(); return; } lsHalt(); LS.res=null; return sayListen(LS.i, R=>{ LS.res=R?{...R,i:LS.i}:null; lsUi(); }); }
+  if(a==="lsmicstop"){ LS.stopSR&&LS.stopSR(); return; }
   if(a==="lsshadow"){ LS.shadow=!LS.shadow; if(LS.shadow) return lsRun("run"); lsHalt(); return lsUi(); }
   if(a==="lsa"){ LS.a=LS.i; if(LS.b!=null&&LS.b<LS.a) LS.b=null; return lsUi(); }
   if(a==="lsb"){ if(LS.a==null) LS.a=0; LS.b=Math.max(LS.a,LS.i); return lsUi(); }
@@ -6984,6 +7023,12 @@ Object.assign(STR.hi,{"lsPlay": "▶ यहाँ से आगे चलाए�
 Object.assign(STR.es,{"lsPlay": "▶ Seguir desde esta frase", "lsShadowOn": "Shadowing activado: tras cada frase hace una pausa para que la repitas y, al acabar la cuenta, sigue con la siguiente. Vuelve a tocar para desactivarlo.", "lsABis": "Se repiten estas {n} frases (en azul claro en el texto)", "lockStyle": "La tienda de estilo abre pronto", "featT": "Quién puede usar estas funciones", "feat_dev": "Solo desarrollador", "feat_testers": "Testers", "feat_all": "Todos", "featNote": "Cambia lo que ven todos los jugadores (se guarda en la nube). En modo desarrollador siempre lo ves todo."});
 Object.assign(STR.ja,{"lsPlay": "▶ この文から続けて再生", "lsShadowOn": "シャドーイング中：1文ごとに止まるので声に出して言い、カウントが終わると次の文へ進みます。もう一度押すとオフになります。", "lsABis": "この {n} 文をくり返します（本文の薄い青の部分）", "lockStyle": "おしゃれショップはまもなくオープン", "featT": "この機能を使える人", "feat_dev": "開発者のみ", "feat_testers": "テスター", "feat_all": "全員", "featNote": "全プレイヤーの表示が変わります（クラウドに保存）。開発者モードでは常にすべて表示されます。"});
 Object.assign(STR.ko,{"lsPlay": "▶ 이 문장부터 이어서 재생", "lsShadowOn": "섀도잉 켜짐: 한 문장마다 멈춰서 따라 말할 시간을 주고, 카운트가 끝나면 다음 문장을 재생해요. 다시 누르면 꺼져요.", "lsABis": "이 {n}문장을 반복해요 (본문의 연한 파란색 부분)", "lockStyle": "꾸미기 상점이 곧 열려요", "featT": "이 기능을 쓸 수 있는 사람", "feat_dev": "개발자만", "feat_testers": "테스터", "feat_all": "모두", "featNote": "모든 플레이어 화면이 바뀌어요(클라우드에 저장). 개발자 모드에서는 항상 다 보여요."});
+Object.assign(STR.zh,{"srBtn": "🎙 我來唸這句", "srListening": "正在聽…", "srDone": "唸完了", "srScore": "辨識率 {p}%", "srGood": "很清楚！", "srOk": "不錯，紅色的字再練一下", "srTry": "再試一次，放慢一點、每個字唸清楚", "srHeard": "手機聽到", "srNothing": "沒聽到聲音，靠近手機再試一次", "srNone": "這台裝置不支援語音辨識，跟讀會改用倒數", "srDenied": "需要允許麥克風和語音辨識才能比對發音", "lsShadowOn": "跟讀模式開啟：每播完一句會停下來聽你唸，綠色是有聽懂的字、紅色是要再練的字，接著自動播下一句。再按一次「跟讀模式」就關掉。"});
+Object.assign(STR.en,{"srBtn": "🎙 Let me say it", "srListening": "Listening…", "srDone": "Done", "srScore": "Recognised {p}%", "srGood": "Very clear!", "srOk": "Good. Practise the red words", "srTry": "Try again: a bit slower, every word clearly", "srHeard": "Your phone heard", "srNothing": "Nothing heard. Move closer and try again", "srNone": "This device has no speech recognition, so shadowing uses a countdown", "srDenied": "Allow the microphone and speech recognition to check your pronunciation", "lsShadowOn": "Shadowing is on: after each sentence it listens to you; green words were understood, red ones need practice, then the next sentence plays. Tap Shadowing again to turn it off."});
+Object.assign(STR.hi,{"srBtn": "🎙 मैं बोलूँ", "srListening": "सुन रहा है…", "srDone": "हो गया", "srScore": "पहचान {p}%", "srGood": "बहुत साफ़!", "srOk": "अच्छा, लाल शब्दों का अभ्यास करें", "srTry": "फिर कोशिश करें: धीरे, हर शब्द साफ़", "srHeard": "फ़ोन ने सुना", "srNothing": "कुछ नहीं सुना, पास आकर फिर कोशिश करें", "srNone": "इस डिवाइस पर वाक् पहचान नहीं है, शैडोइंग में उलटी गिनती चलेगी", "srDenied": "उच्चारण जाँचने के लिए माइक और वाक् पहचान की अनुमति दें", "lsShadowOn": "शैडोइंग चालू: हर वाक्य के बाद यह आपको सुनता है; हरे शब्द समझ आए, लाल शब्दों का अभ्यास करें, फिर अगला वाक्य चलता है। बंद करने के लिए फिर टैप करें।"});
+Object.assign(STR.es,{"srBtn": "🎙 Lo digo yo", "srListening": "Escuchando…", "srDone": "Listo", "srScore": "Reconocido {p}%", "srGood": "¡Muy claro!", "srOk": "Bien. Practica las palabras en rojo", "srTry": "Inténtalo otra vez: más despacio y claro", "srHeard": "Tu móvil oyó", "srNothing": "No se oyó nada. Acércate e inténtalo de nuevo", "srNone": "Este dispositivo no tiene reconocimiento de voz; el shadowing usará una cuenta atrás", "srDenied": "Permite el micrófono y el reconocimiento de voz para comprobar tu pronunciación", "lsShadowOn": "Shadowing activado: tras cada frase te escucha; las palabras verdes se entendieron, las rojas necesitan práctica, y sigue la siguiente frase. Vuelve a tocar para desactivarlo."});
+Object.assign(STR.ja,{"srBtn": "🎙 自分で読む", "srListening": "聞き取り中…", "srDone": "読み終えた", "srScore": "認識率 {p}%", "srGood": "とても明瞭！", "srOk": "いいですね。赤い単語をもう一度", "srTry": "もう一度：ゆっくり、一語ずつはっきり", "srHeard": "スマホが聞き取った内容", "srNothing": "声が聞こえませんでした。近づいてもう一度", "srNone": "この端末は音声認識に対応していないため、シャドーイングはカウントダウンになります", "srDenied": "発音チェックにはマイクと音声認識の許可が必要です", "lsShadowOn": "シャドーイング中：1文ごとにあなたの声を聞き取ります。緑は伝わった単語、赤は練習したい単語。続けて次の文へ進みます。もう一度押すとオフ。"});
+Object.assign(STR.ko,{"srBtn": "🎙 내가 읽어 보기", "srListening": "듣는 중…", "srDone": "다 읽었어요", "srScore": "인식률 {p}%", "srGood": "아주 또렷해요!", "srOk": "좋아요. 빨간 단어를 더 연습해요", "srTry": "다시 해 봐요: 천천히, 한 단어씩 또렷하게", "srHeard": "휴대폰이 들은 내용", "srNothing": "소리가 안 들렸어요. 가까이에서 다시 해 보세요", "srNone": "이 기기는 음성 인식을 지원하지 않아 섀도잉은 카운트다운으로 진행돼요", "srDenied": "발음을 확인하려면 마이크와 음성 인식을 허용해 주세요", "lsShadowOn": "섀도잉 켜짐: 한 문장마다 내 목소리를 들어요. 초록은 알아들은 단어, 빨강은 연습할 단어예요. 이어서 다음 문장이 재생돼요. 다시 누르면 꺼져요."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
