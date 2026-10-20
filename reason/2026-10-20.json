@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-20",
+ "items": {
+  "2026-10-20": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Public sector pay talks have begun, with the Government demanding productivity gains while unions seek to recover lost earnings.",
+     "Unions have called off all industrial action after accepting a 1.2 billion euro offer.",
+     "The Taoiseach has refused to negotiate until unions accept productivity targets.",
+     "Unite has taken over the leadership of the union delegation from Fórsa."
+    ],
+    "a": 0,
+    "exp": "The passage reports that \"Formal negotiations on public sector remuneration commenced\", that any deal \"would be contingent upon substantial productivity commitments\", and that unions aim \"to compensate for a significant decline in real earnings\". No offer has been accepted (B), the Taoiseach is negotiating (C), and Fórsa's Kevin Callinan \"will lead the union delegation\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the unions' view of the reported funding figures?",
+    "opts": [
+     "They believe the 1.6 billion euro contingency fund will be enough to settle the dispute.",
+     "They consider the figures in the reports too low compared with what had been discussed earlier.",
+     "They think the Taoiseach confirmed the figures on Sunday.",
+     "They want the money spent on productivity schemes rather than pay."
+    ],
+    "a": 1,
+    "exp": "Kevin Callinan \"argued that the reports were intended to divert attention from the considerably larger sum of €2 billion discussed previously\", implying the unions see the reported sums as too small. The Taoiseach \"declined to comment on these figures\", so C is wrong."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the passage's outlook on how quickly the talks will end?",
+    "opts": [
+     "Confident that a deal will be signed within days",
+     "Indifferent, since no timetable is mentioned",
+     "Cautious, expecting the process to take a long time",
+     "Alarmed that the talks are about to collapse"
+    ],
+    "a": 2,
+    "exp": "\"It is widely anticipated that the negotiations will be protracted\" and officials \"acknowledge that the process may be prolonged\". This is cautious rather than confident (A) or alarmed (D)."
+   }
+  ],
+  "2026-10-20-2": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "Irish children now read more books than in 2021.",
+     "Most Irish children never enjoy school, whatever their family income.",
+     "Shared reading at home is the only cause of poor school results.",
+     "Persistent poverty harms children's attitudes and reading, partly because poor children have less access to books and activities."
+    ],
+    "a": 3,
+    "exp": "The ESRI study finds persistently poor children \"more than twice as likely to hold negative attitudes towards school\" and \"identifies insufficient access to books as a significant contributing factor\", alongside less shared reading and fewer activities. Only 9% \"reported never enjoying school\" (B), and books are one of \"several factors\" (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the passage suggest about earlier research on childhood poverty?",
+    "opts": [
+     "It showed a link with poorer outcomes but did not explain why.",
+     "It proved that books have no effect on learning.",
+     "It found that poverty affects only children over 13.",
+     "It was carried out by the Minister for Children."
+    ],
+    "a": 0,
+    "exp": "\"Although previous research had demonstrated a correlation between childhood poverty and poorer educational outcomes, the underlying mechanisms had remained unclear.\" So earlier work showed a link but not the reasons."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention Norma Foley's comment at the end?",
+    "opts": [
+     "To show that the Government rejects the report's findings",
+     "To point out that subsidies alone may not be enough without reducing child poverty itself",
+     "To announce new funding for school libraries",
+     "To argue that extracurricular activities are unimportant"
+    ],
+    "a": 1,
+    "exp": "After the recommended subsidies, the writer adds \"Nevertheless\" and reports that \"sustained progress is ultimately contingent upon tackling child poverty itself\", a qualification that the measures are not sufficient on their own."
+   }
+  ],
+  "2026-10-20-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Irish firms lead the world in using AI to defend their systems.",
+     "Quantum computing has already broken most Irish encryption.",
+     "Irish organisations lag behind international peers in building cybersecurity into risk management and preparing for new threats.",
+     "PwC surveyed only Irish companies about cybersecurity."
+    ],
+    "a": 2,
+    "exp": "The passage says Irish organisations are \"considerably less advanced than their international counterparts\" and gives lower Irish figures for risk integration, AI use and quantum-resistant safeguards. Only 6% would let AI agents act alone (A), quantum risk is \"by the 2030s\" (B), and the survey covered \"71 countries\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the comparison of 6% and 21% for quantum-resistant safeguards?",
+    "opts": [
+     "Irish firms are much less likely than firms worldwide to be preparing for a future threat to encryption.",
+     "Quantum computers are already widely used in Ireland.",
+     "Most firms worldwide have finished protecting their systems.",
+     "Irish firms consider quantum computing a greater danger than other countries do."
+    ],
+    "a": 0,
+    "exp": "\"a mere 6% of Irish firms are implementing quantum-resistant safeguards, in contrast to 21% worldwide\", so Irish firms are far less prepared. 21% is still a minority, so C is wrong, and the threat is a potential one (B)."
+   },
+   {
+    "type": "tone",
+    "q": "What is the overall tone of the passage towards Irish firms' readiness?",
+    "opts": [
+     "Celebratory",
+     "Critical and concerned",
+     "Humorous",
+     "Completely neutral, with no evaluation"
+    ],
+    "a": 1,
+    "exp": "Words such as \"considerably less advanced\", \"substantial reluctance\", \"a mere 6%\" and \"many remain inadequately prepared\" show a critical, concerned tone."
+   }
+  ],
+  "2026-10-20-4": [
+   {
+    "type": "main",
+    "q": "What is the main idea of the passage?",
+    "opts": [
+     "Average life expectancy in Ireland has reached 100 years.",
+     "Older people in Ireland mostly worry about their pensions.",
+     "Community Foundation Ireland plans to build care homes.",
+     "Many children born today may live to 100, and the report says Ireland is not ready for the effects of longer lives."
+    ],
+    "a": 3,
+    "exp": "The report \"estimates that one third of children born in Ireland today will live to the age of 100\" and \"concludes that the country is insufficiently prepared\". Life expectancy is \"82.9 years\" (A), and the greatest worries were health-related (B)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the report imply about current policy on ageing?",
+    "opts": [
+     "It is well coordinated and needs no change.",
+     "It was designed for people living longer than 100 years.",
+     "It is split across different areas and based on people living shorter lives.",
+     "It focuses only on younger family members."
+    ],
+    "a": 2,
+    "exp": "\"existing policy remains fragmented and is predicated on a shorter life course\", which is why the report calls for a \"comprehensive 'cradle-to-grave' strategy\"."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the passage mention that 86% saw watching younger family members grow up as a benefit?",
+    "opts": [
+     "To prove that healthcare costs will fall",
+     "To show that people also see positive sides to living longer, not only risks",
+     "To explain why the State pension will be cut",
+     "To show that most people do not worry about cognitive impairment"
+    ],
+    "a": 1,
+    "exp": "After listing concerns, the writer says \"Nevertheless, a significant majority (86%) regarded witnessing younger family members mature as a notable benefit\", balancing the worries with a positive view, which matches the report's call to see longevity \"as an opportunity rather than a burden\"."
+   }
+  ]
+ }
+}
