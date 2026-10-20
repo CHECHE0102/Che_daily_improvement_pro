@@ -1105,6 +1105,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .sty-stage{overflow:hidden}
 .cos-pow{font-size:12px;color:#C9921A;letter-spacing:1px}.cos-pow i{font-style:normal;color:var(--line)}
 @media (prefers-reduced-motion:reduce){.cos-hel em,.cos-orbit .rr u,.cos-helix .hx,.cos-sparks b,.cos-orbit .ob b,.cos-orbs em,.cos-crys .rot,.cos-crys .sh,.cos-back .gr,.cos-back .mn,.cos-back .stars,.cos-back .ab svg,.cos-back s,.cos-back em,.cos-back.cb-b-phoenix,.cos-col,.cos-neck svg{animation:none!important}.cos-helix .hx{opacity:.8;transform:scale(1,.26)}.arena2.cfx,.sty-stage.cfx-dark,.sty-stage.cfx-star{animation:none!important}}
+.easy-hint{display:flex;flex-direction:column;gap:8px;border-color:rgba(64,190,150,.45)}.easy-hint p{margin:0;font-size:14px;line-height:1.5}.easy-acts{display:flex;flex-wrap:wrap;gap:8px}
 </style>
 
 </head>
@@ -1588,6 +1589,7 @@ function viewToday(){
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
     ${preDone&&readDone&&postDone?doneCard(d):""}
+    ${easyHint()||""}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
     ${pushPrompt()}
@@ -3371,7 +3373,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.175";
+const APP_VERSION="2026.10.176";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3871,6 +3873,10 @@ document.addEventListener("click", e=>{
   if(a==="home"){ S.tab="today"; S.view="today"; S.quiz=null; render(); window.scrollTo(0,0); return; }
   if(a==="back"){ const b=S.backTo||"today"; S.tab=b; S.view=b; render(); window.scrollTo(0,0); return; }
   if(a==="pre") return startQuiz("pre");
+  if(a==="easyup"||a==="easythink"||a==="easyno"){ try{ localStorage.setItem("che-easy-hint",today()); }catch(e){}
+    if(a==="easyup"){ setLevel(t.dataset.k); return toast(T("easyUpDone",{l:t.dataset.k==="IELTS"?"IELTS 7–8":t.dataset.k})); }
+    if(a==="easythink"){ S.tab="adv"; S.view="adv"; S.advTab="think"; render(); window.scrollTo(0,0); return; }
+    return render(); }
   if(a==="lvtest"){ S.levelSheet=false; renderSheet&&renderSheet(); return startLvTest(); }
   if(a==="post") return startQuiz("post", mainArticle());
   if(a==="read"){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle()&&mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); return; }
@@ -6785,6 +6791,16 @@ document.addEventListener("click",e=>{
 
 /* ================= daily "what I learned today" card (free for everyone) ================= */
 function wordOf(k){ return S.words.get(k)||[...S.words.values()].find(w=>(w.word||"").toLowerCase()===k||(w.forms||[]).includes(k)); }
+const EASY_DAYS=3, EASY_MAX=3;
+function easyHint(){
+  const d0=dayRec(); const end=new Date(); if(!d0.read) end.setDate(end.getDate()-1);
+  const ns=[]; for(let i=0;i<EASY_DAYS;i++){ const x=new Date(end); x.setDate(end.getDate()-i); const r=dayRec(ymd(x)); if(!r.read) return null; ns.push((r.lookedUp||[]).length); }
+  if(ns.some(n=>n>EASY_MAX)) return null;
+  try{ const k=localStorage.getItem("che-easy-hint"); if(k&&daysBetween(k,today())<7) return null; }catch(e){}
+  const i=LEVELS.findIndex(l=>l.k===LEVEL), up=i>=0&&i<LEVELS.length-1?LEVELS[i+1].k:null;
+  const nm=k=>k==="IELTS"?"IELTS 7–8":k;
+  return `<section class="card easy-hint"><b>💡 ${T("easyT")}</b><p class="muted">${T("easyBody",{d:EASY_DAYS,n:Math.max(...ns)})}</p>
+    <div class="easy-acts">${up?`<button class="btn sm" data-act="easyup" data-k="${up}">⬆️ ${T("easyUp",{l:nm(up)})}</button>`:""}<button class="btn sm ghost" data-act="easythink">🧠 ${T("easyThink")}</button><button class="btn sm ghost" data-act="easyno">${T("easyNo")}</button></div></section>`; }
 function doneCard(d){
   const g=game(), lu=(d.lookedUp||[]).map(wordOf).filter(Boolean);
   const fixed=[...S.words.values()].filter(w=>w.lastTested===today()&&(w.wrong||0)>0&&(w.correct||0)>0&&w.firstSeen<today()).slice(0,6);
@@ -7029,6 +7045,12 @@ Object.assign(STR.hi,{"srBtn": "🎙 मैं बोलूँ", "srListening": 
 Object.assign(STR.es,{"srBtn": "🎙 Lo digo yo", "srListening": "Escuchando…", "srDone": "Listo", "srScore": "Reconocido {p}%", "srGood": "¡Muy claro!", "srOk": "Bien. Practica las palabras en rojo", "srTry": "Inténtalo otra vez: más despacio y claro", "srHeard": "Tu móvil oyó", "srNothing": "No se oyó nada. Acércate e inténtalo de nuevo", "srNone": "Este dispositivo no tiene reconocimiento de voz; el shadowing usará una cuenta atrás", "srDenied": "Permite el micrófono y el reconocimiento de voz para comprobar tu pronunciación", "lsShadowOn": "Shadowing activado: tras cada frase te escucha; las palabras verdes se entendieron, las rojas necesitan práctica, y sigue la siguiente frase. Vuelve a tocar para desactivarlo."});
 Object.assign(STR.ja,{"srBtn": "🎙 自分で読む", "srListening": "聞き取り中…", "srDone": "読み終えた", "srScore": "認識率 {p}%", "srGood": "とても明瞭！", "srOk": "いいですね。赤い単語をもう一度", "srTry": "もう一度：ゆっくり、一語ずつはっきり", "srHeard": "スマホが聞き取った内容", "srNothing": "声が聞こえませんでした。近づいてもう一度", "srNone": "この端末は音声認識に対応していないため、シャドーイングはカウントダウンになります", "srDenied": "発音チェックにはマイクと音声認識の許可が必要です", "lsShadowOn": "シャドーイング中：1文ごとにあなたの声を聞き取ります。緑は伝わった単語、赤は練習したい単語。続けて次の文へ進みます。もう一度押すとオフ。"});
 Object.assign(STR.ko,{"srBtn": "🎙 내가 읽어 보기", "srListening": "듣는 중…", "srDone": "다 읽었어요", "srScore": "인식률 {p}%", "srGood": "아주 또렷해요!", "srOk": "좋아요. 빨간 단어를 더 연습해요", "srTry": "다시 해 봐요: 천천히, 한 단어씩 또렷하게", "srHeard": "휴대폰이 들은 내용", "srNothing": "소리가 안 들렸어요. 가까이에서 다시 해 보세요", "srNone": "이 기기는 음성 인식을 지원하지 않아 섀도잉은 카운트다운으로 진행돼요", "srDenied": "발음을 확인하려면 마이크와 음성 인식을 허용해 주세요", "lsShadowOn": "섀도잉 켜짐: 한 문장마다 내 목소리를 들어요. 초록은 알아들은 단어, 빨강은 연습할 단어예요. 이어서 다음 문장이 재생돼요. 다시 누르면 꺼져요."});
+Object.assign(STR.zh,{"easyT": "文章對你來說可能太簡單了", "easyBody": "最近 {d} 天，你每天最多只查了 {n} 個字。可以把難度調高一級，或去玩推理閱讀，練看懂文章邏輯的能力，讓英文理解再上一層樓。", "easyUp": "調到 {l}", "easyThink": "去玩推理閱讀", "easyNo": "維持現在", "easyUpDone": "已調到 {l}，明天的文章會更有挑戰性"});
+Object.assign(STR.en,{"easyT": "The articles may be too easy for you", "easyBody": "For the last {d} days you looked up at most {n} words a day. Try one level up, or play Reasoning to train how you follow an argument and take your understanding further.", "easyUp": "Switch to {l}", "easyThink": "Play Reasoning", "easyNo": "Keep my level", "easyUpDone": "Switched to {l}. The articles will be more of a challenge"});
+Object.assign(STR.hi,{"easyT": "लेख आपके लिए शायद आसान हैं", "easyBody": "पिछले {d} दिनों में आपने रोज़ ज़्यादा से ज़्यादा {n} शब्द देखे। एक स्तर ऊपर जाएँ, या तर्क पठन खेलें।", "easyUp": "{l} पर जाएँ", "easyThink": "तर्क पठन खेलें", "easyNo": "स्तर वही रखें", "easyUpDone": "{l} पर बदल दिया"});
+Object.assign(STR.es,{"easyT": "Puede que los artículos te resulten fáciles", "easyBody": "En los últimos {d} días consultaste como mucho {n} palabras al día. Prueba un nivel más alto o juega a Razonamiento para entender mejor la lógica de los textos.", "easyUp": "Cambiar a {l}", "easyThink": "Jugar a Razonamiento", "easyNo": "Mantener mi nivel", "easyUpDone": "Nivel cambiado a {l}"});
+Object.assign(STR.ja,{"easyT": "記事が簡単すぎるかもしれません", "easyBody": "この {d} 日間、調べた単語は1日 {n} 語以下でした。レベルを1つ上げるか、論理リーディングで文章の論理を読む力を鍛えましょう。", "easyUp": "{l} に変更", "easyThink": "論理リーディングへ", "easyNo": "このままにする", "easyUpDone": "{l} に変更しました"});
+Object.assign(STR.ko,{"easyT": "기사가 너무 쉬울 수도 있어요", "easyBody": "최근 {d}일 동안 하루에 많아야 {n}개 단어만 찾아봤어요. 레벨을 한 단계 올리거나 논리 독해로 글의 흐름을 읽는 힘을 키워 보세요.", "easyUp": "{l}(으)로 변경", "easyThink": "논리 독해 하기", "easyNo": "지금 레벨 유지", "easyUpDone": "{l}(으)로 변경했어요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
