@@ -987,9 +987,12 @@ body.vp-lock{touch-action:pan-x pan-y}
 .ls-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .ls-cur{font-family:var(--serif,Georgia,serif);font-size:17px;line-height:1.5;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 6%,transparent);overflow-wrap:anywhere}.ls-cur.on{background:color-mix(in srgb,var(--accent) 16%,transparent)}
 .ls-ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.ls-ctl .btn{flex:1 1 auto}.ls-ctl.ab .btn{flex:0 0 auto}.ls-ctl .btn.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+::highlight(ls-cur){background-color:rgba(255,213,74,.55);color:inherit}::highlight(ls-ab){background-color:rgba(120,190,255,.25)}
+#article .w.ls-on{background:rgba(255,213,74,.55);border-radius:3px}
+.ls-tip{margin:0;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--accent) 8%,transparent)}.ls-ab{display:flex;flex-direction:column;gap:3px;font-size:13px;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,#5EC8FF 12%,transparent)}
 .ls-wait{display:flex;flex-direction:column;gap:4px}.ls-wait b{color:var(--accent)}.ls-wait i{display:block;height:6px;border-radius:99px;background:var(--accent);transform-origin:0 50%;animation:lswait linear forwards}
 @keyframes lswait{from{transform:scaleX(1)}to{transform:scaleX(0)}}
-.dev-plan{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:12px;background:color-mix(in srgb,#B98CFF 12%,transparent)}.dev-plan .seg{flex-wrap:wrap}
+.df-row{display:flex;flex-direction:column;gap:4px}.dev-plan{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:12px;background:color-mix(in srgb,#B98CFF 12%,transparent)}.dev-plan .seg{flex-wrap:wrap}
 @media (max-width:400px){.adv-quick{gap:4px}.aq-btn{min-width:0;flex:1 1 0;padding:4px 0;font-size:12px;text-align:center;line-height:1.2}.aq-ic{width:44px;height:44px}.aq-ic svg{width:29px;height:29px}}@media (max-width:330px){.aq-ic{width:40px;height:40px;border-radius:13px}.aq-btn{font-size:11px}}
 /* ----- cosmetics v2: 3D foot auras, more back pieces, necklaces with their own strikes ----- */
 .hero-art{isolation:isolate}
@@ -1506,11 +1509,15 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 
 /* ---------- rendering ---------- */
 /* new players: the Lucky House stays locked until the elder introduces it (day-2 talk); everything else is open from the start */
-function featLock(k){ if(k==="vault"&&!DEV&&!S.payTester) return "lockVault";   // Rainbow Vault stays closed to players until paid items launch
+// who may open the Rainbow Vault and the style shop: "dev" (developer mode only), "testers", "all" — set in developer mode, stored in config/features
+const FEAT_DEF={vault:"testers", style:"all"};
+const featLevel=k=>((S.feat||{})[k])||FEAT_DEF[k];
+function featOpen(k){ const l=featLevel(k); return !!DEV||l==="all"||(l==="testers"&&!!S.payTester); }
+function featLock(k){ if((k==="vault"||k==="style")&&!featOpen(k)) return k==="vault"?"lockVault":"lockStyle";   // Rainbow Vault stays closed to players until paid items launch
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); loginHint(); quizKeep(); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
+function render(){ try{ renderInner(); loginHint(); quizKeep(); if(S.view==="read"&&window.LS&&LS.on) setTimeout(lsHighlight,0); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
 const ERR_SENT=new Set();
 function errReport(e,where){ try{
@@ -2897,7 +2904,7 @@ function viewAdv(){ restCheck();
   } else if(sub==="luck"){
     body=viewLuck();
   } else if(sub==="style"){
-    body=viewStyle();
+    body=featLock("style")?`<section class="card"><p class="muted">🔒 ${T("lockStyle")}</p></section>`:viewStyle();
   } else {
     const f=S.shopEl||"all", all=g.inv.map(id=>ITEMS[id]).filter(Boolean);
     const own=all.filter(it=>f==="all"||it.el===f).sort((a,b)=>b.lv-a.lv||a.slot.localeCompare(b.slot)||elRank(a.el)-elRank(b.el));
@@ -3325,6 +3332,11 @@ function maintApply(){
   else if(bn) bn.remove();
   const dm=document.getElementById("devMaint"); if(dm) dm.innerHTML=devMaintInner();
 }
+function devFeatHtml(){
+  const row=(k,l)=>`<div class="df-row"><b>${T(l)}</b><div class="seg" role="group">${["dev","testers","all"].map(v=>`<button data-act="devfeat" data-k="${k}|${v}" aria-pressed="${featLevel(k)===v}">${T("feat_"+v)}</button>`).join("")}</div></div>`;
+  return `<div class="dev-plan"><b>🔐 ${T("featT")}</b>${row("vault","tabVault")}${row("style","tabStyle")}<span class="muted sm-t">${T("featNote")}</span>${isAdminUser()?"":`<span class="muted sm-t">${T("mtNeedAdmin")}</span>`}</div>`; }
+async function devFeatSet(k,v){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const {fsM,db}=CLOUD.fb; try{ await fsM.setDoc(fsM.doc(db,"config","features"),{[k]:v, at:Date.now()},{merge:true}); S.feat={...(S.feat||{}),[k]:v}; toast(T("dDone")); render(); }catch(e){ toast(T("mtNeedAdmin")); console.warn("features",e); } }
 function devMaintInner(){
   const on=!!(S.maint&&S.maint.on);
   return `<div class="eyebrow">🚧 ${T("mtDev")} · <b style="color:${on?"var(--bad)":"var(--good)"}">${on?T("mtOnNow"):T("mtOffNow")}</b></div>
@@ -3347,13 +3359,14 @@ function devPanel(){
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${planSel}
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}${b("style","dStyle")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
     <div id="devMaint" class="dev-maint">${devMaintInner()}</div>
+    ${devFeatHtml()}
     ${devSupHtml()}
     ${devBadgeHtml()}
     ${devStatsHtml()}
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.172";
+const APP_VERSION="2026.10.173";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3816,6 +3829,7 @@ document.addEventListener("click", e=>{
   if(a==="devunlock") return devUnlock();
   if(a==="devexit") return devExit();
   if(a==="maint") return maintSet(t.dataset.k==="1");
+  if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
   if(a==="devstats") return devLoadStats();
   if(a==="deverr") return devLoadErrors();
@@ -3887,6 +3901,7 @@ async function cloudInit(){
     setTimeout(pushRefresh,1200);
     setTimeout(supLoad,0);
     try{ fsM.onSnapshot(fsM.doc(db,"config","site"), sn=>{ S.maint=sn.exists()?sn.data():null; maintApply(); }, ()=>{}); }catch(e){}
+    try{ fsM.onSnapshot(fsM.doc(db,"config","features"), sn=>{ S.feat=sn.exists()?sn.data():null; render(); }, ()=>{}); }catch(e){}
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
@@ -5355,7 +5370,7 @@ function readBarInner(){
   return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${window.LS?`<button class="btn ghost sm${LS.on?" on":""}" data-act="lstoggle" aria-pressed="${LS.on}">🎧 ${T("lsBtn")}${planHas("sub")?"":" 🔒"}</button>`:""}${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
 }
 function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
-function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi)); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
+function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi&&!(window.LS&&LS.on))); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
 function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
 function readStart(){
   if(!window.speechSynthesis) return toast(T("readNoTts"));
@@ -6775,7 +6790,7 @@ function doneCard(d){
     <div class="dc-sec"><div class="muted sm-t">${T("dcWords")}</div>${chips?`<div class="dc-ws">${chips}</div>`:`<p class="sm-t">${T("dcNoWords")}</p>`}</div>
     ${fixed.length?`<p class="sm-t dc-fixed">💪 ${T("dcFixed",{w:fixed.map(w=>esc(w.word||w.key)).join(", ")})}</p>`:""}
     <div class="dc-stats">${d.preTotal?`<span>📝 ${T("dcPre",{s:d.preScore,t:d.preTotal})}</span>`:""}${d.postTotal?`<span>✅ ${T("dcPost",{s:d.postScore,t:d.postTotal})}</span>`:""}<span>📅 ${T("dcWeek",{n:weekStudyDays()})}</span></div>
-    ${got?`<div class="dc-rw">${STYLE_IC}<b>${T("dcStyle",{n:got.n})}</b>${got.bonus?`<span class="dc-bonus">${T("dcBonus",{d:STYLE_EARN.weekDays,n:got.bonus})}</span>`:""}</div>`:""}
+    ${got&&!featLock("style")?`<div class="dc-rw">${STYLE_IC}<b>${T("dcStyle",{n:got.n})}</b>${got.bonus?`<span class="dc-bonus">${T("dcBonus",{d:STYLE_EARN.weekDays,n:got.bonus})}</span>`:""}</div>`:""}
     <p class="dc-bye">${T("dcBye")}</p></section>`;
 }
 
@@ -6818,12 +6833,28 @@ function lsInner(){
     <div class="ls-cur${LS.playing?" on":""}">${esc(c.t)}</div>
     ${LS.wait?`<div class="ls-wait"><b>🗣 ${T("lsYour")}</b><i style="animation-duration:${LS.wait}ms"></i></div>`:""}
     <div class="ls-ctl"><button class="btn ghost sm" data-act="lsprev">${T("lsPrev")}</button><button class="btn sm" data-act="lsrep">${LS.playing||LS.wait?T("lsStop"):T("lsRep")}</button><button class="btn ghost sm" data-act="lsnext">${T("lsNext")}</button></div>
-    <div class="ls-ctl"><button class="btn ghost sm" data-act="lsplay">${T("lsPlay")}</button><button class="btn ghost sm${LS.shadow?" on":""}" data-act="lsshadow" aria-pressed="${LS.shadow}">${T("lsShadow")}</button></div>
+    <div class="ls-ctl"><button class="btn ghost sm" data-act="lsplay">${T("lsPlay")}</button><button class="btn ghost sm${LS.shadow?" on":""}" data-act="lsshadow" aria-pressed="${LS.shadow}">${T("lsShadow")}${LS.shadow?" ✓":""}</button></div>
+    ${LS.shadow?`<p class="sm-t ls-tip">🗣 ${T("lsShadowOn")}</p>`:""}
     <div class="ls-ctl ab"><button class="btn ghost sm${LS.a!=null?" on":""}" data-act="lsa">A${LS.a!=null?" · "+(LS.a+1):""}</button><button class="btn ghost sm${LS.b!=null?" on":""}" data-act="lsb">B${LS.b!=null?" · "+(LS.b+1):""}</button>${ab?`<span class="sm-t">🔁 ${T("lsAB",{a:LS.a+1,b:LS.b+1})}</span><button class="btn ghost sm" data-act="lsabx">✕</button>`:`<span class="muted sm-t">${T("lsABhint")}</span>`}</div>
+    ${LS.a!=null?`<div class="ls-ab">${[["A",LS.a],["B",LS.b]].filter(([,i])=>i!=null).map(([l,i])=>`<div><b>${l}</b> ${T("lsN",{i:i+1,n})}：<span class="en-i">${esc((C[i]||{t:""}).t.slice(0,60))}${(C[i]||{t:""}).t.length>60?"…":""}</span></div>`).join("")}${ab?`<div class="muted">${T("lsABis",{n:LS.b-LS.a+1})}</div>`:""}</div>`:""}
     <p class="muted sm-t" style="margin:0">${T("lsWhat")}</p></div>`;
 }
-function lsUi(){ const el=document.getElementById("lsBox"); if(el) el.innerHTML=lsInner(); const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(LS.playing||!!LS.wait||!!(READ.on&&!READ.paused)||examOn()); }
-function lsMark(){ const c=lsChunks()[LS.i]; if(c) readMark(c.pi); }
+function lsUi(){ const el=document.getElementById("lsBox"); if(el) el.innerHTML=lsInner(); setTimeout(lsHighlight,0); const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(LS.playing||!!LS.wait||!!(READ.on&&!READ.paused)||examOn()); }
+function lsMark(){ const c=lsChunks()[LS.i]; if(c) readMark(c.pi); lsHighlight(); }
+// highlight the sentence itself inside its paragraph (and the A–B part when a loop is set)
+function lsRange(i){ const C=lsChunks(), c=C[i]; if(!c) return null; const ps=document.querySelectorAll("#article p"), p=ps[c.pi]; if(!p) return null;
+  let pos=0; for(let j=0;j<i;j++) if(C[j].pi===c.pi){ const at=p.textContent.indexOf(C[j].t,pos); if(at>=0) pos=at+C[j].t.length; }
+  const at=p.textContent.indexOf(c.t,pos); if(at<0) return null; return {p, start:at, end:at+c.t.length}; }
+function lsDomRange(R){ const r=document.createRange(); let n=0, set=0; const w=document.createTreeWalker(R.p,NodeFilter.SHOW_TEXT); let t;
+  while((t=w.nextNode())){ const L=t.nodeValue.length; if(!set&&n+L>R.start){ r.setStart(t,R.start-n); set=1; } if(set&&n+L>=R.end){ r.setEnd(t,R.end-n); return r; } n+=L; } return null; }
+function lsHighlight(){ document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading"));
+  const H=window.CSS&&CSS.highlights, ok=LS.on&&planHas("sub");
+  if(H&&window.Highlight){ H.delete("ls-cur"); H.delete("ls-ab"); if(!ok) return;
+    const r=lsRange(LS.i), dr=r&&lsDomRange(r); if(dr) H.set("ls-cur",new Highlight(dr));
+    if(LS.a!=null&&LS.b!=null){ const rs=[]; for(let i=LS.a;i<=LS.b;i++){ if(i===LS.i) continue; const x=lsRange(i), d=x&&lsDomRange(x); if(d) rs.push(d); } if(rs.length) H.set("ls-ab",new Highlight(...rs)); } return; }
+  // older browsers: colour the words of the sentence
+  document.querySelectorAll("#article .w.ls-on").forEach(e=>e.classList.remove("ls-on")); if(!ok) return;
+  const r=lsRange(LS.i); if(!r) return; let n=0; for(const node of r.p.childNodes){ const L=node.textContent.length; if(node.nodeType===1&&n>=r.start&&n<r.end) node.classList.add("ls-on"); n+=L; } }
 function lsHalt(){ LS.tok++; LS.playing=false; LS.wait=0; clearTimeout(LS.wt); if(LS.audio){ try{ LS.audio.pause(); }catch(e){} } try{ speechSynthesis.cancel(); }catch(e){} }
 // play sentence i once, then call done(ms it took)
 function lsSay(i, done){
@@ -6861,7 +6892,7 @@ document.addEventListener("click",e=>{
   if(a==="lsprev"){ LS.i=Math.max(0,LS.i-1); return lsRun("one"); }
   if(a==="lsnext"){ LS.i=Math.min(n-1,LS.i+1); return lsRun("one"); }
   if(a==="lsplay") return lsRun("run");
-  if(a==="lsshadow"){ LS.shadow=!LS.shadow; return lsUi(); }
+  if(a==="lsshadow"){ LS.shadow=!LS.shadow; if(LS.shadow) return lsRun("run"); lsHalt(); return lsUi(); }
   if(a==="lsa"){ LS.a=LS.i; if(LS.b!=null&&LS.b<LS.a) LS.b=null; return lsUi(); }
   if(a==="lsb"){ if(LS.a==null) LS.a=0; LS.b=Math.max(LS.a,LS.i); return lsUi(); }
   if(a==="lsabx"){ LS.a=LS.b=null; return lsUi(); }
@@ -6940,6 +6971,12 @@ Object.assign(STR.hi,{"goFirstNews":"आज की पहली ख़बर प
 Object.assign(STR.es,{"goFirstNews":"Lee la primera noticia de hoy →"});
 Object.assign(STR.ja,{"goFirstNews":"今日の1本目のニュースを読む →"});
 Object.assign(STR.ko,{"goFirstNews":"오늘의 첫 뉴스 보러 가기 →"});
+Object.assign(STR.zh,{"lsPlay": "▶ 從這句接著往下播", "lsShadowOn": "跟讀模式開啟：每播完一句會停下來，換你照著唸一次，倒數結束再播下一句。再按一次「跟讀模式」就關掉。", "lsABis": "會一直重播這 {n} 句（文章裡淡藍色的部分）", "lockStyle": "造型屋即將開放", "featT": "誰可以使用這些功能", "feat_dev": "只有開發者", "feat_testers": "測試員", "feat_all": "所有玩家", "featNote": "這會改變所有玩家看到的畫面（存在雲端）。開發者模式下自己永遠看得到。"});
+Object.assign(STR.en,{"lsPlay": "▶ Keep playing from here", "lsShadowOn": "Shadowing is on: after each sentence it pauses so you can say it yourself, then plays the next one when the countdown ends. Tap Shadowing again to turn it off.", "lsABis": "These {n} sentences repeat (light blue in the story)", "lockStyle": "The style shop opens soon", "featT": "Who can use these features", "feat_dev": "Developer only", "feat_testers": "Testers", "feat_all": "Everyone", "featNote": "This changes what every player sees (saved in the cloud). In developer mode you always see everything."});
+Object.assign(STR.hi,{"lsPlay": "▶ यहाँ से आगे चलाएँ", "lsShadowOn": "शैडोइंग चालू: हर वाक्य के बाद रुककर आपको दोहराने का समय मिलता है, फिर अगला वाक्य चलता है। बंद करने के लिए फिर टैप करें।", "lsABis": "ये {n} वाक्य दोहराए जाएँगे (लेख में हल्के नीले)", "lockStyle": "स्टाइल दुकान जल्द खुलेगी", "featT": "ये सुविधाएँ कौन इस्तेमाल कर सकता है", "feat_dev": "सिर्फ़ डेवलपर", "feat_testers": "टेस्टर", "feat_all": "सभी", "featNote": "इससे सभी खिलाड़ियों की स्क्रीन बदलती है। डेवलपर मोड में आप हमेशा सब देखते हैं।"});
+Object.assign(STR.es,{"lsPlay": "▶ Seguir desde esta frase", "lsShadowOn": "Shadowing activado: tras cada frase hace una pausa para que la repitas y, al acabar la cuenta, sigue con la siguiente. Vuelve a tocar para desactivarlo.", "lsABis": "Se repiten estas {n} frases (en azul claro en el texto)", "lockStyle": "La tienda de estilo abre pronto", "featT": "Quién puede usar estas funciones", "feat_dev": "Solo desarrollador", "feat_testers": "Testers", "feat_all": "Todos", "featNote": "Cambia lo que ven todos los jugadores (se guarda en la nube). En modo desarrollador siempre lo ves todo."});
+Object.assign(STR.ja,{"lsPlay": "▶ この文から続けて再生", "lsShadowOn": "シャドーイング中：1文ごとに止まるので声に出して言い、カウントが終わると次の文へ進みます。もう一度押すとオフになります。", "lsABis": "この {n} 文をくり返します（本文の薄い青の部分）", "lockStyle": "おしゃれショップはまもなくオープン", "featT": "この機能を使える人", "feat_dev": "開発者のみ", "feat_testers": "テスター", "feat_all": "全員", "featNote": "全プレイヤーの表示が変わります（クラウドに保存）。開発者モードでは常にすべて表示されます。"});
+Object.assign(STR.ko,{"lsPlay": "▶ 이 문장부터 이어서 재생", "lsShadowOn": "섀도잉 켜짐: 한 문장마다 멈춰서 따라 말할 시간을 주고, 카운트가 끝나면 다음 문장을 재생해요. 다시 누르면 꺼져요.", "lsABis": "이 {n}문장을 반복해요 (본문의 연한 파란색 부분)", "lockStyle": "꾸미기 상점이 곧 열려요", "featT": "이 기능을 쓸 수 있는 사람", "feat_dev": "개발자만", "feat_testers": "테스터", "feat_all": "모두", "featNote": "모든 플레이어 화면이 바뀌어요(클라우드에 저장). 개발자 모드에서는 항상 다 보여요."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
