@@ -424,6 +424,7 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .odds summary{cursor:pointer;font-weight:600}.odds h4{margin:12px 0 4px;font-size:14px}.odds .rw-row{font-size:13px;padding:2px 0}
 .odds-sc{display:flex;flex-direction:column;gap:3px;padding:6px 0;border-top:1px solid var(--line)}.odds-sc .odds-tiers{justify-content:flex-start}
 .copy-foot{text-align:center;margin-top:2px;font-size:12px}
+.ba-card{gap:8px}.ba-pic{width:84px;height:84px;object-fit:contain;margin:0 auto}.ba-cos{display:flex;justify-content:center}.ba-cos .cos-ic{width:84px;height:84px}.ba-name{font-size:18px}.ba-rows{display:grid;grid-template-columns:1fr auto;gap:4px 12px;text-align:left;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 8%,transparent)}.ba-rows b{display:inline-flex;align-items:center;gap:4px;justify-content:flex-end}
 .pd-scrim{z-index:40;animation:amFade .2s ease-out both}
 .pd-card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:41;width:min(340px,calc(100% - 32px));background:var(--card);border-radius:22px;padding:22px 20px 18px;box-shadow:0 20px 50px rgba(0,0,0,.3);text-align:center;display:flex;flex-direction:column;gap:10px;animation:popMid .25s ease-out}
 .pd-card h2{margin:0}.pd-hero{width:150px;height:150px;object-fit:contain;margin:-60px auto 0;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}.pd-hero-ph{display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:50%}.pd-hero-ph svg{width:96px;height:96px}
@@ -2595,11 +2596,19 @@ function rewardBox(r){
 }
 
 /* ----- shop & equipment ----- */
-function buy(id){
+// every purchase with game money asks once more before paying
+function askBuy(o, yes){ let el=document.getElementById("buyAsk"); if(el) el.remove(); el=document.createElement("div"); el.id="buyAsk";
+  el.innerHTML=`<div class="scrim pd-scrim" data-buyask="no"></div><div class="pd-card ba-card" role="dialog" aria-modal="true">${o.pic||""}<h3 style="margin:0">${T("buyAskQ")}</h3><b class="ba-name">${esc(o.name)}</b>
+    <div class="ba-rows"><span>${T("buyAskCost")}</span><b>${o.cur} ${o.cost.toLocaleString()}</b><span>${T("buyAskLeft")}</span><b>${o.cur} ${(o.have-o.cost).toLocaleString()}</b></div>
+    ${o.note?`<p class="muted sm-t" style="margin:0">${o.note}</p>`:""}<div class="row" style="justify-content:center"><button class="btn ghost" data-buyask="no">${T("buyAskNo")}</button><button class="btn" data-buyask="yes">${T("buyAskYes")}</button></div></div>`;
+  document.body.appendChild(el);
+  el.addEventListener("click",e=>{ const b=e.target.closest("[data-buyask]"); if(!b) return; e.stopPropagation(); el.remove(); if(b.dataset.buyask==="yes") yes(); }); }
+function buy(id, sure){
   const g=game(), it=ITEMS[id]; if(!it) return;
   if(g.inv.includes(id)) return toast(T("owned"));
   if(g.lv<it.lv) return toast(T("needLv",{n:it.lv}));
   if(g.gold<it.price) return toast(T("noGold",{n:it.price-g.gold}));
+  if(!sure){ const pk=picOfItem(it); return askBuy({name:itemName(it), cost:it.price, have:g.gold, cur:"🪙", pic:pk?`<img src="assets/art/${pk}.webp" alt="" class="ba-pic">`:""}, ()=>buy(id,true)); }
   g.gold-=it.price; g.inv.push(id); g[it.slot]=id; sfx("coin"); saveGame();
   toast(T("bought",{i:itemName(it)})); render();
 }
@@ -3335,7 +3344,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.170";
+const APP_VERSION="2026.10.171";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6739,6 +6748,7 @@ document.addEventListener("click",e=>{
   if(a==="cstest") return cosTest();
   if(a==="csbuy"){ const c=cosOf(k); if(!c||cosOwned(k)) return; if(cosNeed(c)&&!planHas(cosNeed(c))) return toast(T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly"));
     if((g.style||0)<c.price) return toast(T("cosNoCoin",{n:c.price-(g.style||0)}));
+    if(!t.dataset.sure){ return askBuy({name:T("cos_"+c.id), cost:c.price, have:g.style||0, cur:STYLE_IC, pic:`<div class="ba-cos">${cosPreviewIc(c)}</div>`, note:T("cosDi_"+c.id)}, ()=>{ const f=document.createElement("button"); f.dataset.act="csbuy"; f.dataset.k=k; f.dataset.sure="1"; f.style.display="none"; document.body.appendChild(f); f.click(); f.remove(); }); }
     g.style-=c.price; g.cosOwn=[...(g.cosOwn||[]),k]; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); cosPush(); sfx("prize"); toast(T("cosBought")); return render(); }
   if(a==="cswear"){ const c=cosOf(k); if(!c||!cosOwned(k)) return; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); cosPush(); if(c.slot==="sfx"||c.slot==="neck") return cosTest(); return render(); }
   if(a==="csoff"){ g.cos={...(g.cos||{})}; delete g.cos[k]; saveGame(); cosPush(); return render(); }
@@ -6909,6 +6919,12 @@ Object.assign(STR.hi,{"vtStyle":"{n} स्टाइल सिक्के"});
 Object.assign(STR.es,{"vtStyle":"{n} monedas de estilo"});
 Object.assign(STR.ja,{"vtStyle":"スタイルコイン {n}"});
 Object.assign(STR.ko,{"vtStyle":"스타일 코인 {n}"});
+Object.assign(STR.zh,{"buyAskQ": "確定要買嗎？", "buyAskCost": "價格", "buyAskLeft": "買完剩下", "buyAskNo": "取消", "buyAskYes": "確定購買"});
+Object.assign(STR.en,{"buyAskQ": "Buy this?", "buyAskCost": "Price", "buyAskLeft": "Left after buying", "buyAskNo": "Cancel", "buyAskYes": "Buy"});
+Object.assign(STR.hi,{"buyAskQ": "क्या आप इसे खरीदना चाहते हैं?", "buyAskCost": "कीमत", "buyAskLeft": "खरीदने के बाद बचेंगे", "buyAskNo": "रद्द करें", "buyAskYes": "खरीदें"});
+Object.assign(STR.es,{"buyAskQ": "¿Comprar esto?", "buyAskCost": "Precio", "buyAskLeft": "Te quedará", "buyAskNo": "Cancelar", "buyAskYes": "Comprar"});
+Object.assign(STR.ja,{"buyAskQ": "購入しますか？", "buyAskCost": "価格", "buyAskLeft": "購入後の残り", "buyAskNo": "キャンセル", "buyAskYes": "購入する"});
+Object.assign(STR.ko,{"buyAskQ": "구매할까요?", "buyAskCost": "가격", "buyAskLeft": "구매 후 남는 양", "buyAskNo": "취소", "buyAskYes": "구매하기"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
