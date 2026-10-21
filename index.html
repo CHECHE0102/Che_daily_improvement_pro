@@ -1106,6 +1106,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .cos-pow{font-size:12px;color:#C9921A;letter-spacing:1px}.cos-pow i{font-style:normal;color:var(--line)}
 @media (prefers-reduced-motion:reduce){.cos-hel em,.cos-orbit .rr u,.cos-helix .hx,.cos-sparks b,.cos-orbit .ob b,.cos-orbs em,.cos-crys .rot,.cos-crys .sh,.cos-back .gr,.cos-back .mn,.cos-back .stars,.cos-back .ab svg,.cos-back s,.cos-back em,.cos-back.cb-b-phoenix,.cos-col,.cos-neck svg{animation:none!important}.cos-helix .hx{opacity:.8;transform:scale(1,.26)}.arena2.cfx,.sty-stage.cfx-dark,.sty-stage.cfx-star{animation:none!important}}
 .easy-hint{display:flex;flex-direction:column;gap:8px;border-color:rgba(64,190,150,.45)}.easy-hint p{margin:0;font-size:14px;line-height:1.5}.easy-acts{display:flex;flex-wrap:wrap;gap:8px}
+.rn-ic{font-size:44px;line-height:1}#renameAsk .search{width:100%;text-align:center;font-size:17px}
 </style>
 
 </head>
@@ -2620,6 +2621,24 @@ function rewardBox(r){
 
 /* ----- shop & equipment ----- */
 // every purchase with game money asks once more before paying
+// pop-up to use a rename ticket straight away (opens after buying or claiming one)
+function renameOpen(step){ let el=document.getElementById("renameAsk"); if(el) el.remove(); el=document.createElement("div"); el.id="renameAsk";
+  const g=game(), tk=g.renames||0, pic=vaultPic("rename1","ba-pic")||`<div class="rn-ic">🏷️</div>`, nm=step&&step.n;
+  el.innerHTML=`<div class="scrim pd-scrim" data-rn="no"></div><div class="pd-card ba-card" role="dialog" aria-modal="true">${pic}<h3 style="margin:0">${T("rnT")}</h3>
+    ${nm?`<p style="margin:0">${T("rnSure",{n:esc(nm)})}</p><p class="muted sm-t" style="margin:0">${g.nick&&nickNeedsTicket()?T("rnCost",{n:Math.max(0,tk-1)}):T("nickFirstSub")}</p>
+      <div class="row" style="justify-content:center"><button class="btn ghost" data-rn="back">${T("rnBack")}</button><button class="btn" data-rn="yes">${T("rnYes")}</button></div>`
+    :`${g.nick?`<p class="muted sm-t" style="margin:0">${T("rnNow",{n:esc(g.nick)})}</p>`:""}<input id="rnIn" class="search" maxlength="16" value="${esc(step&&step.draft!=null?step.draft:"")}" placeholder="${T("rnPh")}" autocomplete="off">
+      <p class="muted sm-t" style="margin:0">${T("nickHint")} · ${T("rnHave",{n:tk})}</p>
+      <div class="row" style="justify-content:center"><button class="btn ghost" data-rn="no">${T("rnLater")}</button><button class="btn" data-rn="go">${T("rnGo")}</button></div>
+      <p class="muted sm-t" style="margin:0">${T("rnWhere")}</p>`}</div>`;
+  document.body.appendChild(el);
+  const inp=el.querySelector("#rnIn"); if(inp){ setTimeout(()=>{ try{ inp.focus(); }catch(e){} },60); inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); el.querySelector('[data-rn="go"]').click(); } }); }
+  el.addEventListener("click",async e=>{ const b=e.target.closest("[data-rn]"); if(!b) return; e.stopPropagation(); const k=b.dataset.rn;
+    if(k==="no"){ el.remove(); return; }
+    if(k==="back") return renameOpen({draft:nm});
+    if(k==="go"){ const n=(inp.value||"").trim().replace(/\s+/g," "); if(n.length<1||n.length>16) return toast(T("nickBad")); if(!nickOk(n)) return toast(T("nickChars"));
+      if(g.nick&&n===g.nick) return toast(T("rnSame")); if(CLOUD.fb&&!CLOUD.user) return toast(T("nickLogin")); return renameOpen({n}); }
+    if(k==="yes"){ b.disabled=true; const r=await nickClaim(nm); if(r===false){ b.disabled=false; return renameOpen({draft:nm}); } el.remove(); render(); } }); }
 function askBuy(o, yes){ let el=document.getElementById("buyAsk"); if(el) el.remove(); el=document.createElement("div"); el.id="buyAsk";
   el.innerHTML=`<div class="scrim pd-scrim" data-buyask="no"></div><div class="pd-card ba-card" role="dialog" aria-modal="true">${o.pic||""}<h3 style="margin:0">${T("buyAskQ")}</h3><b class="ba-name">${esc(o.name)}</b>
     <div class="ba-rows"><span>${T("buyAskCost")}</span><b>${o.cur} ${o.cost.toLocaleString()}</b><span>${T("buyAskLeft")}</span><b>${o.cur} ${(o.have-o.cost).toLocaleString()}</b></div>
@@ -3373,7 +3392,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.176";
+const APP_VERSION="2026.10.177";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6287,7 +6306,7 @@ async function giftAct(id, act){
   catch(e){ toast(e&&e.message==="state"?T("giftChanged"):T("giftFail")); console.warn("gift act",e&&(e.code||e.message)); giftLoad(true); }
   render(); }
 function vaultTest(id){ if(!DEV) return; const v=VAULT_ITEMS.find(x=>x.id===id), g=game(); if(!v) return;
-  if(v.kind==="style") g.style=(g.style||0)+v.n; else if(v.kind==="charm") g.charms=(g.charms||0)+v.n; else if(v.kind==="rename") g.renames=(g.renames||0)+v.n; else g.gold+=v.n; saveGame(); toast(T("vaultTestGot")); render(); }
+  if(v.kind==="style") g.style=(g.style||0)+v.n; else if(v.kind==="charm") g.charms=(g.charms||0)+v.n; else if(v.kind==="rename") g.renames=(g.renames||0)+v.n; else g.gold+=v.n; saveGame(); toast(T("vaultTestGot")); render(); if(v.kind==="rename") renameOpen(); }
 /* ----- real-money purchases (Stripe Checkout, see functions/index.js). The server records each paid
    checkout in purchases/{sessionId}; the game hands the items out once (claimed) and takes them back after a refund. ----- */
 const PAY_FN="https://europe-west1-che-daily-improvement-pro.cloudfunctions.net";
@@ -6308,8 +6327,8 @@ function payShowDone(x){
   const items=JSON.parse(el.dataset.items||"[]"); items.push(x.item); el.dataset.items=JSON.stringify(items);
   const rows=items.map(id=>{ const it=VAULT_ITEMS.find(i=>i.id===id); if(!it) return ""; return `<div class="pd-item">${vaultPic(it.id,"pd-pic")||`<span class="pd-ic">${it.ic}</span>`}<b>${esc(vaultName(it))}</b>${it.kind==="gift"?`<small class="muted">${T(it.id==="subgift"?"subGiftIn":"plusGiftIn")}</small>`:""}</div>`; }).join("");
   const hero=PICS.has("icon-vault-thanks")?`<img src="assets/art/icon-vault-thanks.webp" alt="" class="pd-hero">`:`<div class="pd-hero pd-hero-ph">${VAULT_ICON}</div>`;
-  el.innerHTML=`<div class="scrim pd-scrim" data-act="paydoneclose"></div><div class="pd-card" role="dialog" aria-modal="true">${hero}<h2>${T("payDoneT")}</h2><p class="sm-t muted">${T("payDoneSub")}</p><div class="pd-list">${rows}</div><button class="btn" data-act="paydoneclose">${T("payDoneOk")}</button></div>`; }
-document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="paydoneclose"]'); if(!t) return; e.stopPropagation(); const el=document.getElementById("payDone"); if(el) el.remove(); render(); }, true);
+  el.innerHTML=`<div class="scrim pd-scrim" data-act="paydoneclose"></div><div class="pd-card" role="dialog" aria-modal="true">${hero}<h2>${T("payDoneT")}</h2><p class="sm-t muted">${T("payDoneSub")}</p><div class="pd-list">${rows}</div>${items.some(id=>(VAULT_ITEMS.find(i=>i.id===id)||{}).kind==="rename")?`<div class="row" style="justify-content:center"><button class="btn ghost" data-act="paydoneclose">${T("rnLater")}</button><button class="btn" data-act="paydonerename">🏷️ ${T("rnGoNow")}</button></div>`:`<button class="btn" data-act="paydoneclose">${T("payDoneOk")}</button>`}</div>`; }
+document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="paydoneclose"],[data-act="paydonerename"]'); if(!t) return; e.stopPropagation(); const el=document.getElementById("payDone"); if(el) el.remove(); render(); if(t.dataset.act==="paydonerename") renameOpen(); }, true);
 const payName=x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return v?vaultName(v):x.item; };
 // we left for Stripe; if this same page comes back (back button, the in-app browser closed, page restored from cache), unlock the buttons and say so
 let PAY_LEFT=0;
@@ -6631,8 +6650,8 @@ const STYLE_IC=`<svg class="sty-ic" viewBox="0 0 24 24" aria-hidden="true"><circ
 const COSMETICS=[
   {id:"f-leaf",    slot:"feet", price:90,  c1:"#5CCB6A", c2:"#E4FFB0"},
   {id:"f-gold",    slot:"feet", price:180, c1:"#F5B72E", c2:"#FFF3B0"},
-  {id:"f-helix",   slot:"feet", price:320, c1:"#FFC93C", c2:"#FFF6C8", d3:true, need:"sub"},
   {id:"f-rainbow", slot:"feet", price:360, c1:"#FF7AB6", c2:"#7FE3FF"},
+  {id:"f-helix",   slot:"feet", price:320, c1:"#FFC93C", c2:"#FFF6C8", d3:true, need:"sub"},
   {id:"f-rhelix",  slot:"feet", price:640, c1:"#B98CFF", c2:"#FFFFFF", plus:true, d3:true},
   {id:"b-halo",    slot:"back", price:240, c1:"#FFD75E", c2:"#FFFFFF"},
   {id:"b-gears",   slot:"back", price:300, c1:"#D9A441", c2:"#FFE9A8"},
@@ -7051,6 +7070,12 @@ Object.assign(STR.hi,{"easyT": "लेख आपके लिए शायद �
 Object.assign(STR.es,{"easyT": "Puede que los artículos te resulten fáciles", "easyBody": "En los últimos {d} días consultaste como mucho {n} palabras al día. Prueba un nivel más alto o juega a Razonamiento para entender mejor la lógica de los textos.", "easyUp": "Cambiar a {l}", "easyThink": "Jugar a Razonamiento", "easyNo": "Mantener mi nivel", "easyUpDone": "Nivel cambiado a {l}"});
 Object.assign(STR.ja,{"easyT": "記事が簡単すぎるかもしれません", "easyBody": "この {d} 日間、調べた単語は1日 {n} 語以下でした。レベルを1つ上げるか、論理リーディングで文章の論理を読む力を鍛えましょう。", "easyUp": "{l} に変更", "easyThink": "論理リーディングへ", "easyNo": "このままにする", "easyUpDone": "{l} に変更しました"});
 Object.assign(STR.ko,{"easyT": "기사가 너무 쉬울 수도 있어요", "easyBody": "최근 {d}일 동안 하루에 많아야 {n}개 단어만 찾아봤어요. 레벨을 한 단계 올리거나 논리 독해로 글의 흐름을 읽는 힘을 키워 보세요.", "easyUp": "{l}(으)로 변경", "easyThink": "논리 독해 하기", "easyNo": "지금 레벨 유지", "easyUpDone": "{l}(으)로 변경했어요"});
+Object.assign(STR.zh,{"rnT": "拿到改名卷了！現在就改名字吧", "rnNow": "目前的暱稱：{n}", "rnPh": "輸入新的暱稱", "rnHave": "你有 {n} 張改名卷", "rnLater": "之後再說", "rnGo": "改名", "rnGoNow": "現在就改名字", "rnWhere": "之後也可以到「設定 → 暱稱」使用改名卷。", "rnSure": "確定改成「{n}」嗎？", "rnCost": "會用掉 1 張改名卷，剩 {n} 張。", "rnBack": "再想想", "rnYes": "確定改名", "rnSame": "跟現在的暱稱一樣喔"});
+Object.assign(STR.en,{"rnT": "You've got a rename ticket! Pick your new name", "rnNow": "Current nickname: {n}", "rnPh": "New nickname", "rnHave": "You have {n} rename tickets", "rnLater": "Later", "rnGo": "Rename", "rnGoNow": "Rename now", "rnWhere": "You can also use it later in Settings → Nickname.", "rnSure": "Change your nickname to “{n}”?", "rnCost": "This uses 1 rename ticket ({n} left).", "rnBack": "Go back", "rnYes": "Yes, rename", "rnSame": "That's already your nickname"});
+Object.assign(STR.hi,{"rnT": "नाम बदलने का टिकट मिला! अभी नया नाम चुनें", "rnNow": "अभी का उपनाम: {n}", "rnPh": "नया उपनाम", "rnHave": "आपके पास {n} टिकट हैं", "rnLater": "बाद में", "rnGo": "नाम बदलें", "rnGoNow": "अभी नाम बदलें", "rnWhere": "बाद में सेटिंग → उपनाम में भी बदल सकते हैं।", "rnSure": "उपनाम “{n}” कर दें?", "rnCost": "1 टिकट लगेगा ({n} बचेंगे)।", "rnBack": "वापस", "rnYes": "हाँ, बदलें", "rnSame": "यह पहले से आपका उपनाम है"});
+Object.assign(STR.es,{"rnT": "¡Tienes un vale de cambio de nombre! Elige tu nuevo apodo", "rnNow": "Apodo actual: {n}", "rnPh": "Nuevo apodo", "rnHave": "Tienes {n} vales", "rnLater": "Más tarde", "rnGo": "Cambiar", "rnGoNow": "Cambiar ahora", "rnWhere": "También puedes usarlo después en Ajustes → Apodo.", "rnSure": "¿Cambiar tu apodo a «{n}»?", "rnCost": "Usa 1 vale (te quedan {n}).", "rnBack": "Volver", "rnYes": "Sí, cambiar", "rnSame": "Ese ya es tu apodo"});
+Object.assign(STR.ja,{"rnT": "改名チケットを手に入れました！新しい名前を決めよう", "rnNow": "今のニックネーム：{n}", "rnPh": "新しいニックネーム", "rnHave": "改名チケット {n} 枚", "rnLater": "あとで", "rnGo": "改名する", "rnGoNow": "今すぐ改名", "rnWhere": "あとで「設定 → ニックネーム」からも使えます。", "rnSure": "「{n}」に変更しますか？", "rnCost": "改名チケットを1枚使います（残り {n} 枚）。", "rnBack": "戻る", "rnYes": "変更する", "rnSame": "今と同じニックネームです"});
+Object.assign(STR.ko,{"rnT": "이름 변경권을 받았어요! 새 닉네임을 정해 보세요", "rnNow": "지금 닉네임: {n}", "rnPh": "새 닉네임", "rnHave": "이름 변경권 {n}장", "rnLater": "나중에", "rnGo": "변경", "rnGoNow": "지금 바꾸기", "rnWhere": "나중에 설정 → 닉네임에서도 쓸 수 있어요.", "rnSure": "“{n}”(으)로 바꿀까요?", "rnCost": "이름 변경권 1장을 써요 (남은 {n}장).", "rnBack": "돌아가기", "rnYes": "바꾸기", "rnSame": "지금 닉네임과 같아요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
