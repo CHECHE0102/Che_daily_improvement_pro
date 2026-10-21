@@ -1150,6 +1150,15 @@ body.vp-lock{touch-action:pan-x pan-y}
 .du-atk{flex:1}
 .du-ko{text-align:center;font-weight:800;padding:10px}
 @media (prefers-reduced-motion: reduce){.du-arena.hit,.du-warn,.du-shield.ready,.du-num,.du-slash,.du-boom{animation:none!important}}
+.dr-wrap{--drs:min(250px,calc(100vw - 120px));position:relative;width:calc(var(--drs) * 1.42);height:calc(var(--drs) * 1.42);max-width:100%;margin:0 auto;display:grid;place-items:center}
+.dr-cv{width:var(--drs);height:var(--drs);border-radius:18px;background:#FDF6EA;color:#1B2421;box-shadow:0 6px 18px rgba(0,0,0,.35),inset 0 0 0 3px #E6D9BF;touch-action:none;will-change:transform}
+.dr-cv.mine{box-shadow:0 0 0 3px var(--accent),0 6px 18px rgba(0,0,0,.35);cursor:crosshair}
+.dr-hint{text-align:center;margin:4px 0;font-size:14px}.dr-hint b{letter-spacing:.15em;color:var(--gorse)}
+.dr-guess{display:flex;gap:8px}.dr-guess input{flex:1;text-transform:uppercase;letter-spacing:.2em;font-weight:800;text-align:center}
+.dr-st{text-align:center;margin:8px 0;font-size:14px}.dr-st.ok{color:var(--good)}.dr-st.ng{color:var(--bad)}
+.dr-rev{text-align:center}
+.dr-rr{display:flex;flex-direction:column;align-items:center;gap:6px;margin:6px 0}
+@media (prefers-reduced-motion: reduce){.dr-cv{will-change:auto}}
 </style>
 
 </head>
@@ -3303,7 +3312,7 @@ function devStatsHtml(){
     <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
     <div class="eyebrow">🎮 ${T("dsGames")}</div>
-    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["duel","duName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
+    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["duel","duName"],["draw","drName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
     ${devRetHtml(D.act)}
     ${devPushHtml(D.push)}
     <div class="eyebrow">${T("dsRegions")}</div>
@@ -3444,7 +3453,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.182";
+const APP_VERSION="2026.10.183";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3866,7 +3875,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.del){ remove(t.dataset.del); S.open=null; S.confirmDel=null; toast(T("removed")); return render(); }
   if(t.dataset.artid){ openArticle(t.dataset.artid); return; }
   const a=t.dataset.act;
-  if(a&&/^(pg|qz)/.test(a)) return pgAct(a,t);
+  if(a&&/^(pg|qz|du|dr)/.test(a)) return pgAct(a,t);
   if(a==="close"){ S.sheet=null; return renderSheet(); }
   if(a==="lang"){ S.sheet=null; S.langSheet=true; return renderSheet(); }
   if(a==="closelang"){ S.langSheet=false; return renderSheet(); }
@@ -3961,7 +3970,7 @@ document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.part
     if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
     if(e.key==="Backspace"){ e.preventDefault(); D.sel.pop(); duPush(); return pgRender(); }
     if(/^[a-z]$/i.test(e.key)){ const k=D.hand.findIndex((c,i)=>c===e.key.toLowerCase()&&!D.sel.includes(i)); if(k>=0){ e.preventDefault(); return duPick(k); } } }
-  if(S.pg&&S.view==="play"&&(S.playMode||"party")==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+  if(S.pg&&S.view==="play"&&(S.playMode||"party")==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="drIn"){ e.preventDefault(); drGuess(); return; } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -4516,6 +4525,7 @@ async function pgLeave(){
 async function pgStartGame(){
   const pg=S.pg; if(!pg||!pg.party||pg.party.host!==pgMe()||pg.party.state!=="wait") return;
   if(pg.party.game==="duel"&&Object.keys(pg.party.players||{}).length!==2) return toast(T("duNeed2"));
+  if(pg.party.game==="draw"&&Object.keys(pg.party.players||{}).length<2) return toast(T("drNeed2"));
   const {fsM}=CLOUD.fb; const P=pg.party, up={state:"play", start:Date.now()+3500, seed:String(Math.floor(Math.random()*1e9))};
   if(P.game==="spell"){
     await pgLoadMean();
@@ -4530,6 +4540,12 @@ async function pgStartGame(){
     up.rounds={};
   }
   if(P.game==="bomb") Object.assign(up, await bmInit(P));
+  if(P.game==="draw"){ const ids=Object.keys(P.players||{}), n=(P.rr||1)*ids.length;
+    const pool=(await pgLoadSpell()).filter(o=>o.w.length===5&&/^[a-z]+$/.test(o.w)&&!/s$/.test(o.w)).map(o=>({w:o.w, pos:o.pos, m:{zh:o.zh,hi:o.hi,es:o.es,ja:o.ja,ko:o.ko,en:o.en}}));
+    if(pool.length<n) return toast(T("loading"));
+    const seen=new Set(pgSeen().sp); for(const u of ids) for(const w of ((pg.ps[u]||{}).seenSp||[])) seen.add(w);
+    up.words=[...pgShuffle(pool.filter(o=>!seen.has(o.w))), ...pgShuffle(pool.filter(o=>seen.has(o.w)))].slice(0,n);
+    up.order=pgShuffle([...ids]); up.rr=P.rr||1; up.cur={i:0, ts:up.start}; }
   if(P.game==="hunt"){ const h=await huInit(P, up); if(!h.hu) return toast(T("loading")); Object.assign(up, h); }
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
 }
@@ -4539,7 +4555,7 @@ function pgTickStart(){ if(S.pgTimer) return; S.pgTimer=setInterval(pgTick,250);
 function pgTick(){
   const pg=S.pg; if(!pg||!pg.party){ clearInterval(S.pgTimer); S.pgTimer=null; return; }
   const P=pg.party; if(P.state!=="play"){ if(P.state==="done"){ clearInterval(S.pgTimer); S.pgTimer=null; } return; }
-  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick}[P.game]||pgDropTick)();
+  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick, draw:drTick}[P.game]||pgDropTick)();
   pgRender();
 }
 function pgEndGame(){ const pg=S.pg; if(!pg||pg.ending) return; pg.ending=1; if(pg.L){ pg.L.fall=null; pgPushMe(); } if(pg.D){ pg.D.fall=null; duPush(); } CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{state:"done", end:Date.now()}).catch(()=>{ pg.ending=0; }); }
@@ -4782,6 +4798,109 @@ function duResults(rows){
     <h3>${T("pgWeird")}</h3>${weird.length?`<div class="pg-weird">${weird.map(x=>`<span class="chip new"><s>${esc(pgMask(x.w))}</s> <small>${esc(pgNm(x.u))}</small></span>`).join("")}</div>`:`<p class="muted sm-t">${T("pgNoWeird")}</p>`}`;
   return {stats, extra}; }
 
+/* ----- game 7: spin & shake (2–6 players) — the dealer writes a 5-letter word on a turning board, then on a shaking one; the others guess ----- */
+const DR={intro:3500, draw:10000, guess1:10000, guess2:15000, reveal:5000, spin:14000, maxPts:1500};
+function drPlan(ts){ const d1=ts+DR.intro, g1=d1+DR.draw, d2=g1+DR.guess1, g2=d2+DR.draw, end=g2+DR.guess2; return {ts,d1,g1,d2,g2,end}; }
+function drCur(){ const P=S.pg.party; return P.cur||{i:0, ts:P.start}; }
+function drPhase(now){ const C=drCur(), L=drPlan(C.ts), end=C.end||L.end;
+  const k=now>=end?"rev":now<L.d1?"intro":now<L.g1?"d1":now<L.d2?"g1":now<L.g2?"d2":"g2"; return {k, L, end}; }
+function drOrder(){ const P=S.pg.party; return P.order||Object.keys(P.players||{}); }
+function drDealer(i){ const o=drOrder(); return o[i%o.length]; }
+function drTotal(){ return (S.pg.party.rr||1)*drOrder().length; }
+function drWord(i){ return ((S.pg.party.words||[])[i])||{w:"?????"}; }
+function drDg(u){ const pg=S.pg; return u===pgMe()&&pg.DG?pg.DG:((pg.ps[u]||{}).dg||{}); }
+function drG(u,i,ph){ return drDg(u)[i+"-"+ph]||null; }
+function drGot(u,i){ const a=drG(u,i,1); if(a&&a.ok) return a; const b=drG(u,i,2); return b&&b.ok?b:null; }
+function drGuessers(i){ const d=drDealer(i); return Object.keys(S.pg.party.players||{}).filter(u=>u!==d); }
+function drAllGot(i){ const g=drGuessers(i); return g.length>0&&g.every(u=>drGot(u,i)); }
+function drPts(r){ if(!r||!r.ok) return 0; return r.ph===1?Math.round(100-50*Math.min(1,(r.e||0)/DR.guess1)):Math.round(50-25*Math.min(1,(r.e||0)/DR.guess2)); }
+function drDealerPts(i){ if(!drAllGot(i)) return 0; return drGuessers(i).every(u=>drGot(u,i).ph===1)?50:30; }
+function drScores(){ const P=S.pg.party, sc={}, ids=Object.keys(P.players||{}); ids.forEach(u=>sc[u]=0);
+  const C=drCur(), upto=P.state==="done"?drTotal():Math.min(drTotal(),C.i+(drPhase(Date.now()).k==="rev"?1:0));
+  for(let i=0;i<upto;i++){ for(const u of drGuessers(i)) sc[u]+=drPts(drGot(u,i)); const d=drDealer(i); if(d in sc) sc[d]+=drDealerPts(i); } return sc; }
+function drPhNum(k){ return k==="d1"||k==="g1"?1:k==="d2"||k==="g2"?2:0; }
+function drKeyNow(){ const C=drCur(), F=drPhase(Date.now()); let n=drPhNum(F.k);
+  if(F.k==="rev"){ const d=drDealer(C.i), src=d===pgMe()?S.pg.DW:((S.pg.ps[d]||{}).dr); n=src&&src.k===C.i+"-2"?2:1; } return C.i+"-"+n; }
+const drEnc=st=>st.map(s=>s.map(v=>Math.max(0,Math.min(1000,Math.round(v))).toString(36)).join(",")).join(";");
+const drDec=str=>(str||"").split(";").filter(Boolean).map(s=>s.split(",").map(v=>parseInt(v,36)).filter(v=>!isNaN(v)));
+function drStrokesNow(){ const pg=S.pg, k=drKeyNow(), d=drDealer(drCur().i);
+  if(d===pgMe()) return pg.DW&&pg.DW.k===k?pg.DW.st:[];
+  const r=(pg.ps[d]||{}).dr; if(!r||r.k!==k) return []; if(pg.drCache&&pg.drCache.s===r.s) return pg.drCache.st; const st=drDec(r.s); pg.drCache={s:r.s, st}; return st; }
+function drCanDraw(){ const F=drPhase(Date.now()); return (F.k==="d1"||F.k==="d2")&&drDealer(drCur().i)===pgMe(); }
+function drSend(){ const pg=S.pg, W=pg.DW; if(!W) return; CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dr:{k:W.k, s:drEnc(W.st)}},{merge:true}).catch(()=>{}); }
+function drPush(now){ const pg=S.pg; if(now){ clearTimeout(pg.drT); pg.drT=null; return drSend(); } if(pg.drT) return; pg.drT=setTimeout(()=>{ pg.drT=null; drSend(); },300); }
+// the board turns (round 1) or shakes (round 2); the same motion is used to map the dealer's finger back onto the board
+function drXf(k,now){ const L=drPhase(now).L;
+  if(k==="d1"||k==="g1") return {a:((now-L.d1)/DR.spin)*360, x:0, y:0};
+  if(k==="d2"||k==="g2"){ const t=now-L.d2; return {a:5*Math.sin(t/170), x:11*Math.sin(t/97)+6*Math.sin(t/41), y:11*Math.cos(t/113)+6*Math.sin(t/53)}; }
+  return {a:0,x:0,y:0}; }
+function drBind(cv){ if(cv.dataset.b) return; cv.dataset.b="1"; let cur=null;
+  const loc=e=>{ const r=cv.parentElement.getBoundingClientRect(), now=Date.now(), X=drXf(drPhase(now).k,now), q=-X.a*Math.PI/180;
+    const dx=e.clientX-(r.left+r.width/2)-X.x, dy=e.clientY-(r.top+r.height/2)-X.y, W=cv.clientWidth||1;
+    return [((dx*Math.cos(q)-dy*Math.sin(q))/W+0.5)*1000, ((dx*Math.sin(q)+dy*Math.cos(q))/W+0.5)*1000]; };
+  cv.addEventListener("pointerdown",e=>{ if(!drCanDraw()) return; e.preventDefault(); try{ cv.setPointerCapture(e.pointerId); }catch(x){}
+    const k=drKeyNow(), pg=S.pg; if(!pg.DW||pg.DW.k!==k) pg.DW={k, st:[]}; if(pg.DW.st.reduce((a,s)=>a+s.length,0)>DR.maxPts*2) return; cur=loc(e); pg.DW.st.push(cur); pg.drV=(pg.drV||0)+1; drPush(); });
+  cv.addEventListener("pointermove",e=>{ if(!cur) return; if(!drCanDraw()){ cur=null; drPush(true); return; } e.preventDefault(); const p=loc(e), n=cur.length; if(Math.hypot(p[0]-cur[n-2],p[1]-cur[n-1])<7) return; cur.push(p[0],p[1]); S.pg.drV=(S.pg.drV||0)+1; drPush(); });
+  const up=()=>{ if(cur){ cur=null; drPush(true); } }; cv.addEventListener("pointerup",up); cv.addEventListener("pointercancel",up); }
+function drPaint(cv, st){ const W=cv.clientWidth||300, dpr=Math.min(2,window.devicePixelRatio||1), px=Math.round(W*dpr); if(cv.width!==px){ cv.width=px; cv.height=px; }
+  const c=cv.getContext("2d"), k=cv.width/1000; c.clearRect(0,0,cv.width,cv.height); c.lineCap="round"; c.lineJoin="round"; c.lineWidth=22*k; c.strokeStyle="#1B2421"; c.fillStyle="#1B2421";
+  for(const s of st){ if(s.length<2) continue; c.beginPath(); if(s.length<=2){ c.arc(s[0]*k,s[1]*k,11*k,0,7); c.fill(); continue; } c.moveTo(s[0]*k,s[1]*k); for(let j=2;j+1<s.length;j+=2) c.lineTo(s[j]*k,s[j+1]*k); c.stroke(); } }
+function drLoop(){ if(S.drRaf) return; const step=()=>{ const pg=S.pg; if(!pg||!pg.party||pg.party.game!=="draw"||pg.party.state!=="play"){ S.drRaf=0; return; }
+    const cv=document.getElementById("drCv"); if(cv){ const now=Date.now(), X=drXf(drPhase(now).k,now); cv.style.transform=`translate(${X.x.toFixed(1)}px,${X.y.toFixed(1)}px) rotate(${X.a.toFixed(2)}deg)`; drBind(cv);
+      const st=drStrokesNow(), sig=drKeyNow()+":"+st.length+":"+st.reduce((a,s)=>a+s.length,0); if(cv.dataset.sig!==sig){ cv.dataset.sig=sig; drPaint(cv,st); } }
+    S.drRaf=requestAnimationFrame(step); }; S.drRaf=requestAnimationFrame(step); }
+function drGuess(){ const pg=S.pg, inp=document.getElementById("drIn"), w=((inp&&inp.value)||"").trim().toLowerCase(), now=Date.now(), C=drCur(), F=drPhase(now);
+  if(F.k!=="g1"&&F.k!=="g2") return; const ph=F.k==="g1"?1:2; if(drDealer(C.i)===pgMe()||drGot(pgMe(),C.i)||drG(pgMe(),C.i,ph)) return;
+  if(!/^[a-z]{5}$/.test(w)) return toast(T("drNeed5"));
+  const ok=w===String(drWord(C.i).w).toLowerCase(), r={w, ok, e:now-(ph===1?F.L.g1:F.L.g2), ph};
+  pg.DG={...drDg(pgMe()), [C.i+"-"+ph]:r};
+  CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dg:pg.DG},{merge:true}).catch(()=>toast(T("syncFail")));
+  if(ok){ sfx(880,0.12,"triangle",0.08,1320); toast(T("drRight",{p:drPts(r)})); } else { sfx(180,0.18,"sawtooth",0.06,120); toast(T(ph===1?"drWrong1":"drWrong2")); }
+  pgRender(); }
+function drTick(){ const pg=S.pg, P=pg.party, now=Date.now(); if(now<P.start) return; drLoop();
+  const C=drCur(), F=drPhase(now), host=P.host===pgMe();
+  if(host&&!C.end&&F.k!=="intro"&&F.k!=="d1"&&F.k!=="rev"&&drAllGot(C.i)&&pg.drEndSent!==C.i){ pg.drEndSent=C.i; CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{cur:{...C, end:now}}).catch(()=>{ pg.drEndSent=null; }); }
+  if(F.k==="rev"&&now>=F.end+DR.reveal&&(host||now>F.end+DR.reveal+6000)) drAdvance(C.i); }
+async function drAdvance(i){ const pg=S.pg; if(pg.drAdv===i) return; pg.drAdv=i; const {fsM,db}=CLOUD.fb, ref=pgRef(pg.code);
+  try{ await fsM.runTransaction(db, async tx=>{ const s=await tx.get(ref); const d=s.exists()?s.data():null; if(!d||d.state!=="play") return; const c=d.cur||{i:0};
+    if(c.i!==i) return; const tot=(d.rr||1)*((d.order||Object.keys(d.players||{})).length);
+    if(i+1>=tot) tx.update(ref,{state:"done", end:Date.now()}); else tx.update(ref,{cur:{i:i+1, ts:Date.now()+400}}); }); }
+  catch(e){ pg.drAdv=null; } }
+function drSections(){
+  const pg=S.pg, P=pg.party, now=Date.now();
+  if(now<P.start) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("drSub")}</p></div>`]];
+  drLoop();
+  const C=drCur(), F=drPhase(now), d=drDealer(C.i), amD=d===pgMe(), W=drWord(C.i), sc=drScores(), tot=drTotal();
+  const board=`<div class="pg-board">${Object.keys(P.players).map(u=>`<div class="pg-chip${u===pgMe()?" me":""}"><b>${u===d?"🎨 ":""}${esc(pgNm(u))}</b><span>${sc[u]||0}</span></div>`).join("")}</div>`;
+  const until={intro:F.L.d1, d1:F.L.g1, g1:F.L.d2, d2:F.L.g2, g2:F.end, rev:F.end+DR.reveal}[F.k], secs=Math.max(0,Math.ceil((until-now)/1000));
+  const lab={intro:"drPhIntro", d1:"drPhD1", g1:"drPhG1", d2:"drPhD2", g2:"drPhG2", rev:"drPhRev"}[F.k];
+  const time=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgRound",{i:C.i+1,n:tot})} · 🎨 ${esc(pgNm(d))}</span><b class="sm-t ${secs<=3&&F.k!=="rev"?"bad-t":""}">${T(lab)} · ${secs}s</b></div>`;
+  let stage;
+  if(F.k==="intro") stage=amD?`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drYouDeal")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p><p class="muted sm-t">${T("drYouDealSub")}</p></div>`
+    :`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drTheyDeal",{n:esc(pgNm(d))})}</div><p class="muted sm-t">${T("drTheyDealSub")}</p></div>`;
+  else { const ph=drPhNum(F.k)||(drKeyNow().endsWith("-2")?2:1);
+    stage=`${amD&&F.k!=="rev"?`<p class="dr-hint">${T(F.k==="d1"||F.k==="d2"?"drWriteIt":"drWait")} <b>${esc(String(W.w).toUpperCase())}</b></p>`:""}<div class="dr-wrap${ph===2?" shake":" spin"}"><canvas id="drCv" class="dr-cv${amD&&(F.k==="d1"||F.k==="d2")?" mine":""}"></canvas></div>`; }
+  let guess="";
+  if(F.k==="rev"){ const got=drGuessers(C.i).filter(u=>drGot(u,C.i)), dp=drDealerPts(C.i);
+    guess=`<div class="dr-rev"><div class="eyebrow">${T("wdAnswer")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p>
+      <p class="sm-t">${got.length?got.map(u=>{ const r=drGot(u,C.i); return `✅ <b>${esc(pgNm(u))}</b> +${drPts(r)}`; }).join(" · "):T("pgNobody")}${dp?` · 🎨 <b>${esc(pgNm(d))}</b> +${dp}`:""}</p></div>`; }
+  else if(!amD&&F.k!=="intro"){ const ph=F.k==="g1"||F.k==="d1"?1:2, mine=drG(pgMe(),C.i,ph), got=drGot(pgMe(),C.i), first=drG(pgMe(),C.i,1);
+    if(got) guess=`<p class="dr-st ok">✅ ${T("drGotIt",{w:esc(got.w.toUpperCase()),p:drPts(got)})}</p>`;
+    else if(mine) guess=`<p class="dr-st ng">❌ ${T("drGuessed",{w:esc(mine.w.toUpperCase())})} · ${T(ph===1?"drWait2":"drWaitEnd")}</p>`;
+    else if(F.k==="d1"||F.k==="d2") guess=`<p class="dr-st">${T("drWatch")}${first&&!first.ok?` <span class="muted">(${T("drFirstMiss",{w:esc(first.w.toUpperCase())})})</span>`:""}</p>`;
+    else guess=`<div class="dr-guess"><input id="drIn" class="search" maxlength="5" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${T("drPh")}"><button class="btn" data-act="drguess">${T("pgGuess")}</button></div><p class="muted sm-t">${T("drOnce")}</p>`; }
+  else if(amD&&(F.k==="g1"||F.k==="g2")){ const gs=drGuessers(C.i); guess=`<p class="dr-st">${T("drDealWait")} ${gs.map(u=>{ const r=drGot(u,C.i), m=drG(u,C.i,F.k==="g1"?1:2); return `${r?"✅":m?"❌":"⏳"} ${esc(pgNm(u))}`; }).join(" · ")}</p>`; }
+  return [["pgBoard",board],["pgDrTime",time],["pgStage",stage],["pgDrGuess",guess]];
+}
+function drRows(){ const pg=S.pg, P=pg.party, ids=Object.keys(P.players), sc=drScores(), tot=drTotal();
+  return ids.map(u=>{ let hits=0, first=0, deal=0; for(let i=0;i<tot;i++){ const r=drGot(u,i); if(r&&drDealer(i)!==u){ hits++; if(r.ph===1) first++; } if(drDealer(i)===u&&drAllGot(i)) deal++; }
+    return {u, score:sc[u]||0, hits, first, deal}; }).sort((a,b)=>b.score-a.score||b.hits-a.hits); }
+function drResults(rows){ const P=S.pg.party, tot=drTotal();
+  const stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgScore")}</th><th>${T("drHits")}</th><th>${T("drFirstHits")}</th><th>🎨</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.score}</td><td>${r.hits}</td><td>${r.first}</td><td>${r.deal}</td></tr>`).join("")}</table>`;
+  const extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${Array.from({length:Math.min(tot,(P.words||[]).length)},(_,i)=>{ const W=drWord(i), d=drDealer(i), got=drGuessers(i).filter(u=>drGot(u,i));
+    return `<div class="co-err"><span class="chip ${got.length?"done":"new"}">${i+1}</span><div style="flex:1"><b>${esc(W.w)}</b> <span class="muted sm-t">${esc(W.pos||"")}</span> · ${spMeaning(W)}<div class="muted sm-t">🎨 ${esc(pgNm(d))} · ${got.length?got.map(u=>esc(pgNm(u))).join(", "):T("pgNobody")}</div></div></div>`; }).join("")}</div>`;
+  return {stats, extra}; }
+
 /* ----- game 3: word bomb (BombParty style) ----- */
 const BM={lives:3, maxLives:4, intro:2500, fuse:15000, step:1000, min:4000, cap:15000, abc:"abcdefghilmnoprstuvwy"};
 /* tiny sound effects (WebAudio, unlocked on the first tap) */
@@ -4966,6 +5085,7 @@ function pgRows(){
   if(P.game==="bomb") return ids.map(u=>{ const p=u===pgMe()&&pg.B?pg.B:(pg.ps[u]||{}), words=p.words||[], alive=((P.lives||{})[u]||0)>0; return {u, words, bad:p.bad||[], n:words.length, alive, lives:(P.lives||{})[u]||0, outAt:(P.out||{})[u]||0, longest:words.reduce((a,w)=>w.length>a.length?w:a,""), score:words.length*5+(alive?20:0)}; }).sort((a,b)=>(b.alive-a.alive)||(b.outAt-a.outAt)||(b.n-a.n));
   if(P.game==="hunt"){ const st=huState(); return ids.map(u=>{ const r=huRec(u), n=Object.values(st.found).filter(f=>f.u===u).length, m=r.hm||0; return {u, n, miss:m, score:Math.max(0,n*10-m*3)}; }).sort((a,b)=>b.score-a.score||b.n-a.n); }
   if(P.game==="duel") return duRows();
+  if(P.game==="draw") return drRows();
   if(P.game==="quiz") return ids.map(u=>{ const p=u===pgMe()&&pg.Q?pg.Q:(pg.ps[u]||{}), gold=Math.round(p.gold||0), ok=p.ok||0, ng=p.ng||0; return {u, gold, ok, ng, best:p.best||0, acc:ok+ng?Math.round(ok/(ok+ng)*100):0, miss:p.miss||[], score:Math.min(120,Math.round(gold/25))}; }).sort((a,b)=>b.gold-a.gold||b.acc-a.acc);
   return ids.map(u=>{ const p=u===pgMe()&&pg.L?{words:pg.L.words,bad:pg.L.bad,pts:pg.L.pts,last:pg.L.last}:(pg.ps[u]||{}); return {u, words:p.words||[], bad:p.bad||[], score:p.pts||0, n:(p.words||[]).length}; }).sort((a,b)=>b.n-a.n||b.score-a.score);
 }
@@ -4983,7 +5103,7 @@ function pgFinish(){
 }
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
-  const gm=S.pg.party.game, lab=r=>gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
+  const gm=S.pg.party.game, lab=r=>gm==="draw"?T("pgPtsN",{n:r.score}):gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
   const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
@@ -4996,6 +5116,8 @@ function pgResults(){
   if(P.game==="spell"){
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgScore")}</th><th>${T("pgTries")}</th><th>${T("pgHits")}</th><th>${T("pgMisses")}</th><th>${T("wdRate")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.score}</td><td>${r.tries}</td><td>${r.hits}</td><td>${r.misses}</td><td>${r.acc}%</td></tr>`).join("")}</table>`;
     extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${(P.words||[]).map((W,k)=>{ const first=wdFirstT(P,k), fu=Object.keys(P.players).find(u=>wdRec(u,k).done==="win"&&wdRec(u,k).t===first); return `<div class="co-err"><span class="chip ${fu?"done":"new"}">${k+1}</span><div style="flex:1"><b>${esc(W.w)}</b> <span class="muted sm-t">${esc(W.pos||"")}</span> · ${spMeaning(W)}<div class="muted sm-t">${fu?T("wdFirst",{n:esc(pgNm(fu))}):T("pgNobody")}</div><div class="wd-emo">${Object.keys(P.players).map(u=>{ const r=wdRec(u,k); return `<div><small>${esc(pgNm(u))} ${r.done==="win"?r.g.length:"X"}/${WD.tries}</small><div>${wdEmoji(r,W.w)||"–"}</div></div>`; }).join("")}</div></div></div>`; }).join("")}</div>`;
+  } else if(P.game==="draw"){
+    ({stats, extra}=drResults(rows));
   } else if(P.game==="duel"){
     pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
     ({stats, extra}=duResults(rows));
@@ -5091,23 +5213,24 @@ function pgSections(){
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName"}[k])}${k==="duel"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[k])}${k==="duel"||k==="draw"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
     const joinBox=CLOUD.user?`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
     return [["pgMain",`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>${login}${joinBox}
-      ${card("duel","⚔️")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`]];
+      ${card("duel","⚔️")}${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
-  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName"}[P.game]||"pgDrop");
+  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[P.game]||"pgDrop");
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
       ${(setTimeout(()=>lookFetch(ids.filter(u=>u!==pgMe())),0),"")}<div class="pg-lobby">${ids.map(u=>`<div class="pg-pl${u===pgMe()?" me":""}">${lookArt(u===pgMe()?myLook():LOOKS[u],"pg-fig")}<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div></div>`).join("")}</div>
       <div class="muted">${P.game==="duel"?T("duWaiting",{n:ids.length}):T("pgWaiting",{n:ids.length})}</div>
-      ${host?(P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
+      ${P.game==="draw"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||1)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||1})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||1, t:(P.rr||1)*ids.length})}</span></div>`:""}
+      ${host?(P.game==="draw"&&ids.length<2?`<button class="btn" disabled>${T("drNeed2")}</button>`:P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
   if(P.state==="done") return [["pgMain",pgResults()]];
-  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections}[P.game]||dpSections)();
+  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections, draw:drSections}[P.game]||dpSections)();
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
@@ -5133,6 +5256,8 @@ function pgAct(a,t){
   if(a==="pgkey"){ if(!wdKey(t.dataset.k)) bmKey(t.dataset.k); return; }
   if(a==="qzans") return qzAnswer(+t.dataset.k);
   if(a==="dushield") return duShield();
+  if(a==="drguess") return drGuess();
+  if(a==="drrr"){ const pg=S.pg; if(pg&&pg.party&&pg.party.host===pgMe()&&pg.party.state==="wait") CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{rr:+t.dataset.k}).catch(()=>toast(T("syncFail"))); return; }
   if(a==="dusubmit") return duSubmit();
   if(a==="dupick") return duPick(+t.dataset.k);
   if(a==="dukeep") return duKeep();
@@ -7262,6 +7387,12 @@ Object.assign(STR.hi,{"duName": "⚔️ अक्षर द्वंद्व (1
 Object.assign(STR.es,{"duName": "⚔️ Duelo de letras (1 contra 1)", "duSub": "¡Dos jugadores se enfrentan! Caen letras del cielo; forma una palabra para atacar, y las más largas hacen más daño. Cuando te ataquen, toca 🛡 antes de que se vacíe la barra para bloquear el 40%; si lo tocas antes de tiempo, el escudo se enfría 2 segundos.", "duNeed2": "Esperando rival (1 contra 1)", "duWaiting": "Esperando rival… ({n}/2)", "duFull": "Este duelo ya tiene dos jugadores", "duIncoming": "¡{n} ataca con «{w}»! ¡Bloquea!", "duBlocked": "🛡 ¡Bloqueado! 40% menos daño", "duCalm": "Cuando te ataquen, toca 🛡 a la derecha", "duShield": "Bloquear", "duEarly": "Escudo demasiado pronto: 2 segundos de espera", "duCd": "Escudo enfriándose", "duAttack": "Atacar", "duAuto": "Si no la tocas, entra en tu mano cuando caiga la siguiente", "duKo": "Te han derribado… ¡espera el resultado!", "duMult": "Bonus de ataque {m}%", "duDealt": "Daño causado"});
 Object.assign(STR.ja,{"duName": "⚔️ 文字デュエル（1対1）", "duSub": "2人で対戦！落ちてくる文字で単語を作ると攻撃、長い単語ほど大ダメージ。相手の攻撃中にバーが消える前に🛡を押すとダメージ40%カット。早すぎると盾が2秒使えません。", "duNeed2": "相手を待っています（1対1）", "duWaiting": "相手を待っています…（{n}/2）", "duFull": "この対戦はもう2人そろっています", "duIncoming": "{n}が「{w}」で攻撃！防御して！", "duBlocked": "🛡 防いだ！ダメージ40%減", "duCalm": "相手が攻撃したら右の🛡を押そう", "duShield": "防御", "duEarly": "盾が早すぎ：2秒クールダウン", "duCd": "盾クールダウン中", "duAttack": "攻撃", "duAuto": "押さなくても次の文字が落ちると手札に入ります", "duKo": "倒されてしまった…結果を待とう！", "duMult": "攻撃ボーナス {m}%", "duDealt": "与えたダメージ"});
 Object.assign(STR.ko,{"duName": "⚔️ 글자 대결 (1대1)", "duSub": "두 명이 맞붙어요! 떨어지는 글자로 단어를 만들면 공격, 긴 단어일수록 큰 피해. 상대가 공격할 때 바가 끝나기 전에 🛡를 누르면 피해 40% 감소. 너무 일찍 누르면 방패가 2초 동안 쉬어요.", "duNeed2": "상대를 기다리는 중 (1대1)", "duWaiting": "상대를 기다리는 중… ({n}/2)", "duFull": "이 대결은 이미 두 명이에요", "duIncoming": "{n}이(가) “{w}”(으)로 공격! 막아요!", "duBlocked": "🛡 막았다! 피해 40% 감소", "duCalm": "상대가 공격하면 오른쪽 🛡를 누르세요", "duShield": "방어", "duEarly": "방패를 너무 일찍 들었어요: 2초 대기", "duCd": "방패 대기 중", "duAttack": "공격", "duAuto": "안 눌러도 다음 글자가 떨어지면 손패로 들어와요", "duKo": "쓰러졌어요… 결과를 기다려요!", "duMult": "공격 보너스 {m}%", "duDealt": "준 피해"});
+Object.assign(STR.zh,{"drName": "🌀 轉轉畫板猜單字", "drSub": "2–6 人輪流當莊。莊家拿到一個 5 個字母的單字，先寫在慢慢旋轉的畫板上，寫完大家只有一次機會猜；沒全猜中，就換到一直亂抖的畫板再寫一次。越早猜中分數越高，全部人都猜中莊家也有分！", "drNeed2": "至少要 2 個人才能開始", "drRounds": "要玩幾輪？（每輪每個人當一次莊）", "drRoundsN": "{n} 輪", "drRoundsSub": "共 {t} 題", "drYouDeal": "你是莊家！你的單字是", "drYouDealSub": "等一下用手指把這個字寫在會旋轉的畫板上，寫清楚一點！", "drTheyDeal": "🎨 {n} 是莊家", "drTheyDealSub": "看清楚他在旋轉的畫板上寫什麼，寫完才能猜，只有一次機會。", "drPhIntro": "準備", "drPhD1": "第一回合：旋轉畫板", "drPhG1": "猜！", "drPhD2": "第二回合：震動畫板", "drPhG2": "最後機會", "drPhRev": "答案", "drWriteIt": "用手指寫出：", "drWait": "大家在猜你寫的：", "drWatch": "👀 看清楚他寫什麼…寫完才能猜", "drPh": "5 個字母", "drOnce": "這一回合只能猜一次", "drNeed5": "請輸入 5 個英文字母", "drRight": "猜中了！+{p} 分", "drWrong1": "猜錯了…等他在震動畫板上再寫一次", "drWrong2": "猜錯了…", "drGotIt": "你猜中了「{w}」+{p} 分", "drGuessed": "你猜了「{w}」", "drWait2": "等第二回合再猜一次", "drWaitEnd": "等公布答案", "drFirstMiss": "第一回合猜了 {w}", "drDealWait": "大家正在猜：", "drHits": "猜中", "drFirstHits": "第一回合就猜中", "drNobody": "沒有人猜中"});
+Object.assign(STR.en,{"drName": "🌀 Spin & Shake", "drSub": "2–6 players take turns as the dealer. The dealer gets a 5-letter word and writes it on a slowly spinning board; then everyone has one guess. If not everyone gets it, the dealer writes it again on a shaking board. Faster right guesses score more, and if everyone gets it the dealer scores too!", "drNeed2": "You need at least 2 players", "drRounds": "How many rounds? (everyone deals once per round)", "drRoundsN": "{n} rounds", "drRoundsSub": "{t} words in total", "drYouDeal": "You're the dealer! Your word is", "drYouDealSub": "In a moment, write this word with your finger on the spinning board. Write clearly!", "drTheyDeal": "🎨 {n} is the dealer", "drTheyDealSub": "Watch what they write on the spinning board. You can guess once when they finish.", "drPhIntro": "Get ready", "drPhD1": "Round 1: spinning board", "drPhG1": "Guess!", "drPhD2": "Round 2: shaking board", "drPhG2": "Last chance", "drPhRev": "Answer", "drWriteIt": "Write with your finger:", "drWait": "Everyone is guessing your word:", "drWatch": "👀 Watch closely… you can guess when they finish", "drPh": "5 letters", "drOnce": "One guess this round", "drNeed5": "Type 5 letters", "drRight": "Correct! +{p}", "drWrong1": "Not quite… watch the shaking board next", "drWrong2": "Not quite…", "drGotIt": "You got “{w}” +{p}", "drGuessed": "You guessed “{w}”", "drWait2": "You get another try in round 2", "drWaitEnd": "Wait for the answer", "drFirstMiss": "round 1 guess: {w}", "drDealWait": "Guessing now:", "drHits": "Correct", "drFirstHits": "Got it in round 1", "drNobody": "Nobody got it"});
+Object.assign(STR.hi,{"drName": "🌀 घूमता बोर्ड", "drSub": "2–6 खिलाड़ी बारी-बारी से डीलर बनते हैं। डीलर 5 अक्षर का शब्द घूमते बोर्ड पर लिखता है, फिर सब एक बार अनुमान लगाते हैं; न मिले तो हिलते बोर्ड पर दोबारा।", "drNeed2": "कम से कम 2 खिलाड़ी चाहिए", "drRounds": "कितने राउंड?", "drRoundsN": "{n} राउंड", "drRoundsSub": "कुल {t} शब्द", "drYouDeal": "आप डीलर हैं! आपका शब्द", "drYouDealSub": "इसे घूमते बोर्ड पर उंगली से साफ़ लिखें!", "drTheyDeal": "🎨 {n} डीलर है", "drTheyDealSub": "ध्यान से देखें; लिखना ख़त्म होने पर एक बार अनुमान लगा सकते हैं।", "drPhIntro": "तैयार", "drPhD1": "राउंड 1: घूमता बोर्ड", "drPhG1": "अनुमान!", "drPhD2": "राउंड 2: हिलता बोर्ड", "drPhG2": "आख़िरी मौका", "drPhRev": "जवाब", "drWriteIt": "उंगली से लिखें:", "drWait": "सब अनुमान लगा रहे हैं:", "drWatch": "👀 ध्यान से देखें…", "drPh": "5 अक्षर", "drOnce": "इस राउंड में एक ही अनुमान", "drNeed5": "5 अक्षर लिखें", "drRight": "सही! +{p}", "drWrong1": "ग़लत… अगला हिलता बोर्ड देखें", "drWrong2": "ग़लत…", "drGotIt": "आपने “{w}” पहचाना +{p}", "drGuessed": "आपका अनुमान “{w}”", "drWait2": "राउंड 2 में फिर कोशिश", "drWaitEnd": "जवाब का इंतज़ार", "drFirstMiss": "राउंड 1: {w}", "drDealWait": "अनुमान:", "drHits": "सही", "drFirstHits": "राउंड 1 में सही", "drNobody": "किसी ने नहीं पहचाना"});
+Object.assign(STR.es,{"drName": "🌀 Gira y tiembla", "drSub": "De 2 a 6 jugadores se turnan como repartidor. El repartidor escribe una palabra de 5 letras en un tablero que gira; luego todos tienen un intento. Si no aciertan todos, la escribe otra vez en un tablero que tiembla. ¡Acertar antes da más puntos!", "drNeed2": "Se necesitan al menos 2 jugadores", "drRounds": "¿Cuántas rondas?", "drRoundsN": "{n} rondas", "drRoundsSub": "{t} palabras en total", "drYouDeal": "¡Te toca! Tu palabra es", "drYouDealSub": "Escríbela con el dedo en el tablero que gira. ¡Que se entienda!", "drTheyDeal": "🎨 Escribe {n}", "drTheyDealSub": "Mira bien lo que escribe; podrás adivinar una vez cuando termine.", "drPhIntro": "Prepárate", "drPhD1": "Ronda 1: tablero que gira", "drPhG1": "¡Adivina!", "drPhD2": "Ronda 2: tablero que tiembla", "drPhG2": "Última oportunidad", "drPhRev": "Respuesta", "drWriteIt": "Escribe con el dedo:", "drWait": "Todos adivinan tu palabra:", "drWatch": "👀 Mira bien… podrás adivinar al final", "drPh": "5 letras", "drOnce": "Un intento en esta ronda", "drNeed5": "Escribe 5 letras", "drRight": "¡Correcto! +{p}", "drWrong1": "No… mira el tablero que tiembla", "drWrong2": "No…", "drGotIt": "Acertaste «{w}» +{p}", "drGuessed": "Dijiste «{w}»", "drWait2": "Otro intento en la ronda 2", "drWaitEnd": "Espera la respuesta", "drFirstMiss": "ronda 1: {w}", "drDealWait": "Adivinando:", "drHits": "Aciertos", "drFirstHits": "Acertó en la ronda 1", "drNobody": "Nadie acertó"});
+Object.assign(STR.ja,{"drName": "🌀 回転ボードで単語当て", "drSub": "2〜6人で親を交代。親は5文字の単語をゆっくり回るボードに書き、書き終わったら全員1回だけ回答。全員当たらなければ、揺れるボードにもう一度書きます。早く当てるほど高得点、全員正解なら親にも得点！", "drNeed2": "2人以上で遊べます", "drRounds": "何ラウンド？", "drRoundsN": "{n}ラウンド", "drRoundsSub": "全{t}問", "drYouDeal": "あなたが親！単語は", "drYouDealSub": "回るボードに指でこの単語をはっきり書こう！", "drTheyDeal": "🎨 親は{n}", "drTheyDealSub": "よく見て、書き終わったら1回だけ回答できます。", "drPhIntro": "準備", "drPhD1": "第1ラウンド：回転ボード", "drPhG1": "回答！", "drPhD2": "第2ラウンド：揺れるボード", "drPhG2": "ラストチャンス", "drPhRev": "答え", "drWriteIt": "指で書こう：", "drWait": "みんなが回答中：", "drWatch": "👀 よく見て…書き終わったら回答", "drPh": "5文字", "drOnce": "このラウンドは1回だけ", "drNeed5": "5文字の英字を入力", "drRight": "正解！+{p}", "drWrong1": "はずれ…揺れるボードを見よう", "drWrong2": "はずれ…", "drGotIt": "「{w}」正解 +{p}", "drGuessed": "回答「{w}」", "drWait2": "第2ラウンドでもう一度", "drWaitEnd": "答えを待とう", "drFirstMiss": "第1ラウンド：{w}", "drDealWait": "回答中：", "drHits": "正解", "drFirstHits": "第1ラウンドで正解", "drNobody": "誰も当たらなかった"});
+Object.assign(STR.ko,{"drName": "🌀 빙글빙글 보드 단어 맞히기", "drSub": "2~6명이 돌아가며 출제자가 돼요. 출제자는 5글자 단어를 천천히 도는 보드에 쓰고, 다 쓰면 모두 한 번씩 맞혀요. 다 못 맞히면 흔들리는 보드에 다시 써요. 빨리 맞힐수록 높은 점수, 모두 맞히면 출제자도 점수!", "drNeed2": "2명 이상이어야 해요", "drRounds": "몇 라운드?", "drRoundsN": "{n}라운드", "drRoundsSub": "총 {t}문제", "drYouDeal": "출제자예요! 단어는", "drYouDealSub": "도는 보드에 손가락으로 또박또박 써 주세요!", "drTheyDeal": "🎨 출제자: {n}", "drTheyDealSub": "잘 보세요. 다 쓰면 한 번만 맞힐 수 있어요.", "drPhIntro": "준비", "drPhD1": "1라운드: 도는 보드", "drPhG1": "맞혀요!", "drPhD2": "2라운드: 흔들리는 보드", "drPhG2": "마지막 기회", "drPhRev": "정답", "drWriteIt": "손가락으로 쓰세요:", "drWait": "모두 맞히는 중:", "drWatch": "👀 잘 보세요… 다 쓰면 맞힐 수 있어요", "drPh": "5글자", "drOnce": "이번 라운드는 한 번만", "drNeed5": "영어 5글자를 입력하세요", "drRight": "정답! +{p}", "drWrong1": "틀렸어요… 흔들리는 보드를 보세요", "drWrong2": "틀렸어요…", "drGotIt": "“{w}” 정답 +{p}", "drGuessed": "“{w}”(이)라고 답함", "drWait2": "2라운드에서 한 번 더", "drWaitEnd": "정답을 기다려요", "drFirstMiss": "1라운드: {w}", "drDealWait": "맞히는 중:", "drHits": "정답", "drFirstHits": "1라운드에 정답", "drNobody": "아무도 못 맞혔어요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
