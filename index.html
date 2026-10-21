@@ -1150,7 +1150,8 @@ body.vp-lock{touch-action:pan-x pan-y}
 .du-atk{flex:1}
 .du-ko{text-align:center;font-weight:800;padding:10px}
 @media (prefers-reduced-motion: reduce){.du-arena.hit,.du-warn,.du-shield.ready,.du-num,.du-slash,.du-boom{animation:none!important}}
-.dr-wrap{--drs:min(250px,calc(100vw - 120px));position:relative;width:calc(var(--drs) * 1.42);height:calc(var(--drs) * 1.42);max-width:100%;margin:0 auto;display:grid;place-items:center}
+.dr-clip{overflow:hidden;margin:0 -16px}
+.dr-wrap{--drs:min(330px,calc(100vw - 70px),calc(100vh - 330px));position:relative;width:100%;height:calc(var(--drs) * 1.22);margin:0 auto;display:grid;place-items:center}
 .dr-cv{width:var(--drs);height:var(--drs);border-radius:18px;background:#FDF6EA;color:#1B2421;box-shadow:0 6px 18px rgba(0,0,0,.35),inset 0 0 0 3px #E6D9BF;touch-action:none;will-change:transform}
 .dr-cv.mine{box-shadow:0 0 0 3px var(--accent),0 6px 18px rgba(0,0,0,.35);cursor:crosshair}
 .dr-hint{text-align:center;margin:4px 0;font-size:14px}.dr-hint b{letter-spacing:.15em;color:var(--gorse)}
@@ -1164,6 +1165,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 #advMenu.closing .adv-menu.pm-right{animation-name:pmOut}
 @keyframes pmOut{to{opacity:0;transform:translateY(12px) scale(.6)}}
 .adv-menu.pm-right::after{left:auto;right:calc(10% - 7px);margin-left:0}
+.pg-back{display:flex;align-items:center;gap:10px;justify-content:space-between;border-color:var(--accent)}
 </style>
 
 </head>
@@ -3463,7 +3465,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.185";
+const APP_VERSION="2026.10.186";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4534,7 +4536,7 @@ async function pgJoin(code){
   const fsM=pgFs(); S.pgBusy=T("coJoining"); pgRender();
   try{
     const s=await fsM.getDoc(pgRef(code)); const d=s.exists()?s.data():null;
-    if(!d||d.state==="done"||Date.now()-(d.created||0)>3600e3){ S.pgBusy=null; pgRender(); return toast(T("pgNoRoom")); }
+    if(!d||d.state==="done"||Date.now()-(d.created||0)>3600e3){ S.pgBusy=null; pgLastClear(); pgRender(); return toast(T("pgNoRoom")); }
     const inRoom=d.players&&d.players[pgMe()];
     if(!inRoom){
       if(d.state!=="wait"){ S.pgBusy=null; pgRender(); return toast(T("pgStarted")); }
@@ -4547,7 +4549,7 @@ async function pgJoin(code){
 }
 function pgStop(){ if(S.pg){ (S.pg.unsubs||[]).forEach(f=>{ try{ f(); }catch(e){} }); } clearInterval(S.pgTimer); S.pgTimer=null; }
 function pgListen(code){
-  pgStop(); const fsM=pgFs();
+  pgStop(); const fsM=pgFs(); try{ localStorage.setItem("che-pro-pgroom",JSON.stringify({code, at:Date.now()})); }catch(e){}
   S.pg={code, party:null, ps:{}, subbed:{}, unsubs:[], L:null};
   const me=S.pg;
   me.unsubs.push(fsM.onSnapshot(pgRef(code), snap=>{
@@ -4850,7 +4852,7 @@ function duResults(rows){
   return {stats, extra}; }
 
 /* ----- game 7: spin & shake (2–6 players) — the dealer writes a 5-letter word on a turning board, then on a shaking one; the others guess ----- */
-const DR={intro:3500, draw:10000, guess1:10000, guess2:15000, reveal:5000, spin:14000, maxPts:1500};
+const DR={intro:3500, draw:10000, guess1:10000, guess2:15000, reveal:5000, spin:8000, maxPts:1500};
 function drPlan(ts){ const d1=ts+DR.intro, g1=d1+DR.draw, d2=g1+DR.guess1, g2=d2+DR.draw, end=g2+DR.guess2; return {ts,d1,g1,d2,g2,end}; }
 function drCur(){ const P=S.pg.party; return P.cur||{i:0, ts:P.start}; }
 function drPhase(now){ const C=drCur(), L=drPlan(C.ts), end=C.end||L.end;
@@ -4883,7 +4885,7 @@ function drPush(now){ const pg=S.pg; if(now){ clearTimeout(pg.drT); pg.drT=null;
 // the board turns (round 1) or shakes (round 2); the same motion is used to map the dealer's finger back onto the board
 function drXf(k,now){ const L=drPhase(now).L;
   if(k==="d1"||k==="g1") return {a:((now-L.d1)/DR.spin)*360, x:0, y:0};
-  if(k==="d2"||k==="g2"){ const t=now-L.d2; return {a:5*Math.sin(t/170), x:11*Math.sin(t/97)+6*Math.sin(t/41), y:11*Math.cos(t/113)+6*Math.sin(t/53)}; }
+  if(k==="d2"||k==="g2"){ const t=now-L.d2; return {a:9*Math.sin(t/150)+3*Math.sin(t/47), x:22*Math.sin(t/83)+12*Math.sin(t/37), y:22*Math.cos(t/97)+12*Math.sin(t/43)}; }
   return {a:0,x:0,y:0}; }
 function drBind(cv){ if(cv.dataset.b) return; cv.dataset.b="1"; let cur=null;
   const loc=e=>{ const r=cv.parentElement.getBoundingClientRect(), now=Date.now(), X=drXf(drPhase(now).k,now), q=-X.a*Math.PI/180;
@@ -4930,7 +4932,7 @@ function drSections(){
   if(F.k==="intro") stage=amD?`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drYouDeal")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p><p class="muted sm-t">${T("drYouDealSub")}</p></div>`
     :`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drTheyDeal",{n:esc(pgNm(d))})}</div><p class="muted sm-t">${T("drTheyDealSub")}</p></div>`;
   else { const ph=drPhNum(F.k)||(drKeyNow().endsWith("-2")?2:1);
-    stage=`${amD&&F.k!=="rev"?`<p class="dr-hint">${T(F.k==="d1"||F.k==="d2"?"drWriteIt":"drWait")} <b>${esc(String(W.w).toUpperCase())}</b></p>`:""}<div class="dr-wrap${ph===2?" shake":" spin"}"><canvas id="drCv" class="dr-cv${amD&&(F.k==="d1"||F.k==="d2")?" mine":""}"></canvas></div>`; }
+    stage=`${amD&&F.k!=="rev"?`<p class="dr-hint">${T(F.k==="d1"||F.k==="d2"?"drWriteIt":"drWait")} <b>${esc(String(W.w).toUpperCase())}</b></p>`:""}<div class="dr-clip"><div class="dr-wrap${ph===2?" shake":" spin"}"><canvas id="drCv" class="dr-cv${amD&&(F.k==="d1"||F.k==="d2")?" mine":""}"></canvas></div></div>`; }
   let guess="";
   if(F.k==="rev"){ const got=drGuessers(C.i).filter(u=>drGot(u,C.i)), dp=drDealerPts(C.i);
     guess=`<div class="dr-rev"><div class="eyebrow">${T("wdAnswer")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p>
@@ -5140,8 +5142,10 @@ function pgRows(){
   if(P.game==="quiz") return ids.map(u=>{ const p=u===pgMe()&&pg.Q?pg.Q:(pg.ps[u]||{}), gold=Math.round(p.gold||0), ok=p.ok||0, ng=p.ng||0; return {u, gold, ok, ng, best:p.best||0, acc:ok+ng?Math.round(ok/(ok+ng)*100):0, miss:p.miss||[], score:Math.min(120,Math.round(gold/25))}; }).sort((a,b)=>b.gold-a.gold||b.acc-a.acc);
   return ids.map(u=>{ const p=u===pgMe()&&pg.L?{words:pg.L.words,bad:pg.L.bad,pts:pg.L.pts,last:pg.L.last}:(pg.ps[u]||{}); return {u, words:p.words||[], bad:p.bad||[], score:p.pts||0, n:(p.words||[]).length}; }).sort((a,b)=>b.n-a.n||b.score-a.score);
 }
+function pgLastRoom(){ try{ const o=JSON.parse(localStorage.getItem("che-pro-pgroom")||"null"); return o&&/^\d{4}$/.test(o.code)&&Date.now()-o.at<3600e3?o.code:null; }catch(e){ return null; } }
+function pgLastClear(){ try{ localStorage.removeItem("che-pro-pgroom"); }catch(e){} }
 function pgFinish(){
-  const pg=S.pg; if(!pg||pg.rewarded) return; const P=pg.party; pg.rewarded=1;
+  const pg=S.pg; if(!pg||pg.rewarded) return; const P=pg.party; pg.rewarded=1; if(!pg.local) pgLastClear();
   if(pg.local){ pg.reward={none:true, bot:true}; return; }
   const g=game(); g.partyDone=g.partyDone||{}; const key=pg.code+"-"+P.created; if(g.partyDone[key]) return;
   trackPlay(P.game); if(Object.keys(P.players).length<2) { g.partyDone[key]=1; saveGame(); }
@@ -5266,7 +5270,9 @@ function pgSections(){
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
     const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[k])}${k==="duel"||k==="draw"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
-    const joinBox=CLOUD.user?`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
+    const last=CLOUD.user&&pgLastRoom();
+    const back=last?`<div class="card pg-back"><div><b>${T("pgBackT",{c:esc(last)})}</b><p class="muted sm-t" style="margin:2px 0 0">${T("pgBackSub")}</p></div><button class="btn sm" data-act="pgrejoin" data-k="${esc(last)}">${T("pgBackBtn")}</button></div>`:"";
+    const joinBox=CLOUD.user?back+`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
     return [["pgMain",`${S.playMode==="duo"?"":`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>`}${login}${joinBox}
       ${S.playMode==="duo"?card("duel","⚔️"):`${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`}`]];
   }
@@ -5301,6 +5307,7 @@ function pgAct(a,t){
   sfxUnlock();
   if(a==="pgcreate") return pgCreate(t.dataset.k);
   if(a==="pgbot") return pgBotRoom(t.dataset.k);
+  if(a==="pgrejoin") return pgJoin(t.dataset.k);
   if(a==="pgjoin") return pgJoin(($("#pgCode")||{}).value);
   if(a==="pgstart") return pgStartGame();
   if(a==="pgleave"){ S.pgQuitAsk=false; return pgLeave(); }
@@ -5354,7 +5361,7 @@ Object.assign(STR.zh,{"ieWeek": "今日試題：{t}", "ieReset": "{h} 小時 {m}
 
 Object.assign(STR.zh,{dBadge:"徽章預覽",dBadgeBand:"分數",dBadgeStars:"星星",dBadgeAdd:"加入我的徽章",dBadgeClr:"清空徽章",dIeDay:"重置今日 IELTS"});
 for(const L of ["en","hi","es","ja","ko"]) Object.assign(STR[L],{dBadge:"Badge preview",dBadgeBand:"Band",dBadgeStars:"Stars",dBadgeAdd:"Add to my badges",dBadgeClr:"Clear badges",dIeDay:"Reset today's IELTS"});
-Object.assign(STR.zh,{"cmParty": "多人遊戲", "pgTitle": "多人單字派對", "pgSub": "2–6 人一起玩！建立房間後，把 4 位數房號分享給朋友。", "pgSpell": "🔤 拼字搶答", "pgSpellSub": "每題只給兩個字母和中文意思，最先拼出完整單字的人得分。共 10 題，越快答對分數越高。", "pgDrop": "🌧 字母雨", "pgDropSub": "每 3 秒頭上會掉下一個字母，可以留著或傳給隊友。拼出單字就送出，{s} 秒內沒有拼出正確單字就出局。", "pgCreate": "建立房間", "pgJoin": "加入", "pgCodePh": "輸入房號", "pgNeedLogin": "多人遊戲需要先登入 Google。", "pgWaiting": "等待玩家加入…（{n}/6）", "pgStart": "開始遊戲", "pgStartSolo": "先一個人練習", "pgHostStarts": "等房主開始遊戲…", "pgLeave": "離開", "pgQuitQ": "確定要離開這場遊戲嗎？", "pgFull": "房間已滿（最多 6 人）", "pgNoRoom": "找不到這個房間", "pgStarted": "遊戲已經開始了，下一場再加入吧", "pgGetReady": "準備開始！", "pgRound": "第 {i} / {n} 題", "pgGuessPh": "輸入你猜的單字", "pgGuess": "猜！", "pgRight": "答對了！+{p} 分", "pgLate": "答對了，可惜慢了一步", "pgWrong": "不對，再試試看", "pgWonBy": "{n} 猜中了！", "pgNobody": "時間到，沒有人猜到", "pgLeft": "剩 {s} 秒", "pgHintOn": "時間過半，多給你一個字母", "pgYourTries": "你猜過：", "pgScore": "分數", "pgTries": "猜了", "pgHits": "猜中", "pgMisses": "猜錯", "pgAcc": "準確率", "pgPodium": "🏆 頒獎台", "pgStats": "全部統計", "pgWordsReview": "這場的單字", "pgAgain": "回大廳", "pgRewardNone": "只有一個人玩沒有獎勵，找朋友一起玩吧！", "pgYou": "你", "pgPlayers": "玩家", "pgPtsN": "{n} 分", "pgLife": "出局倒數 {s} 秒", "pgTotal": "剩餘 {s} 秒", "pgKeep": "留著", "pgPassTo": "傳給 {n}", "pgHandFull": "手牌滿了", "pgDropped": "手牌滿了，字母掉走了", "pgGift": "{n} 傳給你「{l}」", "pgSent": "已傳給 {n}", "pgSubmit": "送出", "pgClear": "清除", "pgDiscard": "丟掉", "pgTooShort": "至少要 3 個字母", "pgUsed": "這個字你已經用過了", "pgValid": "好字！+{p} 分", "pgInvalid": "字典裡沒有這個字", "pgOut": "你出局了！可以繼續看隊友玩", "pgOutTag": "出局", "pgWordsN": "{n} 個字", "pgValidN": "拼對", "pgBadN": "拼錯", "pgAllWords": "大家拼出的單字", "pgWeird": "奇怪的錯字", "pgNoWeird": "沒有人拼錯，太強了！", "pgLookup": "查字典", "pgTapLetters": "點字母組成單字", "pgNextDrop": "下一個字母快掉下來了…"});
+Object.assign(STR.zh,{"cmParty": "多人遊戲", "pgTitle": "多人單字派對", "pgSub": "2–6 人一起玩！建立房間後，把 4 位數房號分享給朋友。", "pgSpell": "🔤 拼字搶答", "pgSpellSub": "每題只給兩個字母和中文意思，最先拼出完整單字的人得分。共 10 題，越快答對分數越高。", "pgDrop": "🌧 字母雨", "pgDropSub": "每 3 秒頭上會掉下一個字母，可以留著或傳給隊友。拼出單字就送出，{s} 秒內沒有拼出正確單字就出局。", "pgCreate": "建立房間", "pgJoin": "加入", "pgCodePh": "輸入房號", "pgNeedLogin": "多人遊戲需要先登入 Google。", "pgWaiting": "等待玩家加入…（{n}/6）", "pgStart": "開始遊戲", "pgStartSolo": "先一個人練習", "pgHostStarts": "等房主開始遊戲…", "pgLeave": "離開", "pgQuitQ": "確定要離開這場遊戲嗎？之後 1 小時內可以從遊戲頁的「回到剛剛的房間」，或輸入同一個房號回來。", "pgFull": "房間已滿（最多 6 人）", "pgNoRoom": "找不到這個房間", "pgStarted": "遊戲已經開始了，下一場再加入吧", "pgGetReady": "準備開始！", "pgRound": "第 {i} / {n} 題", "pgGuessPh": "輸入你猜的單字", "pgGuess": "猜！", "pgRight": "答對了！+{p} 分", "pgLate": "答對了，可惜慢了一步", "pgWrong": "不對，再試試看", "pgWonBy": "{n} 猜中了！", "pgNobody": "時間到，沒有人猜到", "pgLeft": "剩 {s} 秒", "pgHintOn": "時間過半，多給你一個字母", "pgYourTries": "你猜過：", "pgScore": "分數", "pgTries": "猜了", "pgHits": "猜中", "pgMisses": "猜錯", "pgAcc": "準確率", "pgPodium": "🏆 頒獎台", "pgStats": "全部統計", "pgWordsReview": "這場的單字", "pgAgain": "回大廳", "pgRewardNone": "只有一個人玩沒有獎勵，找朋友一起玩吧！", "pgYou": "你", "pgPlayers": "玩家", "pgPtsN": "{n} 分", "pgLife": "出局倒數 {s} 秒", "pgTotal": "剩餘 {s} 秒", "pgKeep": "留著", "pgPassTo": "傳給 {n}", "pgHandFull": "手牌滿了", "pgDropped": "手牌滿了，字母掉走了", "pgGift": "{n} 傳給你「{l}」", "pgSent": "已傳給 {n}", "pgSubmit": "送出", "pgClear": "清除", "pgDiscard": "丟掉", "pgTooShort": "至少要 3 個字母", "pgUsed": "這個字你已經用過了", "pgValid": "好字！+{p} 分", "pgInvalid": "字典裡沒有這個字", "pgOut": "你出局了！可以繼續看隊友玩", "pgOutTag": "出局", "pgWordsN": "{n} 個字", "pgValidN": "拼對", "pgBadN": "拼錯", "pgAllWords": "大家拼出的單字", "pgWeird": "奇怪的錯字", "pgNoWeird": "沒有人拼錯，太強了！", "pgLookup": "查字典", "pgTapLetters": "點字母組成單字", "pgNextDrop": "下一個字母快掉下來了…"});
 Object.assign(STR.en,{"cmParty": "Party games", "pgTitle": "Word party", "pgSub": "Play with 2–6 people! Create a room and share the 4-digit code with friends.", "pgSpell": "🔤 Spelling race", "pgSpellSub": "Each round shows only two letters and the meaning. The first to spell the whole word scores. 10 rounds; faster answers score more.", "pgDrop": "🌧 Letter rain", "pgDropSub": "Every 3 seconds a letter drops above your head. Keep it or pass it to a teammate. Spell a word and send it; if you don't make a real word within {s} seconds, you're out.", "pgCreate": "Create room", "pgJoin": "Join", "pgCodePh": "Room code", "pgNeedLogin": "Sign in with Google to play with others.", "pgWaiting": "Waiting for players… ({n}/6)", "pgStart": "Start game", "pgStartSolo": "Practise alone first", "pgHostStarts": "Waiting for the host to start…", "pgLeave": "Leave", "pgQuitQ": "Leave this game?", "pgFull": "The room is full (6 max)", "pgNoRoom": "Room not found", "pgStarted": "The game has already started. Join the next one!", "pgGetReady": "Get ready!", "pgRound": "Round {i} / {n}", "pgGuessPh": "Type your guess", "pgGuess": "Guess!", "pgRight": "Correct! +{p} points", "pgLate": "Correct, but someone was faster", "pgWrong": "Not quite, try again", "pgWonBy": "{n} got it!", "pgNobody": "Time's up, nobody got it", "pgLeft": "{s}s left", "pgHintOn": "Half time: here's one more letter", "pgYourTries": "Your guesses:", "pgScore": "Score", "pgTries": "Guesses", "pgHits": "Correct", "pgMisses": "Wrong", "pgAcc": "Accuracy", "pgPodium": "🏆 Podium", "pgStats": "Full stats", "pgWordsReview": "Words in this game", "pgAgain": "Back to lobby", "pgRewardNone": "No rewards for solo practice. Invite friends!", "pgYou": "You", "pgPlayers": "Player", "pgPtsN": "{n} pts", "pgLife": "Out in {s}s", "pgTotal": "{s}s left", "pgKeep": "Keep", "pgPassTo": "Pass to {n}", "pgHandFull": "Your hand is full", "pgDropped": "Hand full, the letter fell away", "pgGift": "{n} passed you “{l}”", "pgSent": "Passed to {n}", "pgSubmit": "Send", "pgClear": "Clear", "pgDiscard": "Discard", "pgTooShort": "At least 3 letters", "pgUsed": "You've already used this word", "pgValid": "Nice word! +{p} points", "pgInvalid": "That word isn't in the dictionary", "pgOut": "You're out! Keep watching your team", "pgOutTag": "Out", "pgWordsN": "{n} words", "pgValidN": "Valid", "pgBadN": "Wrong", "pgAllWords": "Everyone's words", "pgWeird": "Strange made-up words", "pgNoWeird": "Nobody misspelled anything. Amazing!", "pgLookup": "Look it up", "pgTapLetters": "Tap letters to build a word", "pgNextDrop": "The next letter is about to drop…"});
 Object.assign(STR.hi,{"cmParty": "पार्टी गेम", "pgTitle": "शब्द पार्टी", "pgSub": "2–6 लोगों के साथ खेलें! कमरा बनाएँ और 4 अंकों का कोड दोस्तों को भेजें।", "pgSpell": "🔤 स्पेलिंग रेस", "pgSpellSub": "हर राउंड में सिर्फ़ दो अक्षर और अर्थ दिखते हैं। पूरा शब्द सबसे पहले लिखने वाले को अंक मिलते हैं। 10 राउंड; जल्दी जवाब = ज़्यादा अंक।", "pgDrop": "🌧 अक्षरों की बारिश", "pgDropSub": "हर 3 सेकंड में आपके सिर पर एक अक्षर गिरता है। उसे रखें या साथी को दें। शब्द बनाकर भेजें; {s} सेकंड में सही शब्द नहीं बना तो आप बाहर।", "pgCreate": "कमरा बनाएँ", "pgJoin": "जुड़ें", "pgCodePh": "कमरे का कोड", "pgNeedLogin": "दूसरों के साथ खेलने के लिए Google से साइन इन करें।", "pgWaiting": "खिलाड़ियों का इंतज़ार… ({n}/6)", "pgStart": "खेल शुरू करें", "pgStartSolo": "पहले अकेले अभ्यास करें", "pgHostStarts": "होस्ट के शुरू करने का इंतज़ार…", "pgLeave": "छोड़ें", "pgQuitQ": "यह खेल छोड़ना है?", "pgFull": "कमरा भर गया (अधिकतम 6)", "pgNoRoom": "कमरा नहीं मिला", "pgStarted": "खेल शुरू हो चुका है। अगली बार जुड़ें!", "pgGetReady": "तैयार हो जाइए!", "pgRound": "राउंड {i} / {n}", "pgGuessPh": "अपना अनुमान लिखें", "pgGuess": "अनुमान!", "pgRight": "सही! +{p} अंक", "pgLate": "सही, लेकिन कोई और तेज़ था", "pgWrong": "सही नहीं, फिर कोशिश करें", "pgWonBy": "{n} ने सही बताया!", "pgNobody": "समय ख़त्म, किसी ने नहीं बताया", "pgLeft": "{s} से. बाकी", "pgHintOn": "आधा समय: एक और अक्षर", "pgYourTries": "आपके अनुमान:", "pgScore": "अंक", "pgTries": "अनुमान", "pgHits": "सही", "pgMisses": "ग़लत", "pgAcc": "सटीकता", "pgPodium": "🏆 विजेता मंच", "pgStats": "पूरे आँकड़े", "pgWordsReview": "इस खेल के शब्द", "pgAgain": "लॉबी में वापस", "pgRewardNone": "अकेले अभ्यास पर इनाम नहीं। दोस्तों को बुलाएँ!", "pgYou": "आप", "pgPlayers": "खिलाड़ी", "pgPtsN": "{n} अंक", "pgLife": "{s} से. में बाहर", "pgTotal": "{s} से. बाकी", "pgKeep": "रखें", "pgPassTo": "{n} को दें", "pgHandFull": "हाथ भर गया", "pgDropped": "हाथ भर गया, अक्षर गिर गया", "pgGift": "{n} ने आपको “{l}” दिया", "pgSent": "{n} को दिया", "pgSubmit": "भेजें", "pgClear": "साफ़ करें", "pgDiscard": "फेंकें", "pgTooShort": "कम से कम 3 अक्षर", "pgUsed": "यह शब्द आप पहले ही बना चुके हैं", "pgValid": "बढ़िया शब्द! +{p} अंक", "pgInvalid": "यह शब्द शब्दकोश में नहीं है", "pgOut": "आप बाहर! अपनी टीम को देखते रहें", "pgOutTag": "बाहर", "pgWordsN": "{n} शब्द", "pgValidN": "सही", "pgBadN": "ग़लत", "pgAllWords": "सबके शब्द", "pgWeird": "अजीब बनाए गए शब्द", "pgNoWeird": "किसी ने ग़लती नहीं की, कमाल!", "pgLookup": "शब्दकोश में देखें", "pgTapLetters": "शब्द बनाने के लिए अक्षर दबाएँ", "pgNextDrop": "अगला अक्षर गिरने वाला है…"});
 Object.assign(STR.es,{"cmParty": "Juegos en grupo", "pgTitle": "Fiesta de palabras", "pgSub": "¡Juega con 2–6 personas! Crea una sala y comparte el código de 4 cifras con tus amigos.", "pgSpell": "🔤 Carrera de deletreo", "pgSpellSub": "En cada ronda solo ves dos letras y el significado. Quien escriba primero la palabra completa gana puntos. 10 rondas; cuanto antes, más puntos.", "pgDrop": "🌧 Lluvia de letras", "pgDropSub": "Cada 3 segundos cae una letra sobre tu cabeza. Quédatela o pásasela a un compañero. Forma una palabra y envíala; si no formas una palabra real en {s} segundos, quedas fuera.", "pgCreate": "Crear sala", "pgJoin": "Unirse", "pgCodePh": "Código de sala", "pgNeedLogin": "Inicia sesión con Google para jugar con otros.", "pgWaiting": "Esperando jugadores… ({n}/6)", "pgStart": "Empezar", "pgStartSolo": "Practicar solo primero", "pgHostStarts": "Esperando a que el anfitrión empiece…", "pgLeave": "Salir", "pgQuitQ": "¿Salir de esta partida?", "pgFull": "La sala está llena (máx. 6)", "pgNoRoom": "No se encontró la sala", "pgStarted": "La partida ya empezó. ¡Únete a la próxima!", "pgGetReady": "¡Prepárate!", "pgRound": "Ronda {i} / {n}", "pgGuessPh": "Escribe tu respuesta", "pgGuess": "¡Probar!", "pgRight": "¡Correcto! +{p} puntos", "pgLate": "Correcto, pero alguien fue más rápido", "pgWrong": "No, inténtalo otra vez", "pgWonBy": "¡{n} la acertó!", "pgNobody": "Se acabó el tiempo, nadie la acertó", "pgLeft": "Quedan {s} s", "pgHintOn": "Mitad del tiempo: una letra más", "pgYourTries": "Tus intentos:", "pgScore": "Puntos", "pgTries": "Intentos", "pgHits": "Aciertos", "pgMisses": "Fallos", "pgAcc": "Precisión", "pgPodium": "🏆 Podio", "pgStats": "Estadísticas", "pgWordsReview": "Palabras de esta partida", "pgAgain": "Volver al lobby", "pgRewardNone": "Practicar solo no da premios. ¡Invita a tus amigos!", "pgYou": "Tú", "pgPlayers": "Jugador", "pgPtsN": "{n} pts", "pgLife": "Fuera en {s} s", "pgTotal": "Quedan {s} s", "pgKeep": "Quedármela", "pgPassTo": "Pasar a {n}", "pgHandFull": "Tienes la mano llena", "pgDropped": "Mano llena, la letra se cayó", "pgGift": "{n} te pasó «{l}»", "pgSent": "Pasada a {n}", "pgSubmit": "Enviar", "pgClear": "Borrar", "pgDiscard": "Descartar", "pgTooShort": "Mínimo 3 letras", "pgUsed": "Ya usaste esta palabra", "pgValid": "¡Buena palabra! +{p} puntos", "pgInvalid": "Esa palabra no está en el diccionario", "pgOut": "¡Quedaste fuera! Sigue mirando a tu equipo", "pgOutTag": "Fuera", "pgWordsN": "{n} palabras", "pgValidN": "Válidas", "pgBadN": "Erróneas", "pgAllWords": "Palabras de todos", "pgWeird": "Palabras raras inventadas", "pgNoWeird": "¡Nadie se equivocó, increíble!", "pgLookup": "Buscar", "pgTapLetters": "Toca letras para formar una palabra", "pgNextDrop": "La siguiente letra está a punto de caer…"});
@@ -7454,6 +7461,12 @@ Object.assign(STR.ja,{"tabPlay": "ゲーム", "pmParty": "みんなで遊ぶ", "
 Object.assign(STR.ko,{"tabPlay": "게임", "pmParty": "멀티플레이", "pmDuo": "1대1 대결", "pmDuoSub": "친구와 1대1로 대결해요! 방을 만들고 코드를 공유하세요.", "pmDuoT": "1대1 대결", "pmDuoSub2": "한 방에 두 명이 대결해요.", "duName": "⚔️ 글자 대결", "duNeed2": "상대를 기다리는 중"});
 Object.assign(STR.zh,{"botPractice": "跟電腦練習（開發者）", "botNoReward": "🤖 跟電腦練習沒有獎勵。"});
 Object.assign(STR.en,{"botPractice": "Practise vs computer (dev)", "botNoReward": "🤖 Practice games against the computer give no rewards."});
+Object.assign(STR.zh,{"pgBackT": "回到剛剛的房間 {c}", "pgBackSub": "遊戲還在進行的話，可以接著玩。", "pgBackBtn": "回去"});
+Object.assign(STR.en,{"pgBackT": "Back to room {c}", "pgBackSub": "If the game is still going, you can carry on.", "pgBackBtn": "Rejoin", "pgQuitQ": "Leave this game? Within an hour you can come back from “Back to room” on the Games page, or by entering the same code."});
+Object.assign(STR.hi,{"pgBackT": "कमरे {c} में वापस", "pgBackSub": "खेल चल रहा हो तो जारी रखें।", "pgBackBtn": "वापस जाएँ"});
+Object.assign(STR.es,{"pgBackT": "Volver a la sala {c}", "pgBackSub": "Si la partida sigue, puedes continuar.", "pgBackBtn": "Volver"});
+Object.assign(STR.ja,{"pgBackT": "部屋 {c} に戻る", "pgBackSub": "ゲームが続いていれば再開できます。", "pgBackBtn": "戻る"});
+Object.assign(STR.ko,{"pgBackT": "방 {c}(으)로 돌아가기", "pgBackSub": "게임이 진행 중이면 이어서 할 수 있어요.", "pgBackBtn": "돌아가기"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
