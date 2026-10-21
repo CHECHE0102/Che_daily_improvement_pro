@@ -3392,7 +3392,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.177";
+const APP_VERSION="2026.10.178";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6770,7 +6770,8 @@ function viewStyle(){
   const g=game(), slot=S.cosSlot||"feet", worn=cosWorn(), tryOn=S.cosTry||{}, plan=myPlan();
   const anyTry=Object.keys(tryOn).some(k=>tryOn[k]&&tryOn[k]!==(g.cos||{})[k]);
   const stage=`<div class="sty-stage${S.cosHit?cosArenaFx():""}">${S.cosHit?cosFlash():""}<div class="sty-fig${S.cosHit?" hitting":""}">${heroArt(S.cosHit?"attack":"idle")}</div><div class="sty-dummy">${S.cosHit?cosBurst():""}<span class="dm">🎯</span></div></div>`;
-  const items=COSMETICS.filter(c=>c.slot===slot).map(c=>{
+  const cosRank=c=>c.plus?2:c.need==="sub"?1:0;   // free first, then member, then premium (catalog order within each)
+  const items=COSMETICS.filter(c=>c.slot===slot).map((c,i)=>[c,i]).sort((x,y)=>cosRank(x[0])-cosRank(y[0])||x[1]-y[1]).map(x=>x[0]).map(c=>{
     const own=cosOwned(c.id), on=(g.cos||{})[slot]===c.id, trying=tryOn[slot]===c.id&&!on, lockPlus=cosNeed(c)&&!planHas(cosNeed(c))&&!own;
     const btns=[];
     if(own) btns.push(on?`<button class="btn ghost sm" data-act="csoff" data-k="${slot}">${T("cosOff")}</button>`:`<button class="btn sm" data-act="cswear" data-k="${c.id}">${T("cosWear")}</button>`);
