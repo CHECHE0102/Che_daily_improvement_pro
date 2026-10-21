@@ -3463,7 +3463,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.184";
+const APP_VERSION="2026.10.185";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4479,15 +4479,18 @@ function pgShuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.ra
 /* ----- practice room (developer mode): an in-memory "database" and a computer opponent, so the 2-player games can be tried alone ----- */
 const PG_BOT="bot";
 function pgFs(){ return S.pg&&S.pg.local?PG_LOCAL_FS:CLOUD.fb.fsM; }
-function pgLocalApply(path,data,merge){ const pg=S.pg; if(!pg||!pg.local) return; const parts=path.split("/"), tgt=parts.length<=2?"party":parts[3];
-  let o=tgt==="party"?pg.party:(pg.ps[tgt]=pg.ps[tgt]||{}); if(!merge){ o={}; }
-  for(const [k,v] of Object.entries(data)){ if(k.includes(".")){ const ks=k.split("."); let c=o; for(const x of ks.slice(0,-1)) c=c[x]=c[x]&&typeof c[x]==="object"?{...c[x]}:{}; c[ks[ks.length-1]]=v; } else if(merge&&v&&typeof v==="object"&&!Array.isArray(v)&&o[k]&&typeof o[k]==="object"&&!Array.isArray(o[k])) o[k]={...o[k],...v}; else o[k]=v; }
+// same rules as Firestore: set = replace, set+merge = deep-merge maps, update = replace each named field ("a.b" reaches inside a map)
+function pgDeep(a,b){ const o={...a}; for(const [k,v] of Object.entries(b)){ o[k]=v&&typeof v==="object"&&!Array.isArray(v)&&o[k]&&typeof o[k]==="object"&&!Array.isArray(o[k])?pgDeep(o[k],v):v; } return o; }
+function pgLocalApply(path,data,mode){ const pg=S.pg; if(!pg||!pg.local) return; const parts=path.split("/"), tgt=parts.length<=2?"party":parts[3];
+  let o=tgt==="party"?pg.party:(pg.ps[tgt]=pg.ps[tgt]||{});
+  if(mode==="set") o={...data}; else if(mode==="merge") o=pgDeep(o,data);
+  else { o={...o}; for(const [k,v] of Object.entries(data)){ if(k.includes(".")){ const ks=k.split("."); let c=o; for(const x of ks.slice(0,-1)) c=c[x]=c[x]&&typeof c[x]==="object"?{...c[x]}:{}; c[ks[ks.length-1]]=v; } else o[k]=v; } }
   if(tgt==="party") pg.party=o; else pg.ps[tgt]=o;
   if(tgt===PG_BOT) botOnWrite(data); if(tgt===pgMe()) pgGifts();
   if(tgt==="party"&&o.state==="done") pgFinish(); if(tgt==="party"&&o.state==="play") pgTickStart(); }
-const PG_LOCAL_FS={ setDoc:async(r,d,opt)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),!!(opt&&opt.merge)), updateDoc:async(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),true),
+const PG_LOCAL_FS={ setDoc:async(r,d,opt)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),opt&&opt.merge?"merge":"set"), updateDoc:async(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"update"),
   deleteDoc:async()=>{}, deleteField:()=>undefined,
-  runTransaction:async(db,fn)=>fn({get:async r=>{ const parts=r.path.split("/"); const d=parts.length<=2?S.pg.party:S.pg.ps[parts[3]]; return {exists:()=>!!d, data:()=>JSON.parse(JSON.stringify(d||{}))}; }, update:(r,d)=>pgLocalApply(r.path,d,true), set:(r,d)=>pgLocalApply(r.path,d,false)}) };
+  runTransaction:async(db,fn)=>fn({get:async r=>{ const parts=r.path.split("/"); const d=parts.length<=2?S.pg.party:S.pg.ps[parts[3]]; return {exists:()=>!!d, data:()=>JSON.parse(JSON.stringify(d||{}))}; }, update:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"update"), set:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"set")}) };
 function pgBotRoom(kind){ if(!DEV) return; pgStop(); const s=stats(), now=Date.now(), j=x=>Math.round(x*(0.9+Math.random()*0.2));
   S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖"}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
   pgLoadWords(); pgRender(true); }
@@ -4502,7 +4505,7 @@ function botTick(){ const pg=S.pg, P=pg&&pg.party; if(!pg||!pg.local||!P||P.stat
     if(now<P.start||b.hp<=0||!pg.D||pg.D.hp<=0) return; if(!B.next) B.next=P.start+4000+Math.random()*3000;
     if(now>=B.next&&now<P.start+DU.total*1000){ B.next=now+4500+Math.random()*4000; const w=botWord(3,Math.random()<0.3?7:5), avg=k=>(pg.D.st[k]+b.st[k])/2;
       const m=duClamp(Math.pow((b.st.atk/avg("atk"))/(pg.D.st.def/avg("def")),0.3),0.88,1.15), h=Math.max(1,Math.round(duBase(w.length)*m)); b.words.push(w);
-      pgLocalApply("parties/BOT/p/me",{["gifts.b"+now]:{h, w, f:PG_BOT, at:now}},true); } return; }
+      pgLocalApply("parties/BOT/p/me",{["gifts.b"+now]:{h, w, f:PG_BOT, at:now}},"update"); } return; }
   if(P.game==="draw"){ if(now<P.start) return; const C=drCur(), F=drPhase(now), d=drDealer(C.i), key=C.i+"-"+drPhNum(F.k);
     if(d===PG_BOT&&(F.k==="d1"||F.k==="d2")){ const W=drWord(C.i).w, pts=B.dots&&B.dots.w===W?B.dots.st:(B.dots={w:W, st:botDots(W)}).st, frac=Math.min(1,(now-(F.k==="d1"?F.L.d1:F.L.d2))/(DR.draw*0.8));
       const n=Math.ceil(pts.length*frac); if(B.drn!==key+":"+n){ B.drn=key+":"+n; b.dr={k:key, s:drEnc(pts.slice(0,n))}; } }
