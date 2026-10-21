@@ -1166,6 +1166,42 @@ body.vp-lock{touch-action:pan-x pan-y}
 @keyframes pmOut{to{opacity:0;transform:translateY(12px) scale(.6)}}
 .adv-menu.pm-right::after{left:auto;right:calc(10% - 7px);margin-left:0}
 .pg-back{display:flex;align-items:center;gap:10px;justify-content:space-between;border-color:var(--accent)}
+.du-fx{position:absolute;inset:0;pointer-events:none;z-index:6}
+.du-stage{position:relative;height:124px;display:block}
+.du-body{position:relative;width:124px;height:124px;margin:0 auto}
+.du-side{--dir:1}.du-side.op{--dir:-1}
+.du-pose{position:absolute;inset:0;transition:opacity .05s}
+.du-pose .du-fig{width:100%;height:100%;transform:none}
+#du-op .du-pose{transform:scaleX(-1)}
+.du-pose.atk{opacity:0}.du-side.atk .du-pose.atk{opacity:1}.du-side.atk .du-pose.idle{opacity:0}
+.du-side.lunge .du-body{animation:duLunge .5s ease-out}
+@keyframes duLunge{25%{transform:translateX(calc(var(--dir) * 28px)) rotate(calc(var(--dir) * 5deg))}100%{transform:none}}
+.du-side.hurt .du-body{animation:duHurt .5s ease-out}
+@keyframes duHurt{12%{transform:translateX(calc(var(--dir) * -20px)) rotate(calc(var(--dir) * -8deg));filter:brightness(1.7) sepia(1) hue-rotate(-45deg) saturate(5)}45%{filter:none}100%{transform:none}}
+.du-side.hurtb .du-body{animation:duHurtB .35s ease-out}
+@keyframes duHurtB{30%{transform:translateX(calc(var(--dir) * -8px))}}
+.du-side.ko .du-body{transform:translateY(22px) rotate(calc(var(--dir) * -80deg));opacity:.55;transition:transform .7s ease-in,opacity .7s;animation:none}
+.du-bubble{position:absolute;left:50%;top:50%;width:122px;height:122px;margin:-61px 0 0 -61px;border-radius:50%;border:3px solid rgba(127,200,255,.95);background:radial-gradient(circle,rgba(127,200,255,0) 55%,rgba(127,200,255,.38));box-shadow:0 0 20px rgba(127,200,255,.75);opacity:0;transform:scale(.5);transition:opacity .12s,transform .2s cubic-bezier(.3,1.6,.5,1);pointer-events:none;z-index:3}
+.du-side.shield .du-bubble{opacity:1;transform:scale(1)}
+.du-side.blockflash .du-bubble{animation:duBf .55s ease-out}
+@keyframes duBf{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
+.du-hp i.g{background:rgba(255,255,255,.6)!important;transition:width .9s ease .3s}
+.du-hp i.f{transition:width .2s ease}
+.du-pj{position:absolute;left:0;top:0;pointer-events:none;will-change:transform}
+.pj-arrow,.pj-spear{width:56px;height:4px;margin:-2px 0 0 -28px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--c) 45%,#fff);filter:drop-shadow(0 0 6px var(--c))}
+.pj-spear{width:70px;height:5px;margin:-2.5px 0 0 -35px}
+.pj-arrow::after,.pj-spear::after{content:"";position:absolute;right:-9px;top:-5px;border-left:12px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.pj-orb{width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,var(--c) 45%,transparent 72%);box-shadow:0 0 20px 7px var(--c)}
+.pj-slash{width:34px;height:70px;margin:-35px 0 0 -17px;border-radius:50%;border-right:7px solid #fff;box-shadow:8px 0 16px -3px var(--c);filter:drop-shadow(0 0 7px var(--c))}
+.pj-quake{width:70px;height:22px;margin:-11px 0 0 -35px;border-radius:50%;background:radial-gradient(ellipse,#fff 0,var(--c) 40%,transparent 72%);box-shadow:0 0 18px var(--c)}
+.pj-star{width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:radial-gradient(circle,#fff,var(--c) 50%,transparent 72%)}
+.du-imp{position:absolute;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:radial-gradient(circle,#fff 0,var(--c) 35%,transparent 70%);animation:duImp .5s ease-out forwards;pointer-events:none}
+.du-imp.blk{background:radial-gradient(circle,#fff 0,#7FC8FF 35%,transparent 70%)}
+@keyframes duImp{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.du-fx .du-num{position:absolute;transform:translate(-50%,0);font-size:26px;animation:duNum2 1.05s ease-out forwards;color:#FFB04A}
+.du-fx .du-num.me{color:#FF6B5A}.du-fx .du-num.blk{color:#7FC8FF}
+@keyframes duNum2{0%{opacity:0;transform:translate(-50%,10px) scale(.6)}20%{opacity:1;transform:translate(-50%,0) scale(1.2)}100%{opacity:0;transform:translate(-50%,-36px) scale(1)}}
+@media (prefers-reduced-motion: reduce){.du-side .du-body,.du-imp,.du-fx .du-num{animation:none!important}}
 </style>
 
 </head>
@@ -3465,7 +3501,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.186";
+const APP_VERSION="2026.10.187";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4805,27 +4841,71 @@ function duSubmit(){
   if(D.words.includes(w)){ D.sel=[]; pgRender(); return toast(T("pgUsed")); }
   if(!PG_WORDS.has(w)){ if(!D.bad.includes(w)) D.bad.push(w); pg.shake=Date.now(); D.sel=[]; duPush(); pgRender(); return toast(T("pgInvalid")); }
   const opp=duOpp(), now=Date.now(), dmg=Math.max(1,Math.round(duBase(w.length)*duMult()));
-  D.hand=D.hand.filter((_,k)=>!D.sel.includes(k)); D.sel=[]; D.words.push(w); D.dmg+=dmg; D.fx.atk=now; D.fx.numOp={v:dmg, t:now, w}; pg.flashOk=now; sfx(w.length>=6?"crit":"hit");
+  D.hand=D.hand.filter((_,k)=>!D.sel.includes(k)); D.sel=[]; D.words.push(w); D.dmg+=dmg; D.fx.atk=now; (D.out=D.out||[]).push({id:"o"+now, t0:now, until:now+DU.wind, v:dmg, w}); pg.flashOk=now; sfx(w.length>=6?"crit":"hit");
   if(opp){ const id=pgMe().slice(0,6)+"-"+D.words.length+"-"+now; pgFs().updateDoc(pgRef(pg.code,"p",opp),{["gifts."+id]:{h:dmg, w, f:pgMe(), at:now}}).catch(()=>toast(T("syncFail"))); }
   duPush(); pgRender(); }
 function duPick(k){ const D=S.pg&&S.pg.D; if(!D||D.hp<=0) return; const j=D.sel.indexOf(k); if(j>=0) D.sel.splice(j,1); else D.sel.push(k); duPush(); pgRender(); }
 function duKeep(){ const D=S.pg&&S.pg.D; if(!D||!D.fall) return; if(D.hand.length>=DU.handMax) return toast(T("pgHandFull")); D.hand.push(D.fall.l); D.fall=null; duPush(); pgRender(); }
 function duDiscard(){ const D=S.pg&&S.pg.D; if(!D||!D.sel.length) return; D.hand=D.hand.filter((_,k)=>!D.sel.includes(k)); D.sel=[]; duPush(); pgRender(); }
+/* duel arena: built once and animated in place (no re-rendering, so the figures never reload or flash) */
+const DU_COL={metal:"#F5C842",wood:"#5BD67A",water:"#4FB4FF",fire:"#FF7A3D",earth:"#C9925A"};
+function duWeaponOf(look, mine){ let w=null; if(mine){ const g=game(); w=g.weapon&&ITEMS[g.weapon]; } else { const L=parseLook(look); w=L&&L.w&&ITEMS[L.w]; }
+  if(!w) return {kind:"star", c:"#FFE27A"}; const k=WKIND[w.el]&&WKIND[w.el][w.tier]||"sword";
+  return {kind:k==="bow"?"arrow":k==="staff"||k==="orbstaff"?"orb":k==="trident"?"spear":k==="hammer"||k==="warhammer"?"quake":"slash", c:DU_COL[w.el]||"#FFE27A"}; }
+const duNoLazy=h=>h.replace(/ loading="lazy"/g,"");
+function duArenaBuild(el, myLk, opLk, opp){
+  const side=(who,lk,name,badge)=>`<div class="du-side ${who}" id="du-${who}"><div class="du-nm"><b>${esc(name)}</b>${badge}</div><div class="du-hp${who==="me"?" me":""}"><i class="g"></i><i class="f"></i><span></span></div>
+    <div class="du-stage"><div class="du-body"><div class="du-pose idle">${duNoLazy(lookArt(lk,"du-fig","idle"))}</div><div class="du-pose atk">${duNoLazy(lookArt(lk,"du-fig","attack"))}</div></div><div class="du-bubble"></div></div></div>`;
+  el.innerHTML=side("me",myLk,pgNm(pgMe()),"")+`<div class="du-vs">VS</div>`+side("op",opLk,opp?pgNm(opp):"?",opp?supB(opp,14):"")+`<div class="du-fx"></div>`;
+  el.dataset.k=myLk+"|"+opLk; el._s={}; }
+function duRestart(el,c){ if(!el) return; el.classList.remove(c); void el.offsetWidth; el.classList.add(c); }
+function duFloat(fx, x, y, html, cls){ const n=document.createElement("b"); n.className="du-num "+(cls||""); n.innerHTML=html; n.style.left=x+"px"; n.style.top=y+"px"; fx.appendChild(n); setTimeout(()=>n.remove(),1100); }
+function duBurst(fx, x, y, c, blk){ const n=document.createElement("i"); n.className="du-imp"+(blk?" blk":""); n.style.left=x+"px"; n.style.top=y+"px"; n.style.setProperty("--c",c); fx.appendChild(n); setTimeout(()=>n.remove(),600); }
+function duArenaSync(){
+  const pg=S.pg, el=document.getElementById("duArena"); if(!pg||!pg.D||!el) return;
+  const D=pg.D, now=Date.now(), opp=duOpp(), op=(opp&&pg.ps[opp])||{}, myLk=myLook(), opLk=op.look||LOOKS[opp]||"";
+  if(el.dataset.k!==myLk+"|"+opLk) duArenaBuild(el,myLk,opLk,opp);
+  const st=el._s, me=el.querySelector("#du-me"), ot=el.querySelector("#du-op"), fx=el.querySelector(".du-fx");
+  const opMax=op.hpMax||DU.hp, opHp=op.hpFix?op.hp:opMax;
+  const hp=(side,v,max)=>{ const k=v+"/"+max; if(st["hp"+side.id]===k) return; st["hp"+side.id]=k; const p=max?Math.max(0,v)/max*100:0;
+    side.querySelector(".du-hp .f").style.width=p+"%"; side.querySelector(".du-hp .g").style.width=p+"%"; side.querySelector(".du-hp span").textContent=`${Math.max(0,Math.round(v))} / ${max}`; side.querySelector(".du-hp").classList.toggle("low",p<=30); };
+  hp(me,D.hp,D.hpMax); hp(ot,opHp,opMax);
+  me.classList.toggle("ko",D.hp<=0); ot.classList.toggle("ko",opHp<=0);
+  // poses: attack pose right after launching
+  me.classList.toggle("atk",now-(D.fx.atk||0)<550&&D.hp>0);
+  const lastInc=D.inc.reduce((a,h)=>Math.max(a,h.at||0),0); ot.classList.toggle("atk",now-lastInc<550&&opHp>0);
+  if(st.myAtk!==D.fx.atk&&D.fx.atk){ st.myAtk=D.fx.atk; duRestart(me,"lunge"); }
+  if(lastInc&&st.opAtk!==lastInc){ st.opAtk=lastInc; duRestart(ot,"lunge"); }
+  me.classList.toggle("shield",D.inc.some(h=>h.shield&&now<h.until));
+  // projectiles travel for the whole block window, so the defender can watch them come
+  const ar=el.getBoundingClientRect(), pt=s=>{ const r=s.querySelector(".du-stage").getBoundingClientRect(); return {x:r.left-ar.left+r.width/2, y:r.top-ar.top+r.height*0.52}; };
+  const A=pt(me), B=pt(ot); st.pj=st.pj||{};
+  const myW=st.myW||(st.myW=duWeaponOf(myLk,true)), opW=duWeaponOf(opLk,false);
+  const shots=[...(D.out||[]).map(o=>({...o, from:A, to:B, w:myW, dir:1})), ...D.inc.map(h=>({id:"i"+h.id, t0:h.at, until:h.until, from:B, to:A, w:opW, dir:-1, shield:h.shield}))];
+  const live=new Set();
+  for(const s of shots){ if(now>=s.until) continue; live.add(s.id); let n=st.pj[s.id];
+    if(!n){ n=document.createElement("i"); n.className="du-pj pj-"+s.w.kind; n.style.setProperty("--c",s.w.c); fx.appendChild(n); st.pj[s.id]=n; }
+    const p=Math.min(1,Math.max(0,(now-s.t0)/(s.until-s.t0))), e=p*p*(3-2*p)*0.85+p*0.15, stop=s.dir<0&&s.shield?0.86:1, q=Math.min(e,stop);
+    const x=s.from.x+(s.to.x-s.from.x)*q, ground=s.w.kind==="quake", arc=ground?0:(s.w.kind==="arrow"||s.w.kind==="spear"?-38:-14)*Math.sin(Math.PI*q), y=(ground?s.from.y+40:s.from.y)+(s.to.y-s.from.y)*q+arc;
+    const ang=s.w.kind==="orb"||s.w.kind==="star"?(now/4)%360:(s.w.kind==="arrow"||s.w.kind==="spear"?Math.atan2((s.to.y-s.from.y)+(-38*Math.PI*Math.cos(Math.PI*q)),(s.to.x-s.from.x))*180/Math.PI:(s.dir<0?180:0));
+    n.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) rotate(${ang.toFixed(1)}deg)`; }
+  for(const [id,n] of Object.entries(st.pj)) if(!live.has(id)){ n.remove(); delete st.pj[id]; }
+  // impacts
+  for(const o of (D.out||[])) if(now>=o.until&&!o.hit){ o.hit=1; duBurst(fx,B.x,B.y,myW.c,false); duFloat(fx,B.x,B.y-60,`-${o.v}`); duRestart(ot,"hurt"); duRestart(el,"hit"); }
+  D.out=(D.out||[]).filter(o=>now<o.until+1500);
+  if(D.fx.hurt&&st.hurt!==D.fx.hurt){ st.hurt=D.fx.hurt; const n=D.fx.numMe||{}; duBurst(fx,A.x,A.y,opW.c,n.blk); duFloat(fx,A.x,A.y-60,`${n.blk?"🛡 ":""}-${n.v||0}`,"me"+(n.blk?" blk":"")); duRestart(me,n.blk?"hurtb":"hurt"); if(!n.blk) duRestart(el,"hit"); }
+  const ob=op.blk||0; if(st.opBlk==null) st.opBlk=ob; if(ob>st.opBlk){ st.opBlk=ob; duRestart(ot,"blockflash"); }
+}
+function duLoop(){ if(S.duRaf) return; const step=()=>{ const pg=S.pg; if(!pg||!pg.party||pg.party.game!=="duel"||pg.party.state!=="play"||!pg.D){ S.duRaf=0; return; } try{ duArenaSync(); }catch(e){} S.duRaf=requestAnimationFrame(step); }; S.duRaf=requestAnimationFrame(step); }
+
 function duHpBar(hp,max,mine){ const p=max?Math.max(0,hp)/max*100:0; return `<div class="du-hp${mine?" me":""}${p<=30?" low":""}"><i style="width:${p}%"></i><span>${Math.max(0,Math.round(hp))} / ${max}</span></div>`; }
 function duSections(){
   const pg=S.pg, P=pg.party, now=Date.now(), D=duMe(), opp=duOpp(), op=(opp&&pg.ps[opp])||{};
   if(opp&&!op.look&&!(opp in LOOKS)) lookFetch([opp]);
   if(now<P.start) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("duSub")}</p></div>`]];
   const left=Math.max(0,Math.ceil((P.start+DU.total*1000-now)/1000));
-  const opMax=op.hpMax||DU.hp, opHp=op.hpFix?op.hp:opMax, opLk=op.look||LOOKS[opp]||"";
-  const hurtMe=now-(D.fx.hurt||0)<450, atkMe=now-(D.fx.atk||0)<450, opHurt=now-(D.fx.atk||0)<700&&now-(D.fx.atk||0)>150;
-  const myPose=D.hp<=0?"hurt":hurtMe?"hurt":atkMe?"attack":"idle", opPose=opHp<=0?"hurt":D.inc.length?"attack":opHurt?"hurt":"idle";
-  const nm=D.fx.numMe&&now-D.fx.numMe.t<1000?`<b class="du-num me${D.fx.numMe.blk?" blk":""}" data-t="${D.fx.numMe.t}">${D.fx.numMe.blk?"🛡 ":""}-${D.fx.numMe.v}</b>`:"";
-  const no=D.fx.numOp&&now-D.fx.numOp.t<1000?`<b class="du-num op" data-t="${D.fx.numOp.t}">-${D.fx.numOp.v}</b>`:"";
-  const arena=`<div class="du-arena${hurtMe?" hit":""}">
-    <div class="du-side me"><div class="du-nm"><b>${esc(pgNm(pgMe()))}</b></div>${duHpBar(D.hp,D.hpMax,true)}<div class="du-stage">${lookArt(myLook(),"du-fig",myPose)}${nm}${atkMe?`<i class="du-slash"></i>`:""}</div></div>
-    <div class="du-vs">VS</div>
-    <div class="du-side op"><div class="du-nm"><b>${esc(opp?pgNm(opp):"?")}</b>${opp?supB(opp,14):""}</div>${duHpBar(opHp,opMax,false)}<div class="du-stage">${lookArt(opLk,"du-fig flip",opPose)}${no}${opHurt?`<i class="du-boom"></i>`:""}</div></div></div>`;
+  duLoop();
+  const arena=`<div class="du-arena" id="duArena"></div>`;
   const inc=D.inc.filter(h=>now<h.until), h0=inc[0];
   const cdLeft=Math.max(0,D.cd-now), shieldOn=now-(D.fx.shield||0)<600;
   const warn=`<div class="du-def">${h0?`<div class="du-warn${h0.shield?" ok":""}"><b>${h0.shield?T("duBlocked"):T("duIncoming",{n:esc(opp?pgNm(opp):"?"),w:esc(h0.w.toUpperCase())})}</b><div class="du-wbar"><i style="width:${Math.max(0,(h0.until-now)/DU.wind*100)}%"></i></div></div>`:`<div class="du-warn idle"><span class="muted sm-t">${T("duCalm")}</span></div>`}
