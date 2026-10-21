@@ -1185,7 +1185,7 @@ zh:{
  sumWrong:"答錯的字排在最前面，之後也會更常出現在複習測驗。", sumAll:"全對！這些字之後被抽中的機率會降低。", explainAll:"每個字的講解",
  qMeaning:"這個字的意思是？", qWord:"哪個英文字是這個意思？", qCloze:"選出填入空格的字",
  right:"答對了！", wrong:"答錯了，看看講解", next:"下一題", seeAll:"看結果與全部講解", artLoadFail:"文章載入失敗，請檢查網路", removed:"已移除",
- loot:"戰利品", lootRight:"答對 {n} 題", lootAcc:"正確率 {p}% 獎勵", lootAccNo:"正確率 {p}%（80% 以上有獎勵）", lootDay:"完成今日三步驟", tickets:"出征令", lootT:"+{n} 張", gold:"金幣", goldAmt:"+{n} 金", goAdv:"去冒險 →",
+ loot:"戰利品", lootRight:"答對 {n} 題", lootAcc:"正確率 {p}% 獎勵", lootAccNo:"正確率 {p}%（80% 以上有獎勵）", lootDay:"完成今日三步驟", tickets:"出征令", lootT:"+{n} 片", gold:"金幣", goldAmt:"+{n} 金", goAdv:"去冒險 →",
  owned:"已經擁有", needLv:"需要 Lv {n}", noGold:"金幣不足，還差 {n}", bought:"買下 {i}，已裝備",
  advWin:"武器剋制 ×1.5", advWlose:"武器被剋 ×0.67", advAwin:"防具剋制 受傷 ×0.67", advAlose:"防具被剋 受傷 ×1.5", advNone:"屬性無加成",
  noTicket:"出征令不足，完成測驗就能獲得", spell:"戰前咒語", spellSub:"答對這題，第一擊造成 2 倍傷害。", spellOk:"咒語成功！第一擊 2 倍傷害", spellFail:"咒語失敗。正確答案：{w} — {m}",
@@ -1995,7 +1995,7 @@ function pick(i){
   if(Q.i+1>=Q.qs.length){
     const d=dayRec();
     if(Q.kind==="lvl"){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
-    else if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardReview():null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
+    else if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardSrs(Q.score):null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art),art); }
@@ -3017,6 +3017,15 @@ function applyPrize(p){
 /* ----- dictionary review → 1 lucky ticket ----- */
 const SRS_TICKET_MIN=5;   // a spaced review needs at least this many words to earn a lucky ticket
 function revLeft(){ const g=game(); return g.revDate===today()?Math.max(0,LUCK.reviewTicketsPerDay-(g.revN||0)):LUCK.reviewTicketsPerDay; }
+// spaced review pays by score: 5+ right = 1 shamrock, 10+ = 2, 13+ = 3 (still at most LUCK.reviewTicketsPerDay a day)
+const SRS_PAY=[[13,3],[10,2],[5,1]];
+function srsPayFor(score){ const t=SRS_PAY.find(([k])=>score>=k); return t?t[1]:0; }
+function awardSrs(score){
+  const g=game(); if(g.revDate!==today()){ g.revDate=today(); g.revN=0; }
+  const want=srsPayFor(score); if(!want){ saveGame(); return {lotto:0, low:true, score}; }
+  const n=Math.min(want, Math.max(0,LUCK.reviewTicketsPerDay-(g.revN||0)));
+  g.revN=(g.revN||0)+n; g.lotto=(g.lotto||0)+n; saveGame(); return {lotto:n, score, want};
+}
 function awardReview(){
   const g=game(); if(g.revDate!==today()){ g.revDate=today(); g.revN=0; }
   if((g.revN||0)<LUCK.reviewTicketsPerDay){ g.revN=(g.revN||0)+1; g.lotto=(g.lotto||0)+1; saveGame(); return {lotto:1}; }
@@ -3032,7 +3041,7 @@ function reviewCard(){
 function lottoBox(r){
   if(!r) return "";
   return `<div class="reward lotto-rw"><div class="eyebrow">${T("loot")}</div>
-    <div class="rw-row"><span>${r.lotto?T("lottoGot"):T("lottoCap",{n:LUCK.reviewTicketsPerDay})}</span><b>${r.lotto?T("lootT",{n:1}):"+0"}</b></div>
+    <div class="rw-row"><span>${r.lotto?(r.score!=null?T("lottoGotN",{n:r.lotto,s:r.score}):T("lottoGot")):r.low?T("lottoLow",{s:r.score,k:SRS_PAY[SRS_PAY.length-1][0]}):T("lottoCap",{n:LUCK.reviewTicketsPerDay})}</span><b>${r.lotto?T("lootT",{n:r.lotto}):"+0"}</b></div>
     <div class="rw-row muted"><span>${T("lotto")}</span><b>${game().lotto||0}</b></div></div>`;
 }
 const TICKET_SVG='<svg viewBox="0 0 32 32" width="26" height="26"><path d="M4 9a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v3a3 3 0 0 0 0 6v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a3 3 0 0 0 0-6z" fill="currentColor"/><path d="M20 8v16" stroke="var(--card)" stroke-width="1.6" stroke-dasharray="2 2"/><path d="M12 12.2l1.2 2.5 2.7.4-2 1.9.5 2.7-2.4-1.3-2.4 1.3.5-2.7-2-1.9 2.7-.4z" fill="var(--card)"/></svg>';
@@ -3132,7 +3141,7 @@ function viewLuck(){
   const cards=LUCK.scratch.map(c=>`<div class="sc-shop sc-${c.id}"><b>${scName(c.id)}</b><div class="odds-tiers sm">${c.odds.map((w,i)=>w?`<span><em>${TIER[i].n}</em>${pct(w,c.odds,x=>x)}</span>`:"").join("")}</div>
     <button class="btn sm" data-act="scbuy" data-k="${c.id}" ${L<c.cost?"disabled":""}>${T("scCost",{n:c.cost})}</button></div>`).join("");
   return `<div class="luck">
-    <section class="luck-head"><div class="lh-ic">${TICKET_SVG}</div><div><div class="eyebrow">${T("lotto")}</div><b id="lottoLeft" class="lh-n">${L}</b></div><p class="muted sm-t">${T("luckSub",{n:LUCK.reviewTicketsPerDay})}</p>
+    <section class="luck-head"><div class="lh-ic">${TICKET_SVG}</div><div><div class="eyebrow">${T("lotto")}</div><b id="lottoLeft" class="lh-n">${L}</b></div><p class="muted sm-t">${T("luckSub3",{n:LUCK.reviewTicketsPerDay})}</p>
       ${L<1?`<button class="btn ghost sm" data-tab="dict">${T("revStart")}</button>`:""}
       <div class="ex-row"><span class="sm-t">🪙 ${T("exSub",{c:LUCK.goldLotto.price,n:exLeft(),m:LUCK.goldLotto.perDay})}</span><button class="btn ghost sm" data-act="goldlotto" ${exLeft()<1||g.gold<LUCK.goldLotto.price?"disabled":""}>${T("exBtn",{c:LUCK.goldLotto.price})}</button></div></section>
     <section class="card wheel-card"><h3>${T("wheelTitle")}</h3>
@@ -3392,7 +3401,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.179";
+const APP_VERSION="2026.10.180";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5384,7 +5393,7 @@ function srsCard(){
   const due=srsDueList().length, tm=srsCountOn(srsAdd(today(),1));
   const boxes=[1,2,3,4,5,6].map(b=>[...S.words.values()].filter(w=>(w.srsB||0)===b).length), fresh=[...S.words.values()].filter(w=>!w.srsB).length;
   const bar=`<div class="srs-boxes" title="${esc(T("srsBoxes"))}">${(()=>{ const all=[fresh,...boxes], mx=Math.max(1,...all); return all; })().map((n,i,all)=>`<span style="--h:${n?Math.round(12+70*n/Math.max(1,...all)):4}%"><i></i><small>${i?SRS_INT[i]+"d":"new"}</small><b>${n}</b></span>`).join("")}</div>`;
-  return `<section class="card srs-card"><div class="srs-top"><div class="srs-ic" aria-hidden="true">🧠</div><div><b>${T("srsTitle")}</b><span class="muted sm-t">${due?T("srsDueN",{n:due}):T("srsClear",{n:tm})}</span>${due?(()=>{ const l=revLeft(); return due<SRS_TICKET_MIN?`<span class="rev-left sm-t muted">🎟 ${T("srsTicketMin",{n:SRS_TICKET_MIN})}</span>`:`<span class="rev-left sm-t ${l?"":"muted"}">🎟 ${l?T("srsTicket",{n:l}):T("revNoMore")}</span>`; })():""}</div>${due?`<button class="btn sm" data-act="srs">${T("srsStart",{n:Math.min(SRS_MAX,due)})}</button>`:""}</div>${bar}<p class="muted sm-t" style="margin:6px 0 0">${T("srsHow")}</p></section>`;
+  return `<section class="card srs-card"><div class="srs-top"><div class="srs-ic" aria-hidden="true">🧠</div><div><b>${T("srsTitle")}</b><span class="muted sm-t">${due?T("srsDueN",{n:due}):T("srsClear",{n:tm})}</span>${due?(()=>{ const l=revLeft(); return due<SRS_TICKET_MIN?`<span class="rev-left sm-t muted">🎟 ${T("srsTicketMin",{n:SRS_TICKET_MIN})}</span>`:`<span class="rev-left sm-t ${l?"":"muted"}">☘️ ${l?T("srsPay3",{n:l}):T("revNoMore")}</span>`; })():""}</div>${due?`<button class="btn sm" data-act="srs">${T("srsStart",{n:Math.min(SRS_MAX,due)})}</button>`:""}</div>${bar}<p class="muted sm-t" style="margin:6px 0 0">${T("srsHow")}</p></section>`;
 }
 
 /* ================= read-aloud (speech synthesis, sentence by sentence) ================= */
@@ -7077,6 +7086,12 @@ Object.assign(STR.hi,{"rnT": "नाम बदलने का टिकट म�
 Object.assign(STR.es,{"rnT": "¡Tienes un vale de cambio de nombre! Elige tu nuevo apodo", "rnNow": "Apodo actual: {n}", "rnPh": "Nuevo apodo", "rnHave": "Tienes {n} vales", "rnLater": "Más tarde", "rnGo": "Cambiar", "rnGoNow": "Cambiar ahora", "rnWhere": "También puedes usarlo después en Ajustes → Apodo.", "rnSure": "¿Cambiar tu apodo a «{n}»?", "rnCost": "Usa 1 vale (te quedan {n}).", "rnBack": "Volver", "rnYes": "Sí, cambiar", "rnSame": "Ese ya es tu apodo"});
 Object.assign(STR.ja,{"rnT": "改名チケットを手に入れました！新しい名前を決めよう", "rnNow": "今のニックネーム：{n}", "rnPh": "新しいニックネーム", "rnHave": "改名チケット {n} 枚", "rnLater": "あとで", "rnGo": "改名する", "rnGoNow": "今すぐ改名", "rnWhere": "あとで「設定 → ニックネーム」からも使えます。", "rnSure": "「{n}」に変更しますか？", "rnCost": "改名チケットを1枚使います（残り {n} 枚）。", "rnBack": "戻る", "rnYes": "変更する", "rnSame": "今と同じニックネームです"});
 Object.assign(STR.ko,{"rnT": "이름 변경권을 받았어요! 새 닉네임을 정해 보세요", "rnNow": "지금 닉네임: {n}", "rnPh": "새 닉네임", "rnHave": "이름 변경권 {n}장", "rnLater": "나중에", "rnGo": "변경", "rnGoNow": "지금 바꾸기", "rnWhere": "나중에 설정 → 닉네임에서도 쓸 수 있어요.", "rnSure": "“{n}”(으)로 바꿀까요?", "rnCost": "이름 변경권 1장을 써요 (남은 {n}장).", "rnBack": "돌아가기", "rnYes": "바꾸기", "rnSame": "지금 닉네임과 같아요"});
+Object.assign(STR.zh,{"srsPay3": "答對 5 題 1 片、10 題 2 片、13 題 3 片幸運草 · 今天還能拿 {n} 片", "lottoGotN": "答對 {s} 題，獲得 {n} 片幸運草 ☘️", "lottoLow": "答對 {s} 題，答對 {k} 題以上才有幸運草，再試一次吧！", "luckSub3": "間隔複習每次 15 題：答對 5 題拿 1 片、10 題 2 片、13 題 3 片幸運草（每天最多 {n} 片）。1 片可以轉一次命運轉盤，2 片以上可以買刮刮樂。"});
+Object.assign(STR.en,{"srsPay3": "5 right = 1 shamrock, 10 = 2, 13 = 3 · {n} left today", "lottoGotN": "{s} right: you got {n} shamrock(s) ☘️", "lottoLow": "{s} right. Get {k} or more right to earn a shamrock. Try again!", "luckSub3": "Each spaced review has 15 questions: 5 right earns 1 shamrock, 10 earns 2, 13 earns 3 (up to {n} a day). 1 shamrock spins the Wheel of Fate once; 2 or more buy a scratch card."});
+Object.assign(STR.hi,{"srsPay3": "5 सही = 1 शैमरॉक, 10 = 2, 13 = 3 · आज {n} बाकी", "lottoGotN": "{s} सही: {n} शैमरॉक मिले ☘️", "lottoLow": "{s} सही। शैमरॉक के लिए {k} या ज़्यादा सही चाहिए। फिर कोशिश करें!", "luckSub3": "हर अंतराल दोहराव में 15 सवाल: 5 सही पर 1 शैमरॉक, 10 पर 2, 13 पर 3 (दिन में अधिकतम {n})। 1 शैमरॉक से पहिया एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड।"});
+Object.assign(STR.es,{"srsPay3": "5 aciertos = 1 trébol, 10 = 2, 13 = 3 · quedan {n} hoy", "lottoGotN": "{s} aciertos: ganas {n} trébol(es) ☘️", "lottoLow": "{s} aciertos. Necesitas {k} o más para ganar un trébol. ¡Inténtalo otra vez!", "luckSub3": "Cada repaso espaciado tiene 15 preguntas: 5 aciertos dan 1 trébol, 10 dan 2 y 13 dan 3 (máximo {n} al día). Con 1 trébol giras la ruleta; con 2 o más compras un rasca y gana."});
+Object.assign(STR.ja,{"srsPay3": "5問正解でクローバー1枚、10問で2枚、13問で3枚 · 今日はあと{n}枚", "lottoGotN": "{s}問正解：クローバー{n}枚ゲット ☘️", "lottoLow": "{s}問正解。{k}問以上でクローバーがもらえます。もう一度挑戦！", "luckSub3": "間隔反復は1回15問：5問正解で1枚、10問で2枚、13問で3枚（1日最大{n}枚）。1枚でルーレット1回、2枚以上でスクラッチが買えます。"});
+Object.assign(STR.ko,{"srsPay3": "5개 맞히면 클로버 1장, 10개 2장, 13개 3장 · 오늘 {n}장 남음", "lottoGotN": "{s}개 정답: 클로버 {n}장 획득 ☘️", "lottoLow": "{s}개 정답. {k}개 이상 맞혀야 클로버를 받아요. 다시 도전!", "luckSub3": "간격 복습은 한 번에 15문제: 5개 맞히면 1장, 10개 2장, 13개 3장 (하루 최대 {n}장). 1장으로 룰렛 한 번, 2장 이상이면 긁는 복권."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
