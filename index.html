@@ -1202,6 +1202,8 @@ body.vp-lock{touch-action:pan-x pan-y}
 .du-fx .du-num.me{color:#FF6B5A}.du-fx .du-num.blk{color:#7FC8FF}
 @keyframes duNum2{0%{opacity:0;transform:translate(-50%,10px) scale(.6)}20%{opacity:1;transform:translate(-50%,0) scale(1.2)}100%{opacity:0;transform:translate(-50%,-36px) scale(1)}}
 @media (prefers-reduced-motion: reduce){.du-side .du-body,.du-imp,.du-fx .du-num{animation:none!important}}
+.du-shield,.du-hand .dp-tile,.du-atk,[data-du]{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.du-shield:active{transform:scale(.94)}
 </style>
 
 </head>
@@ -3501,7 +3503,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.187";
+const APP_VERSION="2026.10.188";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4895,7 +4897,20 @@ function duArenaSync(){
   D.out=(D.out||[]).filter(o=>now<o.until+1500);
   if(D.fx.hurt&&st.hurt!==D.fx.hurt){ st.hurt=D.fx.hurt; const n=D.fx.numMe||{}; duBurst(fx,A.x,A.y,opW.c,n.blk); duFloat(fx,A.x,A.y-60,`${n.blk?"🛡 ":""}-${n.v||0}`,"me"+(n.blk?" blk":"")); duRestart(me,n.blk?"hurtb":"hurt"); if(!n.blk) duRestart(el,"hit"); }
   const ob=op.blk||0; if(st.opBlk==null) st.opBlk=ob; if(ob>st.opBlk){ st.opBlk=ob; duRestart(ot,"blockflash"); }
+  duDefSync(D,now,opp);
 }
+function duDefSync(D,now,opp){ const w=document.getElementById("duWarn"), b=document.getElementById("duShield"); if(!w||!b) return;
+  const h0=D.inc.filter(h=>now<h.until)[0], cd=Math.max(0,D.cd-now), st=w._s||(w._s={}), mode=h0?(h0.shield?"ok":"in"):"idle", key=mode+(h0?h0.id:"");
+  if(st.key!==key){ st.key=key; w.className="du-warn"+(mode==="idle"?" idle":mode==="ok"?" ok":"");
+    document.getElementById("duWarnT").innerHTML=mode==="idle"?`<span class="muted sm-t">${T("duCalm")}</span>`:mode==="ok"?T("duBlocked"):T("duIncoming",{n:esc(opp?pgNm(opp):"?"),w:esc(h0.w.toUpperCase())});
+    document.getElementById("duWbarBox").hidden=mode==="idle"; }
+  if(h0) document.getElementById("duWbar").style.width=Math.max(0,(h0.until-now)/DU.wind*100)+"%";
+  b.classList.toggle("ready",!!(h0&&!h0.shield)); b.classList.toggle("cd",cd>0); b.classList.toggle("up",now-(D.fx.shield||0)<600); b.disabled=D.hp<=0;
+  const lab=cd?Math.ceil(cd/1000)+"s":T("duShield"), sm=document.getElementById("duShieldS"); if(sm&&sm.textContent!==lab) sm.textContent=lab; }
+// duel buttons react the moment a finger touches them (not on release), so a re-render can't swallow the tap
+document.addEventListener("pointerdown",e=>{ const t=e.target.closest("[data-du]"); if(!t||!S.pg||!S.pg.D||t.disabled) return; e.preventDefault(); sfxUnlock();
+  const a=t.dataset.du; if(a==="shield") return duShield(); if(a==="submit") return duSubmit(); if(a==="pick") return duPick(+t.dataset.k); if(a==="keep") return duKeep(); if(a==="discard") return duDiscard();
+  if(a==="clear"){ S.pg.D.sel=[]; duPush(); pgRender(); } });
 function duLoop(){ if(S.duRaf) return; const step=()=>{ const pg=S.pg; if(!pg||!pg.party||pg.party.game!=="duel"||pg.party.state!=="play"||!pg.D){ S.duRaf=0; return; } try{ duArenaSync(); }catch(e){} S.duRaf=requestAnimationFrame(step); }; S.duRaf=requestAnimationFrame(step); }
 
 function duHpBar(hp,max,mine){ const p=max?Math.max(0,hp)/max*100:0; return `<div class="du-hp${mine?" me":""}${p<=30?" low":""}"><i style="width:${p}%"></i><span>${Math.max(0,Math.round(hp))} / ${max}</span></div>`; }
@@ -4908,15 +4923,15 @@ function duSections(){
   const arena=`<div class="du-arena" id="duArena"></div>`;
   const inc=D.inc.filter(h=>now<h.until), h0=inc[0];
   const cdLeft=Math.max(0,D.cd-now), shieldOn=now-(D.fx.shield||0)<600;
-  const warn=`<div class="du-def">${h0?`<div class="du-warn${h0.shield?" ok":""}"><b>${h0.shield?T("duBlocked"):T("duIncoming",{n:esc(opp?pgNm(opp):"?"),w:esc(h0.w.toUpperCase())})}</b><div class="du-wbar"><i style="width:${Math.max(0,(h0.until-now)/DU.wind*100)}%"></i></div></div>`:`<div class="du-warn idle"><span class="muted sm-t">${T("duCalm")}</span></div>`}
-    <button class="du-shield${h0&&!h0.shield?" ready":""}${cdLeft?" cd":""}${shieldOn?" up":""}" data-act="dushield" ${D.hp<=0?"disabled":""}>🛡<small>${cdLeft?Math.ceil(cdLeft/1000)+"s":T("duShield")}</small></button></div>`;
+  // fixed markup: the bar and the shield's state are updated in place by duDefSync, so the button is never swapped out under a finger
+  const warn=`<div class="du-def"><div class="du-warn idle" id="duWarn"><b id="duWarnT"><span class="muted sm-t">${T("duCalm")}</span></b><div class="du-wbar" id="duWbarBox" hidden><i id="duWbar"></i></div></div><button class="du-shield" id="duShield" data-du="shield">🛡<small id="duShieldS">${T("duShield")}</small></button></div>`;
   const top=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgTotal",{s:left})}</span><span class="sm-t muted">${T("duMult",{m:Math.round(duMult()*100)})}</span></div>`;
   if(D.hp<=0) return [["pgTop",top],["pgDuArena",arena],["pgDuDef",`<p class="du-ko">${T("duKo")}</p>`],["pgFall",""],["pgHand",""]];
-  const fall=D.fall?`<div class="du-fall" data-f="${D.fall.id}"><span class="dp-letter">${esc(D.fall.l.toUpperCase())}</span><button class="btn sm" data-act="dukeep">${T("pgKeep")}</button><span class="muted sm-t">${T("duAuto")}</span></div>`:`<div class="du-fall wait"><span class="muted sm-t">${T("pgNextDrop")}</span></div>`;
+  const fall=D.fall?`<div class="du-fall" data-f="${D.fall.id}"><span class="dp-letter">${esc(D.fall.l.toUpperCase())}</span><button class="btn sm" data-du="keep">${T("pgKeep")}</button><span class="muted sm-t">${T("duAuto")}</span></div>`:`<div class="du-fall wait"><span class="muted sm-t">${T("pgNextDrop")}</span></div>`;
   const word=D.sel.map(k=>D.hand[k]).join(""), pv=word.length>=3?Math.round(duBase(word.length)*duMult()):0;
   const hand=`<div class="dp-word${pg.shake&&now-pg.shake<500?" shake":""}${pg.flashOk&&now-pg.flashOk<600?" ok":""}">${word?esc(word.toUpperCase())+(pv?` <small class="du-pv">⚔️${pv}</small>`:""):`<span class="muted sm-t">${T("pgTapLetters")}</span>`}</div>
-    <div class="dp-hand du-hand">${D.hand.map((c,k)=>`<button class="dp-tile${D.sel.includes(k)?" sel":""}" data-act="dupick" data-k="${k}">${esc(c.toUpperCase())}${D.sel.includes(k)?`<i>${D.sel.indexOf(k)+1}</i>`:""}</button>`).join("")}${Array.from({length:Math.max(0,DU.handMax-D.hand.length)},()=>`<span class="dp-tile empty"></span>`).join("")}</div>
-    <div class="row dp-btns"><button class="btn du-atk" data-act="dusubmit">⚔️ ${T("duAttack")}</button><button class="btn ghost sm" data-act="duclear">${T("pgClear")}</button><button class="btn ghost sm" data-act="dudiscard">${T("pgDiscard")}</button></div>`;
+    <div class="dp-hand du-hand">${D.hand.map((c,k)=>`<button class="dp-tile${D.sel.includes(k)?" sel":""}" data-du="pick" data-k="${k}">${esc(c.toUpperCase())}${D.sel.includes(k)?`<i>${D.sel.indexOf(k)+1}</i>`:""}</button>`).join("")}${Array.from({length:Math.max(0,DU.handMax-D.hand.length)},()=>`<span class="dp-tile empty"></span>`).join("")}</div>
+    <div class="row dp-btns"><button class="btn du-atk" data-du="submit">⚔️ ${T("duAttack")}</button><button class="btn ghost sm" data-du="clear">${T("pgClear")}</button><button class="btn ghost sm" data-du="discard">${T("pgDiscard")}</button></div>`;
   return [["pgTop",top],["pgDuArena",arena],["pgDuDef",warn],["pgFall",fall],["pgHand",hand]];
 }
 function duRows(){ const pg=S.pg, P=pg.party, ids=Object.keys(P.players);
