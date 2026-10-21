@@ -3401,7 +3401,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.180";
+const APP_VERSION="2026.10.181";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5344,12 +5344,20 @@ document.addEventListener("click",e=>{ const t=e.target.closest("#onb [data-act]
 /* ================= retention: anonymous per-device activity (act/{deviceId}) ================= */
 function devId(){ let v=null; try{ v=localStorage.getItem("che-pro-did"); if(!v){ v=Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,"0")).join(""); localStorage.setItem("che-pro-did",v); } }catch(e){ v=null; } return v; }
 function firstDay(){ let f=null; try{ f=localStorage.getItem("che-pro-first"); if(!f){ const ds=[...S.days.values()].map(d=>d&&d.date).filter(Boolean).sort(); f=ds[0]||today(); localStorage.setItem("che-pro-first",f); } }catch(e){ f=today(); } return f; }
+// what kind of device opened the app (no model, no personal data): helps tell real visitors from bots and duplicate browsers
+function devKind(){ const ua=navigator.userAgent||"", pwa=(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
+  const os=/iPhone|iPad|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1)?"ios":/Android/.test(ua)?"android":/Windows/.test(ua)?"win":/Macintosh/.test(ua)?"mac":"other";
+  return os+(pwa?"-app":""); }
+const isBot=()=>{ try{ return navigator.webdriver===true||/bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|embedly|quora|whatsapp|telegram/i.test(navigator.userAgent||""); }catch(e){ return false; } };
 async function actPing(extra){
-  if(!CLOUD.fb||DEV||CLOUD.deleting) return; const id=devId(); if(!id) return; const t=today();
+  if(!CLOUD.fb||DEV||CLOUD.deleting||isBot()) return; const id=devId(); if(!id) return; const t=today();
   let sent=null; try{ sent=localStorage.getItem("che-pro-actday"); }catch(e){}
   if(sent===t&&!extra) return;
   const {fsM,db}=CLOUD.fb;
-  try{ await fsM.setDoc(fsM.doc(db,"act",id),{f:firstDay(), d:{[t]:1}, lang:langKey(), lvl:LEVEL, u:!!CLOUD.user, ...(extra||{})},{merge:true}); try{ localStorage.setItem("che-pro-actday",t); }catch(e){} }catch(e){}
+  const base={f:firstDay(), d:{[t]:1}, lang:langKey(), lvl:LEVEL, u:!!CLOUD.user, ...(extra||{})}, ref=fsM.doc(db,"act",id);
+  // the device type needs Firestore rules v9; until those are published, send without it
+  try{ await fsM.setDoc(ref,{...base, k:devKind()},{merge:true}); }catch(e){ try{ await fsM.setDoc(ref,base,{merge:true}); }catch(e2){ return; } }
+  try{ localStorage.setItem("che-pro-actday",t); }catch(e){}
 }
 function actFirstRead(){ let r=null; try{ r=localStorage.getItem("che-pro-actr"); }catch(e){} if(r) return; try{ localStorage.setItem("che-pro-actr",today()); }catch(e){} actPing({r:today()}); }
 document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") actPing(); });
@@ -5364,7 +5372,10 @@ function devRetHtml(A){
   const back=(()=>{ const c=A.filter(a=>a.f&&a.f<t); const r=c.filter(a=>Object.keys(a.d||{}).some(d=>d>a.f)); return c.length?`${Math.round(r.length/c.length*100)}%<small> ${r.length}/${c.length}</small>`:"–"; })();
   const onb=A.filter(a=>(a.o||0)>=4).length, rd=A.filter(a=>a.r).length;
   const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
-  return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(newT,T("drNew"))}${tile(dau,T("drDau"))}${tile(wau,T("drWau"))}${tile(ret(1),"D1")}${tile(ret(7),"D7")}${tile(ret(30),"D30")}${tile(back,T("drBack"))}${tile(`${onb}/${N}`,T("drOnb"))}${tile(`${rd}/${N}`,T("drRead"))}</div><p class="muted sm-t">${T("drNote")}</p>`;
+  const kinds=L=>{ const c={}; L.forEach(a=>{ const k=a.k||"?"; c[k]=(c[k]||0)+1; }); return Object.entries(c).sort((x,y)=>y[1]-x[1]).map(([k,n])=>`${T("drK_"+k.replace("-","_"))} ${n}`).join(" · ")||"–"; };
+  const once=A.filter(a=>Object.keys(a.d||{}).length<=1&&!(a.o>0)&&!a.r&&a.f<t).length;
+  const kindHtml=`<p class="sm-t" style="margin:8px 0 0"><b>${T("drNewKinds")}</b> ${kinds(A.filter(a=>a.f===t))}</p><p class="sm-t" style="margin:4px 0 0"><b>${T("drAllKinds")}</b> ${kinds(A)}</p><p class="sm-t muted" style="margin:4px 0 0">${T("drOnce",{n:once})}</p>`;
+  return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(newT,T("drNew"))}${tile(dau,T("drDau"))}${tile(wau,T("drWau"))}${tile(ret(1),"D1")}${tile(ret(7),"D7")}${tile(ret(30),"D30")}${tile(back,T("drBack"))}${tile(`${onb}/${N}`,T("drOnb"))}${tile(`${rd}/${N}`,T("drRead"))}</div>${kindHtml}<p class="muted sm-t">${T("drNote")}</p><p class="muted sm-t">${T("drNote2")}</p>`;
 }
 Object.assign(STR.zh,{loginHint:"🔐 點這裡用 Google 登入，進度會存到雲端，換手機也不會不見！"});
 Object.assign(STR.en,{loginHint:"🔐 Tap here to sign in with Google: your progress is saved to the cloud, so it stays with you even on a new phone!"});
@@ -7092,6 +7103,8 @@ Object.assign(STR.hi,{"srsPay3": "5 सही = 1 शैमरॉक, 10 = 2, 13
 Object.assign(STR.es,{"srsPay3": "5 aciertos = 1 trébol, 10 = 2, 13 = 3 · quedan {n} hoy", "lottoGotN": "{s} aciertos: ganas {n} trébol(es) ☘️", "lottoLow": "{s} aciertos. Necesitas {k} o más para ganar un trébol. ¡Inténtalo otra vez!", "luckSub3": "Cada repaso espaciado tiene 15 preguntas: 5 aciertos dan 1 trébol, 10 dan 2 y 13 dan 3 (máximo {n} al día). Con 1 trébol giras la ruleta; con 2 o más compras un rasca y gana."});
 Object.assign(STR.ja,{"srsPay3": "5問正解でクローバー1枚、10問で2枚、13問で3枚 · 今日はあと{n}枚", "lottoGotN": "{s}問正解：クローバー{n}枚ゲット ☘️", "lottoLow": "{s}問正解。{k}問以上でクローバーがもらえます。もう一度挑戦！", "luckSub3": "間隔反復は1回15問：5問正解で1枚、10問で2枚、13問で3枚（1日最大{n}枚）。1枚でルーレット1回、2枚以上でスクラッチが買えます。"});
 Object.assign(STR.ko,{"srsPay3": "5개 맞히면 클로버 1장, 10개 2장, 13개 3장 · 오늘 {n}장 남음", "lottoGotN": "{s}개 정답: 클로버 {n}장 획득 ☘️", "lottoLow": "{s}개 정답. {k}개 이상 맞혀야 클로버를 받아요. 다시 도전!", "luckSub3": "간격 복습은 한 번에 15문제: 5개 맞히면 1장, 10개 2장, 13개 3장 (하루 최대 {n}장). 1장으로 룰렛 한 번, 2장 이상이면 긁는 복권."});
+Object.assign(STR.zh,{"drNewKinds": "今天新來的裝置：", "drAllKinds": "全部裝置：", "drOnce": "只打開過一次、什麼都沒做就沒再回來：{n} 台", "drK_ios": "iPhone 瀏覽器", "drK_ios_app": "iPhone 主畫面 App", "drK_android": "Android 瀏覽器", "drK_android_app": "Android App", "drK_win": "Windows 電腦", "drK_win_app": "Windows App", "drK_mac": "Mac", "drK_mac_app": "Mac App", "drK_other": "其他", "drK_?": "舊紀錄（沒記錄類型）", "drNote2": "「裝置」是一個瀏覽器：同一支手機的 Safari 和加到主畫面的 App 會算兩台；清除網站資料或用無痕模式也會變成新的一台。自動化測試和搜尋引擎爬蟲不再計入。"});
+Object.assign(STR.en,{"drNewKinds": "New devices today:", "drAllKinds": "All devices:", "drOnce": "Opened once, did nothing and never came back: {n}", "drK_ios": "iPhone browser", "drK_ios_app": "iPhone home-screen app", "drK_android": "Android browser", "drK_android_app": "Android app", "drK_win": "Windows PC", "drK_win_app": "Windows app", "drK_mac": "Mac", "drK_mac_app": "Mac app", "drK_other": "Other", "drK_?": "Older records (no type)", "drNote2": "A “device” is one browser: Safari and the home-screen app on the same phone count as two, and clearing site data or a private window makes a new one. Automated tests and search-engine crawlers are no longer counted."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
