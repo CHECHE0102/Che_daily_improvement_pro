@@ -1159,6 +1159,11 @@ body.vp-lock{touch-action:pan-x pan-y}
 .dr-rev{text-align:center}
 .dr-rr{display:flex;flex-direction:column;align-items:center;gap:6px;margin:6px 0}
 @media (prefers-reduced-motion: reduce){.dr-cv{will-change:auto}}
+.adv-menu.pm-right{left:auto;right:12px;transform:none;transform-origin:85% calc(100% + 14px);animation-name:pmIn}
+@keyframes pmIn{from{opacity:0;transform:translateY(18px) scale(.4)}to{opacity:1;transform:translateY(0) scale(1)}}
+#advMenu.closing .adv-menu.pm-right{animation-name:pmOut}
+@keyframes pmOut{to{opacity:0;transform:translateY(12px) scale(.6)}}
+.adv-menu.pm-right::after{left:auto;right:calc(10% - 7px);margin-left:0}
 </style>
 
 </head>
@@ -2947,14 +2952,19 @@ function advMenuHtml(){ const cur=S.tab==="adv"?(ADV_PAGES[S.advTab]?S.advTab:"g
   return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu" role="menu">${ADV_MENU.map(([k,ic,l])=>{ const lk=featLock(k);
     return `<button role="menuitem" class="am-item${cur===k?" on":""}${lk?" locked":""}" data-act="amgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${lk?"🔒 ":""}${T(l)}</span></button>`; }).join("")}
     </div>`; }
-function advMenuToggle(open){ let el=document.getElementById("advMenu"); const shown=el&&!el.classList.contains("closing"), on=open!=null?open:!shown;
+const PLAY_MENU=[["party","🎉","pmParty"],["duo","⚔️","pmDuo"]];
+function playMenuHtml(){ const cur=S.view==="play"?(S.playMode||"party"):null;
+  return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-right" role="menu">${PLAY_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${cur===k?" on":""}" data-act="pmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
+function advMenuToggle(open, kind){ let el=document.getElementById("advMenu"); const k=kind||"adv", shown=el&&!el.classList.contains("closing")&&el.dataset.k===k, on=open!=null?open:!shown;
   if(!on){ if(el&&!el.classList.contains("closing")){ el.classList.add("closing"); setTimeout(()=>{ if(el.classList.contains("closing")) el.remove(); },190); } return; }
-  if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.classList.remove("closing"); el.innerHTML=advMenuHtml(); }
+  if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.classList.remove("closing"); el.dataset.k=k; el.innerHTML=k==="play"?playMenuHtml():advMenuHtml(); }
 document.addEventListener("click",e=>{
   const nav=e.target.closest("#tab-adv"); if(nav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(); return; }
+  const pnav=e.target.closest("#tab-play"); if(pnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(undefined,"play"); return; }
   if(e.target.closest("[data-tab]")) advMenuToggle(false);   // another bottom tab: close the menu and go there
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
   if(a==="amclose"){ e.stopPropagation(); advMenuToggle(false); return; }
+  if(a==="pmgo"){ e.stopPropagation(); advMenuToggle(false); S.playMode=t.dataset.k; S.tab="play"; S.view="play"; S.open=null; render(); window.scrollTo(0,0); return; }
   if(a==="amgo"){ e.stopPropagation(); const k=t.dataset.k, lk=featLock(k); if(lk){ toast("🔒 "+T(lk)); return; } advMenuToggle(false);
     S.quiz=null; S.battle=null; if(S.view==="ielts"){ ieStopAudio(); S.ieResult=null; } if(S.view==="toeic"){ toStop(); S.toResult=null; }
     S.advTab=k; setTab("adv"); return; }
@@ -3453,7 +3463,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.183";
+const APP_VERSION="2026.10.184";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3970,7 +3980,7 @@ document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.part
     if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
     if(e.key==="Backspace"){ e.preventDefault(); D.sel.pop(); duPush(); return pgRender(); }
     if(/^[a-z]$/i.test(e.key)){ const k=D.hand.findIndex((c,i)=>c===e.key.toLowerCase()&&!D.sel.includes(i)); if(k>=0){ e.preventDefault(); return duPick(k); } } }
-  if(S.pg&&S.view==="play"&&(S.playMode||"party")==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="drIn"){ e.preventDefault(); drGuess(); return; } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+  if(S.pg&&S.view==="play"&&["party","duo"].includes(S.playMode||"party")&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="drIn"){ e.preventDefault(); drGuess(); return; } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -4440,9 +4450,9 @@ function viewCoop(){ const m=S.compMode==="toeic"?"toeic":"ielts";
   return `<div class="seg exam-seg" role="group"><button data-act="compmode" data-k="ielts" aria-pressed="${m==="ielts"}">🎓 IELTS</button><button data-act="compmode" data-k="toeic" aria-pressed="${m==="toeic"}">💼 TOEIC</button></div><div class="ie-lobby">${m==="toeic"?toLobby():ieLobby()}</div>`; }
 // multiplayer games get their own bottom tab (open to everyone from day one)
 function viewPlay(){
-  const m="party"; S.playMode="party";
+  if(!["party","duo"].includes(S.playMode)) S.playMode="party"; const duo=S.playMode==="duo";
   const seg="";
-  return `<div class="view play-view">${pgPlaying()?"":`<div class="play-head"><div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabPlay")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T("playSub")}</p></div><img src="assets/art/scene-party.webp" alt="" class="play-art"></div>`}${seg}${`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
+  return `<div class="view play-view">${pgPlaying()?"":`<div class="play-head"><div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T(duo?"pmDuo":"pmParty")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T(duo?"pmDuoSub":"playSub")}</p></div><img src="assets/art/scene-party.webp" alt="" class="play-art"></div>`}${seg}${`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
 }
 
 /* ---------- party games (2–6 players): spelling race & letter rain ---------- */
@@ -4457,19 +4467,56 @@ async function pgLoadSpell(){ if(PG_SPELL) return PG_SPELL; try{ PG_SPELL=(await
 async function pgLoadMean(){ if(PG_MEAN) return; try{ PG_MEAN=await (await fetch("games/meanings.json")).json(); }catch(e){ PG_MEAN={}; } }
 const PG_LI={zh:0,hi:1,es:2,ja:3,ko:4,en:5};
 const PG_VOW="aeiou", PG_FREQ="eeeeeeeeeeeaaaaaaaaiiiiiiiioooooooonnnnnnrrrrrrttttttllllsssssuuuddddgggbbccmmppffhhvvwwyykxjqz";
-const pgMe=()=>CLOUD.user?CLOUD.user.uid:"";
+const pgMe=()=>S.pg&&S.pg.local?"me":CLOUD.user?CLOUD.user.uid:"";
 const pgName=()=>(game().nick||(CLOUD.user&&CLOUD.user.displayName)||"Player").slice(0,16);
 const pgNm=u=>{ const P=S.pg&&S.pg.party; const n=(P&&P.players&&P.players[u])||"?"; return u===pgMe()?T("pgYou"):n; };
-const pgRef=(...p)=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"parties",...p);
+const pgRef=(...p)=>S.pg&&S.pg.local?{path:["parties",...p].join("/")}:CLOUD.fb.fsM.doc(CLOUD.fb.db,"parties",...p);
 const pgPts=n=>[0,0,0,3,5,8,12,17,23,30,38][Math.min(n,10)];
 const pgMask=w=>PG_BLOCK.has(w)?w[0]+"*".repeat(w.length-1):w;
 function pgRandLetter(hand){ const v=(hand||[]).filter(c=>PG_VOW.includes(c)).length; if(v===0||(hand.length>=3&&v/hand.length<0.25)) return PG_VOW[Math.floor(Math.random()*5)]; return PG_FREQ[Math.floor(Math.random()*PG_FREQ.length)]; }
 function pgShuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
+/* ----- practice room (developer mode): an in-memory "database" and a computer opponent, so the 2-player games can be tried alone ----- */
+const PG_BOT="bot";
+function pgFs(){ return S.pg&&S.pg.local?PG_LOCAL_FS:CLOUD.fb.fsM; }
+function pgLocalApply(path,data,merge){ const pg=S.pg; if(!pg||!pg.local) return; const parts=path.split("/"), tgt=parts.length<=2?"party":parts[3];
+  let o=tgt==="party"?pg.party:(pg.ps[tgt]=pg.ps[tgt]||{}); if(!merge){ o={}; }
+  for(const [k,v] of Object.entries(data)){ if(k.includes(".")){ const ks=k.split("."); let c=o; for(const x of ks.slice(0,-1)) c=c[x]=c[x]&&typeof c[x]==="object"?{...c[x]}:{}; c[ks[ks.length-1]]=v; } else if(merge&&v&&typeof v==="object"&&!Array.isArray(v)&&o[k]&&typeof o[k]==="object"&&!Array.isArray(o[k])) o[k]={...o[k],...v}; else o[k]=v; }
+  if(tgt==="party") pg.party=o; else pg.ps[tgt]=o;
+  if(tgt===PG_BOT) botOnWrite(data); if(tgt===pgMe()) pgGifts();
+  if(tgt==="party"&&o.state==="done") pgFinish(); if(tgt==="party"&&o.state==="play") pgTickStart(); }
+const PG_LOCAL_FS={ setDoc:async(r,d,opt)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),!!(opt&&opt.merge)), updateDoc:async(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),true),
+  deleteDoc:async()=>{}, deleteField:()=>undefined,
+  runTransaction:async(db,fn)=>fn({get:async r=>{ const parts=r.path.split("/"); const d=parts.length<=2?S.pg.party:S.pg.ps[parts[3]]; return {exists:()=>!!d, data:()=>JSON.parse(JSON.stringify(d||{}))}; }, update:(r,d)=>pgLocalApply(r.path,d,true), set:(r,d)=>pgLocalApply(r.path,d,false)}) };
+function pgBotRoom(kind){ if(!DEV) return; pgStop(); const s=stats(), now=Date.now(), j=x=>Math.round(x*(0.9+Math.random()*0.2));
+  S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖"}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
+  pgLoadWords(); pgRender(true); }
+const pgNameLocal=()=>(game().nick||"Player").slice(0,16);
+function botWord(min,max){ const L=[...(PG_WORDS||[])].filter(w=>w.length>=min&&w.length<=max&&/^[a-z]+$/.test(w)); return L.length?L[Math.floor(Math.random()*L.length)]:"cat"; }
+// my writes to the bot's document: hits in the duel
+function botOnWrite(d){ const pg=S.pg; for(const [k,v] of Object.entries(d)){ if(!k.startsWith("gifts.")||!v||!(v.h>0)) continue;
+  setTimeout(()=>{ if(S.pg!==pg) return; const b=pg.ps[PG_BOT], blk=Math.random()<0.45, dmg=Math.max(1,Math.round(v.h*(blk?1-DU.block:1)));
+    b.hp=Math.max(0,(b.hp==null?b.hpMax:b.hp)-dmg); if(blk) b.blk=(b.blk||0)+1; pgRender(); },DU.wind); } }
+function botTick(){ const pg=S.pg, P=pg&&pg.party; if(!pg||!pg.local||!P||P.state!=="play") return; const now=Date.now(), B=pg.bot, b=pg.ps[PG_BOT];
+  if(P.game==="duel"){ if(!b.hpFix&&pg.D){ const avg=k=>(pg.D.st[k]+b.st[k])/2; b.hpMax=Math.round(DU.hp*duClamp(Math.pow(b.st.hp/avg("hp"),0.3),0.9,1.12)); b.hp=b.hpMax; b.hpFix=true; b.t0=P.start; b.words=[]; b.bad=[]; }
+    if(now<P.start||b.hp<=0||!pg.D||pg.D.hp<=0) return; if(!B.next) B.next=P.start+4000+Math.random()*3000;
+    if(now>=B.next&&now<P.start+DU.total*1000){ B.next=now+4500+Math.random()*4000; const w=botWord(3,Math.random()<0.3?7:5), avg=k=>(pg.D.st[k]+b.st[k])/2;
+      const m=duClamp(Math.pow((b.st.atk/avg("atk"))/(pg.D.st.def/avg("def")),0.3),0.88,1.15), h=Math.max(1,Math.round(duBase(w.length)*m)); b.words.push(w);
+      pgLocalApply("parties/BOT/p/me",{["gifts.b"+now]:{h, w, f:PG_BOT, at:now}},true); } return; }
+  if(P.game==="draw"){ if(now<P.start) return; const C=drCur(), F=drPhase(now), d=drDealer(C.i), key=C.i+"-"+drPhNum(F.k);
+    if(d===PG_BOT&&(F.k==="d1"||F.k==="d2")){ const W=drWord(C.i).w, pts=B.dots&&B.dots.w===W?B.dots.st:(B.dots={w:W, st:botDots(W)}).st, frac=Math.min(1,(now-(F.k==="d1"?F.L.d1:F.L.d2))/(DR.draw*0.8));
+      const n=Math.ceil(pts.length*frac); if(B.drn!==key+":"+n){ B.drn=key+":"+n; b.dr={k:key, s:drEnc(pts.slice(0,n))}; } }
+    if(d!==PG_BOT&&(F.k==="g1"||F.k==="g2")){ const ph=F.k==="g1"?1:2, dg=b.dg||{}; if(dg[C.i+"-1"]&&dg[C.i+"-1"].ok) return; if(dg[C.i+"-"+ph]) return;
+      if(!B.at||B.at.k!==C.i+"-"+ph) B.at={k:C.i+"-"+ph, t:now+2000+Math.random()*(ph===1?7000:10000), ok:Math.random()<(ph===1?0.55:0.8)};
+      if(now>=B.at.t){ const W=drWord(C.i).w, w=B.at.ok?W:botWord(5,5); b.dg={...dg, [C.i+"-"+ph]:{w, ok:w===W, e:now-(ph===1?F.L.g1:F.L.g2), ph}}; } } } }
+// the computer "writes" by dotting the word's letters left to right
+function botDots(w){ try{ const c=document.createElement("canvas"); c.width=c.height=200; const x=c.getContext("2d"); x.fillStyle="#000"; x.font="bold 54px sans-serif"; x.textAlign="center"; x.textBaseline="middle"; x.fillText(String(w).toUpperCase(),100,100);
+  const px=x.getImageData(0,0,200,200).data, out=[]; for(let i=4;i<200;i+=5) for(let j=4;j<200;j+=5) if(px[(j*200+i)*4+3]>140) out.push([i*5+(Math.random()*6-3), j*5+(Math.random()*6-3)]); return out; }catch(e){ return []; } }
+
 /* ----- room ----- */
 async function pgCreate(kind){
   if(!CLOUD.user||!CLOUD.fb) return;
-  const {fsM}=CLOUD.fb; S.pgBusy=T("coOpening"); pgRender();
+  const fsM=pgFs(); S.pgBusy=T("coOpening"); pgRender();
   try{
     let code;
     for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await fsM.getDoc(pgRef(code)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
@@ -4481,7 +4528,7 @@ async function pgCreate(kind){
 async function pgJoin(code){
   if(!CLOUD.user||!CLOUD.fb) return; code=(code||"").trim();
   if(!/^\d{4}$/.test(code)) return toast(T("pgNoRoom"));
-  const {fsM}=CLOUD.fb; S.pgBusy=T("coJoining"); pgRender();
+  const fsM=pgFs(); S.pgBusy=T("coJoining"); pgRender();
   try{
     const s=await fsM.getDoc(pgRef(code)); const d=s.exists()?s.data():null;
     if(!d||d.state==="done"||Date.now()-(d.created||0)>3600e3){ S.pgBusy=null; pgRender(); return toast(T("pgNoRoom")); }
@@ -4497,7 +4544,7 @@ async function pgJoin(code){
 }
 function pgStop(){ if(S.pg){ (S.pg.unsubs||[]).forEach(f=>{ try{ f(); }catch(e){} }); } clearInterval(S.pgTimer); S.pgTimer=null; }
 function pgListen(code){
-  pgStop(); const {fsM}=CLOUD.fb;
+  pgStop(); const fsM=pgFs();
   S.pg={code, party:null, ps:{}, subbed:{}, unsubs:[], L:null};
   const me=S.pg;
   me.unsubs.push(fsM.onSnapshot(pgRef(code), snap=>{
@@ -4513,8 +4560,8 @@ function pgListen(code){
   pgRender();
 }
 async function pgLeave(){
-  const pg=S.pg; pgStop(); S.pg=null; S.pgGuessV="";
-  if(pg&&pg.party&&CLOUD.fb){ const {fsM}=CLOUD.fb;
+  const pg=S.pg; pgStop(); S.pg=null; S.pgGuessV=""; if(pg&&pg.local){ S.drRaf=0; return pgRender(); }
+  if(pg&&pg.party&&CLOUD.fb){ const fsM=pgFs();
     if(pg.party.state==="wait"){
       if(pg.party.host===pgMe()) fsM.deleteDoc(pgRef(pg.code)).catch(()=>{});
       else fsM.updateDoc(pgRef(pg.code),{["players."+pgMe()]:fsM.deleteField()}).catch(()=>{});
@@ -4526,7 +4573,7 @@ async function pgStartGame(){
   const pg=S.pg; if(!pg||!pg.party||pg.party.host!==pgMe()||pg.party.state!=="wait") return;
   if(pg.party.game==="duel"&&Object.keys(pg.party.players||{}).length!==2) return toast(T("duNeed2"));
   if(pg.party.game==="draw"&&Object.keys(pg.party.players||{}).length<2) return toast(T("drNeed2"));
-  const {fsM}=CLOUD.fb; const P=pg.party, up={state:"play", start:Date.now()+3500, seed:String(Math.floor(Math.random()*1e9))};
+  const fsM=pgFs(); const P=pg.party, up={state:"play", start:Date.now()+3500, seed:String(Math.floor(Math.random()*1e9))};
   if(P.game==="spell"){
     await pgLoadMean();
     const byW=new Map();
@@ -4556,9 +4603,10 @@ function pgTick(){
   const pg=S.pg; if(!pg||!pg.party){ clearInterval(S.pgTimer); S.pgTimer=null; return; }
   const P=pg.party; if(P.state!=="play"){ if(P.state==="done"){ clearInterval(S.pgTimer); S.pgTimer=null; } return; }
   ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick, draw:drTick}[P.game]||pgDropTick)();
+  if(pg.local) botTick();
   pgRender();
 }
-function pgEndGame(){ const pg=S.pg; if(!pg||pg.ending) return; pg.ending=1; if(pg.L){ pg.L.fall=null; pgPushMe(); } if(pg.D){ pg.D.fall=null; duPush(); } CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{state:"done", end:Date.now()}).catch(()=>{ pg.ending=0; }); }
+function pgEndGame(){ const pg=S.pg; if(!pg||pg.ending) return; pg.ending=1; if(pg.L){ pg.L.fall=null; pgPushMe(); } if(pg.D){ pg.D.fall=null; duPush(); } pgFs().updateDoc(pgRef(pg.code),{state:"done", end:Date.now()}).catch(()=>{ pg.ending=0; }); }
 
 /* ----- game 1: word race (multiplayer Wordle) ----- */
 const WD={rounds:5, len:5, tries:6, sec:150, gap:6000};
@@ -4571,7 +4619,7 @@ function wdColors(guess,ans){ const res=Array(guess.length).fill("b"), cnt={}; f
 function wdFirstT(P,i){ let m=Infinity; for(const u in P.players){ const r=wdRec(u,i); if(r.done==="win"&&r.t<m) m=r.t; } return m; }
 function wdScore(r,first){ if(!r||r.done!=="win") return 0; return 10+(WD.tries-r.g.length)*2+(r.t===first?5:0); }
 function spScores(P){ const sc={}; for(const u in P.players){ sc[u]=0; for(let i=0;i<(P.words||[]).length;i++) sc[u]+=wdScore(wdRec(u,i),wdFirstT(P,i)); } return sc; }
-function wdPush(i){ const pg=S.pg, r=wdMine(i); CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), ["wd."+i]:{g:r.g, done:r.done, t:r.t}}).catch(()=>{}); }
+function wdPush(i){ const pg=S.pg, r=wdMine(i); pgFs().updateDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), ["wd."+i]:{g:r.g, done:r.done, t:r.t}}).catch(()=>{}); }
 function pgSpellTick(){
   const pg=S.pg, P=pg.party, i=spRound(P), n=(P.words||[]).length||WD.rounds;
   if(i>=n) return pgEndGame();
@@ -4579,7 +4627,7 @@ function pgSpellTick(){
   if(pg.curFor!==i){ pg.curFor=i; pg.cur=""; }
   const me=wdMine(i); if(!me.done&&now>dl){ me.done="lose"; wdPush(i); }
   const allDone=Object.keys(P.players).every(u=>wdRec(u,i).done);
-  if((allDone||now>dl+800)&&pg.closeFor!==i){ pg.closeFor=i; const {fsM,db}=CLOUD.fb, ref=pgRef(pg.code);
+  if((allDone||now>dl+800)&&pg.closeFor!==i){ pg.closeFor=i; const fsM=pgFs(), db=CLOUD.fb&&CLOUD.fb.db, ref=pgRef(pg.code);
     setTimeout(()=>fsM.runTransaction(db, async tx=>{ const r=((await tx.get(ref)).data().rounds)||{}; if(!r[i]&&Object.keys(r).length===i) tx.update(ref,{["rounds."+i]:{at:Date.now()}}); }).catch(()=>{ pg.closeFor=null; }), allDone?900:0); }
 }
 function wdKey(k){
@@ -4651,7 +4699,7 @@ function pgDropTick(){
   const ids=Object.keys(P.players), allOut=ids.every(u=>u===pgMe()?L.out:dpOut(pg.ps[u],now));
   if(now>P.start+PG.total*1000||allOut) pgEndGame();
 }
-function pgPushMe(){ const pg=S.pg, L=pg&&pg.L; if(!L) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hand:L.hand.join(""), words:L.words, bad:L.bad.slice(-30), pts:L.pts, last:L.last, out:L.out, fall:L.fall?L.fall.l:"", cur:L.sel.map(k=>L.hand[k]).join("")},{merge:true}).catch(()=>{}); },250); }
+function pgPushMe(){ const pg=S.pg, L=pg&&pg.L; if(!L) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hand:L.hand.join(""), words:L.words, bad:L.bad.slice(-30), pts:L.pts, last:L.last, out:L.out, fall:L.fall?L.fall.l:"", cur:L.sel.map(k=>L.hand[k]).join("")},{merge:true}).catch(()=>{}); },250); }
 function pgGifts(){ const pg=S.pg; if(pg&&pg.party&&pg.party.game==="quiz"&&pg.party.state==="play") return qzGifts(); if(pg&&pg.party&&pg.party.game==="duel") return duHits(); if(!pg||!pg.L) return; const L=pg.L, gs=(pg.ps[pgMe()]||{}).gifts||{};
   for(const [id,g] of Object.entries(gs)){ if(L.gifted[id]) continue; L.gifted[id]=1; if(L.out) continue; if(L.hand.length<PG.giftMax){ L.hand.push(g.l); toast(T("pgGift",{n:pgNm(g.f), l:g.l.toUpperCase()})); } else toast(T("pgHandFull")); }
 }
@@ -4659,7 +4707,7 @@ function pgFallKeep(){ const L=S.pg&&S.pg.L; if(!L||!L.fall) return; if(L.hand.l
 function pgFallPass(to){ const pg=S.pg, L=pg&&pg.L; if(!L||!L.fall) return; const now=Date.now();
   if(dpOut(pg.ps[to],now)) return toast(T("pgOutTag"));
   const id=pgMe().slice(0,6)+"-"+(++L.sent)+"-"+now; const l=L.fall.l; L.fall=null;
-  CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",to),{["gifts."+id]:{l, f:pgMe(), at:now}}).then(()=>toast(T("pgSent",{n:pgNm(to)}))).catch(()=>toast(T("syncFail"))); pgRender(); }
+  pgFs().updateDoc(pgRef(pg.code,"p",to),{["gifts."+id]:{l, f:pgMe(), at:now}}).then(()=>toast(T("pgSent",{n:pgNm(to)}))).catch(()=>toast(T("syncFail"))); pgRender(); }
 function pgPick(k){ const L=S.pg&&S.pg.L; if(!L||L.out) return; const j=L.sel.indexOf(k); if(j>=0) L.sel.splice(j,1); else L.sel.push(k); pgPushMe(); pgRender(); }
 function pgClearSel(){ const L=S.pg&&S.pg.L; if(L){ L.sel=[]; pgPushMe(); pgRender(); } }
 function pgDiscard(){ const L=S.pg&&S.pg.L; if(!L||!L.sel.length) return; L.hand=L.hand.filter((_,k)=>!L.sel.includes(k)); L.sel=[]; pgPushMe(); pgRender(); }
@@ -4722,7 +4770,7 @@ function duMe(){ const pg=S.pg; if(pg.D) return pg.D; const P=pg.party, p=pg.ps[
   if(hand.filter(c=>PG_VOW.includes(c)).length<2){ hand[1]=PG_VOW[Math.floor(Math.random()*5)]; hand[4]=PG_VOW[Math.floor(Math.random()*5)]; }
   pg.D={st:{hp:s.hp|0, atk:s.atk|0, def:s.def|0}, hand, sel:[], fall:null, fallId:0, next:P.start+DU.dropMs, words:[], bad:[], dmg:0, hp:DU.hp, hpMax:DU.hp, hpFix:false, blk:0, seen, inc:[], cd:0, fx:{}};
   duPush(); return pg.D; }
-function duPush(){ const pg=S.pg, D=pg&&pg.D; if(!D) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), t0:pg.party.start, st:D.st, look:myLook(), hand:D.hand.join(""), words:D.words, bad:D.bad.slice(-30), dmg:D.dmg, hp:D.hp, hpMax:D.hpMax, hpFix:D.hpFix, blk:D.blk, cur:D.sel.map(k=>D.hand[k]).join("")},{merge:true}).catch(()=>{}); },150); }
+function duPush(){ const pg=S.pg, D=pg&&pg.D; if(!D) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), t0:pg.party.start, st:D.st, look:myLook(), hand:D.hand.join(""), words:D.words, bad:D.bad.slice(-30), dmg:D.dmg, hp:D.hp, hpMax:D.hpMax, hpFix:D.hpFix, blk:D.blk, cur:D.sel.map(k=>D.hand[k]).join("")},{merge:true}).catch(()=>{}); },150); }
 function duHits(){ const pg=S.pg, D=pg&&pg.D; if(!D) return; const gs=(pg.ps[pgMe()]||{}).gifts||{}, now=Date.now();
   for(const [id,g] of Object.entries(gs)){ if(D.seen[id]) continue; D.seen[id]=1; if(!g||!(g.h>0)||D.hp<=0) continue;
     D.inc.push({id, h:Math.min(200,g.h|0), w:String(g.w||"").slice(0,20), at:now, until:now+DU.wind, shield:false}); sfx(660,0.09,"square",0.06,990); } }
@@ -4753,7 +4801,7 @@ function duSubmit(){
   if(!PG_WORDS.has(w)){ if(!D.bad.includes(w)) D.bad.push(w); pg.shake=Date.now(); D.sel=[]; duPush(); pgRender(); return toast(T("pgInvalid")); }
   const opp=duOpp(), now=Date.now(), dmg=Math.max(1,Math.round(duBase(w.length)*duMult()));
   D.hand=D.hand.filter((_,k)=>!D.sel.includes(k)); D.sel=[]; D.words.push(w); D.dmg+=dmg; D.fx.atk=now; D.fx.numOp={v:dmg, t:now, w}; pg.flashOk=now; sfx(w.length>=6?"crit":"hit");
-  if(opp){ const id=pgMe().slice(0,6)+"-"+D.words.length+"-"+now; CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",opp),{["gifts."+id]:{h:dmg, w, f:pgMe(), at:now}}).catch(()=>toast(T("syncFail"))); }
+  if(opp){ const id=pgMe().slice(0,6)+"-"+D.words.length+"-"+now; pgFs().updateDoc(pgRef(pg.code,"p",opp),{["gifts."+id]:{h:dmg, w, f:pgMe(), at:now}}).catch(()=>toast(T("syncFail"))); }
   duPush(); pgRender(); }
 function duPick(k){ const D=S.pg&&S.pg.D; if(!D||D.hp<=0) return; const j=D.sel.indexOf(k); if(j>=0) D.sel.splice(j,1); else D.sel.push(k); duPush(); pgRender(); }
 function duKeep(){ const D=S.pg&&S.pg.D; if(!D||!D.fall) return; if(D.hand.length>=DU.handMax) return toast(T("pgHandFull")); D.hand.push(D.fall.l); D.fall=null; duPush(); pgRender(); }
@@ -4827,7 +4875,7 @@ function drStrokesNow(){ const pg=S.pg, k=drKeyNow(), d=drDealer(drCur().i);
   if(d===pgMe()) return pg.DW&&pg.DW.k===k?pg.DW.st:[];
   const r=(pg.ps[d]||{}).dr; if(!r||r.k!==k) return []; if(pg.drCache&&pg.drCache.s===r.s) return pg.drCache.st; const st=drDec(r.s); pg.drCache={s:r.s, st}; return st; }
 function drCanDraw(){ const F=drPhase(Date.now()); return (F.k==="d1"||F.k==="d2")&&drDealer(drCur().i)===pgMe(); }
-function drSend(){ const pg=S.pg, W=pg.DW; if(!W) return; CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dr:{k:W.k, s:drEnc(W.st)}},{merge:true}).catch(()=>{}); }
+function drSend(){ const pg=S.pg, W=pg.DW; if(!W) return; pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dr:{k:W.k, s:drEnc(W.st)}},{merge:true}).catch(()=>{}); }
 function drPush(now){ const pg=S.pg; if(now){ clearTimeout(pg.drT); pg.drT=null; return drSend(); } if(pg.drT) return; pg.drT=setTimeout(()=>{ pg.drT=null; drSend(); },300); }
 // the board turns (round 1) or shakes (round 2); the same motion is used to map the dealer's finger back onto the board
 function drXf(k,now){ const L=drPhase(now).L;
@@ -4854,14 +4902,14 @@ function drGuess(){ const pg=S.pg, inp=document.getElementById("drIn"), w=((inp&
   if(!/^[a-z]{5}$/.test(w)) return toast(T("drNeed5"));
   const ok=w===String(drWord(C.i).w).toLowerCase(), r={w, ok, e:now-(ph===1?F.L.g1:F.L.g2), ph};
   pg.DG={...drDg(pgMe()), [C.i+"-"+ph]:r};
-  CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dg:pg.DG},{merge:true}).catch(()=>toast(T("syncFail")));
+  pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dg:pg.DG},{merge:true}).catch(()=>toast(T("syncFail")));
   if(ok){ sfx(880,0.12,"triangle",0.08,1320); toast(T("drRight",{p:drPts(r)})); } else { sfx(180,0.18,"sawtooth",0.06,120); toast(T(ph===1?"drWrong1":"drWrong2")); }
   pgRender(); }
 function drTick(){ const pg=S.pg, P=pg.party, now=Date.now(); if(now<P.start) return; drLoop();
   const C=drCur(), F=drPhase(now), host=P.host===pgMe();
-  if(host&&!C.end&&F.k!=="intro"&&F.k!=="d1"&&F.k!=="rev"&&drAllGot(C.i)&&pg.drEndSent!==C.i){ pg.drEndSent=C.i; CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{cur:{...C, end:now}}).catch(()=>{ pg.drEndSent=null; }); }
+  if(host&&!C.end&&F.k!=="intro"&&F.k!=="d1"&&F.k!=="rev"&&drAllGot(C.i)&&pg.drEndSent!==C.i){ pg.drEndSent=C.i; pgFs().updateDoc(pgRef(pg.code),{cur:{...C, end:now}}).catch(()=>{ pg.drEndSent=null; }); }
   if(F.k==="rev"&&now>=F.end+DR.reveal&&(host||now>F.end+DR.reveal+6000)) drAdvance(C.i); }
-async function drAdvance(i){ const pg=S.pg; if(pg.drAdv===i) return; pg.drAdv=i; const {fsM,db}=CLOUD.fb, ref=pgRef(pg.code);
+async function drAdvance(i){ const pg=S.pg; if(pg.drAdv===i) return; pg.drAdv=i; const fsM=pgFs(), db=CLOUD.fb&&CLOUD.fb.db, ref=pgRef(pg.code);
   try{ await fsM.runTransaction(db, async tx=>{ const s=await tx.get(ref); const d=s.exists()?s.data():null; if(!d||d.state!=="play") return; const c=d.cur||{i:0};
     if(c.i!==i) return; const tot=(d.rr||1)*((d.order||Object.keys(d.players||{})).length);
     if(i+1>=tot) tx.update(ref,{state:"done", end:Date.now()}); else tx.update(ref,{cur:{i:i+1, ts:Date.now()+400}}); }); }
@@ -4921,7 +4969,7 @@ function bmTick(){
   if(P.boom&&pg.boomSnd!==P.boom.at){ pg.boomSnd=P.boom.at; if(now-P.boom.at<2000){ sfx(180,0.6,"sawtooth",0.18,40); sfx(90,0.8,"square",0.12,30); } }
   if(P.last&&pg.passSnd!==P.last.at){ pg.passSnd=P.last.at; if(now-P.last.at<1500){ sfx(660,0.08,"triangle",0.1); setTimeout(()=>sfx(990,0.12,"triangle",0.1),80); } }
   if(now>=B.ts&&now<B.end){ const left=B.end-now, tick=left<=3000?Math.ceil(left/250):Math.ceil(left/1000)*10; if(pg.tickAt!==tick){ pg.tickAt=tick; if(left<=3000) sfx(1200,0.05,"square",0.07); else sfx(left<=6000?880:620,0.05,"square",0.05); } }
-  if(now>B.end+300&&pg.boomFor!==B.n){ pg.boomFor=B.n; const {fsM,db}=CLOUD.fb, ref=pgRef(pg.code), n=B.n;
+  if(now>B.end+300&&pg.boomFor!==B.n){ pg.boomFor=B.n; const fsM=pgFs(), db=CLOUD.fb&&CLOUD.fb.db, ref=pgRef(pg.code), n=B.n;
     fsM.runTransaction(db, async tx=>{ const d=(await tx.get(ref)).data(); const b=d.bomb; if(!b||b.n!==n||d.state!=="play") return;
       const lives={...d.lives}; lives[b.h]=Math.max(0,(lives[b.h]||0)-1); const up={["lives."+b.h]:lives[b.h], boom:{u:b.h, at:Date.now(), syl:b.syl}};
       if(lives[b.h]===0) up["out."+b.h]=Date.now();
@@ -4931,7 +4979,7 @@ function bmTick(){
       tx.update(ref,up); }).catch(()=>{ pg.boomFor=null; });
   }
 }
-function bmPushTy(){ const pg=S.pg; clearTimeout(pg.tyT); pg.tyT=setTimeout(()=>{ CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{ty:{u:pgMe(), s:(pg.bcur||"").slice(0,20)}}).catch(()=>{}); },220); }
+function bmPushTy(){ const pg=S.pg; clearTimeout(pg.tyT); pg.tyT=setTimeout(()=>{ pgFs().updateDoc(pgRef(pg.code),{ty:{u:pgMe(), s:(pg.bcur||"").slice(0,20)}}).catch(()=>{}); },220); }
 function bmKey(k){
   const pg=S.pg; if(!pg||!pg.party||pg.party.state!=="play"||pg.party.game!=="bomb") return false;
   const B=pg.party.bomb; if(!B||B.h!==pgMe()||Date.now()<B.ts) return true;
@@ -4941,7 +4989,7 @@ function bmKey(k){
   bmPushTy(); pgRender(); return true;
 }
 function bmMe(){ const pg=S.pg; if(!pg.B){ const p=pg.ps[pgMe()]||{}; pg.B={words:[...(p.words||[])], bad:[...(p.bad||[])], abc:p.abc||""}; } return pg.B; }
-function bmSave(){ const pg=S.pg, M=bmMe(); CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), words:M.words, bad:M.bad.slice(-30), abc:M.abc},{merge:true}).catch(()=>{}); }
+function bmSave(){ const pg=S.pg, M=bmMe(); pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), words:M.words, bad:M.bad.slice(-30), abc:M.abc},{merge:true}).catch(()=>{}); }
 async function bmSubmit(){
   const pg=S.pg, P=pg.party, B=P.bomb, w=(pg.bcur||"").toLowerCase(), M=bmMe();
   if(w.length<3){ pg.shake=Date.now(); pgRender(); return toast(T("pgTooShort")); }
@@ -4949,7 +4997,7 @@ async function bmSubmit(){
   if(!PG_WORDS||!PG_WORDS.size){ pgLoadWords(); return toast(T("loading")); }
   if((P.used||{})[w]){ pg.shake=Date.now(); pg.bcur=""; bmPushTy(); pgRender(); return toast(T("bmUsed")); }
   if(!PG_WORDS.has(w)){ pg.shake=Date.now(); if(!M.bad.includes(w)) M.bad.push(w); bmSave(); pg.bcur=""; bmPushTy(); pgRender(); return toast(T("pgInvalid")); }
-  const {fsM,db}=CLOUD.fb, ref=pgRef(pg.code); let ok=false, lifeUp=false;
+  const fsM=pgFs(), db=CLOUD.fb&&CLOUD.fb.db, ref=pgRef(pg.code); let ok=false, lifeUp=false;
   let abc=M.abc; for(const c of w) if(BM.abc.includes(c)&&!abc.includes(c)) abc+=c;
   if([...BM.abc].every(c=>abc.includes(c))){ lifeUp=true; }
   try{ await fsM.runTransaction(db, async tx=>{ const d=(await tx.get(ref)).data(); const b=d.bomb; if(!b||b.k!==B.k||b.h!==pgMe()||d.state!=="play"||Date.now()>b.end) return;
@@ -4988,7 +5036,7 @@ const QZ={sec:180, inc:[10,20,40,80,150], incCost:[0,60,200,600,1500], mult:[1,1
 let PG_QUIZ=null;
 async function pgLoadQuiz(){ if(PG_QUIZ) return PG_QUIZ; try{ PG_QUIZ=(await (await fetch("games/quiz.json")).json()).q||[]; }catch(e){ PG_QUIZ=[]; } return PG_QUIZ; }
 function qzMine(){ const pg=S.pg; if(!pg.Q){ const p=pg.ps[pgMe()]||{}; pg.Q={gold:p.gold||0, ok:p.ok||0, ng:p.ng||0, streak:0, best:p.best||0, inc:p.inc||0, mult:p.mult||0, shield:p.shield||0, frozen:0, frozenBy:"", miss:[...(p.miss||[])], seen:{}, q:null, fb:null, gifted:Object.fromEntries(Object.keys(p.gifts||{}).map(k=>[k,1])), sent:0}; } return pg.Q; }
-function qzSave(){ const pg=S.pg, Q=qzMine(); clearTimeout(pg.qT); pg.qT=setTimeout(()=>CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), gold:Math.round(Q.gold), ok:Q.ok, ng:Q.ng, best:Q.best, inc:Q.inc, mult:Q.mult, shield:Q.shield, miss:Q.miss.slice(-40)},{merge:true}).catch(()=>{}),200); }
+function qzSave(){ const pg=S.pg, Q=qzMine(); clearTimeout(pg.qT); pg.qT=setTimeout(()=>pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), gold:Math.round(Q.gold), ok:Q.ok, ng:Q.ng, best:Q.best, inc:Q.inc, mult:Q.mult, shield:Q.shield, miss:Q.miss.slice(-40)},{merge:true}).catch(()=>{}),200); }
 const qzMean=o=>o.m[PG_LI[LANG]]||o.m[5];
 function qHide(m, word){   // qMean, then also unwrap "(phrase with the word: meaning)" and blank a quoted copy of the word
   let t=qMean(m, word); const w=(word||"").toLowerCase(); if(!w) return t;
@@ -5033,7 +5081,7 @@ function qzAttack(kind,to){
   const pg=S.pg, Q=qzMine(), cost=kind==="freeze"?QZ.freeze:QZ.steal;
   if(Q.gold<cost) return toast(T("qzNoMoney"));
   Q.gold-=cost; qzSave(); const id=pgMe().slice(0,6)+"-q"+(++Q.sent)+"-"+Date.now();
-  CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",to),{["gifts."+id]:{k:kind, f:pgMe(), at:Date.now()}}).then(()=>toast(T("qzSentAtk",{n:pgNm(to)}))).catch(()=>toast(T("syncFail")));
+  pgFs().updateDoc(pgRef(pg.code,"p",to),{["gifts."+id]:{k:kind, f:pgMe(), at:Date.now()}}).then(()=>toast(T("qzSentAtk",{n:pgNm(to)}))).catch(()=>toast(T("syncFail")));
   pg.qzPick=null; pg.qzShop=false; pgRender();
 }
 function qzGifts(){
@@ -5043,7 +5091,7 @@ function qzGifts(){
     if(g.k!=="freeze"&&g.k!=="steal") continue;
     if(Q.shield>0){ Q.shield--; toast(T("qzBlocked",{n:pgNm(g.f)})); continue; }
     if(g.k==="freeze"){ Q.frozen=Date.now()+QZ.freezeMs; Q.frozenBy=g.f; toast(T("qzFrozen",{n:pgNm(g.f)})); }
-    else { const amt=Math.floor(Q.gold*QZ.stealPct); Q.gold-=amt; toast(T("qzStolen",{n:pgNm(g.f),a:amt})); if(amt>0){ const lid=pgMe().slice(0,6)+"-l"+(++Q.sent)+"-"+Date.now(); CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",g.f),{["gifts."+lid]:{k:"loot", f:pgMe(), amt, at:Date.now()}}).catch(()=>{}); } }
+    else { const amt=Math.floor(Q.gold*QZ.stealPct); Q.gold-=amt; toast(T("qzStolen",{n:pgNm(g.f),a:amt})); if(amt>0){ const lid=pgMe().slice(0,6)+"-l"+(++Q.sent)+"-"+Date.now(); pgFs().updateDoc(pgRef(pg.code,"p",g.f),{["gifts."+lid]:{k:"loot", f:pgMe(), amt, at:Date.now()}}).catch(()=>{}); } }
   }
   qzSave(); pgRender();
 }
@@ -5091,6 +5139,7 @@ function pgRows(){
 }
 function pgFinish(){
   const pg=S.pg; if(!pg||pg.rewarded) return; const P=pg.party; pg.rewarded=1;
+  if(pg.local){ pg.reward={none:true, bot:true}; return; }
   const g=game(); g.partyDone=g.partyDone||{}; const key=pg.code+"-"+P.created; if(g.partyDone[key]) return;
   trackPlay(P.game); if(Object.keys(P.players).length<2) { g.partyDone[key]=1; saveGame(); }
   const n=Object.keys(P.players).length; if(n<2){ pg.reward={none:true}; return; }
@@ -5111,7 +5160,7 @@ function pgLookup(w){ const d={zh:"english-chinese-traditional",es:"english-span
 function pgMeanOf(w){ const m=PG_MEAN&&PG_MEAN[w]; if(m) return esc(m[PG_LI[LANG]]||m[5]||m[0]); const s=(PG_SPELL||[]).find(x=>x.w===w); if(s) return esc(s[LANG]||s.en); return ""; }
 function pgResults(){
   const pg=S.pg, P=pg.party, rows=pgRows(), rw=pg.reward;
-  const reward=rw?(rw.none?`<p class="muted sm-t">${T("pgRewardNone")}</p>`:`<div class="reward win"><div class="rw-row"><span>${T("gold")}</span><b>+${rw.gold}</b></div><div class="rw-row"><span>${T("exp")}</span><b>+${rw.exp}</b></div>${rw.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${game().lv}</b></div>`:""}</div>`):"";
+  const reward=rw?(rw.none?`<p class="muted sm-t">${T(rw.bot?"botNoReward":"pgRewardNone")}</p>`:`<div class="reward win"><div class="rw-row"><span>${T("gold")}</span><b>+${rw.gold}</b></div><div class="rw-row"><span>${T("exp")}</span><b>+${rw.exp}</b></div>${rw.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${game().lv}</b></div>`:""}</div>`):"";
   let stats, extra;
   if(P.game==="spell"){
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgScore")}</th><th>${T("pgTries")}</th><th>${T("pgHits")}</th><th>${T("pgMisses")}</th><th>${T("wdRate")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.score}</td><td>${r.tries}</td><td>${r.hits}</td><td>${r.misses}</td><td>${r.acc}%</td></tr>`).join("")}</table>`;
@@ -5179,7 +5228,7 @@ function huState(){ const P=S.pg.party, H=P.hu||{errs:[]}, found={}, ids=Object.
   let miss=0; for(const u of ids){ const r=huRec(u); miss+=r.hm||0; for(const [i,t] of Object.entries(r.hf||{})) if(found[i]===undefined||t<found[i].t) found[i]={u,t}; }
   const nf=H.errs.filter(e=>found[e.i]).length, lives=P.lives||huLives(ids.length);
   return {found, miss, nf, total:H.errs.length, lives, win:H.errs.length>0&&nf>=H.errs.length, dead:miss>=lives, late:Date.now()>(P.endAt||Infinity)}; }
-function huPush(){ const pg=S.pg, H=huMine(); clearTimeout(pg.huT); pg.huT=setTimeout(()=>CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hf:H.hf, hm:H.hm},{merge:true}).catch(()=>{}),120); }
+function huPush(){ const pg=S.pg, H=huMine(); clearTimeout(pg.huT); pg.huT=setTimeout(()=>pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hf:H.hf, hm:H.hm},{merge:true}).catch(()=>{}),120); }
 function huTap(i){ const pg=S.pg, P=pg&&pg.party; if(!P||P.state!=="play"||Date.now()<P.start) return; const st=huState(); if(st.win||st.dead||st.late) return;
   if(st.found[i]) return; const H=huMine();
   if((P.hu.errs||[]).some(e=>e.i===i)){ H.hf[i]=Date.now(); sfx(880,0.12,"triangle",0.08,1320); }
@@ -5213,10 +5262,10 @@ function pgSections(){
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[k])}${k==="duel"||k==="draw"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[k])}${k==="duel"||k==="draw"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
     const joinBox=CLOUD.user?`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
-    return [["pgMain",`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>${login}${joinBox}
-      ${card("duel","⚔️")}${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`]];
+    return [["pgMain",`${S.playMode==="duo"?"":`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>`}${login}${joinBox}
+      ${S.playMode==="duo"?card("duel","⚔️"):`${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
   const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[P.game]||"pgDrop");
@@ -5234,10 +5283,10 @@ function pgSections(){
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
-const pgPlaying=()=>!!(S.pg&&S.pg.party&&S.pg.party.state==="play"&&S.view==="play"&&(S.playMode||"party")==="party");
+const pgPlaying=()=>!!(S.pg&&S.pg.party&&S.pg.party.state==="play"&&S.view==="play"&&["party","duo"].includes(S.playMode||"party"));
 function pgLockSync(){ const on=pgPlaying(); document.body.classList.toggle("pg-lock",on); const box=document.getElementById("pgBox"); if(box) box.classList.toggle("pg-full",on); if(on) window.scrollTo(0,0); }
 function pgRender(force){
-  if(!(S.view==="play"&&(S.playMode||"party")==="party")){ document.body.classList.remove("pg-lock"); return; }
+  if(!(S.view==="play"&&["party","duo"].includes(S.playMode||"party"))){ document.body.classList.remove("pg-lock"); return; }
   const box=document.getElementById("pgBox"); if(!box) return render();
   if(box.classList.contains("pg-full")!==pgPlaying()) pgLockSync();
   const secs=pgSections(), key=secs.map(s=>s[0]).join(",");
@@ -5248,6 +5297,7 @@ function pgRender(force){
 function pgAct(a,t){
   sfxUnlock();
   if(a==="pgcreate") return pgCreate(t.dataset.k);
+  if(a==="pgbot") return pgBotRoom(t.dataset.k);
   if(a==="pgjoin") return pgJoin(($("#pgCode")||{}).value);
   if(a==="pgstart") return pgStartGame();
   if(a==="pgleave"){ S.pgQuitAsk=false; return pgLeave(); }
@@ -5257,7 +5307,7 @@ function pgAct(a,t){
   if(a==="qzans") return qzAnswer(+t.dataset.k);
   if(a==="dushield") return duShield();
   if(a==="drguess") return drGuess();
-  if(a==="drrr"){ const pg=S.pg; if(pg&&pg.party&&pg.party.host===pgMe()&&pg.party.state==="wait") CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{rr:+t.dataset.k}).catch(()=>toast(T("syncFail"))); return; }
+  if(a==="drrr"){ const pg=S.pg; if(pg&&pg.party&&pg.party.host===pgMe()&&pg.party.state==="wait") pgFs().updateDoc(pgRef(pg.code),{rr:+t.dataset.k}).catch(()=>toast(T("syncFail"))); return; }
   if(a==="dusubmit") return duSubmit();
   if(a==="dupick") return duPick(+t.dataset.k);
   if(a==="dukeep") return duKeep();
@@ -7393,6 +7443,14 @@ Object.assign(STR.hi,{"drName": "🌀 घूमता बोर्ड", "drSub":
 Object.assign(STR.es,{"drName": "🌀 Gira y tiembla", "drSub": "De 2 a 6 jugadores se turnan como repartidor. El repartidor escribe una palabra de 5 letras en un tablero que gira; luego todos tienen un intento. Si no aciertan todos, la escribe otra vez en un tablero que tiembla. ¡Acertar antes da más puntos!", "drNeed2": "Se necesitan al menos 2 jugadores", "drRounds": "¿Cuántas rondas?", "drRoundsN": "{n} rondas", "drRoundsSub": "{t} palabras en total", "drYouDeal": "¡Te toca! Tu palabra es", "drYouDealSub": "Escríbela con el dedo en el tablero que gira. ¡Que se entienda!", "drTheyDeal": "🎨 Escribe {n}", "drTheyDealSub": "Mira bien lo que escribe; podrás adivinar una vez cuando termine.", "drPhIntro": "Prepárate", "drPhD1": "Ronda 1: tablero que gira", "drPhG1": "¡Adivina!", "drPhD2": "Ronda 2: tablero que tiembla", "drPhG2": "Última oportunidad", "drPhRev": "Respuesta", "drWriteIt": "Escribe con el dedo:", "drWait": "Todos adivinan tu palabra:", "drWatch": "👀 Mira bien… podrás adivinar al final", "drPh": "5 letras", "drOnce": "Un intento en esta ronda", "drNeed5": "Escribe 5 letras", "drRight": "¡Correcto! +{p}", "drWrong1": "No… mira el tablero que tiembla", "drWrong2": "No…", "drGotIt": "Acertaste «{w}» +{p}", "drGuessed": "Dijiste «{w}»", "drWait2": "Otro intento en la ronda 2", "drWaitEnd": "Espera la respuesta", "drFirstMiss": "ronda 1: {w}", "drDealWait": "Adivinando:", "drHits": "Aciertos", "drFirstHits": "Acertó en la ronda 1", "drNobody": "Nadie acertó"});
 Object.assign(STR.ja,{"drName": "🌀 回転ボードで単語当て", "drSub": "2〜6人で親を交代。親は5文字の単語をゆっくり回るボードに書き、書き終わったら全員1回だけ回答。全員当たらなければ、揺れるボードにもう一度書きます。早く当てるほど高得点、全員正解なら親にも得点！", "drNeed2": "2人以上で遊べます", "drRounds": "何ラウンド？", "drRoundsN": "{n}ラウンド", "drRoundsSub": "全{t}問", "drYouDeal": "あなたが親！単語は", "drYouDealSub": "回るボードに指でこの単語をはっきり書こう！", "drTheyDeal": "🎨 親は{n}", "drTheyDealSub": "よく見て、書き終わったら1回だけ回答できます。", "drPhIntro": "準備", "drPhD1": "第1ラウンド：回転ボード", "drPhG1": "回答！", "drPhD2": "第2ラウンド：揺れるボード", "drPhG2": "ラストチャンス", "drPhRev": "答え", "drWriteIt": "指で書こう：", "drWait": "みんなが回答中：", "drWatch": "👀 よく見て…書き終わったら回答", "drPh": "5文字", "drOnce": "このラウンドは1回だけ", "drNeed5": "5文字の英字を入力", "drRight": "正解！+{p}", "drWrong1": "はずれ…揺れるボードを見よう", "drWrong2": "はずれ…", "drGotIt": "「{w}」正解 +{p}", "drGuessed": "回答「{w}」", "drWait2": "第2ラウンドでもう一度", "drWaitEnd": "答えを待とう", "drFirstMiss": "第1ラウンド：{w}", "drDealWait": "回答中：", "drHits": "正解", "drFirstHits": "第1ラウンドで正解", "drNobody": "誰も当たらなかった"});
 Object.assign(STR.ko,{"drName": "🌀 빙글빙글 보드 단어 맞히기", "drSub": "2~6명이 돌아가며 출제자가 돼요. 출제자는 5글자 단어를 천천히 도는 보드에 쓰고, 다 쓰면 모두 한 번씩 맞혀요. 다 못 맞히면 흔들리는 보드에 다시 써요. 빨리 맞힐수록 높은 점수, 모두 맞히면 출제자도 점수!", "drNeed2": "2명 이상이어야 해요", "drRounds": "몇 라운드?", "drRoundsN": "{n}라운드", "drRoundsSub": "총 {t}문제", "drYouDeal": "출제자예요! 단어는", "drYouDealSub": "도는 보드에 손가락으로 또박또박 써 주세요!", "drTheyDeal": "🎨 출제자: {n}", "drTheyDealSub": "잘 보세요. 다 쓰면 한 번만 맞힐 수 있어요.", "drPhIntro": "준비", "drPhD1": "1라운드: 도는 보드", "drPhG1": "맞혀요!", "drPhD2": "2라운드: 흔들리는 보드", "drPhG2": "마지막 기회", "drPhRev": "정답", "drWriteIt": "손가락으로 쓰세요:", "drWait": "모두 맞히는 중:", "drWatch": "👀 잘 보세요… 다 쓰면 맞힐 수 있어요", "drPh": "5글자", "drOnce": "이번 라운드는 한 번만", "drNeed5": "영어 5글자를 입력하세요", "drRight": "정답! +{p}", "drWrong1": "틀렸어요… 흔들리는 보드를 보세요", "drWrong2": "틀렸어요…", "drGotIt": "“{w}” 정답 +{p}", "drGuessed": "“{w}”(이)라고 답함", "drWait2": "2라운드에서 한 번 더", "drWaitEnd": "정답을 기다려요", "drFirstMiss": "1라운드: {w}", "drDealWait": "맞히는 중:", "drHits": "정답", "drFirstHits": "1라운드에 정답", "drNobody": "아무도 못 맞혔어요"});
+Object.assign(STR.zh,{"tabPlay": "遊戲", "pmParty": "多人遊戲", "pmDuo": "雙人對戰", "pmDuoSub": "找一個朋友 1 對 1 決鬥！建立房間、分享房號就能開始。", "pmDuoT": "雙人對戰", "pmDuoSub2": "兩個人一間房，比誰拼字又快又長。", "duName": "⚔️ 字母對決", "duNeed2": "等對手加入"});
+Object.assign(STR.en,{"tabPlay": "Games", "pmParty": "Party games", "pmDuo": "1 vs 1", "pmDuoSub": "Challenge a friend to a one-on-one duel! Create a room and share the code.", "pmDuoT": "1 vs 1 battles", "pmDuoSub2": "Two players per room: who can spell faster and longer?", "duName": "⚔️ Letter Duel", "duNeed2": "Waiting for a rival"});
+Object.assign(STR.hi,{"tabPlay": "खेल", "pmParty": "मल्टीप्लेयर", "pmDuo": "1 बनाम 1", "pmDuoSub": "दोस्त को 1 बनाम 1 मुकाबले की चुनौती दें!", "pmDuoT": "1 बनाम 1", "pmDuoSub2": "एक कमरे में दो खिलाड़ी।", "duName": "⚔️ अक्षर द्वंद्व", "duNeed2": "विरोधी का इंतज़ार"});
+Object.assign(STR.es,{"tabPlay": "Juegos", "pmParty": "Multijugador", "pmDuo": "1 contra 1", "pmDuoSub": "¡Reta a un amigo a un duelo! Crea una sala y comparte el código.", "pmDuoT": "Duelos 1 contra 1", "pmDuoSub2": "Dos jugadores por sala.", "duName": "⚔️ Duelo de letras", "duNeed2": "Esperando rival"});
+Object.assign(STR.ja,{"tabPlay": "ゲーム", "pmParty": "みんなで遊ぶ", "pmDuo": "1対1対戦", "pmDuoSub": "友だちと1対1で勝負！部屋を作ってコードを送ろう。", "pmDuoT": "1対1対戦", "pmDuoSub2": "1部屋2人で対戦。", "duName": "⚔️ 文字デュエル", "duNeed2": "相手を待っています"});
+Object.assign(STR.ko,{"tabPlay": "게임", "pmParty": "멀티플레이", "pmDuo": "1대1 대결", "pmDuoSub": "친구와 1대1로 대결해요! 방을 만들고 코드를 공유하세요.", "pmDuoT": "1대1 대결", "pmDuoSub2": "한 방에 두 명이 대결해요.", "duName": "⚔️ 글자 대결", "duNeed2": "상대를 기다리는 중"});
+Object.assign(STR.zh,{"botPractice": "跟電腦練習（開發者）", "botNoReward": "🤖 跟電腦練習沒有獎勵。"});
+Object.assign(STR.en,{"botPractice": "Practise vs computer (dev)", "botNoReward": "🤖 Practice games against the computer give no rewards."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
