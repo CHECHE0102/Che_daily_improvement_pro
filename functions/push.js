@@ -60,14 +60,14 @@ async function sendPush(sub, msg, key) {
 
 /* ---------- messages ---------- */
 const MSG = {
-  zh: { am: "📰 今天的新聞來了", amB: "{t}\n點開來讀讀看，順便學幾個新單字吧！", pm: "📖 今天的新聞還沒看喔", pmB: "花 5 分鐘讀一篇，今天的英文就不會斷掉！" },
+  zh: { am: "📰 今天的新聞來了", amB: "{t}\n點開來讀讀看，順便學幾個新單字吧！", pm: "🌙 今天還沒讀新聞哦", pmB: "睡前花 5 分鐘看一下吧！讀完今天的英文就完成了。" },
   test: { zh: ["🔔 測試通知", "通知設定成功！之後每天早上 7 點會提醒你看新聞 📰"], en: ["🔔 Test notification", "It works! You'll get a news reminder every morning at 7 📰"] },
-  sc: { am: "📰 今天的新闻来了", amB: "{t}\n点开来读读看，顺便学几个新单词吧！", pm: "📖 今天的新闻还没看哦", pmB: "花 5 分钟读一篇，今天的英文就不会断掉！" },
-  en: { am: "📰 Today's news is here", amB: "{t}\nTap to read it and pick up a few new words!", pm: "📖 You haven't read today's news yet", pmB: "Five minutes with one story keeps your English going today!" },
-  hi: { am: "📰 आज की ख़बरें आ गई हैं", amB: "{t}\nपढ़ने के लिए टैप करें और कुछ नए शब्द सीखें!", pm: "📖 आपने आज की ख़बर अभी तक नहीं पढ़ी", pmB: "बस 5 मिनट में एक ख़बर पढ़ें और आज की अंग्रेज़ी पूरी करें!" },
-  es: { am: "📰 Ya están las noticias de hoy", amB: "{t}\n¡Toca para leerla y aprender palabras nuevas!", pm: "📖 Todavía no has leído las noticias de hoy", pmB: "¡Cinco minutos con una noticia y hoy también practicas inglés!" },
-  ja: { am: "📰 今日のニュースが届きました", amB: "{t}\nタップして読んで、新しい単語を覚えよう！", pm: "📖 今日のニュースをまだ読んでいません", pmB: "5分で1本読んで、今日の英語を続けよう！" },
-  ko: { am: "📰 오늘의 뉴스가 도착했어요", amB: "{t}\n눌러서 읽고 새 단어도 배워 보세요!", pm: "📖 오늘 뉴스를 아직 안 읽었어요", pmB: "5분만 투자해서 한 편 읽고 오늘의 영어를 이어가요!" },
+  sc: { am: "📰 今天的新闻来了", amB: "{t}\n点开来读读看，顺便学几个新单词吧！", pm: "🌙 今天还没读新闻哦", pmB: "睡前花 5 分钟看一下吧！读完今天的英文就完成了。" },
+  en: { am: "📰 Today's news is here", amB: "{t}\nTap to read it and pick up a few new words!", pm: "🌙 You haven't read today's news yet", pmB: "Take five minutes for it before bed!" },
+  hi: { am: "📰 आज की ख़बरें आ गई हैं", amB: "{t}\nपढ़ने के लिए टैप करें और कुछ नए शब्द सीखें!", pm: "🌙 आपने आज की ख़बर अभी तक नहीं पढ़ी", pmB: "सोने से पहले 5 मिनट निकालकर पढ़ लीजिए!" },
+  es: { am: "📰 Ya están las noticias de hoy", amB: "{t}\n¡Toca para leerla y aprender palabras nuevas!", pm: "🌙 Todavía no has leído las noticias de hoy", pmB: "¡Dedícale cinco minutos antes de dormir!" },
+  ja: { am: "📰 今日のニュースが届きました", amB: "{t}\nタップして読んで、新しい単語を覚えよう！", pm: "🌙 今日のニュース、まだ読んでいませんよ", pmB: "寝る前に5分だけ読んでみよう！" },
+  ko: { am: "📰 오늘의 뉴스가 도착했어요", amB: "{t}\n눌러서 읽고 새 단어도 배워 보세요!", pm: "🌙 오늘 뉴스를 아직 안 읽었어요", pmB: "자기 전에 5분만 읽어 봐요!" },
 };
 export function localNow(tz, d = new Date()) {
   let parts; try { parts = new Intl.DateTimeFormat("en-CA", { timeZone: tz || "Europe/Dublin", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23" }).formatToParts(d); }
