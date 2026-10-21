@@ -1151,7 +1151,8 @@ body.vp-lock{touch-action:pan-x pan-y}
 .du-ko{text-align:center;font-weight:800;padding:10px}
 @media (prefers-reduced-motion: reduce){.du-arena.hit,.du-warn,.du-shield.ready,.du-num,.du-slash,.du-boom{animation:none!important}}
 .dr-clip{overflow:hidden;margin:0 -16px}
-.dr-wrap{--drs:min(330px,calc(100vw - 70px),calc(100vh - 470px));position:relative;width:100%;height:calc(var(--drs) * 1.22);margin:0 auto;display:grid;place-items:center}
+.dr-wrap.big{--drs:min(420px,calc(100vw - 24px),calc(100vh - 330px));height:calc(var(--drs) * 1.42)}
+.dr-wrap{--drs:min(290px,calc(100vw - 100px),calc(100vh - 480px));position:relative;width:100%;height:calc(var(--drs) * 1.22);margin:0 auto;display:grid;place-items:center}
 .dr-cv{width:var(--drs);height:var(--drs);border-radius:18px;background:#FDF6EA;color:#1B2421;box-shadow:0 6px 18px rgba(0,0,0,.35),inset 0 0 0 3px #E6D9BF;touch-action:none;will-change:transform}
 .dr-cv.mine{box-shadow:0 0 0 3px var(--accent),0 6px 18px rgba(0,0,0,.35);cursor:crosshair}
 .dr-hint{text-align:center;margin:4px 0;font-size:14px}.dr-hint b{letter-spacing:.15em;color:var(--gorse)}
@@ -3513,7 +3514,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.189";
+const APP_VERSION="2026.10.190";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5046,7 +5047,7 @@ function drSections(){
   if(F.k==="intro") stage=amD?`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drYouDeal")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p><p class="muted sm-t">${T("drYouDealSub")}</p></div>`
     :`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drTheyDeal",{n:esc(pgNm(d))})}</div><p class="muted sm-t">${T("drTheyDealSub")}</p></div>`;
   else { const ph=drPhNum(F.k)||(drKeyNow().endsWith("-2")?2:1);
-    stage=`${amD&&F.k!=="rev"?`<p class="dr-hint">${T(F.k==="d1"||F.k==="d2"?"drWriteIt":"drWait")} <b>${esc(String(W.w).toUpperCase())}</b></p>`:""}<div class="dr-clip"><div class="dr-wrap${ph===2?" shake":" spin"}"><canvas id="drCv" class="dr-cv${amD&&(F.k==="d1"||F.k==="d2")?" mine":""}"></canvas></div></div>`; }
+    stage=`${amD&&F.k!=="rev"?`<p class="dr-hint">${T(F.k==="d1"||F.k==="d2"?"drWriteIt":"drWait")} <b>${esc(String(W.w).toUpperCase())}</b></p>`:""}<div class="dr-clip"><div class="dr-wrap${ph===2?" shake":" spin"}${amD?" big":""}"><canvas id="drCv" class="dr-cv${amD&&(F.k==="d1"||F.k==="d2")?" mine":""}"></canvas></div></div>`; }
   let guess="";
   if(F.k==="rev"){ const got=drGuessers(C.i).filter(u=>drGot(u,C.i)), dp=drDealerPts(C.i);
     guess=`<div class="dr-rev"><div class="eyebrow">${T("wdAnswer")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p>
