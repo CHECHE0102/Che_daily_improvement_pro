@@ -1151,7 +1151,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .du-ko{text-align:center;font-weight:800;padding:10px}
 @media (prefers-reduced-motion: reduce){.du-arena.hit,.du-warn,.du-shield.ready,.du-num,.du-slash,.du-boom{animation:none!important}}
 .dr-clip{overflow:hidden;margin:0 -16px}
-.dr-wrap{--drs:min(330px,calc(100vw - 70px),calc(100vh - 330px));position:relative;width:100%;height:calc(var(--drs) * 1.22);margin:0 auto;display:grid;place-items:center}
+.dr-wrap{--drs:min(330px,calc(100vw - 70px),calc(100vh - 470px));position:relative;width:100%;height:calc(var(--drs) * 1.22);margin:0 auto;display:grid;place-items:center}
 .dr-cv{width:var(--drs);height:var(--drs);border-radius:18px;background:#FDF6EA;color:#1B2421;box-shadow:0 6px 18px rgba(0,0,0,.35),inset 0 0 0 3px #E6D9BF;touch-action:none;will-change:transform}
 .dr-cv.mine{box-shadow:0 0 0 3px var(--accent),0 6px 18px rgba(0,0,0,.35);cursor:crosshair}
 .dr-hint{text-align:center;margin:4px 0;font-size:14px}.dr-hint b{letter-spacing:.15em;color:var(--gorse)}
@@ -1204,6 +1204,16 @@ body.vp-lock{touch-action:pan-x pan-y}
 @media (prefers-reduced-motion: reduce){.du-side .du-body,.du-imp,.du-fx .du-num{animation:none!important}}
 .du-shield,.du-hand .dp-tile,.du-atk,[data-du]{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 .du-shield:active{transform:scale(.94)}
+.dr-slots{display:flex;justify-content:center;gap:6px;margin:6px 0}
+.dr-slots span{width:42px;height:46px;border-radius:10px;border:2px solid var(--line);display:grid;place-items:center;font-size:24px;font-weight:900;background:var(--card)}
+.dr-slots span.on{border-color:var(--accent)}
+.dr-kb{display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.dr-kr{display:flex;justify-content:center;gap:4px}
+.dr-k{flex:1;max-width:36px;height:42px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:17px;font-weight:800;padding:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.dr-k:active{background:var(--accent-soft)}
+.dr-k.wide{max-width:58px;flex:1.6;font-size:14px}
+.dr-k.go{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.dr-k:disabled{opacity:.45}
 </style>
 
 </head>
@@ -3503,7 +3513,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.188";
+const APP_VERSION="2026.10.189";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4020,7 +4030,7 @@ document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.part
     if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
     if(e.key==="Backspace"){ e.preventDefault(); D.sel.pop(); duPush(); return pgRender(); }
     if(/^[a-z]$/i.test(e.key)){ const k=D.hand.findIndex((c,i)=>c===e.key.toLowerCase()&&!D.sel.includes(i)); if(k>=0){ e.preventDefault(); return duPick(k); } } }
-  if(S.pg&&S.view==="play"&&["party","duo"].includes(S.playMode||"party")&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="drIn"){ e.preventDefault(); drGuess(); return; } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+  if(S.pg&&S.view==="play"&&["party","duo"].includes(S.playMode||"party")&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(S.pg&&S.pg.party&&S.pg.party.game==="draw"&&S.pg.party.state==="play"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":/^[a-z]$/i.test(e.key)?e.key.toLowerCase():""; if(k){ e.preventDefault(); drKey(k); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -4527,7 +4537,7 @@ function pgLocalApply(path,data,mode){ const pg=S.pg; if(!pg||!pg.local) return;
   else { o={...o}; for(const [k,v] of Object.entries(data)){ if(k.includes(".")){ const ks=k.split("."); let c=o; for(const x of ks.slice(0,-1)) c=c[x]=c[x]&&typeof c[x]==="object"?{...c[x]}:{}; c[ks[ks.length-1]]=v; } else o[k]=v; } }
   if(tgt==="party") pg.party=o; else pg.ps[tgt]=o;
   if(tgt===PG_BOT) botOnWrite(data); if(tgt===pgMe()) pgGifts();
-  if(tgt==="party"&&o.state==="done") pgFinish(); if(tgt==="party"&&o.state==="play") pgTickStart(); }
+  if(tgt==="party"&&o.state==="done") pgFinish(); if(tgt==="party"&&o.state==="play") pgTickStart(); pgRender(); }
 const PG_LOCAL_FS={ setDoc:async(r,d,opt)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),opt&&opt.merge?"merge":"set"), updateDoc:async(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"update"),
   deleteDoc:async()=>{}, deleteField:()=>undefined,
   runTransaction:async(db,fn)=>fn({get:async r=>{ const parts=r.path.split("/"); const d=parts.length<=2?S.pg.party:S.pg.ps[parts[3]]; return {exists:()=>!!d, data:()=>JSON.parse(JSON.stringify(d||{}))}; }, update:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"update"), set:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"set")}) };
@@ -4978,8 +4988,13 @@ function drCanDraw(){ const F=drPhase(Date.now()); return (F.k==="d1"||F.k==="d2
 function drSend(){ const pg=S.pg, W=pg.DW; if(!W) return; pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dr:{k:W.k, s:drEnc(W.st)}},{merge:true}).catch(()=>{}); }
 function drPush(now){ const pg=S.pg; if(now){ clearTimeout(pg.drT); pg.drT=null; return drSend(); } if(pg.drT) return; pg.drT=setTimeout(()=>{ pg.drT=null; drSend(); },300); }
 // the board turns (round 1) or shakes (round 2); the same motion is used to map the dealer's finger back onto the board
+function drSpinA(t){ const pg=S.pg, key=(pg.party.seed||"0")+"-"+drCur().i; let sp=pg.drSpin;
+  if(!sp||sp.key!==key){ const r=rng(Number(String(pg.party.seed||"1").slice(-8))+drCur().i*7919), seg=[]; let at=0, dir=r()<.5?1:-1;
+    while(at<DR.draw+DR.guess1+2000){ const len=800+r()*1400, v=(25+r()*55)*dir; seg.push([at,len,v]); at+=len; dir=r()<.7?-dir:dir; }
+    sp=pg.drSpin={key, seg}; }
+  let a=0; for(const [at,len,v] of sp.seg){ if(t<=at) break; a+=v*Math.min(len,t-at)/1000; } return a; }
 function drXf(k,now){ const L=drPhase(now).L;
-  if(k==="d1"||k==="g1") return {a:((now-L.d1)/DR.spin)*360, x:0, y:0};
+  if(k==="d1"||k==="g1") return {a:drSpinA(now-L.d1), x:0, y:0};
   if(k==="d2"||k==="g2"){ const t=now-L.d2; return {a:9*Math.sin(t/150)+3*Math.sin(t/47), x:22*Math.sin(t/83)+12*Math.sin(t/37), y:22*Math.cos(t/97)+12*Math.sin(t/43)}; }
   return {a:0,x:0,y:0}; }
 function drBind(cv){ if(cv.dataset.b) return; cv.dataset.b="1"; let cur=null;
@@ -4997,14 +5012,17 @@ function drLoop(){ if(S.drRaf) return; const step=()=>{ const pg=S.pg; if(!pg||!
     const cv=document.getElementById("drCv"); if(cv){ const now=Date.now(), X=drXf(drPhase(now).k,now); cv.style.transform=`translate(${X.x.toFixed(1)}px,${X.y.toFixed(1)}px) rotate(${X.a.toFixed(2)}deg)`; drBind(cv);
       const st=drStrokesNow(), sig=drKeyNow()+":"+st.length+":"+st.reduce((a,s)=>a+s.length,0); if(cv.dataset.sig!==sig){ cv.dataset.sig=sig; drPaint(cv,st); } }
     S.drRaf=requestAnimationFrame(step); }; S.drRaf=requestAnimationFrame(step); }
-function drGuess(){ const pg=S.pg, inp=document.getElementById("drIn"), w=((inp&&inp.value)||"").trim().toLowerCase(), now=Date.now(), C=drCur(), F=drPhase(now);
+function drGuess(){ const pg=S.pg, w=(pg.drTyped||"").toLowerCase(), now=Date.now(), C=drCur(), F=drPhase(now);
   if(F.k!=="g1"&&F.k!=="g2") return; const ph=F.k==="g1"?1:2; if(drDealer(C.i)===pgMe()||drGot(pgMe(),C.i)||drG(pgMe(),C.i,ph)) return;
   if(!/^[a-z]{5}$/.test(w)) return toast(T("drNeed5"));
   const ok=w===String(drWord(C.i).w).toLowerCase(), r={w, ok, e:now-(ph===1?F.L.g1:F.L.g2), ph};
-  pg.DG={...drDg(pgMe()), [C.i+"-"+ph]:r};
+  pg.DG={...drDg(pgMe()), [C.i+"-"+ph]:r}; pg.drTyped="";
   pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), dg:pg.DG},{merge:true}).catch(()=>toast(T("syncFail")));
   if(ok){ sfx(880,0.12,"triangle",0.08,1320); toast(T("drRight",{p:drPts(r)})); } else { sfx(180,0.18,"sawtooth",0.06,120); toast(T(ph===1?"drWrong1":"drWrong2")); }
   pgRender(); }
+function drKey(k){ const pg=S.pg; if(!pg||!pg.party||pg.party.game!=="draw") return; const F=drPhase(Date.now()); if(F.k!=="g1"&&F.k!=="g2") return;
+  let t=pg.drTyped||""; if(k==="enter") return t.length===5?drGuess():null; if(k==="back") t=t.slice(0,-1); else if(/^[a-z]$/.test(k)&&t.length<5) t+=k; pg.drTyped=t; pgRender(); }
+document.addEventListener("pointerdown",e=>{ const t=e.target.closest("[data-drk]"); if(!t||t.disabled) return; e.preventDefault(); drKey(t.dataset.drk); });
 function drTick(){ const pg=S.pg, P=pg.party, now=Date.now(); if(now<P.start) return; drLoop();
   const C=drCur(), F=drPhase(now), host=P.host===pgMe();
   if(host&&!C.end&&F.k!=="intro"&&F.k!=="d1"&&F.k!=="rev"&&drAllGot(C.i)&&pg.drEndSent!==C.i){ pg.drEndSent=C.i; pgFs().updateDoc(pgRef(pg.code),{cur:{...C, end:now}}).catch(()=>{ pg.drEndSent=null; }); }
@@ -5019,6 +5037,7 @@ function drSections(){
   if(now<P.start) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("drSub")}</p></div>`]];
   drLoop();
   const C=drCur(), F=drPhase(now), d=drDealer(C.i), amD=d===pgMe(), W=drWord(C.i), sc=drScores(), tot=drTotal();
+  if(pg.drTypedFor!==C.i+F.k){ pg.drTypedFor=C.i+F.k; if(F.k==="g1"||F.k==="g2") pg.drTyped=""; }
   const board=`<div class="pg-board">${Object.keys(P.players).map(u=>`<div class="pg-chip${u===pgMe()?" me":""}"><b>${u===d?"🎨 ":""}${esc(pgNm(u))}</b><span>${sc[u]||0}</span></div>`).join("")}</div>`;
   const until={intro:F.L.d1, d1:F.L.g1, g1:F.L.d2, d2:F.L.g2, g2:F.end, rev:F.end+DR.reveal}[F.k], secs=Math.max(0,Math.ceil((until-now)/1000));
   const lab={intro:"drPhIntro", d1:"drPhD1", g1:"drPhG1", d2:"drPhD2", g2:"drPhG2", rev:"drPhRev"}[F.k];
@@ -5036,7 +5055,8 @@ function drSections(){
     if(got) guess=`<p class="dr-st ok">✅ ${T("drGotIt",{w:esc(got.w.toUpperCase()),p:drPts(got)})}</p>`;
     else if(mine) guess=`<p class="dr-st ng">❌ ${T("drGuessed",{w:esc(mine.w.toUpperCase())})} · ${T(ph===1?"drWait2":"drWaitEnd")}</p>`;
     else if(F.k==="d1"||F.k==="d2") guess=`<p class="dr-st">${T("drWatch")}${first&&!first.ok?` <span class="muted">(${T("drFirstMiss",{w:esc(first.w.toUpperCase())})})</span>`:""}</p>`;
-    else guess=`<div class="dr-guess"><input id="drIn" class="search" maxlength="5" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${T("drPh")}"><button class="btn" data-act="drguess">${T("pgGuess")}</button></div><p class="muted sm-t">${T("drOnce")}</p>`; }
+    else { const ty=(pg.drTyped||"").toUpperCase(); guess=`<div class="dr-slots">${Array.from({length:5},(_,k)=>`<span class="${ty[k]?"on":""}">${esc(ty[k]||"")}</span>`).join("")}</div>
+      <div class="dr-kb">${["qwertyuiop","asdfghjkl","+zxcvbnm-"].map(row=>`<div class="dr-kr">${[...row].map(c=>c==="+"?`<button class="dr-k wide go" data-drk="enter"${ty.length===5?"":" disabled"}>${T("pgGuess")}</button>`:c==="-"?`<button class="dr-k wide" data-drk="back">⌫</button>`:`<button class="dr-k" data-drk="${c}">${c.toUpperCase()}</button>`).join("")}</div>`).join("")}</div><p class="muted sm-t" style="margin:4px 0 0;text-align:center">${T("drOnce")}</p>`; } }
   else if(amD&&(F.k==="g1"||F.k==="g2")){ const gs=drGuessers(C.i); guess=`<p class="dr-st">${T("drDealWait")} ${gs.map(u=>{ const r=drGot(u,C.i), m=drG(u,C.i,F.k==="g1"?1:2); return `${r?"✅":m?"❌":"⏳"} ${esc(pgNm(u))}`; }).join(" · ")}</p>`; }
   return [["pgBoard",board],["pgDrTime",time],["pgStage",stage],["pgDrGuess",guess]];
 }
