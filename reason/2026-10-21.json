@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-21",
+ "items": {
+  "2026-10-21": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government will phase out councils' purchases of turnkey homes and rely instead on direct construction of social housing.",
+     "Councils will immediately stop all social housing work until 31 December 2027.",
+     "The Land Development Agency will be closed and replaced by approved housing bodies.",
+     "The Minister has proposed giving private buyers priority over all social housing tenants."
+    ],
+    "a": 0,
+    "exp": "The passage says the Government \"intends to discontinue the purchase of so-called turnkey homes\" and that delivery \"will become increasingly contingent upon direct construction by local authorities, approved housing bodies and the Land Development Agency\". Nothing stops immediately (B), the Agency gains a bigger role (C), and no priority rule for buyers is mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the effect of the change on social housing in the short term?",
+    "opts": [
+     "Social housing rents will rise because councils lose their main source of income.",
+     "Councils can continue buying turnkey homes for some time, so supply from this route will not stop at once.",
+     "Tenants already living in turnkey homes will have to move out.",
+     "Private developers will no longer be allowed to sell new homes to anyone."
+    ],
+    "a": 1,
+    "exp": "\"Applications for turnkey purchases will remain permissible until 31 December 2027\" and the transition \"will be incremental\", so the route continues for now. Rents (A), eviction of tenants (C) and a ban on private sales (D) are never mentioned."
+   },
+   {
+    "type": "tone",
+    "q": "What is the writer's attitude in the final paragraph?",
+    "opts": [
+     "Enthusiastic, presenting the policy as certain to succeed.",
+     "Hostile, arguing that the policy should be reversed.",
+     "Cautious, noting that the outcome depends on whether building capacity can grow.",
+     "Indifferent, treating the policy as unimportant."
+    ],
+    "a": 2,
+    "exp": "The writer says \"Its ultimate success, however, will depend substantially on whether these bodies can expand their construction capacity sufficiently to offset the loss of turnkey supply\": a measured, conditional view, neither certain (A) nor opposed (B), and the policy is described as a \"reorientation\" of policy, so not unimportant (D)."
+   }
+  ],
+  "2026-10-21-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "How Sandoz plans to stop selling medicines to the HSE.",
+     "Why biosimilars are less effective than the original biological drugs.",
+     "A new law that forces Irish patients to switch to biosimilars.",
+     "A claim that the HSE could save a large sum each year by using more biosimilar medicines."
+    ],
+    "a": 3,
+    "exp": "The passage opens with the claim that the HSE \"could achieve annual savings of approximately €150 million through more extensive use of biosimilar medicines\" and then explains why uptake is low. Biosimilars are described as \"highly similar\" (not less effective, B), and no new law (C) or withdrawal (A) is mentioned."
+   },
+   {
+    "type": "infer",
+    "q": "Why does the writer mention that Sandoz was the HSE's second-largest supplier?",
+    "opts": [
+     "To suggest that the company's estimate should be read with its commercial interest in mind.",
+     "To prove that the HSE already uses enough biosimilars.",
+     "To explain why the tender process takes 240 days.",
+     "To show that Sandoz no longer makes biosimilars."
+    ],
+    "a": 0,
+    "exp": "The final sentence notes that Sandoz \"would consequently benefit from increased adoption\", which signals a possible conflict of interest behind the savings claim. It does not show uptake is sufficient (B), explain the 240 days (C) or contradict that Sandoz makes biosimilars (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "What is the purpose of the ustekinumab example in paragraph 4?",
+    "opts": [
+     "To show that psoriasis is the most common illness in Ireland.",
+     "To illustrate the gap between possible savings and actual uptake of a biosimilar.",
+     "To argue that the HSE's 80% target is too high.",
+     "To describe how biological drugs are manufactured."
+    ],
+    "a": 1,
+    "exp": "The example says its biosimilar \"could reduce expenditure by almost €30 million annually\" but \"uptake remains at 30%, substantially below the HSE's target of 80%\": a concrete case of the general problem. The passage makes no claim about how common psoriasis is (A), does not criticise the target (C) and does not describe manufacturing (D)."
+   }
+  ],
+  "2026-10-21-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Women in Ireland now earn more than men in most large companies.",
+     "A new website publishes gender pay gap data for large employers, revealing wide differences between organisations.",
+     "The Government has made it illegal for any company to have a gender pay gap.",
+     "Meta has been fined for having the largest pay gap in Ireland."
+    ],
+    "a": 1,
+    "exp": "The passage describes a \"newly launched Government website\" where employers with more than 50 staff publish data, and says \"The data reveal considerable variation\". Only An Post shows women earning more (A), no ban on gaps exists (C), and no fine is mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "According to Michelle McDonagh's view, what would most likely reduce a company's gender pay gap?",
+    "opts": [
+     "Paying women more than men for the same job.",
+     "Publishing the figures earlier than the November deadline.",
+     "Having more women in senior, higher-paid positions.",
+     "Reducing the number of technical roles in the company."
+    ],
+    "a": 2,
+    "exp": "She says the figure \"primarily reflects the representation of women at senior levels\", so more women in senior roles would narrow it. Equal pay for the same work is \"already a legal requirement\" (A), and the passage does not link the gap to publication timing (B) or recommend cutting technical roles (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the An Post figure of minus 4.85%?",
+    "opts": [
+     "To show that some organisations have a gap that favours women, highlighting the range of results.",
+     "To prove that An Post broke the law on equal pay.",
+     "To argue that the national average of 8.3% is incorrect.",
+     "To explain how the gap changes with age."
+    ],
+    "a": 0,
+    "exp": "Set against Meta's 26.5%, the negative figure, \"indicating marginally higher average earnings for women\", illustrates the \"considerable variation\". It does not imply law-breaking (B), dispute the national figure (C) or relate to age (D)."
+   }
+  ],
+  "2026-10-21-4": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "The history of the Irish Meteorological Service since 1936.",
+     "Why the jet stream is weaker this autumn than usual.",
+     "Flood damage already caused across Ireland by Storm Austen.",
+     "Storm Austen's approach to Ireland and the rain warnings issued for it."
+    ],
+    "a": 3,
+    "exp": "The passage reports that Storm Austen \"is approaching Ireland\" and that Met Éireann \"issued status yellow rain warnings\", then describes its likely path. The 1936 detail is only about its name (A), the jet stream is described as \"powerful\" (B), and flooding is a risk, not reported damage (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the forecaster's comment about the storm's trajectory suggest?",
+    "opts": [
+     "The warnings are final and will not change.",
+     "The worst weather is certain to hit Dublin.",
+     "Forecasts are uncertain, so people should keep checking for updates.",
+     "The storm will definitely miss Ireland completely."
+    ],
+    "a": 2,
+    "exp": "Ms Kealy says the worst weather \"is contingent upon the storm's exact trajectory, and that the warnings may therefore be revised\", which implies uncertainty and the need for updates. This contradicts (A), and nothing makes Dublin certain (B) or rules out Ireland (D); southern areas may see \"substantial gusts\"."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the tone of the passage?",
+    "opts": [
+     "Alarmist, predicting disaster for the whole country.",
+     "Informative and measured, reporting warnings and expert forecasts.",
+     "Humorous, making light of the bad weather.",
+     "Critical, blaming Met Éireann for late warnings."
+    ],
+    "a": 1,
+    "exp": "The passage factually reports warning times, the forecast path and that \"substantial gusts are also possible in southern areas\", with hedged language such as \"anticipated\" and \"possible\". It does not predict national disaster (A), joke (C) or criticise Met Éireann (D)."
+   }
+  ]
+ }
+}
