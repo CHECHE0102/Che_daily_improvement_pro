@@ -1107,6 +1107,49 @@ body.vp-lock{touch-action:pan-x pan-y}
 @media (prefers-reduced-motion:reduce){.cos-hel em,.cos-orbit .rr u,.cos-helix .hx,.cos-sparks b,.cos-orbit .ob b,.cos-orbs em,.cos-crys .rot,.cos-crys .sh,.cos-back .gr,.cos-back .mn,.cos-back .stars,.cos-back .ab svg,.cos-back s,.cos-back em,.cos-back.cb-b-phoenix,.cos-col,.cos-neck svg{animation:none!important}.cos-helix .hx{opacity:.8;transform:scale(1,.26)}.arena2.cfx,.sty-stage.cfx-dark,.sty-stage.cfx-star{animation:none!important}}
 .easy-hint{display:flex;flex-direction:column;gap:8px;border-color:rgba(64,190,150,.45)}.easy-hint p{margin:0;font-size:14px;line-height:1.5}.easy-acts{display:flex;flex-wrap:wrap;gap:8px}
 .rn-ic{font-size:44px;line-height:1}#renameAsk .search{width:100%;text-align:center;font-size:17px}
+.du-arena{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:4px;padding:8px 6px 4px;border-radius:16px;background:linear-gradient(180deg,rgba(64,190,150,.10),rgba(0,0,0,.18));overflow:hidden}
+.du-arena.hit{animation:duShake .35s}
+@keyframes duShake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+.du-side{display:flex;flex-direction:column;gap:3px;min-width:0}
+.du-nm{display:flex;align-items:center;gap:4px;font-size:13px;min-width:0}.du-nm b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.du-side.op .du-nm{justify-content:flex-end}
+.du-hp{position:relative;height:16px;border-radius:999px;background:rgba(0,0,0,.35);overflow:hidden;border:1px solid var(--line)}
+.du-hp i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#3FBF7F,#7FE0A8);transition:width .35s ease}
+.du-hp:not(.me) i{background:linear-gradient(90deg,#E06A5A,#F2A07B)}
+.du-hp.low i{background:linear-gradient(90deg,#D9443A,#F06A5A)}
+.du-hp span{position:relative;display:block;text-align:center;font-size:11px;font-weight:800;line-height:14px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.du-stage{position:relative;height:118px;display:flex;justify-content:center;align-items:flex-end}
+.du-fig{width:118px;height:118px}.du-fig.flip{transform:scaleX(-1)}
+.du-vs{font-weight:900;font-size:18px;color:var(--gorse);align-self:center;padding-bottom:30px}
+.du-num{position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:24px;font-weight:900;color:#FF6B5A;text-shadow:0 2px 0 rgba(0,0,0,.5);animation:duNum 1s ease-out forwards;pointer-events:none;z-index:5}
+.du-num.blk{color:#7FC8FF}
+@keyframes duNum{0%{opacity:0;transform:translate(-50%,10px) scale(.6)}20%{opacity:1;transform:translate(-50%,0) scale(1.15)}100%{opacity:0;transform:translate(-50%,-26px) scale(1)}}
+.du-slash{position:absolute;right:-18px;top:40%;width:46px;height:6px;border-radius:6px;background:linear-gradient(90deg,transparent,#FFE27A,#fff);animation:duSlash .45s ease-out forwards;z-index:4}
+@keyframes duSlash{0%{opacity:0;transform:translateX(-30px)}40%{opacity:1}100%{opacity:0;transform:translateX(60px)}}
+.du-boom{position:absolute;left:50%;top:38%;width:70px;height:70px;margin:-35px 0 0 -35px;border-radius:50%;background:radial-gradient(circle,#fff 0,#FFD15A 30%,rgba(255,120,60,.6) 55%,transparent 70%);animation:duBoom .5s ease-out forwards;z-index:4;pointer-events:none}
+@keyframes duBoom{0%{transform:scale(.3);opacity:1}100%{transform:scale(1.4);opacity:0}}
+.du-def{display:flex;gap:8px;align-items:stretch;margin:6px 0}
+.du-warn{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:6px 10px;border-radius:12px;border:2px solid #E06A5A;background:rgba(224,106,90,.14);animation:duPulse .5s ease-in-out infinite alternate}
+.du-warn b{font-size:14px}.du-warn.ok{border-color:#7FC8FF;background:rgba(127,200,255,.14);animation:none}
+.du-warn.idle{border:1px dashed var(--line);background:transparent;animation:none}
+@keyframes duPulse{to{background:rgba(224,106,90,.28)}}
+.du-wbar{height:6px;border-radius:6px;background:rgba(0,0,0,.3);overflow:hidden}.du-wbar i{display:block;height:100%;background:#E06A5A}
+.du-warn.ok .du-wbar i{background:#7FC8FF}
+.du-shield{flex:none;width:82px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-size:28px;line-height:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;font-family:inherit;padding:6px 0}
+.du-shield small{font-size:12px;font-weight:800}
+.du-shield.ready{border-color:#7FC8FF;background:rgba(127,200,255,.22);box-shadow:0 0 0 3px rgba(127,200,255,.35);animation:duReady .35s ease-in-out infinite alternate}
+@keyframes duReady{to{transform:scale(1.06)}}
+.du-shield.up{border-color:#7FC8FF;background:#7FC8FF;color:#0E2433}
+.du-shield.cd{opacity:.45}
+.du-fall{display:flex;align-items:center;gap:10px;min-height:66px;padding:6px 10px;border-radius:14px;background:linear-gradient(90deg,var(--accent-soft),transparent)}
+.du-fall .dp-letter{width:48px;height:52px;font-size:28px}
+.du-fall.wait{justify-content:center}
+.du-hand{grid-template-columns:repeat(7,1fr)}
+.du-hand .dp-tile{height:44px;font-size:22px}
+.du-pv{font-size:14px;letter-spacing:0;color:var(--gorse);margin-left:6px}
+.du-atk{flex:1}
+.du-ko{text-align:center;font-weight:800;padding:10px}
+@media (prefers-reduced-motion: reduce){.du-arena.hit,.du-warn,.du-shield.ready,.du-num,.du-slash,.du-boom{animation:none!important}}
 </style>
 
 </head>
@@ -3260,7 +3303,7 @@ function devStatsHtml(){
     <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
     <div class="eyebrow">🎮 ${T("dsGames")}</div>
-    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
+    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["duel","duName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
     ${devRetHtml(D.act)}
     ${devPushHtml(D.push)}
     <div class="eyebrow">${T("dsRegions")}</div>
@@ -3401,7 +3444,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.181";
+const APP_VERSION="2026.10.182";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3914,7 +3957,11 @@ document.addEventListener("click", e=>{
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
-document.addEventListener("keydown", e=>{ if(S.pg&&S.view==="play"&&(S.playMode||"party")==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.party.game==="duel"&&S.pg.party.state==="play"&&S.view==="play"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const D=S.pg.D;
+    if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
+    if(e.key==="Backspace"){ e.preventDefault(); D.sel.pop(); duPush(); return pgRender(); }
+    if(/^[a-z]$/i.test(e.key)){ const k=D.hand.findIndex((c,i)=>c===e.key.toLowerCase()&&!D.sel.includes(i)); if(k>=0){ e.preventDefault(); return duPick(k); } } }
+  if(S.pg&&S.view==="play"&&(S.playMode||"party")==="party"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -4432,7 +4479,7 @@ async function pgJoin(code){
     const inRoom=d.players&&d.players[pgMe()];
     if(!inRoom){
       if(d.state!=="wait"){ S.pgBusy=null; pgRender(); return toast(T("pgStarted")); }
-      if(Object.keys(d.players||{}).length>=PG.max){ S.pgBusy=null; pgRender(); return toast(T("pgFull")); }
+      if(Object.keys(d.players||{}).length>=(d.game==="duel"?2:PG.max)){ S.pgBusy=null; pgRender(); return toast(T(d.game==="duel"?"duFull":"pgFull")); }
       await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
       await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
     }
@@ -4468,6 +4515,7 @@ async function pgLeave(){
 }
 async function pgStartGame(){
   const pg=S.pg; if(!pg||!pg.party||pg.party.host!==pgMe()||pg.party.state!=="wait") return;
+  if(pg.party.game==="duel"&&Object.keys(pg.party.players||{}).length!==2) return toast(T("duNeed2"));
   const {fsM}=CLOUD.fb; const P=pg.party, up={state:"play", start:Date.now()+3500, seed:String(Math.floor(Math.random()*1e9))};
   if(P.game==="spell"){
     await pgLoadMean();
@@ -4491,10 +4539,10 @@ function pgTickStart(){ if(S.pgTimer) return; S.pgTimer=setInterval(pgTick,250);
 function pgTick(){
   const pg=S.pg; if(!pg||!pg.party){ clearInterval(S.pgTimer); S.pgTimer=null; return; }
   const P=pg.party; if(P.state!=="play"){ if(P.state==="done"){ clearInterval(S.pgTimer); S.pgTimer=null; } return; }
-  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick}[P.game]||pgDropTick)();
+  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick}[P.game]||pgDropTick)();
   pgRender();
 }
-function pgEndGame(){ const pg=S.pg; if(!pg||pg.ending) return; pg.ending=1; if(pg.L){ pg.L.fall=null; pgPushMe(); } CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{state:"done", end:Date.now()}).catch(()=>{ pg.ending=0; }); }
+function pgEndGame(){ const pg=S.pg; if(!pg||pg.ending) return; pg.ending=1; if(pg.L){ pg.L.fall=null; pgPushMe(); } if(pg.D){ pg.D.fall=null; duPush(); } CLOUD.fb.fsM.updateDoc(pgRef(pg.code),{state:"done", end:Date.now()}).catch(()=>{ pg.ending=0; }); }
 
 /* ----- game 1: word race (multiplayer Wordle) ----- */
 const WD={rounds:5, len:5, tries:6, sec:150, gap:6000};
@@ -4588,7 +4636,7 @@ function pgDropTick(){
   if(now>P.start+PG.total*1000||allOut) pgEndGame();
 }
 function pgPushMe(){ const pg=S.pg, L=pg&&pg.L; if(!L) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), hand:L.hand.join(""), words:L.words, bad:L.bad.slice(-30), pts:L.pts, last:L.last, out:L.out, fall:L.fall?L.fall.l:"", cur:L.sel.map(k=>L.hand[k]).join("")},{merge:true}).catch(()=>{}); },250); }
-function pgGifts(){ const pg=S.pg; if(pg&&pg.party&&pg.party.game==="quiz"&&pg.party.state==="play") return qzGifts(); if(!pg||!pg.L) return; const L=pg.L, gs=(pg.ps[pgMe()]||{}).gifts||{};
+function pgGifts(){ const pg=S.pg; if(pg&&pg.party&&pg.party.game==="quiz"&&pg.party.state==="play") return qzGifts(); if(pg&&pg.party&&pg.party.game==="duel") return duHits(); if(!pg||!pg.L) return; const L=pg.L, gs=(pg.ps[pgMe()]||{}).gifts||{};
   for(const [id,g] of Object.entries(gs)){ if(L.gifted[id]) continue; L.gifted[id]=1; if(L.out) continue; if(L.hand.length<PG.giftMax){ L.hand.push(g.l); toast(T("pgGift",{n:pgNm(g.f), l:g.l.toUpperCase()})); } else toast(T("pgHandFull")); }
 }
 function pgFallKeep(){ const L=S.pg&&S.pg.L; if(!L||!L.fall) return; if(L.hand.length>=PG.handMax) return toast(T("pgHandFull")); L.hand.push(L.fall.l); L.fall=null; pgPushMe(); pgRender(); }
@@ -4640,6 +4688,99 @@ function dpSections(){
     ${L.words.length?`<p class="sm-t">✅ ${L.words.map(w=>`<b>${esc(w)}</b>`).join(" · ")} <span class="muted">(${L.pts})</span></p>`:""}`;
   return [["pgTop",top],["pgFall",fall],["pgHand",hand]];
 }
+
+/* ----- game 6: letter-rain duel (1 vs 1) — spell a word to strike; tap the shield while a hit is incoming to soften it ----- */
+const DU={total:150, dropMs:2500, startN:7, handMax:14, wind:1600, block:0.4, shieldCd:2000, hp:120};
+const DU_DMG=[0,0,0,8,12,17,23,30,38,47,57];
+const duBase=n=>n<=10?DU_DMG[n]:57+10*(n-10);
+const duClamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+function duOpp(){ const P=S.pg&&S.pg.party; return P?(Object.keys(P.players||{}).find(u=>u!==pgMe())||null):null; }
+function duSt(u){ return u===pgMe()?(S.pg.D&&S.pg.D.st):((S.pg.ps[u]||{}).st); }
+function duAvg(k){ const a=duSt(pgMe()), b=duSt(duOpp())||a; return a&&b?Math.max(1,(a[k]+b[k])/2):1; }
+// gear and level count, but gently (ratio^0.3, clamped: HP 90–112%, damage 88–115%): a much stronger hero lasts a little longer and hits a little harder
+function duHpMax(st){ return Math.round(DU.hp*duClamp(Math.pow((st.hp||1)/duAvg("hp"),0.3),0.9,1.12)); }
+function duMult(){ const me=duSt(pgMe())||{atk:1,def:1}, op=duSt(duOpp())||me; return duClamp(Math.pow(((me.atk||1)/duAvg("atk"))/((op.def||1)/duAvg("def")),0.3),0.88,1.15); }
+function duMe(){ const pg=S.pg; if(pg.D) return pg.D; const P=pg.party, p=pg.ps[pgMe()]||{}, s=stats(), seen=Object.fromEntries(Object.keys(p.gifts||{}).map(k=>[k,1]));
+  if(p.st&&p.t0===P.start){ pg.D={st:p.st, hand:[...(p.hand||"")], sel:[], fall:null, fallId:0, next:Math.max(Date.now(),P.start)+DU.dropMs, words:p.words||[], bad:p.bad||[], dmg:p.dmg||0, hp:p.hp==null?DU.hp:p.hp, hpMax:p.hpMax||DU.hp, hpFix:!!p.hpFix, blk:p.blk||0, seen, inc:[], cd:0, fx:{}}; return pg.D; }
+  const hand=[]; for(let k=0;k<DU.startN;k++) hand.push(pgRandLetter(hand));
+  if(hand.filter(c=>PG_VOW.includes(c)).length<2){ hand[1]=PG_VOW[Math.floor(Math.random()*5)]; hand[4]=PG_VOW[Math.floor(Math.random()*5)]; }
+  pg.D={st:{hp:s.hp|0, atk:s.atk|0, def:s.def|0}, hand, sel:[], fall:null, fallId:0, next:P.start+DU.dropMs, words:[], bad:[], dmg:0, hp:DU.hp, hpMax:DU.hp, hpFix:false, blk:0, seen, inc:[], cd:0, fx:{}};
+  duPush(); return pg.D; }
+function duPush(){ const pg=S.pg, D=pg&&pg.D; if(!D) return; clearTimeout(pg.pushT); pg.pushT=setTimeout(()=>{ CLOUD.fb.fsM.setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), t0:pg.party.start, st:D.st, look:myLook(), hand:D.hand.join(""), words:D.words, bad:D.bad.slice(-30), dmg:D.dmg, hp:D.hp, hpMax:D.hpMax, hpFix:D.hpFix, blk:D.blk, cur:D.sel.map(k=>D.hand[k]).join("")},{merge:true}).catch(()=>{}); },150); }
+function duHits(){ const pg=S.pg, D=pg&&pg.D; if(!D) return; const gs=(pg.ps[pgMe()]||{}).gifts||{}, now=Date.now();
+  for(const [id,g] of Object.entries(gs)){ if(D.seen[id]) continue; D.seen[id]=1; if(!g||!(g.h>0)||D.hp<=0) continue;
+    D.inc.push({id, h:Math.min(200,g.h|0), w:String(g.w||"").slice(0,20), at:now, until:now+DU.wind, shield:false}); sfx(660,0.09,"square",0.06,990); } }
+function duTick(){
+  const pg=S.pg, P=pg.party, now=Date.now(), D=duMe(), opp=duOpp(), op=pg.ps[opp]||{};
+  if(!D.hpFix&&op.st){ D.hpMax=duHpMax(D.st); D.hp=D.hpMax; D.hpFix=true; duPush(); }
+  if(now<P.start) return;
+  duHits();
+  for(const h of D.inc.filter(h=>now>=h.until)){
+    const dmg=Math.max(1,Math.round(h.h*(h.shield?1-DU.block:1))); D.hp=Math.max(0,D.hp-dmg); if(h.shield) D.blk++;
+    D.fx.hurt=now; D.fx.numMe={v:dmg, t:now, blk:h.shield}; sfx(h.shield?"gem":"hurt"); D.inc=D.inc.filter(x=>x!==h); duPush(); }
+  if(D.hp>0&&now>=D.next&&now<P.start+DU.total*1000){
+    if(D.fall&&D.hand.length<DU.handMax) D.hand.push(D.fall.l);
+    D.fallId++; D.fall={l:pgRandLetter(D.hand), id:D.fallId}; D.next+=DU.dropMs; if(D.next<now) D.next=now+DU.dropMs; duPush(); }
+  if(D.hp<=0||(op.hpFix&&op.hp<=0)||now>P.start+DU.total*1000+DU.wind+600) pgEndGame();
+}
+function duShield(){ const pg=S.pg, D=pg&&pg.D, now=Date.now(); if(!D||D.hp<=0||now<pg.party.start) return;
+  if(now<D.cd) return toast(T("duCd"));
+  const open=D.inc.filter(h=>!h.shield&&now<h.until);
+  if(open.length){ open.forEach(h=>h.shield=true); D.fx.shield=now; sfx(1046,0.12,"triangle",0.08,1568); }
+  else { D.cd=now+DU.shieldCd; D.fx.early=now; toast(T("duEarly")); }
+  pgRender(); }
+function duSubmit(){
+  const pg=S.pg, D=pg&&pg.D; if(!D||D.hp<=0||Date.now()<pg.party.start) return;
+  const w=D.sel.map(k=>D.hand[k]).join(""); if(w.length<3) return toast(T("pgTooShort"));
+  if(!PG_WORDS||!PG_WORDS.size){ pgLoadWords(); return toast(T("loading")); }
+  if(D.words.includes(w)){ D.sel=[]; pgRender(); return toast(T("pgUsed")); }
+  if(!PG_WORDS.has(w)){ if(!D.bad.includes(w)) D.bad.push(w); pg.shake=Date.now(); D.sel=[]; duPush(); pgRender(); return toast(T("pgInvalid")); }
+  const opp=duOpp(), now=Date.now(), dmg=Math.max(1,Math.round(duBase(w.length)*duMult()));
+  D.hand=D.hand.filter((_,k)=>!D.sel.includes(k)); D.sel=[]; D.words.push(w); D.dmg+=dmg; D.fx.atk=now; D.fx.numOp={v:dmg, t:now, w}; pg.flashOk=now; sfx(w.length>=6?"crit":"hit");
+  if(opp){ const id=pgMe().slice(0,6)+"-"+D.words.length+"-"+now; CLOUD.fb.fsM.updateDoc(pgRef(pg.code,"p",opp),{["gifts."+id]:{h:dmg, w, f:pgMe(), at:now}}).catch(()=>toast(T("syncFail"))); }
+  duPush(); pgRender(); }
+function duPick(k){ const D=S.pg&&S.pg.D; if(!D||D.hp<=0) return; const j=D.sel.indexOf(k); if(j>=0) D.sel.splice(j,1); else D.sel.push(k); duPush(); pgRender(); }
+function duKeep(){ const D=S.pg&&S.pg.D; if(!D||!D.fall) return; if(D.hand.length>=DU.handMax) return toast(T("pgHandFull")); D.hand.push(D.fall.l); D.fall=null; duPush(); pgRender(); }
+function duDiscard(){ const D=S.pg&&S.pg.D; if(!D||!D.sel.length) return; D.hand=D.hand.filter((_,k)=>!D.sel.includes(k)); D.sel=[]; duPush(); pgRender(); }
+function duHpBar(hp,max,mine){ const p=max?Math.max(0,hp)/max*100:0; return `<div class="du-hp${mine?" me":""}${p<=30?" low":""}"><i style="width:${p}%"></i><span>${Math.max(0,Math.round(hp))} / ${max}</span></div>`; }
+function duSections(){
+  const pg=S.pg, P=pg.party, now=Date.now(), D=duMe(), opp=duOpp(), op=(opp&&pg.ps[opp])||{};
+  if(opp&&!op.look&&!(opp in LOOKS)) lookFetch([opp]);
+  if(now<P.start) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("duSub")}</p></div>`]];
+  const left=Math.max(0,Math.ceil((P.start+DU.total*1000-now)/1000));
+  const opMax=op.hpMax||DU.hp, opHp=op.hpFix?op.hp:opMax, opLk=op.look||LOOKS[opp]||"";
+  const hurtMe=now-(D.fx.hurt||0)<450, atkMe=now-(D.fx.atk||0)<450, opHurt=now-(D.fx.atk||0)<700&&now-(D.fx.atk||0)>150;
+  const myPose=D.hp<=0?"hurt":hurtMe?"hurt":atkMe?"attack":"idle", opPose=opHp<=0?"hurt":D.inc.length?"attack":opHurt?"hurt":"idle";
+  const nm=D.fx.numMe&&now-D.fx.numMe.t<1000?`<b class="du-num me${D.fx.numMe.blk?" blk":""}" data-t="${D.fx.numMe.t}">${D.fx.numMe.blk?"🛡 ":""}-${D.fx.numMe.v}</b>`:"";
+  const no=D.fx.numOp&&now-D.fx.numOp.t<1000?`<b class="du-num op" data-t="${D.fx.numOp.t}">-${D.fx.numOp.v}</b>`:"";
+  const arena=`<div class="du-arena${hurtMe?" hit":""}">
+    <div class="du-side me"><div class="du-nm"><b>${esc(pgNm(pgMe()))}</b></div>${duHpBar(D.hp,D.hpMax,true)}<div class="du-stage">${lookArt(myLook(),"du-fig",myPose)}${nm}${atkMe?`<i class="du-slash"></i>`:""}</div></div>
+    <div class="du-vs">VS</div>
+    <div class="du-side op"><div class="du-nm"><b>${esc(opp?pgNm(opp):"?")}</b>${opp?supB(opp,14):""}</div>${duHpBar(opHp,opMax,false)}<div class="du-stage">${lookArt(opLk,"du-fig flip",opPose)}${no}${opHurt?`<i class="du-boom"></i>`:""}</div></div></div>`;
+  const inc=D.inc.filter(h=>now<h.until), h0=inc[0];
+  const cdLeft=Math.max(0,D.cd-now), shieldOn=now-(D.fx.shield||0)<600;
+  const warn=`<div class="du-def">${h0?`<div class="du-warn${h0.shield?" ok":""}"><b>${h0.shield?T("duBlocked"):T("duIncoming",{n:esc(opp?pgNm(opp):"?"),w:esc(h0.w.toUpperCase())})}</b><div class="du-wbar"><i style="width:${Math.max(0,(h0.until-now)/DU.wind*100)}%"></i></div></div>`:`<div class="du-warn idle"><span class="muted sm-t">${T("duCalm")}</span></div>`}
+    <button class="du-shield${h0&&!h0.shield?" ready":""}${cdLeft?" cd":""}${shieldOn?" up":""}" data-act="dushield" ${D.hp<=0?"disabled":""}>🛡<small>${cdLeft?Math.ceil(cdLeft/1000)+"s":T("duShield")}</small></button></div>`;
+  const top=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgTotal",{s:left})}</span><span class="sm-t muted">${T("duMult",{m:Math.round(duMult()*100)})}</span></div>`;
+  if(D.hp<=0) return [["pgTop",top],["pgDuArena",arena],["pgDuDef",`<p class="du-ko">${T("duKo")}</p>`],["pgFall",""],["pgHand",""]];
+  const fall=D.fall?`<div class="du-fall" data-f="${D.fall.id}"><span class="dp-letter">${esc(D.fall.l.toUpperCase())}</span><button class="btn sm" data-act="dukeep">${T("pgKeep")}</button><span class="muted sm-t">${T("duAuto")}</span></div>`:`<div class="du-fall wait"><span class="muted sm-t">${T("pgNextDrop")}</span></div>`;
+  const word=D.sel.map(k=>D.hand[k]).join(""), pv=word.length>=3?Math.round(duBase(word.length)*duMult()):0;
+  const hand=`<div class="dp-word${pg.shake&&now-pg.shake<500?" shake":""}${pg.flashOk&&now-pg.flashOk<600?" ok":""}">${word?esc(word.toUpperCase())+(pv?` <small class="du-pv">⚔️${pv}</small>`:""):`<span class="muted sm-t">${T("pgTapLetters")}</span>`}</div>
+    <div class="dp-hand du-hand">${D.hand.map((c,k)=>`<button class="dp-tile${D.sel.includes(k)?" sel":""}" data-act="dupick" data-k="${k}">${esc(c.toUpperCase())}${D.sel.includes(k)?`<i>${D.sel.indexOf(k)+1}</i>`:""}</button>`).join("")}${Array.from({length:Math.max(0,DU.handMax-D.hand.length)},()=>`<span class="dp-tile empty"></span>`).join("")}</div>
+    <div class="row dp-btns"><button class="btn du-atk" data-act="dusubmit">⚔️ ${T("duAttack")}</button><button class="btn ghost sm" data-act="duclear">${T("pgClear")}</button><button class="btn ghost sm" data-act="dudiscard">${T("pgDiscard")}</button></div>`;
+  return [["pgTop",top],["pgDuArena",arena],["pgDuDef",warn],["pgFall",fall],["pgHand",hand]];
+}
+function duRows(){ const pg=S.pg, P=pg.party, ids=Object.keys(P.players);
+  const R=ids.map(u=>{ const p=u===pgMe()&&pg.D?{...(pg.ps[u]||{}), hp:pg.D.hp, hpMax:pg.D.hpMax, words:pg.D.words, bad:pg.D.bad, blk:pg.D.blk}:(pg.ps[u]||{}); const max=p.hpMax||DU.hp, hp=Math.max(0,p.hp==null?max:p.hp), words=p.words||[];
+    return {u, hp, max, pct:hp/max, words, bad:p.bad||[], n:words.length, blk:p.blk||0, longest:words.reduce((a,w)=>w.length>a.length?w:a,"")}; });
+  R.forEach(r=>{ r.dealt=R.filter(o=>o!==r).reduce((a,o)=>a+(o.max-o.hp),0); });
+  R.sort((a,b)=>b.pct-a.pct||b.dealt-a.dealt); R.forEach((r,k)=>{ r.win=k===0&&R.length>1&&(R[1].pct<r.pct||R[1].dealt<r.dealt); r.score=(r.win?60:20)+Math.round(r.dealt/4); }); return R; }
+function duResults(rows){
+  const stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>❤️</th><th>${T("duDealt")}</th><th>${T("pgValidN")}</th><th>${T("bmLongest")}</th><th>🛡</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${Math.round(r.hp)}/${r.max}</td><td>${r.dealt}</td><td>${r.n}</td><td>${esc(r.longest||"–")}</td><td>${r.blk}</td></tr>`).join("")}</table>`;
+  const all=rows.flatMap(r=>r.words.map(w=>({w,u:r.u}))), weird=rows.flatMap(r=>r.bad.map(w=>({w,u:r.u})));
+  const extra=`<h3>${T("pgAllWords")}</h3>${all.length?`<div class="co-list">${all.map(x=>{ const m=pgMeanOf(x.w); return `<div class="co-err"><span class="chip done">⚔️${duBase(x.w.length)}</span><div><b>${esc(x.w)}</b> <span class="muted sm-t">· ${esc(pgNm(x.u))}</span><div class="sm-t">${m||`<a href="${pgLookup(x.w)}" target="_blank" rel="noopener">${T("pgLookup")} ↗</a>`}</div></div></div>`; }).join("")}</div>`:`<p class="muted sm-t">–</p>`}
+    <h3>${T("pgWeird")}</h3>${weird.length?`<div class="pg-weird">${weird.map(x=>`<span class="chip new"><s>${esc(pgMask(x.w))}</s> <small>${esc(pgNm(x.u))}</small></span>`).join("")}</div>`:`<p class="muted sm-t">${T("pgNoWeird")}</p>`}`;
+  return {stats, extra}; }
 
 /* ----- game 3: word bomb (BombParty style) ----- */
 const BM={lives:3, maxLives:4, intro:2500, fuse:15000, step:1000, min:4000, cap:15000, abc:"abcdefghilmnoprstuvwy"};
@@ -4824,6 +4965,7 @@ function pgRows(){
     return ids.map(u=>{ let tries=0, hits=0; for(let i=0;i<n;i++){ const r=wdRec(u,i); tries+=(r.g||[]).length; if(r.done==="win") hits++; } return {u, score:sc[u]||0, tries, hits, misses:tries-hits, acc:Math.round(hits/n*100)}; }).sort((a,b)=>b.score-a.score||b.hits-a.hits||a.tries-b.tries); }
   if(P.game==="bomb") return ids.map(u=>{ const p=u===pgMe()&&pg.B?pg.B:(pg.ps[u]||{}), words=p.words||[], alive=((P.lives||{})[u]||0)>0; return {u, words, bad:p.bad||[], n:words.length, alive, lives:(P.lives||{})[u]||0, outAt:(P.out||{})[u]||0, longest:words.reduce((a,w)=>w.length>a.length?w:a,""), score:words.length*5+(alive?20:0)}; }).sort((a,b)=>(b.alive-a.alive)||(b.outAt-a.outAt)||(b.n-a.n));
   if(P.game==="hunt"){ const st=huState(); return ids.map(u=>{ const r=huRec(u), n=Object.values(st.found).filter(f=>f.u===u).length, m=r.hm||0; return {u, n, miss:m, score:Math.max(0,n*10-m*3)}; }).sort((a,b)=>b.score-a.score||b.n-a.n); }
+  if(P.game==="duel") return duRows();
   if(P.game==="quiz") return ids.map(u=>{ const p=u===pgMe()&&pg.Q?pg.Q:(pg.ps[u]||{}), gold=Math.round(p.gold||0), ok=p.ok||0, ng=p.ng||0; return {u, gold, ok, ng, best:p.best||0, acc:ok+ng?Math.round(ok/(ok+ng)*100):0, miss:p.miss||[], score:Math.min(120,Math.round(gold/25))}; }).sort((a,b)=>b.gold-a.gold||b.acc-a.acc);
   return ids.map(u=>{ const p=u===pgMe()&&pg.L?{words:pg.L.words,bad:pg.L.bad,pts:pg.L.pts,last:pg.L.last}:(pg.ps[u]||{}); return {u, words:p.words||[], bad:p.bad||[], score:p.pts||0, n:(p.words||[]).length}; }).sort((a,b)=>b.n-a.n||b.score-a.score);
 }
@@ -4841,7 +4983,7 @@ function pgFinish(){
 }
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
-  const gm=S.pg.party.game, lab=r=>gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
+  const gm=S.pg.party.game, lab=r=>gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
   const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
@@ -4854,6 +4996,9 @@ function pgResults(){
   if(P.game==="spell"){
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgScore")}</th><th>${T("pgTries")}</th><th>${T("pgHits")}</th><th>${T("pgMisses")}</th><th>${T("wdRate")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.score}</td><td>${r.tries}</td><td>${r.hits}</td><td>${r.misses}</td><td>${r.acc}%</td></tr>`).join("")}</table>`;
     extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${(P.words||[]).map((W,k)=>{ const first=wdFirstT(P,k), fu=Object.keys(P.players).find(u=>wdRec(u,k).done==="win"&&wdRec(u,k).t===first); return `<div class="co-err"><span class="chip ${fu?"done":"new"}">${k+1}</span><div style="flex:1"><b>${esc(W.w)}</b> <span class="muted sm-t">${esc(W.pos||"")}</span> · ${spMeaning(W)}<div class="muted sm-t">${fu?T("wdFirst",{n:esc(pgNm(fu))}):T("pgNobody")}</div><div class="wd-emo">${Object.keys(P.players).map(u=>{ const r=wdRec(u,k); return `<div><small>${esc(pgNm(u))} ${r.done==="win"?r.g.length:"X"}/${WD.tries}</small><div>${wdEmoji(r,W.w)||"–"}</div></div>`; }).join("")}</div></div></div>`; }).join("")}</div>`;
+  } else if(P.game==="duel"){
+    pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
+    ({stats, extra}=duResults(rows));
   } else if(P.game==="hunt"){
     pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
     stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>🔍</th><th>✗</th><th>${T("pgScore")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.n}</td><td>${r.miss}</td><td>${r.score}</td></tr>`).join("")}</table>`;
@@ -4946,23 +5091,23 @@ function pgSections(){
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName"}[k])}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName"}[k])}${k==="duel"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}</div></div>`;
     const joinBox=CLOUD.user?`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
     return [["pgMain",`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>${login}${joinBox}
-      ${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`]];
+      ${card("duel","⚔️")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
-  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName"}[P.game]||"pgDrop");
+  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName"}[P.game]||"pgDrop");
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
       ${(setTimeout(()=>lookFetch(ids.filter(u=>u!==pgMe())),0),"")}<div class="pg-lobby">${ids.map(u=>`<div class="pg-pl${u===pgMe()?" me":""}">${lookArt(u===pgMe()?myLook():LOOKS[u],"pg-fig")}<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div></div>`).join("")}</div>
-      <div class="muted">${T("pgWaiting",{n:ids.length})}</div>
-      ${host?`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`:`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
+      <div class="muted">${P.game==="duel"?T("duWaiting",{n:ids.length}):T("pgWaiting",{n:ids.length})}</div>
+      ${host?(P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
   if(P.state==="done") return [["pgMain",pgResults()]];
-  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections}[P.game]||dpSections)();
+  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections}[P.game]||dpSections)();
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
@@ -4987,6 +5132,12 @@ function pgAct(a,t){
   if(a==="pgquitno"){ S.pgQuitAsk=false; return pgRender(); }
   if(a==="pgkey"){ if(!wdKey(t.dataset.k)) bmKey(t.dataset.k); return; }
   if(a==="qzans") return qzAnswer(+t.dataset.k);
+  if(a==="dushield") return duShield();
+  if(a==="dusubmit") return duSubmit();
+  if(a==="dupick") return duPick(+t.dataset.k);
+  if(a==="dukeep") return duKeep();
+  if(a==="duclear"){ const D=S.pg&&S.pg.D; if(D){ D.sel=[]; duPush(); pgRender(); } return; }
+  if(a==="dudiscard") return duDiscard();
   if(a==="pghutap") return huTap(+t.dataset.k);
   if(a==="qzshop"){ S.pg.qzShop=!S.pg.qzShop; S.pg.qzPick=null; return pgRender(); }
   if(a==="qzbuy") return qzBuy(t.dataset.k);
@@ -7105,6 +7256,12 @@ Object.assign(STR.ja,{"srsPay3": "5問正解でクローバー1枚、10問で2�
 Object.assign(STR.ko,{"srsPay3": "5개 맞히면 클로버 1장, 10개 2장, 13개 3장 · 오늘 {n}장 남음", "lottoGotN": "{s}개 정답: 클로버 {n}장 획득 ☘️", "lottoLow": "{s}개 정답. {k}개 이상 맞혀야 클로버를 받아요. 다시 도전!", "luckSub3": "간격 복습은 한 번에 15문제: 5개 맞히면 1장, 10개 2장, 13개 3장 (하루 최대 {n}장). 1장으로 룰렛 한 번, 2장 이상이면 긁는 복권."});
 Object.assign(STR.zh,{"drNewKinds": "今天新來的裝置：", "drAllKinds": "全部裝置：", "drOnce": "只打開過一次、什麼都沒做就沒再回來：{n} 台", "drK_ios": "iPhone 瀏覽器", "drK_ios_app": "iPhone 主畫面 App", "drK_android": "Android 瀏覽器", "drK_android_app": "Android App", "drK_win": "Windows 電腦", "drK_win_app": "Windows App", "drK_mac": "Mac", "drK_mac_app": "Mac App", "drK_other": "其他", "drK_?": "舊紀錄（沒記錄類型）", "drNote2": "「裝置」是一個瀏覽器：同一支手機的 Safari 和加到主畫面的 App 會算兩台；清除網站資料或用無痕模式也會變成新的一台。自動化測試和搜尋引擎爬蟲不再計入。"});
 Object.assign(STR.en,{"drNewKinds": "New devices today:", "drAllKinds": "All devices:", "drOnce": "Opened once, did nothing and never came back: {n}", "drK_ios": "iPhone browser", "drK_ios_app": "iPhone home-screen app", "drK_android": "Android browser", "drK_android_app": "Android app", "drK_win": "Windows PC", "drK_win_app": "Windows app", "drK_mac": "Mac", "drK_mac_app": "Mac app", "drK_other": "Other", "drK_?": "Older records (no type)", "drNote2": "A “device” is one browser: Safari and the home-screen app on the same phone count as two, and clearing site data or a private window makes a new one. Automated tests and search-engine crawlers are no longer counted."});
+Object.assign(STR.zh,{"duName": "⚔️ 字母對決（1 對 1）", "duSub": "兩個人對打！字母從天上掉下來，拼出單字就攻擊對手，字越長傷害越高。對手攻擊時，在倒數條跑完前按 🛡 防禦，可以擋下 40% 傷害；太早按會冷卻 2 秒。裝備好一點會稍微佔優勢，但拼字才是關鍵！", "duNeed2": "等對手加入（1 對 1）", "duWaiting": "等待對手加入…（{n}/2）", "duFull": "這場對決已經有兩個人了", "duIncoming": "{n} 用「{w}」攻擊你！快防禦！", "duBlocked": "🛡 擋住了！傷害減少 40%", "duCalm": "對手攻擊時，按右邊的 🛡 防禦", "duShield": "防禦", "duEarly": "太早舉盾了，盾牌冷卻 2 秒", "duCd": "盾牌冷卻中", "duAttack": "攻擊", "duAuto": "沒按也會在下一個字母掉下來時收進手牌", "duKo": "你被打倒了…等結果吧！", "duMult": "攻擊加成 {m}%", "duDealt": "造成傷害"});
+Object.assign(STR.en,{"duName": "⚔️ Letter Duel (1 vs 1)", "duSub": "Two players fight! Letters fall from the sky; spell a word to strike your rival, and longer words hit harder. When your rival attacks, tap 🛡 before the bar runs out to block 40% of the damage; tap too early and the shield cools down for 2 seconds. Better gear helps a little, but spelling decides it!", "duNeed2": "Waiting for a rival (1 vs 1)", "duWaiting": "Waiting for a rival… ({n}/2)", "duFull": "This duel already has two players", "duIncoming": "{n} attacks with “{w}”! Block!", "duBlocked": "🛡 Blocked! 40% less damage", "duCalm": "When your rival attacks, tap 🛡 on the right", "duShield": "Block", "duEarly": "Shield raised too early: 2-second cooldown", "duCd": "Shield cooling down", "duAttack": "Attack", "duAuto": "If you don't tap, it goes into your hand when the next letter falls", "duKo": "You've been knocked out… wait for the result!", "duMult": "Attack bonus {m}%", "duDealt": "Damage dealt"});
+Object.assign(STR.hi,{"duName": "⚔️ अक्षर द्वंद्व (1 बनाम 1)", "duSub": "दो खिलाड़ियों की लड़ाई! अक्षर गिरते हैं; शब्द बनाकर वार करें, लंबे शब्द ज़्यादा चोट करते हैं। विरोधी के वार पर 🛡 दबाएँ और 40% नुकसान रोकें; जल्दी दबाने पर 2 सेकंड रुकना पड़ेगा।", "duNeed2": "विरोधी का इंतज़ार (1 बनाम 1)", "duWaiting": "विरोधी का इंतज़ार… ({n}/2)", "duFull": "इस द्वंद्व में पहले से दो खिलाड़ी हैं", "duIncoming": "{n} ने “{w}” से वार किया! बचाव करें!", "duBlocked": "🛡 रोक लिया! 40% कम नुकसान", "duCalm": "विरोधी के वार पर दाईं ओर 🛡 दबाएँ", "duShield": "बचाव", "duEarly": "ढाल बहुत जल्दी उठाई: 2 सेकंड रुकें", "duCd": "ढाल ठंडी हो रही है", "duAttack": "वार", "duAuto": "न दबाएँ तो अगला अक्षर गिरने पर हाथ में आ जाएगा", "duKo": "आप हार गए… नतीजे का इंतज़ार करें!", "duMult": "वार बोनस {m}%", "duDealt": "दिया गया नुकसान"});
+Object.assign(STR.es,{"duName": "⚔️ Duelo de letras (1 contra 1)", "duSub": "¡Dos jugadores se enfrentan! Caen letras del cielo; forma una palabra para atacar, y las más largas hacen más daño. Cuando te ataquen, toca 🛡 antes de que se vacíe la barra para bloquear el 40%; si lo tocas antes de tiempo, el escudo se enfría 2 segundos.", "duNeed2": "Esperando rival (1 contra 1)", "duWaiting": "Esperando rival… ({n}/2)", "duFull": "Este duelo ya tiene dos jugadores", "duIncoming": "¡{n} ataca con «{w}»! ¡Bloquea!", "duBlocked": "🛡 ¡Bloqueado! 40% menos daño", "duCalm": "Cuando te ataquen, toca 🛡 a la derecha", "duShield": "Bloquear", "duEarly": "Escudo demasiado pronto: 2 segundos de espera", "duCd": "Escudo enfriándose", "duAttack": "Atacar", "duAuto": "Si no la tocas, entra en tu mano cuando caiga la siguiente", "duKo": "Te han derribado… ¡espera el resultado!", "duMult": "Bonus de ataque {m}%", "duDealt": "Daño causado"});
+Object.assign(STR.ja,{"duName": "⚔️ 文字デュエル（1対1）", "duSub": "2人で対戦！落ちてくる文字で単語を作ると攻撃、長い単語ほど大ダメージ。相手の攻撃中にバーが消える前に🛡を押すとダメージ40%カット。早すぎると盾が2秒使えません。", "duNeed2": "相手を待っています（1対1）", "duWaiting": "相手を待っています…（{n}/2）", "duFull": "この対戦はもう2人そろっています", "duIncoming": "{n}が「{w}」で攻撃！防御して！", "duBlocked": "🛡 防いだ！ダメージ40%減", "duCalm": "相手が攻撃したら右の🛡を押そう", "duShield": "防御", "duEarly": "盾が早すぎ：2秒クールダウン", "duCd": "盾クールダウン中", "duAttack": "攻撃", "duAuto": "押さなくても次の文字が落ちると手札に入ります", "duKo": "倒されてしまった…結果を待とう！", "duMult": "攻撃ボーナス {m}%", "duDealt": "与えたダメージ"});
+Object.assign(STR.ko,{"duName": "⚔️ 글자 대결 (1대1)", "duSub": "두 명이 맞붙어요! 떨어지는 글자로 단어를 만들면 공격, 긴 단어일수록 큰 피해. 상대가 공격할 때 바가 끝나기 전에 🛡를 누르면 피해 40% 감소. 너무 일찍 누르면 방패가 2초 동안 쉬어요.", "duNeed2": "상대를 기다리는 중 (1대1)", "duWaiting": "상대를 기다리는 중… ({n}/2)", "duFull": "이 대결은 이미 두 명이에요", "duIncoming": "{n}이(가) “{w}”(으)로 공격! 막아요!", "duBlocked": "🛡 막았다! 피해 40% 감소", "duCalm": "상대가 공격하면 오른쪽 🛡를 누르세요", "duShield": "방어", "duEarly": "방패를 너무 일찍 들었어요: 2초 대기", "duCd": "방패 대기 중", "duAttack": "공격", "duAuto": "안 눌러도 다음 글자가 떨어지면 손패로 들어와요", "duKo": "쓰러졌어요… 결과를 기다려요!", "duMult": "공격 보너스 {m}%", "duDealt": "준 피해"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
