@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-22",
+ "items": {
+  "2026-10-22": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Hospital parking will be free for all patients from 2027.",
+     "The Government has asked the HSE to cap hospital parking at €10 a day, though any change depends on a review and on funding.",
+     "St Vincent's Hospital has been fined for charging €17 a day.",
+     "The HSE has refused to discuss parking charges with the Government."
+    ],
+    "a": 1,
+    "exp": "The passage opens with the Government's request for \"a maximum hospital parking charge of €10 per day\" and ends by saying any reduction \"would be contingent upon a careful assessment of affordability\". Free parking (A), a fine (C) and an outright refusal (D) are not mentioned."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the reference to the 2018 review?",
+    "opts": [
+     "Similar recommendations have been made before without being fully put into practice.",
+     "The 2018 review recommended abolishing all parking charges.",
+     "Parking charges have fallen steadily since 2018.",
+     "The HSE carried out every recommendation from 2018."
+    ],
+    "a": 0,
+    "exp": "The cap \"originated in a 2018 review\" whose recommendations \"were never comprehensively implemented\", so the idea has been proposed before without full action. This rules out (D); the review proposed a cap, not abolition (B), and nothing says charges fell (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that parking fees raised €17.8 million last year?",
+    "opts": [
+     "To argue that hospitals should charge more.",
+     "To show that parking is cheaper in Cork than in Dublin.",
+     "To show how much revenue is at stake, which helps explain the HSE's caution.",
+     "To prove that the €10 cap has already been introduced."
+    ],
+    "a": 2,
+    "exp": "The paragraph begins \"The revenue generated is considerable\", and later the HSE \"contends that parking revenue is essential\". The figures show what a cap would cost. The writer does not argue for higher charges (A), compare prices (B) or say the cap exists (D)."
+   }
+  ],
+  "2026-10-22-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A plan to move Arctic whales into Irish waters.",
+     "Storm Austen's damage to the Donegal coast.",
+     "How drones are used to count dolphins.",
+     "A rare beluga sighting in Donegal Bay as part of a trend of Arctic species appearing in Irish waters."
+    ],
+    "a": 3,
+    "exp": "The passage reports that \"A beluga whale has been observed in Donegal Bay\", describing it as \"the most recent example of a broader phenomenon whereby Arctic species are increasingly recorded in Irish waters\". The storm (B) and the drone (C) are details, and no relocation plan (A) is mentioned."
+   },
+   {
+    "type": "infer",
+    "q": "What does Pádraig Whooley's explanation suggest about the cause of the trend?",
+    "opts": [
+     "Warming oceans are pushing Arctic animals away from their usual habitat.",
+     "More people are now able to recognise belugas.",
+     "Polar bears are chasing whales towards Ireland.",
+     "Irish waters have become colder in recent years."
+    ],
+    "a": 0,
+    "exp": "Whooley attributes the trend \"primarily to rising ocean temperatures, which are degrading their natural habitat\", leaving the animals with \"nowhere left to go\". Polar bear scars (C) are a separate detail, and (B) and (D) are not stated; (D) contradicts the passage."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the passage end by mentioning that the IWDG encouraged the public to report sightings?",
+    "opts": [
+     "To criticise people who did not report the beluga.",
+     "To explain that the storm made shore watching difficult, so extra reports from the public are valuable.",
+     "To announce a reward for spotting whales.",
+     "To show that the beluga has already left Irish waters."
+    ],
+    "a": 1,
+    "exp": "The storm \"substantially impeded observation from the shore\", and \"therefore\" the group asked for public reports. No criticism (A), reward (C) or departure of the whale (D) is mentioned."
+   }
+  ],
+  "2026-10-22-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Irish Rail has agreed to pay Indra €30 million.",
+     "Siemens has bought the Spanish company Indra.",
+     "Indra is claiming over €30 million from Irish Rail for a cancelled system, and Irish Rail rejects the claim.",
+     "The Heuston system is now working across the national network."
+    ],
+    "a": 2,
+    "exp": "Indra is \"seeking payments potentially exceeding €30 million\" for a system that \"has subsequently been discontinued\", while Irish Rail \"categorically disputes the claim\". Nothing was agreed (A), Siemens is the replacement supplier (B), and the system was terminated (D)."
+   },
+   {
+    "type": "infer",
+    "q": "Why does Indra mention that its system works in Spain, Saudi Arabia, Morocco and Lithuania?",
+    "opts": [
+     "To suggest that the product itself is not to blame for the failure in Ireland.",
+     "To advertise new contracts in those countries.",
+     "To admit that the Irish version never worked.",
+     "To explain why the original cost was €19 million."
+    ],
+    "a": 0,
+    "exp": "Indra \"contends that its system has been successfully deployed\" elsewhere and \"has reserved all its rights\", implying the product works and it is owed payment. It is a defence, not an admission (C), and has nothing to do with marketing (B) or the original cost (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the relationship between Irish Rail and Indra as presented in the passage?",
+    "opts": [
+     "Friendly and cooperative.",
+     "Indifferent, with neither side interested in the outcome.",
+     "Openly disputed, with each side defending its own position.",
+     "Apologetic on both sides."
+    ],
+    "a": 2,
+    "exp": "Irish Rail \"categorically disputes the claim\" and seeks compensation, while Indra \"conversely, contends\" its system works and has \"reserved all its rights\". This is a clear dispute, not cooperation (A), indifference (B) or apology (D)."
+   }
+  ],
+  "2026-10-22-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "Most employers now let staff work fully from home.",
+     "An Ibec survey shows auto-enrolment is changing workplace pensions, alongside findings on office attendance, AI and pay transparency.",
+     "The Government has made all workplace pensions illegal.",
+     "Artificial intelligence will replace most Irish jobs by 2027."
+    ],
+    "a": 1,
+    "exp": "The passage reports that auto-enrolment \"is substantially altering the pensions landscape\", then covers office attendance, AI and pay transparency. Office attendance is rising (A), pensions are growing (C), and most firms expect little AI impact on staffing (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about employers' readiness for the EU pay transparency rules?",
+    "opts": [
+     "Almost all employers are fully prepared.",
+     "Pay transparency is no longer a concern for employers.",
+     "The rules have already been in force since 2025.",
+     "Most employers do not yet feel adequately prepared."
+    ],
+    "a": 3,
+    "exp": "\"Only one fifth of respondents regard themselves as adequately prepared\", so most do not feel ready. It is their \"principal concern\" (B), and the measures are \"due to be implemented in Ireland in 2027\" (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that 36% of firms have not evaluated AI's consequences?",
+    "opts": [
+     "To qualify the finding that most firms expect little impact, suggesting their view may not be fully informed.",
+     "To prove that AI will cause job losses.",
+     "To show that AI is the employers' main concern.",
+     "To explain the rise in occupational pensions."
+    ],
+    "a": 0,
+    "exp": "After noting \"almost 60% of firms anticipate no significant impact\", the writer adds \"nevertheless, 36% have not yet evaluated its potential consequences\", a qualification. It does not prove job losses (B); pay transparency is the main concern (C); pensions are unrelated (D)."
+   }
+  ]
+ }
+}
