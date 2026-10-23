@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-23",
+ "items": {
+  "2026-10-23": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Road deaths in Ireland have fallen across all age groups in 2026.",
+     "Pedestrian deaths have doubled this year, mainly among people over 65.",
+     "Deaths of young people on Irish roads have risen sharply this year, prompting warnings and stronger enforcement ahead of the bank holiday.",
+     "The Road Safety Authority has placed breathalysers in pubs and hotels."
+    ],
+    "a": 2,
+    "exp": "The passage opens by saying the number of young people killed \"has increased substantially in 2026, rising by almost 50 per cent\", then reports the Garda appeal and seizures. Pedestrian deaths \"remained stable at 29\" (B), the total rose (A), and the breathalyser scheme was abandoned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the reference to the clock change on Sunday?",
+    "opts": [
+     "Gardaí expect darker evenings to put pedestrians at greater risk in the coming weeks.",
+     "The clock change is expected to reduce the number of road deaths.",
+     "The clock change explains why deaths among young people rose this year.",
+     "Motorcyclist deaths fell because of the clock change."
+    ],
+    "a": 0,
+    "exp": "Ferry said \"the reduction in daylight following the clock change on Sunday has typically been associated with an increase in pedestrian casualties\", so more danger for pedestrians is expected. Nothing links the clock change to lower deaths (B), this year's youth figures (C) or motorcyclists (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which word best describes the tone of Assistant Commissioner Ferry's message?",
+    "opts": [
+     "Dismissive",
+     "Celebratory",
+     "Indifferent",
+     "Cautionary"
+    ],
+    "a": 3,
+    "exp": "He \"appealed to all road users to exercise caution\" and warned about rising pedestrian casualties, which is a warning, not dismissive, celebratory or indifferent."
+   }
+  ],
+  "2026-10-23-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Bank of Ireland is cutting thousands of jobs because of AI.",
+     "Bank of Ireland is expanding its use of AI for fraud detection, customer guidance and staff productivity at a time of rising financial fraud.",
+     "The Central Bank has banned the use of AI in payments.",
+     "Prag Sharma has resigned as chief AI officer."
+    ],
+    "a": 1,
+    "exp": "The passage says the bank \"is accelerating the integration of artificial intelligence\" for \"the detection of fraud and the provision of financial guidance\", describes staff tools, and notes \"a significant rise in financial crime\". Job cuts (A), a ban (C) and a resignation (D) are not mentioned; Sharma \"assumed the position\" on 1 October."
+   },
+   {
+    "type": "infer",
+    "q": "What does the phrase \"albeit in a responsible manner\" suggest?",
+    "opts": [
+     "The bank plans to stop using AI soon.",
+     "The bank has already been fined for misusing AI.",
+     "Customers must personally approve every AI decision.",
+     "The bank recognises that using AI widely carries risks that need to be managed."
+    ],
+    "a": 3,
+    "exp": "Sharma says the bank will adopt AI \"extensively, albeit in a responsible manner\"; \"albeit\" signals a limit on that enthusiasm, implying awareness of risks. The bank is expanding AI, not stopping (A), and no fine (B) or customer approval rule (C) is mentioned."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the Central Bank figures in the final paragraph?",
+    "opts": [
+     "To criticise the Central Bank for poor regulation.",
+     "To show that fraud is now declining in Ireland.",
+     "To explain why stronger fraud detection matters, since reported fraud rose from €141 million to €179 million.",
+     "To compare the profits of different Irish banks."
+    ],
+    "a": 2,
+    "exp": "The paragraph says the developments \"must be considered in the context of a significant rise in financial crime\", citing fraud rising \"from €141 million in 2024 to €179 million in 2025\". This gives context for the AI scam detection; fraud is rising, not falling (B), and there is no criticism (A) or profit comparison (D)."
+   }
+  ],
+  "2026-10-23-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Workplace conflict costs Ireland hundreds of millions of euro a year, and experts recommend ways to reduce it.",
+     "Bullying has been eliminated from Irish workplaces.",
+     "Remote working has ended conflict between managers and staff.",
+     "The public sector loses more money to workplace conflict than the private sector."
+    ],
+    "a": 0,
+    "exp": "The research finds conflict \"imposes a substantial financial burden\", estimated at \"€239.3 million annually\", and the passage ends with measures experts \"advocate\". The private sector bears €187.6 million versus €51.8 million (D), and remote working \"may exacerbate\" tensions (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What does William Corless's view imply about remote and hybrid working?",
+    "opts": [
+     "It always improves relations between colleagues.",
+     "Without face-to-face cues, colleagues are more likely to misread each other's intentions.",
+     "It should be banned to stop workplace conflict.",
+     "It mainly affects workers in the public sector."
+    ],
+    "a": 1,
+    "exp": "Corless says remote working \"may exacerbate such tensions, since the absence of non-verbal cues frequently leads individuals to infer negative intentions\", i.e. misunderstandings become more likely. He does not say it improves relations (A), should be banned (C) or is limited to one sector (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer list several measures in the final paragraph?",
+    "opts": [
+     "To show that workplace conflict cannot be prevented.",
+     "To summarise the costs of absenteeism.",
+     "To criticise the NUI Galway researchers.",
+     "To present practical responses to the problem described earlier in the passage."
+    ],
+    "a": 3,
+    "exp": "The paragraph begins \"Consequently, experts advocate a number of measures\", such as \"formal procedures for addressing harassment\" and \"raising concerns at an early stage\", which respond to the costs described earlier. It suggests conflict can be managed (A) and contains no criticism (C)."
+   }
+  ],
+  "2026-10-23-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "The theatre closed after Hamilton finished its run.",
+     "Bord Gáis Energy has bought the theatre from Crownway.",
+     "The Bord Gáis Energy Theatre remained profitable in 2025, earning €5 million before tax despite slightly lower turnover than in a record 2024.",
+     "Attendance at the theatre collapsed in 2025."
+    ],
+    "a": 2,
+    "exp": "The passage reports \"a pre-tax profit of €5 million in 2025\" while turnover \"declined marginally\" after \"the exceptional performance of the previous year\". Bord Gáis only holds naming rights (B), and \"attendance remained substantial\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the theatre's results in 2024?",
+    "opts": [
+     "2024 was a poor year for the theatre.",
+     "2024 was unusually strong, which makes 2025 look weaker by comparison.",
+     "The theatre made a loss in 2024.",
+     "Hamilton was cancelled in 2024."
+    ],
+    "a": 1,
+    "exp": "The decrease in 2025 \"is largely attributable to the exceptional performance of the previous year, when the musical Hamilton generated record ticket sales\", so 2024 was a high point. This contradicts (A), (C) and (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the tone of the passage?",
+    "opts": [
+     "Factual and generally positive about the theatre's prospects",
+     "Highly critical of the theatre's owners",
+     "Alarmed about the theatre's future",
+     "Sarcastic about the musicals on offer"
+    ],
+    "a": 0,
+    "exp": "The writer reports figures neutrally and notes that the company \"anticipates strong trading in 2026\" with productions such as Matilda; there is no criticism, alarm or sarcasm."
+   }
+  ]
+ }
+}
