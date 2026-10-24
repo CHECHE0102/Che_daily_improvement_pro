@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-24",
+ "items": {
+  "2026-10-24": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Ireland's decision to ban all trade with Russia.",
+     "The closure of the Aughinish Alumina refinery in County Limerick.",
+     "An EU envoy's claim that a Limerick refinery's alumina helps Russia's military, while sanctions on it remain undecided.",
+     "An investigation into corruption at the European Commission."
+    ],
+    "a": 2,
+    "exp": "The passage opens with the envoy's statement that alumina from the Limerick refinery is \"undoubtedly\" contributing to \"Russia's military-industrial complex\", then explains that provisions targeting the plant \"have been omitted\" from the draft package. The plant has only warned it \"could\" close (B), Ireland has not banned trade (A), and the investigation concerned the alumina, not the Commission (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about why the quota idea was dropped?",
+    "opts": [
+     "Officials feared that cutting the plant's exports could cause wider problems in Europe.",
+     "Russia threatened to retaliate against Ireland.",
+     "The investigation by The Irish Times was found to be inaccurate.",
+     "Estonia refused to support a quota."
+    ],
+    "a": 0,
+    "exp": "The quota \"was abandoned owing to concerns about potential disruption to complex European supply chains\", suggesting officials worried about knock-on effects in Europe. No Russian threat (B) is mentioned, the envoy said the journalists' findings were \"essentially accurate\" (C), and Estonia actually \"proposed EU-wide sanctions on alumina\" (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer end by noting that new sanctions are \"contingent upon unanimous agreement among all 27 member states\"?",
+    "opts": [
+     "To show that Ireland alone can decide the plant's future.",
+     "To suggest that the Commission has already approved a ban.",
+     "To criticise Helen McEntee for opposing sanctions.",
+     "To indicate that, despite Ireland's support, any ban still faces a significant obstacle."
+    ],
+    "a": 3,
+    "exp": "Right after McEntee \"affirmed that Ireland would support any measures the Commission proposes\", the writer adds \"nonetheless\" that sanctions need \"unanimous agreement among all 27 member states\" — a reminder that a ban is far from certain. Ireland cannot decide alone (A), no ban has been approved (B), and McEntee supports the measures rather than opposing them (C)."
+   }
+  ],
+  "2026-10-24-2": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Lidl is closing 10 stores in Munster to fund a new head office.",
+     "Lidl is investing €420 million in Munster, creating over 500 permanent jobs, with Cork receiving the largest share.",
+     "The Taoiseach has criticised supermarket chains for relying on construction jobs.",
+     "Lidl has spent €136 million building a distribution centre in Tallaght."
+    ],
+    "a": 1,
+    "exp": "The passage states that Lidl \"has announced a €420 million investment in Munster\" expected to \"generate more than 500 permanent positions\", and that \"Cork is set to receive a substantial proportion of the funding\". The 10 outlets are being redeveloped, not closed (A), the Taoiseach \"welcomed the expansion\" (C), and €136 million was spent with Cork suppliers (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the passage suggest about the new distribution centre in Little Island?",
+    "opts": [
+     "It will replace the company's head office in Tallaght.",
+     "It will be built outside County Cork.",
+     "It will employ more people than all of Lidl's Irish stores combined.",
+     "It accounts for most of the money allocated to Cork and helps explain why many new jobs will be there."
+    ],
+    "a": 3,
+    "exp": "Of Cork's €306 million, \"€200 million has been allocated to a new distribution centre in Little Island; consequently, approximately 250 of the new positions will be located in the county\". The word \"consequently\" links the centre to the Cork jobs. Nothing says it replaces Tallaght (A), Little Island is in Cork (B), and (C) is unsupported."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the tone of the passage?",
+    "opts": [
+     "Largely positive and informative, reporting the plan and the welcome it received.",
+     "Strongly critical of Lidl's expansion.",
+     "Anxious about job losses in Munster.",
+     "Humorous and informal."
+    ],
+    "a": 0,
+    "exp": "The passage factually reports figures and quotes approval: Robert Ryan \"asserted that the investment demonstrated the significance of Cork\" and the Taoiseach \"welcomed the expansion\". There is no criticism (B), no mention of job losses (C), and the language is formal (D)."
+   }
+  ],
+  "2026-10-24-3": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "Mortgage lending has fallen sharply because homes are unaffordable.",
+     "Self-build loans are now the most popular type of mortgage.",
+     "First-time buyer mortgages reached their highest quarterly level since 2008, although affordability is still a concern.",
+     "The Help to Buy scheme is being withdrawn."
+    ],
+    "a": 2,
+    "exp": "The passage reports that first-time buyers drew down more mortgages \"than in any equivalent period since 2008\", then adds \"Nevertheless, affordability remains a significant concern\". Lending rose rather than fell (A), self-build loans \"declined by 5.8%\" (B), and nothing says Help to Buy is ending (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the surveyors' study suggest about buyers in Kildare?",
+    "opts": [
+     "Even a couple earning €113,000 with a 10% deposit may not be able to borrow enough to buy a home there.",
+     "Homes in Kildare are cheaper than those in Meath.",
+     "Most first-time buyers in Kildare are self-builders.",
+     "Mortgage approvals in Kildare fell by 13%."
+    ],
+    "a": 0,
+    "exp": "The study found such a couple \"would still encounter a substantial shortfall of almost €25,000 in Kildare\", the largest gap listed, implying they could not afford a typical home without extra funds. The larger shortfall suggests Kildare is more expensive than Meath, not cheaper (B), and (C) and (D) are not stated."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention Help to Buy, the First Home scheme and the Local Authority Home Loan?",
+    "opts": [
+     "To argue that these schemes should be abolished.",
+     "To give the BPFI's explanation for part of the strong demand from buyers.",
+     "To show that remortgaging fell during the quarter.",
+     "To compare Irish schemes with those in other countries."
+    ],
+    "a": 1,
+    "exp": "The passage says \"The BPFI attributed this demand, in part, to State-backed schemes, namely Help to Buy, the First Home scheme and the Local Authority Home Loan\". No abolition is suggested (A), remortgaging \"rose substantially\" (C), and no other countries are mentioned (D)."
+   }
+  ],
+  "2026-10-24-4": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A survey showing that more girls lack confidence in Stem, alongside gaps in subject access and the workforce.",
+     "A new law requiring all schools to teach computer science.",
+     "The success of University College Cork's engineering programme.",
+     "A decline in the number of women studying Stem at university."
+    ],
+    "a": 0,
+    "exp": "The passage begins: \"An increasing proportion of girls lack confidence in their abilities in science, technology, engineering and mathematics (Stem)\", and goes on to describe \"considerable disparities in subject availability\" and women being \"merely one fifth of the digital specialist workforce\". No law is mentioned (B), UCC only analysed the survey (C), and women's share of undergraduates actually \"increased from 31% in 2018 to 36%\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the data on single-sex schools suggest?",
+    "opts": [
+     "Girls in single-sex schools are more confident about Stem.",
+     "Mixed schools offer fewer practical subjects than single-sex schools.",
+     "Where a girl goes to school may limit her chances to study some Stem subjects.",
+     "Single-sex schools have recently introduced engineering for all students."
+    ],
+    "a": 2,
+    "exp": "\"Only 27% of girls in single-sex schools have access to computer science at Leaving Cert level, whereas the figure exceeds 60% in mixed schools\", and engineering is \"considerably less accessible in single-sex schools\". This implies school type affects access. Nothing links school type to confidence (A), and (B) and (D) contradict the passage."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the writer's tone?",
+    "opts": [
+     "Celebratory, suggesting the problem has been solved.",
+     "Concerned but factual, highlighting barriers through survey figures.",
+     "Dismissive of the survey's findings.",
+     "Angry and accusatory towards teachers."
+    ],
+    "a": 1,
+    "exp": "The writer presents rising figures — \"60%\" lacking confidence, \"compared with 55% in 2025 and 50% in 2024\" — and \"substantial obstacles\" in a neutral, formal way, ending with the Taoiseach's view that \"addressing this imbalance is essential\". It does not celebrate (A), dismiss the findings (C) or blame teachers (D)."
+   }
+  ]
+ }
+}
