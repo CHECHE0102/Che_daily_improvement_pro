@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-25",
+ "items": {
+  "2026-10-25": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government has signed a contract to buy 442 Scorpion vehicles from France.",
+     "Belgium's purchase of Scorpion vehicles has proved a clear success.",
+     "Planners are expected to recommend buying over 550 French armoured vehicles, which would change the Army's role, but critics warn of high long-term costs and a lack of expertise.",
+     "The Defence Forces will stop taking part in peacekeeping missions."
+    ],
+    "a": 2,
+    "exp": "The passage opens by saying planners \"are expected to recommend\" more than 550 vehicles, a move that \"would fundamentally alter the Army's role\", and then sets out warnings that the total \"could exceed €14 billion\". No contract has been signed (A), Belgium is a cautionary example (B), and peacekeeping remains one of the vehicles' functions (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the Belgian experience described in the passage?",
+    "opts": [
+     "The purchase price of such vehicles may be only a small part of what they eventually cost.",
+     "Belgium paid less per vehicle than Ireland will pay.",
+     "Belgium's vehicles have never been used.",
+     "Ireland intends to buy its vehicles from Belgium."
+    ],
+    "a": 0,
+    "exp": "Belgium bought its vehicles \"for a stated €1.6 billion, yet its Court of Auditors subsequently estimated the lifetime cost at over €14 billion\". Kearney adds that \"the initial price is negligible relative to these long-term costs\". Prices per vehicle (B) and use (C) are not discussed, and the vehicles come from France (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the 27 light armoured vehicles bought in 2008 and the PC-12 aircraft?",
+    "opts": [
+     "To show that the Air Corps is better managed than the Army.",
+     "To explain why the new vehicles will be cheaper than expected.",
+     "To prove that the Department of Defence has abandoned the programme.",
+     "To give examples of past problems that support doubts about the new plan."
+    ],
+    "a": 3,
+    "exp": "The paragraph begins \"Such concerns are reinforced by previous procurement difficulties\" and notes that \"substantial sums were wasted\" on the 2008 vehicles and that all four aircraft \"are currently out of service\". These are offered as warning examples, not as praise (A), cost savings (B) or proof of abandonment (D) — the Department says the programme \"remains under assessment\"."
+   }
+  ],
+  "2026-10-25-2": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The HSE has frozen pay for 100,000 health workers until 2027.",
+     "New approval controls, introduced because of HSE overspending, will sharply restrict hiring and promotion, and health unions strongly oppose them.",
+     "The Department of Health has handed the HSE full control over recruitment.",
+     "Health unions have accepted the new controls as necessary to cut the deficit."
+    ],
+    "a": 1,
+    "exp": "About 100,000 staff face \"extensive restrictions on promotion\" because the Department \"must now approve each individual position\"; the controls respond to a forecast \"€1 billion cash deficit\", and the unions' response was \"overwhelmingly negative\". Pay is not frozen (A), control moves to the Department, not the HSE (C), and unions do not accept the plan (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the statement that the measures \"have no specified end date\"?",
+    "opts": [
+     "They will automatically end at the close of the year.",
+     "They apply only to graduate appointments.",
+     "They were agreed in advance with the health unions.",
+     "Staff cannot be sure when normal recruitment and promotion will resume."
+    ],
+    "a": 3,
+    "exp": "If the measures \"have no specified end date\", nobody knows when they will be lifted, so staff face open-ended uncertainty. Nothing says they end with the year (A); they cover \"recruitment, replacements, promotions and graduate appointments\", not only graduates (B); and the unions oppose them (C)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the health unions' attitude to the new controls?",
+    "opts": [
+     "Strongly critical",
+     "Cautiously supportive",
+     "Indifferent",
+     "Mixed, with some unions welcoming the plan"
+    ],
+    "a": 0,
+    "exp": "The passage says \"The response from health unions was overwhelmingly negative\": one called it a \"de facto recruitment freeze\" that would \"jeopardise patient safety\", another warned of \"a dangerous precedent\", and the nurses called the constraints \"unjustifiable\". No union is supportive (B, D) or indifferent (C)."
+   }
+  ],
+  "2026-10-25-3": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Tesco Ireland increased its profit and sales over the year, helped by food demand, new stores and wider online services.",
+     "Tesco Ireland's profits fell because of competition from Aldi.",
+     "Tesco Ireland doubled the dividend paid to its British parent.",
+     "Tesco Ireland is closing stores to reduce its costs."
+    ],
+    "a": 0,
+    "exp": "Pretax profit \"increased by 8.6% to €211.6 million\" as turnover rose to €3.75 billion, with sales \"driven primarily by strong demand for food\", nine new stores and online coverage of 92%. Profits rose rather than fell (B), the dividend was \"identical to the previous year\" (C), and the company is opening stores (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does Tesco's price-match scheme against Aldi suggest?",
+    "opts": [
+     "Tesco has stopped selling food online.",
+     "Aldi is Tesco Ireland's parent company.",
+     "Tesco sees Aldi as a rival that customers might switch to because of price.",
+     "Tesco's prices are higher than those of every other shop in Ireland."
+    ],
+    "a": 2,
+    "exp": "Tesco's aim is \"to eliminate price as a reason for customers to shop elsewhere; consequently, it implemented a price-match scheme against Aldi\", implying Aldi is where price-conscious shoppers might go. Online sales are expanding (A), the parent is British Tesco (B), and no comparison with every shop is made (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that Andrew Yaxley held the chief executive role from 2015 to 2018?",
+    "opts": [
+     "To explain why profits rose in 2015.",
+     "To show that he is returning to a position he has held before.",
+     "To suggest that he is new to the company.",
+     "To predict that he will leave in 2027."
+    ],
+    "a": 1,
+    "exp": "The passage says he \"has been reappointed chief executive, a position he previously held from 2015 to 2018\" — the dates explain the word \"reappointed\". They are not linked to profits (A), they show he is not new (C), and no departure is mentioned (D)."
+   }
+  ],
+  "2026-10-25-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Clifden has become a busy tourist destination all year round.",
+     "Most businesses in Clifden have closed permanently.",
+     "The Abbeyglen Castle Hotel makes most of its profit in winter.",
+     "Clifden becomes much quieter after the summer, and local businesses use different strategies to get through the winter."
+    ],
+    "a": 3,
+    "exp": "The passage opens with the \"considerable decline in activity once the summer visitors depart\" and then describes a Christmas shop, golf packages and a restaurant staying open \"until January\". The town is not busy all year (A), closures are \"for the season\", not permanent (B), and the hotel owner says winter is \"unprofitable\" (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about Declan Mannion's decision to stay open until January?",
+    "opts": [
+     "It is the most profitable choice for his restaurant.",
+     "He puts his staff ahead of maximising short-term profit.",
+     "He plans to close the restaurant permanently in January.",
+     "His restaurant is busiest in November."
+    ],
+    "a": 1,
+    "exp": "He \"concedes that closing for the entire winter would probably be more economically rational\", but \"his commitment to his employees means that he remains open until January\". So staying open is not the most profitable choice (A), November evenings are \"quiet\" (D), and nothing suggests a permanent closure (C)."
+   },
+   {
+    "type": "tone",
+    "q": "What is the overall tone of the passage?",
+    "opts": [
+     "Angry and critical of the tourist industry",
+     "Excited about a sudden rise in winter visitors",
+     "Matter-of-fact, describing the difficulties of the off-season and how businesses adapt",
+     "Pessimistic, predicting that the town will not survive"
+    ],
+    "a": 2,
+    "exp": "The writer reports facts and quotes neutrally — the centre \"remains closed until June 2027\", the hotel \"targets domestic customers\" — and ends with the town's \"substantial effort to attract visitors outside the peak season\". There is no anger (A), no rise in visitors (B) and no prediction of decline (D)."
+   }
+  ]
+ }
+}
