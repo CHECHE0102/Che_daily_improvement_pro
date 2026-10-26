@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-26",
+ "items": {
+  "2026-10-26": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Ireland will hold a referendum on neutrality before the end of 2026.",
+     "The UN has vetoed a planned Irish deployment to Lebanon.",
+     "A bill to remove the UN-mandate requirement for Irish troop deployments has passed its first Dáil vote, though it remains contested.",
+     "Fianna Fáil has voted as a bloc against the Triple Lock bill."
+    ],
+    "a": 2,
+    "exp": "The passage reports that legislation \"designed to dismantle the Triple Lock\" has \"passed its first parliamentary test\" and then sets out the \"substantial opposition\" it has provoked. The minister has \"rejected\" a referendum, no UN veto of a new deployment is described, and two Fianna Fáil backbenchers merely \"declined to vote\"."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about why the Government regards UN approval as the decisive part of the Triple Lock?",
+    "opts": [
+     "Because a Government with a Dáil majority can almost always secure the other two approvals itself.",
+     "Because the Dáil has repeatedly rejected deployments that the UN approved.",
+     "Because Irish troops can only serve in UN-led missions under the Constitution.",
+     "Because the President must sign every deployment order."
+    ],
+    "a": 0,
+    "exp": "The passage says the first two conditions \"are largely indistinguishable, as governments almost invariably command a parliamentary majority\"; consequently \"UN authorisation has functioned as the substantive safeguard\". Nothing suggests the Dáil has blocked deployments, a constitutional UN-only rule, or a presidential role in deployments."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the withdrawal of Irish peacekeepers from Lebanon?",
+    "opts": [
+     "To show that Irish troops performed poorly abroad.",
+     "To explain why the bill received only 79 votes.",
+     "To prove that the Security Council supports the bill.",
+     "To illustrate the minister's argument that decisions about Irish forces were being made by actors outside the State."
+    ],
+    "a": 3,
+    "exp": "McEntee argues that \"sovereignty over such decisions should rest with Irish institutions\" and \"cited the withdrawal of Irish peacekeepers from Lebanon, which was ultimately determined by actors outside the State\". The example supports her case; it says nothing about troop performance, the vote count or Security Council support."
+   }
+  ],
+  "2026-10-26-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "An RTÉ investigation that led to prosecutions of unregulated therapists.",
+     "Professional bodies' objection that new statutory standards for counselling and psychotherapy are too low, and the regulator's response.",
+     "The European Commission's decision to block Irish therapy regulation.",
+     "A shortage of qualified psychotherapists in Ireland."
+    ],
+    "a": 1,
+    "exp": "The passage explains that therapy is being placed \"on a statutory footing\", that \"leading professional bodies maintain that the proposed criteria may ultimately compromise patient welfare\", and ends with CORU's reply that the standards are \"a floor rather than a ceiling\". No prosecutions, Commission decision or shortage are reported—only a complaint \"submitted\" to the Commission."
+   },
+   {
+    "type": "infer",
+    "q": "What does the IACP's complaint suggest about its view of the new rules?",
+    "opts": [
+     "It believes the rules require too much training and should be relaxed.",
+     "It wants CORU to be replaced by a European regulator.",
+     "It welcomes the rules but wants them introduced more slowly.",
+     "It doubts the rules are justified by evidence or suitably balanced."
+    ],
+    "a": 3,
+    "exp": "The association complained to the European Commission, \"arguing that any regulation must be proportionate and evidence-based\", which implies it doubts these rules meet that test. Given the parallel concern about \"substantially fewer training hours\", it is not arguing for lighter rules, and nothing mentions replacing CORU or a slower timetable."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the attitude of the Irish Council for Psychotherapists towards the new framework?",
+    "opts": [
+     "Strongly critical and concerned about future harm.",
+     "Cautiously optimistic.",
+     "Indifferent, since its members are unaffected.",
+     "Enthusiastic about the removal of personal therapy."
+    ],
+    "a": 0,
+    "exp": "The council calls the change a \"dumbing down\" of training and predicts \"that inadequately prepared graduates will cause harm over an extended period\"—clearly critical and worried, not optimistic, indifferent or enthusiastic."
+   }
+  ],
+  "2026-10-26-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Cavan has opened a new museum dedicated to Jonathan Swift.",
+     "A lantern sculpture of Gulliver was moved from Mullagh to Urney Church.",
+     "Eco Féile replaced the Gulliver 300 programme this year.",
+     "Cavan marked 300 years of Gulliver's Travels with a day of events highlighting the county's link to the book."
+    ],
+    "a": 3,
+    "exp": "The passage says Co Cavan \"commemorated the 300th anniversary of Jonathan Swift's Gulliver's Travels\" with events that \"emphasised the county's substantial contribution\" to the satire. No museum is mentioned, the lantern was \"unveiled at Urney Church\", and Eco Féile was a partner (\"in conjunction with\"), not a replacement."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the arts officer's remarks about Mullagh?",
+    "opts": [
+     "Swift wrote all of Gulliver's Travels in Cavan.",
+     "Thomas Sheridan co-wrote the novel with Swift.",
+     "The county sees Swift's stays at Quilca House as giving it a genuine claim to the book's heritage.",
+     "Quilca House is now the venue for the festival's main events."
+    ],
+    "a": 2,
+    "exp": "She \"observed that a considerable proportion of the work was composed in Mullagh, where Swift resided with his friend Thomas Sheridan\" and therefore called Gulliver 300 \"an acknowledgement of this cultural legacy\". \"A considerable proportion\" is not all of it, Sheridan is described only as a friend, and the events took place at Urney Church and the courthouse."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer describe the film projection and the lantern parade in the final paragraph?",
+    "opts": [
+     "To show how the celebration continued and ended with large public spectacles.",
+     "To criticise the cost of the festival.",
+     "To explain how Gulliver's Travels was first published.",
+     "To argue that the festival harmed the environment."
+    ],
+    "a": 0,
+    "exp": "The paragraph opens with \"Subsequently\" and describes a film \"projected onto the courthouse facade\" and \"a parade of more than 100 handcrafted lanterns\", rounding off the day's events. No costs, publication history or environmental harm are discussed—indeed the event was linked to a sustainability festival."
+   }
+  ],
+  "2026-10-26-4": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A landlord who was fined €20,000 by Dublin City Council.",
+     "A council inspection programme for cottages on Little Strand Street.",
+     "A tenant who won damages from the RTB over dangerous conditions, though most of the award was offset by arrears and refused access.",
+     "A tenant who was evicted for not paying rent."
+    ],
+    "a": 2,
+    "exp": "The tenant \"has been awarded damages; however, the majority of the sum was offset by accumulated rent arrears\", and the tribunal deducted arrears and \"€4,800 for the refusal of access\". The €20,000 was an RTB award, not a council fine; there is no inspection programme or eviction described."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the landlord's position on repairs?",
+    "opts": [
+     "He tried to repair the ceiling but the tenant refused all access.",
+     "He used the repairs as leverage to get the unpaid rent paid.",
+     "He was unaware of the problems until the council inspected.",
+     "He had already carried out the repairs before the hearing."
+    ],
+    "a": 1,
+    "exp": "Once rent stopped, \"he made any repairs contingent upon the arrears being cleared\", i.e. he used them as leverage. He \"acknowledged that he had been aware of the defects since July 2024 but had not addressed them\", which rules out the other options; the access deduction does not show he attempted the work."
+   },
+   {
+    "type": "tone",
+    "q": "How does the writer present the outcome for the tenant?",
+    "opts": [
+     "As an unqualified victory.",
+     "As a complete defeat.",
+     "As mixed: his case was accepted, yet he receives only a small payment.",
+     "As unfair to the landlord."
+    ],
+    "a": 2,
+    "exp": "The tribunal found his evidence \"very compelling\" and awarded €20,000, but after deductions \"the landlord is therefore obliged to pay only €1,032.40\". The word \"only\" and the \"however\" in the opening signal a mixed result, not a clear win, a loss, or sympathy for the landlord."
+   }
+  ]
+ }
+}
