@@ -3514,7 +3514,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.197";
+const APP_VERSION="2026.10.198";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4646,7 +4646,7 @@ async function pgStartGame(){
     if(pool.length<n) return toast(T("loading"));
     const seen=new Set(pgSeen().sp); for(const u of ids) for(const w of ((pg.ps[u]||{}).seenSp||[])) seen.add(w);
     up.words=[...pgShuffle(pool.filter(o=>!seen.has(o.w))), ...pgShuffle(pool.filter(o=>seen.has(o.w)))].slice(0,n);
-    up.order=pgShuffle([...ids]); up.rr=P.rr||1; up.cur={i:0, ts:up.start}; }
+    up.order=pgShuffle([...ids]); up.rr=P.rr||1; up.dm=P.dm==="c"?"c":"n"; up.cur={i:0, ts:up.start}; }
   if(P.game==="hunt"){ const h=await huInit(P, up); if(!h.hu) return toast(T("loading")); Object.assign(up, h); }
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
 }
@@ -4958,7 +4958,9 @@ function duResults(rows){
   return {stats, extra}; }
 
 /* ----- game 7: spin & shake (2–6 players) — the dealer writes a 5-letter word on a turning board, then on a shaking one; the others guess ----- */
-const DR={intro:3500, draw:10000, guess1:10000, guess2:15000, reveal:5000, spin:8000, maxPts:1500};
+const DR={intro:3500, draw:10000, guess1:10000, guess2:15000, reveal:5000, spin:8000, maxPts:1500, crazy:1.75};
+// crazy mode: the board turns and shakes 1.75× faster
+function drSpd(){ return S.pg&&S.pg.party&&S.pg.party.dm==="c"?DR.crazy:1; }
 function drPlan(ts){ const d1=ts+DR.intro, g1=d1+DR.draw, d2=g1+DR.guess1, g2=d2+DR.draw, end=g2+DR.guess2; return {ts,d1,g1,d2,g2,end}; }
 function drCur(){ const P=S.pg.party; return P.cur||{i:0, ts:P.start}; }
 function drPhase(now){ const C=drCur(), L=drPlan(C.ts), end=C.end||L.end;
@@ -4993,10 +4995,10 @@ function drSpinA(t){ const pg=S.pg, key=(pg.party.seed||"0")+"-"+drCur().i; let 
   if(!sp||sp.key!==key){ const r=rng(Number(String(pg.party.seed||"1").slice(-8))+drCur().i*7919), seg=[]; let at=0, dir=r()<.5?1:-1;
     while(at<DR.draw+DR.guess1+2000){ const len=800+r()*1400, v=(25+r()*55)*dir; seg.push([at,len,v]); at+=len; dir=r()<.7?-dir:dir; }
     sp=pg.drSpin={key, seg}; }
-  let a=0; for(const [at,len,v] of sp.seg){ if(t<=at) break; a+=v*Math.min(len,t-at)/1000; } return a; }
+  let a=0; for(const [at,len,v] of sp.seg){ if(t<=at) break; a+=v*Math.min(len,t-at)/1000; } return a*drSpd(); }
 function drXf(k,now){ const L=drPhase(now).L;
   if(k==="d1"||k==="g1") return {a:drSpinA(now-L.d1), x:0, y:0};
-  if(k==="d2"||k==="g2"){ const t=now-L.d2; return {a:9*Math.sin(t/150)+3*Math.sin(t/47), x:22*Math.sin(t/83)+12*Math.sin(t/37), y:22*Math.cos(t/97)+12*Math.sin(t/43)}; }
+  if(k==="d2"||k==="g2"){ const t=(now-L.d2)*drSpd(); return {a:9*Math.sin(t/150)+3*Math.sin(t/47), x:22*Math.sin(t/83)+12*Math.sin(t/37), y:22*Math.cos(t/97)+12*Math.sin(t/43)}; }
   return {a:0,x:0,y:0}; }
 function drBind(cv){ if(cv.dataset.b) return; cv.dataset.b="1"; let cur=null;
   const loc=e=>{ const r=cv.parentElement.getBoundingClientRect(), now=Date.now(), X=drXf(drPhase(now).k,now), q=-X.a*Math.PI/180;
@@ -5042,7 +5044,7 @@ function drSections(){
   const board=`<div class="pg-board">${Object.keys(P.players).map(u=>`<div class="pg-chip${u===pgMe()?" me":""}"><b>${u===d?"🎨 ":""}${esc(pgNm(u))}</b><span>${sc[u]||0}</span></div>`).join("")}</div>`;
   const until={intro:F.L.d1, d1:F.L.g1, g1:F.L.d2, d2:F.L.g2, g2:F.end, rev:F.end+DR.reveal}[F.k], secs=Math.max(0,Math.ceil((until-now)/1000));
   const lab={intro:"drPhIntro", d1:"drPhD1", g1:"drPhG1", d2:"drPhD2", g2:"drPhG2", rev:"drPhRev"}[F.k];
-  const time=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgRound",{i:C.i+1,n:tot})} · 🎨 ${esc(pgNm(d))}</span><b class="sm-t ${secs<=3&&F.k!=="rev"?"bad-t":""}">${T(lab)} · ${secs}s</b></div>`;
+  const time=`<div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgRound",{i:C.i+1,n:tot})} · 🎨 ${esc(pgNm(d))}${P.dm==="c"?" · 🔥":""}</span><b class="sm-t ${secs<=3&&F.k!=="rev"?"bad-t":""}">${T(lab)} · ${secs}s</b></div>`;
   let stage;
   if(F.k==="intro") stage=amD?`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drYouDeal")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p><p class="muted sm-t">${T("drYouDealSub")}</p></div>`
     :`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drTheyDeal",{n:esc(pgNm(d))})}</div><p class="muted sm-t">${T("drTheyDealSub")}</p></div>`;
@@ -5399,7 +5401,7 @@ function pgSections(){
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
       ${(setTimeout(()=>lookFetch(ids.filter(u=>u!==pgMe())),0),"")}<div class="pg-lobby">${ids.map(u=>`<div class="pg-pl${u===pgMe()?" me":""}">${lookArt(u===pgMe()?myLook():LOOKS[u],"pg-fig")}<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div></div>`).join("")}</div>
       <div class="muted">${P.game==="duel"?T("duWaiting",{n:ids.length}):T("pgWaiting",{n:ids.length})}</div>
-      ${P.game==="draw"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||1)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||1})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||1, t:(P.rr||1)*ids.length})}</span></div>`:""}
+      ${P.game==="draw"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||1)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||1})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||1, t:(P.rr||1)*ids.length})}</span></div><div class="dr-rr"><span class="sm-t">${T("drMode")}</span>${host?`<div class="seg">${["n","c"].map(m=>`<button data-act="drdm" data-k="${m}" aria-pressed="${(P.dm==="c"?"c":"n")===m}">${T(m==="c"?"drModeC":"drModeN")}</button>`).join("")}</div>`:`<b>${T(P.dm==="c"?"drModeC":"drModeN")}</b>`}<span class="muted sm-t">${T(P.dm==="c"?"drModeCSub":"drModeNSub")}</span></div>`:""}
       ${host?(P.game==="draw"&&ids.length<2?`<button class="btn" disabled>${T("drNeed2")}</button>`:P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
@@ -5433,6 +5435,7 @@ function pgAct(a,t){
   if(a==="qzans") return qzAnswer(+t.dataset.k);
   if(a==="dushield") return duShield();
   if(a==="drguess") return drGuess();
+  if(a==="drdm"){ const pg=S.pg; if(pg&&pg.party&&pg.party.host===pgMe()&&pg.party.state==="wait") pgFs().updateDoc(pgRef(pg.code),{dm:t.dataset.k==="c"?"c":"n"}).catch(()=>toast(T("syncFail"))); return; }
   if(a==="drrr"){ const pg=S.pg; if(pg&&pg.party&&pg.party.host===pgMe()&&pg.party.state==="wait") pgFs().updateDoc(pgRef(pg.code),{rr:+t.dataset.k}).catch(()=>toast(T("syncFail"))); return; }
   if(a==="dusubmit") return duSubmit();
   if(a==="dupick") return duPick(+t.dataset.k);
@@ -7583,6 +7586,12 @@ Object.assign(STR.hi,{"pgBackT": "कमरे {c} में वापस", "pgB
 Object.assign(STR.es,{"pgBackT": "Volver a la sala {c}", "pgBackSub": "Si la partida sigue, puedes continuar.", "pgBackBtn": "Volver"});
 Object.assign(STR.ja,{"pgBackT": "部屋 {c} に戻る", "pgBackSub": "ゲームが続いていれば再開できます。", "pgBackBtn": "戻る"});
 Object.assign(STR.ko,{"pgBackT": "방 {c}(으)로 돌아가기", "pgBackSub": "게임이 진행 중이면 이어서 할 수 있어요.", "pgBackBtn": "돌아가기"});
+Object.assign(STR.zh,{"drMode": "畫板模式", "drModeN": "普通版", "drModeC": "🔥 瘋狂版", "drModeNSub": "畫板照原本的速度轉和抖", "drModeCSub": "畫板轉得和抖得快 1.75 倍，超難！"});
+Object.assign(STR.en,{"drMode": "Board mode", "drModeN": "Normal", "drModeC": "🔥 Crazy", "drModeNSub": "The board turns and shakes at the usual speed", "drModeCSub": "The board turns and shakes 1.75× faster. Good luck!"});
+Object.assign(STR.hi,{"drMode": "बोर्ड मोड", "drModeN": "सामान्य", "drModeC": "🔥 पागलपन", "drModeNSub": "बोर्ड सामान्य गति से घूमता और हिलता है", "drModeCSub": "बोर्ड 1.75 गुना तेज़ घूमता और हिलता है। शुभकामनाएँ!"});
+Object.assign(STR.es,{"drMode": "Modo del tablero", "drModeN": "Normal", "drModeC": "🔥 Loco", "drModeNSub": "El tablero gira y tiembla a la velocidad de siempre", "drModeCSub": "El tablero gira y tiembla 1,75 veces más rápido. ¡Suerte!"});
+Object.assign(STR.ja,{"drMode": "ボードモード", "drModeN": "ふつう", "drModeC": "🔥 クレイジー", "drModeNSub": "ボードはいつもの速さで回って揺れます", "drModeCSub": "ボードが1.75倍の速さで回って揺れます。がんばって！"});
+Object.assign(STR.ko,{"drMode": "보드 모드", "drModeN": "보통", "drModeC": "🔥 미친 모드", "drModeNSub": "보드가 평소 속도로 돌고 흔들려요", "drModeCSub": "보드가 1.75배 빠르게 돌고 흔들려요. 행운을 빌어요!"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
