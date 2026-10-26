@@ -630,6 +630,7 @@ u.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--accent
 .wd-kr{display:flex;gap:4px;justify-content:center}
 .wd-k{flex:1;max-width:38px;height:50px;border:0;border-radius:7px;background:var(--line);color:var(--ink);font-size:16px;font-weight:800;font-family:inherit;cursor:pointer;padding:0;touch-action:manipulation}
 .wd-k.wide{max-width:60px;flex:1.6;font-size:13px}
+.wd-k{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}.wd-k:not(:disabled):active{filter:brightness(.8)}
 .wd-k.g{background:#3E9B5C;color:#fff}.wd-k.y{background:#D6A92E;color:#fff}.wd-k.b{background:#7C8784;color:#fff;opacity:.75}
 .wd-ans{font-family:var(--f-display);font-size:34px;font-weight:800;letter-spacing:.2em;color:var(--accent)}
 .wd-status{text-align:center;font-weight:700;margin:6px 0}.wd-status.win{color:var(--good)}.wd-status.lose{color:var(--bad)}
@@ -1214,7 +1215,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .dr-k:active{background:var(--accent-soft)}
 .dr-k.wide{max-width:58px;flex:1.6;font-size:14px}
 .dr-k.go{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.dr-k:disabled{opacity:.45}
+.dr-k:disabled,.dr-k.go.off{opacity:.45}
 </style>
 
 </head>
@@ -3514,7 +3515,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.198";
+const APP_VERSION="2026.10.199";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4710,7 +4711,7 @@ function wdGrid(r,ans,opt){ opt=opt||{}; const rows=[];
   return `<div class="wd-grid${opt.mini?" mini":""}">${rows.join("")}</div>`; }
 function wdKeyboard(r,ans){ const best={}; const rank={g:3,y:2,b:1};
   for(const g of r.g){ const c=wdColors(g,ans); [...g].forEach((ch,j)=>{ if((rank[c[j]]||0)>(rank[best[ch]]||0)) best[ch]=c[j]; }); }
-  return `<div class="wd-kb">${WD_KB.map(row=>`<div class="wd-kr">${[...row].map(ch=>ch==="+"?`<button class="wd-k wide" data-act="pgkey" data-k="enter">${T("wdEnter")}</button>`:ch==="-"?`<button class="wd-k wide" data-act="pgkey" data-k="back" aria-label="back">⌫</button>`:`<button class="wd-k ${best[ch]||""}" data-act="pgkey" data-k="${ch}">${ch.toUpperCase()}</button>`).join("")}</div>`).join("")}</div>`; }
+  return `<div class="wd-kb">${WD_KB.map(row=>`<div class="wd-kr">${[...row].map(ch=>ch==="+"?`<button class="wd-k wide" data-pgk="enter">${T("wdEnter")}</button>`:ch==="-"?`<button class="wd-k wide" data-pgk="back" aria-label="back">⌫</button>`:`<button class="wd-k ${best[ch]||""}" data-pgk="${ch}">${ch.toUpperCase()}</button>`).join("")}</div>`).join("")}</div>`; }
 function wdEmoji(r,ans){ return r.g.map(g=>wdColors(g,ans).map(c=>c==="g"?"🟩":c==="y"?"🟨":"⬜").join("")).join("<br>"); }
 function spMeaning(W, hide){ const m=(W.m&&(W.m[LANG]||W.m.en))||""; return esc(hide?qHide(m,W.w):m); }   // hide: strip English notes that give the answer away
 function spSections(){
@@ -5050,7 +5051,7 @@ function drSections(){
     :`<div class="sp-wait dr-intro"><div class="eyebrow">${T("drTheyDeal",{n:esc(pgNm(d))})}</div><p class="muted sm-t">${T("drTheyDealSub")}</p></div>`;
   else { const ph=drPhNum(F.k)||(drKeyNow().endsWith("-2")?2:1);
     stage=`${amD&&F.k!=="rev"?`<p class="dr-hint">${T(F.k==="d1"||F.k==="d2"?"drWriteIt":"drWait")} <b>${esc(String(W.w).toUpperCase())}</b></p>`:""}<div class="dr-clip"><div class="dr-wrap${ph===2?" shake":" spin"}${amD?" big":""}"><canvas id="drCv" class="dr-cv${amD&&(F.k==="d1"||F.k==="d2")?" mine":""}"></canvas></div></div>`; }
-  let guess="";
+  let guess="", kb="";
   if(F.k==="rev"){ const got=drGuessers(C.i).filter(u=>drGot(u,C.i)), dp=drDealerPts(C.i);
     guess=`<div class="dr-rev"><div class="eyebrow">${T("wdAnswer")}</div><div class="wd-ans">${esc(String(W.w).toUpperCase())}</div><p class="sp-mean"><span class="chip">${esc(W.pos||"")}</span> ${spMeaning(W)}</p>
       <p class="sm-t">${got.length?got.map(u=>{ const r=drGot(u,C.i); return `✅ <b>${esc(pgNm(u))}</b> +${drPts(r)}`; }).join(" · "):T("pgNobody")}${dp?` · 🎨 <b>${esc(pgNm(d))}</b> +${dp}`:""}</p></div>`; }
@@ -5058,10 +5059,10 @@ function drSections(){
     if(got) guess=`<p class="dr-st ok">✅ ${T("drGotIt",{w:esc(got.w.toUpperCase()),p:drPts(got)})}</p>`;
     else if(mine) guess=`<p class="dr-st ng">❌ ${T("drGuessed",{w:esc(mine.w.toUpperCase())})} · ${T(ph===1?"drWait2":"drWaitEnd")}</p>`;
     else if(F.k==="d1"||F.k==="d2") guess=`<p class="dr-st">${T("drWatch")}${first&&!first.ok?` <span class="muted">(${T("drFirstMiss",{w:esc(first.w.toUpperCase())})})</span>`:""}</p>`;
-    else { const ty=(pg.drTyped||"").toUpperCase(); guess=`<div class="dr-slots">${Array.from({length:5},(_,k)=>`<span class="${ty[k]?"on":""}">${esc(ty[k]||"")}</span>`).join("")}</div>
-      <div class="dr-kb">${["qwertyuiop","asdfghjkl","+zxcvbnm-"].map(row=>`<div class="dr-kr">${[...row].map(c=>c==="+"?`<button class="dr-k wide go" data-drk="enter"${ty.length===5?"":" disabled"}>${T("pgGuess")}</button>`:c==="-"?`<button class="dr-k wide" data-drk="back">⌫</button>`:`<button class="dr-k" data-drk="${c}">${c.toUpperCase()}</button>`).join("")}</div>`).join("")}</div><p class="muted sm-t" style="margin:4px 0 0;text-align:center">${T("drOnce")}</p>`; } }
+    else { const ty=(pg.drTyped||"").toUpperCase(); guess=`<div class="dr-slots">${Array.from({length:5},(_,k)=>`<span class="${ty[k]?"on":""}">${esc(ty[k]||"")}</span>`).join("")}</div>`;
+      kb=`<div class="dr-kb">${["qwertyuiop","asdfghjkl","+zxcvbnm-"].map(row=>`<div class="dr-kr">${[...row].map(c=>c==="+"?`<button class="dr-k wide go off" data-drk="enter">${T("pgGuess")}</button>`:c==="-"?`<button class="dr-k wide" data-drk="back">⌫</button>`:`<button class="dr-k" data-drk="${c}">${c.toUpperCase()}</button>`).join("")}</div>`).join("")}</div><p class="muted sm-t" style="margin:4px 0 0;text-align:center">${T("drOnce")}</p>`; } }
   else if(amD&&(F.k==="g1"||F.k==="g2")){ const gs=drGuessers(C.i); guess=`<p class="dr-st">${T("drDealWait")} ${gs.map(u=>{ const r=drGot(u,C.i), m=drG(u,C.i,F.k==="g1"?1:2); return `${r?"✅":m?"❌":"⏳"} ${esc(pgNm(u))}`; }).join(" · ")}</p>`; }
-  return [["pgBoard",board],["pgDrTime",time],["pgStage",stage],["pgDrGuess",guess]];
+  return [["pgBoard",board],["pgDrTime",time],["pgStage",stage],["pgDrGuess",guess],...(kb?[["pgDrKb",kb]]:[])];
 }
 function drRows(){ const pg=S.pg, P=pg.party, ids=Object.keys(P.players), sc=drScores(), tot=drTotal();
   return ids.map(u=>{ let hits=0, first=0, deal=0; for(let i=0;i<tot;i++){ const r=drGot(u,i); if(r&&drDealer(i)!==u){ hits++; if(r.ph===1) first++; } if(drDealer(i)===u&&drAllGot(i)) deal++; }
@@ -5131,7 +5132,7 @@ async function bmSubmit(){
   if(ok){ M.words.push(w); M.abc=lifeUp?"":abc; if(lifeUp) toast(T("bmLifeUp")); pg.flashOk=Date.now(); bmSave(); }
   pg.bcur=""; pgRender();
 }
-function bmKeyboard(active){ return `<div class="wd-kb${active?"":" off"}">${WD_KB.map(row=>`<div class="wd-kr">${[...row].map(ch=>ch==="+"?`<button class="wd-k wide" data-act="pgkey" data-k="enter" ${active?"":"disabled"}>${T("wdEnter")}</button>`:ch==="-"?`<button class="wd-k wide" data-act="pgkey" data-k="back" aria-label="back" ${active?"":"disabled"}>⌫</button>`:`<button class="wd-k" data-act="pgkey" data-k="${ch}" ${active?"":"disabled"}>${ch.toUpperCase()}</button>`).join("")}</div>`).join("")}</div>`; }
+function bmKeyboard(active){ return `<div class="wd-kb${active?"":" off"}">${WD_KB.map(row=>`<div class="wd-kr">${[...row].map(ch=>ch==="+"?`<button class="wd-k wide" data-pgk="enter" ${active?"":"disabled"}>${T("wdEnter")}</button>`:ch==="-"?`<button class="wd-k wide" data-pgk="back" aria-label="back" ${active?"":"disabled"}>⌫</button>`:`<button class="wd-k" data-pgk="${ch}" ${active?"":"disabled"}>${ch.toUpperCase()}</button>`).join("")}</div>`).join("")}</div>`; }
 function bmSections(){
   const pg=S.pg, P=pg.party, B=P.bomb, now=Date.now(); if(!B) return [["pgStage",`<p class="muted">${T("loading")}</p>`]];
   if(pg.bk!==B.k){ pg.bk=B.k; pg.bcur=""; }
@@ -5417,10 +5418,14 @@ function pgRender(force){
   const box=document.getElementById("pgBox"); if(!box) return render();
   if(box.classList.contains("pg-full")!==pgPlaying()) pgLockSync();
   const secs=pgSections(), key=secs.map(s=>s[0]).join(",");
-  if(force||box.dataset.k!==key){ box.innerHTML=secs.map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); box.dataset.k=key; box._c={}; secs.forEach(([id,h])=>box._c[id]=h); return; }
-  box._c=box._c||{};
-  for(const [id,h] of secs){ if(box._c[id]===h) continue; const el=document.getElementById(id); if(el) el.innerHTML=h; box._c[id]=h; }
+  if(force||box.dataset.k!==key){ box.innerHTML=secs.map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); box.dataset.k=key; box._c={}; secs.forEach(([id,h])=>box._c[id]=h); }
+  else { box._c=box._c||{};
+    for(const [id,h] of secs){ if(box._c[id]===h) continue; const el=document.getElementById(id); if(el) el.innerHTML=h; box._c[id]=h; } }
+  const go=document.querySelector('#pgDrKb [data-drk="enter"]'); if(go) go.classList.toggle("off",(S.pg&&S.pg.drTyped||"").length!==5);
 }
+// spell / bomb keys fire the moment a finger touches them: click waits for release and iOS drops it when a 2nd finger lands first, so fast typing lost letters
+document.addEventListener("pointerdown",e=>{ const t=e.target.closest("[data-pgk]"); if(!t||t.disabled) return; e.preventDefault(); sfxUnlock(); if(!wdKey(t.dataset.pgk)) bmKey(t.dataset.pgk); });
+document.addEventListener("touchstart",()=>{},{passive:true});   // lets iOS show :active press feedback
 function pgAct(a,t){
   sfxUnlock();
   if(a==="pgcreate") return pgCreate(t.dataset.k);
