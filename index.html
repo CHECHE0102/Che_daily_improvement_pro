@@ -1620,6 +1620,19 @@ function sentenceWith(art, surface){
   for(const p of parasOf(art)){ for(const s of p.split(/(?<=[.!?])\s+/)){ if(new RegExp("(^|[^A-Za-zÀ-ÿ])"+reEsc(surface)+"([^A-Za-zÀ-ÿ]|$)","i").test(s)) return s; } }
   return "";
 }
+// levels[L].sentZh mirrors levels[L].paragraphs, split into sentences the same way as above
+function sentZhIn(art, sent){
+  if(!sent) return "";
+  for(const l of Object.values(art&&art.levels||{})){ const tr=l.sentZh; if(!tr) continue;
+    const ps=l.paragraphs||[];
+    for(let i=0;i<ps.length;i++){ const j=ps[i].split(/(?<=[.!?])\s+/).indexOf(sent); if(j>=0&&tr[i]&&tr[i][j]) return tr[i][j]; } }
+  return "";
+}
+function exampleZh(w){
+  if(w.exampleZh||!w.example) return w.exampleZh||"";
+  for(const a of S.articles){ const t=sentZhIn(a,w.example); if(t) return t; }
+  return "";
+}
 function lookedUpFor(d, art){ return isMain(art) ? (d.lookedUp||[]) : ((d.lookedUpBy||{})[art.id]||[]); }
 function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,total:d.postTotal}:null) : ((d.postBy||{})[art.id]||null); }
 
@@ -1888,8 +1901,8 @@ function record(surface,g,ex,art){
   const lemma=(g.base||surface).trim(), key=keyOf(lemma), now=today();
   const old=S.words.get(key);
   const forms=new Set([...(old&&old.forms||[]), surface.toLowerCase(), lemma.toLowerCase()]);
-  const rec=old?{...old, forms:[...forms], lookups:(old.lookups||1)+1, lastLookup:new Date().toISOString(), example:old.example||ex, note:old.note||g.note||null, noteHi:old.noteHi||g.noteHi||null, noteEn:old.noteEn||g.noteEn||null, noteEs:old.noteEs||g.noteEs||null, noteJa:old.noteJa||g.noteJa||null, noteKo:old.noteKo||g.noteKo||null, hi:old.hi||g.hi||"", en:old.en||g.en||"", es:old.es||g.es||"", ja:old.ja||g.ja||"", ko:old.ko||g.ko||""}
-    :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, noteEs:g.noteEs||null, noteJa:g.noteJa||null, noteKo:g.noteKo||null, hi:g.hi||"", en:g.en||"", es:g.es||"", ja:g.ja||"", ko:g.ko||""};
+  const rec=old?{...old, forms:[...forms], lookups:(old.lookups||1)+1, lastLookup:new Date().toISOString(), example:old.example||ex, exampleZh:old.exampleZh||sentZhIn(art,old.example||ex)||null, note:old.note||g.note||null, noteHi:old.noteHi||g.noteHi||null, noteEn:old.noteEn||g.noteEn||null, noteEs:old.noteEs||g.noteEs||null, noteJa:old.noteJa||g.noteJa||null, noteKo:old.noteKo||g.noteKo||null, hi:old.hi||g.hi||"", en:old.en||g.en||"", es:old.es||g.es||"", ja:old.ja||g.ja||"", ko:old.ko||g.ko||""}
+    :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, exampleZh:sentZhIn(art,ex)||null, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, noteEs:g.noteEs||null, noteJa:g.noteJa||null, noteKo:g.noteKo||null, hi:g.hi||"", en:g.en||"", es:g.es||"", ja:g.ja||"", ko:g.ko||""};
   persist(key,rec);
   S.sheet.rec=rec; S.sheet.isNew=!old;
   const d=dayRec(), ll=lemma.toLowerCase();
@@ -1956,9 +1969,9 @@ function answerBlock(ans, full){
   const row=(lab,html)=>html?`<p><span class="lab">${T(lab)}</span>${html}</p>`:"";
   const chips=a=>`<span class="wchips inl">${a.map(x=>`<button class="wchip" data-say="${esc(x)}">${esc(x)}</button>`).join("")}</span>`;
   const syn=(g.syn||[]).filter(Boolean), ant=(g.ant||[]).filter(Boolean), col=(n&&n.coll&&n.coll.length?n.coll:(g.col||[])).filter(Boolean);
-  const exEn=n&&n.exEn||g.ex||"", exTr=n&&n.exTr||"";
+  const exEn=n&&n.exEn||g.ex||"", exTr=n&&n.exTr||"", sentTr=LANG==="zh"?exampleZh(w):"";
   const body=row("nMeaning",n&&n.meaning?esc(n.meaning):T("basicTxt",{w:esc(w.word),p:esc(w.pos||""),m:esc(mean(w))})+(others.length?T("forms",{f:esc(others.join(", "))}):""))
-    +(w.example?row("sentence",`<span class="en-i">${highlight(w.example,w.forms)}</span>`):"")
+    +(w.example?row("sentence",`<span class="en-i">${highlight(w.example,w.forms)}</span>${sentTr?`<br><span class="muted">${esc(sentTr)}</span>`:""}`):"")
     +row("nUsage",n&&n.usage?esc(n.usage):"")
     +row("nColl",col.length?`<span class="en-i">${col.map(esc).join(" · ")}</span>`:"")
     +row("nEx",exEn?`<span class="en-i">${highlight(exEn,[g.base||w.word,...(w.forms||[])])}</span><button class="say sm-say" data-say="${esc(exEn)}" aria-label="${T("pron")}">${SPEAK_SVG}</button>${exTr?`<br><span class="muted">${esc(exTr)}</span>`:""}`:"")
@@ -3515,7 +3528,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.203";
+const APP_VERSION="2026.10.204";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
