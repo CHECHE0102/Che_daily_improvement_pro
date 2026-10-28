@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-28",
+ "items": {
+  "2026-10-28": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government has spent most of its emergency fund on unforeseen costs since 1923.",
+     "The Irish Fiscal Advisory Council has asked the Government to stop borrowing.",
+     "The Government is abolishing an old, unused contingency fund while putting far larger sums into long-term savings funds, though doubts remain about sustainability.",
+     "The Future Ireland Fund will be closed in 2041 when the population starts to age."
+    ],
+    "a": 2,
+    "exp": "The passage describes \"the abolition of a contingency fund dating from 1923\" as part of \"a broader transition ... towards substantial, long-term sovereign savings\", and ends with the Council's warning about \"long-term sustainability\". The fund was \"unused for 22 years\" (A), the Council warned rather than demanded (B), and 2041 is when ageing costs begin, not a closure date (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the 1923 contingency fund?",
+    "opts": [
+     "It had become too small to play any meaningful role in today's public finances.",
+     "It was regularly used to cover emergencies until 2024.",
+     "Its balance will be moved into the Future Ireland Fund.",
+     "Ministers disagreed about whether it should be closed."
+    ],
+    "a": 0,
+    "exp": "Its balance of \"approximately €1.2 million is negligible relative to contemporary public finances\" and it \"has remained unused for 22 years\", implying it no longer mattered. It was not used recently (B), the balance \"will be returned to the Exchequer\" (C), and no disagreement is mentioned (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the Irish Fiscal Advisory Council in the final paragraph?",
+    "opts": [
+     "To show that the savings funds have broad independent support.",
+     "To explain how the €1 billion allocation was calculated.",
+     "To reveal that the Council designed the Future Ireland Fund.",
+     "To introduce a note of caution about whether the savings strategy can be maintained."
+    ],
+    "a": 3,
+    "exp": "The Council \"has warned that continued contributions may be contingent upon government borrowing, which raises questions about the long-term sustainability of the strategy\" — a caution, not support (A); nothing is said about calculations (B) or who designed the fund (C)."
+   }
+  ],
+  "2026-10-28-2": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "University Hospital Limerick has solved its overcrowding problem.",
+     "Hospital overcrowding reached 777 patients on trolleys, which the INMO blames mainly on recruitment restrictions and wants addressed by filling vacancies.",
+     "The HSE has announced a new workforce plan to end trolley waits.",
+     "Nurses are planning strike action after the bank holiday weekend."
+    ],
+    "a": 1,
+    "exp": "The passage reports \"777 patients accommodated on trolleys\", says the INMO \"attributed the crisis primarily to restrictions on recruitment\", and notes its call \"for the immediate filling of all vacancies\". Limerick had the highest figure (A), the HSE plan is only demanded (C), and no strike is mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does Phil Ní Sheaghdha's description of the situation suggest?",
+    "opts": [
+     "She believes the overcrowding was caused by an unexpected outbreak of illness.",
+     "She thinks patients should avoid hospitals during bank holidays.",
+     "She considers the hospitals in the west to be better run than those in Dublin.",
+     "She believes the overcrowding could have been anticipated and prevented with proper preparation."
+    ],
+    "a": 3,
+    "exp": "She called it \"a fundamental failure of planning\", implying the problem was foreseeable and avoidable. Nothing suggests an unexpected outbreak (A), advice to patients (B), or a comparison of management quality (C)."
+   },
+   {
+    "type": "tone",
+    "q": "Which word best describes the tone of the INMO's comments as reported in the passage?",
+    "opts": [
+     "Strongly critical",
+     "Cautiously optimistic",
+     "Neutral and detached",
+     "Apologetic"
+    ],
+    "a": 0,
+    "exp": "The union speaks of \"a fundamental failure of planning and a significant disregard for patient safety\" and demands \"immediate\" action — clearly critical, not optimistic (B), detached (C) or apologetic (D)."
+   }
+  ],
+  "2026-10-28-3": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Climate Action Plan has been delayed again, by 11 months, amid admissions that the 2030 target is unlikely to be met and opposition criticism.",
+     "The Government has published its Climate Action Plan ahead of schedule.",
+     "Ireland has abandoned its legal target of cutting emissions by 51% by 2030.",
+     "The plan will focus only on offshore wind energy."
+    ],
+    "a": 0,
+    "exp": "The plan \"has been postponed until November, representing a delay of 11 months\", the Minister \"has acknowledged that this target is unlikely to be achieved\", and opposition parties say policy \"has been deprioritised\". It is late, not early (B); the target remains a legal obligation (C); and it has \"18 priority areas\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the Minister's acknowledgement about the 2030 target?",
+    "opts": [
+     "Ireland has already achieved most of the required reduction.",
+     "The 51% target will be replaced by a lower figure in November.",
+     "Without a change of approach, Ireland may fail to meet a legally binding obligation.",
+     "The Minister blames opposition parties for the delay."
+    ],
+    "a": 2,
+    "exp": "Ireland \"is legally obliged to reduce emissions by 51% by 2030\", yet the target \"is unlikely to be achieved on the current trajectory\", so only a change of course could avoid missing it. Nothing suggests most of the cut is done (A), a new target (B), or blame on the opposition (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention data centres and the suspension of the carbon levy?",
+    "opts": [
+     "To show how the Government plans to meet its 2030 target.",
+     "To give the evidence opposition parties use to argue that climate policy has lost priority.",
+     "To explain why the 2025 plan was four months late.",
+     "To list two of the plan's 18 priority areas."
+    ],
+    "a": 1,
+    "exp": "Opposition parties \"maintain that climate policy has been deprioritised, citing support for data centres and the suspension of the carbon levy\" — these are their supporting examples, not Government plans (A), causes of the 2025 delay (C) or priority areas (D)."
+   }
+  ],
+  "2026-10-28-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Meta has stopped selling smart glasses in Ireland.",
+     "Smart glasses are mainly used by visually impaired people in Irish gyms.",
+     "Irish law now forbids recording in gyms and swimming pools.",
+     "A growing number of Irish businesses are banning smart glasses over covert-recording fears, despite Meta's assurances about its indicator light."
+    ],
+    "a": 3,
+    "exp": "The passage opens with \"an increasing number of Irish businesses have prohibited the use of smart glasses\" because of \"covert recording\", then sets Meta's indicator-light defence against criticism. Meta has not withdrawn sales (A), visually impaired users are only one benefit cited (B), and no new law is mentioned (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What does TJ McIntyre's comment about the indicator light imply?",
+    "opts": [
+     "He thinks the light should be made larger and brighter.",
+     "He believes Meta's main safeguard is easier to get around than the company suggests.",
+     "He supports the glasses because they help visually impaired users.",
+     "He believes facial recognition is already built into the glasses."
+    ],
+    "a": 1,
+    "exp": "He says the light \"constitutes inadequate notice, since it can be disabled with ease\", implying the safeguard Meta relies on can easily be bypassed. He says nothing about size (A) or support (C), and he warns facial recognition \"would\" undermine anonymity, implying it is not yet integrated (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that the glasses offer benefits to visually impaired users?",
+    "opts": [
+     "To argue that the business bans are illegal.",
+     "To explain why FlyeFit introduced its ban.",
+     "To present Meta's side of the argument in defence of the product.",
+     "To show that most buyers are visually impaired."
+    ],
+    "a": 2,
+    "exp": "The point appears where Meta \"maintains\" its indicator light works and \"emphasises that the glasses offer substantial benefits to visually impaired users\" — it is part of the company's defence. Nothing calls the bans illegal (A), FlyeFit's reason was privacy (B), and no buyer breakdown is given (D)."
+   }
+  ]
+ }
+}
