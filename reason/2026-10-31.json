@@ -1,0 +1,157 @@
+{
+ "date": "2026-10-31",
+ "items": {
+  "2026-10-31": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government and unions have signed a new public sector pay agreement after 13 hours of talks.",
+     "Public sector pay talks ended without agreement, and unions are preparing for a possible second national strike.",
+     "Schools will definitely close on 11 November because the work-to-rule has ended.",
+     "Simon Harris has resigned after failing to reach a deal with the unions."
+    ],
+    "a": 1,
+    "exp": "The passage opens by saying negotiations \"concluded late on Friday evening without a resolution\" and later that \"a second national strike is anticipated on Wednesday, 11 November\". No deal was signed (A), the strike is only anticipated and the work-to-rule \"remains in effect\" (C), and nothing suggests Harris resigned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the unions' demands?",
+    "opts": [
+     "They concern only pay for the second half of the current year.",
+     "The Government has already accepted all three of them.",
+     "They were withdrawn so that the October strike could be postponed.",
+     "They aim both to make up for past losses and to guard against future price rises."
+    ],
+    "a": 3,
+    "exp": "The demands include \"compensation for the disparity between wage growth and inflation over the preceding five years\" (past losses) and \"substantial protection against inflationary surges throughout the duration of any new arrangement\" (future rises). There are three demands, not one (A); Callinan says no \"credible proposal\" was made, so they were not accepted (B); nothing says they were withdrawn (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention, in the final paragraph, that Simon Harris had expressed optimism on Thursday?",
+    "opts": [
+     "To contrast the Government's earlier hopes with the breakdown of talks and show a deal may still be possible.",
+     "To prove that the unions were responsible for the failure of the talks.",
+     "To explain why the Workplace Relations Commission session lasted 13 hours.",
+     "To announce that a settlement was reached on Thursday."
+    ],
+    "a": 0,
+    "exp": "The paragraph begins \"Notably\", noting that Harris \"had expressed optimism on Thursday that an agreement could be reached imminently\", which contrasts with Friday's impasse, and adds that \"a settlement remains feasible\". It assigns no blame (B), says nothing about the session's length (C), and no settlement was reached (D)."
+   }
+  ],
+  "2026-10-31-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "The opening of new express lanes for hauliers on the M50.",
+     "A plan to abolish tolls on all public-private partnership roads.",
+     "Toll increases on most national roads from January and the criticism they have drawn from hauliers.",
+     "A fall in traffic through the Dublin Port Tunnel."
+    ],
+    "a": 2,
+    "exp": "The passage reports that motorists \"will be subject to increased charges on the majority of Ireland's national toll roads from 1 January\" and that \"the haulage sector has responded with considerable hostility\". Express lanes are only demanded, not opened (A); tolls are rising, not abolished (B); and the Port Tunnel faces \"escalating peak-time demand\", not falling traffic (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does TII's explanation for the larger Port Tunnel increase suggest?",
+    "opts": [
+     "Freight vehicles will pay less than cars at peak times.",
+     "TII hopes the higher morning price will discourage some peak-time traffic so that freight can still get through.",
+     "The Port Tunnel is losing money and may close.",
+     "The increase is caused only by the 3.6% inflation rate."
+    ],
+    "a": 1,
+    "exp": "The €1 rise is attributed to \"escalating peak-time demand and the necessity of preserving capacity for freight vehicles serving Dublin Port\", implying the higher price is meant to limit other peak traffic. Nothing says freight pays less (A) or the tunnel may close (C), and a €1 rise to €15 is far above an inflation-only change of 3.6% (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe Ger Hyland's attitude to the toll increases?",
+    "opts": [
+     "Indifferent, since hauliers are not affected.",
+     "Grateful for the extra investment in roads.",
+     "Uncertain, because he needs more information.",
+     "Strongly critical, calling them unfair and asking TII to think again."
+    ],
+    "a": 3,
+    "exp": "Hyland \"characterised the increases as price gouging and urged TII to reconsider\", and the sector responded \"with considerable hostility\". He notes hauliers \"already pay in excess of €8 per crossing\", so they are affected (A); he shows no gratitude (B) or uncertainty (C)."
+   }
+  ],
+  "2026-10-31-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "A new website maps over 2,700 derelict homes, revealing the scale of the problem and large unpaid levies as rules on dereliction tighten.",
+     "Councils have collected all the derelict site levies owed to them.",
+     "Michael Gannon is selling 2,700 restored homes worth €505 million.",
+     "Revenue has decided to stop charging levies on derelict sites."
+    ],
+    "a": 0,
+    "exp": "The passage describes a website that \"catalogues in excess of 2,700 derelict residential properties\", Gannon's estimate that \"approximately €49.5 million remains unpaid\", and plans for \"stricter enforcement measures\". The levy is largely unpaid (B), Gannon values the buildings \"if restored\" but is not selling them (C), and Revenue will take over collecting the levy, not stop it (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the statement that \"councils do not disclose the outstanding amounts\"?",
+    "opts": [
+     "The amount owed is exactly €49.5 million.",
+     "Councils have cancelled the levy for most owners.",
+     "Gannon's figure for unpaid levies is his own calculation rather than official data.",
+     "Owners are not told how much they owe."
+    ],
+    "a": 2,
+    "exp": "Because councils do not publish what is owed, the €49.5 million is what \"Mr Gannon calculates\" — an estimate, not an official total, so it is not certain to be exact (A). Nothing suggests the levy was cancelled (B), and the passage concerns public disclosure, not what owners are told (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that the sites are \"predominantly urban\"?",
+    "opts": [
+     "To show that rural dereliction is no longer a problem.",
+     "To explain why the estimated value of the buildings is so high.",
+     "To argue that councils in cities are better at keeping records.",
+     "To suggest the properties are not eligible for grants."
+    ],
+    "a": 1,
+    "exp": "The €505 million valuation is described as \"largely attributable to the predominantly urban location of the sites\", so the detail explains the high value. Rural areas are not discussed (A), Gannon calls local records \"fragmented and inconsistent\" (C), and he estimates 62% \"may be eligible for refurbishment grants\" (D)."
+   }
+  ],
+  "2026-10-31-4": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A new cure for all forms of epidermolysis bullosa.",
+     "The Dawson family's campaign to fund research at Maynooth University.",
+     "Why sweating is harmful for everyone who walks long distances.",
+     "A cooling insole being developed to help prevent foot blisters in people with EB simplex."
+    ],
+    "a": 3,
+    "exp": "The passage centres on \"a cooling shoe insole that may substantially reduce blistering\" for EB simplex. It is repeatedly said not to be a cure (A); the Dawsons were shown the prototype but run no campaign (B); and sweat matters only because heat and moisture trigger EB blisters (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about how the insole works?",
+    "opts": [
+     "It reduces one of the conditions that trigger blisters rather than fixing the missing protein.",
+     "It replaces the protein that bonds the layers of skin.",
+     "It removes the need for patients to walk.",
+     "It heats the foot to make the skin stronger."
+    ],
+    "a": 0,
+    "exp": "Blistering results when the protein deficiency is \"combined with heat, moisture and friction\"; the insole keeps the foot \"at approximately 32 degrees\" and \"does not constitute a treatment\". So it lowers heat, a trigger, without correcting the protein (B). It does not stop walking (C), and it cools rather than heats (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes Debra's response to the insole?",
+    "opts": [
+     "Completely dismissive of the research.",
+     "Angry that the device is not yet on sale.",
+     "Hopeful but careful not to overstate what it can do.",
+     "Neutral, offering no opinion at all."
+    ],
+    "a": 2,
+    "exp": "Debra \"described the innovation as potentially transformative\" (hopeful), but its head of research \"emphasised that it is not a cure, although it would eliminate one further barrier\" (careful). This is neither dismissive (A) nor angry (B), and it clearly gives an opinion (D)."
+   }
+  ]
+ }
+}
