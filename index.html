@@ -426,6 +426,11 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .odds-sc{display:flex;flex-direction:column;gap:3px;padding:6px 0;border-top:1px solid var(--line)}.odds-sc .odds-tiers{justify-content:flex-start}
 .copy-foot{text-align:center;margin-top:2px;font-size:12px}
 .ba-card{gap:8px}.ba-pic{width:84px;height:84px;object-fit:contain;margin:0 auto}.ba-cos{display:flex;justify-content:center}.ba-cos .cos-ic{width:84px;height:84px}.ba-name{font-size:18px}.ba-rows{display:grid;grid-template-columns:1fr auto;gap:4px 12px;text-align:left;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 8%,transparent)}.ba-rows b{display:inline-flex;align-items:center;gap:4px;justify-content:flex-end}
+.lg-strip{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:16px;border:1px solid var(--line,#e3e8e5);background:var(--card);color:inherit;font:inherit;cursor:pointer}.lg-strip.ready{border-color:#E3B341;background:color-mix(in srgb,#FFE58A 22%,var(--card))}.lg-strip .lg-badge{display:flex;width:36px;height:36px;align-items:center;justify-content:center;font-size:26px;flex:none}.lg-strip .lg-txt{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}.lg-strip .lg-txt small{font-size:12px}.lg-strip .go{font-weight:800;color:#8A6410;white-space:nowrap}
+#lgPop .pd-scrim{z-index:70}#lgPop .lg-card{z-index:71}.lg-card{gap:10px;max-height:calc(100vh - 40px);overflow-y:auto}.lg-now{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:14px}.lg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.lg-slot{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:12px;background:color-mix(in srgb,var(--ink,#1d2a24) 6%,transparent);font-size:11px;font-weight:700}.lg-slot small{font-weight:600;opacity:.7}.lg-slot span{display:flex;align-items:center;gap:2px}.lg-slot .sty-ic{width:13px;height:13px;vertical-align:0}.lg-slot.big{grid-column:span 2;background:linear-gradient(135deg,#FFE58A,#FFC8E6);color:#5A3300}.lg-slot.cur{outline:2.5px solid #E3B341;outline-offset:-1px}.lg-slot.got{opacity:.55}.lg-slot i{position:absolute;top:2px;right:5px;font-style:normal;color:#1F9E74;font-size:13px}
+.lg-got{font-size:15px}.lg-got .sty-ic{width:16px;height:16px}.lg-mile{font-weight:800;color:#7A3E00;background:color-mix(in srgb,#FFE58A 40%,transparent);border-radius:12px;padding:8px}.lg-note{font-size:13px;border-radius:12px;padding:8px;background:color-mix(in srgb,#E0573B 12%,transparent)}.lg-note.ok{background:color-mix(in srgb,#1F9E74 14%,transparent)}
+.lg-more{text-align:left;font-size:13px}.lg-more summary{cursor:pointer;font-weight:700}.lg-ladder{display:flex;flex-direction:column;gap:6px;margin:8px 0}.lg-rung{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:8px;opacity:.55}.lg-rung.got{opacity:1}.lg-rung.now b{color:#8A6410}.lg-sprout{font-size:22px;text-align:center}
+.plan-tag.days{background:color-mix(in srgb,#E0573B 16%,transparent);color:#9A3412}.plan-tag.days.ok{background:color-mix(in srgb,#1F9E74 16%,transparent);color:#146C50}.ie-show{display:flex;gap:10px;align-items:flex-start;margin-top:10px;cursor:pointer}.ie-show input{width:20px;height:20px;margin-top:2px;flex:none}.ie-show span{display:flex;flex-direction:column;gap:2px;font-size:14px}.ie-show small{font-size:12px}.sb-wrap.ie-b{margin-left:2px}
 .pd-scrim{z-index:40;animation:amFade .2s ease-out both}
 .pd-card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:41;width:min(340px,calc(100% - 32px));background:var(--card);border-radius:22px;padding:22px 20px 18px;box-shadow:0 20px 50px rgba(0,0,0,.3);text-align:center;display:flex;flex-direction:column;gap:10px;animation:popMid .25s ease-out}
 .pd-card h2{margin:0}.pd-hero{width:150px;height:150px;object-fit:contain;margin:-60px auto 0;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}.pd-hero-ph{display:flex;align-items:center;justify-content:center;background:var(--card);border-radius:50%}.pd-hero-ph svg{width:96px;height:96px}
@@ -1633,7 +1638,7 @@ function featLock(k){ if((k==="vault"||k==="style")&&!featOpen(k)) return k==="v
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
-function render(){ try{ renderInner(); loginHint(); quizKeep(); if(S.view==="read"&&window.LS&&LS.on) setTimeout(lsHighlight,0); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
+function render(){ try{ renderInner(); loginHint(); if(!PLANS_ON) setTimeout(loginPop,0); quizKeep(); if(S.view==="read"&&window.LS&&LS.on) setTimeout(lsHighlight,0); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
 const ERR_SENT=new Set();
 function errReport(e,where){ try{
@@ -1693,6 +1698,7 @@ function viewToday(){
     ${regionNotice()}
     <section class="hero"><div class="eyebrow">${art.region?`📍 ${esc(regionLabel(art.region))} · `:""}${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
     ${onbCoach()}
+    ${PLANS_ON?"":loginStrip()}
     <div class="steps">
       ${!preNeeded&&!d.preDone?(lvtDone()?step(1,"done",T("lvtTitle"),T("lvtDone",{l:lvtDone()==="IELTS"?"IELTS 7–8":lvtDone()}),"lvtest"):step(1,"now",T("lvtTitle"),T("lvtSub"),"lvtest")):step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):(()=>{ const due=srsDueList().filter(w=>w.firstSeen<today()).length; return due?T("preDue",{d:Math.min(10,due),k:Math.min(10,el.length)}):T("preDraw",{n:el.length,k:Math.min(10,el.length)}); })()):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
       ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
@@ -3053,7 +3059,7 @@ function viewAdv(){ restCheck();
   if(ADV_PAGES[sub]) return `<div class="view adv-page"><div class="page-h"><h2>${ADV_PAGES[sub][0]} ${T(ADV_PAGES[sub][1])}</h2></div>${body}</div>`;
   return `<div class="view">
     <section class="hero-card">
-      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>${CLOUD.user?supB(CLOUD.user.uid,20):""}`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),0,30)}</span>`:""; })()}</h2></div><div class="purses"><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div></div>
+      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>${supB(CLOUD.user?CLOUD.user.uid:"me",20,1)}`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),0,30)}</span>`:""; })()}</h2></div><div class="purses"><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div></div>
       <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
@@ -3304,6 +3310,8 @@ function devAct(k){
   const g=game();
   if(k.startsWith("plan-")){ DEV.plan=k.slice(5); devSave(); toast(T("dDone")); return render(); }
   if(k.startsWith("planm-")){ DEV.planM=+k.slice(6); devSave(); return render(); }
+  if(k.startsWith("streak-")){ const n=+k.slice(7); DEV.streak=DEV.streak===n?null:n; devSave(); return render(); }
+  if(k==="loginagain"){ const L=loginSt(g); if(L.last===today()){ const y=new Date(); y.setDate(y.getDate()-1); L.last=ymd(y); L.streak=Math.max(0,(L.streak||0)-1); } S.lgShown=null; saveGame(); render(); return loginPop(true); }
   if(k==="style") g.style=(g.style||0)+500;
   else if(k==="gold") g.gold+=1000;
   else if(k==="tickets") g.tickets+=10;
@@ -3444,7 +3452,11 @@ const supTier=uid=>(SUP[uid]||{}).tier||0;
 const sbArt=(t,size,plus)=>plus?`<span class="sbp">${supSvg(t,size)}</span>`:supSvg(t,size);
 const sbName=(t,plus)=>plus?T("sbPlus",{b:T("sb"+t)}):T("sb"+t);
 const supPlus=uid=>!!(SUP[uid]&&SUP[uid].plus);
-const supB=(uid,size)=>{ const t=supTier(uid), pl=supPlus(uid); return t?`<span class="sb-wrap" title="${esc(sbName(t,pl))}">${sbArt(t,size||18,pl)}</span>`:""; };
+const supB=(uid,size,noIe)=>{ if(PLANS_ON){ const t=supTier(uid), pl=supPlus(uid); return t?`<span class="sb-wrap" title="${esc(sbName(t,pl))}">${sbArt(t,size||18,pl)}</span>`:""; }
+  // plans off: the badge is the login-streak title; a hand-given supporter badge still wins when it is higher
+  const me=uid==="me"||(CLOUD.user&&uid===CLOUD.user.uid), x=me?{t:streakTier(),ie:ieShowBand()}:lookExtra(uid);
+  const sp=SUP[uid]&&!SUP[uid].sub?SUP[uid].tier:0, t=Math.max(x.t,sp);
+  return (t?`<span class="sb-wrap" title="${esc(t>x.t?sbName(t,false):T("lgTitleN",{t:titleName(t)}))}">${sbArt(t,size||18,false)}</span>`:"")+(!noIe&&x.ie>=6?`<span class="sb-wrap ie-b" title="IELTS ${fmtBand(x.ie)}">${badgeSvg(fmtBand(x.ie),0,size||18)}</span>`:""); };
 function supMineCard(){ const u=CLOUD.user; const t=u?supTier(u.uid):0; if(!t) return ""; const pl=supPlus(u.uid); return `<section class="card sup-mine"><div class="sup-mine-b">${sbArt(t,72,pl)}</div><div><b>${T("sbMine",{b:esc(sbName(t,pl))})}</b><p class="muted sm-t" style="margin:4px 0 0">${T("sbThanks")}</p></div></section>`; }
 function devSupHtml(){
   const list=Object.entries(SUP).sort((a,b)=>b[1].tier-a[1].tier);
@@ -3505,7 +3517,8 @@ function devPanel(){
   const b=(k,l)=>`<button class="btn ghost sm" data-act="dev" data-k="${k}">${T(l)}</button>`;
   const pl=DEV.plan||"free";
   const planSel=`<div class="dev-plan"><b>${T("devPlanT")}</b><div class="seg" role="group">${["free","sub","plus"].map(k=>`<button data-act="dev" data-k="plan-${k}" aria-pressed="${pl===k}">${T(k==="free"?"planFree":k==="sub"?"planSub":"planPlus")}</button>`).join("")}</div>${pl!=="free"?`<div class="seg" role="group">${[1,3,6,12,24].map(n=>`<button data-act="dev" data-k="planm-${n}" aria-pressed="${(DEV.planM||3)===n}">${n}</button>`).join("")}</div><span class="muted sm-t">${T("devPlanM",{n:DEV.planM||3})}</span>`:""}<span class="muted sm-t">${T("devPlanNote")}</span></div>`;
-  return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${planSel}
+  const stSel=`<div class="dev-plan"><b>${T("devStreakT")}</b><div class="seg" role="group">${[0,10,30,60,100,180].map(n=>`<button data-act="dev" data-k="streak-${n}" aria-pressed="${DEV.streak===n}">${n}</button>`).join("")}</div><button class="btn ghost sm" data-act="dev" data-k="loginagain">${T("devLoginAgain")}</button></div>`;
+  return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${PLANS_ON?planSel:stSel}
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}${b("style","dStyle")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
     <div id="devMaint" class="dev-maint">${devMaintInner()}</div>
     ${devFeatHtml()}
@@ -3515,7 +3528,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.207";
+const APP_VERSION="2026.10.208";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3862,7 +3875,7 @@ function ieLobby(){
       ${typeof wb==="number"?`<div class="muted sm-t">${T("ieMonthBest",{b:fmtBand(wb)})}</div>`:""}
       ${st.best?`<div class="muted sm-t">${T("ieBest",{b:fmtBand(st.best.band)})}</div>`:""}
       ${CLOUD.user&&game().nick?"":`<p class="muted sm-t">${T("ieLogin")}</p>`}</section>
-    <section class="card"><b>${T("ieBadges")}</b>${badgeShelf()}</section>
+    <section class="card"><b>${T("ieBadges")}</b>${badgeShelf()}${PLANS_ON?"":`<label class="ie-show"><input type="checkbox" data-act="lgieshow" ${game().ieShow?"checked":""}><span><b>${T("ieShowT")}</b><small class="muted">${(ieState().best||{}).band>=6?T("ieShowSub",{b:fmtBand(ieState().best.band)}):T("ieShowNone")}</small></span></label>`}</section>
     <section class="card"><b>${T("iePractice")}</b><p class="muted sm-t" style="margin:4px 0 8px">${T("iePracticeSub")}</p><div class="ie-prac">${IE_PRAC.map(x=>`<button class="btn ghost sm" data-act="iepractice" data-k="${x.id}" ${run?"disabled":""}>${T("iePractBtn",{t:esc(x.title)})}</button>`).join("")}</div></section>
     ${voiceCard()}
     <p class="muted sm-t ie-disc">ⓘ ${T("ieDisclaimer")}</p>`;
@@ -4122,7 +4135,7 @@ function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
   return {...newGame(base), inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], cosOwn:[...new Set([...(base.cosOwn||[]),...(o.cosOwn||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
-    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null}; }
+    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, login:loginMerge(base.login,o.login), battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null}; }
 /* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
    tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
 const WSYNC_KEY="che-pro-wsync", DIRTY_KEY="che-pro-dirty", WSYNC_FULL=7*864e5, WSYNC_MARGIN=15*60e3;
@@ -4223,7 +4236,7 @@ const powerOf=s=>s.hp+s.atk*3+s.def*2;
 function myLook(){ const g=game(); if(!g||!g.gender) return "";
   const sk=id=>id?socketsOf(id).filter(Boolean).join("."):"";
   const c=g.cos||{}, cc=["feet","back","neck"].map(k=>COS_CODE[c[k]]||"").join("");
-  return [g.gender, g.weapon||"", g.armor||"", sk(g.weapon), sk(g.armor), cc].join("|").slice(0,100); }
+  const ex=PLANS_ON?"":"|s"+streakTier(g)+(ieShowBand()>=6?"|i"+Math.round(ieShowBand()*10):"");   const base=[g.gender, g.weapon||"", g.armor||"", sk(g.weapon), sk(g.armor), cc].join("|");   return (base.length+ex.length<=100?base+ex:base).slice(0,100); }
 // styles travel to the leaderboard as two-letter codes (the look field is limited to 100 characters)
 const COS_CODE={"f-leaf":"fl","f-gold":"fg","f-helix":"fh","f-rainbow":"fr","f-rhelix":"fx","b-halo":"bh","b-gears":"bg","b-rune":"br","b-moon":"bm","b-abyss":"ba","b-wings":"bw","b-phoenix":"bp","n-fire":"nf","n-frost":"ni","n-thunder":"nt","n-dark":"nd","n-star":"ns"};
 const COS_DECODE=Object.fromEntries(Object.entries(COS_CODE).map(([k,v])=>[v,k]));
@@ -4257,8 +4270,7 @@ async function lbLoad(){
     const rd=f==="read", fld=rd?"n":f, col=rd?fsM.collection(db,"readMonths",monthKey(),"u"):fsM.collection(db,"leaderboard");
     if(rd) await rdPush(); else await lbPush();
     const q=fsM.query(col, fsM.orderBy(fld,"desc"), fsM.limit(50));
-    const snap=await fsM.getDocs(q); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...safeDoc(d.data())}));
-    let me=null; const mine=rows.findIndex(r=>r.id===CLOUD.user.uid), myV=rd?readsThisMonth():lbEntry()[f];
+    const snap=await fsM.getDocs(q); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...safeDoc(d.data())}));     for(const r of rows) if(typeof r.look==="string") LOOKS[r.id]=r.look;     let me=null; const mine=rows.findIndex(r=>r.id===CLOUD.user.uid), myV=rd?readsThisMonth():lbEntry()[f];
     if(mine>=0) me=mine+1;
     else if(game().nick&&myV>0){ const c=await fsM.getCountFromServer(fsM.query(col, fsM.where(fld,">",myV))); me=c.data().count+1; }
     S.rk={rows, by:f, me};
@@ -4311,7 +4323,7 @@ function viewRank(){
   else if(f!=="toeic"&&(!S.rk||S.rk.by!==f)){ setTimeout(lbLoad,0); }
   if(f==="toeic") return toRankHtml([["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join(""));
   if(f==="ielts"){ const tabsH=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
-    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
+    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18,1)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
     const u=untilMonthEnd();
     return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieMonthReset",{d:u.d,h:u.h})}</div>
       ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
@@ -6919,7 +6931,7 @@ function viewVault(){
   const inbox=CLOUD.user?`<section class="card"><h3>📬 ${T("giftInbox")}</h3>${recv.length?recv.slice(0,10).map(x=>card(x,false)).join(""):`<p class="muted sm-t">${T("giftNoneIn")}</p>`}
     ${sent.length?`<h4>${T("giftSentT")}</h4>${sent.slice(0,10).map(x=>card(x,true)).join("")}`:""}</section>`:"";
   return `<section class="vault-hero"><div class="vh-ic">${VAULT_ICON}</div><div><div class="eyebrow">${T("vaultEyebrow")}</div><h2>${T("vaultName")}</h2><p class="sm-t">${T("vaultSub")}</p></div></section>
-    ${subCard(buyable)}
+    ${PLANS_ON?subCard(buyable):""}
     <section class="card"><h3>✨ ${T("vaultShopT")}</h3><p class="muted sm-t">${T("vaultShopSub")}</p><div class="vt-grid">${shop}</div><p class="muted sm-t vt-legal">${T("vtLegal")} <a href="legal.html${langKey()==="zh"||langKey()==="cn"?"?lang=zh":""}#refunds" target="_blank" rel="noopener">${T("vtLegalLink")}</a></p></section>
     ${hist.length?`<section class="card"><h3>🧾 ${T("payHistT")}</h3>${hist.map(x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return `<div class="rw-row"><span>${v?v.ic:"🛒"} ${v?vaultName(v):esc(x.item)}${x.test?` <small class="muted">${T("vtTestTag")}</small>`:""}</span><b class="sm-t">${T("paySt_"+x.status)||esc(x.status)}</b></div>`; }).join("")}</section>`:""}
     <section class="card"><h3>🎁 ${T("giftTitle")}</h3><p class="muted sm-t">${T("giftSub")}</p>${gift}</section>
@@ -7116,14 +7128,76 @@ Object.assign(STR.es,{"in5": "¡Toma estos 5 pases y un equipo de principiante! 
 Object.assign(STR.ja,{"in5": "この出撃券5枚と初心者装備をやろう！まずは荒野で小さな獣を相手に腕を慣らし、それから最初の町ディングルを取り戻すのじゃ。Lv 1 から Lv 50 まで強くなり、ダブリンのバロールを倒してアイルランドを救え！", "stGot": "出撃券5枚と初心者装備を手に入れた！"});
 Object.assign(STR.ko,{"in5": "이 출정권 5장과 초보자 장비를 받으렴! 먼저 야생에서 작은 짐승들로 몸을 풀고, 첫 번째 마을 딩글을 되찾으렴. Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "stGot": "출정권 5장과 초보자 장비를 받았어요!"});
 /* ================= plans: free / member (€5) / premium (€12). Developer mode can preview any plan. ================= */
-const PLAN_RANK={free:0,sub:1,plus:2};
-function myPlan(){ if(DEV&&DEV.plan) return DEV.plan; const me=CLOUD.user&&SUP[CLOUD.user.uid]; return me&&me.sub?(me.plus?"plus":"sub"):"free"; }
+const PLAN_RANK={free:0,sub:1,plus:2}; const PLANS_ON=false;   // paid membership is switched off for now (everything free); set true to bring the plans back
+function myPlan(){ if(!PLANS_ON) return "plus"; if(DEV&&DEV.plan) return DEV.plan; const me=CLOUD.user&&SUP[CLOUD.user.uid]; return me&&me.sub?(me.plus?"plus":"sub"):"free"; }
 const planHas=need=>PLAN_RANK[myPlan()]>=PLAN_RANK[need];
 // the supporter record the membership card reads; in developer preview a pretend one so every screen can be seen
-function mySup(){ if(DEV&&DEV.plan){ if(DEV.plan==="free") return null; const m=DEV.planM||3; let t=1; for(const [n,tt] of SUB_STEPS) if(m>=n) t=tt; return {tier:t, sub:true, plus:DEV.plan==="plus", months:m, n:game().nick||""}; }
+function mySup(){ if(PLANS_ON&&DEV&&DEV.plan){ if(DEV.plan==="free") return null; const m=DEV.planM||3; let t=1; for(const [n,tt] of SUB_STEPS) if(m>=n) t=tt; return {tier:t, sub:true, plus:DEV.plan==="plus", months:m, n:game().nick||""}; }
   return CLOUD.user&&SUP[CLOUD.user.uid]||null; }
 const planTag=need=>`<span class="plan-tag ${need}">${T(need==="plus"?"planPlus":"planSub")}</span>`;
 
+
+/* ================= daily login reward + login streak (the streak title uses the old membership badges) =================
+   Open the game each day and claim: style coins (+ gold) on a 7-day cycle; slots 3 and 6 also give a truce pass.
+   Missing a day uses a truce pass automatically (the streak survives, that day does not count); with none left the streak restarts.
+   The title follows the BEST streak ever, so it is never taken away. */
+const LOGIN_CYCLE=[{s:10,g:100},{s:10,g:200},{s:15,tr:1},{s:10,g:300},{s:10,g:400},{s:15,tr:1},{s:50,g:1000}];
+const TRUCE_CAP=3;
+const STREAK_STEPS=[[10,1],[30,2],[60,3],[100,4],[180,5]];      // days in a row → badge tier 1–5
+const STREAK_GIFT={10:100,30:300,60:600,100:800,180:1000};       // style coins when a title is first reached
+function loginSt(g=game()){ if(!g.login||typeof g.login!=="object") g.login={last:null,streak:0,best:0,cyc:0,n:0,truce:0,got:[]}; return g.login; }
+function loginMerge(a,b){ if(!a) return b||undefined; if(!b) return a; const n=(a.last||"")>=(b.last||"")?a:b, o=n===a?b:a;
+  return {...n, best:Math.max(a.best||0,b.best||0), n:Math.max(a.n||0,b.n||0), got:[...new Set([...(a.got||[]),...(b.got||[])])]}; }
+const streakBest=(g=game())=>DEV&&DEV.streak!=null?DEV.streak:(loginSt(g).best||0);
+const streakNow=(g=game())=>DEV&&DEV.streak!=null?DEV.streak:(loginSt(g).streak||0);
+function streakTier(g){ const b=streakBest(g||game()); let t=0; for(const [d,tt] of STREAK_STEPS) if(b>=d) t=tt; return t; }
+const titleName=t=>t?T("sb"+t):T("lgT0");
+const ieShowBand=()=>{ const g=game(); return g.ieShow?((ieState().best||{}).band||0):0; };
+function lookExtra(uid){ const L=LOOKS[uid]; if(L===undefined) lookSoon(uid); const p=String(L||"").split("|"); let t=0, ie=0;
+  for(const x of p.slice(6)){ let m=/^s([0-5])$/.exec(x); if(m) t=+m[1]; m=/^i(\d{2})$/.exec(x); if(m) ie=+m[1]/10; } return {t, ie}; }
+let LOOK_Q=new Set(), LOOK_T=0;   // badges for names we have no look for yet: fetch them in one go
+function lookSoon(uid){ if(!uid||!CLOUD.fb||!CLOUD.user) return; LOOK_Q.add(uid); clearTimeout(LOOK_T); LOOK_T=setTimeout(()=>{ const q=[...LOOK_Q]; LOOK_Q.clear(); lookFetch(q); },300); }
+// a missed day uses a truce pass (the streak is kept, the day is not counted); no pass left → the streak restarts. Safe to call often.
+function loginSettle(){ const L=loginSt(), t=today(); if(!L.last||L.last===t) return null; const gap=daysBetween(L.last,t)-1; if(gap<=0) return null;
+  const y=new Date(); y.setDate(y.getDate()-1);
+  if((L.truce||0)>=gap){ L.truce-=gap; L.last=ymd(y); L.note={d:t,saved:gap}; }
+  else { L.streak=0; L.cyc=0; L.last=null; L.note={d:t,broke:1}; }
+  saveGame(); return L.note; }
+function loginClaim(){ const g=game(), L=loginSt(g), t=today(); loginSettle(); if(L.last===t) return null;
+  const slot=(L.cyc||0)%7, r=LOGIN_CYCLE[slot];
+  L.streak=(L.streak||0)+1; L.best=Math.max(L.best||0,L.streak); L.n=(L.n||0)+1; L.cyc=(slot+1)%7; L.last=t;
+  g.style=(g.style||0)+r.s; if(r.g) g.gold=(g.gold||0)+r.g;
+  let tr=0; if(r.tr&&(L.truce||0)<TRUCE_CAP){ L.truce=(L.truce||0)+1; tr=1; }
+  let mile=null; for(const [d,tt] of STREAK_STEPS) if(L.best>=d&&!(L.got||[]).includes(d)){ L.got=[...(L.got||[]),d]; g.style+=STREAK_GIFT[d]; mile={d,t:tt,n:STREAK_GIFT[d]}; }
+  saveGame(); cosPush(); return {slot, r, tr, full:r.tr&&!tr, mile}; }
+function nextTitle(){ const b=streakBest(); return STREAK_STEPS.find(([d])=>d>b)||null; }
+function loginStrip(){ const L=loginSt(), b=streakBest(), t=streakTier(), nx=nextTitle(), claimed=L.last===today();
+  return `<button class="lg-strip${claimed?"":" ready"}" data-act="lgopen"><span class="lg-badge">${t?sbArt(t,34,false):"🌱"}</span><span class="lg-txt"><b>${esc(titleName(t))} · 🔥 ${T("lgDays",{n:streakNow()})}</b><small class="muted">${nx?T("lgNext",{n:nx[0]-b,t:titleName(nx[1])}):T("lgMax")} · ⏸️ ×${L.truce||0}</small></span><span class="go">${claimed?"›":T("lgClaimShort")}</span></button>`; }
+function loginPop(force){
+  const t=today(), L=loginSt();
+  if(!force){ if(PLANS_ON||S.lgShown===t||L.last===t||S.onb||!S.ready.personal||!CLOUD.ready||(CLOUD.user&&CLOUD.status!=="ok")||S.view!=="today"||document.getElementById("onb")||document.getElementById("buyAsk")) return;
+    let onb=null; try{ onb=localStorage.getItem(ONB_KEY); }catch(e){} if(!onb) return; }
+  S.lgShown=t; const note=loginSettle()||(L.note&&L.note.d===t?L.note:null);
+  let el=document.getElementById("lgPop"); if(el) el.remove(); el=document.createElement("div"); el.id="lgPop";
+  const draw=res=>{ const claimed=L.last===t, cur=claimed?(L.cyc+6)%7:(L.cyc||0)%7, b=streakBest(), tier=streakTier(), nx=nextTitle();
+    const slots=LOGIN_CYCLE.map((r,i)=>`<div class="lg-slot${i===cur?" cur":""}${i<cur||(claimed&&i===cur)?" got":""}${i===6?" big":""}"><small>${T("lgDay",{n:i+1})}</small><span>${STYLE_IC}${r.s}</span>${r.g?`<span>🪙${r.g.toLocaleString()}</span>`:""}${r.tr?`<span>⏸️</span>`:""}${i<cur||(claimed&&i===cur)?`<i>✓</i>`:""}</div>`).join("");
+    const ladder=[[0,0],...STREAK_STEPS].map(([d,tt])=>`<div class="lg-rung${b>=d?" got":""}${tier===tt?" now":""}">${tt?sbArt(tt,28,false):`<span class="lg-sprout">🌱</span>`}<b>${esc(titleName(tt))}</b><small class="muted">${d?T("lgRung",{d}):"—"}</small></div>`).join("");
+    const gotLine=res?`<div class="lg-got"><b>${T("lgGot")}</b> ${STYLE_IC}+${res.r.s}${res.r.g?` · 🪙+${res.r.g.toLocaleString()}`:""}${res.tr?` · ⏸️+1`:""}${res.full?`<small class="muted"> ${T("lgTruceFull",{n:TRUCE_CAP})}</small>`:""}</div>${res.mile?`<div class="lg-mile">🎉 ${T("lgMile",{d:res.mile.d,t:titleName(res.mile.t),n:res.mile.n})}</div>`:""}`:"";
+    el.innerHTML=`<div class="scrim pd-scrim" data-lg="close"></div><div class="pd-card lg-card" role="dialog" aria-modal="true">
+      <h3 style="margin:0">🎁 ${T("lgHead")}</h3><p class="muted sm-t" style="margin:0">${T("lgSub")}</p>
+      ${note&&note.saved&&!res?`<div class="lg-note ok">⏸️ ${T("lgSaved",{n:note.saved})}</div>`:""}${note&&note.broke&&!res?`<div class="lg-note">${T("lgBroke")}</div>`:""}
+      <div class="lg-now"><span>🔥 <b>${T("lgDays",{n:streakNow()})}</b></span><span>⏸️ <b>×${L.truce||0}</b></span><span class="muted">${T("lgBest",{n:b})}</span></div>
+      <div class="lg-grid">${slots}</div>${gotLine}
+      ${claimed?`<button class="btn" data-lg="close">${T("lgOk")}</button>`:`<button class="btn" data-lg="claim">${T("lgClaim")}</button>`}
+      <details class="lg-more"><summary>${T("lgLadderT")}${nx?` · ${T("lgNext",{n:nx[0]-b,t:titleName(nx[1])})}`:""}</summary><div class="lg-ladder">${ladder}</div><p class="muted sm-t">${T("lgTruceHelp",{n:TRUCE_CAP})}</p></details></div>`; };
+  draw(null); document.body.appendChild(el);
+  el.addEventListener("click",e=>{ const b=e.target.closest("[data-lg]"); if(!b) return; e.stopPropagation();
+    if(b.dataset.lg==="claim"){ const res=loginClaim(); if(res){ sfx("prize"); draw(res); render(); } return; }
+    el.remove(); render(); });
+}
+document.addEventListener("click",e=>{ const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^lg/.test(a)) return;
+  if(a==="lgopen"){ e.stopPropagation(); return loginPop(true); }
+  if(a==="lgieshow"){ const g=game(); g.ieShow=!!t.checked; saveGame(); cosPush(); return render(); } });
 /* ================= 造型幣 style coins & cosmetics: looks, effects and sounds only, never stats ================= */
 const STYLE_EARN={day:3, week:5, weekDays:5, sub:300, plus:800};
 const STYLE_IC=`<svg class="sty-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#B98CFF" stroke="#6E44B0" stroke-width="1.6"/><circle cx="12" cy="12" r="7.2" fill="#D9B8FF"/><path d="M12 6.2l1.5 3.9 4.1.3-3.2 2.6 1 4L12 14.8l-3.4 2.2 1-4-3.2-2.6 4.1-.3z" fill="#fff"/></svg>`;
@@ -7131,25 +7205,26 @@ const COSMETICS=[
   {id:"f-leaf",    slot:"feet", price:90,  c1:"#5CCB6A", c2:"#E4FFB0"},
   {id:"f-gold",    slot:"feet", price:180, c1:"#F5B72E", c2:"#FFF3B0"},
   {id:"f-rainbow", slot:"feet", price:360, c1:"#FF7AB6", c2:"#7FE3FF"},
-  {id:"f-helix",   slot:"feet", price:320, c1:"#FFC93C", c2:"#FFF6C8", d3:true, need:"sub"},
-  {id:"f-rhelix",  slot:"feet", price:640, c1:"#B98CFF", c2:"#FFFFFF", plus:true, d3:true},
+  {id:"f-helix",   slot:"feet", price:320, c1:"#FFC93C", c2:"#FFF6C8", d3:true, need:"sub", days:10},
+  {id:"f-rhelix",  slot:"feet", price:640, c1:"#B98CFF", c2:"#FFFFFF", plus:true, d3:true, days:30},
   {id:"b-halo",    slot:"back", price:240, c1:"#FFD75E", c2:"#FFFFFF"},
   {id:"b-gears",   slot:"back", price:300, c1:"#D9A441", c2:"#FFE9A8"},
-  {id:"b-rune",    slot:"back", price:360, c1:"#3FD9C0", c2:"#D4FFF5", need:"sub"},
+  {id:"b-rune",    slot:"back", price:360, c1:"#3FD9C0", c2:"#D4FFF5", need:"sub", days:10},
   {id:"b-moon",    slot:"back", price:380, c1:"#BFD7FF", c2:"#FFFFFF"},
-  {id:"b-abyss",   slot:"back", price:520, c1:"#9B4DFF", c2:"#1A0626", need:"sub"},
-  {id:"b-wings",   slot:"back", price:600, c1:"#9FD8FF", c2:"#FFFFFF", plus:true},
-  {id:"b-phoenix", slot:"back", price:720, c1:"#FF6A2B", c2:"#FFE066", plus:true},
+  {id:"b-abyss",   slot:"back", price:520, c1:"#9B4DFF", c2:"#1A0626", need:"sub", days:10},
+  {id:"b-wings",   slot:"back", price:600, c1:"#9FD8FF", c2:"#FFFFFF", plus:true, days:30},
+  {id:"b-phoenix", slot:"back", price:720, c1:"#FF6A2B", c2:"#FFE066", plus:true, days:60},
   {id:"n-fire",    slot:"neck", price:300, c1:"#FF6A2B", c2:"#FFD36B", fx:"fire",    pow:2},
   {id:"n-frost",   slot:"neck", price:300, c1:"#4FC3F7", c2:"#E6FBFF", fx:"frost",   pow:2},
   {id:"n-thunder", slot:"neck", price:420, c1:"#FFE14D", c2:"#FFFFFF", fx:"thunder", pow:3},
-  {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4, need:"sub"},
-  {id:"n-star",    slot:"neck", price:800, c1:"#FFD54A", c2:"#FFFFFF", fx:"star",    pow:5, plus:true},
+  {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4, need:"sub", days:10},
+  {id:"n-star",    slot:"neck", price:800, c1:"#FFD54A", c2:"#FFFFFF", fx:"star",    pow:5, plus:true, days:60},
   {id:"s-chime",   slot:"sfx",  price:120},
   {id:"s-taiko",   slot:"sfx",  price:120},
   {id:"s-retro",   slot:"sfx",  price:120}];
 const COS_SLOTS=["feet","back","neck","sfx"];
-const cosNeed=c=>c.need||(c.plus?"plus":null);
+const cosNeed=c=>PLANS_ON?(c.need||(c.plus?"plus":null)):null;
+const cosDays=c=>PLANS_ON?0:(c.days||0), cosDayLock=c=>cosDays(c)>streakBest();
 // belts were taken out again: anyone who bought one gets the style coins back
 const COS_GONE={"w-crystal":450,"w-orbit":560,"f-orbit":560,"b-crystal":450};
 // pieces that moved to the waist slot keep belonging to whoever bought them
@@ -7252,13 +7327,13 @@ function viewStyle(){
   const stage=`<div class="sty-stage${S.cosHit?cosArenaFx():""}">${S.cosHit?cosFlash():""}<div class="sty-fig${S.cosHit?" hitting":""}">${heroArt(S.cosHit?"attack":"idle")}</div><div class="sty-dummy">${S.cosHit?cosBurst():""}<span class="dm">🎯</span></div></div>`;
   const cosRank=c=>c.plus?2:c.need==="sub"?1:0;   // free first, then member, then premium (catalog order within each)
   const items=COSMETICS.filter(c=>c.slot===slot).map((c,i)=>[c,i]).sort((x,y)=>cosRank(x[0])-cosRank(y[0])||x[1]-y[1]).map(x=>x[0]).map(c=>{
-    const own=cosOwned(c.id), on=(g.cos||{})[slot]===c.id, trying=tryOn[slot]===c.id&&!on, lockPlus=cosNeed(c)&&!planHas(cosNeed(c))&&!own;
+    const own=cosOwned(c.id), on=(g.cos||{})[slot]===c.id, trying=tryOn[slot]===c.id&&!on, lockPlus=((cosNeed(c)&&!planHas(cosNeed(c)))||cosDayLock(c))&&!own;
     const btns=[];
     if(own) btns.push(on?`<button class="btn ghost sm" data-act="csoff" data-k="${slot}">${T("cosOff")}</button>`:`<button class="btn sm" data-act="cswear" data-k="${c.id}">${T("cosWear")}</button>`);
     else { btns.push(`<button class="btn ghost sm" data-act="cstry" data-k="${c.id}">${trying?T("cosTryOff"):T(c.slot==="sfx"?"cosListen":"cosTry")}</button>`);
       if(!lockPlus) btns.push(`<button class="btn sm" data-act="csbuy" data-k="${c.id}" ${(g.style||0)<c.price?"disabled":""}>${STYLE_IC} ${c.price}</button>`); }
-    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${cosNeed(c)?`<span class="plan-tag ${cosNeed(c)}">${T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly")}</span>`:""}<small class="muted">${T("cosDi_"+c.id)}</small>${c.pow?`<small class="cos-pow">${T("cosPow")} ${"★".repeat(c.pow)}<i>${"★".repeat(5-c.pow)}</i></small>`:""}${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
-  const earn=[["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}],["styEarn3",{n:STYLE_EARN.sub}],["styEarn4",{n:STYLE_EARN.plus}]]
+    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${cosNeed(c)?`<span class="plan-tag ${cosNeed(c)}">${T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly")}</span>`:""}${cosDays(c)?`<span class="plan-tag days${cosDayLock(c)?"":" ok"}">${cosDayLock(c)?"🔒":"✓"} ${T("cosDaysTag",{n:c.days})}</span>`:""}<small class="muted">${T("cosDi_"+c.id)}</small>${c.pow?`<small class="cos-pow">${T("cosPow")} ${"★".repeat(c.pow)}<i>${"★".repeat(5-c.pow)}</i></small>`:""}${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
+  const earn=(PLANS_ON?[["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}],["styEarn3",{n:STYLE_EARN.sub}],["styEarn4",{n:STYLE_EARN.plus}]]:[["styEarnL",{}],["styEarnM",{}],["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}]])
     .map(([k,o],i)=>`<li class="${(i===2&&plan==="sub")||(i===3&&plan==="plus")?"mine":""}">${T(k,o)}</li>`).join("");
   return `<section class="card sty-card">
       ${stage}
@@ -7281,7 +7356,7 @@ document.addEventListener("click",e=>{
   if(a==="cstry"){ const c=cosOf(k); S.cosTry=S.cosTry||{}; if(S.cosTry[c.slot]===k){ delete S.cosTry[c.slot]; return render(); } S.cosTry[c.slot]=k; if(c.slot==="sfx"||c.slot==="neck") return cosTest(); return render(); }
   if(a==="cstryclr"){ S.cosTry={}; return render(); }
   if(a==="cstest") return cosTest();
-  if(a==="csbuy"){ const c=cosOf(k); if(!c||cosOwned(k)) return; if(cosNeed(c)&&!planHas(cosNeed(c))) return toast(T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly"));
+  if(a==="csbuy"){ const c=cosOf(k); if(!c||cosOwned(k)) return; if(cosNeed(c)&&!planHas(cosNeed(c))) return toast(T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly"));     if(cosDayLock(c)) return toast(T("cosDaysLock",{n:c.days,m:streakBest()}));
     if((g.style||0)<c.price) return toast(T("cosNoCoin",{n:c.price-(g.style||0)}));
     if(!t.dataset.sure){ return askBuy({name:T("cos_"+c.id), cost:c.price, have:g.style||0, cur:STYLE_IC, pic:`<div class="ba-cos">${cosPreviewIc(c)}</div>`, note:T("cosDi_"+c.id)}, ()=>{ const f=document.createElement("button"); f.dataset.act="csbuy"; f.dataset.k=k; f.dataset.sure="1"; f.style.display="none"; document.body.appendChild(f); f.click(); f.remove(); }); }
     g.style-=c.price; g.cosOwn=[...(g.cosOwn||[]),k]; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); cosPush(); sfx("prize"); toast(T("cosBought")); return render(); }
@@ -7597,6 +7672,12 @@ Object.assign(STR.hi,{"drMode": "बोर्ड मोड", "drModeN": "सा�
 Object.assign(STR.es,{"drMode": "Modo del tablero", "drModeN": "Normal", "drModeC": "🔥 Loco", "drModeNSub": "El tablero gira y tiembla a la velocidad de siempre", "drModeCSub": "El tablero gira y tiembla 1,75 veces más rápido. ¡Suerte!"});
 Object.assign(STR.ja,{"drMode": "ボードモード", "drModeN": "ふつう", "drModeC": "🔥 クレイジー", "drModeNSub": "ボードはいつもの速さで回って揺れます", "drModeCSub": "ボードが1.75倍の速さで回って揺れます。がんばって！"});
 Object.assign(STR.ko,{"drMode": "보드 모드", "drModeN": "보통", "drModeC": "🔥 미친 모드", "drModeNSub": "보드가 평소 속도로 돌고 흔들려요", "drModeCSub": "보드가 1.75배 빠르게 돌고 흔들려요. 행운을 빌어요!"});
+Object.assign(STR.zh,{"lgHead": "每日登入獎勵", "lgSub": "每天打開遊戲就能領。連續登入越久，稱號越高級，還能解鎖更厲害的造型。", "lgDay": "第 {n} 天", "lgClaim": "領取今天的獎勵", "lgClaimShort": "領獎勵 🎁", "lgOk": "好", "lgGot": "領到了！", "lgDays": "連續 {n} 天", "lgBest": "最長 {n} 天", "lgNext": "再 {n} 天升級「{t}」", "lgMax": "已經是最高稱號了", "lgT0": "初心者", "lgTitleN": "稱號：{t}", "lgRung": "連續 {d} 天", "lgLadderT": "稱號一覽", "lgMile": "連續 {d} 天達成！獲得稱號「{t}」，加送 {n} 造型幣", "lgSaved": "有 {n} 天沒來，自動用掉 {n} 張休戰令，連續天數保住了！", "lgBroke": "連續天數重新開始了。別擔心，你拿到的稱號和造型都會一直保留。", "lgTruceFull": "（休戰令最多 {n} 張，已滿）", "lgTruceHelp": "⏸️ 休戰令：漏掉一天時會自動用掉一張，連續天數不會中斷（那天不算天數）。每領 3 天送 1 張，最多存 {n} 張。稱號照最長紀錄給，拿到就不會被收回。", "cosDaysTag": "連續 {n} 天解鎖", "cosDaysLock": "連續登入 {n} 天才能買（你的最長紀錄：{m} 天）", "styEarnL": "每天打開遊戲領登入獎勵（7 天一輪，第 7 天最多）", "styEarnM": "連續 10、30、60 天等里程碑，再送大禮", "ieShowT": "在名字旁顯示我的最佳 IELTS 徽章", "ieShowSub": "排行榜和多人遊戲裡大家都看得到（目前最佳 Band {b}）。", "ieShowNone": "考到 Band 6 以上後就會顯示。", "devStreakT": "👀 預覽連續天數（稱號、造型解鎖）", "devLoginAgain": "再領一次今天的登入獎勵"});
+Object.assign(STR.en,{"lgHead": "Daily login reward", "lgSub": "Open the game every day to claim. The longer your streak, the finer your title, and it unlocks better styles.", "lgDay": "Day {n}", "lgClaim": "Claim today's reward", "lgClaimShort": "Claim 🎁", "lgOk": "OK", "lgGot": "Got it!", "lgDays": "{n}-day streak", "lgBest": "best {n} days", "lgNext": "{n} more days to “{t}”", "lgMax": "You have the top title", "lgT0": "Beginner", "lgTitleN": "Title: {t}", "lgRung": "{d} days in a row", "lgLadderT": "All titles", "lgMile": "{d} days in a row! New title “{t}” and {n} bonus style coins", "lgSaved": "You missed {n} day(s): {n} truce pass(es) used, your streak is safe!", "lgBroke": "Your streak has started again. Don't worry: titles and styles you earned are yours to keep.", "lgTruceFull": "(truce passes are full, max {n})", "lgTruceHelp": "⏸️ Truce pass: if you miss a day, one is used automatically and your streak carries on (that day doesn't count). You get 1 every 3 days you claim, up to {n}. Titles follow your best streak, so they're never taken away.", "cosDaysTag": "{n}-day streak", "cosDaysLock": "Needs a {n}-day login streak (your best: {m} days)", "styEarnL": "Open the game each day for a login reward (7-day cycle, biggest on day 7)", "styEarnM": "Big bonuses at 10, 30, 60 days in a row and more", "ieShowT": "Show my best IELTS badge next to my name", "ieShowSub": "Everyone sees it on leaderboards and in party games (your best: Band {b}).", "ieShowNone": "It appears once you score Band 6 or higher.", "devStreakT": "👀 Preview a login streak (titles, style unlocks)", "devLoginAgain": "Claim today's login reward again"});
+Object.assign(STR.hi,{"lgHead": "रोज़ का लॉगिन इनाम", "lgSub": "हर दिन गेम खोलें और इनाम लें। जितनी लंबी लगातार लॉगिन, उतना बढ़िया टाइटल, और बेहतर स्टाइल खुलते हैं।", "lgDay": "दिन {n}", "lgClaim": "आज का इनाम लें", "lgClaimShort": "इनाम 🎁", "lgOk": "ठीक है", "lgGot": "मिल गया!", "lgDays": "लगातार {n} दिन", "lgBest": "सबसे ज़्यादा {n} दिन", "lgNext": "“{t}” तक {n} दिन और", "lgMax": "आपके पास सबसे ऊँचा टाइटल है", "lgT0": "नौसिखिया", "lgTitleN": "टाइटल: {t}", "lgRung": "लगातार {d} दिन", "lgLadderT": "सभी टाइटल", "lgMile": "लगातार {d} दिन! नया टाइटल “{t}” और {n} बोनस स्टाइल सिक्के", "lgSaved": "आप {n} दिन नहीं आए: {n} युद्धविराम पास इस्तेमाल हुए, आपकी लगातार गिनती बच गई!", "lgBroke": "लगातार गिनती फिर से शुरू हुई। चिंता न करें: कमाए टाइटल और स्टाइल आपके ही रहेंगे।", "lgTruceFull": "(युद्धविराम पास भरे हुए हैं, अधिकतम {n})", "lgTruceHelp": "⏸️ युद्धविराम पास: अगर कोई दिन छूट जाए तो एक अपने-आप इस्तेमाल होता है और गिनती नहीं टूटती (वह दिन गिना नहीं जाता)। हर 3 दिन इनाम लेने पर 1 मिलता है, अधिकतम {n}। टाइटल आपकी सबसे लंबी गिनती से मिलते हैं, कभी वापस नहीं लिए जाते।", "cosDaysTag": "लगातार {n} दिन", "cosDaysLock": "इसके लिए लगातार {n} दिन लॉगिन चाहिए (आपका सबसे ज़्यादा: {m} दिन)", "styEarnL": "हर दिन गेम खोलकर लॉगिन इनाम लें (7 दिन का चक्र, 7वें दिन सबसे बड़ा)", "styEarnM": "लगातार 10, 30, 60 दिन वगैरह पर बड़ा बोनस", "ieShowT": "मेरे नाम के पास मेरा सबसे अच्छा IELTS बैज दिखाएँ", "ieShowSub": "लीडरबोर्ड और ग्रुप गेम में सब देखेंगे (आपका सबसे अच्छा: Band {b})।", "ieShowNone": "Band 6 या उससे ज़्यादा आने पर दिखेगा।", "devStreakT": "👀 लगातार लॉगिन का पूर्वावलोकन (टाइटल, स्टाइल)", "devLoginAgain": "आज का लॉगिन इनाम फिर से लें"});
+Object.assign(STR.es,{"lgHead": "Premio diario por entrar", "lgSub": "Abre el juego cada día para reclamarlo. Cuanto más larga tu racha, mejor tu título, y desbloquea estilos mejores.", "lgDay": "Día {n}", "lgClaim": "Reclamar el premio de hoy", "lgClaimShort": "Premio 🎁", "lgOk": "Vale", "lgGot": "¡Conseguido!", "lgDays": "Racha de {n} días", "lgBest": "récord {n} días", "lgNext": "{n} días más para «{t}»", "lgMax": "Ya tienes el título más alto", "lgT0": "Principiante", "lgTitleN": "Título: {t}", "lgRung": "{d} días seguidos", "lgLadderT": "Todos los títulos", "lgMile": "¡{d} días seguidos! Nuevo título «{t}» y {n} monedas de estilo extra", "lgSaved": "Faltaste {n} día(s): se usaron {n} pase(s) de tregua y tu racha sigue.", "lgBroke": "Tu racha empezó de nuevo. Tranquilo: los títulos y estilos que ganaste son tuyos para siempre.", "lgTruceFull": "(pases de tregua llenos, máximo {n})", "lgTruceHelp": "⏸️ Pase de tregua: si faltas un día se usa uno automáticamente y tu racha continúa (ese día no cuenta). Recibes 1 cada 3 días que reclamas, hasta {n}. Los títulos siguen tu mejor racha, así que nunca se pierden.", "cosDaysTag": "Racha de {n} días", "cosDaysLock": "Necesitas una racha de {n} días (tu récord: {m} días)", "styEarnL": "Abre el juego cada día y reclama el premio (ciclo de 7 días, el mayor el día 7)", "styEarnM": "Grandes premios a los 10, 30, 60 días seguidos y más", "ieShowT": "Mostrar mi mejor insignia IELTS junto a mi nombre", "ieShowSub": "Todos la verán en las clasificaciones y en los juegos en grupo (tu mejor: Band {b}).", "ieShowNone": "Aparece cuando consigas Band 6 o más.", "devStreakT": "👀 Previsualizar una racha (títulos, estilos)", "devLoginAgain": "Reclamar otra vez el premio de hoy"});
+Object.assign(STR.ja,{"lgHead": "毎日のログインボーナス", "lgSub": "毎日ゲームを開くともらえます。連続ログインが長いほど称号が豪華になり、もっとすごいスタイルが解放されます。", "lgDay": "{n}日目", "lgClaim": "今日のボーナスを受け取る", "lgClaimShort": "受け取る 🎁", "lgOk": "OK", "lgGot": "受け取りました！", "lgDays": "{n}日連続", "lgBest": "最長 {n}日", "lgNext": "あと{n}日で「{t}」", "lgMax": "最高の称号です", "lgT0": "初心者", "lgTitleN": "称号：{t}", "lgRung": "{d}日連続", "lgLadderT": "称号一覧", "lgMile": "{d}日連続達成！称号「{t}」と、スタイルコイン {n} をプレゼント", "lgSaved": "{n}日来られなかったので休戦令を{n}枚使いました。連続記録は守られました！", "lgBroke": "連続記録がリセットされました。手に入れた称号とスタイルはずっとあなたのものです。", "lgTruceFull": "（休戦令は最大{n}枚、満タンです）", "lgTruceHelp": "⏸️ 休戦令：1日来られなかったとき自動で1枚使い、連続記録が途切れません（その日は日数に入りません）。3日受け取るごとに1枚、最大{n}枚まで。称号は最長記録で決まるので、なくなることはありません。", "cosDaysTag": "{n}日連続で解放", "cosDaysLock": "{n}日連続ログインで購入できます（あなたの最長：{m}日）", "styEarnL": "毎日ゲームを開いてログインボーナス（7日で1周、7日目が最大）", "styEarnM": "10・30・60日連続などの節目でさらに大きなプレゼント", "ieShowT": "名前の横にベストの IELTS バッジを表示", "ieShowSub": "ランキングやみんなで遊ぶゲームで表示されます（ベスト：Band {b}）。", "ieShowNone": "Band 6 以上を取ると表示されます。", "devStreakT": "👀 連続日数をプレビュー（称号・スタイル解放）", "devLoginAgain": "今日のログインボーナスをもう一度"});
+Object.assign(STR.ko,{"lgHead": "매일 로그인 보상", "lgSub": "매일 게임을 열면 받을 수 있어요. 연속 로그인이 길수록 칭호가 멋져지고, 더 멋진 스타일이 열려요.", "lgDay": "{n}일째", "lgClaim": "오늘 보상 받기", "lgClaimShort": "보상 🎁", "lgOk": "확인", "lgGot": "받았어요!", "lgDays": "{n}일 연속", "lgBest": "최고 {n}일", "lgNext": "{n}일 더 하면 「{t}」", "lgMax": "최고 칭호예요", "lgT0": "초보자", "lgTitleN": "칭호: {t}", "lgRung": "{d}일 연속", "lgLadderT": "칭호 목록", "lgMile": "{d}일 연속 달성! 칭호 「{t}」와 스타일 코인 {n}개 추가", "lgSaved": "{n}일 못 와서 휴전권 {n}장을 자동으로 썼어요. 연속 기록은 그대로예요!", "lgBroke": "연속 기록이 다시 시작됐어요. 걱정 마세요: 얻은 칭호와 스타일은 계속 내 거예요.", "lgTruceFull": "(휴전권은 최대 {n}장, 가득 찼어요)", "lgTruceHelp": "⏸️ 휴전권: 하루를 놓치면 자동으로 한 장 써서 연속 기록이 끊기지 않아요(그날은 일수에 안 들어가요). 3일 받을 때마다 1장, 최대 {n}장. 칭호는 최고 기록으로 정해져서 없어지지 않아요.", "cosDaysTag": "{n}일 연속 해금", "cosDaysLock": "{n}일 연속 로그인해야 살 수 있어요 (내 최고 기록: {m}일)", "styEarnL": "매일 게임을 열고 로그인 보상 받기 (7일 주기, 7일째가 가장 커요)", "styEarnM": "10·30·60일 연속 등 기념일마다 큰 선물", "ieShowT": "이름 옆에 내 최고 IELTS 배지 표시", "ieShowSub": "순위표와 함께 놀기 게임에서 모두가 볼 수 있어요 (최고: Band {b}).", "ieShowNone": "Band 6 이상을 받으면 표시돼요.", "devStreakT": "👀 연속 일수 미리보기 (칭호, 스타일 해금)", "devLoginAgain": "오늘 로그인 보상 다시 받기"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
