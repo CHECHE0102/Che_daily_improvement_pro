@@ -3571,7 +3571,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.2";
+const APP_VERSION="2026.11.3";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5943,7 +5943,7 @@ function readBarInner(){
   return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${window.LS?`<button class="btn ghost sm${LS.on?" on":""}" data-act="lstoggle" aria-pressed="${LS.on}">🎧 ${T("lsBtn")}${planHas("sub")?"":" 🔒"}</button>${lsMini()}`:""}${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
 }
 function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
-function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi&&!(window.LS&&LS.on))); const el=document.querySelectorAll("#article p")[pi]; if(el&&READ.lastPi!==pi&&!(window.LS&&LS.on)){ READ.lastPi=pi; el.scrollIntoView({behavior:"smooth",block:"center"}); } }
+function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi&&!(window.LS&&LS.on))); }   // no auto-scroll: the page stays where the reader left it
 function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
 function readStart(){
   if(!window.speechSynthesis) return toast(T("readNoTts"));
@@ -5954,8 +5954,13 @@ function readStart(){
   if(rec&&rec.t&&rec.t.length===READ.chunks.length){ readAudio(rec); readUi(); return; }
   readNext(); readUi();
 }
+const NEWS_EL={a:null,owner:null};
+function newsEl(url,owner){ let a=NEWS_EL.a; if(!a){ a=new Audio(); a.preload="auto"; NEWS_EL.a=a; }
+  try{ a.pause(); }catch(e){} a.ontimeupdate=a.onended=a.onerror=a.onloadedmetadata=null;
+  if(a.dataset.u!==url){ a.dataset.u=url; a.src=url; } NEWS_EL.owner=owner; return a; }
+function newsElStop(owner){ const a=NEWS_EL.a; if(!a||NEWS_EL.owner!==owner) return; try{ a.pause(); }catch(e){} a.ontimeupdate=a.onended=a.onerror=a.onloadedmetadata=null; }
 function readAudio(rec){
-  const a=new Audio(rec.url); READ.audio=a; READ.times=rec.t; a.preload="auto"; a.playbackRate=READ.rate;
+  const a=newsEl(rec.url,"read"); READ.audio=a; READ.times=rec.t; a.playbackRate=READ.rate; try{ a.currentTime=0; }catch(e){}
   const tok=++READ.tok; readMark(READ.chunks[0].pi);
   a.ontimeupdate=()=>{ if(tok!==READ.tok) return; const ct=a.currentTime+0.05; let i=0; while(i+1<READ.times.length&&READ.times[i+1]<=ct) i++; if(i!==READ.i){ READ.i=i; readMark(READ.chunks[i].pi); readUi(); } };
   a.onended=()=>{ if(tok===READ.tok) readStop(); };
@@ -5969,9 +5974,9 @@ function readNext(){
   const go=()=>{ if(tok!==READ.tok||!READ.on||READ.paused) return; READ.i++; readUi(); readNext(); };
   u.onend=go; u.onerror=go; speechSynthesis.speak(u);
 }
-function readPause(){ READ.paused=true; if(READ.audio){ READ.audio.pause(); return readUi(); } READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} readUi(); }
+function readPause(){ READ.paused=true; if(READ.audio){ try{ READ.audio.pause(); }catch(e){} return readUi(); } READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} readUi(); }
 function readResume(){ READ.paused=false; if(READ.audio){ READ.audio.play().catch(()=>{}); return readUi(); } readNext(); readUi(); }
-function readStop(){ READ.on=false; READ.paused=false; READ.tok++; if(READ.audio){ try{ READ.audio.pause(); }catch(e){} READ.audio=null; } try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
+function readStop(){ READ.on=false; READ.paused=false; READ.tok++; if(READ.audio){ newsElStop("read"); READ.audio=null; } try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
 function readStopIfLeft(){ if(READ.on&&(S.view!=="read"||(S.articleId&&S.articleId!==READ.art))) readStop(); if(window.LS&&(LS.playing||LS.wait)&&S.view!=="read") lsHalt(); if(window.LS&&S.articleId!==LS.art){ LS.art=S.articleId; LS.i=0; LS.a=LS.b=null; } }
 Object.assign(STR.zh,{srsTicketMin:"複習 {n} 個字以上才能拿彩券", srsTicket:"完成一次拿 1 張彩券 · 今天還能拿 {n} 張", srsTitle:"間隔複習", srsDueN:"今天有 {n} 個字該複習了", srsClear:"今天的字都複習完了 ✅ 明天有 {n} 個", srsStart:"複習 {n} 個字", srsNone:"今天沒有要複習的字 🎉", srsHow:"答對的字會隔越來越久才再出現（1→2→4→7→15→30 天），答錯就從明天重新開始。", srsBoxes:"每個格子代表多久複習一次", srsAfter:"還有 {n} 個字今天到期 · 明天預計 {t} 個", readAloud:"朗讀全文", readPause:"暫停", readResume:"繼續", readStop:"停止", readSpeed:"{r}x", readNoTts:"這個瀏覽器不支援朗讀"});
 Object.assign(STR.en,{srsTicketMin:"Review at least {n} words to earn a lucky ticket", srsTicket:"Finish a review for 1 lucky ticket · {n} left today", srsTitle:"Spaced review", srsDueN:"{n} words are due for review today", srsClear:"All caught up today ✅ {n} due tomorrow", srsStart:"Review {n}", srsNone:"Nothing to review today 🎉", srsHow:"Words you get right come back after longer and longer gaps (1→2→4→7→15→30 days); miss one and it starts again tomorrow.", srsBoxes:"Each box is how often a word comes back", srsAfter:"{n} words still due today · about {t} tomorrow", readAloud:"Read aloud", readPause:"Pause", readResume:"Resume", readStop:"Stop", readSpeed:"{r}x", readNoTts:"This browser can't read text aloud"});
@@ -7496,7 +7501,8 @@ function lsInner(){
 function lsUi(){ const el=document.getElementById("lsBox"); if(el) el.innerHTML=lsInner(); setTimeout(lsHighlight,0); const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(LS.playing||!!LS.wait||!!(READ.on&&!READ.paused)||examOn()); }
 function lsMark(){ const c=lsChunks()[LS.i]; if(c) readMark(c.pi); lsHighlight(); lsReveal(); }
 // keep the sentence visible just below the sticky bar, scrolling only as much as needed
-function lsReveal(){ const r=lsRange(LS.i), dr=r&&lsDomRange(r); if(!dr) return; const box=dr.getBoundingClientRect(), bar=document.getElementById("readBar");
+function lsReveal(){ const pb=document.getElementById("lsBox"), pr=pb&&pb.getBoundingClientRect(); if(pr&&pr.height&&pr.bottom>80&&pr.top<window.innerHeight-90) return;
+  const r=lsRange(LS.i), dr=r&&lsDomRange(r); if(!dr) return; const box=dr.getBoundingClientRect(), bar=document.getElementById("readBar");
   const top=(bar?bar.getBoundingClientRect().bottom:70)+12, bottom=window.innerHeight-90;
   if(box.top<top) window.scrollBy({top:box.top-top,behavior:"smooth"}); else if(box.bottom>bottom) window.scrollBy({top:Math.min(box.bottom-bottom, box.top-top),behavior:"smooth"}); }
 function lsMini(){ if(!LS.on||!planHas("sub")) return ""; const n=lsChunks().length, busy=LS.playing||LS.wait;
@@ -7527,39 +7533,45 @@ function sayCompare(target, heard){ const T0=String(target).split(/\s+/).filter(
   const okW=T0.map((w,k)=>{ const idx=owner.map((o,x)=>o===k?x:-1).filter(x=>x>=0); return {w, ok:!idx.length||idx.every(x=>hit[x])}; });
   const scored=okW.filter((x,k)=>tw[k].length); return {words:okW, pct:scored.length?Math.round(scored.filter(x=>x.ok).length/scored.length*100):0, heard}; }
 function sayListen(i, done){
-  if(!SRC){ if(!LS.noSR){ LS.noSR=true; toast(T("srNone")); } return done(null); }
   const C=lsChunks(), c=C[i]; if(!c) return done(null);
-  let r; try{ r=new SRC(); }catch(e){ return done(null); }
+  if(!SRC){ if(!LS.noSR){ LS.noSR=true; toast(T("srNone")); } return done({err:"none"}); }
+  let r; try{ r=new SRC(); }catch(e){ return done({err:"none"}); }
   r.lang="en-GB"; r.interimResults=true; r.continuous=false; r.maxAlternatives=3;
-  let best="", fin=false; const tok=LS.tok;
-  const end=()=>{ if(fin) return; fin=true; clearTimeout(LS.srT); LS.listening=false; try{ r.stop(); }catch(e){} if(tok!==LS.tok) return; done(best?sayCompare(c.t,best):{words:c.t.split(/\s+/).map(w=>({w,ok:false})),pct:0,heard:""}); };
+  let best="", fin=false, err=""; const tok=LS.tok;
+  const end=()=>{ if(fin) return; fin=true; clearTimeout(LS.srT); clearTimeout(LS.srT2); LS.listening=false; try{ r.stop(); }catch(e){} if(tok!==LS.tok) return;
+    if(!best&&(err==="not-allowed"||err==="service-not-allowed")) return done({err:isStandalone()&&/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent||"")?"pwa":"denied"});
+    if(!best&&err&&err!=="no-speech"&&err!=="aborted") return done({err:"fail",code:err});
+    done(best?sayCompare(c.t,best):{words:c.t.split(/\s+/).map(w=>({w,ok:false})),pct:0,heard:""}); };
+  const stopSoon=()=>{ try{ r.stop(); }catch(e){} clearTimeout(LS.srT2); LS.srT2=setTimeout(end,1500); };   // some phones never fire onend
   r.onresult=e=>{ let txt=""; for(let k=0;k<e.results.length;k++){ const alts=[...e.results[k]]; const top=alts.map(a=>a.transcript).sort((x,y)=>sayCompare(c.t,y).pct-sayCompare(c.t,x).pct)[0]||""; txt+=" "+top; } best=txt.trim(); LS.live=best; lsUi(); };
-  r.onerror=e=>{ if(e.error==="not-allowed"||e.error==="service-not-allowed") toast(T("srDenied")); else if(e.error!=="no-speech"&&e.error!=="aborted") console.warn("speech",e.error); end(); };
+  r.onerror=e=>{ err=e.error||"error"; if(err!=="no-speech"&&err!=="aborted") console.warn("speech",err); end(); };
   r.onend=end;
-  LS.listening=true; LS.live=""; LS.res=null; LS.stopSR=()=>{ try{ r.stop(); }catch(e){} }; lsUi();
+  LS.listening=true; LS.live=""; LS.res=null; LS.stopSR=stopSoon; lsUi();
   try{ r.start(); }catch(e){ return end(); }
-  LS.srT=setTimeout(()=>{ try{ r.stop(); }catch(e){} }, Math.max(5000, c.t.split(/\s+/).length*650+2500)); }
+  LS.srT=setTimeout(stopSoon, Math.max(5000, c.t.split(/\s+/).length*650+2500)); }
 function sayResHtml(mini){ const R=LS.res; if(!R) return "";
+  if(R.err){ if(mini) return `<span class="sr-chip low">⚠️</span>`; const k={none:"srNoDev",pwa:"srPwa",denied:"srDenied",fail:"srFail"}[R.err]||"srFail";
+    return `<div class="sr-res"><div class="sm-t">⚠️ ${T(k,{e:esc(R.code||"")})}</div></div>`; }
   const col=R.pct>=85?"good":R.pct>=60?"mid":"low";
   if(mini) return `<span class="sr-chip ${col}">${R.pct}%</span>`;
   return `<div class="sr-res"><div class="sr-head"><b class="sr-chip ${col}">${T("srScore",{p:R.pct})}</b><span class="muted sm-t">${T(R.pct>=85?"srGood":R.pct>=60?"srOk":"srTry")}</span></div>
     <div class="sr-words">${R.words.map(x=>`<span class="${x.ok?"ok":"no"}">${esc(x.w)}</span>`).join(" ")}</div>
     ${R.heard?`<div class="muted sm-t">${T("srHeard")}：<span class="en-i">${esc(R.heard)}</span></div>`:`<div class="muted sm-t">${T("srNothing")}</div>`}</div>`; }
-function lsHalt(){ LS.tok++; LS.playing=false; LS.wait=0; clearTimeout(LS.wt); clearTimeout(LS.srT); if(LS.listening&&LS.stopSR){ LS.listening=false; try{ LS.stopSR(); }catch(e){} } if(LS.audio){ try{ LS.audio.pause(); }catch(e){} } try{ speechSynthesis.cancel(); }catch(e){} }
+function lsHalt(){ LS.tok++; LS.playing=false; LS.wait=0; clearTimeout(LS.wt); clearTimeout(LS.srT); if(LS.listening&&LS.stopSR){ LS.listening=false; try{ LS.stopSR(); }catch(e){} } newsElStop("ls"); if(!READ.on||READ.audio) try{ speechSynthesis.cancel(); }catch(e){} }
 // play sentence i once, then call done(ms it took)
 function lsSay(i, done){
   const C=lsChunks(), c=C[i]; if(!c) return done(0); const tok=LS.tok, t0=Date.now(), rec=readRec();
   LS.playing=true; lsMark(); lsUi();
   const fin=()=>{ if(tok!==LS.tok) return; LS.playing=false; done(Date.now()-t0); };
   if(rec&&rec.t&&rec.t.length===C.length){
-    let a=LS.audio; if(!a||a.dataset.u!==rec.url){ a=new Audio(rec.url); a.preload="auto"; a.dataset.u=rec.url; LS.audio=a; }
-    a.playbackRate=READ.rate; const st=rec.t[i], en=i+1<rec.t.length?rec.t[i+1]:Infinity;
+    const a=newsEl(rec.url,"ls"); a.playbackRate=READ.rate; const st=rec.t[i], en=i+1<rec.t.length?rec.t[i+1]:Infinity;
     a.ontimeupdate=()=>{ if(tok!==LS.tok) return; if(a.currentTime>=en-0.04){ a.pause(); fin(); } }; a.onended=fin;
-    const go=()=>{ try{ a.currentTime=st; }catch(e){} a.play().catch(()=>ttsSay()); };
+    const go=()=>{ if(tok!==LS.tok) return; try{ a.currentTime=st; }catch(e){} a.play().catch(()=>ttsSay()); };
     if(a.readyState>=1) go(); else { a.onloadedmetadata=go; a.onerror=()=>ttsSay(); }
+    a.onerror=()=>ttsSay();
     return; }
   ttsSay();
-  function ttsSay(){ if(!window.speechSynthesis) return fin(); const u=new SpeechSynthesisUtterance(c.t), v=ieVoices().F; if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB"; u.rate=READ.rate; u.onend=fin; u.onerror=fin; try{ speechSynthesis.cancel(); }catch(e){} speechSynthesis.speak(u); }
+  function ttsSay(){ if(tok!==LS.tok) return; if(!window.speechSynthesis) return fin(); const u=new SpeechSynthesisUtterance(c.t), v=ieVoices().F; if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB"; u.rate=READ.rate; u.onend=fin; u.onerror=fin; try{ speechSynthesis.cancel(); }catch(e){} speechSynthesis.speak(u); }
 }
 // mode: "one" = this sentence only; "run" = keep going (and loop A–B when set)
 function lsRun(mode){
@@ -7570,7 +7582,7 @@ function lsRun(mode){
       const n=lsChunks().length, ab=LS.a!=null&&LS.b!=null;
       if(ab&&LS.i>=LS.b) LS.i=LS.a; else if(LS.i+1<n) LS.i++; else { lsUi(); return; }
       step(); };
-    if(LS.shadow&&SRC&&LS.mic!==false){ sayListen(LS.i, R=>{ if(tok!==LS.tok) return; LS.res=R?{...R,i:LS.i}:null; lsUi(); LS.wt=setTimeout(next, R?2600:600); }); }
+    if(LS.shadow&&SRC&&LS.mic!==false){ sayListen(LS.i, R=>{ if(tok!==LS.tok) return; LS.res=R?{...R,i:LS.i}:null; if(R&&R.err==="none") LS.mic=false; lsUi(); LS.wt=setTimeout(next, R&&!R.err?2600:900); }); }
     else if(LS.shadow){ LS.wait=Math.max(1600,Math.round(ms*1.15)+500); lsUi(); LS.wt=setTimeout(next,LS.wait); } else next(); });
   step();
 }
@@ -7583,7 +7595,7 @@ document.addEventListener("click",e=>{
   if(a==="lsprev"){ LS.i=Math.max(0,LS.i-1); return lsRun("one"); }
   if(a==="lsnext"){ LS.i=Math.min(n-1,LS.i+1); return lsRun("one"); }
   if(a==="lsplay") return lsRun("run");
-  if(a==="lsmic"){ if(LS.listening){ LS.stopSR&&LS.stopSR(); return; } lsHalt(); LS.res=null; return sayListen(LS.i, R=>{ LS.res=R?{...R,i:LS.i}:null; lsUi(); }); }
+  if(a==="lsmic"){ if(LS.listening){ LS.stopSR&&LS.stopSR(); return; } lsHalt(); LS.res=null; const i0=LS.i; return sayListen(i0, R=>{ LS.res=R?{...R,i:i0}:null; lsUi(); }); }
   if(a==="lsmicstop"){ LS.stopSR&&LS.stopSR(); return; }
   if(a==="lsshadow"){ LS.shadow=!LS.shadow; if(LS.shadow) return lsRun("run"); lsHalt(); return lsUi(); }
   if(a==="lsa"){ LS.a=LS.i; if(LS.b!=null&&LS.b<LS.a) LS.b=null; return lsUi(); }
@@ -7741,6 +7753,12 @@ Object.assign(STR.hi,{"miAtk": "हमला", "miDef": "बचाव", "miAbout
 Object.assign(STR.es,{"miAtk": "ATQ", "miDef": "DEF", "miAbout": "Sobre este monstruo", "miClose": "Cerrar"});
 Object.assign(STR.ja,{"miAtk": "攻撃", "miDef": "防御", "miAbout": "魔物の紹介", "miClose": "閉じる"});
 Object.assign(STR.ko,{"miAtk": "공격", "miDef": "방어", "miAbout": "몬스터 소개", "miClose": "닫기"});
+Object.assign(STR.zh,{"srNoDev": "這個瀏覽器不支援語音辨識，沒辦法比對發音。可以改用 Chrome 或 Safari 試試。", "srPwa": "從主畫面打開的 BinBin 在 iPhone 上不能用語音辨識。用 Safari 打開 binbindaily.com 就能用「我來唸這句」。", "srFail": "沒辦法開始聽寫（{e}），請再按一次試試。"});
+Object.assign(STR.en,{"srNoDev": "This browser has no speech recognition, so it can't check your pronunciation. Try Chrome or Safari.", "srPwa": "On iPhone, speech recognition doesn't work when BinBin is opened from the Home Screen. Open binbindaily.com in Safari to use \"Say it myself\".", "srFail": "Couldn't start listening ({e}). Please tap again."});
+Object.assign(STR.hi,{"srNoDev": "इस ब्राउज़र में वाक् पहचान नहीं है, इसलिए उच्चारण नहीं जाँचा जा सकता। Chrome या Safari आज़माएँ।", "srPwa": "iPhone पर होम स्क्रीन से खोले गए BinBin में वाक् पहचान काम नहीं करती। Safari में binbindaily.com खोलें।", "srFail": "सुनना शुरू नहीं हो सका ({e})। फिर से टैप करें।"});
+Object.assign(STR.es,{"srNoDev": "Este navegador no tiene reconocimiento de voz, así que no puede comprobar tu pronunciación. Prueba con Chrome o Safari.", "srPwa": "En iPhone, el reconocimiento de voz no funciona si abres BinBin desde la pantalla de inicio. Abre binbindaily.com en Safari.", "srFail": "No se pudo empezar a escuchar ({e}). Vuelve a tocar."});
+Object.assign(STR.ja,{"srNoDev": "このブラウザは音声認識に対応していないため、発音チェックができません。Chrome か Safari をお試しください。", "srPwa": "iPhone ではホーム画面から開いた BinBin で音声認識が使えません。Safari で binbindaily.com を開いてください。", "srFail": "聞き取りを開始できませんでした（{e}）。もう一度タップしてください。"});
+Object.assign(STR.ko,{"srNoDev": "이 브라우저는 음성 인식을 지원하지 않아 발음을 확인할 수 없어요. Chrome이나 Safari를 사용해 보세요.", "srPwa": "iPhone에서 홈 화면으로 연 BinBin에서는 음성 인식이 안 돼요. Safari에서 binbindaily.com을 열어 주세요.", "srFail": "듣기를 시작하지 못했어요 ({e}). 다시 눌러 주세요."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
