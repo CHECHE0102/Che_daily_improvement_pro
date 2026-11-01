@@ -807,6 +807,7 @@ body.onb-open{overflow:hidden}
 .srs-after{font-size:14px}
 .read-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:60px;z-index:3;background:var(--paper);padding:6px 0;box-shadow:0 -12px 0 var(--paper),0 6px 8px -6px rgba(0,0,0,.12)}
 .article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
+.comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
 .del-ask{border:1.5px solid color-mix(in srgb,var(--bad) 50%,var(--line));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--bad) 6%,var(--card))}.del-ask p{margin:6px 0 10px;line-height:1.55}
@@ -1771,6 +1772,7 @@ function viewSettings(){
     ${CLOUD.user?nickForm():""}
     ${regionSection()}
     ${pushCard()}
+    ${communityCard()}
     <details class="card set-sec set-fold" data-fold="lang"${S.fold&&S.fold.lang?" open":""}><summary><b>${T("language")} · Language</b><span class="fold-v" data-nosc>${(LANGS.find(l=>l.k===langKey())||{}).label}</span></summary><div class="opts">${langs}</div></details>
     <details class="card set-sec set-fold" data-fold="lvl"${S.fold&&S.fold.lvl?" open":""}><summary><b>${T("level")}</b><span class="fold-v">${LEVEL==="IELTS"?"IELTS 7–8":esc(LEVEL)}</span></summary><div class="opts">${lvls}</div><button class="btn ghost sm lvt-link" data-act="lvtest">🧭 ${T("lvtLink")}</button></details>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
@@ -3515,7 +3517,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.207";
+const APP_VERSION="2026.11.1";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3871,6 +3873,12 @@ function ieLobby(){
 /* ================= Feedback (→ Google Sheet via Apps Script, plus a Firestore copy) ================= */
 // Paste the Apps Script "Web app" URL here once it is deployed (see instructions from Claude).
 const FEEDBACK_URL="https://script.google.com/macros/s/AKfycbxL21sHbIGaY4OSAwQUGEYL6bw_Dnpv2b6gn8kSMtkG0_7tauCTLIuH4nEZg6vG93X2/exec";
+const LINE_COMMUNITY_URL="https://line.me/ti/g2/p94SUoGrM2EiPywvBuilE-kxGsnSH5nUWMpzxQ";
+function communityCard(){
+  const k=langKey(); if(k!=="zh"&&k!=="cn") return "";
+  return `<section class="card set-sec comm-card"><b>🐶 ${T("commTitle")}</b><span class="muted sm-t">${T("commSub")}</span>
+    <a class="btn sm comm-line" href="${LINE_COMMUNITY_URL}" target="_blank" rel="noopener">${T("commJoin")}</a></section>`;
+}
 function feedbackCard(){
   const types=[["idea",T("fbIdea")],["bug",T("fbBug")],["news",T("fbNews")],["other",T("fbOther")]];
   const ty=S.fbType||"idea";
@@ -7597,6 +7605,7 @@ Object.assign(STR.hi,{"drMode": "बोर्ड मोड", "drModeN": "सा�
 Object.assign(STR.es,{"drMode": "Modo del tablero", "drModeN": "Normal", "drModeC": "🔥 Loco", "drModeNSub": "El tablero gira y tiembla a la velocidad de siempre", "drModeCSub": "El tablero gira y tiembla 1,75 veces más rápido. ¡Suerte!"});
 Object.assign(STR.ja,{"drMode": "ボードモード", "drModeN": "ふつう", "drModeC": "🔥 クレイジー", "drModeNSub": "ボードはいつもの速さで回って揺れます", "drModeCSub": "ボードが1.75倍の速さで回って揺れます。がんばって！"});
 Object.assign(STR.ko,{"drMode": "보드 모드", "drModeN": "보통", "drModeC": "🔥 미친 모드", "drModeNSub": "보드가 평소 속도로 돌고 흔들려요", "drModeCSub": "보드가 1.75배 빠르게 돌고 흔들려요. 행운을 빌어요!"});
+Object.assign(STR.zh,{commTitle:"加入 BinBin Daily LINE 社群", commSub:"跟其他在愛爾蘭打工度假、遊學的朋友一起練英文：分享每日進度、問英文問題、約朋友玩小遊戲。", commJoin:"加入 LINE 社群"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
