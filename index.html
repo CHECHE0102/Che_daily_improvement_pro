@@ -834,7 +834,7 @@ body.onb-open{overflow:hidden}
 .srs-after{font-size:14px}
 .read-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:60px;z-index:3;background:var(--paper);padding:6px 0;box-shadow:0 -12px 0 var(--paper),0 6px 8px -6px rgba(0,0,0,.12)}
 .article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
-.comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
+.comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
 .del-ask{border:1.5px solid color-mix(in srgb,var(--bad) 50%,var(--line));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--bad) 6%,var(--card))}.del-ask p{margin:6px 0 10px;line-height:1.55}
@@ -1824,7 +1824,7 @@ function viewSettings(){
     ${CLOUD.user?nickForm():""}
     ${regionSection()}
     ${pushCard()}
-    ${communityCard()}
+    ${communityCard()}${igCard()}
     <details class="card set-sec set-fold" data-fold="lang"${S.fold&&S.fold.lang?" open":""}><summary><b>${T("language")} · Language</b><span class="fold-v" data-nosc>${(LANGS.find(l=>l.k===langKey())||{}).label}</span></summary><div class="opts">${langs}</div></details>
     <details class="card set-sec set-fold" data-fold="lvl"${S.fold&&S.fold.lvl?" open":""}><summary><b>${T("level")}</b><span class="fold-v">${LEVEL==="IELTS"?"IELTS 7–8":esc(LEVEL)}</span></summary><div class="opts">${lvls}</div><button class="btn ghost sm lvt-link" data-act="lvtest">🧭 ${T("lvtLink")}</button></details>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
@@ -3959,6 +3959,11 @@ function ieLobby(){
 // Paste the Apps Script "Web app" URL here once it is deployed (see instructions from Claude).
 const FEEDBACK_URL="https://script.google.com/macros/s/AKfycbxL21sHbIGaY4OSAwQUGEYL6bw_Dnpv2b6gn8kSMtkG0_7tauCTLIuH4nEZg6vG93X2/exec";
 const LINE_COMMUNITY_URL="https://line.me/ti/g2/p94SUoGrM2EiPywvBuilE-kxGsnSH5nUWMpzxQ";
+const IG_URL="https://www.instagram.com/binbin.daily.english/";
+function igCard(){
+  return `<section class="card set-sec comm-card"><b>📸 ${T("igTitle")}</b><span class="muted sm-t">${T("igSub")}</span>
+    <a class="btn sm comm-ig" href="${IG_URL}" target="_blank" rel="noopener">${T("igFollow")} @binbin.daily.english</a></section>`;
+}
 function communityCard(){
   const k=langKey(); if(k!=="zh"&&k!=="cn") return "";
   return `<section class="card set-sec comm-card"><b>🐶 ${T("commTitle")}</b><span class="muted sm-t">${T("commSub")}</span>
@@ -7892,6 +7897,12 @@ Object.assign(STR.hi,{"lsnTab": "पाठ", "lsnTitle": "BinBin छोटे �
 Object.assign(STR.es,{"lsnTab": "Lecciones", "lsnTitle": "Mini lecciones BinBin", "lsnSub": "Lecciones de 1–3 minutos de frases y gramática (explicadas en chino). Primera vez +{g} oro, +{q} más si aciertas el quiz.", "lsnNone": "¡Las lecciones llegan pronto!", "lsnTapStart": "Toca para empezar la lección", "lsnTap": "¡Toca una respuesta!", "lsnErr": "No se pudo cargar la lección. Revisa la conexión e inténtalo de nuevo.", "lsnFinish": "¡Lección completada!", "lsnNoGold": "Ya recibiste el oro de esta lección. ¡Repasar también vale!", "lsnQuizMiss": "Fallaste el quiz: {q} de oro menos. ¡Suerte en la próxima!", "lsnAgain": "Ver otra vez", "lsnClose": "Cerrar", "lsnDoneCta": "¡Hecho!"});
 Object.assign(STR.ja,{"lsnTab": "ミニ講座", "lsnTitle": "BinBin ミニ講座", "lsnSub": "1～3分のフレーズ・文法講座（中国語で解説）。初回クリアで +{g} ゴールド、クイズ正解でさらに +{q}。", "lsnNone": "講座は準備中です！", "lsnTapStart": "タップして開始", "lsnTap": "答えをタップ！", "lsnErr": "講座を読み込めませんでした。通信を確認してもう一度お試しください。", "lsnFinish": "講座クリア！", "lsnNoGold": "この講座のゴールドは受け取り済みです。復習もえらい！", "lsnQuizMiss": "クイズ不正解：{q} ゴールド少なめ。次はがんばろう！", "lsnAgain": "もう一度見る", "lsnClose": "閉じる", "lsnDoneCta": "完了！"});
 Object.assign(STR.ko,{"lsnTab": "미니 강의", "lsnTitle": "BinBin 미니 강의", "lsnSub": "1~3분 표현·문법 강의(중국어 설명). 처음 완료 시 +{g} 골드, 퀴즈 정답 시 +{q} 추가.", "lsnNone": "강의를 준비 중이에요!", "lsnTapStart": "탭해서 강의 시작", "lsnTap": "답을 탭하세요!", "lsnErr": "강의를 불러오지 못했어요. 연결을 확인하고 다시 시도하세요.", "lsnFinish": "강의 완료!", "lsnNoGold": "이 강의 골드는 이미 받았어요. 복습도 최고!", "lsnQuizMiss": "퀴즈 오답: 골드 {q} 적게. 다음엔 화이팅!", "lsnAgain": "다시 보기", "lsnClose": "닫기", "lsnDoneCta": "완료!"});
+Object.assign(STR.zh,{"igTitle": "BinBin 的 Instagram", "igSub": "片語小課影片和遊戲消息都會發在這裡。", "igFollow": "追蹤"});
+Object.assign(STR.en,{"igTitle": "BinBin on Instagram", "igSub": "Mini-lesson videos and game news.", "igFollow": "Follow"});
+Object.assign(STR.hi,{"igTitle": "Instagram पर BinBin", "igSub": "छोटे पाठ वीडियो और गेम की खबरें।", "igFollow": "फ़ॉलो करें"});
+Object.assign(STR.es,{"igTitle": "BinBin en Instagram", "igSub": "Vídeos de mini lecciones y novedades del juego.", "igFollow": "Seguir"});
+Object.assign(STR.ja,{"igTitle": "BinBin の Instagram", "igSub": "ミニ講座動画やゲームのお知らせを投稿します。", "igFollow": "フォロー"});
+Object.assign(STR.ko,{"igTitle": "BinBin 인스타그램", "igSub": "미니 강의 영상과 게임 소식을 올려요.", "igFollow": "팔로우"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
