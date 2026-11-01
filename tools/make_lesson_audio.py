@@ -16,7 +16,7 @@ async def build(path):
     raw = open(path, "rb").read()
     lesson = json.loads(raw)
     # hash only what is voiced, so editing title / youtube link does not re-record the lesson
-    h = hashlib.sha1(json.dumps([lesson["voices"], lesson["slides"]], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:12]
+    h = hashlib.sha1(json.dumps([lesson["voices"], lesson["slides"]] + ([lesson["prosody"]] if lesson.get("prosody") else []), ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:12]
     out = os.path.join(ROOT, "lessons", "audio", lesson["id"])
     idx_path = os.path.join(out, "index.json")
     entry = {"id": lesson["id"], "file": os.path.basename(path), "title": lesson["title"], "subtitle": lesson.get("subtitle", ""),
@@ -31,7 +31,7 @@ async def build(path):
     for s in lesson["slides"]:
         for ln in s["lines"]:
             if ln["say"] and not ln.get("pause"):
-                clip, bounds = await voice_line(ln, lesson["voices"], os.path.join(work, f"a{n:03d}"))
+                clip, bounds = await voice_line(ln, lesson["voices"], os.path.join(work, f"a{n:03d}"), lesson.get("prosody"))
                 mp3 = os.path.join(out, f"{n}.mp3")
                 subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
                                 "-c:a", "libmp3lame", "-b:a", "48k", mp3], input=clip.astype("float32").tobytes(), check=True)

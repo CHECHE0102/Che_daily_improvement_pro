@@ -1,0 +1,187 @@
+{
+ "id": "L007",
+ "title": "愛爾蘭口頭禪 2",
+ "subtitle": "giving out・your man・the jacks",
+ "level": "A2–B1",
+ "kind": "phrase",
+ "date": "2026-11-02",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "同事說他被",
+    "giving out",
+    "是在發東西？"
+   ],
+   "emoji": "😤",
+   "lines": [
+    {
+     "v": "T",
+     "say": "同事說主管一直 giving out，難道是在發東西？"
+    },
+    {
+     "v": "T",
+     "say": "今天再教你三個愛爾蘭人超愛講的口頭禪！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "giving out",
+   "meaning": "抱怨・唸人・罵人",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，giving out，不是發東西，是抱怨或唸人。"
+    },
+    {
+     "v": "A",
+     "say": "Why is the manager in such a mood?",
+     "zh": "主管怎麼心情這麼差？"
+    },
+    {
+     "v": "B",
+     "say": "He's giving out about the late deliveries.",
+     "zh": "他在抱怨送貨遲到。"
+    },
+    {
+     "v": "T",
+     "say": "被唸的時候可以說 giving out to me，他在唸我。",
+     "cap": "giving out to me ＝ 在唸我"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "your man",
+   "meaning": "那個男的・那傢伙",
+   "img": "scene-party",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，your man，不是你的男人，是指那個男的。"
+    },
+    {
+     "v": "A",
+     "say": "Who's that at the bar?",
+     "zh": "吧檯那個是誰？"
+    },
+    {
+     "v": "B",
+     "say": "Your man there? He's the new chef.",
+     "zh": "那邊那個男的？他是新來的廚師。"
+    },
+    {
+     "v": "T",
+     "say": "女生就說 your one，指那個女的。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "the jacks",
+   "meaning": "廁所",
+   "img": "scene-rest",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，the jacks，就是廁所！"
+    },
+    {
+     "v": "A",
+     "say": "Where's the jacks?",
+     "zh": "廁所在哪？"
+    },
+    {
+     "v": "B",
+     "say": "Down the stairs, on the left.",
+     "zh": "下樓梯左手邊。"
+    },
+    {
+     "v": "T",
+     "say": "在 pub 或朋友家都很常聽到喔。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "She's giving out to me again.",
+   "ask": "同事這樣說，意思是？",
+   "opts": [
+    "她又在罵我了",
+    "她又送我東西了",
+    "她又請我喝飲料"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！同事跟你說："
+    },
+    {
+     "v": "A",
+     "say": "She's giving out to me again.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "是什麼意思？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！giving out to me，就是她又在唸我了。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "giving out",
+     "抱怨・唸人"
+    ],
+    [
+     "your man",
+     "那個男的"
+    ],
+    [
+     "the jacks",
+     "廁所"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了：giving out、your man、the jacks！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

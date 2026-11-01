@@ -1,0 +1,186 @@
+{
+ "id": "L008",
+ "title": "打工面試三句話",
+ "subtitle": "available・experience・quick learner",
+ "level": "A2–B1",
+ "kind": "phrase",
+ "date": "2026-11-02",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "打工面試",
+    "Tell me about yourself",
+    "要怎麼回答？"
+   ],
+   "emoji": "💼",
+   "lines": [
+    {
+     "v": "T",
+     "say": "找到打工機會，面試卻不知道怎麼介紹自己？"
+    },
+    {
+     "v": "T",
+     "say": "今天教你面試最好用的三句英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "I'm available",
+   "meaning": "我可以上班的時間",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，老闆一定會問你什麼時候可以上班。"
+    },
+    {
+     "v": "A",
+     "say": "When are you available to work?",
+     "zh": "你什麼時候可以上班？"
+    },
+    {
+     "v": "B",
+     "say": "I'm available weekends and most evenings.",
+     "zh": "我週末和大部分晚上都可以。"
+    },
+    {
+     "v": "T",
+     "say": "available 就是有空、可以上班。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "experience",
+   "meaning": "經驗",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，experience，經驗。沒經驗也不用怕！"
+    },
+    {
+     "v": "A",
+     "say": "Do you have any experience in a café?",
+     "zh": "你有咖啡店的經驗嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Not here, but I worked in a café back home.",
+     "zh": "這裡沒有，但我在家鄉的咖啡店做過。"
+    },
+    {
+     "v": "T",
+     "say": "back home 就是在我的家鄉，很好用。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "a quick learner",
+   "meaning": "學東西很快",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，沒經驗的時候，就強調你學得很快。"
+    },
+    {
+     "v": "A",
+     "say": "We're quite busy at lunchtime.",
+     "zh": "我們中午很忙喔。"
+    },
+    {
+     "v": "B",
+     "say": "That's grand. I'm a quick learner.",
+     "zh": "沒問題，我學東西很快。"
+    },
+    {
+     "v": "T",
+     "say": "a quick learner，學得很快，老闆最愛聽！"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "I'm available weekends.",
+   "ask": "這句話的意思是？",
+   "opts": [
+    "我週末很忙",
+    "我週末可以上班",
+    "我週末要放假"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！面試的時候你說："
+    },
+    {
+     "v": "A",
+     "say": "I'm available weekends.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "老闆聽到的意思是？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！available，就是週末可以上班。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "I'm available",
+     "可以上班的時間"
+    ],
+    [
+     "experience",
+     "經驗"
+    ],
+    [
+     "a quick learner",
+     "學得很快"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三句面試英文，下次面試就不緊張了！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -81,9 +81,12 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
 .opt.bad{background:#e8846b;color:#fff;border-color:#fff}
 `;
   const LEAD_IN = 0.45;
+  // one teacher per 10 lessons (CheChe): pick with the script's "teacher" field; art in assets/art/lesson/<prefix>-<pose>.webp
+  const pose = (name, icon, pre) => ({ name, icon, talk: `lesson/${pre}-talk`, happy: `lesson/${pre}-yay`, hi: `lesson/${pre}-hi`, bye: `lesson/${pre}-bye`,
+    think: `lesson/${pre}-think`, wow: `lesson/${pre}-wow`, point: `lesson/${pre}-point` });
+  const TEACHERS = { cian: pose("Cian 老師", "👨‍🏫", "teacher"), aoife: pose("Aoife 老師", "👩‍🏫", "aoife"), declan: pose("Declan 老師", "🧔", "declan") };
   const CAST = {
-    T: { name: "Cian 老師", icon: "👨‍🏫", talk: "lesson/teacher-talk", happy: "lesson/teacher-yay", hi: "lesson/teacher-hi", bye: "lesson/teacher-bye",
-         think: "lesson/teacher-think", wow: "lesson/teacher-wow", point: "lesson/teacher-point" },
+    T: TEACHERS.cian,
     A: { name: "Emily", icon: "🗣", talk: "hero-f-idle" },
     B: { name: "Connor", icon: "🗣", talk: "hero-m-idle" }
   };
@@ -167,7 +170,7 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
 
   function frame(lesson, si, li, info, opts = {}) {
     const s = lesson.slides[si], ln = s.lines[li], v = ln.v, en = v !== "T";
-    const cast = Object.assign({}, CAST, lesson.cast || {});
+    const cast = Object.assign({}, CAST, { T: TEACHERS[lesson.teacher] || TEACHERS.cian }, lesson.cast || {});
     const art = opts.art || "assets/art/";
     const img = n => art + n + ".webp";
     const { lead, speech: sp, t0: tglob, ts, p0, p1, first } = info;

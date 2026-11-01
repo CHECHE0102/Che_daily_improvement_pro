@@ -1,0 +1,192 @@
+{
+ "id": "L010",
+ "title": "Have you ever…? 現在完成式",
+ "subtitle": "經驗・ever・never",
+ "level": "B1",
+ "kind": "grammar",
+ "date": "2026-11-02",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "Have you ever",
+    "been to Galway?",
+    "要怎麼回答？"
+   ],
+   "emoji": "🤔",
+   "lines": [
+    {
+     "v": "T",
+     "say": "同事問你 Have you ever been to Galway，要怎麼回答？"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘搞懂，用現在完成式聊經驗！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "Have you ever + p.p.?",
+   "points": [
+    "問「你有沒有…過」",
+    "Have you ever tried a full Irish?"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，問人家有沒有做過什麼，就用 Have you ever。"
+    },
+    {
+     "v": "A",
+     "say": "Have you ever tried a full Irish?",
+     "zh": "你吃過愛爾蘭全套早餐嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I have! It was massive.",
+     "zh": "吃過！份量超大。"
+    },
+    {
+     "v": "T",
+     "say": "後面要接過去分詞，像 tried、been、seen。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "I've never + p.p.",
+   "points": [
+    "「我從來沒有…過」",
+    "I've never seen snow here."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，從來沒做過，就說 I've never。"
+    },
+    {
+     "v": "A",
+     "say": "Have you ever been to Galway?",
+     "zh": "你去過 Galway 嗎？"
+    },
+    {
+     "v": "B",
+     "say": "No, I've never been, but I'd love to go.",
+     "zh": "沒有，我從來沒去過，但很想去。"
+    },
+    {
+     "v": "T",
+     "say": "去過某個地方，要用 been，不是 gone 喔。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "說了時間就用過去式",
+   "points": [
+    "I went last summer.",
+    "有 last、ago、yesterday → 過去式"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，說出明確的時間，就要改用過去式。"
+    },
+    {
+     "v": "A",
+     "say": "When did you go to Galway?",
+     "zh": "你什麼時候去 Galway 的？"
+    },
+    {
+     "v": "B",
+     "say": "I went last summer.",
+     "zh": "我去年夏天去的。"
+    },
+    {
+     "v": "T",
+     "say": "有 last、ago、yesterday，就用過去式。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "I ___ to Cork last weekend.",
+   "ask": "想說「我上週末去了 Cork」，要填？",
+   "opts": [
+    "have been",
+    "went",
+    "have gone"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我上週末去了 Cork。"
+    },
+    {
+     "v": "A",
+     "say": "I blank to Cork last weekend.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！有 last weekend，要用過去式 went。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "Have you ever…?",
+     "有沒有…過"
+    ],
+    [
+     "I've never…",
+     "從來沒…過"
+    ],
+    [
+     "last / ago",
+     "用過去式"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了用現在完成式聊經驗！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

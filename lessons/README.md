@@ -39,3 +39,15 @@ Slide types (see `L001-irish-phrases.json` for a full example)
 
 `img` / `scene` are names in `assets/art/` without `.webp` (e.g. `scene-party`, `scene-study`, `scene-rest`, `scene-win`, `scene-welcome`, `scene-read`, `scene-quiz`, `scene-bell`).
 Top-level fields: `id`, `title`, `subtitle`, `level`, `kind` (`phrase` or `grammar`: which 小教室 tab it goes in), `date` (YYYY-MM-DD), `voices` (copy from L001), optional `youtube` (added later by hand).
+
+## Teachers (one teacher per 10 lessons)
+
+Set `"teacher"` and copy that teacher's `voices` and `prosody` into the script. Each teacher sounds different.
+
+| Lessons | `teacher` | Who | `voices.T` / `voices.TE` | `prosody` |
+|---|---|---|---|---|
+| L001–L010 | `cian` (default) | Cian 老師, early 30s man | `zh-TW-YunJheNeural` / `en-IE-ConnorNeural` | leave out (built-in) |
+| L011–L020 | `aoife` | Aoife 老師, late 20s woman | `zh-TW-HsiaoChenNeural` / `en-IE-EmilyNeural` | `{"T": ["+4%", "+0Hz"], "TE": ["-6%", "+2Hz"]}` |
+| L021–L030 | `declan` | Declan 老師, mid 40s man | `zh-TW-YunJheNeural` / `en-GB-RyanNeural` | `{"T": ["-4%", "-14Hz"], "TE": ["-8%", "-4Hz"]}` |
+
+Art lives in `assets/art/lesson/<prefix>-{talk,yay,hi,bye,think,wow,point}.webp` (Cian's prefix is `teacher`). A new teacher needs all 7 poses before its first lesson; register it in `TEACHERS` in `lessons/lesson-render.js`.
