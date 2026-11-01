@@ -1,37 +1,70 @@
-name: Lesson video
+name: Lesson audio and video
+# 1) voices every lesson for the in-app 小教室 (lessons/audio/, lessons/index.json) and commits it to this branch
+# 2) renders mp4s (YouTube / Instagram) for lessons whose script changed, or all of them when run by hand,
+#    and stores them on the lesson-videos branch (kept off main so GitHub Pages stays small)
 on:
   push:
-    paths: ['lessons/scripts/**', 'tools/make_lesson_video.py', 'tools/render_frames.js', '.github/workflows/lesson-video.yml']
+    paths: ['lessons/scripts/**', 'lessons/lesson-render.js', 'tools/make_lesson_video.py', 'tools/make_lesson_audio.py', 'tools/render_frames.js', '.github/workflows/lesson-video.yml']
   workflow_dispatch:
+    inputs:
+      videos:
+        description: 'Which videos to render: changed, all, none'
+        default: 'all'
 permissions:
   contents: write
+concurrency:
+  group: lesson-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
-  video:
+  lessons:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fonts-noto-cjk
       - run: pip install "edge-tts>=7,<8" numpy
-      - run: npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
-      - name: Build videos
-        run: for f in lessons/scripts/*.json; do python tools/make_lesson_video.py "$f"; done
-      - uses: actions/upload-artifact@v4
-        with:
-          name: lesson-videos
-          path: lessons/out/*.mp4
-          retention-days: 30
-      - name: Push previews to the lesson-videos branch (kept off main so Pages stays small)
+      - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fonts-noto-cjk
+      - name: Voice lessons for the app
+        run: python tools/make_lesson_audio.py
+      - name: Commit lesson audio
         run: |
-          mkdir /tmp/pv && cp lessons/out/*.mp4 /tmp/pv/
           git config user.name "CHECHE0102"
           git config user.email "CHECHE0102@users.noreply.github.com"
-          git checkout --orphan lesson-videos-tmp && git rm -rfq . && cp /tmp/pv/*.mp4 .
-          git add *.mp4 && git commit -qm "Lesson video previews"
-          git push -fq origin HEAD:lesson-videos
+          git add -A lessons/audio lessons/index.json
+          if git diff --cached --quiet; then echo "no audio changes"; else
+            git commit -qm "Update lesson audio"
+            for i in 1 2 3; do git pull --rebase -q origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done
+          fi
+      - name: Pick videos
+        id: pick
+        run: |
+          mode="${{ github.event.inputs.videos || 'changed' }}"
+          before="${{ github.event.before }}"
+          if [ "$mode" = all ] || [ -z "$before" ] || [ "$before" = 0000000000000000000000000000000000000000 ]; then
+            list=$(ls lessons/scripts/*.json)
+          elif [ "$mode" = none ]; then list=""
+          else list=$(git diff --name-only "$before" "${{ github.sha }}" -- lessons/scripts | grep '\.json$' || true); fi
+          echo "list=$(echo $list)" >> "$GITHUB_OUTPUT"
+          echo "videos: $list"
+      - uses: actions/setup-node@v4
+        if: steps.pick.outputs.list != ''
+        with:
+          node-version: '20'
+      - name: Render videos
+        if: steps.pick.outputs.list != ''
+        run: |
+          npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
+          for f in ${{ steps.pick.outputs.list }}; do [ -f "$f" ] && python tools/make_lesson_video.py "$f"; done
+      - name: Store videos on the lesson-videos branch
+        if: steps.pick.outputs.list != ''
+        run: |
+          mkdir -p /tmp/pv && cp lessons/out/*.mp4 /tmp/pv/
+          if git fetch -q origin lesson-videos; then git worktree add -q /tmp/vb origin/lesson-videos && cd /tmp/vb && git checkout -q -B lesson-videos
+          else git worktree add -q --detach /tmp/vb && cd /tmp/vb && git checkout -q --orphan lesson-videos && git rm -rfq .; fi
+          cp /tmp/pv/*.mp4 . && git add *.mp4
+          git commit -qm "Lesson videos" || exit 0
+          git push -q origin HEAD:lesson-videos

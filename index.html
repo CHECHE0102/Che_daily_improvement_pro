@@ -512,6 +512,27 @@ select.search{appearance:auto;-webkit-appearance:menulist}.reg-note{font-size:13
 /* ---- competition / IELTS ---- */
 .comp-seg button{font-size:14px;padding:8px 14px}
 .ie-lobby{display:flex;flex-direction:column;gap:12px}
+.lsn-row{display:flex;align-items:center;gap:12px;text-align:left;width:100%;cursor:pointer;font:inherit;color:inherit}
+.lsn-id{font-weight:800;font-size:12px;background:var(--gold,#f0be45);color:#1d2a26;border-radius:999px;padding:3px 9px}
+.lsn-t{flex:1;display:flex;flex-direction:column;gap:2px}.lsn-t small{font-size:12px}
+.lsn-ok{font-style:normal;color:#1F9E74;font-weight:900;font-size:18px}.lsn-gold{font-style:normal;font-weight:800;font-size:13px;color:#a87a00}
+.lsn-art{width:72px;height:72px;border-radius:50%;object-fit:cover;background:#dcebe5}
+body.lsn-lock{overflow:hidden}
+.lsn-ov{position:fixed;inset:0;z-index:9000;background:#0d2e26;display:flex;flex-direction:column;color:#fff;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.lsn-top{display:flex;align-items:center;gap:10px;padding:8px 12px}.lsn-top b{flex:1;text-align:center;font-size:15px}.lsn-top span{width:40px}
+.lsn-x{width:40px;height:40px;border-radius:50%;border:0;background:#ffffff22;color:#fff;font-size:18px}
+.lsn-box{flex:1;position:relative;overflow:hidden}
+.lsn-fit{position:absolute;transform-origin:0 0}
+.lsn-frame{width:1080px;height:1920px;border:0;display:block;background:#1c6a55}
+.lsn-cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#0d2e26aa;text-align:center;padding:20px}
+.lsn-cover[hidden]{display:none}
+.lsn-big{width:96px;height:96px;border-radius:50%;border:0;background:#f0be45;color:#1d2a26;font-size:40px;box-shadow:0 0 0 14px #f0be4544}
+.lsn-end{background:#fff;color:#1d2a26;border-radius:22px;padding:22px 26px;display:flex;flex-direction:column;align-items:center;gap:8px;max-width:320px}
+.lsn-end b{font-size:20px}.lsn-gold-big{font-size:28px;font-weight:900;color:#a87a00;margin:0}
+.lsn-end .row{display:flex;gap:10px;margin-top:6px}
+.lsn-ctl{display:flex;justify-content:center;gap:22px;padding:10px 0 14px}
+.lsn-ctl button{width:54px;height:54px;border-radius:50%;border:0;background:#ffffff22;color:#fff;font-size:22px}
+.lsn-ctl .lsn-pp{background:#f0be45;color:#1d2a26}
 .ie-hero{display:flex;flex-direction:column;gap:10px;border:1.5px solid var(--accent)}
 .ie-hero-top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.ie-hero h3{font-size:19px}
 .ie-week{display:flex;flex-direction:column;gap:2px}
@@ -3581,7 +3602,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.6";
+const APP_VERSION="2026.11.7";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4018,6 +4039,7 @@ document.addEventListener("click", e=>{
   if(a==="closelevel"){ S.levelSheet=false; return renderSheet(); }
   if(a==="export") return exportData();
   if(a==="compmode"){ S.compMode=t.dataset.k; return render(); }
+  if(a==="lsnopen"){ lsnOpen(t.dataset.k); return; }
   if(a==="playmode"){ S.playMode=t.dataset.k; return render(); }
   if(a==="privacy"){ S.view="privacy"; S.tab="set"; render(); window.scrollTo(0,0); return; }
   if(a==="privback"){ S.view="set"; S.tab="set"; render(); return; }
@@ -4571,8 +4593,8 @@ function coInner(){
   return head+`<p class="muted sm-t">${T("coRead")} · ${T("coMissLeft",{n:CO_MISSES-miss})}</p><article class="article co-text">${body}</article>`;
 }
 function coBossSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="54" r="34" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6"/><path d="M24 30 L30 12 L40 26 M76 30 L70 12 L60 26" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6" stroke-linejoin="round"/><circle cx="38" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="62" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="39" cy="49" r="3" fill="#1B2421"/><circle cx="63" cy="49" r="3" fill="#1B2421"/><path d="M34 68 Q50 60 66 68" fill="none" stroke="#1B2421" stroke-width="2.6"/><text x="50" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#F0BE45" font-family="Georgia,serif">teh</text></svg>`; }
-function viewCoop(){ const m=S.compMode==="toeic"?"toeic":"ielts";
-  return `<div class="seg exam-seg" role="group"><button data-act="compmode" data-k="ielts" aria-pressed="${m==="ielts"}">🎓 IELTS</button><button data-act="compmode" data-k="toeic" aria-pressed="${m==="toeic"}">💼 TOEIC</button></div><div class="ie-lobby">${m==="toeic"?toLobby():ieLobby()}</div>`; }
+function viewCoop(){ const m=["toeic","lesson"].includes(S.compMode)?S.compMode:"ielts";
+  return `<div class="seg exam-seg" role="group"><button data-act="compmode" data-k="lesson" aria-pressed="${m==="lesson"}">📚 ${T("lsnTab")}</button><button data-act="compmode" data-k="ielts" aria-pressed="${m==="ielts"}">🎓 IELTS</button><button data-act="compmode" data-k="toeic" aria-pressed="${m==="toeic"}">💼 TOEIC</button></div><div class="ie-lobby">${m==="toeic"?toLobby():m==="lesson"?lsnLobby():ieLobby()}</div>`; }
 // multiplayer games get their own bottom tab (open to everyone from day one)
 function viewPlay(){
   if(!["party","duo"].includes(S.playMode)) S.playMode="party"; const duo=S.playMode==="duo";
@@ -6733,6 +6755,95 @@ async function toLoadTop(){
   try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"toeicMonths",mk,"scores"), fsM.orderBy("score","desc"), fsM.limit(50))); const rows=[]; snap.forEach(d=>rows.push({id:d.id,...safeDoc(d.data())})); TO_TOP={month:mk, rows}; }catch(e){ TO_TOP={month:mk, rows:[], err:true}; }
   render();
 }
+/* ================= 小教室 Lessons =================
+   lessons/index.json lists lessons; lessons/scripts/<file> is the script; lessons/audio/<id>/ holds one mp3 per line
+   (made by the "Lesson audio and video" Action). lessons/lesson-render.js draws each line (same renderer as the videos). */
+const LSN_GOLD=20, LSN_QUIZ_GOLD=10, LSN_GAP=0.3;
+let LSN_INDEX=null; const LSN={on:false};
+function lsnLoadIndex(){ if(lsnLoadIndex.busy) return; lsnLoadIndex.busy=1;
+  fetch("lessons/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{lessons:[]}).then(j=>{ LSN_INDEX=j.lessons||[]; }).catch(()=>{ LSN_INDEX=[]; }).then(()=>{ lsnLoadIndex.busy=0; if(S.view==="adv") render(); }); }
+function lsnLobby(){
+  if(!LSN_INDEX){ lsnLoadIndex(); return `<p class="muted">${T("loading")}</p>`; }
+  const done=game().lessons||{};
+  const rows=LSN_INDEX.map(l=>{ const d=done[l.id];
+    return `<button class="card lsn-row" data-act="lsnopen" data-k="${esc(l.id)}"><span class="lsn-id">${esc(l.id)}</span><span class="lsn-t"><b>${esc(l.title)}</b><small class="muted">${esc(l.subtitle||"")}${l.level?` · ${esc(l.level)}`:""}</small></span><span class="lsn-st">${d?`<i class="lsn-ok">✓</i>`:`<i class="lsn-gold">+${LSN_GOLD+LSN_QUIZ_GOLD}🪙</i>`}</span></button>`; }).join("");
+  return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>📚 ${T("lsnTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("lsnSub",{g:LSN_GOLD,q:LSN_QUIZ_GOLD})}</p></div><img src="assets/art/scene-study.webp" alt="" class="lsn-art"></div></section>
+    ${rows||`<section class="card"><p class="muted">${T("lsnNone")}</p></section>`}`;
+}
+function lsnScript(src){ return new Promise((res,rej)=>{ if(window.LessonRender) return res(); const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=rej; document.head.append(s); }); }
+async function lsnOpen(id){
+  const meta=(LSN_INDEX||[]).find(l=>l.id===id); if(!meta) return;
+  if(!LSN.au) LSN.au=new Audio();
+  try{ LSN.au.muted=true; const p=LSN.au.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){}   // unlock audio inside the tap (iOS)
+  lsnClose(true);
+  const ov=document.createElement("div"); ov.id="lsnOv"; ov.className="lsn-ov";
+  ov.innerHTML=`<div class="lsn-top"><button class="lsn-x" data-lsn="close" aria-label="${T("lsnClose")}">✕</button><b>${esc(meta.title)}</b><span></span></div>
+    <div class="lsn-box"><div class="lsn-fit"><iframe class="lsn-frame" title="${esc(meta.title)}"></iframe></div><div class="lsn-cover"><p class="muted">${T("loading")}</p></div></div>
+    <div class="lsn-ctl"><button data-lsn="prev" aria-label="prev">⏮</button><button data-lsn="play" class="lsn-pp" aria-label="play">▶</button><button data-lsn="next" aria-label="next">⏭</button></div>`;
+  document.body.append(ov); document.body.classList.add("lsn-lock");
+  Object.assign(LSN,{on:true,id,ov,k:0,playing:false,picked:null,quizOk:null,timers:[]});
+  ov.addEventListener("click",lsnClick); window.addEventListener("resize",lsnFit); lsnFit();
+  if(typeof SND!=="undefined"&&SND.ctx) musicForView();
+  try{
+    const [lesson,aud]=await Promise.all([fetch("lessons/scripts/"+meta.file,{cache:"no-cache"}).then(r=>r.json()),
+      fetch("lessons/audio/"+id+"/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{lines:{}}).catch(()=>({lines:{}})), lsnScript("lessons/lesson-render.js?v="+APP_VERSION)]);
+    if(!LSN.on||LSN.id!==id) return;
+    LSN.lesson=lesson; LSN.lines=[]; let n=0, t=0;
+    lesson.slides.forEach((s,si)=>s.lines.forEach((ln,li)=>{ const a=aud.lines[String(n)];
+      const speech=a?a.d:(ln.say&&!ln.pause?Math.max(1.2,[...ln.say].length*(ln.v==="T"?0.2:0.07)):0);
+      const first=li===0, lead=first&&n>0?LessonRender.LEAD_IN:0.15, dur=lead+(speech?speech+LSN_GAP:(ln.pause||1));
+      LSN.lines.push({si,li,n,first,lead,speech,dur,t0:t,ts:0,bounds:a?a.b:[],file:a?`lessons/audio/${id}/${a.f}`:null}); n++; t+=dur; }));
+    let st=0; LSN.lines.forEach(x=>{ if(x.first) st=x.t0; x.ts=x.t0-st; x.p0=x.t0/t; x.p1=(x.t0+x.dur)/t; });
+    const doc=ov.querySelector("iframe").contentDocument; doc.open(); doc.write(LessonRender.page("")); doc.close();
+    doc.addEventListener("click",e=>{ const b=e.target.closest(".tap"); if(b) lsnPick(+b.dataset.i); });
+    lsnShow(0,false);
+    ov.querySelector(".lsn-cover").innerHTML=`<button class="lsn-big" data-lsn="play">▶</button><p>${T("lsnTapStart")}</p>`;
+  }catch(e){ console.warn("lesson",e); const c=ov.querySelector(".lsn-cover"); if(c) c.innerHTML=`<p>⚠️ ${T("lsnErr")}</p>`; }
+}
+function lsnFit(){ const ov=document.getElementById("lsnOv"); if(!ov) return; const box=ov.querySelector(".lsn-box"), fit=ov.querySelector(".lsn-fit");
+  const s=Math.min(box.clientWidth/1080, box.clientHeight/1920); fit.style.transform=`scale(${s})`; fit.style.width="1080px"; fit.style.height="1920px";
+  fit.style.left=Math.round((box.clientWidth-1080*s)/2)+"px"; fit.style.top=Math.round((box.clientHeight-1920*s)/2)+"px"; }
+function lsnStopTimers(){ LSN.timers.forEach(clearTimeout); LSN.timers=[]; try{ LSN.au.onended=null; LSN.au.onerror=null; LSN.au.pause(); }catch(e){} }
+function lsnLater(fn,s){ LSN.timers.push(setTimeout(fn,s*1000)); }
+function lsnShow(k,play){
+  lsnStopTimers(); const x=LSN.lines[k]; if(!x) return; LSN.k=k;
+  const ln=LSN.lesson.slides[x.si].lines[x.li];
+  if(ln.countdown) LSN.picked=null;
+  const info={idx:k,first:x.first,lead:x.lead,speech:x.speech,bounds:x.bounds,dur:x.dur,t0:x.t0,ts:x.ts,p0:x.p0,p1:x.p1,prevV:k?LSN.lesson.slides[LSN.lines[k-1].si].lines[LSN.lines[k-1].li].v:null};
+  const f=LessonRender.frame(LSN.lesson,x.si,x.li,info,{art:"assets/art/",interactive:true,picked:LSN.picked,askCap:T("lsnTap"),cta:"🎉 "+T("lsnDoneCta")});
+  const doc=LSN.ov.querySelector("iframe").contentDocument; doc.body.innerHTML=f.html;
+  if(!play){ doc.getAnimations().forEach(a=>a.pause()); return; }
+  if(ln.countdown) return;                          // wait for the learner to tap an answer
+  const after=()=>lsnLater(()=>lsnNext(),x.speech?LSN_GAP:(ln.pause||1));
+  lsnLater(()=>{ if(x.file){ const au=LSN.au; au.muted=false; au.onended=after; au.onerror=()=>lsnLater(after,x.speech); au.src=x.file; const p=au.play(); if(p&&p.catch) p.catch(()=>lsnLater(after,x.speech)); }
+    else lsnLater(after,x.speech); }, x.lead);
+}
+function lsnNext(){ if(LSN.k+1>=LSN.lines.length) return lsnFinish(); lsnShow(LSN.k+1,true); }
+function lsnPick(i){ const x=LSN.lines[LSN.k]; if(!x) return; const s=LSN.lesson.slides[x.si]; if(!s.lines[x.li].countdown||LSN.picked!=null) return;
+  LSN.picked=i; if(LSN.quizOk==null) LSN.quizOk=i===s.ans; lsnNext(); }
+function lsnPlayBtn(){ const b=LSN.ov&&LSN.ov.querySelector(".lsn-pp"); if(b) b.textContent=LSN.playing?"⏸":"▶"; }
+function lsnClick(e){ const b=e.target.closest("[data-lsn]"); if(!b) return; const a=b.dataset.lsn;
+  if(a==="close") return lsnClose();
+  if(!LSN.lesson) return;
+  if(a==="again"){ LSN.ov.querySelector(".lsn-cover").innerHTML=""; LSN.ov.querySelector(".lsn-cover").hidden=true; LSN.playing=true; lsnPlayBtn(); return lsnShow(0,true); }
+  if(a==="play"){ const c=LSN.ov.querySelector(".lsn-cover"); if(c){ c.hidden=true; c.innerHTML=""; }
+    if(LSN.playing){ LSN.playing=false; lsnStopTimers(); LSN.ov.querySelector("iframe").contentDocument.getAnimations().forEach(x=>x.pause()); }
+    else { LSN.playing=true; lsnShow(LSN.k,true); }
+    return lsnPlayBtn(); }
+  if(a==="prev"||a==="next"){ let k=LSN.k+(a==="next"?1:-1); if(k<0) k=0; if(k>=LSN.lines.length) return; const c=LSN.ov.querySelector(".lsn-cover"); if(c){ c.hidden=true; c.innerHTML=""; } LSN.playing=true; lsnPlayBtn(); lsnShow(k,true); }
+}
+function lsnFinish(){
+  lsnStopTimers(); LSN.playing=false; lsnPlayBtn();
+  const g=game(); g.lessons=g.lessons||{}; let gold=0;
+  if(!g.lessons[LSN.id]){ gold=LSN_GOLD+(LSN.quizOk?LSN_QUIZ_GOLD:0); g.gold+=gold; g.lessons[LSN.id]={d:today(),q:LSN.quizOk?1:0}; trackPlay("lesson"); saveGame(); }
+  const c=LSN.ov.querySelector(".lsn-cover"); c.hidden=false;
+  c.innerHTML=`<div class="lsn-end"><div style="font-size:54px">🎉</div><b>${T("lsnFinish")}</b>${gold?`<p class="lsn-gold-big">+${gold} 🪙</p>`:`<p class="muted">${T("lsnNoGold")}</p>`}
+    ${LSN.quizOk===false&&gold?`<p class="muted sm-t">${T("lsnQuizMiss",{q:LSN_QUIZ_GOLD})}</p>`:""}
+    <div class="row"><button class="btn ghost" data-lsn="again">${T("lsnAgain")}</button><button class="btn" data-lsn="close">${T("lsnClose")}</button></div></div>`;
+}
+function lsnClose(silent){ const ov=document.getElementById("lsnOv"); if(LSN.on) lsnStopTimers(); LSN.on=false; LSN.lesson=null; if(ov) ov.remove();
+  document.body.classList.remove("lsn-lock"); window.removeEventListener("resize",lsnFit);
+  if(!silent){ if(typeof SND!=="undefined"&&SND.ctx) musicForView(); if(S.view==="adv") render(); } }
 function toLobby(){
   if(!TO_TESTS){ toLoad().then(()=>render()); return `<p class="muted">${T("loading")}</p>`; }
   const st=toState(), t=toWeekTest(), done=st.days[today()], run=game().toeicRun, u=untilTomorrow(), mb=st.months[monthKey()];
@@ -7109,7 +7220,7 @@ const SFX={
   right:t=>{ tone(SND.fx,t,hz(81),0.12,{type:"sine",v:0.2}); tone(SND.fx,t+0.09,hz(88),0.25,{type:"sine",v:0.2}); },
   wrong:t=>tone(SND.fx,t,150,0.22,{type:"square",v:0.1}),
   conquer:t=>{ SFX.win(t); [86,90,93].forEach((m,i)=>tone(SND.fx,t+0.75+i*0.1,hz(m),0.5,{type:"triangle",v:0.18})); }};
-const examOn=()=>S.view==="ielts"||S.view==="toeic";   // IELTS / TOEIC test in progress: no music, no effects
+const examOn=()=>S.view==="ielts"||S.view==="toeic"||LSN.on;   // IELTS / TOEIC test in progress: no music, no effects
 function sfx(name){ if(!SND.opt.sfx||examOn()) return; if(typeof name==="number") return sfxTone(...arguments); const c=sndInit(); if(!c||!SFX[name]) return; try{ SFX[name](c.currentTime+0.01); }catch(e){} }
 function sndToggle(k){ SND.opt[k]=!SND.opt[k]; sndSave(); if(k==="music"){ if(SND.opt.music){ SND.track=null; musicForView(); } else musicPlay(null); } else if(SND.opt.sfx) sfx("tap"); }
 function soundCard(){ return `<section class="card set-sec"><b>🔊 ${T("sndTitle")}</b><span class="muted sm-t">${T("sndSub")}</span>
@@ -7775,6 +7886,12 @@ Object.assign(STR.hi,{"archSearch": "शीर्षक, सारांश य�
 Object.assign(STR.es,{"archSearch": "Buscar títulos, resúmenes o temas", "archNoMatch": "No hay artículos que coincidan", "archFound": "{n} encontrados"});
 Object.assign(STR.ja,{"archSearch": "タイトル・要約・カテゴリで検索", "archNoMatch": "該当する記事がありません", "archFound": "{n}本見つかりました"});
 Object.assign(STR.ko,{"archSearch": "제목, 요약, 분류로 검색", "archNoMatch": "일치하는 기사가 없어요", "archFound": "{n}편 찾음"});
+Object.assign(STR.zh,{"lsnTab": "小教室", "lsnTitle": "BinBin 小教室", "lsnSub": "1～3 分鐘的片語和文法小課，中文講解。第一次上完 +{g} 金幣，測驗答對再 +{q}。", "lsnNone": "課程準備中，敬請期待！", "lsnTapStart": "點一下開始上課", "lsnTap": "點一個答案！", "lsnErr": "課程載入失敗，請檢查網路後再試一次。", "lsnFinish": "上完這一課了！", "lsnNoGold": "這課已經領過金幣囉，複習也很棒！", "lsnQuizMiss": "測驗答錯了，少拿 {q} 金幣，下一課加油！", "lsnAgain": "再看一次", "lsnClose": "關閉", "lsnDoneCta": "完成！"});
+Object.assign(STR.en,{"lsnTab": "Lessons", "lsnTitle": "BinBin mini lessons", "lsnSub": "1–3 minute phrase and grammar lessons (explained in Chinese). First finish +{g} gold, +{q} more for a correct quiz.", "lsnNone": "Lessons are coming soon!", "lsnTapStart": "Tap to start the lesson", "lsnTap": "Tap an answer!", "lsnErr": "Couldn't load the lesson. Check your connection and try again.", "lsnFinish": "Lesson complete!", "lsnNoGold": "You already got the gold for this one. Reviewing is great too!", "lsnQuizMiss": "Quiz missed: {q} gold less. Good luck next time!", "lsnAgain": "Watch again", "lsnClose": "Close", "lsnDoneCta": "Done!"});
+Object.assign(STR.hi,{"lsnTab": "पाठ", "lsnTitle": "BinBin छोटे पाठ", "lsnSub": "1–3 मिनट के वाक्यांश और व्याकरण पाठ (चीनी में समझाए गए)। पहली बार पूरा करने पर +{g} सोना, सही क्विज़ पर +{q}।", "lsnNone": "पाठ जल्द आ रहे हैं!", "lsnTapStart": "पाठ शुरू करने के लिए टैप करें", "lsnTap": "एक उत्तर टैप करें!", "lsnErr": "पाठ लोड नहीं हुआ। कनेक्शन जाँचकर फिर कोशिश करें।", "lsnFinish": "पाठ पूरा हुआ!", "lsnNoGold": "इस पाठ का सोना पहले ही मिल चुका है। दोहराना भी बढ़िया है!", "lsnQuizMiss": "क्विज़ गलत: {q} सोना कम। अगली बार शुभकामनाएँ!", "lsnAgain": "फिर देखें", "lsnClose": "बंद करें", "lsnDoneCta": "पूरा!"});
+Object.assign(STR.es,{"lsnTab": "Lecciones", "lsnTitle": "Mini lecciones BinBin", "lsnSub": "Lecciones de 1–3 minutos de frases y gramática (explicadas en chino). Primera vez +{g} oro, +{q} más si aciertas el quiz.", "lsnNone": "¡Las lecciones llegan pronto!", "lsnTapStart": "Toca para empezar la lección", "lsnTap": "¡Toca una respuesta!", "lsnErr": "No se pudo cargar la lección. Revisa la conexión e inténtalo de nuevo.", "lsnFinish": "¡Lección completada!", "lsnNoGold": "Ya recibiste el oro de esta lección. ¡Repasar también vale!", "lsnQuizMiss": "Fallaste el quiz: {q} de oro menos. ¡Suerte en la próxima!", "lsnAgain": "Ver otra vez", "lsnClose": "Cerrar", "lsnDoneCta": "¡Hecho!"});
+Object.assign(STR.ja,{"lsnTab": "ミニ講座", "lsnTitle": "BinBin ミニ講座", "lsnSub": "1～3分のフレーズ・文法講座（中国語で解説）。初回クリアで +{g} ゴールド、クイズ正解でさらに +{q}。", "lsnNone": "講座は準備中です！", "lsnTapStart": "タップして開始", "lsnTap": "答えをタップ！", "lsnErr": "講座を読み込めませんでした。通信を確認してもう一度お試しください。", "lsnFinish": "講座クリア！", "lsnNoGold": "この講座のゴールドは受け取り済みです。復習もえらい！", "lsnQuizMiss": "クイズ不正解：{q} ゴールド少なめ。次はがんばろう！", "lsnAgain": "もう一度見る", "lsnClose": "閉じる", "lsnDoneCta": "完了！"});
+Object.assign(STR.ko,{"lsnTab": "미니 강의", "lsnTitle": "BinBin 미니 강의", "lsnSub": "1~3분 표현·문법 강의(중국어 설명). 처음 완료 시 +{g} 골드, 퀴즈 정답 시 +{q} 추가.", "lsnNone": "강의를 준비 중이에요!", "lsnTapStart": "탭해서 강의 시작", "lsnTap": "답을 탭하세요!", "lsnErr": "강의를 불러오지 못했어요. 연결을 확인하고 다시 시도하세요.", "lsnFinish": "강의 완료!", "lsnNoGold": "이 강의 골드는 이미 받았어요. 복습도 최고!", "lsnQuizMiss": "퀴즈 오답: 골드 {q} 적게. 다음엔 화이팅!", "lsnAgain": "다시 보기", "lsnClose": "닫기", "lsnDoneCta": "완료!"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});

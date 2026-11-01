@@ -1,11 +1,23 @@
-// Render animated lesson frames into a silent mp4.
-// node tools/render_frames.js frames.json out.mp4   (frames.json = {fps, jobs:[{html, frames}]})
+// Render animated lesson frames into a silent mp4, using the same renderer as the app (lessons/lesson-render.js).
+// node tools/render_frames.js frames.json out.mp4
+//   frames.json = {fps, lesson: <script path>, art: <file:// art dir>, jobs:[{si, li, frames, html, info}]}
 // Each page's CSS animations are paused and seeked to every frame time, then screenshotted.
+// Writes frames-meta.json next to frames.json with the sound-effect moments ({pops, ticks}) of each line.
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
+const fs = require('fs');
 const path = require('path');
-const { fps, jobs } = require(path.resolve(process.argv[2]));
+const LR = require(path.join(__dirname, '..', 'lessons', 'lesson-render.js'));
+const cfgPath = path.resolve(process.argv[2]);
+const { fps, lesson: lessonPath, art, jobs } = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+const lesson = JSON.parse(fs.readFileSync(lessonPath, 'utf8'));
 (async () => {
+  const meta = jobs.map(j => {
+    const f = LR.frame(lesson, j.si, j.li, j.info, { art });
+    fs.writeFileSync(j.html, LR.page(f.html));
+    return { pops: f.pops, ticks: f.ticks };
+  });
+  fs.writeFileSync(path.join(path.dirname(cfgPath), 'frames-meta.json'), JSON.stringify(meta));
   const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '22', '-pix_fmt', 'yuv420p', process.argv[3]], { stdio: ['pipe', 'inherit', 'inherit'] });
   const b = await chromium.launch();
