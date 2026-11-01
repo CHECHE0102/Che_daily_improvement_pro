@@ -1,0 +1,186 @@
+{
+ "id": "L003",
+ "title": "看房必問三句話",
+ "subtitle": "bills included・deposit・notice",
+ "level": "A2–B1",
+ "kind": "phrase",
+ "date": "2026-11-01",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "在愛爾蘭找房",
+    "看房時",
+    "一定要問這三句！"
+   ],
+   "emoji": "🏠",
+   "lines": [
+    {
+     "v": "T",
+     "say": "在愛爾蘭找房子超難，好不容易約到看房，要問什麼？"
+    },
+    {
+     "v": "T",
+     "say": "這三句問清楚，才不會被多收錢！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "bills included",
+   "meaning": "含水電網路費",
+   "img": "scene-rest",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，bills，指的是水電、瓦斯、網路這些帳單。"
+    },
+    {
+     "v": "A",
+     "say": "Are the bills included in the rent?",
+     "zh": "房租有包含水電費嗎？"
+    },
+    {
+     "v": "B",
+     "say": "The rent is 800 a month, bills on top.",
+     "zh": "房租一個月 800，水電另外算。"
+    },
+    {
+     "v": "T",
+     "say": "bills on top，就是帳單要另外付喔！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "deposit",
+   "meaning": "押金",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，deposit，押金。"
+    },
+    {
+     "v": "A",
+     "say": "How much is the deposit?",
+     "zh": "押金要多少？"
+    },
+    {
+     "v": "B",
+     "say": "It's one month's rent, and you get it back when you leave.",
+     "zh": "一個月房租，搬走時會退還。"
+    },
+    {
+     "v": "T",
+     "say": "記得問清楚，搬走時怎麼退押金。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "give notice",
+   "meaning": "提前通知要搬走",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，give notice，提前通知房東要搬走。"
+    },
+    {
+     "v": "A",
+     "say": "How much notice do I need to give?",
+     "zh": "我要提前多久通知？"
+    },
+    {
+     "v": "B",
+     "say": "Four weeks' notice, please.",
+     "zh": "請提前四週通知。"
+    },
+    {
+     "v": "T",
+     "say": "沒提前通知，押金可能就拿不回來了！"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "It's 750 a month, bills on top.",
+   "ask": "房東這樣說，意思是？",
+   "opts": [
+    "房租 750，含所有帳單",
+    "房租 750，帳單另外付",
+    "房租 750，免押金"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！房東跟你說："
+    },
+    {
+     "v": "B",
+     "say": "It's 750 a month, bills on top.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "是什麼意思？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！bills on top，帳單要另外付。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "bills",
+     "水電網路帳單"
+    ],
+    [
+     "deposit",
+     "押金"
+    ],
+    [
+     "give notice",
+     "提前通知搬走"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了：bills、deposit、give notice！看房更安心。"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

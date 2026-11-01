@@ -4046,6 +4046,7 @@ document.addEventListener("click", e=>{
   if(a==="export") return exportData();
   if(a==="compmode"){ S.compMode=t.dataset.k; return render(); }
   if(a==="lsnopen"){ lsnOpen(t.dataset.k); return; }
+  if(a==="lsnkind"){ S.lsnKind=t.dataset.k; return render(); }
   if(a==="playmode"){ S.playMode=t.dataset.k; return render(); }
   if(a==="privacy"){ S.view="privacy"; S.tab="set"; render(); window.scrollTo(0,0); return; }
   if(a==="privback"){ S.view="set"; S.tab="set"; render(); return; }
@@ -6770,11 +6771,12 @@ function lsnLoadIndex(){ if(lsnLoadIndex.busy) return; lsnLoadIndex.busy=1;
   fetch("lessons/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{lessons:[]}).then(j=>{ LSN_INDEX=j.lessons||[]; }).catch(()=>{ LSN_INDEX=[]; }).then(()=>{ lsnLoadIndex.busy=0; if(S.view==="adv") render(); }); }
 function lsnLobby(){
   if(!LSN_INDEX){ lsnLoadIndex(); return `<p class="muted">${T("loading")}</p>`; }
-  const done=game().lessons||{};
-  const rows=LSN_INDEX.map(l=>{ const d=done[l.id];
+  const done=game().lessons||{}, kind=S.lsnKind==="grammar"?"grammar":"phrase";
+  const seg=`<div class="seg lsn-seg" role="group">${[["phrase","📝 "+T("lsnPhrase")],["grammar","📐 "+T("lsnGrammar")]].map(([k,l])=>`<button data-act="lsnkind" data-k="${k}" aria-pressed="${kind===k}">${l}</button>`).join("")}</div>`;
+  const rows=LSN_INDEX.filter(l=>(l.kind||"phrase")===kind).map(l=>{ const d=done[l.id];
     return `<button class="card lsn-row" data-act="lsnopen" data-k="${esc(l.id)}"><span class="lsn-id">${esc(l.id)}</span><span class="lsn-t"><b>${esc(l.title)}</b><small class="muted">${esc(l.subtitle||"")}${l.level?` · ${esc(l.level)}`:""}</small></span><span class="lsn-st">${d?`<i class="lsn-ok">✓</i>`:`<i class="lsn-gold">+${LSN_GOLD+LSN_QUIZ_GOLD}🪙</i>`}</span></button>${lsnYt(l)?`<a class="lsn-yt" href="${esc(lsnYt(l))}" target="_blank" rel="noopener">▶ ${T("lsnYT")}</a>`:""}`; }).join("");
   return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>📚 ${T("lsnTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("lsnSub",{g:LSN_GOLD,q:LSN_QUIZ_GOLD})}</p></div><img src="assets/art/scene-study.webp" alt="" class="lsn-art"></div></section>
-    ${rows||`<section class="card"><p class="muted">${T("lsnNone")}</p></section>`}`;
+    ${seg}${rows||`<section class="card"><p class="muted">${T("lsnNone")}</p></section>`}`;
 }
 // only real YouTube links are shown (the lesson script's "youtube" field)
 function lsnYt(l){ const u=l&&l.youtube||""; return /^https:\/\/(www\.|m\.)?(youtube\.com|youtu\.be)\//.test(u)?u:""; }
@@ -7913,6 +7915,12 @@ Object.assign(STR.hi,{"lsnYT":"YouTube पर देखें"});
 Object.assign(STR.es,{"lsnYT":"Ver en YouTube"});
 Object.assign(STR.ja,{"lsnYT":"YouTube で見る"});
 Object.assign(STR.ko,{"lsnYT":"YouTube에서 보기"});
+Object.assign(STR.zh,{"lsnPhrase": "片語", "lsnGrammar": "文法"});
+Object.assign(STR.en,{"lsnPhrase": "Phrases", "lsnGrammar": "Grammar"});
+Object.assign(STR.hi,{"lsnPhrase": "वाक्यांश", "lsnGrammar": "व्याकरण"});
+Object.assign(STR.es,{"lsnPhrase": "Frases", "lsnGrammar": "Gramática"});
+Object.assign(STR.ja,{"lsnPhrase": "フレーズ", "lsnGrammar": "文法"});
+Object.assign(STR.ko,{"lsnPhrase": "표현", "lsnGrammar": "문법"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});

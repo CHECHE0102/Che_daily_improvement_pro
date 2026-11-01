@@ -20,7 +20,7 @@ async def build(path):
     out = os.path.join(ROOT, "lessons", "audio", lesson["id"])
     idx_path = os.path.join(out, "index.json")
     entry = {"id": lesson["id"], "file": os.path.basename(path), "title": lesson["title"], "subtitle": lesson.get("subtitle", ""),
-             "level": lesson.get("level", ""), "date": lesson.get("date", ""), "youtube": lesson.get("youtube", "")}
+             "level": lesson.get("level", ""), "date": lesson.get("date", ""), "youtube": lesson.get("youtube", ""), "kind": lesson.get("kind", "phrase")}
     if os.path.exists(idx_path) and json.load(open(idx_path)).get("v") == h:
         print("unchanged", lesson["id"])
         return entry
