@@ -827,7 +827,7 @@ body.onb-open{overflow:hidden}
 .onb-back{position:absolute;top:8px;left:10px;background:none;border:0;color:var(--muted);font-size:28px;line-height:1;padding:4px 10px}
 .onb-coach{background:color-mix(in srgb,var(--accent) 12%,var(--card));border-color:color-mix(in srgb,var(--accent) 40%,var(--line));font-weight:600;font-size:14px}
 .ds-tiles .stat small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
-.srs-card{display:flex;flex-direction:column;gap:8px}.srs-top{display:flex;align-items:center;gap:12px}.srs-top>div:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.srs-ic{font-size:28px}
+.srs-card{display:flex;flex-direction:column;gap:8px}.wk-card{display:flex;flex-direction:column;gap:10px}.wk-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.wk-bar i{display:block;height:100%;background:var(--gorse);border-radius:99px}.wk-sec{display:flex;flex-direction:column;gap:4px}.wk-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.wk-row:first-of-type{border-top:0}.wk-st{white-space:nowrap;text-align:right}.wk-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.wk-stats b{display:block;font-size:22px;font-variant-numeric:tabular-nums}.wk-pos{display:grid;grid-template-columns:118px 1fr 44px;align-items:center;gap:8px;padding:4px 0}.wk-pos .wk-bar i{background:var(--good)}.wk-pos.low .wk-bar i{background:var(--bad)}.wk-pos .chip{white-space:nowrap}.wk-pos>span:last-child{text-align:right;font-variant-numeric:tabular-nums}.srs-top{display:flex;align-items:center;gap:12px}.srs-top>div:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.srs-ic{font-size:28px}
 .srs-boxes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:74px;margin-top:4px}
 .srs-boxes span{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:11px}
 .srs-boxes i{display:block;width:100%;height:var(--h);border-radius:6px 6px 3px 3px;background:color-mix(in srgb,var(--accent) 70%,var(--card));opacity:.85}
@@ -1714,6 +1714,7 @@ function renderInner(){
   else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
   else if(S.view==="arch"){ const l=$("#archList"); if(l && document.activeElement && document.activeElement.id==="archSearch") l.innerHTML=archList(); else app.innerHTML=viewArch(); }
   else if(S.view==="set") app.innerHTML=viewSettings();
+  else if(S.view==="weak") app.innerHTML=viewWeak();
   else if(S.view==="play") app.innerHTML=viewPlay();
   else if(S.view==="privacy") app.innerHTML=viewPrivacy();
   else if(S.view==="adv") app.innerHTML=viewAdv();
@@ -1805,6 +1806,7 @@ function viewDict(){
   return `<div class="view">
     <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
     ${srsCard()}
+    ${weakCard()}
     <input id="dictSearch" class="search" type="search" placeholder="${T("search")}" value="${esc(S.dictQ)}" autocomplete="off">
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
@@ -1955,6 +1957,7 @@ function record(surface,g,ex,art){
     :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, exampleZh:sentZhIn(art,ex)||null, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, noteEs:g.noteEs||null, noteJa:g.noteJa||null, noteKo:g.noteKo||null, hi:g.hi||"", en:g.en||"", es:g.es||"", ja:g.ja||"", ko:g.ko||""};
   persist(key,rec);
   S.sheet.rec=rec; S.sheet.isNew=!old;
+  if(!old){ const wn=wkWords().length; if(wn&&wn%WK_STEP===0) setTimeout(()=>toast(T("wkToast",{n:wn})),600); }
   const d=dayRec(), ll=lemma.toLowerCase();
   if(isMain(art)){ if(!(d.lookedUp||[]).includes(ll)) saveDay({...d, lookedUp:[...(d.lookedUp||[]), ll]}); }
   else { const by={...(d.lookedUpBy||{})}; const cur=by[art.id]||[]; if(!cur.includes(ll)){ by[art.id]=[...cur,ll]; saveDay({...d, lookedUpBy:by}); } }
@@ -2100,6 +2103,7 @@ function startQuiz(kind, art){
   if(kind==="pre"){ const el=eligible(), due=srsDueList().filter(w=>w.firstSeen<today()).slice(0,10), dk=new Set(due.map(w=>w.key)); words=due.concat(weightedPick(el.filter(w=>!dk.has(w.key)), Math.max(0,Math.min(10,el.length)-due.length)));
     // a short dictionary should not mean an easy reward: top up to 10 with hard words from today's headline
     const ma=mainArticle(); if(words.length&&words.length<10&&ma) words=words.concat(fillerWords(ma, words.map(w=>(w.word||"").toLowerCase()), 10-words.length)); }
+  else if(kind==="weak"){ words=wkAnalyze().train; if(!words.length) return toast(T("wkNoWeak")); }
   else if(kind==="srs"){ words=srsDueList().slice(0,SRS_MAX); if(!words.length) return toast(T("srsNone")); }
   else if(kind==="rev"){ const all=[...S.words.values()]; if(all.length<LUCK.reviewMinWords) return toast(T("revNeed",{n:LUCK.reviewMinWords})); words=weightedPick(all, Math.min(LUCK.reviewQ, all.length)); }
   else {
@@ -2123,7 +2127,7 @@ function finishPost(art, score, total){
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
-  const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
+  const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):Q.kind==="weak"?T("wkTrainT"):T("postTitle");
   if(Q.i>=Q.qs.length&&Q.kind==="lvl"){
     const nm=k=>k==="IELTS"?"IELTS 7–8":k;
     return `<div class="view"><div class="card lvt-res"><img src="assets/art/scene-win.webp" alt="" class="qd-art"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${esc(nm(Q.lvl))}</div><div>${T("lv"+Q.lvl)}</div><p class="muted sm-t">${T("lvtSet")}</p></div>
@@ -2134,11 +2138,11 @@ function viewQuiz(){
   }
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
+    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card quiz-done"><img src="assets/art/${Q.score>=Q.qs.length*0.7?"scene-win":"scene-quiz"}.webp" alt="" class="qd-art"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
       ${Q.kind==="lvl"?"":`<div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>`}${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
-      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
+      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="weak"?`<div class="card muted sm-t">${T("wkTrainNote")}</div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
@@ -2171,6 +2175,7 @@ function pick(i){
     if(Q.kind==="lvl"){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     else if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardSrs(Q.score):null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
+    else if(Q.kind==="weak"){ Q.reward=null; }   // practice only: no ticket, so it cannot be farmed
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art),art); }
   }
@@ -3603,7 +3608,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.7";
+const APP_VERSION="2026.11.8";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4053,6 +4058,8 @@ document.addEventListener("click", e=>{
   if(a==="delgo") return deleteAccount();
   if(a==="nickedit"){ S.nickEdit=true; return render(); }
   if(a==="srs") return startQuiz("srs");
+  if(a==="weak"){ S.view="weak"; S.tab="dict"; render(); window.scrollTo(0,0); return; }
+  if(a==="wktrain") return startQuiz("weak");
   if(a==="readgo") return READ.on?(READ.paused?readResume():readPause()):readStart();
   if(a==="readstop") return readStop();
   if(a==="readrate"){ const i=(READ_RATES.indexOf(READ.rate)+1)%READ_RATES.length; READ.rate=READ_RATES[i]; try{ localStorage.setItem("che-pro-rrate",READ.rate); }catch(e){} if(READ.audio) READ.audio.playbackRate=READ.rate; else if(READ.on&&!READ.paused){ readPause(); readResume(); } return readUi(); }
@@ -5966,6 +5973,58 @@ function srsCard(){
   const boxes=[1,2,3,4,5,6].map(b=>[...S.words.values()].filter(w=>(w.srsB||0)===b).length), fresh=[...S.words.values()].filter(w=>!w.srsB).length;
   const bar=`<div class="srs-boxes" title="${esc(T("srsBoxes"))}">${(()=>{ const all=[fresh,...boxes], mx=Math.max(1,...all); return all; })().map((n,i,all)=>`<span style="--h:${n?Math.round(12+70*n/Math.max(1,...all)):4}%"><i></i><small>${i?SRS_INT[i]+"d":"new"}</small><b>${n}</b></span>`).join("")}</div>`;
   return `<section class="card srs-card"><div class="srs-top"><div class="srs-ic" aria-hidden="true">🧠</div><div><b>${T("srsTitle")}</b><span class="muted sm-t">${due?T("srsDueN",{n:due}):T("srsClear",{n:tm})}</span>${due?(()=>{ const l=revLeft(); return due<SRS_TICKET_MIN?`<span class="rev-left sm-t muted">🎟 ${T("srsTicketMin",{n:SRS_TICKET_MIN})}</span>`:`<span class="rev-left sm-t ${l?"":"muted"}">☘️ ${l?T("srsPay3",{n:l}):T("revNoMore")}</span>`; })():""}</div>${due?`<button class="btn sm" data-act="srs">${T("srsStart",{n:Math.min(SRS_MAX,due)})}</button>`:""}</div>${bar}<p class="muted sm-t" style="margin:6px 0 0">${T("srsHow")}</p></section>`;
+}
+
+/* ================= word weakness report: one per 100 dictionary words, rule-based, works offline, no AI cost ================= */
+const WK_STEP=100, WK_KEY="che-pro-weakrep";
+function wkKey(){ return SANDBOX()?WK_KEY+"-sb":WK_KEY; }
+function wkLoad(){ try{ return JSON.parse(localStorage.getItem(wkKey())||"null")||{}; }catch(e){ return {}; } }
+function wkSave(o){ try{ localStorage.setItem(wkKey(),JSON.stringify(o)); }catch(e){} }
+function wkWords(){ return [...S.words.values()].filter(w=>w&&w.word&&!w.filler); }
+const wkSolidW=w=>(w.srsB||0)>=3;   // survived 3 spaced reviews in a row
+const wkLk=w=>w.lookups==null?1:w.lookups;
+const wkScore=w=>(w.wrong||0)*2+Math.max(0,wkLk(w)-1)-(w.correct||0)*1.5-(w.srsB||0)*0.5;
+function wkPosOf(w){ const p=(w.pos||"").toLowerCase().trim(); return /^adj/.test(p)?"adj":/^adv/.test(p)?"adv":/^n\b/.test(p)?"n":/^v\b/.test(p)?"v":"o"; }
+function wkAnalyze(){
+  const all=wkWords(), tested=all.filter(w=>(w.correct||0)+(w.wrong||0)>0);
+  let c=0,t=0; for(const w of tested){ c+=w.correct||0; t+=(w.correct||0)+(w.wrong||0); }
+  const wrong=all.filter(w=>(w.wrong||0)>0&&!wkSolidW(w)&&wkScore(w)>0).sort((a,b)=>wkScore(b)-wkScore(a)||(b.wrong||0)-(a.wrong||0)).slice(0,10);
+  const wk=new Set(wrong.map(w=>w.key));
+  const look=all.filter(w=>wkLk(w)>=3&&!wkSolidW(w)&&!wk.has(w.key)&&(w.correct||0)<=(w.wrong||0)+1).sort((a,b)=>wkLk(b)-wkLk(a)).slice(0,8);
+  const pos={}; for(const w of tested){ const k=wkPosOf(w), p=pos[k]=pos[k]||{c:0,t:0}; p.c+=w.correct||0; p.t+=(w.correct||0)+(w.wrong||0); }
+  const posL=Object.entries(pos).filter(([,p])=>p.t>=5).map(([k,p])=>({k,acc:p.c/p.t,t:p.t})).sort((a,b)=>a.acc-b.acc);
+  return {n:all.length, acc:t?c/t:null, tested:tested.length, solid:all.filter(wkSolidW).length, untested:all.length-tested.length, wrong, look, posL, train:[...wrong,...look].slice(0,10)};
+}
+const wkMs=()=>Math.floor(wkWords().length/WK_STEP);
+function wkSync(){   // reaching a new 100 snapshots this report's weak words; the next report shows how many of them are now solid
+  const m=wkMs(), o=wkLoad(); if(!m||(o.m||0)>=m) return o;
+  const n={m, prev:o.cur||null, cur:{m, at:today(), weak:wkAnalyze().train.map(w=>w.key)}, seen:o.seen||0}; wkSave(n); return n; }
+function weakCard(){
+  const n=wkWords().length; if(!n) return "";
+  const m=Math.floor(n/WK_STEP), left=WK_STEP-n%WK_STEP, head=`<div class="srs-ic" aria-hidden="true">🔍</div>`;
+  if(!m&&!DEV) return `<section class="card wk-card"><div class="srs-top">${head}<div><b>${T("wkTitle")}</b><span class="muted sm-t">${T("wkLock",{n:left})}</span></div></div><div class="wk-bar"><i style="width:${(n%WK_STEP)/WK_STEP*100}%"></i></div></section>`;
+  const o=wkSync(), fresh=m>(o.seen||0);
+  return `<section class="card wk-card"><div class="srs-top">${head}<div><b>${T("wkTitle")}${fresh?` <span class="chip new">${T("wkNew")}</span>`:""}</b><span class="muted sm-t">${m?T("wkReady",{m,n:left}):T("wkLock",{n:left})+" · DEV"}</span></div><button class="btn sm" data-act="weak">${T("wkOpen")}</button></div></section>`;
+}
+function viewWeak(){
+  const o=wkSync(), m=wkMs(), A=wkAnalyze();
+  if(m>(o.seen||0)) wkSave({...o, seen:m});
+  const pct=x=>x==null?"—":Math.round(x*100)+"%";
+  const row=w=>`<div class="wk-row"><div><b>${esc(w.word)}</b> <span class="muted sm-t">${esc(w.pos||"")}</span><div class="sm-t">${esc(mean(w))}</div></div><span class="muted sm-t wk-st">${T("wkStat",{w:w.wrong||0,c:w.correct||0,l:wkLk(w)})}</span></div>`;
+  const prev=o.prev, prog=prev&&prev.weak&&prev.weak.length?T("wkProg",{t:prev.weak.length,n:prev.weak.filter(k=>{ const w=S.words.get(k); return w&&wkSolidW(w); }).length}):T("wkProgFirst");
+  const sec=(t,sub,body)=>`<section class="card wk-sec"><b>${t}</b>${sub?`<span class="muted sm-t">${sub}</span>`:""}<div>${body}</div></section>`;
+  const posB=A.posL.length?A.posL.map((p,i)=>`<div class="wk-pos${i===0&&A.posL.length>1?" low":""}"><span>${T("wkPos_"+p.k)}${i===0&&A.posL.length>1?` <span class="chip new">${T("wkPosWeak")}</span>`:""}</span><div class="wk-bar"><i style="width:${Math.round(p.acc*100)}%"></i></div><span class="sm-t">${pct(p.acc)}</span></div>`).join(""):`<span class="muted sm-t">${T("wkPosNone")}</span>`;
+  return `<div class="view">
+    <div><div class="eyebrow">${T("wkTitle")}</div><h2 style="font-size:24px">${m?T("wkHead",{m,n:A.n}):T("dictCount",{n:A.n})}</h2></div>
+    <section class="card wk-stats"><div><b>${pct(A.acc)}</b><span class="muted sm-t">${T("wkAcc")}</span></div><div><b>${A.tested}</b><span class="muted sm-t">${T("wkTested")}</span></div><div><b>${A.solid}</b><span class="muted sm-t">${T("wkSolid")}</span></div></section>
+    ${A.train.length?`<button class="btn" data-act="wktrain">${T("wkTrain",{n:A.train.length})}</button>`:`<section class="card">${T("wkNoWeak")}</section>`}
+    ${A.wrong.length?sec(T("wkWrongT"),T("wkWrongS"),A.wrong.map(row).join("")):""}
+    ${A.look.length?sec(T("wkLookT"),T("wkLookS"),A.look.map(row).join("")):""}
+    ${sec(T("wkPosT"),T("wkPosS"),posB)}
+    ${sec(T("wkProgT"),"",`<span class="sm-t">${prog}</span>`)}
+    ${A.untested?`<p class="muted sm-t">${T("wkUntested",{n:A.untested})}</p>`:""}
+    <button class="btn ghost" data-tab="dict">${T("backDict")}</button>
+  </div>`;
 }
 
 /* ================= read-aloud (speech synthesis, sentence by sentence) ================= */
@@ -7913,6 +7972,12 @@ Object.assign(STR.hi,{"lsnYT":"YouTube पर देखें"});
 Object.assign(STR.es,{"lsnYT":"Ver en YouTube"});
 Object.assign(STR.ja,{"lsnYT":"YouTube で見る"});
 Object.assign(STR.ko,{"lsnYT":"YouTube에서 보기"});
+Object.assign(STR.zh,{"wkTitle": "單字弱點報告", "wkLock": "再存 {n} 個字，就能打開下一份弱點報告（每 100 字一份）", "wkReady": "第 {m} 份報告出爐了 · 再存 {n} 個字出下一份", "wkOpen": "看報告", "wkNew": "新", "wkToast": "🔍 你的字典滿 {n} 個字了！新的弱點報告出爐，到「字典」看看", "wkHead": "第 {m} 份報告 · {n} 個字", "wkAcc": "答對率", "wkTested": "測過的字", "wkSolid": "記牢的字", "wkWrongT": "最常錯的字", "wkWrongS": "這些字你答錯最多次，先把它們搞定", "wkLookT": "查了好幾次還不熟", "wkLookS": "你一直回來查，代表還沒真的記住", "wkPosT": "哪種詞最弱", "wkPosS": "測過 5 次以上的詞性才會列出", "wkPosWeak": "最弱", "wkPosNone": "測驗次數還不夠，多做幾次每日測驗就會出現", "wkUntested": "還有 {n} 個字從來沒被測過，每日測驗和間隔複習會慢慢抽到它們", "wkProgT": "跟上一份比", "wkProg": "上一份報告的 {t} 個弱字，現在已經記牢 {n} 個", "wkProgFirst": "這是你的第一份報告，下一份會告訴你這些弱字進步了多少", "wkTrain": "🎯 特訓這 {n} 個字", "wkTrainT": "弱點特訓", "wkTrainNote": "特訓是純練習，不送彩券；答題結果會算進你的複習紀錄", "wkNoWeak": "目前沒有明顯的弱字，太強了！繼續保持", "wkStat": "錯 {w} · 對 {c} · 查 {l} 次", "wkBack": "回到報告", "wkPos_n": "名詞", "wkPos_v": "動詞", "wkPos_adj": "形容詞", "wkPos_adv": "副詞", "wkPos_o": "其他"});
+Object.assign(STR.en,{"wkTitle": "Word weakness report", "wkLock": "Save {n} more words to open your next weakness report (one every 100 words)", "wkReady": "Report #{m} is ready · {n} more words for the next one", "wkOpen": "View", "wkNew": "New", "wkToast": "🔍 Your dictionary hit {n} words! A new weakness report is ready in Dictionary", "wkHead": "Report #{m} · {n} words", "wkAcc": "Accuracy", "wkTested": "Words tested", "wkSolid": "Words mastered", "wkWrongT": "Most-missed words", "wkWrongS": "You got these wrong the most. Fix them first", "wkLookT": "Looked up again and again", "wkLookS": "You keep coming back to these, so they haven't stuck yet", "wkPosT": "Weakest word type", "wkPosS": "Only word types tested 5+ times are shown", "wkPosWeak": "Weakest", "wkPosNone": "Not enough quiz answers yet. Do a few more daily quizzes", "wkUntested": "{n} words have never been tested yet. Daily quizzes and spaced review will get to them", "wkProgT": "Since last report", "wkProg": "Of the {t} weak words in your last report, {n} are now mastered", "wkProgFirst": "This is your first report. The next one will show how much these words improved", "wkTrain": "🎯 Drill these {n} words", "wkTrainT": "Weak-word drill", "wkTrainNote": "The drill is practice only (no ticket). Your answers still count in your review history", "wkNoWeak": "No clear weak words right now. Great job, keep it up!", "wkStat": "✗ {w} · ✓ {c} · looked up {l}×", "wkBack": "Back to report", "wkPos_n": "Nouns", "wkPos_v": "Verbs", "wkPos_adj": "Adjectives", "wkPos_adv": "Adverbs", "wkPos_o": "Other"});
+Object.assign(STR.hi,{"wkTitle": "शब्द कमज़ोरी रिपोर्ट", "wkLock": "अगली कमज़ोरी रिपोर्ट खोलने के लिए {n} और शब्द सेव करें (हर 100 शब्दों पर एक)", "wkReady": "रिपोर्ट #{m} तैयार है · अगली के लिए {n} और शब्द", "wkOpen": "देखें", "wkNew": "नया", "wkToast": "🔍 आपके शब्दकोश में {n} शब्द हो गए! नई कमज़ोरी रिपोर्ट शब्दकोश में तैयार है", "wkHead": "रिपोर्ट #{m} · {n} शब्द", "wkAcc": "सही उत्तर", "wkTested": "जाँचे गए शब्द", "wkSolid": "पक्के शब्द", "wkWrongT": "सबसे ज़्यादा गलत शब्द", "wkWrongS": "इन शब्दों में आप सबसे ज़्यादा गलत हुए, पहले इन्हें पक्का करें", "wkLookT": "बार-बार देखे गए शब्द", "wkLookS": "आप इन्हें बार-बार देखते हैं, यानी ये अभी याद नहीं हुए", "wkPosT": "सबसे कमज़ोर शब्द-प्रकार", "wkPosS": "केवल 5+ बार जाँचे गए प्रकार दिखते हैं", "wkPosWeak": "सबसे कमज़ोर", "wkPosNone": "अभी पर्याप्त उत्तर नहीं हैं। कुछ और दैनिक क्विज़ करें", "wkUntested": "{n} शब्द अभी तक जाँचे नहीं गए। दैनिक क्विज़ और दोहराव उन तक पहुँचेंगे", "wkProgT": "पिछली रिपोर्ट से तुलना", "wkProg": "पिछली रिपोर्ट के {t} कमज़ोर शब्दों में से {n} अब पक्के हैं", "wkProgFirst": "यह आपकी पहली रिपोर्ट है। अगली रिपोर्ट सुधार दिखाएगी", "wkTrain": "🎯 इन {n} शब्दों का अभ्यास करें", "wkTrainT": "कमज़ोर शब्द अभ्यास", "wkTrainNote": "यह केवल अभ्यास है (टिकट नहीं)। उत्तर आपके दोहराव रिकॉर्ड में गिने जाते हैं", "wkNoWeak": "अभी कोई स्पष्ट कमज़ोर शब्द नहीं। बहुत बढ़िया!", "wkStat": "✗ {w} · ✓ {c} · {l} बार देखा", "wkBack": "रिपोर्ट पर लौटें", "wkPos_n": "संज्ञा", "wkPos_v": "क्रिया", "wkPos_adj": "विशेषण", "wkPos_adv": "क्रिया-विशेषण", "wkPos_o": "अन्य"});
+Object.assign(STR.es,{"wkTitle": "Informe de puntos débiles", "wkLock": "Guarda {n} palabras más para abrir tu próximo informe (uno cada 100 palabras)", "wkReady": "El informe n.º {m} está listo · {n} palabras más para el siguiente", "wkOpen": "Ver", "wkNew": "Nuevo", "wkToast": "🔍 ¡Tu diccionario llegó a {n} palabras! Hay un nuevo informe en Diccionario", "wkHead": "Informe n.º {m} · {n} palabras", "wkAcc": "Aciertos", "wkTested": "Palabras evaluadas", "wkSolid": "Palabras dominadas", "wkWrongT": "Las que más fallas", "wkWrongS": "Estas son las que más fallaste. Empieza por ellas", "wkLookT": "Buscadas una y otra vez", "wkLookS": "Vuelves a buscarlas, así que aún no se te quedan", "wkPosT": "Tipo de palabra más débil", "wkPosS": "Solo se muestran tipos evaluados 5+ veces", "wkPosWeak": "Más débil", "wkPosNone": "Aún no hay suficientes respuestas. Haz algunos quizzes diarios más", "wkUntested": "{n} palabras aún no se han evaluado. El quiz diario y el repaso espaciado llegarán a ellas", "wkProgT": "Desde el último informe", "wkProg": "De las {t} palabras débiles del último informe, ya dominas {n}", "wkProgFirst": "Este es tu primer informe. El siguiente mostrará cuánto mejoraste", "wkTrain": "🎯 Entrena estas {n} palabras", "wkTrainT": "Entreno de palabras débiles", "wkTrainNote": "Es solo práctica (sin boleto). Tus respuestas cuentan en tu historial de repaso", "wkNoWeak": "No hay palabras débiles claras ahora. ¡Muy bien, sigue así!", "wkStat": "✗ {w} · ✓ {c} · buscada {l}×", "wkBack": "Volver al informe", "wkPos_n": "Sustantivos", "wkPos_v": "Verbos", "wkPos_adj": "Adjetivos", "wkPos_adv": "Adverbios", "wkPos_o": "Otros"});
+Object.assign(STR.ja,{"wkTitle": "苦手単語レポート", "wkLock": "あと {n} 語保存すると次の苦手レポートが開きます（100語ごとに1つ）", "wkReady": "レポート第{m}号ができました · 次まであと {n} 語", "wkOpen": "見る", "wkNew": "新", "wkToast": "🔍 単語帳が {n} 語になりました！新しい苦手レポートを単語帳でチェック", "wkHead": "第{m}号 · {n} 語", "wkAcc": "正答率", "wkTested": "テスト済み", "wkSolid": "定着した単語", "wkWrongT": "よく間違える単語", "wkWrongS": "一番多く間違えた単語です。まずここから", "wkLookT": "何度も調べている単語", "wkLookS": "何度も調べるのは、まだ覚えきれていないサインです", "wkPosT": "苦手な品詞", "wkPosS": "5回以上テストした品詞だけ表示します", "wkPosWeak": "苦手", "wkPosNone": "まだ回答数が足りません。毎日のクイズをもう少し続けましょう", "wkUntested": "まだ一度もテストされていない単語が {n} 語あります。毎日のクイズと間隔復習で出てきます", "wkProgT": "前回のレポートと比べて", "wkProg": "前回の苦手 {t} 語のうち、{n} 語が定着しました", "wkProgFirst": "これが最初のレポートです。次回はどれだけ伸びたかを表示します", "wkTrain": "🎯 この {n} 語を特訓", "wkTrainT": "苦手単語特訓", "wkTrainNote": "特訓は練習のみ（チケットなし）。回答は復習記録に反映されます", "wkNoWeak": "今は目立った苦手単語がありません。すごい！この調子で", "wkStat": "✗ {w} · ✓ {c} · {l}回調べた", "wkBack": "レポートに戻る", "wkPos_n": "名詞", "wkPos_v": "動詞", "wkPos_adj": "形容詞", "wkPos_adv": "副詞", "wkPos_o": "その他"});
+Object.assign(STR.ko,{"wkTitle": "약한 단어 리포트", "wkLock": "{n}단어 더 저장하면 다음 약점 리포트가 열려요 (100단어마다 1개)", "wkReady": "리포트 #{m} 도착 · 다음까지 {n}단어", "wkOpen": "보기", "wkNew": "새", "wkToast": "🔍 단어장이 {n}단어가 됐어요! 새 약점 리포트를 단어장에서 확인하세요", "wkHead": "리포트 #{m} · {n}단어", "wkAcc": "정답률", "wkTested": "테스트한 단어", "wkSolid": "외운 단어", "wkWrongT": "가장 많이 틀린 단어", "wkWrongS": "가장 많이 틀린 단어예요. 먼저 잡아요", "wkLookT": "여러 번 찾아본 단어", "wkLookS": "계속 찾아본다는 건 아직 안 외워졌다는 뜻이에요", "wkPosT": "가장 약한 품사", "wkPosS": "5번 이상 테스트한 품사만 보여요", "wkPosWeak": "가장 약함", "wkPosNone": "아직 답이 부족해요. 데일리 퀴즈를 몇 번 더 해 보세요", "wkUntested": "아직 한 번도 테스트하지 않은 단어가 {n}개 있어요. 데일리 퀴즈와 간격 복습에서 나와요", "wkProgT": "지난 리포트와 비교", "wkProg": "지난 리포트의 약한 단어 {t}개 중 {n}개를 이제 외웠어요", "wkProgFirst": "첫 번째 리포트예요. 다음 리포트에서 얼마나 늘었는지 보여 줄게요", "wkTrain": "🎯 이 {n}단어 특훈", "wkTrainT": "약한 단어 특훈", "wkTrainNote": "특훈은 연습용이에요(티켓 없음). 답은 복습 기록에 반영돼요", "wkNoWeak": "지금은 눈에 띄는 약한 단어가 없어요. 최고예요!", "wkStat": "✗ {w} · ✓ {c} · {l}번 찾음", "wkBack": "리포트로 돌아가기", "wkPos_n": "명사", "wkPos_v": "동사", "wkPos_adj": "형용사", "wkPos_adv": "부사", "wkPos_o": "기타"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
