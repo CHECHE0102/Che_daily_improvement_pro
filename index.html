@@ -254,7 +254,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .rw-row{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}.rw-row b{font-family:var(--f-display)}
 .rw-row.lvup b{color:var(--accent);font-size:20px}
 .hero-card{background:var(--night);color:var(--night-ink);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.hero-card .eyebrow{color:var(--night-ink);opacity:.65}.hero-nick{opacity:1;font-size:13px;letter-spacing:0;text-transform:none}
+.hero-card .eyebrow{color:color-mix(in srgb,var(--night-ink) 65%,transparent)}.hero-nick{opacity:1;font-size:13px;letter-spacing:0;text-transform:none}
 .nk{font-weight:800}.nk0{color:#9AA3A0}.nk1{color:#F2F5F3}.nk2{color:#5CD685;text-shadow:0 0 4px rgba(92,214,133,.35)}.nk3{color:#5AA9FF;text-shadow:0 0 5px rgba(90,169,255,.45)}
 .nk4{color:#C08BFF;text-shadow:0 0 6px rgba(192,139,255,.55)}.nk5{color:#FFA24A;text-shadow:0 0 7px rgba(255,162,74,.6)}.nk6{color:#FF5E5E;text-shadow:0 0 8px rgba(255,94,94,.7),0 0 2px #fff}
 .nk7{background:linear-gradient(90deg,#FF5E5E,#FFD25A,#5CD685,#5AA9FF,#C08BFF,#FF5E5E);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 6px rgba(255,210,90,.6));animation:nkflow 3s linear infinite}
@@ -720,7 +720,10 @@ body.maint-lock{overflow:hidden}
 .bm-bomb.warn{animation-duration:.55s}.bm-bomb.urgent{animation:bmshake .12s linear infinite}
 @keyframes bmshake{0%{transform:translate(0,0) rotate(-6deg) scale(1.1)}25%{transform:translate(3px,-2px) rotate(6deg) scale(1.15)}50%{transform:translate(-3px,2px) rotate(-6deg) scale(1.1)}75%{transform:translate(2px,2px) rotate(5deg) scale(1.15)}100%{transform:translate(0,0) rotate(-6deg) scale(1.1)}}
 .pg-full #pgClock{flex:none}
-.sb-wrap{display:inline-flex;vertical-align:middle;margin-left:4px;line-height:0}
+.sb-wrap{display:inline-flex;vertical-align:middle;margin-left:4px;line-height:0}.tt-chip{display:inline-block;vertical-align:middle;margin-left:5px;padding:0 7px;border-radius:999px;font-size:11px;font-weight:700;line-height:17px;letter-spacing:0;text-transform:none;white-space:nowrap;background:color-mix(in srgb,var(--ttc) 18%,transparent);color:var(--ttc)}.rk-sub .tt-chip{margin:0 6px 0 0;font-size:10.5px;line-height:16px}.tt1{--ttc:#B7793F}.tt2{--ttc:#2E9E5B}.tt3{--ttc:#C9961A}.tt4{--ttc:#8E4FD6}.tt5{--ttc:#E0457B}html:root .tt-chip.tt5{background:linear-gradient(90deg,#FF5C8A33,#FFB33C33,#5BD48433,#36C5F033,#B44CFF33)}.mast-tt{display:inline-flex;vertical-align:middle;margin-right:5px;line-height:0}.hero-card .tt-chip{color:color-mix(in srgb,var(--ttc) 45%,#fff);background:color-mix(in srgb,var(--ttc) 32%,transparent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tt-chip{color:color-mix(in srgb,var(--ttc) 55%,#fff);background:color-mix(in srgb,var(--ttc) 26%,transparent)}}
+:root[data-theme="dark"] .tt-chip{color:color-mix(in srgb,var(--ttc) 55%,#fff);background:color-mix(in srgb,var(--ttc) 26%,transparent)}
+
 .sb{flex:none;overflow:visible}.sb4{filter:drop-shadow(0 0 3px rgba(180,76,255,.7));animation:sbglow 2.2s ease-in-out infinite}
 .sb5{filter:drop-shadow(0 0 4px rgba(255,200,80,.85));animation:sbrainbow 4s linear infinite}
 @keyframes sbglow{0%,100%{filter:drop-shadow(0 0 2px rgba(180,76,255,.5))}50%{filter:drop-shadow(0 0 7px rgba(200,120,255,.95))}}
@@ -1672,7 +1675,7 @@ function renderInner(){
   vpApply();
   document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>{ b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"); b.classList.toggle("locked", !!(b.dataset.tab&&featLock(b.dataset.tab))); });
   if(typeof readStopIfLeft==="function") readStopIfLeft(); setTimeout(()=>{ if(typeof pgLockSync==="function") pgLockSync(); },0);
-  { const g=game(); $("#mastInfo").innerHTML = T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}).split(" · ").map(x=>`<span style="white-space:nowrap">${x}</span>`).join(" · "); }
+  { const g=game(); const tt=PLANS_ON?0:streakTier(); $("#mastInfo").innerHTML = (tt?`<span class="mast-tt" title="${esc(T("lgTitleN",{t:titleName(tt)}))}">${sbArt(tt,18,false)}</span>`:"")+T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}).split(" · ").map(x=>`<span style="white-space:nowrap">${x}</span>`).join(" · "); }
   const app=$("#app");
   if(S.view==="today") app.innerHTML=viewToday();
   else if(S.view==="read") app.innerHTML=viewRead();
@@ -2576,7 +2579,7 @@ function allyCard(){
   const a=todayAlly(), d=S.allyDoc||{}, req=d.req&&d.req.date===today()?d.req:null, out=g.allyOut&&g.allyOut.date===today()?g.allyOut:null, friend=a&&a.kind==="friend";
   const ini=(a.n||"?").slice(0,1).toUpperCase();
   return `<div class="card ally-card"><div class="row" style="justify-content:space-between"><b>🤝 ${T("alTitle")}</b><span class="chip ${friend?"done":""}">${friend?T("alFriend"):T("alCpu")}</span></div>
-    <div class="ally-row"><span class="ally-av" style="background:${(EL_PAL[a.wEl]||["#888","#555"])[1]}">${ini}<i>${flagOf(a.flag)}</i></span><div class="it-main"><b>${esc(a.n)}${friend?supB(a.id,16):""}</b><span class="muted sm-t">Lv ${a.lv} · HP ${a.hp} · ${T("atk")} ${a.atk} · ${T("def")} ${a.def}</span>
+    <div class="ally-row"><span class="ally-av" style="background:${(EL_PAL[a.wEl]||["#888","#555"])[1]}">${ini}<i>${flagOf(a.flag)}</i></span><div class="it-main"><b>${esc(a.n)}${friend?supB(a.id,16)+ttChip(a.id):""}</b><span class="muted sm-t">Lv ${a.lv} · HP ${a.hp} · ${T("atk")} ${a.atk} · ${T("def")} ${a.def}</span>
       </div></div>
     <div class="ally-items">${[["weapon",a.wId,a.wEl,a.lentW],["armor",a.aId,a.aEl,a.lentA]].map(([sl,id,el,lent])=>{ const it=id&&ITEMS[id]; return `<div class="ally-it">${it?itemTile(it,true):elBadge(el)}<span><small class="muted">${T(sl)}${lent?" · "+T("alLent"):""}</small><b>${it?esc(itemName(it)):elName(el)}</b><small class="muted">${it?(sl==="weapon"?T("atkPlus",{n:it.atk}):T("defPlus",{d:it.def,h:it.hp}))+" · "+tierLab(it):""}</small></span></div>`; }).join("")}</div>
     ${friend?"":(()=>{ const own=g.inv.map(id=>ITEMS[id]).filter(Boolean), c=cpuAlly(), lend=g.allyGear&&g.allyGear.date===today()?g.allyGear:{};
@@ -3074,7 +3077,7 @@ function viewAdv(){ restCheck();
   if(ADV_PAGES[sub]) return `<div class="view adv-page"><div class="page-h"><h2>${ADV_PAGES[sub][0]} ${T(ADV_PAGES[sub][1])}</h2></div>${body}</div>`;
   return `<div class="view">
     <section class="hero-card">
-      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>${supB(CLOUD.user?CLOUD.user.uid:"me",20,1)}`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),0,30)}</span>`:""; })()}</h2></div><div class="purses"><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div></div>
+      <div class="hc-top"><div><div class="eyebrow">${T("hero")}${g.nick?` · <b class="hero-nick ${nickTier(g.lv)}">${esc(g.nick)}</b>${supB(CLOUD.user?CLOUD.user.uid:"me",20,1)}${ttChip(CLOUD.user?CLOUD.user.uid:"me")}`:""}</div><h2>Lv ${g.lv}${(()=>{ const b=(ieState().best||{}).band; return b>=6?` <span class="hero-badge">${badgeSvg(fmtBand(b),0,30)}</span>`:""; })()}</h2></div><div class="purses"><div class="purse"><b>${g.gold}</b><span>${T("gold")}</span></div><div class="purse"><b>${g.tickets}</b><span>${T("tickets")}</span></div><div class="purse"><b>${g.lotto||0}</b><span>${T("lotto")}</span></div></div></div>
       <div class="xp"><i style="width:${g.exp/need*100}%"></i></div><div class="muted sm-t">${T("expLine",{e:g.exp,n:need})}</div>
       <div class="hc-stats"><span>HP <b>${s.hp}</b></span><span>${T("atk")} <b>${s.atk}</b></span><span>${T("def")} <b>${s.def}</b></span></div>
       <div class="slots"><div class="slot">${g.weapon?itemTile(ITEMS[g.weapon],true):elBadge(null)}<span><small>${T("weapon")}</small>${g.weapon?esc(itemName(ITEMS[g.weapon])):T("bare")}</span></div><div class="slot">${g.armor?itemTile(ITEMS[g.armor],true):elBadge(null)}<span><small>${T("armor")}</small>${g.armor?esc(itemName(ITEMS[g.armor])):T("cloth")}</span></div></div>
@@ -3467,10 +3470,14 @@ const supTier=uid=>(SUP[uid]||{}).tier||0;
 const sbArt=(t,size,plus)=>plus?`<span class="sbp">${supSvg(t,size)}</span>`:supSvg(t,size);
 const sbName=(t,plus)=>plus?T("sbPlus",{b:T("sb"+t)}):T("sb"+t);
 const supPlus=uid=>!!(SUP[uid]&&SUP[uid].plus);
+// plans off: the title shown for a player = login-streak title, or a hand-given supporter badge when that is higher
+const ttOf=uid=>{ const me=uid==="me"||(CLOUD.user&&uid===CLOUD.user.uid), x=me?{t:streakTier(),ie:ieShowBand()}:lookExtra(uid);
+  const sp=SUP[uid]&&!SUP[uid].sub?SUP[uid].tier:0; return {x, t:Math.max(x.t,sp)}; };
+// the title's name as a small coloured chip, shown beside / under a player's name
+const ttChip=uid=>{ if(PLANS_ON) return ""; const {x,t}=ttOf(uid); return t?`<span class="tt-chip tt${t}">${esc(t>x.t?sbName(t,false):titleName(t))}</span>`:""; };
 const supB=(uid,size,noIe)=>{ if(PLANS_ON){ const t=supTier(uid), pl=supPlus(uid); return t?`<span class="sb-wrap" title="${esc(sbName(t,pl))}">${sbArt(t,size||18,pl)}</span>`:""; }
   // plans off: the badge is the login-streak title; a hand-given supporter badge still wins when it is higher
-  const me=uid==="me"||(CLOUD.user&&uid===CLOUD.user.uid), x=me?{t:streakTier(),ie:ieShowBand()}:lookExtra(uid);
-  const sp=SUP[uid]&&!SUP[uid].sub?SUP[uid].tier:0, t=Math.max(x.t,sp);
+  const {x,t}=ttOf(uid);
   return (t?`<span class="sb-wrap" title="${esc(t>x.t?sbName(t,false):T("lgTitleN",{t:titleName(t)}))}">${sbArt(t,size||18,false)}</span>`:"")+(!noIe&&x.ie>=6?`<span class="sb-wrap ie-b" title="IELTS ${fmtBand(x.ie)}">${badgeSvg(fmtBand(x.ie),0,size||18)}</span>`:""); };
 function supMineCard(){ const u=CLOUD.user; const t=u?supTier(u.uid):0; if(!t) return ""; const pl=supPlus(u.uid); return `<section class="card sup-mine"><div class="sup-mine-b">${sbArt(t,72,pl)}</div><div><b>${T("sbMine",{b:esc(sbName(t,pl))})}</b><p class="muted sm-t" style="margin:4px 0 0">${T("sbThanks")}</p></div></section>`; }
 function devSupHtml(){
@@ -3543,7 +3550,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.1";
+const APP_VERSION="2026.11.2";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4344,14 +4351,14 @@ function viewRank(){
   else if(f!=="toeic"&&(!S.rk||S.rk.by!==f)){ setTimeout(lbLoad,0); }
   if(f==="toeic") return toRankHtml([["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join(""));
   if(f==="ielts"){ const tabsH=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
-    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18,1)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
+    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18,1)}</span><span class="rk-sub muted">${ttChip(r.id)}L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
     const u=untilMonthEnd();
     return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieMonthReset",{d:u.d,h:u.h})}</div>
       ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
   const tabs=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
   const rd=f==="read";
-  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}${!rd?" rk-has-look":""}"${!rd?` data-act="rklook" data-k="${i}"`:""}><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span>${!rd?lookArt(r.id===CLOUD.user.uid?myLook():r.look,"rk-fig"):""}<span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv||1}${rd?"":" · "+T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${rd?T("rkArtsN",{n:r.n}):r[f]}</b></li>`).join("");
+  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}${!rd?" rk-has-look":""}"${!rd?` data-act="rklook" data-k="${i}"`:""}><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span>${!rd?lookArt(r.id===CLOUD.user.uid?myLook():r.look,"rk-fig"):""}<span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">${ttChip(r.id)}Lv ${r.lv||1}${rd?"":" · "+T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${rd?T("rkArtsN",{n:r.n}):r[f]}</b></li>`).join("");
   const mu=untilMonthEnd();
   return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
     <div class="seg" role="group">${tabs}</div>
@@ -5312,7 +5319,7 @@ function pgFinish(){
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
   const gm=S.pg.party.game, lab=r=>gm==="draw"?T("pgPtsN",{n:r.score}):gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
-  const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
+  const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}${ttChip(r.u)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
 function pgLookup(w){ const d={zh:"english-chinese-traditional",es:"english-spanish",ja:"english-japanese",ko:"english-korean"}[LANG]; return `https://dictionary.cambridge.org/dictionary/${d||"english"}/${encodeURIComponent(w)}`; }
@@ -6706,7 +6713,7 @@ function toLobby(){
 }
 function toRankHtml(tabsH){
   if(!TO_TOP||TO_TOP.month!==monthKey()){ TO_TOP={month:monthKey(),rows:[],loading:true}; setTimeout(toLoadTop,0); }
-  const rows=(TO_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${r.l} · R ${r.r}</span>${toChip(r.score)}</li>`).join("");
+  const rows=(TO_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">${ttChip(r.id)}L ${r.l} · R ${r.r}</span>${toChip(r.score)}</li>`).join("");
   const u=untilMonthEnd();
   return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(TO_TOP.month)} · ${T("ieMonthReset",{d:u.d,h:u.h})}</div>
     ${TO_TOP.loading?`<p class="muted">${T("loading")}</p>`:TO_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("toNoScore")}</p></div>`}`;
