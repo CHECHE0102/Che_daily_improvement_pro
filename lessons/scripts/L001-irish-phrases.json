@@ -5,63 +5,58 @@
   "level": "A2–B1",
   "voices": {"T": "zh-TW-HsiaoChenNeural", "A": "en-IE-EmilyNeural", "B": "en-IE-ConnorNeural"},
   "slides": [
-    {"type": "title", "img": "scene-welcome", "kicker": "BinBin 小教室 第 1 課",
-     "head": "愛爾蘭人的口頭禪", "sub": "3 分鐘學會 grand・craic・sound",
+    {"type": "hook", "big": ["在愛爾蘭說", "grand", "不是「宏偉」？！"],
      "lines": [
-      {"v": "T", "say": "大家好，歡迎來到 BinBin 小教室！今天要學三個愛爾蘭人每天都在講，但課本很少教的口頭禪。"},
-      {"v": "T", "say": "學會之後，不管是在超市、打工的地方，還是 pub，你都更聽得懂愛爾蘭人在說什麼。"}
+      {"v": "T", "say": "你知道嗎？在愛爾蘭，grand 根本不是宏偉的意思！"},
+      {"v": "T", "say": "三分鐘，帶你聽懂愛爾蘭人每天掛在嘴邊的口頭禪！"}
     ]},
 
-    {"type": "phrase", "img": "elder-talk", "num": "1", "phrase": "grand", "meaning": "沒問題・還可以・沒關係",
+    {"type": "phrase", "img": "scene-rest", "scene": "scene-welcome", "num": "1", "phrase": "grand", "meaning": "沒問題・還可以・沒關係",
      "lines": [
-      {"v": "T", "say": "第一個是 grand。在美國，grand 是宏偉、盛大的意思，但是在愛爾蘭，它幾乎就等於 OK。"},
-      {"v": "A", "say": "Sorry, I'm a bit late."},
-      {"v": "B", "say": "Ah, you're grand. Don't worry about it."},
-      {"v": "T", "say": "這裡的 you're grand，意思是：沒關係，你沒事啦。"},
-      {"v": "T", "say": "要注意，如果有人說 the food was grand，通常是還可以的意思，不一定是非常好吃喔。", "cap": "the food was grand ＝ 還可以（不一定很好吃）"}
+      {"v": "T", "say": "第一個，grand。在愛爾蘭，它幾乎就等於 OK。"},
+      {"v": "A", "say": "Sorry, I'm a bit late.", "zh": "抱歉，我有點遲到了。"},
+      {"v": "B", "say": "Ah, you're grand. Don't worry about it.", "zh": "啊，沒事啦，別在意。"},
+      {"v": "T", "say": "注意！如果有人說 the food was grand，通常只是還可以喔。", "cap": "the food was grand ＝ 還可以（不一定好吃！）"}
     ]},
 
-    {"type": "phrase", "img": "scene-party", "num": "2", "phrase": "craic", "pron": "唸作 crack", "meaning": "樂趣・好玩的氣氛・近況",
+    {"type": "phrase", "img": "scene-party", "scene": "scene-party", "num": "2", "phrase": "craic", "pron": "唸作 crack", "meaning": "樂趣・好玩的氣氛・近況",
      "lines": [
-      {"v": "T", "say": "第二個是 craic，拼法是 C R A I C，唸起來跟 crack 一樣。"},
-      {"v": "T", "say": "craic 指的是樂趣、好玩的氣氛，也可以是最近的消息。"},
-      {"v": "B", "say": "Hey! What's the craic?"},
-      {"v": "A", "say": "Not much. How are you?"},
-      {"v": "T", "say": "What's the craic，就是：最近怎樣？有什麼新鮮事？"}
+      {"v": "T", "say": "第二個，craic，唸起來跟 crack 一樣，意思是樂趣或近況。"},
+      {"v": "B", "say": "Hey! What's the craic?", "zh": "嘿！最近怎樣？"},
+      {"v": "A", "say": "Not much. How are you?", "zh": "沒什麼特別的，你呢？"},
+      {"v": "T", "say": "What's the craic，就是：最近怎樣？"}
     ]},
 
-    {"type": "phrase", "img": "hero-m-win", "num": "3", "phrase": "sound", "meaning": "好喔・謝啦・人很好",
+    {"type": "phrase", "img": "hero-m-win", "scene": "scene-win", "num": "3", "phrase": "sound", "meaning": "好喔・謝啦・人很好",
      "lines": [
-      {"v": "T", "say": "第三個是 sound。它可以是：好喔、謝啦，也可以形容一個人很好相處。"},
-      {"v": "A", "say": "I'll send you the rota tonight."},
-      {"v": "B", "say": "Sound, thanks a million."},
-      {"v": "T", "say": "rota 是排班表。這裡的 sound 就等於：好，謝啦。", "cap": "rota ＝ 排班表　sound ＝ 好，謝啦"},
-      {"v": "T", "say": "如果有人說 he's a sound guy，意思就是：他人很好。", "cap": "He's a sound guy. ＝ 他人很好。"}
+      {"v": "T", "say": "第三個，sound。可以是好喔、謝啦，也可以說一個人很好。"},
+      {"v": "A", "say": "I'll send you the rota tonight.", "zh": "我今晚把排班表傳給你。"},
+      {"v": "B", "say": "Sound, thanks a million.", "zh": "好喔，超感謝！"},
+      {"v": "T", "say": "rota 是排班表。打工的時候一定會聽到！", "cap": "rota ＝ 排班表　sound ＝ 好，謝啦"}
     ]},
 
-    {"type": "grammar", "img": "scene-study", "kicker": "文法小補充", "head": "I'm grand, thanks.",
-     "points": ["I'm grand ＝ 我很好", "I'm grand, thanks ＝ 不用了，謝謝", "禮貌地拒絕別人的好意"],
+    {"type": "grammar", "img": "scene-study", "kicker": "加碼：禮貌拒絕", "head": "I'm grand, thanks.",
+     "points": ["I'm grand ＝ 我很好", "I'm grand, thanks ＝ 不用了，謝謝"],
      "lines": [
-      {"v": "T", "say": "小補充。當別人問你要不要什麼東西，你可以用 I'm grand 來拒絕。"},
-      {"v": "A", "say": "Would you like another cup of tea?"},
-      {"v": "B", "say": "I'm grand, thanks."},
-      {"v": "T", "say": "I'm grand 加上 thanks，就是很自然又有禮貌的：不用了，謝謝。"}
+      {"v": "T", "say": "加碼一個！別人請你吃東西，想拒絕就這樣說："},
+      {"v": "A", "say": "Would you like another cup of tea?", "zh": "要不要再來一杯茶？"},
+      {"v": "B", "say": "I'm grand, thanks.", "zh": "不用了，謝謝。"}
     ]},
 
-    {"type": "quiz", "img": "scene-quiz", "q": "The craic was mighty last night.",
-     "ask": "同事這樣說，他的意思是？", "opts": ["昨晚很糟", "昨晚超好玩", "昨晚有東西壞了"], "ans": 1,
+    {"type": "quiz", "q": "The craic was mighty last night.",
+     "ask": "同事這樣說，意思是？", "opts": ["昨晚很糟", "昨晚超好玩", "昨晚有東西壞了"], "ans": 1,
      "lines": [
-      {"v": "T", "say": "最後來個小測驗。同事跟你說："},
-      {"v": "A", "say": "The craic was mighty last night."},
-      {"v": "T", "say": "他的意思是什麼？A，昨晚很糟。B，昨晚超好玩。C，昨晚有東西壞了。"},
-      {"v": "T", "say": "", "cap": "想一想⋯⋯", "pause": 3},
-      {"v": "T", "say": "答案是 B！mighty 在這裡是超棒的意思，the craic was mighty 就是：超好玩！", "reveal": true}
+      {"v": "T", "say": "小測驗！同事跟你說："},
+      {"v": "A", "say": "The craic was mighty last night.", "zh": "？？？"},
+      {"v": "T", "say": "是什麼意思？A、B、還是 C？"},
+      {"v": "T", "say": "", "cap": "倒數⋯⋯", "pause": 3, "countdown": true},
+      {"v": "T", "say": "答案是 B！mighty 是超棒，就是：昨晚超好玩！", "reveal": true}
     ]},
 
     {"type": "recap", "img": "scene-win", "items": [["grand", "沒問題・還可以"], ["craic", "樂趣・近況"], ["sound", "好喔・謝啦"]],
      "lines": [
-      {"v": "T", "say": "今天學了三個口頭禪：grand，沒問題；craic，樂趣和近況；sound，好喔謝啦。"},
-      {"v": "T", "say": "打開 BinBin 每日新聞，也許你就會遇到它們。我們下次見！"}
+      {"v": "T", "say": "今天學會了：grand、craic、sound！下次聽到就不會愣住了。"},
+      {"v": "T", "say": "打開 BinBin，每天用愛爾蘭新聞練英文。我們下次見！", "end": true}
     ]}
   ]
 }

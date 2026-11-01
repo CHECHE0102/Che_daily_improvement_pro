@@ -1,14 +1,30 @@
-// Screenshot lesson frames: node tools/render_frames.js frames.json  ([{html, png}, ...], 1080x1920)
+// Render animated lesson frames into a silent mp4.
+// node tools/render_frames.js frames.json out.mp4   (frames.json = {fps, jobs:[{html, frames}]})
+// Each page's CSS animations are paused and seeked to every frame time, then screenshotted.
 const { chromium } = require('playwright');
-const jobs = require(require('path').resolve(process.argv[2]));
+const { spawn } = require('child_process');
+const path = require('path');
+const { fps, jobs } = require(path.resolve(process.argv[2]));
 (async () => {
+  const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
+    '-c:v', 'libx264', '-preset', 'medium', '-crf', '22', '-pix_fmt', 'yuv420p', process.argv[3]], { stdio: ['pipe', 'inherit', 'inherit'] });
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
+  let n = 0;
   for (const j of jobs) {
-    await p.goto('file://' + j.html);
+    await p.goto('file://' + j.html, { waitUntil: 'load' });
     await p.evaluate(() => document.fonts.ready);
-    await p.waitForTimeout(150);
-    await p.screenshot({ path: j.png });
+    await p.evaluate(() => { for (const a of document.getAnimations()) a.pause(); });
+    for (let f = 0; f < j.frames; f++) {
+      await p.evaluate(t => { for (const a of document.getAnimations()) a.currentTime = t; }, (f / fps) * 1000);
+      const buf = await p.screenshot({ type: 'jpeg', quality: 88 });
+      if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
+      n++;
+    }
+    process.stdout.write(`frames ${n}\r`);
   }
   await b.close();
+  ff.stdin.end();
+  await new Promise((res, rej) => ff.on('close', c => (c ? rej(new Error('ffmpeg ' + c)) : res())));
+  console.log(`\nrendered ${n} frames`);
 })();
