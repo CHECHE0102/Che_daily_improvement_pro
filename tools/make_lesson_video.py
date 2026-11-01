@@ -10,14 +10,17 @@ usage: python tools/make_lesson_video.py lessons/scripts/L001-irish-phrases.json
   --only N    render only slide N (0-based), for quick previews
 Output: lessons/out/<id>.mp4 (not committed).
 """
-import asyncio, html, json, math, os, random, subprocess, sys
+import asyncio, html, json, math, os, random, re, subprocess, sys
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ART = os.path.join(ROOT, "assets", "art")
 SR, FPS = 24000, 25
 GAP, LEAD = 0.30, 0.45            # silence after each line; lead-in before a new slide's first line
-RATE = {"T": "+10%", "A": "-4%", "B": "-4%"}
+# (rate, pitch) per voice key; "TE" = the English words inside the teacher's Chinese lines
+PROSODY = {"T": ("+6%", "-4Hz"), "TE": ("-6%", "-6Hz"), "A": ("-4%", "+0Hz"), "B": ("-4%", "+0Hz")}
+EN_RUN = re.compile(r"[A-Za-z][A-Za-z0-9'’\- ,.?!]*")
+SEG_GAP = 0.06      # pause between a Chinese and an English segment
 WHO = {"T": "BinBin 長老", "A": "Emily", "B": "Connor"}
 AVATAR = {"T": "elder-talk", "A": "hero-f-idle", "B": "hero-m-idle"}
 
@@ -157,7 +160,7 @@ def stage(s, ln, first, ts):
         cta = (f'<div class="cta" style="{an("pop", 0.7, 0.5)}"><div style="{an("pulse", 0.9, 1.2, ease="ease", count="infinite")}">📲 打開 BinBin 一起練習</div></div>'
                if ln.get("end") else "")
         body = (f'<div class="kicker" style="{E("up", 0.1)}">✅ 今天學會了</div>{cards}'
-                (cta or f'<div class="circle" style="width:340px;height:340px;margin-top:40px;{E("up", 1.8)}"><img src="{img(s["img"])}" style="{kb}"></div>'))
+                + (cta or f'<div class="circle" style="width:340px;height:340px;margin-top:40px;{E("up", 1.8)}"><img src="{img(s["img"])}" style="{kb}"></div>'))
     else:
         raise ValueError("unknown slide type " + t)
     return body, pops
@@ -266,11 +269,57 @@ def decode(path):
     return np.frombuffer(raw, np.int16).astype(np.float32) / 32768
 
 
-async def tts(text, voice, rate, path):
+def segments(say):
+    """Split a teacher line into Chinese and English runs: [(key, text)], key "T" or "TE"."""
+    out, pos = [], 0
+    for m in EN_RUN.finditer(say):
+        en = m.group().rstrip(" ,")
+        if pos < m.start():
+            out.append(("T", say[pos:m.start()]))
+        out.append(("TE", en))
+        pos = m.start() + len(en)
+    if pos < len(say):
+        out.append(("T", say[pos:]))
+    # punctuation-only pieces (e.g. the 、 in "A、B") become a short pause
+    return [(k if re.search(r"[\w\u4e00-\u9fff]", t) else "P", t) for k, t in out if t.strip()]
+
+
+async def voice_line(ln, voices, base):
+    """Voice one line; teacher lines switch to a native English voice for English words.
+    Returns (float32 clip, word boundaries [offset, dur, text])."""
+    segs = segments(ln["say"]) if ln["v"] == "T" else [(ln["v"], ln["say"])]
+    clip, bounds, gap = [], [], np.zeros(int(SEG_GAP * SR), np.float32)
+    t = 0.0
+    for j, (k, text) in enumerate(segs):
+        if k == "P":
+            clip.append(np.zeros(int(0.22 * SR), np.float32)); t += 0.22
+            continue
+        mp3 = f"{base}-{j}.mp3"
+        if not os.path.exists(mp3 + ".json"):
+            await tts(text, voices[k], *PROSODY[k], mp3)
+        c, cut = trim(decode(mp3))
+        if j and segs[j - 1][0] not in (k, "P"):
+            clip.append(gap); t += SEG_GAP
+        for off, d, tok in json.load(open(mp3 + ".json", encoding="utf-8")):
+            bounds.append([t + off - cut, d, tok])
+        clip.append(c); t += len(c) / SR
+    return (np.concatenate(clip) if clip else np.zeros(0, np.float32)), bounds
+
+
+def trim(c, thr=0.01):
+    """Cut leading/trailing silence edge-tts adds around each clip (keeps segment joins tight)."""
+    idx = np.where(np.abs(c) > thr)[0]
+    if not len(idx):
+        return c, 0.0
+    a, b = max(0, idx[0] - int(0.02 * SR)), min(len(c), idx[-1] + int(0.06 * SR))
+    return c[a:b], a / SR
+
+
+async def tts(text, voice, rate, pitch, path):
     import edge_tts
     for attempt in range(4):
         try:
-            com = edge_tts.Communicate(text, voice, rate=rate, boundary="WordBoundary")
+            com = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch, boundary="WordBoundary")
             audio, bounds = bytearray(), []
             async for ch in com.stream():
                 if ch["type"] == "audio":
@@ -364,11 +413,7 @@ async def main():
             if fake:
                 clip = np.zeros(int(len(ln["say"]) * (0.065 if ln["v"] != "T" else 0.18) * SR), np.float32)
             else:
-                mp3 = os.path.join(work, f"a{i:03d}.mp3")
-                if not os.path.exists(mp3 + ".json"):
-                    await tts(ln["say"], lesson["voices"][ln["v"]], RATE[ln["v"]], mp3)
-                clip = decode(mp3)
-                bounds = json.load(open(mp3 + ".json", encoding="utf-8"))
+                clip, bounds = await voice_line(ln, lesson["voices"], os.path.join(work, f"a{i:03d}"))
         speech = len(clip) / SR
         lead = LEAD if first and i > 0 else 0.15
         dur = lead + (speech + GAP if speech else float(ln.get("pause", 1)))
