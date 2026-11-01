@@ -140,7 +140,7 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
       }
       case "phrase":
         return `<div class="num" style="${E("pop", 0.1)}">${esc(s.num)}</div>`
-          + `<div class="phrase" style="font-size:${fit(s.phrase, 190)}px;${E("pop", 0.4, 0.7)}">${esc(s.phrase)}</div>`
+          + `<div class="phrase" style="font-size:${fit(s.phrase, [...s.phrase].length > 14 ? 130 : 190)}px;${E("pop", 0.4, 0.7)}">${esc(s.phrase)}</div>`
           + (s.pron ? `<div class="pron" style="${E("up", 0.9)}">${esc(s.pron)}</div>` : "")
           + `<div class="meaning" style="${E("up", 1.1)}">${esc(s.meaning)}</div>` + circle(470, 1.5, "margin-top:46px;");
       case "grammar":
