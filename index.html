@@ -827,7 +827,7 @@ body.onb-open{overflow:hidden}
 .onb-back{position:absolute;top:8px;left:10px;background:none;border:0;color:var(--muted);font-size:28px;line-height:1;padding:4px 10px}
 .onb-coach{background:color-mix(in srgb,var(--accent) 12%,var(--card));border-color:color-mix(in srgb,var(--accent) 40%,var(--line));font-weight:600;font-size:14px}
 .ds-tiles .stat small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
-.srs-card{display:flex;flex-direction:column;gap:8px}.srs-top{display:flex;align-items:center;gap:12px}.srs-top>div:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.srs-ic{font-size:28px}
+.srs-card{display:flex;flex-direction:column;gap:8px}.wk-card{display:flex;flex-direction:column;gap:10px}.wk-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.wk-bar i{display:block;height:100%;background:var(--gorse);border-radius:99px}.wk-sec{display:flex;flex-direction:column;gap:4px}.wk-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.wk-row:first-of-type{border-top:0}.wk-st{white-space:nowrap;text-align:right}.wk-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.wk-stats b{display:block;font-size:22px;font-variant-numeric:tabular-nums}.wk-pos{display:grid;grid-template-columns:118px 1fr 44px;align-items:center;gap:8px;padding:4px 0}.wk-pos .wk-bar i{background:var(--good)}.wk-pos.low .wk-bar i{background:var(--bad)}.wk-pos .chip{white-space:nowrap}.wk-pos>span:last-child{text-align:right;font-variant-numeric:tabular-nums}.srs-top{display:flex;align-items:center;gap:12px}.srs-top>div:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.srs-ic{font-size:28px}
 .srs-boxes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:74px;margin-top:4px}
 .srs-boxes span{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:11px}
 .srs-boxes i{display:block;width:100%;height:var(--h);border-radius:6px 6px 3px 3px;background:color-mix(in srgb,var(--accent) 70%,var(--card));opacity:.85}
@@ -1207,6 +1207,9 @@ body.vp-lock{touch-action:pan-x pan-y}
 #advMenu.closing .adv-menu.pm-right{animation-name:pmOut}
 @keyframes pmOut{to{opacity:0;transform:translateY(12px) scale(.6)}}
 .adv-menu.pm-right::after{left:auto;right:calc(10% - 7px);margin-left:0}
+.adv-menu.pm-left{left:max(12px,calc(30vw - 110px));width:min(220px,calc(100% - 24px));transform:none;transform-origin:30% calc(100% + 14px);animation-name:pmIn}
+#advMenu.closing .adv-menu.pm-left{animation-name:pmOut}
+.adv-menu.pm-left::after{left:calc(30vw - max(12px,calc(30vw - 110px)) - 7px);margin-left:0}
 .pg-back{display:flex;align-items:center;gap:10px;justify-content:space-between;border-color:var(--accent)}
 .du-fx{position:absolute;inset:0;pointer-events:none;z-index:6}
 .du-stage{position:relative;height:124px;display:block}
@@ -1256,6 +1259,49 @@ body.vp-lock{touch-action:pan-x pan-y}
 .dr-k.wide{max-width:58px;flex:1.6;font-size:14px}
 .dr-k.go{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .dr-k:disabled,.dr-k.go.off{opacity:.45}
+/* root rush */
+.pg-full #pgRtArena{flex:1 1 auto;min-height:0;display:flex}
+.rt-top{display:flex;flex-direction:column;gap:4px}
+.rt-sec{font-size:14px;font-variant-numeric:tabular-nums}
+.rt-bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.rt-bar i{display:block;height:100%;background:var(--accent);border-radius:999px;transition:width .25s linear}
+.rt-bar.intro i{background:var(--gorse)}.rt-bar.rev i{background:var(--muted)}.rt-bar.crit i{background:var(--bad)}
+.rt-arena{flex:1;display:grid;grid-template-columns:29% 1fr 29%;gap:4px;width:100%;min-height:0}
+.rt-side{display:flex;flex-direction:column;justify-content:space-evenly;align-items:center;gap:2px;min-width:0}
+.rt-pl{display:flex;flex-direction:column;align-items:center;gap:1px;width:100%;min-width:0}
+.rt-fig{width:104px;height:104px}.rt-side.n2 .rt-fig{width:76px;height:76px}.rt-side.n3 .rt-fig{width:56px;height:56px}
+.rt-side.n1 .rt-bub{font-size:16px;padding:6px 10px}.rt-side.n3 .rt-bub{font-size:13px;padding:4px 6px}
+.rt-fig .ha-in{width:100%;height:100%}
+.rt-side.r .rt-fig{transform:scaleX(-1)}
+.rt-pl .pg-chip{max-width:100%;padding:2px 7px;font-size:12px}.rt-pl .pg-chip b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:72px}
+.rt-bub{position:relative;max-width:100%;min-width:40px;padding:5px 8px;border-radius:12px;background:var(--card);border:2px solid var(--line);font-size:14px;font-weight:700;text-align:center;line-height:1.15;overflow-wrap:anywhere;margin-bottom:5px}
+.rt-bub::after{content:"";position:absolute;bottom:-7px;width:10px;height:10px;background:inherit;border:inherit;border-top:0;border-left:0;transform:rotate(45deg)}
+.rt-side.l .rt-bub{align-self:flex-end;margin-right:2px}.rt-side.l .rt-bub::after{left:12px}
+.rt-side.r .rt-bub{align-self:flex-start;margin-left:2px}.rt-side.r .rt-bub::after{right:12px;transform:rotate(45deg)}
+.rt-bub b{color:var(--accent)}.rt-bub i{display:block;font-style:normal;font-size:11px;color:var(--good)}
+.rt-pl.ok .rt-bub{border-color:var(--good);background:var(--good-soft);animation:rtpop .35s ease-out}
+.rt-pl.clash .rt-bub{border-color:var(--bad);background:var(--bad-soft);text-decoration:line-through}
+.rt-pl.deal .rt-bub{border-color:var(--gorse);background:var(--gorse-soft)}
+.rt-pl.none .rt-bub{opacity:.7}
+.rt-mid{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.rt-card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px 8px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 4px 0 var(--line)}
+.rt-card.deal{border-color:var(--gorse)}
+.rt-card.pop{animation:rtpop .45s cubic-bezier(.2,1.6,.4,1)}
+.rt-aff{font-size:34px;font-weight:900;letter-spacing:.5px;color:var(--accent);line-height:1.1;word-break:break-all}.rt-aff.sm{font-size:24px}
+.rt-mean{margin:0;font-size:14px;font-weight:700;line-height:1.3}
+.rt-dice{font-size:40px;animation:rtroll .8s linear infinite}
+.rt-bonus{margin:2px 0;font-size:13px;font-weight:800;color:var(--good)}
+.rt-more{list-style:none;margin:0;padding:0;width:100%;display:flex;flex-direction:column;gap:3px;text-align:left}
+.rt-more li{display:flex;flex-direction:column;padding:3px 6px;border-radius:8px;background:var(--paper);font-size:14px;line-height:1.15;word-break:break-all}
+.rt-more li b{color:var(--accent)}.rt-more small{color:var(--muted);font-size:11px}
+.rt-input{display:flex;justify-content:center;align-items:center;min-height:44px;margin:2px 0 4px;padding:4px 10px;border:2px solid var(--accent);border-radius:12px;background:var(--card);font-size:24px;font-weight:900;letter-spacing:1px;word-break:break-all}
+.rt-input b{color:var(--accent);opacity:.75}.rt-input .rt-typed{color:var(--ink)}
+.rt-caret{display:inline-block;width:2px;height:26px;background:var(--ink);margin:0 1px;animation:rtblink 1s steps(1) infinite}
+.rt-input.shake{animation:shake .4s}
+@keyframes rtpop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes rtroll{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes rtblink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.rt-card.pop,.rt-pl.ok .rt-bub,.rt-dice,.rt-caret{animation:none}}
 </style>
 
 </head>
@@ -1266,9 +1312,9 @@ body.vp-lock{touch-action:pan-x pan-y}
 </div>
 <nav class="tabs" aria-label="Main menu">
   <button id="tab-today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>今日</span></button>
-  <button id="tab-dict" data-tab="dict"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>字典</span></button>
+  <button id="tab-read" aria-haspopup="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>閱讀</span></button>
   <button id="tab-adv" data-tab="adv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 3.5l6 6-9 9-3-3z"/><path d="M8.5 15.5l-5 5M5 14l5 5"/></svg><span>冒險</span></button>
-  <button id="tab-arch" data-tab="arch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></svg><span>文章</span></button>
+  <button id="tab-lsn" data-tab="lsn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M7 20l2-4M17 20l-2-4M7 8h6M7 11h4"/><path d="M16 8.5l2 1.5-2 1.5"/></svg><span>小教室</span></button>
   <button id="tab-play" data-tab="play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 8h10a4 4 0 0 1 3.9 4.9l-.8 3.4a2.5 2.5 0 0 1-4.3 1.1L14 15.5h-4l-1.8 1.9a2.5 2.5 0 0 1-4.3-1.1l-.8-3.4A4 4 0 0 1 7 8z"/><path d="M8 11v3M6.5 12.5h3"/><circle cx="15.5" cy="11.5" r=".9" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".9" fill="currentColor"/></svg><span>多人遊戲</span></button>
 </nav>
 <div id="overlay"></div>
@@ -1522,7 +1568,7 @@ function setLang(k){ const was=SC; SC=k==="cn"; LANG=SC?"zh":k; try{ localStorag
   if(was&&!SC){ location.reload(); return; } applyStaticText(); render(); scApply(); }
 function applyStaticText(){
   const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
-  set("tab-today",T("tabToday")); set("tab-dict",T("tabDict")); set("tab-adv",T("tabAdv")); set("tab-arch",T("tabArch")); set("tab-play",T("tabPlay")); { const sb=document.getElementById("setBtn"); if(sb) sb.setAttribute("aria-label",T("tabSet")); }
+  set("tab-today",T("tabToday")); set("tab-read",T("tabRead")); set("tab-adv",T("tabAdv")); set("tab-lsn",T("lsnTab")); set("tab-play",T("tabPlay")); { const sb=document.getElementById("setBtn"); if(sb) sb.setAttribute("aria-label",T("tabSet")); }
   { const hb=document.getElementById("helpBtn"); if(hb) hb.setAttribute("aria-label",(HELP[LANG]||HELP.en).title); }
   const n=document.querySelector("nav.tabs"); if(n) n.setAttribute("aria-label",T("mainMenu"));
   const vb=document.getElementById("levelBtn"); if(vb){ vb.textContent=LEVEL; vb.setAttribute("aria-label",T("level")); }
@@ -1704,7 +1750,7 @@ function vpApply(){ const lock=S.view==="play"; if(lock===VP_LOCK) return; VP_LO
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{ if(VP_LOCK) e.preventDefault(); },{passive:false}));   // iOS Safari ignores user-scalable=no
 function renderInner(){
   vpApply();
-  document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>{ b.setAttribute("aria-current", b.dataset.tab===S.tab?"page":"false"); b.classList.toggle("locked", !!(b.dataset.tab&&featLock(b.dataset.tab))); });
+  document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>{ b.setAttribute("aria-current", (b.id==="tab-read"?(S.tab==="dict"||S.tab==="arch"):b.dataset.tab===S.tab)?"page":"false"); b.classList.toggle("locked", !!(b.dataset.tab&&featLock(b.dataset.tab))); });
   if(typeof readStopIfLeft==="function") readStopIfLeft(); setTimeout(()=>{ if(typeof pgLockSync==="function") pgLockSync(); },0);
   { const g=game(); const tt=PLANS_ON?0:streakTier(); $("#mastInfo").innerHTML = (tt?`<span class="mast-tt" title="${esc(T("lgTitleN",{t:titleName(tt)}))}">${sbArt(tt,18,false)}</span>`:"")+T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}).split(" · ").map(x=>`<span style="white-space:nowrap">${x}</span>`).join(" · "); }
   const app=$("#app");
@@ -1714,7 +1760,9 @@ function renderInner(){
   else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
   else if(S.view==="arch"){ const l=$("#archList"); if(l && document.activeElement && document.activeElement.id==="archSearch") l.innerHTML=archList(); else app.innerHTML=viewArch(); }
   else if(S.view==="set") app.innerHTML=viewSettings();
+  else if(S.view==="weak") app.innerHTML=viewWeak();
   else if(S.view==="play") app.innerHTML=viewPlay();
+  else if(S.view==="lsn") app.innerHTML=viewLsn();
   else if(S.view==="privacy") app.innerHTML=viewPrivacy();
   else if(S.view==="adv") app.innerHTML=viewAdv();
   else if(S.view==="battle") app.innerHTML=viewBattle();
@@ -1805,6 +1853,7 @@ function viewDict(){
   return `<div class="view">
     <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
     ${srsCard()}
+    ${weakCard()}
     <input id="dictSearch" class="search" type="search" placeholder="${T("search")}" value="${esc(S.dictQ)}" autocomplete="off">
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
@@ -1955,6 +2004,7 @@ function record(surface,g,ex,art){
     :{type:"word", key, word:lemma, zh:g.zh, pos:g.pos||"", forms:[...forms], example:ex, exampleZh:sentZhIn(art,ex)||null, articleDate:art.date, firstSeen:now, lookups:1, lastLookup:new Date().toISOString(), correct:0, wrong:0, lastTested:null, note:g.note||null, noteHi:g.noteHi||null, noteEn:g.noteEn||null, noteEs:g.noteEs||null, noteJa:g.noteJa||null, noteKo:g.noteKo||null, hi:g.hi||"", en:g.en||"", es:g.es||"", ja:g.ja||"", ko:g.ko||""};
   persist(key,rec);
   S.sheet.rec=rec; S.sheet.isNew=!old;
+  if(!old){ const wn=wkWords().length; if(wn&&wn%WK_STEP===0) setTimeout(()=>toast(T("wkToast",{n:wn})),600); }
   const d=dayRec(), ll=lemma.toLowerCase();
   if(isMain(art)){ if(!(d.lookedUp||[]).includes(ll)) saveDay({...d, lookedUp:[...(d.lookedUp||[]), ll]}); }
   else { const by={...(d.lookedUpBy||{})}; const cur=by[art.id]||[]; if(!cur.includes(ll)){ by[art.id]=[...cur,ll]; saveDay({...d, lookedUpBy:by}); } }
@@ -2100,6 +2150,7 @@ function startQuiz(kind, art){
   if(kind==="pre"){ const el=eligible(), due=srsDueList().filter(w=>w.firstSeen<today()).slice(0,10), dk=new Set(due.map(w=>w.key)); words=due.concat(weightedPick(el.filter(w=>!dk.has(w.key)), Math.max(0,Math.min(10,el.length)-due.length)));
     // a short dictionary should not mean an easy reward: top up to 10 with hard words from today's headline
     const ma=mainArticle(); if(words.length&&words.length<10&&ma) words=words.concat(fillerWords(ma, words.map(w=>(w.word||"").toLowerCase()), 10-words.length)); }
+  else if(kind==="weak"){ words=wkAnalyze().train; if(!words.length) return toast(T("wkNoWeak")); }
   else if(kind==="srs"){ words=srsDueList().slice(0,SRS_MAX); if(!words.length) return toast(T("srsNone")); }
   else if(kind==="rev"){ const all=[...S.words.values()]; if(all.length<LUCK.reviewMinWords) return toast(T("revNeed",{n:LUCK.reviewMinWords})); words=weightedPick(all, Math.min(LUCK.reviewQ, all.length)); }
   else {
@@ -2123,7 +2174,7 @@ function finishPost(art, score, total){
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
-  const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):T("postTitle");
+  const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):Q.kind==="weak"?T("wkTrainT"):T("postTitle");
   if(Q.i>=Q.qs.length&&Q.kind==="lvl"){
     const nm=k=>k==="IELTS"?"IELTS 7–8":k;
     return `<div class="view"><div class="card lvt-res"><img src="assets/art/scene-win.webp" alt="" class="qd-art"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${esc(nm(Q.lvl))}</div><div>${T("lv"+Q.lvl)}</div><p class="muted sm-t">${T("lvtSet")}</p></div>
@@ -2134,11 +2185,11 @@ function viewQuiz(){
   }
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
+    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card quiz-done"><img src="assets/art/${Q.score>=Q.qs.length*0.7?"scene-win":"scene-quiz"}.webp" alt="" class="qd-art"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
       ${Q.kind==="lvl"?"":`<div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>`}${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
-      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
+      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="weak"?`<div class="card muted sm-t">${T("wkTrainNote")}</div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
@@ -2171,6 +2222,7 @@ function pick(i){
     if(Q.kind==="lvl"){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     else if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardSrs(Q.score):null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
+    else if(Q.kind==="weak"){ Q.reward=null; }   // practice only: no ticket, so it cannot be farmed
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art),art); }
   }
@@ -3086,15 +3138,19 @@ function advMenuHtml(){ const cur=S.tab==="adv"?(ADV_PAGES[S.advTab]?S.advTab:"g
 const PLAY_MENU=[["party","🎉","pmParty"],["duo","⚔️","pmDuo"]];
 function playMenuHtml(){ const cur=S.view==="play"?(S.playMode||"party"):null;
   return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-right" role="menu">${PLAY_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${cur===k?" on":""}" data-act="pmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
+const READ_MENU=[["dict","📖","tabDict"],["arch","📰","tabArch"]];
+function readMenuHtml(){ return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-left" role="menu">${READ_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${S.tab===k?" on":""}" data-act="rmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
 function advMenuToggle(open, kind){ let el=document.getElementById("advMenu"); const k=kind||"adv", shown=el&&!el.classList.contains("closing")&&el.dataset.k===k, on=open!=null?open:!shown;
   if(!on){ if(el&&!el.classList.contains("closing")){ el.classList.add("closing"); setTimeout(()=>{ if(el.classList.contains("closing")) el.remove(); },190); } return; }
-  if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.classList.remove("closing"); el.dataset.k=k; el.innerHTML=k==="play"?playMenuHtml():advMenuHtml(); }
+  if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.classList.remove("closing"); el.dataset.k=k; el.innerHTML=k==="play"?playMenuHtml():k==="read"?readMenuHtml():advMenuHtml(); }
 document.addEventListener("click",e=>{
   const nav=e.target.closest("#tab-adv"); if(nav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(); return; }
+  const rnav=e.target.closest("#tab-read"); if(rnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(undefined,"read"); return; }
   const pnav=e.target.closest("#tab-play"); if(pnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(undefined,"play"); return; }
   if(e.target.closest("[data-tab]")) advMenuToggle(false);   // another bottom tab: close the menu and go there
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
   if(a==="amclose"){ e.stopPropagation(); advMenuToggle(false); return; }
+  if(a==="rmgo"){ e.stopPropagation(); advMenuToggle(false); setTab(t.dataset.k); return; }
   if(a==="pmgo"){ e.stopPropagation(); advMenuToggle(false); S.playMode=t.dataset.k; S.tab="play"; S.view="play"; S.open=null; render(); window.scrollTo(0,0); return; }
   if(a==="amgo"){ e.stopPropagation(); const k=t.dataset.k, lk=featLock(k); if(lk){ toast("🔒 "+T(lk)); return; } advMenuToggle(false);
     S.quiz=null; S.battle=null; if(S.view==="ielts"){ ieStopAudio(); S.ieResult=null; } if(S.view==="toeic"){ toStop(); S.toResult=null; }
@@ -3455,7 +3511,7 @@ function devStatsHtml(){
     <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
     <div class="eyebrow">🎮 ${T("dsGames")}</div>
-    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["duel","duName"],["draw","drName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
+    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["root","rtName"],["duel","duName"],["draw","drName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
     ${devRetHtml(D.act)}
     ${devPushHtml(D.push)}
     <div class="eyebrow">${T("dsRegions")}</div>
@@ -3603,7 +3659,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.7";
+const APP_VERSION="2026.11.10";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4053,6 +4109,8 @@ document.addEventListener("click", e=>{
   if(a==="delgo") return deleteAccount();
   if(a==="nickedit"){ S.nickEdit=true; return render(); }
   if(a==="srs") return startQuiz("srs");
+  if(a==="weak"){ S.view="weak"; S.tab="dict"; render(); window.scrollTo(0,0); return; }
+  if(a==="wktrain") return startQuiz("weak");
   if(a==="readgo") return READ.on?(READ.paused?readResume():readPause()):readStart();
   if(a==="readstop") return readStop();
   if(a==="readrate"){ const i=(READ_RATES.indexOf(READ.rate)+1)%READ_RATES.length; READ.rate=READ_RATES[i]; try{ localStorage.setItem("che-pro-rrate",READ.rate); }catch(e){} if(READ.audio) READ.audio.playbackRate=READ.rate; else if(READ.on&&!READ.paused){ readPause(); readResume(); } return readUi(); }
@@ -4134,7 +4192,7 @@ document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.part
     if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
     if(e.key==="Backspace"){ e.preventDefault(); D.sel.pop(); duPush(); return pgRender(); }
     if(/^[a-z]$/i.test(e.key)){ const k=D.hand.findIndex((c,i)=>c===e.key.toLowerCase()&&!D.sel.includes(i)); if(k>=0){ e.preventDefault(); return duPick(k); } } }
-  if(S.pg&&S.view==="play"&&["party","duo"].includes(S.playMode||"party")&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k))){ e.preventDefault(); return; } } if(S.pg&&S.pg.party&&S.pg.party.game==="draw"&&S.pg.party.state==="play"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":/^[a-z]$/i.test(e.key)?e.key.toLowerCase():""; if(k){ e.preventDefault(); drKey(k); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
+  if(S.pg&&S.view==="play"&&["party","duo"].includes(S.playMode||"party")&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":e.key.length===1?e.key.toLowerCase():""; if(k&&(wdKey(k)||bmKey(k)||rtKey(k))){ e.preventDefault(); return; } } if(S.pg&&S.pg.party&&S.pg.party.game==="draw"&&S.pg.party.state==="play"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const k=e.key==="Enter"?"enter":e.key==="Backspace"?"back":/^[a-z]$/i.test(e.key)?e.key.toLowerCase():""; if(k){ e.preventDefault(); drKey(k); return; } } if(e.key==="Enter"&&e.target.id==="pgCode"){ pgJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="coCode"){ coJoin(e.target.value); return; } if(e.key==="Enter"&&e.target.id==="devCode"){ devUnlock(); return; } if(e.key==="Enter"&&e.target.id==="nickIn"){ document.querySelector("[data-act=nicksave]").click(); return; } });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S.helpSheet=false; renderSheet(); return; } if(e.key==="Escape" && S.sheet){ S.sheet=null; renderSheet(); } });
 
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
@@ -4599,8 +4657,8 @@ function coInner(){
   return head+`<p class="muted sm-t">${T("coRead")} · ${T("coMissLeft",{n:CO_MISSES-miss})}</p><article class="article co-text">${body}</article>`;
 }
 function coBossSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="54" r="34" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6"/><path d="M24 30 L30 12 L40 26 M76 30 L70 12 L60 26" fill="#7A3E9D" stroke="#1B2421" stroke-width="2.6" stroke-linejoin="round"/><circle cx="38" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="62" cy="48" r="7" fill="#fff" stroke="#1B2421" stroke-width="2"/><circle cx="39" cy="49" r="3" fill="#1B2421"/><circle cx="63" cy="49" r="3" fill="#1B2421"/><path d="M34 68 Q50 60 66 68" fill="none" stroke="#1B2421" stroke-width="2.6"/><text x="50" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#F0BE45" font-family="Georgia,serif">teh</text></svg>`; }
-function viewCoop(){ const m=["toeic","lesson"].includes(S.compMode)?S.compMode:"ielts";
-  return `<div class="seg exam-seg" role="group"><button data-act="compmode" data-k="lesson" aria-pressed="${m==="lesson"}">📚 ${T("lsnTab")}</button><button data-act="compmode" data-k="ielts" aria-pressed="${m==="ielts"}">🎓 IELTS</button><button data-act="compmode" data-k="toeic" aria-pressed="${m==="toeic"}">💼 TOEIC</button></div><div class="ie-lobby">${m==="toeic"?toLobby():m==="lesson"?lsnLobby():ieLobby()}</div>`; }
+function viewCoop(){ const m=S.compMode==="toeic"?"toeic":"ielts";
+  return `<div class="seg exam-seg" role="group"><button data-act="compmode" data-k="ielts" aria-pressed="${m==="ielts"}">🎓 IELTS</button><button data-act="compmode" data-k="toeic" aria-pressed="${m==="toeic"}">💼 TOEIC</button></div><div class="ie-lobby">${m==="toeic"?toLobby():ieLobby()}</div>`; }
 // multiplayer games get their own bottom tab (open to everyone from day one)
 function viewPlay(){
   if(!["party","duo"].includes(S.playMode)) S.playMode="party"; const duo=S.playMode==="duo";
@@ -4645,7 +4703,7 @@ const PG_LOCAL_FS={ setDoc:async(r,d,opt)=>pgLocalApply(r.path,JSON.parse(JSON.s
   deleteDoc:async()=>{}, deleteField:()=>undefined,
   runTransaction:async(db,fn)=>fn({get:async r=>{ const parts=r.path.split("/"); const d=parts.length<=2?S.pg.party:S.pg.ps[parts[3]]; return {exists:()=>!!d, data:()=>JSON.parse(JSON.stringify(d||{}))}; }, update:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"update"), set:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"set")}) };
 function pgBotRoom(kind){ if(!DEV) return; pgStop(); const s=stats(), now=Date.now(), j=x=>Math.round(x*(0.9+Math.random()*0.2));
-  S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖"}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
+  S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:kind==="root"?2:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖"}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
   pgLoadWords(); pgRender(true); }
 const pgNameLocal=()=>(game().nick||"Player").slice(0,16);
 function botWord(min,max){ const L=[...(PG_WORDS||[])].filter(w=>w.length>=min&&w.length<=max&&/^[a-z]+$/.test(w)); return L.length?L[Math.floor(Math.random()*L.length)]:"cat"; }
@@ -4659,6 +4717,7 @@ function botTick(){ const pg=S.pg, P=pg&&pg.party; if(!pg||!pg.local||!P||P.stat
     if(now>=B.next&&now<P.start+DU.total*1000){ B.next=now+4500+Math.random()*4000; const w=botWord(3,Math.random()<0.3?7:5), avg=k=>(pg.D.st[k]+b.st[k])/2;
       const m=duClamp(Math.pow((b.st.atk/avg("atk"))/(pg.D.st.def/avg("def")),0.3),0.88,1.15), h=Math.max(1,Math.round(duBase(w.length)*m)); b.words.push(w);
       pgLocalApply("parties/BOT/p/me",{["gifts.b"+now]:{h, w, f:PG_BOT, at:now}},"update"); } return; }
+  if(P.game==="root") return rtBotTick(now);
   if(P.game==="draw"){ if(now<P.start) return; const C=drCur(), F=drPhase(now), d=drDealer(C.i), key=C.i+"-"+drPhNum(F.k);
     if(d===PG_BOT&&(F.k==="d1"||F.k==="d2")){ const W=drWord(C.i).w, pts=B.dots&&B.dots.w===W?B.dots.st:(B.dots={w:W, st:botDots(W)}).st, frac=Math.min(1,(now-(F.k==="d1"?F.L.d1:F.L.d2))/(DR.draw*0.8));
       const n=Math.ceil(pts.length*frac); if(B.drn!==key+":"+n){ B.drn=key+":"+n; b.dr={k:key, s:drEnc(pts.slice(0,n))}; } }
@@ -4676,7 +4735,7 @@ async function pgCreate(kind){
   try{
     let code;
     for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await fsM.getDoc(pgRef(code)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
-    await fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}});
+    await fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}, ...(kind==="root"?{rr:2}:{})});
     await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
     S.pgBusy=null; pgListen(code);
   }catch(e){ S.pgBusy=null; toast(T("syncFail")); pgRender(); }
@@ -4709,7 +4768,7 @@ function pgListen(code){
     me.party=safeDoc(snap.data());
     for(const u of Object.keys(me.party.players||{})) if(!me.subbed[u]){ me.subbed[u]=1; me.unsubs.push(fsM.onSnapshot(pgRef(code,"p",u), s=>{ if(S.pg!==me) return; me.ps[u]=s.exists()?safeDoc(s.data()):{}; if(u===pgMe()) pgGifts(); pgRender(); }, ()=>{})); }
     if(me.party.state==="play"&&me.party.game==="spell"&&me.party.words&&!me.seenSaved){ me.seenSaved=1; pgSeenAdd("sp",me.party.words.map(o=>o.w),300); }
-    if(me.party.state==="play"){ pgLoadWords(); if(me.party.game==="bomb") pgLoadSyl(); if(me.party.game==="quiz") pgLoadQuiz(); }
+    if(me.party.state==="play"){ pgLoadWords(); if(me.party.game==="bomb") pgLoadSyl(); if(me.party.game==="quiz") pgLoadQuiz(); if(me.party.game==="root"){ rtLoad(); rtLoadExtra(); } }
     if(me.party.state==="done") pgFinish();
     pgTickStart(); pgRender();
   }, ()=>{}));
@@ -4728,7 +4787,7 @@ async function pgLeave(){
 async function pgStartGame(){
   const pg=S.pg; if(!pg||!pg.party||pg.party.host!==pgMe()||pg.party.state!=="wait") return;
   if(pg.party.game==="duel"&&Object.keys(pg.party.players||{}).length!==2) return toast(T("duNeed2"));
-  if(pg.party.game==="draw"&&Object.keys(pg.party.players||{}).length<2) return toast(T("drNeed2"));
+  if((pg.party.game==="draw"||pg.party.game==="root")&&Object.keys(pg.party.players||{}).length<2) return toast(T("drNeed2"));
   const fsM=pgFs(); const P=pg.party, up={state:"play", start:Date.now()+3500, seed:String(Math.floor(Math.random()*1e9))};
   if(P.game==="spell"){
     await pgLoadMean();
@@ -4749,6 +4808,8 @@ async function pgStartGame(){
     const seen=new Set(pgSeen().sp); for(const u of ids) for(const w of ((pg.ps[u]||{}).seenSp||[])) seen.add(w);
     up.words=[...pgShuffle(pool.filter(o=>!seen.has(o.w))), ...pgShuffle(pool.filter(o=>seen.has(o.w)))].slice(0,n);
     up.order=pgShuffle([...ids]); up.rr=P.rr||1; up.dm=P.dm==="c"?"c":"n"; up.cur={i:0, ts:up.start}; }
+  if(P.game==="root"){ const ids=Object.keys(P.players||{}), rr=P.rr||2, lib=await rtLoad(); if(!lib.length) return toast(T("loading"));
+    up.affs=pgShuffle([...lib]).slice(0,Math.min(lib.length,rr*ids.length)); up.order=pgShuffle([...ids]); up.rr=rr; up.cur={i:0, ts:up.start}; }
   if(P.game==="hunt"){ const h=await huInit(P, up); if(!h.hu) return toast(T("loading")); Object.assign(up, h); }
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
 }
@@ -4758,7 +4819,7 @@ function pgTickStart(){ if(S.pgTimer) return; S.pgTimer=setInterval(pgTick,250);
 function pgTick(){
   const pg=S.pg; if(!pg||!pg.party){ clearInterval(S.pgTimer); S.pgTimer=null; return; }
   const P=pg.party; if(P.state!=="play"){ if(P.state==="done"){ clearInterval(S.pgTimer); S.pgTimer=null; } return; }
-  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick, draw:drTick}[P.game]||pgDropTick)();
+  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick, draw:drTick, root:rtTick}[P.game]||pgDropTick)();
   if(pg.local) botTick();
   pgRender();
 }
@@ -5359,6 +5420,7 @@ function pgRows(){
   if(P.game==="hunt"){ const st=huState(); return ids.map(u=>{ const r=huRec(u), n=Object.values(st.found).filter(f=>f.u===u).length, m=r.hm||0; return {u, n, miss:m, score:Math.max(0,n*10-m*3)}; }).sort((a,b)=>b.score-a.score||b.n-a.n); }
   if(P.game==="duel") return duRows();
   if(P.game==="draw") return drRows();
+  if(P.game==="root") return rtRows();
   if(P.game==="quiz") return ids.map(u=>{ const p=u===pgMe()&&pg.Q?pg.Q:(pg.ps[u]||{}), gold=Math.round(p.gold||0), ok=p.ok||0, ng=p.ng||0; return {u, gold, ok, ng, best:p.best||0, acc:ok+ng?Math.round(ok/(ok+ng)*100):0, miss:p.miss||[], score:Math.min(120,Math.round(gold/25))}; }).sort((a,b)=>b.gold-a.gold||b.acc-a.acc);
   return ids.map(u=>{ const p=u===pgMe()&&pg.L?{words:pg.L.words,bad:pg.L.bad,pts:pg.L.pts,last:pg.L.last}:(pg.ps[u]||{}); return {u, words:p.words||[], bad:p.bad||[], score:p.pts||0, n:(p.words||[]).length}; }).sort((a,b)=>b.n-a.n||b.score-a.score);
 }
@@ -5379,7 +5441,7 @@ function pgFinish(){
 }
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
-  const gm=S.pg.party.game, lab=r=>gm==="draw"?T("pgPtsN",{n:r.score}):gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
+  const gm=S.pg.party.game, lab=r=>gm==="draw"||gm==="root"?T("pgPtsN",{n:r.score}):gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
   const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
@@ -5394,6 +5456,8 @@ function pgResults(){
     extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${(P.words||[]).map((W,k)=>{ const first=wdFirstT(P,k), fu=Object.keys(P.players).find(u=>wdRec(u,k).done==="win"&&wdRec(u,k).t===first); return `<div class="co-err"><span class="chip ${fu?"done":"new"}">${k+1}</span><div style="flex:1"><b>${esc(W.w)}</b> <span class="muted sm-t">${esc(W.pos||"")}</span> · ${spMeaning(W)}<div class="muted sm-t">${fu?T("wdFirst",{n:esc(pgNm(fu))}):T("pgNobody")}</div><div class="wd-emo">${Object.keys(P.players).map(u=>{ const r=wdRec(u,k); return `<div><small>${esc(pgNm(u))} ${r.done==="win"?r.g.length:"X"}/${WD.tries}</small><div>${wdEmoji(r,W.w)||"–"}</div></div>`; }).join("")}</div></div></div>`; }).join("")}</div>`;
   } else if(P.game==="draw"){
     ({stats, extra}=drResults(rows));
+  } else if(P.game==="root"){
+    ({stats, extra}=rtResults(rows));
   } else if(P.game==="duel"){
     pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
     ({stats, extra}=duResults(rows));
@@ -5483,32 +5547,142 @@ function huResults(){ const P=S.pg.party, H=P.hu||{errs:[],p:[]}, st=huState();
     <div class="hu-title">${huTitle(H)}</div><article class="article co-text">${huText(st,true)}</article>
     <h3>${T("huList")}</h3><div class="co-list">${H.errs.map(e=>{ const f=st.found[e.i]; return `<div class="co-err"><span class="chip ${f?"done":"new"}">${T(e.type==="spell"?"coTypeSpell":e.type==="form"?"coTypeForm":"coTypeConf")}</span><div><s>${esc(e.wrong)}</s> → <b>${esc(e.right)}</b>${f?` <span class="muted sm-t">· ${T("coFoundBy",{n:esc(pgNm(f.u))})}</span>`:` <span class="muted sm-t">· ${T("huMissed")}</span>`}<div class="muted sm-t">${huExplain(e)}</div></div></div>`; }).join("")}</div>`; }
 
+/* ----- game 8: root rush (2–6 players) — one player's phone pops a prefix or suffix, everyone else races to spell a word with it ----- */
+const RT={intro:4000, ans:20000, rev:10000, pts:[100,80,65,50,40], deal:50, show:6};
+let RT_LIB=null, RT_EXTRA=null, RT_EXP=null;
+async function rtLoad(){ if(RT_LIB) return RT_LIB; try{ RT_LIB=(await (await fetch("games/roots.json")).json()).r||[]; }catch(e){ RT_LIB=[]; } return RT_LIB; }
+// a bigger word list on top of games/words.txt (SCOWL size 60), so everyday words like "information" count
+function rtLoadExtra(){ if(!RT_EXP) RT_EXP=fetch("games/words-extra.txt").then(r=>r.text()).then(t=>{ RT_EXTRA=new Set(t.split("\n").map(x=>x.trim()).filter(Boolean)); }).catch(()=>{ RT_EXTRA=new Set(); }); return RT_EXP; }
+const rtReady=()=>!!(PG_WORDS&&PG_WORDS.size&&RT_EXTRA);
+const rtIsWord=w=>!PG_BLOCK.has(w)&&(PG_WORDS.has(w)||RT_EXTRA.has(w));
+const rtFits=(w,A)=>/^[a-z]+$/.test(w)&&w.length>=A.a.length+2&&(A.t==="p"?w.startsWith(A.a):w.endsWith(A.a));
+const rtLab=A=>A.t==="p"?A.a+"-":"-"+A.a;
+const rtMean=A=>esc(LANG==="zh"?A.zh:A.en);
+function rtCur(){ const P=S.pg.party; return P.cur||{i:0, ts:P.start}; }
+function rtPhase(now){ const C=rtCur(), a=C.ts+RT.intro, rv=Math.min(C.end||Infinity, a+RT.ans); return {k:now<a?"intro":now<rv?"ans":"rev", a, rv, next:rv+RT.rev}; }
+function rtOrder(){ const P=S.pg.party; return P.order||Object.keys(P.players||{}); }
+function rtDealer(i){ const o=rtOrder(); return o[i%o.length]; }
+function rtTotal(){ const P=S.pg.party; return Math.min((P.affs||[]).length, (P.rr||2)*rtOrder().length); }
+function rtAff(i){ return (S.pg.party.affs||[])[i]||{a:"?",t:"p",zh:"",en:"",ex:[]}; }
+function rtAnswerers(i){ const d=rtDealer(i); return Object.keys(S.pg.party.players||{}).filter(u=>u!==d); }
+function rtRa(u){ const pg=S.pg; return u===pgMe()&&pg.RA?pg.RA:((pg.ps[u]||{}).ra||{}); }
+function rtRec(u,i){ const r=rtRa(u)[i]; return r&&typeof r.w==="string"&&r.e<=RT.ans+500?r:null; }
+// valid answers of one round, fastest first; when two players send the same word only the earlier one counts
+function rtList(i){ const xs=rtAnswerers(i).map(u=>({u, r:rtRec(u,i)})).filter(x=>x.r).sort((a,b)=>a.r.e-b.r.e||(a.u<b.u?-1:1)), seen=new Set(), out=[];
+  for(const x of xs){ if(seen.has(x.r.w)) continue; seen.add(x.r.w); out.push({u:x.u, w:x.r.w, e:x.r.e, p:RT.pts[Math.min(out.length,RT.pts.length-1)]}); } return out; }
+function rtAllIn(i){ const L=rtList(i), a=rtAnswerers(i); return a.length>0&&a.every(u=>L.some(x=>x.u===u)); }
+function rtScores(){ const P=S.pg.party, sc={}; Object.keys(P.players||{}).forEach(u=>sc[u]=0);
+  const upto=P.state==="done"?rtTotal():Math.min(rtTotal(), rtCur().i+1);
+  for(let i=0;i<upto;i++){ for(const x of rtList(i)) if(x.u in sc) sc[x.u]+=x.p; const d=rtDealer(i); if(d in sc&&rtAllIn(i)) sc[d]+=RT.deal; } return sc; }
+function rtSubmit(){ const pg=S.pg, now=Date.now(), C=rtCur(), F=rtPhase(now); if(F.k!=="ans"||rtDealer(C.i)===pgMe()) return;
+  if(rtList(C.i).some(x=>x.u===pgMe())) return;
+  const A=rtAff(C.i), t=pg.rtTyped||"", w=A.t==="p"?A.a+t:t+A.a;
+  if(t.length<2) return toast(T("rtShort"));
+  if(!rtReady()){ pgLoadWords(); rtLoadExtra(); return toast(T("loading")); }
+  if(!rtIsWord(w)){ pg.shake=now; sfx(180,0.18,"sawtooth",0.06,120); pgRender(); return toast(T("pgInvalid")); }
+  const own=rtList(C.i).find(x=>x.w===w); if(own){ pg.shake=now; sfx(180,0.18,"sawtooth",0.06,120); pgRender(); return toast(T("rtTaken",{w, n:pgNm(own.u)})); }
+  pg.RA={...rtRa(pgMe()), [C.i]:{w, e:now-F.a}}; pg.rtTyped="";
+  pgFs().setDoc(pgRef(pg.code,"p",pgMe()),{n:pgName(), ra:pg.RA},{merge:true}).catch(()=>toast(T("syncFail")));
+  const me=rtList(C.i).find(x=>x.u===pgMe()); sfx(880,0.12,"triangle",0.08,1320); toast(T("rtGot",{w, p:me?me.p:0})); pgRender(); }
+function rtKey(k){ const pg=S.pg; if(!pg||!pg.party||pg.party.game!=="root"||pg.party.state!=="play") return false;
+  const F=rtPhase(Date.now()), C=rtCur(); if(F.k!=="ans"||rtDealer(C.i)===pgMe()||rtList(C.i).some(x=>x.u===pgMe())) return true;
+  let t=pg.rtTyped||""; if(k==="enter"){ rtSubmit(); return true; } if(k==="back") t=t.slice(0,-1); else if(/^[a-z]$/.test(k)&&t.length<18) t+=k; else return true;
+  pg.rtTyped=t; pgRender(); return true; }
+document.addEventListener("pointerdown",e=>{ const t=e.target.closest("[data-rtk]"); if(!t||t.disabled) return; e.preventDefault(); sfxUnlock(); rtKey(t.dataset.rtk); });
+function rtTick(){ const pg=S.pg, P=pg.party, now=Date.now(); if(!RT_EXTRA) rtLoadExtra(); if(now<P.start) return;
+  const C=rtCur(), F=rtPhase(now), host=P.host===pgMe();
+  if(pg.rtFor!==C.i){ pg.rtFor=C.i; pg.rtTyped=""; }
+  if(host&&!C.end&&F.k==="ans"&&rtAllIn(C.i)&&pg.rtEndSent!==C.i){ pg.rtEndSent=C.i; pgFs().updateDoc(pgRef(pg.code),{cur:{...C, end:now+800}}).catch(()=>{ pg.rtEndSent=null; }); }
+  if(F.k==="rev"&&now>=F.next&&(host||now>F.next+6000)) rtAdvance(C.i); }
+async function rtAdvance(i){ const pg=S.pg; if(pg.rtAdv===i) return; pg.rtAdv=i; const fsM=pgFs(), db=CLOUD.fb&&CLOUD.fb.db, ref=pgRef(pg.code);
+  try{ await fsM.runTransaction(db, async tx=>{ const s=await tx.get(ref); const d=s.exists()?s.data():null; if(!d||d.state!=="play") return; const c=d.cur||{i:0};
+    if(c.i!==i) return; const tot=Math.min((d.affs||[]).length, (d.rr||2)*((d.order||Object.keys(d.players||{})).length));
+    if(i+1>=tot) tx.update(ref,{state:"done", end:Date.now()}); else tx.update(ref,{cur:{i:i+1, ts:Date.now()+400}}); }); }
+  catch(e){ pg.rtAdv=null; } }
+function rtBotTick(now){ const pg=S.pg, B=pg.bot, b=pg.ps[PG_BOT], P=pg.party; if(now<P.start) return; const C=rtCur(), F=rtPhase(now);
+  if(F.k!=="ans"||rtDealer(C.i)===PG_BOT||rtList(C.i).some(x=>x.u===PG_BOT)) return;
+  if(!B.rt||B.rt.i!==C.i) B.rt={i:C.i, t:F.a+2500+Math.random()*11000, go:Math.random()<0.85};
+  if(!B.rt.go||now<B.rt.t||!rtReady()) return; B.rt.go=false;
+  const A=rtAff(C.i), taken=new Set(rtList(C.i).map(x=>x.w)), L=[...PG_WORDS].filter(w=>rtFits(w,A)&&w.length<=A.a.length+6&&!taken.has(w)&&!PG_BLOCK.has(w));
+  if(L.length) b.ra={...(b.ra||{}), [C.i]:{w:L[Math.floor(Math.random()*L.length)], e:now-F.a}}; }
+function rtWord(w,A){ if(!rtFits(w,A)) return esc(w); const n=A.a.length; return A.t==="p"?`<b>${esc(w.slice(0,n))}</b>${esc(w.slice(n))}`:`${esc(w.slice(0,-n))}<b>${esc(w.slice(-n))}</b>`; }
+function rtFig(u,pose){ const pg=S.pg, lk=u===pgMe()?myLook():(LOOKS[u]||(pg.ps[u]||{}).look||""); return lookArt(lk,"rt-fig",pose); }
+function rtPlayer(u,i,F,sc,L){ const d=rtDealer(i), A=rtAff(i), me=u===pgMe(), x=L.find(o=>o.u===u), rec=rtRec(u,i);
+  let bub, pose="idle", cls="";
+  if(u===d){ cls="deal"; pose=F.k==="intro"?"cast":"idle"; bub=F.k==="intro"?(me?`🎤 ${esc(rtLab(A))}`:"🎲 …"):`🎤 ${esc(rtLab(A))}`; }
+  else if(x){ pose="win"; cls="ok"; bub=`${rtWord(x.w,A)} <i>+${x.p}</i>`; }
+  else if(rec){ cls="clash"; bub=`💥 ${esc(rec.w)}`; }
+  else if(F.k==="rev"){ pose="hurt"; cls="none"; bub="😵"; }
+  else if(F.k==="intro") bub="👀";
+  else bub=me&&(S.pg.rtTyped||"")?"✍️":"🤔";
+  return `<div class="rt-pl ${cls}${me?" me":""}"><div class="rt-bub">${bub}</div>${rtFig(u,pose)}<div class="pg-chip${me?" me":""}"><b>${u===d?"🎤 ":""}${esc(pgNm(u))}</b><span>${sc[u]||0}</span></div></div>`; }
+function rtSections(){
+  const pg=S.pg, P=pg.party, now=Date.now();
+  if(now<P.start) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("rtSub")}</p></div>`]];
+  const C=rtCur(), F=rtPhase(now), d=rtDealer(C.i), amD=d===pgMe(), A=rtAff(C.i), sc=rtScores(), tot=rtTotal(), L=rtList(C.i);
+  if(pg.rtFor!==C.i){ pg.rtFor=C.i; pg.rtTyped=""; }
+  if(!pg.rtLooks){ pg.rtLooks=1; setTimeout(()=>lookFetch(Object.keys(P.players).filter(u=>u!==pgMe()&&u!==PG_BOT)),0); }
+  const until={intro:F.a, ans:F.rv, rev:F.next}[F.k], span={intro:RT.intro, ans:RT.ans, rev:RT.rev}[F.k], left=Math.max(0,until-now), secs=Math.ceil(left/1000);
+  const top=`<div class="rt-top"><div class="row" style="justify-content:space-between"><span class="eyebrow">${T("pgRound",{i:C.i+1,n:tot})} · 🎤 ${esc(pgNm(d))}</span><b class="rt-sec${F.k==="ans"&&secs<=5?" bad-t":""}">${T({intro:"rtPhIntro",ans:"rtPhAns",rev:"rtPhRev"}[F.k])} · ${secs}s</b></div><div class="rt-bar ${F.k}${F.k==="ans"&&secs<=5?" crit":""}"><i style="width:${(left/span*100).toFixed(1)}%"></i></div></div>`;
+  const kind=`<span class="chip">${T(A.t==="p"?"rtPre":"rtSuf")}</span>`;
+  let mid;
+  if(F.k==="intro") mid=amD?`<div class="rt-card pop deal"><div class="eyebrow">${T("rtYouDeal")}</div>${kind}<div class="rt-aff">${esc(rtLab(A))}</div><p class="rt-mean">${rtMean(A)}</p><p class="muted sm-t">${T("rtYouDealSub")}</p></div>`
+    :`<div class="rt-card"><div class="rt-dice">🎲</div><p class="sm-t">${T("rtTheyDeal",{n:esc(pgNm(d))})}</p></div>`;
+  else if(F.k==="ans") mid=`<div class="rt-card pop">${kind}<div class="rt-aff">${esc(rtLab(A))}</div><p class="rt-mean">${rtMean(A)}</p><p class="muted sm-t">${T("rtCount",{n:L.length,t:rtAnswerers(C.i).length})}</p></div>`;
+  else { const used=new Set(L.map(x=>x.w)), more=(A.ex||[]).filter(([w])=>!used.has(w)).slice(0,RT.show);
+    mid=`<div class="rt-card rev"><div class="rt-aff sm">${esc(rtLab(A))}</div><p class="rt-mean">${rtMean(A)}</p>${rtAllIn(C.i)?`<p class="rt-bonus">${T("rtAllBonus",{n:esc(pgNm(d)),p:RT.deal})}</p>`:L.length?"":`<p class="muted sm-t">${T("rtNobody")}</p>`}
+      ${more.length?`<div class="eyebrow">${T("rtMore")}</div><ul class="rt-more">${more.map(([w,z])=>`<li><span>${rtWord(w,A)}</span>${LANG==="zh"?`<small>${esc(z)}</small>`:""}</li>`).join("")}</ul>`:""}</div>`; }
+  const ids=rtOrder().filter(u=>u in (P.players||{})), lt=ids.filter((_,k)=>k%2===0), rt=ids.filter((_,k)=>k%2===1), side=(us,c)=>`<div class="rt-side ${c} n${Math.max(lt.length,rt.length)}">${us.map(u=>rtPlayer(u,C.i,F,sc,L)).join("")}</div>`;
+  const arena=`<div class="rt-arena">${side(lt,"l")}<div class="rt-mid">${mid}</div>${side(rt,"r")}</div>`;
+  let kb="";
+  const mine=L.find(x=>x.u===pgMe()), rec=rtRec(pgMe(),C.i);
+  if(F.k==="ans"&&!amD&&!mine){ const t=pg.rtTyped||"", shake=pg.shake&&now-pg.shake<500, clash=rec&&!mine?L.find(x=>x.w===rec.w):null;
+    kb=`${clash?`<p class="dr-st ng">${T("rtClash",{n:esc(pgNm(clash.u)),w:esc(rec.w)})}</p>`:""}<div class="rt-input${shake?" shake":""}">${A.t==="p"?`<b>${esc(A.a)}</b>`:""}<span class="rt-typed">${esc(t)}</span><i class="rt-caret"></i>${A.t==="s"?`<b>${esc(A.a)}</b>`:""}</div>
+      <div class="dr-kb">${["qwertyuiop","asdfghjkl","+zxcvbnm-"].map(row=>`<div class="dr-kr">${[...row].map(c=>c==="+"?`<button class="dr-k wide go${t.length<2?" off":""}" data-rtk="enter">${T("rtSend")}</button>`:c==="-"?`<button class="dr-k wide" data-rtk="back" aria-label="back">⌫</button>`:`<button class="dr-k" data-rtk="${c}">${c.toUpperCase()}</button>`).join("")}</div>`).join("")}</div>`; }
+  else if(F.k==="ans"&&mine) kb=`<p class="dr-st ok">✅ ${T("rtGot",{w:esc(mine.w),p:mine.p})} · ${T("rtWaitAll")}</p>`;
+  else if(F.k==="ans") kb=`<p class="dr-st">${T("rtDealWait")}</p>`;
+  else if(F.k==="intro") kb=`<p class="dr-st muted">${T(amD?"rtIntroMe":"rtIntroThem")}</p>`;
+  else kb=`<p class="dr-st muted">${C.i+1>=tot?T("rtLast"):T("rtNext",{s:secs})}</p>`;
+  return [["pgRtTop",top],["pgRtArena",arena],["pgRtKb",kb]];
+}
+function rtRows(){ const P=S.pg.party, ids=Object.keys(P.players), sc=rtScores(), tot=rtTotal();
+  return ids.map(u=>{ let n=0, first=0, deal=0; for(let i=0;i<tot;i++){ const k=rtList(i).findIndex(x=>x.u===u); if(k>=0){ n++; if(k===0) first++; } if(rtDealer(i)===u&&rtAllIn(i)) deal++; }
+    return {u, score:sc[u]||0, n, first, deal}; }).sort((a,b)=>b.score-a.score||b.n-a.n); }
+function rtResults(rows){ const tot=rtTotal();
+  const stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("pgScore")}</th><th>✅</th><th>⚡</th><th>🎤</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${esc(pgNm(r.u))}</b></td><td>${r.score}</td><td>${r.n}</td><td>${r.first}</td><td>${r.deal}</td></tr>`).join("")}</table><p class="muted sm-t">${T("rtLegend")}</p>`;
+  const extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${Array.from({length:tot},(_,i)=>{ const A=rtAff(i), L=rtList(i), used=new Set(L.map(x=>x.w)), more=(A.ex||[]).filter(([w])=>!used.has(w)).slice(0,4);
+    return `<div class="co-err"><span class="chip ${L.length?"done":"new"}">${i+1}</span><div style="flex:1"><b>${esc(rtLab(A))}</b> · ${rtMean(A)} <span class="muted sm-t">· 🎤 ${esc(pgNm(rtDealer(i)))}</span>
+      <div class="sm-t">${L.length?L.map(x=>`${rtWord(x.w,A)} <span class="muted">(${esc(pgNm(x.u))} +${x.p})</span>`).join(" · "):T("rtNobody")}</div>
+      ${more.length?`<div class="muted sm-t">${T("rtMore")}：${more.map(([w,z])=>`${esc(w)}${LANG==="zh"?` ${esc(z)}`:""}`).join("、")}</div>`:""}</div></div>`; }).join("")}</div>`;
+  return {stats, extra}; }
+
 /* ----- view ----- */
 function pgSections(){
   if(S.pgBusy) return [["pgMain",`<p class="muted">${S.pgBusy}</p>`]];
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[k])}${k==="duel"||k==="draw"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName"}[k])}${k==="root"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub",root:"rtSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw"||k==="root")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
     const last=CLOUD.user&&pgLastRoom();
     const back=last?`<div class="card pg-back"><div><b>${T("pgBackT",{c:esc(last)})}</b><p class="muted sm-t" style="margin:2px 0 0">${T("pgBackSub")}</p></div><button class="btn sm" data-act="pgrejoin" data-k="${esc(last)}">${T("pgBackBtn")}</button></div>`:"";
     const joinBox=CLOUD.user?back+`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
     return [["pgMain",`${S.playMode==="duo"?"":`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>`}${login}${joinBox}
-      ${S.playMode==="duo"?card("duel","⚔️"):`${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`}`]];
+      ${S.playMode==="duo"?card("duel","⚔️"):`${card("root","🌱")}${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
-  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName"}[P.game]||"pgDrop");
+  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName"}[P.game]||"pgDrop");
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
       ${(setTimeout(()=>lookFetch(ids.filter(u=>u!==pgMe())),0),"")}<div class="pg-lobby">${ids.map(u=>`<div class="pg-pl${u===pgMe()?" me":""}">${lookArt(u===pgMe()?myLook():LOOKS[u],"pg-fig")}<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div></div>`).join("")}</div>
       <div class="muted">${P.game==="duel"?T("duWaiting",{n:ids.length}):T("pgWaiting",{n:ids.length})}</div>
       ${P.game==="draw"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||1)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||1})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||1, t:(P.rr||1)*ids.length})}</span></div><div class="dr-rr"><span class="sm-t">${T("drMode")}</span>${host?`<div class="seg">${["n","c"].map(m=>`<button data-act="drdm" data-k="${m}" aria-pressed="${(P.dm==="c"?"c":"n")===m}">${T(m==="c"?"drModeC":"drModeN")}</button>`).join("")}</div>`:`<b>${T(P.dm==="c"?"drModeC":"drModeN")}</b>`}<span class="muted sm-t">${T(P.dm==="c"?"drModeCSub":"drModeNSub")}</span></div>`:""}
-      ${host?(P.game==="draw"&&ids.length<2?`<button class="btn" disabled>${T("drNeed2")}</button>`:P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
+      ${P.game==="root"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,2,3].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||2)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||2})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||2, t:(P.rr||2)*ids.length})}</span></div>`:""}
+      ${host?((P.game==="draw"||P.game==="root")&&ids.length<2?`<button class="btn" disabled>${T("drNeed2")}</button>`:P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
   if(P.state==="done") return [["pgMain",pgResults()]];
-  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections, draw:drSections}[P.game]||dpSections)();
+  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections, draw:drSections, root:rtSections}[P.game]||dpSections)();
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
@@ -5966,6 +6140,58 @@ function srsCard(){
   const boxes=[1,2,3,4,5,6].map(b=>[...S.words.values()].filter(w=>(w.srsB||0)===b).length), fresh=[...S.words.values()].filter(w=>!w.srsB).length;
   const bar=`<div class="srs-boxes" title="${esc(T("srsBoxes"))}">${(()=>{ const all=[fresh,...boxes], mx=Math.max(1,...all); return all; })().map((n,i,all)=>`<span style="--h:${n?Math.round(12+70*n/Math.max(1,...all)):4}%"><i></i><small>${i?SRS_INT[i]+"d":"new"}</small><b>${n}</b></span>`).join("")}</div>`;
   return `<section class="card srs-card"><div class="srs-top"><div class="srs-ic" aria-hidden="true">🧠</div><div><b>${T("srsTitle")}</b><span class="muted sm-t">${due?T("srsDueN",{n:due}):T("srsClear",{n:tm})}</span>${due?(()=>{ const l=revLeft(); return due<SRS_TICKET_MIN?`<span class="rev-left sm-t muted">🎟 ${T("srsTicketMin",{n:SRS_TICKET_MIN})}</span>`:`<span class="rev-left sm-t ${l?"":"muted"}">☘️ ${l?T("srsPay3",{n:l}):T("revNoMore")}</span>`; })():""}</div>${due?`<button class="btn sm" data-act="srs">${T("srsStart",{n:Math.min(SRS_MAX,due)})}</button>`:""}</div>${bar}<p class="muted sm-t" style="margin:6px 0 0">${T("srsHow")}</p></section>`;
+}
+
+/* ================= word weakness report: one per 100 dictionary words, rule-based, works offline, no AI cost ================= */
+const WK_STEP=100, WK_KEY="che-pro-weakrep";
+function wkKey(){ return SANDBOX()?WK_KEY+"-sb":WK_KEY; }
+function wkLoad(){ try{ return JSON.parse(localStorage.getItem(wkKey())||"null")||{}; }catch(e){ return {}; } }
+function wkSave(o){ try{ localStorage.setItem(wkKey(),JSON.stringify(o)); }catch(e){} }
+function wkWords(){ return [...S.words.values()].filter(w=>w&&w.word&&!w.filler); }
+const wkSolidW=w=>(w.srsB||0)>=3;   // survived 3 spaced reviews in a row
+const wkLk=w=>w.lookups==null?1:w.lookups;
+const wkScore=w=>(w.wrong||0)*2+Math.max(0,wkLk(w)-1)-(w.correct||0)*1.5-(w.srsB||0)*0.5;
+function wkPosOf(w){ const p=(w.pos||"").toLowerCase().trim(); return /^adj/.test(p)?"adj":/^adv/.test(p)?"adv":/^n\b/.test(p)?"n":/^v\b/.test(p)?"v":"o"; }
+function wkAnalyze(){
+  const all=wkWords(), tested=all.filter(w=>(w.correct||0)+(w.wrong||0)>0);
+  let c=0,t=0; for(const w of tested){ c+=w.correct||0; t+=(w.correct||0)+(w.wrong||0); }
+  const wrong=all.filter(w=>(w.wrong||0)>0&&!wkSolidW(w)&&wkScore(w)>0).sort((a,b)=>wkScore(b)-wkScore(a)||(b.wrong||0)-(a.wrong||0)).slice(0,10);
+  const wk=new Set(wrong.map(w=>w.key));
+  const look=all.filter(w=>wkLk(w)>=3&&!wkSolidW(w)&&!wk.has(w.key)&&(w.correct||0)<=(w.wrong||0)+1).sort((a,b)=>wkLk(b)-wkLk(a)).slice(0,8);
+  const pos={}; for(const w of tested){ const k=wkPosOf(w), p=pos[k]=pos[k]||{c:0,t:0}; p.c+=w.correct||0; p.t+=(w.correct||0)+(w.wrong||0); }
+  const posL=Object.entries(pos).filter(([,p])=>p.t>=5).map(([k,p])=>({k,acc:p.c/p.t,t:p.t})).sort((a,b)=>a.acc-b.acc);
+  return {n:all.length, acc:t?c/t:null, tested:tested.length, solid:all.filter(wkSolidW).length, untested:all.length-tested.length, wrong, look, posL, train:[...wrong,...look].slice(0,10)};
+}
+const wkMs=()=>Math.floor(wkWords().length/WK_STEP);
+function wkSync(){   // reaching a new 100 snapshots this report's weak words; the next report shows how many of them are now solid
+  const m=wkMs(), o=wkLoad(); if(!m||(o.m||0)>=m) return o;
+  const n={m, prev:o.cur||null, cur:{m, at:today(), weak:wkAnalyze().train.map(w=>w.key)}, seen:o.seen||0}; wkSave(n); return n; }
+function weakCard(){
+  const n=wkWords().length; if(!n) return "";
+  const m=Math.floor(n/WK_STEP), left=WK_STEP-n%WK_STEP, head=`<div class="srs-ic" aria-hidden="true">🔍</div>`;
+  if(!m&&!DEV) return `<section class="card wk-card"><div class="srs-top">${head}<div><b>${T("wkTitle")}</b><span class="muted sm-t">${T("wkLock",{n:left})}</span></div></div><div class="wk-bar"><i style="width:${(n%WK_STEP)/WK_STEP*100}%"></i></div></section>`;
+  const o=wkSync(), fresh=m>(o.seen||0);
+  return `<section class="card wk-card"><div class="srs-top">${head}<div><b>${T("wkTitle")}${fresh?` <span class="chip new">${T("wkNew")}</span>`:""}</b><span class="muted sm-t">${m?T("wkReady",{m,n:left}):T("wkLock",{n:left})+" · DEV"}</span></div><button class="btn sm" data-act="weak">${T("wkOpen")}</button></div></section>`;
+}
+function viewWeak(){
+  const o=wkSync(), m=wkMs(), A=wkAnalyze();
+  if(m>(o.seen||0)) wkSave({...o, seen:m});
+  const pct=x=>x==null?"—":Math.round(x*100)+"%";
+  const row=w=>`<div class="wk-row"><div><b>${esc(w.word)}</b> <span class="muted sm-t">${esc(w.pos||"")}</span><div class="sm-t">${esc(mean(w))}</div></div><span class="muted sm-t wk-st">${T("wkStat",{w:w.wrong||0,c:w.correct||0,l:wkLk(w)})}</span></div>`;
+  const prev=o.prev, prog=prev&&prev.weak&&prev.weak.length?T("wkProg",{t:prev.weak.length,n:prev.weak.filter(k=>{ const w=S.words.get(k); return w&&wkSolidW(w); }).length}):T("wkProgFirst");
+  const sec=(t,sub,body)=>`<section class="card wk-sec"><b>${t}</b>${sub?`<span class="muted sm-t">${sub}</span>`:""}<div>${body}</div></section>`;
+  const posB=A.posL.length?A.posL.map((p,i)=>`<div class="wk-pos${i===0&&A.posL.length>1?" low":""}"><span>${T("wkPos_"+p.k)}${i===0&&A.posL.length>1?` <span class="chip new">${T("wkPosWeak")}</span>`:""}</span><div class="wk-bar"><i style="width:${Math.round(p.acc*100)}%"></i></div><span class="sm-t">${pct(p.acc)}</span></div>`).join(""):`<span class="muted sm-t">${T("wkPosNone")}</span>`;
+  return `<div class="view">
+    <div><div class="eyebrow">${T("wkTitle")}</div><h2 style="font-size:24px">${m?T("wkHead",{m,n:A.n}):T("dictCount",{n:A.n})}</h2></div>
+    <section class="card wk-stats"><div><b>${pct(A.acc)}</b><span class="muted sm-t">${T("wkAcc")}</span></div><div><b>${A.tested}</b><span class="muted sm-t">${T("wkTested")}</span></div><div><b>${A.solid}</b><span class="muted sm-t">${T("wkSolid")}</span></div></section>
+    ${A.train.length?`<button class="btn" data-act="wktrain">${T("wkTrain",{n:A.train.length})}</button>`:`<section class="card">${T("wkNoWeak")}</section>`}
+    ${A.wrong.length?sec(T("wkWrongT"),T("wkWrongS"),A.wrong.map(row).join("")):""}
+    ${A.look.length?sec(T("wkLookT"),T("wkLookS"),A.look.map(row).join("")):""}
+    ${sec(T("wkPosT"),T("wkPosS"),posB)}
+    ${sec(T("wkProgT"),"",`<span class="sm-t">${prog}</span>`)}
+    ${A.untested?`<p class="muted sm-t">${T("wkUntested",{n:A.untested})}</p>`:""}
+    <button class="btn ghost" data-tab="dict">${T("backDict")}</button>
+  </div>`;
 }
 
 /* ================= read-aloud (speech synthesis, sentence by sentence) ================= */
@@ -6767,7 +6993,9 @@ async function toLoadTop(){
 const LSN_GOLD=20, LSN_QUIZ_GOLD=10, LSN_GAP=0.3;
 let LSN_INDEX=null; const LSN={on:false};
 function lsnLoadIndex(){ if(lsnLoadIndex.busy) return; lsnLoadIndex.busy=1;
-  fetch("lessons/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{lessons:[]}).then(j=>{ LSN_INDEX=j.lessons||[]; }).catch(()=>{ LSN_INDEX=[]; }).then(()=>{ lsnLoadIndex.busy=0; if(S.view==="adv") render(); }); }
+  fetch("lessons/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{lessons:[]}).then(j=>{ LSN_INDEX=j.lessons||[]; }).catch(()=>{ LSN_INDEX=[]; }).then(()=>{ lsnLoadIndex.busy=0; if(S.view==="lsn"||S.view==="adv") render(); }); }
+// 小教室 has its own bottom tab
+function viewLsn(){ return `<div class="view"><div class="ie-lobby">${lsnLobby()}</div></div>`; }
 function lsnLobby(){
   if(!LSN_INDEX){ lsnLoadIndex(); return `<p class="muted">${T("loading")}</p>`; }
   const done=game().lessons||{};
@@ -6852,7 +7080,7 @@ function lsnFinish(){
 }
 function lsnClose(silent){ const ov=document.getElementById("lsnOv"); if(LSN.on) lsnStopTimers(); LSN.on=false; LSN.lesson=null; if(ov) ov.remove();
   document.body.classList.remove("lsn-lock"); window.removeEventListener("resize",lsnFit);
-  if(!silent){ if(typeof SND!=="undefined"&&SND.ctx) musicForView(); if(S.view==="adv") render(); } }
+  if(!silent){ if(typeof SND!=="undefined"&&SND.ctx) musicForView(); if(S.view==="lsn"||S.view==="adv") render(); } }
 function toLobby(){
   if(!TO_TESTS){ toLoad().then(()=>render()); return `<p class="muted">${T("loading")}</p>`; }
   const st=toState(), t=toWeekTest(), done=st.days[today()], run=game().toeicRun, u=untilTomorrow(), mb=st.months[monthKey()];
@@ -7913,6 +8141,24 @@ Object.assign(STR.hi,{"lsnYT":"YouTube पर देखें"});
 Object.assign(STR.es,{"lsnYT":"Ver en YouTube"});
 Object.assign(STR.ja,{"lsnYT":"YouTube で見る"});
 Object.assign(STR.ko,{"lsnYT":"YouTube에서 보기"});
+Object.assign(STR.zh,{"wkTitle": "單字弱點報告", "wkLock": "再存 {n} 個字，就能打開下一份弱點報告（每 100 字一份）", "wkReady": "第 {m} 份報告出爐了 · 再存 {n} 個字出下一份", "wkOpen": "看報告", "wkNew": "新", "wkToast": "🔍 你的字典滿 {n} 個字了！新的弱點報告出爐，到「字典」看看", "wkHead": "第 {m} 份報告 · {n} 個字", "wkAcc": "答對率", "wkTested": "測過的字", "wkSolid": "記牢的字", "wkWrongT": "最常錯的字", "wkWrongS": "這些字你答錯最多次，先把它們搞定", "wkLookT": "查了好幾次還不熟", "wkLookS": "你一直回來查，代表還沒真的記住", "wkPosT": "哪種詞最弱", "wkPosS": "測過 5 次以上的詞性才會列出", "wkPosWeak": "最弱", "wkPosNone": "測驗次數還不夠，多做幾次每日測驗就會出現", "wkUntested": "還有 {n} 個字從來沒被測過，每日測驗和間隔複習會慢慢抽到它們", "wkProgT": "跟上一份比", "wkProg": "上一份報告的 {t} 個弱字，現在已經記牢 {n} 個", "wkProgFirst": "這是你的第一份報告，下一份會告訴你這些弱字進步了多少", "wkTrain": "🎯 特訓這 {n} 個字", "wkTrainT": "弱點特訓", "wkTrainNote": "特訓是純練習，不送彩券；答題結果會算進你的複習紀錄", "wkNoWeak": "目前沒有明顯的弱字，太強了！繼續保持", "wkStat": "錯 {w} · 對 {c} · 查 {l} 次", "wkBack": "回到報告", "wkPos_n": "名詞", "wkPos_v": "動詞", "wkPos_adj": "形容詞", "wkPos_adv": "副詞", "wkPos_o": "其他"});
+Object.assign(STR.en,{"wkTitle": "Word weakness report", "wkLock": "Save {n} more words to open your next weakness report (one every 100 words)", "wkReady": "Report #{m} is ready · {n} more words for the next one", "wkOpen": "View", "wkNew": "New", "wkToast": "🔍 Your dictionary hit {n} words! A new weakness report is ready in Dictionary", "wkHead": "Report #{m} · {n} words", "wkAcc": "Accuracy", "wkTested": "Words tested", "wkSolid": "Words mastered", "wkWrongT": "Most-missed words", "wkWrongS": "You got these wrong the most. Fix them first", "wkLookT": "Looked up again and again", "wkLookS": "You keep coming back to these, so they haven't stuck yet", "wkPosT": "Weakest word type", "wkPosS": "Only word types tested 5+ times are shown", "wkPosWeak": "Weakest", "wkPosNone": "Not enough quiz answers yet. Do a few more daily quizzes", "wkUntested": "{n} words have never been tested yet. Daily quizzes and spaced review will get to them", "wkProgT": "Since last report", "wkProg": "Of the {t} weak words in your last report, {n} are now mastered", "wkProgFirst": "This is your first report. The next one will show how much these words improved", "wkTrain": "🎯 Drill these {n} words", "wkTrainT": "Weak-word drill", "wkTrainNote": "The drill is practice only (no ticket). Your answers still count in your review history", "wkNoWeak": "No clear weak words right now. Great job, keep it up!", "wkStat": "✗ {w} · ✓ {c} · looked up {l}×", "wkBack": "Back to report", "wkPos_n": "Nouns", "wkPos_v": "Verbs", "wkPos_adj": "Adjectives", "wkPos_adv": "Adverbs", "wkPos_o": "Other"});
+Object.assign(STR.hi,{"wkTitle": "शब्द कमज़ोरी रिपोर्ट", "wkLock": "अगली कमज़ोरी रिपोर्ट खोलने के लिए {n} और शब्द सेव करें (हर 100 शब्दों पर एक)", "wkReady": "रिपोर्ट #{m} तैयार है · अगली के लिए {n} और शब्द", "wkOpen": "देखें", "wkNew": "नया", "wkToast": "🔍 आपके शब्दकोश में {n} शब्द हो गए! नई कमज़ोरी रिपोर्ट शब्दकोश में तैयार है", "wkHead": "रिपोर्ट #{m} · {n} शब्द", "wkAcc": "सही उत्तर", "wkTested": "जाँचे गए शब्द", "wkSolid": "पक्के शब्द", "wkWrongT": "सबसे ज़्यादा गलत शब्द", "wkWrongS": "इन शब्दों में आप सबसे ज़्यादा गलत हुए, पहले इन्हें पक्का करें", "wkLookT": "बार-बार देखे गए शब्द", "wkLookS": "आप इन्हें बार-बार देखते हैं, यानी ये अभी याद नहीं हुए", "wkPosT": "सबसे कमज़ोर शब्द-प्रकार", "wkPosS": "केवल 5+ बार जाँचे गए प्रकार दिखते हैं", "wkPosWeak": "सबसे कमज़ोर", "wkPosNone": "अभी पर्याप्त उत्तर नहीं हैं। कुछ और दैनिक क्विज़ करें", "wkUntested": "{n} शब्द अभी तक जाँचे नहीं गए। दैनिक क्विज़ और दोहराव उन तक पहुँचेंगे", "wkProgT": "पिछली रिपोर्ट से तुलना", "wkProg": "पिछली रिपोर्ट के {t} कमज़ोर शब्दों में से {n} अब पक्के हैं", "wkProgFirst": "यह आपकी पहली रिपोर्ट है। अगली रिपोर्ट सुधार दिखाएगी", "wkTrain": "🎯 इन {n} शब्दों का अभ्यास करें", "wkTrainT": "कमज़ोर शब्द अभ्यास", "wkTrainNote": "यह केवल अभ्यास है (टिकट नहीं)। उत्तर आपके दोहराव रिकॉर्ड में गिने जाते हैं", "wkNoWeak": "अभी कोई स्पष्ट कमज़ोर शब्द नहीं। बहुत बढ़िया!", "wkStat": "✗ {w} · ✓ {c} · {l} बार देखा", "wkBack": "रिपोर्ट पर लौटें", "wkPos_n": "संज्ञा", "wkPos_v": "क्रिया", "wkPos_adj": "विशेषण", "wkPos_adv": "क्रिया-विशेषण", "wkPos_o": "अन्य"});
+Object.assign(STR.es,{"wkTitle": "Informe de puntos débiles", "wkLock": "Guarda {n} palabras más para abrir tu próximo informe (uno cada 100 palabras)", "wkReady": "El informe n.º {m} está listo · {n} palabras más para el siguiente", "wkOpen": "Ver", "wkNew": "Nuevo", "wkToast": "🔍 ¡Tu diccionario llegó a {n} palabras! Hay un nuevo informe en Diccionario", "wkHead": "Informe n.º {m} · {n} palabras", "wkAcc": "Aciertos", "wkTested": "Palabras evaluadas", "wkSolid": "Palabras dominadas", "wkWrongT": "Las que más fallas", "wkWrongS": "Estas son las que más fallaste. Empieza por ellas", "wkLookT": "Buscadas una y otra vez", "wkLookS": "Vuelves a buscarlas, así que aún no se te quedan", "wkPosT": "Tipo de palabra más débil", "wkPosS": "Solo se muestran tipos evaluados 5+ veces", "wkPosWeak": "Más débil", "wkPosNone": "Aún no hay suficientes respuestas. Haz algunos quizzes diarios más", "wkUntested": "{n} palabras aún no se han evaluado. El quiz diario y el repaso espaciado llegarán a ellas", "wkProgT": "Desde el último informe", "wkProg": "De las {t} palabras débiles del último informe, ya dominas {n}", "wkProgFirst": "Este es tu primer informe. El siguiente mostrará cuánto mejoraste", "wkTrain": "🎯 Entrena estas {n} palabras", "wkTrainT": "Entreno de palabras débiles", "wkTrainNote": "Es solo práctica (sin boleto). Tus respuestas cuentan en tu historial de repaso", "wkNoWeak": "No hay palabras débiles claras ahora. ¡Muy bien, sigue así!", "wkStat": "✗ {w} · ✓ {c} · buscada {l}×", "wkBack": "Volver al informe", "wkPos_n": "Sustantivos", "wkPos_v": "Verbos", "wkPos_adj": "Adjetivos", "wkPos_adv": "Adverbios", "wkPos_o": "Otros"});
+Object.assign(STR.ja,{"wkTitle": "苦手単語レポート", "wkLock": "あと {n} 語保存すると次の苦手レポートが開きます（100語ごとに1つ）", "wkReady": "レポート第{m}号ができました · 次まであと {n} 語", "wkOpen": "見る", "wkNew": "新", "wkToast": "🔍 単語帳が {n} 語になりました！新しい苦手レポートを単語帳でチェック", "wkHead": "第{m}号 · {n} 語", "wkAcc": "正答率", "wkTested": "テスト済み", "wkSolid": "定着した単語", "wkWrongT": "よく間違える単語", "wkWrongS": "一番多く間違えた単語です。まずここから", "wkLookT": "何度も調べている単語", "wkLookS": "何度も調べるのは、まだ覚えきれていないサインです", "wkPosT": "苦手な品詞", "wkPosS": "5回以上テストした品詞だけ表示します", "wkPosWeak": "苦手", "wkPosNone": "まだ回答数が足りません。毎日のクイズをもう少し続けましょう", "wkUntested": "まだ一度もテストされていない単語が {n} 語あります。毎日のクイズと間隔復習で出てきます", "wkProgT": "前回のレポートと比べて", "wkProg": "前回の苦手 {t} 語のうち、{n} 語が定着しました", "wkProgFirst": "これが最初のレポートです。次回はどれだけ伸びたかを表示します", "wkTrain": "🎯 この {n} 語を特訓", "wkTrainT": "苦手単語特訓", "wkTrainNote": "特訓は練習のみ（チケットなし）。回答は復習記録に反映されます", "wkNoWeak": "今は目立った苦手単語がありません。すごい！この調子で", "wkStat": "✗ {w} · ✓ {c} · {l}回調べた", "wkBack": "レポートに戻る", "wkPos_n": "名詞", "wkPos_v": "動詞", "wkPos_adj": "形容詞", "wkPos_adv": "副詞", "wkPos_o": "その他"});
+Object.assign(STR.ko,{"wkTitle": "약한 단어 리포트", "wkLock": "{n}단어 더 저장하면 다음 약점 리포트가 열려요 (100단어마다 1개)", "wkReady": "리포트 #{m} 도착 · 다음까지 {n}단어", "wkOpen": "보기", "wkNew": "새", "wkToast": "🔍 단어장이 {n}단어가 됐어요! 새 약점 리포트를 단어장에서 확인하세요", "wkHead": "리포트 #{m} · {n}단어", "wkAcc": "정답률", "wkTested": "테스트한 단어", "wkSolid": "외운 단어", "wkWrongT": "가장 많이 틀린 단어", "wkWrongS": "가장 많이 틀린 단어예요. 먼저 잡아요", "wkLookT": "여러 번 찾아본 단어", "wkLookS": "계속 찾아본다는 건 아직 안 외워졌다는 뜻이에요", "wkPosT": "가장 약한 품사", "wkPosS": "5번 이상 테스트한 품사만 보여요", "wkPosWeak": "가장 약함", "wkPosNone": "아직 답이 부족해요. 데일리 퀴즈를 몇 번 더 해 보세요", "wkUntested": "아직 한 번도 테스트하지 않은 단어가 {n}개 있어요. 데일리 퀴즈와 간격 복습에서 나와요", "wkProgT": "지난 리포트와 비교", "wkProg": "지난 리포트의 약한 단어 {t}개 중 {n}개를 이제 외웠어요", "wkProgFirst": "첫 번째 리포트예요. 다음 리포트에서 얼마나 늘었는지 보여 줄게요", "wkTrain": "🎯 이 {n}단어 특훈", "wkTrainT": "약한 단어 특훈", "wkTrainNote": "특훈은 연습용이에요(티켓 없음). 답은 복습 기록에 반영돼요", "wkNoWeak": "지금은 눈에 띄는 약한 단어가 없어요. 최고예요!", "wkStat": "✗ {w} · ✓ {c} · {l}번 찾음", "wkBack": "리포트로 돌아가기", "wkPos_n": "명사", "wkPos_v": "동사", "wkPos_adj": "형용사", "wkPos_adv": "부사", "wkPos_o": "기타"});
+Object.assign(STR.zh,{"rtNobody":"這題沒有人答出來","rtName": "🌱 字根搶答", "rtSub": "2–6 人輪流出題。出題者的手機會跳出一個字首或字尾（像 pro-、-tion），其他人在 20 秒內搶著拼出含有它的單字：越快分數越高，同一個字不能重複。全員都答出來，出題者也加分！", "rtPre": "字首", "rtSuf": "字尾", "rtYouDeal": "🎤 你是出題者！", "rtYouDealSub": "馬上就會跳到大家的螢幕上", "rtTheyDeal": "{n} 正在抽題…", "rtPhIntro": "抽題", "rtPhAns": "搶答", "rtPhRev": "看答案", "rtCount": "已答出 {n} / {t}", "rtAllBonus": "全員答出！🎤 {n} +{p}", "rtMore": "還有這些字", "rtShort": "再多打幾個字母", "rtTaken": "{w} 已經被 {n} 用掉了，換一個！", "rtGot": "{w} +{p}", "rtClash": "💥 {n} 比你早一步送出 {w}，換一個！", "rtSend": "送出", "rtWaitAll": "等其他人", "rtDealWait": "大家正在搶答，看看誰最快！", "rtIntroMe": "準備把題目亮給大家看…", "rtIntroThem": "手指準備好！", "rtNext": "{s} 秒後下一題", "rtLast": "最後一題結束，馬上公布結果", "rtLegend": "✅ 答出題數 · ⚡ 最快答出 · 🎤 出題時全員答出"});
+Object.assign(STR.en,{"rtNobody":"Nobody got one this time","rtName": "🌱 Root rush", "rtSub": "2–6 players take turns to deal. The dealer's phone pops up a prefix or suffix (like pro- or -tion), and everyone else has 20 seconds to spell a word with it: faster means more points, and no repeats. If everyone gets one, the dealer scores too!", "rtPre": "Prefix", "rtSuf": "Suffix", "rtYouDeal": "🎤 You're dealing!", "rtYouDealSub": "It's about to pop up on everyone's screen", "rtTheyDeal": "{n} is drawing a card…", "rtPhIntro": "Drawing", "rtPhAns": "Go!", "rtPhRev": "Answers", "rtCount": "{n} / {t} answered", "rtAllBonus": "Everyone got one! 🎤 {n} +{p}", "rtMore": "More words", "rtShort": "Add a few more letters", "rtTaken": "{n} already used {w}. Try another!", "rtGot": "{w} +{p}", "rtClash": "💥 {n} sent {w} just before you. Try another!", "rtSend": "Send", "rtWaitAll": "waiting for the others", "rtDealWait": "Everyone's racing. Who'll be fastest?", "rtIntroMe": "Getting ready to show everyone…", "rtIntroThem": "Fingers ready!", "rtNext": "Next one in {s}s", "rtLast": "That was the last one. Results coming up", "rtLegend": "✅ words found · ⚡ fastest · 🎤 everyone answered your card"});
+Object.assign(STR.hi,{"rtNobody":"इस बार किसी ने नहीं लिखा","rtName": "🌱 रूट रश", "rtSub": "2–6 खिलाड़ी बारी-बारी से सवाल देते हैं। देने वाले के फ़ोन पर एक प्रीफ़िक्स या सफ़िक्स (जैसे pro- या -tion) आता है, बाकी सबके पास 20 सेकंड हैं उससे एक शब्द लिखने के लिए: जितना तेज़, उतने ज़्यादा अंक, और शब्द दोहराए नहीं जा सकते। अगर सबने लिख दिया तो देने वाले को भी अंक मिलते हैं!", "rtPre": "प्रीफ़िक्स", "rtSuf": "सफ़िक्स", "rtYouDeal": "🎤 आपकी बारी है सवाल देने की!", "rtYouDealSub": "यह अभी सबकी स्क्रीन पर आएगा", "rtTheyDeal": "{n} सवाल चुन रहे हैं…", "rtPhIntro": "चुनाव", "rtPhAns": "जल्दी!", "rtPhRev": "जवाब", "rtCount": "{n} / {t} ने जवाब दिया", "rtAllBonus": "सबने जवाब दिया! 🎤 {n} +{p}", "rtMore": "और शब्द", "rtShort": "कुछ और अक्षर जोड़ें", "rtTaken": "{n} ने {w} पहले ही इस्तेमाल कर लिया। कोई और आज़माएँ!", "rtGot": "{w} +{p}", "rtClash": "💥 {n} ने {w} आपसे पहले भेजा। कोई और आज़माएँ!", "rtSend": "भेजें", "rtWaitAll": "बाकी का इंतज़ार", "rtDealWait": "सब दौड़ में हैं। कौन सबसे तेज़?", "rtIntroMe": "सबको दिखाने की तैयारी…", "rtIntroThem": "उँगलियाँ तैयार!", "rtNext": "{s} सेकंड में अगला", "rtLast": "यह आख़िरी था। नतीजे आ रहे हैं", "rtLegend": "✅ मिले शब्द · ⚡ सबसे तेज़ · 🎤 आपके सवाल पर सबने जवाब दिया"});
+Object.assign(STR.es,{"rtNobody":"Esta vez nadie acertó","rtName": "🌱 Carrera de raíces", "rtSub": "De 2 a 6 jugadores reparten por turnos. En el móvil de quien reparte aparece un prefijo o sufijo (como pro- o -tion) y los demás tienen 20 segundos para escribir una palabra con él: cuanto más rápido, más puntos, y sin repetir. ¡Si todos aciertan, quien reparte también suma!", "rtPre": "Prefijo", "rtSuf": "Sufijo", "rtYouDeal": "🎤 ¡Repartes tú!", "rtYouDealSub": "Está a punto de aparecer en todas las pantallas", "rtTheyDeal": "{n} está sacando una carta…", "rtPhIntro": "Sacando", "rtPhAns": "¡Ya!", "rtPhRev": "Respuestas", "rtCount": "{n} / {t} han respondido", "rtAllBonus": "¡Todos acertaron! 🎤 {n} +{p}", "rtMore": "Más palabras", "rtShort": "Añade unas letras más", "rtTaken": "{n} ya usó {w}. ¡Prueba otra!", "rtGot": "{w} +{p}", "rtClash": "💥 {n} envió {w} justo antes que tú. ¡Prueba otra!", "rtSend": "Enviar", "rtWaitAll": "esperando a los demás", "rtDealWait": "Todos compiten. ¿Quién será el más rápido?", "rtIntroMe": "Preparándose para mostrarla…", "rtIntroThem": "¡Dedos listos!", "rtNext": "Siguiente en {s} s", "rtLast": "Era la última. Ya vienen los resultados", "rtLegend": "✅ palabras · ⚡ el más rápido · 🎤 todos acertaron tu carta"});
+Object.assign(STR.ja,{"rtNobody":"今回は誰も答えられませんでした","rtName": "🌱 語根スピード", "rtSub": "2〜6人で順番に出題。出題者のスマホに接頭辞か接尾辞（pro- や -tion など）が出て、ほかの人は20秒以内にそれを使った単語を入力します。早いほど高得点、同じ単語は使えません。全員が答えられたら出題者にもボーナス！", "rtPre": "接頭辞", "rtSuf": "接尾辞", "rtYouDeal": "🎤 あなたが出題者！", "rtYouDealSub": "まもなくみんなの画面に表示されます", "rtTheyDeal": "{n} がお題を引いています…", "rtPhIntro": "お題", "rtPhAns": "回答", "rtPhRev": "答え", "rtCount": "{n} / {t} 人が回答", "rtAllBonus": "全員正解！🎤 {n} +{p}", "rtMore": "ほかの単語", "rtShort": "もう少し文字を足してください", "rtTaken": "{w} は {n} が使いました。別の単語を！", "rtGot": "{w} +{p}", "rtClash": "💥 {n} が先に {w} を送りました。別の単語を！", "rtSend": "送信", "rtWaitAll": "ほかの人を待っています", "rtDealWait": "みんな回答中。いちばん早いのは誰？", "rtIntroMe": "みんなに見せる準備中…", "rtIntroThem": "指の準備を！", "rtNext": "{s}秒後に次のお題", "rtLast": "最後のお題でした。結果発表へ", "rtLegend": "✅ 回答数 · ⚡ 最速 · 🎤 出題時に全員正解"});
+Object.assign(STR.ko,{"rtNobody":"이번엔 아무도 못 맞혔어요","rtName": "🌱 어근 스피드", "rtSub": "2~6명이 돌아가며 출제해요. 출제자 폰에 접두사나 접미사(pro-, -tion 등)가 뜨면, 나머지는 20초 안에 그걸 넣은 단어를 써요. 빠를수록 점수가 높고, 같은 단어는 쓸 수 없어요. 모두 맞히면 출제자도 점수를 받아요!", "rtPre": "접두사", "rtSuf": "접미사", "rtYouDeal": "🎤 내가 출제자!", "rtYouDealSub": "곧 모두의 화면에 나타나요", "rtTheyDeal": "{n} 님이 문제를 뽑는 중…", "rtPhIntro": "뽑기", "rtPhAns": "답하기", "rtPhRev": "정답", "rtCount": "{n} / {t}명 답함", "rtAllBonus": "모두 맞혔어요! 🎤 {n} +{p}", "rtMore": "다른 단어들", "rtShort": "글자를 조금 더 입력하세요", "rtTaken": "{w}는 {n} 님이 이미 썼어요. 다른 단어를!", "rtGot": "{w} +{p}", "rtClash": "💥 {n} 님이 {w}를 먼저 보냈어요. 다른 단어를!", "rtSend": "보내기", "rtWaitAll": "다른 사람을 기다리는 중", "rtDealWait": "모두 답하는 중. 누가 제일 빠를까요?", "rtIntroMe": "모두에게 보여 줄 준비 중…", "rtIntroThem": "손가락 준비!", "rtNext": "{s}초 뒤 다음 문제", "rtLast": "마지막 문제였어요. 곧 결과 발표", "rtLegend": "✅ 맞힌 수 · ⚡ 가장 빠름 · 🎤 내 문제를 모두 맞힘"});
+Object.assign(STR.zh,{"tabRead": "閱讀"});
+Object.assign(STR.en,{"tabRead": "Read"});
+Object.assign(STR.hi,{"tabRead": "पढ़ें"});
+Object.assign(STR.es,{"tabRead": "Leer"});
+Object.assign(STR.ja,{"tabRead": "読む"});
+Object.assign(STR.ko,{"tabRead": "읽기"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
