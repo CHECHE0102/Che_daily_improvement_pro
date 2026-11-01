@@ -78,7 +78,8 @@ def trim(c, thr=0.01):
 async def tts(text, voice, rate, pitch, path):
     import edge_tts
     # the service sometimes returns no audio for a voice + prosody pair; fall back to plainer settings
-    tries = [(rate, pitch), (rate, pitch), (rate, "+0Hz"), ("+0%", "+0Hz"), ("+0%", "+0Hz")]
+    # (seen 2026-11-01: after many requests it refuses for a while, so retry slowly before giving up)
+    tries = [(rate, pitch)] * 7 + [("+0%", "+0Hz")] * 2
     for attempt, (r, p) in enumerate(tries):
         try:
             com = edge_tts.Communicate(text, voice, rate=r, pitch=p, boundary="WordBoundary")
@@ -92,10 +93,11 @@ async def tts(text, voice, rate, pitch, path):
                 raise RuntimeError("empty audio")
             open(path, "wb").write(audio)
             json.dump(bounds, open(path + ".json", "w"), ensure_ascii=False)
+            await asyncio.sleep(0.4)   # pace requests
             return
         except Exception as e:  # network hiccups
             print("  retry", attempt, voice, r, p, e)
-            await asyncio.sleep(3 * (attempt + 1))
+            await asyncio.sleep(min(45, 5 * (attempt + 1)))
     raise RuntimeError("tts failed: " + text)
 
 

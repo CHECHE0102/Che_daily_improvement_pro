@@ -46,9 +46,19 @@ async def build(path):
 
 
 async def main():
-    entries = [await build(p) for p in sorted(glob.glob(os.path.join(ROOT, "lessons", "scripts", "*.json")))]
+    entries, failed = [], []
+    for p in sorted(glob.glob(os.path.join(ROOT, "lessons", "scripts", "*.json"))):
+        try:
+            entries.append(await build(p))
+        except Exception as e:   # keep the lessons that worked; the next run tries this one again
+            print("FAILED", os.path.basename(p), e)
+            failed.append(p)
+    # a lesson with no finished audio stays out of the app list until it is voiced
+    entries = [e for e in entries if os.path.exists(os.path.join(ROOT, "lessons", "audio", e["id"], "index.json"))]
     entries.sort(key=lambda e: e["id"], reverse=True)
     json.dump({"lessons": entries}, open(os.path.join(ROOT, "lessons", "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    if failed:
+        print("::warning::lessons not voiced this run: " + ", ".join(map(os.path.basename, failed)))
 
 
 if __name__ == "__main__":

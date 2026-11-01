@@ -64,11 +64,11 @@ jobs:
         if: steps.pick.outputs.list != ''
         run: |
           npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
-          for f in ${{ steps.pick.outputs.list }}; do [ -f "$f" ] && python tools/make_lesson_video.py "$f"; done
+          for f in ${{ steps.pick.outputs.list }}; do [ -f "$f" ] && { python tools/make_lesson_video.py "$f" || echo "::warning::video failed: $f"; }; done
       - name: Store videos on the lesson-videos branch
         if: steps.pick.outputs.list != ''
         run: |
-          mkdir -p /tmp/pv && cp lessons/out/*.mp4 /tmp/pv/
+          mkdir -p /tmp/pv && cp lessons/out/*.mp4 /tmp/pv/ || exit 0
           if git fetch -q origin lesson-videos; then git worktree add -q /tmp/vb origin/lesson-videos && cd /tmp/vb && git checkout -q -B lesson-videos
           else git worktree add -q --detach /tmp/vb && cd /tmp/vb && git checkout -q --orphan lesson-videos && git rm -rfq .; fi
           cp /tmp/pv/*.mp4 . && git add *.mp4
