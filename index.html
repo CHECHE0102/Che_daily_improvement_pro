@@ -812,6 +812,7 @@ body.onb-open{overflow:hidden}
 .srs-after{font-size:14px}
 .read-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:60px;z-index:3;background:var(--paper);padding:6px 0;box-shadow:0 -12px 0 var(--paper),0 6px 8px -6px rgba(0,0,0,.12)}
 .article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
+.comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
 .del-ask{border:1.5px solid color-mix(in srgb,var(--bad) 50%,var(--line));border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--bad) 6%,var(--card))}.del-ask p{margin:6px 0 10px;line-height:1.55}
@@ -1790,6 +1791,7 @@ function viewSettings(){
     ${CLOUD.user?nickForm():""}
     ${regionSection()}
     ${pushCard()}
+    ${communityCard()}
     <details class="card set-sec set-fold" data-fold="lang"${S.fold&&S.fold.lang?" open":""}><summary><b>${T("language")} · Language</b><span class="fold-v" data-nosc>${(LANGS.find(l=>l.k===langKey())||{}).label}</span></summary><div class="opts">${langs}</div></details>
     <details class="card set-sec set-fold" data-fold="lvl"${S.fold&&S.fold.lvl?" open":""}><summary><b>${T("level")}</b><span class="fold-v">${LEVEL==="IELTS"?"IELTS 7–8":esc(LEVEL)}</span></summary><div class="opts">${lvls}</div><button class="btn ghost sm lvt-link" data-act="lvtest">🧭 ${T("lvtLink")}</button></details>
         <section class="card" style="display:flex;flex-direction:column;gap:10px"><b>${T("backup")}</b><span class="muted" style="font-size:13px">${T("backupSub")}</span>
@@ -3541,7 +3543,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.10.209";
+const APP_VERSION="2026.11.1";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3897,6 +3899,12 @@ function ieLobby(){
 /* ================= Feedback (→ Google Sheet via Apps Script, plus a Firestore copy) ================= */
 // Paste the Apps Script "Web app" URL here once it is deployed (see instructions from Claude).
 const FEEDBACK_URL="https://script.google.com/macros/s/AKfycbxL21sHbIGaY4OSAwQUGEYL6bw_Dnpv2b6gn8kSMtkG0_7tauCTLIuH4nEZg6vG93X2/exec";
+const LINE_COMMUNITY_URL="https://line.me/ti/g2/p94SUoGrM2EiPywvBuilE-kxGsnSH5nUWMpzxQ";
+function communityCard(){
+  const k=langKey(); if(k!=="zh"&&k!=="cn") return "";
+  return `<section class="card set-sec comm-card"><b>🐶 ${T("commTitle")}</b><span class="muted sm-t">${T("commSub")}</span>
+    <a class="btn sm comm-line" href="${LINE_COMMUNITY_URL}" target="_blank" rel="noopener">${T("commJoin")}</a></section>`;
+}
 function feedbackCard(){
   const types=[["idea",T("fbIdea")],["bug",T("fbBug")],["news",T("fbNews")],["other",T("fbOther")]];
   const ty=S.fbType||"idea";
@@ -7696,6 +7704,7 @@ Object.assign(STR.hi,{"lgNoNet":"लॉगिन इनाम लेने क�
 Object.assign(STR.es,{"lgNoNet":"Necesitas conexión para reclamar el premio (usa la hora del servidor)","lgHead": "Premio diario por entrar", "lgSub": "Abre el juego cada día para reclamarlo. Cuanto más larga tu racha, mejor tu título, y desbloquea estilos mejores.", "lgDay": "Día {n}", "lgClaim": "Reclamar el premio de hoy", "lgClaimShort": "Premio 🎁", "lgOk": "Vale", "lgGot": "¡Conseguido!", "lgDays": "Racha de {n} días", "lgBest": "récord {n} días", "lgNext": "{n} días más para «{t}»", "lgMax": "Ya tienes el título más alto", "lgT0": "Principiante", "lgTitleN": "Título: {t}", "lgRung": "{d} días seguidos", "lgLadderT": "Todos los títulos", "lgMile": "¡{d} días seguidos! Nuevo título «{t}» y {n} monedas de estilo extra", "lgSaved": "Faltaste {n} día(s): se usaron {n} pase(s) de tregua y tu racha sigue.", "lgBroke": "Tu racha empezó de nuevo. Tranquilo: los títulos y estilos que ganaste son tuyos para siempre.", "lgTruceFull": "(pases de tregua llenos, máximo {n})", "lgTruceHelp": "⏸️ Pase de tregua: si faltas un día se usa uno automáticamente y tu racha continúa (ese día no cuenta). Recibes 1 cada 3 días que reclamas, hasta {n}. Los títulos siguen tu mejor racha, así que nunca se pierden.", "cosDaysTag": "Racha de {n} días", "cosDaysLock": "Necesitas una racha de {n} días (tu récord: {m} días)", "styEarnL": "Abre el juego cada día y reclama el premio (ciclo de 7 días, el mayor el día 7)", "styEarnM": "Grandes premios a los 10, 30, 60 días seguidos y más", "ieShowT": "Mostrar mi mejor insignia IELTS junto a mi nombre", "ieShowSub": "Todos la verán en las clasificaciones y en los juegos en grupo (tu mejor: Band {b}).", "ieShowNone": "Aparece cuando consigas Band 6 o más.", "devStreakT": "👀 Previsualizar una racha (títulos, estilos)", "devLoginAgain": "Reclamar otra vez el premio de hoy"});
 Object.assign(STR.ja,{"lgNoNet":"ログインボーナスの受け取りにはネット接続が必要です（サーバーの時刻を使います）","lgHead": "毎日のログインボーナス", "lgSub": "毎日ゲームを開くともらえます。連続ログインが長いほど称号が豪華になり、もっとすごいスタイルが解放されます。", "lgDay": "{n}日目", "lgClaim": "今日のボーナスを受け取る", "lgClaimShort": "受け取る 🎁", "lgOk": "OK", "lgGot": "受け取りました！", "lgDays": "{n}日連続", "lgBest": "最長 {n}日", "lgNext": "あと{n}日で「{t}」", "lgMax": "最高の称号です", "lgT0": "初心者", "lgTitleN": "称号：{t}", "lgRung": "{d}日連続", "lgLadderT": "称号一覧", "lgMile": "{d}日連続達成！称号「{t}」と、スタイルコイン {n} をプレゼント", "lgSaved": "{n}日来られなかったので休戦令を{n}枚使いました。連続記録は守られました！", "lgBroke": "連続記録がリセットされました。手に入れた称号とスタイルはずっとあなたのものです。", "lgTruceFull": "（休戦令は最大{n}枚、満タンです）", "lgTruceHelp": "⏸️ 休戦令：1日来られなかったとき自動で1枚使い、連続記録が途切れません（その日は日数に入りません）。3日受け取るごとに1枚、最大{n}枚まで。称号は最長記録で決まるので、なくなることはありません。", "cosDaysTag": "{n}日連続で解放", "cosDaysLock": "{n}日連続ログインで購入できます（あなたの最長：{m}日）", "styEarnL": "毎日ゲームを開いてログインボーナス（7日で1周、7日目が最大）", "styEarnM": "10・30・60日連続などの節目でさらに大きなプレゼント", "ieShowT": "名前の横にベストの IELTS バッジを表示", "ieShowSub": "ランキングやみんなで遊ぶゲームで表示されます（ベスト：Band {b}）。", "ieShowNone": "Band 6 以上を取ると表示されます。", "devStreakT": "👀 連続日数をプレビュー（称号・スタイル解放）", "devLoginAgain": "今日のログインボーナスをもう一度"});
 Object.assign(STR.ko,{"lgNoNet":"로그인 보상을 받으려면 인터넷 연결이 필요해요 (서버 시간 기준)","lgHead": "매일 로그인 보상", "lgSub": "매일 게임을 열면 받을 수 있어요. 연속 로그인이 길수록 칭호가 멋져지고, 더 멋진 스타일이 열려요.", "lgDay": "{n}일째", "lgClaim": "오늘 보상 받기", "lgClaimShort": "보상 🎁", "lgOk": "확인", "lgGot": "받았어요!", "lgDays": "{n}일 연속", "lgBest": "최고 {n}일", "lgNext": "{n}일 더 하면 「{t}」", "lgMax": "최고 칭호예요", "lgT0": "초보자", "lgTitleN": "칭호: {t}", "lgRung": "{d}일 연속", "lgLadderT": "칭호 목록", "lgMile": "{d}일 연속 달성! 칭호 「{t}」와 스타일 코인 {n}개 추가", "lgSaved": "{n}일 못 와서 휴전권 {n}장을 자동으로 썼어요. 연속 기록은 그대로예요!", "lgBroke": "연속 기록이 다시 시작됐어요. 걱정 마세요: 얻은 칭호와 스타일은 계속 내 거예요.", "lgTruceFull": "(휴전권은 최대 {n}장, 가득 찼어요)", "lgTruceHelp": "⏸️ 휴전권: 하루를 놓치면 자동으로 한 장 써서 연속 기록이 끊기지 않아요(그날은 일수에 안 들어가요). 3일 받을 때마다 1장, 최대 {n}장. 칭호는 최고 기록으로 정해져서 없어지지 않아요.", "cosDaysTag": "{n}일 연속 해금", "cosDaysLock": "{n}일 연속 로그인해야 살 수 있어요 (내 최고 기록: {m}일)", "styEarnL": "매일 게임을 열고 로그인 보상 받기 (7일 주기, 7일째가 가장 커요)", "styEarnM": "10·30·60일 연속 등 기념일마다 큰 선물", "ieShowT": "이름 옆에 내 최고 IELTS 배지 표시", "ieShowSub": "순위표와 함께 놀기 게임에서 모두가 볼 수 있어요 (최고: Band {b}).", "ieShowNone": "Band 6 이상을 받으면 표시돼요.", "devStreakT": "👀 연속 일수 미리보기 (칭호, 스타일 해금)", "devLoginAgain": "오늘 로그인 보상 다시 받기"});
+Object.assign(STR.zh,{commTitle:"加入 BinBin Daily LINE 社群", commSub:"跟其他在愛爾蘭打工度假、遊學的朋友一起練英文：分享每日進度、問英文問題、約朋友玩小遊戲。", commJoin:"加入 LINE 社群"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
