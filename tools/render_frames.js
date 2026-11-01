@@ -33,6 +33,11 @@ const lesson = JSON.parse(fs.readFileSync(lessonPath, 'utf8'));
       if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
       n++;
     }
+    // at the line's last frame: big words must never run off the screen (lesson-render.js shrinks them; this catches anything it misses)
+    const cut = await p.evaluate(() => [...document.querySelectorAll('.stage *')].filter(e => {
+      const r = document.createRange(); r.selectNodeContents(e); const b = r.getBoundingClientRect();
+      return b.width && (b.left < 0 || b.right > innerWidth); }).map(e => e.textContent.slice(0, 40)));
+    if (cut.length) throw new Error('text runs off the screen: ' + cut.join(' | '));
     process.stdout.write(`frames ${n}\r`);
   }
   await b.close();
