@@ -157,7 +157,7 @@ def stage(s, ln, first, ts):
         cta = (f'<div class="cta" style="{an("pop", 0.7, 0.5)}"><div style="{an("pulse", 0.9, 1.2, ease="ease", count="infinite")}">📲 打開 BinBin 一起練習</div></div>'
                if ln.get("end") else "")
         body = (f'<div class="kicker" style="{E("up", 0.1)}">✅ 今天學會了</div>{cards}'
-                f'<div class="circle" style="width:340px;height:340px;margin-top:40px;{E("up", 1.8)}"><img src="{img(s["img"])}" style="{kb}"></div>{cta}')
+                (cta or f'<div class="circle" style="width:340px;height:340px;margin-top:40px;{E("up", 1.8)}"><img src="{img(s["img"])}" style="{kb}"></div>'))
     else:
         raise ValueError("unknown slide type " + t)
     return body, pops
