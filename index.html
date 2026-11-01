@@ -1570,7 +1570,7 @@ const S = {
   articles:[], articleDate:null,        // article being read
   words:new Map(), days:new Map(),      // personal data
   ready:{articles:false, personal:false},
-  dbOK:false, uid:null, quiz:null, dictSort:"recent", dictQ:"", open:null, sheet:null
+  dbOK:false, uid:null, quiz:null, dictSort:"recent", dictQ:"", archQ:"", open:null, sheet:null
 };
 
 /* ---------- storage layer: db when available, else this browser ---------- */
@@ -1678,7 +1678,7 @@ function renderInner(){
   else if(S.view==="read") app.innerHTML=viewRead();
   else if(S.view==="quiz") app.innerHTML=viewQuiz();
   else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
-  else if(S.view==="arch") app.innerHTML=viewArch();
+  else if(S.view==="arch"){ const l=$("#archList"); if(l && document.activeElement && document.activeElement.id==="archSearch") l.innerHTML=archList(); else app.innerHTML=viewArch(); }
   else if(S.view==="set") app.innerHTML=viewSettings();
   else if(S.view==="play") app.innerHTML=viewPlay();
   else if(S.view==="privacy") app.innerHTML=viewPrivacy();
@@ -1879,10 +1879,18 @@ function highlight(s, forms){ let out=esc(s); (forms||[]).forEach(f=>{ out=out.r
 
 function viewArch(){
   if(!S.index.length) return `<div class="view"><div class="card empty"><img src="assets/art/scene-rest.webp" alt="" class="empty-art"><h3>${T("noArticles")}</h3></div></div>`;
-  const d=dayRec(); const dates=[...new Set(S.index.map(a=>a.date))];
   return `<div class="view"><div><div class="eyebrow">${T("allArts")}</div><h2 style="font-size:24px">${T("artCount",{n:S.index.length})}</h2></div>
-    ${dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${S.index.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("")}
+    <input id="archSearch" class="search" type="search" placeholder="${T("archSearch")}" value="${esc(S.archQ)}" autocomplete="off" enterkeyhint="search">
+    <div id="archList" style="display:flex;flex-direction:column;gap:18px">${archList()}</div>
     <p class="muted" style="font-size:13px">${T("archNote")}</p></div>`;
+}
+function archHay(a){ return [a.title,a.summaryZh,a.summaryEn,sumOf(a),a.topic,topicOf(a),a.region?regionLabel(a.region):""].filter(Boolean).join("\n").toLowerCase(); }
+function archList(){
+  const d=dayRec(), terms=S.archQ.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const list=terms.length?S.index.filter(a=>{ const h=archHay(a); return terms.every(t=>h.includes(t)); }):S.index;
+  if(!list.length) return `<div class="empty">${T("archNoMatch")}</div>`;
+  const dates=[...new Set(list.map(a=>a.date))];
+  return (terms.length?`<div class="muted" style="font-size:13px">${T("archFound",{n:list.length})}</div>`:"")+dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${list.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("");
 }
 
 /* ---------- word sheet ---------- */
@@ -3543,7 +3551,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.1";
+const APP_VERSION="2026.11.2";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4061,7 +4069,7 @@ document.addEventListener("click", e=>{
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
-document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
+document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } else if(e.target.id==="archSearch"){ S.archQ=e.target.value; const l=$("#archList"); if(l) l.innerHTML=archList(); } });
 document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.party.game==="duel"&&S.pg.party.state==="play"&&S.view==="play"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const D=S.pg.D;
     if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
     if(e.key==="Backspace"){ e.preventDefault(); D.sel.pop(); duPush(); return pgRender(); }
@@ -7705,6 +7713,12 @@ Object.assign(STR.es,{"lgNoNet":"Necesitas conexión para reclamar el premio (us
 Object.assign(STR.ja,{"lgNoNet":"ログインボーナスの受け取りにはネット接続が必要です（サーバーの時刻を使います）","lgHead": "毎日のログインボーナス", "lgSub": "毎日ゲームを開くともらえます。連続ログインが長いほど称号が豪華になり、もっとすごいスタイルが解放されます。", "lgDay": "{n}日目", "lgClaim": "今日のボーナスを受け取る", "lgClaimShort": "受け取る 🎁", "lgOk": "OK", "lgGot": "受け取りました！", "lgDays": "{n}日連続", "lgBest": "最長 {n}日", "lgNext": "あと{n}日で「{t}」", "lgMax": "最高の称号です", "lgT0": "初心者", "lgTitleN": "称号：{t}", "lgRung": "{d}日連続", "lgLadderT": "称号一覧", "lgMile": "{d}日連続達成！称号「{t}」と、スタイルコイン {n} をプレゼント", "lgSaved": "{n}日来られなかったので休戦令を{n}枚使いました。連続記録は守られました！", "lgBroke": "連続記録がリセットされました。手に入れた称号とスタイルはずっとあなたのものです。", "lgTruceFull": "（休戦令は最大{n}枚、満タンです）", "lgTruceHelp": "⏸️ 休戦令：1日来られなかったとき自動で1枚使い、連続記録が途切れません（その日は日数に入りません）。3日受け取るごとに1枚、最大{n}枚まで。称号は最長記録で決まるので、なくなることはありません。", "cosDaysTag": "{n}日連続で解放", "cosDaysLock": "{n}日連続ログインで購入できます（あなたの最長：{m}日）", "styEarnL": "毎日ゲームを開いてログインボーナス（7日で1周、7日目が最大）", "styEarnM": "10・30・60日連続などの節目でさらに大きなプレゼント", "ieShowT": "名前の横にベストの IELTS バッジを表示", "ieShowSub": "ランキングやみんなで遊ぶゲームで表示されます（ベスト：Band {b}）。", "ieShowNone": "Band 6 以上を取ると表示されます。", "devStreakT": "👀 連続日数をプレビュー（称号・スタイル解放）", "devLoginAgain": "今日のログインボーナスをもう一度"});
 Object.assign(STR.ko,{"lgNoNet":"로그인 보상을 받으려면 인터넷 연결이 필요해요 (서버 시간 기준)","lgHead": "매일 로그인 보상", "lgSub": "매일 게임을 열면 받을 수 있어요. 연속 로그인이 길수록 칭호가 멋져지고, 더 멋진 스타일이 열려요.", "lgDay": "{n}일째", "lgClaim": "오늘 보상 받기", "lgClaimShort": "보상 🎁", "lgOk": "확인", "lgGot": "받았어요!", "lgDays": "{n}일 연속", "lgBest": "최고 {n}일", "lgNext": "{n}일 더 하면 「{t}」", "lgMax": "최고 칭호예요", "lgT0": "초보자", "lgTitleN": "칭호: {t}", "lgRung": "{d}일 연속", "lgLadderT": "칭호 목록", "lgMile": "{d}일 연속 달성! 칭호 「{t}」와 스타일 코인 {n}개 추가", "lgSaved": "{n}일 못 와서 휴전권 {n}장을 자동으로 썼어요. 연속 기록은 그대로예요!", "lgBroke": "연속 기록이 다시 시작됐어요. 걱정 마세요: 얻은 칭호와 스타일은 계속 내 거예요.", "lgTruceFull": "(휴전권은 최대 {n}장, 가득 찼어요)", "lgTruceHelp": "⏸️ 휴전권: 하루를 놓치면 자동으로 한 장 써서 연속 기록이 끊기지 않아요(그날은 일수에 안 들어가요). 3일 받을 때마다 1장, 최대 {n}장. 칭호는 최고 기록으로 정해져서 없어지지 않아요.", "cosDaysTag": "{n}일 연속 해금", "cosDaysLock": "{n}일 연속 로그인해야 살 수 있어요 (내 최고 기록: {m}일)", "styEarnL": "매일 게임을 열고 로그인 보상 받기 (7일 주기, 7일째가 가장 커요)", "styEarnM": "10·30·60일 연속 등 기념일마다 큰 선물", "ieShowT": "이름 옆에 내 최고 IELTS 배지 표시", "ieShowSub": "순위표와 함께 놀기 게임에서 모두가 볼 수 있어요 (최고: Band {b}).", "ieShowNone": "Band 6 이상을 받으면 표시돼요.", "devStreakT": "👀 연속 일수 미리보기 (칭호, 스타일 해금)", "devLoginAgain": "오늘 로그인 보상 다시 받기"});
 Object.assign(STR.zh,{commTitle:"加入 BinBin Daily LINE 社群", commSub:"跟其他在愛爾蘭打工度假、遊學的朋友一起練英文：分享每日進度、問英文問題、約朋友玩小遊戲。", commJoin:"加入 LINE 社群"});
+Object.assign(STR.zh,{"archSearch": "搜尋標題、摘要或分類", "archNoMatch": "找不到符合的文章", "archFound": "找到 {n} 篇"});
+Object.assign(STR.en,{"archSearch": "Search titles, summaries or topics", "archNoMatch": "No matching articles", "archFound": "{n} found"});
+Object.assign(STR.hi,{"archSearch": "शीर्षक, सारांश या विषय खोजें", "archNoMatch": "कोई मेल खाता लेख नहीं", "archFound": "{n} मिले"});
+Object.assign(STR.es,{"archSearch": "Buscar títulos, resúmenes o temas", "archNoMatch": "No hay artículos que coincidan", "archFound": "{n} encontrados"});
+Object.assign(STR.ja,{"archSearch": "タイトル・要約・カテゴリで検索", "archNoMatch": "該当する記事がありません", "archFound": "{n}本見つかりました"});
+Object.assign(STR.ko,{"archSearch": "제목, 요약, 분류로 검색", "archNoMatch": "일치하는 기사가 없어요", "archFound": "{n}편 찾음"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
