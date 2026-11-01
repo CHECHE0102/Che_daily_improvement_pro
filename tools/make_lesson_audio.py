@@ -15,11 +15,12 @@ from make_lesson_video import ROOT, SR, voice_line  # noqa: E402
 async def build(path):
     raw = open(path, "rb").read()
     lesson = json.loads(raw)
-    h = hashlib.sha1(raw).hexdigest()[:12]
+    # hash only what is voiced, so editing title / youtube link does not re-record the lesson
+    h = hashlib.sha1(json.dumps([lesson["voices"], lesson["slides"]], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:12]
     out = os.path.join(ROOT, "lessons", "audio", lesson["id"])
     idx_path = os.path.join(out, "index.json")
     entry = {"id": lesson["id"], "file": os.path.basename(path), "title": lesson["title"], "subtitle": lesson.get("subtitle", ""),
-             "level": lesson.get("level", ""), "date": lesson.get("date", "")}
+             "level": lesson.get("level", ""), "date": lesson.get("date", ""), "youtube": lesson.get("youtube", "")}
     if os.path.exists(idx_path) and json.load(open(idx_path)).get("v") == h:
         print("unchanged", lesson["id"])
         return entry

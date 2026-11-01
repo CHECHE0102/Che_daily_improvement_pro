@@ -5,10 +5,12 @@ name: Lesson audio and video
 on:
   push:
     paths: ['lessons/scripts/**', 'lessons/lesson-render.js', 'tools/make_lesson_video.py', 'tools/make_lesson_audio.py', 'tools/render_frames.js', '.github/workflows/lesson-video.yml']
+  schedule:
+    - cron: '10 8 * * *'   # merges made by other workflows don't trigger pushes, so catch new lessons daily
   workflow_dispatch:
     inputs:
       videos:
-        description: 'Which videos to render: changed, all, none'
+        description: 'Which videos to render: changed, missing, all, none'
         default: 'all'
 permissions:
   contents: write
@@ -42,9 +44,13 @@ jobs:
       - name: Pick videos
         id: pick
         run: |
-          mode="${{ github.event.inputs.videos || 'changed' }}"
+          mode="${{ github.event.inputs.videos }}"
+          [ -z "$mode" ] && { [ "${{ github.event_name }}" = schedule ] && mode=missing || mode=changed; }
           before="${{ github.event.before }}"
-          if [ "$mode" = all ] || [ -z "$before" ] || [ "$before" = 0000000000000000000000000000000000000000 ]; then
+          if [ "$mode" = missing ]; then   # lessons with no video on the lesson-videos branch yet
+            have=$(git fetch -q origin lesson-videos && git ls-tree --name-only origin/lesson-videos || true)
+            list=$(for f in lessons/scripts/*.json; do id=$(python -c "import json,sys;print(json.load(open(sys.argv[1]))['id'])" "$f"); echo "$have" | grep -qx "$id.mp4" || echo "$f"; done)
+          elif [ "$mode" = all ] || [ -z "$before" ] || [ "$before" = 0000000000000000000000000000000000000000 ]; then
             list=$(ls lessons/scripts/*.json)
           elif [ "$mode" = none ]; then list=""
           else list=$(git diff --name-only "$before" "${{ github.sha }}" -- lessons/scripts | grep '\.json$' || true); fi

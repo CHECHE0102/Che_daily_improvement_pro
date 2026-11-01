@@ -516,6 +516,7 @@ select.search{appearance:auto;-webkit-appearance:menulist}.reg-note{font-size:13
 .lsn-id{font-weight:800;font-size:12px;background:var(--gold,#f0be45);color:#1d2a26;border-radius:999px;padding:3px 9px}
 .lsn-t{flex:1;display:flex;flex-direction:column;gap:2px}.lsn-t small{font-size:12px}
 .lsn-ok{font-style:normal;color:#1F9E74;font-weight:900;font-size:18px}.lsn-gold{font-style:normal;font-weight:800;font-size:13px;color:#a87a00}
+.lsn-yt{align-self:flex-start;margin:-4px 0 4px 6px;font-size:13px;font-weight:700;color:#c4302b!important;text-decoration:none!important}.lsn-end .lsn-yt{align-self:center;margin:4px 0 0}
 .lsn-art{width:72px;height:72px;border-radius:50%;object-fit:cover;background:#dcebe5}
 body.lsn-lock{overflow:hidden}
 .lsn-ov{position:fixed;inset:0;z-index:9000;background:#0d2e26;display:flex;flex-direction:column;color:#fff;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
@@ -6771,10 +6772,12 @@ function lsnLobby(){
   if(!LSN_INDEX){ lsnLoadIndex(); return `<p class="muted">${T("loading")}</p>`; }
   const done=game().lessons||{};
   const rows=LSN_INDEX.map(l=>{ const d=done[l.id];
-    return `<button class="card lsn-row" data-act="lsnopen" data-k="${esc(l.id)}"><span class="lsn-id">${esc(l.id)}</span><span class="lsn-t"><b>${esc(l.title)}</b><small class="muted">${esc(l.subtitle||"")}${l.level?` · ${esc(l.level)}`:""}</small></span><span class="lsn-st">${d?`<i class="lsn-ok">✓</i>`:`<i class="lsn-gold">+${LSN_GOLD+LSN_QUIZ_GOLD}🪙</i>`}</span></button>`; }).join("");
+    return `<button class="card lsn-row" data-act="lsnopen" data-k="${esc(l.id)}"><span class="lsn-id">${esc(l.id)}</span><span class="lsn-t"><b>${esc(l.title)}</b><small class="muted">${esc(l.subtitle||"")}${l.level?` · ${esc(l.level)}`:""}</small></span><span class="lsn-st">${d?`<i class="lsn-ok">✓</i>`:`<i class="lsn-gold">+${LSN_GOLD+LSN_QUIZ_GOLD}🪙</i>`}</span></button>${lsnYt(l)?`<a class="lsn-yt" href="${esc(lsnYt(l))}" target="_blank" rel="noopener">▶ ${T("lsnYT")}</a>`:""}`; }).join("");
   return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>📚 ${T("lsnTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("lsnSub",{g:LSN_GOLD,q:LSN_QUIZ_GOLD})}</p></div><img src="assets/art/scene-study.webp" alt="" class="lsn-art"></div></section>
     ${rows||`<section class="card"><p class="muted">${T("lsnNone")}</p></section>`}`;
 }
+// only real YouTube links are shown (the lesson script's "youtube" field)
+function lsnYt(l){ const u=l&&l.youtube||""; return /^https:\/\/(www\.|m\.)?(youtube\.com|youtu\.be)\//.test(u)?u:""; }
 function lsnScript(src){ return new Promise((res,rej)=>{ if(window.LessonRender) return res(); const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=rej; document.head.append(s); }); }
 async function lsnOpen(id){
   const meta=(LSN_INDEX||[]).find(l=>l.id===id); if(!meta) return;
@@ -6844,7 +6847,8 @@ function lsnFinish(){
   const c=LSN.ov.querySelector(".lsn-cover"); c.hidden=false;
   c.innerHTML=`<div class="lsn-end"><div style="font-size:54px">🎉</div><b>${T("lsnFinish")}</b>${gold?`<p class="lsn-gold-big">+${gold} 🪙</p>`:`<p class="muted">${T("lsnNoGold")}</p>`}
     ${LSN.quizOk===false&&gold?`<p class="muted sm-t">${T("lsnQuizMiss",{q:LSN_QUIZ_GOLD})}</p>`:""}
-    <div class="row"><button class="btn ghost" data-lsn="again">${T("lsnAgain")}</button><button class="btn" data-lsn="close">${T("lsnClose")}</button></div></div>`;
+    <div class="row"><button class="btn ghost" data-lsn="again">${T("lsnAgain")}</button><button class="btn" data-lsn="close">${T("lsnClose")}</button></div>
+    ${lsnYt(LSN.lesson)?`<a class="lsn-yt" href="${esc(lsnYt(LSN.lesson))}" target="_blank" rel="noopener">▶ ${T("lsnYT")}</a>`:""}</div>`;
 }
 function lsnClose(silent){ const ov=document.getElementById("lsnOv"); if(LSN.on) lsnStopTimers(); LSN.on=false; LSN.lesson=null; if(ov) ov.remove();
   document.body.classList.remove("lsn-lock"); window.removeEventListener("resize",lsnFit);
@@ -7903,6 +7907,12 @@ Object.assign(STR.hi,{"igTitle": "Instagram पर BinBin", "igSub": "छोट�
 Object.assign(STR.es,{"igTitle": "BinBin en Instagram", "igSub": "Vídeos de mini lecciones y novedades del juego.", "igFollow": "Seguir"});
 Object.assign(STR.ja,{"igTitle": "BinBin の Instagram", "igSub": "ミニ講座動画やゲームのお知らせを投稿します。", "igFollow": "フォロー"});
 Object.assign(STR.ko,{"igTitle": "BinBin 인스타그램", "igSub": "미니 강의 영상과 게임 소식을 올려요.", "igFollow": "팔로우"});
+Object.assign(STR.zh,{"lsnYT":"在 YouTube 看"});
+Object.assign(STR.en,{"lsnYT":"Watch on YouTube"});
+Object.assign(STR.hi,{"lsnYT":"YouTube पर देखें"});
+Object.assign(STR.es,{"lsnYT":"Ver en YouTube"});
+Object.assign(STR.ja,{"lsnYT":"YouTube で見る"});
+Object.assign(STR.ko,{"lsnYT":"YouTube에서 보기"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
