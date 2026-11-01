@@ -59,6 +59,7 @@ async def main():
     json.dump({"lessons": entries}, open(os.path.join(ROOT, "lessons", "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if failed:
         print("::warning::lessons not voiced this run: " + ", ".join(map(os.path.basename, failed)))
+        sys.exit(1)
 
 
 if __name__ == "__main__":

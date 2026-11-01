@@ -10,7 +10,7 @@ usage: python tools/make_lesson_video.py lessons/scripts/L001-irish-phrases.json
   --only N    render only slide N (0-based), for quick previews
 Output: lessons/out/<id>.mp4 (not committed).
 """
-import asyncio, json, os, re, subprocess, sys
+import asyncio, hashlib, json, os, re, subprocess, sys
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,7 +54,9 @@ async def voice_line(ln, voices, base):
         if k == "P":
             clip.append(np.zeros(int(0.22 * SR), np.float32)); t += 0.22
             continue
-        mp3 = f"{base}-{j}.mp3"
+        # file name carries voice + prosody + text, so a cached clip (actions/cache) is only reused for the same words
+        tag = hashlib.sha1(f"{voices[k]}|{PROSODY[k]}|{text}".encode()).hexdigest()[:8]
+        mp3 = f"{base}-{j}-{tag}.mp3"
         if not os.path.exists(mp3 + ".json"):
             await tts(text, voices[k], *PROSODY[k], mp3)
         c, cut = trim(decode(mp3))
@@ -77,9 +79,9 @@ def trim(c, thr=0.01):
 
 async def tts(text, voice, rate, pitch, path):
     import edge_tts
-    # the service sometimes returns no audio for a voice + prosody pair; fall back to plainer settings
+    # the service sometimes returns "No audio" for a while; finished clips are cached, so a later run carries on
     # (seen 2026-11-01: after many requests it refuses for a while, so retry slowly before giving up)
-    tries = [(rate, pitch)] * 7 + [("+0%", "+0Hz")] * 2
+    tries = [(rate, pitch)] * 5
     for attempt, (r, p) in enumerate(tries):
         try:
             com = edge_tts.Communicate(text, voice, rate=r, pitch=p, boundary="WordBoundary")

@@ -30,8 +30,17 @@ jobs:
           python-version: '3.12'
       - run: pip install "edge-tts>=7,<8" numpy
       - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fonts-noto-cjk
+      - name: Restore voice clips from earlier runs
+        uses: actions/cache@v4
+        with:
+          path: lessons/out/*/a*
+          key: lesson-tts-${{ github.run_id }}
+          restore-keys: lesson-tts-
       - name: Voice lessons for the app
-        run: python tools/make_lesson_audio.py
+        # the TTS service sometimes refuses for a few minutes; finished clips stay on disk, so each pass carries on
+        run: |
+          for i in 1 2 3 4; do python tools/make_lesson_audio.py && break; echo "pass $i incomplete, waiting"; sleep 120; done
+          true
       - name: Commit lesson audio
         run: |
           git config user.name "CHECHE0102"
