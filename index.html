@@ -1582,7 +1582,7 @@ const S = {
   articles:[], articleDate:null,        // article being read
   words:new Map(), days:new Map(),      // personal data
   ready:{articles:false, personal:false},
-  dbOK:false, uid:null, quiz:null, dictSort:"recent", dictQ:"", open:null, sheet:null
+  dbOK:false, uid:null, quiz:null, dictSort:"recent", dictQ:"", archQ:"", open:null, sheet:null
 };
 
 /* ---------- storage layer: db when available, else this browser ---------- */
@@ -1690,7 +1690,7 @@ function renderInner(){
   else if(S.view==="read") app.innerHTML=viewRead();
   else if(S.view==="quiz") app.innerHTML=viewQuiz();
   else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
-  else if(S.view==="arch") app.innerHTML=viewArch();
+  else if(S.view==="arch"){ const l=$("#archList"); if(l && document.activeElement && document.activeElement.id==="archSearch") l.innerHTML=archList(); else app.innerHTML=viewArch(); }
   else if(S.view==="set") app.innerHTML=viewSettings();
   else if(S.view==="play") app.innerHTML=viewPlay();
   else if(S.view==="privacy") app.innerHTML=viewPrivacy();
@@ -1891,10 +1891,18 @@ function highlight(s, forms){ let out=esc(s); (forms||[]).forEach(f=>{ out=out.r
 
 function viewArch(){
   if(!S.index.length) return `<div class="view"><div class="card empty"><img src="assets/art/scene-rest.webp" alt="" class="empty-art"><h3>${T("noArticles")}</h3></div></div>`;
-  const d=dayRec(); const dates=[...new Set(S.index.map(a=>a.date))];
   return `<div class="view"><div><div class="eyebrow">${T("allArts")}</div><h2 style="font-size:24px">${T("artCount",{n:S.index.length})}</h2></div>
-    ${dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${S.index.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("")}
+    <input id="archSearch" class="search" type="search" placeholder="${T("archSearch")}" value="${esc(S.archQ)}" autocomplete="off" enterkeyhint="search">
+    <div id="archList" style="display:flex;flex-direction:column;gap:18px">${archList()}</div>
     <p class="muted" style="font-size:13px">${T("archNote")}</p></div>`;
+}
+function archHay(a){ return [a.title,a.summaryZh,a.summaryEn,sumOf(a),a.topic,topicOf(a),a.region?regionLabel(a.region):""].filter(Boolean).join("\n").toLowerCase(); }
+function archList(){
+  const d=dayRec(), terms=S.archQ.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const list=terms.length?S.index.filter(a=>{ const h=archHay(a); return terms.every(t=>h.includes(t)); }):S.index;
+  if(!list.length) return `<div class="empty">${T("archNoMatch")}</div>`;
+  const dates=[...new Set(list.map(a=>a.date))];
+  return (terms.length?`<div class="muted" style="font-size:13px">${T("archFound",{n:list.length})}</div>`:"")+dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${list.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("");
 }
 
 /* ---------- word sheet ---------- */
@@ -3571,7 +3579,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.3";
+const APP_VERSION="2026.11.4";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4091,7 +4099,7 @@ document.addEventListener("click", e=>{
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
-document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } });
+document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } else if(e.target.id==="archSearch"){ S.archQ=e.target.value; const l=$("#archList"); if(l) l.innerHTML=archList(); } });
 document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.party.game==="duel"&&S.pg.party.state==="play"&&S.view==="play"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const D=S.pg.D;
     if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
     if(e.key==="Backspace"){ e.preventDefault(); D.sel.pop(); duPush(); return pgRender(); }
@@ -7759,6 +7767,12 @@ Object.assign(STR.hi,{"srNoDev": "इस ब्राउज़र में व�
 Object.assign(STR.es,{"srNoDev": "Este navegador no tiene reconocimiento de voz, así que no puede comprobar tu pronunciación. Prueba con Chrome o Safari.", "srPwa": "En iPhone, el reconocimiento de voz no funciona si abres BinBin desde la pantalla de inicio. Abre binbindaily.com en Safari.", "srFail": "No se pudo empezar a escuchar ({e}). Vuelve a tocar."});
 Object.assign(STR.ja,{"srNoDev": "このブラウザは音声認識に対応していないため、発音チェックができません。Chrome か Safari をお試しください。", "srPwa": "iPhone ではホーム画面から開いた BinBin で音声認識が使えません。Safari で binbindaily.com を開いてください。", "srFail": "聞き取りを開始できませんでした（{e}）。もう一度タップしてください。"});
 Object.assign(STR.ko,{"srNoDev": "이 브라우저는 음성 인식을 지원하지 않아 발음을 확인할 수 없어요. Chrome이나 Safari를 사용해 보세요.", "srPwa": "iPhone에서 홈 화면으로 연 BinBin에서는 음성 인식이 안 돼요. Safari에서 binbindaily.com을 열어 주세요.", "srFail": "듣기를 시작하지 못했어요 ({e}). 다시 눌러 주세요."});
+Object.assign(STR.zh,{"archSearch": "搜尋標題、摘要或分類", "archNoMatch": "找不到符合的文章", "archFound": "找到 {n} 篇"});
+Object.assign(STR.en,{"archSearch": "Search titles, summaries or topics", "archNoMatch": "No matching articles", "archFound": "{n} found"});
+Object.assign(STR.hi,{"archSearch": "शीर्षक, सारांश या विषय खोजें", "archNoMatch": "कोई मेल खाता लेख नहीं", "archFound": "{n} मिले"});
+Object.assign(STR.es,{"archSearch": "Buscar títulos, resúmenes o temas", "archNoMatch": "No hay artículos que coincidan", "archFound": "{n} encontrados"});
+Object.assign(STR.ja,{"archSearch": "タイトル・要約・カテゴリで検索", "archNoMatch": "該当する記事がありません", "archFound": "{n}本見つかりました"});
+Object.assign(STR.ko,{"archSearch": "제목, 요약, 분류로 검색", "archNoMatch": "일치하는 기사가 없어요", "archFound": "{n}편 찾음"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
