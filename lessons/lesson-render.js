@@ -82,7 +82,8 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
 `;
   const LEAD_IN = 0.45;
   const CAST = {
-    T: { name: "BinBin 長老", icon: "🧙", talk: "elder-talk", happy: "elder-happy", hi: "elder-wave" },
+    T: { name: "Cian 老師", icon: "👨‍🏫", talk: "lesson/teacher-talk", happy: "lesson/teacher-yay", hi: "lesson/teacher-hi", bye: "lesson/teacher-bye",
+         think: "lesson/teacher-think", wow: "lesson/teacher-wow", point: "lesson/teacher-point" },
     A: { name: "Emily", icon: "🗣", talk: "hero-f-idle" },
     B: { name: "Connor", icon: "🗣", talk: "hero-m-idle" }
   };
@@ -186,7 +187,9 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
         + `<div class="av ${oside} listen" style="transform:scale(.85);"><div style="${idle}"><img src="${img(cast[other].talk)}"></div></div>`;
     } else {
       side = "l"; const c = cast.T;
-      const face = (ln.reveal || ln.end) && c.happy ? c.happy : (info.idx === 0 && first && c.hi ? c.hi : c.talk);
+      // pick a pose: hello at the start, wow on the hook, pointing when a phrase appears, thinking during the quiz, yay/bye at the end
+      const face = (ln.end && c.bye) || (ln.reveal && c.happy) || (ln.countdown && c.think) || (info.idx === 0 && first && c.hi)
+        || (s.type === "hook" && c.wow) || (first && ["phrase", "grammar"].includes(s.type) && c.point) || c.talk;
       avs = `<div class="av l" style="${avIn}"><div style="${talkN ? talk : idle}"><img src="${img(face)}"></div></div>`;
     }
     const cap = ln.cap || ln.say;
