@@ -21,10 +21,10 @@ jobs:
           git config user.email "CHECHE0102@users.noreply.github.com"
           BR="${GITHUB_REF#refs/heads/}"
           git fetch origin "$BR"
-          # only daily content may come in this way: articles, reasoning questions, IELTS/TOEIC weekly sets
+          # only daily content may come in this way: articles, reasoning questions, IELTS/TOEIC weekly sets, lesson scripts
           CHANGED=$(git diff --name-only "$(git merge-base origin/main "origin/$BR")" "origin/$BR")
           echo "$CHANGED"
-          if [ -n "$CHANGED" ] && echo "$CHANGED" | grep -qvE '^(articles|reason|ielts/weeks|toeic/weeks)/'; then echo "Branch changes files outside the daily content folders — refusing"; exit 1; fi
+          if [ -n "$CHANGED" ] && echo "$CHANGED" | grep -qvE '^(articles|reason|ielts/weeks|toeic/weeks|lessons/scripts)/'; then echo "Branch changes files outside the daily content folders — refusing"; exit 1; fi
           git merge --no-edit "origin/$BR"
           # bump the app version so phones pick up the new content (year.month.build, build resets each month)
           python3 - <<'PY'
