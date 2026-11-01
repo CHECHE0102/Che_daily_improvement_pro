@@ -352,7 +352,7 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .rk-row{display:grid;grid-template-columns:34px 1fr auto;grid-template-rows:auto auto;column-gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);align-items:center}
 .rk-row:last-child{border-bottom:0}.rk-row.me{background:var(--accent-soft)}
 .rk-n{grid-row:1/3;font-family:var(--f-display);font-weight:700;font-size:18px;text-align:center;font-variant-numeric:tabular-nums}
-.rk-name{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rk-sub{grid-column:2;font-size:12px}
+.rk-name{font-weight:700;min-width:0;white-space:nowrap;display:flex;align-items:center}.rk-nm{min-width:0;overflow:hidden;text-overflow:ellipsis}.rk-name>.sb-wrap,.rk-name>.rk-flag{flex-shrink:0}.rk-sub{grid-column:2;font-size:12px}
 .rk-v{grid-row:1/3;grid-column:3;font-family:var(--f-display);font-size:20px;font-variant-numeric:tabular-nums}
 .rk-me{font-weight:700;color:var(--accent)}
 .nick{display:flex;flex-direction:column;gap:8px}
@@ -4346,14 +4346,14 @@ function viewRank(){
   else if(f!=="toeic"&&(!S.rk||S.rk.by!==f)){ setTimeout(lbLoad,0); }
   if(f==="toeic") return toRankHtml([["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join(""));
   if(f==="ielts"){ const tabsH=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
-    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18,1)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
+    const rows=(IE_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}<span class="rk-nm">${esc(r.name||"?")}</span>${supB(r.id,18,1)}</span><span class="rk-sub muted">L ${fmtBand(r.l)} · R ${fmtBand(r.r)}</span>${r.band>=6?badgeSvg(fmtBand(r.band),0,30):""}<b class="rk-v">${fmtBand(r.band)}</b></li>`).join("");
     const u=untilMonthEnd();
     return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(IE_TOP.week)} · ${T("ieMonthReset",{d:u.d,h:u.h})}</div>
       ${IE_TOP.loading?`<p class="muted">${T("loading")}</p>`:IE_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("ieNoScore")}</p></div>`}`; }
   const tabs=[["power","⚔️ "+T("rkPower")],["ielts","🎓 "+T("rkIelts")],["toeic","💼 TOEIC"],["read","📖 "+T("rkRead")]].map(([k,l])=>`<button data-rkby="${k}" aria-pressed="${f===k}">${l}</button>`).join("");
   const R=S.rk||{rows:[]};
   const rd=f==="read";
-  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}${!rd?" rk-has-look":""}"${!rd?` data-act="rklook" data-k="${i}"`:""}><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span>${!rd?lookArt(r.id===CLOUD.user.uid?myLook():r.look,"rk-fig"):""}<span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv||1}${rd?"":" · "+T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${rd?T("rkArtsN",{n:r.n}):r[f]}</b></li>`).join("");
+  const rows=R.rows.map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}${!rd?" rk-has-look":""}"${!rd?` data-act="rklook" data-k="${i}"`:""}><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span>${!rd?lookArt(r.id===CLOUD.user.uid?myLook():r.look,"rk-fig"):""}<span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}<span class="rk-nm">${esc(r.name||"?")}</span>${supB(r.id,18)}</span><span class="rk-sub muted">Lv ${r.lv||1}${rd?"":" · "+T("rkConq",{n:r.conq||0})}</span><b class="rk-v">${rd?T("rkArtsN",{n:r.n}):r[f]}</b></li>`).join("");
   const mu=untilMonthEnd();
   return `${g.nick?"":`<div class="card nick"><span>${T("rkNickHint")}</span><button class="btn sm" data-tab="set" style="align-self:flex-start">${T("tabSet")} →</button></div>`}
     <div class="seg" role="group">${tabs}</div>
@@ -6708,7 +6708,7 @@ function toLobby(){
 }
 function toRankHtml(tabsH){
   if(!TO_TOP||TO_TOP.month!==monthKey()){ TO_TOP={month:monthKey(),rows:[],loading:true}; setTimeout(toLoadTop,0); }
-  const rows=(TO_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}${esc(r.name||"?")}${supB(r.id,18)}</span><span class="rk-sub muted">L ${r.l} · R ${r.r}</span>${toChip(r.score)}</li>`).join("");
+  const rows=(TO_TOP.rows||[]).map((r,i)=>`<li class="rk-row${r.id===CLOUD.user.uid?" me":""}"><span class="rk-n">${i<3?["🥇","🥈","🥉"][i]:i+1}</span><span class="rk-name">${/^[A-Z]{2}$/.test(r.flag||"")?`<span class="rk-flag">${flagOf(r.flag)}</span>`:""}<span class="rk-nm">${esc(r.name||"?")}</span>${supB(r.id,18)}</span><span class="rk-sub muted">L ${r.l} · R ${r.r}</span>${toChip(r.score)}</li>`).join("");
   const u=untilMonthEnd();
   return `<div class="seg" role="group">${tabsH}</div><div class="muted sm-t">${esc(TO_TOP.month)} · ${T("ieMonthReset",{d:u.d,h:u.h})}</div>
     ${TO_TOP.loading?`<p class="muted">${T("loading")}</p>`:TO_TOP.err?`<p class="muted">${T("rkLoadFail")}</p>`:rows?`<ol class="rk">${rows}</ol>`:`<div class="card empty"><p>${T("toNoScore")}</p></div>`}`;
