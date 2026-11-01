@@ -4,7 +4,7 @@ on:
     paths: ['lessons/scripts/**', 'tools/make_lesson_video.py', 'tools/render_frames.js', '.github/workflows/lesson-video.yml']
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   video:
     runs-on: ubuntu-latest
@@ -27,3 +27,11 @@ jobs:
           name: lesson-videos
           path: lessons/out/*.mp4
           retention-days: 30
+      - name: Push previews to the lesson-videos branch (kept off main so Pages stays small)
+        run: |
+          mkdir /tmp/pv && cp lessons/out/*.mp4 /tmp/pv/
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git checkout --orphan lesson-videos-tmp && git rm -rfq . && cp /tmp/pv/*.mp4 .
+          git add *.mp4 && git commit -qm "Lesson video previews"
+          git push -fq origin HEAD:lesson-videos
