@@ -3659,7 +3659,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.10";
+const APP_VERSION="2026.11.11";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4102,6 +4102,7 @@ document.addEventListener("click", e=>{
   if(a==="export") return exportData();
   if(a==="compmode"){ S.compMode=t.dataset.k; return render(); }
   if(a==="lsnopen"){ lsnOpen(t.dataset.k); return; }
+  if(a==="lsnkind"){ S.lsnKind=t.dataset.k; return render(); }
   if(a==="playmode"){ S.playMode=t.dataset.k; return render(); }
   if(a==="privacy"){ S.view="privacy"; S.tab="set"; render(); window.scrollTo(0,0); return; }
   if(a==="privback"){ S.view="set"; S.tab="set"; render(); return; }
@@ -6998,11 +6999,12 @@ function lsnLoadIndex(){ if(lsnLoadIndex.busy) return; lsnLoadIndex.busy=1;
 function viewLsn(){ return `<div class="view"><div class="ie-lobby">${lsnLobby()}</div></div>`; }
 function lsnLobby(){
   if(!LSN_INDEX){ lsnLoadIndex(); return `<p class="muted">${T("loading")}</p>`; }
-  const done=game().lessons||{};
-  const rows=LSN_INDEX.map(l=>{ const d=done[l.id];
+  const done=game().lessons||{}, kind=S.lsnKind==="grammar"?"grammar":"phrase";
+  const seg=`<div class="seg lsn-seg" role="group">${[["phrase","📝 "+T("lsnPhrase")],["grammar","📐 "+T("lsnGrammar")]].map(([k,l])=>`<button data-act="lsnkind" data-k="${k}" aria-pressed="${kind===k}">${l}</button>`).join("")}</div>`;
+  const rows=LSN_INDEX.filter(l=>(l.kind||"phrase")===kind).map(l=>{ const d=done[l.id];
     return `<button class="card lsn-row" data-act="lsnopen" data-k="${esc(l.id)}"><span class="lsn-id">${esc(l.id)}</span><span class="lsn-t"><b>${esc(l.title)}</b><small class="muted">${esc(l.subtitle||"")}${l.level?` · ${esc(l.level)}`:""}</small></span><span class="lsn-st">${d?`<i class="lsn-ok">✓</i>`:`<i class="lsn-gold">+${LSN_GOLD+LSN_QUIZ_GOLD}🪙</i>`}</span></button>${lsnYt(l)?`<a class="lsn-yt" href="${esc(lsnYt(l))}" target="_blank" rel="noopener">▶ ${T("lsnYT")}</a>`:""}`; }).join("");
   return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>📚 ${T("lsnTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("lsnSub",{g:LSN_GOLD,q:LSN_QUIZ_GOLD})}</p></div><img src="assets/art/scene-study.webp" alt="" class="lsn-art"></div></section>
-    ${rows||`<section class="card"><p class="muted">${T("lsnNone")}</p></section>`}`;
+    ${seg}${rows||`<section class="card"><p class="muted">${T("lsnNone")}</p></section>`}`;
 }
 // only real YouTube links are shown (the lesson script's "youtube" field)
 function lsnYt(l){ const u=l&&l.youtube||""; return /^https:\/\/(www\.|m\.)?(youtube\.com|youtu\.be)\//.test(u)?u:""; }
@@ -8141,6 +8143,12 @@ Object.assign(STR.hi,{"lsnYT":"YouTube पर देखें"});
 Object.assign(STR.es,{"lsnYT":"Ver en YouTube"});
 Object.assign(STR.ja,{"lsnYT":"YouTube で見る"});
 Object.assign(STR.ko,{"lsnYT":"YouTube에서 보기"});
+Object.assign(STR.zh,{"lsnPhrase": "片語", "lsnGrammar": "文法"});
+Object.assign(STR.en,{"lsnPhrase": "Phrases", "lsnGrammar": "Grammar"});
+Object.assign(STR.hi,{"lsnPhrase": "वाक्यांश", "lsnGrammar": "व्याकरण"});
+Object.assign(STR.es,{"lsnPhrase": "Frases", "lsnGrammar": "Gramática"});
+Object.assign(STR.ja,{"lsnPhrase": "フレーズ", "lsnGrammar": "文法"});
+Object.assign(STR.ko,{"lsnPhrase": "표현", "lsnGrammar": "문법"});
 Object.assign(STR.zh,{"wkTitle": "單字弱點報告", "wkLock": "再存 {n} 個字，就能打開下一份弱點報告（每 100 字一份）", "wkReady": "第 {m} 份報告出爐了 · 再存 {n} 個字出下一份", "wkOpen": "看報告", "wkNew": "新", "wkToast": "🔍 你的字典滿 {n} 個字了！新的弱點報告出爐，到「字典」看看", "wkHead": "第 {m} 份報告 · {n} 個字", "wkAcc": "答對率", "wkTested": "測過的字", "wkSolid": "記牢的字", "wkWrongT": "最常錯的字", "wkWrongS": "這些字你答錯最多次，先把它們搞定", "wkLookT": "查了好幾次還不熟", "wkLookS": "你一直回來查，代表還沒真的記住", "wkPosT": "哪種詞最弱", "wkPosS": "測過 5 次以上的詞性才會列出", "wkPosWeak": "最弱", "wkPosNone": "測驗次數還不夠，多做幾次每日測驗就會出現", "wkUntested": "還有 {n} 個字從來沒被測過，每日測驗和間隔複習會慢慢抽到它們", "wkProgT": "跟上一份比", "wkProg": "上一份報告的 {t} 個弱字，現在已經記牢 {n} 個", "wkProgFirst": "這是你的第一份報告，下一份會告訴你這些弱字進步了多少", "wkTrain": "🎯 特訓這 {n} 個字", "wkTrainT": "弱點特訓", "wkTrainNote": "特訓是純練習，不送彩券；答題結果會算進你的複習紀錄", "wkNoWeak": "目前沒有明顯的弱字，太強了！繼續保持", "wkStat": "錯 {w} · 對 {c} · 查 {l} 次", "wkBack": "回到報告", "wkPos_n": "名詞", "wkPos_v": "動詞", "wkPos_adj": "形容詞", "wkPos_adv": "副詞", "wkPos_o": "其他"});
 Object.assign(STR.en,{"wkTitle": "Word weakness report", "wkLock": "Save {n} more words to open your next weakness report (one every 100 words)", "wkReady": "Report #{m} is ready · {n} more words for the next one", "wkOpen": "View", "wkNew": "New", "wkToast": "🔍 Your dictionary hit {n} words! A new weakness report is ready in Dictionary", "wkHead": "Report #{m} · {n} words", "wkAcc": "Accuracy", "wkTested": "Words tested", "wkSolid": "Words mastered", "wkWrongT": "Most-missed words", "wkWrongS": "You got these wrong the most. Fix them first", "wkLookT": "Looked up again and again", "wkLookS": "You keep coming back to these, so they haven't stuck yet", "wkPosT": "Weakest word type", "wkPosS": "Only word types tested 5+ times are shown", "wkPosWeak": "Weakest", "wkPosNone": "Not enough quiz answers yet. Do a few more daily quizzes", "wkUntested": "{n} words have never been tested yet. Daily quizzes and spaced review will get to them", "wkProgT": "Since last report", "wkProg": "Of the {t} weak words in your last report, {n} are now mastered", "wkProgFirst": "This is your first report. The next one will show how much these words improved", "wkTrain": "🎯 Drill these {n} words", "wkTrainT": "Weak-word drill", "wkTrainNote": "The drill is practice only (no ticket). Your answers still count in your review history", "wkNoWeak": "No clear weak words right now. Great job, keep it up!", "wkStat": "✗ {w} · ✓ {c} · looked up {l}×", "wkBack": "Back to report", "wkPos_n": "Nouns", "wkPos_v": "Verbs", "wkPos_adj": "Adjectives", "wkPos_adv": "Adverbs", "wkPos_o": "Other"});
 Object.assign(STR.hi,{"wkTitle": "शब्द कमज़ोरी रिपोर्ट", "wkLock": "अगली कमज़ोरी रिपोर्ट खोलने के लिए {n} और शब्द सेव करें (हर 100 शब्दों पर एक)", "wkReady": "रिपोर्ट #{m} तैयार है · अगली के लिए {n} और शब्द", "wkOpen": "देखें", "wkNew": "नया", "wkToast": "🔍 आपके शब्दकोश में {n} शब्द हो गए! नई कमज़ोरी रिपोर्ट शब्दकोश में तैयार है", "wkHead": "रिपोर्ट #{m} · {n} शब्द", "wkAcc": "सही उत्तर", "wkTested": "जाँचे गए शब्द", "wkSolid": "पक्के शब्द", "wkWrongT": "सबसे ज़्यादा गलत शब्द", "wkWrongS": "इन शब्दों में आप सबसे ज़्यादा गलत हुए, पहले इन्हें पक्का करें", "wkLookT": "बार-बार देखे गए शब्द", "wkLookS": "आप इन्हें बार-बार देखते हैं, यानी ये अभी याद नहीं हुए", "wkPosT": "सबसे कमज़ोर शब्द-प्रकार", "wkPosS": "केवल 5+ बार जाँचे गए प्रकार दिखते हैं", "wkPosWeak": "सबसे कमज़ोर", "wkPosNone": "अभी पर्याप्त उत्तर नहीं हैं। कुछ और दैनिक क्विज़ करें", "wkUntested": "{n} शब्द अभी तक जाँचे नहीं गए। दैनिक क्विज़ और दोहराव उन तक पहुँचेंगे", "wkProgT": "पिछली रिपोर्ट से तुलना", "wkProg": "पिछली रिपोर्ट के {t} कमज़ोर शब्दों में से {n} अब पक्के हैं", "wkProgFirst": "यह आपकी पहली रिपोर्ट है। अगली रिपोर्ट सुधार दिखाएगी", "wkTrain": "🎯 इन {n} शब्दों का अभ्यास करें", "wkTrainT": "कमज़ोर शब्द अभ्यास", "wkTrainNote": "यह केवल अभ्यास है (टिकट नहीं)। उत्तर आपके दोहराव रिकॉर्ड में गिने जाते हैं", "wkNoWeak": "अभी कोई स्पष्ट कमज़ोर शब्द नहीं। बहुत बढ़िया!", "wkStat": "✗ {w} · ✓ {c} · {l} बार देखा", "wkBack": "रिपोर्ट पर लौटें", "wkPos_n": "संज्ञा", "wkPos_v": "क्रिया", "wkPos_adj": "विशेषण", "wkPos_adv": "क्रिया-विशेषण", "wkPos_o": "अन्य"});

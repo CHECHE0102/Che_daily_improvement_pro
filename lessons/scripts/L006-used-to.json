@@ -1,0 +1,189 @@
+{
+ "id": "L006",
+ "title": "used to 和 be used to",
+ "subtitle": "以前會・已經習慣",
+ "level": "B1",
+ "kind": "grammar",
+ "date": "2026-11-01",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "used to",
+    "be used to",
+    "差一個字，意思差很多！"
+   ],
+   "emoji": "😵",
+   "lines": [
+    {
+     "v": "T",
+     "say": "used to 和 be used to，只差一個字，意思完全不同！"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘幫你分清楚！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "kicker": "文法 1",
+   "head": "used to + 原形動詞",
+   "points": [
+    "以前常常做，現在不做了",
+    "I used to work in a café."
+   ],
+   "img": "scene-study",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，used to 加原形動詞，表示以前常做，現在不做了。"
+    },
+    {
+     "v": "A",
+     "say": "I used to work in a café in Taipei.",
+     "zh": "我以前在台北的咖啡店工作。"
+    },
+    {
+     "v": "B",
+     "say": "Oh nice! Do you still make coffee?",
+     "zh": "不錯喔！你現在還會煮咖啡嗎？"
+    },
+    {
+     "v": "T",
+     "say": "重點是：以前會，現在已經沒有了。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "kicker": "文法 2",
+   "head": "be used to + 名詞 / V-ing",
+   "points": [
+    "已經習慣某件事",
+    "I'm used to the rain now."
+   ],
+   "img": "scene-rest",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，be used to 加名詞或 ing，表示已經習慣。"
+    },
+    {
+     "v": "B",
+     "say": "Are you used to the weather here?",
+     "zh": "你習慣這裡的天氣了嗎？"
+    },
+    {
+     "v": "A",
+     "say": "Yeah, I'm used to the rain now.",
+     "zh": "嗯，我現在已經習慣下雨了。"
+    },
+    {
+     "v": "T",
+     "say": "想說還沒習慣，就說 I'm not used to it yet。",
+     "cap": "I'm not used to it yet. ＝ 我還不習慣。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "kicker": "小技巧",
+   "head": "get used to",
+   "points": [
+    "慢慢變得習慣",
+    "You'll get used to it!"
+   ],
+   "img": "scene-win",
+   "lines": [
+    {
+     "v": "T",
+     "say": "加碼一個，get used to，慢慢變得習慣，很適合安慰新朋友。"
+    },
+    {
+     "v": "A",
+     "say": "Driving on the left is so hard!",
+     "zh": "靠左開車好難！"
+    },
+    {
+     "v": "B",
+     "say": "Don't worry, you'll get used to it.",
+     "zh": "別擔心，你會習慣的。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "I ___ driving on the left now.",
+   "ask": "想說「我現在習慣靠左開車了」，要填？",
+   "opts": [
+    "used to",
+    "am used to",
+    "use to"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我現在已經習慣靠左開車了。"
+    },
+    {
+     "v": "A",
+     "say": "I blank driving on the left now.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！am used to，已經習慣了。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "used to",
+     "以前常做"
+    ],
+    [
+     "be used to",
+     "已經習慣"
+    ],
+    [
+     "get used to",
+     "慢慢習慣"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天分清楚了：used to、be used to、get used to！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -37,4 +37,4 @@ Slide types (see `L001-irish-phrases.json` for a full example)
 - `recap` `{items:[[phrase, meaning]×3], img}`: last line has `"end": true` and ends with 「打開 BinBin，每天用一則新聞練英文。我們下次見！」
 
 `img` / `scene` are names in `assets/art/` without `.webp` (e.g. `scene-party`, `scene-study`, `scene-rest`, `scene-win`, `scene-welcome`, `scene-read`, `scene-quiz`, `scene-bell`).
-Top-level fields: `id`, `title`, `subtitle`, `level`, `date` (YYYY-MM-DD), `voices` (copy from L001), optional `youtube` (added later by hand).
+Top-level fields: `id`, `title`, `subtitle`, `level`, `kind` (`phrase` or `grammar`: which 小教室 tab it goes in), `date` (YYYY-MM-DD), `voices` (copy from L001), optional `youtube` (added later by hand).

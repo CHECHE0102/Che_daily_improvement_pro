@@ -1,0 +1,187 @@
+{
+ "id": "L004",
+ "title": "去看 GP 怎麼說",
+ "subtitle": "appointment・sore throat・prescription",
+ "level": "A2–B1",
+ "kind": "phrase",
+ "date": "2026-11-01",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "在愛爾蘭生病",
+    "GP",
+    "是什麼？"
+   ],
+   "emoji": "🩺",
+   "lines": [
+    {
+     "v": "T",
+     "say": "在愛爾蘭生病，不是直接去醫院，而是先看 GP，家庭醫生。"
+    },
+    {
+     "v": "T",
+     "say": "今天教你看 GP 最常用的三句英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "appointment",
+   "meaning": "預約掛號",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，appointment，預約。看 GP 通常要先打電話預約。"
+    },
+    {
+     "v": "A",
+     "say": "Hi, I'd like to make an appointment, please.",
+     "zh": "你好，我想預約看診。"
+    },
+    {
+     "v": "B",
+     "say": "We have one at half ten tomorrow.",
+     "zh": "明天十點半有空檔。"
+    },
+    {
+     "v": "T",
+     "say": "half ten 是愛爾蘭說法，意思是十點半喔！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "I've a sore throat",
+   "meaning": "我喉嚨痛",
+   "img": "scene-rest",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，描述症狀。愛爾蘭人常說 I've a，不說 I have a。"
+    },
+    {
+     "v": "B",
+     "say": "So, what seems to be the problem?",
+     "zh": "那麼，哪裡不舒服呢？"
+    },
+    {
+     "v": "A",
+     "say": "I've a sore throat and a bit of a temperature.",
+     "zh": "我喉嚨痛，還有一點發燒。"
+    },
+    {
+     "v": "T",
+     "say": "a temperature，在這裡就是發燒的意思。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "prescription",
+   "meaning": "處方箋",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，prescription，處方箋，拿去藥局 pharmacy 領藥。"
+    },
+    {
+     "v": "B",
+     "say": "I'll give you a prescription for antibiotics.",
+     "zh": "我開抗生素的處方箋給你。"
+    },
+    {
+     "v": "A",
+     "say": "Thanks. Can I get it at any pharmacy?",
+     "zh": "謝謝，任何藥局都可以領嗎？"
+    },
+    {
+     "v": "T",
+     "say": "小感冒也可以直接去藥局問，叫 over the counter，不用處方。",
+     "cap": "over the counter ＝ 不用處方就能買的藥"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "I've a bit of a temperature.",
+   "ask": "這句話的意思是？",
+   "opts": [
+    "我有點冷",
+    "我有點發燒",
+    "我量了體溫"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！你跟醫生說："
+    },
+    {
+     "v": "A",
+     "say": "I've a bit of a temperature.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "是什麼意思？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！a temperature，就是發燒。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "appointment",
+     "預約"
+    ],
+    [
+     "sore throat",
+     "喉嚨痛"
+    ],
+    [
+     "prescription",
+     "處方箋"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了：appointment、sore throat、prescription！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

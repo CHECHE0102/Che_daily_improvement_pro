@@ -1,0 +1,186 @@
+{
+ "id": "L002",
+ "title": "打工必備：請病假",
+ "subtitle": "call in sick・swap shifts・cover",
+ "level": "A2–B1",
+ "kind": "phrase",
+ "date": "2026-11-01",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "身體不舒服",
+    "call in sick",
+    "要怎麼跟主管說？"
+   ],
+   "emoji": "🤒",
+   "lines": [
+    {
+     "v": "T",
+     "say": "打工的時候突然生病，不知道怎麼跟主管請假？"
+    },
+    {
+     "v": "T",
+     "say": "今天教你三句打工一定用得到的英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "call in sick",
+   "meaning": "打電話請病假",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，call in sick，就是打電話或傳訊息請病假。"
+    },
+    {
+     "v": "A",
+     "say": "Hi, it's Emily. I'm calling in sick today.",
+     "zh": "嗨，我是 Emily，我今天要請病假。"
+    },
+    {
+     "v": "B",
+     "say": "No bother. Feel better soon.",
+     "zh": "沒問題，早日康復喔。"
+    },
+    {
+     "v": "T",
+     "say": "No bother 是愛爾蘭人常說的：沒問題、不麻煩。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "swap shifts",
+   "meaning": "換班",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，swap shifts，跟同事換班。"
+    },
+    {
+     "v": "A",
+     "say": "Would you swap shifts with me on Saturday?",
+     "zh": "你週六可以跟我換班嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Yeah, sure. I'll take your Saturday.",
+     "zh": "好啊，你週六的班我來上。"
+    },
+    {
+     "v": "T",
+     "say": "記得要先問同事，再跟主管說一聲喔。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "cover for",
+   "meaning": "幫某人代班",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，cover for someone，幫某人代班。"
+    },
+    {
+     "v": "B",
+     "say": "Can anyone cover for me tomorrow?",
+     "zh": "明天有人可以幫我代班嗎？"
+    },
+    {
+     "v": "A",
+     "say": "I can cover for you. You owe me one!",
+     "zh": "我可以幫你，你欠我一次喔！"
+    },
+    {
+     "v": "T",
+     "say": "You owe me one，就是：你欠我一個人情。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Can you cover for me on Friday?",
+   "ask": "同事這樣問，意思是？",
+   "opts": [
+    "你週五可以幫我代班嗎？",
+    "你週五可以請我吃飯嗎？",
+    "你週五可以幫我買東西嗎？"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！同事傳訊息給你："
+    },
+    {
+     "v": "B",
+     "say": "Can you cover for me on Friday?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "他想問什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！cover for me，就是幫我代班。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "call in sick",
+     "請病假"
+    ],
+    [
+     "swap shifts",
+     "換班"
+    ],
+    [
+     "cover for",
+     "幫人代班"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了：call in sick、swap shifts、cover for！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

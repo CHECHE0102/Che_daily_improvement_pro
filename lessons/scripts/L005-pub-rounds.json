@@ -1,0 +1,186 @@
+{
+ "id": "L005",
+ "title": "Pub 裡的請客文化",
+ "subtitle": "what are you having・my round・same again",
+ "level": "A2–B1",
+ "kind": "phrase",
+ "date": "2026-11-01",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "和同事去 pub",
+    "It's my round",
+    "是什麼意思？"
+   ],
+   "emoji": "🍻",
+   "lines": [
+    {
+     "v": "T",
+     "say": "跟愛爾蘭同事去 pub，有一個很重要的文化：輪流請客！"
+    },
+    {
+     "v": "T",
+     "say": "聽懂這三句，你就是 pub 裡的自己人！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "What are you having?",
+   "meaning": "你要喝什麼？",
+   "img": "scene-party",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，What are you having？你要喝什麼？"
+    },
+    {
+     "v": "B",
+     "say": "What are you having?",
+     "zh": "你要喝什麼？"
+    },
+    {
+     "v": "A",
+     "say": "I'll have a pint of cider, please.",
+     "zh": "我要一品脫蘋果酒，謝謝。"
+    },
+    {
+     "v": "T",
+     "say": "pint 是一品脫，大約一大杯，pub 最常見的份量。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "my round",
+   "meaning": "這輪我請",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，round，一輪。大家輪流幫整桌買一輪飲料。"
+    },
+    {
+     "v": "A",
+     "say": "It's my round. Same for everyone?",
+     "zh": "這輪我請，大家都一樣嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Ah, you're very good. Thanks a million.",
+     "zh": "哎呀你人真好，超感謝。"
+    },
+    {
+     "v": "T",
+     "say": "別人請過你，下一輪記得換你請喔！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "Same again?",
+   "meaning": "再來一樣的？",
+   "img": "scene-party",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，Same again？再來一杯一樣的嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Same again, everyone?",
+     "zh": "大家再來一樣的嗎？"
+    },
+    {
+     "v": "A",
+     "say": "Not for me, I'm driving. Just a water.",
+     "zh": "我不用，我要開車，給我水就好。"
+    },
+    {
+     "v": "T",
+     "say": "不想喝就直接說，愛爾蘭人完全不會介意。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "It's your round!",
+   "ask": "朋友這樣說，你該怎麼做？",
+   "opts": [
+    "換你去幫大家買飲料",
+    "換你唱歌",
+    "換你先回家"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！朋友笑著跟你說："
+    },
+    {
+     "v": "B",
+     "say": "It's your round!",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "你該做什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！換你請大家喝一輪啦！",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "What are you having?",
+     "你要喝什麼？"
+    ],
+    [
+     "my round",
+     "這輪我請"
+    ],
+    [
+     "Same again?",
+     "再來一樣的？"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了 pub 三句話，下次聚會就派上用場！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -10,7 +10,7 @@ usage: python tools/make_lesson_video.py lessons/scripts/L001-irish-phrases.json
   --only N    render only slide N (0-based), for quick previews
 Output: lessons/out/<id>.mp4 (not committed).
 """
-import asyncio, json, os, re, subprocess, sys
+import asyncio, hashlib, json, os, re, subprocess, sys
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,7 +54,9 @@ async def voice_line(ln, voices, base):
         if k == "P":
             clip.append(np.zeros(int(0.22 * SR), np.float32)); t += 0.22
             continue
-        mp3 = f"{base}-{j}.mp3"
+        # file name carries voice + prosody + text, so a cached clip (actions/cache) is only reused for the same words
+        tag = hashlib.sha1(f"{voices[k]}|{PROSODY[k]}|{text}".encode()).hexdigest()[:8]
+        mp3 = f"{base}-{j}-{tag}.mp3"
         if not os.path.exists(mp3 + ".json"):
             await tts(text, voices[k], *PROSODY[k], mp3)
         c, cut = trim(decode(mp3))
@@ -77,21 +79,27 @@ def trim(c, thr=0.01):
 
 async def tts(text, voice, rate, pitch, path):
     import edge_tts
-    for attempt in range(4):
+    # the service sometimes returns "No audio" for a while; finished clips are cached, so a later run carries on
+    # (seen 2026-11-01: after many requests it refuses for a while, so retry slowly before giving up)
+    tries = [(rate, pitch)] * 5
+    for attempt, (r, p) in enumerate(tries):
         try:
-            com = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch, boundary="WordBoundary")
+            com = edge_tts.Communicate(text, voice, rate=r, pitch=p, boundary="WordBoundary")
             audio, bounds = bytearray(), []
             async for ch in com.stream():
                 if ch["type"] == "audio":
                     audio += ch["data"]
                 elif ch["type"] == "WordBoundary":
                     bounds.append([ch["offset"] / 1e7, ch["duration"] / 1e7, ch["text"]])
+            if not audio:
+                raise RuntimeError("empty audio")
             open(path, "wb").write(audio)
             json.dump(bounds, open(path + ".json", "w"), ensure_ascii=False)
+            await asyncio.sleep(0.4)   # pace requests
             return
         except Exception as e:  # network hiccups
-            print("  retry", attempt, voice, e)
-            await asyncio.sleep(3 * (attempt + 1))
+            print("  retry", attempt, voice, r, p, e)
+            await asyncio.sleep(min(45, 5 * (attempt + 1)))
     raise RuntimeError("tts failed: " + text)
 
 
