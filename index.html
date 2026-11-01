@@ -786,6 +786,7 @@ body.maint-lock{overflow:hidden}
 .set-btn{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;padding:0}
 .set-btn svg{width:19px;height:19px}.set-btn[aria-current="page"]{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
 .brand{display:flex;align-items:center;gap:2px}.brand span{margin-left:.25em}
+.brand[data-tab]{cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}.brand[data-tab]:active{opacity:.7}
 .brand-dog{height:36px;width:auto;margin:-8px 0 -6px 4px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.12))}
 header.mast{align-items:center}
 @media (max-width:370px){.mast small{display:none}}
@@ -835,6 +836,17 @@ body.onb-open{overflow:hidden}
 .push-art{width:64px;height:64px;flex:none;object-fit:contain}
 .quiz-done{display:flex;flex-direction:column;gap:10px;align-items:flex-start}.qd-art{width:150px;height:auto;align-self:center}
 .empty-art{width:180px;max-width:60%;height:auto;margin:0 auto 6px;display:block}
+.mi-sheet{max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;text-align:center}
+.mi-pic{position:relative;width:min(64vw,240px);aspect-ratio:1;margin:6px auto 10px;border-radius:24px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%, color-mix(in srgb,var(--c) 72%,#fff), var(--c) 75%);animation:miPop .22s ease-out}
+.mi-pic .mi-art{width:88%;height:88%}.mi-pic.boss{box-shadow:0 0 0 3px #E8C547}
+.mi-badge{position:absolute;right:-6px;bottom:-6px}.mi-badge .el{transform:scale(1.5);transform-origin:bottom right;box-shadow:0 0 0 2px var(--card)}
+.mi-name{font-size:22px;margin:4px 0 0}.mi-sub{font-size:14px;margin-top:2px}
+.mi-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0}.mi-tags>span{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:var(--paper);font-size:13px}
+.mi-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 12px}.mi-stats>div{display:flex;flex-direction:column;padding:8px;border-radius:12px;background:var(--paper)}.mi-stats small{color:var(--muted);font-size:12px}.mi-stats b{font-size:18px}
+.mi-lore{text-align:left;padding:10px 12px;border-radius:14px;background:var(--paper);margin-bottom:6px}.mi-lore .lore{margin:2px 0 0}.mi-tr{margin:6px 0 0;font-size:15px;line-height:1.6}
+[data-mi]{cursor:pointer}
+@keyframes miPop{from{transform:scale(.85);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.mi-pic{animation:none}}
 img.pic{object-fit:contain;display:block;pointer-events:none;user-select:none}
 .it-tile img.pic{width:86%;height:86%;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
 .mon-seal img.pic{width:88%;height:88%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
@@ -1227,7 +1239,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 </head>
 <body>
 <div class="wrap">
-  <header class="mast"><div class="mast-l"><button id="setBtn" class="set-btn" data-tab="set" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><div class="brand">BinBin <span>daily</span><img src="assets/binbin-head.webp" class="brand-dog" alt="" width="48" height="36"></div></div><span class="mast-r"><small id="mastInfo"></small><button id="helpBtn" class="help-btn" data-act="help" aria-label="Help">?</button></span></header>
+  <header class="mast"><div class="mast-l"><button id="setBtn" class="set-btn" data-tab="set" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><div class="brand" data-tab="today" role="link" tabindex="0" aria-label="BinBin daily">BinBin <span>daily</span><img src="assets/binbin-head.webp" class="brand-dog" alt="" width="48" height="36"></div></div><span class="mast-r"><small id="mastInfo"></small><button id="helpBtn" class="help-btn" data-act="help" aria-label="Help">?</button></span></header>
   <main id="app"><div class="view"><p class="muted">…</p></div></main>
 </div>
 <nav class="tabs" aria-label="Main menu">
@@ -1650,7 +1662,7 @@ const featLevel=k=>((S.feat||{})[k])||FEAT_DEF[k];
 function featOpen(k){ const l=featLevel(k); return !!DEV||l==="all"||(l==="testers"&&!!S.payTester); }
 function featLock(k){ if((k==="vault"||k==="style")&&!featOpen(k)) return k==="vault"?"lockVault":"lockStyle";   // Rainbow Vault stays closed to players until paid items launch
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
-function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
+function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.monInfo=null; S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
 function render(){ try{ renderInner(); loginHint(); if(!PLANS_ON) setTimeout(loginPop,0); quizKeep(); if(S.view==="read"&&window.LS&&LS.on) setTimeout(lsHighlight,0); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
@@ -1932,6 +1944,8 @@ function renderSheet(){
   if(S.scratch){ const key=S.scratch.uid+(S.scratch.revealed?"r":""); if(o.dataset.sc===key) return; o.dataset.sc=key; o.innerHTML=scratchModal(); requestAnimationFrame(initScratch); return; }
   delete o.dataset.sc;
   if(S.helpSheet){ if(!o.querySelector(".help-sheet")) o.innerHTML=helpSheet(); return; }
+  if(S.monInfo){ if(o.dataset.mi!==S.monInfo+LANG){ o.innerHTML=monInfoSheet(MONS[S.monInfo]); o.dataset.mi=S.monInfo+LANG; } return; }
+  delete o.dataset.mi;
   if(S.langSheet){ o.innerHTML=langSheet(); return; }
   if(S.levelSheet){ o.innerHTML=levelSheet(); return; }
   if(!S.sheet){ o.innerHTML=""; return; }
@@ -2591,7 +2605,7 @@ function allyCard(){
 /* ===== conquest page: available fights on top, beaten + locked ones in the monster notebook ===== */
 function wildCard(m, again){
   const beaten=wildBeaten(m), open=wildOpen(m);
-  return `<div class="mon wild${beaten?" own":""}${open?"":" locked"}"><span class="thumb sm el-th-${m.el}">${monSvg(m)}${elBadge(m.el)}</span><span class="it-main"><b>${esc(monName(m))}${beaten?` <span class="chip done">${T("wdBeaten")}</span>`:""}</b><span class="muted">Lv ${m.lv} · ${elName(m.el)} · HP ${m.hp}</span><span class="row" style="gap:4px">${open?diffTag(m)+advice(m):""}</span></span>
+  return `<div class="mon wild${beaten?" own":""}${open?"":" locked"}"><span class="thumb sm el-th-${m.el}" data-mi="${m.id}">${monSvg(m)}${elBadge(m.el)}</span><span class="it-main"><b data-mi="${m.id}">${esc(monName(m))}${beaten?` <span class="chip done">${T("wdBeaten")}</span>`:""}</b><span class="muted">Lv ${m.lv} · ${elName(m.el)} · HP ${m.hp}</span><span class="row" style="gap:4px">${open?diffTag(m)+advice(m):""}</span></span>
     ${open?`<button class="btn sm ${beaten?"ghost":""}" data-mon="${m.id}">${beaten?T("trainBtn"):T("attack")}</button>`:`<span class="muted sm-t">${T("needLv",{n:m.lv})}</span>`}</div>`;
 }
 /* difficulty label: a quick simulation with your current gear (and today's ally) */
@@ -2601,7 +2615,7 @@ function diffOf(m){ const g=game(), s=stats(), key=[m.id,g.lv,g.weapon,g.armor,J
   const p=Math.round(w/N*100); S.dfCache[key]=p; return p; }
 function diffTag(m){ const p=diffOf(m), k=p>=85?"dfEasy":p>=50?"dfEven":"dfHard"; return `<span class="df ${k}" title="${esc(T("dfTip",{p}))}">${T(k)}</span>`; }
 function townRow(t){ const c=conquered(), own=!!c[t.id], open=canAttack(t);
-  return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${esc(monName(t))} · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span>${open&&!own?diffTag(t):""}</span><span class="go-t">${own?"✓":open?"›":"🔒"}</span></button>`; }
+  return `<button class="mon${own?" own":""}${open?"":" locked"}" data-town="${t.id}"><span class="thumb sm el-th-${t.el}" data-mi="${t.id}">${monSvg(t)}${elBadge(t.el)}</span><span class="it-main"><b data-mi="${t.id}">${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted"><span data-mi="${t.id}">${esc(monName(t))}</span> · Lv ${t.lv} · ${T("pop",{n:fmtPop(t.pop)})}</span>${open&&!own?diffTag(t):""}</span><span class="go-t">${own?"✓":open?"›":"🔒"}</span></button>`; }
 function notebookHtml(){
   const g=game(), c=conquered();
   const wB=WILD.filter(m=>wildBeaten(m)).sort((a,b)=>b.lv-a.lv), wL=WILD.filter(m=>!wildOpen(m)), tB=TOWNS.filter(t=>c[t.id]), tL=TOWNS.filter(t=>!c[t.id]&&!canAttack(t));
@@ -2612,6 +2626,20 @@ function notebookHtml(){
   else { const lvls=[...new Set(wL.map(m=>m.lv))].sort((a,b)=>a-b);
     body=(tL.length?`<div class="eyebrow">${T("nbTowns")}</div><div class="mons">${tL.map(townRow).join("")}</div>`:"")+lvls.map(L=>`<div class="eyebrow">Lv ${L}</div><div class="mons">${wL.filter(m=>m.lv===L).map(m=>wildCard(m)).join("")}</div>`).join("")+(!tL.length&&!wL.length?`<p class="muted sm-t">${T("nbAllOpen")}</p>`:""); }
   return `<details class="card nb"${S.fold&&S.fold.nb?" open":""} data-fold="nb"><summary><b>📒 ${T("nbTitle")}</b><span class="fold-v">${wB.length+tB.length} / ${WILD.length+TOWNS.length}</span></summary>${seg}${body}</details>`;
+}
+const LORE_ZH={"selkie": "海豹人平時是海豹，脫下海豹皮就能變成人上岸。傳說只要藏起她的海豹皮，她就回不了大海。", "cusith": "一隻像小牛一樣大的綠色精靈獵犬。牠會連叫三聲，聽到第三聲還沒躲好的人，靈魂就會被帶走。", "bodach": "愛惡作劇的怪老頭，晚上會從煙囪溜進屋裡嚇唬不乖的小孩。", "bananach": "在古戰場上空尖叫盤旋的女妖，戰士們聽到她的聲音就會心驚膽跳。", "aossi": "住在空心山丘裡的精靈族，夜裡會成群騎馬出巡。愛爾蘭人到現在還不敢隨便破壞「精靈堡」。", "cailleach": "冬天的老巫婆，傳說愛爾蘭的山是她從圍裙裡掉下的石頭堆成的，暴風雪也是她帶來的。", "aillen": "每年萬聖節（Samhain）他都會用魔法音樂讓塔拉城的人全睡著，再噴火把城燒掉，直到英雄芬恩打敗他。", "cromcruach": "一座金色的古老神像，據說很久以前在納文附近被人崇拜，直到聖派翠克把它推倒。", "morrigan": "愛爾蘭神話裡的戰爭女神，常常化身成一隻渡鴉，在戰場上空盤旋預言勝負。", "merrow": "愛爾蘭的人魚，戴著一頂紅帽子才能回到海底。如果帽子被偷走，她就只能留在陸地上。", "changeling": "精靈偷偷抱走人類嬰兒後，放在搖籃裡的替身。長得很像寶寶，卻總是哭鬧又吃不飽。", "leprechaun": "愛爾蘭最有名的小矮妖，是個做鞋的小老頭，把金子藏在彩虹的盡頭。抓到他就能要求他交出寶藏。", "grogoch": "來自北愛爾蘭阿爾斯特傳說、全身長毛的半人小怪，喜歡偷偷幫農家做事，但討厭被人道謝。", "feardearg": "穿紅外套的小矮人，最愛惡作劇，常常開很過分的玩笑捉弄路人。", "dobharchu": "「水之獵犬」，一種像巨大水獺的怪物，據說住在斯萊戈和利特里姆的湖裡，會攻擊在湖邊的人。", "clurichaun": "小矮妖的表親，總是醉醺醺的，專門守著酒窖。好好對他，他會幫你看好酒；惹他生氣就會被搗亂。", "catsi": "一隻胸口有白斑、像狗一樣大的黑色精靈貓。傳說牠會在人下葬前偷走靈魂，所以大家會守夜趕走牠。", "puca": "會變身的精靈，常變成黑山羊或黑馬。牠會把人甩上背狂奔一整夜，到了早上才把人丟回原地。", "eachuisce": "住在湖裡的水馬，看起來像一匹漂亮的馬。可是一旦有人騎上去，牠就會把騎士拖進深深的湖底。", "wisp": "在沼澤上飄來飄去的神祕光點，會把夜歸的旅人引離安全的小路。", "gancanagh": "很有魅力的精靈男子，被他碰到的人會無可救藥地愛上他，最後相思成疾。", "feargorta": "在饑荒時出現的瘦弱老人，向人討麵包。願意分享食物的人，之後會得到好運作為回報。", "leannan": "精靈情人，能帶給詩人和音樂家驚人的靈感，但代價是他們的生命會慢慢被吸走。", "caorthannach": "會噴火的魔母，傳說曾經追趕聖派翠克，最後被他困在湖裡。", "sluagh": "一群無法安息的亡魂，常常從西方飛來，想把將死之人的靈魂帶走，所以老房子朝西的窗要關好。", "banshee": "報喪女妖。夜裡聽到她悲傷的哭聲，就表示這個家族很快會有人過世。", "abhartach": "德里郡一個殘暴的小酋長，死後一次又一次從墳墓爬出來，被說是愛爾蘭的吸血鬼。", "ellen": "一隻三顆頭的怪物，在萬聖節（Samhain）那天從洞穴裡爬出來，四處破壞。", "oilliphéist": "巨大的海蛇怪，傳說香農河就是牠逃跑時在大地上爬出來的痕跡。", "dullahan": "無頭騎士，把自己的頭夾在手臂下騎著黑馬奔馳。他停下來叫誰的名字，那個人就會死去。", "fomorian": "來自海底的遠古巨人族，是愛爾蘭古老神祇的死對頭。", "balor": "弗摩爾巨人的國王，只有一隻魔眼，被他看到的東西都會燒起來。最後被自己的孫子魯格一槍射穿眼睛。", "hare": "愛爾蘭野兔春天會在田野裡站起來「拳擊」，以前的人還以為牠們是女巫變的。", "badger": "獾會在愛爾蘭的樹籬下挖出很大的地道，一個家族可以住上好幾代。", "raven": "戰爭女神莫莉甘常常化身成渡鴉，在戰場上空盤旋。", "fox": "聰明又敏捷的紅狐狸，是很多愛爾蘭爐邊故事裡的搗蛋鬼。", "eel": "內伊湖的鰻魚會游好幾千公里到馬尾藻海產卵，小鰻魚再一路游回來。", "boar": "傳說中的巨大野豬特里亞斯（Torc Triath），曾被亞瑟王的手下追遍整個愛爾蘭。", "wolf": "愛爾蘭以前被稱為「狼之國」，最後一隻野狼在 1786 年被看到。", "stag": "愛爾蘭巨鹿的鹿角寬度超過三公尺。", "crab": "漁夫們說，大西洋沿岸躲著和小木船一樣大的巨蟹。", "bear": "棕熊在愛爾蘭生活到大約 2500 年前才消失。", "serpent": "傳說聖派翠克把愛爾蘭所有的蛇都趕進了大海，所以愛爾蘭到現在都沒有野生的蛇。", "golem": "由巨石陣的石頭組成的巨人，有人移動了精靈圈的石頭，它就會醒過來。", "heron": "蒼鷺站在愛爾蘭的河裡一動也不動，大家叫牠們「水邊的老爺爺」。", "seal": "灰海豹會在西岸的岩石上唱歌，有人說牠們其實是偽裝的海豹人。", "salmon": "英雄芬恩在烤智慧鮭魚時燙到拇指，舔了一下，就知道了世界上所有的事。", "wildcat": "野貓以前在愛爾蘭的森林裡出沒，老故事說有一位貓王統治著牠們。", "elk": "巨角鹿的骨骼現在還會從沼澤裡被挖出來，牠們的角比一台車還寬。", "shark": "世界第二大的魚，每年夏天都會沿著愛爾蘭海岸慢慢游過。牠只吃浮游生物，對人沒有危險。", "troll": "挖泥炭的工人小聲傳說，沼澤底下睡著一隻巨魔，最討厭被吵醒。", "wyrm": "一條沒有翅膀的龍，據說在第一位國王出現之前，就盤著身子睡在愛爾蘭的湖底了。"};
+// monster info popup (tap a monster's picture or name on the Quest page)
+function monInfoSheet(m){
+  if(!m) return "";
+  const key=m.wild?m.kind:m.foe.mid, tr=LANG==="zh"?LORE_ZH[key]:"", sub=monSub(m);
+  const where=m.wild?T("wildTitle"):townName(m);
+  return `<div class="scrim" data-act="closemi"></div><div class="sheet mi-sheet" role="dialog" aria-label="${esc(monName(m))}"><div class="grab"></div>
+    <div class="mi-pic el-th-${m.el}${m.boss?" boss":""}">${monSvg(m,"mi-art")}<span class="mi-badge">${elBadge(m.el)}</span></div>
+    <h2 class="mi-name">${esc(monName(m))}</h2>${sub&&sub!==monName(m)?`<div class="muted mi-sub">${esc(sub)}</div>`:""}
+    <div class="mi-tags"><span>📍 ${esc(where)}</span><span>Lv ${m.lv}</span><span>${elBadge(m.el)} ${esc(T("elAttr",{e:elName(m.el)}))}</span></div>
+    <div class="mi-stats"><div><small>HP</small><b>${m.hp}</b></div><div><small>${esc(T("miAtk"))}</small><b>${m.atk}</b></div><div><small>${esc(T("miDef"))}</small><b>${m.def}</b></div></div>
+    <div class="mi-lore"><div class="eyebrow">${esc(T("miAbout"))}</div><p class="lore en">${esc(m.lore||"")}</p>${tr?`<p class="mi-tr">${esc(tr)}</p>`:""}</div>
+    <button class="btn" data-act="closemi" style="width:100%;margin-top:6px">${esc(T("miClose"))}</button></div>`;
 }
 function huntHtml(){
   const g=game(), c=conquered();
@@ -2659,7 +2687,7 @@ function mapSvg(){
 function townCard(t){
   const c=conquered(), own=!!c[t.id], open=canAttack(t);
   return `<div class="town-card${own?" own":""}">
-    <div class="tc-top"><span class="thumb el-th-${t.el}">${monSvg(t)}${elBadge(t.el)}</span><div class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${T("pop",{n:fmtPop(t.pop)})} · Lv ${t.lv}</span></div></div>
+    <div class="tc-top"><span class="thumb el-th-${t.el}" data-mi="${t.id}">${monSvg(t)}${elBadge(t.el)}</span><div class="it-main"><b>${esc(townName(t))} ${own?`<span class="chip done">${T("conqTag")}</span>`:""}</b><span class="muted">${T("pop",{n:fmtPop(t.pop)})} · Lv ${t.lv}</span></div></div>
     <div class="muted" style="font-size:14px">${own?T("taxLine",{n:t.tax}):T("holds",{m:esc(monName(t))})}</div>
     <div class="row" style="gap:4px">${open?diffTag(t):""}${advice(t)}</div>
     ${t.boss&&!own?`<p class="sm-t elder-tip">🧙 ${T("balorHint")}</p>`:""}
@@ -3543,7 +3571,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.1";
+const APP_VERSION="2026.11.2";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -3941,8 +3969,9 @@ async function loadArticle(id){
 const byOrder=(a,b)=>b.date.localeCompare(a.date)||artPrio(a)-artPrio(b)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; pushMarkRead(); S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
-  const t=e.target.closest("[data-iqk],[data-iesec],[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  const t=e.target.closest("[data-mi],[data-iqk],[data-iesec],[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
   if(!t) return;
+  if(t.dataset.mi){ if(MONS[t.dataset.mi]){ S.monInfo=t.dataset.mi; renderSheet(); } return; }
   if(t.dataset.iqk){ const R=game().ieltsRun; if(R){ const v=t.dataset.iqv; R.ans[t.dataset.iqk]=/^\d+$/.test(v)?+v:v; S.ieConfirm=false; lsSave(); render(); } return; }
   if(t.dataset.iesec!==undefined){ const i=+t.dataset.iesec; if(S.ieResult) S.ieReviewSec=i; else if(game().ieltsRun){ game().ieltsRun.sec=i; lsSave(); } render(); window.scrollTo(0,0); return; }
   if(t.dataset.lang) return setLang(t.dataset.lang);
@@ -4007,6 +4036,7 @@ document.addEventListener("click", e=>{
   if(a==="pushhow"){ S.pushHelp=true; return setTab("set"); }
   if(a==="copyacct"){ const v="116506030607"; (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(T("supCopied")),()=>toast(v)); return; }
   if(a==="help"){ S.sheet=null; S.helpSheet=true; return renderSheet(); }
+  if(a==="closemi"){ S.monInfo=null; return renderSheet(); }
   if(a==="closehelp"){ S.helpSheet=false; return renderSheet(); }
   if(a==="devtap"){ S.devTaps=(S.devTaps||0)+1; if(S.devTaps>=5&&!DEV){ S.devAsk=true; render(); setTimeout(()=>{ const i=$("#devCode"); if(i) i.focus(); },50); } return; }
   if(a==="devunlock") return devUnlock();
@@ -7705,6 +7735,12 @@ Object.assign(STR.es,{"lgNoNet":"Necesitas conexión para reclamar el premio (us
 Object.assign(STR.ja,{"lgNoNet":"ログインボーナスの受け取りにはネット接続が必要です（サーバーの時刻を使います）","lgHead": "毎日のログインボーナス", "lgSub": "毎日ゲームを開くともらえます。連続ログインが長いほど称号が豪華になり、もっとすごいスタイルが解放されます。", "lgDay": "{n}日目", "lgClaim": "今日のボーナスを受け取る", "lgClaimShort": "受け取る 🎁", "lgOk": "OK", "lgGot": "受け取りました！", "lgDays": "{n}日連続", "lgBest": "最長 {n}日", "lgNext": "あと{n}日で「{t}」", "lgMax": "最高の称号です", "lgT0": "初心者", "lgTitleN": "称号：{t}", "lgRung": "{d}日連続", "lgLadderT": "称号一覧", "lgMile": "{d}日連続達成！称号「{t}」と、スタイルコイン {n} をプレゼント", "lgSaved": "{n}日来られなかったので休戦令を{n}枚使いました。連続記録は守られました！", "lgBroke": "連続記録がリセットされました。手に入れた称号とスタイルはずっとあなたのものです。", "lgTruceFull": "（休戦令は最大{n}枚、満タンです）", "lgTruceHelp": "⏸️ 休戦令：1日来られなかったとき自動で1枚使い、連続記録が途切れません（その日は日数に入りません）。3日受け取るごとに1枚、最大{n}枚まで。称号は最長記録で決まるので、なくなることはありません。", "cosDaysTag": "{n}日連続で解放", "cosDaysLock": "{n}日連続ログインで購入できます（あなたの最長：{m}日）", "styEarnL": "毎日ゲームを開いてログインボーナス（7日で1周、7日目が最大）", "styEarnM": "10・30・60日連続などの節目でさらに大きなプレゼント", "ieShowT": "名前の横にベストの IELTS バッジを表示", "ieShowSub": "ランキングやみんなで遊ぶゲームで表示されます（ベスト：Band {b}）。", "ieShowNone": "Band 6 以上を取ると表示されます。", "devStreakT": "👀 連続日数をプレビュー（称号・スタイル解放）", "devLoginAgain": "今日のログインボーナスをもう一度"});
 Object.assign(STR.ko,{"lgNoNet":"로그인 보상을 받으려면 인터넷 연결이 필요해요 (서버 시간 기준)","lgHead": "매일 로그인 보상", "lgSub": "매일 게임을 열면 받을 수 있어요. 연속 로그인이 길수록 칭호가 멋져지고, 더 멋진 스타일이 열려요.", "lgDay": "{n}일째", "lgClaim": "오늘 보상 받기", "lgClaimShort": "보상 🎁", "lgOk": "확인", "lgGot": "받았어요!", "lgDays": "{n}일 연속", "lgBest": "최고 {n}일", "lgNext": "{n}일 더 하면 「{t}」", "lgMax": "최고 칭호예요", "lgT0": "초보자", "lgTitleN": "칭호: {t}", "lgRung": "{d}일 연속", "lgLadderT": "칭호 목록", "lgMile": "{d}일 연속 달성! 칭호 「{t}」와 스타일 코인 {n}개 추가", "lgSaved": "{n}일 못 와서 휴전권 {n}장을 자동으로 썼어요. 연속 기록은 그대로예요!", "lgBroke": "연속 기록이 다시 시작됐어요. 걱정 마세요: 얻은 칭호와 스타일은 계속 내 거예요.", "lgTruceFull": "(휴전권은 최대 {n}장, 가득 찼어요)", "lgTruceHelp": "⏸️ 휴전권: 하루를 놓치면 자동으로 한 장 써서 연속 기록이 끊기지 않아요(그날은 일수에 안 들어가요). 3일 받을 때마다 1장, 최대 {n}장. 칭호는 최고 기록으로 정해져서 없어지지 않아요.", "cosDaysTag": "{n}일 연속 해금", "cosDaysLock": "{n}일 연속 로그인해야 살 수 있어요 (내 최고 기록: {m}일)", "styEarnL": "매일 게임을 열고 로그인 보상 받기 (7일 주기, 7일째가 가장 커요)", "styEarnM": "10·30·60일 연속 등 기념일마다 큰 선물", "ieShowT": "이름 옆에 내 최고 IELTS 배지 표시", "ieShowSub": "순위표와 함께 놀기 게임에서 모두가 볼 수 있어요 (최고: Band {b}).", "ieShowNone": "Band 6 이상을 받으면 표시돼요.", "devStreakT": "👀 연속 일수 미리보기 (칭호, 스타일 해금)", "devLoginAgain": "오늘 로그인 보상 다시 받기"});
 Object.assign(STR.zh,{commTitle:"加入 BinBin Daily LINE 社群", commSub:"跟其他在愛爾蘭打工度假、遊學的朋友一起練英文：分享每日進度、問英文問題、約朋友玩小遊戲。", commJoin:"加入 LINE 社群"});
+Object.assign(STR.zh,{"miAtk": "攻擊", "miDef": "防禦", "miAbout": "怪物介紹", "miClose": "關閉"});
+Object.assign(STR.en,{"miAtk": "ATK", "miDef": "DEF", "miAbout": "About this monster", "miClose": "Close"});
+Object.assign(STR.hi,{"miAtk": "हमला", "miDef": "बचाव", "miAbout": "इस दानव के बारे में", "miClose": "बंद करें"});
+Object.assign(STR.es,{"miAtk": "ATQ", "miDef": "DEF", "miAbout": "Sobre este monstruo", "miClose": "Cerrar"});
+Object.assign(STR.ja,{"miAtk": "攻撃", "miDef": "防御", "miAbout": "魔物の紹介", "miClose": "閉じる"});
+Object.assign(STR.ko,{"miAtk": "공격", "miDef": "방어", "miAbout": "몬스터 소개", "miClose": "닫기"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
