@@ -1557,7 +1557,7 @@ Object.assign(STR.hi,{conqProg:"{n} / {t} शहर जीते", conqTag:"ज�
 Object.assign(STR.es,{conqProg:"{n} / {t} ciudades conquistadas", conqTag:"Conquistada", conqNew:"¡Has conquistado {c}!", allConq:"¡Has conquistado toda la isla de Irlanda!", taxBtn:"Cobrar impuestos de hoy +{n} oro", taxGot:"Has cobrado {n} de oro", taxDone:"Impuestos cobrados: vuelve mañana", taxHint:"Cada ciudad conquistada paga impuestos una vez al día; las más grandes pagan más.", taxLine:"Paga {n} de oro al día", pop:"Pobl. ~{n}", holds:"{m} domina esta ciudad", tapCity:"Toca una ciudad del mapa para ver detalles", attack:"Atacar", trainBtn:"Entrenar aquí", lockedCity:"Ataque desde Lv {n}", lockShort:"Bloqueada", mapAria:"Mapa de la isla de Irlanda"});
 STR.es.goal="Objetivo: avanzar desde el pueblo más pequeño hasta Dublín y conquistar toda la isla. Cuanto más grande la ciudad, más fuerte el monstruo.";
 
-function T(k, v){ let s=(STR[LANG]&&STR[LANG][k]) ?? STR.zh[k] ?? k; if(v) for(const [a,b] of Object.entries(v)) s=s.split("{"+a+"}").join(b); return s; }
+function T(k, v){ let s=(STR[LANG]&&STR[LANG][k]) ?? (LANG!=="zh"?STR.en[k]:null) ?? STR.zh[k] ?? k; if(v) for(const [a,b] of Object.entries(v)) s=s.split("{"+a+"}").join(b); return s; }
 const LOCALE={zh:"zh-TW", en:"en-IE", hi:"hi-IN", es:"es-ES", ja:"ja-JP", ko:"ko-KR"};
 const TOPICS={"勞資":{en:"Labour",hi:"श्रम",es:"Trabajo",ja:"労働",ko:"노동"},"環境":{en:"Environment",hi:"पर्यावरण",es:"Medio ambiente",ja:"環境",ko:"환경"},"住房":{en:"Housing",hi:"आवास",es:"Vivienda",ja:"住宅",ko:"주거"},"觀光":{en:"Tourism",hi:"पर्यटन",es:"Turismo",ja:"観光",ko:"관광"},"健康":{en:"Health",hi:"स्वास्थ्य",es:"Salud",ja:"健康",ko:"건강"},"經濟":{en:"Economy",hi:"अर्थव्यवस्था",es:"Economía",ja:"経済",ko:"경제"},"教育":{en:"Education",hi:"शिक्षा",es:"Educación",ja:"教育",ko:"교육"},"科技":{en:"Tech",hi:"तकनीक",es:"Tecnología",ja:"テクノロジー",ko:"기술"},"文化":{en:"Culture",hi:"संस्कृति",es:"Cultura",ja:"文化",ko:"문화"},"社會":{en:"Society",hi:"समाज",es:"Sociedad",ja:"社会",ko:"사회"},"政治":{en:"Politics",hi:"राजनीति",es:"Política",ja:"政治",ko:"정치"}};
 const topicOf=a=>!a.topic?"":LANG==="zh"?a.topic:((TOPICS[a.topic]||{})[LANG]||a.topic);
@@ -3659,7 +3659,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.12";
+const APP_VERSION="2026.11.17";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4810,7 +4810,7 @@ async function pgStartGame(){
     up.words=[...pgShuffle(pool.filter(o=>!seen.has(o.w))), ...pgShuffle(pool.filter(o=>seen.has(o.w)))].slice(0,n);
     up.order=pgShuffle([...ids]); up.rr=P.rr||1; up.dm=P.dm==="c"?"c":"n"; up.cur={i:0, ts:up.start}; }
   if(P.game==="root"){ const ids=Object.keys(P.players||{}), rr=P.rr||3, lib=await rtLoad(); if(!lib.length) return toast(T("loading"));
-    up.affs=pgShuffle([...lib]).slice(0,Math.min(lib.length,rr*ids.length)); up.order=pgShuffle([...ids]); up.rr=rr; up.cur={i:0, ts:up.start}; }
+    up.affs=pgShuffle([...lib]).slice(0,Math.min(lib.length,rr*ids.length)).map(A=>({...A, ex:(A.ex||[]).map(e=>e.join("|"))})); up.order=pgShuffle([...ids]); up.rr=rr; up.cur={i:0, ts:up.start}; }
   if(P.game==="hunt"){ const h=await huInit(P, up); if(!h.hu) return toast(T("loading")); Object.assign(up, h); }
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
 }
@@ -5558,13 +5558,17 @@ const rtReady=()=>!!(PG_WORDS&&PG_WORDS.size&&RT_EXTRA);
 const rtIsWord=w=>!PG_BLOCK.has(w)&&(PG_WORDS.has(w)||RT_EXTRA.has(w));
 const rtFits=(w,A)=>/^[a-z]+$/.test(w)&&w.length>=A.a.length+2&&(A.t==="p"?w.startsWith(A.a):w.endsWith(A.a));
 const rtLab=A=>A.t==="p"?A.a+"-":"-"+A.a;
-const rtMean=A=>esc(LANG==="zh"?A.zh:A.en);
+const rtMean=A=>esc(A[LANG]||A.en);
+// roots.json example words: [word, zh, hi, es, ja, ko]; English players get no translation
+const RT_EXI={zh:1,hi:2,es:3,ja:4,ko:5};
+const rtExTr=e=>RT_EXI[LANG]?(e[RT_EXI[LANG]]||""):"";
 function rtCur(){ const P=S.pg.party; return P.cur||{i:0, ts:P.start}; }
 function rtPhase(now){ const C=rtCur(), a=C.ts+RT.intro, rv=Math.min(C.end||Infinity, a+RT.ans); return {k:now<a?"intro":now<rv?"ans":"rev", a, rv, next:rv+RT.rev}; }
 function rtOrder(){ const P=S.pg.party; return P.order||Object.keys(P.players||{}); }
 function rtDealer(i){ const o=rtOrder(); return o[i%o.length]; }
 function rtTotal(){ const P=S.pg.party; return Math.min((P.affs||[]).length, (P.rr||3)*rtOrder().length); }
-function rtAff(i){ return (S.pg.party.affs||[])[i]||{a:"?",t:"p",zh:"",en:"",ex:[]}; }
+function rtAff(i){ const A=(S.pg.party.affs||[])[i]; if(!A) return {a:"?",t:"p",zh:"",en:"",ex:[]};
+  return {...A, ex:(A.ex||[]).map(e=>Array.isArray(e)?e:String(e).split("|"))}; }
 function rtAnswerers(i){ const d=rtDealer(i); return Object.keys(S.pg.party.players||{}).filter(u=>u!==d); }
 function rtRa(u){ const pg=S.pg; return u===pgMe()&&pg.RA?pg.RA:((pg.ps[u]||{}).ra||{}); }
 function rtRec(u,i){ const r=rtRa(u)[i]; return r&&typeof r.w==="string"&&r.e<=RT.ans+500?r:null; }
@@ -5632,7 +5636,7 @@ function rtSections(){
   else if(F.k==="ans") mid=`<div class="rt-card pop">${kind}<div class="rt-aff">${esc(rtLab(A))}</div><p class="rt-mean">${rtMean(A)}</p><p class="muted sm-t">${T("rtCount",{n:L.length,t:rtAnswerers(C.i).length})}</p></div>`;
   else { const used=new Set(L.map(x=>x.w)), more=(A.ex||[]).filter(([w])=>!used.has(w)).slice(0,RT.show);
     mid=`<div class="rt-card rev"><div class="rt-aff sm">${esc(rtLab(A))}</div><p class="rt-mean">${rtMean(A)}</p>${rtAllIn(C.i)?`<p class="rt-bonus">${T("rtAllBonus",{n:esc(pgNm(d)),p:RT.deal})}</p>`:L.length?"":`<p class="muted sm-t">${T("rtNobody")}</p>`}
-      ${more.length?`<div class="eyebrow">${T("rtMore")}</div><ul class="rt-more">${more.map(([w,z])=>`<li><span>${rtWord(w,A)}</span>${LANG==="zh"?`<small>${esc(z)}</small>`:""}</li>`).join("")}</ul>`:""}</div>`; }
+      ${more.length?`<div class="eyebrow">${T("rtMore")}</div><ul class="rt-more">${more.map(e=>`<li><span>${rtWord(e[0],A)}</span>${rtExTr(e)?`<small>${esc(rtExTr(e))}</small>`:""}</li>`).join("")}</ul>`:""}</div>`; }
   const ids=rtOrder().filter(u=>u in (P.players||{})), lt=ids.filter((_,k)=>k%2===0), rt=ids.filter((_,k)=>k%2===1), side=(us,c)=>`<div class="rt-side ${c} n${Math.max(lt.length,rt.length)}">${us.map(u=>rtPlayer(u,C.i,F,sc,L)).join("")}</div>`;
   const arena=`<div class="rt-arena">${side(lt,"l")}<div class="rt-mid">${mid}</div>${side(rt,"r")}</div>`;
   let kb="";
@@ -5654,7 +5658,7 @@ function rtResults(rows){ const tot=rtTotal();
   const extra=`<h3>${T("pgWordsReview")}</h3><div class="co-list">${Array.from({length:tot},(_,i)=>{ const A=rtAff(i), L=rtList(i), used=new Set(L.map(x=>x.w)), more=(A.ex||[]).filter(([w])=>!used.has(w)).slice(0,4);
     return `<div class="co-err"><span class="chip ${L.length?"done":"new"}">${i+1}</span><div style="flex:1"><b>${esc(rtLab(A))}</b> · ${rtMean(A)} <span class="muted sm-t">· 🎤 ${esc(pgNm(rtDealer(i)))}</span>
       <div class="sm-t">${L.length?L.map(x=>`${rtWord(x.w,A)} <span class="muted">(${esc(pgNm(x.u))} +${x.p})</span>`).join(" · "):T("rtNobody")}</div>
-      ${more.length?`<div class="muted sm-t">${T("rtMore")}：${more.map(([w,z])=>`${esc(w)}${LANG==="zh"?` ${esc(z)}`:""}`).join("、")}</div>`:""}</div></div>`; }).join("")}</div>`;
+      ${more.length?`<div class="muted sm-t">${T("rtMore")}${LANG==="zh"?"：":": "}${more.map(e=>`${esc(e[0])}${rtExTr(e)?` ${esc(rtExTr(e))}`:""}`).join(LANG==="zh"?"、":", ")}</div>`:""}</div></div>`; }).join("")}</div>`;
   return {stats, extra}; }
 
 /* ----- view ----- */
@@ -8167,6 +8171,10 @@ Object.assign(STR.hi,{"tabRead": "पढ़ें"});
 Object.assign(STR.es,{"tabRead": "Leer"});
 Object.assign(STR.ja,{"tabRead": "読む"});
 Object.assign(STR.ko,{"tabRead": "읽기"});
+Object.assign(STR.hi,{"version": "संस्करण"});
+Object.assign(STR.es,{"version": "Versión"});
+Object.assign(STR.ja,{"version": "バージョン"});
+Object.assign(STR.ko,{"version": "버전"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});

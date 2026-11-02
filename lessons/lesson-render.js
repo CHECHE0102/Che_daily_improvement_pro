@@ -81,11 +81,21 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
 .opt.bad{background:#e8846b;color:#fff;border-color:#fff}
 `;
   const LEAD_IN = 0.45;
+  // one teacher per 10 lessons (CheChe): pick with the script's "teacher" field; art in assets/art/lesson/<prefix>-<pose>.webp
+  const pose = (name, icon, pre) => ({ name, icon, talk: `lesson/${pre}-talk`, happy: `lesson/${pre}-yay`, hi: `lesson/${pre}-hi`, bye: `lesson/${pre}-bye`,
+    think: `lesson/${pre}-think`, wow: `lesson/${pre}-wow`, point: `lesson/${pre}-point` });
+  const TEACHERS = { cian: pose("Cian 老師", "👨‍🏫", "teacher"), aoife: pose("Aoife 老師", "👩‍🏫", "aoife"), declan: pose("Declan 老師", "🧔", "declan") };
   const CAST = {
-    T: { name: "Cian 老師", icon: "👨‍🏫", talk: "lesson/teacher-talk", happy: "lesson/teacher-yay", hi: "lesson/teacher-hi", bye: "lesson/teacher-bye",
-         think: "lesson/teacher-think", wow: "lesson/teacher-wow", point: "lesson/teacher-point" },
+    T: TEACHERS.cian,
     A: { name: "Emily", icon: "🗣", talk: "hero-f-idle" },
     B: { name: "Connor", icon: "🗣", talk: "hero-m-idle" }
+  };
+  // font size so the longest single word still fits the 960px stage (CheChe: big words must never be cut off)
+  // em widths are rough upper bounds for Poppins bold; CJK characters are about 1em
+  const fit = (text, base, maxW = 860) => {
+    const w = t => [...t].reduce((a, ch) => a + (/[\u2e80-\uffff]/.test(ch) ? 1 : /[mwMW@]/.test(ch) ? 0.95 : /[A-Z0-9]/.test(ch) ? 0.75 : /[il.,'’!|]/.test(ch) ? 0.32 : 0.62), 0);
+    const longest = Math.max(1, ...String(text).split(/\s+/).map(w));
+    return Math.min(base, Math.floor(maxW / longest));
   };
   const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const an = (name, dur, delay, ease = "cubic-bezier(.2,.9,.3,1.2)", fill = "both", count = "1") =>
@@ -124,18 +134,18 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
       case "hook": {
         const [a, b, c] = s.big;
         return `<div class="big" style="margin-top:120px;${E("up", 0.1)}">${esc(a)}</div>`
-          + `<div style="${E("pop", 0.7, 0.7)}"><div class="big hl" style="${an("shake", 0.8, D(1.3), "ease")}">${esc(b)}</div></div>`
+          + `<div style="${E("pop", 0.7, 0.7)}"><div class="big hl" style="font-size:${fit(b, 230)}px;${an("shake", 0.8, D(1.3), "ease")}">${esc(b)}</div></div>`
           + `<div class="big" style="font-size:84px;${E("up", 1.6)}">${esc(c)}</div>`
           + `<div style="font-size:150px;margin-top:40px;${E("pop", 2.2)}">${esc(s.emoji || "🤔")}</div>`;
       }
       case "phrase":
         return `<div class="num" style="${E("pop", 0.1)}">${esc(s.num)}</div>`
-          + `<div class="phrase" style="${E("pop", 0.4, 0.7)}">${esc(s.phrase)}</div>`
+          + `<div class="phrase" style="font-size:${fit(s.phrase, [...s.phrase].length > 14 ? 130 : 190)}px;${E("pop", 0.4, 0.7)}">${esc(s.phrase)}</div>`
           + (s.pron ? `<div class="pron" style="${E("up", 0.9)}">${esc(s.pron)}</div>` : "")
           + `<div class="meaning" style="${E("up", 1.1)}">${esc(s.meaning)}</div>` + circle(470, 1.5, "margin-top:46px;");
       case "grammar":
         return `<div class="kicker" style="${E("up", 0.1)}">${esc(s.kicker)}</div>`
-          + `<div class="big" style="font-size:100px;font-family:Poppins;${E("pop", 0.4, 0.7)}">${esc(s.head)}</div>`
+          + `<div class="big" style="font-size:${fit(s.head, 100)}px;font-family:Poppins;${E("pop", 0.4, 0.7)}">${esc(s.head)}</div>`
           + `<div class="points">${s.points.map((p, i) => `<div style="${E("fromL", 0.9 + i * 0.5)}">✦ ${esc(p)}</div>`).join("")}</div>` + circle(380, 2.0);
       case "quiz": {
         const rev = ln.reveal, pick = opts.picked, ask = opts.interactive && ln.countdown;
@@ -160,7 +170,7 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
 
   function frame(lesson, si, li, info, opts = {}) {
     const s = lesson.slides[si], ln = s.lines[li], v = ln.v, en = v !== "T";
-    const cast = Object.assign({}, CAST, lesson.cast || {});
+    const cast = Object.assign({}, CAST, { T: TEACHERS[lesson.teacher] || TEACHERS.cian }, lesson.cast || {});
     const art = opts.art || "assets/art/";
     const img = n => art + n + ".webp";
     const { lead, speech: sp, t0: tglob, ts, p0, p1, first } = info;

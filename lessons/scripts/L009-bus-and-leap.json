@@ -1,0 +1,187 @@
+{
+ "id": "L009",
+ "title": "搭公車必學三句",
+ "subtitle": "top up・Does this bus go to・Cheers",
+ "level": "A2",
+ "kind": "phrase",
+ "date": "2026-11-02",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "第一次搭公車",
+    "Leap card",
+    "要怎麼用？"
+   ],
+   "emoji": "🚌",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一次在愛爾蘭搭公車，不知道要怎麼開口？"
+    },
+    {
+     "v": "T",
+     "say": "今天教你搭公車最常用的三句英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "top up",
+   "meaning": "加值・儲值",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，top up，加值。Leap card 沒錢了就要加值。"
+    },
+    {
+     "v": "A",
+     "say": "Can I top up my Leap card here?",
+     "zh": "我可以在這裡幫 Leap card 加值嗎？"
+    },
+    {
+     "v": "B",
+     "say": "You can, yeah. How much?",
+     "zh": "可以啊，要加多少？"
+    },
+    {
+     "v": "T",
+     "say": "手機加值也一樣說 top up 喔。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "Does this bus go to…?",
+   "meaning": "這班車有到…嗎？",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，上車前先問司機這班車有沒有到。"
+    },
+    {
+     "v": "A",
+     "say": "Does this bus go to the city centre?",
+     "zh": "這班車有到市中心嗎？"
+    },
+    {
+     "v": "B",
+     "say": "It does. Hop on.",
+     "zh": "有喔，上來吧。"
+    },
+    {
+     "v": "T",
+     "say": "Hop on 就是上車吧，司機很常說。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "Cheers",
+   "meaning": "謝啦",
+   "img": "scene-win",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，下車的時候，愛爾蘭人會跟司機說 Cheers。"
+    },
+    {
+     "v": "A",
+     "say": "This is my stop. Cheers!",
+     "zh": "我到站了，謝啦！"
+    },
+    {
+     "v": "B",
+     "say": "No bother. Mind yourself.",
+     "zh": "不客氣，路上小心。"
+    },
+    {
+     "v": "T",
+     "say": "Cheers 就是謝啦，Mind yourself 是保重。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Hop on.",
+   "ask": "司機這樣說，意思是？",
+   "opts": [
+    "請下車",
+    "上車吧",
+    "等下一班"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！你問司機有沒有到市中心，他說："
+    },
+    {
+     "v": "A",
+     "say": "It does. Hop on.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "Hop on 是什麼意思？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！Hop on，就是上車吧！",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "top up",
+     "加值"
+    ],
+    [
+     "Does this bus go to…?",
+     "有到…嗎？"
+    ],
+    [
+     "Cheers",
+     "謝啦"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了：top up、Does this bus go to、Cheers！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ],
+ "teacher": "cian"
+}

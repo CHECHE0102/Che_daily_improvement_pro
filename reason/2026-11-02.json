@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-02",
+ "items": {
+  "2026-11-02": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The minister has announced that homelessness fell in September for the first time in a year.",
+     "Monthly homelessness figures have been delayed by industrial action, while the minister highlighted a rise in non-Irish citizens in emergency accommodation.",
+     "Regional lead authorities have refused to collect homelessness data because of a funding dispute.",
+     "The Social Democrats have published their own homelessness figures for September."
+    ],
+    "a": 1,
+    "exp": "The passage opens by saying the statistics 'have been postponed', with the delay attributed 'to industrial action', and goes on to report 'a substantial increase in the proportion of non-Irish citizens in emergency accommodation'."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about why the department cannot simply publish partial figures?",
+    "opts": [
+     "The minister believes partial figures would show an increase and wants to hide it.",
+     "Partial figures are illegal to publish under the work-to-rule agreement.",
+     "Because people move in and out of homelessness, incomplete returns could lead to double-counting or missed individuals.",
+     "The nine authorities have already sent their data, but the department has lost it."
+    ],
+    "a": 2,
+    "exp": "The minister said that 'since individuals frequently move in and out of homelessness, rigorous verification is essential to prevent duplication and to ensure that every person is accounted for', and the department 'has consequently been unable to obtain a comprehensive data set'. The passage also says he 'could not predict whether the figures would increase or decrease', which rules out hiding a known rise."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the minister's attitude to non-Irish citizens in emergency accommodation, as reported in the passage?",
+    "opts": [
+     "Supportive of their entitlement, while acknowledging the extra barriers they face",
+     "Hostile, suggesting they should not receive housing",
+     "Indifferent, refusing to comment on the figures",
+     "Alarmed, calling for immediate changes to entitlement rules"
+    ],
+    "a": 0,
+    "exp": "He 'maintained that these individuals are fully entitled to housing; however, he noted that they typically encounter more significant socio-economic barriers to obtaining a home'."
+   }
+  ],
+  "2026-11-02-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "The history of Irish casualties in Lebanon since 1978",
+     "A dispute between Senator Tom Clonan and Mark Mellett over Ireland's role in Mali",
+     "The United States' decision to send its own troops to southern Lebanon",
+     "The end of the UNIFIL mission and the uncertainty it creates for future Irish military involvement"
+    ],
+    "a": 3,
+    "exp": "The passage states that UNIFIL 'is scheduled to terminate at the end of this year, thereby generating considerable uncertainty regarding the future of Irish military involvement in the region', and the rest discusses the successor mission, the triple lock and the debate."
+   },
+   {
+    "type": "infer",
+    "q": "Why does the minister's proposed legislation matter for the new EU mission?",
+    "opts": [
+     "Without it, Ireland could send only about a dozen soldiers, because the EU mission has no UN mandate.",
+     "It would allow Irish troops to stay in UNIFIL after 31 December.",
+     "It would require a UN vote before any Irish deployment abroad.",
+     "It would let the United States approve Irish deployments."
+    ],
+    "a": 0,
+    "exp": "The triple lock 'limits contributions to missions without a UN mandate to approximately a dozen soldiers', so the minister 'has introduced legislation that would abolish this requirement, rendering deployment contingent upon Cabinet and Dáil approval alone'. The EU mission is the kind of non-UN mission this affects."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention Mark Mellett's comparison with Mali?",
+    "opts": [
+     "To show that Irish troops have already been trained by the Lebanese army",
+     "To present a counter-argument to the concern that training the Lebanese army is risky",
+     "To explain why UNIFIL was established in 1978",
+     "To prove that the triple lock has already been abolished"
+    ],
+    "a": 1,
+    "exp": "After critics argue that assisting the Lebanese army 'could implicate Irish troops in a potential civil conflict', the passage says 'Nevertheless, former chief of staff Mark Mellett has maintained that such training would be comparable to Ireland's previous role in Mali' - 'Nevertheless' signals an opposing view."
+   }
+  ],
+  "2026-11-02-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Dublin City Council has introduced stricter parking laws with higher fines across the city.",
+     "Dublin Street Parking Services has won a new contract to run parking enforcement until 2030.",
+     "A new operator and a zone-based system will spread parking enforcement beyond the city centre, though the rules themselves are unchanged.",
+     "Clamping has been abolished in residential areas following complaints."
+    ],
+    "a": 2,
+    "exp": "APCOA 'replaces Dublin Street Parking Services'; the city is divided 'into six enforcement zones', so enforcement 'will no longer be predominantly concentrated in the city centre'; and Feljin Jose says 'the regulations themselves remain unchanged'."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about drivers in outer areas of Dublin?",
+    "opts": [
+     "They are more likely to be clamped than before, even though the rules have not changed.",
+     "They will now pay lower parking fines than drivers in the city centre.",
+     "They were never allowed to park on footpaths before November.",
+     "They will be exempt from enforcement for the first six months."
+    ],
+    "a": 0,
+    "exp": "Jason Cullen 'anticipates a substantial increase in clamping in outer areas as a result of the zonal approach', while the passage notes 'the regulations themselves remain unchanged; rather, the modification concerns their implementation'."
+   },
+   {
+    "type": "tone",
+    "q": "What is Jason Cullen's overall attitude towards the new system?",
+    "opts": [
+     "Completely opposed, because of the cost of clamp removal",
+     "Uninterested, as it does not affect commuters",
+     "Enthusiastic, with no reservations at all",
+     "Broadly positive, despite some concern about costs for drivers"
+    ],
+    "a": 3,
+    "exp": "'Although he expressed concern about the financial burden imposed by clamp removal fees, he nevertheless characterised the wider distribution of enforcement as a positive development.'"
+   }
+  ],
+  "2026-11-02-4": [
+   {
+    "type": "main",
+    "q": "What is the main focus of the passage?",
+    "opts": [
+     "The construction of the Coombe's Cork Street building in 1967",
+     "The Coombe hospital's 200th anniversary, its origins and how outcomes have improved",
+     "A comparison of the Rotunda and the Coombe as maternity hospitals today",
+     "The life story of Dr John Kirby and his anatomy school"
+    ],
+    "a": 1,
+    "exp": "The passage begins 'The Coombe ... is commemorating its bicentenary', explains that 'Its establishment can be traced to a tragedy in the winter of 1825', and states 'The improvement in outcomes has been substantial'."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about maternity care in Dublin before the Coombe was founded?",
+    "opts": [
+     "Women south of the Liffey had to travel a considerable distance to reach dedicated maternity care.",
+     "Most women gave birth in Dr Kirby's anatomy school.",
+     "There were several maternity hospitals south of the Liffey.",
+     "Maternal deaths were rarer than they are today."
+    ],
+    "a": 0,
+    "exp": "The two women from the Liberties 'attempted to travel through a snowstorm to the Rotunda, which was at that time the city's only dedicated maternity hospital', and the Coombe later became 'the first maternity hospital south of the Liffey'."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the exhibition at the Little Museum of Dublin?",
+    "opts": [
+     "To advertise ticket prices for the museum",
+     "To show that baby Ollie's story is the main exhibit",
+     "To point out that it recognises Margaret Boyle, whose role has been overlooked in official records",
+     "To explain why the hospital moved to Cork Street"
+    ],
+    "a": 2,
+    "exp": "The exhibition 'acknowledges the contribution of Margaret Boyle, a founder who is notably absent from official biographical records'."
+   }
+  ]
+ }
+}

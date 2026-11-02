@@ -44,10 +44,11 @@ def segments(say):
     return [(k if re.search(r"[\w\u4e00-\u9fff]", t) else "P", t) for k, t in out if t.strip()]
 
 
-async def voice_line(ln, voices, base):
+async def voice_line(ln, voices, base, prosody=None):
     """Voice one line; teacher lines switch to a native English voice for English words.
     Returns (float32 clip, word boundaries [offset, dur, text])."""
     segs = segments(ln["say"]) if ln["v"] == "T" else [(ln["v"], ln["say"])]
+    pro = dict(PROSODY, **{k: tuple(v) for k, v in (prosody or {}).items()})   # a teacher can tune rate / pitch per lesson
     clip, bounds, gap = [], [], np.zeros(int(SEG_GAP * SR), np.float32)
     t = 0.0
     for j, (k, text) in enumerate(segs):
@@ -55,10 +56,10 @@ async def voice_line(ln, voices, base):
             clip.append(np.zeros(int(0.22 * SR), np.float32)); t += 0.22
             continue
         # file name carries voice + prosody + text, so a cached clip (actions/cache) is only reused for the same words
-        tag = hashlib.sha1(f"{voices[k]}|{PROSODY[k]}|{text}".encode()).hexdigest()[:8]
+        tag = hashlib.sha1(f"{voices[k]}|{pro[k]}|{text}".encode()).hexdigest()[:8]
         mp3 = f"{base}-{j}-{tag}.mp3"
         if not os.path.exists(mp3 + ".json"):
-            await tts(text, voices[k], *PROSODY[k], mp3)
+            await tts(text, voices[k], *pro[k], mp3)
         c, cut = trim(decode(mp3))
         if j and segs[j - 1][0] not in (k, "P"):
             clip.append(gap); t += SEG_GAP
@@ -181,7 +182,7 @@ async def main():
             if fake:
                 clip = np.zeros(int(len(ln["say"]) * (0.065 if ln["v"] != "T" else 0.18) * SR), np.float32)
             else:
-                clip, bounds = await voice_line(ln, lesson["voices"], os.path.join(work, f"a{i:03d}"))
+                clip, bounds = await voice_line(ln, lesson["voices"], os.path.join(work, f"a{i:03d}"), lesson.get("prosody"))
         speech = len(clip) / SR
         lead = LEAD if first and i > 0 else 0.15
         dur = lead + (speech + GAP if speech else float(ln.get("pause", 1)))
