@@ -38,13 +38,13 @@ const RW={
   sq:[[0,0],[200,.04],[480,-.06],[540,-.07],[600,-.16,"inQ"],[650,-.18],[760,.03],[900,-.02],[1300,0]],
   legN:[[0,0],[200,6],[480,-14],[600,32,"inQ"],[900,26],[1300,0,"io"]],legF:[[0,0],[200,-6],[480,16],[600,-34,"inQ"],[900,-28],[1300,0,"io"]]},
  trident:{impact:300,trail:[220,320],shout:[150,700],main:"N",two:85,
-  hand:[[0,[470,690,-70]],[200,[340,640,-8],"outQ"],[300,[740,620,-3],"inQ"],[380,[725,624,-3]],[760,[680,640,-5]],[1000,[470,690,-70],"io"]],
+  hand:[[0,[600,720,-55]],[200,[340,640,-8],"outQ"],[300,[740,620,-3],"inQ"],[380,[725,624,-3]],[760,[680,640,-5]],[1000,[600,720,-55],"io"]],
   lean:[[0,0],[200,-14,"outQ"],[300,22,"inQ"],[760,8],[1000,0,"io"]],
   x:[[0,0],[200,-.05,"outQ"],[300,.22,"inQ"],[760,.2],[1000,0,"outC"]],
   sq:[[0,0],[200,-.04],[300,.05,"inQ"],[380,-.03],[600,0]],
   legN:[[0,0],[200,-10],[300,32,"inQ"],[760,24],[1000,0,"io"]],legF:[[0,0],[200,10],[300,-34,"inQ"],[760,-26],[1000,0,"io"]]},
  staff:{impact:680,trail:[575,625],shout:[150,900],main:"N",charge:[150,560],shoot:[600,680],open:[150,1000],
-  hand:[[0,[480,700,-90]],[250,[460,330,-92],"outQ"],[560,[455,318,-96]],[620,[720,560,-12],"inQ"],[900,[705,570,-16]],[1150,[480,700,-90],"io"]],
+  hand:[[0,[640,725,-70]],[250,[460,330,-92],"outQ"],[560,[455,318,-96]],[620,[720,560,-12],"inQ"],[900,[705,570,-16]],[1150,[640,725,-70],"io"]],
   far:[[0,[720,700]],[250,[720,420],"outQ"],[560,[725,410]],[620,[880,560],"inQ"],[900,[870,570]],[1150,[720,700],"io"]],
   lean:[[0,0],[250,-12,"outQ"],[560,-14],[620,18,"inQ"],[900,12],[1150,0,"io"]],
   x:[[0,0],[560,-.03],[620,.07,"inQ"],[1150,0,"io"]],
@@ -52,7 +52,7 @@ const RW={
   sq:[[0,0],[250,-.05],[560,-.06],[620,.05,"inQ"],[700,0]],
   legN:[[0,0],[560,-6],[620,18,"inQ"],[900,14],[1150,0,"io"]],legF:[[0,0],[560,6],[620,-18,"inQ"],[900,-14],[1150,0,"io"]]},
  bow:{impact:740,shout:[250,760],main:"F",draw:[200,660],shoot:[660,740],grip:[.43,.47,.46],
-  hand:[[0,[700,700,60]],[200,[900,575,90],"outQ"],[900,[900,575,90]],[1150,[700,700,60],"io"]],
+  hand:[[0,[760,720,70]],[200,[900,575,90],"outQ"],[900,[900,575,90]],[1150,[760,720,70],"io"]],
   far:[[0,[470,680]],[200,[860,580],"outQ"],[600,[460,530],"outC"],[655,[455,526]],[700,[360,500],"outQ"],[900,[430,580]],[1150,[470,680],"io"]],
   lean:[[0,0],[200,-4],[600,-10],[660,-10],[700,-16,"outQ"],[1150,0,"io"]],
   x:[[0,0],[660,0],[700,-.05,"outQ"],[1150,0,"io"]],
@@ -119,16 +119,17 @@ function drawHeroRig(t){
     else c.drawImage(IM[w.img],X(0),Y(0),S_,S_);};
   const two=!!R.two;
   // draw order
-  if(mainK==="F"){drawWeapon();}
+  // weapon goes behind the body only while it is raised overhead; otherwise it is held in front
+  const an=((f.H[2]%360)+540)%360-180,up=an<-60&&an>-175;
+  const raised=f.H[1]<500&&(f.phase==="atk"||S.hero.act==="win"),behind=raised&&up;
+  if(behind)drawWeapon();
   if(!two){drawPart(c,base,M.armFl,"h-armFl");if(f.open)openHand(c,base,M);}
   drawPart(c,base,M.armFu,"h-armFu");
   drawPart(c,base,M.legF,"h-legF");drawPart(c,base,M.legN,"h-legN");
-  const an=((f.H[2]%360)+540)%360-180,up=an<-60&&an>-175;
-  if(two&&up)drawWeapon();
-  const raised=f.H[1]<500&&f.phase==="atk";
   drawPart(c,base,M.hips,"h-torso");if(!raised)drawPart(c,base,M.head,f.head);
-  if(two){if(!up)drawWeapon();drawPart(c,base,M.armFl,"h-armFl");}
-  if(mainK==="N"&&!two)drawWeapon();
+  if(!behind&&(two||mainK==="F"))drawWeapon();
+  if(two)drawPart(c,base,M.armFl,"h-armFl");
+  if(!behind&&mainK==="N"&&!two)drawWeapon();
   drawPart(c,base,M.armNu,"h-armNu");drawPart(c,base,M.armNl,"h-armNl");
   if(raised)drawPart(c,base,M.head,f.head);
   // bow string + arrow
