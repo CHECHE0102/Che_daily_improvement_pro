@@ -391,9 +391,9 @@ function drawFx(dt,t){const c=fx.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0
       const dx=(i-1)*12,p=Math.min(1,k*3.5);c.moveTo(dx-len*.4,-len*.5);c.lineTo(dx-len*.4+len*.8*p,-len*.5+len*p);c.stroke();}}
     c.restore();return true});
   // weapon smear
-  c.globalCompositeOperation="lighter";S.trail=S.trail.filter(q=>{q.t+=dt;const k=q.t/.16;if(k>=1)return false;c.globalAlpha=(1-k)*.8;
+  c.globalCompositeOperation="lighter";S.trail=S.trail.filter(q=>{q.t+=dt;const k=q.t/.16;if(k>=1)return false;c.globalAlpha=(1-k)*.8;const sh=q.ox!=null?H.sx-q.ox:0;c.save();c.translate(sh,0);
     const g=c.createLinearGradient(q.c[0],q.c[1],q.d[0],q.d[1]);g.addColorStop(0,q.col[1]+"00");g.addColorStop(1,q.col[0]);c.fillStyle=g;
-    c.beginPath();c.moveTo(...q.a);c.lineTo(...q.b);c.lineTo(...q.d);c.lineTo(...q.c);c.closePath();c.fill();c.globalAlpha=1;return true});c.globalCompositeOperation="source-over";
+    c.beginPath();c.moveTo(...q.a);c.lineTo(...q.b);c.lineTo(...q.d);c.lineTo(...q.c);c.closePath();c.fill();c.restore();c.globalAlpha=1;return true});c.globalCompositeOperation="source-over";
   // staff orb
   if(H.orb){const o=H.orb,g=c.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r*2.2);g.addColorStop(0,"#fff");g.addColorStop(.35,WPN.staff.col[0]);g.addColorStop(1,"rgba(79,191,74,0)");
     c.fillStyle=g;c.beginPath();c.arc(o.x,o.y,o.r*2.2*(1+.08*Math.sin(t*.06)),0,7);c.fill();}
@@ -427,7 +427,7 @@ function heroAttack(crit,ko){
   if(S.wolf.ko||S.hero.ko) return;
   if(S.hero.act==="atk") return;
   const wp=WPN[WSEL];S.hero.act="atk";S.hero.t0=S.sim;S.hero.shot=false;
-  at(wp.impact,()=>{const w=S.wolf;w.act=ko?"ko":"hit";w.t0=S.sim;w.keys=ko?W_KO:hitKeys(crit?1.5:1);if(ko)w.ko=true;
+  at(S.mode==="parts"?RW[WSEL].impact:wp.impact,()=>{const w=S.wolf;w.act=ko?"ko":"hit";w.t0=S.sim;w.keys=ko?W_KO:hitKeys(crit?1.5:1);if(ko)w.ko=true;
     w.flash=[[S.sim,1],[S.sim+(crit?160:110),.9],[S.sim+260,0]];w.red=[[S.sim,0],[S.sim+120,.35],[S.sim+420,0]];
     const cx=L.wx-Wd*.02,cy=L.gy-Wd*.2,big=crit||ko;impactFx(WSEL,cx,cy,big);
     dmg(cx,cy-Wd*.12,ko?999:crit?186:74,crit||ko);hitStop(big?170:WSEL==="hammer"?130:85);S.shake=big?14:WSEL==="hammer"?12:6;if(crit||ko){S.zoom=1;S.slowUntil=S.sim+380}
@@ -444,7 +444,7 @@ function reset(){Object.assign(S.wolf,{act:null,keys:null,ko:false,flash:[[0,0]]
 let demoTimer=null;
 function demo(on){S.demo=on;$("#demoBtn").textContent=on?"■ 停止示範":"▶ 自動示範";clearTimeout(demoTimer);if(!on)return;
   const seq=[()=>{pickW("sword");heroAttack(false)},()=>wolfAttack(),()=>{pickW("hammer");heroAttack(true)},()=>{pickW("trident");heroAttack(false)},()=>{pickW("staff");heroAttack(false)},()=>{pickW("bow");heroAttack(false,true)},()=>{reset();pickW("sword")}];let i=0;
-  const step=()=>{if(!S.demo)return;if(S.mode==="old")oldAct(["hero","wolf","hero","hero","hero","hero",null][i]);else seq[i]();const gap=[1500,1500,1800,1500,1700,2500,700][i];i=(i+1)%seq.length;demoTimer=setTimeout(step,gap*slowMul())};step();}
+  const step=()=>{if(!S.demo)return;if(S.mode==="old")oldAct(["hero","wolf","hero","hero","hero","hero",null][i]);else seq[i]();const gap=[1500,1500,2300,1600,1900,2700,700][i];i=(i+1)%seq.length;demoTimer=setTimeout(step,gap*slowMul())};step();}
 
 /* ---------------- old version ---------------- */
 function oldAct(a){if(!a)return;const h=$("#old .o-hero"),m=$("#old .mon-seal");[h,m].forEach(e=>{e.className=e.className.replace(/ ?o-\S+/g,"");void e.offsetWidth});

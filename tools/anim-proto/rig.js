@@ -10,114 +10,142 @@ function drawPart(c,base,M,name){const img=IM[name];if(!img)return;const o=PM[na
 const HB=[{n:"root",p:HP.feet},{n:"hips",p:HP.hips,par:"root"},{n:"head",p:HP.neck,par:"hips"},
   {n:"armNu",p:HP.shN,par:"hips"},{n:"armNl",p:HP.elN,par:"armNu"},{n:"armFu",p:HP.shF,par:"hips"},{n:"armFl",p:HP.elF,par:"armFu"},
   {n:"legN",p:HP.hipN,par:"root"},{n:"legF",p:HP.hipF,par:"root"}];
-const REST_A={ua:136,fa:136,ufa:50,ffa:50};
-const K=(a)=>a; // keys helper
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),ang=(a,b)=>Math.atan2(b[1]-a[1],b[0]-a[0])/D2R;
+const ARM={N:{sh:HP.shN,a:dist(HP.shN,HP.elN),b:dist(HP.elN,HP.gripN),ru:ang(HP.shN,HP.elN),rf:ang(HP.elN,HP.gripN)},
+           F:{sh:HP.shF,a:dist(HP.shF,HP.elF),b:dist(HP.elF,HP.gripF),ru:ang(HP.shF,HP.elF),rf:ang(HP.elF,HP.gripF)}};
+// 2-bone IK: shoulder S, target T -> absolute upper/forearm angles (deg). Elbow is kept on the lower side.
+function ik(S,T,a,b,up){let dx=T[0]-S[0],dy=T[1]-S[1],d=Math.hypot(dx,dy);const th=Math.atan2(dy,dx);d=Math.max(Math.abs(a-b)+1,Math.min(a+b-.5,d));
+  const A=Math.acos(Math.max(-1,Math.min(1,(a*a+d*d-b*b)/(2*a*d))));let best=null;
+  for(const s of [1,-1]){const u=th+s*A,E=[S[0]+a*Math.cos(u),S[1]+a*Math.sin(u)];const H=[S[0]+d*Math.cos(th),S[1]+d*Math.sin(th)];
+    const c={ua:u/D2R,fa:Math.atan2(H[1]-E[1],H[0]-E[0])/D2R,ey:E[1]};if(!best||(up?c.ey<best.ey:c.ey>best.ey))best=c;}
+  return best;}
+// keyframes: [t, value(s), ease]. P(...) = [hx,hy,d]  (main hand target in body space, weapon tip direction)
 const RW={
- sword:{idle:{ua:105,fa:40,ufa:75,ffa:100,d:-50},trail:[250,380],shout:[120,650],
-  ua:[[0,105],[150,-110,"outQ"],[230,-120],[300,20,"inQ"],[380,60,"outQ"],[650,55],[950,105,"io"]],
-  fa:[[0,40],[150,-150,"outQ"],[230,-165],[300,-5,"inQ"],[380,70,"outQ"],[650,60],[950,40,"io"]],
-  d:[[0,-50],[150,-170,"outQ"],[230,-185],[300,-10,"inQ"],[380,80,"outQ"],[650,70],[950,-50,"io"]],
-  ufa:[[0,75],[230,40],[300,120,"inQ"],[950,75,"io"]],ffa:[[0,100],[230,10],[300,150,"inQ"],[950,100,"io"]],
-  lean:[[0,0],[150,-8],[230,-10],[300,10,"inQ"],[380,14],[650,6],[950,0,"io"]],
-  x:[[0,0],[170,-.03,"outQ"],[270,.22,"inQ"],[580,.21],[950,0,"outC"]],
-  legN:[[0,0],[230,10],[300,25,"inQ"],[650,20],[950,0,"io"]],legF:[[0,0],[230,-5],[300,-25,"inQ"],[650,-20],[950,0,"io"]]},
- hammer:{idle:{ua:150,fa:-60,ufa:75,ffa:100,d:-95},trail:[400,500],shout:[100,800],
-  ua:[[0,150],[120,-120,"outQ"],[380,-150,"outQ"],[480,40,"inQ"],[560,55],[820,50],[1080,150,"io"]],
-  fa:[[0,-60],[120,-130,"outQ"],[380,-170,"outQ"],[480,60,"inQ"],[560,75],[820,70],[1080,-60,"io"]],
-  d:[[0,-95],[120,-140,"outQ"],[380,-190,"outQ"],[480,70,"inQ"],[560,80],[820,72],[1080,-95,"io"]],
-  ufa:[[0,75],[120,-110,"outQ"],[380,-140],[480,30,"inQ"],[820,40],[1080,75,"io"]],ffa:[[0,100],[120,-140,"outQ"],[380,-165],[480,50,"inQ"],[820,60],[1080,100,"io"]],
-  lean:[[0,0],[380,-14,"outQ"],[480,16,"inQ"],[820,8],[1080,0,"io"]],
-  x:[[0,0],[330,-.04,"outQ"],[440,.2,"inQ"],[760,.19],[1080,0,"outC"]],y:[[0,0],[330,-.035,"outQ"],[420,-.07,"outQ"],[480,0,"inQ"]],
-  sq:[[0,0],[300,-.06],[440,.05],[500,-.12,"outQ"],[680,0,"outBack"]],
-  legN:[[0,0],[380,-10],[480,25,"inQ"],[820,20],[1080,0,"io"]],legF:[[0,0],[380,10],[480,-25,"inQ"],[820,-20],[1080,0,"io"]]},
- trident:{idle:{ua:120,fa:80,ufa:75,ffa:100,d:-90},trail:[230,330],shout:[150,700],
-  ua:[[0,120],[90,150,"outQ"],[210,175,"outQ"],[300,5,"inQ"],[380,0],[760,40],[1000,120,"io"]],
-  fa:[[0,80],[90,15,"outQ"],[210,20],[300,-2,"inQ"],[380,-2],[760,10],[1000,80,"io"]],
-  d:[[0,-90],[90,-8,"outQ"],[210,-12],[300,-2,"inQ"],[860,-4],[1000,-90,"io"]],
-  ufa:[[0,75],[90,20,"outQ"],[210,60],[300,-10,"inQ"],[760,20],[1000,75,"io"]],ffa:[[0,100],[90,0,"outQ"],[210,0],[300,-5,"inQ"],[760,0],[1000,100,"io"]],
-  lean:[[0,0],[210,-6],[300,10,"inQ"],[760,4],[1000,0,"io"]],
-  x:[[0,0],[210,-.03,"outQ"],[300,.16,"inQ"],[620,.15],[950,0,"outC"]],
-  legN:[[0,0],[210,5],[300,25,"inQ"],[700,20],[1000,0,"io"]],legF:[[0,0],[300,-25,"inQ"],[700,-20],[1000,0,"io"]]},
- staff:{idle:{ua:120,fa:80,ufa:75,ffa:100,d:-90},trail:[480,560],shout:[100,800],open:[100,950],
-  ua:[[0,120],[110,-110,"outQ"],[440,-120,"io"],[530,-20,"inQ"],[900,-10],[1060,120,"io"]],
-  fa:[[0,80],[110,-95,"outQ"],[440,-100],[530,-25,"inQ"],[900,-20],[1060,80,"io"]],
-  d:[[0,-90],[110,-90],[440,-105,"io"],[530,-30,"inQ"],[900,-35],[1060,-90,"io"]],
-  ufa:[[0,75],[110,10,"outQ"],[530,-5],[900,0],[1060,75,"io"]],ffa:[[0,100],[110,-10,"outQ"],[530,-15],[900,-10],[1060,100,"io"]],
-  lean:[[0,0],[440,-5],[530,6,"inQ"],[1060,0,"io"]],x:[[0,0],[480,-.025,"io"],[560,.04,"outQ"],[1000,0,"io"]]},
- bow:{idle:{ua:110,fa:60,ufa:75,ffa:100,d:60},shout:[300,700],
-  ua:[[0,110],[110,-5,"outQ"],[820,-5],[960,110,"io"]],fa:[[0,60],[110,-8,"outQ"],[820,-8],[960,60,"io"]],d:[[0,60],[110,90,"outQ"],[820,90],[960,60,"io"]],
-  ufa:[[0,75],[110,150,"outQ"],[470,185,"io"],[520,160,"outQ"],[820,160],[960,75,"io"]],ffa:[[0,100],[110,-5,"outQ"],[470,5],[520,-10],[820,-10],[960,100,"io"]],
-  lean:[[0,0],[470,-3],[520,-7,"outQ"],[900,0,"io"]],x:[[0,0],[470,-.03,"io"],[520,-.06,"outQ"],[900,0,"io"]]}
+ sword:{impact:300,trail:[255,370],shout:[150,620],main:"N",
+  hand:[[0,[480,690,-25]],[180,[385,505,-118],"outQ"],[235,[380,498,-124]],[300,[560,600,-15],"inQ"],[360,[520,720,75],"outQ"],[620,[500,700,65]],[950,[480,690,-25],"io"]],
+  far:[[0,[720,700]],[180,[760,620],"outQ"],[300,[640,700],"inQ"],[620,[650,700]],[950,[720,700],"io"]],
+  lean:[[0,0],[180,-12,"outQ"],[230,-13],[300,14,"inQ"],[360,20,"outQ"],[620,10],[950,0,"io"]],
+  x:[[0,0],[180,-.04,"outQ"],[230,-.03],[300,.22,"inQ"],[620,.22],[950,0,"outC"]],
+  sq:[[0,0],[180,-.03],[300,.03],[360,-.04],[600,0]],
+  legN:[[0,0],[180,-6],[300,22,"inQ"],[620,18],[950,0,"io"]],legF:[[0,0],[180,8],[300,-24,"inQ"],[620,-20],[950,0,"io"]]},
+ hammer:{impact:600,trail:[550,615],shout:[200,950],main:"N",two:75,
+  hand:[[0,[520,720,75]],[200,[500,700,125],"io"],[480,[420,540,212],"outQ"],[540,[415,532,216]],[600,[600,720,415],"inQ"],[640,[605,730,420]],[900,[600,725,418]],[1300,[520,720,435],"io"]],
+  lean:[[0,0],[200,-4],[480,-16,"outQ"],[540,-17],[600,24,"inQ"],[640,25],[900,20],[1300,0,"io"]],
+  x:[[0,0],[200,.06,"io"],[480,.12],[540,.13],[600,.2,"inQ"],[900,.2],[1300,0,"io"]],
+  sq:[[0,0],[480,-.03],[540,-.04],[600,-.1,"inQ"],[640,-.13],[900,-.02],[1300,0]],
+  legN:[[0,0],[480,-8],[600,24,"inQ"],[900,20],[1300,0,"io"]],legF:[[0,0],[480,10],[600,-26,"inQ"],[900,-22],[1300,0,"io"]]},
+ trident:{impact:300,trail:[220,320],shout:[150,700],main:"N",two:85,
+  hand:[[0,[470,690,-70]],[200,[380,640,-6],"outQ"],[300,[600,630,-3],"inQ"],[380,[590,632,-3]],[760,[560,640,-5]],[1000,[470,690,-70],"io"]],
+  lean:[[0,0],[200,-8,"outQ"],[300,14,"inQ"],[760,6],[1000,0,"io"]],
+  x:[[0,0],[200,-.02,"outQ"],[300,.16,"inQ"],[760,.15],[1000,0,"outC"]],
+  legN:[[0,0],[200,-5],[300,22,"inQ"],[760,18],[1000,0,"io"]],legF:[[0,0],[200,6],[300,-24,"inQ"],[760,-20],[1000,0,"io"]]},
+ staff:{impact:680,trail:[575,625],shout:[150,900],main:"N",charge:[150,560],shoot:[600,680],open:[150,1000],
+  hand:[[0,[480,700,-90]],[250,[450,520,-95],"outQ"],[560,[445,505,-100]],[620,[610,580,-15],"inQ"],[900,[600,585,-18]],[1150,[480,700,-90],"io"]],
+  far:[[0,[720,700]],[250,[650,560],"outQ"],[560,[655,555]],[620,[790,575],"inQ"],[900,[785,580]],[1150,[720,700],"io"]],
+  lean:[[0,0],[250,-6,"outQ"],[560,-8],[620,12,"inQ"],[900,10],[1150,0,"io"]],
+  x:[[0,0],[560,-.02],[620,.04,"inQ"],[1150,0,"io"]],
+  legN:[[0,0],[560,-4],[620,12,"inQ"],[900,10],[1150,0,"io"]],legF:[[0,0],[560,4],[620,-12,"inQ"],[900,-10],[1150,0,"io"]]},
+ bow:{impact:740,shout:[250,760],main:"F",draw:[200,660],shoot:[660,740],grip:[.43,.47,.46],
+  hand:[[0,[700,700,60]],[200,[800,585,90],"outQ"],[900,[800,585,90]],[1150,[700,700,60],"io"]],
+  far:[[0,[470,680]],[200,[770,590],"outQ"],[600,[485,548],"outC"],[655,[480,545]],[700,[420,520],"outQ"],[900,[470,600]],[1150,[470,680],"io"]],
+  lean:[[0,0],[200,-2],[600,-5],[660,-5],[700,-8,"outQ"],[1150,0,"io"]],
+  x:[[0,0],[660,0],[700,-.03,"outQ"],[1150,0,"io"]],
+  legN:[[0,0],[200,6],[1000,6],[1150,0,"io"]],legF:[[0,0],[200,-8],[1000,-8],[1150,0,"io"]]}
 };
+const IDLE_FAR=[720,700];
+function sampleVec(keys,t){const n=keys[0][1].length,out=[];for(let i=0;i<n;i++)out.push(sampleNum(keys.map(k=>[k[0],k[1][i],k[2]]),t));return out;}
 const HR={tipPrev:null,midPrev:null};
 function heroRigFrame(t){
-  const h=S.hero,dt=h.act?t-h.t0:1e9,R=RW[WSEL],w=WPN[WSEL];const id=R.idle;
-  const f={x:0,y:0,r:0,sq:0,lean:0,ua:id.ua,fa:id.fa,ufa:id.ufa,ffa:id.ffa,d:id.d,legN:0,legF:0,head:"h-head",flash:0,open:false,weapon:true,dt};
+  const h=S.hero,dt=h.act?t-h.t0:1e9,R=RW[WSEL];
+  const f={x:0,y:0,r:0,sq:0,lean:0,legN:0,legF:0,head:"h-head",flash:0,open:false,dt,phase:"idle"};
+  let H=R.hand[0][1].slice(),FH=(R.far?R.far[0][1]:IDLE_FAR).slice();
   const br=reduce?0:Math.sin(t*2*Math.PI/1700);
-  if(h.act==="atk"){for(const k of ["x","y","sq","lean","ua","fa","ufa","ffa","d","legN","legF"]) if(R[k]) f[k]=sampleNum(R[k],dt);
+  if(h.act==="atk"){f.phase="atk";H=sampleVec(R.hand,dt);if(R.far)FH=sampleVec(R.far,dt);
+    for(const k of ["x","y","sq","lean","legN","legF"]) if(R[k]) f[k]=sampleNum(R[k],dt);
     if(R.shout&&dt>R.shout[0]&&dt<R.shout[1])f.head="h-head-shout";
     if(R.open&&dt>R.open[0]&&dt<R.open[1])f.open=true;
-    if(dt>R.ua[R.ua.length-1][0]+80)h.act=null;}
+    if(dt>R.hand[R.hand.length-1][0]+80)h.act=null;}
   else if(h.act==="hurt"){f.x=sampleNum([[0,0],[70,-.07,"outQ"],[600,0,"outBack"]],dt);f.lean=sampleNum([[0,0],[70,-14,"outQ"],[600,0,"outBack"]],dt);
-    f.ua+=sampleNum([[0,0],[80,-60,"outQ"],[600,0,"io"]],dt);f.ufa+=sampleNum([[0,0],[80,50,"outQ"],[600,0,"io"]],dt);f.ffa+=sampleNum([[0,0],[80,70,"outQ"],[600,0,"io"]],dt);
-    f.legN=sampleNum([[0,0],[80,14],[600,0]],dt);f.legF=sampleNum([[0,0],[80,8],[600,0]],dt);
-    f.flash=sampleNum([[0,1],[200,0]],dt);if(dt<520)f.head="h-head-hurt";if(dt>650)h.act=null;}
-  else if(h.act==="win"){if(h.winT==null)h.winT=t;const T0=h.winT;const k=clamp((t-T0)/300);const hop=Math.abs(Math.sin((t-T0)/200))*(t-T0<1300?1:0);
-    f.ua=id.ua+(-100-id.ua)*k;f.fa=id.fa+(-115-id.fa)*k;f.d=id.d+(-80-id.d)*k;f.ufa=75+(-60-75)*k;f.ffa=100+(-90-100)*k;f.y=-hop*.03;f.head="h-head-happy";}
-  // idle breathing
-  f.sq+=.012*br;f.ua+=2*br;f.ufa-=2*br;
-  return f;
+    const k=sampleNum([[0,0],[80,1,"outQ"],[600,0,"io"]],dt);H=[H[0]-60*k,H[1]-40*k,H[2]-40*k];FH=[FH[0]+30*k,FH[1]-60*k];
+    f.legN=12*k;f.legF=8*k;f.flash=sampleNum([[0,1],[200,0]],dt);if(dt<520)f.head="h-head-hurt";if(dt>650)h.act=null;}
+  else if(h.act==="win"){if(h.winT==null)h.winT=t;const T0=h.winT,k=E.outC(clamp((t-T0)/350));const hop=Math.abs(Math.sin((t-T0)/200))*(t-T0<1300?1:0);
+    const up=R.main==="F"?[720,470,-80]:[430,470,-80];H=H.map((v,i)=>v+(up[i]-v)*k);FH=FH.map((v,i)=>v+((R.main==="F"?[440,480]:[680,470])[i]-v)*k);f.y=-hop*.03;f.head="h-head-happy";}
+  H[1]+=3*br;f.sq+=.012*br;
+  f.H=H;f.FH=FH;return f;
 }
-function heroRigPose(f){const lean=f.lean;
-  return {root:{x:0,y:0,r:f.r,sx:-f.sq*.5,sy:f.sq},hips:{r:lean},head:{r:-lean*.4},
-    armNu:{r:f.ua-REST_A.ua-lean},armNl:{r:(f.fa-REST_A.fa)-(f.ua-REST_A.ua)},
-    armFu:{r:f.ufa-REST_A.ufa-lean},armFl:{r:(f.ffa-REST_A.ffa)-(f.ufa-REST_A.ufa)},
-    legN:{r:f.legN},legF:{r:f.legF}};}
 const heroOff=document.createElement("canvas");
 function drawHeroRig(t){
   const f=heroRigFrame(t),w=WPN[WSEL],R=RW[WSEL];
-  const k=Wd*.30/842; // figure height
-  const sx=L.hx+f.x*Wd, sy=L.gy+f.y*Wd;
+  const k=Wd*.30/842,sx=L.hx+f.x*Wd,sy=L.gy+f.y*Wd;
   if(heroOff.width!==hc.width){heroOff.width=hc.width;heroOff.height=hc.height}
   const c=heroOff.getContext("2d");c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,heroOff.width,heroOff.height);
   const base=new DOMMatrix().scale(DPR,DPR).translate(sx,sy).scale(k,k).translate(-HP.feet[0],-HP.feet[1]);
-  const M=rigMats(HB,heroRigPose(f));
-  H.left=sx-Wd*.18;H.B=Wd*.36;
-  drawPart(c,base,M.armFl,"h-armFl");
-  if(f.open){const T=new DOMMatrix().translate(HP.elF[0],HP.elF[1]).rotate(REST_A.ffa-REST_A.fa).translate(-HP.elN[0],-HP.elN[1]);
-    c.setTransform(base.multiply(M.armFl).multiply(T));const o=PM["h-armNl-open"];c.drawImage(IM["h-armNl-open"],o[0],o[1]);}
+  // body-space shoulders after the lean
+  const hipsL=new DOMMatrix().translate(HP.hips[0],HP.hips[1]).rotate(f.lean).translate(-HP.hips[0],-HP.hips[1]);
+  const shp=p=>{const q=hipsL.transformPoint(new DOMPoint(p[0],p[1]));return [q.x,q.y]};
+  const mainK=R.main,otherK=mainK==="N"?"F":"N",A1=ARM[mainK],A2=ARM[otherK];
+  const s1=ik(shp(A1.sh),f.H,A1.a,A1.b),u=[Math.cos(f.H[2]*D2R),Math.sin(f.H[2]*D2R)];
+  // second hand: on the handle (two-handed) or its own target
+  let T2=f.FH;if(R.two&&f.phase!=="hurt"){const hand1=[shp(A1.sh)[0]+A1.a*Math.cos(s1.ua*D2R)+A1.b*Math.cos(s1.fa*D2R),shp(A1.sh)[1]+A1.a*Math.sin(s1.ua*D2R)+A1.b*Math.sin(s1.fa*D2R)];T2=[hand1[0]+u[0]*R.two,hand1[1]+u[1]*R.two];}
+  const s2=ik(shp(A2.sh),T2,A2.a,A2.b);
+  const ang={};ang["u"+mainK]=s1.ua;ang["f"+mainK]=s1.fa;ang["u"+otherK]=s2.ua;ang["f"+otherK]=s2.fa;
+  const pose={root:{r:f.r,sx:-f.sq*.5,sy:f.sq},hips:{r:f.lean},head:{r:-f.lean*.4},
+    armNu:{r:ang.uN-ARM.N.ru-f.lean},armNl:{r:(ang.fN-ARM.N.rf)-(ang.uN-ARM.N.ru)},
+    armFu:{r:ang.uF-ARM.F.ru-f.lean},armFl:{r:(ang.fF-ARM.F.rf)-(ang.uF-ARM.F.ru)},legN:{r:f.legN},legF:{r:f.legF}};
+  const M=rigMats(HB,pose);H.left=sx-Wd*.18;H.B=Wd*.36;
+  const rootM=base.multiply(M.root),rootInv=M.root.inverse();
+  const fistOf=(K)=>{const p=M[K==="N"?"armNl":"armFl"].transformPoint(new DOMPoint(...(K==="N"?HP.gripN:HP.gripF)));const q=rootInv.transformPoint(p);return [q.x,q.y]};
+  const g1=fistOf(mainK),S_=w.grip[2]*1010,[gx,gy]=R.grip||w.grip;let tip=null,mid=null;const wb=[];
+  const drawWeapon=()=>{c.setTransform(rootM);c.translate(g1[0],g1[1]);c.rotate((f.H[2]+45)*D2R);
+    const m=c.getTransform(),P=(lx,ly)=>{const p=m.transformPoint(new DOMPoint(lx,ly));return [p.x/DPR,p.y/DPR]};
+    tip=P((w.tip[0]-gx)*S_,(w.tip[1]-gy)*S_);mid=P((w.tip[0]-gx)*S_*.45,(w.tip[1]-gy)*S_*.45);
+    const X=u=>-gx*S_+u*S_,Y=v=>-gy*S_+v*S_;
+    if(WSEL==="bow"){ // hide the painted string, we draw our own
+      const A=[.76,.26],B=[.33,.80],e=[B[0]-A[0],B[1]-A[1]],n=[-.78,-.62],o=.016,A2=[A[0]+n[0]*o-e[0]*3,A[1]+n[1]*o-e[1]*3],B2=[B[0]+n[0]*o+e[0]*3,B[1]+n[1]*o+e[1]*3];
+      c.save();c.beginPath();c.moveTo(X(A2[0]),Y(A2[1]));c.lineTo(X(B2[0]),Y(B2[1]));c.lineTo(X(B2[0]+n[0]*3),Y(B2[1]+n[1]*3));c.lineTo(X(A2[0]+n[0]*3),Y(A2[1]+n[1]*3));c.closePath();c.clip();
+      c.drawImage(IM[w.img],X(0),Y(0),S_,S_);c.restore();wb.push(P(X(A[0]),Y(A[1])),P(X(B[0]),Y(B[1])));}
+    else c.drawImage(IM[w.img],X(0),Y(0),S_,S_);};
+  const two=!!R.two;
+  // draw order
+  if(mainK==="F"){drawWeapon();}
+  if(!two){drawPart(c,base,M.armFl,"h-armFl");if(f.open)openHand(c,base,M);}
   drawPart(c,base,M.armFu,"h-armFu");
   drawPart(c,base,M.legF,"h-legF");drawPart(c,base,M.legN,"h-legN");
+  const an=((f.H[2]%360)+540)%360-180,up=an<-60&&an>-175;
+  if(two&&up)drawWeapon();
   drawPart(c,base,M.hips,"h-torso");drawPart(c,base,M.head,f.head);
-  // weapon in the near fist (drawn under the forearm so the fist wraps it)
-  const gm=base.multiply(M.armNl),gp=gm.transformPoint(new DOMPoint(HP.gripN[0],HP.gripN[1]));
-  const hand=[gp.x/DPR,gp.y/DPR];let tip=null,mid=null;
-  const [gx,gy,Lw]=w.grip,B=Wd*.36;
-  c.setTransform(1,0,0,1,0,0);c.translate(gp.x,gp.y);c.scale(DPR,DPR);c.rotate((f.d+45)*D2R);
-  { const m=c.getTransform(),P=(lx,ly)=>{const p=m.transformPoint(new DOMPoint(lx,ly));return [p.x/DPR,p.y/DPR]};
-    tip=P((w.tip[0]-gx)*Lw*B,(w.tip[1]-gy)*Lw*B);mid=P((w.tip[0]-gx)*Lw*B*.45,(w.tip[1]-gy)*Lw*B*.45);
-    c.drawImage(IM[w.img],-gx*Lw*B,-gy*Lw*B,Lw*B,Lw*B); }
+  if(two){if(!up)drawWeapon();drawPart(c,base,M.armFl,"h-armFl");}
+  if(mainK==="N"&&!two)drawWeapon();
   drawPart(c,base,M.armNu,"h-armNu");drawPart(c,base,M.armNl,"h-armNl");
-  // bow: string pulled back to the far fist + arrow
-  if(w.draw&&S.hero.act==="atk"&&f.dt>=w.draw[0]&&f.dt<w.draw[1]){const fp=base.multiply(M.armFl).transformPoint(new DOMPoint(HP.gripF[0],HP.gripF[1]));
-    const bx=hand[0],by=hand[1],qx=fp.x/DPR,qy=fp.y/DPR;c.setTransform(DPR,0,0,DPR,0,0);c.lineCap="round";
-    c.strokeStyle="#e8d8b0";c.lineWidth=1.5;c.beginPath();c.moveTo(bx,by-Wd*.07);c.lineTo(qx,qy);c.lineTo(bx,by+Wd*.07);c.stroke();
-    c.strokeStyle="#5a3a22";c.lineWidth=3;c.beginPath();c.moveTo(qx,qy);c.lineTo(bx+Wd*.04,by);c.stroke();
-    c.fillStyle=w.col[1];c.beginPath();c.moveTo(bx+Wd*.06,by);c.lineTo(bx+Wd*.035,by-Wd*.012);c.lineTo(bx+Wd*.035,by+Wd*.012);c.fill();
-    const k2=clamp((f.dt-w.draw[0])/(w.draw[1]-w.draw[0]-60));if(k2>.6&&!reduce){c.globalAlpha=(k2-.6)*2.5;c.fillStyle=w.col[0];c.beginPath();c.arc(bx+Wd*.05,by,Wd*.014*(1+.3*Math.sin(t*.05)),0,7);c.fill();c.globalAlpha=1}}
-  // flash
+  // bow string + arrow
+  if(WSEL==="bow"&&wb.length){const nh=fistOf("N"),nm=rootM.transformPoint(new DOMPoint(nh[0],nh[1])),hx=nm.x/DPR,hy=nm.y/DPR;
+    const drawing=S.hero.act==="atk"&&f.dt>=R.draw[0]&&f.dt<R.draw[1];const [a,b]=wb;c.setTransform(DPR,0,0,DPR,0,0);c.lineCap="round";
+    c.strokeStyle="#f3e6c4";c.lineWidth=1.6;c.beginPath();c.moveTo(a[0],a[1]);if(drawing)c.lineTo(hx,hy);c.lineTo(b[0],b[1]);c.stroke();
+    if(drawing&&f.dt>R.draw[0]+80){const gp=rootM.transformPoint(new DOMPoint(g1[0],g1[1])),bx=gp.x/DPR,by=gp.y/DPR,an=Math.atan2(by-hy,bx-hx),Lr=Math.hypot(bx-hx,by-hy)+Wd*.05;
+      c.save();c.translate(hx,hy);c.rotate(an);c.strokeStyle="#6b4527";c.lineWidth=3;c.beginPath();c.moveTo(0,0);c.lineTo(Lr,0);c.stroke();
+      c.fillStyle="#d9d4c7";c.beginPath();c.moveTo(-2,0);c.lineTo(-Wd*.022,-Wd*.01);c.lineTo(-Wd*.014,0);c.lineTo(-Wd*.022,Wd*.01);c.fill();
+      c.fillStyle=w.col[1];c.beginPath();c.moveTo(Lr+Wd*.028,0);c.lineTo(Lr,-Wd*.012);c.lineTo(Lr,Wd*.012);c.fill();
+      const k2=clamp((f.dt-480)/180);if(k2>0&&!reduce){c.globalAlpha=k2;c.fillStyle=w.col[0];c.beginPath();c.arc(Lr+Wd*.012,0,Wd*.016*(1+.3*Math.sin(t*.05)),0,7);c.fill();c.globalAlpha=1}
+      c.restore();H.arrowFrom=[hx+Math.cos(an)*Lr,hy+Math.sin(an)*Lr];}}
   if(f.flash>0){c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation="source-atop";c.fillStyle=`rgba(255,255,255,${f.flash*.75})`;c.fillRect(0,0,heroOff.width,heroOff.height);c.globalCompositeOperation="source-over";}
   const hc2=hc.getContext("2d");hc2.setTransform(1,0,0,1,0,0);hc2.clearRect(0,0,hc.width,hc.height);hc2.drawImage(heroOff,0,0);
-  // trail / staff orb / projectiles (shared with the other mode)
-  if(tip&&R.trail&&S.hero.act==="atk"&&f.dt>=R.trail[0]&&f.dt<=R.trail[1]&&HR.tipPrev&&Math.hypot(tip[0]-HR.tipPrev[0],tip[1]-HR.tipPrev[1])<Wd*.14) S.trail.push({a:HR.midPrev,b:HR.tipPrev,c:mid,d:tip,t:0,col:w.col});
-  HR.tipPrev=tip;HR.midPrev=mid;
-  if(w.charge&&S.hero.act==="atk"&&f.dt>=w.charge[0]&&f.dt<w.charge[1]){const k3=clamp((f.dt-w.charge[0])/(w.charge[1]-w.charge[0]));H.orb={x:tip[0],y:tip[1],r:B*(.03+.08*k3)};
+  const gS=tip?(()=>{const q=rootM.transformPoint(new DOMPoint(g1[0],g1[1]));return [q.x/DPR,q.y/DPR]})():null;
+  if(tip&&R.trail&&S.hero.act==="atk"&&f.dt>=R.trail[0]&&f.dt<=R.trail[1]&&HR.prev){const P0=HR.prev,vt=[tip[0]-gS[0],tip[1]-gS[1]],vm=[mid[0]-gS[0],mid[1]-gS[1]];
+    const a0=Math.atan2(P0.vt[1],P0.vt[0]),a1=Math.atan2(vt[1],vt[0]);let da=a1-a0;while(da>Math.PI)da-=2*Math.PI;while(da<-Math.PI)da+=2*Math.PI;
+    const lt0=Math.hypot(...P0.vt),lt1=Math.hypot(...vt),lm0=Math.hypot(...P0.vm),lm1=Math.hypot(...vm),n=Math.max(1,Math.ceil(Math.abs(da)/.1));
+    const at=k=>{const a=a0+da*k,g=[P0.g[0]+(gS[0]-P0.g[0])*k,P0.g[1]+(gS[1]-P0.g[1])*k],lt=lt0+(lt1-lt0)*k,lm=lm0+(lm1-lm0)*k;return [[g[0]+Math.cos(a)*lm,g[1]+Math.sin(a)*lm],[g[0]+Math.cos(a)*lt,g[1]+Math.sin(a)*lt]]};
+    let pr=at(0);for(let i=1;i<=n;i++){const cu=at(i/n);S.trail.push({a:pr[0],b:pr[1],c:cu[0],d:cu[1],t:(1-i/n)*.02,col:w.col,ox:sx});pr=cu;}}
+  HR.prev=tip?{g:gS,vt:[tip[0]-gS[0],tip[1]-gS[1]],vm:[mid[0]-gS[0],mid[1]-gS[1]]}:null;
+  const B=Wd*.36;H.sx=sx;
+  if(R.charge&&S.hero.act==="atk"&&f.dt>=R.charge[0]&&f.dt<R.charge[1]){const k3=clamp((f.dt-R.charge[0])/(R.charge[1]-R.charge[0]));H.orb={x:tip[0],y:tip[1],r:B*(.03+.08*k3)};
     if(Math.random()<.7&&!reduce){const a=Math.random()*7,Rr=B*.35;S.parts.push({x:tip[0]+Math.cos(a)*Rr,y:tip[1]+Math.sin(a)*Rr,vx:-Math.cos(a)*Rr*3.2,vy:-Math.sin(a)*Rr*3.2,life:0,max:.28,sz:2.2,c:w.col[1],g:0,glow:1})}}
   else H.orb=null;
-  if(w.shoot&&S.hero.act==="atk"&&f.dt>=w.shoot[0]&&!S.hero.shot){S.hero.shot=true;const from=w.draw?[hand[0]+Wd*.05,hand[1]]:tip;
-    S.proj.push({x0:from[0],y0:from[1],x1:L.wx-Wd*.04,y1:L.gy-Wd*.2,t:0,dur:(w.shoot[1]-w.shoot[0])/1000,kind:w.draw?"arrow":"orb",col:w.col,hist:[]});}
-  H.rigBones=S.showBones?HB.map(b=>{const p=base.multiply(M[b.n]).transformPoint(new DOMPoint(b.p[0],b.p[1]));return [p.x/DPR,p.y/DPR,b.par?(()=>{const q=base.multiply(M[b.par]).transformPoint(new DOMPoint(HB.find(x=>x.n===b.par).p[0],HB.find(x=>x.n===b.par).p[1]));return [q.x/DPR,q.y/DPR]})():null]}):null;
+  if(R.shoot&&S.hero.act==="atk"&&f.dt>=R.shoot[0]&&!S.hero.shot){S.hero.shot=true;const from=WSEL==="bow"?(H.arrowFrom||tip):tip;
+    S.proj.push({x0:from[0],y0:from[1],x1:L.wx-Wd*.04,y1:L.gy-Wd*.2,t:0,dur:(R.shoot[1]-R.shoot[0])/1000,kind:WSEL==="bow"?"arrow":"orb",col:w.col,hist:[]});}
+  H.rigBones=S.showBones?HB.map(b=>{const p=base.multiply(M[b.n]).transformPoint(new DOMPoint(b.p[0],b.p[1]));const pb=b.par&&HB.find(x=>x.n===b.par);const q=pb&&base.multiply(M[b.par]).transformPoint(new DOMPoint(pb.p[0],pb.p[1]));return [p.x/DPR,p.y/DPR,q?[q.x/DPR,q.y/DPR]:null]}):null;
 }
+function openHand(c,base,M){const T=new DOMMatrix().translate(HP.elF[0],HP.elF[1]).rotate(ARM.F.rf-ARM.N.rf).translate(-HP.elN[0],-HP.elN[1]);
+  c.setTransform(base.multiply(M.armFl).multiply(T));const o=PM["h-armNl-open"];c.drawImage(IM["h-armNl-open"],o[0],o[1]);}
 // ---- wolf ----
 const WB=[{n:"root",p:WP.feet},{n:"body",p:WP.body,par:"root"},{n:"head",p:WP.head,par:"body"},{n:"tail",p:WP.tail,par:"body"},
   {n:"legBN",p:WP.legBN,par:"root"},{n:"legBF",p:WP.legBF,par:"root"},{n:"legFN",p:WP.legFN,par:"root"},{n:"legFF",p:WP.legFF,par:"root"}];
