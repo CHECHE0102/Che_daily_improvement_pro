@@ -741,17 +741,17 @@ function drawHeroRig(t){
     else c.drawImage(IM[w.img],X(0),Y(0),S_,S_);};
   const two=!!R.two;
   // draw order
-  // weapon goes behind the body only while it is raised overhead; otherwise it is held in front
-  const an=((f.H[2]%360)+540)%360-180,up=an<-60&&an>-175;
-  const raised=f.H[1]<500&&(f.phase==="atk"||S.hero.act==="win"),behind=raised&&up;
-  if(behind)drawWeapon();
-  if(!two){drawPart(c,base,M.armFl,"h-armFl");if(f.open)openHand(c,base,M);}
+  // A held weapon always sits in the same layer as the hand holding it (like a Spine weapon slot):
+  // far arm/legs -> torso -> [far forearm + weapon] -> near arm -> head when raised.
+  // It never goes behind the torso, so the hand and the blade can't end up on different sides of the body.
+  const raised=f.H[1]<500&&(f.phase==="atk"||S.hero.act==="win");
+  const farFront=two||mainK==="F";
+  if(!farFront){drawPart(c,base,M.armFl,"h-armFl");if(f.open)openHand(c,base,M);}
   drawPart(c,base,M.armFu,"h-armFu");
   drawPart(c,base,M.legF,"h-legF");drawPart(c,base,M.legN,"h-legN");
   drawPart(c,base,M.hips,"h-torso");if(!raised)drawPart(c,base,M.head,f.head);
-  if(!behind&&(two||mainK==="F"))drawWeapon();
-  if(two)drawPart(c,base,M.armFl,"h-armFl");
-  if(!behind&&mainK==="N"&&!two)drawWeapon();
+  if(mainK==="F"){drawPart(c,base,M.armFl,"h-armFl");drawWeapon();}
+  else{drawWeapon();if(two)drawPart(c,base,M.armFl,"h-armFl");}
   drawPart(c,base,M.armNu,"h-armNu");drawPart(c,base,M.armNl,"h-armNl");
   if(raised)drawPart(c,base,M.head,f.head);
   // bow string + arrow
