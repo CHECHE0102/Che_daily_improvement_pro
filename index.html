@@ -3659,7 +3659,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.16";
+const APP_VERSION="2026.11.17";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4704,7 +4704,7 @@ const PG_LOCAL_FS={ setDoc:async(r,d,opt)=>pgLocalApply(r.path,JSON.parse(JSON.s
   deleteDoc:async()=>{}, deleteField:()=>undefined,
   runTransaction:async(db,fn)=>fn({get:async r=>{ const parts=r.path.split("/"); const d=parts.length<=2?S.pg.party:S.pg.ps[parts[3]]; return {exists:()=>!!d, data:()=>JSON.parse(JSON.stringify(d||{}))}; }, update:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"update"), set:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"set")}) };
 function pgBotRoom(kind){ if(!DEV) return; pgStop(); const s=stats(), now=Date.now(), j=x=>Math.round(x*(0.9+Math.random()*0.2));
-  S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:kind==="root"?2:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖"}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
+  S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:kind==="root"?3:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖"}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
   pgLoadWords(); pgRender(true); }
 const pgNameLocal=()=>(game().nick||"Player").slice(0,16);
 function botWord(min,max){ const L=[...(PG_WORDS||[])].filter(w=>w.length>=min&&w.length<=max&&/^[a-z]+$/.test(w)); return L.length?L[Math.floor(Math.random()*L.length)]:"cat"; }
@@ -4736,7 +4736,7 @@ async function pgCreate(kind){
   try{
     let code;
     for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await fsM.getDoc(pgRef(code)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
-    await fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}, ...(kind==="root"?{rr:2}:{})});
+    await fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}, ...(kind==="root"?{rr:3}:{})});
     await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
     S.pgBusy=null; pgListen(code);
   }catch(e){ S.pgBusy=null; toast(T("syncFail")); pgRender(); }
@@ -4809,7 +4809,7 @@ async function pgStartGame(){
     const seen=new Set(pgSeen().sp); for(const u of ids) for(const w of ((pg.ps[u]||{}).seenSp||[])) seen.add(w);
     up.words=[...pgShuffle(pool.filter(o=>!seen.has(o.w))), ...pgShuffle(pool.filter(o=>seen.has(o.w)))].slice(0,n);
     up.order=pgShuffle([...ids]); up.rr=P.rr||1; up.dm=P.dm==="c"?"c":"n"; up.cur={i:0, ts:up.start}; }
-  if(P.game==="root"){ const ids=Object.keys(P.players||{}), rr=P.rr||2, lib=await rtLoad(); if(!lib.length) return toast(T("loading"));
+  if(P.game==="root"){ const ids=Object.keys(P.players||{}), rr=P.rr||3, lib=await rtLoad(); if(!lib.length) return toast(T("loading"));
     up.affs=pgShuffle([...lib]).slice(0,Math.min(lib.length,rr*ids.length)).map(A=>({...A, ex:(A.ex||[]).map(e=>e.join("|"))})); up.order=pgShuffle([...ids]); up.rr=rr; up.cur={i:0, ts:up.start}; }
   if(P.game==="hunt"){ const h=await huInit(P, up); if(!h.hu) return toast(T("loading")); Object.assign(up, h); }
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
@@ -5566,7 +5566,7 @@ function rtCur(){ const P=S.pg.party; return P.cur||{i:0, ts:P.start}; }
 function rtPhase(now){ const C=rtCur(), a=C.ts+RT.intro, rv=Math.min(C.end||Infinity, a+RT.ans); return {k:now<a?"intro":now<rv?"ans":"rev", a, rv, next:rv+RT.rev}; }
 function rtOrder(){ const P=S.pg.party; return P.order||Object.keys(P.players||{}); }
 function rtDealer(i){ const o=rtOrder(); return o[i%o.length]; }
-function rtTotal(){ const P=S.pg.party; return Math.min((P.affs||[]).length, (P.rr||2)*rtOrder().length); }
+function rtTotal(){ const P=S.pg.party; return Math.min((P.affs||[]).length, (P.rr||3)*rtOrder().length); }
 function rtAff(i){ const A=(S.pg.party.affs||[])[i]; if(!A) return {a:"?",t:"p",zh:"",en:"",ex:[]};
   return {...A, ex:(A.ex||[]).map(e=>Array.isArray(e)?e:String(e).split("|"))}; }
 function rtAnswerers(i){ const d=rtDealer(i); return Object.keys(S.pg.party.players||{}).filter(u=>u!==d); }
@@ -5601,7 +5601,7 @@ function rtTick(){ const pg=S.pg, P=pg.party, now=Date.now(); if(!RT_EXTRA) rtLo
   if(F.k==="rev"&&now>=F.next&&(host||now>F.next+6000)) rtAdvance(C.i); }
 async function rtAdvance(i){ const pg=S.pg; if(pg.rtAdv===i) return; pg.rtAdv=i; const fsM=pgFs(), db=CLOUD.fb&&CLOUD.fb.db, ref=pgRef(pg.code);
   try{ await fsM.runTransaction(db, async tx=>{ const s=await tx.get(ref); const d=s.exists()?s.data():null; if(!d||d.state!=="play") return; const c=d.cur||{i:0};
-    if(c.i!==i) return; const tot=Math.min((d.affs||[]).length, (d.rr||2)*((d.order||Object.keys(d.players||{})).length));
+    if(c.i!==i) return; const tot=Math.min((d.affs||[]).length, (d.rr||3)*((d.order||Object.keys(d.players||{})).length));
     if(i+1>=tot) tx.update(ref,{state:"done", end:Date.now()}); else tx.update(ref,{cur:{i:i+1, ts:Date.now()+400}}); }); }
   catch(e){ pg.rtAdv=null; } }
 function rtBotTick(now){ const pg=S.pg, B=pg.bot, b=pg.ps[PG_BOT], P=pg.party; if(now<P.start) return; const C=rtCur(), F=rtPhase(now);
@@ -5682,7 +5682,7 @@ function pgSections(){
       ${(setTimeout(()=>lookFetch(ids.filter(u=>u!==pgMe())),0),"")}<div class="pg-lobby">${ids.map(u=>`<div class="pg-pl${u===pgMe()?" me":""}">${lookArt(u===pgMe()?myLook():LOOKS[u],"pg-fig")}<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div></div>`).join("")}</div>
       <div class="muted">${P.game==="duel"?T("duWaiting",{n:ids.length}):T("pgWaiting",{n:ids.length})}</div>
       ${P.game==="draw"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||1)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||1})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||1, t:(P.rr||1)*ids.length})}</span></div><div class="dr-rr"><span class="sm-t">${T("drMode")}</span>${host?`<div class="seg">${["n","c"].map(m=>`<button data-act="drdm" data-k="${m}" aria-pressed="${(P.dm==="c"?"c":"n")===m}">${T(m==="c"?"drModeC":"drModeN")}</button>`).join("")}</div>`:`<b>${T(P.dm==="c"?"drModeC":"drModeN")}</b>`}<span class="muted sm-t">${T(P.dm==="c"?"drModeCSub":"drModeNSub")}</span></div>`:""}
-      ${P.game==="root"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,2,3].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||2)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||2})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||2, t:(P.rr||2)*ids.length})}</span></div>`:""}
+      ${P.game==="root"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||3)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||3})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||3, t:(P.rr||3)*ids.length})}</span></div>`:""}
       ${host?((P.game==="draw"||P.game==="root")&&ids.length<2?`<button class="btn" disabled>${T("drNeed2")}</button>`:P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
