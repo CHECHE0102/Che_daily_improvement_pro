@@ -744,7 +744,7 @@ function drawHeroRig(t){
   // A held weapon always sits in the same layer as the hand holding it (like a Spine weapon slot):
   // far arm/legs -> torso -> [far forearm + weapon] -> near arm -> head when raised.
   // It never goes behind the torso, so the hand and the blade can't end up on different sides of the body.
-  const raised=f.H[1]<500&&(f.phase==="atk"||S.hero.act==="win");
+  const raised=false; // CheChe: weapon and hands may cover the face, keep them in front
   const farFront=two||mainK==="F";
   if(!farFront){drawPart(c,base,M.armFl,"h-armFl");if(f.open)openHand(c,base,M);}
   drawPart(c,base,M.armFu,"h-armFu");
