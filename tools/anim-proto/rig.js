@@ -14,7 +14,7 @@ const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),ang=(a,b)=>Math.atan2(b[1]-a[1
 const ARM={N:{sh:HP.shN,a:dist(HP.shN,HP.elN),b:dist(HP.elN,HP.gripN),ru:ang(HP.shN,HP.elN),rf:ang(HP.elN,HP.gripN)},
            F:{sh:HP.shF,a:dist(HP.shF,HP.elF),b:dist(HP.elF,HP.gripF),ru:ang(HP.shF,HP.elF),rf:ang(HP.elF,HP.gripF)}};
 // 2-bone IK: shoulder S, target T -> absolute upper/forearm angles (deg). Elbow is kept on the lower side.
-const STMAX=1.75;
+const STMAX=1.35;
 function ik(S,T,a0,b0,up){let dx=T[0]-S[0],dy=T[1]-S[1],d=Math.hypot(dx,dy);const th=Math.atan2(dy,dx);const st=Math.max(1,Math.min(STMAX,d/(a0+b0-.5)));const a=a0*st,b=b0*st;d=Math.max(Math.abs(a-b)+1,Math.min(a+b-.5,d));
   const A=Math.acos(Math.max(-1,Math.min(1,(a*a+d*d-b*b)/(2*a*d))));let best=null;
   for(const s of [1,-1]){const u=th+s*A,E=[S[0]+a*Math.cos(u),S[1]+a*Math.sin(u)];const H=[S[0]+d*Math.cos(th),S[1]+d*Math.sin(th)];
@@ -37,15 +37,15 @@ const RW={
   y:[[0,0],[200,.01],[420,-.03,"outQ"],[540,-.075,"outQ"],[600,0,"inQ"]],
   sq:[[0,0],[200,.04],[480,-.06],[540,-.07],[600,-.16,"inQ"],[650,-.18],[760,.03],[900,-.02],[1300,0]],
   legN:[[0,0],[200,6],[480,-14],[600,32,"inQ"],[900,26],[1300,0,"io"]],legF:[[0,0],[200,-6],[480,16],[600,-34,"inQ"],[900,-28],[1300,0,"io"]]},
- trident:{impact:300,trail:[220,320],shout:[150,700],main:"N",two:85,
-  hand:[[0,[600,720,-55]],[200,[340,640,-8],"outQ"],[300,[740,620,-3],"inQ"],[380,[725,624,-3]],[760,[680,640,-5]],[1000,[600,720,-55],"io"]],
+ trident:{impact:300,trail:[220,320],shout:[150,700],main:"N",two:95,grip:[.28,.72],
+  hand:[[0,[480,700,-40]],[200,[365,650,-8],"outQ"],[300,[535,628,-3],"inQ"],[380,[530,630,-3]],[760,[515,640,-5]],[1000,[480,700,-40],"io"]],
   lean:[[0,0],[200,-14,"outQ"],[300,22,"inQ"],[760,8],[1000,0,"io"]],
-  x:[[0,0],[200,-.05,"outQ"],[300,.22,"inQ"],[760,.2],[1000,0,"outC"]],
+  x:[[0,0],[200,-.05,"outQ"],[300,.24,"inQ"],[760,.22],[1000,0,"outC"]],
   sq:[[0,0],[200,-.04],[300,.05,"inQ"],[380,-.03],[600,0]],
   legN:[[0,0],[200,-10],[300,32,"inQ"],[760,24],[1000,0,"io"]],legF:[[0,0],[200,10],[300,-34,"inQ"],[760,-26],[1000,0,"io"]]},
- staff:{impact:680,trail:[575,625],shout:[150,900],main:"N",charge:[150,560],shoot:[600,680],open:[150,1000],
-  hand:[[0,[640,725,-70]],[250,[460,330,-92],"outQ"],[560,[455,318,-96]],[620,[720,560,-12],"inQ"],[900,[705,570,-16]],[1150,[640,725,-70],"io"]],
-  far:[[0,[720,700]],[250,[720,420],"outQ"],[560,[725,410]],[620,[880,560],"inQ"],[900,[870,570]],[1150,[720,700],"io"]],
+ staff:{impact:680,trail:[575,625],shout:[150,900],main:"F",charge:[150,560],shoot:[600,680],
+  hand:[[0,[730,720,-80]],[250,[690,470,-92],"outQ"],[560,[688,462,-95]],[620,[800,575,-15],"inQ"],[900,[795,580,-18]],[1150,[730,720,-80],"io"]],
+  far:[[0,[470,690]],[250,[430,640],"outQ"],[560,[430,640]],[620,[560,610],"inQ"],[900,[555,615]],[1150,[470,690],"io"]],
   lean:[[0,0],[250,-12,"outQ"],[560,-14],[620,18,"inQ"],[900,12],[1150,0,"io"]],
   x:[[0,0],[560,-.03],[620,.07,"inQ"],[1150,0,"io"]],
   y:[[0,0],[250,-.03,"outQ"],[560,-.045],[620,0,"inQ"]],
