@@ -19,7 +19,7 @@ h1{font-size:20px;margin:4px 0 2px}
 .stage-wrap{position:relative;border-radius:18px;overflow:hidden;background:var(--night);aspect-ratio:4/3;width:100%;touch-action:manipulation}
 .stage{position:absolute;inset:0;will-change:transform}
 .stage canvas,.stage img{position:absolute;pointer-events:none}
-#bg,#sh,#hc,#gl,#fx{inset:0;width:100%;height:100%}
+#bg,#sh,#hc,#gl,#pc,#fx{inset:0;width:100%;height:100%}
 .dmg{position:absolute;transform:translate(-50%,0);font:900 26px system-ui,sans-serif;color:#fff;text-shadow:0 3px 0 #0009,0 0 10px #000a;pointer-events:none;white-space:nowrap;z-index:5;animation:dmgpop 1s cubic-bezier(.2,.9,.3,1) both}
 .dmg.crit{color:#FFD54A;font-size:36px}
 .dmg small{display:block;font-size:12px;text-align:center;letter-spacing:1px}
@@ -67,11 +67,12 @@ h1{font-size:20px;margin:4px 0 2px}
 <body>
 <main>
 <h1>怪物戰鬥動畫原型</h1>
-<p class="sub">火狼 · 用現有的一張圖做「骨架網格」動畫，不用重畫。主角可以換 5 種武器。</p>
+<p class="sub">火狼和主角都換成 Codex 畫的部件，手腳會真的動。主角可以換 5 種武器。</p>
 
 <div class="seg" role="group" aria-label="版本">
-  <button id="mNew" aria-pressed="true">✨ 新版</button>
-  <button id="mOld" aria-pressed="false">現在的版本</button>
+  <button id="mParts" aria-pressed="true">✨ 部件版</button>
+  <button id="mNew" aria-pressed="false">網格版</button>
+  <button id="mOld" aria-pressed="false">現在</button>
 </div>
 
 <div class="wpick" id="wpick" role="group" aria-label="武器"></div>
@@ -81,6 +82,7 @@ h1{font-size:20px;margin:4px 0 2px}
     <canvas id="sh"></canvas>
     <canvas id="hc"></canvas>
     <canvas id="gl"></canvas>
+    <canvas id="pc"></canvas>
     <canvas id="fx"></canvas>
     <div id="old">
       <div class="o-hero"><img id="oHero" alt=""></div>
@@ -117,8 +119,13 @@ h1{font-size:20px;margin:4px 0 2px}
   <p class="muted">每隻怪只要多填 5 個點（骨頭位置），全部現有怪物都能套，不用新圖。勾「顯示骨架」可以看網格。</p>
 </div>
 <div class="note">
-  <h2>Codex 拆部件版（下一步）</h2>
-  <p>這版的限制是腳不能真的走、嘴不能真的張開。如果請 Codex 把火狼畫成分開的部件（頭、下巴、身體、4 隻腳、尾巴），就能做到真的跑跳和張嘴咬。任務單已經寫好。</p>
+  <h2>部件版（Codex 畫的部件）</h2>
+  <ul>
+    <li><b>火狼</b>：尾巴、身體、頭、4 隻腳都是分開的圖。撲咬時前腳往前伸、後腳往後蹬；攻擊換生氣臉，被打換受傷臉。</li>
+    <li><b>主角</b>：頭、身體、上臂、前臂、兩隻腳分開，手臂真的會揮。攻擊大喊、受傷 &gt;&lt;、勝利笑臉。法杖施法時另一隻手會張開。</li>
+    <li>Codex 畫的部件大小和位置都對不準，已經自動對位修好；主角的手臂和腳改從母版切，關節補了圓頭，轉動不會破洞。</li>
+  </ul>
+  <p class="muted">「網格版」是上一版只用一張圖的做法，「現在」是遊戲目前的樣子，可以切換比較。</p>
 </div>
 </main>
 
@@ -196,16 +203,16 @@ const W_KO=[[0,REST],
   [900,P({root:[-40,4,.06,.1,-.2],body:[0,8,0,.04,-.12],head:[0,22,.5],tail:[0,8,.6],tail2:[0,0,.45]}),"outC"]];
 
 /* ---------------- state ---------------- */
-const S={mode:"new",now:0,sim:0,last:0,freeze:0,slowUntil:0,shake:0,zoom:0,
+const S={mode:"parts",now:0,sim:0,last:0,freeze:0,slowUntil:0,shake:0,zoom:0,
   wolf:{act:null,t0:0,keys:null,idle:1,flash:[[0,0]],red:[[0,0]],gray:0,alpha:1,ko:false},
   hero:{act:null,t0:0,ko:false},
   hp:{p:1,m:1,pl:1,ml:1},parts:[],slashes:[],trail:[],proj:[],queue:[],demo:false};
 
 /* ---------------- canvas setup ---------------- */
-const wrap=$("#wrap"),stage=$("#stage"),bg=$("#bg"),shc=$("#sh"),glc=$("#gl"),fx=$("#fx"),hc=$("#hc");
+const wrap=$("#wrap"),stage=$("#stage"),bg=$("#bg"),shc=$("#sh"),glc=$("#gl"),pc=$("#pc"),fx=$("#fx"),hc=$("#hc");
 let Wd=0,Ht=0,DPR=1;
 function size(){const r=wrap.getBoundingClientRect();Wd=r.width;Ht=r.height;DPR=Math.min(2,window.devicePixelRatio||1);
-  for(const c of [bg,shc,hc,glc,fx]){c.width=Math.round(Wd*DPR);c.height=Math.round(Ht*DPR)}
+  for(const c of [bg,shc,hc,glc,pc,fx]){c.width=Math.round(Wd*DPR);c.height=Math.round(Ht*DPR)}
   drawBg(); if(gl) gl.viewport(0,0,glc.width,glc.height); }
 const L={get gy(){return Ht*.86},get wx(){return Wd*.71},get k(){return Wd*.52/IW},get hx(){return Wd*.22}};
 function drawBg(){const c=bg.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0);
@@ -401,7 +408,7 @@ function drawFx(dt,t){const c=fx.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0
   // impact ring
   if(S.ring){S.ring.t+=dt;const k=S.ring.t/.28;if(k>=1)S.ring=null;else{c.strokeStyle=`rgba(255,255,255,${1-k})`;c.lineWidth=4*(1-k);c.beginPath();c.arc(S.ring.x,S.ring.y,10+k*Wd*.14,0,7);c.stroke();}}
   if(S.ring2){S.ring2.t+=dt;const k=S.ring2.t/.4;if(k>=1)S.ring2=null;else{c.strokeStyle=`rgba(246,221,166,${1-k})`;c.lineWidth=6*(1-k);c.beginPath();c.ellipse(S.ring2.x,S.ring2.y,10+k*Wd*.35,4+k*Wd*.06,0,0,7);c.stroke();}}
-  if($("#bones").checked&&lastMats) drawBones(c);
+  if($("#bones").checked){if(S.mode==="parts")drawRigBones(c);else if(lastMats)drawBones(c);}
 }
 function drawBones(c){
   c.strokeStyle="rgba(120,230,255,.28)";c.lineWidth=.7;
@@ -432,7 +439,7 @@ function wolfAttack(){
   at(W_ATK_IMPACT,()=>{S.hero.act="hurt";S.hero.t0=S.sim;const cx=L.hx+Wd*.02,cy=L.gy-Wd*.2;claw(cx,cy);burst(cx,cy,14,false);S.ring={x:cx,y:cy,t:0};
     dmg(cx,cy-Wd*.1,52,false);hitStop(90);S.shake=8;S.hp.p=Math.max(.1,S.hp.p-.16)});
 }
-function reset(){Object.assign(S.wolf,{act:null,keys:null,ko:false,flash:[[0,0]],red:[[0,0]]});S.hero.act=null;S.hero.ko=false;S.trail=[];S.proj=[];H.orb=null;S.hp={p:1,m:1,pl:1,ml:1};S.queue=[];
+function reset(){Object.assign(S.wolf,{act:null,keys:null,ko:false,flash:[[0,0]],red:[[0,0]]});S.hero.act=null;S.hero.winT=null;S.hero.ko=false;S.trail=[];S.proj=[];H.orb=null;S.hp={p:1,m:1,pl:1,ml:1};S.queue=[];
   document.querySelectorAll(".dmg").forEach(d=>d.remove())}
 let demoTimer=null;
 function demo(on){S.demo=on;$("#demoBtn").textContent=on?"■ 停止示範":"▶ 自動示範";clearTimeout(demoTimer);if(!on)return;
@@ -443,17 +450,21 @@ function demo(on){S.demo=on;$("#demoBtn").textContent=on?"■ 停止示範":"▶
 function oldAct(a){if(!a)return;const h=$("#old .o-hero"),m=$("#old .mon-seal");[h,m].forEach(e=>{e.className=e.className.replace(/ ?o-\S+/g,"");void e.offsetWidth});
   if(a==="hero"){h.classList.add("o-atk-h");m.classList.add("o-hurt");setTimeout(()=>{const d=document.createElement("div");d.className="dmg";d.textContent="-74";d.style.cssText="left:74%;top:30%";$("#old").appendChild(d);setTimeout(()=>d.remove(),1400)},10)}
   else{m.classList.add("o-atk-m");h.classList.add("o-hurt");setTimeout(()=>{const d=document.createElement("div");d.className="dmg";d.textContent="-52";d.style.cssText="left:24%;top:30%";$("#old").appendChild(d);setTimeout(()=>d.remove(),1400)},10)}}
-function setMode(m){S.mode=m;$("#mNew").setAttribute("aria-pressed",m==="new");$("#mOld").setAttribute("aria-pressed",m==="old");
-  const nw=m==="new";[glc,fx,shc,hc].forEach(e=>e.style.display=nw?"":"none");$("#old").style.display=nw?"none":"block";reset();}
+function setMode(m){S.mode=m;["Parts","New","Old"].forEach(k=>$("#m"+k).setAttribute("aria-pressed",m===k.toLowerCase().replace("new","new")));
+  $("#mParts").setAttribute("aria-pressed",m==="parts");$("#mNew").setAttribute("aria-pressed",m==="new");$("#mOld").setAttribute("aria-pressed",m==="old");
+  const old=m==="old";[fx,shc,hc].forEach(e=>e.style.display=old?"none":"");glc.style.display=m==="new"?"":"none";pc.style.display=m==="parts"?"":"none";
+  $("#old").style.display=old?"block":"none";reset();}
 
+__RIGJS__
 /* ---------------- main loop ---------------- */
 let emberAcc=0;
 function frame(now){
   S.rnow=now;const realDt=Math.min(.05,(now-(S.last||now))/1000);S.last=now;
   let dt=realDt/slowMul(); if(now<S.freeze) dt=0; if(S.sim<S.slowUntil) dt*=.45;
   S.sim+=dt*1000;const t=S.sim;
-  S.queue=S.queue.filter(q=>{if(t>=q.t){q.fn();return false}return true});
-  if(S.mode==="new"&&gl){
+  {const due=S.queue.filter(q=>t>=q.t);S.queue=S.queue.filter(q=>t<q.t);due.forEach(q=>q.fn());}
+  if((S.mode==="new"&&gl)||S.mode==="parts"){
+    const PARTS=S.mode==="parts";S.showBones=$("#bones").checked;
     const w=S.wolf;let act=REST,idleAmt=1;
     if(w.act){const d=t-w.t0;act=samplePose(w.keys,d);const dur=w.keys[w.keys.length-1][0];idleAmt=w.ko?clamp(1-d/300):clamp((d-dur+250)/250);if(!w.ko&&d>dur){w.act=null}}
     if(w.ko&&!w.act) act=W_KO[W_KO.length-1][1],idleAmt=0;
@@ -461,14 +472,15 @@ function frame(now){
     // jitter while hurt
     if(w.act==="hit"&&t-w.t0<180){const j=(1-(t-w.t0)/180)*6;pose[0][0]+=(Math.random()-.5)*j;pose[0][1]+=(Math.random()-.5)*j*.5}
     const ko=w.ko?clamp((t-w.t0-350)/550):0;
-    drawWolf(pose,t,{f:sampleNum(w.flash,t),r:sampleNum(w.red,t),g:ko,a:1-ko*.15});
-    drawHero(t);
+    const U={f:sampleNum(w.flash,t),r:sampleNum(w.red,t),g:ko,a:1-ko*.15};
+    if(PARTS){drawWolfRig(pose,t,U,w);drawHeroRig(t);}else{drawWolf(pose,t,U);drawHero(t);}
     // embers
-    emberAcc+=dt*(w.ko?2:9);while(emberAcc>1){emberAcc--;if(!reduce)ember()}
+    emberAcc+=dt*(w.ko?2:9);while(emberAcc>1){emberAcc--;if(!reduce)(PARTS?wolfRigEmber:ember)()}
     // shadows under fighters
     drawFx(dt,t);
     const c=shc.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,Wd,Ht);
-    const wr=lastMats[0],sx=toScr(wr[4]+FOOT.x,FOOT.y)[0],lift=clamp(-(wr[5])/40);
+    let sx,lift;if(PARTS){const p=lastWolfRig.base.multiply(lastWolfRig.M.root).transformPoint(new DOMPoint(WP.feet[0],WP.feet[1]));sx=p.x/DPR;lift=clamp((L.gy-p.y/DPR)/30);}
+    else{const wr=lastMats[0];sx=toScr(wr[4]+FOOT.x,FOOT.y)[0];lift=clamp(-(wr[5])/40);}
     c.fillStyle=`rgba(0,0,0,${.32-lift*.15})`;c.beginPath();c.ellipse(sx,L.gy+2,Wd*.17*(1-lift*.25),Wd*.025,0,0,7);c.fill();
     const hx=H.left+H.B/2;c.beginPath();c.ellipse(hx,L.gy+2,Wd*.1,Wd*.022,0,0,7);c.fill();
   }
@@ -481,11 +493,11 @@ function frame(now){
   $("#hpPL").style.transform=`scaleX(${S.hp.pl})`;$("#hpML").style.transform=`scaleX(${S.hp.ml})`;
   if(!REC)requestAnimationFrame(frame);
 }
-const REC=location.hash==="#rec";window.__P={frame,heroAttack,wolfAttack,pickW:k=>pickW(k),reset};
+const REC=location.hash==="#rec";window.__P={frame,heroAttack,wolfAttack,pickW:k=>pickW(k),reset,S};
 
 /* ---------------- boot ---------------- */
 $("#oHero").src=IMG["idle-hold"];$("#oWolf").src=IMG.wolf;
-Promise.all(Object.keys(IMG).map(k=>new Promise(r=>{const i=new Image();i.onload=()=>r();i.onerror=()=>r();i.src=IMG[k];IM[k]=i}))).then(()=>{size();if(!initGL(IM.wolf)){setMode("old")}buildPicker();if(!REC)requestAnimationFrame(frame);window.__ready=1});
+Promise.all(Object.keys(IMG).map(k=>new Promise(r=>{const i=new Image();i.onload=()=>r();i.onerror=()=>r();i.src=IMG[k];IM[k]=i}))).then(()=>{size();if(!initGL(IM.wolf)){$("#mNew").style.display="none"}setMode("parts");buildPicker();if(!REC)requestAnimationFrame(frame);window.__ready=1});
 function buildPicker(){const p=$("#wpick");p.innerHTML=Object.entries(WPN).map(([k,w])=>`<button data-w="${k}" aria-pressed="${k===WSEL}"><img src="${IMG[w.img]}" alt="">${w.name}</button>`).join("");
   p.querySelectorAll("button").forEach(b=>b.onclick=()=>pickW(b.dataset.w));}
 function pickW(k){WSEL=k;document.querySelectorAll("#wpick button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.w===k));S.hero.act=null;}
@@ -495,7 +507,7 @@ document.querySelectorAll("[data-a]").forEach(b=>b.addEventListener("click",()=>
   if(S.demo) demo(false);
   if(S.mode==="old"){ if(a==="hero"||a==="crit"||a==="ko")oldAct("hero"); else if(a==="wolf")oldAct("wolf"); return; }
   if(a==="hero")heroAttack(false);else if(a==="wolf")wolfAttack();else if(a==="crit")heroAttack(true);else if(a==="ko")heroAttack(true,true);else reset();}));
-$("#mNew").onclick=()=>setMode("new");$("#mOld").onclick=()=>setMode("old");
+$("#mParts").onclick=()=>setMode("parts");$("#mNew").onclick=()=>setMode("new");$("#mOld").onclick=()=>setMode("old");
 </script>
 </body>
 </html>
