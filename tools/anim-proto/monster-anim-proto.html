@@ -636,43 +636,50 @@ const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),ang=(a,b)=>Math.atan2(b[1]-a[1
 const ARM={N:{sh:HP.shN,a:dist(HP.shN,HP.elN),b:dist(HP.elN,HP.gripN),ru:ang(HP.shN,HP.elN),rf:ang(HP.elN,HP.gripN)},
            F:{sh:HP.shF,a:dist(HP.shF,HP.elF),b:dist(HP.elF,HP.gripF),ru:ang(HP.shF,HP.elF),rf:ang(HP.elF,HP.gripF)}};
 // 2-bone IK: shoulder S, target T -> absolute upper/forearm angles (deg). Elbow is kept on the lower side.
-function ik(S,T,a,b,up){let dx=T[0]-S[0],dy=T[1]-S[1],d=Math.hypot(dx,dy);const th=Math.atan2(dy,dx);d=Math.max(Math.abs(a-b)+1,Math.min(a+b-.5,d));
+const STMAX=1.75;
+function ik(S,T,a0,b0,up){let dx=T[0]-S[0],dy=T[1]-S[1],d=Math.hypot(dx,dy);const th=Math.atan2(dy,dx);const st=Math.max(1,Math.min(STMAX,d/(a0+b0-.5)));const a=a0*st,b=b0*st;d=Math.max(Math.abs(a-b)+1,Math.min(a+b-.5,d));
   const A=Math.acos(Math.max(-1,Math.min(1,(a*a+d*d-b*b)/(2*a*d))));let best=null;
   for(const s of [1,-1]){const u=th+s*A,E=[S[0]+a*Math.cos(u),S[1]+a*Math.sin(u)];const H=[S[0]+d*Math.cos(th),S[1]+d*Math.sin(th)];
-    const c={ua:u/D2R,fa:Math.atan2(H[1]-E[1],H[0]-E[0])/D2R,ey:E[1]};if(!best||(up?c.ey<best.ey:c.ey>best.ey))best=c;}
+    const c={ua:u/D2R,fa:Math.atan2(H[1]-E[1],H[0]-E[0])/D2R,ey:E[1],st,E};if(!best||(up?c.ey<best.ey:c.ey>best.ey))best=c;}
   return best;}
 // keyframes: [t, value(s), ease]. P(...) = [hx,hy,d]  (main hand target in body space, weapon tip direction)
 const RW={
- sword:{impact:300,trail:[255,370],shout:[150,620],main:"N",
-  hand:[[0,[480,690,-25]],[180,[385,505,-118],"outQ"],[235,[380,498,-124]],[300,[560,600,-15],"inQ"],[360,[520,720,75],"outQ"],[620,[500,700,65]],[950,[480,690,-25],"io"]],
-  far:[[0,[720,700]],[180,[760,620],"outQ"],[300,[640,700],"inQ"],[620,[650,700]],[950,[720,700],"io"]],
-  lean:[[0,0],[180,-12,"outQ"],[230,-13],[300,14,"inQ"],[360,20,"outQ"],[620,10],[950,0,"io"]],
-  x:[[0,0],[180,-.04,"outQ"],[230,-.03],[300,.22,"inQ"],[620,.22],[950,0,"outC"]],
-  sq:[[0,0],[180,-.03],[300,.03],[360,-.04],[600,0]],
-  legN:[[0,0],[180,-6],[300,22,"inQ"],[620,18],[950,0,"io"]],legF:[[0,0],[180,8],[300,-24,"inQ"],[620,-20],[950,0,"io"]]},
- hammer:{impact:600,trail:[550,615],shout:[200,950],main:"N",two:75,
-  hand:[[0,[520,720,75]],[200,[500,700,125],"io"],[480,[420,540,212],"outQ"],[540,[415,532,216]],[600,[600,720,415],"inQ"],[640,[605,730,420]],[900,[600,725,418]],[1300,[520,720,435],"io"]],
-  lean:[[0,0],[200,-4],[480,-16,"outQ"],[540,-17],[600,24,"inQ"],[640,25],[900,20],[1300,0,"io"]],
-  x:[[0,0],[200,.06,"io"],[480,.12],[540,.13],[600,.2,"inQ"],[900,.2],[1300,0,"io"]],
-  sq:[[0,0],[480,-.03],[540,-.04],[600,-.1,"inQ"],[640,-.13],[900,-.02],[1300,0]],
-  legN:[[0,0],[480,-8],[600,24,"inQ"],[900,20],[1300,0,"io"]],legF:[[0,0],[480,10],[600,-26,"inQ"],[900,-22],[1300,0,"io"]]},
+ sword:{impact:300,trail:[250,380],shout:[150,620],main:"N",
+  hand:[[0,[480,690,-25]],[180,[420,335,-122],"outQ"],[235,[414,322,-130]],[300,[700,610,-8],"inQ"],[360,[650,770,80],"outQ"],[620,[630,750,70]],[950,[480,690,-25],"io"]],
+  far:[[0,[720,700]],[180,[800,560],"outQ"],[300,[600,720],"inQ"],[620,[620,720]],[950,[720,700],"io"]],
+  lean:[[0,0],[180,-18,"outQ"],[235,-20],[300,22,"inQ"],[360,28,"outQ"],[620,14],[950,0,"io"]],
+  x:[[0,0],[180,-.05,"outQ"],[235,-.05],[300,.26,"inQ"],[620,.25],[950,0,"outC"]],
+  y:[[0,0],[180,-.025,"outQ"],[300,0,"inQ"]],
+  sq:[[0,0],[180,-.05],[300,.04],[360,-.07],[600,0]],
+  legN:[[0,0],[180,-10],[300,30,"inQ"],[620,24],[950,0,"io"]],legF:[[0,0],[180,12],[300,-32,"inQ"],[620,-26],[950,0,"io"]]},
+ hammer:{impact:600,trail:[548,615],shout:[200,950],main:"N",two:75,
+  hand:[[0,[520,720,75]],[200,[490,700,130],"io"],[480,[440,300,222],"outQ"],[540,[436,290,228]],[600,[690,735,415],"inQ"],[640,[695,745,420]],[900,[690,740,418]],[1300,[520,720,435],"io"]],
+  lean:[[0,0],[200,-6],[480,-22,"outQ"],[540,-24],[600,32,"inQ"],[640,34],[900,24],[1300,0,"io"]],
+  x:[[0,0],[200,.04,"io"],[480,.1],[540,.11],[600,.22,"inQ"],[900,.22],[1300,0,"io"]],
+  y:[[0,0],[200,.01],[420,-.03,"outQ"],[540,-.075,"outQ"],[600,0,"inQ"]],
+  sq:[[0,0],[200,.04],[480,-.06],[540,-.07],[600,-.16,"inQ"],[650,-.18],[760,.03],[900,-.02],[1300,0]],
+  legN:[[0,0],[200,6],[480,-14],[600,32,"inQ"],[900,26],[1300,0,"io"]],legF:[[0,0],[200,-6],[480,16],[600,-34,"inQ"],[900,-28],[1300,0,"io"]]},
  trident:{impact:300,trail:[220,320],shout:[150,700],main:"N",two:85,
-  hand:[[0,[470,690,-70]],[200,[380,640,-6],"outQ"],[300,[600,630,-3],"inQ"],[380,[590,632,-3]],[760,[560,640,-5]],[1000,[470,690,-70],"io"]],
-  lean:[[0,0],[200,-8,"outQ"],[300,14,"inQ"],[760,6],[1000,0,"io"]],
-  x:[[0,0],[200,-.02,"outQ"],[300,.16,"inQ"],[760,.15],[1000,0,"outC"]],
-  legN:[[0,0],[200,-5],[300,22,"inQ"],[760,18],[1000,0,"io"]],legF:[[0,0],[200,6],[300,-24,"inQ"],[760,-20],[1000,0,"io"]]},
+  hand:[[0,[470,690,-70]],[200,[340,640,-8],"outQ"],[300,[740,620,-3],"inQ"],[380,[725,624,-3]],[760,[680,640,-5]],[1000,[470,690,-70],"io"]],
+  lean:[[0,0],[200,-14,"outQ"],[300,22,"inQ"],[760,8],[1000,0,"io"]],
+  x:[[0,0],[200,-.05,"outQ"],[300,.22,"inQ"],[760,.2],[1000,0,"outC"]],
+  sq:[[0,0],[200,-.04],[300,.05,"inQ"],[380,-.03],[600,0]],
+  legN:[[0,0],[200,-10],[300,32,"inQ"],[760,24],[1000,0,"io"]],legF:[[0,0],[200,10],[300,-34,"inQ"],[760,-26],[1000,0,"io"]]},
  staff:{impact:680,trail:[575,625],shout:[150,900],main:"N",charge:[150,560],shoot:[600,680],open:[150,1000],
-  hand:[[0,[480,700,-90]],[250,[450,520,-95],"outQ"],[560,[445,505,-100]],[620,[610,580,-15],"inQ"],[900,[600,585,-18]],[1150,[480,700,-90],"io"]],
-  far:[[0,[720,700]],[250,[650,560],"outQ"],[560,[655,555]],[620,[790,575],"inQ"],[900,[785,580]],[1150,[720,700],"io"]],
-  lean:[[0,0],[250,-6,"outQ"],[560,-8],[620,12,"inQ"],[900,10],[1150,0,"io"]],
-  x:[[0,0],[560,-.02],[620,.04,"inQ"],[1150,0,"io"]],
-  legN:[[0,0],[560,-4],[620,12,"inQ"],[900,10],[1150,0,"io"]],legF:[[0,0],[560,4],[620,-12,"inQ"],[900,-10],[1150,0,"io"]]},
+  hand:[[0,[480,700,-90]],[250,[460,330,-92],"outQ"],[560,[455,318,-96]],[620,[720,560,-12],"inQ"],[900,[705,570,-16]],[1150,[480,700,-90],"io"]],
+  far:[[0,[720,700]],[250,[720,420],"outQ"],[560,[725,410]],[620,[880,560],"inQ"],[900,[870,570]],[1150,[720,700],"io"]],
+  lean:[[0,0],[250,-12,"outQ"],[560,-14],[620,18,"inQ"],[900,12],[1150,0,"io"]],
+  x:[[0,0],[560,-.03],[620,.07,"inQ"],[1150,0,"io"]],
+  y:[[0,0],[250,-.03,"outQ"],[560,-.045],[620,0,"inQ"]],
+  sq:[[0,0],[250,-.05],[560,-.06],[620,.05,"inQ"],[700,0]],
+  legN:[[0,0],[560,-6],[620,18,"inQ"],[900,14],[1150,0,"io"]],legF:[[0,0],[560,6],[620,-18,"inQ"],[900,-14],[1150,0,"io"]]},
  bow:{impact:740,shout:[250,760],main:"F",draw:[200,660],shoot:[660,740],grip:[.43,.47,.46],
-  hand:[[0,[700,700,60]],[200,[800,585,90],"outQ"],[900,[800,585,90]],[1150,[700,700,60],"io"]],
-  far:[[0,[470,680]],[200,[770,590],"outQ"],[600,[485,548],"outC"],[655,[480,545]],[700,[420,520],"outQ"],[900,[470,600]],[1150,[470,680],"io"]],
-  lean:[[0,0],[200,-2],[600,-5],[660,-5],[700,-8,"outQ"],[1150,0,"io"]],
-  x:[[0,0],[660,0],[700,-.03,"outQ"],[1150,0,"io"]],
-  legN:[[0,0],[200,6],[1000,6],[1150,0,"io"]],legF:[[0,0],[200,-8],[1000,-8],[1150,0,"io"]]}
+  hand:[[0,[700,700,60]],[200,[900,575,90],"outQ"],[900,[900,575,90]],[1150,[700,700,60],"io"]],
+  far:[[0,[470,680]],[200,[860,580],"outQ"],[600,[460,530],"outC"],[655,[455,526]],[700,[360,500],"outQ"],[900,[430,580]],[1150,[470,680],"io"]],
+  lean:[[0,0],[200,-4],[600,-10],[660,-10],[700,-16,"outQ"],[1150,0,"io"]],
+  x:[[0,0],[660,0],[700,-.05,"outQ"],[1150,0,"io"]],
+  sq:[[0,0],[600,-.03],[700,.03],[900,0]],
+  legN:[[0,0],[200,12],[1000,12],[1150,0,"io"]],legF:[[0,0],[200,-14],[1000,-14],[1150,0,"io"]]}
 };
 const IDLE_FAR=[720,700];
 function sampleVec(keys,t){const n=keys[0][1].length,out=[];for(let i=0;i<n;i++)out.push(sampleNum(keys.map(k=>[k[0],k[1][i],k[2]]),t));return out;}
@@ -683,7 +690,7 @@ function heroRigFrame(t){
   let H=R.hand[0][1].slice(),FH=(R.far?R.far[0][1]:IDLE_FAR).slice();
   const br=reduce?0:Math.sin(t*2*Math.PI/1700);
   if(h.act==="atk"){f.phase="atk";H=sampleVec(R.hand,dt);if(R.far)FH=sampleVec(R.far,dt);
-    for(const k of ["x","y","sq","lean","legN","legF"]) if(R[k]) f[k]=sampleNum(R[k],dt);
+    for(const k of ["x","y","r","sq","lean","legN","legF"]) if(R[k]) f[k]=sampleNum(R[k],dt);
     if(R.shout&&dt>R.shout[0]&&dt<R.shout[1])f.head="h-head-shout";
     if(R.open&&dt>R.open[0]&&dt<R.open[1])f.open=true;
     if(dt>R.hand[R.hand.length-1][0]+80)h.act=null;}
@@ -708,13 +715,18 @@ function drawHeroRig(t){
   const mainK=R.main,otherK=mainK==="N"?"F":"N",A1=ARM[mainK],A2=ARM[otherK];
   const s1=ik(shp(A1.sh),f.H,A1.a,A1.b),u=[Math.cos(f.H[2]*D2R),Math.sin(f.H[2]*D2R)];
   // second hand: on the handle (two-handed) or its own target
-  let T2=f.FH;if(R.two&&f.phase!=="hurt"){const hand1=[shp(A1.sh)[0]+A1.a*Math.cos(s1.ua*D2R)+A1.b*Math.cos(s1.fa*D2R),shp(A1.sh)[1]+A1.a*Math.sin(s1.ua*D2R)+A1.b*Math.sin(s1.fa*D2R)];T2=[hand1[0]+u[0]*R.two,hand1[1]+u[1]*R.two];}
+  let T2=f.FH;if(R.two&&f.phase!=="hurt"){const hand1=[s1.E[0]+A1.b*s1.st*Math.cos(s1.fa*D2R),s1.E[1]+A1.b*s1.st*Math.sin(s1.fa*D2R)];T2=[hand1[0]+u[0]*R.two,hand1[1]+u[1]*R.two];}
   const s2=ik(shp(A2.sh),T2,A2.a,A2.b);
   const ang={};ang["u"+mainK]=s1.ua;ang["f"+mainK]=s1.fa;ang["u"+otherK]=s2.ua;ang["f"+otherK]=s2.fa;
   const pose={root:{r:f.r,sx:-f.sq*.5,sy:f.sq},hips:{r:f.lean},head:{r:-f.lean*.4},
     armNu:{r:ang.uN-ARM.N.ru-f.lean},armNl:{r:(ang.fN-ARM.N.rf)-(ang.uN-ARM.N.ru)},
     armFu:{r:ang.uF-ARM.F.ru-f.lean},armFl:{r:(ang.fF-ARM.F.rf)-(ang.uF-ARM.F.ru)},legN:{r:f.legN},legF:{r:f.legF}};
-  const M=rigMats(HB,pose);H.left=sx-Wd*.18;H.B=Wd*.36;
+  const M=rigMats(HB,pose);
+  const dS=(a,k)=>new DOMMatrix().rotate(a).scale(k,1).rotate(-a);
+  for(const [K,sol] of [[mainK,s1],[otherK,s2]]){const A=ARM[K],Sh=shp(A.sh),E=sol.E,el=K==="N"?HP.elN:HP.elF;
+    M["arm"+K+"u"]=M.root.multiply(new DOMMatrix().translate(Sh[0],Sh[1]).rotate(sol.ua-A.ru).multiply(dS(A.ru,sol.st)).translate(-A.sh[0],-A.sh[1]));
+    M["arm"+K+"l"]=M.root.multiply(new DOMMatrix().translate(E[0],E[1]).rotate(sol.fa-A.rf).multiply(dS(A.rf,sol.st)).translate(-el[0],-el[1]));}
+  H.left=sx-Wd*.18;H.B=Wd*.36;
   const rootM=base.multiply(M.root),rootInv=M.root.inverse();
   const fistOf=(K)=>{const p=M[K==="N"?"armNl":"armFl"].transformPoint(new DOMPoint(...(K==="N"?HP.gripN:HP.gripF)));const q=rootInv.transformPoint(p);return [q.x,q.y]};
   const g1=fistOf(mainK),S_=w.grip[2]*1010,[gx,gy]=R.grip||w.grip;let tip=null,mid=null;const wb=[];
@@ -735,10 +747,12 @@ function drawHeroRig(t){
   drawPart(c,base,M.legF,"h-legF");drawPart(c,base,M.legN,"h-legN");
   const an=((f.H[2]%360)+540)%360-180,up=an<-60&&an>-175;
   if(two&&up)drawWeapon();
-  drawPart(c,base,M.hips,"h-torso");drawPart(c,base,M.head,f.head);
+  const raised=f.H[1]<500&&f.phase==="atk";
+  drawPart(c,base,M.hips,"h-torso");if(!raised)drawPart(c,base,M.head,f.head);
   if(two){if(!up)drawWeapon();drawPart(c,base,M.armFl,"h-armFl");}
   if(mainK==="N"&&!two)drawWeapon();
   drawPart(c,base,M.armNu,"h-armNu");drawPart(c,base,M.armNl,"h-armNl");
+  if(raised)drawPart(c,base,M.head,f.head);
   // bow string + arrow
   if(WSEL==="bow"&&wb.length){const nh=fistOf("N"),nm=rootM.transformPoint(new DOMPoint(nh[0],nh[1])),hx=nm.x/DPR,hy=nm.y/DPR;
     const drawing=S.hero.act==="atk"&&f.dt>=R.draw[0]&&f.dt<R.draw[1];const [a,b]=wb;c.setTransform(DPR,0,0,DPR,0,0);c.lineCap="round";
