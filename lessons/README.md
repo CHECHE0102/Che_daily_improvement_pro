@@ -23,6 +23,7 @@ Rules
 - Teacher lines (`"v": "T"`) are spoken Chinese; keep English inside them short (a word or phrase). English is voiced separately by a native voice.
 - Dialogue lines: `"v": "A"` (Emily) / `"v": "B"` (Connor), natural Irish English, each with `"zh"` translation.
 - Big words (phrase, hook word, grammar head) shrink automatically to fit the screen; render_frames.js refuses a frame where text runs off the edge.
+- Long caption / dialogue lines get a smaller font automatically so they stay inside the speech bubble (capFit in lesson-render.js); render_frames.js also refuses a frame whose caption spills out of the bubble. Still, keep dialogue lines short (about 45 characters max) so the text stays big.
 - Max ~45 Chinese characters per teacher line, ~12 words per English line (it must fit the caption box).
 - `cap` replaces the on-screen caption when the spoken line would be too long to show; otherwise leave it out (karaoke needs cap == say).
 - No price wording at all (no 免費 / 限時 / 會員價). Don't say 愛爾蘭新聞 — news follows the player's region: say 每天一則新聞.

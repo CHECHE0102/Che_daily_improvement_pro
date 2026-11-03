@@ -38,6 +38,12 @@ const lesson = JSON.parse(fs.readFileSync(lessonPath, 'utf8'));
       const r = document.createRange(); r.selectNodeContents(e); const b = r.getBoundingClientRect();
       return b.width && (b.left < 0 || b.right > innerWidth); }).map(e => e.textContent.slice(0, 40)));
     if (cut.length) throw new Error('text runs off the screen: ' + cut.join(' | '));
+    // ...and the caption must stay inside its speech bubble (lesson-render.js capFit shrinks long lines)
+    const spill = await p.evaluate(() => { const e = document.querySelector('.bub'); if (!e) return '';
+      const B = e.getBoundingClientRect();
+      return [...e.children].some(c => { const r = c.getBoundingClientRect(); return r.top < B.top + 4 || r.bottom > B.bottom - 4; })
+        ? e.textContent.slice(0, 60) : ''; });
+    if (spill) throw new Error('caption spills out of its bubble: ' + spill);
     process.stdout.write(`frames ${n}\r`);
   }
   await b.close();
