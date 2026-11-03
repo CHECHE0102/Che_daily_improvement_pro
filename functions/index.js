@@ -13,6 +13,7 @@
 import { onRequest } from "firebase-functions/v2/https";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { runPush } from "./push.js";
+import { runWellDraw, prevMonth } from "./well.js";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
@@ -252,4 +253,10 @@ export const stripeWebhook = onRequest({ region: REGION, secrets: [STRIPE_KEY, W
 export const newsPush = onSchedule({ schedule: "every 15 minutes", timeZone: "Europe/Dublin", region: REGION, secrets: [VAPID_PRIVATE], timeoutSeconds: 300, retryCount: 0, maxInstances: 1 }, async () => {
   const r = await runPush(db, VAPID_PRIVATE.value(), (...a) => logger.info(...a));
   if (r.am || r.pm || r.gone || r.fail || r.bad) logger.info("newsPush", r);
+});
+
+// 許願池 (Wishing Well): at 00:10 Irish time on the 1st of each month, draw last month's winners (game gold only).
+export const wellDraw = onSchedule({ schedule: "10 0 1 * *", timeZone: "Europe/Dublin", region: REGION, timeoutSeconds: 120, retryCount: 3, maxInstances: 1 }, async () => {
+  const r = await runWellDraw(db, prevMonth());
+  logger.info("wellDraw", r);
 });

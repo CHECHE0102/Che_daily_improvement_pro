@@ -957,6 +957,9 @@ body.vp-lock{touch-action:pan-x pan-y}
 .sub-ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:6px 0 4px}.sub-step{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;font-size:11px;line-height:1.25;padding:6px 2px;border-radius:12px;opacity:.55}.sub-step.got{opacity:1}.sub-step.now{background:color-mix(in srgb,var(--accent) 16%,transparent);outline:1.5px solid var(--accent)}.sub-step b{font-size:11px}
 .vt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px}.vt-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border-radius:14px;border:1px solid #E3B341;background:linear-gradient(180deg,color-mix(in srgb,#FFE58A 18%,var(--card,#fff)),var(--card,#fff));text-align:center}.vt-ic{font-size:28px}.vt-soon{font-size:12px;font-weight:700;color:var(--muted);border:1px dashed var(--line,#ccd);border-radius:99px;padding:3px 10px}
 .gift-find input{flex:1;min-width:0}.gift-to{font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.gift-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gift-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;border:1px solid var(--line,#ccd);border-radius:10px}.gift-lab{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.gift-step{display:flex;align-items:center;gap:6px}.gift-step b{min-width:20px;text-align:center}.gift-step .btn{padding:4px 10px}
+.well-pool{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;margin:8px 0;background:linear-gradient(135deg,color-mix(in srgb,#2A68B0 16%,transparent),color-mix(in srgb,#3FA65A 12%,transparent));border:1px solid color-mix(in srgb,#2A68B0 35%,transparent)}.well-pool b{display:block;font-size:22px}.well-ic{font-size:34px;line-height:1}
+.well-prizes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0}.well-prize{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 4px;border-radius:12px;border:1px solid #E3B341;background:color-mix(in srgb,#FFE58A 14%,transparent)}.well-prize span{font-size:20px}
+.well-picks{flex-wrap:wrap;gap:6px;margin:6px 0}.well-me{font-weight:700}
 .gift-fee{margin:6px 0;font-weight:700}.gift-confirm{border:2px solid var(--fire);border-radius:12px;padding:10px;margin:8px 0;background:color-mix(in srgb,var(--fire) 8%,transparent)}
 .gift-card{border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;margin:8px 0;display:flex;flex-direction:column;gap:6px}.gift-card.pending{border-color:#E3B341}.gift-card.accepted{border-color:#2f9e6e}.gift-doneq{font-weight:600}.gift-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .am-scrim{position:fixed;inset:0;bottom:calc(65px + env(safe-area-inset-bottom,0px));z-index:30;background:rgba(10,16,14,.25);animation:amFade .22s ease-out both}#advMenu.closing .am-scrim{animation:amFadeOut .18s ease-in both}@keyframes amFade{from{opacity:0}}@keyframes amFadeOut{to{opacity:0}}
@@ -1725,10 +1728,10 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 /* ---------- rendering ---------- */
 /* new players: the Lucky House stays locked until the elder introduces it (day-2 talk); everything else is open from the start */
 // who may open the Rainbow Vault and the style shop: "dev" (developer mode only), "testers", "all" — set in developer mode, stored in config/features
-const FEAT_DEF={vault:"testers", style:"all"};
+const FEAT_DEF={vault:"all", style:"all"};
 const featLevel=k=>((S.feat||{})[k])||FEAT_DEF[k];
 function featOpen(k){ const l=featLevel(k); return !!DEV||l==="all"||(l==="testers"&&!!S.payTester); }
-function featLock(k){ if((k==="vault"||k==="style")&&!featOpen(k)) return k==="vault"?"lockVault":"lockStyle";   // Rainbow Vault stays closed to players until paid items launch
+function featLock(k){ if((k==="vault"||k==="style")&&!featOpen(k)) return k==="vault"?"lockVault":"lockStyle";   // the Rainbow Vault now only has gifting and the wishing well, so it is open to everyone by default
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
 function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.monInfo=null; S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
@@ -3659,7 +3662,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.20";
+const APP_VERSION="2026.11.21";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -7138,6 +7141,8 @@ const VAULT_ITEMS=[
   {id:"charm3", kind:"charm", n:3, ic:"🪄", pay:"charm3", price:"€1", test:true}, {id:"charm10", kind:"charm", n:10, ic:"🪄"},
   {id:"rename1", kind:"rename", n:1, ic:"🏷️"}, {id:"sub", kind:"sub", n:1, ic:"🌟", pay:"sub", price:"€5", test:true}, {id:"plus", kind:"sub", n:1, ic:"👑", pay:"plus", price:"€12", test:true, plus:true},
   {id:"plusgift", kind:"gift", n:1, ic:"🎁"}, {id:"subgift", kind:"gift", n:1, ic:"🎁"}, {id:"style250", kind:"style", n:250, ic:"✨", pay:"style250", test:true}, {id:"style700", kind:"style", n:700, ic:"✨", pay:"style700", test:true}, {id:"style1600", kind:"style", n:1600, ic:"✨", pay:"style1600", test:true}, {id:"gold5k", kind:"gold", n:5000, ic:"🪙"}, {id:"gold20k", kind:"gold", n:20000, ic:"💰"}, {id:"gold60k", kind:"gold", n:60000, ic:"👑"}];
+// the vault's shop, memberships and purchase history are hidden while there are no real-money items (payments on hold); the code stays for later
+const VAULT_SHOP_ON=false;
 const GIFT={feeShard:[10,20,40,80], feeGem:[40,80,160,320], feeCharm:60, minFee:20, maxEach:20};
 function giftFee(it){ let f=0; for(const [k,n] of Object.entries(it.gems||{})) f+=n*GIFT.feeGem[+k.split("-")[1]]; for(const [k,n] of Object.entries(it.shards||{})) f+=n*GIFT.feeShard[+k.split("-")[1]]; f+=(it.charms||0)*GIFT.feeCharm; return f?Math.max(GIFT.minFee,f):0; }
 function giftCount(it){ return Object.values(it.gems||{}).reduce((a,b)=>a+b,0)+Object.values(it.shards||{}).reduce((a,b)=>a+b,0)+(it.charms||0); }
@@ -7317,6 +7322,105 @@ async function subPortal(){
     const j=await r.json().catch(()=>({})); if(r.ok&&j.url){ payLeave("portal"); location.href=j.url; return; } toast(T("subPortalFail")); console.warn("portal",r.status,j); }
   catch(e){ toast(T("subPortalFail")); }
   PAY_BUSY=false; render(); }
+/* ----- 許願池 · Wishing Well — in-game gold only, never real money.
+   During a month players toss gold in: one doc each, well/{YYYY-MM}_{uid} {uid, month, nick, coins, at}; coins only go up (max WELL.maxMonth).
+   On the 1st (00:10 Irish time) the wellDraw Cloud Function (functions/well.js) draws WELL.split.length winners from last month,
+   weighted by gold tossed, no one twice, and splits the whole pool by WELL.split. It writes wellDraw/{month} (the public result)
+   and wellWin/{month}_{uid} (status "won"); the winner's game collects it once (won -> claimed, in a transaction), like gifts.
+   The month is the Irish month from the server clock (loginDay), so changing the phone's clock does nothing. ----- */
+const WELL={min:10, picks:[10,50,100,300], maxMonth:1000, split:[50,30,20]};
+let WELL_IN=null;   // {at, month, prev, list:[{uid,nick,coins}], draw}
+const wellMonth=()=>{ const d=loginDay(); return d?d.slice(0,7):null; };
+const monthBefore=m=>{ let [y,mo]=m.split("-").map(Number); mo--; if(!mo){ mo=12; y--; } return y+"-"+String(mo).padStart(2,"0"); };
+const wellTotal=()=>WELL_IN?WELL_IN.list.reduce((a,b)=>a+b.coins,0):0;
+const wellMine=()=>{ const me=CLOUD.user&&CLOUD.user.uid, x=WELL_IN&&me&&WELL_IN.list.find(y=>y.uid===me); return x?x.coins:0; };
+function wellShares(total,k){ const p=WELL.split.slice(0,k), sp=p.reduce((a,b)=>a+b,0)||1, out=p.map(x=>Math.floor(total*x/sp)); if(out.length) out[0]+=total-out.reduce((a,b)=>a+b,0); return out; }
+// weighted draw without repeats (the server does the same with a crypto random number)
+function wellPick(list){ const pool=list.slice(), k=Math.min(WELL.split.length,pool.length), out=[]; let sum=pool.reduce((a,b)=>a+b.coins,0);
+  for(let j=0;j<k;j++){ let r=Math.random()*sum, i=0; while(i<pool.length-1&&r>=pool[i].coins){ r-=pool[i].coins; i++; } out.push(pool[i]); sum-=pool[i].coins; pool.splice(i,1); } return out; }
+let WELL_CH={key:"",p:0};
+function wellChance(){ const me=CLOUD.user&&CLOUD.user.uid, L=(WELL_IN&&WELL_IN.list)||[]; if(!me||!L.some(x=>x.uid===me)) return 0;
+  if(L.length<=WELL.split.length) return 1; const key=L.map(x=>x.uid+":"+x.coins).join(","); if(WELL_CH.key===key) return WELL_CH.p;
+  const N=L.length>200?600:2000; let hit=0; for(let i=0;i<N;i++) if(wellPick(L).some(x=>x.uid===me)) hit++;
+  WELL_CH={key,p:hit/N}; return WELL_CH.p; }
+async function wellLoad(force){
+  if(!CLOUD.user||!CLOUD.fb||SANDBOX()) return; if(!force&&WELL_IN&&Date.now()-WELL_IN.at<90e3) return;
+  WELL_IN={...(WELL_IN||{list:[],draw:null}), at:Date.now()};
+  if(SRV_OFF==null) await srvSync(); const m=wellMonth(); if(!m){ WELL_IN.err=true; if(S.view==="adv") render(); return; }
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, prev=monthBefore(m);
+  try{ const [q,dr]=await Promise.all([fsM.getDocs(fsM.query(fsM.collection(db,"well"),fsM.where("month","==",m),fsM.limit(500))), fsM.getDoc(fsM.doc(db,"wellDraw",prev))]);
+    const list=[]; q.forEach(d=>{ const x=safeDoc(d.data()); const c=Math.floor(+x.coins||0); if(x.month===m&&x.uid&&c>0) list.push({uid:String(x.uid), nick:String(x.nick||"").slice(0,16), coins:c}); });
+    list.sort((a,b)=>b.coins-a.coins);
+    const draw=dr.exists()?safeDoc(dr.data()):null;
+    WELL_IN={at:Date.now(), month:m, prev, list, draw};
+    if(draw&&(draw.winners||[]).some(x=>x.uid===me)) wellClaim(prev); }
+  catch(e){ console.warn("well",e&&e.code); WELL_IN={at:Date.now(), month:m, prev, list:[], draw:null, err:true}; }
+  if(S.view==="adv") render(); }
+const WELL_CLAIMING=new Set();
+async function wellClaim(m){ const g=game(); if((g.wellGot||[]).includes(m)||WELL_CLAIMING.has(m)||!CLOUD.fb||!CLOUD.user) return; WELL_CLAIMING.add(m);
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, ref=fsM.doc(db,"wellWin",m+"_"+me); let gold=0;
+  const mark=()=>{ g.wellGot=[...(g.wellGot||[]),m].slice(-24); };
+  try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():null;
+      if(!d||d.uid!==me||d.status!=="won") throw new Error("state"); gold=Math.max(0,Math.floor(+d.gold||0)); tx.update(ref,{status:"claimed", claimedAt:new Date().toISOString()}); });
+    g.gold=(g.gold||0)+gold; mark(); saveGame(); toast(T("wellWon",{n:gold.toLocaleString()})); if(typeof sfx==="function") sfx("prize"); }
+  catch(e){ if(e&&e.message==="state"){ mark(); saveGame(); } else console.warn("well claim",e&&(e.code||e.message)); }
+  WELL_CLAIMING.delete(m); if(S.view==="adv") render(); }
+async function wellToss(){
+  const W=S.well||(S.well={n:WELL.picks[1]}), g=game(), n=Math.floor(W.n||0);
+  if(W.busy) return; if(!CLOUD.user||!CLOUD.fb) return toast(T("wellLogin"));
+  if(!WELL_IN||!WELL_IN.month||WELL_IN.err) return toast(T("wellLoadFail"));
+  if(n<WELL.min) return; const left=WELL.maxMonth-wellMine(); if(n>left) return toast(left>0?T("wellLeft",{n:left}):T("wellMax",{n:WELL.maxMonth}));
+  if((g.gold||0)<n) return toast(T("noGold",{n:n-(g.gold||0)}));
+  if(!W.ask){ W.ask=true; render(); return; }   // first tap shows the warning; the second tap tosses
+  if(SRV_OFF==null) await srvSync(); const m=wellMonth();
+  if(m!==WELL_IN.month){ W.ask=false; toast(T("wellNewMonth")); return wellLoad(true); }
+  W.ask=false; W.busy=true; g.gold-=n; saveGame(); render();
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, ref=fsM.doc(db,"well",m+"_"+me), nick=(g.nick||CLOUD.user.displayName||"").slice(0,16);
+  try{ let total=0; await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():null; total=(d?Math.floor(+d.coins||0):0)+n;
+      if(total>WELL.maxMonth) throw new Error("max"); tx.set(ref,{uid:me, month:m, nick, coins:total, at:new Date().toISOString()}); });
+    const L=WELL_IN.list, x=L.find(y=>y.uid===me); if(x) x.coins=total; else L.push({uid:me,nick,coins:total}); L.sort((a,b)=>b.coins-a.coins);
+    toast(T("wellTossed",{n})); if(typeof sfx==="function") sfx("prize"); }
+  catch(e){ g.gold+=n; saveGame(); toast(e&&e.message==="max"?T("wellMax",{n:WELL.maxMonth}):T("wellFail")); console.warn("well toss",e&&(e.code||e.message)); }
+  W.busy=false; render(); setTimeout(()=>wellLoad(true),1500); }
+function wellDaysLeft(){ const d=loginDay(); if(!d) return null; const [y,mo]=d.split("-").map(Number); const next=ymd(new Date(y,mo,1)); return Math.max(1,daysBetween(d,next)); }
+const WELL_MEDAL=["🥇","🥈","🥉","🏅","🏅"];
+function wellCard(){
+  setTimeout(()=>wellLoad(false),0);
+  const g=game(), W=S.well||(S.well={n:WELL.picks[1]}), me=CLOUD.user&&CLOUD.user.uid;
+  const head=`<h3>🌠 ${T("wellT")}</h3><p class="muted sm-t">${T("wellSub",{k:WELL.split.length})}</p>`;
+  if(!CLOUD.user) return `<section class="card well-card">${head}<p class="muted sm-t">${T("wellLogin")}</p></section>`;
+  if(!WELL_IN||(!WELL_IN.month&&!WELL_IN.err)) return `<section class="card well-card">${head}<p class="muted sm-t">${T("wellLoading")}</p></section>`;
+  if(WELL_IN.err&&!WELL_IN.list.length) return `<section class="card well-card">${head}<p class="muted sm-t">${T("wellLoadFail")}</p><button class="btn ghost sm" data-act="wlreload">${T("wellRetry")}</button></section>`;
+  const L=WELL_IN.list, total=wellTotal(), mine=wellMine(), left=WELL.maxMonth-mine, k=Math.min(WELL.split.length,Math.max(L.length,WELL.split.length));
+  const sh=wellShares(total,k), days=wellDaysLeft();
+  const split=WELL.split.map((p,i)=>`<div class="well-prize"><span>${WELL_MEDAL[i]}</span><b>${(sh[i]||0).toLocaleString()}</b><small class="muted">${p}%</small></div>`).join("");
+  const picks=WELL.picks.map(n=>`<button class="btn sm${W.n===n?"":" ghost"}" data-act="wlpick" data-k="${n}" ${n>left||n>(g.gold||0)?"disabled":""}>🪙 ${n}</button>`).join("");
+  const ch=mine?wellChance():0;
+  const top=L.slice(0,5).map((x,i)=>`<div class="rw-row${x.uid===me?" well-me":""}"><span>${i+1}. ${esc(x.nick||"?")}${x.uid===me?` <small class="muted">(${T("wellYou")})</small>`:""}</span><b class="sm-t">🪙 ${x.coins.toLocaleString()}</b></div>`).join("");
+  const D=WELL_IN.draw, last=D?`<h4>🎊 ${T("wellLast",{m:esc(WELL_IN.prev)})}</h4><p class="muted sm-t">${T("wellCount",{n:(+D.count||0),t:(+D.total||0).toLocaleString()})}</p>${(D.winners||[]).map((w,i)=>`<div class="rw-row${w.uid===me?" well-me":""}"><span>${WELL_MEDAL[(+w.rank||i+1)-1]||"🏅"} ${esc(String(w.nick||"?").slice(0,16))}${w.uid===me?` <small class="muted">(${T("wellYou")})</small>`:""}</span><b class="sm-t">+🪙 ${(+w.gold||0).toLocaleString()}</b></div>`).join("")||`<p class="muted sm-t">${T("wellNoOne")}</p>`}`:"";
+  const sim=DEV&&S.wellSim?`<div class="gift-confirm"><b>${T("wellSimT")}</b>${S.wellSim.map((x,i)=>`<div>${WELL_MEDAL[i]} ${esc(x.nick||"?")} · +🪙 ${(wellShares(total,S.wellSim.length)[i]||0).toLocaleString()}</div>`).join("")||`<div class="muted">${T("wellEmpty")}</div>`}</div>`:"";
+  return `<section class="card well-card">${head}
+    <div class="well-pool"><span class="well-ic">⛲</span><div><b>🪙 ${total.toLocaleString()}</b><small class="muted">${T("wellPeople",{n:L.length})}${days?` · ${T("wellDays",{n:days})}`:""}</small></div></div>
+    <div class="well-prizes">${split}</div>
+    <p class="sm-t">${mine?T("wellMine",{n:mine.toLocaleString(),m:WELL.maxMonth.toLocaleString()})+` · <b>${T("wellChance",{p:Math.max(1,Math.round(ch*100))})}</b>`:T("wellNone",{m:WELL.maxMonth.toLocaleString()})}</p>
+    ${left>0?`<div class="row well-picks">${picks}</div>
+      ${W.ask?`<div class="gift-confirm"><b>${T("wellCheck",{n:W.n})}</b><p class="sm-t">${T("wellCheck2")}</p></div>`:""}
+      <div class="row"><button class="btn${W.ask?" danger":""}" data-act="wltoss" ${W.busy||W.n>left||W.n>(g.gold||0)?"disabled":""}>${W.ask?T("wellSure",{n:W.n}):T("wellToss",{n:W.n})}</button>${W.ask?`<button class="btn ghost" data-act="wlcancel">${T("cancel")}</button>`:""}</div>`
+      :`<p class="muted sm-t">${T("wellMax",{n:WELL.maxMonth})}</p>`}
+    <p class="muted sm-t">${T("wellRule")}</p>
+    ${L.length?`<h4>${T("wellTop")}</h4>${top}`:`<p class="muted sm-t">${T("wellEmpty")}</p>`}
+    ${last}
+    ${DEV?`<div class="row"><button class="btn ghost sm" data-act="wlsim">${T("wellSim")}</button></div>${sim}`:""}
+  </section>`; }
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^wl/.test(a)) return; e.stopPropagation();
+  const W=S.well||(S.well={n:WELL.picks[1]});
+  if(a==="wlpick"){ W.n=+t.dataset.k; W.ask=false; return render(); }
+  if(a==="wltoss") return wellToss();
+  if(a==="wlcancel"){ W.ask=false; return render(); }
+  if(a==="wlreload") return wellLoad(true);
+  if(a==="wlsim"&&DEV){ S.wellSim=wellPick((WELL_IN&&WELL_IN.list)||[]); return render(); }
+}, true);
 function viewVault(){
   setTimeout(()=>{ giftLoad(false); if(PAY_IN===null){ PAY_IN=[]; payLoad(); } },0);
   const g=game(), G=S.gift;
@@ -7350,10 +7454,11 @@ function viewVault(){
     ${mine&&x.status==="pending"?`<div class="row">${btn(x,"cancel","ghost")}</div>`:""}${mine&&x.status==="declined"?`<div class="row">${btn(x,"reclaim")}</div>`:""}</div>`;
   const inbox=CLOUD.user?`<section class="card"><h3>📬 ${T("giftInbox")}</h3>${recv.length?recv.slice(0,10).map(x=>card(x,false)).join(""):`<p class="muted sm-t">${T("giftNoneIn")}</p>`}
     ${sent.length?`<h4>${T("giftSentT")}</h4>${sent.slice(0,10).map(x=>card(x,true)).join("")}`:""}</section>`:"";
-  return `<section class="vault-hero"><div class="vh-ic">${VAULT_ICON}</div><div><div class="eyebrow">${T("vaultEyebrow")}</div><h2>${T("vaultName")}</h2><p class="sm-t">${T("vaultSub")}</p></div></section>
-    ${PLANS_ON?subCard(buyable):""}
+  return `<section class="vault-hero"><div class="vh-ic">${VAULT_ICON}</div><div><div class="eyebrow">${T("vaultEyebrow")}</div><h2>${T("vaultName")}</h2><p class="sm-t">${T("vaultSub2")}</p></div></section>
+    ${VAULT_SHOP_ON?`${PLANS_ON?subCard(buyable):""}
     <section class="card"><h3>✨ ${T("vaultShopT")}</h3><p class="muted sm-t">${T("vaultShopSub")}</p><div class="vt-grid">${shop}</div><p class="muted sm-t vt-legal">${T("vtLegal")} <a href="legal.html${langKey()==="zh"||langKey()==="cn"?"?lang=zh":""}#refunds" target="_blank" rel="noopener">${T("vtLegalLink")}</a></p></section>
-    ${hist.length?`<section class="card"><h3>🧾 ${T("payHistT")}</h3>${hist.map(x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return `<div class="rw-row"><span>${v?v.ic:"🛒"} ${v?vaultName(v):esc(x.item)}${x.test?` <small class="muted">${T("vtTestTag")}</small>`:""}</span><b class="sm-t">${T("paySt_"+x.status)||esc(x.status)}</b></div>`; }).join("")}</section>`:""}
+    ${hist.length?`<section class="card"><h3>🧾 ${T("payHistT")}</h3>${hist.map(x=>{ const v=VAULT_ITEMS.find(i=>i.id===x.item); return `<div class="rw-row"><span>${v?v.ic:"🛒"} ${v?vaultName(v):esc(x.item)}${x.test?` <small class="muted">${T("vtTestTag")}</small>`:""}</span><b class="sm-t">${T("paySt_"+x.status)||esc(x.status)}</b></div>`; }).join("")}</section>`:""}`:""}
+    ${wellCard()}
     <section class="card"><h3>🎁 ${T("giftTitle")}</h3><p class="muted sm-t">${T("giftSub")}</p>${gift}</section>
     ${inbox}`;
 }
@@ -8175,6 +8280,12 @@ Object.assign(STR.hi,{"version": "संस्करण"});
 Object.assign(STR.es,{"version": "Versión"});
 Object.assign(STR.ja,{"version": "バージョン"});
 Object.assign(STR.ko,{"version": "버전"});
+Object.assign(STR.zh,{"vaultSub2": "傳說小矮妖把金子藏在彩虹的盡頭。來這裡許個願、把寶物送給朋友，或打開你的禮物箱。", "wellT": "許願池", "wellSub": "把金幣投進許願池，每個月 1 號從上個月許願的玩家裡抽出 {k} 位，一起瓜分整池金幣（第一名拿最多）。投越多，抽中機率越高。", "wellLoading": "正在看許願池……", "wellLoadFail": "許願池暫時連不上", "wellRetry": "再試一次", "wellLogin": "登入後才能許願。", "wellPeople": "本月 {n} 位玩家許願", "wellDays": "還有 {n} 天開獎", "wellMine": "你這個月投了 🪙 {n}（上限 {m}）", "wellNone": "你這個月還沒許願（每月最多投 🪙 {m}）", "wellChance": "中獎機率約 {p}%", "wellToss": "投 🪙 {n} 許願", "wellSure": "確定投下 🪙 {n}", "wellCheck": "要把 🪙 {n} 投進許願池嗎？", "wellCheck2": "投進去的金幣不會退回。沒抽中的話，金幣會分給這個月的中獎玩家。", "wellTossed": "🌠 投下 {n} 金，願望許好了！", "wellMax": "這個月已經投滿 🪙 {n} 了，下個月再來", "wellLeft": "這個月最多再投 🪙 {n}", "wellFail": "許願沒成功，金幣已退回", "wellNewMonth": "新的一個月開始了，許願池重新開放", "wellRule": "只用遊戲金幣，沒有真錢。開獎在每月 1 號（愛爾蘭時間），中獎的金幣下次打開彩虹寶庫時自動入帳。", "wellTop": "本月許願榜", "wellEmpty": "這個月還沒有人許願，當第一個吧！", "wellYou": "你", "wellLast": "{m} 開獎結果", "wellCount": "{n} 人參加 · 池裡共 🪙 {t}", "wellNoOne": "那個月沒有人許願。", "wellWon": "🎉 許願池中獎！拿到 {n} 金幣", "wellSim": "模擬開獎（開發者，不會發獎）", "wellSimT": "模擬結果（不會發獎）"});
+Object.assign(STR.en,{"vaultSub2": "Legend says the leprechaun hides his gold at the end of the rainbow. Make a wish here, send treasures to friends, or open your gift box.", "wellT": "Wishing Well", "wellSub": "Toss gold into the well. On the 1st of each month, {k} players who wished last month are drawn and share the whole pool (1st place gets the most). The more you toss, the better your chance.", "wellLoading": "Looking into the well…", "wellLoadFail": "Can't reach the wishing well right now", "wellRetry": "Try again", "wellLogin": "Sign in to make a wish.", "wellPeople": "{n} players wished this month", "wellDays": "draw in {n} days", "wellMine": "You tossed 🪙 {n} this month (max {m})", "wellNone": "You haven't wished this month (up to 🪙 {m} a month)", "wellChance": "about {p}% chance to win", "wellToss": "Toss 🪙 {n} and wish", "wellSure": "Yes, toss 🪙 {n}", "wellCheck": "Toss 🪙 {n} into the wishing well?", "wellCheck2": "Gold in the well never comes back. If you're not drawn, it goes to this month's winners.", "wellTossed": "🌠 Tossed {n} gold. Wish made!", "wellMax": "You've tossed the 🪙 {n} limit this month. Come back next month", "wellLeft": "You can toss up to 🪙 {n} more this month", "wellFail": "The wish didn't go through. Your gold is back", "wellNewMonth": "A new month has started; the well is open again", "wellRule": "Game gold only, no real money. The draw is on the 1st of each month (Irish time); winnings arrive the next time you open the Rainbow Vault.", "wellTop": "This month's wishers", "wellEmpty": "No one has wished this month yet. Be the first!", "wellYou": "you", "wellLast": "{m} draw results", "wellCount": "{n} players · pool 🪙 {t}", "wellNoOne": "No one wished that month.", "wellWon": "🎉 You won the wishing well! +{n} gold", "wellSim": "Test draw (developer, no prizes)", "wellSimT": "Test draw (no prizes given)"});
+Object.assign(STR.hi,{"vaultSub2": "कहते हैं लेप्रेकॉन अपना सोना इंद्रधनुष के छोर पर छिपाता है। यहाँ इच्छा माँगें, दोस्तों को ख़ज़ाना भेजें, या अपना गिफ़्ट बॉक्स खोलें।", "wellT": "इच्छा कुआँ", "wellSub": "कुएँ में सोना डालें। हर महीने की 1 तारीख़ को पिछले महीने इच्छा माँगने वालों में से {k} खिलाड़ी चुने जाते हैं और पूरा सोना बाँटते हैं (पहले स्थान को सबसे ज़्यादा)। जितना ज़्यादा डालेंगे, मौका उतना बड़ा।", "wellLoading": "कुएँ में झाँक रहे हैं…", "wellLoadFail": "अभी इच्छा कुआँ नहीं खुल रहा", "wellRetry": "फिर कोशिश करें", "wellLogin": "इच्छा माँगने के लिए साइन इन करें।", "wellPeople": "इस महीने {n} खिलाड़ियों ने इच्छा माँगी", "wellDays": "{n} दिन में ड्रॉ", "wellMine": "इस महीने आपने 🪙 {n} डाले (सीमा {m})", "wellNone": "इस महीने आपने अभी इच्छा नहीं माँगी (महीने में 🪙 {m} तक)", "wellChance": "जीतने का मौका लगभग {p}%", "wellToss": "🪙 {n} डालकर इच्छा माँगें", "wellSure": "हाँ, 🪙 {n} डालें", "wellCheck": "क्या 🪙 {n} इच्छा कुएँ में डालें?", "wellCheck2": "कुएँ में डाला सोना वापस नहीं आता। अगर आप नहीं चुने गए, तो यह इस महीने के विजेताओं को जाता है।", "wellTossed": "🌠 {n} सोना डाला। इच्छा माँग ली!", "wellMax": "इस महीने आप 🪙 {n} की सीमा तक डाल चुके हैं। अगले महीने आइए", "wellLeft": "इस महीने आप 🪙 {n} और डाल सकते हैं", "wellFail": "इच्छा नहीं हो पाई। आपका सोना वापस आ गया", "wellNewMonth": "नया महीना शुरू हो गया; कुआँ फिर खुल गया", "wellRule": "सिर्फ़ गेम का सोना, असली पैसा नहीं। ड्रॉ हर महीने की 1 तारीख़ (आयरलैंड समय) को; जीत अगली बार इंद्रधनुष ख़ज़ाना खोलने पर मिलती है।", "wellTop": "इस महीने के इच्छा माँगने वाले", "wellEmpty": "इस महीने अभी किसी ने इच्छा नहीं माँगी। पहले बनिए!", "wellYou": "आप", "wellLast": "{m} ड्रॉ के नतीजे", "wellCount": "{n} खिलाड़ी · कुल 🪙 {t}", "wellNoOne": "उस महीने किसी ने इच्छा नहीं माँगी।", "wellWon": "🎉 आप इच्छा कुआँ जीत गए! +{n} सोना", "wellSim": "टेस्ट ड्रॉ (डेवलपर, इनाम नहीं)", "wellSimT": "टेस्ट ड्रॉ (कोई इनाम नहीं)"});
+Object.assign(STR.es,{"vaultSub2": "Dice la leyenda que el leprechaun esconde su oro al final del arcoíris. Pide un deseo, envía tesoros a tus amigos o abre tu caja de regalos.", "wellT": "Pozo de los deseos", "wellSub": "Echa oro al pozo. El día 1 de cada mes se sortean {k} jugadores que pidieron un deseo el mes anterior y se reparten todo el pozo (el 1.º se lleva más). Cuanto más eches, más probabilidades.", "wellLoading": "Mirando el pozo…", "wellLoadFail": "No se puede abrir el pozo ahora", "wellRetry": "Reintentar", "wellLogin": "Inicia sesión para pedir un deseo.", "wellPeople": "{n} jugadores pidieron un deseo este mes", "wellDays": "sorteo en {n} días", "wellMine": "Este mes echaste 🪙 {n} (máx. {m})", "wellNone": "Aún no pediste un deseo este mes (hasta 🪙 {m} al mes)", "wellChance": "≈{p}% de ganar", "wellToss": "Echar 🪙 {n} y pedir", "wellSure": "Sí, echar 🪙 {n}", "wellCheck": "¿Echar 🪙 {n} al pozo de los deseos?", "wellCheck2": "El oro del pozo no se devuelve. Si no te toca, va a los ganadores de este mes.", "wellTossed": "🌠 Echaste {n} de oro. ¡Deseo pedido!", "wellMax": "Ya echaste el límite de 🪙 {n} este mes. Vuelve el mes que viene", "wellLeft": "Este mes puedes echar hasta 🪙 {n} más", "wellFail": "El deseo no se guardó. Tu oro ha vuelto", "wellNewMonth": "Empezó un mes nuevo; el pozo vuelve a abrir", "wellRule": "Solo oro del juego, nada de dinero real. El sorteo es el día 1 de cada mes (hora de Irlanda); el premio llega la próxima vez que abras la Cámara del Arcoíris.", "wellTop": "Deseos de este mes", "wellEmpty": "Nadie ha pedido un deseo este mes. ¡Sé el primero!", "wellYou": "tú", "wellLast": "Resultados de {m}", "wellCount": "{n} jugadores · pozo 🪙 {t}", "wellNoOne": "Nadie pidió un deseo ese mes.", "wellWon": "🎉 ¡Ganaste el pozo de los deseos! +{n} de oro", "wellSim": "Sorteo de prueba (desarrollador, sin premios)", "wellSimT": "Sorteo de prueba (sin premios)"});
+Object.assign(STR.ja,{"vaultSub2": "レプラコーンは虹のふもとに金貨を隠すと言われています。ここで願いごとをしたり、友だちに宝物を贈ったり、ギフトボックスを開けたりできます。", "wellT": "願いの泉", "wellSub": "泉に金貨を投げ入れよう。毎月1日に、前の月に願いごとをしたプレイヤーから {k} 人を抽選し、泉の金貨を全部分け合います（1位が一番多い）。たくさん入れるほど当たりやすくなります。", "wellLoading": "泉をのぞいています…", "wellLoadFail": "今は願いの泉につながりません", "wellRetry": "もう一度", "wellLogin": "ログインすると願いごとができます。", "wellPeople": "今月 {n} 人が願いごと", "wellDays": "抽選まであと {n} 日", "wellMine": "今月は 🪙 {n} 入れました（上限 {m}）", "wellNone": "今月はまだ願いごとをしていません（月 🪙 {m} まで）", "wellChance": "当選確率 約 {p}%", "wellToss": "🪙 {n} 入れて願う", "wellSure": "🪙 {n} 入れる", "wellCheck": "🪙 {n} を願いの泉に入れますか？", "wellCheck2": "入れた金貨は戻りません。当たらなかった場合、今月の当選者に分けられます。", "wellTossed": "🌠 {n} 金貨を入れました。願いごと完了！", "wellMax": "今月の上限 🪙 {n} まで入れました。また来月", "wellLeft": "今月はあと 🪙 {n} まで入れられます", "wellFail": "うまくいきませんでした。金貨は戻しました", "wellNewMonth": "新しい月になりました。泉がまた開きました", "wellRule": "ゲームの金貨だけ、本物のお金は使いません。抽選は毎月1日（アイルランド時間）、当選金貨は次に虹の宝庫を開いたときに届きます。", "wellTop": "今月の願いごとランキング", "wellEmpty": "今月はまだ誰も願いごとをしていません。一番乗りしよう！", "wellYou": "あなた", "wellLast": "{m} の抽選結果", "wellCount": "{n} 人参加 · 泉の金貨 🪙 {t}", "wellNoOne": "その月は誰も願いごとをしませんでした。", "wellWon": "🎉 願いの泉で当選！{n} 金貨ゲット", "wellSim": "テスト抽選（開発者・賞品なし）", "wellSimT": "テスト抽選（賞品なし）"});
+Object.assign(STR.ko,{"vaultSub2": "레프러콘은 무지개 끝에 금을 숨긴다고 해요. 여기서 소원을 빌고, 친구에게 보물을 선물하거나, 선물함을 열어 보세요.", "wellT": "소원의 샘", "wellSub": "샘에 금화를 던져 보세요. 매달 1일, 지난달 소원을 빈 플레이어 중 {k}명을 뽑아 샘의 금화를 모두 나눠 줘요 (1등이 가장 많이). 많이 던질수록 당첨 확률이 높아요.", "wellLoading": "샘을 들여다보는 중…", "wellLoadFail": "지금은 소원의 샘에 연결할 수 없어요", "wellRetry": "다시 시도", "wellLogin": "로그인하면 소원을 빌 수 있어요.", "wellPeople": "이번 달 {n}명이 소원을 빌었어요", "wellDays": "추첨까지 {n}일", "wellMine": "이번 달 🪙 {n} 던졌어요 (최대 {m})", "wellNone": "이번 달 아직 소원을 빌지 않았어요 (한 달 최대 🪙 {m})", "wellChance": "당첨 확률 약 {p}%", "wellToss": "🪙 {n} 던지고 소원 빌기", "wellSure": "네, 🪙 {n} 던질게요", "wellCheck": "🪙 {n}을 소원의 샘에 던질까요?", "wellCheck2": "샘에 던진 금화는 돌려받을 수 없어요. 뽑히지 않으면 이번 달 당첨자에게 가요.", "wellTossed": "🌠 금화 {n}개를 던졌어요. 소원 완료!", "wellMax": "이번 달 한도 🪙 {n}까지 던졌어요. 다음 달에 또 와요", "wellLeft": "이번 달 🪙 {n}까지 더 던질 수 있어요", "wellFail": "소원을 빌지 못했어요. 금화를 돌려드렸어요", "wellNewMonth": "새 달이 시작됐어요. 샘이 다시 열렸어요", "wellRule": "게임 금화만 사용하고 실제 돈은 없어요. 추첨은 매달 1일(아일랜드 시간), 당첨 금화는 다음에 무지개 보물고를 열 때 들어와요.", "wellTop": "이번 달 소원 순위", "wellEmpty": "이번 달 아직 아무도 소원을 빌지 않았어요. 첫 번째가 되어 보세요!", "wellYou": "나", "wellLast": "{m} 추첨 결과", "wellCount": "{n}명 참가 · 샘 🪙 {t}", "wellNoOne": "그 달에는 아무도 소원을 빌지 않았어요.", "wellWon": "🎉 소원의 샘 당첨! 금화 +{n}", "wellSim": "테스트 추첨 (개발자, 상품 없음)", "wellSimT": "테스트 추첨 (상품 없음)"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
