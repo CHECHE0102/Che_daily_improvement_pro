@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-03",
+ "items": {
+  "2026-11-03": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government has agreed to hire 1,000 extra staff for Cork University Hospital.",
+     "Internal records show a long-running dispute between Cork University Hospital and HSE South West over staffing and spending, with claims of political pressure that the Government denies.",
+     "Cork University Hospital has been closed to new patients because of its €60 million deficit.",
+     "The Health Minister has accepted that patient safety at Cork University Hospital is getting worse."
+    ],
+    "a": 1,
+    "exp": "The passage opens with documents revealing \"a prolonged and increasingly contentious dispute\" over \"staffing levels and expenditure\", then reports the claim about the Taoiseach's office, which \"both offices have categorically denied\". No hiring deal (A) or closure (C) is mentioned, and the Minister says the safety profile \"has remained stable\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about Andy Philips's decision earlier in August?",
+    "opts": [
+     "It was welcomed by Jennifer Kearney as a sensible saving.",
+     "It was ordered directly by the Minister for Health.",
+     "It added to the staffing pressure that Ms Kearney later complained about.",
+     "It resolved the hospital's €60 million deficit."
+    ],
+    "a": 2,
+    "exp": "Philips \"suspended approximately 700 posts\" before Kearney's letter complained that \"recruitment restrictions had resulted in a shortfall of more than 1,000 employees\", so the pause fed the staffing problem. Nothing suggests she welcomed it (A), the Minister's offices deny giving instructions (B), and the deficit is still \"projected\" (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the writer's tone in presenting the dispute?",
+    "opts": [
+     "Balanced, setting each side's claims against the other's denials or counter-arguments.",
+     "Openly critical of Jennifer Kearney for leaking her letter.",
+     "Enthusiastic about the Government's handling of the hospital.",
+     "Mocking towards the HSE's regional managers."
+    ],
+    "a": 0,
+    "exp": "The writer reports Kearney's warnings, then the offices that \"categorically denied\" the claims, the Minister who \"contends\" staffing has improved, and finally that Kearney \"maintains her original position\". Each side is reported without judgement, so (B), (C) and (D) do not fit."
+   }
+  ],
+  "2026-11-03-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Ryanair's decision to stop hedging its fuel.",
+     "A fall in passenger numbers at Ryanair after fares went up.",
+     "Ryanair's plan to replace its cabin crew with artificial intelligence.",
+     "Ryanair's lower half-year profit, caused mainly by higher fuel costs, and how it plans to respond."
+    ],
+    "a": 3,
+    "exp": "The passage reports \"a 15% decline in its half-year profit, primarily attributable to a substantial increase in fuel prices\" and ends with the airline \"conducting a comprehensive review of its expenditure\". Passenger numbers actually \"increased by 6%\" (B); AI is only for \"administrative functions\" (C); and it had hedged 80% of fuel (A)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the statement that the cost of unhedged fuel \"approximately doubled\"?",
+    "opts": [
+     "Ryanair would have lost money if it had hedged more of its fuel.",
+     "Hedging most of its fuel protected Ryanair from an even larger rise in costs.",
+     "Ryanair hedged none of its fuel this year.",
+     "Fuel prices fell during the six months to September."
+    ],
+    "a": 1,
+    "exp": "Ryanair \"had hedged 80% of its fuel requirements at $67 per barrel\", while the unhedged part doubled in cost, so the hedge limited the damage. (A) reverses this, (C) contradicts the 80% figure, and (D) contradicts the \"substantial increase in fuel prices\"."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include Michael O'Leary's comment about higher fares?",
+    "opts": [
+     "To show that the airline cannot simply pass the extra fuel costs on to passengers.",
+     "To announce that fares will double next year.",
+     "To suggest that passengers are no longer interested in flying.",
+     "To prove that the Middle East conflict has ended."
+    ],
+    "a": 0,
+    "exp": "O'Leary \"acknowledged that higher fares were unlikely to compensate fully for this increase\", which explains why the airline is turning to cost cuts. No doubling of fares is mentioned (B), demand \"remained resilient\" (C), and the outlook depends on a \"rapid resolution\" of the conflict, which has not happened (D)."
+   }
+  ],
+  "2026-11-03-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "The National Cyber Security Centre found that Passwork had leaked State data.",
+     "Spain has banned Passwork because of its links to Russia.",
+     "Three Irish State agencies have stopped using Passwork after an investigation linked it to a Russian product approved by Russian security services, although the Spanish owner denies any connection.",
+     "The FSB has bought a Spanish password company."
+    ],
+    "a": 2,
+    "exp": "The passage opens with three agencies that \"have discontinued their use of a password-management service following an investigation\" linking it to a Russian company, and ends with the owner who \"has nevertheless rejected any connection to Russia\". The NCSC \"identified no risks\" (A), and there is no Spanish ban (B) or FSB purchase (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the agencies' decision to stop using the software even though no risk was found?",
+    "opts": [
+     "They had already suffered a serious data breach.",
+     "They were ordered to do so by a Spanish court.",
+     "They preferred the Russian version of the product.",
+     "They chose to act cautiously because of the reported links to Russia."
+    ],
+    "a": 3,
+    "exp": "The agencies \"ceased using it\" \"despite the fact that the National Cyber Security Centre identified no risks\", which points to caution rather than proven danger. The State Laboratory says there is \"no evidence of compromised data\" (A); no court order is mentioned (B); and the Russian version is supplied only to Russian clients (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer list the shared source code, documentation, update schedules and logos?",
+    "opts": [
+     "To give evidence for the claimed similarity between the Spanish and Russian products.",
+     "To explain how to install the software.",
+     "To show that the Spanish product is better designed.",
+     "To argue that all password managers are unsafe."
+    ],
+    "a": 0,
+    "exp": "The list follows the claim that the investigation \"identified substantial similarities with a Russian product bearing the same name\", so it supports that finding. It is not instructions (B), a quality comparison (C), or a general claim about all password tools (D)."
+   }
+  ],
+  "2026-11-03-4": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A new dam being built on the River Lee to help salmon.",
+     "The sharp decline of Ireland's wild salmon and the disagreement over proposed rules to protect them.",
+     "How sea lice are treated in Irish fish farms.",
+     "Record salmon catches by anglers in Cork."
+    ],
+    "a": 1,
+    "exp": "The passage begins with salmon declining \"to one of its lowest levels in several decades\", then sets out the proposed measures, the Lee anglers who \"rejected these proposals entirely\" and Salmon Watch Ireland, which \"welcomed the emphasis on conservation\". The Inniscarra Dam already exists and \"obstructs migration\" (A); (C) and (D) are not discussed."
+   },
+   {
+    "type": "infer",
+    "q": "What does Alan Nolan's description of the angler as a \"sentinel\" suggest?",
+    "opts": [
+     "Anglers are mainly responsible for the fall in salmon numbers.",
+     "Anglers want rivers closed as soon as possible.",
+     "Anglers act as watchers who help protect rivers by noticing and reporting problems.",
+     "Anglers are paid by the State to guard rivers."
+    ],
+    "a": 2,
+    "exp": "Nolan contends that \"river closures would eliminate those most likely to report pollution and fish mortality\", so a sentinel is a guard who watches for danger. The club says anglers are \"disproportionately targeted\" (A) and opposes closures (B); no payment is mentioned (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the tone of the passage?",
+    "opts": [
+     "Alarmed and one-sided in favour of the anglers.",
+     "Humorous and light-hearted.",
+     "Dismissive of the need for conservation.",
+     "Informative and even-handed, presenting the decline and the competing views on how to respond."
+    ],
+    "a": 3,
+    "exp": "The writer gives the figures (\"fewer than 200,000 in recent years\"), then the anglers' objections and, \"in contrast\", Salmon Watch Ireland's support. Both sides are reported without comment, so it is neither one-sided (A), humorous (B) nor dismissive (C)."
+   }
+  ]
+ }
+}
