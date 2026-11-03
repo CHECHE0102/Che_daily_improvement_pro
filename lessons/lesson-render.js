@@ -169,6 +169,28 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
     throw new Error("unknown slide type " + s.type);
   }
 
+  // caption bubble: long lines get a smaller font so they never spill out of the bubble (CheChe 2026-11-03, L012).
+  // Simulates word wrap with estimated glyph widths; returns null when the normal size already fits.
+  const txtOf = h => String(h).replace(/<[^>]*>/g, "");
+  const capFit = (text, en, zhText) => {
+    const base = en ? 66 : 56, lh = en ? 1.28 : 1.42, inner = 840;
+    const cw = ch => /[\u2e80-\uffff]/.test(ch) ? 1.02 : /[mwMW@]/.test(ch) ? 0.98 : /[A-Z0-9]/.test(ch) ? 0.74 : /[il.,'’!|:;]/.test(ch) ? 0.34 : 0.66;
+    const zhLines = zhText ? Math.ceil([...zhText].reduce((a, ch) => a + cw(ch), 0) * 44 / inner) : 0;
+    // bubble inside is 340px tall; keep name + caption + translation within 316px (12px clear of the border)
+    const room = 316 - 50 - (zhText ? 14 + zhLines * 62 : 0);
+    const lines = px => {
+      let n = 1, x = 0;
+      for (const tok of String(text).match(/[\u2e80-\uffff]|[^\s\u2e80-\uffff]+|\s+/g) || []) {
+        if (/^\s+$/.test(tok)) { x += 0.3 * px; continue; }
+        const w = [...tok].reduce((a, ch) => a + cw(ch), 0) * px;
+        if (x + w > inner && x > 0) { n++; x = w; } else x += w;
+      }
+      return n;
+    };
+    for (let px = base; px >= 34; px -= 2) if (lines(px) * px * lh <= room) return px === base ? null : px;
+    return 34;
+  };
+
   function frame(lesson, si, li, info, opts = {}) {
     const s = lesson.slides[si], ln = s.lines[li], v = ln.v, en = v !== "T";
     const cast = Object.assign({}, CAST, { T: TEACHERS[lesson.teacher] || TEACHERS.cian }, lesson.cast || {});
@@ -212,8 +234,9 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
       txt = captionSpans(cap, times, en);
     }
     const zh = en && ln.zh ? `<div class="zh" style="${an("fade", 0.4, lead + sp * 0.7, "ease")}">${esc(ln.zh)}</div>` : "";
+    const capPx = capFit(ln.countdown ? txtOf(txt) : cap, en, en && ln.zh);
     const bub = `<div class="bub ${side}${en ? " en" : ""}" style="${first || en || info.prevV !== v ? an("pop", 0.45, 0.02) : ""}">`
-      + `<div class="who">${cast[v].icon || ""} ${esc(cast[v].name)}</div><div class="txt">${txt}</div>${zh}</div>`;
+      + `<div class="who">${cast[v].icon || ""} ${esc(cast[v].name)}</div><div class="txt"${capPx ? ` style="font-size:${capPx}px"` : ""}>${txt}</div>${zh}</div>`;
     let extra = "";
     if (ln.countdown && !opts.interactive) {
       const n = Math.round(ln.pause || 3);
