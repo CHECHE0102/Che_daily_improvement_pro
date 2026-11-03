@@ -1,0 +1,203 @@
+{
+ "id": "L023",
+ "title": "If I had known… 與過去相反",
+ "subtitle": "第三條件句・混合條件句",
+ "level": "B2–C1",
+ "kind": "grammar",
+ "date": "2026-11-03",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "早知道就…",
+    "If I had",
+    "known…"
+   ],
+   "emoji": "😩",
+   "lines": [
+    {
+     "v": "T",
+     "say": "早知道就不要錯過那班車！英文要怎麼說？"
+    },
+    {
+     "v": "T",
+     "say": "今天學與過去事實相反的條件句。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "If + had p.p., would have p.p.",
+   "points": [
+    "跟過去事實相反",
+    "If I had left earlier, I'd have caught the bus."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，跟過去事實相反，就用 had 加過去分詞。"
+    },
+    {
+     "v": "A",
+     "say": "You missed the bus again?",
+     "zh": "你又錯過公車了？"
+    },
+    {
+     "v": "B",
+     "say": "If I had left earlier, I'd have caught it.",
+     "zh": "如果我早點出門，就趕上了。"
+    },
+    {
+     "v": "T",
+     "say": "事實是：沒早點出門，也沒趕上。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "should have / could have",
+   "points": [
+    "should have：早該…",
+    "could have：本來可以…"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，表達後悔，常用 should have 和 could have。"
+    },
+    {
+     "v": "A",
+     "say": "I should have booked the tickets sooner.",
+     "zh": "我早該早點訂票的。"
+    },
+    {
+     "v": "B",
+     "say": "You could have asked me to help.",
+     "zh": "你本來可以找我幫忙的。"
+    },
+    {
+     "v": "T",
+     "say": "口語常縮成 should've、could've。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "混合條件句",
+   "points": [
+    "過去的事影響現在",
+    "If I had studied, I'd be a nurse now."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，過去的事影響到現在，就用混合條件句。"
+    },
+    {
+     "v": "A",
+     "say": "If I had taken that job, I'd be living in Cork now.",
+     "zh": "如果當初接那份工作，我現在就住在 Cork 了。"
+    },
+    {
+     "v": "B",
+     "say": "Do you regret it?",
+     "zh": "你後悔嗎？"
+    },
+    {
+     "v": "T",
+     "say": "前半是過去，後半是現在，用 would 加原形。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "If I ___ the email, I'd have replied.",
+   "ask": "要填什麼？",
+   "opts": [
+    "saw",
+    "had seen",
+    "have seen"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：如果我有看到信，我就會回了。"
+    },
+    {
+     "v": "A",
+     "say": "If I blank the email, I'd have replied.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！與過去相反，要用 had seen。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "If I had known…",
+     "與過去相反"
+    ],
+    [
+     "should have",
+     "早該…"
+    ],
+    [
+     "混合條件句",
+     "過去影響現在"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了第三條件句和混合條件句！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

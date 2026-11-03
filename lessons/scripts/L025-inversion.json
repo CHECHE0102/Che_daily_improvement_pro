@@ -1,0 +1,203 @@
+{
+ "id": "L025",
+ "title": "Never have I… 倒裝句",
+ "subtitle": "Not only・Never have I・Hardly had",
+ "level": "C1",
+ "kind": "grammar",
+ "date": "2026-11-03",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "Never have I",
+    "seen",
+    "so much rain!"
+   ],
+   "emoji": "🌀",
+   "lines": [
+    {
+     "v": "T",
+     "say": "Never have I seen 這種句子，為什麼主詞跑到後面？"
+    },
+    {
+     "v": "T",
+     "say": "今天學倒裝句，讓英文聽起來更有力。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "Never have I + p.p.",
+   "points": [
+    "強調「從來沒有」",
+    "Never have I seen so much rain."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，否定詞放句首，助動詞就要跑到主詞前面。"
+    },
+    {
+     "v": "A",
+     "say": "Never have I seen so much rain!",
+     "zh": "我從來沒看過這麼多雨！"
+    },
+    {
+     "v": "B",
+     "say": "Welcome to Ireland!",
+     "zh": "歡迎來到愛爾蘭！"
+    },
+    {
+     "v": "T",
+     "say": "比 I have never seen 更有戲劇效果。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "Not only… but also",
+   "points": [
+    "Not only is it cheap, but it's also close.",
+    "not only 放句首要倒裝"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，Not only 放句首，後面也要倒裝。"
+    },
+    {
+     "v": "A",
+     "say": "Not only is the flat cheap, but it's also close to work.",
+     "zh": "這間公寓不但便宜，離公司也很近。"
+    },
+    {
+     "v": "B",
+     "say": "Take it before someone else does!",
+     "zh": "趁別人還沒搶走，快租下來！"
+    },
+    {
+     "v": "T",
+     "say": "is the flat，be 動詞跑到主詞前面了。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "Hardly had… when",
+   "points": [
+    "一…就…",
+    "Hardly had I arrived when it rained."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，Hardly had 加 when，表示才剛…就…。"
+    },
+    {
+     "v": "A",
+     "say": "Hardly had I sat down when my phone rang.",
+     "zh": "我才剛坐下，手機就響了。"
+    },
+    {
+     "v": "B",
+     "say": "Typical!",
+     "zh": "總是這樣！"
+    },
+    {
+     "v": "T",
+     "say": "寫作或演講時用，會讓你的英文更高級。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Never ___ such a long queue.",
+   "ask": "要填什麼？",
+   "opts": [
+    "I have seen",
+    "have I seen",
+    "I seen"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我從沒看過這麼長的隊伍。"
+    },
+    {
+     "v": "A",
+     "say": "Never blank such a long queue.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！Never 放句首要倒裝：have I seen。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "Never have I…",
+     "從來沒有"
+    ],
+    [
+     "Not only… but also",
+     "不但…而且"
+    ],
+    [
+     "Hardly had… when",
+     "一…就…"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三種倒裝句！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,197 @@
+{
+ "id": "L014",
+ "title": "愛爾蘭人怎麼聊天氣",
+ "subtitle": "lashing・baltic・a grand stretch",
+ "level": "B1–B2",
+ "kind": "phrase",
+ "date": "2026-11-03",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "愛爾蘭人說",
+    "It's lashing",
+    "是在打人嗎？"
+   ],
+   "emoji": "🌧️",
+   "lines": [
+    {
+     "v": "T",
+     "say": "愛爾蘭人最愛聊天氣，但你聽得懂嗎？"
+    },
+    {
+     "v": "T",
+     "say": "今天學三句道地的愛爾蘭天氣用語！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "It's lashing",
+   "meaning": "雨下超大",
+   "img": "scene-rest",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，It's lashing，就是雨下得超級大。"
+    },
+    {
+     "v": "A",
+     "say": "Did you bring a brolly? It's lashing out there.",
+     "zh": "你有帶傘嗎？外面下超大雨。"
+    },
+    {
+     "v": "B",
+     "say": "Ah no, I'll be drowned!",
+     "zh": "啊沒帶，我會淋成落湯雞！"
+    },
+    {
+     "v": "T",
+     "say": "brolly 是雨傘，愛爾蘭和英國常這樣說。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "It's baltic",
+   "meaning": "冷得要命",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，It's baltic，意思是冷到不行。"
+    },
+    {
+     "v": "A",
+     "say": "Close the door, it's baltic in here!",
+     "zh": "把門關上，這裡冷死了！"
+    },
+    {
+     "v": "B",
+     "say": "Sorry, the heating's broken again.",
+     "zh": "抱歉，暖氣又壞了。"
+    },
+    {
+     "v": "T",
+     "say": "baltic 來自很冷的波羅的海，非常形象。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "a grand stretch",
+   "meaning": "白天變長了",
+   "img": "scene-win",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，a grand stretch，是說白天變長了。"
+    },
+    {
+     "v": "A",
+     "say": "There's a grand stretch in the evenings now.",
+     "zh": "現在傍晚天黑得晚多了。"
+    },
+    {
+     "v": "B",
+     "say": "Sure, summer's nearly here.",
+     "zh": "對啊，夏天快到了。"
+    },
+    {
+     "v": "T",
+     "say": "春天的時候，愛爾蘭人超愛說這句！"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "It's baltic today.",
+   "ask": "同事這樣說，今天天氣怎樣？",
+   "opts": [
+    "很熱",
+    "很冷",
+    "下大雨"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！同事一進門就說："
+    },
+    {
+     "v": "A",
+     "say": "It's baltic today.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "今天天氣怎樣？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！baltic，就是冷得要命。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "It's lashing",
+     "雨下超大"
+    ],
+    [
+     "It's baltic",
+     "冷得要命"
+    ],
+    [
+     "a grand stretch",
+     "白天變長"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三句愛爾蘭天氣用語！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,197 @@
+{
+ "id": "L011",
+ "title": "打工必學片語動詞",
+ "subtitle": "run out of・sort out・fill in for",
+ "level": "B1–B2",
+ "kind": "phrase",
+ "date": "2026-11-03",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "上班聽到",
+    "sort it out",
+    "是要分類嗎？"
+   ],
+   "emoji": "🧩",
+   "lines": [
+    {
+     "v": "T",
+     "say": "主管叫你 sort it out，是要你把東西分類嗎？"
+    },
+    {
+     "v": "T",
+     "say": "今天學三個上班天天聽到的片語動詞！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "run out of",
+   "meaning": "用完・沒有了",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，run out of，就是某樣東西用完了。"
+    },
+    {
+     "v": "A",
+     "say": "We've run out of oat milk again.",
+     "zh": "燕麥奶又用完了。"
+    },
+    {
+     "v": "B",
+     "say": "I'll grab some from the storeroom.",
+     "zh": "我去倉庫拿一些。"
+    },
+    {
+     "v": "T",
+     "say": "咖啡店最常聽到！後面直接接用完的東西。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "sort out",
+   "meaning": "處理・搞定",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，sort out，不是分類，是把問題處理好。"
+    },
+    {
+     "v": "A",
+     "say": "The card machine isn't working.",
+     "zh": "刷卡機壞了。"
+    },
+    {
+     "v": "B",
+     "say": "Don't worry, I'll sort it out.",
+     "zh": "別擔心，我來處理。"
+    },
+    {
+     "v": "T",
+     "say": "I'll sort it out，我來搞定，超實用！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "fill in for",
+   "meaning": "幫某人代班・代替",
+   "img": "scene-win",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，fill in for，暫時代替某人的工作。"
+    },
+    {
+     "v": "A",
+     "say": "Could you fill in for Sarah tomorrow?",
+     "zh": "你明天可以幫 Sarah 代班嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Sure, what time does her shift start?",
+     "zh": "好啊，她幾點的班？"
+    },
+    {
+     "v": "T",
+     "say": "跟 cover for 很像，都是代班的意思。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "We've run out of cups.",
+   "ask": "同事這樣說，你該做什麼？",
+   "opts": [
+    "去補杯子",
+    "去洗杯子",
+    "把杯子收起來"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！同事跟你說："
+    },
+    {
+     "v": "A",
+     "say": "We've run out of cups.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "你該做什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！run out of，杯子用完了，快去補貨！",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "run out of",
+     "用完"
+    ],
+    [
+     "sort out",
+     "處理好"
+    ],
+    [
+     "fill in for",
+     "代班"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三個上班必備的片語動詞！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
