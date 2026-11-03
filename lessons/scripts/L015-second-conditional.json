@@ -1,0 +1,203 @@
+{
+ "id": "L015",
+ "title": "If I had… 假設語氣",
+ "subtitle": "第二條件句・would・were",
+ "level": "B1–B2",
+ "kind": "grammar",
+ "date": "2026-11-03",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "如果我中樂透",
+    "If I won",
+    "the Lotto…"
+   ],
+   "emoji": "💭",
+   "lines": [
+    {
+     "v": "T",
+     "say": "如果中了樂透，你會做什麼？英文要怎麼說？"
+    },
+    {
+     "v": "T",
+     "say": "今天學第二條件句，聊不太可能的假設！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "If + 過去式, would + 原形",
+   "points": [
+    "現在或未來不太可能的事",
+    "If I won the Lotto, I'd travel."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，不太可能的假設，If 後面用過去式。"
+    },
+    {
+     "v": "A",
+     "say": "What would you do if you won the Lotto?",
+     "zh": "如果你中樂透，你會做什麼？"
+    },
+    {
+     "v": "B",
+     "say": "If I won the Lotto, I'd travel the world.",
+     "zh": "如果我中樂透，我會環遊世界。"
+    },
+    {
+     "v": "T",
+     "say": "I'd 就是 I would 的縮寫。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "If I were you…",
+   "points": [
+    "給建議的固定說法",
+    "If I were you, I'd ask the manager."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，給別人建議時，常說 If I were you。"
+    },
+    {
+     "v": "A",
+     "say": "My landlord won't fix the heating.",
+     "zh": "我房東不修暖氣。"
+    },
+    {
+     "v": "B",
+     "say": "If I were you, I'd email him today.",
+     "zh": "如果我是你，我今天就寄信給他。"
+    },
+    {
+     "v": "T",
+     "say": "注意！這裡用 were，不是 was。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "第一 vs 第二條件句",
+   "points": [
+    "可能發生：If it rains, I'll stay in.",
+    "不太可能：If I had a car, I'd drive."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，有可能發生的事，就用 will，不用 would。"
+    },
+    {
+     "v": "A",
+     "say": "If it rains tomorrow, I'll stay in.",
+     "zh": "如果明天下雨，我就待在家。"
+    },
+    {
+     "v": "B",
+     "say": "If I had a car, I'd drive to Galway.",
+     "zh": "如果我有車，我就開去 Galway。"
+    },
+    {
+     "v": "T",
+     "say": "差別在於：你覺得這件事有多可能發生。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "If I ___ you, I'd take the job.",
+   "ask": "要填什麼？",
+   "opts": [
+    "am",
+    "were",
+    "will be"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：如果我是你，我會接這份工作。"
+    },
+    {
+     "v": "A",
+     "say": "If I blank you, I'd take the job.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！If I were you，固定用 were。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "If + 過去式",
+     "不太可能的假設"
+    ],
+    [
+     "If I were you",
+     "給建議"
+    ],
+    [
+     "will / would",
+     "看可能性"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了第二條件句！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

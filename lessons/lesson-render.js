@@ -35,7 +35,8 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
 .opt{width:100%;margin-top:24px;border-radius:28px;padding:26px 40px;font-size:56px;font-weight:800;text-align:left;background:#ffffff1c;border:5px solid transparent}
 .opt.ok{background:#f0be45;color:#1d2a26;border-color:#fff}
 .card{width:100%;display:flex;align-items:center;gap:36px;background:#ffffff1c;border-radius:30px;padding:28px 44px;margin-top:26px}
-.card b{font-size:84px;font-weight:800;color:#f0be45;min-width:330px;text-align:left}
+.card b{font-size:84px;font-weight:800;color:#f0be45;min-width:330px;text-align:left;white-space:nowrap;flex:none}
+.card span{flex:1}
 .card span{font-size:52px;font-weight:700}
 .cta{margin-top:40px;background:#fff;color:#1c6a55;border-radius:999px;padding:22px 60px;font-size:54px;font-weight:900}
 .cd{position:absolute;left:50%;top:820px;width:380px;height:380px;margin-left:-190px;border-radius:50%;background:#f0be45;color:#1d2a26;
@@ -160,7 +161,7 @@ body{width:1080px;height:1920px;overflow:hidden;position:relative;color:#fff;
           + `<div class="ask" style="${E("up", 0.8)}">${esc(s.ask)}</div>${os}`;
       }
       case "recap": {
-        const cards = s.items.map(([a, b], i) => `<div class="card" style="${E("fromR", 0.3 + i * 0.45)}"><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join("");
+        const cards = s.items.map(([a, b], i) => `<div class="card" style="${E("fromR", 0.3 + i * 0.45)}"><b style="font-size:${fit(String(a).replace(/ /g, "i"), 84, 500)}px">${esc(a)}</b><span>${esc(b)}</span></div>`).join("");
         const cta = ln.end ? `<div class="cta" style="${an("pop", 0.7, 0.5)}"><div style="${an("pulse", 0.9, 1.2, "ease", "infinite")}">${esc(opts.cta || "📲 打開 BinBin 一起練習")}</div></div>` : "";
         return `<div class="kicker" style="${E("up", 0.1)}">✅ 今天學會了</div>${cards}` + (cta || circle(340, 1.8, "margin-top:40px;"));
       }

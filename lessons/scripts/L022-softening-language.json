@@ -1,0 +1,197 @@
+{
+ "id": "L022",
+ "title": "說話不要太直接",
+ "subtitle": "I'd say・It might be worth・To be fair",
+ "level": "B2–C1",
+ "kind": "phrase",
+ "date": "2026-11-03",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "英文說話",
+    "太直接",
+    "會得罪人嗎？"
+   ],
+   "emoji": "🎩",
+   "lines": [
+    {
+     "v": "T",
+     "say": "英文說得太直接，有時候會讓人不舒服。"
+    },
+    {
+     "v": "T",
+     "say": "今天學三個讓你說話更圓融的表達。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "I'd say…",
+   "meaning": "我覺得大概…",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，I'd say，讓你的意見聽起來不那麼武斷。"
+    },
+    {
+     "v": "A",
+     "say": "How long will the repair take?",
+     "zh": "修理要多久？"
+    },
+    {
+     "v": "B",
+     "say": "I'd say about two hours.",
+     "zh": "我覺得大概兩個小時。"
+    },
+    {
+     "v": "T",
+     "say": "比直接說 two hours，更有彈性。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "It might be worth…",
+   "meaning": "或許值得…",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，It might be worth，用來委婉地給建議。"
+    },
+    {
+     "v": "A",
+     "say": "The customer is still unhappy.",
+     "zh": "客人還是不滿意。"
+    },
+    {
+     "v": "B",
+     "say": "It might be worth offering a discount.",
+     "zh": "或許可以給個折扣。"
+    },
+    {
+     "v": "T",
+     "say": "後面接動詞 ing，聽起來不像在命令別人。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "To be fair…",
+   "meaning": "說句公道話",
+   "img": "scene-rest",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，To be fair，愛爾蘭人超愛用，表示說句公道話。"
+    },
+    {
+     "v": "A",
+     "say": "The new guy is so slow.",
+     "zh": "新來的那個好慢。"
+    },
+    {
+     "v": "B",
+     "say": "To be fair, it's only his second day.",
+     "zh": "說句公道話，他才第二天上班。"
+    },
+    {
+     "v": "T",
+     "say": "用來幫別人說話，或補充另一個角度。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "It might be worth calling them.",
+   "ask": "同事這樣說，語氣是？",
+   "opts": [
+    "命令你打電話",
+    "委婉建議你打",
+    "說不用打"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！同事跟你說："
+    },
+    {
+     "v": "A",
+     "say": "It might be worth calling them.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "語氣是什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！It might be worth，是委婉的建議。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "I'd say…",
+     "我覺得大概"
+    ],
+    [
+     "It might be worth…",
+     "或許值得"
+    ],
+    [
+     "To be fair…",
+     "說句公道話"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三個讓說話更圓融的表達！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

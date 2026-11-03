@@ -1,0 +1,197 @@
+{
+ "id": "L021",
+ "title": "職場慣用語",
+ "subtitle": "on the same page・touch base・drop the ball",
+ "level": "B2–C1",
+ "kind": "phrase",
+ "date": "2026-11-03",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "開會時老闆說",
+    "drop the ball",
+    "是要丟球嗎？"
+   ],
+   "emoji": "🏀",
+   "lines": [
+    {
+     "v": "T",
+     "say": "開會時聽到 drop the ball，難道是在打球？"
+    },
+    {
+     "v": "T",
+     "say": "今天學三個職場上超常見的慣用語。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "on the same page",
+   "meaning": "想法一致",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，on the same page，意思是大家想法一致。"
+    },
+    {
+     "v": "A",
+     "say": "Before we start, are we all on the same page?",
+     "zh": "開始之前，大家的想法都一致嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I think so. The deadline is Friday, right?",
+     "zh": "應該是，截止日是週五對吧？"
+    },
+    {
+     "v": "T",
+     "say": "開會前後最常聽到，確認大家有共識。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "touch base",
+   "meaning": "簡單聯絡一下",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，touch base，就是簡單聯絡、確認一下進度。"
+    },
+    {
+     "v": "A",
+     "say": "Let's touch base next week about the menu.",
+     "zh": "我們下週再聯絡一下菜單的事。"
+    },
+    {
+     "v": "B",
+     "say": "Sounds good. I'll send you a message.",
+     "zh": "好，我再傳訊息給你。"
+    },
+    {
+     "v": "T",
+     "say": "touch base with someone，跟某人聯絡一下。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "drop the ball",
+   "meaning": "出包・疏忽",
+   "img": "scene-rest",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，drop the ball，是出包、把事情搞砸。"
+    },
+    {
+     "v": "A",
+     "say": "Who forgot to order the bread?",
+     "zh": "誰忘了訂麵包？"
+    },
+    {
+     "v": "B",
+     "say": "Sorry, I dropped the ball on that one.",
+     "zh": "抱歉，那件事是我疏忽了。"
+    },
+    {
+     "v": "T",
+     "say": "主動承認 I dropped the ball，反而顯得負責。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Let's touch base on Monday.",
+   "ask": "主管這樣說，意思是？",
+   "opts": [
+    "週一放假",
+    "週一再聯絡",
+    "週一要開除你"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！主管跟你說："
+    },
+    {
+     "v": "A",
+     "say": "Let's touch base on Monday.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "是什麼意思？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！touch base，週一再聯絡確認一下。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "on the same page",
+     "想法一致"
+    ],
+    [
+     "touch base",
+     "聯絡一下"
+    ],
+    [
+     "drop the ball",
+     "出包"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三個職場慣用語！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

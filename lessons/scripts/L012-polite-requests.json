@@ -1,0 +1,197 @@
+{
+ "id": "L012",
+ "title": "客氣地拜託別人",
+ "subtitle": "I was wondering if・Would you mind・Any chance",
+ "level": "B1–B2",
+ "kind": "phrase",
+ "date": "2026-11-03",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "想請人幫忙",
+    "Can you…?",
+    "太直接了嗎？"
+   ],
+   "emoji": "🙏",
+   "lines": [
+    {
+     "v": "T",
+     "say": "想拜託別人，只會說 Can you 嗎？"
+    },
+    {
+     "v": "T",
+     "say": "今天學三種更客氣、更像母語人士的說法！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "I was wondering if…",
+   "meaning": "不知道能不能…",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，I was wondering if，聽起來非常客氣。"
+    },
+    {
+     "v": "A",
+     "say": "I was wondering if I could leave early today.",
+     "zh": "不知道我今天能不能早點下班？"
+    },
+    {
+     "v": "B",
+     "say": "That should be grand. Just let me know.",
+     "zh": "應該沒問題，跟我說一聲就好。"
+    },
+    {
+     "v": "T",
+     "say": "雖然用過去式，但其實是在問現在的事喔。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "Would you mind…?",
+   "meaning": "你介意…嗎？",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，Would you mind，後面要接動詞 ing。"
+    },
+    {
+     "v": "A",
+     "say": "Would you mind closing the window?",
+     "zh": "你介意把窗戶關起來嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Not at all.",
+     "zh": "一點也不介意。"
+    },
+    {
+     "v": "T",
+     "say": "注意！回答 Not at all，意思是不介意，可以。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "Is there any chance…?",
+   "meaning": "有沒有可能…？",
+   "img": "scene-rest",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，Is there any chance，適合比較難開口的請求。"
+    },
+    {
+     "v": "A",
+     "say": "Is there any chance I could swap my Monday shift?",
+     "zh": "我週一的班有沒有可能換掉？"
+    },
+    {
+     "v": "B",
+     "say": "I'll have a look at the rota.",
+     "zh": "我看一下班表。"
+    },
+    {
+     "v": "T",
+     "say": "口語也常縮短成 Any chance，更輕鬆。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Would you mind helping me?",
+   "ask": "對方回 Not at all，意思是？",
+   "opts": [
+    "不幫你",
+    "願意幫你",
+    "不知道"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！你問同事："
+    },
+    {
+     "v": "A",
+     "say": "Would you mind helping me?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "他回答 Not at all，是什麼意思？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！Not at all，就是不介意，願意幫你。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "I was wondering if…",
+     "不知道能不能…"
+    ],
+    [
+     "Would you mind…?",
+     "你介意…嗎？"
+    ],
+    [
+     "Any chance…?",
+     "有沒有可能…？"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三種客氣的拜託說法！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,197 @@
+{
+ "id": "L024",
+ "title": "談條件不吃虧",
+ "subtitle": "a bit steep・any flexibility・meet halfway",
+ "level": "B2–C1",
+ "kind": "phrase",
+ "date": "2026-11-03",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "房租太貴？",
+    "Is there any",
+    "flexibility?"
+   ],
+   "emoji": "🤝",
+   "lines": [
+    {
+     "v": "T",
+     "say": "房租或薪水想談一談，卻不知道怎麼開口？"
+    },
+    {
+     "v": "T",
+     "say": "今天學三個談條件不失禮的說法。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "That's a bit steep",
+   "meaning": "有點貴",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，That's a bit steep，委婉地說價格有點高。"
+    },
+    {
+     "v": "A",
+     "say": "The rent is fourteen hundred a month.",
+     "zh": "房租一個月一千四。"
+    },
+    {
+     "v": "B",
+     "say": "Hmm, that's a bit steep for one room.",
+     "zh": "嗯，一個房間這樣有點貴。"
+    },
+    {
+     "v": "T",
+     "say": "steep 原本是陡峭，用在價格就是太高。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "Is there any flexibility on…?",
+   "meaning": "…有彈性嗎？",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，Is there any flexibility，問條件能不能調整。"
+    },
+    {
+     "v": "A",
+     "say": "Is there any flexibility on the start date?",
+     "zh": "開始日期有彈性嗎？"
+    },
+    {
+     "v": "B",
+     "say": "We could push it back a week.",
+     "zh": "我們可以延後一週。"
+    },
+    {
+     "v": "T",
+     "say": "on 後面接你想談的東西：價格、時間、薪水。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "meet halfway",
+   "meaning": "各退一步",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，meet halfway，雙方各退一步。"
+    },
+    {
+     "v": "A",
+     "say": "Could we meet halfway on the deposit?",
+     "zh": "押金我們能各退一步嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Fair enough. Let's say one month instead of two.",
+     "zh": "好吧，那就收一個月，不收兩個月。"
+    },
+    {
+     "v": "T",
+     "say": "Fair enough，就是好吧、合理，很常用。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Could we meet halfway?",
+   "ask": "對方這樣說，意思是？",
+   "opts": [
+    "約在中間見面",
+    "各退一步",
+    "一半的人會來"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！房東跟你說："
+    },
+    {
+     "v": "A",
+     "say": "Could we meet halfway?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "是什麼意思？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！meet halfway，就是雙方各退一步。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "a bit steep",
+     "有點貴"
+    ],
+    [
+     "any flexibility on…?",
+     "有彈性嗎"
+    ],
+    [
+     "meet halfway",
+     "各退一步"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三個談條件的說法！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

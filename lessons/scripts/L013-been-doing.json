@@ -1,0 +1,203 @@
+{
+ "id": "L013",
+ "title": "I've been working… 現在完成進行式",
+ "subtitle": "for・since・一直在做",
+ "level": "B1–B2",
+ "kind": "grammar",
+ "date": "2026-11-03",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "你在這裡多久了？",
+    "I've been",
+    "working here…"
+   ],
+   "emoji": "⏳",
+   "lines": [
+    {
+     "v": "T",
+     "say": "別人問你在這裡工作多久，要怎麼說？"
+    },
+    {
+     "v": "T",
+     "say": "今天搞懂現在完成進行式！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "have been + V-ing",
+   "points": [
+    "從過去一直做到現在",
+    "I've been working here for a year."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，從以前一直做到現在，就用 have been 加 ing。"
+    },
+    {
+     "v": "A",
+     "say": "How long have you been working here?",
+     "zh": "你在這裡工作多久了？"
+    },
+    {
+     "v": "B",
+     "say": "I've been working here for a year.",
+     "zh": "我在這裡工作一年了。"
+    },
+    {
+     "v": "T",
+     "say": "強調一直持續，到現在還在做。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "for 和 since",
+   "points": [
+    "for + 一段時間：for two months",
+    "since + 起點：since March"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，for 接一段時間，since 接開始的時間點。"
+    },
+    {
+     "v": "A",
+     "say": "I've been living in Dublin since March.",
+     "zh": "我從三月就住在都柏林。"
+    },
+    {
+     "v": "B",
+     "say": "And I've been here for two months.",
+     "zh": "我在這裡兩個月了。"
+    },
+    {
+     "v": "T",
+     "say": "since March，從三月開始；for two months，兩個月。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "剛做完的痕跡",
+   "points": [
+    "You look tired!",
+    "I've been running."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，看到剛剛做事留下的痕跡，也能用它。"
+    },
+    {
+     "v": "A",
+     "say": "You're all wet! What happened?",
+     "zh": "你全身濕透了！怎麼了？"
+    },
+    {
+     "v": "B",
+     "say": "I've been walking in the rain.",
+     "zh": "我剛剛一直在雨中走路。"
+    },
+    {
+     "v": "T",
+     "say": "在愛爾蘭，這句你一定用得到！"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "I've been learning English ___ 2024.",
+   "ask": "要填 for 還是 since？",
+   "opts": [
+    "for",
+    "since",
+    "from"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我從 2024 年開始學英文。"
+    },
+    {
+     "v": "A",
+     "say": "I've been learning English blank 2024.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！2024 是開始的時間點，要用 since。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "have been + V-ing",
+     "一直在做"
+    ],
+    [
+     "for",
+     "一段時間"
+    ],
+    [
+     "since",
+     "從某時開始"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了現在完成進行式！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
