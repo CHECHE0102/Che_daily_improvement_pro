@@ -1237,6 +1237,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 @keyframes aurora{0%{transform:skewX(-12deg) scaleY(.88)}100%{transform:skewX(12deg) scaleY(1.08)}}
 @keyframes aurora2{0%{transform:translateX(-6%) skewX(8deg);opacity:.5}100%{transform:translateX(6%) skewX(-8deg);opacity:.95}}
 .cos-back.cb-b-sun{width:104%}
+.cos-ic .cos-back.cb-b-sun{width:auto;inset:4px}
 .cos-back.cb-b-sun .rays{position:absolute;inset:-4%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,214,90,.95) 0 3deg,transparent 3deg 15deg);-webkit-mask:radial-gradient(closest-side,transparent 40%,#000 50% 72%,transparent 100%);mask:radial-gradient(closest-side,transparent 40%,#000 50% 72%,transparent 100%);filter:drop-shadow(0 0 6px #FFB300);animation:cosspin 16s linear infinite}
 .cos-back.cb-b-sun .rays.r2{inset:6%;background:repeating-conic-gradient(from 7deg,rgba(255,140,40,.9) 0 2deg,transparent 2deg 10deg);animation-duration:10s;animation-direction:reverse}
 .cos-back.cb-b-sun .core{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,250,220,.95),rgba(255,200,60,.7) 55%,rgba(255,140,30,0));animation:cospulse 2.2s ease-in-out infinite}
@@ -3796,7 +3797,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.23";
+const APP_VERSION="2026.11.24";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
