@@ -2886,9 +2886,9 @@ function renameOpen(step){ let el=document.getElementById("renameAsk"); if(el) e
       if(g.nick&&n===g.nick) return toast(T("rnSame")); if(CLOUD.fb&&!CLOUD.user) return toast(T("nickLogin")); return renameOpen({n}); }
     if(k==="yes"){ b.disabled=true; const r=await nickClaim(nm); if(r===false){ b.disabled=false; return renameOpen({draft:nm}); } el.remove(); render(); } }); }
 function askBuy(o, yes){ let el=document.getElementById("buyAsk"); if(el) el.remove(); el=document.createElement("div"); el.id="buyAsk";
-  el.innerHTML=`<div class="scrim pd-scrim" data-buyask="no"></div><div class="pd-card ba-card" role="dialog" aria-modal="true">${o.pic||""}<h3 style="margin:0">${T("buyAskQ")}</h3><b class="ba-name">${esc(o.name)}</b>
-    <div class="ba-rows"><span>${T("buyAskCost")}</span><b>${o.cur} ${o.cost.toLocaleString()}</b><span>${T("buyAskLeft")}</span><b>${o.cur} ${(o.have-o.cost).toLocaleString()}</b></div>
-    ${o.note?`<p class="muted sm-t" style="margin:0">${o.note}</p>`:""}<div class="row" style="justify-content:center"><button class="btn ghost" data-buyask="no">${T("buyAskNo")}</button><button class="btn" data-buyask="yes">${T("buyAskYes")}</button></div></div>`;
+  el.innerHTML=`<div class="scrim pd-scrim" data-buyask="no"></div><div class="pd-card ba-card" role="dialog" aria-modal="true">${o.pic||""}<h3 style="margin:0">${o.q||T("buyAskQ")}</h3><b class="ba-name">${esc(o.name)}</b>
+    <div class="ba-rows"><span>${o.costL||T("buyAskCost")}</span><b>${o.cur} ${o.cost.toLocaleString()}</b><span>${o.leftL||T("buyAskLeft")}</span><b>${o.cur} ${(o.have-o.cost).toLocaleString()}</b></div>
+    ${o.note?`<p class="muted sm-t" style="margin:0">${o.note}</p>`:""}<div class="row" style="justify-content:center"><button class="btn ghost" data-buyask="no">${T("buyAskNo")}</button><button class="btn" data-buyask="yes">${o.yes||T("buyAskYes")}</button></div></div>`;
   document.body.appendChild(el);
   el.addEventListener("click",e=>{ const b=e.target.closest("[data-buyask]"); if(!b) return; e.stopPropagation(); el.remove(); if(b.dataset.buyask==="yes") yes(); }); }
 function buy(id, sure){
@@ -3315,9 +3315,10 @@ function wheelSvg(){
       <g transform="rotate(${(i+.5)*step})"><text y="-66" class="wh-big">${esc(big)}</text><text y="-50" class="wh-small">${esc(small)}</text></g>`; }).join("");
   return `<svg viewBox="-104 -104 208 208" aria-hidden="true">${segs}<circle r="102" fill="none" stroke="var(--ink)" stroke-width="3"/><circle r="16" fill="var(--card)" stroke="var(--ink)" stroke-width="3"/></svg>`;
 }
-function spinWheel(){
+function spinWheel(sure){
   if(S.wheelBusy) return;
   const g=game(); if((g.lotto||0)<1) return toast(T("noLotto"));
+  if(!sure) return askBuy({q:T("wheelAskQ"), yes:T("wheelAskYes"), name:T("wheelTitle"), costL:T("spendL"), leftL:T("spendLeft"), cost:1, have:g.lotto, cur:"🍀"}, ()=>spinWheel(true));
   g.lotto--; const W=LUCK.wheel, N=W.length, step=360/N;
   const i=wpick(W.map((_,k)=>k), k=>W[k].w);
   const res=applyPrize(W[i]); saveGame();
@@ -3334,11 +3335,13 @@ function spinWheel(){
 
 /* ----- scratch cards ----- */
 function exLeft(){ const g=game(); return g.exDate===today()?Math.max(0,LUCK.goldLotto.perDay-(g.exN||0)):LUCK.goldLotto.perDay; }
-function goldToLotto(){ const g=game(), c=LUCK.goldLotto.price; if(exLeft()<1) return toast(T("exNone")); if(g.gold<c) return toast(T("noGold",{n:c-g.gold}));
+function goldToLotto(sure){ const g=game(), c=LUCK.goldLotto.price; if(exLeft()<1) return toast(T("exNone")); if(g.gold<c) return toast(T("noGold",{n:c-g.gold}));
+  if(!sure) return askBuy({q:T("exAskQ"), yes:T("exAskYes"), name:"🍀 "+T("lotto")+" ×1", cost:c, have:g.gold, cur:"🪙"}, ()=>goldToLotto(true));
   if(g.exDate!==today()){ g.exDate=today(); g.exN=0; } g.exN++; g.gold-=c; g.lotto=(g.lotto||0)+1; sfx("coin"); saveGame(); toast(T("exDone")); render(); }
-function buyScratch(id){
+function buyScratch(id,sure){
   const c=LUCK.scratch.find(x=>x.id===id); if(!c) return;
   const g=game(); if((g.lotto||0)<c.cost) return toast(T("noLotto"));
+  if(!sure) return askBuy({name:scName(id), cost:c.cost, have:g.lotto, cur:"🍀"}, ()=>buyScratch(id,true));
   g.lotto-=c.cost;
   const tier=wpick([0,1,2,3], t=>c.odds[t]||0), n=Math.random()*100<c.double?2:1, el=randEl();
   addShard(el,tier,n); saveGame();
@@ -3864,28 +3867,36 @@ function voiceCard(){
     <label class="vrow"><span>${T("ieVoiceM")}</span><select id="ieVoiceM" class="search">${opt(V.M)}</select><button class="btn ghost sm" data-act="ievtry" data-k="M">${T("ieVoiceTry")}</button></label>`:`<p class="muted sm-t">${T("ieVoiceNone")}</p>`}
     <p class="muted sm-t">${T("ieVoiceHint")}</p></section>`;
 }
-function iePlay(pi){
+/* A recording that started but never reached its end (page refreshed, app closed, left the screen) can be
+   continued from the line where it stopped. R.prog[k] = next line to play, or "done" when it finished. */
+function ieCutAt(R,k,playing){ const p=R.prog&&R.prog[k]; return R.played[k]===true&&typeof p==="number"&&!playing?p:null; }
+function ieProg(R,k,v){ R.prog=R.prog||{}; R.prog[k]=v; saveGame(); }
+function ieContHtml(at,act,k,n){ return `<div class="ie-audio"><button class="btn sm" data-act="${act}" data-k="${k}">${T("ieCont",{i:Math.min(at+1,n)})}</button><span class="muted sm-t">${T("ieCut")}</span></div>`; }
+function iePlay(pi,cont){
   const R=game().ieltsRun; if(!R) return; const t=ieFind(R.test), part=t.listening[pi];
-  if(R.ranked&&R.played[pi]) return;
+  const cut=ieCutAt(R,pi,S.iePlaying&&S.iePlaying.pi===pi);
+  if(cont&&cut==null) return;
+  if(R.ranked&&R.played[pi]&&!cont) return;
+  const from=cont?cut:0;
   const rec=(IE_AUDIO.tests||{})[t.id], files=rec&&rec.parts&&rec.parts[pi];
-  if(files&&files.length===part.script.length) return iePlayRec(pi, part, files);
+  if(files&&files.length===part.script.length) return iePlayRec(pi, part, files, from);
   if(!window.speechSynthesis){ R.played[pi]="nots"; saveGame(); return render(); }
-  speechSynthesis.cancel(); const V=ieVoices(); const lines=part.script; let i=0;
-  R.played[pi]=true; saveGame(); S.iePlaying={pi,i:0,n:lines.length}; render();
-  const next=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; if(i>=lines.length){ S.iePlaying=null; render(); return; }
+  speechSynthesis.cancel(); const V=ieVoices(); const lines=part.script; let i=from;
+  R.played[pi]=true; ieProg(R,pi,i); S.iePlaying={pi,i,n:lines.length}; render();
+  const next=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; if(i>=lines.length){ ieProg(R,pi,"done"); S.iePlaying=null; render(); return; }
     const [sp,text]=lines[i];
-    ieSay(text, V[sp]||V.F, sp, V.same, ()=>{ i++; S.iePlaying&&(S.iePlaying.i=i); const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,lines.length),n:lines.length}); setTimeout(next,450); }); };
+    ieSay(text, V[sp]||V.F, sp, V.same, ()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; i++; S.iePlaying.i=i; ieProg(R,pi,i); const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,lines.length),n:lines.length}); setTimeout(next,450); }); };
   next();
 }
-function iePlayRec(pi, part, files){
+function iePlayRec(pi, part, files, from){
   const R=game().ieltsRun; ieStopAudio();
   const au=S.ieAudioEl||(S.ieAudioEl=new Audio()); au.preload="auto";
   const pre=new Audio(); pre.preload="auto";
-  let i=0; R.played[pi]=true; saveGame(); S.iePlaying={pi,i:0,n:files.length,rec:true}; render();
+  let i=from||0; R.played[pi]=true; ieProg(R,pi,i); S.iePlaying={pi,i,n:files.length,rec:true}; render();
   const url=k=>"ielts/audio/"+k+".mp3";
   const fallback=()=>{ const V=ieVoices(), [sp,text]=part.script[i]; if(window.speechSynthesis) ieSay(text, V[sp]||V.F, sp, V.same, step); else step(); };
-  const step=()=>{ i++; if(S.iePlaying) S.iePlaying.i=i; const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,files.length),n:files.length}); setTimeout(next,120); };
-  const next=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; if(i>=files.length){ S.iePlaying=null; render(); return; }
+  const step=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; i++; S.iePlaying.i=i; ieProg(R,pi,i); const el=document.getElementById("iePlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,files.length),n:files.length}); setTimeout(next,120); };
+  const next=()=>{ if(!S.iePlaying||S.iePlaying.pi!==pi) return; if(i>=files.length){ ieProg(R,pi,"done"); S.iePlaying=null; render(); return; }
     au.onended=step; au.onerror=fallback; au.src=url(files[i]); const pr=au.play(); if(pr&&pr.catch) pr.catch(fallback);
     if(files[i+1]) pre.src=url(files[i+1]); };
   next();
@@ -3911,6 +3922,7 @@ function ieSectionHtml(t,R,review){
     const p=t.listening[tab], pi=tab, played=R.played[pi], playing=S.iePlaying&&S.iePlaying.pi===pi;
     const noTTS=!window.speechSynthesis||played==="nots";
     const audio=review||noTTS?"":playing?`<div class="ie-audio playing"><span class="eq"><i></i><i></i><i></i></span><span id="iePlayState">${T("iePlaying",{i:S.iePlaying.i+1,n:p.script.length})}</span></div>`
+      :ieCutAt(R,pi,false)!=null?ieContHtml(ieCutAt(R,pi,false),"ieplaycont",pi,p.script.length)
       :played&&R.ranked?`<div class="ie-audio done">✓ ${T("iePlayed")}</div>`
       :`<div class="ie-audio"><button class="btn" data-act="ieplay" data-k="${pi}">${played?T("ieReplay"):T("iePlay")}</button>${R.ranked?`<span class="muted sm-t">${T("iePlayOnce")}</span>`:""}</div>`;
     const script=(review||noTTS)?`<details class="ie-script"${noTTS&&!review?" open":""}><summary>${T("ieScript")}</summary>${noTTS&&!review?`<p class="muted sm-t">${T("ieNoTTS")}</p>`:""}${p.script.map(([sp,x])=>`<p><b>${sp==="F"?"♀":"♂"}</b> ${esc(x)}</p>`).join("")}</details>`:"";
@@ -4131,6 +4143,7 @@ document.addEventListener("click", e=>{
   if(a==="ieexit2"){ S.ieExitAsk=false; ieStopAudio(); clearInterval(S.ieTimer); game().ieltsRun=null; saveGame(); S.view="adv"; S.tab="adv"; S.advTab="coop"; S.compMode="ielts"; render(); window.scrollTo(0,0); return; }
   if(a==="ievtry"){ const V=ieVoices(), sp=t.dataset.k; try{ speechSynthesis.cancel(); }catch(e){} ieSay(sp==="F"?"Good morning. Welcome to the listening test. Please listen carefully.":"Hello there. I'd like to book a place on the evening course, please.", V[sp], sp, V.same, ()=>{}); return; }
   if(a==="ieplay") return iePlay(+t.dataset.k);
+  if(a==="ieplaycont") return iePlay(+t.dataset.k,true);
   if(a==="iesubmit"){ if(!S.ieConfirm){ S.ieConfirm=true; return render(); } S.ieConfirm=false; return ieSubmit(); }
   if(a==="ieback"){ S.ieResult=null; S.view="adv"; S.tab="adv"; S.advTab="coop"; S.compMode="ielts"; IE_TOP=null; render(); window.scrollTo(0,0); return; }
   if(a==="fbtype"){ S.fbDraft=($("#fbText")||{}).value||S.fbDraft; S.fbContactV=($("#fbContact")||{}).value||S.fbContactV; S.fbType=t.dataset.k; return render(); }
@@ -6947,17 +6960,19 @@ async function toStart(id, ranked){
 }
 function toTick(){ clearInterval(S.toTimer); S.toTimer=setInterval(()=>{ const R=game().toeicRun; if(!R||S.view!=="toeic"){ clearInterval(S.toTimer); return; } const left=toLeft(); const el=document.getElementById("toClock"); if(el){ el.textContent=`${Math.floor(left/60)}:${String(left%60).padStart(2,"0")}`; el.classList.toggle("low",left<120); } if(left<=0){ clearInterval(S.toTimer); toast(T("ieTimeUp")); toSubmit(); } },1000); }
 /* audio: recorded files (toeic/audio) line by line, otherwise the phone's own voices */
-function toPlay(gi){
+function toPlay(gi,cont){
   const R=game().toeicRun; if(!R) return; const t=toFind(R.test), grp=t.listening[gi];
-  if(R.ranked&&R.played[gi]) return; ieStopAudio();
+  const cut=ieCutAt(R,gi,S.toPlaying&&S.toPlaying.gi===gi);
+  if(cont&&cut==null) return;
+  if(R.ranked&&R.played[gi]&&!cont) return; ieStopAudio();
   const rec=(TO_AUDIO.tests||{})[t.id], files=rec&&rec.parts&&rec.parts[gi];
-  const lines=grp.script; let i=0; R.played[gi]=true; saveGame(); S.toPlaying={gi,i:0,n:lines.length}; render();
+  const lines=grp.script; let i=cont?cut:0; R.played[gi]=true; ieProg(R,gi,i); S.toPlaying={gi,i,n:lines.length}; render();
   const V=window.speechSynthesis?ieVoices():{};
   const au=S.ieAudioEl||(S.ieAudioEl=new Audio()); au.preload="auto";
   const upd=()=>{ const el=document.getElementById("toPlayState"); if(el) el.textContent=T("iePlaying",{i:Math.min(i+1,lines.length),n:lines.length}); };
-  const step=()=>{ i++; if(S.toPlaying) S.toPlaying.i=i; upd(); setTimeout(next,grp.part===2?400:120); };
+  const step=()=>{ if(!S.toPlaying||S.toPlaying.gi!==gi) return; i++; S.toPlaying.i=i; ieProg(R,gi,i); upd(); setTimeout(next,grp.part===2?400:120); };
   const tts=()=>{ const [sp,text]=lines[i]; if(window.speechSynthesis) ieSay(text, V[sp]||V.F, sp, V.same, step); else step(); };
-  const next=()=>{ if(!S.toPlaying||S.toPlaying.gi!==gi) return; if(i>=lines.length){ S.toPlaying=null; render(); return; }
+  const next=()=>{ if(!S.toPlaying||S.toPlaying.gi!==gi) return; if(i>=lines.length){ ieProg(R,gi,"done"); S.toPlaying=null; render(); return; }
     if(files&&files.length===lines.length){ au.onended=step; au.onerror=tts; au.src="toeic/audio/"+files[i]+".mp3"; const p=au.play(); if(p&&p.catch) p.catch(tts); } else tts(); };
   next();
 }
@@ -6975,6 +6990,7 @@ function toAudioHtml(gi, grp, R, review){
   if(review) return "";
   const played=R.played[gi], playing=S.toPlaying&&S.toPlaying.gi===gi;
   if(playing) return `<div class="ie-audio playing"><span class="eq"><i></i><i></i><i></i></span><span id="toPlayState">${T("iePlaying",{i:S.toPlaying.i+1,n:grp.script.length})}</span></div>`;
+  const cut=ieCutAt(R,gi,false); if(cut!=null) return ieContHtml(cut,"toplaycont",gi,grp.script.length);
   if(played&&R.ranked) return `<div class="ie-audio done">✓ ${T("iePlayed")}</div>`;
   return `<div class="ie-audio"><button class="btn sm" data-act="toplay" data-k="${gi}">${played?T("ieReplay"):T("iePlay")}</button></div>`;
 }
@@ -7080,7 +7096,7 @@ async function lsnOpen(id){
   try{
     const [lesson,aud]=await Promise.all([fetch("lessons/scripts/"+meta.file,{cache:"no-cache"}).then(r=>r.json()),
       fetch("lessons/audio/"+id+"/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{lines:{}}).catch(()=>({lines:{}})), lsnScript("lessons/lesson-render.js?v="+APP_VERSION)]);
-    if(!LSN.on||LSN.id!==id) return;
+    if(!LSN.on||LSN.id!==id||LSN.ov!==ov) return;
     LSN.lesson=lesson; LSN.lines=[]; let n=0, t=0;
     lesson.slides.forEach((s,si)=>s.lines.forEach((ln,li)=>{ const a=aud.lines[String(n)];
       const speech=a?a.d:(ln.say&&!ln.pause?Math.max(1.2,[...ln.say].length*(ln.v==="T"?0.2:0.07)):0);
@@ -7091,15 +7107,16 @@ async function lsnOpen(id){
     doc.addEventListener("click",e=>{ const b=e.target.closest(".tap"); if(b) lsnPick(+b.dataset.i); });
     lsnShow(0,false);
     ov.querySelector(".lsn-cover").innerHTML=`<button class="lsn-big" data-lsn="play">▶</button><p>${T("lsnTapStart")}</p>`;
-  }catch(e){ console.warn("lesson",e); const c=ov.querySelector(".lsn-cover"); if(c) c.innerHTML=`<p>⚠️ ${T("lsnErr")}</p>`; }
+  }catch(e){ if(LSN.ov!==ov||!LSN.on) return; console.warn("lesson",e); const c=ov.querySelector(".lsn-cover"); if(c) c.innerHTML=`<p>⚠️ ${T("lsnErr")}</p>`; }
 }
 function lsnFit(){ const ov=document.getElementById("lsnOv"); if(!ov) return; const box=ov.querySelector(".lsn-box"), fit=ov.querySelector(".lsn-fit");
   const s=Math.min(box.clientWidth/1080, box.clientHeight/1920); fit.style.transform=`scale(${s})`; fit.style.width="1080px"; fit.style.height="1920px";
   fit.style.left=Math.round((box.clientWidth-1080*s)/2)+"px"; fit.style.top=Math.round((box.clientHeight-1920*s)/2)+"px"; }
-function lsnStopTimers(){ LSN.timers.forEach(clearTimeout); LSN.timers=[]; try{ LSN.au.onended=null; LSN.au.onerror=null; LSN.au.pause(); }catch(e){} }
-function lsnLater(fn,s){ LSN.timers.push(setTimeout(fn,s*1000)); }
+function lsnStopTimers(){ LSN.tok=(LSN.tok||0)+1; LSN.timers.forEach(clearTimeout); LSN.timers=[]; try{ LSN.au.onended=null; LSN.au.onerror=null; LSN.au.pause(); }catch(e){} }
+// tok: callbacks from an older line (e.g. the play() promise rejecting because we paused it) are ignored
+function lsnLater(fn,s,tok=LSN.tok){ if(tok!==LSN.tok) return; LSN.timers.push(setTimeout(()=>{ if(LSN.on&&LSN.lesson&&tok===LSN.tok) fn(); },s*1000)); }
 function lsnShow(k,play){
-  lsnStopTimers(); const x=LSN.lines[k]; if(!x) return; LSN.k=k;
+  lsnStopTimers(); if(!LSN.on||!LSN.lesson) return; const x=LSN.lines[k]; if(!x) return; LSN.k=k; const tok=LSN.tok;
   const ln=LSN.lesson.slides[x.si].lines[x.li];
   if(ln.countdown) LSN.picked=null;
   const info={idx:k,first:x.first,lead:x.lead,speech:x.speech,bounds:x.bounds,dur:x.dur,t0:x.t0,ts:x.ts,p0:x.p0,p1:x.p1,prevV:k?LSN.lesson.slides[LSN.lines[k-1].si].lines[LSN.lines[k-1].li].v:null};
@@ -7108,11 +7125,11 @@ function lsnShow(k,play){
   if(!play){ doc.getAnimations().forEach(a=>a.pause()); return; }
   if(ln.countdown) return;                          // wait for the learner to tap an answer
   const after=()=>lsnLater(()=>lsnNext(),x.speech?LSN_GAP:(ln.pause||1));
-  lsnLater(()=>{ if(x.file){ const au=LSN.au; au.muted=false; au.onended=after; au.onerror=()=>lsnLater(after,x.speech); au.src=x.file; const p=au.play(); if(p&&p.catch) p.catch(()=>lsnLater(after,x.speech)); }
+  lsnLater(()=>{ if(x.file){ const au=LSN.au; au.muted=false; au.onended=after; au.onerror=()=>lsnLater(after,x.speech,tok); au.src=x.file; const p=au.play(); if(p&&p.catch) p.catch(()=>lsnLater(after,x.speech,tok)); }
     else lsnLater(after,x.speech); }, x.lead);
 }
-function lsnNext(){ if(LSN.k+1>=LSN.lines.length) return lsnFinish(); lsnShow(LSN.k+1,true); }
-function lsnPick(i){ const x=LSN.lines[LSN.k]; if(!x) return; const s=LSN.lesson.slides[x.si]; if(!s.lines[x.li].countdown||LSN.picked!=null) return;
+function lsnNext(){ if(!LSN.on||!LSN.lesson) return; if(LSN.k+1>=LSN.lines.length) return lsnFinish(); lsnShow(LSN.k+1,true); }
+function lsnPick(i){ if(!LSN.on||!LSN.lesson) return; const x=LSN.lines[LSN.k]; if(!x) return; const s=LSN.lesson.slides[x.si]; if(!s.lines[x.li].countdown||LSN.picked!=null) return;
   LSN.picked=i; if(LSN.quizOk==null) LSN.quizOk=i===s.ans; lsnNext(); }
 function lsnPlayBtn(){ const b=LSN.ov&&LSN.ov.querySelector(".lsn-pp"); if(b) b.textContent=LSN.playing?"⏸":"▶"; }
 function lsnClick(e){ const b=e.target.closest("[data-lsn]"); if(!b) return; const a=b.dataset.lsn;
@@ -7126,7 +7143,7 @@ function lsnClick(e){ const b=e.target.closest("[data-lsn]"); if(!b) return; con
   if(a==="prev"||a==="next"){ let k=LSN.k+(a==="next"?1:-1); if(k<0) k=0; if(k>=LSN.lines.length) return; const c=LSN.ov.querySelector(".lsn-cover"); if(c){ c.hidden=true; c.innerHTML=""; } LSN.playing=true; lsnPlayBtn(); lsnShow(k,true); }
 }
 function lsnFinish(){
-  lsnStopTimers(); LSN.playing=false; lsnPlayBtn();
+  if(!LSN.on||!LSN.lesson) return; lsnStopTimers(); LSN.playing=false; lsnPlayBtn();
   const g=game(); g.lessons=g.lessons||{}; let gold=0;
   if(!g.lessons[LSN.id]){ gold=LSN_GOLD+(LSN.quizOk?LSN_QUIZ_GOLD:0); g.gold+=gold; g.lessons[LSN.id]={d:today(),q:LSN.quizOk?1:0}; trackPlay("lesson"); saveGame(); }
   const c=LSN.ov.querySelector(".lsn-cover"); c.hidden=false;
@@ -7169,6 +7186,7 @@ document.addEventListener("click",e=>{
   if(a==="topractice"){ e.stopPropagation(); toStart(t.dataset.k,false); return; }
   if(a==="toresume"){ e.stopPropagation(); if(R){ S.view="toeic"; render(); toTick(); } return; }
   if(a==="toplay"){ e.stopPropagation(); toPlay(+t.dataset.k); return; }
+  if(a==="toplaycont"){ e.stopPropagation(); toPlay(+t.dataset.k,true); return; }
   if(a==="totab"){ e.stopPropagation(); toStop(); if(S.toResult) S.toRevTab=+t.dataset.k; else if(R) R.tab=+t.dataset.k; saveGame(); render(); window.scrollTo(0,0); return; }
   if(a==="tosubmit"){ e.stopPropagation(); if(!S.toConfirm){ S.toConfirm=true; render(); return; } S.toConfirm=false; toSubmit(); return; }
   if(a==="toexit"){ e.stopPropagation(); S.toExitAsk=true; render(); return; }
@@ -8340,6 +8358,12 @@ Object.assign(STR.hi,{"vaultSub2": "कहते हैं लेप्रेक
 Object.assign(STR.es,{"vaultSub2": "Dice la leyenda que el leprechaun esconde su oro al final del arcoíris. Pide un deseo, envía tesoros a tus amigos o abre tu caja de regalos.", "wellT": "Pozo de los deseos", "wellSub": "Echa oro al pozo. El día 1 de cada mes se sortean {k} jugadores que pidieron un deseo el mes anterior y se reparten todo el pozo (el 1.º se lleva más). Cuanto más eches, más probabilidades.", "wellLoading": "Mirando el pozo…", "wellLoadFail": "No se puede abrir el pozo ahora", "wellRetry": "Reintentar", "wellLogin": "Inicia sesión para pedir un deseo.", "wellPeople": "{n} jugadores pidieron un deseo este mes", "wellDays": "sorteo en {n} días", "wellMine": "Este mes echaste 🪙 {n} (máx. {m})", "wellNone": "Aún no pediste un deseo este mes (hasta 🪙 {m} al mes)", "wellChance": "≈{p}% de ganar", "wellToss": "Echar 🪙 {n} y pedir", "wellSure": "Sí, echar 🪙 {n}", "wellCheck": "¿Echar 🪙 {n} al pozo de los deseos?", "wellCheck2": "El oro del pozo no se devuelve. Si no te toca, va a los ganadores de este mes.", "wellTossed": "🌠 Echaste {n} de oro. ¡Deseo pedido!", "wellMax": "Ya echaste el límite de 🪙 {n} este mes. Vuelve el mes que viene", "wellLeft": "Este mes puedes echar hasta 🪙 {n} más", "wellFail": "El deseo no se guardó. Tu oro ha vuelto", "wellNewMonth": "Empezó un mes nuevo; el pozo vuelve a abrir", "wellRule": "Solo oro del juego, nada de dinero real. El sorteo es el día 1 de cada mes (hora de Irlanda); el premio llega la próxima vez que abras la Cámara del Arcoíris.", "wellTop": "Deseos de este mes", "wellEmpty": "Nadie ha pedido un deseo este mes. ¡Sé el primero!", "wellYou": "tú", "wellLast": "Resultados de {m}", "wellCount": "{n} jugadores · pozo 🪙 {t}", "wellNoOne": "Nadie pidió un deseo ese mes.", "wellWon": "🎉 ¡Ganaste el pozo de los deseos! +{n} de oro", "wellSim": "Sorteo de prueba (desarrollador, sin premios)", "wellSimT": "Sorteo de prueba (sin premios)"});
 Object.assign(STR.ja,{"vaultSub2": "レプラコーンは虹のふもとに金貨を隠すと言われています。ここで願いごとをしたり、友だちに宝物を贈ったり、ギフトボックスを開けたりできます。", "wellT": "願いの泉", "wellSub": "泉に金貨を投げ入れよう。毎月1日に、前の月に願いごとをしたプレイヤーから {k} 人を抽選し、泉の金貨を全部分け合います（1位が一番多い）。たくさん入れるほど当たりやすくなります。", "wellLoading": "泉をのぞいています…", "wellLoadFail": "今は願いの泉につながりません", "wellRetry": "もう一度", "wellLogin": "ログインすると願いごとができます。", "wellPeople": "今月 {n} 人が願いごと", "wellDays": "抽選まであと {n} 日", "wellMine": "今月は 🪙 {n} 入れました（上限 {m}）", "wellNone": "今月はまだ願いごとをしていません（月 🪙 {m} まで）", "wellChance": "当選確率 約 {p}%", "wellToss": "🪙 {n} 入れて願う", "wellSure": "🪙 {n} 入れる", "wellCheck": "🪙 {n} を願いの泉に入れますか？", "wellCheck2": "入れた金貨は戻りません。当たらなかった場合、今月の当選者に分けられます。", "wellTossed": "🌠 {n} 金貨を入れました。願いごと完了！", "wellMax": "今月の上限 🪙 {n} まで入れました。また来月", "wellLeft": "今月はあと 🪙 {n} まで入れられます", "wellFail": "うまくいきませんでした。金貨は戻しました", "wellNewMonth": "新しい月になりました。泉がまた開きました", "wellRule": "ゲームの金貨だけ、本物のお金は使いません。抽選は毎月1日（アイルランド時間）、当選金貨は次に虹の宝庫を開いたときに届きます。", "wellTop": "今月の願いごとランキング", "wellEmpty": "今月はまだ誰も願いごとをしていません。一番乗りしよう！", "wellYou": "あなた", "wellLast": "{m} の抽選結果", "wellCount": "{n} 人参加 · 泉の金貨 🪙 {t}", "wellNoOne": "その月は誰も願いごとをしませんでした。", "wellWon": "🎉 願いの泉で当選！{n} 金貨ゲット", "wellSim": "テスト抽選（開発者・賞品なし）", "wellSimT": "テスト抽選（賞品なし）"});
 Object.assign(STR.ko,{"vaultSub2": "레프러콘은 무지개 끝에 금을 숨긴다고 해요. 여기서 소원을 빌고, 친구에게 보물을 선물하거나, 선물함을 열어 보세요.", "wellT": "소원의 샘", "wellSub": "샘에 금화를 던져 보세요. 매달 1일, 지난달 소원을 빈 플레이어 중 {k}명을 뽑아 샘의 금화를 모두 나눠 줘요 (1등이 가장 많이). 많이 던질수록 당첨 확률이 높아요.", "wellLoading": "샘을 들여다보는 중…", "wellLoadFail": "지금은 소원의 샘에 연결할 수 없어요", "wellRetry": "다시 시도", "wellLogin": "로그인하면 소원을 빌 수 있어요.", "wellPeople": "이번 달 {n}명이 소원을 빌었어요", "wellDays": "추첨까지 {n}일", "wellMine": "이번 달 🪙 {n} 던졌어요 (최대 {m})", "wellNone": "이번 달 아직 소원을 빌지 않았어요 (한 달 최대 🪙 {m})", "wellChance": "당첨 확률 약 {p}%", "wellToss": "🪙 {n} 던지고 소원 빌기", "wellSure": "네, 🪙 {n} 던질게요", "wellCheck": "🪙 {n}을 소원의 샘에 던질까요?", "wellCheck2": "샘에 던진 금화는 돌려받을 수 없어요. 뽑히지 않으면 이번 달 당첨자에게 가요.", "wellTossed": "🌠 금화 {n}개를 던졌어요. 소원 완료!", "wellMax": "이번 달 한도 🪙 {n}까지 던졌어요. 다음 달에 또 와요", "wellLeft": "이번 달 🪙 {n}까지 더 던질 수 있어요", "wellFail": "소원을 빌지 못했어요. 금화를 돌려드렸어요", "wellNewMonth": "새 달이 시작됐어요. 샘이 다시 열렸어요", "wellRule": "게임 금화만 사용하고 실제 돈은 없어요. 추첨은 매달 1일(아일랜드 시간), 당첨 금화는 다음에 무지개 보물고를 열 때 들어와요.", "wellTop": "이번 달 소원 순위", "wellEmpty": "이번 달 아직 아무도 소원을 빌지 않았어요. 첫 번째가 되어 보세요!", "wellYou": "나", "wellLast": "{m} 추첨 결과", "wellCount": "{n}명 참가 · 샘 🪙 {t}", "wellNoOne": "그 달에는 아무도 소원을 빌지 않았어요.", "wellWon": "🎉 소원의 샘 당첨! 금화 +{n}", "wellSim": "테스트 추첨 (개발자, 상품 없음)", "wellSimT": "테스트 추첨 (상품 없음)"});
+Object.assign(STR.zh,{"spendL":"花費","spendLeft":"用完剩下","ieCont": "▶ 從第 {i} 句繼續聽", "ieCut": "上次播放被中斷了（例如重新整理頁面），可以從中斷的地方繼續。", "wheelAskQ": "要轉一次命運輪盤嗎？", "wheelAskYes": "轉！", "exAskQ": "要用金幣換幸運草嗎？", "exAskYes": "確定兌換"});
+Object.assign(STR.en,{"spendL":"Costs","spendLeft":"Left after","ieCont": "▶ Continue from line {i}", "ieCut": "Playback was interrupted (for example by a page refresh). You can pick up where it stopped.", "wheelAskQ": "Spin the wheel?", "wheelAskYes": "Spin!", "exAskQ": "Trade gold for a shamrock?", "exAskYes": "Trade"});
+Object.assign(STR.hi,{"spendL":"खर्च","spendLeft":"बाद में बचेंगे","ieCont": "▶ पंक्ति {i} से आगे सुनें", "ieCut": "प्लेबैक बीच में रुक गया था (जैसे पेज रीफ़्रेश करने से)। आप वहीं से आगे सुन सकते हैं।", "wheelAskQ": "चक्र घुमाएँ?", "wheelAskYes": "घुमाएँ!", "exAskQ": "सोने से शैमरॉक लें?", "exAskYes": "बदलें", "pvCardSub": "देखें हम कौन-सा डेटा रखते हैं, या अपना खाता हमेशा के लिए हटाएँ।", "delBtnLocal": "इस फ़ोन का डेटा साफ़ करें", "delQ": "सब कुछ हमेशा के लिए हटाएँ?", "delWhat": "इससे क्लाउड और इस फ़ोन पर आपका सारा डेटा मिट जाएगा: शब्द, पढ़ने और टेस्ट का इतिहास, गेम प्रगति, उपनाम, लीडरबोर्ड नतीजे, साथी और सूचना सेटिंग, और आपका BinBin खाता। यह वापस नहीं हो सकता। पुष्टि के लिए आपसे एक बार फिर Google से साइन इन करने को कहा जा सकता है।", "delWhatLocal": "इससे इस फ़ोन पर सारा सीखने का रिकॉर्ड, शब्द और गेम प्रगति मिट जाएगी। यह वापस नहीं हो सकता।", "delBusy": "हटाया जा रहा है…", "delDone": "हटा दिया गया। BinBin daily इस्तेमाल करने के लिए धन्यवाद", "delFail": "हटाना पूरा नहीं हो सका। कनेक्शन जाँचें और फिर कोशिश करें", "delCancel": "रद्द किया — कुछ भी नहीं हटाया गया"});
+Object.assign(STR.es,{"spendL":"Cuesta","spendLeft":"Te quedará","ieCont": "▶ Seguir desde la línea {i}", "ieCut": "La reproducción se cortó (por ejemplo, al recargar la página). Puedes seguir desde donde se quedó.", "wheelAskQ": "¿Girar la ruleta?", "wheelAskYes": "¡Girar!", "exAskQ": "¿Cambiar oro por un trébol?", "exAskYes": "Cambiar", "pvCardSub": "Mira qué datos guardamos o elimina tu cuenta para siempre.", "delBtnLocal": "Borrar los datos de este teléfono", "delQ": "¿Eliminar todo para siempre?", "delWhat": "Se borrarán todos tus datos en la nube y en este teléfono: palabras, historial de lectura y pruebas, progreso del juego, apodo, resultados de la clasificación, aliados y ajustes de notificaciones, además de tu cuenta de BinBin. No se puede deshacer. Puede que te pidamos iniciar sesión con Google otra vez para confirmar.", "delWhatLocal": "Se borrarán todos los registros de estudio, las palabras y el progreso del juego de este teléfono. No se puede deshacer.", "delBusy": "Eliminando…", "delDone": "Eliminado. Gracias por usar BinBin daily", "delFail": "No se pudo terminar de eliminar. Revisa tu conexión e inténtalo de nuevo", "delCancel": "Cancelado: no se eliminó nada"});
+Object.assign(STR.ja,{"spendL":"使う数","spendLeft":"使った後の残り","ieCont": "▶ {i}文目から続きを聞く", "ieCut": "再生が途中で止まりました（ページの再読み込みなど）。止まったところから続けられます。", "wheelAskQ": "ルーレットを回しますか？", "wheelAskYes": "回す！", "exAskQ": "金貨をクローバーに交換しますか？", "exAskYes": "交換する", "pvCardSub": "保存しているデータを確認したり、アカウントを完全に削除したりできます。", "delBtnLocal": "このスマホのデータを消去", "delQ": "すべて完全に削除しますか？", "delWhat": "クラウドとこのスマホにあるすべてのデータ（単語、読書とテストの記録、ゲームの進行状況、ニックネーム、ランキングの結果、仲間、通知設定）と BinBin アカウントが削除されます。元に戻せません。確認のため、もう一度 Google でログインをお願いすることがあります。", "delWhatLocal": "このスマホにある学習記録、単語、ゲームの進行状況がすべて消去されます。元に戻せません。", "delBusy": "削除しています…", "delDone": "削除しました。BinBin daily をご利用いただきありがとうございました", "delFail": "削除を完了できませんでした。接続を確認してもう一度お試しください", "delCancel": "キャンセルしました。何も削除されていません"});
+Object.assign(STR.ko,{"spendL":"사용","spendLeft":"사용 후 남는 양","ieCont": "▶ {i}번째 문장부터 이어 듣기", "ieCut": "재생이 중간에 끊겼어요(예: 페이지 새로고침). 끊긴 곳부터 이어서 들을 수 있어요.", "wheelAskQ": "룰렛을 돌릴까요?", "wheelAskYes": "돌리기!", "exAskQ": "골드를 클로버로 바꿀까요?", "exAskYes": "교환하기", "pvCardSub": "어떤 데이터를 보관하는지 확인하거나 계정을 영구 삭제할 수 있어요.", "delBtnLocal": "이 휴대폰의 데이터 지우기", "delQ": "모두 영구 삭제할까요?", "delWhat": "클라우드와 이 휴대폰에 있는 모든 데이터(단어, 읽기·테스트 기록, 게임 진행, 닉네임, 순위 결과, 동료, 알림 설정)와 BinBin 계정이 삭제돼요. 되돌릴 수 없어요. 확인을 위해 Google 로그인을 한 번 더 요청할 수 있어요.", "delWhatLocal": "이 휴대폰에 있는 학습 기록, 단어, 게임 진행이 모두 지워져요. 되돌릴 수 없어요.", "delBusy": "삭제 중…", "delDone": "삭제했어요. BinBin daily를 이용해 주셔서 감사해요", "delFail": "삭제를 끝내지 못했어요. 연결을 확인하고 다시 시도해 주세요", "delCancel": "취소했어요. 아무것도 삭제되지 않았어요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
