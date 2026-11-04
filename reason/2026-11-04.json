@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-04",
+ "items": {
+  "2026-11-04": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government has agreed to raise its pay offer to 9.25% to avoid a strike.",
+     "Public sector unions have accepted a 7.75% deal but want more local bargaining money.",
+     "After rejecting a 7.75% pay proposal as inadequate, unions plan a second strike and stepped-up action, while both sides seek a way out of the impasse.",
+     "The EU summit in Dublin has been cancelled because of planned industrial action."
+    ],
+    "a": 2,
+    "exp": "The passage reports that employees \"are scheduled to undertake a second strike ... following their unions' rejection of a pay proposal worth 7.75%\", explains why unions see it as \"substantially below expectations\", and ends with both parties meeting \"in an attempt to resolve the impasse\"."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about low-paid workers under the current proposal?",
+    "opts": [
+     "Their actual increases would probably be much closer to the headline figure than under the previous deal.",
+     "They would receive a larger percentage increase than higher earners.",
+     "They are guaranteed a minimum increase of 17%.",
+     "They would be paid the local bargaining money first."
+    ],
+    "a": 0,
+    "exp": "Kane notes \"the absence of guaranteed minimum increases for employees earning less than €50,000\", and that such provisions \"had previously raised their increases from a nominal 9.25% to slightly over 17%\". Without them, their rises would be close to the nominal figure."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the summit of EU leaders in Dublin?",
+    "opts": [
+     "To explain why the Government made its pay proposal.",
+     "To suggest that EU leaders will help to settle the dispute.",
+     "To show that the unions support Ireland's EU Presidency.",
+     "To highlight that the strike's timing makes it more significant and potentially embarrassing for the Government."
+    ],
+    "a": 3,
+    "exp": "The writer adds, \"Moreover, it coincides with a summit of EU leaders in Dublin during Ireland's EU Presidency\" — \"Moreover\" signals an additional point that raises the stakes of the strike's timing."
+   }
+  ],
+  "2026-11-04-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Ireland plans to stop issuing employment permits to non-EEA workers.",
+     "Ireland still relies heavily on non-EEA workers but has trouble retaining them, and the ESRI suggests reforms.",
+     "Google has become the largest employer of foreign workers in Europe.",
+     "Information technology is the fastest-growing sector for migrant workers."
+    ],
+    "a": 1,
+    "exp": "The passage opens by saying Ireland \"continues to depend substantially on workers from outside the European Economic Area, although it experiences considerable difficulty in retaining them\", and ends with the report's recommendations."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the retention figures for the two permit types?",
+    "opts": [
+     "General Employment Permit holders are more likely to leave than Critical Skills holders.",
+     "Most permit holders leave Ireland within one year.",
+     "Retention problems affect only low-skilled sectors such as agri-food.",
+     "Holding a permit for in-demand, highly skilled work does not ensure that a worker will stay."
+    ],
+    "a": 3,
+    "exp": "\"Two years after arrival, 40% of Critical Skills Permit holders had departed, compared with 21% of General Employment Permit holders.\" The skilled-permit group actually leaves at about twice the rate."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the tone of the passage?",
+    "opts": [
+     "Analytical and constructive, setting out problems and proposed remedies.",
+     "Celebratory, praising the success of the permit system.",
+     "Hostile, arguing that Ireland should rely less on foreign workers.",
+     "Uncertain, refusing to draw any conclusions from the data."
+    ],
+    "a": 0,
+    "exp": "The passage reports figures neutrally, notes that \"Retention constitutes a considerable challenge\", and closes with what the report \"recommends\" — a measured, problem-and-solution tone."
+   }
+  ],
+  "2026-11-04-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Although more rental homes are on the market, almost none are affordable within HAP limits, and the charity wants the limits raised.",
+     "The number of rental properties in Ireland has fallen sharply since 2025.",
+     "Budget 2027 increased HAP limits for the first time in a decade.",
+     "Most HAP-eligible homes are now found outside Dublin."
+    ],
+    "a": 0,
+    "exp": "Only \"12 rental properties across 16 areas were available within Housing Assistance Payment (HAP) limits\", despite a 63% rise in listings, and Grogan argues \"an increase in the thresholds would constitute an immediate and practical intervention\"."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the rise in available rental properties?",
+    "opts": [
+     "It shows that HAP limits are now adequate.",
+     "It was caused by changes to HAP in Budget 2027.",
+     "It has done little for HAP recipients, because rents remain above the HAP limits.",
+     "It happened only in Dublin."
+    ],
+    "a": 2,
+    "exp": "The charity found \"1,361 properties available at any price, representing a 63% increase\", yet only 12 fell within HAP limits, because \"rents had increased substantially ... whereas HAP had remained largely unchanged\"."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer list towns such as Athlone, Cork and Galway?",
+    "opts": [
+     "To show where rents are lowest in Ireland.",
+     "To emphasise that the lack of HAP-eligible homes is widespread, including in major cities.",
+     "To explain where the Simon Communities have offices.",
+     "To compare these towns favourably with Dublin."
+    ],
+    "a": 1,
+    "exp": "The passage states that \"11 of the 16 areas, including Athlone, Cork, Galway, Limerick, Sligo and Waterford, contained no eligible properties whatsoever\" — naming them stresses how widespread the problem is."
+   }
+  ],
+  "2026-11-04-4": [
+   {
+    "type": "main",
+    "q": "What is the main focus of the passage?",
+    "opts": [
+     "A ban on horse-drawn vehicles on all public roads.",
+     "The closure of all puppy farms in Ireland.",
+     "A campaign to encourage people to adopt more dogs.",
+     "A new five-year animal welfare strategy centred on tougher sanctions for puppy farms, along with wider measures."
+    ],
+    "a": 3,
+    "exp": "\"Increased fines and sanctions for puppy farms ... constitute a central priority of a new animal welfare strategy\", and the passage then lists further measures on wardens, microchipping, awareness and horses."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the extra powers for dog wardens?",
+    "opts": [
+     "They are already in force.",
+     "They have not yet been decided and are still under consideration.",
+     "They were rejected by local authorities.",
+     "They apply only in urban areas."
+    ],
+    "a": 1,
+    "exp": "The passage says \"the Government will consider enhancing the powers of dog wardens\" — \"will consider\" shows the change has not yet been decided."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the writer's tone?",
+    "opts": [
+     "Strongly critical of the Minister.",
+     "Enthusiastic and promotional.",
+     "Mainly neutral and informative, with a note of caution about how well the plan will work.",
+     "Sarcastic about animal welfare groups."
+    ],
+    "a": 2,
+    "exp": "The passage reports the plan's contents factually and ends cautiously: \"the effectiveness of these measures will be contingent upon closer collaboration between the Department of Agriculture and local authorities.\""
+   }
+  ]
+ }
+}
