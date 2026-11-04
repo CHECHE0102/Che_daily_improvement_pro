@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>怪物戰鬥動畫原型</title>
+<style>
+:root{--bg:#F2F5F3;--ink:#18221F;--muted:#5d6b66;--card:#fff;--line:#d6dfdb;--accent:#C9461D;--gorse:#E2B23B;--night:#16211E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111816;--ink:#E4ECE9;--muted:#9fb0aa;--card:#18221F;--line:#2a3833;--accent:#F07A4F;--gorse:#F0BE45}}
+:root[data-theme="dark"]{--bg:#111816;--ink:#E4ECE9;--muted:#9fb0aa;--card:#18221F;--line:#2a3833;--accent:#F07A4F;--gorse:#F0BE45}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+main{max-width:480px;margin:0 auto;padding:14px 16px 40px}
+h1{font-size:20px;margin:4px 0 2px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px;margin-bottom:10px}
+.seg button{flex:1;border:0;background:none;color:var(--ink);font:600 14px inherit;font-family:inherit;padding:8px;border-radius:9px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.stage-wrap{position:relative;border-radius:18px;overflow:hidden;background:var(--night);aspect-ratio:4/3;width:100%;touch-action:manipulation}
+.stage{position:absolute;inset:0;will-change:transform}
+.stage canvas,.stage img{position:absolute;pointer-events:none}
+#bg,#sh,#hc,#gl,#pc,#fx{inset:0;width:100%;height:100%}
+.dmg{position:absolute;transform:translate(-50%,0);font:900 26px system-ui,sans-serif;color:#fff;text-shadow:0 3px 0 #0009,0 0 10px #000a;pointer-events:none;white-space:nowrap;z-index:5;animation:dmgpop 1s cubic-bezier(.2,.9,.3,1) both}
+.dmg.crit{color:#FFD54A;font-size:36px}
+.dmg small{display:block;font-size:12px;text-align:center;letter-spacing:1px}
+@keyframes dmgpop{0%{opacity:0;transform:translate(-50%,8px) scale(.4)}18%{opacity:1;transform:translate(-50%,-6px) scale(1.25)}35%{transform:translate(-50%,-10px) scale(1)}100%{opacity:0;transform:translate(-50%,-46px) scale(.95)}}
+.hp{position:absolute;top:10px;height:10px;width:38%;background:#0007;border-radius:6px;overflow:hidden;z-index:6}
+.hp i{position:absolute;inset:0;transform-origin:0 50%;border-radius:6px}
+.hp .lag{background:#fff9}
+.hp .cur{background:#5BC07A}
+.hp.m .cur{background:#E86A3E}
+.hp.p{left:10px}.hp.m{right:10px}
+.tag{position:absolute;top:24px;font:700 11px system-ui;color:#fffc;z-index:6}
+.tag.p{left:12px}.tag.m{right:12px}
+/* old version */
+#old{position:absolute;inset:0;display:none}
+#old .o-hero{position:absolute;left:4%;bottom:12%;width:40%}
+#old img{position:static}
+#old .o-hero img{width:100%;display:block}
+#old .mon-seal{position:absolute;right:6%;bottom:14%;width:40%;aspect-ratio:1;border-radius:22px;background:radial-gradient(circle at 50% 35%,#f6b39a,#F07A4F 70%);display:grid;place-items:center;box-shadow:inset 0 0 0 3px rgba(0,0,0,.15)}
+#old .mon-seal img{width:86%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+#old .dmg{animation:float 1.1s ease-out .2s both;font-size:24px}
+.o-atk-h{animation:lungeR .8s ease-out}
+.o-atk-m{animation:lungeL .8s ease-out}
+.o-hurt{animation:hurt .6s ease-out .3s}
+@keyframes lungeR{40%{transform:translateX(26%)}100%{transform:none}}
+@keyframes lungeL{40%{transform:translateX(-30%) scale(1.05)}100%{transform:none}}
+@keyframes hurt{0%{filter:brightness(2.2) saturate(.3)}30%{transform:translateX(7px)}60%{transform:translateX(-5px)}100%{transform:none}}
+@keyframes float{0%{opacity:0;transform:translate(-50%,10px) scale(.7)}20%{opacity:1;transform:translate(-50%,0) scale(1.15)}100%{opacity:0;transform:translate(-50%,-34px) scale(1)}}
+.wpick{display:flex;gap:6px;margin-bottom:10px;overflow-x:auto}
+.wpick button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 12px inherit;font-family:inherit;padding:6px 2px;border-radius:12px;cursor:pointer}
+.wpick button img{width:30px;height:30px}
+.wpick button[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}
+.btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.btns button{border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px inherit;font-family:inherit;padding:11px 4px;border-radius:12px;cursor:pointer;transition:transform .08s}
+.btns button:active{transform:scale(.95)}
+.btns button.main{background:var(--accent);color:#fff;border-color:transparent}
+.opts{display:flex;flex-wrap:wrap;gap:14px;margin:12px 2px 0;font-size:14px;color:var(--muted)}
+.opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:16px;font-size:14px}
+.note h2{font-size:15px;margin:0 0 6px}
+.note p,.note ul{margin:4px 0}
+.note ul{padding-left:20px}
+.muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>怪物戰鬥動畫原型</h1>
+<p class="sub">火狼和主角都換成 Codex 畫的部件，手腳會真的動。主角可以換 5 種武器。</p>
+
+<div class="seg" role="group" aria-label="版本">
+  <button id="mParts" aria-pressed="true">✨ 部件版</button>
+  <button id="mNew" aria-pressed="false">網格版</button>
+  <button id="mOld" aria-pressed="false">現在</button>
+</div>
+
+<div class="wpick" id="wpick" role="group" aria-label="武器"></div>
+<div class="stage-wrap" id="wrap">
+  <div class="stage" id="stage">
+    <canvas id="bg"></canvas>
+    <canvas id="sh"></canvas>
+    <canvas id="hc"></canvas>
+    <canvas id="gl"></canvas>
+    <canvas id="pc"></canvas>
+    <canvas id="fx"></canvas>
+    <div id="old">
+      <div class="o-hero"><img id="oHero" alt=""></div>
+      <div class="mon-seal"><img id="oWolf" alt=""></div>
+    </div>
+  </div>
+  <div class="hp p"><i class="lag" id="hpPL"></i><i class="cur" id="hpP"></i></div>
+  <div class="hp m"><i class="lag" id="hpML"></i><i class="cur" id="hpM"></i></div>
+  <span class="tag p">勇者 · Lv 12</span><span class="tag m">火狼 · Lv 11</span>
+</div>
+
+<div class="btns">
+  <button class="main" data-a="hero">⚔️ 主角攻擊</button>
+  <button class="main" data-a="wolf">🐺 怪物攻擊</button>
+  <button data-a="crit">💥 暴擊</button>
+  <button data-a="ko">☠️ 擊倒</button>
+  <button data-a="demo" id="demoBtn">▶ 自動示範</button>
+  <button data-a="reset">↺ 重來</button>
+</div>
+<div class="opts">
+  <label><input type="checkbox" id="slow"> 慢動作 0.3×</label>
+  <label><input type="checkbox" id="bones"> 顯示骨架</label>
+</div>
+
+<div class="note">
+  <h2>這版做了什麼</h2>
+  <ul>
+    <li><b>骨架網格</b>：把火狼圖鋪在 32×32 的網格上，綁 5 根骨頭（腳、身體、頭、尾巴、尾巴尖）。待機會呼吸、甩尾、點頭，火焰邊緣會晃。</li>
+    <li><b>攻擊</b>：先蹲低蓄力 → 撲出去拉長 → 咬下 → 彈回原位。</li>
+    <li><b>受傷</b>：命中瞬間停格（hit-stop）、全身閃白、被擊退、頭往後甩，畫面震動。</li>
+    <li>腳是「釘在地上」的，身體動腳不滑。</li>
+    <li><b>主角武器</b>：用遊戲裡同一套握把位置，武器跟著手揮動。劍會從背後劈下來、戰錘跳起來砸地、三叉戟往後收再刺、法杖集氣放魔法球、弓拉弦射火箭。快速揮動時有殘影。</li>
+  </ul>
+  <p class="muted">每隻怪只要多填 5 個點（骨頭位置），全部現有怪物都能套，不用新圖。勾「顯示骨架」可以看網格。</p>
+</div>
+<div class="note">
+  <h2>部件版（Codex 畫的部件）</h2>
+  <ul>
+    <li><b>火狼</b>：尾巴、身體、頭、4 隻腳都是分開的圖。撲咬時前腳往前伸、後腳往後蹬；攻擊換生氣臉，被打換受傷臉。</li>
+    <li><b>主角</b>：頭、身體、上臂、前臂、兩隻腳分開，手臂真的會揮。攻擊大喊、受傷 &gt;&lt;、勝利笑臉。法杖施法時另一隻手會張開。</li>
+    <li>Codex 畫的部件大小和位置都對不準，已經自動對位修好；主角的手臂和腳改從母版切，關節補了圓頭，轉動不會破洞。</li>
+  </ul>
+  <p class="muted">「網格版」是上一版只用一張圖的做法，「現在」是遊戲目前的樣子，可以切換比較。</p>
+</div>
+</main>
+
+<script>
+const IMG=__IMGS__;
+/* ---------------- helpers ---------------- */
+const $=s=>document.querySelector(s);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ss=x=>{x=clamp(x);return x*x*(3-2*x)};
+const E={lin:t=>t,inQ:t=>t*t,outQ:t=>1-(1-t)*(1-t),outC:t=>1-Math.pow(1-t,3),io:t=>-(Math.cos(Math.PI*t)-1)/2,
+  outBack:t=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)},
+  outEl:t=>t===0||t===1?t:Math.pow(2,-9*t)*Math.sin((t*10-.75)*(2*Math.PI)/3)+1};
+let reduce=false; try{reduce=matchMedia("(prefers-reduced-motion:reduce)").matches}catch(e){}
+
+/* ---------------- rig definition (image px, source faces right) ---------------- */
+const IW=512, FOOT={x:300,y:445};
+const BONES=[
+  {n:"root",p:[300,445],par:-1},
+  {n:"body",p:[300,400],par:0},
+  {n:"head",p:[345,285],par:1},
+  {n:"tail",p:[180,265],par:1},
+  {n:"tail2",p:[100,215],par:3},
+];
+const NB=BONES.length, N=32;
+function weightsAt(x,y){
+  let wh=ss((x-285)/55)*ss((305-y)/55);
+  let wt=ss((190-x)/45)*ss((335-y)/40);
+  let wt2=wt*ss((130-x)/55); wt-=wt2;
+  const rest=Math.max(0,1-wh-wt-wt2), b=ss((415-y)/75);
+  return [rest*(1-b), rest*b, wh, wt, wt2];
+}
+/* ---------------- pose maths ---------------- */
+// channel per bone: tx,ty,r,sx,sy (sx/sy are deltas from 1)
+const zeroPose=()=>BONES.map(()=>[0,0,0,0,0]);
+function P(o){const p=zeroPose();for(const k in o){const i=BONES.findIndex(b=>b.n===k);o[k].forEach((v,j)=>p[i][j]=v)}return p}
+function lerpPose(a,b,t){return a.map((r,i)=>r.map((v,j)=>v+(b[i][j]-v)*t))}
+function addPose(a,b,k=1){return a.map((r,i)=>r.map((v,j)=>v+b[i][j]*k))}
+function samplePose(keys,t){ // keys: [time, pose, ease]
+  if(t<=keys[0][0]) return keys[0][1];
+  for(let i=1;i<keys.length;i++){ if(t<=keys[i][0]){const [t0,p0]=keys[i-1],[t1,p1,e]=keys[i];return lerpPose(p0,p1,(E[e||"io"])((t-t0)/(t1-t0)))} }
+  return keys[keys.length-1][1];
+}
+function sampleNum(keys,t){
+  if(t<=keys[0][0]) return keys[0][1];
+  for(let i=1;i<keys.length;i++){ if(t<=keys[i][0]){const [t0,v0]=keys[i-1],[t1,v1,e]=keys[i];return v0+(v1-v0)*(E[e||"lin"])((t-t0)/(t1-t0))} }
+  return keys[keys.length-1][1];
+}
+const mul=(A,B)=>[A[0]*B[0]+A[2]*B[1],A[1]*B[0]+A[3]*B[1],A[0]*B[2]+A[2]*B[3],A[1]*B[2]+A[3]*B[3],A[0]*B[4]+A[2]*B[5]+A[4],A[1]*B[4]+A[3]*B[5]+A[5]];
+function local(b,c){const [px,py]=b.p,[tx,ty,r,dsx,dsy]=c,co=Math.cos(r),si=Math.sin(r),sx=1+dsx,sy=1+dsy;
+  // T(p+t)·R·S·T(-p)
+  const a=co*sx,bb=si*sx,cc=-si*sy,d=co*sy; return [a,bb,cc,d,px+tx-(a*px+cc*py),py+ty-(bb*px+d*py)];}
+function worldMats(pose){const W=[];BONES.forEach((b,i)=>{const L=local(b,pose[i]);W[i]=b.par<0?L:mul(W[b.par],L)});return W}
+
+/* ---------------- animations (ms) ---------------- */
+function idlePose(t,amt){
+  const br=Math.sin(t*2*Math.PI/1700);
+  return P({body:[0,0,0,-.012*br,.028*br],head:[0,-2.5*br,.045*Math.sin(t*2*Math.PI/1700-.7),0,0],
+    tail:[0,0,.13*Math.sin(t*2*Math.PI/1150),0,0],tail2:[0,0,.2*Math.sin(t*2*Math.PI/1150-1.1),0,0]}).map(r=>r.map(v=>v*amt));
+}
+const REST=zeroPose();
+const W_ATK=[[0,REST],
+  [300,P({root:[-24,4,.05,.03,-.07],body:[0,6,0,.07,-.1],head:[0,8,.16],tail:[0,0,-.38],tail2:[0,0,-.3]}),"io"],
+  [400,P({root:[235,-34,-.11,.12,-.07],body:[0,0,0,.08,-.04],head:[0,0,-.24],tail:[0,0,.48],tail2:[0,0,.4]}),"inQ"],
+  [480,P({root:[218,-4,.07,.05,.03],head:[0,4,.2],tail:[0,0,.22],tail2:[0,0,.3]}),"outQ"],
+  [560,P({root:[210,0,.04,.03,0],head:[0,2,.12],tail:[0,0,.15]}),"lin"],
+  [1050,REST,"outBack"]];
+const W_ATK_IMPACT=400;
+function hitKeys(k){ return [[0,REST],
+  [70,P({root:[-48*k,-8*k,-.1*k,-.08*k,.07*k],body:[0,0,0,-.06*k,.09*k],head:[0,-4*k,-.3*k],tail:[0,0,-.45*k],tail2:[0,0,-.55*k]}),"outQ"],
+  [220,P({root:[-40*k,0,.03*k,.06*k,-.07*k],body:[0,3,0,.04,-.05],head:[0,2,.1*k],tail:[0,0,.25*k],tail2:[0,0,.3*k]}),"io"],
+  [700,REST,"outBack"]]; }
+const W_KO=[[0,REST],
+  [80,P({root:[-60,-10,-.14,-.1,.08],head:[0,-6,-.38],tail:[0,0,-.5],tail2:[0,0,-.6]}),"outQ"],
+  [380,P({root:[-72,0,.02,.1,-.12],head:[0,4,.1],tail:[0,0,.2]}),"io"],
+  [900,P({root:[-40,4,.06,.1,-.2],body:[0,8,0,.04,-.12],head:[0,22,.5],tail:[0,8,.6],tail2:[0,0,.45]}),"outC"]];
+
+/* ---------------- state ---------------- */
+const S={mode:"parts",now:0,sim:0,last:0,freeze:0,slowUntil:0,shake:0,zoom:0,
+  wolf:{act:null,t0:0,keys:null,idle:1,flash:[[0,0]],red:[[0,0]],gray:0,alpha:1,ko:false},
+  hero:{act:null,t0:0,ko:false},
+  hp:{p:1,m:1,pl:1,ml:1},parts:[],slashes:[],trail:[],proj:[],queue:[],demo:false};
+
+/* ---------------- canvas setup ---------------- */
+const wrap=$("#wrap"),stage=$("#stage"),bg=$("#bg"),shc=$("#sh"),glc=$("#gl"),pc=$("#pc"),fx=$("#fx"),hc=$("#hc");
+let Wd=0,Ht=0,DPR=1;
+function size(){const r=wrap.getBoundingClientRect();Wd=r.width;Ht=r.height;DPR=Math.min(2,window.devicePixelRatio||1);
+  for(const c of [bg,shc,hc,glc,pc,fx]){c.width=Math.round(Wd*DPR);c.height=Math.round(Ht*DPR)}
+  drawBg(); if(gl) gl.viewport(0,0,glc.width,glc.height); }
+const L={get gy(){return Ht*.86},get wx(){return Wd*.71},get k(){return Wd*.52/IW},get hx(){return Wd*.22}};
+function drawBg(){const c=bg.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0);
+  const g=c.createLinearGradient(0,0,0,Ht);g.addColorStop(0,"#1c2b33");g.addColorStop(.62,"#2b3b3a");g.addColorStop(.63,"#3a4a3c");g.addColorStop(1,"#26332a");
+  c.fillStyle=g;c.fillRect(0,0,Wd,Ht);
+  c.fillStyle="rgba(246,231,180,.22)";c.beginPath();c.arc(Wd*.12,Ht*.2,Ht*.07,0,7);c.fill();
+  c.fillStyle="rgba(255,255,255,.5)";for(let i=0;i<26;i++){const x=(i*97%100)/100*Wd,y=(i*53%37)/100*Ht;c.fillRect(x,y,1.2,1.2)}
+  c.fillStyle="rgba(20,32,26,.8)";c.beginPath();c.moveTo(0,Ht*.63);for(let x=0;x<=Wd;x+=Wd/8)c.lineTo(x,Ht*.63-Ht*.05*Math.abs(Math.sin(x*.013)));c.lineTo(Wd,Ht*.63);c.fill();
+}
+
+/* ---------------- WebGL mesh ---------------- */
+let gl,prog,buf,ibuf,nIdx,vCount,base=[],wts=[],flameV=[],alphaAt=null,deformed;
+function initGL(img){
+  gl=glc.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:true}); if(!gl) return false;
+  const vs=`attribute vec2 aP;attribute vec2 aU;varying vec2 vU;void main(){vU=aU;gl_Position=vec4(aP,0.,1.);}`;
+  const fs=`precision mediump float;varying vec2 vU;uniform sampler2D uT;uniform float uF,uR,uG,uA;
+  void main(){vec4 t=texture2D(uT,vU);float g=dot(t.rgb,vec3(.299,.587,.114));vec3 c=mix(t.rgb,vec3(g)*.72,uG);
+  c=mix(c,vec3(1.,.28,.2)*t.a,uR);c=mix(c,vec3(t.a),uF);gl_FragColor=vec4(c,t.a)*uA;}`;
+  const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};
+  prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
+  const tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  // alpha map for ember spawn points
+  const oc=document.createElement("canvas");oc.width=oc.height=128;const ox=oc.getContext("2d");ox.drawImage(img,0,0,128,128);
+  try{const d=ox.getImageData(0,0,128,128).data;alphaAt=(x,y)=>d[((Math.min(127,y>>2))*128+Math.min(127,x>>2))*4+3]}catch(e){alphaAt=()=>255}
+  for(let j=0;j<=N;j++)for(let i=0;i<=N;i++){const x=i/N*IW,y=j/N*IW;base.push(x,y);const w=weightsAt(x,y);wts.push(w);
+    if(alphaAt(x|0,y|0)>200&&y<330&&(w[2]>.6||w[3]+w[4]>.6)) flameV.push(base.length/2-1);}
+  vCount=(N+1)*(N+1);const idx=[];
+  for(let j=0;j<N;j++)for(let i=0;i<N;i++){const a=j*(N+1)+i,b=a+1,c=a+N+1,d=c+1;
+    // skip fully transparent cells
+    let any=false;for(let yy=0;yy<=4&&!any;yy++)for(let xx=0;xx<=4&&!any;xx++) if(alphaAt(((i+xx/4)/N*IW)|0,((j+yy/4)/N*IW)|0)>0) any=true;
+    if(any) idx.push(a,b,c,b,d,c);}
+  nIdx=idx.length;
+  ibuf=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ibuf);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx),gl.STATIC_DRAW);
+  const uv=[];for(let j=0;j<=N;j++)for(let i=0;i<=N;i++)uv.push(i/N,j/N);
+  const ub=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,ub);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(uv),gl.STATIC_DRAW);
+  const aU=gl.getAttribLocation(prog,"aU");gl.enableVertexAttribArray(aU);gl.vertexAttribPointer(aU,2,gl.FLOAT,false,0,0);
+  buf=gl.createBuffer();deformed=new Float32Array(vCount*2);
+  gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+  return true;
+}
+// source image px -> screen px (flipped so the wolf faces the hero)
+const toScr=(x,y)=>[L.wx-(x-FOOT.x)*L.k, L.gy+(y-FOOT.y)*L.k];
+let lastMats=null;
+function drawWolf(pose,t,u){
+  const M=worldMats(pose);lastMats=M;const clip=new Float32Array(vCount*2);
+  for(let v=0;v<vCount;v++){const x=base[2*v],y=base[2*v+1],w=wts[v];let X=0,Y=0;
+    for(let b=0;b<NB;b++){const wb=w[b];if(!wb)continue;const m=M[b];X+=wb*(m[0]*x+m[2]*y+m[4]);Y+=wb*(m[1]*x+m[3]*y+m[5]);}
+    const fl=(w[2]+w[3]+w[4])*(reduce?0:1); X+=Math.sin(t*.007+y*.06)*1.8*fl; Y+=Math.cos(t*.006+x*.05)*1.2*fl;
+    deformed[2*v]=X;deformed[2*v+1]=Y;const s=toScr(X,Y);clip[2*v]=s[0]/Wd*2-1;clip[2*v+1]=1-s[1]/Ht*2;}
+  gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,clip,gl.DYNAMIC_DRAW);
+  const aP=gl.getAttribLocation(prog,"aP");gl.enableVertexAttribArray(aP);gl.vertexAttribPointer(aP,2,gl.FLOAT,false,0,0);
+  gl.uniform1f(gl.getUniformLocation(prog,"uF"),u.f);gl.uniform1f(gl.getUniformLocation(prog,"uR"),u.r);
+  gl.uniform1f(gl.getUniformLocation(prog,"uG"),u.g);gl.uniform1f(gl.getUniformLocation(prog,"uA"),u.a);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ibuf);gl.drawElements(gl.TRIANGLES,nIdx,gl.UNSIGNED_SHORT,0);
+}
+
+/* ---------------- hero + weapon (same grip numbers as the game: HERO_GRIP / KIND_GRIP) ---------------- */
+const IM={};
+const GRIP={"idle-hold":[.665,.70,60],"idle-plant":[.71,.47,-90],"idle-shoulder":[.29,.47,-88],slash:[.40,.25,-115],thrust:[.83,.63,-4],smash:[.45,.15,-95],bow:[.82,.53,90],cast:[.22,.41,-88]};
+const WPN={
+ sword:{img:"w_sword",grip:[.24,.76,.42],tip:[.95,.05],idle:"idle-hold",name:"劍",impact:300,col:["#FFFFFF","#BFD0E6"],trail:[230,380],
+  hand:[[0,"idle-hold"],[70,"slash","outQ"],[230,"slash"],[330,"idle-hold","inQ"]],
+  d:[[0,60],[70,-115,"outQ"],[200,-160,"outQ"],[300,-5,"inQ"],[380,85,"outQ"],[620,72],[900,60,"io"]],
+  x:[[0,0],[170,-.03,"outQ"],[270,.23,"inQ"],[580,.22],[900,0,"outC"]],r:[[0,0],[170,-6,"outQ"],[270,5],[380,9,"outQ"],[620,3],[900,0,"outC"]]},
+ hammer:{img:"w_hammer",grip:[.24,.76,.46],tip:[.8,.2],idle:"idle-shoulder",name:"戰錘",impact:480,col:["#F6DDA6","#C99A5B"],trail:[390,500],
+  hand:[[0,"idle-shoulder"],[110,"smash","outQ"],[390,"smash"],[480,"idle-hold","inQ"],[820,"idle-hold"],[1080,"idle-shoulder","io"]],
+  d:[[0,-88],[110,-100,"outQ"],[360,-160,"outQ"],[480,72,"inQ"],[560,80,"outQ"],[820,70],[1080,-88,"io"]],
+  x:[[0,0],[330,-.04,"outQ"],[440,.2,"inQ"],[760,.19],[1080,0,"outC"]],y:[[0,0],[330,-.035,"outQ"],[420,-.07,"outQ"],[480,0,"inQ"]],
+  sq:[[0,0],[300,-.06],[440,.05],[500,-.12,"outQ"],[680,0,"outBack"]],r:[[0,0],[330,-10,"outQ"],[480,12,"inQ"],[760,6],[1080,0,"outC"]]},
+ trident:{img:"w_trident",grip:[.45,.56,.58],tip:[.95,.05],idle:"idle-plant",name:"三叉戟",impact:300,col:["#DDF4FF","#3FA8F0"],trail:[210,340],
+  hand:[[0,"idle-plant"],[90,"thrust","outQ"],[860,"thrust"],[1000,"idle-plant","io"]],
+  hx:[[0,0],[90,0],[210,-.16,"outQ"],[300,.1,"inQ"],[380,.08],[760,0,"io"]],
+  d:[[0,-90],[90,-8,"outQ"],[210,-14,"outQ"],[300,-2,"inQ"],[860,-4],[1000,-90,"io"]],
+  x:[[0,0],[210,-.03,"outQ"],[300,.16,"inQ"],[620,.15],[950,0,"outC"]],r:[[0,0],[210,-5],[300,6,"inQ"],[620,2],[950,0]]},
+ staff:{img:"w_staff",grip:[.40,.62,.55],tip:[.82,.18],idle:"idle-plant",name:"法杖",impact:660,col:["#D8FFC0","#4FBF4A"],trail:[480,560],charge:[120,520],shoot:[520,660],
+  hand:[[0,"idle-plant"],[110,"cast","outQ"],[900,"cast"],[1060,"idle-plant","io"]],
+  d:[[0,-90],[110,-88,"outQ"],[440,-110,"io"],[530,-25,"inQ"],[900,-40],[1060,-90,"io"]],
+  x:[[0,0],[480,-.025,"io"],[560,.04,"outQ"],[1000,0,"io"]],r:[[0,0],[480,-4],[560,5,"outQ"],[1000,0]]},
+ bow:{img:"w_bow",grip:[.5,.5,.46],tip:[.5,.5],idle:"idle-hold",name:"弓",impact:540,col:["#FFE07A","#FF6A2A"],draw:[110,470],shoot:[470,540],
+  hand:[[0,"idle-hold"],[110,"bow","outQ"],[820,"bow"],[960,"idle-hold","io"]],
+  d:[[0,60],[110,90,"outQ"],[820,90],[960,60,"io"]],
+  x:[[0,0],[470,-.03,"io"],[520,-.06,"outQ"],[900,0,"io"]],r:[[0,0],[470,-3],[520,-7,"outQ"],[900,0]]}
+};
+let WSEL="sword";
+const H={left:0,tipPrev:null,midPrev:null};
+function heroFrame(t){
+  const h=S.hero,dt=h.act?t-h.t0:1e9,w=WPN[WSEL];
+  const f={pose:w.idle,x:0,y:0,r:0,sq:0,hand:w.idle,hx:0,d:GRIP[w.idle][2],flash:0,dt};
+  if(h.ko){f.pose="hurt";f.hand=null}
+  if(h.act==="atk"){
+    const hk=w.hand;let i=1;while(i<hk.length&&dt>hk[i][0])i++;
+    if(i>=hk.length){f.hand=hk[hk.length-1][1];f.pose=f.hand}
+    else{const [t0,g0]=hk[i-1],[t1,g1,e]=hk[i],k=(E[e||"io"])(clamp((dt-t0)/(t1-t0)));
+      f.pose=k<.5?g0:g1;f.handA=GRIP[g0];f.handB=GRIP[g1];f.handK=k;}
+    f.d=sampleNum(w.d,dt);f.x=sampleNum(w.x,dt);f.r=sampleNum(w.r,dt);
+    if(w.y)f.y=sampleNum(w.y,dt);if(w.sq)f.sq=sampleNum(w.sq,dt);if(w.hx)f.hx=sampleNum(w.hx,dt);
+    if(dt>w.d[w.d.length-1][0]+80&&dt>w.hand[w.hand.length-1][0]+80)h.act=null;
+  }else if(h.act==="hurt"){f.x=sampleNum([[0,0],[70,-.07,"outQ"],[600,0,"outBack"]],dt);f.r=sampleNum([[0,0],[70,-8,"outQ"],[600,0,"outBack"]],dt);
+    f.flash=sampleNum([[0,1],[200,0]],dt);if(dt<520){f.pose="hurt";f.hand=null}if(dt>650)h.act=null;}
+  else if(h.act==="win"){f.pose="win";f.hand=null}
+  if(f.hand&&!f.handA){f.handA=f.handB=GRIP[f.hand];f.handK=0}
+  return f;
+}
+const offc=document.createElement("canvas");
+function drawHero(t){
+  const f=heroFrame(t),w=WPN[WSEL],c=hc.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,Wd,Ht);
+  const B=Wd*.36,left=L.hx-B/2+f.x*Wd,top=L.gy-B+4+f.y*Wd,br=reduce?0:Math.sin(t*2*Math.PI/1700);H.left=left;H.B=B;
+  c.save();c.translate(left+B/2,top+B);c.rotate(f.r*Math.PI/180);c.scale(1-f.sq*.5-.006*br,1+f.sq+.014*br);c.translate(-B/2,-B);
+  let tip=null,mid=null,handScr=null;
+  const drawW=()=>{ if(!f.handA) return; const [gx,gy,Lw]=w.grip,A=f.handA,Bg=f.handB,k=f.handK;
+    const px=(A[0]+(Bg[0]-A[0])*k+f.hx)*B,py=(A[1]+(Bg[1]-A[1])*k)*B;
+    c.save();c.translate(px,py);c.rotate((f.d+45)*Math.PI/180);
+    const m=c.getTransform(),P=(lx,ly)=>{const p=m.transformPoint(new DOMPoint(lx,ly));return [p.x/DPR,p.y/DPR]};
+    tip=P((w.tip[0]-gx)*Lw*B,(w.tip[1]-gy)*Lw*B);mid=P((w.tip[0]-gx)*Lw*B*.45,(w.tip[1]-gy)*Lw*B*.45);handScr=P(0,0);
+    // bow: pulled string + arrow while drawing
+    if(w.draw&&f.dt>=w.draw[0]&&f.dt<w.draw[1]&&S.hero.act==="atk"){const k2=clamp((f.dt-w.draw[0])/(w.draw[1]-w.draw[0]-60));c.restore();
+      c.save();c.translate(px,py);const pull=B*(.05+.2*E.outC(k2));
+      c.strokeStyle="#5a3a22";c.lineWidth=B*.018;c.lineCap="round";c.beginPath();c.moveTo(-pull,0);c.lineTo(B*.2,0);c.stroke();
+      c.fillStyle=w.col[1];c.beginPath();c.moveTo(B*.24,0);c.lineTo(B*.18,-B*.035);c.lineTo(B*.18,B*.035);c.fill();
+      if(k2>.6&&!reduce){c.globalAlpha=(k2-.6)*2.5;c.fillStyle=w.col[0];c.beginPath();c.arc(B*.22,0,B*.04*(1+.3*Math.sin(t*.05)),0,7);c.fill();c.globalAlpha=1}
+      c.restore();c.save();c.translate(px,py);c.rotate((f.d+45)*Math.PI/180);}
+    c.drawImage(IM[w.img],-gx*Lw*B,-gy*Lw*B,Lw*B,Lw*B);c.restore(); };
+  const front=f.pose.startsWith("idle");
+  if(!front)drawW();
+  if(f.flash>0){offc.width=offc.height=Math.round(B*DPR);const o=offc.getContext("2d");o.drawImage(IM[f.pose],0,0,offc.width,offc.height);
+    o.globalCompositeOperation="source-atop";o.fillStyle=`rgba(255,255,255,${f.flash*.75})`;o.fillRect(0,0,offc.width,offc.height);c.drawImage(offc,0,0,B,B)}
+  else c.drawImage(IM[f.pose],0,0,B,B);
+  if(front)drawW();
+  c.restore();
+  // weapon trail (smear) during the fast part of the swing
+  if(tip&&w.trail&&S.hero.act==="atk"&&f.dt>=w.trail[0]&&f.dt<=w.trail[1]&&H.tipPrev&&Math.hypot(tip[0]-H.tipPrev[0],tip[1]-H.tipPrev[1])<Wd*.12) S.trail.push({a:H.midPrev,b:H.tipPrev,c:mid,d:tip,t:0,col:w.col});
+  H.tipPrev=tip;H.midPrev=mid;
+  // staff: charge orb at the tip, then shoot
+  if(w.charge&&S.hero.act==="atk"&&tip){const k=clamp((f.dt-w.charge[0])/(w.charge[1]-w.charge[0]));
+    if(f.dt>=w.charge[0]&&f.dt<w.charge[1]){const fc=fx.getContext("2d");H.orb={x:tip[0],y:tip[1],r:B*(.03+.08*k)};
+      if(Math.random()<.7&&!reduce){const a=Math.random()*7,R=B*.35;S.parts.push({x:tip[0]+Math.cos(a)*R,y:tip[1]+Math.sin(a)*R,vx:-Math.cos(a)*R*3.2,vy:-Math.sin(a)*R*3.2,life:0,max:.28,sz:2.2,c:w.col[1],g:0,glow:1})}}
+    else H.orb=null;}
+  else H.orb=null;
+  if(w.shoot&&S.hero.act==="atk"&&f.dt>=w.shoot[0]&&!S.hero.shot){S.hero.shot=true;const from=w.draw?handScr:tip;
+    S.proj.push({x0:from[0],y0:from[1],x1:L.wx-Wd*.04,y1:L.gy-Wd*.2,t:0,dur:(w.shoot[1]-w.shoot[0])/1000,kind:w.draw?"arrow":"orb",col:w.col,hist:[]});}
+}
+
+/* ---------------- FX ---------------- */
+function burst(x,y,n,big){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=(big?240:160)*(.4+Math.random());
+  S.parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-60,life:0,max:.45+Math.random()*.35,sz:2+Math.random()*(big?5:3),c:Math.random()<.5?"#FFD54A":"#FF7A3D",g:420})}}
+function ember(){if(!flameV.length||!deformed)return;const v=flameV[(Math.random()*flameV.length)|0];const [x,y]=toScr(deformed[2*v],deformed[2*v+1]);
+  S.parts.push({x,y,vx:(Math.random()-.5)*14,vy:-20-Math.random()*30,life:0,max:.9+Math.random()*.8,sz:1.5+Math.random()*2.2,c:Math.random()<.6?"#FFB347":"#FF6B3D",g:-10,glow:1})}
+function impactFx(k,x,y,big){const w=WPN[k];
+  if(k==="sword")slash(x,y,big);
+  if(k==="trident"){for(let i=0;i<3;i++)S.slashes.push({x:x+Wd*.02,y:y+(i-1)*Wd*.04,t:-i*.03,kind:"pierce",col:w.col})}
+  if(k==="hammer"){S.ring2={x:L.wx-Wd*.05,y:L.gy,t:0};for(let i=0;i<22;i++){const a=Math.PI+Math.random()*Math.PI,s=120+Math.random()*200;S.parts.push({x:L.wx-Wd*.12,y:L.gy,vx:Math.cos(a)*s,vy:Math.sin(a)*s*.8,life:0,max:.6,sz:3+Math.random()*4,c:Math.random()<.5?"#C99A5B":"#8a6b45",g:520})}}
+  if(k==="staff"||k==="bow"){for(let i=0;i<(big?30:20);i++){const a=Math.random()*7,s=60+Math.random()*220;S.parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:0,max:.5,sz:2+Math.random()*4,c:Math.random()<.5?w.col[0]:w.col[1],g:60,glow:1})}}
+  burst(x,y,big?30:14,big);S.ring={x,y,t:0};}
+function slash(x,y,big){S.slashes.push({x,y,t:0,big,kind:"slash"})}
+function claw(x,y){S.slashes.push({x,y,t:0,kind:"claw"})}
+function dmg(x,y,n,crit){const d=document.createElement("div");d.className="dmg"+(crit?" crit":"");d.innerHTML=`-${n}${crit?"<small>CRIT!</small>":""}`;
+  d.style.left=x+"px";d.style.top=y+"px";d.style.animationDuration=slowMul()+"s";wrap.appendChild(d);setTimeout(()=>d.remove(),1100*slowMul())}
+function drawFx(dt,t){const c=fx.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,Wd,Ht);
+  // shadows are drawn here under nothing else; fine for the prototype
+  // particles
+  c.globalCompositeOperation="lighter";
+  S.parts=S.parts.filter(p=>{p.life+=dt;if(p.life>p.max)return false;p.vy+=p.g*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;const k=1-p.life/p.max;
+    c.globalAlpha=k;c.fillStyle=p.c;c.beginPath();c.arc(p.x,p.y,p.sz*(p.glow?k:1),0,7);c.fill();return true});
+  c.globalCompositeOperation="source-over";c.globalAlpha=1;
+  S.slashes=S.slashes.filter(s=>{s.t+=dt;const T=s.kind==="claw"?.32:.3;if(s.t>T)return false;const k=s.t/T;
+    c.save();c.translate(s.x,s.y);c.lineCap="round";
+    if(s.kind==="slash"){c.rotate(-.5);const R=Wd*(s.big?.2:.15);const a0=-2.2+k*.4,a1=a0+Math.min(1,k*3)*2.6;
+      c.strokeStyle=`rgba(255,255,255,${1-k})`;c.lineWidth=(s.big?14:9)*(1-k)+2;c.beginPath();c.arc(0,0,R,a0,a1);c.stroke();
+      c.strokeStyle=`rgba(255,213,74,${(1-k)*.8})`;c.lineWidth=3;c.beginPath();c.arc(0,0,R*.86,a0+.2,a1);c.stroke();}
+    else if(s.kind==="pierce"){if(s.t<0){c.restore();return true}const p=Math.min(1,k*3);c.strokeStyle=`rgba(221,244,255,${1-k})`;c.lineWidth=5*(1-k)+1;c.beginPath();c.moveTo(-Wd*.16*p,0);c.lineTo(Wd*.08,0);c.stroke();}
+    else{const len=Wd*.12;for(let i=0;i<3;i++){c.strokeStyle=`rgba(255,120,80,${1-k})`;c.lineWidth=6*(1-k)+1.5;c.beginPath();
+      const dx=(i-1)*12,p=Math.min(1,k*3.5);c.moveTo(dx-len*.4,-len*.5);c.lineTo(dx-len*.4+len*.8*p,-len*.5+len*p);c.stroke();}}
+    c.restore();return true});
+  // weapon smear
+  c.globalCompositeOperation="lighter";S.trail=S.trail.filter(q=>{q.t+=dt;const k=q.t/.16;if(k>=1)return false;c.globalAlpha=(1-k)*.8;const sh=q.ox!=null?H.sx-q.ox:0;c.save();c.translate(sh,0);
+    const g=c.createLinearGradient(q.c[0],q.c[1],q.d[0],q.d[1]);g.addColorStop(0,q.col[1]+"00");g.addColorStop(1,q.col[0]);c.fillStyle=g;
+    c.beginPath();c.moveTo(...q.a);c.lineTo(...q.b);c.lineTo(...q.d);c.lineTo(...q.c);c.closePath();c.fill();c.restore();c.globalAlpha=1;return true});c.globalCompositeOperation="source-over";
+  // staff orb
+  if(H.orb){const o=H.orb,g=c.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r*2.2);g.addColorStop(0,"#fff");g.addColorStop(.35,WPN.staff.col[0]);g.addColorStop(1,"rgba(79,191,74,0)");
+    c.fillStyle=g;c.beginPath();c.arc(o.x,o.y,o.r*2.2*(1+.08*Math.sin(t*.06)),0,7);c.fill();}
+  // projectiles
+  S.proj=S.proj.filter(p=>{p.t+=dt;const k=clamp(p.t/p.dur);if(p.t>p.dur+.05)return false;const x=p.x0+(p.x1-p.x0)*k,y=p.y0+(p.y1-p.y0)*k-Math.sin(k*Math.PI)*(p.kind==="arrow"?Wd*.02:Wd*.05);
+    p.hist.push([x,y]);if(p.hist.length>7)p.hist.shift();
+    c.lineCap="round";for(let i=1;i<p.hist.length;i++){c.strokeStyle=p.col[1];c.globalAlpha=i/p.hist.length*.7;c.lineWidth=(p.kind==="arrow"?3:10)*i/p.hist.length;c.beginPath();c.moveTo(...p.hist[i-1]);c.lineTo(...p.hist[i]);c.stroke()}
+    c.globalAlpha=1;if(p.kind==="orb"){const g=c.createRadialGradient(x,y,0,x,y,Wd*.05);g.addColorStop(0,"#fff");g.addColorStop(.4,p.col[0]);g.addColorStop(1,"rgba(79,191,74,0)");c.fillStyle=g;c.beginPath();c.arc(x,y,Wd*.05,0,7);c.fill()}
+    else{const a=Math.atan2(p.y1-p.y0,p.x1-p.x0);c.save();c.translate(x,y);c.rotate(a);c.strokeStyle="#5a3a22";c.lineWidth=3;c.beginPath();c.moveTo(-Wd*.07,0);c.lineTo(0,0);c.stroke();
+      c.fillStyle=p.col[1];c.beginPath();c.moveTo(Wd*.025,0);c.lineTo(-Wd*.005,-Wd*.012);c.lineTo(-Wd*.005,Wd*.012);c.fill();c.fillStyle=p.col[0];c.beginPath();c.arc(0,0,Wd*.012,0,7);c.fill();c.restore()}
+    return true});
+  // impact ring
+  if(S.ring){S.ring.t+=dt;const k=S.ring.t/.28;if(k>=1)S.ring=null;else{c.strokeStyle=`rgba(255,255,255,${1-k})`;c.lineWidth=4*(1-k);c.beginPath();c.arc(S.ring.x,S.ring.y,10+k*Wd*.14,0,7);c.stroke();}}
+  if(S.ring2){S.ring2.t+=dt;const k=S.ring2.t/.4;if(k>=1)S.ring2=null;else{c.strokeStyle=`rgba(246,221,166,${1-k})`;c.lineWidth=6*(1-k);c.beginPath();c.ellipse(S.ring2.x,S.ring2.y,10+k*Wd*.35,4+k*Wd*.06,0,0,7);c.stroke();}}
+  if($("#bones").checked){if(S.mode==="parts")drawRigBones(c);else if(lastMats)drawBones(c);}
+}
+function drawBones(c){
+  c.strokeStyle="rgba(120,230,255,.28)";c.lineWidth=.7;
+  for(let j=0;j<=N;j+=2){c.beginPath();for(let i=0;i<=N;i++){const v=j*(N+1)+i,[x,y]=toScr(deformed[2*v],deformed[2*v+1]);i?c.lineTo(x,y):c.moveTo(x,y)}c.stroke()}
+  for(let i=0;i<=N;i+=2){c.beginPath();for(let j=0;j<=N;j++){const v=j*(N+1)+i,[x,y]=toScr(deformed[2*v],deformed[2*v+1]);j?c.lineTo(x,y):c.moveTo(x,y)}c.stroke()}
+  const pos=BONES.map((b,i)=>{const m=lastMats[i];return toScr(m[0]*b.p[0]+m[2]*b.p[1]+m[4],m[1]*b.p[0]+m[3]*b.p[1]+m[5])});
+  c.strokeStyle="#FFD54A";c.lineWidth=3;BONES.forEach((b,i)=>{if(b.par<0)return;c.beginPath();c.moveTo(...pos[b.par]);c.lineTo(...pos[i]);c.stroke()});
+  pos.forEach(([x,y])=>{c.fillStyle="#FFD54A";c.beginPath();c.arc(x,y,5,0,7);c.fill();c.strokeStyle="#1B2421";c.lineWidth=1.5;c.stroke()});
+}
+
+/* ---------------- actions ---------------- */
+const at=(ms,fn)=>S.queue.push({t:S.sim+ms,fn});
+function hitStop(ms){S.freeze=(S.rnow||performance.now())+ms*(slowMul())}
+function slowMul(){return $("#slow").checked?3.3:1}
+function heroAttack(crit,ko){
+  if(S.wolf.ko||S.hero.ko) return;
+  if(S.hero.act==="atk") return;
+  const wp=WPN[WSEL];S.hero.act="atk";S.hero.t0=S.sim;S.hero.shot=false;
+  at(S.mode==="parts"?RW[WSEL].impact:wp.impact,()=>{const w=S.wolf;w.act=ko?"ko":"hit";w.t0=S.sim;w.keys=ko?W_KO:hitKeys(crit?1.5:1);if(ko)w.ko=true;
+    w.flash=[[S.sim,1],[S.sim+(crit?160:110),.9],[S.sim+260,0]];w.red=[[S.sim,0],[S.sim+120,.35],[S.sim+420,0]];
+    const cx=L.wx-Wd*.02,cy=L.gy-Wd*.2,big=crit||ko;impactFx(WSEL,cx,cy,big);
+    dmg(cx,cy-Wd*.12,ko?999:crit?186:74,crit||ko);hitStop(big?170:WSEL==="hammer"?130:85);S.shake=big?14:WSEL==="hammer"?12:6;if(crit||ko){S.zoom=1;S.slowUntil=S.sim+380}
+    S.hp.m=ko?0:Math.max(.08,S.hp.m-(crit?.35:.14));if(ko){at(950,()=>{S.hero.act="win"})}});
+}
+function wolfAttack(){
+  if(S.wolf.ko||S.hero.ko) return;
+  const w=S.wolf;w.act="atk";w.t0=S.sim;w.keys=W_ATK;
+  at(W_ATK_IMPACT,()=>{S.hero.act="hurt";S.hero.t0=S.sim;const cx=L.hx+Wd*.02,cy=L.gy-Wd*.2;claw(cx,cy);burst(cx,cy,14,false);S.ring={x:cx,y:cy,t:0};
+    dmg(cx,cy-Wd*.1,52,false);hitStop(90);S.shake=8;S.hp.p=Math.max(.1,S.hp.p-.16)});
+}
+function reset(){Object.assign(S.wolf,{act:null,keys:null,ko:false,flash:[[0,0]],red:[[0,0]]});S.hero.act=null;S.hero.winT=null;S.hero.ko=false;S.trail=[];S.proj=[];H.orb=null;S.hp={p:1,m:1,pl:1,ml:1};S.queue=[];
+  document.querySelectorAll(".dmg").forEach(d=>d.remove())}
+let demoTimer=null;
+function demo(on){S.demo=on;$("#demoBtn").textContent=on?"■ 停止示範":"▶ 自動示範";clearTimeout(demoTimer);if(!on)return;
+  const seq=[()=>{pickW("sword");heroAttack(false)},()=>wolfAttack(),()=>{pickW("hammer");heroAttack(true)},()=>{pickW("trident");heroAttack(false)},()=>{pickW("staff");heroAttack(false)},()=>{pickW("bow");heroAttack(false,true)},()=>{reset();pickW("sword")}];let i=0;
+  const step=()=>{if(!S.demo)return;if(S.mode==="old")oldAct(["hero","wolf","hero","hero","hero","hero",null][i]);else seq[i]();const gap=[1500,1500,2300,1600,1900,2700,700][i];i=(i+1)%seq.length;demoTimer=setTimeout(step,gap*slowMul())};step();}
+
+/* ---------------- old version ---------------- */
+function oldAct(a){if(!a)return;const h=$("#old .o-hero"),m=$("#old .mon-seal");[h,m].forEach(e=>{e.className=e.className.replace(/ ?o-\S+/g,"");void e.offsetWidth});
+  if(a==="hero"){h.classList.add("o-atk-h");m.classList.add("o-hurt");setTimeout(()=>{const d=document.createElement("div");d.className="dmg";d.textContent="-74";d.style.cssText="left:74%;top:30%";$("#old").appendChild(d);setTimeout(()=>d.remove(),1400)},10)}
+  else{m.classList.add("o-atk-m");h.classList.add("o-hurt");setTimeout(()=>{const d=document.createElement("div");d.className="dmg";d.textContent="-52";d.style.cssText="left:24%;top:30%";$("#old").appendChild(d);setTimeout(()=>d.remove(),1400)},10)}}
+function setMode(m){S.mode=m;["Parts","New","Old"].forEach(k=>$("#m"+k).setAttribute("aria-pressed",m===k.toLowerCase().replace("new","new")));
+  $("#mParts").setAttribute("aria-pressed",m==="parts");$("#mNew").setAttribute("aria-pressed",m==="new");$("#mOld").setAttribute("aria-pressed",m==="old");
+  const old=m==="old";[fx,shc,hc].forEach(e=>e.style.display=old?"none":"");glc.style.display=m==="new"?"":"none";pc.style.display=m==="parts"?"":"none";
+  $("#old").style.display=old?"block":"none";reset();}
+
+__RIGJS__
+/* ---------------- main loop ---------------- */
+let emberAcc=0;
+function frame(now){
+  S.rnow=now;const realDt=Math.min(.05,(now-(S.last||now))/1000);S.last=now;
+  let dt=realDt/slowMul(); if(now<S.freeze) dt=0; if(S.sim<S.slowUntil) dt*=.45;
+  S.sim+=dt*1000;const t=S.sim;
+  {const due=S.queue.filter(q=>t>=q.t);S.queue=S.queue.filter(q=>t<q.t);due.forEach(q=>q.fn());}
+  if((S.mode==="new"&&gl)||S.mode==="parts"){
+    const PARTS=S.mode==="parts";S.showBones=$("#bones").checked;
+    const w=S.wolf;let act=REST,idleAmt=1;
+    if(w.act){const d=t-w.t0;act=samplePose(w.keys,d);const dur=w.keys[w.keys.length-1][0];idleAmt=w.ko?clamp(1-d/300):clamp((d-dur+250)/250);if(!w.ko&&d>dur){w.act=null}}
+    if(w.ko&&!w.act) act=W_KO[W_KO.length-1][1],idleAmt=0;
+    let pose=addPose(act,idlePose(t,reduce?0:idleAmt));
+    // jitter while hurt
+    if(w.act==="hit"&&t-w.t0<180){const j=(1-(t-w.t0)/180)*6;pose[0][0]+=(Math.random()-.5)*j;pose[0][1]+=(Math.random()-.5)*j*.5}
+    const ko=w.ko?clamp((t-w.t0-350)/550):0;
+    const U={f:sampleNum(w.flash,t),r:sampleNum(w.red,t),g:ko,a:1-ko*.15};
+    if(PARTS){drawWolfRig(pose,t,U,w);drawHeroRig(t);}else{drawWolf(pose,t,U);drawHero(t);}
+    // embers
+    emberAcc+=dt*(w.ko?2:9);while(emberAcc>1){emberAcc--;if(!reduce)(PARTS?wolfRigEmber:ember)()}
+    // shadows under fighters
+    drawFx(dt,t);
+    const c=shc.getContext("2d");c.setTransform(DPR,0,0,DPR,0,0);c.clearRect(0,0,Wd,Ht);
+    let sx,lift;if(PARTS){const p=lastWolfRig.base.multiply(lastWolfRig.M.root).transformPoint(new DOMPoint(WP.feet[0],WP.feet[1]));sx=p.x/DPR;lift=clamp((L.gy-p.y/DPR)/30);}
+    else{const wr=lastMats[0];sx=toScr(wr[4]+FOOT.x,FOOT.y)[0];lift=clamp(-(wr[5])/40);}
+    c.fillStyle=`rgba(0,0,0,${.32-lift*.15})`;c.beginPath();c.ellipse(sx,L.gy+2,Wd*.17*(1-lift*.25),Wd*.025,0,0,7);c.fill();
+    const hx=H.left+H.B/2;c.beginPath();c.ellipse(hx,L.gy+2,Wd*.1,Wd*.022,0,0,7);c.fill();
+  }
+  // shake / zoom
+  S.shake*=Math.pow(.0009,realDt);S.zoom*=Math.pow(.004,realDt);
+  const sh=reduce?0:S.shake;stage.style.transform=`translate(${(Math.random()-.5)*sh}px,${(Math.random()-.5)*sh*.6}px) scale(${1+S.zoom*.05})`;
+  // hp bars: current snaps, white lag bar drains
+  S.hp.pl+=(S.hp.p-S.hp.pl)*Math.min(1,realDt*2.5);S.hp.ml+=(S.hp.m-S.hp.ml)*Math.min(1,realDt*2.5);
+  $("#hpP").style.transform=`scaleX(${S.hp.p})`;$("#hpM").style.transform=`scaleX(${S.hp.m})`;
+  $("#hpPL").style.transform=`scaleX(${S.hp.pl})`;$("#hpML").style.transform=`scaleX(${S.hp.ml})`;
+  if(!REC)requestAnimationFrame(frame);
+}
+const REC=location.hash==="#rec";window.__P={frame,heroAttack,wolfAttack,pickW:k=>pickW(k),reset,S};
+
+/* ---------------- boot ---------------- */
+$("#oHero").src=IMG["idle-hold"];$("#oWolf").src=IMG.wolf;
+Promise.all(Object.keys(IMG).map(k=>new Promise(r=>{const i=new Image();i.onload=()=>r();i.onerror=()=>r();i.src=IMG[k];IM[k]=i}))).then(()=>{size();if(!initGL(IM.wolf)){$("#mNew").style.display="none"}setMode("parts");buildPicker();if(!REC)requestAnimationFrame(frame);window.__ready=1});
+function buildPicker(){const p=$("#wpick");p.innerHTML=Object.entries(WPN).map(([k,w])=>`<button data-w="${k}" aria-pressed="${k===WSEL}"><img src="${IMG[w.img]}" alt="">${w.name}</button>`).join("");
+  p.querySelectorAll("button").forEach(b=>b.onclick=()=>pickW(b.dataset.w));}
+function pickW(k){WSEL=k;document.querySelectorAll("#wpick button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.w===k));S.hero.act=null;}
+addEventListener("resize",size);
+document.querySelectorAll("[data-a]").forEach(b=>b.addEventListener("click",()=>{const a=b.dataset.a;
+  if(a==="demo") return demo(!S.demo);
+  if(S.demo) demo(false);
+  if(S.mode==="old"){ if(a==="hero"||a==="crit"||a==="ko")oldAct("hero"); else if(a==="wolf")oldAct("wolf"); return; }
+  if(a==="hero")heroAttack(false);else if(a==="wolf")wolfAttack();else if(a==="crit")heroAttack(true);else if(a==="ko")heroAttack(true,true);else reset();}));
+$("#mParts").onclick=()=>setMode("parts");$("#mNew").onclick=()=>setMode("new");$("#mOld").onclick=()=>setMode("old");
+</script>
+</body>
+</html>
