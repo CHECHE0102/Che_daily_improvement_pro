@@ -1826,7 +1826,7 @@ function viewRead(){
   const lu=lookedUpFor(d,art), post=postFor(d,art);
   const hits=new Set(lu);
   const known=new Set([...S.words.values()].flatMap(w=>w.forms||[]));
-  const paras=parasOf(art).map((p,pi)=>`<p${READ.on&&READ.art===art.id&&READ.cur===pi?' class="reading"':""}>`+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((tok,i)=>{
+  const paras=parasOf(art).map((p,pi)=>`<p${READ.on&&READ.art===readKey(art)&&READ.cur===pi?' class="reading"':""}>`+p.split(/([A-Za-zÀ-ÿ]+(?:['’-][A-Za-zÀ-ÿ]+)*)/).map((tok,i)=>{
     if(i%2===0) return esc(tok);
     const k=tok.toLowerCase(); const g=glossFor(art,tok); const lemma=(g&&g.base||k).toLowerCase();
     const cls="w"+(hits.has(lemma)?" hit":(known.has(k)?" known":""));
@@ -6251,12 +6251,14 @@ function readBarInner(){
 }
 function readUi(){ const b=document.getElementById("readBar"); if(b) b.innerHTML=readBarInner(); if(typeof SND!=="undefined"&&SND.ctx) musicDuck(!!(READ.on&&!READ.paused)||examOn()); }
 function readMark(pi){ READ.cur=pi; document.querySelectorAll("#article p").forEach((p,i)=>p.classList.toggle("reading",i===pi&&!(window.LS&&LS.on))); }   // no auto-scroll: the page stays where the reader left it
+// the same article has different text per level (A2 / B1 / IELTS…), so sentence lists are keyed by article + level
+function readKey(art){ art=art||currentArticle(); return art?art.id+"|"+(levelOf(art)||"base"):null; }
 function readChunks(){ const out=[]; document.querySelectorAll("#article p").forEach((p,pi)=>{ p.textContent.split(/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/).forEach(t=>{ t=t.trim(); if(t) out.push({pi,t}); }); }); return out; }
 function readStart(){
   if(!window.speechSynthesis) return toast(T("readNoTts"));
   if(window.LS&&(LS.playing||LS.wait)) lsHalt();
   try{ speechSynthesis.cancel(); }catch(e){}
-  READ.chunks=readChunks(); READ.i=0; READ.on=true; READ.paused=false; READ.art=S.articleId||(currentArticle()||{}).id; READ.lastPi=-1;
+  READ.chunks=readChunks(); READ.i=0; READ.on=true; READ.paused=false; READ.art=readKey(); READ.lastPi=-1;
   const rec=readRec();
   if(rec&&rec.t&&rec.t.length===READ.chunks.length){ readAudio(rec); readUi(); return; }
   readNext(); readUi();
@@ -6284,7 +6286,8 @@ function readNext(){
 function readPause(){ READ.paused=true; if(READ.audio){ try{ READ.audio.pause(); }catch(e){} return readUi(); } READ.tok++; try{ speechSynthesis.cancel(); }catch(e){} readUi(); }
 function readResume(){ READ.paused=false; if(READ.audio){ READ.audio.play().catch(()=>{}); return readUi(); } readNext(); readUi(); }
 function readStop(){ READ.on=false; READ.paused=false; READ.tok++; if(READ.audio){ newsElStop("read"); READ.audio=null; } try{ speechSynthesis.cancel(); }catch(e){} READ.cur=-1; document.querySelectorAll("#article p.reading").forEach(p=>p.classList.remove("reading")); readUi(); }
-function readStopIfLeft(){ if(READ.on&&(S.view!=="read"||(S.articleId&&S.articleId!==READ.art))) readStop(); if(window.LS&&(LS.playing||LS.wait)&&S.view!=="read") lsHalt(); if(window.LS&&S.articleId!==LS.art){ LS.art=S.articleId; LS.i=0; LS.a=LS.b=null; } }
+function readStopIfLeft(){ const k=readKey(); if(READ.on&&(S.view!=="read"||READ.art!==k)) readStop(); if(READ.art!==k) READ.chunks=[];
+  if(window.LS&&(LS.playing||LS.wait||LS.listening)&&(S.view!=="read"||LS.art!==k)) lsHalt(); if(window.LS&&LS.art!==k){ LS.art=k; LS.i=0; LS.a=LS.b=null; LS.res=null; if(LS.on) setTimeout(lsUi,0); } }   // redraw once the new text is on the page
 Object.assign(STR.zh,{srsTicketMin:"複習 {n} 個字以上才能拿彩券", srsTicket:"完成一次拿 1 張彩券 · 今天還能拿 {n} 張", srsTitle:"間隔複習", srsDueN:"今天有 {n} 個字該複習了", srsClear:"今天的字都複習完了 ✅ 明天有 {n} 個", srsStart:"複習 {n} 個字", srsNone:"今天沒有要複習的字 🎉", srsHow:"答對的字會隔越來越久才再出現（1→2→4→7→15→30 天），答錯就從明天重新開始。", srsBoxes:"每個格子代表多久複習一次", srsAfter:"還有 {n} 個字今天到期 · 明天預計 {t} 個", readAloud:"朗讀全文", readPause:"暫停", readResume:"繼續", readStop:"停止", readSpeed:"{r}x", readNoTts:"這個瀏覽器不支援朗讀"});
 Object.assign(STR.en,{srsTicketMin:"Review at least {n} words to earn a lucky ticket", srsTicket:"Finish a review for 1 lucky ticket · {n} left today", srsTitle:"Spaced review", srsDueN:"{n} words are due for review today", srsClear:"All caught up today ✅ {n} due tomorrow", srsStart:"Review {n}", srsNone:"Nothing to review today 🎉", srsHow:"Words you get right come back after longer and longer gaps (1→2→4→7→15→30 days); miss one and it starts again tomorrow.", srsBoxes:"Each box is how often a word comes back", srsAfter:"{n} words still due today · about {t} tomorrow", readAloud:"Read aloud", readPause:"Pause", readResume:"Resume", readStop:"Stop", readSpeed:"{r}x", readNoTts:"This browser can't read text aloud"});
 Object.assign(STR.hi,{srsTicketMin:"लकी टिकट के लिए कम से कम {n} शब्द दोहराएँ", srsTicket:"एक दोहराई पूरी करें, 1 लकी टिकट पाएँ · आज {n} बाकी", srsTitle:"अंतराल दोहराव", srsDueN:"आज {n} शब्द दोहराने हैं", srsClear:"आज के सब शब्द हो गए ✅ कल {n}", srsStart:"{n} दोहराएँ", srsNone:"आज दोहराने को कुछ नहीं 🎉", srsHow:"सही जवाब वाले शब्द लंबे अंतराल पर लौटते हैं (1→2→4→7→15→30 दिन); गलत होने पर कल फिर से।", srsBoxes:"हर खाना बताता है शब्द कितने दिन में लौटेगा", srsAfter:"आज अभी {n} बाकी · कल लगभग {t}", readAloud:"ज़ोर से पढ़ें", readPause:"रोकें", readResume:"जारी रखें", readStop:"बंद", readSpeed:"{r}x", readNoTts:"यह ब्राउज़र पढ़कर नहीं सुना सकता"});
@@ -7889,7 +7892,7 @@ function weekCard(){
 
 /* ================= 精聽 close-listening tool (members): one sentence at a time, A–B loop, shadowing ================= */
 var LS={on:false,i:0,a:null,b:null,shadow:false,playing:false,wait:0,tok:0,audio:null};
-function lsChunks(){ if(!READ.chunks.length||READ.art!==(S.articleId||(currentArticle()||{}).id)){ READ.chunks=readChunks(); READ.art=S.articleId||(currentArticle()||{}).id; } return READ.chunks; }
+function lsChunks(){ const k=readKey(), el=document.getElementById("article"); if(!READ.chunks.length||READ.art!==k||(el&&READ.el!==el&&!READ.on)){ READ.chunks=readChunks(); READ.art=k; READ.el=el; } return READ.chunks; }
 function lsInner(){
   if(!LS.on) return "";
   if(!planHas("sub")) return `<div class="ls-panel locked"><b>🎧 ${T("lsT")}</b> ${planTag("sub")}<p class="sm-t" style="margin:4px 0 0">${T("lsWhat")}</p><p class="muted sm-t" style="margin:4px 0 0">${T("lsLocked")}</p></div>`;
