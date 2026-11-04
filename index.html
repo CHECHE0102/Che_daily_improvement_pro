@@ -1150,6 +1150,39 @@ body.vp-lock{touch-action:pan-x pan-y}
 @keyframes ashake{20%,60%{transform:translate(-3px,1px)}40%,80%{transform:translate(3px,-1px)}}
 @keyframes ashake2{15%{transform:translate(-6px,3px)}30%{transform:translate(6px,-3px)}45%{transform:translate(-5px,-2px)}60%{transform:translate(4px,3px)}80%{transform:translate(-2px,0)}}
 .sty-stage{overflow:hidden}
+/* 100- and 180-day streak pieces */
+.hero-art .cos-feet.cf-f-galaxy{width:100%;bottom:-10%}
+.cos-feet.cf-f-galaxy .disc{background:radial-gradient(closest-side,rgba(255,255,255,.95),#C9A8FF 14%,rgba(90,50,190,.8) 40%,rgba(30,15,90,.45) 62%,transparent 80%)}
+.cos-feet.cf-f-galaxy .spin{inset:0;background:conic-gradient(from 0deg,transparent,#7FD4FF 8%,transparent 22% 50%,#C9A8FF 58%,transparent 72%);-webkit-mask:radial-gradient(closest-side,transparent 14%,#000 26% 84%,transparent 96%);mask:radial-gradient(closest-side,transparent 14%,#000 26% 84%,transparent 96%);filter:drop-shadow(0 0 6px #9B7BFF);animation-duration:5s}
+.cos-feet.cf-f-galaxy .spin.s2{inset:8%;background:conic-gradient(from 90deg,transparent,#fff 6%,transparent 16% 50%,#FFB8F0 56%,transparent 66%);animation-duration:8s;animation-direction:reverse;opacity:.85}
+.cos-feet.cf-f-galaxy .gc{position:absolute;inset:40%;border-radius:50%;background:radial-gradient(closest-side,#fff,rgba(255,255,255,0));animation:cospulse 1.6s ease-in-out infinite}
+.cos-feet.cf-f-galaxy b{width:10%;border-radius:0;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);box-shadow:none;filter:drop-shadow(0 0 3px #9B7BFF);animation-duration:2.8s}
+.cos-feet.cf-f-galaxy b:nth-of-type(4){left:36%;animation-delay:.4s}.cos-feet.cf-f-galaxy b:nth-of-type(5){left:50%;animation-delay:1.2s}.cos-feet.cf-f-galaxy b:nth-of-type(6){left:72%;animation-delay:2s}
+.cos-back.cb-b-aurora{top:40%;width:104%}
+.cos-back.cb-b-aurora .au{position:absolute;left:4%;right:4%;top:6%;height:62%;border-radius:50% 50% 40% 40%/70% 70% 30% 30%;background:linear-gradient(to bottom,transparent,rgba(92,255,176,.9) 30%,rgba(79,216,255,.8) 55%,rgba(155,123,255,.55) 80%,transparent);filter:blur(3px) drop-shadow(0 0 8px #5CFFB0);opacity:.8;transform-origin:50% 100%;animation:aurora 4s ease-in-out infinite alternate}
+.cos-back.cb-b-aurora .a2{left:-8%;right:30%;top:16%;background:linear-gradient(to bottom,transparent,rgba(255,140,220,.75) 35%,rgba(155,123,255,.7) 65%,transparent);animation-duration:5s;animation-delay:-1.5s;opacity:.7}
+.cos-back.cb-b-aurora .a3{left:30%;right:-8%;top:12%;background:repeating-linear-gradient(90deg,transparent 0 5%,rgba(220,255,240,.8) 6% 7%,transparent 8% 12%);-webkit-mask:linear-gradient(to bottom,transparent,#000 30% 70%,transparent);mask:linear-gradient(to bottom,transparent,#000 30% 70%,transparent);filter:blur(1px);animation:aurora2 3s ease-in-out infinite alternate}
+@keyframes aurora{0%{transform:skewX(-12deg) scaleY(.88)}100%{transform:skewX(12deg) scaleY(1.08)}}
+@keyframes aurora2{0%{transform:translateX(-6%) skewX(8deg);opacity:.5}100%{transform:translateX(6%) skewX(-8deg);opacity:.95}}
+.cos-back.cb-b-sun{width:104%}
+.cos-back.cb-b-sun .rays{position:absolute;inset:-4%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,214,90,.95) 0 3deg,transparent 3deg 15deg);-webkit-mask:radial-gradient(closest-side,transparent 40%,#000 50% 72%,transparent 100%);mask:radial-gradient(closest-side,transparent 40%,#000 50% 72%,transparent 100%);filter:drop-shadow(0 0 6px #FFB300);animation:cosspin 16s linear infinite}
+.cos-back.cb-b-sun .rays.r2{inset:6%;background:repeating-conic-gradient(from 7deg,rgba(255,140,40,.9) 0 2deg,transparent 2deg 10deg);animation-duration:10s;animation-direction:reverse}
+.cos-back.cb-b-sun .core{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,250,220,.95),rgba(255,200,60,.7) 55%,rgba(255,140,30,0));animation:cospulse 2.2s ease-in-out infinite}
+.cos-back.cb-b-sun svg{inset:13%;width:74%;height:74%}
+.cos-back.cb-b-sun .orb{position:absolute;inset:0;animation:cosspin 5s linear infinite}.cos-back.cb-b-sun .orb.o2{animation-delay:-1.67s}.cos-back.cb-b-sun .orb.o3{animation-delay:-3.33s}
+.cos-back.cb-b-sun .orb b{position:absolute;left:46%;top:-1%;width:8%;height:8%;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#FFD54A 50%,#FF8A1F);box-shadow:0 0 10px 3px #FFB300}
+.cos-neck.cn-prism svg{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 6px #C9A8FF);animation:prismhue 3s linear infinite}
+@keyframes prismhue{to{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 6px #C9A8FF) hue-rotate(360deg)}}
+.cbx-prism .core{left:-60px;top:-60px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#fff,rgba(255,255,255,.6) 30%,transparent 70%);opacity:0;animation:pzcore .7s ease-out forwards}
+@keyframes pzcore{0%{opacity:1;transform:scale(.2)}40%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(1.4)}}
+.cbx-prism .bm{left:-6px;top:-150px;width:12px;height:150px;border-radius:6px;transform-origin:50% 100%;transform:rotate(var(--a)) scaleY(0);background:linear-gradient(to top,#fff,hsl(var(--h) 95% 65%) 40%,transparent);filter:drop-shadow(0 0 6px hsl(var(--h) 95% 60%));opacity:0;animation:pzbeam .75s ease-out var(--d) forwards}
+@keyframes pzbeam{0%{opacity:1;transform:rotate(var(--a)) scaleY(0)}40%{opacity:1;transform:rotate(var(--a)) scaleY(1)}100%{opacity:0;transform:rotate(var(--a)) scaleY(1.2)}}
+.cbx-prism .rg{left:-70px;top:-70px;width:140px;height:140px;border-radius:50%;background:conic-gradient(#FF5E7E,#FFB347,#FFE66D,#6EE7A0,#5EC8FF,#9B7BFF,#FF5E7E);-webkit-mask:radial-gradient(closest-side,transparent 86%,#000 89%);mask:radial-gradient(closest-side,transparent 86%,#000 89%);filter:drop-shadow(0 0 8px #fff);opacity:0;animation:cosring .7s ease-out .3s forwards}.cbx-prism .rg.r2{animation-delay:.5s;animation-duration:.9s}
+.cbx-prism em{left:-5px;top:-5px;width:10px;height:10px;background:hsl(var(--h) 100% 78%);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:0;animation:starspk .9s ease-out .35s forwards}
+.cfx-prism .cfx-fl{background:radial-gradient(circle at 72% 55%,rgba(255,255,255,.9),rgba(255,255,255,0) 35%),conic-gradient(from 0deg at 72% 55%,rgba(255,94,126,.5),rgba(255,230,109,.5),rgba(110,231,160,.5),rgba(94,200,255,.5),rgba(155,123,255,.5),rgba(255,94,126,.5));animation:aflash2 .8s ease-out .2s}
+.arena2.cfx-prism,.sty-stage.cfx-prism{animation:ashake2 .6s ease-in-out .3s}
+@media (prefers-reduced-motion:reduce){.cos-back.cb-b-aurora .au,.cos-back.cb-b-sun .rays,.cos-back.cb-b-sun .orb,.cos-back.cb-b-sun .core,.cos-feet.cf-f-galaxy .gc,.cos-neck.cn-prism svg,.arena2.cfx-prism,.sty-stage.cfx-prism{animation:none!important}}
+
 .cos-pow{font-size:12px;color:#C9921A;letter-spacing:1px}.cos-pow i{font-style:normal;color:var(--line)}
 @media (prefers-reduced-motion:reduce){.cos-hel em,.cos-orbit .rr u,.cos-helix .hx,.cos-sparks b,.cos-orbit .ob b,.cos-orbs em,.cos-crys .rot,.cos-crys .sh,.cos-back .gr,.cos-back .mn,.cos-back .stars,.cos-back .ab svg,.cos-back s,.cos-back em,.cos-back.cb-b-phoenix,.cos-col,.cos-neck svg{animation:none!important}.cos-helix .hx{opacity:.8;transform:scale(1,.26)}.arena2.cfx,.sty-stage.cfx-dark,.sty-stage.cfx-star{animation:none!important}}
 .easy-hint{display:flex;flex-direction:column;gap:8px;border-color:rgba(64,190,150,.45)}.easy-hint p{margin:0;font-size:14px;line-height:1.5}.easy-acts{display:flex;flex-wrap:wrap;gap:8px}
@@ -2280,13 +2313,15 @@ const ITEMS={};
 /* shop gear: every level Lv1–20 sells 3 weapons + 3 armours of different elements; stats grow a little each level
    (the wild monsters were tuned assuming gear of your level − 1) */
 const GEAR_W=L=>Math.round(4+2.4*L+0.06*L*L), GEAR_D=L=>Math.round(2.5+1.6*L+0.04*L*L), GEAR_H=L=>Math.round(10+8*L+0.45*L*L);
-const GEAR_PRICE=L=>{ const A=[[1,80],[4,300],[8,900],[13,2500],[20,5500]]; for(let i=0;i<A.length-1;i++){ const [a,pa]=A[i],[b,pb]=A[i+1]; if(L>=a&&L<=b) return Math.round((pa+(pb-pa)*(L-a)/(b-a))/10)*10; } return 5500; };
+/* shop prices grow by ×5 per tier (Ⅰ–Ⅳ), because income grows a lot in the late game: the first piece of a new tier is
+   affordable the day it unlocks, collecting all ten of a tier is a long goal (checked with the economy simulation, Nov 2026) */
+const GEAR_TIER_PRICE=[300,1500,7500,37500];
 const tierOfLv=L=>{ let t=0; TIER_LV.forEach((x,i)=>{ if(L>=x) t=i; }); return t; };
 /* the shop sells only the plain pieces: 5 elements x 4 tiers, a weapon and an armour each. A tier opens at Lv 1 / 13 / 26 / 39.
    Tier Ⅰ–Ⅳ pieces have 1–4 gem sockets; growing stronger inside a tier now comes from element gems (see GEM below). */
 for(const e of ELS) TIER_LV.forEach((L,t)=>{ const q=pl(L);
-  ITEMS[`w-${e.k}-${t}`]={id:`w-${e.k}-${t}`, slot:"weapon", el:e.k, tier:t, name:WNAMES[e.k][t], atk:GEAR_W(q), price:GEAR_PRICE(q), lv:L, sockets:t+1};
-  ITEMS[`a-${e.k}-${t}`]={id:`a-${e.k}-${t}`, slot:"armor", el:e.k, tier:t, name:ANAMES[e.k][t], def:GEAR_D(q), hp:GEAR_H(q), price:GEAR_PRICE(q), lv:L, sockets:t+1};
+  ITEMS[`w-${e.k}-${t}`]={id:`w-${e.k}-${t}`, slot:"weapon", el:e.k, tier:t, name:WNAMES[e.k][t], atk:GEAR_W(q), price:GEAR_TIER_PRICE[t], lv:L, sockets:t+1};
+  ITEMS[`a-${e.k}-${t}`]={id:`a-${e.k}-${t}`, slot:"armor", el:e.k, tier:t, name:ANAMES[e.k][t], def:GEAR_D(q), hp:GEAR_H(q), price:GEAR_TIER_PRICE[t], lv:L, sockets:t+1};
 });
 /* element gems: 3 shards of one element and tier → 1 gem. A weapon gem adds attack, an armour gem adds defence and HP;
    a gem whose element matches the piece counts 1.5x. Gems stay in the piece they are set in; an unsocketing charm takes one out. */
@@ -2843,25 +2878,44 @@ function stats(g=game()){
    new articles still works), plus 1 for finishing the daily three steps. Older articles and the review quiz give gold only. */
 const newestArtDate=()=>S.index.reduce((m,a)=>a.date>m?a.date:m,"");
 const isTicketArt=art=>!!(art&&art.date&&art.date===newestArtDate());
+/* the word quizzes also give EXP, so someone who only reads still levels up (slowly: fights stay the main way) */
+const QUIZ_EXP={per:2, acc:10};   // 2 EXP per right answer, +10 at 80% or better
+/* older articles (not the newest day's news) pay only the first time ever, and at most OLD_ART_DAY of them a day,
+   so the archive cannot be farmed for gold. The quiz itself can still be taken as practice. */
+const OLD_ART_DAY=3;
+function oldArtPaidBefore(id){ const t=today();
+  for(const [k,v] of S.days){ if(!k.startsWith("day~")||v.date===t) continue; if((v.postBy&&v.postBy[id])||(v.oldPaid||[]).includes(id)||(v.read===id&&v.postDone)) return true; }
+  return false; }
+function gainExp(g,n){ const before=g.lv; g.exp+=n; while(g.lv<LV_MAX&&g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; } if(g.lv>=LV_MAX) g.exp=Math.min(g.exp,expNeed(LV_MAX)); return g.lv-before; }
 function awardQuiz(kind, score, total, isMainPost, art){
   if(!total) return null;
   const g=game(), acc=score/total;
   const r={kind, base:score*10, acc:(acc>=0.8?20:0)+(acc===1?20:0), tickets:kind==="post"&&isTicketArt(art)?1:0, bonus:0, bonusTickets:0, acc100:Math.round(acc*100), old:kind==="post"&&!isTicketArt(art)};
+  if(r.old&&art){ const d=dayRec(), paid=d.oldPaid||[];
+    if(paid.includes(art.id)||oldArtPaidBefore(art.id)){ r.noPay="lootOldDone"; return r; }
+    if(paid.length>=OLD_ART_DAY){ r.noPay="lootOldCap"; return r; }
+    saveDay({...d, oldPaid:[...paid, art.id]}); }
   if(isMainPost){
     const d=dayRec();
     if(!d.bonus){ r.bonus=30; r.bonusTickets=2; saveDay({...d, bonus:true}); }
   }
   r.gold=r.base+r.acc+r.bonus;
-  g.gold+=r.gold; g.tickets+=r.tickets+r.bonusTickets; saveGame();
+  r.exp=score*QUIZ_EXP.per+(acc>=0.8?QUIZ_EXP.acc:0);
+  g.gold+=r.gold; g.tickets+=r.tickets+r.bonusTickets; r.lvUp=gainExp(g,r.exp); r.lv=g.lv; saveGame();
+  if(r.lvUp) setTimeout(()=>sfx("lvup"),400);
   return r;
 }
 function rewardBox(r){
   if(!r) return "";
+  if(r.noPay) return `<div class="reward"><div class="eyebrow">${T("loot")}</div><div class="rw-row muted"><span>${T(r.noPay,{n:OLD_ART_DAY})}</span><b>+0</b></div>
+    <button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goAdv")}</button></div>`;
   return `<div class="reward"><div class="eyebrow">${T("loot")}</div>
     <div class="rw-row"><span>${T("lootRight",{n:r.base/10})}</span><b>${T("goldAmt",{n:r.base})}</b></div>
     ${r.acc?`<div class="rw-row"><span>${T("lootAcc",{p:r.acc100})}</span><b>${T("goldAmt",{n:r.acc})}</b></div>`:`<div class="rw-row muted"><span>${T("lootAccNo",{p:r.acc100})}</span><b>+0</b></div>`}
     ${r.bonus?`<div class="rw-row"><span>${T("lootDay")}</span><b>${T("goldAmt",{n:r.bonus})}</b></div>`:""}
     ${r.tickets+r.bonusTickets?`<div class="rw-row"><span>${T("tickets")}</span><b>${T("lootT",{n:r.tickets+r.bonusTickets})}</b></div>`:""}
+    ${r.exp?`<div class="rw-row"><span>${T("exp")}</span><b>+${r.exp}</b></div>`:""}
+    ${r.lvUp?`<div class="rw-row"><span>🎉 ${T("lvUp")}</span><b>Lv ${r.lv}</b></div>`:""}
     ${r.kind==="pre"?`<button class="btn ghost" data-act="read" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goFirstNews")}</button>`:`<button class="btn ghost" data-tab="adv" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("goAdv")}</button>`}</div>`;
 }
 
@@ -4301,7 +4355,7 @@ function mergeDay(a,b){ if(!a) return b; if(!b) return a; const base=dScore(b)>d
   // each step is kept if either device finished it (done flags are OR-ed, the score goes with whichever device did that step)
   const pre=base.preDone?base:o.preDone?o:base, post=base.postDone?base:o.postDone?o:base;
   return {...base, preDone:!!(a.preDone||b.preDone), preScore:pre.preScore, preTotal:pre.preTotal, postDone:!!(a.postDone||b.postDone), postScore:post.postScore, postTotal:post.postTotal,
-    read:base.read||o.read||null, lookedUp:[...new Set([...(base.lookedUp||[]),...(o.lookedUp||[])])], lookedUpBy:lb, postBy:{...(o.postBy||{}),...(base.postBy||{})}, bonus:!!(a.bonus||b.bonus)}; }
+    read:base.read||o.read||null, lookedUp:[...new Set([...(base.lookedUp||[]),...(o.lookedUp||[])])], lookedUpBy:lb, postBy:{...(o.postBy||{}),...(base.postBy||{})}, bonus:!!(a.bonus||b.bonus), oldPaid:[...new Set([...(a.oldPaid||[]),...(b.oldPaid||[])])]}; }
 function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
@@ -4409,7 +4463,7 @@ function myLook(){ const g=game(); if(!g||!g.gender) return "";
   const c=g.cos||{}, cc=["feet","back","neck"].map(k=>COS_CODE[c[k]]||"").join("");
   const ex=PLANS_ON?"":"|s"+streakTier(g)+(ieShowBand()>=6?"|i"+Math.round(ieShowBand()*10):"");   const base=[g.gender, g.weapon||"", g.armor||"", sk(g.weapon), sk(g.armor), cc].join("|");   return (base.length+ex.length<=100?base+ex:base).slice(0,100); }
 // styles travel to the leaderboard as two-letter codes (the look field is limited to 100 characters)
-const COS_CODE={"f-leaf":"fl","f-gold":"fg","f-helix":"fh","f-rainbow":"fr","f-rhelix":"fx","b-halo":"bh","b-gears":"bg","b-rune":"br","b-moon":"bm","b-abyss":"ba","b-wings":"bw","b-phoenix":"bp","n-fire":"nf","n-frost":"ni","n-thunder":"nt","n-dark":"nd","n-star":"ns"};
+const COS_CODE={"f-leaf":"fl","f-gold":"fg","f-helix":"fh","f-rainbow":"fr","f-rhelix":"fx","b-halo":"bh","b-gears":"bg","b-rune":"br","b-moon":"bm","b-abyss":"ba","b-wings":"bw","b-phoenix":"bp","n-fire":"nf","n-frost":"ni","n-thunder":"nt","n-dark":"nd","n-star":"ns","f-galaxy":"fv","b-aurora":"bu","b-sun":"bs","n-prism":"np"};
 const COS_DECODE=Object.fromEntries(Object.entries(COS_CODE).map(([k,v])=>[v,k]));
 function parseLook(str){ if(typeof str!=="string") return null; const [g,w,a,ws,as,cc]=str.split("|");
   if(g!=="m"&&g!=="f") return null; const gem=x=>(x||"").split(".").filter(k=>/^(metal|wood|water|fire|earth)-[0-3]$/.test(k)).slice(0,4);
@@ -7815,6 +7869,11 @@ const COSMETICS=[
   {id:"n-thunder", slot:"neck", price:420, c1:"#FFE14D", c2:"#FFFFFF", fx:"thunder", pow:3},
   {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4, need:"sub", days:10},
   {id:"n-star",    slot:"neck", price:800, c1:"#FFD54A", c2:"#FFFFFF", fx:"star",    pow:5, plus:true, days:60},
+  // 100- and 180-day streak pieces: dearer and flashier than everything before them
+  {id:"f-galaxy",  slot:"feet", price:900,  c1:"#9B7BFF", c2:"#7FD4FF", plus:true, days:100},
+  {id:"b-aurora",  slot:"back", price:1000, c1:"#5CFFB0", c2:"#9B7BFF", plus:true, days:100},
+  {id:"b-sun",     slot:"back", price:1300, c1:"#FFC93C", c2:"#FFFFFF", plus:true, days:180},
+  {id:"n-prism",   slot:"neck", price:1500, c1:"#FFFFFF", c2:"#9B7BFF", fx:"prism",   pow:6, plus:true, days:180},
   {id:"s-chime",   slot:"sfx",  price:120},
   {id:"s-taiko",   slot:"sfx",  price:120},
   {id:"s-retro",   slot:"sfx",  price:120}];
@@ -7831,6 +7890,7 @@ function cosFix(g){ if(g.cosFixed===2) return; g.cosFixed=2;
   if(g.cos){ delete g.cos.waist; for(const [k,v] of Object.entries({...g.cos})) if(COS_GONE[v]) delete g.cos[k]; }
   if(back) saveGame(); }
 const cosOf=id=>COSMETICS.find(c=>c.id===id);
+const COS_POW_MAX=Math.max(...COSMETICS.map(c=>c.pow||0));
 const cosOwned=id=>(game().cosOwn||[]).includes(id);
 const cosStyleCss=c=>`--c1:${c.c1||"#fff"};--c2:${c.c2||"#fff"}`;
 function cosWorn(){ cosFix(game()); const w={...(game().cos||{})}; if(S.view==="adv"&&S.advTab==="style"&&S.cosTry) for(const [k,v] of Object.entries(S.cosTry)) w[k]=v; return w; }
@@ -7850,6 +7910,7 @@ const PENDANT={
   frost:`<svg viewBox="0 0 20 24"><path d="M10 1L17 12L10 23L3 12Z" fill="var(--c1)" stroke="#0b4a6e" stroke-width="1.2"/><path d="M10 4L13 12L10 20L7 12Z" fill="var(--c2)" opacity=".85"/></svg>`,
   thunder:`<svg viewBox="0 0 20 24"><path d="M12 1L3 14h6l-2 9 10-14h-6l3-8z" fill="var(--c1)" stroke="#6b5200" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
   dark:`<svg viewBox="0 0 20 24"><path d="M10 1L18 9L10 23L2 9Z" fill="#14031F" stroke="var(--c1)" stroke-width="1.6"/><path d="M10 6L14 10L10 17L6 10Z" fill="var(--c1)" opacity=".75"/></svg>`,
+  prism:`<svg viewBox="0 0 20 26"><defs><linearGradient id="pzg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF5E7E"/><stop offset=".25" stop-color="#FFE66D"/><stop offset=".5" stop-color="#6EE7A0"/><stop offset=".75" stop-color="#5EC8FF"/><stop offset="1" stop-color="#9B7BFF"/></linearGradient></defs><path d="M10 1L18 8L10 25L2 8Z" fill="url(#pzg)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 8H18M10 1L6 8L10 25L14 8L10 1" fill="none" stroke="#fff" stroke-width=".7" opacity=".85"/></svg>`,
   star:`<svg viewBox="0 0 24 24"><path d="M12 1L14.5 9.5L23 12L14.5 14.5L12 23L9.5 14.5L1 12L9.5 9.5Z" fill="var(--c1)" stroke="#7a5a00" stroke-width="1"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>`};
 // a ring seen in 3D: the back half is drawn behind the hero, the front half in front (same animation, so the halves stay in step)
 const split=(cls,inner)=>({under:`<span class="${cls} back">${inner}</span>`, over:`<span class="${cls} front">${inner}</span>`});
@@ -7861,6 +7922,8 @@ function cosLayers(w){
         :b.id==="b-gears"?`<i class="gr g1">${gearSvg(12,46,38)}</i><i class="gr g2">${gearSvg(9,46,36)}</i><i class="gr g3">${gearSvg(8,46,35)}</i>`
         :b.id==="b-moon"?`<i class="mn">${MOON}</i><i class="stars">${"<b>✦</b>".repeat(6)}</i>`
         :b.id==="b-abyss"?`<i class="ab a1">${abyssSvg()}</i><i class="ab a2">${abyssSvg()}</i>${"<s></s>".repeat(5)}`
+        :b.id==="b-aurora"?`<i class="au a1"></i><i class="au a2"></i><i class="au a3"></i><i class="stars">${"<b>✦</b>".repeat(6)}</i>`
+        :b.id==="b-sun"?`<i class="rays"></i><i class="rays r2"></i><i class="core"></i>${runeWheel()}<i class="orb"><b></b></i><i class="orb o2"><b></b></i><i class="orb o3"><b></b></i>`
         :b.id==="b-phoenix"?`<i class="ring"></i><i class="fw">${Array.from({length:12},(_,i)=>`<em style="--a:${i*30}deg;--d:${-(i%4)*.18}s"></em>`).join("")}</i>${"<s></s>".repeat(6)}`
         :`<i class="ring"></i><i class="ring r2"></i>`;
       under+=`<span class="cos-back cb-${b.id}" style="${st}">${inner}</span>`; } }
@@ -7871,6 +7934,9 @@ function cosLayers(w){
     else if(f.id==="f-helix"){ under+=`<span class="cos-col" style="${st}"></span><span class="cos-feet cf-f-gold" style="${st}"><i class="disc"><i class="spin"></i></i></span>`;
       const orbs=Array.from({length:16},(_,i)=>`<em style="animation-delay:${(-i*.16).toFixed(2)}s"></em>`).join("");
       under+=`<span class="cos-hel back">${orbs}</span>`; over+=`<span class="cos-hel front">${orbs}</span>`; }
+    else if(f.id==="f-galaxy"){ under+=`<span class="cos-col" style="${st}"></span><span class="cos-feet cf-f-galaxy" style="${st}"><i class="disc"><i class="spin"></i><i class="spin s2"></i><i class="gc"></i></i>${"<b></b>".repeat(6)}</span>`;
+      const orbs=Array.from({length:20},(_,i)=>`<em style="animation-delay:${(-i*.13).toFixed(2)}s;--h:${[200,260,290,220][i%4]}"></em>`).join("");
+      under+=`<span class="cos-hel rb back">${orbs}</span>`; over+=`<span class="cos-hel rb front">${orbs}</span>`; }
     else under+=`<span class="cos-feet cf-${f.id}" style="${st}"><i class="disc"><i class="spin"></i></i><b></b><b></b><b></b></span>`; }
   if(wa){ const st=cosStyleCss(wa);
     if(wa.id==="w-crystal"){ let sh=""; for(let i=0;i<6;i++){ const a=i*60*Math.PI/180; sh+=`<i class="sh" style="left:${(50+46*Math.cos(a)).toFixed(1)}%;top:${(50+46*Math.sin(a)).toFixed(1)}%"></i>`; }
@@ -7886,6 +7952,7 @@ function cosBurst(){ const n=cosWorn().neck&&cosOf(cosWorn().neck); if(!n) retur
   else if(n.fx==="frost") h=`<u></u><b class="ring"></b>${R(7,i=>`<i class="sp" style="--a:${i*51}deg;--l:${40+(i%3)*14}px"></i>`)}${R(6,i=>`<s style="--a:${i*60+30}deg;--d:${(i%3)*80}ms">❄</s>`)}`;
   else if(n.fx==="thunder") h=`<b class="core"></b>${R(3,i=>`<svg class="bolt" viewBox="0 0 30 120" style="--x:${[-34,0,30][i]}px;--d:${[0,90,170][i]}ms"><path d="M18 0L6 46h12L4 120l24-70H16L26 0z"/></svg>`)}${R(10,i=>`<i class="sk" style="--a:${i*36}deg"></i>`)}`;
   else if(n.fx==="dark") h=`<b class="void"></b><b class="swirl"></b>${R(8,i=>`<i class="td" style="--a:${i*45}deg;--d:${(i%2)*70}ms"></i>`)}<svg class="crack" viewBox="0 0 100 100"><path d="M50 50L22 30L12 34M50 50L80 22M50 50L74 78L88 80M50 50L30 82M50 50L90 52"/></svg>`;
+  else if(n.fx==="prism") h=`<b class="core"></b>${R(7,i=>`<i class="bm" style="--a:${i*51+8}deg;--h:${i*51};--d:${(i%3)*50}ms"></i>`)}<i class="rg"></i><i class="rg r2"></i>${R(14,i=>`<em style="--a:${i*26}deg;--r:${60+(i%3)*22}px;--h:${i*26}"></em>`)}`;
   else h=`${R(5,i=>`<s class="fall" style="--x:${-80+i*34}px;--d:${i*70}ms">✦</s>`)}<b class="big"><svg viewBox="0 0 100 100"><path d="M50 0L58 38L96 26L64 50L96 74L58 62L50 100L42 62L4 74L36 50L4 26L42 38Z"/></svg></b><i class="sw"></i><i class="sw s2"></i>${R(14,i=>`<em style="--a:${i*26}deg;--r:${70+(i%3)*22}px"></em>`)}`;
   return `<span class="cos-burst cbx-${n.fx}${game().lv&&n.pow>=4?" big":""}" style="${cosStyleCss(n)}" aria-hidden="true">${h}</span>`; }
 // whole-arena part of the stronger necklaces: flash, darkening, shake
@@ -7904,6 +7971,7 @@ Object.assign(SFX,{
   "nx-thunder":t=>{ noise(SND.fx,t,0.07,{f:4000,v:0.4}); noise(SND.fx,t+0.02,0.6,{f:300,v:0.5}); tone(SND.fx,t,80,0.55,{type:"sawtooth",to:38,v:0.2}); },
   "nx-dark":t=>{ tone(SND.fx,t,140,0.8,{type:"sawtooth",to:42,v:0.2,vib:true}); tone(SND.fx,t+0.05,55,0.9,{type:"sine",v:0.32}); noise(SND.fx,t+0.3,0.5,{f:250,v:0.32}); },
   "nx-star":t=>{ [76,80,83,88,92].forEach((m,i)=>tone(SND.fx,t+i*0.07,hz(m),0.3,{type:"square",v:0.08})); tone(SND.fx,t+0.38,2093,0.6,{type:"sine",v:0.14}); noise(SND.fx,t+0.38,0.5,{f:500,v:0.4}); noise(SND.fx,t+0.4,0.4,{f:7000,v:0.12}); },
+  "nx-prism":t=>{ [72,76,79,84,88,91,96].forEach((m,i)=>tone(SND.fx,t+i*0.045,hz(m),0.35,{type:"triangle",v:0.09})); tone(SND.fx,t+0.34,hz(96),0.9,{type:"sine",v:0.13}); tone(SND.fx,t+0.34,hz(91),0.9,{type:"sine",v:0.08}); noise(SND.fx,t+0.3,0.4,{f:8000,v:0.1}); noise(SND.fx,t+0.3,0.3,{f:400,v:0.3}); },
   "s-retroC":t=>{ tone(SND.fx,t,988,0.07,{type:"square",v:0.13}); tone(SND.fx,t+0.07,1319,0.22,{type:"square",v:0.13}); }});
 const monWeek=d=>{ const x=new Date(d+"T12:00:00"); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return x.toISOString().slice(0,10); };
 function weekStudyDays(d){ const wk=monWeek(d||today()); let n=0; for(const [k,v] of S.days) if(k.startsWith("day~")&&v.postDone&&monWeek(v.date)===wk) n++; return n; }
@@ -7928,7 +7996,7 @@ function viewStyle(){
     if(own) btns.push(on?`<button class="btn ghost sm" data-act="csoff" data-k="${slot}">${T("cosOff")}</button>`:`<button class="btn sm" data-act="cswear" data-k="${c.id}">${T("cosWear")}</button>`);
     else { btns.push(`<button class="btn ghost sm" data-act="cstry" data-k="${c.id}">${trying?T("cosTryOff"):T(c.slot==="sfx"?"cosListen":"cosTry")}</button>`);
       if(!lockPlus) btns.push(`<button class="btn sm" data-act="csbuy" data-k="${c.id}" ${(g.style||0)<c.price?"disabled":""}>${STYLE_IC} ${c.price}</button>`); }
-    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${cosNeed(c)?`<span class="plan-tag ${cosNeed(c)}">${T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly")}</span>`:""}${cosDays(c)?`<span class="plan-tag days${cosDayLock(c)?"":" ok"}">${cosDayLock(c)?"🔒":"✓"} ${T("cosDaysTag",{n:c.days})}</span>`:""}<small class="muted">${T("cosDi_"+c.id)}</small>${c.pow?`<small class="cos-pow">${T("cosPow")} ${"★".repeat(c.pow)}<i>${"★".repeat(5-c.pow)}</i></small>`:""}${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
+    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${cosNeed(c)?`<span class="plan-tag ${cosNeed(c)}">${T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly")}</span>`:""}${cosDays(c)?`<span class="plan-tag days${cosDayLock(c)?"":" ok"}">${cosDayLock(c)?"🔒":"✓"} ${T("cosDaysTag",{n:c.days})}</span>`:""}<small class="muted">${T("cosDi_"+c.id)}</small>${c.pow?`<small class="cos-pow">${T("cosPow")} ${"★".repeat(c.pow)}<i>${"★".repeat(Math.max(0,COS_POW_MAX-c.pow))}</i></small>`:""}${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
   const earn=(PLANS_ON?[["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}],["styEarn3",{n:STYLE_EARN.sub}],["styEarn4",{n:STYLE_EARN.plus}]]:[["styEarnL",{}],["styEarnM",{}],["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}]])
     .map(([k,o],i)=>`<li class="${(i===2&&plan==="sub")||(i===3&&plan==="plus")?"mine":""}">${T(k,o)}</li>`).join("");
   return `<section class="card sty-card">
@@ -8364,6 +8432,12 @@ Object.assign(STR.hi,{"spendL":"खर्च","spendLeft":"बाद में �
 Object.assign(STR.es,{"spendL":"Cuesta","spendLeft":"Te quedará","ieCont": "▶ Seguir desde la línea {i}", "ieCut": "La reproducción se cortó (por ejemplo, al recargar la página). Puedes seguir desde donde se quedó.", "wheelAskQ": "¿Girar la ruleta?", "wheelAskYes": "¡Girar!", "exAskQ": "¿Cambiar oro por un trébol?", "exAskYes": "Cambiar", "pvCardSub": "Mira qué datos guardamos o elimina tu cuenta para siempre.", "delBtnLocal": "Borrar los datos de este teléfono", "delQ": "¿Eliminar todo para siempre?", "delWhat": "Se borrarán todos tus datos en la nube y en este teléfono: palabras, historial de lectura y pruebas, progreso del juego, apodo, resultados de la clasificación, aliados y ajustes de notificaciones, además de tu cuenta de BinBin. No se puede deshacer. Puede que te pidamos iniciar sesión con Google otra vez para confirmar.", "delWhatLocal": "Se borrarán todos los registros de estudio, las palabras y el progreso del juego de este teléfono. No se puede deshacer.", "delBusy": "Eliminando…", "delDone": "Eliminado. Gracias por usar BinBin daily", "delFail": "No se pudo terminar de eliminar. Revisa tu conexión e inténtalo de nuevo", "delCancel": "Cancelado: no se eliminó nada"});
 Object.assign(STR.ja,{"spendL":"使う数","spendLeft":"使った後の残り","ieCont": "▶ {i}文目から続きを聞く", "ieCut": "再生が途中で止まりました（ページの再読み込みなど）。止まったところから続けられます。", "wheelAskQ": "ルーレットを回しますか？", "wheelAskYes": "回す！", "exAskQ": "金貨をクローバーに交換しますか？", "exAskYes": "交換する", "pvCardSub": "保存しているデータを確認したり、アカウントを完全に削除したりできます。", "delBtnLocal": "このスマホのデータを消去", "delQ": "すべて完全に削除しますか？", "delWhat": "クラウドとこのスマホにあるすべてのデータ（単語、読書とテストの記録、ゲームの進行状況、ニックネーム、ランキングの結果、仲間、通知設定）と BinBin アカウントが削除されます。元に戻せません。確認のため、もう一度 Google でログインをお願いすることがあります。", "delWhatLocal": "このスマホにある学習記録、単語、ゲームの進行状況がすべて消去されます。元に戻せません。", "delBusy": "削除しています…", "delDone": "削除しました。BinBin daily をご利用いただきありがとうございました", "delFail": "削除を完了できませんでした。接続を確認してもう一度お試しください", "delCancel": "キャンセルしました。何も削除されていません"});
 Object.assign(STR.ko,{"spendL":"사용","spendLeft":"사용 후 남는 양","ieCont": "▶ {i}번째 문장부터 이어 듣기", "ieCut": "재생이 중간에 끊겼어요(예: 페이지 새로고침). 끊긴 곳부터 이어서 들을 수 있어요.", "wheelAskQ": "룰렛을 돌릴까요?", "wheelAskYes": "돌리기!", "exAskQ": "골드를 클로버로 바꿀까요?", "exAskYes": "교환하기", "pvCardSub": "어떤 데이터를 보관하는지 확인하거나 계정을 영구 삭제할 수 있어요.", "delBtnLocal": "이 휴대폰의 데이터 지우기", "delQ": "모두 영구 삭제할까요?", "delWhat": "클라우드와 이 휴대폰에 있는 모든 데이터(단어, 읽기·테스트 기록, 게임 진행, 닉네임, 순위 결과, 동료, 알림 설정)와 BinBin 계정이 삭제돼요. 되돌릴 수 없어요. 확인을 위해 Google 로그인을 한 번 더 요청할 수 있어요.", "delWhatLocal": "이 휴대폰에 있는 학습 기록, 단어, 게임 진행이 모두 지워져요. 되돌릴 수 없어요.", "delBusy": "삭제 중…", "delDone": "삭제했어요. BinBin daily를 이용해 주셔서 감사해요", "delFail": "삭제를 끝내지 못했어요. 연결을 확인하고 다시 시도해 주세요", "delCancel": "취소했어요. 아무것도 삭제되지 않았어요"});
+Object.assign(STR.zh,{"lootOldDone": "這篇以前已經領過獎勵，這次是練習", "lootOldCap": "舊文章每天最多 {n} 篇有獎勵，今天的已經領完，這次是練習", "cos_f-galaxy": "星河漩渦", "cosDi_f-galaxy": "腳下轉著一整個銀河，星星一顆顆往上飄", "cos_b-aurora": "極光之幕", "cosDi_b-aurora": "綠、藍、紫的極光在身後飄動，星星閃爍", "cos_b-sun": "日冕神輪", "cosDi_b-sun": "金色太陽光芒兩層反轉，符文輪在中間轉，三顆火球繞著飛", "cos_n-prism": "七彩稜鏡項鍊", "cosDi_n-prism": "攻擊時七道彩虹光束炸開，彩虹光環擴散、整個畫面閃出七彩光並震動"});
+Object.assign(STR.en,{"lootOldDone": "You already got the reward for this article, so this one is practice", "lootOldCap": "Older articles pay for up to {n} a day and today's are used up, so this one is practice", "cos_f-galaxy": "Galaxy swirl", "cosDi_f-galaxy": "A whole galaxy spins under your feet while stars drift up", "cos_b-aurora": "Aurora veil", "cosDi_b-aurora": "Green, blue and violet northern lights ripple behind you under twinkling stars", "cos_b-sun": "Solar crown", "cosDi_b-sun": "Two rings of golden sun rays turn opposite ways round a spinning rune wheel, with three fireballs in orbit", "cos_n-prism": "Prism necklace", "cosDi_n-prism": "Seven rainbow beams burst out on every hit, a rainbow ring spreads and the whole screen flashes and shakes"});
+Object.assign(STR.hi,{"lootOldDone": "इस लेख का इनाम आप पहले ले चुके हैं, यह अभ्यास है", "lootOldCap": "पुराने लेखों पर दिन में {n} तक ही इनाम मिलता है, आज के पूरे हो गए — यह अभ्यास है", "cos_f-galaxy": "आकाशगंगा भँवर", "cosDi_f-galaxy": "पैरों के नीचे पूरी आकाशगंगा घूमती है और तारे ऊपर उड़ते हैं", "cos_b-aurora": "ध्रुवीय ज्योति परदा", "cosDi_b-aurora": "पीछे हरी, नीली और बैंगनी ध्रुवीय रोशनी लहराती है, तारे टिमटिमाते हैं", "cos_b-sun": "सूर्य मुकुट", "cosDi_b-sun": "सुनहरी सूर्य-किरणों के दो चक्र उलटे घूमते हैं, बीच में रून चक्र, और तीन आग के गोले चक्कर लगाते हैं", "cos_n-prism": "प्रिज़्म हार", "cosDi_n-prism": "हर वार पर सात इंद्रधनुषी किरणें फूटती हैं, इंद्रधनुष घेरा फैलता है और पूरी स्क्रीन चमककर हिलती है"});
+Object.assign(STR.es,{"lootOldDone": "Ya cobraste la recompensa de este artículo, así que esta vez es práctica", "lootOldCap": "Los artículos antiguos dan premio hasta {n} al día y ya los usaste hoy, así que esta vez es práctica", "cos_f-galaxy": "Remolino galáctico", "cosDi_f-galaxy": "Una galaxia entera gira bajo tus pies mientras suben estrellas", "cos_b-aurora": "Velo de aurora", "cosDi_b-aurora": "Auroras verdes, azules y violetas ondean detrás de ti entre estrellas que brillan", "cos_b-sun": "Corona solar", "cosDi_b-sun": "Dos anillos de rayos de sol dorados giran en sentidos opuestos alrededor de una rueda de runas, con tres bolas de fuego en órbita", "cos_n-prism": "Collar prisma", "cosDi_n-prism": "Siete rayos de arcoíris estallan en cada golpe, se expande un anillo de arcoíris y toda la pantalla destella y tiembla"});
+Object.assign(STR.ja,{"lootOldDone": "この記事のごほうびはもう受け取り済みなので、今回は練習です", "lootOldCap": "古い記事のごほうびは1日{n}本まで。今日はもう受け取ったので、今回は練習です", "cos_f-galaxy": "銀河のうず", "cosDi_f-galaxy": "足もとで銀河がまるごと回り、星がふわふわ昇っていく", "cos_b-aurora": "オーロラのとばり", "cosDi_b-aurora": "緑・青・紫のオーロラが背中でゆらめき、星がまたたく", "cos_b-sun": "太陽の冠", "cosDi_b-sun": "金色の光線が2重に逆回転し、真ん中でルーンの輪が回り、火の玉が3つ周りを飛ぶ", "cos_n-prism": "七色プリズムのネックレス", "cosDi_n-prism": "攻撃のたびに7本の虹の光線がはじけ、虹の輪が広がり、画面全体が七色に光って揺れる"});
+Object.assign(STR.ko,{"lootOldDone": "이 기사의 보상은 이미 받았어요. 이번엔 연습이에요", "lootOldCap": "지난 기사는 하루 {n}개까지만 보상이 있어요. 오늘 몫은 다 받아서 이번엔 연습이에요", "cos_f-galaxy": "은하 소용돌이", "cosDi_f-galaxy": "발밑에서 은하 전체가 돌고 별들이 떠올라요", "cos_b-aurora": "오로라 장막", "cosDi_b-aurora": "초록·파랑·보라 오로라가 등 뒤에서 일렁이고 별이 반짝여요", "cos_b-sun": "태양 왕관", "cosDi_b-sun": "황금 햇살 두 겹이 서로 반대로 돌고, 가운데 룬 바퀴가 돌며 불덩이 세 개가 주위를 날아요", "cos_n-prism": "일곱 빛깔 프리즘 목걸이", "cosDi_n-prism": "공격할 때마다 무지개 광선 일곱 줄기가 터지고 무지개 고리가 퍼지며 화면 전체가 번쩍이고 흔들려요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
