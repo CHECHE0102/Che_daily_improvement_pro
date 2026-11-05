@@ -940,7 +940,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .exam-seg{margin-bottom:10px}.to-chip{display:inline-flex;align-items:baseline;gap:6px;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--tc) 18%,transparent);border:2px solid var(--tc)}.to-chip b{color:var(--tc);font-size:16px}.to-chip small{font-size:11px;color:var(--tc);font-weight:700}.to-chip.big{padding:8px 16px}.to-chip.big b{font-size:34px}
 .to-tiers{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.to-tier{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 9px;border-radius:99px;border:1px solid var(--line,#ccd)}.to-tier i{width:12px;height:12px;border-radius:50%;background:var(--tc)}
 .to-grp{display:flex;flex-direction:column;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line,#ccd)}.to-doc{border-left:3px solid var(--accent);padding-left:12px}.to-doc .eyebrow{margin-bottom:2px}.to-blank{font-weight:800;color:var(--accent);text-decoration:underline}.to-tabs{flex-wrap:wrap}
-.train-card{padding:10px}.train-arena{margin:0}.tr-line{text-align:center;margin:6px 0 0}.tr-act{justify-content:center;margin-top:8px}
+.train-card{padding:10px}.train-arena{margin:0}.rig-on .fighter.hero{z-index:2}.rig-on .foe:not(.hurt) .mon-seal{animation:none}.rig-host{position:relative;width:100%;height:100%}.rig-cv{position:absolute;left:-20%;top:-30%;width:300%;height:140%;pointer-events:none}.rig-mon{position:relative;display:block}.rig-mon img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;user-select:none}.tr-line{text-align:center;margin:6px 0 0}.tr-act{justify-content:center;margin-top:8px}
 .tr-seg{display:flex;flex-wrap:wrap;gap:6px}.tr-seg button{border:1.5px solid var(--line,#ddd);background:var(--card,#fff);color:inherit;font:inherit;font-size:13px;font-weight:700;border-radius:99px;padding:6px 10px;display:inline-flex;align-items:center;gap:4px;cursor:pointer}.tr-seg button.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--card,#fff));color:var(--accent)}.tr-tier button{min-width:44px;justify-content:center}
 .adv-quick{grid-column:1/-1;display:flex;justify-content:center;gap:14px;margin-top:6px;padding-top:10px;border-top:1px dashed color-mix(in srgb,var(--hs-tint,#C8B89A) 45%,transparent)}.aq-card .adv-quick{border-top:0;margin:0;padding:0}
 .aq-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 6px;color:inherit;font:inherit;font-size:13px;font-weight:700;min-width:64px;cursor:pointer}
@@ -3798,7 +3798,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.25";
+const APP_VERSION="2026.11.26";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6119,23 +6119,174 @@ function heroStage(){
   const tint=a?ARMC[a.el][1]:"#C8B89A";
   return `<section class="card hero-stage" style="--hs-tint:${tint}">${side(w,"weapon","bare")}<div class="hs-fig"><div class="hs-ground"></div>${heroArt("idle")}</div>${side(a,"armor","cloth")}${advQuick()}</section>`;
 }
+/* ----- parts rig: hero / ally cut into head, torso, 2-part arms and legs (assets/art/rig/h/<outfit>/), arms driven by 2-bone IK
+   from per-weapon keyframes; town monsters swap hurt / angry faces (assets/art/rig/t/). Every outfit is aligned to one skeleton. ----- */
+const RIG={man:null, loading:null, im:{}, act:null, t0:0, raf:0, impactCb:null, impactDone:true};
+const RIG_HP={shN:[373,597],elN:[326,642],shF:[669,592],elF:[705,635],hipN:[450,772],hipF:[612,772],neck:[540,468],hips:[530,775],gripN:[268,698],gripF:[763,705],feet:[540,935]};
+const RIG_E={lin:t=>t,inQ:t=>t*t,outQ:t=>1-(1-t)*(1-t),outC:t=>1-Math.pow(1-t,3),io:t=>-(Math.cos(Math.PI*t)-1)/2,
+  outBack:t=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)}};
+const rigClamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+function rigNum(keys,t){ if(t<=keys[0][0]) return keys[0][1];
+  for(let i=1;i<keys.length;i++){ if(t<=keys[i][0]){ const [t0,v0]=keys[i-1],[t1,v1,e]=keys[i]; return v0+(v1-v0)*(RIG_E[e||"lin"])((t-t0)/(t1-t0)); } }
+  return keys[keys.length-1][1]; }
+function rigVec(keys,t){ const n=keys[0][1].length,o=[]; for(let i=0;i<n;i++) o.push(rigNum(keys.map(k=>[k[0],k[1][i],k[2]]),t)); return o; }
+const RIG_KIND={sword:"sword",dagger:"sword",curved:"sword",hammer:"hammer",warhammer:"hammer",club:"hammer",trident:"trident",spear:"trident",staff:"staff",orbstaff:"staff",bow:"bow"};
+const RIG_TIP={sword:[.95,.05],hammer:[.8,.2],trident:[.95,.05],staff:[.82,.18],bow:[.5,.5]};
+// keyframes: hand = [x, y, weapon angle] of the main hand in skeleton space; far = the other hand
+const RIG_RW={
+ sword:{impact:300,shout:[150,620],main:"N",
+  hand:[[0,[480,690,-25]],[180,[420,335,-122],"outQ"],[235,[414,322,-130]],[300,[700,610,-8],"inQ"],[360,[650,770,80],"outQ"],[620,[630,750,70]],[950,[480,690,-25],"io"]],
+  far:[[0,[720,700]],[180,[800,560],"outQ"],[300,[600,720],"inQ"],[620,[620,720]],[950,[720,700],"io"]],
+  lean:[[0,0],[180,-18,"outQ"],[235,-20],[300,22,"inQ"],[360,28,"outQ"],[620,14],[950,0,"io"]],
+  x:[[0,0],[180,-.05,"outQ"],[235,-.05],[300,.26,"inQ"],[620,.25],[950,0,"outC"]],
+  y:[[0,0],[180,-.025,"outQ"],[300,0,"inQ"]],
+  sq:[[0,0],[180,-.05],[300,.04],[360,-.07],[600,0]],
+  legN:[[0,0],[180,-10],[300,30,"inQ"],[620,24],[950,0,"io"]],legF:[[0,0],[180,12],[300,-32,"inQ"],[620,-26],[950,0,"io"]]},
+ hammer:{impact:600,shout:[200,950],main:"N",two:75,
+  hand:[[0,[520,720,75]],[200,[490,700,130],"io"],[480,[440,300,222],"outQ"],[540,[436,290,228]],[600,[690,735,415],"inQ"],[640,[695,745,420]],[900,[690,740,418]],[1300,[520,720,435],"io"]],
+  lean:[[0,0],[200,-6],[480,-22,"outQ"],[540,-24],[600,32,"inQ"],[640,34],[900,24],[1300,0,"io"]],
+  x:[[0,0],[200,.04,"io"],[480,.1],[540,.11],[600,.22,"inQ"],[900,.22],[1300,0,"io"]],
+  y:[[0,0],[200,.01],[420,-.03,"outQ"],[540,-.075,"outQ"],[600,0,"inQ"]],
+  sq:[[0,0],[200,.04],[480,-.06],[540,-.07],[600,-.16,"inQ"],[650,-.18],[760,.03],[900,-.02],[1300,0]],
+  legN:[[0,0],[200,6],[480,-14],[600,32,"inQ"],[900,26],[1300,0,"io"]],legF:[[0,0],[200,-6],[480,16],[600,-34,"inQ"],[900,-28],[1300,0,"io"]]},
+ trident:{impact:300,shout:[150,700],main:"N",two:95,grip:[.28,.72],
+  hand:[[0,[480,700,-40]],[200,[365,650,-8],"outQ"],[300,[535,628,-3],"inQ"],[380,[530,630,-3]],[760,[515,640,-5]],[1000,[480,700,-40],"io"]],
+  lean:[[0,0],[200,-14,"outQ"],[300,22,"inQ"],[760,8],[1000,0,"io"]],
+  x:[[0,0],[200,-.05,"outQ"],[300,.24,"inQ"],[760,.22],[1000,0,"outC"]],
+  sq:[[0,0],[200,-.04],[300,.05,"inQ"],[380,-.03],[600,0]],
+  legN:[[0,0],[200,-10],[300,32,"inQ"],[760,24],[1000,0,"io"]],legF:[[0,0],[200,10],[300,-34,"inQ"],[760,-26],[1000,0,"io"]]},
+ staff:{impact:680,shout:[150,900],main:"F",
+  hand:[[0,[730,720,-80]],[250,[690,470,-92],"outQ"],[560,[688,462,-95]],[620,[800,575,-15],"inQ"],[900,[795,580,-18]],[1150,[730,720,-80],"io"]],
+  far:[[0,[470,690]],[250,[430,640],"outQ"],[560,[430,640]],[620,[560,610],"inQ"],[900,[555,615]],[1150,[470,690],"io"]],
+  lean:[[0,0],[250,-12,"outQ"],[560,-14],[620,18,"inQ"],[900,12],[1150,0,"io"]],
+  x:[[0,0],[560,-.03],[620,.07,"inQ"],[1150,0,"io"]],
+  y:[[0,0],[250,-.03,"outQ"],[560,-.045],[620,0,"inQ"]],
+  sq:[[0,0],[250,-.05],[560,-.06],[620,.05,"inQ"],[700,0]],
+  legN:[[0,0],[560,-6],[620,18,"inQ"],[900,14],[1150,0,"io"]],legF:[[0,0],[560,6],[620,-18,"inQ"],[900,-14],[1150,0,"io"]]},
+ bow:{impact:780,shout:[250,800],main:"F",grip:[.43,.47],
+  hand:[[0,[760,720,70]],[220,[620,615,90],"outQ"],[330,[622,614,90]],[620,[800,580,90],"io"],[700,[800,580,90]],[740,[805,578,90],"outQ"],[1050,[800,580,90]],[1300,[760,720,70],"io"]],
+  far:[[0,[470,680]],[220,[530,645],"outQ"],[320,[556,633],"outQ"],[340,[555,633]],[620,[488,550],"io"],[700,[484,548]],[740,[430,520],"outQ"],[1050,[450,560]],[1300,[470,680],"io"]],
+  lean:[[0,0],[220,-3],[620,-10,"io"],[700,-10],[740,-14,"outQ"],[1300,0,"io"]],
+  x:[[0,0],[700,0],[740,-.04,"outQ"],[1300,0,"io"]],
+  sq:[[0,0],[620,-.03,"io"],[700,-.03],[740,.03],[900,0]],
+  legN:[[0,0],[220,12],[1150,12],[1300,0,"io"]],legF:[[0,0],[220,-14],[1150,-14],[1300,0,"io"]]}
+};
+const RIG_D2R=Math.PI/180, rigDist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]), rigAng=(a,b)=>Math.atan2(b[1]-a[1],b[0]-a[0])/RIG_D2R;
+const RIG_ARM={N:{sh:RIG_HP.shN,el:RIG_HP.elN,a:rigDist(RIG_HP.shN,RIG_HP.elN),b:rigDist(RIG_HP.elN,RIG_HP.gripN),ru:rigAng(RIG_HP.shN,RIG_HP.elN),rf:rigAng(RIG_HP.elN,RIG_HP.gripN)},
+               F:{sh:RIG_HP.shF,el:RIG_HP.elF,a:rigDist(RIG_HP.shF,RIG_HP.elF),b:rigDist(RIG_HP.elF,RIG_HP.gripF),ru:rigAng(RIG_HP.shF,RIG_HP.elF),rf:rigAng(RIG_HP.elF,RIG_HP.gripF)}};
+const RIG_BONES=[{n:"root",p:RIG_HP.feet},{n:"hips",p:RIG_HP.hips,par:"root"},{n:"head",p:RIG_HP.neck,par:"hips"},{n:"legN",p:RIG_HP.hipN,par:"root"},{n:"legF",p:RIG_HP.hipF,par:"root"}];
+function rigReduced(){ try{ return matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){ return false; } }
+function rigLoad(){ if(RIG.man) return Promise.resolve(RIG.man); if(!RIG.loading) RIG.loading=fetch("assets/art/rig/manifest.json").then(r=>r.ok?r.json():null).then(j=>{ RIG.man=j; return j; }).catch(()=>null); return RIG.loading; }
+function rigImg(src){ let i=RIG.im[src]; if(!i){ i=new Image(); i.decoding="async"; i.src=src; RIG.im[src]=i; } return i; }
+function rigOutfit(gen,armor){ const k=`${gen}-${armor?armor.el+(armor.tier+1):"cloth"}`; return RIG.man&&RIG.man.h[k]?k:(RIG.man&&RIG.man.h[`${gen}-cloth`]?`${gen}-cloth`:null); }
+function rigReady(key){ const p=RIG.man&&RIG.man.h[key]; if(!p) return false; let ok=true; for(const n in p){ const i=rigImg(`assets/art/rig/h/${key}/${n}.webp`); if(!(i.complete&&i.naturalWidth)) ok=false; } return ok; }
+function rigIk(S,T,a0,b0){ let dx=T[0]-S[0],dy=T[1]-S[1],d=Math.hypot(dx,dy); const th=Math.atan2(dy,dx), st=Math.max(1,Math.min(1.35,d/(a0+b0-.5))), a=a0*st, b=b0*st;
+  d=Math.max(Math.abs(a-b)+1,Math.min(a+b-.5,d)); const A=Math.acos(rigClamp((a*a+d*d-b*b)/(2*a*d),-1,1)); let best=null;
+  for(const s of [1,-1]){ const u=th+s*A, E=[S[0]+a*Math.cos(u),S[1]+a*Math.sin(u)], H=[S[0]+d*Math.cos(th),S[1]+d*Math.sin(th)];
+    const c={ua:u/RIG_D2R,fa:Math.atan2(H[1]-E[1],H[0]-E[0])/RIG_D2R,st,E}; if(!best||E[1]>best.E[1]) best=c; }
+  return best; }
+function rigFrame(R,t){
+  const dt=RIG.act?t-RIG.t0:1e9, f={x:0,y:0,sq:0,lean:0,legN:0,legF:0,head:"head",flash:0,dt};
+  let H=R.hand[0][1].slice(), FH=(R.far?R.far[0][1]:[720,700]).slice();
+  const br=Math.sin(t*2*Math.PI/1700);
+  if(RIG.act==="atk"){ H=rigVec(R.hand,dt); if(R.far) FH=rigVec(R.far,dt);
+    for(const k of ["x","y","sq","lean","legN","legF"]) if(R[k]) f[k]=rigNum(R[k],dt);
+    if(R.shout&&dt>R.shout[0]&&dt<R.shout[1]) f.head="head-shout";
+    if(!RIG.impactDone&&dt>=R.impact){ RIG.impactDone=true; const cb=RIG.impactCb; RIG.impactCb=null; if(cb) setTimeout(cb,0); }
+    if(dt>R.hand[R.hand.length-1][0]+80) RIG.act=null; }
+  else if(RIG.act==="hurt"){ f.x=rigNum([[0,0],[70,-.07,"outQ"],[600,0,"outBack"]],dt); f.lean=rigNum([[0,0],[70,-14,"outQ"],[600,0,"outBack"]],dt);
+    const k=rigNum([[0,0],[80,1,"outQ"],[600,0,"io"]],dt); H=[H[0]-60*k,H[1]-40*k,H[2]-40*k]; FH=[FH[0]+30*k,FH[1]-60*k];
+    f.legN=12*k; f.legF=8*k; f.flash=rigNum([[0,1],[200,0]],dt); if(dt<520) f.head="head-hurt"; if(dt>650) RIG.act=null; }
+  else if(RIG.act==="win"){ const k=RIG_E.outC(rigClamp(dt/350)), up=R.main==="F"?[720,470,-80]:[430,470,-80], fu=R.main==="F"?[440,480]:[680,470];
+    H=H.map((v,i)=>v+(up[i]-v)*k); FH=FH.map((v,i)=>v+(fu[i]-v)*k); f.y=-Math.abs(Math.sin(dt/200))*(dt<1300?.03:0); f.head="head-happy"; }
+  H[1]+=3*br; f.sq+=.012*br; f.H=H; f.FH=FH; return f;
+}
+/* draw one hero onto canvas cv: the host box is SW wide, the canvas reaches past it so the lunge can cross the arena */
+function rigDraw(cv,o,t){
+  const host=cv.parentElement; if(!host) return; const SW=host.clientWidth; if(!SW) return;
+  const DPR=Math.min(2,window.devicePixelRatio||1), W=Math.round(SW*3*DPR), Hh=Math.round(SW*1.4*DPR);
+  if(cv.width!==W||cv.height!==Hh){ cv.width=W; cv.height=Hh; }
+  const c=cv.getContext("2d"); c.setTransform(1,0,0,1,0,0); c.clearRect(0,0,W,Hh);
+  const R=RIG_RW[o.kind]||RIG_RW.sword, f=rigFrame(R,t), Wd=SW*.871/.30, k=SW*.871/841;
+  const ox=SW*.2, oy=SW*.3; // canvas origin offset inside the host box
+  const sx=ox+SW*.45+f.x*Wd, sy=oy+SW*.963+f.y*Wd;
+  const base=new DOMMatrix().scale(DPR,DPR).translate(sx,sy).scale(k,k).translate(-RIG_HP.feet[0],-RIG_HP.feet[1]);
+  const L=(p,b)=>new DOMMatrix().translate(b[0]+(p.x||0),b[1]+(p.y||0)).rotate(p.r||0).scale(1+(p.sx||0),1+(p.sy||0)).translate(-b[0],-b[1]);
+  const pose={root:{sx:-f.sq*.5,sy:f.sq},hips:{r:f.lean},head:{r:-f.lean*.4},legN:{r:f.legN},legF:{r:f.legF}}, M={};
+  for(const b of RIG_BONES){ const l=L(pose[b.n]||{},b.p); M[b.n]=b.par?M[b.par].multiply(l):l; }
+  const hipsL=L({r:f.lean},RIG_HP.hips), shp=p=>{ const q=hipsL.transformPoint(new DOMPoint(p[0],p[1])); return [q.x,q.y]; };
+  const mainK=R.main, otherK=mainK==="N"?"F":"N", A1=RIG_ARM[mainK], A2=RIG_ARM[otherK];
+  const s1=rigIk(shp(A1.sh),f.H,A1.a,A1.b), u=[Math.cos(f.H[2]*RIG_D2R),Math.sin(f.H[2]*RIG_D2R)];
+  let T2=f.FH; if(R.two&&RIG.act!=="hurt"){ const h1=[s1.E[0]+A1.b*s1.st*Math.cos(s1.fa*RIG_D2R),s1.E[1]+A1.b*s1.st*Math.sin(s1.fa*RIG_D2R)]; T2=[h1[0]+u[0]*R.two,h1[1]+u[1]*R.two]; }
+  const s2=rigIk(shp(A2.sh),T2,A2.a,A2.b);
+  const dS=(a,s)=>new DOMMatrix().rotate(a).scale(s,1).rotate(-a);
+  for(const [K,sol] of [[mainK,s1],[otherK,s2]]){ const A=RIG_ARM[K], Sh=shp(A.sh), E=sol.E;
+    M["arm"+K+"u"]=M.root.multiply(new DOMMatrix().translate(Sh[0],Sh[1]).rotate(sol.ua-A.ru).multiply(dS(A.ru,sol.st)).translate(-A.sh[0],-A.sh[1]));
+    M["arm"+K+"l"]=M.root.multiply(new DOMMatrix().translate(E[0],E[1]).rotate(sol.fa-A.rf).multiply(dS(A.rf,sol.st)).translate(-A.el[0],-A.el[1])); }
+  const man=RIG.man.h[o.key];
+  const part=(m,n)=>{ const p=man[n]; if(!p) return; const im=rigImg(`assets/art/rig/h/${o.key}/${n}.webp`); if(!im.naturalWidth) return; c.setTransform(base.multiply(m)); c.drawImage(im,p[0],p[1],p[2],p[3]); };
+  const rootM=base.multiply(M.root), rootInv=M.root.inverse();
+  const fist=K=>{ const p=M[K==="N"?"armNl":"armFl"].transformPoint(new DOMPoint(...(K==="N"?RIG_HP.gripN:RIG_HP.gripF))); const q=rootInv.transformPoint(p); return [q.x,q.y]; };
+  const weapon=()=>{ if(!o.wimg) return; const im=rigImg(o.wimg); if(!im.naturalWidth) return; const g1=fist(mainK), S_=o.grip[2]*1010, gx=(R.grip||o.grip)[0], gy=(R.grip||o.grip)[1];
+    c.setTransform(rootM); c.translate(g1[0],g1[1]); c.rotate((f.H[2]+45)*RIG_D2R); c.drawImage(im,-gx*S_,-gy*S_,S_,S_); };
+  // weapon always sits in the layer of the hand holding it, never behind the torso
+  const two=!!R.two, farFront=two||mainK==="F";
+  if(!farFront) part(M.armFl,"armFl");
+  part(M.armFu,"armFu"); part(M.legF,"legF"); part(M.legN,"legN"); part(M.hips,"torso"); part(M.head,f.head in man?f.head:"head");
+  if(mainK==="F"){ part(M.armFl,"armFl"); weapon(); } else { weapon(); if(two) part(M.armFl,"armFl"); }
+  part(M.armNu,"armNu"); part(M.armNl,"armNl");
+  if(f.flash>0){ c.setTransform(1,0,0,1,0,0); c.globalCompositeOperation="source-atop"; c.fillStyle=`rgba(255,255,255,${f.flash*.75})`; c.fillRect(0,0,W,Hh); c.globalCompositeOperation="source-over"; }
+}
+function rigLoop(){ RIG.raf=0; const cv=document.getElementById("rigHero"); if(!cv||!RIG.cur) return;
+  try{ rigDraw(cv,RIG.cur,performance.now()); }catch(e){ console.warn(e); }
+  RIG.raf=requestAnimationFrame(rigLoop); }
+function rigStart(){ if(!RIG.raf) RIG.raf=requestAnimationFrame(rigLoop); }
+/* the hero figure for the practice arena: a canvas once the parts are loaded, the old single drawing until then */
+function rigHeroHtml(gen,w,armor,fallback){
+  if(rigReduced()||!gen) return fallback();
+  if(!RIG.man){ rigLoad().then(j=>{ if(j){ const b=document.getElementById("trStage"); if(b&&!(S.train&&S.train.busy)) b.innerHTML=trainScene(); } }); return fallback(); }
+  const key=rigOutfit(gen,armor); if(!key) return fallback();
+  const kind=w?WKIND[w.el][w.tier]:"sword", pk=w&&picOfItem(w);
+  RIG.cur={key, kind:RIG_KIND[kind]||"sword", wimg:pk?`assets/art/${pk}.webp`:null, grip:KIND_GRIP[kind]||[.24,.76,.42]};
+  if(!rigReady(key)){ Object.keys(RIG.man.h[key]).forEach(n=>rigImg(`assets/art/rig/h/${key}/${n}.webp`)); if(RIG.cur.wimg) rigImg(RIG.cur.wimg); }
+  setTimeout(rigStart,0);
+  return `<div class="hero-svg rig-host"><canvas id="rigHero" class="rig-cv" aria-hidden="true"></canvas></div>`;
+}
+function rigAttack(onImpact){ const R=RIG_RW[RIG.cur&&RIG.cur.kind]||RIG_RW.sword; RIG.act="atk"; RIG.t0=performance.now(); RIG.impactDone=false; RIG.impactCb=onImpact; rigStart(); return R; }
+/* town monster with an optional hurt / angry face laid over the same drawing */
+function rigMonHtml(m,face){
+  const pk=picOfMon(m), t=pk&&RIG.man&&RIG.man.t[pk], p=t&&face&&t[face];
+  if(!p) return monArt(m);
+  return `<div class="mon-seal el-bg-${m.el}${m.boss?" boss":""}"><span class="ms-art rig-mon"><img src="assets/art/${pk}.webp" alt="" draggable="false"><img class="rig-face" src="assets/art/rig/t/${pk}/${face}.webp" alt="" draggable="false" style="left:${p[0]}%;top:${p[1]}%;width:${p[2]}%;height:${p[3]}%"></span><span class="ms-badge">${elBadge(m.el)}</span></div>`;
+}
 /* ----- practice arena (練習場): try any weapon on a town monster — no tickets, no stamina, no rewards, nothing saved ----- */
 function trainState(){ if(!S.train){ const w=game().weapon&&ITEMS[game().weapon]; S.train={el:w?w.el:"metal", t:w?w.tier:0, mi:0, hit:null, n:0, sum:0}; } return S.train; }
 const trainMons=()=>TOWNS.filter(m=>!m.boss);
 function trainScene(){
   const R=trainState(), g=game(), w=ITEMS[`w-${R.el}-${R.t}`], ms=trainMons(), m=ms[R.mi%ms.length], h=R.busy&&R.hit;
-  const hero=g.gender?charArt(g.gender, h?"attack":"idle", w, g.armor&&ITEMS[g.armor], null, null, cosLayers(cosWorn())):heroSvg();
+  const old=()=>charArt(g.gender, h?"attack":"idle", w, g.armor&&ITEMS[g.armor], null, null, cosLayers(cosWorn()));
+  const hero=g.gender?rigHeroHtml(g.gender, w, g.armor&&ITEMS[g.armor], old):heroSvg(), rig=hero.includes("rig-host");
   const hl=h?(h.crit?3:2):0, mult=elMult(R.el,m.el);
-  return `<div class="arena2 train-arena"><div class="fighter hero${h?" atk":""}"><div class="f-name">${esc(g.nick||T("hero"))} · Lv ${g.lv}</div><div class="f-stage">${hero}</div></div>
-    <div class="fighter foe${h?" hurt hs"+hl:""}"><div class="f-name">${esc(monName(m))} · ${elBadge(m.el)}</div><div class="f-stage">${monArt(m)}${h?`${atkFx(w,h.crit)}${hitBurst(hl,"you")}<span class="dmg foe-hit s${hl}${h.crit?" crit":""}" style="animation-name:float">-${h.dmg}${h.crit?"<small>CRIT!</small>":""}</span>`:""}</div></div></div>
+  return `<div class="arena2 train-arena${rig?" rig-on":""}"><div class="fighter hero${h&&!rig?" atk":""}"><div class="f-name">${esc(g.nick||T("hero"))} · Lv ${g.lv}</div><div class="f-stage">${hero}</div></div>
+    <div class="fighter foe${h?" hurt hs"+hl:""}" id="trFoe"><div class="f-name">${esc(monName(m))} · ${elBadge(m.el)}</div><div class="f-stage">${rig?rigMonHtml(m,h?"hurt":R.busy?"angry":null):monArt(m)}${h?`${atkFx(w,h.crit)}${hitBurst(hl,"you")}<span class="dmg foe-hit s${hl}${h.crit?" crit":""}" style="animation-name:float">-${h.dmg}${h.crit?"<small>CRIT!</small>":""}</span>`:""}</div></div></div>
     <p class="sm-t tr-line">${mult>1?`✅ ${T("trAdv",{w:elName(R.el),m:elName(m.el)})}`:mult<1?`⚠️ ${T("trDis",{w:elName(R.el),m:elName(m.el)})}`:T("trEven")}${R.n?` · ${T("trTotal",{n:R.n,d:R.sum})}`:""}</p>`;
 }
+function trainPatch(){ const b=document.getElementById("trStage"); if(!b) return; const tmp=document.createElement("div"); tmp.innerHTML=trainScene();
+  const nf=tmp.querySelector("#trFoe"), of=b.querySelector("#trFoe"), nl=tmp.querySelector(".tr-line"), ol=b.querySelector(".tr-line");
+  if(!of||!nf||!b.querySelector("#rigHero")){ b.innerHTML=tmp.innerHTML; return; } of.replaceWith(nf); if(ol&&nl) ol.replaceWith(nl); }
 function trainHit(){
   const R=trainState(); if(R.busy) return; const g=game(), w=ITEMS[`w-${R.el}-${R.t}`], ms=trainMons(), m=ms[R.mi%ms.length];
   const atk=baseStats(g.lv).atk+(w.atk||0), crit=Math.random()<.15;
   const dmg=Math.max(1, Math.round((atk*elMult(R.el,m.el)-m.def*.5)*(.9+Math.random()*.2)*(crit?1.5:1)));
+  const box=()=>document.getElementById("trStage");
+  if(document.getElementById("rigHero")&&RIG.cur){ // parts rig: swing first, the monster reacts at the moment of impact
+    R.busy=true; trainPatch();
+    const A=rigAttack(()=>{ R.hit={dmg,crit}; R.n++; R.sum+=dmg; sfx(crit?"crit":"hit"); trainPatch();
+      clearTimeout(R.tm); R.tm=setTimeout(()=>{ R.hit=null; R.busy=false; trainPatch(); }, 700); });
+    clearTimeout(R.tm2); R.tm2=setTimeout(()=>{ if(R.busy&&!R.hit){ R.busy=false; trainPatch(); } }, A.impact+1500);
+    return; }
   R.hit={dmg,crit}; R.n++; R.sum+=dmg; R.busy=true; sfx(crit?"crit":"hit");
-  const box=()=>document.getElementById("trStage"); if(box()) box().innerHTML=trainScene(); else render();
+  if(box()) box().innerHTML=trainScene(); else render();
   clearTimeout(R.tm); R.tm=setTimeout(()=>{ R.busy=false; if(box()) box().innerHTML=trainScene(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?300:1000);
 }
 function viewTrain(){
