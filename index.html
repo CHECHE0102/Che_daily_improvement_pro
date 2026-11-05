@@ -6131,6 +6131,7 @@ function rigNum(keys,t){ if(t<=keys[0][0]) return keys[0][1];
   return keys[keys.length-1][1]; }
 function rigVec(keys,t){ const n=keys[0][1].length,o=[]; for(let i=0;i<n;i++) o.push(rigNum(keys.map(k=>[k[0],k[1][i],k[2]]),t)); return o; }
 const RIG_KIND={sword:"sword",dagger:"sword",curved:"sword",hammer:"hammer",warhammer:"hammer",club:"hammer",trident:"trident",spear:"trident",staff:"staff",orbstaff:"staff",bow:"bow"};
+const RIG_BOW=[[[.776,.268],[.348,.788]],[[.76,.277],[.355,.776]],[[.771,.292],[.375,.766]],[[.754,.306],[.387,.759]]]; // painted string ends per bow tier (top, bottom)
 const RIG_TIP={sword:[.95,.05],hammer:[.8,.2],trident:[.95,.05],staff:[.82,.18],bow:[.5,.5]};
 // keyframes: hand = [x, y, weapon angle] of the main hand in skeleton space; far = the other hand
 const RIG_RW={
@@ -6163,7 +6164,7 @@ const RIG_RW={
   y:[[0,0],[250,-.03,"outQ"],[560,-.045],[620,0,"inQ"]],
   sq:[[0,0],[250,-.05],[560,-.06],[620,.05,"inQ"],[700,0]],
   legN:[[0,0],[560,-6],[620,18,"inQ"],[900,14],[1150,0,"io"]],legF:[[0,0],[560,6],[620,-18,"inQ"],[900,-14],[1150,0,"io"]]},
- bow:{impact:780,shout:[250,800],main:"F",grip:[.43,.47],
+ bow:{impact:780,shout:[250,800],main:"F",grip:[.43,.47],draw:[330,700],
   hand:[[0,[760,720,70]],[220,[620,615,90],"outQ"],[330,[622,614,90]],[620,[800,580,90],"io"],[700,[800,580,90]],[740,[805,578,90],"outQ"],[1050,[800,580,90]],[1300,[760,720,70],"io"]],
   far:[[0,[470,680]],[220,[530,645],"outQ"],[320,[556,633],"outQ"],[340,[555,633]],[620,[488,550],"io"],[700,[484,548]],[740,[430,520],"outQ"],[1050,[450,560]],[1300,[470,680],"io"]],
   lean:[[0,0],[220,-3],[620,-10,"io"],[700,-10],[740,-14,"outQ"],[1300,0,"io"]],
@@ -6227,13 +6228,33 @@ function rigDraw(cv,o,t){
   const part=(m,n)=>{ const p=man[n]; if(!p) return; const im=rigImg(`assets/art/rig/h/${o.key}/${n}.webp`); if(!im.naturalWidth) return; c.setTransform(base.multiply(m)); c.drawImage(im,p[0],p[1],p[2],p[3]); };
   const rootM=base.multiply(M.root), rootInv=M.root.inverse();
   const fist=K=>{ const p=M[K==="N"?"armNl":"armFl"].transformPoint(new DOMPoint(...(K==="N"?RIG_HP.gripN:RIG_HP.gripF))); const q=rootInv.transformPoint(p); return [q.x,q.y]; };
+  let wb=null, gpx=null;
   const weapon=()=>{ if(!o.wimg) return; const im=rigImg(o.wimg); if(!im.naturalWidth) return; const g1=fist(mainK), S_=o.grip[2]*1010, gx=(R.grip||o.grip)[0], gy=(R.grip||o.grip)[1];
-    c.setTransform(rootM); c.translate(g1[0],g1[1]); c.rotate((f.H[2]+45)*RIG_D2R); c.drawImage(im,-gx*S_,-gy*S_,S_,S_); };
+    c.setTransform(rootM); c.translate(g1[0],g1[1]); c.rotate((f.H[2]+45)*RIG_D2R);
+    const st=o.kind==="bow"&&(RIG_BOW[o.tier]||RIG_BOW[0]);
+    if(!st){ c.drawImage(im,-gx*S_,-gy*S_,S_,S_); return; }
+    // bow: hide the painted string and draw our own, so it can be pulled back
+    const X=u=>(u-gx)*S_, Y=v=>(v-gy)*S_, [A,B]=st, e=[B[0]-A[0],B[1]-A[1]]; let n=[-e[1],e[0]]; const nl=Math.hypot(n[0],n[1]); n=[n[0]/nl,n[1]/nl];
+    if(n[0]*(.3-A[0])+n[1]*(.3-A[1])<0) n=[-n[0],-n[1]];
+    const o2=.014, A2=[A[0]+n[0]*o2-e[0]*3,A[1]+n[1]*o2-e[1]*3], B2=[B[0]+n[0]*o2+e[0]*3,B[1]+n[1]*o2+e[1]*3];
+    c.save(); c.beginPath(); c.moveTo(X(A2[0]),Y(A2[1])); c.lineTo(X(B2[0]),Y(B2[1])); c.lineTo(X(B2[0]+n[0]*3),Y(B2[1]+n[1]*3)); c.lineTo(X(A2[0]+n[0]*3),Y(A2[1]+n[1]*3)); c.closePath(); c.clip();
+    c.drawImage(im,-gx*S_,-gy*S_,S_,S_); c.restore();
+    const m=c.getTransform(), P=(u,v)=>{ const q=m.transformPoint(new DOMPoint(X(u),Y(v))); return [q.x,q.y]; };
+    wb=[P(A[0],A[1]),P(B[0],B[1])]; gpx=P(gx,gy); };
+  const bowString=()=>{ if(!wb) return; const nh=rootM.transformPoint(new DOMPoint(...fist("N"))), hx=nh.x, hy=nh.y, dt=f.dt, atk=RIG.act==="atk";
+    const [a,b]=wb, px1=k*DPR; let mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2; const hooked=atk&&dt>=R.draw[0]&&dt<R.draw[1];
+    if(atk&&dt>=R.draw[1]&&dt<R.draw[1]+280){ const q=(dt-R.draw[1])/280, ex=b[0]-a[0], ey=b[1]-a[1], L=Math.hypot(ex,ey), w=40*px1*(1-q)*Math.sin((dt-R.draw[1])*.11); mx+=-ey/L*w; my+=ex/L*w; }
+    const sx2=hooked?hx:mx, sy2=hooked?hy:my;
+    c.setTransform(1,0,0,1,0,0); c.lineCap="round"; c.strokeStyle="#f3e6c4"; c.lineWidth=Math.max(1.2,7*px1); c.beginPath(); c.moveTo(a[0],a[1]); c.lineTo(sx2,sy2); c.lineTo(b[0],b[1]); c.stroke();
+    if(hooked&&gpx){ const an=Math.atan2(gpx[1]-hy,gpx[0]-hx), Lr=Math.hypot(gpx[0]-hx,gpx[1]-hy)+90*px1;
+      c.save(); c.translate(hx,hy); c.rotate(an); c.strokeStyle="#6b4527"; c.lineWidth=Math.max(1.5,10*px1); c.beginPath(); c.moveTo(0,0); c.lineTo(Lr,0); c.stroke();
+      c.fillStyle="#d9d4c7"; c.beginPath(); c.moveTo(-4*px1,0); c.lineTo(-40*px1,-18*px1); c.lineTo(-26*px1,0); c.lineTo(-40*px1,18*px1); c.fill();
+      c.fillStyle="#FF6A2A"; c.beginPath(); c.moveTo(Lr+50*px1,0); c.lineTo(Lr,-22*px1); c.lineTo(Lr,22*px1); c.fill(); c.restore(); } };
   // weapon always sits in the layer of the hand holding it, never behind the torso
   const two=!!R.two, farFront=two||mainK==="F";
   if(!farFront) part(M.armFl,"armFl");
   part(M.armFu,"armFu"); part(M.legF,"legF"); part(M.legN,"legN"); part(M.hips,"torso"); part(M.head,f.head in man?f.head:"head");
-  if(mainK==="F"){ part(M.armFl,"armFl"); weapon(); } else { weapon(); if(two) part(M.armFl,"armFl"); }
+  if(mainK==="F"){ part(M.armFl,"armFl"); weapon(); bowString(); } else { weapon(); if(two) part(M.armFl,"armFl"); }
   part(M.armNu,"armNu"); part(M.armNl,"armNl");
   if(f.flash>0){ c.setTransform(1,0,0,1,0,0); c.globalCompositeOperation="source-atop"; c.fillStyle=`rgba(255,255,255,${f.flash*.75})`; c.fillRect(0,0,W,Hh); c.globalCompositeOperation="source-over"; }
 }
@@ -6247,7 +6268,7 @@ function rigHeroHtml(gen,w,armor,fallback){
   if(!RIG.man){ rigLoad().then(j=>{ if(j){ const b=document.getElementById("trStage"); if(b&&!(S.train&&S.train.busy)) b.innerHTML=trainScene(); } }); return fallback(); }
   const key=rigOutfit(gen,armor); if(!key) return fallback();
   const kind=w?WKIND[w.el][w.tier]:"sword", pk=w&&picOfItem(w);
-  RIG.cur={key, kind:RIG_KIND[kind]||"sword", wimg:pk?`assets/art/${pk}.webp`:null, grip:KIND_GRIP[kind]||[.24,.76,.42]};
+  RIG.cur={key, tier:w?w.tier:0, kind:RIG_KIND[kind]||"sword", wimg:pk?`assets/art/${pk}.webp`:null, grip:KIND_GRIP[kind]||[.24,.76,.42]};
   if(!rigReady(key)){ Object.keys(RIG.man.h[key]).forEach(n=>rigImg(`assets/art/rig/h/${key}/${n}.webp`)); if(RIG.cur.wimg) rigImg(RIG.cur.wimg); }
   setTimeout(rigStart,0);
   return `<div class="hero-svg rig-host"><canvas id="rigHero" class="rig-cv" aria-hidden="true"></canvas></div>`;
