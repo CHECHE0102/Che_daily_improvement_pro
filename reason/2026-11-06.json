@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-06",
+ "items": {
+  "2026-11-06": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Rents in Ireland have started to fall for the first time since 2024.",
+     "Most Irish landlords are wealthy investors aged over 65.",
+     "CSO data show that rent takes a very large share of many tenants' income, especially around Dublin, and market rents are still rising.",
+     "Leitrim has the highest rents in Ireland because of strong demand."
+    ],
+    "a": 2,
+    "exp": "The passage opens by saying 'housing affordability remains a substantial challenge in Ireland', gives the share of tenants paying half their income ('26% of tenants' in south Dublin), and adds that 'market conditions continue to deteriorate for renters'. The other options contradict or misread the text."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about renters in Leitrim compared with those in south Dublin?",
+    "opts": [
+     "Renters in Leitrim generally carry a lighter rent burden relative to their income.",
+     "Renters in Leitrim pay higher rents but earn much more.",
+     "Leitrim was not included in the CSO analysis.",
+     "Most renters in Leitrim rely on social welfare."
+    ],
+    "a": 0,
+    "exp": "The share of tenants spending more than 40% of income on rent 'stood at 34% in south Dublin' but 'was considerably lower, at 18%, in Leitrim', so Leitrim renters are less burdened. The passage gives no data on Leitrim incomes or welfare, and Leitrim was clearly included."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that 'approximately 62% had a gross income below €60,000, and one third were aged over 65'?",
+    "opts": [
+     "To argue that landlords should pay higher taxes.",
+     "To show that tenants earn more than landlords.",
+     "To explain why rents rose to a record €2,204.",
+     "To support the point that landlords are not a homogeneous group."
+    ],
+    "a": 3,
+    "exp": "The figures follow directly after 'the data suggest that landlords are not a homogeneous group', so they illustrate that claim. The writer makes no tax argument, no tenant–landlord income comparison, and does not link these figures to the rise in rents."
+   }
+  ],
+  "2026-11-06-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Ireland's decision to raise its standard corporate tax rate to 15%.",
+     "An idea under discussion to direct part of Ireland's extra corporate tax revenue to the EU budget, which Irish officials say is not yet a formal proposal.",
+     "France's plan to leave the OECD agreement on minimum tax.",
+     "The results of an EU summit held in Brussels last month."
+    ],
+    "a": 1,
+    "exp": "The passage says Costa's team 'is considering the reallocation of a proportion of the additional revenue arising from the recent OECD agreement', while Dublin officials 'maintain that... no formal proposal currently exists'. Ireland's 'standard rate remains 12.5%', and the Brussels meeting is still to come 'at the end of the month'."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the 2.5% top-up on large multinationals?",
+    "opts": [
+     "It applies to all Irish companies, large and small.",
+     "It was introduced by the EU to fund its 2028–2034 budget.",
+     "It has replaced the 12.5% standard rate entirely.",
+     "It produces extra revenue that some EU policymakers would like to share."
+    ],
+    "a": 3,
+    "exp": "The top-up exists 'in order to comply with the 15% minimum' and 'could generate approximately €5 billion'; Costa's team is considering reallocating 'the additional revenue arising from' that agreement. It applies only to 'large multinational companies', comes from the OECD deal, and 'Ireland's standard rate remains 12.5%'."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the tone of the passage?",
+    "opts": [
+     "Neutral and informative, reporting positions on both sides.",
+     "Angry and critical of the European Union.",
+     "Enthusiastic about giving Irish tax revenue to Brussels.",
+     "Humorous and informal."
+    ],
+    "a": 0,
+    "exp": "The writer reports facts and claims without judging them: 'It has been reported that...', 'The Fiscal Council estimates...', 'officials in Dublin maintain that...'. There is no emotional, approving or humorous language."
+   }
+  ],
+  "2026-11-06-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "The CAO has opened applications for college places, and the passage explains the fees, registration steps and deadline for changing choices.",
+     "The CAO has reduced the number of courses on offer to 1,400.",
+     "Students must choose their final courses on the day they register.",
+     "The Leaving Certificate will no longer affect college offers from 2027."
+    ],
+    "a": 0,
+    "exp": "The passage reports that the CAO 'opened its online portal at noon on Thursday' and then describes the €35/€50 fee, registration and the right to amend choices 'until 5pm on 1 July 2027'. Applicants 'are not obliged to finalise their course preferences at this stage', and Leaving Certificate points 'largely determine' offers."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about a student who applies on 25 January?",
+    "opts": [
+     "They will not be allowed to apply at all.",
+     "They will have to sit the Leaving Certificate twice.",
+     "They will pay €15 more than a student who applied by 20 January.",
+     "They will receive a course offer immediately."
+    ],
+    "a": 2,
+    "exp": "'The application fee is €35 for submissions received by 20 January; subsequently, it increases to €50.' A 25 January application therefore costs €50, which is €15 more. Nothing suggests late applicants are refused or get instant offers."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer say the later fee 'provides a clear incentive to apply early'?",
+    "opts": [
+     "To complain that the CAO charges too much.",
+     "To point out the practical benefit of applying before 20 January.",
+     "To suggest that the fee will be removed next year.",
+     "To explain how Leaving Certificate points are calculated."
+    ],
+    "a": 1,
+    "exp": "The comment follows the fee rise 'to €50' after 20 January, so it highlights the saving from applying early. The writer does not criticise the fee, predict its removal or discuss how points are calculated here."
+   }
+  ],
+  "2026-11-06-4": [
+   {
+    "type": "main",
+    "q": "What is the main idea of the passage?",
+    "opts": [
+     "Newstalk has overtaken RTÉ as Ireland's most popular broadcaster.",
+     "Radio listening in Ireland fell sharply in the year to September 2026.",
+     "Drivetime is now RTÉ's most popular programme.",
+     "The latest JNLR survey shows Morning Ireland is still the most popular radio show and RTÉ remains dominant, though Newstalk also gained."
+    ],
+    "a": 3,
+    "exp": "Morning Ireland 'continues to be the most widely listened-to radio programme', RTÉ 'maintains a dominant position, accounting for the entire top 10', and Newstalk 'also performed well'. Drivetime 'declined by 9,000', and many shows grew rather than fell."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the gap between Morning Ireland and Today with David McCullagh?",
+    "opts": [
+     "It became smaller over the year.",
+     "It grew, because Morning Ireland gained listeners while Today lost some.",
+     "It stayed exactly the same.",
+     "Today with David McCullagh now has more listeners."
+    ],
+    "a": 1,
+    "exp": "Morning Ireland rose to 464,000, 'an increase of 7,000', while Today 'remains in second position with 421,000, a marginal decline of 1,000'. One rose and the other fell, so the gap widened."
+   },
+   {
+    "type": "tone",
+    "q": "What is the tone of the passage?",
+    "opts": [
+     "Critical of RTÉ's dominance.",
+     "Nostalgic about the history of Irish radio.",
+     "Factual and objective, focused on listener figures.",
+     "Doubtful about the accuracy of the survey."
+    ],
+    "a": 2,
+    "exp": "The passage mainly lists audience numbers and changes, e.g. 'rising from 254,000 to 268,000' and 'gained 14,000 listeners, reaching 189,000'. It describes the survey as comprising '16,750 interviews' without questioning it, and gives no criticism or nostalgia."
+   }
+  ]
+ }
+}
