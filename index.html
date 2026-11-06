@@ -835,6 +835,7 @@ body.onb-open{overflow:hidden}
 .srs-after{font-size:14px}
 .read-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:60px;z-index:3;background:var(--paper);padding:6px 0;box-shadow:0 -12px 0 var(--paper),0 6px 8px -6px rgba(0,0,0,.12)}
 .article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
+.inv-card .inv-mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.inv-card .inv-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px}.inv-list{display:flex;flex-direction:column;gap:6px}.inv-row{display:flex;align-items:center;gap:8px}.inv-row b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inv-dots{display:flex;gap:3px}.inv-dots i{width:10px;height:10px;border-radius:50%;background:#ddd}.inv-dots i.on{background:#3BB273}.inv-joined{font-weight:700}.inv-enter{display:flex;flex-direction:column;gap:6px}
 .comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
@@ -1985,6 +1986,7 @@ function viewSettings(){
     ${devPanel()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
+    ${inviteCard()}
     ${regionSection()}
     ${pushCard()}
     ${communityCard()}${igCard()}
@@ -2282,6 +2284,7 @@ function finishPost(art, score, total){
   const d=dayRec();
   if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
   if(isMain(art)) styleDaily();
+  if(isMain(art)&&INV.ref) setTimeout(invTick,600);
   else saveDay({...d, postBy:{...(d.postBy||{}), [art.id]:{score,total}}});
   setTimeout(rdPush,500);
 }
@@ -3798,7 +3801,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.28";
+const APP_VERSION="2026.11.29";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4290,6 +4293,8 @@ document.addEventListener("click", e=>{
   if(a==="maint") return maintSet(t.dataset.k==="1");
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
+  if(a==="invuse") return invUse(($("#invIn")||{}).value||"");
+  if(a==="invshare") return invShare();
   if(a==="devstats") return devLoadStats();
   if(a==="deverr") return devLoadErrors();
   if(a==="dev") return devAct(t.dataset.k);
@@ -4374,7 +4379,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -4417,7 +4422,7 @@ async function nickVerify(){
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
 }
 const OWNER_KEY="che-pro-owner";
-function localReset(){ S.words.clear(); S.days.clear(); try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+function localReset(){ S.words.clear(); S.days.clear(); INV={list:null, ref:undefined, busy:false, err:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
 async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
   localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
@@ -4434,7 +4439,10 @@ function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
   return {...newGame(base), inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], cosOwn:[...new Set([...(base.cosOwn||[]),...(o.cosOwn||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
-    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, login:loginMerge(base.login,o.login), battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null}; }
+    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, login:loginMerge(base.login,o.login), battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null,
+    ...invMergeG(base,o)}; }
+function invMergeG(a,b){ const r={}, c=a.invCode||b.invCode, p=[a.invPaid,b.invPaid].filter(Boolean).sort((x,y)=>(x.m||"").localeCompare(y.m||"")||(x.n||0)-(y.n||0)).pop();
+  if(c) r.invCode=c; if(a.invGot||b.invGot) r.invGot=1; if(p) r.invPaid=p; return r; }
 /* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
    tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
 const WSYNC_KEY="che-pro-wsync", DIRTY_KEY="che-pro-dirty", WSYNC_FULL=7*864e5, WSYNC_MARGIN=15*60e3;
@@ -8007,6 +8015,87 @@ function mySup(){ if(PLANS_ON&&DEV&&DEV.plan){ if(DEV.plan==="free") return null
 const planTag=need=>`<span class="plan-tag ${need}">${T(need==="plus"?"planPlus":"planSub")}</span>`;
 
 
+/* ================= invite friends =================
+   A friend joins with my code and finishes the 3 daily steps on 3 days in a row → I get INV_ME style coins, the friend gets INV_FRIEND.
+   inviteCodes/{CODE} = {uid}; referrals/{friendUid} = {by, code, name, n, d, paid}. d = the last counted day as a UTC day number;
+   the Firestore rules check d against the server clock, so changing the phone's date does not help. Only accounts younger than
+   INV_NEW_DAYS can enter a code, each account only once, and I can collect at most INV_CAP friends per month (the rest wait for next month). */
+const INV_ME=50, INV_FRIEND=30, INV_DAYS=3, INV_CAP=5, INV_NEW_DAYS=7;
+const INV_AB="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", INV_RE=/^[A-HJ-NP-Z2-9]{6}$/;
+let INV={list:null, ref:undefined, busy:false, err:false};
+const invDayNo=()=>SRV_OFF==null?null:Math.floor((Date.now()+SRV_OFF)/864e5);
+const invUrl=c=>location.origin+location.pathname+"?inv="+c;
+(function(){ try{ const c=(new URLSearchParams(location.search).get("inv")||"").trim().toUpperCase(); if(INV_RE.test(c)) localStorage.setItem("bb_inv",c); }catch(e){} })();
+const invPending=()=>{ try{ return localStorage.getItem("bb_inv")||""; }catch(e){ return ""; } };
+function invNewAcct(){ if(DEV) return true; const u=CLOUD.user, t=u&&u.metadata&&Date.parse(u.metadata.creationTime||""); return !!t&&Date.now()-t<INV_NEW_DAYS*864e5; }
+function invPaidN(g=game()){ const p=g.invPaid||{}; return p.m===monthKey()?(p.n||0):0; }
+async function invEnsureCode(){ const g=game(); if(g.invCode) return g.invCode; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  for(let i=0;i<6;i++){ let c=""; for(let k=0;k<6;k++) c+=INV_AB[Math.floor(Math.random()*INV_AB.length)];
+    const ref=fsM.doc(db,"inviteCodes",c); const sn=await fsM.getDoc(ref); if(sn.exists()) continue;
+    await fsM.setDoc(ref,{uid:me}); g.invCode=c; saveGame(); return c; }
+  return null; }
+async function invLoad(){ if(!CLOUD.fb||!CLOUD.user||SANDBOX()||INV.busy) return; INV.busy=true;
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ if(SRV_OFF==null) await srvSync();
+    await invEnsureCode();
+    const r=await fsM.getDoc(fsM.doc(db,"referrals",me)); INV.ref=r.exists()?r.data():null;
+    const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"referrals"),fsM.where("by","==",me),fsM.limit(60)));
+    const L=[]; sn.forEach(d=>L.push({id:d.id,...d.data()})); L.sort((a,b)=>(b.d||0)-(a.d||0)); INV.list=L; INV.err=false;
+  }catch(e){ console.warn("invite load",e&&(e.code||e.message)); INV.err=true; }
+  INV.busy=false;
+  try{ if(INV.ref===null&&invPending()&&invNewAcct()) await invUse(invPending(),true);
+    else if(INV.ref) { await invTick(); invFriendReward(); }
+    for(const x of INV.list||[]) if((x.n||0)>=INV_DAYS&&!x.paid&&invPaidN()<INV_CAP) await invPay(x);
+  }catch(e){}
+  if(S.view==="set") render(); }
+// enter a friend's code (auto = it came from their invite link)
+async function invUse(raw,auto){ const c=String(raw||"").trim().toUpperCase(); const g=game();
+  if(!CLOUD.fb||!CLOUD.user) return toast(T("invLogin"));
+  if(!INV_RE.test(c)) return auto?null:toast(T("invBad"));
+  if(c===g.invCode){ try{ localStorage.removeItem("bb_inv"); }catch(e){} return auto?null:toast(T("invSelf")); }
+  if(INV.ref) return auto?null:toast(T("invAlready"));
+  if(!invNewAcct()) return auto?null:toast(T("invOld",{n:INV_NEW_DAYS}));
+  if(SRV_OFF==null&&!(await srvSync())) return toast(T("lgNoNet"));
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const cd=await fsM.getDoc(fsM.doc(db,"inviteCodes",c)); if(!cd.exists()) return toast(T("invBad"));
+    const by=cd.data().uid; if(by===me) return toast(T("invSelf"));
+    const doc={by, code:c, name:(g.nick||"").slice(0,16), n:0, d:invDayNo()-1, paid:false};
+    await fsM.setDoc(fsM.doc(db,"referrals",me),doc); INV.ref=doc;
+    try{ localStorage.removeItem("bb_inv"); }catch(e){}
+    toast(T("invJoined",{n:INV_DAYS})); await invTick(); render(); }
+  catch(e){ console.warn("invite use",e&&(e.code||e.message)); toast(e&&e.code==="permission-denied"?T("invDenied"):T("syncFail")); } }
+// the friend's side: count today once today's 3 steps are done; a gap of a day starts the count again
+async function invTick(){ const R=INV.ref; if(!R||!CLOUD.fb||!CLOUD.user||(R.n||0)>=INV_DAYS||!dayRec().postDone) return;
+  if(SRV_OFF==null&&!(await srvSync())) return; const t=invDayNo(); if(t==null||(R.d||0)>=t) return;
+  const n=R.d===t-1?(R.n||0)+1:1, {fsM,db}=CLOUD.fb;
+  try{ await fsM.updateDoc(fsM.doc(db,"referrals",CLOUD.user.uid),{n, d:t, name:(game().nick||R.name||"").slice(0,16)}); R.n=n; R.d=t;
+    if(n>=INV_DAYS) invFriendReward(); else toast(T("invDay",{n,m:INV_DAYS})); }
+  catch(e){ console.warn("invite tick",e&&(e.code||e.message)); } }
+function invFriendReward(){ const g=game(), R=INV.ref; if(!R||(R.n||0)<INV_DAYS||g.invGot) return;
+  g.invGot=1; g.style=(g.style||0)+INV_FRIEND; saveGame(); cosPush(); toast(T("invFriendDone",{n:INV_FRIEND})); }
+// my side: collect the reward for a friend who finished (once per friend, at most INV_CAP per month)
+async function invPay(x){ if(!CLOUD.fb||!CLOUD.user||invPaidN()>=INV_CAP) return; const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"referrals",x.id);
+  try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref), d=sn.exists()?sn.data():null;
+      if(!d||d.by!==CLOUD.user.uid||(d.n||0)<INV_DAYS||d.paid) throw new Error("state"); tx.update(ref,{paid:true}); });
+    const g=game(); x.paid=true; g.style=(g.style||0)+INV_ME; g.invPaid={m:monthKey(), n:invPaidN(g)+1}; saveGame(); cosPush();
+    toast(T("invPaid",{n:INV_ME, f:x.name||T("invFriend")})); }
+  catch(e){ console.warn("invite pay",e&&(e.code||e.message)); } }
+function invShare(){ const c=game().invCode; if(!c) return; const url=invUrl(c), txt=T("invShareTxt",{c});
+  if(navigator.share) navigator.share({title:"BinBin daily", text:txt, url}).catch(()=>{});
+  else (navigator.clipboard?navigator.clipboard.writeText(txt+" "+url):Promise.reject()).then(()=>toast(T("invCopied")),()=>toast(url)); }
+function inviteCard(){ if(!CLOUD.user||SANDBOX()) return "";
+  if(INV.ref===undefined&&!INV.busy&&!INV.err) setTimeout(invLoad,0);
+  const g=game(), c=g.invCode, R=INV.ref, full=invPaidN()>=INV_CAP;
+  const rows=(INV.list||[]).map(x=>{ const done=(x.n||0)>=INV_DAYS;
+    return `<div class="inv-row"><b>${esc(x.name||T("invFriend"))}</b><span class="inv-dots">${Array.from({length:INV_DAYS},(_,i)=>`<i class="${i<(x.n||0)?"on":""}"></i>`).join("")}</span><span class="muted sm-t">${done?(x.paid?`✓ ${STYLE_IC}+${INV_ME}`:(full?T("invNextMonth"):T("invWait"))):T("invProg",{n:x.n||0,m:INV_DAYS})}</span></div>`; }).join("");
+  const mine=R?`<div class="inv-joined">${(R.n||0)>=INV_DAYS?`✓ ${T("invJoinedDone",{n:INV_FRIEND})}`:T("invJoinedProg",{n:R.n||0,m:INV_DAYS,f:INV_FRIEND})}</div>`
+    :(invNewAcct()?`<div class="inv-enter"><span class="muted sm-t">${T("invHaveCode")}</span><div class="row" style="gap:6px;flex-wrap:nowrap"><input id="invIn" class="search" maxlength="6" placeholder="ABC234" autocomplete="off" autocapitalize="characters" value="${esc(invPending())}" style="text-transform:uppercase"><button class="btn sm" data-act="invuse">${T("invUse")}</button></div></div>`:"");
+  return `<section class="card set-sec inv-card"><b>🎁 ${T("invTitle")}</b><span class="muted sm-t">${T("invSub",{d:INV_DAYS,a:INV_ME,b:INV_FRIEND,c:INV_CAP})}</span>
+    ${c?`<div class="inv-mine"><span class="muted sm-t">${T("invMyCode")}</span><span class="inv-code">${esc(c)}</span><button class="btn sm" data-act="invshare">${T("invShare")}</button></div>`:`<span class="muted sm-t">${INV.err?T("syncFail"):T("loading")}</span>`}
+    ${rows?`<div class="inv-list"><span class="muted sm-t">${T("invMonth",{n:invPaidN(),c:INV_CAP})}</span>${rows}</div>`:""}
+    ${mine}</section>`; }
+
+
 /* ================= daily login reward + login streak (the streak title uses the old membership badges) =================
    Open the game each day and claim: style coins (+ gold) on a 7-day cycle; slots 3 and 6 also give a truce pass.
    Missing a day uses a truce pass automatically (the streak survives, that day does not count); with none left the streak restarts.
@@ -8722,6 +8811,12 @@ Object.assign(STR.hi,{"cos_f-sakura": "साकुरा भँवर", "cosDi_
 Object.assign(STR.es,{"cos_f-sakura": "Remolino sakura", "cosDi_f-sakura": "Un aro rosa de flores gira bajo tus pies y suben pétalos", "cos_f-flame": "Círculo de llamas", "cosDi_f-flame": "Un anillo de fuego arde a tus pies y las llamas saltan hacia arriba", "cos_f-thunder": "Sello del trueno", "cosDi_f-thunder": "Un círculo de runas azul gira bajo tus pies mientras suben rayos", "cos_f-eternal": "Arcoíris eterno", "cosDi_f-eternal": "Una columna arcoíris, un círculo de runas dorado, una doble hélice de chispas y estrellas que suben", "cos_b-bubble": "Mar de burbujas", "cosDi_b-bubble": "Un aro azul agua gira detrás de ti y suben burbujas de todos los tamaños", "cos_b-cosmos": "Alas estelares", "cosDi_b-cosmos": "Alas de luz estelar que cambian de color, dos anillos de rayos, una rueda de runas y tres estrellas en órbita", "cos_n-leaf": "Collar del bosque", "cosDi_n-leaf": "Cada golpe estalla en luz verde y esparce un anillo de hojas girando", "cos_n-wave": "Collar de la marea", "cosDi_n-wave": "Cada golpe barre una ola, expande anillos de agua y salpica gotas", "cos_n-moon": "Collar de luz de luna", "cosDi_n-moon": "Cada golpe traza una media luna gigante, la pantalla se vuelve noche, brilla y tiembla", "cos_n-cosmic": "Collar del cosmos", "cosDi_n-cosmic": "Cada golpe abre un agujero negro, estalla un vórtice arcoíris con rayos, caen meteoros y tiembla toda la pantalla", "cos_s-harp": "Arpa", "cosDi_s-harp": "Un acorde de arpa en cada golpe, un arpegio en los críticos", "cos_s-laser": "Láser", "cosDi_s-laser": "Un láser en cada golpe, doble disparo en los críticos", "cos_s-coin": "Monedas", "cosDi_s-coin": "Una moneda tintinea en cada golpe, lluvia de monedas en los críticos", "cos_s-sword": "Espadas", "cosDi_s-sword": "Choque de acero, golpe doble en los críticos", "cos_s-dragon": "Rugido de dragón", "cosDi_s-dragon": "Un rugido grave, más largo y fuerte en los críticos", "cos_s-orch": "Fanfarria", "cosDi_s-orch": "Un acorde de metales en cada golpe, una fanfarria en los críticos", "cos_s-choir": "Coro de ángeles", "cosDi_s-choir": "Un coro suave en cada golpe, con campana en los críticos"});
 Object.assign(STR.ja,{"cos_f-sakura": "桜の舞", "cosDi_f-sakura": "足もとで桜の輪が回り、花びらがひらひら舞い上がる", "cos_f-flame": "炎の陣", "cosDi_f-flame": "足もとで炎の輪が燃え、火が次々に立ちのぼる", "cos_f-thunder": "雷の魔法陣", "cosDi_f-thunder": "青いルーンの魔法陣が回り、稲妻が上へ走る", "cos_f-eternal": "永遠の虹陣", "cosDi_f-eternal": "虹の光柱・金色の魔法陣・虹の光の二重らせん・昇る星", "cos_b-bubble": "泡の海", "cosDi_b-bubble": "背中で水色の輪が回り、大小の泡がどんどん昇る", "cos_b-cosmos": "星界の翼", "cosDi_b-cosmos": "色が変わる星の翼、2重の星の光、ルーンの輪、周りを回る3つの星", "cos_n-leaf": "森のネックレス", "cosDi_n-leaf": "攻撃のたびに緑の光がはじけ、葉っぱがくるくる飛び散る", "cos_n-wave": "潮のネックレス", "cosDi_n-wave": "攻撃のたびに波が横切り、水の輪が広がり、しぶきが飛ぶ", "cos_n-moon": "月光のネックレス", "cosDi_n-moon": "攻撃のたびに大きな三日月の斬撃、画面が夜になって星がきらめき揺れる", "cos_n-cosmic": "宇宙のネックレス", "cosDi_n-cosmic": "攻撃のたびにブラックホールが開き、虹のうずと光線が爆発、流れ星が落ち、画面全体が大きく揺れる", "cos_s-harp": "ハープ", "cosDi_s-harp": "攻撃でハープの和音、クリティカルでアルペジオ", "cos_s-laser": "レーザー", "cosDi_s-laser": "攻撃でレーザー音、クリティカルで2連射", "cos_s-coin": "コイン", "cosDi_s-coin": "攻撃でコインの音、クリティカルでコインの雨", "cos_s-sword": "剣", "cosDi_s-sword": "キンッと金属の音、クリティカルで2連撃", "cos_s-dragon": "竜の咆哮", "cosDi_s-dragon": "低い竜の咆哮、クリティカルでもっと長く大きく", "cos_s-orch": "ファンファーレ", "cosDi_s-orch": "攻撃で金管の和音、クリティカルで短いファンファーレ", "cos_s-choir": "天使の合唱", "cosDi_s-choir": "攻撃でやさしい合唱、クリティカルで鐘つき"});
 Object.assign(STR.ko,{"cos_f-sakura": "벚꽃 회오리", "cosDi_f-sakura": "발밑에서 분홍 꽃고리가 돌고 꽃잎이 날아올라요", "cos_f-flame": "화염진", "cosDi_f-flame": "발밑에서 불의 고리가 타오르고 불길이 치솟아요", "cos_f-thunder": "번개 마법진", "cosDi_f-thunder": "파란 룬 마법진이 돌고 번개가 위로 내리쳐요", "cos_f-eternal": "영원의 무지개진", "cosDi_f-eternal": "무지개 빛기둥, 황금 룬 마법진, 무지개 빛 이중 나선, 떠오르는 별", "cos_b-bubble": "거품 바다", "cosDi_b-bubble": "등 뒤에서 물빛 고리가 돌고 크고 작은 거품이 올라가요", "cos_b-cosmos": "별의 날개", "cosDi_b-cosmos": "색이 바뀌는 별빛 날개, 두 겹 별빛, 룬 바퀴, 주위를 도는 별 세 개", "cos_n-leaf": "숲의 목걸이", "cosDi_n-leaf": "공격할 때마다 초록 빛이 터지고 나뭇잎이 빙글빙글 흩날려요", "cos_n-wave": "파도 목걸이", "cosDi_n-wave": "공격할 때마다 파도가 쓸고 물결이 퍼지며 물방울이 튀어요", "cos_n-moon": "달빛 목걸이", "cosDi_n-moon": "공격할 때마다 거대한 초승달이 베고 화면이 밤이 되며 반짝이고 흔들려요", "cos_n-cosmic": "우주 목걸이", "cosDi_n-cosmic": "공격할 때마다 블랙홀이 열리고 무지개 소용돌이와 광선이 터지며 유성이 떨어지고 화면 전체가 흔들려요", "cos_s-harp": "하프", "cosDi_s-harp": "공격하면 하프 화음, 치명타면 아르페지오", "cos_s-laser": "레이저", "cosDi_s-laser": "공격하면 레이저 소리, 치명타면 두 발", "cos_s-coin": "동전", "cosDi_s-coin": "공격하면 동전 소리, 치명타면 동전 비", "cos_s-sword": "검", "cosDi_s-sword": "쨍 하는 쇳소리, 치명타면 두 번 연속", "cos_s-dragon": "용의 포효", "cosDi_s-dragon": "낮은 용의 포효, 치명타면 더 길고 크게", "cos_s-orch": "팡파르", "cosDi_s-orch": "공격하면 금관 화음, 치명타면 짧은 팡파르", "cos_s-choir": "천사 합창", "cosDi_s-choir": "공격하면 부드러운 합창, 치명타면 종소리까지"});
+Object.assign(STR.zh,{"invTitle": "邀請朋友", "invSub": "朋友用你的邀請碼加入，連續 {d} 天完成每日三個步驟：你得 {a} 造型幣，朋友得 {b} 造型幣。每月最多領 {c} 位。", "invMyCode": "我的邀請碼", "invShare": "分享邀請連結", "invShareTxt": "一起來 BinBin 每天用新聞練英文！用我的邀請碼 {c} 加入，連續 3 天完成每日任務就能拿造型幣 🎁", "invCopied": "已複製邀請連結", "invMonth": "本月已領 {n}/{c} 位", "invProg": "進行中 {n}/{m}", "invWait": "可領取", "invNextMonth": "本月已滿，下個月可領", "invFriend": "朋友", "invHaveCode": "有朋友的邀請碼？（新帳號 7 天內可輸入）", "invUse": "確認", "invLogin": "請先登入", "invBad": "找不到這個邀請碼", "invSelf": "不能使用自己的邀請碼", "invAlready": "你已經接受過邀請了", "invOld": "只有註冊 {n} 天內的新帳號可以輸入邀請碼", "invDenied": "無法使用這個邀請碼", "invJoined": "已接受邀請！連續 {n} 天完成每日三個步驟就能拿獎勵", "invDay": "邀請任務進度 {n}/{m} 天", "invFriendDone": "邀請任務完成！獲得 {n} 造型幣 🎁", "invPaid": "{f} 完成了邀請任務！你獲得 {n} 造型幣 🎁", "invJoinedProg": "你接受了朋友的邀請：進度 {n}/{m} 天，完成可得 {f} 造型幣", "invJoinedDone": "邀請任務完成，已獲得 {n} 造型幣"});
+Object.assign(STR.en,{"invTitle": "Invite friends", "invSub": "A friend joins with your code and finishes the 3 daily steps {d} days in a row: you get {a} style coins, they get {b}. Up to {c} friends a month.", "invMyCode": "My invite code", "invShare": "Share invite link", "invShareTxt": "Learn English with the daily news on BinBin! Join with my invite code {c} and finish the daily steps 3 days in a row to get style coins 🎁", "invCopied": "Invite link copied", "invMonth": "Collected this month: {n}/{c}", "invProg": "In progress {n}/{m}", "invWait": "Ready to collect", "invNextMonth": "Monthly limit reached, collect next month", "invFriend": "Friend", "invHaveCode": "Got a friend's invite code? (new accounts, first 7 days)", "invUse": "Use", "invLogin": "Please sign in first", "invBad": "Invite code not found", "invSelf": "You can't use your own code", "invAlready": "You have already accepted an invite", "invOld": "Only accounts created in the last {n} days can enter an invite code", "invDenied": "This invite code can't be used", "invJoined": "Invite accepted! Finish the 3 daily steps {n} days in a row for your reward", "invDay": "Invite progress: day {n}/{m}", "invFriendDone": "Invite task done! You got {n} style coins 🎁", "invPaid": "{f} finished the invite task! You got {n} style coins 🎁", "invJoinedProg": "You accepted a friend's invite: day {n}/{m}, finish to get {f} style coins", "invJoinedDone": "Invite task done, you got {n} style coins"});
+Object.assign(STR.hi,{"invTitle": "दोस्तों को बुलाएँ", "invSub": "दोस्त आपके कोड से जुड़े और लगातार {d} दिन रोज़ के 3 कदम पूरे करे: आपको {a} स्टाइल सिक्के, दोस्त को {b}। हर महीने अधिकतम {c} दोस्त।", "invMyCode": "मेरा आमंत्रण कोड", "invShare": "आमंत्रण लिंक भेजें", "invShareTxt": "BinBin पर रोज़ की ख़बरों से अंग्रेज़ी सीखें! मेरे कोड {c} से जुड़ें और लगातार 3 दिन रोज़ के कदम पूरे करके स्टाइल सिक्के पाएँ 🎁", "invCopied": "आमंत्रण लिंक कॉपी हुआ", "invMonth": "इस महीने: {n}/{c}", "invProg": "जारी {n}/{m}", "invWait": "लेने के लिए तैयार", "invNextMonth": "इस महीने की सीमा पूरी, अगले महीने लें", "invFriend": "दोस्त", "invHaveCode": "दोस्त का आमंत्रण कोड है? (नया खाता, पहले 7 दिन)", "invUse": "लागू करें", "invLogin": "पहले साइन इन करें", "invBad": "यह कोड नहीं मिला", "invSelf": "अपना कोड इस्तेमाल नहीं कर सकते", "invAlready": "आप पहले ही आमंत्रण स्वीकार कर चुके हैं", "invOld": "केवल पिछले {n} दिनों में बने खाते कोड डाल सकते हैं", "invDenied": "यह कोड इस्तेमाल नहीं हो सकता", "invJoined": "आमंत्रण स्वीकार! इनाम के लिए लगातार {n} दिन रोज़ के 3 कदम पूरे करें", "invDay": "आमंत्रण प्रगति: दिन {n}/{m}", "invFriendDone": "आमंत्रण पूरा! आपको {n} स्टाइल सिक्के मिले 🎁", "invPaid": "{f} ने आमंत्रण पूरा किया! आपको {n} स्टाइल सिक्के मिले 🎁", "invJoinedProg": "आपने दोस्त का आमंत्रण स्वीकार किया: दिन {n}/{m}, पूरा करने पर {f} स्टाइल सिक्के", "invJoinedDone": "आमंत्रण पूरा, आपको {n} स्टाइल सिक्के मिले"});
+Object.assign(STR.es,{"invTitle": "Invita a amigos", "invSub": "Un amigo se une con tu código y completa los 3 pasos diarios {d} días seguidos: tú recibes {a} monedas de estilo y tu amigo {b}. Hasta {c} amigos al mes.", "invMyCode": "Mi código de invitación", "invShare": "Compartir enlace", "invShareTxt": "¡Aprende inglés con las noticias del día en BinBin! Únete con mi código {c} y completa los pasos diarios 3 días seguidos para ganar monedas de estilo 🎁", "invCopied": "Enlace copiado", "invMonth": "Este mes: {n}/{c}", "invProg": "En curso {n}/{m}", "invWait": "Listo para cobrar", "invNextMonth": "Límite del mes alcanzado, cóbralo el mes que viene", "invFriend": "Amigo", "invHaveCode": "¿Tienes el código de un amigo? (cuentas nuevas, primeros 7 días)", "invUse": "Usar", "invLogin": "Inicia sesión primero", "invBad": "No se encontró ese código", "invSelf": "No puedes usar tu propio código", "invAlready": "Ya aceptaste una invitación", "invOld": "Solo las cuentas creadas en los últimos {n} días pueden usar un código", "invDenied": "Este código no se puede usar", "invJoined": "¡Invitación aceptada! Completa los 3 pasos diarios {n} días seguidos para tu premio", "invDay": "Progreso de la invitación: día {n}/{m}", "invFriendDone": "¡Invitación completada! Recibes {n} monedas de estilo 🎁", "invPaid": "¡{f} completó la invitación! Recibes {n} monedas de estilo 🎁", "invJoinedProg": "Aceptaste la invitación de un amigo: día {n}/{m}, al terminar recibes {f} monedas de estilo", "invJoinedDone": "Invitación completada, recibiste {n} monedas de estilo"});
+Object.assign(STR.ja,{"invTitle": "友だちを招待", "invSub": "友だちがあなたのコードで参加し、{d}日連続で毎日の3ステップを終えると、あなたに{a}、友だちに{b}スタイルコイン。毎月最大{c}人まで。", "invMyCode": "自分の招待コード", "invShare": "招待リンクを共有", "invShareTxt": "BinBinで毎日ニュースを使って英語を練習しよう！招待コード {c} で参加して、3日連続で毎日のタスクを終えるとスタイルコインがもらえるよ 🎁", "invCopied": "招待リンクをコピーしました", "invMonth": "今月の受け取り {n}/{c}", "invProg": "進行中 {n}/{m}", "invWait": "受け取り可能", "invNextMonth": "今月の上限に達しました。来月受け取れます", "invFriend": "友だち", "invHaveCode": "友だちの招待コードがある？（新規アカウント7日以内）", "invUse": "使う", "invLogin": "先にログインしてください", "invBad": "招待コードが見つかりません", "invSelf": "自分のコードは使えません", "invAlready": "すでに招待を受け取っています", "invOld": "登録から{n}日以内のアカウントだけがコードを入力できます", "invDenied": "このコードは使えません", "invJoined": "招待を受け取りました！{n}日連続で毎日の3ステップを終えると報酬", "invDay": "招待の進み具合 {n}/{m}日", "invFriendDone": "招待タスク完了！{n}スタイルコイン獲得 🎁", "invPaid": "{f}が招待タスクを完了！{n}スタイルコイン獲得 🎁", "invJoinedProg": "友だちの招待を受け取りました：{n}/{m}日、完了で{f}スタイルコイン", "invJoinedDone": "招待タスク完了、{n}スタイルコイン獲得済み"});
+Object.assign(STR.ko,{"invTitle": "친구 초대", "invSub": "친구가 내 코드로 가입해 {d}일 연속 매일 3단계를 마치면 나는 스타일 코인 {a}개, 친구는 {b}개. 한 달 최대 {c}명.", "invMyCode": "내 초대 코드", "invShare": "초대 링크 공유", "invShareTxt": "BinBin에서 매일 뉴스로 영어 연습해요! 내 초대 코드 {c}로 가입하고 3일 연속 매일 과제를 마치면 스타일 코인을 받아요 🎁", "invCopied": "초대 링크를 복사했어요", "invMonth": "이번 달 받은 수 {n}/{c}", "invProg": "진행 중 {n}/{m}", "invWait": "받을 수 있음", "invNextMonth": "이번 달 한도 도달, 다음 달에 받을 수 있어요", "invFriend": "친구", "invHaveCode": "친구의 초대 코드가 있나요? (새 계정 7일 이내)", "invUse": "사용", "invLogin": "먼저 로그인하세요", "invBad": "초대 코드를 찾을 수 없어요", "invSelf": "내 코드는 사용할 수 없어요", "invAlready": "이미 초대를 받았어요", "invOld": "가입 {n}일 이내 계정만 코드를 입력할 수 있어요", "invDenied": "이 코드는 사용할 수 없어요", "invJoined": "초대를 받았어요! {n}일 연속 매일 3단계를 마치면 보상", "invDay": "초대 진행 {n}/{m}일", "invFriendDone": "초대 과제 완료! 스타일 코인 {n}개 획득 🎁", "invPaid": "{f}님이 초대 과제를 완료했어요! 스타일 코인 {n}개 획득 🎁", "invJoinedProg": "친구 초대를 받았어요: {n}/{m}일, 완료하면 스타일 코인 {f}개", "invJoinedDone": "초대 과제 완료, 스타일 코인 {n}개 획득"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
