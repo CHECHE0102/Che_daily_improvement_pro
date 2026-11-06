@@ -836,6 +836,7 @@ body.onb-open{overflow:hidden}
 .read-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:60px;z-index:3;background:var(--paper);padding:6px 0;box-shadow:0 -12px 0 var(--paper),0 6px 8px -6px rgba(0,0,0,.12)}
 .article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
 .inv-card .inv-mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.inv-card .inv-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px}.inv-list{display:flex;flex-direction:column;gap:6px}.inv-row{display:flex;align-items:center;gap:8px}.inv-row b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inv-dots{display:flex;gap:3px}.inv-dots i{width:10px;height:10px;border-radius:50%;background:#ddd}.inv-dots i.on{background:#3BB273}.inv-joined{font-weight:700}.inv-enter{display:flex;flex-direction:column;gap:6px}
+.mem-card .mem-on{margin:0;font-weight:700;color:#2E8B57}.mem-card .mem-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px;align-self:flex-start}.mem-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:2px;font-size:14px}.ls-panel.locked .comm-ig,.wk-card.locked .comm-ig{margin-top:8px;color:#fff!important;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;font-weight:700}
 .comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
@@ -1983,7 +1984,9 @@ function viewSettings(){
   return `<div class="view">
     <div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabSet")}</h2></div>
     ${supMineCard()}
+    ${memCard()}
     ${devPanel()}
+    ${memAdmin()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
     ${inviteCard()}
@@ -4293,6 +4296,10 @@ document.addEventListener("click", e=>{
   if(a==="maint") return maintSet(t.dataset.k==="1");
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
+  if(a==="memapply") return memApply();
+  if(a==="memgrant") return memGrant();
+  if(a==="memlist") return memPending();
+  if(a==="memgo"){ S.view="set"; S.tab="set"; render(); setTimeout(()=>{ const c=document.getElementById("memCard"); if(c) c.scrollIntoView({behavior:"smooth",block:"center"}); },60); return; }
   if(a==="invuse") return invUse(($("#invIn")||{}).value||"");
   if(a==="invshare") return invShare();
   if(a==="devstats") return devLoadStats();
@@ -4379,7 +4386,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(memLoad,900); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -4422,7 +4429,7 @@ async function nickVerify(){
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
 }
 const OWNER_KEY="che-pro-owner";
-function localReset(){ S.words.clear(); S.days.clear(); INV={list:null, ref:undefined, busy:false, err:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+function localReset(){ S.words.clear(); S.days.clear(); INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
 async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
   localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
@@ -8007,13 +8014,61 @@ Object.assign(STR.ja,{"in5": "この出撃券5枚と初心者装備をやろう�
 Object.assign(STR.ko,{"in5": "이 출정권 5장과 초보자 장비를 받으렴! 먼저 야생에서 작은 짐승들로 몸을 풀고, 첫 번째 마을 딩글을 되찾으렴. Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "stGot": "출정권 5장과 초보자 장비를 받았어요!"});
 /* ================= plans: free / member (€5) / premium (€12). Developer mode can preview any plan. ================= */
 const PLAN_RANK={free:0,sub:1,plus:2}; const PLANS_ON=false;   // paid membership is switched off for now (everything free); set true to bring the plans back
-function myPlan(){ if(!PLANS_ON) return "plus"; if(DEV&&DEV.plan) return DEV.plan; const me=CLOUD.user&&SUP[CLOUD.user.uid]; return me&&me.sub?(me.plus?"plus":"sub"):"free"; }
+function myPlan(){ if(!PLANS_ON) return !IG_MEMBER_ON||isMember()?"plus":"free"; if(DEV&&DEV.plan) return DEV.plan; const me=CLOUD.user&&SUP[CLOUD.user.uid]; return me&&me.sub?(me.plus?"plus":"sub"):"free"; }
 const planHas=need=>PLAN_RANK[myPlan()]>=PLAN_RANK[need];
 // the supporter record the membership card reads; in developer preview a pretend one so every screen can be seen
 function mySup(){ if(PLANS_ON&&DEV&&DEV.plan){ if(DEV.plan==="free") return null; const m=DEV.planM||3; let t=1; for(const [n,tt] of SUB_STEPS) if(m>=n) t=tt; return {tier:t, sub:true, plus:DEV.plan==="plus", months:m, n:game().nick||""}; }
   return CLOUD.user&&SUP[CLOUD.user.uid]||null; }
 const planTag=need=>`<span class="plan-tag ${need}">${T(need==="plus"?"planPlus":"planSub")}</span>`;
 
+
+/* ================= free IG membership =================
+   With paid plans off, the old member features (close listening, weekly review) open for players who follow BinBin on IG:
+   the player taps "apply" → gets a short code (memberReq/{uid}) → DMs it to the IG account → the admin pastes the codes in the
+   developer panel → members/{uid} is written. Admin and developer mode always count as members. */
+const IG_MEMBER_ON=true;
+const IG_DM="https://ig.me/m/binbin.daily.english", MEM_AB="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", MEM_RE=/BB-[A-HJ-NP-Z2-9]{4}/g;
+let MEM={on:undefined, req:undefined, busy:false};
+const isMember=()=>!!(DEV||isAdminUser()||MEM.on);
+async function memLoad(){ if(!CLOUD.fb||!CLOUD.user||MEM.busy) return; MEM.busy=true; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const [m,r]=await Promise.all([fsM.getDoc(fsM.doc(db,"members",me)), fsM.getDoc(fsM.doc(db,"memberReq",me))]);
+    MEM.on=m.exists()&&m.data().ig===true; MEM.req=r.exists()?r.data():null; }catch(e){ console.warn("member load",e&&(e.code||e.message)); MEM.on=false; MEM.req=null; }
+  MEM.busy=false; render(); }
+async function memApply(){ if(!CLOUD.fb||!CLOUD.user) return toast(T("invLogin")); const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ let R=MEM.req; if(!R){ let c="BB-"; for(let k=0;k<4;k++) c+=MEM_AB[Math.floor(Math.random()*MEM_AB.length)];
+      R={code:c, nick:(game().nick||"").slice(0,16), at:Date.now()}; await fsM.setDoc(fsM.doc(db,"memberReq",me),R); MEM.req=R; }
+    (navigator.clipboard?navigator.clipboard.writeText(R.code):Promise.reject()).then(()=>toast(T("memCopied",{c:R.code})),()=>{});
+    render(); window.open(IG_DM,"_blank","noopener"); }
+  catch(e){ console.warn("member apply",e&&(e.code||e.message)); toast(T("syncFail")); } }
+function memCard(){ if(PLANS_ON||!IG_MEMBER_ON) return ""; const on=isMember(), R=MEM.req;
+  if(CLOUD.user&&MEM.on===undefined&&!MEM.busy) setTimeout(memLoad,0);
+  const perks=["memPerk1","memPerk2"].map(k=>`<li>${T(k)}</li>`).join("");
+  const body=on?`<p class="mem-on">✓ ${T("memYes")}</p>`
+    :!CLOUD.user?`<p class="muted sm-t">${T("invLogin")}</p>`
+    :R?`<p class="sm-t">${T("memWait")}</p><div class="mem-code">${esc(R.code)}</div><a class="btn sm comm-ig" href="${IG_DM}" target="_blank" rel="noopener">${T("memDmAgain")}</a>`
+    :`<ol class="mem-steps"><li>${T("memStep1")}</li><li>${T("memStep2")}</li><li>${T("memStep3")}</li></ol><button class="btn comm-ig" data-act="memapply">${T("memApply")}</button>`;
+  return `<section class="card set-sec comm-card mem-card" id="memCard"><b>🌟 ${T("memTitle")}</b><ul class="sub-perks">${perks}</ul>${body}</section>`; }
+const memLockBtn=()=>PLANS_ON?"":`<button class="btn sm comm-ig" data-act="memgo">${T("memUnlock")}</button>`;
+// admin: paste the DMs (or just the codes) → every BB-XXXX found becomes a member
+async function memGrant(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const codes=[...new Set((((document.getElementById("memCodes")||{}).value||"").toUpperCase().match(MEM_RE))||[])]; if(!codes.length) return toast(T("memNoCodes"));
+  const {fsM,db}=CLOUD.fb; let ok=[], miss=[];
+  try{ for(let i=0;i<codes.length;i+=30){ const part=codes.slice(i,i+30);
+      const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"memberReq"),fsM.where("code","in",part))); const found=new Set();
+      const B=fsM.writeBatch(db); sn.forEach(d=>{ const x=d.data(); found.add(x.code); ok.push(x.nick||x.code);
+        B.set(fsM.doc(db,"members",d.id),{ig:true, n:x.nick||"", code:x.code, at:Date.now()}); B.delete(d.ref); });
+      await B.commit(); miss.push(...part.filter(c=>!found.has(c))); }
+    S.memRes={ok, miss}; render(); }
+  catch(e){ console.warn("member grant",e&&(e.code||e.message)); toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
+async function memPending(){ if(!CLOUD.fb||!isAdminUser()) return; const {fsM,db}=CLOUD.fb;
+  try{ const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"memberReq"),fsM.limit(100))); const L=[]; sn.forEach(d=>L.push(d.data())); L.sort((a,b)=>(a.at||0)-(b.at||0)); S.memReqs=L; render(); }
+  catch(e){ toast(T("syncFail")); } }
+function memAdmin(){ if(PLANS_ON||!IG_MEMBER_ON||!isAdminUser()) return ""; const R=S.memRes, L=S.memReqs;
+  return `<div class="card set-sec"><b>🌟 ${T("memAdminT")}</b><span class="muted sm-t">${T("memAdminSub")}</span>
+    <textarea id="memCodes" class="search" rows="3" placeholder="BB-K7Q2 BB-ZP4M …"></textarea>
+    <div class="row" style="gap:6px"><button class="btn sm" data-act="memgrant">${T("memGrant")}</button><button class="btn sm ghost" data-act="memlist">${T("memList")}</button></div>
+    ${R?`<p class="sm-t">${R.ok.length?`✓ ${esc(R.ok.join("、"))}`:""}${R.miss.length?`<br><span class="bad-t">${T("memMiss")} ${esc(R.miss.join(" "))}</span>`:""}</p>`:""}
+    ${L?(L.length?`<div class="sm-t">${L.map(x=>`<div><b>${esc(x.code)}</b> ${esc(x.nick||"")} <span class="muted">${new Date(x.at||0).toLocaleDateString()}</span></div>`).join("")}</div>`:`<p class="muted sm-t">${T("memNone")}</p>`):""}</div>`; }
 
 /* ================= invite friends =================
    A friend joins with my code and finishes the 3 daily steps on 3 days in a row → I get INV_ME style coins, the friend gets INV_FRIEND.
@@ -8434,7 +8489,7 @@ function weekStats(endOffset){
   return {f,e,days,arts,acc:tot?Math.round(sc/tot*100):null,newW:W.filter(w=>inR(w.firstSeen)).length,
     weak:W.filter(w=>inR(w.lastTested)&&(w.wrong||0)>(w.correct||0)).sort((a,b)=>(b.wrong||0)-(a.wrong||0)).slice(0,6)}; }
 function weekCard(){
-  if(!planHas("sub")) return `<section class="card wk-card locked"><div class="wk-h"><b>📈 ${T("wkT")}</b>${planTag("sub")}</div><p class="muted sm-t" style="margin:0">${T("wkTeaser")}</p></section>`;
+  if(!planHas("sub")) return `<section class="card wk-card locked"><div class="wk-h"><b>📈 ${T("wkT")}</b>${planTag("sub")}</div><p class="muted sm-t" style="margin:0">${T("wkTeaser")}</p>${memLockBtn()}</section>`;
   const a=weekStats(0), b=weekStats(7), kept=[...S.words.values()].filter(w=>!w.filler&&(w.srsB||0)>=3).length, due=srsDueList().length;
   const cmp=(x,y)=>y==null||x==null?"":x>y?`<i class="up">▲</i>`:x<y?`<i class="dn">▼</i>`:"";
   const box=(l,v,pv,suf)=>`<div class="wk-box"><b>${v==null?"—":v+(suf||"")}${cmp(v,pv)}</b><span>${T(l)}</span><small class="muted">${T("wkVs",{n:pv==null?"—":pv+(suf||"")})}</small></div>`;
@@ -8453,7 +8508,7 @@ var LS={on:false,i:0,a:null,b:null,shadow:false,playing:false,wait:0,tok:0,audio
 function lsChunks(){ const k=readKey(), el=document.getElementById("article"); if(!READ.chunks.length||READ.art!==k||(el&&READ.el!==el&&!READ.on)){ READ.chunks=readChunks(); READ.art=k; READ.el=el; } return READ.chunks; }
 function lsInner(){
   if(!LS.on) return "";
-  if(!planHas("sub")) return `<div class="ls-panel locked"><b>🎧 ${T("lsT")}</b> ${planTag("sub")}<p class="sm-t" style="margin:4px 0 0">${T("lsWhat")}</p><p class="muted sm-t" style="margin:4px 0 0">${T("lsLocked")}</p></div>`;
+  if(!planHas("sub")) return `<div class="ls-panel locked"><b>🎧 ${T("lsT")}</b> ${planTag("sub")}<p class="sm-t" style="margin:4px 0 0">${T("lsWhat")}</p><p class="muted sm-t" style="margin:4px 0 0">${T("lsLocked")}</p>${memLockBtn()}</div>`;
   const C=lsChunks(), n=C.length, i=Math.min(LS.i,n-1), c=C[i]||{t:""};
   const ab=LS.a!=null&&LS.b!=null;
   return `<div class="ls-panel"><div class="ls-h"><b>🎧 ${T("lsT")}</b><span class="muted sm-t">${T("lsN",{i:i+1,n})}</span></div>
@@ -8817,6 +8872,12 @@ Object.assign(STR.hi,{"invTitle": "दोस्तों को बुलाए�
 Object.assign(STR.es,{"invTitle": "Invita a amigos", "invSub": "Un amigo se une con tu código y completa los 3 pasos diarios {d} días seguidos: tú recibes {a} monedas de estilo y tu amigo {b}. Hasta {c} amigos al mes.", "invMyCode": "Mi código de invitación", "invShare": "Compartir enlace", "invShareTxt": "¡Aprende inglés con las noticias del día en BinBin! Únete con mi código {c} y completa los pasos diarios 3 días seguidos para ganar monedas de estilo 🎁", "invCopied": "Enlace copiado", "invMonth": "Este mes: {n}/{c}", "invProg": "En curso {n}/{m}", "invWait": "Listo para cobrar", "invNextMonth": "Límite del mes alcanzado, cóbralo el mes que viene", "invFriend": "Amigo", "invHaveCode": "¿Tienes el código de un amigo? (cuentas nuevas, primeros 7 días)", "invUse": "Usar", "invLogin": "Inicia sesión primero", "invBad": "No se encontró ese código", "invSelf": "No puedes usar tu propio código", "invAlready": "Ya aceptaste una invitación", "invOld": "Solo las cuentas creadas en los últimos {n} días pueden usar un código", "invDenied": "Este código no se puede usar", "invJoined": "¡Invitación aceptada! Completa los 3 pasos diarios {n} días seguidos para tu premio", "invDay": "Progreso de la invitación: día {n}/{m}", "invFriendDone": "¡Invitación completada! Recibes {n} monedas de estilo 🎁", "invPaid": "¡{f} completó la invitación! Recibes {n} monedas de estilo 🎁", "invJoinedProg": "Aceptaste la invitación de un amigo: día {n}/{m}, al terminar recibes {f} monedas de estilo", "invJoinedDone": "Invitación completada, recibiste {n} monedas de estilo"});
 Object.assign(STR.ja,{"invTitle": "友だちを招待", "invSub": "友だちがあなたのコードで参加し、{d}日連続で毎日の3ステップを終えると、あなたに{a}、友だちに{b}スタイルコイン。毎月最大{c}人まで。", "invMyCode": "自分の招待コード", "invShare": "招待リンクを共有", "invShareTxt": "BinBinで毎日ニュースを使って英語を練習しよう！招待コード {c} で参加して、3日連続で毎日のタスクを終えるとスタイルコインがもらえるよ 🎁", "invCopied": "招待リンクをコピーしました", "invMonth": "今月の受け取り {n}/{c}", "invProg": "進行中 {n}/{m}", "invWait": "受け取り可能", "invNextMonth": "今月の上限に達しました。来月受け取れます", "invFriend": "友だち", "invHaveCode": "友だちの招待コードがある？（新規アカウント7日以内）", "invUse": "使う", "invLogin": "先にログインしてください", "invBad": "招待コードが見つかりません", "invSelf": "自分のコードは使えません", "invAlready": "すでに招待を受け取っています", "invOld": "登録から{n}日以内のアカウントだけがコードを入力できます", "invDenied": "このコードは使えません", "invJoined": "招待を受け取りました！{n}日連続で毎日の3ステップを終えると報酬", "invDay": "招待の進み具合 {n}/{m}日", "invFriendDone": "招待タスク完了！{n}スタイルコイン獲得 🎁", "invPaid": "{f}が招待タスクを完了！{n}スタイルコイン獲得 🎁", "invJoinedProg": "友だちの招待を受け取りました：{n}/{m}日、完了で{f}スタイルコイン", "invJoinedDone": "招待タスク完了、{n}スタイルコイン獲得済み"});
 Object.assign(STR.ko,{"invTitle": "친구 초대", "invSub": "친구가 내 코드로 가입해 {d}일 연속 매일 3단계를 마치면 나는 스타일 코인 {a}개, 친구는 {b}개. 한 달 최대 {c}명.", "invMyCode": "내 초대 코드", "invShare": "초대 링크 공유", "invShareTxt": "BinBin에서 매일 뉴스로 영어 연습해요! 내 초대 코드 {c}로 가입하고 3일 연속 매일 과제를 마치면 스타일 코인을 받아요 🎁", "invCopied": "초대 링크를 복사했어요", "invMonth": "이번 달 받은 수 {n}/{c}", "invProg": "진행 중 {n}/{m}", "invWait": "받을 수 있음", "invNextMonth": "이번 달 한도 도달, 다음 달에 받을 수 있어요", "invFriend": "친구", "invHaveCode": "친구의 초대 코드가 있나요? (새 계정 7일 이내)", "invUse": "사용", "invLogin": "먼저 로그인하세요", "invBad": "초대 코드를 찾을 수 없어요", "invSelf": "내 코드는 사용할 수 없어요", "invAlready": "이미 초대를 받았어요", "invOld": "가입 {n}일 이내 계정만 코드를 입력할 수 있어요", "invDenied": "이 코드는 사용할 수 없어요", "invJoined": "초대를 받았어요! {n}일 연속 매일 3단계를 마치면 보상", "invDay": "초대 진행 {n}/{m}일", "invFriendDone": "초대 과제 완료! 스타일 코인 {n}개 획득 🎁", "invPaid": "{f}님이 초대 과제를 완료했어요! 스타일 코인 {n}개 획득 🎁", "invJoinedProg": "친구 초대를 받았어요: {n}/{m}일, 완료하면 스타일 코인 {f}개", "invJoinedDone": "초대 과제 완료, 스타일 코인 {n}개 획득"});
+Object.assign(STR.zh,{"memTitle": "BinBin 會員（免費）", "memPerk1": "🎧 精聽工具：單句重播、A–B 循環、跟讀", "memPerk2": "📈 每週學習回顧", "memStep1": "按下面的按鈕，取得你的會員申請碼（會自動複製）", "memStep2": "追蹤 BinBin 的 IG", "memStep3": "把申請碼私訊給 BinBin，24 小時內開通", "memApply": "申請會員並開啟 IG", "memCopied": "已複製申請碼 {c}，請貼到 IG 私訊", "memWait": "審核中：請把下面的申請碼私訊給 BinBin 的 IG，24 小時內開通。", "memDmAgain": "開啟 IG 私訊", "memYes": "你是 BinBin 會員，所有會員功能都已開啟", "memUnlock": "追蹤 IG 免費開通", "memAdminT": "開通 IG 會員", "memAdminSub": "把 IG 私訊內容整段貼上，系統會自動抓出所有 BB-XXXX 申請碼", "memGrant": "全部開通", "memList": "看待審核名單", "memMiss": "找不到：", "memNone": "目前沒有人申請", "memNoCodes": "沒有找到 BB-XXXX 申請碼", "lsLocked": "精聽工具是 🌟 會員功能，追蹤 BinBin IG 就能免費開通。", "wkTeaser": "每週看看讀了多少、記住了多少、哪些字常錯，還有下週的三個建議。追蹤 BinBin IG 就能免費開通。", "planSub": "🌟 會員"});
+Object.assign(STR.en,{"memTitle": "BinBin membership (free)", "memPerk1": "🎧 Close listening: replay a sentence, A–B loop, shadowing", "memPerk2": "📈 Weekly learning review", "memStep1": "Tap the button below to get your member code (it is copied for you)", "memStep2": "Follow BinBin on Instagram", "memStep3": "Send the code to BinBin in a DM; it is switched on within 24 hours", "memApply": "Apply and open Instagram", "memCopied": "Code {c} copied, paste it in your Instagram DM", "memWait": "Pending: send the code below to BinBin on Instagram; it is switched on within 24 hours.", "memDmAgain": "Open Instagram DM", "memYes": "You are a BinBin member, all member features are on", "memUnlock": "Follow on IG to unlock free", "memAdminT": "Switch on IG members", "memAdminSub": "Paste the Instagram DMs as they are; every BB-XXXX code is picked out", "memGrant": "Switch on all", "memList": "Show pending", "memMiss": "Not found:", "memNone": "No pending requests", "memNoCodes": "No BB-XXXX codes found", "lsLocked": "Close listening is a 🌟 member feature, free when you follow BinBin on Instagram.", "wkTeaser": "See each week how much you read and remembered, which words you miss, and three tips for next week. Free when you follow BinBin on Instagram.", "planSub": "🌟 Member"});
+Object.assign(STR.hi,{"memTitle": "BinBin सदस्यता (मुफ़्त)", "memPerk1": "🎧 ध्यान से सुनें: वाक्य दोहराएँ, A–B लूप, शैडोइंग", "memPerk2": "📈 साप्ताहिक समीक्षा", "memStep1": "नीचे बटन दबाकर अपना सदस्य कोड लें (अपने-आप कॉपी होगा)", "memStep2": "Instagram पर BinBin को फ़ॉलो करें", "memStep3": "कोड BinBin को DM करें, 24 घंटे में चालू होगा", "memApply": "आवेदन करें और Instagram खोलें", "memCopied": "कोड {c} कॉपी हुआ, Instagram DM में चिपकाएँ", "memWait": "लंबित: नीचे का कोड Instagram पर BinBin को भेजें, 24 घंटे में चालू होगा।", "memDmAgain": "Instagram DM खोलें", "memYes": "आप BinBin सदस्य हैं, सभी सुविधाएँ चालू हैं", "memUnlock": "IG फ़ॉलो करके मुफ़्त खोलें", "memAdminT": "IG सदस्य चालू करें", "memAdminSub": "Instagram DM जैसे हैं वैसे चिपकाएँ; सभी BB-XXXX कोड चुन लिए जाएँगे", "memGrant": "सब चालू करें", "memList": "लंबित देखें", "memMiss": "नहीं मिला:", "memNone": "कोई लंबित अनुरोध नहीं", "memNoCodes": "कोई BB-XXXX कोड नहीं मिला", "lsLocked": "ध्यान से सुनना 🌟 सदस्य सुविधा है, Instagram पर BinBin को फ़ॉलो करने पर मुफ़्त।", "wkTeaser": "हर हफ़्ते देखें कितना पढ़ा, कितना याद रखा, कौन से शब्द छूटते हैं, और अगले हफ़्ते के तीन सुझाव। Instagram पर फ़ॉलो करने पर मुफ़्त।", "planSub": "🌟 सदस्य"});
+Object.assign(STR.es,{"memTitle": "Membresía BinBin (gratis)", "memPerk1": "🎧 Escucha atenta: repetir frase, bucle A–B, shadowing", "memPerk2": "📈 Resumen semanal", "memStep1": "Pulsa el botón para obtener tu código de miembro (se copia solo)", "memStep2": "Sigue a BinBin en Instagram", "memStep3": "Envía el código por DM a BinBin; se activa en 24 horas", "memApply": "Solicitar y abrir Instagram", "memCopied": "Código {c} copiado, pégalo en el DM de Instagram", "memWait": "Pendiente: envía el código de abajo a BinBin en Instagram; se activa en 24 horas.", "memDmAgain": "Abrir DM de Instagram", "memYes": "Eres miembro de BinBin, todas las funciones están activas", "memUnlock": "Sigue en IG para activarlo gratis", "memAdminT": "Activar miembros de IG", "memAdminSub": "Pega los DM de Instagram tal cual; se detectan todos los códigos BB-XXXX", "memGrant": "Activar todos", "memList": "Ver pendientes", "memMiss": "No encontrados:", "memNone": "No hay solicitudes pendientes", "memNoCodes": "No se encontraron códigos BB-XXXX", "lsLocked": "La escucha atenta es para 🌟 miembros, gratis si sigues a BinBin en Instagram.", "wkTeaser": "Mira cada semana cuánto leíste y recordaste, qué palabras fallas y tres consejos para la próxima. Gratis si sigues a BinBin en Instagram.", "planSub": "🌟 Miembro"});
+Object.assign(STR.ja,{"memTitle": "BinBinメンバー（無料）", "memPerk1": "🎧 精聴ツール：一文リピート、A–Bループ、シャドーイング", "memPerk2": "📈 毎週の学習ふりかえり", "memStep1": "下のボタンでメンバー申請コードを取得（自動でコピー）", "memStep2": "BinBinのInstagramをフォロー", "memStep3": "コードをBinBinにDMすると24時間以内に有効化", "memApply": "申請してInstagramを開く", "memCopied": "コード {c} をコピーしました。InstagramのDMに貼り付けてください", "memWait": "審査中：下のコードをInstagramでBinBinにDMしてください。24時間以内に有効化されます。", "memDmAgain": "InstagramのDMを開く", "memYes": "BinBinメンバーです。すべてのメンバー機能が使えます", "memUnlock": "IGフォローで無料開放", "memAdminT": "IGメンバーを有効化", "memAdminSub": "InstagramのDMをそのまま貼り付けると BB-XXXX コードを自動で拾います", "memGrant": "すべて有効化", "memList": "審査待ちを見る", "memMiss": "見つからない：", "memNone": "申請はありません", "memNoCodes": "BB-XXXX コードが見つかりません", "lsLocked": "精聴ツールは 🌟 メンバー機能です。BinBinのInstagramをフォローすると無料で使えます。", "wkTeaser": "毎週、読んだ量・覚えた量・よく間違える単語と来週の3つのアドバイス。BinBinのInstagramをフォローすると無料。", "planSub": "🌟 メンバー"});
+Object.assign(STR.ko,{"memTitle": "BinBin 멤버십 (무료)", "memPerk1": "🎧 정밀 듣기: 한 문장 반복, A–B 반복, 섀도잉", "memPerk2": "📈 주간 학습 리뷰", "memStep1": "아래 버튼으로 멤버 신청 코드를 받으세요 (자동 복사)", "memStep2": "BinBin 인스타그램 팔로우", "memStep3": "코드를 BinBin에 DM으로 보내면 24시간 안에 열려요", "memApply": "신청하고 인스타그램 열기", "memCopied": "코드 {c} 복사됨, 인스타그램 DM에 붙여넣으세요", "memWait": "검토 중: 아래 코드를 인스타그램으로 BinBin에 보내 주세요. 24시간 안에 열려요.", "memDmAgain": "인스타그램 DM 열기", "memYes": "BinBin 멤버예요. 모든 멤버 기능이 열려 있어요", "memUnlock": "IG 팔로우로 무료 열기", "memAdminT": "IG 멤버 열기", "memAdminSub": "인스타그램 DM을 그대로 붙여넣으면 BB-XXXX 코드를 모두 찾아요", "memGrant": "모두 열기", "memList": "대기 목록 보기", "memMiss": "찾을 수 없음:", "memNone": "대기 중인 신청이 없어요", "memNoCodes": "BB-XXXX 코드를 찾지 못했어요", "lsLocked": "정밀 듣기는 🌟 멤버 기능이에요. BinBin 인스타그램을 팔로우하면 무료예요.", "wkTeaser": "매주 얼마나 읽고 기억했는지, 자주 틀리는 단어, 다음 주 팁 세 가지. BinBin 인스타그램을 팔로우하면 무료예요.", "planSub": "🌟 멤버"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
