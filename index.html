@@ -837,6 +837,7 @@ body.onb-open{overflow:hidden}
 .article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
 .inv-card .inv-mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.inv-card .inv-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px}.inv-list{display:flex;flex-direction:column;gap:6px}.inv-row{display:flex;align-items:center;gap:8px}.inv-row b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inv-dots{display:flex;gap:3px}.inv-dots i{width:10px;height:10px;border-radius:50%;background:#ddd}.inv-dots i.on{background:#3BB273}.inv-joined{font-weight:700}.inv-enter{display:flex;flex-direction:column;gap:6px}
 .mem-card .mem-on{margin:0;font-weight:700;color:#2E8B57}.mem-card .mem-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px;align-self:flex-start}.mem-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:2px;font-size:14px}.ls-panel.locked .comm-ig,.wk-card.locked .comm-ig{margin-top:8px;color:#fff!important;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;font-weight:700}
+.plaza{display:flex;flex-direction:column;gap:8px}.plz-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.plz-ground{display:flex;gap:4px;overflow-x:auto;padding:14px 6px 8px;margin:0 -6px;border-radius:14px;scrollbar-width:none;background:linear-gradient(180deg,#CFEAFB 0%,#E8F6FF 46%,#A8D98A 46%,#8CCB6E 100%)}.plz-ground::-webkit-scrollbar{display:none}.plz-p{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:0;width:84px;cursor:pointer;-webkit-tap-highlight-color:transparent}.plz-fig{display:block;animation:plzBob 2.4s ease-in-out infinite;animation-delay:var(--d,0s)}.plz-art{width:84px;height:84px}.plz-art .ha-in{width:100%;height:100%}.plz-n{max-width:84px;font-size:12px;font-weight:700;color:#1B2421;background:rgba(255,255,255,.85);border-radius:999px;padding:1px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plz-p.me .plz-n{background:#1F6F5C;color:#fff}.plz-p:active .plz-fig{transform:scale(.94)}@keyframes plzBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@media (prefers-reduced-motion:reduce){.plz-fig{animation:none}}
 .comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
@@ -1916,6 +1917,7 @@ function viewToday(){
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
     ${preDone&&readDone&&postDone?doneCard(d):""}
+    ${plazaCard()}
     ${easyHint()||""}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
@@ -4296,6 +4298,7 @@ document.addEventListener("click", e=>{
   if(a==="maint") return maintSet(t.dataset.k==="1");
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
+  if(a==="plook") return lookCard(plazaList()[+t.dataset.k]);
   if(a==="memapply") return memApply();
   if(a==="memgrant") return memGrant();
   if(a==="memlist") return memPending();
@@ -4386,7 +4389,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(memLoad,900); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -4429,7 +4432,7 @@ async function nickVerify(){
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
 }
 const OWNER_KEY="che-pro-owner";
-function localReset(){ S.words.clear(); S.days.clear(); INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+function localReset(){ S.words.clear(); S.days.clear(); PLAZA={rows:null, at:0, busy:false}; INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
 async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
   localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
@@ -4569,7 +4572,7 @@ function lbEntry(){ const g=game(), s=stats(); const e={name:(g.nick||"").slice(
 async function lbPush(){
   if(DEV||CLOUD.deleting) return;
   if(!CLOUD.user||!CLOUD.fb||!game().nick) return;
-  const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:0});
+  const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:today()});
   if(sig===CLOUD.lbSig) return;
   try{ await fsM.setDoc(fsM.doc(db,"leaderboard",CLOUD.user.uid), e); CLOUD.lbSig=sig; }
   catch(err){ // older security rules don't know "look" yet: save without it
@@ -4619,7 +4622,8 @@ function nickForm(){ const g=game(), w=nickLocked(), auto=ccDetect(), f=g.flag||
       <option value="none"${f==="none"?" selected":""}>${T("flagNone")}</option>
       ${list.map(([c,n])=>`<option value="${c}"${f===c?" selected":""}>${flagOf(c)} ${esc(n)}</option>`).join("")}</select></label>
     <span class="muted sm-t">${T("flagHint")}</span></div>`; }
-function rkLookOpen(i){ const r=S.rk&&S.rk.rows&&S.rk.rows[i]; if(!r) return; const me=r.id===(CLOUD.user&&CLOUD.user.uid);
+function rkLookOpen(i){ lookCard(S.rk&&S.rk.rows&&S.rk.rows[i]); }
+function lookCard(r){ if(!r) return; const me=r.id===(CLOUD.user&&CLOUD.user.uid);
   const L=parseLook(me?myLook():r.look), gear=(id,socks)=>{ const it=id&&ITEMS[id]; if(!it) return `<span class="muted">—</span>`; return `<span>${esc(itemName(it)||it.name)}</span> ${socks.map(gemDot).join("")}`; };
   let el=document.getElementById("rkLook"); if(!el){ el=document.createElement("div"); el.id="rkLook"; document.body.appendChild(el); }
   el.innerHTML=`<div class="scrim pd-scrim" data-act="rklookclose"></div><div class="pd-card rk-look" role="dialog" aria-modal="true">
@@ -8022,6 +8026,26 @@ function mySup(){ if(PLANS_ON&&DEV&&DEV.plan){ if(DEV.plan==="free") return null
 const planTag=need=>`<span class="plan-tag ${need}">${T(need==="plus"?"planPlus":"planSub")}</span>`;
 
 
+/* ================= 廣場 plaza: recently active players standing together on the home page =================
+   One public doc, plaza/now {rows, at}, rebuilt every 15 minutes by a Cloud Function from the leaderboard,
+   so opening the plaza costs one read. Read again at most every 10 minutes. Tap a player to see their card. */
+let PLAZA={rows:null, at:0, busy:false};
+async function plazaLoad(force){ if(!CLOUD.fb||!CLOUD.user||PLAZA.busy) return; if(!force&&PLAZA.rows&&Date.now()-PLAZA.at<10*60e3) return;
+  PLAZA.busy=true; const {fsM,db}=CLOUD.fb;
+  try{ const d=await fsM.getDoc(fsM.doc(db,"plaza","now")); const x=d.exists()?d.data():{}; PLAZA.rows=(Array.isArray(x.rows)?x.rows:[]).map(safeDoc); }
+  catch(e){ console.warn("plaza",e&&(e.code||e.message)); PLAZA.rows=PLAZA.rows||[]; }
+  PLAZA.at=Date.now(); PLAZA.busy=false; for(const r of PLAZA.rows) if(typeof r.look==="string") LOOKS[r.id]=r.look; if(S.view==="today") render(); }
+function plazaList(){ const me=CLOUD.user&&CLOUD.user.uid, g=game(), mine=myLook();
+  const rows=(PLAZA.rows||[]).filter(r=>r.id!==me);
+  if(mine&&g.nick){ const e=lbEntry(); rows.unshift({id:me, name:g.nick, look:mine, lv:e.lv, power:e.power, conq:e.conq, flag:e.flag, me:true}); }
+  return rows; }
+function plazaCard(){ if(!CLOUD.user||SANDBOX()) return "";
+  if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(plazaLoad,0);
+  const L=plazaList();
+  if(!L.length) return PLAZA.rows?"":`<section class="card plaza"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("loading")}</span></section>`;
+  const figs=L.map((r,i)=>`<button class="plz-p${r.me?" me":""}" data-act="plook" data-k="${i}" style="--d:${(i*0.37)%2}s"><span class="plz-fig">${lookArt(r.look,"plz-art")}</span><span class="plz-n">${/^[A-Z]{2}$/.test(r.flag||"")?flagOf(r.flag)+" ":""}${esc(r.me?T("plzMe"):r.name)}</span></button>`).join("");
+  return `<section class="card plaza"><div class="plz-h"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("plzSub",{n:L.length})}</span></div><div class="plz-ground">${figs}</div>${!game().nick?`<p class="muted sm-t">${T("plzNoNick")}</p>`:""}</section>`; }
+
 /* ================= free IG membership =================
    With paid plans off, the old member features (close listening, weekly review) open for players who follow BinBin on IG:
    the player taps "apply" → gets a short code (memberReq/{uid}) → DMs it to the IG account → the admin pastes the codes in the
@@ -8878,6 +8902,12 @@ Object.assign(STR.hi,{"memTitle": "BinBin सदस्यता (मुफ़्
 Object.assign(STR.es,{"memTitle": "Membresía BinBin (gratis)", "memPerk1": "🎧 Escucha atenta: repetir frase, bucle A–B, shadowing", "memPerk2": "📈 Resumen semanal", "memStep1": "Pulsa el botón para obtener tu código de miembro (se copia solo)", "memStep2": "Sigue a BinBin en Instagram", "memStep3": "Envía el código por DM a BinBin; se activa en 24 horas", "memApply": "Solicitar y abrir Instagram", "memCopied": "Código {c} copiado, pégalo en el DM de Instagram", "memWait": "Pendiente: envía el código de abajo a BinBin en Instagram; se activa en 24 horas.", "memDmAgain": "Abrir DM de Instagram", "memYes": "Eres miembro de BinBin, todas las funciones están activas", "memUnlock": "Sigue en IG para activarlo gratis", "memAdminT": "Activar miembros de IG", "memAdminSub": "Pega los DM de Instagram tal cual; se detectan todos los códigos BB-XXXX", "memGrant": "Activar todos", "memList": "Ver pendientes", "memMiss": "No encontrados:", "memNone": "No hay solicitudes pendientes", "memNoCodes": "No se encontraron códigos BB-XXXX", "lsLocked": "La escucha atenta es para 🌟 miembros, gratis si sigues a BinBin en Instagram.", "wkTeaser": "Mira cada semana cuánto leíste y recordaste, qué palabras fallas y tres consejos para la próxima. Gratis si sigues a BinBin en Instagram.", "planSub": "🌟 Miembro"});
 Object.assign(STR.ja,{"memTitle": "BinBinメンバー（無料）", "memPerk1": "🎧 精聴ツール：一文リピート、A–Bループ、シャドーイング", "memPerk2": "📈 毎週の学習ふりかえり", "memStep1": "下のボタンでメンバー申請コードを取得（自動でコピー）", "memStep2": "BinBinのInstagramをフォロー", "memStep3": "コードをBinBinにDMすると24時間以内に有効化", "memApply": "申請してInstagramを開く", "memCopied": "コード {c} をコピーしました。InstagramのDMに貼り付けてください", "memWait": "審査中：下のコードをInstagramでBinBinにDMしてください。24時間以内に有効化されます。", "memDmAgain": "InstagramのDMを開く", "memYes": "BinBinメンバーです。すべてのメンバー機能が使えます", "memUnlock": "IGフォローで無料開放", "memAdminT": "IGメンバーを有効化", "memAdminSub": "InstagramのDMをそのまま貼り付けると BB-XXXX コードを自動で拾います", "memGrant": "すべて有効化", "memList": "審査待ちを見る", "memMiss": "見つからない：", "memNone": "申請はありません", "memNoCodes": "BB-XXXX コードが見つかりません", "lsLocked": "精聴ツールは 🌟 メンバー機能です。BinBinのInstagramをフォローすると無料で使えます。", "wkTeaser": "毎週、読んだ量・覚えた量・よく間違える単語と来週の3つのアドバイス。BinBinのInstagramをフォローすると無料。", "planSub": "🌟 メンバー"});
 Object.assign(STR.ko,{"memTitle": "BinBin 멤버십 (무료)", "memPerk1": "🎧 정밀 듣기: 한 문장 반복, A–B 반복, 섀도잉", "memPerk2": "📈 주간 학습 리뷰", "memStep1": "아래 버튼으로 멤버 신청 코드를 받으세요 (자동 복사)", "memStep2": "BinBin 인스타그램 팔로우", "memStep3": "코드를 BinBin에 DM으로 보내면 24시간 안에 열려요", "memApply": "신청하고 인스타그램 열기", "memCopied": "코드 {c} 복사됨, 인스타그램 DM에 붙여넣으세요", "memWait": "검토 중: 아래 코드를 인스타그램으로 BinBin에 보내 주세요. 24시간 안에 열려요.", "memDmAgain": "인스타그램 DM 열기", "memYes": "BinBin 멤버예요. 모든 멤버 기능이 열려 있어요", "memUnlock": "IG 팔로우로 무료 열기", "memAdminT": "IG 멤버 열기", "memAdminSub": "인스타그램 DM을 그대로 붙여넣으면 BB-XXXX 코드를 모두 찾아요", "memGrant": "모두 열기", "memList": "대기 목록 보기", "memMiss": "찾을 수 없음:", "memNone": "대기 중인 신청이 없어요", "memNoCodes": "BB-XXXX 코드를 찾지 못했어요", "lsLocked": "정밀 듣기는 🌟 멤버 기능이에요. BinBin 인스타그램을 팔로우하면 무료예요.", "wkTeaser": "매주 얼마나 읽고 기억했는지, 자주 틀리는 단어, 다음 주 팁 세 가지. BinBin 인스타그램을 팔로우하면 무료예요.", "planSub": "🌟 멤버"});
+Object.assign(STR.zh,{"plzT": "廣場", "plzSub": "最近上線的 {n} 位冒險者，點一下看看他們的裝備", "plzMe": "我", "plzNoNick": "取一個暱稱，你的角色也會出現在廣場上。"});
+Object.assign(STR.en,{"plzT": "Plaza", "plzSub": "{n} adventurers online lately, tap one to see their gear", "plzMe": "Me", "plzNoNick": "Choose a nickname and your character shows up in the plaza too."});
+Object.assign(STR.hi,{"plzT": "चौक", "plzSub": "हाल में ऑनलाइन {n} साहसी, उनका सामान देखने के लिए टैप करें", "plzMe": "मैं", "plzNoNick": "उपनाम चुनें, आपका किरदार भी चौक में दिखेगा।"});
+Object.assign(STR.es,{"plzT": "Plaza", "plzSub": "{n} aventureros conectados hace poco; toca uno para ver su equipo", "plzMe": "Yo", "plzNoNick": "Elige un apodo y tu personaje también aparecerá en la plaza."});
+Object.assign(STR.ja,{"plzT": "広場", "plzSub": "最近ログインした冒険者 {n} 人。タップして装備を見てみよう", "plzMe": "自分", "plzNoNick": "ニックネームを決めると、あなたのキャラも広場に出ます。"});
+Object.assign(STR.ko,{"plzT": "광장", "plzSub": "최근 접속한 모험가 {n}명, 눌러서 장비를 구경해 보세요", "plzMe": "나", "plzNoNick": "닉네임을 정하면 내 캐릭터도 광장에 나와요."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
