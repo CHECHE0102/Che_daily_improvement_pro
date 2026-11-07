@@ -835,6 +835,10 @@ body.onb-open{overflow:hidden}
 .srs-after{font-size:14px}
 .read-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:60px;z-index:3;background:var(--paper);padding:6px 0;box-shadow:0 -12px 0 var(--paper),0 6px 8px -6px rgba(0,0,0,.12)}
 .article p.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);transition:background .3s}
+.inv-card .inv-mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.inv-card .inv-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px}.inv-list{display:flex;flex-direction:column;gap:6px}.inv-row{display:flex;align-items:center;gap:8px}.inv-row b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inv-dots{display:flex;gap:3px}.inv-dots i{width:10px;height:10px;border-radius:50%;background:#ddd}.inv-dots i.on{background:#3BB273}.inv-joined{font-weight:700}.inv-enter{display:flex;flex-direction:column;gap:6px}
+.mem-card .mem-on{margin:0;font-weight:700;color:#2E8B57}.mem-card .mem-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px;align-self:flex-start}.mem-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:2px;font-size:14px}.ls-panel.locked .comm-ig,.wk-card.locked .comm-ig{margin-top:8px;color:#fff!important;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;font-weight:700}
+.plaza{display:flex;flex-direction:column;gap:8px}.plz-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.plz-ground{display:flex;gap:4px;overflow-x:auto;padding:14px 6px 8px;margin:0 -6px;border-radius:14px;scrollbar-width:none;background:linear-gradient(180deg,#CFEAFB 0%,#E8F6FF 46%,#A8D98A 46%,#8CCB6E 100%)}.plz-ground::-webkit-scrollbar{display:none}.plz-p{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:0;width:84px;cursor:pointer;-webkit-tap-highlight-color:transparent}.plz-fig{display:block;animation:plzBob 2.4s ease-in-out infinite;animation-delay:var(--d,0s)}.plz-art{width:84px;height:84px}.plz-art .ha-in{width:100%;height:100%}.plz-n{max-width:84px;font-size:12px;font-weight:700;color:#1B2421;background:rgba(255,255,255,.85);border-radius:999px;padding:1px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plz-p.me .plz-n{background:#1F6F5C;color:#fff}.plz-p:active .plz-fig{transform:scale(.94)}@keyframes plzBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@media (prefers-reduced-motion:reduce){.plz-fig{animation:none}}
+#plazaRoom{position:fixed;inset:0;z-index:35;background:#8cc46e}body.pz-open{overflow:hidden}#plazaRoom .pz-stage{position:absolute;inset:0;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}#plazaRoom .pz-world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}#plazaRoom .pz-ground{position:absolute;left:0;top:0}.pz-ent{position:absolute;left:0;top:0;width:76px;height:96px;margin:-90px 0 0 -38px;will-change:transform;cursor:pointer}.pz-sh{position:absolute;left:14px;right:14px;bottom:2px;height:12px;border-radius:50%;background:rgba(20,40,20,.28)}.pz-bob{position:absolute;left:0;top:0;width:76px;height:76px;transform-origin:50% 100%}.pz-fig{width:76px;height:76px}.pz-art{width:76px;height:76px}.pz-art .ha-in{width:100%;height:100%}.pz-tag{position:absolute;left:50%;top:76px;transform:translateX(-50%);white-space:nowrap;font:700 11px/1.5 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.92);border-radius:999px;padding:0 7px;pointer-events:none;display:flex;align-items:center;gap:2px}.pz-tag small{font-weight:600;opacity:.7}.pz-tt{display:inline-flex}.pz-off .pz-tag{background:rgba(225,229,232,.85);color:#58646b}.pz-off .pz-fig{filter:saturate(.75)}.pz-me .pz-tag{background:#1F6F5C;color:#fff}.pz-me::before{content:"";position:absolute;left:50%;bottom:-2px;width:58px;height:18px;margin-left:-29px;border-radius:50%;border:2px solid rgba(255,255,255,.8)}.pz-live .pz-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#2ECC71;margin-right:3px}.pz-pod .pz-tag{background:#FFF3C4}.pz-star .pz-bob::before{content:"";position:absolute;left:8px;right:8px;top:-6px;height:16px;border-radius:50%;border:3px solid #FFD84D;box-shadow:0 0 10px #FFE98A;animation:pzHalo 2s ease-in-out infinite}@keyframes pzHalo{50%{transform:translateY(-3px)}}.pz-bub{position:absolute;left:50%;bottom:100px;transform:translateX(-50%) scale(.6);opacity:0;transition:.18s;background:#fff;color:#1B2421;font:700 15px/1.3 system-ui,sans-serif;padding:4px 9px;border-radius:12px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.18);pointer-events:none}.pz-bub::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-top-color:#fff;border-bottom:0}.pz-bub.on{opacity:1;transform:translateX(-50%) scale(1)}.pz-hud{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px));pointer-events:none}.pz-pill{pointer-events:auto;border:0;background:rgba(255,255,255,.94);color:#1B2421;border-radius:999px;padding:8px 14px;font:700 14px/1.2 system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.12)}.pz-emo{position:absolute;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px}.pz-emo button{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:22px;box-shadow:0 2px 8px rgba(0,0,0,.15)}.pz-emo button:active{transform:scale(.9)}.pz-joy{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.6);pointer-events:none;display:none;z-index:2}.pz-joy i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.85)}.pz-hint{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:rgba(27,36,33,.72);color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap}.pz-zones{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:calc(56px + env(safe-area-inset-top,0px));width:min(320px,calc(100% - 24px));background:rgba(255,255,255,.97);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:3}.pz-zones>b{font:700 15px/1.3 system-ui,sans-serif;color:#1B2421;padding:0 4px 4px}.pz-zones button{display:flex;align-items:center;gap:10px;border:0;background:#F2F5F3;border-radius:12px;padding:8px 10px;text-align:left;color:#1B2421}.pz-zones button.on{outline:2px solid #1F6F5C}.pz-zones button>span:first-child{font-size:24px}.pz-zones button>span:nth-child(2){flex:1;display:flex;flex-direction:column}.pz-zones small{color:#5d6b66;font-size:12px}.pz-zones em{font-style:normal;font-size:12px;font-weight:700;color:#1F6F5C;white-space:nowrap}.pz-cnt{font-size:12px!important}.pz-like{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.pz-likeN{font-weight:700}.pz-starTag{font-weight:700;color:#B8860B}.plz-go{align-self:stretch}@media (prefers-reduced-motion:reduce){.pz-bub{transition:none}.pz-star .pz-bob::before{animation:none}}
 .comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
@@ -1914,6 +1918,7 @@ function viewToday(){
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
     ${preDone&&readDone&&postDone?doneCard(d):""}
+    ${plazaCard()}
     ${easyHint()||""}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
@@ -1982,9 +1987,12 @@ function viewSettings(){
   return `<div class="view">
     <div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T("tabSet")}</h2></div>
     ${supMineCard()}
+    ${memCard()}
     ${devPanel()}
+    ${memAdmin()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
+    ${inviteCard()}
     ${regionSection()}
     ${pushCard()}
     ${communityCard()}${igCard()}
@@ -2282,6 +2290,7 @@ function finishPost(art, score, total){
   const d=dayRec();
   if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
   if(isMain(art)) styleDaily();
+  if(isMain(art)&&INV.ref) setTimeout(invTick,600);
   else saveDay({...d, postBy:{...(d.postBy||{}), [art.id]:{score,total}}});
   setTimeout(rdPush,500);
 }
@@ -3798,7 +3807,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.28";
+const APP_VERSION="2026.11.29";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4290,6 +4299,14 @@ document.addEventListener("click", e=>{
   if(a==="maint") return maintSet(t.dataset.k==="1");
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
+  if(a==="plook") return lookCard(plazaList()[+t.dataset.k]);
+  if(a==="plzgo") return plazaOpen();
+  if(a==="memapply") return memApply();
+  if(a==="memgrant") return memGrant();
+  if(a==="memlist") return memPending();
+  if(a==="memgo"){ S.view="set"; S.tab="set"; render(); setTimeout(()=>{ const c=document.getElementById("memCard"); if(c) c.scrollIntoView({behavior:"smooth",block:"center"}); },60); return; }
+  if(a==="invuse") return invUse(($("#invIn")||{}).value||"");
+  if(a==="invshare") return invShare();
   if(a==="devstats") return devLoadStats();
   if(a==="deverr") return devLoadErrors();
   if(a==="dev") return devAct(t.dataset.k);
@@ -4365,7 +4382,7 @@ async function cloudInit(){
     const app=appM.initializeApp(FB_CONFIG);
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
-    CLOUD.fb={authM,fsM,auth,db};
+    CLOUD.fb={authM,fsM,auth,db,app};
     setTimeout(()=>actPing(),2500);
     setTimeout(pushRefresh,1200);
     setTimeout(supLoad,0);
@@ -4374,7 +4391,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -4417,7 +4434,7 @@ async function nickVerify(){
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
 }
 const OWNER_KEY="che-pro-owner";
-function localReset(){ S.words.clear(); S.days.clear(); try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+function localReset(){ S.words.clear(); S.days.clear(); if(typeof plazaClose==="function") plazaClose(); PLAZA={rows:null, at:0, busy:false, top:[], star:null}; INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
 async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
   localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
@@ -4434,7 +4451,10 @@ function mergeGame(a,b){ if(!a) return b; if(!b) return a;
   const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
   return {...newGame(base), inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], cosOwn:[...new Set([...(base.cosOwn||[]),...(o.cosOwn||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
-    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, login:loginMerge(base.login,o.login), battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null}; }
+    taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, login:loginMerge(base.login,o.login), battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null,
+    ...invMergeG(base,o)}; }
+function invMergeG(a,b){ const r={}, c=a.invCode||b.invCode, p=[a.invPaid,b.invPaid].filter(Boolean).sort((x,y)=>(x.m||"").localeCompare(y.m||"")||(x.n||0)-(y.n||0)).pop();
+  if(c) r.invCode=c; if(a.invGot||b.invGot) r.invGot=1; if(p) r.invPaid=p; return r; }
 /* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
    tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
 const WSYNC_KEY="che-pro-wsync", DIRTY_KEY="che-pro-dirty", WSYNC_FULL=7*864e5, WSYNC_MARGIN=15*60e3;
@@ -4554,7 +4574,7 @@ function lbEntry(){ const g=game(), s=stats(); const e={name:(g.nick||"").slice(
 async function lbPush(){
   if(DEV||CLOUD.deleting) return;
   if(!CLOUD.user||!CLOUD.fb||!game().nick) return;
-  const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:0});
+  const {fsM,db}=CLOUD.fb; const e=lbEntry(); const sig=JSON.stringify({...e,updatedAt:today()});
   if(sig===CLOUD.lbSig) return;
   try{ await fsM.setDoc(fsM.doc(db,"leaderboard",CLOUD.user.uid), e); CLOUD.lbSig=sig; }
   catch(err){ // older security rules don't know "look" yet: save without it
@@ -4604,7 +4624,8 @@ function nickForm(){ const g=game(), w=nickLocked(), auto=ccDetect(), f=g.flag||
       <option value="none"${f==="none"?" selected":""}>${T("flagNone")}</option>
       ${list.map(([c,n])=>`<option value="${c}"${f===c?" selected":""}>${flagOf(c)} ${esc(n)}</option>`).join("")}</select></label>
     <span class="muted sm-t">${T("flagHint")}</span></div>`; }
-function rkLookOpen(i){ const r=S.rk&&S.rk.rows&&S.rk.rows[i]; if(!r) return; const me=r.id===(CLOUD.user&&CLOUD.user.uid);
+function rkLookOpen(i){ lookCard(S.rk&&S.rk.rows&&S.rk.rows[i]); }
+function lookCard(r){ if(!r) return; const me=r.id===(CLOUD.user&&CLOUD.user.uid);
   const L=parseLook(me?myLook():r.look), gear=(id,socks)=>{ const it=id&&ITEMS[id]; if(!it) return `<span class="muted">—</span>`; return `<span>${esc(itemName(it)||it.name)}</span> ${socks.map(gemDot).join("")}`; };
   let el=document.getElementById("rkLook"); if(!el){ el=document.createElement("div"); el.id="rkLook"; document.body.appendChild(el); }
   el.innerHTML=`<div class="scrim pd-scrim" data-act="rklookclose"></div><div class="pd-card rk-look" role="dialog" aria-modal="true">
@@ -7999,12 +8020,312 @@ Object.assign(STR.ja,{"in5": "この出撃券5枚と初心者装備をやろう�
 Object.assign(STR.ko,{"in5": "이 출정권 5장과 초보자 장비를 받으렴! 먼저 야생에서 작은 짐승들로 몸을 풀고, 첫 번째 마을 딩글을 되찾으렴. Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "stGot": "출정권 5장과 초보자 장비를 받았어요!"});
 /* ================= plans: free / member (€5) / premium (€12). Developer mode can preview any plan. ================= */
 const PLAN_RANK={free:0,sub:1,plus:2}; const PLANS_ON=false;   // paid membership is switched off for now (everything free); set true to bring the plans back
-function myPlan(){ if(!PLANS_ON) return "plus"; if(DEV&&DEV.plan) return DEV.plan; const me=CLOUD.user&&SUP[CLOUD.user.uid]; return me&&me.sub?(me.plus?"plus":"sub"):"free"; }
+function myPlan(){ if(!PLANS_ON) return !IG_MEMBER_ON||isMember()?"plus":"free"; if(DEV&&DEV.plan) return DEV.plan; const me=CLOUD.user&&SUP[CLOUD.user.uid]; return me&&me.sub?(me.plus?"plus":"sub"):"free"; }
 const planHas=need=>PLAN_RANK[myPlan()]>=PLAN_RANK[need];
 // the supporter record the membership card reads; in developer preview a pretend one so every screen can be seen
 function mySup(){ if(PLANS_ON&&DEV&&DEV.plan){ if(DEV.plan==="free") return null; const m=DEV.planM||3; let t=1; for(const [n,tt] of SUB_STEPS) if(m>=n) t=tt; return {tier:t, sub:true, plus:DEV.plan==="plus", months:m, n:game().nick||""}; }
   return CLOUD.user&&SUP[CLOUD.user.uid]||null; }
 const planTag=need=>`<span class="plan-tag ${need}">${T(need==="plus"?"planPlus":"planSub")}</span>`;
+
+
+/* ================= 廣場 plaza: recently active players standing together on the home page =================
+   One public doc, plaza/now {rows, at}, rebuilt every 15 minutes by a Cloud Function from the leaderboard,
+   so opening the plaza costs one read. Read again at most every 10 minutes. Tap a player to see their card. */
+let PLAZA={rows:null, at:0, busy:false, top:[], star:null};
+async function plazaLoad(force){ if(!CLOUD.fb||!CLOUD.user||PLAZA.busy) return; if(!force&&PLAZA.rows&&Date.now()-PLAZA.at<10*60e3) return;
+  PLAZA.busy=true; const {fsM,db}=CLOUD.fb;
+  try{ const d=await fsM.getDoc(fsM.doc(db,"plaza","now")); const x=d.exists()?d.data():{}; PLAZA.rows=(Array.isArray(x.rows)?x.rows:[]).map(safeDoc); PLAZA.top=(Array.isArray(x.top)?x.top:[]).map(safeDoc); PLAZA.star=x.star&&typeof x.star.id==="string"?safeDoc(x.star):null; for(const r of PLAZA.top) if(typeof r.look==="string") LOOKS[r.id]=r.look; }
+  catch(e){ console.warn("plaza",e&&(e.code||e.message)); PLAZA.rows=PLAZA.rows||[]; }
+  PLAZA.at=Date.now(); PLAZA.busy=false; for(const r of PLAZA.rows) if(typeof r.look==="string") LOOKS[r.id]=r.look; if(S.view==="today") render(); }
+function plazaList(){ const me=CLOUD.user&&CLOUD.user.uid, g=game(), mine=myLook();
+  const rows=(PLAZA.rows||[]).filter(r=>r.id!==me);
+  if(mine&&g.nick){ const e=lbEntry(); rows.unshift({id:me, name:g.nick, look:mine, lv:e.lv, power:e.power, conq:e.conq, flag:e.flag, me:true}); }
+  return rows; }
+function plazaCard(){ if(!CLOUD.user||SANDBOX()) return "";
+  if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(plazaLoad,0);
+  const L=plazaList();
+  if(!L.length) return PLAZA.rows?"":`<section class="card plaza"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("loading")}</span></section>`;
+  const figs=L.map((r,i)=>`<button class="plz-p${r.me?" me":""}" data-act="plook" data-k="${i}" style="--d:${(i*0.37)%2}s"><span class="plz-fig">${lookArt(r.look,"plz-art")}</span><span class="plz-n">${/^[A-Z]{2}$/.test(r.flag||"")?flagOf(r.flag)+" ":""}${esc(r.me?T("plzMe"):r.name)}</span></button>`).join("");
+  return `<section class="card plaza"><div class="plz-h"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("plzSub",{n:L.length})}</span></div><div class="plz-ground">${figs}</div>${!game().nick?`<p class="muted sm-t">${T("plzNoNick")}</p>`:`<button class="btn plz-go" data-act="plzgo">🚶 ${T("plzGo")}</button>`}</section>`; }
+
+/* ================= 廣場 room: walk around the plaza (Archero-style drag joystick) =================
+   Players who are in the room right now are live: each one writes its own spot to the Realtime Database
+   (plaza/{channel}/{uid}, a few times a second while walking, removed on leaving) and sees everyone else move.
+   A channel holds PLZ_CAP players; when it is full the next one opens. Players who are not online wander on
+   their own with a grey "offline" tag, so the plaza is never empty. The top 3 by power stand on the podium,
+   and last week's most-liked player wears a halo. Likes: likeWeeks/{week}/u/{uid} {n,name} + likeGiven/{week}_{from}_{to}. */
+const PLZ_W=1500, PLZ_H=1100, PLZ_CAP=10, PLZ_CHS=10, PLZ_SEND=250, PLZ_STALE=45e3, PLZ_MAX=10;
+const PLZ_DB_URL="https://che-daily-improvement-pro-default-rtdb.europe-west1.firebasedatabase.app";
+const PLZ_SOLID=[{x:750,y:548,rx:118,ry:86},{x:750,y:345,rx:150,ry:34}];
+const PLZ_PODIUM=[{x:750,y:318,m:"🥇"},{x:648,y:332,m:"🥈"},{x:852,y:336,m:"🥉"}];
+const PLZ_ZONES=[{k:"fountain",ic:"⛲"},{k:"gate",ic:"🏛️"},{k:"pond",ic:"🦆"},{k:"band",ic:"🎵"},{k:"lawn",ic:"🧺"}];   // areas of the park (St Stephen's Green style); each runs its own channels of PLZ_CAP
+const PLZ_EMO=["👋","😄","🔥","📚","👍","☕"];
+let ROOM=null, PLZ_DBM=null;   // PLZ_DBM: a stand-in database module for tests
+const plzRnd=(a,b)=>a+Math.random()*(b-a);
+function plzBlocked(x,y){ if(x<40||y<70||x>PLZ_W-40||y>PLZ_H-10) return true; for(const s of PLZ_SOLID){ const dx=(x-s.x)/s.rx, dy=(y-s.y)/s.ry; if(dx*dx+dy*dy<1) return true; } return false; }
+function plzSpot(){ for(let i=0;i<30;i++){ const a=Math.random()*7, r=Math.random(), x=750+Math.cos(a)*(130+r*300)*1.15, y=548+Math.sin(a)*(110+r*230); if(!plzBlocked(x,y)) return [x,y]; } return [750,760]; }
+function plzGround(cv){ const D=Math.min(2,devicePixelRatio||1), W=PLZ_W, H=PLZ_H; cv.width=W*D; cv.height=H*D; cv.style.width=W+"px"; cv.style.height=H+"px";
+  const c=cv.getContext("2d"); c.scale(D,D); let s=7; const rnd=()=>{ s=(s*16807)%2147483647; return s/2147483647; };
+  c.fillStyle="#8cc46e"; c.fillRect(0,0,W,H);
+  for(let i=0;i<900;i++){ c.fillStyle=rnd()<.5?"#83bb65":"#97cc79"; c.beginPath(); c.ellipse(rnd()*W,rnd()*H,3+rnd()*6,2+rnd()*3,0,0,7); c.fill(); }
+  c.fillStyle="#e3d2a8"; c.beginPath(); c.roundRect(700,0,100,H,30); c.fill(); c.beginPath(); c.roundRect(0,490,W,100,30); c.fill();
+  c.strokeStyle="#cdb98a"; c.lineWidth=3; c.beginPath(); c.ellipse(750,540,420,330,0,0,7); c.fillStyle="#e8dcc0"; c.fill(); c.stroke();
+  for(let ring=0;ring<6;ring++){ c.beginPath(); c.ellipse(750,540,120+ring*52,95+ring*40,0,0,7); c.strokeStyle="rgba(150,130,95,.35)"; c.lineWidth=2; c.stroke(); }
+  for(let a=0;a<48;a++){ const t=a/48*Math.PI*2; c.beginPath(); c.moveTo(750+Math.cos(t)*120,540+Math.sin(t)*95); c.lineTo(750+Math.cos(t)*412,540+Math.sin(t)*322); c.strokeStyle="rgba(150,130,95,.18)"; c.stroke(); }
+  c.beginPath(); c.ellipse(750,548,110,80,0,0,7); c.fillStyle="#b9c3c9"; c.fill(); c.strokeStyle="#7d8a92"; c.lineWidth=4; c.stroke();
+  c.beginPath(); c.ellipse(750,545,92,64,0,0,7); c.fillStyle="#6fc1e8"; c.fill();
+  c.beginPath(); c.ellipse(750,540,26,18,0,0,7); c.fillStyle="#b9c3c9"; c.fill(); c.strokeStyle="#7d8a92"; c.stroke();
+  // podium (1st in the middle, higher)
+  const step=(x,y,w,h,col)=>{ c.fillStyle="rgba(60,50,30,.22)"; c.fillRect(x-w/2+4,y+4,w,h); c.fillStyle=col; c.fillRect(x-w/2,y-h,w,h*2); c.strokeStyle="#7a6a45"; c.lineWidth=2; c.strokeRect(x-w/2,y-h,w,h*2); };
+  step(648,345,100,18,"#d9dde2"); step(852,348,100,14,"#e2b07e"); step(750,330,104,26,"#f3cf55");
+  c.fillStyle="#5b4a28"; c.font="bold 16px system-ui"; c.textAlign="center"; c.fillText("1",750,342); c.fillText("2",648,352); c.fillText("3",852,354);
+  const tree=(x,y,r)=>{ c.fillStyle="rgba(30,60,30,.25)"; c.beginPath(); c.ellipse(x+6,y+r*.7,r*.9,r*.35,0,0,7); c.fill();
+    c.fillStyle="#7a5534"; c.fillRect(x-5,y,10,r*.7); c.fillStyle="#4f9a4a"; c.beginPath(); c.arc(x,y-r*.2,r,0,7); c.fill(); c.fillStyle="#62b25a"; c.beginPath(); c.arc(x-r*.3,y-r*.45,r*.55,0,7); c.fill(); };
+  const flowers=(x,y)=>{ c.fillStyle="#6a4a2e"; c.beginPath(); c.ellipse(x,y,46,22,0,0,7); c.fill(); for(let i=0;i<14;i++){ c.fillStyle=["#ff7aa2","#ffd447","#ffffff","#b78cff"][i%4]; c.beginPath(); c.arc(x-34+rnd()*68,y-12+rnd()*24,4,0,7); c.fill(); } };
+  [[180,170,54],[1320,190,60],[160,900,58],[1330,900,52],[420,120,40],[1080,110,44],[90,520,36],[1420,560,40],[460,1010,42],[1060,1000,46]].forEach(t=>tree(...t));
+  [[520,760],[980,760],[470,420],[1030,420]].forEach(f=>flowers(...f));
+  const bench=(x,y)=>{ c.fillStyle="#9b6b3e"; c.fillRect(x-36,y-8,72,10); c.fillRect(x-36,y-20,72,7); c.fillStyle="#5d3f24"; c.fillRect(x-32,y+2,5,10); c.fillRect(x+27,y+2,5,10); };
+  [[600,840],[900,840],[330,560],[1170,560]].forEach(b=>bench(...b));
+  const lamp=(x,y)=>{ c.fillStyle="#3b4a52"; c.fillRect(x-3,y-60,6,60); c.beginPath(); c.arc(x,y-64,10,0,7); c.fillStyle="#ffe58a"; c.fill(); };
+  [[360,420],[1140,420],[360,690],[1140,690]].forEach(l=>lamp(...l)); }
+// one person on the map; kind: me | live | off | pod
+function plzEnt(p,kind){ const R=ROOM, e=document.createElement("div"); e.className="pz-ent pz-"+kind+(R.star&&R.star.id===p.id?" pz-star":"");
+  const ex=lookExtra(p.id), tier=p.s!=null?p.s:ex.t;
+  e.innerHTML=`<div class="pz-sh"></div><div class="pz-bob"><div class="pz-fig">${lookArt(p.look,"pz-art")}</div></div><div class="pz-tag">${kind==="pod"?(PLZ_PODIUM[p.rank]||{}).m+" ":""}${tier?`<span class="pz-tt">${sbArt(tier,14,false)}</span>`:""}${flagOf(p.flag)?flagOf(p.flag)+" ":""}${esc(kind==="me"?T("plzMe"):p.name||"?")}${kind==="off"?` <small>${T("plzOff")}</small>`:""}</div><div class="pz-bub"></div>`;
+  R.world.appendChild(e); const [x,y]=p.x!=null?[p.x,p.y]:plzSpot();
+  const o={...p, kind, el:e, bob:e.querySelector(".pz-bob"), fig:e.querySelector(".pz-fig"), bub:e.querySelector(".pz-bub"), x, y, tx:x, ty:y, vx:0, vy:0, face:p.d||1, phase:Math.random()*6, wait:Math.random()*2, sp:plzRnd(45,75), bubT:0, said:0};
+  e.addEventListener("click",ev=>{ if(R.dragged) return; ev.stopPropagation(); plzCard(o); });
+  return o; }
+function plzSay(o,t){ o.bub.textContent=t; o.bub.classList.add("on"); o.bubT=2.6; }
+function plzMeRow(){ const g=game(), e=lbEntry(); return {id:CLOUD.user.uid, name:g.nick||"", look:myLook(), flag:e.flag, s:streakTier(), lv:e.lv, power:e.power, conq:e.conq}; }
+function plzRebuild(){ const R=ROOM; if(!R) return; const keep=new Set([R.me.id]);
+  // podium
+  (R.top||[]).slice(0,3).forEach((p,i)=>{ const k="pod:"+p.id; keep.add(k); if(!R.ents.has(k)){ const o=plzEnt({...p,rank:i,x:PLZ_PODIUM[i].x,y:PLZ_PODIUM[i].y,d:i===1?1:i===2?-1:1},"pod"); R.ents.set(k,o); } });
+  // live players
+  for(const [uid,v] of R.live){ keep.add(uid); if(!R.ents.has(uid)) R.ents.set(uid,plzEnt({id:uid,name:v.n,look:v.l,flag:v.f,s:v.s,x:v.x,y:v.y,d:v.d},"live")); }
+  // offline fill
+  let n=[...R.ents.values()].filter(o=>o.kind==="live").length+1;
+  for(const p of R.rows||[]){ if(n>=PLZ_MAX) break; if(p.id===R.me.id||R.live.has(p.id)) continue; keep.add(p.id); if(!R.ents.has(p.id)) R.ents.set(p.id,plzEnt(p,"off")); n++; }
+  for(const [k,o] of R.ents) if(!keep.has(k)&&o!==R.me){ o.el.remove(); R.ents.delete(k); }
+  const live=[...R.live.keys()].length+1, el=document.getElementById("pzCount"); if(el) el.textContent=T("plzOnline",{n:live, c:R.ch||1}); }
+async function plazaOpen(zone){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD.fb) return; zone=PLZ_ZONES.some(z=>z.k===zone)?zone:"fountain"; if(!game().nick||!myLook()) return toast(T("plzNoNick"));
+  const box=document.createElement("div"); box.id="plazaRoom";
+  box.innerHTML=`<div class="pz-stage"><div class="pz-world"><canvas class="pz-ground"></canvas></div></div>
+    <div class="pz-hud"><button class="pz-pill" data-pz="close">← ${T("plzBack")}</button><button class="pz-pill" data-pz="zones">${PLZ_ZONES.find(z=>z.k===zone).ic} ${T("plzZ_"+zone)} ▾</button><span class="pz-pill pz-cnt" id="pzCount">${T("loading")}</span></div><div class="pz-zones" hidden></div>
+    <div class="pz-emo">${PLZ_EMO.map(x=>`<button data-pz="emo" data-k="${x}">${x}</button>`).join("")}</div>
+    <div class="pz-joy"><i></i></div><div class="pz-hint">${T("plzHint")}</div>`;
+  document.body.appendChild(box); document.body.classList.add("pz-open");
+  const stage=box.querySelector(".pz-stage"), world=box.querySelector(".pz-world"); world.style.width=PLZ_W+"px"; world.style.height=PLZ_H+"px"; plzGround(box.querySelector(".pz-ground"));
+  ROOM={zone, box, stage, world, ents:new Map(), live:new Map(), rows:(PLAZA.rows||[]), top:PLAZA.top||[], star:PLAZA.star||null, keys:{}, J:null, last:performance.now(), cam:null, sendAt:0, sent:"", db:null, ch:0};
+  const me=plzMeRow(); const [sx,sy]=[750+plzRnd(-120,120),780]; ROOM.me=plzEnt({...me,x:sx,y:sy},"me"); ROOM.ents.set(me.id,ROOM.me); ROOM.cam={x:sx,y:sy};
+  plzRebuild(); plzInput(); ROOM.raf=requestAnimationFrame(plzStep);
+  plazaLoad(true).then(()=>{ if(!ROOM) return; ROOM.rows=PLAZA.rows||[]; ROOM.top=PLAZA.top||[]; ROOM.star=PLAZA.star||null; plzRebuild(); });
+  plzJoin(); }
+function plazaClose(){ const R=ROOM; if(!R) return; ROOM=null; cancelAnimationFrame(R.raf); removeEventListener("keydown",R.kd); removeEventListener("keyup",R.ku);
+  try{ if(R.unsub) R.unsub.forEach(f=>f()); if(R.myRef) R.dbM.remove(R.myRef); }catch(e){} R.box.remove(); document.body.classList.remove("pz-open"); }
+// live part: Realtime Database (loaded only when the room opens)
+async function plzJoin(){ const R=ROOM; try{
+    const dbM=PLZ_DBM||await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-database.js`); if(ROOM!==R) return;
+    const db=dbM.getDatabase(CLOUD.fb.app, PLZ_DB_URL), me=R.me.id, now=Date.now(); R.dbM=dbM; R.db=db;
+    let ch=1; for(;ch<=PLZ_CHS;ch++){ const sn=await dbM.get(dbM.ref(db,`plaza/${R.zone}-${ch}`)); const v=sn.val()||{}; const n=Object.entries(v).filter(([u,x])=>u!==me&&x&&now-(x.ts||0)<PLZ_STALE).length; if(n<PLZ_CAP) break; }
+    if(ROOM!==R) return; R.ch=Math.min(ch,PLZ_CHS); R.myRef=dbM.ref(db,`plaza/${R.zone}-${R.ch}/${me}`);
+    await dbM.onDisconnect(R.myRef).remove(); await plzSend(true);
+    const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
+        const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
+        const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; plzSay(o,v.b); } } };
+    R.unsub=[dbM.onChildAdded(room,up), dbM.onChildChanged(room,up), dbM.onChildRemoved(room,sn=>{ if(!ROOM) return; R.live.delete(sn.key); const o=R.ents.get(sn.key); if(o&&o.kind==="live"){ o.el.remove(); R.ents.delete(sn.key); } plzRebuild(); })];
+    R.hb=setInterval(()=>{ if(ROOM===R) plzSend(true); else clearInterval(R.hb); },15e3);
+    plzRebuild();
+  }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
+async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
+  const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
+  const v={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv, ts:R.dbM.serverTimestamp(), ...(extra||{})};
+  try{ await R.dbM.set(R.myRef,v); }catch(e){} }
+function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"), knob=joy.firstElementChild;
+  st.addEventListener("pointerdown",ev=>{ R.J={id:ev.pointerId,x0:ev.clientX,y0:ev.clientY,dx:0,dy:0,moved:false}; R.dragged=false; });
+  st.addEventListener("pointermove",ev=>{ const J=R.J; if(!J||ev.pointerId!==J.id) return; let dx=ev.clientX-J.x0, dy=ev.clientY-J.y0; const d=Math.hypot(dx,dy);
+    if(!J.moved&&d>10){ J.moved=true; R.dragged=true; try{ st.setPointerCapture(ev.pointerId); }catch(e){} joy.style.display="block"; joy.style.left=J.x0+"px"; joy.style.top=J.y0+"px"; const h=R.box.querySelector(".pz-hint"); if(h) h.style.opacity=0; }
+    if(d>45){ dx*=45/d; dy*=45/d; } J.dx=dx/45; J.dy=dy/45; knob.style.transform=`translate(${dx}px,${dy}px)`; });
+  const end=ev=>{ if(!R.J||ev.pointerId!==R.J.id) return; R.J=null; joy.style.display="none"; knob.style.transform=""; setTimeout(()=>{ R.dragged=false; },0); };
+  st.addEventListener("pointerup",end); st.addEventListener("pointercancel",end);
+  R.kd=e=>{ if(/INPUT|TEXTAREA/.test(e.target.tagName)) return; R.keys[e.key.toLowerCase()]=1; if(e.key==="Escape") plazaClose(); }; R.ku=e=>{ R.keys[e.key.toLowerCase()]=0; };
+  addEventListener("keydown",R.kd); addEventListener("keyup",R.ku);
+  R.box.addEventListener("click",e=>{ const b=e.target.closest("[data-pz]"); if(!b) return; const a=b.dataset.pz;
+    if(a==="close") return plazaClose();
+    if(a==="zones") return plzZones();
+    if(a==="zone"){ const z=b.dataset.k; if(z!==R.zone) plazaOpen(z); else R.box.querySelector(".pz-zones").hidden=true; return; }
+    if(a==="emo"){ plzSay(R.me,b.dataset.k); plzSend(false,{b:b.dataset.k, bt:Date.now()}); } }); }
+function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R.last)/1000); R.last=now; const K=R.keys, m=R.me;
+  let ix=(K.arrowright||K.d?1:0)-(K.arrowleft||K.a?1:0), iy=(K.arrowdown||K.s?1:0)-(K.arrowup||K.w?1:0);
+  if(R.J&&R.J.moved){ ix=R.J.dx; iy=R.J.dy; } const mg=Math.hypot(ix,iy); if(mg>1){ ix/=mg; iy/=mg; }
+  m.vx=ix*170; m.vy=iy*170; m.mv=mg>.05; const ox=m.x, oy=m.y; if(!plzBlocked(m.x+m.vx*dt,m.y)) m.x+=m.vx*dt; if(!plzBlocked(m.x,m.y+m.vy*dt)) m.y+=m.vy*dt;
+  if(Math.abs(m.vx)>4) m.face=m.vx<0?-1:1; if(m.mv||ox!==m.x||oy!==m.y) plzSend(false); else if(R.sent&&R.sent.endsWith(",1")) plzSend(false);
+  for(const o of R.ents.values()){ if(o===m) continue;
+    if(o.kind==="live"){ const dx=o.tx-o.x, dy=o.ty-o.y, d=Math.hypot(dx,dy); if(d>300){ o.x=o.tx; o.y=o.ty; } else if(d>1){ const k=Math.min(1,dt*8); o.x+=dx*k; o.y+=dy*k; } o.vx=d>2?dx:0; o.vy=d>2?dy:0; }
+    else if(o.kind==="off"){ if(o.wait>0){ o.wait-=dt; o.vx=o.vy=0; if(o.wait<=0){ [o.tx,o.ty]=plzSpot(); } }
+      else { const dx=o.tx-o.x, dy=o.ty-o.y, d=Math.hypot(dx,dy); if(d<6){ o.wait=plzRnd(1,4.5); }
+        else { o.vx=dx/d*o.sp; o.vy=dy/d*o.sp; const px=o.x, py=o.y; if(!plzBlocked(o.x+o.vx*dt,o.y)) o.x+=o.vx*dt; if(!plzBlocked(o.x,o.y+o.vy*dt)) o.y+=o.vy*dt; if(Math.abs(o.x-px)+Math.abs(o.y-py)<.01) o.wait=.5; } } }
+    else { o.vx=o.vy=0; }
+    if(o.kind!=="live"&&Math.hypot(o.x-m.x,o.y-m.y)<95&&!(o.vx||o.vy)){ o.face=m.x<o.x?-1:1; if(o.kind==="off"&&now/1000-o.said>15){ o.said=now/1000; plzSay(o,"👋"); } } }
+  const reduce=rigReduced&&rigReduced();
+  for(const o of R.ents.values()){ const mv=o===m?m.mv:(o.kind==="live"?(o.mv||Math.hypot(o.vx,o.vy)>2):Math.hypot(o.vx,o.vy)>1); if(o!==m&&o.kind!=="live"&&Math.abs(o.vx)>4) o.face=o.vx<0?-1:1;
+    o.phase+=dt*(mv?13:2.2); const b=reduce?0:(mv?-Math.abs(Math.sin(o.phase))*6:Math.sin(o.phase)*1.2), r=reduce||!mv?0:Math.sin(o.phase)*4, sq=mv?1+Math.abs(Math.sin(o.phase))*.03:1+Math.sin(o.phase)*.01;
+    o.el.style.transform=`translate(${o.x.toFixed(1)}px,${o.y.toFixed(1)}px)`; o.el.style.zIndex=Math.round(o.y);
+    o.bob.style.transform=`translateY(${b.toFixed(1)}px) rotate(${r.toFixed(1)}deg) scale(${(1/sq).toFixed(3)},${sq.toFixed(3)})`; o.fig.style.transform=o.face<0?"scaleX(-1)":"";
+    if(o.bubT>0){ o.bubT-=dt; if(o.bubT<=0) o.bub.classList.remove("on"); } }
+  const vw=R.stage.clientWidth, vh=R.stage.clientHeight, z=vw<600?1:1.15; R.cam.x+=(m.x-R.cam.x)*Math.min(1,dt*6); R.cam.y+=(m.y-60-R.cam.y)*Math.min(1,dt*6);
+  const cx=Math.max(vw/2/z,Math.min(PLZ_W-vw/2/z,R.cam.x)), cy=Math.max(vh/2/z-70,Math.min(PLZ_H-vh/2/z,R.cam.y));   // 70px of sky above the map keeps the podium clear of the top bar
+  R.world.style.transform=`scale(${z}) translate(${(vw/2/z-cx).toFixed(1)}px,${(vh/2/z-cy).toFixed(1)}px)`;
+  R.raf=requestAnimationFrame(plzStep); }
+// zone picker: how many people are in the first channel of each area
+async function plzZones(){ const R=ROOM; if(!R) return; const el=R.box.querySelector(".pz-zones"); if(!el.hidden){ el.hidden=true; return; }
+  const draw=n=>{ el.innerHTML=`<b>${T("plzZones")}</b>`+PLZ_ZONES.map(z=>`<button data-pz="zone" data-k="${z.k}" class="${z.k===R.zone?"on":""}"><span>${z.ic}</span><span><b>${T("plzZ_"+z.k)}</b><small>${T("plzZd_"+z.k)}</small></span><em>${n&&n[z.k]!=null?T("plzZn",{n:n[z.k]}):""}</em></button>`).join(""); };
+  draw(null); el.hidden=false; if(!R.dbM||!R.db) return;
+  try{ const now=Date.now(), n={}; await Promise.all(PLZ_ZONES.map(async z=>{ const v=(await R.dbM.get(R.dbM.ref(R.db,`plaza/${z.k}-1`))).val()||{}; n[z.k]=Object.values(v).filter(x=>x&&now-(x.ts||0)<PLZ_STALE).length; })); if(ROOM===R&&!el.hidden) draw(n); }catch(e){} }
+// player card + likes (one like per player per week)
+const plzWeek=()=>isoWeek().id;
+async function plzCard(o){ lookCard({id:o.id, name:o.kind==="me"?game().nick:o.name, look:o.look, lv:o.lv, power:o.power, conq:o.conq, flag:o.flag});
+  const el=document.getElementById("rkLook"); if(!el) return; const card=el.querySelector(".pd-card"); if(!card||!CLOUD.fb) return;
+  const row=document.createElement("div"); row.className="pz-like"; row.innerHTML=`<span class="muted sm-t">${T("loading")}</span>`; card.insertBefore(row,card.querySelector(".btn:last-child"));
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, wk=plzWeek(), mine=o.id===me;
+  try{ const [c,g]=await Promise.all([fsM.getDoc(fsM.doc(db,"likeWeeks",wk,"u",o.id)), mine?null:fsM.getDoc(fsM.doc(db,"likeGiven",`${wk}_${me}_${o.id}`))]);
+    const n=c.exists()?(c.data().n||0):0, done=g&&g.exists(), star=ROOM&&ROOM.star&&ROOM.star.id===o.id;
+    row.innerHTML=`${star?`<span class="pz-starTag">✨ ${T("plzStar")}</span>`:""}<span class="pz-likeN">👍 ${T("plzLikes",{n})}</span>${mine?"":`<button class="btn sm${done?" ghost":""}" ${done?"disabled":""} data-like="${esc(o.id)}">${done?T("plzLiked"):T("plzLike")}</button>`}`;
+    const b=row.querySelector("[data-like]"); if(b) b.onclick=async ev=>{ ev.stopPropagation(); b.disabled=true;
+      try{ const B=fsM.writeBatch(db), ref=fsM.doc(db,"likeWeeks",wk,"u",o.id);
+        B.set(fsM.doc(db,"likeGiven",`${wk}_${me}_${o.id}`),{from:me, to:o.id, w:wk});
+        if(c.exists()) B.update(ref,{n:fsM.increment(1)}); else B.set(ref,{n:1, name:String(o.name||"").slice(0,16)});
+        await B.commit(); row.querySelector(".pz-likeN").textContent="👍 "+T("plzLikes",{n:n+1}); b.textContent=T("plzLiked"); b.classList.add("ghost"); if(ROOM) plzSay(o,"😊"); }
+      catch(e){ console.warn("like",e&&(e.code||e.message)); b.disabled=false; toast(T("syncFail")); } }; }
+  catch(e){ row.innerHTML=""; } }
+
+/* ================= free IG membership =================
+   With paid plans off, the old member features (close listening, weekly review) open for players who follow BinBin on IG:
+   the player taps "apply" → gets a short code (memberReq/{uid}) → DMs it to the IG account → the admin pastes the codes in the
+   developer panel → members/{uid} is written. Admin and developer mode always count as members. */
+const IG_MEMBER_ON=true;
+const IG_DM="https://ig.me/m/binbin.daily.english", MEM_AB="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", MEM_RE=/BB-[A-HJ-NP-Z2-9]{4}/g;
+let MEM={on:undefined, req:undefined, busy:false};
+const isMember=()=>!!(DEV||isAdminUser()||MEM.on);
+async function memLoad(){ if(!CLOUD.fb||!CLOUD.user||MEM.busy) return; MEM.busy=true; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const [m,r]=await Promise.all([fsM.getDoc(fsM.doc(db,"members",me)), fsM.getDoc(fsM.doc(db,"memberReq",me))]);
+    MEM.on=m.exists()&&m.data().ig===true; MEM.req=r.exists()?r.data():null; }catch(e){ console.warn("member load",e&&(e.code||e.message)); MEM.on=false; MEM.req=null; }
+  MEM.busy=false; render(); }
+async function memApply(){ if(!CLOUD.fb||!CLOUD.user) return toast(T("invLogin")); const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ let R=MEM.req; if(!R){ let c="BB-"; for(let k=0;k<4;k++) c+=MEM_AB[Math.floor(Math.random()*MEM_AB.length)];
+      R={code:c, nick:(game().nick||"").slice(0,16), at:Date.now()}; await fsM.setDoc(fsM.doc(db,"memberReq",me),R); MEM.req=R; }
+    (navigator.clipboard?navigator.clipboard.writeText(R.code):Promise.reject()).then(()=>toast(T("memCopied",{c:R.code})),()=>{});
+    render(); window.open(IG_DM,"_blank","noopener"); }
+  catch(e){ console.warn("member apply",e&&(e.code||e.message)); toast(T("syncFail")); } }
+function memCard(){ if(PLANS_ON||!IG_MEMBER_ON) return ""; const on=isMember(), R=MEM.req;
+  if(CLOUD.user&&MEM.on===undefined&&!MEM.busy) setTimeout(memLoad,0);
+  const perks=["memPerk1","memPerk2"].map(k=>`<li>${T(k)}</li>`).join("");
+  const body=on?`<p class="mem-on">✓ ${T("memYes")}</p>`
+    :!CLOUD.user?`<p class="muted sm-t">${T("invLogin")}</p>`
+    :R?`<p class="sm-t">${T("memWait")}</p><div class="mem-code">${esc(R.code)}</div><a class="btn sm comm-ig" href="${IG_DM}" target="_blank" rel="noopener">${T("memDmAgain")}</a>`
+    :`<ol class="mem-steps"><li>${T("memStep1")}</li><li>${T("memStep2")}</li><li>${T("memStep3")}</li></ol><button class="btn comm-ig" data-act="memapply">${T("memApply")}</button>`;
+  return `<section class="card set-sec comm-card mem-card" id="memCard"><b>🌟 ${T("memTitle")}</b><ul class="sub-perks">${perks}</ul>${body}</section>`; }
+const memLockBtn=()=>PLANS_ON?"":`<button class="btn sm comm-ig" data-act="memgo">${T("memUnlock")}</button>`;
+// admin: paste the DMs (or just the codes) → every BB-XXXX found becomes a member
+async function memGrant(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const codes=[...new Set((((document.getElementById("memCodes")||{}).value||"").toUpperCase().match(MEM_RE))||[])]; if(!codes.length) return toast(T("memNoCodes"));
+  const {fsM,db}=CLOUD.fb; let ok=[], miss=[];
+  try{ for(let i=0;i<codes.length;i+=30){ const part=codes.slice(i,i+30);
+      const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"memberReq"),fsM.where("code","in",part))); const found=new Set();
+      const B=fsM.writeBatch(db); sn.forEach(d=>{ const x=d.data(); found.add(x.code); ok.push(x.nick||x.code);
+        B.set(fsM.doc(db,"members",d.id),{ig:true, n:x.nick||"", code:x.code, at:Date.now()}); B.delete(d.ref); });
+      await B.commit(); miss.push(...part.filter(c=>!found.has(c))); }
+    S.memRes={ok, miss}; render(); }
+  catch(e){ console.warn("member grant",e&&(e.code||e.message)); toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
+async function memPending(){ if(!CLOUD.fb||!isAdminUser()) return; const {fsM,db}=CLOUD.fb;
+  try{ const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"memberReq"),fsM.limit(100))); const L=[]; sn.forEach(d=>L.push(d.data())); L.sort((a,b)=>(a.at||0)-(b.at||0)); S.memReqs=L; render(); }
+  catch(e){ toast(T("syncFail")); } }
+function memAdmin(){ if(PLANS_ON||!IG_MEMBER_ON||!isAdminUser()) return ""; const R=S.memRes, L=S.memReqs;
+  return `<div class="card set-sec"><b>🌟 ${T("memAdminT")}</b><span class="muted sm-t">${T("memAdminSub")}</span>
+    <textarea id="memCodes" class="search" rows="3" placeholder="BB-K7Q2 BB-ZP4M …"></textarea>
+    <div class="row" style="gap:6px"><button class="btn sm" data-act="memgrant">${T("memGrant")}</button><button class="btn sm ghost" data-act="memlist">${T("memList")}</button></div>
+    ${R?`<p class="sm-t">${R.ok.length?`✓ ${esc(R.ok.join("、"))}`:""}${R.miss.length?`<br><span class="bad-t">${T("memMiss")} ${esc(R.miss.join(" "))}</span>`:""}</p>`:""}
+    ${L?(L.length?`<div class="sm-t">${L.map(x=>`<div><b>${esc(x.code)}</b> ${esc(x.nick||"")} <span class="muted">${new Date(x.at||0).toLocaleDateString()}</span></div>`).join("")}</div>`:`<p class="muted sm-t">${T("memNone")}</p>`):""}</div>`; }
+
+/* ================= invite friends =================
+   A friend joins with my code and finishes the 3 daily steps on 3 days in a row → I get INV_ME style coins, the friend gets INV_FRIEND.
+   inviteCodes/{CODE} = {uid}; referrals/{friendUid} = {by, code, name, n, d, paid}. d = the last counted day as a UTC day number;
+   the Firestore rules check d against the server clock, so changing the phone's date does not help. Only accounts younger than
+   INV_NEW_DAYS can enter a code, each account only once, and I can collect at most INV_CAP friends per month (the rest wait for next month). */
+const INV_ME=50, INV_FRIEND=30, INV_DAYS=3, INV_CAP=5, INV_NEW_DAYS=7;
+const INV_AB="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", INV_RE=/^[A-HJ-NP-Z2-9]{6}$/;
+let INV={list:null, ref:undefined, busy:false, err:false};
+const invDayNo=()=>SRV_OFF==null?null:Math.floor((Date.now()+SRV_OFF)/864e5);
+const invUrl=c=>location.origin+location.pathname+"?inv="+c;
+(function(){ try{ const c=(new URLSearchParams(location.search).get("inv")||"").trim().toUpperCase(); if(INV_RE.test(c)) localStorage.setItem("bb_inv",c); }catch(e){} })();
+const invPending=()=>{ try{ return localStorage.getItem("bb_inv")||""; }catch(e){ return ""; } };
+function invNewAcct(){ if(DEV) return true; const u=CLOUD.user, t=u&&u.metadata&&Date.parse(u.metadata.creationTime||""); return !!t&&Date.now()-t<INV_NEW_DAYS*864e5; }
+function invPaidN(g=game()){ const p=g.invPaid||{}; return p.m===monthKey()?(p.n||0):0; }
+async function invEnsureCode(){ const g=game(); if(g.invCode) return g.invCode; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  for(let i=0;i<6;i++){ let c=""; for(let k=0;k<6;k++) c+=INV_AB[Math.floor(Math.random()*INV_AB.length)];
+    const ref=fsM.doc(db,"inviteCodes",c); const sn=await fsM.getDoc(ref); if(sn.exists()) continue;
+    await fsM.setDoc(ref,{uid:me}); g.invCode=c; saveGame(); return c; }
+  return null; }
+async function invLoad(){ if(!CLOUD.fb||!CLOUD.user||SANDBOX()||INV.busy) return; INV.busy=true;
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ if(SRV_OFF==null) await srvSync();
+    await invEnsureCode();
+    const r=await fsM.getDoc(fsM.doc(db,"referrals",me)); INV.ref=r.exists()?r.data():null;
+    const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"referrals"),fsM.where("by","==",me),fsM.limit(60)));
+    const L=[]; sn.forEach(d=>L.push({id:d.id,...d.data()})); L.sort((a,b)=>(b.d||0)-(a.d||0)); INV.list=L; INV.err=false;
+  }catch(e){ console.warn("invite load",e&&(e.code||e.message)); INV.err=true; }
+  INV.busy=false;
+  try{ if(INV.ref===null&&invPending()&&invNewAcct()) await invUse(invPending(),true);
+    else if(INV.ref) { await invTick(); invFriendReward(); }
+    for(const x of INV.list||[]) if((x.n||0)>=INV_DAYS&&!x.paid&&invPaidN()<INV_CAP) await invPay(x);
+  }catch(e){}
+  if(S.view==="set") render(); }
+// enter a friend's code (auto = it came from their invite link)
+async function invUse(raw,auto){ const c=String(raw||"").trim().toUpperCase(); const g=game();
+  if(!CLOUD.fb||!CLOUD.user) return toast(T("invLogin"));
+  if(!INV_RE.test(c)) return auto?null:toast(T("invBad"));
+  if(c===g.invCode){ try{ localStorage.removeItem("bb_inv"); }catch(e){} return auto?null:toast(T("invSelf")); }
+  if(INV.ref) return auto?null:toast(T("invAlready"));
+  if(!invNewAcct()) return auto?null:toast(T("invOld",{n:INV_NEW_DAYS}));
+  if(SRV_OFF==null&&!(await srvSync())) return toast(T("lgNoNet"));
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const cd=await fsM.getDoc(fsM.doc(db,"inviteCodes",c)); if(!cd.exists()) return toast(T("invBad"));
+    const by=cd.data().uid; if(by===me) return toast(T("invSelf"));
+    const doc={by, code:c, name:(g.nick||"").slice(0,16), n:0, d:invDayNo()-1, paid:false};
+    await fsM.setDoc(fsM.doc(db,"referrals",me),doc); INV.ref=doc;
+    try{ localStorage.removeItem("bb_inv"); }catch(e){}
+    toast(T("invJoined",{n:INV_DAYS})); await invTick(); render(); }
+  catch(e){ console.warn("invite use",e&&(e.code||e.message)); toast(e&&e.code==="permission-denied"?T("invDenied"):T("syncFail")); } }
+// the friend's side: count today once today's 3 steps are done; a gap of a day starts the count again
+async function invTick(){ const R=INV.ref; if(!R||!CLOUD.fb||!CLOUD.user||(R.n||0)>=INV_DAYS||!dayRec().postDone) return;
+  if(SRV_OFF==null&&!(await srvSync())) return; const t=invDayNo(); if(t==null||(R.d||0)>=t) return;
+  const n=R.d===t-1?(R.n||0)+1:1, {fsM,db}=CLOUD.fb;
+  try{ await fsM.updateDoc(fsM.doc(db,"referrals",CLOUD.user.uid),{n, d:t, name:(game().nick||R.name||"").slice(0,16)}); R.n=n; R.d=t;
+    if(n>=INV_DAYS) invFriendReward(); else toast(T("invDay",{n,m:INV_DAYS})); }
+  catch(e){ console.warn("invite tick",e&&(e.code||e.message)); } }
+function invFriendReward(){ const g=game(), R=INV.ref; if(!R||(R.n||0)<INV_DAYS||g.invGot) return;
+  g.invGot=1; g.style=(g.style||0)+INV_FRIEND; saveGame(); cosPush(); toast(T("invFriendDone",{n:INV_FRIEND})); }
+// my side: collect the reward for a friend who finished (once per friend, at most INV_CAP per month)
+async function invPay(x){ if(!CLOUD.fb||!CLOUD.user||invPaidN()>=INV_CAP) return; const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"referrals",x.id);
+  try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref), d=sn.exists()?sn.data():null;
+      if(!d||d.by!==CLOUD.user.uid||(d.n||0)<INV_DAYS||d.paid) throw new Error("state"); tx.update(ref,{paid:true}); });
+    const g=game(); x.paid=true; g.style=(g.style||0)+INV_ME; g.invPaid={m:monthKey(), n:invPaidN(g)+1}; saveGame(); cosPush();
+    toast(T("invPaid",{n:INV_ME, f:x.name||T("invFriend")})); }
+  catch(e){ console.warn("invite pay",e&&(e.code||e.message)); } }
+function invShare(){ const c=game().invCode; if(!c) return; const url=invUrl(c), txt=T("invShareTxt",{c});
+  if(navigator.share) navigator.share({title:"BinBin daily", text:txt, url}).catch(()=>{});
+  else (navigator.clipboard?navigator.clipboard.writeText(txt+" "+url):Promise.reject()).then(()=>toast(T("invCopied")),()=>toast(url)); }
+function inviteCard(){ if(!CLOUD.user||SANDBOX()) return "";
+  if(INV.ref===undefined&&!INV.busy&&!INV.err) setTimeout(invLoad,0);
+  const g=game(), c=g.invCode, R=INV.ref, full=invPaidN()>=INV_CAP;
+  const rows=(INV.list||[]).map(x=>{ const done=(x.n||0)>=INV_DAYS;
+    return `<div class="inv-row"><b>${esc(x.name||T("invFriend"))}</b><span class="inv-dots">${Array.from({length:INV_DAYS},(_,i)=>`<i class="${i<(x.n||0)?"on":""}"></i>`).join("")}</span><span class="muted sm-t">${done?(x.paid?`✓ ${STYLE_IC}+${INV_ME}`:(full?T("invNextMonth"):T("invWait"))):T("invProg",{n:x.n||0,m:INV_DAYS})}</span></div>`; }).join("");
+  const mine=R?`<div class="inv-joined">${(R.n||0)>=INV_DAYS?`✓ ${T("invJoinedDone",{n:INV_FRIEND})}`:T("invJoinedProg",{n:R.n||0,m:INV_DAYS,f:INV_FRIEND})}</div>`
+    :(invNewAcct()?`<div class="inv-enter"><span class="muted sm-t">${T("invHaveCode")}</span><div class="row" style="gap:6px;flex-wrap:nowrap"><input id="invIn" class="search" maxlength="6" placeholder="ABC234" autocomplete="off" autocapitalize="characters" value="${esc(invPending())}" style="text-transform:uppercase"><button class="btn sm" data-act="invuse">${T("invUse")}</button></div></div>`:"");
+  return `<section class="card set-sec inv-card"><b>🎁 ${T("invTitle")}</b><span class="muted sm-t">${T("invSub",{d:INV_DAYS,a:INV_ME,b:INV_FRIEND,c:INV_CAP})}</span>
+    ${c?`<div class="inv-mine"><span class="muted sm-t">${T("invMyCode")}</span><span class="inv-code">${esc(c)}</span><button class="btn sm" data-act="invshare">${T("invShare")}</button></div>`:`<span class="muted sm-t">${INV.err?T("syncFail"):T("loading")}</span>`}
+    ${rows?`<div class="inv-list"><span class="muted sm-t">${T("invMonth",{n:invPaidN(),c:INV_CAP})}</span>${rows}</div>`:""}
+    ${mine}</section>`; }
 
 
 /* ================= daily login reward + login streak (the streak title uses the old membership badges) =================
@@ -8345,7 +8666,7 @@ function weekStats(endOffset){
   return {f,e,days,arts,acc:tot?Math.round(sc/tot*100):null,newW:W.filter(w=>inR(w.firstSeen)).length,
     weak:W.filter(w=>inR(w.lastTested)&&(w.wrong||0)>(w.correct||0)).sort((a,b)=>(b.wrong||0)-(a.wrong||0)).slice(0,6)}; }
 function weekCard(){
-  if(!planHas("sub")) return `<section class="card wk-card locked"><div class="wk-h"><b>📈 ${T("wkT")}</b>${planTag("sub")}</div><p class="muted sm-t" style="margin:0">${T("wkTeaser")}</p></section>`;
+  if(!planHas("sub")) return `<section class="card wk-card locked"><div class="wk-h"><b>📈 ${T("wkT")}</b>${planTag("sub")}</div><p class="muted sm-t" style="margin:0">${T("wkTeaser")}</p>${memLockBtn()}</section>`;
   const a=weekStats(0), b=weekStats(7), kept=[...S.words.values()].filter(w=>!w.filler&&(w.srsB||0)>=3).length, due=srsDueList().length;
   const cmp=(x,y)=>y==null||x==null?"":x>y?`<i class="up">▲</i>`:x<y?`<i class="dn">▼</i>`:"";
   const box=(l,v,pv,suf)=>`<div class="wk-box"><b>${v==null?"—":v+(suf||"")}${cmp(v,pv)}</b><span>${T(l)}</span><small class="muted">${T("wkVs",{n:pv==null?"—":pv+(suf||"")})}</small></div>`;
@@ -8364,7 +8685,7 @@ var LS={on:false,i:0,a:null,b:null,shadow:false,playing:false,wait:0,tok:0,audio
 function lsChunks(){ const k=readKey(), el=document.getElementById("article"); if(!READ.chunks.length||READ.art!==k||(el&&READ.el!==el&&!READ.on)){ READ.chunks=readChunks(); READ.art=k; READ.el=el; } return READ.chunks; }
 function lsInner(){
   if(!LS.on) return "";
-  if(!planHas("sub")) return `<div class="ls-panel locked"><b>🎧 ${T("lsT")}</b> ${planTag("sub")}<p class="sm-t" style="margin:4px 0 0">${T("lsWhat")}</p><p class="muted sm-t" style="margin:4px 0 0">${T("lsLocked")}</p></div>`;
+  if(!planHas("sub")) return `<div class="ls-panel locked"><b>🎧 ${T("lsT")}</b> ${planTag("sub")}<p class="sm-t" style="margin:4px 0 0">${T("lsWhat")}</p><p class="muted sm-t" style="margin:4px 0 0">${T("lsLocked")}</p>${memLockBtn()}</div>`;
   const C=lsChunks(), n=C.length, i=Math.min(LS.i,n-1), c=C[i]||{t:""};
   const ab=LS.a!=null&&LS.b!=null;
   return `<div class="ls-panel"><div class="ls-h"><b>🎧 ${T("lsT")}</b><span class="muted sm-t">${T("lsN",{i:i+1,n})}</span></div>
@@ -8722,6 +9043,40 @@ Object.assign(STR.hi,{"cos_f-sakura": "साकुरा भँवर", "cosDi_
 Object.assign(STR.es,{"cos_f-sakura": "Remolino sakura", "cosDi_f-sakura": "Un aro rosa de flores gira bajo tus pies y suben pétalos", "cos_f-flame": "Círculo de llamas", "cosDi_f-flame": "Un anillo de fuego arde a tus pies y las llamas saltan hacia arriba", "cos_f-thunder": "Sello del trueno", "cosDi_f-thunder": "Un círculo de runas azul gira bajo tus pies mientras suben rayos", "cos_f-eternal": "Arcoíris eterno", "cosDi_f-eternal": "Una columna arcoíris, un círculo de runas dorado, una doble hélice de chispas y estrellas que suben", "cos_b-bubble": "Mar de burbujas", "cosDi_b-bubble": "Un aro azul agua gira detrás de ti y suben burbujas de todos los tamaños", "cos_b-cosmos": "Alas estelares", "cosDi_b-cosmos": "Alas de luz estelar que cambian de color, dos anillos de rayos, una rueda de runas y tres estrellas en órbita", "cos_n-leaf": "Collar del bosque", "cosDi_n-leaf": "Cada golpe estalla en luz verde y esparce un anillo de hojas girando", "cos_n-wave": "Collar de la marea", "cosDi_n-wave": "Cada golpe barre una ola, expande anillos de agua y salpica gotas", "cos_n-moon": "Collar de luz de luna", "cosDi_n-moon": "Cada golpe traza una media luna gigante, la pantalla se vuelve noche, brilla y tiembla", "cos_n-cosmic": "Collar del cosmos", "cosDi_n-cosmic": "Cada golpe abre un agujero negro, estalla un vórtice arcoíris con rayos, caen meteoros y tiembla toda la pantalla", "cos_s-harp": "Arpa", "cosDi_s-harp": "Un acorde de arpa en cada golpe, un arpegio en los críticos", "cos_s-laser": "Láser", "cosDi_s-laser": "Un láser en cada golpe, doble disparo en los críticos", "cos_s-coin": "Monedas", "cosDi_s-coin": "Una moneda tintinea en cada golpe, lluvia de monedas en los críticos", "cos_s-sword": "Espadas", "cosDi_s-sword": "Choque de acero, golpe doble en los críticos", "cos_s-dragon": "Rugido de dragón", "cosDi_s-dragon": "Un rugido grave, más largo y fuerte en los críticos", "cos_s-orch": "Fanfarria", "cosDi_s-orch": "Un acorde de metales en cada golpe, una fanfarria en los críticos", "cos_s-choir": "Coro de ángeles", "cosDi_s-choir": "Un coro suave en cada golpe, con campana en los críticos"});
 Object.assign(STR.ja,{"cos_f-sakura": "桜の舞", "cosDi_f-sakura": "足もとで桜の輪が回り、花びらがひらひら舞い上がる", "cos_f-flame": "炎の陣", "cosDi_f-flame": "足もとで炎の輪が燃え、火が次々に立ちのぼる", "cos_f-thunder": "雷の魔法陣", "cosDi_f-thunder": "青いルーンの魔法陣が回り、稲妻が上へ走る", "cos_f-eternal": "永遠の虹陣", "cosDi_f-eternal": "虹の光柱・金色の魔法陣・虹の光の二重らせん・昇る星", "cos_b-bubble": "泡の海", "cosDi_b-bubble": "背中で水色の輪が回り、大小の泡がどんどん昇る", "cos_b-cosmos": "星界の翼", "cosDi_b-cosmos": "色が変わる星の翼、2重の星の光、ルーンの輪、周りを回る3つの星", "cos_n-leaf": "森のネックレス", "cosDi_n-leaf": "攻撃のたびに緑の光がはじけ、葉っぱがくるくる飛び散る", "cos_n-wave": "潮のネックレス", "cosDi_n-wave": "攻撃のたびに波が横切り、水の輪が広がり、しぶきが飛ぶ", "cos_n-moon": "月光のネックレス", "cosDi_n-moon": "攻撃のたびに大きな三日月の斬撃、画面が夜になって星がきらめき揺れる", "cos_n-cosmic": "宇宙のネックレス", "cosDi_n-cosmic": "攻撃のたびにブラックホールが開き、虹のうずと光線が爆発、流れ星が落ち、画面全体が大きく揺れる", "cos_s-harp": "ハープ", "cosDi_s-harp": "攻撃でハープの和音、クリティカルでアルペジオ", "cos_s-laser": "レーザー", "cosDi_s-laser": "攻撃でレーザー音、クリティカルで2連射", "cos_s-coin": "コイン", "cosDi_s-coin": "攻撃でコインの音、クリティカルでコインの雨", "cos_s-sword": "剣", "cosDi_s-sword": "キンッと金属の音、クリティカルで2連撃", "cos_s-dragon": "竜の咆哮", "cosDi_s-dragon": "低い竜の咆哮、クリティカルでもっと長く大きく", "cos_s-orch": "ファンファーレ", "cosDi_s-orch": "攻撃で金管の和音、クリティカルで短いファンファーレ", "cos_s-choir": "天使の合唱", "cosDi_s-choir": "攻撃でやさしい合唱、クリティカルで鐘つき"});
 Object.assign(STR.ko,{"cos_f-sakura": "벚꽃 회오리", "cosDi_f-sakura": "발밑에서 분홍 꽃고리가 돌고 꽃잎이 날아올라요", "cos_f-flame": "화염진", "cosDi_f-flame": "발밑에서 불의 고리가 타오르고 불길이 치솟아요", "cos_f-thunder": "번개 마법진", "cosDi_f-thunder": "파란 룬 마법진이 돌고 번개가 위로 내리쳐요", "cos_f-eternal": "영원의 무지개진", "cosDi_f-eternal": "무지개 빛기둥, 황금 룬 마법진, 무지개 빛 이중 나선, 떠오르는 별", "cos_b-bubble": "거품 바다", "cosDi_b-bubble": "등 뒤에서 물빛 고리가 돌고 크고 작은 거품이 올라가요", "cos_b-cosmos": "별의 날개", "cosDi_b-cosmos": "색이 바뀌는 별빛 날개, 두 겹 별빛, 룬 바퀴, 주위를 도는 별 세 개", "cos_n-leaf": "숲의 목걸이", "cosDi_n-leaf": "공격할 때마다 초록 빛이 터지고 나뭇잎이 빙글빙글 흩날려요", "cos_n-wave": "파도 목걸이", "cosDi_n-wave": "공격할 때마다 파도가 쓸고 물결이 퍼지며 물방울이 튀어요", "cos_n-moon": "달빛 목걸이", "cosDi_n-moon": "공격할 때마다 거대한 초승달이 베고 화면이 밤이 되며 반짝이고 흔들려요", "cos_n-cosmic": "우주 목걸이", "cosDi_n-cosmic": "공격할 때마다 블랙홀이 열리고 무지개 소용돌이와 광선이 터지며 유성이 떨어지고 화면 전체가 흔들려요", "cos_s-harp": "하프", "cosDi_s-harp": "공격하면 하프 화음, 치명타면 아르페지오", "cos_s-laser": "레이저", "cosDi_s-laser": "공격하면 레이저 소리, 치명타면 두 발", "cos_s-coin": "동전", "cosDi_s-coin": "공격하면 동전 소리, 치명타면 동전 비", "cos_s-sword": "검", "cosDi_s-sword": "쨍 하는 쇳소리, 치명타면 두 번 연속", "cos_s-dragon": "용의 포효", "cosDi_s-dragon": "낮은 용의 포효, 치명타면 더 길고 크게", "cos_s-orch": "팡파르", "cosDi_s-orch": "공격하면 금관 화음, 치명타면 짧은 팡파르", "cos_s-choir": "천사 합창", "cosDi_s-choir": "공격하면 부드러운 합창, 치명타면 종소리까지"});
+Object.assign(STR.zh,{"invTitle": "邀請朋友", "invSub": "朋友用你的邀請碼加入，連續 {d} 天完成每日三個步驟：你得 {a} 造型幣，朋友得 {b} 造型幣。每月最多領 {c} 位。", "invMyCode": "我的邀請碼", "invShare": "分享邀請連結", "invShareTxt": "一起來 BinBin 每天用新聞練英文！用我的邀請碼 {c} 加入，連續 3 天完成每日任務就能拿造型幣 🎁", "invCopied": "已複製邀請連結", "invMonth": "本月已領 {n}/{c} 位", "invProg": "進行中 {n}/{m}", "invWait": "可領取", "invNextMonth": "本月已滿，下個月可領", "invFriend": "朋友", "invHaveCode": "有朋友的邀請碼？（新帳號 7 天內可輸入）", "invUse": "確認", "invLogin": "請先登入", "invBad": "找不到這個邀請碼", "invSelf": "不能使用自己的邀請碼", "invAlready": "你已經接受過邀請了", "invOld": "只有註冊 {n} 天內的新帳號可以輸入邀請碼", "invDenied": "無法使用這個邀請碼", "invJoined": "已接受邀請！連續 {n} 天完成每日三個步驟就能拿獎勵", "invDay": "邀請任務進度 {n}/{m} 天", "invFriendDone": "邀請任務完成！獲得 {n} 造型幣 🎁", "invPaid": "{f} 完成了邀請任務！你獲得 {n} 造型幣 🎁", "invJoinedProg": "你接受了朋友的邀請：進度 {n}/{m} 天，完成可得 {f} 造型幣", "invJoinedDone": "邀請任務完成，已獲得 {n} 造型幣"});
+Object.assign(STR.en,{"invTitle": "Invite friends", "invSub": "A friend joins with your code and finishes the 3 daily steps {d} days in a row: you get {a} style coins, they get {b}. Up to {c} friends a month.", "invMyCode": "My invite code", "invShare": "Share invite link", "invShareTxt": "Learn English with the daily news on BinBin! Join with my invite code {c} and finish the daily steps 3 days in a row to get style coins 🎁", "invCopied": "Invite link copied", "invMonth": "Collected this month: {n}/{c}", "invProg": "In progress {n}/{m}", "invWait": "Ready to collect", "invNextMonth": "Monthly limit reached, collect next month", "invFriend": "Friend", "invHaveCode": "Got a friend's invite code? (new accounts, first 7 days)", "invUse": "Use", "invLogin": "Please sign in first", "invBad": "Invite code not found", "invSelf": "You can't use your own code", "invAlready": "You have already accepted an invite", "invOld": "Only accounts created in the last {n} days can enter an invite code", "invDenied": "This invite code can't be used", "invJoined": "Invite accepted! Finish the 3 daily steps {n} days in a row for your reward", "invDay": "Invite progress: day {n}/{m}", "invFriendDone": "Invite task done! You got {n} style coins 🎁", "invPaid": "{f} finished the invite task! You got {n} style coins 🎁", "invJoinedProg": "You accepted a friend's invite: day {n}/{m}, finish to get {f} style coins", "invJoinedDone": "Invite task done, you got {n} style coins"});
+Object.assign(STR.hi,{"invTitle": "दोस्तों को बुलाएँ", "invSub": "दोस्त आपके कोड से जुड़े और लगातार {d} दिन रोज़ के 3 कदम पूरे करे: आपको {a} स्टाइल सिक्के, दोस्त को {b}। हर महीने अधिकतम {c} दोस्त।", "invMyCode": "मेरा आमंत्रण कोड", "invShare": "आमंत्रण लिंक भेजें", "invShareTxt": "BinBin पर रोज़ की ख़बरों से अंग्रेज़ी सीखें! मेरे कोड {c} से जुड़ें और लगातार 3 दिन रोज़ के कदम पूरे करके स्टाइल सिक्के पाएँ 🎁", "invCopied": "आमंत्रण लिंक कॉपी हुआ", "invMonth": "इस महीने: {n}/{c}", "invProg": "जारी {n}/{m}", "invWait": "लेने के लिए तैयार", "invNextMonth": "इस महीने की सीमा पूरी, अगले महीने लें", "invFriend": "दोस्त", "invHaveCode": "दोस्त का आमंत्रण कोड है? (नया खाता, पहले 7 दिन)", "invUse": "लागू करें", "invLogin": "पहले साइन इन करें", "invBad": "यह कोड नहीं मिला", "invSelf": "अपना कोड इस्तेमाल नहीं कर सकते", "invAlready": "आप पहले ही आमंत्रण स्वीकार कर चुके हैं", "invOld": "केवल पिछले {n} दिनों में बने खाते कोड डाल सकते हैं", "invDenied": "यह कोड इस्तेमाल नहीं हो सकता", "invJoined": "आमंत्रण स्वीकार! इनाम के लिए लगातार {n} दिन रोज़ के 3 कदम पूरे करें", "invDay": "आमंत्रण प्रगति: दिन {n}/{m}", "invFriendDone": "आमंत्रण पूरा! आपको {n} स्टाइल सिक्के मिले 🎁", "invPaid": "{f} ने आमंत्रण पूरा किया! आपको {n} स्टाइल सिक्के मिले 🎁", "invJoinedProg": "आपने दोस्त का आमंत्रण स्वीकार किया: दिन {n}/{m}, पूरा करने पर {f} स्टाइल सिक्के", "invJoinedDone": "आमंत्रण पूरा, आपको {n} स्टाइल सिक्के मिले"});
+Object.assign(STR.es,{"invTitle": "Invita a amigos", "invSub": "Un amigo se une con tu código y completa los 3 pasos diarios {d} días seguidos: tú recibes {a} monedas de estilo y tu amigo {b}. Hasta {c} amigos al mes.", "invMyCode": "Mi código de invitación", "invShare": "Compartir enlace", "invShareTxt": "¡Aprende inglés con las noticias del día en BinBin! Únete con mi código {c} y completa los pasos diarios 3 días seguidos para ganar monedas de estilo 🎁", "invCopied": "Enlace copiado", "invMonth": "Este mes: {n}/{c}", "invProg": "En curso {n}/{m}", "invWait": "Listo para cobrar", "invNextMonth": "Límite del mes alcanzado, cóbralo el mes que viene", "invFriend": "Amigo", "invHaveCode": "¿Tienes el código de un amigo? (cuentas nuevas, primeros 7 días)", "invUse": "Usar", "invLogin": "Inicia sesión primero", "invBad": "No se encontró ese código", "invSelf": "No puedes usar tu propio código", "invAlready": "Ya aceptaste una invitación", "invOld": "Solo las cuentas creadas en los últimos {n} días pueden usar un código", "invDenied": "Este código no se puede usar", "invJoined": "¡Invitación aceptada! Completa los 3 pasos diarios {n} días seguidos para tu premio", "invDay": "Progreso de la invitación: día {n}/{m}", "invFriendDone": "¡Invitación completada! Recibes {n} monedas de estilo 🎁", "invPaid": "¡{f} completó la invitación! Recibes {n} monedas de estilo 🎁", "invJoinedProg": "Aceptaste la invitación de un amigo: día {n}/{m}, al terminar recibes {f} monedas de estilo", "invJoinedDone": "Invitación completada, recibiste {n} monedas de estilo"});
+Object.assign(STR.ja,{"invTitle": "友だちを招待", "invSub": "友だちがあなたのコードで参加し、{d}日連続で毎日の3ステップを終えると、あなたに{a}、友だちに{b}スタイルコイン。毎月最大{c}人まで。", "invMyCode": "自分の招待コード", "invShare": "招待リンクを共有", "invShareTxt": "BinBinで毎日ニュースを使って英語を練習しよう！招待コード {c} で参加して、3日連続で毎日のタスクを終えるとスタイルコインがもらえるよ 🎁", "invCopied": "招待リンクをコピーしました", "invMonth": "今月の受け取り {n}/{c}", "invProg": "進行中 {n}/{m}", "invWait": "受け取り可能", "invNextMonth": "今月の上限に達しました。来月受け取れます", "invFriend": "友だち", "invHaveCode": "友だちの招待コードがある？（新規アカウント7日以内）", "invUse": "使う", "invLogin": "先にログインしてください", "invBad": "招待コードが見つかりません", "invSelf": "自分のコードは使えません", "invAlready": "すでに招待を受け取っています", "invOld": "登録から{n}日以内のアカウントだけがコードを入力できます", "invDenied": "このコードは使えません", "invJoined": "招待を受け取りました！{n}日連続で毎日の3ステップを終えると報酬", "invDay": "招待の進み具合 {n}/{m}日", "invFriendDone": "招待タスク完了！{n}スタイルコイン獲得 🎁", "invPaid": "{f}が招待タスクを完了！{n}スタイルコイン獲得 🎁", "invJoinedProg": "友だちの招待を受け取りました：{n}/{m}日、完了で{f}スタイルコイン", "invJoinedDone": "招待タスク完了、{n}スタイルコイン獲得済み"});
+Object.assign(STR.ko,{"invTitle": "친구 초대", "invSub": "친구가 내 코드로 가입해 {d}일 연속 매일 3단계를 마치면 나는 스타일 코인 {a}개, 친구는 {b}개. 한 달 최대 {c}명.", "invMyCode": "내 초대 코드", "invShare": "초대 링크 공유", "invShareTxt": "BinBin에서 매일 뉴스로 영어 연습해요! 내 초대 코드 {c}로 가입하고 3일 연속 매일 과제를 마치면 스타일 코인을 받아요 🎁", "invCopied": "초대 링크를 복사했어요", "invMonth": "이번 달 받은 수 {n}/{c}", "invProg": "진행 중 {n}/{m}", "invWait": "받을 수 있음", "invNextMonth": "이번 달 한도 도달, 다음 달에 받을 수 있어요", "invFriend": "친구", "invHaveCode": "친구의 초대 코드가 있나요? (새 계정 7일 이내)", "invUse": "사용", "invLogin": "먼저 로그인하세요", "invBad": "초대 코드를 찾을 수 없어요", "invSelf": "내 코드는 사용할 수 없어요", "invAlready": "이미 초대를 받았어요", "invOld": "가입 {n}일 이내 계정만 코드를 입력할 수 있어요", "invDenied": "이 코드는 사용할 수 없어요", "invJoined": "초대를 받았어요! {n}일 연속 매일 3단계를 마치면 보상", "invDay": "초대 진행 {n}/{m}일", "invFriendDone": "초대 과제 완료! 스타일 코인 {n}개 획득 🎁", "invPaid": "{f}님이 초대 과제를 완료했어요! 스타일 코인 {n}개 획득 🎁", "invJoinedProg": "친구 초대를 받았어요: {n}/{m}일, 완료하면 스타일 코인 {f}개", "invJoinedDone": "초대 과제 완료, 스타일 코인 {n}개 획득"});
+Object.assign(STR.zh,{"memTitle": "BinBin 會員（免費）", "memPerk1": "🎧 精聽工具：單句重播、A–B 循環、跟讀", "memPerk2": "📈 每週學習回顧", "memStep1": "按下面的按鈕，取得你的會員申請碼（會自動複製）", "memStep2": "追蹤 BinBin 的 IG", "memStep3": "把申請碼私訊給 BinBin，24 小時內開通", "memApply": "申請會員並開啟 IG", "memCopied": "已複製申請碼 {c}，請貼到 IG 私訊", "memWait": "審核中：請把下面的申請碼私訊給 BinBin 的 IG，24 小時內開通。", "memDmAgain": "開啟 IG 私訊", "memYes": "你是 BinBin 會員，所有會員功能都已開啟", "memUnlock": "追蹤 IG 免費開通", "memAdminT": "開通 IG 會員", "memAdminSub": "把 IG 私訊內容整段貼上，系統會自動抓出所有 BB-XXXX 申請碼", "memGrant": "全部開通", "memList": "看待審核名單", "memMiss": "找不到：", "memNone": "目前沒有人申請", "memNoCodes": "沒有找到 BB-XXXX 申請碼", "lsLocked": "精聽工具是 🌟 會員功能，追蹤 BinBin IG 就能免費開通。", "wkTeaser": "每週看看讀了多少、記住了多少、哪些字常錯，還有下週的三個建議。追蹤 BinBin IG 就能免費開通。", "planSub": "🌟 會員"});
+Object.assign(STR.en,{"memTitle": "BinBin membership (free)", "memPerk1": "🎧 Close listening: replay a sentence, A–B loop, shadowing", "memPerk2": "📈 Weekly learning review", "memStep1": "Tap the button below to get your member code (it is copied for you)", "memStep2": "Follow BinBin on Instagram", "memStep3": "Send the code to BinBin in a DM; it is switched on within 24 hours", "memApply": "Apply and open Instagram", "memCopied": "Code {c} copied, paste it in your Instagram DM", "memWait": "Pending: send the code below to BinBin on Instagram; it is switched on within 24 hours.", "memDmAgain": "Open Instagram DM", "memYes": "You are a BinBin member, all member features are on", "memUnlock": "Follow on IG to unlock free", "memAdminT": "Switch on IG members", "memAdminSub": "Paste the Instagram DMs as they are; every BB-XXXX code is picked out", "memGrant": "Switch on all", "memList": "Show pending", "memMiss": "Not found:", "memNone": "No pending requests", "memNoCodes": "No BB-XXXX codes found", "lsLocked": "Close listening is a 🌟 member feature, free when you follow BinBin on Instagram.", "wkTeaser": "See each week how much you read and remembered, which words you miss, and three tips for next week. Free when you follow BinBin on Instagram.", "planSub": "🌟 Member"});
+Object.assign(STR.hi,{"memTitle": "BinBin सदस्यता (मुफ़्त)", "memPerk1": "🎧 ध्यान से सुनें: वाक्य दोहराएँ, A–B लूप, शैडोइंग", "memPerk2": "📈 साप्ताहिक समीक्षा", "memStep1": "नीचे बटन दबाकर अपना सदस्य कोड लें (अपने-आप कॉपी होगा)", "memStep2": "Instagram पर BinBin को फ़ॉलो करें", "memStep3": "कोड BinBin को DM करें, 24 घंटे में चालू होगा", "memApply": "आवेदन करें और Instagram खोलें", "memCopied": "कोड {c} कॉपी हुआ, Instagram DM में चिपकाएँ", "memWait": "लंबित: नीचे का कोड Instagram पर BinBin को भेजें, 24 घंटे में चालू होगा।", "memDmAgain": "Instagram DM खोलें", "memYes": "आप BinBin सदस्य हैं, सभी सुविधाएँ चालू हैं", "memUnlock": "IG फ़ॉलो करके मुफ़्त खोलें", "memAdminT": "IG सदस्य चालू करें", "memAdminSub": "Instagram DM जैसे हैं वैसे चिपकाएँ; सभी BB-XXXX कोड चुन लिए जाएँगे", "memGrant": "सब चालू करें", "memList": "लंबित देखें", "memMiss": "नहीं मिला:", "memNone": "कोई लंबित अनुरोध नहीं", "memNoCodes": "कोई BB-XXXX कोड नहीं मिला", "lsLocked": "ध्यान से सुनना 🌟 सदस्य सुविधा है, Instagram पर BinBin को फ़ॉलो करने पर मुफ़्त।", "wkTeaser": "हर हफ़्ते देखें कितना पढ़ा, कितना याद रखा, कौन से शब्द छूटते हैं, और अगले हफ़्ते के तीन सुझाव। Instagram पर फ़ॉलो करने पर मुफ़्त।", "planSub": "🌟 सदस्य"});
+Object.assign(STR.es,{"memTitle": "Membresía BinBin (gratis)", "memPerk1": "🎧 Escucha atenta: repetir frase, bucle A–B, shadowing", "memPerk2": "📈 Resumen semanal", "memStep1": "Pulsa el botón para obtener tu código de miembro (se copia solo)", "memStep2": "Sigue a BinBin en Instagram", "memStep3": "Envía el código por DM a BinBin; se activa en 24 horas", "memApply": "Solicitar y abrir Instagram", "memCopied": "Código {c} copiado, pégalo en el DM de Instagram", "memWait": "Pendiente: envía el código de abajo a BinBin en Instagram; se activa en 24 horas.", "memDmAgain": "Abrir DM de Instagram", "memYes": "Eres miembro de BinBin, todas las funciones están activas", "memUnlock": "Sigue en IG para activarlo gratis", "memAdminT": "Activar miembros de IG", "memAdminSub": "Pega los DM de Instagram tal cual; se detectan todos los códigos BB-XXXX", "memGrant": "Activar todos", "memList": "Ver pendientes", "memMiss": "No encontrados:", "memNone": "No hay solicitudes pendientes", "memNoCodes": "No se encontraron códigos BB-XXXX", "lsLocked": "La escucha atenta es para 🌟 miembros, gratis si sigues a BinBin en Instagram.", "wkTeaser": "Mira cada semana cuánto leíste y recordaste, qué palabras fallas y tres consejos para la próxima. Gratis si sigues a BinBin en Instagram.", "planSub": "🌟 Miembro"});
+Object.assign(STR.ja,{"memTitle": "BinBinメンバー（無料）", "memPerk1": "🎧 精聴ツール：一文リピート、A–Bループ、シャドーイング", "memPerk2": "📈 毎週の学習ふりかえり", "memStep1": "下のボタンでメンバー申請コードを取得（自動でコピー）", "memStep2": "BinBinのInstagramをフォロー", "memStep3": "コードをBinBinにDMすると24時間以内に有効化", "memApply": "申請してInstagramを開く", "memCopied": "コード {c} をコピーしました。InstagramのDMに貼り付けてください", "memWait": "審査中：下のコードをInstagramでBinBinにDMしてください。24時間以内に有効化されます。", "memDmAgain": "InstagramのDMを開く", "memYes": "BinBinメンバーです。すべてのメンバー機能が使えます", "memUnlock": "IGフォローで無料開放", "memAdminT": "IGメンバーを有効化", "memAdminSub": "InstagramのDMをそのまま貼り付けると BB-XXXX コードを自動で拾います", "memGrant": "すべて有効化", "memList": "審査待ちを見る", "memMiss": "見つからない：", "memNone": "申請はありません", "memNoCodes": "BB-XXXX コードが見つかりません", "lsLocked": "精聴ツールは 🌟 メンバー機能です。BinBinのInstagramをフォローすると無料で使えます。", "wkTeaser": "毎週、読んだ量・覚えた量・よく間違える単語と来週の3つのアドバイス。BinBinのInstagramをフォローすると無料。", "planSub": "🌟 メンバー"});
+Object.assign(STR.ko,{"memTitle": "BinBin 멤버십 (무료)", "memPerk1": "🎧 정밀 듣기: 한 문장 반복, A–B 반복, 섀도잉", "memPerk2": "📈 주간 학습 리뷰", "memStep1": "아래 버튼으로 멤버 신청 코드를 받으세요 (자동 복사)", "memStep2": "BinBin 인스타그램 팔로우", "memStep3": "코드를 BinBin에 DM으로 보내면 24시간 안에 열려요", "memApply": "신청하고 인스타그램 열기", "memCopied": "코드 {c} 복사됨, 인스타그램 DM에 붙여넣으세요", "memWait": "검토 중: 아래 코드를 인스타그램으로 BinBin에 보내 주세요. 24시간 안에 열려요.", "memDmAgain": "인스타그램 DM 열기", "memYes": "BinBin 멤버예요. 모든 멤버 기능이 열려 있어요", "memUnlock": "IG 팔로우로 무료 열기", "memAdminT": "IG 멤버 열기", "memAdminSub": "인스타그램 DM을 그대로 붙여넣으면 BB-XXXX 코드를 모두 찾아요", "memGrant": "모두 열기", "memList": "대기 목록 보기", "memMiss": "찾을 수 없음:", "memNone": "대기 중인 신청이 없어요", "memNoCodes": "BB-XXXX 코드를 찾지 못했어요", "lsLocked": "정밀 듣기는 🌟 멤버 기능이에요. BinBin 인스타그램을 팔로우하면 무료예요.", "wkTeaser": "매주 얼마나 읽고 기억했는지, 자주 틀리는 단어, 다음 주 팁 세 가지. BinBin 인스타그램을 팔로우하면 무료예요.", "planSub": "🌟 멤버"});
+Object.assign(STR.zh,{"plzT": "廣場", "plzSub": "最近上線的 {n} 位冒險者，點一下看看他們的裝備", "plzMe": "我", "plzNoNick": "取一個暱稱，你的角色也會出現在廣場上。"});
+Object.assign(STR.en,{"plzT": "Plaza", "plzSub": "{n} adventurers online lately, tap one to see their gear", "plzMe": "Me", "plzNoNick": "Choose a nickname and your character shows up in the plaza too."});
+Object.assign(STR.hi,{"plzT": "चौक", "plzSub": "हाल में ऑनलाइन {n} साहसी, उनका सामान देखने के लिए टैप करें", "plzMe": "मैं", "plzNoNick": "उपनाम चुनें, आपका किरदार भी चौक में दिखेगा।"});
+Object.assign(STR.es,{"plzT": "Plaza", "plzSub": "{n} aventureros conectados hace poco; toca uno para ver su equipo", "plzMe": "Yo", "plzNoNick": "Elige un apodo y tu personaje también aparecerá en la plaza."});
+Object.assign(STR.ja,{"plzT": "広場", "plzSub": "最近ログインした冒険者 {n} 人。タップして装備を見てみよう", "plzMe": "自分", "plzNoNick": "ニックネームを決めると、あなたのキャラも広場に出ます。"});
+Object.assign(STR.ko,{"plzT": "광장", "plzSub": "최근 접속한 모험가 {n}명, 눌러서 장비를 구경해 보세요", "plzMe": "나", "plzNoNick": "닉네임을 정하면 내 캐릭터도 광장에 나와요."});
+Object.assign(STR.zh,{"plzGo": "進入廣場走走", "plzBack": "離開", "plzOff": "離線", "plzOnline": "🟢 {n} 人在線 · {c} 線", "plzSolo": "目前只有離線玩家", "plzHint": "按住畫面拖曳就能走路 · 點別人看裝備", "plzLikes": "本週 {n} 個讚", "plzLike": "按讚", "plzLiked": "已按讚", "plzStar": "上週最多讚"});
+Object.assign(STR.en,{"plzGo": "Walk around the plaza", "plzBack": "Leave", "plzOff": "offline", "plzOnline": "🟢 {n} online · room {c}", "plzSolo": "Only offline players right now", "plzHint": "Drag anywhere to walk · tap someone to see their gear", "plzLikes": "{n} likes this week", "plzLike": "Like", "plzLiked": "Liked", "plzStar": "Most liked last week"});
+Object.assign(STR.hi,{"plzGo": "चौक में घूमें", "plzBack": "बाहर", "plzOff": "ऑफ़लाइन", "plzOnline": "🟢 {n} ऑनलाइन · चौक {c}", "plzSolo": "अभी केवल ऑफ़लाइन खिलाड़ी", "plzHint": "चलने के लिए कहीं भी खींचें · सामान देखने के लिए टैप करें", "plzLikes": "इस हफ़्ते {n} लाइक", "plzLike": "लाइक", "plzLiked": "लाइक किया", "plzStar": "पिछले हफ़्ते सबसे ज़्यादा लाइक"});
+Object.assign(STR.es,{"plzGo": "Pasear por la plaza", "plzBack": "Salir", "plzOff": "desconectado", "plzOnline": "🟢 {n} conectados · plaza {c}", "plzSolo": "Ahora solo hay jugadores desconectados", "plzHint": "Arrastra para caminar · toca a alguien para ver su equipo", "plzLikes": "{n} me gusta esta semana", "plzLike": "Me gusta", "plzLiked": "Te gusta", "plzStar": "Más me gusta la semana pasada"});
+Object.assign(STR.ja,{"plzGo": "広場を歩く", "plzBack": "出る", "plzOff": "オフライン", "plzOnline": "🟢 {n}人オンライン · 第{c}広場", "plzSolo": "今はオフラインのプレイヤーだけです", "plzHint": "画面をドラッグして歩く · タップで装備を見る", "plzLikes": "今週 {n} いいね", "plzLike": "いいね", "plzLiked": "いいね済み", "plzStar": "先週いちばんいいね"});
+Object.assign(STR.ko,{"plzGo": "광장 걷기", "plzBack": "나가기", "plzOff": "오프라인", "plzOnline": "🟢 {n}명 접속 · {c}번 광장", "plzSolo": "지금은 오프라인 플레이어만 있어요", "plzHint": "화면을 드래그해 걷기 · 눌러서 장비 보기", "plzLikes": "이번 주 좋아요 {n}개", "plzLike": "좋아요", "plzLiked": "좋아요 함", "plzStar": "지난주 좋아요 1위"});
+Object.assign(STR.zh,{"plzZones": "選擇區域（每區最多 10 人）", "plzZn": "{n}/10", "plzZ_fountain": "噴泉花園", "plzZd_fountain": "許願池、聊天集合點", "plzZ_gate": "大門廣場", "plzZd_gate": "拍照打卡", "plzZ_pond": "鴨子湖", "plzZd_pond": "餵鴨子、釣單字", "plzZ_band": "音樂台", "plzZd_band": "跳舞、聽力挑戰", "plzZ_lawn": "大草坪", "plzZd_lawn": "野餐、字根搶答"});
+Object.assign(STR.en,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.hi,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.es,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.ja,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.ko,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.hi,{"plzZones": "जगह चुनें (हर जगह अधिकतम 10 लोग)", "plzZ_fountain": "फव्वारा बाग़", "plzZd_fountain": "विशिंग वेल, मिलने की जगह", "plzZ_gate": "द्वार चौक", "plzZd_gate": "फ़ोटो स्पॉट", "plzZ_pond": "बत्तख तालाब", "plzZd_pond": "बत्तखों को खिलाएँ, शब्द पकड़ें", "plzZ_band": "बैंडस्टैंड", "plzZd_band": "नाच, सुनने की चुनौती", "plzZ_lawn": "बड़ा लॉन", "plzZd_lawn": "पिकनिक, रूट रश"});
+Object.assign(STR.es,{"plzZones": "Elige una zona (máx. 10 personas)", "plzZ_fountain": "Jardín de la fuente", "plzZd_fountain": "Pozo de los deseos, punto de encuentro", "plzZ_gate": "Plaza de la puerta", "plzZd_gate": "Rincón de fotos", "plzZ_pond": "Estanque de patos", "plzZd_pond": "Dar de comer a los patos, pescar palabras", "plzZ_band": "Quiosco de música", "plzZd_band": "Baile, reto de escucha", "plzZ_lawn": "El césped", "plzZd_lawn": "Pícnic, carrera de raíces"});
+Object.assign(STR.ja,{"plzZones": "エリアを選ぶ（各エリア最大10人）", "plzZ_fountain": "噴水ガーデン", "plzZd_fountain": "願いの泉、待ち合わせ", "plzZ_gate": "門の広場", "plzZd_gate": "写真スポット", "plzZ_pond": "カモの池", "plzZd_pond": "カモにえさ、単語つり", "plzZ_band": "音楽堂", "plzZd_band": "ダンス、リスニング対決", "plzZ_lawn": "大芝生", "plzZd_lawn": "ピクニック、語根早押し"});
+Object.assign(STR.ko,{"plzZones": "구역 선택 (구역당 최대 10명)", "plzZ_fountain": "분수 정원", "plzZd_fountain": "소원의 우물, 모임 장소", "plzZ_gate": "정문 광장", "plzZd_gate": "사진 명소", "plzZ_pond": "오리 연못", "plzZd_pond": "오리 먹이 주기, 단어 낚시", "plzZ_band": "음악당", "plzZd_band": "댄스, 듣기 챌린지", "plzZ_lawn": "큰 잔디밭", "plzZd_lawn": "피크닉, 어근 퀴즈"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});

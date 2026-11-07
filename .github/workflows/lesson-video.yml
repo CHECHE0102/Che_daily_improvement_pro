@@ -78,8 +78,11 @@ jobs:
         if: steps.pick.outputs.list != ''
         run: |
           mkdir -p /tmp/pv && cp lessons/out/*.mp4 /tmp/pv/ || exit 0
-          if git fetch -q origin lesson-videos; then git worktree add -q /tmp/vb origin/lesson-videos && cd /tmp/vb && git checkout -q -B lesson-videos
-          else git worktree add -q --detach /tmp/vb && cd /tmp/vb && git checkout -q --orphan lesson-videos && git rm -rfq .; fi
+          # keep only the latest copy of each video: the branch is one commit with no history, replaced on every run,
+          # so re-rendered videos don't pile up in the repository (it reached 1 GB this way before 2026-11-06)
+          if git fetch -q origin lesson-videos; then git worktree add -q --detach /tmp/vb origin/lesson-videos && cd /tmp/vb
+          else git worktree add -q --detach /tmp/vb && cd /tmp/vb && git rm -rfq .; fi
           cp /tmp/pv/*.mp4 . && git add *.mp4
-          git commit -qm "Lesson videos" || exit 0
-          git push -q origin HEAD:lesson-videos
+          git diff --cached --quiet && exit 0
+          c=$(git commit-tree "$(git write-tree)" -m "Lesson videos (latest only)")
+          git push -q -f origin "$c:refs/heads/lesson-videos"
