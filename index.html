@@ -838,6 +838,7 @@ body.onb-open{overflow:hidden}
 .inv-card .inv-mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.inv-card .inv-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px}.inv-list{display:flex;flex-direction:column;gap:6px}.inv-row{display:flex;align-items:center;gap:8px}.inv-row b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inv-dots{display:flex;gap:3px}.inv-dots i{width:10px;height:10px;border-radius:50%;background:#ddd}.inv-dots i.on{background:#3BB273}.inv-joined{font-weight:700}.inv-enter{display:flex;flex-direction:column;gap:6px}
 .mem-card .mem-on{margin:0;font-weight:700;color:#2E8B57}.mem-card .mem-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px;align-self:flex-start}.mem-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:2px;font-size:14px}.ls-panel.locked .comm-ig,.wk-card.locked .comm-ig{margin-top:8px;color:#fff!important;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;font-weight:700}
 .plaza{display:flex;flex-direction:column;gap:8px}.plz-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.plz-ground{display:flex;gap:4px;overflow-x:auto;padding:14px 6px 8px;margin:0 -6px;border-radius:14px;scrollbar-width:none;background:linear-gradient(180deg,#CFEAFB 0%,#E8F6FF 46%,#A8D98A 46%,#8CCB6E 100%)}.plz-ground::-webkit-scrollbar{display:none}.plz-p{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:0;width:84px;cursor:pointer;-webkit-tap-highlight-color:transparent}.plz-fig{display:block;animation:plzBob 2.4s ease-in-out infinite;animation-delay:var(--d,0s)}.plz-art{width:84px;height:84px}.plz-art .ha-in{width:100%;height:100%}.plz-n{max-width:84px;font-size:12px;font-weight:700;color:#1B2421;background:rgba(255,255,255,.85);border-radius:999px;padding:1px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plz-p.me .plz-n{background:#1F6F5C;color:#fff}.plz-p:active .plz-fig{transform:scale(.94)}@keyframes plzBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@media (prefers-reduced-motion:reduce){.plz-fig{animation:none}}
+#plazaRoom{position:fixed;inset:0;z-index:35;background:#8cc46e}body.pz-open{overflow:hidden}#plazaRoom .pz-stage{position:absolute;inset:0;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}#plazaRoom .pz-world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}#plazaRoom .pz-ground{position:absolute;left:0;top:0}.pz-ent{position:absolute;left:0;top:0;width:76px;height:96px;margin:-90px 0 0 -38px;will-change:transform;cursor:pointer}.pz-sh{position:absolute;left:14px;right:14px;bottom:2px;height:12px;border-radius:50%;background:rgba(20,40,20,.28)}.pz-bob{position:absolute;left:0;top:0;width:76px;height:76px;transform-origin:50% 100%}.pz-fig{width:76px;height:76px}.pz-art{width:76px;height:76px}.pz-art .ha-in{width:100%;height:100%}.pz-tag{position:absolute;left:50%;top:76px;transform:translateX(-50%);white-space:nowrap;font:700 11px/1.5 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.92);border-radius:999px;padding:0 7px;pointer-events:none;display:flex;align-items:center;gap:2px}.pz-tag small{font-weight:600;opacity:.7}.pz-tt{display:inline-flex}.pz-off .pz-tag{background:rgba(225,229,232,.85);color:#58646b}.pz-off .pz-fig{filter:saturate(.75)}.pz-me .pz-tag{background:#1F6F5C;color:#fff}.pz-me::before{content:"";position:absolute;left:50%;bottom:-2px;width:58px;height:18px;margin-left:-29px;border-radius:50%;border:2px solid rgba(255,255,255,.8)}.pz-live .pz-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#2ECC71;margin-right:3px}.pz-pod .pz-tag{background:#FFF3C4}.pz-star .pz-bob::before{content:"";position:absolute;left:8px;right:8px;top:-6px;height:16px;border-radius:50%;border:3px solid #FFD84D;box-shadow:0 0 10px #FFE98A;animation:pzHalo 2s ease-in-out infinite}@keyframes pzHalo{50%{transform:translateY(-3px)}}.pz-bub{position:absolute;left:50%;bottom:100px;transform:translateX(-50%) scale(.6);opacity:0;transition:.18s;background:#fff;color:#1B2421;font:700 15px/1.3 system-ui,sans-serif;padding:4px 9px;border-radius:12px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.18);pointer-events:none}.pz-bub::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-top-color:#fff;border-bottom:0}.pz-bub.on{opacity:1;transform:translateX(-50%) scale(1)}.pz-hud{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px));pointer-events:none}.pz-pill{pointer-events:auto;border:0;background:rgba(255,255,255,.94);color:#1B2421;border-radius:999px;padding:8px 14px;font:700 14px/1.2 system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.12)}.pz-emo{position:absolute;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px}.pz-emo button{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:22px;box-shadow:0 2px 8px rgba(0,0,0,.15)}.pz-emo button:active{transform:scale(.9)}.pz-joy{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.6);pointer-events:none;display:none;z-index:2}.pz-joy i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.85)}.pz-hint{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:rgba(27,36,33,.72);color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap}.pz-zones{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:calc(56px + env(safe-area-inset-top,0px));width:min(320px,calc(100% - 24px));background:rgba(255,255,255,.97);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:3}.pz-zones>b{font:700 15px/1.3 system-ui,sans-serif;color:#1B2421;padding:0 4px 4px}.pz-zones button{display:flex;align-items:center;gap:10px;border:0;background:#F2F5F3;border-radius:12px;padding:8px 10px;text-align:left;color:#1B2421}.pz-zones button.on{outline:2px solid #1F6F5C}.pz-zones button>span:first-child{font-size:24px}.pz-zones button>span:nth-child(2){flex:1;display:flex;flex-direction:column}.pz-zones small{color:#5d6b66;font-size:12px}.pz-zones em{font-style:normal;font-size:12px;font-weight:700;color:#1F6F5C;white-space:nowrap}.pz-cnt{font-size:12px!important}.pz-like{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.pz-likeN{font-weight:700}.pz-starTag{font-weight:700;color:#B8860B}.plz-go{align-self:stretch}@media (prefers-reduced-motion:reduce){.pz-bub{transition:none}.pz-star .pz-bob::before{animation:none}}
 .comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
@@ -4299,6 +4300,7 @@ document.addEventListener("click", e=>{
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
   if(a==="plook") return lookCard(plazaList()[+t.dataset.k]);
+  if(a==="plzgo") return plazaOpen();
   if(a==="memapply") return memApply();
   if(a==="memgrant") return memGrant();
   if(a==="memlist") return memPending();
@@ -4380,7 +4382,7 @@ async function cloudInit(){
     const app=appM.initializeApp(FB_CONFIG);
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
-    CLOUD.fb={authM,fsM,auth,db};
+    CLOUD.fb={authM,fsM,auth,db,app};
     setTimeout(()=>actPing(),2500);
     setTimeout(pushRefresh,1200);
     setTimeout(supLoad,0);
@@ -4432,7 +4434,7 @@ async function nickVerify(){
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
 }
 const OWNER_KEY="che-pro-owner";
-function localReset(){ S.words.clear(); S.days.clear(); PLAZA={rows:null, at:0, busy:false}; INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+function localReset(){ S.words.clear(); S.days.clear(); if(typeof plazaClose==="function") plazaClose(); PLAZA={rows:null, at:0, busy:false, top:[], star:null}; INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
 async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
   localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
@@ -8029,10 +8031,10 @@ const planTag=need=>`<span class="plan-tag ${need}">${T(need==="plus"?"planPlus"
 /* ================= 廣場 plaza: recently active players standing together on the home page =================
    One public doc, plaza/now {rows, at}, rebuilt every 15 minutes by a Cloud Function from the leaderboard,
    so opening the plaza costs one read. Read again at most every 10 minutes. Tap a player to see their card. */
-let PLAZA={rows:null, at:0, busy:false};
+let PLAZA={rows:null, at:0, busy:false, top:[], star:null};
 async function plazaLoad(force){ if(!CLOUD.fb||!CLOUD.user||PLAZA.busy) return; if(!force&&PLAZA.rows&&Date.now()-PLAZA.at<10*60e3) return;
   PLAZA.busy=true; const {fsM,db}=CLOUD.fb;
-  try{ const d=await fsM.getDoc(fsM.doc(db,"plaza","now")); const x=d.exists()?d.data():{}; PLAZA.rows=(Array.isArray(x.rows)?x.rows:[]).map(safeDoc); }
+  try{ const d=await fsM.getDoc(fsM.doc(db,"plaza","now")); const x=d.exists()?d.data():{}; PLAZA.rows=(Array.isArray(x.rows)?x.rows:[]).map(safeDoc); PLAZA.top=(Array.isArray(x.top)?x.top:[]).map(safeDoc); PLAZA.star=x.star&&typeof x.star.id==="string"?safeDoc(x.star):null; for(const r of PLAZA.top) if(typeof r.look==="string") LOOKS[r.id]=r.look; }
   catch(e){ console.warn("plaza",e&&(e.code||e.message)); PLAZA.rows=PLAZA.rows||[]; }
   PLAZA.at=Date.now(); PLAZA.busy=false; for(const r of PLAZA.rows) if(typeof r.look==="string") LOOKS[r.id]=r.look; if(S.view==="today") render(); }
 function plazaList(){ const me=CLOUD.user&&CLOUD.user.uid, g=game(), mine=myLook();
@@ -8044,7 +8046,158 @@ function plazaCard(){ if(!CLOUD.user||SANDBOX()) return "";
   const L=plazaList();
   if(!L.length) return PLAZA.rows?"":`<section class="card plaza"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("loading")}</span></section>`;
   const figs=L.map((r,i)=>`<button class="plz-p${r.me?" me":""}" data-act="plook" data-k="${i}" style="--d:${(i*0.37)%2}s"><span class="plz-fig">${lookArt(r.look,"plz-art")}</span><span class="plz-n">${/^[A-Z]{2}$/.test(r.flag||"")?flagOf(r.flag)+" ":""}${esc(r.me?T("plzMe"):r.name)}</span></button>`).join("");
-  return `<section class="card plaza"><div class="plz-h"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("plzSub",{n:L.length})}</span></div><div class="plz-ground">${figs}</div>${!game().nick?`<p class="muted sm-t">${T("plzNoNick")}</p>`:""}</section>`; }
+  return `<section class="card plaza"><div class="plz-h"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("plzSub",{n:L.length})}</span></div><div class="plz-ground">${figs}</div>${!game().nick?`<p class="muted sm-t">${T("plzNoNick")}</p>`:`<button class="btn plz-go" data-act="plzgo">🚶 ${T("plzGo")}</button>`}</section>`; }
+
+/* ================= 廣場 room: walk around the plaza (Archero-style drag joystick) =================
+   Players who are in the room right now are live: each one writes its own spot to the Realtime Database
+   (plaza/{channel}/{uid}, a few times a second while walking, removed on leaving) and sees everyone else move.
+   A channel holds PLZ_CAP players; when it is full the next one opens. Players who are not online wander on
+   their own with a grey "offline" tag, so the plaza is never empty. The top 3 by power stand on the podium,
+   and last week's most-liked player wears a halo. Likes: likeWeeks/{week}/u/{uid} {n,name} + likeGiven/{week}_{from}_{to}. */
+const PLZ_W=1500, PLZ_H=1100, PLZ_CAP=10, PLZ_CHS=10, PLZ_SEND=250, PLZ_STALE=45e3, PLZ_MAX=10;
+const PLZ_DB_URL="https://che-daily-improvement-pro-default-rtdb.europe-west1.firebasedatabase.app";
+const PLZ_SOLID=[{x:750,y:548,rx:118,ry:86},{x:750,y:345,rx:150,ry:34}];
+const PLZ_PODIUM=[{x:750,y:318,m:"🥇"},{x:648,y:332,m:"🥈"},{x:852,y:336,m:"🥉"}];
+const PLZ_ZONES=[{k:"fountain",ic:"⛲"},{k:"gate",ic:"🏛️"},{k:"pond",ic:"🦆"},{k:"band",ic:"🎵"},{k:"lawn",ic:"🧺"}];   // areas of the park (St Stephen's Green style); each runs its own channels of PLZ_CAP
+const PLZ_EMO=["👋","😄","🔥","📚","👍","☕"];
+let ROOM=null, PLZ_DBM=null;   // PLZ_DBM: a stand-in database module for tests
+const plzRnd=(a,b)=>a+Math.random()*(b-a);
+function plzBlocked(x,y){ if(x<40||y<70||x>PLZ_W-40||y>PLZ_H-10) return true; for(const s of PLZ_SOLID){ const dx=(x-s.x)/s.rx, dy=(y-s.y)/s.ry; if(dx*dx+dy*dy<1) return true; } return false; }
+function plzSpot(){ for(let i=0;i<30;i++){ const a=Math.random()*7, r=Math.random(), x=750+Math.cos(a)*(130+r*300)*1.15, y=548+Math.sin(a)*(110+r*230); if(!plzBlocked(x,y)) return [x,y]; } return [750,760]; }
+function plzGround(cv){ const D=Math.min(2,devicePixelRatio||1), W=PLZ_W, H=PLZ_H; cv.width=W*D; cv.height=H*D; cv.style.width=W+"px"; cv.style.height=H+"px";
+  const c=cv.getContext("2d"); c.scale(D,D); let s=7; const rnd=()=>{ s=(s*16807)%2147483647; return s/2147483647; };
+  c.fillStyle="#8cc46e"; c.fillRect(0,0,W,H);
+  for(let i=0;i<900;i++){ c.fillStyle=rnd()<.5?"#83bb65":"#97cc79"; c.beginPath(); c.ellipse(rnd()*W,rnd()*H,3+rnd()*6,2+rnd()*3,0,0,7); c.fill(); }
+  c.fillStyle="#e3d2a8"; c.beginPath(); c.roundRect(700,0,100,H,30); c.fill(); c.beginPath(); c.roundRect(0,490,W,100,30); c.fill();
+  c.strokeStyle="#cdb98a"; c.lineWidth=3; c.beginPath(); c.ellipse(750,540,420,330,0,0,7); c.fillStyle="#e8dcc0"; c.fill(); c.stroke();
+  for(let ring=0;ring<6;ring++){ c.beginPath(); c.ellipse(750,540,120+ring*52,95+ring*40,0,0,7); c.strokeStyle="rgba(150,130,95,.35)"; c.lineWidth=2; c.stroke(); }
+  for(let a=0;a<48;a++){ const t=a/48*Math.PI*2; c.beginPath(); c.moveTo(750+Math.cos(t)*120,540+Math.sin(t)*95); c.lineTo(750+Math.cos(t)*412,540+Math.sin(t)*322); c.strokeStyle="rgba(150,130,95,.18)"; c.stroke(); }
+  c.beginPath(); c.ellipse(750,548,110,80,0,0,7); c.fillStyle="#b9c3c9"; c.fill(); c.strokeStyle="#7d8a92"; c.lineWidth=4; c.stroke();
+  c.beginPath(); c.ellipse(750,545,92,64,0,0,7); c.fillStyle="#6fc1e8"; c.fill();
+  c.beginPath(); c.ellipse(750,540,26,18,0,0,7); c.fillStyle="#b9c3c9"; c.fill(); c.strokeStyle="#7d8a92"; c.stroke();
+  // podium (1st in the middle, higher)
+  const step=(x,y,w,h,col)=>{ c.fillStyle="rgba(60,50,30,.22)"; c.fillRect(x-w/2+4,y+4,w,h); c.fillStyle=col; c.fillRect(x-w/2,y-h,w,h*2); c.strokeStyle="#7a6a45"; c.lineWidth=2; c.strokeRect(x-w/2,y-h,w,h*2); };
+  step(648,345,100,18,"#d9dde2"); step(852,348,100,14,"#e2b07e"); step(750,330,104,26,"#f3cf55");
+  c.fillStyle="#5b4a28"; c.font="bold 16px system-ui"; c.textAlign="center"; c.fillText("1",750,342); c.fillText("2",648,352); c.fillText("3",852,354);
+  const tree=(x,y,r)=>{ c.fillStyle="rgba(30,60,30,.25)"; c.beginPath(); c.ellipse(x+6,y+r*.7,r*.9,r*.35,0,0,7); c.fill();
+    c.fillStyle="#7a5534"; c.fillRect(x-5,y,10,r*.7); c.fillStyle="#4f9a4a"; c.beginPath(); c.arc(x,y-r*.2,r,0,7); c.fill(); c.fillStyle="#62b25a"; c.beginPath(); c.arc(x-r*.3,y-r*.45,r*.55,0,7); c.fill(); };
+  const flowers=(x,y)=>{ c.fillStyle="#6a4a2e"; c.beginPath(); c.ellipse(x,y,46,22,0,0,7); c.fill(); for(let i=0;i<14;i++){ c.fillStyle=["#ff7aa2","#ffd447","#ffffff","#b78cff"][i%4]; c.beginPath(); c.arc(x-34+rnd()*68,y-12+rnd()*24,4,0,7); c.fill(); } };
+  [[180,170,54],[1320,190,60],[160,900,58],[1330,900,52],[420,120,40],[1080,110,44],[90,520,36],[1420,560,40],[460,1010,42],[1060,1000,46]].forEach(t=>tree(...t));
+  [[520,760],[980,760],[470,420],[1030,420]].forEach(f=>flowers(...f));
+  const bench=(x,y)=>{ c.fillStyle="#9b6b3e"; c.fillRect(x-36,y-8,72,10); c.fillRect(x-36,y-20,72,7); c.fillStyle="#5d3f24"; c.fillRect(x-32,y+2,5,10); c.fillRect(x+27,y+2,5,10); };
+  [[600,840],[900,840],[330,560],[1170,560]].forEach(b=>bench(...b));
+  const lamp=(x,y)=>{ c.fillStyle="#3b4a52"; c.fillRect(x-3,y-60,6,60); c.beginPath(); c.arc(x,y-64,10,0,7); c.fillStyle="#ffe58a"; c.fill(); };
+  [[360,420],[1140,420],[360,690],[1140,690]].forEach(l=>lamp(...l)); }
+// one person on the map; kind: me | live | off | pod
+function plzEnt(p,kind){ const R=ROOM, e=document.createElement("div"); e.className="pz-ent pz-"+kind+(R.star&&R.star.id===p.id?" pz-star":"");
+  const ex=lookExtra(p.id), tier=p.s!=null?p.s:ex.t;
+  e.innerHTML=`<div class="pz-sh"></div><div class="pz-bob"><div class="pz-fig">${lookArt(p.look,"pz-art")}</div></div><div class="pz-tag">${kind==="pod"?(PLZ_PODIUM[p.rank]||{}).m+" ":""}${tier?`<span class="pz-tt">${sbArt(tier,14,false)}</span>`:""}${flagOf(p.flag)?flagOf(p.flag)+" ":""}${esc(kind==="me"?T("plzMe"):p.name||"?")}${kind==="off"?` <small>${T("plzOff")}</small>`:""}</div><div class="pz-bub"></div>`;
+  R.world.appendChild(e); const [x,y]=p.x!=null?[p.x,p.y]:plzSpot();
+  const o={...p, kind, el:e, bob:e.querySelector(".pz-bob"), fig:e.querySelector(".pz-fig"), bub:e.querySelector(".pz-bub"), x, y, tx:x, ty:y, vx:0, vy:0, face:p.d||1, phase:Math.random()*6, wait:Math.random()*2, sp:plzRnd(45,75), bubT:0, said:0};
+  e.addEventListener("click",ev=>{ if(R.dragged) return; ev.stopPropagation(); plzCard(o); });
+  return o; }
+function plzSay(o,t){ o.bub.textContent=t; o.bub.classList.add("on"); o.bubT=2.6; }
+function plzMeRow(){ const g=game(), e=lbEntry(); return {id:CLOUD.user.uid, name:g.nick||"", look:myLook(), flag:e.flag, s:streakTier(), lv:e.lv, power:e.power, conq:e.conq}; }
+function plzRebuild(){ const R=ROOM; if(!R) return; const keep=new Set([R.me.id]);
+  // podium
+  (R.top||[]).slice(0,3).forEach((p,i)=>{ const k="pod:"+p.id; keep.add(k); if(!R.ents.has(k)){ const o=plzEnt({...p,rank:i,x:PLZ_PODIUM[i].x,y:PLZ_PODIUM[i].y,d:i===1?1:i===2?-1:1},"pod"); R.ents.set(k,o); } });
+  // live players
+  for(const [uid,v] of R.live){ keep.add(uid); if(!R.ents.has(uid)) R.ents.set(uid,plzEnt({id:uid,name:v.n,look:v.l,flag:v.f,s:v.s,x:v.x,y:v.y,d:v.d},"live")); }
+  // offline fill
+  let n=[...R.ents.values()].filter(o=>o.kind==="live").length+1;
+  for(const p of R.rows||[]){ if(n>=PLZ_MAX) break; if(p.id===R.me.id||R.live.has(p.id)) continue; keep.add(p.id); if(!R.ents.has(p.id)) R.ents.set(p.id,plzEnt(p,"off")); n++; }
+  for(const [k,o] of R.ents) if(!keep.has(k)&&o!==R.me){ o.el.remove(); R.ents.delete(k); }
+  const live=[...R.live.keys()].length+1, el=document.getElementById("pzCount"); if(el) el.textContent=T("plzOnline",{n:live, c:R.ch||1}); }
+async function plazaOpen(zone){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD.fb) return; zone=PLZ_ZONES.some(z=>z.k===zone)?zone:"fountain"; if(!game().nick||!myLook()) return toast(T("plzNoNick"));
+  const box=document.createElement("div"); box.id="plazaRoom";
+  box.innerHTML=`<div class="pz-stage"><div class="pz-world"><canvas class="pz-ground"></canvas></div></div>
+    <div class="pz-hud"><button class="pz-pill" data-pz="close">← ${T("plzBack")}</button><button class="pz-pill" data-pz="zones">${PLZ_ZONES.find(z=>z.k===zone).ic} ${T("plzZ_"+zone)} ▾</button><span class="pz-pill pz-cnt" id="pzCount">${T("loading")}</span></div><div class="pz-zones" hidden></div>
+    <div class="pz-emo">${PLZ_EMO.map(x=>`<button data-pz="emo" data-k="${x}">${x}</button>`).join("")}</div>
+    <div class="pz-joy"><i></i></div><div class="pz-hint">${T("plzHint")}</div>`;
+  document.body.appendChild(box); document.body.classList.add("pz-open");
+  const stage=box.querySelector(".pz-stage"), world=box.querySelector(".pz-world"); world.style.width=PLZ_W+"px"; world.style.height=PLZ_H+"px"; plzGround(box.querySelector(".pz-ground"));
+  ROOM={zone, box, stage, world, ents:new Map(), live:new Map(), rows:(PLAZA.rows||[]), top:PLAZA.top||[], star:PLAZA.star||null, keys:{}, J:null, last:performance.now(), cam:null, sendAt:0, sent:"", db:null, ch:0};
+  const me=plzMeRow(); const [sx,sy]=[750+plzRnd(-120,120),780]; ROOM.me=plzEnt({...me,x:sx,y:sy},"me"); ROOM.ents.set(me.id,ROOM.me); ROOM.cam={x:sx,y:sy};
+  plzRebuild(); plzInput(); ROOM.raf=requestAnimationFrame(plzStep);
+  plazaLoad(true).then(()=>{ if(!ROOM) return; ROOM.rows=PLAZA.rows||[]; ROOM.top=PLAZA.top||[]; ROOM.star=PLAZA.star||null; plzRebuild(); });
+  plzJoin(); }
+function plazaClose(){ const R=ROOM; if(!R) return; ROOM=null; cancelAnimationFrame(R.raf); removeEventListener("keydown",R.kd); removeEventListener("keyup",R.ku);
+  try{ if(R.unsub) R.unsub.forEach(f=>f()); if(R.myRef) R.dbM.remove(R.myRef); }catch(e){} R.box.remove(); document.body.classList.remove("pz-open"); }
+// live part: Realtime Database (loaded only when the room opens)
+async function plzJoin(){ const R=ROOM; try{
+    const dbM=PLZ_DBM||await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-database.js`); if(ROOM!==R) return;
+    const db=dbM.getDatabase(CLOUD.fb.app, PLZ_DB_URL), me=R.me.id, now=Date.now(); R.dbM=dbM; R.db=db;
+    let ch=1; for(;ch<=PLZ_CHS;ch++){ const sn=await dbM.get(dbM.ref(db,`plaza/${R.zone}-${ch}`)); const v=sn.val()||{}; const n=Object.entries(v).filter(([u,x])=>u!==me&&x&&now-(x.ts||0)<PLZ_STALE).length; if(n<PLZ_CAP) break; }
+    if(ROOM!==R) return; R.ch=Math.min(ch,PLZ_CHS); R.myRef=dbM.ref(db,`plaza/${R.zone}-${R.ch}/${me}`);
+    await dbM.onDisconnect(R.myRef).remove(); await plzSend(true);
+    const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
+        const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
+        const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; plzSay(o,v.b); } } };
+    R.unsub=[dbM.onChildAdded(room,up), dbM.onChildChanged(room,up), dbM.onChildRemoved(room,sn=>{ if(!ROOM) return; R.live.delete(sn.key); const o=R.ents.get(sn.key); if(o&&o.kind==="live"){ o.el.remove(); R.ents.delete(sn.key); } plzRebuild(); })];
+    R.hb=setInterval(()=>{ if(ROOM===R) plzSend(true); else clearInterval(R.hb); },15e3);
+    plzRebuild();
+  }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
+async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
+  const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
+  const v={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv, ts:R.dbM.serverTimestamp(), ...(extra||{})};
+  try{ await R.dbM.set(R.myRef,v); }catch(e){} }
+function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"), knob=joy.firstElementChild;
+  st.addEventListener("pointerdown",ev=>{ R.J={id:ev.pointerId,x0:ev.clientX,y0:ev.clientY,dx:0,dy:0,moved:false}; R.dragged=false; });
+  st.addEventListener("pointermove",ev=>{ const J=R.J; if(!J||ev.pointerId!==J.id) return; let dx=ev.clientX-J.x0, dy=ev.clientY-J.y0; const d=Math.hypot(dx,dy);
+    if(!J.moved&&d>10){ J.moved=true; R.dragged=true; try{ st.setPointerCapture(ev.pointerId); }catch(e){} joy.style.display="block"; joy.style.left=J.x0+"px"; joy.style.top=J.y0+"px"; const h=R.box.querySelector(".pz-hint"); if(h) h.style.opacity=0; }
+    if(d>45){ dx*=45/d; dy*=45/d; } J.dx=dx/45; J.dy=dy/45; knob.style.transform=`translate(${dx}px,${dy}px)`; });
+  const end=ev=>{ if(!R.J||ev.pointerId!==R.J.id) return; R.J=null; joy.style.display="none"; knob.style.transform=""; setTimeout(()=>{ R.dragged=false; },0); };
+  st.addEventListener("pointerup",end); st.addEventListener("pointercancel",end);
+  R.kd=e=>{ if(/INPUT|TEXTAREA/.test(e.target.tagName)) return; R.keys[e.key.toLowerCase()]=1; if(e.key==="Escape") plazaClose(); }; R.ku=e=>{ R.keys[e.key.toLowerCase()]=0; };
+  addEventListener("keydown",R.kd); addEventListener("keyup",R.ku);
+  R.box.addEventListener("click",e=>{ const b=e.target.closest("[data-pz]"); if(!b) return; const a=b.dataset.pz;
+    if(a==="close") return plazaClose();
+    if(a==="zones") return plzZones();
+    if(a==="zone"){ const z=b.dataset.k; if(z!==R.zone) plazaOpen(z); else R.box.querySelector(".pz-zones").hidden=true; return; }
+    if(a==="emo"){ plzSay(R.me,b.dataset.k); plzSend(false,{b:b.dataset.k, bt:Date.now()}); } }); }
+function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R.last)/1000); R.last=now; const K=R.keys, m=R.me;
+  let ix=(K.arrowright||K.d?1:0)-(K.arrowleft||K.a?1:0), iy=(K.arrowdown||K.s?1:0)-(K.arrowup||K.w?1:0);
+  if(R.J&&R.J.moved){ ix=R.J.dx; iy=R.J.dy; } const mg=Math.hypot(ix,iy); if(mg>1){ ix/=mg; iy/=mg; }
+  m.vx=ix*170; m.vy=iy*170; m.mv=mg>.05; const ox=m.x, oy=m.y; if(!plzBlocked(m.x+m.vx*dt,m.y)) m.x+=m.vx*dt; if(!plzBlocked(m.x,m.y+m.vy*dt)) m.y+=m.vy*dt;
+  if(Math.abs(m.vx)>4) m.face=m.vx<0?-1:1; if(m.mv||ox!==m.x||oy!==m.y) plzSend(false); else if(R.sent&&R.sent.endsWith(",1")) plzSend(false);
+  for(const o of R.ents.values()){ if(o===m) continue;
+    if(o.kind==="live"){ const dx=o.tx-o.x, dy=o.ty-o.y, d=Math.hypot(dx,dy); if(d>300){ o.x=o.tx; o.y=o.ty; } else if(d>1){ const k=Math.min(1,dt*8); o.x+=dx*k; o.y+=dy*k; } o.vx=d>2?dx:0; o.vy=d>2?dy:0; }
+    else if(o.kind==="off"){ if(o.wait>0){ o.wait-=dt; o.vx=o.vy=0; if(o.wait<=0){ [o.tx,o.ty]=plzSpot(); } }
+      else { const dx=o.tx-o.x, dy=o.ty-o.y, d=Math.hypot(dx,dy); if(d<6){ o.wait=plzRnd(1,4.5); }
+        else { o.vx=dx/d*o.sp; o.vy=dy/d*o.sp; const px=o.x, py=o.y; if(!plzBlocked(o.x+o.vx*dt,o.y)) o.x+=o.vx*dt; if(!plzBlocked(o.x,o.y+o.vy*dt)) o.y+=o.vy*dt; if(Math.abs(o.x-px)+Math.abs(o.y-py)<.01) o.wait=.5; } } }
+    else { o.vx=o.vy=0; }
+    if(o.kind!=="live"&&Math.hypot(o.x-m.x,o.y-m.y)<95&&!(o.vx||o.vy)){ o.face=m.x<o.x?-1:1; if(o.kind==="off"&&now/1000-o.said>15){ o.said=now/1000; plzSay(o,"👋"); } } }
+  const reduce=rigReduced&&rigReduced();
+  for(const o of R.ents.values()){ const mv=o===m?m.mv:(o.kind==="live"?(o.mv||Math.hypot(o.vx,o.vy)>2):Math.hypot(o.vx,o.vy)>1); if(o!==m&&o.kind!=="live"&&Math.abs(o.vx)>4) o.face=o.vx<0?-1:1;
+    o.phase+=dt*(mv?13:2.2); const b=reduce?0:(mv?-Math.abs(Math.sin(o.phase))*6:Math.sin(o.phase)*1.2), r=reduce||!mv?0:Math.sin(o.phase)*4, sq=mv?1+Math.abs(Math.sin(o.phase))*.03:1+Math.sin(o.phase)*.01;
+    o.el.style.transform=`translate(${o.x.toFixed(1)}px,${o.y.toFixed(1)}px)`; o.el.style.zIndex=Math.round(o.y);
+    o.bob.style.transform=`translateY(${b.toFixed(1)}px) rotate(${r.toFixed(1)}deg) scale(${(1/sq).toFixed(3)},${sq.toFixed(3)})`; o.fig.style.transform=o.face<0?"scaleX(-1)":"";
+    if(o.bubT>0){ o.bubT-=dt; if(o.bubT<=0) o.bub.classList.remove("on"); } }
+  const vw=R.stage.clientWidth, vh=R.stage.clientHeight, z=vw<600?1:1.15; R.cam.x+=(m.x-R.cam.x)*Math.min(1,dt*6); R.cam.y+=(m.y-60-R.cam.y)*Math.min(1,dt*6);
+  const cx=Math.max(vw/2/z,Math.min(PLZ_W-vw/2/z,R.cam.x)), cy=Math.max(vh/2/z-70,Math.min(PLZ_H-vh/2/z,R.cam.y));   // 70px of sky above the map keeps the podium clear of the top bar
+  R.world.style.transform=`scale(${z}) translate(${(vw/2/z-cx).toFixed(1)}px,${(vh/2/z-cy).toFixed(1)}px)`;
+  R.raf=requestAnimationFrame(plzStep); }
+// zone picker: how many people are in the first channel of each area
+async function plzZones(){ const R=ROOM; if(!R) return; const el=R.box.querySelector(".pz-zones"); if(!el.hidden){ el.hidden=true; return; }
+  const draw=n=>{ el.innerHTML=`<b>${T("plzZones")}</b>`+PLZ_ZONES.map(z=>`<button data-pz="zone" data-k="${z.k}" class="${z.k===R.zone?"on":""}"><span>${z.ic}</span><span><b>${T("plzZ_"+z.k)}</b><small>${T("plzZd_"+z.k)}</small></span><em>${n&&n[z.k]!=null?T("plzZn",{n:n[z.k]}):""}</em></button>`).join(""); };
+  draw(null); el.hidden=false; if(!R.dbM||!R.db) return;
+  try{ const now=Date.now(), n={}; await Promise.all(PLZ_ZONES.map(async z=>{ const v=(await R.dbM.get(R.dbM.ref(R.db,`plaza/${z.k}-1`))).val()||{}; n[z.k]=Object.values(v).filter(x=>x&&now-(x.ts||0)<PLZ_STALE).length; })); if(ROOM===R&&!el.hidden) draw(n); }catch(e){} }
+// player card + likes (one like per player per week)
+const plzWeek=()=>isoWeek().id;
+async function plzCard(o){ lookCard({id:o.id, name:o.kind==="me"?game().nick:o.name, look:o.look, lv:o.lv, power:o.power, conq:o.conq, flag:o.flag});
+  const el=document.getElementById("rkLook"); if(!el) return; const card=el.querySelector(".pd-card"); if(!card||!CLOUD.fb) return;
+  const row=document.createElement("div"); row.className="pz-like"; row.innerHTML=`<span class="muted sm-t">${T("loading")}</span>`; card.insertBefore(row,card.querySelector(".btn:last-child"));
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, wk=plzWeek(), mine=o.id===me;
+  try{ const [c,g]=await Promise.all([fsM.getDoc(fsM.doc(db,"likeWeeks",wk,"u",o.id)), mine?null:fsM.getDoc(fsM.doc(db,"likeGiven",`${wk}_${me}_${o.id}`))]);
+    const n=c.exists()?(c.data().n||0):0, done=g&&g.exists(), star=ROOM&&ROOM.star&&ROOM.star.id===o.id;
+    row.innerHTML=`${star?`<span class="pz-starTag">✨ ${T("plzStar")}</span>`:""}<span class="pz-likeN">👍 ${T("plzLikes",{n})}</span>${mine?"":`<button class="btn sm${done?" ghost":""}" ${done?"disabled":""} data-like="${esc(o.id)}">${done?T("plzLiked"):T("plzLike")}</button>`}`;
+    const b=row.querySelector("[data-like]"); if(b) b.onclick=async ev=>{ ev.stopPropagation(); b.disabled=true;
+      try{ const B=fsM.writeBatch(db), ref=fsM.doc(db,"likeWeeks",wk,"u",o.id);
+        B.set(fsM.doc(db,"likeGiven",`${wk}_${me}_${o.id}`),{from:me, to:o.id, w:wk});
+        if(c.exists()) B.update(ref,{n:fsM.increment(1)}); else B.set(ref,{n:1, name:String(o.name||"").slice(0,16)});
+        await B.commit(); row.querySelector(".pz-likeN").textContent="👍 "+T("plzLikes",{n:n+1}); b.textContent=T("plzLiked"); b.classList.add("ghost"); if(ROOM) plzSay(o,"😊"); }
+      catch(e){ console.warn("like",e&&(e.code||e.message)); b.disabled=false; toast(T("syncFail")); } }; }
+  catch(e){ row.innerHTML=""; } }
 
 /* ================= free IG membership =================
    With paid plans off, the old member features (close listening, weekly review) open for players who follow BinBin on IG:
@@ -8908,6 +9061,22 @@ Object.assign(STR.hi,{"plzT": "चौक", "plzSub": "हाल में ऑन
 Object.assign(STR.es,{"plzT": "Plaza", "plzSub": "{n} aventureros conectados hace poco; toca uno para ver su equipo", "plzMe": "Yo", "plzNoNick": "Elige un apodo y tu personaje también aparecerá en la plaza."});
 Object.assign(STR.ja,{"plzT": "広場", "plzSub": "最近ログインした冒険者 {n} 人。タップして装備を見てみよう", "plzMe": "自分", "plzNoNick": "ニックネームを決めると、あなたのキャラも広場に出ます。"});
 Object.assign(STR.ko,{"plzT": "광장", "plzSub": "최근 접속한 모험가 {n}명, 눌러서 장비를 구경해 보세요", "plzMe": "나", "plzNoNick": "닉네임을 정하면 내 캐릭터도 광장에 나와요."});
+Object.assign(STR.zh,{"plzGo": "進入廣場走走", "plzBack": "離開", "plzOff": "離線", "plzOnline": "🟢 {n} 人在線 · {c} 線", "plzSolo": "目前只有離線玩家", "plzHint": "按住畫面拖曳就能走路 · 點別人看裝備", "plzLikes": "本週 {n} 個讚", "plzLike": "按讚", "plzLiked": "已按讚", "plzStar": "上週最多讚"});
+Object.assign(STR.en,{"plzGo": "Walk around the plaza", "plzBack": "Leave", "plzOff": "offline", "plzOnline": "🟢 {n} online · room {c}", "plzSolo": "Only offline players right now", "plzHint": "Drag anywhere to walk · tap someone to see their gear", "plzLikes": "{n} likes this week", "plzLike": "Like", "plzLiked": "Liked", "plzStar": "Most liked last week"});
+Object.assign(STR.hi,{"plzGo": "चौक में घूमें", "plzBack": "बाहर", "plzOff": "ऑफ़लाइन", "plzOnline": "🟢 {n} ऑनलाइन · चौक {c}", "plzSolo": "अभी केवल ऑफ़लाइन खिलाड़ी", "plzHint": "चलने के लिए कहीं भी खींचें · सामान देखने के लिए टैप करें", "plzLikes": "इस हफ़्ते {n} लाइक", "plzLike": "लाइक", "plzLiked": "लाइक किया", "plzStar": "पिछले हफ़्ते सबसे ज़्यादा लाइक"});
+Object.assign(STR.es,{"plzGo": "Pasear por la plaza", "plzBack": "Salir", "plzOff": "desconectado", "plzOnline": "🟢 {n} conectados · plaza {c}", "plzSolo": "Ahora solo hay jugadores desconectados", "plzHint": "Arrastra para caminar · toca a alguien para ver su equipo", "plzLikes": "{n} me gusta esta semana", "plzLike": "Me gusta", "plzLiked": "Te gusta", "plzStar": "Más me gusta la semana pasada"});
+Object.assign(STR.ja,{"plzGo": "広場を歩く", "plzBack": "出る", "plzOff": "オフライン", "plzOnline": "🟢 {n}人オンライン · 第{c}広場", "plzSolo": "今はオフラインのプレイヤーだけです", "plzHint": "画面をドラッグして歩く · タップで装備を見る", "plzLikes": "今週 {n} いいね", "plzLike": "いいね", "plzLiked": "いいね済み", "plzStar": "先週いちばんいいね"});
+Object.assign(STR.ko,{"plzGo": "광장 걷기", "plzBack": "나가기", "plzOff": "오프라인", "plzOnline": "🟢 {n}명 접속 · {c}번 광장", "plzSolo": "지금은 오프라인 플레이어만 있어요", "plzHint": "화면을 드래그해 걷기 · 눌러서 장비 보기", "plzLikes": "이번 주 좋아요 {n}개", "plzLike": "좋아요", "plzLiked": "좋아요 함", "plzStar": "지난주 좋아요 1위"});
+Object.assign(STR.zh,{"plzZones": "選擇區域（每區最多 10 人）", "plzZn": "{n}/10", "plzZ_fountain": "噴泉花園", "plzZd_fountain": "許願池、聊天集合點", "plzZ_gate": "大門廣場", "plzZd_gate": "拍照打卡", "plzZ_pond": "鴨子湖", "plzZd_pond": "餵鴨子、釣單字", "plzZ_band": "音樂台", "plzZd_band": "跳舞、聽力挑戰", "plzZ_lawn": "大草坪", "plzZd_lawn": "野餐、字根搶答"});
+Object.assign(STR.en,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.hi,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.es,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.ja,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.ko,{"plzZones": "Choose an area (up to 10 people each)", "plzZn": "{n}/10", "plzZ_fountain": "Fountain garden", "plzZd_fountain": "Wishing well, meeting spot", "plzZ_gate": "Gate plaza", "plzZd_gate": "Photo spot", "plzZ_pond": "Duck pond", "plzZd_pond": "Feed ducks, fish for words", "plzZ_band": "Bandstand", "plzZd_band": "Dance, listening challenge", "plzZ_lawn": "The lawn", "plzZd_lawn": "Picnic, root rush"});
+Object.assign(STR.hi,{"plzZones": "जगह चुनें (हर जगह अधिकतम 10 लोग)", "plzZ_fountain": "फव्वारा बाग़", "plzZd_fountain": "विशिंग वेल, मिलने की जगह", "plzZ_gate": "द्वार चौक", "plzZd_gate": "फ़ोटो स्पॉट", "plzZ_pond": "बत्तख तालाब", "plzZd_pond": "बत्तखों को खिलाएँ, शब्द पकड़ें", "plzZ_band": "बैंडस्टैंड", "plzZd_band": "नाच, सुनने की चुनौती", "plzZ_lawn": "बड़ा लॉन", "plzZd_lawn": "पिकनिक, रूट रश"});
+Object.assign(STR.es,{"plzZones": "Elige una zona (máx. 10 personas)", "plzZ_fountain": "Jardín de la fuente", "plzZd_fountain": "Pozo de los deseos, punto de encuentro", "plzZ_gate": "Plaza de la puerta", "plzZd_gate": "Rincón de fotos", "plzZ_pond": "Estanque de patos", "plzZd_pond": "Dar de comer a los patos, pescar palabras", "plzZ_band": "Quiosco de música", "plzZd_band": "Baile, reto de escucha", "plzZ_lawn": "El césped", "plzZd_lawn": "Pícnic, carrera de raíces"});
+Object.assign(STR.ja,{"plzZones": "エリアを選ぶ（各エリア最大10人）", "plzZ_fountain": "噴水ガーデン", "plzZd_fountain": "願いの泉、待ち合わせ", "plzZ_gate": "門の広場", "plzZd_gate": "写真スポット", "plzZ_pond": "カモの池", "plzZd_pond": "カモにえさ、単語つり", "plzZ_band": "音楽堂", "plzZd_band": "ダンス、リスニング対決", "plzZ_lawn": "大芝生", "plzZd_lawn": "ピクニック、語根早押し"});
+Object.assign(STR.ko,{"plzZones": "구역 선택 (구역당 최대 10명)", "plzZ_fountain": "분수 정원", "plzZd_fountain": "소원의 우물, 모임 장소", "plzZ_gate": "정문 광장", "plzZd_gate": "사진 명소", "plzZ_pond": "오리 연못", "plzZd_pond": "오리 먹이 주기, 단어 낚시", "plzZ_band": "음악당", "plzZd_band": "댄스, 듣기 챌린지", "plzZ_lawn": "큰 잔디밭", "plzZd_lawn": "피크닉, 어근 퀴즈"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
