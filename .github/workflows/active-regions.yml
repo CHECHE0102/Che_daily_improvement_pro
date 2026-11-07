@@ -3,6 +3,9 @@ name: Export active news regions
 # and saves it to articles/active-regions.json so the daily regional news task can read it.
 on:
   schedule:
+    # GitHub runs scheduled jobs late on this repo (05:00 runs landed 11:30-13:00 UTC),
+    # so also run the evening before; either run is fresh enough for the 6-day window.
+    - cron: '23 18 * * *'
     - cron: '0 5 * * *'
   workflow_dispatch:
 permissions:
