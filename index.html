@@ -940,7 +940,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .exam-seg{margin-bottom:10px}.to-chip{display:inline-flex;align-items:baseline;gap:6px;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--tc) 18%,transparent);border:2px solid var(--tc)}.to-chip b{color:var(--tc);font-size:16px}.to-chip small{font-size:11px;color:var(--tc);font-weight:700}.to-chip.big{padding:8px 16px}.to-chip.big b{font-size:34px}
 .to-tiers{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.to-tier{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 9px;border-radius:99px;border:1px solid var(--line,#ccd)}.to-tier i{width:12px;height:12px;border-radius:50%;background:var(--tc)}
 .to-grp{display:flex;flex-direction:column;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line,#ccd)}.to-doc{border-left:3px solid var(--accent);padding-left:12px}.to-doc .eyebrow{margin-bottom:2px}.to-blank{font-weight:800;color:var(--accent);text-decoration:underline}.to-tabs{flex-wrap:wrap}
-img.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}.mesh-on .foe .mon-seal{background:none;box-shadow:none;animation:none;filter:none;transform:none}.mesh-on .foe .mon-seal>*{visibility:hidden}.train-card{padding:10px}.train-arena{margin:0}.rig-on .fighter.hero{z-index:2}.rig-on .foe:not(.hurt) .mon-seal{animation:none}.rig-host{position:relative;width:100%;height:100%}.rig-cv{position:absolute;left:-20%;top:-30%;width:300%;height:140%;pointer-events:none}.rig-mon{position:relative;display:block}.rig-mon img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;user-select:none}.tr-line{text-align:center;margin:6px 0 0}.tr-act{justify-content:center;margin-top:8px}
+img.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}.mesh-on .foe .mon-seal{background:none;box-shadow:none;animation:none;filter:none;transform:none}.mesh-on .foe .mon-seal>*{visibility:hidden}.mesh-pend .foe .mon-seal{background:none;box-shadow:none}.mesh-pend .foe .ms-badge{visibility:hidden}.mesh-glow{position:absolute;left:50%;top:50%;width:125%;aspect-ratio:1;border-radius:50%;pointer-events:none;z-index:2;opacity:0;mix-blend-mode:screen;background:radial-gradient(circle,#fff 0,var(--c1) 20%,color-mix(in srgb,var(--c2) 70%,transparent) 42%,transparent 68%);transform:translate(-50%,-50%) scale(.5);animation:mglow .65s ease-out .2s}.mesh-glow.s3,.mesh-glow.s4{width:155%}@keyframes mglow{0%{opacity:0;transform:translate(-50%,-50%) scale(.45)}22%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.15)}}.train-card{padding:10px}.train-arena{margin:0}.rig-on .fighter.hero{z-index:2}.rig-on .foe:not(.hurt) .mon-seal{animation:none}.rig-host{position:relative;width:100%;height:100%}.rig-cv{position:absolute;left:-20%;top:-30%;width:300%;height:140%;pointer-events:none}.rig-mon{position:relative;display:block}.rig-mon img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;user-select:none}.tr-line{text-align:center;margin:6px 0 0}.tr-act{justify-content:center;margin-top:8px}
 .tr-seg{display:flex;flex-wrap:wrap;gap:6px}.tr-seg button{border:1.5px solid var(--line,#ddd);background:var(--card,#fff);color:inherit;font:inherit;font-size:13px;font-weight:700;border-radius:99px;padding:6px 10px;display:inline-flex;align-items:center;gap:4px;cursor:pointer}.tr-seg button.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--card,#fff));color:var(--accent)}.tr-tier button{min-width:44px;justify-content:center}
 .adv-quick{grid-column:1/-1;display:flex;justify-content:center;gap:14px;margin-top:6px;padding-top:10px;border-top:1px dashed color-mix(in srgb,var(--hs-tint,#C8B89A) 45%,transparent)}.aq-card .adv-quick{border-top:0;margin:0;padding:0}
 .aq-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 6px;color:inherit;font:inherit;font-size:13px;font-weight:700;min-width:64px;cursor:pointer}
@@ -3801,7 +3801,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.36";
+const APP_VERSION="2026.11.37";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6379,13 +6379,15 @@ function monDraw(t,box){
   gl.bindBuffer(gl.ARRAY_BUFFER,C.ub); const aU=gl.getAttribLocation(MR.prog,"aU"); gl.enableVertexAttribArray(aU); gl.vertexAttribPointer(aU,2,gl.FLOAT,false,0,0);
   gl.bindBuffer(gl.ARRAY_BUFFER,C.pb); gl.bufferData(gl.ARRAY_BUFFER,clip,gl.DYNAMIC_DRAW); const aP=gl.getAttribLocation(MR.prog,"aP"); gl.enableVertexAttribArray(aP); gl.vertexAttribPointer(aP,2,gl.FLOAT,false,0,0);
   gl.bindTexture(gl.TEXTURE_2D,C.tex[MR.face]||C.tex.calm);
-  const fl=MR.act==="hit"?rigNum([[0,.85],[90,.6],[200,0]],dt):0;
+  const fl=MR.act==="hit"?rigNum([[0,1],[130,.8],[340,0]],dt):0;
   gl.uniform1f(gl.getUniformLocation(MR.prog,"uF"),fl); gl.uniform1f(gl.getUniformLocation(MR.prog,"uR"),0);
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,C.ib); gl.drawElements(gl.TRIANGLES,C.n,gl.UNSIGNED_SHORT,0);
 }
 function monPlay(act,cb){ MR.act=act; MR.t0=performance.now(); MR.keys=act==="atk"?M_ATK:act==="brace"?M_BRACE:mHit(1); MR.impactDone=act!=="atk"; MR.impactCb=cb||null; }
 
 const MESH={pk:null,cv:null,ready:false,busy:false,raf:0};
+/* impact glow in the weapon's colours: with the mesh there is no coloured card behind the monster any more, so this takes over the card's bright hit flash */
+function meshGlow(w,lv){ const [c1,c2]=FX_COL[w&&w.el]||FX_COL.metal; return `<span class="mesh-glow s${lv}" style="--c1:${c1};--c2:${c2}" aria-hidden="true"></span>`; }
 function meshBox(ar){ const a=ar.getBoundingClientRect(), se=ar.querySelector("#trFoe .mon-seal"); if(!se) return null; const r=se.getBoundingClientRect(), s=r.width*1.12;
   return {x:r.left-a.left+(r.width-s)/2, y:r.bottom-a.top-s, s}; }
 function meshTick(){ MESH.raf=0; const cv=document.getElementById("trMonCv"), R=S.train; if(!cv||!R) return;
@@ -6407,8 +6409,8 @@ function trainScene(){
   const hero=g.gender?rigHeroHtml(g.gender, w, g.armor&&ITEMS[g.armor], old):heroSvg(), rig=hero.includes("rig-host");
   const hl=h?(h.crit?3:2):0, mult=elMult(R.el,m.el);
   const mesh=rig&&!!(RIG.man&&RIG.man.t[picOfMon(m)]); if(mesh) meshStart();
-  return `<div class="arena2 train-arena${rig?" rig-on":""}">${mesh?`<canvas id="trMonCv" class="mon-cv" aria-hidden="true"></canvas>`:""}<div class="fighter hero${h&&!rig?" atk":""}"><div class="f-name">${esc(g.nick||T("hero"))} · Lv ${g.lv}</div><div class="f-stage">${hero}</div></div>
-    <div class="fighter foe${h?" hurt hs"+hl:""}" id="trFoe"><div class="f-name">${esc(monName(m))} · ${elBadge(m.el)}</div><div class="f-stage">${rig?rigMonHtml(m,h?"hurt":R.busy?"angry":null):monArt(m)}${h?`${atkFx(w,h.crit)}${hitBurst(hl,"you")}<span class="dmg foe-hit s${hl}${h.crit?" crit":""}" style="animation-name:float">-${h.dmg}${h.crit?"<small>CRIT!</small>":""}</span>`:""}</div></div></div>
+  return `<div class="arena2 train-arena${rig?" rig-on":""}${mesh?" mesh-pend":""}">${mesh?`<canvas id="trMonCv" class="mon-cv" aria-hidden="true"></canvas>`:""}<div class="fighter hero${h&&!rig?" atk":""}"><div class="f-name">${esc(g.nick||T("hero"))} · Lv ${g.lv}</div><div class="f-stage">${hero}</div></div>
+    <div class="fighter foe${h?" hurt hs"+hl:""}" id="trFoe"><div class="f-name">${esc(monName(m))} · ${elBadge(m.el)}</div><div class="f-stage">${rig?rigMonHtml(m,h?"hurt":R.busy?"angry":null):monArt(m)}${h?`${mesh?meshGlow(w,hl):""}${atkFx(w,h.crit)}${hitBurst(hl,"you")}<span class="dmg foe-hit s${hl}${h.crit?" crit":""}" style="animation-name:float">-${h.dmg}${h.crit?"<small>CRIT!</small>":""}</span>`:""}</div></div></div>
     <p class="sm-t tr-line">${mult>1?`✅ ${T("trAdv",{w:elName(R.el),m:elName(m.el)})}`:mult<1?`⚠️ ${T("trDis",{w:elName(R.el),m:elName(m.el)})}`:T("trEven")}${R.n?` · ${T("trTotal",{n:R.n,d:R.sum})}`:""}</p>`;
 }
 function trainPatch(){ const b=document.getElementById("trStage"); if(!b) return; const tmp=document.createElement("div"); tmp.innerHTML=trainScene();
