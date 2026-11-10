@@ -2490,11 +2490,12 @@ function statsAt(lv){
 }
 /* Town and wild monster strength = statsAt(level) × a multiplier per town / per level, fitted by simulation:
    a town can be attacked TOWN_EARLY levels before its own level; at that point a player with plain gear of their tier
-   (no gems, no element advantage) wins about 60% of the time, with gems or the right element about 90%.
-   A wild monster of your own level: about 70% with plain gear, 95%+ with gems. */
+   (no gems, no element advantage) still wins at least ~35% of the time (CheChe 2026-11-10: never below 30%),
+   with full gems or the right element nearly always. A wild monster of your own level: ~35%+ with plain gear even with the worst-matched ally of the day, a
+   near-certain win with gems or the right element (re-fitted 2026-11-10, earlier values left plain gear at 0%). */
 const TOWN_EARLY=3;
-const TOWN_K=[2.44,2.06,1.77,1.6,1.82,1.82,1.91,1.83,1.77,1.72,1.72,2.03,2,1.92,1.84,1.81,1.71,1.55,1.49,1.63,1.51,1.47,1.37,1.27,1.2,1.17,1.1,1.25,1.19,1.16,1.12,1];
-const WILD_K=[2.56,2.5,2.39,2.46,2.47,2.54,2.39,2.5,2.41,2.31,2.19,2.13,2.5,2.47,2.34,2.29,2.22,2.18,2.12,2.08,1.97,1.87,1.78,2.15,2.16,2.25,2.25,2.12,2.05,2.07,1.94,1.96,1.84,1.79,1.83,1.7,1.75,1.65,1.82,1.84,1.74,1.79,1.7,1.65,1.7,1.59,1.64,1.56,1.51,1.57];
+const TOWN_K=[2.44,2.06,1.77,1.6,1.53,1.42,1.45,1.3,1.18,1.08,1.06,1.36,1.29,1.21,1.13,1.11,1.04,1,0.98,1.2,1.14,1.13,1.08,1.04,1.01,1,0.97,1.15,1.12,1.11,1.08,1];
+const WILD_K=[2.56,2.47,2.13,2.03,1.96,1.85,1.71,1.67,1.56,1.47,1.39,1.32,1.7,1.62,1.53,1.46,1.4,1.37,1.3,1.27,1.22,1.18,1.16,1.5,1.47,1.67,1.62,1.56,1.53,1.5,1.45,1.42,1.39,1.36,1.33,1.3,1.28,1.24,1.45,1.42,1.4,1.38,1.36,1.34,1.32,1.3,1.29,1.27,1.25,1.24];
 const BALOR={hp:1394,atk:125,def:52,exp:900,gold:400};   // fully gemmed Lv 50 with a neutral element wins ~70%; water gear with half the sockets ~95%
 const scaleSt=(st,k)=>({...st, hp:Math.round(st.hp*k), atk:Math.round(st.atk*k), def:Math.round(st.def*k)});
 const TJK={donegal:["ドニゴール","도니골"],kinsale:["キンセール","킨세일"],castlebar:["キャッスルバー","캐슬바"],clonmel:["クロンメル","클론멜"],mullingar:["マリンガー","멀링가"],portlaoise:["ポートリーシュ","포틀리시"],coleraine:["コールレーン","콜레인"],navan:["ナヴァン","나반"],bangor:["バンガー","뱅거"],dingle:["ディングル","딩글"],westport:["ウェストポート","웨스트포트"],killarney:["キラーニー","킬라니"],enniskillen:["エニスキレン","에니스킬렌"],armagh:["アーマー","아마"],sligo:["スライゴ","슬라이고"],wexford:["ウェックスフォード","웩스퍼드"],letterkenny:["レターケニー","레터케니"],athlone:["アスローン","애슬론"],tralee:["トラリー","트랄리"],kilkenny:["キルケニー","킬케니"],newry:["ニューリー","뉴리"],carlow:["カーロウ","칼로"],ennis:["エニス","에니스"],dundalk:["ダンドーク","던독"],drogheda:["ドロヘダ","드로이다"],waterford:["ウォーターフォード","워터퍼드"],derry:["デリー","데리"],galway:["ゴールウェイ","골웨이"],limerick:["リムリック","리머릭"],cork:["コーク","코크"],belfast:["ベルファスト","벨파스트"],dublin:["ダブリン","더블린"]};
@@ -3800,7 +3801,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.35";
+const APP_VERSION="2026.11.36";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
