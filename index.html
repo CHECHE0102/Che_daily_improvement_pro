@@ -428,7 +428,7 @@ header.mast.dev{box-shadow:inset 0 -3px 0 var(--bad)}header.mast.dev .brand::aft
 .ba-card{gap:8px}.ba-pic{width:84px;height:84px;object-fit:contain;margin:0 auto}.ba-cos{display:flex;justify-content:center}.ba-cos .cos-ic{width:84px;height:84px}.ba-name{font-size:18px}.ba-rows{display:grid;grid-template-columns:1fr auto;gap:4px 12px;text-align:left;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 8%,transparent)}.ba-rows b{display:inline-flex;align-items:center;gap:4px;justify-content:flex-end}
 .lg-strip{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:16px;border:1px solid var(--line,#e3e8e5);background:var(--card);color:inherit;font:inherit;cursor:pointer}.lg-strip.ready{border-color:#E3B341;background:color-mix(in srgb,#FFE58A 22%,var(--card))}.lg-strip .lg-badge{display:flex;width:36px;height:36px;align-items:center;justify-content:center;font-size:26px;flex:none}.lg-strip .lg-txt{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}.lg-strip .lg-txt small{font-size:12px}.lg-strip .go{font-weight:800;color:#8A6410;white-space:nowrap}
 #lgPop .pd-scrim{z-index:70}#lgPop .lg-card{z-index:71}.lg-card{gap:10px;max-height:calc(100vh - 40px);overflow-y:auto}.lg-now{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:14px}.lg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.lg-slot{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:12px;background:color-mix(in srgb,var(--ink,#1d2a24) 6%,transparent);font-size:11px;font-weight:700}.lg-slot small{font-weight:600;opacity:.7}.lg-slot span{display:flex;align-items:center;gap:2px}.lg-slot .sty-ic{width:13px;height:13px;vertical-align:0}.lg-slot.big{grid-column:span 2;background:linear-gradient(135deg,#FFE58A,#FFC8E6);color:#5A3300}.lg-slot.cur{outline:2.5px solid #E3B341;outline-offset:-1px}.lg-slot.got{opacity:.55}.lg-slot i{position:absolute;top:2px;right:5px;font-style:normal;color:#1F9E74;font-size:13px}
-.lg-got{font-size:15px}.lg-got .sty-ic{width:16px;height:16px}.lg-mile{font-weight:800;color:#7A3E00;background:color-mix(in srgb,#FFE58A 40%,transparent);border-radius:12px;padding:8px}.lg-note{font-size:13px;border-radius:12px;padding:8px;background:color-mix(in srgb,#E0573B 12%,transparent)}.lg-note.ok{background:color-mix(in srgb,#1F9E74 14%,transparent)}
+.lg-got{font-size:15px}.lg-got .sty-ic{width:16px;height:16px}.lg-mile{font-weight:800;color:#7A3E00;background:color-mix(in srgb,#FFE58A 40%,transparent);border-radius:12px;padding:8px}.lg-note{font-size:13px;border-radius:12px;padding:8px;background:color-mix(in srgb,#E0573B 12%,transparent)}.lg-note.ok{background:color-mix(in srgb,#1F9E74 14%,transparent)}.lg-week{display:flex;justify-content:space-between;gap:4px;padding:8px 6px;border-radius:14px;background:color-mix(in srgb,currentColor 5%,transparent)}.lg-wd{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;min-width:0}.lg-wd small{font-size:11px;opacity:.7}.lg-wd.today small{opacity:1;font-weight:800}.lg-seal{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;box-sizing:border-box}.lg-seal svg{width:18px;height:18px}.lg-seal.s-c{background:#E0573B;color:#fff;box-shadow:inset 0 0 0 2px #E0573B,inset 0 0 0 4px #fff;transform:rotate(-10deg)}.lg-seal.s-x{background:color-mix(in srgb,#8A8F8D 18%,transparent);color:#9AA09E}.lg-seal.s-t{background:#4A8FE0;color:#fff}.lg-seal.s-now{border:2px dashed #E0A23B}.lg-seal.s-none{border:2px solid color-mix(in srgb,currentColor 12%,transparent)}.lg-seal.stamp-in{animation:lgStamp .5s cubic-bezier(.3,1.6,.5,1) both}@keyframes lgStamp{0%{transform:scale(2.2) rotate(-30deg);opacity:0}60%{opacity:1}100%{transform:scale(1) rotate(-10deg);opacity:1}}@media (prefers-reduced-motion:reduce){.lg-seal.stamp-in{animation:none}}
 .lg-more{text-align:left;font-size:13px}.lg-more summary{cursor:pointer;font-weight:700}.lg-ladder{display:flex;flex-direction:column;gap:6px;margin:8px 0}.lg-rung{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:8px;opacity:.55}.lg-rung.got{opacity:1}.lg-rung.now b{color:#8A6410}.lg-sprout{font-size:22px;text-align:center}
 .plan-tag.days{background:color-mix(in srgb,#E0573B 16%,transparent);color:#9A3412}.plan-tag.days.ok{background:color-mix(in srgb,#1F9E74 16%,transparent);color:#146C50}.ie-show{display:flex;gap:10px;align-items:flex-start;margin-top:10px;cursor:pointer}.ie-show input{width:20px;height:20px;margin-top:2px;flex:none}.ie-show span{display:flex;flex-direction:column;gap:2px;font-size:14px}.ie-show small{font-size:12px}.sb-wrap.ie-b{margin-left:2px}
 .pd-scrim{z-index:40;animation:amFade .2s ease-out both}
@@ -8160,8 +8160,12 @@ const LG_DAY=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Dublin",year:"num
 const loginDay=()=>SRV_OFF==null?null:LG_DAY.format(new Date(Date.now()+SRV_OFF));   // the day by Irish time, from the server clock
 const dayBefore=d=>{ const x=new Date(d+"T12:00:00"); x.setDate(x.getDate()-1); return ymd(x); };
 function loginSt(g=game()){ if(!g.login||typeof g.login!=="object") g.login={last:null,streak:0,best:0,cyc:0,n:0,truce:0,got:[]}; return g.login; }
-function loginMerge(a,b){ if(!a) return b||undefined; if(!b) return a; const n=(a.last||"")>=(b.last||"")?a:b, o=n===a?b:a;
-  return {...n, best:Math.max(a.best||0,b.best||0), n:Math.max(a.n||0,b.n||0), got:[...new Set([...(a.got||[]),...(b.got||[])])]}; }
+function loginMerge(a,b){ if(!a) return b||undefined; if(!b) return a; const n=(a.last||"")>=(b.last||"")?a:b, o=n===a?b:a, u=k=>lgKeep([...(a[k]||[]),...(b[k]||[])]);
+  const first=[a.first,b.first].filter(Boolean).sort()[0];
+  return {...n, best:Math.max(a.best||0,b.best||0), n:Math.max(a.n||0,b.n||0), got:[...new Set([...(a.got||[]),...(b.got||[])])], c:u("c"), td:u("td"), xd:u("xd"), ...(first?{first}:{})}; }
+// the day stamps on the login card: keep the last 60 days of each list (sorted, no repeats)
+const lgKeep=a=>[...new Set(a.filter(Boolean))].sort().slice(-60);
+function lgGapDays(from,t){ const out=[]; let d=dayBefore(t); while(d>from){ out.push(d); d=dayBefore(d); } return out; }
 const streakBest=(g=game())=>DEV&&DEV.streak!=null?DEV.streak:(loginSt(g).best||0);
 const streakNow=(g=game())=>DEV&&DEV.streak!=null?DEV.streak:(loginSt(g).streak||0);
 function streakTier(g){ const b=streakBest(g||game()); let t=0; for(const [d,tt] of STREAK_STEPS) if(b>=d) t=tt; return t; }
@@ -8173,16 +8177,25 @@ let LOOK_Q=new Set(), LOOK_T=0;   // badges for names we have no look for yet: f
 function lookSoon(uid){ if(!uid||!CLOUD.fb||!CLOUD.user) return; LOOK_Q.add(uid); clearTimeout(LOOK_T); LOOK_T=setTimeout(()=>{ const q=[...LOOK_Q]; LOOK_Q.clear(); lookFetch(q); },300); }
 // a missed day uses a truce pass (the streak is kept, the day is not counted); no pass left → the streak restarts. Safe to call often.
 function loginSettle(){ const L=loginSt(), t=loginDay(); if(!t||!L.last||L.last>=t) return null; const gap=daysBetween(L.last,t)-1; if(gap<=0) return null;
-  if((L.truce||0)>=gap){ L.truce-=gap; L.last=dayBefore(t); L.note={d:t,saved:gap}; }
-  else { L.note={d:t,broke:1,gap,had:L.truce||0,was:L.streak||0}; L.streak=0; L.cyc=0; L.last=null; }   // not enough passes to cover every missed day: the passes are kept, not wasted
+  const miss=lgGapDays(L.last,t); L.c=lgKeep([...(L.c||[]),L.last]);
+  if((L.truce||0)>=gap){ L.truce-=gap; L.td=lgKeep([...(L.td||[]),...miss]); L.last=dayBefore(t); L.note={d:t,saved:gap}; }
+  else { L.xd=lgKeep([...(L.xd||[]),...miss]); L.note={d:t,broke:1,gap,had:L.truce||0,was:L.streak||0}; L.streak=0; L.cyc=0; L.last=null; }   // not enough passes to cover every missed day: the passes are kept, not wasted
   saveGame(); return L.note; }
 function loginClaim(){ const g=game(), L=loginSt(g), t=loginDay(); if(!t) return null; loginSettle(); if(L.last&&L.last>=t) return null;
   const slot=(L.cyc||0)%7, r=LOGIN_CYCLE[slot];
-  L.streak=(L.streak||0)+1; L.best=Math.max(L.best||0,L.streak); L.n=(L.n||0)+1; L.cyc=(slot+1)%7; L.last=t;
+  L.streak=(L.streak||0)+1; L.best=Math.max(L.best||0,L.streak); L.n=(L.n||0)+1; L.cyc=(slot+1)%7; L.last=t; L.c=lgKeep([...(L.c||[]),t]); if(!L.first) L.first=t;
   g.style=(g.style||0)+r.s; if(r.g) g.gold=(g.gold||0)+r.g;
   let tr=0; if(r.tr&&(L.truce||0)<TRUCE_CAP){ L.truce=(L.truce||0)+1; tr=1; }
   let mile=null; for(const [d,tt] of STREAK_STEPS) if(L.best>=d&&!(L.got||[]).includes(d)){ L.got=[...(L.got||[]),d]; g.style+=STREAK_GIFT[d]; mile={d,t:tt,n:STREAK_GIFT[d]}; }
   saveGame(); cosPush(); return {slot, r, tr, full:r.tr&&!tr, mile}; }
+function lgState(L,d,t){ if((L.c||[]).includes(d)) return "c"; if((L.td||[]).includes(d)) return "t"; if(L.last&&L.last===d) return "c"; if(d===t) return "now";
+  if((L.xd||[]).includes(d)) return "x"; const f=L.first||(L.c||[])[0]; return f&&d>f&&d<t?"x":"none"; }
+function lgWeek(L,t,anim){ const ds=[t]; for(let i=0;i<6;i++) ds.unshift(dayBefore(ds[0]));
+  const wd=new Intl.DateTimeFormat(LOCALE[LANG]||"zh-TW",{weekday:"narrow",timeZone:"UTC"});
+  const ic={c:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    x:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+    t:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7v10M15 7v10" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>`, now:"", none:""};
+  return `<div class="lg-week">${ds.map(d=>{ const st=lgState(L,d,t); return `<div class="lg-wd${d===t?" today":""}"><span class="lg-seal s-${st}${anim&&d===t&&st==="c"?" stamp-in":""}" title="${d}">${ic[st]}</span><small>${d===t?T("lgToday"):esc(wd.format(new Date(d+"T12:00:00Z")))}</small></div>`; }).join("")}</div>`; }
 function nextTitle(){ const b=streakBest(); return STREAK_STEPS.find(([d])=>d>b)||null; }
 function loginStrip(){ const L=loginSt(), b=streakBest(), t=streakTier(), nx=nextTitle(), claimed=!!L.last&&L.last>=(loginDay()||today());
   return `<button class="lg-strip${claimed?"":" ready"}" data-act="lgopen"><span class="lg-badge">${t?sbArt(t,34,false):"🌱"}</span><span class="lg-txt"><b>${esc(titleName(t))} · 🔥 ${T("lgDays",{n:streakNow()})}</b><small class="muted">${nx?T("lgNext",{n:nx[0]-b,t:titleName(nx[1])}):T("lgMax")} · ⏸️ ×${L.truce||0}</small></span><span class="go">${claimed?"›":T("lgClaimShort")}</span></button>`; }
@@ -8201,7 +8214,7 @@ function loginPop(force){
       <h3 style="margin:0">🎁 ${T("lgHead")}</h3><p class="muted sm-t" style="margin:0">${T("lgSub")}</p>
       ${note&&note.saved&&!res?`<div class="lg-note ok">⏸️ ${T("lgSaved",{n:note.saved})}</div>`:""}${note&&note.broke&&!res?`<div class="lg-note">${note.gap?T(note.had?"lgBrokeK":"lgBrokeZ",{n:note.gap,k:note.had})+" ":""}${T("lgBroke")}</div>`:""}
       <div class="lg-now"><span>🔥 <b>${T("lgDays",{n:streakNow()})}</b></span><span>⏸️ <b>×${L.truce||0}</b></span><span class="muted">${T("lgBest",{n:b})}</span></div>
-      <div class="lg-grid">${slots}</div>${gotLine}
+      ${lgWeek(L,t,!!res)}<div class="lg-grid">${slots}</div>${gotLine}
       ${claimed?`<button class="btn" data-lg="close">${T("lgOk")}</button>`:`<button class="btn" data-lg="claim">${T("lgClaim")}</button>`}
       <details class="lg-more"><summary>${T("lgLadderT")}${nx?` · ${T("lgNext",{n:nx[0]-b,t:titleName(nx[1])})}`:""}</summary><div class="lg-ladder">${ladder}</div><p class="muted sm-t">${T("lgTruceHelp2",{n:TRUCE_CAP})}</p></details></div>`; };
   draw(null); document.body.appendChild(el);
@@ -8867,6 +8880,12 @@ Object.assign(STR.hi,{"lgBrokeK": "आप {n} दिन नहीं आए, प
 Object.assign(STR.es,{"lgBrokeK": "Faltaste {n} días pero solo tenías {k} pase(s) de tregua, no alcanzaban para cubrirlos todos, así que tus pases se guardaron sin usarse.", "lgBrokeZ": "Faltaste {n} día(s) y no tenías ningún pase de tregua para cubrirlos.", "lgTruceHelp2": "⏸️ Pase de tregua: cada día que faltas se usa uno automáticamente y tu racha sigue (ese día no cuenta). Si faltas más días de los pases que tienes, la racha empieza de nuevo pero tus pases se guardan. Recibes 1 cada 3 días que reclamas, hasta {n}. Los títulos siguen tu mejor racha, así que nunca se pierden."});
 Object.assign(STR.ja,{"lgBrokeK": "{n}日来られませんでしたが、休戦令は{k}枚しかなく全部の日を補えないため、休戦令は使わずに残してあります。", "lgBrokeZ": "{n}日来られず、補う休戦令がありませんでした。", "lgTruceHelp2": "⏸️ 休戦令：来られなかった日ごとに自動で1枚使い、連続記録が途切れません（その日は日数に入りません）。来られなかった日数が休戦令より多いと連続記録はリセットされますが、休戦令は使われずに残ります。3日受け取るごとに1枚、最大{n}枚まで。称号は最長記録で決まるので、なくなることはありません。"});
 Object.assign(STR.ko,{"lgBrokeK": "{n}일 동안 오지 않았는데 휴전권이 {k}장뿐이라 모든 날을 메울 수 없어서, 휴전권은 쓰지 않고 그대로 남겨 두었어요.", "lgBrokeZ": "{n}일 동안 오지 않았고 메울 휴전권이 없었어요.", "lgTruceHelp2": "⏸️ 휴전권: 빠진 날마다 자동으로 1장 쓰이고 연속 기록이 끊기지 않아요(그날은 일수에 안 들어가요). 빠진 날이 휴전권보다 많으면 연속 기록은 다시 시작되지만 휴전권은 그대로 남아요. 3일 받을 때마다 1장, 최대 {n}장. 칭호는 최고 기록으로 정해져서 사라지지 않아요."});
+Object.assign(STR.zh,{"lgToday": "今天"});
+Object.assign(STR.en,{"lgToday": "Today"});
+Object.assign(STR.hi,{"lgToday": "आज"});
+Object.assign(STR.es,{"lgToday": "Hoy"});
+Object.assign(STR.ja,{"lgToday": "今日"});
+Object.assign(STR.ko,{"lgToday": "오늘"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
