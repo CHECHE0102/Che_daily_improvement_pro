@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-10",
+ "items": {
+  "2026-11-10": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The GRA has called a full strike for the week of the EU meetings.",
+     "Garda Commissioner Justin Kelly has resigned after talks with the GRA broke down.",
+     "The GRA has called off a planned work-to-rule after progress in talks, just before Dublin hosts major international meetings, although some wider issues remain unresolved.",
+     "The European Political Community meeting has been moved out of Dublin because of police shortages."
+    ],
+    "a": 2,
+    "exp": "The passage says the GRA \"has rescinded a proposed five-day work-to-rule shortly before Dublin hosts a series of exceptionally high-profile international meetings\" owing to \"considerable progress in negotiations\", while \"a number of broader concerns remain contingent upon the findings of the Rosters Review Group\". No full strike (A), resignation (B) or relocation (D) is mentioned."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the enhanced overtime premiums introduced on Monday afternoon?",
+    "opts": [
+     "They were a key concession that helped persuade the GRA to call off its action.",
+     "They were rejected by the GRA's national executive.",
+     "They will apply to every shift for the rest of the EU Presidency.",
+     "They settled all of the association's grievances permanently."
+    ],
+    "a": 0,
+    "exp": "The passage states that \"the agreement was facilitated by the introduction, on Monday afternoon, of enhanced premiums\", and the executive decided that same evening, so the premiums evidently helped secure the deal. They covered officers working \"overtime on Thursday\" only (C), and broader concerns \"remain\" (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the roughly 50 heads of government and the informal EU summit?",
+    "opts": [
+     "To criticise the Government for hosting too many events at once.",
+     "To show how serious the consequences of the work-to-rule could have been.",
+     "To explain why the GRA's president was overburdened.",
+     "To suggest that the protests had been cancelled."
+    ],
+    "a": 1,
+    "exp": "The paragraph begins \"The potential consequences of the dispute were considerable\" and then lists \"approximately 50 heads of government\" and \"an informal summit of EU leaders\", illustrating what was at stake. The writer makes no criticism (A), and protests are still \"anticipated\" (D)."
+   }
+  ],
+  "2026-11-10-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Google has paid a €403 million fine and changed its location features.",
+     "The DPC has withdrawn its findings against Google after a court hearing.",
+     "The EU is drafting a new law on location data.",
+     "Google is challenging a €403 million DPC fine over location data in the High Court, including the constitutional validity of parts of Irish data law."
+    ],
+    "a": 3,
+    "exp": "Google \"has initiated High Court proceedings to contest a €403 million penalty\" relating to \"users' location data\" and \"intends to challenge the constitutional validity of certain provisions of the Data Protection Act 2018\". It has not paid or complied (A), and the DPC has not withdrawn anything (B)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the fact that the case was admitted to the fast-track list \"with the regulator's consent\"?",
+    "opts": [
+     "The DPC has accepted that its decision contained errors.",
+     "The DPC does not object to the dispute being decided relatively quickly.",
+     "The DPC will no longer require Google to comply within six months.",
+     "Google and the DPC have reached a settlement."
+    ],
+    "a": 1,
+    "exp": "Consenting to the \"Commercial Court's fast-track list\" means the regulator was content for the case to be handled speedily. It does not mean the DPC admits errors (A) or has dropped its demands (C), and the case was \"adjourned\", not settled (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the writer's tone in the passage?",
+    "opts": [
+     "Neutral and factual, reporting both the regulator's findings and Google's arguments.",
+     "Openly hostile to Google.",
+     "Enthusiastic about the fine.",
+     "Sarcastic about the Data Protection Commission."
+    ],
+    "a": 0,
+    "exp": "The writer reports that the DPC \"determined that location data had been combined... in the absence of a lawful basis\" and that Google is \"maintaining that it contains significant errors of both law and fact\" without taking sides, ending with a measured note that the outcome \"may have substantial implications\"."
+   }
+  ],
+  "2026-11-10-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Dromoland Castle has closed permanently and its staff have lost their jobs.",
+     "Dromoland Castle is being sold to the owners of Adare Manor.",
+     "Dromoland Castle has closed for a €55 million six-month refurbishment, during which all permanent staff will continue to be paid.",
+     "Dromoland Castle made a loss in 2025 and needs public funding."
+    ],
+    "a": 2,
+    "exp": "The resort \"closed on Monday in order to undergo a comprehensive six-month refurbishment\" costing \"approximately €55 million\", and the owners \"committed to retaining all permanent employees on the payroll until the hotel reopens in May 2027\". The closure is temporary (A), and 2025 was \"highly profitable\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the timing of the refurbishment?",
+    "opts": [
+     "The owners want the improved resort ready to benefit from visitors coming for the 2027 Ryder Cup.",
+     "The work was delayed by a poor year for revenue.",
+     "The Ryder Cup will be played on Dromoland's golf course.",
+     "The refurbishment was ordered by Clare County Council."
+    ],
+    "a": 0,
+    "exp": "The timing \"is largely contingent upon the Ryder Cup\", which \"is consequently expected to attract a substantial number of international visitors\", and the hotel reopens in May 2027. The Ryder Cup is at \"Adare Manor in Co Limerick\" (C), and revenue reached \"a record\" (B)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the company's 2025 accounts in the final paragraph?",
+    "opts": [
+     "To argue that the hotel's prices are too high.",
+     "To show that the company is in a strong financial position to fund the investment and keep paying staff.",
+     "To warn that the refurbishment will make the company unprofitable.",
+     "To compare Dromoland with the Rine Hotel."
+    ],
+    "a": 1,
+    "exp": "The paragraph says \"The expenditure follows a highly profitable year\", with revenue at \"a record €36.6 million\" and pre-tax profit up \"43 per cent\", providing context for how the company can afford the €55 million project and the €5 million staff cost. No prices (A), warnings (C) or comparison (D) appear."
+   }
+  ],
+  "2026-11-10-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "The N6 Galway City Ring Road has been cancelled because of legal costs.",
+     "Galway harbour will be expanded before the ring road is built.",
+     "Construction of the N6 Galway City Ring Road is now expected to start in 2028 after legal challenges were resolved, though concerns about compensation remain.",
+     "Shane Foran has launched a new legal challenge against the ring road."
+    ],
+    "a": 2,
+    "exp": "Construction \"is now expected to commence in the second quarter of 2028\" after legal proceedings \"were recently resolved through an agreement with Shane Foran\", while \"concerns were raised regarding compensation\". The project is not cancelled (A), and Foran withdrew challenges rather than launching one (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about Shane Foran's agreement with the authorities?",
+    "opts": [
+     "He dropped his objections in exchange for commitments that address some of his transport concerns.",
+     "He was paid compensation for his home.",
+     "He lost his case in the High Court.",
+     "He now supports building more roads in every Irish city."
+    ],
+    "a": 0,
+    "exp": "Foran, \"an advocate of active travel\", \"obtained commitments regarding sustainable transport, traffic management and road improvements\" and \"withdrew a separate challenge\", indicating a negotiated trade-off. Nothing says he was compensated (B) or lost in court (C)."
+   },
+   {
+    "type": "tone",
+    "q": "What is the writer's attitude in the final paragraph?",
+    "opts": [
+     "Dismissive of the councillors' views.",
+     "Angry about the cost of litigation.",
+     "Doubtful that construction will ever begin.",
+     "Positive, presenting the agreement as an example of how dialogue can avoid costly court battles."
+    ],
+    "a": 3,
+    "exp": "The final sentence reports that the agreement \"illustrates the extent to which constructive dialogue can prevent prolonged and costly litigation\", a favourable view of the outcome rather than doubt (C) or anger (B)."
+   }
+  ]
+ }
+}
