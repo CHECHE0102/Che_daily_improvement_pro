@@ -8216,9 +8216,15 @@ function plzIn(sh,u,v){ if(Array.isArray(sh)){ let ins=false; for(let i=0,j=sh.l
 // Until a mask loads, the rough shapes in PLZ_GEO are used. Occluders: cut-outs of the painting (gate arch, bandstand,
 // fountain) laid over the players, so you can walk behind them; z is the world y of the thing's base.
 const PLZ_MASK={}, PLZ_MC=4, PLZ_OCC={"gate":[{"f":"gate-arch","x":497,"y":0,"w":542,"h":366,"z":361},{"f":"gate-lampl","x":36,"y":814,"w":97,"h":274,"z":1080},{"f":"gate-lampr","x":1403,"y":814,"w":97,"h":274,"z":1080},{"f":"gate-lamptl","x":282,"y":141,"w":82,"h":284,"z":415},{"f":"gate-lamptr","x":1172,"y":141,"w":82,"h":284,"z":415},{"f":"gate-benchl","x":118,"y":456,"w":148,"h":174,"z":622},{"f":"gate-benchr","x":1270,"y":456,"w":148,"h":174,"z":622}],"pond":[{"f":"pond-willowl","x":0,"y":0,"w":164,"h":389,"z":389},{"f":"pond-willowr","x":1398,"y":92,"w":138,"h":533,"z":620},{"f":"pond-pinkr","x":1357,"y":481,"w":159,"h":133,"z":609},{"f":"pond-lampl","x":179,"y":38,"w":72,"h":228,"z":261},{"f":"pond-lampr","x":1293,"y":38,"w":71,"h":228,"z":261},{"f":"pond-benchl","x":256,"y":108,"w":179,"h":143,"z":246},{"f":"pond-benchr","x":1111,"y":108,"w":174,"h":143,"z":246},{"f":"pond-bed","x":584,"y":23,"w":368,"h":184,"z":205},{"f":"pond-bush","x":927,"y":594,"w":189,"h":128,"z":717},{"f":"pond-bridge","x":1116,"y":543,"w":292,"h":271,"z":768}],"band":[{"f":"band-back","x":568,"y":225,"w":400,"h":517,"z":586},{"f":"band-front","x":573,"y":225,"w":390,"h":471,"z":748},{"f":"band-lampbl","x":328,"y":901,"w":66,"h":184,"z":1075},{"f":"band-lampbr","x":1142,"y":901,"w":66,"h":184,"z":1075},{"f":"band-lamptl","x":333,"y":0,"w":61,"h":174,"z":169},{"f":"band-lamptr","x":1142,"y":0,"w":61,"h":174,"z":169},{"f":"band-benchtl","x":61,"y":169,"w":175,"h":154,"z":317},{"f":"band-benchtr","x":1300,"y":169,"w":175,"h":154,"z":317},{"f":"band-benchbl","x":51,"y":799,"w":159,"h":164,"z":957},{"f":"band-benchbr","x":1326,"y":799,"w":164,"h":153,"z":947},{"f":"band-bushbl","x":399,"y":1014,"w":297,"h":123,"z":1132},{"f":"band-bushbr","x":840,"y":1014,"w":297,"h":123,"z":1132}],"fountain":[{"f":"fountain-f","x":609,"y":399,"w":318,"h":287,"z":671}],"lawn":[{"f":"lawn-treel","x":0,"y":256,"w":159,"h":358,"z":604},{"f":"lawn-treer","x":1352,"y":269,"w":184,"h":358,"z":620},{"f":"lawn-lampl","x":302,"y":0,"w":72,"h":184,"z":179},{"f":"lawn-lampr","x":1162,"y":0,"w":72,"h":184,"z":179},{"f":"lawn-benchl","x":159,"y":92,"w":158,"h":144,"z":230},{"f":"lawn-benchr","x":1219,"y":92,"w":158,"h":144,"z":230},{"f":"lawn-basket","x":1311,"y":840,"w":112,"h":123,"z":957},{"f":"lawn-bushbl","x":0,"y":934,"w":243,"h":218,"z":1152},{"f":"lawn-bushbr","x":1293,"y":934,"w":243,"h":218,"z":1152}]};
+// soft copy of the mask (box blur, r cells): its slope gives a smooth wall direction, so you glide along a wall
+// instead of catching on every 4px step of it
+function plzBlur(a,w,h,r){ const t=new Float32Array(w*h), f=new Float32Array(w*h), k=1/(2*r+1);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){ let s=0; for(let i=-r;i<=r;i++){ const xx=x+i; s+=xx<0||xx>=w?0:a[y*w+xx]; } t[y*w+x]=s*k; }
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){ let s=0; for(let i=-r;i<=r;i++){ const yy=y+i; s+=yy<0||yy>=h?0:t[yy*w+x]; } f[y*w+x]=s*k; }
+  return f; }
 function plzMaskLoad(zone){ if(PLZ_MASK[zone]) return Promise.resolve(PLZ_MASK[zone]);
   return new Promise(ok=>{ const im=new Image(); im.onload=()=>{ try{ const c=document.createElement("canvas"); c.width=im.width; c.height=im.height; const x=c.getContext("2d"); x.drawImage(im,0,0);
-      const d=x.getImageData(0,0,im.width,im.height).data, a=new Uint8Array(im.width*im.height); for(let i=0;i<a.length;i++) a[i]=d[i*4]>127?1:0; PLZ_MASK[zone]={w:im.width,h:im.height,a}; }catch(e){} ok(PLZ_MASK[zone]); };
+      const d=x.getImageData(0,0,im.width,im.height).data, a=new Uint8Array(im.width*im.height); for(let i=0;i<a.length;i++) a[i]=d[i*4]>127?1:0; PLZ_MASK[zone]={w:im.width,h:im.height,a,f:plzBlur(a,im.width,im.height,3)}; }catch(e){} ok(PLZ_MASK[zone]); };
     im.onerror=()=>ok(null); im.src=`assets/art/plaza/${zone}-walk.png`; }); }
 function plzBlocked(x,y){ const zone=ROOM?ROOM.zone:"fountain", M=PLZ_MASK[zone];
   if(M){ const i=Math.floor(x/PLZ_MC), j=Math.floor(y/PLZ_MC); return i<0||j<0||i>=M.w||j>=M.h||!M.a[j*M.w+i]; }
@@ -8228,9 +8234,28 @@ function plzBlocked(x,y){ const zone=ROOM?ROOM.zone:"fountain", M=PLZ_MASK[zone]
 function plzZoom(vw,vh){ return Math.max(vw<600?.62:1, vh/PLZ_H, vw/PLZ_W); }
 function plzView(){ const R=ROOM; if(!R||!R.cam) return null; const vw=R.stage.clientWidth, vh=R.stage.clientHeight; if(!vw) return null; const z=plzZoom(vw,vh), top=R.zone==="fountain"?70:0;
   const cx=Math.max(vw/2/z,Math.min(PLZ_W-vw/2/z,R.cam.x)), cy=Math.max(vh/2/z-top,Math.min(PLZ_H-vh/2/z,R.cam.y)); return {x0:cx-vw/2/z, x1:cx+vw/2/z, y0:cy-vh/2/z, y1:cy+vh/2/z, z}; }
-function plzMove(o,vx,vy,dt){ const sp=Math.hypot(vx,vy); if(sp<1) return false; const a0=Math.atan2(vy,vx), st=sp*dt;
-  for(const t of [0,.35,-.35,.7,-.7,1.05,-1.05,1.35,-1.35]){ const a=a0+t, k=Math.cos(t), nx=o.x+Math.cos(a)*st*k, ny=o.y+Math.sin(a)*st*k; if(!plzBlocked(nx,ny)){ o.x=nx; o.y=ny; return true; } }
-  return false; }
+// direction pointing away from the nearest wall (into walkable ground), or null in open ground
+function plzNorm(x,y){ const M=PLZ_MASK[ROOM?ROOM.zone:"fountain"]; let gx=0,gy=0;
+  if(M&&M.f){ const F=(px,py)=>{ const u=px/PLZ_MC-.5, v=py/PLZ_MC-.5, i=Math.floor(u), j=Math.floor(v), fu=u-i, fv=v-j, g=(p,q)=>p<0||q<0||p>=M.w||q>=M.h?0:M.f[q*M.w+p];
+      return (g(i,j)*(1-fu)+g(i+1,j)*fu)*(1-fv)+(g(i,j+1)*(1-fu)+g(i+1,j+1)*fu)*fv; };
+    gx=F(x+6,y)-F(x-6,y); gy=F(x,y+6)-F(x,y-6); }
+  if(Math.abs(gx)+Math.abs(gy)<1e-4){ gx=gy=0; for(let a=0;a<6.28;a+=.785){ const c=Math.cos(a), s=Math.sin(a); if(plzBlocked(x+c*10,y+s*10)){ gx-=c; gy-=s; } } }
+  const l=Math.hypot(gx,gy); return l>1e-6?[gx/l,gy/l]:null; }
+// move in small steps; on hitting a wall keep the part of the motion along the wall (a glancing hit keeps nearly full
+// speed, a head-on one stops), then fall back to x-only / y-only
+function plzMove(o,vx,vy,dt){ const sp=Math.hypot(vx,vy); if(sp<1) return false; const st=sp*dt, n=Math.max(1,Math.ceil(st/3)), dx=vx*dt/n, dy=vy*dt/n, L=st/n; let moved=0;
+  const go=(ax,ay)=>{ if(plzBlocked(o.x+ax,o.y+ay)) return false; o.x+=ax; o.y+=ay; moved+=Math.hypot(ax,ay); return true; };
+  for(let k=0;k<n;k++){ const ax=o.x+dx/L*9, ay=o.y+dy/L*9;   // look 9px ahead so the turn starts before the wall, not after
+    if(!plzBlocked(ax,ay)&&go(dx,dy)) continue;
+    const N=plzNorm(ax,ay)||plzNorm(o.x,o.y);
+    if(N){ const d=dx*N[0]+dy*N[1], tx=dx-d*N[0], ty=dy-d*N[1], tl=Math.hypot(tx,ty);
+      if(d>=0&&go(dx,dy)) continue;
+      if(tl>1e-3){ const m=L*Math.min(1,tl/L*1.6)/tl, ux=tx*m, uy=ty*m;
+        if(go(ux,uy)||go(ux+N[0]*.6,uy+N[1]*.6)) continue; } }
+    if(go(dx,dy)) continue;
+    if(Math.abs(dx)>Math.abs(dy)){ if(go(dx,0)||go(0,dy)) continue; } else if(go(0,dy)||go(dx,0)) continue;
+    break; }
+  return moved>st*.25; }
 // nearest walkable spot (after a mask loads, or if someone stands somewhere odd)
 function plzFree(x,y){ if(!plzBlocked(x,y)) return [x,y]; for(let r=8;r<500;r+=8) for(let a=0;a<6.28;a+=.4){ const nx=x+Math.cos(a)*r, ny=y+Math.sin(a)*r; if(!plzBlocked(nx,ny)) return [nx,ny]; } return [x,y]; }
 function plzSpot(){ const v=plzView();
