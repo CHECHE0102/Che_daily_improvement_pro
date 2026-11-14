@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-14",
+ "items": {
+  "2026-11-14": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Homelessness in Ireland has fallen for the first time in a year, mainly outside Dublin.",
+     "Official September figures show homelessness rising again, with charities alarmed and the true total likely higher than reported.",
+     "Industrial action has stopped the Department of Housing from publishing any homelessness data.",
+     "Most people in emergency accommodation come from outside the European Economic Area."
+    ],
+    "a": 1,
+    "exp": "The passage says homelessness \"has continued its upward trajectory\", reports charities calling the figures \"astoundingly depressing\", and ends that \"the true scale of homelessness is likely to be substantially greater\". The figures did not fall (A); publication was only \"deferred\" (C); and half were Irish citizens, with 31.4% from outside the EEA (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the final paragraph about the official figure of 18,065?",
+    "opts": [
+     "It understates the number of people who actually lack secure housing.",
+     "It counts people sleeping rough twice.",
+     "It was calculated by Simon Communities of Ireland rather than the Government.",
+     "It includes everyone living in direct provision."
+    ],
+    "a": 0,
+    "exp": "The figures \"exclude people sleeping rough, those couch-surfing\" and others, so the real number is \"likely to be substantially greater than the official data suggest\" — the official figure is an underestimate. Rough sleepers are excluded, not double-counted (B); the data come from the Department of Housing (C); and direct provision residents are excluded (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the attitude of the voluntary sector towards the figures?",
+    "opts": [
+     "Indifferent, because the increase was small.",
+     "Cautiously optimistic about the trend.",
+     "Sceptical about whether the statistics are accurate.",
+     "Deeply troubled and pressing for urgent government action."
+    ],
+    "a": 3,
+    "exp": "Ber Grogan called the figures \"astoundingly depressing\", and Dublin Simon Community \"expressed deep concern\" and called \"on the Government to take decisive action\". This is alarm, not indifference (A) or optimism (B), and they do not question the data's accuracy (C)."
+   }
+  ],
+  "2026-11-14-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "AIB's decision to stop lending to fossil-fuel companies.",
+     "The outcome of negotiations at COP31 in Antalya.",
+     "AIB's decision to double its green lending target after rapid progress towards the old one.",
+     "A fall in AIB's mortgage lending during 2026."
+    ],
+    "a": 2,
+    "exp": "The passage opens with AIB \"doubling its 2030 target for green and transition lending to 60 billion euro\" and explains that this is \"largely a consequence of the bank's rapid progress\". Fossil-fuel lending is not discussed (A), the summit outcome is still \"uncertain\" (B), and no fall in mortgages is mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about AIB's previous target of 30 billion euro?",
+    "opts": [
+     "It was abandoned because it proved unrealistic.",
+     "It was set only in 2026.",
+     "It applied solely to mortgage lending.",
+     "AIB was close to reaching it well before 2030."
+    ],
+    "a": 3,
+    "exp": "AIB has issued \"28 billion euro in eligible loans, equivalent to 93% of its previous 30 billion euro objective\", so it was near the target years ahead of 2030. The target was raised, not dropped as unrealistic (A); lending has been counted \"since 2019\" (B); and it covered business and infrastructure lending too, not just mortgages (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the final paragraph about the wider summit?",
+    "opts": [
+     "To contrast AIB's ambitious commitment with the uncertain progress of the international talks.",
+     "To suggest that AIB will withdraw its new target if COP31 fails.",
+     "To explain how AIB's climate capital division earns its profits.",
+     "To show that fossil-fuel producers support AIB's plan."
+    ],
+    "a": 0,
+    "exp": "The paragraph begins \"Nevertheless, the broader prospects for the summit remain uncertain\", as producers \"are resisting firm new targets\" — a contrast with AIB's announcement. Nothing links AIB's target to the summit outcome (B), profits are not discussed (C), and producers are described as resisting, not supporting (D)."
+   }
+  ],
+  "2026-11-14-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "A cyberattack shut down Microsoft 365 for several days.",
+     "Outlook was the only Microsoft service affected by Thursday's problems.",
+     "A configuration update caused a long global Microsoft 365 outage, prompting advice on testing and backup plans.",
+     "Microsoft has fully explained why the outage lasted so long."
+    ],
+    "a": 2,
+    "exp": "The outage \"appears to have originated in a configuration update\", \"persisted for more than 12 hours\", and an expert recommended \"rigorous testing\" and \"contingency measures\". Microsoft saw \"no indication of a cyberattack\" (A); Teams and Office apps were also hit (B); and the company \"failed to account for the prolonged duration\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the statement that preliminary fixes \"proved counterproductive\"?",
+    "opts": [
+     "Microsoft's engineers ignored the problem until Friday.",
+     "Bringing servers back online too quickly caused them to fail again under returning demand.",
+     "The fixes caused a cyberattack.",
+     "Users stopped trying to connect once the fixes were applied."
+    ],
+    "a": 1,
+    "exp": "\"Restored servers became unresponsive as traffic returned\", so Microsoft \"restricted traffic\" — restoring them quickly let demand overload them again. Engineers were actively applying fixes (A); no attack was found (C); and returning traffic shows users kept connecting (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that Microsoft's own staff could not send email for over nine hours?",
+    "opts": [
+     "To emphasise how serious and wide-reaching the disruption was.",
+     "To criticise Microsoft staff for causing the outage.",
+     "To show that only Microsoft employees were affected.",
+     "To explain why the outage began at 6pm."
+    ],
+    "a": 0,
+    "exp": "It follows \"The consequences were far-reaching\" and is introduced with \"Notably\" — even the provider itself was hit, underlining the severity. Staff are not blamed (B); businesses, courts and schools were also affected (C); and it has nothing to do with the 6pm spike (D)."
+   }
+  ],
+  "2026-11-14-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "Bluetongue has been found in humans in County Down.",
+     "Northern Ireland has confirmed its first bluetongue cases of the winter, but no new restrictions will follow because the disease is already present.",
+     "Milk and meat from County Down have been withdrawn from sale.",
+     "Bluetongue has been eradicated from the Republic of Ireland."
+    ],
+    "a": 1,
+    "exp": "BTV-3 was confirmed in three sheep, \"Northern Ireland's first cases of the 2026/27 winter season\", and \"no additional movement restrictions or disease control zones would be implemented\" since it was confirmed in 2025. It poses \"no threat to human health\" (A), food remains \"entirely safe\" (C), and a Wexford case is reported this year (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the Chief Veterinary Officer's explanation?",
+    "opts": [
+     "Restrictions would probably have been imposed if BTV-3 had never been confirmed in Northern Ireland before.",
+     "He believes the virus is harmless to animals.",
+     "Movement restrictions from 2025 are still fully in force across all farms.",
+     "He expects many more cases in humans this winter."
+    ],
+    "a": 0,
+    "exp": "No new restrictions are needed \"since BTV-3 had previously been confirmed in Northern Ireland\", so the response \"is contingent upon the disease's existing status\" — implying a first-ever case would have triggered controls. He does not call it harmless to animals (B), nothing is said about 2025 restrictions remaining (C), and humans are not at risk (D)."
+   },
+   {
+    "type": "tone",
+    "q": "What is the overall tone of the officials' statements?",
+    "opts": [
+     "Panicked and urgent.",
+     "Dismissive of farmers' concerns.",
+     "Calm and reassuring, while still encouraging vigilance.",
+     "Angry at EU importers."
+    ],
+    "a": 2,
+    "exp": "Muir stresses \"no threat to human health\", Armstrong says it was \"not unexpected\", yet farmers \"are urged to report any suspected infections\" — reassurance with vigilance. There is no panic (A), farmers are engaged rather than dismissed (B), and imports are simply tested, with no anger (D)."
+   }
+  ]
+ }
+}
