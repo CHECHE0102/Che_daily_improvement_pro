@@ -1,0 +1,203 @@
+{
+ "id": "L018",
+ "title": "The guy who… 關係子句",
+ "subtitle": "who・which・that・省略",
+ "level": "B1–B2",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "那個…的人",
+    "the guy who",
+    "怎麼說？"
+   ],
+   "emoji": "👉",
+   "lines": [
+    {
+     "v": "T",
+     "say": "想說「幫我們修水槽的那個人」，英文要怎麼接？"
+    },
+    {
+     "v": "T",
+     "say": "今天學關係子句！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "人 + who",
+   "points": [
+    "who 用來說明人",
+    "the guy who fixed our sink"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，要補充說明一個人，就用 who。"
+    },
+    {
+     "v": "A",
+     "say": "Who's that at the door?",
+     "zh": "門口那是誰？"
+    },
+    {
+     "v": "B",
+     "say": "It's the guy who fixed our sink.",
+     "zh": "是幫我們修水槽的那個人。"
+    },
+    {
+     "v": "T",
+     "say": "who fixed our sink，說明是哪一個人。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "東西 + which / that",
+   "points": [
+    "which、that 說明東西",
+    "the bus that goes to town"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，說明東西，用 which 或 that。"
+    },
+    {
+     "v": "A",
+     "say": "Which bus should I take?",
+     "zh": "我該搭哪一班公車？"
+    },
+    {
+     "v": "B",
+     "say": "Take the one that goes to the city centre.",
+     "zh": "搭去市中心的那班。"
+    },
+    {
+     "v": "T",
+     "say": "口語裡 that 比 which 更常用。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "省略 that",
+   "points": [
+    "後面還有主詞就能省",
+    "the jacket (that) you bought"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，that 後面還有主詞的話，可以省略。"
+    },
+    {
+     "v": "A",
+     "say": "I love the jacket you bought!",
+     "zh": "我好喜歡你買的那件外套！"
+    },
+    {
+     "v": "B",
+     "say": "Thanks! I got it in town.",
+     "zh": "謝謝！我在市區買的。"
+    },
+    {
+     "v": "T",
+     "say": "the jacket you bought，中間的 that 省略了。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "She's the nurse ___ helped me.",
+   "ask": "要填什麼？",
+   "opts": [
+    "which",
+    "who",
+    "what"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：她就是幫過我的那位護士。"
+    },
+    {
+     "v": "A",
+     "say": "She's the nurse blank helped me.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！護士是人，要用 who。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "who",
+     "說明人"
+    ],
+    [
+     "which / that",
+     "說明東西"
+    ],
+    [
+     "省略 that",
+     "後面有主詞"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了關係子句！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

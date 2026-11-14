@@ -1,0 +1,203 @@
+{
+ "id": "L028",
+ "title": "Having finished… 分詞構句",
+ "subtitle": "V-ing・Having p.p.・Not knowing",
+ "level": "B2–C1",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "一句講兩件事",
+    "Having",
+    "finished…"
+   ],
+   "emoji": "✂️",
+   "lines": [
+    {
+     "v": "T",
+     "say": "新聞常看到 Having finished 開頭的句子，是什麼意思？"
+    },
+    {
+     "v": "T",
+     "say": "今天學分詞構句，讓句子更精簡。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "V-ing, 主要子句",
+   "points": [
+    "原因・同時發生",
+    "Feeling tired, I went home."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，兩件事主詞一樣，前面可以改成 ing。"
+    },
+    {
+     "v": "A",
+     "say": "Why did you leave the party early?",
+     "zh": "你為什麼提早離開派對？"
+    },
+    {
+     "v": "B",
+     "say": "Feeling tired, I just went home.",
+     "zh": "因為覺得累，我就回家了。"
+    },
+    {
+     "v": "T",
+     "say": "Feeling tired，就是 Because I felt tired。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "Having + p.p.",
+   "points": [
+    "先做完一件事",
+    "Having finished work, I went out."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，強調先做完一件事，用 Having 加過去分詞。"
+    },
+    {
+     "v": "A",
+     "say": "Did you see the match last night?",
+     "zh": "你昨晚有看比賽嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Having finished work late, I missed it.",
+     "zh": "因為工作太晚結束，我錯過了。"
+    },
+    {
+     "v": "T",
+     "say": "Having finished，表示這件事先完成了。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "Not + V-ing",
+   "points": [
+    "否定放最前面",
+    "Not knowing the area, I got lost."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，否定的分詞構句，Not 要放最前面。"
+    },
+    {
+     "v": "A",
+     "say": "How was your first day in Cork?",
+     "zh": "你在 Cork 第一天如何？"
+    },
+    {
+     "v": "B",
+     "say": "Not knowing the area, I got lost twice.",
+     "zh": "因為不熟這一帶，我迷路兩次。"
+    },
+    {
+     "v": "T",
+     "say": "不是 Knowing not，是 Not knowing。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "___ the email, she called her boss.",
+   "ask": "要填什麼？",
+   "opts": [
+    "Having read",
+    "Have read",
+    "Had reading"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：讀完信之後，她打給老闆。"
+    },
+    {
+     "v": "A",
+     "say": "Blank the email, she called her boss.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！先讀完信，用 Having read。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "Feeling tired,…",
+     "因為・同時"
+    ],
+    [
+     "Having finished,…",
+     "先做完…"
+    ],
+    [
+     "Not knowing,…",
+     "因為不…"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了分詞構句！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

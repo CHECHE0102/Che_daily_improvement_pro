@@ -1,0 +1,197 @@
+{
+ "id": "L027",
+ "title": "委婉拒絕不失禮",
+ "subtitle": "I'll have to pass・rain check・not really into",
+ "level": "B2–C1",
+ "kind": "phrase",
+ "date": "2026-11-14",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "不想去又不好意思？",
+    "rain check",
+    "是什麼？"
+   ],
+   "emoji": "🙅",
+   "lines": [
+    {
+     "v": "T",
+     "say": "同事約你，但你不想去，要怎麼拒絕才不失禮？"
+    },
+    {
+     "v": "T",
+     "say": "今天學三個委婉拒絕的說法。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "I'll have to pass",
+   "meaning": "這次就不了",
+   "img": "scene-bell",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，I'll have to pass，這次我就不參加了。"
+    },
+    {
+     "v": "A",
+     "say": "We're off to the pub after work. Coming?",
+     "zh": "下班我們要去酒吧，要來嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I'll have to pass tonight, I'm wrecked.",
+     "zh": "今晚我就不了，我累壞了。"
+    },
+    {
+     "v": "T",
+     "say": "wrecked 是愛爾蘭人說超累的口語。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "take a rain check",
+   "meaning": "改天再約",
+   "img": "scene-read",
+   "scene": "scene-rest",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，take a rain check，這次不行，改天再約。"
+    },
+    {
+     "v": "A",
+     "say": "Fancy a coffee this afternoon?",
+     "zh": "下午要喝杯咖啡嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Can I take a rain check? I'm swamped.",
+     "zh": "可以改天嗎？我忙翻了。"
+    },
+    {
+     "v": "T",
+     "say": "說 rain check，對方知道你不是不想去。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "I'm not really into",
+   "meaning": "我不太喜歡…",
+   "img": "scene-win",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，not really into，對這個不太有興趣。"
+    },
+    {
+     "v": "A",
+     "say": "Do you want to come hiking on Sunday?",
+     "zh": "星期天要一起去健行嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Thanks, but I'm not really into hiking.",
+     "zh": "謝謝，不過我不太喜歡健行。"
+    },
+    {
+     "v": "T",
+     "say": "前面加上 Thanks, but，聽起來就很客氣。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Can I take a ___ check?",
+   "ask": "要填什麼？",
+   "opts": [
+    "sun",
+    "rain",
+    "snow"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：可以改天再約嗎？"
+    },
+    {
+     "v": "A",
+     "say": "Can I take a blank check?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！改天再約，就是 rain check。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "I'll have to pass",
+     "這次就不了"
+    ],
+    [
+     "take a rain check",
+     "改天再約"
+    ],
+    [
+     "not really into",
+     "不太喜歡"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三種委婉拒絕！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

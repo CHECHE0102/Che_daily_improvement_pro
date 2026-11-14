@@ -1,0 +1,203 @@
+{
+ "id": "L020",
+ "title": "will 還是 going to？未來式",
+ "subtitle": "will・be going to・現在進行式",
+ "level": "B1–B2",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "說未來的事",
+    "will or",
+    "going to?"
+   ],
+   "emoji": "📅",
+   "lines": [
+    {
+     "v": "T",
+     "say": "說未來的事，用 will 還是 going to？"
+    },
+    {
+     "v": "T",
+     "say": "今天一次分清楚！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "will：當下決定",
+   "points": [
+    "說話當下才決定",
+    "Don't worry, I'll get it."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，說話當下才決定的事，用 will。"
+    },
+    {
+     "v": "A",
+     "say": "The phone's ringing!",
+     "zh": "電話在響！"
+    },
+    {
+     "v": "B",
+     "say": "Don't worry, I'll get it.",
+     "zh": "別擔心，我來接。"
+    },
+    {
+     "v": "T",
+     "say": "臨時決定、主動幫忙，都用 will。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "be going to：早有打算",
+   "points": [
+    "之前就計畫好",
+    "I'm going to travel around Ireland."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，之前就打算好的事，用 be going to。"
+    },
+    {
+     "v": "A",
+     "say": "Any plans for the summer?",
+     "zh": "夏天有什麼計畫嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I'm going to travel around Ireland.",
+     "zh": "我打算環遊愛爾蘭。"
+    },
+    {
+     "v": "T",
+     "say": "早就想好了，所以用 going to。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "現在進行式：排好的行程",
+   "points": [
+    "時間都定好了",
+    "I'm working until ten."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，已經排好時間的行程，用現在進行式。"
+    },
+    {
+     "v": "A",
+     "say": "Do you want to grab dinner tonight?",
+     "zh": "今晚要一起吃晚餐嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Sorry, I'm working until ten.",
+     "zh": "抱歉，我要上班到十點。"
+    },
+    {
+     "v": "T",
+     "say": "班表排好了，說 I'm working 就很自然。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Hold on, I ___ help you with that bag.",
+   "ask": "要填什麼？",
+   "opts": [
+    "will",
+    "am going",
+    "was"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！看到別人提重物，想馬上說：我來幫你拿。"
+    },
+    {
+     "v": "A",
+     "say": "Hold on, I blank help you with that bag.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！當下決定要幫忙，用 will。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "will",
+     "當下決定"
+    ],
+    [
+     "be going to",
+     "早有打算"
+    ],
+    [
+     "I'm working…",
+     "排好的行程"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三種未來式！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
