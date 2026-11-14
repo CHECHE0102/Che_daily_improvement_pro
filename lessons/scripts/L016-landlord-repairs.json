@@ -1,0 +1,197 @@
+{
+ "id": "L016",
+ "title": "跟房東報修",
+ "subtitle": "is playing up・get someone out・keep me posted",
+ "level": "B1–B2",
+ "kind": "phrase",
+ "date": "2026-11-14",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "熱水器壞了",
+    "playing up",
+    "怎麼跟房東說？"
+   ],
+   "emoji": "🔧",
+   "lines": [
+    {
+     "v": "T",
+     "say": "家裡熱水器壞了，要怎麼跟房東說？"
+    },
+    {
+     "v": "T",
+     "say": "今天學三句報修必學英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "is playing up",
+   "meaning": "怪怪的・不太正常",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，is playing up，東西怪怪的、不太正常。"
+    },
+    {
+     "v": "A",
+     "say": "Hi, the shower is playing up again.",
+     "zh": "嗨，淋浴又怪怪的了。"
+    },
+    {
+     "v": "B",
+     "say": "Oh no, is there no hot water?",
+     "zh": "糟糕，沒有熱水嗎？"
+    },
+    {
+     "v": "T",
+     "say": "電腦、手機、熱水器怪怪的，都能說 playing up。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "get someone out",
+   "meaning": "請人來看・派人來修",
+   "img": "scene-read",
+   "scene": "scene-rest",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，get someone out，請人到家裡來修。"
+    },
+    {
+     "v": "A",
+     "say": "Could you get someone out to look at it?",
+     "zh": "可以請人來看一下嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Sure, I'll ring a plumber today.",
+     "zh": "好，我今天打給水電工。"
+    },
+    {
+     "v": "T",
+     "say": "這裡的 out，是請人出門到你家來。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "keep me posted",
+   "meaning": "有消息再跟我說",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，keep me posted，有進度要告訴我。"
+    },
+    {
+     "v": "A",
+     "say": "He can come on Thursday morning.",
+     "zh": "他星期四早上可以來。"
+    },
+    {
+     "v": "B",
+     "say": "Great, thanks. Keep me posted.",
+     "zh": "太好了，謝謝。有消息再跟我說。"
+    },
+    {
+     "v": "T",
+     "say": "上班、租房都好用，比 tell me 更自然。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "The heating is ___ again.",
+   "ask": "要填什麼？",
+   "opts": [
+    "playing up",
+    "playing out",
+    "getting up"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：暖氣又怪怪的了。"
+    },
+    {
+     "v": "A",
+     "say": "The heating is blank again.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！東西怪怪的，就是 playing up。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "playing up",
+     "怪怪的"
+    ],
+    [
+     "get someone out",
+     "請人來修"
+    ],
+    [
+     "keep me posted",
+     "有消息跟我說"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三句報修英文！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
