@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-15",
+ "items": {
+  "2026-11-15": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government has agreed to share the cost of compensating survivors of abuse in scouting.",
+     "Scouting Ireland has decided to close and sell all of its properties.",
+     "Scouting Ireland is weighing emergency measures to raise €8 million to compensate abuse survivors and avoid collapse.",
+     "Local scout groups have refused to contribute any money to the national organisation."
+    ],
+    "a": 2,
+    "exp": "The passage opens by saying Scouting Ireland is \"contemplating a series of emergency measures intended to generate €8 million, with the dual objective of compensating survivors of historical child abuse and averting the potential collapse of the organisation\". The Government \"unequivocally rejected\" liability (A); \"no definitive decision has been made\" (B); and volunteers only said contributions \"would necessitate extensive fundraising\", not that they refused (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the organisation's finances from the passage?",
+    "opts": [
+     "It can meet its costs for now, but the legal claims threaten its survival in the longer term.",
+     "It already has enough money to pay all outstanding claims.",
+     "It has received a large grant from the State to cover legal fees.",
+     "It is currently in liquidation."
+    ],
+    "a": 0,
+    "exp": "The accounts show \"adequate funds until the end of next year\", but \"additional resources would subsequently be required\", and the claims are \"a substantial financial risk\" that could force liquidation. So it is solvent now but at risk later. It does not have enough for all claims (B); the State rejected liability (C); and liquidation is only a possibility \"unless a credible restructuring could be implemented\" (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that the average settlement \"may approach €250,000\"?",
+    "opts": [
+     "To argue that survivors are being paid too little.",
+     "To show that most cases have already been settled.",
+     "To criticise the legal fees charged by lawyers.",
+     "To help explain why such a large sum as €8 million is needed."
+    ],
+    "a": 3,
+    "exp": "With \"over 70 survivors\" who \"have initiated civil proceedings\", an average settlement that \"may approach €250,000\" shows why the organisation needs about €8 million. The writer makes no judgement that payments are too low (A) or that fees are excessive (C), and only \"a number of\" cases were resolved (B)."
+   }
+  ],
+  "2026-11-15-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "The cancellation of several rail projects in the west because of cost.",
+     "Irish Rail's plans and projects to expand rail services in the west, which it says could transform the regional economy.",
+     "A dispute between Irish Rail and the consultancies Aecom and Jacobs.",
+     "The opening of a new passenger line between Limerick and Foynes this year."
+    ],
+    "a": 1,
+    "exp": "Irish Rail \"has contended that considerable investment in the western rail network could fundamentally transform the regional economy\", and the passage then lists the Limerick double-tracking, Foynes, Ceannt station and the Athenry–Claremorris line. Nothing is cancelled (A); the consultancies were \"commissioned\", with no dispute (C); and Foynes freight opens in \"early 2027\", with passengers \"to follow subsequently\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the Limerick Junction to Colbert double-tracking?",
+    "opts": [
+     "It has already received planning approval.",
+     "Construction will finish before the Foynes freight line opens.",
+     "It will replace the need for any other western projects.",
+     "Its 2032 opening date could slip if planning consent is delayed or refused."
+    ],
+    "a": 3,
+    "exp": "Approval is only \"anticipated in 2028 or 2029\", and the line \"could become operational by 2032, although this is contingent upon planning consent\" — so the date depends on planning. It has not yet been approved (A); Foynes is due in \"early 2027\", long before 2032 (B); and the passage describes several \"complementary projects\" alongside it (C)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the overall tone of the passage towards the rail plans?",
+    "opts": [
+     "Informative and generally positive, while noting that some schemes are still at an early stage.",
+     "Strongly critical of wasteful public spending.",
+     "Indifferent, as the plans are unlikely to affect anyone.",
+     "Alarmed about the environmental damage the plans will cause."
+    ],
+    "a": 0,
+    "exp": "The passage reports that investment \"could fundamentally transform the regional economy\" and that Ceannt station \"is approaching completion\", but adds that \"several schemes remain at an early stage\". It does not criticise spending (B), dismiss the plans (C) or mention environmental harm (D)."
+   }
+  ],
+  "2026-11-15-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "The Minister has cut the minimum weekly hours in a wage subsidy scheme to help more disabled people find work, though some say more is needed.",
+     "The wage subsidy scheme for disabled workers has been abolished in Budget 2027.",
+     "Ireland now has one of the highest employment rates for disabled people in Europe.",
+     "Employers have complained that the wage subsidy scheme is too generous."
+    ],
+    "a": 0,
+    "exp": "Budget 2027 \"reduced the minimum weekly hours required from 15 to eight\" to \"facilitate their access to the labour market\", while Maurice Quinlivan \"advocated a more generous subsidy\". The scheme was reformed, not abolished (B); Ireland's gap is \"among the most pronounced in Europe\" (C); and no employer complaints are mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the passage suggest about the Minister's reform compared with the 2024 review?",
+    "opts": [
+     "It ignored the review's recommendation and kept the hours unchanged.",
+     "It was less ambitious than the review recommended.",
+     "It went further than the review had recommended.",
+     "It was based only on the review and not on consultation."
+    ],
+    "a": 2,
+    "exp": "The 2024 review \"had recommended a considerably more modest reduction, from 21 to 15 hours\", whereas Budget 2027 cut the minimum to eight hours — further than recommended. The hours did change (A), the reform was more ambitious, not less (B), and it followed \"consultation with stakeholders\" (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the retailer Mr Price?",
+    "opts": [
+     "To show that large retailers refuse to hire disabled people.",
+     "To give an example of an employer the Minister presents as a model of inclusive practice.",
+     "To explain how the hourly subsidy is calculated.",
+     "To criticise the company for receiving too much public money."
+    ],
+    "a": 1,
+    "exp": "The Minister \"cited the retailer Mr Price, where approximately 18% of employees have a disability, as a model of inclusive practice\". It is a positive example, not a refusal (A) or criticism (D), and the subsidy calculation is explained separately, based on \"the size of the disabled workforce\" (C)."
+   }
+  ],
+  "2026-11-15-4": [
+   {
+    "type": "main",
+    "q": "What is the main focus of the passage?",
+    "opts": [
+     "A new biography of John McGahern published by Frank Shovlin.",
+     "The banning of The Dark in 1965 and the court case that followed.",
+     "The sale of John McGahern's former house in Clontarf.",
+     "The unveiling of a plaque at the Dublin house where John McGahern wrote his first two novels."
+    ],
+    "a": 3,
+    "exp": "The passage centres on the plaque \"formally unveiled on Saturday morning at 57 Howth Road, Clontarf\", the house where he \"composed his first two novels\". Shovlin proposed the plaque but no new biography is described (A); the ban is background, with no court case (B); and the owners \"granted their consent\", with no sale (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from Cllr Donna Cooney's comment that the plaque is \"a partial acknowledgement of the State's treatment of the author\"?",
+    "opts": [
+     "She believes the State always treated McGahern fairly.",
+     "She feels McGahern was treated unfairly by the State, and the plaque goes only some way towards recognising this.",
+     "She thinks the plaque should be removed.",
+     "She believes McGahern's novels should still be banned."
+    ],
+    "a": 1,
+    "exp": "Calling the plaque a \"partial acknowledgement of the State's treatment\" implies that his treatment — The Dark was \"banned\" and he was \"dismissed from his teaching post\" — was wrong, and that the plaque only partly makes up for it. This contradicts (A), and nothing suggests removing the plaque (C) or supporting the ban (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer explain that a plaque requires at least 20 years since a person's death?",
+    "opts": [
+     "To criticise the council for breaking its own rules.",
+     "To suggest that McGahern is not yet famous enough for a plaque.",
+     "To explain why the tribute is only being installed now, nearly two decades after his death.",
+     "To show that the plaque was paid for by his family."
+    ],
+    "a": 2,
+    "exp": "The writer says \"the tribute could only be installed now: the writer died in March 2006, and erecting a plaque is contingent upon at least 20 years having elapsed since a person's death\". This explains the timing; it does not accuse the council of breaking rules (A), question his fame (B) or mention who paid (D)."
+   }
+  ]
+ }
+}

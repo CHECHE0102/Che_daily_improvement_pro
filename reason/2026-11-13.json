@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-13",
+ "items": {
+  "2026-11-13": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "European leaders meeting in Dublin agreed on a final peace settlement for Ukraine.",
+     "The Dublin summit was dominated by Ukraine, with leaders insisting Europe must be involved in any peace deal, although no breakthrough was evident and Europe itself appeared divided.",
+     "The summit was cancelled after anti-war protests outside the Convention Centre Dublin.",
+     "The US envoys refused to meet Zelenskiy while they were in Ireland."
+    ],
+    "a": 1,
+    "exp": "The passage says the conflict \"dominated proceedings\" and that \"any durable peace settlement would be contingent upon meaningful European involvement\", but there was \"scant evidence of a substantive breakthrough\" and \"divisions were apparent\". No settlement was agreed (A), the summit went ahead (C), and the envoys did brief Zelenskiy (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from Donald Tusk's comment about the current contacts?",
+    "opts": [
+     "He believed a peace agreement would be signed within days.",
+     "He thought Europe should stop talking to the United States.",
+     "He felt the talks were less advanced or serious than the word \"negotiations\" suggests.",
+     "He had personally led the discussions with Vladimir Putin."
+    ],
+    "a": 2,
+    "exp": "Tusk \"characterised the description of the current contacts as negotiations as an exaggeration\", following the observation that there was \"no indication that Russia had moderated its objectives\". This implies he saw the contacts as falling short of real negotiations. Nothing supports an imminent deal (A), a break with the US (B) or him meeting Putin (D)."
+   },
+   {
+    "type": "tone",
+    "q": "What is the tone of the passage when reporting the outcome of the diplomatic efforts?",
+    "opts": [
+     "Cautious and measured, balancing claims of progress against signs of limited results and disagreement.",
+     "Triumphant, celebrating a historic diplomatic victory.",
+     "Mocking, ridiculing the European leaders for meeting at all.",
+     "Indifferent, treating the summit as unimportant."
+    ],
+    "a": 0,
+    "exp": "The writer reports that Zelenskiy \"reported progress\" but immediately adds \"Nevertheless, there was scant evidence of a substantive breakthrough\" and notes that \"divisions were apparent\". This weighing of both sides is cautious, not triumphant (B), mocking (C) or dismissive (D)."
+   }
+  ],
+  "2026-11-13-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A new national law that has cut council rents across Ireland.",
+     "The opening of new accessible council housing in Leitrim.",
+     "How Dublin City Council collects rent arrears from tenants.",
+     "Protests by council tenants over large rent increases caused by changes in how rents are calculated, and calls for a fairer national system."
+    ],
+    "a": 3,
+    "exp": "The passage opens with tenants who \"have protested against substantial rent increases arising from changes to the method by which their rents are calculated\" and ends with calls for \"consistent treatment across the country\" and a promised \"national framework\". No new law has cut rents (A); the other options are minor details or not mentioned."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from Seamus Reidy's experience?",
+    "opts": [
+     "Council rent decisions can sometimes be reduced if tenants seek help and apply for hardship relief.",
+     "All wheelchair users are exempt from paying council rent.",
+     "His rent returned to its original level of €37.30.",
+     "The council refused to consider any appeal."
+    ],
+    "a": 0,
+    "exp": "After \"assistance from the Money Advice and Budgeting Service and a hardship application, the council subsequently reduced this to €100\", which suggests increases can be lowered through such routes. His rent was not restored to €37.30 (C), the council did reconsider (D), and no exemption is mentioned (B)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that criteria \"vary considerably between local authorities\"?",
+    "opts": [
+     "To show that every council charges exactly 15.3% of income.",
+     "To explain why tenants in different areas may be treated differently, supporting calls for a national approach.",
+     "To argue that rents should be abolished entirely.",
+     "To praise local authorities for their flexibility."
+    ],
+    "a": 1,
+    "exp": "The point that criteria \"vary considerably\" sets up the later calls for \"consistent treatment across the country\" and \"a national framework\". The 15.3% figure applies only to Dublin City Council (A), and the writer neither calls for abolishing rents (C) nor praises the variation (D)."
+   }
+  ],
+  "2026-11-13-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Car insurance premiums have risen sharply this year.",
+     "Comparison websites now account for most car insurance sales.",
+     "Central Bank research shows large price differences between insurers, so drivers could save money by shopping around, yet few do so.",
+     "The Central Bank has ordered insurers to charge all drivers the same premium."
+    ],
+    "a": 2,
+    "exp": "The regulator found \"substantial variation in the premiums offered to identical drivers\" and says motorists \"could save approximately €300\", but \"only 9% of motorists switch provider\". Premiums have actually \"declined by over 5%\" (A), comparison sites are \"merely 4% of sales\" (B), and no order was issued (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about drivers with penalty points?",
+    "opts": [
+     "They are banned from buying car insurance.",
+     "They always receive the cheapest quotes online.",
+     "They are not allowed to use insurance brokers.",
+     "They may find it harder to compare prices online than other drivers."
+    ],
+    "a": 3,
+    "exp": "Higher-risk drivers, \"including those with penalty points\", \"frequently cannot obtain online quotes\" and are advised to \"consult brokers or approach insurers directly\", so comparing online is harder for them. They are not banned (A), get no special online discount (B), and are in fact advised to use brokers (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the comments from Insurance Ireland's Moyagh Murdock?",
+    "opts": [
+     "To present the insurance industry's perspective, noting falling premiums and customer satisfaction.",
+     "To show that the Central Bank's research was inaccurate.",
+     "To advise drivers to renew without contacting their insurer.",
+     "To announce that insurers will stop offering online quotes."
+    ],
+    "a": 0,
+    "exp": "Murdock \"noted that motor premiums have declined by over 5%\" and that \"almost eight in ten customers report being satisfied\", giving the industry's side. She does not dispute the research (B), recommend passive renewal (C) or announce any change to quotes (D)."
+   }
+  ],
+  "2026-11-13-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "Garth Brooks has cancelled his Irish tour because of high hotel prices.",
+     "Rapid ticket sales for Garth Brooks's regional Irish concerts pushed accommodation prices up, though the hotel industry denied price gouging.",
+     "Hotel prices in Dublin have doubled because all concerts are in the capital.",
+     "The Government has capped hotel prices for next summer."
+    ],
+    "a": 1,
+    "exp": "The passage reports that \"accommodation prices rose substantially\" as tickets \"sold rapidly\", that venues are \"outside Dublin\", and that the IHF \"rejected allegations of price gouging\". The tour was not cancelled (A), the concerts are not in Dublin (C), and no price cap is mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the writer suggest about the booking website figures?",
+    "opts": [
+     "They prove that no rooms will be available next summer.",
+     "They were invented by hotel owners.",
+     "They might overstate how scarce accommodation really is, since more rooms could become available.",
+     "They only refer to properties in Dublin."
+    ],
+    "a": 2,
+    "exp": "The writer says \"these figures may not be comprehensive, as property owners could release additional rooms\", implying availability may be better than the figures suggest. This contradicts (A), there is no claim of invention (B), and the figures concern Galway, Limerick and Cork, not Dublin (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does Paul Gallagher mention that January rates are about half of July and August rates?",
+    "opts": [
+     "To announce that hotels will close in January.",
+     "To encourage fans to attend concerts in winter instead.",
+     "To admit that hotels have been overcharging guests all year.",
+     "To support his argument that high prices reflect demand-based dynamic pricing rather than gouging."
+    ],
+    "a": 3,
+    "exp": "Gallagher rejected \"allegations of price gouging\", attributing increases to \"dynamic pricing contingent upon demand\", and cited the January-versus-summer difference as evidence. He does not mention closures (A), winter concerts (B) or admit overcharging (C)."
+   }
+  ]
+ }
+}
