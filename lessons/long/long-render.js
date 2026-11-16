@@ -15,6 +15,7 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#fff;fon
 .bg{position:absolute;inset:-40px;background-size:cover;background-position:center;animation:kb 40s linear both}
 .shade{position:absolute;inset:0;background:linear-gradient(90deg,#0b332900 0%,#0b332955 45%,#0b3329aa 100%)}
 .shade.skit{background:linear-gradient(180deg,#0b332933 0%,#0b332900 40%,#0b3329aa 100%)}
+.top{position:absolute;top:0;left:0;right:0;height:130px;background:linear-gradient(180deg,#0b3329e6 0%,#0b332999 55%,#0b332900 100%);z-index:4}
 .brand{position:absolute;top:26px;left:44px;font-weight:800;font-size:34px;letter-spacing:-.5px;text-shadow:0 3px 0 #0004;z-index:5}
 .brand b{color:#f0be45;font-weight:700;font-size:24px;margin-left:10px}
 .chips{position:absolute;top:28px;right:44px;display:flex;gap:10px;z-index:5}
@@ -23,7 +24,7 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#fff;fon
 .chip.done{color:#fff}
 .prog{position:absolute;top:0;left:0;right:0;height:8px;background:#ffffff25;z-index:6}
 .prog i{display:block;height:100%;width:100%;background:#f0be45;transform-origin:left}
-.teacher{position:absolute;left:30px;bottom:-30px;width:680px;height:1020px;z-index:2;transform-origin:50% 100%}
+.teacher{position:absolute;left:30px;bottom:-6px;width:680px;height:985px;z-index:2;transform-origin:50% 100%}
 .teacher img,.actor img{width:100%;height:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 10px 18px #0006)}
 .ph{width:100%;height:100%;border-radius:340px 340px 40px 40px;background:#ffffff22;border:6px dashed #ffffff66;display:flex;align-items:center;justify-content:center;
  font-size:44px;font-weight:800;color:#ffffffcc;text-align:center}
@@ -60,7 +61,7 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#fff;fon
  align-items:center;justify-content:center;font-size:66px;font-weight:900;opacity:0}
 .echo i{display:block;width:80%;height:16px;border-radius:8px;background:#1d2a2633;margin-top:22px;overflow:hidden}
 .echo i u{display:block;height:100%;background:#1d2a26;transform-origin:left}
-.actor{position:absolute;bottom:-30px;width:640px;height:960px;z-index:2;transform-origin:50% 100%}
+.actor{position:absolute;bottom:-6px;width:640px;height:960px;z-index:2;transform-origin:50% 100%}
 .actor.l{left:60px}.actor.r{right:60px}
 .actor.r img{transform:scaleX(-1)}
 .actor.listen{filter:brightness(.72)}
@@ -69,7 +70,7 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#fff;fon
 .chap{position:absolute;inset:60px 0 290px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;padding-left:560px}
 .chap .n{width:200px;height:200px;border-radius:50%;background:#f0be45;color:#1d2a26;font-size:120px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 22px #f0be4544}
 .chap .t{font-size:136px;font-weight:900;margin-top:40px;white-space:nowrap;text-shadow:0 8px 0 #0004}
-.chap .s{font-size:50px;font-weight:700;color:#cfe7de;margin-top:14px;white-space:nowrap}
+.chap .s{font-size:50px;font-weight:700;color:#fff;text-shadow:0 3px 8px #000a;margin-top:14px;white-space:nowrap}
 .wipe{position:absolute;inset:0;background:#f0be45;z-index:9;transform:translateX(-110%)}
 .stick{position:absolute;font-size:110px;z-index:6;filter:drop-shadow(0 6px 0 #0003)}
 .conf{position:absolute;top:-60px;width:20px;height:32px;border-radius:5px;z-index:8}
@@ -180,6 +181,7 @@ function page(lesson, si, li, info, opts) {
   const bgName = sc.type === 'skit' ? 'bg-cafe' : 'bg-studio';
   if (opts.has(bgName)) h += `<div class="bg" style="background-image:url('${opts.art}${bgName}.webp');animation-delay:-${info.ts.toFixed(2)}s"></div>`;
   h += `<div class="shade${sc.type === 'skit' ? ' skit' : ''}"></div>`;
+  h += '<div class="top"></div>';
   h += `<div class="prog"><i style="--a:${info.p0.toFixed(4)};--b:${info.p1.toFixed(4)};animation:grow ${info.dur}s linear both"></i></div>`;
   h += `<div class="brand">BinBin 小教室<b>${esc(lesson.id)}・${esc(lesson.title)}</b></div>`;
   h += '<div class="chips">' + chapters.map((c, i) => `<div class="chip${i === sc.ch ? ' on' : i < sc.ch ? ' done' : ''}">${esc(c)}</div>`).join('') + '</div>';
