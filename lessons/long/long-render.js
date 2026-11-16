@@ -57,6 +57,10 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#fff;fon
 .txt span{opacity:.38}
 .w{white-space:nowrap;display:inline-block}
 .zh{font-size:36px;font-weight:700;color:#5a6b66;margin-top:8px}
+.cap.t{top:786px;height:262px;padding:18px 40px}
+.cap.t.wide{top:800px;height:250px}
+.cap.t .txt{font-size:48px;line-height:1.24}
+.cap.t .zh{color:#1c6a55;font-size:35px;line-height:1.3}
 .echo{position:absolute;left:740px;top:800px;width:1120px;height:240px;border-radius:36px;background:#f0be45;color:#1d2a26;z-index:5;display:flex;flex-direction:column;
  align-items:center;justify-content:center;font-size:66px;font-weight:900;opacity:0}
 .echo i{display:block;width:80%;height:16px;border-radius:8px;background:#1d2a2633;margin-top:22px;overflow:hidden}
@@ -102,7 +106,7 @@ const FIT = `window.__fit=function(){
   while(need()&&fs>20&&n++<60){fs*=.95;e.style.fontSize=fs+'px';e.querySelectorAll('.cell').forEach(function(c){c.style.fontSize=fs+'px';c.style.minHeight='0';});}});
  document.querySelectorAll('.cap').forEach(function(c){var t=c.querySelector('.txt'),z=c.querySelector('.zh');if(!t)return;
   var fs=parseFloat(getComputedStyle(t).fontSize),n=0;
-  while(c.scrollHeight>c.clientHeight+1&&fs>20&&n++<60){fs*=.95;t.style.fontSize=fs+'px';if(z)z.style.fontSize=Math.max(22,fs*.6)+'px';}});
+  while(c.scrollHeight>c.clientHeight+1&&fs>20&&n++<60){fs*=.95;t.style.fontSize=fs+'px';if(z)z.style.fontSize=Math.max(26,fs*.72)+'px';}});
 };`;
 
 function twoLines(t) {
@@ -169,8 +173,9 @@ function board(sc, li, lines, info) {
 function caption(ln, info, cls, who) {
   const isEn = ln.v !== 'T';
   const text = ln.cap || ln.say;
+  if (ln.cap) info = Object.assign({}, info, { bounds: [] });   // caption differs from the spoken words: spread the highlight evenly
   if (!text) return '';
-  return `<div class="cap ${isEn ? 'en ' : ''}${cls || ''}">${who ? `<div class="who">${esc(who)}</div>` : ''}<div class="txt">${karaoke(text, info, isEn)}</div>` +
+  return `<div class="cap ${isEn ? 'en ' : ''}${ln.v === 'E' ? 't ' : ''}${cls || ''}">${who ? `<div class="who">${esc(who)}</div>` : ''}<div class="txt">${karaoke(text, info, isEn)}</div>` +
     (ln.zh ? `<div class="zh">${esc(ln.zh)}</div>` : '') + '</div>';
 }
 
@@ -198,7 +203,7 @@ function page(lesson, si, li, info, opts) {
     h += `<div class="actor l${side === 'r' ? ' listen' : ''}" style="${ent ? anim('inL', .6, .1) : ln.L ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'l' ? bob : ''}">${person(opts, L, '店員')}</div></div>`;
     h += `<div class="actor r${side === 'l' ? ' listen' : ''}" style="${ent ? anim('inR', .6, .25) : ln.R ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'r' ? bob : ''}">${person(opts, R, '客人')}</div></div>`;
     if (side) h += `<div class="tail" style="${side === 'l' ? 'left:600px' : 'right:600px'};top:786px"></div>`;
-    h += caption(ln, info, 'wide', ln.v === 'A' ? '店員' : ln.v === 'B' ? '客人' : 'Niamh 老師');
+    h += caption(ln, info, 'wide', ln.v === 'A' ? 'Staff 店員' : ln.v === 'B' ? 'Customer 客人' : 'Niamh');
   } else if (sc.type === 'chapter') {
     h += `<div class="teacher" style="${anim('inL', .6, .35)}"><div style="width:100%;height:100%${bob}">${person(opts, pose, 'Niamh')}</div></div>`;
     h += `<div class="chap"><div class="n" style="${info.first ? anim('pop', .6, .45) : ''}">${esc(sc.num)}</div><div class="t fit" style="${info.first ? anim('up', .5, .7) : ''}">${esc(sc.title)}</div>` +
@@ -208,10 +213,10 @@ function page(lesson, si, li, info, opts) {
     const changed = info.prevPose !== pose;
     h += `<div class="teacher" style="${info.first && info.sceneEnter ? anim('inL', .6, .2) : changed ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${bob}">${person(opts, pose, 'Niamh')}</div></div>`;
     h += board(sc, li, lines, info);
-    h += caption(ln, info, '', ln.v === 'T' ? '' : '🔊 聽聽看');
+    h += caption(ln, info, '', ln.v === 'A' ? '🔊 Listen' : '');
     if (info.echo) {
       const at = info.lead + info.speech + .15;
-      h += `<div class="echo" style="animation:show ${(info.echo).toFixed(2)}s ease-out ${at.toFixed(2)}s both">🎤 換你說！<i><u style="animation:drain ${(info.echo - .3).toFixed(2)}s linear ${(at + .2).toFixed(2)}s both"></u></i></div>`;
+      h += `<div class="echo" style="animation:show ${(info.echo).toFixed(2)}s ease-out ${at.toFixed(2)}s both">🎤 Your turn!<i><u style="animation:drain ${(info.echo - .3).toFixed(2)}s linear ${(at + .2).toFixed(2)}s both"></u></i></div>`;
     }
   }
   if (ln.sticker) h += `<div class="stick" style="left:${ln.stickerX || 620}px;top:${ln.stickerY || 150}px;${anim('pop', .5, info.lead)}"><div style="animation:wob 1s ease-in-out ${(info.lead + .5).toFixed(2)}s infinite">${ln.sticker}</div></div>`;

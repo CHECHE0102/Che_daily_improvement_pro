@@ -6,31 +6,28 @@
  "date": "2026-11-16",
  "teacher": "niamh",
  "voices": {
-  "T": "zh-TW-HsiaoYuNeural",
+  "T": "en-IE-EmilyNeural",
   "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
   "A": "en-IE-EmilyNeural",
   "B": "en-GB-SoniaNeural"
  },
  "prosody": {
-  "T": [
-   "+8%",
-   "+0Hz"
-  ],
-  "TE": [
-   "-6%",
+  "E": [
+   "-4%",
    "+0Hz"
   ],
   "A": [
-   "-8%",
+   "-12%",
    "+0Hz"
   ],
   "B": [
-   "-4%",
+   "-6%",
    "-2Hz"
   ]
  },
  "chapters": [
-  "開場",
+  "Intro",
   "接單",
   "聽不懂",
   "出包了",
@@ -72,19 +69,21 @@
    "board": {
     "emoji": "😱",
     "big": [
-     "第一天上班",
-     "*就當機？"
+     "My first day",
+     "*and I froze!"
     ]
    },
    "lines": [
     {
-     "v": "T",
-     "say": "我第一天在咖啡店打工，客人講了一串，我只聽懂 hi。",
+     "v": "E",
+     "say": "On my first day in a café, a customer said all that, and I only understood hi.",
+     "zh": "我第一天在咖啡店打工，客人講了一串，我只聽懂 hi。",
      "pose": "talk2"
     },
     {
-     "v": "T",
-     "say": "結果，我給了他一杯熱巧克力。",
+     "v": "E",
+     "say": "So I gave him a hot chocolate.",
+     "zh": "結果，我給了他一杯熱巧克力。",
      "pose": "secret",
      "sticker": "🍫",
      "stickerX": 640,
@@ -96,10 +95,10 @@
    "type": "talk",
    "ch": 0,
    "board": {
-    "kicker": "老師的名字怎麼唸？",
+    "kicker": "How do you say my name?",
     "big": [
      "Niamh",
-     "*＝ 妮芙"
+     "*＝ Neev"
     ],
     "bigStep": [
      0,
@@ -108,15 +107,19 @@
    },
    "lines": [
     {
-     "v": "T",
-     "say": "哈囉大家，我是 Niamh 老師！",
-     "pose": "hi"
+     "v": "E",
+     "say": "Hi everyone, I'm Neev!",
+     "zh": "哈囉大家，我是 Niamh 老師！",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh!"
     },
     {
-     "v": "T",
-     "say": "對，N, I, A, M, H，唸作妮芙。愛爾蘭名字就是這麼不講道理。",
+     "v": "E",
+     "say": "It's spelled N, I, A, M, H, but we say Neev. Irish names make no sense!",
+     "zh": "拼作 N-I-A-M-H，卻唸作「妮芙」。愛爾蘭名字就是不講道理！",
      "pose": "talk2",
-     "step": 1
+     "step": 1,
+     "cap": "It's spelled N, I, A, M, H, but we say Niamh. Irish names make no sense!"
     }
    ]
   },
@@ -124,24 +127,26 @@
    "type": "talk",
    "ch": 0,
    "board": {
-    "kicker": "今天的任務",
+    "kicker": "Today's mission",
     "big": [
-     "咖啡店打工",
-     "*12 句"
+     "Your first day",
+     "*12 sentences"
     ],
-    "cta": "第一天上班不當機",
+    "cta": "咖啡店打工第一天・12 句",
     "ctaStep": 1
    },
    "lines": [
     {
-     "v": "T",
-     "say": "今天我要教你十二句話，讓你第一天去咖啡店上班，不會像我一樣當機。",
+     "v": "E",
+     "say": "Today, I'll teach you twelve sentences for your first day in a café.",
+     "zh": "今天教你十二句話，第一天去咖啡店上班就用得上。",
      "pose": "point",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "準備好了嗎？Let's go!",
+     "v": "E",
+     "say": "So you won't freeze like I did. Ready? Let's go!",
+     "zh": "這樣你就不會像我一樣當機。準備好了嗎？出發！",
      "pose": "cheer"
     }
    ]
@@ -150,13 +155,20 @@
    "type": "chapter",
    "ch": 1,
    "num": "1",
-   "title": "接單",
-   "sub": "三句話，接完一張單",
+   "title": "Taking an order",
+   "sub": "接單：三句話接完一張單",
    "lines": [
     {
-     "v": "T",
-     "say": "第一段，接單。客人走到櫃檯，你第一句要說什麼？",
+     "v": "E",
+     "say": "Part one: taking an order.",
+     "zh": "第一段：接單。",
      "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A customer walks up to you. What do you say first?",
+     "zh": "客人走到櫃檯，你第一句要說什麼？",
+     "pose": "think"
     }
    ]
   },
@@ -164,7 +176,7 @@
    "type": "talk",
    "ch": 1,
    "board": {
-    "kicker": "櫃檯的第一句",
+    "kicker": "The first thing you say",
     "items": [
      "✗ May I help you?",
      "✓ What can I get you?"
@@ -172,14 +184,16 @@
    },
    "lines": [
     {
-     "v": "T",
-     "say": "課本教的是 May I help you。沒有錯，但是在咖啡店聽起來太正式了。",
+     "v": "E",
+     "say": "Your textbook says: May I help you? It's correct, but too formal for a café.",
+     "zh": "課本教 May I help you？沒有錯，但在咖啡店太正式了。",
      "pose": "think",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "大家真正說的，是這一句。",
+     "v": "E",
+     "say": "This is what we really say.",
+     "zh": "我們真正說的是這一句。",
      "pose": "point",
      "step": 2
     }
@@ -189,6 +203,7 @@
    "type": "phrase",
    "ch": 1,
    "num": 1,
+   "label": "No. 1",
    "phrase": "What can I get you?",
    "meaning": "想喝點什麼？",
    "note": "輕鬆又親切，櫃檯必備",
@@ -199,20 +214,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "意思是，我可以幫你準備什麼？",
+     "v": "E",
+     "say": "It means: what would you like? It's friendly and relaxed.",
+     "zh": "意思是：想喝點什麼？語氣親切又輕鬆。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "語氣輕鬆又親切，客人一聽就覺得你很熟練。",
+     "v": "E",
+     "say": "Say it with a smile, and you already sound like a pro.",
+     "zh": "帶著微笑說，聽起來就很專業。",
      "pose": "thumb",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -227,13 +245,15 @@
    "type": "phrase",
    "ch": 1,
    "num": 2,
+   "label": "No. 2",
    "phrase": "Is that to have here or take away?",
    "meaning": "內用還是外帶？",
    "note": "美國 to go ＝ 愛爾蘭 take away",
    "lines": [
     {
-     "v": "T",
-     "say": "客人點完之後，你要問內用還是外帶。",
+     "v": "E",
+     "say": "After they order, ask this.",
+     "zh": "客人點完之後，問這一句。",
      "pose": "talk"
     },
     {
@@ -242,20 +262,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "have here 是內用，take away 是外帶。",
+     "v": "E",
+     "say": "Have here means you drink it in the café. Take away means you bring it with you.",
+     "zh": "have here 是內用，take away 是外帶。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "注意！美國人說 to go，但是在愛爾蘭和英國，外帶叫 take away。",
+     "v": "E",
+     "say": "Careful! Americans say to go. In Ireland and the UK, we say take away.",
+     "zh": "注意！美國人說 to go，愛爾蘭和英國說 take away。",
      "pose": "secret",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
      "pose": "cheer"
     },
     {
@@ -270,13 +293,15 @@
    "type": "phrase",
    "ch": 1,
    "num": 3,
+   "label": "No. 3",
    "phrase": "Anything else for you?",
    "meaning": "還需要別的嗎？",
    "note": "多問一句，多賣一塊蛋糕",
    "lines": [
     {
-     "v": "T",
-     "say": "結帳之前，再多問一句。",
+     "v": "E",
+     "say": "Before they pay, ask one more question.",
+     "zh": "結帳之前，再多問一句。",
      "pose": "talk"
     },
     {
@@ -285,14 +310,16 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "還需要別的嗎？",
+     "v": "E",
+     "say": "It means: do you want something more?",
+     "zh": "意思是：還需要別的嗎？",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "老闆會很愛你，因為客人常常就多買一塊蛋糕。",
+     "v": "E",
+     "say": "Your boss will love you, because people often add a cake!",
+     "zh": "老闆會很愛你，因為客人常常就多買一塊蛋糕！",
      "pose": "secret",
      "sticker": "🍰",
      "stickerX": 640,
@@ -300,8 +327,9 @@
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -319,8 +347,9 @@
    "R": "customer",
    "lines": [
     {
-     "v": "T",
-     "say": "來看一次完整的接單。",
+     "v": "E",
+     "say": "Let's watch a full order.",
+     "zh": "來看一次完整的接單。",
      "pose": "talk"
     },
     {
@@ -355,8 +384,9 @@
      "R": "customer-happy"
     },
     {
-     "v": "T",
-     "say": "看，三句話，一張單就接完了。",
+     "v": "E",
+     "say": "See? Three sentences, and the order is done.",
+     "zh": "看，三句話，一張單就接完了。",
      "pose": "talk"
     }
    ]
@@ -365,13 +395,20 @@
    "type": "chapter",
    "ch": 2,
    "num": "2",
-   "title": "聽不懂",
-   "sub": "客人講太快怎麼辦？",
+   "title": "I didn't catch that",
+   "sub": "聽不懂：客人講太快怎麼辦？",
    "lines": [
     {
-     "v": "T",
-     "say": "第二段。客人講話超快，口音又重，你完全沒聽懂，怎麼辦？",
+     "v": "E",
+     "say": "Part two. The customer talks really fast, and you don't understand.",
+     "zh": "第二段。客人講話超快，你完全沒聽懂。",
      "pose": "think"
+    },
+    {
+     "v": "E",
+     "say": "What now?",
+     "zh": "怎麼辦？",
+     "pose": "barista-panic"
     }
    ]
   },
@@ -379,7 +416,7 @@
    "type": "talk",
    "ch": 2,
    "board": {
-    "kicker": "千萬不要這樣說",
+    "kicker": "Never say this",
     "items": [
      "✗ What?",
      "✗ Again!"
@@ -387,14 +424,16 @@
    },
    "lines": [
     {
-     "v": "T",
-     "say": "這時候，千萬不要說 What?",
+     "v": "E",
+     "say": "Please, never say: What?",
+     "zh": "拜託，千萬不要說 What？",
      "pose": "no",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "也不要說 Again! 聽起來很兇。",
+     "v": "E",
+     "say": "And never say: Again! It sounds rude.",
+     "zh": "也不要說 Again！聽起來很沒禮貌。",
      "pose": "no",
      "step": 2
     }
@@ -404,13 +443,15 @@
    "type": "phrase",
    "ch": 2,
    "num": 4,
+   "label": "No. 4",
    "phrase": "Sorry, could you say that again?",
    "meaning": "不好意思，可以再說一次嗎？",
    "note": "開頭加 Sorry，立刻變客氣",
    "lines": [
     {
-     "v": "T",
-     "say": "客氣的說法是這一句。",
+     "v": "E",
+     "say": "Here is the polite way.",
+     "zh": "客氣的說法是這一句。",
      "pose": "talk"
     },
     {
@@ -419,20 +460,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "不好意思，可以再說一次嗎？",
+     "v": "E",
+     "say": "It means: please repeat that.",
+     "zh": "意思是：請再說一次。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "開頭加一個 Sorry，整句話立刻變客氣。",
+     "v": "E",
+     "say": "Start with sorry, and the whole sentence becomes polite.",
+     "zh": "開頭加 Sorry，整句話立刻變客氣。",
      "pose": "thumb",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -447,13 +491,15 @@
    "type": "phrase",
    "ch": 2,
    "num": 5,
+   "label": "No. 5",
    "phrase": "Sorry, was that an oat flat white?",
    "meaning": "重複確認：剛剛是……嗎？",
    "note": "Was that ＋ 你聽到的東西",
    "lines": [
     {
-     "v": "T",
-     "say": "還有一招更厲害：把你聽到的部分重複一次，讓客人確認。",
+     "v": "E",
+     "say": "Here's a smarter trick. Repeat what you heard, and let the customer check it.",
+     "zh": "更厲害的一招：把你聽到的重複一次，讓客人確認。",
      "pose": "secret"
     },
     {
@@ -462,14 +508,16 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "剛剛是燕麥奶的 flat white 嗎？",
+     "v": "E",
+     "say": "Say was that, then the thing you heard.",
+     "zh": "先說 was that，再接你聽到的東西。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "客人會覺得你很專業，其實你只是在猜。",
+     "v": "E",
+     "say": "You sound very professional. Really, you're just guessing!",
+     "zh": "聽起來超專業，其實你只是在猜！",
      "pose": "secret",
      "sticker": "🤫",
      "stickerX": 640,
@@ -477,8 +525,9 @@
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
      "pose": "cheer"
     },
     {
@@ -493,13 +542,15 @@
    "type": "phrase",
    "ch": 2,
    "num": 6,
+   "label": "No. 6",
    "phrase": "Bear with me, it's my first day.",
    "meaning": "請多包涵，我第一天上班",
    "note": "bear with me ＝ 請對我有點耐心",
    "lines": [
     {
-     "v": "T",
-     "say": "如果真的手忙腳亂，就打出這張王牌。",
+     "v": "E",
+     "say": "And if everything goes wrong, use this magic sentence.",
+     "zh": "如果真的手忙腳亂，就用這句神奇的話。",
      "pose": "cheer"
     },
     {
@@ -508,20 +559,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "請多包涵，我今天第一天上班。",
+     "v": "E",
+     "say": "Bear with me means: please be patient with me.",
+     "zh": "bear with me 意思是：請對我有點耐心。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "bear with me，就是請對我有點耐心。這句一說，客人都會對你微笑。",
+     "v": "E",
+     "say": "Say this, and almost every customer will smile at you.",
+     "zh": "說出這句，幾乎每個客人都會對你微笑。",
      "pose": "talk2",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -538,14 +592,15 @@
    "board": {
     "emoji": "🤭",
     "big": [
-     "這句話",
-     "*我用了一個月"
+     "I used it",
+     "*for a month"
     ]
    },
    "lines": [
     {
-     "v": "T",
-     "say": "偷偷告訴你，這句話，我用了整整一個月。",
+     "v": "E",
+     "say": "A little secret: I used this sentence for a whole month.",
+     "zh": "偷偷告訴你，這句話我用了整整一個月。",
      "pose": "secret"
     }
    ]
@@ -554,13 +609,20 @@
    "type": "chapter",
    "ch": 3,
    "num": "3",
-   "title": "出包了",
-   "sub": "道歉・解決・加碼",
+   "title": "Oops!",
+   "sub": "出包了：道歉・解決・加碼",
    "lines": [
     {
-     "v": "T",
-     "say": "第三段。做錯飲料一定會發生，我保證。重點是做錯之後怎麼說。",
+     "v": "E",
+     "say": "Part three. One day, you will make the wrong drink. I promise!",
+     "zh": "第三段。你總有一天會做錯飲料，我保證！",
      "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "What matters is what you say next.",
+     "zh": "重點是接下來怎麼說。",
+     "pose": "point"
     }
    ]
   },
@@ -568,29 +630,32 @@
    "type": "talk",
    "ch": 3,
    "board": {
-    "kicker": "出包三步驟",
+    "kicker": "Three steps",
     "items": [
-     "① 道歉",
-     "② 馬上解決",
-     "③ 加碼"
+     "① Say sorry　道歉",
+     "② Fix it fast　馬上解決",
+     "③ A little extra　加碼"
     ]
    },
    "lines": [
     {
-     "v": "T",
-     "say": "記住三個步驟。第一，道歉。",
+     "v": "E",
+     "say": "Remember three steps. One: say sorry.",
+     "zh": "記住三個步驟。第一，道歉。",
      "pose": "point",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "第二，馬上解決。",
+     "v": "E",
+     "say": "Two: fix it fast.",
+     "zh": "第二，馬上解決。",
      "pose": "point",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "第三，加碼。",
+     "v": "E",
+     "say": "Three: give a little extra.",
+     "zh": "第三，加碼。",
      "pose": "point",
      "step": 3
     }
@@ -600,13 +665,15 @@
    "type": "phrase",
    "ch": 3,
    "num": 7,
+   "label": "No. 7",
    "phrase": "I'm so sorry about that.",
    "meaning": "真的很抱歉",
    "note": "so sorry 比 very sorry 更真心",
    "lines": [
     {
-     "v": "T",
-     "say": "第一步，道歉。",
+     "v": "E",
+     "say": "Step one: say sorry.",
+     "zh": "第一步，道歉。",
      "pose": "barista-sorry"
     },
     {
@@ -615,20 +682,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "真的很抱歉。",
+     "v": "E",
+     "say": "It shows you really feel bad about it.",
+     "zh": "表示你真的覺得很抱歉。",
      "pose": "barista-sorry",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "注意是 so sorry，不是 very sorry。so 聽起來比較真心。",
+     "v": "E",
+     "say": "Say so sorry, not very sorry. So sounds more honest.",
+     "zh": "說 so sorry，不要說 very sorry。so 聽起來比較真心。",
      "pose": "talk",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -643,13 +713,15 @@
    "type": "phrase",
    "ch": 3,
    "num": 8,
+   "label": "No. 8",
    "phrase": "I'll make you a fresh one straight away.",
    "meaning": "我馬上幫你重做一杯",
    "note": "straight away ＝ 立刻",
    "lines": [
     {
-     "v": "T",
-     "say": "第二步，馬上解決。",
+     "v": "E",
+     "say": "Step two: fix it fast.",
+     "zh": "第二步，馬上解決。",
      "pose": "talk"
     },
     {
@@ -658,20 +730,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "我馬上幫你重做一杯。",
+     "v": "E",
+     "say": "A fresh one means a new drink.",
+     "zh": "a fresh one 就是重做一杯新的。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "straight away 就是立刻，愛爾蘭和英國人很愛用。",
+     "v": "E",
+     "say": "And straight away means right now. We say it a lot in Ireland.",
+     "zh": "straight away 是立刻，愛爾蘭人很常說。",
      "pose": "thumb",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸！",
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
      "pose": "cheer"
     },
     {
@@ -686,13 +761,15 @@
    "type": "phrase",
    "ch": 3,
    "num": 9,
+   "label": "No. 9",
    "phrase": "This one's on the house.",
    "meaning": "這杯店家請客",
    "note": "on the house ＝ 店家招待",
    "lines": [
     {
-     "v": "T",
-     "say": "第三步，如果老闆同意，可以加碼。",
+     "v": "E",
+     "say": "Step three, if your boss says yes: give a little extra.",
+     "zh": "第三步，如果老闆同意，可以加碼。",
      "pose": "secret"
     },
     {
@@ -701,14 +778,16 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "on the house 不是在房子上，是店家請客。",
+     "v": "E",
+     "say": "On the house means the café pays for it.",
+     "zh": "on the house 是店家招待，由店裡請客。",
      "pose": "talk2",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "小提醒：要先問過老闆再說，不然請客的就是你的薪水。",
+     "v": "E",
+     "say": "But ask your boss first, or you will be the one paying!",
+     "zh": "但要先問老闆，不然付錢的就是你！",
      "pose": "secret",
      "sticker": "💸",
      "stickerX": 640,
@@ -716,8 +795,9 @@
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -762,13 +842,20 @@
    "type": "chapter",
    "ch": 4,
    "num": "4",
-   "title": "跟同事",
-   "sub": "尖峰時間的三句話",
+   "title": "With your team",
+   "sub": "跟同事：尖峰時間的三句話",
    "lines": [
     {
-     "v": "T",
-     "say": "第四段。除了客人，你還要跟同事溝通。尖峰時間，大家講話都很短。",
-     "pose": "point"
+     "v": "E",
+     "say": "Part four. You also need to talk to your coworkers.",
+     "zh": "第四段。你還要跟同事溝通。",
+     "pose": "talk"
+    },
+    {
+     "v": "E",
+     "say": "When it's busy, everyone speaks in short sentences.",
+     "zh": "忙的時候，大家講話都很短。",
+     "pose": "talk2"
     }
    ]
   },
@@ -776,13 +863,15 @@
    "type": "phrase",
    "ch": 4,
    "num": 10,
+   "label": "No. 10",
    "phrase": "Can you give me a hand?",
    "meaning": "可以幫我一下嗎？",
    "note": "give me a hand ＝ 幫個忙",
    "lines": [
     {
-     "v": "T",
-     "say": "忙不過來的時候，說這一句。",
+     "v": "E",
+     "say": "When you have too much to do, say this.",
+     "zh": "忙不過來的時候，說這一句。",
      "pose": "barista-ask"
     },
     {
@@ -791,14 +880,16 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "可以幫我一下嗎？",
+     "v": "E",
+     "say": "Give me a hand means: help me.",
+     "zh": "give me a hand 意思是：幫我一下。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "give me a hand，給我一隻手，就是幫個忙。",
+     "v": "E",
+     "say": "You're not asking for a real hand, of course!",
+     "zh": "當然不是真的要一隻手！",
      "pose": "talk2",
      "sticker": "🖐️",
      "stickerX": 640,
@@ -806,8 +897,9 @@
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -822,13 +914,15 @@
    "type": "phrase",
    "ch": 4,
    "num": 11,
+   "label": "No. 11",
    "phrase": "Can you mind the till for a sec?",
    "meaning": "幫我顧一下收銀台",
    "note": "till ＝ 收銀台　for a sec ＝ 一下下",
    "lines": [
     {
-     "v": "T",
-     "say": "要離開櫃檯的時候，說這一句。",
+     "v": "E",
+     "say": "When you need to leave the counter, say this.",
+     "zh": "要離開櫃檯的時候，說這一句。",
      "pose": "talk"
     },
     {
@@ -837,20 +931,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "till 是收銀台。mind 在這裡是幫忙顧著的意思。",
+     "v": "E",
+     "say": "The till is where the money goes. Mind it means: watch it for me.",
+     "zh": "till 是收銀台。mind 是幫我顧著。",
      "pose": "talk",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "for a sec 是一下下。整句就是，幫我顧一下收銀台。",
+     "v": "E",
+     "say": "And for a sec means for a very short time.",
+     "zh": "for a sec 是一下下。",
      "pose": "thumb",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸！",
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
      "pose": "cheer"
     },
     {
@@ -865,13 +962,15 @@
    "type": "phrase",
    "ch": 4,
    "num": 12,
+   "label": "No. 12",
    "phrase": "I'm going on my break.",
    "meaning": "我去休息了",
    "note": "全店最快樂的一句話",
    "lines": [
     {
-     "v": "T",
-     "say": "最後一句，也是全店最快樂的一句話。",
+     "v": "E",
+     "say": "And the last one. It's the happiest sentence in the whole café!",
+     "zh": "最後一句，也是全店最快樂的一句話！",
      "pose": "cheer"
     },
     {
@@ -880,20 +979,23 @@
      "pose": "point"
     },
     {
-     "v": "T",
-     "say": "我去休息了。",
+     "v": "E",
+     "say": "Your break is your rest time at work.",
+     "zh": "break 就是上班中間的休息時間。",
      "pose": "barista-break",
      "step": 1
     },
     {
-     "v": "T",
-     "say": "break 就是上班中間的休息時間。",
+     "v": "E",
+     "say": "Everyone loves saying this one.",
+     "zh": "每個人都超愛說這句。",
      "pose": "barista-break",
      "step": 2
     },
     {
-     "v": "T",
-     "say": "跟我唸一次！",
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
      "pose": "cheer"
     },
     {
@@ -908,12 +1010,13 @@
    "type": "chapter",
    "ch": 5,
    "num": "☘",
-   "title": "愛爾蘭限定",
-   "sub": "加碼送你兩句",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：加碼送你兩句",
    "lines": [
     {
-     "v": "T",
-     "say": "最後，加碼送你兩句愛爾蘭限定！",
+     "v": "E",
+     "say": "One more thing! Here are two bonus phrases, only in Ireland.",
+     "zh": "還有加碼！送你兩句愛爾蘭限定。",
      "pose": "cheer"
     }
    ]
@@ -922,10 +1025,10 @@
    "type": "talk",
    "ch": 5,
    "board": {
-    "kicker": "客人拿到咖啡會說",
+    "kicker": "When customers get their coffee",
     "big": [
      "*Thanks a million!",
-     "謝你一百萬次"
+     "太感謝了"
     ],
     "bigStep": [
      0,
@@ -934,8 +1037,9 @@
    },
    "lines": [
     {
-     "v": "T",
-     "say": "客人拿到咖啡，常常不說 thank you，而是說這句。",
+     "v": "E",
+     "say": "When customers get their coffee, they often don't say thank you. They say this.",
+     "zh": "客人拿到咖啡，常常不說 thank you，而是說這句。",
      "pose": "customer-happy"
     },
     {
@@ -944,8 +1048,9 @@
      "pose": "customer-happy"
     },
     {
-     "v": "T",
-     "say": "謝你一百萬次。沒有在誇張，這裡的人真的每天這樣講。",
+     "v": "E",
+     "say": "A million thanks! It sounds big, but people here say it every day.",
+     "zh": "一百萬個感謝！聽起來很誇張，但這裡的人每天都這樣說。",
      "pose": "talk2",
      "step": 1
     }
@@ -955,7 +1060,7 @@
    "type": "talk",
    "ch": 5,
    "board": {
-    "kicker": "那你要怎麼回？",
+    "kicker": "What do you say back?",
     "items": [
      "✗ You're welcome.",
      "✓ No bother!"
@@ -963,8 +1068,9 @@
    },
    "lines": [
     {
-     "v": "T",
-     "say": "那你要怎麼回？不是 You're welcome。",
+     "v": "E",
+     "say": "So what do you say back? Not: you're welcome.",
+     "zh": "那你要怎麼回？不是 You're welcome。",
      "pose": "think",
      "step": 1
     },
@@ -975,8 +1081,9 @@
      "step": 2
     },
     {
-     "v": "T",
-     "say": "不麻煩！說出這句，你就是半個愛爾蘭人了。",
+     "v": "E",
+     "say": "It means: no problem at all. Say it, and you're half Irish already!",
+     "zh": "意思是：完全不麻煩。說出這句，你就是半個愛爾蘭人了！",
      "pose": "cheer"
     },
     {
@@ -991,12 +1098,13 @@
    "type": "chapter",
    "ch": 6,
    "num": "★",
-   "title": "總複習",
-   "sub": "跟著店員一起唸",
+   "title": "All together",
+   "sub": "總複習：跟著店員一起唸",
    "lines": [
     {
-     "v": "T",
-     "say": "來，用一場完整的戲，把今天的句子串起來。跟著店員一起大聲唸！",
+     "v": "E",
+     "say": "Now let's put it all together in one scene. Say the lines with me!",
+     "zh": "現在用一場戲把今天的句子串起來。跟我一起唸！",
      "pose": "cheer"
     }
    ]
@@ -1051,7 +1159,7 @@
    "type": "recap",
    "ch": 6,
    "board": {
-    "kicker": "今天的 12 句",
+    "kicker": "Today's 12 sentences",
     "items": [
      "What can I get you?",
      "Is that to have here or take away?",
@@ -1069,13 +1177,15 @@
    },
    "lines": [
     {
-     "v": "T",
-     "say": "太棒了，你被錄取了！",
+     "v": "E",
+     "say": "Brilliant! You got the job!",
+     "zh": "太棒了，你被錄取了！",
      "pose": "cheer"
     },
     {
-     "v": "T",
-     "say": "今天的十二句都在這裡。截圖存起來，上班前再看一次。",
+     "v": "E",
+     "say": "Here are all twelve sentences. Take a screenshot, and read them before work.",
+     "zh": "十二句都在這裡。截圖存起來，上班前再看一次。",
      "pose": "point"
     }
    ]
@@ -1086,7 +1196,7 @@
    "board": {
     "emoji": "☕",
     "big": [
-     "我們下一課見",
+     "See you next time",
      "*Bye!"
     ],
     "cta": "打開 BinBin，每天用一則新聞練英文",
@@ -1094,13 +1204,16 @@
    },
    "lines": [
     {
-     "v": "T",
-     "say": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
-     "pose": "hi"
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
     },
     {
-     "v": "T",
-     "say": "現在，I'm going on my break. 我們下一課見，Bye!",
+     "v": "E",
+     "say": "And now, I'm going on my break. See you next time. Bye!",
+     "zh": "現在，我要去休息了。下一課見，Bye！",
      "pose": "barista-break",
      "end": true
     }
