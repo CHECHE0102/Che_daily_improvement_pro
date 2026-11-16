@@ -82,6 +82,15 @@ async def main():
         t += info["dur"]
     total = t
     print(f"total {total:.0f}s = {total / 60:.1f} min")
+    if only is None:   # YouTube chapter list: when each chapter starts
+        seen_ch, rows = set(), []
+        for (sc, ln, first, si, li), info in zip(lines, infos):
+            if sc.get("ch") not in seen_ch:
+                seen_ch.add(sc.get("ch"))
+                tt = int(info["t0"])
+                rows.append(f"{tt // 60:02d}:{tt % 60:02d} {lesson.get('chapters', [])[sc.get('ch', 0)]}")
+        open(os.path.join(ROOT, "lessons", "out", lesson["id"] + "-chapters.txt"), "w", encoding="utf-8").write("\n".join(rows) + "\n")
+        print("\n".join(rows))
 
     # 2) frames
     jobs = [{"si": si, "li": li, "frames": 1 if stills else info["frames"], "html": os.path.join(work, f"f{info['idx']:03d}.html"),

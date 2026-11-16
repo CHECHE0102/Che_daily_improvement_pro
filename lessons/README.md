@@ -53,16 +53,7 @@ Set `"teacher"` and copy that teacher's `voices` and `prosody` into the script. 
 
 Art lives in `assets/art/lesson/<prefix>-{talk,yay,hi,bye,think,wow,point}.webp` (Cian's prefix is `teacher`). A new teacher needs all 7 poses before its first lesson; register it in `TEACHERS` in `lessons/lesson-render.js`.
 
-## Long lessons (5–10 minutes, YouTube 16:9)
+## Long videos (V001 onward, YouTube only)
 
-`lessons/long/L###-<slug>.json` → **Long lesson video** workflow → `L###.mp4` (1920×1080) on the `lesson-videos` branch. Not shown in the app.
-Drawn by `lessons/long/long-render.js`; built by `tools/make_long_lesson.py` (`--fake-tts --stills --shots DIR` checks every line's layout without network).
-
-- Top level: `id`, `title`, `teacher`, `voices`, `prosody`, `chapters` (names of the chips at the top), `scenes`.
-- Scene types (`ch` = chapter index): `talk` (teacher + board: `board {emoji, kicker, big[], bigStep[], items[], cta}`), `phrase` (`num, phrase, meaning, note`),
-  `skit` (café, `L` staff pose / `R` customer pose; lines `v: "A"` staff, `"B"` customer, each with `zh`), `chapter` (`num, title, sub`), `recap` (`board.items`).
-- Line fields: `v` (`T` teacher Chinese, `A`/`B` English), `say`, `pose`, `step` (reveals board parts: items 1..n; phrase: 1 meaning, 2 note),
-  `echo: true` (leaves time for the viewer to repeat), `pause`, `sticker`, `end`.
-- Text marked to fit shrinks by itself, and the renderer refuses a line whose text leaves the board or caption.
-- Teacher art: `assets/art/lesson/<teacher>/niamh-<pose>.webp`, `bg-cafe.webp`, `bg-studio.webp`. A missing image shows a dashed placeholder.
-- L031–L040 teacher: Niamh 老師 (28, semi-realistic style), `zh-TW-HsiaoYuNeural` / `en-IE-EmilyNeural`, customer `en-GB-SoniaNeural`.
+5–10 minute lessons for YouTube, taught in English by Niamh with Chinese subtitles. Not shown in the app.
+Scripts are `lessons/long/V###-<slug>.json`; the full how-to (format, poses, steps, checks, delivery) is in `lessons/long/README.md`.
