@@ -1,0 +1,93 @@
+name: Long lesson video
+# Renders the long YouTube lessons (lessons/long/V###-*.json, 1920x1080, 5-10 minutes) and stores
+# V###.mp4, V###-thumb.png and V###-chapters.txt on the lesson-videos branch (never on main).
+# On push: only the scripts changed by that push. By hand: the script named in "script" (or "all").
+on:
+  push:
+    paths: ['lessons/long/*.json']
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Script to render, e.g. lessons/long/V001-cafe-first-day.json (or "all")'
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: long-lesson-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Pick scripts
+        id: pick
+        run: |
+          want="${{ github.event.inputs.script }}"
+          before="${{ github.event.before }}"
+          if [ "$want" = all ]; then list=$(ls lessons/long/*.json)
+          elif [ -n "$want" ]; then list="$want"
+          elif [ -z "$before" ] || [ "$before" = 0000000000000000000000000000000000000000 ]; then
+            list=$(git diff --no-renames --name-only --diff-filter=AM origin/main...HEAD -- 'lessons/long/*.json' || true)
+          else list=$(git diff --no-renames --name-only --diff-filter=AM "$before" "${{ github.sha }}" -- 'lessons/long/*.json' || true); fi
+          echo "list=$(echo $list)" >> "$GITHUB_OUTPUT"
+          echo "scripts: $list"
+      - uses: actions/setup-python@v5
+        if: steps.pick.outputs.list != ''
+        with:
+          python-version: '3.12'
+      - if: steps.pick.outputs.list != ''
+        run: pip install "edge-tts>=7,<8" numpy && sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fonts-noto-cjk fonts-noto-color-emoji
+      - name: Restore voice clips from earlier runs
+        if: steps.pick.outputs.list != ''
+        uses: actions/cache/restore@v4
+        with:
+          path: lessons/out/*/a*
+          key: long-lesson-tts-${{ github.run_id }}
+          restore-keys: long-lesson-tts-
+      - uses: actions/setup-node@v4
+        if: steps.pick.outputs.list != ''
+        with:
+          node-version: '20'
+      - name: Render
+        if: steps.pick.outputs.list != ''
+        # the TTS service sometimes refuses for a few minutes; finished clips stay on disk, so each pass carries on
+        run: |
+          npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
+          for f in ${{ steps.pick.outputs.list }}; do
+            ok=0
+            for i in 1 2 3 4; do python tools/make_long_lesson.py "$f" && ok=1 && break; echo "pass $i failed, waiting"; sleep 90; done
+            [ $ok = 1 ] || { echo "::error::could not render $f"; exit 1; }
+            id=$(python -c "import json,sys;print(json.load(open(sys.argv[1]))['id'])" "$f")
+            node tools/make_long_thumb.js "$f" "lessons/out/$id-thumb.png" || echo "::warning::thumbnail failed for $f"
+          done
+          ls -la lessons/out/
+      - name: Keep voice clips for the next run
+        if: always() && steps.pick.outputs.list != ''
+        uses: actions/cache/save@v4
+        with:
+          path: lessons/out/*/a*
+          key: long-lesson-tts-${{ github.run_id }}
+      - name: Keep each video under GitHub's 100 MB file limit
+        if: steps.pick.outputs.list != ''
+        run: |
+          for f in lessons/out/*.mp4; do
+            if [ "$(stat -c%s "$f")" -gt 90000000 ]; then
+              echo "::warning::$f is over 90 MB, encoding it again at a lower bitrate"
+              ffmpeg -y -v error -i "$f" -c:v libx264 -preset slow -b:v 1300k -maxrate 1500k -bufsize 3000k -pix_fmt yuv420p -c:a copy -movflags +faststart /tmp/small.mp4 && mv /tmp/small.mp4 "$f"
+            fi
+          done
+      - name: Store videos on the lesson-videos branch
+        if: steps.pick.outputs.list != ''
+        run: |
+          mkdir -p /tmp/pv && cp lessons/out/*.mp4 lessons/out/*-thumb.png lessons/out/*-chapters.txt /tmp/pv/ 2>/dev/null || true
+          if git fetch -q origin lesson-videos; then git worktree add -q /tmp/vb origin/lesson-videos && cd /tmp/vb && git checkout -q -B lesson-videos
+          else git worktree add -q --detach /tmp/vb && cd /tmp/vb && git checkout -q --orphan lesson-videos && git rm -rfq .; fi
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          cp /tmp/pv/* . && git add -A .
+          git commit -qm "Long lesson video" || exit 0
+          git push -q origin HEAD:lesson-videos
