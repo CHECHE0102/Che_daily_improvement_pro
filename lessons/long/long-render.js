@@ -12,7 +12,7 @@ const CSS = `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#fff;font-family:'Poppins','Noto Sans TC','Noto Sans CJK TC',sans-serif;
  background:linear-gradient(160deg,#2a8a72 0%,#1c6a55 50%,#123f34 100%)}
-.bg{position:absolute;inset:-40px;background-size:cover;background-position:center;animation:kb 40s linear both}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center}
 .shade{position:absolute;inset:0;background:linear-gradient(90deg,#0b332900 0%,#0b332955 45%,#0b3329aa 100%)}
 .shade.skit{background:linear-gradient(180deg,#0b332933 0%,#0b332900 40%,#0b3329aa 100%)}
 .top{position:absolute;top:0;left:0;right:0;height:130px;background:linear-gradient(180deg,#0b3329e6 0%,#0b332999 55%,#0b332900 100%);z-index:4}
@@ -179,7 +179,7 @@ function page(lesson, si, li, info, opts) {
   const chapters = lesson.chapters || [];
   let h = '';
   const bgName = sc.type === 'skit' ? 'bg-cafe' : 'bg-studio';
-  if (opts.has(bgName)) h += `<div class="bg" style="background-image:url('${opts.art}${bgName}.webp');animation-delay:-${info.ts.toFixed(2)}s"></div>`;
+  if (opts.has(bgName)) h += `<div class="bg" style="background-image:url('${opts.art}${bgName}.webp')"></div>`;
   h += `<div class="shade${sc.type === 'skit' ? ' skit' : ''}"></div>`;
   h += '<div class="top"></div>';
   h += `<div class="prog"><i style="--a:${info.p0.toFixed(4)};--b:${info.p1.toFixed(4)};animation:grow ${info.dur}s linear both"></i></div>`;

@@ -24,7 +24,7 @@ jobs:
       - run: pip install "edge-tts>=7,<8" numpy
       - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg fonts-noto-cjk fonts-noto-color-emoji
       - name: Restore voice clips from earlier runs
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: lessons/out/*/a*
           key: long-lesson-tts-${{ github.run_id }}
@@ -38,6 +38,21 @@ jobs:
           npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
           for f in lessons/long/*.json; do
             for i in 1 2 3 4; do python tools/make_long_lesson.py "$f" && break; echo "pass $i failed, waiting"; sleep 90; done
+          done
+          ls -la lessons/out/*.mp4
+      - name: Keep voice clips for the next run
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: lessons/out/*/a*
+          key: long-lesson-tts-${{ github.run_id }}
+      - name: Keep each video under GitHub's 100 MB file limit
+        run: |
+          for f in lessons/out/*.mp4; do
+            if [ "$(stat -c%s "$f")" -gt 90000000 ]; then
+              echo "::warning::$f is over 90 MB, encoding it again at a lower bitrate"
+              ffmpeg -y -v error -i "$f" -c:v libx264 -preset slow -b:v 1300k -maxrate 1500k -bufsize 3000k -pix_fmt yuv420p -c:a copy -movflags +faststart /tmp/small.mp4 && mv /tmp/small.mp4 "$f"
+            fi
           done
           ls -la lessons/out/*.mp4
       - name: Store videos on the lesson-videos branch
