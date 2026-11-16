@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-12",
+ "items": {
+  "2026-11-12": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Ireland and Ukraine discussed drone cooperation and the path to peace during Zelenskiy's visit to Dublin.",
+     "Ireland has signed a contract to buy Ukrainian military drones for its army.",
+     "Zelenskiy announced that Ukraine is ready to give up the Donbas region in exchange for peace.",
+     "EU leaders agreed in Dublin to speed up Ukraine's accession to the European Union."
+    ],
+    "a": 0,
+    "exp": "The passage reports that Ireland \"is engaged in negotiations concerning the potential deployment of Ukrainian drone technology\" and covers Zelenskiy's comments on \"a peace agreement with Russia\". No contract has been signed (B): the Department is only \"evaluating a joint memorandum\". Zelenskiy said giving up the Donbas \"would be impossible\" (C), and the EU leaders' meeting has not yet happened (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the drone arrangement between Ireland and Ukraine?",
+    "opts": [
+     "It is already being used to patrol Irish waters.",
+     "It was rejected by the Irish Department of Defence.",
+     "It is still at an early stage and not yet finalised.",
+     "It depends on the outcome of the US talks in Moscow."
+    ],
+    "a": 2,
+    "exp": "The Department of Defence \"is evaluating a joint memorandum\", and Zelenskiy \"anticipated that the arrangement would become operational in due course\", so it is not yet in place (A) and has not been rejected (B). Nothing links it to the Moscow talks (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe Zelenskiy's attitude towards a peace deal, as reported in the passage?",
+    "opts": [
+     "Openly pessimistic and ready to abandon negotiations",
+     "Willing to accept almost any terms to end the war quickly",
+     "Indifferent, leaving the matter entirely to the United States",
+     "Hopeful about a limited chance but firm on key conditions"
+    ],
+    "a": 3,
+    "exp": "He said \"there exists a limited window of opportunity to achieve meaningful progress\", which shows cautious hope, yet \"relinquishing the Donbas region would be impossible\" and he \"sought concrete commitments from Washington\", which shows firmness rather than accepting any terms (B), despair (A) or indifference (C)."
+   }
+  ],
+  "2026-11-12-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A new EU rule allowing smoke flavourings in cheese and fish until 2029.",
+     "Kerry Group's unsuccessful court challenge against the EU's phase-out of certain smoke flavourings.",
+     "A scientific study proving that traditional smoking is safer than smoke flavourings.",
+     "Kerry Group's successful appeal against a ban on Irish ham and bacon exports."
+    ],
+    "a": 1,
+    "exp": "The passage opens: \"The EU General Court has rejected a legal challenge brought by Kerry Group against the gradual withdrawal of several smoke flavourings.\" The 2029 date is a deadline for stopping use, not a new permission (A); no study proving traditional smoking safer is mentioned (C); and Kerry lost and is only \"considering whether to lodge an appeal\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about Kerry's claim that up to 40% of Irish ham and bacon relied on these flavourings?",
+    "opts": [
+     "The court did not accept it as proven.",
+     "The European Commission used it to justify the ban.",
+     "Member states confirmed it before endorsing the decision.",
+     "It was the main reason the transition period was extended."
+    ],
+    "a": 0,
+    "exp": "Right after the 40% figure, the passage says \"the court found that Kerry had not provided sufficient evidence to support this assertion\", so the claim was not accepted as proven. The Commission's reasons were \"public health\" concerns (B), member states endorsed the decision, not the figure (C), and nothing ties the transition period to the claim (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that traditional smoking \"remains lawful\"?",
+    "opts": [
+     "To show that the EU plans to ban traditional smoking next.",
+     "To explain why the court ruled in favour of the Commission.",
+     "To present the basis of Kerry's argument that the ban could backfire.",
+     "To suggest that Irish producers have already returned to the older method."
+    ],
+    "a": 2,
+    "exp": "Kerry \"maintained that purified smoke flavourings pose fewer health risks than traditional smoking, which remains lawful, and argued that the prohibition could consequently encourage producers to revert to the older method\". The detail supports Kerry's argument; it is not about a future ban (A), the court's reasoning (B) or something that has already happened (D)."
+   }
+  ],
+  "2026-11-12-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Irish hospitals are replacing clinicians with AI systems to save money.",
+     "Novartis has launched an AI product for writing hospital discharge notes.",
+     "Enterprise Ireland has invested €2 million to expand AI use in the UK and Gulf.",
+     "An Irish start-up has built an AI tool that drafts clinical paperwork for clinicians to check, and plans to expand."
+    ],
+    "a": 3,
+    "exp": "The passage describes how MedWrite's platform \"generates, drafts and transmits clinical notes, care plans and reports, invariably subject to human oversight\" and says the team is preparing a funding round to expand \"into the UK and Gulf markets\". Clinicians still review the notes (A), the founders only used to work at Novartis (B), and Enterprise Ireland provided €250,000, not €2 million (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about MedWrite's business model with private hospitals?",
+    "opts": [
+     "Hospitals pay more when they use the system more.",
+     "Hospitals pay a single fixed fee each year.",
+     "Hospitals receive the system free during a trial.",
+     "Hospitals are paid by MedWrite to test the system."
+    ],
+    "a": 0,
+    "exp": "The providers' \"fees are contingent upon actual usage\", meaning payment rises with use. This rules out a fixed fee (B); nothing mentions a free trial (C) or MedWrite paying hospitals (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention David Menzies?",
+    "opts": [
+     "To show that the company was founded entirely by doctors.",
+     "To explain how the start-up came to focus on patient discharge.",
+     "To criticise emergency departments for poor paperwork.",
+     "To reveal who provided the company's development funding."
+    ],
+    "a": 1,
+    "exp": "Menzies, \"a consultant in emergency medicine\", \"identified patient discharge as a particularly significant administrative challenge\", which is followed by the study of \"AI-assisted discharge\". The other co-founders came from Novartis (A), no criticism is made (C), and the funding came from other sources such as Enterprise Ireland (D)."
+   }
+  ],
+  "2026-11-12-4": [
+   {
+    "type": "main",
+    "q": "What is the main focus of the passage?",
+    "opts": [
+     "TUI's decision to buy the remaining shares in Fly4 Airlines.",
+     "A dispute between Fly4 and aircraft lessors in Turkey, Germany and Belgium.",
+     "The appointment of provisional liquidators to Fly4 Airlines amid rising fuel costs.",
+     "Plans to open new charter routes from Dublin Airport in 2026."
+    ],
+    "a": 2,
+    "exp": "The passage begins: \"The High Court has appointed joint provisional liquidators to Fly4 Airlines\", whose finances have \"deteriorated substantially as a consequence of rising fuel costs\". No share purchase (A) or new routes (D) are mentioned, and the lessors \"may be entitled to repossess\" aircraft, but no dispute is described (B)."
+   },
+   {
+    "type": "infer",
+    "q": "Based on the figures given, what can be inferred about Fly4's cash position?",
+    "opts": [
+     "It has enough cash to operate for at least a year.",
+     "Its cash would cover only about one month of normal spending.",
+     "Its cash reserves have grown since 2025.",
+     "It expects a €3 million profit to restore its cash this year."
+    ],
+    "a": 1,
+    "exp": "The company \"holds approximately €2.7 million in cash, whereas its underlying expenditure amounts to between €2.5 million and €3 million per month\", so the cash covers roughly one month. This contradicts A; nothing says reserves have grown (C); and the €3 million profit forecast has been replaced by \"a loss of €1.1 million in the first nine months\" (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which word best describes the tone of the passage?",
+    "opts": [
+     "Factual",
+     "Celebratory",
+     "Sarcastic",
+     "Alarmist"
+    ],
+    "a": 0,
+    "exp": "The writer reports figures and events neutrally, e.g. \"Fly4 incurred losses of approximately €16 million in 2024 and €4 million in 2025\" and \"The case may return to court at the end of November\", without praise (B), mockery (C) or exaggerated warnings (D)."
+   }
+  ]
+ }
+}
