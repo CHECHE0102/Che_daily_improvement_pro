@@ -31,8 +31,8 @@ jobs:
           if [ "$want" = all ]; then list=$(ls lessons/long/*.json)
           elif [ -n "$want" ]; then list="$want"
           elif [ -z "$before" ] || [ "$before" = 0000000000000000000000000000000000000000 ]; then
-            list=$(git diff --no-renames --name-only --diff-filter=AM origin/main...HEAD -- 'lessons/long/*.json' || true)
-          else list=$(git diff --no-renames --name-only --diff-filter=AM "$before" "${{ github.sha }}" -- 'lessons/long/*.json' || true); fi
+            list=$(git diff --no-renames --name-only --diff-filter=AM origin/main...HEAD -- ':(glob)lessons/long/*.json' || true)
+          else list=$(git diff --no-renames --name-only --diff-filter=AM "$before" "${{ github.sha }}" -- ':(glob)lessons/long/*.json' || true); fi
           echo "list=$(echo $list)" >> "$GITHUB_OUTPUT"
           echo "scripts: $list"
       - uses: actions/setup-python@v5
