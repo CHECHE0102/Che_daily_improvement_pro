@@ -1,0 +1,203 @@
+{
+ "id": "L017",
+ "title": "My bike was stolen 被動語態",
+ "subtitle": "be + p.p.・being・get it done",
+ "level": "B1–B2",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "腳踏車被偷了！",
+    "was stolen",
+    "怎麼說？"
+   ],
+   "emoji": "🚲",
+   "lines": [
+    {
+     "v": "T",
+     "say": "腳踏車被偷了，英文要怎麼說？"
+    },
+    {
+     "v": "T",
+     "say": "今天搞懂被動語態！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "be + p.p.",
+   "points": [
+    "重點是「被怎樣」",
+    "My bike was stolen last night."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，不知道誰做的，就用 be 加過去分詞。"
+    },
+    {
+     "v": "A",
+     "say": "My bike was stolen last night.",
+     "zh": "我的腳踏車昨晚被偷了。"
+    },
+    {
+     "v": "B",
+     "say": "Oh no! Did you report it?",
+     "zh": "天啊！你報案了嗎？"
+    },
+    {
+     "v": "T",
+     "say": "小偷是誰不知道，重點是腳踏車被偷了。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "is being + p.p.",
+   "points": [
+    "正在被處理",
+    "The road is being fixed."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，正在被處理，用 is being 加過去分詞。"
+    },
+    {
+     "v": "A",
+     "say": "Why is the bus so late today?",
+     "zh": "今天公車怎麼這麼慢？"
+    },
+    {
+     "v": "B",
+     "say": "The road is being fixed in town.",
+     "zh": "市區的路正在修。"
+    },
+    {
+     "v": "T",
+     "say": "being 表示事情現在還在進行中。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "get + 東西 + p.p.",
+   "points": [
+    "請別人幫你做",
+    "I got my hair cut."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，請別人幫你做，用 get 加東西加過去分詞。"
+    },
+    {
+     "v": "A",
+     "say": "You look different today!",
+     "zh": "你今天看起來不一樣！"
+    },
+    {
+     "v": "B",
+     "say": "I got my hair cut yesterday.",
+     "zh": "我昨天去剪頭髮了。"
+    },
+    {
+     "v": "T",
+     "say": "不是自己剪，是請人剪，所以用 got my hair cut。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "My phone ___ last week.",
+   "ask": "要填什麼？",
+   "opts": [
+    "stole",
+    "was stolen",
+    "is stealing"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我的手機上週被偷了。"
+    },
+    {
+     "v": "A",
+     "say": "My phone blank last week.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！手機是被偷的，要用 was stolen。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "was stolen",
+     "被…了"
+    ],
+    [
+     "is being fixed",
+     "正在被處理"
+    ],
+    [
+     "get it done",
+     "請人幫你做"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了被動語態！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

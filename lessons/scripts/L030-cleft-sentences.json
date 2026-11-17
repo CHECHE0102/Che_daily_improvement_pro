@@ -1,0 +1,203 @@
+{
+ "id": "L030",
+ "title": "What I need is… 強調句",
+ "subtitle": "What…is・It was…who・The thing is",
+ "level": "B2–C1",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "想強調重點？",
+    "What I need",
+    "is…"
+   ],
+   "emoji": "🎯",
+   "lines": [
+    {
+     "v": "T",
+     "say": "想強調重點，英文不是只能加 really。"
+    },
+    {
+     "v": "T",
+     "say": "今天學三種強調句，說話更有力。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "What… is…",
+   "points": [
+    "把重點放到最後",
+    "What I need is a cup of tea."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，用 What 開頭，把最想講的放到最後。"
+    },
+    {
+     "v": "A",
+     "say": "You've been working all day.",
+     "zh": "你工作一整天了。"
+    },
+    {
+     "v": "B",
+     "say": "I know. What I need is a cup of tea.",
+     "zh": "我知道。我現在需要的是一杯茶。"
+    },
+    {
+     "v": "T",
+     "say": "比 I need a cup of tea 更有強調的感覺。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "It was… who / that…",
+   "points": [
+    "強調是誰、是什麼",
+    "It was Sarah who found them."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，強調是誰做的，用 It was 加 who 或 that。"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for finding my keys!",
+     "zh": "謝謝你找到我的鑰匙！"
+    },
+    {
+     "v": "B",
+     "say": "Actually, it was Sarah who found them.",
+     "zh": "其實是 Sarah 找到的。"
+    },
+    {
+     "v": "T",
+     "say": "重點是 Sarah，不是別人。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "The thing is…",
+   "points": [
+    "說出真正的問題",
+    "The thing is, I'm off that day."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，要說出真正的問題，愛爾蘭人超愛用 The thing is。"
+    },
+    {
+     "v": "A",
+     "say": "Can you come to the meeting on Friday?",
+     "zh": "你星期五可以來開會嗎？"
+    },
+    {
+     "v": "B",
+     "say": "The thing is, I'm off that day.",
+     "zh": "問題是，我那天休假。"
+    },
+    {
+     "v": "T",
+     "say": "先說 The thing is，聽起來比較委婉。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "___ I really want is more sleep.",
+   "ask": "要填什麼？",
+   "opts": [
+    "That",
+    "What",
+    "It"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我真正想要的是多睡一點。"
+    },
+    {
+     "v": "A",
+     "say": "Blank I really want is more sleep.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！把重點放後面，用 What 開頭。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "What I need is…",
+     "我需要的是…"
+    ],
+    [
+     "It was… who…",
+     "就是…做的"
+    ],
+    [
+     "The thing is…",
+     "問題是…"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三種強調句！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

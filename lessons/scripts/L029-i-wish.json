@@ -1,0 +1,203 @@
+{
+ "id": "L029",
+ "title": "I wish I had… 願望與遺憾",
+ "subtitle": "wish + 過去式・had p.p.・would",
+ "level": "B2–C1",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "真希望我…",
+    "I wish",
+    "I had…"
+   ],
+   "emoji": "🌠",
+   "lines": [
+    {
+     "v": "T",
+     "say": "真希望我有更多時間！英文要怎麼說？"
+    },
+    {
+     "v": "T",
+     "say": "今天學 I wish 的三種用法。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "wish + 過去式",
+   "points": [
+    "希望現在不一樣",
+    "I wish I lived closer."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，希望現在不一樣，wish 後面用過去式。"
+    },
+    {
+     "v": "A",
+     "say": "It takes me an hour to get to work.",
+     "zh": "我上班要花一個小時。"
+    },
+    {
+     "v": "B",
+     "say": "I wish I lived closer to the office.",
+     "zh": "真希望我住得離公司近一點。"
+    },
+    {
+     "v": "T",
+     "say": "事實是現在住很遠，所以用過去式 lived。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "wish + had p.p.",
+   "points": [
+    "後悔過去的事",
+    "I wish I had gone with you."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，後悔過去的事，wish 後面用 had 加過去分詞。"
+    },
+    {
+     "v": "A",
+     "say": "The concert was amazing last night!",
+     "zh": "昨晚的演唱會超棒的！"
+    },
+    {
+     "v": "B",
+     "say": "I wish I had gone with you.",
+     "zh": "真希望我有跟你去。"
+    },
+    {
+     "v": "T",
+     "say": "事實是沒去，現在後悔了。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "wish + would",
+   "points": [
+    "希望別人改變",
+    "I wish he would clean up."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，希望別人改掉某個習慣，用 wish 加 would。"
+    },
+    {
+     "v": "A",
+     "say": "My flatmate never washes his dishes.",
+     "zh": "我室友從來不洗碗。"
+    },
+    {
+     "v": "B",
+     "say": "I wish he would clean up after himself.",
+     "zh": "真希望他會自己收拾。"
+    },
+    {
+     "v": "T",
+     "say": "帶點抱怨的語氣，很常用在室友身上！"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "I wish I ___ to the party yesterday.",
+   "ask": "要填什麼？",
+   "opts": [
+    "went",
+    "had gone",
+    "would go"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：真希望我昨天有去派對。"
+    },
+    {
+     "v": "A",
+     "say": "I wish I blank to the party yesterday.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！後悔過去的事，用 had gone。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "I wish I lived…",
+     "希望現在不同"
+    ],
+    [
+     "I wish I had gone",
+     "後悔過去"
+    ],
+    [
+     "I wish he would…",
+     "希望別人改變"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了 I wish 的三種用法！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
