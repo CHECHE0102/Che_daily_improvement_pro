@@ -148,7 +148,12 @@
 
 **`recap` 總複習表**：`board: {"kicker": "Today's 12 sentences", "items": [最多 12 句]}`，配 2 句老師台詞。
 
-結尾固定用一個 `talk` 場景，最後一句加 `"end": true`。
+**`outro` 片尾：推廣 BinBin**（每支影片最後一個場景，所有影片共用同一段，約 35 秒）。黑板上是 BinBin 小狗頭像和「BinBin Daily」，四個功能隨著 Niamh 介紹一條一條跳出來（`step` 1–4），最後 `step: 5` 跳出黃色網址 `binbindaily.com`。最後一句是這支影片自己的道別，加 `"end": true`。
+```json
+{"type": "outro", "ch": 6, "board": {"items": ["📰 每天一則在地新聞練英文", "🎮 單字小遊戲，約朋友一起玩", "🔥 連續打卡、解鎖稱號、逛廣場", "🎓 英文小教室：會話、片語、文法"], "url": "binbindaily.com"},
+ "lines": [ ...六句固定的介紹（照抄 V001 的 outro）... , {"v": "E", "say": "And now, I'm going on my break. See you next time. Bye!", "zh": "…", "pose": "barista-break", "end": true, "step": 5}]}
+```
+片尾的台詞和功能清單**不要自己改**（CheChe 規定推廣文字不能提價格，例如不能說「免費」）。要改的話所有影片一起改。小狗頭像是 `assets/art/lesson/niamh/binbin-logo.webp`。
 
 ### 3.3 Niamh 的姿勢
 
