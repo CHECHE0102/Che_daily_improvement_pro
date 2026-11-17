@@ -19,6 +19,10 @@
   "B": [
    "-5%",
    "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
   ]
  },
  "id": "V007",
@@ -257,7 +261,7 @@
    "ch": 1,
    "num": 3,
    "label": "No. 3",
-   "phrase": "Is there any chance of cross-contamination?",
+   "phrase": "Could there be any cross-contamination?",
    "meaning": "有沒有可能交叉污染？",
    "note": "cross-contamination ＝ 交叉污染",
    "lines": [
@@ -269,7 +273,7 @@
     },
     {
      "v": "A",
-     "say": "Is there any chance of cross-contamination?",
+     "say": "Could there be any cross-contamination?",
      "pose": "point"
     },
     {
@@ -294,7 +298,7 @@
     },
     {
      "v": "A",
-     "say": "Is there any chance of cross-contamination?",
+     "say": "Could there be any cross-contamination?",
      "pose": "point",
      "echo": true
     }
@@ -1051,7 +1055,7 @@
     "items": [
      "I have a severe nut allergy. Is that OK with this dish?",
      "Could you check with the kitchen what's in the sauce?",
-     "Is there any chance of cross-contamination?",
+     "Could there be any cross-contamination?",
      "Could I have it without the cheese?",
      "Is it OK if I swap the chips for a side salad?",
      "Could I get the dressing on the side?",

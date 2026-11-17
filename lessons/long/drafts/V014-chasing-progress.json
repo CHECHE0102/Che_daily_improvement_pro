@@ -1,0 +1,1030 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IN-PrabhatNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V014",
+ "title": "追進度不惹人厭",
+ "subtitle": "12 句英文，催人也不傷感情",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-office",
+ "guest": "arjun",
+ "roles": {
+  "A": "Niamh",
+  "B": "Arjun 同事"
+ },
+ "thumb": {
+  "pose": "no",
+  "bg": "bg-office",
+  "line1": "報告還沒好？",
+  "line2": "催人不傷感情",
+  "tag": "12 句 B2 英文",
+  "sticker": "⏰"
+ },
+ "chapters": [
+  "Intro",
+  "輕輕推一下",
+  "第二次提醒",
+  "用 email 追",
+  "往上找",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "talk",
+   "R": "arjun",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Hi Arjun. The report? Where is it? I asked you last week! And on Monday! And yesterday!",
+     "zh": "嗨 Arjun。報告呢？在哪裡？我上週就問了！星期一也問！昨天也問！",
+     "L": "no"
+    },
+    {
+     "v": "B",
+     "say": "Wow. OK. Good morning to you too.",
+     "zh": "哇，好喔，你也早安啊。",
+     "R": "arjun-frown"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "⏰",
+    "big": [
+     "I needed his report",
+     "*and I got his anger"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I really needed that report. But after that morning, Arjun didn't speak to me for a week, and the report came even later.",
+     "zh": "我真的很需要那份報告。但那天早上之後，Arjun 一週沒跟我說話，報告也更晚才來。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Chasing people is a skill. Push too little, nothing happens. Push too hard, you lose a friend.",
+     "zh": "追進度是一門技巧。推太輕，什麼都不會發生；推太用力，你會失去一個朋友。",
+     "pose": "think",
+     "sticker": "⚖️",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Chase it up",
+     "*without being annoying"
+    ],
+    "cta": "追進度不惹人厭・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for getting things done through other people.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你透過別人把事情完成的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for getting things done through other people."
+    },
+    {
+     "v": "E",
+     "say": "A friendly first reminder, a firmer second one, and how to offer help instead of pressure.",
+     "zh": "友善的第一次提醒、更堅定的第二次，還有怎麼用幫忙代替施壓。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Friendly nudge",
+   "sub": "第一次提醒：輕輕推一下",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: the friendly nudge.",
+     "zh": "第一段：輕輕推一下。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A nudge is a small, gentle push. The first reminder should feel like one.",
+     "zh": "nudge 是輕輕一推，第一次提醒就該是這種感覺。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Just checking in on the report. How's it going?",
+   "meaning": "只是來問一下報告，進行得怎麼樣？",
+   "note": "check in on ＝ 關心一下進度",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Just checking in on the report. How's it going?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Check in on means ask about something in a friendly way.",
+     "zh": "check in on 是友善地關心一下。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "How's it going is an open question. It lets them tell you about a problem, if there is one.",
+     "zh": "How's it going 是開放式問題，如果有問題，對方會告訴你。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Just checking in on the report. How's it going?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "No rush, but do you have a rough idea of when it'll be ready?",
+   "meaning": "不急，但你大概知道什麼時候會好嗎？",
+   "note": "a rough idea ＝ 大概的想法",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask for a time, softly.",
+     "zh": "接著溫和地問時間。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "No rush, but do you have a rough idea of when it'll be ready?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A rough idea means an approximate answer. Not exact, just roughly.",
+     "zh": "a rough idea 是大概，不用很精確。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "No rush is only true if it's true! Don't say it on deadline day.",
+     "zh": "只有真的不急才能說 no rush！截止日當天不要說。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "No rush, but do you have a rough idea of when it'll be ready?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Is there anything you're waiting on from me?",
+   "meaning": "你有在等我這邊的什麼東西嗎？",
+   "note": "wait on ＝ 等待（某人提供）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And check that the delay isn't actually you!",
+     "zh": "再確認一下，卡住的人其實不是你！",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything you're waiting on from me?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Wait on means need something before you can continue.",
+     "zh": "wait on 是要先拿到某樣東西才能繼續。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Sometimes the answer is yes. That's embarrassing, but much better to know.",
+     "zh": "有時候答案是有。很尷尬，但知道總比不知道好。",
+     "pose": "talk2",
+     "sticker": "😅",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything you're waiting on from me?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Second reminder",
+   "sub": "第二次提醒：說清楚影響",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: the second reminder.",
+     "zh": "第二段：第二次提醒。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The nudge didn't work. Now be clearer, but still kind. Talk about why it matters.",
+     "zh": "輕推沒有用。現在要講得更清楚，但還是要友善。說明為什麼重要。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "Sorry to chase, but I'm a bit stuck without it.",
+   "meaning": "抱歉一直催，但沒有它我有點卡住",
+   "note": "chase ＝ 催、追",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Sorry to chase, but I'm a bit stuck without it.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Sorry to chase recognises that reminding is annoying. That makes it less annoying!",
+     "zh": "Sorry to chase 承認催人很煩，這反而讓它沒那麼煩！",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I'm stuck explains the effect on you, not their failure.",
+     "zh": "I'm stuck 講的是對你的影響，不是對方的失誤。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Sorry to chase, but I'm a bit stuck without it.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "The client needs it by Thursday, so I'd need it by Wednesday.",
+   "meaning": "客戶星期四要，所以我星期三需要拿到",
+   "note": "by ＋ 時間 ＝ 最晚……之前",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Explain the chain. Show where the deadline comes from.",
+     "zh": "說明環環相扣的關係，讓對方知道期限從哪來。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "The client needs it by Thursday, so I'd need it by Wednesday.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "When people see the real deadline, it stops feeling like your personal opinion.",
+     "zh": "對方看到真正的期限，就不會覺得是你個人在逼他。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And give your date a day early. Things always take longer.",
+     "zh": "你要的日期提早一天。事情總是比預期久。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "The client needs it by Thursday, so I'd need it by Wednesday.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "Would it help if I took the first section off your hands?",
+   "meaning": "如果第一部分我來幫你處理，會有幫助嗎？",
+   "note": "take something off your hands ＝ 幫你接手",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And here's the clever move: offer help.",
+     "zh": "這裡有一招聰明的：主動幫忙。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would it help if I took the first section off your hands?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Take something off your hands means do it for you, so you have less work.",
+     "zh": "take something off your hands 是幫你接手，讓你少一點工作。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Often the delay is because they're overloaded. Help is faster than pressure.",
+     "zh": "延誤常常是因為對方太忙。幫忙比施壓更快。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would it help if I took the first section off your hands?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "arjun",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's go back to that morning, the better way.",
+     "zh": "我們回到那天早上，用更好的方式。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Morning, Arjun! Just checking in on the report. How's it going?",
+     "zh": "早安，Arjun！只是來問一下報告，進行得怎麼樣？"
+    },
+    {
+     "v": "B",
+     "say": "Honestly? Slowly. I've had three other urgent things this week.",
+     "zh": "老實說？很慢。我這週還有三件急事。",
+     "R": "arjun-think"
+    },
+    {
+     "v": "A",
+     "say": "Sorry to chase, but the client needs it by Thursday, so I'd need it by Wednesday. Would it help if I took the first section off your hands?",
+     "zh": "抱歉一直催，但客戶星期四要，所以我星期三需要拿到。如果第一部分我來幫你處理，會有幫助嗎？"
+    },
+    {
+     "v": "B",
+     "say": "That would be amazing. Thank you!",
+     "zh": "那就太好了，謝謝你！",
+     "R": "arjun-happy"
+    },
+    {
+     "v": "E",
+     "say": "Same report, same deadline, and now he's grateful.",
+     "zh": "同一份報告、同一個期限，現在他還謝謝我。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "In writing",
+   "sub": "用 email 追：簡短、清楚、好回覆",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: in writing.",
+     "zh": "第三段：用文字追。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Most chasing happens in email or chat. These sentences work in both.",
+     "zh": "大部分的催促都發生在 email 或聊天訊息裡。這幾句兩種都能用。",
+     "pose": "talk2",
+     "sticker": "📧",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Just following up on my email from Monday.",
+   "meaning": "跟進一下我星期一寄的信",
+   "note": "follow up on ＝ 跟進",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Just following up on my email from Monday.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Follow up on means contact someone again about the same thing.",
+     "zh": "follow up on 是針對同一件事再聯絡一次。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say which email. Busy people get a hundred a day.",
+     "zh": "說清楚是哪一封，忙的人一天收一百封。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Just following up on my email from Monday.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "Could you let me know either way, so I can plan around it?",
+   "meaning": "不管可不可以，能不能跟我說一聲，我好安排？",
+   "note": "either way ＝ 不管哪一種",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Sometimes silence is the problem. Ask for any answer.",
+     "zh": "有時候問題是沒有回音。那就要求任何答案都好。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Could you let me know either way, so I can plan around it?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Either way means yes or no, I just need to know.",
+     "zh": "either way 是 yes 或 no 都可以，我只是需要知道。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Plan around it means organise my work based on the answer.",
+     "zh": "plan around it 是根據答案來安排我的工作。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you let me know either way, so I can plan around it?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "I've attached the template, so it should only take ten minutes.",
+   "meaning": "我附上了範本，應該只要十分鐘",
+   "note": "attach ＝ 附加檔案",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And make it as easy as possible to say yes.",
+     "zh": "讓對方盡量容易答應。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "I've attached the template, so it should only take ten minutes.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "When a task looks small, people do it immediately.",
+     "zh": "工作看起來很小，對方就會馬上做。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Ten minutes is a promise. Make sure it's true!",
+     "zh": "十分鐘是個承諾，要確定是真的！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've attached the template, so it should only take ten minutes.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Escalate",
+   "sub": "往上找：最後一步，還是要客氣",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: when nothing works.",
+     "zh": "第四段：怎麼樣都沒用的時候。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Sometimes you have to involve a manager. Do it openly, never behind someone's back.",
+     "zh": "有時候得找主管。要光明正大，千萬不要在背後說。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "I don't want to go over your head, but this is holding up the whole project.",
+   "meaning": "我不想越級找你主管，但這卡住了整個專案",
+   "note": "go over someone's head ＝ 越級　hold up ＝ 拖延",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I don't want to go over your head, but this is holding up the whole project.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Go over someone's head means talk to their boss instead of them.",
+     "zh": "go over someone's head 是越過他直接找他主管。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Holding up means delaying. You're explaining the stakes, not making a threat.",
+     "zh": "holding up 是拖累。你是在說明利害，不是威脅。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I don't want to go over your head, but this is holding up the whole project.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "Shall we loop in Valeria to help us prioritise?",
+   "meaning": "要不要把 Valeria 也拉進來，幫我們排優先順序？",
+   "note": "loop in ＝ 讓某人加入（討論或 email）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then suggest it together. We, not I.",
+     "zh": "然後用「我們」一起提，不是「我」。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Shall we loop in Valeria to help us prioritise?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Loop in means add someone to the conversation or email.",
+     "zh": "loop in 是把某人加進對話或 email。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Help us prioritise makes the manager a helper, not a judge.",
+     "zh": "help us prioritise 讓主管變成幫手，不是法官。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Shall we loop in Valeria to help us prioritise?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Thanks for pulling this together. I know it was a lot.",
+   "meaning": "謝謝你把這件事完成，我知道很不容易",
+   "note": "pull something together ＝ 把東西整合完成",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when it's finally done, say thank you. Properly.",
+     "zh": "終於完成時，好好說謝謝。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for pulling this together. I know it was a lot.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Pull something together means organise lots of pieces into one finished thing.",
+     "zh": "pull something together 是把很多部分整合成一個成品。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I know it was a lot shows you saw their effort. Next time, they'll be faster for you.",
+     "zh": "I know it was a lot 表示你看見他的努力。下次他會更快幫你。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for pulling this together. I know it was a lot.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：辦公室裡的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two phrases from Irish offices.",
+     "zh": "還有加碼！愛爾蘭辦公室常聽到的兩句。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Very busy",
+    "big": [
+     "*I'm up to my eyes.",
+     "我忙到不行"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "When an Irish colleague is very busy, they say this.",
+     "zh": "愛爾蘭同事很忙時，會這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I'm up to my eyes.",
+     "pose": "barista-panic"
+    },
+    {
+     "v": "E",
+     "say": "Up to my eyes in work, like water up to your eyes. You can't see anything else!",
+     "zh": "工作淹到眼睛，什麼都看不到了！",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "It will happen… eventually",
+    "big": [
+     "*I'll do it in a minute.",
+     "我等一下就做（其實要很久）"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And be careful with this one.",
+     "zh": "還有這一句要小心。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "I'll do it in a minute.",
+     "pose": "thumb",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "In Ireland, a minute can mean ten minutes, an hour, or next week. Ask: what time?",
+     "zh": "在愛爾蘭，一分鐘可能是十分鐘、一小時，或下禮拜。記得問：幾點？",
+     "pose": "no"
+    },
+    {
+     "v": "A",
+     "say": "I'll do it in a minute.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：追到了，朋友也還在",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's chase Arjun one more time, nicely. Say my lines with me!",
+     "zh": "我們再好好追一次 Arjun。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "arjun",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Morning! Is there anything you're waiting on from me?",
+     "zh": "早安！你有在等我這邊的什麼東西嗎？"
+    },
+    {
+     "v": "B",
+     "say": "No, I'm just up to my eyes.",
+     "zh": "沒有，我只是忙到不行。",
+     "R": "arjun-think"
+    },
+    {
+     "v": "A",
+     "say": "No rush, but do you have a rough idea of when it'll be ready?",
+     "zh": "不急，但你大概知道什麼時候會好嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Wednesday, I promise.",
+     "zh": "星期三，我保證。",
+     "R": "arjun-talk"
+    },
+    {
+     "v": "A",
+     "say": "Perfect. Could you let me know either way, so I can plan around it?",
+     "zh": "太好了。不管可不可以，能不能跟我說一聲，我好安排？"
+    },
+    {
+     "v": "B",
+     "say": "Will do.",
+     "zh": "沒問題。",
+     "R": "arjun-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Just checking in on the report. How's it going?",
+     "No rush, but do you have a rough idea of when it'll be ready?",
+     "Is there anything you're waiting on from me?",
+     "Sorry to chase, but I'm a bit stuck without it.",
+     "The client needs it by Thursday, so I'd need it by Wednesday.",
+     "Would it help if I took the first section off your hands?",
+     "Just following up on my email from Monday.",
+     "Could you let me know either way, so I can plan around it?",
+     "I've attached the template, so it should only take ten minutes.",
+     "I don't want to go over your head, but this is holding up the whole project.",
+     "Shall we loop in Valeria to help us prioritise?",
+     "Thanks for pulling this together. I know it was a lot."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Report done, friendship saved. Brilliant!",
+     "zh": "報告完成，友誼保住。太棒了！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them before you send your next reminder.",
+     "zh": "十二句都在這裡，下次催人之前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "📧",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Just following up: did you subscribe? No rush! Bye!",
+     "zh": "跟進一下：你訂閱了嗎？不急！Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

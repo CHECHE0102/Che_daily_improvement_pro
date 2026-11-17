@@ -1,0 +1,1130 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-US-AndrewNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V012",
+ "title": "跟室友把話講開",
+ "subtitle": "12 句英文，不吵架也能說清楚",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-kitchen",
+ "guest": "mateo",
+ "roles": {
+  "A": "Niamh",
+  "B": "Mateo 室友"
+ },
+ "thumb": {
+  "pose": "no",
+  "bg": "bg-kitchen",
+  "line1": "室友都不洗碗？",
+  "line2": "這樣說不吵架",
+  "tag": "12 句 B2 英文",
+  "sticker": "🍽️"
+ },
+ "chapters": [
+  "Intro",
+  "開口",
+  "好好說",
+  "訂規則",
+  "日常小事",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "talk",
+   "R": "mateo",
+   "lines": [
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.6,
+     "L": "no",
+     "sticker": "🍽️",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "B",
+     "say": "Morning! Ah, I'll do those dishes later.",
+     "zh": "早安！啊，那些碗我晚點洗。",
+     "R": "mateo-happy"
+    },
+    {
+     "v": "A",
+     "say": "Grand. No worries.",
+     "zh": "好，沒關係。",
+     "L": "thumb"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "L": "no",
+     "sticker": "😤",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🍽️",
+    "big": [
+     "Later",
+     "*＝ never"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Later meant never. For three weeks I said no worries, and for three weeks I was very, very worried.",
+     "zh": "「晚點」就是永遠不會。三個星期我都說沒關係，三個星期我都非常有關係。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Then one night I exploded about a frying pan. It was not my finest moment.",
+     "zh": "然後某天晚上，我為了一個平底鍋爆炸了。那不是我最光彩的時刻。",
+     "pose": "barista-sorry",
+     "sticker": "🍳",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Talk to your flatmate",
+     "*before you explode"
+    ],
+    "cta": "跟室友把話講開・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for living with other people.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你跟別人一起住要用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for living with other people."
+    },
+    {
+     "v": "E",
+     "say": "How to bring up a problem early, say how you feel without blaming, and agree on simple rules.",
+     "zh": "怎麼早點提出問題、表達感受但不指責、一起訂簡單的規則。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Bring it up",
+   "sub": "開口：挑對時機，輕輕帶入",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: bring it up.",
+     "zh": "第一段：開口。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The best time is when you're both calm. Not at midnight, not next to the dirty pan.",
+     "zh": "最好的時機是兩個人都冷靜的時候。不是半夜，也不是站在髒鍋子旁邊。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Have you got a sec? There's something I've been meaning to mention.",
+   "meaning": "你有空嗎？有件事我一直想跟你提",
+   "note": "I've been meaning to ＝ 我一直想要……",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Have you got a sec? There's something I've been meaning to mention.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I've been meaning to means I wanted to do this for a while, but didn't.",
+     "zh": "I've been meaning to 是我想做這件事很久了，只是一直沒做。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It also tells them: this is not a sudden attack. It's been on my mind.",
+     "zh": "也讓對方知道：這不是突然發難，是我想了一陣子。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Have you got a sec? There's something I've been meaning to mention.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "It's not a big deal, but it's starting to bother me.",
+   "meaning": "不是什麼大事，但開始讓我有點困擾",
+   "note": "bother ＝ 困擾、煩",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then set the size of the problem.",
+     "zh": "接著設定問題的大小。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "It's not a big deal, but it's starting to bother me.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Not a big deal makes it light. But starting to bother me is honest.",
+     "zh": "not a big deal 讓氣氛輕鬆，starting to bother me 則很誠實。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Small problems are easy to fix. Three-week problems are not.",
+     "zh": "小問題很好解決，拖三週的問題就難了。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's not a big deal, but it's starting to bother me.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I'd rather say something now than let it build up.",
+   "meaning": "我寧願現在說，也不想讓它累積",
+   "note": "let it build up ＝ 讓它累積",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And explain why you're bringing it up at all.",
+     "zh": "再說明你為什麼要提。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I'd rather say something now than let it build up.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Build up means grow bigger slowly, like dishes in the sink.",
+     "zh": "build up 是慢慢累積，就像水槽裡的碗。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "This sentence makes talking sound like the kind choice. Because it is.",
+     "zh": "這句話讓開口聽起來是體貼的選擇，因為它本來就是。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd rather say something now than let it build up.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Say it kindly",
+   "sub": "說感受：用「我」開頭，不用「你總是」",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: say it kindly.",
+     "zh": "第二段：好好說。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "One small word changes everything. Start with I, not you.",
+     "zh": "一個小字就能改變一切：用 I 開頭，不要用 you。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 2,
+   "board": {
+    "kicker": "You or I?",
+    "items": [
+     "✗ You never wash anything!",
+     "✓ I find it hard when…"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "You never wash anything is an attack. Your flatmate will defend himself.",
+     "zh": "「你從來不洗」是攻擊，室友只會開始辯解。",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Talk about how it affects you. Nobody can argue with your feelings.",
+     "zh": "講它對你的影響。沒有人能反駁你的感受。",
+     "pose": "point",
+     "step": 2
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "I find it hard to cook when the sink's full.",
+   "meaning": "水槽滿了的時候，我很難煮飯",
+   "note": "I find it hard to ＝ 我覺得很難……",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I find it hard to cook when the sink's full.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I find it hard to talks about your experience, not their character.",
+     "zh": "I find it hard to 講的是你的經驗，不是對方的人格。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And it gives a real reason: you need the sink.",
+     "zh": "而且有具體理由：你需要用水槽。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I find it hard to cook when the sink's full.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "I'm sure you don't mean to, but it's been happening a lot.",
+   "meaning": "我相信你不是故意的，但最近很常發生",
+   "note": "I'm sure you don't mean to ＝ 我相信你不是故意的",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Give them the benefit of the doubt.",
+     "zh": "先往好的方向假設。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'm sure you don't mean to, but it's been happening a lot.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'm sure you don't mean to gives them an easy way out. Nobody likes to feel accused.",
+     "zh": "這句給對方台階下。沒有人喜歡被指控。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "But the second half keeps the facts clear. A lot is a lot.",
+     "zh": "但後半句把事實講清楚：很常就是很常。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm sure you don't mean to, but it's been happening a lot.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "Is there anything I do that annoys you? Be honest.",
+   "meaning": "我有什麼讓你不爽的地方嗎？老實說",
+   "note": "annoy ＝ 惹惱",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And then, the bravest sentence of today.",
+     "zh": "然後是今天最勇敢的一句。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything I do that annoys you? Be honest.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Living together goes both ways. Maybe you play music at two in the morning!",
+     "zh": "住在一起是雙向的。說不定你凌晨兩點在放音樂！",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "When you ask this, the conversation becomes fair. And fair conversations work.",
+     "zh": "問了這句，對話就變公平了。公平的對話才有用。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything I do that annoys you? Be honest.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "mateo",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's try the kind version.",
+     "zh": "我們試試好好說的版本。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Have you got a sec? There's something I've been meaning to mention.",
+     "zh": "你有空嗎？有件事我一直想跟你提。"
+    },
+    {
+     "v": "B",
+     "say": "Sure. What's up?",
+     "zh": "好啊，怎麼了？",
+     "R": "mateo-talk"
+    },
+    {
+     "v": "A",
+     "say": "It's not a big deal, but I find it hard to cook when the sink's full.",
+     "zh": "不是什麼大事，但水槽滿了的時候，我很難煮飯。"
+    },
+    {
+     "v": "B",
+     "say": "Oh. Yeah, sorry, I've been working late.",
+     "zh": "喔，對，抱歉，我最近都加班。",
+     "R": "mateo-think"
+    },
+    {
+     "v": "A",
+     "say": "I'm sure you don't mean to. Is there anything I do that annoys you? Be honest.",
+     "zh": "我相信你不是故意的。我有什麼讓你不爽的地方嗎？老實說。"
+    },
+    {
+     "v": "B",
+     "say": "Well… you do sing in the shower. Very loudly.",
+     "zh": "嗯……你洗澡會唱歌，很大聲。",
+     "R": "mateo-happy"
+    },
+    {
+     "v": "E",
+     "say": "Fair enough! Now we both have something to fix.",
+     "zh": "說得對！現在我們都有要改的地方了。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Agree on rules",
+   "sub": "訂規則：具體、公平、寫下來",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: agree on rules.",
+     "zh": "第三段：訂規則。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Feelings are shared. Now turn them into something simple you can both follow.",
+     "zh": "感受說完了，接著變成兩個人都做得到的簡單規則。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "How about we each wash our own stuff before bed?",
+   "meaning": "我們各自睡前把自己的東西洗好，怎麼樣？",
+   "note": "How about we ＋ 原形動詞 ＝ 我們……如何",
+   "lines": [
+    {
+     "v": "A",
+     "say": "How about we each wash our own stuff before bed?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "How about we suggests a shared plan. Notice the verb stays simple: wash.",
+     "zh": "How about we 是提議一起做，後面動詞用原形 wash。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Before bed is a clear time. Later is not a time.",
+     "zh": "睡前是明確的時間，「晚點」不是時間。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "How about we each wash our own stuff before bed?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "Should we set up a rota for the bins and the bathroom?",
+   "meaning": "我們要不要排個值日表，輪流倒垃圾和打掃浴室？",
+   "note": "rota ＝ 輪值表",
+   "lines": [
+    {
+     "v": "E",
+     "say": "For jobs nobody wants, take turns.",
+     "zh": "沒人想做的事，就輪流。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Should we set up a rota for the bins and the bathroom?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A rota is a list of who does what, and when. It's a very Irish and British word.",
+     "zh": "rota 是誰在什麼時候做什麼的表，是很英式和愛爾蘭的字。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Put it on the fridge. Then nobody has to remember, or remind.",
+     "zh": "貼在冰箱上，就沒人需要記，也沒人需要提醒。",
+     "pose": "point",
+     "sticker": "📋",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Should we set up a rota for the bins and the bathroom?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Let's try it for a couple of weeks and see how it goes.",
+   "meaning": "我們先試兩個禮拜，看看效果如何",
+   "note": "see how it goes ＝ 看看情況如何",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And make it a trial, not a law.",
+     "zh": "把它當成試用，不是法律。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "Let's try it for a couple of weeks and see how it goes.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A couple of weeks means about two weeks. See how it goes means check if it works.",
+     "zh": "a couple of weeks 是大約兩週，see how it goes 是看看行不行得通。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "People agree more easily to something that's only for now.",
+     "zh": "只是暫時的，大家比較容易答應。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Let's try it for a couple of weeks and see how it goes.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Small daily things",
+   "sub": "日常小事：借東西、帶朋友、安靜時間",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: small daily things.",
+     "zh": "第四段：日常小事。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Most flatmate fights aren't about big things. They're about milk, guests and noise.",
+     "zh": "大部分室友吵架都不是為了大事，而是牛奶、客人和噪音。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Can I borrow some milk? I'll replace it tomorrow.",
+   "meaning": "你介意我借點牛奶嗎？我明天補給你",
+   "note": "replace ＝ 補上、換新的",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Can I borrow some milk? I'll replace it tomorrow.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Ask first, and say when you'll replace it. Two small things that build trust.",
+     "zh": "先問，再說什麼時候補。兩件小事，建立信任。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Milk disappearing without a word is the number one flatmate crime.",
+     "zh": "牛奶默默消失，是室友間的頭號罪行。",
+     "pose": "talk2",
+     "sticker": "🥛",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Can I borrow some milk? I'll replace it tomorrow.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "Just a heads-up, I've got a friend staying on Saturday.",
+   "meaning": "先跟你說一聲，我星期六有朋友要來住",
+   "note": "a heads-up ＝ 事先提醒",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And give a warning before you bring someone home.",
+     "zh": "帶人回家前，先打聲招呼。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Just a heads-up, I've got a friend staying on Saturday.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A heads-up is a short warning in advance, so nobody gets a surprise.",
+     "zh": "heads-up 是事先通知，讓大家不會被嚇到。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Especially if your flatmate likes walking around in a towel.",
+     "zh": "尤其是你室友喜歡只圍一條浴巾走來走去的時候。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Just a heads-up, I've got a friend staying on Saturday.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Could you keep it down after eleven? I'm up early for work.",
+   "meaning": "十一點以後可以小聲一點嗎？我要早起上班",
+   "note": "keep it down ＝ 小聲一點",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the noise one.",
+     "zh": "還有噪音這件事。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Could you keep it down after eleven? I'm up early for work.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Keep it down means make less noise. Add a reason, and it doesn't sound like a complaint.",
+     "zh": "keep it down 是小聲一點。加上理由，就不像在抱怨。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "After eleven gives a clear limit. Clear limits are easy to respect.",
+     "zh": "「十一點以後」是清楚的界線，清楚的界線最容易被尊重。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you keep it down after eleven? I'm up early for work.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "mateo",
+   "lines": [
+    {
+     "v": "A",
+     "say": "How about we each wash our own stuff before bed?",
+     "zh": "我們各自睡前把自己的東西洗好，怎麼樣？"
+    },
+    {
+     "v": "B",
+     "say": "Deal. And should we set up a rota for the bins?",
+     "zh": "成交。那要不要排個倒垃圾的值日表？",
+     "R": "mateo-talk"
+    },
+    {
+     "v": "A",
+     "say": "Good idea. Let's try it for a couple of weeks and see how it goes.",
+     "zh": "好主意。我們先試兩個禮拜，看看效果如何。",
+     "L": "thumb"
+    },
+    {
+     "v": "B",
+     "say": "Perfect. And I'll buy some earplugs for your singing.",
+     "zh": "太好了。我也會去買耳塞，擋你的歌聲。",
+     "R": "mateo-happy"
+    },
+    {
+     "v": "A",
+     "say": "Ha! Fair enough.",
+     "zh": "哈！好吧，算你有理。",
+     "L": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Problem solved, and we're still friends.",
+     "zh": "問題解決了，我們還是朋友。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：家裡會聽到的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two things you'll hear in an Irish house.",
+     "zh": "還有加碼！愛爾蘭家裡會聽到的兩句話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "A mess",
+    "big": [
+     "*The place is a tip!",
+     "這裡亂得像垃圾場！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "A tip is a rubbish dump. So when a room is very messy, we say this.",
+     "zh": "tip 是垃圾場。房間很亂時，我們這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "The place is a tip!",
+     "pose": "no"
+    },
+    {
+     "v": "E",
+     "say": "Every Irish mother has said it at least once a week.",
+     "zh": "每個愛爾蘭媽媽每週至少說一次。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Tea solves everything",
+    "big": [
+     "*I'll stick the kettle on.",
+     "我去燒水泡茶"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And after any difficult conversation in Ireland, someone says this.",
+     "zh": "在愛爾蘭，任何不好開口的談話結束後，總會有人說這句。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I'll stick the kettle on.",
+     "pose": "cheer",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Stick it on means turn it on. Tea means peace.",
+     "zh": "stick it on 是打開。泡茶就代表和好了。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'll stick the kettle on!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：在爆炸之前說出口",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Back to that kitchen, before the frying pan. Say my lines with me!",
+     "zh": "回到廚房，在平底鍋事件之前。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "mateo",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Morning! Ah, I'll do those dishes later.",
+     "zh": "早安！啊，那些碗我晚點洗。",
+     "R": "mateo-happy"
+    },
+    {
+     "v": "A",
+     "say": "Have you got a sec? There's something I've been meaning to mention.",
+     "zh": "你有空嗎？有件事我一直想跟你提。"
+    },
+    {
+     "v": "B",
+     "say": "Sure.",
+     "zh": "好啊。",
+     "R": "mateo-think"
+    },
+    {
+     "v": "A",
+     "say": "I'd rather say something now than let it build up. I find it hard to cook when the sink's full.",
+     "zh": "我寧願現在說，也不想讓它累積。水槽滿了的時候，我很難煮飯。"
+    },
+    {
+     "v": "B",
+     "say": "Fair enough. I'll do them now.",
+     "zh": "有道理，我現在就洗。",
+     "R": "mateo-talk"
+    },
+    {
+     "v": "A",
+     "say": "Thanks. I'll stick the kettle on.",
+     "zh": "謝謝，我去燒水泡茶。",
+     "L": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Have you got a sec? There's something I've been meaning to mention.",
+     "It's not a big deal, but it's starting to bother me.",
+     "I'd rather say something now than let it build up.",
+     "I find it hard to cook when the sink's full.",
+     "I'm sure you don't mean to, but it's been happening a lot.",
+     "Is there anything I do that annoys you? Be honest.",
+     "How about we each wash our own stuff before bed?",
+     "Should we set up a rota for the bins and the bathroom?",
+     "Let's try it for a couple of weeks and see how it goes.",
+     "Can I borrow some milk? I'll replace it tomorrow.",
+     "Just a heads-up, I've got a friend staying on Saturday.",
+     "Could you keep it down after eleven? I'm up early for work."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Clean sink, happy flat. Well done!",
+     "zh": "水槽乾淨，家裡和平。做得好！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them, or stick them on the fridge.",
+     "zh": "十二句都在這裡。截圖，或貼在冰箱上。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🫖",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Now, I'll stick the kettle on. See you next time. Bye!",
+     "zh": "好，我去燒水泡茶了。下一課見，Bye！",
+     "pose": "cheer",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

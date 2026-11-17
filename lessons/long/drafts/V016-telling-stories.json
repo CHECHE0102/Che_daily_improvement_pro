@@ -1,0 +1,1083 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-NG-AbeoNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V016",
+ "title": "把糗事講得好笑",
+ "subtitle": "12 句英文，說故事不冷場",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-pub",
+ "guest": "tunde",
+ "roles": {
+  "A": "Niamh",
+  "B": "Tunde 朋友"
+ },
+ "thumb": {
+  "pose": "secret",
+  "bg": "bg-pub",
+  "line1": "講糗事沒人笑？",
+  "line2": "說故事的 12 句",
+  "tag": "B2 英文",
+  "sticker": "😂"
+ },
+ "chapters": [
+  "Intro",
+  "勾住大家",
+  "鋪陳",
+  "笑點落地",
+  "回應別人",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "talk",
+   "R": "tunde",
+   "lines": [
+    {
+     "v": "A",
+     "say": "So yesterday, I go to the shop, and there is a man, and he has a dog, and the dog… no wait, first I… em…",
+     "zh": "所以昨天，我去商店，然後有一個男的，他有一隻狗，然後那隻狗……不對，等等，我先……呃……",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "…Sorry, what happened in the end?",
+     "zh": "……抱歉，所以最後怎麼了？",
+     "R": "tunde-think"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "L": "barista-sorry",
+     "sticker": "😶",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "😂",
+    "big": [
+     "The funniest story",
+     "*told the worst way"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "That story was hilarious. In my head. By the time I got to the end, everyone was looking at their phones.",
+     "zh": "那個故事超好笑，在我腦袋裡的時候。等我講到結尾，大家都在滑手機了。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "A good story isn't about perfect grammar. It's about order, timing, and a punchline.",
+     "zh": "好故事不是靠完美的文法，是靠順序、節奏和笑點。",
+     "pose": "secret",
+     "sticker": "🥁",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Tell a funny story",
+     "*and land the punchline"
+    ],
+    "cta": "把糗事講得好笑・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for telling a story that people actually want to hear.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你講一個大家真的想聽的故事的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for telling a story that people actually want to hear."
+    },
+    {
+     "v": "E",
+     "say": "How to start, how to build it up, how to land the ending, and how to react to other people's stories.",
+     "zh": "怎麼開頭、怎麼鋪陳、怎麼收尾，還有怎麼回應別人的故事。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Hook them",
+   "sub": "開頭：先勾住大家",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: hook them.",
+     "zh": "第一段：勾住大家。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The first sentence decides if people put their phones down.",
+     "zh": "第一句話決定大家會不會放下手機。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "You'll never guess what happened to me yesterday.",
+   "meaning": "你絕對猜不到我昨天發生什麼事",
+   "note": "You'll never guess ＝ 你絕對猜不到",
+   "lines": [
+    {
+     "v": "A",
+     "say": "You'll never guess what happened to me yesterday.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This sentence makes everyone curious. It's a promise of a good story.",
+     "zh": "這句話讓大家好奇，承諾了一個好故事。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now you have to deliver! No pressure.",
+     "zh": "現在你得說到做到！沒壓力。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "You'll never guess what happened to me yesterday.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "So, I was standing in the queue at Tesco, minding my own business…",
+   "meaning": "我那時在 Tesco 排隊，自己顧自己……",
+   "note": "was standing ＝ 過去進行式：當時正在",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then set the scene. Use was plus i-n-g for the background.",
+     "zh": "接著交代場景。用 was 加 ing 描述背景。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "So, I was standing in the queue at Tesco, minding my own business…",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I was standing describes what was happening when the story began.",
+     "zh": "I was standing 描述故事開始時正在發生的事。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Minding my own business means doing nothing special, not bothering anyone. Something is about to happen!",
+     "zh": "minding my own business 是自顧自的、沒招惹誰。代表事情要發生了！",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "So, I was standing in the queue at Tesco, minding my own business…",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Out of nowhere, this huge dog ran up and grabbed my sandwich.",
+   "meaning": "突然冒出一隻大狗衝過來，叼走我的三明治",
+   "note": "Out of nowhere ＝ 突然、毫無預警",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then the action. Switch to simple past for the events.",
+     "zh": "接著是動作。事件用簡單過去式。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Out of nowhere, this huge dog ran up and grabbed my sandwich.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Out of nowhere means suddenly, without warning.",
+     "zh": "out of nowhere 是突然、毫無預警。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Background in was plus i-n-g. Events in simple past. That's the secret of every English story.",
+     "zh": "背景用 was＋ing，事件用過去式，這就是所有英文故事的秘訣。",
+     "pose": "thumb",
+     "sticker": "🐕",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Out of nowhere, this huge dog ran up and grabbed my sandwich.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Build it up",
+   "sub": "鋪陳：放慢、加細節、製造懸念",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: build it up.",
+     "zh": "第二段：鋪陳。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't rush to the end. The middle is where people start laughing.",
+     "zh": "不要急著講到結局，中間才是大家開始笑的地方。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "And I'm not joking, it was the size of a small horse.",
+   "meaning": "我不是開玩笑，那隻狗跟小馬一樣大",
+   "note": "I'm not joking ＝ 我沒開玩笑",
+   "lines": [
+    {
+     "v": "A",
+     "say": "And I'm not joking, it was the size of a small horse.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Exaggerating is part of the fun. Everyone knows it wasn't really a horse.",
+     "zh": "誇張是樂趣的一部分，大家都知道那不是真的馬。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I'm not joking, when you clearly are, makes it even funnier.",
+     "zh": "明明在誇張還說「我沒開玩笑」，更好笑。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "And I'm not joking, it was the size of a small horse.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "So I just stood there, thinking: what do I do now?",
+   "meaning": "所以我就站在那裡，心想：現在怎麼辦？",
+   "note": "stood there, thinking ＝ 站在那裡想著",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then share what was in your head.",
+     "zh": "接著說你當時腦袋在想什麼。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "So I just stood there, thinking: what do I do now?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Telling people your thoughts lets them feel the moment with you.",
+     "zh": "說出你當時的想法，讓大家跟你一起身歷其境。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Pause before what do I do now. Let them wonder too.",
+     "zh": "在 what do I do now 前停一下，讓大家也一起猜。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "So I just stood there, thinking: what do I do now?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "And then, to make things even worse, the owner turned around and said…",
+   "meaning": "然後，更糟的是，狗主人轉過來說……",
+   "note": "to make things even worse ＝ 更糟的是",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when things get worse, say so. It builds tension.",
+     "zh": "事情越來越糟時，就明說。這會製造張力。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "And then, to make things even worse, the owner turned around and said…",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To make things even worse tells people: wait, there's more.",
+     "zh": "to make things even worse 告訴大家：等一下，還沒完。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Stop right there for a second. Everyone will lean in.",
+     "zh": "在這裡停一秒，大家會往前靠。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "And then, to make things even worse, the owner turned around and said…",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "tunde",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's try that story again.",
+     "zh": "我們重講一次這個故事。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "You'll never guess what happened to me yesterday. So, I was standing in the queue at Tesco, minding my own business…",
+     "zh": "你絕對猜不到我昨天發生什麼事。我那時在 Tesco 排隊，自己顧自己……"
+    },
+    {
+     "v": "B",
+     "say": "Uh oh.",
+     "zh": "喔喔。",
+     "R": "tunde-think"
+    },
+    {
+     "v": "A",
+     "say": "Out of nowhere, this huge dog ran up and grabbed my sandwich. And I'm not joking, it was the size of a small horse.",
+     "zh": "突然冒出一隻大狗衝過來，叼走我的三明治。我不是開玩笑，那隻狗跟小馬一樣大。"
+    },
+    {
+     "v": "B",
+     "say": "No way!",
+     "zh": "不會吧！",
+     "R": "tunde-happy"
+    },
+    {
+     "v": "E",
+     "say": "He's listening. Now the ending.",
+     "zh": "他在聽了。現在講結局。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Land it",
+   "sub": "收尾：笑點要漂亮落地",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: land the punchline.",
+     "zh": "第三段：笑點落地。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The punchline is the funny last line. Say it short, and then stop.",
+     "zh": "punchline 是最後那句好笑的話。說短一點，說完就停。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "He looked at me and said: he doesn't usually eat ham.",
+   "meaning": "他看著我說：牠通常不吃火腿的",
+   "note": "He said ＋ 直接引述 ＝ 最生動的說法",
+   "lines": [
+    {
+     "v": "A",
+     "say": "He looked at me and said: he doesn't usually eat ham.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Quote the exact words. Direct speech is always funnier than he told me that.",
+     "zh": "直接引述原話。直接引語永遠比 he told me that 好笑。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And change your voice a little when you quote someone. Act it!",
+     "zh": "引述別人時稍微換個聲音，演出來！",
+     "pose": "talk2",
+     "sticker": "🎭",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "He looked at me and said: he doesn't usually eat ham.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I didn't know whether to laugh or cry.",
+   "meaning": "我不知道該笑還是該哭",
+   "note": "whether to A or B ＝ 該 A 還是 B",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then add your reaction.",
+     "zh": "接著說你的反應。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I didn't know whether to laugh or cry.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Whether to laugh or cry means it was so bad it was funny.",
+     "zh": "whether to laugh or cry 是糟到好笑的程度。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A classic way to end a disaster story.",
+     "zh": "這是災難故事的經典結尾。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I didn't know whether to laugh or cry.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Anyway, long story short, I never went back to that Tesco.",
+   "meaning": "總之，長話短說，我再也沒去過那家 Tesco",
+   "note": "long story short ＝ 長話短說",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you're losing them, jump to the end.",
+     "zh": "如果大家快失去興趣了，就直接跳到結尾。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Anyway, long story short, I never went back to that Tesco.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Long story short means I'll skip the details and give you the ending.",
+     "zh": "long story short 是跳過細節直接講結果。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Anyway is the magic word that brings any story back to the point.",
+     "zh": "anyway 是把任何故事拉回重點的魔法字。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Anyway, long story short, I never went back to that Tesco.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "React",
+   "sub": "回應別人的故事：讓對方講得開心",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: react to other people's stories.",
+     "zh": "第四段：回應別人的故事。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Half of a good chat is being a good audience.",
+     "zh": "好的聊天，一半是當個好聽眾。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Stop! You're making that up!",
+   "meaning": "不會吧！你是編的吧！",
+   "note": "make up ＝ 編造",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Stop! You're making that up!",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Make something up means invent a story. Said with a big smile, it's a compliment.",
+     "zh": "make something up 是編故事。笑著說，這是讚美。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It means: your story is so good, it can't be true.",
+     "zh": "意思是：你的故事好到不像真的。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Stop! You're making that up!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "That reminds me of the time I locked myself out in my pyjamas.",
+   "meaning": "這讓我想起有一次我穿著睡衣被鎖在門外",
+   "note": "That reminds me of the time ＝ 這讓我想起有一次",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then share a story back.",
+     "zh": "接著回一個你的故事。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "That reminds me of the time I locked myself out in my pyjamas.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "That reminds me of the time is how stories become a chain. Everyone takes a turn.",
+     "zh": "That reminds me of the time 讓故事一個接一個，每個人輪流講。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "But wait until they've finished. Don't steal their moment.",
+     "zh": "但要等對方講完，不要搶人家的風頭。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That reminds me of the time I locked myself out in my pyjamas.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "I can't believe that actually happened to you.",
+   "meaning": "真不敢相信這真的發生在你身上",
+   "note": "actually ＝ 真的、竟然",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the warmest reaction of all.",
+     "zh": "最溫暖的回應。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "I can't believe that actually happened to you.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Actually here adds surprise. It really happened!",
+     "zh": "這裡的 actually 加強驚訝：竟然真的發生了！",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Your friend will want to tell you every story they have.",
+     "zh": "你朋友會想把所有故事都講給你聽。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I can't believe that actually happened to you.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "tunde",
+   "lines": [
+    {
+     "v": "A",
+     "say": "He looked at me and said: he doesn't usually eat ham.",
+     "zh": "他看著我說：牠通常不吃火腿的。",
+     "L": "secret"
+    },
+    {
+     "v": "B",
+     "say": "Stop! You're making that up!",
+     "zh": "不會吧！你是編的吧！",
+     "R": "tunde-happy"
+    },
+    {
+     "v": "A",
+     "say": "I'm not! I didn't know whether to laugh or cry.",
+     "zh": "我沒有！我不知道該笑還是該哭。",
+     "L": "cheer"
+    },
+    {
+     "v": "B",
+     "say": "That reminds me of the time a seagull stole my chips in Howth.",
+     "zh": "這讓我想起有一次在 Howth，一隻海鷗搶走我的薯條。",
+     "R": "tunde-talk"
+    },
+    {
+     "v": "A",
+     "say": "No way! I can't believe that actually happened to you.",
+     "zh": "不會吧！真不敢相信這真的發生在你身上。"
+    },
+    {
+     "v": "E",
+     "say": "And now it's his turn. That's a great night at the pub.",
+     "zh": "現在換他講了。這就是 Pub 裡美好的夜晚。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：聽故事時的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish reactions to a great story.",
+     "zh": "還有加碼！愛爾蘭人聽到好故事時的兩種反應。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When it's hilarious",
+    "big": [
+     "*I was in stitches!",
+     "我笑到肚子痛！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "When something is so funny it hurts, Irish people say this.",
+     "zh": "好笑到肚子痛時，愛爾蘭人會這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I was in stitches!",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Stitches are a pain in your side, from laughing too much.",
+     "zh": "stitches 是笑太多側腹的抽痛。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you don't believe it",
+    "big": [
+     "*Go 'way!",
+     "少來了！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when a story sounds too wild to be true, they say this.",
+     "zh": "故事誇張到不像真的時，他們會這樣說。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "Go 'way!",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's short for go away, but it means: no way, I don't believe you! Tell me more!",
+     "zh": "這是 go away 的縮寫，但意思是：少來了，我不信！再多說一點！",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "Go 'way!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：整個故事講一遍",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now tell the whole story with me. Say my lines!",
+     "zh": "現在跟我一起把整個故事講一遍。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "tunde",
+   "lines": [
+    {
+     "v": "A",
+     "say": "You'll never guess what happened to me yesterday.",
+     "zh": "你絕對猜不到我昨天發生什麼事。"
+    },
+    {
+     "v": "B",
+     "say": "Go on.",
+     "zh": "說吧。",
+     "R": "tunde-think"
+    },
+    {
+     "v": "A",
+     "say": "So I just stood there, thinking: what do I do now? And then, to make things even worse, the owner turned around and said…",
+     "zh": "所以我就站在那裡，心想：現在怎麼辦？然後，更糟的是，狗主人轉過來說……"
+    },
+    {
+     "v": "B",
+     "say": "What? What did he say?",
+     "zh": "什麼？他說什麼？",
+     "R": "tunde-talk"
+    },
+    {
+     "v": "A",
+     "say": "He doesn't usually eat ham.",
+     "zh": "牠通常不吃火腿的。",
+     "L": "secret"
+    },
+    {
+     "v": "B",
+     "say": "Go 'way! I was in stitches!",
+     "zh": "少來了！我笑到肚子痛！",
+     "R": "tunde-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "You'll never guess what happened to me yesterday.",
+     "So, I was standing in the queue at Tesco, minding my own business…",
+     "Out of nowhere, this huge dog ran up and grabbed my sandwich.",
+     "And I'm not joking, it was the size of a small horse.",
+     "So I just stood there, thinking: what do I do now?",
+     "And then, to make things even worse, the owner turned around and said…",
+     "He looked at me and said: he doesn't usually eat ham.",
+     "I didn't know whether to laugh or cry.",
+     "Anyway, long story short, I never went back to that Tesco.",
+     "Stop! You're making that up!",
+     "That reminds me of the time I locked myself out in my pyjamas.",
+     "I can't believe that actually happened to you."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Great storytelling! Order, timing, punchline.",
+     "zh": "說得太好了！順序、節奏、笑點。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them, and tell your own disaster story this week.",
+     "zh": "十二句都在這裡。截圖下來，這週講一個你自己的糗事。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🐕",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And keep an eye on your sandwiches. See you next time. Bye!",
+     "zh": "還有，顧好你的三明治。下一課見，Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
