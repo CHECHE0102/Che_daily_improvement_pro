@@ -200,12 +200,13 @@ function page(lesson, si, li, info, opts) {
     const L = ln.L || lines.slice(0, li).reverse().map(l => l.L).find(Boolean) || sc.L;
     const R = ln.R || lines.slice(0, li).reverse().map(l => l.R).find(Boolean) || sc.R;
     const roles = lesson.roles || {};
-    const side = ln.v === 'A' ? 'l' : ln.v === 'B' ? 'r' : '';
+    // C = a second guest who stands on the left instead of Niamh (own voice, own name tag)
+    const side = ln.v === 'A' || ln.v === 'C' ? 'l' : ln.v === 'B' ? 'r' : '';
     const ent = info.first;
-    h += `<div class="actor l${side === 'r' ? ' listen' : ''}" style="${ent ? anim('inL', .6, .1) : ln.L ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'l' ? bob : ''}">${person(opts, L, roles.A || '店員')}</div></div>`;
+    h += `<div class="actor l${side === 'r' ? ' listen' : ''}" style="${ent ? anim('inL', .6, .1) : ln.L ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'l' ? bob : ''}">${person(opts, L, roles.C || roles.A || '店員')}</div></div>`;
     h += `<div class="actor r${side === 'l' ? ' listen' : ''}" style="${ent ? anim('inR', .6, .25) : ln.R ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'r' ? bob : ''}">${person(opts, R, roles.B || '客人')}</div></div>`;
     if (side) h += `<div class="tail" style="${side === 'l' ? 'left:600px' : 'right:600px'};top:786px"></div>`;
-    h += caption(ln, info, 'wide', ln.v === 'A' ? roles.A || 'Staff 店員' : ln.v === 'B' ? roles.B || 'Customer 客人' : 'Niamh');
+    h += caption(ln, info, 'wide', ln.v === 'C' ? roles.C || '' : ln.v === 'A' ? roles.A || 'Staff 店員' : ln.v === 'B' ? roles.B || 'Customer 客人' : 'Niamh');
   } else if (sc.type === 'chapter') {
     h += `<div class="teacher" style="${anim('inL', .6, .35)}"><div style="width:100%;height:100%${bob}">${person(opts, pose, 'Niamh')}</div></div>`;
     h += `<div class="chap"><div class="n" style="${info.first ? anim('pop', .6, .45) : ''}">${esc(sc.num)}</div><div class="t fit" style="${info.first ? anim('up', .5, .7) : ''}">${esc(sc.title)}</div>` +

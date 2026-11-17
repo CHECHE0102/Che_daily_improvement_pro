@@ -1,0 +1,1108 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-US-JennyNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V015",
+ "title": "聊時事說出自己的看法",
+ "subtitle": "12 句英文，不再只會說 it's good",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-cafe",
+ "guest": "valeria",
+ "roles": {
+  "A": "Niamh",
+  "B": "Valeria 朋友"
+ },
+ "thumb": {
+  "pose": "think",
+  "bg": "bg-cafe",
+  "line1": "你覺得呢？",
+  "line2": "不再只會說 good",
+  "tag": "12 句 B2 英文",
+  "sticker": "📰"
+ },
+ "chapters": [
+  "Intro",
+  "說出看法",
+  "留點餘地",
+  "友善地反駁",
+  "收尾",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "customer",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Did you see the news? They want to try a four-day working week here. What do you think?",
+     "zh": "你有看新聞嗎？這裡想試行一週上四天班。你覺得呢？",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "L": "think",
+     "sticker": "🤔",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "Em… it's good. Yes. Good.",
+     "zh": "呃……很好。對，很好。",
+     "L": "barista-sorry"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🤐",
+    "big": [
+     "I had opinions",
+     "*just not in English"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "In my own language, I could talk about this for an hour. In English, all I had was: it's good.",
+     "zh": "用母語，這種話題我可以聊一小時。用英文，我只有一句：很好。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "My friend changed the subject. She thought I didn't care. I cared a lot!",
+     "zh": "我朋友換了話題，她以為我不在乎。我超在乎的！",
+     "pose": "no",
+     "sticker": "😩",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Share your opinion",
+     "*and keep the chat going"
+    ],
+    "cta": "聊時事說出自己的看法・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for talking about the news with friends.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你跟朋友聊時事的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for talking about the news with friends."
+    },
+    {
+     "v": "E",
+     "say": "How to give an opinion, how to sound less certain, how to disagree with a friend, and how to change your mind.",
+     "zh": "怎麼表達看法、怎麼留點餘地、怎麼跟朋友意見不同，還有怎麼改變想法。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Have a view",
+   "sub": "表達看法：有立場，也有理由",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: have a view.",
+     "zh": "第一段：說出你的看法。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "An opinion has two parts: what you think, and why. Most learners stop after the first part.",
+     "zh": "一個看法有兩部分：你怎麼想，還有為什麼。大部分學習者講完第一部分就停了。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Personally, I think it's a great idea.",
+   "meaning": "我個人覺得這是個好主意",
+   "note": "Personally ＝ 就我個人而言",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Personally, I think it's a great idea.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Personally shows this is your view, not a fact. It invites other views.",
+     "zh": "Personally 表示這是你的看法，不是事實，也歡迎別人有不同意見。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "But don't stop there. Your friend is waiting for the because.",
+     "zh": "但不要停在這裡，朋友在等你的 because。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Personally, I think it's a great idea.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "The way I see it, people would be happier and work better.",
+   "meaning": "在我看來，大家會更快樂，工作也會更好",
+   "note": "The way I see it ＝ 在我看來",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then give your reason.",
+     "zh": "接著說理由。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "The way I see it, people would be happier and work better.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The way I see it introduces your reasoning. It sounds thoughtful.",
+     "zh": "The way I see it 帶出你的理由，聽起來很有想法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Two reasons is perfect. Three is a speech!",
+     "zh": "兩個理由剛好，三個就變演講了！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "The way I see it, people would be happier and work better.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I read somewhere that it worked really well in Iceland.",
+   "meaning": "我在哪裡看到，冰島試行得很成功",
+   "note": "I read somewhere that ＝ 我在哪裡讀到……",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you read something about it, use it.",
+     "zh": "如果你有讀過相關的東西，就拿出來用。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "I read somewhere that it worked really well in Iceland.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I read somewhere is great when you don't remember exactly where. Very honest.",
+     "zh": "I read somewhere 很適合用在你記不清楚出處的時候，很誠實。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "This is exactly why reading the news in English helps you speak. Hint, hint.",
+     "zh": "這就是讀英文新聞能幫你開口的原因。你懂的。",
+     "pose": "secret",
+     "sticker": "📰",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I read somewhere that it worked really well in Iceland.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Soften it",
+   "sub": "留點餘地：不要說得太滿",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: soften it.",
+     "zh": "第二段：留點餘地。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In English, sounding too sure can sound rude. Small words make a big difference.",
+     "zh": "在英文裡，講得太肯定可能顯得沒禮貌。小字有大作用。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 2,
+   "board": {
+    "kicker": "Too strong?",
+    "items": [
+     "✗ It's definitely better.",
+     "✓ It could be better, depending on…"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Definitely leaves no room for your friend.",
+     "zh": "definitely 不給朋友留任何空間。",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Soft words keep the conversation open.",
+     "zh": "柔和的字讓對話保持開放。",
+     "pose": "point",
+     "step": 2
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "It depends on the job, really.",
+   "meaning": "其實要看是什麼工作",
+   "note": "It depends on ＝ 要看……",
+   "lines": [
+    {
+     "v": "A",
+     "say": "It depends on the job, really.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It depends on shows you've thought about different situations.",
+     "zh": "It depends on 表示你考慮過不同情況。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Really at the end makes it sound relaxed and natural.",
+     "zh": "最後加 really，聽起來輕鬆又自然。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It depends on the job, really.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "I can see it working for offices, but maybe not for hospitals.",
+   "meaning": "我覺得辦公室可行，但醫院可能不行",
+   "note": "I can see it working ＝ 我覺得行得通",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then show both sides.",
+     "zh": "接著說兩面。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I can see it working for offices, but maybe not for hospitals.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I can see it working means I can imagine it being successful.",
+     "zh": "I can see it working 是我想像得到它會成功。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Giving both sides makes you sound fair, and much smarter.",
+     "zh": "說出兩面讓你聽起來公平，也更聰明。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I can see it working for offices, but maybe not for hospitals.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I'm not 100% sure, but I don't think it's that simple.",
+   "meaning": "我不是百分之百確定，但我覺得沒那麼簡單",
+   "note": "that simple ＝ 那麼簡單",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you're doubtful, say so honestly.",
+     "zh": "如果你有懷疑，就老實說。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "I'm not 100% sure, but I don't think it's that simple.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'm not 100% sure is honest and humble. People trust it.",
+     "zh": "I'm not 100% sure 誠實又謙虛，大家會信任你。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Not that simple means more complicated than it looks.",
+     "zh": "not that simple 是比看起來複雜。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm not 100% sure, but I don't think it's that simple.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "customer",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's try that chat again.",
+     "zh": "我們重聊一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "A four-day working week. What do you think?",
+     "zh": "一週上四天班，你覺得呢？",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "A",
+     "say": "Personally, I think it's a great idea. The way I see it, people would be happier and work better.",
+     "zh": "我個人覺得這是個好主意。在我看來，大家會更快樂，工作也會更好。"
+    },
+    {
+     "v": "B",
+     "say": "Even nurses? Even shops?",
+     "zh": "連護理師也是？商店也是？",
+     "R": "valeria-think"
+    },
+    {
+     "v": "A",
+     "say": "It depends on the job, really. I can see it working for offices, but maybe not for hospitals.",
+     "zh": "其實要看是什麼工作。我覺得辦公室可行，但醫院可能不行。"
+    },
+    {
+     "v": "B",
+     "say": "Hmm, that's true.",
+     "zh": "嗯，有道理。",
+     "R": "valeria-happy"
+    },
+    {
+     "v": "E",
+     "say": "Now it's a real conversation.",
+     "zh": "現在這才是真正的聊天。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Push back",
+   "sub": "跟朋友意見不同：友善地反駁",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: push back.",
+     "zh": "第三段：友善地反駁。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Disagreeing with a friend is normal. It's how good conversations happen.",
+     "zh": "跟朋友意見不同很正常，好的對話就是這樣來的。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Really? I'm not so sure about that.",
+   "meaning": "真的嗎？這我倒不太確定",
+   "note": "I'm not so sure about that ＝ 我不太同意",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Really? I'm not so sure about that.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'm not so sure about that is the friendliest way to say I disagree.",
+     "zh": "I'm not so sure about that 是說「我不同意」最友善的方式。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say it with a smile, and a little laugh. Friends do this all the time.",
+     "zh": "帶著微笑、輕輕一笑地說。朋友之間常這樣。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Really? I'm not so sure about that.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "But what about people who are paid by the hour?",
+   "meaning": "那時薪制的人怎麼辦？",
+   "note": "What about…? ＝ 那……呢？",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask a question, instead of making a statement.",
+     "zh": "接著用問題代替陳述。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "But what about people who are paid by the hour?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "What about is a gentle way to bring up a problem.",
+     "zh": "What about 是溫和地提出問題的方法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Questions feel like curiosity. Statements feel like a fight.",
+     "zh": "問題感覺像好奇，陳述感覺像吵架。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "But what about people who are paid by the hour?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "I take your point, but I still think the risk is too high.",
+   "meaning": "我懂你的意思，但我還是覺得風險太高",
+   "note": "I take your point ＝ 我明白你的意思",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you really disagree, be clear, but kind.",
+     "zh": "真的不同意時，清楚但友善地說。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I take your point, but I still think the risk is too high.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I take your point means I understand and respect your argument.",
+     "zh": "I take your point 是我理解也尊重你的論點。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "But I still think keeps your opinion. Both of you can be smart and still disagree.",
+     "zh": "But I still think 保住你的看法。兩個聰明人也可以意見不同。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I take your point, but I still think the risk is too high.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Wrap it up",
+   "sub": "收尾：改變想法、讓話題延續",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: wrap it up.",
+     "zh": "第四段：收尾。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A good chat doesn't need a winner.",
+     "zh": "好的聊天不需要贏家。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "That's a good point. I hadn't thought of it like that.",
+   "meaning": "說得好，我沒從這個角度想過",
+   "note": "think of it like that ＝ 從那個角度想",
+   "lines": [
+    {
+     "v": "A",
+     "say": "That's a good point. I hadn't thought of it like that.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Changing your mind is not losing. It's listening.",
+     "zh": "改變想法不是輸，是有在聽。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "People love talking to someone who can say this.",
+     "zh": "大家都喜歡跟說得出這句話的人聊天。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That's a good point. I hadn't thought of it like that.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "I suppose we'll have to wait and see.",
+   "meaning": "我想我們只能等著看了",
+   "note": "wait and see ＝ 等著看結果",
+   "lines": [
+    {
+     "v": "E",
+     "say": "When there's no answer yet, end it like this.",
+     "zh": "還沒有答案時，就這樣結束。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I suppose we'll have to wait and see.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I suppose means I think, but not strongly. Wait and see means let's see what happens.",
+     "zh": "I suppose 是我想（不強烈），wait and see 是看看會怎樣。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It closes the topic without anyone losing.",
+     "zh": "這句話結束話題，沒有人輸。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I suppose we'll have to wait and see.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "What's everyone at your work saying about it?",
+   "meaning": "你公司的人都怎麼說？",
+   "note": "What's everyone saying ＝ 大家怎麼說",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And keep the conversation going, with one more question.",
+     "zh": "再用一個問題讓對話繼續。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "What's everyone at your work saying about it?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Asking about other people's opinions is a safe, easy next step.",
+     "zh": "問別人的看法，是安全又簡單的下一步。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now your friend talks, and you rest. Clever!",
+     "zh": "現在換朋友說，你休息。很聰明！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "What's everyone at your work saying about it?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "customer",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "B",
+     "say": "But what about people who are paid by the hour?",
+     "zh": "那時薪制的人怎麼辦？",
+     "R": "valeria-frown"
+    },
+    {
+     "v": "A",
+     "say": "That's a good point. I hadn't thought of it like that.",
+     "zh": "說得好，我沒從這個角度想過。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Mm. They'd lose money.",
+     "zh": "嗯，他們會少賺錢。",
+     "R": "valeria-think"
+    },
+    {
+     "v": "A",
+     "say": "I suppose we'll have to wait and see. What's everyone at your work saying about it?",
+     "zh": "我想我們只能等著看了。你公司的人都怎麼說？",
+     "L": "customer-happy"
+    },
+    {
+     "v": "B",
+     "say": "Oh, don't get me started!",
+     "zh": "喔，別讓我開始講！",
+     "R": "valeria-happy"
+    },
+    {
+     "v": "E",
+     "say": "And off she goes. A real conversation, in English.",
+     "zh": "然後她就開始講了。這是一場真正的英文對話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：聊天時的兩句口頭禪",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish phrases for chatting about the news.",
+     "zh": "還有加碼！聊時事時的兩句愛爾蘭口頭禪。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you agree completely",
+    "big": [
+     "*You're dead right.",
+     "你完全說對了"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "In Ireland, dead can mean very. So dead right means completely right.",
+     "zh": "在愛爾蘭，dead 可以是「非常」的意思。dead right 就是完全正確。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "You're dead right.",
+     "pose": "thumb"
+    },
+    {
+     "v": "E",
+     "say": "You'll also hear dead easy, and dead on. Nothing to do with dying!",
+     "zh": "你也會聽到 dead easy、dead on，跟死掉一點關係都沒有！",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When the topic is too big",
+    "big": [
+     "*Don't get me started!",
+     "別讓我開始講！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when someone has very strong feelings about a topic, they say this.",
+     "zh": "當有人對某個話題非常有感，會這樣說。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Don't get me started!",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It means: I have so much to say. And then, of course, they start.",
+     "zh": "意思是：我有好多話要說。然後當然，他們就開始說了。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Don't get me started!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一杯咖啡聊完一則新聞",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Back to the café one more time. Say my lines with me!",
+     "zh": "再回到咖啡店一次。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "customer",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Did you see the news? What do you think?",
+     "zh": "你有看新聞嗎？你覺得呢？",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "A",
+     "say": "Personally, I think it's a great idea. I read somewhere that it worked really well in Iceland.",
+     "zh": "我個人覺得這是個好主意。我在哪裡看到，冰島試行得很成功。"
+    },
+    {
+     "v": "B",
+     "say": "Really? I'm not so sure about that.",
+     "zh": "真的嗎？這我倒不太確定。",
+     "R": "valeria-think"
+    },
+    {
+     "v": "A",
+     "say": "I take your point. It depends on the job, really.",
+     "zh": "我懂你的意思。其實要看是什麼工作。"
+    },
+    {
+     "v": "B",
+     "say": "You're dead right there.",
+     "zh": "這點你完全說對了。",
+     "R": "valeria-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Personally, I think it's a great idea.",
+     "The way I see it, people would be happier and work better.",
+     "I read somewhere that it worked really well in Iceland.",
+     "It depends on the job, really.",
+     "I can see it working for offices, but maybe not for hospitals.",
+     "I'm not 100% sure, but I don't think it's that simple.",
+     "Really? I'm not so sure about that.",
+     "But what about people who are paid by the hour?",
+     "I take your point, but I still think the risk is too high.",
+     "That's a good point. I hadn't thought of it like that.",
+     "I suppose we'll have to wait and see.",
+     "What's everyone at your work saying about it?"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Opinions, reasons, and a friendly argument. Brilliant!",
+     "zh": "有看法、有理由，還有一場友善的辯論。太棒了！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them, and try them on the next news story you read.",
+     "zh": "十二句都在這裡。截圖下來，下一則新聞就拿來試試。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "📰",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Then you'll always have something to talk about. See you next time. Bye!",
+     "zh": "這樣你永遠都有話題可以聊。下一課見，Bye！",
+     "pose": "cheer",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

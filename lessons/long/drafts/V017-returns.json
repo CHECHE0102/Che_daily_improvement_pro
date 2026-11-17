@@ -1,0 +1,1099 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-ZA-LeahNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V017",
+ "title": "退貨、換貨不吃虧",
+ "subtitle": "12 句英文，東西壞了也不怕",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-counter",
+ "guest": "zanele",
+ "roles": {
+  "A": "Niamh 客人",
+  "B": "Zanele 客服"
+ },
+ "thumb": {
+  "pose": "no",
+  "bg": "bg-counter",
+  "line1": "東西壞了想退？",
+  "line2": "退換貨 12 句",
+  "tag": "B2 英文",
+  "sticker": "🧾"
+ },
+ "chapters": [
+  "Intro",
+  "說明問題",
+  "提出要求",
+  "被拒絕時",
+  "沒收據",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "think",
+   "R": "zanele",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Hi… em… this kettle… it doesn't… I want my money back. Now.",
+     "zh": "嗨……呃……這個水壺……它不……我要退錢。馬上。",
+     "L": "barista-panic"
+    },
+    {
+     "v": "B",
+     "say": "Do you have a receipt? Was it opened? What exactly is wrong with it?",
+     "zh": "你有收據嗎？拆開過嗎？到底哪裡有問題？",
+     "R": "zanele-frown"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "L": "barista-sorry",
+     "sticker": "😬",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🧾",
+    "big": [
+     "Three questions",
+     "*zero answers"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I walked in angry, and walked out with nothing. Because I couldn't answer three simple questions.",
+     "zh": "我氣沖沖走進去，結果什麼都沒拿到，因為我答不出三個簡單的問題。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Returning something is easy, if you say what happened, what you want, and why you're right.",
+     "zh": "退貨其實很簡單，只要說清楚發生什麼、你要什麼、為什麼你有道理。",
+     "pose": "secret",
+     "sticker": "💡",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Return or exchange",
+     "*without losing out"
+    ],
+    "cta": "退貨、換貨不吃虧・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for returning things in a shop.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你在店裡退換貨的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for returning things in a shop."
+    },
+    {
+     "v": "E",
+     "say": "Explaining the problem, asking for what you want, handling a no, and returning a gift with no receipt.",
+     "zh": "說明問題、提出要求、被拒絕時怎麼辦，還有沒收據的禮物怎麼退。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Explain",
+   "sub": "說明問題：冷靜、清楚",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: explain the problem.",
+     "zh": "第一段：說明問題。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Calm and clear wins every time. Shouting gets you nowhere.",
+     "zh": "冷靜清楚每次都贏，大吼大叫什麼都拿不到。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "I'd like to return this, please. It stopped working after two days.",
+   "meaning": "我想退這個，它用兩天就壞了",
+   "note": "stopped working ＝ 不能用了、壞了",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I'd like to return this, please. It stopped working after two days.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Start with what you want, then the problem. Two short sentences.",
+     "zh": "先說你要什麼，再說問題。兩句短句就好。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Stopped working is perfect for anything electrical. No need for technical words.",
+     "zh": "stopped working 適用所有電器，不需要專業字。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to return this, please. It stopped working after two days.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "I bought it here last Saturday. Here's the receipt.",
+   "meaning": "我上週六在這裡買的，這是收據",
+   "note": "Here's the receipt ＝ 這是收據",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then show them it's from their shop.",
+     "zh": "接著證明是在他們店裡買的。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I bought it here last Saturday. Here's the receipt.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "When and where. That's the first thing staff need to know.",
+     "zh": "時間和地點，這是店員第一個需要知道的。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And hand over the receipt while you say it. Very professional.",
+     "zh": "邊說邊遞上收據，非常專業。",
+     "pose": "talk2",
+     "sticker": "🧾",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I bought it here last Saturday. Here's the receipt.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "It was like this when I opened the box.",
+   "meaning": "我一打開盒子就是這樣了",
+   "note": "It was like this ＝ 本來就是這樣",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And make it clear it wasn't your fault.",
+     "zh": "再講清楚不是你弄壞的。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "It was like this when I opened the box.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It was like this means: I didn't break it. It came broken.",
+     "zh": "It was like this 意思是：不是我弄壞的，買來就壞了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Point at the problem as you say it.",
+     "zh": "說的時候指著問題的地方。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It was like this when I opened the box.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Ask",
+   "sub": "提出要求：退錢、換貨還是保固",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: ask for what you want.",
+     "zh": "第二段：提出你要的。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't wait for them to decide. Tell them which option you'd like.",
+     "zh": "不要等對方決定，直接說你想要哪個選項。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "Would I be able to get a refund rather than an exchange?",
+   "meaning": "我可以退錢，而不是換貨嗎？",
+   "note": "refund ＝ 退款；exchange ＝ 換貨",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Would I be able to get a refund rather than an exchange?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A refund is your money back. An exchange is a new one of the same thing.",
+     "zh": "refund 是退錢，exchange 是換一個新的。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Would I be able to is polite but clear. You're asking, but you know what you want.",
+     "zh": "Would I be able to 禮貌又清楚，是在問，但你知道自己要什麼。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would I be able to get a refund rather than an exchange?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "If you don't have another one in stock, could I get store credit?",
+   "meaning": "如果沒有現貨，可以給我店內購物金嗎？",
+   "note": "in stock ＝ 有現貨；store credit ＝ 購物金",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then have a plan B ready.",
+     "zh": "接著準備好 B 計畫。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "If you don't have another one in stock, could I get store credit?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In stock means the shop has it right now.",
+     "zh": "in stock 是店裡現在有貨。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Store credit is money you can only spend in that shop. Better than nothing!",
+     "zh": "store credit 是只能在那家店用的錢。總比沒有好！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "If you don't have another one in stock, could I get store credit?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "It's only eight months old. Is it still under warranty?",
+   "meaning": "才買八個月，還在保固期內嗎？",
+   "note": "under warranty ＝ 在保固期內",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And for bigger things, ask about the warranty.",
+     "zh": "比較貴的東西，記得問保固。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "It's only eight months old. Is it still under warranty?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Under warranty means they must repair or replace it for free.",
+     "zh": "under warranty 是他們必須免費修理或更換。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Most electrical things have at least one year. Always ask!",
+     "zh": "大部分電器至少一年保固。一定要問！",
+     "pose": "cheer",
+     "sticker": "🛡️",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's only eight months old. Is it still under warranty?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "zanele",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's go back and try again.",
+     "zh": "我們回去再試一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Hi. I'd like to return this, please. It stopped working after two days.",
+     "zh": "嗨，我想退這個，它用兩天就壞了。"
+    },
+    {
+     "v": "B",
+     "say": "Oh no, sorry to hear that. When did you buy it?",
+     "zh": "喔不，很抱歉。你什麼時候買的？",
+     "R": "zanele-talk"
+    },
+    {
+     "v": "A",
+     "say": "I bought it here last Saturday. Here's the receipt. It was like this when I opened the box.",
+     "zh": "我上週六在這裡買的，這是收據。我一打開盒子就是這樣了。"
+    },
+    {
+     "v": "B",
+     "say": "Right. I can give you a new one, or…",
+     "zh": "好的，我可以換一個新的給你，或者……",
+     "R": "zanele-think"
+    },
+    {
+     "v": "A",
+     "say": "Would I be able to get a refund rather than an exchange?",
+     "zh": "我可以退錢，而不是換貨嗎？"
+    },
+    {
+     "v": "E",
+     "say": "Clear and calm. Now, what if she says no?",
+     "zh": "清楚又冷靜。那如果她說不行呢？",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "When they say no",
+   "sub": "被拒絕時：有禮貌地堅持",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: when the answer is no.",
+     "zh": "第三段：當對方說不行。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't give up, and don't get angry. Stay polite, and stay firm.",
+     "zh": "不要放棄，也不要生氣。保持禮貌，但要堅定。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "I understand it's your policy, but it's faulty, not just unwanted.",
+   "meaning": "我理解這是你們的規定，但它是壞的，不是我不想要",
+   "note": "faulty ＝ 有瑕疵的",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I understand it's your policy, but it's faulty, not just unwanted.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I understand, but shows you're listening, and then you push back.",
+     "zh": "I understand, but 表示你有在聽，然後再反駁。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Faulty is the key word. A faulty item is very different from changing your mind.",
+     "zh": "faulty 是關鍵字。東西壞了跟你改變心意是完全不同的。",
+     "pose": "point",
+     "sticker": "🔑",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I understand it's your policy, but it's faulty, not just unwanted.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "As far as I know, I'm entitled to a repair, a replacement or a refund.",
+   "meaning": "據我所知，我有權要求修理、換新或退款",
+   "note": "be entitled to ＝ 有權得到",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then mention your rights. Gently.",
+     "zh": "接著溫和地提到你的權利。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "As far as I know, I'm entitled to a repair, a replacement or a refund.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In Ireland and the EU, if something is faulty, you have these rights by law.",
+     "zh": "在愛爾蘭和歐盟，東西有瑕疵，法律保障你這些權利。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "As far as I know makes it sound less aggressive. You're not a lawyer, you're just informed.",
+     "zh": "As far as I know 讓語氣沒那麼衝，你不是律師，只是有做功課。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "As far as I know, I'm entitled to a repair, a replacement or a refund.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Is there a manager on duty I could have a word with?",
+   "meaning": "現在有值班的主管可以讓我談一下嗎？",
+   "note": "have a word with ＝ 跟……談一下",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you're still stuck, go one step up.",
+     "zh": "如果還是卡住，就往上找一層。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Is there a manager on duty I could have a word with?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "On duty means working right now. Have a word with means have a short talk.",
+     "zh": "on duty 是正在值班，have a word with 是談一下。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Much better than: get me your manager!",
+     "zh": "比「叫你們經理出來！」好太多了。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there a manager on duty I could have a word with?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "No receipt",
+   "sub": "沒收據的禮物：照樣能處理",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: returning a gift, with no receipt.",
+     "zh": "第四段：沒有收據的禮物怎麼退。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It's harder, but it's often possible. You just need the right words.",
+     "zh": "比較難，但常常做得到，只要用對的話。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "It was a present, so I only have the gift receipt.",
+   "meaning": "這是別人送的，所以我只有禮物收據",
+   "note": "gift receipt ＝ 禮物收據（不顯示價格）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "It was a present, so I only have the gift receipt.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A gift receipt shows what was bought, but not the price.",
+     "zh": "gift receipt 顯示買了什麼，但不顯示價格。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Most shops will give you an exchange or store credit with one.",
+     "zh": "大部分店家看到它會讓你換貨或給購物金。",
+     "pose": "talk2",
+     "sticker": "🎁",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It was a present, so I only have the gift receipt.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "I paid by card, so it should show up on your system.",
+   "meaning": "我是刷卡付的，所以你們系統應該查得到",
+   "note": "show up ＝ 出現、查得到",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you paid by card, there's another way.",
+     "zh": "如果你是刷卡，還有另一個辦法。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I paid by card, so it should show up on your system.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Show up means appear. The shop can search for the payment.",
+     "zh": "show up 是出現，店家可以查這筆付款。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "No paper receipt? Your bank card is your receipt.",
+     "zh": "沒有紙本收據？你的卡就是收據。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I paid by card, so it should show up on your system.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Thanks for your patience. I really appreciate you going out of your way.",
+   "meaning": "謝謝你的耐心，真的很感謝你特別幫忙",
+   "note": "go out of your way ＝ 特地多花力氣幫忙",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And always end with this.",
+     "zh": "最後一定要用這句收尾。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your patience. I really appreciate you going out of your way.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Going out of your way means doing more than you have to.",
+     "zh": "go out of your way 是做得比該做的還多。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Staff remember nice customers. Next time, they'll help you even faster.",
+     "zh": "店員會記得好客人，下次會更快幫你。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your patience. I really appreciate you going out of your way.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "zanele",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I understand it's your policy, but it's faulty, not just unwanted.",
+     "zh": "我理解這是你們的規定，但它是壞的，不是我不想要。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Hmm, I'll need to check with my manager.",
+     "zh": "嗯，我需要問一下我的主管。",
+     "R": "zanele-think"
+    },
+    {
+     "v": "A",
+     "say": "No problem. As far as I know, I'm entitled to a repair, a replacement or a refund.",
+     "zh": "沒問題。據我所知，我有權要求修理、換新或退款。"
+    },
+    {
+     "v": "B",
+     "say": "You're right. I'll do the refund for you now.",
+     "zh": "你說得對，我現在幫你退款。",
+     "R": "zanele-happy"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your patience. I really appreciate you going out of your way.",
+     "zh": "謝謝你的耐心，真的很感謝你特別幫忙。",
+     "L": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Money back, and everyone's still smiling.",
+     "zh": "錢退回來了，大家都還笑著。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：東西壞了怎麼說",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish phrases you'll hear at the counter.",
+     "zh": "還有加碼！櫃檯常聽到的兩句愛爾蘭話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When it's broken",
+    "big": [
+     "*It's banjaxed.",
+     "它完全壞掉了。"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "When something is completely broken, Irish people say this.",
+     "zh": "東西完全壞掉時，愛爾蘭人會這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "It's banjaxed.",
+     "pose": "no"
+    },
+    {
+     "v": "E",
+     "say": "Banjaxed means broken beyond hope. Your kettle, your phone, your back after moving house.",
+     "zh": "banjaxed 是壞到沒救。你的水壺、手機，或搬家後的腰。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When they help you",
+    "big": [
+     "*Thanks a million!",
+     "太感謝了！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when someone helps you, this is the Irish thank you.",
+     "zh": "有人幫你時，這是愛爾蘭式的謝謝。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "Thanks a million!",
+     "pose": "cheer",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A million thanks. Very warm, very Irish. You'll hear it ten times a day.",
+     "zh": "一百萬個謝謝，很溫暖，很愛爾蘭。你一天會聽到十次。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Thanks a million!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：整段退貨對話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the whole return, from start to finish. Say my lines!",
+     "zh": "現在把整段退貨從頭到尾演一遍。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "zanele",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Hi. I'd like to return this, please. It's banjaxed. It was like this when I opened the box.",
+     "zh": "嗨，我想退這個，它完全壞了。我一打開盒子就是這樣了。"
+    },
+    {
+     "v": "B",
+     "say": "Do you have the receipt?",
+     "zh": "你有收據嗎？",
+     "R": "zanele-talk"
+    },
+    {
+     "v": "A",
+     "say": "It was a present, so I only have the gift receipt. But my friend paid by card, so it should show up on your system.",
+     "zh": "這是別人送的，所以我只有禮物收據。但我朋友是刷卡付的，所以你們系統應該查得到。"
+    },
+    {
+     "v": "B",
+     "say": "Let me check… Yes, there it is.",
+     "zh": "我查一下……有，找到了。",
+     "R": "zanele-think"
+    },
+    {
+     "v": "A",
+     "say": "If you don't have another one in stock, could I get store credit?",
+     "zh": "如果沒有現貨，可以給我店內購物金嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Of course. Here you go.",
+     "zh": "當然，給你。",
+     "R": "zanele-happy"
+    },
+    {
+     "v": "A",
+     "say": "Thanks a million!",
+     "zh": "太感謝了！",
+     "L": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "I'd like to return this, please. It stopped working after two days.",
+     "I bought it here last Saturday. Here's the receipt.",
+     "It was like this when I opened the box.",
+     "Would I be able to get a refund rather than an exchange?",
+     "If you don't have another one in stock, could I get store credit?",
+     "It's only eight months old. Is it still under warranty?",
+     "I understand it's your policy, but it's faulty, not just unwanted.",
+     "As far as I know, I'm entitled to a repair, a replacement or a refund.",
+     "Is there a manager on duty I could have a word with?",
+     "It was a present, so I only have the gift receipt.",
+     "I paid by card, so it should show up on your system.",
+     "Thanks for your patience. I really appreciate you going out of your way."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Brilliant! Calm, clear, and polite but firm.",
+     "zh": "太棒了！冷靜、清楚，有禮貌又堅定。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them for the next time something breaks.",
+     "zh": "十二句都在這裡。截圖存起來，下次東西壞了用得到。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🧾",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And keep your receipts! See you next time. Bye!",
+     "zh": "還有，收據要留好！下一課見，Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

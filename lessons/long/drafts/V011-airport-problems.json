@@ -1,0 +1,1097 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-US-MichelleNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V011",
+ "title": "機場出包：行李不見、班機取消",
+ "subtitle": "12 句英文，冷靜爭取補償",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-airport",
+ "guest": "camila",
+ "roles": {
+  "A": "Niamh 旅客",
+  "B": "Camila 地勤"
+ },
+ "thumb": {
+  "pose": "barista-panic",
+  "bg": "bg-airport",
+  "line1": "行李不見了！",
+  "line2": "機場英文 12 句",
+  "tag": "還能爭取補償",
+  "sticker": "🧳"
+ },
+ "chapters": [
+  "Intro",
+  "行李不見",
+  "班機取消",
+  "爭取補償",
+  "保持禮貌",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "customer",
+   "R": "camila",
+   "lines": [
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.6,
+     "L": "think",
+     "sticker": "🧳",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "Excuse me… my suitcase didn't come out.",
+     "zh": "不好意思……我的行李沒有出來。",
+     "L": "barista-panic"
+    },
+    {
+     "v": "B",
+     "say": "I'm sorry to hear that. Do you have your baggage tag?",
+     "zh": "很遺憾。您有行李條嗎？",
+     "R": "camila-talk"
+    },
+    {
+     "v": "A",
+     "say": "My… what?",
+     "zh": "我的……什麼？",
+     "L": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🧳",
+    "big": [
+     "Everyone's bag came out",
+     "*except mine"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I stood at the carousel for forty minutes, watching everyone else's bags come out. Mine was in Amsterdam.",
+     "zh": "我在行李轉盤前站了四十分鐘，看著別人的行李一個個出來。我的在阿姆斯特丹。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "I had no clothes, no charger, and no idea what a baggage tag was.",
+     "zh": "我沒有衣服、沒有充電器，也不知道行李條是什麼。",
+     "pose": "barista-sorry",
+     "sticker": "🔌",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Fix an airport mess",
+     "*and get compensation"
+    ],
+    "cta": "機場出包：行李不見、班機取消・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for when travel goes wrong.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你旅行出狀況時用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for when travel goes wrong."
+    },
+    {
+     "v": "E",
+     "say": "Lost bags, cancelled flights, and how to ask for what you're owed.",
+     "zh": "行李不見、班機取消，還有怎麼爭取你應得的補償。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Lost bag",
+   "sub": "行李不見：報失、描述、追蹤",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: your bag is lost.",
+     "zh": "第一段：行李不見了。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "First, don't leave the airport. Go straight to the baggage desk.",
+     "zh": "第一步，不要離開機場，直接去行李服務台。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "My suitcase hasn't arrived. I'd like to file a report.",
+   "meaning": "我的行李沒有到，我要報遺失",
+   "note": "file a report ＝ 正式報告、登記",
+   "lines": [
+    {
+     "v": "A",
+     "say": "My suitcase hasn't arrived. I'd like to file a report.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "File a report means make an official record.",
+     "zh": "file a report 是正式登記一筆紀錄。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Your baggage tag is the sticker with a barcode they gave you at check-in. It's usually on your boarding pass.",
+     "zh": "行李條就是報到時給你的條碼貼紙，通常貼在登機證上。",
+     "pose": "point",
+     "sticker": "🏷️",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "My suitcase hasn't arrived. I'd like to file a report.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "It's a large navy suitcase with a yellow ribbon on the handle.",
+   "meaning": "是一個大的深藍色行李箱，把手上綁了黃色緞帶",
+   "note": "with ＋ 特徵",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then describe it. Size, colour, then the special thing.",
+     "zh": "接著描述：大小、顏色，再講特別的地方。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "It's a large navy suitcase with a yellow ribbon on the handle.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Navy is dark blue. A ribbon on the handle is the classic way to find your bag.",
+     "zh": "navy 是深藍色。把手綁緞帶是最經典的認行李方法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Hundreds of suitcases are navy. Only yours has the ribbon.",
+     "zh": "深藍色的行李箱有幾百個，綁緞帶的只有你的。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's a large navy suitcase with a yellow ribbon on the handle.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Could you have it delivered to my address when it turns up?",
+   "meaning": "找到後可以送到我的住址嗎？",
+   "note": "have it delivered ＝ 請人送來　turn up ＝ 出現",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And ask them to bring it to you. Don't go back for it.",
+     "zh": "請他們送過來，不要自己再跑回去。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "Could you have it delivered to my address when it turns up?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Have it delivered means ask someone to deliver it. You don't do it yourself.",
+     "zh": "have it delivered 是請人送，不是你自己去拿。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Turn up means appear, usually after being lost.",
+     "zh": "turn up 是失而復得、出現。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you have it delivered to my address when it turns up?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Cancelled",
+   "sub": "班機取消：問清楚下一步",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: your flight is cancelled.",
+     "zh": "第二段：班機取消了。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The screen says cancelled, and two hundred people run to one desk. Be ready with the right questions.",
+     "zh": "螢幕顯示取消，兩百個人衝向同一個櫃台。準備好正確的問題。",
+     "pose": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "My flight's been cancelled. What are my options?",
+   "meaning": "我的班機取消了，我有哪些選擇？",
+   "note": "What are my options? ＝ 我有哪些選擇",
+   "lines": [
+    {
+     "v": "A",
+     "say": "My flight's been cancelled. What are my options?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "What are my options is better than what do I do now. It asks for choices, not orders.",
+     "zh": "What are my options 比 what do I do now 好，你要的是選項，不是指令。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "The first option they give is often not the best one. Listen to all of them.",
+     "zh": "他們給的第一個選項常常不是最好的，全部聽完。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "My flight's been cancelled. What are my options?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "Is there an earlier flight I could be rebooked on?",
+   "meaning": "有更早的班機可以幫我改訂嗎？",
+   "note": "rebook ＝ 重新訂位",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask for the one you want.",
+     "zh": "接著主動要你想要的。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Is there an earlier flight I could be rebooked on?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Rebook means change your ticket to a new flight.",
+     "zh": "rebook 是幫你換到另一個航班。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Check the airline app while you wait. Sometimes you can find the flight before they do!",
+     "zh": "排隊時看一下航空公司 app，有時候你比他們先找到班機！",
+     "pose": "point",
+     "sticker": "📱",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there an earlier flight I could be rebooked on?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "If I have to stay overnight, will the airline cover the hotel?",
+   "meaning": "如果要過夜，航空公司會負擔飯店嗎？",
+   "note": "cover ＝ 支付、負擔",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if the next flight is tomorrow, ask this.",
+     "zh": "如果下一班是明天，問這一句。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "If I have to stay overnight, will the airline cover the hotel?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Cover means pay for. Overnight means for the night.",
+     "zh": "cover 是支付，overnight 是過夜。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "In Europe, the airline must look after you when they cancel. Ask, and keep your receipts.",
+     "zh": "在歐洲，航班取消時航空公司有義務照顧你。要問，收據也要留好。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "If I have to stay overnight, will the airline cover the hotel?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "customer",
+   "R": "camila",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Watch how this goes.",
+     "zh": "來看看會怎麼發展。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "My flight's been cancelled. What are my options?",
+     "zh": "我的班機取消了，我有哪些選擇？"
+    },
+    {
+     "v": "B",
+     "say": "We can put you on tomorrow morning's flight.",
+     "zh": "我們可以幫您改到明天早上的班機。",
+     "R": "camila-talk"
+    },
+    {
+     "v": "A",
+     "say": "Is there an earlier flight I could be rebooked on? There's one tonight with your partner airline.",
+     "zh": "有更早的班機可以幫我改訂嗎？你們的合作航空今晚有一班。"
+    },
+    {
+     "v": "B",
+     "say": "Let me check. Yes, there are two seats left.",
+     "zh": "我查一下。是的，還剩兩個位子。",
+     "R": "camila-happy"
+    },
+    {
+     "v": "E",
+     "say": "She found it because I asked. Not because she offered.",
+     "zh": "是因為我開口問，她才去找的，不是她主動給的。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Compensation",
+   "sub": "爭取補償：你應得的",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: compensation.",
+     "zh": "第三段：爭取補償。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In the EU, a long delay or a late cancellation can mean money back. Many people never ask.",
+     "zh": "在歐盟，長時間延誤或臨時取消可以拿到賠償。很多人從來不問。",
+     "pose": "secret",
+     "sticker": "💶",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Am I entitled to any compensation for this?",
+   "meaning": "這種情況我有資格拿到補償嗎？",
+   "note": "be entitled to ＝ 有權得到",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Am I entitled to any compensation for this?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Entitled to means you have the right to it. It's yours by law.",
+     "zh": "entitled to 是你有權利得到，依法屬於你。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It sounds formal and confident. Exactly how you want to sound here.",
+     "zh": "聽起來正式又有自信，這時候就是要這種語氣。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Am I entitled to any compensation for this?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "Could I have that in writing, with the reason for the delay?",
+   "meaning": "可以給我書面說明，包括延誤的原因嗎？",
+   "note": "in writing ＝ 書面",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then get proof.",
+     "zh": "接著拿證據。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Could I have that in writing, with the reason for the delay?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The reason matters. Bad weather usually means no money. A technical problem usually means money.",
+     "zh": "原因很重要。天氣不好通常不賠，機械問題通常要賠。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "With it in writing, nobody can change the story later.",
+     "zh": "有書面紀錄，之後誰都改不了說法。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could I have that in writing, with the reason for the delay?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Where do I send my receipts for food and taxis?",
+   "meaning": "餐費和計程車的收據要寄到哪裡？",
+   "note": "receipt ＝ 收據",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And don't forget the small costs.",
+     "zh": "小錢也不要忘了。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Where do I send my receipts for food and taxis?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Receipts are the papers that show what you paid.",
+     "zh": "receipt 是付款的證明。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A sandwich, a phone charger, a taxi. It adds up.",
+     "zh": "一個三明治、一條充電線、一趟計程車，加起來不少。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Where do I send my receipts for food and taxis?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Stay human",
+   "sub": "保持禮貌：櫃台人員是你的盟友",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: stay human.",
+     "zh": "第四段：保持禮貌。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The person at the desk didn't cancel your flight. And they decide how hard they try for you.",
+     "zh": "櫃台人員沒有取消你的班機，但他們決定要為你多努力。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "I know it's not your fault. You must be having a crazy day.",
+   "meaning": "我知道不是你的錯，你今天一定忙翻了",
+   "note": "You must be ＝ 你一定是……（推測）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I know it's not your fault. You must be having a crazy day.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You must be is a guess about someone's situation. Here it shows sympathy.",
+     "zh": "You must be 是推測對方的狀況，這裡表示同理。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "After a hundred angry passengers, this sentence feels like a holiday.",
+     "zh": "被一百個生氣的乘客罵過之後，聽到這句就像放假。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I know it's not your fault. You must be having a crazy day.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "Is there anything else you can do for me?",
+   "meaning": "還有其他你能幫我的嗎？",
+   "note": "最後再爭取一次",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Before you leave the desk, one last try.",
+     "zh": "離開櫃台前，再爭取一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything else you can do for me?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It's an open question. Sometimes the answer is a meal voucher, or lounge access.",
+     "zh": "這是開放式問題，有時候會換來餐券或貴賓室。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "They often have more to give. They just don't offer it first.",
+     "zh": "他們常常有更多可以給，只是不會先講。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything else you can do for me?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Thanks so much. You've been a great help.",
+   "meaning": "太感謝了，你幫了大忙",
+   "note": "a great help ＝ 幫了大忙",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And thank them properly.",
+     "zh": "最後好好道謝。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "Thanks so much. You've been a great help.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You've been a great help means you made a real difference.",
+     "zh": "You've been a great help 是你真的幫了很多。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If they were great, write the airline a short note with their name. It matters.",
+     "zh": "如果對方真的很棒，寫封短信給航空公司提他的名字，很有意義。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks so much. You've been a great help.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "customer",
+   "R": "camila",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I know it's not your fault. You must be having a crazy day.",
+     "zh": "我知道不是你的錯，你今天一定忙翻了。"
+    },
+    {
+     "v": "B",
+     "say": "Ha! You have no idea. Thank you.",
+     "zh": "哈！你無法想像。謝謝你。",
+     "R": "camila-happy"
+    },
+    {
+     "v": "A",
+     "say": "Am I entitled to any compensation for this?",
+     "zh": "這種情況我有資格拿到補償嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Yes. It was a technical problem, so you can claim online.",
+     "zh": "有，這是機械問題，您可以上網申請。",
+     "R": "camila-talk"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything else you can do for me?",
+     "zh": "還有其他你能幫我的嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Here's a voucher for dinner. Enjoy.",
+     "zh": "這是晚餐券，請享用。",
+     "R": "camila-happy"
+    },
+    {
+     "v": "E",
+     "say": "A new flight, money back, and free dinner. Kindness works.",
+     "zh": "新的班機、拿回賠償，還有晚餐。善意有用。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：旅行時的兩句話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish phrases for travel days.",
+     "zh": "還有加碼！旅行時會聽到的兩句愛爾蘭話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When everything goes wrong",
+    "big": [
+     "*What a nightmare!",
+     "簡直是惡夢！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Telling your Irish friends about the trip? They'll say this.",
+     "zh": "跟愛爾蘭朋友講這趟旅程？他們會這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "What a nightmare!",
+     "pose": "no"
+    },
+    {
+     "v": "E",
+     "say": "Then they'll tell you an even worse travel story. It's a competition here.",
+     "zh": "然後他們會講一個更慘的旅行故事。在這裡這是比賽。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Finally home",
+    "big": [
+     "*Home sweet home.",
+     "還是家裡好"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you finally get home, tired, with no suitcase…",
+     "zh": "最後終於到家，累到不行，行李還沒到……",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Ah, home sweet home.",
+     "pose": "customer-happy",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's not only Irish, but you'll hear it every time someone walks in the door.",
+     "zh": "這不只是愛爾蘭說法，但每次有人進家門都會聽到。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Home sweet home!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：同一個機場，不同的結局",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Back to the baggage desk one more time. Say my lines with me!",
+     "zh": "再回到行李服務台一次。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "customer",
+   "R": "camila",
+   "lines": [
+    {
+     "v": "A",
+     "say": "My suitcase hasn't arrived. I'd like to file a report.",
+     "zh": "我的行李沒有到，我要報遺失。"
+    },
+    {
+     "v": "B",
+     "say": "Of course. Can you describe it?",
+     "zh": "好的，可以描述一下嗎？",
+     "R": "camila-talk"
+    },
+    {
+     "v": "A",
+     "say": "It's a large navy suitcase with a yellow ribbon on the handle.",
+     "zh": "是一個大的深藍色行李箱，把手上綁了黃色緞帶。"
+    },
+    {
+     "v": "B",
+     "say": "Got it. It's in Amsterdam. It will be here tomorrow.",
+     "zh": "了解，它在阿姆斯特丹，明天會到。",
+     "R": "camila-think"
+    },
+    {
+     "v": "A",
+     "say": "Could you have it delivered to my address when it turns up?",
+     "zh": "找到後可以送到我的住址嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Absolutely.",
+     "zh": "當然可以。",
+     "R": "camila-happy"
+    },
+    {
+     "v": "A",
+     "say": "Thanks so much. You've been a great help.",
+     "zh": "太感謝了，你幫了大忙。",
+     "L": "customer-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "My suitcase hasn't arrived. I'd like to file a report.",
+     "It's a large navy suitcase with a yellow ribbon on the handle.",
+     "Could you have it delivered to my address when it turns up?",
+     "My flight's been cancelled. What are my options?",
+     "Is there an earlier flight I could be rebooked on?",
+     "If I have to stay overnight, will the airline cover the hotel?",
+     "Am I entitled to any compensation for this?",
+     "Could I have that in writing, with the reason for the delay?",
+     "Where do I send my receipts for food and taxis?",
+     "I know it's not your fault. You must be having a crazy day.",
+     "Is there anything else you can do for me?",
+     "Thanks so much. You've been a great help."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Bag found, flight changed, money back. Safe travels!",
+     "zh": "行李找到、班機改好、補償拿到。一路順風！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them before your next flight.",
+     "zh": "十二句都在這裡，下次搭飛機前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "✈️",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And now I always pack a charger in my hand luggage. See you next time. Bye!",
+     "zh": "現在我一定把充電器放在隨身行李裡。下一課見，Bye！",
+     "pose": "cheer",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1117 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-NG-EzinneNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V008",
+ "title": "開會時禮貌地不同意",
+ "subtitle": "12 句英文，反對也不失禮",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-meeting",
+ "guest": "amara",
+ "roles": {
+  "A": "Niamh 同事",
+  "B": "Amara 專案負責人"
+ },
+ "thumb": {
+  "pose": "no",
+  "bg": "bg-meeting",
+  "line1": "開會不敢反對？",
+  "line2": "這樣說不失禮",
+  "tag": "12 句 B2 英文",
+  "sticker": "🗣️"
+ },
+ "chapters": [
+  "Intro",
+  "插話",
+  "表達不同意",
+  "提方案",
+  "收尾",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "talk",
+   "R": "amara",
+   "lines": [
+    {
+     "v": "B",
+     "say": "So, we'll launch the new menu next Monday. Everyone happy?",
+     "zh": "那我們下週一推出新菜單，大家都沒問題吧？",
+     "R": "amara-talk"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.6,
+     "L": "think",
+     "sticker": "🤐",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "Em… yeah. Grand.",
+     "zh": "呃……對，沒問題。",
+     "L": "barista-sorry"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🤐",
+    "big": [
+     "I knew it was wrong",
+     "*and I said grand"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I knew Monday was a bad idea. Half the team was on holiday. But I said nothing, because disagreeing in English felt rude.",
+     "zh": "我知道週一不行，一半的人在休假。但我什麼都沒說，因為用英文反對感覺很沒禮貌。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Monday came, and it was a disaster. And someone asked me: why didn't you say something?",
+     "zh": "週一到了，一場災難。然後有人問我：你怎麼不早說？",
+     "pose": "no",
+     "sticker": "💥",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Disagree politely",
+     "*and be heard"
+    ],
+    "cta": "開會時禮貌地不同意・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for disagreeing in a meeting.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你開會時表達不同意見的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for disagreeing in a meeting."
+    },
+    {
+     "v": "E",
+     "say": "Disagreeing isn't rude. Doing it badly is. Today you'll learn to do it well.",
+     "zh": "反對不等於沒禮貌，反對得不好才是。今天教你怎麼反對得漂亮。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Get in",
+   "sub": "插話：先拿到說話的機會",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: get in.",
+     "zh": "第一段：插話。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In a fast meeting, nobody will stop and ask for your opinion. You have to step in.",
+     "zh": "節奏快的會議，沒有人會停下來問你意見。你得自己切進去。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Sorry to jump in, but could I just add something?",
+   "meaning": "抱歉插個話，我可以補充一下嗎？",
+   "note": "jump in ＝ 插話",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Sorry to jump in, but could I just add something?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Jump in means start talking while others are talking.",
+     "zh": "jump in 是在別人講話時切進來。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Sorry to jump in, plus just. Two small softeners, and nobody minds.",
+     "zh": "Sorry to jump in 再加上 just，兩個小緩衝，就沒人介意。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Sorry to jump in, but could I just add something?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "Before we move on, can I go back to the launch date?",
+   "meaning": "在進入下一項之前，我可以回到推出日期嗎？",
+   "note": "move on ＝ 進入下一項",
+   "lines": [
+    {
+     "v": "E",
+     "say": "If the topic already passed, bring it back.",
+     "zh": "如果話題已經過去了，就把它拉回來。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Before we move on, can I go back to the launch date?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Move on means go to the next point.",
+     "zh": "move on 是換到下一個議題。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Before we move on is perfect timing. It's not too late yet.",
+     "zh": "Before we move on 時機剛好，還不算太晚。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Before we move on, can I go back to the launch date?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Can I play devil's advocate for a second?",
+   "meaning": "我可以先唱個反調嗎？",
+   "note": "play devil's advocate ＝ 故意提出反方意見",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And here's a clever one when everyone already agrees.",
+     "zh": "大家都已經同意的時候，有一招很聰明。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "Can I play devil's advocate for a second?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To play devil's advocate means to argue the other side, just to test the idea.",
+     "zh": "play devil's advocate 是故意站在反方，測試這個想法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's safe, because you're not saying you're against it. You're just being careful.",
+     "zh": "這很安全，因為你沒說你反對，只是在謹慎檢查。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Can I play devil's advocate for a second?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Disagree",
+   "sub": "表達不同意：先認同，再轉折",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: disagree.",
+     "zh": "第二段：表達不同意。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The secret is a sandwich: something positive, then your concern.",
+     "zh": "秘訣是三明治：先講好的，再講你的擔心。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 2,
+   "board": {
+    "kicker": "Too strong",
+    "items": [
+     "✗ That's wrong.",
+     "✗ That won't work.",
+     "✓ I see what you mean, but…"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "That's wrong, or that won't work, closes the conversation.",
+     "zh": "說 That's wrong 或 That won't work，對話就結束了。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Start by showing you understand. Then add your but.",
+     "zh": "先表示你理解，再接 but。",
+     "pose": "point",
+     "step": 3
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "I see where you're coming from, but I'm not sure Monday works.",
+   "meaning": "我懂你的出發點，但我不確定週一可行",
+   "note": "where you're coming from ＝ 你的出發點",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I see where you're coming from, but I'm not sure Monday works.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I see where you're coming from means I understand why you think that.",
+     "zh": "I see where you're coming from 是我懂你為什麼這樣想。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And I'm not sure is much softer than no. But everyone understands it means no.",
+     "zh": "I'm not sure 比 no 柔和得多，但大家都聽得懂意思是不行。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I see where you're coming from, but I'm not sure Monday works.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "My concern is that half the team will be on leave.",
+   "meaning": "我擔心的是一半的人在休假",
+   "note": "My concern is that ＝ 我擔心的是",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then give the real reason. Make it about the problem, not the person.",
+     "zh": "接著講真正的原因。針對問題，不針對人。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "My concern is that half the team will be on leave.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "My concern is that turns a complaint into a careful, professional point.",
+     "zh": "My concern is that 把抱怨變成謹慎、專業的意見。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "On leave means on holiday from work.",
+     "zh": "on leave 是請假、休假中。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "My concern is that half the team will be on leave.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I'm not convinced we have enough time to train everyone.",
+   "meaning": "我不太相信我們有足夠時間訓練所有人",
+   "note": "I'm not convinced ＝ 我不太認同、沒被說服",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you need a stronger line, use this.",
+     "zh": "需要更強烈一點時，用這一句。",
+     "pose": "no"
+    },
+    {
+     "v": "A",
+     "say": "I'm not convinced we have enough time to train everyone.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'm not convinced means: you haven't persuaded me yet.",
+     "zh": "I'm not convinced 是「你還沒說服我」。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It leaves the door open. Give me a good reason, and I might change my mind.",
+     "zh": "它把門留著：給我好理由，我可能會改變主意。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm not convinced we have enough time to train everyone.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "amara",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Watch how I try again.",
+     "zh": "看我重新來一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "So, we'll launch next Monday. Everyone happy?",
+     "zh": "那我們下週一推出，大家都沒問題吧？",
+     "R": "amara-talk"
+    },
+    {
+     "v": "A",
+     "say": "Sorry to jump in, but could I just add something?",
+     "zh": "抱歉插個話，我可以補充一下嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Sure, go ahead.",
+     "zh": "當然，請說。",
+     "R": "amara-think"
+    },
+    {
+     "v": "A",
+     "say": "I see where you're coming from, but I'm not sure Monday works. My concern is that half the team will be on leave.",
+     "zh": "我懂你的出發點，但我不確定週一可行。我擔心的是一半的人在休假。"
+    },
+    {
+     "v": "B",
+     "say": "Oh. I hadn't thought of that.",
+     "zh": "喔，我沒想到這點。",
+     "R": "amara-think"
+    },
+    {
+     "v": "E",
+     "say": "Nobody was offended, and the problem is on the table.",
+     "zh": "沒有人被冒犯，而且問題被提出來了。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Offer a way",
+   "sub": "提方案：不只說不，還要說怎麼做",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: offer a way forward.",
+     "zh": "第三段：提出替代方案。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A no without a plan sounds negative. A no with a plan sounds like leadership.",
+     "zh": "只有反對沒有方案，聽起來很負面。有方案的反對，聽起來像領導者。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "What if we pushed it back a week?",
+   "meaning": "如果我們延後一週呢？",
+   "note": "push back ＝ 延後",
+   "lines": [
+    {
+     "v": "A",
+     "say": "What if we pushed it back a week?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Push back means move to a later date.",
+     "zh": "push back 是把日期往後延。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "What if we, with the past form pushed, sounds like an idea, not a demand.",
+     "zh": "What if we 加上過去式 pushed，聽起來像建議，不像要求。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "What if we pushed it back a week?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "Would it make more sense to start with one shop first?",
+   "meaning": "先從一家店開始，會不會比較合理？",
+   "note": "make more sense ＝ 比較合理",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Or suggest a smaller step.",
+     "zh": "或是建議先走一小步。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Would it make more sense to start with one shop first?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Make more sense means be more logical.",
+     "zh": "make more sense 是比較合理。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Asking it as a question lets the others decide. People love deciding.",
+     "zh": "用問句提出，讓大家自己決定。人都喜歡自己做決定。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would it make more sense to start with one shop first?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "I'd be happy to look into it and come back to you on Friday.",
+   "meaning": "我很樂意研究一下，星期五再回覆你們",
+   "note": "look into ＝ 研究、調查　come back to you ＝ 回覆你",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And offer to do the work. That makes your idea easy to accept.",
+     "zh": "再主動接下工作，讓你的意見很容易被接受。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "I'd be happy to look into it and come back to you on Friday.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Look into it means check it carefully. Come back to you means give you an answer later.",
+     "zh": "look into 是仔細研究，come back to you 是之後回覆你。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now you're not the person who complains. You're the person who solves it.",
+     "zh": "現在你不是抱怨的人，而是解決問題的人。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd be happy to look into it and come back to you on Friday.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Land it",
+   "sub": "收尾：同意、讓步、確認",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: land it.",
+     "zh": "第四段：收尾。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You don't have to win everything. Agree where you can.",
+     "zh": "你不用每一點都贏。能同意的地方就同意。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Fair point. I hadn't looked at it that way.",
+   "meaning": "說得好，我之前沒從這個角度想",
+   "note": "fair point ＝ 說得有道理",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Fair point. I hadn't looked at it that way.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Fair point means: that's a good argument.",
+     "zh": "fair point 是你這點說得有道理。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Saying this when someone is right makes people trust you when you disagree.",
+     "zh": "別人說得對時大方承認，你反對時大家才會信你。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Fair point. I hadn't looked at it that way.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "I can live with that, as long as we review it after a month.",
+   "meaning": "我可以接受，只要一個月後再檢討",
+   "note": "I can live with that ＝ 我可以接受",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you accept, but not completely, say this.",
+     "zh": "接受但還有條件時，這樣說。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I can live with that, as long as we review it after a month.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I can live with that means it's not perfect, but I accept it.",
+     "zh": "I can live with that 是不完美，但我能接受。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Review means look at it again and check it's working.",
+     "zh": "review 是之後再檢查一次效果。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I can live with that, as long as we review it after a month.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "So, just so we're all clear: launch on the twentieth, one shop first.",
+   "meaning": "所以讓大家都清楚：二十號推出，先從一家店開始",
+   "note": "just so we're all clear ＝ 讓大家都清楚",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And finish by saying the decision out loud.",
+     "zh": "最後把決定大聲說一遍。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "So, just so we're all clear: launch on the twentieth, one shop first.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Just so we're all clear means let's make sure everyone understood the same thing.",
+     "zh": "just so we're all clear 是確認大家理解一致。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Meetings fail when everyone leaves with a different plan in their head.",
+     "zh": "很多會議失敗，是因為每個人帶著不同的計畫離開。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "So, just so we're all clear: launch on the twentieth, one shop first.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "amara",
+   "lines": [
+    {
+     "v": "A",
+     "say": "What if we pushed it back a week? Would it make more sense to start with one shop first?",
+     "zh": "如果我們延後一週呢？先從一家店開始，會不會比較合理？"
+    },
+    {
+     "v": "B",
+     "say": "But we promised the owners a big launch.",
+     "zh": "可是我們跟老闆保證要盛大推出。",
+     "R": "amara-frown"
+    },
+    {
+     "v": "A",
+     "say": "Fair point. I hadn't looked at it that way.",
+     "zh": "說得好，我之前沒從這個角度想。"
+    },
+    {
+     "v": "B",
+     "say": "OK. One shop on the twentieth, then all shops a week later?",
+     "zh": "好吧。二十號先一家店，一週後全部的店？",
+     "R": "amara-think"
+    },
+    {
+     "v": "A",
+     "say": "I can live with that.",
+     "zh": "我可以接受。",
+     "L": "thumb"
+    },
+    {
+     "v": "B",
+     "say": "Great. Thanks for speaking up.",
+     "zh": "太好了，謝謝你提出來。",
+     "R": "amara-happy"
+    },
+    {
+     "v": "E",
+     "say": "Thanks for speaking up. That's what you want to hear.",
+     "zh": "謝謝你提出來。這就是你想聽到的話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：會議裡的兩句話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two things you'll hear in an Irish meeting.",
+     "zh": "還有加碼！在愛爾蘭開會會聽到的兩句話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When an idea is bad",
+    "big": [
+     "*I'd be a bit wary of that.",
+     "這我有點保留"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Irish people rarely say an idea is bad. They say this.",
+     "zh": "愛爾蘭人很少直接說點子很爛，他們會這樣說。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "I'd be a bit wary of that.",
+     "pose": "think"
+    },
+    {
+     "v": "E",
+     "say": "Wary means careful, a bit worried. But a bit wary often means: absolutely not!",
+     "zh": "wary 是謹慎、有點擔心。但「有點保留」常常代表：絕對不行！",
+     "pose": "talk2",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When the meeting is over",
+    "big": [
+     "*Grand, so.",
+     "好，就這樣吧"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And this is how many Irish meetings end.",
+     "zh": "很多愛爾蘭會議都是這樣結束的。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Grand, so.",
+     "pose": "thumb",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It means: OK, we're done, decision made. Then everyone goes for tea.",
+     "zh": "意思是：好，結束，決定了。然後大家去喝茶。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Grand, so!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：這次我開口了",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's go back to that first meeting. Say my lines with me!",
+     "zh": "我們回到第一場會議。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "amara",
+   "lines": [
+    {
+     "v": "B",
+     "say": "So, we'll launch the new menu next Monday. Everyone happy?",
+     "zh": "那我們下週一推出新菜單，大家都沒問題吧？",
+     "R": "amara-talk"
+    },
+    {
+     "v": "A",
+     "say": "Before we move on, can I go back to the launch date?",
+     "zh": "在進入下一項之前，我可以回到推出日期嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Sure.",
+     "zh": "當然。",
+     "R": "amara-think"
+    },
+    {
+     "v": "A",
+     "say": "I'm not convinced we have enough time to train everyone. I'd be happy to look into it and come back to you on Friday.",
+     "zh": "我不太相信我們有足夠時間訓練所有人。我很樂意研究一下，星期五再回覆你們。"
+    },
+    {
+     "v": "B",
+     "say": "Perfect. Let's do that.",
+     "zh": "很好，就這麼辦。",
+     "R": "amara-happy"
+    },
+    {
+     "v": "A",
+     "say": "So, just so we're all clear: no launch until Friday's update.",
+     "zh": "所以讓大家都清楚：星期五報告之前先不推出。",
+     "L": "point"
+    },
+    {
+     "v": "B",
+     "say": "Grand, so.",
+     "zh": "好，就這樣吧。"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Sorry to jump in, but could I just add something?",
+     "Before we move on, can I go back to the launch date?",
+     "Can I play devil's advocate for a second?",
+     "I see where you're coming from, but I'm not sure Monday works.",
+     "My concern is that half the team will be on leave.",
+     "I'm not convinced we have enough time to train everyone.",
+     "What if we pushed it back a week?",
+     "Would it make more sense to start with one shop first?",
+     "I'd be happy to look into it and come back to you on Friday.",
+     "Fair point. I hadn't looked at it that way.",
+     "I can live with that, as long as we review it after a month.",
+     "So, just so we're all clear: launch on the twentieth, one shop first."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "You spoke up, nobody was offended, and the plan got better. Brilliant!",
+     "zh": "你開口了、沒人被冒犯，計畫還變得更好。太棒了！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them before your next meeting.",
+     "zh": "十二句都在這裡，下次開會前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🗣️",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Any questions? No? Grand, so. See you next time. Bye!",
+     "zh": "有問題嗎？沒有？好，就這樣吧。下一課見，Bye！",
+     "pose": "cheer",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

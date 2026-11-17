@@ -1,0 +1,1097 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-GB-SoniaNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V018",
+ "title": "茶水間閒聊",
+ "subtitle": "12 句英文，跟同事聊天不冷場",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-canteen",
+ "guest": "carmen",
+ "roles": {
+  "A": "Niamh 新同事",
+  "B": "Carmen 同事"
+ },
+ "thumb": {
+  "pose": "talk2",
+  "bg": "bg-canteen",
+  "line1": "跟同事只會說 Good？",
+  "line2": "閒聊不冷場 12 句",
+  "tag": "B2 英文",
+  "sticker": "☕"
+ },
+ "chapters": [
+  "Intro",
+  "開場",
+  "接話",
+  "找共同點",
+  "不尷尬離開",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "think",
+   "R": "carmen",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Morning! How are things?",
+     "zh": "早安！最近怎麼樣？",
+     "R": "carmen-happy"
+    },
+    {
+     "v": "A",
+     "say": "Good.",
+     "zh": "很好。",
+     "L": "barista-sorry"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.6,
+     "R": "carmen-think",
+     "sticker": "🦗",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "B",
+     "say": "…Right. Well. Enjoy your coffee.",
+     "zh": "……好吧，那，好好享用你的咖啡。",
+     "R": "carmen-frown"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "☕",
+    "big": [
+     "One word answers",
+     "*kill every chat"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "That was me, my first week at work. Good. Fine. Yes. And then silence.",
+     "zh": "這是我上班第一週。Good、Fine、Yes，然後一片沉默。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Small talk isn't about big topics. It's about keeping the ball in the air.",
+     "zh": "閒聊不是講大道理，而是讓球一直在空中，不要掉下來。",
+     "pose": "secret",
+     "sticker": "🏐",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Small talk at work",
+     "*that doesn't die"
+    ],
+    "cta": "茶水間閒聊・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for small talk with your colleagues.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你跟同事閒聊的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for small talk with your colleagues."
+    },
+    {
+     "v": "E",
+     "say": "How to start, how to keep it going, how to find things in common, and how to leave without being awkward.",
+     "zh": "怎麼開場、怎麼接話、怎麼找共同點，還有怎麼不尷尬地離開。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Start",
+   "sub": "開場：一句話打開話匣子",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: start the chat.",
+     "zh": "第一段：打開話題。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The best openers are easy to answer. Nobody wants a hard question before coffee.",
+     "zh": "最好的開場很好回答。沒人想在喝咖啡前回答難題。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Have you got anything nice planned for the weekend?",
+   "meaning": "週末有安排什麼好玩的嗎？",
+   "note": "have something planned ＝ 有安排",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Have you got anything nice planned for the weekend?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This works from Wednesday to Friday. Everyone has an answer, even if it's: nothing!",
+     "zh": "從週三到週五都能用。每個人都答得出來，就算答案是「沒有」！",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Anything nice makes it friendly, not nosy.",
+     "zh": "anything nice 讓問題很友善，不會像在打探。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Have you got anything nice planned for the weekend?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "How was your weekend? Did you get up to much?",
+   "meaning": "週末過得怎樣？有做什麼嗎？",
+   "note": "get up to ＝ 做（什麼事）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And on Monday, turn it around.",
+     "zh": "到了週一，就反過來問。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "How was your weekend? Did you get up to much?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Get up to means do. Did you get up to much? means: did you do anything fun?",
+     "zh": "get up to 是做。Did you get up to much? 是「有做什麼好玩的嗎？」",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Very common in Ireland and the UK. It sounds relaxed and natural.",
+     "zh": "在愛爾蘭和英國超常見，聽起來輕鬆自然。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "How was your weekend? Did you get up to much?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Is it just me, or is this week dragging?",
+   "meaning": "是我的錯覺嗎，還是這週過得特別慢？",
+   "note": "drag ＝ 時間過得很慢",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Or start with a shared feeling.",
+     "zh": "或者用一個大家都有的感覺開場。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Is it just me, or is this week dragging?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Is it just me, or invites the other person to agree with you.",
+     "zh": "Is it just me, or 邀請對方附和你。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Dragging means time is moving slowly. Everyone agrees on a Thursday!",
+     "zh": "dragging 是時間過很慢。週四大家一定都同意！",
+     "pose": "secret",
+     "sticker": "🐌",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is it just me, or is this week dragging?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Keep it going",
+   "sub": "接話：讓球不要掉",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: keep it going.",
+     "zh": "第二段：把話接下去。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The secret: answer, add one detail, and ask something back.",
+     "zh": "秘訣是：回答、多加一個細節，再反問一句。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "Not much, to be honest. I just took it easy. What about you?",
+   "meaning": "老實說沒什麼，就放輕鬆。你呢？",
+   "note": "take it easy ＝ 放輕鬆、休息",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Not much, to be honest. I just took it easy. What about you?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Even a boring weekend can keep the chat alive. The magic is in: what about you?",
+     "zh": "就算週末很無聊也能讓話題繼續，魔法就在 what about you。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Take it easy means rest and relax. A perfectly good weekend!",
+     "zh": "take it easy 是休息放鬆，很棒的週末啊！",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Not much, to be honest. I just took it easy. What about you?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "Oh, really? How did that go?",
+   "meaning": "喔，真的嗎？結果怎麼樣？",
+   "note": "How did that go? ＝ 結果怎麼樣？",
+   "lines": [
+    {
+     "v": "E",
+     "say": "When they tell you something, show interest.",
+     "zh": "對方說了什麼，就表示有興趣。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Oh, really? How did that go?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "How did that go? asks for the story. People love telling their story.",
+     "zh": "How did that go? 是請對方講故事，大家都喜歡講自己的事。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say oh, really? with your eyebrows up. It shows you're listening.",
+     "zh": "說 oh, really? 時挑一下眉毛，表示你有在聽。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Oh, really? How did that go?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I've been meaning to try that place. Is it any good?",
+   "meaning": "我一直想去那家，好吃嗎？",
+   "note": "have been meaning to ＝ 一直想要（但還沒做）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And connect it to yourself.",
+     "zh": "再把話題連到你自己。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I've been meaning to try that place. Is it any good?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I've been meaning to means: I wanted to for a while, but I haven't yet.",
+     "zh": "I've been meaning to 是想很久了，但還沒去做。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now they're the expert. They'll tell you everything.",
+     "zh": "現在對方變專家了，會全部告訴你。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've been meaning to try that place. Is it any good?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "carmen",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's try that morning again.",
+     "zh": "我們重來一次那個早上。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "Morning! How are things?",
+     "zh": "早安！最近怎麼樣？",
+     "R": "carmen-happy"
+    },
+    {
+     "v": "A",
+     "say": "Not bad, thanks. How was your weekend? Did you get up to much?",
+     "zh": "還不錯，謝謝。週末過得怎樣？有做什麼嗎？"
+    },
+    {
+     "v": "B",
+     "say": "We tried that new Spanish place on Dame Street.",
+     "zh": "我們去了 Dame Street 那家新的西班牙餐廳。",
+     "R": "carmen-talk"
+    },
+    {
+     "v": "A",
+     "say": "Oh, really? How did that go? I've been meaning to try that place.",
+     "zh": "喔，真的嗎？結果怎麼樣？我一直想去那家。"
+    },
+    {
+     "v": "B",
+     "say": "Honestly, my mum makes better paella. But the dessert was amazing!",
+     "zh": "老實說，我媽做的海鮮飯比較好吃。不過甜點超棒！",
+     "R": "carmen-happy"
+    },
+    {
+     "v": "E",
+     "say": "See? Now it's a real conversation.",
+     "zh": "看到了嗎？現在是真正的對話了。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Common ground",
+   "sub": "找共同點：從同事變朋友",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: find things in common.",
+     "zh": "第三段：找共同點。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This is where colleagues start becoming friends.",
+     "zh": "同事就是從這裡開始變朋友的。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Have you been watching anything good lately?",
+   "meaning": "最近有在看什麼好看的嗎？",
+   "note": "lately ＝ 最近",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Have you been watching anything good lately?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "TV is the safest topic in any office. Everyone watches something.",
+     "zh": "影集是辦公室裡最安全的話題，每個人都在看點什麼。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If you've seen it too, you've found something in common!",
+     "zh": "如果你也看過，你們就有共同話題了！",
+     "pose": "cheer",
+     "sticker": "📺",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Have you been watching anything good lately?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "How long have you been working here, by the way?",
+   "meaning": "對了，你在這裡工作多久了？",
+   "note": "by the way ＝ 對了、順便問一下",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask about them.",
+     "zh": "接著問問對方的事。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "How long have you been working here, by the way?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "By the way lets you change the topic smoothly.",
+     "zh": "by the way 讓你自然地換話題。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And people who've been there longer always have useful tips.",
+     "zh": "待比較久的人總是有很多實用的建議。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "How long have you been working here, by the way?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "We should grab lunch together some time.",
+   "meaning": "我們找時間一起吃午餐吧",
+   "note": "grab lunch ＝ 一起吃個午餐（輕鬆說法）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when it's going well, take the next step.",
+     "zh": "聊得順的時候，就再往前一步。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "We should grab lunch together some time.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Grab lunch sounds casual. No pressure, just food.",
+     "zh": "grab lunch 聽起來很隨性，沒有壓力，就是吃個飯。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Some time keeps it open. If they say: how about Thursday? You've made a friend!",
+     "zh": "some time 讓時間保持彈性。如果對方說「週四怎麼樣？」你就交到朋友了！",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "We should grab lunch together some time.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Exit",
+   "sub": "離開：不尷尬地結束",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: leave the chat without being awkward.",
+     "zh": "第四段：不尷尬地結束聊天。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Every chat has to end. The trick is to end it warmly.",
+     "zh": "每段聊天都要結束，訣竅是溫暖地結束。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Anyway, I'd better get back to it.",
+   "meaning": "好啦，我該回去忙了",
+   "note": "I'd better ＝ 我最好（該）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Anyway, I'd better get back to it.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Anyway signals the end. I'd better get back to it means: back to work for me.",
+     "zh": "anyway 是結束的信號。I'd better get back to it 是「我要回去工作了」。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Nobody is offended. Everybody has work.",
+     "zh": "沒人會不開心，大家都有工作。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Anyway, I'd better get back to it.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "I'll let you get on with your day.",
+   "meaning": "不打擾你了，你去忙吧",
+   "note": "get on with ＝ 繼續做（某事）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Or make it about them. Even more polite.",
+     "zh": "或者把重點放在對方，更有禮貌。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'll let you get on with your day.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'll let you get on means: I won't take more of your time.",
+     "zh": "I'll let you get on 意思是：我不再佔用你的時間。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It sounds kind, like you're doing them a favour.",
+     "zh": "聽起來很體貼，好像是在幫對方的忙。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'll let you get on with your day.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Good chatting to you. Catch you later!",
+   "meaning": "很高興跟你聊天，待會見！",
+   "note": "Catch you later ＝ 待會見（輕鬆說法）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the last line, with a smile.",
+     "zh": "最後一句，帶著微笑說。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Good chatting to you. Catch you later!",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Good chatting to you is the friendly goodbye for colleagues.",
+     "zh": "Good chatting to you 是同事間友善的道別。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Catch you later is relaxed. You'll see each other again at the coffee machine!",
+     "zh": "Catch you later 很輕鬆，反正等一下在咖啡機又會遇到！",
+     "pose": "talk2",
+     "sticker": "👋",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Good chatting to you. Catch you later!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "carmen",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Have you been watching anything good lately?",
+     "zh": "最近有在看什麼好看的嗎？",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "I've just started that Irish crime drama. I can't stop!",
+     "zh": "我剛開始看那部愛爾蘭犯罪劇，停不下來！",
+     "R": "carmen-happy"
+    },
+    {
+     "v": "A",
+     "say": "No way, me too! We should grab lunch together some time and talk about it.",
+     "zh": "不會吧，我也是！我們找時間一起吃午餐聊這部。",
+     "L": "cheer"
+    },
+    {
+     "v": "B",
+     "say": "Definitely. How about Thursday?",
+     "zh": "當然好。週四怎麼樣？",
+     "R": "carmen-talk"
+    },
+    {
+     "v": "A",
+     "say": "Perfect. Anyway, I'd better get back to it. Good chatting to you. Catch you later!",
+     "zh": "太好了。好啦，我該回去忙了。很高興跟你聊天，待會見！"
+    },
+    {
+     "v": "E",
+     "say": "Lunch on Thursday. From good to a new friend in one week.",
+     "zh": "週四吃午餐。一週內從「Good」變成新朋友。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：茶水間的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish lines you'll hear by the kettle.",
+     "zh": "還有加碼！在熱水壺旁邊常聽到的兩句愛爾蘭話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Instead of how are you",
+    "big": [
+     "*Any news?",
+     "最近有什麼新鮮事嗎？"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Irish people often say this instead of how are you.",
+     "zh": "愛爾蘭人常用這句代替 how are you。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Any news?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It doesn't mean the news on TV. It means: what's new with you?",
+     "zh": "這不是在問電視新聞，是「你最近有什麼新鮮事？」",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you're doing fine",
+    "big": [
+     "*Not a bother on me.",
+     "我好得很。"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when someone asks how you are, try this answer.",
+     "zh": "別人問你好不好時，試試這個回答。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "Not a bother on me.",
+     "pose": "cheer",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It means: I'm perfectly fine, nothing is wrong. Very relaxed, very Irish.",
+     "zh": "意思是：我好得很，什麼事都沒有。很輕鬆，很愛爾蘭。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Not a bother on me.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一次完整的茶水間閒聊",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the whole chat, from hello to goodbye. Say my lines!",
+     "zh": "現在把整段閒聊從打招呼到道別演一遍。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "carmen",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Morning, Niamh! Any news?",
+     "zh": "早安，Niamh！最近有什麼新鮮事嗎？",
+     "R": "carmen-happy"
+    },
+    {
+     "v": "A",
+     "say": "Not a bother on me. Is it just me, or is this week dragging?",
+     "zh": "我好得很。是我的錯覺嗎，還是這週過得特別慢？"
+    },
+    {
+     "v": "B",
+     "say": "It's not just you! I can't wait for Friday.",
+     "zh": "不只你這樣覺得！我等不及週五了。",
+     "R": "carmen-talk"
+    },
+    {
+     "v": "A",
+     "say": "Have you got anything nice planned for the weekend?",
+     "zh": "週末有安排什麼好玩的嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I'm going to Galway with my sister.",
+     "zh": "我要跟我妹妹去 Galway。",
+     "R": "carmen-happy"
+    },
+    {
+     "v": "A",
+     "say": "Oh, really? Lovely. Well, I'll let you get on with your day. Catch you later!",
+     "zh": "喔，真的嗎？真好。那不打擾你了，你去忙吧。待會見！"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Have you got anything nice planned for the weekend?",
+     "How was your weekend? Did you get up to much?",
+     "Is it just me, or is this week dragging?",
+     "Not much, to be honest. I just took it easy. What about you?",
+     "Oh, really? How did that go?",
+     "I've been meaning to try that place. Is it any good?",
+     "Have you been watching anything good lately?",
+     "How long have you been working here, by the way?",
+     "We should grab lunch together some time.",
+     "Anyway, I'd better get back to it.",
+     "I'll let you get on with your day.",
+     "Good chatting to you. Catch you later!"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Lovely! You kept the ball in the air the whole time.",
+     "zh": "太棒了！你讓球一直在空中，沒有掉下來。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them, and try one at the coffee machine tomorrow.",
+     "zh": "十二句都在這裡。截圖下來，明天在咖啡機旁試一句。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "☕",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Then you'll always have an answer to: any news? See you next time. Bye!",
+     "zh": "這樣別人問 any news? 你永遠答得出來。下一課見，Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

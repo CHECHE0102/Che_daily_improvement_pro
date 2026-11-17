@@ -1,0 +1,1099 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-US-JennyNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V021",
+ "title": "好好離職",
+ "subtitle": "12 句英文，好聚好散留後路",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-office",
+ "guest": "valeria",
+ "roles": {
+  "A": "Niamh 員工",
+  "B": "Valeria 主管"
+ },
+ "thumb": {
+  "pose": "talk2",
+  "bg": "bg-office",
+  "line1": "想離職怎麼開口？",
+  "line2": "好好離職 12 句",
+  "tag": "B2 英文",
+  "sticker": "🚪"
+ },
+ "chapters": [
+  "Intro",
+  "開口",
+  "說原因",
+  "交接細節",
+  "好好道別",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "think",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Valeria, I quit. Friday is my last day. Bye.",
+     "zh": "Valeria，我不幹了，週五是最後一天。掰。",
+     "L": "barista-panic"
+    },
+    {
+     "v": "B",
+     "say": "…Excuse me? Friday? We have the big launch next week!",
+     "zh": "……你說什麼？週五？我們下週有大型發表會耶！",
+     "R": "valeria-frown"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "L": "barista-sorry",
+     "sticker": "💥",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "📦",
+    "big": [
+     "Leaving a job",
+     "*burning every bridge"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "That's how not to leave a job. In one minute, I lost a reference and a friend.",
+     "zh": "這是離職的錯誤示範。一分鐘內，我失去了推薦人，也失去了一個朋友。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "You might need your old boss again one day. So leave the door open.",
+     "zh": "有一天你可能還會需要前老闆，所以要把門留著。",
+     "pose": "secret",
+     "sticker": "🚪",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Resign politely",
+     "*and leave on good terms"
+    ],
+    "cta": "好好離職・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for leaving a job the right way.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你好好離職的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for leaving a job the right way."
+    },
+    {
+     "v": "E",
+     "say": "Starting the conversation, giving your reason, sorting the practical details, and saying goodbye well.",
+     "zh": "開啟對話、說明原因、處理實際細節，還有好好道別。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Start the talk",
+   "sub": "開口：先約時間，再說重點",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: start the conversation.",
+     "zh": "第一段：開啟對話。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Never resign in the corridor, by text, or in the middle of a busy shift.",
+     "zh": "千萬不要在走廊、用簡訊，或在忙碌的班中途提離職。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Could we have a quick chat in private? There's something I need to tell you.",
+   "meaning": "可以私下聊一下嗎？我有件事要跟你說",
+   "note": "in private ＝ 私下",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could we have a quick chat in private? There's something I need to tell you.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In private means just the two of you. Your manager will know it's serious.",
+     "zh": "in private 是只有你們兩個人，你的主管會知道事情很重要。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Find a quiet room, and close the door.",
+     "zh": "找個安靜的房間，把門關上。",
+     "pose": "talk2",
+     "sticker": "🚪",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could we have a quick chat in private? There's something I need to tell you.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "This isn't an easy conversation for me.",
+   "meaning": "這對我來說不是件容易開口的事",
+   "note": "easy conversation ＝ 容易開口的對話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then prepare them, gently.",
+     "zh": "接著溫和地讓對方有心理準備。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "This isn't an easy conversation for me.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This sentence shows respect. You're not happy to leave. It's hard for you too.",
+     "zh": "這句話表示尊重：你不是開心地離開，你也很為難。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A short pause after it helps.",
+     "zh": "說完停一下會更好。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "This isn't an easy conversation for me.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I've decided to hand in my notice.",
+   "meaning": "我決定提出離職",
+   "note": "hand in my notice ＝ 提出離職",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And then, say it clearly.",
+     "zh": "然後清楚地說出來。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I've decided to hand in my notice.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Hand in your notice means officially tell your employer you're leaving.",
+     "zh": "hand in your notice 是正式告訴雇主你要離職。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I've decided shows it's final. Not a question, not a negotiation.",
+     "zh": "I've decided 表示已經決定了，不是問題，也不是談判。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've decided to hand in my notice.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Your reason",
+   "sub": "說原因：正面、簡短",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: give your reason.",
+     "zh": "第二段：說明原因。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Keep it positive and short. This is not the time to complain.",
+     "zh": "正面又簡短。現在不是抱怨的時候。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "I've been offered a position that's closer to what I studied.",
+   "meaning": "我拿到一個跟我所學比較相關的職位",
+   "note": "be offered a position ＝ 獲得一個職位",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've been offered a position that's closer to what I studied.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Talk about what you're going towards, not what you're running from.",
+     "zh": "說你要去哪裡，不要說你在逃離什麼。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Closer to what I studied is a reason nobody can argue with.",
+     "zh": "跟所學比較相關，這個理由沒人能反駁。",
+     "pose": "thumb",
+     "sticker": "🎓",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've been offered a position that's closer to what I studied.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "It's nothing to do with the team. I've really enjoyed working here.",
+   "meaning": "跟團隊沒有關係，我在這裡工作真的很開心",
+   "note": "nothing to do with ＝ 跟……沒關係",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then reassure them.",
+     "zh": "接著讓對方放心。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "It's nothing to do with the team. I've really enjoyed working here.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Nothing to do with the team means: please don't think it's your fault.",
+     "zh": "nothing to do with the team 是：請不要覺得是你們的問題。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Managers worry about this. Saying it takes the pressure off.",
+     "zh": "主管會擔心這點，說出來能讓對方鬆一口氣。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's nothing to do with the team. I've really enjoyed working here.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "It was a tough decision, but I feel the timing is right.",
+   "meaning": "這是個艱難的決定，但我覺得時機對了",
+   "note": "the timing is right ＝ 時機對了",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And show you thought about it carefully.",
+     "zh": "再表示你是深思熟慮過的。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "It was a tough decision, but I feel the timing is right.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Tough decision shows it wasn't easy to leave them.",
+     "zh": "tough decision 表示離開他們並不容易。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "The timing is right is calm and grown-up. No drama.",
+     "zh": "the timing is right 冷靜又成熟，不搞戲劇化。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It was a tough decision, but I feel the timing is right.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's try that again. The right way.",
+     "zh": "我們重來一次，這次用對的方法。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Valeria, could we have a quick chat in private? There's something I need to tell you.",
+     "zh": "Valeria，可以私下聊一下嗎？我有件事要跟你說。"
+    },
+    {
+     "v": "B",
+     "say": "Of course. Come in, have a seat.",
+     "zh": "當然，進來坐。",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "A",
+     "say": "This isn't an easy conversation for me. I've decided to hand in my notice.",
+     "zh": "這對我來說不是件容易開口的事。我決定提出離職。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Oh. I'm sorry to hear that. Can I ask why?",
+     "zh": "喔，很遺憾聽到這個。可以問為什麼嗎？",
+     "R": "valeria-frown"
+    },
+    {
+     "v": "A",
+     "say": "I've been offered a position that's closer to what I studied. It's nothing to do with the team.",
+     "zh": "我拿到一個跟我所學比較相關的職位，跟團隊沒有關係。"
+    },
+    {
+     "v": "E",
+     "say": "Same news, but she's still sitting there listening.",
+     "zh": "一樣的消息，但她還坐在那裡聽你說。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "The details",
+   "sub": "實際細節：讓交接順利",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: the practical details.",
+     "zh": "第三段：實際的細節。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Your manager's first thought is: who will do your job? Answer it before they ask.",
+     "zh": "主管的第一個念頭是：誰來做你的工作？在對方開口前先回答。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "My last day would be the twenty-eighth, if that works for you.",
+   "meaning": "我的最後一天會是二十八號，如果你覺得可以的話",
+   "note": "if that works for you ＝ 如果你方便的話",
+   "lines": [
+    {
+     "v": "A",
+     "say": "My last day would be the twenty-eighth, if that works for you.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Give a clear date. Check your contract for how much notice you need.",
+     "zh": "給一個明確的日期。看一下合約要提前多久通知。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If that works for you sounds flexible, even when the date is fixed.",
+     "zh": "if that works for you 聽起來很有彈性，就算日期其實已經定了。",
+     "pose": "talk2",
+     "sticker": "📅",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "My last day would be the twenty-eighth, if that works for you.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I'm happy to help train whoever replaces me.",
+   "meaning": "我很樂意幫忙訓練接手我的人",
+   "note": "whoever ＝ 不管是誰",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then offer to help with the handover.",
+     "zh": "接著主動幫忙交接。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'm happy to help train whoever replaces me.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Whoever replaces me means the new person, whoever it is.",
+     "zh": "whoever replaces me 是接替你的人，不管是誰。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "This is the sentence that makes managers relax.",
+     "zh": "這句話會讓主管鬆一口氣。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm happy to help train whoever replaces me.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "I'll put it in writing and email it to you today.",
+   "meaning": "我會寫成書面，今天 email 給你",
+   "note": "put it in writing ＝ 寫成書面",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And make it official.",
+     "zh": "然後讓它正式生效。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I'll put it in writing and email it to you today.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In Ireland, you should always give written notice. A short, polite email is fine.",
+     "zh": "在愛爾蘭，一定要提供書面通知，一封簡短有禮貌的 email 就可以。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Date, last day, thank you. Three lines.",
+     "zh": "日期、最後一天、謝謝，三行就好。",
+     "pose": "secret",
+     "sticker": "✉️",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'll put it in writing and email it to you today.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Leave well",
+   "sub": "好好道別：留下好印象",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: leave on good terms.",
+     "zh": "第四段：好聚好散。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The last week is what people remember. Make it a good one.",
+     "zh": "大家記得的是最後一週，讓它美好一點。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Would you be willing to give me a reference in the future?",
+   "meaning": "以後你願意當我的推薦人嗎？",
+   "note": "reference ＝ 推薦人、推薦信",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Would you be willing to give me a reference in the future?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A reference is when your old boss tells a new employer you're good.",
+     "zh": "reference 是前老闆跟新雇主說你很好。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Would you be willing is very polite. Ask now, while you're on good terms.",
+     "zh": "Would you be willing 非常有禮貌。趁現在關係好的時候問。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would you be willing to give me a reference in the future?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "I've learned so much from you. Thank you for everything.",
+   "meaning": "我從你身上學到好多，謝謝你做的一切",
+   "note": "learn from ＝ 從……學習",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then say thank you properly.",
+     "zh": "接著好好說謝謝。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I've learned so much from you. Thank you for everything.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Be specific if you can. What did they teach you?",
+     "zh": "可以的話具體一點，對方教了你什麼？",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Everyone likes to hear that they made a difference.",
+     "zh": "每個人都喜歡聽到自己帶來了改變。",
+     "pose": "talk2",
+     "sticker": "🌱",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've learned so much from you. Thank you for everything.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "I hope our paths cross again.",
+   "meaning": "希望我們以後還會再遇到",
+   "note": "paths cross ＝ 再次相遇",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the last line on your last day.",
+     "zh": "最後一天的最後一句。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I hope our paths cross again.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Our paths cross means we meet again, in work or in life.",
+     "zh": "our paths cross 是在工作或生活中再相遇。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's warm, and it leaves the door wide open.",
+     "zh": "很溫暖，而且把門大大地留著。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I hope our paths cross again.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "A",
+     "say": "My last day would be the twenty-eighth, if that works for you. I'm happy to help train whoever replaces me.",
+     "zh": "我的最後一天會是二十八號，如果你覺得可以的話。我很樂意幫忙訓練接手我的人。"
+    },
+    {
+     "v": "B",
+     "say": "That would be a huge help, thank you.",
+     "zh": "那幫了大忙，謝謝。",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "A",
+     "say": "Would you be willing to give me a reference in the future?",
+     "zh": "以後你願意當我的推薦人嗎？",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Of course. You've done a great job here.",
+     "zh": "當然，你在這裡表現很好。",
+     "R": "valeria-happy"
+    },
+    {
+     "v": "A",
+     "say": "I've learned so much from you. Thank you for everything.",
+     "zh": "我從你身上學到好多，謝謝你做的一切。",
+     "L": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "A reference, a smooth handover, and a manager who's on your side.",
+     "zh": "有推薦人、交接順利，主管還站在你這邊。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：離職時會聽到的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish phrases for your last week.",
+     "zh": "還有加碼！最後一週會用到的兩句愛爾蘭話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "The goodbye party",
+    "big": [
+     "*Are you having a leaving do?",
+     "你有要辦送別會嗎？"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "In Ireland, when someone leaves a job, there's always a party.",
+     "zh": "在愛爾蘭，有人離職一定會辦派對。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Are you having a leaving do?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A leaving do is a goodbye party, usually in the pub after work.",
+     "zh": "leaving do 是送別會，通常是下班後在 Pub。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you say goodbye",
+    "big": [
+     "*Don't be a stranger!",
+     "要常聯絡喔！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And on your last day, your colleagues will say this.",
+     "zh": "最後一天，同事們會跟你說這句。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "Don't be a stranger!",
+     "pose": "cheer",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It means: stay in contact, come and visit. We don't want to lose you.",
+     "zh": "意思是：保持聯絡，回來看看我們，我們不想失去你。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Don't be a stranger!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：整段離職對話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the whole conversation, start to finish. Say my lines!",
+     "zh": "現在把整段對話從頭到尾演一遍。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could we have a quick chat in private? This isn't an easy conversation for me. I've decided to hand in my notice.",
+     "zh": "可以私下聊一下嗎？這對我來說不是件容易開口的事。我決定提出離職。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Oh no. We'll miss you. What's next?",
+     "zh": "喔不，我們會想你的。接下來要去哪？",
+     "R": "valeria-frown"
+    },
+    {
+     "v": "A",
+     "say": "It was a tough decision, but I feel the timing is right. I'll put it in writing and email it to you today.",
+     "zh": "這是個艱難的決定，但我覺得時機對了。我會寫成書面，今天 email 給你。"
+    },
+    {
+     "v": "B",
+     "say": "Thank you for telling me properly. Are you having a leaving do?",
+     "zh": "謝謝你好好地告訴我。你有要辦送別會嗎？",
+     "R": "valeria-happy"
+    },
+    {
+     "v": "A",
+     "say": "Of course! I hope our paths cross again.",
+     "zh": "當然！希望我們以後還會再遇到。",
+     "L": "cheer"
+    },
+    {
+     "v": "B",
+     "say": "Don't be a stranger!",
+     "zh": "要常聯絡喔！",
+     "R": "valeria-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Could we have a quick chat in private? There's something I need to tell you.",
+     "This isn't an easy conversation for me.",
+     "I've decided to hand in my notice.",
+     "I've been offered a position that's closer to what I studied.",
+     "It's nothing to do with the team. I've really enjoyed working here.",
+     "It was a tough decision, but I feel the timing is right.",
+     "My last day would be the twenty-eighth, if that works for you.",
+     "I'm happy to help train whoever replaces me.",
+     "I'll put it in writing and email it to you today.",
+     "Would you be willing to give me a reference in the future?",
+     "I've learned so much from you. Thank you for everything.",
+     "I hope our paths cross again."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Perfect! Clear, kind, and the door is still open.",
+     "zh": "完美！清楚、體貼，門還留著。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them for the day you need them.",
+     "zh": "十二句都在這裡。截圖存起來，等需要的那天用。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🚪",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And good luck with the new job! Don't be a stranger. Bye!",
+     "zh": "祝你新工作順利！要常聯絡喔。Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
