@@ -101,9 +101,9 @@ const FIT = `window.__fit=function(){
   var fs=parseFloat(getComputedStyle(e).fontSize),n=0;
   while(e.scrollWidth>max&&fs>16&&n++<80){fs*=.95;e.style.fontSize=fs+'px';}});
  document.querySelectorAll('.board').forEach(function(b){var e=b.querySelector('.phrase,.big.hl,.grid');if(!e)return;
-  var fs=parseFloat(getComputedStyle(e).fontSize),n=0;
+  var grid=e.classList.contains('grid'),fs=parseFloat(getComputedStyle(grid?e.querySelector('.cell'):e).fontSize),n=0;
   var need=function(){var h=0;[].forEach.call(b.children,function(c){var m=getComputedStyle(c);h+=c.offsetHeight+parseFloat(m.marginTop)+parseFloat(m.marginBottom);});return h>b.clientHeight-72;};
-  while(need()&&fs>20&&n++<60){fs*=.95;e.style.fontSize=fs+'px';e.querySelectorAll('.cell').forEach(function(c){c.style.fontSize=fs+'px';c.style.minHeight='0';});}});
+  while(need()&&fs>17&&n++<60){fs*=.95;e.style.fontSize=fs+'px';if(grid)e.style.gap='6px 16px';e.querySelectorAll('.cell').forEach(function(c){c.style.fontSize=fs+'px';c.style.minHeight='0';c.style.padding='5px 14px';var k=c.querySelector('b');k.style.minWidth=k.style.height=Math.round(fs*1.35)+'px';k.style.fontSize=Math.round(fs*.85)+'px';});}});
  document.querySelectorAll('.cap').forEach(function(c){var t=c.querySelector('.txt'),z=c.querySelector('.zh');if(!t)return;
   var fs=parseFloat(getComputedStyle(t).fontSize),n=0;
   while(c.scrollHeight>c.clientHeight+1&&fs>20&&n++<60){fs*=.95;t.style.fontSize=fs+'px';if(z)z.style.fontSize=Math.max(26,fs*.72)+'px';}});
@@ -119,7 +119,8 @@ function twoLines(t) {
 const anim = (name, dur, delay, extra) => `animation:${name} ${dur}s ${extra || 'cubic-bezier(.2,.8,.2,1)'} ${delay}s both`;
 
 function person(opts, pose, label) {
-  const f = 'niamh-' + pose;
+  // teacher poses are niamh-<pose>.webp; a guest's pictures are <name>.webp and <name>-<pose>.webp in the same folder
+  const f = opts.has('niamh-' + pose) ? 'niamh-' + pose : pose;
   return opts.has(f) ? `<img src="${opts.art}${f}.webp">` : `<div class="ph">${esc(label)}<br>${esc(pose)}</div>`;
 }
 
@@ -183,7 +184,7 @@ function page(lesson, si, li, info, opts) {
   const sc = lesson.scenes[si], lines = sc.lines, ln = lines[li];
   const chapters = lesson.chapters || [];
   let h = '';
-  const bgName = sc.type === 'skit' ? 'bg-cafe' : 'bg-studio';
+  const bgName = sc.type === 'skit' ? (lesson.bg || 'bg-cafe') : 'bg-studio';
   if (opts.has(bgName)) h += `<div class="bg" style="background-image:url('${opts.art}${bgName}.webp')"></div>`;
   h += `<div class="shade${sc.type === 'skit' ? ' skit' : ''}"></div>`;
   h += '<div class="top"></div>';
@@ -198,12 +199,13 @@ function page(lesson, si, li, info, opts) {
     // one teacher plays both parts: L = staff (left), R = customer (right, mirrored)
     const L = ln.L || lines.slice(0, li).reverse().map(l => l.L).find(Boolean) || sc.L;
     const R = ln.R || lines.slice(0, li).reverse().map(l => l.R).find(Boolean) || sc.R;
+    const roles = lesson.roles || {};
     const side = ln.v === 'A' ? 'l' : ln.v === 'B' ? 'r' : '';
     const ent = info.first;
-    h += `<div class="actor l${side === 'r' ? ' listen' : ''}" style="${ent ? anim('inL', .6, .1) : ln.L ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'l' ? bob : ''}">${person(opts, L, '店員')}</div></div>`;
-    h += `<div class="actor r${side === 'l' ? ' listen' : ''}" style="${ent ? anim('inR', .6, .25) : ln.R ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'r' ? bob : ''}">${person(opts, R, '客人')}</div></div>`;
+    h += `<div class="actor l${side === 'r' ? ' listen' : ''}" style="${ent ? anim('inL', .6, .1) : ln.L ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'l' ? bob : ''}">${person(opts, L, roles.A || '店員')}</div></div>`;
+    h += `<div class="actor r${side === 'l' ? ' listen' : ''}" style="${ent ? anim('inR', .6, .25) : ln.R ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${side === 'r' ? bob : ''}">${person(opts, R, roles.B || '客人')}</div></div>`;
     if (side) h += `<div class="tail" style="${side === 'l' ? 'left:600px' : 'right:600px'};top:786px"></div>`;
-    h += caption(ln, info, 'wide', ln.v === 'A' ? 'Staff 店員' : ln.v === 'B' ? 'Customer 客人' : 'Niamh');
+    h += caption(ln, info, 'wide', ln.v === 'A' ? roles.A || 'Staff 店員' : ln.v === 'B' ? roles.B || 'Customer 客人' : 'Niamh');
   } else if (sc.type === 'chapter') {
     h += `<div class="teacher" style="${anim('inL', .6, .35)}"><div style="width:100%;height:100%${bob}">${person(opts, pose, 'Niamh')}</div></div>`;
     h += `<div class="chap"><div class="n" style="${info.first ? anim('pop', .6, .45) : ''}">${esc(sc.num)}</div><div class="t fit" style="${info.first ? anim('up', .5, .7) : ''}">${esc(sc.title)}</div>` +

@@ -1,0 +1,1188 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-US-GuyNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V006",
+ "title": "剪頭髮講清楚要什麼",
+ "subtitle": "12 句英文，不再剪完回家哭",
+ "level": "B2",
+ "date": "2026-11-16",
+ "bg": "bg-salon",
+ "guest": "diego",
+ "roles": {
+  "A": "Niamh 客人",
+  "B": "Diego 理髮師"
+ },
+ "thumb": {
+  "pose": "barista-panic",
+  "bg": "bg-salon",
+  "line1": "剪短一點點",
+  "line2": "結果少了 15 公分",
+  "tag": "12 句 B2 英文",
+  "sticker": "✂️"
+ },
+ "chapters": [
+  "Intro",
+  "講需求",
+  "講細節",
+  "中途喊停",
+  "收尾",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "talk",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "B",
+     "say": "So, what are we doing today?",
+     "zh": "今天想怎麼剪？",
+     "R": "diego-talk"
+    },
+    {
+     "v": "A",
+     "say": "Em… just a little shorter, please.",
+     "zh": "呃……剪短一點點就好。"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.6,
+     "L": "barista-panic",
+     "sticker": "✂️",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "B",
+     "say": "There you go! What do you think?",
+     "zh": "好了！你覺得怎麼樣？",
+     "R": "diego-happy"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "✂️",
+    "big": [
+     "\"A little shorter\"",
+     "*＝ 15 cm gone"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I said a little shorter. He heard: do whatever you like. I lost fifteen centimetres that day.",
+     "zh": "我說剪短一點點，他聽到的是「隨便你剪」。那天我少了十五公分的頭髮。",
+     "pose": "barista-panic"
+    },
+    {
+     "v": "E",
+     "say": "And when he asked: do you like it? I said: yes, lovely! Then I cried on the bus.",
+     "zh": "他問我喜不喜歡，我說：喜歡，很好看！然後在公車上哭。",
+     "pose": "barista-sorry",
+     "sticker": "😭",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Get the haircut",
+     "*you actually want"
+    ],
+    "cta": "剪頭髮講清楚・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for the hairdresser or the barber.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你去髮廊或理髮店的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for the hairdresser or the barber."
+    },
+    {
+     "v": "E",
+     "say": "How to say exactly what you want, how to stop them in the middle, and how to say you're not happy.",
+     "zh": "怎麼精確說出你要的、怎麼中途喊停，還有怎麼說你不滿意。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Say what you want",
+   "sub": "講需求：用數字和照片",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: say what you want.",
+     "zh": "第一段：說出你要的。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A little means something different to everyone. So we use numbers and pictures.",
+     "zh": "「一點點」每個人的定義都不同，所以要用數字和照片。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 1,
+   "board": {
+    "kicker": "How much is a little?",
+    "items": [
+     "✗ a little shorter",
+     "✓ about two centimetres",
+     "✓ just a trim"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Never say only: a little shorter.",
+     "zh": "永遠不要只說 a little shorter。",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Give a number, or use the magic word: a trim.",
+     "zh": "給一個數字，或用這個神奇的字：a trim。",
+     "pose": "point",
+     "step": 3
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Just a trim, please. About two centimetres off the ends.",
+   "meaning": "稍微修一下就好，髮尾剪掉兩公分左右",
+   "note": "a trim ＝ 稍微修剪　off the ends ＝ 從髮尾",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Just a trim, please. About two centimetres off the ends.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A trim is a very small cut, just to tidy it. The ends are the tips of your hair.",
+     "zh": "trim 是稍微修剪整齊，ends 是髮尾。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Show the two centimetres with your fingers as well. Fingers don't lie.",
+     "zh": "同時用手指比出兩公分，手指不會騙人。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Just a trim, please. About two centimetres off the ends.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "I'd like to keep the length, but take some weight out.",
+   "meaning": "長度我想留著，但幫我打薄一點",
+   "note": "take some weight out ＝ 打薄",
+   "lines": [
+    {
+     "v": "E",
+     "say": "If your hair feels heavy, but you love it long, say this.",
+     "zh": "如果覺得頭髮很厚重，但又想留長，就說這一句。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to keep the length, but take some weight out.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Keep the length means don't make it shorter. Take some weight out means make it thinner and lighter.",
+     "zh": "keep the length 是不要剪短，take some weight out 是打薄、變輕。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Saying what you want to keep is just as important as what you want to change.",
+     "zh": "說出你想保留的，跟說出你想改的一樣重要。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to keep the length, but take some weight out.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I've got a photo. Could you do something like this?",
+   "meaning": "我有照片，可以剪成類似這樣嗎？",
+   "note": "something like this ＝ 類似這樣",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the best tool of all is in your pocket.",
+     "zh": "而最好用的工具，就在你的口袋裡。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "I've got a photo. Could you do something like this?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Something like this means similar, not exactly the same. That's fair. Your hair is not the model's hair.",
+     "zh": "something like this 是「類似」，不是一模一樣。這很合理，你的髮質跟模特兒不同。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Hairdressers love photos. One picture saves a hundred words.",
+     "zh": "設計師最喜歡照片，一張圖勝過一百個字。",
+     "pose": "thumb",
+     "sticker": "📱",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've got a photo. Could you do something like this?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "The details",
+   "sub": "講細節：瀏海、兩側、後面",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: the details.",
+     "zh": "第二段：講細節。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Now you need a few hair words. Don't worry, there are only three.",
+     "zh": "現在需要幾個頭髮的單字。別擔心，只有三個。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 2,
+   "board": {
+    "kicker": "Three hair words",
+    "items": [
+     "fringe　瀏海",
+     "layers　層次",
+     "the sides and the back　兩側和後面"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "A fringe is the hair over your forehead. Americans call it bangs.",
+     "zh": "fringe 是額頭前的瀏海，美國人叫 bangs。",
+     "pose": "point",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Layers are different lengths cut into your hair, to give it shape.",
+     "zh": "layers 是剪出不同長度的層次，讓頭髮有型。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "And for short hair, you talk about the sides and the back.",
+     "zh": "短髮的話，會講兩側和後面。",
+     "pose": "point",
+     "step": 3
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "Could you leave the fringe a bit longer?",
+   "meaning": "瀏海可以留長一點嗎？",
+   "note": "leave it longer ＝ 留長一點",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could you leave the fringe a bit longer?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Leave it longer means don't cut too much there.",
+     "zh": "leave it longer 是那裡不要剪太多。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A fringe that's too short takes two months to fix. So be careful with this one!",
+     "zh": "瀏海剪太短要兩個月才救得回來，所以這句很重要！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you leave the fringe a bit longer?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "Short on the sides, but not too short on top.",
+   "meaning": "兩側短，但頭頂不要太短",
+   "note": "on the sides ＝ 兩側　on top ＝ 頭頂",
+   "lines": [
+    {
+     "v": "E",
+     "say": "This one is for shorter haircuts.",
+     "zh": "這一句是短髮用的。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Short on the sides, but not too short on top.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "We say on the sides and on top. The little word is on.",
+     "zh": "說 on the sides、on top，介系詞是 on。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Barbers may ask what number you want. That's the machine. A one is very short, a four is longer.",
+     "zh": "理髮師可能會問你要幾號，那是指電推。一號很短，四號比較長。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Short on the sides, but not too short on top.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I usually wear it parted on the left.",
+   "meaning": "我平常是左邊分線",
+   "note": "parted on the left ＝ 左分",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And tell them how you normally wear it.",
+     "zh": "還要告訴對方你平常怎麼整理。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I usually wear it parted on the left.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Your parting is the line in your hair. Parted on the left means the line is on the left side.",
+     "zh": "parting 是頭髮的分線，parted on the left 是分線在左邊。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "We say wear your hair, just like wearing clothes.",
+     "zh": "頭髮的造型用 wear 這個動詞，跟穿衣服一樣。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I usually wear it parted on the left.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the same visit, with clear instructions.",
+     "zh": "同樣去剪頭髮，這次把話講清楚。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "So, what are we doing today?",
+     "zh": "今天想怎麼剪？",
+     "R": "diego-talk"
+    },
+    {
+     "v": "A",
+     "say": "Just a trim, please. About two centimetres off the ends.",
+     "zh": "稍微修一下就好，髮尾剪掉兩公分左右。"
+    },
+    {
+     "v": "B",
+     "say": "No problem. And the fringe?",
+     "zh": "沒問題。瀏海呢？",
+     "R": "diego-think"
+    },
+    {
+     "v": "A",
+     "say": "Could you leave the fringe a bit longer? And I usually wear it parted on the left.",
+     "zh": "瀏海可以留長一點嗎？還有，我平常是左邊分線。"
+    },
+    {
+     "v": "B",
+     "say": "Perfect. That's really clear.",
+     "zh": "完美，講得很清楚。",
+     "R": "diego-happy"
+    },
+    {
+     "v": "E",
+     "say": "He knows exactly what to do. No surprises.",
+     "zh": "他完全知道要怎麼剪，不會有驚嚇。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Speak up",
+   "sub": "中途喊停：現在說，不要回家哭",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: speak up.",
+     "zh": "第三段：開口說。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You see too much hair on the floor. Your heart is beating fast. What do you do?",
+     "zh": "你看到地上的頭髮太多了，心跳加速。怎麼辦？",
+     "pose": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 3,
+   "board": {
+    "kicker": "When is the right time?",
+    "items": [
+     "✗ at home, crying",
+     "✓ right now, in the chair"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Most of us say nothing, because we don't want to be rude.",
+     "zh": "大部分的人什麼都不說，因為不想失禮。",
+     "pose": "barista-sorry",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "But a good hairdresser wants you to speak now. They can fix it now. They can't fix it tomorrow.",
+     "zh": "但好的設計師希望你現在說。現在還能調整，明天就沒辦法了。",
+     "pose": "point",
+     "step": 2
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Sorry, could we stop there for a second?",
+   "meaning": "不好意思，可以先停一下嗎？",
+   "note": "stop there ＝ 先停在這裡",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Sorry, could we stop there for a second?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It's short and polite, and it works immediately.",
+     "zh": "這句話簡短、有禮貌，而且馬上有效。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Could we makes it sound like teamwork, not an order.",
+     "zh": "用 Could we 聽起來像合作，不像命令。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Sorry, could we stop there for a second?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "That's as short as I'd like to go.",
+   "meaning": "這個長度就是我的極限了，不要再短",
+   "note": "as short as I'd like to go ＝ 最短只能到這裡",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then tell them clearly where the limit is.",
+     "zh": "接著清楚說出你的底線。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "That's as short as I'd like to go.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "As short as I'd like to go means: this is the shortest I want. No more.",
+     "zh": "as short as I'd like to go 是「我最短只想到這裡」，不要再剪了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "You can use this pattern for anything. That's as far as I'd like to go. That's as much as I'd like to pay.",
+     "zh": "這個句型到處都能用：最遠到這裡、最多付這些。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That's as short as I'd like to go.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "It's not quite what I had in mind.",
+   "meaning": "這跟我想的不太一樣",
+   "note": "not quite ＝ 不太是　had in mind ＝ 心裡想的",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And at the end, if you're not happy, here is the gentle, honest way.",
+     "zh": "最後如果不滿意，溫和又誠實的說法是這一句。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "It's not quite what I had in mind.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "What I had in mind is the picture that was in my head.",
+     "zh": "what I had in mind 是我腦中原本想的樣子。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Not quite is very useful. It means not exactly, and it's much softer than I don't like it.",
+     "zh": "not quite 非常好用，意思是「不完全是」，比 I don't like it 柔和很多。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's not quite what I had in mind.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Finish well",
+   "sub": "收尾：調整、道謝、小費",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: finish well.",
+     "zh": "第四段：好好收尾。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "After not quite what I had in mind, always say what would make it better.",
+     "zh": "說完「跟我想的不太一樣」之後，一定要說怎樣會更好。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Could you even it up a little on this side?",
+   "meaning": "這一邊可以幫我修齊一點嗎？",
+   "note": "even it up ＝ 修齊、修成對稱",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could you even it up a little on this side?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Even means the same on both sides. Even it up means make it equal.",
+     "zh": "even 是兩邊一樣，even it up 是修成對稱。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Point at the place while you say it.",
+     "zh": "邊說邊指出位置。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you even it up a little on this side?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "That's much better. Thanks for fixing that.",
+   "meaning": "好多了，謝謝你幫我調整",
+   "note": "much better ＝ 好多了",
+   "lines": [
+    {
+     "v": "E",
+     "say": "When they fix it, tell them.",
+     "zh": "對方調整好之後，要告訴他。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "That's much better. Thanks for fixing that.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A little praise at the end means they'll remember you kindly next time.",
+     "zh": "最後稱讚一下，下次他會記得你是個好客人。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And you will come back. Finding a good hairdresser is harder than finding a flat!",
+     "zh": "而且你會再回來的。找到好設計師比找房子還難！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That's much better. Thanks for fixing that.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Could I book in with you again for six weeks' time?",
+   "meaning": "我可以再跟你約六週後嗎？",
+   "note": "book in with you ＝ 指定跟你預約",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you love it, don't lose them.",
+     "zh": "如果你很滿意，就不要錯過這位設計師。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could I book in with you again for six weeks' time?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Book in with you means make an appointment with you, not just anyone.",
+     "zh": "book in with you 是指定跟你預約，不是隨便哪一位。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "In six weeks' time means six weeks from today.",
+     "zh": "in six weeks' time 是從今天算起六週後。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could I book in with you again for six weeks' time?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Sorry, could we stop there for a second? That's as short as I'd like to go.",
+     "zh": "不好意思，可以先停一下嗎？這個長度就是我的極限了。"
+    },
+    {
+     "v": "B",
+     "say": "Of course. Thanks for telling me.",
+     "zh": "當然，謝謝你告訴我。",
+     "R": "diego-talk"
+    },
+    {
+     "v": "A",
+     "say": "Could you even it up a little on this side?",
+     "zh": "這一邊可以幫我修齊一點嗎？"
+    },
+    {
+     "v": "B",
+     "say": "There. How's that?",
+     "zh": "好了，這樣呢？",
+     "R": "diego-think"
+    },
+    {
+     "v": "A",
+     "say": "That's much better. Could I book in with you again for six weeks' time?",
+     "zh": "好多了。我可以再跟你約六週後嗎？",
+     "L": "thumb"
+    },
+    {
+     "v": "B",
+     "say": "I'd love that. See you then!",
+     "zh": "太好了，到時候見！",
+     "R": "diego-happy"
+    },
+    {
+     "v": "E",
+     "say": "I spoke up, and we're still friends.",
+     "zh": "我開口了，而且我們還是朋友。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：剪完頭髮會聽到的話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two things you'll hear after a haircut in Ireland.",
+     "zh": "還有加碼！在愛爾蘭剪完頭髮會聽到的兩句話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "A compliment",
+    "big": [
+     "*Your hair is only gorgeous!",
+     "你的頭髮超美的！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "In Irish English, only can make something stronger.",
+     "zh": "在愛爾蘭英文裡，only 可以用來加強語氣。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "Your hair is only gorgeous!",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "It doesn't mean just gorgeous. It means absolutely gorgeous.",
+     "zh": "不是「只有漂亮」，而是「漂亮極了」。",
+     "pose": "talk2",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "A friendly joke",
+    "big": [
+     "*Did you get a haircut?",
+     "不然呢？"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the opposite. Your friends will see your new hair and ask the most obvious question.",
+     "zh": "另一種相反。朋友看到你的新髮型，會問一個最明顯的問題。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Did you get a haircut?",
+     "pose": "think",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "The Irish answer is: no, I got them all cut! It's a very old joke. You'll hear it forever.",
+     "zh": "愛爾蘭式的回答是：不，我是全部的頭髮都剪了！這是個老笑話，你會聽一輩子。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "No, I got them all cut!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：剪出你要的頭髮",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's go back to the chair one more time. Say my lines with me!",
+     "zh": "我們再回到那張椅子上一次。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "B",
+     "say": "So, what are we doing today?",
+     "zh": "今天想怎麼剪？",
+     "R": "diego-talk"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to keep the length, but take some weight out.",
+     "zh": "長度我想留著，但幫我打薄一點。"
+    },
+    {
+     "v": "B",
+     "say": "Sure. Any idea of the shape?",
+     "zh": "好。有想要的樣子嗎？",
+     "R": "diego-think"
+    },
+    {
+     "v": "A",
+     "say": "I've got a photo. Could you do something like this?",
+     "zh": "我有照片，可以剪成類似這樣嗎？",
+     "L": "point"
+    },
+    {
+     "v": "B",
+     "say": "Oh, nice. That will suit you.",
+     "zh": "喔，不錯，這很適合你。",
+     "R": "diego-happy"
+    },
+    {
+     "v": "A",
+     "say": "Could you leave the fringe a bit longer?",
+     "zh": "瀏海可以留長一點嗎？"
+    },
+    {
+     "v": "B",
+     "say": "You're the boss.",
+     "zh": "聽你的。",
+     "R": "diego-talk"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Just a trim, please. About two centimetres off the ends.",
+     "I'd like to keep the length, but take some weight out.",
+     "I've got a photo. Could you do something like this?",
+     "Could you leave the fringe a bit longer?",
+     "Short on the sides, but not too short on top.",
+     "I usually wear it parted on the left.",
+     "Sorry, could we stop there for a second?",
+     "That's as short as I'd like to go.",
+     "It's not quite what I had in mind.",
+     "Could you even it up a little on this side?",
+     "That's much better. Thanks for fixing that.",
+     "Could I book in with you again for six weeks' time?"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Gorgeous! And nobody cried on the bus.",
+     "zh": "漂亮！而且沒有人在公車上哭。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them before your next haircut.",
+     "zh": "十二句都在這裡，下次剪頭髮前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "💇",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And yes, I did get a haircut. See you next time. Bye!",
+     "zh": "對，我有剪頭髮。下一課見，Bye！",
+     "pose": "cheer",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

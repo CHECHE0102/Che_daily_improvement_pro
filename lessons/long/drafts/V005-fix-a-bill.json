@@ -1,0 +1,1090 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IN-NeerjaNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V005",
+ "title": "打電話處理帳單出錯",
+ "subtitle": "12 句英文，講電話不再怕",
+ "level": "B2",
+ "date": "2026-11-16",
+ "bg": "bg-livingroom",
+ "guest": "priya",
+ "roles": {
+  "A": "Niamh 用戶",
+  "B": "Priya 客服"
+ },
+ "thumb": {
+  "pose": "barista-panic",
+  "bg": "bg-livingroom",
+  "line1": "帳單多收 200 歐？",
+  "line2": "打電話怎麼講",
+  "tag": "12 句 B2 英文",
+  "sticker": "📞"
+ },
+ "chapters": [
+  "Intro",
+  "接通",
+  "說明問題",
+  "要求更正",
+  "留紀錄",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "think",
+   "R": "priya",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Thank you for calling. Can I take your account number, your date of birth, and the first line of your address?",
+     "zh": "感謝您的來電。請給我您的帳號、出生日期，還有地址的第一行。",
+     "R": "priya-talk"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "L": "barista-panic",
+     "sticker": "📞",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "Sorry… my what?",
+     "zh": "抱歉……我的什麼？",
+     "L": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "📞",
+    "big": [
+     "No face. No hands.",
+     "*Just fast English"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Phone calls are the hardest English there is. You can't see a face, and you can't point at anything.",
+     "zh": "講電話是最難的英文。看不到臉，也沒辦法用手比。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "My electricity bill was over two hundred euro too high, and I waited two months before I rang. I was too scared of the call.",
+     "zh": "我的電費多算了兩百多歐，我拖了兩個月才打電話，因為我太怕講電話了。",
+     "pose": "barista-sorry",
+     "sticker": "💡",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Fix a wrong bill",
+     "*on the phone"
+    ],
+    "cta": "打電話處理帳單出錯・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences to fix a wrong bill on the phone.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教十二句話，打電話把算錯的帳單處理好。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences to fix a wrong bill on the phone."
+    },
+    {
+     "v": "E",
+     "say": "You'll explain the problem, ask them to fix it, and write down the proof.",
+     "zh": "說明問題、請對方更正，並且留下紀錄。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Get through",
+   "sub": "接通：說明來意，掌握節奏",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: get through.",
+     "zh": "第一段：接通之後。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Before you ring, put three things in front of you: your account number, the bill, and a pen.",
+     "zh": "打之前，先把三樣東西放在面前：帳號、帳單、一支筆。",
+     "pose": "talk2",
+     "sticker": "📝",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "I'm calling about a problem with my latest bill.",
+   "meaning": "我打來是因為最新一期帳單有問題",
+   "note": "I'm calling about ＝ 我打來是為了",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I'm calling about a problem with my latest bill.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'm calling about is how almost every phone call starts.",
+     "zh": "I'm calling about 幾乎是每一通電話的開場。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Your latest bill is the newest one, the one you just received.",
+     "zh": "latest bill 是最新的那一期帳單。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm calling about a problem with my latest bill.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "Could you bear with me while I find my account number?",
+   "meaning": "可以稍等我一下嗎？我找一下帳號",
+   "note": "while I ＝ 在我……的時候",
+   "lines": [
+    {
+     "v": "E",
+     "say": "They'll ask for details. If you need a moment, don't go silent. Say this.",
+     "zh": "對方會問資料。如果你需要一點時間，不要沉默，說這一句。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Could you bear with me while I find my account number?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You know bear with me from our café lesson. Here it buys you time on the phone.",
+     "zh": "bear with me 在咖啡店那一課學過。在電話上，它能幫你爭取時間。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Silence on the phone feels very long. One sentence makes it comfortable.",
+     "zh": "電話上的沉默感覺特別久，一句話就能讓氣氛自在。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you bear with me while I find my account number?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Sorry, you're breaking up. Could you say that last part again?",
+   "meaning": "抱歉，你的聲音斷斷續續，最後那段可以再說一次嗎？",
+   "note": "you're breaking up ＝ 訊號斷斷續續",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you don't understand, blame the line, not your English!",
+     "zh": "如果你聽不懂，就怪訊號，不要怪自己的英文！",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "Sorry, you're breaking up. Could you say that last part again?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You're breaking up means the sound keeps cutting out.",
+     "zh": "you're breaking up 是聲音斷斷續續。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And ask for that last part only. Then they repeat one piece, slowly, not everything.",
+     "zh": "只請對方重複最後那段，這樣他會慢慢講那一小段，不會全部重來。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Sorry, you're breaking up. Could you say that last part again?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Explain it",
+   "sub": "說明：用數字講，不用情緒講",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: explain the problem.",
+     "zh": "第二段：說明問題。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The agent talks to angry people all day. Be the calm one with the numbers.",
+     "zh": "客服整天都在面對生氣的人。你要當那個冷靜、有數字的人。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "I've been charged three hundred and twenty euro, which can't be right.",
+   "meaning": "我被收了三百二十歐，這不可能是對的",
+   "note": "I've been charged ＝ 我被收了",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've been charged three hundred and twenty euro, which can't be right.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I've been charged is passive. You're not saying you did this. You're saying this happened.",
+     "zh": "I've been charged 是被動語態。你沒有說「是你害的」，只說「事情發生了」。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And which can't be right adds your opinion in a calm way.",
+     "zh": "which can't be right 則是冷靜地補上你的看法。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've been charged three hundred and twenty euro, which can't be right.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "My bills are normally around ninety euro.",
+   "meaning": "我的帳單通常在九十歐左右",
+   "note": "normally around ＝ 通常大約",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then give them something to compare it with.",
+     "zh": "接著給對方一個比較的基準。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "My bills are normally around ninety euro.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Normally means usually. Around means approximately.",
+     "zh": "normally 是通常，around 是大約。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now the agent can see the problem in five seconds.",
+     "zh": "這樣客服五秒鐘就看得出問題。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "My bills are normally around ninety euro.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "It looks like the meter reading was estimated.",
+   "meaning": "看起來電表度數是用估的",
+   "note": "It looks like ＝ 看起來像是　estimated ＝ 估算的",
+   "lines": [
+    {
+     "v": "E",
+     "say": "If you know the reason, say it carefully.",
+     "zh": "如果你知道原因，要小心地說。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "It looks like the meter reading was estimated.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A meter reading is the number on your electricity meter. Estimated means they guessed it.",
+     "zh": "meter reading 是電表上的數字，estimated 是公司用猜的。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It looks like is softer than you made a mistake. It lets them agree with you easily.",
+     "zh": "It looks like 比「你們弄錯了」柔和，對方很容易就能認同你。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It looks like the meter reading was estimated.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "priya",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Listen to the middle of the call.",
+     "zh": "來聽通話的中段。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I've been charged three hundred and twenty euro, which can't be right. My bills are normally around ninety euro.",
+     "zh": "我被收了三百二十歐，這不可能是對的。我的帳單通常在九十歐左右。"
+    },
+    {
+     "v": "B",
+     "say": "I see. Let me have a look at the account.",
+     "zh": "了解，我看一下您的帳戶。",
+     "R": "priya-think"
+    },
+    {
+     "v": "A",
+     "say": "It looks like the meter reading was estimated.",
+     "zh": "看起來電表度數是用估的。"
+    },
+    {
+     "v": "B",
+     "say": "You're right. It was estimated. Have you got the actual reading there?",
+     "zh": "沒錯，是估算的。您手邊有實際的度數嗎？",
+     "R": "priya-talk"
+    },
+    {
+     "v": "E",
+     "say": "Numbers first, then the reason. She found it straight away.",
+     "zh": "先講數字，再講原因，她馬上就找到問題。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Get it fixed",
+   "sub": "要求更正：講清楚你要什麼",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: get it fixed.",
+     "zh": "第三段：要求更正。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Many callers explain the problem beautifully, and then never say what they want.",
+     "zh": "很多人把問題說明得很好，卻從頭到尾沒說自己要什麼。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Could you issue a corrected bill?",
+   "meaning": "可以重新開一張正確的帳單嗎？",
+   "note": "issue ＝ 開立、發出",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could you issue a corrected bill?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To issue a bill means to produce it and send it.",
+     "zh": "issue a bill 是開立並寄出帳單。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's a formal word. Use it, and the agent knows you're serious.",
+     "zh": "這是正式的字。用了它，客服就知道你是認真的。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you issue a corrected bill?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I'd like the difference refunded to my account.",
+   "meaning": "我希望差額退回我的帳戶",
+   "note": "the difference ＝ 差額　refund ＝ 退款",
+   "lines": [
+    {
+     "v": "E",
+     "say": "If you already paid, ask for your money.",
+     "zh": "如果你已經繳了，就要把錢要回來。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'd like the difference refunded to my account.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The difference is the extra amount you paid. Refunded means paid back.",
+     "zh": "the difference 是你多付的金額，refunded 是退還。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "They may offer credit on your next bill instead. It's OK to say you'd prefer a refund.",
+     "zh": "對方可能會說折抵下一期帳單。你可以說你比較想要退款。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd like the difference refunded to my account.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "How long will that take to come through?",
+   "meaning": "那大概要多久才會入帳？",
+   "note": "come through ＝（款項、文件）下來、到達",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And always ask for a time.",
+     "zh": "而且一定要問時間。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "How long will that take to come through?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "When a refund comes through, it arrives in your account.",
+     "zh": "come through 是款項進到你的帳戶。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Five working days is an answer. Soon is not an answer.",
+     "zh": "「五個工作天」是答案，「很快」不是答案。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "How long will that take to come through?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Keep a record",
+   "sub": "留紀錄：名字、編號、覆述一次",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: keep a record.",
+     "zh": "第四段：留下紀錄。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "If nothing happens, you'll have to ring again. Make sure the second call is short.",
+     "zh": "如果事情沒處理，你得再打一次。要確保第二通電話很短。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Could I take your name and a reference number?",
+   "meaning": "可以請問你的名字和案件編號嗎？",
+   "note": "take your name ＝ 記下你的名字",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could I take your name and a reference number?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Could I take your name means: please tell me your name so I can write it down.",
+     "zh": "Could I take your name 是請對方報名字，讓你記下來。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A reference number is the number of this call. With it, the next agent can see everything.",
+     "zh": "reference number 是這通電話的編號，有了它，下一位客服什麼都查得到。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could I take your name and a reference number?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "So, just to recap: you'll send a new bill, and refund the difference.",
+   "meaning": "所以整理一下：你們會寄新帳單，並退回差額",
+   "note": "just to recap ＝ 整理一下重點",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Before you hang up, say it all back.",
+     "zh": "掛電話之前，把內容覆述一遍。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "So, just to recap: you'll send a new bill, and refund the difference.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To recap means to repeat the main points.",
+     "zh": "recap 是把重點再說一次。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If you misunderstood something, this is when you'll find out, not in two weeks.",
+     "zh": "如果你有聽錯，現在就會發現，而不是兩個星期後。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "So, just to recap: you'll send a new bill, and refund the difference.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "If it hasn't come through by Friday, who should I ask for?",
+   "meaning": "如果星期五前還沒入帳，我該找誰？",
+   "note": "who should I ask for ＝ 我該指名找誰",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And one last clever question.",
+     "zh": "最後一個聰明的問題。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "If it hasn't come through by Friday, who should I ask for?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Ask for someone means say their name when you ring.",
+     "zh": "ask for someone 是打電話時指名找某人。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It tells them, very politely, that you will be checking.",
+     "zh": "這句話很有禮貌地告訴對方：你會回來追蹤。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "If it hasn't come through by Friday, who should I ask for?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "priya",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could you issue a corrected bill? And I'd like the difference refunded to my account.",
+     "zh": "可以重新開一張正確的帳單嗎？還有，我希望差額退回我的帳戶。"
+    },
+    {
+     "v": "B",
+     "say": "Certainly. I'll do both now.",
+     "zh": "沒問題，我現在兩件一起處理。",
+     "R": "priya-talk"
+    },
+    {
+     "v": "A",
+     "say": "How long will that take to come through?",
+     "zh": "那大概要多久才會入帳？"
+    },
+    {
+     "v": "B",
+     "say": "Three to five working days.",
+     "zh": "三到五個工作天。"
+    },
+    {
+     "v": "A",
+     "say": "Could I take your name and a reference number?",
+     "zh": "可以請問你的名字和案件編號嗎？"
+    },
+    {
+     "v": "B",
+     "say": "It's Priya, and your reference is four, four, seven, nine.",
+     "zh": "我叫 Priya，您的案件編號是 4479。",
+     "R": "priya-happy"
+    },
+    {
+     "v": "E",
+     "say": "Done. And I had everything on paper.",
+     "zh": "搞定，而且我全部都記在紙上。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：電話上的兩個習慣",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two things about Irish phone calls.",
+     "zh": "還有加碼！愛爾蘭人講電話的兩個習慣。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Ring, not call",
+    "big": [
+     "*I'll give you a ring.",
+     "我再打給你"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Here, people often say ring, not call.",
+     "zh": "這裡的人常說 ring，不說 call。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I'll give you a ring tomorrow.",
+     "pose": "talk"
+    },
+    {
+     "v": "E",
+     "say": "No jewellery, sorry. It just means I'll phone you.",
+     "zh": "抱歉，不是送你戒指，只是我會打給你。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "The Irish goodbye on the phone",
+    "big": [
+     "*Bye, bye, bye, bye…",
+     "掛電話要說很多次"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And Irish people never say goodbye once on the phone. It's more like this.",
+     "zh": "愛爾蘭人掛電話從來不只說一次 bye，而是像這樣。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "OK, thanks a million. Bye. Bye, bye, bye, bye.",
+     "pose": "hi",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If you say bye just once and hang up, it feels a bit cold. So join in!",
+     "zh": "如果只說一次 bye 就掛，會有點冷淡。一起來吧！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Bye, bye, bye, bye!",
+     "pose": "hi",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：三分鐘講完一通電話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's make that call again, the calm way. Say my lines with me!",
+     "zh": "我們用冷靜的方式重打一次。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "priya",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Thank you for calling. How can I help?",
+     "zh": "感謝您的來電，有什麼需要協助的嗎？",
+     "R": "priya-talk"
+    },
+    {
+     "v": "A",
+     "say": "I'm calling about a problem with my latest bill.",
+     "zh": "我打來是因為最新一期帳單有問題。"
+    },
+    {
+     "v": "B",
+     "say": "Can I take your account number?",
+     "zh": "請給我您的帳號。"
+    },
+    {
+     "v": "A",
+     "say": "Could you bear with me while I find my account number?",
+     "zh": "可以稍等我一下嗎？我找一下帳號。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Of course. Take your time.",
+     "zh": "當然，慢慢來。",
+     "R": "priya-happy"
+    },
+    {
+     "v": "A",
+     "say": "So, just to recap: you'll send a new bill, and refund the difference.",
+     "zh": "所以整理一下：你們會寄新帳單，並退回差額。",
+     "L": "point"
+    },
+    {
+     "v": "B",
+     "say": "That's right. Is there anything else?",
+     "zh": "沒錯。還有其他需要嗎？",
+     "R": "priya-talk"
+    },
+    {
+     "v": "A",
+     "say": "If it hasn't come through by Friday, who should I ask for?",
+     "zh": "如果星期五前還沒入帳，我該找誰？"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "I'm calling about a problem with my latest bill.",
+     "Could you bear with me while I find my account number?",
+     "Sorry, you're breaking up. Could you say that last part again?",
+     "I've been charged three hundred and twenty euro, which can't be right.",
+     "My bills are normally around ninety euro.",
+     "It looks like the meter reading was estimated.",
+     "Could you issue a corrected bill?",
+     "I'd like the difference refunded to my account.",
+     "How long will that take to come through?",
+     "Could I take your name and a reference number?",
+     "So, just to recap: you'll send a new bill, and refund the difference.",
+     "If it hasn't come through by Friday, who should I ask for?"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "You did it, and you didn't even need to see a face.",
+     "zh": "你做到了，而且連臉都不用看。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them, and keep them beside you when you ring.",
+     "zh": "十二句都在這裡。截圖下來，打電話時放在旁邊。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "📞",
+    "big": [
+     "See you next time",
+     "*Bye, bye, bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "See you next time. Bye. Bye, bye, bye, bye!",
+     "zh": "下一課見。Bye，bye bye bye bye！",
+     "pose": "hi",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
