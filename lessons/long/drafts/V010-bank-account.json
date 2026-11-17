@@ -1,0 +1,1101 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-SG-LunaNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V010",
+ "title": "銀行開戶與證明文件",
+ "subtitle": "12 句英文，跑一趟就搞定",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-bank",
+ "guest": "aisyah",
+ "roles": {
+  "A": "Niamh 客人",
+  "B": "Aisyah 行員"
+ },
+ "thumb": {
+  "pose": "barista-panic",
+  "bg": "bg-bank",
+  "line1": "沒地址不能開戶？",
+  "line2": "銀行英文 12 句",
+  "tag": "打工度假必看",
+  "sticker": "🏦"
+ },
+ "chapters": [
+  "Intro",
+  "說明狀況",
+  "證明文件",
+  "手續費和卡片",
+  "出狀況",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "customer",
+   "R": "aisyah",
+   "lines": [
+    {
+     "v": "B",
+     "say": "We'll need your PPS number, proof of address, and photo ID.",
+     "zh": "我們需要您的 PPS 號碼、地址證明和有照片的證件。",
+     "R": "aisyah-talk"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "L": "think",
+     "sticker": "📄",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "Proof of… address? I don't have an address. I need a bank account to rent a flat!",
+     "zh": "地址……證明？我沒有地址啊。我要先有銀行帳戶才能租房子！",
+     "L": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🔁",
+    "big": [
+     "No account → no flat",
+     "*No flat → no account"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "When you arrive in Ireland, you meet a famous circle. The bank wants an address. The landlord wants a bank account.",
+     "zh": "剛到愛爾蘭時，你會遇到一個有名的死循環。銀行要地址，房東要銀行帳戶。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "I went to the bank three times before I knew what to say.",
+     "zh": "我跑了三趟銀行，才知道該怎麼講。",
+     "pose": "barista-sorry",
+     "sticker": "😵",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Open a bank account",
+     "*and get what you need"
+    ],
+    "cta": "銀行開戶與證明文件・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for the bank.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你去銀行用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for the bank."
+    },
+    {
+     "v": "E",
+     "say": "You'll explain your situation, ask what counts as proof, and understand fees and cards.",
+     "zh": "說明你的狀況、問清楚什麼文件算數、搞懂手續費和卡片。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Explain yourself",
+   "sub": "說明狀況：我是誰、我要什麼",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: explain yourself.",
+     "zh": "第一段：說明你的狀況。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The clerk sees a hundred people a day. Help them understand you in ten seconds.",
+     "zh": "行員一天見一百個人。讓他十秒鐘就懂你的狀況。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "I've just moved here, and I'd like to open a current account.",
+   "meaning": "我剛搬來，想開一個活期帳戶",
+   "note": "current account ＝ 活期帳戶（美國說 checking account）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've just moved here, and I'd like to open a current account.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A current account is the everyday account for your salary and your card. Americans say checking account.",
+     "zh": "current account 是領薪水、刷卡用的日常帳戶，美國叫 checking account。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I've just moved here explains a lot. Now they know which questions to ask.",
+     "zh": "I've just moved here 一句交代很多，行員就知道該問什麼。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've just moved here, and I'd like to open a current account.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "I'm here on a working holiday visa for a year.",
+   "meaning": "我是持打工度假簽證來的，待一年",
+   "note": "on a … visa ＝ 持……簽證",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then say why you're here and for how long.",
+     "zh": "接著說你為什麼在這裡、待多久。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'm here on a working holiday visa for a year.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "We say on a visa, not with a visa.",
+     "zh": "簽證的介系詞用 on，不用 with。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Have your passport and your visa letter ready before you say it.",
+     "zh": "說之前，先把護照和簽證信準備好。",
+     "pose": "point",
+     "sticker": "🛂",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm here on a working holiday visa for a year.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I'm still waiting for my PPS number. Can I apply without it?",
+   "meaning": "我的 PPS 號碼還在等，沒有它可以申請嗎？",
+   "note": "PPS number ＝ 愛爾蘭的個人公共服務號碼",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if something is missing, ask honestly.",
+     "zh": "如果少了什麼，就老實問。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "I'm still waiting for my PPS number. Can I apply without it?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A PPS number is your personal public service number in Ireland. You need it for work and tax.",
+     "zh": "PPS number 是愛爾蘭的個人公共服務號碼，工作和報稅都要用。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Sometimes the answer is yes. You won't know until you ask.",
+     "zh": "有時候答案是可以。不問就不知道。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm still waiting for my PPS number. Can I apply without it?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "The paperwork",
+   "sub": "證明文件：什麼算數？",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: the paperwork.",
+     "zh": "第二段：證明文件。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This is where most people get stuck. So ask clever questions.",
+     "zh": "大部分的人都卡在這裡，所以要問聰明的問題。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "What counts as proof of address?",
+   "meaning": "什麼東西可以當作地址證明？",
+   "note": "count as ＝ 算作、被認可為",
+   "lines": [
+    {
+     "v": "A",
+     "say": "What counts as proof of address?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Count as means be accepted as.",
+     "zh": "count as 是被接受、被認可為。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Don't ask: do you need proof of address? They do. Ask what they'll accept.",
+     "zh": "不要問「需要地址證明嗎」，一定要的。要問他們接受什麼。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "What counts as proof of address?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "Would a letter from my employer be enough?",
+   "meaning": "雇主開的信可以嗎？",
+   "note": "be enough ＝ 足夠",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then offer an alternative.",
+     "zh": "接著提出替代方案。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Would a letter from my employer be enough?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A letter from your employer with your address on it is often accepted.",
+     "zh": "雇主開的、上面有你地址的信，常常是可以的。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Be enough means: is that all you need?",
+     "zh": "be enough 是：這樣就夠了嗎？",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would a letter from my employer be enough?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "Does it need to be the original, or is a copy OK?",
+   "meaning": "需要正本，還是影本就可以？",
+   "note": "original ＝ 正本　copy ＝ 影本",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And always ask this one. It saves a second trip.",
+     "zh": "這一句一定要問，可以省下一趟。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Does it need to be the original, or is a copy OK?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The original is the real paper. A copy is a photocopy or a printout.",
+     "zh": "original 是正本，copy 是影本或印出來的。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Many banks also accept a document on your phone. Ask that too.",
+     "zh": "很多銀行也接受手機上的電子文件，這個也可以問。",
+     "pose": "thumb",
+     "sticker": "📱",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Does it need to be the original, or is a copy OK?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "customer",
+   "R": "aisyah",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's see how this goes now.",
+     "zh": "來看看這次會怎樣。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I've just moved here, and I'd like to open a current account.",
+     "zh": "我剛搬來，想開一個活期帳戶。"
+    },
+    {
+     "v": "B",
+     "say": "Sure. Do you have proof of address?",
+     "zh": "好的，您有地址證明嗎？",
+     "R": "aisyah-talk"
+    },
+    {
+     "v": "A",
+     "say": "What counts as proof of address? I'm staying in a hostel at the moment.",
+     "zh": "什麼東西可以當作地址證明？我目前住在青年旅館。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "A letter from the hostel, or from your employer.",
+     "zh": "青年旅館或雇主開的信都可以。",
+     "R": "aisyah-think"
+    },
+    {
+     "v": "A",
+     "say": "Great. Does it need to be the original, or is a copy OK?",
+     "zh": "太好了。需要正本，還是影本就可以？"
+    },
+    {
+     "v": "B",
+     "say": "A copy is fine.",
+     "zh": "影本就可以。",
+     "R": "aisyah-happy"
+    },
+    {
+     "v": "E",
+     "say": "One visit, not three.",
+     "zh": "跑一趟就好，不用三趟。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Fees and cards",
+   "sub": "手續費和卡片：問清楚再簽",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: fees and cards.",
+     "zh": "第三段：手續費和卡片。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Banks are polite. Their fees are less polite.",
+     "zh": "銀行很有禮貌，他們的手續費就沒那麼有禮貌了。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Are there any monthly fees on this account?",
+   "meaning": "這個帳戶每個月有手續費嗎？",
+   "note": "monthly fee ＝ 月費",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Are there any monthly fees on this account?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Monthly fees are charges you pay every month just to have the account.",
+     "zh": "monthly fee 是每個月光是有這個帳戶就要付的費用。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "In Ireland, some accounts are free if you pay in a salary. Ask!",
+     "zh": "在愛爾蘭，有些帳戶只要有薪水轉入就免費。要問！",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Are there any monthly fees on this account?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "How long will it take for my card to arrive?",
+   "meaning": "卡片大概多久會寄到？",
+   "note": "How long will it take for … to ＝ ……要多久",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then the card.",
+     "zh": "接著問卡片。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "How long will it take for my card to arrive?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "How long will it take for my card to arrive is a long question, but very useful. Say it slowly.",
+     "zh": "這句有點長，但非常實用，慢慢說。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Until then, ask if you can use the app or Apple Pay.",
+     "zh": "卡片寄到之前，可以問能不能先用 app 或手機支付。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "How long will it take for my card to arrive?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Could you explain what this charge is for?",
+   "meaning": "可以解釋一下這筆費用是什麼嗎？",
+   "note": "charge ＝ 費用、扣款",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And later, when a strange charge appears on your statement, use this.",
+     "zh": "之後帳單上出現奇怪的扣款時，就用這一句。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "Could you explain what this charge is for?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A charge is money the bank took from you. What it's for means why.",
+     "zh": "charge 是銀行扣你的錢，what it's for 是為什麼扣。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It doesn't accuse anyone. It just asks. Often they'll remove it.",
+     "zh": "這句沒有指責誰，只是問。很多時候他們會直接取消。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you explain what this charge is for?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Problems",
+   "sub": "出狀況：卡片、轉帳、凍結",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: when something goes wrong.",
+     "zh": "第四段：出狀況的時候。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Card lost, money missing, account frozen. Three things you'll want to fix fast.",
+     "zh": "卡片掉了、錢不見了、帳戶被凍結。這三件事都要快點處理。",
+     "pose": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "I think my card's been blocked. It was declined twice today.",
+   "meaning": "我的卡好像被鎖了，今天被拒絕兩次",
+   "note": "be blocked ＝ 被鎖　declined ＝ 被拒絕",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I think my card's been blocked. It was declined twice today.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Blocked means stopped by the bank. Declined means the payment didn't go through.",
+     "zh": "blocked 是被銀行鎖住，declined 是付款沒成功。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Banks block cards when you suddenly spend in a new country. Very common for us!",
+     "zh": "在新的國家突然刷卡，銀行常常會鎖卡。我們這種人很常遇到！",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I think my card's been blocked. It was declined twice today.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "I sent a transfer on Monday, and it still hasn't gone through.",
+   "meaning": "我星期一轉了一筆帳，到現在還沒到",
+   "note": "go through ＝（款項）成功、完成",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Next, a missing transfer.",
+     "zh": "接著是轉帳沒到。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I sent a transfer on Monday, and it still hasn't gone through.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A transfer is money sent from one account to another. Gone through means completed.",
+     "zh": "transfer 是轉帳，gone through 是完成入帳。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Give the day and the amount. It helps them find it fast.",
+     "zh": "說出日期和金額，他們會更快找到。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I sent a transfer on Monday, and it still hasn't gone through.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Could you put a note on my account that I've reported this?",
+   "meaning": "可以在我的帳戶註記我已經通報過了嗎？",
+   "note": "put a note on ＝ 留下註記",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And finally, protect yourself.",
+     "zh": "最後，保護好自己。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "Could you put a note on my account that I've reported this?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A note on your account means anyone at the bank can see you reported it.",
+     "zh": "在帳戶上留註記，任何行員都看得到你通報過了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Next time you call, you won't start from zero.",
+     "zh": "下次再打來，就不用從頭開始。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you put a note on my account that I've reported this?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "customer",
+   "R": "aisyah",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I think my card's been blocked. It was declined twice today.",
+     "zh": "我的卡好像被鎖了，今天被拒絕兩次。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Let me check. Yes, there was a security block. I've removed it now.",
+     "zh": "我查一下。是的，有安全鎖，我已經幫您解除了。",
+     "R": "aisyah-talk"
+    },
+    {
+     "v": "A",
+     "say": "Thanks. And are there any monthly fees on this account?",
+     "zh": "謝謝。還有，這個帳戶每個月有手續費嗎？"
+    },
+    {
+     "v": "B",
+     "say": "No, not while your salary is paid in.",
+     "zh": "沒有，只要有薪水轉入就不用。",
+     "R": "aisyah-happy"
+    },
+    {
+     "v": "A",
+     "say": "Could you put a note on my account that I've reported this?",
+     "zh": "可以在我的帳戶註記我已經通報過了嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Done.",
+     "zh": "好了。",
+     "R": "aisyah-happy"
+    },
+    {
+     "v": "E",
+     "say": "Fixed, explained, and on record.",
+     "zh": "問題解決、費用問清楚，還留了紀錄。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：跟錢有關的兩個字",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two money words you'll hear from Irish friends.",
+     "zh": "還有加碼！愛爾蘭朋友講到錢時的兩個字。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Out of money",
+    "big": [
+     "*I'm broke.",
+     "我破產了／沒錢了"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Before payday, you'll hear this a lot.",
+     "zh": "發薪日前，你會常聽到這句。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I'm broke until Friday.",
+     "pose": "barista-sorry"
+    },
+    {
+     "v": "E",
+     "say": "Broke means you have no money. Not a broken leg!",
+     "zh": "broke 是沒錢，不是骨折！",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Expensive",
+    "big": [
+     "*That's daylight robbery!",
+     "這根本是搶劫！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when a price is far too high, Irish people say this.",
+     "zh": "價錢貴到離譜時，愛爾蘭人會這樣說。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "That's daylight robbery!",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Robbery in the daylight, when everyone can see. Perfect for bank fees.",
+     "zh": "光天化日下的搶劫，用來形容銀行手續費剛剛好。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That's daylight robbery!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一趟就開好戶",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's go back to the bank one more time. Say my lines with me!",
+     "zh": "我們再去一次銀行。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "customer",
+   "R": "aisyah",
+   "lines": [
+    {
+     "v": "B",
+     "say": "How can I help you today?",
+     "zh": "今天需要什麼服務？",
+     "R": "aisyah-talk"
+    },
+    {
+     "v": "A",
+     "say": "I've just moved here, and I'd like to open a current account. I'm here on a working holiday visa for a year.",
+     "zh": "我剛搬來，想開一個活期帳戶。我是持打工度假簽證來的，待一年。"
+    },
+    {
+     "v": "B",
+     "say": "No problem. We'll need proof of address.",
+     "zh": "沒問題，我們需要地址證明。",
+     "R": "aisyah-talk"
+    },
+    {
+     "v": "A",
+     "say": "Would a letter from my employer be enough?",
+     "zh": "雇主開的信可以嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Yes, that's perfect.",
+     "zh": "可以，那就很好。",
+     "R": "aisyah-happy"
+    },
+    {
+     "v": "A",
+     "say": "Great. How long will it take for my card to arrive?",
+     "zh": "太好了。卡片大概多久會寄到？"
+    },
+    {
+     "v": "B",
+     "say": "About five working days.",
+     "zh": "大約五個工作天。",
+     "R": "aisyah-talk"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "I've just moved here, and I'd like to open a current account.",
+     "I'm here on a working holiday visa for a year.",
+     "I'm still waiting for my PPS number. Can I apply without it?",
+     "What counts as proof of address?",
+     "Would a letter from my employer be enough?",
+     "Does it need to be the original, or is a copy OK?",
+     "Are there any monthly fees on this account?",
+     "How long will it take for my card to arrive?",
+     "Could you explain what this charge is for?",
+     "I think my card's been blocked. It was declined twice today.",
+     "I sent a transfer on Monday, and it still hasn't gone through.",
+     "Could you put a note on my account that I've reported this?"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Account open, card on its way. Brilliant!",
+     "zh": "帳戶開好、卡片在路上。太棒了！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them before you go to the bank.",
+     "zh": "十二句都在這裡，去銀行前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🏦",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Now, I'm off to check my statement for daylight robbery. See you next time. Bye!",
+     "zh": "我要去檢查帳單有沒有被搶劫了。下一課見，Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

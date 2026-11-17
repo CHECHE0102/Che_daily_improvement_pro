@@ -1,0 +1,1110 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-GB-RyanNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V009",
+ "title": "客人生氣了怎麼辦",
+ "subtitle": "12 句英文，冷靜化解客訴",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-counter",
+ "guest": "luca",
+ "roles": {
+  "A": "Niamh 店員",
+  "B": "Luca 客人"
+ },
+ "thumb": {
+  "pose": "barista-panic",
+  "bg": "bg-counter",
+  "line1": "客人氣炸了！",
+  "line2": "這樣說就對了",
+  "tag": "12 句 B2 英文",
+  "sticker": "😡"
+ },
+ "chapters": [
+  "Intro",
+  "先傾聽",
+  "聰明地道歉",
+  "給方案",
+  "冷靜設界線",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "barista",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "B",
+     "say": "I've been waiting twenty minutes for one coffee! This is ridiculous!",
+     "zh": "一杯咖啡我等了二十分鐘！太誇張了吧！",
+     "R": "luca-frown"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "L": "barista-panic",
+     "sticker": "😡",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "It's not my fault! The machine is broken!",
+     "zh": "又不是我的錯！機器壞了！",
+     "L": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🔥",
+    "big": [
+     "True.",
+     "*But the wrong answer"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Everything I said was true. The machine was broken. It wasn't my fault.",
+     "zh": "我說的都是真的。機器壞了，也不是我的錯。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "And the customer got angrier, asked for my manager, and wrote a one-star review about me.",
+     "zh": "結果客人更火大，要求找經理，還寫了一顆星評論罵我。",
+     "pose": "barista-sorry",
+     "sticker": "⭐",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Calm an angry customer",
+     "*without saying sorry 100 times"
+    ],
+    "cta": "客人生氣了怎麼辦・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for when a customer is angry.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你遇到生氣的客人時用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for when a customer is angry."
+    },
+    {
+     "v": "E",
+     "say": "You'll listen, apologise the smart way, offer a solution, and stay calm, even if they don't.",
+     "zh": "傾聽、聰明地道歉、給出方案，而且就算對方不冷靜，你也要冷靜。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Listen",
+   "sub": "先傾聽：讓對方知道你懂",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: listen.",
+     "zh": "第一段：先傾聽。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "An angry person doesn't want an explanation first. They want to feel heard.",
+     "zh": "生氣的人一開始不想聽解釋，他們想被理解。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "I can see why you're frustrated.",
+   "meaning": "我能理解你為什麼不高興",
+   "note": "frustrated ＝ 沮喪、惱火",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I can see why you're frustrated.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Frustrated means annoyed because something isn't working.",
+     "zh": "frustrated 是因為事情不順而惱火。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I can see why doesn't say you were wrong. It just says your feeling makes sense.",
+     "zh": "I can see why 不是承認你錯，只是說對方的感受合理。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I can see why you're frustrated.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "Twenty minutes is far too long to wait.",
+   "meaning": "等二十分鐘真的太久了",
+   "note": "far too ＝ 實在太……",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then repeat the problem in their words. It shows you were really listening.",
+     "zh": "接著用對方的話把問題說一遍，證明你真的有在聽。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Twenty minutes is far too long to wait.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Far too is stronger than too. You're agreeing with them, completely.",
+     "zh": "far too 比 too 更強，你完全站在對方那邊。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's very hard to keep shouting at someone who agrees with you.",
+     "zh": "人很難一直對著同意自己的人大吼。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Twenty minutes is far too long to wait.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Let me make sure I've got this right.",
+   "meaning": "讓我確認一下我理解得對不對",
+   "note": "get it right ＝ 理解正確",
+   "lines": [
+    {
+     "v": "E",
+     "say": "If the story is long or messy, slow it down.",
+     "zh": "如果對方講得又長又亂，就讓節奏慢下來。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Let me make sure I've got this right.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Then you repeat what you heard, step by step.",
+     "zh": "然後把你聽到的一步步覆述一次。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "This also gives the customer a moment to breathe. Angry people need that.",
+     "zh": "這也給對方一點喘息的時間，生氣的人需要這個。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Let me make sure I've got this right.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Apologise well",
+   "sub": "聰明地道歉：負責但不認罪",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: apologise well.",
+     "zh": "第二段：聰明地道歉。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "There's a big difference between sorry and it's not my fault.",
+     "zh": "「抱歉」和「不是我的錯」之間差很多。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 2,
+   "board": {
+    "kicker": "Two kinds of answers",
+    "items": [
+     "✗ It's not my fault.",
+     "✗ Sorry, sorry, sorry…",
+     "✓ Sorry + what I'll do"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "It's not my fault sounds like you don't care.",
+     "zh": "「不是我的錯」聽起來像你不在乎。",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And saying sorry ten times sounds weak. One sorry, then action.",
+     "zh": "一直說對不起聽起來很弱。說一次，然後行動。",
+     "pose": "point",
+     "step": 3
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "I'm really sorry about the wait. That's not the service we want to give.",
+   "meaning": "真的很抱歉讓你久等，這不是我們想提供的服務",
+   "note": "the wait ＝ 等待（名詞）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I'm really sorry about the wait. That's not the service we want to give.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You're sorry about the wait, not sorry that you exist. Be specific.",
+     "zh": "你是為「等待」道歉，不是為自己道歉。要具體。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And the second part shows you have standards. It's about the shop, not about you.",
+     "zh": "後半句表示你們有標準，講的是店，不是你個人。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm really sorry about the wait. That's not the service we want to give.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "Our machine went down this morning, but that's no excuse.",
+   "meaning": "我們的機器今天早上壞了，但這不是藉口",
+   "note": "go down ＝（機器）故障　no excuse ＝ 不是藉口",
+   "lines": [
+    {
+     "v": "E",
+     "say": "You can give the reason, if you add one important part.",
+     "zh": "你可以說原因，只要加上一個重要的部分。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Our machine went down this morning, but that's no excuse.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Went down means stopped working.",
+     "zh": "went down 是故障、停擺。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "But that's no excuse changes everything. Now it's information, not a defence.",
+     "zh": "加上 but that's no excuse，就變成說明，而不是辯解。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Our machine went down this morning, but that's no excuse.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I completely understand, and I'd feel the same.",
+   "meaning": "我完全理解，換作是我也會這樣覺得",
+   "note": "I'd feel the same ＝ 我也會有同樣感受",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if they keep going, stay with them.",
+     "zh": "如果對方繼續抱怨，就繼續陪著他。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I completely understand, and I'd feel the same.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'd feel the same puts you on their side of the counter.",
+     "zh": "I'd feel the same 讓你站到櫃檯的同一邊。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Use it once. More than once and it sounds like a script.",
+     "zh": "說一次就好，說太多聽起來像在背台詞。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I completely understand, and I'd feel the same.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "barista",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's try that again.",
+     "zh": "我們重來一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "I've been waiting twenty minutes for one coffee!",
+     "zh": "一杯咖啡我等了二十分鐘！",
+     "R": "luca-frown"
+    },
+    {
+     "v": "A",
+     "say": "I can see why you're frustrated. Twenty minutes is far too long to wait.",
+     "zh": "我能理解你為什麼不高興，等二十分鐘真的太久了。",
+     "L": "barista-sorry"
+    },
+    {
+     "v": "B",
+     "say": "It is! I have a meeting in ten minutes.",
+     "zh": "就是啊！我十分鐘後要開會。",
+     "R": "luca-frown"
+    },
+    {
+     "v": "A",
+     "say": "I'm really sorry about the wait. Our machine went down this morning, but that's no excuse.",
+     "zh": "真的很抱歉讓你久等。我們的機器今天早上壞了，但這不是藉口。"
+    },
+    {
+     "v": "B",
+     "say": "OK. So what now?",
+     "zh": "好吧，那現在怎麼辦？",
+     "R": "luca-think"
+    },
+    {
+     "v": "E",
+     "say": "Listen to his voice. He's already calmer. Now he wants a solution.",
+     "zh": "聽他的語氣，已經冷靜多了。現在他要的是解決方法。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Fix it",
+   "sub": "給方案：讓客人選",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: fix it.",
+     "zh": "第三段：解決問題。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't just say what you can't do. Say what you can.",
+     "zh": "不要只說你做不到什麼，要說你能做什麼。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Here's what I can do for you.",
+   "meaning": "我可以幫你這樣處理",
+   "note": "最有力量的一句客服英文",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Here's what I can do for you.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This sentence moves the conversation from the problem to the solution.",
+     "zh": "這句話把對話從問題帶到解決方法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Customers relax as soon as they hear it. Try it.",
+     "zh": "客人一聽到這句就會放鬆。試試看。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Here's what I can do for you.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I can either refund you, or get you a drink from next door.",
+   "meaning": "我可以退錢給你，或是去隔壁幫你買一杯",
+   "note": "either A or B ＝ A 或 B 二選一",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then give two options.",
+     "zh": "接著給兩個選項。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I can either refund you, or get you a drink from next door.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Either A or B gives the customer a choice. A choice gives them back control.",
+     "zh": "either A or B 讓客人自己選，選擇權讓人覺得被尊重。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Even small options work, as long as they're real.",
+     "zh": "選項小沒關係，只要是真的做得到。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I can either refund you, or get you a drink from next door.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "I'll handle this myself, so you don't have to explain it again.",
+   "meaning": "我會親自處理，你不用再解釋一次",
+   "note": "handle ＝ 處理、負責",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if it needs a manager, don't just pass them on.",
+     "zh": "如果需要找經理，不要直接把客人丟過去。",
+     "pose": "no"
+    },
+    {
+     "v": "A",
+     "say": "I'll handle this myself, so you don't have to explain it again.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Handle means take care of it, from start to finish.",
+     "zh": "handle 是從頭到尾負責處理。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "The worst thing for an angry customer is telling the whole story twice.",
+     "zh": "對生氣的客人來說，最糟的就是同一件事要講兩次。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'll handle this myself, so you don't have to explain it again.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Stay calm",
+   "sub": "對方太過分時：冷靜設界線",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: stay calm.",
+     "zh": "第四段：保持冷靜。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Most customers calm down. But some start shouting, or getting personal. You have limits too.",
+     "zh": "大多數客人會冷靜下來。但有些人會開始大吼或人身攻擊。你也有底線。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "I want to help you, but I need you to stop shouting.",
+   "meaning": "我想幫你，但請你不要再大吼了",
+   "note": "I need you to ＝ 我需要你……（堅定）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I want to help you, but I need you to stop shouting.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Start with I want to help you. Then the limit.",
+     "zh": "先說「我想幫你」，再說底線。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I need you to is firm, but not rude. Say it slowly and quietly.",
+     "zh": "I need you to 很堅定，但不無禮。慢慢地、小聲地說。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I want to help you, but I need you to stop shouting.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "Let me get my manager. She'll be able to help you further.",
+   "meaning": "我去請經理來，她能進一步幫你",
+   "note": "help you further ＝ 進一步協助",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when it's above your level, hand it over properly.",
+     "zh": "超出你權限時，就好好地交接。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Let me get my manager. She'll be able to help you further.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Further means more, beyond what I can do.",
+     "zh": "further 是更進一步，超出我能做的範圍。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then tell your manager the story, so the customer doesn't have to.",
+     "zh": "然後你把經過告訴經理，客人就不用再講一次。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Let me get my manager. She'll be able to help you further.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Thanks for your patience. I hope we see you again.",
+   "meaning": "謝謝你的耐心，希望你再來",
+   "note": "patience ＝ 耐心",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And always end on a warm note, even if they weren't very patient!",
+     "zh": "最後一定要溫暖地結束，就算對方其實沒什麼耐心！",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your patience. I hope we see you again.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Thanking someone for patience they didn't really have is a small gift. They'll notice.",
+     "zh": "感謝一個其實沒什麼耐心的人，是送他一份小禮物。他會感覺到。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Often that angry customer becomes a regular.",
+     "zh": "很多時候，那個生氣的客人最後變成了常客。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your patience. I hope we see you again.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "barista",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Here's what I can do for you. I can either refund you, or get you a drink from next door.",
+     "zh": "我可以幫你這樣處理：退錢給你，或是去隔壁幫你買一杯。"
+    },
+    {
+     "v": "B",
+     "say": "Next door is fine. I like their coffee anyway.",
+     "zh": "隔壁就好，反正我也喜歡他們的咖啡。",
+     "R": "luca-talk"
+    },
+    {
+     "v": "A",
+     "say": "Ha! Fair enough. I'll be back in two minutes.",
+     "zh": "哈！好吧。我兩分鐘後回來。",
+     "L": "thumb"
+    },
+    {
+     "v": "B",
+     "say": "Thanks. And sorry for shouting.",
+     "zh": "謝謝。剛剛大吼不好意思。",
+     "R": "luca-happy"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your patience. I hope we see you again.",
+     "zh": "謝謝你的耐心，希望你再來。",
+     "L": "barista"
+    },
+    {
+     "v": "E",
+     "say": "He apologised to me! That's how you know it worked.",
+     "zh": "他反過來跟我道歉！這就代表成功了。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：形容生氣的兩種說法",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish ways to talk about angry people.",
+     "zh": "還有加碼！愛爾蘭人形容生氣的兩種說法。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Very angry",
+    "big": [
+     "*He was raging.",
+     "他氣炸了"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "After a shift, you tell your friends about him like this.",
+     "zh": "下班後跟朋友講這位客人，你會這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "He was raging.",
+     "pose": "secret"
+    },
+    {
+     "v": "E",
+     "say": "Raging means extremely angry. In Ireland we use it all the time.",
+     "zh": "raging 是氣到不行，愛爾蘭人超常用。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Calm down, in Irish",
+    "big": [
+     "*Ah, sure look.",
+     "唉，算了啦"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when something goes wrong, and there's nothing you can do, Irish people say this.",
+     "zh": "事情出錯又無能為力時，愛爾蘭人會這樣說。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "Ah, sure look.",
+     "pose": "talk2",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It means: oh well, that's life, let's move on. It's the most Irish sentence there is.",
+     "zh": "意思是：唉，人生就是這樣，往前走吧。這是最愛爾蘭的一句話。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Ah, sure look!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：從一顆星到常客",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's go back to that first customer. Say my lines with me!",
+     "zh": "我們回到那位客人。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "barista",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "B",
+     "say": "I've been waiting twenty minutes for one coffee! This is ridiculous!",
+     "zh": "一杯咖啡我等了二十分鐘！太誇張了吧！",
+     "R": "luca-frown"
+    },
+    {
+     "v": "A",
+     "say": "I can see why you're frustrated. Let me make sure I've got this right. You ordered a flat white?",
+     "zh": "我能理解你為什麼不高興。讓我確認一下，你點的是 flat white？",
+     "L": "barista-ask"
+    },
+    {
+     "v": "B",
+     "say": "Yes. Twenty minutes ago.",
+     "zh": "對，二十分鐘前。",
+     "R": "luca-frown"
+    },
+    {
+     "v": "A",
+     "say": "I'm really sorry about the wait. That's not the service we want to give.",
+     "zh": "真的很抱歉讓你久等，這不是我們想提供的服務。",
+     "L": "barista-sorry"
+    },
+    {
+     "v": "B",
+     "say": "OK. Thank you for saying that.",
+     "zh": "好，謝謝你這樣說。",
+     "R": "luca-think"
+    },
+    {
+     "v": "A",
+     "say": "Here's what I can do for you.",
+     "zh": "我可以幫你這樣處理。",
+     "L": "barista"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "I can see why you're frustrated.",
+     "Twenty minutes is far too long to wait.",
+     "Let me make sure I've got this right.",
+     "I'm really sorry about the wait. That's not the service we want to give.",
+     "Our machine went down this morning, but that's no excuse.",
+     "I completely understand, and I'd feel the same.",
+     "Here's what I can do for you.",
+     "I can either refund you, or get you a drink from next door.",
+     "I'll handle this myself, so you don't have to explain it again.",
+     "I want to help you, but I need you to stop shouting.",
+     "Let me get my manager. She'll be able to help you further.",
+     "Thanks for your patience. I hope we see you again."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "From raging to regular. Brilliant work!",
+     "zh": "從氣炸到常客。做得太好了！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Take a screenshot before your next shift.",
+     "zh": "十二句都在這裡，下次上班前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "☕",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And if today was hard? Ah, sure look. See you next time. Bye!",
+     "zh": "今天很辛苦？唉，算了啦。下一課見，Bye！",
+     "pose": "barista-break",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
