@@ -71,7 +71,7 @@ async def main():
         t = f0 / FPS
         if first:
             scene_t0 = t
-        board_types = ("talk", "phrase", "recap")
+        board_types = ("talk", "phrase", "recap", "outro")
         info.update(t0=t, ts=t - scene_t0, frames=f1 - f0, p0=t / total, p1=(t + info["dur"]) / total, first=first,
                     prevPose=None if first and not (prev_type in board_types and s["type"] in board_types) else prev_pose,
                     sceneEnter=first and not (prev_type in board_types and s["type"] in board_types),

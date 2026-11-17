@@ -1156,31 +1156,67 @@
    ]
   },
   {
-   "type": "talk",
+   "type": "outro",
    "ch": 6,
    "board": {
-    "emoji": "💇",
-    "big": [
-     "See you next time",
-     "*Bye!"
+    "items": [
+     "📰 每天一則在地新聞練英文",
+     "🎮 單字小遊戲，約朋友一起玩",
+     "🔥 連續打卡、解鎖稱號、逛廣場",
+     "🎓 英文小教室：會話、片語、文法"
     ],
-    "cta": "打開 BinBin，每天用一則新聞練英文",
-    "ctaStep": 0
+    "url": "binbindaily.com"
    },
    "lines": [
     {
      "v": "E",
-     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
-     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
-     "pose": "hi",
-     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+     "say": "Before you go! Do you want to practise English a little every day?",
+     "zh": "走之前！想每天都練一點英文嗎？",
+     "pose": "hi"
+    },
+    {
+     "v": "E",
+     "say": "Try BinBin. Every day, there's a short news story from where you live, with the hard words explained.",
+     "zh": "試試 BinBin。每天一則你所在地區的短新聞，難的單字都有解釋。",
+     "pose": "point",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then play quick word games, on your own or with your friends.",
+     "zh": "接著玩快速的單字小遊戲，自己玩或約朋友一起。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Keep your streak going, unlock new titles, and say hi to other learners in the plaza.",
+     "zh": "保持連續打卡、解鎖新稱號，還能在廣場跟其他學習者打招呼。",
+     "pose": "thumb",
+     "step": 3
+    },
+    {
+     "v": "E",
+     "say": "And there are more lessons like this one, right inside the app.",
+     "zh": "App 裡還有更多像這樣的英文小教室。",
+     "pose": "talk2",
+     "step": 4
+    },
+    {
+     "v": "E",
+     "say": "Go to binbindaily dot com, or tap the link below.",
+     "zh": "上 binbindaily.com，或點下面的連結。",
+     "pose": "point",
+     "step": 5,
+     "cap": "Go to binbindaily.com, or tap the link below."
     },
     {
      "v": "E",
      "say": "And yes, I did get a haircut. See you next time. Bye!",
      "zh": "對，我有剪頭髮。下一課見，Bye！",
      "pose": "cheer",
-     "end": true
+     "end": true,
+     "step": 5
     }
    ]
   }

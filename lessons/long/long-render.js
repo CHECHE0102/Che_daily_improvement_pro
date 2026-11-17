@@ -78,6 +78,14 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;color:#fff;fon
 .wipe{position:absolute;inset:0;background:#f0be45;z-index:9;transform:translateX(-110%)}
 .stick{position:absolute;font-size:110px;z-index:6;filter:drop-shadow(0 6px 0 #0003)}
 .conf{position:absolute;top:-60px;width:20px;height:32px;border-radius:5px;z-index:8}
+.ologo{display:flex;align-items:center;gap:24px;margin-bottom:16px}
+.ologo img{width:120px;height:100px;object-fit:contain;filter:drop-shadow(0 6px 0 #0004)}
+.ologo .on{font-size:84px;font-weight:900;line-height:1;white-space:nowrap}
+.ologo .on b{color:#f0be45}
+.ofeat{width:100%;display:flex;flex-direction:column;gap:14px}
+.of{background:#ffffff1c;border-radius:22px;padding:10px 30px;font-size:40px;font-weight:800;text-align:left;white-space:nowrap;display:flex;gap:22px;align-items:center}
+.of i{font-style:normal;font-size:44px;flex:none}
+.ourl{margin-top:18px;background:#f0be45;color:#1d2a26;border-radius:999px;padding:10px 60px;font-size:58px;font-weight:900;white-space:nowrap;box-shadow:0 8px 0 #0004}
 @keyframes pop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.12);opacity:1}80%{transform:scale(.97)}100%{transform:scale(1);opacity:1}}
 @keyframes up{from{transform:translateY(70px);opacity:0}to{transform:none;opacity:1}}
 @keyframes inL{from{transform:translateX(-120%)}to{transform:none}}
@@ -141,7 +149,7 @@ function karaoke(text, info, isEn) {
   }).join('');
 }
 
-function board(sc, li, lines, info) {
+function board(sc, li, lines, info, opts) {
   const b = sc.board || {};
   const step = lines.slice(0, li + 1).reduce((m, l) => Math.max(m, l.step || 0), 0);
   const isNew = n => n > 0 && (lines[li].step || 0) === n && !lines.slice(0, li).some(l => (l.step || 0) >= n);
@@ -155,6 +163,15 @@ function board(sc, li, lines, info) {
   } else if (sc.type === 'recap') {
     h += `<div class="kicker">${esc(b.kicker || '今天的 12 句')}</div><div class="grid">` +
       b.items.map((t, i) => `<div class="cell" style="${info.first ? anim('pop', .4, .3 + i * .12) : ''}"><b>${i + 1}</b>${esc(t)}</div>`).join('') + '</div>';
+  } else if (sc.type === 'outro') {
+    // promo end card: BinBin logo + name, features appear one by one, then the web address
+    h += `<div class="ologo" style="${vis(0)}">${opts && opts.has('binbin-logo') ? `<img src="${opts.art}binbin-logo.webp">` : ''}<div class="on">${b.name || 'BinBin <b>Daily</b>'}</div></div>`;
+    if (b.items) h += '<div class="ofeat">' + b.items.map((t, i) => {
+      const [ic, ...rest] = t.split(' ');
+      return `<div class="of fit" style="${vis(i + 1)}"><i>${ic}</i>${esc(rest.join(' '))}</div>`;
+    }).join('') + '</div>';
+    const u = b.urlStep || (b.items || []).length + 1;
+    if (b.url) h += `<div class="ourl fit" style="${vis(u, 4)}${step >= u && !isNew(u) ? ';' + anim('pulse', 1.2, .2, 'ease-in-out') + ';animation-iteration-count:infinite' : ''}">${esc(b.url)}</div>`;
   } else {
     if (b.emoji) h += `<div class="emoji" style="${vis(0)}">${b.emoji}</div>`;
     if (b.kicker) h += `<div class="kicker fit" style="${vis(0)}">${esc(b.kicker)}</div>`;
@@ -215,7 +232,7 @@ function page(lesson, si, li, info, opts) {
   } else {
     const changed = info.prevPose !== pose;
     h += `<div class="teacher" style="${info.first && info.sceneEnter ? anim('inL', .6, .2) : changed ? anim('swap', .35, 0) : ''}"><div style="width:100%;height:100%${bob}">${person(opts, pose, 'Niamh')}</div></div>`;
-    h += board(sc, li, lines, info);
+    h += board(sc, li, lines, info, opts);
     h += caption(ln, info, '', ln.v === 'A' ? '🔊 Listen' : '');
     if (info.echo) {
       const at = info.lead + info.speech + .15;
