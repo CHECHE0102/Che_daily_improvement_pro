@@ -173,6 +173,40 @@
 
 連續兩句不要用同一個姿勢超過 3 次，畫面才會活。黑板場景也可以用 `barista-*`、`customer-*`（例如教道歉那句時用 `barista-sorry`）。
 
+### 3.4 來賓角色、場景背景、角色名牌（V002 起）
+
+V002 之後每支影片有一位各國的來賓角色，跟 Niamh 演短劇。腳本最上層多三個欄位：
+
+```json
+"bg": "bg-garda",
+"guest": "conor",
+"roles": {"A": "Niamh 報案的人", "B": "Conor 警察"},
+```
+
+- `bg`：短劇（`skit`）用的背景圖檔名，不含副檔名。沒寫就用 `bg-cafe`。黑板場景一律是教室背景，不受影響。
+- `guest`：來賓的英文小寫名字，只是給人看的註記。
+- `roles`：短劇字幕框上方的名牌。`A` 是左邊的人（Niamh），`B` 是右邊的人（來賓）。
+- `voices.B`：來賓的聲音，每位來賓不同，照腳本寫的用，不要改。
+
+短劇的 `L`（左）、`R`（右）填的是圖的名字。程式先找 `niamh-<名字>.webp`，找不到再找 `<名字>.webp`。所以：
+- `"L": "customer"` 是 Niamh 的風衣造型（`niamh-customer.webp`）。
+- `"R": "conor"` 是 Conor 原本的站姿（`conor.webp`），`"R": "conor-talk"` 是他說話的姿勢（`conor-talk.webp`）。
+- 每位來賓有 5 張：`<名字>`（站姿，聽人說話時用）、`<名字>-talk`（說話）、`<名字>-think`（思考、猶豫）、`<名字>-happy`（開心、同意）、`<名字>-frown`（不滿、拒絕）。
+
+來賓的圖和背景圖都放在 `assets/art/lesson/niamh/`。圖還沒放進去時，畫面上會出現虛線框寫著圖的名字，**這種狀態不可以交付**。把 Codex 畫的 PNG 轉進來的方法：
+
+```
+python3 tools/import_long_art.py person conor-talk  /path/to/conor-talk.png
+python3 tools/import_long_art.py person conor       /path/to/ireland.png      # 原站姿
+python3 tools/import_long_art.py bg     bg-garda    /path/to/bg-garda.png
+```
+
+圖的來源在 CheChe 電腦上：來賓的 4 個姿勢在 `D:\sidejob\picture\cast\`，原站姿在 `D:\sidejob\picture\female\` 和 `D:\sidejob\picture\male\`（哪個檔案是誰，看 `/mnt/project-files/binbin/lessons/codex/CODEX-TASK-cast.md` 的表），背景在 `D:\sidejob\picture\longbg\`。每支影片的 prompt 會列出那一支需要的圖。
+
+### 3.5 寫好但還沒製作的腳本
+
+寫好、還在等圖的腳本放在 `lessons/long/drafts/`。放在這裡不會觸發 GitHub 的影片流程。要製作某一支時，把它搬到 `lessons/long/`（`git mv lessons/long/drafts/V002-report-a-theft.json lessons/long/`），之後照第 2 節的流程做。**不要改台詞。**
+
 ## 4. 腳本怎麼寫才好看
 
 固定骨架（V001 就是這樣，總共約 125 句、33 個場景、8 分鐘）：
@@ -213,7 +247,7 @@
 現有的圖只有：Niamh 的 16 個姿勢、咖啡店背景、教室背景。腳本需要別的地點（超市、Pub、公車站、租屋）或別的造型時：
 1. 寫 Codex 任務檔，照 `/mnt/project-files/binbin/lessons/codex/CODEX-TASK-teacher-3.md` 和 `teacher3-queue.json` 的格式（每張圖一段完整的英文 prompt，都要附 `D:\sidejob\picture\teacher3\niamh-sheet.png` 當參考，確保長相一致）。
 2. 把任務檔放到 CheChe 電腦的 `D:\sidejob\picture\codex\`，再給 CheChe 一段可以直接貼給 Codex 的話。
-3. Codex 畫完後取回 PNG，人物圖去背後貼到 900×1536 的透明畫布（腳貼齊底部、左右置中），存成 `assets/art/lesson/niamh/niamh-<姿勢>.webp`；背景縮成 1920×1280 存成 `bg-<名字>.webp`。新背景要在 `long-render.js` 裡加對應的場景才用得到。
+3. Codex 畫完後取回 PNG，人物圖去背後貼到 900×1536 的透明畫布（腳貼齊底部、左右置中），存成 `assets/art/lesson/niamh/niamh-<姿勢>.webp`；背景縮成 1920×1280 存成 `bg-<名字>.webp`。轉檔用 `tools/import_long_art.py`（見 3.4）。新背景在腳本最上層寫 `"bg": "bg-<名字>"` 就會用在短劇場景。
 4. 造型規則：合身俐落、得體，不走暴露路線。
 
 ## 7. 常見問題

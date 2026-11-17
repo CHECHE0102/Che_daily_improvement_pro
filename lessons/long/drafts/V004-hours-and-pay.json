@@ -1,0 +1,1132 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-US-JennyNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V004",
+ "title": "跟主管談排班和加薪",
+ "subtitle": "12 句英文，開口不尷尬",
+ "level": "B2",
+ "date": "2026-11-16",
+ "bg": "bg-staffroom",
+ "guest": "valeria",
+ "roles": {
+  "A": "Niamh 店員",
+  "B": "Valeria 店經理"
+ },
+ "thumb": {
+  "pose": "barista-ask",
+  "bg": "bg-staffroom",
+  "line1": "跟主管談",
+  "line2": "排班和加薪",
+  "tag": "12 句 B2 英文",
+  "sticker": "💪"
+ },
+ "chapters": [
+  "Intro",
+  "開口",
+  "談排班",
+  "談加薪",
+  "收尾",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "barista-panic",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Niamh, can you work Saturday and Sunday again this week?",
+     "zh": "Niamh，這週六、日你可以再來上班嗎？",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "L": "barista-panic",
+     "sticker": "😩",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "Em… sure. No problem.",
+     "zh": "呃……好啊，沒問題。",
+     "L": "barista-sorry"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "😤",
+    "big": [
+     "6 weekends",
+     "*in a row"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "That was my sixth weekend in a row. I said no problem, but it was a problem.",
+     "zh": "那是我連續第六個週末上班。我嘴巴說沒問題，其實很有問題。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "I said nothing, I got angrier every week, and I nearly quit a job I liked.",
+     "zh": "我什麼都沒說，一週比一週火大，差點辭掉一份我喜歡的工作。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Ask your manager",
+     "*hours and pay"
+    ],
+    "cta": "跟主管談排班和加薪・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today you'll learn twelve sentences for talking to your manager.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你跟主管談事情的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today you'll learn twelve sentences for talking to your manager."
+    },
+    {
+     "v": "E",
+     "say": "How to start, how to ask for better hours, and how to ask for more money, without sounding rude.",
+     "zh": "怎麼開口、怎麼爭取排班、怎麼談加薪，而且不失禮。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Open the door",
+   "sub": "開口：先約時間，再說來意",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: open the door.",
+     "zh": "第一段：先把門打開。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The worst moment to ask is the middle of the lunch rush. So first, ask for a moment.",
+     "zh": "最糟的時機就是午餐尖峰。所以第一步，先約時間。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Have you got a minute? I'd like to run something by you.",
+   "meaning": "你有空嗎？有件事想跟你討論一下",
+   "note": "run something by you ＝ 想聽聽你的意見",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Have you got a minute? I'd like to run something by you.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Run something by you means: tell you my idea and hear what you think.",
+     "zh": "run something by you 是把想法告訴你、聽聽你的意見。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It sounds light and friendly, not like a complaint.",
+     "zh": "聽起來輕鬆友善，不像在抱怨。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Have you got a minute? I'd like to run something by you.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "Is now a good time, or shall I catch you later?",
+   "meaning": "現在方便嗎？還是我晚點再找你？",
+   "note": "catch you later ＝ 晚點再找你",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then give your manager a choice.",
+     "zh": "接著給主管一個選擇。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Is now a good time, or shall I catch you later?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Catch you later means: find you and talk to you later.",
+     "zh": "catch you later 是晚點再找你談。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "You're showing respect for their time, and managers remember that.",
+     "zh": "你尊重對方的時間，主管會記得這一點。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is now a good time, or shall I catch you later?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I wanted to have a word about my hours.",
+   "meaning": "我想跟你談一下我的工時",
+   "note": "have a word about ＝ 簡短談一下",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now say what it's about, in one clear sentence.",
+     "zh": "然後用一句話講清楚來意。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I wanted to have a word about my hours.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Have a word about means: talk briefly about something.",
+     "zh": "have a word about 是簡短談一下某件事。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Notice I wanted, not I want. The past form makes it softer.",
+     "zh": "注意是 I wanted，不是 I want。用過去式語氣更柔和。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I wanted to have a word about my hours.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Better hours",
+   "sub": "談排班：講事實，提方案",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: better hours.",
+     "zh": "第二段：爭取更好的排班。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't start with a feeling. Start with a fact.",
+     "zh": "不要從情緒開始，要從事實開始。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 2,
+   "board": {
+    "kicker": "Feeling or fact?",
+    "items": [
+     "✗ You always give me the worst shifts!",
+     "✓ I've closed five nights this week."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "If you say: you always give me the worst shifts, your manager will defend herself.",
+     "zh": "如果你說「你每次都把最爛的班給我」，主管只會開始辯解。",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A fact is hard to argue with.",
+     "zh": "事實很難反駁。",
+     "pose": "point",
+     "step": 2
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "I've been doing a lot of closing shifts lately.",
+   "meaning": "我最近排了很多晚班（關店班）",
+   "note": "I've been doing ＝ 最近一直在做",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've been doing a lot of closing shifts lately.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I've been doing shows it started in the past and is still happening.",
+     "zh": "I've been doing 表示從之前到現在一直持續。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A closing shift is the last shift, when you clean up and lock the door.",
+     "zh": "closing shift 是最後一班，要打掃和鎖門。",
+     "pose": "barista-break",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've been doing a lot of closing shifts lately.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "Would it be possible to have one weekend off a month?",
+   "meaning": "有可能一個月休一個週末嗎？",
+   "note": "Would it be possible to ＝ 有沒有可能",
+   "lines": [
+    {
+     "v": "E",
+     "say": "After the fact, make one small, clear request.",
+     "zh": "講完事實，提出一個小而明確的要求。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Would it be possible to have one weekend off a month?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Would it be possible to is a polite way to ask for something big.",
+     "zh": "Would it be possible to 是提出比較大的要求時的客氣說法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And be exact. One weekend a month is easy to say yes to. Fewer weekends is not.",
+     "zh": "而且要具體。「一個月一個週末」容易答應，「少排點週末」就很難。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would it be possible to have one weekend off a month?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I'm happy to be flexible, as long as I get some notice.",
+   "meaning": "我可以配合，只要提早通知我",
+   "note": "as long as ＝ 只要",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now show that you're a team player, with one condition.",
+     "zh": "接著表現出你願意配合，但帶一個條件。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I'm happy to be flexible, as long as I get some notice.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "As long as means: only if. So you say yes, but with a condition.",
+     "zh": "as long as 是「只要」。你答應了，但有條件。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And notice means being told early, not at the last minute.",
+     "zh": "notice 是提早告知，不是臨時才說。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm happy to be flexible, as long as I get some notice.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "barista-ask",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's see how that goes.",
+     "zh": "來看看實際的對話。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Have you got a minute? I wanted to have a word about my hours.",
+     "zh": "你有空嗎？我想跟你談一下我的工時。"
+    },
+    {
+     "v": "B",
+     "say": "Sure. What's up?",
+     "zh": "好啊，怎麼了？",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "A",
+     "say": "I've been doing a lot of closing shifts lately. Would it be possible to have one weekend off a month?",
+     "zh": "我最近排了很多晚班。有可能一個月休一個週末嗎？",
+     "L": "barista"
+    },
+    {
+     "v": "B",
+     "say": "Hmm. Weekends are our busiest days.",
+     "zh": "嗯，週末是我們最忙的時候。",
+     "R": "valeria-think"
+    },
+    {
+     "v": "A",
+     "say": "I know. I'm happy to be flexible, as long as I get some notice.",
+     "zh": "我知道。我可以配合，只要提早通知我。"
+    },
+    {
+     "v": "B",
+     "say": "OK. That's fair. Leave it with me.",
+     "zh": "好，這很合理，交給我處理。",
+     "R": "valeria-happy"
+    },
+    {
+     "v": "E",
+     "say": "No drama. A fact, a request, and a little flexibility.",
+     "zh": "沒有吵架。一個事實、一個要求，再加一點彈性。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "More money",
+   "sub": "談加薪：拿出證據，問出條件",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: more money.",
+     "zh": "第三段：談加薪。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "This is the scary one. But asking is normal here, if you do it well.",
+     "zh": "這個最可怕。但在這裡，只要方法對，開口是很正常的。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 3,
+   "board": {
+    "kicker": "Why should they pay you more?",
+    "items": [
+     "✗ I need more money.",
+     "✓ I do more than before."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I need more money is true for everyone. It's not a reason.",
+     "zh": "「我需要更多錢」每個人都一樣，不算理由。",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Your reason is the extra value you bring.",
+     "zh": "你的理由是你多帶來的價值。",
+     "pose": "point",
+     "step": 2
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "I've taken on a lot more responsibility since I started.",
+   "meaning": "從我進來到現在，我多承擔了很多責任",
+   "note": "take on ＝ 承擔、接下",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've taken on a lot more responsibility since I started.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Take on means accept extra work or duties.",
+     "zh": "take on 是接下額外的工作或責任。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then give examples: I open the shop, I train new staff, I do the orders.",
+     "zh": "接著舉例：我負責開店、帶新人、訂貨。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've taken on a lot more responsibility since I started.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I'd like to talk about whether my pay reflects that.",
+   "meaning": "我想談談我的薪水有沒有反映這一點",
+   "note": "reflect ＝ 反映、相稱",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And here is the key sentence.",
+     "zh": "然後是最關鍵的一句。",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to talk about whether my pay reflects that.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Reflects that means: matches that. You never say the words pay rise, but everyone understands.",
+     "zh": "reflects that 是「跟那個相稱」。你沒說加薪兩個字，但大家都懂。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's calm, it's adult, and it's very hard to be offended by it.",
+     "zh": "這句話冷靜、成熟，而且很難讓人不高興。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to talk about whether my pay reflects that.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "What would I need to do to get to the next level?",
+   "meaning": "我需要做到什麼，才能到下一個等級？",
+   "note": "get to the next level ＝ 升上去",
+   "lines": [
+    {
+     "v": "E",
+     "say": "What if the answer is: not right now? Don't give up. Ask this.",
+     "zh": "如果答案是「現在沒辦法」呢？別放棄，問這一句。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "What would I need to do to get to the next level?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You're asking for a clear target.",
+     "zh": "你在要一個明確的目標。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now your manager has to give you a plan, not just a no.",
+     "zh": "這樣主管就得給你一個計畫，不能只說不行。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "What would I need to do to get to the next level?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Close it well",
+   "sub": "收尾：道謝、約下次、確認",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: close it well.",
+     "zh": "第四段：把話收好。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "How you end the conversation matters as much as how you start it.",
+     "zh": "怎麼結束，跟怎麼開始一樣重要。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "I appreciate you being straight with me.",
+   "meaning": "謝謝你跟我說實話",
+   "note": "be straight with ＝ 有話直說",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I appreciate you being straight with me.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Being straight with someone means being honest and direct.",
+     "zh": "be straight with 是對人誠實、有話直說。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say it even when the answer is no. It keeps the relationship warm.",
+     "zh": "就算被拒絕也要說，這樣關係不會變冷。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I appreciate you being straight with me.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "Could we revisit this in three months?",
+   "meaning": "我們三個月後可以再談一次嗎？",
+   "note": "revisit ＝ 重新討論",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then put a date on it.",
+     "zh": "然後訂一個時間。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Could we revisit this in three months?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Revisit means come back to it and discuss it again.",
+     "zh": "revisit 是回頭再討論一次。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Without a date, later usually means never.",
+     "zh": "沒有日期的「以後再說」，通常就是永遠不說。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could we revisit this in three months?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "So, just to confirm: one weekend off, starting next month?",
+   "meaning": "所以確認一下：下個月開始，每月休一個週末？",
+   "note": "just to confirm ＝ 確認一下",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And before you leave, repeat what you agreed.",
+     "zh": "離開之前，把談好的內容重複一次。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "So, just to confirm: one weekend off, starting next month?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Just to confirm means: I want to check that we understood the same thing.",
+     "zh": "just to confirm 是確認雙方理解的是同一件事。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then send a short message about it later, so it's written down.",
+     "zh": "之後再傳個簡短訊息，留下文字紀錄。",
+     "pose": "talk2",
+     "sticker": "📱",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "So, just to confirm: one weekend off, starting next month?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "barista",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've taken on a lot more responsibility since I started. I'd like to talk about whether my pay reflects that.",
+     "zh": "從我進來到現在，我多承擔了很多責任。我想談談我的薪水有沒有反映這一點。"
+    },
+    {
+     "v": "B",
+     "say": "You're right, you have. But the budget is fixed until spring.",
+     "zh": "你說得對，確實是。但預算到春天之前都動不了。",
+     "R": "valeria-think"
+    },
+    {
+     "v": "A",
+     "say": "I appreciate you being straight with me. Could we revisit this in three months?",
+     "zh": "謝謝你跟我說實話。我們三個月後可以再談一次嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Yes. Let's do that.",
+     "zh": "好，就這麼辦。",
+     "R": "valeria-happy"
+    },
+    {
+     "v": "E",
+     "say": "Not a yes today, but a real date. That's a win.",
+     "zh": "今天沒有拿到 yes，但拿到了明確的日期，這就是贏。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：下班後的兩句話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two things you'll hear from Irish workmates.",
+     "zh": "還有加碼！兩句愛爾蘭同事常說的話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "After a long shift",
+    "big": [
+     "*I'm wrecked.",
+     "我累爆了"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "After six weekends in a row, I wasn't tired. I was this.",
+     "zh": "連上六個週末之後，我不是 tired，我是這個。",
+     "pose": "barista-break"
+    },
+    {
+     "v": "A",
+     "say": "I'm wrecked.",
+     "pose": "barista-break"
+    },
+    {
+     "v": "E",
+     "say": "Wrecked means completely exhausted. Like a ship at the bottom of the sea.",
+     "zh": "wrecked 是累到不行，像沉在海底的船。",
+     "pose": "talk2",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When someone does well",
+    "big": [
+     "*Fair play to you!",
+     "做得好，佩服"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you tell your friends you asked for a pay rise, they'll say this.",
+     "zh": "當你跟朋友說你開口談加薪了，他們會這樣說。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Fair play to you!",
+     "pose": "thumb",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It means: well done, I respect that.",
+     "zh": "意思是：做得好，我佩服你。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Fair play to you!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一次談完",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now let's do the whole conversation. Say my lines with me!",
+     "zh": "現在把整段對話走一次。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "barista",
+   "R": "valeria",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Is now a good time, or shall I catch you later?",
+     "zh": "現在方便嗎？還是我晚點再找你？",
+     "L": "barista-ask"
+    },
+    {
+     "v": "B",
+     "say": "Now is fine. Go ahead.",
+     "zh": "現在可以，你說。",
+     "R": "valeria-talk"
+    },
+    {
+     "v": "A",
+     "say": "I wanted to have a word about my hours. Would it be possible to have one weekend off a month?",
+     "zh": "我想跟你談一下我的工時。有可能一個月休一個週末嗎？",
+     "L": "barista"
+    },
+    {
+     "v": "B",
+     "say": "I think we can manage that.",
+     "zh": "我想可以安排。",
+     "R": "valeria-happy"
+    },
+    {
+     "v": "A",
+     "say": "So, just to confirm: one weekend off, starting next month?",
+     "zh": "所以確認一下：下個月開始，每月休一個週末？"
+    },
+    {
+     "v": "B",
+     "say": "Starting next month. Fair play to you for asking!",
+     "zh": "下個月開始。你敢開口，佩服！"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Have you got a minute? I'd like to run something by you.",
+     "Is now a good time, or shall I catch you later?",
+     "I wanted to have a word about my hours.",
+     "I've been doing a lot of closing shifts lately.",
+     "Would it be possible to have one weekend off a month?",
+     "I'm happy to be flexible, as long as I get some notice.",
+     "I've taken on a lot more responsibility since I started.",
+     "I'd like to talk about whether my pay reflects that.",
+     "What would I need to do to get to the next level?",
+     "I appreciate you being straight with me.",
+     "Could we revisit this in three months?",
+     "So, just to confirm: one weekend off, starting next month?"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Brilliant! You asked, and nothing bad happened.",
+     "zh": "太棒了！你開口了，而且什麼壞事都沒發生。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Take a screenshot, and practise before you talk to your manager.",
+     "zh": "十二句都在這裡。截圖存起來，找主管之前先練一次。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "💪",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Now I'm wrecked, and it's my weekend off. See you next time. Bye!",
+     "zh": "我累爆了，而且這個週末我放假。下一課見，Bye！",
+     "pose": "barista-break",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

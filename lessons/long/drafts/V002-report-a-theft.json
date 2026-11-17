@@ -1,0 +1,1162 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ]
+ },
+ "id": "V002",
+ "title": "東西被偷了怎麼報案",
+ "subtitle": "12 句英文，兩分鐘把話講清楚",
+ "level": "B2",
+ "date": "2026-11-16",
+ "bg": "bg-garda",
+ "guest": "conor",
+ "roles": {
+  "A": "Niamh 報案的人",
+  "B": "Conor 警察"
+ },
+ "thumb": {
+  "pose": "barista-panic",
+  "bg": "bg-garda",
+  "line1": "包包被偷了！",
+  "line2": "報案怎麼說？",
+  "tag": "12 句 B2 英文",
+  "sticker": "👜"
+ },
+ "chapters": [
+  "Intro",
+  "說經過",
+  "講特徵",
+  "要文件",
+  "問後續",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "customer",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Garda station, how can I help?",
+     "zh": "這裡是警察局，有什麼需要幫忙的嗎？",
+     "R": "conor-talk"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "L": "barista-panic",
+     "sticker": "😱",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "My bag! A man! Bus! Gone!",
+     "zh": "我的包包！一個男的！公車！不見了！",
+     "L": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "👜",
+    "big": [
+     "My bag was stolen",
+     "*and my English too"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "That was me. Someone took my bag on the bus, and when I got to the station, my English disappeared too.",
+     "zh": "那就是我。包包在公車上被拿走，我到了警局，英文也跟著不見了。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "The garda was very kind, but it took twenty minutes to explain a ten second story.",
+     "zh": "警察人很好，但一個十秒鐘的故事，我花了二十分鐘才講完。",
+     "pose": "secret",
+     "sticker": "⏱️",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Report a theft",
+     "*clearly and calmly"
+    ],
+    "cta": "東西被偷了怎麼報案・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! I hope you never need today's lesson. But if you do, you'll be ready.",
+     "zh": "哈囉大家，我是 Niamh 老師！希望你永遠用不到今天這一課。但萬一需要，你會準備好。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! I hope you never need today's lesson. But if you do, you'll be ready."
+    },
+    {
+     "v": "E",
+     "say": "Twelve sentences to report a theft: what happened, what was taken, and what happens next.",
+     "zh": "十二句話報案：發生什麼事、什麼被偷、接下來怎麼辦。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "In Ireland, the police are…",
+    "big": [
+     "*the Gardaí",
+     "one officer ＝ a garda"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "First, one word. In Ireland the police are called the Gardaí.",
+     "zh": "先講一個字。在愛爾蘭，警察叫做 Gardaí。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "One officer is a garda, and the police station is the garda station.",
+     "zh": "一位警察叫 garda，警察局就是 garda station。",
+     "pose": "talk2",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "What happened",
+   "sub": "說經過：先講重點，再講細節",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: say what happened.",
+     "zh": "第一段：說明經過。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "When you're stressed, you tell the story from the very beginning. Don't. Start with the headline.",
+     "zh": "人一緊張，就會從頭開始講。不要這樣，先講標題。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "I'd like to report a theft.",
+   "meaning": "我要報案，我東西被偷了",
+   "note": "report a theft ＝ 報竊盜案",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I'd like to report a theft.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To report means to tell the police officially. A theft is when something is stolen.",
+     "zh": "report 是正式向警方通報，theft 是竊盜。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "With this one sentence, the garda knows exactly which form to open.",
+     "zh": "光這一句，警察就知道要開哪一張表格。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to report a theft.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "My bag was stolen on the bus about an hour ago.",
+   "meaning": "我的包包大約一小時前在公車上被偷了",
+   "note": "was stolen ＝ 被偷（被動語態）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then: what, where, and when, all in one sentence.",
+     "zh": "接著一句話講完：什麼東西、在哪裡、什麼時候。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "My bag was stolen on the bus about an hour ago.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "We say was stolen, the passive, because we don't know who did it.",
+     "zh": "用被動的 was stolen，因為我們不知道是誰偷的。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "What, where, when. Say it in that order and you sound calm, even if you're not.",
+     "zh": "什麼、哪裡、何時。照這個順序說，就算你不冷靜，聽起來也很冷靜。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "My bag was stolen on the bus about an hour ago.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I only realised it was gone when I got off.",
+   "meaning": "我下車的時候才發現不見了",
+   "note": "I only realised… when ＝ 直到……才發現",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Often you didn't see it happen. Here's how to say that.",
+     "zh": "很多時候你根本沒看到過程。這時候這樣說。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I only realised it was gone when I got off.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I only realised when means: I didn't know until that moment.",
+     "zh": "I only realised… when 意思是：直到那一刻我才發現。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It was gone means it wasn't there any more.",
+     "zh": "it was gone 是東西已經不在了。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I only realised it was gone when I got off.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Describe it",
+   "sub": "講特徵：東西和人都要描述",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: describe it.",
+     "zh": "第二段：描述特徵。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The garda will ask two things: what does the bag look like, and did you see anyone?",
+     "zh": "警察會問兩件事：包包長什麼樣子？你有看到誰嗎？",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 2,
+   "board": {
+    "kicker": "The order of describing words",
+    "items": [
+     "① size → ② colour",
+     "③ material → ④ thing",
+     "small black leather backpack"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "In English, describing words have an order: size, then colour, then material, then the thing.",
+     "zh": "英文的形容詞有順序：大小、顏色、材質，最後才是東西。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "So it's a small black leather backpack. Any other order sounds strange.",
+     "zh": "所以是 a small black leather backpack，換個順序聽起來就怪。",
+     "pose": "talk2",
+     "step": 3
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "It's a small black leather backpack with a broken zip.",
+   "meaning": "是一個小的黑色皮革後背包，拉鍊壞了",
+   "note": "with ＋ 特別的地方，最好認",
+   "lines": [
+    {
+     "v": "A",
+     "say": "It's a small black leather backpack with a broken zip.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "After the basics, add with, and one special detail.",
+     "zh": "講完基本資料，加上 with，再講一個特別的地方。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "The special detail is what helps them find it. Thousands of bags are black.",
+     "zh": "特別的地方才找得到，黑色的包包有幾千個。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's a small black leather backpack with a broken zip.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "It had my passport, my wallet and my phone in it.",
+   "meaning": "裡面有我的護照、錢包和手機",
+   "note": "It had … in it ＝ 裡面有……",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now, what was inside?",
+     "zh": "接著，裡面有什麼？",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "It had my passport, my wallet and my phone in it.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It had something in it. Don't forget the little in it at the end.",
+     "zh": "It had… in it，最後的 in it 不要漏掉。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Start with the most important thing. For most of us, that's the passport.",
+     "zh": "從最重要的講起。對大部分的人來說是護照。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It had my passport, my wallet and my phone in it.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I didn't get a good look at him, but he was wearing a grey hoodie.",
+   "meaning": "我沒看清楚他的長相，但他穿灰色連帽衣",
+   "note": "get a good look at ＝ 看清楚",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if you saw someone, but not clearly, say this.",
+     "zh": "如果你有看到人，但沒看清楚，就這樣說。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "I didn't get a good look at him, but he was wearing a grey hoodie.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Get a good look at means see someone clearly.",
+     "zh": "get a good look at 是把某人看清楚。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's fine not to be sure. Never guess. Just say what you really saw.",
+     "zh": "不確定沒關係，千萬不要亂猜，只講你真的看到的。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I didn't get a good look at him, but he was wearing a grey hoodie.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "customer",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Listen to how the garda asks, and how I answer.",
+     "zh": "聽聽警察怎麼問，我怎麼回答。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "Can you describe the bag for me?",
+     "zh": "你可以描述一下那個包包嗎？",
+     "R": "conor-talk"
+    },
+    {
+     "v": "A",
+     "say": "It's a small black leather backpack with a broken zip.",
+     "zh": "是一個小的黑色皮革後背包，拉鍊壞了。"
+    },
+    {
+     "v": "B",
+     "say": "And what was in it?",
+     "zh": "裡面有什麼？"
+    },
+    {
+     "v": "A",
+     "say": "It had my passport, my wallet and my phone in it.",
+     "zh": "裡面有我的護照、錢包和手機。"
+    },
+    {
+     "v": "B",
+     "say": "Did you see who took it?",
+     "zh": "你有看到是誰拿的嗎？",
+     "R": "conor-think"
+    },
+    {
+     "v": "A",
+     "say": "I didn't get a good look at him, but he was wearing a grey hoodie.",
+     "zh": "我沒看清楚他的長相，但他穿灰色連帽衣。"
+    },
+    {
+     "v": "E",
+     "say": "Clear answers, and no guessing.",
+     "zh": "回答清楚，而且不亂猜。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "What I need",
+   "sub": "要文件：保險和補辦都靠它",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: get what you need.",
+     "zh": "第三段：拿到你需要的東西。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Many people report the theft, say thank you, and leave. Then the insurance company asks for a number they don't have.",
+     "zh": "很多人報完案、說聲謝謝就走了。結果保險公司跟你要一個你沒有的號碼。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Could I get a crime reference number for my insurance?",
+   "meaning": "可以給我報案編號嗎？保險要用",
+   "note": "crime reference number ＝ 報案編號",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could I get a crime reference number for my insurance?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A crime reference number is the number of your report.",
+     "zh": "crime reference number 就是你這個案件的編號。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Your insurance and your bank will both ask for it. In Ireland it's also called a Pulse number.",
+     "zh": "保險公司和銀行都會要。在愛爾蘭也叫 Pulse number。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could I get a crime reference number for my insurance?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I'll need a copy of the report to replace my passport.",
+   "meaning": "我需要一份報案紀錄，才能補辦護照",
+   "note": "replace ＝ 補辦、換新的",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if your passport is gone, you need paper too.",
+     "zh": "如果護照不見了，你還需要紙本。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'll need a copy of the report to replace my passport.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To replace something means to get a new one.",
+     "zh": "replace 是換一個新的，也就是補辦。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Your embassy or office will ask for the police report first.",
+     "zh": "你的大使館或辦事處會先跟你要報案紀錄。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'll need a copy of the report to replace my passport.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Do you think it might have been caught on CCTV?",
+   "meaning": "你覺得有可能被監視器拍到嗎？",
+   "note": "might have been ＝ 可能已經被……",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Buses and stations have cameras. So ask.",
+     "zh": "公車和車站都有攝影機，所以要問。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "Do you think it might have been caught on CCTV?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "CCTV means security cameras. Might have been caught means: maybe it was recorded.",
+     "zh": "CCTV 是監視器。might have been caught 是「可能已經被拍到」。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Ask quickly. Many places delete the video after a few weeks.",
+     "zh": "要快點問，很多地方幾週後就會刪掉影片。",
+     "pose": "secret",
+     "sticker": "📹",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Do you think it might have been caught on CCTV?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "What next",
+   "sub": "問後續：現在該做什麼？",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: what happens next.",
+     "zh": "第四段：問後續。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You've reported it. Now make sure you're not just waiting in the dark.",
+     "zh": "案報完了。接下來要確保自己不是摸黑乾等。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Is there anything else I should do in the meantime?",
+   "meaning": "這段時間我還需要做什麼嗎？",
+   "note": "in the meantime ＝ 在這段期間",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Is there anything else I should do in the meantime?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In the meantime means while I'm waiting.",
+     "zh": "in the meantime 是在等待的這段期間。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "They'll usually tell you to cancel your cards and lock your phone.",
+     "zh": "對方通常會叫你停卡、鎖手機。",
+     "pose": "point",
+     "sticker": "💳",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything else I should do in the meantime?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "How will I be kept updated?",
+   "meaning": "之後有進展會怎麼通知我？",
+   "note": "be kept updated ＝ 持續得到最新消息",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask how you'll hear news.",
+     "zh": "接著問怎麼得到消息。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "How will I be kept updated?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To be kept updated means someone keeps giving you the latest news.",
+     "zh": "be kept updated 是有人持續告訴你最新進度。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's the passive again: I will be kept updated. You don't need to say by who.",
+     "zh": "又是被動語態：I will be kept updated，不用說是誰通知。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "How will I be kept updated?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Thanks for your help. I really appreciate it.",
+   "meaning": "謝謝你的幫忙，真的很感謝",
+   "note": "appreciate ＝ 感激",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And finish warmly. The garda is on your side.",
+     "zh": "最後溫暖地結束，警察是站在你這邊的。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your help. I really appreciate it.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I really appreciate it is stronger and warmer than thank you.",
+     "zh": "I really appreciate it 比 thank you 更強烈、更有溫度。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "People help more when they feel appreciated. That's true in every country.",
+     "zh": "人被感謝時會更願意幫忙，這在每個國家都一樣。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your help. I really appreciate it.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "customer",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could I get a crime reference number for my insurance?",
+     "zh": "可以給我報案編號嗎？保險要用。"
+    },
+    {
+     "v": "B",
+     "say": "Of course. I'll write it down for you now.",
+     "zh": "當然，我現在寫給你。",
+     "R": "conor-talk"
+    },
+    {
+     "v": "A",
+     "say": "Do you think it might have been caught on CCTV?",
+     "zh": "有沒有可能被監視器拍到？"
+    },
+    {
+     "v": "B",
+     "say": "Good question. We'll ask the bus company today.",
+     "zh": "問得好，我們今天就問公車公司。",
+     "R": "conor-think"
+    },
+    {
+     "v": "A",
+     "say": "And how will I be kept updated?",
+     "zh": "那之後有進展會怎麼通知我？"
+    },
+    {
+     "v": "B",
+     "say": "We'll ring you. And cancel your cards in the meantime.",
+     "zh": "我們會打電話給你。這段時間先把卡停掉。",
+     "R": "conor-talk"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for your help. I really appreciate it.",
+     "zh": "謝謝你的幫忙，真的很感謝。",
+     "L": "customer-happy"
+    },
+    {
+     "v": "E",
+     "say": "That took two minutes, not twenty.",
+     "zh": "這次只花兩分鐘，不是二十分鐘。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：包包被偷的兩種說法",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two words you'll hear when you tell your Irish friends.",
+     "zh": "還有加碼！你跟愛爾蘭朋友講這件事時，會聽到的兩個字。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "Irish for stolen",
+    "big": [
+     "*It was robbed.",
+     "被偷了（愛爾蘭說法）"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Your textbook says a bag is stolen, and a person is robbed. But in Ireland, people say this about things too.",
+     "zh": "課本說東西用 stolen、人才用 robbed。但愛爾蘭人講東西也這樣說。",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "My bag was robbed.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It's not textbook English, but you'll hear it everywhere. Use stolen with the garda, and robbed with your friends.",
+     "zh": "這不是課本英文，但到處都聽得到。跟警察說 stolen，跟朋友說 robbed。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "How your friends will react",
+    "big": [
+     "*That's desperate!",
+     "太慘了吧！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And your friends will answer with this.",
+     "zh": "然後你朋友會這樣回。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "That's desperate!",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Here, desperate means terrible, really bad. It shows they feel sorry for you.",
+     "zh": "在這裡 desperate 是很糟、很慘，表示他們替你難過。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "That's desperate!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：兩分鐘報完案",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now let's report it again, the right way. Say my lines with me!",
+     "zh": "現在用對的方法重新報一次案。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "customer",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Garda station, how can I help?",
+     "zh": "這裡是警察局，有什麼需要幫忙的嗎？",
+     "R": "conor-talk"
+    },
+    {
+     "v": "A",
+     "say": "I'd like to report a theft. My bag was stolen on the bus about an hour ago.",
+     "zh": "我要報案。我的包包大約一小時前在公車上被偷了。"
+    },
+    {
+     "v": "B",
+     "say": "I'm sorry to hear that. Did you see it happen?",
+     "zh": "很遺憾聽到這件事。你有看到過程嗎？",
+     "R": "conor-think"
+    },
+    {
+     "v": "A",
+     "say": "No. I only realised it was gone when I got off.",
+     "zh": "沒有，我下車的時候才發現不見了。"
+    },
+    {
+     "v": "B",
+     "say": "OK. Let's take the details.",
+     "zh": "好，我們來記錄細節。",
+     "R": "conor-talk"
+    },
+    {
+     "v": "A",
+     "say": "I'll need a copy of the report to replace my passport.",
+     "zh": "我需要一份報案紀錄，才能補辦護照。"
+    },
+    {
+     "v": "B",
+     "say": "No problem. You'll have it before you leave.",
+     "zh": "沒問題，你離開前就會拿到。",
+     "R": "conor-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "I'd like to report a theft.",
+     "My bag was stolen on the bus about an hour ago.",
+     "I only realised it was gone when I got off.",
+     "It's a small black leather backpack with a broken zip.",
+     "It had my passport, my wallet and my phone in it.",
+     "I didn't get a good look at him, but he was wearing a grey hoodie.",
+     "Could I get a crime reference number for my insurance?",
+     "I'll need a copy of the report to replace my passport.",
+     "Do you think it might have been caught on CCTV?",
+     "Is there anything else I should do in the meantime?",
+     "How will I be kept updated?",
+     "Thanks for your help. I really appreciate it."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Well done. Calm, clear, and nothing forgotten.",
+     "zh": "做得好。冷靜、清楚，而且什麼都沒漏。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Take a screenshot and keep it on your phone. Just not only on your phone!",
+     "zh": "十二句都在這裡，截圖存在手機裡。但不要只存在手機裡！",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "👜",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And did I get my bag back? I did! But that's a story for another day. Bye!",
+     "zh": "那我的包包有找回來嗎？有！不過那是另一個故事了。Bye！",
+     "pose": "cheer",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
