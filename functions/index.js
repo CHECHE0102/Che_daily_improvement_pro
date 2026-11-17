@@ -14,6 +14,7 @@ import { onRequest } from "firebase-functions/v2/https";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { runPush } from "./push.js";
 import { runWellDraw, prevMonth } from "./well.js";
+import { runPlaza } from "./plaza.js";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
@@ -248,9 +249,10 @@ export const stripeWebhook = onRequest({ region: REGION, secrets: [STRIPE_KEY, W
   }
 });
 
-// Daily news reminders. Cloud Scheduler calls this every 15 minutes, so the morning reminder goes out
+// Daily news reminders (and the plaza refresh). Cloud Scheduler calls this every 15 minutes, so the morning reminder goes out
 // right after the news is published (08:00 Dublin) and the evening one at 19:00, every day.
 export const newsPush = onSchedule({ schedule: "every 15 minutes", timeZone: "Europe/Dublin", region: REGION, secrets: [VAPID_PRIVATE], timeoutSeconds: 300, retryCount: 0, maxInstances: 1 }, async () => {
+  try { await runPlaza(db); } catch (e) { logger.warn("plaza", e && e.message); }   // 廣場: refresh who stands in the plaza (one doc)
   const r = await runPush(db, VAPID_PRIVATE.value(), (...a) => logger.info(...a));
   if (r.am || r.pm || r.gone || r.fail || r.bad) logger.info("newsPush", r);
 });
