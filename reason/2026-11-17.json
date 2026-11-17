@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-17",
+ "items": {
+  "2026-11-17": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Greater Dublin Drainage project has been cancelled after years of court challenges.",
+     "Uisce Éireann has finished upgrading the Ringsend plant, so no new facilities are needed.",
+     "Work has begun on a costly, long-delayed wastewater scheme meant to support large-scale housing growth in the Dublin region.",
+     "The Taoiseach has promised that the drainage project will be completed by the end of next year."
+    ],
+    "a": 2,
+    "exp": "The passage opens by saying \"Construction has commenced on the Greater Dublin Drainage project\", costing \"up to €2.3 billion\" and serving \"up to 185,000 new dwellings\", and later notes studies began in 2005. It was not cancelled (A), Ringsend's extra capacity has been \"absorbed\" (B), and completion is \"scheduled for ... 2031\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the new critical infrastructure legislation?",
+    "opts": [
+     "The Government sees it as a way to speed up approvals for major projects like this one.",
+     "It removed the need for any planning consent for the drainage scheme.",
+     "It was introduced because the High Court requested it.",
+     "It has made the project cheaper than first estimated."
+    ],
+    "a": 0,
+    "exp": "Jack Chambers says the legislation \"enabled a crucial consent to be obtained within 75 days, approximately five times faster than in comparable previous cases\", implying it is meant to accelerate approvals. A consent was still needed (B), the court did not request it (C), and nothing links it to lower costs (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes Martin's attitude as reported in the passage?",
+    "opts": [
+     "Purely celebratory, claiming the State has always delivered infrastructure on time.",
+     "Indifferent, treating the project as a minor local matter.",
+     "Openly hostile to Uisce Éireann's management of the scheme.",
+     "Supportive of the project but self-critical about the State's past record."
+    ],
+    "a": 3,
+    "exp": "Martin called the project \"fundamental to economic expansion and housing provision\", yet \"acknowledged that the State had not delivered infrastructure at the necessary scale or speed\". That mix of support and admission rules out (A), (B) and (C)."
+   }
+  ],
+  "2026-11-17-2": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Rents in Ireland fell for the first time since 2020.",
+     "Rent growth has slowed, but rents remain high and supply is still well below pre-pandemic levels.",
+     "Dublin recorded the sharpest annual rent increase in the country.",
+     "The number of rental properties has returned to its pre-pandemic average."
+    ],
+    "a": 1,
+    "exp": "The passage reports that rental inflation \"has decelerated to its lowest third-quarter level in six years\", yet rents are \"43% above pre-2020 levels\" and supply \"remains between one quarter and one half below pre-pandemic levels\". Rents rose rather than fell (A), Cork and Galway had the biggest rises (C), and 2,800 is \"considerably below\" 4,400 (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the finding that properties advertised after March were about 3% more expensive?",
+    "opts": [
+     "Landlords are now charging less to attract tenants.",
+     "Tenants have stopped moving between rental homes.",
+     "The new rules have made rental supply return to normal.",
+     "Some landlords have used the new freedom to reset rents between tenancies to raise prices."
+    ],
+    "a": 3,
+    "exp": "Lyons says the data show \"how landlords have responded to recent regulatory changes\": since March \"rents may be reset to market levels between tenancies\", and new listings were \"approximately 3% more expensive\". This contradicts (A); nothing is said about tenants stopping moving (B), and supply is still well below normal (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the figure of approximately 4,400 properties?",
+    "opts": [
+     "To show that the recent improvement in availability is still small by historical standards.",
+     "To prove that rents have fallen in Cork and Galway.",
+     "To give the number of properties built since 2021.",
+     "To suggest that landlords are leaving the market."
+    ],
+    "a": 0,
+    "exp": "After noting almost 2,800 properties, \"the highest figure for that month since 2021\", the writer adds that \"this remains considerably below the pre-pandemic average of approximately 4,400\", putting the improvement in context. The figure is unrelated to Cork and Galway rents (B), construction (C) or landlords leaving (D)."
+   }
+  ],
+  "2026-11-17-3": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Boys miss far more school than girls, according to the ESRI.",
+     "Chronic absence has fallen below pre-pandemic levels at all school levels.",
+     "Schools in disadvantaged areas have a higher share of unexplained absences, and overall absence remains above pre-pandemic levels.",
+     "DEIS schools have been told to cut absences by 20 days per year."
+    ],
+    "a": 2,
+    "exp": "The passage says DEIS schools \"experience a considerably higher proportion of unexplained pupil absences\" (41% vs 23% at primary) and that \"overall absence levels remain above pre-pandemic figures\". There was \"no substantial difference between male and female students\" (A), absence is still above pre-pandemic levels (B), and 20 days is only the definition of chronic absence (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from Anna Moya's comment?",
+    "opts": [
+     "Not knowing why pupils are absent makes it harder to help those in disadvantaged schools.",
+     "She believes DEIS schools should lose their additional resources.",
+     "She thinks unexplained absences are not a serious problem.",
+     "She found that most absences were caused by illness."
+    ],
+    "a": 0,
+    "exp": "Moya called the gap \"a significant concern from an equality perspective, as effective interventions are contingent upon understanding the underlying reasons for absence\" — so missing explanations hinder support where they are most common. She does not suggest cutting resources (B), she calls it significant (C), and no causes are identified (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that chronic absence among primary pupils fell from 22.1% to 19%?",
+    "opts": [
+     "To show that the problem of absence has been fully solved.",
+     "To contrast an improvement at primary level with a worsening at post-primary level.",
+     "To explain why DEIS schools receive extra resources.",
+     "To compare male and female attendance rates."
+    ],
+    "a": 1,
+    "exp": "The sentence reads \"Although chronic absence among primary pupils declined ... the number of chronically absent post-primary students increased by more than 8,000\", setting the two levels against each other. Overall absence is still high (A), and the figure is not about DEIS funding (C) or gender (D)."
+   }
+  ],
+  "2026-11-17-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Most Irish consumers are sceptical of Black Friday discounts and plan to spend less this year.",
+     "Irish shoppers plan to spend more on Black Friday than ever before.",
+     "The CCPC has banned online Black Friday sales.",
+     "Most shoppers trust retailers' discount claims more than in 2022."
+    ],
+    "a": 0,
+    "exp": "Only \"23% of respondents consider retailers' claims of substantial discounts to be credible\" and expected spending fell to \"€307, compared with €431 in 2024\". Spending is down (B), nothing is banned (C), and trust is \"the lowest proportion since monitoring commenced in 2022\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the CCPC's advice to buy from EU-based sellers?",
+    "opts": [
+     "Sellers outside the EU are always cheaper.",
+     "Black Friday is not held outside the EU.",
+     "Buyers from sellers outside the EU may not have the same right to a 14-day refund.",
+     "EU sellers offer the biggest Black Friday discounts."
+    ],
+    "a": 2,
+    "exp": "De Búrca recommended EU-based sellers \"since consumers are consequently entitled to a 14-day period in which to change their minds and obtain a full refund\", implying that this protection may not apply elsewhere. Prices (A), discount size (D) and where Black Friday is held (B) are not discussed."
+   },
+   {
+    "type": "tone",
+    "q": "What is the overall tone of the passage?",
+    "opts": [
+     "Enthusiastic, encouraging readers to buy as much as possible.",
+     "Factual, reporting survey findings and official advice.",
+     "Angry, accusing named retailers of fraud.",
+     "Humorous, mocking shoppers who buy while drunk."
+    ],
+    "a": 1,
+    "exp": "The passage presents figures such as \"73% regard such discounts as untrustworthy\" and reports that de Búrca \"recommended purchasing from EU-based sellers\". It neither urges buying (A), names or accuses retailers (C), nor mocks anyone; the alcohol finding is simply \"Notably\" reported (D)."
+   }
+  ]
+ }
+}
