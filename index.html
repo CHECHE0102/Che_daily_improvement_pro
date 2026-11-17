@@ -838,6 +838,68 @@ body.onb-open{overflow:hidden}
 .inv-card .inv-mine{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.inv-card .inv-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px}.inv-list{display:flex;flex-direction:column;gap:6px}.inv-row{display:flex;align-items:center;gap:8px}.inv-row b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.inv-dots{display:flex;gap:3px}.inv-dots i{width:10px;height:10px;border-radius:50%;background:#ddd}.inv-dots i.on{background:#3BB273}.inv-joined{font-weight:700}.inv-enter{display:flex;flex-direction:column;gap:6px}
 .mem-card .mem-on{margin:0;font-weight:700;color:#2E8B57}.mem-card .mem-code{font:800 22px/1 ui-monospace,Menlo,monospace;letter-spacing:3px;padding:6px 10px;border:2px dashed var(--line,#ccc);border-radius:10px;align-self:flex-start}.mem-steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:2px;font-size:14px}.ls-panel.locked .comm-ig,.wk-card.locked .comm-ig{margin-top:8px;color:#fff!important;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;font-weight:700}
 .plaza{display:flex;flex-direction:column;gap:8px}.plz-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.plz-ground{display:flex;gap:4px;overflow-x:auto;padding:14px 6px 8px;margin:0 -6px;border-radius:14px;scrollbar-width:none;background:linear-gradient(180deg,#CFEAFB 0%,#E8F6FF 46%,#A8D98A 46%,#8CCB6E 100%)}.plz-ground::-webkit-scrollbar{display:none}.plz-p{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:0;width:84px;cursor:pointer;-webkit-tap-highlight-color:transparent}.plz-fig{display:block;animation:plzBob 2.4s ease-in-out infinite;animation-delay:var(--d,0s)}.plz-art{width:84px;height:84px}.plz-art .ha-in{width:100%;height:100%}.plz-n{max-width:84px;font-size:12px;font-weight:700;color:#1B2421;background:rgba(255,255,255,.85);border-radius:999px;padding:1px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plz-p.me .plz-n{background:#1F6F5C;color:#fff}.plz-p:active .plz-fig{transform:scale(.94)}@keyframes plzBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@media (prefers-reduced-motion:reduce){.plz-fig{animation:none}}
+.pz-tuft{display:none;position:absolute;left:4px;right:4px;top:50px;height:30px;pointer-events:none;background:no-repeat center bottom/100% 100%;transform-origin:50% 100%}
+.pz-ingrass .pz-tuft{display:block;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 30'%3E%3Cg fill='%233f9a3a' stroke='%231B2421' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M2 30Q4 16 0 6Q10 14 12 24Q12 10 18 0Q22 14 20 26Q24 14 32 8Q28 20 28 30Z'/%3E%3Cpath fill='%234aa843' d='M24 30Q26 14 22 4Q32 12 34 24Q36 8 42 0Q44 14 42 26Q48 12 54 6Q50 20 50 30Z'/%3E%3Cpath d='M42 30Q44 16 40 8Q50 14 52 24Q54 12 60 4Q62 16 60 26Q64 18 68 14Q66 24 66 30Z'/%3E%3C/g%3E%3C/svg%3E")}
+.pz-ingrass.pz-mv .pz-tuft{animation:pzRustle .32s ease-in-out infinite alternate}
+@keyframes pzRustle{from{transform:skewX(-7deg)}to{transform:skewX(7deg)}}
+.pz-ingrass .pz-sh,.pz-swim .pz-sh,.pz-swim.pz-me::before,.pz-ingrass.pz-me::before{display:none}
+.pz-swim .pz-bob{top:12px;clip-path:inset(-40px -20px 30% -20px)}
+.pz-swim .pz-tuft{display:block;top:50px;height:26px;left:-2px;right:-2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 26'%3E%3Cellipse cx='40' cy='13' rx='37' ry='10' fill='rgba(255,255,255,.35)' stroke='%23fff' stroke-width='2.4'/%3E%3Cellipse cx='40' cy='13' rx='24' ry='6' fill='none' stroke='rgba(255,255,255,.7)' stroke-width='1.6'/%3E%3C/svg%3E");animation:pzRipple 1.6s ease-in-out infinite}
+.pz-swim.pz-mv .pz-tuft{animation-duration:.6s}
+@keyframes pzRipple{0%,100%{transform:scale(.92,.9);opacity:.85}50%{transform:scale(1.06,1.08);opacity:1}}
+.pz-swim .pz-tag{top:70px}
+.pz-spot{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;pointer-events:none;animation:pzSpot 1.8s ease-in-out infinite}
+.pz-spot b{font-size:26px;line-height:1;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.25);border:2px solid #1B2421}
+.pz-spot span{margin-top:3px;font:800 12px/1.4 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.92);border-radius:999px;padding:0 8px;white-space:nowrap}
+@keyframes pzSpot{0%,100%{transform:translate(-50%,-100%)}50%{transform:translate(-50%,calc(-100% - 7px))}}
+.pz-says{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;max-height:34vh;overflow:auto;padding-top:6px;border-top:1px solid #E3E8E5}
+.pz-says>small{width:100%;font:700 11px/1.3 system-ui,sans-serif;color:#58646b}
+.pz-acts .pz-says button{width:auto;height:auto;flex-direction:column;align-items:flex-start;padding:5px 9px;border-radius:12px;font-size:13px;text-align:left}
+.pz-says button b{font:800 13px/1.25 system-ui,sans-serif;color:#1F6F5C}
+.pz-says button small{font:600 10px/1.25 system-ui,sans-serif;color:#58646b}
+.pz-acts{max-width:calc(100vw - 28px)}
+#plazaRoom.pz-encfx::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;animation:pzEncFx .7s ease-out forwards}
+@keyframes pzEncFx{from{background:rgba(10,20,16,0)}to{background:rgba(10,20,16,.5)}}
+#plazaRoom.pz-encfx .pz-stage{animation:pzShake .45s ease-in-out}
+@keyframes pzShake{0%,100%{transform:none}15%{transform:translate(-9px,3px)}30%{transform:translate(8px,-4px)}45%{transform:translate(-6px,-2px)}60%{transform:translate(5px,3px)}80%{transform:translate(-2px,0)}}
+.pz-enc,.pz-board{position:absolute;inset:0;z-index:6;display:grid;place-items:center;background:rgba(10,20,16,.55);padding:16px;animation:amFade .2s ease-out both}
+.pz-encin,.pz-boardin{width:min(340px,100%);background:var(--card,#fff);color:var(--ink,#1B2421);border-radius:22px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.pz-encwh{font:700 12px/1.3 system-ui,sans-serif;color:#58646b}
+.pz-encart{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;animation:pzEncIn .5s cubic-bezier(.3,1.6,.5,1) both;border:3px solid #1B2421}
+.pz-enc-grass .pz-encart{box-shadow:0 0 0 6px #8cc46e}
+.pz-enc-water .pz-encart{box-shadow:0 0 0 6px #62AEEA}
+.pz-encmon{width:120px;height:120px;object-fit:contain}
+@keyframes pzEncIn{from{transform:scale(.2) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+.pz-encin>b{font-size:18px}
+.pz-enccost{color:#1F6F5C;font-weight:700}
+.pz-boardt{font-size:18px}
+.pz-boardh{margin:0;font:700 15px/1.4 Georgia,serif}
+.pz-boardst{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.pz-boardst span{font:700 12px/1.6 system-ui,sans-serif;border-radius:999px;padding:0 9px;background:#EEF1EF;color:#58646b}
+.pz-boardst span.ok{background:#DDF3E6;color:#1F6F5C}
+.pz-radio{position:absolute;left:50%;transform:translateX(-50%);top:calc(64px + env(safe-area-inset-top,0px));z-index:4;display:flex;align-items:center;gap:8px;max-width:calc(100% - 150px);background:rgba(27,36,33,.78);color:#fff;border-radius:16px;padding:6px 8px 6px 12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.pz-radiot{display:flex;flex-direction:column;min-width:0}.pz-radiot small{font:600 10px/1.2 system-ui,sans-serif;opacity:.8}.pz-radiot b{font:700 12px/1.3 system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pz-radio button{flex:none;width:32px;height:32px;border:0;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;font-size:14px}
+#pzBack{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:34;border:0;border-radius:999px;padding:10px 16px;font:800 14px/1 system-ui,sans-serif;background:#1F6F5C;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media (prefers-reduced-motion:reduce){.pz-spot,.pz-tuft,.pz-encart,#plazaRoom.pz-encfx .pz-stage{animation:none!important}#plazaRoom.pz-encfx::after{animation-duration:.01s}}
+.pz-rchip{position:absolute;right:max(14px,env(safe-area-inset-right,0px));top:calc(118px + env(safe-area-inset-top,0px));z-index:3;border:0;border-radius:999px;padding:5px 10px;font:800 12px/1.2 system-ui,sans-serif;background:rgba(255,248,214,.95);color:#7a5a00;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.pz-enc-rare .pz-encart{box-shadow:0 0 0 6px #FFD84D,0 0 26px 8px rgba(255,216,77,.85)!important;animation:pzEncIn .5s cubic-bezier(.3,1.6,.5,1) both,pzRareGlow 1.6s ease-in-out .5s infinite}
+@keyframes pzRareGlow{50%{box-shadow:0 0 0 6px #FFE98A,0 0 40px 14px rgba(255,216,77,.95)}}
+.pz-raretag{font:800 13px/1.5 system-ui,sans-serif;color:#7a5a00;background:#FFF3C4;border-radius:999px;padding:0 10px}
+.pz-rtrait{color:#9a3d12;font-weight:700}
+.mon-seal.rare{box-shadow:0 0 0 4px #FFD84D,0 0 22px 6px rgba(255,216,77,.8)}
+.mon-seal.rare img,.mon-seal.rare svg{filter:drop-shadow(0 0 6px rgba(255,230,120,.95)) saturate(1.25)}
+.q-timer{position:absolute;right:12px;top:10px;font:800 15px/1 system-ui,sans-serif;color:#C0443B;background:#F7DEDB;border-radius:999px;padding:5px 10px;font-variant-numeric:tabular-nums}
+.qcard{position:relative}
+.pz-rbookin{max-height:84vh;width:min(380px,100%)}
+.pz-rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;overflow:auto;max-height:56vh;width:100%;padding:2px}
+.pz-rcell{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+.pz-rcell small{font:700 10px/1.25 system-ui,sans-serif;color:#58646b;text-align:center;overflow-wrap:anywhere}
+.pz-rpic{width:62px;height:62px;border-radius:14px;display:grid;place-items:center;overflow:hidden}
+.pz-rmon{width:56px;height:56px;object-fit:contain}
+.pz-rcell:not(.own) .pz-rmon{filter:brightness(0);opacity:.22}
+.pz-rcell.own .pz-rpic{box-shadow:0 0 0 3px #FFD84D,0 0 10px rgba(255,216,77,.8)}
+@media (prefers-reduced-motion:reduce){.pz-enc-rare .pz-encart{animation:none!important}}
 #plazaRoom{position:fixed;inset:0;z-index:35;background:#8cc46e}body.pz-open{overflow:hidden}#plazaRoom .pz-stage{position:absolute;inset:0;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}#plazaRoom .pz-world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}#plazaRoom .pz-ground{position:absolute;left:0;top:0}.pz-ent{position:absolute;left:0;top:0;width:76px;height:96px;margin:-90px 0 0 -38px;will-change:transform;cursor:pointer}.pz-sh{position:absolute;left:14px;right:14px;bottom:2px;height:12px;border-radius:50%;background:rgba(20,40,20,.28)}.pz-bob{position:absolute;left:0;top:0;width:76px;height:76px;transform-origin:50% 100%}.pz-fig{width:76px;height:76px}.pz-art{width:76px;height:76px}.pz-art .ha-in{width:100%;height:100%}.pz-tag{position:absolute;left:50%;top:76px;transform:translateX(-50%);white-space:nowrap;font:700 11px/1.5 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.92);border-radius:999px;padding:0 7px;pointer-events:none;display:flex;align-items:center;gap:2px}.pz-tag small{font-weight:600;opacity:.7}.pz-tt{display:inline-flex}.pz-off .pz-tag{background:rgba(225,229,232,.85);color:#58646b}.pz-off .pz-fig{filter:saturate(.75)}.pz-me .pz-tag{background:#1F6F5C;color:#fff}.pz-me::before{content:"";position:absolute;left:50%;bottom:-2px;width:58px;height:18px;margin-left:-29px;border-radius:50%;border:2px solid rgba(255,255,255,.8)}.pz-live .pz-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#2ECC71;margin-right:3px}.pz-pod .pz-tag{background:#FFF3C4}.pz-star .pz-bob::before{content:"";position:absolute;left:8px;right:8px;top:-6px;height:16px;border-radius:50%;border:3px solid #FFD84D;box-shadow:0 0 10px #FFE98A;animation:pzHalo 2s ease-in-out infinite}@keyframes pzHalo{50%{transform:translateY(-3px)}}.pz-bub{position:absolute;left:50%;bottom:100px;transform:translateX(-50%) scale(.6);opacity:0;transition:.18s;background:#fff;color:#1B2421;font:700 15px/1.3 system-ui,sans-serif;padding:4px 9px;border-radius:12px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.18);pointer-events:none}.pz-bub::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-top-color:#fff;border-bottom:0}.pz-bub.on{opacity:1;transform:translateX(-50%) scale(1)}.pz-hud{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px));pointer-events:none}.pz-pill{pointer-events:auto;border:0;background:rgba(255,255,255,.94);color:#1B2421;border-radius:999px;padding:8px 14px;font:700 14px/1.2 system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.12)}.pz-emo{position:absolute;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px}.pz-emo button{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:22px;box-shadow:0 2px 8px rgba(0,0,0,.15)}.pz-emo button:active{transform:scale(.9)}.pz-joy{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.6);pointer-events:none;display:none;z-index:2}.pz-joy i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.85)}.pz-hint{position:absolute;left:50%;bottom:calc(150px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:rgba(27,36,33,.72);color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap}.pz-zones{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:calc(56px + env(safe-area-inset-top,0px));width:min(380px,calc(100% - 24px));background:rgba(255,255,255,.97);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:3}.pz-zones>b{font:700 15px/1.3 system-ui,sans-serif;color:#1B2421;padding:0 4px 4px}.pz-map{position:relative;width:100%;aspect-ratio:1;border-radius:12px;background:#8cc46e url(assets/art/plaza/map.webp) center/cover}.pz-map button{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;border:0;background:rgba(255,255,255,.94);border-radius:12px;padding:4px 8px;color:#1B2421;box-shadow:0 2px 6px rgba(0,0,0,.2);font:700 12px/1.3 system-ui,sans-serif;white-space:nowrap}.pz-map button.on{background:#1F6F5C;color:#fff}.pz-map em{font-style:normal;font-size:11px;font-weight:600;opacity:.85}.pz-mapd{color:#5d6b66;font-size:12px;padding:0 4px}.pz-cnt{font-size:12px!important}#plazaRoom .pz-hud{gap:8px}.pz-ib{pointer-events:auto;width:42px;height:42px;border-radius:14px;border:0;background:rgba(27,36,33,.55);color:#fff;font:700 20px/1 system-ui,sans-serif;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}.pz-room{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:0;border:0;border-radius:14px;padding:5px 30px 5px 12px;position:relative;background:rgba(255,255,255,.88);color:#1B2421;box-shadow:0 2px 10px rgba(0,0,0,.15);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);text-align:left}.pz-room b{font:800 14px/1.3 system-ui,sans-serif}.pz-room small{font:600 11px/1.3 system-ui,sans-serif;color:#1F6F5C}.pz-room i{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-style:normal;font-size:11px;opacity:.6}.pz-minibox{position:absolute;right:max(10px,env(safe-area-inset-right,0px));top:calc(10px + env(safe-area-inset-top,0px));width:112px;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.9);cursor:pointer;z-index:2}.pz-mini{display:block;width:112px;height:84px}.pz-minibox span{position:absolute;left:4px;top:3px;font:700 9px/1.3 system-ui,sans-serif;color:#fff;background:rgba(27,36,33,.55);border-radius:6px;padding:0 4px}.pz-big{touch-action:none;-webkit-user-select:none;user-select:none;position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:64px;height:64px;border-radius:20px;border:0;background:rgba(27,36,33,.55);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 3px 12px rgba(0,0,0,.2);z-index:2;transition:transform .12s,background .2s}.pz-big b{font-size:22px;line-height:1}.pz-big span{font:700 11px/1.2 system-ui,sans-serif}.pz-big:active{transform:scale(.92)}.pz-intb{left:max(14px,env(safe-area-inset-left,0px))}.pz-actsb{right:max(14px,env(safe-area-inset-right,0px))}.pz-intb.on{background:rgba(31,111,92,.92);animation:pzPulse 1.4s ease-in-out infinite}@keyframes pzPulse{50%{box-shadow:0 0 0 6px rgba(46,204,113,.35)}}.pz-acts{position:absolute;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(5,46px);gap:6px;padding:8px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 6px 20px rgba(0,0,0,.22);z-index:3}.pz-acts[hidden]{display:none}.pz-acts button{width:46px;height:46px;border:0;border-radius:14px;background:#F2F5F3;font-size:22px;display:flex;flex-direction:column;align-items:center;justify-content:center}.pz-acts .pz-actb b{font-size:18px;line-height:1.1}.pz-acts .pz-actb small{font:700 9px/1.1 system-ui,sans-serif;color:#1B2421}.pz-acts button:active{transform:scale(.9)}.pz-joy.rest{display:block!important;opacity:.45;transition:left .18s,top .18s,opacity .18s}.pz-joy{transition:opacity .12s}.pz-tint{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(20,30,25,.28) 100%)}#plazaRoom.pz-eve .pz-tint{background:radial-gradient(ellipse at 50% 45%,rgba(255,170,80,.10) 40%,rgba(120,50,20,.35) 100%)}#plazaRoom.pz-night .pz-tint{background:radial-gradient(ellipse at 50% 45%,rgba(20,30,90,.28) 30%,rgba(5,10,40,.6) 100%)}.pz-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.pz-banner{position:absolute;left:50%;top:28%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;font:800 26px/1.2 system-ui,sans-serif;text-shadow:0 2px 10px rgba(0,0,0,.5);pointer-events:none;animation:pzBanner 2.6s ease forwards;white-space:nowrap}.pz-banner small{font:600 13px/1.3 system-ui,sans-serif}@keyframes pzBanner{0%{opacity:0;transform:translate(-50%,-30%)}15%,70%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(-50%,-60%)}}.pz-ent:not(.pz-me):not(.pz-pod) .pz-tag{background:none;color:#1B2421;text-shadow:0 0 2px #fff,0 0 3px #fff,0 0 5px rgba(255,255,255,.9);font-size:12px;font-weight:800}.pz-off:not(.pz-pod) .pz-tag{color:#4a5752}.pz-near .pz-sh{background:rgba(46,204,113,.45);box-shadow:0 0 0 3px rgba(255,255,255,.7)}.pz-dust{position:absolute;left:0;top:0;width:14px;height:8px;margin:-6px 0 0 -7px;border-radius:50%;background:rgba(255,255,255,.7);pointer-events:none;animation:pzDust .5s ease-out forwards}@keyframes pzDust{to{opacity:0;width:26px;height:12px;margin:-10px 0 0 -13px}}@media (prefers-reduced-motion:reduce){.pz-banner{animation-duration:.01s}.pz-intb.on{animation:none}}.pz-occ{position:absolute;pointer-events:none;user-select:none;-webkit-user-drag:none;transition:opacity .25s}.pz-occ.pz-see{opacity:.5}.pz-edge{position:absolute;left:0;top:0;margin:-14px 0 0 -40px;width:80px;display:flex;flex-direction:column;align-items:center;gap:1px;z-index:2;cursor:pointer}.pz-edge i{width:22px;height:22px;border-radius:50%;background:#2ECC71;box-shadow:0 2px 6px rgba(0,0,0,.25);position:relative}.pz-edge i::after{content:"";position:absolute;left:15px;top:6px;border:5px solid transparent;border-left:8px solid #1B7A46}.pz-edge span{max-width:80px;font:700 11px/1.4 system-ui,sans-serif;background:rgba(255,255,255,.92);color:#1B2421;border-radius:999px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pz-like{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.pz-likeN{font-weight:700}.pz-starTag{font-weight:700;color:#B8860B}.plz-go{align-self:stretch}@media (prefers-reduced-motion:reduce){.pz-bub{transition:none}.pz-star .pz-bob::before{animation:none}}
 .comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
@@ -1847,7 +1909,7 @@ const featLevel=k=>((S.feat||{})[k])||FEAT_DEF[k];
 function featOpen(k){ const l=featLevel(k); return !!DEV||l==="all"||(l==="testers"&&!!S.payTester); }
 function featLock(k){ if((k==="vault"||k==="style")&&!featOpen(k)) return k==="vault"?"lockVault":"lockStyle";   // the Rainbow Vault now only has gifting and the wishing well, so it is open to everyone by default
   const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
-function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); S.monInfo=null; S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
+function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); try{ if(ROOM&&ROOM.away){ if(S.battle&&S.battle.plz) S.battle=null; plazaClose(); } }catch(e){} S.monInfo=null; S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
 function render(){ try{ renderInner(); loginHint(); if(!PLANS_ON) setTimeout(loginPop,0); quizKeep(); if(S.view==="read"&&window.LS&&LS.on) setTimeout(lsHighlight,0); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
@@ -3063,7 +3125,7 @@ function advice(m){
 const BATTLE_RNG={roll:0.2, mCrit:0.12};
 const BOSS={wAdv:1.25, wDis:0.85, aAdv:0.8, aDis:1.2, eyeEvery:3, eye:1.3, rageAt:0.35, rage:1.25};   // wDis/aAdv/aDis: the boss's own element counts less (normal monsters 0.67 / 0.67 / 1.5)
 function simulate(m, spellOk){
-  const s=stats(), al=m.wild&&m.lv>=ALLY_LV?todayAlly():null;
+  const s0=stats(), s=m.pDefMul&&m.pDefMul!==1?{...s0, def:Math.round(s0.def*m.pDefMul)}:s0, al=m.wild&&m.lv>=ALLY_LV?todayAlly():null;
   let php=s.hp, mhp=m.hp, ahp=al?al.hp:0; const ev=[]; let first=true, mt=0, raged=false;
   const awm=al?elMult(al.wEl,m.el):1, aam=al?elMult(m.el,al.aEl):1;
   const roll=()=>1-BATTLE_RNG.roll+Math.random()*BATTLE_RNG.roll*2, mcrit=()=>Math.random()<BATTLE_RNG.mCrit;
@@ -3103,15 +3165,18 @@ function stamina(){ const g=game(); const st=g.stam||(g.stam={v:STAM_MAX,t:Date.
   return st; }
 function stamNextMin(){ const st=stamina(); return st.v>=STAM_MAX?0:Math.max(1,Math.ceil((st.t+STAM_HOURS*3600e3-Date.now())/60000)); }
 function wildGoldFactor(id){ const g=game(), d=g.wildDay&&g.wildDay.date===today()?g.wildDay:{n:{}}; return Math.max(0.3,Math.pow(0.7,d.n[id]||0)); }
-function startBattle(mid){
-  const g=game(), m=MONS[mid]; if(!m) return;
-  if(m.wild){ if(stamina().v<1) return toast(T("noStam",{m:stamNextMin()})); }
+function startBattle(mid, opt){
+  const g=game(), m=MONS[mid]; if(!m) return; opt=opt||{};
+  if(m.wild){ if(stamina().v<1&&!opt.free) return toast(T("noStam",{m:stamNextMin()})); }
   else if(g.tickets<1) return toast(T("noTicket"));
-  S.battle={m:foeOf(m), stage:"spell"};
+  S.battle={m:foeOf(m), stage:"spell", plz:!!opt.plz, free:!!opt.free};
   // spell question needs at least one word in the dictionary
   if(!S.words.size) S.battle.stage="ready";
   else { const w=weightedPick([...S.words.values()],1)[0]; S.battle.q=makeQuestion(w); }
   S.view="battle"; render(); window.scrollTo(0,0);
+  clearInterval(S.qtimer); if(S.battle.stage==="spell"&&S.battle.m.qSec){ const B=S.battle; B.qEnd=Date.now()+B.m.qSec*1000;
+    S.qtimer=setInterval(()=>{ if(S.battle!==B||B.stage!=="spell"||B.picked!=null){ clearInterval(S.qtimer); return; } const left=Math.ceil((B.qEnd-Date.now())/1000), el=document.getElementById("qTime");
+      if(left<=0){ clearInterval(S.qtimer); B.picked=-1; B.spellOk=false; B.qOut=true; if(typeof sfx==="function") sfx("spellNo"); render(); } else if(el) el.textContent="⏱ "+left; },200); }
 }
 function castSpell(i){
   const B=S.battle; if(!B||B.stage!=="spell"||B.picked!=null) return;
@@ -3122,7 +3187,8 @@ function castSpell(i){
 }
 function fight(){
   const B=S.battle, g=game(); if(!B||B.stage==="fight"||B.stage==="end"||B.started) return;   // never settle the same battle twice
-  if(B.m.wild){ const st=stamina(); if(st.v<1){ toast(T("noStam",{m:stamNextMin()})); return; } B.started=true; if(st.v>=STAM_MAX) st.t=Date.now(); st.v-=1; }
+  if(B.m.wild&&B.free&&plzFreeLeft()>0){ B.started=true; plzFreeUse(); }   // 廣場 grass / pond: the first fights of the day cost no stamina
+  else if(B.m.wild){ const st=stamina(); if(st.v<1){ toast(T("noStam",{m:stamNextMin()})); return; } B.started=true; B.free=false; if(st.v>=STAM_MAX) st.t=Date.now(); st.v-=1; }
   else { if(g.tickets<1){ toast(T("noTicket")); return; } B.started=true; g.tickets-=1; }
   g.battles=(g.battles||0)+1;
   const res=simulate(B.m, !!B.spellOk);
@@ -3130,9 +3196,10 @@ function fight(){
   if(res.win){
     let gold=B.m.gold;
     if(B.m.wild){ gold=Math.round(gold*wildGoldFactor(B.m.id)); if(!g.wildDay||g.wildDay.date!==today()) g.wildDay={date:today(),n:{}}; g.wildDay.n[B.m.id]=(g.wildDay.n[B.m.id]||0)+1; }
-    restCheck(); const rest=(g.rest||0)>0; B.exp=B.m.exp*(rest?REST.mult:1); B.rest=rest; if(rest) g.rest--;
+    restCheck(); const rest=!B.free&&(g.rest||0)>0; B.exp=B.free?0:B.m.exp*(rest?REST.mult:1); B.rest=rest; if(rest) g.rest--;   // 廣場 free fights: gold and drops only, so level growth stays as tuned
     B.gold=gold; const before=g.lv; g.exp+=B.exp; g.gold+=gold; g.wins[B.m.id]=(g.wins[B.m.id]||0)+1;
-    if(B.m.wild&&Math.random()<GEM.wildDrop){ const t=tierOfLv(B.m.lv); addShard(B.m.el,t,1); B.shard={el:B.m.el,t}; }
+    if(B.m.rare){ const k=plzRareKey(B.m), got=plzRareGot(); if(!got[k]){ got[k]=today(); B.rareNew=true; } }
+    if(B.m.wild&&Math.random()<(B.m.rare?PLZ_RARE.drop:GEM.wildDrop)){ const t=tierOfLv(B.m.lv); addShard(B.m.el,t,1); B.shard={el:B.m.el,t}; }
     const c=conquered(); if(!B.m.wild&&!c[B.m.id]){ c[B.m.id]=today(); B.conquered=true; if(g.scar) delete g.scar[B.m.id]; }
     while(g.lv<LV_MAX&&g.exp>=expNeed(g.lv)){ g.exp-=expNeed(g.lv); g.lv++; } if(g.lv>=LV_MAX) g.exp=Math.min(g.exp,expNeed(LV_MAX));
     B.lvUp=g.lv-before;
@@ -3151,7 +3218,7 @@ function battleTimer(){
 function battleFast(){ if(S.fastMem!=null) return S.fastMem; try{ return localStorage.getItem("che-pro-fast")==="1"; }catch(e){ return false; } }
 function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
 function monArt(m, hit){
-  return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}">${monSvg(m,"ms-art")}<span class="ms-badge">${elBadge(m.el)}</span></div>`;
+  return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}${m.rare?" rare":""}">${monSvg(m,"ms-art")}<span class="ms-badge">${elBadge(m.el)}</span></div>`;
 }
 function hpBar(cur,max,cls){ return `<div class="hp ${cls}"><i style="width:${Math.max(0,cur/max*100)}%"></i><span>${cur} / ${max}</span></div>`; }
 /* nickname colour grows with level: grey → white → green → blue → purple → orange → red → rainbow (Lv 20+) */
@@ -3191,20 +3258,21 @@ function viewBattle(){
   const m=B.m, s=stats(), g=game();
   if(B.stage==="spell"||B.stage==="ready"){
     const q=B.q, p=B.picked;
-    const spell = B.stage==="spell" ? `<div class="card qcard"><div class="eyebrow">${T("spell")}</div><div class="muted" style="font-size:14px">${T("spellSub")}</div>
+    const spell = B.stage==="spell" ? `<div class="card qcard">${m.qSec&&p==null?`<div class="q-timer" id="qTime">⏱ ${Math.max(1,Math.ceil(((B.qEnd||Date.now()+m.qSec*1000)-Date.now())/1000))}</div>`:""}<div class="eyebrow">${T("spell")}</div><div class="muted" style="font-size:14px">${T("spellSub")}</div>
       ${q.type==="cloze"?`<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"),"<u></u>")}</div>`:`<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`}
       <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(p!=null){ if(o.ok) c+=" right"; else if(i===p) c+=" wrong"; } return `<button class="${c}" data-spell="${i}" ${p!=null?"disabled":""}>${esc(o.label)}</button>`; }).join("")}</div>
-      ${p!=null?`<div class="fb ${B.spellOk?"ok":"no"}">${B.spellOk?T("spellOk"):T("spellFail",{w:esc(q.w.word),m:esc(mean(q.w))})}</div>`:""}</div>` : "";
+      ${p!=null?`<div class="fb ${B.spellOk?"ok":"no"}">${B.qOut?T("plzQOut")+" ":""}${B.spellOk?T("spellOk"):T("spellFail",{w:esc(q.w.word),m:esc(mean(q.w))})}</div>`:""}</div>` : "";
     return `<div class="view">
       <button class="btn ghost" data-act="advback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("retreat")}</button>
       <div class="vs">${monArt(m)}<div><div class="eyebrow">${esc(townName(m))} · Lv ${m.lv} · ${elBadge(m.el)} ${T("elAttr",{e:elName(m.el)})}</div><h2 style="font-size:24px">${esc(monName(m))}</h2><p class="lore">${esc(m.lore)}</p></div></div>
       <div class="row">${advice(m)||`<span class="adv">${T("advNone")}</span>`}</div>
+      ${m.rare?`<p class="sm-t pz-rtrait">✨ ${T("plzRareT")} · ${T("plzRareTw_"+m.el)}</p>`:""}
       ${m.scar?`<p class="sm-t scar-tip">🩹 ${T("scarLine",{m:esc(monName(m)),p:Math.round(m.scar*100)})}</p>`:""}
       ${m.wild&&m.lv>=ALLY_LV&&todayAlly()?(()=>{ const A=todayAlly(), wi=A.wId&&ITEMS[A.wId], ai=A.aId&&ITEMS[A.aId]; return `<div class="card ally-pre">🤝 ${T("alWith",{n:esc(A.n)})} · Lv ${A.lv}<div class="sm-t muted">${elBadge(A.wEl)} ${wi?esc(itemName(wi)):""} · ${elBadge(A.aEl)} ${ai?esc(itemName(ai)):""}</div></div>`; })():g.lv>=ALLY_LV?`<div class="card ally-pre muted">🤝 ${m.wild?T("alNoLow",{n:ALLY_LV}):T("alNoTown")}</div>`:""}
       ${m.boss?`<div class="card boss-rules"><b>${T("bossTitle")}</b><p>🔥 ${T("bossShield")}</p><p>👁 ${T("bossEye",{n:BOSS.eyeEvery})}</p><p>💢 ${T("bossRage",{p:Math.round(BOSS.rageAt*100)})}</p><p class="muted sm-t">${T("bossTip")}</p></div>`:""}
       <div class="stats"><div class="stat"><b>${s.hp}</b><span>${T("yourHp")}</span></div><div class="stat"><b>${s.atk}</b><span>${T("atk")} ${elBadge(s.wEl)}</span></div><div class="stat"><b>${s.def}</b><span>${T("def")} ${elBadge(s.aEl)}</span></div></div>
       ${spell}
-      <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?T("skipSpell"):T(m.wild?"fightWild":"fight",{s:stamina().v,mx:STAM_MAX})}</button>
+      <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?T("skipSpell"):B.free&&plzFreeLeft()>0?T("plzFightFree2",{n:plzFreeLeft(),t:PLZ_ENC.free}):T(m.wild?"fightWild":"fight",{s:stamina().v,mx:STAM_MAX})}</button>
     </div>`;
   }
   const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp};
@@ -3212,13 +3280,13 @@ function viewBattle(){
   const log=ev.slice(0,upto).map(e=>e.who==="a"?`<li class="lp">🤝 ${T("logAlly",{a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="m"&&e.tgt==="a"?`<li class="lm">${T("logMonAlly",{m:esc(monName(m)),a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${e.rage?`<b>${T("bossRageLog",{m:esc(monName(m))})}</b> `:""}${e.crit?T("logMonCrit"):""}${e.eye?T("bossEyeLog",{m:esc(monName(m)),n:e.dmg}):T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
-    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div><div class="rw-row"><span>${T("exp")}${B.rest?` <small class="chip rest">😴 ×${REST.mult}</small>`:""}</span><b>+${B.exp||m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.shard?`<div class="rw-row lvup"><span>💎 ${esc(T("pShard",{e:elName(B.shard.el),t:TIER[B.shard.t].n,n:1}))}</span></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
+    ? `<div class="reward win"><div class="eyebrow">${T("win")}</div>${B.free?`<div class="rw-row"><span>${T("exp")}</span><b>+0</b><small class="muted"> ${T("plzNoExp")}</small></div>`:""}<div class="rw-row"${B.free?" hidden":""}><span>${T("exp")}${B.rest?` <small class="chip rest">😴 ×${REST.mult}</small>`:""}</span><b>+${B.exp||m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.shard?`<div class="rw-row lvup"><span>💎 ${esc(T("pShard",{e:elName(B.shard.el),t:TIER[B.shard.t].n,n:1}))}</span></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
     : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p>${B.scarNew?`<p class="sm-t" style="margin:6px 0 0">🩹 ${T("scarNew",{m:esc(monName(m)),p:B.scarNew})}</p>`:""}</div>`) : "";
   return `<div class="view">
     ${arenaScene(B, last, cur)}
     ${end}
     <ul class="blog">${log}</ul>
-    ${B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${(m.wild?stamina().v>0:g.tickets>0)?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<div class="row"><button class="btn ghost" data-act="bspeed" aria-pressed="${battleFast()}">⏩ ${battleFast()?T("spd1"):T("spd2")}</button><button class="btn ghost" data-act="skip">${T("skipAnim")}</button></div>`}
+    ${B.stage==="end"&&B.plz?`<div class="row"><button class="btn" data-act="plzback">🏞️ ${T("plzBack2")}</button></div>`:B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${(m.wild?stamina().v>0:g.tickets>0)?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<div class="row"><button class="btn ghost" data-act="bspeed" aria-pressed="${battleFast()}">⏩ ${battleFast()?T("spd1"):T("spd2")}</button><button class="btn ghost" data-act="skip">${T("skipAnim")}</button></div>`}
   </div>`;
 }
 
@@ -3810,7 +3878,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.47";
+const APP_VERSION="2026.11.48";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4342,6 +4410,8 @@ document.addEventListener("click", e=>{
   if(a==="tax") return collectTax();
   if(a==="bspeed"){ const f=!battleFast(); try{ localStorage.setItem("che-pro-fast", f?"1":"0"); }catch(e){} S.fastMem=f; if(S.battle&&S.battle.stage==="fight") battleTimer(); renderBattleOnly(); return; }
   if(a==="skip"){ if(S.battle&&S.battle.stage==="fight") battleEndSfx(); if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
+  if(a==="plzback") return plzReturn();
+  if(a==="advback"&&S.battle&&S.battle.plz) return plzReturn();
   if(a==="advback"){ clearInterval(S.btimer); S.battle=null; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
   if(a==="nodel"){ S.confirmDel=null; return render(); }
   if(a==="home"){ S.tab="today"; S.view="today"; S.quiz=null; render(); window.scrollTo(0,0); return; }
@@ -8229,9 +8299,15 @@ function plzBlur(a,w,h,r){ const t=new Float32Array(w*h), f=new Float32Array(w*h
   for(let y=0;y<h;y++) for(let x=0;x<w;x++){ let s=0; for(let i=-r;i<=r;i++){ const yy=y+i; s+=yy<0||yy>=h?0:t[yy*w+x]; } f[y*w+x]=s*k; }
   return f; }
 function plzMaskLoad(zone){ if(PLZ_MASK[zone]) return Promise.resolve(PLZ_MASK[zone]);
-  return new Promise(ok=>{ const im=new Image(); im.onload=()=>{ try{ const c=document.createElement("canvas"); c.width=im.width; c.height=im.height; const x=c.getContext("2d"); x.drawImage(im,0,0);
-      const d=x.getImageData(0,0,im.width,im.height).data, a=new Uint8Array(im.width*im.height); for(let i=0;i<a.length;i++) a[i]=d[i*4]>127?1:0; PLZ_MASK[zone]={w:im.width,h:im.height,a,f:plzBlur(a,im.width,im.height,3)}; }catch(e){} ok(PLZ_MASK[zone]); };
+  return new Promise(ok=>{ const im=new Image(); im.onload=async()=>{ try{ const c=document.createElement("canvas"); c.width=im.width; c.height=im.height; const x=c.getContext("2d"); x.drawImage(im,0,0);
+      const d=x.getImageData(0,0,im.width,im.height).data, a=new Uint8Array(im.width*im.height); for(let i=0;i<a.length;i++) a[i]=d[i*4]>127?1:0;
+      const sw=zone==="pond"?await plzSwimLoad(im.width,im.height):null; if(sw) for(let i=0;i<a.length;i++) if(sw[i]) a[i]=1;   // the lake is walkable too (you swim in it)
+      PLZ_MASK[zone]={w:im.width,h:im.height,a,f:plzBlur(a,im.width,im.height,3),sw}; }catch(e){} ok(PLZ_MASK[zone]); };
     im.onerror=()=>ok(null); im.src=`assets/art/plaza/${zone}-walk.png`; }); }
+// pond-swim.png (same grid as the walk mask): 255 = water you swim in, 128 = the stone rim between path and water
+function plzSwimLoad(w,h){ return new Promise(ok=>{ const im=new Image(); im.onload=()=>{ try{ const c=document.createElement("canvas"); c.width=w; c.height=h; const x=c.getContext("2d"); x.drawImage(im,0,0,w,h);
+      const d=x.getImageData(0,0,w,h).data, a=new Uint8Array(w*h); for(let i=0;i<a.length;i++) a[i]=d[i*4]>200?2:d[i*4]>60?1:0; ok(a); }catch(e){ ok(null); } };
+    im.onerror=()=>ok(null); im.src="assets/art/plaza/pond-swim.png"; }); }
 function plzBlocked(x,y){ const zone=ROOM?ROOM.zone:"fountain", M=PLZ_MASK[zone];
   if(M){ const i=Math.floor(x/PLZ_MC), j=Math.floor(y/PLZ_MC); return i<0||j<0||i>=M.w||j>=M.h||!M.a[j*M.w+i]; }
   const g=PLZ_GEO[zone], u=x/PLZ_U, v=y/PLZ_U; if(x<30||x>PLZ_W-30||y<60||y>PLZ_H-6) return true;
@@ -8272,11 +8348,11 @@ function plzGround(cv,zone){ const D=Math.min(2,devicePixelRatio||1), W=PLZ_W, H
   const podium=()=>{ if(zone!=="fountain") return; const step=(x,y,w,h,col)=>{ c.fillStyle="rgba(60,50,30,.22)"; c.fillRect(x-w/2+4,y+4,w,h); c.fillStyle=col; c.fillRect(x-w/2,y-h,w,h*2); c.strokeStyle="#7a6a45"; c.lineWidth=2; c.strokeRect(x-w/2,y-h,w,h*2); };
     step(664,189,100,18,"#d9dde2"); step(872,192,100,14,"#e2b07e"); step(768,174,104,26,"#f3cf55");
     c.fillStyle="#5b4a28"; c.font="bold 16px system-ui"; c.textAlign="center"; c.fillText("1",768,186); c.fillText("2",664,196); c.fillText("3",872,198); };
-  const im=new Image(); im.decoding="async"; im.onload=()=>{ c.drawImage(im,0,0,W,H); podium(); }; im.onerror=podium; im.src=`assets/art/plaza/${zone}.webp`; }
+  const im=new Image(); im.decoding="async"; im.onload=()=>{ c.drawImage(im,0,0,W,H); podium(); if(zone==="lawn") plzGrassDraw(c); }; im.onerror=()=>{ podium(); if(zone==="lawn") plzGrassDraw(c); }; im.src=`assets/art/plaza/${zone}.webp`; }
 // one person on the map; kind: me | live | off | pod
 function plzEnt(p,kind){ const R=ROOM, e=document.createElement("div"); e.className="pz-ent pz-"+kind+(R.star&&R.star.id===p.id?" pz-star":"");
   const ex=lookExtra(p.id), tier=p.s!=null?p.s:ex.t;
-  e.innerHTML=`<div class="pz-sh"></div><div class="pz-bob"><div class="pz-fig">${lookArt(p.look,"pz-art")}</div></div><div class="pz-tag">${kind==="pod"?(PLZ_PODIUM[p.rank]||{}).m+" ":""}${tier?`<span class="pz-tt">${sbArt(tier,14,false)}</span>`:""}${flagOf(p.flag)?flagOf(p.flag)+" ":""}${esc(kind==="me"?T("plzMe"):p.name||"?")}${kind==="off"?` <small>${T("plzOff")}</small>`:""}</div><div class="pz-bub"></div>`;
+  e.innerHTML=`<div class="pz-sh"></div><div class="pz-bob"><div class="pz-fig">${lookArt(p.look,"pz-art")}</div></div><div class="pz-tuft"></div><div class="pz-tag">${kind==="pod"?(PLZ_PODIUM[p.rank]||{}).m+" ":""}${tier?`<span class="pz-tt">${sbArt(tier,14,false)}</span>`:""}${flagOf(p.flag)?flagOf(p.flag)+" ":""}${esc(kind==="me"?T("plzMe"):p.name||"?")}${kind==="off"?` <small>${T("plzOff")}</small>`:""}</div><div class="pz-bub"></div>`;
   R.world.appendChild(e); const [x,y]=p.x!=null?[p.x,p.y]:plzSpot();
   const o={...p, kind, el:e, bob:e.querySelector(".pz-bob"), fig:e.querySelector(".pz-fig"), bub:e.querySelector(".pz-bub"), x, y, tx:x, ty:y, vx:0, vy:0, face:p.d||1, phase:Math.random()*6, wait:Math.random()*2, sp:plzRnd(45,75), bubT:0, said:0};
   e.addEventListener("click",ev=>{ if(R.dragged) return; ev.stopPropagation(); plzCard(o); });
@@ -8298,20 +8374,21 @@ async function plazaOpen(zone){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD.fb
   box.innerHTML=`<div class="pz-stage"><div class="pz-world"><canvas class="pz-ground"></canvas></div></div>
     <div class="pz-tint"></div><canvas class="pz-fx"></canvas>
     <div class="pz-hud"><button class="pz-ib" data-pz="close" aria-label="${T("plzBack")}">←</button><button class="pz-room" data-pz="zones"><b>${PLZ_ZONES.find(z=>z.k===zone).ic} ${T("plzZ_"+zone)}</b><small id="pzCount">${T("loading")}</small><i>▾</i></button></div>
-    <div class="pz-minibox" data-pz="zones"><canvas class="pz-mini"></canvas><span>${T("plzMap")}</span></div><div class="pz-zones" hidden></div>
-    <div class="pz-acts" hidden>${PLZ_EMO.map(x=>`<button data-pz="emo" data-k="${x}">${x}</button>`).join("")}${PLZ_ACTS.map(a=>`<button data-pz="act" data-k="${a.k}" class="pz-actb"><b>${a.ic}</b><small>${T("plzA_"+a.k)}</small></button>`).join("")}</div>
+    <div class="pz-minibox" data-pz="zones"><canvas class="pz-mini"></canvas><span>${T("plzMap")}</span></div>${zone==="lawn"||zone==="pond"?`<button class="pz-rchip" data-pz="rbook">✨ ${Object.keys(plzRareGot()).length}/${plzRareAll().length}</button>`:""}<div class="pz-zones" hidden></div>
+    <div class="pz-acts" hidden>${PLZ_EMO.map(x=>`<button data-pz="emo" data-k="${x}">${x}</button>`).join("")}${PLZ_ACTS.map(a=>`<button data-pz="act" data-k="${a.k}" class="pz-actb"><b>${a.ic}</b><small>${T("plzA_"+a.k)}</small></button>`).join("")}<div class="pz-says"><small>${T("plzSayT")}</small>${PLZ_SAY.map((x,i)=>`<button data-pz="say" data-k="${i}"><b>${esc(x[0])}</b><small>${esc(plzSayMean(x))}</small></button>`).join("")}</div></div>
     <button class="pz-big pz-intb" data-pz="int"><b>👋</b><span>${T("plzInt")}</span></button><button class="pz-big pz-actsb" data-pz="acts"><b>✨</b><span>${T("plzAct")}</span></button>
-    <div class="pz-joy rest"><i></i></div><div class="pz-hint">${T("plzHint")}</div><div class="pz-banner">${PLZ_ZONES.find(z=>z.k===zone).ic} ${T("plzZ_"+zone)}<small>${T("plzZd_"+zone)}</small></div>`;
+    <div class="pz-joy rest"><i></i></div><div class="pz-hint">${T("plzHint")}</div><div class="pz-banner">${PLZ_ZONES.find(z=>z.k===zone).ic} ${T("plzZ_"+zone)}<small>${T("plzZd2_"+zone)}</small></div>`;
   document.body.appendChild(box); document.body.classList.add("pz-open");
   const stage=box.querySelector(".pz-stage"), world=box.querySelector(".pz-world"); world.style.width=PLZ_W+"px"; world.style.height=PLZ_H+"px"; plzGround(box.querySelector(".pz-ground"),zone);
   ROOM={zone, box, stage, world, ents:new Map(), live:new Map(), rows:(PLAZA.rows||[]), top:PLAZA.top||[], star:PLAZA.star||null, keys:{}, J:null, last:performance.now(), cam:null, sendAt:0, sent:"", db:null, ch:0};
+  for(const sp of PLZ_SPOTS[zone]||[]){ const e=document.createElement("div"); e.className="pz-spot"; e.style.cssText=`left:${sp.x}px;top:${sp.y-sp.h}px;z-index:${sp.y+400}`; e.innerHTML=`<b>${sp.ic}</b><span>${T("plzSpot_"+sp.k)}</span>`; world.appendChild(e); }
   for(const q of PLZ_OCC[zone]||[]){ const im=document.createElement("img"); im.className="pz-occ"; im.alt=""; im.src=`assets/art/plaza/${q.f}.webp`; im.style.cssText=`left:${q.x}px;top:${q.y}px;width:${q.w}px;height:${q.h}px;z-index:${q.z}`; world.appendChild(im); (ROOM.occ=ROOM.occ||[]).push({el:im,q}); }
   plzMaskLoad(zone).then(()=>{ const R=ROOM; if(!R||R.zone!==zone) return; for(const o of R.ents.values()) if(o.kind!=="live"&&o.kind!=="pod"&&plzBlocked(o.x,o.y)){ [o.x,o.y]=plzFree(o.x,o.y); o.tx=o.x; o.ty=o.y; } });
   const me=plzMeRow(), sp=PLZ_GEO[zone].sp; let sx=sp[0]*PLZ_U+plzRnd(-60,60), sy=sp[1]*PLZ_U; if(plzBlocked(sx,sy)) sx=sp[0]*PLZ_U; ROOM.me=plzEnt({...me,x:sx,y:sy},"me"); ROOM.ents.set(me.id,ROOM.me); ROOM.cam={x:sx,y:sy};
   plzRebuild(); plzInput(); ROOM.raf=requestAnimationFrame(plzStep);
   plazaLoad(true).then(()=>{ if(!ROOM) return; ROOM.rows=PLAZA.rows||[]; ROOM.top=PLAZA.top||[]; ROOM.star=PLAZA.star||null; plzRebuild(); });
   plzJoin(); }
-function plazaClose(){ const R=ROOM; if(!R) return; ROOM=null; cancelAnimationFrame(R.raf); removeEventListener("keydown",R.kd); removeEventListener("keyup",R.ku);
+function plazaClose(){ const R=ROOM; if(!R) return; ROOM=null; cancelAnimationFrame(R.raf); clearInterval(R.hb); plzRadioStop(R); plzBackPill(false); if(R.away&&S.battle&&S.battle.plz) S.battle.plz=false; removeEventListener("keydown",R.kd); removeEventListener("keyup",R.ku);
   try{ if(R.unsub) R.unsub.forEach(f=>f()); if(R.myRef) R.dbM.remove(R.myRef); }catch(e){} R.box.remove(); document.body.classList.remove("pz-open"); }
 // live part: Realtime Database (loaded only when the room opens)
 async function plzJoin(){ const R=ROOM; try{
@@ -8324,7 +8401,7 @@ async function plzJoin(){ const R=ROOM; try{
         const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
         const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; if(v.b[0]==="@") plzDo(o,v.b.slice(1)); else plzSay(o,v.b); } } };
     R.unsub=[dbM.onChildAdded(room,up), dbM.onChildChanged(room,up), dbM.onChildRemoved(room,sn=>{ if(!ROOM) return; R.live.delete(sn.key); const o=R.ents.get(sn.key); if(o&&o.kind==="live"){ o.el.remove(); if(o.edge) o.edge.remove(); R.ents.delete(sn.key); } plzRebuild(); })];
-    R.hb=setInterval(()=>{ if(ROOM===R) plzSend(true); else clearInterval(R.hb); },15e3);
+    R.hb=setInterval(()=>{ if(ROOM!==R) return clearInterval(R.hb); if(R.away&&Date.now()-R.away.at>15*60e3) return plazaClose(); plzSend(true); },15e3);
     plzRebuild();
   }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
 async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
@@ -8348,18 +8425,29 @@ function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"
     if(a==="zone"){ const z=b.dataset.k; if(z!==R.zone) plazaOpen(z); else R.box.querySelector(".pz-zones").hidden=true; return; }
     if(a==="acts"){ const p=R.box.querySelector(".pz-acts"); p.hidden=!p.hidden; return; }
     if(a==="int"){ const go=()=>setTimeout(()=>{ if(ROOM===R) plzInteract(); },90); b.addEventListener("pointerup",go,{once:true}); return; }   // open the card after the tap ends, so the same tap does not close it
-    if(a==="act"){ R.box.querySelector(".pz-acts").hidden=true; plzDo(R.me,b.dataset.k); plzSend(false,{b:"@"+b.dataset.k, bt:Date.now()}); return; }
-    if(a==="emo"){ R.box.querySelector(".pz-acts").hidden=true; plzSay(R.me,b.dataset.k); plzSend(false,{b:b.dataset.k, bt:Date.now()}); } }); }
+    const hideActs=()=>setTimeout(()=>{ R.box.querySelector(".pz-acts").hidden=true; },300);
+    if(a==="act"){ hideActs(); plzDo(R.me,b.dataset.k); plzSend(false,{b:"@"+b.dataset.k, bt:Date.now()}); return; }
+    if(a==="emo"){ hideActs(); plzSay(R.me,b.dataset.k); plzSend(false,{b:b.dataset.k, bt:Date.now()}); }
+    if(a==="say"){ const x=PLZ_SAY[+b.dataset.k]; if(!x) return; hideActs(); plzSay(R.me,x[0]); plzSend(false,{b:x[0], bt:Date.now()}); }
+    if(a==="encgo") return plzFight();
+    if(a==="encrun") return plzEncEnd();
+    if(a==="boardx"||a==="boardgo"||a==="boardlg"){ const el=R.box.querySelector(".pz-board"); if(el) el.remove(); if(a==="boardgo"){ plzAway("📖"); S.tab="today"; S.view="today"; render(); window.scrollTo(0,0); } if(a==="boardlg") loginPop(true); return; }
+    if(a==="radio"){ return plzRadio(); }
+    if(a==="rbook"){ return plzRareBook(); }
+    if(a==="radiox"){ return plzRadioStop(); } }); }
 // actions (jump, dance, sit, spin): played on the figure; a live player's action arrives as b:"@name"
 function plzDo(o,k){ const a=PLZ_ACTS.find(x=>x.k===k); if(!a||!o) return; o.act=k; o.actT=a.t; o.actD=a.t; }
 // 互動: the nearest person within reach turns to you, you wave, and their card opens
 function plzNear(){ const R=ROOM, m=R.me; let best=null, bd=150; for(const o of R.ents.values()){ if(o===m) continue; const d=Math.hypot(o.x-m.x,(o.y-m.y)*1.3); if(d<bd){ bd=d; best=o; } } return best; }
-function plzInteract(){ const R=ROOM, o=plzNear(); if(!o) return toast(T("plzNone")); const m=R.me;
+function plzInteract(){ const R=ROOM; if(R.enc) return; const sp=plzSpotNear(); if(sp&&(!R.nearO||Math.hypot(R.nearO.x-R.me.x,R.nearO.y-R.me.y)>90)) return plzSpotGo(sp);
+  const o=plzNear(); if(!o) return toast(T("plzNone")); const m=R.me;
   m.face=o.x<m.x?-1:1; if(o.kind!=="live") o.face=m.x<o.x?-1:1; plzSay(m,"👋"); plzSend(false,{b:"👋", bt:Date.now()}); if(o.kind==="off") setTimeout(()=>{ if(ROOM===R) plzSay(o,"😊"); },500); plzCard(o); }
 function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R.last)/1000); R.last=now; const K=R.keys, m=R.me;
   let ix=(K.arrowright||K.d?1:0)-(K.arrowleft||K.a?1:0), iy=(K.arrowdown||K.s?1:0)-(K.arrowup||K.w?1:0);
-  if(R.J&&R.J.moved){ ix=R.J.dx; iy=R.J.dy; } const mg=Math.hypot(ix,iy); if(mg>1){ ix/=mg; iy/=mg; }
-  m.vx=ix*190; m.vy=iy*190; m.mv=mg>.05; const ox=m.x, oy=m.y; plzMove(m,m.vx,m.vy,dt);
+  if(R.J&&R.J.moved){ ix=R.J.dx; iy=R.J.dy; } if(R.enc){ ix=iy=0; } const mg=Math.hypot(ix,iy); if(mg>1){ ix/=mg; iy/=mg; }
+  const spd=m.terr==="water"?130:190; m.vx=ix*spd; m.vy=iy*spd; m.mv=mg>.05; const ox=m.x, oy=m.y; plzMove(m,m.vx,m.vy,dt);
+  const walked=Math.hypot(m.x-ox,m.y-oy), terr=plzTerr(m.x,m.y);
+  if(terr&&walked>0&&!R.enc){ R.encD=(R.encD||0)+walked; if(R.encD>=PLZ_ENC.step){ R.encD=0; if(now/1000>(R.encCool||0)&&Math.random()<PLZ_ENC.p) plzEncounter(terr); } }
   if(Math.abs(m.vx)>4) m.face=m.vx<0?-1:1; if(m.mv||ox!==m.x||oy!==m.y) plzSend(false); else if(R.sent&&R.sent.endsWith(",1")) plzSend(false);
   for(const o of R.ents.values()){ if(o===m) continue;
     if(o.kind==="live"){ const dx=o.tx-o.x, dy=o.ty-o.y, d=Math.hypot(dx,dy); if(d>300){ o.x=o.tx; o.y=o.ty; } else if(d>1){ const k=Math.min(1,dt*8); o.x+=dx*k; o.y+=dy*k; } o.vx=d>2?dx:0; o.vy=d>2?dy:0; }
@@ -8377,6 +8465,9 @@ function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R
       else if(o.act==="sit"){ b=10; sq=.86; r=0; }
       else if(o.act==="spin"){ b=-Math.sin(p*Math.PI)*12; r=p*360; sq=1; } } }
     if(o===m&&mv&&!reduce){ o.dust=(o.dust||0)-dt; if(o.dust<=0){ o.dust=.16; const d=document.createElement("i"); d.className="pz-dust"; d.style.transform=`translate(${(o.x-o.face*14).toFixed(0)}px,${o.y.toFixed(0)}px)`; d.style.zIndex=Math.round(o.y)-1; R.world.appendChild(d); setTimeout(()=>d.remove(),520); } }
+    const tr=plzTerr(o.x,o.y); if(tr!==o.terr){ o.terr=tr; o.el.classList.toggle("pz-ingrass",tr==="grass"); o.el.classList.toggle("pz-swim",tr==="water"); }
+    if(tr==="water"&&!mv&&!(o.actT>0)){ b=Math.sin(o.phase*.8)*2.2; r=0; sq=1; }
+    o.el.classList.toggle("pz-mv",!!mv);
     o.el.style.transform=`translate(${o.x.toFixed(1)}px,${o.y.toFixed(1)}px)`; o.el.style.zIndex=Math.round(o.y);
     o.bob.style.transform=`translateY(${b.toFixed(1)}px) rotate(${r.toFixed(1)}deg) scale(${(1/sq).toFixed(3)},${sq.toFixed(3)})`; o.fig.style.transform=o.face<0?"scaleX(-1)":"";
     if(o.bubT>0){ o.bubT-=dt; if(o.bubT<=0) o.bub.classList.remove("on"); } }
@@ -8390,7 +8481,9 @@ function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R
       o.edge.style.transform=`translate(${ex.toFixed(0)}px,${ey.toFixed(0)}px)`; o.edge.firstChild.style.transform=`rotate(${Math.atan2(sy-ey,sx-ex).toFixed(2)}rad)`; o.edge.hidden=false; }
     else if(o.edge) o.edge.hidden=true; }
   for(const o of R.occ||[]){ const q=o.q, hid=m.y<q.z&&m.x>q.x-20&&m.x<q.x+q.w+20&&m.y-80<q.y+q.h&&m.y>q.y; if(hid!==o.hid){ o.hid=hid; o.el.classList.toggle("pz-see",hid); } }
-  const nr=plzNear(); if(nr!==R.nearO){ if(R.nearO) R.nearO.el.classList.remove("pz-near"); if(nr) nr.el.classList.add("pz-near"); R.nearO=nr; R.box.querySelector(".pz-intb").classList.toggle("on",!!nr); }
+  const nr=plzNear(), spn=plzSpotNear(), useSp=spn&&(!nr||Math.hypot(nr.x-m.x,nr.y-m.y)>90);
+  if(nr!==R.nearO||spn!==R.nearS){ if(R.nearO) R.nearO.el.classList.remove("pz-near"); if(nr) nr.el.classList.add("pz-near"); R.nearO=nr; R.nearS=spn;
+    const ib=R.box.querySelector(".pz-intb"); ib.classList.toggle("on",!!(nr||spn)); ib.innerHTML=useSp?`<b>${spn.ic}</b><span>${T("plzSpot_"+spn.k)}</span>`:`<b>👋</b><span>${T("plzInt")}</span>`; }
   if(now-(R.miniAt||0)>120){ R.miniAt=now; plzMini(V); }
   plzFx(dt,vw,vh);
   R.world.style.transform=`scale(${z}) translate(${(vw/2/z-cx).toFixed(1)}px,${(vh/2/z-cy).toFixed(1)}px)`;
@@ -8416,9 +8509,115 @@ function plzFx(dt,vw,vh){ const R=ROOM, cv=R.box.querySelector(".pz-fx"); if(!cv
       c.save(); c.translate(p.x,p.y); c.rotate(p.w); c.scale(p.s,p.s*Math.abs(Math.cos(p.w*.7))+.2); c.fillStyle="rgba(255,182,206,.85)"; c.beginPath(); c.ellipse(0,0,5,3,0,0,7); c.fill(); c.restore(); } } }
 // zone picker: how many people are in the first channel of each area
 async function plzZones(){ const R=ROOM; if(!R) return; const el=R.box.querySelector(".pz-zones"); if(!el.hidden){ el.hidden=true; return; }
-  const draw=n=>{ el.innerHTML=`<b>${T("plzZones")}</b><div class="pz-map">`+PLZ_ZONES.map(z=>`<button data-pz="zone" data-k="${z.k}" class="${z.k===R.zone?"on":""}" style="left:${z.mx}%;top:${z.my}%" title="${esc(T("plzZd_"+z.k))}"><b>${z.ic} ${T("plzZ_"+z.k)}</b>${n&&n[z.k]!=null?`<em>${T("plzZn",{n:n[z.k]})}</em>`:""}</button>`).join("")+`</div><small class="pz-mapd">${T("plzZd_"+R.zone)}</small>`; };
+  const draw=n=>{ el.innerHTML=`<b>${T("plzZones")}</b><div class="pz-map">`+PLZ_ZONES.map(z=>`<button data-pz="zone" data-k="${z.k}" class="${z.k===R.zone?"on":""}" style="left:${z.mx}%;top:${z.my}%" title="${esc(T("plzZd2_"+z.k))}"><b>${z.ic} ${T("plzZ_"+z.k)}</b>${n&&n[z.k]!=null?`<em>${T("plzZn",{n:n[z.k]})}</em>`:""}</button>`).join("")+`</div><small class="pz-mapd">${T("plzZd2_"+R.zone)}</small>`; };
   draw(null); el.hidden=false; if(!R.dbM||!R.db) return;
   try{ const now=Date.now(), n={}; await Promise.all(PLZ_ZONES.map(async z=>{ const v=(await R.dbM.get(R.dbM.ref(R.db,`plaza/${z.k}-1`))).val()||{}; n[z.k]=Object.values(v).filter(x=>x&&now-(x.ts||0)<PLZ_STALE).length; })); if(ROOM===R&&!el.hidden) draw(n); }catch(e){} }
+
+/* ===== 草叢 & 游泳: walk through tall grass on the lawn, or swim in the duck pond, and a wild monster may jump out
+   (Pokémon style; CheChe 2026-11-16). Grass meets metal / wood / fire / earth beasts, water meets water beasts, all from
+   the normal wild list near your level, so the fight, rewards and notebook are exactly the wild hunt's. The first
+   PLZ_ENC.free fights a day cost no stamina; after that each fight uses stamina like the wild hunt. ===== */
+const PLZ_GRASS=[[430,560,210,120],[1130,520,200,115],[770,300,220,80],[330,890,170,80]];   // lawn tall-grass patches [cx,cy,rx,ry], world px
+const PLZ_ENC={step:70, p:.12, cool:4, free:3};   // roll every 70px walked in grass / water (~3 s of walking per meeting)
+const PLZ_SAY=[["Hi there!","嗨！","Hi!","नमस्ते!","¡Hola!","やあ！","안녕!"],["Morning!","早安！","Good morning!","सुप्रभात!","¡Buenos días!","おはよう！","좋은 아침!"],
+  ["How's it going?","最近好嗎？","How are you?","कैसे हो?","¿Qué tal?","調子どう？","잘 지내?"],["What's the craic?","有什麼新鮮事？（愛爾蘭口語）","What's new? (Irish slang)","क्या चल रहा है? (आयरिश)","¿Qué hay de nuevo? (irlandés)","最近どう？（アイルランド英語）","무슨 일 있어? (아일랜드 말)"],
+  ["Nice gear!","裝備好帥！","Cool gear!","बढ़िया सामान!","¡Buen equipo!","装備かっこいい！","장비 멋지다!"],["Let's go hunting!","一起去打怪吧！","Let's hunt together!","चलो शिकार करें!","¡Vamos a cazar!","狩りに行こう！","사냥 가자!"],
+  ["Well done!","做得好！","Great job!","शाबाश!","¡Bien hecho!","よくやった！","잘했어!"],["Thanks a million!","超感謝！（愛爾蘭說法）","Thanks a lot! (Irish)","बहुत धन्यवाद! (आयरिश)","¡Mil gracias! (irlandés)","本当にありがとう！（アイルランド）","정말 고마워! (아일랜드)"],
+  ["Grand!","沒問題、很好！（愛爾蘭口語）","Fine / great! (Irish)","बढ़िया! (आयरिश)","¡Genial! (irlandés)","いいね！（アイルランド英語）","좋아! (아일랜드 말)"],["See you later!","待會見！","Bye for now!","फिर मिलेंगे!","¡Hasta luego!","またね！","나중에 봐!"]];
+const plzSayMean=x=>x[{zh:1,en:2,hi:3,es:4,ja:5,ko:6}[LANG]||1];
+// landmarks: walk up to them and the 互動 button turns into the landmark (h = how high the marker floats above x,y)
+const PLZ_SPOTS={fountain:[{k:"well",ic:"🌠",x:768,y:560,h:150,r:230}], band:[{k:"radio",ic:"📻",x:768,y:540,h:200,r:300}], gate:[{k:"board",ic:"📰",x:768,y:380,h:250,r:190}]};
+function plzSpotNear(){ const R=ROOM; if(!R||!R.me) return null; let best=null, bd=1e9; for(const sp of PLZ_SPOTS[R.zone]||[]){ const d=Math.hypot(sp.x-R.me.x,(sp.y-R.me.y)*1.2); if(d<sp.r&&d<bd){ bd=d; best=sp; } } return best; }
+function plzTerr(x,y){ const R=ROOM; if(!R) return ""; if(R.zone==="lawn") return PLZ_GRASS.some(([cx,cy,rx,ry])=>{ const dx=(x-cx)/rx, dy=(y-cy)/ry; return dx*dx+dy*dy<1; })?"grass":"";
+  if(R.zone==="pond"){ const M=PLZ_MASK.pond; if(!M||!M.sw) return ""; const i=Math.floor(x/PLZ_MC), j=Math.floor(y/PLZ_MC); return i>=0&&j>=0&&i<M.w&&j<M.h&&M.sw[j*M.w+i]===2?"water":""; } return ""; }
+// tall grass tufts painted onto the lawn (same seed every time, so everyone sees the same patches)
+function plzGrassDraw(c){ let sd=7; const rnd=()=>{ sd=(sd*16807)%2147483647; return sd/2147483647; };
+  for(const [cx,cy,rx,ry] of PLZ_GRASS){ const g=c.createRadialGradient(cx,cy,0,cx,cy,rx); g.addColorStop(0,"rgba(38,105,40,.34)"); g.addColorStop(.85,"rgba(38,105,40,.26)"); g.addColorStop(1,"rgba(38,105,40,0)");
+    c.save(); c.translate(cx,cy); c.scale(1,ry/rx); c.fillStyle=g; c.beginPath(); c.arc(0,0,rx*1.04,0,7); c.fill(); c.restore();
+    const pts=[]; const n=Math.round(rx*ry/190); for(let i=0;i<n;i++){ const a=rnd()*6.283, d=Math.sqrt(rnd())*.94; pts.push([cx+Math.cos(a)*rx*d, cy+Math.sin(a)*ry*d, .8+rnd()*.5, rnd()]); }
+    pts.sort((p,q)=>p[1]-q[1]);
+    for(const [x,y,k,t] of pts){ c.save(); c.translate(x,y); c.scale(k,k); c.beginPath();
+      c.moveTo(-9,0); c.quadraticCurveTo(-9,-12,-14,-20); c.quadraticCurveTo(-5,-13,-4,-4); c.quadraticCurveTo(-3,-18,1,-28); c.quadraticCurveTo(4,-16,3,-4); c.quadraticCurveTo(6,-14,13,-21); c.quadraticCurveTo(9,-10,9,0); c.closePath();
+      c.fillStyle=t<.5?"#3f9a3a":"#4aa843"; c.fill(); c.lineWidth=1.6; c.strokeStyle="#1B2421"; c.lineJoin="round"; c.stroke();
+      c.beginPath(); c.moveTo(1,-24); c.quadraticCurveTo(2,-14,1.5,-6); c.strokeStyle="rgba(205,240,170,.75)"; c.lineWidth=1.4; c.stroke(); c.restore(); } } }
+
+/* ===== 廣場稀有 (CheChe 2026-11-16): an encounter in the grass / pond has a small chance to be a rare variant of any
+   same-element wild beast at or below your level. Same picture with a golden glow; each element brings its own twist:
+   earth = more HP, metal = the spell question has a short countdown, water = your defence drops, fire = harder hits,
+   wood = tougher hide. Beating one is likely to drop an element shard and fills the plaza rare notebook. ===== */
+const PLZ_RARE={p:.05, drop:.6, qSec:6, tw:{earth:{hp:1.5}, metal:{qSec:6}, water:{pDef:.7}, fire:{atk:1.3}, wood:{def:1.5}}};
+const PLZ_RARE_PRE={zh:"閃耀",en:"Shining ",hi:"चमकता ",es:" brillante",ja:"輝く",ko:"빛나는 "};
+function plzRareOf(m){ const id="rr-"+m.id; if(MONS[id]) return MONS[id]; const t=PLZ_RARE.tw[m.el]||{}, nm={};
+  for(const lg in m.foe.name){ const p=PLZ_RARE_PRE[lg]||PLZ_RARE_PRE.en; nm[lg]=lg==="es"?m.foe.name[lg]+p:lg==="zh"||lg==="ja"?p+m.foe.name[lg]:(p+m.foe.name[lg]); }
+  const r={...m, id, rare:true, rareOf:m.id, foe:{...m.foe, name:nm}, hp:Math.round(m.hp*(t.hp||1)), atk:Math.round(m.atk*(t.atk||1)), def:Math.round(m.def*(t.def||1)), pDefMul:t.pDef||1, qSec:t.qSec||0};
+  MONS[id]=r; return r; }
+const plzRareKey=m=>m.foe.mid;   // one notebook slot per picture (creature + element)
+function plzRareAll(){ const seen=new Set(), out=[]; for(const m of WILD){ if(m.lv<1||seen.has(m.foe.mid)) continue; seen.add(m.foe.mid); out.push(m); } return out; }
+function plzRareGot(){ const g=game(); return g.plzRare||(g.plzRare={}); }
+function plzRareBook(){ const R=ROOM; if(!R) return; const old=R.box.querySelector(".pz-rbook"); if(old) return old.remove();
+  const all=plzRareAll(), got=plzRareGot(), L=Math.max(1,game().lv||1), n=all.filter(m=>got[plzRareKey(m)]).length;
+  const el=document.createElement("div"); el.className="pz-board pz-rbook";
+  el.innerHTML=`<div class="pz-boardin pz-rbookin"><b class="pz-boardt">✨ ${T("plzRareBook")}</b><small class="muted">${T("plzRareBookSub",{n,t:all.length})}</small>
+    <div class="pz-rgrid">${all.map(m=>{ const own=got[plzRareKey(m)], open=m.lv<=L; return `<div class="pz-rcell${own?" own":""}"><span class="pz-rpic el-bg-${m.el}">${monSvg(m,"pz-rmon")}</span><small>${own?esc(monName(plzRareOf(m))):open?"？？？":"Lv "+m.lv+"+"}</small></div>`; }).join("")}</div>
+    <button class="btn ghost" data-pz="boardx">${T("plzBack")}</button></div>`;
+  R.box.appendChild(el); }
+function plzFreeLeft(){ const g=game(), d=g.plzEnc&&g.plzEnc.date===today()?g.plzEnc.n:0; return Math.max(0,PLZ_ENC.free-d); }
+function plzFreeUse(){ const g=game(); g.plzEnc={date:today(), n:(g.plzEnc&&g.plzEnc.date===today()?g.plzEnc.n:0)+1}; }
+// a wild beast of the right element near your level (only ones you could already meet in the wild hunt)
+function plzPickMon(terr){ const L=Math.max(1,game().lv||1), els=terr==="water"?["water"]:["metal","wood","fire","earth"];
+  let c=WILD.filter(m=>els.includes(m.el)&&m.lv<=L&&m.lv>=L-3); if(!c.length) c=WILD.filter(m=>els.includes(m.el)&&m.lv<=L).slice(-4); if(!c.length) c=WILD.filter(m=>els.includes(m.el)).slice(0,2);
+  return c.length?c[Math.floor(Math.random()*c.length)]:null; }
+function plzEncounter(terr){ const R=ROOM; if(!R||R.enc) return; let m=plzPickMon(terr); if(!m) return;
+  if(Math.random()<PLZ_RARE.p){ const L=Math.max(1,game().lv||1), els=terr==="water"?["water"]:["metal","wood","fire","earth"], pool=WILD.filter(x=>x.lv>=1&&x.lv<=L&&els.includes(x.el));
+    if(pool.length) m=plzRareOf(pool[Math.floor(Math.random()*pool.length)]); }
+  const free=plzFreeLeft(), st=stamina().v;
+  if(!free&&st<1){ if(!R.tiredSaid){ R.tiredSaid=1; toast(T("plzEncTired",{m:stamNextMin()})); } R.encCool=performance.now()/1000+60; return; }
+  R.enc={m, terr}; if(R.J){ R.J=null; if(R.joyRest) R.joyRest(); const k=R.box.querySelector(".pz-joy i"); if(k) k.style.transform=""; }
+  R.box.querySelector(".pz-acts").hidden=true; plzSay(R.me,"❗"); plzSend(false,{b:"❗", bt:Date.now()}); if(typeof sfx==="function") sfx("eye");
+  R.box.classList.add("pz-encfx"); setTimeout(()=>{ if(ROOM!==R||!R.enc) return; R.box.classList.remove("pz-encfx");
+    const el=document.createElement("div"); el.className="pz-enc pz-enc-"+terr+(m.rare?" pz-enc-rare":""); const fr=plzFreeLeft(), s2=stamina().v;
+    el.innerHTML=`<div class="pz-encin"><small class="pz-encwh">${T(terr==="water"?"plzEncWater":"plzEncGrass")}</small><div class="pz-encart el-bg-${m.el}">${monSvg(m,"pz-encmon")}</div>
+      ${m.rare?`<span class="pz-raretag">✨ ${T("plzRareT")}${plzRareGot()[plzRareKey(m)]?"":" · 🆕"}</span><span class="pz-rtrait sm-t">${T("plzRareTw_"+m.el)}</span>`:""}<b>${T("plzEncT",{m:esc(monName(m))})}</b><span class="muted sm-t">Lv ${m.lv} · ${elBadge(m.el)} ${elName(m.el)} ${diffTag(m)}</span><span class="row" style="gap:4px;justify-content:center">${advice(m)}</span>
+      <span class="sm-t pz-enccost">${fr?T("plzEncFree2",{n:fr,t:PLZ_ENC.free}):T("plzEncStam",{s:s2,mx:STAM_MAX})}</span>
+      <div class="row" style="justify-content:center"><button class="btn" data-pz="encgo">⚔️ ${T("plzEncGo")}</button><button class="btn ghost" data-pz="encrun">🏃 ${T("plzEncRun")}</button></div></div>`;
+    R.box.appendChild(el); },700); }
+function plzEncEnd(){ const R=ROOM; if(!R) return; R.enc=null; R.encCool=performance.now()/1000+PLZ_ENC.cool; R.box.classList.remove("pz-encfx"); const el=R.box.querySelector(".pz-enc"); if(el) el.remove(); }
+// leave the room for a moment (a fight, the wishing well, today's tasks): it stays connected, hidden, and a pill brings you back
+function plzAway(mark, noPill){ const R=ROOM; if(!R) return; plzRadioStop(R); R.away={at:Date.now(), prev:{tab:S.tab, view:S.view, advTab:S.advTab}}; cancelAnimationFrame(R.raf); R.box.style.display="none"; document.body.classList.remove("pz-open");
+  R.keys={}; R.J=null; if(mark){ plzSay(R.me,mark); plzSend(false,{b:mark, bt:Date.now()}); } if(!noPill) plzBackPill(true); }
+function plzBackPill(on){ let el=document.getElementById("pzBack"); if(!on){ if(el) el.remove(); return; } if(el) return;
+  el=document.createElement("button"); el.id="pzBack"; el.dataset.act="plzback"; el.innerHTML=`🏞️ ${T("plzBack2")}`; document.body.appendChild(el); }
+function plzReturn(){ const R=ROOM; plzBackPill(false); if(!R||!R.away){ if(S.battle&&S.battle.plz){ S.battle=null; S.view=S.tab||"today"; render(); } return; }
+  const B=S.battle, won=B&&B.plz&&B.res&&B.res.win&&B.stage==="end"; if(B&&B.plz){ clearInterval(S.btimer); S.battle=null; }
+  const p=R.away.prev; R.away=null; S.tab=p.tab; S.view=p.view==="battle"?p.tab:p.view; S.advTab=p.advTab; render();
+  R.box.style.display=""; document.body.classList.add("pz-open"); R.last=performance.now(); R.encCool=performance.now()/1000+PLZ_ENC.cool; R.encD=0; R.raf=requestAnimationFrame(plzStep);
+  if(won){ plzSay(R.me,"🏆"); plzSend(false,{b:"🏆", bt:Date.now()}); } else plzSend(true); }
+function plzFight(){ const R=ROOM, E=R&&R.enc; if(!E) return; const free=plzFreeLeft()>0; plzEncEnd(); plzAway("⚔️",true); startBattle(E.m.id,{plz:true, free}); if(!S.battle||!S.battle.plz) plzReturn(); }
+// landmarks
+function plzSpotGo(sp){ const R=ROOM; if(!R) return;
+  if(sp.k==="well"){ plzAway("🌠"); S.tab="adv"; S.view="adv"; S.advTab="vault"; render(); setTimeout(()=>{ const w=document.querySelector(".well-card"); if(w) w.scrollIntoView({block:"start"}); else window.scrollTo(0,0); },60); return; }
+  if(sp.k==="radio") return plzRadio();
+  if(sp.k==="board") return plzBoard(); }
+// 公告板 at the gate: today's headline, today's three steps and the daily login reward
+function plzBoard(){ const R=ROOM; if(!R) return; const old=R.box.querySelector(".pz-board"); if(old) return old.remove();
+  const art=mainArticle(), d=dayRec(), done=[!!(d.preDone||!eligible().length),!!d.read,!!d.postDone], n=done.filter(Boolean).length;
+  let lg=""; if(!PLANS_ON){ const L=loginSt(), claimed=!!L.last&&L.last>=(loginDay()||today()); if(!claimed) lg=`<button class="btn" data-pz="boardlg">🎁 ${T("plzBoardLogin")}</button>`; }
+  const el=document.createElement("div"); el.className="pz-board";
+  el.innerHTML=`<div class="pz-boardin"><b class="pz-boardt">📰 ${T("plzBoardT")}</b>${art?`<small class="muted">${T("plzBoardToday")}</small><p class="pz-boardh">${esc(art.title)}</p>`:""}
+    <div class="pz-boardst">${[T("stepPre"),T("stepRead"),T("stepPost")].map((t,i)=>`<span class="${done[i]?"ok":""}">${done[i]?"✓":i+1} ${esc(t)}</span>`).join("")}</div>
+    <small class="muted">${T("plzBoardSteps",{n})}</small>
+    <div class="row" style="justify-content:center;flex-wrap:wrap">${n<3?`<button class="btn" data-pz="boardgo">📖 ${T("plzBoardGo")}</button>`:""}${lg}<button class="btn ghost" data-pz="boardx">${T("plzBack")}</button></div></div>`;
+  R.box.appendChild(el); }
+// 音樂台: today's news recording plays over the park while you stay in the room
+function plzNewsRec(){ const art=mainArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDIO.sha) return null; const it=(NEWS_AUDIO.items||{})[art.id+"|"+(levelOf(art)||"base")]||(NEWS_AUDIO.items||{})[art.id+"|base"];
+  return it?{art, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
+function plzRadio(){ const R=ROOM; if(!R) return; if(R.radio){ const a=R.radio.a; if(a.paused) a.play().catch(()=>{}); else a.pause(); plzRadioBar(); return; }
+  const rec=plzNewsRec(); if(!rec) return toast(T("plzNoRec"));
+  const a=new Audio(rec.url); a.onended=()=>plzRadioStop(); R.radio={a, art:rec.art}; a.play().catch(()=>{ toast(T("plzNoRec")); plzRadioStop(); }); plzSay(R.me,"🎧"); plzSend(false,{b:"🎧", bt:Date.now()}); plzRadioBar(); }
+function plzRadioBar(){ const R=ROOM; if(!R) return; let el=R.box.querySelector(".pz-radio"); if(!R.radio){ if(el) el.remove(); return; }
+  if(!el){ el=document.createElement("div"); el.className="pz-radio"; R.box.appendChild(el); }
+  el.innerHTML=`<span>📻</span><span class="pz-radiot"><small>${T("plzNowPlay")}</small><b>${esc(R.radio.art.title)}</b></span><button data-pz="radio">${R.radio.a.paused?"▶":"⏸"}</button><button data-pz="radiox">✕</button>`; }
+function plzRadioStop(R0){ const R=R0||ROOM; if(!R||!R.radio) return; try{ R.radio.a.pause(); }catch(e){} R.radio=null; const el=R.box&&R.box.querySelector(".pz-radio"); if(el) el.remove(); }
 // player card + likes (one like per player per week)
 const plzWeek=()=>isoWeek().id;
 async function plzCard(o){ lookCard({id:o.id, name:o.kind==="me"?game().nick:o.name, look:o.look, lv:o.lv, power:o.power, conq:o.conq, flag:o.flag});
@@ -9350,6 +9549,24 @@ Object.assign(STR.hi,{"plzInt": "मिलें", "plzAct": "हरकतें
 Object.assign(STR.es,{"plzInt": "Saludar", "plzAct": "Acciones", "plzMap": "Mapa", "plzNone": "No hay nadie cerca, acércate primero", "plzRoomN": "Sala {c} · {n}/{cap} en línea", "plzA_jump": "Saltar", "plzA_dance": "Bailar", "plzA_sit": "Sentarse", "plzA_spin": "Girar"});
 Object.assign(STR.ja,{"plzInt": "あいさつ", "plzAct": "アクション", "plzMap": "マップ", "plzNone": "近くに誰もいません。近づいてから押してね", "plzRoomN": "{c}番ルーム · {n}/{cap}人オンライン", "plzA_jump": "ジャンプ", "plzA_dance": "ダンス", "plzA_sit": "すわる", "plzA_spin": "くるっと"});
 Object.assign(STR.ko,{"plzInt": "인사", "plzAct": "동작", "plzMap": "지도", "plzNone": "근처에 아무도 없어요. 가까이 가서 눌러 주세요", "plzRoomN": "{c}번 방 · {n}/{cap}명 접속", "plzA_jump": "점프", "plzA_dance": "춤", "plzA_sit": "앉기", "plzA_spin": "빙글"});
+Object.assign(STR.zh,{"plzZd2_fountain": "許願池、聊天集合點", "plzZd2_gate": "公告板：今天的新聞和登入獎勵", "plzZd2_pond": "下水游泳，小心水屬性野怪", "plzZd2_band": "聽今天的新聞錄音", "plzZd2_lawn": "草叢裡有金木火土野怪出沒", "plzEncGrass": "草叢沙沙作響……", "plzEncWater": "水面冒出一串泡泡……", "plzEncT": "野生的{m}跳出來了！", "plzEncFree": "🎁 今天還有 {n}/{t} 次免體力", "plzEncStam": "會用掉 1 點體力（剩 {s}/{mx}）", "plzEncGo": "戰鬥", "plzEncRun": "逃跑", "plzEncTired": "體力用完了，草叢和湖裡暫時很安靜（{m} 分鐘後恢復 1 點）", "plzFightFree": "⚔️ 開戰（免體力，今天剩 {n}/{t}）", "plzBack2": "回廣場", "plzSpot_well": "許願池", "plzSpot_radio": "聽新聞", "plzSpot_board": "公告板", "plzNoRec": "今天的新聞還沒有錄音", "plzNowPlay": "音樂台正在播今天的新聞", "plzBoardT": "BinBin 公告板", "plzBoardToday": "今天的新聞", "plzBoardGo": "去完成今天的任務", "plzBoardLogin": "領每日獎勵", "plzBoardSteps": "今日進度 {n}/3", "plzSayT": "英文快速對話（點一下說出來）"});
+Object.assign(STR.en,{"plzZd2_fountain": "Wishing well, meeting spot", "plzZd2_gate": "Notice board: today's news and login reward", "plzZd2_pond": "Go for a swim, watch out for water beasts", "plzZd2_band": "Listen to today's news recording", "plzZd2_lawn": "Metal, wood, fire and earth beasts hide in the tall grass", "plzEncGrass": "The grass rustles…", "plzEncWater": "Bubbles rise from the water…", "plzEncT": "A wild {m} jumped out!", "plzEncFree": "🎁 {n}/{t} stamina-free fights left today", "plzEncStam": "Uses 1 stamina ({s}/{mx} left)", "plzEncGo": "Fight", "plzEncRun": "Run", "plzEncTired": "Out of stamina, the grass and pond are quiet for now (1 point back in {m} min)", "plzFightFree": "⚔️ Fight (no stamina, {n}/{t} left today)", "plzBack2": "Back to the plaza", "plzSpot_well": "Wishing well", "plzSpot_radio": "News", "plzSpot_board": "Notice board", "plzNoRec": "Today's news has no recording yet", "plzNowPlay": "The bandstand is playing today's news", "plzBoardT": "BinBin notice board", "plzBoardToday": "Today's news", "plzBoardGo": "Do today's tasks", "plzBoardLogin": "Claim daily reward", "plzBoardSteps": "Today {n}/3 done", "plzSayT": "Quick English (tap to say it)"});
+Object.assign(STR.hi,{"plzZd2_fountain": "इच्छा कुआँ, मिलने की जगह", "plzZd2_gate": "सूचना बोर्ड: आज की खबर और लॉगिन इनाम", "plzZd2_pond": "तैरने जाओ, पानी वाले जानवरों से सावधान", "plzZd2_band": "आज की खबर की रिकॉर्डिंग सुनो", "plzZd2_lawn": "ऊँची घास में धातु, लकड़ी, अग्नि, पृथ्वी जानवर छिपे हैं", "plzEncGrass": "घास सरसराई…", "plzEncWater": "पानी से बुलबुले उठे…", "plzEncT": "जंगली {m} कूद पड़ा!", "plzEncFree": "🎁 आज {n}/{t} बिना ऊर्जा की लड़ाइयाँ बाकी", "plzEncStam": "1 ऊर्जा लगेगी ({s}/{mx} बाकी)", "plzEncGo": "लड़ो", "plzEncRun": "भागो", "plzEncTired": "ऊर्जा खत्म, घास और तालाब अभी शांत हैं ({m} मिनट में 1 वापस)", "plzFightFree": "⚔️ लड़ो (बिना ऊर्जा, आज {n}/{t} बाकी)", "plzBack2": "चौक पर लौटें", "plzSpot_well": "इच्छा कुआँ", "plzSpot_radio": "खबर", "plzSpot_board": "सूचना बोर्ड", "plzNoRec": "आज की खबर की रिकॉर्डिंग अभी नहीं है", "plzNowPlay": "मंच पर आज की खबर चल रही है", "plzBoardT": "BinBin सूचना बोर्ड", "plzBoardToday": "आज की खबर", "plzBoardGo": "आज के काम करें", "plzBoardLogin": "रोज़ का इनाम लें", "plzBoardSteps": "आज {n}/3 पूरे", "plzSayT": "झटपट अंग्रेज़ी (बोलने के लिए टैप करें)"});
+Object.assign(STR.es,{"plzZd2_fountain": "Pozo de los deseos, punto de encuentro", "plzZd2_gate": "Tablón: noticias de hoy y premio diario", "plzZd2_pond": "Date un baño, cuidado con las bestias de agua", "plzZd2_band": "Escucha la grabación de las noticias de hoy", "plzZd2_lawn": "En la hierba alta hay bestias de metal, madera, fuego y tierra", "plzEncGrass": "La hierba se mueve…", "plzEncWater": "Suben burbujas del agua…", "plzEncT": "¡Un {m} salvaje apareció!", "plzEncFree": "🎁 Te quedan {n}/{t} combates sin energía hoy", "plzEncStam": "Usa 1 de energía (quedan {s}/{mx})", "plzEncGo": "Luchar", "plzEncRun": "Huir", "plzEncTired": "Sin energía, la hierba y el estanque están tranquilos (1 punto en {m} min)", "plzFightFree": "⚔️ Luchar (sin energía, quedan {n}/{t} hoy)", "plzBack2": "Volver a la plaza", "plzSpot_well": "Pozo", "plzSpot_radio": "Noticias", "plzSpot_board": "Tablón", "plzNoRec": "Las noticias de hoy aún no tienen grabación", "plzNowPlay": "El quiosco está poniendo las noticias de hoy", "plzBoardT": "Tablón de BinBin", "plzBoardToday": "Noticia de hoy", "plzBoardGo": "Hacer las tareas de hoy", "plzBoardLogin": "Recoger premio diario", "plzBoardSteps": "Hoy {n}/3 hecho", "plzSayT": "Inglés rápido (toca para decirlo)"});
+Object.assign(STR.ja,{"plzZd2_fountain": "願いの泉、集合場所", "plzZd2_gate": "掲示板：今日のニュースとログイン報酬", "plzZd2_pond": "泳いでみよう、水属性の獣に注意", "plzZd2_band": "今日のニュース音声を聞く", "plzZd2_lawn": "草むらに金・木・火・土の獣が潜んでいる", "plzEncGrass": "草むらがガサガサ…", "plzEncWater": "水面に泡が…", "plzEncT": "野生の{m}が飛び出してきた！", "plzEncFree": "🎁 今日はあと {n}/{t} 回スタミナなしで戦える", "plzEncStam": "スタミナを 1 使う（残り {s}/{mx}）", "plzEncGo": "戦う", "plzEncRun": "逃げる", "plzEncTired": "スタミナ切れ、草むらと池は今は静か（{m} 分後に 1 回復）", "plzFightFree": "⚔️ 戦う（スタミナ不要、今日あと {n}/{t}）", "plzBack2": "広場に戻る", "plzSpot_well": "願いの泉", "plzSpot_radio": "ニュース", "plzSpot_board": "掲示板", "plzNoRec": "今日のニュースはまだ録音がありません", "plzNowPlay": "音楽堂で今日のニュースを放送中", "plzBoardT": "BinBin 掲示板", "plzBoardToday": "今日のニュース", "plzBoardGo": "今日のタスクへ", "plzBoardLogin": "毎日の報酬を受け取る", "plzBoardSteps": "今日 {n}/3 完了", "plzSayT": "かんたん英会話（タップで話す）"});
+Object.assign(STR.ko,{"plzZd2_fountain": "소원 우물, 모임 장소", "plzZd2_gate": "게시판: 오늘의 뉴스와 출석 보상", "plzZd2_pond": "수영해 보세요, 물 속성 야수 주의", "plzZd2_band": "오늘 뉴스 녹음 듣기", "plzZd2_lawn": "풀숲에 금·목·화·토 야수가 숨어 있어요", "plzEncGrass": "풀숲이 바스락거린다…", "plzEncWater": "물에서 거품이 올라온다…", "plzEncT": "야생의 {m}이(가) 튀어나왔다!", "plzEncFree": "🎁 오늘 체력 없이 {n}/{t}번 더 싸울 수 있어요", "plzEncStam": "체력 1 사용 (남은 {s}/{mx})", "plzEncGo": "싸우기", "plzEncRun": "도망", "plzEncTired": "체력이 없어 풀숲과 호수가 조용해요 ({m}분 뒤 1 회복)", "plzFightFree": "⚔️ 싸우기 (체력 없이, 오늘 {n}/{t} 남음)", "plzBack2": "광장으로", "plzSpot_well": "소원 우물", "plzSpot_radio": "뉴스", "plzSpot_board": "게시판", "plzNoRec": "오늘 뉴스는 아직 녹음이 없어요", "plzNowPlay": "음악당에서 오늘 뉴스 방송 중", "plzBoardT": "BinBin 게시판", "plzBoardToday": "오늘의 뉴스", "plzBoardGo": "오늘 할 일 하러 가기", "plzBoardLogin": "매일 보상 받기", "plzBoardSteps": "오늘 {n}/3 완료", "plzSayT": "빠른 영어 (눌러서 말하기)"});
+Object.assign(STR.zh,{"plzEncFree2": "🎁 免體力戰鬥：今天還有 {n}/{t} 次（拿金幣，不加經驗）", "plzFightFree2": "⚔️ 開戰（免體力，今天剩 {n}/{t}，不加經驗）", "plzNoExp": "免體力戰鬥不加經驗"});
+Object.assign(STR.en,{"plzEncFree2": "🎁 Free fights: {n}/{t} left today (gold, no EXP)", "plzFightFree2": "⚔️ Fight (free, {n}/{t} left today, no EXP)", "plzNoExp": "free fights give no EXP"});
+Object.assign(STR.hi,{"plzEncFree2": "🎁 मुफ़्त लड़ाइयाँ: आज {n}/{t} बाकी (सोना, EXP नहीं)", "plzFightFree2": "⚔️ लड़ो (मुफ़्त, आज {n}/{t} बाकी, EXP नहीं)", "plzNoExp": "मुफ़्त लड़ाई में EXP नहीं"});
+Object.assign(STR.es,{"plzEncFree2": "🎁 Combates gratis: quedan {n}/{t} hoy (oro, sin EXP)", "plzFightFree2": "⚔️ Luchar (gratis, quedan {n}/{t} hoy, sin EXP)", "plzNoExp": "los combates gratis no dan EXP"});
+Object.assign(STR.ja,{"plzEncFree2": "🎁 無料バトル：今日あと {n}/{t} 回（ゴールドのみ、経験値なし）", "plzFightFree2": "⚔️ 戦う（無料、今日あと {n}/{t}、経験値なし）", "plzNoExp": "無料バトルは経験値なし"});
+Object.assign(STR.ko,{"plzEncFree2": "🎁 무료 전투: 오늘 {n}/{t}번 남음 (골드만, 경험치 없음)", "plzFightFree2": "⚔️ 싸우기 (무료, 오늘 {n}/{t} 남음, 경험치 없음)", "plzNoExp": "무료 전투는 경험치 없음"});
+Object.assign(STR.zh,{"plzRareT": "廣場稀有", "plzRareTw_earth": "厚皮：血量 ×1.5", "plzRareTw_metal": "疾速：咒語題只有 6 秒", "plzRareTw_water": "寒氣：你的防禦 −30%", "plzRareTw_fire": "狂暴：攻擊力 ×1.3", "plzRareTw_wood": "硬殼：防禦力 ×1.5", "plzRareBook": "廣場稀有圖鑑", "plzRareBookSub": "在草叢和湖裡偶爾會遇到閃耀的稀有種 · 已收集 {n}/{t}", "plzQOut": "時間到！"});
+Object.assign(STR.en,{"plzRareT": "Plaza rare", "plzRareTw_earth": "Thick hide: HP ×1.5", "plzRareTw_metal": "Swift: only 6 s for the spell question", "plzRareTw_water": "Chill: your defence −30%", "plzRareTw_fire": "Frenzy: attack ×1.3", "plzRareTw_wood": "Hard shell: defence ×1.5", "plzRareBook": "Plaza rare notebook", "plzRareBookSub": "Shining rare beasts sometimes appear in the grass and the pond · {n}/{t} collected", "plzQOut": "Time's up!"});
+Object.assign(STR.hi,{"plzRareT": "चौक दुर्लभ", "plzRareTw_earth": "मोटी खाल: HP ×1.5", "plzRareTw_metal": "तेज़: मंत्र प्रश्न के लिए सिर्फ़ 6 सेकंड", "plzRareTw_water": "ठंडक: तुम्हारा बचाव −30%", "plzRareTw_fire": "उन्माद: हमला ×1.3", "plzRareTw_wood": "कठोर खोल: बचाव ×1.5", "plzRareBook": "चौक दुर्लभ संग्रह", "plzRareBookSub": "घास और तालाब में कभी-कभी चमकते दुर्लभ जानवर मिलते हैं · {n}/{t} इकट्ठे", "plzQOut": "समय खत्म!"});
+Object.assign(STR.es,{"plzRareT": "Rara de la plaza", "plzRareTw_earth": "Piel gruesa: PV ×1.5", "plzRareTw_metal": "Veloz: solo 6 s para el hechizo", "plzRareTw_water": "Escarcha: tu defensa −30%", "plzRareTw_fire": "Furia: ataque ×1.3", "plzRareTw_wood": "Caparazón: defensa ×1.5", "plzRareBook": "Cuaderno de raras", "plzRareBookSub": "A veces aparecen bestias raras brillantes en la hierba y el estanque · {n}/{t}", "plzQOut": "¡Se acabó el tiempo!"});
+Object.assign(STR.ja,{"plzRareT": "広場レア", "plzRareTw_earth": "厚い皮：HP ×1.5", "plzRareTw_metal": "俊敏：呪文問題は 6 秒だけ", "plzRareTw_water": "冷気：あなたの防御 −30%", "plzRareTw_fire": "狂暴：攻撃力 ×1.3", "plzRareTw_wood": "硬い殻：防御力 ×1.5", "plzRareBook": "広場レア図鑑", "plzRareBookSub": "草むらや池でまれに輝くレア種に出会える · {n}/{t} 収集", "plzQOut": "時間切れ！"});
+Object.assign(STR.ko,{"plzRareT": "광장 희귀", "plzRareTw_earth": "두꺼운 가죽: HP ×1.5", "plzRareTw_metal": "신속: 주문 문제는 6초만", "plzRareTw_water": "냉기: 내 방어력 −30%", "plzRareTw_fire": "광폭: 공격력 ×1.3", "plzRareTw_wood": "단단한 껍질: 방어력 ×1.5", "plzRareBook": "광장 희귀 도감", "plzRareBookSub": "풀숲과 호수에서 가끔 빛나는 희귀종을 만나요 · {n}/{t} 수집", "plzQOut": "시간 초과!"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
