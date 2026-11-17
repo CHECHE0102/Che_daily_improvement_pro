@@ -1,0 +1,1095 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural",
+  "C": "en-HK-SamNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V020",
+ "title": "聽懂愛爾蘭式互虧",
+ "subtitle": "12 句英文，被虧不再只會說對不起",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-pub",
+ "guest": "conor",
+ "roles": {
+  "C": "阿杰 Jay",
+  "B": "Conor 朋友"
+ },
+ "thumb": {
+  "pose": "secret",
+  "bg": "bg-pub",
+  "line1": "被虧只會說 Sorry？",
+  "line2": "愛爾蘭互虧 12 句",
+  "tag": "B2 英文",
+  "sticker": "🍺"
+ },
+ "chapters": [
+  "Intro",
+  "聽出玩笑",
+  "虧回去",
+  "話要反著聽",
+  "開過頭時",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "jay",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Well, look who it is! Did you get dressed in the dark, Jay?",
+     "zh": "喲，看看誰來了！Jay，你是摸黑穿衣服的嗎？",
+     "R": "conor-happy"
+    },
+    {
+     "v": "C",
+     "say": "…What? Is something wrong with my clothes? I'm sorry…",
+     "zh": "……什麼？我的衣服有問題嗎？對不起……",
+     "L": "jay-frown"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "R": "conor-think",
+     "sticker": "😅",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🍺",
+    "big": [
+     "Is he being rude?",
+     "*or is he being friendly?"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "This is Jay. He's from Taiwan. His Irish friend Conor just insulted his shirt. And Jay is upset.",
+     "zh": "這是 Jay，他從台灣來。他的愛爾蘭朋友 Conor 剛剛虧他的襯衫，Jay 很受傷。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "But here's the secret. In Ireland, if someone teases you, it usually means they like you.",
+     "zh": "但秘密是：在愛爾蘭，如果有人虧你，通常代表他喜歡你。",
+     "pose": "secret",
+     "sticker": "💚",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Understand Irish banter",
+     "*and give it back"
+    ],
+    "cta": "聽懂愛爾蘭式互虧・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today, Jay will learn twelve sentences for Irish banter.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天 Jay 要學愛爾蘭式互虧的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today, Jay will learn twelve sentences for Irish banter."
+    },
+    {
+     "v": "E",
+     "say": "Recognising a joke, hitting back, Irish ways of saying things, and what to do if you go too far.",
+     "zh": "聽出玩笑、虧回去、愛爾蘭人特有的說法，還有開玩笑過頭時怎麼辦。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Is it a joke?",
+   "sub": "聽出玩笑：他是在鬧你",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: is it a joke?",
+     "zh": "第一段：這是玩笑嗎？",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Banter is friendly teasing. In Ireland, it's how friends show they're close.",
+     "zh": "banter 是友善的互虧。在愛爾蘭，這是朋友表示親近的方式。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Are you slagging me?",
+   "meaning": "你是在虧我嗎？",
+   "note": "slag ＝ （愛爾蘭）取笑、虧",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Are you slagging me?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Slagging is the Irish word for teasing. It's not the same as insulting.",
+     "zh": "slagging 是愛爾蘭人說的取笑，跟侮辱不一樣。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say it with a smile, and you've already won half the game.",
+     "zh": "笑著說，你就已經贏一半了。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Are you slagging me?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "Relax, I'm only pulling your leg.",
+   "meaning": "放輕鬆，我只是在逗你",
+   "note": "pull someone's leg ＝ 開某人玩笑",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And this is what they'll say back.",
+     "zh": "對方通常會這樣回。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Relax, I'm only pulling your leg.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Pulling your leg means joking. Nobody meant it seriously.",
+     "zh": "pulling your leg 是開玩笑，沒人當真。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "When you hear this, you know: it was banter, not a fight.",
+     "zh": "聽到這句你就知道：這是互虧，不是吵架。",
+     "pose": "talk2",
+     "sticker": "😜",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Relax, I'm only pulling your leg.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Don't take it personally. It means he likes you.",
+   "meaning": "別往心裡去，這代表他喜歡你",
+   "note": "take it personally ＝ 往心裡去",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if a friend gets upset, explain it like this.",
+     "zh": "如果朋友不開心了，就這樣解釋。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Don't take it personally. It means he likes you.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't take it personally means: it's not really about you.",
+     "zh": "Don't take it personally 意思是：這不是真的針對你。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "In Ireland, people only slag the people they're comfortable with.",
+     "zh": "在愛爾蘭，大家只虧自己熟的人。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Don't take it personally. It means he likes you.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Hit back",
+   "sub": "虧回去：別只會道歉",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: hit back.",
+     "zh": "第二段：虧回去。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "If someone slags you, saying sorry is the worst answer. They want you to play!",
+     "zh": "被虧時說對不起是最糟的回答。他們想要你一起玩！",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "Says you, with that haircut!",
+   "meaning": "你還敢說，看看你那個髮型！",
+   "note": "Says you ＝ 你還敢說",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Says you, with that haircut!",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Says you means: you can't criticise me, you're no better.",
+     "zh": "Says you 意思是：你沒資格說我，你也好不到哪裡去。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Add something about them. Keep it light. Hair is always safe.",
+     "zh": "再加一點關於對方的事，輕鬆就好。髮型永遠是安全牌。",
+     "pose": "cheer",
+     "sticker": "💇",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Says you, with that haircut!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "That's rich, coming from you!",
+   "meaning": "這話從你嘴裡說出來還真好笑！",
+   "note": "That's rich ＝ 真好意思說",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Another way to hit back.",
+     "zh": "另一種虧回去的方法。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "That's rich, coming from you!",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "That's rich means: you're the last person who should say that.",
+     "zh": "That's rich 是「你最沒資格說這句話」。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If he says you're always late, and he's even later? That's rich!",
+     "zh": "如果他說你總是遲到，但他更遲？That's rich！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That's rich, coming from you!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "You're one to talk!",
+   "meaning": "你還好意思講！",
+   "note": "You're one to talk ＝ 你還好意思說",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the shortest one.",
+     "zh": "最短的一句。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "You're one to talk!",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Same meaning, and very quick. Perfect when you need an answer fast.",
+     "zh": "意思一樣，而且很短。需要快速回嘴時超好用。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Timing is everything. Say it straight away, with a grin.",
+     "zh": "時機就是一切。馬上說，帶點壞笑。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "You're one to talk!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "jay",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's try the pub again. Jay, you're ready.",
+     "zh": "我們重來一次 Pub 那段。Jay，你準備好了。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "Well, look who it is! Did you get dressed in the dark, Jay?",
+     "zh": "喲，看看誰來了！Jay，你是摸黑穿衣服的嗎？",
+     "R": "conor-happy"
+    },
+    {
+     "v": "C",
+     "say": "Are you slagging me? Says you, with that haircut!",
+     "zh": "你是在虧我嗎？你還敢說，看看你那個髮型！",
+     "L": "jay-happy"
+    },
+    {
+     "v": "B",
+     "say": "Ha! Relax, I'm only pulling your leg.",
+     "zh": "哈！放輕鬆，我只是在逗你。",
+     "R": "conor-happy"
+    },
+    {
+     "v": "C",
+     "say": "I know. You're one to talk, though. You've worn that jumper all week!",
+     "zh": "我知道。不過你還好意思講，那件毛衣你穿一整週了！",
+     "L": "jay-talk"
+    },
+    {
+     "v": "E",
+     "say": "Look at Conor's face. Jay has passed the test!",
+     "zh": "看 Conor 的表情，Jay 通過考驗了！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Irish ways",
+   "sub": "愛爾蘭說法：話要反著聽",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: Irish ways of saying things.",
+     "zh": "第三段：愛爾蘭人特有的說法。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Irish people often say the opposite of what they mean. You need a decoder!",
+     "zh": "愛爾蘭人常常說反話，你需要一台解碼器！",
+     "pose": "secret",
+     "sticker": "🔐",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "It's not the worst.",
+   "meaning": "還不賴（其實是很好）",
+   "note": "not the worst ＝ 其實很好",
+   "lines": [
+    {
+     "v": "A",
+     "say": "It's not the worst.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "It's not the worst actually means: it's really good!",
+     "zh": "It's not the worst 其實是說：這很棒！",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Irish people don't like to sound too excited. So they say less.",
+     "zh": "愛爾蘭人不喜歡聽起來太激動，所以會少說一點。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's not the worst.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "Ah, would you stop!",
+   "meaning": "哎呀，別鬧了啦！",
+   "note": "Would you stop! ＝ 別鬧了（被稱讚時）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when someone gives you a compliment, this is the answer.",
+     "zh": "被稱讚時，這就是標準回答。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Ah, would you stop!",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Would you stop! means: you're embarrassing me, but thank you.",
+     "zh": "Would you stop! 是「你害我不好意思了，但謝謝」。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Irish people find it hard to just say thank you to a compliment.",
+     "zh": "愛爾蘭人很難直接對讚美說謝謝。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Ah, would you stop!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Go on, go on, go on. Just one more.",
+   "meaning": "來嘛來嘛來嘛，再一個就好",
+   "note": "Go on ＝ 來嘛（勸人）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the famous Irish way to insist.",
+     "zh": "還有愛爾蘭人出名的勸說方式。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Go on, go on, go on. Just one more.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Go on, said three times, means: I won't take no for an answer.",
+     "zh": "Go on 說三次，意思是：我不接受拒絕。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Usually about one more cup of tea, or one more biscuit. You will always say yes.",
+     "zh": "通常是再一杯茶或再一塊餅乾，而你最後一定會答應。",
+     "pose": "cheer",
+     "sticker": "🍪",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Go on, go on, go on. Just one more.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Too far?",
+   "sub": "開玩笑過頭時：怎麼救回來",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: when a joke goes too far.",
+     "zh": "第四段：玩笑開過頭時。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Even the Irish get it wrong sometimes. The important thing is to fix it fast.",
+     "zh": "連愛爾蘭人有時也會開過頭。重點是要快點補救。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Sorry, I didn't mean it like that.",
+   "meaning": "抱歉，我不是那個意思",
+   "note": "mean it like that ＝ 是那個意思",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Sorry, I didn't mean it like that.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "If someone looks hurt, stop joking and say this.",
+     "zh": "如果對方看起來受傷了，就別再鬧，說這句。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say it simply, and look at them. No more jokes for a minute.",
+     "zh": "簡單地說，看著對方，接下來一分鐘別再開玩笑。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Sorry, I didn't mean it like that.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "That came out wrong.",
+   "meaning": "我講錯了，不是那樣的",
+   "note": "come out wrong ＝ 說出來的話跟本意不同",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Or when your words sound worse than you meant.",
+     "zh": "或者當你的話聽起來比本意更糟。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "That came out wrong.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "That came out wrong means: the words were bad, but my meaning wasn't.",
+     "zh": "That came out wrong 是：話說得不好，但我本意不是那樣。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Very useful when you're joking in your second language!",
+     "zh": "用第二語言開玩笑時超好用！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That came out wrong.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Fair enough, I'll give you that one.",
+   "meaning": "好吧，這一回算你贏",
+   "note": "I'll give you that ＝ 這點我承認",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when they win the round, admit it.",
+     "zh": "對方這回合贏了，就大方承認。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "Fair enough, I'll give you that one.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'll give you that one means: OK, your joke was better. You win this time.",
+     "zh": "I'll give you that one 是：好啦，你的笑話比較好，這次你贏。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Losing well is part of banter too.",
+     "zh": "輸得漂亮也是互虧的一部分。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Fair enough, I'll give you that one.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "jay",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Jay, you look great tonight, actually.",
+     "zh": "Jay，說真的，你今晚很帥。",
+     "R": "conor-happy"
+    },
+    {
+     "v": "C",
+     "say": "Ah, would you stop!",
+     "zh": "哎呀，別鬧了啦！",
+     "L": "jay-happy"
+    },
+    {
+     "v": "B",
+     "say": "Another drink? Go on, go on, go on.",
+     "zh": "再一杯？來嘛來嘛來嘛。",
+     "R": "conor-talk"
+    },
+    {
+     "v": "C",
+     "say": "No, I'm driving. You'd know that if you ever listened!",
+     "zh": "不行，我要開車。你有在聽我說話就會知道！",
+     "L": "jay-talk"
+    },
+    {
+     "v": "B",
+     "say": "Ha! Fair enough, I'll give you that one.",
+     "zh": "哈！好吧，這一回算你贏。",
+     "R": "conor-happy"
+    },
+    {
+     "v": "E",
+     "say": "Listen to Jay. He sounds like he grew up in Dublin.",
+     "zh": "聽聽 Jay，聽起來像在都柏林長大的。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：互虧必備兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two words you'll hear in every round of banter.",
+     "zh": "還有加碼！每一輪互虧都會聽到的兩個字。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "A friendly insult",
+    "big": [
+     "*Ya eejit!",
+     "你這個笨蛋！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "This is the most common friendly insult in Ireland.",
+     "zh": "這是愛爾蘭最常見的友善罵人話。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Ya eejit!",
+     "pose": "secret"
+    },
+    {
+     "v": "E",
+     "say": "Eejit is the Irish way to say idiot. Between friends, it's almost a compliment.",
+     "zh": "eejit 是愛爾蘭版的 idiot。朋友之間說，幾乎算是讚美。",
+     "pose": "cheer",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you're embarrassed",
+    "big": [
+     "*I was mortified!",
+     "我尷尬死了！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when the joke is on you, and your face goes red, say this.",
+     "zh": "被虧到臉紅時，就說這句。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "I was mortified!",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Mortified means extremely embarrassed. Irish people use it for everything, big or small.",
+     "zh": "mortified 是尷尬到極點。愛爾蘭人大小事都用這個字。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I was mortified!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一整晚的互虧",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the whole night at the pub. Say Jay's lines!",
+     "zh": "現在把 Pub 的一整晚演一遍。跟著唸 Jay 的台詞！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "jay",
+   "R": "conor",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Look who it is! Did you get dressed in the dark?",
+     "zh": "看看誰來了！你是摸黑穿衣服的嗎？",
+     "R": "conor-happy"
+    },
+    {
+     "v": "C",
+     "say": "Are you slagging me? That's rich, coming from you!",
+     "zh": "你是在虧我嗎？這話從你嘴裡說出來還真好笑！",
+     "L": "jay-happy"
+    },
+    {
+     "v": "B",
+     "say": "Ha! I'm only pulling your leg. How was the new job?",
+     "zh": "哈！我只是在逗你。新工作怎麼樣？",
+     "R": "conor-talk"
+    },
+    {
+     "v": "C",
+     "say": "It's not the worst. But I called my boss mum on the first day. I was mortified!",
+     "zh": "還不賴。但我第一天叫我老闆「媽」，我尷尬死了！",
+     "L": "jay-frown"
+    },
+    {
+     "v": "B",
+     "say": "Ya eejit!",
+     "zh": "你這個笨蛋！",
+     "R": "conor-happy"
+    },
+    {
+     "v": "C",
+     "say": "Says you! Fair enough, I'll give you that one.",
+     "zh": "你還敢說！好吧，這一回算你贏。",
+     "L": "jay-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Are you slagging me?",
+     "Relax, I'm only pulling your leg.",
+     "Don't take it personally. It means he likes you.",
+     "Says you, with that haircut!",
+     "That's rich, coming from you!",
+     "You're one to talk!",
+     "It's not the worst.",
+     "Ah, would you stop!",
+     "Go on, go on, go on. Just one more.",
+     "Sorry, I didn't mean it like that.",
+     "That came out wrong.",
+     "Fair enough, I'll give you that one."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Jay, you're a natural! Smile, hit back, and know when to stop.",
+     "zh": "Jay，你天生就會！微笑、虧回去，還知道什麼時候該停。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them, and try one on your Irish friends.",
+     "zh": "十二句都在這裡。截圖下來，對你的愛爾蘭朋友試一句。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🍺",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And if anyone slags your English? Says you! See you next time. Bye!",
+     "zh": "如果有人虧你的英文？你還敢說！下一課見，Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
