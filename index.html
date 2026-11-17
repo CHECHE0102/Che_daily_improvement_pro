@@ -3878,7 +3878,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.50";
+const APP_VERSION="2026.11.51";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6493,7 +6493,7 @@ function meshTick(){ MESH.raf=0; const cv=document.getElementById("trMonCv"), R=
   MESH.raf=requestAnimationFrame(meshTick); }
 function meshStart(){ if(!MESH.raf) MESH.raf=requestAnimationFrame(meshTick); }
 /* ----- practice arena (練習場): try any weapon on a town monster — no tickets, no stamina, no rewards, nothing saved ----- */
-function trainState(){ if(!S.train){ const w=game().weapon&&ITEMS[game().weapon]; S.train={el:w?w.el:"metal", t:w?w.tier:0, mi:0, hit:null, n:0, sum:0}; } return S.train; }
+function trainState(){ if(!S.train){ const w=game().weapon&&ITEMS[game().weapon]; S.train={el:w?w.el:"metal", t:0, mi:0, hit:null, n:0, sum:0}; } S.train.t=0; return S.train; } /* practice uses tier I weapons only (CheChe 2026-11-17) */
 /* town monsters, then each wild picture the player has already reached (one per picture) */
 const trainMons=()=>{ const seen=new Set(), wl=WILD.filter(m=>{ const pk=wildOpen(m)&&picOfMon(m); if(!pk||seen.has(pk)) return false; seen.add(pk); return true; });
   return TOWNS.filter(m=>!m.boss).concat(wl); };
@@ -6528,12 +6528,10 @@ function trainHit(){
 function viewTrain(){
   const R=trainState(), w=ITEMS[`w-${R.el}-${R.t}`];
   const elBtns=ELS.map(e=>{ const it=ITEMS[`w-${e.k}-${R.t}`]; return `<button class="${R.el===e.k?"on":""}" data-act="trel" data-k="${e.k}" aria-pressed="${R.el===e.k}">${elBadge(e.k)} ${esc(itemName(it)||elName(e.k))}</button>`; }).join("");
-  const tierBtns=TIER.map((x,i)=>`<button class="${R.t===i?"on":""}" data-act="trtier" data-k="${i}" aria-pressed="${R.t===i}">${x.n}</button>`).join("");
   return `<p class="muted sm-t" style="margin:0">${T("trNote")}</p>
     <div class="card train-card"><div id="trStage">${trainScene()}</div>
       <div class="row tr-act"><button class="btn" data-act="trhit">⚔️ ${T("trHit")}</button><button class="btn ghost" data-act="trmon">🔄 ${T("trNext")}</button></div></div>
     <div class="eyebrow">${T("trPick")}</div><div class="tr-seg tr-el">${elBtns}</div>
-    <div class="eyebrow">${T("trTier")}</div><div class="tr-seg tr-tier">${tierBtns}</div>
     <p class="muted sm-t">${esc(itemName(w)||"")} · ${T("atk")} +${w.atk}</p>`;
 }
 /* shop · lucky house · bag: small icon buttons under the hero */
@@ -8863,7 +8861,7 @@ const COSMETICS=[
   {id:"n-fire",    slot:"neck", price:300, c1:"#FF6A2B", c2:"#FFD36B", fx:"fire",    pow:2},
   {id:"n-frost",   slot:"neck", price:300, c1:"#4FC3F7", c2:"#E6FBFF", fx:"frost",   pow:2},
   {id:"n-thunder", slot:"neck", price:420, c1:"#FFE14D", c2:"#FFFFFF", fx:"thunder", pow:3},
-  {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4, need:"sub", days:10},
+  {id:"n-dark",    slot:"neck", price:560, c1:"#9B4DFF", c2:"#14031F", fx:"dark",    pow:4, need:"sub", days:20},
   {id:"n-star",    slot:"neck", price:800, c1:"#FFD54A", c2:"#FFFFFF", fx:"star",    pow:5, plus:true, days:60},
   // 100- and 180-day streak pieces: dearer and flashier than everything before them
   {id:"f-galaxy",  slot:"feet", price:900,  c1:"#9B7BFF", c2:"#7FD4FF", plus:true, days:100},
@@ -8877,7 +8875,7 @@ const COSMETICS=[
   {id:"f-eternal", slot:"feet", price:2200, c1:"#FFD54A", c2:"#B98CFF", plus:true, days:365},
   {id:"b-bubble",  slot:"back", price:460,  c1:"#4FC3F7", c2:"#E6FBFF", need:"sub", days:20},
   {id:"b-cosmos",  slot:"back", price:2500, c1:"#B98CFF", c2:"#7FD4FF", plus:true, days:365},
-  {id:"n-leaf",    slot:"neck", price:500,  c1:"#5CCB6A", c2:"#E4FFB0", fx:"leaf",    pow:3, need:"sub", days:20},
+  {id:"n-leaf",    slot:"neck", price:500,  c1:"#5CCB6A", c2:"#E4FFB0", fx:"leaf",    pow:3, need:"sub", days:10},
   {id:"n-wave",    slot:"neck", price:650,  c1:"#29A8E8", c2:"#E6FBFF", fx:"wave",    pow:4, plus:true, days:30},
   {id:"n-moon",    slot:"neck", price:1100, c1:"#EAF2FF", c2:"#7FA8FF", fx:"moon",    pow:5, plus:true, days:100},
   {id:"n-cosmic",  slot:"neck", price:2600, c1:"#B98CFF", c2:"#FFD54A", fx:"cosmic",  pow:7, plus:true, days:365},
