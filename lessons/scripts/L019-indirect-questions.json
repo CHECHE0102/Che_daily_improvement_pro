@@ -1,0 +1,203 @@
+{
+ "id": "L019",
+ "title": "Do you know where…? 間接問句",
+ "subtitle": "語序・Could you tell me・if",
+ "level": "B1–B2",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "aoife",
+ "voices": {
+  "T": "zh-TW-HsiaoChenNeural",
+  "TE": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "+4%",
+   "+0Hz"
+  ],
+  "TE": [
+   "-6%",
+   "+2Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "問路更有禮貌",
+    "Do you know",
+    "where it is?"
+   ],
+   "emoji": "🧭",
+   "lines": [
+    {
+     "v": "T",
+     "say": "問路時直接說 Where is，有點太直接。"
+    },
+    {
+     "v": "T",
+     "say": "今天學更有禮貌的間接問句！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "Do you know where…",
+   "points": [
+    "主詞放在動詞前面",
+    "Do you know where the station is?"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，Do you know 後面接問句，語序要變回直述句。"
+    },
+    {
+     "v": "A",
+     "say": "Excuse me, do you know where the station is?",
+     "zh": "不好意思，你知道車站在哪裡嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Sure, it's just around the corner.",
+     "zh": "知道，就在轉角。"
+    },
+    {
+     "v": "T",
+     "say": "注意！是 the station is，主詞在前面。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "Could you tell me…?",
+   "points": [
+    "更客氣的開頭",
+    "Could you tell me what time it opens?"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，想更客氣，可以說 Could you tell me。"
+    },
+    {
+     "v": "A",
+     "say": "Could you tell me what time it opens?",
+     "zh": "可以告訴我幾點開門嗎？"
+    },
+    {
+     "v": "B",
+     "say": "It opens at nine.",
+     "zh": "九點開門。"
+    },
+    {
+     "v": "T",
+     "say": "what time it opens，一樣是主詞在前。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "if / whether",
+   "points": [
+    "問「是不是」",
+    "Do you know if it goes to town?"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，問是不是，沒有疑問詞，就用 if 或 whether。"
+    },
+    {
+     "v": "A",
+     "say": "Do you know if this bus goes to town?",
+     "zh": "你知道這班公車有沒有到市區嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Yeah, it does. Hop on.",
+     "zh": "有喔，上車吧。"
+    },
+    {
+     "v": "T",
+     "say": "Does this bus go，變成 if this bus goes。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Do you know where ___?",
+   "ask": "要填什麼？",
+   "opts": [
+    "is the toilet",
+    "the toilet is",
+    "does the toilet"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想有禮貌地問：你知道廁所在哪裡嗎？"
+    },
+    {
+     "v": "A",
+     "say": "Do you know where blank?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！間接問句，主詞放在動詞前面。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "Do you know where…",
+     "你知道…在哪"
+    ],
+    [
+     "Could you tell me…",
+     "可以告訴我…"
+    ],
+    [
+     "if / whether",
+     "是不是"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了間接問句！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

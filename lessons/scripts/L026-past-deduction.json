@@ -1,0 +1,203 @@
+{
+ "id": "L026",
+ "title": "He must have… 推測過去",
+ "subtitle": "must have・might have・can't have",
+ "level": "B2–C1",
+ "kind": "grammar",
+ "date": "2026-11-14",
+ "teacher": "declan",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-GB-RyanNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "prosody": {
+  "T": [
+   "-4%",
+   "-14Hz"
+  ],
+  "TE": [
+   "-8%",
+   "-4Hz"
+  ]
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "他一定是…",
+    "must have",
+    "forgotten"
+   ],
+   "emoji": "🔍",
+   "lines": [
+    {
+     "v": "T",
+     "say": "朋友遲到又不回訊息，一定是忘了！英文怎麼說？"
+    },
+    {
+     "v": "T",
+     "say": "今天學怎麼推測過去發生的事。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "must have + p.p.",
+   "points": [
+    "很確定：一定是…了",
+    "He must have missed the bus."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，很有把握的推測，用 must have 加過去分詞。"
+    },
+    {
+     "v": "A",
+     "say": "Tom still isn't here.",
+     "zh": "Tom 還沒到。"
+    },
+    {
+     "v": "B",
+     "say": "He must have missed the bus.",
+     "zh": "他一定是錯過公車了。"
+    },
+    {
+     "v": "T",
+     "say": "九成確定，但沒有親眼看到。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "might have + p.p.",
+   "points": [
+    "不太確定：可能…了",
+    "She might have left early."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，只是猜測，用 might have 或 could have。"
+    },
+    {
+     "v": "A",
+     "say": "Her desk is empty.",
+     "zh": "她的位子是空的。"
+    },
+    {
+     "v": "B",
+     "say": "She might have left early.",
+     "zh": "她可能提早走了。"
+    },
+    {
+     "v": "T",
+     "say": "might have 大概五成，語氣比 must 弱很多。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "can't have + p.p.",
+   "points": [
+    "很確定：不可能…",
+    "You can't have finished already!"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，覺得不可能，用 can't have。"
+    },
+    {
+     "v": "A",
+     "say": "I've finished the whole report.",
+     "zh": "整份報告我寫完了。"
+    },
+    {
+     "v": "B",
+     "say": "You can't have finished already!",
+     "zh": "你不可能已經寫完了吧！"
+    },
+    {
+     "v": "T",
+     "say": "很多人會說成 mustn't have，這是錯的喔。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "The lights are off. They ___ gone home.",
+   "ask": "要填什麼？",
+   "opts": [
+    "must have",
+    "can't have",
+    "mustn't"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！燈都關了，想說：他們一定回家了。"
+    },
+    {
+     "v": "A",
+     "say": "The lights are off. They blank gone home.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！很確定的推測，用 must have。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "must have",
+     "一定是…了"
+    ],
+    [
+     "might have",
+     "可能…了"
+    ],
+    [
+     "can't have",
+     "不可能…"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了怎麼推測過去！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
