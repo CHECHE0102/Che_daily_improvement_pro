@@ -52,3 +52,8 @@ Set `"teacher"` and copy that teacher's `voices` and `prosody` into the script. 
 | L021–L030 | `declan` | Declan 老師, mid 40s man | `zh-TW-YunJheNeural` / `en-GB-RyanNeural` | `{"T": ["-4%", "-14Hz"], "TE": ["-8%", "-4Hz"]}` |
 
 Art lives in `assets/art/lesson/<prefix>-{talk,yay,hi,bye,think,wow,point}.webp` (Cian's prefix is `teacher`). A new teacher needs all 7 poses before its first lesson; register it in `TEACHERS` in `lessons/lesson-render.js`.
+
+## Long videos (V001 onward, YouTube only)
+
+5–10 minute lessons for YouTube, taught in English by Niamh with Chinese subtitles. Not shown in the app.
+Scripts are `lessons/long/V###-<slug>.json`; the full how-to (format, poses, steps, checks, delivery) is in `lessons/long/README.md`.
