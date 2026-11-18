@@ -1006,7 +1006,7 @@ body.vp-lock{touch-action:pan-x pan-y}
 .exam-seg{margin-bottom:10px}.to-chip{display:inline-flex;align-items:baseline;gap:6px;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--tc) 18%,transparent);border:2px solid var(--tc)}.to-chip b{color:var(--tc);font-size:16px}.to-chip small{font-size:11px;color:var(--tc);font-weight:700}.to-chip.big{padding:8px 16px}.to-chip.big b{font-size:34px}
 .to-tiers{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.to-tier{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 9px;border-radius:99px;border:1px solid var(--line,#ccd)}.to-tier i{width:12px;height:12px;border-radius:50%;background:var(--tc)}
 .to-grp{display:flex;flex-direction:column;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line,#ccd)}.to-doc{border-left:3px solid var(--accent);padding-left:12px}.to-doc .eyebrow{margin-bottom:2px}.to-blank{font-weight:800;color:var(--accent);text-decoration:underline}.to-tabs{flex-wrap:wrap}
-img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}.mesh-on .foe .mon-seal{background:none;box-shadow:none;animation:none;filter:none;transform:none}.mesh-on .foe .mon-seal>*{visibility:hidden}.rig-cos{position:absolute;inset:0;pointer-events:none;transform:translate(var(--rx,0),var(--ry,0)) rotate(var(--rl,0deg));transform-origin:46% 66%}.rig-host>.rig-cos:last-child{z-index:2}.mesh-pend .foe .mon-seal{background:none;box-shadow:none}.mesh-pend .foe .ms-badge{visibility:hidden}.mesh-glow{position:absolute;left:50%;top:50%;width:125%;aspect-ratio:1;border-radius:50%;pointer-events:none;z-index:2;opacity:0;mix-blend-mode:screen;background:radial-gradient(circle,#fff 0,var(--c1) 20%,color-mix(in srgb,var(--c2) 70%,transparent) 42%,transparent 68%);transform:translate(-50%,-50%) scale(.5);animation:mglow .65s ease-out .2s}.mesh-glow.s3,.mesh-glow.s4{width:155%}@keyframes mglow{0%{opacity:0;transform:translate(-50%,-50%) scale(.45)}22%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.15)}}.train-card{padding:10px}.train-arena{margin:0}.rig-on .fighter.hero{z-index:2}.rig-on .foe:not(.hurt) .mon-seal{animation:none}.rig-host{position:relative;width:100%;height:100%}.rig-cv{position:absolute;left:-20%;top:-30%;width:300%;height:140%;pointer-events:none}.rig-mon{position:relative;display:block}.rig-mon img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;user-select:none}.tr-line{text-align:center;margin:6px 0 0}.tr-act{justify-content:center;margin-top:8px}
+img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}.mesh-on .foe .mon-seal{background:none;box-shadow:none;animation:none;filter:none;transform:none}.mesh-on .foe .mon-seal>*{visibility:hidden}.rig-cos{position:absolute;inset:0;pointer-events:none;transform-origin:46% 66%;will-change:transform}.cos-item .cos-ic:not(.ic-on) *{animation-play-state:paused!important}.pz-hid{visibility:hidden}.pz-hid *{animation-play-state:paused!important}#plazaRoom .pz-bob{will-change:transform}#plazaRoom .pz-fig [class*="cos-"],#plazaRoom .pz-fig [class*="cos-"] *{filter:none!important}#plazaRoom .ha-glow{animation:none!important}.rig-host>.rig-cos:last-child{z-index:2}.mesh-pend .foe .mon-seal{background:none;box-shadow:none}.mesh-pend .foe .ms-badge{visibility:hidden}.mesh-glow{position:absolute;left:50%;top:50%;width:125%;aspect-ratio:1;border-radius:50%;pointer-events:none;z-index:2;opacity:0;mix-blend-mode:screen;background:radial-gradient(circle,#fff 0,var(--c1) 20%,color-mix(in srgb,var(--c2) 70%,transparent) 42%,transparent 68%);transform:translate(-50%,-50%) scale(.5);animation:mglow .65s ease-out .2s}.mesh-glow.s3,.mesh-glow.s4{width:155%}@keyframes mglow{0%{opacity:0;transform:translate(-50%,-50%) scale(.45)}22%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.15)}}.train-card{padding:10px}.train-arena{margin:0}.rig-on .fighter.hero{z-index:2}.rig-on .foe:not(.hurt) .mon-seal{animation:none}.rig-host{position:relative;width:100%;height:100%}.rig-cv{position:absolute;left:-20%;top:-30%;width:300%;height:140%;pointer-events:none}.rig-mon{position:relative;display:block}.rig-mon img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;user-select:none}.tr-line{text-align:center;margin:6px 0 0}.tr-act{justify-content:center;margin-top:8px}
 .tr-seg{display:flex;flex-wrap:wrap;gap:6px}.tr-seg button{border:1.5px solid var(--line,#ddd);background:var(--card,#fff);color:inherit;font:inherit;font-size:13px;font-weight:700;border-radius:99px;padding:6px 10px;display:inline-flex;align-items:center;gap:4px;cursor:pointer}.tr-seg button.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--card,#fff));color:var(--accent)}.tr-tier button{min-width:44px;justify-content:center}
 .adv-quick{grid-column:1/-1;display:flex;justify-content:center;gap:14px;margin-top:6px;padding-top:10px;border-top:1px dashed color-mix(in srgb,var(--hs-tint,#C8B89A) 45%,transparent)}.aq-card .adv-quick{border-top:0;margin:0;padding:0}
 .aq-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 6px;color:inherit;font:inherit;font-size:13px;font-weight:700;min-width:64px;cursor:pointer}
@@ -3878,7 +3878,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.53";
+const APP_VERSION="2026.11.54";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6306,7 +6306,8 @@ function rigDraw(cv,o,t){
   const R=RIG_RW[o.kind]||RIG_RW.sword, f=rigFrame(R,t), Wd=SW*.871/.30, k=SW*.871/841;
   const ox=SW*.2, oy=SW*.3; // canvas origin offset inside the host box
   const sx=ox+SW*.45+f.x*Wd, sy=oy+SW*.963+f.y*Wd;
-  host.style.setProperty("--rx",(f.x*Wd).toFixed(1)+"px"); host.style.setProperty("--ry",(f.y*Wd).toFixed(1)+"px"); host.style.setProperty("--rl",(f.lean||0).toFixed(1)+"deg");
+  const cosT=`translate(${(f.x*Wd).toFixed(1)}px,${(f.y*Wd).toFixed(1)}px) rotate(${(f.lean||0).toFixed(1)}deg)`;   // move the cosmetic layers directly: a CSS variable on the host restyled every effect inside them each frame (lag on iPhone)
+  if(host._cosT!==cosT){ host._cosT=cosT; for(const e of host.children) if(e.classList.contains("rig-cos")) e.style.transform=cosT; }
   const base=new DOMMatrix().scale(DPR,DPR).translate(sx,sy).scale(k,k).translate(-RIG_HP.feet[0],-RIG_HP.feet[1]);
   const L=(p,b)=>new DOMMatrix().translate(b[0]+(p.x||0),b[1]+(p.y||0)).rotate(p.r||0).scale(1+(p.sx||0),1+(p.sy||0)).translate(-b[0],-b[1]);
   const pose={root:{sx:-f.sq*.5,sy:f.sq},hips:{r:f.lean},head:{r:-f.lean*.4},legN:{r:f.legN},legF:{r:f.legF}}, M={};
@@ -8341,7 +8342,7 @@ function plzFree(x,y){ if(!plzBlocked(x,y)) return [x,y]; for(let r=8;r<500;r+=8
 function plzSpot(){ const v=plzView();
   if(v) for(let i=0;i<60;i++){ const x=plzRnd(v.x0+50,v.x1-70), y=plzRnd(v.y0+150,v.y1-30); if(!plzBlocked(x,y)) return [x,y]; }
   for(let i=0;i<60;i++){ const x=plzRnd(60,PLZ_W-60), y=plzRnd(120,PLZ_H-40); if(!plzBlocked(x,y)) return [x,y]; } const sp=PLZ_GEO[ROOM?ROOM.zone:"fountain"].sp; return [sp[0]*PLZ_U,sp[1]*PLZ_U]; }
-function plzGround(cv,zone){ const D=Math.min(2,devicePixelRatio||1), W=PLZ_W, H=PLZ_H; cv.width=W*D; cv.height=H*D; cv.style.width=W+"px"; cv.style.height=H+"px";
+function plzGround(cv,zone){ const D=Math.min(1.5,devicePixelRatio||1), W=PLZ_W, H=PLZ_H; cv.width=W*D; cv.height=H*D; cv.style.width=W+"px"; cv.style.height=H+"px";
   const c=cv.getContext("2d"); c.scale(D,D); c.fillStyle="#8cc46e"; c.fillRect(0,0,W,H);
   const podium=()=>{ if(zone!=="fountain") return; const step=(x,y,w,h,col)=>{ c.fillStyle="rgba(60,50,30,.22)"; c.fillRect(x-w/2+4,y+4,w,h); c.fillStyle=col; c.fillRect(x-w/2,y-h,w,h*2); c.strokeStyle="#7a6a45"; c.lineWidth=2; c.strokeRect(x-w/2,y-h,w,h*2); };
     step(664,189,100,18,"#d9dde2"); step(872,192,100,14,"#e2b07e"); step(768,174,104,26,"#f3cf55");
@@ -8465,14 +8466,15 @@ function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R
     if(o===m&&mv&&!reduce){ o.dust=(o.dust||0)-dt; if(o.dust<=0){ o.dust=.16; const d=document.createElement("i"); d.className="pz-dust"; d.style.transform=`translate(${(o.x-o.face*14).toFixed(0)}px,${o.y.toFixed(0)}px)`; d.style.zIndex=Math.round(o.y)-1; R.world.appendChild(d); setTimeout(()=>d.remove(),520); } }
     const tr=plzTerr(o.x,o.y); if(tr!==o.terr){ o.terr=tr; o.el.classList.toggle("pz-ingrass",tr==="grass"); o.el.classList.toggle("pz-swim",tr==="water"); }
     if(tr==="water"&&!mv&&!(o.actT>0)){ b=Math.sin(o.phase*.8)*2.2; r=0; sq=1; }
-    o.el.classList.toggle("pz-mv",!!mv);
-    o.el.style.transform=`translate(${o.x.toFixed(1)}px,${o.y.toFixed(1)}px)`; o.el.style.zIndex=Math.round(o.y);
-    o.bob.style.transform=`translateY(${b.toFixed(1)}px) rotate(${r.toFixed(1)}deg) scale(${(1/sq).toFixed(3)},${sq.toFixed(3)})`; o.fig.style.transform=o.face<0?"scaleX(-1)":"";
+    if(!!mv!==o.mvC){ o.mvC=!!mv; o.el.classList.toggle("pz-mv",!!mv); }
+    const pT=`translate(${o.x.toFixed(1)}px,${o.y.toFixed(1)}px)`, zI=Math.round(o.y), bT=`translateY(${b.toFixed(1)}px) rotate(${r.toFixed(1)}deg) scale(${(1/sq).toFixed(3)},${sq.toFixed(3)})`, fT=o.face<0?"scaleX(-1)":"";   // write only what changed
+    if(pT!==o.pT){ o.pT=pT; o.el.style.transform=pT; } if(zI!==o.zI){ o.zI=zI; o.el.style.zIndex=zI; } if(bT!==o.bT){ o.bT=bT; o.bob.style.transform=bT; } if(fT!==o.fT){ o.fT=fT; o.fig.style.transform=fT; }
     if(o.bubT>0){ o.bubT-=dt; if(o.bubT<=0) o.bub.classList.remove("on"); } }
   const vw=R.stage.clientWidth, vh=R.stage.clientHeight, z=plzZoom(vw,vh); R.cam.x+=(m.x-R.cam.x)*Math.min(1,dt*6); R.cam.y+=(m.y-60-R.cam.y)*Math.min(1,dt*6);
   const cx=Math.max(vw/2/z,Math.min(PLZ_W-vw/2/z,R.cam.x)), cy=Math.max(vh/2/z-(R.zone==="fountain"?70:0),Math.min(PLZ_H-vh/2/z,R.cam.y));   // 70px of sky above the map keeps the podium clear of the top bar
   const V={x0:cx-vw/2/z, x1:cx+vw/2/z, y0:cy-vh/2/z, y1:cy+vh/2/z};
-  for(const o of R.ents.values()){ if(o.kind==="off"&&o.wait>0&&(o.x<V.x0+20||o.x>V.x1-20||o.y<V.y0+90||o.y>V.y1)) o.wait=Math.min(o.wait,.2);
+  for(const o of R.ents.values()){ const vis=o.x>V.x0-60&&o.x<V.x1+60&&o.y>V.y0-20&&o.y<V.y1+110; if(vis!==o.vis){ o.vis=vis; o.el.classList.toggle("pz-hid",!vis); }   // people off screen: hidden, their effects paused
+    if(o.kind==="off"&&o.wait>0&&(o.x<V.x0+20||o.x>V.x1-20||o.y<V.y0+90||o.y>V.y1)) o.wait=Math.min(o.wait,.2);
     const out=o.kind==="live"&&(o.x<V.x0||o.x>V.x1||o.y<V.y0+60||o.y>V.y1+40);
     if(out){ if(!o.edge){ o.edge=document.createElement("div"); o.edge.className="pz-edge"; o.edge.innerHTML=`<i></i><span>${esc(o.name||"?")}</span>`; o.edge.onclick=()=>plzCard(o); R.box.appendChild(o.edge); }
       const sx=(o.x-cx)*z+vw/2, sy=(o.y-50-cy)*z+vh/2, ex=Math.max(46,Math.min(vw-46,sx)), ey=Math.max(90,Math.min(vh-40,sy));
@@ -9032,7 +9034,11 @@ function cosPreviewIc(c){
   if(c.slot==="sfx") return `<span class="cos-ic sfx">${COS_SFX_IC[c.id]||"🎵"}</span>`;
   const L=cosLayers({[c.slot]:c.id});
   return `<span class="cos-ic ${c.slot}${c.d3?" d3":""}" style="${cosStyleCss(c)}">${c.slot==="neck"?`<span class="cos-neck solo cn-${c.fx}" style="${cosStyleCss(c)}">${PENDANT[c.fx]}</span>`:L.under+L.over}</span>`; }
+function cosIcWatch(){ if(!("IntersectionObserver" in window)) return; if(S.cosIO) S.cosIO.disconnect();
+  S.cosIO=new IntersectionObserver(es=>{ for(const e of es) e.target.classList.toggle("ic-on",e.isIntersecting); });
+  document.querySelectorAll(".cos-item .cos-ic").forEach(el=>S.cosIO.observe(el)); }
 function viewStyle(){
+  setTimeout(cosIcWatch,0);   // each shop icon is a small live effect (up to ~30 moving parts); only the ones on screen run
   const g=game(), slot=S.cosSlot||"feet", worn=cosWorn(), tryOn=S.cosTry||{}, plan=myPlan();
   const anyTry=Object.keys(tryOn).some(k=>tryOn[k]&&tryOn[k]!==(g.cos||{})[k]);
   const hero=g.gender?rigHeroHtml(g.gender, g.weapon&&ITEMS[g.weapon], g.armor&&ITEMS[g.armor], ()=>heroArt(S.cosHit?"attack":"idle"), cosLayers(cosWorn())):heroArt(S.cosHit?"attack":"idle"), rig=hero.includes("rig-host");
@@ -9063,7 +9069,11 @@ function cosPush(){ try{ if(CLOUD.user&&!SANDBOX()&&typeof lbPush==="function"){
 function cosTest(){ const e={who:"p"};
   if(document.getElementById("rigHero")&&RIG.cur&&!S.cosBusy){ S.cosBusy=true; const A=rigAttack(()=>{ S.cosBusy=false; cosHitNow(e); }); clearTimeout(S.cosBusyT); S.cosBusyT=setTimeout(()=>{ S.cosBusy=false; }, A.impact+1500); return; }
   if(S.cosBusy) return; cosHitNow(e); }
-function cosHitNow(e){ S.cosHit=true; const n=cosSfxName(e); sfx(n||"hit"); const nk=cosWorn().neck&&cosOf(cosWorn().neck); if(nk) sfx("nx-"+nk.fx); render(); clearTimeout(S.cosHitT); S.cosHitT=setTimeout(()=>{ S.cosHit=false; render(); },1400); }
+function cosHitNow(e){ S.cosHit=true; const n=cosSfxName(e); sfx(n||"hit"); const nk=cosWorn().neck&&cosOf(cosWorn().neck); if(nk) sfx("nx-"+nk.fx); cosStageRefresh(); clearTimeout(S.cosHitT); S.cosHitT=setTimeout(()=>{ S.cosHit=false; cosStageRefresh(); },1400); }
+// a test strike only changes the stage: swap that in place (the moving hero canvas stays) instead of rebuilding the whole page and every shop icon (lag spike on iPhone)
+function cosStageRefresh(){ const old=document.querySelector(".sty-stage"); if(!old||S.view!=="adv"||S.advTab!=="style") return render();
+  const tmp=document.createElement("div"); tmp.innerHTML=viewStyle(); const nw=tmp.querySelector(".sty-stage"); if(!nw) return render();
+  const of=old.querySelector(".sty-fig"), nf=nw.querySelector(".sty-fig"); if(of&&nf&&of.querySelector("#rigHero")&&nf.querySelector("#rigHero")) nf.replaceWith(of); old.replaceWith(nw); }
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^cs/.test(a)) return; e.stopPropagation();
   const g=game(), k=t.dataset.k;
