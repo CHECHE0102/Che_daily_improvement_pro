@@ -1,0 +1,1115 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-SG-WayneNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V007",
+ "title": "餐廳點餐：過敏與特殊需求",
+ "subtitle": "12 句英文，吃得安心又不失禮",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-restaurant",
+ "guest": "hafiz",
+ "roles": {
+  "A": "Niamh 客人",
+  "B": "Hafiz 服務生"
+ },
+ "thumb": {
+  "pose": "think",
+  "bg": "bg-restaurant",
+  "line1": "對堅果過敏",
+  "line2": "點餐怎麼說？",
+  "tag": "12 句 B2 英文",
+  "sticker": "🥜"
+ },
+ "chapters": [
+  "Intro",
+  "先問清楚",
+  "請廚房調整",
+  "上錯菜了",
+  "結帳",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "customer",
+   "R": "hafiz",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Are you ready to order?",
+     "zh": "可以點餐了嗎？",
+     "R": "hafiz-talk"
+    },
+    {
+     "v": "A",
+     "say": "Yes, the pesto pasta, please.",
+     "zh": "可以，我要青醬義大利麵。"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "L": "barista-panic",
+     "sticker": "🥜",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "Wait… is there anything in it?",
+     "zh": "等等……裡面有加什麼嗎？",
+     "L": "think"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🥜",
+    "big": [
+     "Pesto = pine nuts",
+     "*and I'm allergic"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "My friend Aoife is allergic to nuts. She ordered pesto pasta, and she didn't know pesto is made with nuts.",
+     "zh": "我朋友 Aoife 對堅果過敏。她點了青醬義大利麵，卻不知道青醬是用堅果做的。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "She was fine in the end, but she spent her birthday dinner in A and E.",
+     "zh": "最後她沒事，但她的生日晚餐是在急診室度過的。",
+     "pose": "barista-sorry",
+     "sticker": "🚑",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Order safely",
+     "*and get what you want"
+    ],
+    "cta": "餐廳點餐：過敏與特殊需求・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for eating out when you have an allergy, or just a preference.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你在外面吃飯時，有過敏或特別需求要用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for eating out when you have an allergy, or just a preference."
+    },
+    {
+     "v": "E",
+     "say": "You'll ask what's in a dish, change it, and complain politely if something goes wrong.",
+     "zh": "你會學到怎麼問菜裡有什麼、怎麼請廚房調整、出錯時怎麼有禮貌地反映。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Ask first",
+   "sub": "先問清楚：菜裡有什麼？",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: ask first.",
+     "zh": "第一段：先問清楚。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Menus don't list everything. Sauces, oils and toppings are where the surprises hide.",
+     "zh": "菜單不會寫出所有東西。醬汁、油和配料最容易藏驚喜。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "I have a severe nut allergy. Is that OK with this dish?",
+   "meaning": "我對堅果嚴重過敏，這道菜可以吃嗎？",
+   "note": "severe ＝ 嚴重的",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I have a severe nut allergy. Is that OK with this dish?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Severe means serious. It tells the waiter this isn't a small thing.",
+     "zh": "severe 是嚴重的，讓服務生知道這不是小事。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say it before you order, not after the food arrives.",
+     "zh": "要在點餐前說，不是等菜上來才說。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I have a severe nut allergy. Is that OK with this dish?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "Could you check with the kitchen what's in the sauce?",
+   "meaning": "可以幫我問一下廚房醬汁裡有什麼嗎？",
+   "note": "check with ＝ 去問、確認",
+   "lines": [
+    {
+     "v": "E",
+     "say": "If the waiter isn't sure, don't accept a guess.",
+     "zh": "如果服務生不確定，不要接受用猜的答案。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Could you check with the kitchen what's in the sauce?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Check with the kitchen means go and ask the chef.",
+     "zh": "check with the kitchen 是去問廚師。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Notice the order: what's in the sauce, not what is in the sauce is. It's a question inside a sentence.",
+     "zh": "注意語序是 what's in the sauce，因為這是句子裡的問句。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could you check with the kitchen what's in the sauce?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "Could there be any cross-contamination?",
+   "meaning": "有沒有可能交叉污染？",
+   "note": "cross-contamination ＝ 交叉污染",
+   "lines": [
+    {
+     "v": "E",
+     "say": "For real allergies, there's one more question.",
+     "zh": "如果是真的過敏，還要多問一句。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Could there be any cross-contamination?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Cross-contamination means a tiny amount gets in from the same pan or board.",
+     "zh": "cross-contamination 是同一個鍋子或砧板沾到了一點點。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A good restaurant will give you an honest answer, even if the answer is: we can't promise.",
+     "zh": "好的餐廳會老實回答，就算答案是「沒辦法保證」。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could there be any cross-contamination?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 1,
+   "L": "customer",
+   "R": "hafiz",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's hear it.",
+     "zh": "來聽聽看。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I have a severe nut allergy. Is that OK with the pesto pasta?",
+     "zh": "我對堅果嚴重過敏，青醬義大利麵可以吃嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Hmm, I'm not sure. Pesto usually has pine nuts.",
+     "zh": "嗯，我不確定。青醬通常有松子。",
+     "R": "hafiz-think"
+    },
+    {
+     "v": "A",
+     "say": "Could you check with the kitchen what's in the sauce?",
+     "zh": "可以幫我問一下廚房醬汁裡有什麼嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Of course. Back in a minute.",
+     "zh": "當然，馬上回來。",
+     "R": "hafiz-talk"
+    },
+    {
+     "v": "E",
+     "say": "Clear and calm. Now the kitchen knows too.",
+     "zh": "清楚又冷靜。現在廚房也知道了。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Change it",
+   "sub": "請廚房調整：換、拿掉、分開放",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: change it.",
+     "zh": "第二段：請廚房調整。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Not just for allergies. Maybe you don't eat meat, or you just hate onions. You're allowed to ask.",
+     "zh": "不只是過敏。也許你不吃肉，或是很討厭洋蔥，都可以開口。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "Could I have it without the cheese?",
+   "meaning": "可以不要加起司嗎？",
+   "note": "without ＝ 不要加",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could I have it without the cheese?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Without is the easiest way to remove something.",
+     "zh": "without 是拿掉東西最簡單的說法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Could I have is softer than I want. The waiter hears it all day.",
+     "zh": "Could I have 比 I want 柔和，服務生整天都聽到這句。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could I have it without the cheese?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "Is it OK if I swap the chips for a side salad?",
+   "meaning": "薯條可以換成配菜沙拉嗎？",
+   "note": "swap A for B ＝ 把 A 換成 B",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Next, a swap.",
+     "zh": "接著，換菜。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Is it OK if I swap the chips for a side salad?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Swap A for B means take A away, and give me B instead.",
+     "zh": "swap A for B 是拿掉 A，換成 B。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "In Ireland, chips are the thick fries. Crisps are the thin ones in a bag.",
+     "zh": "在愛爾蘭，chips 是粗薯條，袋裝的薄片叫 crisps。",
+     "pose": "secret",
+     "sticker": "🍟",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is it OK if I swap the chips for a side salad?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "Could I get the dressing on the side?",
+   "meaning": "醬汁可以另外放嗎？",
+   "note": "on the side ＝ 另外放、放旁邊",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you want control, say this.",
+     "zh": "想自己控制份量時，就說這一句。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Could I get the dressing on the side?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "On the side means in a small bowl next to the food, not on it.",
+     "zh": "on the side 是放在旁邊的小碟子，不要淋上去。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then you decide how much. Very useful for sauces you don't trust.",
+     "zh": "這樣份量你決定。遇到沒把握的醬汁很好用。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could I get the dressing on the side?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Something's wrong",
+   "sub": "上錯菜了：說清楚但不吵架",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: something's wrong.",
+     "zh": "第三段：出錯了。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The food arrives, and there's cheese all over it. What now?",
+     "zh": "菜上來了，上面滿滿的起司。怎麼辦？",
+     "pose": "barista-panic"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 3,
+   "board": {
+    "kicker": "Don't do this",
+    "items": [
+     "✗ Eat it and say nothing",
+     "✗ Get angry at the waiter"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Some people eat it and say nothing. Others get angry at the waiter.",
+     "zh": "有些人默默吃掉，有些人對服務生發脾氣。",
+     "pose": "no",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Both are wrong. The waiter didn't cook it, and you shouldn't pay for food you can't eat.",
+     "zh": "兩種都不對。菜不是服務生煮的，你也不該為不能吃的菜付錢。",
+     "pose": "point",
+     "step": 2
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Sorry, I think there's been a mix-up. I asked for no cheese.",
+   "meaning": "不好意思，好像弄錯了，我有說不要起司",
+   "note": "mix-up ＝ 搞混、弄錯",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Sorry, I think there's been a mix-up. I asked for no cheese.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A mix-up is a mistake where things got confused. It blames nobody.",
+     "zh": "mix-up 是搞混了，沒有怪任何人。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then say the fact: I asked for no cheese. Short and clear.",
+     "zh": "接著講事實：I asked for no cheese。簡短清楚。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Sorry, I think there's been a mix-up. I asked for no cheese.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I'm afraid I can't eat this. Could you send it back?",
+   "meaning": "恐怕我不能吃這個，可以退回廚房嗎？",
+   "note": "send it back ＝ 退回去重做",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask for what you need.",
+     "zh": "然後說出你需要的。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'm afraid I can't eat this. Could you send it back?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'm afraid is a polite way to give bad news.",
+     "zh": "I'm afraid 是委婉地說出壞消息。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Send it back means return it to the kitchen to be made again.",
+     "zh": "send it back 是退回廚房重做。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm afraid I can't eat this. Could you send it back?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "It's been about forty minutes. Is our food on its way?",
+   "meaning": "已經等了大概四十分鐘，我們的菜在路上了嗎？",
+   "note": "on its way ＝ 在路上、快來了",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if the food doesn't come at all?",
+     "zh": "如果菜一直沒來呢？",
+     "pose": "think"
+    },
+    {
+     "v": "A",
+     "say": "It's been about forty minutes. Is our food on its way?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Start with the fact: how long you've waited. Then ask a simple question.",
+     "zh": "先講事實：等了多久，再問一個簡單的問題。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "On its way means it's coming soon. It sounds relaxed, but they'll understand.",
+     "zh": "on its way 是快來了。聽起來很輕鬆，但對方會懂。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's been about forty minutes. Is our food on its way?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 3,
+   "L": "customer",
+   "R": "hafiz",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Here you go. Enjoy!",
+     "zh": "您的餐點，請慢用！",
+     "R": "hafiz-happy"
+    },
+    {
+     "v": "A",
+     "say": "Sorry, I think there's been a mix-up. I asked for no cheese.",
+     "zh": "不好意思，好像弄錯了，我有說不要起司。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Oh no, I'm so sorry.",
+     "zh": "喔不，真的很抱歉。",
+     "R": "hafiz-think"
+    },
+    {
+     "v": "A",
+     "say": "I'm afraid I can't eat this. Could you send it back?",
+     "zh": "恐怕我不能吃這個，可以退回廚房嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Of course. I'll get you a fresh one straight away.",
+     "zh": "當然，我馬上幫你重做一份。",
+     "R": "hafiz-talk"
+    },
+    {
+     "v": "E",
+     "say": "No drama, and a new plate is coming.",
+     "zh": "沒有吵架，新的一盤就要來了。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Pay and go",
+   "sub": "結帳：分開付、小費、道謝",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: pay and go.",
+     "zh": "第四段：結帳離開。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The end of the meal has its own little phrases.",
+     "zh": "吃完飯也有幾句固定的話。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Could we get the bill, please?",
+   "meaning": "可以幫我們結帳嗎？",
+   "note": "the bill ＝ 帳單（美國說 the check）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Could we get the bill, please?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "In Ireland and the UK, we say the bill. Americans say the check.",
+     "zh": "在愛爾蘭和英國說 the bill，美國人說 the check。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And the waiter usually won't bring it until you ask. That's not slow service. It's politeness.",
+     "zh": "而且你不開口，服務生通常不會拿來。那不是服務慢，是禮貌。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Could we get the bill, please?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "Would it be OK to split it three ways?",
+   "meaning": "可以分成三份付嗎？",
+   "note": "split it three ways ＝ 平分成三份",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Eating with friends? Ask this.",
+     "zh": "跟朋友一起吃？問這一句。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Would it be OK to split it three ways?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Split it means divide it. Three ways means into three equal parts.",
+     "zh": "split 是分開，three ways 是平均分成三份。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Or say: could we pay separately? Then everyone pays for their own food.",
+     "zh": "或是說 could we pay separately，各付各的。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Would it be OK to split it three ways?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Thanks, that was lovely. Please pass it on to the chef.",
+   "meaning": "謝謝，非常好吃，請幫我轉告廚師",
+   "note": "pass it on ＝ 轉告",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And finish with a compliment.",
+     "zh": "最後送上一句稱讚。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks, that was lovely. Please pass it on to the chef.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Pass it on means tell someone else for me.",
+     "zh": "pass it on 是幫我轉達給別人。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Tipping is not required in Ireland, but about ten percent is normal for good service.",
+     "zh": "在愛爾蘭小費不是必須的，但服務好的話給一成左右很常見。",
+     "pose": "talk2",
+     "sticker": "💶",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks, that was lovely. Please pass it on to the chef.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：吃飯時聽到的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two things you'll hear at an Irish table.",
+     "zh": "還有加碼！在愛爾蘭餐桌上會聽到的兩句話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When the food is great",
+    "big": [
+     "*That was gorgeous!",
+     "太好吃了！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Irish people use gorgeous for food, not only for people.",
+     "zh": "愛爾蘭人 gorgeous 不只形容人，也形容食物。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "That was gorgeous!",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "So if your Irish friend says the soup was gorgeous, it was really, really good.",
+     "zh": "所以愛爾蘭朋友說湯 gorgeous，就是超級好喝。",
+     "pose": "thumb",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you can't eat any more",
+    "big": [
+     "*I'm stuffed.",
+     "我吃好撐"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And at the end of a big meal, you'll hear this.",
+     "zh": "大餐吃完之後，你會聽到這句。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I'm stuffed.",
+     "pose": "customer-happy",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Stuffed means so full you can't move. Then someone will still offer you dessert!",
+     "zh": "stuffed 是飽到動不了。然後還是會有人問你要不要甜點！",
+     "pose": "secret"
+    },
+    {
+     "v": "A",
+     "say": "I'm stuffed!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一頓安心的晚餐",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's have that dinner again, the safe way. Say my lines with me!",
+     "zh": "我們再吃一次這頓晚餐，這次很安心。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "customer",
+   "R": "hafiz",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Are you ready to order?",
+     "zh": "可以點餐了嗎？",
+     "R": "hafiz-talk"
+    },
+    {
+     "v": "A",
+     "say": "I have a severe nut allergy. Is that OK with this dish?",
+     "zh": "我對堅果嚴重過敏，這道菜可以吃嗎？"
+    },
+    {
+     "v": "B",
+     "say": "That one's fine. No nuts at all.",
+     "zh": "這道沒問題，完全沒有堅果。",
+     "R": "hafiz-happy"
+    },
+    {
+     "v": "A",
+     "say": "Great. Could I have it without the cheese, and the dressing on the side?",
+     "zh": "太好了。可以不要加起司，醬汁另外放嗎？"
+    },
+    {
+     "v": "B",
+     "say": "No problem.",
+     "zh": "沒問題。",
+     "R": "hafiz-talk"
+    },
+    {
+     "v": "A",
+     "say": "Thanks, that was lovely. Could we get the bill, please?",
+     "zh": "謝謝，非常好吃。可以幫我們結帳嗎？",
+     "L": "customer-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "I have a severe nut allergy. Is that OK with this dish?",
+     "Could you check with the kitchen what's in the sauce?",
+     "Could there be any cross-contamination?",
+     "Could I have it without the cheese?",
+     "Is it OK if I swap the chips for a side salad?",
+     "Could I get the dressing on the side?",
+     "Sorry, I think there's been a mix-up. I asked for no cheese.",
+     "I'm afraid I can't eat this. Could you send it back?",
+     "It's been about forty minutes. Is our food on its way?",
+     "Could we get the bill, please?",
+     "Would it be OK to split it three ways?",
+     "Thanks, that was lovely. Please pass it on to the chef."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Safe, full, and happy. Well done!",
+     "zh": "吃得安心、吃得飽，也很開心。做得好！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Take a screenshot before you eat out.",
+     "zh": "十二句都在這裡，出去吃飯前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🍝",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "And Aoife? She orders the pesto every time now. Without the pesto. Bye!",
+     "zh": "那 Aoife 呢？她現在每次都點青醬麵，不加青醬。Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

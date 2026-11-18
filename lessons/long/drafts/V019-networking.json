@@ -1,0 +1,1098 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-ZA-LukeNeural",
+  "C": "en-GB-LibbyNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V019",
+ "title": "活動上認識新朋友",
+ "subtitle": "12 句英文，交流活動不再只會發名片",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-event",
+ "guest": "sipho",
+ "roles": {
+  "C": "Giulia",
+  "B": "Sipho"
+ },
+ "thumb": {
+  "pose": "point",
+  "bg": "bg-event",
+  "line1": "交流活動好尷尬？",
+  "line2": "建立人脈 12 句",
+  "tag": "B2 英文",
+  "sticker": "🤝"
+ },
+ "chapters": [
+  "Intro",
+  "破冰",
+  "聊工作",
+  "建立連結",
+  "離開和後續",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "giulia",
+   "R": "sipho",
+   "lines": [
+    {
+     "v": "C",
+     "say": "Hello. I am Giulia. I work in marketing. Here is my card. Do you have a job for me?",
+     "zh": "你好，我是 Giulia，我做行銷。這是我的名片。你有工作給我嗎？",
+     "L": "giulia-talk"
+    },
+    {
+     "v": "B",
+     "say": "Oh… em… I'm just going to get a drink. Excuse me.",
+     "zh": "喔……呃……我去拿杯飲料，失陪一下。",
+     "R": "sipho-frown"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "L": "giulia-frown",
+     "sticker": "💨",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🤝",
+    "big": [
+     "Straight to business",
+     "*straight out the door"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "This is Giulia. She's brilliant at her job. But she went straight to: give me a job. And he ran.",
+     "zh": "這是 Giulia，她工作能力超強。但她一開口就是「給我工作」，對方就跑了。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Networking isn't selling yourself. It's being curious about other people.",
+     "zh": "經營人脈不是推銷自己，而是對別人好奇。",
+     "pose": "secret",
+     "sticker": "🔍",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Network at an event",
+     "*and make real contacts"
+    ],
+    "cta": "活動上認識新朋友・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today, Giulia will learn twelve sentences for any networking event.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天 Giulia 要學任何交流活動都能用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today, Giulia will learn twelve sentences for any networking event."
+    },
+    {
+     "v": "E",
+     "say": "Breaking the ice, talking about work, making a connection, and leaving with a contact.",
+     "zh": "打破沉默、聊工作、建立連結，最後帶著聯絡方式離開。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Break the ice",
+   "sub": "破冰：先別談工作",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: break the ice.",
+     "zh": "第一段：破冰。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The first minute is about the event, not about jobs.",
+     "zh": "第一分鐘聊活動本身，不要聊工作。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Hi, I don't think we've met. I'm Giulia.",
+   "meaning": "嗨，我們應該還沒見過，我是 Giulia",
+   "note": "I don't think we've met ＝ 我們應該還沒見過",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Hi, I don't think we've met. I'm Giulia.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This is the easiest way to walk up to a stranger. No excuse needed.",
+     "zh": "這是走向陌生人最簡單的方法，不需要任何理由。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Say your name, hold out your hand, and smile.",
+     "zh": "說名字、伸出手、微笑。",
+     "pose": "thumb",
+     "sticker": "🤝",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Hi, I don't think we've met. I'm Giulia.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "So, what brings you here tonight?",
+   "meaning": "那你今晚怎麼會來？",
+   "note": "What brings you here? ＝ 你怎麼會來這裡？",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask the perfect first question.",
+     "zh": "接著問一個完美的第一個問題。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "So, what brings you here tonight?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "What brings you here? is open. They can talk about work, a friend, or the free wine!",
+     "zh": "What brings you here? 很開放，對方可以聊工作、朋友，或免費的紅酒！",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Everyone at the event has an answer.",
+     "zh": "活動上每個人都答得出來。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "So, what brings you here tonight?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "How do you know the organisers?",
+   "meaning": "你怎麼認識主辦人的？",
+   "note": "organiser ＝ 主辦人",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And then find the link between you.",
+     "zh": "接著找出你們之間的關聯。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "How do you know the organisers?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This question often shows you know the same people. Instant connection!",
+     "zh": "這個問題常會發現你們認識同樣的人，馬上有連結！",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Organisers, with an S in Irish and British English.",
+     "zh": "愛爾蘭和英式英文拼 organisers，用 s。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "How do you know the organisers?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Talk about work",
+   "sub": "聊工作：讓對方先說",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: talk about work.",
+     "zh": "第二段：聊工作。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Ask first, listen properly, and then talk about yourself.",
+     "zh": "先問，好好聽，再談自己。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "What line of work are you in?",
+   "meaning": "你是做哪一行的？",
+   "note": "line of work ＝ 行業",
+   "lines": [
+    {
+     "v": "A",
+     "say": "What line of work are you in?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This is a softer way to say: what's your job?",
+     "zh": "這是「你做什麼工作？」比較柔和的說法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It sounds curious, not like a job interview.",
+     "zh": "聽起來是好奇，不像在面試。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "What line of work are you in?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "That sounds fascinating. How did you get into that?",
+   "meaning": "聽起來很有意思，你怎麼會進這一行的？",
+   "note": "get into ＝ 開始做、進入（某行業）",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then show real interest.",
+     "zh": "接著表現出真心的興趣。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "That sounds fascinating. How did you get into that?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "How did you get into that? asks for their story. Everyone has one.",
+     "zh": "How did you get into that? 是問對方的故事，每個人都有。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "People remember the person who listened, not the person who talked.",
+     "zh": "大家記得的是傾聽的人，不是講最多的人。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That sounds fascinating. How did you get into that?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "I work in marketing, mostly on the digital side.",
+   "meaning": "我做行銷，主要負責數位這塊",
+   "note": "on the ... side ＝ 負責……那一塊",
+   "lines": [
+    {
+     "v": "E",
+     "say": "When they ask you back, keep it short.",
+     "zh": "對方反問你時，簡短回答。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I work in marketing, mostly on the digital side.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "One sentence: your field, and the part you do. That's it.",
+     "zh": "一句話：你的領域，加上你負責的部分，就這樣。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If they want more, they'll ask. And that's when it gets interesting.",
+     "zh": "對方想知道更多就會問，那才是有趣的開始。",
+     "pose": "talk2",
+     "sticker": "🎯",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I work in marketing, mostly on the digital side.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "giulia",
+   "R": "sipho",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's watch Giulia try again.",
+     "zh": "我們看 Giulia 再試一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "C",
+     "say": "Hi, I don't think we've met. I'm Giulia.",
+     "zh": "嗨，我們應該還沒見過，我是 Giulia。",
+     "L": "giulia-happy"
+    },
+    {
+     "v": "B",
+     "say": "Sipho. Nice to meet you.",
+     "zh": "我是 Sipho，很高興認識你。",
+     "R": "sipho-talk"
+    },
+    {
+     "v": "C",
+     "say": "So, what brings you here tonight?",
+     "zh": "那你今晚怎麼會來？",
+     "L": "giulia-talk"
+    },
+    {
+     "v": "B",
+     "say": "My company is one of the sponsors. I'm in software.",
+     "zh": "我們公司是贊助商之一，我做軟體。",
+     "R": "sipho-happy"
+    },
+    {
+     "v": "C",
+     "say": "That sounds fascinating. How did you get into that?",
+     "zh": "聽起來很有意思，你怎麼會進這一行的？",
+     "L": "giulia-talk"
+    },
+    {
+     "v": "E",
+     "say": "And now he's talking, and she's listening. Perfect.",
+     "zh": "現在換他說，她在聽。完美。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Connect",
+   "sub": "建立連結：互相幫忙",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: make a real connection.",
+     "zh": "第三段：建立真正的連結。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The best networkers help first, and ask later.",
+     "zh": "最會經營人脈的人，先幫忙，之後才開口。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "You should talk to my colleague. She works on exactly that.",
+   "meaning": "你應該跟我同事聊聊，她做的就是這個",
+   "note": "exactly that ＝ 正好就是這個",
+   "lines": [
+    {
+     "v": "A",
+     "say": "You should talk to my colleague. She works on exactly that.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Offering an introduction is the best gift at any event.",
+     "zh": "主動介紹人脈是活動上最好的禮物。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now they owe you one, and they'll remember you.",
+     "zh": "現在對方欠你一份人情，而且會記得你。",
+     "pose": "thumb",
+     "sticker": "🎁",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "You should talk to my colleague. She works on exactly that.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I'd love to pick your brain about it some time.",
+   "meaning": "我很想找時間向你請教一下",
+   "note": "pick someone's brain ＝ 向某人請教",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then ask for advice, not a job.",
+     "zh": "接著請教意見，而不是要工作。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'd love to pick your brain about it some time.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Pick your brain means ask you for ideas and advice. It's a compliment: you're an expert.",
+     "zh": "pick your brain 是向你請教點子和建議，這是讚美：你是專家。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "People say yes to advice much more than to: give me a job.",
+     "zh": "比起「給我工作」，大家更容易答應給建議。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'd love to pick your brain about it some time.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Are you on LinkedIn? I'll send you a request.",
+   "meaning": "你有 LinkedIn 嗎？我加你",
+   "note": "send a request ＝ 送出（好友）邀請",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And get a way to stay in contact.",
+     "zh": "再拿到之後聯絡的方式。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Are you on LinkedIn? I'll send you a request.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Much easier than business cards these days.",
+     "zh": "現在比交換名片方便多了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Do it right there, on your phone, so you don't forget.",
+     "zh": "當場用手機加，免得忘記。",
+     "pose": "secret",
+     "sticker": "📱",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Are you on LinkedIn? I'll send you a request.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Leave and follow up",
+   "sub": "離開和後續：讓人記住你",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: leave, and follow up.",
+     "zh": "第四段：離開，然後後續聯絡。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't stay with one person all night. And don't disappear afterwards.",
+     "zh": "不要整晚黏著同一個人，事後也不要消失。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "I won't keep you. I'm sure there are lots of people you want to see.",
+   "meaning": "不耽誤你了，你一定還有很多人想見",
+   "note": "I won't keep you ＝ 不耽誤你了",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I won't keep you. I'm sure there are lots of people you want to see.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I won't keep you is a kind way to end the chat.",
+     "zh": "I won't keep you 是結束聊天的體貼說法。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It gives both of you the freedom to meet other people.",
+     "zh": "讓你們兩個都能自由去認識其他人。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I won't keep you. I'm sure there are lots of people you want to see.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "It was great to meet you. Let's stay in touch.",
+   "meaning": "很高興認識你，我們保持聯絡",
+   "note": "stay in touch ＝ 保持聯絡",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then say goodbye properly.",
+     "zh": "接著好好道別。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "It was great to meet you. Let's stay in touch.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Let's stay in touch means: this isn't the end.",
+     "zh": "Let's stay in touch 是「這不是結束」。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Shake hands again. Same smile as the beginning.",
+     "zh": "再握一次手，跟一開始一樣的笑容。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It was great to meet you. Let's stay in touch.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Great to meet you last night. As promised, here's the link I mentioned.",
+   "meaning": "昨晚很高興認識你，照約定附上我提到的連結",
+   "note": "As promised ＝ 照約定、如我所說",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the next day, send a short message.",
+     "zh": "隔天，傳一則簡短的訊息。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Great to meet you last night. As promised, here's the link I mentioned.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Send it within twenty-four hours, while they still remember your face.",
+     "zh": "二十四小時內傳，趁對方還記得你的臉。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "As promised shows you keep your word. That's what people remember.",
+     "zh": "As promised 表示你說到做到，這才是別人會記住的。",
+     "pose": "secret",
+     "sticker": "✉️",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Great to meet you last night. As promised, here's the link I mentioned.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "giulia",
+   "R": "sipho",
+   "lines": [
+    {
+     "v": "B",
+     "say": "I work with a lot of marketing teams, actually.",
+     "zh": "其實我跟很多行銷團隊合作。",
+     "R": "sipho-talk"
+    },
+    {
+     "v": "C",
+     "say": "Really? I'd love to pick your brain about it some time.",
+     "zh": "真的嗎？我很想找時間向你請教一下。",
+     "L": "giulia-happy"
+    },
+    {
+     "v": "B",
+     "say": "Sure. And you should talk to my colleague, Aoife. She works on exactly that.",
+     "zh": "當然。你也應該跟我同事 Aoife 聊聊，她做的就是這個。",
+     "R": "sipho-happy"
+    },
+    {
+     "v": "C",
+     "say": "That would be brilliant. Are you on LinkedIn? I'll send you a request.",
+     "zh": "那太好了。你有 LinkedIn 嗎？我加你。",
+     "L": "giulia-talk"
+    },
+    {
+     "v": "C",
+     "say": "Anyway, I won't keep you. It was great to meet you. Let's stay in touch.",
+     "zh": "好了，不耽誤你了。很高興認識你，我們保持聯絡。",
+     "L": "giulia-happy"
+    },
+    {
+     "v": "E",
+     "say": "A new contact, and an introduction. That's a good night's networking.",
+     "zh": "一個新人脈，加一個引薦。這就是成功的交流之夜。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：人脈的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! In Ireland, everyone seems to know everyone. Two phrases for that.",
+     "zh": "還有加碼！在愛爾蘭，好像每個人都互相認識。教你兩句相關的話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you know the same people",
+    "big": [
+     "*Small world!",
+     "世界真小！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "When you find out you have a friend in common, say this.",
+     "zh": "發現你們有共同朋友時，就這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Small world!",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "In Ireland, you'll say this a lot. Two people in a room always know the same cousin.",
+     "zh": "在愛爾蘭你會常說這句。房間裡隨便兩個人一定認識同一個表親。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you're asked about a person",
+    "big": [
+     "*I'll put you in touch.",
+     "我幫你們牽線。"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you can connect two people, offer this.",
+     "zh": "可以幫兩個人牽線時，就這樣說。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "I'll put you in touch.",
+     "pose": "point",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Put you in touch means introduce you, usually by email. The Irish do it all the time.",
+     "zh": "put you in touch 是幫你們介紹，通常是寫 email。愛爾蘭人超常這樣做。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I'll put you in touch.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一場完整的交流",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the whole conversation, from hello to follow-up. Say Giulia's lines!",
+     "zh": "現在把整段對話從打招呼到後續演一遍。跟著唸 Giulia 的台詞！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "giulia",
+   "R": "sipho",
+   "lines": [
+    {
+     "v": "C",
+     "say": "Hi, I don't think we've met. I'm Giulia. How do you know the organisers?",
+     "zh": "嗨，我們應該還沒見過，我是 Giulia。你怎麼認識主辦人的？",
+     "L": "giulia-happy"
+    },
+    {
+     "v": "B",
+     "say": "I used to work with Ciara. And you?",
+     "zh": "我以前跟 Ciara 一起工作。你呢？",
+     "R": "sipho-talk"
+    },
+    {
+     "v": "C",
+     "say": "She's my flatmate's sister! Small world! So, what line of work are you in?",
+     "zh": "她是我室友的姊姊！世界真小！那你是做哪一行的？",
+     "L": "giulia-talk"
+    },
+    {
+     "v": "B",
+     "say": "Software. Marketing teams are my biggest clients. I'll put you in touch with a few.",
+     "zh": "軟體。行銷團隊是我最大的客戶，我幫你介紹幾個。",
+     "R": "sipho-happy"
+    },
+    {
+     "v": "C",
+     "say": "That's so kind. It was great to meet you. Let's stay in touch.",
+     "zh": "你人真好。很高興認識你，我們保持聯絡。",
+     "L": "giulia-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Hi, I don't think we've met. I'm Giulia.",
+     "So, what brings you here tonight?",
+     "How do you know the organisers?",
+     "What line of work are you in?",
+     "That sounds fascinating. How did you get into that?",
+     "I work in marketing, mostly on the digital side.",
+     "You should talk to my colleague. She works on exactly that.",
+     "I'd love to pick your brain about it some time.",
+     "Are you on LinkedIn? I'll send you a request.",
+     "I won't keep you. I'm sure there are lots of people you want to see.",
+     "It was great to meet you. Let's stay in touch.",
+     "Great to meet you last night. As promised, here's the link I mentioned."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Well done, Giulia! Curious first, helpful second, and you followed up.",
+     "zh": "Giulia 做得好！先好奇，再幫忙，還記得後續聯絡。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them before your next event.",
+     "zh": "十二句都在這裡。下次參加活動前截圖存起來。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🤝",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "Then you'll always have something interesting to talk about. See you next time. Bye!",
+     "zh": "這樣你永遠有有趣的話題可以聊。下一課見，Bye！",
+     "pose": "secret",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

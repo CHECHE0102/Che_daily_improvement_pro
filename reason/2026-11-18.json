@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-18",
+ "items": {
+  "2026-11-18": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Hackers stole money from the accounts of 1.8 million credit union members.",
+     "A suspected breach at a software provider used by 43 credit unions may have exposed the personal data of many members, raising concerns about fraud.",
+     "The Data Protection Commission has fined Wellington IT for failing to protect member records.",
+     "Constellation Software has decided to sell Wellington IT following the incident."
+    ],
+    "a": 1,
+    "exp": "The passage centres on \"a suspected data breach involving 43 credit unions\" that originated at Wellington IT and \"could potentially\" affect \"approximately 1.8 million individuals\", with phishing the main risk. No money was taken, as \"accounts and balances remained uncompromised\" (A); no fine is mentioned (C); and no sale is reported (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about why so many credit unions were affected?",
+    "opts": [
+     "Each credit union was attacked separately by different groups of hackers.",
+     "The credit unions had all ignored warnings from the Central Bank.",
+     "The breach happened inside the Department of Finance's own systems.",
+     "Many credit unions depend on the same external software platform, so one weakness affected them all."
+    ],
+    "a": 3,
+    "exp": "The passage says the firm \"supplies the banking platform for more than a third of Irish credit unions, which consequently magnifies the potential scale of the incident\", implying that shared reliance on one provider spread the risk. Nothing suggests separate attacks (A), ignored warnings (B), or a breach at the Department (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that the stolen records \"contain authentic personal details\"?",
+    "opts": [
+     "To explain why phishing messages based on them could be especially convincing.",
+     "To show that the hackers failed to obtain any useful information.",
+     "To prove that account balances have been changed.",
+     "To suggest that members should close their credit union accounts."
+    ],
+    "a": 0,
+    "exp": "The sentence continues: \"fraudulent communications are likely to appear considerably more credible, thereby increasing the probability that recipients will disclose confidential information.\" The detail explains the phishing risk, not that the data was useless (B), that balances changed (C), or that accounts should be closed (D)."
+   }
+  ],
+  "2026-11-18-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Ireland has met its 2030 climate targets ahead of schedule.",
+     "Mary Robinson has been appointed to lead Ireland's delegation at Cop31.",
+     "Mary Robinson's criticism that Ireland's climate action is too slow, and the climate minister's defence of the Government's record.",
+     "The European Union has agreed to cancel Ireland's climate compliance payments."
+    ],
+    "a": 2,
+    "exp": "Robinson argues Ireland's response \"remains inadequate in both scale and pace\", and O'Brien \"maintained that the Government's approach has been effective overall\". The targets \"will not be met\" (A), O'Brien, not Robinson, represents Ireland (B), and no cancellation of payments is mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the estimate of compliance payments of up to €26 billion?",
+    "opts": [
+     "The minister does not accept that the cost will be as high as the advisers project.",
+     "The Government has already paid this amount to the European Union.",
+     "Mary Robinson produced the estimate herself.",
+     "The figure refers to the cost of the National Development Plan."
+    ],
+    "a": 0,
+    "exp": "The passage calls it \"a projection the minister has repeatedly disputed\", implying he rejects the figure. It is a future estimate, not a payment already made (B); it comes from \"independent climate and fiscal advisers\", not Robinson (C); and it concerns the emissions \"shortfall\", not the Development Plan (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe O'Brien's response to Robinson's criticism?",
+    "opts": [
+     "Dismissive and personally insulting towards her.",
+     "Fully in agreement that the Government's approach has failed.",
+     "Confused and unable to give any examples of progress.",
+     "Respectful of her, yet firm in defending the Government's overall approach."
+    ],
+    "a": 3,
+    "exp": "O'Brien \"expressed considerable respect for Robinson\" and said her criticism \"would be given due consideration\", yet \"maintained that the Government's approach has been effective overall\", citing renewables and retrofitting. He was neither insulting (A), fully in agreement (B), nor short of examples (C)."
+   }
+  ],
+  "2026-11-18-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "RTÉ has announced it will stop commissioning independent productions.",
+     "Independent producers argue that a proposed €20 million cut to RTÉ's funding threatens their sector and call for stable, multi-annual funding.",
+     "Netflix and Disney have agreed to pay a new content levy in Ireland.",
+     "Production spending in Ireland fell sharply in 2025."
+    ],
+    "a": 1,
+    "exp": "The passage reports that the \"proposed €20 million reduction in RTÉ's funding\" has \"prompted substantial concern\" among producers, who want the Government to \"introduce multi-annual funding\". RTÉ's commissioning is not discussed (A), the levy is only a \"proposal\" (C), and spending \"increased by 26%\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "Why would the cut, together with flat TG4 funding, hit regions outside Dublin especially hard?",
+    "opts": [
+     "Because RTÉ plans to close its regional offices.",
+     "Because streaming providers only operate in Dublin.",
+     "Because much Irish-language production takes place outside Dublin.",
+     "Because the European Media Freedom Act bans regional broadcasting."
+    ],
+    "a": 2,
+    "exp": "Kirby links the two points: \"given that Irish-language production is concentrated outside Dublin, the cut would have disproportionate regional consequences.\" No office closures (A), Dublin-only streamers (B), or regional ban (D) are mentioned."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the passage cite the sector's contribution of \"in excess of €1 billion annually\"?",
+    "opts": [
+     "To argue that the sector no longer needs public funding.",
+     "To criticise producers for spending too much money.",
+     "To show that the €20 million cut has already been reversed.",
+     "To stress the sector's economic importance and support the case for predictable funding."
+    ],
+    "a": 3,
+    "exp": "The figures are followed by the conclusion that the sector's \"continued growth may therefore be contingent upon predictable funding\", so they underline its value to back the producers' argument. They are not used to reject public funding (A), criticise spending (B), or report a reversal (C)."
+   }
+  ],
+  "2026-11-18-4": [
+   {
+    "type": "main",
+    "q": "What is the main idea of the passage?",
+    "opts": [
+     "Public EV charging in Ireland has become more expensive while the charging network is failing to keep pace with rising demand.",
+     "Ireland now has more public chargers per person than the Netherlands.",
+     "ESB has cut its rapid-charging prices to encourage more drivers to buy electric cars.",
+     "Electric vehicles remain far less popular than petrol cars in Ireland."
+    ],
+    "a": 0,
+    "exp": "The passage opens with ESB's \"second price increase this year\" and later states that \"infrastructure provision remains inadequate\" as sessions grow \"approximately 20% faster than new installations\". Ireland has 95 chargers per 100,000 versus 820 in the Netherlands (B), prices rose (C), and EVs \"have surpassed petrol, diesel and hybrid models\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about drivers who live in apartments?",
+    "opts": [
+     "They usually pay less for charging than people with driveways.",
+     "They are exempt from ESB's price increases.",
+     "They are likely to feel the impact of higher public charging prices more than homeowners with a private charger.",
+     "They are prevented by law from owning electric vehicles."
+    ],
+    "a": 2,
+    "exp": "Residents of apartments \"are frequently unable to install a private charger and are therefore contingent upon the public network\", which may be \"six times more expensive than domestic charging\". So they bear the increase more heavily, not less (A); there is no exemption (B) or legal ban (D)."
+   },
+   {
+    "type": "tone",
+    "q": "What is the writer's attitude towards the Government's community charging hub strategy?",
+    "opts": [
+     "Enthusiastic, presenting it as a complete solution.",
+     "Cautiously sceptical, noting a limitation that may reduce its usefulness.",
+     "Angry, demanding that the strategy be withdrawn.",
+     "Neutral, offering no evaluation of it at all."
+    ],
+    "a": 1,
+    "exp": "The writer notes the hubs are proposed for \"households lacking driveways\" but adds that the Government \"does not intend to regulate their prices, which may limit their effectiveness\" — a measured reservation. That is not enthusiasm (A), anger (C), or the absence of any judgement (D)."
+   }
+  ]
+ }
+}

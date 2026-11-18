@@ -1,0 +1,1068 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-GB-ThomasNeural",
+  "C": "en-HK-YanNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V013",
+ "title": "英文簡報從開場到收尾",
+ "subtitle": "12 句英文，上台不再只會說「呃」",
+ "level": "B2",
+ "date": "2026-11-17",
+ "bg": "bg-meeting",
+ "guest": "javier",
+ "roles": {
+  "C": "小婷 Ting",
+  "B": "Javier 同事"
+ },
+ "thumb": {
+  "pose": "point",
+  "bg": "bg-meeting",
+  "line1": "上台只會說「呃」？",
+  "line2": "簡報英文 12 句",
+  "tag": "開場・路標・問答・收尾",
+  "sticker": "🎤"
+ },
+ "chapters": [
+  "Intro",
+  "開場",
+  "路標",
+  "問答",
+  "收尾",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "ting",
+   "R": "javier",
+   "lines": [
+    {
+     "v": "C",
+     "say": "Em… hello. My name is Ting. Today I… em… I will… talk about… our project. Sorry.",
+     "zh": "呃……大家好，我叫小婷。今天我……呃……要……講我們的專案。抱歉。",
+     "L": "ting-think"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.4,
+     "R": "javier",
+     "sticker": "😴",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🎤",
+    "big": [
+     "Good ideas",
+     "*lost in the first minute"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "This is my student Ting. Her project was brilliant. But nobody heard it, because she lost everyone in the first minute.",
+     "zh": "這是我的學生小婷。她的專案很棒，但沒人聽進去，因為第一分鐘就把大家搞丟了。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "The problem wasn't her English. It was that she had no signposts.",
+     "zh": "問題不是她的英文，而是她沒有路標。",
+     "pose": "think",
+     "sticker": "🪧",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Give a presentation",
+     "*from start to finish"
+    ],
+    "cta": "英文簡報從開場到收尾・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today, Ting and I will show you twelve sentences for any presentation.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天我和小婷要教你任何簡報都能用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today, Ting and I will show you twelve sentences for any presentation."
+    },
+    {
+     "v": "E",
+     "say": "A strong start, clear signposts, good answers to hard questions, and an ending people remember.",
+     "zh": "有力的開場、清楚的路標、漂亮地回答難題，還有讓人記住的結尾。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Open strong",
+   "sub": "開場：前 30 秒決定一切",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: open strong.",
+     "zh": "第一段：有力的開場。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't start with sorry, and don't start with em. Start with a plan.",
+     "zh": "不要用抱歉開場，也不要用「呃」開場。用一個計畫開場。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Thanks for coming. I'll keep this short, about ten minutes.",
+   "meaning": "謝謝大家來，我會講短一點，大約十分鐘",
+   "note": "keep it short ＝ 長話短說",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Thanks for coming. I'll keep this short, about ten minutes.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Every audience loves to hear that it will be short. And saying ten minutes makes you sound organised.",
+     "zh": "每個聽眾都喜歡聽到「會很短」。說出十分鐘，聽起來很有條理。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then you have to actually finish in ten minutes, of course!",
+     "zh": "當然，你就真的要在十分鐘內講完！",
+     "pose": "secret",
+     "sticker": "⏱️",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for coming. I'll keep this short, about ten minutes.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "By the end, you'll know exactly why our numbers went up.",
+   "meaning": "聽完之後，你會清楚知道我們的數字為什麼上升",
+   "note": "By the end ＝ 到最後",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then tell them what they'll get.",
+     "zh": "接著告訴聽眾他們會得到什麼。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "By the end, you'll know exactly why our numbers went up.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This is a promise. It gives people a reason to keep listening.",
+     "zh": "這是一個承諾，讓大家有理由繼續聽。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Think of it as the trailer for your film.",
+     "zh": "把它想成電影的預告片。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "By the end, you'll know exactly why our numbers went up.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I've split this into three parts.",
+   "meaning": "我把今天的內容分成三個部分",
+   "note": "split into ＝ 分成",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And give the map.",
+     "zh": "再給一張地圖。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I've split this into three parts.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Split into means divide into. Three is the magic number. People can remember three.",
+     "zh": "split into 是分成。三是魔法數字，大家記得住三個。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now the audience knows where you're going. They relax.",
+     "zh": "聽眾知道你要往哪走，就會放鬆。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've split this into three parts.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Signposts",
+   "sub": "路標：讓聽眾不迷路",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: signposts.",
+     "zh": "第二段：路標。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A signpost is a sentence that says where we are. It's the most useful presentation English there is.",
+     "zh": "路標是告訴大家「現在在哪裡」的句子，是最實用的簡報英文。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "Moving on to the second point…",
+   "meaning": "接著進入第二點……",
+   "note": "move on to ＝ 進入（下一部分）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Moving on to the second point…",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Moving on to tells everyone: the last part is finished, here comes the next.",
+     "zh": "moving on to 告訴大家：上一段結束了，下一段來了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Pause after it. That pause is where people catch up.",
+     "zh": "說完停一下，大家會在這個停頓中跟上。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Moving on to the second point…",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "This is the key point, so I'll say it again.",
+   "meaning": "這是重點，所以我再說一次",
+   "note": "the key point ＝ 最重要的一點",
+   "lines": [
+    {
+     "v": "E",
+     "say": "When something really matters, say so.",
+     "zh": "真正重要的事，要明說。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "This is the key point, so I'll say it again.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The key point means the most important point.",
+     "zh": "the key point 是最重要的那一點。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Repeating it isn't boring. In a talk, it's how people remember.",
+     "zh": "重複不無聊。在簡報裡，重複是讓人記住的方法。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "This is the key point, so I'll say it again.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "As you can see from this chart, sales nearly doubled.",
+   "meaning": "從這張圖可以看到，銷售幾乎翻倍",
+   "note": "As you can see ＝ 如各位所見",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you show a picture, tell them what to look at.",
+     "zh": "放圖的時候，要告訴大家看哪裡。",
+     "pose": "point",
+     "sticker": "📈",
+     "stickerX": 640,
+     "stickerY": 140
+    },
+    {
+     "v": "A",
+     "say": "As you can see from this chart, sales nearly doubled.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't make people read your chart alone. Point at it, and say the one thing that matters.",
+     "zh": "不要讓聽眾自己讀圖。指著它，講出最重要的那一件事。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Nearly doubled means almost twice as much.",
+     "zh": "nearly doubled 是幾乎變成兩倍。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "As you can see from this chart, sales nearly doubled.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "ting",
+   "R": "javier",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Watch Ting again, after one week of practice.",
+     "zh": "來看練習一週後的小婷。",
+     "pose": "talk"
+    },
+    {
+     "v": "C",
+     "say": "Thanks for coming. I'll keep this short, about ten minutes. I've split this into three parts.",
+     "zh": "謝謝大家來，我會講短一點，大約十分鐘。我把內容分成三個部分。",
+     "L": "ting-talk"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.0,
+     "R": "javier-think"
+    },
+    {
+     "v": "C",
+     "say": "As you can see from this chart, sales nearly doubled. This is the key point, so I'll say it again.",
+     "zh": "從這張圖可以看到，銷售幾乎翻倍。這是重點，所以我再說一次。",
+     "L": "ting-happy"
+    },
+    {
+     "v": "E",
+     "say": "Look at Javier. He's actually listening now!",
+     "zh": "看看 Javier，他現在真的在聽了！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Questions",
+   "sub": "問答：不會的也能接",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: questions.",
+     "zh": "第三段：問答。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This is the scary part for most people. But you only need three sentences.",
+     "zh": "這是大部分人最怕的部分。但你只需要三句話。",
+     "pose": "think"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "That's a great question. Just to check, are you asking about the cost?",
+   "meaning": "好問題。確認一下，你是在問成本嗎？",
+   "note": "Just to check ＝ 確認一下",
+   "lines": [
+    {
+     "v": "A",
+     "say": "That's a great question. Just to check, are you asking about the cost?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Checking the question gives you time to think, and makes sure you answer the right thing.",
+     "zh": "確認問題能幫你爭取思考時間，也確保你回答對的東西。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "If you didn't understand, this is also a polite way to hear it again.",
+     "zh": "如果你沒聽懂，這也是請對方再說一次的禮貌方式。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That's a great question. Just to check, are you asking about the cost?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I don't have that figure with me, but I'll email it to you today.",
+   "meaning": "我手邊沒有那個數字，但今天會 email 給你",
+   "note": "figure ＝ 數字、數據",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you don't know? Never guess.",
+     "zh": "如果你不知道呢？千萬不要猜。",
+     "pose": "no"
+    },
+    {
+     "v": "A",
+     "say": "I don't have that figure with me, but I'll email it to you today.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A figure is a number. With me means here, right now.",
+     "zh": "figure 是數字，with me 是手邊。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Promise a time, and keep it. You'll look more professional than if you'd guessed.",
+     "zh": "承諾一個時間，並且做到。這比亂猜看起來專業多了。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I don't have that figure with me, but I'll email it to you today.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Can we take that one offline? I'd love to talk about it after.",
+   "meaning": "那個問題我們可以會後再談嗎？我很樂意之後聊",
+   "note": "take it offline ＝ 會後私下討論",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if a question is too long, or off topic, use this.",
+     "zh": "如果問題太長，或離題了，就用這一句。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Can we take that one offline? I'd love to talk about it after.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Take it offline means discuss it later, outside the meeting.",
+     "zh": "take it offline 是會後私下討論。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I'd love to shows it's not a rejection. You're just protecting everyone's time.",
+     "zh": "I'd love to 表示你不是拒絕，只是保護大家的時間。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Can we take that one offline? I'd love to talk about it after.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 3,
+   "L": "ting",
+   "R": "javier",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Sorry, how much did all this cost?",
+     "zh": "不好意思，這些總共花了多少錢？",
+     "R": "javier-talk"
+    },
+    {
+     "v": "C",
+     "say": "That's a great question. Just to check, are you asking about the cost for this year?",
+     "zh": "好問題。確認一下，你是在問今年的成本嗎？",
+     "L": "ting-talk"
+    },
+    {
+     "v": "B",
+     "say": "Yes, this year.",
+     "zh": "對，今年的。",
+     "R": "javier-think"
+    },
+    {
+     "v": "C",
+     "say": "I don't have that figure with me, but I'll email it to you today.",
+     "zh": "我手邊沒有那個數字，但今天會 email 給你。",
+     "L": "ting-think"
+    },
+    {
+     "v": "B",
+     "say": "Perfect, thanks.",
+     "zh": "好，謝謝。",
+     "R": "javier-happy"
+    },
+    {
+     "v": "E",
+     "say": "She didn't know the answer, and it still went perfectly.",
+     "zh": "她不知道答案，但一樣很完美。",
+     "pose": "thumb"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Close it",
+   "sub": "收尾：讓人記住一件事",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: close it.",
+     "zh": "第四段：收尾。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Most people end with: em, that's it. Let's do better.",
+     "zh": "大部分的人結尾都說：呃，就這樣。我們可以做得更好。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "So, to sum up: three changes, one big result.",
+   "meaning": "總結一下：三個改變，一個大成果",
+   "note": "to sum up ＝ 總結",
+   "lines": [
+    {
+     "v": "A",
+     "say": "So, to sum up: three changes, one big result.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "To sum up means to give a short summary of everything.",
+     "zh": "to sum up 是用一句話總結全部。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Make it short enough to fit on a T-shirt.",
+     "zh": "短到可以印在 T 恤上。",
+     "pose": "secret",
+     "sticker": "👕",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "So, to sum up: three changes, one big result.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "If there's one thing I'd like you to remember, it's this.",
+   "meaning": "如果你只記得一件事，我希望是這件",
+   "note": "If there's one thing ＝ 如果只有一件事",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then give them one thing to take home.",
+     "zh": "接著給大家一件可以帶回家的事。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "If there's one thing I'd like you to remember, it's this.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This sentence makes everyone look up from their phone. Try it.",
+     "zh": "這句話會讓每個人從手機上抬起頭。試試看。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then pause, and say your key point one last time.",
+     "zh": "然後停頓一下，最後再說一次你的重點。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "If there's one thing I'd like you to remember, it's this.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Thanks for listening. I'm happy to take any questions.",
+   "meaning": "謝謝聆聽，歡迎提問",
+   "note": "take questions ＝ 接受提問",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And end with a clear signal.",
+     "zh": "最後用清楚的信號結束。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for listening. I'm happy to take any questions.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Take questions means answer questions from the audience.",
+     "zh": "take questions 是回答聽眾的問題。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then smile, and stop talking. Silence after this is normal. Wait.",
+     "zh": "然後微笑、停下來。這之後的沉默很正常，等一下。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for listening. I'm happy to take any questions.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：簡報後聽到的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two things you'll hear after a presentation in Ireland.",
+     "zh": "還有加碼！在愛爾蘭做完簡報會聽到的兩句話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you did well",
+    "big": [
+     "*You smashed it!",
+     "你超讚的！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "When you finish and it went well, your colleagues will say this.",
+     "zh": "簡報講完又講得好，同事會這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "You smashed it!",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Smashed it means did it brilliantly. Not broke it!",
+     "zh": "smashed it 是表現超好，不是把它打破！",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you're nervous",
+    "big": [
+     "*I was bricking it.",
+     "我超緊張的"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you tell them how nervous you were before, you can say this.",
+     "zh": "跟他們說你上台前有多緊張，可以這樣講。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I was bricking it.",
+     "pose": "barista-panic",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's very informal. It means very, very nervous. Only say it to friends!",
+     "zh": "很口語，意思是超級緊張。只能跟朋友說！",
+     "pose": "no"
+    },
+    {
+     "v": "A",
+     "say": "I was bricking it!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：小婷的新簡報",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One last time, Ting's new presentation. Say her lines with her!",
+     "zh": "最後一次，小婷的新簡報。跟她一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "ting",
+   "R": "javier",
+   "lines": [
+    {
+     "v": "C",
+     "say": "Thanks for coming. By the end, you'll know exactly why our numbers went up.",
+     "zh": "謝謝大家來。聽完之後，你會清楚知道我們的數字為什麼上升。",
+     "L": "ting-talk"
+    },
+    {
+     "v": "C",
+     "say": "Moving on to the second point… As you can see from this chart, sales nearly doubled.",
+     "zh": "接著進入第二點……從這張圖可以看到，銷售幾乎翻倍。",
+     "L": "ting-happy"
+    },
+    {
+     "v": "C",
+     "say": "So, to sum up: three changes, one big result. Thanks for listening. I'm happy to take any questions.",
+     "zh": "總結一下：三個改變，一個大成果。謝謝聆聽，歡迎提問。",
+     "L": "ting-talk"
+    },
+    {
+     "v": "B",
+     "say": "Great job, Ting. You smashed it!",
+     "zh": "做得好，小婷，你超讚的！",
+     "R": "javier-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Thanks for coming. I'll keep this short, about ten minutes.",
+     "By the end, you'll know exactly why our numbers went up.",
+     "I've split this into three parts.",
+     "Moving on to the second point…",
+     "This is the key point, so I'll say it again.",
+     "As you can see from this chart, sales nearly doubled.",
+     "That's a great question. Just to check, are you asking about the cost?",
+     "I don't have that figure with me, but I'll email it to you today.",
+     "Can we take that one offline? I'd love to talk about it after.",
+     "So, to sum up: three changes, one big result.",
+     "If there's one thing I'd like you to remember, it's this.",
+     "Thanks for listening. I'm happy to take any questions."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "From em to smashed it, in one lesson. Well done, Ting, and well done, you!",
+     "zh": "一課就從「呃」變成「超讚」。小婷做得好，你也是！",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them before your next presentation.",
+     "zh": "十二句都在這裡，下次簡報前先截圖。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 6,
+   "board": {
+    "emoji": "🎤",
+    "big": [
+     "See you next time",
+     "*Bye!"
+    ],
+    "cta": "打開 BinBin，每天用一則新聞練英文",
+    "ctaStep": 0
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "I'm Neev. Open BinBin, and practise English with one news story every day.",
+     "zh": "我是 Niamh 老師。打開 BinBin，每天用一則新聞練英文。",
+     "pose": "hi",
+     "cap": "I'm Niamh. Open BinBin, and practise English with one news story every day."
+    },
+    {
+     "v": "E",
+     "say": "To sum up: practise, signpost, and smile. See you next time. Bye!",
+     "zh": "總結一下：練習、路標、微笑。下一課見，Bye！",
+     "pose": "cheer",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
