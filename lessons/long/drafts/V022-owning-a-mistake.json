@@ -1,0 +1,1131 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-US-GuyNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V022",
+ "title": "工作出錯好好道歉",
+ "subtitle": "12 句英文，搞砸了也能挽回信任",
+ "level": "B2",
+ "date": "2026-11-20",
+ "bg": "bg-office",
+ "guest": "diego",
+ "roles": {
+  "A": "Niamh 員工",
+  "B": "Diego 主管"
+ },
+ "thumb": {
+  "pose": "no",
+  "bg": "bg-office",
+  "line1": "工作出錯怎麼說？",
+  "line2": "道歉挽回信任 12 句",
+  "tag": "B2 英文",
+  "sticker": "🙈"
+ },
+ "chapters": [
+  "Intro",
+  "承認",
+  "說明經過",
+  "補救",
+  "往前走",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "think",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Niamh, the client just rang. They got the wrong price list?",
+     "zh": "Niamh，客戶剛打來，他們收到錯的價目表？",
+     "R": "diego-frown"
+    },
+    {
+     "v": "A",
+     "say": "Oh… em… the system was slow, and Ciara gave me the file, and nobody told me…",
+     "zh": "喔……呃……系統很慢，然後是 Ciara 給我檔案的，也沒人跟我說……",
+     "L": "barista-panic"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "R": "diego-frown",
+     "sticker": "😤",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🙈",
+    "big": [
+     "One small mistake",
+     "*ten big excuses"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "The mistake was small. The excuses made it big. Now my boss trusts me less.",
+     "zh": "錯誤本來很小，是藉口把它變大的。現在老闆比較不信任我了。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Everyone makes mistakes at work. What people remember is how you handle them.",
+     "zh": "每個人工作都會出錯，大家記得的是你怎麼處理。",
+     "pose": "secret",
+     "sticker": "🔧",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Own a mistake at work",
+     "*and win back trust"
+    ],
+    "cta": "工作出錯好好道歉・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today: twelve sentences for when you get something wrong at work.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天教你工作出錯時用的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today: twelve sentences for when you get something wrong at work."
+    },
+    {
+     "v": "E",
+     "say": "Owning it, explaining what happened, fixing it, and moving on.",
+     "zh": "承認錯誤、說明經過、補救，還有往前走。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Own it",
+   "sub": "承認：先說是自己的錯",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: own it.",
+     "zh": "第一段：承認錯誤。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Go to your manager before they come to you. That alone changes everything.",
+     "zh": "在主管來找你之前，先去找主管。光這樣就差很多。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "I'm afraid I've got some bad news. I made a mistake with the Murphy order.",
+   "meaning": "恐怕有個壞消息，Murphy 那張訂單我出錯了",
+   "note": "I'm afraid ＝ 恐怕（帶出壞消息）",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I'm afraid I've got some bad news. I made a mistake with the Murphy order.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I'm afraid softens bad news. Then say exactly which thing went wrong.",
+     "zh": "I'm afraid 讓壞消息聽起來柔和一點，接著說出是哪件事出錯。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Bad news doesn't get better with time. It gets worse.",
+     "zh": "壞消息不會隨時間變好，只會變更糟。",
+     "pose": "no",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm afraid I've got some bad news. I made a mistake with the Murphy order.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "That's on me. I should have double-checked.",
+   "meaning": "這是我的責任，我應該再檢查一次的",
+   "note": "That's on me ＝ 這是我的責任",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then take responsibility.",
+     "zh": "接著承擔責任。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "That's on me. I should have double-checked.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "That's on me means: it's my fault, not someone else's.",
+     "zh": "That's on me 意思是：是我的錯，不是別人的。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "I should have plus past participle is how we talk about past mistakes.",
+     "zh": "I should have 加過去分詞，是談過去錯誤的說法。",
+     "pose": "point",
+     "sticker": "📝",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "That's on me. I should have double-checked.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "I'm not going to make excuses.",
+   "meaning": "我不會找藉口",
+   "note": "make excuses ＝ 找藉口",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And show you're serious.",
+     "zh": "再表示你是認真的。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "I'm not going to make excuses.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Managers hear excuses all day. This sentence makes them listen.",
+     "zh": "主管整天都在聽藉口，這句話會讓他們願意聽你說。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "And then, of course, really don't make any!",
+     "zh": "然後，當然要真的不找藉口！",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'm not going to make excuses.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Explain",
+   "sub": "說明經過：講事實，不怪人",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: explain what happened.",
+     "zh": "第二段：說明經過。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Facts, not feelings. And never blame a colleague.",
+     "zh": "講事實，不講情緒。而且絕對不要怪同事。",
+     "pose": "no"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "What happened was, I sent them last year's price list.",
+   "meaning": "事情是這樣的，我寄了去年的價目表給他們",
+   "note": "What happened was ＝ 事情是這樣的",
+   "lines": [
+    {
+     "v": "A",
+     "say": "What happened was, I sent them last year's price list.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "What happened was introduces the facts. Short and simple.",
+     "zh": "What happened was 帶出事實，簡短就好。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "One sentence. Your manager doesn't need the whole story yet.",
+     "zh": "一句話就好，主管現在還不需要整個故事。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "What happened was, I sent them last year's price list.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "I didn't notice until this morning, when I checked the replies.",
+   "meaning": "我直到今天早上看回信才發現",
+   "note": "not … until ＝ 直到……才",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then say when you found out.",
+     "zh": "接著說你什麼時候發現的。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I didn't notice until this morning, when I checked the replies.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Not until this morning means: this morning was the first moment I knew.",
+     "zh": "not until this morning 是：今天早上才第一次知道。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It shows you're being honest about the timeline.",
+     "zh": "這表示你對時間點很誠實。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I didn't notice until this morning, when I checked the replies.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "The good news is, it only went to one client.",
+   "meaning": "好消息是，只寄給了一個客戶",
+   "note": "The good news is ＝ 好消息是",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And if there's something positive, say it.",
+     "zh": "如果有好的一面，也說出來。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "The good news is, it only went to one client.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The good news is helps your manager see the size of the problem.",
+     "zh": "The good news is 幫主管看清楚問題有多大。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Not to hide the mistake. Just to be accurate.",
+     "zh": "不是要掩蓋錯誤，只是要說得準確。",
+     "pose": "secret",
+     "sticker": "🔍",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "The good news is, it only went to one client.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "talk",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's go back and do it properly.",
+     "zh": "我們回去好好再來一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Diego, I'm afraid I've got some bad news. I made a mistake with the Murphy order.",
+     "zh": "Diego，恐怕有個壞消息，Murphy 那張訂單我出錯了。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Oh? What happened?",
+     "zh": "喔？怎麼了？",
+     "R": "diego-think"
+    },
+    {
+     "v": "A",
+     "say": "What happened was, I sent them last year's price list. That's on me. I should have double-checked.",
+     "zh": "事情是這樣的，我寄了去年的價目表給他們。這是我的責任，我應該再檢查一次的。"
+    },
+    {
+     "v": "B",
+     "say": "I see. Did anyone else get it?",
+     "zh": "了解。還有其他人收到嗎？",
+     "R": "diego-talk"
+    },
+    {
+     "v": "A",
+     "say": "The good news is, it only went to one client.",
+     "zh": "好消息是，只寄給了一個客戶。"
+    },
+    {
+     "v": "E",
+     "say": "Calm, clear, honest. He's not angry, he's thinking.",
+     "zh": "冷靜、清楚、誠實。他沒有生氣，而是在思考。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Fix it",
+   "sub": "補救：帶著解決方法來",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: fix it.",
+     "zh": "第三段：補救。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Never bring only a problem. Bring a solution too.",
+     "zh": "不要只帶著問題來，也要帶著解決方法。",
+     "pose": "secret",
+     "sticker": "🛠️",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "I've already called them and apologised.",
+   "meaning": "我已經打電話跟他們道歉了",
+   "note": "have already ＋ 過去分詞 ＝ 已經做了",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've already called them and apologised.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "I've already shows you didn't wait for instructions. You acted.",
+     "zh": "I've already 表示你沒有等人交代，你已經行動了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Managers love the word already.",
+     "zh": "主管最愛聽到 already 這個字。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I've already called them and apologised.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "I'll send them the correct prices by lunchtime.",
+   "meaning": "我午餐前會把正確的價格寄給他們",
+   "note": "by lunchtime ＝ 午餐前",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then give a clear next step, with a time.",
+     "zh": "接著給一個明確的下一步，加上時間。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "I'll send them the correct prices by lunchtime.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "By lunchtime means before lunch, at the latest.",
+     "zh": "by lunchtime 是最晚在午餐前。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A deadline makes your promise real.",
+     "zh": "有期限，你的承諾才算數。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "I'll send them the correct prices by lunchtime.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "From now on, I'll get a second pair of eyes on anything that goes to a client.",
+   "meaning": "以後寄給客戶的東西，我都會請別人再看一次",
+   "note": "a second pair of eyes ＝ 再找一個人幫忙看",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And show it won't happen again.",
+     "zh": "再表示不會再發生。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "From now on, I'll get a second pair of eyes on anything that goes to a client.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A second pair of eyes means another person checks your work.",
+     "zh": "a second pair of eyes 是請另一個人檢查你的工作。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "From now on shows you've learned something. That's what rebuilds trust.",
+     "zh": "From now on 表示你學到教訓了，這才能重建信任。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "From now on, I'll get a second pair of eyes on anything that goes to a client.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Move on",
+   "sub": "往前走：接受和給予原諒",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: move on.",
+     "zh": "第四段：往前走。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "After the mistake is fixed, don't keep apologising for days. Close it.",
+     "zh": "錯誤補救好之後，不要一直道歉好幾天，就此結束。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Thanks for being so understanding.",
+   "meaning": "謝謝你這麼體諒",
+   "note": "understanding ＝ 體諒的",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Thanks for being so understanding.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "When your manager is kind about it, thank them.",
+     "zh": "主管很體諒你的時候，要謝謝他。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Understanding here is an adjective. It means patient and kind.",
+     "zh": "這裡的 understanding 是形容詞，意思是有耐心又體貼。",
+     "pose": "point",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for being so understanding.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "Don't worry, these things happen.",
+   "meaning": "別擔心，這種事難免的",
+   "note": "these things happen ＝ 這種事難免",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when a colleague apologises to you, say this.",
+     "zh": "同事跟你道歉時，就說這句。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Don't worry, these things happen.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "These things happen means: it's normal, everyone makes mistakes.",
+     "zh": "these things happen 是：很正常，每個人都會出錯。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Be kind to others, the way you want them to be kind to you.",
+     "zh": "像你希望別人怎麼對你一樣，善待別人。",
+     "pose": "thumb",
+     "sticker": "💛",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Don't worry, these things happen.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "Let's put it behind us.",
+   "meaning": "我們就讓它過去吧",
+   "note": "put it behind us ＝ 讓它過去",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the last line, to close it for good.",
+     "zh": "最後一句，讓這件事正式結束。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Let's put it behind us.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Put it behind us means stop thinking about it, and move forward.",
+     "zh": "put it behind us 是不再想它，繼續往前。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "A mistake that's handled well can actually build trust.",
+     "zh": "處理得好的錯誤，反而能建立信任。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Let's put it behind us.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "talk",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I've already called them and apologised. I'll send them the correct prices by lunchtime.",
+     "zh": "我已經打電話跟他們道歉了，午餐前會把正確的價格寄給他們。"
+    },
+    {
+     "v": "B",
+     "say": "Good. That's exactly what I'd have done.",
+     "zh": "很好，換作是我也會這樣做。",
+     "R": "diego-happy"
+    },
+    {
+     "v": "A",
+     "say": "From now on, I'll get a second pair of eyes on anything that goes to a client.",
+     "zh": "以後寄給客戶的東西，我都會請別人再看一次。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "Don't worry, these things happen. Let's put it behind us.",
+     "zh": "別擔心，這種事難免的。我們就讓它過去吧。",
+     "R": "diego-talk"
+    },
+    {
+     "v": "A",
+     "say": "Thanks for being so understanding.",
+     "zh": "謝謝你這麼體諒。",
+     "L": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Same mistake. But this time, he trusts her more, not less.",
+     "zh": "同樣的錯誤，但這次他反而更信任她了。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：搞砸時的兩句",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Two Irish phrases for when things go wrong.",
+     "zh": "還有加碼！搞砸時的兩句愛爾蘭話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you mess up",
+    "big": [
+     "*I made a hames of it.",
+     "我搞砸了。"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "When you make a total mess of something, Irish people say this.",
+     "zh": "把事情完全搞砸時，愛爾蘭人會這樣說。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "I made a hames of it.",
+     "pose": "no"
+    },
+    {
+     "v": "E",
+     "say": "A hames is a complete mess. It's very Irish, and a little bit funny, so it takes the pressure off.",
+     "zh": "hames 是一團糟。很愛爾蘭，又有點好笑，能讓氣氛輕鬆一點。",
+     "pose": "secret",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When a friend feels bad",
+    "big": [
+     "*Don't be beating yourself up.",
+     "別再自責了。"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when a friend feels terrible about a mistake, say this.",
+     "zh": "朋友為了錯誤很難過時，就這樣說。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "Don't be beating yourself up.",
+     "pose": "cheer",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Beating yourself up means blaming yourself too much. Don't be plus i-n-g is very Irish.",
+     "zh": "beating yourself up 是過度自責。Don't be 加 ing 是很愛爾蘭的說法。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Don't be beating yourself up.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：整段道歉對話",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the whole conversation, start to finish. Say my lines!",
+     "zh": "現在把整段對話從頭到尾演一遍。跟我一起唸！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "talk",
+   "R": "diego",
+   "lines": [
+    {
+     "v": "A",
+     "say": "I'm afraid I've got some bad news. I made a mistake with the Murphy order. I'm not going to make excuses.",
+     "zh": "恐怕有個壞消息，Murphy 那張訂單我出錯了。我不會找藉口。",
+     "L": "think"
+    },
+    {
+     "v": "B",
+     "say": "OK. What happened?",
+     "zh": "好，怎麼了？",
+     "R": "diego-think"
+    },
+    {
+     "v": "A",
+     "say": "What happened was, I sent them last year's price list. I didn't notice until this morning, when I checked the replies.",
+     "zh": "事情是這樣的，我寄了去年的價目表給他們。我直到今天早上看回信才發現。"
+    },
+    {
+     "v": "B",
+     "say": "Right. Have you spoken to them?",
+     "zh": "好。你跟他們聯絡了嗎？",
+     "R": "diego-talk"
+    },
+    {
+     "v": "A",
+     "say": "I've already called them and apologised. I made a hames of it, but it's fixed.",
+     "zh": "我已經打電話跟他們道歉了。我搞砸了，但已經補救好了。"
+    },
+    {
+     "v": "B",
+     "say": "Don't be beating yourself up. Let's put it behind us.",
+     "zh": "別再自責了。我們就讓它過去吧。",
+     "R": "diego-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "I'm afraid I've got some bad news. I made a mistake with the Murphy order.",
+     "That's on me. I should have double-checked.",
+     "I'm not going to make excuses.",
+     "What happened was, I sent them last year's price list.",
+     "I didn't notice until this morning, when I checked the replies.",
+     "The good news is, it only went to one client.",
+     "I've already called them and apologised.",
+     "I'll send them the correct prices by lunchtime.",
+     "From now on, I'll get a second pair of eyes on anything that goes to a client.",
+     "Thanks for being so understanding.",
+     "Don't worry, these things happen.",
+     "Let's put it behind us."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Brilliant! Own it, explain it, fix it, and move on.",
+     "zh": "太棒了！承認、說明、補救，然後往前走。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them. I hope you never need them, but you probably will!",
+     "zh": "十二句都在這裡。截圖存起來。希望你用不到，但你大概會用到！",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "outro",
+   "ch": 6,
+   "board": {
+    "items": [
+     "📰 每天一則在地新聞練英文",
+     "🎮 單字小遊戲，約朋友一起玩",
+     "🔥 連續打卡、解鎖稱號、逛廣場",
+     "🎓 英文小教室：會話、片語、文法"
+    ],
+    "url": "binbindaily.com"
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Before you go! Do you want to practise English a little every day?",
+     "zh": "走之前！想每天都練一點英文嗎？",
+     "pose": "hi"
+    },
+    {
+     "v": "E",
+     "say": "Try BinBin. Every day, there's a short news story from where you live, with the hard words explained.",
+     "zh": "試試 BinBin。每天一則你所在地區的短新聞，難的單字都有解釋。",
+     "pose": "point",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then play quick word games, on your own or with your friends.",
+     "zh": "接著玩快速的單字小遊戲，自己玩或約朋友一起。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Keep your streak going, unlock new titles, and say hi to other learners in the plaza.",
+     "zh": "保持連續打卡、解鎖新稱號，還能在廣場跟其他學習者打招呼。",
+     "pose": "thumb",
+     "step": 3
+    },
+    {
+     "v": "E",
+     "say": "And there are more lessons like this one, right inside the app.",
+     "zh": "App 裡還有更多像這樣的英文小教室。",
+     "pose": "talk2",
+     "step": 4
+    },
+    {
+     "v": "E",
+     "say": "Go to binbindaily dot com, or tap the link below.",
+     "zh": "上 binbindaily.com，或點下面的連結。",
+     "pose": "point",
+     "step": 5,
+     "cap": "Go to binbindaily.com, or tap the link below."
+    },
+    {
+     "v": "E",
+     "say": "And always double-check your attachments! See you next time. Bye!",
+     "zh": "還有，附件一定要再檢查一次！下一課見，Bye！",
+     "pose": "secret",
+     "end": true,
+     "step": 5
+    }
+   ]
+  }
+ ]
+}

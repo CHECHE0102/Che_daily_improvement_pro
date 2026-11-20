@@ -1,0 +1,1131 @@
+{
+ "teacher": "niamh",
+ "voices": {
+  "T": "en-IE-EmilyNeural",
+  "TE": "en-IE-EmilyNeural",
+  "E": "en-IE-EmilyNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-GB-RyanNeural",
+  "C": "en-HK-YanNeural"
+ },
+ "prosody": {
+  "E": [
+   "-2%",
+   "+0Hz"
+  ],
+  "A": [
+   "-10%",
+   "+0Hz"
+  ],
+  "B": [
+   "-5%",
+   "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
+  ]
+ },
+ "id": "V023",
+ "title": "跟外國朋友介紹台灣",
+ "subtitle": "12 句英文，聊家鄉不再只會說「很台」",
+ "level": "B2",
+ "date": "2026-11-20",
+ "bg": "bg-livingroom",
+ "guest": "luca",
+ "roles": {
+  "C": "小婷 Ting",
+  "B": "Luca 朋友"
+ },
+ "thumb": {
+  "pose": "cheer",
+  "bg": "bg-livingroom",
+  "line1": "介紹台灣卡住？",
+  "line2": "聊家鄉文化 12 句",
+  "tag": "B2 英文",
+  "sticker": "🧧"
+ },
+ "chapters": [
+  "Intro",
+  "習俗",
+  "食物",
+  "被問倒時",
+  "反問",
+  "愛爾蘭限定",
+  "總複習"
+ ],
+ "scenes": [
+  {
+   "type": "skit",
+   "ch": 0,
+   "L": "ting",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "B",
+     "say": "So, Ting, what's Taiwan like? What do people do for New Year?",
+     "zh": "小婷，台灣是什麼樣子？大家過年都做什麼？",
+     "R": "luca-happy"
+    },
+    {
+     "v": "C",
+     "say": "Em… we… eat. And… em… red envelope. It's… very… Taiwanese.",
+     "zh": "呃……我們……吃東西。還有……呃……紅包。就……很……台灣。",
+     "L": "ting-think"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "pause": 1.2,
+     "R": "luca-think",
+     "sticker": "🤔",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "emoji": "🧧",
+    "big": [
+     "Your own culture",
+     "*the hardest topic"
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "This is Ting again. She knows everything about Taiwan. But in English, it all came out as: it's very Taiwanese.",
+     "zh": "又是小婷。她對台灣瞭若指掌，但用英文講出來，全部變成「就很台灣」。",
+     "pose": "talk2"
+    },
+    {
+     "v": "E",
+     "say": "Explaining your own culture is hard, because you've never had to explain it before.",
+     "zh": "介紹自己的文化很難，因為你從來不需要解釋它。",
+     "pose": "secret",
+     "sticker": "💡",
+     "stickerX": 640,
+     "stickerY": 140
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 0,
+   "board": {
+    "kicker": "Today's mission",
+    "big": [
+     "Explain your culture",
+     "*so people get it"
+    ],
+    "cta": "跟外國朋友介紹台灣・12 句",
+    "ctaStep": 1
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Hi everyone, I'm Neev! Today, Ting will learn twelve sentences for talking about home.",
+     "zh": "哈囉大家，我是 Niamh 老師！今天小婷要學介紹家鄉的十二句話。",
+     "pose": "hi",
+     "cap": "Hi everyone, I'm Niamh! Today, Ting will learn twelve sentences for talking about home."
+    },
+    {
+     "v": "E",
+     "say": "Explaining customs, describing food, answering surprising questions, and asking about their culture too.",
+     "zh": "解釋習俗、形容食物、回答意想不到的問題，還有反過來問對方的文化。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 1,
+   "num": "1",
+   "title": "Customs",
+   "sub": "習俗：用對方懂的東西比喻",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part one: explain a custom.",
+     "zh": "第一段：解釋習俗。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The trick is to connect it to something they already know.",
+     "zh": "訣竅是把它連到對方已經知道的東西。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 1,
+   "label": "No. 1",
+   "phrase": "Lunar New Year is a bit like Christmas here. Everyone goes home to their family.",
+   "meaning": "農曆新年有點像這裡的聖誕節，大家都回家團圓",
+   "note": "a bit like ＝ 有點像",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Lunar New Year is a bit like Christmas here. Everyone goes home to their family.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A bit like plus something they know. Now they understand straight away.",
+     "zh": "a bit like 加上對方知道的東西，對方馬上就懂了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then add one detail that makes it real.",
+     "zh": "接著加一個細節，讓它更具體。",
+     "pose": "talk2",
+     "sticker": "🏮",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Lunar New Year is a bit like Christmas here. Everyone goes home to their family.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 2,
+   "label": "No. 2",
+   "phrase": "Older relatives give the kids money in red envelopes, for good luck.",
+   "meaning": "長輩會用紅包裝錢給小孩，討個吉利",
+   "note": "for good luck ＝ 為了好運",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then explain the custom. Who, what, and why.",
+     "zh": "接著解釋這個習俗：誰、做什麼、為什麼。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Older relatives give the kids money in red envelopes, for good luck.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Don't just say red envelope. Say who gives it, what's inside, and why.",
+     "zh": "不要只說 red envelope，要說誰給、裡面是什麼、為什麼。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "For good luck is the why. People always want to know the why.",
+     "zh": "for good luck 就是原因，大家總是想知道為什麼。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Older relatives give the kids money in red envelopes, for good luck.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 1,
+   "num": 3,
+   "label": "No. 3",
+   "phrase": "There's no direct translation, but it means something like…",
+   "meaning": "沒有直接的翻譯，但意思大概是……",
+   "note": "There's no direct translation ＝ 沒有直接的翻譯",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when a word is impossible to translate, say this.",
+     "zh": "遇到沒辦法翻譯的字，就這樣說。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "There's no direct translation, but it means something like…",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Then explain the feeling, not the word.",
+     "zh": "接著解釋那種感覺，而不是那個字。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Foreigners love these words. They're the most interesting part!",
+     "zh": "外國人超愛這種字，那是最有趣的部分！",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "There's no direct translation, but it means something like…",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 2,
+   "num": "2",
+   "title": "Food",
+   "sub": "食物：讓人聽了就想吃",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part two: talk about food.",
+     "zh": "第二段：聊食物。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Food is the easiest way into any culture. And everyone has an opinion.",
+     "zh": "食物是進入任何文化最簡單的方式，而且每個人都有意見。",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 4,
+   "label": "No. 4",
+   "phrase": "You have to try stinky tofu. It smells awful, but it tastes amazing.",
+   "meaning": "你一定要試試臭豆腐，聞起來很可怕，但吃起來超讚",
+   "note": "smells … but tastes … ＝ 聞起來……但吃起來……",
+   "lines": [
+    {
+     "v": "A",
+     "say": "You have to try stinky tofu. It smells awful, but it tastes amazing.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "You have to try is a strong, friendly recommendation.",
+     "zh": "You have to try 是強烈又友善的推薦。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Smells awful, but tastes amazing. The contrast makes people curious.",
+     "zh": "聞起來很可怕、吃起來超讚，這種反差讓人好奇。",
+     "pose": "secret",
+     "sticker": "😝",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "You have to try stinky tofu. It smells awful, but it tastes amazing.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 5,
+   "label": "No. 5",
+   "phrase": "It's the kind of thing you eat at a night market, late at night.",
+   "meaning": "那是你會在夜市、深夜吃的東西",
+   "note": "the kind of thing ＝ 那種……的東西",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Then tell them when and where people eat it.",
+     "zh": "接著告訴對方大家什麼時候、在哪裡吃。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "It's the kind of thing you eat at a night market, late at night.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "The kind of thing you eat paints a picture. Now they can imagine it.",
+     "zh": "the kind of thing you eat 畫出一個畫面，對方就能想像了。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Night markets are one of the best things to describe. Lights, noise, smells!",
+     "zh": "夜市是最適合形容的東西之一：燈光、人聲、香味！",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "It's the kind of thing you eat at a night market, late at night.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 2,
+   "num": 6,
+   "label": "No. 6",
+   "phrase": "If you like spicy food, you'd love Taiwanese beef noodle soup.",
+   "meaning": "如果你喜歡吃辣，你一定會愛台灣牛肉麵",
+   "note": "If you like …, you'd love … ＝ 如果你喜歡……你一定會愛……",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And connect it to what they like.",
+     "zh": "再把它連到對方喜歡的東西。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "If you like spicy food, you'd love Taiwanese beef noodle soup.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "If you like, you'd love. A perfect way to recommend anything.",
+     "zh": "If you like, you'd love，推薦任何東西的完美句型。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Now it's not just your culture. It's something for them.",
+     "zh": "這樣它不只是你的文化，也變成對方會喜歡的東西。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "If you like spicy food, you'd love Taiwanese beef noodle soup.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 2,
+   "L": "ting",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Let's watch Ting try again.",
+     "zh": "我們看小婷再試一次。",
+     "pose": "talk"
+    },
+    {
+     "v": "B",
+     "say": "So, what do people do for New Year in Taiwan?",
+     "zh": "那台灣人過年都做什麼？",
+     "R": "luca-talk"
+    },
+    {
+     "v": "C",
+     "say": "Lunar New Year is a bit like Christmas here. Everyone goes home to their family.",
+     "zh": "農曆新年有點像這裡的聖誕節，大家都回家團圓。",
+     "L": "ting-talk"
+    },
+    {
+     "v": "C",
+     "say": "Older relatives give the kids money in red envelopes, for good luck.",
+     "zh": "長輩會用紅包裝錢給小孩，討個吉利。",
+     "L": "ting-happy"
+    },
+    {
+     "v": "B",
+     "say": "Money? I wish we did that in Italy!",
+     "zh": "給錢？真希望義大利也這樣！",
+     "R": "luca-happy"
+    },
+    {
+     "v": "E",
+     "say": "Now he understands, and he wants to hear more.",
+     "zh": "現在他懂了，而且還想聽更多。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 3,
+   "num": "3",
+   "title": "Questions",
+   "sub": "被問倒時：好好回答意外的問題",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part three: answer surprising questions.",
+     "zh": "第三段：回答意想不到的問題。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "People will ask things you never expected. That's a good sign. They're interested!",
+     "zh": "大家會問你完全沒想過的問題，這是好事，表示他們有興趣！",
+     "pose": "talk2"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 7,
+   "label": "No. 7",
+   "phrase": "Actually, that's a common misconception.",
+   "meaning": "其實那是很常見的誤解",
+   "note": "misconception ＝ 誤解",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Actually, that's a common misconception.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "When someone has the wrong idea, correct them gently with this.",
+     "zh": "對方有錯誤印象時，用這句溫和地糾正。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Common makes it kind. It means: lots of people think that, it's not your fault.",
+     "zh": "common 讓語氣很體貼：很多人都這樣想，不是你的錯。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Actually, that's a common misconception.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 8,
+   "label": "No. 8",
+   "phrase": "Not exactly. It really depends on the family.",
+   "meaning": "不完全是，其實要看每個家庭",
+   "note": "depends on ＝ 要看、取決於",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when the answer is: it's complicated, say this.",
+     "zh": "答案是「很複雜」的時候，就這樣說。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "Not exactly. It really depends on the family.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Not exactly is softer than no.",
+     "zh": "Not exactly 比 no 柔和。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It depends on the family. Because no country is just one way.",
+     "zh": "要看每個家庭，因為沒有一個國家只有一種樣子。",
+     "pose": "thumb",
+     "sticker": "🏠",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Not exactly. It really depends on the family.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 3,
+   "num": 9,
+   "label": "No. 9",
+   "phrase": "Good question! I've never really thought about that.",
+   "meaning": "好問題！我從來沒想過這個",
+   "note": "I've never really thought about ＝ 從來沒想過",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you just don't know, be honest.",
+     "zh": "真的不知道的時候，就誠實說。",
+     "pose": "point"
+    },
+    {
+     "v": "A",
+     "say": "Good question! I've never really thought about that.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "This buys you time, and it's a compliment to their question.",
+     "zh": "這句幫你爭取時間，也是在稱讚對方的問題。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Nobody knows everything about their own country. That's OK.",
+     "zh": "沒有人對自己的國家無所不知，沒關係的。",
+     "pose": "talk2",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Good question! I've never really thought about that.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 4,
+   "num": "4",
+   "title": "Ask back",
+   "sub": "反問：變成雙向交流",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Part four: ask about their culture too.",
+     "zh": "第四段：也問問對方的文化。",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "A good culture chat goes both ways.",
+     "zh": "好的文化交流是雙向的。",
+     "pose": "secret"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 10,
+   "label": "No. 10",
+   "phrase": "Is there anything like that in Italy?",
+   "meaning": "義大利有類似的東西嗎？",
+   "note": "anything like that ＝ 類似的東西",
+   "lines": [
+    {
+     "v": "A",
+     "say": "Is there anything like that in Italy?",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "After you explain, turn it around. Now it's their turn to be the expert.",
+     "zh": "你解釋完之後，把問題丟回去，換對方當專家。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Anything like that works for food, festivals, anything.",
+     "zh": "anything like that 用在食物、節慶，什麼都可以。",
+     "pose": "thumb",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "Is there anything like that in Italy?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 11,
+   "label": "No. 11",
+   "phrase": "No way, we do something really similar!",
+   "meaning": "不會吧，我們也有很像的習俗！",
+   "note": "something really similar ＝ 很像的東西",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And when you find something in common, say this.",
+     "zh": "發現共同點的時候，就這樣說。",
+     "pose": "talk"
+    },
+    {
+     "v": "A",
+     "say": "No way, we do something really similar!",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Finding something in common is the best moment in any culture chat.",
+     "zh": "找到共同點是文化交流中最棒的時刻。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It turns two strangers into two friends.",
+     "zh": "兩個陌生人就這樣變成朋友。",
+     "pose": "cheer",
+     "sticker": "🤝",
+     "stickerX": 640,
+     "stickerY": 140,
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Your turn!",
+     "zh": "換你！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "No way, we do something really similar!",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "ch": 4,
+   "num": 12,
+   "label": "No. 12",
+   "phrase": "You should come and visit some time. I'll show you around.",
+   "meaning": "你哪天應該來玩，我帶你到處逛",
+   "note": "show someone around ＝ 帶某人到處參觀",
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the warmest way to finish.",
+     "zh": "最溫暖的結尾。",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "You should come and visit some time. I'll show you around.",
+     "pose": "point"
+    },
+    {
+     "v": "E",
+     "say": "Show you around means be their guide.",
+     "zh": "show you around 是當對方的導遊。",
+     "pose": "talk",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Even if they never come, they'll remember the invitation.",
+     "zh": "就算對方從來沒去，也會記得這個邀請。",
+     "pose": "secret",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Now you say it!",
+     "zh": "換你說！",
+     "pose": "cheer"
+    },
+    {
+     "v": "A",
+     "say": "You should come and visit some time. I'll show you around.",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 4,
+   "L": "ting",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "B",
+     "say": "Is it true everyone in Taiwan eats rice every day?",
+     "zh": "台灣是不是每個人每天都吃飯？",
+     "R": "luca-think"
+    },
+    {
+     "v": "C",
+     "say": "Not exactly. It really depends on the family. Is there anything like that in Italy?",
+     "zh": "不完全是，其實要看每個家庭。義大利有類似的東西嗎？",
+     "L": "ting-talk"
+    },
+    {
+     "v": "B",
+     "say": "Well, my nonna made pasta every single day.",
+     "zh": "嗯，我奶奶每天都煮義大利麵。",
+     "R": "luca-happy"
+    },
+    {
+     "v": "C",
+     "say": "No way, my grandma made rice every single day!",
+     "zh": "不會吧，我奶奶也每天都煮飯！",
+     "L": "ting-happy"
+    },
+    {
+     "v": "C",
+     "say": "You should come and visit some time. I'll show you around.",
+     "zh": "你哪天應該來玩，我帶你到處逛。",
+     "L": "ting-happy"
+    },
+    {
+     "v": "E",
+     "say": "Two grandmas, one friendship. Perfect.",
+     "zh": "兩個奶奶，一段友誼。完美。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 5,
+   "num": "☘",
+   "title": "Only in Ireland",
+   "sub": "愛爾蘭限定：愛爾蘭式的歡迎",
+   "lines": [
+    {
+     "v": "E",
+     "say": "One more thing! Irish people are famous for welcoming visitors. Two phrases you'll hear.",
+     "zh": "還有加碼！愛爾蘭人以熱情好客出名，教你兩句常聽到的話。",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "A hundred thousand welcomes",
+    "big": [
+     "*Céad míle fáilte!",
+     "十萬個歡迎！"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "This is Irish, the language. You'll see it at airports, pubs and hotels.",
+     "zh": "這是愛爾蘭語，在機場、Pub 和飯店都看得到。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "Céad míle fáilte!",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "It sounds like kayd meela fawlcha. It means: a hundred thousand welcomes.",
+     "zh": "唸起來像 kayd meela fawlcha，意思是：十萬個歡迎。",
+     "pose": "point",
+     "step": 1
+    }
+   ]
+  },
+  {
+   "type": "talk",
+   "ch": 5,
+   "board": {
+    "kicker": "When you visit an Irish home",
+    "big": [
+     "*You'll have a cup of tea?",
+     "你要喝杯茶吧？"
+    ],
+    "bigStep": [
+     0,
+     1
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "And the first thing you'll hear in any Irish home is this.",
+     "zh": "走進任何愛爾蘭人家裡，第一句一定會聽到這個。",
+     "pose": "thumb"
+    },
+    {
+     "v": "A",
+     "say": "You'll have a cup of tea?",
+     "pose": "secret",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "It's not really a question. Say yes. The kettle is already on.",
+     "zh": "這不算真的在問你。說好就對了，水已經在燒了。",
+     "pose": "talk2"
+    },
+    {
+     "v": "A",
+     "say": "You'll have a cup of tea?",
+     "pose": "point",
+     "echo": true
+    }
+   ]
+  },
+  {
+   "type": "chapter",
+   "ch": 6,
+   "num": "★",
+   "title": "All together",
+   "sub": "總複習：一整晚的文化交流",
+   "lines": [
+    {
+     "v": "E",
+     "say": "Now the whole dinner chat. Say Ting's lines!",
+     "zh": "現在把整段晚餐聊天演一遍。跟著唸小婷的台詞！",
+     "pose": "cheer"
+    }
+   ]
+  },
+  {
+   "type": "skit",
+   "ch": 6,
+   "L": "ting",
+   "R": "luca",
+   "lines": [
+    {
+     "v": "B",
+     "say": "So, what's the one food I have to try in Taiwan?",
+     "zh": "那在台灣，一定要吃的食物是什麼？",
+     "R": "luca-talk"
+    },
+    {
+     "v": "C",
+     "say": "You have to try stinky tofu. It smells awful, but it tastes amazing.",
+     "zh": "你一定要試試臭豆腐，聞起來很可怕，但吃起來超讚。",
+     "L": "ting-happy"
+    },
+    {
+     "v": "B",
+     "say": "Stinky? Is it like a strong cheese?",
+     "zh": "臭的？像味道很重的起司嗎？",
+     "R": "luca-think"
+    },
+    {
+     "v": "C",
+     "say": "Good question! I've never really thought about that. It's the kind of thing you eat at a night market, late at night.",
+     "zh": "好問題！我從來沒想過這個。那是你會在夜市、深夜吃的東西。",
+     "L": "ting-talk"
+    },
+    {
+     "v": "B",
+     "say": "I'm in. When do we go?",
+     "zh": "我要去！什麼時候出發？",
+     "R": "luca-happy"
+    },
+    {
+     "v": "C",
+     "say": "You should come and visit some time. I'll show you around.",
+     "zh": "你哪天應該來玩，我帶你到處逛。",
+     "L": "ting-happy"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "ch": 6,
+   "board": {
+    "kicker": "Today's 12 sentences",
+    "items": [
+     "Lunar New Year is a bit like Christmas here. Everyone goes home to their family.",
+     "Older relatives give the kids money in red envelopes, for good luck.",
+     "There's no direct translation, but it means something like…",
+     "You have to try stinky tofu. It smells awful, but it tastes amazing.",
+     "It's the kind of thing you eat at a night market, late at night.",
+     "If you like spicy food, you'd love Taiwanese beef noodle soup.",
+     "Actually, that's a common misconception.",
+     "Not exactly. It really depends on the family.",
+     "Good question! I've never really thought about that.",
+     "Is there anything like that in Italy?",
+     "No way, we do something really similar!",
+     "You should come and visit some time. I'll show you around."
+    ]
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Well done, Ting! Now everyone at the table wants to visit Taiwan.",
+     "zh": "小婷做得好！現在全桌的人都想去台灣了。",
+     "pose": "cheer"
+    },
+    {
+     "v": "E",
+     "say": "Here are all twelve. Screenshot them, and change the details for your own home town.",
+     "zh": "十二句都在這裡。截圖下來，把細節換成你自己的家鄉。",
+     "pose": "point"
+    }
+   ]
+  },
+  {
+   "type": "outro",
+   "ch": 6,
+   "board": {
+    "items": [
+     "📰 每天一則在地新聞練英文",
+     "🎮 單字小遊戲，約朋友一起玩",
+     "🔥 連續打卡、解鎖稱號、逛廣場",
+     "🎓 英文小教室：會話、片語、文法"
+    ],
+    "url": "binbindaily.com"
+   },
+   "lines": [
+    {
+     "v": "E",
+     "say": "Before you go! Do you want to practise English a little every day?",
+     "zh": "走之前！想每天都練一點英文嗎？",
+     "pose": "hi"
+    },
+    {
+     "v": "E",
+     "say": "Try BinBin. Every day, there's a short news story from where you live, with the hard words explained.",
+     "zh": "試試 BinBin。每天一則你所在地區的短新聞，難的單字都有解釋。",
+     "pose": "point",
+     "step": 1
+    },
+    {
+     "v": "E",
+     "say": "Then play quick word games, on your own or with your friends.",
+     "zh": "接著玩快速的單字小遊戲，自己玩或約朋友一起。",
+     "pose": "cheer",
+     "step": 2
+    },
+    {
+     "v": "E",
+     "say": "Keep your streak going, unlock new titles, and say hi to other learners in the plaza.",
+     "zh": "保持連續打卡、解鎖新稱號，還能在廣場跟其他學習者打招呼。",
+     "pose": "thumb",
+     "step": 3
+    },
+    {
+     "v": "E",
+     "say": "And there are more lessons like this one, right inside the app.",
+     "zh": "App 裡還有更多像這樣的英文小教室。",
+     "pose": "talk2",
+     "step": 4
+    },
+    {
+     "v": "E",
+     "say": "Go to binbindaily dot com, or tap the link below.",
+     "zh": "上 binbindaily.com，或點下面的連結。",
+     "pose": "point",
+     "step": 5,
+     "cap": "Go to binbindaily.com, or tap the link below."
+    },
+    {
+     "v": "E",
+     "say": "And bring me some pineapple cake next time! See you next time. Bye!",
+     "zh": "下次記得帶鳳梨酥給我！下一課見，Bye！",
+     "pose": "secret",
+     "end": true,
+     "step": 5
+    }
+   ]
+  }
+ ]
+}
