@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-20",
+ "items": {
+  "2026-11-20": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Siptu has rejected the public sector pay deal because of the Government's inflexibility.",
+     "Public sector workers have already received a 10.75 per cent pay rise.",
+     "Siptu has backed the provisional pay deal, adding to broad union support, although final acceptance depends on ballots and some groups object.",
+     "The nursing and teaching unions have voted against the agreement."
+    ],
+    "a": 2,
+    "exp": "The passage opens with Siptu having \"formally recommended that its members ratify the provisional public sector pay agreement\", notes that Fórsa and the nursing and teaching unions \"had previously endorsed the proposals\", and ends by saying ratification \"is contingent upon a majority vote within each individual union\". Siptu did not reject it (A), the increases are not yet paid (B), and the nursing and teaching unions endorsed it (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about how Adrian Kane viewed the negotiations?",
+    "opts": [
+     "He felt the Government had been difficult to deal with during the talks.",
+     "He believed the Government had offered more than the unions asked for.",
+     "He thought members were ready to give up during the talks.",
+     "He considered public service standards no longer a concern for the union."
+    ],
+    "a": 0,
+    "exp": "Kane said members \"had remained resolute despite what he characterised as the Government's inflexibility\", which implies he found the Government hard to negotiate with. Nothing suggests a generous offer (B); members stayed \"resolute\" (C); and he said the union would \"continue to hold the Government accountable for public service standards\" (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the attitude of most unions towards the deal, as presented in the final paragraph?",
+    "opts": [
+     "Enthusiastic, seeing it as a complete victory.",
+     "Hostile, planning industrial action against it.",
+     "Indifferent, leaving the decision entirely to the Government.",
+     "Pragmatic, accepting it as the best deal realistically available."
+    ],
+    "a": 3,
+    "exp": "The final paragraph says unions \"currently regard the agreement as the most favourable outcome achievable under the prevailing conditions\". This is realistic acceptance, not celebration of a complete victory (A); there is no hostility or plan for action (B), and unions are actively recommending it rather than being indifferent (C)."
+   }
+  ],
+  "2026-11-20-2": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Dublin City Council has abolished social housing rents for low-income tenants.",
+     "Dublin City Council will review its new income-based rent scheme, which has raised rents, as pressure grows to reverse the increases.",
+     "Councillors have voted to set new social housing rents themselves.",
+     "The Minister has removed Dublin City Council over its 2027 budget."
+    ],
+    "a": 1,
+    "exp": "The passage opens by saying the council \"has committed to a formal review of its new social housing rent scheme, as political pressure intensifies to reverse the increases\". Rents were not abolished (A); \"councillors lack the authority to set rents\" (C); and removal by the Minister is only a possible risk, not something that has happened (D)."
+   },
+   {
+    "type": "infer",
+    "q": "Why did the largest percentage increases mostly affect households with multiple earners?",
+    "opts": [
+     "Because the new scheme charges a flat rate to every household.",
+     "Because these households live in the newest council homes.",
+     "Because the council wanted to raise money from business rates.",
+     "Because under the old system they paid an unusually small share of their income, so linking rent to total income raised their rents most."
+    ],
+    "a": 3,
+    "exp": "Rents are now \"calculated as a proportion of net household income\", and Whelan said that before, \"households with more earners paid a disproportionately small share of their income in rent\". Correcting this naturally hit those households hardest. The scheme is differential, not flat (A); the age of homes is not mentioned (B); and business rates are Sinn Féin's proposal, not the cause (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that councillors could refuse to approve the budget?",
+    "opts": [
+     "To show the main lever councillors have over rents, and the risk it carries, since they cannot set rents directly.",
+     "To suggest that councillors have already decided to reject the budget.",
+     "To explain how the scheme will raise €22.5 million for maintenance.",
+     "To argue that the Minister should set council rents."
+    ],
+    "a": 0,
+    "exp": "The writer notes that \"Although councillors lack the authority to set rents, they could refuse to approve the budget\", which is \"contingent upon accepting the risk of removal by the Minister\". This explains their indirect power and its cost. No decision has been made (B), the €22.5 million figure is Whelan's estimate in a different paragraph (C), and the writer makes no argument about who should set rents (D)."
+   }
+  ],
+  "2026-11-20-3": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "BWG plans to invest €300 million by 2030 in its stores, distribution network and technology to support further growth.",
+     "BWG is closing hundreds of Spar and Londis stores to save €300 million.",
+     "South Africa's Spar Group has agreed to sell BWG.",
+     "BWG will spend most of its investment on artificial intelligence."
+    ],
+    "a": 0,
+    "exp": "BWG \"has announced a substantial €300 million investment programme designed to sustain its growth until 2030\", covering \"new distribution infrastructure, the modernisation of its retail network and technological development\". It is investing in, not closing, stores (B); no sale is mentioned (C); and digital work is €30 million, the smallest part (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about BWG's flagship store in south Dublin?",
+    "opts": [
+     "It is the group's only profitable outlet.",
+     "It will be replaced by the new national distribution centre.",
+     "It served as a testing ground for ideas the group now plans to roll out more widely.",
+     "It will close once the depot in County Sligo opens."
+    ],
+    "a": 2,
+    "exp": "The group intends \"to replicate innovations in fresh food and automation that were initially trialled at its flagship store in south Dublin\". \"Trialled\" and \"replicate\" show it was used to test ideas before wider use. Profitability (A), replacement (B) and closure (D) are not mentioned."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the writer's tone in the passage?",
+    "opts": [
+     "Sceptical, questioning whether BWG can afford the plan.",
+     "Neutral and informative, reporting the company's plans and figures without judgement.",
+     "Critical, accusing BWG of neglecting its staff.",
+     "Nostalgic, regretting changes to traditional shops."
+    ],
+    "a": 1,
+    "exp": "The passage sets out figures such as \"In excess of €150 million\" and \"Over €120 million\", and attributes evaluation to the company itself (\"According to chief executive John Moane, these investments will consequently render the organisation more resilient\"). The writer expresses no doubt (A), criticism (C) or regret (D)."
+   }
+  ],
+  "2026-11-20-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Cork University Hospital has been closed because of safety failures.",
+     "The HIQA report has found that Cork University Hospital is unsafe.",
+     "Andy Phillips has been dismissed from HSE South West.",
+     "Senior ministers will meet Cork hospital leaders amid a dispute over whether staffing limits endanger patients, with a HIQA report expected to be decisive."
+    ],
+    "a": 3,
+    "exp": "The passage reports that the Taoiseach and Health Minister \"are scheduled to meet management and senior clinicians\" as a dispute continues over \"whether staffing levels and recruitment restrictions ... constitute a significant risk to patient safety\", and ends: \"much will be contingent upon the forthcoming HIQA report\". The hospital is not closed (A), the HIQA report has not yet appeared (B), and Phillips's position is only described as \"increasingly untenable\" (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about Andy Phillips's position?",
+    "opts": [
+     "He has been promoted to head the HSE.",
+     "There is growing doubt that he can remain in his role.",
+     "He has been cleared of all criticism by HIQA.",
+     "He supports the Government's view that the hospital is unsafe."
+    ],
+    "a": 1,
+    "exp": "His position \"has become increasingly untenable following the emergence of a recording of a contentious meeting\", implying he may not be able to stay. There is no promotion (A); the HIQA report is still \"forthcoming\" (C); and it is the Government that disputes that the hospital is unsafe, so (D) is wrong."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention \"the absence of any increase in mortality\"?",
+    "opts": [
+     "To prove that the HIQA report has already been published.",
+     "To show that the Taoiseach disagrees with the Health Minister.",
+     "To give the evidence the minister relies on in rejecting claims that the hospital is unsafe.",
+     "To explain why Anne O'Connor did not speak to Ms Kearney."
+    ],
+    "a": 2,
+    "exp": "The minister \"has nevertheless rejected claims that the hospital is unsafe, citing an assessment that was broadly reassuring and the absence of any increase in mortality\". The detail supports her position. The HIQA report is still expected (A); no disagreement between the Taoiseach and minister is described (B); and O'Connor's silence is a separate point (D)."
+   }
+  ]
+ }
+}
