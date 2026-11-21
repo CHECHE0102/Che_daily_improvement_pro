@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-21",
+ "items": {
+  "2026-11-21": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The HSE is expanding community MRI access for older patients with joint pain.",
+     "GPs have asked the HSE to stop referring over-60s for MRI scans.",
+     "The HSE plans to end GP referrals for community MRI scans for over-60s with hip and knee problems, citing clinical evidence and limited capacity, but the move has drawn criticism.",
+     "The HSE has abolished all MRI scans for patients over 60."
+    ],
+    "a": 2,
+    "exp": "The passage opens with the HSE's intention \"to discontinue a scheme that enabled GPs to refer patients aged over 60 with hip and knee conditions for MRI scans\", gives its reasons (clinical evidence and \"MRI capacity is finite\"), then reports criticism from Prof Crowley and Marie Sherlock. Scans remain available \"through specialist pathways\", so (D) is wrong; there is no expansion (A), and GPs did not request the change (B)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about over-60s with hip or knee problems who still need an MRI after the change?",
+    "opts": [
+     "They will receive scans faster than before.",
+     "They will have to pay their GP directly for the scan.",
+     "They will no longer be able to obtain an MRI under any circumstances.",
+     "They are likely to wait longer, because the remaining route is often slow."
+    ],
+    "a": 3,
+    "exp": "MRI \"will remain available to patients referred through specialist pathways\", but \"this route is frequently associated with substantial waiting times\", and Sherlock warns of \"delays of 18 months or more\". So longer waits are likely, not faster scans (A) or no access at all (C); payment to GPs (B) is never mentioned."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes Marie Sherlock's attitude towards the cut?",
+    "opts": [
+     "Strongly critical",
+     "Cautiously supportive",
+     "Largely indifferent",
+     "Mildly positive"
+    ],
+    "a": 0,
+    "exp": "Sherlock \"characterised the cut as regressive and disproportionately detrimental to older people\" and warned of long delays, which is clearly strong criticism rather than support or indifference."
+   }
+  ],
+  "2026-11-21-2": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Shein has moved its European headquarters from Dublin to Hong Kong.",
+     "Shein's Irish subsidiary handled over €7.9 billion of European sales in 2025, although revenue and profit fell, as the EU brought in a charge on low-value imports.",
+     "Shein's profits rose sharply in 2025 thanks to the new EU charges.",
+     "The EU has banned low-value imports from online retailers such as Shein and Temu."
+    ],
+    "a": 1,
+    "exp": "The passage reports that Shein \"generated more than €7.9 billion in European sales through its Irish-registered subsidiary in 2025\", that \"revenue declined by approximately 16 per cent\" and profit decreased, and describes the new \"uniform €3 charge\". Profit fell rather than rose (C), the EU imposed a charge, not a ban (D), and the entity remains \"headquartered in Grand Canal Dock, Dublin\" (A)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the fact that the €3 charge was introduced earlier than planned?",
+    "opts": [
+     "EU authorities regarded the growth of cheap online imports as a pressing problem.",
+     "Shein asked for the charge to be introduced sooner.",
+     "The charge was considered too small to have any effect.",
+     "Low-value imports had already fallen sharply before the charge."
+    ],
+    "a": 0,
+    "exp": "The measure, \"originally scheduled for 2028, was accelerated in order to address the proliferation of inexpensive online retailers\", and the Commission estimates \"almost six billion low-value items\" arrived last year, showing the EU saw the issue as urgent. Nothing suggests Shein requested it (B), that it was seen as ineffective (C), or that imports had fallen (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer describe 2025 as \"the final full year prior to the introduction of new EU charges on low-value imports\"?",
+    "opts": [
+     "To argue that the charges caused Shein's revenue to fall in 2025.",
+     "To show that Shein paid the €3 charge throughout 2025.",
+     "To explain why Shein's employee numbers rose.",
+     "To make clear that the 2025 figures show the business before the new charge took effect."
+    ],
+    "a": 3,
+    "exp": "The charge has applied only \"since July\" of this year, so 2025 was the last full year without it; the phrase signals that these accounts reflect trading before the charge. Because the charge came later, it cannot explain the 2025 revenue fall (A) or have been paid in 2025 (B), and the rise in staff (\"from 254 to 389\") is not linked to it (C)."
+   }
+  ],
+  "2026-11-21-3": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Dublin City Council has abolished residents' parking permits.",
+     "Councillors have approved residents' permits costing up to €225 a year.",
+     "Dublin residents' parking permits will rise by 30 per cent in January, the first increase in over 15 years, with future rises linked to inflation.",
+     "Meter charges for non-residents will be frozen while resident permits rise."
+    ],
+    "a": 2,
+    "exp": "The passage states that permits are \"set to increase by 30 per cent in January, representing the first adjustment in over 15 years\" and that charges will then be \"adjusted annually in accordance with the Consumer Price Index\". The €225 proposal was \"rejected as disproportionate\" (B), and meter charges \"will likewise increase\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the comparison between 12 hours of yellow-zone parking and an annual permit suggest?",
+    "opts": [
+     "Yellow-zone meters are badly overpriced.",
+     "The council regards the current resident permit as very cheap compared with meter parking.",
+     "Most residents park on the street for 12 hours a day.",
+     "Annual permits will be replaced by hourly charges."
+    ],
+    "a": 1,
+    "exp": "The council notes that resident charges \"have remained unchanged since 2011, whereas hourly meter rates... have risen by 30 per cent\", so that \"12 hours of parking in the yellow zone currently costs approximately the same as an annual resident permit\". The point is that a whole year's permit is worth only half a day's meter parking, i.e. it is very cheap; nothing says meters are overpriced (A) or that permits will be scrapped (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the earlier proposal of up to €225 per year?",
+    "opts": [
+     "To show that the increase now planned is modest by comparison.",
+     "To suggest that fees will reach €225 next year.",
+     "To show that councillors supported much higher fees.",
+     "To explain how the Consumer Price Index is calculated."
+    ],
+    "a": 0,
+    "exp": "The writer says \"the new fees are considerably more modest than a previous proposal of up to €225 per year, which councillors rejected as disproportionate\". The comparison highlights how moderate the €65 permit is; councillors opposed the higher figure (C), and future rises follow the CPI rather than jumping to €225 (B)."
+   }
+  ],
+  "2026-11-21-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Social Democrats have rejected the Tánaiste's request for proposals on Irish unity.",
+     "All parties in Northern Ireland have welcomed the Social Democrats' plan.",
+     "The Government has already set up a new Oireachtas committee on Irish unity.",
+     "The Social Democrats have put forward four proposals to prepare for Irish unity, led by a new Oireachtas committee, and other parties have reacted in different ways."
+    ],
+    "a": 3,
+    "exp": "The party \"submitted four proposals intended to advance preparations for Irish unity\", the \"principal proposal\" being \"a new Oireachtas committee\", and \"responses from other parties were notably divergent\". The committee is only proposed (C), the party responded rather than refused (A), and the UUP and DUP did not welcome it (B)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about Cian O'Callaghan's view of the Government's current approach?",
+    "opts": [
+     "He thinks it concentrates too much on health and housing.",
+     "He believes it gives ordinary citizens too little involvement.",
+     "He thinks it has already agreed a framework for unity.",
+     "He considers it too expensive to carry out."
+    ],
+    "a": 1,
+    "exp": "He \"maintained that the Government's current proposals offer the public no substantive role\", which is why he calls for public consultation and \"a comprehensive civic dialogue\". He wants health and housing included rather than reduced (A), the framework is still to be agreed (C), and cost is not raised (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How does the writer present the reactions of the other parties?",
+    "opts": [
+     "As uniformly hostile",
+     "As unanimously enthusiastic",
+     "As mixed, ranging from a warm welcome to outright dismissal",
+     "As not yet known"
+    ],
+    "a": 2,
+    "exp": "The writer calls the responses \"notably divergent\": Sinn Féin and the SDLP \"welcomed the initiative\" and Alliance was willing \"to engage\", whereas the UUP \"expressed no interest\" and the DUP leader dismissed the letter as an attempt \"to outmanoeuvre its competitors\"."
+   }
+  ]
+ }
+}
