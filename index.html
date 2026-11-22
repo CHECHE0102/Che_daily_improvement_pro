@@ -555,7 +555,7 @@ select.search{appearance:auto;-webkit-appearance:menulist}.reg-note{font-size:13
 .lsn-yt{align-self:flex-start;margin:-4px 0 4px 6px;font-size:13px;font-weight:700;color:#c4302b!important;text-decoration:none!important}.lsn-end .lsn-yt{align-self:center;margin:4px 0 0}
 .lsn-art{width:72px;height:72px;border-radius:50%;object-fit:cover;background:#dcebe5}
 body.lsn-lock{overflow:hidden}
-.lsn-ov{position:fixed;inset:0;z-index:9000;background:#0d2e26;display:flex;flex-direction:column;color:#fff;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.lsn-ov{position:fixed;inset:0;z-index:9000;touch-action:manipulation;background:#0d2e26;display:flex;flex-direction:column;color:#fff;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 .lsn-top{display:flex;align-items:center;gap:10px;padding:8px 12px}.lsn-top b{flex:1;text-align:center;font-size:15px}.lsn-top span{width:40px}
 .lsn-x{width:40px;height:40px;border-radius:50%;border:0;background:#ffffff22;color:#fff;font-size:18px}
 .lsn-box{flex:1;position:relative;overflow:hidden}
@@ -1959,9 +1959,10 @@ function errReport(e,where){ try{
 }catch(_){} }
 window.addEventListener("error",e=>{ try{ errReport(e.error||e.message,"global:"+(e.lineno||"")); if(DEV) toast("⚠️ "+(e.message||"error")+" @"+String(e.lineno||"")); }catch(_){} });
 window.addEventListener("unhandledrejection",e=>{ try{ const r=e.reason; if(r&&/permission|network|offline|unavailable|quota/i.test(String(r.code||r.message||""))) return; errReport(r,"promise"); if(DEV) toast("⚠️ "+String(r&&r.message||r).slice(0,140)); }catch(_){} });
-/* pinch-zoom is allowed everywhere (easier reading) except in the multiplayer games, where quick taps must not zoom the page */
+/* pinch-zoom is allowed everywhere (easier reading) except in the multiplayer games, where quick taps must not zoom the page,
+   and in the 小教室 lesson player (zooming its 1080x1920 scaled iframe again and again made iOS run out of memory and reload the page) */
 let VP_LOCK=null;
-function vpApply(){ const lock=S.view==="play"; if(lock===VP_LOCK) return; VP_LOCK=lock; const m=document.getElementById("vpMeta");
+function vpApply(){ let lsn=false; try{ lsn=!!LSN.on; }catch(_){} const lock=S.view==="play"||lsn; if(lock===VP_LOCK) return; VP_LOCK=lock; const m=document.getElementById("vpMeta");
   if(m) m.setAttribute("content","width=device-width,initial-scale=1,viewport-fit=cover"+(lock?",maximum-scale=1,user-scalable=no":"")); document.body.classList.toggle("vp-lock",lock); }
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{ if(VP_LOCK) e.preventDefault(); },{passive:false}));   // iOS Safari ignores user-scalable=no
 function renderInner(){
@@ -4192,7 +4193,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.73";
+const APP_VERSION="2026.11.74";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -7928,9 +7929,9 @@ async function lsnOpen(id){
   const ov=document.createElement("div"); ov.id="lsnOv"; ov.className="lsn-ov";
   ov.innerHTML=`<div class="lsn-top"><button class="lsn-x" data-lsn="close" aria-label="${T("lsnClose")}">✕</button><b>${esc(meta.title)}</b><span></span></div>
     <div class="lsn-box"><div class="lsn-fit"><iframe class="lsn-frame" title="${esc(meta.title)}"></iframe></div><div class="lsn-cover"><p class="muted">${T("loading")}</p></div></div>
-    <div class="lsn-ctl"><button data-lsn="prev" aria-label="prev">⏮</button><button data-lsn="play" class="lsn-pp" aria-label="play">▶</button><button data-lsn="next" aria-label="next">⏭</button></div>`;
+    <div class="lsn-ctl"><button data-lsn="prev" aria-label="prev">⏮</button><button data-lsn="play" class="lsn-pp" aria-label="play">▶</button></div>`;
   document.body.append(ov); document.body.classList.add("lsn-lock");
-  Object.assign(LSN,{on:true,id,ov,k:0,playing:false,picked:null,quizOk:null,timers:[]});
+  Object.assign(LSN,{on:true,id,ov,k:0,playing:false,picked:null,quizOk:null,timers:[]}); vpApply();
   ov.addEventListener("click",lsnClick); window.addEventListener("resize",lsnFit); lsnFit();
   if(typeof SND!=="undefined"&&SND.ctx) musicForView();
   try{
@@ -7944,6 +7945,9 @@ async function lsnOpen(id){
       LSN.lines.push({si,li,n,first,lead,speech,dur,t0:t,ts:0,bounds:a?a.b:[],file:a?`lessons/audio/${id}/${a.f}`:null}); n++; t+=dur; }));
     let st=0; LSN.lines.forEach(x=>{ if(x.first) st=x.t0; x.ts=x.t0-st; x.p0=x.t0/t; x.p1=(x.t0+x.dur)/t; });
     const doc=ov.querySelector("iframe").contentDocument; doc.open(); doc.write(LessonRender.page("")); doc.close();
+    ["gesturestart","gesturechange"].forEach(t=>doc.addEventListener(t,e=>e.preventDefault(),{passive:false}));   // no pinch-zoom inside the lesson frame either
+    doc.addEventListener("touchmove",e=>{ if(e.touches.length>1) e.preventDefault(); },{passive:false});
+    if(doc.documentElement) doc.documentElement.style.touchAction="manipulation";
     doc.addEventListener("click",e=>{ const b=e.target.closest(".tap"); if(b) lsnPick(+b.dataset.i); });
     lsnShow(0,false);
     ov.querySelector(".lsn-cover").innerHTML=`<button class="lsn-big" data-lsn="play">▶</button><p>${T("lsnTapStart")}</p>`;
@@ -7980,7 +7984,7 @@ function lsnClick(e){ const b=e.target.closest("[data-lsn]"); if(!b) return; con
     if(LSN.playing){ LSN.playing=false; lsnStopTimers(); LSN.ov.querySelector("iframe").contentDocument.getAnimations().forEach(x=>x.pause()); }
     else { LSN.playing=true; lsnShow(LSN.k,true); }
     return lsnPlayBtn(); }
-  if(a==="prev"||a==="next"){ let k=LSN.k+(a==="next"?1:-1); if(k<0) k=0; if(k>=LSN.lines.length) return; const c=LSN.ov.querySelector(".lsn-cover"); if(c){ c.hidden=true; c.innerHTML=""; } LSN.playing=true; lsnPlayBtn(); lsnShow(k,true); }
+  if(a==="prev"){ let k=LSN.k-1; if(k<0) k=0;   /* no skip-forward: gold needs the lesson actually watched */ const c=LSN.ov.querySelector(".lsn-cover"); if(c){ c.hidden=true; c.innerHTML=""; } LSN.playing=true; lsnPlayBtn(); lsnShow(k,true); }
 }
 function lsnFinish(){
   if(!LSN.on||!LSN.lesson) return; lsnStopTimers(); LSN.playing=false; lsnPlayBtn();
@@ -7993,7 +7997,7 @@ function lsnFinish(){
     ${lsnYt(LSN.lesson)?`<a class="lsn-yt" href="${esc(lsnYt(LSN.lesson))}" target="_blank" rel="noopener">▶ ${T("lsnYT")}</a>`:""}</div>`;
 }
 function lsnClose(silent){ const ov=document.getElementById("lsnOv"); if(LSN.on) lsnStopTimers(); LSN.on=false; LSN.lesson=null; if(ov) ov.remove();
-  document.body.classList.remove("lsn-lock"); window.removeEventListener("resize",lsnFit);
+  document.body.classList.remove("lsn-lock"); window.removeEventListener("resize",lsnFit); vpApply();
   if(!silent){ if(typeof SND!=="undefined"&&SND.ctx) musicForView(); if(S.view==="lsn"||S.view==="adv") render(); } }
 function toLobby(){
   if(!TO_TESTS){ toLoad().then(()=>render()); return `<p class="muted">${T("loading")}</p>`; }
