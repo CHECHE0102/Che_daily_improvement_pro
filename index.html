@@ -6265,10 +6265,11 @@ function syPhase(now){ const C=syCur(), st=syState(), alive=C.ph==="hit"?((st.R[
   const dur={say:SY.say, talk:SY.talk, vote:SY.vote, hit:SY.hit}[C.ph]||SY.say;
   return {C, st, alive, sp, who:C.ph==="say"?sp[C.t]:null, until:C.ts+dur, dur}; }
 function syRand(seed){ let h=2166136261; for(const c of String(seed)){ h^=c.charCodeAt(0); h=Math.imul(h,16777619); } h=h||1; return ()=>{ h^=h<<13; h^=h>>>17; h^=h<<5; return ((h>>>0)%10000)/10000; }; }
-// 5 choices on my turn: 3 that fit both words (safe but vague) + 2 that fit only mine (clear but risky); nothing said this round or by me before
+// 5 choices on my turn: words that fit both (safe but vague), sometimes one that fits only mine (clear but risky); nothing said this round or by me before
 function syOpts(u,r){ const Y=S.pg.party.sy||{}, own=(syIsSpy(u)?Y.b1:Y.a1)||[], ban=new Set([...syRoundWords(r), ...syMine(u)]), rnd=syRand(S.pg.party.seed+u+r);
   const mix=a=>{ for(let i=a.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }, pick=(L,n)=>mix(L.filter(w=>!ban.has(w))).slice(0,n);
-  let o=[...pick(Y.s||[],3), ...pick(own,2)]; if(o.length<5) o=[...o, ...pick(Y.s||[],9).filter(w=>!o.includes(w))].slice(0,5);
+  const no=rnd()<0.5?0:1;   // half the turns offer one word that fits only your word, the other half only shared words (sims: 3+2 let the odd one get caught ~95% of games)
+  let o=[...pick(Y.s||[],5-no), ...pick(own,no)]; if(o.length<5) o=[...o, ...pick(Y.s||[],9).filter(w=>!o.includes(w))].slice(0,5);
   return mix(o); }
 
 function sySay(w,custom){ const pg=S.pg, F=syPhase(Date.now()), C=F.C; if(C.ph!=="say"||F.who!==pgMe()||sySa(pgMe())[C.r]) return;
