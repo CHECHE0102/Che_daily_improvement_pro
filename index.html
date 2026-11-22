@@ -890,7 +890,7 @@ body.onb-open{overflow:hidden}
 .mon-seal.rare{box-shadow:0 0 0 4px #FFD84D,0 0 22px 6px rgba(255,216,77,.8)}
 .mon-seal.rare img,.mon-seal.rare svg{filter:drop-shadow(0 0 6px rgba(255,230,120,.95)) saturate(1.25)}
 .q-timer{position:absolute;right:12px;top:10px;font:800 15px/1 system-ui,sans-serif;color:#C0443B;background:#F7DEDB;border-radius:999px;padding:5px 10px;font-variant-numeric:tabular-nums}
-.qcard{position:relative}
+.qcard{position:relative}.bq{gap:10px}.bq.def{box-shadow:inset 0 0 0 2px var(--bad)}.bq-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.bq-combo{font-weight:800;font-size:13px;padding:2px 10px;border-radius:99px;background:var(--line)}.bq-combo.hot{background:#F2C94C;color:#2a2208}.bq-time{height:6px;border-radius:99px;background:var(--line);overflow:hidden}.bq-time i{display:block;height:100%;background:var(--accent,#3e9c5a);transform-origin:left;transition:transform .1s linear}.bq.def .bq-time i{background:var(--bad)}.bq-sum{display:flex;flex-direction:column;gap:6px}
 .pz-rbookin{max-height:84vh;width:min(380px,100%)}
 .pz-rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;overflow:auto;max-height:56vh;width:100%;padding:2px}
 .pz-rcell{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
@@ -3124,17 +3124,23 @@ function advice(m){
 /* battle randomness: damage varies ±roll, monsters land a critical hit (×1.5) with chance mCrit */
 const BATTLE_RNG={roll:0.2, mCrit:0.12};
 const BOSS={wAdv:1.25, wDis:0.85, aAdv:0.8, aDis:1.2, eyeEvery:3, eye:1.3, rageAt:0.35, rage:1.25};   // wDis/aAdv/aDis: the boss's own element counts less (normal monsters 0.67 / 0.67 / 1.5)
-function simulate(m, spellOk){
+/* quiz battle (CheChe 2026-11-22, V2 numbers from the 2026-11-10 simulation): before each of your attacks you answer a word —
+   right = combo +3% per hit (max ×1.15), wrong or too slow = ×0.92; every 3rd monster attack on you asks a guard word, right = damage ×0.8.
+   With no answers (yield gets undefined) it is the plain auto battle, so the 穩贏/很難 labels keep using simulate() unchanged. */
+const QB={step:.03, cap:5, wrong:.92, block:.8, guardEvery:3, atkSec:10, defSec:7, minWords:4};
+function simulate(m, spellOk){ const it=simGen(m, spellOk); let r=it.next(); while(!r.done) r=it.next(); return r.value; }
+function* simGen(m, spellOk){
   const s0=stats(), s=m.pDefMul&&m.pDefMul!==1?{...s0, def:Math.round(s0.def*m.pDefMul)}:s0, al=m.wild&&m.lv>=ALLY_LV?todayAlly():null;
-  let php=s.hp, mhp=m.hp, ahp=al?al.hp:0; const ev=[]; let first=true, mt=0, raged=false;
+  let php=s.hp, mhp=m.hp, ahp=al?al.hp:0; const ev=[]; let first=true, mt=0, raged=false, combo=0, pt=0;
   const awm=al?elMult(al.wEl,m.el):1, aam=al?elMult(m.el,al.aEl):1;
   const roll=()=>1-BATTLE_RNG.roll+Math.random()*BATTLE_RNG.roll*2, mcrit=()=>Math.random()<BATTLE_RNG.mCrit;
   let wm=elMult(s.wEl,m.el); if(m.boss) wm= wm>1?BOSS.wAdv: wm<1?BOSS.wDis: 1;
   const pam0=elMult(m.el,s.aEl), pam= m.boss ? (pam0<1?BOSS.aAdv: pam0>1?BOSS.aDis: 1) : pam0;
   for(let round=1; round<=40 && php>0 && mhp>0; round++){
+    const ans=yield {ask:"atk", ev, maxP:s.hp, ally:al, combo}; let q=1; if(ans===true){ combo++; q=1+QB.step*Math.min(combo,QB.cap); } else if(ans===false){ combo=0; q=QB.wrong; }
     const crit=Math.random()<0.1 || (first&&spellOk);
-    let dmg=Math.max(1, Math.round((s.atk*wm - m.def*0.5)*roll()*(crit?(first&&spellOk?2:1.5):1)));
-    mhp=Math.max(0,mhp-dmg); ev.push({who:"p", dmg, crit, spell:first&&spellOk, php, mhp, ahp}); first=false;
+    let dmg=Math.max(1, Math.round((s.atk*wm - m.def*0.5)*roll()*(crit?(first&&spellOk?2:1.5):1)*q));
+    mhp=Math.max(0,mhp-dmg); ev.push({who:"p", dmg, crit, spell:first&&spellOk, php, mhp, ahp, combo:ans===true?combo:0, weak:ans===false}); first=false;
     if(mhp<=0) break;
     if(al&&ahp>0){ const ac=Math.random()<0.1; const ad=Math.max(1, Math.round((al.atk*ALLY_HIT*awm - m.def*0.5)*roll()*(ac?1.5:1))); mhp=Math.max(0,mhp-ad); ev.push({who:"a", dmg:ad, crit:ac, php, mhp, ahp}); if(mhp<=0) break; }
     mt++;
@@ -3142,10 +3148,12 @@ function simulate(m, spellOk){
     if(m.boss&&mhp<m.hp*BOSS.rageAt){ rage=BOSS.rage; if(!raged){ raged=true; rageNow=true; } }
     const eye=m.boss&&mt%BOSS.eyeEvery===0;
     if(al&&ahp>0&&Math.random()<ALLY_AGGRO){ const t2=Math.max(1, Math.round((m.atk*aam - al.def*0.5)*roll())); ahp=Math.max(0,ahp-t2); ev.push({who:"m", tgt:"a", dmg:t2, php, mhp, ahp}); continue; }
-    const mc=!eye&&mcrit();
+    const mc=!eye&&mcrit(); pt++;
+    const guard=pt%QB.guardEvery===0 ? yield {ask:"def", ev, maxP:s.hp, ally:al, combo} : undefined;
     let taken= eye ? Math.max(1, Math.round((m.atk*rage*BOSS.eye - s.def*0.25)*roll()))
                    : Math.max(1, Math.round((m.atk*rage*pam - s.def*0.5)*roll()*(mc?1.5:1)));
-    php=Math.max(0,php-taken); ev.push({who:"m", dmg:taken, eye, crit:mc, rage:rageNow, php, mhp, ahp});
+    if(guard===true) taken=Math.max(1,Math.round(taken*QB.block));
+    php=Math.max(0,php-taken); ev.push({who:"m", dmg:taken, eye, crit:mc, rage:rageNow, php, mhp, ahp, block:guard===true});
   }
   return {ev, win:mhp<=0 && php>0, maxP:s.hp, ally:al};
 }
@@ -3191,8 +3199,16 @@ function fight(){
   else if(B.m.wild){ const st=stamina(); if(st.v<1){ toast(T("noStam",{m:stamNextMin()})); return; } B.started=true; B.free=false; if(st.v>=STAM_MAX) st.t=Date.now(); st.v-=1; }
   else { if(g.tickets<1){ toast(T("noTicket")); return; } B.started=true; g.tickets-=1; }
   g.battles=(g.battles||0)+1;
+  if(quizOn()){ quizStart(B); return; }
   const res=simulate(B.m, !!B.spellOk);
   B.res=res; B.stage="fight"; B.idx=0; evSfx(res.ev[0]);
+  battleSettle(B,res);
+  saveGame(); render(); setTimeout(()=>battleAnim(res.ev[0]),30);
+  clearInterval(S.btimer);
+  battleTimer();
+}
+/* rewards, scars and level-ups for a finished battle (auto or quiz) */
+function battleSettle(B,res){ const g=game();
   if(res.win){
     let gold=B.m.gold;
     if(B.m.wild){ gold=Math.round(gold*wildGoldFactor(B.m.id)); if(!g.wildDay||g.wildDay.date!==today()) g.wildDay={date:today(),n:{}}; g.wildDay.n[B.m.id]=(g.wildDay.n[B.m.id]||0)+1; }
@@ -3205,10 +3221,29 @@ function fight(){
     B.lvUp=g.lv-before;
   }
   if(!res.win&&!B.m.wild&&!conquered()[B.m.id]){ g.scar=g.scar||{}; const n0=g.scar[B.m.id]||0; if(SCAR.per*n0<SCAR.max-1e-9){ g.scar[B.m.id]=n0+1; B.scarNew=Math.round(Math.min(SCAR.max,SCAR.per*(n0+1))*100); } }
-  saveGame(); render(); setTimeout(()=>battleAnim(res.ev[0]),30);
-  clearInterval(S.btimer);
-  battleTimer();
 }
+/* ----- quiz battle flow: question → answer → play the events it produced → next question ----- */
+function quizOn(){ return S.words.size>=QB.minWords; }
+function quizStart(B){ B.quiz={n:0, ok:0, best:0, miss:[], used:new Set()}; B.gen=simGen(B.m, !!B.spellOk); const r=B.gen.next();
+  B.res={ev:r.value.ev, win:false, maxP:r.value.maxP, ally:r.value.ally}; B.stage="fight"; B.idx=-1; quizAsk(B,r.value); saveGame(); render(); }
+function quizAsk(B,a){ const all=[...S.words.values()], Q=B.quiz, fresh=all.filter(x=>!Q.used.has(x.key)); if(!fresh.length) Q.used.clear();
+  const w=weightedPick(fresh.length?fresh:all,1)[0]; Q.used.add(w.key); B.ask={kind:a.ask, combo:a.combo, q:makeQuestion(w), picked:null, end:Date.now()+(a.ask==="def"?QB.defSec:QB.atkSec)*1000};
+  clearInterval(S.qtimer); S.qtimer=setInterval(()=>{ const A=S.battle&&S.battle.ask; if(!A||A.picked!=null||S.battle!==B){ clearInterval(S.qtimer); return; }
+    const left=(A.end-Date.now())/1000, bar=document.getElementById("bqBar"); if(bar) bar.style.transform=`scaleX(${Math.max(0,left/(A.kind==="def"?QB.defSec:QB.atkSec))})`;
+    if(left<=0){ clearInterval(S.qtimer); quizAnswer(-1); } },100); }
+function quizAnswer(i){ const B=S.battle, A=B&&B.ask; if(!A||A.picked!=null||B.stage!=="fight") return; clearInterval(S.qtimer);
+  A.picked=i; const ok=i>=0&&!!A.q.opts[i].ok, Q=B.quiz; Q.n++; if(ok){ Q.ok++; } else Q.miss.push(A.q.w);
+  sfx(ok?"spellOk":"spellNo"); const w=S.words.get(A.q.w.key)||A.q.w;
+  persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
+  const from=B.res.ev.length, r=B.gen.next(ok); if(A.kind==="atk") Q.best=Math.max(Q.best, ok?(B.res.ev[from]&&B.res.ev[from].combo)||0:0);
+  renderBattleOnly(); setTimeout(()=>{ if(S.battle===B) quizPlay(B,r); }, ok?500:1100); }
+function quizPlay(B,r){ clearInterval(S.btimer);
+  const step=()=>{ if(S.battle!==B) return clearInterval(S.btimer);
+    if(B.idx<B.res.ev.length-1){ B.idx++; const e=B.res.ev[B.idx]; evSfx(e); renderBattleOnly(); battleAnim(e); return; }
+    clearInterval(S.btimer);
+    if(r.done){ B.ask=null; B.res=r.value; B.idx=B.res.ev.length-1; battleSettle(B,B.res); saveGame(); B.stage="end"; B.justEnded=true; battleEndSfx(); render(); }
+    else { quizAsk(B,r.value); renderBattleOnly(); } };
+  step(); S.btimer=setInterval(step, matchMedia("(prefers-reduced-motion: reduce)").matches?200:900); }
 function evSfx(e){ if(!e) return; if(e.who==="p"){ const nk=cosWorn().neck&&cosOf(cosWorn().neck); if(nk) sfx("nx-"+nk.fx); } if(e.who==="p") sfx(cosSfxName(e)||(e.crit||e.spell?"crit":"hit")); else if(e.who==="a") sfx("ally"); else if(e.eye) sfx("eye"); else if(e.tgt==="a") sfx("hurt"); else sfx(e.crit?"mcrit":"hurt"); }
 function battleEndSfx(){ const B=S.battle; if(!B||!B.res) return; if(!B.res.win) return sfx("lose"); sfx(B.conquered?"conquer":"win"); if(B.lvUp) setTimeout(()=>sfx("lvup"),900); }
 function battleTimer(){
@@ -3257,7 +3292,7 @@ function arenaScene(B, last, cur){
   const heroPose=fin?(B.res.win?"win":"hurt"):showAnim&&pAtk&&!aAtk?"attack":showAnim&&mAtk?"hurt":"idle";
   const heroH=g.gender&&!fin?rigHeroHtml(g.gender, g.weapon&&ITEMS[g.weapon], g.armor&&ITEMS[g.armor], ()=>heroArt(heroPose), cosLayers(cosWorn())):heroArt(heroPose), rig=heroH.includes("rig-host");
   const mesh=rig&&!!(RIG.man&&RIG.man.t[picOfMon(m)]); if(mesh) meshStart();
-  B.face=showAnim&&pAtk?"hurt":showAnim&&(mAtk||aHit)?"angry":"calm";
+  B.face=showAnim&&pAtk?"hurt":showAnim&&(mAtk||aHit)?"angry":"calm"; if(B.ask&&B.ask.picked==null) B.face=B.ask.kind==="def"?"angry":"calm";
   const heroCls=showAnim&&!rig?(pAtk&&!aAtk?" atk":mAtk?" def hurt hs"+hl:""):"", foeCls=showAnim?(mAtk||aHit?(mesh?"":" atk"):pAtk?" hurt hs"+hl:""):"";
   const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allyArt(al, fin?(B.res.win&&!aDown?"win":"hurt"):showAnim&&aAtk?"attack":showAnim&&aHit?"hurt":"idle")}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
   const cfx=showAnim&&pAtk&&!aAtk;
@@ -3290,18 +3325,27 @@ function viewBattle(){
       <button class="btn" data-act="fight" ${B.stage==="spell"&&p==null?"":""}>${B.stage==="spell"&&p==null?T("skipSpell"):B.free&&plzFreeLeft()>0?T("plzFightFree2",{n:plzFreeLeft(),t:PLZ_ENC.free}):T(m.wild?"fightWild":"fight",{s:stamina().v,mx:STAM_MAX})}</button>
     </div>`;
   }
-  const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp};
+  const ev=B.res.ev, upto=B.stage==="end"?ev.length:B.idx+1, cur=ev[Math.min(upto,ev.length)-1]||{php:B.res.maxP,mhp:m.hp,ahp:B.res.ally?B.res.ally.hp:null};
   const al=B.res.ally;
-  const log=ev.slice(0,upto).map(e=>e.who==="a"?`<li class="lp">🤝 ${T("logAlly",{a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="m"&&e.tgt==="a"?`<li class="lm">${T("logMonAlly",{m:esc(monName(m)),a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}</li>`:`<li class="lm">${e.rage?`<b>${T("bossRageLog",{m:esc(monName(m))})}</b> `:""}${e.crit?T("logMonCrit"):""}${e.eye?T("bossEyeLog",{m:esc(monName(m)),n:e.dmg}):T("logMon",{m:esc(monName(m)),n:e.dmg})}</li>`).reverse().join("");
+  const log=ev.slice(0,upto).map(e=>e.who==="a"?`<li class="lp">🤝 ${T("logAlly",{a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="m"&&e.tgt==="a"?`<li class="lm">${T("logMonAlly",{m:esc(monName(m)),a:esc(al?al.n:""),n:e.dmg})}</li>`:e.who==="p"?`<li class="lp">${e.spell?T("logSpell"):e.crit?T("logCrit"):""}${T("logYou",{n:e.dmg})}${e.combo>1?` <small class="chip">${T("bqCombo",{n:e.combo})}</small>`:""}</li>`:`<li class="lm">${e.rage?`<b>${T("bossRageLog",{m:esc(monName(m))})}</b> `:""}${e.crit?T("logMonCrit"):""}${e.eye?T("bossEyeLog",{m:esc(monName(m)),n:e.dmg}):T("logMon",{m:esc(monName(m)),n:e.dmg})}${e.block?` <small class="chip">🛡️ ${T("bqBlockS")}</small>`:""}</li>`).reverse().join("");
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
     ? `<div class="reward win"><div class="eyebrow">${T("win")}</div>${B.free?`<div class="rw-row"><span>${T("exp")}</span><b>+0</b><small class="muted"> ${T("plzNoExp")}</small></div>`:""}<div class="rw-row"${B.free?" hidden":""}><span>${T("exp")}${B.rest?` <small class="chip rest">😴 ×${REST.mult}</small>`:""}</span><b>+${B.exp||m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.shard?`<div class="rw-row lvup"><span>💎 ${esc(T("pShard",{e:elName(B.shard.el),t:TIER[B.shard.t].n,n:1}))}</span></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
     : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p>${B.scarNew?`<p class="sm-t" style="margin:6px 0 0">🩹 ${T("scarNew",{m:esc(monName(m)),p:B.scarNew})}</p>`:""}</div>`) : "";
+  const A=B.stage==="fight"&&B.ask, Q=B.quiz, asking=A&&A.picked==null;
+  const qcard=A?(()=>{ const q=A.q, p=A.picked, ok=p!=null&&p>=0&&q.opts[p].ok;
+    return `<div class="card qcard bq${A.kind==="def"?" def":""}"><div class="bq-top"><b>${A.kind==="def"?T("bqDef"):T("bqAtk")}</b>${A.kind==="atk"&&A.combo?`<span class="bq-combo${A.combo>=3?" hot":""}">${T("bqCombo",{n:A.combo})}</span>`:""}</div>
+      <div class="bq-time"><i id="bqBar"></i></div>
+      ${q.type==="cloze"?`<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"),"<u></u>")}</div>`:`<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`}
+      <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(p!=null){ if(o.ok) c+=" right"; else if(i===p) c+=" wrong"; } return `<button class="${c}" data-bq="${i}" ${p!=null?"disabled":""}>${esc(o.label)}</button>`; }).join("")}</div>
+      ${p!=null?`<div class="fb ${ok?"ok":"no"}">${ok?(A.kind==="def"?T("bqBlock"):T("bqOk")):`${p<0?"⏰ ":""}${T("bqNo",{w:esc(q.w.word),m:esc(mean(q.w))})}${A.kind==="def"?"":T("bqWeak")}`}</div>`:""}</div>`; })():"";
+  const qsum=B.stage==="end"&&Q?`<div class="card bq-sum"><b>${T("bqSum",{r:Q.ok,t:Q.n,c:Q.best})}</b>${Q.miss.length?`<div class="sm-t muted">${T("bqMiss")} ${[...new Map(Q.miss.map(w=>[w.key,w])).values()].map(w=>`<b>${esc(w.word)}</b> ${esc(mean(w))}`).join(" · ")}</div>`:""}</div>`:"";
   return `<div class="view">
-    ${arenaScene(B, last, cur)}
-    ${end}
+    ${arenaScene(B, asking?null:last, cur)}
+    ${qcard}
+    ${end}${qsum}
     <ul class="blog">${log}</ul>
-    ${B.stage==="end"&&B.plz?`<div class="row"><button class="btn" data-act="plzback">🏞️ ${T("plzBack2")}</button></div>`:B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${(m.wild?stamina().v>0:g.tickets>0)?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:`<div class="row"><button class="btn ghost" data-act="bspeed" aria-pressed="${battleFast()}">⏩ ${battleFast()?T("spd1"):T("spd2")}</button><button class="btn ghost" data-act="skip">${T("skipAnim")}</button></div>`}
+    ${B.stage==="end"&&B.plz?`<div class="row"><button class="btn" data-act="plzback">🏞️ ${T("plzBack2")}</button></div>`:B.stage==="end"?`<div class="row"><button class="btn" data-act="advback">${T("backAdv")}</button>${(m.wild?stamina().v>0:g.tickets>0)?`<button class="btn ghost" data-mon="${m.id}">${T("fightAgain")}</button>`:""}</div>`:B.quiz?"":`<div class="row"><button class="btn ghost" data-act="bspeed" aria-pressed="${battleFast()}">⏩ ${battleFast()?T("spd1"):T("spd2")}</button><button class="btn ghost" data-act="skip">${T("skipAnim")}</button></div>`}
   </div>`;
 }
 
@@ -3893,7 +3937,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.64";
+const APP_VERSION="2026.11.65";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4305,7 +4349,7 @@ async function loadArticle(id){
 const byOrder=(a,b)=>b.date.localeCompare(a.date)||artPrio(a)-artPrio(b)||(a.rank||1)-(b.rank||1);
 async function openArticle(id){ if(!(await loadArticle(id))) return; pushMarkRead(); S.articleId=id; S.backTo=S.view==="arch"?"arch":"today"; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); }
 document.addEventListener("click", e=>{
-  const t=e.target.closest("[data-mi],[data-iqk],[data-iesec],[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
+  const t=e.target.closest("[data-mi],[data-iqk],[data-iesec],[data-co],[data-rkby],[data-level],[data-town],[data-lang],[data-advtab],[data-shopel],[data-buy],[data-equip],[data-mon],[data-spell],[data-bq],[data-tab],[data-act],[data-w],[data-pick],[data-open],[data-sort],[data-say],[data-artid],[data-del],[data-askdel],[data-explain]");
   if(!t) return;
   if(t.dataset.mi){ if(MONS[t.dataset.mi]){ S.monInfo=t.dataset.mi; renderSheet(); } return; }
   if(t.dataset.iqk){ const R=game().ieltsRun; if(R){ const v=t.dataset.iqv; R.ans[t.dataset.iqk]=/^\d+$/.test(v)?+v:v; S.ieConfirm=false; lsSave(); render(); } return; }
@@ -4325,6 +4369,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.act==="alyes") return allyAnswer(true);
   if(t.dataset.act==="alno") return allyAnswer(false);
   if(t.dataset.spell!=null) return castSpell(+t.dataset.spell);
+  if(t.dataset.bq!=null) return quizAnswer(+t.dataset.bq);
   if(t.dataset.tab){ S.quiz=null; S.battle=null; if(S.view==="ielts"){ ieStopAudio(); S.ieResult=null; } if(S.view==="toeic"){ toStop(); S.toResult=null; } return setTab(t.dataset.tab); }
   if(t.dataset.say){ speak(t.dataset.say); return; }
   if(t.dataset.w){ lookup(t.dataset.w); return; }
@@ -9589,7 +9634,7 @@ Object.assign(STR.hi,{"plzRareT": "चौक दुर्लभ", "plzRareTw_ear
 Object.assign(STR.es,{"plzRareT": "Rara de la plaza", "plzRareTw_earth": "Piel gruesa: PV ×1.5", "plzRareTw_metal": "Veloz: solo 6 s para el hechizo", "plzRareTw_water": "Escarcha: tu defensa −30%", "plzRareTw_fire": "Furia: ataque ×1.3", "plzRareTw_wood": "Caparazón: defensa ×1.5", "plzRareBook": "Cuaderno de raras", "plzRareBookSub": "A veces aparecen bestias raras brillantes en la hierba y el estanque · {n}/{t}", "plzQOut": "¡Se acabó el tiempo!"});
 Object.assign(STR.ja,{"plzRareT": "広場レア", "plzRareTw_earth": "厚い皮：HP ×1.5", "plzRareTw_metal": "俊敏：呪文問題は 6 秒だけ", "plzRareTw_water": "冷気：あなたの防御 −30%", "plzRareTw_fire": "狂暴：攻撃力 ×1.3", "plzRareTw_wood": "硬い殻：防御力 ×1.5", "plzRareBook": "広場レア図鑑", "plzRareBookSub": "草むらや池でまれに輝くレア種に出会える · {n}/{t} 収集", "plzQOut": "時間切れ！"});
 Object.assign(STR.ko,{"plzRareT": "광장 희귀", "plzRareTw_earth": "두꺼운 가죽: HP ×1.5", "plzRareTw_metal": "신속: 주문 문제는 6초만", "plzRareTw_water": "냉기: 내 방어력 −30%", "plzRareTw_fire": "광폭: 공격력 ×1.3", "plzRareTw_wood": "단단한 껍질: 방어력 ×1.5", "plzRareBook": "광장 희귀 도감", "plzRareBookSub": "풀숲과 호수에서 가끔 빛나는 희귀종을 만나요 · {n}/{t} 수집", "plzQOut": "시간 초과!"});
-Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
+Object.assign(STR.zh,{"bqAtk": "⚔️ 你的回合：答對就出手", "bqDef": "⚠️ 怪物要攻擊了！答對就格擋", "bqCombo": "連擊 {n}", "bqOk": "✅ 答對！攻擊加強", "bqBlock": "🛡️ 答對！擋下一部分傷害", "bqBlockS": "格擋", "bqNo": "❌ {w} = {m}", "bqWeak": "，這次攻擊變弱", "bqSum": "答對 {r} / {t} 題 · 最高連擊 {c}", "bqMiss": "答錯的字已加進複習："});Object.assign(STR.en,{"bqAtk": "⚔️ Your turn: answer to attack", "bqDef": "⚠️ The monster is attacking! Answer to guard", "bqCombo": "Combo {n}", "bqOk": "✅ Correct! Stronger hit", "bqBlock": "🛡️ Correct! Part of the damage blocked", "bqBlockS": "Guard", "bqNo": "❌ {w} = {m}", "bqWeak": " — weaker hit this time", "bqSum": "{r} / {t} correct · best combo {c}", "bqMiss": "Missed words go to review:"});Object.assign(STR.hi,{"bqAtk": "⚔️ आपकी बारी: सही जवाब दें और वार करें", "bqDef": "⚠️ राक्षस हमला कर रहा है! सही जवाब से बचाव करें", "bqCombo": "कॉम्बो {n}", "bqOk": "✅ सही! वार और ताकतवर", "bqBlock": "🛡️ सही! कुछ नुकसान रोका", "bqBlockS": "बचाव", "bqNo": "❌ {w} = {m}", "bqWeak": " — इस बार वार कमज़ोर", "bqSum": "{t} में से {r} सही · सबसे बड़ा कॉम्बो {c}", "bqMiss": "गलत शब्द दोहराने में जोड़े गए:"});Object.assign(STR.es,{"bqAtk": "⚔️ Tu turno: acierta para atacar", "bqDef": "⚠️ ¡El monstruo ataca! Acierta para bloquear", "bqCombo": "Combo {n}", "bqOk": "✅ ¡Correcto! Golpe más fuerte", "bqBlock": "🛡️ ¡Correcto! Bloqueas parte del daño", "bqBlockS": "Bloqueo", "bqNo": "❌ {w} = {m}", "bqWeak": " — esta vez el golpe es más débil", "bqSum": "{r} / {t} aciertos · mejor combo {c}", "bqMiss": "Palabras falladas, a repaso:"});Object.assign(STR.ja,{"bqAtk": "⚔️ あなたの番：正解で攻撃", "bqDef": "⚠️ モンスターの攻撃！正解でガード", "bqCombo": "コンボ {n}", "bqOk": "✅ 正解！攻撃アップ", "bqBlock": "🛡️ 正解！ダメージを一部ガード", "bqBlockS": "ガード", "bqNo": "❌ {w} = {m}", "bqWeak": "、今回は攻撃が弱まる", "bqSum": "{t}問中 {r}問正解 · 最大コンボ {c}", "bqMiss": "間違えた単語は復習へ："});Object.assign(STR.ko,{"bqAtk": "⚔️ 내 차례: 맞히면 공격", "bqDef": "⚠️ 몬스터가 공격해요! 맞히면 막기", "bqCombo": "콤보 {n}", "bqOk": "✅ 정답! 공격 강화", "bqBlock": "🛡️ 정답! 피해 일부를 막았어요", "bqBlockS": "막기", "bqNo": "❌ {w} = {m}", "bqWeak": ", 이번 공격은 약해져요", "bqSum": "{t}문제 중 {r}개 정답 · 최고 콤보 {c}", "bqMiss": "틀린 단어는 복습에 추가:"});Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
 Object.assign(STR.es,{"legalT": "Información, condiciones y reembolsos", "legalSub": "Quién gestiona la app, artículos y precios de la Cámara del Arcoíris, política de pagos y reembolsos, condiciones de uso y privacidad.", "legalOpen": "Abrir", "vtLegal": "Al comprar pides la entrega inmediata y aceptas que el derecho de desistimiento de 14 días termina al entregarse los artículos. Si no llegan o se te cobra dos veces, siempre te reembolsamos.", "vtLegalLink": "Política de pagos y reembolsos"});
