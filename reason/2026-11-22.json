@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-22",
+ "items": {
+  "2026-11-22": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The Government has abandoned its plan to reform the triple lock after a large neutrality protest.",
+     "The Government plans to amend its triple lock bill so ministers must consider UN General Assembly resolutions, while opponents march against the reform and demand stronger safeguards.",
+     "Opposition parties have agreed to support the Defence Amendment Bill 2026 if the General Assembly endorses every mission.",
+     "The UN Security Council has asked Ireland to remove the triple lock."
+    ],
+    "a": 1,
+    "exp": "The passage opens by saying the Government \"intends to modify its contentious triple lock legislation\" so ministers must \"take into consideration any relevant UN General Assembly resolution\", alongside \"a substantial demonstration in Dublin in support of Irish neutrality\". The reform is going ahead (\"aspires to enact it before the end of the year\"), so (A) is wrong; the opposition wants a \"more rigorous legal criterion\" rather than supporting the bill (C); nothing suggests the Security Council requested anything (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the Government's proposed amendment from the opposition's position?",
+    "opts": [
+     "It gives the General Assembly a veto over all overseas deployments.",
+     "It has been withdrawn because of the number of amendments submitted.",
+     "It was written jointly by Sinn Féin and the Irish Neutrality League.",
+     "It does not go as far as opponents want, because considering a resolution is weaker than requiring explicit approval."
+    ],
+    "a": 3,
+    "exp": "Under the Government plan ministers would only have to \"take into consideration any relevant UN General Assembly resolution\", whereas the opposition wants troops deployed \"only if the General Assembly explicitly endorsed the specific mission\". The amendment is therefore weaker than what opponents seek; it is no veto (A), it has not been withdrawn (B), and it was drafted by Minister McEntee (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that Fine Gael sources say the provision \"does not constitute a response\" to the Fianna Fáil backbenchers' initiative?",
+    "opts": [
+     "To show that the Government denies it is simply reacting to pressure from within a coalition party, despite the similarity of the two proposals.",
+     "To prove that the two amendments are completely different in content.",
+     "To suggest that Willie O'Dea will become the next defence minister.",
+     "To explain why the Irish Neutrality League organised the march."
+    ],
+    "a": 0,
+    "exp": "The passage says the provision is \"broadly comparable to an amendment proposed by ten Fianna Fáil backbenchers\"; \"nevertheless, Fine Gael sources assert that it does not constitute a response to that initiative.\" The contrast highlights the Government's denial of reacting to internal pressure. The proposals are described as similar, not different (B), and nothing links the remark to O'Dea's future (C) or the march (D)."
+   }
+  ],
+  "2026-11-22-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Ireland's plan to introduce its own 3% tax on online advertising.",
+     "The European Commission's decision to raise the EU budget to €1.76 trillion.",
+     "António Costa's revived proposal for an EU digital services tax within a reduced budget framework, which Ireland opposes and which needs unanimous approval.",
+     "A summit at which all member states unanimously adopted a digital tax."
+    ],
+    "a": 2,
+    "exp": "Costa \"has reintroduced a proposal for an EU-wide digital services tax as a central component of a compromise framework\" and \"reduced the overall budget\"; Martin \"indicated that Ireland does not endorse the levy\", and adoption \"is contingent upon unanimous agreement\". The tax is an EU proposal, not Irish (A); the budget was cut, not raised (B); the summit has not yet happened (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the proposal's chances of success?",
+    "opts": [
+     "They are uncertain, since Ireland's opposition alone could be enough to block it.",
+     "They are guaranteed, because Germany supports a smaller budget.",
+     "They depend only on the votes of the largest member states.",
+     "They improved once the tax threshold was set at €750 million."
+    ],
+    "a": 0,
+    "exp": "The passage states that adoption \"is contingent upon unanimous agreement, meaning that any single member state could effectively block it\", and Ireland \"does not endorse the levy\". So Ireland could block it. Nothing guarantees success (B), unanimity means all states matter, not just large ones (C), and no link is made between the threshold and its chances (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the writer's tone in the passage?",
+    "opts": [
+     "Enthusiastic about the digital tax and critical of Ireland.",
+     "Sarcastic towards António Costa's budget cuts.",
+     "Alarmed that multinational technology firms will leave Ireland.",
+     "Neutral and informative, reporting the proposal, its figures and positions without taking sides."
+    ],
+    "a": 3,
+    "exp": "The writer gives facts such as \"3% of revenue\", \"approximately €35 billion\" and reports that Martin \"indicated that Ireland does not endorse the levy\" without praising or criticising anyone. Even the note that Ireland's position \"is significant\" is explained factually (\"Ireland accommodates the European headquarters of numerous multinational technology corporations\"), not with alarm (C) or sarcasm (B)."
+   }
+  ],
+  "2026-11-22-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "A long-established Dromcollogher drapery shop has closed after its 83-year-old owner, who worked there for over fifty years, retired.",
+     "A new clothing shop has opened in the village square of Dromcollogher.",
+     "Cleary & Co closed because rural customers stopped buying school uniforms.",
+     "Nuala Cleary's granddaughters plan to reopen the shop next year."
+    ],
+    "a": 0,
+    "exp": "The passage reports that a drapery \"that served the community of Dromcollogher ... for more than a century has ceased operations\", closing \"following the retirement of its proprietor\", Nuala Cleary, who \"worked in the shop for in excess of five decades\". No new shop opens (B), the closure is linked to retirement, not falling uniform sales (C), and no reopening is mentioned (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the change in the shop's opening hours most likely suggest?",
+    "opts": [
+     "The shop was forced by law to close earlier.",
+     "Nuala wanted more time for swimming and card games.",
+     "Rural shops like this one have seen less demand than in the past.",
+     "The shop had become busier in the evenings."
+    ],
+    "a": 2,
+    "exp": "The writer says the decline \"from a twelve-hour day to a 5.30pm closing time, arguably reflects substantial changes in rural retail\", implying reduced trade. No law is mentioned (A); her hobbies are mentioned only in relation to her retirement (B); and shorter hours suggest fewer, not more, evening customers (D)."
+   },
+   {
+    "type": "tone",
+    "q": "What is the overall tone of the passage?",
+    "opts": [
+     "Angry about the decline of rural villages.",
+     "Warm and respectful, marking the end of an era with appreciation.",
+     "Indifferent and dismissive of small businesses.",
+     "Humorous and mocking about old-fashioned shops."
+    ],
+    "a": 1,
+    "exp": "The passage notes the family's \"appreciation to its loyal customer base\", quotes the closure as \"the end of an era\", and ends positively, saying Nuala's \"enthusiasm for swimming and card games suggests that she will remain active\". There is no anger (A), dismissiveness (C) or mockery (D)."
+   }
+  ],
+  "2026-11-22-4": [
+   {
+    "type": "main",
+    "q": "What is the main idea of the passage?",
+    "opts": [
+     "AI has made Irish pension funds completely safe from market falls.",
+     "The Central Bank of Ireland has banned investment in AI companies.",
+     "Data centres now supply 23% of Ireland's electricity.",
+     "Ireland is heavily exposed to the AI boom, which supports growth but carries significant financial risk if it ends."
+    ],
+    "a": 3,
+    "exp": "O'Leary says Ireland \"is disproportionately exposed\" to AI; the Central Bank calls it \"a key structural vulnerability\"; pension funds hold up to \"€15 of every €100\" in six AI firms; EY credits growth \"partly to AI\"; and Dr Howard warns \"the bubble will inevitably burst\". Pensions are exposed, not safe (A); no ban is mentioned (B); data centres consume, not supply, 23% of demand (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about ordinary Irish savers from the passage?",
+    "opts": [
+     "They are not affected by AI because only banks invest in it.",
+     "Their retirement savings could lose value if AI-related companies fall sharply.",
+     "They have mostly moved their pensions out of technology firms.",
+     "They will benefit whenever data centres face local opposition."
+    ],
+    "a": 1,
+    "exp": "The passage stresses that \"this exposure is not confined to institutional investors\": up to \"€15 of every €100 invested by Irish pension funds is allocated to only six AI-related corporations\". A fall in those companies could therefore hit pensions. This contradicts (A) and (C), and nothing links savers' gains to opposition to data centres (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the sentence beginning \"Admittedly, EY attributes...\"?",
+    "opts": [
+     "To argue that the risks of AI have been greatly exaggerated.",
+     "To show that the European average growth rate is 6%.",
+     "To acknowledge AI's benefits to the economy before returning to its costs and risks.",
+     "To prove that data centres are the main cause of Irish growth."
+    ],
+    "a": 2,
+    "exp": "\"Admittedly\" signals a concession: AI helps keep growth \"at approximately 3%, double the European average\". The next words, \"Nevertheless, data centres accounted for 23% of national electricity demand\", and the closing warning return to the downsides. The writer does not dismiss the risks (A); growth is double the European average, so that average is about 1.5% (B); and AI is credited only \"partly\" (D)."
+   }
+  ]
+ }
+}
