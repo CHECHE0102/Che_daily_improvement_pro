@@ -6234,7 +6234,7 @@ function rtWord(w,A){ if(!rtFits(w,A)) return esc(w); const n=A.a.length; return
 
 /* ----- game: Odd One Out (誰是臥底) — everyone gets a similar word, one player (the odd one) gets a different one and doesn't know it;
    players take turns describing their word with one adjective, then vote anonymously; the top vote loses a heart (tie = nobody) ----- */
-const SY={say:15000, gap:1600, talk:15000, vote:15000, hit:4200, lives:3, min:4, chatMs:4000};
+const SY={say:15000, gap:1600, talk:30000, vote:15000, hit:4200, lives:3, min:4, chatMs:4000};
 const SY_Q=["I think it's {n}!","Not me!","Me too!","Hmm… that's strange.","Good one!","Trust me!","I'm not sure.","Let's vote!"];
 let SY_LIB=null, SY_LP=null;
 function syLoad(){ if(!SY_LP) SY_LP=fetch("games/spy.json").then(r=>r.json()).then(d=>{ SY_LIB=d; return d; }).catch(()=>{ SY_LP=null; return {p:[],adj:{}}; }); return SY_LP; }
@@ -6329,7 +6329,7 @@ function syBotSuspect(u,alive){ const fit=new Set(syFits(u)); let best=null, bs=
   for(const v of alive){ if(v===u) continue; let s=Math.random()*1.5; for(const x of Object.values(sySa(v))) s+=fit.has(x.w)?0:x.c?0.6:2; if(s>bs){ bs=s; best=v; } } return best; }
 function syBotTick(now){ const pg=S.pg, P=pg.party; if(now<P.start||!SY_LIB) return; const F=syPhase(now), C=F.C, B=pg.bot;
   for(const u of syBots()){ if(!F.alive.includes(u)) continue; const b=pg.ps[u]=pg.ps[u]||{}, k=u+":"+C.r+":"+C.ph+":"+C.t;
-    if(!B[k]) B[k]={at:now+(C.ph==="say"?1500+Math.random()*3500:C.ph==="vote"?1500+Math.random()*7000:1000+Math.random()*10000), done:false, chat:Math.random()<0.4};
+    if(!B[k]) B[k]={at:now+(C.ph==="say"?1500+Math.random()*3500:C.ph==="vote"?1500+Math.random()*7000:1000+Math.random()*25000), done:false, chat:Math.random()<0.6};
     const J=B[k]; if(J.done||now<J.at) continue; J.done=true;
     if(C.ph==="say"){ if(F.who!==u||(b.sa||{})[C.r]) continue; const o=syOpts(u,C.r), Y=P.sy, own=(syIsSpy(u)?Y.b1:Y.a1)||[], sp=o.filter(w=>own.includes(w));
       if(o.length) b.sa={...(b.sa||{}), [C.r]:{w:sp.length&&Math.random()<0.35?sp[0]:o[Math.floor(Math.random()*o.length)], c:0}}; }
