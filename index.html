@@ -211,6 +211,22 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .chip{font-size:11px;border-radius:999px;padding:1px 8px;font-weight:600}
 .chip.new{background:var(--gorse-soft);color:var(--ink)}
 .dx{display:flex;flex-direction:column;gap:8px}
+.cal-card{display:flex;flex-direction:column;gap:10px}
+.cal-h{display:flex;align-items:center;gap:8px}.cal-h b{flex:1}
+.cal-nav{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:18px;line-height:1;padding:0}
+.cal-nav:disabled{opacity:.35}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-wd{font-size:11px;color:var(--muted);text-align:center}
+.cal-d{aspect-ratio:1;border:0;border-radius:10px;background:color-mix(in srgb,var(--line) 45%,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0;font-size:12px;color:var(--ink);min-width:0}
+.cal-d b{font-size:11px;line-height:1;padding:2px 5px;border-radius:99px;background:var(--card)}
+.cal-d.l1{background:color-mix(in srgb,var(--accent) 22%,var(--card))}.cal-d.l2{background:color-mix(in srgb,var(--accent) 42%,var(--card))}
+.cal-d.l3{background:color-mix(in srgb,var(--accent) 64%,var(--card));color:#fff}.cal-d.l4{background:var(--accent);color:#fff}
+.cal-d.l3 b,.cal-d.l4 b{color:var(--ink)}
+.cal-d.today{box-shadow:inset 0 0 0 2px var(--gorse)}.cal-d.sel{box-shadow:inset 0 0 0 2px var(--ink)}
+.cal-d.fut{opacity:.4}
+.cal-day{display:flex;flex-direction:column;gap:6px}
+.cal-day .dc-w{border:0;text-align:left;cursor:pointer}.cal-day .dc-w small{color:var(--muted)}
+.cal-day .dc-w.re{background:color-mix(in srgb,var(--gorse) 18%,transparent)}
 .srch-wrap{position:relative}
 .srch-wrap .search{padding-right:46px}
 .srch-wrap .search::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
@@ -2048,6 +2064,7 @@ function viewDict(){
     <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
     ${srsCard()}
     ${weakCard()}
+    ${calCard()}
     <div class="srch-wrap"><input id="dictSearch" class="search" type="search" placeholder="${T("dxPh")}" value="${esc(S.dictQ)}" autocomplete="off"><button type="button" class="srch-x" data-clr="dictSearch" aria-label="${T("clrSearch")}"${S.dictQ?"":" hidden"}>✕</button></div>
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
@@ -2156,6 +2173,40 @@ function dictList(){
   if(q) return (rows?`<div class="dict">${rows}</div>`:"")+dxSection(q);
   return S.words.size?(rows?`<div class="dict">${rows}</div>`:`<div class="empty">${T("noMatch")}</div>`):`<div class="card empty"><h3>${T("dictEmpty")}</h3><p>${T("dictEmptySub")}</p></div>`;
 }
+/* ---------- word calendar (members): which words were looked up on which day ----------
+   new = words first saved that day (firstSeen); again = saved words looked up again that day (day~DATE lookedUp/lookedUpBy) */
+function calData(){
+  const M=new Map(), get=d=>{ if(!M.has(d)) M.set(d,{nw:[],re:[]}); return M.get(d); };
+  for(const w of S.words.values()) if(w.firstSeen&&!w.filler) get(w.firstSeen).nw.push(w.key);
+  for(const [k,d] of S.days){ if(!k.startsWith("day~")||!d) continue; const date=k.slice(4), e=get(date), seen=new Set(e.nw);
+    for(const l of [...(d.lookedUp||[]), ...Object.values(d.lookedUpBy||{}).flat()]){ const key=keyOf(String(l)); if(!seen.has(key)&&S.words.has(key)){ seen.add(key); e.re.push(key); } } }
+  return M;
+}
+function calCard(){
+  if(!planHas("sub")) return `<section class="card wk-card cal-card locked"><div class="wk-h"><b>📅 ${T("calT")}</b>${planTag("sub")}</div><p class="muted sm-t" style="margin:0">${T("calTeaser")}</p>${memLockBtn()}</section>`;
+  const td=today(), cur=td.slice(0,7), ym=S.calM||cur, [y,m]=ym.split("-").map(Number);
+  const first=new Date(y,m-1,1), nd=new Date(y,m,0).getDate(), off=(first.getDay()+6)%7, M=calData(), loc=LOCALE[LANG]||"zh-TW";
+  const wd=[...Array(7)].map((_,i)=>`<span class="cal-wd">${esc(new Date(2024,0,1+i).toLocaleDateString(loc,{weekday:"narrow"}))}</span>`).join("");
+  let cells="".padEnd(0), tot=0, act=0;
+  for(let i=0;i<off;i++) cells+="<span></span>";
+  for(let d=1;d<=nd;d++){ const ds=ym+"-"+String(d).padStart(2,"0"), e=M.get(ds), n=e?e.nw.length+e.re.length:0;
+    if(e&&e.nw.length) tot+=e.nw.length; if(n) act++;
+    const lv=!n?0:n<3?1:n<6?2:n<10?3:4;
+    cells+=`<button class="cal-d l${lv}${ds===td?" today":""}${ds===S.calD?" sel":""}${ds>td?" fut":""}" data-cald="${ds}" aria-label="${esc(fmtDate(ds))}: ${n}"><span>${d}</span>${n?`<b>${n}</b>`:""}</button>`; }
+  let day="";
+  if(S.calD&&S.calD.startsWith(ym)){ const e=M.get(S.calD)||{nw:[],re:[]};
+    const chip=(k,re)=>{ const w=S.words.get(k); return w?`<button class="dc-w${re?" re":""}" data-calw="${esc(k)}"><b>${esc(w.word)}</b><small>${esc(String(mean(w)||"").slice(0,24))}</small></button>`:""; };
+    day=`<div class="cal-day"><b class="sm-t">${esc(fmtDate(S.calD))}</b>${!e.nw.length&&!e.re.length?`<span class="muted sm-t">${T("calNone")}</span>`:""}
+      ${e.nw.length?`<div class="muted sm-t">${T("calNew",{n:e.nw.length})}</div><div class="dc-ws">${e.nw.map(k=>chip(k,0)).join("")}</div>`:""}
+      ${e.re.length?`<div class="muted sm-t">${T("calRe",{n:e.re.length})}</div><div class="dc-ws">${e.re.map(k=>chip(k,1)).join("")}</div>`:""}</div>`; }
+  return `<section class="card cal-card"><div class="cal-h"><b>📅 ${T("calT")}</b><button class="cal-nav" data-calm="-1" aria-label="‹">‹</button><span class="sm-t" style="min-width:92px;text-align:center">${esc(first.toLocaleDateString(loc,{year:"numeric",month:"long"}))}</span><button class="cal-nav" data-calm="1" aria-label="›"${ym>=cur?" disabled":""}>›</button></div>
+    <div class="muted sm-t">${T("calSum",{n:tot,d:act})}</div>
+    <div class="cal-g">${wd}${cells}</div>
+    ${day||`<div class="muted sm-t">${T("calPick")}</div>`}</section>`;
+}
+function calMove(dir){ const [y,m]=(S.calM||today().slice(0,7)).split("-").map(Number), d=new Date(y,m-1+dir,1);
+  const ym=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"); if(ym>today().slice(0,7)) return; S.calM=ym; S.calD=null; calRedraw(); }
+function calRedraw(){ const c=document.querySelector(".cal-card"); if(c) c.outerHTML=calCard(); }
 /* ---------- look up any word: bundled BinBin dictionary (assets/dict/<lang>.json, built daily from every article
    glossary by tools/make_dict_index.py) + the free English dictionary api.dictionaryapi.dev for anything else ---------- */
 const DX={lang:null,data:null,p:null,api:{}};
@@ -2217,14 +2268,15 @@ function dxMatches(q){
 function dxSection(q){
   q=dxNorm(q); if(!q) return "";
   if(!DX.data||DX.lang!==dxLang()){ dxLoad().then(d=>{ if(d&&S.view==="dict"){ const l=$("#dictList"); if(l) l.innerHTML=dictList(); } }); return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")}</div><div class="muted sm-t">${T("loading")}</div></div>`; }
-  const list=dxMatches(q);
-  if(!list.length&&DX.pend) return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")}</div><div class="muted sm-t">${T("loading")}</div></div>`;
+  const all=dxMatches(q), list=all.filter(b=>!S.words.has(keyOf(b)));   // saved words are already listed above
+  if(!all.length&&DX.pend) return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")}</div><div class="muted sm-t">${T("loading")}</div></div>`;
   const rows=list.map(b=>{ const g=dxEntry(b), mine=S.words.has(keyOf(b));
     return `<div class="ent"><button data-dx="${esc(b)}"><span class="en">${esc(b)} <span class="pos">${esc(g.pos||"")}</span></span>${mine?`<span class="dx-in">✓ ${T("dxMine")}</span>`:g.lvl?`<span class="dx-lv">${g.lvl==="PN"?T("dxPN"):esc(g.lvl)}</span>`:"<span></span>"}<span class="z">${esc(mean(g))}</span></button></div>`; }).join("");
-  const single=/^[a-z][a-z'-]{1,30}$/.test(q), exact=list[0]&&list[0]===dxBase(q);
-  if(!list.length&&!/^[a-z][a-z' -]*$/.test(q)) return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")} · ${T("dxCount",{n:(DX.data.n||0).toLocaleString()})}</div><div class="dx-none"><span>${T("dxNone",{q:`<b>${esc(q)}</b>`})}</span><a class="btn ghost sm" href="https://translate.google.com/?sl=auto&tl=en&op=translate&text=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${T("dxGt")} ↗</a></div></div>`;
+  const single=/^[a-z][a-z'-]{1,30}$/.test(q), exact=all[0]&&all[0]===dxBase(q);
+  if(!all.length&&!/^[a-z][a-z' -]*$/.test(q)) return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")} · ${T("dxCount",{n:(DX.data.n||0).toLocaleString()})}</div><div class="dx-none"><span>${T("dxNone",{q:`<b>${esc(q)}</b>`})}</span><a class="btn ghost sm" href="https://translate.google.com/?sl=auto&tl=en&op=translate&text=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${T("dxGt")} ↗</a></div></div>`;
   const none=single&&!exact?`<div class="dx-none"><span>${T("dxNone",{q:`<b>${esc(q)}</b>`})}</span><div class="dx-acts" style="margin-top:0"><button class="btn ghost sm" data-dxapi="${esc(q)}">🔎 ${T("dxApi")}</button>${dxGt(q)}</div></div>`:"";
-  return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")} · ${T("dxCount",{n:(DX.data.n||0).toLocaleString()})}</div>${none}${rows?`<div class="dict">${rows}</div>`:(none?"":`<div class="empty">${T("noMatch")}</div>`)}</div>`;
+  if(!list.length&&!none&&all.length) return "";
+  return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")} · ${T("dxCount",{n:(DX.data.n||0).toLocaleString()})}</div>${none}${rows?`<div class="dict">${rows}</div>`:(none||all.length?"":`<div class="empty">${T("noMatch")}</div>`)}</div>`;
 }
 function dxOpen(base){
   const g=dxEntry(base); if(!g) return;
@@ -4073,7 +4125,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.69";
+const APP_VERSION="2026.11.70";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4626,6 +4678,11 @@ document.addEventListener("click", e=>{
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("click", e=>{
+  const cm=e.target.closest("[data-calm],[data-cald],[data-calw]");
+  if(cm){ if(cm.dataset.calm) calMove(+cm.dataset.calm);
+    else if(cm.dataset.cald){ S.calD=S.calD===cm.dataset.cald?null:cm.dataset.cald; calRedraw(); }
+    else { const w=S.words.get(cm.dataset.calw); if(w){ S.dictQ=w.word; S.open=w.key; render(); const i=$("#dictSearch"); if(i) i.scrollIntoView({block:"start",behavior:"smooth"}); } }
+    return; }
   const c=e.target.closest("[data-clr]"); if(c){ const i=document.getElementById(c.dataset.clr); if(i){ i.value=""; i.dispatchEvent(new Event("input",{bubbles:true})); i.focus(); } return; }
   const t=e.target.closest("[data-dx],[data-dxapi],[data-dxadd]"); if(!t) return;
   if(t.dataset.dx) dxOpen(t.dataset.dx); else if(t.dataset.dxapi) dxApi(t.dataset.dxapi); else dxAdd();
@@ -8855,7 +8912,7 @@ async function memApply(){ if(!CLOUD.fb||!CLOUD.user) return toast(T("invLogin")
   catch(e){ console.warn("member apply",e&&(e.code||e.message)); toast(T("syncFail")); } }
 function memCard(){ if(PLANS_ON||!IG_MEMBER_ON) return ""; const on=isMember(), R=MEM.req;
   if(CLOUD.user&&MEM.on===undefined&&!MEM.busy) setTimeout(memLoad,0);
-  const perks=["memPerk1","memPerk2"].map(k=>`<li>${T(k)}</li>`).join("");
+  const perks=["memPerk1","memPerk2","memPerk3"].map(k=>`<li>${T(k)}</li>`).join("");
   const body=on?`<p class="mem-on">✓ ${T("memYes")}</p>`
     :!CLOUD.user?`<p class="muted sm-t">${T("invLogin")}</p>`
     :R?`<p class="sm-t">${T("memWait")}</p><div class="mem-code">${esc(R.code)}</div><a class="btn sm comm-ig" href="${IG_DM}" target="_blank" rel="noopener">${T("memDmAgain")}</a>`
@@ -9776,11 +9833,17 @@ Object.assign(STR.es,{"plzRareT": "Rara de la plaza", "plzRareTw_earth": "Piel g
 Object.assign(STR.ja,{"plzRareT": "広場レア", "plzRareTw_earth": "厚い皮：HP ×1.5", "plzRareTw_metal": "俊敏：呪文問題は 6 秒だけ", "plzRareTw_water": "冷気：あなたの防御 −30%", "plzRareTw_fire": "狂暴：攻撃力 ×1.3", "plzRareTw_wood": "硬い殻：防御力 ×1.5", "plzRareBook": "広場レア図鑑", "plzRareBookSub": "草むらや池でまれに輝くレア種に出会える · {n}/{t} 収集", "plzQOut": "時間切れ！"});
 Object.assign(STR.ko,{"plzRareT": "광장 희귀", "plzRareTw_earth": "두꺼운 가죽: HP ×1.5", "plzRareTw_metal": "신속: 주문 문제는 6초만", "plzRareTw_water": "냉기: 내 방어력 −30%", "plzRareTw_fire": "광폭: 공격력 ×1.3", "plzRareTw_wood": "단단한 껍질: 방어력 ×1.5", "plzRareBook": "광장 희귀 도감", "plzRareBookSub": "풀숲과 호수에서 가끔 빛나는 희귀종을 만나요 · {n}/{t} 수집", "plzQOut": "시간 초과!"});
 Object.assign(STR.zh,{"bqAtk": "⚔️ 你的回合：答對就出手", "bqDef": "⚠️ 怪物要攻擊了！答對就格擋", "bqCombo": "連擊 {n}", "bqOk": "✅ 答對！攻擊加強", "bqBlock": "🛡️ 答對！擋下一部分傷害", "bqBlockS": "格擋", "bqNo": "❌ {w} = {m}", "bqWeak": "，這次攻擊變弱", "bqSum": "答對 {r} / {t} 題 · 最高連擊 {c}", "bqMiss": "答錯的字已加進複習："});Object.assign(STR.en,{"bqAtk": "⚔️ Your turn: answer to attack", "bqDef": "⚠️ The monster is attacking! Answer to guard", "bqCombo": "Combo {n}", "bqOk": "✅ Correct! Stronger hit", "bqBlock": "🛡️ Correct! Part of the damage blocked", "bqBlockS": "Guard", "bqNo": "❌ {w} = {m}", "bqWeak": " — weaker hit this time", "bqSum": "{r} / {t} correct · best combo {c}", "bqMiss": "Missed words go to review:"});Object.assign(STR.hi,{"bqAtk": "⚔️ आपकी बारी: सही जवाब दें और वार करें", "bqDef": "⚠️ राक्षस हमला कर रहा है! सही जवाब से बचाव करें", "bqCombo": "कॉम्बो {n}", "bqOk": "✅ सही! वार और ताकतवर", "bqBlock": "🛡️ सही! कुछ नुकसान रोका", "bqBlockS": "बचाव", "bqNo": "❌ {w} = {m}", "bqWeak": " — इस बार वार कमज़ोर", "bqSum": "{t} में से {r} सही · सबसे बड़ा कॉम्बो {c}", "bqMiss": "गलत शब्द दोहराने में जोड़े गए:"});Object.assign(STR.es,{"bqAtk": "⚔️ Tu turno: acierta para atacar", "bqDef": "⚠️ ¡El monstruo ataca! Acierta para bloquear", "bqCombo": "Combo {n}", "bqOk": "✅ ¡Correcto! Golpe más fuerte", "bqBlock": "🛡️ ¡Correcto! Bloqueas parte del daño", "bqBlockS": "Bloqueo", "bqNo": "❌ {w} = {m}", "bqWeak": " — esta vez el golpe es más débil", "bqSum": "{r} / {t} aciertos · mejor combo {c}", "bqMiss": "Palabras falladas, a repaso:"});Object.assign(STR.ja,{"bqAtk": "⚔️ あなたの番：正解で攻撃", "bqDef": "⚠️ モンスターの攻撃！正解でガード", "bqCombo": "コンボ {n}", "bqOk": "✅ 正解！攻撃アップ", "bqBlock": "🛡️ 正解！ダメージを一部ガード", "bqBlockS": "ガード", "bqNo": "❌ {w} = {m}", "bqWeak": "、今回は攻撃が弱まる", "bqSum": "{t}問中 {r}問正解 · 最大コンボ {c}", "bqMiss": "間違えた単語は復習へ："});Object.assign(STR.ko,{"bqAtk": "⚔️ 내 차례: 맞히면 공격", "bqDef": "⚠️ 몬스터가 공격해요! 맞히면 막기", "bqCombo": "콤보 {n}", "bqOk": "✅ 정답! 공격 강화", "bqBlock": "🛡️ 정답! 피해 일부를 막았어요", "bqBlockS": "막기", "bqNo": "❌ {w} = {m}", "bqWeak": ", 이번 공격은 약해져요", "bqSum": "{t}문제 중 {r}개 정답 · 최고 콤보 {c}", "bqMiss": "틀린 단어는 복습에 추가:"});Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
+Object.assign(STR.zh,{"calT": "單字日曆", "calTeaser": "用日曆看每天查了哪些單字、查了幾個，點一下日期就能複習那天的字。", "calSum": "這個月新查 {n} 個字，{d} 天有查字", "calNew": "新查的字（{n}）", "calRe": "再查一次的字（{n}）", "calNone": "這天沒有查字", "calPick": "點日期看那天查了哪些字", "memPerk3": "📅 單字日曆：每天查了哪些字"});
 Object.assign(STR.zh,{"clrSearch":"清除","dxPN":"專有名詞","dxPNNote":"這是 BinBin 新聞裡的專有名詞意思（人名、地名、機構等），不一定是這個字的一般意思。想看一般意思，可以查英英字典、Google 翻譯或劍橋字典。","dxGt":"Google 翻譯","dxPh": "搜尋你的單字，或查任何英文字", "dxTitle": "BinBin 字典", "dxCount": "{n} 字", "dxMine": "已收藏", "dxNone": "BinBin 字典裡還沒有 {q}", "dxApi": "查英英字典", "dxAdd": "加入我的字典", "dxCamb": "劍橋字典", "dxErr": "連不上字典，請稍後再試。", "dxApiNone": "找不到這個字，可能拼錯了？", "dxApiNote": "英文解釋來自免費的 Free Dictionary（dictionaryapi.dev）。"});
+Object.assign(STR.en,{"calT": "Word calendar", "calTeaser": "See which words you looked up each day and how many. Tap a day to review its words.", "calSum": "This month: {n} new words, {d} days with look-ups", "calNew": "New words ({n})", "calRe": "Looked up again ({n})", "calNone": "No look-ups this day", "calPick": "Tap a day to see its words", "memPerk3": "📅 Word calendar: your words, day by day"});
 Object.assign(STR.en,{"clrSearch":"Clear","dxPN":"Proper noun","dxPNNote":"This is the proper-noun meaning from a BinBin news story (a name, place or organisation), not always the word's usual meaning. For the usual meaning, try the English dictionary, Google Translate or Cambridge.","dxGt":"Google Translate","dxPh": "Search your words or look up any word", "dxTitle": "BinBin dictionary", "dxCount": "{n} words", "dxMine": "Saved", "dxNone": "{q} isn't in the BinBin dictionary yet", "dxApi": "Look it up (English)", "dxAdd": "Add to my dictionary", "dxCamb": "Cambridge", "dxErr": "Couldn't reach the dictionary. Try again later.", "dxApiNone": "Word not found. Check the spelling?", "dxApiNote": "Definitions from the Free Dictionary API (dictionaryapi.dev)."});
+Object.assign(STR.hi,{"calT": "शब्द कैलेंडर", "calTeaser": "देखें किस दिन कौन-से और कितने शब्द देखे। किसी दिन पर टैप करके उसके शब्द दोहराएँ।", "calSum": "इस महीने: {n} नए शब्द, {d} दिन शब्द देखे", "calNew": "नए शब्द ({n})", "calRe": "फिर से देखे ({n})", "calNone": "इस दिन कोई शब्द नहीं देखा", "calPick": "किसी दिन पर टैप करें", "memPerk3": "📅 शब्द कैलेंडर: रोज़ के शब्द"});
 Object.assign(STR.hi,{"clrSearch":"साफ़ करें","dxPN":"व्यक्तिवाचक संज्ञा","dxPNNote":"यह BinBin की किसी खबर से लिया गया व्यक्तिवाचक संज्ञा वाला अर्थ है (नाम, जगह या संस्था), हमेशा सामान्य अर्थ नहीं। सामान्य अर्थ के लिए अंग्रेज़ी शब्दकोश, Google अनुवाद या Cambridge देखें।","dxGt":"Google अनुवाद","dxPh": "अपने शब्द खोजें या कोई भी शब्द देखें", "dxTitle": "BinBin शब्दकोश", "dxCount": "{n} शब्द", "dxMine": "सहेजा गया", "dxNone": "{q} अभी BinBin शब्दकोश में नहीं है", "dxApi": "अंग्रेज़ी शब्दकोश में देखें", "dxAdd": "मेरे शब्दकोश में जोड़ें", "dxCamb": "Cambridge", "dxErr": "शब्दकोश से कनेक्ट नहीं हो सका। बाद में फिर कोशिश करें।", "dxApiNone": "शब्द नहीं मिला। वर्तनी जाँचें?", "dxApiNote": "परिभाषाएँ Free Dictionary API (dictionaryapi.dev) से।"});
+Object.assign(STR.es,{"calT": "Calendario de palabras", "calTeaser": "Mira qué palabras buscaste cada día y cuántas. Toca un día para repasarlas.", "calSum": "Este mes: {n} palabras nuevas, {d} días con búsquedas", "calNew": "Palabras nuevas ({n})", "calRe": "Buscadas otra vez ({n})", "calNone": "Ese día no buscaste palabras", "calPick": "Toca un día para ver sus palabras", "memPerk3": "📅 Calendario de palabras: tus palabras día a día"});
 Object.assign(STR.es,{"clrSearch":"Borrar","dxPN":"Nombre propio","dxPNNote":"Es el significado de nombre propio de una noticia de BinBin (persona, lugar u organización), no siempre el significado habitual. Para el significado habitual, prueba el diccionario en inglés, Google Traductor o Cambridge.","dxGt":"Google Traductor","dxPh": "Busca tus palabras o cualquier palabra", "dxTitle": "Diccionario BinBin", "dxCount": "{n} palabras", "dxMine": "Guardada", "dxNone": "{q} aún no está en el diccionario BinBin", "dxApi": "Buscar en inglés", "dxAdd": "Añadir a mi diccionario", "dxCamb": "Cambridge", "dxErr": "No se pudo conectar con el diccionario. Inténtalo más tarde.", "dxApiNone": "Palabra no encontrada. ¿Revisas la ortografía?", "dxApiNote": "Definiciones de Free Dictionary API (dictionaryapi.dev)."});
+Object.assign(STR.ja,{"calT": "単語カレンダー", "calTeaser": "毎日どの単語をいくつ調べたかをカレンダーで確認。日付をタップするとその日の単語を復習できます。", "calSum": "今月：新しい単語 {n} 語、{d} 日調べました", "calNew": "新しく調べた単語（{n}）", "calRe": "もう一度調べた単語（{n}）", "calNone": "この日は調べた単語がありません", "calPick": "日付をタップしてその日の単語を見る", "memPerk3": "📅 単語カレンダー：毎日調べた単語"});
 Object.assign(STR.ja,{"clrSearch":"クリア","dxPN":"固有名詞","dxPNNote":"BinBin のニュースに出てきた固有名詞（人名・地名・団体など）の意味で、一般的な意味とは限りません。一般的な意味は英英辞典、Google 翻訳、Cambridge で調べてください。","dxGt":"Google 翻訳","dxPh": "自分の単語を検索、または好きな単語を調べる", "dxTitle": "BinBin 辞書", "dxCount": "{n} 語", "dxMine": "保存済み", "dxNone": "{q} はまだ BinBin 辞書にありません", "dxApi": "英英辞典で調べる", "dxAdd": "単語帳に追加", "dxCamb": "Cambridge", "dxErr": "辞書に接続できません。後でもう一度お試しください。", "dxApiNone": "見つかりません。スペルを確認してください。", "dxApiNote": "定義は Free Dictionary API（dictionaryapi.dev）より。"});
+Object.assign(STR.ko,{"calT": "단어 달력", "calTeaser": "매일 어떤 단어를 몇 개 찾았는지 달력으로 확인하고, 날짜를 누르면 그날 단어를 복습할 수 있어요.", "calSum": "이번 달: 새 단어 {n}개, {d}일 동안 찾음", "calNew": "새로 찾은 단어 ({n})", "calRe": "다시 찾은 단어 ({n})", "calNone": "이날은 찾은 단어가 없어요", "calPick": "날짜를 눌러 그날 단어 보기", "memPerk3": "📅 단어 달력: 날마다 찾은 단어"});
 Object.assign(STR.ko,{"clrSearch":"지우기","dxPN":"고유명사","dxPNNote":"BinBin 뉴스에 나온 고유명사(인명·지명·기관 등) 뜻이라 일반적인 뜻이 아닐 수 있어요. 일반적인 뜻은 영영사전, Google 번역, Cambridge에서 찾아보세요.","dxGt":"Google 번역","dxPh": "내 단어 검색 또는 아무 단어나 찾기", "dxTitle": "BinBin 사전", "dxCount": "{n}개 단어", "dxMine": "저장됨", "dxNone": "{q}은(는) 아직 BinBin 사전에 없어요", "dxApi": "영영사전에서 찾기", "dxAdd": "내 단어장에 추가", "dxCamb": "Cambridge", "dxErr": "사전에 연결할 수 없어요. 나중에 다시 시도하세요.", "dxApiNone": "단어를 찾을 수 없어요. 철자를 확인해 보세요.", "dxApiNote": "정의 출처: Free Dictionary API (dictionaryapi.dev)."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
