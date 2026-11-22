@@ -8463,12 +8463,12 @@ const PLZ_U=2.56, PLZ_GEO={
   band:{w:[{e:[300,225,268,200]},{r:[276,0,326,40]},{r:[276,410,326,450]}], s:[{e:[300,205,86,92]}], sp:[300,395]},
   fountain:{w:[{r:[0,135,600,312]},{r:[182,0,420,450]}], s:[{e:[300,224,56,38]},{e:[300,66,70,16]}], sp:[300,385]},
   lawn:{w:[{e:[300,238,262,195]},{e:[505,365,62,30]}], s:[], sp:[300,380]}};
-const PLZ_PODIUM=[{x:768,y:162,m:"🥇"},{x:664,y:176,m:"🥈"},{x:872,y:180,m:"🥉"}];   // fountain area only, top of the path
+const PLZ_PODIUM=[{x:768,y:157,m:"🥇"},{x:667,y:181,m:"🥈"},{x:869,y:191,m:"🥉"}];   // fountain area only, top of the path
 const PLZ_ZONES=[{k:"fountain",ic:"⛲",mx:50,my:50},{k:"gate",ic:"🏛️",mx:50,my:85},{k:"pond",ic:"🦆",mx:16,my:58},{k:"band",ic:"🎵",mx:50,my:13},{k:"lawn",ic:"🧺",mx:82,my:50}];   // areas of the park (St Stephen's Green style); each runs its own channels of PLZ_CAP
 // walking off an edge takes you to the next area (St Stephen's Green layout: band north, gate south, pond west, lawn east of the fountain).
 // d = side, a0..a1 = the path's opening along that side (world px, from the walk masks), e = the farthest walkable spot toward that side,
 // in = how far inside the next area you appear (the gate's arch needs more room), sg = where its sign stands if not at the middle
-const PLZ_EXITS={fountain:[{d:"n",a0:440,a1:1092,e:8,to:"band",sg:[768,100]},{d:"s",a0:440,a1:1092,e:1144,to:"gate"},{d:"w",a0:328,a1:808,e:8,to:"pond"},{d:"e",a0:328,a1:808,e:1528,to:"lawn"}],
+const PLZ_EXITS={fountain:[{d:"n",a0:440,a1:1092,e:8,to:"band",sg:[530,118]},{d:"s",a0:440,a1:1092,e:1144,to:"gate"},{d:"w",a0:328,a1:808,e:8,to:"pond"},{d:"e",a0:328,a1:808,e:1528,to:"lawn"}],
   band:[{d:"s",a0:712,a1:824,e:1144,to:"fountain"}], gate:[{d:"n",a0:716,a1:816,e:208,to:"fountain",in:170}], pond:[{d:"e",a0:740,a1:780,e:1532,to:"fountain"}], lawn:[{d:"w",a0:700,a1:932,e:8,to:"fountain"}]};
 const PLZ_OPP={n:"s",s:"n",w:"e",e:"w"};
 const PLZ_EMO=["👋","😄","🔥","📚","👍","☕"];
@@ -8545,9 +8545,8 @@ function plzSpot(){ const v=plzView();
   for(let i=0;i<60;i++){ const x=plzRnd(60,PLZ_W-60), y=plzRnd(120,PLZ_H-40); if(!plzBlocked(x,y)) return [x,y]; } const sp=PLZ_GEO[ROOM?ROOM.zone:"fountain"].sp; return [sp[0]*PLZ_U,sp[1]*PLZ_U]; }
 function plzGround(cv,zone){ const D=Math.min(1.5,devicePixelRatio||1), W=PLZ_W, H=PLZ_H; cv.width=W*D; cv.height=H*D; cv.style.width=W+"px"; cv.style.height=H+"px";
   const c=cv.getContext("2d"); c.scale(D,D); c.fillStyle="#8cc46e"; c.fillRect(0,0,W,H);
-  const podium=()=>{ if(zone!=="fountain") return; const step=(x,y,w,h,col)=>{ c.fillStyle="rgba(60,50,30,.22)"; c.fillRect(x-w/2+4,y+4,w,h); c.fillStyle=col; c.fillRect(x-w/2,y-h,w,h*2); c.strokeStyle="#7a6a45"; c.lineWidth=2; c.strokeRect(x-w/2,y-h,w,h*2); };
-    step(664,189,100,18,"#d9dde2"); step(872,192,100,14,"#e2b07e"); step(768,174,104,26,"#f3cf55");
-    c.fillStyle="#5b4a28"; c.font="bold 16px system-ui"; c.textAlign="center"; c.fillText("1",768,186); c.fillText("2",664,196); c.fillText("3",872,198); };
+  // podium: a painted three-step stand (assets/art/plaza/podium.webp, 384x176 world px at x576 y136), drawn into the ground
+  const pod=zone==="fountain"?new Image():null; if(pod) pod.src="assets/art/plaza/podium.webp"; const podium=()=>{ if(!pod) return; const d=()=>c.drawImage(pod,576,136,384,176); if(pod.complete&&pod.naturalWidth) d(); else pod.onload=d; };
   const im=new Image(); im.decoding="async"; im.onload=()=>{ c.drawImage(im,0,0,W,H); podium(); if(zone==="lawn") plzGrassDraw(c); }; im.onerror=()=>{ podium(); if(zone==="lawn") plzGrassDraw(c); }; im.src=`assets/art/plaza/${zone}.webp`; }
 // one person on the map; kind: me | live | off | pod
 function plzEnt(p,kind){ const R=ROOM, e=document.createElement("div"); e.className="pz-ent pz-"+kind+(R.star&&R.star.id===p.id?" pz-star":"");
