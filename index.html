@@ -4056,7 +4056,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.68";
+const APP_VERSION="2026.11.72";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -8825,7 +8825,7 @@ async function plzCard(o){ lookCard({id:o.id, name:o.kind==="me"?game().nick:o.n
 const IG_MEMBER_ON=true;
 const IG_DM="https://ig.me/m/binbin.daily.english", MEM_AB="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", MEM_RE=/BB-[A-HJ-NP-Z2-9]{4}/g;
 let MEM={on:undefined, req:undefined, busy:false};
-const isMember=()=>!!(DEV||isAdminUser()||MEM.on);
+const isMember=()=>!!(DEV||MEM.on);   // the owner account is a normal player outside developer mode
 async function memLoad(){ if(!CLOUD.fb||!CLOUD.user||MEM.busy) return; MEM.busy=true; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
   try{ const [m,r]=await Promise.all([fsM.getDoc(fsM.doc(db,"members",me)), fsM.getDoc(fsM.doc(db,"memberReq",me))]);
     MEM.on=m.exists()&&m.data().ig===true; MEM.req=r.exists()?r.data():null; }catch(e){ console.warn("member load",e&&(e.code||e.message)); MEM.on=false; MEM.req=null; }
@@ -8859,7 +8859,7 @@ async function memGrant(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedA
 async function memPending(){ if(!CLOUD.fb||!isAdminUser()) return; const {fsM,db}=CLOUD.fb;
   try{ const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"memberReq"),fsM.limit(100))); const L=[]; sn.forEach(d=>L.push(d.data())); L.sort((a,b)=>(a.at||0)-(b.at||0)); S.memReqs=L; render(); }
   catch(e){ toast(T("syncFail")); } }
-function memAdmin(){ if(PLANS_ON||!IG_MEMBER_ON||!isAdminUser()) return ""; const R=S.memRes, L=S.memReqs;
+function memAdmin(){ if(PLANS_ON||!IG_MEMBER_ON||!DEV||!isAdminUser()) return ""; const R=S.memRes, L=S.memReqs;
   return `<div class="card set-sec"><b>🌟 ${T("memAdminT")}</b><span class="muted sm-t">${T("memAdminSub")}</span>
     <textarea id="memCodes" class="search" rows="3" placeholder="BB-K7Q2 BB-ZP4M …"></textarea>
     <div class="row" style="gap:6px"><button class="btn sm" data-act="memgrant">${T("memGrant")}</button><button class="btn sm ghost" data-act="memlist">${T("memList")}</button></div>
