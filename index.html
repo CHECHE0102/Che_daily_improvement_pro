@@ -1423,6 +1423,7 @@ img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;
 @keyframes pmOut{to{opacity:0;transform:translateY(12px) scale(.6)}}
 .adv-menu.pm-right::after{left:auto;right:calc(10% - 7px);margin-left:0}
 .adv-menu.pm-left{left:max(12px,calc(30vw - 110px));width:min(220px,calc(100% - 24px));transform:none;transform-origin:30% calc(100% + 14px);animation-name:pmIn}
+.adv-menu.pm-left.rm3{left:12px;width:min(312px,calc(100% - 24px));grid-template-columns:repeat(3,1fr)}
 #advMenu.closing .adv-menu.pm-left{animation-name:pmOut}
 .adv-menu.pm-left::after{left:calc(30vw - max(12px,calc(30vw - 110px)) - 7px);margin-left:0}
 .pg-back{display:flex;align-items:center;gap:10px;justify-content:space-between;border-color:var(--accent)}
@@ -1965,7 +1966,7 @@ function vpApply(){ const lock=S.view==="play"; if(lock===VP_LOCK) return; VP_LO
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{ if(VP_LOCK) e.preventDefault(); },{passive:false}));   // iOS Safari ignores user-scalable=no
 function renderInner(){
   vpApply();
-  document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>{ b.setAttribute("aria-current", (b.id==="tab-read"?(S.tab==="dict"||S.tab==="arch"):b.dataset.tab===S.tab)?"page":"false"); b.classList.toggle("locked", !!(b.dataset.tab&&featLock(b.dataset.tab))); });
+  document.querySelectorAll("nav.tabs button,#setBtn").forEach(b=>{ b.setAttribute("aria-current", (b.id==="tab-read"?(S.tab==="dict"||S.tab==="arch"||S.tab==="ovw"):b.dataset.tab===S.tab)?"page":"false"); b.classList.toggle("locked", !!(b.dataset.tab&&featLock(b.dataset.tab))); });
   if(typeof readStopIfLeft==="function") readStopIfLeft(); setTimeout(()=>{ if(typeof pgLockSync==="function") pgLockSync(); },0);
   { const g=game(); const tt=PLANS_ON?0:streakTier(); $("#mastInfo").innerHTML = (tt?`<span class="mast-tt" title="${esc(T("lgTitleN",{t:titleName(tt)}))}">${sbArt(tt,18,false)}</span>`:"")+T("mast",{lv:g.lv,gold:g.gold,t:g.tickets}).split(" · ").map(x=>`<span style="white-space:nowrap">${x}</span>`).join(" · "); }
   const app=$("#app");
@@ -1974,6 +1975,7 @@ function renderInner(){
   else if(S.view==="quiz") app.innerHTML=viewQuiz();
   else if(S.view==="dict"){ const l=$("#dictList"); if(l && document.activeElement && document.activeElement.id==="dictSearch") l.innerHTML=dictList(); else app.innerHTML=viewDict(); }
   else if(S.view==="arch"){ const l=$("#archList"); if(l && document.activeElement && document.activeElement.id==="archSearch") l.innerHTML=archList(); else app.innerHTML=viewArch(); }
+  else if(S.view==="ovw") app.innerHTML=viewOvw();
   else if(S.view==="set") app.innerHTML=viewSettings();
   else if(S.view==="weak") app.innerHTML=viewWeak();
   else if(S.view==="play") app.innerHTML=viewPlay();
@@ -2064,14 +2066,21 @@ function viewRead(){
 }
 
 /* ---------- dictionary ---------- */
+// 總覽 overview (閱讀 menu): review, weakness report, word calendar and growth chart, so 字典 is just the word list
+function viewOvw(){
+  return `<div class="view">
+    <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("tabOvw")}</h2></div>
+    ${srsCard()}
+    ${growCard()}
+    ${calCard()}
+    ${weakCard()}
+    <button class="btn ghost" data-tab="dict">📖 ${T("ovwToDict",{n:S.words.size})}</button>
+  </div>`;
+}
 function viewDict(){
   const seg=(k,l)=>`<button data-sort="${k}" aria-pressed="${S.dictSort===k}">${l}</button>`;
   return `<div class="view">
     <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
-    ${srsCard()}
-    ${weakCard()}
-    ${calCard()}
-    ${growCard()}
     <div class="srch-wrap"><input id="dictSearch" class="search" type="search" placeholder="${T("dxPh")}" value="${esc(S.dictQ)}" autocomplete="off"><button type="button" class="srch-x" data-clr="dictSearch" aria-label="${T("clrSearch")}"${S.dictQ?"":" hidden"}>✕</button></div>
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
@@ -2604,7 +2613,7 @@ function viewQuiz(){
   }
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="dict">${T("backDict")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
+    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card quiz-done"><img src="assets/art/${Q.score>=Q.qs.length*0.7?"scene-win":"scene-quiz"}.webp" alt="" class="qd-art"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
       ${Q.kind==="lvl"?"":`<div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>`}${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
@@ -3646,8 +3655,8 @@ function advMenuHtml(){ const cur=S.tab==="adv"?(ADV_PAGES[S.advTab]?S.advTab:"g
 const PLAY_MENU=[["party","🎉","pmParty"],["duo","⚔️","pmDuo"]];
 function playMenuHtml(){ const cur=S.view==="play"?(S.playMode||"party"):null;
   return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-right" role="menu">${PLAY_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${cur===k?" on":""}" data-act="pmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
-const READ_MENU=[["dict","📖","tabDict"],["arch","📰","tabArch"]];
-function readMenuHtml(){ return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-left" role="menu">${READ_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${S.tab===k?" on":""}" data-act="rmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
+const READ_MENU=[["ovw","📊","tabOvw"],["dict","📖","tabDict"],["arch","📰","tabArch"]];
+function readMenuHtml(){ return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-left rm3" role="menu">${READ_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${S.tab===k?" on":""}" data-act="rmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
 function advMenuToggle(open, kind){ let el=document.getElementById("advMenu"); const k=kind||"adv", shown=el&&!el.classList.contains("closing")&&el.dataset.k===k, on=open!=null?open:!shown;
   if(!on){ if(el&&!el.classList.contains("closing")){ el.classList.add("closing"); setTimeout(()=>{ if(el.classList.contains("closing")) el.remove(); },190); } return; }
   if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.classList.remove("closing"); el.dataset.k=k; el.innerHTML=k==="play"?playMenuHtml():k==="read"?readMenuHtml():advMenuHtml(); }
@@ -4172,7 +4181,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.71";
+const APP_VERSION="2026.11.72";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4633,7 +4642,7 @@ document.addEventListener("click", e=>{
   if(a==="delgo") return deleteAccount();
   if(a==="nickedit"){ S.nickEdit=true; return render(); }
   if(a==="srs") return startQuiz("srs");
-  if(a==="weak"){ S.view="weak"; S.tab="dict"; render(); window.scrollTo(0,0); return; }
+  if(a==="weak"){ S.view="weak"; S.tab="ovw"; render(); window.scrollTo(0,0); return; }
   if(a==="wktrain") return startQuiz("weak");
   if(a==="readgo") return READ.on?(READ.paused?readResume():readPause()):readStart();
   if(a==="readstop") return readStop();
@@ -7069,7 +7078,7 @@ function viewWeak(){
     ${sec(T("wkPosT"),T("wkPosS"),posB)}
     ${sec(T("wkProgT"),"",`<span class="sm-t">${prog}</span>`)}
     ${A.untested?`<p class="muted sm-t">${T("wkUntested",{n:A.untested})}</p>`:""}
-    <button class="btn ghost" data-tab="dict">${T("backDict")}</button>
+    <button class="btn ghost" data-tab="ovw">${T("backOvw")}</button>
   </div>`;
 }
 
@@ -9881,21 +9890,27 @@ Object.assign(STR.es,{"plzRareT": "Rara de la plaza", "plzRareTw_earth": "Piel g
 Object.assign(STR.ja,{"plzRareT": "広場レア", "plzRareTw_earth": "厚い皮：HP ×1.5", "plzRareTw_metal": "俊敏：呪文問題は 6 秒だけ", "plzRareTw_water": "冷気：あなたの防御 −30%", "plzRareTw_fire": "狂暴：攻撃力 ×1.3", "plzRareTw_wood": "硬い殻：防御力 ×1.5", "plzRareBook": "広場レア図鑑", "plzRareBookSub": "草むらや池でまれに輝くレア種に出会える · {n}/{t} 収集", "plzQOut": "時間切れ！"});
 Object.assign(STR.ko,{"plzRareT": "광장 희귀", "plzRareTw_earth": "두꺼운 가죽: HP ×1.5", "plzRareTw_metal": "신속: 주문 문제는 6초만", "plzRareTw_water": "냉기: 내 방어력 −30%", "plzRareTw_fire": "광폭: 공격력 ×1.3", "plzRareTw_wood": "단단한 껍질: 방어력 ×1.5", "plzRareBook": "광장 희귀 도감", "plzRareBookSub": "풀숲과 호수에서 가끔 빛나는 희귀종을 만나요 · {n}/{t} 수집", "plzQOut": "시간 초과!"});
 Object.assign(STR.zh,{"bqAtk": "⚔️ 你的回合：答對就出手", "bqDef": "⚠️ 怪物要攻擊了！答對就格擋", "bqCombo": "連擊 {n}", "bqOk": "✅ 答對！攻擊加強", "bqBlock": "🛡️ 答對！擋下一部分傷害", "bqBlockS": "格擋", "bqNo": "❌ {w} = {m}", "bqWeak": "，這次攻擊變弱", "bqSum": "答對 {r} / {t} 題 · 最高連擊 {c}", "bqMiss": "答錯的字已加進複習："});Object.assign(STR.en,{"bqAtk": "⚔️ Your turn: answer to attack", "bqDef": "⚠️ The monster is attacking! Answer to guard", "bqCombo": "Combo {n}", "bqOk": "✅ Correct! Stronger hit", "bqBlock": "🛡️ Correct! Part of the damage blocked", "bqBlockS": "Guard", "bqNo": "❌ {w} = {m}", "bqWeak": " — weaker hit this time", "bqSum": "{r} / {t} correct · best combo {c}", "bqMiss": "Missed words go to review:"});Object.assign(STR.hi,{"bqAtk": "⚔️ आपकी बारी: सही जवाब दें और वार करें", "bqDef": "⚠️ राक्षस हमला कर रहा है! सही जवाब से बचाव करें", "bqCombo": "कॉम्बो {n}", "bqOk": "✅ सही! वार और ताकतवर", "bqBlock": "🛡️ सही! कुछ नुकसान रोका", "bqBlockS": "बचाव", "bqNo": "❌ {w} = {m}", "bqWeak": " — इस बार वार कमज़ोर", "bqSum": "{t} में से {r} सही · सबसे बड़ा कॉम्बो {c}", "bqMiss": "गलत शब्द दोहराने में जोड़े गए:"});Object.assign(STR.es,{"bqAtk": "⚔️ Tu turno: acierta para atacar", "bqDef": "⚠️ ¡El monstruo ataca! Acierta para bloquear", "bqCombo": "Combo {n}", "bqOk": "✅ ¡Correcto! Golpe más fuerte", "bqBlock": "🛡️ ¡Correcto! Bloqueas parte del daño", "bqBlockS": "Bloqueo", "bqNo": "❌ {w} = {m}", "bqWeak": " — esta vez el golpe es más débil", "bqSum": "{r} / {t} aciertos · mejor combo {c}", "bqMiss": "Palabras falladas, a repaso:"});Object.assign(STR.ja,{"bqAtk": "⚔️ あなたの番：正解で攻撃", "bqDef": "⚠️ モンスターの攻撃！正解でガード", "bqCombo": "コンボ {n}", "bqOk": "✅ 正解！攻撃アップ", "bqBlock": "🛡️ 正解！ダメージを一部ガード", "bqBlockS": "ガード", "bqNo": "❌ {w} = {m}", "bqWeak": "、今回は攻撃が弱まる", "bqSum": "{t}問中 {r}問正解 · 最大コンボ {c}", "bqMiss": "間違えた単語は復習へ："});Object.assign(STR.ko,{"bqAtk": "⚔️ 내 차례: 맞히면 공격", "bqDef": "⚠️ 몬스터가 공격해요! 맞히면 막기", "bqCombo": "콤보 {n}", "bqOk": "✅ 정답! 공격 강화", "bqBlock": "🛡️ 정답! 피해 일부를 막았어요", "bqBlockS": "막기", "bqNo": "❌ {w} = {m}", "bqWeak": ", 이번 공격은 약해져요", "bqSum": "{t}문제 중 {r}개 정답 · 최고 콤보 {c}", "bqMiss": "틀린 단어는 복습에 추가:"});Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
+Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
 Object.assign(STR.zh,{"grT": "學習曲線", "grWords": "學過的單字", "grLooks": "查詢次數", "grD": "{n} 天", "grAll": "全部", "grWordsU": "個單字", "grLooksU": "次查詢", "grNone": "多查幾天字，這裡就會長出你的曲線。"});
 Object.assign(STR.zh,{"calT": "單字日曆", "calTeaser": "用日曆看每天查了哪些單字、查了幾個，點一下日期就能複習那天的字。", "calSum": "這個月新查 {n} 個字，{d} 天有查字", "calNew": "新查的字（{n}）", "calRe": "再查一次的字（{n}）", "calNone": "這天沒有查字", "calPick": "點日期看那天查了哪些字", "memPerk3": "📅 單字日曆：每天查了哪些字"});
 Object.assign(STR.zh,{"clrSearch":"清除","dxPN":"專有名詞","dxPNNote":"這是 BinBin 新聞裡的專有名詞意思（人名、地名、機構等），不一定是這個字的一般意思。想看一般意思，可以查英英字典、Google 翻譯或劍橋字典。","dxGt":"Google 翻譯","dxPh": "搜尋你的單字，或查任何英文字", "dxTitle": "BinBin 字典", "dxCount": "{n} 字", "dxMine": "已收藏", "dxNone": "BinBin 字典裡還沒有 {q}", "dxApi": "查英英字典", "dxAdd": "加入我的字典", "dxCamb": "劍橋字典", "dxErr": "連不上字典，請稍後再試。", "dxApiNone": "找不到這個字，可能拼錯了？", "dxApiNote": "英文解釋來自免費的 Free Dictionary（dictionaryapi.dev）。"});
+Object.assign(STR.en,{"backOvw":"Back to overview","tabOvw":"Overview","ovwToDict":"Open my words ({n})"});
 Object.assign(STR.en,{"grT": "Your progress", "grWords": "Words learned", "grLooks": "Look-ups", "grD": "{n} days", "grAll": "All", "grWordsU": "words", "grLooksU": "look-ups", "grNone": "Look up words for a few days and your curve will grow here."});
 Object.assign(STR.en,{"calT": "Word calendar", "calTeaser": "See which words you looked up each day and how many. Tap a day to review its words.", "calSum": "This month: {n} new words, {d} days with look-ups", "calNew": "New words ({n})", "calRe": "Looked up again ({n})", "calNone": "No look-ups this day", "calPick": "Tap a day to see its words", "memPerk3": "📅 Word calendar: your words, day by day"});
 Object.assign(STR.en,{"clrSearch":"Clear","dxPN":"Proper noun","dxPNNote":"This is the proper-noun meaning from a BinBin news story (a name, place or organisation), not always the word's usual meaning. For the usual meaning, try the English dictionary, Google Translate or Cambridge.","dxGt":"Google Translate","dxPh": "Search your words or look up any word", "dxTitle": "BinBin dictionary", "dxCount": "{n} words", "dxMine": "Saved", "dxNone": "{q} isn't in the BinBin dictionary yet", "dxApi": "Look it up (English)", "dxAdd": "Add to my dictionary", "dxCamb": "Cambridge", "dxErr": "Couldn't reach the dictionary. Try again later.", "dxApiNone": "Word not found. Check the spelling?", "dxApiNote": "Definitions from the Free Dictionary API (dictionaryapi.dev)."});
+Object.assign(STR.hi,{"backOvw":"सारांश पर लौटें","tabOvw":"सारांश","ovwToDict":"मेरे शब्द खोलें ({n})"});
 Object.assign(STR.hi,{"grT": "आपकी प्रगति", "grWords": "सीखे शब्द", "grLooks": "खोज", "grD": "{n} दिन", "grAll": "सभी", "grWordsU": "शब्द", "grLooksU": "खोज", "grNone": "कुछ दिन शब्द देखें, यहाँ आपकी रेखा बढ़ेगी।"});
 Object.assign(STR.hi,{"calT": "शब्द कैलेंडर", "calTeaser": "देखें किस दिन कौन-से और कितने शब्द देखे। किसी दिन पर टैप करके उसके शब्द दोहराएँ।", "calSum": "इस महीने: {n} नए शब्द, {d} दिन शब्द देखे", "calNew": "नए शब्द ({n})", "calRe": "फिर से देखे ({n})", "calNone": "इस दिन कोई शब्द नहीं देखा", "calPick": "किसी दिन पर टैप करें", "memPerk3": "📅 शब्द कैलेंडर: रोज़ के शब्द"});
 Object.assign(STR.hi,{"clrSearch":"साफ़ करें","dxPN":"व्यक्तिवाचक संज्ञा","dxPNNote":"यह BinBin की किसी खबर से लिया गया व्यक्तिवाचक संज्ञा वाला अर्थ है (नाम, जगह या संस्था), हमेशा सामान्य अर्थ नहीं। सामान्य अर्थ के लिए अंग्रेज़ी शब्दकोश, Google अनुवाद या Cambridge देखें।","dxGt":"Google अनुवाद","dxPh": "अपने शब्द खोजें या कोई भी शब्द देखें", "dxTitle": "BinBin शब्दकोश", "dxCount": "{n} शब्द", "dxMine": "सहेजा गया", "dxNone": "{q} अभी BinBin शब्दकोश में नहीं है", "dxApi": "अंग्रेज़ी शब्दकोश में देखें", "dxAdd": "मेरे शब्दकोश में जोड़ें", "dxCamb": "Cambridge", "dxErr": "शब्दकोश से कनेक्ट नहीं हो सका। बाद में फिर कोशिश करें।", "dxApiNone": "शब्द नहीं मिला। वर्तनी जाँचें?", "dxApiNote": "परिभाषाएँ Free Dictionary API (dictionaryapi.dev) से।"});
+Object.assign(STR.es,{"backOvw":"Volver al resumen","tabOvw":"Resumen","ovwToDict":"Abrir mis palabras ({n})"});
 Object.assign(STR.es,{"grT": "Tu progreso", "grWords": "Palabras aprendidas", "grLooks": "Búsquedas", "grD": "{n} días", "grAll": "Todo", "grWordsU": "palabras", "grLooksU": "búsquedas", "grNone": "Busca palabras unos días y tu curva crecerá aquí."});
 Object.assign(STR.es,{"calT": "Calendario de palabras", "calTeaser": "Mira qué palabras buscaste cada día y cuántas. Toca un día para repasarlas.", "calSum": "Este mes: {n} palabras nuevas, {d} días con búsquedas", "calNew": "Palabras nuevas ({n})", "calRe": "Buscadas otra vez ({n})", "calNone": "Ese día no buscaste palabras", "calPick": "Toca un día para ver sus palabras", "memPerk3": "📅 Calendario de palabras: tus palabras día a día"});
 Object.assign(STR.es,{"clrSearch":"Borrar","dxPN":"Nombre propio","dxPNNote":"Es el significado de nombre propio de una noticia de BinBin (persona, lugar u organización), no siempre el significado habitual. Para el significado habitual, prueba el diccionario en inglés, Google Traductor o Cambridge.","dxGt":"Google Traductor","dxPh": "Busca tus palabras o cualquier palabra", "dxTitle": "Diccionario BinBin", "dxCount": "{n} palabras", "dxMine": "Guardada", "dxNone": "{q} aún no está en el diccionario BinBin", "dxApi": "Buscar en inglés", "dxAdd": "Añadir a mi diccionario", "dxCamb": "Cambridge", "dxErr": "No se pudo conectar con el diccionario. Inténtalo más tarde.", "dxApiNone": "Palabra no encontrada. ¿Revisas la ortografía?", "dxApiNote": "Definiciones de Free Dictionary API (dictionaryapi.dev)."});
+Object.assign(STR.ja,{"backOvw":"まとめに戻る","tabOvw":"まとめ","ovwToDict":"単語帳を開く（{n} 語）"});
 Object.assign(STR.ja,{"grT": "学習カーブ", "grWords": "覚えた単語", "grLooks": "検索回数", "grD": "{n} 日", "grAll": "全部", "grWordsU": "語", "grLooksU": "回", "grNone": "何日か単語を調べると、ここにカーブが伸びていきます。"});
 Object.assign(STR.ja,{"calT": "単語カレンダー", "calTeaser": "毎日どの単語をいくつ調べたかをカレンダーで確認。日付をタップするとその日の単語を復習できます。", "calSum": "今月：新しい単語 {n} 語、{d} 日調べました", "calNew": "新しく調べた単語（{n}）", "calRe": "もう一度調べた単語（{n}）", "calNone": "この日は調べた単語がありません", "calPick": "日付をタップしてその日の単語を見る", "memPerk3": "📅 単語カレンダー：毎日調べた単語"});
 Object.assign(STR.ja,{"clrSearch":"クリア","dxPN":"固有名詞","dxPNNote":"BinBin のニュースに出てきた固有名詞（人名・地名・団体など）の意味で、一般的な意味とは限りません。一般的な意味は英英辞典、Google 翻訳、Cambridge で調べてください。","dxGt":"Google 翻訳","dxPh": "自分の単語を検索、または好きな単語を調べる", "dxTitle": "BinBin 辞書", "dxCount": "{n} 語", "dxMine": "保存済み", "dxNone": "{q} はまだ BinBin 辞書にありません", "dxApi": "英英辞典で調べる", "dxAdd": "単語帳に追加", "dxCamb": "Cambridge", "dxErr": "辞書に接続できません。後でもう一度お試しください。", "dxApiNone": "見つかりません。スペルを確認してください。", "dxApiNote": "定義は Free Dictionary API（dictionaryapi.dev）より。"});
+Object.assign(STR.ko,{"backOvw":"한눈에 보기로","tabOvw":"한눈에 보기","ovwToDict":"단어장 열기 ({n}개)"});
 Object.assign(STR.ko,{"grT": "학습 곡선", "grWords": "배운 단어", "grLooks": "검색 횟수", "grD": "{n}일", "grAll": "전체", "grWordsU": "개 단어", "grLooksU": "회 검색", "grNone": "며칠 단어를 찾으면 여기에 곡선이 자라요."});
 Object.assign(STR.ko,{"calT": "단어 달력", "calTeaser": "매일 어떤 단어를 몇 개 찾았는지 달력으로 확인하고, 날짜를 누르면 그날 단어를 복습할 수 있어요.", "calSum": "이번 달: 새 단어 {n}개, {d}일 동안 찾음", "calNew": "새로 찾은 단어 ({n})", "calRe": "다시 찾은 단어 ({n})", "calNone": "이날은 찾은 단어가 없어요", "calPick": "날짜를 눌러 그날 단어 보기", "memPerk3": "📅 단어 달력: 날마다 찾은 단어"});
 Object.assign(STR.ko,{"clrSearch":"지우기","dxPN":"고유명사","dxPNNote":"BinBin 뉴스에 나온 고유명사(인명·지명·기관 등) 뜻이라 일반적인 뜻이 아닐 수 있어요. 일반적인 뜻은 영영사전, Google 번역, Cambridge에서 찾아보세요.","dxGt":"Google 번역","dxPh": "내 단어 검색 또는 아무 단어나 찾기", "dxTitle": "BinBin 사전", "dxCount": "{n}개 단어", "dxMine": "저장됨", "dxNone": "{q}은(는) 아직 BinBin 사전에 없어요", "dxApi": "영영사전에서 찾기", "dxAdd": "내 단어장에 추가", "dxCamb": "Cambridge", "dxErr": "사전에 연결할 수 없어요. 나중에 다시 시도하세요.", "dxApiNone": "단어를 찾을 수 없어요. 철자를 확인해 보세요.", "dxApiNote": "정의 출처: Free Dictionary API (dictionaryapi.dev)."});
