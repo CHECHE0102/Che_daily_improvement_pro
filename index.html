@@ -3205,7 +3205,7 @@ function fight(){
     B.lvUp=g.lv-before;
   }
   if(!res.win&&!B.m.wild&&!conquered()[B.m.id]){ g.scar=g.scar||{}; const n0=g.scar[B.m.id]||0; if(SCAR.per*n0<SCAR.max-1e-9){ g.scar[B.m.id]=n0+1; B.scarNew=Math.round(Math.min(SCAR.max,SCAR.per*(n0+1))*100); } }
-  saveGame(); render();
+  saveGame(); render(); setTimeout(()=>battleAnim(res.ev[0]),30);
   clearInterval(S.btimer);
   battleTimer();
 }
@@ -3213,10 +3213,20 @@ function evSfx(e){ if(!e) return; if(e.who==="p"){ const nk=cosWorn().neck&&cosO
 function battleEndSfx(){ const B=S.battle; if(!B||!B.res) return; if(!B.res.win) return sfx("lose"); sfx(B.conquered?"conquer":"win"); if(B.lvUp) setTimeout(()=>sfx("lvup"),900); }
 function battleTimer(){
   clearInterval(S.btimer);
-  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); battleEndSfx(); } else evSfx(S.battle.res.ev[S.battle.idx]); renderBattleOnly(); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:(battleFast()?520:1150));
+  S.btimer=setInterval(()=>{ if(!S.battle||S.battle.stage!=="fight"){ clearInterval(S.btimer); return; } S.battle.idx++; if(S.battle.idx>=S.battle.res.ev.length){ S.battle.stage="end"; S.battle.justEnded=false; clearInterval(S.btimer); battleEndSfx(); } else evSfx(S.battle.res.ev[S.battle.idx]); renderBattleOnly(); if(S.battle.stage==="fight") battleAnim(S.battle.res.ev[S.battle.idx]); }, matchMedia("(prefers-reduced-motion: reduce)").matches?150:(battleFast()?520:1150));
 }
 function battleFast(){ if(S.fastMem!=null) return S.fastMem; try{ return localStorage.getItem("che-pro-fast")==="1"; }catch(e){ return false; } }
-function renderBattleOnly(){ if(S.view==="battle") $("#app").innerHTML=viewBattle(); }
+function renderBattleOnly(){ if(S.view!=="battle") return; const app=$("#app"), oh=app.querySelector(".rig-host"), oc=app.querySelector("#bMonCv"), oa=app.querySelector(".arena2");
+  if(!oh&&!oc){ app.innerHTML=viewBattle(); return; }
+  const tmp=document.createElement("div"); tmp.innerHTML=viewBattle(); const nh=tmp.querySelector(".rig-host"), nc=tmp.querySelector("#bMonCv"), na=tmp.querySelector(".arena2");
+  if(oh&&nh) nh.replaceWith(oh); if(oc&&nc) nc.replaceWith(oc); if(oa&&na&&oa.classList.contains("mesh-on")&&nc) na.classList.add("mesh-on");
+  app.replaceChildren(...tmp.childNodes); }
+/* rig moves for one battle event: the hero swings and the monster flinches at impact, or the monster lunges and the hero recoils */
+function battleAnim(e){ if(!e||!document.getElementById("rigHero")||!RIG.cur) return; const mesh=MESH.ready&&MESH.cv&&MESH.cv.id==="bMonCv"&&document.body.contains(MESH.cv);
+  if(e.who==="p"){ if(mesh) monPlay("brace"); rigAttack(()=>{ if(mesh) monPlay("hit"); }); }
+  else if(e.who==="a"){ if(mesh) monPlay("hit"); }
+  else if(e.tgt==="a"){ if(mesh) monPlay("atk"); }
+  else { const hurt=()=>{ RIG.act="hurt"; RIG.t0=performance.now(); rigStart(); }; if(mesh) monPlay("atk",hurt); else hurt(); } }
 function monArt(m, hit){
   return `<div class="mon-seal el-bg-${m.el}${hit?" hit":""}${m.boss?" boss":""}${m.rare?" rare":""}">${monSvg(m,"ms-art")}<span class="ms-badge">${elBadge(m.el)}</span></div>`;
 }
@@ -3243,20 +3253,25 @@ function arenaScene(B, last, cur){
   const hl=last?hitLv(last,last.who==="m"?(last.tgt==="a"?al.hp:B.res.maxP):m.hp):0;
   const pop=(e,cls)=>e?`<span class="dmg ${cls} s${hl}${e.crit?" crit":""}">-${e.dmg}${e.spell?`<small>${T("logSpell")}</small>`:e.crit?`<small>CRIT!</small>`:e.eye?`<small>👁 ${T("bossEyeShort")}</small>`:hl===4?`<small>${T("hitKO")}</small>`:hl===3?`<small>${T("hitBig")}</small>`:""}</span>`:"";
   const showAnim=!fin||B.justEnded;
-  const heroCls=showAnim?(pAtk&&!aAtk?" atk":mAtk?" def hurt hs"+hl:""):"", foeCls=showAnim?(mAtk||aHit?" atk":pAtk?" hurt hs"+hl:""):"";
+  /* parts rig hero + mesh monster, same as the practice arena (CheChe 2026-11-22); the plain drawings stay as the fallback */
+  const heroPose=fin?(B.res.win?"win":"hurt"):showAnim&&pAtk&&!aAtk?"attack":showAnim&&mAtk?"hurt":"idle";
+  const heroH=g.gender&&!fin?rigHeroHtml(g.gender, g.weapon&&ITEMS[g.weapon], g.armor&&ITEMS[g.armor], ()=>heroArt(heroPose), cosLayers(cosWorn())):heroArt(heroPose), rig=heroH.includes("rig-host");
+  const mesh=rig&&!!(RIG.man&&RIG.man.t[picOfMon(m)]); if(mesh) meshStart();
+  B.face=showAnim&&pAtk?"hurt":showAnim&&(mAtk||aHit)?"angry":"calm";
+  const heroCls=showAnim&&!rig?(pAtk&&!aAtk?" atk":mAtk?" def hurt hs"+hl:""):"", foeCls=showAnim?(mAtk||aHit?(mesh?"":" atk"):pAtk?" hurt hs"+hl:""):"";
   const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allyArt(al, fin?(B.res.win&&!aDown?"win":"hurt"):showAnim&&aAtk?"attack":showAnim&&aHit?"hurt":"idle")}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
   const cfx=showAnim&&pAtk&&!aAtk;
-  return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}${cfx?cosArenaFx():""}">${cfx?cosFlash():""}
+  return `<div class="arena2${fin?(B.res.win?" win":" lose"):""}${cfx?cosArenaFx():""}${rig?" rig-on":""}${mesh?" mesh-pend":""}">${mesh?`<canvas id="bMonCv" class="mon-cv" aria-hidden="true"></canvas>`:""}${cfx?cosFlash():""}
     <div class="fighter hero${heroCls}"><div class="f-name"><span class="${g.nick?nickTier(g.lv):""}">${esc(g.nick||T("hero"))}</span> · Lv ${g.lv}</div>${hpBar(cur.php,B.res.maxP,"p")}${B.res.ally?`<div class="ally-hp"><span>🤝 ${esc(B.res.ally.n)} ${Math.max(0,cur.ahp!=null?cur.ahp:B.res.ally.hp)}/${B.res.ally.hp}</span><div class="ally-bar"><i style="width:${Math.max(0,(cur.ahp!=null?cur.ahp:B.res.ally.hp)/B.res.ally.hp*100)}%"></i></div></div>`:""}
-      <div class="f-stage${al?" with-ally":""}">${allyFig}${heroArt(fin?(B.res.win?"win":"hurt"):heroCls.includes("atk")?"attack":heroCls.includes("hurt")?"hurt":"idle")}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${hitBurst(hl,"foe")}${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
+      <div class="f-stage${al?" with-ally":""}">${allyFig}${heroH}${showAnim&&mAtk?`<span class="shield-fx"></span><svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/><path d="M58 14L86 70"/></svg>${hitBurst(hl,"foe")}${pop(last,last&&last.eye?"eye":"")}`:""}${showAnim&&mAtk&&last.eye?'<span class="eye-fx"></span>':""}</div></div>
     <div class="fighter foe${foeCls}"><div class="f-name">${esc(monName(m))} · Lv ${m.lv}</div>${hpBar(cur.mhp,m.hp,"m")}
-      <div class="f-stage">${monArt(m)}${showAnim&&pAtk&&!aAtk?cosBurst():""}${showAnim&&pAtk?`${atkFx(ITEMS[game().weapon],last.crit)}${hitBurst(hl,"you")}${pop(last,"foe-hit")}`:""}</div></div>
+      <div class="f-stage">${monArt(m)}${showAnim&&pAtk&&!aAtk?cosBurst():""}${showAnim&&pAtk?`${mesh?meshGlow(ITEMS[game().weapon],hl):""}${atkFx(ITEMS[game().weapon],last.crit)}${hitBurst(hl,"you")}${pop(last,"foe-hit")}`:""}</div></div>
   </div>`;
 }
 function viewBattle(){
   const B=S.battle; if(!B) return "";
   const m=B.m, s=stats(), g=game();
-  if(B.stage==="spell"||B.stage==="ready"){
+  if(B.stage==="spell"||B.stage==="ready"){ if(g.gender) rigLoad();   // fetch the rig early so the fight starts animated
     const q=B.q, p=B.picked;
     const spell = B.stage==="spell" ? `<div class="card qcard">${m.qSec&&p==null?`<div class="q-timer" id="qTime">⏱ ${Math.max(1,Math.ceil(((B.qEnd||Date.now()+m.qSec*1000)-Date.now())/1000))}</div>`:""}<div class="eyebrow">${T("spell")}</div><div class="muted" style="font-size:14px">${T("spellSub")}</div>
       ${q.type==="cloze"?`<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"),"<u></u>")}</div>`:`<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`}
@@ -3878,7 +3893,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.63";
+const APP_VERSION="2026.11.64";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -6363,7 +6378,7 @@ function rigStart(){ if(!RIG.raf) RIG.raf=requestAnimationFrame(rigLoop); }
 /* the hero figure for the practice arena: a canvas once the parts are loaded, the old single drawing until then */
 function rigHeroHtml(gen,w,armor,fallback,cos){
   if(rigReduced()||!gen) return fallback();
-  if(!RIG.man){ rigLoad().then(j=>{ if(j){ const b=document.getElementById("trStage"); if(b){ if(!(S.train&&S.train.busy)) b.innerHTML=trainScene(); } else if(document.querySelector(".sty-stage")) render(); } }); return fallback(); }
+  if(!RIG.man){ rigLoad().then(j=>{ if(j){ const b=document.getElementById("trStage"); if(b){ if(!(S.train&&S.train.busy)) b.innerHTML=trainScene(); } else if(document.querySelector(".sty-stage")) render(); else if(S.view==="battle"&&S.battle&&S.battle.stage==="fight") renderBattleOnly(); } }); return fallback(); }
   const key=rigOutfit(gen,armor); if(!key) return fallback();
   const kind=w?WKIND[w.el][w.tier]:"sword", pk=w&&picOfItem(w);
   RIG.cur={key, tier:w?w.tier:0, kind:RIG_KIND[kind]||"sword", wimg:pk?`assets/art/${pk}.webp`:null, grip:KIND_GRIP[kind]||[.24,.76,.42]};
@@ -6481,16 +6496,16 @@ function monPlay(act,cb){ MR.act=act; MR.t0=performance.now(); MR.keys=act==="at
 const MESH={pk:null,cv:null,ready:false,busy:false,raf:0};
 /* impact glow in the weapon's colours: with the mesh there is no coloured card behind the monster any more, so this takes over the card's bright hit flash */
 function meshGlow(w,lv){ const [c1,c2]=FX_COL[w&&w.el]||FX_COL.metal; return `<span class="mesh-glow s${lv}" style="--c1:${c1};--c2:${c2}" aria-hidden="true"></span>`; }
-function meshBox(ar){ const a=ar.getBoundingClientRect(), se=ar.querySelector("#trFoe .mon-seal"); if(!se) return null; const r=se.getBoundingClientRect(), s=r.width*1.12;
+function meshBox(ar){ const a=ar.getBoundingClientRect(), se=ar.querySelector(".foe .mon-seal"); if(!se) return null; const r=se.getBoundingClientRect(), s=r.width*1.12;
   return {x:r.left-a.left+(r.width-s)/2, y:r.bottom-a.top-s, s}; }
-function meshTick(){ MESH.raf=0; const cv=document.getElementById("trMonCv"), R=S.train; if(!cv||!R) return;
-  const ms=trainMons(), m=ms[R.mi%ms.length], pk=m&&picOfMon(m); if(!pk) return;
+function meshTick(){ MESH.raf=0; const bc=document.getElementById("bMonCv"), cv=bc||document.getElementById("trMonCv"), R=S.train, B=S.battle; if(!cv||(bc?!B:!R)) return;
+  const ms=bc?null:trainMons(), m=bc?B.m:ms[R.mi%ms.length], pk=m&&picOfMon(m); if(!pk) return;
   if((cv!==MESH.cv||pk!==MESH.pk)&&!MESH.busy){ MESH.busy=true; MESH.ready=false; MESH.cv=cv; MESH.pk=pk;
     monSetup(cv,pk,(RIG.man&&RIG.man.t[pk])||{}).then(ok=>{ MESH.busy=false; if(MESH.cv===cv&&MESH.pk===pk) MESH.ready=ok; }).catch(()=>{ MESH.busy=false; }); }
   const ar=cv.parentElement, on=MESH.ready&&!MESH.busy&&cv===MESH.cv&&pk===MESH.pk, box=on&&meshBox(ar);
   ar.classList.toggle("mesh-on",!!box);
   if(box){ const k=Math.min(2,devicePixelRatio||1), w=Math.round(cv.clientWidth*k), hh=Math.round(cv.clientHeight*k); if(cv.width!==w||cv.height!==hh){ cv.width=w; cv.height=hh; }
-    MR.face=R.hit?"hurt":R.busy?"angry":"calm"; try{ monDraw(performance.now(),box); }catch(e){ console.warn(e); } }
+    MR.face=bc?B.face||"calm":R.hit?"hurt":R.busy?"angry":"calm"; try{ monDraw(performance.now(),box); }catch(e){ console.warn(e); } }
   MESH.raf=requestAnimationFrame(meshTick); }
 function meshStart(){ if(!MESH.raf) MESH.raf=requestAnimationFrame(meshTick); }
 /* ----- practice arena (練習場): try any weapon on a town monster — no tickets, no stamina, no rewards, nothing saved ----- */
