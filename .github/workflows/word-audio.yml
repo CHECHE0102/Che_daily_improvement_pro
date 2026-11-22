@@ -2,7 +2,7 @@ name: Word pronunciation audio
 on:
   push:
     branches: [main]
-    paths: ['tools/make_word_audio.py', '.github/workflows/word-audio.yml']
+    paths: ['tools/make_word_audio.py', 'tools/make_dict_index.py', '.github/workflows/word-audio.yml']
   schedule:
     - cron: '55 7 * * *'   # after the daily articles and their news audio
   workflow_dispatch:
@@ -37,8 +37,9 @@ jobs:
           git add -A
           if ! git diff --cached --quiet; then git commit -q -m "Word audio $(date -u +%F)"; git push -q origin HEAD:words; fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-      - name: Update word-audio.json on main
+      - name: Update word-audio.json and the look-up dictionary (assets/dict) on main
         run: |
+          python tools/make_dict_index.py
           python - <<'PY'
           import json
           m = json.load(open("wa/manifest.json"))
@@ -48,9 +49,9 @@ jobs:
           rm -rf wa
           git config user.name "CHECHE0102"
           git config user.email "CHECHE0102@users.noreply.github.com"
-          git add word-audio.json
+          git add word-audio.json assets/dict
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
-          git commit -q -m "Update word audio manifest"
+          git commit -q -m "Update word audio manifest and dictionary"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
           exit 1
       - name: Summary
