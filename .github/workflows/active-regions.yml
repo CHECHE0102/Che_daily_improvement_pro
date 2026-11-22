@@ -26,9 +26,14 @@ jobs:
           raw = json.load(open("raw.json"))
           fields = raw.get("fields", {})
           regions = {k: v.get("stringValue", "") for k, v in fields.items()}
-          cutoff = (datetime.date.today() - datetime.timedelta(days=6)).isoformat()
+          # The list is for the NEXT regional news run (07:23 Dublin). Runs after 08:00 UTC
+          # (the late 05:00 run and evening runs before midnight) are for tomorrow's news.
+          now = datetime.datetime.utcnow()
+          news_day = now.date() + datetime.timedelta(days=1 if now.hour >= 8 else 0)
+          # A region gets news for 7 days counting the day it was last seen (seen 11-16 -> news up to 11-22).
+          cutoff = (news_day - datetime.timedelta(days=6)).isoformat()
           active = sorted([k for k, d in regions.items() if d >= cutoff and k != "IE"], key=lambda k: regions[k], reverse=True)
-          out = {"updated": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"), "ok": bool(raw), "regions": regions, "active": active}
+          out = {"updated": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "newsDay": news_day.isoformat(), "cutoff": cutoff, "ok": bool(raw), "regions": regions, "active": active}
           json.dump(out, open("articles/active-regions.json", "w"), indent=1, ensure_ascii=False)
           print(out)
           PY
