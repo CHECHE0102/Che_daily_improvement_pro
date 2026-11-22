@@ -30,6 +30,8 @@ def main():
             if k != b and WORD.match(k): forms[k] = b
     out = {}
     for b, vs in cands.items():
+        gen = [v for v in vs if v.get("lvl") != "PN"]   # a general meaning beats a news proper noun (abbey 修道院, not Abbey Street)
+        vs = gen or vs
         common = collections.Counter(v["zh"] for v in vs).most_common(1)[0][0]
         pick = max(vs, key=lambda v: (v["zh"] == common, bool(v.get("ex")), len(v.get("syn") or []) > 0))
         out[b] = [pick.get("pos") or "", pick.get("lvl") or ""] + [str(pick.get(l) or "") for l in LANGS] + [
