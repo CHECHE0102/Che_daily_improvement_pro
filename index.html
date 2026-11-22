@@ -210,6 +210,15 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .meter i{display:block;height:100%}
 .chip{font-size:11px;border-radius:999px;padding:1px 8px;font-weight:600}
 .chip.new{background:var(--gorse-soft);color:var(--ink)}
+.dx{display:flex;flex-direction:column;gap:8px}
+.dx .dict .ent>button{grid-template-columns:1fr auto}
+.dx-in{font-size:11px;color:var(--good);font-weight:600;align-self:center}
+.dx-lv{font-size:11px;color:var(--muted);align-self:center}
+.dx-none{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:12px 14px;background:var(--card);border:1px dashed var(--line);border-radius:var(--r);font-size:14px}
+.dx-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.dx-def{display:flex;flex-direction:column;gap:6px;margin-top:6px;font-size:14.5px}
+.dx-def .lab{font-size:12px;color:var(--muted);font-weight:600}
+.dx-def .en-i{color:var(--muted)}
 .more{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px;font-size:14px}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
 .kv dt{color:var(--muted)} .kv dd{margin:0;font-variant-numeric:tabular-nums}
@@ -2034,7 +2043,7 @@ function viewDict(){
     <div><div class="eyebrow">${T("myDict")}</div><h2 style="font-size:24px">${T("dictCount",{n:S.words.size})}</h2></div>
     ${srsCard()}
     ${weakCard()}
-    <input id="dictSearch" class="search" type="search" placeholder="${T("search")}" value="${esc(S.dictQ)}" autocomplete="off">
+    <input id="dictSearch" class="search" type="search" placeholder="${T("dxPh")}" value="${esc(S.dictQ)}" autocomplete="off">
     <div class="seg" role="group" aria-label="${T("sort")}">${seg("recent",T("sortRecent"))}${seg("weak",T("sortWeak"))}${seg("az","A–Z")}</div>
     <div id="dictList">${dictList()}</div>
     <p class="muted" style="font-size:12.5px">${T("probNote")}</p>
@@ -2139,7 +2148,100 @@ function dictList(){
       </div>`:""}
     </div>`;
   }).join("");
+  if(q) return (rows?`<div class="dict">${rows}</div>`:"")+dxSection(q);
   return S.words.size?(rows?`<div class="dict">${rows}</div>`:`<div class="empty">${T("noMatch")}</div>`):`<div class="card empty"><h3>${T("dictEmpty")}</h3><p>${T("dictEmptySub")}</p></div>`;
+}
+/* ---------- look up any word: bundled BinBin dictionary (assets/dict/<lang>.json, built daily from every article
+   glossary by tools/make_dict_index.py) + the free English dictionary api.dictionaryapi.dev for anything else ---------- */
+const DX={lang:null,data:null,p:null,api:{}};
+const dxLang=()=>["zh","en","hi","es","ja","ko"].includes(LANG)?LANG:"zh";
+function dxLoad(){
+  const l=dxLang(); if(DX.lang===l&&DX.data) return Promise.resolve(DX.data); if(DX.lang===l&&DX.p) return DX.p;
+  DX.lang=l; DX.data=null;
+  DX.p=fetch("assets/dict/"+l+".json").then(r=>r.ok?r.json():null).then(d=>{ if(DX.lang===l){ DX.data=d; DX.p=null; } return d; }).catch(()=>{ DX.p=null; return null; });
+  return DX.p;
+}
+const dxNorm=t=>String(t||"").trim().toLowerCase().replace(/[’‘]/g,"'");
+function dxBase(w){
+  const W=DX.data&&DX.data.w, F=DX.data&&DX.data.f; if(!W) return null;
+  if(W[w]) return w; if(F[w]) return F[w];
+  const tries=[[/ies$/,"y"],[/ied$/,"y"],[/es$/,""],[/s$/,""],[/ed$/,""],[/ed$/,"e"],[/ing$/,""],[/ing$/,"e"],[/(.)\1ing$/,"$1"],[/(.)\1ed$/,"$1"],[/er$/,""],[/est$/,""],[/ly$/,""],[/'s$/,""]];
+  for(const [re,to] of tries){ if(!re.test(w)) continue; const b=w.replace(re,to); if(b.length>1&&W[b]) return b; }
+  return null;
+}
+function dxEntry(base){
+  const a=DX.data&&DX.data.w[base]; if(!a) return null;
+  const g={base, pos:a[0], lvl:a[1], en:a[3], ex:a[4], syn:a[5]?a[5].split("|"):[], ant:a[6]?a[6].split("|"):[], dx:1};
+  if(DX.lang!=="en") g[DX.lang]=a[2];
+  if(!g.zh) g.zh=DX.lang==="zh"?a[2]:"";
+  return g;
+}
+function dxMatches(q){
+  const W=DX.data.w, out=[], seen=new Set(), add=b=>{ if(b&&!seen.has(b)&&W[b]){ seen.add(b); out.push(b); } };
+  if(/^[a-z][a-z' -]*$/.test(q)){
+    add(dxBase(q));
+    const pre=[]; for(const b in W){ if(b.startsWith(q)) pre.push(b); if(pre.length>400) break; }
+    pre.sort((a,b)=>a.length-b.length||a.localeCompare(b)).forEach(add);
+  } else {
+    const hit=[]; for(const b in W){ const m=(W[b][2]||W[b][3]||"").toLowerCase(); if(m.includes(q)) hit.push([b,m.length]); }
+    hit.sort((a,b)=>a[1]-b[1]).forEach(h=>add(h[0]));
+  }
+  return out.slice(0,8);
+}
+function dxSection(q){
+  q=dxNorm(q); if(!q) return "";
+  if(!DX.data||DX.lang!==dxLang()){ dxLoad().then(d=>{ if(d&&S.view==="dict"){ const l=$("#dictList"); if(l) l.innerHTML=dictList(); } }); return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")}</div><div class="muted sm-t">${T("loading")}</div></div>`; }
+  const list=dxMatches(q);
+  const rows=list.map(b=>{ const g=dxEntry(b), mine=S.words.has(keyOf(b));
+    return `<div class="ent"><button data-dx="${esc(b)}"><span class="en">${esc(b)} <span class="pos">${esc(g.pos||"")}</span></span>${mine?`<span class="dx-in">✓ ${T("dxMine")}</span>`:g.lvl?`<span class="dx-lv">${esc(g.lvl)}</span>`:"<span></span>"}<span class="z">${esc(mean(g))}</span></button></div>`; }).join("");
+  const single=/^[a-z][a-z'-]{1,30}$/.test(q), exact=list[0]&&list[0]===dxBase(q);
+  const none=single&&!exact?`<div class="dx-none"><span>${T("dxNone",{q:`<b>${esc(q)}</b>`})}</span><div class="dx-acts" style="margin-top:0"><button class="btn ghost sm" data-dxapi="${esc(q)}">🔎 ${T("dxApi")}</button>${dxGt(q)}</div></div>`:"";
+  return `<div class="dx"><div class="eyebrow">📖 ${T("dxTitle")} · ${T("dxCount",{n:(DX.data.n||0).toLocaleString()})}</div>${none}${rows?`<div class="dict">${rows}</div>`:(none?"":`<div class="empty">${T("noMatch")}</div>`)}</div>`;
+}
+function dxOpen(base){
+  const g=dxEntry(base); if(!g) return;
+  S.sheet={surface:base, g, ex:g.ex||"", dx:1, rec:S.words.get(keyOf(base))||null};
+  renderSheet();
+}
+function dxAdd(){
+  const sh=S.sheet; if(!sh||!sh.g) return;
+  const g=sh.g, lemma=g.base||sh.surface, key=keyOf(lemma), old=S.words.get(key), iso=new Date().toISOString();
+  const rec=old?{...old, lookups:(old.lookups||1)+1, lastLookup:iso}
+    :{type:"word", key, word:lemma, zh:g.zh||"", pos:g.pos||"", forms:[lemma.toLowerCase()], example:g.ex||"", exampleZh:null, articleDate:null, firstSeen:today(), lookups:1, lastLookup:iso, correct:0, wrong:0, lastTested:null, note:null, noteHi:null, noteEn:null, noteEs:null, noteJa:null, noteKo:null, hi:g.hi||"", en:g.en||"", es:g.es||"", ja:g.ja||"", ko:g.ko||"", src:"dict"};
+  persist(key,rec);
+  sh.rec=rec; sh.isNew=!old; sh.addedNow=1;
+  if(!old){ const wn=wkWords().length; if(wn&&wn%WK_STEP===0) setTimeout(()=>toast(T("wkToast",{n:wn})),600); }
+  renderSheet(); render();
+}
+const DX_CAMB={zh:"english-chinese-traditional",ja:"english-japanese",ko:"english-korean",es:"english-spanish"};
+const DX_GT={zh:"zh-TW",ja:"ja",ko:"ko",es:"es",hi:"hi",en:"zh-TW"};
+const dxGtUrl=w=>"https://translate.google.com/?sl=en&tl="+(SC&&LANG==="zh"?"zh-CN":DX_GT[LANG]||"zh-TW")+"&op=translate&text="+encodeURIComponent(w);
+const dxGt=w=>`<a class="btn ghost sm" href="${dxGtUrl(w)}" target="_blank" rel="noopener noreferrer">${T("dxGt")} ↗</a>`;
+const dxCambUrl=w=>"https://dictionary.cambridge.org/dictionary/"+(DX_CAMB[LANG]||"english")+"/"+encodeURIComponent(w);
+async function dxApi(w){
+  S.sheet={surface:w, api:1, loading:true}; renderSheet();
+  let r=DX.api[w];
+  if(!r){
+    try{
+      const res=await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/"+encodeURIComponent(w));
+      if(res.status===404) r={none:1};
+      else if(!res.ok) throw new Error(res.status);
+      else{ const j=await res.json(), defs=[]; let ph="";
+        for(const e of j||[]){ ph=ph||e.phonetic||((e.phonetics||[]).find(x=>x.text)||{}).text||"";
+          for(const m of e.meanings||[]) for(const d of (m.definitions||[]).slice(0,2)){ if(defs.length<5) defs.push({pos:m.partOfSpeech||"", def:d.definition||"", ex:d.example||""}); } }
+        r=defs.length?{ph,defs}:{none:1}; }
+      DX.api[w]=r;
+    }catch(e){ r={err:1}; }
+  }
+  if(!S.sheet||S.sheet.surface!==w||!S.sheet.api) return;
+  S.sheet={surface:w, api:r, loading:false}; renderSheet();
+}
+function dxApiBody(w,r){
+  const camb=dxGt(w)+`<a class="btn ghost sm" href="${dxCambUrl(w)}" target="_blank" rel="noopener noreferrer">${T("dxCamb")} ↗</a>`;
+  if(r.err) return `<div class="zh" style="color:var(--bad);font-size:16px">${T("dxErr")}</div><div class="dx-acts">${camb}</div>`;
+  if(r.none) return `<div class="zh" style="font-size:16px">${T("dxApiNone")}</div><div class="dx-acts">${camb}</div>`;
+  return `${r.ph?`<div class="muted" style="font-size:14px">${esc(r.ph)}</div>`:""}<div class="dx-def">${r.defs.map(d=>`<div><span class="lab">${esc(d.pos)}</span> ${esc(d.def)}${d.ex?`<br><span class="en-i">“${esc(d.ex)}”</span>`:""}</div>`).join("")}</div>
+    <div class="muted" style="font-size:12px;margin-top:8px">${T("dxApiNote")}</div><div class="dx-acts">${camb}</div>`;
 }
 function highlight(s, forms){ let out=esc(s); (forms||[]).forEach(f=>{ out=out.replace(new RegExp("\\b("+reEsc(f)+")\\b","gi"),"<b>$1</b>"); }); return out; }
 
@@ -2166,6 +2268,7 @@ async function lookup(surface){
   const ex=sentenceWith(art,surface);
   S.sheet={surface, g, ex, loading:!g};
   renderSheet();
+  if(!g){ const d=await dxLoad(); const b=d&&dxBase(dxNorm(surface)); if(b){ g=dxEntry(b); if(!S.sheet||S.sheet.surface!==surface) return; S.sheet.g=g; S.sheet.loading=false; } }
   if(!g){
     if(!sample){ S.sheet.loading=false; S.sheet.err=T("noGloss"); renderSheet(); return; }
     try{
@@ -2213,12 +2316,16 @@ function renderSheet(){
   if(S.levelSheet){ o.innerHTML=levelSheet(); return; }
   if(!S.sheet){ o.innerHTML=""; return; }
   const {surface,g,ex,loading,err,rec,isNew,skip}=S.sheet;
+  if(S.sheet.api){ o.innerHTML=`<div class="scrim" data-act="close"></div><div class="sheet" role="dialog" aria-label="${T("wordTr")}"><div class="grab"></div>
+    <div class="wd">${esc(surface)}<span style="flex:1"></span><button class="say" data-say="${esc(surface)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>
+    ${loading?`<div class="zh muted">…</div>`:dxApiBody(surface,S.sheet.api)}</div>`; return; }
   o.innerHTML=`<div class="scrim" data-act="close"></div><div class="sheet" role="dialog" aria-label="${T("wordTr")}"><div class="grab"></div>
     <div class="wd">${esc(surface)} ${g&&g.pos?`<span class="pos">${esc(g.pos)}</span>`:""}<span style="flex:1"></span><button class="say" data-say="${esc(surface)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>
     ${loading?`<div class="zh muted">…</div>`:err?`<div class="zh" style="color:var(--bad);font-size:16px">${esc(err)}</div>`:`<div class="zh">${esc(mean(g))}</div>
     ${g.base&&g.base.toLowerCase()!==surface.toLowerCase()?`<div class="muted" style="font-size:13px">${T("base")}<b>${esc(g.base)}</b></div>`:""}
     ${wordExtras(g)}
-    <div class="muted" style="font-size:13px;margin-top:10px">${skip?T("funcWord"):(rec?(isNew?T("added"):T("already",{n:rec.lookups})):"")}</div>`}
+    ${S.sheet.dx?`<div class="dx-acts">${rec?`<span class="muted" style="font-size:13px;align-self:center">${S.sheet.addedNow&&isNew?T("added"):T("already",{n:rec.lookups||1})}</span>`:`<button class="btn sm" data-dxadd="1">＋ ${T("dxAdd")}</button>`}${dxGt(g.base||surface)}<a class="btn ghost sm" href="${dxCambUrl(g.base||surface)}" target="_blank" rel="noopener noreferrer">${T("dxCamb")} ↗</a></div>`
+    :`<div class="muted" style="font-size:13px;margin-top:10px">${skip?T("funcWord"):(rec?(isNew?T("added"):T("already",{n:rec.lookups})):"")}</div>`}`}
   </div>`;
 }
 
@@ -4429,6 +4536,10 @@ document.addEventListener("click", e=>{
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
+document.addEventListener("click", e=>{
+  const t=e.target.closest("[data-dx],[data-dxapi],[data-dxadd]"); if(!t) return;
+  if(t.dataset.dx) dxOpen(t.dataset.dx); else if(t.dataset.dxapi) dxApi(t.dataset.dxapi); else dxAdd();
+});
 document.addEventListener("input", e=>{ if(e.target.id==="devBadgeN"||e.target.id==="devBadgeK"){ const P=S.devBadge||(S.devBadge={k:"9.0",n:0}); if(e.target.id==="devBadgeN") P.n=+e.target.value; else P.k=e.target.value; const pv=$("#devBadgePrev"); if(pv) pv.innerHTML=badgeSvg(P.k,P.n,84); const nv=$("#devBadgeNv"); if(nv) nv.textContent=P.n; return; } if(e.target.dataset&&e.target.dataset.iq){ const R=game().ieltsRun; if(R){ R.ans[e.target.dataset.iq]=e.target.value; S.ieConfirm=false; lsSave(); } return; } if(e.target.id==="fbText"){ S.fbDraft=e.target.value; return; } if(e.target.id==="fbContact"){ S.fbContactV=e.target.value; return; } if(e.target.id==="dictSearch"){ S.dictQ=e.target.value; const l=$("#dictList"); if(l) l.innerHTML=dictList(); } else if(e.target.id==="archSearch"){ S.archQ=e.target.value; const l=$("#archList"); if(l) l.innerHTML=archList(); } });
 document.addEventListener("keydown", e=>{ if(S.pg&&S.pg.D&&S.pg.party&&S.pg.party.game==="duel"&&S.pg.party.state==="play"&&S.view==="play"&&!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.metaKey&&!e.ctrlKey){ const D=S.pg.D;
     if(e.key===" "){ e.preventDefault(); return duShield(); } if(e.key==="Enter"){ e.preventDefault(); return duSubmit(); }
@@ -9609,6 +9720,12 @@ Object.assign(STR.hi,{"plzRareT": "चौक दुर्लभ", "plzRareTw_ear
 Object.assign(STR.es,{"plzRareT": "Rara de la plaza", "plzRareTw_earth": "Piel gruesa: PV ×1.5", "plzRareTw_metal": "Veloz: solo 6 s para el hechizo", "plzRareTw_water": "Escarcha: tu defensa −30%", "plzRareTw_fire": "Furia: ataque ×1.3", "plzRareTw_wood": "Caparazón: defensa ×1.5", "plzRareBook": "Cuaderno de raras", "plzRareBookSub": "A veces aparecen bestias raras brillantes en la hierba y el estanque · {n}/{t}", "plzQOut": "¡Se acabó el tiempo!"});
 Object.assign(STR.ja,{"plzRareT": "広場レア", "plzRareTw_earth": "厚い皮：HP ×1.5", "plzRareTw_metal": "俊敏：呪文問題は 6 秒だけ", "plzRareTw_water": "冷気：あなたの防御 −30%", "plzRareTw_fire": "狂暴：攻撃力 ×1.3", "plzRareTw_wood": "硬い殻：防御力 ×1.5", "plzRareBook": "広場レア図鑑", "plzRareBookSub": "草むらや池でまれに輝くレア種に出会える · {n}/{t} 収集", "plzQOut": "時間切れ！"});
 Object.assign(STR.ko,{"plzRareT": "광장 희귀", "plzRareTw_earth": "두꺼운 가죽: HP ×1.5", "plzRareTw_metal": "신속: 주문 문제는 6초만", "plzRareTw_water": "냉기: 내 방어력 −30%", "plzRareTw_fire": "광폭: 공격력 ×1.3", "plzRareTw_wood": "단단한 껍질: 방어력 ×1.5", "plzRareBook": "광장 희귀 도감", "plzRareBookSub": "풀숲과 호수에서 가끔 빛나는 희귀종을 만나요 · {n}/{t} 수집", "plzQOut": "시간 초과!"});
+Object.assign(STR.zh,{"dxGt":"Google 翻譯","dxPh": "搜尋你的單字，或查任何英文字", "dxTitle": "BinBin 字典", "dxCount": "{n} 字", "dxMine": "已收藏", "dxNone": "BinBin 字典裡還沒有 {q}", "dxApi": "查英英字典", "dxAdd": "加入我的字典", "dxCamb": "劍橋字典", "dxErr": "連不上字典，請稍後再試。", "dxApiNone": "找不到這個字，可能拼錯了？", "dxApiNote": "英文解釋來自免費的 Free Dictionary（dictionaryapi.dev）。"});
+Object.assign(STR.en,{"dxGt":"Google Translate","dxPh": "Search your words or look up any word", "dxTitle": "BinBin dictionary", "dxCount": "{n} words", "dxMine": "Saved", "dxNone": "{q} isn't in the BinBin dictionary yet", "dxApi": "Look it up (English)", "dxAdd": "Add to my dictionary", "dxCamb": "Cambridge", "dxErr": "Couldn't reach the dictionary. Try again later.", "dxApiNone": "Word not found. Check the spelling?", "dxApiNote": "Definitions from the Free Dictionary API (dictionaryapi.dev)."});
+Object.assign(STR.hi,{"dxGt":"Google अनुवाद","dxPh": "अपने शब्द खोजें या कोई भी शब्द देखें", "dxTitle": "BinBin शब्दकोश", "dxCount": "{n} शब्द", "dxMine": "सहेजा गया", "dxNone": "{q} अभी BinBin शब्दकोश में नहीं है", "dxApi": "अंग्रेज़ी शब्दकोश में देखें", "dxAdd": "मेरे शब्दकोश में जोड़ें", "dxCamb": "Cambridge", "dxErr": "शब्दकोश से कनेक्ट नहीं हो सका। बाद में फिर कोशिश करें।", "dxApiNone": "शब्द नहीं मिला। वर्तनी जाँचें?", "dxApiNote": "परिभाषाएँ Free Dictionary API (dictionaryapi.dev) से।"});
+Object.assign(STR.es,{"dxGt":"Google Traductor","dxPh": "Busca tus palabras o cualquier palabra", "dxTitle": "Diccionario BinBin", "dxCount": "{n} palabras", "dxMine": "Guardada", "dxNone": "{q} aún no está en el diccionario BinBin", "dxApi": "Buscar en inglés", "dxAdd": "Añadir a mi diccionario", "dxCamb": "Cambridge", "dxErr": "No se pudo conectar con el diccionario. Inténtalo más tarde.", "dxApiNone": "Palabra no encontrada. ¿Revisas la ortografía?", "dxApiNote": "Definiciones de Free Dictionary API (dictionaryapi.dev)."});
+Object.assign(STR.ja,{"dxGt":"Google 翻訳","dxPh": "自分の単語を検索、または好きな単語を調べる", "dxTitle": "BinBin 辞書", "dxCount": "{n} 語", "dxMine": "保存済み", "dxNone": "{q} はまだ BinBin 辞書にありません", "dxApi": "英英辞典で調べる", "dxAdd": "単語帳に追加", "dxCamb": "Cambridge", "dxErr": "辞書に接続できません。後でもう一度お試しください。", "dxApiNone": "見つかりません。スペルを確認してください。", "dxApiNote": "定義は Free Dictionary API（dictionaryapi.dev）より。"});
+Object.assign(STR.ko,{"dxGt":"Google 번역","dxPh": "내 단어 검색 또는 아무 단어나 찾기", "dxTitle": "BinBin 사전", "dxCount": "{n}개 단어", "dxMine": "저장됨", "dxNone": "{q}은(는) 아직 BinBin 사전에 없어요", "dxApi": "영영사전에서 찾기", "dxAdd": "내 단어장에 추가", "dxCamb": "Cambridge", "dxErr": "사전에 연결할 수 없어요. 나중에 다시 시도하세요.", "dxApiNone": "단어를 찾을 수 없어요. 철자를 확인해 보세요.", "dxApiNote": "정의 출처: Free Dictionary API (dictionaryapi.dev)."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
