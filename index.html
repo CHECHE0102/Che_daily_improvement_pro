@@ -235,6 +235,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .acal-tg[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
 .acal-sel{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);color:var(--accent);border:0;border-radius:999px;padding:8px 12px;font-size:14px;font-weight:600}
 .acal{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:10px}
+.acal-lock .row{display:flex;flex-wrap:wrap}
 .acal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .acal-hd b{font-size:16px}
 .acal-nav{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:18px;line-height:1;padding:0}
@@ -2285,7 +2286,7 @@ function archHay(a){ return [a.title,a.summaryZh,a.summaryEn,sumOf(a),a.topic,to
 function archList(){
   const d=dayRec(), terms=S.archQ.trim().toLowerCase().split(/\s+/).filter(Boolean);
   let list=terms.length?S.index.filter(a=>{ const h=archHay(a); return terms.every(t=>h.includes(t)); }):S.index;
-  if(S.archDay) list=list.filter(a=>a.date===S.archDay);
+  if(S.archDay&&planHas("sub")) list=list.filter(a=>a.date===S.archDay);
   if(!list.length) return `<div class="empty">${T(S.archDay&&!terms.length?"acalNone":"archNoMatch")}</div>`;
   const dates=[...new Set(list.map(a=>a.date))];
   return (terms.length?`<div class="muted" style="font-size:13px">${T("archFound",{n:list.length})}</div>`:"")+dates.map(dt=>`<section style="display:flex;flex-direction:column;gap:10px"><div class="eyebrow">${esc(fmtDate(dt))}</div><div class="arch">${list.filter(a=>a.date===dt).map(a=>artCard(a,d)).join("")}</div></section>`).join("");
@@ -2294,9 +2295,10 @@ function archList(){
 function archCounts(){ const m={}; S.index.forEach(a=>{ if(a.date) m[a.date]=(m[a.date]||0)+1; }); return m; }
 function archMonths(c){ return [...new Set(Object.keys(c).map(d=>d.slice(0,7)))].sort(); }
 function archCal(){
-  const c=archCounts(), sel=S.archDay;
-  const bar=`<div class="acal-bar"><button type="button" class="acal-tg" data-acal="tg" aria-expanded="${S.archCal?"true":"false"}">📅 ${T("acalBtn")}</button>${sel?`<button type="button" class="acal-sel" data-aday="" title="${T("acalAll")}">${esc(fmtDate(sel))} · ${T("artCount",{n:c[sel]||0})} <span aria-hidden="true">✕</span></button>`:""}</div>`;
+  const c=archCounts(), mem=planHas("sub"); if(!mem) S.archDay=null; const sel=S.archDay;
+  const bar=`<div class="acal-bar"><button type="button" class="acal-tg" data-acal="tg" aria-expanded="${S.archCal?"true":"false"}">📅 ${T("acalBtn")}${mem?"":" 🔒"}</button>${sel?`<button type="button" class="acal-sel" data-aday="" title="${T("acalAll")}">${esc(fmtDate(sel))} · ${T("artCount",{n:c[sel]||0})} <span aria-hidden="true">✕</span></button>`:""}</div>`;
   if(!S.archCal) return bar;
+  if(!mem) return bar+`<div class="acal acal-lock"><div class="row" style="gap:8px;align-items:center"><b>📅 ${T("acalBtn")}</b>${planTag("sub")}</div><p class="muted sm-t" style="margin:6px 0 10px">${T("acalLocked")}</p>${memLockBtn()}</div>`;
   const ms=archMonths(c); if(!ms.length) return bar;
   let mon=S.archMon||(sel?sel.slice(0,7):ms[ms.length-1]); if(!ms.includes(mon)) mon=ms[ms.length-1]; S.archMon=mon;
   const i=ms.indexOf(mon), [y,mo]=mon.split("-").map(Number), loc=LOCALE[LANG]||"zh-TW";
@@ -9650,12 +9652,12 @@ Object.assign(STR.hi,{"srNoDev": "इस ब्राउज़र में व�
 Object.assign(STR.es,{"srNoDev": "Este navegador no tiene reconocimiento de voz, así que no puede comprobar tu pronunciación. Prueba con Chrome o Safari.", "srPwa": "En iPhone, el reconocimiento de voz no funciona si abres BinBin desde la pantalla de inicio. Abre binbindaily.com en Safari.", "srFail": "No se pudo empezar a escuchar ({e}). Vuelve a tocar."});
 Object.assign(STR.ja,{"srNoDev": "このブラウザは音声認識に対応していないため、発音チェックができません。Chrome か Safari をお試しください。", "srPwa": "iPhone ではホーム画面から開いた BinBin で音声認識が使えません。Safari で binbindaily.com を開いてください。", "srFail": "聞き取りを開始できませんでした（{e}）。もう一度タップしてください。"});
 Object.assign(STR.ko,{"srNoDev": "이 브라우저는 음성 인식을 지원하지 않아 발음을 확인할 수 없어요. Chrome이나 Safari를 사용해 보세요.", "srPwa": "iPhone에서 홈 화면으로 연 BinBin에서는 음성 인식이 안 돼요. Safari에서 binbindaily.com을 열어 주세요.", "srFail": "듣기를 시작하지 못했어요 ({e}). 다시 눌러 주세요."});
-Object.assign(STR.zh,{"acalBtn": "日曆", "acalAll": "看全部", "acalNone": "這天沒有文章"});
-Object.assign(STR.en,{"acalBtn": "Calendar", "acalAll": "Show all", "acalNone": "No articles on this day"});
-Object.assign(STR.hi,{"acalBtn": "कैलेंडर", "acalAll": "सभी दिखाएँ", "acalNone": "इस दिन कोई लेख नहीं"});
-Object.assign(STR.es,{"acalBtn": "Calendario", "acalAll": "Ver todo", "acalNone": "No hay artículos este día"});
-Object.assign(STR.ja,{"acalBtn": "カレンダー", "acalAll": "すべて表示", "acalNone": "この日の記事はありません"});
-Object.assign(STR.ko,{"acalBtn": "달력", "acalAll": "전체 보기", "acalNone": "이 날은 기사가 없어요"});
+Object.assign(STR.zh,{"acalLocked": "點日曆上的日期，直接看那天的新聞。追蹤 IG 開通會員就能使用。", "acalBtn": "日曆", "acalAll": "看全部", "acalNone": "這天沒有文章"});
+Object.assign(STR.en,{"acalLocked": "Tap a date to read that day's news. Follow on IG to unlock membership and use it.", "acalBtn": "Calendar", "acalAll": "Show all", "acalNone": "No articles on this day"});
+Object.assign(STR.hi,{"acalLocked": "किसी तारीख पर टैप करके उस दिन की खबरें पढ़ें। सदस्यता के लिए IG पर फ़ॉलो करें।", "acalBtn": "कैलेंडर", "acalAll": "सभी दिखाएँ", "acalNone": "इस दिन कोई लेख नहीं"});
+Object.assign(STR.es,{"acalLocked": "Toca una fecha para leer las noticias de ese día. Síguenos en IG para hacerte miembro.", "acalBtn": "Calendario", "acalAll": "Ver todo", "acalNone": "No hay artículos este día"});
+Object.assign(STR.ja,{"acalLocked": "日付をタップしてその日のニュースを読めます。IG をフォローして会員になると使えます。", "acalBtn": "カレンダー", "acalAll": "すべて表示", "acalNone": "この日の記事はありません"});
+Object.assign(STR.ko,{"acalLocked": "날짜를 누르면 그날의 뉴스를 볼 수 있어요. IG를 팔로우해 회원이 되면 사용할 수 있어요.", "acalBtn": "달력", "acalAll": "전체 보기", "acalNone": "이 날은 기사가 없어요"});
 Object.assign(STR.zh,{"archSearch": "搜尋標題、摘要或分類", "archNoMatch": "找不到符合的文章", "archFound": "找到 {n} 篇"});
 Object.assign(STR.en,{"archSearch": "Search titles, summaries or topics", "archNoMatch": "No matching articles", "archFound": "{n} found"});
 Object.assign(STR.hi,{"archSearch": "शीर्षक, सारांश या विषय खोजें", "archNoMatch": "कोई मेल खाता लेख नहीं", "archFound": "{n} मिले"});
