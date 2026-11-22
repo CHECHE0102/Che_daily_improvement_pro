@@ -899,7 +899,7 @@ body.onb-open{overflow:hidden}
 .mon-seal.rare{box-shadow:0 0 0 4px #FFD84D,0 0 22px 6px rgba(255,216,77,.8)}
 .mon-seal.rare img,.mon-seal.rare svg{filter:drop-shadow(0 0 6px rgba(255,230,120,.95)) saturate(1.25)}
 .q-timer{position:absolute;right:12px;top:10px;font:800 15px/1 system-ui,sans-serif;color:#C0443B;background:#F7DEDB;border-radius:999px;padding:5px 10px;font-variant-numeric:tabular-nums}
-.qcard{position:relative}.bq{gap:10px}.bq.def{box-shadow:inset 0 0 0 2px var(--bad)}.bq-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.bq-combo{font-weight:800;font-size:13px;padding:2px 10px;border-radius:99px;background:var(--line)}.bq-combo.hot{background:#F2C94C;color:#2a2208}.bq-time{height:6px;border-radius:99px;background:var(--line);overflow:hidden}.bq-time i{display:block;height:100%;background:var(--accent,#3e9c5a);transform-origin:left;transition:transform .1s linear}.bq.def .bq-time i{background:var(--bad)}.bq-sum{display:flex;flex-direction:column;gap:6px}
+.qcard{position:relative}.arena2.win .mon-cv{filter:grayscale(1) brightness(.85);opacity:.6;transition:filter .8s,opacity .8s}.bq{gap:10px}.bq.def{box-shadow:inset 0 0 0 2px var(--bad)}.bq-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.bq-combo{font-weight:800;font-size:13px;padding:2px 10px;border-radius:99px;background:var(--line)}.bq-combo.hot{background:#F2C94C;color:#2a2208}.bq-time{height:6px;border-radius:99px;background:var(--line);overflow:hidden}.bq-time i{display:block;height:100%;background:var(--accent,#3e9c5a);transform-origin:left;transition:transform .1s linear}.bq.def .bq-time i{background:var(--bad)}.bq-sum{display:flex;flex-direction:column;gap:6px}
 .pz-rbookin{max-height:84vh;width:min(380px,100%)}
 .pz-rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;overflow:auto;max-height:56vh;width:100%;padding:2px}
 .pz-rcell{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
@@ -3348,7 +3348,7 @@ function quizPlay(B,r){ clearInterval(S.btimer);
   const step=()=>{ if(S.battle!==B) return clearInterval(S.btimer);
     if(B.idx<B.res.ev.length-1){ B.idx++; const e=B.res.ev[B.idx]; evSfx(e); renderBattleOnly(); battleAnim(e); return; }
     clearInterval(S.btimer);
-    if(r.done){ B.ask=null; B.res=r.value; B.idx=B.res.ev.length-1; battleSettle(B,B.res); saveGame(); B.stage="end"; B.justEnded=true; battleEndSfx(); render(); }
+    if(r.done){ B.ask=null; B.res=r.value; B.idx=B.res.ev.length-1; battleSettle(B,B.res); saveGame(); B.stage="end"; B.justEnded=true; battleEndSfx(); renderBattleOnly(); }
     else { quizAsk(B,r.value); renderBattleOnly(); } };
   step(); S.btimer=setInterval(step, matchMedia("(prefers-reduced-motion: reduce)").matches?200:900); }
 function evSfx(e){ if(!e) return; if(e.who==="p"){ const nk=cosWorn().neck&&cosOf(cosWorn().neck); if(nk) sfx("nx-"+nk.fx); } if(e.who==="p") sfx(cosSfxName(e)||(e.crit||e.spell?"crit":"hit")); else if(e.who==="a") sfx("ally"); else if(e.eye) sfx("eye"); else if(e.tgt==="a") sfx("hurt"); else sfx(e.crit?"mcrit":"hurt"); }
@@ -3397,9 +3397,9 @@ function arenaScene(B, last, cur){
   const showAnim=!fin||B.justEnded;
   /* parts rig hero + mesh monster, same as the practice arena (CheChe 2026-11-22); the plain drawings stay as the fallback */
   const heroPose=fin?(B.res.win?"win":"hurt"):showAnim&&pAtk&&!aAtk?"attack":showAnim&&mAtk?"hurt":"idle";
-  const heroH=g.gender&&!fin?rigHeroHtml(g.gender, g.weapon&&ITEMS[g.weapon], g.armor&&ITEMS[g.armor], ()=>heroArt(heroPose), cosLayers(cosWorn())):heroArt(heroPose), rig=heroH.includes("rig-host");
+  const heroH=g.gender?rigHeroHtml(g.gender, g.weapon&&ITEMS[g.weapon], g.armor&&ITEMS[g.armor], ()=>heroArt(heroPose), cosLayers(cosWorn())):heroArt(heroPose), rig=heroH.includes("rig-host");
   const mesh=rig&&!!(RIG.man&&RIG.man.t[picOfMon(m)]); if(mesh) meshStart();
-  B.face=showAnim&&pAtk?"hurt":showAnim&&(mAtk||aHit)?"angry":"calm"; if(B.ask&&B.ask.picked==null) B.face=B.ask.kind==="def"?"angry":"calm";
+  B.face=showAnim&&pAtk?"hurt":showAnim&&(mAtk||aHit)?"angry":"calm"; if(B.ask&&B.ask.picked==null) B.face=B.ask.kind==="def"?"angry":"calm"; if(fin) B.face=B.res.win?"hurt":"angry";
   const heroCls=showAnim&&!rig?(pAtk&&!aAtk?" atk":mAtk?" def hurt hs"+hl:""):"", foeCls=showAnim?(mAtk||aHit?(mesh?"":" atk"):pAtk?" hurt hs"+hl:""):"";
   const allyFig=al?`<div class="ally-fig${showAnim&&aAtk?" a-atk":""}${showAnim&&aHit?" a-hurt":""}${aDown?" a-down":""}">${allyArt(al, fin?(B.res.win&&!aDown?"win":"hurt"):showAnim&&aAtk?"attack":showAnim&&aHit?"hurt":"idle")}${showAnim&&aHit?`<svg class="slash claw" viewBox="0 0 100 100"><path d="M30 20L60 80"/><path d="M44 16L74 76"/></svg>${pop(last,"")}`:""}<span class="ally-tag">🤝 ${esc(al.n)}${flagOf(al.flag)}</span></div>`:"";
   const cfx=showAnim&&pAtk&&!aAtk;
@@ -4044,7 +4044,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.65";
+const APP_VERSION="2026.11.66";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4576,7 +4576,7 @@ document.addEventListener("click", e=>{
   if(a==="trel"||a==="trtier"||a==="trmon"){ const R=trainState(); if(a==="trel") R.el=t.dataset.k; else if(a==="trtier") R.t=+t.dataset.k; else R.mi=(R.mi+1)%trainMons().length; R.hit=null; R.sum=0; R.n=0; return render(); }
   if(a==="tax") return collectTax();
   if(a==="bspeed"){ const f=!battleFast(); try{ localStorage.setItem("che-pro-fast", f?"1":"0"); }catch(e){} S.fastMem=f; if(S.battle&&S.battle.stage==="fight") battleTimer(); renderBattleOnly(); return; }
-  if(a==="skip"){ if(S.battle&&S.battle.stage==="fight") battleEndSfx(); if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); render(); } return; }
+  if(a==="skip"){ if(S.battle&&S.battle.stage==="fight") battleEndSfx(); if(S.battle){ S.battle.stage="end"; clearInterval(S.btimer); renderBattleOnly(); } return; }
   if(a==="plzback") return plzReturn();
   if(a==="advback"&&S.battle&&S.battle.plz) return plzReturn();
   if(a==="advback"){ clearInterval(S.btimer); S.battle=null; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
