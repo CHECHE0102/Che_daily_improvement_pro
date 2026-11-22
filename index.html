@@ -6104,7 +6104,7 @@ function pgResults(){
     extra=`<h3>${T("pgAllWords")}</h3>${all.length?`<div class="co-list">${all.map(x=>{ const m=pgMeanOf(x.w); return `<div class="co-err"><span class="chip done">+${pgPts(x.w.length)}</span><div><b>${esc(x.w)}</b> <span class="muted sm-t">· ${esc(pgNm(x.u))}</span><div class="sm-t">${m||`<a href="${pgLookup(x.w)}" target="_blank" rel="noopener">${T("pgLookup")} ↗</a>`}</div></div></div>`; }).join("")}</div>`:`<p class="muted sm-t">–</p>`}
       <h3>${T("pgWeird")}</h3>${weird.length?`<div class="pg-weird">${weird.map(x=>`<span class="chip new"><s>${esc(pgMask(x.w))}</s> <small>${esc(pgNm(x.u))}</small></span>`).join("")}</div>`:`<p class="muted sm-t">${T("pgNoWeird")}</p>`}`;
   }
-  return `<div class="pg-result">${P.game==="spy"?syBanner():""}<div class="eyebrow">${T("pgPodium")}</div>${pgPodium(rows)}${reward}<h3>${T("pgStats")}</h3><div class="ds-scroll">${stats}</div>${extra}<button class="btn" data-act="pgleave">${T("pgAgain")}</button></div>`;
+  return `<div class="pg-result">${P.game==="spy"?syBanner():""}${P.game==="spy"?"":`<div class="eyebrow">${T("pgPodium")}</div>${pgPodium(rows)}`}${reward}<h3>${T("pgStats")}</h3><div class="ds-scroll">${stats}</div>${extra}<button class="btn" data-act="pgleave">${T("pgAgain")}</button></div>`;
 }
 
 
