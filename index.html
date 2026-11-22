@@ -8328,19 +8328,30 @@ function plzNorm(x,y){ const M=PLZ_MASK[ROOM?ROOM.zone:"fountain"]; let gx=0,gy=
     gx=F(x+6,y)-F(x-6,y); gy=F(x,y+6)-F(x,y-6); }
   if(Math.abs(gx)+Math.abs(gy)<1e-4){ gx=gy=0; for(let a=0;a<6.28;a+=.785){ const c=Math.cos(a), s=Math.sin(a); if(plzBlocked(x+c*10,y+s*10)){ gx-=c; gy-=s; } } }
   const l=Math.hypot(gx,gy); return l>1e-6?[gx/l,gy/l]:null; }
-// move in small steps; on hitting a wall keep the part of the motion along the wall (a glancing hit keeps nearly full
-// speed, a head-on one stops), then fall back to x-only / y-only
-function plzMove(o,vx,vy,dt){ const sp=Math.hypot(vx,vy); if(sp<1) return false; const st=sp*dt, n=Math.max(1,Math.ceil(st/3)), dx=vx*dt/n, dy=vy*dt/n, L=st/n; let moved=0;
-  const go=(ax,ay)=>{ if(plzBlocked(o.x+ax,o.y+ay)) return false; o.x+=ax; o.y+=ay; moved+=Math.hypot(ax,ay); return true; };
-  for(let k=0;k<n;k++){ const ax=o.x+dx/L*9, ay=o.y+dy/L*9;   // look 9px ahead so the turn starts before the wall, not after
-    if(!plzBlocked(ax,ay)&&go(dx,dy)) continue;
-    const N=plzNorm(ax,ay)||plzNorm(o.x,o.y);
-    if(N){ const d=dx*N[0]+dy*N[1], tx=dx-d*N[0], ty=dy-d*N[1], tl=Math.hypot(tx,ty);
-      if(d>=0&&go(dx,dy)) continue;
-      if(tl>1e-3){ const m=L*Math.min(1,tl/L*1.6)/tl, ux=tx*m, uy=ty*m;
-        if(go(ux,uy)||go(ux+N[0]*.6,uy+N[1]*.6)) continue; } }
-    if(go(dx,dy)) continue;
-    if(Math.abs(dx)>Math.abs(dy)){ if(go(dx,0)||go(0,dy)) continue; } else if(go(0,dy)||go(dx,0)) continue;
+// move in small steps. Straight on while the way 9px ahead is clear; otherwise turn the step a little at a time, toward the side
+// that leads away from the wall (from the soft mask's slope), until it fits, and keep only the part that still points where you aim
+// (a glancing hit keeps nearly full speed, a near head-on one slides slowly). A second pass without the look-ahead gets you out of
+// notches and tight corners, so you never stick while some way forward is open.
+const PLZ_TURN=[.26,.52,.79,1.05,1.31,1.57,1.83];
+// walls for moving: the soft mask cut at half, so the 4px stair-steps of a slanted edge become one smooth slope you glide along
+function plzOpenAt(x,y){ const M=PLZ_MASK[ROOM?ROOM.zone:"fountain"]; if(!M||!M.f) return !plzBlocked(x,y);
+  const u=x/PLZ_MC-.5, v=y/PLZ_MC-.5, i=Math.floor(u), j=Math.floor(v), fu=u-i, fv=v-j, g=(p,q)=>p<0||q<0||p>=M.w||q>=M.h?0:M.f[q*M.w+p];
+  return (g(i,j)*(1-fu)+g(i+1,j)*fu)*(1-fv)+(g(i,j+1)*(1-fu)+g(i+1,j+1)*fu)*fv>=.5; }
+function plzMove(o,vx,vy,dt){ const sp=Math.hypot(vx,vy); if(sp<1) return false; const st=sp*dt, n=Math.max(1,Math.ceil(st/3)), dx=vx*dt/n, dy=vy*dt/n, L=st/n, ux=dx/L, uy=dy/L; let moved=0;
+  const free=(x,y)=>plzOpenAt(x,y)||(plzBlocked(o.x,o.y)?false:!plzOpenAt(o.x,o.y)&&!plzBlocked(x,y));   // already in a thin spot the soft walls shut? walk out on the plain mask
+  for(let k=0;k<n;k++){ const sx=o.x+dx, sy=o.y+dy, okStep=free(sx,sy);
+    if(okStep&&free(o.x+ux*9,o.y+uy*9)){ o.x=sx; o.y=sy; moved+=L; if(o.slideK>0) o.slideK--; continue; }
+    const N=plzNorm(o.x+ux*9,o.y+uy*9)||plzNorm(o.x,o.y), cr=N?ux*N[1]-uy*N[0]:0, sg=o.slideK>0||Math.abs(cr)<=.05?(o.slideSg||1):cr>0?1:-1;   // while sliding, keep turning the same way (no jitter in corners)
+    let hit=null;
+    for(let pass=0;pass<2&&!hit;pass++) for(const t of PLZ_TURN){ if(pass===0&&t>1.35) break;
+      for(const s2 of [sg,-sg]){ const a=t*s2, c=Math.cos(a), sn=Math.sin(a), rx=ux*c-uy*sn, ry=ux*sn+uy*c, m=L*Math.max(.3,c), tx=o.x+rx*m, ty=o.y+ry*m; if(t>1.2&&N&&rx*N[0]+ry*N[1]<0) continue;   // a wide turn must lead away from the wall, or you wobble in a corner
+        if(free(tx,ty)&&(pass||free(o.x+rx*9,o.y+ry*9))){ hit=[tx,ty,m,s2]; break; } }
+      if(hit) break; }
+    if(hit&&!(okStep&&hit[2]<L*.5)){ o.x=hit[0]; o.y=hit[1]; moved+=hit[2]; o.slideSg=hit[3]; o.slideK=12; continue; }
+    if(okStep){ o.x=sx; o.y=sy; moved+=L; continue; }
+    if(hit){ o.x=hit[0]; o.y=hit[1]; moved+=hit[2]; o.slideSg=hit[3]; o.slideK=12; continue; }
+    // wedged into a jagged corner of the mask: step back off the wall a little, so the next step has room to turn
+    const B=plzNorm(o.x,o.y)||N; if(B&&free(o.x+B[0]*1.5,o.y+B[1]*1.5)){ o.x+=B[0]*1.5; o.y+=B[1]*1.5; }
     break; }
   return moved>st*.25; }
 // nearest walkable spot (after a mask loads, or if someone stands somewhere odd)
