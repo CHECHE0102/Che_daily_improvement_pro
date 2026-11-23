@@ -1,187 +1,187 @@
 {
- "id": "L031",
- "title": "認識新朋友三句話",
- "subtitle": "working holiday・How are you finding・What do you do",
- "level": "A2",
- "kind": "phrase",
- "date": "2026-11-23",
- "teacher": "cian",
- "voices": {
-  "T": "zh-TW-YunJheNeural",
-  "TE": "en-IE-ConnorNeural",
-  "A": "en-IE-EmilyNeural",
-  "B": "en-IE-ConnorNeural"
- },
- "slides": [
-  {
-   "type": "hook",
-   "big": [
-    "剛認識新朋友",
-    "聊兩句就卡住",
-    "怎麼接下去？"
-   ],
-   "emoji": "👋",
-   "lines": [
-    {
-     "v": "T",
-     "say": "在 Pub 或宿舍認識新朋友，聊兩句就卡住了？"
-    },
-    {
-     "v": "T",
-     "say": "今天教你認識新朋友最好用的三句英文！"
-    }
-   ]
+  "id": "L031",
+  "title": "認識新朋友三句話",
+  "subtitle": "working holiday・How are you finding・What do you do",
+  "level": "A2",
+  "kind": "phrase",
+  "date": "2026-11-23",
+  "teacher": "cian",
+  "voices": {
+    "T": "zh-TW-YunJheNeural",
+    "TE": "en-IE-ConnorNeural",
+    "A": "en-IE-EmilyNeural",
+    "B": "en-IE-ConnorNeural"
   },
-  {
-   "type": "phrase",
-   "num": "1",
-   "phrase": "I'm over on a working holiday",
-   "meaning": "我來這裡打工度假",
-   "img": "scene-bell",
-   "scene": "scene-welcome",
-   "lines": [
+  "slides": [
     {
-     "v": "T",
-     "say": "第一個，介紹自己為什麼來愛爾蘭。"
+      "type": "hook",
+      "big": [
+        "剛認識新朋友",
+        "聊兩句就卡住",
+        "怎麼接下去？"
+      ],
+      "emoji": "👋",
+      "lines": [
+        {
+          "v": "T",
+          "say": "在 Pub 或宿舍認識新朋友，聊兩句就卡住了？"
+        },
+        {
+          "v": "T",
+          "say": "今天教你認識新朋友最好用的三句英文！"
+        }
+      ]
     },
     {
-     "v": "A",
-     "say": "So what brings you to Ireland?",
-     "zh": "你怎麼會來愛爾蘭？"
+      "type": "phrase",
+      "num": "1",
+      "phrase": "I'm over on a working holiday",
+      "meaning": "我來這裡打工度假",
+      "img": "scene-bell",
+      "scene": "scene-welcome",
+      "lines": [
+        {
+          "v": "T",
+          "say": "第一個，介紹自己為什麼來愛爾蘭。"
+        },
+        {
+          "v": "A",
+          "say": "So what brings you to Ireland?",
+          "zh": "你怎麼會來愛爾蘭？"
+        },
+        {
+          "v": "B",
+          "say": "I'm over on a working holiday.",
+          "zh": "我來這裡打工度假。"
+        },
+        {
+          "v": "T",
+          "say": "I'm over 就是我從國外過來，愛爾蘭人很常說。"
+        }
+      ]
     },
     {
-     "v": "B",
-     "say": "I'm over on a working holiday.",
-     "zh": "我來這裡打工度假。"
+      "type": "phrase",
+      "num": "2",
+      "phrase": "How are you finding…?",
+      "meaning": "你覺得…怎麼樣？",
+      "img": "scene-study",
+      "scene": "scene-welcome",
+      "lines": [
+        {
+          "v": "T",
+          "say": "第二個，愛爾蘭人一定會問你習不習慣。"
+        },
+        {
+          "v": "A",
+          "say": "How are you finding Ireland?",
+          "zh": "你覺得愛爾蘭怎麼樣？"
+        },
+        {
+          "v": "B",
+          "say": "I love it, but the weather's mad!",
+          "zh": "我很喜歡，但天氣好瘋狂！"
+        },
+        {
+          "v": "T",
+          "say": "finding 在這裡不是找，是覺得怎麼樣。"
+        }
+      ]
     },
     {
-     "v": "T",
-     "say": "I'm over 就是我從國外過來，愛爾蘭人很常說。"
+      "type": "phrase",
+      "num": "3",
+      "phrase": "What do you do?",
+      "meaning": "你做什麼工作？",
+      "img": "scene-win",
+      "scene": "scene-party",
+      "lines": [
+        {
+          "v": "T",
+          "say": "第三個，換你問對方，也最常被問。"
+        },
+        {
+          "v": "A",
+          "say": "What do you do?",
+          "zh": "你做什麼工作？"
+        },
+        {
+          "v": "B",
+          "say": "I work in a café in town.",
+          "zh": "我在市區的咖啡店工作。"
+        },
+        {
+          "v": "T",
+          "say": "What do you do 不是問你在幹嘛，是問你的工作。"
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "q": "What do you do?",
+      "ask": "新朋友問你這句，意思是？",
+      "opts": [
+        "你現在在做什麼？",
+        "你做什麼工作？",
+        "你要去做什麼？"
+      ],
+      "ans": 1,
+      "lines": [
+        {
+          "v": "T",
+          "say": "小測驗！新朋友問你："
+        },
+        {
+          "v": "A",
+          "say": "What do you do?",
+          "zh": "？？？"
+        },
+        {
+          "v": "T",
+          "say": "意思是什麼？A、B、還是 C？"
+        },
+        {
+          "v": "T",
+          "say": "",
+          "cap": "倒數⋯⋯",
+          "pause": 3,
+          "countdown": true
+        },
+        {
+          "v": "T",
+          "say": "答案是 B！What do you do，是問你做什麼工作。",
+          "reveal": true
+        }
+      ]
+    },
+    {
+      "type": "recap",
+      "img": "scene-win",
+      "items": [
+        [
+          "I'm over on a working holiday",
+          "來打工度假"
+        ],
+        [
+          "How are you finding…?",
+          "覺得…怎麼樣"
+        ],
+        [
+          "What do you do?",
+          "做什麼工作"
+        ]
+      ],
+      "lines": [
+        {
+          "v": "T",
+          "say": "今天學會了三句認識新朋友的英文，下次就能多聊幾句！"
+        },
+        {
+          "v": "T",
+          "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+          "end": true
+        }
+      ]
     }
-   ]
-  },
-  {
-   "type": "phrase",
-   "num": "2",
-   "phrase": "How are you finding…?",
-   "meaning": "你覺得…怎麼樣？",
-   "img": "scene-study",
-   "scene": "scene-welcome",
-   "lines": [
-    {
-     "v": "T",
-     "say": "第二個，愛爾蘭人一定會問你習不習慣。"
-    },
-    {
-     "v": "A",
-     "say": "How are you finding Ireland?",
-     "zh": "你覺得愛爾蘭怎麼樣？"
-    },
-    {
-     "v": "B",
-     "say": "I love it, but the weather's mad!",
-     "zh": "我很喜歡，但天氣好瘋狂！"
-    },
-    {
-     "v": "T",
-     "say": "finding 在這裡不是找，是覺得怎麼樣。"
-    }
-   ]
-  },
-  {
-   "type": "phrase",
-   "num": "3",
-   "phrase": "What do you do?",
-   "meaning": "你做什麼工作？",
-   "img": "scene-win",
-   "scene": "scene-party",
-   "lines": [
-    {
-     "v": "T",
-     "say": "第三個，換你問對方，也最常被問。"
-    },
-    {
-     "v": "A",
-     "say": "What do you do?",
-     "zh": "你做什麼工作？"
-    },
-    {
-     "v": "B",
-     "say": "I work in a café in town.",
-     "zh": "我在市區的咖啡店工作。"
-    },
-    {
-     "v": "T",
-     "say": "What do you do 不是問你在幹嘛，是問你的工作。"
-    }
-   ]
-  },
-  {
-   "type": "quiz",
-   "q": "What do you do?",
-   "ask": "新朋友問你這句，意思是？",
-   "opts": [
-    "你現在在做什麼？",
-    "你做什麼工作？",
-    "你要去做什麼？"
-   ],
-   "ans": 1,
-   "lines": [
-    {
-     "v": "T",
-     "say": "小測驗！新朋友問你："
-    },
-    {
-     "v": "A",
-     "say": "What do you do?",
-     "zh": "？？？"
-    },
-    {
-     "v": "T",
-     "say": "意思是什麼？A、B、還是 C？"
-    },
-    {
-     "v": "T",
-     "say": "",
-     "cap": "倒數⋯⋯",
-     "pause": 3,
-     "countdown": true
-    },
-    {
-     "v": "T",
-     "say": "答案是 B！What do you do，是問你做什麼工作。",
-     "reveal": true
-    }
-   ]
-  },
-  {
-   "type": "recap",
-   "img": "scene-win",
-   "items": [
-    [
-     "I'm over on a working holiday",
-     "來打工度假"
-    ],
-    [
-     "How are you finding…?",
-     "覺得…怎麼樣"
-    ],
-    [
-     "What do you do?",
-     "做什麼工作"
-    ]
-   ],
-   "lines": [
-    {
-     "v": "T",
-     "say": "今天學會了三句認識新朋友的英文，下次就能多聊幾句！"
-    },
-    {
-     "v": "T",
-     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
-     "end": true
-    }
-   ]
-  }
- ]
+  ]
 }
