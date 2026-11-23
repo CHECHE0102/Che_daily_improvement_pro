@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-23",
+ "items": {
+  "2026-11-23": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Ireland has asked the UK to rejoin the EU single market by 2028.",
+     "Irish leaders welcome a wide-ranging new UK-EU agreement that eases agri-food trade and is expected to improve relations, although its economic gains are limited.",
+     "The UK will gain full voting rights on EU food-standards law.",
+     "Northern Ireland will lose its access to the EU single market under the new deal."
+    ],
+    "a": 1,
+    "exp": "The passage opens by saying relations \"have improved substantially as a consequence of a landmark agreement\", sets out its provisions such as removing agri-food checks, and ends with Burnham \"acknowledging that incremental measures have inherent limitations\". UK officials \"will not possess voting rights\" (C), and Northern Ireland \"will nevertheless maintain its access\" (D); rejoining the single market (A) is never mentioned."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the UK's position on EU rules such as food standards?",
+    "opts": [
+     "The UK will have to follow some EU rules that it cannot formally vote on.",
+     "The UK will be able to veto any new EU food law.",
+     "The UK has refused to accept any EU standards.",
+     "EU food standards will no longer apply to goods sold in Northern Ireland."
+    ],
+    "a": 0,
+    "exp": "British officials \"will be consulted on EU legislation in domains such as food standards, with which the UK must comply; however, they will not possess voting rights\" — so the UK follows rules it does not vote on. This contradicts (B) and (C), and nothing suggests (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe Burnham's attitude to the economic impact of the deal, as reported in the final paragraph?",
+    "opts": [
+     "Dismissive, believing the deal will damage the economy",
+     "Indifferent, refusing to comment on its effects",
+     "Wildly enthusiastic, predicting it will transform the economy overnight",
+     "Cautiously positive, citing a modest gain while admitting its limits"
+    ],
+    "a": 3,
+    "exp": "Burnham \"estimated that the deal could increase UK gross domestic product by approximately 0.5 per cent, while acknowledging that incremental measures have inherent limitations\" — a modest, positive estimate with a caveat. He does comment (B), sees a gain rather than damage (A), and 0.5 per cent is far from a transformation (C)."
+   }
+  ],
+  "2026-11-23-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A survey showing that most parents are happy with uniform costs",
+     "The Competition and Consumer Protection Commission's decision to fine uniform suppliers",
+     "A planned national review of school uniform rules, driven by concern about costs, that may ban compulsory branded outerwear",
+     "A new law requiring all schools to supply free laptops"
+    ],
+    "a": 2,
+    "exp": "The passage begins with \"a prohibition on schools mandating branded jumpers, jackets and coats\" as a principal proposal of \"a forthcoming national review\", and says the initiative \"reflects increasing concern regarding the financial implications of returning to school\". The survey found 59 per cent see costs as a burden (A); there is no fine (B) or free laptop law (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the total cost of a uniform for many families?",
+    "opts": [
+     "It is usually less than €100.",
+     "It is often higher than €240 once branded items are included.",
+     "It has fallen since the Commission's report in May.",
+     "It is fully covered by credit unions."
+    ],
+    "a": 1,
+    "exp": "Barnardos estimates that \"a basic uniform costs approximately €240, excluding branded outerwear\", so where branded jumpers or coats are required the total is likely to exceed €240. Nothing supports a figure under €100 (A), a fall in cost (C) or credit unions paying (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the Competition and Consumer Protection Commission's findings in the final paragraph?",
+    "opts": [
+     "To show that an independent body has already backed cheaper, generic uniforms",
+     "To argue that the Minister's review is unnecessary",
+     "To explain how schools choose their exclusive suppliers",
+     "To criticise parents for buying bespoke uniforms"
+    ],
+    "a": 0,
+    "exp": "The Commission \"concluded that requiring bespoke uniforms from exclusive suppliers imposes an unnecessary financial burden\" and \"recommended generic garments\", supporting the direction of the review. The writer does not call the review unnecessary (B), explain supplier selection (C) or blame parents (D)."
+   }
+  ],
+  "2026-11-23-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "The Government has decided to scrap the Renewable Electricity Support Scheme.",
+     "Irish electricity prices are now below the EU average.",
+     "Wind Energy Ireland plans to stop building onshore wind farms.",
+     "An industry-commissioned report says small changes to the renewable support scheme could lower electricity costs."
+    ],
+    "a": 3,
+    "exp": "The passage opens: \"According to a report commissioned by the wind industry, relatively minor modifications to the State's principal renewable energy support mechanism could substantially reduce electricity costs.\" Irish prices are \"the highest\" in the EU (B), the scheme is not scrapped (A), and construction is \"at its highest level in a decade\" (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the hypothetical figures for the most recent auction?",
+    "opts": [
+     "The proposed changes were actually used in the last auction.",
+     "The clearing price in the last auction was €69 per megawatt hour.",
+     "If the changes had applied, the clearing price would have been about €28 per megawatt hour lower.",
+     "The changes would have raised the clearing price."
+    ],
+    "a": 2,
+    "exp": "\"Had these measures been applied … the clearing price would hypothetically have decreased from €97 to €69 per megawatt hour\" — a fall of €28. The word \"hypothetically\" shows they were not used (A); the actual price was €97 (B), and the price would fall, not rise (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer point out that the report was commissioned by the wind industry?",
+    "opts": [
+     "To show that the Government wrote the report",
+     "To make readers aware of who paid for the analysis and therefore of its possible interest in the findings",
+     "To prove that the report's figures are wrong",
+     "To suggest that consumers asked for the report"
+    ],
+    "a": 1,
+    "exp": "The analysis was \"conducted by the consultancy Baringa on behalf of Wind Energy Ireland\" and described as \"commissioned by the wind industry\", which tells readers the sponsor benefits from the proposals. It was not written by the Government (A) or requested by consumers (D), and the writer does not claim the figures are wrong (C)."
+   }
+  ],
+  "2026-11-23-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "Robert Watt says the O'Connell Street regeneration will focus mainly on small apartments in converted vacant and derelict buildings, with a stronger role for the State.",
+     "Dublin City Council has sold the Carlton site to a private developer.",
+     "Architects unanimously support Watt's view that the city centre is unsuitable for families.",
+     "The MetroLink station on O'Connell Street has been cancelled."
+    ],
+    "a": 0,
+    "exp": "Watt says the regeneration \"will predominantly consist of one- and two-bedroom apartments\", the company \"will prioritise the conversion of vacant and underutilised buildings\", and the State \"should adopt a more proactive role in land assembly\". Architects \"contested the assumption\" (C); no sale (B) or cancellation (D) is mentioned."
+   },
+   {
+    "type": "infer",
+    "q": "What does Watt's expectation about residents moving out imply about the planned homes?",
+    "opts": [
+     "They will be large family houses with gardens.",
+     "They will be reserved for retired people.",
+     "They are expected to suit mainly single people and couples rather than families with children.",
+     "They will be built only on the Carlton site."
+    ],
+    "a": 2,
+    "exp": "The homes will be \"one- and two-bedroom apartments\", and Watt \"anticipates that a considerable proportion of residents will relocate once they have children\" — implying they suit people without children. This contradicts (A); nothing mentions retirees (B), and the Carlton is only one example site (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes Watt's attitude to the current developer-led approach to large sites?",
+    "opts": [
+     "Strongly supportive",
+     "Neutral and uninterested",
+     "Amused",
+     "Critical"
+    ],
+    "a": 3,
+    "exp": "\"He criticised the prevailing developer-led approach to large sites, maintaining that the State should adopt a more proactive role\" — a clearly critical stance, not supportive (A), neutral (B) or amused (C)."
+   }
+  ]
+ }
+}

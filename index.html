@@ -638,6 +638,78 @@ u.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--accent
 .pg-game{display:flex;gap:12px;align-items:flex-start}
 .pg-ic{font-size:34px;line-height:1;flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:var(--accent-soft)}
 .pg-board{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}
+/* 五行字母牌 */
+:root{--fe-ink:#FFFFFF;--fe-felt:#E4ECE8;--fe-felt2:#F6FAF8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fe-ink:#141A22;--fe-felt:#16201D;--fe-felt2:#202D29}}
+:root[data-theme="dark"]{--fe-ink:#141A22;--fe-felt:#16201D;--fe-felt2:#202D29}
+.fe-opps{display:flex;gap:6px}
+.fe-opp{flex:1 1 0;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 8px;display:flex;flex-direction:column;gap:4px;transition:border-color .2s,box-shadow .2s}
+.fe-opp.on{border-color:var(--gorse);box-shadow:0 0 0 2px var(--gorse-soft)}
+.fe-on{display:flex;justify-content:space-between;gap:4px;font-size:12.5px}
+.fe-on b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.fe-on span{color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
+.fe-backs{display:flex;gap:2px;flex-wrap:wrap;min-height:14px}
+.fe-backs i{width:9px;height:13px;border-radius:3px;background:var(--accent);opacity:.75}
+.pg-full #pgFeTable{flex:1 1 auto;display:flex;min-height:150px}
+.fe-tw{position:relative;flex:1;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,var(--fe-felt2),var(--fe-felt) 72%);border:1px solid var(--line);border-radius:18px;min-height:0;overflow:hidden}
+.fe-svg{width:100%;height:100%;max-height:100%;display:block}
+.fe-arw{stroke:var(--muted);stroke-width:2;fill:none;opacity:.6}
+.fe-ahd{fill:var(--muted)}
+.fe-isl circle.base{fill:var(--card);stroke:var(--line);stroke-width:2;transition:fill .25s,stroke .25s}
+.fe-isl text{text-anchor:middle;dominant-baseline:central;font-family:var(--f-display)}
+.fe-isl .zh{font-size:15px;fill:var(--muted)}
+.fe-isl .zh.on{fill:var(--fe-ink);font-weight:700}
+.fe-isl .lt{font-size:34px;font-weight:800;fill:var(--fe-ink)}
+.fe-isl.lit circle.base{fill:var(--c);stroke:var(--ink);stroke-width:3}
+.fe-isl .hint{fill:none;stroke:var(--c);stroke-width:2;stroke-dasharray:5 5;opacity:0;transition:opacity .25s}
+.fe-isl.can .hint{opacity:.9}
+.fe-isl.can circle.base{stroke:var(--c)}
+.fe-isl.can .zh{fill:var(--c);font-weight:700}
+.fe-ct{text-anchor:middle;fill:var(--muted);font-size:13px;font-family:var(--f-ui)}
+.fe-ct.sm{font-size:12px}.fe-ct.xs{font-size:11px}
+.fe-fx{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:3}
+.fe-fxc{width:min(64%,230px);padding:14px 12px;border-radius:18px;background:var(--card);border:2px solid var(--gorse);box-shadow:0 0 0 6px var(--gorse-soft),0 16px 36px rgba(0,0,0,.35);text-align:center;display:flex;flex-direction:column;gap:4px;animation:fePop .32s cubic-bezier(.2,1.4,.4,1)}
+.fe-fxc.sh{border-color:var(--good);box-shadow:0 0 0 6px var(--good-soft),0 16px 36px rgba(0,0,0,.35)}
+.fe-fxc .ic{font-size:42px;line-height:1.1}
+.fe-fxc .nm{font:800 20px var(--f-display)}
+.fe-fxc .who{font-size:13px;font-weight:700;color:var(--accent)}
+.fe-fxc .ds{font-size:12px;color:var(--muted);line-height:1.4}
+@keyframes fePop{from{transform:scale(.4) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+.fe-st{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 10px;display:flex;flex-direction:column;gap:2px;font-size:12.5px;min-height:62px}
+.fe-st b{font-size:13.5px}
+.fe-ord{font-size:11.5px}
+.fe-tm{flex:none;font-weight:700;font-variant-numeric:tabular-nums}
+.fe-hh{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.fe-hand{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;min-height:74px;padding-top:8px}
+.fe-card{position:relative;width:48px;height:68px;border-radius:10px;border:2px solid rgba(0,0,0,.18);background:var(--c);color:var(--fe-ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;cursor:pointer;transition:transform .12s,box-shadow .12s,opacity .12s;touch-action:manipulation}
+.fe-card .l{font:800 26px/1 var(--f-display)}
+.fe-card .e{font-size:11px;font-weight:700;margin-top:3px}
+.fe-card.f{background:var(--card);color:var(--ink);border-color:var(--gorse)}
+.fe-card.f .l{font-size:20px}
+.fe-card.f .e{font-size:9.5px;line-height:1.1;text-align:center;padding:0 2px}
+.fe-card.dead{opacity:.42}
+.fe-card.play{box-shadow:0 0 0 3px var(--good)}
+.fe-card.sel{transform:translateY(-8px);box-shadow:0 0 0 3px var(--gorse)}
+.fe-card .ord{position:absolute;top:-8px;right:-8px;width:19px;height:19px;border-radius:50%;background:var(--gorse);color:#18221F;font:700 11px/19px var(--f-ui);text-align:center}
+.fe-bar{display:flex;gap:6px;margin-top:6px}
+.fe-bar .btn{flex:1 1 0;min-width:0;padding-inline:6px}
+.fe-sheet{position:fixed;left:0;right:0;bottom:0;z-index:30;max-width:640px;margin:0 auto;background:var(--card);border-top:1px solid var(--line);border-radius:18px 18px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.3);padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;max-height:75dvh;overflow-y:auto}
+.fe-sh-h{display:flex;align-items:center;gap:8px;font-size:17px}
+.fe-sh-ic{font-size:26px}
+.fe-sheet p{margin:0}
+.fe-row{display:flex;gap:6px;flex-wrap:wrap}
+.fe-elb{border:none;border-radius:10px;padding:8px 12px;background:var(--c);color:var(--fe-ink);font-weight:700;min-width:48px;cursor:pointer}
+.fe-elb.on{outline:3px solid var(--ink);outline-offset:1px}
+.fe-elb:disabled{opacity:.35}
+.fe-lg{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.fe-lg button{padding:6px 0;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:700 15px var(--f-display)}
+.fe-lg button.on{background:var(--gorse);color:#18221F}
+.fe-lg button:disabled{opacity:.3}
+.fe-rules{text-align:left;border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0}
+.fe-rules summary{cursor:pointer;font-weight:700}
+.fe-rules ul{padding-left:18px;margin:6px 0;line-height:1.6}
+.fe-bots{display:flex;gap:8px;justify-content:center;margin:6px 0}
+@media (prefers-reduced-motion:reduce){.fe-fxc{animation:none}}
 .pg-chip{display:flex;gap:6px;align-items:center;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px}
 .pg-chip.me{border-color:var(--accent);background:var(--accent-soft)}
 .pg-chip span{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent)}
@@ -4124,7 +4196,7 @@ function devStatsHtml(){
     <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
     <div class="eyebrow">🎮 ${T("dsGames")}</div>
-    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["spy","syName"],["root","rtName"],["duel","duName"],["draw","drName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
+    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["five","feName"],["spy","syName"],["root","rtName"],["duel","duName"],["draw","drName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
     ${devRetHtml(D.act)}
     ${devPushHtml(D.push)}
     <div class="eyebrow">${T("dsRegions")}</div>
@@ -4272,7 +4344,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.76";
+const APP_VERSION="2026.11.80";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4716,7 +4788,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.del){ remove(t.dataset.del); S.open=null; S.confirmDel=null; toast(T("removed")); return render(); }
   if(t.dataset.artid){ openArticle(t.dataset.artid); return; }
   const a=t.dataset.act;
-  if(a&&/^(pg|qz|du|dr|sy)/.test(a)) return pgAct(a,t);
+  if(a&&/^(pg|qz|du|dr|sy|fe)/.test(a)) return pgAct(a,t);
   if(a==="close"){ S.sheet=null; return renderSheet(); }
   if(a==="lang"){ S.sheet=null; S.langSheet=true; return renderSheet(); }
   if(a==="closelang"){ S.langSheet=false; return renderSheet(); }
@@ -5360,7 +5432,7 @@ const PG_LOCAL_FS={ setDoc:async(r,d,opt)=>pgLocalApply(r.path,JSON.parse(JSON.s
   deleteDoc:async()=>{}, deleteField:()=>undefined,
   runTransaction:async(db,fn)=>fn({get:async r=>{ const parts=r.path.split("/"); const d=parts.length<=2?S.pg.party:S.pg.ps[parts[3]]; return {exists:()=>!!d, data:()=>JSON.parse(JSON.stringify(d||{}))}; }, update:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"update"), set:(r,d)=>pgLocalApply(r.path,JSON.parse(JSON.stringify(d)),"set")}) };
 function pgBotRoom(kind){ if(!DEV) return; pgStop(); const s=stats(), now=Date.now(), j=x=>Math.round(x*(0.9+Math.random()*0.2));
-  S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:kind==="root"?3:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖"}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
+  S.pg={code:"BOT", local:true, party:{host:"me", game:kind, state:"wait", created:now, rr:kind==="root"?3:1, players:{me:pgNameLocal(), [PG_BOT]:"BinBot 🤖", ...(kind==="five"?{bot2:"BinBot 2 🤖", bot3:"BinBot 3 🤖"}:{})}}, ps:{me:{n:pgNameLocal()}, [PG_BOT]:{n:"BinBot 🤖", look:"f|||||", st:{hp:j(s.hp), atk:j(s.atk), def:j(s.def)}}}, subbed:{}, unsubs:[], L:null, bot:{}};
   if(kind==="spy") syBotSeat();
   pgLoadWords(); pgRender(true); }
 const pgNameLocal=()=>(game().nick||"Player").slice(0,16);
@@ -5409,7 +5481,7 @@ async function pgJoin(code){
     const inRoom=d.players&&d.players[pgMe()];
     if(!inRoom){
       if(d.state!=="wait"){ S.pgBusy=null; pgRender(); return toast(T("pgStarted")); }
-      if(Object.keys(d.players||{}).length>=(d.game==="duel"?2:PG.max)){ S.pgBusy=null; pgRender(); return toast(T(d.game==="duel"?"duFull":"pgFull")); }
+      if(Object.keys(d.players||{}).length>=(d.game==="duel"?2:d.game==="five"?FV.max:PG.max)){ S.pgBusy=null; pgRender(); return toast(T(d.game==="duel"?"duFull":"pgFull")); }
       await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
       await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
     }
@@ -5446,7 +5518,7 @@ async function pgLeave(){
 async function pgStartGame(){
   const pg=S.pg; if(!pg||!pg.party||pg.party.host!==pgMe()||pg.party.state!=="wait") return;
   if(pg.party.game==="duel"&&Object.keys(pg.party.players||{}).length!==2) return toast(T("duNeed2"));
-  if((pg.party.game==="draw"||pg.party.game==="root")&&Object.keys(pg.party.players||{}).length<2) return toast(T("drNeed2"));
+  if((pg.party.game==="draw"||pg.party.game==="root"||pg.party.game==="five")&&Object.keys(pg.party.players||{}).length<2) return toast(T("drNeed2"));
   if(pg.party.game==="spy"&&Object.keys(pg.party.players||{}).length<SY.min) return toast(T("syNeed4"));
   const fsM=pgFs(); const P=pg.party, up={state:"play", start:Date.now()+3500, seed:String(Math.floor(Math.random()*1e9))};
   if(P.game==="spell"){
@@ -5474,6 +5546,7 @@ async function pgStartGame(){
     const Q=lib.p[Math.floor(Math.random()*lib.p.length)], sw=Math.random()<0.5;
     up.sy=sw?{a:Q.b, b:Q.a, s:Q.s, a1:Q.b1, b1:Q.a1}:{a:Q.a, b:Q.b, s:Q.s, a1:Q.a1, b1:Q.b1};
     up.spy=ids[Math.floor(Math.random()*ids.length)]; up.order=pgShuffle([...ids]); up.rr=P.rr||6; up.cur={r:0, ph:"say", t:0, ts:up.start}; }
+  if(P.game==="five") Object.assign(up, feInit(P));
   if(P.game==="hunt"){ const h=await huInit(P, up); if(!h.hu) return toast(T("loading")); Object.assign(up, h); }
   try{ await fsM.updateDoc(pgRef(pg.code),up); }catch(e){ toast(T("syncFail")); }
 }
@@ -5483,7 +5556,7 @@ function pgTickStart(){ if(S.pgTimer) return; S.pgTimer=setInterval(pgTick,250);
 function pgTick(){
   const pg=S.pg; if(!pg||!pg.party){ clearInterval(S.pgTimer); S.pgTimer=null; return; }
   const P=pg.party; if(P.state!=="play"){ if(P.state==="done"){ clearInterval(S.pgTimer); S.pgTimer=null; } return; }
-  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick, draw:drTick, root:rtTick, spy:syTick}[P.game]||pgDropTick)();
+  ({spell:pgSpellTick, drop:pgDropTick, bomb:bmTick, quiz:qzTick, hunt:huTick, duel:duTick, draw:drTick, root:rtTick, spy:syTick, five:feTick}[P.game]||pgDropTick)();
   if(pg.local) botTick();
   pgRender();
 }
@@ -6086,6 +6159,7 @@ function pgRows(){
   if(P.game==="draw") return drRows();
   if(P.game==="root") return rtRows();
   if(P.game==="spy") return syRows();
+  if(P.game==="five") return feRows();
   if(P.game==="quiz") return ids.map(u=>{ const p=u===pgMe()&&pg.Q?pg.Q:(pg.ps[u]||{}), gold=Math.round(p.gold||0), ok=p.ok||0, ng=p.ng||0; return {u, gold, ok, ng, best:p.best||0, acc:ok+ng?Math.round(ok/(ok+ng)*100):0, miss:p.miss||[], score:Math.min(120,Math.round(gold/25))}; }).sort((a,b)=>b.gold-a.gold||b.acc-a.acc);
   return ids.map(u=>{ const p=u===pgMe()&&pg.L?{words:pg.L.words,bad:pg.L.bad,pts:pg.L.pts,last:pg.L.last}:(pg.ps[u]||{}); return {u, words:p.words||[], bad:p.bad||[], score:p.pts||0, n:(p.words||[]).length}; }).sort((a,b)=>b.n-a.n||b.score-a.score);
 }
@@ -6096,7 +6170,7 @@ function pgFinish(){
   if(pg.local){ pg.reward={none:true, bot:true}; return; }
   const g=game(); g.partyDone=g.partyDone||{}; const key=pg.code+"-"+P.created; if(g.partyDone[key]) return;
   trackPlay(P.game); if(Object.keys(P.players).length<2) { g.partyDone[key]=1; saveGame(); }
-  const n=Object.keys(P.players).length; if(n<2){ pg.reward={none:true}; return; }
+  const n=Object.keys(P.players).filter(u=>!/^bot\d*$/.test(u)).length; if(n<2){ pg.reward={none:true}; return; }
   const rows=pgRows(), rank=rows.findIndex(r=>r.u===pgMe()), r=rows[rank]||{score:0};
   const mc=mpCount(), paid=mc.n<MP_DAILY; mc.n++;
   const gold=paid?5+Math.min(15,Math.round(r.score/6))+([10,6,3][rank]||0):0, exp=paid?3+(rank===0?3:0):0;
@@ -6106,7 +6180,7 @@ function pgFinish(){
 }
 function pgConfetti(){ const cs=["#F0BE45","#E0457B","#2563C9","#2E8B57","#7B3FC4","#E3A16B"]; return `<div class="confetti" aria-hidden="true">${Array.from({length:36},(_,k)=>`<i style="left:${(k*37)%100}%;background:${cs[k%cs.length]};animation-delay:${(k%12)*0.18}s;animation-duration:${2.4+(k%5)*0.35}s"></i>`).join("")}</div>`; }
 function pgPodium(rows){
-  const gm=S.pg.party.game, lab=r=>gm==="draw"||gm==="root"||gm==="spy"?T("pgPtsN",{n:r.score}):gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
+  const gm=S.pg.party.game, lab=r=>gm==="five"?(r.win?"🏆 "+T("feLeftN",{n:0}):T("feLeftN",{n:r.left})):gm==="draw"||gm==="root"||gm==="spy"?T("pgPtsN",{n:r.score}):gm==="duel"?(r.win?"🏆 ":"")+"❤️ "+Math.round(r.hp)+"/"+r.max:gm==="hunt"?"🔍 "+r.n:gm==="spell"?T("pgPtsN",{n:r.score}):gm==="quiz"?"🪙 "+r.gold:gm==="bomb"?(r.alive?"🏆 "+T("bmSurvive"):T("pgWordsN",{n:r.n})):T("pgWordsN",{n:r.n});
   const slot=(r,place)=>r?`<div class="pd-col p${place}"><div class="pd-medal">${["🥇","🥈","🥉"][place-1]}</div><div class="pd-name ${r.u===pgMe()?"me":""}">${esc(pgNm(r.u))}${supB(r.u,18)}</div><div class="pd-score">${lab(r)}</div><div class="pd-block">${place}</div></div>`:`<div class="pd-col p${place} empty"><div class="pd-block">${place}</div></div>`;
   return `<div class="podium">${pgConfetti()}${slot(rows[1],2)}${slot(rows[0],1)}${slot(rows[2],3)}</div>`;
 }
@@ -6125,6 +6199,8 @@ function pgResults(){
     ({stats, extra}=syResults(rows));
   } else if(P.game==="root"){
     ({stats, extra}=rtResults(rows));
+  } else if(P.game==="five"){
+    ({stats, extra}=feResults(rows));
   } else if(P.game==="duel"){
     pgLoadMean().then(()=>{ if(!pg.meanDone){ pg.meanDone=1; pgRender(true); } });
     ({stats, extra}=duResults(rows));
@@ -6504,34 +6580,440 @@ function rtResults(rows){ const tot=rtTotal();
       ${more.length?`<div class="muted sm-t">${T("rtMore")}${LANG==="zh"?"：":": "}${more.map(e=>`${esc(e[0])}${rtExTr(e)?` ${esc(rtExTr(e))}`:""}`).join(LANG==="zh"?"、":", ")}</div>`:""}</div></div>`; }).join("")}</div>`;
   return {stats, extra}; }
 
+const FE=(function(){ const root={};
+  const ELS = ['metal', 'wood', 'water', 'fire', 'earth'];
+  // X 剋 Y : 金剋木 木剋土 土剋水 水剋火 火剋金
+  const BEATS = { metal: 'wood', wood: 'earth', earth: 'water', water: 'fire', fire: 'metal' };
+  const COUNTER = {}; for (const k in BEATS) COUNTER[BEATS[k]] = k; // who beats X
+  const FUNCS = ['drone', 'convert', 'bomb', 'shift', 'vortex', 'seal', 'reverse', 'sheng', 'portal', 'shield'];
+  // 相生: 木生火 火生土 土生金 金生水 水生木
+  const CHILD = { wood: 'fire', fire: 'earth', earth: 'metal', metal: 'water', water: 'wood' };
+  const L = i => String.fromCharCode(97 + i);
+
+  function defaults() {
+    return {
+      players: 4, hand: 5, max: 7, funcEach: 2, funcSet: 'all',
+      chain: 'mixed',         // 'any' 任意遞增, 'straight' 多張必須連號, 'mixed' 同元素可跳號、換元素只能+1
+      zMode: 'open',           // 'open' = 出z後桌面清空給下一位, 'again' = 出z者再出一次
+      droneMode: 'fair',       // 'raw' = 對手各炸一張(會幫對手), 'fair' = 炸一張補兩張
+      shiftMax: 26,            // 字母位移最多移幾格
+      funcAlone: true,         // 沒字母可出時能否只用功能牌
+      maxPer: 99,              // 每回合最多幾張字母牌
+      startFlip: false,        // 開局翻一張牌當桌面
+      seed: 1,
+    };
+  }
+
+  function rng(seed) { let s = seed >>> 0 || 1; return () => { s ^= s << 13; s >>>= 0; s ^= s >> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; }; }
+
+  function newGame(opt) {
+    const o = Object.assign(defaults(), opt || {});
+    const R = rng(o.seed);
+    let id = 0, deck = [];
+    for (const el of ELS) for (let i = 0; i < 26; i++) deck.push({ id: id++, t: 'L', el, n: i });
+    for (const f of (o.funcSet === 'old' ? FUNCS.slice(0, 5) : FUNCS)) for (let k = 0; k < o.funcEach; k++) deck.push({ id: id++, t: 'F', f });
+    shuffle(deck, R);
+    const g = { o, R, deck, discard: [], players: [], table: null, turn: 0, dir: 1, sealed: {}, sheng: false, lastPlayer: -1, passes: 0, winner: -1, log: [], turns: 0, stats: { resets: 0, zResets: 0, funcs: {}, forcedDraws: 0, capBlocked: 0 } };
+    for (let p = 0; p < o.players; p++) g.players.push({ hand: [] });
+    for (let k = 0; k < o.hand; k++) for (const p of g.players) p.hand.push(draw(g));
+    if (o.startFlip) { let c; do { c = draw(g); g.discard.push(c); } while (c.t !== 'L' || c.n > 12); g.table = { el: c.el, n: c.n }; g.lastPlayer = o.players - 1; }
+    return g;
+  }
+  function shuffle(a, R) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } }
+  function draw(g) {
+    if (!g.deck.length) { g.deck = g.discard; g.discard = []; shuffle(g.deck, g.R); }
+    return g.deck.pop() || null;
+  }
+  function give(g, p, n) { const P = g.players[p]; let c = 0; while (n-- > 0 && P.hand.length < g.o.max) { const d = draw(g); if (!d) break; P.hand.push(d); c++; } return c; }
+
+  // can card c follow "prev" ({el,n}) ; prev null = open table
+  function follows(prev, c, straight, gen) {
+    if (c.t !== 'L') return false;
+    if (!prev) return true;
+    const need1 = straight === true || (straight === 'mixed' && c.el !== prev.el);
+    if (need1 ? c.n !== prev.n + 1 : c.n <= prev.n) return false;
+    return c.el === prev.el || c.el === COUNTER[prev.el] || (gen && c.el === CHILD[prev.el]);
+  }
+  function canStart(g, c) { return follows(g.table, c, false, g.sheng); }
+  // validate a sequence of letter cards for this turn
+  function validSeq(g, seq) {
+    if (!seq.length || seq.length > g.o.maxPer) return false;
+    let prev = g.table;
+    for (let i = 0; i < seq.length; i++) {
+      const straight = i > 0 && (g.o.chain === 'straight' || (g.o.chain === 'mixed' && 'mixed'));
+      if (!follows(prev, seq[i], straight, g.sheng)) return false;
+      prev = seq[i];
+      if (seq[i].n === 25 && i < seq.length - 1) return false; // z ends the run
+    }
+    return true;
+  }
+  function hasPlayable(g, p) { return g.players[p].hand.some(c => canStart(g, c)); }
+
+  // longest valid run from hand (DFS) -> array of cards
+  function bestRun(g, p, prefer) {
+    const hand = g.players[p].hand.filter(c => c.t === 'L');
+    let best = [];
+    const used = new Set();
+    function dfs(prev, path, first) {
+      if (score(path) > score(best)) best = path.slice();
+      if (path.length && path[path.length - 1].n === 25) return;
+      if (path.length >= g.o.maxPer) return;
+      for (const c of hand) {
+        if (used.has(c.id)) continue;
+        const straight = !first && (g.o.chain === 'straight' || (g.o.chain === 'mixed' && 'mixed'));
+        if (!follows(prev, c, straight, g.sheng)) continue;
+        used.add(c.id); path.push(c); dfs(c, path, false); path.pop(); used.delete(c.id);
+      }
+    }
+    function score(path) { if (!path.length) return -1; return path.length * 100 - path[path.length - 1].n - (prefer === 'high' ? -2 * path[0].n : path[0].n); }
+    dfs(g.table, [], true);
+    return best;
+  }
+
+  function removeCards(g, p, cards) { const ids = new Set(cards.map(c => c.id)); const P = g.players[p]; P.hand = P.hand.filter(c => !ids.has(c.id)); }
+
+  // ---- function cards ----
+  function shielded(g, q) {
+    const H = g.players[q].hand; const k = H.findIndex(c => c.t === 'F' && c.f === 'shield');
+    if (k < 0) return false;
+    g.discard.push(H.splice(k, 1)[0]); g.log.push({ p: q, kind: 'shield' }); g.stats.funcs.shieldBlock = (g.stats.funcs.shieldBlock || 0) + 1;
+    return true;
+  }
+  function nextOf(g, p) { return (p + g.dir + g.o.players) % g.o.players; }
+  function useFunc(g, p, card, arg) {
+    const o = g.o; arg = arg || {};
+    const P = g.players[p];
+    if (!card || card.t !== 'F' || !P.hand.some(c => c.id === card.id)) return '';
+    removeCards(g, p, [card]); g.discard.push(card);
+    g.stats.funcs[card.f] = (g.stats.funcs[card.f] || 0) + 1;
+    const opp = g.players.map((_, i) => i).filter(i => i !== p);
+    let msg = '';
+    if (card.f === 'drone') {
+      for (const q of opp) {
+        const H = g.players[q].hand; if (!H.length) continue;
+        if (shielded(g, q)) continue;
+        const k = Math.floor(g.R() * H.length); g.discard.push(H.splice(k, 1)[0]);
+        if (o.droneMode === 'fair') give(g, q, 2);
+      }
+      msg = o.droneMode === 'fair' ? '無人機：每位對手被炸掉1張，再補抽2張' : '無人機：每位對手被炸掉1張';
+    } else if (card.f === 'convert') {
+      const c = P.hand.find(x => x.id === arg.cardId); if (c && c.t === 'L') { c.el = arg.el; msg = '元素轉換器：' + L(c.n) + ' 變成 ' + arg.el; }
+    } else if (card.f === 'bomb') {
+      const q = arg.target != null ? arg.target : opp[Math.floor(g.R() * opp.length)];
+      if (!shielded(g, q)) for (const c of g.players[q].hand) if (c.t === 'L') c.el = ELS[Math.floor(g.R() * 5)];
+      msg = '元素炸彈：玩家' + (q + 1) + '的字母牌全部隨機換元素'; arg.target = q;
+    } else if (card.f === 'shift') {
+      if (g.table) { let n = Math.max(0, Math.min(25, arg.n)); const d = n - g.table.n; if (Math.abs(d) > o.shiftMax) n = g.table.n + Math.sign(d) * o.shiftMax; g.table = { el: g.table.el, n }; msg = '字母位移：桌面變成 ' + L(n); }
+    } else if (card.f === 'vortex') {
+      if (g.table) { g.table = { el: arg.el, n: g.table.n }; msg = '元素漩渦：桌面元素變成 ' + arg.el; }
+    } else if (card.f === 'seal') {
+      const q = arg.target != null ? arg.target : nextOf(g, p); arg.target = q;
+      if (shielded(g, q)) msg = '封印：被玩家' + (q + 1) + '的護盾擋下';
+      else { g.sealed[q] = true; msg = '封印：玩家' + (q + 1) + '下一回合不能出牌'; }
+    } else if (card.f === 'reverse') {
+      g.dir = -g.dir; msg = '迴轉：出牌順序反過來';
+    } else if (card.f === 'sheng') {
+      g.sheng = true; msg = '相生：這回合也可以接桌面「生」出來的元素';
+    } else if (card.f === 'portal') {
+      const q = arg.target; const c = P.hand.find(x => x.id === arg.cardId);
+      if (q != null && c) {
+        arg.target = q;
+        if (shielded(g, q)) msg = '傳送門：被玩家' + (q + 1) + '的護盾擋下';
+        else if (g.players[q].hand.length >= o.max) msg = '傳送門：玩家' + (q + 1) + '手牌滿了，傳不過去';
+        else { removeCards(g, p, [c]); g.players[q].hand.push(c); msg = '傳送門：送 1 張牌給玩家' + (q + 1); }
+      }
+    } else if (card.f === 'shield') {
+      msg = '護盾：收起來了';
+    }
+    g.log.push({ p, kind: 'func', f: card.f, msg, arg });
+    return msg;
+  }
+
+  // ---- play letters & end turn ----
+  function playLetters(g, p, seq) {
+    if (!validSeq(g, seq)) return false;
+    removeCards(g, p, seq); for (const c of seq) g.discard.push(c);
+    const last = seq[seq.length - 1];
+    g.table = { el: last.el, n: last.n };
+    g.lastPlayer = p; g.passes = 0;
+    g.log.push({ p, kind: 'play', cards: seq.map(c => ({ el: c.el, n: c.n })) });
+    if (!g.players[p].hand.length) { g.winner = p; return true; }
+    if (last.n === 25) { g.stats.zResets++; g.table = null; g.log.push({ p, kind: 'reset', why: 'z' }); if (g.o.zMode === 'again') g.again = true; }
+    return true;
+  }
+  function pass(g, p) {
+    const got = give(g, p, 1);
+    if (!got) g.stats.capBlocked++;
+    g.stats.forcedDraws++;
+    g.passes++;
+    g.log.push({ p, kind: 'pass', drew: got });
+    // everyone else passed since last play -> table opens for the last player
+    if (g.table && g.lastPlayer >= 0 && g.passes >= g.o.players - 1) { g.table = null; g.stats.resets++; g.log.push({ p, kind: 'reset', why: 'allpass' }); g.passes = 0; }
+    else if (g.table === null && g.passes >= g.o.players) { g.passes = 0; }
+  }
+  function endTurn(g) {
+    if (g.winner >= 0) return;
+    g.turns++;
+    g.sheng = false;
+    if (g.again) { g.again = false; return; }
+    g.turn = nextOf(g, g.turn);
+    let guard = 0;
+    while (g.sealed[g.turn] && guard++ < 10) {
+      delete g.sealed[g.turn]; g.log.push({ p: g.turn, kind: 'sealed' });
+      pass(g, g.turn); g.turns++; g.turn = nextOf(g, g.turn);
+    }
+  }
+
+  // ---- bot ----
+  function botTurn(g, p, level) {
+    const P = g.players[p]; const out = [];
+    const opp = g.players.map((_, i) => i).filter(i => i !== p);
+    const minOpp = Math.min(...opp.map(i => g.players[i].hand.length));
+    const funcs = () => P.hand.filter(c => c.t === 'F');
+    // 1) try to make a play possible / better with vortex/convert/shift
+    let run = bestRun(g, p);
+    const tryImprove = () => {
+      if (!g.table) return;
+      for (const fc of funcs()) {
+        if (fc.f === 'vortex') {
+          let bestEl = null, bl = run.length;
+          for (const el of ELS) { const save = g.table; g.table = { el, n: save.n }; const r = bestRun(g, p); g.table = save; if (r.length > bl) { bl = r.length; bestEl = el; } }
+          if (bestEl) { out.push(useFunc(g, p, fc, { el: bestEl })); run = bestRun(g, p); return true; }
+        }
+        if (fc.f === 'sheng' && !g.sheng) {
+          g.sheng = true; const r = bestRun(g, p); g.sheng = false;
+          if (r.length > run.length) { out.push(useFunc(g, p, fc)); run = bestRun(g, p); return true; }
+        }
+        if (fc.f === 'shift' && run.length === 0) {
+          // move table down so lowest same/counter card is playable
+          const ok = P.hand.filter(c => c.t === 'L' && (c.el === g.table.el || c.el === COUNTER[g.table.el]));
+          if (ok.length) { const lo = Math.min(...ok.map(c => c.n)); if (lo > 0) { out.push(useFunc(g, p, fc, { n: lo - 1 })); run = bestRun(g, p); return true; } }
+        }
+        if (fc.f === 'convert' && run.length === 0) {
+          const higher = P.hand.filter(c => c.t === 'L' && c.n > g.table.n);
+          if (higher.length) { const c = higher.sort((a, b) => a.n - b.n)[0]; out.push(useFunc(g, p, fc, { cardId: c.id, el: g.table.el })); run = bestRun(g, p); return true; }
+        }
+      }
+      return false;
+    };
+    let guard = 0; while (run.length === 0 && guard++ < 3 && tryImprove());
+    if (run.length && level !== 'easy') tryImprove();
+    // 2) attack: drone/bomb when someone is close to winning
+    for (const fc of funcs()) {
+      if (fc.f === 'drone' && (g.o.droneMode === 'fair' ? minOpp <= 3 : false)) out.push(useFunc(g, p, fc));
+      else if (fc.f === 'bomb' && minOpp <= 3) { const q = opp.sort((a, b) => g.players[a].hand.length - g.players[b].hand.length)[0]; out.push(useFunc(g, p, fc, { target: q })); }
+    }
+    const nx = nextOf(g, p), pv = (p - g.dir + g.o.players) % g.o.players;
+    for (const fc of funcs()) {
+      if (fc.f === 'seal' && g.players[nx].hand.length <= 3) out.push(useFunc(g, p, fc, { target: nx }));
+      else if (fc.f === 'reverse' && g.o.players > 2 && g.players[nx].hand.length <= 2 && g.players[pv].hand.length > g.players[nx].hand.length) out.push(useFunc(g, p, fc));
+    }
+    // portal: give away a card we can't use this turn to the opponent with most cards
+    run = bestRun(g, p);
+    for (const fc of funcs()) {
+      if (fc.f !== 'portal') continue;
+      const inRun = new Set(run.map(c => c.id));
+      const junk = P.hand.filter(c => !inRun.has(c.id) && c.id !== fc.id && !(c.t === 'F' && c.f === 'shield')).sort((a, b) => (b.n || 0) - (a.n || 0))[0];
+      const tq = opp.filter(i => g.players[i].hand.length < g.o.max).sort((a, b) => g.players[b].hand.length - g.players[a].hand.length)[0];
+      if (junk && tq != null) out.push(useFunc(g, p, fc, { cardId: junk.id, target: tq }));
+    }
+    run = bestRun(g, p);
+    if (run.length) {
+      playLetters(g, p, run);
+      if (g.winner < 0 && g.o.funcAlone) {
+        // if only function cards remain, use them to finish
+        const onlyF = P.hand.length && P.hand.every(c => c.t === 'F');
+        if (onlyF) { for (const fc of funcs()) { useFunc(g, p, fc, defaultArg(g, p, fc)); } if (!P.hand.length) g.winner = p; }
+      }
+    } else {
+      if (g.o.funcAlone && funcs().length && P.hand.length >= g.o.max) { const fc = funcs()[0]; out.push(useFunc(g, p, fc, defaultArg(g, p, fc))); }
+      if (!P.hand.length) g.winner = p; else pass(g, p);
+    }
+    endTurn(g);
+    return out;
+  }
+  function defaultArg(g, p, fc) {
+    if (fc.f === 'convert') { const c = g.players[p].hand.find(x => x.t === 'L'); return c ? { cardId: c.id, el: c.el } : {}; }
+    if (fc.f === 'shift') return { n: g.table ? Math.min(25, g.table.n + 5) : 0 };
+    if (fc.f === 'vortex') return { el: ELS[Math.floor(g.R() * 5)] };
+    if (fc.f === 'seal') return { target: nextOf(g, p) };
+    if (fc.f === 'portal') { const c = g.players[p].hand.find(x => x.id !== fc.id); const opp = g.players.map((_, i) => i).filter(i => i !== p && g.players[i].hand.length < g.o.max); return c && opp.length ? { cardId: c.id, target: opp[0] } : {}; }
+    return {};
+  }
+
+  root.ELG = { ELS, BEATS, COUNTER, CHILD, FUNCS, nextOf, L, newGame, defaults, follows, canStart, validSeq, hasPlayable, bestRun, playLetters, pass, endTurn, useFunc, botTurn, give, removeCards };
+  return root.ELG;
+})();
+
+/* ----- 五行字母牌 (game key "five"): turn-based cards; the whole game state lives in the party doc (eg), every move is one transaction ----- */
+const FV={max:5, botDelay:1300, fxMs:1600, idle:45000, take:12000};
+const FE_IC={drone:"🛸",convert:"🔄",bomb:"💥",shift:"↕️",vortex:"🌀",seal:"🔒",reverse:"🔁",sheng:"🌱",portal:"🚪",shield:"🛡️"};
+const FE_RING=["metal","wood","earth","water","fire"];   // around the ring each one 剋 the next
+const feIsBot=u=>/^bot\d*$/.test(u||"");
+const feEl=e=>T("feE_"+e);
+function fePack(g){ return JSON.parse(JSON.stringify({o:g.o, deck:g.deck, discard:g.discard, players:g.players.map(p=>({hand:p.hand})), table:g.table, turn:g.turn, dir:g.dir||1, sealed:g.sealed||{}, sheng:!!g.sheng, lastPlayer:g.lastPlayer, passes:g.passes, winner:g.winner, turns:g.turns})); }
+function feUnpack(d){ const g=JSON.parse(JSON.stringify(d||{})); g.R=Math.random; g.log=[]; g.stats={resets:0,zResets:0,funcs:{},forcedDraws:0,capBlocked:0};
+  g.players=(g.players||[]).map(p=>({hand:p.hand||[]})); g.sealed=g.sealed||{}; g.deck=g.deck||[]; g.discard=g.discard||[]; g.dir=g.dir||1; if(g.table===undefined) g.table=null; return g; }
+function feG(){ const pg=S.pg, P=pg.party; if(!pg.feC||pg.feC.s!==P.eseq||pg.feC.eg!==P.eg) pg.feC={s:P.eseq, eg:P.eg, g:feUnpack(P.eg)}; return pg.feC.g; }
+const feOrd=()=>S.pg.party.ord||[];
+const feMeI=()=>feOrd().indexOf(pgMe());
+function feInit(P){ const ids=Object.keys(P.players||{}), ord=pgShuffle([...ids]);
+  const g=FE.newGame({players:ord.length, chain:"mixed", startFlip:true, droneMode:"fair", seed:Math.floor(Math.random()*1e9)}); g.turn=0; g.lastPlayer=ord.length-1;
+  return {eg:fePack(g), ord, eseq:1, elog:[{s:1, kind:"start", t:Date.now(), table:g.table}]}; }
+function feOut(d,g){ let s=d.eseq||0; const now=Date.now(); const add=g.log.map(({msg,...e})=>({...e, s:++s, t:now}));
+  const out={eg:fePack(g), eseq:s, elog:JSON.parse(JSON.stringify([...(d.elog||[]), ...add].slice(-30)))};
+  if(g.turns!==(d.eg||{}).turns) out.ets=now;
+  if(g.winner>=0){ out.state="done"; out.end=now; out.ewin=(d.ord||[])[g.winner]; }
+  return out; }
+// run one move against the latest state; fn(g,d) returns true when it changed something
+async function feDo(fn){ const pg=S.pg; if(!pg||!pg.party||pg.feBusy) return false; pg.feBusy=1; let ok=false;
+  try{ await pgFs().runTransaction(CLOUD.fb&&CLOUD.fb.db, async tx=>{ ok=false; const ref=pgRef(pg.code), s=await tx.get(ref); const d=s.exists()?s.data():null;
+      if(!d||d.state!=="play"||!d.eg) return; const g=feUnpack(d.eg); if(!fn(g,d)) return; ok=true; tx.update(ref, feOut(d,g)); }); }
+  catch(e){ pg.feAuto=null; toast(T("syncFail")); }
+  if(S.pg===pg) pg.feBusy=0; pgRender(); return ok; }
+function fePlay(){ const pg=S.pg, ids=(pg.feSel||[]).slice(); if(!ids.length) return; pg.feSel=[];
+  feDo((g,d)=>{ const me=(d.ord||[]).indexOf(pgMe()); if(me<0||g.turn!==me) return false; const H=g.players[me].hand, seq=ids.map(id=>H.find(c=>c.id===id));
+    if(seq.some(c=>!c)||!FE.playLetters(g,me,seq)) return false; FE.endTurn(g); return true; }).then(ok=>{ if(ok) sfx(660,0.12,"triangle",0.07,990); }); }
+function fePass(){ const pg=S.pg; pg.feSel=[];
+  feDo((g,d)=>{ const me=(d.ord||[]).indexOf(pgMe()); if(me<0||g.turn!==me||FE.hasPlayable(g,me)) return false; FE.pass(g,me); FE.endTurn(g); return true; }); }
+function feUse(id,arg){ const pg=S.pg; pg.feSel=[]; pg.feSheet=null;
+  feDo((g,d)=>{ const me=(d.ord||[]).indexOf(pgMe()); if(me<0||g.turn!==me) return false; const c=g.players[me].hand.find(x=>x.id===id);
+    if(!c||c.t!=="F") return false; FE.useFunc(g,me,c,{...arg}); if(!g.players[me].hand.length&&g.winner<0) g.winner=me; return true; }); }
+// bots move on the host's phone; a human who stays idle too long gets one automatic move; if the host has gone, anyone takes over a little later
+function feTick(){ const pg=S.pg, P=pg.party, now=Date.now(); if(now<P.start||!P.eg) return; feFxPump(now);
+  const u=feOrd()[P.eg.turn], host=P.host===pgMe(); if(!u) return;
+  const lastFx=Math.max(0,...(P.elog||[]).filter(e=>e.kind==="func"||e.kind==="shield").map(e=>e.t||0));
+  const due=feIsBot(u)?Math.max(P.ets||P.start, lastFx+FV.fxMs)+FV.botDelay:(P.ets||P.start)+FV.idle;
+  if(now>=due&&(host||now>=due+FV.take)&&pg.feAuto!==P.eseq){ pg.feAuto=P.eseq; const seq=P.eseq;
+    feDo((g,d)=>{ if(d.eseq!==seq) return false; FE.botTurn(g,g.turn); return true; }); } }
+// the big card in the middle of the table whenever anyone uses a function card
+function feFxPump(now){ const pg=S.pg, P=pg.party, L=P.elog||[]; if(pg.feSeen==null){ pg.feSeen=P.eseq||0; return; }
+  if(pg.feFx&&now<pg.feFx.until) return; pg.feFx=null;
+  for(const e of L){ if(e.s<=pg.feSeen) continue; pg.feSeen=e.s; if(e.kind==="func"||e.kind==="shield"){ pg.feFx={e, until:now+FV.fxMs}; sfx(520,0.16,"triangle",0.06,780); break; } } }
+function feName(i){ const u=feOrd()[i]; return u?pgNm(u):"?"; }
+function feCardTxt(c){ return feEl(c.el)+" "+FE.L(c.n); }
+function feDetail(e){ const a=e.arg||{};
+  if(e.f==="bomb"||e.f==="seal"||e.f==="portal") return a.target!=null?"🎯 "+esc(feName(a.target)):"";
+  if(e.f==="shift"&&a.n!=null) return "→ "+FE.L(Math.max(0,Math.min(25,a.n)));
+  if((e.f==="vortex"||e.f==="convert")&&a.el) return "→ "+esc(feEl(a.el));
+  return ""; }
+function feLogTxt(e){ const n=esc(feName(e.p));
+  if(e.kind==="start") return T("feLogStart",{c:e.table?esc(feCardTxt(e.table)):"–"});
+  if(e.kind==="play") return T("feLogPlay",{n, c:(e.cards||[]).map(c=>esc(feCardTxt(c))).join(" → ")});
+  if(e.kind==="pass") return T(e.drew?"feLogPass":"feLogPassFull",{n});
+  if(e.kind==="sealed") return T("feLogSealed",{n});
+  if(e.kind==="shield") return T("feLogShield",{n});
+  if(e.kind==="func") return T("feLogFunc",{n, f:FE_IC[e.f]+" "+T("feF_"+e.f)})+(feDetail(e)?" "+feDetail(e):"");
+  if(e.kind==="reset") return e.why==="z"?T("feLogZ"):T("feLogAll");
+  return ""; }
+function feCanAdd(g,me,c){ const sel=S.pg.feSel||[], H=g.players[me].hand; if(c.t!=="L") return false; const seq=sel.map(id=>H.find(x=>x.id===id)).filter(Boolean); return FE.validSeq(g,[...seq,c]); }
+function feRing(g){ const t=g.table, allow=t?[t.el, FE.COUNTER[t.el]].concat(g.sheng?[FE.CHILD[t.el]]:[]):FE_RING;
+  const W=360,H=310,cx=180,cy=158,R=108,r=38, pos=FE_RING.map((el,i)=>{ const a=-Math.PI/2+i*2*Math.PI/5; return {el,x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)}; });
+  let s=`<svg viewBox="0 0 ${W} ${H}" class="fe-svg" role="img" aria-label="${esc(T("feName"))}"><defs><marker id="feAh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" class="fe-ahd"/></marker></defs>`;
+  for(let i=0;i<5;i++){ const a=pos[i], b=pos[(i+1)%5], dx=b.x-a.x, dy=b.y-a.y, d=Math.hypot(dx,dy), ux=dx/d, uy=dy/d;
+    s+=`<line class="fe-arw" x1="${(a.x+ux*(r+6)).toFixed(1)}" y1="${(a.y+uy*(r+6)).toFixed(1)}" x2="${(b.x-ux*(r+10)).toFixed(1)}" y2="${(b.y-uy*(r+10)).toFixed(1)}" marker-end="url(#feAh)"/>`; }
+  for(const p of pos){ const lit=t&&t.el===p.el, can=!!t&&!lit&&allow.includes(p.el);
+    s+=`<g class="fe-isl${lit?" lit":""}${can?" can":""}" style="--c:var(--${p.el})"><circle class="hint" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${r+7}"/><circle class="base" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${r}"/>`+
+      (lit?`<text class="lt" x="${p.x.toFixed(1)}" y="${(p.y-4).toFixed(1)}">${FE.L(t.n)}</text><text class="zh on" x="${p.x.toFixed(1)}" y="${(p.y+23).toFixed(1)}">${esc(feEl(p.el))}</text>`:`<text class="zh" x="${p.x.toFixed(1)}" y="${p.y.toFixed(1)}">${esc(feEl(p.el))}</text>`)+`</g>`; }
+  s+=`<text class="fe-ct" x="${cx}" y="${cy-8}">${t?esc(T("feNext",{a:FE.L(Math.min(25,t.n+1))})):esc(T("feOpen"))}</text><text class="fe-ct sm" x="${cx}" y="${cy+12}">${t?esc(allow.map(feEl).join(" / "))+(g.sheng?" 🌱":""):esc(T("feAny"))}</text>`;
+  s+=`<text class="fe-ct xs" x="22" y="${H-10}" text-anchor="start">${esc(T("feArrow"))}</text><text class="fe-ct xs" x="${W-22}" y="${H-10}" text-anchor="end">${esc(T("feDeck",{n:g.deck.length}))}</text>`;
+  return s+`</svg>`; }
+function feOrderTxt(g){ const a=[]; let p=g.turn; for(let k=0;k<g.o.players;k++){ a.push(esc(feName(p))); p=FE.nextOf(g,p); } return a.join(" → ")+(g.dir<0?" "+T("feRev"):""); }
+function feSheet(g,me){ const pg=S.pg, sh=pg.feSheet; if(!sh) return ""; const H=g.players[me].hand, fc=H.find(c=>c.id===sh.id); if(!fc||g.turn!==me){ pg.feSheet=null; return ""; }
+  const st=sh.st||{}, f=fc.f, opp=g.players.map((_,i)=>i).filter(i=>i!==me);
+  const elRow=(dis)=>`<div class="fe-row">${FE.ELS.map(el=>`<button class="fe-elb${st.el===el?" on":""}" style="--c:var(--${el})" data-act="fest" data-k="el:${el}" ${dis&&dis===el?"disabled":""}>${esc(feEl(el))}</button>`).join("")}</div>`;
+  const oppRow=(full)=>`<div class="fe-row">${opp.map(i=>`<button class="btn sm${st.t===i?"":" ghost"}" data-act="fest" data-k="t:${i}" ${full&&g.players[i].hand.length>=g.o.max?"disabled":""}>${esc(feName(i))} (${g.players[i].hand.length})</button>`).join("")}</div>`;
+  const cardRow=(list)=>`<div class="fe-row">${list.map(c=>c.t==="L"?`<button class="fe-elb${st.id===c.id?" on":""}" style="--c:var(--${c.el})" data-act="fest" data-k="id:${c.id}">${esc(feEl(c.el))} ${FE.L(c.n)}</button>`:`<button class="btn sm${st.id===c.id?"":" ghost"}" data-act="fest" data-k="id:${c.id}">${FE_IC[c.f]} ${esc(T("feF_"+c.f))}</button>`).join("")}</div>`;
+  let body="", ready=true;
+  if((f==="shift"||f==="vortex")&&!g.table){ body=`<p class="muted sm-t">${T("feNoTable")}</p>`; ready=false; }
+  else if(f==="bomb"||f==="seal"){ body=`<div class="sm-t">${T("fePickP")}</div>${oppRow(false)}`; ready=st.t!=null; }
+  else if(f==="portal"){ body=`<div class="sm-t">${T("fePickCard")}</div>${cardRow(H.filter(c=>c.id!==fc.id))}<div class="sm-t">${T("fePickP")}</div>${oppRow(true)}`; ready=st.id!=null&&st.t!=null; }
+  else if(f==="convert"){ body=`<div class="sm-t">${T("fePickCard")}</div>${cardRow(H.filter(c=>c.t==="L"))}<div class="sm-t">${T("fePickEl")}</div>${elRow()}`; ready=st.id!=null&&!!st.el; }
+  else if(f==="vortex"){ body=`<div class="sm-t">${T("fePickEl")}</div>${elRow(g.table.el)}`; ready=!!st.el&&st.el!==g.table.el; }
+  else if(f==="shift"){ body=`<div class="sm-t">${T("fePickL")}</div><div class="fe-lg">${Array.from({length:26},(_,i)=>`<button class="${st.n===i?"on":""}" data-act="fest" data-k="n:${i}" ${i===g.table.n?"disabled":""}>${FE.L(i)}</button>`).join("")}</div>`; ready=st.n!=null&&st.n!==g.table.n; }
+  else if(f==="sheng"&&g.sheng) ready=false;
+  return `<div class="fe-sheet"><div class="fe-sh-h"><span class="fe-sh-ic">${FE_IC[f]}</span><b>${T("feF_"+f)}</b></div><p class="sm-t">${T("feD_"+f)}</p>${body}
+    <div class="fe-row"><button class="btn" data-act="fego" ${ready?"":"disabled"}>${T(f==="shield"?"feDrop":"feGo")}</button><button class="btn ghost" data-act="feno">${T("feNo")}</button></div></div>`; }
+function feSections(){
+  const pg=S.pg, P=pg.party, now=Date.now();
+  if(now<P.start||!P.eg) return [["pgStage",`<div class="sp-wait"><div class="eyebrow">${T("pgGetReady")}</div><div class="sp-count">${Math.max(0,Math.ceil((P.start-now)/1000))}</div><p class="muted sm-t">${T("feSub")}</p></div>`]];
+  const g=feG(), me=feMeI(), mine=me>=0&&g.turn===me&&g.winner<0, H=me>=0?g.players[me].hand:[];
+  if(pg.feSel&&pg.feSel.some(id=>!H.find(c=>c.id===id))) pg.feSel=[];
+  if(!mine){ pg.feSel=[]; pg.feSheet=null; }
+  const seats=[]; for(let k=1;k<g.o.players;k++) seats.push(me<0?k-1:(me+k)%g.o.players);
+  const opp=`<div class="fe-opps">${seats.map(i=>`<div class="fe-opp${g.turn===i?" on":""}"><div class="fe-on"><b>${feIsBot(feOrd()[i])?"🤖 ":""}${esc(feName(i))}${g.sealed[i]?" 🔒":""}</b><span>${g.players[i].hand.length}/${g.o.max}</span></div><div class="fe-backs">${g.players[i].hand.map(()=>"<i></i>").join("")}</div></div>`).join("")}</div>`;
+  const F=pg.feFx&&now<pg.feFx.until?pg.feFx.e:null;
+  const fx=F?`<div class="fe-fx"><div class="fe-fxc${F.kind==="shield"?" sh":""}"><div class="ic">${FE_IC[F.kind==="shield"?"shield":F.f]}</div><div class="nm">${T(F.kind==="shield"?"feShieldOn":"feF_"+F.f)}</div><div class="who">${T(F.kind==="shield"?"feBlock":"feUse",{n:esc(feName(F.p))})}</div><div class="ds">${F.kind==="shield"?T("feShieldDs"):T("feD_"+F.f)}${F.kind==="func"&&feDetail(F)?`<br><b>${feDetail(F)}</b>`:""}</div></div></div>`:"";
+  const table=`<div class="fe-tw">${feRing(g)}${fx}</div>`;
+  const canPlay=me>=0&&FE.hasPlayable(g,me), sel=pg.feSel||[];
+  const left=Math.max(0,Math.ceil(((P.ets||P.start)+FV.idle-now)/1000));
+  const head=mine?(sel.length?T("feSel",{n:sel.length}):canPlay?T("feTurnMe"):T("feTurnNo")):T("feTurnOf",{n:esc(feName(g.turn))});
+  const logs=(P.elog||[]).slice(-3).reverse().map(e=>`<div class="muted">${feLogTxt(e)}</div>`).join("");
+  const status=`<div class="fe-st"><div class="row" style="justify-content:space-between;gap:6px"><b>${head}</b>${mine&&left<=20?`<span class="fe-tm${left<=8?" bad-t":""}">⏳ ${left}s</span>`:""}</div><div class="muted fe-ord">${T("feOrder",{s:feOrderTxt(g)})}</div>${logs}</div>`;
+  const sorted=H.slice().sort((a,b)=>a.t!==b.t?(a.t==="L"?-1:1):a.t==="L"?a.n-b.n||a.el.localeCompare(b.el):a.f.localeCompare(b.f));
+  const cards=sorted.map(c=>{ const k=sel.indexOf(c.id);
+    if(c.t==="L"){ const cls=!mine?"":k>=0?" sel":feCanAdd(g,me,c)?" play":" dead"; return `<button class="fe-card${cls}" style="--c:var(--${c.el})" data-act="fecard" data-k="${c.id}" aria-label="${esc(feCardTxt(c))}"><span class="l">${FE.L(c.n)}</span><span class="e">${esc(feEl(c.el))}</span>${k>=0?`<span class="ord">${k+1}</span>`:""}</button>`; }
+    return `<button class="fe-card f${mine?"":" dead"}" data-act="fecard" data-k="${c.id}" aria-label="${esc(T("feF_"+c.f))}"><span class="l">${FE_IC[c.f]}</span><span class="e">${esc(T("feF_"+c.f))}</span></button>`; }).join("");
+  const hand=`<div class="fe-hh"><span>${T("feHand")}</span><span>${T("feHandN",{n:H.length,m:g.o.max})}</span></div><div class="fe-hand">${cards}</div>
+    <div class="fe-bar"><button class="btn" data-act="feplay" ${mine&&sel.length&&!pg.feBusy?"":"disabled"}>${sel.length?T("fePlayN",{n:sel.length}):T("fePlay")}</button><button class="btn ghost" data-act="feclear" ${mine&&sel.length?"":"disabled"}>${T("feClear")}</button><button class="btn ghost" data-act="fepass" ${mine&&!canPlay&&!pg.feBusy?"":"disabled"}>${T(H.length>=g.o.max?"fePassFull":"fePass")}</button></div>`;
+  return [["pgFeOpp",opp],["pgFeTable",table],["pgFeSt",status],["pgFeHand",hand],["pgFeSheet",me>=0?feSheet(g,me):""]];
+}
+function feAct(a,t){ const pg=S.pg; if(!pg||!pg.party) return;
+  if(a==="feaddbot"||a==="fermbot"){ const P=pg.party; if(P.host!==pgMe()||P.state!=="wait") return; const ids=Object.keys(P.players||{}), bots=ids.filter(feIsBot);
+    if(a==="feaddbot"){ if(ids.length>=FV.max) return toast(T("pgFull")); let k=1, id; do{ id=k===1?PG_BOT:PG_BOT+k; k++; }while(ids.includes(id)); pgFs().updateDoc(pgRef(pg.code),{["players."+id]:T("feBotN",{n:bots.length+1})}).catch(()=>toast(T("syncFail"))); }
+    else if(bots.length) pgFs().updateDoc(pgRef(pg.code),{["players."+bots[bots.length-1]]:pgFs().deleteField()}).catch(()=>toast(T("syncFail")));
+    return; }
+  if(pg.party.state!=="play"||!pg.party.eg) return;
+  const g=feG(), me=feMeI(); if(me<0||g.turn!==me||g.winner>=0) return;
+  if(a==="fecard"){ const id=+t.dataset.k, c=g.players[me].hand.find(x=>x.id===id); if(!c) return;
+    if(c.t==="F"){ pg.feSheet={id, st:{}}; return pgRender(); }
+    const sel=pg.feSel=pg.feSel||[], k=sel.indexOf(id);
+    if(k>=0) pg.feSel=sel.slice(0,k); else if(feCanAdd(g,me,c)) sel.push(id); else sfx(180,0.12,"sawtooth",0.04,140);
+    return pgRender(); }
+  if(a==="feclear"){ pg.feSel=[]; return pgRender(); }
+  if(a==="feplay") return fePlay();
+  if(a==="fepass") return fePass();
+  if(a==="feno"){ pg.feSheet=null; return pgRender(); }
+  if(a==="fest"&&pg.feSheet){ const [k,v]=String(t.dataset.k).split(":"); pg.feSheet.st={...pg.feSheet.st, [k]:k==="el"?v:+v}; return pgRender(); }
+  if(a==="fego"&&pg.feSheet){ const sh=pg.feSheet, st=sh.st||{}; return feUse(sh.id,{target:st.t, el:st.el, n:st.n, cardId:st.id}); }
+}
+function feRows(){ const P=S.pg.party, g=P.eg?feUnpack(P.eg):null, ord=P.ord||Object.keys(P.players||{});
+  return ord.map((u,i)=>{ const left=g&&g.players[i]?g.players[i].hand.length:0, win=u===P.ewin; return {u, left, win, score:win?60:Math.max(0,30-left*4)}; }).sort((a,b)=>(b.win-a.win)||(a.left-b.left)); }
+function feResults(rows){
+  const stats=`<table class="ds-t pg-t"><tr><th>#</th><th>${T("pgPlayers")}</th><th>${T("feLeft")}</th></tr>${rows.map((r,k)=>`<tr class="${r.u===pgMe()?"me":""}"><td>${k+1}</td><td><b>${r.win?"🏆 ":""}${esc(pgNm(r.u))}</b></td><td>${r.left}</td></tr>`).join("")}</table>`;
+  const L=(S.pg.party.elog||[]).slice(-8).map(e=>`<div class="sm-t muted">${feLogTxt(e)}</div>`).join("");
+  return {stats, extra:L?`<h3>${T("feLast")}</h3><div class="co-list">${L}</div>`:""}; }
+function feRulesHtml(){ return `<details class="fe-rules"><summary>${T("feRulesT")}</summary><p class="sm-t">${T("feRules")}</p><ul class="sm-t">${FE.FUNCS.map(f=>`<li>${FE_IC[f]} <b>${T("feF_"+f)}</b>${LANG==="zh"||LANG==="ja"?"：":": "}${T("feD_"+f)}</li>`).join("")}</ul></details>`; }
+
 /* ----- view ----- */
 function pgSections(){
   if(S.pgBusy) return [["pgMain",`<p class="muted">${S.pgBusy}</p>`]];
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName",spy:"syName"}[k])}${k==="spy"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub",root:"rtSub",spy:"sySub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw"||k==="root"||k==="spy")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName",spy:"syName",five:"feName"}[k])}${k==="spy"||k==="five"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub",root:"rtSub",spy:"sySub",five:"feSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw"||k==="root"||k==="spy"||k==="five")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
     const last=CLOUD.user&&pgLastRoom();
     const back=last?`<div class="card pg-back"><div><b>${T("pgBackT",{c:esc(last)})}</b><p class="muted sm-t" style="margin:2px 0 0">${T("pgBackSub")}</p></div><button class="btn sm" data-act="pgrejoin" data-k="${esc(last)}">${T("pgBackBtn")}</button></div>`:"";
     const joinBox=CLOUD.user?back+`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
     return [["pgMain",`${S.playMode==="duo"?"":`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>`}${login}${joinBox}
-      ${S.playMode==="duo"?card("duel","⚔️"):`${card("spy","🕵️")}${card("root","🌱")}${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`}`]];
+      ${S.playMode==="duo"?card("duel","⚔️"):`${card("five","🃏")}${card("spy","🕵️")}${card("root","🌱")}${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
-  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName",spy:"syName"}[P.game]||"pgDrop");
+  const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName",spy:"syName",five:"feName"}[P.game]||"pgDrop");
   if(P.state==="wait"){
     const ids=Object.keys(P.players||{}), host=P.host===pgMe();
     return [["pgMain",`<div class="card co-wait"><div class="eyebrow">${kind}</div><div class="muted">${T("coShare")}</div><div class="co-code">${esc(pg.code)}</div>
       ${(setTimeout(()=>lookFetch(ids.filter(u=>u!==pgMe())),0),"")}<div class="pg-lobby">${ids.map(u=>`<div class="pg-pl${u===pgMe()?" me":""}">${lookArt(u===pgMe()?myLook():(LOOKS[u]||(pg.ps[u]||{}).look),"pg-fig")}<div class="pg-chip${u===pgMe()?" me":""}"><b>${esc(pgNm(u))}</b>${supB(u,16)}${u===P.host?"<span>👑</span>":""}</div></div>`).join("")}</div>
-      <div class="muted">${P.game==="duel"?T("duWaiting",{n:ids.length}):T("pgWaiting",{n:ids.length})}</div>
+      <div class="muted">${P.game==="duel"?T("duWaiting",{n:ids.length}):P.game==="five"?T("pgWaiting",{n:ids.length}).replace("/6","/"+FV.max):T("pgWaiting",{n:ids.length})}</div>
       ${P.game==="draw"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||1)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||1})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||1, t:(P.rr||1)*ids.length})}</span></div><div class="dr-rr"><span class="sm-t">${T("drMode")}</span>${host?`<div class="seg">${["n","c"].map(m=>`<button data-act="drdm" data-k="${m}" aria-pressed="${(P.dm==="c"?"c":"n")===m}">${T(m==="c"?"drModeC":"drModeN")}</button>`).join("")}</div>`:`<b>${T(P.dm==="c"?"drModeC":"drModeN")}</b>`}<span class="muted sm-t">${T(P.dm==="c"?"drModeCSub":"drModeNSub")}</span></div>`:""}
       ${P.game==="root"?`<div class="dr-rr"><span class="sm-t">${T("drRounds")}</span>${host?`<div class="seg">${[1,3,5].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||3)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||3})}</b>`}<span class="muted sm-t">${T("drRoundsSub",{n:P.rr||3, t:(P.rr||3)*ids.length})}</span></div>`:""}
       ${P.game==="spy"?`<div class="dr-rr"><span class="sm-t">${T("syRoundsQ")}</span>${host?`<div class="seg">${[4,6,8].map(n=>`<button data-act="drrr" data-k="${n}" aria-pressed="${(P.rr||6)===n}">${T("drRoundsN",{n})}</button>`).join("")}</div>`:`<b>${T("drRoundsN",{n:P.rr||6})}</b>`}<span class="muted sm-t">${T("syRoundsSub",{n:P.rr||6})}</span></div>`:""}
-      ${host?(P.game==="spy"&&ids.length<SY.min?`<button class="btn" disabled>${T("syNeed4")}</button>`:(P.game==="draw"||P.game==="root")&&ids.length<2?`<button class="btn" disabled>${T("drNeed2")}</button>`:P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
+      ${P.game==="five"?`${host&&!pg.local?`<div class="fe-bots"><button class="btn ghost sm" data-act="feaddbot" ${ids.length>=FV.max?"disabled":""}>${T("feAddBot")}</button><button class="btn ghost sm" data-act="fermbot" ${ids.some(feIsBot)?"":"disabled"}>${T("feRmBot")}</button></div>`:""}${feRulesHtml()}`:""}
+      ${host?(P.game==="spy"&&ids.length<SY.min?`<button class="btn" disabled>${T("syNeed4")}</button>`:(P.game==="draw"||P.game==="root"||P.game==="five")&&ids.length<2?`<button class="btn" disabled>${T("drNeed2")}</button>`:P.game==="duel"&&ids.length<2?`<button class="btn" disabled>${T("duNeed2")}</button>`:`<button class="btn" data-act="pgstart">${ids.length<2?T("pgStartSolo"):T("pgStart")}</button>`):`<p class="muted sm-t">${T("pgHostStarts")}</p>`}
       <button class="btn ghost" data-act="pgleave">${T("pgLeave")}</button></div>`]];
   }
   if(P.state==="done") return [["pgMain",pgResults()]];
-  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections, draw:drSections, root:rtSections, spy:sySections}[P.game]||dpSections)();
+  const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections, draw:drSections, root:rtSections, spy:sySections, five:feSections}[P.game]||dpSections)();
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
@@ -6552,6 +7034,7 @@ document.addEventListener("pointerdown",e=>{ const t=e.target.closest("[data-pgk
 document.addEventListener("touchstart",()=>{},{passive:true});   // lets iOS show :active press feedback
 function pgAct(a,t){
   sfxUnlock();
+  if(a.startsWith("fe")) return feAct(a,t);
   if(a==="pgcreate") return pgCreate(t.dataset.k);
   if(a==="pgbot") return pgBotRoom(t.dataset.k);
   if(a==="pgrejoin") return pgJoin(t.dataset.k);
@@ -9283,7 +9766,7 @@ async function plzCard(o){ lookCard({id:o.id, name:o.kind==="me"?game().nick:o.n
 const IG_MEMBER_ON=true;
 const IG_DM="https://ig.me/m/binbin.daily.english", MEM_AB="ABCDEFGHJKLMNPQRSTUVWXYZ23456789", MEM_RE=/BB-[A-HJ-NP-Z2-9]{4}/g;
 let MEM={on:undefined, req:undefined, busy:false};
-const isMember=()=>!!(DEV||isAdminUser()||MEM.on);
+const isMember=()=>!!(DEV||MEM.on);   // the owner account is a normal player outside developer mode
 async function memLoad(){ if(!CLOUD.fb||!CLOUD.user||MEM.busy) return; MEM.busy=true; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
   try{ const [m,r]=await Promise.all([fsM.getDoc(fsM.doc(db,"members",me)), fsM.getDoc(fsM.doc(db,"memberReq",me))]);
     MEM.on=m.exists()&&m.data().ig===true; MEM.req=r.exists()?r.data():null; }catch(e){ console.warn("member load",e&&(e.code||e.message)); MEM.on=false; MEM.req=null; }
@@ -9317,7 +9800,7 @@ async function memGrant(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedA
 async function memPending(){ if(!CLOUD.fb||!isAdminUser()) return; const {fsM,db}=CLOUD.fb;
   try{ const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"memberReq"),fsM.limit(100))); const L=[]; sn.forEach(d=>L.push(d.data())); L.sort((a,b)=>(a.at||0)-(b.at||0)); S.memReqs=L; render(); }
   catch(e){ toast(T("syncFail")); } }
-function memAdmin(){ if(PLANS_ON||!IG_MEMBER_ON||!isAdminUser()) return ""; const R=S.memRes, L=S.memReqs;
+function memAdmin(){ if(PLANS_ON||!IG_MEMBER_ON||!DEV||!isAdminUser()) return ""; const R=S.memRes, L=S.memReqs;
   return `<div class="card set-sec"><b>🌟 ${T("memAdminT")}</b><span class="muted sm-t">${T("memAdminSub")}</span>
     <textarea id="memCodes" class="search" rows="3" placeholder="BB-K7Q2 BB-ZP4M …"></textarea>
     <div class="row" style="gap:6px"><button class="btn sm" data-act="memgrant">${T("memGrant")}</button><button class="btn sm ghost" data-act="memlist">${T("memList")}</button></div>
@@ -9411,6 +9894,7 @@ function inviteCard(){ if(!CLOUD.user||SANDBOX()) return "";
    The title follows the BEST streak ever, so it is never taken away. */
 const LOGIN_CYCLE=[{s:10,g:100},{s:10,g:200},{s:15,tr:1},{s:10,g:300},{s:10,g:400},{s:15,tr:1},{s:50,g:1000}];
 const TRUCE_CAP=3;
+Object.assign(STR.zh,{"feName": "🃏 五行字母牌", "feSub": "2–5 人輪流出牌。字母要越出越大，元素要相同或是剋桌面的元素，先出完手牌的人贏。人不夠可以加電腦。", "feE_metal": "金", "feE_wood": "木", "feE_water": "水", "feE_fire": "火", "feE_earth": "土", "feF_drone": "無人機", "feF_convert": "元素轉換器", "feF_bomb": "元素炸彈", "feF_shift": "字母位移", "feF_vortex": "元素漩渦", "feF_seal": "封印", "feF_reverse": "迴轉", "feF_sheng": "相生", "feF_portal": "傳送門", "feF_shield": "護盾", "feD_drone": "每個對手隨機被炸掉 1 張手牌，再補抽 2 張。", "feD_convert": "把自己 1 張字母牌換成任一種元素。", "feD_bomb": "選一個對手，他的字母牌全部隨機換元素。", "feD_shift": "把桌面上的字母改成任意字母。", "feD_vortex": "把桌面上的元素換成任意元素。", "feD_seal": "選一個對手，他下一回合不能出牌，直接抽 1 張。", "feD_reverse": "出牌順序反過來。", "feD_sheng": "這回合也可以接桌面「生」出來的元素（木生火、火生土、土生金、金生水、水生木）。", "feD_portal": "把自己 1 張手牌送給一個對手（對方滿 7 張不行）。", "feD_shield": "放在手上就有效：被無人機、元素炸彈、封印、傳送門指到時自動擋下一次。也可以直接丟掉，少一張手牌。", "feTurnMe": "輪到你：點綠框的牌出牌", "feTurnNo": "輪到你：沒有能接的字母牌，可以用功能牌或抽牌跳過", "feTurnOf": "輪到 {n}…", "feSel": "已選 {n} 張，按「出牌」", "fePlay": "出牌", "fePlayN": "出牌（{n}）", "feClear": "取消選擇", "fePass": "抽牌跳過", "fePassFull": "跳過（滿手）", "feOpen": "桌面清空", "feAny": "任意出", "feNext": "接 {a}～z", "feArrow": "箭頭＝剋", "feDeck": "牌庫 {n}", "feOrder": "出牌順序：{s}", "feRev": "（已迴轉）", "feHand": "你的手牌", "feHandN": "{n}/{m} 張", "feBotN": "電腦 {n} 🤖", "feAddBot": "＋ 加電腦", "feRmBot": "－ 移除電腦", "feLogStart": "開局翻牌：桌面是 {c}", "feLogPlay": "{n} 出了 {c}", "feLogPass": "{n} 沒牌可出，抽 1 張", "feLogPassFull": "{n} 沒牌可出（滿 7 張，不抽）", "feLogSealed": "{n} 被封印，這回合不能出牌", "feLogShield": "{n} 的護盾擋下攻擊！", "feLogFunc": "{n} 用了 {f}", "feLogZ": "出到 z，桌面清空", "feLogAll": "大家都跳過，桌面清空，最後出牌的人可以任意出", "feUse": "{n} 使用", "feBlock": "{n} 擋下攻擊", "feShieldOn": "護盾發動", "feShieldDs": "這次攻擊對他沒效", "feGo": "使用", "feDrop": "丟掉護盾", "feNo": "先不要", "fePickCard": "選一張你的牌", "fePickEl": "選元素", "fePickP": "選一個對手", "fePickL": "選字母", "feNoTable": "桌面清空時不能用。", "feLeft": "剩餘手牌", "feLeftN": "剩 {n} 張", "feLast": "最後幾步", "feRulesT": "規則", "feRules": "每人 5 張手牌，最多 7 張，開局翻一張牌當桌面。接牌時字母要比桌面大，元素要相同或是剋桌面的元素（金剋木、木剋土、土剋水、水剋火、火剋金）。一回合可以出很多張：同元素可以跳號，換元素只能 +1。有字母牌能出就一定要出，沒有才抽一張跳過。大家都跳過一輪或出到 z，桌面清空。功能牌只能在自己的回合用，可以單獨用、一次用好幾張。先出完手牌的人贏。45 秒沒動作會自動出牌。"});Object.assign(STR.en,{"feName": "🃏 Element letters", "feSub": "2–5 players take turns. Letters must go up, and the element must match or beat the one on the table. First to empty their hand wins. Add computer players if you're short.", "feE_metal": "Metal", "feE_wood": "Wood", "feE_water": "Water", "feE_fire": "Fire", "feE_earth": "Earth", "feF_drone": "Drone", "feF_convert": "Converter", "feF_bomb": "Element bomb", "feF_shift": "Letter shift", "feF_vortex": "Vortex", "feF_seal": "Seal", "feF_reverse": "Reverse", "feF_sheng": "Nurture", "feF_portal": "Portal", "feF_shield": "Shield", "feD_drone": "Every opponent loses 1 random card, then draws 2.", "feD_convert": "Change 1 of your letter cards to any element.", "feD_bomb": "Pick an opponent: all their letter cards get random elements.", "feD_shift": "Change the letter on the table to any letter.", "feD_vortex": "Change the element on the table to any element.", "feD_seal": "Pick an opponent: they can't play on their next turn and draw 1.", "feD_reverse": "Turn order goes the other way.", "feD_sheng": "This turn you can also play the element the table feeds (Wood→Fire, Fire→Earth, Earth→Metal, Metal→Water, Water→Wood).", "feD_portal": "Give 1 card from your hand to an opponent (not if they hold 7).", "feD_shield": "Works while it's in your hand: blocks one drone, bomb, seal or portal aimed at you. You can also throw it away to shrink your hand.", "feTurnMe": "Your turn: tap the green-outlined cards", "feTurnNo": "Your turn: no letter fits. Use a power card or draw and pass", "feTurnOf": "{n}'s turn…", "feSel": "{n} selected. Tap Play", "fePlay": "Play", "fePlayN": "Play ({n})", "feClear": "Clear", "fePass": "Draw & pass", "fePassFull": "Pass (hand full)", "feOpen": "Table is clear", "feAny": "Play anything", "feNext": "Play {a}–z", "feArrow": "Arrow = beats", "feDeck": "Deck {n}", "feOrder": "Order: {s}", "feRev": "(reversed)", "feHand": "Your hand", "feHandN": "{n}/{m} cards", "feBotN": "Computer {n} 🤖", "feAddBot": "+ Add computer", "feRmBot": "− Remove computer", "feLogStart": "First card: {c}", "feLogPlay": "{n} played {c}", "feLogPass": "{n} couldn't play and drew 1", "feLogPassFull": "{n} couldn't play (7 cards, no draw)", "feLogSealed": "{n} is sealed and skips this turn", "feLogShield": "{n}'s shield blocked it!", "feLogFunc": "{n} used {f}", "feLogZ": "Reached z: table cleared", "feLogAll": "Everyone passed: table cleared, the last player plays anything", "feUse": "{n} used it", "feBlock": "{n} blocked it", "feShieldOn": "Shield up", "feShieldDs": "That attack did nothing", "feGo": "Use", "feDrop": "Throw away", "feNo": "Not now", "fePickCard": "Pick one of your cards", "fePickEl": "Pick an element", "fePickP": "Pick an opponent", "fePickL": "Pick a letter", "feNoTable": "Can't use it while the table is clear.", "feLeft": "Cards left", "feLeftN": "{n} left", "feLast": "Last moves", "feRulesT": "Rules", "feRules": "Everyone starts with 5 cards (max 7); one card is flipped as the table. Play a higher letter whose element matches the table or beats it (Metal beats Wood, Wood beats Earth, Earth beats Water, Water beats Fire, Fire beats Metal). You may play several cards: the same element can skip letters, a new element must be exactly +1. If a letter fits you must play; otherwise draw 1 and pass. If everyone passes, or someone plays z, the table clears. Power cards work only on your turn, alone or several at once. First to empty their hand wins. After 45 seconds idle the game moves for you."});Object.assign(STR.hi,{"feName": "🃏 तत्व अक्षर", "feSub": "2–5 खिलाड़ी बारी-बारी से पत्ते डालते हैं। अक्षर बड़ा होना चाहिए और तत्व वही या मेज़ वाले को हराने वाला। जो पहले सारे पत्ते खत्म करे वह जीतता है। कम लोग हों तो कंप्यूटर जोड़ें।", "feE_metal": "धातु", "feE_wood": "लकड़ी", "feE_water": "जल", "feE_fire": "अग्नि", "feE_earth": "पृथ्वी", "feF_drone": "ड्रोन", "feF_convert": "तत्व बदलो", "feF_bomb": "तत्व बम", "feF_shift": "अक्षर खिसकाओ", "feF_vortex": "भंवर", "feF_seal": "मुहर", "feF_reverse": "उल्टा", "feF_sheng": "पोषण", "feF_portal": "द्वार", "feF_shield": "ढाल", "feD_drone": "हर विरोधी का 1 पत्ता उड़ जाता है, फिर वह 2 उठाता है।", "feD_convert": "अपने 1 अक्षर पत्ते का तत्व बदलें।", "feD_bomb": "एक विरोधी चुनें: उसके सारे अक्षर पत्तों के तत्व बेतरतीब बदल जाते हैं।", "feD_shift": "मेज़ का अक्षर कोई भी अक्षर कर दें।", "feD_vortex": "मेज़ का तत्व कोई भी तत्व कर दें।", "feD_seal": "एक विरोधी चुनें: अगली बारी में वह नहीं खेल सकता और 1 पत्ता उठाता है।", "feD_reverse": "बारी का क्रम उल्टा हो जाता है।", "feD_sheng": "इस बारी आप वह तत्व भी डाल सकते हैं जिसे मेज़ का तत्व पोषित करता है (लकड़ी→अग्नि, अग्नि→पृथ्वी, पृथ्वी→धातु, धातु→जल, जल→लकड़ी)।", "feD_portal": "अपना 1 पत्ता किसी विरोधी को दें (उसके 7 हों तो नहीं)।", "feD_shield": "हाथ में रहते काम करती है: आप पर ड्रोन, बम, मुहर या द्वार एक बार रोकती है। चाहें तो इसे फेंक भी सकते हैं।", "feTurnMe": "आपकी बारी: हरे घेरे वाले पत्ते छुएँ", "feTurnNo": "आपकी बारी: कोई अक्षर नहीं बैठता। शक्ति पत्ता चलाएँ या उठाकर छोड़ें", "feTurnOf": "{n} की बारी…", "feSel": "{n} चुने। खेलें दबाएँ", "fePlay": "खेलें", "fePlayN": "खेलें ({n})", "feClear": "हटाएँ", "fePass": "उठाकर छोड़ें", "fePassFull": "छोड़ें (हाथ भरा)", "feOpen": "मेज़ खाली", "feAny": "कुछ भी डालें", "feNext": "{a}–z डालें", "feArrow": "तीर = हराता है", "feDeck": "गड्डी {n}", "feOrder": "क्रम: {s}", "feRev": "(उल्टा)", "feHand": "आपके पत्ते", "feHandN": "{n}/{m} पत्ते", "feBotN": "कंप्यूटर {n} 🤖", "feAddBot": "+ कंप्यूटर जोड़ें", "feRmBot": "− कंप्यूटर हटाएँ", "feLogStart": "पहला पत्ता: {c}", "feLogPlay": "{n} ने डाला {c}", "feLogPass": "{n} नहीं खेल सका, 1 उठाया", "feLogPassFull": "{n} नहीं खेल सका (7 पत्ते, नहीं उठाया)", "feLogSealed": "{n} पर मुहर, यह बारी छूटी", "feLogShield": "{n} की ढाल ने रोका!", "feLogFunc": "{n} ने {f} चलाया", "feLogZ": "z आया: मेज़ खाली", "feLogAll": "सबने छोड़ा: मेज़ खाली, आखिरी खिलाड़ी कुछ भी डाले", "feUse": "{n} ने चलाया", "feBlock": "{n} ने रोका", "feShieldOn": "ढाल चली", "feShieldDs": "इस हमले का असर नहीं हुआ", "feGo": "चलाएँ", "feDrop": "फेंक दें", "feNo": "अभी नहीं", "fePickCard": "अपना एक पत्ता चुनें", "fePickEl": "तत्व चुनें", "fePickP": "विरोधी चुनें", "fePickL": "अक्षर चुनें", "feNoTable": "मेज़ खाली हो तो नहीं चलेगा।", "feLeft": "बचे पत्ते", "feLeftN": "{n} बचे", "feLast": "आखिरी चालें", "feRulesT": "नियम", "feRules": "सबको 5 पत्ते (अधिकतम 7), एक पत्ता मेज़ पर पलटा जाता है। बड़ा अक्षर डालें जिसका तत्व मेज़ वाला हो या उसे हराए (धातु लकड़ी को, लकड़ी पृथ्वी को, पृथ्वी जल को, जल अग्नि को, अग्नि धातु को)। कई पत्ते डाल सकते हैं: वही तत्व अक्षर छोड़ सकता है, नया तत्व ठीक +1 होना चाहिए। अक्षर बैठे तो खेलना ज़रूरी, वरना 1 उठाकर छोड़ें। सब छोड़ें या z आए तो मेज़ खाली। शक्ति पत्ते सिर्फ अपनी बारी में। जो पहले पत्ते खत्म करे वह जीते। 45 सेकंड रुकने पर खेल अपने आप चलता है।"});Object.assign(STR.es,{"feName": "🃏 Letras elementales", "feSub": "De 2 a 5 jugadores por turnos. Las letras deben subir y el elemento debe ser igual o vencer al de la mesa. Gana quien vacíe su mano primero. Si faltan jugadores, añade la computadora.", "feE_metal": "Metal", "feE_wood": "Madera", "feE_water": "Agua", "feE_fire": "Fuego", "feE_earth": "Tierra", "feF_drone": "Dron", "feF_convert": "Conversor", "feF_bomb": "Bomba elemental", "feF_shift": "Salto de letra", "feF_vortex": "Vórtice", "feF_seal": "Sello", "feF_reverse": "Reversa", "feF_sheng": "Nutrir", "feF_portal": "Portal", "feF_shield": "Escudo", "feD_drone": "Cada rival pierde 1 carta al azar y luego roba 2.", "feD_convert": "Cambia 1 de tus cartas de letra a cualquier elemento.", "feD_bomb": "Elige un rival: todas sus cartas de letra cambian de elemento al azar.", "feD_shift": "Cambia la letra de la mesa por cualquier letra.", "feD_vortex": "Cambia el elemento de la mesa por cualquiera.", "feD_seal": "Elige un rival: no juega en su próximo turno y roba 1.", "feD_reverse": "El orden de turnos se invierte.", "feD_sheng": "Este turno también puedes jugar el elemento que nutre la mesa (Madera→Fuego, Fuego→Tierra, Tierra→Metal, Metal→Agua, Agua→Madera).", "feD_portal": "Da 1 carta de tu mano a un rival (no si tiene 7).", "feD_shield": "Funciona mientras está en tu mano: bloquea una vez un dron, bomba, sello o portal contra ti. También puedes tirarlo.", "feTurnMe": "Tu turno: toca las cartas con borde verde", "feTurnNo": "Tu turno: ninguna letra sirve. Usa una carta especial o roba y pasa", "feTurnOf": "Turno de {n}…", "feSel": "{n} elegidas. Toca Jugar", "fePlay": "Jugar", "fePlayN": "Jugar ({n})", "feClear": "Quitar", "fePass": "Robar y pasar", "fePassFull": "Pasar (mano llena)", "feOpen": "Mesa libre", "feAny": "Juega cualquiera", "feNext": "Juega {a}–z", "feArrow": "Flecha = vence", "feDeck": "Mazo {n}", "feOrder": "Orden: {s}", "feRev": "(invertido)", "feHand": "Tu mano", "feHandN": "{n}/{m} cartas", "feBotN": "Computadora {n} 🤖", "feAddBot": "+ Añadir computadora", "feRmBot": "− Quitar computadora", "feLogStart": "Primera carta: {c}", "feLogPlay": "{n} jugó {c}", "feLogPass": "{n} no pudo jugar y robó 1", "feLogPassFull": "{n} no pudo jugar (7 cartas, no roba)", "feLogSealed": "{n} está sellado y pierde el turno", "feLogShield": "¡El escudo de {n} lo bloqueó!", "feLogFunc": "{n} usó {f}", "feLogZ": "Llegó la z: mesa libre", "feLogAll": "Todos pasaron: mesa libre, el último en jugar elige", "feUse": "{n} la usó", "feBlock": "{n} lo bloqueó", "feShieldOn": "Escudo activado", "feShieldDs": "El ataque no tuvo efecto", "feGo": "Usar", "feDrop": "Tirar", "feNo": "Ahora no", "fePickCard": "Elige una de tus cartas", "fePickEl": "Elige un elemento", "fePickP": "Elige un rival", "fePickL": "Elige una letra", "feNoTable": "No se puede usar con la mesa libre.", "feLeft": "Cartas restantes", "feLeftN": "Quedan {n}", "feLast": "Últimas jugadas", "feRulesT": "Reglas", "feRules": "Todos empiezan con 5 cartas (máx. 7); se voltea una carta como mesa. Juega una letra mayor cuyo elemento sea igual al de la mesa o lo venza (Metal vence a Madera, Madera a Tierra, Tierra a Agua, Agua a Fuego, Fuego a Metal). Puedes jugar varias: el mismo elemento puede saltar letras, un elemento nuevo debe ser exactamente +1. Si una letra sirve, debes jugar; si no, roba 1 y pasa. Si todos pasan o alguien juega la z, la mesa se libera. Las cartas especiales solo en tu turno. Gana quien vacíe su mano. Tras 45 segundos sin jugar, el juego mueve por ti."});Object.assign(STR.ja,{"feName": "🃏 五行アルファベット", "feSub": "2〜5人で順番にカードを出します。文字はどんどん大きく、属性は場と同じか場に勝つものだけ。先に手札がなくなった人の勝ち。人数が足りなければコンピューターを追加できます。", "feE_metal": "金", "feE_wood": "木", "feE_water": "水", "feE_fire": "火", "feE_earth": "土", "feF_drone": "ドローン", "feF_convert": "属性チェンジャー", "feF_bomb": "属性ボム", "feF_shift": "文字シフト", "feF_vortex": "属性の渦", "feF_seal": "封印", "feF_reverse": "リバース", "feF_sheng": "相生", "feF_portal": "ポータル", "feF_shield": "シールド", "feD_drone": "相手全員の手札が1枚ランダムに消え、そのあと2枚引きます。", "feD_convert": "自分の文字カード1枚の属性を好きなものに変えます。", "feD_bomb": "相手を1人選ぶと、その人の文字カードの属性がすべてランダムに変わります。", "feD_shift": "場の文字を好きな文字に変えます。", "feD_vortex": "場の属性を好きな属性に変えます。", "feD_seal": "相手を1人選ぶと、次の番は出せずに1枚引きます。", "feD_reverse": "順番が逆回りになります。", "feD_sheng": "この番は場の属性が「生む」属性も出せます（木生火・火生土・土生金・金生水・水生木）。", "feD_portal": "自分の手札1枚を相手に渡します（相手が7枚なら不可）。", "feD_shield": "手札にあるだけで有効：ドローン・ボム・封印・ポータルを1回防ぎます。捨てて手札を減らすこともできます。", "feTurnMe": "あなたの番：緑枠のカードをタップ", "feTurnNo": "あなたの番：出せる文字がありません。機能カードを使うか、引いてパス", "feTurnOf": "{n}の番…", "feSel": "{n}枚選択中。「出す」をタップ", "fePlay": "出す", "fePlayN": "出す（{n}）", "feClear": "選び直す", "fePass": "引いてパス", "fePassFull": "パス（手札満杯）", "feOpen": "場が空です", "feAny": "何でも出せる", "feNext": "{a}〜z を出す", "feArrow": "矢印＝剋す", "feDeck": "山札 {n}", "feOrder": "順番：{s}", "feRev": "（逆回り）", "feHand": "あなたの手札", "feHandN": "{n}/{m} 枚", "feBotN": "コンピューター {n} 🤖", "feAddBot": "＋ コンピューター追加", "feRmBot": "－ コンピューター削除", "feLogStart": "最初の場：{c}", "feLogPlay": "{n} が {c} を出した", "feLogPass": "{n} は出せず1枚引いた", "feLogPassFull": "{n} は出せず（7枚なので引かない）", "feLogSealed": "{n} は封印され、この番は出せない", "feLogShield": "{n} のシールドが防いだ！", "feLogFunc": "{n} が {f} を使った", "feLogZ": "z が出て場がリセット", "feLogAll": "全員パスで場がリセット。最後に出した人が自由に出せる", "feUse": "{n} が使用", "feBlock": "{n} が防いだ", "feShieldOn": "シールド発動", "feShieldDs": "この攻撃は効かなかった", "feGo": "使う", "feDrop": "捨てる", "feNo": "やめる", "fePickCard": "自分のカードを1枚選ぶ", "fePickEl": "属性を選ぶ", "fePickP": "相手を選ぶ", "fePickL": "文字を選ぶ", "feNoTable": "場が空のときは使えません。", "feLeft": "残り手札", "feLeftN": "残り {n} 枚", "feLast": "最後の数手", "feRulesT": "ルール", "feRules": "手札は5枚（最大7枚）、最初に1枚めくって場にします。場より大きい文字で、属性が同じか場に勝つ（金剋木・木剋土・土剋水・水剋火・火剋金）カードを出せます。一度に何枚も出せます：同じ属性は文字を飛ばしてOK、属性を変えるときは +1 だけ。出せるなら必ず出し、出せなければ1枚引いてパス。全員パスか z が出たら場はリセット。機能カードは自分の番だけ、単独でも複数でも使えます。先に手札がなくなった人の勝ち。45秒動かないと自動で出します。"});Object.assign(STR.ko,{"feName": "🃏 오행 알파벳", "feSub": "2~5명이 차례로 카드를 내요. 글자는 점점 커져야 하고, 원소는 같거나 판의 원소를 이기는 것만. 먼저 손패를 다 내면 승리. 사람이 모자라면 컴퓨터를 넣을 수 있어요.", "feE_metal": "금", "feE_wood": "목", "feE_water": "수", "feE_fire": "화", "feE_earth": "토", "feF_drone": "드론", "feF_convert": "원소 변환기", "feF_bomb": "원소 폭탄", "feF_shift": "글자 이동", "feF_vortex": "원소 소용돌이", "feF_seal": "봉인", "feF_reverse": "리버스", "feF_sheng": "상생", "feF_portal": "포털", "feF_shield": "방패", "feD_drone": "상대 모두 손패 1장이 무작위로 날아가고 2장을 뽑아요.", "feD_convert": "내 글자 카드 1장의 원소를 원하는 것으로 바꿔요.", "feD_bomb": "상대 1명을 골라 그 사람의 글자 카드 원소를 모두 무작위로 바꿔요.", "feD_shift": "판의 글자를 원하는 글자로 바꿔요.", "feD_vortex": "판의 원소를 원하는 원소로 바꿔요.", "feD_seal": "상대 1명을 고르면 다음 차례에 못 내고 1장을 뽑아요.", "feD_reverse": "차례 순서가 반대로 돌아요.", "feD_sheng": "이번 차례엔 판의 원소가 '낳는' 원소도 낼 수 있어요 (목생화·화생토·토생금·금생수·수생목).", "feD_portal": "내 손패 1장을 상대에게 줘요 (상대가 7장이면 불가).", "feD_shield": "손에 있기만 하면 효과: 나를 노린 드론·폭탄·봉인·포털을 한 번 막아요. 버려서 손패를 줄일 수도 있어요.", "feTurnMe": "내 차례: 초록 테두리 카드를 누르세요", "feTurnNo": "내 차례: 낼 글자가 없어요. 기능 카드를 쓰거나 뽑고 넘기기", "feTurnOf": "{n} 차례…", "feSel": "{n}장 선택. '내기'를 누르세요", "fePlay": "내기", "fePlayN": "내기 ({n})", "feClear": "선택 취소", "fePass": "뽑고 넘기기", "fePassFull": "넘기기 (손패 가득)", "feOpen": "판이 비었어요", "feAny": "아무거나 내기", "feNext": "{a}~z 내기", "feArrow": "화살표 = 극", "feDeck": "덱 {n}", "feOrder": "순서: {s}", "feRev": "(반대 방향)", "feHand": "내 손패", "feHandN": "{n}/{m}장", "feBotN": "컴퓨터 {n} 🤖", "feAddBot": "+ 컴퓨터 추가", "feRmBot": "− 컴퓨터 빼기", "feLogStart": "첫 카드: {c}", "feLogPlay": "{n}: {c} 냄", "feLogPass": "{n}: 낼 카드가 없어 1장 뽑음", "feLogPassFull": "{n}: 낼 카드 없음 (7장이라 안 뽑음)", "feLogSealed": "{n}: 봉인되어 이번 차례 쉼", "feLogShield": "{n}의 방패가 막았어요!", "feLogFunc": "{n}: {f} 사용", "feLogZ": "z가 나와 판 초기화", "feLogAll": "모두 넘겨서 판 초기화, 마지막에 낸 사람이 아무거나 내요", "feUse": "{n} 사용", "feBlock": "{n}이(가) 막음", "feShieldOn": "방패 발동", "feShieldDs": "이번 공격은 효과가 없었어요", "feGo": "사용", "feDrop": "버리기", "feNo": "안 할래요", "fePickCard": "내 카드 1장 고르기", "fePickEl": "원소 고르기", "fePickP": "상대 고르기", "fePickL": "글자 고르기", "feNoTable": "판이 비었을 땐 못 써요.", "feLeft": "남은 손패", "feLeftN": "{n}장 남음", "feLast": "마지막 몇 수", "feRulesT": "규칙", "feRules": "모두 5장으로 시작(최대 7장), 1장을 뒤집어 판으로 해요. 판보다 큰 글자이고 원소가 같거나 판을 이기는(금극목·목극토·토극수·수극화·화극금) 카드를 낼 수 있어요. 한 번에 여러 장 가능: 같은 원소는 글자를 건너뛰어도 되고, 원소를 바꿀 땐 딱 +1. 낼 수 있으면 꼭 내야 하고, 없으면 1장 뽑고 넘겨요. 모두 넘기거나 z가 나오면 판이 비워져요. 기능 카드는 내 차례에만, 혼자 또는 여러 장 사용 가능. 먼저 손패를 다 내면 승리. 45초 동안 가만히 있으면 자동으로 내요."});
 const STREAK_STEPS=[[10,1],[30,2],[60,3],[100,4],[180,5]];      // days in a row → badge tier 1–5
 const STREAK_GIFT={10:100,30:300,60:600,100:800,180:1000};       // style coins when a title is first reached
 let SRV_OFF=null;   // server time − device time (ms), from the Date header of our own site
