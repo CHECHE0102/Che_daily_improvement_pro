@@ -1,0 +1,7462 @@
+{
+ "id": "2026-11-23-tw-1",
+ "date": "2026-11-23",
+ "rank": 1,
+ "region": "TW",
+ "topic": "科技",
+ "title": "Taiwan Banks Turn to AI as Cyberattacks Double",
+ "level": "B2",
+ "summaryZh": "網攻倍增，台灣銀行加強運用AI防禦。",
+ "summaryHi": "साइबर हमले दोगुने होने पर ताइवान के बैंक बचाव के लिए AI का सहारा ले रहे हैं।",
+ "summaryEs": "Los bancos de Taiwán recurren a la IA ante el doble de ciberataques.",
+ "summaryJa": "サイバー攻撃が倍増、台湾の銀行がAIで防御強化。",
+ "summaryKo": "사이버 공격 두 배 증가, 대만 은행들 AI로 방어 강화.",
+ "summaryEn": "Taiwan Cooperative Bank says attacks doubled this year, and First Bank blocked 2.2 million, so banks are using AI to spot and stop threats.",
+ "sources": [
+  {
+   "name": "Focus Taiwan (CNA)",
+   "url": "https://focustaiwan.tw/sci-tech/202611220007"
+  }
+ ],
+ "paragraphs": [
+  "Taiwan's banks are increasingly relying on artificial intelligence to spot suspicious activity, uncover weaknesses in their systems and fend off cyberattacks, as threats against the financial sector intensify.",
+  "Taiwan Cooperative Bank reported a sharp rise in suspicious external probes and attacks during the first ten months of 2026, with the monthly average roughly twice that of 2025. About 80 percent of the attack volume was concentrated between August and October.",
+  "The attacks mainly targeted internet-facing services such as bank websites, online banking and corporate banking platforms. First Bank said its web application firewall blocked around 2.2 million attacks from January to October, noting that probing activity climbed significantly from the third quarter.",
+  "In response, First Bank has introduced AI-powered network and endpoint detection, Bank of Taiwan relies on AI-assisted threat detection, and Taiwan Cooperative Bank is trialling AI-based security tools. None of the banks has identified an attack that can be definitively attributed to autonomous AI, although they admit that increasingly automated methods make this harder to judge.",
+  "Chen Chia-hung, a consultant at Rays Technology, urged banks to go beyond tools that only detect attacks after the fact. Instead, he said, they should use AI to simulate attacks and probe their own defences, and include AI-driven attacks in routine cybersecurity drills."
+ ],
+ "levels": {
+  "A2": {
+   "paragraphs": [
+    "Banks in Taiwan are using AI to stop computer attacks. AI is a smart computer program. It can find danger fast.",
+    "There are more attacks this year. At Taiwan Cooperative Bank, the number of attacks each month is about two times last year's number. Most of the attacks came between August and October.",
+    "The attackers try to get into bank websites and online banking. First Bank stopped about 2.2 million attacks from January to October.",
+    "Now banks use AI to watch their computers. It looks for strange activity and finds weak places in the system. Bank of Taiwan also uses AI. Taiwan Cooperative Bank is testing new AI tools.",
+    "An expert says banks should also use AI to make fake attacks. Then they can test their safety before real attackers come."
+   ],
+   "sentZh": [
+    [
+     "台灣的銀行正在用AI阻止電腦攻擊。",
+     "AI是一種聰明的電腦程式。",
+     "它能很快發現危險。"
+    ],
+    [
+     "今年的攻擊變多了。",
+     "在合作金庫銀行，每個月的攻擊次數大約是去年的兩倍。",
+     "大部分攻擊發生在八月到十月之間。"
+    ],
+    [
+     "攻擊者試圖侵入銀行網站和網路銀行。",
+     "第一銀行從一月到十月擋下了約220萬次攻擊。"
+    ],
+    [
+     "現在銀行用AI監看它們的電腦。",
+     "它會尋找奇怪的活動，並找出系統中的弱點。",
+     "臺灣銀行也使用AI。",
+     "合作金庫銀行正在測試新的AI工具。"
+    ],
+    [
+     "一位專家說，銀行也應該用AI製造假的攻擊。",
+     "這樣它們就能在真正的攻擊者到來前測試自己的安全。"
+    ]
+   ]
+  },
+  "B1": {
+   "paragraphs": [
+    "Banks in Taiwan are turning to artificial intelligence (AI) to protect themselves from cyberattacks, as online threats to the financial sector keep growing.",
+    "Taiwan Cooperative Bank said it saw more suspicious probes and attacks in the first ten months of 2026. The monthly average was about double last year's. Around 80 percent of the attacks happened between August and October.",
+    "Most attacks targeted services that customers use on the internet, such as bank websites, online banking and corporate banking. First Bank said its firewall blocked about 2.2 million attacks between January and October, with a big rise from the third quarter.",
+    "To fight back, First Bank uses AI to watch its network and computers, Bank of Taiwan uses AI to help detect threats, and Taiwan Cooperative Bank is testing AI security tools. The banks say they have not found an attack clearly carried out by AI on its own, but it is getting harder to tell.",
+    "A cybersecurity consultant, Chen Chia-hung, said banks should not only react after an attack. He suggested using AI to copy attacks and test defences, and adding AI attacks to regular security drills."
+   ],
+   "sentZh": [
+    [
+     "隨著金融業面臨的網路威脅持續增加，台灣的銀行正轉而運用人工智慧（AI）來保護自己免受網路攻擊。"
+    ],
+    [
+     "合作金庫銀行表示，2026年前十個月出現了更多可疑的探測和攻擊。",
+     "每月平均次數約為去年的兩倍。",
+     "大約八成的攻擊發生在八月到十月之間。"
+    ],
+    [
+     "大多數攻擊針對顧客在網路上使用的服務，例如銀行網站、網路銀行和企業網銀。",
+     "第一銀行表示，它的防火牆在一月到十月間擋下約220萬次攻擊，且從第三季起大幅增加。"
+    ],
+    [
+     "為了反擊，第一銀行用AI監看網路和電腦，臺灣銀行用AI協助偵測威脅，合作金庫銀行則在測試AI資安工具。",
+     "這些銀行說，它們尚未發現明確由AI自行發動的攻擊，但這越來越難分辨。"
+    ],
+    [
+     "資安顧問陳嘉宏表示，銀行不應只在遭到攻擊後才反應。",
+     "他建議用AI模擬攻擊來測試防禦，並把AI攻擊加入定期的資安演練。"
+    ]
+   ]
+  },
+  "B2": {
+   "paragraphs": [
+    "Taiwan's banks are increasingly relying on artificial intelligence to spot suspicious activity, uncover weaknesses in their systems and fend off cyberattacks, as threats against the financial sector intensify.",
+    "Taiwan Cooperative Bank reported a sharp rise in suspicious external probes and attacks during the first ten months of 2026, with the monthly average roughly twice that of 2025. About 80 percent of the attack volume was concentrated between August and October.",
+    "The attacks mainly targeted internet-facing services such as bank websites, online banking and corporate banking platforms. First Bank said its web application firewall blocked around 2.2 million attacks from January to October, noting that probing activity climbed significantly from the third quarter.",
+    "In response, First Bank has introduced AI-powered network and endpoint detection, Bank of Taiwan relies on AI-assisted threat detection, and Taiwan Cooperative Bank is trialling AI-based security tools. None of the banks has identified an attack that can be definitively attributed to autonomous AI, although they admit that increasingly automated methods make this harder to judge.",
+    "Chen Chia-hung, a consultant at Rays Technology, urged banks to go beyond tools that only detect attacks after the fact. Instead, he said, they should use AI to simulate attacks and probe their own defences, and include AI-driven attacks in routine cybersecurity drills."
+   ],
+   "sentZh": [
+    [
+     "隨著針對金融業的威脅加劇，台灣的銀行越來越依賴人工智慧來察覺可疑活動、找出系統弱點並抵擋網路攻擊。"
+    ],
+    [
+     "合作金庫銀行通報，2026年前十個月可疑的外部探測與攻擊急劇增加，每月平均約為2025年的兩倍。",
+     "約八成的攻擊量集中在八月到十月之間。"
+    ],
+    [
+     "這些攻擊主要針對面向網際網路的服務，例如銀行網站、網路銀行和企業網銀平台。",
+     "第一銀行表示，其網頁應用程式防火牆在一月至十月間擋下約220萬次攻擊，並指出探測活動從第三季起顯著攀升。"
+    ],
+    [
+     "為此，第一銀行導入了AI驅動的網路與端點偵測，臺灣銀行仰賴AI輔助的威脅偵測，合作金庫銀行則在試用以AI為基礎的資安工具。",
+     "目前沒有任何一家銀行找到能明確歸咎於自主AI的攻擊，不過它們承認，越來越自動化的手法讓這點更難判斷。"
+    ],
+    [
+     "瑞思科技顧問陳嘉宏呼籲銀行，不要只依賴事後才偵測攻擊的工具。",
+     "他說，銀行反而應該用AI模擬攻擊、探測自己的防禦，並把AI驅動的攻擊納入例行資安演練。"
+    ]
+   ]
+  },
+  "C1": {
+   "paragraphs": [
+    "Confronted with a mounting wave of cyber threats, Taiwan's banks are turning to artificial intelligence to flag suspicious activity, expose vulnerabilities in their systems and repel intrusions before they cause damage.",
+    "The scale of the problem is striking. Taiwan Cooperative Bank recorded a marked increase in hostile external probes over the first ten months of 2026, with the monthly average running at roughly double the 2025 level. Some 80 percent of that volume was clustered in the three months from August to October.",
+    "Attackers have largely focused on internet-facing services, from public websites to online and corporate banking platforms. First Bank said its web application firewall repelled about 2.2 million attacks between January and October, with probing escalating noticeably from the third quarter onwards.",
+    "Lenders have responded by weaving AI into their defences. First Bank now runs AI-powered network and endpoint detection, Bank of Taiwan relies on AI-assisted threat detection, and Taiwan Cooperative Bank is piloting AI-based security tools. Tellingly, none has yet pinned an attack definitively on autonomous AI, conceding that increasingly automated techniques blur the line between human and machine attackers.",
+    "Consultant Chen Chia-hung of Rays Technology argues that reactive tools are no longer enough. Banks, he contends, should harness AI to simulate attacks and stress-test their own systems, and should build AI-driven scenarios into their routine cybersecurity drills."
+   ],
+   "sentZh": [
+    [
+     "面對日益升高的網路威脅浪潮，台灣的銀行正轉向人工智慧，在入侵造成損害之前標記可疑活動、揭露系統漏洞並擊退入侵。"
+    ],
+    [
+     "問題的規模相當驚人。",
+     "合作金庫銀行記錄到，2026年前十個月帶有敵意的外部探測明顯增加，每月平均約為2025年水準的兩倍。",
+     "其中約八成集中在八月至十月這三個月。"
+    ],
+    [
+     "攻擊者大多鎖定面向網際網路的服務，從公開網站到網路銀行與企業網銀平台都有。",
+     "第一銀行表示，其網頁應用程式防火牆在一月至十月間擊退約220萬次攻擊，探測行為從第三季起明顯升級。"
+    ],
+    [
+     "銀行業的回應是把AI融入防禦體系。",
+     "第一銀行現在運行AI驅動的網路與端點偵測，臺灣銀行仰賴AI輔助的威脅偵測，合作金庫銀行則在試辦以AI為基礎的資安工具。",
+     "耐人尋味的是，至今沒有一家銀行能明確把攻擊歸咎於自主AI，並承認日益自動化的技術模糊了人類與機器攻擊者之間的界線。"
+    ],
+    [
+     "瑞思科技顧問陳嘉宏認為，被動應對的工具已經不夠了。",
+     "他主張，銀行應該善用AI模擬攻擊、對自家系統進行壓力測試，並把AI驅動的情境納入例行資安演練。"
+    ]
+   ]
+  },
+  "IELTS": {
+   "paragraphs": [
+    "Taiwan's banking sector is increasingly deploying artificial intelligence as a frontline defence, using it to identify anomalous activity, pinpoint systemic vulnerabilities and thwart cyberattacks at a time when threats to financial institutions are escalating.",
+    "The figures underline the severity of the challenge. Taiwan Cooperative Bank documented a substantial surge in suspicious external probes during the first ten months of 2026, with the monthly average approximately twice the 2025 figure. Notably, around 80 percent of the attack volume was concentrated between August and October.",
+    "These incursions predominantly targeted internet-facing services, including public websites and online and corporate banking platforms. First Bank reported that its web application firewall intercepted roughly 2.2 million attacks between January and October, observing that reconnaissance activity intensified considerably from the third quarter.",
+    "Consequently, lenders are integrating AI across their security architecture. First Bank operates AI-powered network and endpoint detection, Bank of Taiwan employs AI-assisted threat detection, and Taiwan Cooperative Bank is evaluating AI-based tools. Significantly, no bank has conclusively attributed an attack to autonomous AI, although all acknowledge that increasingly automated methods make such attribution problematic.",
+    "Chen Chia-hung, a consultant with Rays Technology, maintains that purely reactive detection is inadequate. He advocates using AI to simulate attacks and rigorously test defences, and incorporating AI-driven scenarios into routine cybersecurity drills."
+   ],
+   "sentZh": [
+    [
+     "台灣銀行業正越來越多地把人工智慧部署為第一線防禦，在金融機構面臨的威脅不斷升級之際，用它來辨識異常活動、精確找出系統性漏洞並阻止網路攻擊。"
+    ],
+    [
+     "這些數據凸顯了挑戰的嚴重性。",
+     "合作金庫銀行記錄到，2026年前十個月可疑的外部探測大幅激增，每月平均約為2025年數字的兩倍。",
+     "值得注意的是，約八成的攻擊量集中在八月至十月之間。"
+    ],
+    [
+     "這些入侵主要針對面向網際網路的服務，包括公開網站以及網路銀行和企業網銀平台。",
+     "第一銀行報告，其網頁應用程式防火牆在一月至十月間攔截了約220萬次攻擊，並觀察到偵察活動從第三季起大幅增強。"
+    ],
+    [
+     "因此，銀行正在把AI整合到整個資安架構中。",
+     "第一銀行運作AI驅動的網路與端點偵測，臺灣銀行採用AI輔助的威脅偵測，合作金庫銀行則在評估以AI為基礎的工具。",
+     "值得一提的是，沒有任何銀行能確鑿地將攻擊歸因於自主AI，但各銀行都承認，越來越自動化的手法讓這種歸因變得困難。"
+    ],
+    [
+     "瑞思科技顧問陳嘉宏堅持認為，純粹被動的偵測並不足夠。",
+     "他提倡用AI模擬攻擊、嚴格測試防禦，並把AI驅動的情境納入例行資安演練。"
+    ]
+   ]
+  }
+ },
+ "gloss": {
+  "a": {
+   "base": "a",
+   "en": "one; any (article)",
+   "es": "un; una",
+   "hi": "एक",
+   "ja": "一つの；ある",
+   "ko": "하나의",
+   "lvl": "A1",
+   "pos": "art.",
+   "zh": "一個"
+  },
+  "about": {
+   "base": "about",
+   "en": "on the subject of",
+   "es": "sobre",
+   "hi": "के बारे में",
+   "ja": "〜について",
+   "ko": "~에 대해",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "關於（talk about：談論）"
+  },
+  "acknowledge": {
+   "ant": [
+    "deny"
+   ],
+   "base": "acknowledge",
+   "col": [
+    "acknowledge a problem",
+    "publicly acknowledge"
+   ],
+   "en": "to accept that something is true",
+   "es": "reconocer",
+   "ex": "The minister acknowledged that mistakes were made.",
+   "hi": "स्वीकार करना",
+   "ja": "認める",
+   "ko": "인정하다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "admit",
+    "accept",
+    "concede",
+    "recognise"
+   ],
+   "zh": "承認"
+  },
+  "across": {
+   "base": "across",
+   "en": "in every part of",
+   "es": "en todo",
+   "hi": "भर में",
+   "ja": "〜全体で",
+   "ko": "~에 걸쳐",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "遍及"
+  },
+  "activity": {
+   "ant": [
+    "inactivity"
+   ],
+   "base": "activity",
+   "col": [
+    "midge activity",
+    "reduce activity"
+   ],
+   "en": "the moving or work something does",
+   "es": "actividad",
+   "ex": "Insect activity falls in winter.",
+   "hi": "गतिविधि",
+   "ja": "活動",
+   "ko": "활동",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "movement",
+    "action"
+   ],
+   "zh": "活動"
+  },
+  "adding": {
+   "ant": [
+    "removing",
+    "cutting"
+   ],
+   "base": "add",
+   "col": [
+    "adding jobs",
+    "adding value"
+   ],
+   "en": "making something bigger by putting more in",
+   "es": "añadir",
+   "ex": "The shop is adding ten new jobs.",
+   "hi": "जोड़ना",
+   "ja": "加える",
+   "ko": "추가하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "increasing",
+    "gaining"
+   ],
+   "zh": "增加"
+  },
+  "admit": {
+   "ant": [
+    "deny"
+   ],
+   "base": "admit",
+   "col": [
+    "admit to",
+    "admit that"
+   ],
+   "en": "agree that something bad is true",
+   "es": "admitir",
+   "ex": "He admits that he made a mistake.",
+   "hi": "स्वीकार करना",
+   "ja": "認める",
+   "ko": "인정하다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "acknowledge",
+    "concede",
+    "confess"
+   ],
+   "zh": "承認"
+  },
+  "advocates": {
+   "ant": [
+    "opposes"
+   ],
+   "base": "advocate",
+   "col": [
+    "advocates change",
+    "strongly advocates"
+   ],
+   "en": "publicly supports an idea",
+   "es": "defiende; propone",
+   "ex": "The group advocates cleaner public transport.",
+   "hi": "समर्थन करता है",
+   "ja": "提唱する",
+   "ko": "주장하다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "supports",
+    "recommends",
+    "champions",
+    "promotes"
+   ],
+   "zh": "主張；提倡"
+  },
+  "after": {
+   "base": "after",
+   "en": "later than",
+   "es": "después de",
+   "hi": "के बाद",
+   "ja": "〜の後で",
+   "ko": "~ 후에",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "在…之後"
+  },
+  "against": {
+   "base": "against",
+   "en": "compared with",
+   "es": "frente a",
+   "hi": "की तुलना में",
+   "ja": "〜に対して（比べて）",
+   "ko": "~에 비해",
+   "lvl": "B1",
+   "pos": "prep.",
+   "zh": "相較於"
+  },
+  "ai": {
+   "ant": [],
+   "base": "AI",
+   "col": [
+    "AI investment",
+    "the AI boom"
+   ],
+   "en": "computers that can think and learn like people",
+   "es": "inteligencia artificial (IA)",
+   "ex": "Many offices now use AI to write reports.",
+   "hi": "कृत्रिम बुद्धिमत्ता",
+   "ja": "人工知能（AI）",
+   "ko": "인공지능",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "artificial intelligence",
+    "machine learning"
+   ],
+   "zh": "人工智慧"
+  },
+  "ai-assisted": {
+   "ant": [
+    "manual"
+   ],
+   "base": "AI-assisted",
+   "col": [
+    "AI-assisted diagnosis",
+    "AI-assisted process"
+   ],
+   "en": "done with help from AI",
+   "es": "asistido por IA",
+   "ex": "AI-assisted search can save students hours.",
+   "hi": "एआई-सहायता प्राप्त",
+   "ja": "AI支援の",
+   "ko": "AI 지원의",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "AI-supported",
+    "automated",
+    "computer-aided"
+   ],
+   "zh": "人工智慧輔助的"
+  },
+  "ai-based": {
+   "ant": [
+    "manual"
+   ],
+   "base": "AI-based",
+   "col": [
+    "AI-based tools",
+    "AI-based system"
+   ],
+   "en": "using artificial intelligence",
+   "es": "basado en IA",
+   "ex": "The shop uses an AI-based chat service.",
+   "hi": "AI-आधारित",
+   "ja": "AIを使った",
+   "ko": "AI 기반의",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "AI-powered",
+    "automated",
+    "smart"
+   ],
+   "zh": "以AI為基礎的"
+  },
+  "ai-driven": {
+   "ant": [
+    "manual",
+    "human-run"
+   ],
+   "base": "AI-driven",
+   "col": [
+    "AI-driven tools",
+    "AI-driven analysis"
+   ],
+   "en": "run or powered by AI",
+   "es": "impulsado por IA",
+   "ex": "An AI-driven app sorts the emails.",
+   "hi": "AI-संचालित",
+   "ja": "AI主導の",
+   "ko": "AI 기반의",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "AI-powered",
+    "automated",
+    "AI-based"
+   ],
+   "zh": "AI驅動的"
+  },
+  "ai-powered": {
+   "ant": [
+    "manual"
+   ],
+   "base": "AI-powered",
+   "col": [
+    "AI-powered tool",
+    "AI-powered platform"
+   ],
+   "en": "using AI to work",
+   "es": "impulsado por IA",
+   "ex": "She bought an AI-powered vacuum cleaner.",
+   "hi": "एआई-संचालित",
+   "ja": "AI搭載の",
+   "ko": "AI 기반의",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "AI-driven",
+    "AI-based",
+    "smart"
+   ],
+   "zh": "人工智慧驅動的"
+  },
+  "all": {
+   "base": "all",
+   "en": "every one; the whole",
+   "es": "todos; todo",
+   "hi": "सब; सभी",
+   "ja": "すべて",
+   "ko": "모두",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "全部；都"
+  },
+  "also": {
+   "ant": [],
+   "base": "also",
+   "col": [
+    "also known as",
+    "also included"
+   ],
+   "en": "as well",
+   "es": "también",
+   "ex": "She speaks French and also some Spanish.",
+   "hi": "भी",
+   "ja": "〜も",
+   "ko": "또한",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "too",
+    "as well",
+    "besides"
+   ],
+   "zh": "也"
+  },
+  "although": {
+   "base": "although",
+   "en": "even though",
+   "es": "aunque",
+   "hi": "हालाँकि",
+   "ja": "〜だけれども",
+   "ko": "비록 ~이지만",
+   "lvl": "B1",
+   "pos": "conj.",
+   "zh": "雖然；儘管"
+  },
+  "an": {
+   "base": "an",
+   "en": "one; any (article)",
+   "es": "un; una",
+   "hi": "एक",
+   "ja": "一つの；ある",
+   "ko": "하나의",
+   "lvl": "A1",
+   "pos": "art.",
+   "zh": "一個"
+  },
+  "and": {
+   "base": "and",
+   "en": "used to join words",
+   "es": "y",
+   "hi": "और",
+   "ja": "そして",
+   "ko": "그리고",
+   "lvl": "A2",
+   "pos": "conj.",
+   "zh": "和；而且"
+  },
+  "anomalous": {
+   "zh": "異常的",
+   "hi": "असामान्य",
+   "es": "anómalo",
+   "ja": "異常な",
+   "ko": "비정상적인",
+   "en": "different from what is normal",
+   "pos": "adj.",
+   "base": "anomalous",
+   "lvl": "C2",
+   "syn": [
+    "abnormal",
+    "unusual",
+    "irregular"
+   ],
+   "ant": [
+    "normal"
+   ],
+   "ex": "The system flagged an anomalous login at 3 a.m.",
+   "col": [
+    "anomalous activity",
+    "anomalous results"
+   ],
+   "note": {
+    "meaning": "異常的；不合常規的。",
+    "usage": "正式用語，常見於科學、資安：anomalous activity/results/data。",
+    "collocations": [
+     "anomalous activity",
+     "anomalous results",
+     "anomalous data"
+    ],
+    "example": {
+     "en": "The software flags anomalous logins from abroad.",
+     "zh": "這套軟體會標記來自海外的異常登入。"
+    }
+   },
+   "noteHi": {
+    "meaning": "असामान्य; सामान्य से अलग।",
+    "usage": "औपचारिक शब्द: anomalous activity/results।",
+    "exampleTr": "सॉफ़्टवेयर विदेश से हुए असामान्य लॉगिन को चिह्नित करता है।"
+   },
+   "noteEs": {
+    "meaning": "anómalo; fuera de lo normal.",
+    "usage": "Registro formal: anomalous activity/results/data.",
+    "exampleTr": "El software señala los inicios de sesión anómalos desde el extranjero."
+   },
+   "noteJa": {
+    "meaning": "異常な；通常と異なる。",
+    "usage": "anomalous activity/results/data など堅い文脈で使う。",
+    "exampleTr": "そのソフトは海外からの異常なログインを警告する。"
+   },
+   "noteKo": {
+    "meaning": "비정상적인; 평소와 다른.",
+    "usage": "anomalous activity/results/data 등 격식체에서 쓴다.",
+    "exampleTr": "그 소프트웨어는 해외에서의 비정상 로그인을 표시한다."
+   },
+   "noteEn": {
+    "meaning": "different from what is normal or expected.",
+    "usage": "Formal; common in science and IT: 'anomalous activity', 'anomalous results'."
+   }
+  },
+  "application": {
+   "ant": [],
+   "base": "application",
+   "col": [
+    "mobile application",
+    "a phone application"
+   ],
+   "en": "a program on a phone or computer",
+   "es": "aplicación",
+   "ex": "Download the application to pay for parking.",
+   "hi": "ऐप्लिकेशन",
+   "ja": "アプリ",
+   "ko": "애플리케이션",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "app",
+    "program",
+    "software"
+   ],
+   "zh": "應用程式"
+  },
+  "approximately": {
+   "ant": [
+    "exactly",
+    "precisely"
+   ],
+   "base": "approximately",
+   "col": [
+    "approximately half",
+    "approximately equal"
+   ],
+   "en": "about; roughly",
+   "es": "aproximadamente",
+   "ex": "Approximately 500 people attended the concert.",
+   "hi": "लगभग",
+   "ja": "約；およそ",
+   "ko": "약；대략",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "about",
+    "roughly",
+    "around"
+   ],
+   "zh": "大約"
+  },
+  "architecture": {
+   "zh": "架構",
+   "hi": "ढांचा (आर्किटेक्चर)",
+   "es": "arquitectura",
+   "ja": "構成；アーキテクチャ",
+   "ko": "구조(아키텍처)",
+   "en": "the overall design of a computer system",
+   "pos": "n.",
+   "base": "architecture",
+   "lvl": "C1",
+   "syn": [
+    "structure",
+    "design",
+    "framework"
+   ],
+   "ant": [],
+   "ex": "The bank rebuilt its network architecture last year.",
+   "col": [
+    "security architecture",
+    "system architecture"
+   ]
+  },
+  "are": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "there are",
+    "are expected"
+   ],
+   "en": "to exist; to have a quality",
+   "es": "ser; estar",
+   "ex": "There are three parks near my home.",
+   "hi": "है; होना",
+   "ja": "〜である",
+   "ko": "~이다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "exist",
+    "remain"
+   ],
+   "zh": "是"
+  },
+  "argues": {
+   "ant": [
+    "concedes"
+   ],
+   "base": "argue",
+   "col": [
+    "argues convincingly",
+    "argues that"
+   ],
+   "en": "says something is true and gives reasons",
+   "es": "sostiene",
+   "ex": "She argues that the town needs more buses.",
+   "hi": "तर्क देता है",
+   "ja": "主張する",
+   "ko": "주장한다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "claims",
+    "contends",
+    "maintains"
+   ],
+   "zh": "主張；認為"
+  },
+  "around": {
+   "ant": [
+    "exactly"
+   ],
+   "base": "around",
+   "col": [
+    "around half",
+    "around the world"
+   ],
+   "en": "approximately",
+   "es": "alrededor de",
+   "ex": "Around forty people joined the walk.",
+   "hi": "लगभग",
+   "ja": "約",
+   "ko": "약",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "about",
+    "approximately",
+    "roughly"
+   ],
+   "zh": "大約"
+  },
+  "artificial": {
+   "ant": [
+    "natural",
+    "human"
+   ],
+   "base": "artificial",
+   "col": [
+    "artificial intelligence",
+    "artificial light"
+   ],
+   "en": "made by people, not natural",
+   "es": "artificial",
+   "ex": "Artificial intelligence can translate texts in seconds.",
+   "hi": "कृत्रिम",
+   "ja": "人工の",
+   "ko": "인공의",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "man-made",
+    "synthetic",
+    "machine"
+   ],
+   "zh": "人造的；人工的"
+  },
+  "as": {
+   "base": "as",
+   "en": "in the same way; in the role of",
+   "es": "como",
+   "hi": "जैसे; के रूप में",
+   "ja": "〜として；〜のように",
+   "ko": "~로서；~처럼",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "如同；作為"
+  },
+  "at": {
+   "ant": [],
+   "base": "at",
+   "col": [
+    "at the back",
+    "at least"
+   ],
+   "en": "in a place, time or level",
+   "es": "en; a",
+   "ex": "The shop opens at nine.",
+   "hi": "पर",
+   "ja": "〜で；〜に",
+   "ko": "~에",
+   "lvl": "A1",
+   "pos": "prep.",
+   "syn": [
+    "in",
+    "on"
+   ],
+   "zh": "在（地點、時間）；在…（價格）"
+  },
+  "attack": {
+   "ant": [
+    "defence"
+   ],
+   "base": "attack",
+   "col": [
+    "cyber attack",
+    "launch an attack"
+   ],
+   "en": "an attempt to harm something",
+   "es": "ataque",
+   "ex": "The bank's website suffered an attack last week.",
+   "hi": "हमला",
+   "ja": "攻撃",
+   "ko": "공격",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "assault",
+    "strike"
+   ],
+   "zh": "攻擊"
+  },
+  "attackers": {
+   "zh": "攻擊者",
+   "hi": "हमलावर",
+   "es": "atacantes",
+   "ja": "攻撃者",
+   "ko": "공격자",
+   "en": "people who try to harm a system",
+   "pos": "n.",
+   "base": "attacker",
+   "lvl": "B1",
+   "syn": [
+    "hackers",
+    "intruders",
+    "assailants"
+   ],
+   "ant": [
+    "defenders"
+   ],
+   "ex": "The attackers stole thousands of passwords.",
+   "col": [
+    "cyber attackers",
+    "attackers target"
+   ]
+  },
+  "attacks": {
+   "ant": [
+    "defence"
+   ],
+   "base": "attack",
+   "col": [
+    "animal attacks",
+    "suffer attacks"
+   ],
+   "en": "violent actions against someone",
+   "es": "ataques",
+   "ex": "The farmer lost sheep to fox attacks.",
+   "hi": "हमले",
+   "ja": "攻撃",
+   "ko": "공격",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "assaults",
+    "strikes"
+   ],
+   "zh": "攻擊"
+  },
+  "attributed": {
+   "ant": [],
+   "base": "attribute",
+   "col": [
+    "attributed to",
+    "widely attributed"
+   ],
+   "en": "said something was caused by",
+   "es": "atribuyó",
+   "ex": "She attributed her success to hard work.",
+   "hi": "ज़िम्मेदार ठहराया",
+   "ja": "〜のせいとした",
+   "ko": "~의 탓으로 돌렸다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "ascribed",
+    "credited",
+    "blamed"
+   ],
+   "zh": "歸因於"
+  },
+  "attribution": {
+   "ant": [],
+   "base": "attribution",
+   "col": [
+    "attribution of blame",
+    "make an attribution"
+   ],
+   "en": "saying who is responsible for something",
+   "es": "atribución",
+   "ex": "Attribution of cyber attacks is often difficult.",
+   "hi": "श्रेय/ज़िम्मेदारी तय करना",
+   "ja": "（犯行の）帰属；特定",
+   "ko": "귀속; 소행 판단",
+   "lvl": "C2",
+   "pos": "n.",
+   "syn": [
+    "assignment",
+    "ascription",
+    "linking"
+   ],
+   "zh": "歸屬認定；認定是誰所為"
+  },
+  "august": {
+   "base": "August",
+   "en": "the eighth month of the year",
+   "es": "agosto",
+   "hi": "अगस्त",
+   "ja": "8月",
+   "ko": "8월",
+   "lvl": "PN",
+   "pos": "n.",
+   "zh": "八月"
+  },
+  "automated": {
+   "ant": [
+    "manual",
+    "human"
+   ],
+   "base": "automated",
+   "col": [
+    "automated system",
+    "automated insights"
+   ],
+   "en": "done by machines or computers",
+   "es": "automatizado",
+   "ex": "The bank sends automated messages.",
+   "hi": "स्वचालित",
+   "ja": "自動化された",
+   "ko": "자동화된",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "automatic",
+    "computerised",
+    "machine-made"
+   ],
+   "zh": "自動化的"
+  },
+  "autonomous": {
+   "zh": "自主的；自動運作的",
+   "hi": "स्वायत्त",
+   "es": "autónomo",
+   "ja": "自律的な",
+   "ko": "자율적인",
+   "en": "able to act on its own without human control",
+   "pos": "adj.",
+   "base": "autonomous",
+   "lvl": "C1",
+   "syn": [
+    "independent",
+    "self-directed",
+    "automatic"
+   ],
+   "ant": [
+    "controlled",
+    "manual"
+   ],
+   "ex": "Autonomous robots clean the airport at night.",
+   "col": [
+    "autonomous AI",
+    "autonomous vehicles"
+   ]
+  },
+  "average": {
+   "ant": [
+    "extreme"
+   ],
+   "base": "average",
+   "col": [
+    "above average",
+    "the European average"
+   ],
+   "en": "the usual or middle amount",
+   "es": "promedio",
+   "ex": "House prices here are above the national average.",
+   "hi": "औसत",
+   "ja": "平均",
+   "ko": "평균",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "mean",
+    "norm",
+    "typical level"
+   ],
+   "zh": "平均"
+  },
+  "back": {
+   "zh": "反擊（fight back）",
+   "hi": "जवाब देना (fight back)",
+   "es": "defenderse (fight back)",
+   "ja": "反撃する（fight back）",
+   "ko": "반격하다(fight back)",
+   "en": "(fight back) defend yourself against an attack",
+   "pos": "adv.",
+   "base": "back",
+   "lvl": "A1"
+  },
+  "bank": {
+   "ant": [],
+   "base": "bank",
+   "col": [
+    "central bank",
+    "bank account"
+   ],
+   "en": "a business that keeps and lends money",
+   "es": "banco",
+   "ex": "The central bank raised interest rates.",
+   "hi": "बैंक",
+   "ja": "銀行",
+   "ko": "은행",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "lender",
+    "financial institution"
+   ],
+   "zh": "銀行"
+  },
+  "banking": {
+   "ant": [],
+   "base": "banking",
+   "col": [
+    "banking sector",
+    "online banking"
+   ],
+   "en": "the business of banks",
+   "es": "banca",
+   "ex": "She has worked in banking for ten years.",
+   "hi": "बैंकिंग",
+   "ja": "銀行業",
+   "ko": "은행업",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "finance",
+    "bank sector"
+   ],
+   "zh": "銀行業"
+  },
+  "banks": {
+   "ant": [],
+   "base": "bank",
+   "col": [
+    "big banks",
+    "Irish banks"
+   ],
+   "en": "businesses that keep and lend money",
+   "es": "bancos",
+   "ex": "Most banks have mobile apps now.",
+   "hi": "बैंक",
+   "ja": "銀行",
+   "ko": "은행",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "lenders",
+    "financial institutions"
+   ],
+   "zh": "銀行"
+  },
+  "be": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "will be",
+    "to be"
+   ],
+   "en": "to exist; to have a quality",
+   "es": "ser; estar",
+   "ex": "The new road will be ready next year.",
+   "hi": "है; होना",
+   "ja": "〜である",
+   "ko": "~이다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "exist",
+    "become",
+    "remain"
+   ],
+   "zh": "是"
+  },
+  "before": {
+   "ant": [
+    "after",
+    "later"
+   ],
+   "base": "before",
+   "col": [
+    "the day before",
+    "never before"
+   ],
+   "en": "at an earlier time",
+   "es": "antes",
+   "ex": "I had never seen snow before.",
+   "hi": "पहले",
+   "ja": "以前は",
+   "ko": "전에는",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "previously",
+    "earlier",
+    "formerly"
+   ],
+   "zh": "以前"
+  },
+  "between": {
+   "base": "between",
+   "en": "in the space or time separating two things",
+   "es": "entre",
+   "hi": "के बीच",
+   "ja": "〜の間に",
+   "ko": "~ 사이에",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "在…之間"
+  },
+  "beyond": {
+   "base": "beyond",
+   "en": "further than",
+   "es": "más allá de",
+   "hi": "से आगे",
+   "ja": "〜を超えて",
+   "ko": "~을 넘어",
+   "lvl": "B2",
+   "pos": "prep.",
+   "zh": "超出；不只是（go beyond）"
+  },
+  "big": {
+   "ant": [
+    "small",
+    "little"
+   ],
+   "base": "big",
+   "col": [
+    "a big problem",
+    "big companies"
+   ],
+   "en": "large",
+   "es": "grande",
+   "ex": "A big crowd waited outside the station.",
+   "hi": "बड़ा",
+   "ja": "大きい",
+   "ko": "큰",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "large",
+    "major",
+    "huge"
+   ],
+   "zh": "大的"
+  },
+  "blocked": {
+   "zh": "阻擋",
+   "hi": "रोका",
+   "es": "bloqueó",
+   "ja": "阻止した",
+   "ko": "차단했다",
+   "en": "stopped something from getting through",
+   "pos": "v.",
+   "base": "block",
+   "lvl": "B1",
+   "syn": [
+    "stopped",
+    "prevented",
+    "barred"
+   ],
+   "ant": [
+    "allowed"
+   ],
+   "ex": "The app blocked a message from an unknown number.",
+   "col": [
+    "blocked access",
+    "blocked an attack"
+   ]
+  },
+  "blur": {
+   "zh": "使模糊",
+   "hi": "धुंधला करना",
+   "es": "difuminar",
+   "ja": "曖昧にする",
+   "ko": "흐리게 하다",
+   "en": "make a difference less clear",
+   "pos": "v.",
+   "base": "blur",
+   "lvl": "C1",
+   "syn": [
+    "obscure",
+    "muddy",
+    "confuse"
+   ],
+   "ant": [
+    "clarify",
+    "sharpen"
+   ],
+   "ex": "Social media can blur work and free time.",
+   "col": [
+    "blur the line",
+    "blur the distinction"
+   ]
+  },
+  "build": {
+   "ant": [
+    "demolish"
+   ],
+   "base": "build",
+   "col": [
+    "build homes",
+    "build a road"
+   ],
+   "en": "make a building",
+   "es": "construir",
+   "ex": "They plan to build a new school.",
+   "hi": "बनाना",
+   "ja": "建てる",
+   "ko": "짓다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "construct",
+    "put up",
+    "erect"
+   ],
+   "zh": "建造"
+  },
+  "but": {
+   "base": "but",
+   "en": "used to show contrast",
+   "es": "pero",
+   "hi": "लेकिन",
+   "ja": "しかし",
+   "ko": "그러나",
+   "lvl": "A2",
+   "pos": "conj.",
+   "zh": "但是"
+  },
+  "by": {
+   "base": "by",
+   "en": "showing who did something",
+   "es": "por",
+   "hi": "द्वारा",
+   "ja": "〜によって",
+   "ko": "~에 의해",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "由；被"
+  },
+  "came": {
+   "zh": "來；發生",
+   "hi": "आए",
+   "es": "vinieron",
+   "ja": "来た",
+   "ko": "왔다",
+   "en": "arrived or happened",
+   "pos": "v.",
+   "base": "come",
+   "lvl": "A1",
+   "syn": [
+    "arrived",
+    "happened",
+    "occurred"
+   ],
+   "ant": [
+    "went"
+   ],
+   "ex": "The rain came after a long dry week.",
+   "col": [
+    "came from",
+    "came between"
+   ]
+  },
+  "can": {
+   "ant": [
+    "cannot"
+   ],
+   "base": "can",
+   "col": [
+    "can help",
+    "can block"
+   ],
+   "en": "to be able to",
+   "es": "poder",
+   "ex": "Anyone can join the club for free.",
+   "hi": "सकना",
+   "ja": "〜できる",
+   "ko": "~할 수 있다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "is able to",
+    "may"
+   ],
+   "zh": "能夠"
+  },
+  "carried": {
+   "zh": "（carried out：執行；發動）",
+   "hi": "(carried out) किया गया",
+   "es": "(carried out) llevado a cabo",
+   "ja": "（carried out）実行された",
+   "ko": "(carried out) 실행된",
+   "en": "(carried out) done or performed",
+   "pos": "v.",
+   "base": "carry",
+   "lvl": "A2",
+   "syn": [
+    "performed",
+    "done",
+    "conducted"
+   ],
+   "ant": [],
+   "ex": "The test was carried out by experts.",
+   "col": [
+    "carried out an attack",
+    "carried out a study"
+   ]
+  },
+  "cause": {
+   "ant": [
+    "prevent"
+   ],
+   "base": "cause",
+   "col": [
+    "cause damage",
+    "cause problems"
+   ],
+   "en": "make something happen",
+   "es": "causar",
+   "ex": "Heavy rain can cause serious flooding.",
+   "hi": "कारण बनना",
+   "ja": "引き起こす",
+   "ko": "일으키다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "lead to",
+    "create",
+    "bring about"
+   ],
+   "zh": "造成；引起"
+  },
+  "challenge": {
+   "zh": "挑戰",
+   "hi": "चुनौती",
+   "es": "desafío",
+   "ja": "課題",
+   "ko": "도전",
+   "en": "a difficult problem to deal with",
+   "pos": "n.",
+   "base": "challenge",
+   "lvl": "B1",
+   "syn": [
+    "difficulty",
+    "problem",
+    "test"
+   ],
+   "ant": [
+    "ease"
+   ],
+   "ex": "Online fraud is a big challenge for banks.",
+   "col": [
+    "face a challenge",
+    "major challenge"
+   ]
+  },
+  "chen": {
+   "base": "Chen",
+   "en": "family name of Chen Yen-chung, an urban planning professor",
+   "es": "Chen",
+   "hi": "चेन",
+   "ja": "陳（チェン）",
+   "ko": "천(陳)",
+   "lvl": "PN",
+   "pos": "n.",
+   "zh": "陳（姓）"
+  },
+  "chia-hung": {
+   "zh": "嘉宏（人名）",
+   "hi": "चिया-हुंग (नाम)",
+   "es": "Chia-hung (nombre)",
+   "ja": "嘉宏（人名）",
+   "ko": "자훙(이름)",
+   "en": "part of a Taiwanese given name",
+   "pos": "n.",
+   "base": "Chia-hung",
+   "lvl": "PN"
+  },
+  "clearly": {
+   "ant": [
+    "vaguely"
+   ],
+   "base": "clearly",
+   "col": [
+    "clearly state",
+    "clearly approve"
+   ],
+   "en": "in a way easy to understand",
+   "es": "claramente",
+   "ex": "The sign clearly says no parking.",
+   "hi": "स्पष्ट रूप से",
+   "ja": "はっきりと",
+   "ko": "분명하게",
+   "lvl": "B1",
+   "pos": "adv.",
+   "syn": [
+    "plainly",
+    "explicitly",
+    "openly"
+   ],
+   "zh": "清楚地"
+  },
+  "climbed": {
+   "zh": "上升",
+   "hi": "बढ़ा",
+   "es": "subió",
+   "ja": "上昇した",
+   "ko": "상승했다",
+   "en": "went up",
+   "pos": "v.",
+   "base": "climb",
+   "lvl": "B1",
+   "syn": [
+    "rose",
+    "increased",
+    "went up"
+   ],
+   "ant": [
+    "fell",
+    "dropped"
+   ],
+   "ex": "Prices climbed by 5% last year.",
+   "col": [
+    "climb sharply",
+    "climbed to"
+   ]
+  },
+  "clustered": {
+   "zh": "聚集",
+   "hi": "केंद्रित",
+   "es": "agrupado",
+   "ja": "集中した",
+   "ko": "몰려 있는",
+   "en": "grouped closely together",
+   "pos": "v.",
+   "base": "cluster",
+   "lvl": "C1",
+   "syn": [
+    "grouped",
+    "bunched",
+    "concentrated"
+   ],
+   "ant": [
+    "scattered",
+    "spread"
+   ],
+   "ex": "The cafes are clustered near the station.",
+   "col": [
+    "clustered around",
+    "clustered together"
+   ]
+  },
+  "come": {
+   "zh": "來",
+   "hi": "आना",
+   "es": "venir",
+   "ja": "来る",
+   "ko": "오다",
+   "en": "arrive at a place",
+   "pos": "v.",
+   "base": "come",
+   "lvl": "A1",
+   "syn": [
+    "arrive",
+    "appear"
+   ],
+   "ant": [
+    "leave"
+   ],
+   "ex": "Please come before the shop closes.",
+   "col": [
+    "come back",
+    "come in"
+   ]
+  },
+  "computer": {
+   "zh": "電腦",
+   "hi": "कंप्यूटर",
+   "es": "ordenador; computadora",
+   "ja": "コンピューター",
+   "ko": "컴퓨터",
+   "en": "an electronic machine for working with information",
+   "pos": "n.",
+   "base": "computer",
+   "lvl": "A1",
+   "syn": [
+    "PC",
+    "machine",
+    "laptop"
+   ],
+   "ant": [],
+   "ex": "I use my computer for school work.",
+   "col": [
+    "computer program",
+    "computer code"
+   ]
+  },
+  "computers": {
+   "ant": [],
+   "base": "computer",
+   "col": [
+    "personal computers",
+    "powerful computers"
+   ],
+   "en": "electronic machines that process data",
+   "es": "ordenadores",
+   "ex": "Our school bought new computers this year.",
+   "hi": "कंप्यूटर",
+   "ja": "コンピューター",
+   "ko": "컴퓨터",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "machines",
+    "PCs",
+    "devices"
+   ],
+   "zh": "電腦"
+  },
+  "conceding": {
+   "ant": [
+    "denying",
+    "disputing"
+   ],
+   "base": "concede",
+   "col": [
+    "concede that",
+    "concede defeat"
+   ],
+   "en": "admitting something you would rather not",
+   "es": "admitiendo; reconociendo",
+   "ex": "The coach conceded that the team played badly.",
+   "hi": "मानते हुए",
+   "ja": "（しぶしぶ）認めながら",
+   "ko": "(마지못해) 인정하면서",
+   "lvl": "C2",
+   "pos": "v.",
+   "syn": [
+    "admitting",
+    "acknowledging",
+    "accepting"
+   ],
+   "zh": "（勉強）承認"
+  },
+  "concentrated": {
+   "zh": "集中的",
+   "hi": "केंद्रित",
+   "es": "concentrado",
+   "ja": "集中した",
+   "ko": "집중된",
+   "en": "gathered in one place",
+   "pos": "adj.",
+   "base": "concentrated",
+   "lvl": "C1",
+   "syn": [
+    "focused",
+    "grouped",
+    "centred"
+   ],
+   "ant": [
+    "spread out"
+   ],
+   "ex": "Jobs are concentrated in the cities.",
+   "col": [
+    "concentrated in",
+    "highly concentrated"
+   ]
+  },
+  "conclusively": {
+   "zh": "確鑿地；決定性地",
+   "hi": "निर्णायक रूप से",
+   "es": "de forma concluyente",
+   "ja": "決定的に",
+   "ko": "결정적으로",
+   "en": "in a way that proves something without doubt",
+   "pos": "adv.",
+   "base": "conclusively",
+   "lvl": "C1",
+   "syn": [
+    "definitively",
+    "decisively",
+    "beyond doubt"
+   ],
+   "ant": [
+    "inconclusively"
+   ],
+   "ex": "Tests showed conclusively that the water was safe.",
+   "col": [
+    "prove conclusively",
+    "conclusively show"
+   ]
+  },
+  "confronted": {
+   "zh": "面對",
+   "hi": "सामना करना पड़ा",
+   "es": "enfrentado",
+   "ja": "直面した",
+   "ko": "직면한",
+   "en": "(be confronted with) have to deal with a problem",
+   "pos": "v.",
+   "base": "confront",
+   "lvl": "C1",
+   "syn": [
+    "faced",
+    "challenged",
+    "met"
+   ],
+   "ant": [
+    "avoided"
+   ],
+   "ex": "The team was confronted with a difficult choice.",
+   "col": [
+    "confronted with",
+    "be confronted by"
+   ]
+  },
+  "consequently": {
+   "ant": [],
+   "base": "consequently",
+   "col": [
+    "and consequently",
+    "consequently, prices rose"
+   ],
+   "en": "as a result",
+   "es": "por consiguiente",
+   "ex": "The road was closed; consequently, buses were late.",
+   "hi": "परिणामस्वरूप",
+   "ja": "その結果",
+   "ko": "그 결과",
+   "lvl": "C1",
+   "pos": "adv.",
+   "syn": [
+    "as a result",
+    "therefore",
+    "so"
+   ],
+   "zh": "因此"
+  },
+  "considerably": {
+   "zh": "相當大地",
+   "hi": "काफ़ी",
+   "es": "considerablemente",
+   "ja": "かなり",
+   "ko": "상당히",
+   "en": "by a large amount",
+   "pos": "adv.",
+   "base": "considerably",
+   "lvl": "C1",
+   "syn": [
+    "significantly",
+    "greatly",
+    "substantially"
+   ],
+   "ant": [
+    "slightly"
+   ],
+   "ex": "Prices rose considerably last year.",
+   "col": [
+    "considerably lower",
+    "grow considerably"
+   ]
+  },
+  "consultant": {
+   "zh": "顧問",
+   "hi": "सलाहकार",
+   "es": "consultor",
+   "ja": "コンサルタント",
+   "ko": "컨설턴트",
+   "en": "an expert who gives professional advice",
+   "pos": "n.",
+   "base": "consultant",
+   "lvl": "B2",
+   "syn": [
+    "adviser",
+    "specialist",
+    "expert"
+   ],
+   "ant": [],
+   "ex": "The firm hired a consultant to check its systems.",
+   "col": [
+    "security consultant",
+    "management consultant"
+   ]
+  },
+  "contends": {
+   "ant": [
+    "concedes"
+   ],
+   "base": "contend",
+   "col": [
+    "contends that",
+    "rightly contends"
+   ],
+   "en": "claims",
+   "es": "sostiene",
+   "ex": "The report contends that rents will keep rising.",
+   "hi": "तर्क देता है",
+   "ja": "主張する",
+   "ko": "주장한다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "argues",
+    "claims",
+    "maintains"
+   ],
+   "zh": "主張"
+  },
+  "cooperative": {
+   "zh": "合作（社）的",
+   "hi": "सहकारी",
+   "es": "cooperativo",
+   "ja": "協同組合の",
+   "ko": "협동조합의",
+   "en": "owned and run by its members together",
+   "pos": "adj.",
+   "base": "cooperative",
+   "lvl": "B2",
+   "syn": [
+    "collective",
+    "joint",
+    "mutual"
+   ],
+   "ant": [
+    "competitive"
+   ],
+   "ex": "The farmers sell their rice through a cooperative shop.",
+   "col": [
+    "cooperative bank",
+    "cooperative society"
+   ]
+  },
+  "copy": {
+   "ant": [
+    "delete"
+   ],
+   "base": "copy",
+   "col": [
+    "copy data",
+    "copy a file"
+   ],
+   "en": "to make the same thing again",
+   "es": "copiar",
+   "ex": "Please copy the file to your laptop.",
+   "hi": "कॉपी करना",
+   "ja": "コピーする",
+   "ko": "복사하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "duplicate",
+    "reproduce",
+    "take"
+   ],
+   "zh": "複製"
+  },
+  "corporate": {
+   "ant": [
+    "personal"
+   ],
+   "base": "corporate",
+   "col": [
+    "corporate tax",
+    "corporate sector"
+   ],
+   "en": "of companies",
+   "es": "corporativo; de sociedades",
+   "ex": "Corporate profits rose this year.",
+   "hi": "कॉर्पोरेट",
+   "ja": "法人の",
+   "ko": "법인의",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "company",
+    "business",
+    "commercial"
+   ],
+   "zh": "公司的；企業的（corporate tax：公司稅）"
+  },
+  "customers": {
+   "ant": [
+    "sellers"
+   ],
+   "base": "customer",
+   "col": [
+    "bank customers",
+    "serve customers"
+   ],
+   "en": "people who buy or use a service",
+   "es": "clientes",
+   "ex": "The shop wants to keep its customers happy.",
+   "hi": "ग्राहक",
+   "ja": "顧客",
+   "ko": "고객들",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "clients",
+    "users",
+    "buyers"
+   ],
+   "zh": "顧客"
+  },
+  "cyber": {
+   "ant": [
+    "offline"
+   ],
+   "base": "cyber",
+   "col": [
+    "cyber security",
+    "cyber attack"
+   ],
+   "en": "related to computers and the internet",
+   "es": "ciber",
+   "ex": "Cyber attacks on banks are rising.",
+   "hi": "साइबर",
+   "ja": "サイバー",
+   "ko": "사이버",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "online",
+    "digital",
+    "internet"
+   ],
+   "zh": "網路的（cyber security：網路安全）"
+  },
+  "cyberattacks": {
+   "zh": "網路攻擊",
+   "hi": "साइबर हमले",
+   "es": "ciberataques",
+   "ja": "サイバー攻撃",
+   "ko": "사이버 공격",
+   "en": "attempts to damage or break into computer systems",
+   "pos": "n.",
+   "base": "cyberattack",
+   "lvl": "B2",
+   "syn": [
+    "hacks",
+    "online attacks",
+    "intrusions"
+   ],
+   "ant": [],
+   "ex": "Hospitals are a common target of cyberattacks.",
+   "col": [
+    "prevent cyberattacks",
+    "launch cyberattacks"
+   ]
+  },
+  "cybersecurity": {
+   "zh": "網路安全",
+   "hi": "साइबर सुरक्षा",
+   "es": "ciberseguridad",
+   "ja": "サイバーセキュリティ",
+   "ko": "사이버 보안",
+   "en": "protection of computers and networks from attack",
+   "pos": "n.",
+   "base": "cybersecurity",
+   "lvl": "B2",
+   "syn": [
+    "online security",
+    "IT security",
+    "data protection"
+   ],
+   "ant": [],
+   "ex": "The company hired a cybersecurity team.",
+   "col": [
+    "cybersecurity drills",
+    "cybersecurity tools"
+   ]
+  },
+  "damage": {
+   "zh": "損害",
+   "hi": "नुकसान",
+   "es": "daño",
+   "ja": "損害",
+   "ko": "피해",
+   "en": "harm done to something",
+   "pos": "n.",
+   "base": "damage",
+   "lvl": "B1",
+   "syn": [
+    "harm",
+    "loss",
+    "injury"
+   ],
+   "ant": [
+    "repair"
+   ],
+   "ex": "The attack caused little damage.",
+   "col": [
+    "cause damage",
+    "serious damage"
+   ]
+  },
+  "danger": {
+   "ant": [
+    "safety"
+   ],
+   "base": "danger",
+   "col": [
+    "a danger to",
+    "in danger"
+   ],
+   "en": "a chance of harm",
+   "es": "peligro",
+   "ex": "The old bridge is a danger to drivers.",
+   "hi": "खतरा",
+   "ja": "危険",
+   "ko": "위험",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "risk",
+    "threat",
+    "hazard"
+   ],
+   "zh": "危險"
+  },
+  "defence": {
+   "zh": "防禦",
+   "hi": "रक्षा",
+   "es": "defensa",
+   "ja": "防御",
+   "ko": "방어",
+   "en": "protection against attack",
+   "pos": "n.",
+   "base": "defence",
+   "lvl": "B2",
+   "syn": [
+    "protection",
+    "shield",
+    "safeguard"
+   ],
+   "ant": [
+    "attack"
+   ],
+   "ex": "Strong passwords are the first line of defence.",
+   "col": [
+    "line of defence",
+    "frontline defence"
+   ]
+  },
+  "defences": {
+   "zh": "防禦措施",
+   "hi": "रक्षा उपाय",
+   "es": "defensas",
+   "ja": "防御策",
+   "ko": "방어 체계",
+   "en": "systems that protect against attack",
+   "pos": "n.",
+   "base": "defence",
+   "lvl": "B2",
+   "syn": [
+    "protections",
+    "safeguards",
+    "barriers"
+   ],
+   "ant": [
+    "weaknesses"
+   ],
+   "ex": "The company tested its defences against hackers.",
+   "col": [
+    "test defences",
+    "cyber defences"
+   ]
+  },
+  "definitively": {
+   "zh": "明確地；確定地",
+   "hi": "निश्चित रूप से",
+   "es": "definitivamente",
+   "ja": "確定的に",
+   "ko": "확정적으로",
+   "en": "in a final and certain way",
+   "pos": "adv.",
+   "base": "definitively",
+   "lvl": "C1",
+   "syn": [
+    "conclusively",
+    "clearly",
+    "certainly"
+   ],
+   "ant": [
+    "tentatively"
+   ],
+   "ex": "No one can say definitively when the virus started.",
+   "col": [
+    "definitively prove",
+    "say definitively"
+   ]
+  },
+  "deploying": {
+   "ant": [
+    "withdrawing"
+   ],
+   "base": "deploy",
+   "col": [
+    "deploy technology",
+    "deploy staff"
+   ],
+   "en": "putting something into use for a purpose",
+   "es": "desplegar; emplear",
+   "ex": "The city is deploying robots to clean streets.",
+   "hi": "तैनात करना; इस्तेमाल करना",
+   "ja": "導入する；活用する",
+   "ko": "도입하다; 배치하다",
+   "lvl": "C2",
+   "pos": "v.",
+   "syn": [
+    "using",
+    "employing",
+    "introducing",
+    "applying"
+   ],
+   "zh": "運用；部署",
+   "note": {
+    "meaning": "部署；運用（資源、技術）。",
+    "usage": "常見 deploy technology/troops/resources；deploy sth as/to do sth。",
+    "collocations": [
+     "deploy technology",
+     "deploy resources",
+     "widely deployed"
+    ],
+    "example": {
+     "en": "The city is deploying sensors to track air quality.",
+     "zh": "市政府正在部署感測器來追蹤空氣品質。"
+    }
+   },
+   "noteHi": {
+    "meaning": "तैनात करना; किसी तकनीक या संसाधन का उपयोग करना।",
+    "usage": "deploy technology/resources आम प्रयोग है।",
+    "exampleTr": "शहर हवा की गुणवत्ता मापने के लिए सेंसर लगा रहा है।"
+   },
+   "noteEs": {
+    "meaning": "desplegar; poner en uso una tecnología o recurso.",
+    "usage": "Se usa deploy technology/resources; deploy sth as sth.",
+    "exampleTr": "La ciudad está desplegando sensores para medir la calidad del aire."
+   },
+   "noteJa": {
+    "meaning": "配備する；（技術・資源を）投入する。",
+    "usage": "deploy technology/resources の形が多い。",
+    "exampleTr": "市は大気の質を測るためにセンサーを配備している。"
+   },
+   "noteKo": {
+    "meaning": "배치하다; 기술이나 자원을 투입하다.",
+    "usage": "deploy technology/resources 형태가 흔하다.",
+    "exampleTr": "시는 대기 질을 측정하기 위해 센서를 배치하고 있다."
+   },
+   "noteEn": {
+    "meaning": "to put technology, people or resources into use for a purpose.",
+    "usage": "Common: 'deploy technology', 'deploy resources', 'deploy something as a tool'."
+   }
+  },
+  "detect": {
+   "zh": "偵測；發現",
+   "hi": "पता लगाना",
+   "es": "detectar",
+   "ja": "検知する",
+   "ko": "감지하다",
+   "en": "to notice or find something that is hard to see",
+   "pos": "v.",
+   "base": "detect",
+   "lvl": "B2",
+   "syn": [
+    "discover",
+    "sense",
+    "spot"
+   ],
+   "ant": [
+    "miss",
+    "overlook"
+   ],
+   "ex": "The machine can detect very small changes.",
+   "col": [
+    "detect a signal",
+    "easily detect"
+   ]
+  },
+  "detection": {
+   "ant": [],
+   "base": "detection",
+   "col": [
+    "fraud detection",
+    "scam detection"
+   ],
+   "en": "finding or noticing something",
+   "es": "detección",
+   "ex": "Early detection of illness saves lives.",
+   "hi": "पहचान",
+   "ja": "検知",
+   "ko": "탐지",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "discovery",
+    "identification",
+    "spotting"
+   ],
+   "zh": "偵測"
+  },
+  "documented": {
+   "ant": [],
+   "base": "document",
+   "col": [
+    "well documented",
+    "documented cases"
+   ],
+   "en": "recorded in writing or photos",
+   "es": "documentado",
+   "ex": "The changes were documented in a report.",
+   "hi": "दर्ज किया गया",
+   "ja": "記録された",
+   "ko": "기록된",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "recorded",
+    "logged",
+    "noted"
+   ],
+   "zh": "記錄在案"
+  },
+  "double": {
+   "ant": [
+    "half"
+   ],
+   "base": "double",
+   "col": [
+    "double the rate",
+    "double the average"
+   ],
+   "en": "twice as much",
+   "es": "el doble",
+   "ex": "Rents here are double the national figure.",
+   "hi": "दोगुना",
+   "ja": "2倍",
+   "ko": "두 배",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "twice",
+    "two times",
+    "twofold"
+   ],
+   "zh": "兩倍；近一倍"
+  },
+  "drills": {
+   "zh": "演練；演習",
+   "hi": "अभ्यास (ड्रिल)",
+   "es": "simulacros",
+   "ja": "訓練；演習",
+   "ko": "훈련",
+   "en": "practice exercises for an emergency",
+   "pos": "n.",
+   "base": "drill",
+   "lvl": "B2",
+   "syn": [
+    "exercises",
+    "practices",
+    "rehearsals"
+   ],
+   "ant": [],
+   "ex": "Schools hold earthquake drills twice a year.",
+   "col": [
+    "fire drills",
+    "security drills"
+   ]
+  },
+  "during": {
+   "base": "during",
+   "en": "at some time in a period",
+   "es": "durante",
+   "hi": "के दौरान",
+   "ja": "〜の間",
+   "ko": "~동안",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "在……期間"
+  },
+  "each": {
+   "base": "each",
+   "en": "every one",
+   "es": "cada",
+   "hi": "प्रत्येक",
+   "ja": "それぞれの",
+   "ko": "각각의",
+   "lvl": "A1",
+   "pos": "det.",
+   "zh": "每個"
+  },
+  "employs": {
+   "zh": "採用；使用",
+   "hi": "उपयोग करता है",
+   "es": "emplea",
+   "ja": "採用する",
+   "ko": "사용한다",
+   "en": "uses a method or tool",
+   "pos": "v.",
+   "base": "employ",
+   "lvl": "B2",
+   "syn": [
+    "uses",
+    "applies",
+    "utilises"
+   ],
+   "ant": [
+    "rejects"
+   ],
+   "ex": "The firm employs AI to sort emails.",
+   "col": [
+    "employs a method",
+    "employs technology"
+   ]
+  },
+  "endpoint": {
+   "zh": "端點（設備）",
+   "hi": "एंडपॉइंट (उपकरण)",
+   "es": "punto final (dispositivo)",
+   "ja": "エンドポイント",
+   "ko": "엔드포인트",
+   "en": "a device such as a laptop or phone connected to a network",
+   "pos": "n.",
+   "base": "endpoint",
+   "lvl": "C2",
+   "syn": [
+    "device",
+    "terminal"
+   ],
+   "ant": [],
+   "ex": "Every endpoint in the office runs security software.",
+   "col": [
+    "endpoint detection",
+    "endpoint security"
+   ]
+  },
+  "enough": {
+   "ant": [
+    "insufficiently"
+   ],
+   "base": "enough",
+   "col": [
+    "fast enough",
+    "big enough"
+   ],
+   "en": "to the necessary degree",
+   "es": "lo suficiente",
+   "ex": "He didn't run fast enough to catch the bus.",
+   "hi": "पर्याप्त रूप से",
+   "ja": "十分に",
+   "ko": "충분히",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "sufficiently",
+    "adequately"
+   ],
+   "zh": "足夠地"
+  },
+  "escalating": {
+   "ant": [
+    "easing",
+    "falling"
+   ],
+   "base": "escalate",
+   "col": [
+    "escalating costs",
+    "escalating problem"
+   ],
+   "en": "getting worse",
+   "es": "cada vez más grave",
+   "ex": "The city faces an escalating crime problem.",
+   "hi": "बढ़ता हुआ",
+   "ja": "激化する",
+   "ko": "격화되는",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "growing",
+    "worsening",
+    "rising"
+   ],
+   "zh": "逐步升級的"
+  },
+  "evaluating": {
+   "ant": [
+    "ignoring"
+   ],
+   "base": "evaluate",
+   "col": [
+    "evaluate options",
+    "evaluate a proposal"
+   ],
+   "en": "carefully judging the value of something",
+   "es": "evaluando",
+   "ex": "The council is evaluating three new designs.",
+   "hi": "मूल्यांकन कर रहा",
+   "ja": "検討している",
+   "ko": "평가하고 있는",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "assessing",
+    "reviewing",
+    "examining"
+   ],
+   "zh": "評估"
+  },
+  "expert": {
+   "ant": [
+    "amateur",
+    "beginner"
+   ],
+   "base": "expert",
+   "col": [
+    "leading expert",
+    "health expert"
+   ],
+   "en": "a person with special knowledge",
+   "es": "experto",
+   "ex": "Ask an expert before you invest.",
+   "hi": "विशेषज्ञ",
+   "ja": "専門家",
+   "ko": "전문가",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "specialist",
+    "authority",
+    "professional"
+   ],
+   "zh": "專家"
+  },
+  "expose": {
+   "ant": [
+    "hide"
+   ],
+   "base": "expose",
+   "col": [
+    "expose a weakness",
+    "expose divisions"
+   ],
+   "en": "to show something hidden",
+   "es": "poner al descubierto",
+   "ex": "The data expose a big problem.",
+   "hi": "उजागर करना",
+   "ja": "露呈させる",
+   "ko": "드러내다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "reveal",
+    "show",
+    "uncover"
+   ],
+   "zh": "揭露"
+  },
+  "external": {
+   "ant": [
+    "internal"
+   ],
+   "base": "external",
+   "col": [
+    "external review",
+    "external assessment"
+   ],
+   "en": "from outside the organisation",
+   "es": "externo",
+   "ex": "An external expert checked the accounts.",
+   "hi": "बाहरी",
+   "ja": "外部の",
+   "ko": "외부의",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "outside",
+    "independent",
+    "third-party"
+   ],
+   "zh": "外部的"
+  },
+  "fact": {
+   "zh": "事實（after the fact：事後）",
+   "hi": "तथ्य (after the fact: बाद में)",
+   "es": "hecho (after the fact: a posteriori)",
+   "ja": "事実（after the fact：事後に）",
+   "ko": "사실(after the fact: 사후에)",
+   "en": "(after the fact) after something has already happened",
+   "pos": "n.",
+   "base": "fact",
+   "lvl": "A2",
+   "syn": [
+    "reality",
+    "truth"
+   ],
+   "ant": [],
+   "ex": "Fixing problems after the fact costs more.",
+   "col": [
+    "after the fact",
+    "in fact"
+   ]
+  },
+  "fake": {
+   "ant": [
+    "real",
+    "genuine"
+   ],
+   "base": "fake",
+   "col": [
+    "fake news",
+    "fake threat"
+   ],
+   "en": "not real",
+   "es": "falso",
+   "ex": "He paid with a fake note.",
+   "hi": "नकली",
+   "ja": "偽の",
+   "ko": "가짜",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "false",
+    "bogus",
+    "hoax"
+   ],
+   "zh": "假的"
+  },
+  "fast": {
+   "ant": [
+    "slow"
+   ],
+   "base": "fast",
+   "col": [
+    "fast charger",
+    "fast service"
+   ],
+   "en": "quick; working at high speed",
+   "es": "rápido",
+   "ex": "This fast train reaches Cork in two hours.",
+   "hi": "तेज़",
+   "ja": "急速の；速い",
+   "ko": "빠른",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "quick",
+    "rapid",
+    "speedy"
+   ],
+   "zh": "快速的"
+  },
+  "fend": {
+   "zh": "抵擋（fend off）",
+   "hi": "रोकना (fend off)",
+   "es": "repeler (fend off)",
+   "ja": "撃退する（fend off）",
+   "ko": "막아내다(fend off)",
+   "en": "(fend off) defend yourself against something",
+   "pos": "v.",
+   "base": "fend",
+   "lvl": "C1",
+   "syn": [
+    "repel",
+    "ward off",
+    "resist"
+   ],
+   "ant": [
+    "invite"
+   ],
+   "ex": "She fended off questions about her plans.",
+   "col": [
+    "fend off attacks",
+    "fend off rivals"
+   ]
+  },
+  "fight": {
+   "ant": [
+    "accept",
+    "support"
+   ],
+   "base": "fight",
+   "col": [
+    "fight a decision",
+    "fight back"
+   ],
+   "en": "to try hard to stop something",
+   "es": "luchar contra",
+   "ex": "The town will fight the plan in court.",
+   "hi": "लड़ना",
+   "ja": "争う",
+   "ko": "맞서 싸우다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "challenge",
+    "oppose",
+    "contest"
+   ],
+   "zh": "對抗；抗爭"
+  },
+  "figure": {
+   "zh": "數字",
+   "hi": "आंकड़ा",
+   "es": "cifra",
+   "ja": "数字",
+   "ko": "수치",
+   "en": "a number",
+   "pos": "n.",
+   "base": "figure",
+   "lvl": "B1",
+   "syn": [
+    "number",
+    "amount",
+    "total"
+   ],
+   "ant": [],
+   "ex": "The 2025 figure was much lower.",
+   "col": [
+    "the latest figure",
+    "sales figure"
+   ]
+  },
+  "figures": {
+   "zh": "數據",
+   "hi": "आंकड़े",
+   "es": "cifras",
+   "ja": "数字；データ",
+   "ko": "수치",
+   "en": "numbers that show facts",
+   "pos": "n.",
+   "base": "figure",
+   "lvl": "B1",
+   "syn": [
+    "numbers",
+    "data",
+    "statistics"
+   ],
+   "ant": [],
+   "ex": "The figures show a clear rise in attacks.",
+   "col": [
+    "official figures",
+    "the figures show"
+   ]
+  },
+  "financial": {
+   "ant": [
+    "non-financial"
+   ],
+   "base": "financial",
+   "col": [
+    "financial markets",
+    "financial crisis"
+   ],
+   "en": "about money",
+   "es": "financiera",
+   "ex": "The company faces serious financial problems.",
+   "hi": "वित्तीय",
+   "ja": "財務の",
+   "ko": "재정의",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "economic",
+    "monetary",
+    "fiscal"
+   ],
+   "zh": "財務的"
+  },
+  "find": {
+   "ant": [
+    "lose"
+   ],
+   "base": "find",
+   "col": [
+    "find money",
+    "find a way"
+   ],
+   "en": "to get or discover",
+   "es": "encontrar",
+   "ex": "They need to find more money.",
+   "hi": "ढूँढना",
+   "ja": "見つける",
+   "ko": "찾다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "get",
+    "discover",
+    "locate"
+   ],
+   "zh": "找到"
+  },
+  "finds": {
+   "zh": "找到；發現",
+   "hi": "ढूंढता है",
+   "es": "encuentra",
+   "ja": "見つける",
+   "ko": "찾아낸다",
+   "en": "discovers something",
+   "pos": "v.",
+   "base": "find",
+   "lvl": "A1",
+   "syn": [
+    "discovers",
+    "spots",
+    "locates"
+   ],
+   "ant": [
+    "misses"
+   ],
+   "ex": "The tool finds errors in the code.",
+   "col": [
+    "finds problems",
+    "finds a way"
+   ]
+  },
+  "firewall": {
+   "zh": "防火牆（網路）",
+   "hi": "फ़ायरवॉल",
+   "es": "cortafuegos",
+   "ja": "ファイアウォール",
+   "ko": "방화벽",
+   "en": "a security system that blocks harmful network traffic",
+   "pos": "n.",
+   "base": "firewall",
+   "lvl": "B2",
+   "syn": [
+    "filter",
+    "barrier",
+    "shield"
+   ],
+   "ant": [],
+   "ex": "The firewall stopped the virus from entering.",
+   "col": [
+    "web application firewall",
+    "install a firewall"
+   ]
+  },
+  "first": {
+   "zh": "最初的",
+   "hi": "पहला",
+   "es": "primero",
+   "ja": "最初の",
+   "ko": "처음의",
+   "en": "coming before all others",
+   "pos": "adj.",
+   "base": "first",
+   "lvl": "A1",
+   "syn": [
+    "initial",
+    "opening",
+    "earliest"
+   ],
+   "ant": [
+    "last"
+   ],
+   "ex": "The first ten months were very busy.",
+   "col": [
+    "the first ten months",
+    "first time"
+   ]
+  },
+  "flag": {
+   "zh": "標記；提醒注意",
+   "hi": "चिह्नित करना",
+   "es": "señalar",
+   "ja": "警告表示する",
+   "ko": "표시하다",
+   "en": "mark something as possibly a problem",
+   "pos": "v.",
+   "base": "flag",
+   "lvl": "C1",
+   "syn": [
+    "mark",
+    "highlight",
+    "signal"
+   ],
+   "ant": [
+    "ignore"
+   ],
+   "ex": "The app will flag any strange payments.",
+   "col": [
+    "flag suspicious activity",
+    "flag a problem"
+   ]
+  },
+  "focused": {
+   "ant": [
+    "distracted"
+   ],
+   "base": "focused",
+   "col": [
+    "focused on",
+    "tightly focused"
+   ],
+   "en": "giving attention to one thing",
+   "es": "centrado",
+   "ex": "The team is focused on winning.",
+   "hi": "केंद्रित",
+   "ja": "集中している",
+   "ko": "집중하는",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "concentrated",
+    "centred",
+    "intent"
+   ],
+   "zh": "專注於"
+  },
+  "for": {
+   "base": "for",
+   "en": "intended for",
+   "es": "para; por",
+   "hi": "के लिए",
+   "ja": "〜のために",
+   "ko": "~을 위해",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "為了；給"
+  },
+  "found": {
+   "ant": [
+    "missed"
+   ],
+   "base": "find",
+   "col": [
+    "study found",
+    "found that"
+   ],
+   "en": "past tense of \"find\"",
+   "es": "encontró",
+   "ex": "The survey found that most people agreed.",
+   "hi": "पाया",
+   "ja": "見つけた",
+   "ko": "발견했다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "discovered",
+    "showed",
+    "revealed",
+    "concluded"
+   ],
+   "zh": "發現（find 的過去式）"
+  },
+  "from": {
+   "base": "from",
+   "en": "starting at",
+   "es": "de; desde",
+   "hi": "से",
+   "ja": "〜から",
+   "ko": "~부터",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "從"
+  },
+  "frontline": {
+   "zh": "第一線的",
+   "hi": "अग्रिम पंक्ति का",
+   "es": "de primera línea",
+   "ja": "最前線の",
+   "ko": "최전선의",
+   "en": "the most important position in a fight or effort",
+   "pos": "adj.",
+   "base": "frontline",
+   "lvl": "C1",
+   "syn": [
+    "leading",
+    "primary",
+    "forward"
+   ],
+   "ant": [
+    "rear"
+   ],
+   "ex": "Nurses are frontline workers in a health crisis.",
+   "col": [
+    "frontline defence",
+    "frontline workers"
+   ]
+  },
+  "get": {
+   "zh": "進入；得到",
+   "hi": "घुसना; पाना",
+   "es": "entrar; conseguir",
+   "ja": "入る；得る",
+   "ko": "들어가다; 얻다",
+   "en": "(get into) enter a place",
+   "pos": "v.",
+   "base": "get",
+   "lvl": "A1",
+   "syn": [
+    "enter",
+    "reach",
+    "access"
+   ],
+   "ant": [
+    "leave"
+   ],
+   "ex": "Hackers tried to get into the system.",
+   "col": [
+    "get into",
+    "get access"
+   ]
+  },
+  "getting": {
+   "zh": "變得",
+   "hi": "होता जा रहा",
+   "es": "volviéndose",
+   "ja": "なってきている",
+   "ko": "되어 가는",
+   "en": "becoming",
+   "pos": "v.",
+   "base": "get",
+   "lvl": "A1",
+   "syn": [
+    "becoming",
+    "growing",
+    "turning"
+   ],
+   "ant": [],
+   "ex": "It is getting colder every day.",
+   "col": [
+    "getting harder",
+    "getting better"
+   ]
+  },
+  "go": {
+   "zh": "超越（go beyond）；去",
+   "hi": "आगे जाना (go beyond)",
+   "es": "ir más allá (go beyond)",
+   "ja": "超える（go beyond）",
+   "ko": "넘어서다(go beyond)",
+   "en": "(go beyond) do more than",
+   "pos": "v.",
+   "base": "go",
+   "lvl": "A1",
+   "syn": [
+    "move",
+    "exceed"
+   ],
+   "ant": [
+    "stop"
+   ],
+   "ex": "We need to go beyond simple solutions.",
+   "col": [
+    "go beyond",
+    "go further"
+   ]
+  },
+  "growing": {
+   "ant": [
+    "falling",
+    "shrinking"
+   ],
+   "base": "grow",
+   "col": [
+    "growing fast",
+    "growing demand"
+   ],
+   "en": "getting bigger in number",
+   "es": "creciendo",
+   "ex": "The number of cyclists is growing.",
+   "hi": "बढ़ रहा",
+   "ja": "増えている",
+   "ko": "늘어나는",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "rising",
+    "increasing",
+    "expanding"
+   ],
+   "zh": "成長；增加"
+  },
+  "happened": {
+   "ant": [],
+   "base": "happen",
+   "col": [
+    "happened years ago",
+    "what happened"
+   ],
+   "en": "took place",
+   "es": "ocurrió",
+   "ex": "The accident happened last night.",
+   "hi": "हुआ",
+   "ja": "起きた",
+   "ko": "일어났다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "occurred",
+    "took place",
+    "arose"
+   ],
+   "zh": "發生"
+  },
+  "harder": {
+   "ant": [
+    "easier"
+   ],
+   "base": "hard",
+   "col": [
+    "harder to",
+    "make it harder"
+   ],
+   "en": "more difficult",
+   "es": "más difícil",
+   "ex": "The rain made the walk harder.",
+   "hi": "और कठिन",
+   "ja": "より難しい",
+   "ko": "더 어려운",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "more difficult",
+    "tougher"
+   ],
+   "zh": "更困難的"
+  },
+  "harness": {
+   "zh": "利用；駕馭",
+   "hi": "उपयोग करना",
+   "es": "aprovechar",
+   "ja": "活用する",
+   "ko": "활용하다",
+   "en": "control and use something for a purpose",
+   "pos": "v.",
+   "base": "harness",
+   "lvl": "C1",
+   "syn": [
+    "use",
+    "exploit",
+    "utilise"
+   ],
+   "ant": [
+    "waste"
+   ],
+   "ex": "The town harnesses wind to make electricity.",
+   "col": [
+    "harness technology",
+    "harness the power of"
+   ]
+  },
+  "has": {
+   "ant": [
+    "lacks"
+   ],
+   "base": "have",
+   "col": [
+    "has been",
+    "has to"
+   ],
+   "en": "used to form the present perfect",
+   "es": "ha (presente perfecto)",
+   "ex": "The town has a long history.",
+   "hi": "है (present perfect)",
+   "ja": "（現在完了の助動詞）",
+   "ko": "(현재완료 조동사)",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "holds",
+    "owns",
+    "possesses"
+   ],
+   "zh": "有；已經（現在完成式）"
+  },
+  "have": {
+   "ant": [
+    "lack"
+   ],
+   "base": "have",
+   "col": [
+    "have to",
+    "have got"
+   ],
+   "en": "to own; (have to: must)",
+   "es": "tener (have to: tener que)",
+   "ex": "We have to leave early tomorrow.",
+   "hi": "होना; (have to: करना पड़ना)",
+   "ja": "持つ（have to：〜しなければならない）",
+   "ko": "가지다 (have to: ~해야 한다)",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "hold",
+    "own",
+    "possess"
+   ],
+   "zh": "有；必須（have to）"
+  },
+  "he": {
+   "base": "he",
+   "en": "that man",
+   "es": "él",
+   "hi": "वह",
+   "ja": "彼",
+   "ko": "그",
+   "lvl": "A1",
+   "pos": "pron.",
+   "zh": "他"
+  },
+  "help": {
+   "ant": [
+    "hinder",
+    "block"
+   ],
+   "base": "help",
+   "col": [
+    "help pay",
+    "help someone"
+   ],
+   "en": "to make easier",
+   "es": "ayudar",
+   "ex": "The money will help pay for new schools.",
+   "hi": "मदद करना",
+   "ja": "助ける",
+   "ko": "돕다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "assist",
+    "support",
+    "aid"
+   ],
+   "zh": "幫助"
+  },
+  "hostile": {
+   "ant": [
+    "friendly",
+    "supportive"
+   ],
+   "base": "hostile",
+   "col": [
+    "hostile environment",
+    "hostile reaction"
+   ],
+   "en": "unfriendly and against something",
+   "es": "hostil",
+   "ex": "The minister faced a hostile crowd at the meeting.",
+   "hi": "शत्रुतापूर्ण",
+   "ja": "敵対的な",
+   "ko": "적대적인",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "unfriendly",
+    "antagonistic",
+    "adverse"
+   ],
+   "zh": "敵意的；不友善的"
+  },
+  "human": {
+   "ant": [
+    "machine",
+    "automatic"
+   ],
+   "base": "human",
+   "col": [
+    "human health",
+    "human oversight"
+   ],
+   "en": "of or by people",
+   "es": "humano",
+   "ex": "Human error caused the accident.",
+   "hi": "मानव",
+   "ja": "人間の；人による",
+   "ko": "인간의; 사람의",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "people's",
+    "personal",
+    "manual"
+   ],
+   "zh": "人類的；人工的"
+  },
+  "identified": {
+   "ant": [
+    "overlooked",
+    "missed"
+   ],
+   "base": "identify",
+   "col": [
+    "identified as",
+    "clearly identified"
+   ],
+   "en": "named or found",
+   "es": "identificó",
+   "ex": "The report identified three main risks.",
+   "hi": "पहचाना",
+   "ja": "特定した",
+   "ko": "확인했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "named",
+    "recognised",
+    "pinpointed",
+    "flagged"
+   ],
+   "zh": "找出；確認"
+  },
+  "identify": {
+   "ant": [
+    "overlook"
+   ],
+   "base": "identify",
+   "col": [
+    "identify alternatives",
+    "identify risks"
+   ],
+   "en": "find or recognise something",
+   "es": "identificar",
+   "ex": "Can you identify the bird in this photo?",
+   "hi": "पहचानना",
+   "ja": "見つける；特定する",
+   "ko": "찾아내다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "find",
+    "recognise",
+    "pinpoint"
+   ],
+   "zh": "找出；確認"
+  },
+  "in": {
+   "base": "in",
+   "en": "inside",
+   "es": "en",
+   "hi": "में",
+   "ja": "〜の中で",
+   "ko": "~ 안에",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "在…裡"
+  },
+  "inadequate": {
+   "ant": [
+    "adequate",
+    "enough"
+   ],
+   "base": "inadequate",
+   "col": [
+    "inadequate exercise",
+    "inadequate supply"
+   ],
+   "en": "not enough",
+   "es": "insuficiente",
+   "ex": "The pay offer was inadequate.",
+   "hi": "अपर्याप्त",
+   "ja": "不十分な",
+   "ko": "불충분한",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "insufficient",
+    "not enough",
+    "poor"
+   ],
+   "zh": "不足的",
+   "note": {
+    "meaning": "不足的；不夠好的。",
+    "usage": "inadequate for sth / to do sth；常見 inadequate funding/protection。",
+    "collocations": [
+     "inadequate funding",
+     "inadequate protection",
+     "wholly inadequate"
+    ],
+    "example": {
+     "en": "The report said safety checks were inadequate.",
+     "zh": "報告指出安全檢查不夠充分。"
+    }
+   },
+   "noteHi": {
+    "meaning": "अपर्याप्त।",
+    "usage": "inadequate for/to do; inadequate funding।",
+    "exampleTr": "रिपोर्ट में कहा गया कि सुरक्षा जांच अपर्याप्त थी।"
+   },
+   "noteEs": {
+    "meaning": "insuficiente; no adecuado.",
+    "usage": "inadequate for/to do; inadequate funding/protection.",
+    "exampleTr": "El informe dijo que los controles de seguridad eran insuficientes."
+   },
+   "noteJa": {
+    "meaning": "不十分な。",
+    "usage": "inadequate for/to do、inadequate funding の形。",
+    "exampleTr": "報告書は安全点検が不十分だったと述べた。"
+   },
+   "noteKo": {
+    "meaning": "불충분한.",
+    "usage": "inadequate for/to do, inadequate funding 형태.",
+    "exampleTr": "보고서는 안전 점검이 불충분했다고 밝혔다."
+   },
+   "noteEn": {
+    "meaning": "not good enough or not enough.",
+    "usage": "Common: 'inadequate funding', 'inadequate protection', 'inadequate for something'."
+   }
+  },
+  "include": {
+   "ant": [
+    "exclude",
+    "omit"
+   ],
+   "base": "include",
+   "col": [
+    "include all",
+    "examples include"
+   ],
+   "en": "to contain as a part",
+   "es": "incluir",
+   "ex": "Prices include breakfast.",
+   "hi": "शामिल करना",
+   "ja": "含む",
+   "ko": "포함하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "contain",
+    "involve",
+    "cover",
+    "comprise"
+   ],
+   "zh": "包含"
+  },
+  "including": {
+   "ant": [
+    "excluding"
+   ],
+   "base": "including",
+   "col": [
+    "including tax",
+    "including costs"
+   ],
+   "en": "and also; as part of the total",
+   "es": "incluido",
+   "ex": "Ten people came, including my aunt.",
+   "hi": "सहित",
+   "ja": "〜を含めて",
+   "ko": "~을 포함해",
+   "lvl": "A2",
+   "pos": "prep.",
+   "syn": [
+    "counting",
+    "plus"
+   ],
+   "zh": "包括"
+  },
+  "incorporating": {
+   "ant": [
+    "excluding"
+   ],
+   "base": "incorporate",
+   "col": [
+    "incorporating ideas",
+    "incorporating features"
+   ],
+   "en": "including something as part of a whole",
+   "es": "incorporando",
+   "ex": "The design is incorporating local art.",
+   "hi": "शामिल करना",
+   "ja": "取り入れる",
+   "ko": "통합하는",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "including",
+    "integrating",
+    "combining"
+   ],
+   "zh": "融入；包含"
+  },
+  "increase": {
+   "ant": [
+    "decrease",
+    "fall"
+   ],
+   "base": "increase",
+   "col": [
+    "sharp increase",
+    "increase in"
+   ],
+   "en": "a rise in amount",
+   "es": "aumento",
+   "ex": "There was a 10% increase in sales.",
+   "hi": "वृद्धि",
+   "ja": "増加",
+   "ko": "증가",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "rise",
+    "growth",
+    "upswing"
+   ],
+   "zh": "增加"
+  },
+  "increasingly": {
+   "ant": [
+    "decreasingly"
+   ],
+   "base": "increasingly",
+   "col": [
+    "increasingly common",
+    "increasingly important"
+   ],
+   "en": "more and more",
+   "es": "cada vez más",
+   "ex": "Jobs are increasingly done online.",
+   "hi": "तेज़ी से अधिक",
+   "ja": "ますます",
+   "ko": "점점 더",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "progressively",
+    "more and more",
+    "ever more"
+   ],
+   "zh": "越來越"
+  },
+  "incursions": {
+   "zh": "入侵",
+   "hi": "घुसपैठ",
+   "es": "incursiones",
+   "ja": "侵入",
+   "ko": "침입",
+   "en": "sudden attacks or entries into a place",
+   "pos": "n.",
+   "base": "incursion",
+   "lvl": "C2",
+   "syn": [
+    "intrusions",
+    "raids",
+    "invasions"
+   ],
+   "ant": [
+    "withdrawals"
+   ],
+   "ex": "The army reported several incursions across the border.",
+   "col": [
+    "military incursions",
+    "repeated incursions"
+   ]
+  },
+  "instead": {
+   "ant": [],
+   "base": "instead",
+   "col": [
+    "instead of",
+    "use instead"
+   ],
+   "en": "in place of",
+   "es": "en lugar de",
+   "ex": "We took the train instead of the car.",
+   "hi": "के बजाय",
+   "ja": "〜の代わりに",
+   "ko": "~대신에",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "rather",
+    "in place of"
+   ],
+   "zh": "而不是（instead of）"
+  },
+  "institutions": {
+   "ant": [],
+   "base": "institution",
+   "col": [
+    "EU institutions",
+    "public institutions"
+   ],
+   "en": "large official organisations",
+   "es": "instituciones",
+   "ex": "EU institutions are based in Brussels.",
+   "hi": "संस्थाएँ",
+   "ja": "機関",
+   "ko": "기관",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "bodies",
+    "organisations",
+    "agencies"
+   ],
+   "zh": "機構"
+  },
+  "integrating": {
+   "ant": [
+    "separating",
+    "isolating"
+   ],
+   "base": "integrate",
+   "en": "combining into a whole",
+   "es": "integrar",
+   "ex": "The school is integrating computers into every class.",
+   "hi": "एकीकृत करना",
+   "ja": "統合すること",
+   "ko": "통합하는 것",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "incorporating",
+    "combining",
+    "merging"
+   ],
+   "zh": "整合",
+   "col": [
+    "integrating services",
+    "integrating technology"
+   ]
+  },
+  "intelligence": {
+   "ant": [
+    "stupidity"
+   ],
+   "base": "intelligence",
+   "col": [
+    "artificial intelligence",
+    "human intelligence"
+   ],
+   "en": "ability to think and learn",
+   "es": "inteligencia",
+   "ex": "The app uses artificial intelligence to translate.",
+   "hi": "बुद्धिमत्ता",
+   "ja": "知能",
+   "ko": "지능",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "intellect",
+    "reasoning",
+    "cognition"
+   ],
+   "zh": "智慧（artificial intelligence：人工智慧）"
+  },
+  "intensified": {
+   "ant": [
+    "eased",
+    "relaxed"
+   ],
+   "base": "intensify",
+   "col": [
+    "intensified efforts",
+    "fighting intensified"
+   ],
+   "en": "became stronger",
+   "es": "se intensificó",
+   "ex": "Police intensified checks over Christmas.",
+   "hi": "तेज़ हुआ",
+   "ja": "勢力を強めた",
+   "ko": "강해졌다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "increased",
+    "strengthened",
+    "stepped up"
+   ],
+   "zh": "增強"
+  },
+  "intensify": {
+   "ant": [
+    "weaken"
+   ],
+   "base": "intensify",
+   "col": [
+    "intensify action",
+    "intensify pressure"
+   ],
+   "en": "to become stronger",
+   "es": "intensificarse",
+   "ex": "Fighting may intensify next week.",
+   "hi": "तेज़ होना",
+   "ja": "強まる",
+   "ko": "강해지다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "strengthen",
+    "grow",
+    "increase"
+   ],
+   "zh": "增強"
+  },
+  "intercepted": {
+   "zh": "攔截",
+   "hi": "रोका",
+   "es": "interceptó",
+   "ja": "阻止した；傍受した",
+   "ko": "가로챘다",
+   "en": "stopped something before it reached its target",
+   "pos": "v.",
+   "base": "intercept",
+   "lvl": "C1",
+   "syn": [
+    "blocked",
+    "caught",
+    "stopped"
+   ],
+   "ant": [
+    "released"
+   ],
+   "ex": "Police intercepted the package at the airport.",
+   "col": [
+    "intercepted messages",
+    "intercept an attack"
+   ],
+   "note": {
+    "meaning": "攔截；截獲。",
+    "usage": "intercept a message/call/attack/ball；被動 be intercepted by。",
+    "collocations": [
+     "intercept a message",
+     "intercepted by",
+     "intercept an attack"
+    ],
+    "example": {
+     "en": "Customs officers intercepted a large shipment of fake goods.",
+     "zh": "海關人員攔截了一大批假貨。"
+    }
+   },
+   "noteHi": {
+    "meaning": "रोक लेना; बीच में पकड़ना।",
+    "usage": "intercept a message/attack; be intercepted by।",
+    "exampleTr": "सीमा शुल्क अधिकारियों ने नकली सामान की बड़ी खेप पकड़ी।"
+   },
+   "noteEs": {
+    "meaning": "interceptar; detener algo antes de que llegue.",
+    "usage": "intercept a message/attack; be intercepted by.",
+    "exampleTr": "Los agentes de aduanas interceptaron un gran cargamento de productos falsos."
+   },
+   "noteJa": {
+    "meaning": "途中で阻止する；傍受する。",
+    "usage": "intercept a message/attack、be intercepted by。",
+    "exampleTr": "税関職員が偽物の大量の荷物を押収した。"
+   },
+   "noteKo": {
+    "meaning": "가로채다; 차단하다.",
+    "usage": "intercept a message/attack, be intercepted by.",
+    "exampleTr": "세관 직원들이 대량의 위조품을 적발했다."
+   },
+   "noteEn": {
+    "meaning": "stopped something before it reached its target.",
+    "usage": "Common: 'intercept a message', 'intercept an attack', 'be intercepted by'."
+   }
+  },
+  "internet": {
+   "ant": [],
+   "base": "internet",
+   "col": [
+    "on the internet",
+    "internet access"
+   ],
+   "en": "the worldwide computer network",
+   "es": "internet",
+   "ex": "I found the recipe on the internet.",
+   "hi": "इंटरनेट",
+   "ja": "インターネット",
+   "ko": "인터넷",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "web",
+    "net",
+    "online world"
+   ],
+   "zh": "網路"
+  },
+  "internet-facing": {
+   "zh": "面向網際網路的",
+   "hi": "इंटरनेट से जुड़ी",
+   "es": "expuesto a internet",
+   "ja": "インターネットに公開された",
+   "ko": "인터넷에 노출된",
+   "en": "open to users on the public internet",
+   "pos": "adj.",
+   "base": "internet-facing",
+   "lvl": "C2",
+   "syn": [
+    "public-facing",
+    "online",
+    "exposed"
+   ],
+   "ant": [
+    "internal"
+   ],
+   "ex": "Internet-facing servers need extra protection.",
+   "col": [
+    "internet-facing services",
+    "internet-facing systems"
+   ]
+  },
+  "into": {
+   "base": "into",
+   "en": "becoming (part of)",
+   "es": "en",
+   "hi": "में",
+   "ja": "〜の中へ；〜に",
+   "ko": "~ 안으로；~으로",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "進入；成為"
+  },
+  "introduced": {
+   "ant": [
+    "abolished",
+    "scrapped"
+   ],
+   "base": "introduce",
+   "col": [
+    "introduced a tax",
+    "newly introduced"
+   ],
+   "en": "started or brought in for the first time",
+   "es": "introducido",
+   "ex": "A new fee was introduced in May.",
+   "hi": "शुरू किया गया",
+   "ja": "導入された",
+   "ko": "도입되었다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "brought in",
+    "launched",
+    "implemented",
+    "adopted"
+   ],
+   "zh": "推出；實行"
+  },
+  "intrusions": {
+   "zh": "入侵",
+   "hi": "घुसपैठ",
+   "es": "intrusiones",
+   "ja": "侵入",
+   "ko": "침입",
+   "en": "unwanted entries into a system or place",
+   "pos": "n.",
+   "base": "intrusion",
+   "lvl": "C1",
+   "syn": [
+    "incursions",
+    "break-ins",
+    "invasions"
+   ],
+   "ant": [],
+   "ex": "The software warns users about intrusions.",
+   "col": [
+    "detect intrusions",
+    "network intrusions"
+   ]
+  },
+  "is": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "is located",
+    "is expected"
+   ],
+   "en": "to exist; to have a quality",
+   "es": "ser; estar",
+   "ex": "The shop is on the main street.",
+   "hi": "है; होना",
+   "ja": "〜である",
+   "ko": "~이다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "exists",
+    "remains",
+    "stands"
+   ],
+   "zh": "是"
+  },
+  "it": {
+   "base": "it",
+   "en": "that thing",
+   "es": "ello; lo",
+   "hi": "यह",
+   "ja": "それ",
+   "ko": "그것",
+   "lvl": "A1",
+   "pos": "pron.",
+   "zh": "它"
+  },
+  "its": {
+   "base": "its",
+   "en": "belonging to it",
+   "es": "su",
+   "hi": "उसका",
+   "ja": "その",
+   "ko": "그것의",
+   "lvl": "A1",
+   "pos": "det.",
+   "zh": "它的"
+  },
+  "january": {
+   "zh": "一月",
+   "hi": "जनवरी",
+   "es": "enero",
+   "ja": "1月",
+   "ko": "1월",
+   "en": "the first month of the year",
+   "pos": "n.",
+   "base": "January",
+   "lvl": "PN"
+  },
+  "judge": {
+   "zh": "判斷",
+   "hi": "आंकना",
+   "es": "juzgar",
+   "ja": "判断する",
+   "ko": "판단하다",
+   "en": "form an opinion about something",
+   "pos": "v.",
+   "base": "judge",
+   "lvl": "B1",
+   "syn": [
+    "assess",
+    "tell",
+    "evaluate"
+   ],
+   "ant": [],
+   "ex": "It is hard to judge who sent the message.",
+   "col": [
+    "hard to judge",
+    "judge the risk"
+   ]
+  },
+  "keep": {
+   "zh": "持續",
+   "hi": "जारी रहना",
+   "es": "seguir",
+   "ja": "〜し続ける",
+   "ko": "계속하다",
+   "en": "continue doing something",
+   "pos": "v.",
+   "base": "keep",
+   "lvl": "A1",
+   "syn": [
+    "continue",
+    "go on",
+    "carry on"
+   ],
+   "ant": [
+    "stop"
+   ],
+   "ex": "Prices keep rising every month.",
+   "col": [
+    "keep growing",
+    "keep going"
+   ]
+  },
+  "largely": {
+   "ant": [
+    "slightly"
+   ],
+   "base": "largely",
+   "col": [
+    "largely due to",
+    "largely ignored"
+   ],
+   "en": "mostly",
+   "es": "en gran parte",
+   "ex": "The delay was largely due to bad weather.",
+   "hi": "काफ़ी हद तक",
+   "ja": "大部分は",
+   "ko": "대체로",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "mostly",
+    "mainly",
+    "chiefly"
+   ],
+   "zh": "大部分；大多"
+  },
+  "last": {
+   "zh": "去年的；上一個",
+   "hi": "पिछला",
+   "es": "pasado",
+   "ja": "昨〜の；前の",
+   "ko": "지난",
+   "en": "the one before this one",
+   "pos": "adj.",
+   "base": "last",
+   "lvl": "A1",
+   "syn": [
+    "previous",
+    "past",
+    "prior"
+   ],
+   "ant": [
+    "next"
+   ],
+   "ex": "Sales were higher last year.",
+   "col": [
+    "last year",
+    "last month"
+   ]
+  },
+  "lenders": {
+   "ant": [
+    "borrowers"
+   ],
+   "base": "lender",
+   "col": [
+    "mortgage lenders",
+    "major lenders"
+   ],
+   "en": "banks or people that lend money",
+   "es": "prestamistas",
+   "ex": "Lenders have raised interest rates again.",
+   "hi": "ऋणदाता",
+   "ja": "貸し手",
+   "ko": "대출 기관",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "banks",
+    "creditors"
+   ],
+   "zh": "放款機構；貸方"
+  },
+  "level": {
+   "zh": "水準",
+   "hi": "स्तर",
+   "es": "nivel",
+   "ja": "水準",
+   "ko": "수준",
+   "en": "an amount compared with others",
+   "pos": "n.",
+   "base": "level",
+   "lvl": "A2",
+   "syn": [
+    "amount",
+    "rate",
+    "degree"
+   ],
+   "ant": [],
+   "ex": "Attacks rose above last year's level.",
+   "col": [
+    "the 2025 level",
+    "high level"
+   ]
+  },
+  "line": {
+   "zh": "界線",
+   "hi": "रेखा",
+   "es": "línea",
+   "ja": "境界線",
+   "ko": "경계",
+   "en": "a boundary between two things",
+   "pos": "n.",
+   "base": "line",
+   "lvl": "A2",
+   "syn": [
+    "boundary",
+    "border",
+    "divide"
+   ],
+   "ant": [],
+   "ex": "There is a fine line between help and control.",
+   "col": [
+    "blur the line",
+    "draw a line"
+   ]
+  },
+  "longer": {
+   "ant": [
+    "shorter"
+   ],
+   "base": "long",
+   "col": [
+    "or longer",
+    "no longer"
+   ],
+   "en": "for more time",
+   "es": "más tiempo",
+   "ex": "The trip took longer than we thought.",
+   "hi": "अधिक समय",
+   "ja": "より長く",
+   "ko": "더 오래",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "more",
+    "further"
+   ],
+   "zh": "更久"
+  },
+  "looks": {
+   "zh": "尋找（looks for）",
+   "hi": "खोजता है (looks for)",
+   "es": "busca (looks for)",
+   "ja": "探す（looks for）",
+   "ko": "찾는다(looks for)",
+   "en": "(looks for) tries to find",
+   "pos": "v.",
+   "base": "look",
+   "lvl": "A1",
+   "syn": [
+    "searches",
+    "seeks",
+    "hunts"
+   ],
+   "ant": [
+    "ignores"
+   ],
+   "ex": "The dog looks for food under the table.",
+   "col": [
+    "looks for",
+    "looks at"
+   ]
+  },
+  "machine": {
+   "zh": "機器",
+   "hi": "मशीन",
+   "es": "máquina",
+   "ja": "機械",
+   "ko": "기계",
+   "en": "a computer or device that works on its own",
+   "pos": "n.",
+   "base": "machine",
+   "lvl": "A2",
+   "syn": [
+    "computer",
+    "device",
+    "system"
+   ],
+   "ant": [
+    "human"
+   ],
+   "ex": "It is hard to tell if a human or a machine wrote this.",
+   "col": [
+    "human and machine",
+    "machine learning"
+   ]
+  },
+  "mainly": {
+   "ant": [
+    "partly"
+   ],
+   "base": "mainly",
+   "col": [
+    "mainly because",
+    "mainly known for"
+   ],
+   "en": "mostly",
+   "es": "principalmente",
+   "ex": "The guests were mainly students.",
+   "hi": "मुख्य रूप से",
+   "ja": "主に",
+   "ko": "주로",
+   "lvl": "B1",
+   "pos": "adv.",
+   "syn": [
+    "mostly",
+    "chiefly",
+    "largely"
+   ],
+   "zh": "主要地"
+  },
+  "maintains": {
+   "ant": [
+    "denies"
+   ],
+   "base": "maintain",
+   "col": [
+    "maintains that"
+   ],
+   "en": "says firmly",
+   "es": "sostiene",
+   "ex": "The company maintains that prices will stay low.",
+   "hi": "ज़ोर देता है",
+   "ja": "主張する",
+   "ko": "주장한다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "insists",
+    "claims",
+    "asserts"
+   ],
+   "zh": "堅持認為"
+  },
+  "make": {
+   "zh": "製造；使得",
+   "hi": "बनाना",
+   "es": "hacer",
+   "ja": "作る；させる",
+   "ko": "만들다",
+   "en": "create; cause to be",
+   "pos": "v.",
+   "base": "make",
+   "lvl": "A1",
+   "syn": [
+    "create",
+    "produce",
+    "cause"
+   ],
+   "ant": [
+    "destroy"
+   ],
+   "ex": "Automation can make attacks harder to trace.",
+   "col": [
+    "make it harder",
+    "make fake attacks"
+   ]
+  },
+  "marked": {
+   "zh": "明顯的",
+   "hi": "स्पष्ट",
+   "es": "notable",
+   "ja": "著しい",
+   "ko": "뚜렷한",
+   "en": "easy to notice; clear",
+   "pos": "adj.",
+   "base": "marked",
+   "lvl": "C1",
+   "syn": [
+    "clear",
+    "noticeable",
+    "striking"
+   ],
+   "ant": [
+    "slight"
+   ],
+   "ex": "There has been a marked rise in online fraud.",
+   "col": [
+    "marked increase",
+    "marked difference"
+   ]
+  },
+  "methods": {
+   "zh": "方法（複數）",
+   "hi": "तरीके",
+   "es": "métodos",
+   "ja": "方法",
+   "ko": "방법들",
+   "en": "ways of doing something",
+   "pos": "n.",
+   "base": "method",
+   "lvl": "B1",
+   "syn": [
+    "ways",
+    "techniques",
+    "approaches"
+   ],
+   "ant": [],
+   "ex": "Teachers use different methods in class.",
+   "col": [
+    "traditional methods",
+    "new methods"
+   ]
+  },
+  "million": {
+   "base": "million",
+   "en": "1,000,000",
+   "es": "millón",
+   "hi": "दस लाख",
+   "ja": "100万",
+   "ko": "백만",
+   "lvl": "A2",
+   "pos": "num.",
+   "zh": "百萬"
+  },
+  "month": {
+   "ant": [],
+   "base": "month",
+   "col": [
+    "the following month",
+    "next month"
+   ],
+   "en": "about four weeks",
+   "es": "mes",
+   "ex": "The rent is due each month.",
+   "hi": "महीना",
+   "ja": "月",
+   "ko": "달",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "four weeks",
+    "calendar month"
+   ],
+   "zh": "月"
+  },
+  "monthly": {
+   "ant": [
+    "yearly"
+   ],
+   "base": "monthly",
+   "col": [
+    "monthly cost",
+    "monthly payment"
+   ],
+   "en": "happening every month",
+   "es": "mensual",
+   "ex": "Our monthly bills are too high.",
+   "hi": "मासिक",
+   "ja": "毎月の",
+   "ko": "월간의",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "per month",
+    "month-by-month"
+   ],
+   "zh": "每月的"
+  },
+  "months": {
+   "ant": [],
+   "base": "month",
+   "col": [
+    "nine months",
+    "next six months"
+   ],
+   "en": "periods of about thirty days",
+   "es": "meses",
+   "ex": "The work will take six months.",
+   "hi": "महीने",
+   "ja": "か月",
+   "ko": "개월",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "weeks",
+    "periods"
+   ],
+   "zh": "月（複數）"
+  },
+  "more": {
+   "ant": [
+    "less",
+    "fewer"
+   ],
+   "base": "more",
+   "col": [
+    "more than",
+    "more money"
+   ],
+   "en": "a larger amount",
+   "es": "más",
+   "ex": "We need more time to finish.",
+   "hi": "अधिक",
+   "ja": "より多く",
+   "ko": "더 많이",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "extra",
+    "additional",
+    "further"
+   ],
+   "zh": "更多"
+  },
+  "most": {
+   "zh": "大部分",
+   "hi": "अधिकांश",
+   "es": "la mayoría",
+   "ja": "ほとんど",
+   "ko": "대부분",
+   "en": "nearly all",
+   "pos": "det.",
+   "base": "most",
+   "lvl": "A1"
+  },
+  "mounting": {
+   "ant": [
+    "falling"
+   ],
+   "base": "mounting",
+   "col": [
+    "mounting pressure",
+    "mounting calls"
+   ],
+   "en": "growing stronger",
+   "es": "creciente",
+   "ex": "There is mounting pressure to cut prices.",
+   "hi": "बढ़ता हुआ",
+   "ja": "高まる",
+   "ko": "커지는",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "growing",
+    "increasing",
+    "rising"
+   ],
+   "zh": "日益增加的"
+  },
+  "network": {
+   "ant": [],
+   "base": "network",
+   "col": [
+    "rail network",
+    "transport network"
+   ],
+   "en": "a system of connected lines",
+   "es": "red",
+   "ex": "The city has a good bus network.",
+   "hi": "नेटवर्क",
+   "ja": "網；ネットワーク",
+   "ko": "망",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "system",
+    "web",
+    "grid"
+   ],
+   "zh": "網絡"
+  },
+  "new": {
+   "ant": [
+    "old"
+   ],
+   "base": "new",
+   "col": [
+    "new law",
+    "new tax"
+   ],
+   "en": "recently made",
+   "es": "nuevo",
+   "ex": "The city opened a new library.",
+   "hi": "नया",
+   "ja": "新しい",
+   "ko": "새로운",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "fresh",
+    "recent",
+    "novel"
+   ],
+   "zh": "新的"
+  },
+  "no": {
+   "ant": [],
+   "base": "no",
+   "col": [
+    "no presence",
+    "no newcomer"
+   ],
+   "en": "not any; not a",
+   "es": "ningún",
+   "ex": "There is no bus today.",
+   "hi": "कोई नहीं",
+   "ja": "〜がない",
+   "ko": "~없는; 아닌",
+   "lvl": "A1",
+   "pos": "det.",
+   "syn": [
+    "none",
+    "not any"
+   ],
+   "zh": "沒有的"
+  },
+  "none": {
+   "base": "none",
+   "en": "not one",
+   "es": "ninguno",
+   "hi": "कोई भी नहीं",
+   "ja": "一つも〜ない",
+   "ko": "아무것도 없음",
+   "lvl": "A2",
+   "pos": "pron.",
+   "zh": "一個也沒有"
+  },
+  "not": {
+   "ant": [],
+   "base": "not",
+   "col": [
+    "not yet",
+    "not only"
+   ],
+   "en": "used to make a negative",
+   "es": "no",
+   "ex": "The plan is not ready yet.",
+   "hi": "नहीं",
+   "ja": "〜ない",
+   "ko": "~아니다",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "no",
+    "never"
+   ],
+   "zh": "不"
+  },
+  "notably": {
+   "zh": "值得注意的是",
+   "hi": "उल्लेखनीय रूप से",
+   "es": "cabe destacar que",
+   "ja": "注目すべきことに",
+   "ko": "주목할 만하게",
+   "en": "in a way worth noticing",
+   "pos": "adv.",
+   "base": "notably",
+   "lvl": "C1",
+   "syn": [
+    "significantly",
+    "remarkably",
+    "especially"
+   ],
+   "ant": [],
+   "ex": "Notably, prices fell in rural areas.",
+   "col": [
+    "most notably",
+    "notably absent"
+   ]
+  },
+  "noticeably": {
+   "zh": "明顯地",
+   "hi": "स्पष्ट रूप से",
+   "es": "notablemente",
+   "ja": "目立って",
+   "ko": "눈에 띄게",
+   "en": "in a way that is easy to see",
+   "pos": "adv.",
+   "base": "noticeably",
+   "lvl": "B2",
+   "syn": [
+    "clearly",
+    "markedly",
+    "visibly"
+   ],
+   "ant": [
+    "slightly"
+   ],
+   "ex": "The air was noticeably cleaner after the rain.",
+   "col": [
+    "noticeably better",
+    "noticeably different"
+   ]
+  },
+  "noting": {
+   "ant": [
+    "ignoring"
+   ],
+   "base": "note",
+   "col": [
+    "worth noting",
+    "noting that"
+   ],
+   "en": "mentioning something important",
+   "es": "señalar",
+   "ex": "It is worth noting that prices have fallen.",
+   "hi": "ध्यान देना",
+   "ja": "注目すること",
+   "ko": "주목할",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "mentioning",
+    "observing",
+    "pointing out"
+   ],
+   "zh": "指出；值得一提"
+  },
+  "now": {
+   "ant": [
+    "then"
+   ],
+   "base": "now",
+   "col": [
+    "right now",
+    "now that"
+   ],
+   "en": "at this time",
+   "es": "ahora",
+   "ex": "She now lives in Galway.",
+   "hi": "अब",
+   "ja": "今",
+   "ko": "지금",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "currently",
+    "at present",
+    "today"
+   ],
+   "zh": "現在"
+  },
+  "number": {
+   "ant": [],
+   "base": "number",
+   "col": [
+    "the number of",
+    "a high number"
+   ],
+   "en": "an amount or total",
+   "es": "número",
+   "ex": "The number of visitors fell this year.",
+   "hi": "संख्या",
+   "ja": "数",
+   "ko": "수; 숫자",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "amount",
+    "total",
+    "figure"
+   ],
+   "zh": "數量；數字"
+  },
+  "observing": {
+   "ant": [],
+   "base": "observe",
+   "col": [
+    "observe that",
+    "rightly observe"
+   ],
+   "en": "saying or remarking",
+   "es": "señalando",
+   "ex": "She smiled, observing that it was late.",
+   "hi": "टिप्पणी करते हुए",
+   "ja": "述べて",
+   "ko": "언급하며",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "remarking",
+    "noting",
+    "commenting"
+   ],
+   "zh": "指出；評論"
+  },
+  "october": {
+   "base": "October",
+   "en": "the tenth month",
+   "es": "octubre",
+   "hi": "अक्टूबर",
+   "ja": "10月",
+   "ko": "10월",
+   "lvl": "PN",
+   "pos": "n.",
+   "zh": "十月"
+  },
+  "of": {
+   "base": "of",
+   "en": "belonging to",
+   "es": "de",
+   "hi": "का",
+   "ja": "〜の",
+   "ko": "~의",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "…的"
+  },
+  "off": {
+   "zh": "（fend off：擊退）",
+   "hi": "(fend off) रोकना",
+   "es": "(fend off) repeler",
+   "ja": "（fend off）撃退する",
+   "ko": "(fend off) 물리치다",
+   "en": "(fend off) used to mean pushing something away",
+   "pos": "adv.",
+   "base": "off",
+   "lvl": "A1"
+  },
+  "on": {
+   "ant": [
+    "off"
+   ],
+   "base": "on",
+   "col": [
+    "go on",
+    "carry on"
+   ],
+   "en": "about",
+   "es": "sobre",
+   "ex": "Voting will go on for nine days.",
+   "hi": "के बारे में",
+   "ja": "〜に関する",
+   "ko": "~에 관한",
+   "lvl": "A1",
+   "pos": "prep.",
+   "syn": [
+    "ahead",
+    "forward"
+   ],
+   "zh": "關於"
+  },
+  "online": {
+   "ant": [
+    "offline"
+   ],
+   "base": "online",
+   "col": [
+    "online advertising",
+    "online sales"
+   ],
+   "en": "using the internet",
+   "es": "conectado",
+   "ex": "More people now shop online.",
+   "hi": "ऑनलाइन",
+   "ja": "オンラインで",
+   "ko": "온라인에",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "digital",
+    "internet",
+    "web"
+   ],
+   "zh": "在線上；上網"
+  },
+  "only": {
+   "ant": [],
+   "base": "only",
+   "col": [
+    "only if",
+    "the only"
+   ],
+   "en": "no more than",
+   "es": "solo",
+   "ex": "The museum is only open on weekends.",
+   "hi": "केवल",
+   "ja": "〜だけ",
+   "ko": "~만",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "just",
+    "solely",
+    "merely"
+   ],
+   "zh": "只；僅"
+  },
+  "onwards": {
+   "ant": [],
+   "base": "onwards",
+   "col": [
+    "from 2041 onwards",
+    "from now onwards"
+   ],
+   "en": "starting from a time and continuing",
+   "es": "en adelante",
+   "ex": "The shop is open from 9 a.m. onwards.",
+   "hi": "से आगे",
+   "ja": "以降",
+   "ko": "이후",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "forward",
+    "on",
+    "beyond"
+   ],
+   "zh": "從…起"
+  },
+  "operates": {
+   "ant": [
+    "stops",
+    "fails"
+   ],
+   "base": "operate",
+   "col": [
+    "operate safely",
+    "operate under rules"
+   ],
+   "en": "works or functions",
+   "es": "funciona",
+   "ex": "The machine operates only when the door is closed.",
+   "hi": "काम करता है",
+   "ja": "作動する；機能する",
+   "ko": "작동하다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "works",
+    "functions",
+    "runs"
+   ],
+   "zh": "運作；運行"
+  },
+  "out": {
+   "zh": "（carried out：執行）",
+   "hi": "(carried out) किया",
+   "es": "(carried out) realizado",
+   "ja": "（carried out）実行",
+   "ko": "(carried out) 실행",
+   "en": "(carried out) used to mean performed",
+   "pos": "adv.",
+   "base": "out",
+   "lvl": "A1"
+  },
+  "over": {
+   "base": "over",
+   "en": "about",
+   "es": "por",
+   "hi": "को लेकर",
+   "ja": "〜をめぐる",
+   "ko": "~에 대한",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "關於（concern over：對…的擔憂）"
+  },
+  "own": {
+   "ant": [
+    "shared"
+   ],
+   "base": "own",
+   "col": [
+    "its own future",
+    "on your own"
+   ],
+   "en": "belonging to that person or group",
+   "es": "propio",
+   "ex": "They want to run their own business.",
+   "hi": "अपना",
+   "ja": "自分の",
+   "ko": "자신의",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "personal",
+    "individual"
+   ],
+   "zh": "自己的"
+  },
+  "percent": {
+   "zh": "百分比",
+   "hi": "प्रतिशत",
+   "es": "por ciento",
+   "ja": "パーセント",
+   "ko": "퍼센트",
+   "en": "out of every hundred",
+   "pos": "n.",
+   "base": "percent",
+   "lvl": "A2",
+   "syn": [
+    "per cent",
+    "percentage"
+   ],
+   "ant": [],
+   "ex": "Ten percent of the class was absent.",
+   "col": [
+    "33 percent",
+    "5 percent"
+   ]
+  },
+  "piloting": {
+   "zh": "試行；試辦",
+   "hi": "प्रायोगिक रूप से चलाना",
+   "es": "poniendo a prueba",
+   "ja": "試験導入している",
+   "ko": "시범 운영하는",
+   "en": "testing something on a small scale first",
+   "pos": "v.",
+   "base": "pilot",
+   "lvl": "C1",
+   "syn": [
+    "trialling",
+    "testing",
+    "trying out"
+   ],
+   "ant": [
+    "abandoning"
+   ],
+   "ex": "The city is piloting free buses this month.",
+   "col": [
+    "pilot a scheme",
+    "pilot a programme"
+   ]
+  },
+  "pinned": {
+   "zh": "歸咎於（pin on）",
+   "hi": "का दोष डालना",
+   "es": "atribuyó",
+   "ja": "〜のせいにした",
+   "ko": "~탓으로 돌렸다",
+   "en": "(pin on) said someone or something was responsible",
+   "pos": "v.",
+   "base": "pin",
+   "lvl": "C1",
+   "syn": [
+    "blamed",
+    "attributed",
+    "laid"
+   ],
+   "ant": [
+    "cleared"
+   ],
+   "ex": "They pinned the delay on bad weather.",
+   "col": [
+    "pin the blame on",
+    "pin something on someone"
+   ]
+  },
+  "pinpoint": {
+   "zh": "精確找出",
+   "hi": "सटीक पहचानना",
+   "es": "localizar con precisión",
+   "ja": "特定する",
+   "ko": "정확히 찾아내다",
+   "en": "find or identify exactly",
+   "pos": "v.",
+   "base": "pinpoint",
+   "lvl": "C1",
+   "syn": [
+    "identify",
+    "locate",
+    "spot"
+   ],
+   "ant": [
+    "overlook"
+   ],
+   "ex": "Doctors could not pinpoint the cause of the pain.",
+   "col": [
+    "pinpoint the cause",
+    "pinpoint the location"
+   ],
+   "note": {
+    "meaning": "精確找出；準確指出。",
+    "usage": "pinpoint the cause/location/problem；也可作形容詞 with pinpoint accuracy。",
+    "collocations": [
+     "pinpoint the cause",
+     "pinpoint the location",
+     "pinpoint accuracy"
+    ],
+    "example": {
+     "en": "Engineers finally pinpointed the cause of the outage.",
+     "zh": "工程師終於找出了停電的確切原因。"
+    }
+   },
+   "noteHi": {
+    "meaning": "सटीक रूप से पहचानना।",
+    "usage": "pinpoint the cause/location आम प्रयोग है।",
+    "exampleTr": "इंजीनियरों ने आखिरकार बिजली गुल होने का सही कारण ढूंढ लिया।"
+   },
+   "noteEs": {
+    "meaning": "localizar o identificar con precisión.",
+    "usage": "Se usa pinpoint the cause/location; with pinpoint accuracy.",
+    "exampleTr": "Los ingenieros por fin localizaron la causa del apagón."
+   },
+   "noteJa": {
+    "meaning": "正確に特定する。",
+    "usage": "pinpoint the cause/location の形が多い。",
+    "exampleTr": "技術者たちはついに停電の原因を突き止めた。"
+   },
+   "noteKo": {
+    "meaning": "정확히 찾아내다.",
+    "usage": "pinpoint the cause/location 형태가 흔하다.",
+    "exampleTr": "엔지니어들은 마침내 정전의 원인을 정확히 찾아냈다."
+   },
+   "noteEn": {
+    "meaning": "to find or identify something exactly.",
+    "usage": "Common: 'pinpoint the cause', 'pinpoint the location', 'pinpoint accuracy'."
+   }
+  },
+  "places": {
+   "zh": "地方；部分",
+   "hi": "जगहें",
+   "es": "lugares",
+   "ja": "箇所",
+   "ko": "부분",
+   "en": "parts or points of something",
+   "pos": "n.",
+   "base": "place",
+   "lvl": "A1",
+   "syn": [
+    "spots",
+    "points",
+    "areas"
+   ],
+   "ant": [],
+   "ex": "The test found weak places in the wall.",
+   "col": [
+    "weak places",
+    "many places"
+   ]
+  },
+  "platforms": {
+   "zh": "平台（系統）",
+   "hi": "प्लेटफ़ॉर्म",
+   "es": "plataformas",
+   "ja": "プラットフォーム",
+   "ko": "플랫폼",
+   "en": "computer systems that run online services",
+   "pos": "n.",
+   "base": "platform",
+   "lvl": "B2",
+   "syn": [
+    "systems",
+    "services",
+    "portals"
+   ],
+   "ant": [],
+   "ex": "Online shopping platforms grew fast this year.",
+   "col": [
+    "online platforms",
+    "banking platforms"
+   ]
+  },
+  "predominantly": {
+   "ant": [
+    "partly"
+   ],
+   "base": "predominantly",
+   "col": [
+    "predominantly rural",
+    "predominantly associated"
+   ],
+   "en": "mainly; mostly",
+   "es": "predominantemente",
+   "ex": "The area is predominantly rural.",
+   "hi": "मुख्य रूप से",
+   "ja": "主として",
+   "ko": "주로",
+   "lvl": "C1",
+   "pos": "adv.",
+   "syn": [
+    "mainly",
+    "chiefly",
+    "largely"
+   ],
+   "zh": "主要地",
+   "note": {
+    "meaning": "主要地；多半。",
+    "usage": "正式副詞，等同 mainly/mostly，寫作中可替換避免重複。",
+    "collocations": [
+     "predominantly young",
+     "predominantly urban",
+     "predominantly female"
+    ],
+    "example": {
+     "en": "The audience was predominantly university students.",
+     "zh": "觀眾以大學生為主。"
+    }
+   },
+   "noteHi": {
+    "meaning": "मुख्य रूप से।",
+    "usage": "औपचारिक; mainly/mostly का विकल्प।",
+    "exampleTr": "दर्शक मुख्य रूप से विश्वविद्यालय के छात्र थे।"
+   },
+   "noteEs": {
+    "meaning": "predominantemente; en su mayoría.",
+    "usage": "Formal; sinónimo de mainly/mostly.",
+    "exampleTr": "El público estaba formado predominantemente por universitarios."
+   },
+   "noteJa": {
+    "meaning": "主に；大部分は。",
+    "usage": "mainly/mostly の堅い言い方。",
+    "exampleTr": "観客は主に大学生だった。"
+   },
+   "noteKo": {
+    "meaning": "주로; 대부분.",
+    "usage": "mainly/mostly의 격식 있는 표현.",
+    "exampleTr": "관객은 주로 대학생이었다."
+   },
+   "noteEn": {
+    "meaning": "mainly; mostly.",
+    "usage": "Formal alternative to 'mainly'; e.g. 'predominantly young', 'predominantly urban'."
+   }
+  },
+  "probe": {
+   "zh": "探測；試探",
+   "hi": "जांचना",
+   "es": "sondear",
+   "ja": "探る",
+   "ko": "탐색하다",
+   "en": "test or examine something closely",
+   "pos": "v.",
+   "base": "probe",
+   "lvl": "C1",
+   "syn": [
+    "test",
+    "examine",
+    "explore"
+   ],
+   "ant": [
+    "ignore"
+   ],
+   "ex": "Engineers probe the bridge for hidden damage.",
+   "col": [
+    "probe for weaknesses",
+    "probe deeper"
+   ]
+  },
+  "probes": {
+   "zh": "探測；試探性攻擊",
+   "hi": "जांच प्रयास",
+   "es": "sondeos",
+   "ja": "探査攻撃",
+   "ko": "탐색 공격",
+   "en": "attempts to test a system for weak points",
+   "pos": "n.",
+   "base": "probe",
+   "lvl": "C1",
+   "syn": [
+    "scans",
+    "tests",
+    "investigations"
+   ],
+   "ant": [],
+   "ex": "The bank logged thousands of probes from abroad.",
+   "col": [
+    "external probes",
+    "suspicious probes"
+   ]
+  },
+  "probing": {
+   "zh": "探測；試探",
+   "hi": "जांच करना",
+   "es": "sondeo",
+   "ja": "探査",
+   "ko": "탐색",
+   "en": "the act of testing a system for weak points",
+   "pos": "n.",
+   "base": "probing",
+   "lvl": "C1",
+   "syn": [
+    "scanning",
+    "testing",
+    "exploring"
+   ],
+   "ant": [],
+   "ex": "Probing by hackers rose after the holiday.",
+   "col": [
+    "probing activity",
+    "probing attacks"
+   ]
+  },
+  "problem": {
+   "ant": [
+    "solution"
+   ],
+   "base": "problem",
+   "col": [
+    "money problem",
+    "big problem"
+   ],
+   "en": "something difficult to deal with",
+   "es": "problema",
+   "ex": "We have a money problem.",
+   "hi": "समस्या",
+   "ja": "問題",
+   "ko": "문제",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "difficulty",
+    "trouble",
+    "issue"
+   ],
+   "zh": "問題"
+  },
+  "problematic": {
+   "ant": [
+    "easy"
+   ],
+   "base": "problematic",
+   "col": [
+    "highly problematic",
+    "problematic area"
+   ],
+   "en": "causing problems",
+   "es": "problemático",
+   "ex": "The junction is problematic for cyclists.",
+   "hi": "समस्याग्रस्त",
+   "ja": "問題のある",
+   "ko": "문제가 있는",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "troublesome",
+    "difficult",
+    "awkward"
+   ],
+   "zh": "有問題的"
+  },
+  "program": {
+   "ant": [],
+   "base": "program",
+   "col": [
+    "computer program",
+    "install a program"
+   ],
+   "en": "software that a computer runs",
+   "es": "programa",
+   "ex": "This program helps you edit photos.",
+   "hi": "प्रोग्राम",
+   "ja": "プログラム；ソフト",
+   "ko": "프로그램",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "software",
+    "app",
+    "application"
+   ],
+   "zh": "程式"
+  },
+  "protect": {
+   "ant": [
+    "harm",
+    "endanger"
+   ],
+   "base": "protect",
+   "col": [
+    "protect from",
+    "protect rights"
+   ],
+   "en": "keep safe from harm",
+   "es": "proteger",
+   "ex": "We must protect our rivers.",
+   "hi": "रक्षा करना",
+   "ja": "保護する",
+   "ko": "보호하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "defend",
+    "guard",
+    "safeguard"
+   ],
+   "zh": "保護"
+  },
+  "public": {
+   "zh": "公開的",
+   "hi": "सार्वजनिक",
+   "es": "público",
+   "ja": "公開の",
+   "ko": "공개된",
+   "en": "open to everyone",
+   "pos": "adj.",
+   "base": "public",
+   "lvl": "A2",
+   "syn": [
+    "open",
+    "external"
+   ],
+   "ant": [
+    "private",
+    "internal"
+   ],
+   "ex": "The bank's public website was attacked.",
+   "col": [
+    "public websites",
+    "public services"
+   ]
+  },
+  "purely": {
+   "zh": "純粹地",
+   "hi": "केवल",
+   "es": "puramente",
+   "ja": "純粋に",
+   "ko": "순전히",
+   "en": "only; for this one reason",
+   "pos": "adv.",
+   "base": "purely",
+   "lvl": "B2",
+   "syn": [
+    "solely",
+    "only",
+    "entirely"
+   ],
+   "ant": [
+    "partly"
+   ],
+   "ex": "The decision was made purely on cost.",
+   "col": [
+    "purely on merit",
+    "purely by chance"
+   ]
+  },
+  "quarter": {
+   "zh": "季度",
+   "hi": "तिमाही",
+   "es": "trimestre",
+   "ja": "四半期",
+   "ko": "분기",
+   "en": "a three-month period of the year",
+   "pos": "n.",
+   "base": "quarter",
+   "lvl": "B1",
+   "syn": [
+    "three months",
+    "period"
+   ],
+   "ant": [],
+   "ex": "Sales rose in the third quarter.",
+   "col": [
+    "third quarter",
+    "last quarter"
+   ]
+  },
+  "rays": {
+   "zh": "（公司名）Rays",
+   "hi": "रेज़ (कंपनी नाम)",
+   "es": "Rays (nombre de empresa)",
+   "ja": "Rays（社名）",
+   "ko": "레이즈(회사명)",
+   "en": "part of a company name",
+   "pos": "n.",
+   "base": "Rays",
+   "lvl": "PN"
+  },
+  "react": {
+   "zh": "反應",
+   "hi": "प्रतिक्रिया देना",
+   "es": "reaccionar",
+   "ja": "反応する",
+   "ko": "반응하다",
+   "en": "to act or feel in response to something",
+   "pos": "v.",
+   "base": "react",
+   "lvl": "B1",
+   "syn": [
+    "respond",
+    "answer"
+   ],
+   "ant": [
+    "ignore"
+   ],
+   "ex": "How did your parents react?",
+   "col": [
+    "react to",
+    "react quickly"
+   ]
+  },
+  "reactive": {
+   "zh": "被動應對的",
+   "hi": "प्रतिक्रियात्मक",
+   "es": "reactivo",
+   "ja": "受け身の；事後対応の",
+   "ko": "사후 대응의",
+   "en": "acting only after something has happened",
+   "pos": "adj.",
+   "base": "reactive",
+   "lvl": "C1",
+   "syn": [
+    "responsive",
+    "defensive"
+   ],
+   "ant": [
+    "proactive",
+    "preventive"
+   ],
+   "ex": "A reactive plan waits for problems to appear.",
+   "col": [
+    "reactive approach",
+    "purely reactive"
+   ]
+  },
+  "real": {
+   "zh": "真正的",
+   "hi": "असली",
+   "es": "real",
+   "ja": "本物の",
+   "ko": "진짜의",
+   "en": "not fake",
+   "pos": "adj.",
+   "base": "real",
+   "lvl": "A1",
+   "syn": [
+    "actual",
+    "genuine"
+   ],
+   "ant": [
+    "fake"
+   ],
+   "ex": "They tested defences before real attackers came.",
+   "col": [
+    "real attackers",
+    "real threat"
+   ]
+  },
+  "reconnaissance": {
+   "zh": "偵察",
+   "hi": "टोही",
+   "es": "reconocimiento",
+   "ja": "偵察",
+   "ko": "정찰",
+   "en": "gathering information before an attack",
+   "pos": "n.",
+   "base": "reconnaissance",
+   "lvl": "C2",
+   "syn": [
+    "scouting",
+    "surveillance",
+    "probing"
+   ],
+   "ant": [],
+   "ex": "Hackers often start with reconnaissance of a network.",
+   "col": [
+    "reconnaissance activity",
+    "carry out reconnaissance"
+   ]
+  },
+  "recorded": {
+   "zh": "記錄",
+   "hi": "दर्ज किया",
+   "es": "registró",
+   "ja": "記録した",
+   "ko": "기록했다",
+   "en": "noted officially",
+   "pos": "v.",
+   "base": "record",
+   "lvl": "B1",
+   "syn": [
+    "logged",
+    "noted",
+    "documented"
+   ],
+   "ant": [],
+   "ex": "The bank recorded a big rise in attacks.",
+   "col": [
+    "recorded an increase",
+    "recorded data"
+   ]
+  },
+  "regular": {
+   "ant": [
+    "irregular",
+    "occasional"
+   ],
+   "base": "regular",
+   "en": "happening often at fixed times",
+   "es": "regular",
+   "ex": "Take regular breaks when you study.",
+   "hi": "नियमित",
+   "ja": "定期的な",
+   "ko": "정기적인",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "routine",
+    "frequent",
+    "periodic"
+   ],
+   "zh": "定期的（on a regular basis：定期地）",
+   "col": [
+    "regular searches",
+    "on a regular basis"
+   ]
+  },
+  "relies": {
+   "zh": "依賴",
+   "hi": "निर्भर करता है",
+   "es": "depende",
+   "ja": "頼る",
+   "ko": "의존한다",
+   "en": "depends on something",
+   "pos": "v.",
+   "base": "rely",
+   "lvl": "B1",
+   "syn": [
+    "depends",
+    "counts",
+    "leans"
+   ],
+   "ant": [],
+   "ex": "The bank relies on AI to find threats.",
+   "col": [
+    "relies on",
+    "heavily relies"
+   ]
+  },
+  "relying": {
+   "ant": [],
+   "base": "rely",
+   "col": [
+    "relying on",
+    "relying on HAP"
+   ],
+   "en": "needing something",
+   "es": "que dependen",
+   "ex": "Families relying on food banks need help.",
+   "hi": "निर्भर रहते हुए",
+   "ja": "依存している",
+   "ko": "의존하는",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "depending",
+    "counting",
+    "leaning"
+   ],
+   "zh": "依賴"
+  },
+  "repel": {
+   "zh": "擊退；抵禦",
+   "hi": "खदेड़ना",
+   "es": "repeler",
+   "ja": "撃退する",
+   "ko": "격퇴하다",
+   "en": "drive back an attack",
+   "pos": "v.",
+   "base": "repel",
+   "lvl": "C1",
+   "syn": [
+    "fend off",
+    "resist",
+    "drive back"
+   ],
+   "ant": [
+    "invite",
+    "attract"
+   ],
+   "ex": "The castle walls helped repel invaders.",
+   "col": [
+    "repel attacks",
+    "repel insects"
+   ]
+  },
+  "repelled": {
+   "zh": "擊退",
+   "hi": "खदेड़ा",
+   "es": "repelió",
+   "ja": "撃退した",
+   "ko": "격퇴했다",
+   "en": "drove back an attack",
+   "pos": "v.",
+   "base": "repel",
+   "lvl": "C1",
+   "syn": [
+    "blocked",
+    "fended off",
+    "resisted"
+   ],
+   "ant": [
+    "admitted"
+   ],
+   "ex": "The team repelled every attack in the second half.",
+   "col": [
+    "repelled an attack",
+    "successfully repelled"
+   ]
+  },
+  "reported": {
+   "zh": "報導",
+   "hi": "रिपोर्ट किया",
+   "es": "informó",
+   "ja": "報じた",
+   "ko": "보도했다",
+   "en": "told the public about news",
+   "pos": "v.",
+   "base": "report",
+   "lvl": "B1",
+   "syn": [
+    "stated",
+    "announced",
+    "revealed"
+   ],
+   "ant": [
+    "hid"
+   ],
+   "ex": "The radio reported a big fire downtown.",
+   "col": [
+    "reported that",
+    "widely reported"
+   ]
+  },
+  "responded": {
+   "ant": [
+    "ignored"
+   ],
+   "base": "respond",
+   "col": [
+    "responded to questions",
+    "responded quickly"
+   ],
+   "en": "replied",
+   "es": "respondieron",
+   "ex": "He responded to my message quickly.",
+   "hi": "जवाब दिया",
+   "ja": "応じた",
+   "ko": "답변했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "replied",
+    "answered",
+    "reacted"
+   ],
+   "zh": "回應"
+  },
+  "response": {
+   "ant": [
+    "question"
+   ],
+   "base": "response",
+   "col": [
+    "in response to",
+    "a response to"
+   ],
+   "en": "a reaction to something",
+   "es": "respuesta",
+   "ex": "The council gave no response to the letter.",
+   "hi": "प्रतिक्रिया",
+   "ja": "反応",
+   "ko": "반응",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "reply",
+    "reaction",
+    "answer"
+   ],
+   "zh": "反應；回應"
+  },
+  "rigorously": {
+   "ant": [
+    "loosely",
+    "carelessly"
+   ],
+   "base": "rigorously",
+   "col": [
+    "rigorously tested",
+    "rigorously enforced"
+   ],
+   "en": "very carefully and strictly",
+   "es": "rigurosamente",
+   "ex": "The drug was rigorously tested.",
+   "hi": "कड़ाई से",
+   "ja": "厳密に",
+   "ko": "엄격하게",
+   "lvl": "C1",
+   "pos": "adv.",
+   "syn": [
+    "strictly",
+    "thoroughly",
+    "carefully"
+   ],
+   "zh": "嚴格地"
+  },
+  "rise": {
+   "ant": [
+    "fall",
+    "drop"
+   ],
+   "base": "rise",
+   "col": [
+    "a sharp rise",
+    "rent rise"
+   ],
+   "en": "an increase in amount",
+   "es": "subida",
+   "ex": "There was a sharp rise in prices.",
+   "hi": "वृद्धि",
+   "ja": "上昇",
+   "ko": "인상",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "increase",
+    "hike",
+    "jump"
+   ],
+   "zh": "上漲；增加"
+  },
+  "roughly": {
+   "ant": [
+    "exactly",
+    "precisely"
+   ],
+   "base": "roughly",
+   "col": [
+    "roughly half",
+    "roughly speaking"
+   ],
+   "en": "about",
+   "es": "aproximadamente",
+   "ex": "The trip takes roughly two hours.",
+   "hi": "लगभग",
+   "ja": "おおよそ",
+   "ko": "대략",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "about",
+    "approximately",
+    "around"
+   ],
+   "zh": "大約"
+  },
+  "routine": {
+   "ant": [
+    "unusual",
+    "special"
+   ],
+   "base": "routine",
+   "col": [
+    "routine walking",
+    "daily routine"
+   ],
+   "en": "normal and done regularly",
+   "es": "rutinario; habitual",
+   "ex": "The doctor did a routine check-up.",
+   "hi": "नियमित; रोज़ाना",
+   "ja": "定例の；日常の",
+   "ko": "일상적인；정기적인",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "regular",
+    "usual",
+    "ordinary"
+   ],
+   "zh": "例行的；日常的"
+  },
+  "running": {
+   "zh": "持續處於（某水準）",
+   "hi": "चल रहा (स्तर पर)",
+   "es": "situándose",
+   "ja": "推移している",
+   "ko": "유지되는",
+   "en": "continuing at a certain level",
+   "pos": "v.",
+   "base": "run",
+   "lvl": "B2",
+   "syn": [
+    "standing",
+    "remaining",
+    "holding"
+   ],
+   "ant": [],
+   "ex": "Inflation is running at about two percent.",
+   "col": [
+    "running at",
+    "running high"
+   ]
+  },
+  "runs": {
+   "zh": "運行；執行",
+   "hi": "चलाता है",
+   "es": "ejecuta",
+   "ja": "運用する",
+   "ko": "운영한다",
+   "en": "operates a system or program",
+   "pos": "v.",
+   "base": "run",
+   "lvl": "A2",
+   "syn": [
+    "operates",
+    "uses",
+    "manages"
+   ],
+   "ant": [
+    "stops"
+   ],
+   "ex": "The bank runs new software on every computer.",
+   "col": [
+    "runs a program",
+    "runs a system"
+   ]
+  },
+  "safety": {
+   "ant": [
+    "danger"
+   ],
+   "base": "safety",
+   "col": [
+    "safety tests",
+    "food safety"
+   ],
+   "en": "being protected from danger",
+   "es": "seguridad",
+   "ex": "Wear a helmet for your safety.",
+   "hi": "सुरक्षा",
+   "ja": "安全",
+   "ko": "안전",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "security",
+    "protection"
+   ],
+   "zh": "安全"
+  },
+  "said": {
+   "ant": [],
+   "base": "say",
+   "col": [
+    "said that",
+    "officials said"
+   ],
+   "en": "past tense of \"say\"",
+   "es": "dijo",
+   "ex": "She said the bus was late again.",
+   "hi": "कहा",
+   "ja": "言った",
+   "ko": "말했다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "stated",
+    "told",
+    "explained"
+   ],
+   "zh": "說（say 的過去式）"
+  },
+  "saw": {
+   "zh": "經歷；看到",
+   "hi": "देखा",
+   "es": "registró",
+   "ja": "経験した",
+   "ko": "겪었다",
+   "en": "experienced or noticed",
+   "pos": "v.",
+   "base": "see",
+   "lvl": "A1",
+   "syn": [
+    "experienced",
+    "noticed",
+    "recorded"
+   ],
+   "ant": [
+    "missed"
+   ],
+   "ex": "The shop saw more customers in December.",
+   "col": [
+    "saw a rise",
+    "saw an increase"
+   ]
+  },
+  "say": {
+   "ant": [],
+   "base": "say",
+   "col": [
+    "say that",
+    "experts say"
+   ],
+   "en": "to state",
+   "es": "decir",
+   "ex": "Doctors say rest is important after illness.",
+   "hi": "कहना",
+   "ja": "言う",
+   "ko": "말하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "state",
+    "tell",
+    "claim"
+   ],
+   "zh": "說"
+  },
+  "says": {
+   "ant": [],
+   "base": "say",
+   "col": [
+    "says that",
+    "the report says"
+   ],
+   "en": "to state",
+   "es": "decir",
+   "ex": "The sign says the shop opens at nine.",
+   "hi": "कहना",
+   "ja": "言う",
+   "ko": "말하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "states",
+    "claims",
+    "reports"
+   ],
+   "zh": "說"
+  },
+  "scale": {
+   "ant": [],
+   "base": "scale",
+   "col": [
+    "on a large scale",
+    "the scale of"
+   ],
+   "en": "how big or serious something is",
+   "es": "magnitud",
+   "ex": "Nobody knew the scale of the problem.",
+   "hi": "पैमाना",
+   "ja": "規模",
+   "ko": "규모",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "size",
+    "extent",
+    "magnitude"
+   ],
+   "zh": "規模；程度"
+  },
+  "scenarios": {
+   "zh": "情境；情節",
+   "hi": "परिदृश्य",
+   "es": "escenarios",
+   "ja": "シナリオ；想定",
+   "ko": "시나리오",
+   "en": "imagined situations used for planning",
+   "pos": "n.",
+   "base": "scenario",
+   "lvl": "B2",
+   "syn": [
+    "situations",
+    "cases",
+    "simulations"
+   ],
+   "ant": [],
+   "ex": "The drill used three different flood scenarios.",
+   "col": [
+    "worst-case scenarios",
+    "attack scenarios"
+   ]
+  },
+  "sector": {
+   "ant": [],
+   "base": "sector",
+   "col": [
+    "food sector",
+    "public sector"
+   ],
+   "en": "one part of the economy or business",
+   "es": "sector",
+   "ex": "The tech sector employs thousands in Dublin.",
+   "hi": "क्षेत्र; उद्योग",
+   "ja": "業界",
+   "ko": "업계; 부문",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "industry",
+    "field",
+    "branch",
+    "area"
+   ],
+   "zh": "行業；產業界"
+  },
+  "security": {
+   "zh": "安全；資安",
+   "hi": "सुरक्षा",
+   "es": "seguridad",
+   "ja": "セキュリティ",
+   "ko": "보안",
+   "en": "protection from danger or attack",
+   "pos": "n.",
+   "base": "security",
+   "lvl": "B1",
+   "syn": [
+    "protection",
+    "safety",
+    "defence"
+   ],
+   "ant": [
+    "danger",
+    "risk"
+   ],
+   "ex": "The bank spent more on online security.",
+   "col": [
+    "security tools",
+    "cyber security"
+   ]
+  },
+  "services": {
+   "ant": [],
+   "base": "service",
+   "col": [
+    "digital services",
+    "public services"
+   ],
+   "en": "work done for people",
+   "es": "servicios",
+   "ex": "Online services are now used by everyone.",
+   "hi": "सेवाएँ",
+   "ja": "サービス",
+   "ko": "서비스",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "facilities",
+    "provision",
+    "work"
+   ],
+   "zh": "服務"
+  },
+  "severity": {
+   "zh": "嚴重性",
+   "hi": "गंभीरता",
+   "es": "gravedad",
+   "ja": "深刻さ",
+   "ko": "심각성",
+   "en": "how serious or bad something is",
+   "pos": "n.",
+   "base": "severity",
+   "lvl": "C1",
+   "syn": [
+    "seriousness",
+    "gravity",
+    "intensity"
+   ],
+   "ant": [
+    "mildness"
+   ],
+   "ex": "Doctors judged the severity of each injury.",
+   "col": [
+    "the severity of",
+    "reduce the severity"
+   ],
+   "note": {
+    "meaning": "嚴重性；嚴重程度。",
+    "usage": "the severity of + 名詞；常見 reduce/assess the severity。",
+    "collocations": [
+     "the severity of",
+     "assess the severity",
+     "reduce the severity"
+    ],
+    "example": {
+     "en": "Officials are still assessing the severity of the damage.",
+     "zh": "官員仍在評估損害的嚴重程度。"
+    }
+   },
+   "noteHi": {
+    "meaning": "गंभीरता।",
+    "usage": "the severity of + संज्ञा; assess the severity।",
+    "exampleTr": "अधिकारी अभी भी नुकसान की गंभीरता का आकलन कर रहे हैं।"
+   },
+   "noteEs": {
+    "meaning": "gravedad; lo serio que es algo.",
+    "usage": "the severity of + sustantivo; assess the severity.",
+    "exampleTr": "Las autoridades aún evalúan la gravedad de los daños."
+   },
+   "noteJa": {
+    "meaning": "深刻さ；重大さ。",
+    "usage": "the severity of 〜、assess the severity の形。",
+    "exampleTr": "当局は被害の深刻さをまだ評価中だ。"
+   },
+   "noteKo": {
+    "meaning": "심각성.",
+    "usage": "the severity of ~, assess the severity 형태.",
+    "exampleTr": "당국은 아직 피해의 심각성을 평가하고 있다."
+   },
+   "noteEn": {
+    "meaning": "how serious or bad something is.",
+    "usage": "Usually 'the severity of something'; 'assess/reduce the severity'."
+   }
+  },
+  "sharp": {
+   "ant": [
+    "gradual",
+    "slight"
+   ],
+   "base": "sharp",
+   "col": [
+    "sharp fall",
+    "sharp decline"
+   ],
+   "en": "sudden and large",
+   "es": "brusco",
+   "ex": "There was a sharp rise in prices.",
+   "hi": "तेज़",
+   "ja": "急激な",
+   "ko": "급격한",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "steep",
+    "sudden",
+    "rapid"
+   ],
+   "zh": "急劇的"
+  },
+  "should": {
+   "zh": "應該",
+   "hi": "चाहिए",
+   "es": "debería",
+   "ja": "〜すべきだ",
+   "ko": "~해야 한다",
+   "en": "used to give advice",
+   "pos": "aux.",
+   "base": "should",
+   "lvl": "A1"
+  },
+  "significantly": {
+   "ant": [
+    "slightly"
+   ],
+   "base": "significantly",
+   "col": [
+    "most significantly",
+    "significantly lower"
+   ],
+   "en": "importantly",
+   "es": "cabe destacar que",
+   "ex": "Significantly, dentists will also strike.",
+   "hi": "उल्लेखनीय रूप से",
+   "ja": "注目すべきことに",
+   "ko": "주목할 만하게",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "notably",
+    "considerably"
+   ],
+   "zh": "值得注意的是；顯著地"
+  },
+  "simulate": {
+   "zh": "模擬",
+   "hi": "नकल करना (सिमुलेट)",
+   "es": "simular",
+   "ja": "模擬する",
+   "ko": "모의 실행하다",
+   "en": "create a copy of a real situation for testing",
+   "pos": "v.",
+   "base": "simulate",
+   "lvl": "C1",
+   "syn": [
+    "imitate",
+    "replicate",
+    "model"
+   ],
+   "ant": [],
+   "ex": "Pilots use machines that simulate bad weather.",
+   "col": [
+    "simulate an attack",
+    "simulate conditions"
+   ]
+  },
+  "smart": {
+   "ant": [
+    "basic"
+   ],
+   "base": "smart",
+   "col": [
+    "smart glasses",
+    "smart phone"
+   ],
+   "en": "connected to the internet and computers",
+   "es": "inteligente",
+   "ex": "I bought a smart watch.",
+   "hi": "स्मार्ट",
+   "ja": "スマート",
+   "ko": "스마트",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "intelligent",
+    "digital",
+    "high-tech"
+   ],
+   "zh": "智慧型的"
+  },
+  "some": {
+   "ant": [
+    "exactly"
+   ],
+   "base": "some",
+   "col": [
+    "some two decades",
+    "some 50 people"
+   ],
+   "en": "a number of, but not all",
+   "es": "algunos",
+   "ex": "Some 300 people came.",
+   "hi": "कुछ",
+   "ja": "いくつかの",
+   "ko": "일부",
+   "lvl": "A1",
+   "pos": "det.",
+   "syn": [
+    "about",
+    "roughly",
+    "approximately"
+   ],
+   "zh": "一些"
+  },
+  "spot": {
+   "zh": "發現；察覺",
+   "hi": "पहचानना",
+   "es": "detectar",
+   "ja": "見つける",
+   "ko": "알아채다",
+   "en": "notice or find something",
+   "pos": "v.",
+   "base": "spot",
+   "lvl": "B1",
+   "syn": [
+    "notice",
+    "detect",
+    "identify"
+   ],
+   "ant": [
+    "miss"
+   ],
+   "ex": "Can you spot the mistake in this email?",
+   "col": [
+    "spot a problem",
+    "spot suspicious activity"
+   ]
+  },
+  "stop": {
+   "ant": [
+    "start",
+    "allow"
+   ],
+   "base": "stop",
+   "col": [
+    "stop a mission",
+    "stop working"
+   ],
+   "en": "to prevent",
+   "es": "evitar",
+   "ex": "Nothing could stop the plan going ahead.",
+   "hi": "रोकना",
+   "ja": "止める；防ぐ",
+   "ko": "막다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "halt",
+    "block",
+    "prevent"
+   ],
+   "zh": "阻止"
+  },
+  "stopped": {
+   "ant": [
+    "started",
+    "continued"
+   ],
+   "base": "stop",
+   "col": [
+    "stopped at the border",
+    "stopped by"
+   ],
+   "en": "no longer continued",
+   "es": "dejaron de; pararon",
+   "ex": "The rain stopped in the afternoon.",
+   "hi": "बंद हो गया",
+   "ja": "止まった；やめた",
+   "ko": "멈췄다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "ceased",
+    "ended",
+    "halted"
+   ],
+   "zh": "停止"
+  },
+  "strange": {
+   "zh": "奇怪的",
+   "hi": "अजीब",
+   "es": "extraño",
+   "ja": "変な",
+   "ko": "이상한",
+   "en": "unusual; hard to understand",
+   "pos": "adj.",
+   "base": "strange",
+   "lvl": "A2",
+   "syn": [
+    "odd",
+    "weird",
+    "unusual"
+   ],
+   "ant": [
+    "normal"
+   ],
+   "ex": "I got a strange message today.",
+   "col": [
+    "strange message",
+    "feel strange"
+   ]
+  },
+  "stress-test": {
+   "zh": "壓力測試",
+   "hi": "तनाव परीक्षण करना",
+   "es": "someter a prueba de estrés",
+   "ja": "ストレステストする",
+   "ko": "스트레스 테스트하다",
+   "en": "test a system under very difficult conditions",
+   "pos": "v.",
+   "base": "stress-test",
+   "lvl": "C1",
+   "syn": [
+    "test",
+    "trial",
+    "probe"
+   ],
+   "ant": [],
+   "ex": "Regulators stress-test banks every year.",
+   "col": [
+    "stress-test banks",
+    "stress-test a system"
+   ]
+  },
+  "striking": {
+   "ant": [
+    "ordinary",
+    "unremarkable"
+   ],
+   "base": "striking",
+   "col": [
+    "striking resemblance",
+    "striking contrast"
+   ],
+   "en": "very noticeable; surprising",
+   "es": "llamativo",
+   "ex": "There is a striking difference between the two.",
+   "hi": "उल्लेखनीय",
+   "ja": "注目すべき",
+   "ko": "눈에 띄는",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "remarkable",
+    "notable",
+    "noticeable"
+   ],
+   "zh": "引人注目的"
+  },
+  "substantial": {
+   "ant": [
+    "small",
+    "minor"
+   ],
+   "base": "substantial",
+   "col": [
+    "substantial amount",
+    "substantial change"
+   ],
+   "en": "large",
+   "es": "considerable",
+   "ex": "The town received a substantial grant.",
+   "hi": "पर्याप्त; बड़ा",
+   "ja": "相当な",
+   "ko": "상당한",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "large",
+    "considerable",
+    "significant"
+   ],
+   "zh": "大量的；重大的"
+  },
+  "such": {
+   "base": "such",
+   "en": "for example (such as)",
+   "es": "como (such as: por ejemplo)",
+   "hi": "जैसे (such as)",
+   "ja": "（such as：例えば）",
+   "ko": "(such as: 예를 들어)",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "例如（such as）"
+  },
+  "suggested": {
+   "ant": [
+    "rejected"
+   ],
+   "base": "suggest",
+   "col": [
+    "suggested a plan",
+    "suggested that"
+   ],
+   "en": "put forward an idea",
+   "es": "sugirió",
+   "ex": "The teacher suggested a new reading plan.",
+   "hi": "सुझाव दिया",
+   "ja": "提案した",
+   "ko": "제안했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "proposed",
+    "put forward",
+    "recommended"
+   ],
+   "zh": "建議"
+  },
+  "surge": {
+   "zh": "激增",
+   "hi": "तेज़ उछाल",
+   "es": "aumento repentino",
+   "ja": "急増",
+   "ko": "급증",
+   "en": "a sudden large increase",
+   "pos": "n.",
+   "base": "surge",
+   "lvl": "C1",
+   "syn": [
+    "rise",
+    "jump",
+    "spike",
+    "increase"
+   ],
+   "ant": [
+    "drop",
+    "fall"
+   ],
+   "ex": "There was a surge in online shopping this month.",
+   "col": [
+    "a surge in demand",
+    "sudden surge"
+   ],
+   "note": {
+    "meaning": "激增；急遽上升。",
+    "usage": "名詞 a surge in sth；動詞 surge to/by。",
+    "collocations": [
+     "a surge in",
+     "sudden surge",
+     "surge in demand"
+    ],
+    "example": {
+     "en": "There was a surge in online shopping before the holiday.",
+     "zh": "假期前網購激增。"
+    }
+   },
+   "noteHi": {
+    "meaning": "अचानक भारी वृद्धि।",
+    "usage": "a surge in + संज्ञा; क्रिया surge to/by।",
+    "exampleTr": "छुट्टी से पहले ऑनलाइन खरीदारी में अचानक उछाल आया।"
+   },
+   "noteEs": {
+    "meaning": "aumento repentino y fuerte.",
+    "usage": "a surge in sth; verbo surge to/by.",
+    "exampleTr": "Hubo un aumento repentino de compras en línea antes de las fiestas."
+   },
+   "noteJa": {
+    "meaning": "急増。",
+    "usage": "a surge in 〜；動詞 surge to/by。",
+    "exampleTr": "休暇前にネット通販が急増した。"
+   },
+   "noteKo": {
+    "meaning": "급증.",
+    "usage": "a surge in ~; 동사 surge to/by.",
+    "exampleTr": "연휴 전 온라인 쇼핑이 급증했다."
+   },
+   "noteEn": {
+    "meaning": "a sudden large increase.",
+    "usage": "Common: 'a surge in something', 'a sudden surge', 'surge in demand'."
+   }
+  },
+  "suspicious": {
+   "ant": [
+    "normal",
+    "innocent"
+   ],
+   "base": "suspicious",
+   "col": [
+    "suspicious package",
+    "suspicious item"
+   ],
+   "en": "making you think something is wrong",
+   "es": "sospechoso",
+   "ex": "Report any suspicious bags to staff.",
+   "hi": "संदिग्ध",
+   "ja": "不審な",
+   "ko": "수상한",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "questionable",
+    "dubious",
+    "odd"
+   ],
+   "zh": "可疑的"
+  },
+  "system": {
+   "zh": "系統",
+   "hi": "प्रणाली",
+   "es": "sistema",
+   "ja": "システム",
+   "ko": "시스템",
+   "en": "a set of computers and programs working together",
+   "pos": "n.",
+   "base": "system",
+   "lvl": "A2",
+   "syn": [
+    "network",
+    "setup",
+    "platform"
+   ],
+   "ant": [],
+   "ex": "The new system checks every payment.",
+   "col": [
+    "computer system",
+    "security system"
+   ]
+  },
+  "systemic": {
+   "zh": "系統性的；整體的",
+   "hi": "प्रणालीगत",
+   "es": "sistémico",
+   "ja": "システム全体の",
+   "ko": "시스템적인",
+   "en": "affecting a whole system",
+   "pos": "adj.",
+   "base": "systemic",
+   "lvl": "C1",
+   "syn": [
+    "structural",
+    "widespread",
+    "fundamental"
+   ],
+   "ant": [
+    "isolated",
+    "local"
+   ],
+   "ex": "The report found systemic problems in the software.",
+   "col": [
+    "systemic risk",
+    "systemic weaknesses"
+   ],
+   "note": {
+    "meaning": "系統性的；影響整個體系的。",
+    "usage": "與 systematic（有條理的）不同；常見 systemic risk/problem/failure。",
+    "collocations": [
+     "systemic risk",
+     "systemic problem",
+     "systemic failure"
+    ],
+    "example": {
+     "en": "Experts warned of systemic risk in the banking sector.",
+     "zh": "專家警告銀行業存在系統性風險。"
+    }
+   },
+   "noteHi": {
+    "meaning": "प्रणालीगत; पूरे तंत्र को प्रभावित करने वाला।",
+    "usage": "systematic से अलग; systemic risk/problem।",
+    "exampleTr": "विशेषज्ञों ने बैंकिंग क्षेत्र में प्रणालीगत जोखिम की चेतावनी दी।"
+   },
+   "noteEs": {
+    "meaning": "sistémico; que afecta a todo un sistema.",
+    "usage": "Distinto de systematic; systemic risk/problem/failure.",
+    "exampleTr": "Los expertos advirtieron de un riesgo sistémico en el sector bancario."
+   },
+   "noteJa": {
+    "meaning": "システム全体に関わる。",
+    "usage": "systematic（体系的な）とは別。systemic risk/problem。",
+    "exampleTr": "専門家は銀行業界のシステミックリスクを警告した。"
+   },
+   "noteKo": {
+    "meaning": "시스템 전체에 영향을 주는.",
+    "usage": "systematic(체계적인)과 다름. systemic risk/problem.",
+    "exampleTr": "전문가들은 은행권의 시스템 리스크를 경고했다."
+   },
+   "noteEn": {
+    "meaning": "affecting a whole system, not just one part.",
+    "usage": "Not the same as 'systematic'. Common: 'systemic risk', 'systemic failure'."
+   }
+  },
+  "systems": {
+   "ant": [],
+   "base": "system",
+   "col": [
+    "computer systems",
+    "IT systems"
+   ],
+   "en": "sets of computers or programs working together",
+   "es": "sistemas",
+   "ex": "Our computer systems were updated last night.",
+   "hi": "प्रणालियाँ",
+   "ja": "システム",
+   "ko": "시스템",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "networks",
+    "platforms"
+   ],
+   "zh": "系統"
+  },
+  "taiwan": {
+   "zh": "台灣",
+   "hi": "ताइवान",
+   "es": "Taiwán",
+   "ja": "台湾",
+   "ko": "대만",
+   "en": "an island country in East Asia",
+   "pos": "n.",
+   "base": "Taiwan",
+   "lvl": "PN"
+  },
+  "taiwan's": {
+   "zh": "台灣的",
+   "hi": "ताइवान का",
+   "es": "de Taiwán",
+   "ja": "台湾の",
+   "ko": "대만의",
+   "en": "belonging to Taiwan",
+   "pos": "n.",
+   "base": "Taiwan",
+   "lvl": "PN"
+  },
+  "targeted": {
+   "ant": [
+    "general",
+    "broad"
+   ],
+   "base": "targeted",
+   "col": [
+    "targeted support",
+    "targeted measures"
+   ],
+   "en": "aimed at a particular group",
+   "es": "específica",
+   "ex": "Targeted help is needed for older workers.",
+   "hi": "लक्षित",
+   "ja": "的を絞った",
+   "ko": "표적화된",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "focused",
+    "specific",
+    "directed"
+   ],
+   "zh": "針對性的"
+  },
+  "techniques": {
+   "zh": "技術；手法",
+   "hi": "तकनीकें",
+   "es": "técnicas",
+   "ja": "手法",
+   "ko": "기법",
+   "en": "particular ways of doing something",
+   "pos": "n.",
+   "base": "technique",
+   "lvl": "B1",
+   "syn": [
+    "methods",
+    "tactics",
+    "approaches"
+   ],
+   "ant": [],
+   "ex": "Hackers keep inventing new techniques.",
+   "col": [
+    "new techniques",
+    "attack techniques"
+   ]
+  },
+  "technology": {
+   "zh": "科技（公司名中）",
+   "hi": "प्रौद्योगिकी",
+   "es": "tecnología",
+   "ja": "テクノロジー",
+   "ko": "기술",
+   "en": "machines and methods based on science; part of a company name",
+   "pos": "n.",
+   "base": "technology",
+   "lvl": "A2",
+   "syn": [
+    "tech",
+    "engineering"
+   ],
+   "ant": [],
+   "ex": "New technology helps banks stop fraud.",
+   "col": [
+    "security technology",
+    "new technology"
+   ]
+  },
+  "tell": {
+   "zh": "分辨",
+   "hi": "पहचानना",
+   "es": "distinguir",
+   "ja": "見分ける",
+   "ko": "구별하다",
+   "en": "know the difference",
+   "pos": "v.",
+   "base": "tell",
+   "lvl": "A1",
+   "syn": [
+    "distinguish",
+    "know",
+    "judge"
+   ],
+   "ant": [
+    "confuse"
+   ],
+   "ex": "It is hard to tell real emails from fake ones.",
+   "col": [
+    "hard to tell",
+    "tell the difference"
+   ]
+  },
+  "tellingly": {
+   "ant": [],
+   "base": "tellingly",
+   "col": [
+    "tellingly, few replied",
+    "most tellingly"
+   ],
+   "en": "in a way that shows something important",
+   "es": "reveladoramente",
+   "ex": "Tellingly, no one asked about the cost.",
+   "hi": "अर्थपूर्ण ढंग से",
+   "ja": "示唆的にも",
+   "ko": "의미심장하게도",
+   "lvl": "C2",
+   "pos": "adv.",
+   "syn": [
+    "revealingly",
+    "significantly",
+    "notably"
+   ],
+   "zh": "耐人尋味地"
+  },
+  "ten": {
+   "base": "ten",
+   "en": "the number 10",
+   "es": "diez",
+   "hi": "दस",
+   "ja": "10",
+   "ko": "열; 십",
+   "lvl": "A1",
+   "pos": "num.",
+   "zh": "十"
+  },
+  "test": {
+   "zh": "測試",
+   "hi": "परीक्षण करना",
+   "es": "probar",
+   "ja": "テストする",
+   "ko": "시험하다",
+   "en": "check how well something works",
+   "pos": "v.",
+   "base": "test",
+   "lvl": "A2",
+   "syn": [
+    "check",
+    "try",
+    "examine"
+   ],
+   "ant": [],
+   "ex": "Banks test their systems every month.",
+   "col": [
+    "test defences",
+    "test a system"
+   ]
+  },
+  "testing": {
+   "ant": [],
+   "base": "test",
+   "col": [
+    "testing animals",
+    "testing samples"
+   ],
+   "en": "checking for disease",
+   "es": "analizando",
+   "ex": "Labs are testing samples from the farm.",
+   "hi": "जांच करना",
+   "ja": "検査している",
+   "ko": "검사하는",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "checking",
+    "screening",
+    "examining"
+   ],
+   "zh": "檢測"
+  },
+  "that": {
+   "base": "that",
+   "en": "used to begin a clause",
+   "es": "que",
+   "hi": "कि; वह",
+   "ja": "〜ということ；あの",
+   "ko": "~라는 것；그",
+   "lvl": "A2",
+   "pos": "conj.",
+   "zh": "那個；（引導子句）"
+  },
+  "the": {
+   "base": "the",
+   "en": "used before a known thing",
+   "es": "el; la",
+   "hi": "(निश्चित आर्टिकल)",
+   "ja": "その",
+   "ko": "그",
+   "lvl": "A2",
+   "pos": "art.",
+   "zh": "這個；那個"
+  },
+  "their": {
+   "base": "their",
+   "en": "belonging to them",
+   "es": "su; sus",
+   "hi": "उनका",
+   "ja": "彼らの",
+   "ko": "그들의",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "他們的"
+  },
+  "themselves": {
+   "base": "themselves",
+   "en": "without anyone doing it; on their own",
+   "es": "solos",
+   "hi": "खुद",
+   "ja": "自分で",
+   "ko": "스스로",
+   "lvl": "A2",
+   "pos": "pron.",
+   "zh": "自己"
+  },
+  "then": {
+   "ant": [],
+   "base": "then",
+   "col": [
+    "and then",
+    "since then"
+   ],
+   "en": "after that; as a result",
+   "es": "entonces",
+   "ex": "Then the trains will be faster.",
+   "hi": "तब",
+   "ja": "そうすれば",
+   "ko": "그러면",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "next",
+    "after that",
+    "so"
+   ],
+   "zh": "那麼；然後"
+  },
+  "there": {
+   "zh": "有（there are）",
+   "hi": "वहाँ (there are)",
+   "es": "hay (there are)",
+   "ja": "〜がある（there are）",
+   "ko": "~이 있다(there are)",
+   "en": "used to say something exists",
+   "pos": "pron.",
+   "base": "there",
+   "lvl": "A1"
+  },
+  "these": {
+   "base": "these",
+   "en": "the ones here or just mentioned",
+   "es": "estos",
+   "hi": "ये",
+   "ja": "これらの",
+   "ko": "이러한",
+   "lvl": "A1",
+   "pos": "det.",
+   "zh": "這些"
+  },
+  "they": {
+   "base": "they",
+   "en": "those people",
+   "es": "ellos",
+   "hi": "वे",
+   "ja": "彼ら",
+   "ko": "그들",
+   "lvl": "A2",
+   "pos": "pron.",
+   "zh": "他們"
+  },
+  "third": {
+   "ant": [
+    "first"
+   ],
+   "base": "third",
+   "col": [
+    "the third requirement",
+    "third time"
+   ],
+   "en": "coming after the second",
+   "es": "tercero",
+   "ex": "Our office is on the third floor.",
+   "hi": "तीसरा",
+   "ja": "3番目の",
+   "ko": "세 번째",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "final"
+   ],
+   "zh": "第三的"
+  },
+  "this": {
+   "base": "this",
+   "en": "the thing here",
+   "es": "este; esto",
+   "hi": "यह",
+   "ja": "これ；この",
+   "ko": "이것；이",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "這個；這"
+  },
+  "threat": {
+   "ant": [
+    "safety"
+   ],
+   "base": "threat",
+   "col": [
+    "financial threat",
+    "serious threat"
+   ],
+   "en": "something that may cause harm",
+   "es": "amenaza",
+   "ex": "Rising costs are a threat to small firms.",
+   "hi": "ख़तरा",
+   "ja": "脅威",
+   "ko": "위협",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "danger",
+    "risk",
+    "menace"
+   ],
+   "zh": "威脅"
+  },
+  "threats": {
+   "ant": [
+    "safety"
+   ],
+   "base": "threat",
+   "col": [
+    "evolving threats",
+    "security threats"
+   ],
+   "en": "possible dangers",
+   "es": "amenazas",
+   "ex": "New threats need new ideas.",
+   "hi": "ख़तरे",
+   "ja": "脅威",
+   "ko": "위협",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "dangers",
+    "risks",
+    "menaces"
+   ],
+   "zh": "威脅"
+  },
+  "three": {
+   "base": "three",
+   "en": "3",
+   "es": "tres",
+   "hi": "तीन",
+   "ja": "3",
+   "ko": "셋",
+   "lvl": "A2",
+   "pos": "num.",
+   "zh": "三"
+  },
+  "thwart": {
+   "ant": [
+    "help",
+    "assist"
+   ],
+   "base": "thwart",
+   "col": [
+    "thwart a plan",
+    "thwart an attempt"
+   ],
+   "en": "to stop a plan from succeeding",
+   "es": "frustrar",
+   "ex": "Bad weather could thwart our plans for the trip.",
+   "hi": "विफल करना",
+   "ja": "阻止する",
+   "ko": "좌절시키다",
+   "lvl": "C2",
+   "pos": "v.",
+   "syn": [
+    "block",
+    "foil",
+    "obstruct",
+    "frustrate"
+   ],
+   "zh": "阻撓",
+   "note": {
+    "meaning": "阻撓；挫敗（計畫、攻擊）。",
+    "usage": "thwart an attack/plan/attempt；被動 be thwarted by。",
+    "collocations": [
+     "thwart an attack",
+     "thwart a plan",
+     "be thwarted by"
+    ],
+    "example": {
+     "en": "Quick action by staff thwarted the robbery.",
+     "zh": "員工迅速行動，挫敗了這起搶案。"
+    }
+   },
+   "noteHi": {
+    "meaning": "नाकाम करना; रोकना।",
+    "usage": "thwart an attack/plan आम प्रयोग है।",
+    "exampleTr": "कर्मचारियों की तेज़ कार्रवाई ने डकैती को नाकाम कर दिया।"
+   },
+   "noteEs": {
+    "meaning": "frustrar; impedir un plan o ataque.",
+    "usage": "Se usa thwart an attack/plan; be thwarted by.",
+    "exampleTr": "La rápida reacción del personal frustró el robo."
+   },
+   "noteJa": {
+    "meaning": "（計画・攻撃を）阻止する。",
+    "usage": "thwart an attack/plan、be thwarted by の形。",
+    "exampleTr": "スタッフの素早い対応で強盗は阻止された。"
+   },
+   "noteKo": {
+    "meaning": "(계획·공격을) 좌절시키다.",
+    "usage": "thwart an attack/plan, be thwarted by 형태.",
+    "exampleTr": "직원들의 빠른 대응으로 강도가 저지되었다."
+   },
+   "noteEn": {
+    "meaning": "to stop someone from doing what they planned.",
+    "usage": "Common: 'thwart an attack', 'thwart a plan', 'be thwarted by'."
+   }
+  },
+  "time": {
+   "zh": "時候",
+   "hi": "समय",
+   "es": "momento",
+   "ja": "時",
+   "ko": "시기",
+   "en": "a particular period",
+   "pos": "n.",
+   "base": "time",
+   "lvl": "A1",
+   "syn": [
+    "period",
+    "moment",
+    "point"
+   ],
+   "ant": [],
+   "ex": "At a time when prices are rising, people spend less.",
+   "col": [
+    "at a time when",
+    "this time"
+   ]
+  },
+  "times": {
+   "ant": [],
+   "base": "time",
+   "col": [
+    "at certain times",
+    "at times"
+   ],
+   "en": "parts of the day",
+   "es": "horas",
+   "ex": "The street is busy at certain times.",
+   "hi": "समय",
+   "ja": "時間帯",
+   "ko": "시간대",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "hours",
+    "periods",
+    "moments"
+   ],
+   "zh": "時段"
+  },
+  "to": {
+   "base": "to",
+   "en": "towards",
+   "es": "a; para",
+   "hi": "को; तक",
+   "ja": "〜へ",
+   "ko": "~으로",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "到；去"
+  },
+  "tools": {
+   "zh": "工具",
+   "hi": "उपकरण",
+   "es": "herramientas",
+   "ja": "ツール",
+   "ko": "도구",
+   "en": "programs used to do a job",
+   "pos": "n.",
+   "base": "tool",
+   "lvl": "A2",
+   "syn": [
+    "programs",
+    "instruments",
+    "devices"
+   ],
+   "ant": [],
+   "ex": "The bank uses new tools to check payments.",
+   "col": [
+    "security tools",
+    "AI tools"
+   ]
+  },
+  "trialling": {
+   "zh": "試用；試驗",
+   "hi": "परीक्षण करना",
+   "es": "probando",
+   "ja": "試験中の",
+   "ko": "시험 중인",
+   "en": "testing something to see if it works",
+   "pos": "v.",
+   "base": "trial",
+   "lvl": "C1",
+   "syn": [
+    "testing",
+    "piloting",
+    "trying out"
+   ],
+   "ant": [
+    "rejecting"
+   ],
+   "ex": "The school is trialling a four-day week.",
+   "col": [
+    "trial a new system",
+    "trialling software"
+   ]
+  },
+  "try": {
+   "ant": [
+    "give up"
+   ],
+   "base": "try",
+   "col": [
+    "try to help",
+    "try hard"
+   ],
+   "en": "to make an effort to do something",
+   "es": "intentar",
+   "ex": "I will try to call you later.",
+   "hi": "कोशिश करना",
+   "ja": "努める",
+   "ko": "노력하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "attempt",
+    "seek",
+    "aim"
+   ],
+   "zh": "嘗試；努力"
+  },
+  "turning": {
+   "zh": "轉向；求助於（turn to）",
+   "hi": "की ओर मुड़ना",
+   "es": "recurriendo a",
+   "ja": "頼る；向かう",
+   "ko": "~에 의지하는",
+   "en": "(turning to) starting to use for help",
+   "pos": "v.",
+   "base": "turn",
+   "lvl": "A2",
+   "syn": [
+    "switching",
+    "moving",
+    "resorting"
+   ],
+   "ant": [
+    "abandoning"
+   ],
+   "ex": "More people are turning to online banking.",
+   "col": [
+    "turning to AI",
+    "turning to technology"
+   ]
+  },
+  "twice": {
+   "ant": [
+    "half"
+   ],
+   "base": "twice",
+   "col": [
+    "twice as much",
+    "twice a week"
+   ],
+   "en": "two times",
+   "es": "el doble",
+   "ex": "Bus fares are twice what they were.",
+   "hi": "दोगुना",
+   "ja": "2倍",
+   "ko": "두 배",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "two times",
+    "double"
+   ],
+   "zh": "兩倍"
+  },
+  "two": {
+   "base": "two",
+   "en": "the number 2",
+   "es": "dos",
+   "hi": "दो",
+   "ja": "二つ",
+   "ko": "둘",
+   "lvl": "A1",
+   "pos": "num.",
+   "zh": "二"
+  },
+  "uncover": {
+   "zh": "揭露；發現",
+   "hi": "उजागर करना",
+   "es": "descubrir",
+   "ja": "発見する；暴く",
+   "ko": "밝혀내다",
+   "en": "find something that was hidden",
+   "pos": "v.",
+   "base": "uncover",
+   "lvl": "B2",
+   "syn": [
+    "discover",
+    "reveal",
+    "expose"
+   ],
+   "ant": [
+    "conceal",
+    "hide"
+   ],
+   "ex": "The audit uncovered several security gaps.",
+   "col": [
+    "uncover weaknesses",
+    "uncover the truth"
+   ]
+  },
+  "underline": {
+   "ant": [
+    "downplay"
+   ],
+   "base": "underline",
+   "col": [
+    "underline the importance",
+    "underline ties"
+   ],
+   "en": "to show something is important",
+   "es": "subrayar",
+   "ex": "The minister wants to underline the risk.",
+   "hi": "रेखांकित करना",
+   "ja": "強調する",
+   "ko": "강조하다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "stress",
+    "emphasise",
+    "highlight"
+   ],
+   "zh": "強調"
+  },
+  "urged": {
+   "ant": [
+    "discouraged"
+   ],
+   "base": "urge",
+   "col": [
+    "urged to",
+    "strongly urged"
+   ],
+   "en": "strongly asked someone to do something",
+   "es": "instó",
+   "ex": "Police urged drivers to take care.",
+   "hi": "आग्रह किया",
+   "ja": "強く促した",
+   "ko": "촉구했다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "advised",
+    "called on",
+    "encouraged"
+   ],
+   "zh": "敦促；呼籲"
+  },
+  "use": {
+   "ant": [],
+   "base": "use",
+   "col": [
+    "use the line",
+    "use daily"
+   ],
+   "en": "do something with",
+   "es": "usar",
+   "ex": "Many students use the bus.",
+   "hi": "उपयोग करना",
+   "ja": "使う",
+   "ko": "이용하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "operate on",
+    "employ",
+    "utilise"
+   ],
+   "zh": "使用"
+  },
+  "uses": {
+   "zh": "使用",
+   "hi": "उपयोग करता है",
+   "es": "usa",
+   "ja": "使う",
+   "ko": "사용한다",
+   "en": "puts something to work",
+   "pos": "v.",
+   "base": "use",
+   "lvl": "A1",
+   "syn": [
+    "employs",
+    "applies",
+    "utilises"
+   ],
+   "ant": [],
+   "ex": "Bank of Taiwan uses AI to detect threats.",
+   "col": [
+    "uses AI",
+    "uses tools"
+   ]
+  },
+  "using": {
+   "ant": [
+    "avoiding"
+   ],
+   "base": "use",
+   "col": [
+    "by using",
+    "using more"
+   ],
+   "en": "making use of",
+   "es": "usar",
+   "ex": "Using a map helped us find the hotel.",
+   "hi": "उपयोग करना",
+   "ja": "使うこと",
+   "ko": "사용하는 것",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "employing",
+    "applying",
+    "relying on"
+   ],
+   "zh": "使用"
+  },
+  "volume": {
+   "ant": [],
+   "base": "volume",
+   "col": [
+    "volume of work",
+    "high volume"
+   ],
+   "en": "the amount of something",
+   "es": "volumen",
+   "ex": "The volume of emails grows every year.",
+   "hi": "मात्रा",
+   "ja": "量",
+   "ko": "양",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "amount",
+    "quantity",
+    "load"
+   ],
+   "zh": "數量；工作量"
+  },
+  "vulnerabilities": {
+   "zh": "漏洞；弱點",
+   "hi": "कमज़ोरियाँ",
+   "es": "vulnerabilidades",
+   "ja": "脆弱性",
+   "ko": "취약점",
+   "en": "weak points that can be attacked",
+   "pos": "n.",
+   "base": "vulnerability",
+   "lvl": "C1",
+   "syn": [
+    "weaknesses",
+    "flaws",
+    "gaps"
+   ],
+   "ant": [
+    "strengths"
+   ],
+   "ex": "Experts found three vulnerabilities in the app.",
+   "col": [
+    "security vulnerabilities",
+    "expose vulnerabilities"
+   ]
+  },
+  "was": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "was open",
+    "was born"
+   ],
+   "en": "past tense of \"be\"",
+   "es": "era; estaba (pasado de be)",
+   "ex": "The shop was open every day.",
+   "hi": "था; थे",
+   "ja": "be の過去形",
+   "ko": "be의 과거형",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "existed",
+    "remained"
+   ],
+   "zh": "是（be 的過去式）"
+  },
+  "watch": {
+   "zh": "監看",
+   "hi": "निगरानी करना",
+   "es": "vigilar",
+   "ja": "監視する",
+   "ko": "감시하다",
+   "en": "look at something carefully over time",
+   "pos": "v.",
+   "base": "watch",
+   "lvl": "A1",
+   "syn": [
+    "monitor",
+    "observe",
+    "guard"
+   ],
+   "ant": [
+    "ignore"
+   ],
+   "ex": "Guards watch the doors all night.",
+   "col": [
+    "watch closely",
+    "watch the network"
+   ]
+  },
+  "wave": {
+   "zh": "一波",
+   "hi": "लहर",
+   "es": "oleada",
+   "ja": "波",
+   "ko": "물결",
+   "en": "a sudden increase of something",
+   "pos": "n.",
+   "base": "wave",
+   "lvl": "B1",
+   "syn": [
+    "surge",
+    "flood",
+    "rush"
+   ],
+   "ant": [
+    "lull"
+   ],
+   "ex": "A wave of fake emails hit the company.",
+   "col": [
+    "a wave of attacks",
+    "new wave"
+   ]
+  },
+  "weak": {
+   "ant": [
+    "strong"
+   ],
+   "base": "weak",
+   "col": [
+    "weak demand",
+    "weak brand recognition"
+   ],
+   "en": "not strong; low",
+   "es": "débil",
+   "ex": "The company has weak sales in winter.",
+   "hi": "कमज़ोर",
+   "ja": "弱い",
+   "ko": "약한",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "poor",
+    "low",
+    "feeble"
+   ],
+   "zh": "薄弱的"
+  },
+  "weaknesses": {
+   "zh": "弱點",
+   "hi": "कमज़ोरियाँ",
+   "es": "debilidades",
+   "ja": "弱点",
+   "ko": "약점",
+   "en": "weak points or faults",
+   "pos": "n.",
+   "base": "weakness",
+   "lvl": "B1",
+   "syn": [
+    "flaws",
+    "gaps",
+    "vulnerabilities"
+   ],
+   "ant": [
+    "strengths"
+   ],
+   "ex": "The test showed weaknesses in the system.",
+   "col": [
+    "find weaknesses",
+    "uncover weaknesses"
+   ]
+  },
+  "weaving": {
+   "zh": "融入；編織",
+   "hi": "बुनना; शामिल करना",
+   "es": "integrando",
+   "ja": "組み込む",
+   "ko": "엮어 넣는",
+   "en": "adding something closely into a larger whole",
+   "pos": "v.",
+   "base": "weave",
+   "lvl": "C1",
+   "syn": [
+    "integrating",
+    "building",
+    "blending"
+   ],
+   "ant": [
+    "removing"
+   ],
+   "ex": "She is weaving music into her lessons.",
+   "col": [
+    "weave into",
+    "weaving together"
+   ]
+  },
+  "web": {
+   "ant": [],
+   "base": "web",
+   "col": [
+    "web activity",
+    "web page"
+   ],
+   "en": "the internet",
+   "es": "web",
+   "ex": "You can pay your bill on the web.",
+   "hi": "वेब",
+   "ja": "ウェブ",
+   "ko": "웹",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "internet",
+    "online"
+   ],
+   "zh": "網路"
+  },
+  "websites": {
+   "ant": [],
+   "base": "website",
+   "col": [
+    "ticket websites",
+    "visit websites"
+   ],
+   "en": "pages on the internet",
+   "es": "sitios web",
+   "ex": "Many websites sell second-hand clothes.",
+   "hi": "वेबसाइटें",
+   "ja": "ウェブサイト",
+   "ko": "웹사이트",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "sites",
+    "web pages"
+   ],
+   "zh": "網站"
+  },
+  "when": {
+   "base": "when",
+   "en": "at the time that",
+   "es": "cuando",
+   "hi": "जब",
+   "ja": "〜するとき",
+   "ko": "~할 때",
+   "lvl": "A1",
+   "pos": "conj.",
+   "zh": "當…時"
+  },
+  "with": {
+   "base": "with",
+   "en": "together",
+   "es": "con",
+   "hi": "के साथ",
+   "ja": "〜と一緒に",
+   "ko": "~와 함께",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "和；跟"
+  },
+  "year": {
+   "ant": [],
+   "base": "year",
+   "col": [
+    "end of the year",
+    "last year"
+   ],
+   "en": "twelve months",
+   "es": "año",
+   "ex": "The festival happens once a year.",
+   "hi": "वर्ष",
+   "ja": "年",
+   "ko": "해；년",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "twelve months",
+    "annum"
+   ],
+   "zh": "年"
+  },
+  "year's": {
+   "zh": "…年的",
+   "hi": "वर्ष का",
+   "es": "del año",
+   "ja": "〜年の",
+   "ko": "~년의",
+   "en": "belonging to a year",
+   "pos": "n.",
+   "base": "year",
+   "lvl": "A1"
+  },
+  "yet": {
+   "base": "yet",
+   "en": "but",
+   "es": "sin embargo",
+   "hi": "फिर भी",
+   "ja": "しかし",
+   "ko": "그러나",
+   "lvl": "B2",
+   "pos": "conj.",
+   "zh": "然而"
+  }
+ }
+}
