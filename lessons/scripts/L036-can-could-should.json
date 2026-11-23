@@ -1,0 +1,193 @@
+{
+ "id": "L036",
+ "title": "can、could、should 怎麼用",
+ "subtitle": "會・客氣請求・建議",
+ "level": "A2–B1",
+ "kind": "grammar",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "Can you…?",
+    "Could you…?",
+    "哪個比較客氣？"
+   ],
+   "emoji": "🙋",
+   "lines": [
+    {
+     "v": "T",
+     "say": "Can you 和 Could you，哪個比較有禮貌？"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘搞懂 can、could、should！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "can：會・可以",
+   "points": [
+    "能力或允許",
+    "I can work weekends."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，can 加原形動詞，表示會、可以。"
+    },
+    {
+     "v": "A",
+     "say": "Can you drive?",
+     "zh": "你會開車嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I can, but not on the left yet!",
+     "zh": "會，但還不敢靠左開！"
+    },
+    {
+     "v": "T",
+     "say": "can 後面的動詞，永遠用原形。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "Could you…?：客氣請求",
+   "points": [
+    "比 Can you 更有禮貌",
+    "Could you say that again?"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，請別人幫忙，用 Could you 更客氣。"
+    },
+    {
+     "v": "A",
+     "say": "Could you say that again, please?",
+     "zh": "可以請你再說一次嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Of course. Platform two.",
+     "zh": "當然，第二月台。"
+    },
+    {
+     "v": "T",
+     "say": "聽不懂的時候，這句超好用，記起來！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "should：建議",
+   "points": [
+    "你應該・我建議",
+    "You should try the chowder."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，給別人建議，用 should。"
+    },
+    {
+     "v": "A",
+     "say": "Any tips for Galway?",
+     "zh": "去 Galway 有什麼建議？"
+    },
+    {
+     "v": "B",
+     "say": "You should try the seafood chowder.",
+     "zh": "你應該試試海鮮巧達湯。"
+    },
+    {
+     "v": "T",
+     "say": "should 是建議，語氣不會太強硬。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "___ you open the window, please?",
+   "ask": "想客氣地請人開窗，要填？",
+   "opts": [
+    "Should",
+    "Could",
+    "Must"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想客氣地請別人開窗。"
+    },
+    {
+     "v": "A",
+     "say": "Blank you open the window, please?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！客氣請別人幫忙，用 Could you。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "can",
+     "會・可以"
+    ],
+    [
+     "Could you…?",
+     "客氣請求"
+    ],
+    [
+     "should",
+     "建議"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了 can、could、should 三種用法！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

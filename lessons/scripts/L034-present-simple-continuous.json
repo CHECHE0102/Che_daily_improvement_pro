@@ -1,0 +1,193 @@
+{
+ "id": "L034",
+ "title": "I work 還是 I'm working？",
+ "subtitle": "平常・正在做・這陣子",
+ "level": "A2–B1",
+ "kind": "grammar",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "I work",
+    "還是",
+    "I'm working？"
+   ],
+   "emoji": "🤯",
+   "lines": [
+    {
+     "v": "T",
+     "say": "I work 和 I'm working，到底差在哪？"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘幫你分清楚！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "現在簡單式：平常・習慣",
+   "points": [
+    "每天、平常都這樣",
+    "I work in a café."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，平常、每天都這樣的事，用現在簡單式。"
+    },
+    {
+     "v": "A",
+     "say": "Where do you work?",
+     "zh": "你在哪裡工作？"
+    },
+    {
+     "v": "B",
+     "say": "I work in a café on Main Street.",
+     "zh": "我在大街上的咖啡店工作。"
+    },
+    {
+     "v": "T",
+     "say": "always、every day、usually，都是平常的事。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "現在進行式：正在做",
+   "points": [
+    "說話這一刻正在做",
+    "I'm working right now."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，說話這一刻正在做，用 be 加 ing。"
+    },
+    {
+     "v": "A",
+     "say": "Are you free for a quick call?",
+     "zh": "你有空講一下電話嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Sorry, I'm working right now.",
+     "zh": "抱歉，我現在在上班。"
+    },
+    {
+     "v": "T",
+     "say": "right now、at the moment，就用進行式。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "進行式：這陣子暫時",
+   "points": [
+    "最近這段時間，不是永遠",
+    "I'm staying with friends."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，最近暫時的狀況，也用進行式。"
+    },
+    {
+     "v": "A",
+     "say": "Where are you living these days?",
+     "zh": "你最近住哪裡？"
+    },
+    {
+     "v": "B",
+     "say": "I'm staying with friends for now.",
+     "zh": "我暫時住朋友家。"
+    },
+    {
+     "v": "T",
+     "say": "for now、these days，都表示暫時這樣。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Shh! The baby ___.",
+   "ask": "想說「噓！寶寶正在睡覺」，要填？",
+   "opts": [
+    "sleeps",
+    "is sleeping",
+    "sleep"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：噓！寶寶正在睡覺。"
+    },
+    {
+     "v": "A",
+     "say": "Shh! The baby blank.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！這一刻正在睡，用 is sleeping。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "I work…",
+     "平常・習慣"
+    ],
+    [
+     "I'm working now",
+     "正在做"
+    ],
+    [
+     "I'm staying… for now",
+     "這陣子暫時"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了分清楚 I work 和 I'm working！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

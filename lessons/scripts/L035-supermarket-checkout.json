@@ -1,0 +1,187 @@
+{
+ "id": "L035",
+ "title": "超市結帳三句話",
+ "subtitle": "Do you need a bag・tap・receipt",
+ "level": "A2",
+ "kind": "phrase",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "超市結帳",
+    "店員講好快",
+    "聽不懂怎麼辦？"
+   ],
+   "emoji": "🛒",
+   "lines": [
+    {
+     "v": "T",
+     "say": "在超市結帳，店員一直問問題，聽不懂好緊張？"
+    },
+    {
+     "v": "T",
+     "say": "今天教你結帳最常聽到的三句英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "Do you need a bag?",
+   "meaning": "需要袋子嗎？",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，愛爾蘭大家習慣自己帶袋子，店員常會問。"
+    },
+    {
+     "v": "A",
+     "say": "Do you need a bag?",
+     "zh": "需要袋子嗎？"
+    },
+    {
+     "v": "B",
+     "say": "No, I'm grand, thanks.",
+     "zh": "不用，謝謝。"
+    },
+    {
+     "v": "T",
+     "say": "I'm grand 在這裡就是不用了，沒關係。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "Can I just tap?",
+   "meaning": "可以直接感應付款嗎？",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，付錢的時候最常用。"
+    },
+    {
+     "v": "A",
+     "say": "Card or cash?",
+     "zh": "刷卡還是現金？"
+    },
+    {
+     "v": "B",
+     "say": "Card. Can I just tap?",
+     "zh": "刷卡，我可以直接感應嗎？"
+    },
+    {
+     "v": "T",
+     "say": "tap 就是用卡或手機感應付款，愛爾蘭超普遍。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "receipt",
+   "meaning": "收據",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，最後店員會問你要不要收據。"
+    },
+    {
+     "v": "A",
+     "say": "Do you want the receipt?",
+     "zh": "收據要嗎？"
+    },
+    {
+     "v": "B",
+     "say": "No, you're grand. Thanks!",
+     "zh": "不用了，謝謝！"
+    },
+    {
+     "v": "T",
+     "say": "receipt 的 p 不發音，唸起來像 re-seat。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Do you need a bag?",
+   "ask": "店員問你這句，意思是？",
+   "opts": [
+    "要不要會員卡？",
+    "需要袋子嗎？",
+    "要不要收據？"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！結帳的時候店員問你："
+    },
+    {
+     "v": "A",
+     "say": "Do you need a bag?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "意思是什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！bag 是袋子，問你需不需要袋子。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "Do you need a bag?",
+     "需要袋子嗎"
+    ],
+    [
+     "Can I just tap?",
+     "可以感應嗎"
+    ],
+    [
+     "receipt",
+     "收據（p 不發音）"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三句結帳英文，下次結帳不慌張！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,187 @@
+{
+ "id": "L033",
+ "title": "問路必學三句",
+ "subtitle": "How do I get to・Is it far・on your left",
+ "level": "A2",
+ "kind": "phrase",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "手機沒電了",
+    "找不到路",
+    "要怎麼問？"
+   ],
+   "emoji": "🗺️",
+   "lines": [
+    {
+     "v": "T",
+     "say": "手機沒電、地圖打不開，只好開口問路人？"
+    },
+    {
+     "v": "T",
+     "say": "今天教你問路最好用的三句英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "How do I get to…?",
+   "meaning": "我要怎麼去…？",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，問怎麼去某個地方，就說 How do I get to。"
+    },
+    {
+     "v": "A",
+     "say": "Sorry, how do I get to the station?",
+     "zh": "不好意思，請問車站怎麼走？"
+    },
+    {
+     "v": "B",
+     "say": "Go straight down this road.",
+     "zh": "沿著這條路直走。"
+    },
+    {
+     "v": "T",
+     "say": "愛爾蘭人問路常用 Sorry 開頭，就像 Excuse me。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "Is it far?",
+   "meaning": "遠嗎？",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，問一下要走多久。"
+    },
+    {
+     "v": "A",
+     "say": "Is it far from here?",
+     "zh": "離這裡遠嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Not at all. About five minutes' walk.",
+     "zh": "不會，走路大概五分鐘。"
+    },
+    {
+     "v": "T",
+     "say": "five minutes' walk，就是走路五分鐘。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "on your left",
+   "meaning": "在你左手邊",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，聽懂最後在哪一邊。"
+    },
+    {
+     "v": "A",
+     "say": "Take the second right. It's on your left.",
+     "zh": "第二個路口右轉，就在你左手邊。"
+    },
+    {
+     "v": "B",
+     "say": "Brilliant, thanks a million!",
+     "zh": "太好了，非常感謝！"
+    },
+    {
+     "v": "T",
+     "say": "thanks a million，是愛爾蘭人說非常感謝。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Take the second right.",
+   "ask": "路人這樣說，意思是？",
+   "opts": [
+    "第二個路口右轉",
+    "右邊第二間店",
+    "往右走兩分鐘"
+   ],
+   "ans": 0,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！路人跟你說："
+    },
+    {
+     "v": "A",
+     "say": "Take the second right.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "意思是什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 A！take the second right，第二個路口右轉。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "How do I get to…?",
+     "怎麼去…"
+    ],
+    [
+     "Is it far?",
+     "遠嗎"
+    ],
+    [
+     "on your left",
+     "在左手邊"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三句問路英文，迷路也不怕了！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

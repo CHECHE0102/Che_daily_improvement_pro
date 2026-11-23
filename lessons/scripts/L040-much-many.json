@@ -1,0 +1,193 @@
+{
+ "id": "L040",
+ "title": "much、many、a lot of",
+ "subtitle": "可數・不可數・都可以",
+ "level": "A2",
+ "kind": "grammar",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "How much？",
+    "How many？",
+    "差在哪？"
+   ],
+   "emoji": "🍞",
+   "lines": [
+    {
+     "v": "T",
+     "say": "How much 和 How many，到底什麼時候用哪個？"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘搞懂 much、many、a lot of！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "many + 可數名詞",
+   "points": [
+    "可以一個一個數的",
+    "How many people?・not many"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，可以一個一個數的東西，用 many。"
+    },
+    {
+     "v": "A",
+     "say": "How many people are coming?",
+     "zh": "有幾個人要來？"
+    },
+    {
+     "v": "B",
+     "say": "Not many. Maybe five.",
+     "zh": "不多，大概五個。"
+    },
+    {
+     "v": "T",
+     "say": "人、杯子、蘋果，可以數，就用 many。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "much + 不可數名詞",
+   "points": [
+    "不能一個一個數的",
+    "How much milk?・not much time"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，不能一個一個數的東西，用 much。"
+    },
+    {
+     "v": "A",
+     "say": "How much milk do you want?",
+     "zh": "你要多少牛奶？"
+    },
+    {
+     "v": "B",
+     "say": "Just a little, thanks.",
+     "zh": "一點點就好，謝謝。"
+    },
+    {
+     "v": "T",
+     "say": "牛奶、時間、錢，不能一個一個數，用 much。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "a lot of：都可以用",
+   "points": [
+    "可數不可數都能用，最口語",
+    "a lot of people・a lot of rain"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，不確定的時候，說 a lot of 最保險。"
+    },
+    {
+     "v": "A",
+     "say": "Was it busy today?",
+     "zh": "今天很忙嗎？"
+    },
+    {
+     "v": "B",
+     "say": "Yeah, we had a lot of customers!",
+     "zh": "對啊，今天好多客人！"
+    },
+    {
+     "v": "T",
+     "say": "肯定句裡，口語最常說 a lot of。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "How ___ water do you drink a day?",
+   "ask": "問「你一天喝多少水」，要填？",
+   "opts": [
+    "many",
+    "much",
+    "lot"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想問：你一天喝多少水？"
+    },
+    {
+     "v": "A",
+     "say": "How blank water do you drink a day?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！水不能一個一個數，用 much。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "many",
+     "可數"
+    ],
+    [
+     "much",
+     "不可數"
+    ],
+    [
+     "a lot of",
+     "都可以"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了 much、many 和 a lot of！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

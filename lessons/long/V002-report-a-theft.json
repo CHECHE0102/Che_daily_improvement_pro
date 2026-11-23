@@ -19,6 +19,10 @@
   "B": [
    "-5%",
    "+0Hz"
+  ],
+  "C": [
+   "-6%",
+   "+0Hz"
   ]
  },
  "id": "V002",
@@ -153,9 +157,10 @@
    "lines": [
     {
      "v": "E",
-     "say": "First, one word. In Ireland the police are called the Gardaí.",
+     "say": "First, one word. In Ireland the police are called the Gardee.",
      "zh": "先講一個字。在愛爾蘭，警察叫做 Gardaí。",
-     "pose": "point"
+     "pose": "point",
+     "cap": "First, one word. In Ireland the police are called the Gardaí."
     },
     {
      "v": "E",

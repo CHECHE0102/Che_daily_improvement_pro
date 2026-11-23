@@ -1,0 +1,187 @@
+{
+ "id": "L037",
+ "title": "約朋友出去三句話",
+ "subtitle": "Are you free・What time suits you・See you there",
+ "level": "A2",
+ "kind": "phrase",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "想約朋友",
+    "Are you free?",
+    "接下來怎麼說？"
+   ],
+   "emoji": "📅",
+   "lines": [
+    {
+     "v": "T",
+     "say": "想約新朋友出去，卻不知道怎麼開口？"
+    },
+    {
+     "v": "T",
+     "say": "今天教你約朋友最好用的三句英文！"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "1",
+   "phrase": "Are you free on…?",
+   "meaning": "你…有空嗎？",
+   "img": "scene-bell",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，先問對方哪天有沒有空。"
+    },
+    {
+     "v": "A",
+     "say": "Are you free on Saturday?",
+     "zh": "你星期六有空嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I am, yeah. What's the plan?",
+     "zh": "有啊，要做什麼？"
+    },
+    {
+     "v": "T",
+     "say": "星期幾前面用 on，像 on Friday。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "2",
+   "phrase": "What time suits you?",
+   "meaning": "你幾點方便？",
+   "img": "scene-study",
+   "scene": "scene-welcome",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，問對方幾點方便，很貼心。"
+    },
+    {
+     "v": "A",
+     "say": "What time suits you?",
+     "zh": "你幾點方便？"
+    },
+    {
+     "v": "B",
+     "say": "Anytime after two is grand.",
+     "zh": "兩點以後都可以。"
+    },
+    {
+     "v": "T",
+     "say": "suits you，就是對你來說方便。"
+    }
+   ]
+  },
+  {
+   "type": "phrase",
+   "num": "3",
+   "phrase": "See you there!",
+   "meaning": "到時見！",
+   "img": "scene-win",
+   "scene": "scene-party",
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，約好了，最後這樣說。"
+    },
+    {
+     "v": "A",
+     "say": "Grand, the café at three, so.",
+     "zh": "好，那就三點咖啡店。"
+    },
+    {
+     "v": "B",
+     "say": "Perfect. See you there!",
+     "zh": "完美，到時見！"
+    },
+    {
+     "v": "T",
+     "say": "so 放句尾，是愛爾蘭人說那就這樣。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "What time suits you?",
+   "ask": "朋友問你這句，意思是？",
+   "opts": [
+    "你幾點下班？",
+    "你幾點方便？",
+    "現在幾點？"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！朋友問你："
+    },
+    {
+     "v": "A",
+     "say": "What time suits you?",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "意思是什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！suits you，是問你幾點方便。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "Are you free on…?",
+     "…有空嗎"
+    ],
+    [
+     "What time suits you?",
+     "幾點方便"
+    ],
+    [
+     "See you there!",
+     "到時見"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了三句約朋友的英文，快去約人吧！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

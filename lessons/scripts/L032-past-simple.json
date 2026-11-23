@@ -1,0 +1,193 @@
+{
+ "id": "L032",
+ "title": "昨天做了什麼？過去式",
+ "subtitle": "-ed・went・didn't",
+ "level": "A2",
+ "kind": "grammar",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "同事問你",
+    "What did you do yesterday?",
+    "要怎麼回答？"
+   ],
+   "emoji": "🗓️",
+   "lines": [
+    {
+     "v": "T",
+     "say": "同事問你昨天做了什麼，動詞要怎麼變？"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘搞懂過去式！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "規則動詞 + ed",
+   "points": [
+    "過去發生的事，動詞加 ed",
+    "I worked late last night."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，大部分動詞說過去的事，加 ed 就好。"
+    },
+    {
+     "v": "A",
+     "say": "You look wrecked. What happened?",
+     "zh": "你看起來累壞了，怎麼了？"
+    },
+    {
+     "v": "B",
+     "say": "I worked late last night.",
+     "zh": "我昨晚工作到很晚。"
+    },
+    {
+     "v": "T",
+     "say": "work 變 worked，watch 變 watched。wrecked 是累壞了。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "不規則動詞",
+   "points": [
+    "最常用的要背起來",
+    "go → went・get → got・have → had"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，最常用的動詞偏偏不規則，要背起來。"
+    },
+    {
+     "v": "A",
+     "say": "Did you have a good weekend?",
+     "zh": "你週末過得好嗎？"
+    },
+    {
+     "v": "B",
+     "say": "I did! I went to Howth with friends.",
+     "zh": "很好！我跟朋友去了 Howth。"
+    },
+    {
+     "v": "T",
+     "say": "went、got、had、saw，這幾個最常用，一定要熟。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "didn't / Did you…?",
+   "points": [
+    "否定和問句用 did，動詞變回原形",
+    "I didn't go. ・Did you go?"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，說沒有做，或問別人有沒有做，用 did。"
+    },
+    {
+     "v": "A",
+     "say": "Did you see the match on Saturday?",
+     "zh": "你週六有看比賽嗎？"
+    },
+    {
+     "v": "B",
+     "say": "No, I didn't. I was working.",
+     "zh": "沒有，我在上班。"
+    },
+    {
+     "v": "T",
+     "say": "有 did 的時候，後面的動詞要變回原形喔。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "I didn't ___ to work yesterday.",
+   "ask": "想說「我昨天沒去上班」，要填？",
+   "opts": [
+    "went",
+    "go",
+    "goes"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我昨天沒去上班。"
+    },
+    {
+     "v": "A",
+     "say": "I didn't blank to work yesterday.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！有 didn't，後面用原形 go。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "worked / watched",
+     "規則：加 ed"
+    ],
+    [
+     "went / got / had",
+     "不規則要背"
+    ],
+    [
+     "didn't + 原形",
+     "否定和問句"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了用過去式聊昨天做了什麼！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

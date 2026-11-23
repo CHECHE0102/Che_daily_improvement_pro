@@ -1,0 +1,193 @@
+{
+ "id": "L039",
+ "title": "比較級與最高級",
+ "subtitle": "smaller than・more expensive・the best",
+ "level": "A2–B1",
+ "kind": "grammar",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "Dublin 和 Cork",
+    "哪個比較好？",
+    "英文怎麼比？"
+   ],
+   "emoji": "⚖️",
+   "lines": [
+    {
+     "v": "T",
+     "say": "想比較兩個城市、兩間房子，英文怎麼說？"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘搞懂比較級和最高級！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "短的字 + er + than",
+   "points": [
+    "比較兩樣東西",
+    "Cork is smaller than Dublin."
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，短的形容詞加 er，後面接 than。"
+    },
+    {
+     "v": "A",
+     "say": "Is Cork like Dublin?",
+     "zh": "Cork 跟 Dublin 像嗎？"
+    },
+    {
+     "v": "B",
+     "say": "It's smaller and quieter than Dublin.",
+     "zh": "它比 Dublin 小，也比較安靜。"
+    },
+    {
+     "v": "T",
+     "say": "small 變 smaller，quiet 變 quieter。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "more + 長的字",
+   "points": [
+    "兩個音節以上用 more",
+    "more expensive・more relaxed"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，長的形容詞不加 er，前面放 more。"
+    },
+    {
+     "v": "A",
+     "say": "Why did you move out of the city?",
+     "zh": "你為什麼搬出市區？"
+    },
+    {
+     "v": "B",
+     "say": "Rent is more expensive there.",
+     "zh": "那裡房租比較貴。"
+    },
+    {
+     "v": "T",
+     "say": "expensive 太長了，所以說 more expensive。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "the + est / the most",
+   "points": [
+    "三個以上，最…",
+    "the best・the friendliest"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，三個以上比較，說最什麼，用 the。"
+    },
+    {
+     "v": "A",
+     "say": "What's the best thing about Ireland?",
+     "zh": "愛爾蘭最棒的是什麼？"
+    },
+    {
+     "v": "B",
+     "say": "The people. They're the friendliest!",
+     "zh": "人，他們最友善了！"
+    },
+    {
+     "v": "T",
+     "say": "注意 good 變 better、best，是不規則的。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "Dublin is ___ than Galway.",
+   "ask": "想說「Dublin 比 Galway 大」，要填？",
+   "opts": [
+    "more big",
+    "bigger",
+    "biggest"
+   ],
+   "ans": 1,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：Dublin 比 Galway 大。"
+    },
+    {
+     "v": "A",
+     "say": "Dublin is blank than Galway.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 B！big 是短字，變 bigger，g 要多一個。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "smaller than",
+     "短字 + er"
+    ],
+    [
+     "more expensive",
+     "長字 + more"
+    ],
+    [
+     "the best",
+     "最…"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了用英文比較東西！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,193 @@
+{
+ "id": "L038",
+ "title": "in、on、at 時間介系詞",
+ "subtitle": "幾點・星期幾・月份年份",
+ "level": "A2",
+ "kind": "grammar",
+ "date": "2026-11-23",
+ "teacher": "cian",
+ "voices": {
+  "T": "zh-TW-YunJheNeural",
+  "TE": "en-IE-ConnorNeural",
+  "A": "en-IE-EmilyNeural",
+  "B": "en-IE-ConnorNeural"
+ },
+ "slides": [
+  {
+   "type": "hook",
+   "big": [
+    "at Monday？",
+    "on Monday？",
+    "in Monday？"
+   ],
+   "emoji": "⏰",
+   "lines": [
+    {
+     "v": "T",
+     "say": "約在星期一見面，介系詞到底用哪個？"
+    },
+    {
+     "v": "T",
+     "say": "一分鐘搞懂時間的 in、on、at！"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-study",
+   "kicker": "文法 1",
+   "head": "at + 幾點",
+   "points": [
+    "精準的時間點",
+    "at seven・at night"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第一個，幾點幾分，用 at。"
+    },
+    {
+     "v": "A",
+     "say": "What time does your shift start?",
+     "zh": "你的班幾點開始？"
+    },
+    {
+     "v": "B",
+     "say": "At seven, so I'm up at six.",
+     "zh": "七點，所以我六點就要起床。"
+    },
+    {
+     "v": "T",
+     "say": "還有 at night，愛爾蘭也說 at the weekend。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-rest",
+   "kicker": "文法 2",
+   "head": "on + 星期・日期",
+   "points": [
+    "星期幾、特定日期",
+    "on Monday・on 17th March"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第二個，星期幾、幾月幾號，用 on。"
+    },
+    {
+     "v": "A",
+     "say": "When's your day off?",
+     "zh": "你哪天休假？"
+    },
+    {
+     "v": "B",
+     "say": "On Monday, thank God.",
+     "zh": "星期一，謝天謝地。"
+    },
+    {
+     "v": "T",
+     "say": "日期也一樣，on Paddy's Day，on my birthday。"
+    }
+   ]
+  },
+  {
+   "type": "grammar",
+   "img": "scene-win",
+   "kicker": "文法 3",
+   "head": "in + 月份・年份・季節",
+   "points": [
+    "比較長的一段時間",
+    "in March・in 2026・in summer"
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "第三個，月份、年份、季節，用 in。"
+    },
+    {
+     "v": "A",
+     "say": "When did you arrive in Ireland?",
+     "zh": "你什麼時候來愛爾蘭的？"
+    },
+    {
+     "v": "B",
+     "say": "In March. It was freezing!",
+     "zh": "三月，冷死了！"
+    },
+    {
+     "v": "T",
+     "say": "還有 in the morning，in the evening。"
+    }
+   ]
+  },
+  {
+   "type": "quiz",
+   "q": "My birthday is ___ Friday.",
+   "ask": "想說「我的生日在星期五」，要填？",
+   "opts": [
+    "in",
+    "at",
+    "on"
+   ],
+   "ans": 2,
+   "lines": [
+    {
+     "v": "T",
+     "say": "小測驗！想說：我的生日在星期五。"
+    },
+    {
+     "v": "A",
+     "say": "My birthday is blank Friday.",
+     "zh": "？？？"
+    },
+    {
+     "v": "T",
+     "say": "空格要填什麼？A、B、還是 C？"
+    },
+    {
+     "v": "T",
+     "say": "",
+     "cap": "倒數⋯⋯",
+     "pause": 3,
+     "countdown": true
+    },
+    {
+     "v": "T",
+     "say": "答案是 C！星期幾用 on。",
+     "reveal": true
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "img": "scene-win",
+   "items": [
+    [
+     "at",
+     "幾點・at night"
+    ],
+    [
+     "on",
+     "星期・日期"
+    ],
+    [
+     "in",
+     "月・年・季節"
+    ]
+   ],
+   "lines": [
+    {
+     "v": "T",
+     "say": "今天學會了時間的 in、on、at！"
+    },
+    {
+     "v": "T",
+     "say": "打開 BinBin，每天用一則新聞練英文。我們下次見！",
+     "end": true
+    }
+   ]
+  }
+ ]
+}
