@@ -19,14 +19,14 @@ export function retention(A, t) {
   const kinds = L => { const c = {}; L.forEach(a => { const k = a.k || "?"; c[k] = (c[k] || 0) + 1; }); return c; };
   // new-player funnel: devices whose first day was in the last 30 days (today's newcomers have not had a chance to come back yet)
   const coh = A.filter(a => a.f && a.f > addDays(t, -31) && a.f < t);
-  const funnel = [
-    ["open", coh.length],
-    ["intro", coh.filter(a => (a.o || 0) >= 4).length],
-    ["read", coh.filter(a => a.r).length],
-    ["quiz", coh.filter(a => a.q).length],
-    ["signin", coh.filter(a => a.u).length],
-    ["back", coh.filter(a => Object.keys(a.d || {}).some(d => d > a.f)).length],
-    ["d7", coh.filter(a => Object.keys(a.d || {}).some(d => d >= addDays(a.f, 7))).length],
+  const funnel = [   // {k, n}: Firestore cannot store arrays inside arrays
+    { k: "open", n: coh.length},
+    { k: "intro", n: coh.filter(a => (a.o || 0) >= 4).length},
+    { k: "read", n: coh.filter(a => a.r).length},
+    { k: "quiz", n: coh.filter(a => a.q).length},
+    { k: "signin", n: coh.filter(a => a.u).length},
+    { k: "back", n: coh.filter(a => Object.keys(a.d || {}).some(d => d > a.f)).length},
+    { k: "d7", n: coh.filter(a => Object.keys(a.d || {}).some(d => d >= addDays(a.f, 7))).length},
   ];
   // where new players stop during the intro (o = last intro page reached)
   const introStop = {}; coh.forEach(a => { const o = Math.min(4, a.o || 0); introStop[o] = (introStop[o] || 0) + 1; });

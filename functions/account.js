@@ -67,6 +67,8 @@ export async function eraseUser(db, uid, { rtdb = null, log = () => {} } = {}) {
     // wishing well: own entries and prizes; the public winners list keeps the gold amounts but not who it was
     ["well", () => delQuery(db, col("well").where("uid", "==", uid))],
     ["wellWin", () => delQuery(db, col("wellWin").where("uid", "==", uid))],
+    ["wellSum", async () => { for (const d of await col("wellSum").listDocuments())
+      await d.update(new FieldPath("e", uid), FieldValue.delete()).catch(e => { if (e && e.code !== 5) throw e; }); }],   // 5 = no such month
     ["wellDraw", async () => { const snap = await col("wellDraw").get();
       for (const d of snap.docs) { const w = d.data().winners;
         if (Array.isArray(w) && w.some(x => x && x.uid === uid)) await d.ref.update({ winners: w.map(x => x && x.uid === uid ? { ...x, uid: GONE, nick: GONE } : x) }); } }],
@@ -91,6 +93,7 @@ export async function eraseUser(db, uid, { rtdb = null, log = () => {} } = {}) {
         if (Object.keys(up).length) await d.ref.update(up); } }],
     // messages you sent us and error reports from your account
     ["feedback", () => delQuery(db, col("feedback").where("uid", "==", uid))],
+    ["inbox", () => db.recursiveDelete(col("inbox").doc(uid))],   // our replies to the player's feedback
     ["errors", () => delQuery(db, col("errors").where("uid", "==", uid))],
   ];
   if (rtdb) steps.push(["realtime", async () => {
@@ -109,7 +112,7 @@ export async function eraseUser(db, uid, { rtdb = null, log = () => {} } = {}) {
   return { failed, blocking };
 }
 const CORE = new Set(["users", "own docs", "nicks", "inviteCodes", "readMonths", "ieltsMonths", "ieltsWeeks", "toeicMonths",
-  "likeWeeks", "likeGiven", "well", "wellWin", "gifts to", "feedback"]);
+  "likeWeeks", "likeGiven", "well", "wellWin", "wellSum", "gifts to", "feedback", "inbox"]);
 
 export { RTDB_URL };
 

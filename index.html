@@ -4279,9 +4279,9 @@ function devStatsHtml(){
 }
 // 新玩家漏斗: of the devices that first opened BinBin in the last 30 days, how many reached each step
 function devFunnelHtml(R){ const F=R&&Array.isArray(R.funnel)?R.funnel:null; const head=`<div class="eyebrow">🪜 ${T("fnTitle")}</div>`;
-  if(!F||!F.length||!(+F[0][1])) return head+`<p class="muted sm-t">${T("drNone")}</p>`;
-  const top=+F[0][1]||1;
-  const bars=F.map(([k,n],i)=>{ const p=Math.round((+n||0)/top*100), prev=i?(+F[i-1][1]||0):0, drop=i&&prev?Math.round((prev-(+n||0))/prev*100):0;
+  if(!F||!F.length||!(+F[0].n)) return head+`<p class="muted sm-t">${T("drNone")}</p>`;
+  const top=+F[0].n||1;
+  const bars=F.map(({k,n},i)=>{ const p=Math.round((+n||0)/top*100), prev=i?(+F[i-1].n||0):0, drop=i&&prev?Math.round((prev-(+n||0))/prev*100):0;
     return `<div class="fn-row"><span>${T("fn_"+k)}</span><div class="fn-bar"><i style="width:${p}%"></i></div><b>${num(n)}</b><small class="muted">${p}%${i&&drop>0?` · −${drop}%`:""}</small></div>`; }).join("");
   const st=R.introStop||{}, stop=[0,1,2,3].map(o=>`${T("fnStep",{n:o+1})} ${num(st[o]||0)}`).join(" · ");
   return head+`<div class="fn">${bars}</div><p class="muted sm-t">${T("fnIntroStop")} ${stop}</p><p class="muted sm-t">${T("fnNote")}</p>`; }
@@ -9206,8 +9206,13 @@ async function wellLoad(force){
   WELL_IN={...(WELL_IN||{list:[],draw:null}), at:Date.now()};
   if(SRV_OFF==null) await srvSync(); const m=wellMonth(); if(!m){ WELL_IN.err=true; if(S.view==="adv") render(); return; }
   const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, prev=monthBefore(m);
-  try{ const [q,dr,cr]=await Promise.all([fsM.getDocs(fsM.query(fsM.collection(db,"well"),fsM.where("month","==",m),fsM.limit(500))), fsM.getDoc(fsM.doc(db,"wellDraw",prev)), fsM.getDoc(fsM.doc(db,"wellCarry",m)).catch(()=>null)]);
-    const list=[]; q.forEach(d=>{ const x=safeDoc(d.data()); const c=Math.floor(+x.coins||0); if(x.month===m&&x.uid&&c>0) list.push({uid:String(x.uid), nick:String(x.nick||"").slice(0,16), coins:c}); });
+  try{ const [sm,dr,cr]=await Promise.all([fsM.getDoc(fsM.doc(db,"wellSum",m)).catch(()=>null), fsM.getDoc(fsM.doc(db,"wellDraw",prev)), fsM.getDoc(fsM.doc(db,"wellCarry",m)).catch(()=>null)]);
+    // one summary document per month (wellSum/{month}.e = {uid:{n,c}}, kept in step with each player's own well doc by
+    // the rules) instead of reading every entry; months from before the summary existed fall back to the full list
+    const list=[], E=sm&&sm.exists()?safeDoc(sm.data()).e:null;
+    if(E&&typeof E==="object") for(const [u,x] of Object.entries(E)){ const c=Math.floor(+(x&&x.c)||0); if(c>0) list.push({uid:String(u), nick:String((x&&x.n)||"").slice(0,16), coins:c}); }
+    else { const q=await fsM.getDocs(fsM.query(fsM.collection(db,"well"),fsM.where("month","==",m),fsM.limit(500)));
+      q.forEach(d=>{ const x=safeDoc(d.data()); const c=Math.floor(+x.coins||0); if(x.month===m&&x.uid&&c>0) list.push({uid:String(x.uid), nick:String(x.nick||"").slice(0,16), coins:c}); }); }
     list.sort((a,b)=>b.coins-a.coins);
     const draw=dr.exists()?safeDoc(dr.data()):null;
     const carry=cr&&cr.exists()?Math.max(0,Math.floor(+safeDoc(cr.data()).gold||0)):0;
@@ -9279,7 +9284,8 @@ async function wellToss(){
   W.ask=false; W.busy=true; g.gold-=n; saveGame(); render();
   const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, ref=fsM.doc(db,"well",m+"_"+me), nick=(g.nick||CLOUD.user.displayName||"").slice(0,16);
   try{ let total=0; await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():null; total=(d?Math.floor(+d.coins||0):0)+n;
-      if(total>WELL.maxMonth) throw new Error("max"); tx.set(ref,{uid:me, month:m, nick, coins:total, at:new Date().toISOString()}); });
+      if(total>WELL.maxMonth) throw new Error("max"); tx.set(ref,{uid:me, month:m, nick, coins:total, at:new Date().toISOString()});
+      tx.set(fsM.doc(db,"wellSum",m),{e:{[me]:{n:nick, c:total}}},{merge:true}); });
     const L=WELL_IN.list, x=L.find(y=>y.uid===me); if(x) x.coins=total; else L.push({uid:me,nick,coins:total}); L.sort((a,b)=>b.coins-a.coins);
     toast(T("wellTossed",{n})); if(typeof sfx==="function") sfx("prize"); }
   catch(e){ g.gold+=n; saveGame(); toast(e&&e.message==="max"?T("wellMax",{n:WELL.maxMonth}):T("wellFail")); console.warn("well toss",e&&(e.code||e.message)); }
@@ -10582,6 +10588,7 @@ async function chSet(uid, ban, nick){ const {fsM,db}=CLOUD.fb, m=monthKey();
   const B=fsM.writeBatch(db);
   if(ban){ B.set(fsM.doc(db,"banned",uid),{at:Date.now(), n:String(nick||"").slice(0,16)});
     for(const p of [["leaderboard",uid],["ieltsMonths",m,"scores",uid],["toeicMonths",m,"scores",uid],["readMonths",m,"u",uid],["well",m+"_"+uid]]) B.delete(fsM.doc(db,...p));
+    B.set(fsM.doc(db,"wellSum",m),{e:{[uid]:fsM.deleteField()}},{merge:true});
     B.set(fsM.doc(db,"cheat",uid),{uid, nick:String(nick||"").slice(0,16), status:"banned", at:new Date().toISOString()},{merge:true}); }
   else { B.delete(fsM.doc(db,"banned",uid)); B.set(fsM.doc(db,"cheat",uid),{status:"ok"},{merge:true}); }
   await B.commit();
