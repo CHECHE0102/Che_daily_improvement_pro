@@ -1026,7 +1026,48 @@ body.onb-open{overflow:hidden}
 .pz-rcell:not(.own) .pz-rmon{filter:brightness(0);opacity:.22}
 .pz-rcell.own .pz-rpic{box-shadow:0 0 0 3px #FFD84D,0 0 10px rgba(255,216,77,.8)}
 @media (prefers-reduced-motion:reduce){.pz-enc-rare .pz-encart{animation:none!important}}
-#plazaRoom{position:fixed;inset:0;z-index:35;background:#8cc46e}body.pz-open{overflow:hidden}#plazaRoom .pz-stage{position:absolute;inset:0;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}#plazaRoom .pz-world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}#plazaRoom .pz-ground{position:absolute;left:0;top:0}.pz-ent{position:absolute;left:0;top:0;width:76px;height:96px;margin:-90px 0 0 -38px;will-change:transform;cursor:pointer}.pz-sh{position:absolute;left:14px;right:14px;bottom:2px;height:12px;border-radius:50%;background:rgba(20,40,20,.28)}.pz-bob{position:absolute;left:0;top:0;width:76px;height:76px;transform-origin:50% 100%}.pz-fig{width:76px;height:76px}.pz-art{width:76px;height:76px}.pz-art .ha-in{width:100%;height:100%}.pz-tag{position:absolute;left:50%;top:76px;transform:translateX(-50%);white-space:nowrap;font:700 11px/1.5 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.92);border-radius:999px;padding:0 7px;pointer-events:none;display:flex;align-items:center;gap:2px}.pz-tag small{font-weight:600;opacity:.7}.pz-tt{display:inline-flex}.pz-off .pz-tag{background:rgba(225,229,232,.85);color:#58646b}.pz-off .pz-fig{filter:saturate(.75)}.pz-me .pz-tag{background:#1F6F5C;color:#fff}.pz-me::before{content:"";position:absolute;left:50%;bottom:-2px;width:58px;height:18px;margin-left:-29px;border-radius:50%;border:2px solid rgba(255,255,255,.8)}.pz-live .pz-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#2ECC71;margin-right:3px}.pz-pod .pz-tag{background:#FFF3C4}.pz-star .pz-bob::before{content:"";position:absolute;left:8px;right:8px;top:-6px;height:16px;border-radius:50%;border:3px solid #FFD84D;box-shadow:0 0 10px #FFE98A;animation:pzHalo 2s ease-in-out infinite}@keyframes pzHalo{50%{transform:translateY(-3px)}}.pz-bub{position:absolute;left:50%;bottom:100px;transform:translateX(-50%) scale(.6);opacity:0;transition:.18s;background:#fff;color:#1B2421;font:700 15px/1.3 system-ui,sans-serif;padding:4px 9px;border-radius:12px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.18);pointer-events:none}.pz-bub::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-top-color:#fff;border-bottom:0}.pz-bub.on{opacity:1;transform:translateX(-50%) scale(1)}.pz-hud{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px));pointer-events:none}.pz-pill{pointer-events:auto;border:0;background:rgba(255,255,255,.94);color:#1B2421;border-radius:999px;padding:8px 14px;font:700 14px/1.2 system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.12)}.pz-emo{position:absolute;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px}.pz-emo button{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:22px;box-shadow:0 2px 8px rgba(0,0,0,.15)}.pz-emo button:active{transform:scale(.9)}.pz-joy{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.6);pointer-events:none;display:none;z-index:2}.pz-joy i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.85)}.pz-hint{position:absolute;left:50%;bottom:calc(150px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:rgba(27,36,33,.72);color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap}.pz-zones{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:calc(56px + env(safe-area-inset-top,0px));width:min(380px,calc(100% - 24px));background:rgba(255,255,255,.97);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:3}.pz-zones>b{font:700 15px/1.3 system-ui,sans-serif;color:#1B2421;padding:0 4px 4px}.pz-map{position:relative;width:100%;aspect-ratio:1;border-radius:12px;background:#8cc46e url(assets/art/plaza/map.webp) center/cover}.pz-map button{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;border:0;background:rgba(255,255,255,.94);border-radius:12px;padding:4px 8px;color:#1B2421;box-shadow:0 2px 6px rgba(0,0,0,.2);font:700 12px/1.3 system-ui,sans-serif;white-space:nowrap}.pz-map button.on{background:#1F6F5C;color:#fff}.pz-map em{font-style:normal;font-size:11px;font-weight:600;opacity:.85}.pz-mapd{color:#5d6b66;font-size:12px;padding:0 4px}.pz-linesT{font:700 13px/1.3 system-ui,sans-serif;color:#1B2421;padding:4px 4px 0}.pz-lines{display:flex;flex-wrap:wrap;gap:6px;max-height:118px;overflow-y:auto;padding:2px}.pz-lines button{display:flex;flex-direction:column;align-items:center;min-width:58px;border:0;border-radius:12px;padding:5px 8px;background:#F2F5F3;color:#1B2421;font:700 13px/1.25 system-ui,sans-serif}.pz-lines button em{font-style:normal;font-size:11px;font-weight:600;opacity:.75}.pz-lines button.on{background:#1F6F5C;color:#fff}.pz-lines button.full{opacity:.45}.pz-cnt{font-size:12px!important}#plazaRoom .pz-hud{gap:8px}.pz-ib{pointer-events:auto;width:42px;height:42px;border-radius:14px;border:0;background:rgba(27,36,33,.55);color:#fff;font:700 20px/1 system-ui,sans-serif;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}.pz-room{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:0;border:0;border-radius:14px;padding:5px 30px 5px 12px;position:relative;background:rgba(255,255,255,.88);color:#1B2421;box-shadow:0 2px 10px rgba(0,0,0,.15);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);text-align:left}.pz-room b{font:800 14px/1.3 system-ui,sans-serif}.pz-room small{font:600 11px/1.3 system-ui,sans-serif;color:#1F6F5C}.pz-room i{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-style:normal;font-size:11px;opacity:.6}.pz-minibox{position:absolute;right:max(10px,env(safe-area-inset-right,0px));top:calc(10px + env(safe-area-inset-top,0px));width:112px;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.9);cursor:pointer;z-index:2}.pz-mini{display:block;width:112px;height:84px}.pz-minibox span{position:absolute;left:4px;top:3px;font:700 9px/1.3 system-ui,sans-serif;color:#fff;background:rgba(27,36,33,.55);border-radius:6px;padding:0 4px}.pz-big{touch-action:none;-webkit-user-select:none;user-select:none;position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:64px;height:64px;border-radius:20px;border:0;background:rgba(27,36,33,.55);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 3px 12px rgba(0,0,0,.2);z-index:2;transition:transform .12s,background .2s}.pz-big b{font-size:22px;line-height:1}.pz-big span{font:700 11px/1.2 system-ui,sans-serif}.pz-big:active{transform:scale(.92)}.pz-intb{left:max(14px,env(safe-area-inset-left,0px))}.pz-actsb{right:max(14px,env(safe-area-inset-right,0px))}.pz-intb.on{background:rgba(31,111,92,.92);animation:pzPulse 1.4s ease-in-out infinite}@keyframes pzPulse{50%{box-shadow:0 0 0 6px rgba(46,204,113,.35)}}.pz-acts{position:absolute;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(5,46px);gap:6px;padding:8px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 6px 20px rgba(0,0,0,.22);z-index:3}.pz-acts[hidden]{display:none}.pz-acts button{width:46px;height:46px;border:0;border-radius:14px;background:#F2F5F3;font-size:22px;display:flex;flex-direction:column;align-items:center;justify-content:center}.pz-acts .pz-actb b{font-size:18px;line-height:1.1}.pz-acts .pz-actb small{font:700 9px/1.1 system-ui,sans-serif;color:#1B2421}.pz-acts button:active{transform:scale(.9)}.pz-joy.rest{display:block!important;opacity:.45;transition:left .18s,top .18s,opacity .18s}.pz-joy{transition:opacity .12s}.pz-tint{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(20,30,25,.28) 100%)}#plazaRoom.pz-eve .pz-tint{background:radial-gradient(ellipse at 50% 45%,rgba(255,170,80,.10) 40%,rgba(120,50,20,.35) 100%)}#plazaRoom.pz-night .pz-tint{background:radial-gradient(ellipse at 50% 45%,rgba(20,30,90,.28) 30%,rgba(5,10,40,.6) 100%)}.pz-fx{position:absolute;inset:0;overflow:hidden;pointer-events:none}.pz-ff{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,150,1) 0,rgba(255,240,150,.5) 35%,rgba(255,240,150,0) 70%);will-change:transform,opacity;animation:pzFfMove 7s ease-in-out infinite alternate,pzFfGlow 2.4s ease-in-out infinite alternate}@keyframes pzFfMove{0%{transform:translate(0,0) scale(var(--s))}50%{transform:translate(14px,-9px) scale(var(--s))}100%{transform:translate(-10px,8px) scale(var(--s))}}@keyframes pzFfGlow{from{opacity:.1}to{opacity:.95}}.pz-pt{position:absolute;top:-12px;width:10px;height:6px;will-change:transform;animation:pzPtFall 30s linear infinite}.pz-pt b{display:block;width:10px;height:6px;border-radius:50%;background:rgba(255,182,206,.85);animation:pzPtSpin 2s ease-in-out infinite alternate}@keyframes pzPtFall{from{transform:translate(0,0) scale(var(--s))}to{transform:translate(60px,calc(100vh + 30px)) scale(var(--s))}}@keyframes pzPtSpin{from{transform:rotate(-40deg) scaleY(1)}to{transform:rotate(60deg) scaleY(.3)}}@media (prefers-reduced-motion:reduce){.pz-ff,.pz-pt{display:none}}.pz-banner{position:absolute;left:50%;top:28%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;font:800 26px/1.2 system-ui,sans-serif;text-shadow:0 2px 10px rgba(0,0,0,.5);pointer-events:none;animation:pzBanner 2.6s ease forwards;white-space:nowrap}.pz-banner small{font:600 13px/1.3 system-ui,sans-serif}@keyframes pzBanner{0%{opacity:0;transform:translate(-50%,-30%)}15%,70%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(-50%,-60%)}}.pz-ent:not(.pz-me):not(.pz-pod) .pz-tag{background:none;color:#1B2421;text-shadow:0 0 2px #fff,0 0 3px #fff,0 0 5px rgba(255,255,255,.9);font-size:12px;font-weight:800}.pz-off:not(.pz-pod) .pz-tag{color:#4a5752}.pz-near .pz-sh{background:rgba(46,204,113,.45);box-shadow:0 0 0 3px rgba(255,255,255,.7)}.pz-dust{position:absolute;left:0;top:0;width:14px;height:8px;margin:-6px 0 0 -7px;will-change:opacity,scale;border-radius:50%;background:rgba(255,255,255,.7);pointer-events:none;animation:pzDust .5s ease-out forwards}@keyframes pzDust{to{opacity:0;scale:1.85 1.5}}@media (prefers-reduced-motion:reduce){.pz-banner{animation-duration:.01s}.pz-intb.on{animation:none}}.pz-exit{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px;pointer-events:none;font:800 19px/1.4 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.85);border-radius:999px;padding:3px 13px;box-shadow:0 2px 6px rgba(0,0,0,.15);white-space:nowrap}.pz-exit b{color:#1F6F5C;font-size:18px}#pzFade{position:fixed;inset:0;z-index:36;background:#1B2421;opacity:0;pointer-events:none;transition:opacity .16s ease}#pzFade.on{opacity:1}.pz-occ{position:absolute;pointer-events:none;user-select:none;-webkit-user-drag:none;transition:opacity .25s}.pz-occ.pz-see{opacity:.5}.pz-edge{position:absolute;left:0;top:0;margin:-14px 0 0 -40px;width:80px;display:flex;flex-direction:column;align-items:center;gap:1px;z-index:2;cursor:pointer}.pz-edge i{width:22px;height:22px;border-radius:50%;background:#2ECC71;box-shadow:0 2px 6px rgba(0,0,0,.25);position:relative}.pz-edge i::after{content:"";position:absolute;left:15px;top:6px;border:5px solid transparent;border-left:8px solid #1B7A46}.pz-edge span{max-width:80px;font:700 11px/1.4 system-ui,sans-serif;background:rgba(255,255,255,.92);color:#1B2421;border-radius:999px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pz-like{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.pz-likeN{font-weight:700}.pz-starTag{font-weight:700;color:#B8860B}.plz-go{align-self:stretch}@media (prefers-reduced-motion:reduce){.pz-bub{transition:none}.pz-star .pz-bob::before{animation:none}}
+#plazaRoom{position:fixed;inset:0;z-index:35;background:#8cc46e}body.pz-open{overflow:hidden}#plazaRoom .pz-stage{position:absolute;inset:0;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}#plazaRoom .pz-world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}#plazaRoom .pz-ground{position:absolute;left:0;top:0}.pz-ent{position:absolute;left:0;top:0;width:76px;height:96px;margin:-90px 0 0 -38px;will-change:transform;cursor:pointer}.pz-sh{position:absolute;left:14px;right:14px;bottom:2px;height:12px;border-radius:50%;background:rgba(20,40,20,.28)}.pz-bob{position:absolute;left:0;top:0;width:76px;height:76px;transform-origin:50% 100%}.pz-fig{width:76px;height:76px}.pz-art{width:76px;height:76px}.pz-art .ha-in{width:100%;height:100%}.pz-tag{position:absolute;left:50%;top:76px;transform:translateX(-50%);white-space:nowrap;font:700 11px/1.5 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.92);border-radius:999px;padding:0 7px;pointer-events:none;display:flex;align-items:center;gap:2px}.pz-tag small{font-weight:600;opacity:.7}.pz-tt{display:inline-flex}.pz-off .pz-tag{background:rgba(225,229,232,.85);color:#58646b}.pz-off .pz-fig{filter:saturate(.75)}.pz-me .pz-tag{background:#1F6F5C;color:#fff}.pz-me::before{content:"";position:absolute;left:50%;bottom:-2px;width:58px;height:18px;margin-left:-29px;border-radius:50%;border:2px solid rgba(255,255,255,.8)}.pz-live .pz-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#2ECC71;margin-right:3px}.pz-pod .pz-tag{background:#FFF3C4}.pz-star .pz-bob::before{content:"";position:absolute;left:8px;right:8px;top:-6px;height:16px;border-radius:50%;border:3px solid #FFD84D;box-shadow:0 0 10px #FFE98A;animation:pzHalo 2s ease-in-out infinite}@keyframes pzHalo{50%{transform:translateY(-3px)}}.pz-bub{position:absolute;left:50%;bottom:100px;transform:translateX(-50%) scale(.6);opacity:0;transition:.18s;background:#fff;color:#1B2421;font:700 15px/1.3 system-ui,sans-serif;padding:4px 9px;border-radius:12px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.18);pointer-events:none}.pz-bub::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-top-color:#fff;border-bottom:0}.pz-bub.on{opacity:1;transform:translateX(-50%) scale(1)}.pz-hud{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px));pointer-events:none}.pz-pill{pointer-events:auto;border:0;background:rgba(255,255,255,.94);color:#1B2421;border-radius:999px;padding:8px 14px;font:700 14px/1.2 system-ui,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.12)}.pz-emo{position:absolute;right:max(10px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:6px}.pz-emo button{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:22px;box-shadow:0 2px 8px rgba(0,0,0,.15)}.pz-emo button:active{transform:scale(.9)}.pz-joy{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.6);pointer-events:none;display:none;z-index:2}.pz-joy i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.85)}.pz-hint{position:absolute;left:50%;bottom:calc(150px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:rgba(27,36,33,.72);color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap}.pz-zones{position:absolute;left:max(12px,env(safe-area-inset-left,0px));top:calc(56px + env(safe-area-inset-top,0px));width:min(380px,calc(100% - 24px));background:rgba(255,255,255,.97);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:3}.pz-zones>b{font:700 15px/1.3 system-ui,sans-serif;color:#1B2421;padding:0 4px 4px}.pz-map{position:relative;width:100%;aspect-ratio:1;border-radius:12px;background:#8cc46e url(assets/art/plaza/map.webp) center/cover}.pz-map button{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;border:0;background:rgba(255,255,255,.94);border-radius:12px;padding:4px 8px;color:#1B2421;box-shadow:0 2px 6px rgba(0,0,0,.2);font:700 12px/1.3 system-ui,sans-serif;white-space:nowrap}.pz-map button.on{background:#1F6F5C;color:#fff}.pz-map em{font-style:normal;font-size:11px;font-weight:600;opacity:.85}.pz-mapd{color:#5d6b66;font-size:12px;padding:0 4px}.pz-linesT{font:700 13px/1.3 system-ui,sans-serif;color:#1B2421;padding:4px 4px 0}.pz-lines{display:flex;flex-wrap:wrap;gap:6px;max-height:118px;overflow-y:auto;padding:2px}.pz-lines button{display:flex;flex-direction:column;align-items:center;min-width:58px;border:0;border-radius:12px;padding:5px 8px;background:#F2F5F3;color:#1B2421;font:700 13px/1.25 system-ui,sans-serif}.pz-lines button em{font-style:normal;font-size:11px;font-weight:600;opacity:.75}.pz-lines button.on{background:#1F6F5C;color:#fff}.pz-lines button.full{opacity:.45}.pz-cnt{font-size:12px!important}#plazaRoom .pz-hud{gap:8px}.pz-ib{pointer-events:auto;width:42px;height:42px;border-radius:14px;border:0;background:rgba(27,36,33,.55);color:#fff;font:700 20px/1 system-ui,sans-serif;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}.pz-room{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;gap:0;border:0;border-radius:14px;padding:5px 30px 5px 12px;position:relative;background:rgba(255,255,255,.88);color:#1B2421;box-shadow:0 2px 10px rgba(0,0,0,.15);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);text-align:left}.pz-room b{font:800 14px/1.3 system-ui,sans-serif}.pz-room small{font:600 11px/1.3 system-ui,sans-serif;color:#1F6F5C}.pz-room i{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-style:normal;font-size:11px;opacity:.6}.pz-minibox{position:absolute;right:max(10px,env(safe-area-inset-right,0px));top:calc(10px + env(safe-area-inset-top,0px));width:112px;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.9);cursor:pointer;z-index:2}.pz-mini{display:block;width:112px;height:84px}.pz-minibox span{position:absolute;left:4px;top:3px;font:700 9px/1.3 system-ui,sans-serif;color:#fff;background:rgba(27,36,33,.55);border-radius:6px;padding:0 4px}.pz-big{touch-action:none;-webkit-user-select:none;user-select:none;position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:64px;height:64px;border-radius:20px;border:0;background:rgba(27,36,33,.55);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 3px 12px rgba(0,0,0,.2);z-index:2;transition:transform .12s,background .2s}.pz-big b{font-size:22px;line-height:1}.pz-big span{font:700 11px/1.2 system-ui,sans-serif}.pz-big:active{transform:scale(.92)}.pz-intb{left:max(14px,env(safe-area-inset-left,0px))}.pz-actsb{right:max(14px,env(safe-area-inset-right,0px))}.pz-intb.on{background:rgba(31,111,92,.92);animation:pzPulse 1.4s ease-in-out infinite}@keyframes pzPulse{50%{box-shadow:0 0 0 6px rgba(46,204,113,.35)}}.pz-acts{position:absolute;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(5,46px);gap:6px;padding:8px;border-radius:18px;background:rgba(255,255,255,.95);box-shadow:0 6px 20px rgba(0,0,0,.22);z-index:3}.pz-acts[hidden]{display:none}.pz-acts button{width:46px;height:46px;border:0;border-radius:14px;background:#F2F5F3;font-size:22px;display:flex;flex-direction:column;align-items:center;justify-content:center}.pz-acts .pz-actb b{font-size:18px;line-height:1.1}.pz-acts .pz-actb small{font:700 9px/1.1 system-ui,sans-serif;color:#1B2421}.pz-acts button:active{transform:scale(.9)}.pz-joy.rest{display:block!important;opacity:.45;transition:left .18s,top .18s,opacity .18s}.pz-joy{transition:opacity .12s}.pz-tint{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(20,30,25,.28) 100%)}#plazaRoom.pz-eve .pz-tint{background:radial-gradient(ellipse at 50% 45%,rgba(255,170,80,.10) 40%,rgba(120,50,20,.35) 100%)}#plazaRoom.pz-night .pz-tint{background:radial-gradient(ellipse at 50% 45%,rgba(20,30,90,.28) 30%,rgba(5,10,40,.6) 100%)}.pz-fx{position:absolute;inset:0;overflow:hidden;pointer-events:none}.pz-ff{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,150,1) 0,rgba(255,240,150,.5) 35%,rgba(255,240,150,0) 70%);will-change:transform,opacity;animation:pzFfMove 7s ease-in-out infinite alternate,pzFfGlow 2.4s ease-in-out infinite alternate}@keyframes pzFfMove{0%{transform:translate(0,0) scale(var(--s))}50%{transform:translate(14px,-9px) scale(var(--s))}100%{transform:translate(-10px,8px) scale(var(--s))}}@keyframes pzFfGlow{from{opacity:.1}to{opacity:.95}}.pz-pt{position:absolute;top:-12px;width:10px;height:6px;will-change:transform;animation:pzPtFall 30s linear infinite}.pz-pt b{display:block;width:10px;height:6px;border-radius:50%;background:rgba(255,182,206,.85);animation:pzPtSpin 2s ease-in-out infinite alternate}@keyframes pzPtFall{from{transform:translate(0,0) scale(var(--s))}to{transform:translate(60px,calc(100vh + 30px)) scale(var(--s))}}@keyframes pzPtSpin{from{transform:rotate(-40deg) scaleY(1)}to{transform:rotate(60deg) scaleY(.3)}}@media (prefers-reduced-motion:reduce){.pz-ff,.pz-pt{display:none}}.pz-banner{position:absolute;left:50%;top:28%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;font:800 26px/1.2 system-ui,sans-serif;text-shadow:0 2px 10px rgba(0,0,0,.5);pointer-events:none;animation:pzBanner 2.6s ease forwards;white-space:nowrap}.pz-banner small{font:600 13px/1.3 system-ui,sans-serif}@keyframes pzBanner{0%{opacity:0;transform:translate(-50%,-30%)}15%,70%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(-50%,-60%)}}.pz-ent:not(.pz-me):not(.pz-pod) .pz-tag{background:none;color:#1B2421;text-shadow:0 0 2px #fff,0 0 3px #fff,0 0 5px rgba(255,255,255,.9);font-size:12px;font-weight:800}.pz-off:not(.pz-pod) .pz-tag{color:#4a5752}.pz-near .pz-sh{background:rgba(46,204,113,.45);box-shadow:0 0 0 3px rgba(255,255,255,.7)}.pz-dust{position:absolute;left:0;top:0;width:14px;height:8px;margin:-6px 0 0 -7px;will-change:opacity,scale;border-radius:50%;background:rgba(255,255,255,.7);pointer-events:none;animation:pzDust .5s ease-out forwards}@keyframes pzDust{to{opacity:0;scale:1.85 1.5}}@media (prefers-reduced-motion:reduce){.pz-banner{animation-duration:.01s}.pz-intb.on{animation:none}}.pz-exit{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px;pointer-events:none;font:800 19px/1.4 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.85);border-radius:999px;padding:3px 13px;box-shadow:0 2px 6px rgba(0,0,0,.15);white-space:nowrap}.pz-exit b{color:#1F6F5C;font-size:18px}#pzFade{position:fixed;inset:0;z-index:36;background:#1B2421;opacity:0;pointer-events:none;transition:opacity .16s ease}#pzFade.on{opacity:1}.pz-occ{position:absolute;pointer-events:none;user-select:none;-webkit-user-drag:none;transition:opacity .25s}.pz-occ.pz-see{opacity:.5}.pz-ntop{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:5px;font:700 11px/1.35 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.93);border:1.5px solid #1B2421;border-radius:9px;padding:2px 8px;white-space:nowrap;box-shadow:0 2px 0 rgba(27,36,33,.2)}.pz-ntop b{font-weight:900;color:#B5470B}.pz-ntop i{font-style:normal;font-weight:900}.pz-ttop{position:absolute;transform:translateX(-50%);margin:0}.pz-podl{position:absolute;transform:translate(-50%,-100%);font:900 20px/1.3 system-ui,sans-serif;color:#1B2421;background:#FFF3C4;border:2px solid #1B2421;border-radius:999px;padding:3px 14px;white-space:nowrap;pointer-events:none;box-shadow:0 3px 0 rgba(27,36,33,.25)}.pz-pv{font-weight:900!important;opacity:1!important;color:#1F6F5C}.pz-piano{position:absolute;inset:0;z-index:7;display:flex;flex-direction:column;background:#16211D;padding:calc(10px + env(safe-area-inset-top,0px)) max(10px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));animation:amFade .2s ease-out both}.pz-pih{display:flex;align-items:center;gap:10px;color:#fff;padding:4px 4px 10px;max-width:480px;width:100%;margin:0 auto;box-sizing:border-box}.pz-pih button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.2);color:#fff;font-size:18px}.pz-pih b{font:900 26px/1 system-ui,sans-serif;text-align:center}.pz-pit{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}.pz-pit small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.pz-pit em,.pz-st{font-style:normal;color:#FFC53D;letter-spacing:1px}.pz-note small em,.pz-snote small em{display:block;font-style:normal;color:#E5A000;font-size:10px;letter-spacing:1px;line-height:1.1}.pz-pih small{font:700 12px/1.2 system-ui,sans-serif;opacity:.85}.pz-piano canvas{flex:1;width:100%;max-width:480px;margin:0 auto;border-radius:16px;touch-action:none;display:block;min-height:0}.pz-pio{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--card,#fff);color:var(--ink,#1B2421);border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,.35);min-width:220px}.pz-pio>b{font:900 48px/1 system-ui,sans-serif}.pz-pio small{font:700 14px/1.3 system-ui,sans-serif}.pz-rug{position:absolute;z-index:1;box-sizing:border-box;border-radius:28px;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 12px,transparent 12px 24px),#2F6B57;border:10px solid #E2B04A;box-shadow:0 0 0 3px #1B2421,inset 0 0 0 6px #2F6B57,inset 0 0 0 9px #F4E3B5,0 8px 0 rgba(27,36,33,.18)}.pz-rugh{position:absolute;left:24px;top:12px;right:24px;display:flex;align-items:center;justify-content:space-between}.pz-rugh b{font:900 28px/1.2 system-ui,sans-serif;color:#F4E3B5;letter-spacing:.04em}.pz-rugh button{font:800 18px/1.2 system-ui,sans-serif;background:#F4E3B5;border:2px solid #1B2421;border-radius:999px;padding:5px 16px;color:#1B2421;cursor:pointer}.pz-rugs{position:absolute;height:26px;box-sizing:border-box;border:2px dashed rgba(244,227,181,.5);border-radius:50%}.pz-wc{position:absolute;transform:translate(-50%,-100%);margin-top:4px;font:800 26px/1 system-ui,sans-serif;color:#1B2421;background:#FFFDF6;border:2px solid #1B2421;border-radius:9px;padding:9px 12px;white-space:nowrap;box-shadow:0 5px 0 #C9B27E,0 7px 0 #1B2421;cursor:pointer;transition:opacity .2s,background .2s}.pz-wc.tg{background:#FFE58A;box-shadow:0 5px 0 #D9A92E,0 7px 0 #1B2421,0 0 0 6px rgba(255,255,255,.75)}.pz-wc.see{opacity:.3}.pz-wc.gone{opacity:0;pointer-events:none}.pz-grab{position:absolute;left:0;top:0;z-index:5;width:0;height:0;pointer-events:none}.pz-grab button{position:absolute;top:-29px;pointer-events:auto;touch-action:manipulation;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:#E5484D;color:#fff;font-size:26px;box-shadow:0 4px 0 #8f1f23,0 6px 14px rgba(0,0,0,.3)}.pz-grab button.l{left:-104px}.pz-grab button.r{left:46px}.pz-grab button:active{margin-top:3px;box-shadow:0 1px 0 #8f1f23}.pz-grab span{position:absolute;left:0;top:-118px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;color:#fff;border-radius:12px;padding:4px 10px;white-space:nowrap;background:linear-gradient(90deg,rgba(229,72,77,.92) calc(var(--p,0)*100%),rgba(27,36,33,.85) 0)}.pz-grab span b{font:900 18px/1.1 system-ui,sans-serif}.pz-grab span small{font:700 11px/1.2 system-ui,sans-serif}.pz-grab.hit span{animation:pzGrabHit .15s}@keyframes pzGrabHit{50%{transform:translateX(-50%) scale(1.15)}}
+
+
+
+
+
+
+
+
+
+
+
+.pz-hold{position:absolute;left:50%;bottom:80px;transform:translateX(-50%);pointer-events:none}
+.pz-hold.w{font:800 20px/1 system-ui,sans-serif;background:#FFFDF6;color:#1B2421;border:2px solid #1B2421;border-radius:7px;padding:5px 9px;white-space:nowrap;box-shadow:0 3px 0 rgba(27,36,33,.3)}
+.pz-hold.w::after{content:"";position:absolute;left:50%;top:100%;margin-left:-1.5px;width:3px;height:9px;background:#1B2421}
+.pz-hold.n{width:38px;height:38px;border-radius:50%;background:var(--c);border:2px solid #1B2421;display:grid;place-items:center;color:#fff;font:900 22px/1 system-ui,sans-serif;box-shadow:0 0 12px var(--c)}
+.pz-holding .pz-bub{bottom:136px}
+.pz-note{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:opacity .3s,transform .3s}
+.pz-note>b{width:46px;height:46px;border-radius:50%;background:var(--c);border:3px solid #1B2421;color:#fff;font:900 28px/1 system-ui,sans-serif;display:grid;place-items:center;box-shadow:0 0 14px var(--c);animation:pzNote 2.2s ease-in-out infinite}
+.pz-note small{margin-top:4px;font:800 12px/1.4 system-ui,sans-serif;background:rgba(255,255,255,.92);color:#1B2421;border-radius:999px;padding:0 8px;white-space:nowrap}
+.pz-note.gone{opacity:0;transform:translate(-50%,-100%) scale(.4)}
+.pz-note.tg>b{box-shadow:0 0 0 5px rgba(255,255,255,.9),0 0 18px var(--c)}
+@keyframes pzNote{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pz-drop{position:absolute;width:210px;height:96px;margin:-48px 0 0 -105px;border-radius:50%;border:4px dashed rgba(255,255,255,.9);background:rgba(255,216,77,.25);display:grid;place-items:center;pointer-events:none;opacity:0;transition:opacity .3s}
+.pz-drop.on{opacity:1;animation:pzDrop 1.2s ease-in-out infinite}
+.pz-drop span{font:800 14px/1.4 system-ui,sans-serif;background:#1F6F5C;color:#fff;border-radius:999px;padding:2px 10px;white-space:nowrap}
+@keyframes pzDrop{50%{transform:scale(1.06)}}
+.pz-snote{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none}.pz-snote[hidden]{display:none}
+.pz-snote b{width:66px;height:66px;border-radius:50%;background:var(--c);border:3px solid #1B2421;color:#fff;font:900 40px/1 system-ui,sans-serif;display:grid;place-items:center;box-shadow:0 0 26px var(--c),0 0 0 6px rgba(255,255,255,.55);animation:pzNote 1.6s ease-in-out infinite}
+.pz-snote small{margin-top:6px;font:800 14px/1.4 system-ui,sans-serif;background:#1B2421;color:#fff;border-radius:999px;padding:1px 10px;white-space:nowrap}
+.pz-snote i{position:absolute;top:0;left:50%;font:normal 900 26px/1 system-ui,sans-serif;color:var(--c);text-shadow:0 0 3px #fff,0 0 3px #fff;opacity:0;animation:pzFloat 3s linear infinite}
+.pz-snote i::before{content:"♪"}.pz-snote i:nth-of-type(2){animation-delay:-1s;margin-left:-60px}.pz-snote i:nth-of-type(2)::before{content:"♫"}.pz-snote i:nth-of-type(3){animation-delay:-2s;margin-left:30px}
+@keyframes pzFloat{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(26px,-120px);opacity:0}}
+.pz-hcard{position:absolute;left:50%;transform:translateX(-50%);top:calc(64px + env(safe-area-inset-top,0px));z-index:4;display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;justify-content:center;max-width:calc(100% - 150px);box-sizing:border-box;background:rgba(27,36,33,.82);color:#fff;border-radius:16px;padding:8px 10px 8px 14px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#plazaRoom:has(.pz-radio) .pz-hcard{top:calc(122px + env(safe-area-inset-top,0px))}
+.pz-hcw{display:flex;align-items:center;gap:6px;font:800 18px/1.2 system-ui,sans-serif}
+.pz-hcw button{background:none;border:0;font-size:18px;padding:0 2px;color:#fff;cursor:pointer}
+.pz-hcw i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--c);display:grid;place-items:center;border:2px solid #fff;font-weight:900}
+.pz-hcard small{font:600 13px/1.3 system-ui,sans-serif;opacity:.92;text-align:center}
+.pz-hcard>button{background:#fff;color:#1B2421;border:0;border-radius:999px;font:800 13px/1 system-ui,sans-serif;padding:7px 12px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.pz-note>b,.pz-snote b,.pz-drop.on,.pz-snote i{animation:none!important}}
+.pz-edge{position:absolute;left:0;top:0;margin:-14px 0 0 -40px;width:80px;display:flex;flex-direction:column;align-items:center;gap:1px;z-index:2;cursor:pointer}.pz-edge i{width:22px;height:22px;border-radius:50%;background:#2ECC71;box-shadow:0 2px 6px rgba(0,0,0,.25);position:relative}.pz-edge i::after{content:"";position:absolute;left:15px;top:6px;border:5px solid transparent;border-left:8px solid #1B7A46}.pz-edge span{max-width:80px;font:700 11px/1.4 system-ui,sans-serif;background:rgba(255,255,255,.92);color:#1B2421;border-radius:999px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pz-like{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.pz-likeN{font-weight:700}.pz-starTag{font-weight:700;color:#B8860B}.plz-go{align-self:stretch}@media (prefers-reduced-motion:reduce){.pz-bub{transition:none}.pz-star .pz-bob::before{animation:none}}
 .comm-card{display:flex;flex-direction:column;gap:8px}.comm-card .comm-ig{align-self:flex-start;background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888);border:0;color:#fff!important;text-decoration:none!important;font-weight:700}.comm-card .comm-line{align-self:flex-start;background:#06C755;border-color:#06C755;color:#fff!important;text-decoration:none!important;font-weight:700}
 .priv-card{display:flex;flex-direction:column;gap:8px}.priv-card .row{gap:8px;flex-wrap:wrap}
 .btn.ghost.del-btn{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}.btn.danger-solid{background:var(--bad);color:#fff}
@@ -4338,14 +4379,14 @@ function devPanel(){
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${PLANS_ON?planSel:stSel}
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}${b("style","dStyle")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
     <div id="devMaint" class="dev-maint">${devMaintInner()}</div>
-    ${devFeatHtml()}
+    ${devFeatHtml()}${plzNoticeDev()}
     ${devSupHtml()}
     ${devBadgeHtml()}
     ${devStatsHtml()}
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.85";
+const APP_VERSION="2026.11.86";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4836,6 +4877,7 @@ document.addEventListener("click", e=>{
   if(a==="devunlock") return devUnlock();
   if(a==="devexit") return devExit();
   if(a==="maint") return maintSet(t.dataset.k==="1");
+  if(a==="plznotice") return plzNoticeSave();
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
   if(a==="plook") return lookCard(plazaList()[+t.dataset.k]);
@@ -9182,14 +9224,79 @@ const TRACKS={
     [78,1],[79,1],[81,1],[83,2],[81,1], [79,1],[78,1],[76,1],[78,2],[74,1], [76,1],[78,1],[79,1],[76,2],[73,1], [74,3],[69,3],
     [78,1],[79,1],[81,1],[83,2],[81,1], [79,2],[78,1],[76,2],[74,1], [73,1],[74,1],[76,1],[69,1],[73,1],[76,1], [74,3],[0,3]],
     bass:[[50,6],[45,6],[43,6],[45,6],[50,6],[45,6],[43,3],[45,3],[50,6],[50,6],[43,6],[45,6],[50,6],[50,6],[43,6],[45,3],[50,3]],
-    drum:"K..t.. k..t..", lead:{type:"triangle", vib:true, v:0.22}, bassV:0.16},
+    drum:"K..t.. k..t..", lead:{type:"triangle", vib:true, v:0.22}, bassV:0.16, harp:6},
   battle:{bpm:168, mel:[
     [64,1],[71,1],[71,1],[67,1],[71,1],[67,1],[69,1],[71,1], [64,1],[71,1],[71,1],[67,1],[74,1],[71,1],[69,1],[67,1],
     [64,1],[71,1],[71,1],[69,1],[71,1],[74,1],[76,1],[74,1], [71,1],[69,1],[67,1],[69,1],[71,2],[0,2],
     [76,1],[79,1],[76,1],[74,1],[71,1],[74,1],[76,1],[78,1], [79,1],[78,1],[76,1],[74,1],[71,1],[69,1],[67,1],[69,1],
     [71,1],[74,1],[71,1],[69,1],[67,1],[69,1],[71,1],[69,1], [67,1],[66,1],[64,1],[66,1],[64,2],[0,2]],
     bass:[[40,4],[40,4],[38,4],[40,4],[40,4],[40,4],[43,4],[38,4],[40,4],[43,4],[45,4],[47,4],[43,4],[38,4],[40,4],[40,4]],
-    drum:"K.t.K.tt K.t.Kktt", lead:{type:"square", vib:false, v:0.13}, bassV:0.2}};
+    drum:"K.t.K.tt K.t.Kktt", lead:{type:"square", vib:false, v:0.13}, bassV:0.2},
+  // 音符點歌 (plaza bandstand): five more tunes, one per music note
+  pzWaltz:{bpm:96, mel:[
+    [67,4],[71,2], [74,4],[71,2], [72,2],[71,2],[69,2], [67,6], [69,4],[72,2], [76,4],[74,2], [72,2],[71,2],[69,2], [71,6],
+    [67,4],[71,2], [74,4],[79,2], [78,2],[76,2],[74,2], [76,6], [72,2],[76,2],[74,2], [71,2],[74,2],[72,2], [69,2],[66,2],[69,2], [67,6]],
+    bass:[[43,6],[43,6],[38,6],[43,6],[45,6],[48,6],[38,6],[43,6],[43,6],[40,6],[38,6],[45,6],[48,6],[43,6],[38,6],[43,6]],
+    drum:"..t.t.", dv:.7, lead:{type:"triangle", vib:true, v:0.2}, bassV:0.17, harp:6},
+  pzLofi:{bpm:78, mel:[
+    [76,2],[79,1],[83,3],[79,2], [76,2],[72,2],[74,1],[76,3], [77,3],[76,1],[72,2],[69,2], [71,2],[74,2],[77,2],[0,2],
+    [76,2],[79,1],[83,3],[84,2], [83,2],[81,2],[79,1],[76,3], [77,2],[81,2],[79,1],[77,1],[76,2], [74,4],[72,2],[0,2]],
+    bass:[[48,8],[45,8],[41,8],[43,8]],
+    drum:"K...t..kK...t...", dv:.55, lead:{type:"sine", vib:true, v:0.24}, bassV:0.2, harp:4},
+  pzChip:{bpm:150, mel:[
+    [69,1],[72,1],[76,1],[72,1],[81,2],[79,1],[76,1], [77,1],[76,1],[74,1],[72,1],[74,2],[72,1],[69,1],
+    [72,1],[76,1],[79,1],[76,1],[84,2],[83,1],[79,1], [81,2],[79,1],[77,1],[76,2],[74,2],
+    [69,1],[72,1],[76,1],[72,1],[81,2],[79,1],[76,1], [77,1],[76,1],[74,1],[72,1],[74,2],[72,1],[69,1],
+    [72,1],[74,1],[76,1],[79,1],[77,1],[76,1],[74,1],[72,1], [71,2],[74,2],[69,4]],
+    bass:[[45,2],[57,2],[45,2],[57,2],[41,2],[53,2],[41,2],[53,2],[48,2],[60,2],[48,2],[60,2],[43,2],[55,2],[43,2],[55,2]],
+    drum:"K.t.k.t.", dv:.8, lead:{type:"square", vib:false, v:0.1}, bassV:0.15},
+  pzHorn:{bpm:108, mel:[
+    [69,1],[74,1],[78,1],[74,1],[81,2],[78,2], [79,1],[78,1],[76,1],[74,1],[76,2],[73,2], [74,1],[78,1],[81,1],[78,1],[83,2],[81,2], [79,1],[76,1],[73,1],[76,1],[74,2],[0,2],
+    [81,1],[83,1],[85,1],[86,1],[85,2],[81,2], [83,1],[81,1],[79,1],[78,1],[76,2],[71,2], [74,1],[73,1],[74,1],[76,1],[78,1],[79,1],[81,1],[78,1], [76,2],[73,2],[74,2],[0,2]],
+    bass:[[38,8],[45,8],[38,8],[45,4],[38,4],[45,8],[43,8],[38,4],[45,4],[45,4],[38,4]],
+    drum:"K..tK.t.", dv:.8, lead:{type:"triangle", vib:false, v:0.2}, bassV:0.18},
+  pzLull:{bpm:66, mel:[
+    [72,2],[77,2],[76,2],[72,2], [74,2],[77,2],[81,4], [79,2],[77,2],[76,2],[74,2], [72,6],[0,2],
+    [72,2],[77,2],[79,2],[81,2], [82,2],[81,2],[79,4], [77,2],[76,2],[74,2],[76,2], [77,6],[0,2]],
+    bass:[[41,8],[46,8],[41,8],[48,8],[41,8],[46,8],[48,8],[41,8]],
+    drum:"", lead:{type:"sine", vib:true, v:0.26}, bassV:0.16, harp:4},
+  pzJazz:{bpm:120, mel:[
+    [67,2],[70,1],[72,1],[74,2],[72,2], [70,1],[67,1],[65,2],[67,4], [72,2],[75,1],[77,1],[79,2],[77,2], [75,1],[72,1],[70,2],[72,4],
+    [74,1],[77,1],[74,1],[72,1],[70,2],[67,2], [69,2],[72,2],[74,4], [67,2],[70,1],[72,1],[74,2],[70,2], [67,6],[0,2]],
+    bass:[[43,2],[47,2],[50,2],[52,2],[48,2],[52,2],[55,2],[52,2],[48,2],[51,2],[55,2],[51,2],[43,2],[47,2],[50,2],[47,2],[50,2],[53,2],[57,2],[53,2],[45,2],[48,2],[50,2],[54,2],[43,2],[46,2],[50,2],[46,2],[43,4],[38,4]],
+    drum:"k.t.k.tt", dv:.5, lead:{type:"triangle", vib:true, v:0.2}, bassV:0.22},
+  pzBossa:{bpm:100, mel:[
+    [76,3],[74,1],[72,2],[69,2], [71,3],[72,1],[74,4], [72,3],[71,1],[69,2],[67,2], [69,6],[0,2],
+    [76,3],[77,1],[79,2],[76,2], [74,3],[72,1],[71,4], [72,2],[74,2],[71,2],[67,2], [69,6],[0,2]],
+    bass:[[45,3],[52,3],[45,2],[50,3],[57,3],[50,2],[43,3],[50,3],[43,2],[45,3],[52,3],[45,2]],
+    drum:"K..t..t.K.t..t..", dv:.45, lead:{type:"sine", vib:true, v:0.26}, bassV:0.2, harp:8},
+  pzPenta:{bpm:88, mel:[
+    [69,2],[72,2],[74,2],[76,2], [79,4],[76,2],[74,2], [72,2],[74,2],[72,2],[69,2], [67,6],[0,2],
+    [69,2],[72,2],[74,2],[79,2], [81,4],[79,2],[76,2], [74,2],[76,2],[74,2],[72,2], [69,6],[0,2]],
+    bass:[[45,8],[43,8],[45,8],[43,8],[45,8],[48,8],[43,8],[45,8]],
+    drum:"K.......t...k...", dv:.5, lead:{type:"triangle", vib:true, v:0.24}, bassV:0.15, harp:4},
+  pzRain:{bpm:72, mel:[
+    [76,4],[74,2],[72,2],[74,4],[76,4], [79,4],[76,4],[74,8], [72,4],[74,2],[76,2],[74,4],[72,4], [69,8],[0,8]],
+    bass:[[45,16],[43,16],[41,16],[45,16]],
+    drum:"", lead:{type:"sine", vib:true, v:0.26}, bassV:0.15, harp:4},
+  pzSea:{bpm:96, mel:[
+    [67,3],[69,1],[71,2],[74,2], [72,3],[71,1],[69,4], [67,2],[71,2],[74,2],[79,2], [78,6],[0,2],
+    [76,3],[74,1],[72,2],[71,2], [69,3],[71,1],[72,4], [74,2],[71,2],[69,2],[66,2], [67,6],[0,2]],
+    bass:[[43,8],[48,8],[43,8],[50,8],[48,8],[45,8],[50,8],[43,8]],
+    drum:"K.....t.....", dv:.4, lead:{type:"triangle", vib:true, v:0.24}, bassV:0.18, harp:6},
+  pzSamba:{bpm:112, mel:[
+    [72,1],[74,1],[76,2],[74,1],[72,1],[69,2], [72,1],[74,1],[76,1],[79,1],[77,2],[76,2], [74,1],[76,1],[77,2],[76,1],[74,1],[72,2], [71,2],[72,2],[74,4],
+    [72,1],[74,1],[76,2],[79,1],[77,1],[76,2], [77,1],[79,1],[81,2],[79,1],[77,1],[76,2], [74,1],[72,1],[71,2],[74,2],[72,2], [72,6],[0,2]],
+    bass:[[48,3],[55,3],[48,2],[45,3],[52,3],[45,2],[50,3],[57,3],[50,2],[43,3],[50,3],[43,2]],
+    drum:"K..tK.t.K..tK.tt", dv:.5, lead:{type:"triangle", vib:false, v:0.24}, bassV:0.22},
+  pzReel:{bpm:132, mel:[
+    [74,1],[76,1],[78,1],[74,1],[81,1],[78,1],[76,1],[74,1], [73,1],[76,1],[81,1],[76,1],[73,1],[76,1],[78,1],[76,1],
+    [74,1],[78,1],[81,1],[83,1],[81,1],[78,1],[76,1],[74,1], [76,1],[73,1],[69,1],[73,1],[74,2],[0,2],
+    [81,1],[83,1],[85,1],[86,1],[85,1],[83,1],[81,1],[78,1], [79,1],[81,1],[83,1],[79,1],[78,1],[76,1],[74,1],[76,1],
+    [78,1],[76,1],[74,1],[73,1],[71,1],[73,1],[74,1],[76,1], [78,1],[76,1],[73,1],[69,1],[74,2],[0,2]],
+    bass:[[50,4],[50,4],[45,4],[45,4],[50,4],[50,4],[45,4],[50,4]],
+    drum:"K.t.K.t.", dv:.45, lead:{type:"triangle", vib:false, v:0.22}, bassV:0.2}
+};
 function musicSchedule(){
   const c=SND.ctx, T0=TRACKS[SND.track]; if(!c||!T0) return; const st=60/T0.bpm/2;   // seconds per eighth
   if(SND.duck){ SND.next=Math.max(SND.next,c.currentTime+0.1); return; }   // silenced (exam / read-aloud): schedule nothing
@@ -9200,12 +9307,13 @@ function musicSchedule(){
   while(SND.next<c.currentTime+0.25){
     const t=SND.next, i=SND.step%melLen, n=melAt[i];
     if(n&&n[0]) tone(SND.mus, t, hz(n[0]), n[1]*st*0.95, {type:T0.lead.type, vib:T0.lead.vib, v:T0.lead.v, a:0.012});
-    if(n&&n[0]&&SND.track==="town"&&i%6===0) tone(SND.mus, t, hz(n[0]-12), st*2.5, {type:"sine", v:0.08, r:st*2.4});   // harp-like doubling
+    if(n&&n[0]&&T0.harp&&i%T0.harp===0) tone(SND.mus, t, hz(n[0]-12), st*2.5, {type:"sine", v:0.08, r:st*2.4});   // harp-like doubling
     const b=bassAt[SND.step%bassLen]; if(b) tone(SND.mus, t, hz(b[0]), b[1]*st*0.9, {type:"sine", v:T0.bassV, a:0.01, r:b[1]*st*0.8});
     const d=dr[SND.step%dr.length];
-    if(d==="K") { tone(SND.mus, t, 120, 0.18, {type:"sine", to:45, v:0.5, a:0.002, r:0.17}); }
-    else if(d==="k") { tone(SND.mus, t, 110, 0.12, {type:"sine", to:50, v:0.3, a:0.002, r:0.11}); }
-    else if(d==="t") noise(SND.mus, t, 0.05, {f:3500, ft:"highpass", v:0.12});
+    const dv=T0.dv||1;
+    if(d==="K") { tone(SND.mus, t, 120, 0.18, {type:"sine", to:45, v:0.5*dv, a:0.002, r:0.17}); }
+    else if(d==="k") { tone(SND.mus, t, 110, 0.12, {type:"sine", to:50, v:0.3*dv, a:0.002, r:0.11}); }
+    else if(d==="t") noise(SND.mus, t, 0.05, {f:3500, ft:"highpass", v:0.12*dv});
     SND.next+=st; SND.step++;
   } }
 function musicPlay(name){
@@ -9216,7 +9324,7 @@ function musicPlay(name){
   SND.track=name; SND.step=0; SND.next=SND.ctx.currentTime+0.1;
   const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(0.0001,now); g.exponentialRampToValueAtTime(musicLevel(), now+1.2);
   SND.timer=setInterval(musicSchedule, 80); musicSchedule(); }
-function musicForView(){ musicPlay(S.view==="battle"?"battle":"town"); musicDuck(!!(READ.on&&!READ.paused)||!!(window.LS&&(LS.playing||LS.wait))||examOn()); }
+function musicForView(){ musicPlay(S.view==="battle"?"battle":(plzTrack()||"town")); musicDuck(!!(READ.on&&!READ.paused)||!!(window.LS&&(LS.playing||LS.wait))||examOn()||plzRadioOn()); }
 const musicLevel=()=>SND.duck?0.0001:(SND.track==="battle"?0.14:0.16);
 function musicDuck(on){ if(SND.duck===on) return; SND.duck=on; if(!SND.ctx||!SND.track) return;
   const g=SND.mus.gain, now=SND.ctx.currentTime; g.cancelScheduledValues(now); g.setValueAtTime(Math.max(g.value,0.0001),now); g.exponentialRampToValueAtTime(musicLevel(), now+(on?0.35:1.5)); if(on) g.setValueAtTime(0, now+0.4); }
@@ -9374,11 +9482,25 @@ const PLZ_U=2.56, PLZ_GEO={
   fountain:{w:[{r:[0,135,600,312]},{r:[182,0,420,450]}], s:[{e:[300,224,56,38]},{e:[300,66,70,16]}], sp:[300,385]},
   lawn:{w:[{e:[300,238,262,195]},{e:[505,365,62,30]}], s:[], sp:[300,380]}};
 const PLZ_PODIUM=[{x:768,y:157,m:"🥇"},{x:667,y:181,m:"🥈"},{x:869,y:191,m:"🥉"}];   // fountain area only, top of the path
+// four podiums in the fountain garden (CheChe 2026-11-24): power at the top of the path, IELTS west, TOEIC east, reading south.
+// x,y = top-left of the podium picture (384x176); each spot stands where PLZ_PODIUM stands on the first one
+const PLZ_PODS=[{k:"power",ic:"⚔️",x:576,y:136},{k:"ielts",ic:"🎓",x:24,y:340},{k:"toeic",ic:"💼",x:1128,y:340},{k:"read",ic:"📖",x:576,y:890}];
+const plzPodAt=(pd,i)=>({x:pd.x+PLZ_PODIUM[i].x-576, y:pd.y+PLZ_PODIUM[i].y-136});
+let PLZ_TOPS={at:0, busy:false};
+// this month's top 3 for IELTS / TOEIC / reading (the same lists as the ranking page); looks come from each player's leaderboard doc
+async function plzTopsLoad(){ if(!CLOUD.fb||PLZ_TOPS.busy||Date.now()-PLZ_TOPS.at<10*60e3) return; PLZ_TOPS.busy=true; const {fsM,db}=CLOUD.fb, mk=monthKey(), out={at:Date.now(), busy:false};
+  const q=async(k,col,fld)=>{ try{ const sn=await fsM.getDocs(fsM.query(fsM.collection(db,...col), fsM.orderBy(fld,"desc"), fsM.limit(3))); const r=[]; sn.forEach(d=>r.push({id:d.id,...safeDoc(d.data())})); out[k]=r; }catch(e){ out[k]=[]; } };
+  await Promise.all([q("ielts",["ieltsMonths",mk,"scores"],"band"), q("toeic",["toeicMonths",mk,"scores"],"score"), q("read",["readMonths",mk,"u"],"n")]);
+  const need=[...new Set(["ielts","toeic","read"].flatMap(k=>out[k].map(r=>r.id)))].filter(id=>!PLZ_TOPS.lb||!PLZ_TOPS.lb[id]), lb={...(PLZ_TOPS.lb||{})};
+  await Promise.all(need.map(async id=>{ try{ const d=await fsM.getDoc(fsM.doc(db,"leaderboard",id)); if(d.exists()) lb[id]=safeDoc(d.data()); }catch(e){} }));
+  out.lb=lb; for(const k of ["ielts","toeic","read"]) out[k]=out[k].map(r=>{ const L=lb[r.id]||{}; const look=typeof L.look==="string"?L.look:LOOKS[r.id];
+      return look?{id:r.id, name:String(r.name||L.name||"?").slice(0,16), flag:r.flag||L.flag||"", look, lv:L.lv|0, power:L.power|0, conq:L.conq|0, pv:k==="ielts"?fmtBand(r.band):k==="toeic"?String(r.score|0):T("plzPodReadN",{n:r.n|0})}:null; }).filter(Boolean);
+  PLZ_TOPS=out; if(ROOM&&ROOM.zone==="fountain") plzRebuild(); }
 const PLZ_ZONES=[{k:"fountain",ic:"⛲",mx:50,my:50},{k:"gate",ic:"🏛️",mx:50,my:85},{k:"pond",ic:"🦆",mx:16,my:58},{k:"band",ic:"🎵",mx:50,my:13},{k:"lawn",ic:"🧺",mx:82,my:50}];   // areas of the park (St Stephen's Green style); each runs its own channels of PLZ_CAP
 // walking off an edge takes you to the next area (St Stephen's Green layout: band north, gate south, pond west, lawn east of the fountain).
 // d = side, a0..a1 = the path's opening along that side (world px, from the walk masks), e = the farthest walkable spot toward that side,
 // in = how far inside the next area you appear (the gate's arch needs more room), sg = where its sign stands if not at the middle
-const PLZ_EXITS={fountain:[{d:"n",a0:440,a1:1092,e:8,to:"band",sg:[530,118]},{d:"s",a0:440,a1:1092,e:1144,to:"gate"},{d:"w",a0:328,a1:808,e:8,to:"pond"},{d:"e",a0:328,a1:808,e:1528,to:"lawn"}],
+const PLZ_EXITS={fountain:[{d:"n",a0:440,a1:1092,e:8,to:"band",sg:[530,118]},{d:"s",a0:440,a1:1092,e:1144,to:"gate"},{d:"w",a0:328,a1:808,e:8,to:"pond",sg:[158,700]},{d:"e",a0:328,a1:808,e:1528,to:"lawn",sg:[1378,700]}],
   band:[{d:"s",a0:712,a1:824,e:1144,to:"fountain"}], gate:[{d:"n",a0:716,a1:816,e:208,to:"fountain",in:170}], pond:[{d:"e",a0:740,a1:780,e:1532,to:"fountain"}], lawn:[{d:"w",a0:700,a1:932,e:8,to:"fountain"}]};
 const PLZ_OPP={n:"s",s:"n",w:"e",e:"w"};
 const PLZ_EMO=["👋","😄","🔥","📚","👍","☕"];
@@ -9461,12 +9583,12 @@ function plzSpot(){ const v=plzView();
 function plzGround(cv,zone){ const D=Math.min(1.5,devicePixelRatio||1), W=PLZ_W, H=PLZ_H; cv.width=W*D; cv.height=H*D; cv.style.width=W+"px"; cv.style.height=H+"px";
   const c=cv.getContext("2d"); c.scale(D,D); c.fillStyle="#8cc46e"; c.fillRect(0,0,W,H);
   // podium: a painted three-step stand (assets/art/plaza/podium.webp, 384x176 world px at x576 y136), drawn into the ground
-  const pod=zone==="fountain"?new Image():null; if(pod) pod.src="assets/art/plaza/podium.webp"; const podium=()=>{ if(!pod) return; const d=()=>c.drawImage(pod,576,136,384,176); if(pod.complete&&pod.naturalWidth) d(); else pod.onload=d; };
+  const pod=zone==="fountain"?new Image():null; if(pod) pod.src="assets/art/plaza/podium.webp"; const podium=()=>{ if(!pod) return; const d=()=>PLZ_PODS.forEach(pd=>c.drawImage(pod,pd.x,pd.y,384,176)); if(pod.complete&&pod.naturalWidth) d(); else pod.onload=d; };
   const im=new Image(); im.decoding="async"; im.onload=()=>{ c.drawImage(im,0,0,W,H); podium(); if(zone==="lawn") plzGrassDraw(c); }; im.onerror=()=>{ podium(); if(zone==="lawn") plzGrassDraw(c); }; im.src=`assets/art/plaza/${zone}.webp`; }
 // one person on the map; kind: me | live | off | pod
 function plzEnt(p,kind){ const R=ROOM, e=document.createElement("div"); e.className="pz-ent pz-"+kind+(R.star&&R.star.id===p.id?" pz-star":"");
   const ex=lookExtra(p.id), tier=p.s!=null?p.s:ex.t;
-  e.innerHTML=`<div class="pz-sh"></div><div class="pz-bob"><div class="pz-fig">${lookArt(p.look,"pz-art")}</div></div><div class="pz-tuft"></div><div class="pz-tag">${kind==="pod"?(PLZ_PODIUM[p.rank]||{}).m+" ":""}${tier?`<span class="pz-tt">${sbArt(tier,14,false)}</span>`:""}${flagOf(p.flag)?flagOf(p.flag)+" ":""}${esc(kind==="me"?T("plzMe"):p.name||"?")}${kind==="off"?` <small>${T("plzOff")}</small>`:""}</div><div class="pz-bub"></div>`;
+  e.innerHTML=`<div class="pz-sh"></div><div class="pz-bob"><div class="pz-fig">${lookArt(p.look,"pz-art")}</div></div><div class="pz-tuft"></div><div class="pz-tag">${kind==="pod"?(PLZ_PODIUM[p.rank]||{}).m+" ":""}${tier?`<span class="pz-tt">${sbArt(tier,14,false)}</span>`:""}${flagOf(p.flag)?flagOf(p.flag)+" ":""}${esc(kind==="me"?T("plzMe"):p.name||"?")}${kind==="off"?` <small>${T("plzOff")}</small>`:""}${kind==="pod"&&p.pv?` <small class="pz-pv">${esc(p.pv)}</small>`:""}</div><div class="pz-bub"></div>`;
   R.world.appendChild(e); const [x,y]=p.x!=null?[p.x,p.y]:plzSpot();
   const o={...p, kind, el:e, bob:e.querySelector(".pz-bob"), fig:e.querySelector(".pz-fig"), bub:e.querySelector(".pz-bub"), x, y, tx:x, ty:y, vx:0, vy:0, face:p.d||1, phase:Math.random()*6, wait:Math.random()*2, sp:plzRnd(45,75), bubT:0, said:0};
   e.addEventListener("click",ev=>{ if(R.dragged) return; ev.stopPropagation(); plzCard(o); });
@@ -9475,7 +9597,7 @@ function plzSay(o,t){ o.bub.textContent=t; o.bub.classList.add("on"); o.bubT=2.6
 function plzMeRow(){ const g=game(), e=lbEntry(); return {id:CLOUD.user.uid, name:g.nick||"", look:myLook(), flag:e.flag, s:streakTier(), lv:e.lv, power:e.power, conq:e.conq}; }
 function plzRebuild(){ const R=ROOM; if(!R) return; const keep=new Set([R.me.id]);
   // podium
-  (R.zone==="fountain"?R.top||[]:[]).slice(0,3).forEach((p,i)=>{ const k="pod:"+p.id; keep.add(k); if(!R.ents.has(k)){ const o=plzEnt({...p,rank:i,x:PLZ_PODIUM[i].x,y:PLZ_PODIUM[i].y,d:i===1?1:i===2?-1:1},"pod"); R.ents.set(k,o); } });
+  if(R.zone==="fountain") for(const pd of PLZ_PODS) (pd.k==="power"?R.top||[]:PLZ_TOPS[pd.k]||[]).slice(0,3).forEach((p,i)=>{ const k="pod:"+pd.k+":"+p.id; keep.add(k); if(!R.ents.has(k)){ const at=plzPodAt(pd,i), o=plzEnt({...p,rank:i,x:at.x,y:at.y,d:i===1?1:i===2?-1:1},"pod"); R.ents.set(k,o); } });
   // live players
   for(const [uid,v] of R.live){ keep.add(uid); if(!R.ents.has(uid)) R.ents.set(uid,plzEnt({id:uid,name:v.n,look:v.l,flag:v.f,s:v.s,x:v.x,y:v.y,d:v.d},"live")); }
   // offline fill
@@ -9496,6 +9618,8 @@ async function plazaOpen(zone,at){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD
   const stage=box.querySelector(".pz-stage"), world=box.querySelector(".pz-world"); world.style.width=PLZ_W+"px"; world.style.height=PLZ_H+"px"; plzGround(box.querySelector(".pz-ground"),zone);
   ROOM={zone, box, stage, world, ents:new Map(), live:new Map(), rows:(PLAZA.rows||[]), top:PLAZA.top||[], star:PLAZA.star||null, keys:{}, J:null, last:performance.now(), cam:null, sendAt:0, sent:"", db:null, ch:0, want:(at&&at.ch)||0, pick:!!(at&&at.pick), act:Date.now()};
   for(const sp of PLZ_SPOTS[zone]||[]){ const e=document.createElement("div"); e.className="pz-spot"; e.style.cssText=`left:${sp.x}px;top:${sp.y-sp.h}px;z-index:${sp.y+400}`; e.innerHTML=`<b>${sp.ic}</b><span>${T("plzSpot_"+sp.k)}</span>`; world.appendChild(e); }
+  if(zone==="gate"){ plzNbBuild(); plzNoticeLoad(); } if(zone==="band") plzNotesBuild();
+  if(zone==="fountain"){ for(const pd of PLZ_PODS){ const e=document.createElement("div"); e.className="pz-podl"; e.style.cssText=`left:${pd.x+192}px;top:${pd.y-64}px;z-index:${pd.y+400}`; e.textContent=`${pd.ic} ${T("plzPod_"+pd.k)}`; world.appendChild(e); } setTimeout(plzTopsLoad,0); }
   for(const q of PLZ_OCC[zone]||[]){
     const im=document.createElement("img"); im.className="pz-occ"; im.alt=""; im.src=`assets/art/plaza/${q.f}.webp`; im.style.cssText=`left:${q.x}px;top:${q.y}px;width:${q.w}px;height:${q.h}px;z-index:${q.z}`; world.appendChild(im); (ROOM.occ=ROOM.occ||[]).push({el:im,q}); }
   plzMaskLoad(zone).then(()=>{ const R=ROOM; if(!R||R.zone!==zone) return; for(const o of R.ents.values()) if(o.kind!=="live"&&o.kind!=="pod"&&plzBlocked(o.x,o.y)){ [o.x,o.y]=plzFree(o.x,o.y); o.tx=o.x; o.ty=o.y; } });
@@ -9507,7 +9631,7 @@ async function plazaOpen(zone,at){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD
   plazaLoad(true).then(()=>{ if(!ROOM) return; ROOM.rows=PLAZA.rows||[]; ROOM.top=PLAZA.top||[]; ROOM.star=PLAZA.star||null; plzRebuild(); });
   plzJoin(); }
 function plazaClose(){ const R=ROOM; if(!R) return; ROOM=null; cancelAnimationFrame(R.raf); clearInterval(R.hb); plzRadioStop(R); plzBackPill(false); if(R.away&&S.battle&&S.battle.plz) S.battle.plz=false; removeEventListener("keydown",R.kd); removeEventListener("keyup",R.ku);
-  try{ if(R.unsub) R.unsub.forEach(f=>f()); if(R.myRef) R.dbM.remove(R.myRef); }catch(e){} R.box.remove(); document.body.classList.remove("pz-open"); }
+  try{ if(R.unsub) R.unsub.forEach(f=>f()); if(R.myRef) R.dbM.remove(R.myRef); }catch(e){} R.box.remove(); document.body.classList.remove("pz-open"); if(SND.ctx) musicForView(); }
 // live part: Realtime Database (loaded only when the room opens)
 async function plzJoin(){ const R=ROOM; try{
     const dbM=PLZ_DBM||await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-database.js`); if(ROOM!==R) return;
@@ -9520,7 +9644,7 @@ async function plzJoin(){ const R=ROOM; try{
     await dbM.onDisconnect(R.myRef).remove(); await plzSend(true);
     const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
         const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
-        const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; if(v.b[0]==="@") plzDo(o,v.b.slice(1)); else plzSay(o,v.b); } } };
+        if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); if(v.g||v.gv) plzGrabSeen(v,me); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; if(v.b[0]==="@") plzDo(o,v.b.slice(1)); else plzSay(o,v.b); } } };
     R.unsub=[dbM.onChildAdded(room,up), dbM.onChildChanged(room,up), dbM.onChildRemoved(room,sn=>{ if(!ROOM) return; R.live.delete(sn.key); const o=R.ents.get(sn.key); if(o&&o.kind==="live"){ o.el.remove(); if(o.edge) o.edge.remove(); R.ents.delete(sn.key); } plzRebuild(); })];
     R.hb=setInterval(()=>{ if(ROOM!==R) return clearInterval(R.hb); if(R.away&&Date.now()-R.away.at>15*60e3) return plazaClose();
       if(!R.away&&Date.now()-R.act>PLZ_IDLE){ plazaClose(); toast(T("plzIdleOut")); return; }   // standing still 10 minutes frees your spot in the line
@@ -9529,7 +9653,7 @@ async function plzJoin(){ const R=ROOM; try{
   }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
 async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
   const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
-  const v={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv, ts:R.dbM.serverTimestamp(), ...(extra||{})};
+  const v={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv, h:m.h||"", hw:(m.hw||"").slice(0,18), ...(m.pt?{pn:m.pn|0, pt:m.pt}:{}), ...(m.g&&t-m.g.t<8000?{g:m.g}:{}), ...(m.gv&&t-m.gv.t<8000?{gv:m.gv}:{}), ts:R.dbM.serverTimestamp(), ...(extra||{})};
   try{ await R.dbM.set(R.myRef,v); }catch(e){} }
 function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"), knob=joy.firstElementChild;
   const rest=()=>{ joy.classList.add("rest"); joy.style.left=R.box.clientWidth/2+"px"; joy.style.top=(R.box.clientHeight-Math.max(96,R.box.clientHeight*.13))+"px"; }; R.joyRest=rest; rest();
@@ -9557,6 +9681,11 @@ function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"
     if(a==="encgo") return plzFight();
     if(a==="encrun") return plzEncEnd();
     if(a==="boardx"||a==="boardgo"||a==="boardlg"){ const el=R.box.querySelector(".pz-board"); if(el) el.remove(); if(a==="boardgo"){ plzAway("📖"); S.tab="today"; S.view="today"; render(); window.scrollTo(0,0); } if(a==="boardlg") loginPop(true); return; }
+    if(a==="grab") return plzGrabTap();
+    if(a==="pianox") return plzPianoClose();
+    if(a==="pianore") return plzPianoAgain();
+    if(a==="wput") return plzWordPut();
+    if(a==="wsay"){ const w=(R.me.hw||"").toLowerCase().replace(/[^a-z'-]/g,""); if(w) speak(w); return; }
     if(a==="radio"){ return plzRadio(); }
     if(a==="rbook"){ return plzRareBook(); }
     if(a==="radiox"){ return plzRadioStop(); } }); }
@@ -9564,7 +9693,7 @@ function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"
 function plzDo(o,k){ const a=PLZ_ACTS.find(x=>x.k===k); if(!a||!o) return; o.act=k; o.actT=a.t; o.actD=a.t; }
 // 互動: the nearest person within reach turns to you, you wave, and their card opens
 function plzNear(){ const R=ROOM, m=R.me; let best=null, bd=150; for(const o of R.ents.values()){ if(o===m) continue; const d=Math.hypot(o.x-m.x,(o.y-m.y)*1.3); if(d<bd){ bd=d; best=o; } } return best; }
-function plzInteract(){ const R=ROOM; if(R.enc) return; const sp=plzSpotNear(); if(sp&&(!R.nearO||Math.hypot(R.nearO.x-R.me.x,R.nearO.y-R.me.y)>90)) return plzSpotGo(sp);
+function plzInteract(){ const R=ROOM; if(R.enc||R.piano) return; const c=plzCtx(); if(c) return plzCtxGo(c); const sp=plzSpotNear(); if(sp&&(!R.nearO||Math.hypot(R.nearO.x-R.me.x,R.nearO.y-R.me.y)>90)) return plzSpotGo(sp);
   const o=plzNear(); if(!o) return toast(T("plzNone")); const m=R.me;
   m.face=o.x<m.x?-1:1; if(o.kind!=="live") o.face=m.x<o.x?-1:1; plzSay(m,"👋"); plzSend(false,{b:"👋", bt:Date.now()}); if(o.kind==="off") setTimeout(()=>{ if(ROOM===R) plzSay(o,"😊"); },500); plzCard(o); }
 // edges: near an opening, load the next area in the background; past the line while still pushing toward it, switch area
@@ -9621,10 +9750,12 @@ function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R
       const sx=(o.x-cx)*z+vw/2, sy=(o.y-50-cy)*z+vh/2, ex=Math.max(46,Math.min(vw-46,sx)), ey=Math.max(90,Math.min(vh-40,sy));
       o.edge.style.transform=`translate(${ex.toFixed(0)}px,${ey.toFixed(0)}px)`; o.edge.firstChild.style.transform=`rotate(${Math.atan2(sy-ey,sx-ex).toFixed(2)}rad)`; o.edge.hidden=false; }
     else if(o.edge) o.edge.hidden=true; }
+  if(R.zone==="gate") plzGrabUi(cx,cy,z,vw,vh,now);
   for(const o of R.occ||[]){ const q=o.q, hid=m.y<plzOccZ(q,m.x)&&m.x>q.x-20&&m.x<q.x+q.w+20&&m.y-80<q.y+q.h&&m.y>q.y; if(hid!==o.hid){ o.hid=hid; o.el.classList.toggle("pz-see",hid); } }
-  const nr=plzNear(), spn=plzSpotNear(), useSp=spn&&(!nr||Math.hypot(nr.x-m.x,nr.y-m.y)>90);
-  if(nr!==R.nearO||spn!==R.nearS){ if(R.nearO) R.nearO.el.classList.remove("pz-near"); if(nr) nr.el.classList.add("pz-near"); R.nearO=nr; R.nearS=spn;
-    const ib=R.box.querySelector(".pz-intb"); ib.classList.toggle("on",!!(nr||spn)); ib.innerHTML=useSp?`<b>${spn.ic}</b><span>${T("plzSpot_"+spn.k)}</span>`:`<b>👋</b><span>${T("plzInt")}</span>`; }
+  if(R.nb) plzNbSync(); if(R.notes){ if((m.h||"")[0]==="n"&&Math.hypot(m.x-PLZ_STAGE.x,(m.y-PLZ_STAGE.y)*1.3)<PLZ_STAGE.r) plzNotePlace(); plzNotesSync(); }
+  const nr=plzNear(), cx0=plzCtx(), spn=cx0?null:plzSpotNear(), far=!nr||Math.hypot(nr.x-m.x,nr.y-m.y)>90, useC=!!cx0, useSp=spn&&far,   /* at the board or a note, the button always lifts / picks up (tap a person to see them) */ ck=useC?cx0.k:"";
+  if(nr!==R.nearO||spn!==R.nearS||ck!==R.nearC){ if(R.nearO) R.nearO.el.classList.remove("pz-near"); if(nr) nr.el.classList.add("pz-near"); R.nearO=nr; R.nearS=spn; R.nearC=ck;
+    const ib=R.box.querySelector(".pz-intb"); ib.classList.toggle("on",!!(nr||spn||cx0)); ib.innerHTML=useC?`<b>${cx0.ic}</b><span>${cx0.t}</span>`:useSp?`<b>${spn.ic}</b><span>${T("plzSpot_"+spn.k)}</span>`:`<b>👋</b><span>${T("plzInt")}</span>`; }
   if(now-(R.miniAt||0)>200){ R.miniAt=now; plzMini(V); }
   plzFx();
   R.world.style.transform=`scale(${z}) translate(${(vw/2/z-cx).toFixed(1)}px,${(vh/2/z-cy).toFixed(1)}px)`;
@@ -9680,7 +9811,7 @@ const PLZ_SAY=[["Hi there!","嗨！","Hi!","नमस्ते!","¡Hola!","や�
   ["Grand!","沒問題、很好！（愛爾蘭口語）","Fine / great! (Irish)","बढ़िया! (आयरिश)","¡Genial! (irlandés)","いいね！（アイルランド英語）","좋아! (아일랜드 말)"],["See you later!","待會見！","Bye for now!","फिर मिलेंगे!","¡Hasta luego!","またね！","나중에 봐!"]];
 const plzSayMean=x=>x[{zh:1,en:2,hi:3,es:4,ja:5,ko:6}[LANG]||1];
 // landmarks: walk up to them and the 互動 button turns into the landmark (h = how high the marker floats above x,y)
-const PLZ_SPOTS={fountain:[{k:"well",ic:"🌠",x:768,y:560,h:150,r:230}], band:[{k:"radio",ic:"📻",x:768,y:540,h:200,r:300}], gate:[{k:"board",ic:"📰",x:768,y:380,h:250,r:190}]};
+const PLZ_SPOTS={fountain:[{k:"well",ic:"🌠",x:768,y:560,h:150,r:230}]};   /* the bandstand: no news radio any more (CheChe 2026-11-24), notes + 🎹 instead */   // the gate's notice board is a real board now (plzNbBuild)
 function plzSpotNear(){ const R=ROOM; if(!R||!R.me) return null; let best=null, bd=1e9; for(const sp of PLZ_SPOTS[R.zone]||[]){ const d=Math.hypot(sp.x-R.me.x,(sp.y-R.me.y)*1.2); if(d<sp.r&&d<bd){ bd=d; best=sp; } } return best; }
 function plzTerr(x,y){ const R=ROOM; if(!R) return ""; if(R.zone==="lawn") return PLZ_GRASS.some(([cx,cy,rx,ry])=>{ const dx=(x-cx)/rx, dy=(y-cy)/ry; return dx*dx+dy*dy<1; })?"grass":"";
   if(R.zone==="pond"){ const M=PLZ_MASK.pond; if(!M||!M.sw) return ""; const i=Math.floor(x/PLZ_MC), j=Math.floor(y/PLZ_MC); return i>=0&&j>=0&&i<M.w&&j<M.h&&M.sw[j*M.w+i]===2?"water":""; } return ""; }
@@ -9738,14 +9869,14 @@ function plzEncounter(terr){ const R=ROOM; if(!R||R.enc) return; let m=plzPickMo
 function plzEncEnd(){ const R=ROOM; if(!R) return; R.enc=null; R.encCool=performance.now()/1000+PLZ_ENC.cool; R.box.classList.remove("pz-encfx"); const el=R.box.querySelector(".pz-enc"); if(el) el.remove(); }
 // leave the room for a moment (a fight, the wishing well, today's tasks): it stays connected, hidden, and a pill brings you back
 function plzAway(mark, noPill){ const R=ROOM; if(!R) return; plzRadioStop(R); R.away={at:Date.now(), prev:{tab:S.tab, view:S.view, advTab:S.advTab}}; cancelAnimationFrame(R.raf); R.box.style.display="none"; document.body.classList.remove("pz-open");
-  R.keys={}; R.J=null; if(mark){ plzSay(R.me,mark); plzSend(false,{b:mark, bt:Date.now()}); } if(!noPill) plzBackPill(true); }
+  R.keys={}; R.J=null; if(SND.ctx) musicForView(); if(mark){ plzSay(R.me,mark); plzSend(false,{b:mark, bt:Date.now()}); } if(!noPill) plzBackPill(true); }
 function plzBackPill(on){ let el=document.getElementById("pzBack"); if(!on){ if(el) el.remove(); return; } if(el) return;
   el=document.createElement("button"); el.id="pzBack"; el.dataset.act="plzback"; el.innerHTML=`🏞️ ${T("plzBack2")}`; document.body.appendChild(el); }
 function plzReturn(){ const R=ROOM; plzBackPill(false); if(!R||!R.away){ if(S.battle&&S.battle.plz){ S.battle=null; S.view=S.tab||"today"; render(); } return; }
   const B=S.battle, won=B&&B.plz&&B.res&&B.res.win&&B.stage==="end"; if(B&&B.plz){ clearInterval(S.btimer); S.battle=null; }
   const p=R.away.prev; R.away=null; R.act=Date.now(); S.tab=p.tab; S.view=p.view==="battle"?p.tab:p.view; S.advTab=p.advTab; render();
   R.box.style.display=""; document.body.classList.add("pz-open"); R.last=performance.now(); R.encCool=performance.now()/1000+PLZ_ENC.cool; R.encD=0; R.raf=requestAnimationFrame(plzStep);
-  if(won){ plzSay(R.me,"🏆"); plzSend(false,{b:"🏆", bt:Date.now()}); } else plzSend(true); }
+  if(won){ plzSay(R.me,"🏆"); plzSend(false,{b:"🏆", bt:Date.now()}); } else plzSend(true); if(SND.ctx) musicForView(); }
 function plzFight(){ const R=ROOM, E=R&&R.enc; if(!E) return; const free=plzFreeLeft()>0; plzEncEnd(); plzAway("⚔️",true); startBattle(E.m.id,{plz:true, free}); if(!S.battle||!S.battle.plz) plzReturn(); }
 // landmarks
 function plzSpotGo(sp){ const R=ROOM; if(!R) return;
@@ -9765,13 +9896,230 @@ function plzBoard(){ const R=ROOM; if(!R) return; const old=R.box.querySelector(
 // 音樂台: today's news recording plays over the park while you stay in the room
 function plzNewsRec(){ const art=mainArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDIO.sha) return null; const it=(NEWS_AUDIO.items||{})[art.id+"|"+(levelOf(art)||"base")]||(NEWS_AUDIO.items||{})[art.id+"|base"];
   return it?{art, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
-function plzRadio(){ const R=ROOM; if(!R) return; if(R.radio){ const a=R.radio.a; if(a.paused) a.play().catch(()=>{}); else a.pause(); plzRadioBar(); return; }
+function plzRadio(){ const R=ROOM; if(!R) return; if(R.radio){ const a=R.radio.a; if(a.paused) a.play().then(()=>{ if(SND.ctx) musicForView(); }).catch(()=>{}); else a.pause(); if(SND.ctx) musicForView(); plzRadioBar(); return; }
   const rec=plzNewsRec(); if(!rec) return toast(T("plzNoRec"));
-  const a=new Audio(rec.url); a.onended=()=>plzRadioStop(); R.radio={a, art:rec.art}; a.play().catch(()=>{ toast(T("plzNoRec")); plzRadioStop(); }); plzSay(R.me,"🎧"); plzSend(false,{b:"🎧", bt:Date.now()}); plzRadioBar(); }
+  const a=new Audio(rec.url); a.onended=()=>plzRadioStop(); R.radio={a, art:rec.art}; a.play().then(()=>{ if(SND.ctx) musicForView(); }).catch(()=>{ toast(T("plzNoRec")); plzRadioStop(); }); plzSay(R.me,"🎧"); plzSend(false,{b:"🎧", bt:Date.now()}); plzRadioBar(); }
 function plzRadioBar(){ const R=ROOM; if(!R) return; let el=R.box.querySelector(".pz-radio"); if(!R.radio){ if(el) el.remove(); return; }
   if(!el){ el=document.createElement("div"); el.className="pz-radio"; R.box.appendChild(el); }
   el.innerHTML=`<span>📻</span><span class="pz-radiot"><small>${T("plzNowPlay")}</small><b>${esc(R.radio.art.title)}</b></span><button data-pz="radio">${R.radio.a.paused?"▶":"⏸"}</button><button data-pz="radiox">✕</button>`; }
-function plzRadioStop(R0){ const R=R0||ROOM; if(!R||!R.radio) return; try{ R.radio.a.pause(); }catch(e){} R.radio=null; const el=R.box&&R.box.querySelector(".pz-radio"); if(el) el.remove(); }
+function plzRadioStop(R0){ const R=R0||ROOM; if(!R||!R.radio) return; try{ R.radio.a.pause(); }catch(e){} R.radio=null; const el=R.box&&R.box.querySelector(".pz-radio"); if(el) el.remove(); if(SND.ctx) musicForView(); }
+/* ===== 大佈告欄 & 音符點歌 (CheChe 2026-11-23) =====
+   Gate: a big notice board stands in the middle with the announcement written on it as word cards. Walk up to it and lift a
+   word: it rides above your head (everyone in the room sees it), you hear it and see what it means; put it back on the board,
+   or lift another. Bandstand: five music notes lie on the ground. Pick one up, carry it to the steps of the bandstand and
+   the park's music changes for everyone in that room. What you hold and the last note you placed ride in your presence row
+   (h = "w3" / "n2", hw = the word, pn / pt = note placed and when), so nothing else is written to the database.
+   The announcement is config/plaza {notice} in Firestore (developer panel), or PLZ_NOTICE_DEF. */
+const PLZ_NB={x0:280, x1:1256, y0:500, top:96, row:92, gap:46, pad:50};   // the rug: left, right, top edge (world px); top = first row of words below the edge, row = row spacing, gap = space between words
+const PLZ_NOTICE_DEF="Welcome to BinBin Park! Lift a word to learn it. Carry a music note to the bandstand and change the song for everyone.";
+let PLZ_NOTICE={t:null, at:0};
+const plzNoticeText=()=>String(PLZ_NOTICE.t||PLZ_NOTICE_DEF).replace(/\s+/g," ").trim().slice(0,240);
+// the words on the board: split on spaces (a sentence without spaces, e.g. Chinese, is cut into 2-letter pieces), at most 32
+function plzNoticeWords(){ const t=plzNoticeText(); let w=t.split(" ").filter(Boolean); if(w.length<3&&t.length>8) w=t.replace(/ /g,"").match(/.{1,2}/gu)||[t]; return w.slice(0,32).map(x=>x.slice(0,18)); }
+async function plzNoticeLoad(){ if(!CLOUD.fb||Date.now()-PLZ_NOTICE.at<5*60e3) return; PLZ_NOTICE.at=Date.now();
+  try{ const {fsM,db}=CLOUD.fb, sn=await fsM.getDoc(fsM.doc(db,"config","plaza")); const t=sn&&sn.exists()?String((sn.data()||{}).notice||"").trim():"";
+    if((t||null)!==PLZ_NOTICE.t){ PLZ_NOTICE.t=t||null; const R=ROOM; if(R&&R.zone==="gate"){ if(R.me) R.me.h=""; plzNbBuild(); } } }catch(e){} }
+async function plzNoticeSave(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin")); const el=document.getElementById("plzNoticeIn"); const t=((el&&el.value)||"").replace(/\s+/g," ").trim().slice(0,240);
+  const {fsM,db}=CLOUD.fb; try{ await fsM.setDoc(fsM.doc(db,"config","plaza"),{notice:t, at:Date.now()},{merge:true}); PLZ_NOTICE={t:t||null, at:Date.now()}; toast(T("dDone")); }
+  catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
+function plzNoticeDev(){ return `<div class="dev-plan"><b>📢 ${T("plzNbDevT")}</b><textarea id="plzNoticeIn" class="search" rows="3" maxlength="240" placeholder="${esc(PLZ_NOTICE_DEF)}">${esc(PLZ_NOTICE.t||"")}</textarea><button class="btn sm" data-act="plznotice">${T("plzNbDevSave")}</button><span class="muted sm-t">${T("plzNbDevNote")}</span></div>`; }
+// the board is a big rug lying on the paving; every word stands on it as a little card. Stand on a word (your feet on it) to lift it.
+function plzNbBuild(){ const R=ROOM; if(!R||R.zone!=="gate") return; if(R.nb){ R.nb.el.remove(); R.nb.cards.forEach(c=>c.remove()); }
+  const words=plzNoticeWords(), Q=PLZ_NB, cv=document.createElement("canvas").getContext("2d"); cv.font="800 26px system-ui,sans-serif";
+  const ws=words.map(w=>Math.ceil(cv.measureText(w).width)+28), maxW=Q.x1-Q.x0-Q.pad*2, rows=[[]]; let rw=0;
+  ws.forEach((w,i)=>{ if(rows[rows.length-1].length&&rw+w>maxW){ rows.push([]); rw=0; } rows[rows.length-1].push(i); rw+=w+Q.gap; });
+  const pos=[]; rows.forEach((r,ri)=>{ const tot=r.reduce((a,i)=>a+ws[i],0)+Q.gap*(r.length-1); let x=(Q.x0+Q.x1)/2-tot/2; const y=Q.y0+Q.top+ri*Q.row;
+    r.forEach(i=>{ pos[i]=[x+ws[i]/2, y, ws[i]]; x+=ws[i]+Q.gap; }); });
+  const H=Q.top+(rows.length-1)*Q.row+Q.pad; Q.y1=Q.y0+H;
+  const el=document.createElement("div"); el.className="pz-rug"; el.style.cssText=`left:${Q.x0}px;top:${Q.y0}px;width:${Q.x1-Q.x0}px;height:${H}px`;
+  el.innerHTML=`<div class="pz-rugh"><b>📢 ${T("plzNbT")}</b><button data-nb="news">📰 ${T("plzNbNews")}</button></div>`+pos.map(([x,y,w])=>`<i class="pz-rugs" style="left:${(x-w/2-Q.x0).toFixed(0)}px;top:${(y-Q.y0-14).toFixed(0)}px;width:${w}px"></i>`).join("");
+  R.world.appendChild(el);
+  const cards=words.map((w,i)=>{ const c=document.createElement("button"); c.className="pz-wc"; c.dataset.w=i; c.textContent=w; c.style.cssText=`left:${pos[i][0].toFixed(0)}px;top:${pos[i][1]}px;z-index:${Math.round(pos[i][1]/4)*4}`; R.world.appendChild(c); return c; });
+  R.nb={el, words, cards, tiles:cards, pos, taken:"", tg:-1, seeAt:0};
+  const tap=ev=>{ if(R.dragged) return; const b=ev.target.closest("[data-w],[data-nb]"); if(!b) return; ev.stopPropagation();
+    if(b.dataset.nb==="news") return plzBoard();
+    const i=+b.dataset.w; if(plzNbTarget(true)!==i) return toast(T("plzNbFar")); if(R.me.h==="w"+i) return plzWordPut(); plzWordLift(i); };
+  el.addEventListener("click",tap); cards.forEach(c=>c.addEventListener("click",tap)); }
+function plzNbPos(){ const N=ROOM&&ROOM.nb; return N?N.pos:null; }
+function plzNbReach(){ const R=ROOM, m=R&&R.me, Q=PLZ_NB; return !!(m&&R.nb&&R.zone==="gate"&&m.x>Q.x0-20&&m.x<Q.x1+20&&m.y>Q.y0&&m.y<(Q.y1||Q.y0)+40); }
+// which words someone is holding right now (so their card shows as an empty slot on the board)
+function plzTakenSet(kind){ const R=ROOM, s=new Set(); for(const o of R.ents.values()) if(o.kind==="me"||o.kind==="live"){ const h=o.h||""; if(h[0]===kind) s.add(+h.slice(1)); } return s; }
+// the word under your feet (any = also one somebody holds, for a tap on its slot)
+function plzNbTarget(any){ const R=ROOM, N=R&&R.nb; if(!N||!R.me||!plzNbReach()) return -1; const tk=any?new Set():plzTakenSet("w"), m=R.me; let best=-1, bd=1e9;
+  N.pos.forEach(([x,y,w],i)=>{ if(tk.has(i)) return; const dx=Math.abs(m.x-x), dy=m.y-y; if(dx<w/2+8&&dy>-30&&dy<28){ const d=dx+Math.abs(dy); if(d<bd){ bd=d; best=i; } } }); return best; }
+function plzWordLift(i){ const R=ROOM, N=R&&R.nb; if(!N||N.words[i]==null) return; if(plzTakenSet("w").has(i)&&R.me.h!=="w"+i) return toast(T("plzNbTaken"));
+  const w=N.words[i]; R.me.h="w"+i; R.me.hw=w; plzHoldSet(R.me); plzSend(true); sfx("tap");
+  const clean=w.toLowerCase().replace(/[^a-z'-]/g,"").replace(/^'+|'+$/g,""); if(clean&&/^[a-z]/.test(clean)) speak(clean);
+  plzWordCard(w,clean); plzNbSync(true); }
+function plzWordPut(){ const R=ROOM; if(!R||!R.me.h) return; R.me.h=""; R.me.hw=""; plzHoldSet(R.me); plzSend(true); const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzNbSync(true); plzNotesSync(true); }   // puts back a word or a note
+// the card at the bottom: the word you hold, what it means (BinBin dictionary), listen, put back
+async function plzWordCard(w,clean){ const R=ROOM; let el=R.box.querySelector(".pz-hcard"); if(!el){ el=document.createElement("div"); el.className="pz-hcard"; R.box.appendChild(el); }
+  const draw=mean=>{ if(ROOM!==R||R.me.hw!==w) return; el.innerHTML=`<span class="pz-hcw">🙌 <b>${esc(w)}</b>${clean?`<button data-pz="wsay" aria-label="🔊">🔊</button>`:""}</span>${mean?`<small>${esc(mean)}</small>`:clean?`<small class="muted">${T("plzNbLook")}</small>`:""}<button data-pz="wput">↩️ ${T("plzNbPut")}</button>`; };
+  draw(""); if(!clean) return; try{ await dxLoad(); const b=dxBase(clean), e=b&&dxEntry(b); const mean=e?(e[DX.lang]||e.zh||e.en||""):""; draw(mean?String(mean).split(/[;；]/)[0].slice(0,40):(LANG==="en"?"":T("plzNbNoMean"))); }catch(e){} }
+// the board's cards follow who holds what; the one under your feet glows; a card fades while someone stands on it or right behind it
+function plzNbSync(force){ const R=ROOM, N=R&&R.nb; if(!N) return; const tk=plzTakenSet("w"), key=[...tk].sort().join(","), tg=!R.me||(R.me.h||"")[0]==="w"?-1:plzNbTarget();
+  if(force||key!==N.taken){ N.taken=key; N.cards.forEach((t,i)=>t.classList.toggle("gone",tk.has(i))); }
+  if(force||tg!==N.tg){ if(N.cards[N.tg]) N.cards[N.tg].classList.remove("tg"); N.tg=tg; if(N.cards[tg]) N.cards[tg].classList.add("tg"); }
+  const now=performance.now(); if(!force&&now-N.seeAt<90) return; N.seeAt=now; const ppl=[...R.ents.values()];
+  N.pos.forEach(([x,y,w],i)=>{ const see=ppl.some(o=>Math.abs(o.x-x)<w/2+26&&o.y>y-100&&o.y<y+34); const c=N.cards[i]; if(see!==!!c.see){ c.see=see; c.classList.toggle("see",see); } }); }
+
+/* ---- 搶字 / 送字: no word on your head? walk up to someone holding one and a ✊ button appears on each side of them: tap fast to
+   take it. The closer you stand, the fewer taps (5 at arm's length, 8 at the edge of reach); every bit the holder walks while you
+   try adds more, and stopping lets your count slip back. Holding a word, walk up to someone with none and put it on their head.
+   The other player's phone gives up / takes the word when it sees g / gv {to, w, t} in your presence row. ---- */
+const PLZ_GRAB={reach:130, near:45, min:5, max:8, walk:70, extra:6, slip:1100};
+function plzGrabTarget(){ const R=ROOM, m=R.me; if(R.zone!=="gate"||(m.h||"")||R.enc) return null; let best=null, bd=PLZ_GRAB.reach;
+  for(const o of R.ents.values()){ if(o.kind!=="live"||(o.h||"")[0]!=="w") continue; const d=Math.hypot(o.x-m.x,(o.y-m.y)*1.2); if(d<bd){ bd=d; best=o; } } return best; }
+function plzGiveTarget(){ const R=ROOM, m=R.me; if(R.zone!=="gate"||(m.h||"")[0]!=="w") return null; let best=null, bd=110;
+  for(const o of R.ents.values()){ if(o.kind!=="live"||o.h) continue; const d=Math.hypot(o.x-m.x,(o.y-m.y)*1.2); if(d<bd){ bd=d; best=o; } } return best; }
+function plzGrabUi(cx,cy,z,vw,vh,now){ const R=ROOM, o=plzGrabTarget(); let el=R.box.querySelector(".pz-grab");
+  if(!o){ if(el) el.remove(); R.grab=null; return; }
+  let G=R.grab; if(!G||G.o!==o){ G=R.grab={o, taps:0, moved:0, lx:o.x, ly:o.y, last:now}; }
+  G.moved+=Math.hypot(o.x-G.lx,o.y-G.ly); G.lx=o.x; G.ly=o.y;
+  if(G.taps>0&&now-G.last>PLZ_GRAB.slip){ G.taps=Math.max(0,G.taps-1); G.last=now-PLZ_GRAB.slip+350; }
+  const d=Math.hypot(o.x-R.me.x,(o.y-R.me.y)*1.2), base=Math.round(Math.min(PLZ_GRAB.max,Math.max(PLZ_GRAB.min,PLZ_GRAB.min+(PLZ_GRAB.max-PLZ_GRAB.min)*(d-PLZ_GRAB.near)/(PLZ_GRAB.reach-PLZ_GRAB.near)))); G.need=base+Math.min(PLZ_GRAB.extra,Math.floor(G.moved/PLZ_GRAB.walk));
+  if(!el){ el=document.createElement("div"); el.className="pz-grab"; el.innerHTML=`<button data-pz="grab" class="l">✊</button><span></span><button data-pz="grab" class="r">✊</button>`; R.box.appendChild(el); }
+  const sx=(o.x-cx)*z+vw/2, sy=(o.y-46-cy)*z+vh/2, k=`${Math.round(sx)},${Math.round(sy)},${Math.floor(G.taps)}/${G.need}`;
+  if(k!==G.k){ G.k=k; el.style.transform=`translate(${Math.max(112,Math.min(vw-112,sx)).toFixed(0)}px,${Math.max(190,Math.min(vh-120,sy)).toFixed(0)}px)`; el.children[1].innerHTML=`<b>${Math.floor(G.taps)}/${G.need}</b><small>${T("plzGrabT")}</small>`; el.style.setProperty("--p",(G.taps/G.need).toFixed(2)); } }
+function plzGrabTap(){ const R=ROOM, G=R&&R.grab; if(!G||!G.o||(R.me.h||"")) return; const o=G.o; G.taps=Math.floor(G.taps)+1; G.last=performance.now(); G.k=""; sfx("tap");
+  const el=R.box.querySelector(".pz-grab"); if(el){ el.classList.remove("hit"); void el.offsetWidth; el.classList.add("hit"); }
+  if(G.taps===1){ plzSay(R.me,"✊"); plzSend(false,{b:"✊", bt:Date.now()}); }
+  if(G.taps<G.need) return;
+  const h=o.h, hw=o.hw; R.me.h=h; R.me.hw=hw; R.me.g={to:o.id, w:h, t:Date.now()}; o.h=""; o.hw=""; plzHoldSet(o); plzHoldSet(R.me); R.grab=null; if(el) el.remove();
+  plzSend(true); sfx("coin"); toast(T("plzGrabOk",{w:hw})); const clean=(hw||"").toLowerCase().replace(/[^a-z'-]/g,""); plzWordCard(hw,clean); plzNbSync(true); }
+function plzGive(o){ const R=ROOM; if(!o||(R.me.h||"")[0]!=="w"||o.h) return; const h=R.me.h, hw=R.me.hw; R.me.gv={to:o.id, w:h, hw, t:Date.now()}; o.h=h; o.hw=hw; plzHoldSet(o);
+  R.me.h=""; R.me.hw=""; plzHoldSet(R.me); const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzSend(true); plzSay(R.me,"🎁"); toast(T("plzGiveOk",{n:o.name||"?",w:hw})); plzNbSync(true); }
+// someone else's row says they took my word, or put one on my head
+function plzGrabSeen(v,me){ const R=ROOM; if(!R) return;
+  if(v.g&&v.g.to===me&&v.g.t>(R.gotG||0)){ R.gotG=v.g.t; if(R.me.h===v.g.w){ R.me.h=""; R.me.hw=""; plzHoldSet(R.me); const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzSend(true); toast(T("plzGrabbed",{n:v.n||"?"})); } }
+  if(v.gv&&v.gv.to===me&&v.gv.t>(R.gotGv||0)){ R.gotGv=v.gv.t; if(!R.me.h&&R.zone==="gate"){ R.me.h=String(v.gv.w||""); R.me.hw=String(v.gv.hw||"").slice(0,18); plzHoldSet(R.me); plzSend(true); toast(T("plzGiven",{n:v.n||"?",w:R.me.hw})); plzWordCard(R.me.hw,R.me.hw.toLowerCase().replace(/[^a-z'-]/g,"")); } } }
+// what a person holds, drawn above their head
+function plzHoldSet(o){ const h=o.h||"", k=h+"|"+(o.hw||""); if(k===o.holdK) return; o.holdK=k; let el=o.el.querySelector(".pz-hold");
+  if(!h){ if(el) el.remove(); o.el.classList.remove("pz-holding"); return; }
+  if(!el){ el=document.createElement("div"); el.className="pz-hold"; o.bob.appendChild(el); } o.el.classList.add("pz-holding");
+  if(h[0]==="w"){ el.className="pz-hold w"; el.textContent=o.hw||"?"; }
+  else { const n=PLZ_NOTES[+h.slice(1)]; el.className="pz-hold n"; el.style.setProperty("--c",n?n.c:"#888"); el.innerHTML=`<b>${n?n.ic:"♪"}</b>`; } }
+
+/* ---- 音符點歌 at the bandstand ---- */
+const PLZ_NOTES=[{tr:"pzWaltz",ic:"♪",c:"#E5484D",x:300,y:470},{tr:"pzLofi",ic:"♫",c:"#8E4EC6",x:1236,y:470},{tr:"pzChip",ic:"♪",c:"#3E63DD",x:430,y:900},{tr:"pzHorn",ic:"♫",c:"#F76B15",x:1106,y:900},{tr:"pzLull",ic:"♪",c:"#12A594",x:768,y:190},{tr:"pzJazz",ic:"♫",c:"#B8860B",x:190,y:700},{tr:"pzBossa",ic:"♪",c:"#D6409F",x:1346,y:700},{tr:"pzPenta",ic:"♫",c:"#0090FF",x:560,y:240},{tr:"pzRain",ic:"♪",c:"#5B7BA6",x:976,y:240},{tr:"pzSea",ic:"♫",c:"#0D9488",x:280,y:890},{tr:"pzSamba",ic:"♪",c:"#E5A000",x:1256,y:890},{tr:"pzReel",ic:"♫",c:"#2F9E44",x:1272,y:306}];
+const PLZ_STAGE={x:768, y:800, r:105, nx:768, ny:520};   // drop ring in front of the bandstand steps; nx,ny = where the playing note floats
+function plzNotesBuild(){ const R=ROOM; if(!R||R.zone!=="band") return; R.notes=PLZ_NOTES.map((n,i)=>{ const e=document.createElement("div"); e.className="pz-note"; e.style.cssText=`left:${n.x}px;top:${n.y}px;z-index:${n.y};--c:${n.c}`; e.innerHTML=`<b>${n.ic}</b><small>${T("plzSong_"+n.tr)}<em>${plzStarTxt(n.tr)}</em></small>`; R.world.appendChild(e); return e; });
+  const d=document.createElement("div"); d.className="pz-drop"; d.style.cssText=`left:${PLZ_STAGE.x}px;top:${PLZ_STAGE.y}px;z-index:${PLZ_STAGE.y-60}`; d.innerHTML=`<span>🎵 ${T("plzNoteHere")}</span>`; R.world.appendChild(d); R.drop=d;
+  const s=document.createElement("div"); s.className="pz-snote"; s.style.cssText=`left:${PLZ_STAGE.nx}px;top:${PLZ_STAGE.ny}px;z-index:900`; s.hidden=true; R.world.appendChild(s); R.snote=s;
+  plzNotesSync(true); plzPianoTopLoad(); }
+function plzNoteNear(){ const R=ROOM, m=R&&R.me; if(!m||R.zone!=="band"||!R.notes) return -1; const tk=plzTakenSet("n"); let best=-1, bd=95;
+  PLZ_NOTES.forEach((n,i)=>{ if(tk.has(i)||i===R.song) return; const d=Math.hypot(n.x-m.x,(n.y-m.y)*1.2); if(d<bd){ bd=d; best=i; } }); return best; }
+function plzNoteGet(i){ const R=ROOM; if(!R||i<0) return; R.me.h="n"+i; R.me.hw=""; plzHoldSet(R.me); plzSend(true); sfx("coin"); plzNotesSync(true);
+  let el=R.box.querySelector(".pz-hcard"); if(!el){ el=document.createElement("div"); el.className="pz-hcard"; R.box.appendChild(el); }
+  el.innerHTML=`<span class="pz-hcw"><i style="--c:${PLZ_NOTES[i].c}">${PLZ_NOTES[i].ic}</i> <b>${T("plzSong_"+PLZ_NOTES[i].tr)}</b> <em class="pz-st">${plzStarTxt(PLZ_NOTES[i].tr)}</em></span><small>${T("plzNoteCarry")}</small><button data-pz="wput">↩️ ${T("plzNotePut")}</button>`; }
+function plzNotePlace(){ const R=ROOM, h=R.me.h||""; if(h[0]!=="n") return; const k=+h.slice(1); R.me.h=""; R.me.pn=k; R.me.pt=Date.now(); plzHoldSet(R.me);
+  const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzSongSet(k,R.me.pt,null); plzSend(true); plzSay(R.me,"🎵"); plzSend(false,{b:"🎵", bt:Date.now()}); }
+// the song: the note placed last by anyone in this room (mine or from a live row)
+function plzSongSet(k,t,who){ const R=ROOM; if(!R||k==null||!PLZ_NOTES[k]||(t||0)<=(R.songT||0)) return; R.songT=t; const ch=R.song!==k; R.song=k;
+  if(ch||!who){ const nm=T("plzSong_"+PLZ_NOTES[k].tr); toast(who?T("plzSongBy",{n:who,s:nm}):T("plzSongNow",{s:nm})); if(!SND.opt.music&&!R.musicHint){ R.musicHint=1; setTimeout(()=>toast(T("plzMusicOff")),1800); } }
+  if(!who) sfx("prize"); plzNotesSync(true); musicForView(); }
+function plzNotesSync(force){ const R=ROOM; if(!R||!R.notes) return; const tk=plzTakenSet("n"), key=[...tk].sort().join(",")+"|"+R.song;
+  if(force||key!==R.notesK){ R.notesK=key; R.notes.forEach((e,i)=>e.classList.toggle("gone",tk.has(i)||i===R.song));
+    const n=PLZ_NOTES[R.song]; if(n){ R.snote.hidden=false; R.snote.style.setProperty("--c",n.c); R.snote.innerHTML=`<b>${n.ic}</b><small>${T("plzSong_"+n.tr)}<em>${plzStarTxt(n.tr)}</em></small><i></i><i></i><i></i>`; } else R.snote.hidden=true; }
+  const hold=((R.me&&R.me.h)||"")[0]==="n"; if(hold!==R.dropOn){ R.dropOn=hold; R.drop.classList.toggle("on",hold); }
+  const ni=plzNoteNear(); if(ni!==R.noteTg){ if(R.notes[R.noteTg]) R.notes[R.noteTg].classList.remove("tg"); R.noteTg=ni; if(R.notes[ni]) R.notes[ni].classList.add("tg"); } }
+/* ---- 舞台彈琴 (CheChe 2026-11-24, "別踩白塊兒" style): stand in front of the bandstand steps with empty hands and press 🎹.
+   Four lanes scroll down. Hit the lowest dark tiles before they leave the screen; each hit plays the next note of the song now
+   playing at the bandstand (town tune if none), so a good run plays the whole tune. Three kinds of tile:
+   tap (one row), double (two lanes in the same row, hit both) and long (several rows: press and keep holding, every row you hold
+   scores). Tapping a white spot or letting a tile pass ends the run. Each tune has a star level (PLZ_STARS) that sets the speed
+   and how often doubles and long tiles show up. Best score kept in g.plzPiano. ---- */
+const PLZ_PIANO={lanes:4, rows:4.6};
+const PLZ_STARS={pzLull:1, pzRain:1, pzWaltz:2, pzLofi:2, town:2, pzBossa:3, pzPenta:3, pzJazz:3, pzSea:3, pzHorn:4, pzSamba:4, pzChip:5, pzReel:5};
+const plzStarsOf=tr=>PLZ_STARS[tr]||2, plzStarTxt=tr=>"★".repeat(plzStarsOf(tr))+"☆".repeat(5-plzStarsOf(tr));
+// speed (rows a second) and tile mix for each star level
+const plzPianoLv=st=>({v0:1.5+st*.35, dv:.025+st*.008, vmax:2.6+st*.85, dbl:[0,.04,.1,.16,.22,.3][st], lng:[0,.55,.5,.45,.4,.35][st]});
+function plzPianoOpen(){ const R=ROOM; if(!R||R.piano) return; sndInit(); const tk=plzTrack()||"town", tr=TRACKS[tk]||TRACKS.town, st=plzStarsOf(tk);
+  const el=document.createElement("div"); el.className="pz-piano"; el.innerHTML=`<div class="pz-pih"><button data-pz="pianox" aria-label="${T("plzBack")}">✕</button><span class="pz-pit"><small>${esc(T("plzSong_"+tk))} <em>${plzStarTxt(tk)}</em></small><b id="pzPiS">0</b></span><small>${T("plzPianoBest",{n:(game().plzPiano||0)})}</small></div><canvas></canvas><div class="pz-pio" hidden></div>`;
+  R.box.appendChild(el); const cv=el.querySelector("canvas");
+  const P=R.piano={el, cv, tr, tk, st, lv:plzPianoLv(st), mel:tr.mel.filter(n=>n[0]), mi:0, ev:[], nextRow:0, off:0, v:0, score:0, on:false, over:false, last:performance.now(), flash:null, holds:{}};
+  P.v=P.lv.v0; while(P.nextRow<40) plzPianoEv(P);
+  musicDuck(true); plzSay(R.me,"🎹"); plzSend(false,{b:"🎹", bt:Date.now()});
+  cv.addEventListener("pointerdown",ev=>{ ev.preventDefault(); try{ cv.setPointerCapture(ev.pointerId); }catch(e){} plzPianoTap(ev); });
+  const up=ev=>plzPianoUp(ev.pointerId); cv.addEventListener("pointerup",up); cv.addEventListener("pointercancel",up);
+  const loop=now=>{ if(ROOM!==R||R.piano!==P) return; plzPianoStep(P,now); P.raf=requestAnimationFrame(loop); }; P.raf=requestAnimationFrame(loop); }
+// next event from the melody: a long note may become a long tile, some notes a double; the first one is always a plain tap
+function plzPianoEv(P){ const n=P.mel[P.mi++%P.mel.length], first=!P.ev.length, prev=P.ev.length?P.ev[P.ev.length-1].tiles.map(t=>t.lane):[];
+  const free=[0,1,2,3].filter(l=>!prev.includes(l)), pick=a=>a[Math.floor(Math.random()*a.length)], r0=P.nextRow;
+  let tiles; const r=Math.random();
+  if(!first&&(n[1]>=3||(P.st>=4&&n[1]>=2))&&r<P.lv.lng){ const len=Math.min(4,Math.max(2,Math.round(n[1]/1.5))); tiles=[{lane:pick(free.length?free:[0,1,2,3]), len}]; }
+  else if(!first&&Math.random()<P.lv.dbl){ const a=pick([[0,2],[1,3],[0,3],[0,1],[2,3],[1,2]]); tiles=a.map(l=>({lane:l, len:1})); }
+  else tiles=[{lane:pick(free.length?free:[0,1,2,3]), len:1}];
+  const len=Math.max(...tiles.map(t=>t.len)); P.ev.push({r0, len, m:n[0], tiles:tiles.map(t=>({...t, hit:0, held:0, done:false}))}); P.nextRow+=len; }
+function plzPianoClose(){ const R=ROOM, P=R&&R.piano; if(!P) return; cancelAnimationFrame(P.raf); P.el.remove(); R.piano=null; musicDuck(false); if(SND.ctx) musicForView(); }
+function plzPianoNote(P,m,len,chord){ const c=sndInit(); if(!c) return; const t=c.currentTime+.005, L=P.tr.lead||{}, sq=L.type==="square", d=len>1?.25*len+.2:.42;
+  tone(SND.master, t, hz(m), d, {type:sq?"square":"triangle", v:sq?.12:.26, vib:!!L.vib||len>1, a:.006, r:d*.95}); tone(SND.master, t, hz(m-12), d+.08, {type:"sine", v:.1});
+  if(chord) tone(SND.master, t, hz(m-5), d, {type:"triangle", v:.14}); }
+const plzPianoCur=P=>P.ev.find(e=>e.tiles.some(t=>!t.hit));   // the lowest event that still has a tile to hit
+function plzPianoTap(ev){ const R=ROOM, P=R&&R.piano; if(!P||P.over) return; const r=P.cv.getBoundingClientRect(), lane=Math.floor((ev.clientX-r.left)/r.width*PLZ_PIANO.lanes), rh=r.height/PLZ_PIANO.rows, yRow=(r.height-(ev.clientY-r.top))/rh+P.off;
+  const E=plzPianoCur(P); if(!E) return; const t=E.tiles.find(x=>!x.hit&&x.lane===lane);
+  if(t&&yRow>E.r0-.6&&yRow<E.r0+t.len+.9){ t.hit=performance.now(); P.score++; if(!P.on){ P.on=true; P.last=performance.now(); }
+    const dbl=E.tiles.length>1; if(!dbl||E.tiles.every(x=>x.hit)) plzPianoNote(P,E.m,t.len,dbl); else if(dbl) plzPianoNote(P,E.m,1,false);
+    if(t.len>1) P.holds[ev.pointerId]={t, E}; else t.done=true;
+    const s=document.getElementById("pzPiS"); if(s) s.textContent=P.score; return; }
+  if(!P.on) return; P.flash={lane, y:Math.floor(yRow)}; plzPianoEnd(P); }
+function plzPianoUp(id){ const P=ROOM&&ROOM.piano, h=P&&P.holds[id]; if(!h) return; h.t.done=true; delete P.holds[id]; }
+function plzPianoStep(P,now){ const dt=Math.min(.05,(now-P.last)/1000); P.last=now;
+  if(P.on&&!P.over){ P.v=Math.min(P.lv.vmax,P.lv.v0+P.score*P.lv.dv); P.off+=P.v*dt;
+    // holding a long tile: +1 for every row of it that passes while you hold
+    for(const id in P.holds){ const {t,E}=P.holds[id], rows=Math.min(t.len-1,Math.floor(P.off-E.r0)); if(rows>t.held){ P.score+=rows-t.held; t.held=rows; const s=document.getElementById("pzPiS"); if(s) s.textContent=P.score; } if(P.off>=E.r0+t.len){ t.done=true; delete P.holds[id]; } }
+    const E=plzPianoCur(P); if(E&&E.r0<P.off-.05){ const t=E.tiles.find(x=>!x.hit); P.flash={lane:t.lane, y:E.r0, miss:1}; P.off=Math.max(0,E.r0-.6); plzPianoEnd(P); }
+    while(P.nextRow<P.off+14) plzPianoEv(P); }
+  plzPianoDraw(P,now); }
+function plzPianoDraw(P,now){ const cv=P.cv, W=cv.clientWidth, H=cv.clientHeight, D=Math.min(2,devicePixelRatio||1); if(!W) return; if(cv.width!==Math.round(W*D)){ cv.width=Math.round(W*D); cv.height=Math.round(H*D); }
+  const c=cv.getContext("2d"); c.setTransform(D,0,0,D,0,0); c.fillStyle="#FBF8EF"; c.fillRect(0,0,W,H); const N=PLZ_PIANO.lanes, lw=W/N, rh=H/PLZ_PIANO.rows, col=(PLZ_NOTES.find(n=>n.tr===P.tk)||{c:"#1F6F5C"}).c;
+  c.strokeStyle="rgba(27,36,33,.12)"; c.lineWidth=1; for(let k=1;k<N;k++){ c.beginPath(); c.moveTo(k*lw,0); c.lineTo(k*lw,H); c.stroke(); }
+  const rr=(x,y,w,h,r)=>{ c.beginPath(); if(c.roundRect) c.roundRect(x,y,w,h,r); else c.rect(x,y,w,h); };
+  for(const E of P.ev){ if(E.r0+E.len<P.off-1) continue; if(E.r0>P.off+PLZ_PIANO.rows+1) break;
+    for(const t of E.tiles){ const x=t.lane*lw, y=H-(E.r0-P.off+t.len)*rh, h=t.len*rh;
+      if(t.hit&&t.len===1){ const a=Math.max(0,1-(now-t.hit)/260); c.fillStyle=`rgba(27,36,33,${(.12+.5*a).toFixed(2)})`; c.fillRect(x+3,y+3,lw-6,h-6); continue; }
+      c.fillStyle="#1B2421"; rr(x+3,y+3,lw-6,h-6,10); c.fill();
+      if(t.len>1){ // long tile: a coloured bar fills up while you hold it
+        const p=t.hit?Math.min(1,Math.max(0,(P.off-E.r0)/t.len)):0; c.fillStyle=col; c.globalAlpha=t.hit&&t.done&&p<1?.35:.9; rr(x+lw/2-5,y+h-6-(h-12)*p,10,(h-12)*p,5); c.fill(); c.globalAlpha=1;
+        c.fillStyle="rgba(255,255,255,.75)"; c.beginPath(); c.arc(x+lw/2,y+h-26,9,0,7); c.fill(); c.strokeStyle="rgba(255,255,255,.35)"; c.lineWidth=3; c.beginPath(); c.moveTo(x+lw/2,y+h-40); c.lineTo(x+lw/2,y+16); c.stroke(); }
+      else { c.fillStyle=col; c.fillRect(x+3,y+h-12,lw-6,6); }
+      if(E.tiles.length>1&&!t.hit){ c.strokeStyle=col; c.lineWidth=3; rr(x+6,y+6,lw-12,h-12,8); c.stroke(); }
+      if(!P.on&&E===P.ev[0]){ c.fillStyle="#fff"; c.font="800 18px system-ui,sans-serif"; c.textAlign="center"; c.textBaseline="middle"; c.fillText(T("plzPianoGo"),x+lw/2,y+h/2); } } }
+  if(P.flash){ const f=P.flash, y=H-(f.y-P.off+1)*rh; c.fillStyle="rgba(229,72,77,.45)"; c.fillRect(f.lane*lw+3,y+3,lw-6,rh-6); } }
+function plzPianoEnd(P){ P.over=true; P.holds={}; const R=ROOM, g=game(), best=g.plzPiano||0, nb=P.score>best; if(nb){ g.plzPiano=P.score; saveGame(); } sfx(nb?"win":"lose");
+  plzSay(R.me,`🎹 ${P.score}`); plzSend(false,{b:`🎹 ${P.score}`, bt:Date.now()}); plzPianoTopSave(P.tk,P.score);
+  const o=P.el.querySelector(".pz-pio"); o.hidden=false; o.innerHTML=`<b>${P.score}</b><small>${nb&&P.score?T("plzPianoNew"):T("plzPianoBest",{n:Math.max(best,P.score)})}</small><div class="row"><button class="btn" data-pz="pianore">🔁 ${T("plzPianoAgain")}</button><button class="btn ghost" data-pz="pianox">${T("plzBack")}</button></div>`; }
+function plzPianoAgain(){ plzPianoClose(); plzPianoOpen(); }
+// 🎹 high scores per tune (CheChe 2026-11-24): pianoTop/{tune} {a_n,a_s,a_u = all-time name/score/uid, m_n,m_s,m_u,mk = this month}.
+// Shown on a little sign above each note (and by the steps for the town tune, played when no note is on the stage).
+let PLZ_PTOP={at:0, t:{}};
+async function plzPianoTopLoad(force){ if(!CLOUD.fb||(!force&&Date.now()-PLZ_PTOP.at<5*60e3)) return plzPianoTopShow(); PLZ_PTOP.at=Date.now(); const {fsM,db}=CLOUD.fb;
+  await Promise.all(["town",...PLZ_NOTES.map(n=>n.tr)].map(async tr=>{ try{ const d=await fsM.getDoc(fsM.doc(db,"pianoTop",tr)); if(d&&d.exists()) PLZ_PTOP.t[tr]=safeDoc(d.data()); }catch(e){} }));
+  plzPianoTopShow(); }
+function plzPianoTopHtml(tr){ const x=PLZ_PTOP.t[tr]||{}, mk=monthKey(), m=x.mk===mk&&x.m_s>0;
+  return `<span>🏆 ${x.a_s>0?`${esc(x.a_n||"?")} <b>${x.a_s}</b>`:T("plzPianoNone")}</span><span>📅 ${m?`${esc(x.m_n||"?")} <b>${x.m_s}</b>`:T("plzPianoNone")}</span>`; }
+function plzPianoTopShow(){ const R=ROOM; if(!R||R.zone!=="band"||!R.notes) return;
+  PLZ_NOTES.forEach((n,i)=>{ const e=R.notes[i]; let t=e.querySelector(".pz-ntop"); if(!t){ t=document.createElement("div"); t.className="pz-ntop"; e.prepend(t); } t.innerHTML=plzPianoTopHtml(n.tr); });
+  if(!R.ttop){ R.ttop=document.createElement("div"); R.ttop.className="pz-ntop pz-ttop"; R.ttop.style.cssText=`left:${PLZ_STAGE.x}px;top:${PLZ_STAGE.y+52}px;z-index:${PLZ_STAGE.y+52}`; R.world.appendChild(R.ttop); }
+  R.ttop.innerHTML=`<i>🎹 ${T("plzSong_town")}</i>`+plzPianoTopHtml("town"); }
+async function plzPianoTopSave(tr,score){ if(!CLOUD.fb||!CLOUD.user||score<1) return; const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"pianoTop",tr), mk=monthKey(), name=(game().nick||"?").slice(0,16), me=CLOUD.user.uid;
+  try{ await fsM.runTransaction(db, async tx=>{ const d=await tx.get(ref), x=d&&d.exists()?d.data():{}, nx={...x}; let ch=false;
+      if(!(x.a_s>=score)){ Object.assign(nx,{a_n:name,a_s:score,a_u:me}); ch=true; }
+      if(x.mk!==mk||!(x.m_s>=score)){ Object.assign(nx,{m_n:name,m_s:score,m_u:me,mk}); ch=true; }
+      if(ch){ for(const k of Object.keys(nx)) if(!["a_n","a_s","a_u","m_n","m_s","m_u","mk"].includes(k)) delete nx[k]; if(!nx.a_s){ Object.assign(nx,{a_n:name,a_s:score,a_u:me}); } tx.set(ref,nx); PLZ_PTOP.t[tr]=nx; } });
+    plzPianoTopShow(); }catch(e){ console.warn("pianoTop",e&&e.code); } }
+
+// which plaza tune should play (null = the usual town music); safe to call before the plaza code has run
+function plzTrack(){ try{ const R=ROOM; return R&&!R.away&&R.zone==="band"&&R.song!=null&&PLZ_NOTES[R.song]?PLZ_NOTES[R.song].tr:null; }catch(e){ return null; } }
+function plzRadioOn(){ try{ const R=ROOM; return !!(R&&!R.away&&R.radio&&!R.radio.a.paused); }catch(e){ return false; } }
+// what the 互動 button does here (board / notes), or null
+function plzCtx(){ const R=ROOM, m=R.me, h=m.h||"";
+  if(R.zone==="gate"&&R.nb){ if(h[0]==="w"){ const o=plzGiveTarget(); if(o) return {k:"give"+o.id, ic:"🎁", t:T("plzGive"), o}; if(plzNbReach()) return {k:"wput", ic:"↩️", t:T("plzNbPut")}; }
+    else if(!h){ const i=plzNbTarget(); if(i>=0) return {k:"w"+i, ic:"🙌", t:T("plzNbLift")}; } }
+  if(R.zone==="band"){ const i=plzNoteNear(); if(i>=0) return {k:"n"+i, ic:PLZ_NOTES[i].ic, t:T("plzNoteGet")}; if(!h&&Math.hypot(m.x-PLZ_STAGE.x,(m.y-PLZ_STAGE.y)*1.3)<PLZ_STAGE.r+20) return {k:"piano", ic:"🎹", t:T("plzPiano")}; }
+  return null; }
+function plzCtxGo(c){ if(c.o) return plzGive(c.o); if(c.k==="piano") return plzPianoOpen(); if(c.k==="wput") return plzWordPut(); if(c.k[0]==="w") return plzWordLift(+c.k.slice(1)); if(c.k[0]==="n") return plzNoteGet(+c.k.slice(1)); }
+
 // player card + likes (one like per player per week)
 const plzWeek=()=>isoWeek().id;
 async function plzCard(o){ lookCard({id:o.id, name:o.kind==="me"?game().nick:o.name, look:o.look, lv:o.lv, power:o.power, conq:o.conq, flag:o.flag});
@@ -10791,6 +11139,42 @@ Object.assign(STR.hi,{"syName": "अलग कौन?", "sySub": "4–6 खि�
 Object.assign(STR.es,{"syName": "El intruso", "sySub": "De 4 a 6 jugadores. Todos reciben una palabra en inglés parecida, menos el intruso, que tiene otra distinta (y no lo sabe). Por turnos describid vuestra palabra con un adjetivo y luego votad en secreto: el más votado recibe un golpe de todos y pierde 1 corazón. Cada uno tiene 2. Si el intruso se queda sin corazones, ganan los demás; si aguanta hasta el final, ¡gana él!", "syNeed4": "Hacen falta al menos 4 jugadores", "syRoundsSub": "Hasta {n} rondas, 2 corazones cada uno", "syYourWord": "Tu palabra", "syPhSay": "Describir", "syPhTalk": "Hablar", "syPhVote": "Votar", "syPhHit": "Resultado", "syTurn": "Turno de {n}", "syYourTurn": "¡Tu turno! Elige un adjetivo", "syCustom": "Escribir el mío", "syBackOpts": "← Volver a las opciones", "syWaitSay": "Esperando a {n}…", "syWaitNext": "¡Listo! Esperando al siguiente…", "sySkipped": "(no dijo nada)", "syTalkT": "Hora de hablar", "syTalkHint": "Charlad con las frases en inglés de abajo y luego votad", "syVoteT": "¡A votar!", "syVoteHint": "Toca a quien creas que es el intruso (secreto)", "syVoted": "Votos {a}/{b}", "syMyVote": "Votaste a {n}", "syHitT": "¡Todos golpean a {n}! −1 ❤️", "syTie": "¡Empate! Nadie sale herido esta ronda", "syNoVote": "Nadie votó", "syOut": "{n} queda fuera", "syDead": "Estás fuera, pero puedes seguir mirando", "syHistory": "Adjetivos hasta ahora", "syCivWin": "¡Ganan los demás!", "sySpyWin": "¡Gana el intruso!", "syCiv": "La palabra de todos", "sySpyWas": "La palabra de {n}, el intruso", "syRole": "Rol", "syLegend": "Equipo ganador +100, +20 por corazón restante, +15 por cada voto al intruso", "syBoth": "Vale para las dos", "syAdjReview": "Repaso de adjetivos", "syUsed": "Alguien ya lo dijo esta ronda, o tú ya lo usaste", "syNotWord": "No conocemos esa palabra en inglés", "syHasWord": "No puedes decir tu propia palabra", "syShort": "Al menos 3 letras", "syQ0": "¡Creo que es …!", "syQ1": "¡Yo no!", "syQ2": "¡Yo también!", "syQ3": "Mmm… qué raro.", "syQ4": "¡Buena!", "syQ5": "¡Confía en mí!", "syQ6": "No estoy seguro.", "syQ7": "¡Votemos!", "syRound": "Ronda {i} / {n}", "syRoundsQ": "¿Cuántas rondas como máximo?"});
 Object.assign(STR.ja,{"syName": "仲間はずれは誰？", "sySub": "4〜6人。みんな似た英単語をもらいますが、1人だけ違う単語（本人も知らない）。順番に英語の形容詞1つで自分の単語を説明し、匿名で投票。いちばん票の多い人はみんなに攻撃されてハート−1。全員ハート2つ。少数派のハートがなくなればみんなの勝ち、最後まで残れば少数派の勝ち！", "syNeed4": "4人以上必要です", "syRoundsSub": "最大 {n} ラウンド、全員ハート2つ", "syYourWord": "あなたの単語", "syPhSay": "説明", "syPhTalk": "話し合い", "syPhVote": "投票", "syPhHit": "結果", "syTurn": "{n} の番", "syYourTurn": "あなたの番！形容詞を選んでね", "syCustom": "自分で入力", "syBackOpts": "← 選択肢に戻る", "syWaitSay": "{n} を待っています…", "syWaitNext": "OK！次の人を待っています…", "sySkipped": "（何も言わなかった）", "syTalkT": "話し合いタイム", "syTalkHint": "下の英語フレーズで話して、そのあと投票", "syVoteT": "投票！", "syVoteHint": "少数派だと思う人をタップ（匿名）", "syVoted": "投票 {a}/{b}", "syMyVote": "{n} に投票しました", "syHitT": "{n} がみんなに攻撃された！−1 ❤️", "syTie": "同点！このラウンドは誰もダメージなし", "syNoVote": "誰も投票しませんでした", "syOut": "{n} が脱落", "syDead": "脱落しました。観戦は続けられます", "syHistory": "これまでの形容詞", "syCivWin": "みんなの勝ち！", "sySpyWin": "少数派の勝ち！", "syCiv": "みんなの単語", "sySpyWas": "少数派 {n} の単語", "syRole": "役", "syLegend": "勝ったチーム +100、残りハート1つにつき +20、少数派に投票するたび +15", "syBoth": "両方に合う", "syAdjReview": "形容詞の復習", "syUsed": "このラウンドで誰かが言ったか、前にあなたが使いました", "syNotWord": "その英単語は見つかりません", "syHasWord": "自分の単語は言えません", "syShort": "3文字以上", "syQ0": "… だと思う！", "syQ1": "私じゃない！", "syQ2": "私も！", "syQ3": "うーん…あやしい。", "syQ4": "いいね！", "syQ5": "信じて！", "syQ6": "わからないな。", "syQ7": "投票しよう！", "syRound": "ラウンド {i} / {n}", "syRoundsQ": "最大何ラウンド？"});
 Object.assign(STR.ko,{"syName": "누가 다를까?", "sySub": "4~6명. 모두 비슷한 영어 단어를 받지만 한 명만 다른 단어를 받아요(본인도 몰라요). 돌아가며 영어 형용사 하나로 단어를 설명하고 익명 투표: 가장 많이 뽑힌 사람은 모두에게 한 대 맞고 하트 1개를 잃어요. 모두 하트 2개. 라이어 하트가 다 떨어지면 나머지가 이기고, 끝까지 버티면 라이어가 이겨요!", "syNeed4": "최소 4명이 필요해요", "syRoundsSub": "최대 {n}라운드, 모두 하트 2개", "syYourWord": "내 단어", "syPhSay": "설명", "syPhTalk": "토론", "syPhVote": "투표", "syPhHit": "결과", "syTurn": "{n}의 차례", "syYourTurn": "내 차례! 형용사를 골라요", "syCustom": "직접 입력", "syBackOpts": "← 선택지로", "syWaitSay": "{n} 기다리는 중…", "syWaitNext": "완료! 다음 사람을 기다려요…", "sySkipped": "(말 안 함)", "syTalkT": "토론 시간", "syTalkHint": "아래 영어 문장으로 이야기하고 투표해요", "syVoteT": "투표!", "syVoteHint": "라이어라고 생각하는 사람을 눌러요(익명)", "syVoted": "투표 {a}/{b}", "syMyVote": "{n}에게 투표했어요", "syHitT": "{n}이(가) 모두에게 맞았어요! −1 ❤️", "syTie": "동점! 이번 라운드는 아무도 안 다쳐요", "syNoVote": "아무도 투표하지 않았어요", "syOut": "{n} 탈락", "syDead": "탈락했어요. 계속 구경할 수 있어요", "syHistory": "지금까지 나온 형용사", "syCivWin": "나머지 팀 승리!", "sySpyWin": "라이어 승리!", "syCiv": "모두의 단어", "sySpyWas": "라이어 {n}의 단어", "syRole": "역할", "syLegend": "이긴 팀 +100, 남은 하트당 +20, 라이어에게 투표할 때마다 +15", "syBoth": "둘 다 해당", "syAdjReview": "형용사 복습", "syUsed": "이번 라운드에 이미 나왔거나 전에 내가 쓴 말이에요", "syNotWord": "모르는 영어 단어예요", "syHasWord": "내 단어는 말할 수 없어요", "syShort": "3글자 이상", "syQ0": "… 같아!", "syQ1": "나 아니야!", "syQ2": "나도!", "syQ3": "음… 이상한데.", "syQ4": "좋은데!", "syQ5": "날 믿어!", "syQ6": "잘 모르겠어.", "syQ7": "투표하자!", "syRound": "{i} / {n} 라운드", "syRoundsQ": "최대 몇 라운드?"});
+Object.assign(STR.zh,{"plzNbT": "公告", "plzNbNews": "今日", "plzNbFar": "走近佈告欄才拿得到字", "plzNbTaken": "這個字已經被別人舉走了", "plzNbLift": "舉起字", "plzNbPut": "放回去", "plzNbLook": "查字典中…", "plzNbNoMean": "字典裡還沒有這個字", "plzNbDevT": "廣場佈告欄公告", "plzNbDevSave": "存公告", "plzNbDevNote": "寫英文，玩家可以把每個字舉起來學。留空 = 預設歡迎詞。", "plzNoteGet": "撿音符", "plzNotePut": "放回地上", "plzNoteCarry": "拿到音樂台階梯前面，就會換成這首", "plzNoteHere": "音符放這裡", "plzSongNow": "🎵 現在播放：{s}", "plzSongBy": "🎵 {n} 換了音樂：{s}", "plzMusicOff": "背景音樂關著，到「設定 → 聲音」打開才聽得到", "plzSong_pzWaltz": "豎琴華爾滋", "plzSong_pzLofi": "Lo-fi 咖啡", "plzSong_pzChip": "8-bit 冒險", "plzSong_pzHorn": "愛爾蘭角笛", "plzSong_pzLull": "晚安搖籃曲", "plzZd2_gate": "大佈告欄：走過去把字舉起來學", "plzZd2_band": "撿音符放上音樂台換音樂，也能聽新聞"});
+Object.assign(STR.en,{"plzNbT": "Notice", "plzNbNews": "Today", "plzNbFar": "Walk up to the board to reach the words", "plzNbTaken": "Someone else is holding that word", "plzNbLift": "Lift word", "plzNbPut": "Put back", "plzNbLook": "Looking it up…", "plzNbNoMean": "Not in the dictionary yet", "plzNbDevT": "Plaza notice board", "plzNbDevSave": "Save notice", "plzNbDevNote": "Write it in English; players can lift each word to learn it. Empty = the default welcome.", "plzNoteGet": "Pick up", "plzNotePut": "Put down", "plzNoteCarry": "Carry it to the bandstand steps to play this tune", "plzNoteHere": "Drop notes here", "plzSongNow": "🎵 Now playing: {s}", "plzSongBy": "🎵 {n} changed the music: {s}", "plzMusicOff": "Music is off. Turn it on in Settings → Sound to hear it", "plzSong_pzWaltz": "Harp Waltz", "plzSong_pzLofi": "Lo-fi Café", "plzSong_pzChip": "8-bit Quest", "plzSong_pzHorn": "Irish Hornpipe", "plzSong_pzLull": "Goodnight Lullaby", "plzZd2_gate": "Big notice board: lift the words to learn them", "plzZd2_band": "Bring a note to the bandstand to change the music; today's news too"});
+Object.assign(STR.hi,{"plzNbT": "सूचना", "plzNbNews": "आज", "plzNbFar": "शब्द लेने के लिए बोर्ड के पास जाओ", "plzNbTaken": "यह शब्द किसी और ने उठा रखा है", "plzNbLift": "शब्द उठाओ", "plzNbPut": "वापस रखो", "plzNbLook": "ढूँढ रहे हैं…", "plzNbNoMean": "यह शब्द अभी शब्दकोश में नहीं है", "plzNbDevT": "प्लाज़ा सूचना बोर्ड", "plzNbDevSave": "सूचना सहेजें", "plzNbDevNote": "अंग्रेज़ी में लिखें; खिलाड़ी हर शब्द उठाकर सीख सकते हैं। खाली = डिफ़ॉल्ट स्वागत।", "plzNoteGet": "उठाओ", "plzNotePut": "नीचे रखो", "plzNoteCarry": "इसे बैंडस्टैंड की सीढ़ियों तक ले जाओ, यही धुन बजेगी", "plzNoteHere": "सुर यहाँ रखो", "plzSongNow": "🎵 अभी बज रहा है: {s}", "plzSongBy": "🎵 {n} ने संगीत बदला: {s}", "plzMusicOff": "संगीत बंद है। सुनने के लिए सेटिंग → ध्वनि में चालू करें", "plzSong_pzWaltz": "हार्प वाल्ट्ज़", "plzSong_pzLofi": "लो-फ़ाई कैफ़े", "plzSong_pzChip": "8-बिट सफ़र", "plzSong_pzHorn": "आयरिश हॉर्नपाइप", "plzSong_pzLull": "शुभ रात्रि लोरी", "plzZd2_gate": "बड़ा सूचना बोर्ड: शब्द उठाकर सीखो", "plzZd2_band": "सुर बैंडस्टैंड पर रखकर संगीत बदलो; आज की खबर भी"});
+Object.assign(STR.es,{"plzNbT": "Aviso", "plzNbNews": "Hoy", "plzNbFar": "Acércate al tablón para coger las palabras", "plzNbTaken": "Otra persona tiene esa palabra", "plzNbLift": "Levantar", "plzNbPut": "Devolver", "plzNbLook": "Buscando…", "plzNbNoMean": "Aún no está en el diccionario", "plzNbDevT": "Tablón de la plaza", "plzNbDevSave": "Guardar aviso", "plzNbDevNote": "Escríbelo en inglés; los jugadores pueden levantar cada palabra para aprenderla. Vacío = bienvenida por defecto.", "plzNoteGet": "Recoger", "plzNotePut": "Dejar", "plzNoteCarry": "Llévala a los escalones del quiosco para poner esta canción", "plzNoteHere": "Deja las notas aquí", "plzSongNow": "🎵 Suena: {s}", "plzSongBy": "🎵 {n} cambió la música: {s}", "plzMusicOff": "La música está apagada. Actívala en Ajustes → Sonido", "plzSong_pzWaltz": "Vals de arpa", "plzSong_pzLofi": "Café lo-fi", "plzSong_pzChip": "Aventura 8-bit", "plzSong_pzHorn": "Hornpipe irlandés", "plzSong_pzLull": "Canción de cuna", "plzZd2_gate": "Gran tablón: levanta las palabras para aprenderlas", "plzZd2_band": "Lleva una nota al quiosco para cambiar la música; y las noticias de hoy"});
+Object.assign(STR.ja,{"plzNbT": "お知らせ", "plzNbNews": "今日", "plzNbFar": "掲示板に近づくと単語を取れるよ", "plzNbTaken": "その単語は他の人が持っているよ", "plzNbLift": "単語を持つ", "plzNbPut": "戻す", "plzNbLook": "辞書で検索中…", "plzNbNoMean": "まだ辞書にない単語です", "plzNbDevT": "広場の掲示板", "plzNbDevSave": "保存", "plzNbDevNote": "英語で書いてね。プレイヤーは単語を一つずつ持ち上げて覚えられる。空欄 = いつもの歓迎文。", "plzNoteGet": "拾う", "plzNotePut": "置く", "plzNoteCarry": "音楽堂の階段の前まで運ぶとこの曲になるよ", "plzNoteHere": "音符はここへ", "plzSongNow": "🎵 再生中：{s}", "plzSongBy": "🎵 {n} が曲を変えた：{s}", "plzMusicOff": "BGMがオフです。設定 → サウンドでオンにすると聞こえます", "plzSong_pzWaltz": "ハープのワルツ", "plzSong_pzLofi": "ローファイ・カフェ", "plzSong_pzChip": "8ビット冒険", "plzSong_pzHorn": "アイリッシュ・ホーンパイプ", "plzSong_pzLull": "おやすみ子守唄", "plzZd2_gate": "大きな掲示板：単語を持ち上げて覚えよう", "plzZd2_band": "音符を音楽堂に運んで曲を変えよう。今日のニュースも"});
+Object.assign(STR.ko,{"plzNbT": "공지", "plzNbNews": "오늘", "plzNbFar": "게시판 가까이 가야 단어를 들 수 있어요", "plzNbTaken": "다른 사람이 그 단어를 들고 있어요", "plzNbLift": "단어 들기", "plzNbPut": "되돌리기", "plzNbLook": "사전 찾는 중…", "plzNbNoMean": "아직 사전에 없는 단어예요", "plzNbDevT": "광장 게시판 공지", "plzNbDevSave": "공지 저장", "plzNbDevNote": "영어로 쓰세요. 플레이어가 단어를 하나씩 들어 올려 배울 수 있어요. 비우면 기본 환영 문구.", "plzNoteGet": "줍기", "plzNotePut": "내려놓기", "plzNoteCarry": "음악당 계단 앞까지 가져가면 이 곡으로 바뀌어요", "plzNoteHere": "음표는 여기에", "plzSongNow": "🎵 지금 재생: {s}", "plzSongBy": "🎵 {n} 님이 음악을 바꿨어요: {s}", "plzMusicOff": "배경 음악이 꺼져 있어요. 설정 → 소리에서 켜 주세요", "plzSong_pzWaltz": "하프 왈츠", "plzSong_pzLofi": "로파이 카페", "plzSong_pzChip": "8비트 모험", "plzSong_pzHorn": "아일랜드 혼파이프", "plzSong_pzLull": "잘 자 자장가", "plzZd2_gate": "큰 게시판: 단어를 들어 올려 배워요", "plzZd2_band": "음표를 음악당에 가져가 음악을 바꿔요. 오늘의 뉴스도"});
+Object.assign(STR.zh,{"plzGrabT": "連點搶字！", "plzGrabOk": "搶到「{w}」了！", "plzGrabbed": "{n} 把你的字搶走了！", "plzGive": "放他頭上", "plzGiveOk": "把「{w}」放到 {n} 頭上了", "plzGiven": "{n} 把「{w}」放到你頭上了", "plzNbFar": "站到那個字上面才拿得到", "plzZd2_gate": "地上的大公告：站上去把字舉起來，還能搶別人的字"});
+Object.assign(STR.en,{"plzGrabT": "Tap fast to grab!", "plzGrabOk": "You grabbed “{w}”!", "plzGrabbed": "{n} grabbed your word!", "plzGive": "Put on head", "plzGiveOk": "You put “{w}” on {n}'s head", "plzGiven": "{n} put “{w}” on your head", "plzNbFar": "Stand on the word to pick it up", "plzZd2_gate": "A big notice rug: stand on a word to lift it, or grab someone else's"});
+Object.assign(STR.hi,{"plzGrabT": "जल्दी टैप करो, छीन लो!", "plzGrabOk": "तुमने “{w}” छीन लिया!", "plzGrabbed": "{n} ने तुम्हारा शब्द छीन लिया!", "plzGive": "सिर पर रखो", "plzGiveOk": "तुमने “{w}” {n} के सिर पर रखा", "plzGiven": "{n} ने “{w}” तुम्हारे सिर पर रखा", "plzNbFar": "शब्द उठाने के लिए उस पर खड़े हो", "plzZd2_gate": "ज़मीन पर बड़ी सूचना: शब्द पर खड़े होकर उठाओ, या किसी और का छीनो"});
+Object.assign(STR.es,{"plzGrabT": "¡Toca rápido para quitarla!", "plzGrabOk": "¡Te quedaste con “{w}”!", "plzGrabbed": "¡{n} te quitó la palabra!", "plzGive": "En su cabeza", "plzGiveOk": "Pusiste “{w}” en la cabeza de {n}", "plzGiven": "{n} puso “{w}” en tu cabeza", "plzNbFar": "Ponte encima de la palabra para cogerla", "plzZd2_gate": "Gran alfombra de avisos: ponte sobre una palabra para levantarla, o quítasela a otro"});
+Object.assign(STR.ja,{"plzGrabT": "連打して奪え！", "plzGrabOk": "「{w}」を奪った！", "plzGrabbed": "{n} に単語を奪われた！", "plzGive": "頭にのせる", "plzGiveOk": "「{w}」を {n} の頭にのせた", "plzGiven": "{n} が「{w}」をあなたの頭にのせた", "plzNbFar": "単語の上に立つと拾えるよ", "plzZd2_gate": "地面の大きなお知らせ：単語の上に立って持ち上げよう。人の単語も奪える"});
+Object.assign(STR.ko,{"plzGrabT": "빠르게 연타해서 뺏어!", "plzGrabOk": "“{w}” 을(를) 뺏었어요!", "plzGrabbed": "{n} 님이 단어를 뺏어 갔어요!", "plzGive": "머리에 올리기", "plzGiveOk": "“{w}” 을(를) {n} 님 머리에 올렸어요", "plzGiven": "{n} 님이 “{w}” 을(를) 머리에 올려 줬어요", "plzNbFar": "단어 위에 서야 들 수 있어요", "plzZd2_gate": "바닥의 큰 공지: 단어 위에 서서 들어 올리고, 다른 사람 것도 뺏어요"});
+Object.assign(STR.zh,{"plzPiano": "彈琴", "plzPianoGo": "點這裡開始", "plzPianoBest": "最高 {n} 塊", "plzPianoNew": "新紀錄！", "plzPianoAgain": "再一次", "plzSong_pzJazz": "爵士散步", "plzSong_pzBossa": "夏日波沙", "plzSong_pzPenta": "東方五聲", "plzZd2_band": "撿音符換音樂，站到階梯前彈琴小遊戲", "plzNoteHere": "音符放這裡 · 空手來彈琴"});
+Object.assign(STR.en,{"plzPiano": "Play", "plzPianoGo": "Tap to start", "plzPianoBest": "Best: {n} tiles", "plzPianoNew": "New best!", "plzPianoAgain": "Again", "plzSong_pzJazz": "Jazz Stroll", "plzSong_pzBossa": "Summer Bossa", "plzSong_pzPenta": "Eastern Pentatonic", "plzZd2_band": "Swap the music with a note, or play the piano game at the steps", "plzNoteHere": "Drop notes here · empty hands to play"});
+Object.assign(STR.hi,{"plzPiano": "बजाओ", "plzPianoGo": "शुरू करने के लिए टैप करो", "plzPianoBest": "सबसे अच्छा: {n}", "plzPianoNew": "नया रिकॉर्ड!", "plzPianoAgain": "फिर से", "plzSong_pzJazz": "जैज़ सैर", "plzSong_pzBossa": "समर बोसा", "plzSong_pzPenta": "पूर्वी पंचस्वर", "plzZd2_band": "सुर से संगीत बदलो, या सीढ़ियों पर पियानो खेल खेलो", "plzNoteHere": "सुर यहाँ रखो · खाली हाथ बजाओ"});
+Object.assign(STR.es,{"plzPiano": "Tocar", "plzPianoGo": "Toca para empezar", "plzPianoBest": "Récord: {n}", "plzPianoNew": "¡Nuevo récord!", "plzPianoAgain": "Otra vez", "plzSong_pzJazz": "Paseo de jazz", "plzSong_pzBossa": "Bossa de verano", "plzSong_pzPenta": "Pentatónica oriental", "plzZd2_band": "Cambia la música con una nota o toca el piano en los escalones", "plzNoteHere": "Deja las notas aquí · sin nada, a tocar"});
+Object.assign(STR.ja,{"plzPiano": "演奏", "plzPianoGo": "タップでスタート", "plzPianoBest": "ベスト {n} 枚", "plzPianoNew": "新記録！", "plzPianoAgain": "もう一回", "plzSong_pzJazz": "ジャズ散歩", "plzSong_pzBossa": "夏のボサノバ", "plzSong_pzPenta": "東洋の五音", "plzZd2_band": "音符で曲を変えたり、階段の前でピアノゲーム", "plzNoteHere": "音符はここへ · 手ぶらなら演奏"});
+Object.assign(STR.ko,{"plzPiano": "연주", "plzPianoGo": "눌러서 시작", "plzPianoBest": "최고 {n}개", "plzPianoNew": "신기록!", "plzPianoAgain": "다시", "plzSong_pzJazz": "재즈 산책", "plzSong_pzBossa": "여름 보사", "plzSong_pzPenta": "동양 5음계", "plzZd2_band": "음표로 음악을 바꾸거나 계단 앞에서 피아노 게임", "plzNoteHere": "음표는 여기에 · 빈손이면 연주"});
+Object.assign(STR.zh,{"plzPod_power": "戰力", "plzPod_ielts": "IELTS", "plzPod_toeic": "TOEIC", "plzPod_read": "閱讀", "plzPodReadN": "{n} 篇", "plzZd2_fountain": "許願池、四座頒獎台：戰力、IELTS、TOEIC、閱讀"});
+Object.assign(STR.en,{"plzPod_power": "Power", "plzPod_ielts": "IELTS", "plzPod_toeic": "TOEIC", "plzPod_read": "Reading", "plzPodReadN": "{n} reads", "plzZd2_fountain": "Wishing well and four podiums: power, IELTS, TOEIC, reading"});
+Object.assign(STR.hi,{"plzPod_power": "ताकत", "plzPod_ielts": "IELTS", "plzPod_toeic": "TOEIC", "plzPod_read": "पढ़ना", "plzPodReadN": "{n} लेख", "plzZd2_fountain": "इच्छा कुआँ और चार मंच: ताकत, IELTS, TOEIC, पढ़ना"});
+Object.assign(STR.es,{"plzPod_power": "Poder", "plzPod_ielts": "IELTS", "plzPod_toeic": "TOEIC", "plzPod_read": "Lectura", "plzPodReadN": "{n} lecturas", "plzZd2_fountain": "Pozo de los deseos y cuatro podios: poder, IELTS, TOEIC, lectura"});
+Object.assign(STR.ja,{"plzPod_power": "戦力", "plzPod_ielts": "IELTS", "plzPod_toeic": "TOEIC", "plzPod_read": "読書", "plzPodReadN": "{n} 本", "plzZd2_fountain": "願いの泉と4つの表彰台：戦力・IELTS・TOEIC・読書"});
+Object.assign(STR.ko,{"plzPod_power": "전투력", "plzPod_ielts": "IELTS", "plzPod_toeic": "TOEIC", "plzPod_read": "읽기", "plzPodReadN": "{n}편", "plzZd2_fountain": "소원 우물과 시상대 4개: 전투력, IELTS, TOEIC, 읽기"});
+Object.assign(STR.zh,{"plzPianoNone": "還沒有人", "plzSong_town": "小鎮吉格"});
+Object.assign(STR.en,{"plzPianoNone": "No one yet", "plzSong_town": "Town Jig"});
+Object.assign(STR.hi,{"plzPianoNone": "अभी कोई नहीं", "plzSong_town": "टाउन जिग"});
+Object.assign(STR.es,{"plzPianoNone": "Nadie aún", "plzSong_town": "Giga del pueblo"});
+Object.assign(STR.ja,{"plzPianoNone": "まだいない", "plzSong_town": "町のジグ"});
+Object.assign(STR.ko,{"plzPianoNone": "아직 없음", "plzSong_town": "마을 지그"});
+Object.assign(STR.zh,{"plzSong_pzRain":"雨天小調","plzSong_pzSea":"海風船歌","plzSong_pzSamba":"嘉年華森巴","plzSong_pzReel":"愛爾蘭快舞"});
+Object.assign(STR.en,{"plzSong_pzRain":"Rainy Day","plzSong_pzSea":"Sea Breeze","plzSong_pzSamba":"Carnival Samba","plzSong_pzReel":"Irish Reel"});
+Object.assign(STR.hi,{"plzSong_pzRain":"बरसात का दिन","plzSong_pzSea":"समुद्री हवा","plzSong_pzSamba":"कार्निवल साम्बा","plzSong_pzReel":"आयरिश रील"});
+Object.assign(STR.es,{"plzSong_pzRain":"Día de lluvia","plzSong_pzSea":"Brisa marina","plzSong_pzSamba":"Samba de carnaval","plzSong_pzReel":"Reel irlandés"});
+Object.assign(STR.ja,{"plzSong_pzRain":"雨の日","plzSong_pzSea":"海風の舟歌","plzSong_pzSamba":"カーニバル・サンバ","plzSong_pzReel":"アイリッシュ・リール"});
+Object.assign(STR.ko,{"plzSong_pzRain":"비 오는 날","plzSong_pzSea":"바닷바람","plzSong_pzSamba":"카니발 삼바","plzSong_pzReel":"아일랜드 릴"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
