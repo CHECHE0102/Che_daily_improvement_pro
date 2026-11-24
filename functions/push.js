@@ -4,7 +4,8 @@
  * Encryption, VAPID and the timing rules are the same as tools/push.mjs (which now only sends test notifications). */
 import crypto from "node:crypto";
 
-const NEWS_INDEX = "https://cheche0102.github.io/Che_daily_improvement_pro/articles/index.json";
+// the domain first (keeps working if the site moves to the backup host), then the GitHub Pages address
+const NEWS_INDEX = ["https://binbindaily.com/articles/index.json", "https://cheche0102.github.io/Che_daily_improvement_pro/articles/index.json"];
 const CONTACT = "mailto:binbindaily.help@gmail.com";
 export const VAPID_PUBLIC = "BG8pT7pCPH1boxpKEe_fFinoQBJQDHonJyA7E-4Rf-5Wkxv0hM6cphsBOzz9M3ulvp6za-IVA6zItxjqXUV_zsw";
 const AM = [8, 12], PM = [19, 23]; // [from, before) local hours
@@ -88,11 +89,14 @@ export function plan(s, news, now = new Date()) {
 
 
 async function latestNews() {
-  try {
-    const j = await (await fetch(NEWS_INDEX + "?t=" + Date.now(), { signal: AbortSignal.timeout(10000) })).json();
-    const top = (j.articles || []).filter(a => (a.rank || 1) === 1).sort((a, b) => b.date.localeCompare(a.date))[0];
-    return top ? { date: top.date, title: top.title } : null;
-  } catch (e) { return null; }
+  for (const url of NEWS_INDEX) {
+    try {
+      const j = await (await fetch(url + "?t=" + Date.now(), { signal: AbortSignal.timeout(10000) })).json();
+      const top = (j.articles || []).filter(a => (a.rank || 1) === 1).sort((a, b) => b.date.localeCompare(a.date))[0];
+      return top ? { date: top.date, title: top.title } : null;
+    } catch (e) { /* try the next address */ }
+  }
+  return null;
 }
 
 async function saveStats(db, subs, add) {

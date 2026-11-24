@@ -1,0 +1,39 @@
+name: Backup site (Cloudflare Pages)
+# Keeps a full copy of the game on Cloudflare Pages (binbin-daily.pages.dev), so the site can be switched over in a few
+# minutes if GitHub Pages or the GitHub account ever goes down (as on 2026-10-30).
+# Needs repo secrets CLOUDFLARE_API_TOKEN (permission: Account > Cloudflare Pages > Edit) and CLOUDFLARE_ACCOUNT_ID;
+# until they exist every run just skips.
+# Pushes made by other workflows (daily articles, audio manifests) don't start this one, so it also runs every day.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '30 9 * * *'
+    - cron: '30 21 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: backup-site
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Skip until the Cloudflare secrets are added
+        if: env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == ''
+        run: echo "::notice::Cloudflare secrets not set yet, nothing deployed"
+      - uses: actions/checkout@v4
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+      - name: Deploy the site files to Cloudflare Pages
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        run: |
+          mkdir -p /tmp/site
+          rsync -a --exclude .git --exclude .github --exclude tools --exclude functions --exclude art-requests ./ /tmp/site/
+          echo "$(find /tmp/site -type f | wc -l) files, $(du -sm /tmp/site | cut -f1) MB"
+          npx -y wrangler@3 pages project create binbin-daily --production-branch=main 2>/dev/null || true
+          npx -y wrangler@3 pages deploy /tmp/site --project-name=binbin-daily --branch=main --commit-dirty=true
