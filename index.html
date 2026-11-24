@@ -4492,7 +4492,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.96";
+const APP_VERSION="2026.11.97";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5089,7 +5089,7 @@ document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
 const FB_CONFIG={apiKey:"AIzaSyCMGO6INIRITrfhTT0IPR-U0O620xKcaYE",authDomain:location.hostname==="binbindaily.com"?"binbindaily.com":"che-daily-improvement-pro.firebaseapp.com",projectId:"che-daily-improvement-pro",storageBucket:"che-daily-improvement-pro.firebasestorage.app",messagingSenderId:"935084997550",appId:"1:935084997550:web:dd1a7901e357e612a5a63f"};
 const FB_V="10.12.2";
-// App Check (reCAPTCHA v3 site key, public by design): proves requests come from the real BinBin pages, so a script
+// App Check (reCAPTCHA / Google Cloud Fraud Defense site key, public by design; classic v3 is retired): proves requests come from the real BinBin pages, so a script
 // can't hammer the database with a copied config. Empty = off. Turn on enforcement in the Firebase console only after the
 // App Check page shows almost all requests as verified.
 const APPCHECK_KEY="6LcxDjEuAAAAAB4oM1C-V_cFmL3YjlZUfueo3x5q";
@@ -5107,7 +5107,7 @@ async function cloudInit(){
       import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-firestore.js`)]);
     const app=appM.initializeApp(FB_CONFIG);
     if(APPCHECK_KEY&&/^(binbindaily\.com|www\.binbindaily\.com|binbin-daily\.pages\.dev|cheche0102\.github\.io)$/.test(location.hostname)){
-      try{ const acM=await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-app-check.js`); acM.initializeAppCheck(app,{provider:new acM.ReCaptchaV3Provider(APPCHECK_KEY), isTokenAutoRefreshEnabled:true}); }
+      try{ const acM=await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-app-check.js`); acM.initializeAppCheck(app,{provider:new acM.ReCaptchaEnterpriseProvider(APPCHECK_KEY), isTokenAutoRefreshEnabled:true}); }
       catch(e){ console.warn("appcheck",e&&e.message); } }
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
