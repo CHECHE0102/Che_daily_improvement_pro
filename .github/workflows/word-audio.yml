@@ -37,16 +37,35 @@ jobs:
           git add -A
           if ! git diff --cached --quiet; then git commit -q -m "Word audio $(date -u +%F)"; git push -q origin HEAD:words; fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Publish one small branch per first letter (jsDelivr refuses branches over 50 MB; "words" is far bigger)
+        run: |
+          cd wa
+          : > ../shards.txt
+          wt=$(git rev-parse HEAD:w)
+          for l in $(git ls-tree --name-only "$wt" | cut -c1 | sort -u); do
+            git ls-tree "$wt" | awk -v l="$l" '{ split($0, a, "\t"); if (substr(a[2], 1, 1) == l) print }' > ../ent.txt
+            sub=$(git mktree < ../ent.txt)
+            mb=$(git ls-tree -l "$sub" | awk '{ s += $4 } END { printf "%d", s / 1048576 }')
+            if [ "$mb" -ge 45 ]; then echo "::warning::words-$l is $mb MB, close to jsDelivr's 50 MB limit: split it by two letters"; fi
+            top=$(printf '040000 tree %s\tw\n' "$sub" | git mktree)
+            # fixed author/date: the same files always give the same commit, so unchanged letters keep their CDN cache
+            c=$(GIT_AUTHOR_DATE="2026-01-01T00:00:00Z" GIT_COMMITTER_DATE="2026-01-01T00:00:00Z" git commit-tree "$top" -m "Word audio $l")
+            cur=$(git ls-remote origin "refs/heads/words-$l" | cut -f1)
+            if [ "$cur" != "$c" ]; then git push -q -f origin "$c:refs/heads/words-$l"; echo "words-$l updated ($mb MB)"; fi
+            echo "$l $c" >> ../shards.txt
+          done
+          cat ../shards.txt
       - name: Update word-audio.json and the look-up dictionary (assets/dict) on main
         run: |
           python tools/make_dict_index.py
           python - <<'PY'
           import json
           m = json.load(open("wa/manifest.json"))
-          json.dump({"repo": "${{ github.repository }}", "sha": "${{ steps.pub.outputs.sha }}", "voice": m["voice"], "w": ",".join(m["w"])},
+          sh = dict(l.split() for l in open("shards.txt") if l.strip())   # first letter -> commit on branch words-<letter>
+          json.dump({"repo": "${{ github.repository }}", "sha": "${{ steps.pub.outputs.sha }}", "sh": sh, "voice": m["voice"], "w": ",".join(m["w"])},
                     open("word-audio.json", "w"), separators=(",", ":"))
           PY
-          rm -rf wa
+          rm -rf wa shards.txt ent.txt
           git config user.name "CHECHE0102"
           git config user.email "CHECHE0102@users.noreply.github.com"
           git add word-audio.json assets/dict
