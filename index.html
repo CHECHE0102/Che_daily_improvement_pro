@@ -849,6 +849,11 @@ body.pg-lock .toast{bottom:auto;top:calc(10px + env(safe-area-inset-top,0px));z-
 .maint-ov{position:fixed;inset:0;z-index:100;background:var(--paper);display:grid;place-items:center;padding:24px}
 .maint-card{max-width:360px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}.maint-card h2{margin:0}.maint-ic{font-size:64px;animation:bmpulse 2s ease-in-out infinite}
 body.maint-lock{overflow:hidden}
+.ann-bn{display:flex;gap:10px;align-items:flex-start;margin:10px 0 0;padding:10px 12px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--accent);font-size:14px;line-height:1.5}.ann-bn.warn{background:var(--gorse-soft);border-color:var(--gorse)}.ann-bn>b{font-size:18px;line-height:1.2}.ann-bn>div{flex:1;min-width:0;white-space:pre-line;overflow-wrap:anywhere}.ann-bn .ann-x{flex:none;border:0;background:none;color:inherit;font-size:18px;line-height:1;padding:2px 4px;cursor:pointer;opacity:.7}
+.fb-done{opacity:.55}.fb-rep{border-left:3px solid var(--bad);padding-left:8px}.fb-reply{margin-top:4px;padding:6px 8px;border-radius:8px;background:var(--accent-soft);font-size:13px}.fb-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.fb-item textarea{margin-top:6px}
+#inboxPop .pd-scrim{z-index:74}#inboxPop .pd-card{z-index:75}.ib-ic{font-size:44px}.ib-item{text-align:left;padding:8px 10px;border-radius:10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
+.fn{display:flex;flex-direction:column;gap:4px}.fn-row{display:grid;grid-template-columns:7.5em 1fr 3em 6.5em;gap:6px;align-items:center;font-size:13px}.fn-bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}.fn-bar i{display:block;height:100%;background:var(--accent)}.fn-row b{text-align:right}
+.dev-ann{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--accent);border-radius:12px;margin:8px 0}.dev-ann textarea{min-height:60px}
 .maint-bn{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:99;background:var(--bad);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;pointer-events:none;opacity:.92;white-space:nowrap}
 .dev-maint{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--bad);border-radius:12px;margin:8px 0}
 .sup-note{margin:6px 0 2px;padding:8px 10px;border-radius:10px;background:var(--gorse-soft);border:1px solid var(--gorse);line-height:1.5}
@@ -923,6 +928,7 @@ body.maint-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.hs-fig .hero-svg{animation:none}}
 .mast-l{display:flex;align-items:center;gap:8px;min-width:0}
 .st-nick{display:flex;gap:8px;margin:4px 0 2px}.st-nick .search{flex:1;min-width:0}.st-nick .btn{flex:none}.st-nick-note{margin:4px 0 6px;color:var(--muted);text-align:center}.st-signin{align-self:center;margin-bottom:6px}
+body:has(.scrim,.pd-card,.sc-modal,#onb,#story) .login-hint{display:none}
 .login-hint{position:absolute;top:calc(100% + 10px);left:10px;z-index:6;max-width:min(300px,calc(100vw - 40px));display:flex;align-items:flex-start;gap:8px;padding:11px 10px 11px 14px;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-size:14px;line-height:1.45;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.28);cursor:pointer;animation:lhIn .35s ease-out both}
 .login-hint::before{content:"";position:absolute;top:-7px;left:14px;width:14px;height:14px;background:inherit;transform:rotate(45deg);border-radius:3px 0 0 0}
 .login-hint span{position:relative}
@@ -1978,7 +1984,7 @@ const sumOf=a=>LANG==="ja"?(a.summaryJa||a.summaryEn||a.summaryZh):LANG==="ko"?(
 const mean=x=>!x?"":LANG==="ja"?(x.ja||x.en||x.zh):LANG==="ko"?(x.ko||x.en||x.zh):LANG==="es"?(x.es||x.en||x.zh):LANG==="hi"?(x.hi||x.en||x.zh):LANG==="en"?(x.en||x.zh):x.zh;
 function setLang(k){ const was=SC; SC=k==="cn"; LANG=SC?"zh":k; try{ localStorage.setItem("che-pro-lang",k); }catch(e){} if(PUSH.on) pushWrite({lang:LANG,sc:SC}); document.documentElement.lang=HTML_LANG[k]; S.langSheet=false;
   if(was&&!SC){ location.reload(); return; } applyStaticText(); render(); scApply(); }
-function applyStaticText(){
+function applyStaticText(){ if(typeof annApply==="function"&&S.notice) setTimeout(annApply,0);
   const set=(id,txt)=>{ const b=document.getElementById(id); if(b) b.lastChild.textContent=txt; };
   set("tab-today",T("tabToday")); set("tab-read",T("tabRead")); set("tab-adv",T("tabAdv")); set("tab-lsn",T("lsnTab")); set("tab-play",T("tabPlay")); { const sb=document.getElementById("setBtn"); if(sb) sb.setAttribute("aria-label",T("tabSet")); }
   { const hb=document.getElementById("helpBtn"); if(hb) hb.setAttribute("aria-label",(HELP[LANG]||HELP.en).title); }
@@ -2823,6 +2829,7 @@ function startQuiz(kind, art){
 }
 function finishPost(art, score, total){
   const d=dayRec();
+  actFirstQuiz();
   if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
   if(isMain(art)) styleDaily();
   if(isMain(art)&&INV.ref) setTimeout(invTick,600);
@@ -4222,28 +4229,18 @@ function devAct(k){
 }
 
 /* ----- developer: player data & system stats (needs admin rule in Firestore) ----- */
-async function devLoadStats(){
+async function devLoadStats(fresh){
   if(!CLOUD.user||!CLOUD.fb){ S.devStats={err:T("dsLogin")}; return render(); }
   const {fsM,db}=CLOUD.fb; S.devStats={loading:true}; render();
   try{
-    const us=await fsM.getDocs(fsM.collection(db,"users"));
-    const users=[]; us.forEach(d=>users.push({id:d.id, ...safeDoc(d.data())}));
-    const counts=await Promise.all(users.slice(0,300).map(u=>fsM.getCountFromServer(fsM.collection(db,"users",u.id,"words")).then(c=>c.data().count).catch(()=>null)));
-    users.forEach((u,i)=>u.words=counts[i]);
-    let lbN=null; try{ lbN=(await fsM.getCountFromServer(fsM.collection(db,"leaderboard"))).data().count; }catch(e){}
+    // the numbers are worked out on the server (daily, or now when asked) so the panel never downloads every player
+    let sum=null;
+    if(fresh){ try{ const tok=await CLOUD.user.getIdToken(); const r=await fetch(PAY_FN+"/adminStats",{method:"POST",headers:{Authorization:"Bearer "+tok}}); if(r.ok) sum=await r.json(); }catch(e){} }
+    if(!sum){ const sn=await fsM.getDoc(fsM.doc(db,"stats","summary")); sum=sn.exists()?safeDoc(sn.data()):null; }
     let regions={}; try{ const r=await fsM.getDoc(fsM.doc(db,"stats","regions")); if(r.exists()) regions=r.data(); }catch(e){}
-    let rooms=0; try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); rs.forEach(d=>{ const x=d.data(); if(x.state!=="done"&&Date.now()-(x.created||0)<3600e3) rooms++; }); }catch(e){}
     const fb=await devLoadFeedback();
-    // game play stats: per-user counters (game.plays) merged with room history (parties / rooms)
-    const per={}; const bump=(u,k,n)=>{ per[k]=per[k]||{}; per[k][u]=Math.max(per[k][u]||0,n); };
-    users.forEach(u=>{ const g=u.game||{}, pl=g.plays||{}; for(const [k,n] of Object.entries(pl)) bump(u.id,k,n);
-      if(g.ielts&&g.ielts.days) bump(u.id,"ielts",Object.keys(g.ielts.days).length); if(g.battles) bump(u.id,"battle",g.battles); });
-    try{ const ps=await fsM.getDocs(fsM.collection(db,"parties")); const cnt={}; ps.forEach(d=>{ const x=d.data(); if(x.state!=="done") return; for(const u of Object.keys(x.players||{})){ const k=x.game+"|"+u; cnt[k]=(cnt[k]||0)+1; } }); for(const [k,n] of Object.entries(cnt)){ const [g,u]=k.split("|"); bump(u,g,n); } }catch(e){}
-    try{ const rs=await fsM.getDocs(fsM.collection(db,"rooms")); const cnt={}; rs.forEach(d=>{ const x=d.data(); if(x.state!=="done") return; [x.host,x.guest].filter(Boolean).forEach(u=>cnt[u]=(cnt[u]||0)+1); }); for(const [u,n] of Object.entries(cnt)) bump(u,"coop",n); }catch(e){}
-    const games=Object.fromEntries(Object.entries(per).map(([k,m])=>[k,{players:Object.keys(m).length, plays:Object.values(m).reduce((a,b)=>a+b,0)}]));
     let push=null; try{ const r=await fsM.getDoc(fsM.doc(db,"config","pushStats")); if(r.exists()) push=r.data(); }catch(e){}
-    let act=null; try{ const r=await fsM.getDocs(fsM.collection(db,"act")); const a=[]; r.forEach(d=>a.push(safeDoc(d.data()))); act=a.length?a:null; }catch(e){}
-    S.devStats={users, lbN, regions, rooms, fb, games, push, act, at:new Date()};
+    S.devStats={sum, regions, fb, push, at:new Date()};
   }catch(e){ S.devStats={err:e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")}; }
   render();
 }
@@ -4253,34 +4250,85 @@ function devStatsHtml(){
   if(!D) return `<button class="btn ghost" data-act="devstats">📊 ${T("dsLoad")}</button>`;
   if(D.loading) return `<p class="muted">${T("loading")}</p>`;
   if(D.err) return `<p class="muted sm-t">${esc(D.err)}</p><button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button>`;
-  const t=today(), day=s=>(s||"").slice(0,10), since=n=>{ const d=new Date(); d.setDate(d.getDate()-n); return ymd(d); };
-  const U=D.users, act1=U.filter(u=>day(u.updatedAt)===t).length, act7=U.filter(u=>day(u.updatedAt)>=since(6)).length;
-  const lv=U.map(u=>(u.game&&u.game.lv)||1), avgLv=U.length?(lv.reduce((a,b)=>a+b,0)/U.length).toFixed(1):"–";
-  const words=U.reduce((a,u)=>a+(u.words||0),0), daysPlayed=U.reduce((a,u)=>a+Object.keys(u.days||{}).length,0);
-  const quizzes=U.reduce((a,u)=>a+Object.values(u.days||{}).reduce((b,d)=>b+(d.preDone?1:0)+(d.postDone?1:0)+Object.keys(d.postBy||{}).length,0),0);
-  const conqAll=U.filter(u=>u.game&&Object.keys(u.game.conq||{}).length>=23).length;
+  const X=D.sum, since=n=>{ const d=new Date(); d.setDate(d.getDate()-n); return ymd(d); };
   const regs=Object.entries(D.regions||{}).sort((a,b)=>String(b[1]).localeCompare(String(a[1])));
   const regional=RAW_INDEX.filter(a=>a.region).length, latest=(S.index[0]||{}).date||"–";
   const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
-  const rows=U.slice().sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).map(u=>{ const g=u.game||{};
-    return `<tr><td><b>${esc(g.nick||u.name||u.id.slice(0,6))}</b>${g.nick&&u.name?`<br><span class="muted">${esc(u.name)}</span>`:""}</td><td>${num(g.lv||1)}</td><td>${num(g.gold||0)}</td><td>${u.words==null?"–":num(u.words)}</td><td>${Object.keys(u.days||{}).length}</td><td>${Object.keys(g.conq||{}).length}</td><td>${esc(u.region||"–")}</td><td>${esc(day(u.updatedAt)||"–")}</td></tr>`; }).join("");
+  const reloadBtn=`<div class="dev-grid"><button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button><button class="btn ghost sm" data-act="devstatsnow">🔄 ${T("dsFresh")}</button></div>`;
+  const fbHtml=`<div class="eyebrow">${T("dsFeedback",{n:D.fb?D.fb.length:"–"})}</div>${devFbHtml(D.fb)}`;
+  const errHtml=devErrWatchHtml(X);
+  if(!X) return `<div class="ds"><p class="muted sm-t">${T("dsNoSum")}</p>${reloadBtn}${errHtml}${fbHtml}</div>`;
+  const P=Array.isArray(X.players)?X.players:[];
+  const rows=P.map(u=>`<tr><td><b>${esc(u.nick||u.name||"–")}</b>${u.nick&&u.name?`<br><span class="muted">${esc(u.name)}</span>`:""}</td><td>${num(u.lv)}</td><td>${num(u.gold)}</td><td>${num(u.days)}</td><td>${num(u.conq)}</td><td>${esc(u.region||"–")}</td><td>${esc(u.last||"–")}</td></tr>`).join("");
   return `<div class="ds">
+    <p class="muted sm-t">${T("dsAsOf",{t:new Date(+X.at||0).toLocaleString([], {month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})})}</p>
     <div class="eyebrow">${T("dsSys")}</div>
-    <div class="stats ds-tiles">${tile(U.length,T("dsUsers"))}${tile(act1,T("dsToday"))}${tile(act7,T("dsWeek"))}${tile(avgLv,T("dsAvgLv"))}${tile(words,T("dsWords"))}${tile(daysPlayed,T("dsDays"))}${tile(quizzes,T("dsQuiz"))}${tile(D.lbN??"–",T("dsLb"))}${tile(D.rooms,T("dsRooms"))}${tile(conqAll,T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
+    <div class="stats ds-tiles">${tile(num(X.users),T("dsUsers"))}${tile(num(X.today),T("dsToday"))}${tile(num(X.week),T("dsWeek"))}${tile(num(X.avgLv),T("dsAvgLv"))}${tile(X.words==null?"–":num(X.words),T("dsWords"))}${tile(num(X.daysPlayed),T("dsDays"))}${tile(num(X.quizzes),T("dsQuiz"))}${tile(X.lbN==null?"–":num(X.lbN),T("dsLb"))}${tile(num(X.rooms),T("dsRooms"))}${tile(num(X.conqAll),T("dsConq"))}${tile(S.index.filter(a=>!a.region).length,T("dsArts"))}${tile(regional,T("dsRegArts"))}</div>
     <p class="muted sm-t">${T("dsLatest",{d:latest})}</p>
     <div class="eyebrow">🎮 ${T("dsGames")}</div>
-    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["five","feName"],["spy","syName"],["root","rtName"],["duel","duName"],["draw","drName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(D.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${x.players}</td><td>${x.plays}</td></tr>`; }).join("")}</table>
-    ${devRetHtml(D.act)}
+    <table class="ds-t"><tr><th>${T("dsGame")}</th><th>${T("dsGPlayers")}</th><th>${T("dsGPlays")}</th></tr>${[["five","feName"],["spy","syName"],["root","rtName"],["duel","duName"],["draw","drName"],["hunt","huName"],["bomb","bmName"],["quiz","qzName"],["spell","pgSpell"],["drop","pgDrop"],["coop","cmCoop"],["coopSolo","coSolo"],["ielts","dsGIelts"],["ieltsPrac","dsGIeltsP"],["battle","dsGBattle"]].map(([k,l])=>{ const x=(X.games||{})[k]||{players:0,plays:0}; return `<tr><td>${esc(T(l))}</td><td>${num(x.players)}</td><td>${num(x.plays)}</td></tr>`; }).join("")}</table>
+    ${devRetHtml(X.ret)}
+    ${devFunnelHtml(X.ret)}
+    ${errHtml}
     ${devPushHtml(D.push)}
     <div class="eyebrow">${T("dsRegions")}</div>
     ${regs.length?`<table class="ds-t"><tr><th>${T("dsRegion")}</th><th>${T("dsLast")}</th><th></th></tr>${regs.map(([k,v])=>`<tr><td>${esc(regionLabel(k))} <span class="muted">${esc(k)}</span></td><td>${esc(v)}</td><td>${String(v)>=since(6)?"🟢":"⚪"}</td></tr>`).join("")}</table>`:`<p class="muted sm-t">–</p>`}
-    <div class="eyebrow">${T("dsPlayers",{n:U.length})}</div>
-    <div class="ds-scroll"><table class="ds-t"><tr><th>${T("nick")}</th><th>Lv</th><th>${T("gold")}</th><th>${T("dsW")}</th><th>${T("dsD")}</th><th>${T("dsC")}</th><th>${T("dsRegion")}</th><th>${T("dsLast")}</th></tr>${rows}</table></div>
-    <div class="eyebrow">${T("dsFeedback",{n:D.fb?D.fb.length:"–"})}</div>
-    ${D.fb&&D.fb.length?`<div class="fb-list">${D.fb.map(f=>`<div class="fb-item"><div class="muted sm-t">${esc(String(f.at||"").slice(0,16).replace("T"," "))} · ${esc(f.type||"")} · ${esc(f.nick||f.name||"–")} · Lv ${num(f.lv)} · ${esc(f.lang||"")}/${esc(f.region||"")}</div><div>${esc(f.msg||"")}</div>${f.contact?`<div class="muted sm-t">✉ ${esc(f.contact)}</div>`:""}</div>`).join("")}</div>`:`<p class="muted sm-t">${D.fb===null?T("dsDenied"):"–"}</p>`}
-    <p class="muted sm-t">${T("dsNote",{t:D.at.toLocaleTimeString()})}</p>
-    <button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button></div>`;
+    <div class="eyebrow">${T("dsPlayers",{n:num(X.users)})} · ${T("dsRecent100")}</div>
+    <div class="ds-scroll"><table class="ds-t"><tr><th>${T("nick")}</th><th>Lv</th><th>${T("gold")}</th><th>${T("dsD")}</th><th>${T("dsC")}</th><th>${T("dsRegion")}</th><th>${T("dsLast")}</th></tr>${rows}</table></div>
+    ${fbHtml}
+    ${reloadBtn}</div>`;
 }
+// 新玩家漏斗: of the devices that first opened BinBin in the last 30 days, how many reached each step
+function devFunnelHtml(R){ const F=R&&Array.isArray(R.funnel)?R.funnel:null; const head=`<div class="eyebrow">🪜 ${T("fnTitle")}</div>`;
+  if(!F||!F.length||!(+F[0].n)) return head+`<p class="muted sm-t">${T("drNone")}</p>`;
+  const top=+F[0].n||1;
+  const bars=F.map(({k,n},i)=>{ const p=Math.round((+n||0)/top*100), prev=i?(+F[i-1].n||0):0, drop=i&&prev?Math.round((prev-(+n||0))/prev*100):0;
+    return `<div class="fn-row"><span>${T("fn_"+k)}</span><div class="fn-bar"><i style="width:${p}%"></i></div><b>${num(n)}</b><small class="muted">${p}%${i&&drop>0?` · −${drop}%`:""}</small></div>`; }).join("");
+  const st=R.introStop||{}, stop=[0,1,2,3].map(o=>`${T("fnStep",{n:o+1})} ${num(st[o]||0)}`).join(" · ");
+  return head+`<div class="fn">${bars}</div><p class="muted sm-t">${T("fnIntroStop")} ${stop}</p><p class="muted sm-t">${T("fnNote")}</p>`; }
+// error watch: last 24 h count + turn on error push notifications on this phone
+function devErrWatchHtml(X){ const on=(()=>{ try{ return localStorage.getItem("che-pro-errpush")==="1"; }catch(e){ return false; } })();
+  return `<div class="eyebrow">🚨 ${T("ewTitle")}</div><p class="sm-t">${T("ew24",{n:X&&X.errors24!=null?num(X.errors24):"–"})}</p>
+    <button class="btn ghost sm" data-act="errpush">${on?"✓ "+T("ewOn"):"🔔 "+T("ewTurnOn")}</button><p class="muted sm-t">${T("ewNote")}</p>`; }
+async function devErrPush(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const st=pushState(); if(st==="ios"||st==="no"){ S.pushHelp=true; render(); return; }
+  try{ const perm=await Notification.requestPermission(); if(perm!=="granted") return toast(T("pushDenied"));
+    const sub=await pushSubscribe(), j=sub.toJSON(), {fsM,db}=CLOUD.fb;
+    await fsM.setDoc(fsM.doc(db,"adminPush",PUSH.id),{endpoint:j.endpoint, p256dh:j.keys.p256dh, auth:j.keys.auth, ts:Date.now()});
+    try{ localStorage.setItem("che-pro-errpush","1"); }catch(e){} toast(T("ewOn")); render(); }
+  catch(e){ console.warn("errpush",e&&(e.code||e.message)); toast(T("pushFail")); } }
+/* feedback inbox for the developer: open items first, mark done, reply (the player sees the reply next time they open the game) */
+function devFbHtml(L){
+  if(!L||!L.length) return `<p class="muted sm-t">${L===null?T("dsDenied"):"–"}</p>`;
+  const all=!!S.fbAll, open=L.filter(f=>!f.done), shown=all?L:open;
+  const item=f=>`<div class="fb-item${f.done?" fb-done":""}${f.type==="report"?" fb-rep":""}" data-fbid="${esc(f._id||"")}"><div class="muted sm-t">${esc(String(f.at||"").slice(0,16).replace("T"," "))} · ${f.type==="report"?"🚩 ":""}${esc(f.type||"")} · ${esc(f.nick||f.name||"–")} · Lv ${num(f.lv)} · ${esc(f.lang||"")}/${esc(f.region||"")}</div><div>${esc(f.msg||"")}</div>${f.contact?`<div class="muted sm-t">✉ ${esc(f.contact)}</div>`:""}
+    ${f.reply?`<div class="fb-reply">↩ ${esc(f.reply)}</div>`:""}
+    <div class="fb-tools"><button class="btn ghost sm" data-act="fbdone" data-k="${esc(f._id||"")}">${f.done?T("fbUndo"):"✓ "+T("fbDone")}</button>${f.uid&&!f.reply?`<button class="btn ghost sm" data-act="fbreply" data-k="${esc(f._id||"")}">💬 ${T("fbReply")}</button>`:""}</div>
+    ${S.fbReplyId===f._id?`<textarea id="fbReplyTx" class="search" maxlength="500" rows="3" placeholder="${T("fbReplyPh")}"></textarea><button class="btn sm" data-act="fbreplysend" data-k="${esc(f._id||"")}">${T("fbReplySend")}</button>`:""}</div>`;
+  return `<div class="seg" role="group"><button data-act="fball" data-k="0" aria-pressed="${!all}">${T("fbOpen",{n:open.length})}</button><button data-act="fball" data-k="1" aria-pressed="${all}">${T("fbAllN",{n:L.length})}</button></div>
+    ${shown.length?`<div class="fb-list">${shown.map(item).join("")}</div>`:`<p class="muted sm-t">${T("fbNoneOpen")}</p>`}`; }
+async function devFbDone(id){ const D=S.devStats, f=D&&D.fb&&D.fb.find(x=>x._id===id); if(!f||!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const {fsM,db}=CLOUD.fb; try{ await fsM.updateDoc(fsM.doc(db,"feedback",id),{done:!f.done}); f.done=!f.done; render(); }catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
+async function devFbReply(id){ const D=S.devStats, f=D&&D.fb&&D.fb.find(x=>x._id===id); if(!f||!f.uid||!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const msg=(($("#fbReplyTx")||{}).value||"").trim().slice(0,500); if(!msg) return toast(T("annEmpty"));
+  const {fsM,db}=CLOUD.fb;
+  try{ const B=fsM.writeBatch(db);
+    B.set(fsM.doc(fsM.collection(db,"inbox",f.uid,"m")),{msg, q:String(f.msg||"").slice(0,200), at:Date.now(), seen:false});
+    B.update(fsM.doc(db,"feedback",id),{done:true, reply:msg});
+    await B.commit(); f.done=true; f.reply=msg; S.fbReplyId=null; toast(T("fbReplied")); render(); }
+  catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
+// the player's side: replies from BinBin to feedback they sent, shown once after sign-in
+async function inboxCheck(){ if(!CLOUD.user||!CLOUD.fb||DEV) return; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"inbox",me,"m"), fsM.where("seen","==",false), fsM.limit(3))); if(sn.empty) return;
+    const L=[]; sn.forEach(d=>L.push({id:d.id, ...safeDoc(d.data())})); L.sort((a,b)=>(a.at||0)-(b.at||0)); inboxShow(L); }
+  catch(e){ console.warn("inbox",e&&e.code); } }
+function inboxShow(L){ let el=document.getElementById("inboxPop"); if(!el){ el=document.createElement("div"); el.id="inboxPop"; document.body.appendChild(el); }
+  el.innerHTML=`<div class="scrim pd-scrim"></div><div class="pd-card ib-card" role="dialog" aria-modal="true"><div class="ib-ic">💌</div><h2>${T("ibTitle")}</h2>
+    ${L.map(x=>`<div class="ib-item">${x.q?`<div class="muted sm-t">${T("ibYou")}「${esc(String(x.q))}」</div>`:""}<div>${esc(String(x.msg||""))}</div></div>`).join("")}
+    <button class="btn" data-ibok="${esc(L.map(x=>x.id).join(","))}">${T("genYes")}</button></div>`; }
+document.addEventListener("click",async e=>{ const b=e.target.closest("[data-ibok]"); if(!b) return; const el=document.getElementById("inboxPop"); if(el) el.remove();
+  if(!CLOUD.fb||!CLOUD.user) return; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  for(const id of b.dataset.ibok.split(",").filter(Boolean)){ try{ await fsM.updateDoc(fsM.doc(db,"inbox",me,"m",id),{seen:true}); }catch(_){} } });
 function devBadgeHtml(){
   const P=S.devBadge||(S.devBadge={k:"9.0",n:0});
   return `<div class="dev-badge"><div class="eyebrow">🎖 ${T("dBadge")}</div>
@@ -4401,6 +4449,33 @@ async function maintSet(on){
   try{ await fsM.setDoc(fsM.doc(db,"config","site"), on?{on:true, msg, until:min?Date.now()+min*60000:0, at:Date.now()}:{on:false, msg:"", until:0, at:Date.now()}); toast(on?T("mtOnNow"):T("mtOffNow")); }
   catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); }
 }
+/* ----- announcement banner (config/notice in Firestore): a note under the top bar that does not block the game,
+   e.g. "the plaza is closed tonight 22:00-23:00". Each player can close it; a new announcement shows again. ----- */
+function annText(N){ return (LANG!=="zh"&&N.msgEn)?N.msgEn:(N.msg||N.msgEn||""); }
+function annLive(N){ return !!(N&&N.id&&(N.msg||N.msgEn)&&(!N.until||N.until>Date.now())); }
+function annApply(){
+  const N=S.notice; let el=document.getElementById("annBn"); let gone=""; try{ gone=localStorage.getItem("che-pro-ann")||""; }catch(e){}
+  if(!annLive(N)||gone===N.id){ if(el) el.remove(); }
+  else { if(!el){ el=document.createElement("div"); el.id="annBn"; el.setAttribute("role","status"); const app=document.getElementById("app"); if(!app) return; app.parentNode.insertBefore(el,app); }
+    el.className="ann-bn"+(N.kind==="warn"?" warn":""); el.innerHTML=`<b>${N.kind==="warn"?"⚠️":"📢"}</b><div>${esc(annText(N))}</div><button class="ann-x" data-annx="${esc(N.id)}" aria-label="${T("annClose")}">✕</button>`; }
+  const d=document.getElementById("devAnn"); if(d) d.innerHTML=devAnnInner(); }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-annx]"); if(!b) return; try{ localStorage.setItem("che-pro-ann",b.dataset.annx); }catch(_){} const el=document.getElementById("annBn"); if(el) el.remove(); });
+function devAnnInner(){ const N=S.notice, live=annLive(N);
+  return `<div class="eyebrow">📢 ${T("annDev")} · <b>${live?T("annOnNow"):T("annOffNow")}</b></div>
+    ${isAdminUser()?"":`<p class="muted sm-t">${T("mtNeedAdmin")}</p>`}
+    ${live?`<p class="sm-t">${esc(N.msg||"")}${N.msgEn?`<br><span class="muted">${esc(N.msgEn)}</span>`:""}${N.until?`<br><span class="muted">${T("annUntil",{t:new Date(N.until).toLocaleString([], {month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})})}</span>`:""}</p><button class="btn ghost sm" data-act="annset" data-k="0">${T("annOff")}</button>`:""}
+    <textarea id="annMsg" class="search" maxlength="300" placeholder="${T("annPh")}"></textarea>
+    <input id="annEn" class="search" maxlength="300" placeholder="${T("annPhEn")}">
+    <div class="seg" role="group"><select id="annKind" class="search"><option value="info">📢 ${T("annInfo")}</option><option value="warn">⚠️ ${T("annWarn")}</option></select>
+    <select id="annDur" class="search"><option value="1">1 ${T("annDay")}</option><option value="3">3 ${T("annDay")}</option><option value="7">7 ${T("annDay")}</option><option value="0">${T("annNoEnd")}</option></select></div>
+    <button class="btn sm" data-act="annset" data-k="1">${T("annPost")}</button>`; }
+async function annSet(on){
+  if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+  const v=id=>((document.getElementById(id)||{}).value||"").trim(), msg=v("annMsg").slice(0,300), msgEn=v("annEn").slice(0,300), days=+v("annDur")||0;
+  if(on&&!msg&&!msgEn) return toast(T("annEmpty"));
+  const {fsM,db}=CLOUD.fb;
+  try{ await fsM.setDoc(fsM.doc(db,"config","notice"), on?{id:String(Date.now()), msg, msgEn, kind:v("annKind")==="warn"?"warn":"info", until:days?Date.now()+days*864e5:0, at:Date.now()}:{id:"", msg:"", msgEn:"", kind:"info", until:0, at:Date.now()}); toast(T("dDone")); }
+  catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
 function devPanel(){
   if(!DEV) return "";
   const b=(k,l)=>`<button class="btn ghost sm" data-act="dev" data-k="${k}">${T(l)}</button>`;
@@ -4409,7 +4484,7 @@ function devPanel(){
   const stSel=`<div class="dev-plan"><b>${T("devStreakT")}</b><div class="seg" role="group">${[0,10,30,60,100,180].map(n=>`<button data-act="dev" data-k="streak-${n}" aria-pressed="${DEV.streak===n}">${n}</button>`).join("")}</div><button class="btn ghost sm" data-act="dev" data-k="loginagain">${T("devLoginAgain")}</button></div>`;
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${PLANS_ON?planSel:stSel}
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}${b("style","dStyle")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
-    <div id="devMaint" class="dev-maint">${devMaintInner()}</div>
+    <div id="devMaint" class="dev-maint">${devMaintInner()}</div><div id="devAnn" class="dev-ann">${devAnnInner()}</div>
     ${devFeatHtml()}${plzNoticeDev()}
     ${devSupHtml()}
     ${devBadgeHtml()}
@@ -4417,13 +4492,13 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.94";
+const APP_VERSION="2026.11.95";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
     ${S.devAsk&&!DEV?`<div class="row" style="flex-wrap:nowrap"><input id="devCode" class="search" type="password" autocomplete="off" placeholder="${T("devCode")}"><button class="btn sm" data-act="devunlock" style="flex:none">${T("devGo")}</button></div>`:""}</div>`;
 }
-function applyMast(){ const m=document.querySelector("header.mast"); if(m) m.classList.toggle("dev", !!DEV); if(typeof maintApply==="function") maintApply(); }
+function applyMast(){ const m=document.querySelector("header.mast"); if(m) m.classList.toggle("dev", !!DEV); if(typeof maintApply==="function") maintApply(); if(typeof annApply==="function") annApply(); }
 
 
 const HELP={"zh": {"title": "使用說明", "intro": "每天花 10–15 分鐘讀一篇愛爾蘭新聞，邊學英文邊玩遊戲。", "close": "💚 做這個 App，是希望能幫助每一個想學好英文的人。每天進步一點點，英文就會越來越好。祝你學習愉快！", "sign": "— CheChe", "ok": "開始使用", "secs": [["📰", "每日三步驟", "① 複習測驗：抽考前幾天查過的單字，越不熟的字越容易被抽到。② 閱讀頭條：看不懂的字直接點，會顯示翻譯、相似詞、反義詞和例句，並自動存進字典。③ 讀後測驗：固定 10 題，每題都有講解，答錯的更要看。"], ["📚", "字典", "查過的字都會存在這裡，可以搜尋，也可以依「最不熟」排序。上方的「間隔複習」每完成一次可以拿 1 片幸運草（每天最多 3 張）。"], ["🎯", "英文程度", "到「設定」選 B1、B2、C1 或 IELTS 7–8，文章會換成對應難度的版本。"], ["⚔️", "冒險", "測驗答對就能賺金幣和出征令。到商店買五行裝備，用出征令攻打愛爾蘭各城鎮的怪物，打贏就能佔領城鎮、每天收稅。武器屬性克制怪物時傷害 ×1.5，出征前記得看五行圖挑裝備。目標：從最小的小鎮一路打到都柏林，佔領整座島！ 城鎮可以比你的等級早 3 級挑戰，每隻怪物都會標「輕鬆／勢均力敵／危險」，那是用你現在的裝備預估的勝率。打輸了也不是白打：還沒佔領的城鎮，怪物會帶著傷，下次 HP 會少一點。隔幾天沒來，回來後前幾場勝利經驗值 ×2。"], ["🍀", "幸運屋", "1 片幸運草可以轉一次命運輪盤，2 片以上可以買刮刮樂。刮到的元素碎片，同屬性、同等級集滿 3 個就能合成元素寶石，鑲在武器或防具上變強。 合成寶石要付一點金幣；寶石可以直接換掉（舊的會碎掉），想留著舊寶石就用解鑲符取下。金幣也能換幸運草，每天最多 3 次。"], ["🤝", "合作與排行榜", "登入後可以和朋友開房間，一起找文章裡的錯字打倒魔王。在設定取個暱稱，就能用等級、HP、攻擊力和大家比排名。"], ["⚙️", "設定", "用 Google 登入一次，進度就會存到雲端，換手機也不會不見。語言、英文程度和備份也都在這裡。"], ["📱", "小技巧", "在 Safari 按「分享」→「加入主畫面」，就能像 App 一樣從主畫面打開。"]]}, "en": {"title": "How to use", "intro": "Spend 10–15 minutes a day reading one Irish news story, and play a game while you learn.", "close": "💚 I made this app hoping it helps everyone who wants to learn English. A little progress every day adds up. Enjoy learning!", "sign": "— CheChe", "ok": "Let's go", "secs": [["📰", "Three steps a day", "① Review quiz: words you looked up on earlier days, and the ones you know least come up most. ② Read the headline: tap any word you don't know to see its meaning, synonyms, opposites and an example; it's saved to your dictionary. ③ After-reading quiz: always 10 questions, each with an explanation, especially the ones you get wrong."], ["📚", "Words", "Every word you look up is saved here. Search it or sort by \"Weakest\". Each finished Spaced review at the top earns 1 shamrock (up to 3 a day)."], ["🎯", "English level", "In Settings choose B1, B2, C1 or IELTS 7–8 and articles switch to a version at that level."], ["⚔️", "Quest", "Correct answers earn gold and quest passes. Buy elemental gear in the shop and use passes to fight the monsters in Ireland's towns. Win to conquer a town and collect taxes every day. A weapon whose element beats the monster deals ×1.5 damage, so check the five-element chart first. Goal: fight from the smallest village all the way to Dublin and conquer the whole island! You can attack a town up to 3 levels early, and every monster is tagged Easy, Even fight or Risky based on your current gear. Losing still helps: a monster in a town you have not taken stays wounded, with less HP next time. If you miss a few days, your next wins give double EXP."], ["🍀", "Luck", "1 shamrock spins the Wheel of Fate once; 2 or more buy a scratch card. Collect 3 element shards of the same element and tier to make an element gem, then set it in your weapon or armour. Making a gem costs a little gold. You can swap a gem straight away (the old one breaks), or keep it by taking it out with an unsocketing charm. You can also trade gold for shamrocks, up to 3 times a day."], ["🤝", "Co-op & ranking", "Once signed in, open a room with a friend and hunt for the mistakes in an article together to beat the boss. Set a nickname in Settings to compare level, HP and attack on the leaderboard."], ["⚙️", "Settings", "Sign in with Google once and your progress is saved to the cloud, so a new phone won't lose anything. Language, English level and backups are here too."], ["📱", "Tip", "In Safari tap Share → Add to Home Screen to open it from your home screen like an app."]]}, "hi": {"title": "कैसे इस्तेमाल करें", "intro": "रोज़ 10–15 मिनट एक आयरिश ख़बर पढ़ें, और सीखते हुए खेल भी खेलें।", "close": "💚 मैंने यह ऐप इस उम्मीद में बनाया है कि यह अंग्रेज़ी सीखना चाहने वाले हर व्यक्ति की मदद करे। रोज़ थोड़ा-थोड़ा सुधार बड़ा फ़र्क़ लाता है। सीखने का आनंद लें!", "sign": "— CheChe", "ok": "शुरू करें", "secs": [["📰", "रोज़ के तीन चरण", "① दोहराई क्विज़: पिछले दिनों देखे गए शब्द; जो कम आते हैं वे ज़्यादा पूछे जाते हैं। ② मुख्य ख़बर पढ़ें: न समझ आने वाले शब्द पर टैप करें; अर्थ, समानार्थी, विलोम और उदाहरण दिखेंगे और शब्द शब्दकोश में सहेजा जाएगा। ③ पढ़ने के बाद क्विज़: हमेशा 10 प्रश्न, हर एक की व्याख्या के साथ।"], ["📚", "शब्दकोश", "देखे गए सभी शब्द यहाँ सहेजे जाते हैं। खोजें या \"सबसे कमज़ोर\" से क्रम लगाएँ। ऊपर की अंतराल दोहराव पूरी करने पर 1 शैमरॉक मिलता है (दिन में अधिकतम 3)।"], ["🎯", "अंग्रेज़ी स्तर", "सेटिंग्स में B1, B2, C1 या IELTS 7–8 चुनें; लेख उसी स्तर के संस्करण में बदल जाएँगे।"], ["⚔️", "साहसिक", "सही उत्तरों से सोना और अभियान पास मिलते हैं। दुकान से तत्व वाले उपकरण खरीदें और पास से आयरलैंड के शहरों के दानवों से लड़ें। जीतने पर शहर आपका, और रोज़ कर मिलेगा। जो हथियार दानव के तत्व को हराता है वह ×1.5 नुकसान करता है, इसलिए पहले पंचतत्व चार्ट देखें। लक्ष्य: सबसे छोटे गाँव से डबलिन तक जीतकर पूरा द्वीप जीतना! आप किसी शहर पर अपने स्तर से 3 स्तर पहले भी हमला कर सकते हैं, और हर राक्षस पर आपके उपकरणों के हिसाब से आसान, बराबर की टक्कर या ख़तरनाक लिखा होता है। हारना भी बेकार नहीं: जिस शहर पर अभी क़ब्ज़ा नहीं हुआ, उसका राक्षस घायल रहता है और अगली बार उसका HP कम होता है। कुछ दिन न आएँ, तो लौटने पर अगली जीतों में EXP दोगुना मिलता है।"], ["🍀", "किस्मत", "1 शैमरॉक से पहिया एक बार घूमता है; 2 या ज़्यादा से स्क्रैच कार्ड। एक ही तत्व और स्तर के 3 टुकड़े जमा करके तत्व-रत्न बनाएँ और उसे हथियार या कवच में जड़ें। रत्न बनाने में थोड़ा सोना लगता है। रत्न सीधे बदल सकते हैं (पुराना टूट जाएगा), या मुक्ति-ताबीज़ से निकालकर रख सकते हैं। सोने से शैमरॉक भी ले सकते हैं, दिन में 3 बार तक।"], ["🤝", "साथ में और रैंकिंग", "साइन इन के बाद दोस्त के साथ कमरा बनाएँ और लेख की ग़लतियाँ साथ ढूँढकर दानव को हराएँ। सेटिंग्स में उपनाम चुनें और लीडरबोर्ड पर लेवल, HP व आक्रमण की तुलना करें।"], ["⚙️", "सेटिंग्स", "एक बार Google से साइन इन करें, प्रगति क्लाउड में सहेजी जाएगी और फ़ोन बदलने पर भी नहीं खोएगी। भाषा, अंग्रेज़ी स्तर और बैकअप भी यहीं हैं।"], ["📱", "सुझाव", "Safari में शेयर → होम स्क्रीन में जोड़ें दबाएँ, फिर इसे ऐप की तरह होम स्क्रीन से खोलें।"]]}, "es": {"title": "Cómo se usa", "intro": "Dedica 10–15 minutos al día a leer una noticia irlandesa y juega mientras aprendes.", "close": "💚 Hice esta app con la esperanza de ayudar a todas las personas que quieren aprender inglés. Un poco cada día marca la diferencia. ¡Disfruta aprendiendo!", "sign": "— CheChe", "ok": "¡Vamos!", "secs": [["📰", "Tres pasos al día", "① Test de repaso: palabras que consultaste otros días; las que menos dominas salen más. ② Lee el titular: toca cualquier palabra que no entiendas para ver su significado, sinónimos, antónimos y un ejemplo; se guarda en tu diccionario. ③ Test después de leer: siempre 10 preguntas, cada una con su explicación."], ["📚", "Diccionario", "Aquí se guardan todas las palabras que consultas. Puedes buscarlas u ordenarlas por «Más débiles». Cada «Repaso espaciado» terminado da 1 trébol (máximo 3 al día)."], ["🎯", "Nivel de inglés", "En Ajustes elige B1, B2, C1 o IELTS 7–8 y los artículos cambian a la versión de ese nivel."], ["⚔️", "Aventura", "Las respuestas correctas dan oro y pases. Compra equipo elemental en la tienda y usa los pases para luchar contra los monstruos de las ciudades de Irlanda. Si ganas, conquistas la ciudad y cobras impuestos cada día. Un arma cuyo elemento vence al del monstruo hace ×1,5 de daño, así que mira primero el gráfico de los cinco elementos. Objetivo: llegar desde el pueblo más pequeño hasta Dublín y conquistar toda la isla. Puedes atacar una ciudad hasta 3 niveles antes, y cada monstruo lleva la etiqueta Fácil, Igualado o Peligroso según tu equipo actual. Perder también ayuda: el monstruo de una ciudad que aún no has tomado sigue herido y tendrá menos PV la próxima vez. Si faltas unos días, tus siguientes victorias dan EXP doble."], ["🍀", "Suerte", "Con 1 trébol giras la Rueda del destino; con 2 o más compras un rasca y gana. Junta 3 fragmentos del mismo elemento y nivel para crear una gema elemental y engástala en tu arma o armadura. Crear una gema cuesta un poco de oro. Puedes cambiar una gema directamente (la antigua se rompe) o conservarla sacándola con un amuleto de desengaste. También puedes cambiar oro por tréboles, hasta 3 veces al día."], ["🤝", "Cooperativo y ranking", "Con la sesión iniciada, abre una sala con un amigo y buscad juntos los errores de un artículo para vencer al jefe. Elige un apodo en Ajustes para comparar nivel, HP y ataque en la clasificación."], ["⚙️", "Ajustes", "Inicia sesión con Google una vez y tu progreso se guarda en la nube; si cambias de móvil no pierdes nada. Aquí también están el idioma, el nivel de inglés y las copias de seguridad."], ["📱", "Consejo", "En Safari toca Compartir → Añadir a pantalla de inicio para abrirla como una app."]]}, "ja": {"title": "使い方", "intro": "1日10〜15分、アイルランドのニュースを1本読んで、ゲームも楽しみながら英語を学びましょう。", "close": "💚 このアプリは、英語を学びたいすべての人の役に立てたらと思って作りました。毎日少しずつの積み重ねが力になります。楽しく学んでください！", "sign": "— CheChe", "ok": "はじめる", "secs": [["📰", "毎日の3ステップ", "① 復習テスト：前の日に調べた単語から出題。苦手な単語ほど出やすくなります。② トップ記事を読む：わからない単語をタップすると、意味・類義語・反対語・例文が表示され、単語帳に保存されます。③ 読後テスト：いつも10問、全問に解説付き。"], ["📚", "単語帳", "調べた単語はすべてここに保存されます。検索や「苦手順」での並べ替えもできます。上の「間隔反復」を1回終えるとクローバーが1枚（1日最大3枚）。"], ["🎯", "英語レベル", "設定で B1・B2・C1・IELTS 7–8 を選ぶと、記事がそのレベルの版に切り替わります。"], ["⚔️", "冒険", "正解するとゴールドと出撃券がもらえます。ショップで五行の装備を買い、出撃券でアイルランド各地の魔物に挑みましょう。勝てばその町を征服し、毎日税金が入ります。武器の属性が魔物に勝っているとダメージ×1.5なので、出撃前に五行の図を確認しましょう。目標：いちばん小さな村からダブリンまで攻め上がり、島全体を征服！ 町は自分のレベルより3つ早く挑戦できます。どのモンスターにも、今の装備から予想した「楽勝／互角／危険」が表示されます。負けても無駄にはなりません。まだ占領していない町のモンスターは傷が残り、次はHPが少し減っています。何日か休んだあとは、次の何回かの勝利で経験値が2倍になります。"], ["🍀", "幸運", "クローバー1枚で運命のルーレットを1回、2枚以上でスクラッチカードが買えます。同じ属性・ランクのかけらを3個集めると属性の宝石を合成でき、武器や防具にはめて強くなれます。 宝石を作るには金貨が少し必要です。宝石はそのまま入れ替えられ（古い宝石は砕けます）、残したいときは外しの護符で外せます。金貨でクローバーを交換することもでき、1日3回までです。"], ["🤝", "協力とランキング", "ログインすると友達とルームを作り、記事の間違いを一緒に探してボスを倒せます。設定でニックネームを決めると、レベル・HP・攻撃力でランキングに参加できます。"], ["⚙️", "設定", "Google で一度ログインすると進行状況がクラウドに保存され、機種変更しても消えません。言語・英語レベル・バックアップもここにあります。"], ["📱", "ヒント", "Safari で「共有」→「ホーム画面に追加」を押すと、アプリのようにホーム画面から開けます。"]]}, "ko": {"title": "사용 방법", "intro": "하루 10~15분, 아일랜드 뉴스 한 편을 읽고 게임도 즐기며 영어를 배워 보세요.", "close": "💚 영어를 배우고 싶은 모든 분께 도움이 되길 바라며 이 앱을 만들었어요. 매일 조금씩 쌓이면 영어가 점점 늘어요. 즐겁게 공부하세요!", "sign": "— CheChe", "ok": "시작하기", "secs": [["📰", "매일 3단계", "① 복습 퀴즈: 전에 찾아본 단어가 나와요. 잘 모르는 단어일수록 더 자주 나와요. ② 헤드라인 읽기: 모르는 단어를 누르면 뜻, 비슷한 말, 반대말, 예문이 나오고 단어장에 저장돼요. ③ 읽은 후 퀴즈: 항상 10문제, 모든 문제에 해설이 있어요."], ["📚", "단어장", "찾아본 단어는 모두 여기에 저장돼요. 검색하거나 '약한 순'으로 정렬할 수 있어요. 위의 '간격 복습'을 한 번 끝낼 때마다 클로버 1장 (하루 최대 3장)."], ["🎯", "영어 수준", "설정에서 B1, B2, C1, IELTS 7–8 중에서 고르면 기사가 그 수준의 버전으로 바뀌어요."], ["⚔️", "모험", "정답을 맞히면 골드와 출정권을 받아요. 상점에서 오행 장비를 사고, 출정권으로 아일랜드 마을의 괴물과 싸우세요. 이기면 마을을 정복하고 매일 세금을 받아요. 무기 속성이 괴물을 이기면 피해 ×1.5이니 출정 전에 오행 그림을 확인하세요. 목표: 가장 작은 마을부터 더블린까지 정복해 섬 전체를 차지하기! 마을은 내 레벨보다 3레벨 먼저 공격할 수 있고, 모든 몬스터에는 지금 장비로 예상한 '쉬움/막상막하/위험'이 표시돼요. 져도 헛수고가 아니에요. 아직 점령하지 않은 마을의 몬스터는 상처가 남아 다음엔 HP가 줄어 있어요. 며칠 쉬었다 돌아오면 다음 몇 번의 승리는 경험치가 2배예요."], ["🍀", "행운", "클로버 1장으로 운명의 룰렛을 한 번, 2장 이상이면 스크래치 카드를 살 수 있어요. 같은 속성·등급 조각 3개를 모으면 속성 보석을 만들어 무기나 방어구에 끼울 수 있어요. 보석을 만들려면 골드가 조금 들어요. 보석은 바로 바꿔 끼울 수 있고(예전 보석은 깨져요), 남기고 싶으면 해제 부적으로 빼면 돼요. 골드로 클로버를 교환할 수도 있어요. 하루 3번까지."], ["🤝", "협동과 랭킹", "로그인하면 친구와 방을 만들어 기사 속 틀린 곳을 함께 찾아 보스를 물리칠 수 있어요. 설정에서 닉네임을 정하면 레벨·HP·공격력으로 랭킹에 참여해요."], ["⚙️", "설정", "Google로 한 번 로그인하면 진행 상황이 클라우드에 저장돼 휴대폰을 바꿔도 사라지지 않아요. 언어, 영어 수준, 백업도 여기에 있어요."], ["📱", "팁", "Safari에서 '공유' → '홈 화면에 추가'를 누르면 앱처럼 홈 화면에서 열 수 있어요."]]}};
@@ -4824,7 +4899,7 @@ async function sendFeedback(){
 }
 async function devLoadFeedback(){
   if(!CLOUD.fb) return []; const {fsM,db}=CLOUD.fb;
-  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"feedback"), fsM.orderBy("at","desc"), fsM.limit(100))); const rows=[]; snap.forEach(d=>rows.push(safeDoc(d.data()))); return rows; }catch(e){ return null; }
+  try{ const snap=await fsM.getDocs(fsM.query(fsM.collection(db,"feedback"), fsM.orderBy("at","desc"), fsM.limit(100))); const rows=[]; snap.forEach(d=>rows.push({...safeDoc(d.data()), _id:d.id})); return rows; }catch(e){ return null; }
 }
 
 /* ---------- events ---------- */
@@ -4916,6 +4991,11 @@ document.addEventListener("click", e=>{
   if(a==="devunlock") return devUnlock();
   if(a==="devexit") return devExit();
   if(a==="maint") return maintSet(t.dataset.k==="1");
+  if(a==="annset") return annSet(t.dataset.k==="1");
+  if(a==="fbdone") return devFbDone(t.dataset.k);
+  if(a==="fbreply"){ S.fbReplyId=S.fbReplyId===t.dataset.k?null:t.dataset.k; render(); setTimeout(()=>{ const x=$("#fbReplyTx"); if(x) x.focus(); },0); return; }
+  if(a==="fbreplysend") return devFbReply(t.dataset.k);
+  if(a==="fball"){ S.fbAll=t.dataset.k==="1"; return render(); }
   if(a==="plznotice") return plzNoticeSave();
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
@@ -4930,6 +5010,8 @@ document.addEventListener("click", e=>{
   if(a==="invhide"){ game().invHide=1; saveGame(); return render(); }
   if(a==="invshare") return invShare();
   if(a==="devstats") return devLoadStats();
+  if(a==="devstatsnow") return devLoadStats(true);
+  if(a==="errpush") return devErrPush();
   if(a==="deverr") return devLoadErrors();
   if(a==="dev") return devAct(t.dataset.k);
   if(a==="rev") return startQuiz("rev");
@@ -5007,6 +5089,10 @@ document.addEventListener("keydown", e=>{ if(e.key==="Escape" && S.helpSheet){ S
 /* ================= Cloud save (Firebase: Google sign-in + Firestore) ================= */
 const FB_CONFIG={apiKey:"AIzaSyCMGO6INIRITrfhTT0IPR-U0O620xKcaYE",authDomain:location.hostname==="binbindaily.com"?"binbindaily.com":"che-daily-improvement-pro.firebaseapp.com",projectId:"che-daily-improvement-pro",storageBucket:"che-daily-improvement-pro.firebasestorage.app",messagingSenderId:"935084997550",appId:"1:935084997550:web:dd1a7901e357e612a5a63f"};
 const FB_V="10.12.2";
+// App Check (reCAPTCHA v3 site key, public by design): proves requests come from the real BinBin pages, so a script
+// can't hammer the database with a copied config. Empty = off. Turn on enforcement in the Firebase console only after the
+// App Check page shows almost all requests as verified.
+const APPCHECK_KEY="";
 Object.assign(STR.zh,{acctTitle:"雲端存檔", acctOff:"登入後，單字、測驗和遊戲進度會存到雲端。換手機或清除瀏覽器資料也不會不見，只要登入一次。", signIn:"用 Google 登入", signOut:"登出", signedAs:"已登入：{n}", synced:"已同步到雲端", syncing:"同步中…", syncFail:"雲端同步失敗，進度先存在這支手機，連上網路後會再試。", loginFail:"登入沒有完成，請再試一次。", merged:"已把這支手機的紀錄合併到雲端", signedOut:"已登出，進度仍保留在這支手機上", cloudOff:"目前無法連到雲端服務", acctShort:"登入保存進度"});
 Object.assign(STR.en,{acctTitle:"Cloud save", acctOff:"Sign in to save your words, quizzes and game progress to the cloud. Changing phones or clearing browser data won't lose anything, and you only sign in once.", signIn:"Sign in with Google", signOut:"Sign out", signedAs:"Signed in as {n}", synced:"Saved to the cloud", syncing:"Saving…", syncFail:"Couldn't reach the cloud. Progress is kept on this phone and will sync when you're back online.", loginFail:"Sign-in didn't finish. Please try again.", merged:"This phone's progress has been merged into your cloud save", signedOut:"Signed out. Progress stays on this phone.", cloudOff:"Cloud service is unavailable right now", acctShort:"Sign in to save progress"});
 Object.assign(STR.hi,{acctTitle:"क्लाउड सेव", acctOff:"साइन इन करें ताकि आपके शब्द, क्विज़ और खेल की प्रगति क्लाउड में सहेजी जाए। फ़ोन बदलने या ब्राउज़र डेटा मिटाने पर भी कुछ नहीं खोएगा, और साइन इन सिर्फ़ एक बार करना है।", signIn:"Google से साइन इन करें", signOut:"साइन आउट", signedAs:"{n} के रूप में साइन इन", synced:"क्लाउड में सहेजा गया", syncing:"सहेजा जा रहा है…", syncFail:"क्लाउड से कनेक्ट नहीं हो सका। प्रगति इस फ़ोन पर है और ऑनलाइन होने पर सिंक होगी।", loginFail:"साइन इन पूरा नहीं हुआ। फिर कोशिश करें।", merged:"इस फ़ोन की प्रगति क्लाउड में जोड़ दी गई", signedOut:"साइन आउट हो गया। प्रगति इस फ़ोन पर बनी है।", cloudOff:"अभी क्लाउड सेवा उपलब्ध नहीं है", acctShort:"प्रगति सहेजने के लिए साइन इन करें"});
@@ -5020,6 +5106,9 @@ async function cloudInit(){
       import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-auth.js`),
       import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-firestore.js`)]);
     const app=appM.initializeApp(FB_CONFIG);
+    if(APPCHECK_KEY&&/^(binbindaily\.com|www\.binbindaily\.com|binbin-daily\.pages\.dev|cheche0102\.github\.io)$/.test(location.hostname)){
+      try{ const acM=await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-app-check.js`); acM.initializeAppCheck(app,{provider:new acM.ReCaptchaV3Provider(APPCHECK_KEY), isTokenAutoRefreshEnabled:true}); }
+      catch(e){ console.warn("appcheck",e&&e.message); } }
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
     CLOUD.fb={authM,fsM,auth,db,app};
@@ -5027,11 +5116,12 @@ async function cloudInit(){
     setTimeout(pushRefresh,1200);
     setTimeout(supLoad,0);
     try{ fsM.onSnapshot(fsM.doc(db,"config","site"), sn=>{ S.maint=sn.exists()?sn.data():null; maintApply(); }, ()=>{}); }catch(e){}
+    try{ fsM.onSnapshot(fsM.doc(db,"config","notice"), sn=>{ S.notice=sn.exists()?sn.data():null; annApply(); }, ()=>{}); }catch(e){}
     try{ fsM.onSnapshot(fsM.doc(db,"config","features"), sn=>{ S.feat=sn.exists()?sn.data():null; render(); }, ()=>{}); }catch(e){}
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(inboxCheck,5000); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -5280,7 +5370,16 @@ function lookCard(r){ if(!r) return; const me=r.id===(CLOUD.user&&CLOUD.user.uid
     <h2>${/^[A-Z]{2}$/.test(r.flag||"")?flagOf(r.flag)+" ":""}${esc(r.name||"?")}</h2>
     <div class="muted sm-t">Lv ${r.lv||1} · ${T("rkPower")} ${r.power||0} · ${T("rkConq",{n:r.conq||0})}</div>
     ${L?`<div class="rk-gear"><div><small class="muted">${T("weapon")}</small>${gear(L.w,L.ws)}</div><div><small class="muted">${T("armor")}</small>${gear(L.a,L.as)}</div></div>`:`<p class="muted sm-t">${T("rkNoLook")}</p>`}
+    ${!me&&r.id&&CLOUD.user?`<button class="btn sm ghost rk-report" data-report="${esc(r.id)}" data-rn="${esc(String(r.name||"").slice(0,16))}">🚩 ${T("rptNick")}</button>`:""}
     <button class="btn" data-act="rklookclose">${T("genYes")}</button></div>`; }
+// report a player's name (it is the only text players choose themselves); lands in the dev panel's feedback list as type "report"
+async function reportNick(uid,name){ if(!CLOUD.fb||!CLOUD.user) return toast(T("rkNeedLogin"));
+  let done={}; try{ done=JSON.parse(localStorage.getItem("che-pro-rpt")||"{}")||{}; }catch(e){} if(done[uid]) return toast(T("rptDone"));
+  const g=game(), d={type:"report", msg:`暱稱檢舉 name report: "${name}" uid=${uid}`.slice(0,1000), nick:g.nick||"", lv:Math.max(1,Math.min(99,g.lv|0||1)), lang:LANG, uid:CLOUD.user.uid, at:new Date().toISOString()};
+  try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"feedback",Date.now()+"-"+Math.random().toString(36).slice(2,8)), d);
+    done[uid]=1; try{ localStorage.setItem("che-pro-rpt",JSON.stringify(done)); }catch(e){} toast(T("rptThanks")); }
+  catch(e){ console.warn("report",e&&e.code); toast(T("fbFail")); } }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-report]"); if(!b) return; e.stopPropagation(); b.disabled=true; reportNick(b.dataset.report,b.dataset.rn||""); }, true);
 document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="rklook"],[data-act="rklookclose"]'); if(!t) return; e.stopPropagation();
   if(t.dataset.act==="rklook") return rkLookOpen(+t.dataset.k); const el=document.getElementById("rkLook"); if(el) el.remove(); }, true);
 function viewRank(){
@@ -7237,6 +7336,8 @@ Object.assign(STR.es,{upNew:"Hay una versión nueva",upBtn:"Actualizar"});
 Object.assign(STR.ja,{upNew:"新しいバージョンがあります",upBtn:"今すぐ更新"});
 Object.assign(STR.ko,{upNew:"새 버전이 있어요",upBtn:"지금 업데이트"});
 /* ----- auto update check: compare the deployed APP_VERSION with this one ----- */
+// offline copies + push (sw.js): registered on every visit, after the page has loaded so it never slows the first paint
+if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost")) window.addEventListener("load",()=>{ setTimeout(()=>navigator.serviceWorker.register("sw.js").catch(()=>{}),2000); });
 /* new-version check reads the tiny version.json (kept in sync with APP_VERSION on every commit) instead of the whole 740 KB page */
 async function upCheck(){ try{ const j=await (await fetch("version.json?t="+Date.now(),{cache:"no-store"})).json(); const m=j&&typeof j.v==="string"?[null,j.v.slice(0,20)]:null; if(m&&m[1]!==APP_VERSION&&!document.getElementById("upBar")){ const b=document.createElement("div"); b.id="upBar"; b.className="up-bar"; b.innerHTML=`<span>🔄 ${T("upNew")} (${esc(m[1])})</span><button class="btn sm" onclick="location.replace(location.pathname+'?v='+Date.now())">${T("upBtn")}</button>`; document.body.append(b); } }catch(e){} }
 setTimeout(upCheck,4000); setInterval(upCheck,5*60e3); document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") upCheck(); });
@@ -7836,7 +7937,7 @@ async function statsSet(on){
   try{ localStorage.setItem(STATS_KEY,on?"y":"n"); }catch(e){}
   if(on){ try{ localStorage.removeItem("che-pro-actday"); }catch(e){} actPing(S.onb?null:{o:5}); }
   else { const id=devIdPeek(); if(id&&CLOUD.fb){ try{ const {fsM,db}=CLOUD.fb; await fsM.deleteDoc(fsM.doc(db,"act",id)); }catch(e){} }
-    try{ ["che-pro-did","che-pro-actday","che-pro-actr"].forEach(k=>localStorage.removeItem(k)); }catch(e){} }
+    try{ ["che-pro-did","che-pro-actday","che-pro-actr","che-pro-actq"].forEach(k=>localStorage.removeItem(k)); }catch(e){} }
   if(S.onb) onbRender(); else render();
 }
 function statsAskHtml(card, short){
@@ -7864,23 +7965,17 @@ async function actPing(extra){
   try{ await fsM.setDoc(ref,{...base, k:devKind()},{merge:true}); }catch(e){ try{ await fsM.setDoc(ref,base,{merge:true}); }catch(e2){ return; } }
   try{ localStorage.setItem("che-pro-actday",t); }catch(e){}
 }
+function actFirstQuiz(){ let r=null; try{ r=localStorage.getItem("che-pro-actq"); }catch(e){} if(r) return; try{ localStorage.setItem("che-pro-actq",today()); }catch(e){} actPing({q:today()}); }
 function actFirstRead(){ let r=null; try{ r=localStorage.getItem("che-pro-actr"); }catch(e){} if(r) return; try{ localStorage.setItem("che-pro-actr",today()); }catch(e){} actPing({r:today()}); }
 document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") actPing(); });
-function devRetHtml(A){
+function devRetHtml(R){
   const head=`<div class="eyebrow">📈 ${T("drTitle")}</div>`;
-  if(!A) return head+`<p class="muted sm-t">${T("drNone")}</p>`;
-  const t=today(), add=(d,n)=>{ const x=new Date(d+"T12:00:00"); x.setDate(x.getDate()+n); return ymd(x); };
-  const act=(a,d)=>!!(a.d&&a.d[d]);
-  const N=A.length, newT=A.filter(a=>a.f===t).length, dau=A.filter(a=>act(a,t)).length;
-  const wau=A.filter(a=>Object.keys(a.d||{}).some(d=>d>add(t,-7))).length;
-  const ret=n=>{ const c=A.filter(a=>a.f&&a.f<=add(t,-n)); const r=c.filter(a=>act(a,add(a.f,n))); return c.length?`${Math.round(r.length/c.length*100)}%<small> ${r.length}/${c.length}</small>`:"–"; };
-  const back=(()=>{ const c=A.filter(a=>a.f&&a.f<t); const r=c.filter(a=>Object.keys(a.d||{}).some(d=>d>a.f)); return c.length?`${Math.round(r.length/c.length*100)}%<small> ${r.length}/${c.length}</small>`:"–"; })();
-  const onb=A.filter(a=>(a.o||0)>=4).length, rd=A.filter(a=>a.r).length;
-  const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
-  const kinds=L=>{ const c={}; L.forEach(a=>{ const k=a.k||"?"; c[k]=(c[k]||0)+1; }); return Object.entries(c).sort((x,y)=>y[1]-x[1]).map(([k,n])=>`${T("drK_"+k.replace("-","_"))} ${n}`).join(" · ")||"–"; };
-  const once=A.filter(a=>Object.keys(a.d||{}).length<=1&&!(a.o>0)&&!a.r&&a.f<t).length;
-  const kindHtml=`<p class="sm-t" style="margin:8px 0 0"><b>${T("drNewKinds")}</b> ${kinds(A.filter(a=>a.f===t))}</p><p class="sm-t" style="margin:4px 0 0"><b>${T("drAllKinds")}</b> ${kinds(A)}</p><p class="sm-t muted" style="margin:4px 0 0">${T("drOnce",{n:once})}</p>`;
-  return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(newT,T("drNew"))}${tile(dau,T("drDau"))}${tile(wau,T("drWau"))}${tile(ret(1),"D1")}${tile(ret(7),"D7")}${tile(ret(30),"D30")}${tile(back,T("drBack"))}${tile(`${onb}/${N}`,T("drOnb"))}${tile(`${rd}/${N}`,T("drRead"))}</div>${kindHtml}<p class="muted sm-t">${T("drNote")}</p><p class="muted sm-t">${T("drNote2")}</p>`;
+  if(!R) return head+`<p class="muted sm-t">${T("drNone")}</p>`;
+  const r=x=>x&&+x.of?`${Math.round(x.n/x.of*100)}%<small> ${num(x.n)}/${num(x.of)}</small>`:"–";
+  const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`, N=num(R.devices);
+  const kinds=c=>Object.entries(c||{}).sort((x,y)=>y[1]-x[1]).map(([k,n])=>`${T("drK_"+String(k).replace("-","_"))} ${num(n)}`).join(" · ")||"–";
+  const kindHtml=`<p class="sm-t" style="margin:8px 0 0"><b>${T("drNewKinds")}</b> ${kinds(R.kindsNew)}</p><p class="sm-t" style="margin:4px 0 0"><b>${T("drAllKinds")}</b> ${kinds(R.kindsAll)}</p><p class="sm-t muted" style="margin:4px 0 0">${T("drOnce",{n:num(R.once)})}</p>`;
+  return head+`<div class="stats ds-tiles">${tile(N,T("drDevices"))}${tile(num(R.newToday),T("drNew"))}${tile(num(R.dau),T("drDau"))}${tile(num(R.wau),T("drWau"))}${tile(r(R.d1),"D1")}${tile(r(R.d7),"D7")}${tile(r(R.d30),"D30")}${tile(r(R.back),T("drBack"))}${tile(`${num(R.intro)}/${N}`,T("drOnb"))}${tile(`${num(R.read)}/${N}`,T("drRead"))}</div>${kindHtml}<p class="muted sm-t">${T("drNote")}</p><p class="muted sm-t">${T("drNote2")}</p>`;
 }
 Object.assign(STR.zh,{loginHint:"🔐 點這裡用 Google 登入，進度會存到雲端，換手機也不會不見！"});
 Object.assign(STR.en,{loginHint:"🔐 Tap here to sign in with Google: your progress is saved to the cloud, so it stays with you even on a new phone!"});
@@ -8062,8 +8157,8 @@ async function deleteAccount(){
   }
 }
 const PRIV={
-zh:{t:"隱私權政策", upd:"最後更新：2026 年 11 月 25 日", secs:[["我們是誰", "BinBin daily 由住在愛爾蘭的個人開發者 Ching Che Huang（CheChe）製作與經營，也是你資料的負責人（GDPR 所說的「資料控制者」）。有任何隱私問題，請寄信到 binbindaily.help@gmail.com，或用「設定 → 意見回饋」告訴我，我會在一個月內回覆。"], ["我們收集哪些資料", ["不登入：學習紀錄、單字和遊戲進度只存在你的手機（瀏覽器的本機儲存空間），不會上傳。", "用 Google 登入：Google 帳號編號、顯示名稱、大頭貼（email 只由 Google 登入服務保管），以及你的單字、閱讀與測驗紀錄、遊戲進度、造型、新聞地區，存到雲端，讓你換手機也不會不見。", "其他玩家看得到的：你的暱稱、國旗、角色造型、等級與戰力、排行榜成績（閱讀、IELTS、多益、鋼琴）、收到的讚，以及許願池得獎名單上的暱稱。", "廣場：你的角色在遊戲地圖上的位置（不是手機的 GPS 定位）和你說的話（聊天泡泡），同一區的玩家即時看得到；聊天泡泡幾秒後就消失，不會保存。最近有來廣場的玩家，暱稱和造型會出現在廣場上，大約每 15 分鐘更新一次。", "多人遊戲、盟友、送禮、邀請碼：房間裡的暱稱和遊戲狀態、盟友關係、送禮紀錄（雙方暱稱與道具）、誰用了誰的邀請碼。", "IG 會員：你申請時產生的會員碼和暱稱；你在 Instagram 私訊 BinBin 時，Instagram 帳號名稱會出現在 BinBin 的 Instagram 收件匣。", "公平遊戲檢查：每天自動比對進度是否合理（例如金幣、等級突然暴增），可疑的帳號會留下紀錄給開發者人工確認。", "開啟通知時：推播訂閱資訊、時區、語言，以及你當天是否讀過新聞。", "使用統計（只有你同意才會記錄）：一組隨機的裝置編號，記錄這台裝置哪幾天打開 app、第一次使用的日期、語言、程度、是否登入、裝置類型、新手引導走到第幾步。不含姓名或聯絡方式。", "錯誤回報：app 出錯時，錯誤訊息、版本、瀏覽器型號，以及（登入時）你的帳號編號，用來修正問題。", "意見回饋：你寫的內容、選填的聯絡方式、暱稱、帳號編號與裝置資訊。"]], ["我們為什麼可以使用這些資料（法律依據）", ["提供你要求的服務（GDPR 第 6 條第 1 項 b 款）：帳號、雲端同步、排行榜、廣場、多人遊戲、送禮、邀請碼、IG 會員。", "你的同意（第 6 條第 1 項 a 款）：使用統計、推播通知。你隨時可以在設定裡撤回，撤回後就不再記錄，已記錄的統計也會刪除。", "正當利益（第 6 條第 1 項 f 款）：公平遊戲檢查、錯誤回報、處理意見回饋，目的是讓遊戲公平、穩定，並回覆你的問題。"]], ["我們用資料做什麼", "只用來提供 app 的功能和改進 app。不放廣告、不賣資料，也不把資料分享給行銷公司。目前沒有開放任何付費購買。"], ["誰會經手這些資料", ["Google Firebase／Google Cloud：登入、雲端資料庫、即時廣場和伺服器程式。即時廣場和伺服器程式在歐盟（比利時）；其他部分服務可能在歐盟以外，Google 依其資料保護條款（包含歐盟標準契約條款）處理。", "GitHub Pages、Cloudflare Pages（網站主機與備援）、jsDelivr（音檔）、Google Fonts（字型）：只會看到 IP 位址等一般連線資訊。", "Apple、Google、Mozilla 的推播服務：把通知送到你的裝置。", "Google 試算表：意見回饋會另外存一份，方便開發者閱讀。"]], ["保存多久", ["帳號資料：保存到你刪除帳號為止。", "廣場聊天泡泡：不保存；廣場位置在你離開後就刪除。", "使用統計：保存到你撤回同意為止，撤回時立即刪除。", "錯誤回報：90 天後自動刪除。意見回饋：2 年後自動刪除。", "推播資訊：關閉通知時立即刪除。"]], ["刪除帳號", "「設定 → 刪除我的帳號與資料」會由伺服器刪除你所有的資料：個人資料、單字、各期排行榜、許願池、按讚、送禮、多人房間、公平遊戲紀錄與 Google 登入帳號。別人保留的紀錄（例如你送給朋友的禮物、許願池得獎名單）會留給對方，但會拿掉你的暱稱和帳號編號。如果中途有任何一步沒有成功，帳號不會被刪掉，你可以再按一次。"], ["你的權利", "依照歐盟 GDPR，你可以查看、匯出、更正或刪除你的資料，也可以反對我們基於正當利益處理資料：「設定 → 備份」可以匯出學習紀錄，其他請寄信給我們。你也可以向愛爾蘭資料保護委員會（Data Protection Commission，www.dataprotection.ie）申訴。"], ["兒童", "BinBin daily 適合 13 歲以上的使用者，未滿 13 歲請不要使用。13 到 15 歲的使用者，請先取得家長或監護人同意再登入。廣場上的話其他玩家看得到，請不要在暱稱或聊天裡透露真實姓名、學校或聯絡方式。"], ["Cookie 與本機儲存", "我們不使用追蹤型 Cookie。app 用瀏覽器的本機儲存空間保存你的設定和進度；使用統計用的裝置編號只有在你同意後才會建立。"], ["IELTS 聲明", "IELTS™ 是 British Council、IDP: IELTS Australia 與 Cambridge University Press & Assessment 的註冊商標。BinBin daily 與上述機構沒有任何關係，也未經其認可或核准。app 內的模擬試題皆為原創，分數僅為估計，不代表正式成績。"], ["政策更新", "政策有重大變更時，會在 app 內通知。"]]},
-en:{t:"Privacy policy", upd:"Last updated: 25 November 2026", secs:[["Who we are", "BinBin daily is made and run by Ching Che Huang (CheChe), an independent developer living in Ireland, who is responsible for your data (the \"data controller\" under the GDPR). For any privacy question, write to binbindaily.help@gmail.com or use Settings → Feedback; you'll get an answer within a month."], ["What we collect", ["Without signing in: your progress, words and game data stay on your phone (the browser's local storage) and are not uploaded.", "When you sign in with Google: your Google account ID, display name and profile photo (your e-mail stays with Google's sign-in service), plus your words, reading and quiz history, game progress, outfits and news region, stored in the cloud so they follow you to a new phone.", "Visible to other players: your nickname, flag, character look, level and power, leaderboard results (reading, IELTS, TOEIC, piano), likes received, and your nickname on the wishing-well winners list.", "Plaza: your character's position on the game map (not your phone's GPS location) and what you say (chat bubbles) are shown live to players in the same area; bubbles disappear after a few seconds and are not stored. Players who visited the plaza recently appear there with their nickname and look, refreshed about every 15 minutes.", "Party games, allies, gifts and invite codes: your nickname and game state in a room, ally links, gift records (both nicknames and the items), and who used whose invite code.", "IG membership: the member code you request and your nickname; when you message BinBin on Instagram, your Instagram name appears in BinBin's Instagram inbox.", "Fair-play checks: a daily automatic check that progress makes sense (for example coins or levels jumping suddenly); suspicious accounts are noted for the developer to review by hand.", "If you turn on notifications: your push subscription, time zone, language and whether you've read today's news.", "Usage statistics (only if you agree): a random device ID with the days this device opened the app, the first day, language, level, whether you're signed in, device type and how far you got in the welcome tour. No name or contact details.", "Error reports: when something breaks, the error message, app version, browser model and (if signed in) your account ID, to fix the problem.", "Feedback: what you write, the optional contact you give, your nickname, account ID and device information."]], ["Why we may use it (legal basis)", ["To provide the service you asked for (GDPR Art. 6(1)(b)): account, cloud sync, leaderboards, plaza, party games, gifts, invite codes, IG membership.", "Your consent (Art. 6(1)(a)): usage statistics and push notifications. You can withdraw it any time in Settings; we then stop and delete the statistics already recorded.", "Legitimate interests (Art. 6(1)(f)): fair-play checks, error reports and handling your feedback, to keep the game fair and working and to answer you."]], ["How we use it", "Only to run and improve the app. We show no ads, never sell data and never share it with marketers. There are currently no paid purchases."], ["Who handles it", ["Google Firebase / Google Cloud: sign-in, cloud database, live plaza and server code. The live plaza and server code run in the EU (Belgium); some other services may be outside the EU, and Google processes data under its data-protection terms, including the EU Standard Contractual Clauses.", "GitHub Pages, Cloudflare Pages (hosting and backup), jsDelivr (audio) and Google Fonts (fonts) see normal connection data such as your IP address.", "Push services of Apple, Google and Mozilla deliver notifications to your device.", "Google Sheets: a copy of feedback, so the developer can read it."]], ["How long we keep it", ["Account data: until you delete your account.", "Plaza chat bubbles: not stored; your plaza position is removed when you leave.", "Usage statistics: until you withdraw consent, then deleted at once.", "Error reports: deleted automatically after 90 days. Feedback: deleted automatically after 2 years.", "Push details: deleted as soon as you turn notifications off."]], ["Deleting your account", "Settings → \"Delete my account and data\" has our server delete all your data: profile, words, every period's leaderboards, wishing well, likes, gifts, party rooms, fair-play records and your sign-in. Records another player keeps (such as a gift you sent them or a winners list) stay with them, but your nickname and account ID are removed. If any step fails, your account is not deleted and you can simply try again."], ["Your rights", "Under the EU GDPR you can access, export, correct or delete your data and object to processing based on legitimate interests: Settings → Backup exports your learning records; for anything else, write to us. You can also complain to Ireland's Data Protection Commission (www.dataprotection.ie)."], ["Children", "BinBin daily is for people aged 13 and over; if you are under 13, please don't use it. If you are 13 to 15, please get a parent's or guardian's permission before signing in. Other players can see what you say in the plaza, so don't put your real name, school or contact details in your nickname or chat."], ["Cookies and local storage", "We use no tracking cookies. The app uses your browser's local storage for your settings and progress; the device ID for usage statistics is only created after you agree."], ["IELTS notice", "IELTS™ is a registered trademark of the British Council, IDP: IELTS Australia and Cambridge University Press & Assessment. BinBin daily is not affiliated with, endorsed or approved by them. All practice tests are original and scores are estimates only."], ["Changes", "We'll let you know in the app if this policy changes in an important way."]]}};
+zh:{t:"隱私權政策", upd:"最後更新：2026 年 11 月 25 日", secs:[["我們是誰", "BinBin daily 由住在愛爾蘭的個人開發者 Ching Che Huang（CheChe）製作與經營，也是你資料的負責人（GDPR 所說的「資料控制者」）。有任何隱私問題，請寄信到 binbindaily.help@gmail.com，或用「設定 → 意見回饋」告訴我，我會在一個月內回覆。"], ["我們收集哪些資料", ["不登入：學習紀錄、單字和遊戲進度只存在你的手機（瀏覽器的本機儲存空間），不會上傳。", "用 Google 登入：Google 帳號編號、顯示名稱、大頭貼（email 只由 Google 登入服務保管），以及你的單字、閱讀與測驗紀錄、遊戲進度、造型、新聞地區，存到雲端，讓你換手機也不會不見。", "其他玩家看得到的：你的暱稱、國旗、角色造型、等級與戰力、排行榜成績（閱讀、IELTS、多益、鋼琴）、收到的讚，以及許願池得獎名單上的暱稱。", "廣場：你的角色在遊戲地圖上的位置（不是手機的 GPS 定位）和你說的話（聊天泡泡），同一區的玩家即時看得到；聊天泡泡幾秒後就消失，不會保存。最近有來廣場的玩家，暱稱和造型會出現在廣場上，大約每 15 分鐘更新一次。", "多人遊戲、盟友、送禮、邀請碼：房間裡的暱稱和遊戲狀態、盟友關係、送禮紀錄（雙方暱稱與道具）、誰用了誰的邀請碼。", "IG 會員：你申請時產生的會員碼和暱稱；你在 Instagram 私訊 BinBin 時，Instagram 帳號名稱會出現在 BinBin 的 Instagram 收件匣。", "公平遊戲檢查：每天自動比對進度是否合理（例如金幣、等級突然暴增），可疑的帳號會留下紀錄給開發者人工確認。", "開啟通知時：推播訂閱資訊、時區、語言，以及你當天是否讀過新聞。", "使用統計（只有你同意才會記錄）：一組隨機的裝置編號，記錄這台裝置哪幾天打開 app、第一次使用的日期、語言、程度、是否登入、裝置類型、新手引導走到第幾步、第一次讀完文章和做完測驗的日期。不含姓名或聯絡方式。", "錯誤回報：app 出錯時，錯誤訊息、版本、瀏覽器型號，以及（登入時）你的帳號編號，用來修正問題。", "意見回饋：你寫的內容、選填的聯絡方式、暱稱、帳號編號與裝置資訊，以及我們給你的回覆（存在你的帳號下，刪除帳號時一起刪除）。你檢舉別的玩家暱稱時，也會記下那個暱稱和帳號編號。"]], ["我們為什麼可以使用這些資料（法律依據）", ["提供你要求的服務（GDPR 第 6 條第 1 項 b 款）：帳號、雲端同步、排行榜、廣場、多人遊戲、送禮、邀請碼、IG 會員。", "你的同意（第 6 條第 1 項 a 款）：使用統計、推播通知。你隨時可以在設定裡撤回，撤回後就不再記錄，已記錄的統計也會刪除。", "正當利益（第 6 條第 1 項 f 款）：公平遊戲檢查、錯誤回報、處理意見回饋，目的是讓遊戲公平、穩定，並回覆你的問題。"]], ["我們用資料做什麼", "只用來提供 app 的功能和改進 app。不放廣告、不賣資料，也不把資料分享給行銷公司。目前沒有開放任何付費購買。"], ["誰會經手這些資料", ["Google Firebase／Google Cloud：登入、雲端資料庫、即時廣場和伺服器程式。即時廣場和伺服器程式在歐盟（比利時）；其他部分服務可能在歐盟以外，Google 依其資料保護條款（包含歐盟標準契約條款）處理。", "GitHub Pages、Cloudflare Pages（網站主機與備援）、jsDelivr（音檔）、Google Fonts（字型）：只會看到 IP 位址等一般連線資訊。", "Apple、Google、Mozilla 的推播服務：把通知送到你的裝置。", "Google 試算表：意見回饋會另外存一份，方便開發者閱讀。"]], ["保存多久", ["帳號資料：保存到你刪除帳號為止。", "廣場聊天泡泡：不保存；廣場位置在你離開後就刪除。", "使用統計：保存到你撤回同意為止，撤回時立即刪除。", "錯誤回報：90 天後自動刪除。意見回饋：2 年後自動刪除。", "推播資訊：關閉通知時立即刪除。"]], ["刪除帳號", "「設定 → 刪除我的帳號與資料」會由伺服器刪除你所有的資料：個人資料、單字、各期排行榜、許願池、按讚、送禮、多人房間、公平遊戲紀錄與 Google 登入帳號。別人保留的紀錄（例如你送給朋友的禮物、許願池得獎名單）會留給對方，但會拿掉你的暱稱和帳號編號。如果中途有任何一步沒有成功，帳號不會被刪掉，你可以再按一次。"], ["你的權利", "依照歐盟 GDPR，你可以查看、匯出、更正或刪除你的資料，也可以反對我們基於正當利益處理資料：「設定 → 備份」可以匯出學習紀錄，其他請寄信給我們。你也可以向愛爾蘭資料保護委員會（Data Protection Commission，www.dataprotection.ie）申訴。"], ["兒童", "BinBin daily 適合 13 歲以上的使用者，未滿 13 歲請不要使用。13 到 15 歲的使用者，請先取得家長或監護人同意再登入。廣場上的話其他玩家看得到，請不要在暱稱或聊天裡透露真實姓名、學校或聯絡方式。"], ["Cookie 與本機儲存", "我們不使用追蹤型 Cookie。app 用瀏覽器的本機儲存空間保存你的設定和進度，也會在你的裝置上留一份打開過的頁面、文章和圖片，讓沒網路時也能看；使用統計用的裝置編號只有在你同意後才會建立。"], ["IELTS 聲明", "IELTS™ 是 British Council、IDP: IELTS Australia 與 Cambridge University Press & Assessment 的註冊商標。BinBin daily 與上述機構沒有任何關係，也未經其認可或核准。app 內的模擬試題皆為原創，分數僅為估計，不代表正式成績。"], ["政策更新", "政策有重大變更時，會在 app 內通知。"]]},
+en:{t:"Privacy policy", upd:"Last updated: 25 November 2026", secs:[["Who we are", "BinBin daily is made and run by Ching Che Huang (CheChe), an independent developer living in Ireland, who is responsible for your data (the \"data controller\" under the GDPR). For any privacy question, write to binbindaily.help@gmail.com or use Settings → Feedback; you'll get an answer within a month."], ["What we collect", ["Without signing in: your progress, words and game data stay on your phone (the browser's local storage) and are not uploaded.", "When you sign in with Google: your Google account ID, display name and profile photo (your e-mail stays with Google's sign-in service), plus your words, reading and quiz history, game progress, outfits and news region, stored in the cloud so they follow you to a new phone.", "Visible to other players: your nickname, flag, character look, level and power, leaderboard results (reading, IELTS, TOEIC, piano), likes received, and your nickname on the wishing-well winners list.", "Plaza: your character's position on the game map (not your phone's GPS location) and what you say (chat bubbles) are shown live to players in the same area; bubbles disappear after a few seconds and are not stored. Players who visited the plaza recently appear there with their nickname and look, refreshed about every 15 minutes.", "Party games, allies, gifts and invite codes: your nickname and game state in a room, ally links, gift records (both nicknames and the items), and who used whose invite code.", "IG membership: the member code you request and your nickname; when you message BinBin on Instagram, your Instagram name appears in BinBin's Instagram inbox.", "Fair-play checks: a daily automatic check that progress makes sense (for example coins or levels jumping suddenly); suspicious accounts are noted for the developer to review by hand.", "If you turn on notifications: your push subscription, time zone, language and whether you've read today's news.", "Usage statistics (only if you agree): a random device ID with the days this device opened the app, the first day, language, level, whether you're signed in, device type and how far you got in the welcome tour, and the day you first finished a story and a quiz. No name or contact details.", "Error reports: when something breaks, the error message, app version, browser model and (if signed in) your account ID, to fix the problem.", "Feedback: what you write, the optional contact you give, your nickname, account ID and device information, and our reply to you (kept with your account and deleted with it). When you report another player's name, that name and account ID are recorded too."]], ["Why we may use it (legal basis)", ["To provide the service you asked for (GDPR Art. 6(1)(b)): account, cloud sync, leaderboards, plaza, party games, gifts, invite codes, IG membership.", "Your consent (Art. 6(1)(a)): usage statistics and push notifications. You can withdraw it any time in Settings; we then stop and delete the statistics already recorded.", "Legitimate interests (Art. 6(1)(f)): fair-play checks, error reports and handling your feedback, to keep the game fair and working and to answer you."]], ["How we use it", "Only to run and improve the app. We show no ads, never sell data and never share it with marketers. There are currently no paid purchases."], ["Who handles it", ["Google Firebase / Google Cloud: sign-in, cloud database, live plaza and server code. The live plaza and server code run in the EU (Belgium); some other services may be outside the EU, and Google processes data under its data-protection terms, including the EU Standard Contractual Clauses.", "GitHub Pages, Cloudflare Pages (hosting and backup), jsDelivr (audio) and Google Fonts (fonts) see normal connection data such as your IP address.", "Push services of Apple, Google and Mozilla deliver notifications to your device.", "Google Sheets: a copy of feedback, so the developer can read it."]], ["How long we keep it", ["Account data: until you delete your account.", "Plaza chat bubbles: not stored; your plaza position is removed when you leave.", "Usage statistics: until you withdraw consent, then deleted at once.", "Error reports: deleted automatically after 90 days. Feedback: deleted automatically after 2 years.", "Push details: deleted as soon as you turn notifications off."]], ["Deleting your account", "Settings → \"Delete my account and data\" has our server delete all your data: profile, words, every period's leaderboards, wishing well, likes, gifts, party rooms, fair-play records and your sign-in. Records another player keeps (such as a gift you sent them or a winners list) stay with them, but your nickname and account ID are removed. If any step fails, your account is not deleted and you can simply try again."], ["Your rights", "Under the EU GDPR you can access, export, correct or delete your data and object to processing based on legitimate interests: Settings → Backup exports your learning records; for anything else, write to us. You can also complain to Ireland's Data Protection Commission (www.dataprotection.ie)."], ["Children", "BinBin daily is for people aged 13 and over; if you are under 13, please don't use it. If you are 13 to 15, please get a parent's or guardian's permission before signing in. Other players can see what you say in the plaza, so don't put your real name, school or contact details in your nickname or chat."], ["Cookies and local storage", "We use no tracking cookies. The app uses your browser's local storage for your settings and progress, and keeps copies of the pages, stories and pictures you opened on your device so they work offline; the device ID for usage statistics is only created after you agree."], ["IELTS notice", "IELTS™ is a registered trademark of the British Council, IDP: IELTS Australia and Cambridge University Press & Assessment. BinBin daily is not affiliated with, endorsed or approved by them. All practice tests are original and scores are estimates only."], ["Changes", "We'll let you know in the app if this policy changes in an important way."]]}};
 function viewPrivacy(){
   const P=PRIV[LANG]||PRIV.en, note=PRIV[LANG]?"":`<p class="muted sm-t">${T("pvEnOnly")}</p>`;
   return `<div class="view priv-view"><button class="btn ghost" data-act="privback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("back")}</button>
@@ -9121,8 +9216,13 @@ async function wellLoad(force){
   WELL_IN={...(WELL_IN||{list:[],draw:null}), at:Date.now()};
   if(SRV_OFF==null) await srvSync(); const m=wellMonth(); if(!m){ WELL_IN.err=true; if(S.view==="adv") render(); return; }
   const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, prev=monthBefore(m);
-  try{ const [q,dr,cr]=await Promise.all([fsM.getDocs(fsM.query(fsM.collection(db,"well"),fsM.where("month","==",m),fsM.limit(500))), fsM.getDoc(fsM.doc(db,"wellDraw",prev)), fsM.getDoc(fsM.doc(db,"wellCarry",m)).catch(()=>null)]);
-    const list=[]; q.forEach(d=>{ const x=safeDoc(d.data()); const c=Math.floor(+x.coins||0); if(x.month===m&&x.uid&&c>0) list.push({uid:String(x.uid), nick:String(x.nick||"").slice(0,16), coins:c}); });
+  try{ const [sm,dr,cr]=await Promise.all([fsM.getDoc(fsM.doc(db,"wellSum",m)).catch(()=>null), fsM.getDoc(fsM.doc(db,"wellDraw",prev)), fsM.getDoc(fsM.doc(db,"wellCarry",m)).catch(()=>null)]);
+    // one summary document per month (wellSum/{month}.e = {uid:{n,c}}, kept in step with each player's own well doc by
+    // the rules) instead of reading every entry; months from before the summary existed fall back to the full list
+    const list=[], E=sm&&sm.exists()?safeDoc(sm.data()).e:null;
+    if(E&&typeof E==="object") for(const [u,x] of Object.entries(E)){ const c=Math.floor(+(x&&x.c)||0); if(c>0) list.push({uid:String(u), nick:String((x&&x.n)||"").slice(0,16), coins:c}); }
+    else { const q=await fsM.getDocs(fsM.query(fsM.collection(db,"well"),fsM.where("month","==",m),fsM.limit(500)));
+      q.forEach(d=>{ const x=safeDoc(d.data()); const c=Math.floor(+x.coins||0); if(x.month===m&&x.uid&&c>0) list.push({uid:String(x.uid), nick:String(x.nick||"").slice(0,16), coins:c}); }); }
     list.sort((a,b)=>b.coins-a.coins);
     const draw=dr.exists()?safeDoc(dr.data()):null;
     const carry=cr&&cr.exists()?Math.max(0,Math.floor(+safeDoc(cr.data()).gold||0)):0;
@@ -9194,7 +9294,8 @@ async function wellToss(){
   W.ask=false; W.busy=true; g.gold-=n; saveGame(); render();
   const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, ref=fsM.doc(db,"well",m+"_"+me), nick=(g.nick||CLOUD.user.displayName||"").slice(0,16);
   try{ let total=0; await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():null; total=(d?Math.floor(+d.coins||0):0)+n;
-      if(total>WELL.maxMonth) throw new Error("max"); tx.set(ref,{uid:me, month:m, nick, coins:total, at:new Date().toISOString()}); });
+      if(total>WELL.maxMonth) throw new Error("max"); tx.set(ref,{uid:me, month:m, nick, coins:total, at:new Date().toISOString()});
+      tx.set(fsM.doc(db,"wellSum",m),{e:{[me]:{n:nick, c:total}}},{merge:true}); });
     const L=WELL_IN.list, x=L.find(y=>y.uid===me); if(x) x.coins=total; else L.push({uid:me,nick,coins:total}); L.sort((a,b)=>b.coins-a.coins);
     toast(T("wellTossed",{n})); if(typeof sfx==="function") sfx("prize"); }
   catch(e){ g.gold+=n; saveGame(); toast(e&&e.message==="max"?T("wellMax",{n:WELL.maxMonth}):T("wellFail")); console.warn("well toss",e&&(e.code||e.message)); }
@@ -9613,6 +9714,13 @@ const PLZ_EXITS={fountain:[{d:"n",a0:440,a1:1092,e:8,to:"band",sg:[530,118]},{d:
   band:[{d:"s",a0:712,a1:824,e:1144,to:"fountain"}], gate:[{d:"n",a0:716,a1:816,e:208,to:"fountain",in:170}], pond:[{d:"e",a0:740,a1:780,e:1532,to:"fountain"}], lawn:[{d:"w",a0:700,a1:932,e:8,to:"fountain"}]};
 const PLZ_OPP={n:"s",s:"n",w:"e",e:"w"};
 const PLZ_EMO=["👋","😄","🔥","📚","👍","☕"];
+// speech bubbles travel as short codes, never as text, so a changed client cannot put its own words above a head
+// (the Realtime Database rule only accepts these codes): @act, e<emoji>, m<mark>, s<quick phrase>, p<piano score>
+const PLZ_MARK=["👋","✊","❗","🎧","🎵","🎹","🏆","📖","⚔️","🌠","😊","🎁"];
+function plzBEnc(t){ t=String(t||""); if(/^@(jump|dance|sit|spin)$/.test(t)) return t; let i=PLZ_EMO.indexOf(t); if(i>=0) return "e"+i; i=PLZ_MARK.indexOf(t); if(i>=0) return "m"+i;
+  i=PLZ_SAY.findIndex(x=>x[0]===t); if(i>=0) return "s"+i; const m=/^🎹 (\d{1,7})$/.exec(t); return m?"p"+m[1]:""; }
+function plzBDec(c){ c=String(c||""); if(/^@(jump|dance|sit|spin)$/.test(c)) return c; const m=/^([emsp])(\d{1,7})$/.exec(c); if(!m) return ""; const i=+m[2];
+  if(m[1]==="p") return "🎹 "+i; const x=m[1]==="e"?PLZ_EMO[i]:m[1]==="m"?PLZ_MARK[i]:(PLZ_SAY[i]||[])[0]; return x||""; }
 const PLZ_ACTS=[{k:"jump",ic:"🦘",t:.7},{k:"dance",ic:"💃",t:2.6},{k:"sit",ic:"🪑",t:6},{k:"spin",ic:"🌀",t:.9}];   // actions everyone in the room sees (sent as b:"@jump")
 let ROOM=null, PLZ_DBM=null;   // PLZ_DBM: a stand-in database module for tests
 const plzRnd=(a,b)=>a+Math.random()*(b-a);
@@ -9769,7 +9877,7 @@ async function plzJoin(){ const R=ROOM; try{
     await dbM.onDisconnect(R.myRef).remove(); await plzSend(true);
     const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
         const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
-        if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); if(v.g||v.gv) plzGrabSeen(v,me); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; if(v.b[0]==="@") plzDo(o,v.b.slice(1)); else plzSay(o,v.b); } } };
+        if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); if(v.g||v.gv) plzGrabSeen(v,me); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; const bt=plzBDec(v.b); if(bt[0]==="@") plzDo(o,bt.slice(1)); else if(bt) plzSay(o,bt); } } };
     R.unsub=[dbM.onChildAdded(room,up), dbM.onChildChanged(room,up), dbM.onChildRemoved(room,sn=>{ if(!ROOM) return; R.live.delete(sn.key); const o=R.ents.get(sn.key); if(o&&o.kind==="live"){ o.el.remove(); if(o.edge) o.edge.remove(); R.ents.delete(sn.key); } plzRebuild(); })];
     if(R.zone==="lawn") plzLawnJoin(dbM,db);
     R.hb=setInterval(()=>{ if(ROOM!==R) return clearInterval(R.hb); if(R.away&&Date.now()-R.away.at>15*60e3) return plazaClose();
@@ -9777,7 +9885,7 @@ async function plzJoin(){ const R=ROOM; try{
       plzSend(true); },15e3);
     plzRebuild();
   }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
-async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
+async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; if(extra&&"b" in extra){ const b=plzBEnc(extra.b); if(!b) return; extra={...extra, b}; } const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
   const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
   const pos={x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv};
   const core={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, h:m.h||"", hw:(m.hw||"").slice(0,18), ...(m.pt?{pn:m.pn|0, pt:m.pt}:{}), ...(m.g&&t-m.g.t<8000?{g:m.g}:{}), ...(m.gv&&t-m.gv.t<8000?{gv:m.gv}:{})};
@@ -10490,6 +10598,7 @@ async function chSet(uid, ban, nick){ const {fsM,db}=CLOUD.fb, m=monthKey();
   const B=fsM.writeBatch(db);
   if(ban){ B.set(fsM.doc(db,"banned",uid),{at:Date.now(), n:String(nick||"").slice(0,16)});
     for(const p of [["leaderboard",uid],["ieltsMonths",m,"scores",uid],["toeicMonths",m,"scores",uid],["readMonths",m,"u",uid],["well",m+"_"+uid]]) B.delete(fsM.doc(db,...p));
+    B.set(fsM.doc(db,"wellSum",m),{e:{[uid]:fsM.deleteField()}},{merge:true});
     B.set(fsM.doc(db,"cheat",uid),{uid, nick:String(nick||"").slice(0,16), status:"banned", at:new Date().toISOString()},{merge:true}); }
   else { B.delete(fsM.doc(db,"banned",uid)); B.set(fsM.doc(db,"cheat",uid),{status:"ok"},{merge:true}); }
   await B.commit();
@@ -11473,6 +11582,30 @@ Object.assign(STR.hi,{"plzMowLbl": "घास काटने की मशी�
 Object.assign(STR.es,{"plzMowLbl": "Cortacésped", "plzMowT": "¡Toca rápido en cualquier parte para coger el cortacésped!", "plzMowGo": "¡A cortar! Te bajas en {s} s", "plzMowLost": "{n} cogió el cortacésped primero", "plzMowHop": "Bajar", "plzMowEnd": "Se acabó el tiempo, te bajaste del cortacésped", "plzSeedLbl": "Plantones", "plzSeedGet": "Coger plantones", "plzSeedWait": "Los plantones aún crecen, vuelve en {s} s", "plzSeedGot": "¡{n} plantones! Mientras los llevas no salen bestias", "plzSeedDone": "¡Todo plantado! Vuelven las bestias en la hierba", "plzSeedDrop": "Tirar plantones", "plzSeedDropped": "Plantones tirados. Vuelven las bestias en la hierba", "plzPlant": "Plantar", "plzPlantNo": "Aquí no se puede plantar", "plzPlantHas": "Aquí ya hay hierba", "plzPlantFull": "El césped de esta línea está lleno, espera al cortacésped"});
 Object.assign(STR.ja,{"plzMowLbl": "芝刈り機", "plzMowT": "画面のどこでも連打して芝刈り機を取れ！", "plzMowGo": "出発！{s} 秒で自動で降ります", "plzMowLost": "{n} が先に芝刈り機を取った", "plzMowHop": "降りる", "plzMowEnd": "時間切れ、芝刈り機から降りました", "plzSeedLbl": "苗", "plzSeedGet": "苗をもらう", "plzSeedWait": "苗はまだ育っています。{s} 秒後にまた来てね", "plzSeedGot": "苗を {n} 本ゲット！持っている間は野生のモンスターに会いません", "plzSeedDone": "植え終わった！草むらでまたモンスターに会います", "plzSeedDrop": "苗を捨てる", "plzSeedDropped": "苗を捨てました。草むらでまたモンスターに会います", "plzPlant": "植える", "plzPlantNo": "ここには植えられません", "plzPlantHas": "ここにはもう草があります", "plzPlantFull": "このラインの芝生はいっぱい。芝刈り機を待とう"});
 Object.assign(STR.ko,{"plzMowLbl": "잔디깎이", "plzMowT": "화면 아무 곳이나 연타해서 잔디깎이를 잡아!", "plzMowGo": "출발! {s}초 후 자동으로 내려요", "plzMowLost": "{n}님이 먼저 잔디깎이를 잡았어요", "plzMowHop": "내리기", "plzMowEnd": "시간 끝, 잔디깎이에서 내렸어요", "plzSeedLbl": "모종", "plzSeedGet": "모종 받기", "plzSeedWait": "모종이 아직 자라는 중, {s}초 후에 다시 와요", "plzSeedGot": "모종 {n}개 획득! 들고 있는 동안 야생 몬스터를 만나지 않아요", "plzSeedDone": "다 심었어요! 풀숲에서 다시 몬스터를 만나요", "plzSeedDrop": "모종 버리기", "plzSeedDropped": "모종을 버렸어요. 풀숲에서 다시 몬스터를 만나요", "plzPlant": "심기", "plzPlantNo": "여기는 심을 수 없어요", "plzPlantHas": "여기는 이미 풀이 있어요", "plzPlantFull": "이 라인의 잔디가 꽉 찼어요, 잔디깎이를 기다려요"});
+Object.assign(STR.zh,{"rptNick": "檢舉這個暱稱", "rptThanks": "謝謝，我們會看看這個暱稱", "rptDone": "你已經檢舉過這個玩家了"});
+Object.assign(STR.en,{"rptNick": "Report this name", "rptThanks": "Thanks, we'll take a look at this name", "rptDone": "You already reported this player"});
+Object.assign(STR.hi,{"rptNick": "इस नाम की शिकायत करें", "rptThanks": "धन्यवाद, हम इस नाम को देखेंगे", "rptDone": "आप इस खिलाड़ी की शिकायत पहले ही कर चुके हैं"});
+Object.assign(STR.es,{"rptNick": "Denunciar este nombre", "rptThanks": "Gracias, revisaremos este nombre", "rptDone": "Ya denunciaste a este jugador"});
+Object.assign(STR.ja,{"rptNick": "この名前を報告", "rptThanks": "ありがとう、この名前を確認します", "rptDone": "このプレイヤーはもう報告済みです"});
+Object.assign(STR.ko,{"rptNick": "이 이름 신고", "rptThanks": "고마워요, 이 이름을 확인할게요", "rptDone": "이미 신고한 플레이어예요"});
+Object.assign(STR.zh,{"annClose": "關閉公告", "annDev": "公告橫幅", "annOnNow": "公告中", "annOffNow": "沒有公告", "annUntil": "到 {t} 自動消失", "annOff": "收回公告", "annPh": "公告內容（中文，玩家不用關站也看得到）", "annPhEn": "英文版（可空白，其他語言玩家會看到這個）", "annInfo": "一般", "annWarn": "注意", "annDay": "天", "annNoEnd": "不自動消失", "annPost": "發布公告", "annEmpty": "請先寫公告內容"});
+Object.assign(STR.en,{"annClose": "Close announcement", "annDev": "Announcement banner", "annOnNow": "Showing", "annOffNow": "No announcement", "annUntil": "Disappears at {t}", "annOff": "Take down", "annPh": "Announcement (Chinese; players see it without closing the site)", "annPhEn": "English version (optional; shown to other languages)", "annInfo": "Info", "annWarn": "Warning", "annDay": "day(s)", "annNoEnd": "No end", "annPost": "Post announcement", "annEmpty": "Write the announcement first"});
+Object.assign(STR.hi,{"annClose": "घोषणा बंद करें", "annDev": "घोषणा पट्टी", "annOnNow": "दिख रही है", "annOffNow": "कोई घोषणा नहीं", "annUntil": "{t} पर हट जाएगी", "annOff": "हटाएँ", "annPh": "घोषणा (चीनी)", "annPhEn": "अंग्रेज़ी संस्करण (वैकल्पिक)", "annInfo": "सूचना", "annWarn": "चेतावनी", "annDay": "दिन", "annNoEnd": "कोई अंत नहीं", "annPost": "घोषणा करें", "annEmpty": "पहले घोषणा लिखें"});
+Object.assign(STR.es,{"annClose": "Cerrar aviso", "annDev": "Aviso", "annOnNow": "Visible", "annOffNow": "Sin aviso", "annUntil": "Desaparece a las {t}", "annOff": "Retirar", "annPh": "Aviso (chino)", "annPhEn": "Versión en inglés (opcional)", "annInfo": "Info", "annWarn": "Atención", "annDay": "día(s)", "annNoEnd": "Sin fin", "annPost": "Publicar aviso", "annEmpty": "Escribe el aviso primero"});
+Object.assign(STR.ja,{"annClose": "お知らせを閉じる", "annDev": "お知らせバナー", "annOnNow": "表示中", "annOffNow": "お知らせなし", "annUntil": "{t} に消えます", "annOff": "取り下げる", "annPh": "お知らせ（中国語）", "annPhEn": "英語版（任意）", "annInfo": "通常", "annWarn": "注意", "annDay": "日", "annNoEnd": "期限なし", "annPost": "お知らせを出す", "annEmpty": "先に内容を書いてください"});
+Object.assign(STR.ko,{"annClose": "공지 닫기", "annDev": "공지 배너", "annOnNow": "표시 중", "annOffNow": "공지 없음", "annUntil": "{t}에 사라짐", "annOff": "내리기", "annPh": "공지 (중국어)", "annPhEn": "영어 버전 (선택)", "annInfo": "일반", "annWarn": "주의", "annDay": "일", "annNoEnd": "기한 없음", "annPost": "공지 올리기", "annEmpty": "먼저 공지를 써 주세요"});
+Object.assign(STR.zh,{"fbDone": "已處理", "fbUndo": "改回未處理", "fbReply": "回覆", "fbReplyPh": "寫給這位玩家的回覆（玩家下次打開遊戲會看到）", "fbReplySend": "送出回覆", "fbReplied": "已回覆", "fbOpen": "未處理 {n}", "fbAllN": "全部 {n}", "fbNoneOpen": "沒有未處理的意見 🎉", "ibTitle": "BinBin 回覆你了", "ibYou": "你說："});
+Object.assign(STR.en,{"fbDone": "Done", "fbUndo": "Mark not done", "fbReply": "Reply", "fbReplyPh": "Your reply (the player sees it next time they open the game)", "fbReplySend": "Send reply", "fbReplied": "Replied", "fbOpen": "Open {n}", "fbAllN": "All {n}", "fbNoneOpen": "Nothing open 🎉", "ibTitle": "BinBin replied to you", "ibYou": "You said: "});
+Object.assign(STR.hi,{"fbDone": "हो गया", "fbUndo": "फिर से खोलें", "fbReply": "जवाब दें", "fbReplyPh": "आपका जवाब", "fbReplySend": "जवाब भेजें", "fbReplied": "जवाब भेजा", "fbOpen": "खुले {n}", "fbAllN": "सभी {n}", "fbNoneOpen": "कुछ बाकी नहीं 🎉", "ibTitle": "BinBin ने आपको जवाब दिया", "ibYou": "आपने कहा: "});
+Object.assign(STR.es,{"fbDone": "Hecho", "fbUndo": "Marcar pendiente", "fbReply": "Responder", "fbReplyPh": "Tu respuesta", "fbReplySend": "Enviar respuesta", "fbReplied": "Respondido", "fbOpen": "Pendientes {n}", "fbAllN": "Todos {n}", "fbNoneOpen": "Nada pendiente 🎉", "ibTitle": "BinBin te respondió", "ibYou": "Dijiste: "});
+Object.assign(STR.ja,{"fbDone": "対応済み", "fbUndo": "未対応に戻す", "fbReply": "返信", "fbReplyPh": "返信内容", "fbReplySend": "返信を送る", "fbReplied": "返信しました", "fbOpen": "未対応 {n}", "fbAllN": "すべて {n}", "fbNoneOpen": "未対応はありません 🎉", "ibTitle": "BinBin から返信が届きました", "ibYou": "あなた："});
+Object.assign(STR.ko,{"fbDone": "처리 완료", "fbUndo": "미처리로 되돌리기", "fbReply": "답장", "fbReplyPh": "답장 내용", "fbReplySend": "답장 보내기", "fbReplied": "답장했어요", "fbOpen": "미처리 {n}", "fbAllN": "전체 {n}", "fbNoneOpen": "미처리 의견이 없어요 🎉", "ibTitle": "BinBin이 답장했어요", "ibYou": "내가 쓴 말: "});
+Object.assign(STR.zh,{"dsFresh": "現在重算", "dsNoSum": "還沒有統計（每天凌晨伺服器會算一次，或按「現在重算」）", "dsAsOf": "統計時間：{t}", "dsRecent100": "最近活躍的 100 位", "fnTitle": "新玩家漏斗（最近 30 天第一次打開的裝置）", "fn_open": "第一次打開", "fn_intro": "完成新手引導", "fn_read": "讀完第一篇", "fn_quiz": "做完第一個測驗", "fn_signin": "登入 Google", "fn_back": "隔天以後有回來", "fn_d7": "第 7 天以後還在", "fnIntroStop": "新手引導停在：", "fnStep": "第 {n} 頁", "fnNote": "只算同意統計的裝置，不含個人資料。每一步的 −% 是比上一步少掉多少。", "ewTitle": "錯誤監控", "ew24": "過去 24 小時有 {n} 個錯誤回報", "ewTurnOn": "錯誤警報推播到這台手機", "ewOn": "這台手機會收到錯誤警報", "ewNote": "有新種類的錯誤，或 15 分鐘內很多錯誤時，會推播到你開啟的手機（最多一小時一次）。"});
+Object.assign(STR.en,{"dsFresh": "Recalculate now", "dsNoSum": "No numbers yet (the server works them out every night, or press Recalculate now)", "dsAsOf": "As of {t}", "dsRecent100": "100 most recently active", "fnTitle": "New-player funnel (devices first opened in the last 30 days)", "fn_open": "First open", "fn_intro": "Finished intro", "fn_read": "Read first story", "fn_quiz": "Finished first quiz", "fn_signin": "Signed in", "fn_back": "Came back another day", "fn_d7": "Still here after 7 days", "fnIntroStop": "Intro stopped at:", "fnStep": "page {n}", "fnNote": "Only devices that agreed to stats; no personal data. The −% is how many dropped since the step before.", "ewTitle": "Error watch", "ew24": "{n} error reports in the last 24 hours", "ewTurnOn": "Send error alerts to this phone", "ewOn": "This phone gets error alerts", "ewNote": "A new kind of error, or many errors in 15 minutes, sends a push to the phones you turned this on (at most once an hour)."});
+Object.assign(STR.hi,{"dsFresh": "अभी गिनें", "dsNoSum": "अभी कोई आँकड़े नहीं", "dsAsOf": "{t} तक", "dsRecent100": "हाल के 100 सक्रिय", "fnTitle": "नए खिलाड़ी फ़नल", "fn_open": "पहली बार खोला", "fn_intro": "परिचय पूरा", "fn_read": "पहली ख़बर पढ़ी", "fn_quiz": "पहला क्विज़", "fn_signin": "साइन इन", "fn_back": "किसी और दिन लौटे", "fn_d7": "7 दिन बाद भी", "fnIntroStop": "परिचय यहाँ रुका:", "fnStep": "पेज {n}", "fnNote": "सिर्फ़ सहमति वाले डिवाइस।", "ewTitle": "त्रुटि निगरानी", "ew24": "पिछले 24 घंटों में {n} त्रुटियाँ", "ewTurnOn": "त्रुटि अलर्ट इस फ़ोन पर", "ewOn": "इस फ़ोन पर अलर्ट आएँगे", "ewNote": "नई त्रुटि होने पर पुश सूचना (घंटे में एक बार तक)।"});
+Object.assign(STR.es,{"dsFresh": "Recalcular ahora", "dsNoSum": "Aún no hay datos", "dsAsOf": "A las {t}", "dsRecent100": "Los 100 más recientes", "fnTitle": "Embudo de nuevos jugadores", "fn_open": "Primera visita", "fn_intro": "Terminó la intro", "fn_read": "Leyó la primera noticia", "fn_quiz": "Primer test", "fn_signin": "Inició sesión", "fn_back": "Volvió otro día", "fn_d7": "Sigue tras 7 días", "fnIntroStop": "La intro se detuvo en:", "fnStep": "página {n}", "fnNote": "Solo dispositivos que aceptaron estadísticas.", "ewTitle": "Vigilancia de errores", "ew24": "{n} errores en las últimas 24 horas", "ewTurnOn": "Alertas de errores a este móvil", "ewOn": "Este móvil recibe alertas", "ewNote": "Un error nuevo envía una notificación (como mucho una por hora)."});
+Object.assign(STR.ja,{"dsFresh": "今すぐ再計算", "dsNoSum": "まだ集計がありません", "dsAsOf": "{t} 時点", "dsRecent100": "最近の 100 人", "fnTitle": "新規プレイヤーの流れ", "fn_open": "初回起動", "fn_intro": "チュートリアル完了", "fn_read": "初めての記事", "fn_quiz": "初めてのテスト", "fn_signin": "ログイン", "fn_back": "別の日に戻った", "fn_d7": "7日後も継続", "fnIntroStop": "チュートリアルの離脱：", "fnStep": "{n} ページ目", "fnNote": "統計に同意した端末のみ。", "ewTitle": "エラー監視", "ew24": "過去24時間のエラー {n} 件", "ewTurnOn": "エラー通知をこの端末に", "ewOn": "この端末に通知されます", "ewNote": "新しい種類のエラーで通知します（1時間に1回まで）。"});
+Object.assign(STR.ko,{"dsFresh": "지금 다시 계산", "dsNoSum": "아직 통계가 없어요", "dsAsOf": "{t} 기준", "dsRecent100": "최근 활동 100명", "fnTitle": "신규 플레이어 퍼널", "fn_open": "처음 열기", "fn_intro": "튜토리얼 완료", "fn_read": "첫 기사 읽기", "fn_quiz": "첫 퀴즈", "fn_signin": "로그인", "fn_back": "다른 날 다시 옴", "fn_d7": "7일 후에도", "fnIntroStop": "튜토리얼 이탈:", "fnStep": "{n}페이지", "fnNote": "통계에 동의한 기기만.", "ewTitle": "오류 감시", "ew24": "최근 24시간 오류 {n}건", "ewTurnOn": "오류 알림을 이 폰으로", "ewOn": "이 폰이 알림을 받아요", "ewNote": "새로운 오류가 생기면 알림 (1시간에 최대 1번)."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});

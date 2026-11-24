@@ -49,7 +49,7 @@ export function vapidAuth(endpoint, key) {
 // only real browser push services are contacted (anyone can write a subscription, so never POST to arbitrary hosts)
 const PUSH_HOSTS = [/^fcm\.googleapis\.com$/, /^android\.googleapis\.com$/, /(^|\.)push\.apple\.com$/, /^updates\.push\.services\.mozilla\.com$/, /(^|\.)notify\.windows\.com$/, /(^|\.)push\.services\.mozilla\.com$/];
 export const pushHostOk = ep => { try { const u = new URL(ep); return u.protocol === "https:" && PUSH_HOSTS.some(r => r.test(u.hostname)); } catch { return false; } };
-async function sendPush(sub, msg, key) {
+export async function sendPush(sub, msg, key) {
   const r = await fetch(sub.endpoint, {
     signal: AbortSignal.timeout(10000), redirect: "manual",
     method: "POST",

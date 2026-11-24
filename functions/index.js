@@ -17,6 +17,7 @@ import { runWellDraw, runWellExpire, prevMonth } from "./well.js";
 import { runPlaza } from "./plaza.js";
 import { runCheatScan } from "./cheat.js";
 import { eraseUser, runCleanup, RTDB_URL } from "./account.js";
+import { runStats, runErrWatch } from "./ops.js";
 import { getDatabaseWithUrl } from "firebase-admin/database";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
@@ -57,6 +58,8 @@ const subTier = m => (SUB_TIERS.find(([n]) => m >= n) || [0, 0])[1];
 // sha256 of tester e-mail addresses (sandbox only; keeps the address itself out of this public repo)
 const TESTERS = new Set(["d64a281160d50a9cd12426bc8ee395a2315b913497c840ed9c65feb367d56fc0"]);
 const sha = s => crypto.createHash("sha256").update(String(s || "").toLowerCase()).digest("hex");
+// sha256 of the developer's e-mail (same account as isAdmin() in the Firestore rules)
+const ADMIN_SHA = "d64a281160d50a9cd12426bc8ee395a2315b913497c840ed9c65feb367d56fc0";
 
 async function stripe(path, params) {
   const body = new URLSearchParams();
@@ -278,6 +281,8 @@ export const deleteAccount = onRequest({ region: REGION, cors: ORIGINS, maxInsta
 
 export const newsPush = onSchedule({ schedule: "every 15 minutes", timeZone: "Europe/Dublin", region: REGION, secrets: [VAPID_PRIVATE], timeoutSeconds: 300, retryCount: 0, maxInstances: 1 }, async () => {
   try { await runPlaza(db); } catch (e) { logger.warn("plaza", e && e.message); }   // 廣場: refresh who stands in the plaza (one doc)
+  // new error reports → push to the developer's phone (no e-mail)
+  try { const e = await runErrWatch(db, VAPID_PRIVATE.value(), (...a) => logger.warn(...a)); if (e.n) logger.info("errWatch", e); } catch (e) { logger.warn("errWatch", e && e.message); }
   const r = await runPush(db, VAPID_PRIVATE.value(), (...a) => logger.info(...a));
   if (r.am || r.pm || r.gone || r.fail || r.bad) logger.info("newsPush", r);
 });
@@ -296,4 +301,15 @@ export const wellExpire = onSchedule({ schedule: "20 0 * * *", timeZone: "Europe
   try { logger.info("cheatScan", await runCheatScan(db)); } catch (e) { logger.warn("cheatScan", e && e.message); }
   // privacy policy: old error reports and feedback are removed on schedule
   try { logger.info("cleanup", await runCleanup(db)); } catch (e) { logger.warn("cleanup", e && e.message); }
+  // developer panel numbers, worked out once a day (the panel can also ask for fresh ones: adminStats)
+  try { const s = await runStats(db); logger.info("stats", { users: s.users, devices: s.ret && s.ret.devices }); } catch (e) { logger.warn("stats", e && e.message); }
+});
+
+// 開發者面板「重新整理」: the admin asks for fresh numbers now. Only the admin's own Google account may call it.
+export const adminStats = onRequest({ region: REGION, cors: ORIGINS, maxInstances: 2, timeoutSeconds: 120, memory: "512MiB" }, async (req, res) => {
+  if (req.method !== "POST") return res.status(405).json({ error: "method" });
+  const tok = (req.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  const user = await getAuth().verifyIdToken(tok).catch(() => null);
+  if (!user || !user.email_verified || sha(user.email) !== ADMIN_SHA) return res.status(403).json({ error: "admin" });
+  try { return res.json(await runStats(db)); } catch (e) { logger.error("adminStats", e && e.message); return res.status(500).json({ error: "stats" }); }
 });
