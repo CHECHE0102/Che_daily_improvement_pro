@@ -92,6 +92,7 @@ n1:accident
 n1:accidental
 n1:accidentally
 n1:accidents
+n1:acclaim
 n1:acclaimed
 n1:accolade
 n1:accolades
@@ -166,6 +167,7 @@ n1:acre
 n1:acres
 n1:acridity
 n1:acrimonious
+n1:acrimony
 n1:across
 n1:across-the-board
 n1:act
@@ -248,6 +250,7 @@ n1:administrations
 n1:administrative
 n1:administrator
 n1:administrators
+n1:admirable
 n1:admiration
 n1:admired
 n1:admirer
@@ -745,6 +748,7 @@ n1:apartments
 n1:apathetic
 n1:apathy
 n1:apcoa
+n1:apec
 n1:apiece
 n1:apologetic
 n1:apologise
@@ -770,6 +774,7 @@ n1:append
 n1:appetite
 n1:applaud
 n1:applauded
+n1:applause
 n1:appliance
 n1:appliances
 n1:applicable
@@ -821,6 +826,8 @@ n1:aptitude
 n1:aquaculture
 n1:aquarium
 n1:arabia
+n1:arbitrarily
+n1:arbitrary
 n1:arbitrate
 n1:arbitrator
 n1:archaeological
@@ -1114,6 +1121,7 @@ n1:authorise
 n1:authorised
 n1:authorises
 n1:authorising
+n1:authoritarian
 n1:authorities
 n1:authorities_
 n1:authority
@@ -1234,6 +1242,8 @@ n1:balanced
 n1:balances
 n1:balancing
 n1:baldonnel
+n1:balk
+n1:balked
 n1:ballfield
 n1:ballgame
 n1:balloon
@@ -1255,6 +1265,8 @@ n1:bandied
 n1:bands
 n1:banger
 n1:bangers
+n1:banish
+n1:banished
 n1:bank
 n1:bank_s
 n1:bankable
@@ -1645,6 +1657,7 @@ n1:blow
 n1:blowers
 n1:blowing
 n1:blown
+n1:blows
 n1:blue
 n1:blueprint
 n1:bluetongue
@@ -1764,6 +1777,7 @@ n1:botch
 n1:botched
 n1:both
 n1:bother
+n1:bothered
 n1:bothers
 n1:bots
 n1:bottle
@@ -1846,6 +1860,7 @@ n1:breakfast
 n1:breaking
 n1:breaks
 n1:breakthrough
+n1:breakup
 n1:breast
 n1:breath
 n1:breathalyser
@@ -2036,6 +2051,8 @@ n1:busily
 n1:business
 n1:business_s
 n1:businesses
+n1:businessman
+n1:businesswoman
 n1:bust
 n1:bustle
 n1:bustling
@@ -2537,6 +2554,7 @@ n1:chia-hung
 n1:chia-lung
 n1:chia-wei
 n1:chiang
+n1:chiao
 n1:chiayi
 n1:chicken
 n1:chief
@@ -2645,6 +2663,7 @@ n1:circumvents
 n1:circus
 n1:cistern
 n1:cistern_s
+n1:citation
 n1:citations
 n1:cite
 n1:cited
@@ -2813,6 +2832,9 @@ n1:co-branded
 n1:co-creator
 n1:co-develop
 n1:co-educational
+n1:co-established
+n1:co-found
+n1:co-founded
 n1:co-founder
 n1:co-founders
 n1:co-hosted
@@ -2939,6 +2961,7 @@ n1:comes
 n1:comfort
 n1:comfortable
 n1:comfortably
+n1:comforted
 n1:comforting
 n1:comforts
 n1:comic
@@ -3259,6 +3282,7 @@ n1:connected
 n1:connecting
 n1:connection
 n1:connections
+n1:connector
 n1:connectors
 n1:connects
 n1:conned
@@ -3430,6 +3454,7 @@ n1:contracts
 n1:contractual
 n1:contradict
 n1:contradicted
+n1:contradiction
 n1:contradictory
 n1:contradicts
 n1:contraflow
@@ -3615,6 +3640,7 @@ n1:counsels
 n1:count
 n1:countable
 n1:counted
+n1:countenance
 n1:counter
 n1:counter-proposal
 n1:counter-proposals
@@ -3770,6 +3796,7 @@ n1:cross-border
 n1:cross-departmental
 n1:cross-generational
 n1:cross-ridge
+n1:cross-strait
 n1:crossagalla
 n1:crossed
 n1:crossing
@@ -3860,6 +3887,7 @@ n1:current
 n1:currently
 n1:curricular
 n1:curse
+n1:curt
 n1:curtailed
 n1:curtain
 n1:curve
@@ -3922,6 +3950,7 @@ n1:damaged
 n1:damages
 n1:damaging
 n1:dame
+n1:damien
 n1:damning
 n1:damp
 n1:dampen
@@ -4045,6 +4074,7 @@ n1:deciding
 n1:decimal
 n1:decision
 n1:decision-makers
+n1:decision-making
 n1:decisions
 n1:decisive
 n1:decisively
@@ -4419,6 +4449,7 @@ n1:deterring
 n1:deters
 n1:detest
 n1:detours
+n1:detractor
 n1:detractors
 n1:detriment
 n1:detrimental
@@ -4498,10 +4529,12 @@ n1:difficulties
 n1:difficulty
 n1:dig
 n1:digangi
+n1:digest
 n1:digester
 n1:digesters
 n1:digestion
 n1:digging
+n1:digit
 n1:digital
 n1:digitally
 n1:dignified
@@ -4591,6 +4624,7 @@ n1:disapproval
 n1:disapprove
 n1:disapproving
 n1:disarray
+n1:disassociated
 n1:disaster
 n1:disasters
 n1:disband
@@ -4657,6 +4691,8 @@ n1:diseases
 n1:disembark
 n1:disembarked
 n1:disgrace
+n1:disgraceful
+n1:disguises
 n1:dish
 n1:dishes
 n1:dishonest
@@ -4703,6 +4739,8 @@ n1:dispatch
 n1:dispatched
 n1:dispatches
 n1:dispatching
+n1:dispel
+n1:dispelled
 n1:dispensable
 n1:dispensary
 n1:dispense
@@ -4779,6 +4817,7 @@ n1:dissuaded
 n1:dissuades
 n1:dissuading
 n1:distance
+n1:distanced
 n1:distances
 n1:distant
 n1:distantly
@@ -5093,6 +5132,7 @@ n1:dupe
 n1:duplicate
 n1:duplicates
 n1:duplication
+n1:duplicity
 n1:durability
 n1:durable
 n1:duration
@@ -5475,6 +5515,7 @@ n1:energy
 n1:energy-efficient
 n1:energy-saving
 n1:enforce
+n1:enforceable
 n1:enforced
 n1:enforcement
 n1:enforcing
@@ -5578,6 +5619,7 @@ n1:entrant_s
 n1:entrants
 n1:entreated
 n1:entrenched
+n1:entrepreneur
 n1:entries
 n1:entrust
 n1:entrusted
@@ -5833,6 +5875,7 @@ n1:exclusively
 n1:excursion
 n1:excuse
 n1:excused
+n1:excusing
 n1:execute
 n1:executed
 n1:executing
@@ -6075,6 +6118,7 @@ n1:fallout
 n1:falls
 n1:false
 n1:falsehood
+n1:falsely
 n1:falter
 n1:faltered
 n1:faltering
@@ -6092,6 +6136,7 @@ n1:famously
 n1:fan
 n1:fanatical
 n1:fancy
+n1:fanfare
 n1:fang-ming
 n1:fans
 n1:far
@@ -6099,6 +6144,7 @@ n1:far-fetched
 n1:far-off
 n1:far-reaching
 n1:faraway
+n1:farce
 n1:fare
 n1:fared
 n1:fares
@@ -6308,6 +6354,7 @@ n1:fined
 n1:finer
 n1:fines
 n1:fingal
+n1:finger
 n1:fingernails
 n1:fingers
 n1:finish
@@ -6452,6 +6499,7 @@ n1:floodwaters
 n1:floor
 n1:floors
 n1:flop
+n1:flopped
 n1:flops
 n1:flora
 n1:floral
@@ -6855,6 +6903,7 @@ n1:fused
 n1:fuselage
 n1:fusensen
 n1:fusion
+n1:fuss
 n1:futile
 n1:futsal
 n1:future
@@ -6965,6 +7014,7 @@ n1:gentler
 n1:gentlest
 n1:gently
 n1:genuine
+n1:genuinely
 n1:geographical
 n1:geographically
 n1:geologic
@@ -7172,6 +7222,8 @@ n1:greenlight
 n1:greenlit
 n1:greenly
 n1:greens
+n1:greenwash
+n1:greenwashes
 n1:greenway
 n1:greet
 n1:greeted
@@ -7282,6 +7334,7 @@ n1:gust
 n1:gusting
 n1:gusts
 n1:gusty
+n1:guterres
 n1:gym
 n1:gyms
 n1:h
@@ -7371,9 +7424,12 @@ n1:hang
 n1:hangar
 n1:hanging
 n1:hangs
+n1:hans
 n1:hao
 n1:hap
 n1:hap-eligible
+n1:haphazard
+n1:haphazardly
 n1:happen
 n1:happened
 n1:happening
@@ -7905,6 +7961,7 @@ n1:hype
 n1:hyperbole
 n1:hyperlink
 n1:hypertensive
+n1:hypocrisy
 n1:hypothermia
 n1:hypothetical
 n1:hypothetically
@@ -8105,9 +8162,11 @@ n1:improvising
 n1:impulse
 n1:impulsive
 n1:impulsively
+n1:impunity
 n1:impure
 n1:impurity
 n1:in
+n1:in-between
 n1:in-depth
 n1:in-flight
 n1:in-house
@@ -8160,6 +8219,7 @@ n1:including
 n1:inclusion
 n1:inclusions
 n1:inclusive
+n1:incoherence
 n1:incoherent
 n1:income
 n1:incomes
@@ -8194,6 +8254,7 @@ n1:incremental
 n1:incrementally
 n1:increments
 n1:incriminated
+n1:incumbency
 n1:incumbent
 n1:incur
 n1:incurable
@@ -8251,6 +8312,7 @@ n1:indra_s
 n1:induced
 n1:inducements
 n1:indulge
+n1:indulged
 n1:industrial
 n1:industrialised
 n1:industries
@@ -8433,6 +8495,7 @@ n1:insignificance
 n1:insignificant
 n1:insignificantly
 n1:insincere
+n1:insincerity
 n1:insist
 n1:insisted
 n1:insistent
@@ -8696,6 +8759,8 @@ n1:irish-based
 n1:irish-incorporated
 n1:irish-language
 n1:irish-registered
+n1:irk
+n1:irked
 n1:iron
 n1:iron-on
 n1:iron-roofed
@@ -8715,6 +8780,7 @@ n1:irresponsible
 n1:irreversible
 n1:irrigated
 n1:irrigation
+n1:irritated
 n1:irritation
 n1:is
 n1:island
@@ -8782,6 +8848,7 @@ n1:jeanie
 n1:jen-der
 n1:jennifer
 n1:jenny
+n1:jensen
 n1:jeopardise
 n1:jeopardising
 n1:jerseys
@@ -8795,6 +8862,7 @@ n1:jewels
 n1:jillian
 n1:jim
 n1:jingles
+n1:jinping
 n1:jitters
 n1:jnlr
 n1:job
@@ -9360,6 +9428,8 @@ n1:limbo
 n1:limbs
 n1:limerick
 n1:limit
+n1:limit-down
+n1:limit-up
 n1:limitation
 n1:limitations
 n1:limited
@@ -9416,6 +9486,7 @@ n1:liters
 n1:lithium
 n1:lithium-ion
 n1:lithuania
+n1:litigants
 n1:litigating
 n1:litigation
 n1:litre
@@ -9523,6 +9594,7 @@ n1:long-standing
 n1:long-term
 n1:long-time
 n1:longed
+n1:longed-for
 n1:longer
 n1:longer-term
 n1:longest
@@ -9764,6 +9836,7 @@ n1:marcher
 n1:marchers
 n1:marches
 n1:marching
+n1:marco
 n1:mare
 n1:mares
 n1:margaret
@@ -9868,6 +9941,7 @@ n1:mayor
 n1:mayoral
 n1:mayors
 n1:mcauliffe
+n1:mccallion
 n1:mccullagh
 n1:mcdonagh
 n1:mcdonald
@@ -10002,6 +10076,7 @@ n1:mergers
 n1:merging
 n1:meridional
 n1:merit
+n1:meriting
 n1:merits
 n1:merrion
 n1:mesh
@@ -10532,6 +10607,7 @@ n1:ne
 n1:neap
 n1:near
 n1:near-average
+n1:near-complete
 n1:near-copies
 n1:near-copy
 n1:near-identical
@@ -10683,6 +10759,7 @@ n1:non-aligned
 n1:non-alignment
 n1:non-attendance
 n1:non-automated
+n1:non-binding
 n1:non-clerical
 n1:non-clinical
 n1:non-commercial
@@ -10706,6 +10783,7 @@ n1:non-immunised
 n1:non-infectious
 n1:non-interference
 n1:non-irish
+n1:non-judicial
 n1:non-liquid
 n1:non-medical
 n1:non-member
@@ -10741,6 +10819,7 @@ n1:non-technical
 n1:non-technology
 n1:non-transferable
 n1:non-verbal
+n1:non-violent
 n1:none
 n1:nonetheless
 n1:nonexistence
@@ -10859,6 +10938,7 @@ n1:nurturing
 n1:nutrient
 n1:nutrition
 n1:nvidia
+n1:nvidia_s
 n1:o_brien
 n1:o_brien_s
 n1:o_briens
@@ -10978,6 +11058,7 @@ n1:oeuvre
 n1:of
 n1:off
 n1:off-campus
+n1:off-exchange
 n1:off-peak
 n1:off-season
 n1:off-site
@@ -11173,6 +11254,7 @@ n1:originators
 n1:origins
 n1:ornamented
 n1:osteoarthritis
+n1:otc
 n1:other
 n1:other_s
 n1:others
@@ -11267,6 +11349,7 @@ n1:oven
 n1:ovens
 n1:over
 n1:over-representation
+n1:over-the-counter
 n1:overabundance
 n1:overall
 n1:overarching
@@ -11611,6 +11694,7 @@ n1:pc
 n1:pcs
 n1:peace
 n1:peaceful
+n1:peacefully
 n1:peacekeeper
 n1:peacekeepers
 n1:peacekeeping
@@ -11925,6 +12009,8 @@ n1:plates
 n1:platform
 n1:platform_s
 n1:platforms
+n1:plaudit
+n1:plaudits
 n1:plausible
 n1:play
 n1:played
@@ -12530,6 +12616,7 @@ n1:prone
 n1:pronounced
 n1:proof
 n1:prop
+n1:propaganda
 n1:propel
 n1:propelled
 n1:proper
@@ -12790,6 +12877,7 @@ n1:quit
 n1:quite
 n1:quitting
 n1:quizzed
+n1:quo
 n1:quota
 n1:quotas
 n1:quote
@@ -12852,7 +12940,9 @@ n1:ramping
 n1:ran
 n1:ranch
 n1:rancorous
+n1:rancour
 n1:random
+n1:randomly
 n1:range
 n1:ranged
 n1:ranges
@@ -12914,6 +13004,8 @@ n1:re-established
 n1:re-evaluate
 n1:re-examine
 n1:re-examining
+n1:re-filing
+n1:re-sending
 n1:reach
 n1:reachability
 n1:reachable
@@ -12939,6 +13031,7 @@ n1:reading
 n1:readings
 n1:readjust
 n1:readjustment
+n1:readout
 n1:reads
 n1:ready
 n1:ready-made
@@ -12967,10 +13060,12 @@ n1:realm
 n1:realty
 n1:reap
 n1:reappearance
+n1:reapplication
 n1:reapply
 n1:reapplying
 n1:reappoint
 n1:reappointed
+n1:reappointment
 n1:rear
 n1:reared
 n1:rearing
@@ -13127,6 +13222,7 @@ n1:recruits
 n1:rectified
 n1:rectify
 n1:rectifying
+n1:recurrent
 n1:recurring
 n1:recurve
 n1:recycle
@@ -13210,6 +13306,7 @@ n1:reforming
 n1:reformist
 n1:reforms
 n1:refrain
+n1:refrained
 n1:refraining
 n1:reframe
 n1:reframed
@@ -13633,6 +13730,8 @@ n1:residing
 n1:residual
 n1:residue
 n1:residues
+n1:resign
+n1:resignation
 n1:resigned
 n1:resilience
 n1:resilient
@@ -13716,6 +13815,7 @@ n1:restructure
 n1:restructured
 n1:restructuring
 n1:rests
+n1:resubmission
 n1:result
 n1:resulted
 n1:resulting
@@ -13795,6 +13895,8 @@ n1:revenue
 n1:revenues
 n1:reversal
 n1:reverse
+n1:reversed
+n1:reverses
 n1:reversible
 n1:reversing
 n1:reversion
@@ -13974,6 +14076,7 @@ n1:rostered
 n1:rostering
 n1:rosters
 n1:rosy
+n1:rota
 n1:rotas
 n1:rotating
 n1:rotation
@@ -14010,6 +14113,7 @@ n1:rubbing
 n1:rubbish
 n1:rubble
 n1:rubeola
+n1:rubio
 n1:rude
 n1:rue
 n1:rued
@@ -14064,6 +14168,7 @@ n1:ryder
 n1:s
 n1:sack
 n1:sacked
+n1:sacking
 n1:sacks
 n1:sacramento
 n1:sacrificing
@@ -14169,6 +14274,7 @@ n1:scammers
 n1:scams
 n1:scan
 n1:scandal
+n1:scandalous
 n1:scanner
 n1:scanners
 n1:scanning
@@ -14320,6 +14426,7 @@ n1:seasons
 n1:seat
 n1:seat-choice
 n1:seat-selection
+n1:seated
 n1:seating
 n1:seats
 n1:seaward
@@ -14347,6 +14454,7 @@ n1:secrecy
 n1:secret
 n1:secretaries
 n1:secretary
+n1:secretary-general
 n1:secretary_s
 n1:secreted
 n1:secretive
@@ -14611,6 +14719,7 @@ n1:shelved
 n1:shelves
 n1:shen
 n1:shen_s
+n1:shenzhen
 n1:sheridan
 n1:sherlock
 n1:shi
@@ -14805,6 +14914,7 @@ n1:simple
 n1:simpler
 n1:simplex
 n1:simplicity
+n1:simplified
 n1:simplify
 n1:simplifying
 n1:simply
@@ -14814,6 +14924,8 @@ n1:simultaneous
 n1:simultaneously
 n1:since
 n1:sincere
+n1:sincerely
+n1:sincerity
 n1:sinfonia
 n1:singapore
 n1:singapore-based
@@ -15022,6 +15134,7 @@ n1:snaps
 n1:snapshot
 n1:sneaky
 n1:snipping
+n1:snooping
 n1:snorkel
 n1:snorkelled
 n1:snorkelling
@@ -15115,6 +15228,7 @@ n1:soon
 n1:sooner
 n1:soonest
 n1:soothe
+n1:soothed
 n1:soothing
 n1:sophia
 n1:sophisticated
@@ -15256,6 +15370,7 @@ n1:spheres
 n1:spike
 n1:spikes
 n1:spillover
+n1:spin
 n1:spiral
 n1:spiralled
 n1:spiralling
@@ -15275,6 +15390,7 @@ n1:spoiled
 n1:spoils
 n1:spoke
 n1:spoken
+n1:spokesman
 n1:spokespeople
 n1:spokesperson
 n1:spokeswoman
@@ -15531,6 +15647,7 @@ n1:stingy
 n1:stink
 n1:stint
 n1:stipulate
+n1:stipulated
 n1:stipulates
 n1:stipulating
 n1:stipulation
@@ -15570,6 +15687,7 @@ n1:stopover
 n1:stoppage
 n1:stoppages
 n1:stopped
+n1:stopper
 n1:stopping
 n1:stops
 n1:storage
@@ -15871,6 +15989,7 @@ n1:superior
 n1:superiors
 n1:supermarket
 n1:supermarkets
+n1:superpowers
 n1:supersede
 n1:superseded
 n1:supersedes
@@ -16113,6 +16232,8 @@ n1:taipei
 n1:taipei_s
 n1:taitung
 n1:taiwan
+n1:taiwan-born
+n1:taiwan-related
 n1:taiwan_s
 n1:taiwanese
 n1:take
@@ -16334,6 +16455,7 @@ n1:territory
 n1:terror
 n1:terrorism
 n1:terrorist
+n1:terse
 n1:tertiary
 n1:tesco
 n1:tesco_s
@@ -16589,6 +16711,7 @@ n1:tolls
 n1:tom
 n1:tomes
 n1:tomorrow
+n1:tomorrow_s
 n1:tomorrows
 n1:ton
 n1:tone
@@ -16918,6 +17041,7 @@ n1:tubes
 n1:tues
 n1:tuesday
 n1:tuesday_s
+n1:tug
 n1:tui
 n1:tuition
 n1:tumble
@@ -16935,6 +17059,7 @@ n1:turbocharged
 n1:turbulent
 n1:turf
 n1:turkey
+n1:turkish
 n1:turmoil
 n1:turn
 n1:turnaround
@@ -16992,6 +17117,7 @@ n1:two-year
 n1:two-yearly
 n1:twofold
 n1:twos
+n1:tycoon
 n1:tycoons
 n1:tying
 n1:type
@@ -17050,6 +17176,7 @@ n1:unambiguous
 n1:unambitious
 n1:unanimity
 n1:unanimous
+n1:unanimously
 n1:unapologetic
 n1:unappealing
 n1:unapproved
@@ -17159,6 +17286,7 @@ n1:undershot
 n1:underside
 n1:undersides
 n1:underspend
+n1:underspending
 n1:underspent
 n1:understaffed
 n1:understaffing
@@ -17189,6 +17317,7 @@ n1:undesirable
 n1:undetectable
 n1:undeterred
 n1:undeveloped
+n1:undid
 n1:undignified
 n1:undisclosed
 n1:undiscriminating
@@ -17485,6 +17614,7 @@ n1:unwillingness
 n1:unwind
 n1:unwise
 n1:unworkable
+n1:unworthy
 n1:unwrapped
 n1:unwritten
 n1:unyielding
@@ -17758,6 +17888,7 @@ n1:violator
 n1:violators
 n1:violence
 n1:violent
+n1:violently
 n1:virgin
 n1:virtual
 n1:virtually
@@ -18096,6 +18227,7 @@ n1:whip
 n1:whipping
 n1:white
 n1:whitening
+n1:whitewashes
 n1:whittle
 n1:who
 n1:whole
@@ -18217,6 +18349,7 @@ n1:wording
 n1:wordless
 n1:wordplay
 n1:words
+n1:wordy
 n1:work
 n1:work-based
 n1:work-related
@@ -18312,6 +18445,8 @@ n1:wrote
 n1:wu
 n1:wurst
 n1:x-ray
+n1:xi
+n1:xinhua
 n1:xinsheng
 n1:xinzuoying
 n1:xl
@@ -18338,6 +18473,7 @@ n1:yen-chung
 n1:yerevan
 n1:yes
 n1:yesterday
+n1:yesterday_s
 n1:yet
 n1:yeung
 n1:yi-chun
