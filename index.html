@@ -4395,7 +4395,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.87";
+const APP_VERSION="2026.11.88";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -9819,7 +9819,9 @@ function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R
       o.edge.style.transform=`translate(${ex.toFixed(0)}px,${ey.toFixed(0)}px)`; o.edge.firstChild.style.transform=`rotate(${Math.atan2(sy-ey,sx-ex).toFixed(2)}rad)`; o.edge.hidden=false; }
     else if(o.edge) o.edge.hidden=true; }
   if(R.zone==="gate") plzGrabUi(cx,cy,z,vw,vh,now);
-  for(const o of R.occ||[]){ const q=o.q, hid=m.y<plzOccZ(q,m.x)&&m.x>q.x-20&&m.x<q.x+q.w+20&&m.y-80<q.y+q.h&&m.y>q.y; if(hid!==o.hid){ o.hid=hid; o.el.classList.toggle("pz-see",hid); } }
+  // anyone standing behind a tree / lamp / bench makes it see-through, so nobody vanishes (CheChe 2026-11-24, option 2)
+  const behind=(q,e)=>e.y<plzOccZ(q,e.x)&&e.x>q.x-20&&e.x<q.x+q.w+20&&e.y-80<q.y+q.h&&e.y>q.y;
+  for(const o of R.occ||[]){ const q=o.q; let hid=false; for(const e of R.ents.values()) if(e.kind!=="pod"&&behind(q,e)){ hid=true; break; } if(hid!==o.hid){ o.hid=hid; o.el.classList.toggle("pz-see",hid); } }
   if(R.nb) plzNbSync(); if(R.notes){ if((m.h||"")[0]==="n"&&Math.hypot(m.x-PLZ_STAGE.x,(m.y-PLZ_STAGE.y)*1.3)<PLZ_STAGE.r) plzNotePlace(); plzNotesSync(); }
   const nr=plzNear(), cx0=plzCtx(), spn=cx0?null:plzSpotNear(), far=!nr||Math.hypot(nr.x-m.x,nr.y-m.y)>90, useC=!!cx0, useSp=spn&&far,   /* at the board or a note, the button always lifts / picks up (tap a person to see them) */ ck=useC?cx0.k:"";
   if(nr!==R.nearO||spn!==R.nearS||ck!==R.nearC){ if(R.nearO) R.nearO.el.classList.remove("pz-near"); if(nr) nr.el.classList.add("pz-near"); R.nearO=nr; R.nearS=spn; R.nearC=ck;
