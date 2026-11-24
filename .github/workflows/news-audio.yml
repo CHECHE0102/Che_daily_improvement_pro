@@ -27,6 +27,10 @@ jobs:
           if git fetch -q --depth=1 origin audio 2>/dev/null; then git --work-tree=prev checkout FETCH_HEAD -- . && git reset -q; fi
           ls prev | head
       - run: python tools/make_news_audio.py prev out
+      - name: Size check (jsDelivr refuses branches over 50 MB, and then the app falls back to the phone's voice)
+        run: |
+          mb=$(du -sm out | cut -f1); echo "audio branch: $mb MB"
+          if [ "$mb" -ge 45 ]; then echo "::warning::news audio is $mb MB, close to jsDelivr's 50 MB limit: lower KEEP_DAYS in tools/make_news_audio.py"; fi
       - name: Publish recordings (branch "audio", replaced every run so the repo stays small)
         id: pub
         run: |

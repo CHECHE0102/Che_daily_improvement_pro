@@ -2022,7 +2022,10 @@ let SAY_NOTE=false;
 let WORD_AUDIO=null, WA_SET=null, SAY_AUDIO=null;
 function waLoad(){ if(WORD_AUDIO!==null) return; WORD_AUDIO=false; fetch("word-audio.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{ if(j&&j.sha&&j.w){ WORD_AUDIO=j; WA_SET=new Set(j.w.split(",")); } }).catch(()=>{}); }
 function waUrl(text){ const t=String(text||"").trim().toLowerCase().replace(/’/g,"'"); if(!WA_SET||!/^[a-z][a-z'-]{0,30}$/.test(t)) return null; const k=t.replace(/'/g,"_");
-  return WA_SET.has(k)?`https://cdn.jsdelivr.net/gh/${WORD_AUDIO.repo}@${WORD_AUDIO.sha}/w/${encodeURIComponent(k)}.mp3`:null; }
+  if(!WA_SET.has(k)) return null;
+  // one small branch per first letter (jsDelivr only serves branches up to 50 MB); older manifests have only "sha"
+  const ref=(WORD_AUDIO.sh&&WORD_AUDIO.sh[k[0]])||WORD_AUDIO.sha;
+  return `https://cdn.jsdelivr.net/gh/${WORD_AUDIO.repo}@${ref}/w/${encodeURIComponent(k)}.mp3`; }
 function speak(text){ try{
   // news being read aloud: pause it for the word, then carry on from the same place
   const held=typeof READ!=="undefined"&&READ.on&&!READ.paused; if(held){ readPause(); READ.heldBySay=true; }
@@ -2279,6 +2282,7 @@ function viewSettings(){
     ${memCard()}
     ${devPanel()}
     ${memAdmin()}
+    ${cheatAdmin()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
     ${inviteCard()}
@@ -4395,7 +4399,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.88";
+const APP_VERSION="2026.11.90";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4893,7 +4897,7 @@ document.addEventListener("click", e=>{
   if(a==="plzgo") return plazaOpen();
   if(a==="memapply") return memApply();
   if(a==="memgrant") return memGrant();
-  if(a==="memlist") return memPending();
+  if(a==="memlist") return memPending();   if(a==="chload") return chLoad();   if(a==="chact") return chAct(t.dataset.k,t.dataset.v);   if(a==="chmanual") return chManual(($("#chIn")||{}).value||"");
   if(a==="memgo"){ S.view="set"; S.tab="set"; render(); setTimeout(()=>{ const c=document.getElementById("memCard"); if(c) c.scrollIntoView({behavior:"smooth",block:"center"}); },60); return; }
   if(a==="invuse") return invUse(($("#invIn")||{}).value||"");
   if(a==="invuse2") return invUse(($("#invIn2")||{}).value||"");
@@ -9721,8 +9725,16 @@ async function plzJoin(){ const R=ROOM; try{
   }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
 async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
   const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
-  const v={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv, h:m.h||"", hw:(m.hw||"").slice(0,18), ...(m.pt?{pn:m.pn|0, pt:m.pt}:{}), ...(m.g&&t-m.g.t<8000?{g:m.g}:{}), ...(m.gv&&t-m.gv.t<8000?{gv:m.gv}:{}), ts:R.dbM.serverTimestamp(), ...(extra||{})};
-  try{ await R.dbM.set(R.myRef,v); }catch(e){} }
+  const pos={x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv};
+  const core={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, h:m.h||"", hw:(m.hw||"").slice(0,18), ...(m.pt?{pn:m.pn|0, pt:m.pt}:{}), ...(m.g&&t-m.g.t<8000?{g:m.g}:{}), ...(m.gv&&t-m.gv.t<8000?{gv:m.gv}:{})};
+  const cs=JSON.stringify(core);
+  // traffic (Realtime Database bills every byte sent to the others in the line): the whole row only when joining, every
+  // 15 s heartbeat, or when name/look/held word/song/grab changes; plain walking sends just the position fields that changed
+  if(force||cs!==R.coreSent||!R.posSent){ R.coreSent=cs; R.posSent=pos;
+    try{ await R.dbM.set(R.myRef,{...core, ...pos, ts:R.dbM.serverTimestamp(), ...(extra||{})}); }catch(e){} return; }
+  const u={}; for(const k in pos) if(pos[k]!==R.posSent[k]) u[k]=pos[k]; R.posSent=pos; Object.assign(u, extra||{});
+  if(!Object.keys(u).length) return;
+  try{ await R.dbM.update(R.myRef,u); }catch(e){} }
 function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"), knob=joy.firstElementChild;
   const rest=()=>{ joy.classList.add("rest"); joy.style.left=R.box.clientWidth/2+"px"; joy.style.top=(R.box.clientHeight-Math.max(96,R.box.clientHeight*.13))+"px"; }; R.joyRest=rest; rest();
   st.addEventListener("pointerdown",ev=>{ if(R.J&&R.J.moved) return; R.J={id:ev.pointerId,x0:ev.clientX,y0:ev.clientY,dx:0,dy:0,moved:false}; R.dragged=false; R.box.querySelector(".pz-acts").hidden=true; });
@@ -10254,6 +10266,48 @@ function memAdmin(){ if(PLANS_ON||!IG_MEMBER_ON||!DEV||!isAdminUser()) return ""
     <div class="row" style="gap:6px"><button class="btn sm" data-act="memgrant">${T("memGrant")}</button><button class="btn sm ghost" data-act="memlist">${T("memList")}</button></div>
     ${R?`<p class="sm-t">${R.ok.length?`✓ ${esc(R.ok.join("、"))}`:""}${R.miss.length?`<br><span class="bad-t">${T("memMiss")} ${esc(R.miss.join(" "))}</span>`:""}</p>`:""}
     ${L?(L.length?`<div class="sm-t">${L.map(x=>`<div><b>${esc(x.code)}</b> ${esc(x.nick||"")} <span class="muted">${new Date(x.at||0).toLocaleDateString()}</span></div>`).join("")}</div>`:`<p class="muted sm-t">${T("memNone")}</p>`):""}</div>`; }
+
+/* ================= 防作弊 (admin only) =================
+   A Cloud Function checks every save once a day (functions/cheat.js) and writes what looks impossible to cheat/{uid}.
+   Here the admin reads that list and bans (banned/{uid} in Firestore + banned/{uid} in the Realtime Database: the rules
+   then refuse that player's writes to every public board and the plaza; this month's rankings are deleted) or clears it. */
+let CH=null;   // {L:[...], err}
+async function chLoad(){ if(!CLOUD.fb||!isAdminUser()) return; const {fsM,db}=CLOUD.fb; CH={...(CH||{L:[]}), busy:true}; render();
+  try{ const sn=await fsM.getDocs(fsM.query(fsM.collection(db,"cheat"),fsM.where("status","in",["new","banned","ok"]),fsM.limit(150)));
+    const L=[]; sn.forEach(d=>L.push({id:d.id,...safeDoc(d.data())}));
+    const rank={new:0,banned:1,ok:2}; L.sort((a,b)=>(rank[a.status]-rank[b.status])||String(b.at||"").localeCompare(String(a.at||""))); CH={L}; }
+  catch(e){ CH={L:[], err:e&&(e.code||e.message)}; } render(); }
+async function chSet(uid, ban, nick){ const {fsM,db}=CLOUD.fb, m=monthKey();
+  const B=fsM.writeBatch(db);
+  if(ban){ B.set(fsM.doc(db,"banned",uid),{at:Date.now(), n:String(nick||"").slice(0,16)});
+    for(const p of [["leaderboard",uid],["ieltsMonths",m,"scores",uid],["toeicMonths",m,"scores",uid],["readMonths",m,"u",uid],["well",m+"_"+uid]]) B.delete(fsM.doc(db,...p));
+    B.set(fsM.doc(db,"cheat",uid),{uid, nick:String(nick||"").slice(0,16), status:"banned", at:new Date().toISOString()},{merge:true}); }
+  else { B.delete(fsM.doc(db,"banned",uid)); B.set(fsM.doc(db,"cheat",uid),{status:"ok"},{merge:true}); }
+  await B.commit();
+  try{ const dbM=PLZ_DBM||await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-database.js`), r=dbM.ref(dbM.getDatabase(CLOUD.fb.app, PLZ_DB_URL),"banned/"+uid);
+    if(ban) await dbM.set(r,true); else await dbM.remove(r); }catch(e){ toast(T("chRtdbFail")); } }
+async function chAct(uid, act){ if(!CLOUD.fb||!isAdminUser()||!uid) return; const x=(CH&&CH.L||[]).find(y=>y.id===uid)||{id:uid};
+  const ask=uid+"|"+act; if(act==="ban"&&S.chAsk!==ask){ S.chAsk=ask; return render(); } S.chAsk=null;   // banning needs a second tap
+  try{ if(act==="ok"){ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"cheat",uid),{status:"ok"},{merge:true}); x.status="ok"; }
+    else { await chSet(uid, act==="ban", x.nick); x.status=act==="ban"?"banned":"ok"; toast(T(act==="ban"?"chBanDone":"chUnbanDone",{n:x.nick||uid})); } }
+  catch(e){ console.warn("cheat",e&&(e.code||e.message)); toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } render(); }
+// ban someone by nickname or uid (e.g. an offensive name seen on a board)
+async function chManual(q){ q=q.trim(); if(!q||!CLOUD.fb||!isAdminUser()) return; const {fsM,db}=CLOUD.fb; let uid=null, nick=q;
+  try{ const d=await fsM.getDoc(fsM.doc(db,"nicks",nickKey(q))); if(d.exists()&&d.data().uid){ uid=d.data().uid; nick=d.data().n||q; } }catch(e){}
+  if(!uid&&/^[A-Za-z0-9]{20,40}$/.test(q)) uid=q;
+  if(!uid) return toast(T("chNotFound"));
+  CH=CH||{L:[]}; if(!CH.L.find(y=>y.id===uid)) CH.L.unshift({id:uid, uid, nick, status:"new", flags:[{msg:T("chManualFlag")}]});
+  S.chAsk=null; chAct(uid,"ban"); }
+function cheatAdmin(){ if(!DEV||!isAdminUser()) return ""; const L=CH&&CH.L;
+  const row=x=>{ const fl=(x.flags||[]).slice(-3).map(f=>`<div class="muted sm-t">· ${esc(f.msg||f.k||"")}</div>`).join(""), asking=S.chAsk===x.id+"|ban";
+    const st=x.status==="banned"?`<span class="bad-t">${T("chBanned")}</span>`:x.status==="ok"?`<span class="muted">${T("chOkT")}</span>`:"";
+    const btns=x.status==="banned"?`<button class="btn sm ghost" data-act="chact" data-k="${esc(x.id)}" data-v="unban">${T("chUnban")}</button>`
+      :`<button class="btn sm${asking?"":" ghost"}" data-act="chact" data-k="${esc(x.id)}" data-v="ban">${T(asking?"chBanSure":"chBan")}</button>${x.status==="new"?`<button class="btn sm ghost" data-act="chact" data-k="${esc(x.id)}" data-v="ok">${T("chOk")}</button>`:""}`;
+    return `<div style="padding:6px 0;border-top:1px solid var(--line,#ddd)"><b>${esc(x.nick||"?")}</b> ${st} <span class="muted sm-t">${esc(String(x.id).slice(0,8))}…</span>${fl}<div class="row" style="gap:6px;margin-top:4px">${btns}</div></div>`; };
+  return `<div class="card set-sec" id="chCard"><b>🛡 ${T("chT")}</b><span class="muted sm-t">${T("chSub")}</span>
+    <div class="row" style="gap:6px"><button class="btn sm ghost" data-act="chload">${T(CH&&CH.busy?"chLoading":"chLoad")}</button></div>
+    ${L?(L.length?L.map(row).join(""):`<p class="muted sm-t">${T("chNone")}</p>`):""}${CH&&CH.err?`<p class="bad-t sm-t">${esc(String(CH.err))}</p>`:""}
+    <div class="row" style="gap:6px;margin-top:8px"><input id="chIn" class="search" placeholder="${T("chManual")}" style="flex:1"><button class="btn sm ghost" data-act="chmanual">${T("chBan")}</button></div></div>`; }
 
 /* ================= invite friends =================
    A friend joins with my code and finishes the 3 daily steps on 3 days in a row → I get INV_ME style coins, the friend gets INV_FRIEND.
@@ -11172,6 +11226,8 @@ Object.assign(STR.hi,{"invTodayT": "क्या आपके पास दो�
 Object.assign(STR.es,{"invTodayT": "¿Tienes el código de invitación de un amigo?", "invTodaySub": "Escríbelo y completa los 3 pasos diarios {d} días seguidos para ganar {b} monedas de estilo. Disponible durante {n} días tras registrarte."});
 Object.assign(STR.ja,{"invTodayT": "友だちの招待コードを持っていますか？", "invTodaySub": "コードを入力して、毎日の3ステップを{d}日連続でクリアすると{b}スタイルコインがもらえます。登録から{n}日以内なら入力できます。"});
 Object.assign(STR.ko,{"invTodayT": "친구 초대 코드가 있나요?", "invTodaySub": "코드를 입력하고 매일 3단계를 {d}일 연속 완료하면 스타일 코인 {b}개를 받아요. 가입 후 {n}일 안에 입력할 수 있어요."});
+Object.assign(STR.zh,{"chT": "防作弊", "chSub": "每天凌晨自動檢查一次所有存檔：一天內金幣或等級暴增、排行榜和存檔對不上，就會列在這裡。封鎖後這個人不能再寫入排行榜、許願池、送禮、邀請和廣場，本月的排名也會刪掉。不會自動封鎖，都由你決定。", "chLoad": "看可疑名單", "chLoading": "讀取中…", "chNone": "目前沒有可疑的玩家", "chBan": "封鎖", "chBanSure": "確定封鎖？再按一次", "chUnban": "解除封鎖", "chOk": "沒問題", "chOkT": "已確認沒問題", "chBanned": "已封鎖", "chManual": "暱稱或 uid（直接封鎖某人）", "chManualFlag": "手動封鎖", "chBanDone": "已封鎖 {n}", "chUnbanDone": "已解除封鎖 {n}", "chNotFound": "找不到這個暱稱", "chRtdbFail": "廣場的封鎖沒寫進去，請稍後再按一次"});
+Object.assign(STR.en,{"chT": "Anti-cheat", "chSub": "Every night all saves are checked: gold or levels that jump too much in a day, or a board that doesn't match the save, show up here. A banned player can no longer write to boards, the wishing well, gifts, invites or the plaza, and this month's rankings are deleted. Nothing is banned automatically.", "chLoad": "Show suspicious players", "chLoading": "Loading…", "chNone": "No suspicious players right now", "chBan": "Ban", "chBanSure": "Sure? Tap again to ban", "chUnban": "Unban", "chOk": "It's fine", "chOkT": "Checked, fine", "chBanned": "Banned", "chManual": "Nickname or uid (ban someone directly)", "chManualFlag": "Banned by hand", "chBanDone": "Banned {n}", "chUnbanDone": "Unbanned {n}", "chNotFound": "No player with that nickname", "chRtdbFail": "The plaza ban didn't save, please tap again later"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
