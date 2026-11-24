@@ -3644,7 +3644,7 @@ function quizAnswer(i){ const B=S.battle, A=B&&B.ask; if(!A||A.picked!=null||B.s
   persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
   const from=B.res.ev.length, r=B.gen.next(ok); if(A.kind==="atk") Q.best=Math.max(Q.best, ok?(B.res.ev[from]&&B.res.ev[from].combo)||0:0);
   renderBattleOnly(); setTimeout(()=>{ if(S.battle===B) quizPlay(B,r); }, ok?500:1100); }
-function quizPlay(B,r){ clearInterval(S.btimer);
+function quizPlay(B,r){ clearInterval(S.btimer); if(B.ask) B.ask.go=true;   // only now may the arena show this answer's hits
   const step=()=>{ if(S.battle!==B) return clearInterval(S.btimer);
     if(B.idx<B.res.ev.length-1){ B.idx++; const e=B.res.ev[B.idx]; evSfx(e); renderBattleOnly(); battleAnim(e); return; }
     clearInterval(S.btimer);
@@ -3739,7 +3739,7 @@ function viewBattle(){
   const end = B.stage==="end" ? (B.res.win
     ? `<div class="reward win"><div class="eyebrow">${T("win")}</div>${B.free?`<div class="rw-row"><span>${T("exp")}</span><b>+0</b><small class="muted"> ${T("plzNoExp")}</small></div>`:""}<div class="rw-row"${B.free?" hidden":""}><span>${T("exp")}${B.rest?` <small class="chip rest">😴 ×${REST.mult}</small>`:""}</span><b>+${B.exp||m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.shard?`<div class="rw-row lvup"><span>💎 ${esc(T("pShard",{e:elName(B.shard.el),t:TIER[B.shard.t].n,n:1}))}</span></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
     : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p>${B.scarNew?`<p class="sm-t" style="margin:6px 0 0">🩹 ${T("scarNew",{m:esc(monName(m)),p:B.scarNew})}</p>`:""}</div>`) : "";
-  const A=B.stage==="fight"&&B.ask, Q=B.quiz, asking=A&&A.picked==null;
+  const A=B.stage==="fight"&&B.ask, Q=B.quiz, asking=A&&(A.picked==null||!A.go);   // after answering, keep the last round's hit hidden until the new events play (else the monster's old hit replays first)
   const qcard=A?(()=>{ const q=A.q, p=A.picked, ok=p!=null&&p>=0&&q.opts[p].ok;
     return `<div class="card qcard bq${A.kind==="def"?" def":""}"><div class="bq-top"><b>${A.kind==="def"?T("bqDef"):T("bqAtk")}</b>${A.kind==="atk"&&A.combo?`<span class="bq-combo${A.combo>=3?" hot":""}">${T("bqCombo",{n:A.combo})}</span>`:""}</div>
       <div class="bq-time"><i id="bqBar"></i></div>
@@ -4344,7 +4344,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.80";
+const APP_VERSION="2026.11.81";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
