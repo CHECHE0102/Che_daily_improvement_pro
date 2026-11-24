@@ -7328,6 +7328,8 @@ Object.assign(STR.es,{upNew:"Hay una versión nueva",upBtn:"Actualizar"});
 Object.assign(STR.ja,{upNew:"新しいバージョンがあります",upBtn:"今すぐ更新"});
 Object.assign(STR.ko,{upNew:"새 버전이 있어요",upBtn:"지금 업데이트"});
 /* ----- auto update check: compare the deployed APP_VERSION with this one ----- */
+// offline copies + push (sw.js): registered on every visit, after the page has loaded so it never slows the first paint
+if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost")) window.addEventListener("load",()=>{ setTimeout(()=>navigator.serviceWorker.register("sw.js").catch(()=>{}),2000); });
 /* new-version check reads the tiny version.json (kept in sync with APP_VERSION on every commit) instead of the whole 740 KB page */
 async function upCheck(){ try{ const j=await (await fetch("version.json?t="+Date.now(),{cache:"no-store"})).json(); const m=j&&typeof j.v==="string"?[null,j.v.slice(0,20)]:null; if(m&&m[1]!==APP_VERSION&&!document.getElementById("upBar")){ const b=document.createElement("div"); b.id="upBar"; b.className="up-bar"; b.innerHTML=`<span>🔄 ${T("upNew")} (${esc(m[1])})</span><button class="btn sm" onclick="location.replace(location.pathname+'?v='+Date.now())">${T("upBtn")}</button>`; document.body.append(b); } }catch(e){} }
 setTimeout(upCheck,4000); setInterval(upCheck,5*60e3); document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") upCheck(); });
