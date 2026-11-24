@@ -15,6 +15,7 @@ import { onSchedule } from "firebase-functions/v2/scheduler";
 import { runPush } from "./push.js";
 import { runWellDraw, runWellExpire, prevMonth } from "./well.js";
 import { runPlaza } from "./plaza.js";
+import { runCheatScan } from "./cheat.js";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
@@ -267,4 +268,6 @@ export const wellDraw = onSchedule({ schedule: "10 0 1 * *", timeZone: "Europe/D
 export const wellExpire = onSchedule({ schedule: "20 0 * * *", timeZone: "Europe/Dublin", region: REGION, timeoutSeconds: 120, retryCount: 3, maxInstances: 1 }, async () => {
   const r = await runWellExpire(db);
   if (r.length) logger.info("wellExpire", r);
+  // 防作弊: same daily run (keeps us within the 3 free Cloud Scheduler jobs)
+  try { logger.info("cheatScan", await runCheatScan(db)); } catch (e) { logger.warn("cheatScan", e && e.message); }
 });
