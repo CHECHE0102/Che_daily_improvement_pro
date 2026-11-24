@@ -853,6 +853,7 @@ body.maint-lock{overflow:hidden}
 .fb-done{opacity:.55}.fb-rep{border-left:3px solid var(--bad);padding-left:8px}.fb-reply{margin-top:4px;padding:6px 8px;border-radius:8px;background:var(--accent-soft);font-size:13px}.fb-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.fb-item textarea{margin-top:6px}
 #inboxPop .pd-scrim{z-index:74}#inboxPop .pd-card{z-index:75}.ib-ic{font-size:44px}.ib-item{text-align:left;padding:8px 10px;border-radius:10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
 .fn{display:flex;flex-direction:column;gap:4px}.fn-row{display:grid;grid-template-columns:7.5em 1fr 3em 6.5em;gap:6px;align-items:center;font-size:13px}.fn-bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}.fn-bar i{display:block;height:100%;background:var(--accent)}.fn-row b{text-align:right}
+.dev-tabs{margin:8px 0 4px;flex-wrap:wrap}.dev-tabs button{flex:1 1 40%;white-space:nowrap}.dev-body{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
 .dev-ann{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--accent);border-radius:12px;margin:8px 0}.dev-ann textarea{min-height:60px}
 .maint-bn{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:99;background:var(--bad);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;pointer-events:none;opacity:.92;white-space:nowrap}
 .dev-maint{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--bad);border-radius:12px;margin:8px 0}
@@ -2305,8 +2306,6 @@ function viewSettings(){
     ${supMineCard()}
     ${memCard()}
     ${devPanel()}
-    ${memAdmin()}
-    ${cheatAdmin()}
     ${accountCard(false)||`<section class="card acct"><b>${T("acctTitle")}</b><span class="muted sm-t">${T("loading")}</span></section>`}
     ${CLOUD.user?nickForm():""}
     ${inviteCard()}
@@ -4238,9 +4237,8 @@ async function devLoadStats(fresh){
     if(fresh){ try{ const tok=await CLOUD.user.getIdToken(); const r=await fetch(PAY_FN+"/adminStats",{method:"POST",headers:{Authorization:"Bearer "+tok}}); if(r.ok) sum=await r.json(); }catch(e){} }
     if(!sum){ const sn=await fsM.getDoc(fsM.doc(db,"stats","summary")); sum=sn.exists()?safeDoc(sn.data()):null; }
     let regions={}; try{ const r=await fsM.getDoc(fsM.doc(db,"stats","regions")); if(r.exists()) regions=r.data(); }catch(e){}
-    const fb=await devLoadFeedback();
     let push=null; try{ const r=await fsM.getDoc(fsM.doc(db,"config","pushStats")); if(r.exists()) push=r.data(); }catch(e){}
-    S.devStats={sum, regions, fb, push, at:new Date()};
+    S.devStats={sum, regions, push, at:new Date()};
   }catch(e){ S.devStats={err:e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")}; }
   render();
 }
@@ -4255,9 +4253,8 @@ function devStatsHtml(){
   const regional=RAW_INDEX.filter(a=>a.region).length, latest=(S.index[0]||{}).date||"–";
   const tile=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
   const reloadBtn=`<div class="dev-grid"><button class="btn ghost sm" data-act="devstats">${T("dsReload")}</button><button class="btn ghost sm" data-act="devstatsnow">🔄 ${T("dsFresh")}</button></div>`;
-  const fbHtml=`<div class="eyebrow">${T("dsFeedback",{n:D.fb?D.fb.length:"–"})}</div>${devFbHtml(D.fb)}`;
   const errHtml=devErrWatchHtml(X);
-  if(!X) return `<div class="ds"><p class="muted sm-t">${T("dsNoSum")}</p>${reloadBtn}${errHtml}${fbHtml}</div>`;
+  if(!X) return `<div class="ds"><p class="muted sm-t">${T("dsNoSum")}</p>${reloadBtn}${errHtml}</div>`;
   const P=Array.isArray(X.players)?X.players:[];
   const rows=P.map(u=>`<tr><td><b>${esc(u.nick||u.name||"–")}</b>${u.nick&&u.name?`<br><span class="muted">${esc(u.name)}</span>`:""}</td><td>${num(u.lv)}</td><td>${num(u.gold)}</td><td>${num(u.days)}</td><td>${num(u.conq)}</td><td>${esc(u.region||"–")}</td><td>${esc(u.last||"–")}</td></tr>`).join("");
   return `<div class="ds">
@@ -4275,7 +4272,6 @@ function devStatsHtml(){
     ${regs.length?`<table class="ds-t"><tr><th>${T("dsRegion")}</th><th>${T("dsLast")}</th><th></th></tr>${regs.map(([k,v])=>`<tr><td>${esc(regionLabel(k))} <span class="muted">${esc(k)}</span></td><td>${esc(v)}</td><td>${String(v)>=since(6)?"🟢":"⚪"}</td></tr>`).join("")}</table>`:`<p class="muted sm-t">–</p>`}
     <div class="eyebrow">${T("dsPlayers",{n:num(X.users)})} · ${T("dsRecent100")}</div>
     <div class="ds-scroll"><table class="ds-t"><tr><th>${T("nick")}</th><th>Lv</th><th>${T("gold")}</th><th>${T("dsD")}</th><th>${T("dsC")}</th><th>${T("dsRegion")}</th><th>${T("dsLast")}</th></tr>${rows}</table></div>
-    ${fbHtml}
     ${reloadBtn}</div>`;
 }
 // 新玩家漏斗: of the devices that first opened BinBin in the last 30 days, how many reached each step
@@ -4298,6 +4294,9 @@ async function devErrPush(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNee
     try{ localStorage.setItem("che-pro-errpush","1"); }catch(e){} toast(T("ewOn")); render(); }
   catch(e){ console.warn("errpush",e&&(e.code||e.message)); toast(T("pushFail")); } }
 /* feedback inbox for the developer: open items first, mark done, reply (the player sees the reply next time they open the game) */
+function devFbCard(){ const L=S.devFbL;
+  return `<div class="card set-sec"><b>💬 ${T("dsFeedback",{n:L?L.length:"–"})}</b>${L===undefined?`<button class="btn ghost sm" data-act="devfbload">${T("dsLoad")}</button>`:L==="loading"?`<p class="muted">${T("loading")}</p>`:`${devFbHtml(L)}<button class="btn ghost sm" data-act="devfbload">${T("dsReload")}</button>`}</div>`; }
+async function devFbLoad(){ S.devFbL="loading"; render(); S.devFbL=await devLoadFeedback(); render(); }
 function devFbHtml(L){
   if(!L||!L.length) return `<p class="muted sm-t">${L===null?T("dsDenied"):"–"}</p>`;
   const all=!!S.fbAll, open=L.filter(f=>!f.done), shown=all?L:open;
@@ -4307,9 +4306,9 @@ function devFbHtml(L){
     ${S.fbReplyId===f._id?`<textarea id="fbReplyTx" class="search" maxlength="500" rows="3" placeholder="${T("fbReplyPh")}"></textarea><button class="btn sm" data-act="fbreplysend" data-k="${esc(f._id||"")}">${T("fbReplySend")}</button>`:""}</div>`;
   return `<div class="seg" role="group"><button data-act="fball" data-k="0" aria-pressed="${!all}">${T("fbOpen",{n:open.length})}</button><button data-act="fball" data-k="1" aria-pressed="${all}">${T("fbAllN",{n:L.length})}</button></div>
     ${shown.length?`<div class="fb-list">${shown.map(item).join("")}</div>`:`<p class="muted sm-t">${T("fbNoneOpen")}</p>`}`; }
-async function devFbDone(id){ const D=S.devStats, f=D&&D.fb&&D.fb.find(x=>x._id===id); if(!f||!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+async function devFbDone(id){ const L=Array.isArray(S.devFbL)?S.devFbL:[], f=L.find(x=>x._id===id); if(!f||!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
   const {fsM,db}=CLOUD.fb; try{ await fsM.updateDoc(fsM.doc(db,"feedback",id),{done:!f.done}); f.done=!f.done; render(); }catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
-async function devFbReply(id){ const D=S.devStats, f=D&&D.fb&&D.fb.find(x=>x._id===id); if(!f||!f.uid||!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
+async function devFbReply(id){ const L=Array.isArray(S.devFbL)?S.devFbL:[], f=L.find(x=>x._id===id); if(!f||!f.uid||!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin"));
   const msg=(($("#fbReplyTx")||{}).value||"").trim().slice(0,500); if(!msg) return toast(T("annEmpty"));
   const {fsM,db}=CLOUD.fb;
   try{ const B=fsM.writeBatch(db);
@@ -4477,22 +4476,25 @@ async function annSet(on){
   try{ await fsM.setDoc(fsM.doc(db,"config","notice"), on?{id:String(Date.now()), msg, msgEn, kind:v("annKind")==="warn"?"warn":"info", until:days?Date.now()+days*864e5:0, at:Date.now()}:{id:"", msg:"", msgEn:"", kind:"info", until:0, at:Date.now()}); toast(T("dDone")); }
   catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
 function devPanel(){
-  if(!DEV) return "";
+  if(!DEV) return ""; if(S.devTab==null){ try{ S.devTab=localStorage.getItem("che-pro-devtab")||"test"; }catch(_){ S.devTab="test"; } }
   const b=(k,l)=>`<button class="btn ghost sm" data-act="dev" data-k="${k}">${T(l)}</button>`;
   const pl=DEV.plan||"free";
   const planSel=`<div class="dev-plan"><b>${T("devPlanT")}</b><div class="seg" role="group">${["free","sub","plus"].map(k=>`<button data-act="dev" data-k="plan-${k}" aria-pressed="${pl===k}">${T(k==="free"?"planFree":k==="sub"?"planSub":"planPlus")}</button>`).join("")}</div>${pl!=="free"?`<div class="seg" role="group">${[1,3,6,12,24].map(n=>`<button data-act="dev" data-k="planm-${n}" aria-pressed="${(DEV.planM||3)===n}">${n}</button>`).join("")}</div><span class="muted sm-t">${T("devPlanM",{n:DEV.planM||3})}</span>`:""}<span class="muted sm-t">${T("devPlanNote")}</span></div>`;
   const stSel=`<div class="dev-plan"><b>${T("devStreakT")}</b><div class="seg" role="group">${[0,10,30,60,100,180].map(n=>`<button data-act="dev" data-k="streak-${n}" aria-pressed="${DEV.streak===n}">${n}</button>`).join("")}</div><button class="btn ghost sm" data-act="dev" data-k="loginagain">${T("devLoginAgain")}</button></div>`;
-  return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${PLANS_ON?planSel:stSel}
+  // four areas (CheChe 2026-11-24): 🧪 test the game on this phone · 📊 watch the live game · 📢 run the site · 💬 players
+  const tab=["test","watch","run","players"].includes(S.devTab)?S.devTab:"test";
+  const tabs=`<div class="seg dev-tabs" role="tablist">${[["test","🧪","dtTest"],["watch","📊","dtWatch"],["run","📢","dtRun"],["players","💬","dtPlayers"]].map(([k,ic,l])=>`<button role="tab" data-act="devtab" data-k="${k}" aria-pressed="${tab===k}">${ic} ${T(l)}</button>`).join("")}</div>`;
+  const body=tab==="test"?`<p class="muted sm-t">${T("dtTestSub")}</p>${PLANS_ON?planSel:stSel}
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}${b("style","dStyle")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
-    <div id="devMaint" class="dev-maint">${devMaintInner()}</div><div id="devAnn" class="dev-ann">${devAnnInner()}</div>
-    ${devFeatHtml()}${plzNoticeDev()}
-    ${devSupHtml()}
-    ${devBadgeHtml()}
-    ${devStatsHtml()}
-    ${devErrHtml()}
+    ${devBadgeHtml()}`
+   :tab==="watch"?`<p class="muted sm-t">${T("dtWatchSub")}</p>${devStatsHtml()}${devErrHtml()}`
+   :tab==="run"?`<p class="muted sm-t">${T("dtRunSub")}</p><div id="devMaint" class="dev-maint">${devMaintInner()}</div><div id="devAnn" class="dev-ann">${devAnnInner()}</div>${devFeatHtml()}${plzNoticeDev()}`
+   :`<p class="muted sm-t">${T("dtPlayersSub")}</p>${devFbCard()}${cheatAdmin()}${memAdmin()}${devSupHtml()}`;
+  return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${tabs}
+    <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.97";
+const APP_VERSION="2026.11.98";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5011,6 +5013,8 @@ document.addEventListener("click", e=>{
   if(a==="invshare") return invShare();
   if(a==="devstats") return devLoadStats();
   if(a==="devstatsnow") return devLoadStats(true);
+  if(a==="devfbload") return devFbLoad();
+  if(a==="devtab"){ S.devTab=t.dataset.k; try{ localStorage.setItem("che-pro-devtab",S.devTab); }catch(_){} return render(); }
   if(a==="errpush") return devErrPush();
   if(a==="deverr") return devLoadErrors();
   if(a==="dev") return devAct(t.dataset.k);
@@ -11606,6 +11610,12 @@ Object.assign(STR.hi,{"dsFresh": "अभी गिनें", "dsNoSum": "अभ
 Object.assign(STR.es,{"dsFresh": "Recalcular ahora", "dsNoSum": "Aún no hay datos", "dsAsOf": "A las {t}", "dsRecent100": "Los 100 más recientes", "fnTitle": "Embudo de nuevos jugadores", "fn_open": "Primera visita", "fn_intro": "Terminó la intro", "fn_read": "Leyó la primera noticia", "fn_quiz": "Primer test", "fn_signin": "Inició sesión", "fn_back": "Volvió otro día", "fn_d7": "Sigue tras 7 días", "fnIntroStop": "La intro se detuvo en:", "fnStep": "página {n}", "fnNote": "Solo dispositivos que aceptaron estadísticas.", "ewTitle": "Vigilancia de errores", "ew24": "{n} errores en las últimas 24 horas", "ewTurnOn": "Alertas de errores a este móvil", "ewOn": "Este móvil recibe alertas", "ewNote": "Un error nuevo envía una notificación (como mucho una por hora)."});
 Object.assign(STR.ja,{"dsFresh": "今すぐ再計算", "dsNoSum": "まだ集計がありません", "dsAsOf": "{t} 時点", "dsRecent100": "最近の 100 人", "fnTitle": "新規プレイヤーの流れ", "fn_open": "初回起動", "fn_intro": "チュートリアル完了", "fn_read": "初めての記事", "fn_quiz": "初めてのテスト", "fn_signin": "ログイン", "fn_back": "別の日に戻った", "fn_d7": "7日後も継続", "fnIntroStop": "チュートリアルの離脱：", "fnStep": "{n} ページ目", "fnNote": "統計に同意した端末のみ。", "ewTitle": "エラー監視", "ew24": "過去24時間のエラー {n} 件", "ewTurnOn": "エラー通知をこの端末に", "ewOn": "この端末に通知されます", "ewNote": "新しい種類のエラーで通知します（1時間に1回まで）。"});
 Object.assign(STR.ko,{"dsFresh": "지금 다시 계산", "dsNoSum": "아직 통계가 없어요", "dsAsOf": "{t} 기준", "dsRecent100": "최근 활동 100명", "fnTitle": "신규 플레이어 퍼널", "fn_open": "처음 열기", "fn_intro": "튜토리얼 완료", "fn_read": "첫 기사 읽기", "fn_quiz": "첫 퀴즈", "fn_signin": "로그인", "fn_back": "다른 날 다시 옴", "fn_d7": "7일 후에도", "fnIntroStop": "튜토리얼 이탈:", "fnStep": "{n}페이지", "fnNote": "통계에 동의한 기기만.", "ewTitle": "오류 감시", "ew24": "최근 24시간 오류 {n}건", "ewTurnOn": "오류 알림을 이 폰으로", "ewOn": "이 폰이 알림을 받아요", "ewNote": "새로운 오류가 생기면 알림 (1시간에 최대 1번)."});
+Object.assign(STR.zh,{"dtTest": "遊戲測試", "dtWatch": "遊戲監控", "dtRun": "網站營運", "dtPlayers": "玩家", "dtTestSub": "只改這台手機上的測試存檔，不影響真正的玩家。", "dtWatchSub": "全部玩家的統計、留存、新玩家漏斗和錯誤。", "dtRunSub": "會影響所有玩家：維護模式、公告、功能開放和廣場公告板。", "dtPlayersSub": "玩家的意見回饋和檢舉、防作弊、會員申請、贊助徽章。"});
+Object.assign(STR.en,{"dtTest": "Test", "dtWatch": "Monitor", "dtRun": "Site", "dtPlayers": "Players", "dtTestSub": "Only changes the test save on this phone; real players are not affected.", "dtWatchSub": "Stats for all players: retention, new-player funnel and errors.", "dtRunSub": "Affects every player: maintenance, announcements, feature access, plaza board.", "dtPlayersSub": "Player feedback and reports, anti-cheat, member requests, supporter badges."});
+Object.assign(STR.hi,{"dtTest": "टेस्ट", "dtWatch": "निगरानी", "dtRun": "साइट", "dtPlayers": "खिलाड़ी", "dtTestSub": "सिर्फ़ इस फ़ोन का टेस्ट सेव बदलता है।", "dtWatchSub": "सभी खिलाड़ियों के आँकड़े और त्रुटियाँ।", "dtRunSub": "सभी खिलाड़ियों पर असर: रखरखाव, घोषणा।", "dtPlayersSub": "प्रतिक्रिया, शिकायतें, एंटी-चीट।"});
+Object.assign(STR.es,{"dtTest": "Pruebas", "dtWatch": "Monitor", "dtRun": "Sitio", "dtPlayers": "Jugadores", "dtTestSub": "Solo cambia la partida de prueba de este móvil.", "dtWatchSub": "Estadísticas de todos los jugadores y errores.", "dtRunSub": "Afecta a todos: mantenimiento, avisos, funciones.", "dtPlayersSub": "Comentarios, denuncias, antitrampas, insignias."});
+Object.assign(STR.ja,{"dtTest": "テスト", "dtWatch": "監視", "dtRun": "運営", "dtPlayers": "プレイヤー", "dtTestSub": "この端末のテスト用データだけを変更します。", "dtWatchSub": "全プレイヤーの統計とエラー。", "dtRunSub": "全員に影響：メンテナンス、お知らせ、機能公開。", "dtPlayersSub": "意見・報告、不正対策、会員申請、バッジ。"});
+Object.assign(STR.ko,{"dtTest": "테스트", "dtWatch": "모니터링", "dtRun": "운영", "dtPlayers": "플레이어", "dtTestSub": "이 폰의 테스트 저장만 바뀌어요.", "dtWatchSub": "전체 플레이어 통계와 오류.", "dtRunSub": "모든 플레이어에 영향: 점검, 공지, 기능 공개.", "dtPlayersSub": "의견·신고, 부정 방지, 회원 신청, 배지."});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
