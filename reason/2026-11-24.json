@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-24",
+ "items": {
+  "2026-11-24": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Anne O'Connor resigned from the HSE to take up a post in another organisation.",
+     "The Minister for Health removed the HSE chief executive against the wishes of the board.",
+     "The Taoiseach will address the Dáil after the HSE board abruptly removed its chief executive, a move that has led to demands for accountability.",
+     "The Cabinet has cut the HSE's budget by €780 million because of overspending."
+    ],
+    "a": 2,
+    "exp": "The passage opens by saying the Taoiseach will \"address the Dáil today regarding the abrupt removal of Anne O'Connor\", which \"has prompted considerable demands for accountability\". She did not resign (A), the decision \"fell exclusively within the remit of the board\" (B), and the €780 million was a \"supplementary allocation\", not a cut (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the Minister for Health?",
+    "opts": [
+     "She was aware some time beforehand that a process which might end Ms O'Connor's tenure was under way.",
+     "She publicly opposed the board's decision.",
+     "She first heard about the removal from opposition parties.",
+     "She intends to replace the HSE board."
+    ],
+    "a": 0,
+    "exp": "The minister \"conceded that she was informed in September of a procedure that could potentially result in Ms O'Connor's removal\", so she knew in advance. She \"expressed her support for it\" (not B); nothing suggests C or D."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention the leaked letter from Cork University Hospital and the €780 million allocation?",
+    "opts": [
+     "To argue that Ms O'Connor's removal was unfair.",
+     "To show that the HSE's finances have recently improved.",
+     "To explain why Damien McCallion was chosen as interim chief.",
+     "To give background showing that Ms O'Connor's time in charge had been troubled."
+    ],
+    "a": 3,
+    "exp": "These details follow the statement that \"Ms O'Connor's tenure was characterised by considerable controversy\": a warning of a \"deficit of 1,000 staff\" and extra money \"owing to recurrent overspending\". They illustrate the controversy rather than argue unfairness (A), show improvement (B) or explain the interim choice (C)."
+   }
+  ],
+  "2026-11-24-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "The Government's decision to scrap the Planning and Development Act 2024.",
+     "A set of planning reforms, including legal deadlines for An Coimisiún Pleanála decisions, aimed at speeding up housing and infrastructure.",
+     "Plans to abolish An Coimisiún Pleanála and transfer its work to the courts.",
+     "Changes that will make judicial review of planning decisions longer and more open."
+    ],
+    "a": 1,
+    "exp": "The Cabinet will approve \"a comprehensive set of planning reforms\" that \"establish statutory timelines for decisions by An Coimisiún Pleanála\" in order \"to accelerate the delivery of housing and infrastructure\". The reforms mark \"the virtual completion\" of the 2024 Act rather than scrapping it (A); the body is not abolished (C); review is shortened, not lengthened (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the changes to judicial review?",
+    "opts": [
+     "They will give objectors more opportunities to appeal.",
+     "They will cause permissions under review to lapse automatically.",
+     "They are likely to make it harder and quicker to challenge planning decisions in court.",
+     "They will apply only to developments of more than 250 homes."
+    ],
+    "a": 2,
+    "exp": "Applicants must now \"demonstrate 'sufficient interest'\", \"a further appeal to the Court of Appeal will be eliminated\" and proceedings could be cut by \"approximately eight weeks\" — all of which narrow and speed up challenges. Appeals are removed, not added (A); permissions \"will be suspended rather than allowed to expire\" (B); the 250-home figure concerns Environmental Impact Assessments (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "What is the writer's main purpose in this passage?",
+    "opts": [
+     "To inform readers about what the reforms contain and what they are intended to achieve.",
+     "To criticise the Government for weakening environmental protection.",
+     "To persuade readers to oppose new housing developments.",
+     "To compare Irish planning law with that of other countries."
+    ],
+    "a": 0,
+    "exp": "The passage neutrally lists the measures (\"statutory timelines\", correcting \"minor errors\", a \"revised leave procedure\") and their aims, such as \"to enhance predictability for applicants\". It offers no criticism (B), persuasion (C) or international comparison (D)."
+   }
+  ],
+  "2026-11-24-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "COP31 agreed a new plan to phase out fossil fuels by 2050.",
+     "Turkey walked out of COP31 after a dispute with Saudi Arabia.",
+     "The EU accepted the Antalya Pact once fossil fuels were added to the text.",
+     "COP31 ended without a deal after the EU, led by an Irish minister, rejected a draft that left out fossil fuels."
+    ],
+    "a": 3,
+    "exp": "The summit \"concluded without an agreement\", mainly because of \"the European Union's objection to a draft text that omitted any reference to fossil fuels\"; the EU delegation \"was led by Ireland's Minister ... Darragh O'Brien\". There was no agreement (A, C), and Turkey held the presidency rather than walking out (B)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the passage suggest about the EU's role at the talks?",
+    "opts": [
+     "The EU was completely isolated, with no other countries backing it.",
+     "Although its stance won wide support, the EU was not seen by everyone as blameless.",
+     "The EU caused the collapse by demanding more climate finance for itself.",
+     "Every aid organisation praised the EU's handling of the negotiations."
+    ],
+    "a": 1,
+    "exp": "The EU's position \"received substantial support from a diverse range of countries\", yet \"the EU was also subject to criticism: several aid organisations alleged inconsistency regarding climate finance\". So it was supported but not beyond criticism, ruling out A and D; nothing says it demanded finance for itself (C)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the tone of the passage?",
+    "opts": [
+     "Celebratory, presenting the outcome as a victory for the climate.",
+     "Sarcastic, mocking the leaders who attended the summit.",
+     "Largely factual, reporting disappointment and criticism from several sides.",
+     "Indifferent, suggesting the outcome does not matter much."
+    ],
+    "a": 2,
+    "exp": "The writer reports events and reactions — Mary Robinson \"cited a profound lack of leadership\" and the UN Secretary-General \"expressed profound disappointment\" — without mockery or celebration. The seriousness of the 1.5°C threshold being \"already exceeded\" rules out indifference (D)."
+   }
+  ],
+  "2026-11-24-4": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "Ryanair now tells passengers who do not pay for a seat where they will sit only about three hours before departure, which has upset frequent travellers.",
+     "Ryanair has stopped offering free seats to any passenger.",
+     "Online check-in with Ryanair now opens only three hours before a flight.",
+     "Ryanair has widely advertised the launch of its winter schedule."
+    ],
+    "a": 0,
+    "exp": "Passengers \"allocated a complimentary seat at random will be informed of their seat number only approximately three hours prior to departure\", and the change \"has generated considerable dissatisfaction among frequent travellers\". Free seats still exist (B), check-in still \"commences up to 24 hours in advance\" (C), and the change \"was not publicly announced\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the passage suggest Ryanair may gain from the change?",
+    "opts": [
+     "Fewer complaints about lost luggage.",
+     "Lower fuel costs on winter routes.",
+     "More passengers checking in online.",
+     "More customers paying for a seat in advance rather than risking an unwanted one."
+    ],
+    "a": 3,
+    "exp": "Because passengers can no longer upgrade from \"an undesirable middle seat\" after check-in, \"the removal of this option may substantially increase the proportion of customers who pay in advance\"; critics call it \"a further strategy to maximise revenue\". Luggage (A), fuel (B) and online check-in numbers (C) are not mentioned."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include Ryanair's explanation in the final paragraph?",
+    "opts": [
+     "To show that the writer fully agrees with the airline.",
+     "To present the airline's side before noting that critics see the move as a way to raise revenue.",
+     "To explain to readers how to upgrade their seat using the app.",
+     "To report that the airline plans to reverse the policy."
+    ],
+    "a": 1,
+    "exp": "The paragraph gives the airline's reason — complaints from passengers \"unable to secure their preferred seat\" — and then adds, \"Nevertheless, critics have characterised the measure as a further strategy to maximise revenue.\" This balances both views rather than endorsing Ryanair (A); no upgrade instructions (C) or reversal (D) are given."
+   }
+  ]
+ }
+}
