@@ -952,6 +952,7 @@ body.onb-open{overflow:hidden}
 .onb-skip{position:absolute;top:12px;right:14px;background:none;border:0;color:var(--muted);font-size:14px;padding:6px}
 .onb-back{position:absolute;top:8px;left:10px;background:none;border:0;color:var(--muted);font-size:28px;line-height:1;padding:4px 10px}
 .onb-coach{background:color-mix(in srgb,var(--accent) 12%,var(--card));border-color:color-mix(in srgb,var(--accent) 40%,var(--line));font-weight:600;font-size:14px}
+.stats-ask{display:flex;flex-direction:column;gap:6px;margin-top:10px;text-align:left}.stats-ask .row{display:flex;gap:8px;flex-wrap:wrap}.onb .stats-ask{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:14px;width:100%;margin-top:2px}.onb .stats-ask .row{justify-content:flex-start}
 .ds-tiles .stat small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
 .srs-card{display:flex;flex-direction:column;gap:8px}.wk-card{display:flex;flex-direction:column;gap:10px}.wk-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.wk-bar i{display:block;height:100%;background:var(--gorse);border-radius:99px}.wk-sec{display:flex;flex-direction:column;gap:4px}.wk-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.wk-row:first-of-type{border-top:0}.wk-st{white-space:nowrap;text-align:right}.wk-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.wk-stats b{display:block;font-size:22px;font-variant-numeric:tabular-nums}.wk-pos{display:grid;grid-template-columns:118px 1fr 44px;align-items:center;gap:8px;padding:4px 0}.wk-pos .wk-bar i{background:var(--good)}.wk-pos.low .wk-bar i{background:var(--bad)}.wk-pos .chip{white-space:nowrap}.wk-pos>span:last-child{text-align:right;font-variant-numeric:tabular-nums}.srs-top{display:flex;align-items:center;gap:12px}.srs-top>div:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.srs-ic{font-size:28px}
 .srs-boxes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:74px;margin-top:4px}
@@ -1104,7 +1105,7 @@ body.onb-open{overflow:hidden}
 .ha-idle .ha-wpn{z-index:0}.ha-idle .ha-in>img{z-index:1}.ha-idle .ha-in.wfront .ha-wpn{z-index:2}
 .hero-art .ha-in>img.ha-fist{position:absolute;inset:0;z-index:3}
 .hero-stage .hs-fig .hero-art{position:relative;z-index:1;width:100%;height:100%}
-.onb-art{width:200px;max-width:70%;height:auto;aspect-ratio:1/1;margin-top:4px}.onb-art.sm{width:150px}
+.onb-art{width:200px;max-width:70%;height:auto;aspect-ratio:1/1;margin-top:4px}.onb-art.sm{width:150px}.onb-art.xs{width:96px}
 .play-head{display:flex;align-items:center;gap:10px}.play-head>div{flex:1;min-width:0}.play-art{width:110px;height:auto;flex:none}
 .push-art{width:64px;height:64px;flex:none;object-fit:contain}
 .quiz-done{display:flex;flex-direction:column;gap:10px;align-items:flex-start}.qd-art{width:150px;height:auto;align-self:center}
@@ -2209,7 +2210,7 @@ function viewToday(){
   return `<div class="view">
     ${regionNotice()}
     <section class="hero"><div class="eyebrow">${art.region?`📍 ${esc(regionLabel(art.region))} · `:""}${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
-    ${onbCoach()}
+    ${onbCoach()}${statsAskToday()}
     ${PLANS_ON?"":loginStrip()}
     <div class="steps">
       ${!preNeeded&&!d.preDone?(lvtDone()?step(1,"done",T("lvtTitle"),T("lvtDone",{l:lvtDone()==="IELTS"?"IELTS 7–8":lvtDone()}),"lvtest"):step(1,"now",T("lvtTitle"),T("lvtSub"),"lvtest")):step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):(()=>{ const due=srsDueList().filter(w=>w.firstSeen<today()).length; return due?T("preDue",{d:Math.min(10,due),k:Math.min(10,el.length)}):T("preDraw",{n:el.length,k:Math.min(10,el.length)}); })()):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
@@ -4416,7 +4417,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.93";
+const APP_VERSION="2026.11.94";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4558,7 +4559,15 @@ async function ieLoad(){ if(IE_TESTS) return IE_TESTS;
   IE_TESTS=base.tests||[]; IE_PRAC=base.practice||[]; IE_ALL=IE_TESTS.concat(IE_PRAC);
   // a fresh set is written every week: ielts/weeks/<ISO week>.json = {week, tests:[7, Mon..Sun], practice:[3]}
   try{ const r=await fetch("ielts/weeks/"+isoWeek().id+".json",{cache:"no-cache"}); if(r.ok){ const j=await r.json(); if(j.tests&&j.tests.length>=7){ IE_TESTS=j.tests; IE_WEEKLY=true; if(j.practice&&j.practice.length) IE_PRAC=j.practice; IE_ALL=IE_ALL.concat(j.tests,j.practice||[]); } } }catch(e){}
+  if(!IE_WEEKLY){ const old=await pastWeekTests("ielts"); if(old.length){ IE_TESTS=IE_TESTS.concat(old); IE_ALL=IE_ALL.concat(old); } }
   return IE_TESTS; }
+// no new set this week: rotate through the base tests plus the last few weekly sets, so the daily test repeats far less often
+async function pastWeekTests(dir){
+  const ids=[1,2,3,4,5,6,7,8].map(k=>isoWeek(new Date(Date.now()-k*7*864e5)).id);
+  const got=await Promise.all(ids.map(id=>fetch(dir+"/weeks/"+id+".json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).catch(()=>null)));
+  const seen=new Set(), out=[];
+  got.filter(j=>j&&Array.isArray(j.tests)).slice(0,3).forEach(j=>j.tests.forEach(t=>{ if(t&&t.id&&!seen.has(t.id)){ seen.add(t.id); out.push(t); } }));
+  return out; }
 function isoWeek(d=new Date()){ const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); const day=t.getUTCDay()||7; t.setUTCDate(t.getUTCDate()+4-day); const y0=new Date(Date.UTC(t.getUTCFullYear(),0,1)); const w=Math.ceil(((t-y0)/864e5+1)/7); return {id:t.getUTCFullYear()+"-W"+String(w).padStart(2,"0"), n:t.getUTCFullYear()*53+w}; }
 const dayNum=()=>{ const d=new Date(); return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5); };
 function weekTest(){ if(!IE_TESTS||!IE_TESTS.length) return null; if(IE_WEEKLY){ const wd=(new Date().getDay()+6)%7; return IE_TESTS[wd%IE_TESTS.length]; } return IE_TESTS[dayNum()%IE_TESTS.length]; }   // a different ranked test every day
@@ -4767,7 +4776,7 @@ function ieLobby(){
   const runBtn=run?`<button class="btn" data-act="ieresume">${T("ieContinue",{m:Math.ceil(ieRunLeft()/60)})}</button>`:"";
   const ranked=run?"":done!==undefined?`<div class="ie-done">${T("ieDone",{b:typeof done==="number"?fmtBand(done):"–"})}</div>`:`<button class="btn" data-act="ieranked">${T("ieRanked")}</button><p class="muted sm-t">${T("ieRankedNote")}</p>`;
   return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>${T("ieTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("ieSub")}</p></div>${st.best&&st.best.band>=6?badgeSvg(fmtBand(st.best.band),0,52):""}</div>
-      <div class="ie-week"><b>${T("ieWeek",{t:esc(t?t.title:"–")})}</b><span class="muted sm-t">${T("ieReset",{h:u.h,m:u.m})}</span></div>
+      <div class="ie-week"><b>${T("ieWeek",{t:esc(t?t.title:"–")})}</b><span class="muted sm-t">${T(IE_WEEKLY?"ieReset":"ieRotate",{h:u.h,m:u.m})}</span></div>
       ${runBtn}${ranked}
       ${typeof wb==="number"?`<div class="muted sm-t">${T("ieMonthBest",{b:fmtBand(wb)})}</div>`:""}
       ${st.best?`<div class="muted sm-t">${T("ieBest",{b:fmtBand(st.best.band)})}</div>`:""}
@@ -5139,8 +5148,11 @@ async function cloudFlush(){
     const clean=o=>JSON.parse(JSON.stringify(o,(k,v)=>typeof v==="number"&&!isFinite(v)?0:v));   // Firestore rejects undefined
     if(main) ops.push({k:"", ref:userRef(), data:clean({name:(CLOUD.user&&CLOUD.user.displayName)||"", region:regionKey(), game:(DEV?DEV.game:S.game)||null, days:Object.fromEntries(S.days), updatedAt:new Date().toISOString(), v:1})});
     const now=Date.now(), okId=k=>k&&k.length<700&&!k.includes("/")&&k!=="."&&k!==".."&&!/^__.*__$/.test(k);
-    for(const k of words){ const v=S.words.get(k); if(v&&okId(k)) ops.push({k, ref:fsM.doc(wordsCol(),k), data:{...clean(v), _u:now}}); }
-    for(const k of dels) if(okId(k)) ops.push({k, ref:fsM.doc(wordsCol(),k), data:{_del:1, _u:now}});
+    // words the server already refused this session stay queued (kept on the phone) and are tried again next time the app opens
+    const tried=CLOUD.badTried||(CLOUD.badTried=new Set()), held=k=>tried.has(k);
+    for(const k of words){ if(held(k)){ CLOUD.dirtyWords.add(k); continue; } const v=S.words.get(k); if(v&&okId(k)) ops.push({k, ref:fsM.doc(wordsCol(),k), data:{...clean(v), _u:now}}); }
+    for(const k of dels){ if(held(k)){ CLOUD.delWords.add(k); continue; } if(okId(k)) ops.push({k, ref:fsM.doc(wordsCol(),k), data:{_del:1, _u:now}}); }
+    if(tried.size) dirtySave();
     try{ for(let i=0;i<ops.length;i+=400){ const b=fsM.writeBatch(db); ops.slice(i,i+400).forEach(o=>b.set(o.ref,o.data)); await b.commit(); } }
     catch(e0){
       if(e0&&/unavailable|network|offline|deadline/i.test(String(e0.code||e0.message))) throw e0;
@@ -5148,7 +5160,11 @@ async function cloudFlush(){
       const res=await Promise.allSettled(ops.map(o=>fsM.setDoc(o.ref,o.data)));
       const bad=res.map((r,i)=>r.status==="rejected"?[ops[i],r.reason]:null).filter(Boolean);
       if(bad.length){ const [o,err]=bad[0]; errReport({message:"sync "+(o.k||"main")+": "+String(err&&(err.code||"")+" "+(err&&err.message||"")).slice(0,200), stack:JSON.stringify(o.data).length+" bytes"},"cloudFlush");
-        if(bad.some(([o])=>!o.k)) throw bad.find(([o])=>!o.k)[1]; }
+        if(bad.some(([o])=>!o.k)) throw bad.find(([o])=>!o.k)[1];
+        // keep refused words queued instead of dropping them, and tell the player once that some words are only on this phone
+        const badW=bad.map(([o])=>o).filter(o=>o.k);
+        badW.forEach(o=>{ tried.add(o.k); (o.data&&o.data._del?CLOUD.delWords:CLOUD.dirtyWords).add(o.k); }); dirtySave();
+        if(badW.length&&!CLOUD.badToast){ CLOUD.badToast=1; setTimeout(()=>toast(T("syncPartial",{n:badW.length})),0); } }
     }
     if(CLOUD.status!=="ok"){ CLOUD.status="ok"; render(); }
   }catch(e){
@@ -7773,7 +7789,7 @@ function onbRender(){
   else if(st===1) body=`<img src="assets/art/scene-read.webp" alt="" class="onb-art sm"><h2>${T("onbLang")}</h2><div class="onb-opts">${LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-act="onblang" data-k="${l.k}" data-nosc><b>${l.label}</b></button>`).join("")}</div>`;
   else if(st===2) body=`<img src="assets/art/scene-study.webp" alt="" class="onb-art sm"><h2>${T("onbLevel")}</h2><p class="sm-t">${T("onbLevelSub")}</p><div class="onb-opts">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-act="onblvl" data-k="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div>`;
   else if(st===3) body=`<h2>${T("onbGender")}</h2>${genderPick(true)}`;
-  else body=`<img src="assets/art/scene-party.webp" alt="" class="onb-art sm"><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>`;
+  else body=`<img src="assets/art/scene-party.webp" alt="" class="onb-art xs"><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>${statsAskHtml(false,true)}`;
   const nav=st===0?`<button class="btn" data-act="onbnext">${STR.zh.onbNext} · ${STR.en.onbNext}</button>`:st<N-1?`<button class="btn" data-act="onbnext">${T("onbNext")}</button>`:`<button class="btn" data-act="onbstart">${T("onbStart")}</button><button class="btn ghost" data-act="onblvt">🧭 ${T("onbLvt")}</button><button class="btn ghost" data-act="onblook">${T("onbLook")}</button>`;
   el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${st===0?`${STR.zh.onbSkip} · ${STR.en.onbSkip}`:T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
   scApply&&scApply();
@@ -7811,6 +7827,26 @@ document.addEventListener("click",e=>{ const t=e.target.closest("#onb [data-act]
 }, true);
 
 /* ================= retention: anonymous per-device activity (act/{deviceId}) ================= */
+// Only with the player's OK (EU rules on tracking): "y" = may count visits, "n" = no, unset = not asked yet (nothing is sent)
+const STATS_KEY="che-pro-stats";
+function statsChoice(){ try{ return localStorage.getItem(STATS_KEY); }catch(e){ return null; } }
+const statsOk=()=>statsChoice()==="y";
+const devIdPeek=()=>{ try{ return localStorage.getItem("che-pro-did"); }catch(e){ return null; } };
+async function statsSet(on){
+  try{ localStorage.setItem(STATS_KEY,on?"y":"n"); }catch(e){}
+  if(on){ try{ localStorage.removeItem("che-pro-actday"); }catch(e){} actPing(S.onb?null:{o:5}); }
+  else { const id=devIdPeek(); if(id&&CLOUD.fb){ try{ const {fsM,db}=CLOUD.fb; await fsM.deleteDoc(fsM.doc(db,"act",id)); }catch(e){} }
+    try{ ["che-pro-did","che-pro-actday","che-pro-actr"].forEach(k=>localStorage.removeItem(k)); }catch(e){} }
+  if(S.onb) onbRender(); else render();
+}
+function statsAskHtml(card, short){
+  const c=statsChoice();
+  return `<div class="${card?"card ":""}stats-ask"><b>📊 ${T("stQ")}</b><span class="muted sm-t">${T(short?"stWhyS":"stWhy")}</span>
+    <div class="row"><button class="btn sm${c==="y"?"":" ghost"}" data-act="statsyes" aria-pressed="${c==="y"}">${T("stYes")}</button><button class="btn sm${c==="n"?"":" ghost"}" data-act="statsno" aria-pressed="${c==="n"}">${T("stNo")}</button></div></div>`;
+}
+// players who finished the tour before this question existed see it once on the Today page
+function statsAskToday(){ let onb=null; try{ onb=localStorage.getItem(ONB_KEY); }catch(e){} return !statsChoice()&&onb&&!S.onb&&!SANDBOX()?statsAskHtml(true):""; }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-act=statsyes],[data-act=statsno]"); if(!b) return; e.stopPropagation(); e.preventDefault(); statsSet(b.dataset.act==="statsyes"); },true);
 function devId(){ let v=null; try{ v=localStorage.getItem("che-pro-did"); if(!v){ v=Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,"0")).join(""); localStorage.setItem("che-pro-did",v); } }catch(e){ v=null; } return v; }
 function firstDay(){ let f=null; try{ f=localStorage.getItem("che-pro-first"); if(!f){ const ds=[...S.days.values()].map(d=>d&&d.date).filter(Boolean).sort(); f=ds[0]||today(); localStorage.setItem("che-pro-first",f); } }catch(e){ f=today(); } return f; }
 // what kind of device opened the app (no model, no personal data): helps tell real visitors from bots and duplicate browsers
@@ -7819,7 +7855,7 @@ function devKind(){ const ua=navigator.userAgent||"", pwa=(window.matchMedia&&ma
   return os+(pwa?"-app":""); }
 const isBot=()=>{ try{ return navigator.webdriver===true||/bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|embedly|quora|whatsapp|telegram/i.test(navigator.userAgent||""); }catch(e){ return false; } };
 async function actPing(extra){
-  if(!CLOUD.fb||DEV||CLOUD.deleting||isBot()) return; const id=devId(); if(!id) return; const t=today();
+  if(!CLOUD.fb||DEV||CLOUD.deleting||isBot()||!statsOk()) return; const id=devId(); if(!id) return; const t=today();
   let sent=null; try{ sent=localStorage.getItem("che-pro-actday"); }catch(e){}
   if(sent===t&&!extra) return;
   const {fsM,db}=CLOUD.fb;
@@ -7988,8 +8024,9 @@ Object.assign(STR.ko,{srsTicketMin:"{n}단어 이상 복습하면 복권을 받�
 /* ================= privacy, account deletion ================= */
 function privacyCard(){
   const u=CLOUD.user;
-  return `<section class="card priv-card"><b>🔒 ${T("pvLegalT")}</b><span class="muted sm-t">${T("pvLegalSub")}</span>
+  return `<section class="card priv-card"><b>🔒 ${T("pvLegalT")}</b><span class="muted sm-t">${T("pvLegalSub2")}</span>
     <div class="row"><a class="btn sm ghost" href="legal.html${langKey()==="zh"||langKey()==="cn"?"?lang=zh":""}" target="_blank" rel="noopener">📄 ${T("pvLegalOpen")}</a><button class="btn ghost sm" data-act="privacy">${T("pvOpen")}</button><a class="btn sm ghost" href="mailto:binbindaily.help@gmail.com">✉️ binbindaily.help@gmail.com</a></div>
+    ${statsAskHtml(false)}
     <div class="row"><button class="btn ghost sm del-btn" data-act="delask">${u?T("delBtn"):T("delBtnLocal")}</button></div>
     ${S.delAsk?`<div class="del-ask"><b>⚠️ ${T("delQ")}</b><p class="sm-t">${u?T("delWhat"):T("delWhatLocal")}</p><div class="row"><button class="btn sm danger-solid" data-act="delgo" ${S.delBusy?"disabled":""}>${S.delBusy?T("delBusy"):T("delYes")}</button><button class="btn ghost sm" data-act="delask">${T("nickNo")}</button></div></div>`:""}</section>`;
 }
@@ -8003,48 +8040,30 @@ async function deleteAccount(){
       const last=Date.parse((auth.currentUser&&auth.currentUser.metadata&&auth.currentUser.metadata.lastSignInTime)||0);
       if(authM.reauthenticateWithPopup&&!(Date.now()-last<4*60e3)){ await authM.reauthenticateWithPopup(auth.currentUser,new authM.GoogleAuthProvider()); }
       CLOUD.deleting=true; clearTimeout(CLOUD.timer); CLOUD.dirtyWords.clear(); CLOUD.delWords.clear(); CLOUD.dirtyMain=false;
+      // the server removes everything tied to this account (boards of every month, gifts, likes, plaza, …) with admin rights,
+      // and deletes the Google sign-in only when that worked; on any failure nothing is signed out and the player can retry
+      const tok=await auth.currentUser.getIdToken(true);
+      const r=await fetch(PAY_FN+"/deleteAccount",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:"{}"});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||!j.ok){ const err=new Error("delete "+(j.error||r.status)); err.code=j.error==="recent"?"auth/requires-recent-login":"delete/"+(j.error||r.status); throw err; }
+      // this phone's notification and visit records are tied to the device, not the account: clear them here
       const del=async ref=>{ try{ await fsM.deleteDoc(ref); }catch(e){} };
-      const ws=await fsM.getDocs(wordsCol()); const ids=[]; ws.forEach(d=>ids.push(d.id));
-      for(let i=0;i<ids.length;i+=400){ const b=fsM.writeBatch(db); ids.slice(i,i+400).forEach(id=>b.delete(fsM.doc(wordsCol(),id))); await b.commit(); }
-      await del(userRef()); await del(fsM.doc(db,"leaderboard",uid)); await del(fsM.doc(db,"allies",uid));
-      if(g.nick){ try{ const r=fsM.doc(db,"nicks",nickKey(g.nick)), d=await fsM.getDoc(r); if(d.exists()&&d.data().uid===uid) await fsM.deleteDoc(r); }catch(e){} }
-      const pm=(()=>{ const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()-1); return ymd(d).slice(0,7); })();
-      for(const m of [monthKey(),pm]){ await del(fsM.doc(db,"readMonths",m,"u",uid)); await del(fsM.doc(db,"ieltsMonths",m,"scores",uid)); }
-      await del(fsM.doc(db,"ieltsWeeks",isoWeek().id,"scores",uid));
       if(PUSH.id) await del(fsM.doc(db,"push",PUSH.id));
-      const did=devId(); if(did) await del(fsM.doc(db,"act",did));
+      const did=devIdPeek(); if(did) await del(fsM.doc(db,"act",did));
       try{ const reg=await navigator.serviceWorker.getRegistration(); const sub=reg&&await reg.pushManager.getSubscription(); if(sub) await sub.unsubscribe(); }catch(e){}
-      if(authM.deleteUser) await authM.deleteUser(auth.currentUser);
-    } else if(CLOUD.fb){ const {fsM,db}=CLOUD.fb; const did=devId(); try{ if(PUSH.id) await fsM.deleteDoc(fsM.doc(db,"push",PUSH.id)); if(did) await fsM.deleteDoc(fsM.doc(db,"act",did)); }catch(e){} }
+      try{ await authM.signOut(auth); }catch(e){}
+    } else if(CLOUD.fb){ const {fsM,db}=CLOUD.fb; const did=devIdPeek(); try{ if(PUSH.id) await fsM.deleteDoc(fsM.doc(db,"push",PUSH.id)); if(did) await fsM.deleteDoc(fsM.doc(db,"act",did)); }catch(e){} }
     wipeLocal(); toast(T("delDone")); setTimeout(()=>location.reload(),1200);
   }catch(e){
+    // the server may have removed part of the cloud copy before it stopped: queue this phone's progress to be saved again
+    if(CLOUD.deleting&&CLOUD.user){ CLOUD.dirtyMain=true; for(const k of S.words.keys()) CLOUD.dirtyWords.add(k); dirtySave(); }
     CLOUD.deleting=false; S.delBusy=false;
     const c=e&&e.code||""; toast(c==="auth/popup-closed-by-user"||c==="auth/cancelled-popup-request"?T("delCancel"):T("delFail")); render();
   }
 }
 const PRIV={
-zh:{t:"隱私權政策", upd:"最後更新：2026 年 10 月 16 日", secs:[
- ["我們是誰","BinBin daily 是一位個人開發者（CheChe）在愛爾蘭製作的英文學習 app。有任何隱私問題，請寄信到 binbindaily.help@gmail.com，或用「設定 → 意見回饋」告訴我。完整的條款、退款與隱私權政策請見「設定 → 關於、條款與退款」。"],
- ["我們收集哪些資料",["不登入也能使用：學習紀錄、單字、遊戲進度只存在你的手機（瀏覽器的本機儲存空間）。","用 Google 登入時：你的 Google 帳號編號、顯示名稱與大頭貼，以及你的單字、閱讀與測驗紀錄、遊戲進度、新聞地區設定，會存到雲端，讓你換手機也不會不見。","你自己設定的暱稱、國旗，以及排行榜成績（戰力、IELTS、閱讀篇數），其他登入的玩家看得到。","多人遊戲與盟友：房間內的暱稱與遊戲狀態，其他玩家看得到。","開啟通知時：推播訂閱資訊、時區、語言，以及你當天是否讀過新聞（只用來決定要不要提醒你）。","使用統計：一組隨機產生的裝置編號，記錄你哪幾天打開 app、語言和程度設定，用來計算留存率；不含姓名或聯絡方式。","你主動送出的意見回饋內容。"]],
- ["我們用資料做什麼","只用來提供 app 的功能：同步進度、排行榜、多人遊戲、提醒通知，以及了解 app 哪裡需要改進。我們不放廣告、不賣資料，也不把資料分享給行銷公司。"],
- ["資料存在哪裡",["Google Firebase（帳號登入與雲端資料庫）：伺服器可能位於歐盟以外，Google 依其資料保護條款處理。","GitHub Pages（網站主機）、Google Fonts（字型）：會看到你的 IP 位址等一般連線資訊。","推播服務（Apple、Google、Mozilla）：負責把通知送到你的裝置。","意見回饋會存到開發者的 Google 試算表。"]],
- ["保存多久","你的資料會保存到你刪除帳號為止。關閉通知時，推播資訊會立即刪除；失效的推播訂閱也會自動移除。"],
- ["你的權利","依照歐盟 GDPR，你可以查看、匯出、更正或刪除你的資料：「設定 → 備份」可以匯出所有學習紀錄；下方的「刪除我的帳號與資料」會永久刪除雲端與這支手機上的資料。若你對資料處理有疑慮，也可以向愛爾蘭資料保護委員會（Data Protection Commission）申訴。"],
- ["兒童","未滿 16 歲的使用者，請在家長或監護人同意下登入使用。"],
- ["Cookie 與本機儲存","我們不使用追蹤型 Cookie。app 只用瀏覽器的本機儲存空間保存你的設定與進度。"],
- ["IELTS 聲明","IELTS™ 是 British Council、IDP: IELTS Australia 與 Cambridge University Press & Assessment 的註冊商標。BinBin daily 與上述機構沒有任何關係，也未經其認可或核准。app 內的模擬試題皆為原創，分數僅為估計，不代表正式成績。"],
- ["政策更新","政策有重大變更時，會在 app 內通知。"]]},
-en:{t:"Privacy policy", upd:"Last updated: 16 October 2026", secs:[
- ["Who we are","BinBin daily is an English-learning app made by an independent developer (CheChe) in Ireland. For any privacy question, write to binbindaily.help@gmail.com or use Settings → Feedback. The full terms, refund and privacy policy are under Settings → About, terms and refunds."],
- ["What we collect",["Without signing in: your progress, words and game data stay on your phone (the browser's local storage).","When you sign in with Google: your Google account ID, display name and profile photo, plus your words, reading and quiz history, game progress and news region, are stored in the cloud so they follow you to a new phone.","The nickname and flag you choose and your leaderboard results (power, IELTS, articles read) are visible to other signed-in players.","Party games and allies: your nickname and game state in a room are visible to the other players.","If you turn on notifications: your push subscription, time zone, language and whether you've read the news today (only to decide whether to remind you).","Usage statistics: a randomly generated device ID with the days you opened the app and your language/level settings, used to measure retention. It contains no name or contact details.","Any feedback you send us."]],
- ["How we use it","Only to run the app: syncing progress, leaderboards, party games, reminders, and understanding what to improve. We show no ads, never sell data and never share it with marketers."],
- ["Where it is stored",["Google Firebase (sign-in and cloud database); servers may be outside the EU and Google processes data under its data-protection terms.","GitHub Pages (hosting) and Google Fonts (fonts) see normal connection data such as your IP address.","Push services (Apple, Google, Mozilla) deliver notifications to your device.","Feedback is stored in the developer's Google Sheet."]],
- ["How long we keep it","Until you delete your account. Push details are deleted as soon as you turn notifications off, and expired subscriptions are removed automatically."],
- ["Your rights","Under the EU GDPR you can access, export, correct or delete your data: Settings → Backup exports all your learning records, and “Delete my account and data” below permanently erases your data from the cloud and this phone. You can also complain to Ireland's Data Protection Commission."],
- ["Children","If you are under 16, please sign in only with a parent's or guardian's permission."],
- ["Cookies and local storage","We use no tracking cookies. The app only uses your browser's local storage to keep your settings and progress."],
- ["IELTS notice","IELTS™ is a registered trademark of the British Council, IDP: IELTS Australia and Cambridge University Press & Assessment. BinBin daily is not affiliated with, endorsed or approved by them. All practice tests are original and scores are estimates only."],
- ["Changes","We'll let you know in the app if this policy changes in an important way."]]}};
+zh:{t:"隱私權政策", upd:"最後更新：2026 年 11 月 25 日", secs:[["我們是誰", "BinBin daily 由住在愛爾蘭的個人開發者 Ching Che Huang（CheChe）製作與經營，也是你資料的負責人（GDPR 所說的「資料控制者」）。有任何隱私問題，請寄信到 binbindaily.help@gmail.com，或用「設定 → 意見回饋」告訴我，我會在一個月內回覆。"], ["我們收集哪些資料", ["不登入：學習紀錄、單字和遊戲進度只存在你的手機（瀏覽器的本機儲存空間），不會上傳。", "用 Google 登入：Google 帳號編號、顯示名稱、大頭貼（email 只由 Google 登入服務保管），以及你的單字、閱讀與測驗紀錄、遊戲進度、造型、新聞地區，存到雲端，讓你換手機也不會不見。", "其他玩家看得到的：你的暱稱、國旗、角色造型、等級與戰力、排行榜成績（閱讀、IELTS、多益、鋼琴）、收到的讚，以及許願池得獎名單上的暱稱。", "廣場：你的角色在遊戲地圖上的位置（不是手機的 GPS 定位）和你說的話（聊天泡泡），同一區的玩家即時看得到；聊天泡泡幾秒後就消失，不會保存。最近有來廣場的玩家，暱稱和造型會出現在廣場上，大約每 15 分鐘更新一次。", "多人遊戲、盟友、送禮、邀請碼：房間裡的暱稱和遊戲狀態、盟友關係、送禮紀錄（雙方暱稱與道具）、誰用了誰的邀請碼。", "IG 會員：你申請時產生的會員碼和暱稱；你在 Instagram 私訊 BinBin 時，Instagram 帳號名稱會出現在 BinBin 的 Instagram 收件匣。", "公平遊戲檢查：每天自動比對進度是否合理（例如金幣、等級突然暴增），可疑的帳號會留下紀錄給開發者人工確認。", "開啟通知時：推播訂閱資訊、時區、語言，以及你當天是否讀過新聞。", "使用統計（只有你同意才會記錄）：一組隨機的裝置編號，記錄這台裝置哪幾天打開 app、第一次使用的日期、語言、程度、是否登入、裝置類型、新手引導走到第幾步。不含姓名或聯絡方式。", "錯誤回報：app 出錯時，錯誤訊息、版本、瀏覽器型號，以及（登入時）你的帳號編號，用來修正問題。", "意見回饋：你寫的內容、選填的聯絡方式、暱稱、帳號編號與裝置資訊。"]], ["我們為什麼可以使用這些資料（法律依據）", ["提供你要求的服務（GDPR 第 6 條第 1 項 b 款）：帳號、雲端同步、排行榜、廣場、多人遊戲、送禮、邀請碼、IG 會員。", "你的同意（第 6 條第 1 項 a 款）：使用統計、推播通知。你隨時可以在設定裡撤回，撤回後就不再記錄，已記錄的統計也會刪除。", "正當利益（第 6 條第 1 項 f 款）：公平遊戲檢查、錯誤回報、處理意見回饋，目的是讓遊戲公平、穩定，並回覆你的問題。"]], ["我們用資料做什麼", "只用來提供 app 的功能和改進 app。不放廣告、不賣資料，也不把資料分享給行銷公司。目前沒有開放任何付費購買。"], ["誰會經手這些資料", ["Google Firebase／Google Cloud：登入、雲端資料庫、即時廣場和伺服器程式。即時廣場和伺服器程式在歐盟（比利時）；其他部分服務可能在歐盟以外，Google 依其資料保護條款（包含歐盟標準契約條款）處理。", "GitHub Pages、Cloudflare Pages（網站主機與備援）、jsDelivr（音檔）、Google Fonts（字型）：只會看到 IP 位址等一般連線資訊。", "Apple、Google、Mozilla 的推播服務：把通知送到你的裝置。", "Google 試算表：意見回饋會另外存一份，方便開發者閱讀。"]], ["保存多久", ["帳號資料：保存到你刪除帳號為止。", "廣場聊天泡泡：不保存；廣場位置在你離開後就刪除。", "使用統計：保存到你撤回同意為止，撤回時立即刪除。", "錯誤回報：90 天後自動刪除。意見回饋：2 年後自動刪除。", "推播資訊：關閉通知時立即刪除。"]], ["刪除帳號", "「設定 → 刪除我的帳號與資料」會由伺服器刪除你所有的資料：個人資料、單字、各期排行榜、許願池、按讚、送禮、多人房間、公平遊戲紀錄與 Google 登入帳號。別人保留的紀錄（例如你送給朋友的禮物、許願池得獎名單）會留給對方，但會拿掉你的暱稱和帳號編號。如果中途有任何一步沒有成功，帳號不會被刪掉，你可以再按一次。"], ["你的權利", "依照歐盟 GDPR，你可以查看、匯出、更正或刪除你的資料，也可以反對我們基於正當利益處理資料：「設定 → 備份」可以匯出學習紀錄，其他請寄信給我們。你也可以向愛爾蘭資料保護委員會（Data Protection Commission，www.dataprotection.ie）申訴。"], ["兒童", "BinBin daily 適合 13 歲以上的使用者，未滿 13 歲請不要使用。13 到 15 歲的使用者，請先取得家長或監護人同意再登入。廣場上的話其他玩家看得到，請不要在暱稱或聊天裡透露真實姓名、學校或聯絡方式。"], ["Cookie 與本機儲存", "我們不使用追蹤型 Cookie。app 用瀏覽器的本機儲存空間保存你的設定和進度；使用統計用的裝置編號只有在你同意後才會建立。"], ["IELTS 聲明", "IELTS™ 是 British Council、IDP: IELTS Australia 與 Cambridge University Press & Assessment 的註冊商標。BinBin daily 與上述機構沒有任何關係，也未經其認可或核准。app 內的模擬試題皆為原創，分數僅為估計，不代表正式成績。"], ["政策更新", "政策有重大變更時，會在 app 內通知。"]]},
+en:{t:"Privacy policy", upd:"Last updated: 25 November 2026", secs:[["Who we are", "BinBin daily is made and run by Ching Che Huang (CheChe), an independent developer living in Ireland, who is responsible for your data (the \"data controller\" under the GDPR). For any privacy question, write to binbindaily.help@gmail.com or use Settings → Feedback; you'll get an answer within a month."], ["What we collect", ["Without signing in: your progress, words and game data stay on your phone (the browser's local storage) and are not uploaded.", "When you sign in with Google: your Google account ID, display name and profile photo (your e-mail stays with Google's sign-in service), plus your words, reading and quiz history, game progress, outfits and news region, stored in the cloud so they follow you to a new phone.", "Visible to other players: your nickname, flag, character look, level and power, leaderboard results (reading, IELTS, TOEIC, piano), likes received, and your nickname on the wishing-well winners list.", "Plaza: your character's position on the game map (not your phone's GPS location) and what you say (chat bubbles) are shown live to players in the same area; bubbles disappear after a few seconds and are not stored. Players who visited the plaza recently appear there with their nickname and look, refreshed about every 15 minutes.", "Party games, allies, gifts and invite codes: your nickname and game state in a room, ally links, gift records (both nicknames and the items), and who used whose invite code.", "IG membership: the member code you request and your nickname; when you message BinBin on Instagram, your Instagram name appears in BinBin's Instagram inbox.", "Fair-play checks: a daily automatic check that progress makes sense (for example coins or levels jumping suddenly); suspicious accounts are noted for the developer to review by hand.", "If you turn on notifications: your push subscription, time zone, language and whether you've read today's news.", "Usage statistics (only if you agree): a random device ID with the days this device opened the app, the first day, language, level, whether you're signed in, device type and how far you got in the welcome tour. No name or contact details.", "Error reports: when something breaks, the error message, app version, browser model and (if signed in) your account ID, to fix the problem.", "Feedback: what you write, the optional contact you give, your nickname, account ID and device information."]], ["Why we may use it (legal basis)", ["To provide the service you asked for (GDPR Art. 6(1)(b)): account, cloud sync, leaderboards, plaza, party games, gifts, invite codes, IG membership.", "Your consent (Art. 6(1)(a)): usage statistics and push notifications. You can withdraw it any time in Settings; we then stop and delete the statistics already recorded.", "Legitimate interests (Art. 6(1)(f)): fair-play checks, error reports and handling your feedback, to keep the game fair and working and to answer you."]], ["How we use it", "Only to run and improve the app. We show no ads, never sell data and never share it with marketers. There are currently no paid purchases."], ["Who handles it", ["Google Firebase / Google Cloud: sign-in, cloud database, live plaza and server code. The live plaza and server code run in the EU (Belgium); some other services may be outside the EU, and Google processes data under its data-protection terms, including the EU Standard Contractual Clauses.", "GitHub Pages, Cloudflare Pages (hosting and backup), jsDelivr (audio) and Google Fonts (fonts) see normal connection data such as your IP address.", "Push services of Apple, Google and Mozilla deliver notifications to your device.", "Google Sheets: a copy of feedback, so the developer can read it."]], ["How long we keep it", ["Account data: until you delete your account.", "Plaza chat bubbles: not stored; your plaza position is removed when you leave.", "Usage statistics: until you withdraw consent, then deleted at once.", "Error reports: deleted automatically after 90 days. Feedback: deleted automatically after 2 years.", "Push details: deleted as soon as you turn notifications off."]], ["Deleting your account", "Settings → \"Delete my account and data\" has our server delete all your data: profile, words, every period's leaderboards, wishing well, likes, gifts, party rooms, fair-play records and your sign-in. Records another player keeps (such as a gift you sent them or a winners list) stay with them, but your nickname and account ID are removed. If any step fails, your account is not deleted and you can simply try again."], ["Your rights", "Under the EU GDPR you can access, export, correct or delete your data and object to processing based on legitimate interests: Settings → Backup exports your learning records; for anything else, write to us. You can also complain to Ireland's Data Protection Commission (www.dataprotection.ie)."], ["Children", "BinBin daily is for people aged 13 and over; if you are under 13, please don't use it. If you are 13 to 15, please get a parent's or guardian's permission before signing in. Other players can see what you say in the plaza, so don't put your real name, school or contact details in your nickname or chat."], ["Cookies and local storage", "We use no tracking cookies. The app uses your browser's local storage for your settings and progress; the device ID for usage statistics is only created after you agree."], ["IELTS notice", "IELTS™ is a registered trademark of the British Council, IDP: IELTS Australia and Cambridge University Press & Assessment. BinBin daily is not affiliated with, endorsed or approved by them. All practice tests are original and scores are estimates only."], ["Changes", "We'll let you know in the app if this policy changes in an important way."]]}};
 function viewPrivacy(){
   const P=PRIV[LANG]||PRIV.en, note=PRIV[LANG]?"":`<p class="muted sm-t">${T("pvEnOnly")}</p>`;
   return `<div class="view priv-view"><button class="btn ghost" data-act="privback" style="align-self:flex-start;padding:6px 14px;font-size:13px">${T("back")}</button>
@@ -8052,8 +8071,8 @@ function viewPrivacy(){
     ${P.secs.map(([h,b])=>`<section class="card"><b>${esc(h)}</b>${Array.isArray(b)?`<ul>${b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<p>${esc(b)}</p>`}</section>`).join("")}
     ${privacyCard()}</div>`;
 }
-Object.assign(STR.zh,{pvCard:"隱私與帳號", pvCardSub:"了解我們收集哪些資料，或永久刪除你的帳號。", pvOpen:"隱私權政策", delBtn:"刪除我的帳號與資料", delBtnLocal:"清除這支手機上的資料", delQ:"確定要永久刪除嗎？", delWhat:"會刪除你在雲端與這支手機上的所有資料：單字、閱讀與測驗紀錄、遊戲進度、暱稱、排行榜成績、盟友與通知設定，以及你的 BinBin 帳號。刪除後無法復原。可能會請你再用 Google 登入一次確認身分。", delWhatLocal:"會清除這支手機上的所有學習紀錄、單字與遊戲進度，無法復原。", delYes:"永久刪除", delBusy:"刪除中…", delDone:"已刪除，謝謝你使用 BinBin daily", delFail:"刪除沒有完成，請確認網路後再試一次", delCancel:"已取消，沒有刪除任何資料", pvEnOnly:"", ieDisclaimer:"非官方練習：IELTS™ 是 British Council、IDP 與 Cambridge University Press & Assessment 的註冊商標，本 app 與其無關、也未經認可。試題為原創，分數僅供參考。"});
-Object.assign(STR.en,{pvCard:"Privacy & account", pvCardSub:"See what data we keep, or permanently delete your account.", pvOpen:"Privacy policy", delBtn:"Delete my account and data", delBtnLocal:"Clear the data on this phone", delQ:"Permanently delete everything?", delWhat:"This erases all your data in the cloud and on this phone — words, reading and quiz history, game progress, nickname, leaderboard results, allies and notification settings — and your BinBin account. It can't be undone. You may be asked to sign in with Google once more to confirm.", delWhatLocal:"This clears all learning records, words and game progress on this phone. It can't be undone.", delYes:"Delete permanently", delBusy:"Deleting…", delDone:"Deleted. Thank you for using BinBin daily", delFail:"Couldn't finish deleting. Check your connection and try again", delCancel:"Cancelled — nothing was deleted", pvEnOnly:"", ieDisclaimer:"Unofficial practice: IELTS™ is a registered trademark of the British Council, IDP and Cambridge University Press & Assessment. This app is not affiliated with or endorsed by them. Tests are original and scores are estimates only."});
+Object.assign(STR.zh,{pvCard:"隱私與帳號", pvCardSub:"了解我們收集哪些資料，或永久刪除你的帳號。", pvOpen:"隱私權政策", delBtn:"刪除我的帳號與資料", delBtnLocal:"清除這支手機上的資料", delQ:"確定要永久刪除嗎？", delWhat:"會刪除你在雲端與這支手機上的所有資料：單字、閱讀與測驗紀錄、遊戲進度、暱稱、各期排行榜、許願池、按讚、送禮、盟友與通知設定，以及你的 BinBin 帳號。刪除後無法復原。可能會請你再用 Google 登入一次確認身分。", delWhatLocal:"會清除這支手機上的所有學習紀錄、單字與遊戲進度，無法復原。", delYes:"永久刪除", delBusy:"刪除中…", delDone:"已刪除，謝謝你使用 BinBin daily", delFail:"刪除沒有完成，請確認網路後再試一次", delCancel:"已取消，沒有刪除任何資料", pvEnOnly:"", ieDisclaimer:"非官方練習：IELTS™ 是 British Council、IDP 與 Cambridge University Press & Assessment 的註冊商標，本 app 與其無關、也未經認可。試題為原創，分數僅供參考。"});
+Object.assign(STR.en,{pvCard:"Privacy & account", pvCardSub:"See what data we keep, or permanently delete your account.", pvOpen:"Privacy policy", delBtn:"Delete my account and data", delBtnLocal:"Clear the data on this phone", delQ:"Permanently delete everything?", delWhat:"This erases all your data in the cloud and on this phone — words, reading and quiz history, game progress, nickname, every leaderboard, wishing well, likes, gifts, allies and notification settings — and your BinBin account. It can't be undone. You may be asked to sign in with Google once more to confirm.", delWhatLocal:"This clears all learning records, words and game progress on this phone. It can't be undone.", delYes:"Delete permanently", delBusy:"Deleting…", delDone:"Deleted. Thank you for using BinBin daily", delFail:"Couldn't finish deleting. Check your connection and try again", delCancel:"Cancelled — nothing was deleted", pvEnOnly:"", ieDisclaimer:"Unofficial practice: IELTS™ is a registered trademark of the British Council, IDP and Cambridge University Press & Assessment. This app is not affiliated with or endorsed by them. Tests are original and scores are estimates only."});
 for(const k of ["hi","es","ja","ko"]) for(const x of ["pvCard","pvCardSub","pvOpen","delBtn","delBtnLocal","delQ","delWhat","delWhatLocal","delYes","delBusy","delDone","delFail","delCancel","ieDisclaimer"]) if(!STR[k][x]) STR[k][x]=STR.en[x];
 Object.assign(STR.hi,{pvCard:"गोपनीयता और खाता", pvOpen:"गोपनीयता नीति", delBtn:"मेरा खाता और डेटा हटाएँ", delYes:"हमेशा के लिए हटाएँ", pvEnOnly:"यह नीति अभी अंग्रेज़ी में उपलब्ध है।"});
 Object.assign(STR.es,{pvCard:"Privacidad y cuenta", pvOpen:"Política de privacidad", delBtn:"Eliminar mi cuenta y mis datos", delYes:"Eliminar para siempre", pvEnOnly:"Por ahora esta política está disponible en inglés."});
@@ -8617,6 +8636,7 @@ async function toLoad(){ if(TO_TESTS) return TO_TESTS;
   let base={tests:[],practice:[]}; try{ const r=await fetch("toeic/tests.json",{cache:"no-cache"}); base=await r.json(); }catch(e){}
   TO_TESTS=base.tests||[]; TO_PRAC=base.practice||[]; TO_ALL=TO_TESTS.concat(TO_PRAC);
   try{ const r=await fetch("toeic/weeks/"+isoWeek().id+".json",{cache:"no-cache"}); if(r.ok){ const j=await r.json(); if(j.tests&&j.tests.length>=7){ TO_TESTS=j.tests; TO_WEEKLY=true; if(j.practice&&j.practice.length) TO_PRAC=j.practice; TO_ALL=TO_ALL.concat(j.tests,j.practice||[]); } } }catch(e){}
+  if(!TO_WEEKLY){ const old=await pastWeekTests("toeic"); if(old.length){ TO_TESTS=TO_TESTS.concat(old); TO_ALL=TO_ALL.concat(old); } }
   return TO_TESTS; }
 function toWeekTest(){ if(!TO_TESTS||!TO_TESTS.length) return null; if(TO_WEEKLY){ const wd=(new Date().getDay()+6)%7; return TO_TESTS[wd%TO_TESTS.length]; } return TO_TESTS[dayNum()%TO_TESTS.length]; }
 const toSec=n=>Math.max(5,Math.min(495,Math.round(n*98)*5+5));   // share correct (0–1) → 5–495
@@ -8842,7 +8862,7 @@ function toLobby(){
   const ranked=run?"":done!==undefined?`<div class="ie-done">${T("toDoneToday",{s:typeof done==="number"?done:"–"})}</div>`:`<button class="btn" data-act="toranked">${T("toRanked")}</button><p class="muted sm-t">${T("toRankedNote")}</p>`;
   const tiers=TO_TIERS.slice().reverse().map(([m,k,c])=>`<span class="to-tier" style="--tc:${c}"><i></i>${T("toT_"+k)} ${m}+${st.tiers[k]?` ×${st.tiers[k]}`:""}</span>`).join("");
   return `<section class="card ie-hero"><div class="ie-hero-top"><div><h3>${T("toTitle")}</h3><p class="muted sm-t" style="margin:4px 0 0">${T("toSub")}</p></div>${st.best?toChip(st.best.total):""}</div>
-      <div class="ie-week"><b>${T("toToday",{t:esc(t?t.title:"–")})}</b><span class="muted sm-t">${T("toNew",{h:u.h,m:u.m})}</span></div>
+      <div class="ie-week"><b>${T("toToday",{t:esc(t?t.title:"–")})}</b><span class="muted sm-t">${T(TO_WEEKLY?"toNew":"ieRotate",{h:u.h,m:u.m})}</span></div>
       ${runBtn}${ranked}
       ${typeof mb==="number"?`<div class="muted sm-t">${T("toMonthBest",{s:mb})}</div>`:""}
       ${CLOUD.user&&game().nick?"":`<p class="muted sm-t">${T("ieLogin")}</p>`}</section>
@@ -11417,6 +11437,36 @@ Object.assign(STR.ja,{"invTodayT": "友だちの招待コードを持ってい�
 Object.assign(STR.ko,{"invTodayT": "친구 초대 코드가 있나요?", "invTodaySub": "코드를 입력하고 매일 3단계를 {d}일 연속 완료하면 스타일 코인 {b}개를 받아요. 가입 후 {n}일 안에 입력할 수 있어요."});
 Object.assign(STR.zh,{"chT": "防作弊", "chSub": "每天凌晨自動檢查一次所有存檔：一天內金幣或等級暴增、排行榜和存檔對不上，就會列在這裡。封鎖後這個人不能再寫入排行榜、許願池、送禮、邀請和廣場，本月的排名也會刪掉。不會自動封鎖，都由你決定。", "chLoad": "看可疑名單", "chLoading": "讀取中…", "chNone": "目前沒有可疑的玩家", "chBan": "封鎖", "chBanSure": "確定封鎖？再按一次", "chUnban": "解除封鎖", "chOk": "沒問題", "chOkT": "已確認沒問題", "chBanned": "已封鎖", "chManual": "暱稱或 uid（直接封鎖某人）", "chManualFlag": "手動封鎖", "chBanDone": "已封鎖 {n}", "chUnbanDone": "已解除封鎖 {n}", "chNotFound": "找不到這個暱稱", "chRtdbFail": "廣場的封鎖沒寫進去，請稍後再按一次"});
 Object.assign(STR.en,{"chT": "Anti-cheat", "chSub": "Every night all saves are checked: gold or levels that jump too much in a day, or a board that doesn't match the save, show up here. A banned player can no longer write to boards, the wishing well, gifts, invites or the plaza, and this month's rankings are deleted. Nothing is banned automatically.", "chLoad": "Show suspicious players", "chLoading": "Loading…", "chNone": "No suspicious players right now", "chBan": "Ban", "chBanSure": "Sure? Tap again to ban", "chUnban": "Unban", "chOk": "It's fine", "chOkT": "Checked, fine", "chBanned": "Banned", "chManual": "Nickname or uid (ban someone directly)", "chManualFlag": "Banned by hand", "chBanDone": "Banned {n}", "chUnbanDone": "Unbanned {n}", "chNotFound": "No player with that nickname", "chRtdbFail": "The plaza ban didn't save, please tap again later"});
+Object.assign(STR.zh,{pvLegalSub2:"營運者資訊、使用條款、隱私權政策、使用統計設定，或永久刪除你的帳號。"});
+Object.assign(STR.en,{pvLegalSub2:"Who runs the app, terms of use, privacy policy, usage-statistics choice, or delete your account for good."});
+Object.assign(STR.hi,{pvLegalSub2:"ऐप कौन चलाता है, उपयोग की शर्तें, गोपनीयता नीति, उपयोग-आँकड़ों का विकल्प, या अपना खाता हमेशा के लिए हटाएँ।"});
+Object.assign(STR.es,{pvLegalSub2:"Quién gestiona la app, condiciones de uso, privacidad, estadísticas de uso o borrar tu cuenta para siempre."});
+Object.assign(STR.ja,{pvLegalSub2:"運営者、利用規約、プライバシーポリシー、利用統計の設定、アカウントの完全削除。"});
+Object.assign(STR.ko,{pvLegalSub2:"운영자 정보, 이용약관, 개인정보처리방침, 사용 통계 설정, 또는 계정 영구 삭제."});
+Object.assign(STR.zh,{stWhyS:"只記錄哪幾天有開 app，不含姓名或 email。設定裡可以改。"});
+Object.assign(STR.en,{stWhyS:"Only which days you open the app — no name or e-mail. Change it in Settings."});
+Object.assign(STR.hi,{stWhyS:"सिर्फ़ किन दिनों ऐप खुला — कोई नाम या ई-मेल नहीं। सेटिंग्स में बदलें।"});
+Object.assign(STR.es,{stWhyS:"Solo qué días abres la app, sin nombre ni e-mail. Cámbialo en Ajustes."});
+Object.assign(STR.ja,{stWhyS:"アプリを開いた日だけを記録し、名前やメールは含みません。設定で変更できます。"});
+Object.assign(STR.ko,{stWhyS:"앱을 연 날짜만 기록하고 이름이나 이메일은 없어요. 설정에서 바꿀 수 있어요."});
+Object.assign(STR.zh,{stQ:"可以幫我們匿名統計使用情況嗎？", stWhy:"只記錄這台裝置哪幾天有打開 app、選的語言和程度，不含姓名或 email，用來了解新玩家會不會回來、哪裡需要改進。隨時可以在「設定」裡改。", stYes:"好，可以", stNo:"不要"});
+Object.assign(STR.en,{stQ:"Can we count your visits anonymously?", stWhy:"We'd only note which days this device opens the app, plus your language and level — no name or e-mail — to see whether new players come back and what to improve. You can change this any time in Settings.", stYes:"Yes, OK", stNo:"No thanks"});
+Object.assign(STR.hi,{stQ:"क्या हम आपकी विज़िट गुमनाम रूप से गिन सकते हैं?", stWhy:"हम सिर्फ़ यह नोट करेंगे कि यह डिवाइस किन दिनों ऐप खोलता है, साथ में आपकी भाषा और स्तर — कोई नाम या ई-मेल नहीं — ताकि पता चले नए खिलाड़ी लौटते हैं या नहीं। सेटिंग्स में कभी भी बदलें।", stYes:"हाँ, ठीक है", stNo:"नहीं"});
+Object.assign(STR.es,{stQ:"¿Podemos contar tus visitas de forma anónima?", stWhy:"Solo anotaríamos qué días este dispositivo abre la app, además de tu idioma y nivel — sin nombre ni e-mail — para saber si los nuevos jugadores vuelven y qué mejorar. Puedes cambiarlo cuando quieras en Ajustes.", stYes:"Sí, vale", stNo:"No, gracias"});
+Object.assign(STR.ja,{stQ:"利用状況を匿名で集計してもいいですか？", stWhy:"この端末でアプリを開いた日と、言語・レベルだけを記録します（名前やメールは含みません）。新しいプレイヤーが続けて使っているか、どこを改善すべきかを知るためです。設定からいつでも変更できます。", stYes:"はい、OK", stNo:"いいえ"});
+Object.assign(STR.ko,{stQ:"사용 현황을 익명으로 집계해도 될까요?", stWhy:"이 기기가 앱을 연 날짜와 언어·레벨만 기록해요(이름이나 이메일은 없어요). 새 플레이어가 다시 오는지, 무엇을 고쳐야 할지 알기 위해서예요. 설정에서 언제든 바꿀 수 있어요.", stYes:"네, 좋아요", stNo:"아니요"});
+Object.assign(STR.zh,{ieRotate:"{h} 小時 {m} 分後換題庫裡的另一份試題"});
+Object.assign(STR.en,{ieRotate:"Another test from the test bank in {h} h {m} min"});
+Object.assign(STR.hi,{ieRotate:"{h} घंटे {m} मिनट में टेस्ट बैंक से दूसरा टेस्ट"});
+Object.assign(STR.es,{ieRotate:"Otro examen del banco de pruebas en {h} h {m} min"});
+Object.assign(STR.ja,{ieRotate:"{h} 時間 {m} 分後に問題集の別のテストに切り替わります"});
+Object.assign(STR.ko,{ieRotate:"{h}시간 {m}분 후 문제 은행의 다른 시험으로 바뀌어요"});
+Object.assign(STR.zh,{syncPartial:"有 {n} 個單字暫時沒存到雲端，先留在這支手機，下次打開 app 會再試一次。"});
+Object.assign(STR.en,{syncPartial:"{n} word(s) couldn't be saved to the cloud yet. They're kept on this phone and will be tried again next time you open the app."});
+Object.assign(STR.hi,{syncPartial:"{n} शब्द अभी क्लाउड में सेव नहीं हो सके। वे इस फ़ोन पर हैं और अगली बार ऐप खोलने पर फिर से कोशिश होगी।"});
+Object.assign(STR.es,{syncPartial:"{n} palabra(s) no se pudieron guardar en la nube todavía. Se quedan en este móvil y se volverá a intentar la próxima vez que abras la app."});
+Object.assign(STR.ja,{syncPartial:"{n} 個の単語をまだクラウドに保存できませんでした。この端末に残してあり、次にアプリを開いたときにもう一度試します。"});
+Object.assign(STR.ko,{syncPartial:"단어 {n}개를 아직 클라우드에 저장하지 못했어요. 이 휴대폰에 남겨 두고 다음에 앱을 열 때 다시 시도할게요."});
 Object.assign(STR.zh,{"plzMowLbl": "除草機", "plzMowT": "連點螢幕任何地方搶除草機！", "plzMowGo": "開動！{s} 秒後會自動跳下", "plzMowLost": "{n} 先搶到除草機了", "plzMowHop": "跳下", "plzMowEnd": "時間到，跳下除草機了", "plzSeedLbl": "草苗", "plzSeedGet": "拿草苗", "plzSeedWait": "草苗還在長，{s} 秒後再來拿", "plzSeedGot": "拿到 {n} 株草苗！拿著草苗時不會遇到野怪", "plzSeedDone": "草苗種完了，草叢裡又會遇到野怪", "plzSeedDrop": "丟棄草苗", "plzSeedDropped": "丟掉草苗了，草叢裡又會遇到野怪", "plzPlant": "種草", "plzPlantNo": "這裡不能種草", "plzPlantHas": "這裡已經有草了", "plzPlantFull": "這條線的草坪種滿了，等除草機來割吧"});
 Object.assign(STR.en,{"plzMowLbl": "Mower", "plzMowT": "Tap anywhere fast to grab the mower!", "plzMowGo": "Let's mow! You hop off after {s} s", "plzMowLost": "{n} got the mower first", "plzMowHop": "Hop off", "plzMowEnd": "Time's up, you hopped off the mower", "plzSeedLbl": "Seedlings", "plzSeedGet": "Take seedlings", "plzSeedWait": "The seedlings are still growing, come back in {s} s", "plzSeedGot": "Got {n} seedlings! No wild beasts while you carry them", "plzSeedDone": "All planted! Wild beasts are back in the grass", "plzSeedDrop": "Drop seedlings", "plzSeedDropped": "Seedlings dropped. Wild beasts are back in the grass", "plzPlant": "Plant", "plzPlantNo": "You can't plant here", "plzPlantHas": "There's grass here already", "plzPlantFull": "This line's lawn is full, wait for the mower"});
 Object.assign(STR.hi,{"plzMowLbl": "घास काटने की मशीन", "plzMowT": "मशीन लेने के लिए स्क्रीन पर कहीं भी जल्दी टैप करो!", "plzMowGo": "चलो घास काटें! {s} सेकंड बाद तुम उतर जाओगे", "plzMowLost": "{n} ने पहले मशीन ले ली", "plzMowHop": "उतरो", "plzMowEnd": "समय खत्म, तुम मशीन से उतर गए", "plzSeedLbl": "पौधे", "plzSeedGet": "पौधे लो", "plzSeedWait": "पौधे अभी उग रहे हैं, {s} सेकंड बाद आना", "plzSeedGot": "{n} पौधे मिले! इन्हें पकड़े रहने पर जंगली जानवर नहीं मिलेंगे", "plzSeedDone": "सब लग गए! घास में फिर जंगली जानवर मिलेंगे", "plzSeedDrop": "पौधे फेंको", "plzSeedDropped": "पौधे फेंक दिए। घास में फिर जंगली जानवर मिलेंगे", "plzPlant": "लगाओ", "plzPlantNo": "यहाँ नहीं लगा सकते", "plzPlantHas": "यहाँ पहले से घास है", "plzPlantFull": "इस लाइन का लॉन भर गया है, मशीन का इंतज़ार करो"});

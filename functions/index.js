@@ -16,6 +16,8 @@ import { runPush } from "./push.js";
 import { runWellDraw, runWellExpire, prevMonth } from "./well.js";
 import { runPlaza } from "./plaza.js";
 import { runCheatScan } from "./cheat.js";
+import { eraseUser, runCleanup, RTDB_URL } from "./account.js";
+import { getDatabaseWithUrl } from "firebase-admin/database";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
 import { initializeApp } from "firebase-admin/app";
@@ -31,7 +33,7 @@ const VAPID_PRIVATE = defineSecret("VAPID_PRIVATE");
 const REGION = "europe-west1";
 const STRIPE_VERSION = "2026-04-22.dahlia";
 const SITE = "https://binbindaily.com/";
-const ORIGINS = ["https://binbindaily.com", "https://www.binbindaily.com", "https://cheche0102.github.io", "http://localhost:8765"];
+const ORIGINS = ["https://binbindaily.com", "https://www.binbindaily.com", "https://cheche0102.github.io", "https://binbin-daily.pages.dev", "http://localhost:8765"];
 
 // What each vault item gives. Prices are created in the Stripe dashboard; only the ID lives here.
 // test=true: sandbox item, only testers may buy it.
@@ -252,6 +254,28 @@ export const stripeWebhook = onRequest({ region: REGION, secrets: [STRIPE_KEY, W
 
 // Daily news reminders (and the plaza refresh). Cloud Scheduler calls this every 15 minutes, so the morning reminder goes out
 // right after the news is published (08:00 Dublin) and the evening one at 19:00, every day.
+// 刪除我的帳號與資料: the game calls this after the player confirms (and has signed in again recently).
+// Removes all data tied to the uid with admin rights, then deletes the Google sign-in only if the player's own
+// data is really gone. Answers {ok:true} or {error, failed:[steps]} so the game can say "try again".
+export const deleteAccount = onRequest({ region: REGION, cors: ORIGINS, maxInstances: 5, timeoutSeconds: 300, memory: "512MiB" }, async (req, res) => {
+  if (req.method !== "POST") return res.status(405).json({ error: "method" });
+  const tok = (req.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  const user = await getAuth().verifyIdToken(tok, true).catch(() => null);
+  if (!user) return res.status(401).json({ error: "login" });
+  // a stolen session must not be enough to wipe someone: the sign-in has to be recent (the game re-asks Google first)
+  if (Date.now() / 1000 - (user.auth_time || 0) > 15 * 60) return res.status(403).json({ error: "recent" });
+  const uid = user.uid;
+  let rtdb = null; try { rtdb = getDatabaseWithUrl(RTDB_URL); } catch (e) { logger.warn("delete rtdb", e && e.message); }
+  const { failed, blocking } = await eraseUser(db, uid, { rtdb, log: (step, err) => logger.warn("delete step", { step, err }) });
+  if (blocking.length) { logger.error("delete blocked", { failed }); return res.status(500).json({ error: "partial", failed: blocking }); }
+  // a step about someone else's record failed: note only which steps, so it can be finished by hand (no name kept)
+  if (failed.length) await db.doc("deletions/" + uid).set({ failed, at: FieldValue.serverTimestamp() }).catch(() => {});
+  try { await getAuth().deleteUser(uid); }
+  catch (e) { if (e && e.code !== "auth/user-not-found") { logger.error("delete auth", e && e.message); return res.status(500).json({ error: "auth" }); } }
+  logger.info("account deleted", { steps: failed.length ? "with follow-up" : "complete" });
+  return res.json({ ok: true });
+});
+
 export const newsPush = onSchedule({ schedule: "every 15 minutes", timeZone: "Europe/Dublin", region: REGION, secrets: [VAPID_PRIVATE], timeoutSeconds: 300, retryCount: 0, maxInstances: 1 }, async () => {
   try { await runPlaza(db); } catch (e) { logger.warn("plaza", e && e.message); }   // 廣場: refresh who stands in the plaza (one doc)
   const r = await runPush(db, VAPID_PRIVATE.value(), (...a) => logger.info(...a));
@@ -270,4 +294,6 @@ export const wellExpire = onSchedule({ schedule: "20 0 * * *", timeZone: "Europe
   if (r.length) logger.info("wellExpire", r);
   // 防作弊: same daily run (keeps us within the 3 free Cloud Scheduler jobs)
   try { logger.info("cheatScan", await runCheatScan(db)); } catch (e) { logger.warn("cheatScan", e && e.message); }
+  // privacy policy: old error reports and feedback are removed on schedule
+  try { logger.info("cleanup", await runCleanup(db)); } catch (e) { logger.warn("cleanup", e && e.message); }
 });

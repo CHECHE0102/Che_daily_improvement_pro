@@ -38,5 +38,7 @@ jobs:
           PY
           git add index.html version.json
           git commit -q -m "Bump version for daily content" || true
-          for i in 1 2 3; do git pull --rebase -q origin main && git push origin main && break; sleep 5; done
+          ok=0; for i in 1 2 3; do git pull --rebase -q origin main && git push origin main && ok=1 && break; sleep 5; done
+          # keep the article branch when the articles never reached main, so nothing is lost and the run shows red
+          if [ "$ok" != 1 ]; then echo "::error::Could not push to main after 3 tries; keeping branch $BR"; exit 1; fi
           git push origin --delete "$BR"
