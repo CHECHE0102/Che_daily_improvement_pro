@@ -13,7 +13,7 @@
 import { onRequest } from "firebase-functions/v2/https";
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { runPush } from "./push.js";
-import { runWellDraw, prevMonth } from "./well.js";
+import { runWellDraw, runWellExpire, prevMonth } from "./well.js";
 import { runPlaza } from "./plaza.js";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
@@ -261,4 +261,10 @@ export const newsPush = onSchedule({ schedule: "every 15 minutes", timeZone: "Eu
 export const wellDraw = onSchedule({ schedule: "10 0 1 * *", timeZone: "Europe/Dublin", region: REGION, timeoutSeconds: 120, retryCount: 3, maxInstances: 1 }, async () => {
   const r = await runWellDraw(db, prevMonth());
   logger.info("wellDraw", r);
+});
+
+// 許願池: every day at 00:20 Irish time, prizes not claimed within 7 days go back into the well (next draw's pool).
+export const wellExpire = onSchedule({ schedule: "20 0 * * *", timeZone: "Europe/Dublin", region: REGION, timeoutSeconds: 120, retryCount: 3, maxInstances: 1 }, async () => {
+  const r = await runWellExpire(db);
+  if (r.length) logger.info("wellExpire", r);
 });

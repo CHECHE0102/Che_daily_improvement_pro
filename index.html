@@ -1196,6 +1196,15 @@ img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;
 .well-pool{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;margin:8px 0;background:linear-gradient(135deg,color-mix(in srgb,#2A68B0 16%,transparent),color-mix(in srgb,#3FA65A 12%,transparent));border:1px solid color-mix(in srgb,#2A68B0 35%,transparent)}.well-pool b{display:block;font-size:22px}.well-ic{font-size:34px;line-height:1}
 .well-prizes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0}.well-prize{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 4px;border-radius:12px;border:1px solid #E3B341;background:color-mix(in srgb,#FFE58A 14%,transparent)}.well-prize span{font-size:20px}
 .well-picks{flex-wrap:wrap;gap:6px;margin:6px 0}.well-me{font-weight:700}
+.well-win{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px;border-radius:14px;margin:4px 0 8px;background:linear-gradient(135deg,color-mix(in srgb,#FFE58A 26%,transparent),color-mix(in srgb,#FFC8E6 20%,transparent));border:1.5px solid #E3B341}.well-win>div{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1 1 160px}.well-win small{opacity:.8}.well-win .btn{flex:0 0 auto}
+.well-got{font-weight:700;color:#1F9E74}.well-carry{display:block;margin-top:2px;color:#E3B341;font-weight:700}
+#wellPop .pd-scrim{z-index:72}#wellPop .pd-card{z-index:73}
+.well-pop{background:linear-gradient(180deg,color-mix(in srgb,#FFE58A 22%,var(--card)) 0%,var(--card) 55%);border:2px solid #E3B341}
+.wp-burst{position:relative;width:110px;height:110px;margin:-62px auto 0;border-radius:50%;background:radial-gradient(circle,#FFF6C8 0%,#FFE58A 55%,#E3B341 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}.wp-burst span{font-size:58px;line-height:1}
+.wp-burst i{position:absolute;font-style:normal;font-size:20px;animation:wpTw 1.6s ease-in-out infinite}.wp-burst i:nth-of-type(1){top:-4px;left:2px}.wp-burst i:nth-of-type(2){top:6px;right:-8px;animation-delay:.5s}.wp-burst i:nth-of-type(3){bottom:0;left:-8px;animation-delay:1s}
+@keyframes wpTw{0%,100%{transform:scale(.7);opacity:.5}50%{transform:scale(1.15);opacity:1}}
+.wp-gold{font-size:34px;font-weight:800;color:#C98A00}.wp-days{margin:0;font-weight:700}.well-pop .btn{width:100%}.wp-claim{font-size:17px;padding-top:12px;padding-bottom:12px}
+@media (prefers-reduced-motion:reduce){.wp-burst i{animation:none}}
 .gift-fee{margin:6px 0;font-weight:700}.gift-confirm{border:2px solid var(--fire);border-radius:12px;padding:10px;margin:8px 0;background:color-mix(in srgb,var(--fire) 8%,transparent)}
 .gift-card{border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;margin:8px 0;display:flex;flex-direction:column;gap:6px}.gift-card.pending{border-color:#E3B341}.gift-card.accepted{border-color:#2f9e6e}.gift-doneq{font-weight:600}.gift-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .am-scrim{position:fixed;inset:0;bottom:calc(65px + env(safe-area-inset-bottom,0px));z-index:30;background:rgba(10,16,14,.25);animation:amFade .22s ease-out both}#advMenu.closing .am-scrim{animation:amFadeOut .18s ease-in both}@keyframes amFade{from{opacity:0}}@keyframes amFadeOut{to{opacity:0}}
@@ -4386,7 +4395,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.86";
+const APP_VERSION="2026.11.87";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4992,7 +5001,7 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -9042,13 +9051,20 @@ async function subPortal(){
    During a month players toss gold in: one doc each, well/{YYYY-MM}_{uid} {uid, month, nick, coins, at}; coins only go up (max WELL.maxMonth).
    On the 1st (00:10 Irish time) the wellDraw Cloud Function (functions/well.js) draws WELL.split.length winners from last month,
    weighted by gold tossed, no one twice, and splits the whole pool by WELL.split. It writes wellDraw/{month} (the public result)
-   and wellWin/{month}_{uid} (status "won"); the winner's game collects it once (won -> claimed, in a transaction), like gifts.
+   and wellWin/{month}_{uid} (status "won", expires = draw + 7 days). The winner has to tap 領獎 (won -> claimed, in a transaction):
+   a 恭喜中獎 pop-up opens once a day while the prize waits, and the well card has a claim button too. After 7 days the server
+   marks it "expired" and the gold goes back into the well (wellCarry/{month}, added to the next draw's pool).
    The month is the Irish month from the server clock (loginDay), so changing the phone's clock does nothing. ----- */
 const WELL={min:10, picks:[10,50,100,300], maxMonth:1000, split:[50,30,20]};
-let WELL_IN=null;   // {at, month, prev, list:[{uid,nick,coins}], draw}
+let WELL_IN=null;   // {at, month, prev, list:[{uid,nick,coins}], draw, carry}
+let WELL_WIN=null;  // my prize from last month's draw: {month, gold, rank, exp(ms), status:"won"|"claimed"|"expired"}
 const wellMonth=()=>{ const d=loginDay(); return d?d.slice(0,7):null; };
 const monthBefore=m=>{ let [y,mo]=m.split("-").map(Number); mo--; if(!mo){ mo=12; y--; } return y+"-"+String(mo).padStart(2,"0"); };
-const wellTotal=()=>WELL_IN?WELL_IN.list.reduce((a,b)=>a+b.coins,0):0;
+const wellTotal=()=>WELL_IN?WELL_IN.list.reduce((a,b)=>a+b.coins,0)+(WELL_IN.carry||0):0;
+const wellNow=()=>Date.now()+(SRV_OFF||0);
+const wellExpMs=d=>{ const e=d&&d.expires; return e&&typeof e.toMillis==="function"?e.toMillis():(e?Date.parse(e)||0:0); };
+const wellWinOpen=()=>!!(WELL_WIN&&WELL_WIN.status==="won"&&(!WELL_WIN.exp||wellNow()<WELL_WIN.exp));
+const wellWinDays=()=>WELL_WIN&&WELL_WIN.exp?Math.max(1,Math.ceil((WELL_WIN.exp-wellNow())/864e5)):7;
 const wellMine=()=>{ const me=CLOUD.user&&CLOUD.user.uid, x=WELL_IN&&me&&WELL_IN.list.find(y=>y.uid===me); return x?x.coins:0; };
 function wellShares(total,k){ const p=WELL.split.slice(0,k), sp=p.reduce((a,b)=>a+b,0)||1, out=p.map(x=>Math.floor(total*x/sp)); if(out.length) out[0]+=total-out.reduce((a,b)=>a+b,0); return out; }
 // weighted draw without repeats (the server does the same with a crypto random number)
@@ -9064,23 +9080,67 @@ async function wellLoad(force){
   WELL_IN={...(WELL_IN||{list:[],draw:null}), at:Date.now()};
   if(SRV_OFF==null) await srvSync(); const m=wellMonth(); if(!m){ WELL_IN.err=true; if(S.view==="adv") render(); return; }
   const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, prev=monthBefore(m);
-  try{ const [q,dr]=await Promise.all([fsM.getDocs(fsM.query(fsM.collection(db,"well"),fsM.where("month","==",m),fsM.limit(500))), fsM.getDoc(fsM.doc(db,"wellDraw",prev))]);
+  try{ const [q,dr,cr]=await Promise.all([fsM.getDocs(fsM.query(fsM.collection(db,"well"),fsM.where("month","==",m),fsM.limit(500))), fsM.getDoc(fsM.doc(db,"wellDraw",prev)), fsM.getDoc(fsM.doc(db,"wellCarry",m)).catch(()=>null)]);
     const list=[]; q.forEach(d=>{ const x=safeDoc(d.data()); const c=Math.floor(+x.coins||0); if(x.month===m&&x.uid&&c>0) list.push({uid:String(x.uid), nick:String(x.nick||"").slice(0,16), coins:c}); });
     list.sort((a,b)=>b.coins-a.coins);
     const draw=dr.exists()?safeDoc(dr.data()):null;
-    WELL_IN={at:Date.now(), month:m, prev, list, draw};
-    if(draw&&(draw.winners||[]).some(x=>x.uid===me)) wellClaim(prev); }
+    const carry=cr&&cr.exists()?Math.max(0,Math.floor(+safeDoc(cr.data()).gold||0)):0;
+    WELL_IN={at:Date.now(), month:m, prev, list, draw, carry};
+    if(draw&&(draw.winners||[]).some(x=>x.uid===me)) await wellWinLoad(prev); else if(WELL_WIN&&WELL_WIN.month!==prev) WELL_WIN=null; }
   catch(e){ console.warn("well",e&&e.code); WELL_IN={at:Date.now(), month:m, prev, list:[], draw:null, err:true}; }
   if(S.view==="adv") render(); }
-const WELL_CLAIMING=new Set();
-async function wellClaim(m){ const g=game(); if((g.wellGot||[]).includes(m)||WELL_CLAIMING.has(m)||!CLOUD.fb||!CLOUD.user) return; WELL_CLAIMING.add(m);
-  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, ref=fsM.doc(db,"wellWin",m+"_"+me); let gold=0;
-  const mark=()=>{ g.wellGot=[...(g.wellGot||[]),m].slice(-24); };
+// read my prize for month m (no gold moves until the winner taps 領獎)
+async function wellWinLoad(m){ if(!CLOUD.fb||!CLOUD.user) return; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const sn=await fsM.getDoc(fsM.doc(db,"wellWin",m+"_"+me)); const d=sn.exists()?sn.data():null;
+    WELL_WIN=d&&d.uid===me?{month:m, gold:Math.max(0,Math.floor(+d.gold||0)), rank:+d.rank||1, exp:wellExpMs(d), status:String(d.status||"")}:null;
+    if(WELL_WIN&&WELL_WIN.status==="won"&&!wellWinOpen()) WELL_WIN.status="expired"; }
+  catch(e){ console.warn("well win",e&&e.code); } }
+// on app start: did I win last month's draw? then show the 恭喜中獎 pop-up (once a day, for 7 days, until claimed)
+async function wellWinCheck(){ if(!CLOUD.user||!CLOUD.fb||SANDBOX()) return;
+  if(SRV_OFF==null&&!(await srvSync())) return; const m=wellMonth(); if(!m) return; const prev=monthBefore(m);
+  const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const dr=await fsM.getDoc(fsM.doc(db,"wellDraw",prev)); const D=dr.exists()?safeDoc(dr.data()):null;
+    if(!D||!(D.winners||[]).some(x=>x.uid===me)) return; await wellWinLoad(prev); }
+  catch(e){ console.warn("well check",e&&e.code); return; }
+  wellPopMaybe(); }
+function wellPopMaybe(tries){ if(!wellWinOpen()) return; const g=game(), d=loginDay(); if(!d||g.wellPop===d+"|"+WELL_WIN.month) return;
+  // wait while the welcome / story / another pop-up is on screen
+  if(document.querySelector("#onb,#story,#payDone,#lgPop,.pd-card,.sc-modal")){ if((tries||0)<40) setTimeout(()=>wellPopMaybe((tries||0)+1),3000); return; }
+  g.wellPop=d+"|"+WELL_WIN.month; saveGame(); wellPopShow(); }
+// the app may stay open overnight: check again when it comes back to the screen
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible"&&wellWinOpen()) setTimeout(wellPopMaybe,800); });
+function wellPopShow(){ if(!WELL_WIN) return; let el=document.getElementById("wellPop");
+  if(!el){ el=document.createElement("div"); el.id="wellPop"; document.body.appendChild(el); }
+  const W=WELL_WIN, medal=WELL_MEDAL[W.rank-1]||"🏅", done=W.status==="claimed";
+  el.innerHTML=`<div class="scrim pd-scrim" data-act="${done?"wlpopclose":""}"></div><div class="pd-card well-pop${done?" got":""}" role="dialog" aria-modal="true">
+    <div class="wp-burst" aria-hidden="true"><span>⛲</span><i>✨</i><i>🌟</i><i>✨</i></div>
+    <h2>${done?T("wpGotT"):T("wpT")}</h2>
+    <p class="sm-t muted">${T("wpSub",{m:esc(W.month),r:medal,k:W.rank})}</p>
+    <div class="wp-gold">+🪙 ${W.gold.toLocaleString()}</div>
+    ${done?`<button class="btn" data-act="wlpopclose">${T("wpOk")}</button>`
+      :`<p class="sm-t wp-days">${T("wpDays",{n:wellWinDays()})}</p>
+    <button class="btn wp-claim" data-act="wlclaim" ${WELL_CLAIMING?"disabled":""}>${WELL_CLAIMING?T("wpClaiming"):T("wpClaim",{n:W.gold.toLocaleString()})}</button>
+    <button class="btn ghost" data-act="wlpopclose">${T("wpLater")}</button>`}
+  </div>`; }
+let WELL_CLAIMING=false;
+async function wellClaim(){ if(WELL_CLAIMING||!wellWinOpen()) return;
+  if(WELL_WIN.dev){ WELL_WIN.status="claimed"; toast(T("wellWon",{n:WELL_WIN.gold.toLocaleString()})+" (DEV)"); if(document.getElementById("wellPop")) wellPopShow(); return render(); }   // developer preview: no gold moves
+  if(!CLOUD.fb||!CLOUD.user) return;
+  const g=game(), m=WELL_WIN.month, {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, ref=fsM.doc(db,"wellWin",m+"_"+me); let gold=0;
+  WELL_CLAIMING=true; if(document.getElementById("wellPop")) wellPopShow(); render();
   try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():null;
-      if(!d||d.uid!==me||d.status!=="won") throw new Error("state"); gold=Math.max(0,Math.floor(+d.gold||0)); tx.update(ref,{status:"claimed", claimedAt:new Date().toISOString()}); });
-    g.gold=(g.gold||0)+gold; mark(); saveGame(); toast(T("wellWon",{n:gold.toLocaleString()})); if(typeof sfx==="function") sfx("prize"); }
-  catch(e){ if(e&&e.message==="state"){ mark(); saveGame(); } else console.warn("well claim",e&&(e.code||e.message)); }
-  WELL_CLAIMING.delete(m); if(S.view==="adv") render(); }
+      if(!d||d.uid!==me) throw new Error("state"); if(d.status==="claimed") throw new Error("claimed");
+      const exp=wellExpMs(d); if(d.status!=="won"||(exp&&wellNow()>=exp)) throw new Error("late");
+      gold=Math.max(0,Math.floor(+d.gold||0)); tx.update(ref,{status:"claimed", claimedAt:new Date().toISOString()}); });
+    if(!(g.wellGot||[]).includes(m)){ g.gold=(g.gold||0)+gold; g.wellGot=[...(g.wellGot||[]),m].slice(-24); }
+    WELL_WIN.status="claimed"; saveGame(); toast(T("wellWon",{n:gold.toLocaleString()})); if(typeof sfx==="function") sfx("prize"); }
+  catch(e){ const c=e&&(e.message||e.code);
+    if(c==="claimed"){ WELL_WIN.status="claimed"; }
+    else if(c==="late"||c==="permission-denied"){ WELL_WIN.status="expired"; toast(T("wpLate")); }
+    else { toast(T("wpFail")); console.warn("well claim",c); } }
+  WELL_CLAIMING=false;
+  const el=document.getElementById("wellPop"); if(el){ if(WELL_WIN.status==="claimed") wellPopShow(); else el.remove(); }
+  render(); }
 async function wellToss(){
   const W=S.well||(S.well={n:WELL.picks[1]}), g=game(), n=Math.floor(W.n||0);
   if(W.busy) return; if(!CLOUD.user||!CLOUD.fb) return toast(T("wellLogin"));
@@ -9114,19 +9174,24 @@ function wellCard(){
   const ch=mine?wellChance():0;
   const top=L.slice(0,5).map((x,i)=>`<div class="rw-row${x.uid===me?" well-me":""}"><span>${i+1}. ${esc(x.nick||"?")}${x.uid===me?` <small class="muted">(${T("wellYou")})</small>`:""}</span><b class="sm-t">🪙 ${x.coins.toLocaleString()}</b></div>`).join("");
   const D=WELL_IN.draw, last=D?`<h4>🎊 ${T("wellLast",{m:esc(WELL_IN.prev)})}</h4><p class="muted sm-t">${T("wellCount",{n:(+D.count||0),t:(+D.total||0).toLocaleString()})}</p>${(D.winners||[]).map((w,i)=>`<div class="rw-row${w.uid===me?" well-me":""}"><span>${WELL_MEDAL[(+w.rank||i+1)-1]||"🏅"} ${esc(String(w.nick||"?").slice(0,16))}${w.uid===me?` <small class="muted">(${T("wellYou")})</small>`:""}</span><b class="sm-t">+🪙 ${(+w.gold||0).toLocaleString()}</b></div>`).join("")||`<p class="muted sm-t">${T("wellNoOne")}</p>`}`:"";
+  const WW=WELL_WIN&&WELL_WIN.month===WELL_IN.prev?WELL_WIN:null;
+  const win=!WW?"":WW.status==="won"&&wellWinOpen()?`<div class="well-win"><div><b>🎉 ${T("wcWin",{r:WELL_MEDAL[WW.rank-1]||"🏅",k:WW.rank})}</b><small>${T("wpDays",{n:wellWinDays()})}</small></div><button class="btn" data-act="wlclaim" ${WELL_CLAIMING?"disabled":""}>${WELL_CLAIMING?T("wpClaiming"):T("wpClaim",{n:WW.gold.toLocaleString()})}</button></div>`
+    :WW.status==="claimed"?`<p class="sm-t well-got">✅ ${T("wcGot",{n:WW.gold.toLocaleString()})}</p>`
+    :`<p class="muted sm-t">${T("wcLate",{n:WW.gold.toLocaleString()})}</p>`;
+  const carry=WELL_IN.carry||0;
   const sim=DEV&&S.wellSim?`<div class="gift-confirm"><b>${T("wellSimT")}</b>${S.wellSim.map((x,i)=>`<div>${WELL_MEDAL[i]} ${esc(x.nick||"?")} · +🪙 ${(wellShares(total,S.wellSim.length)[i]||0).toLocaleString()}</div>`).join("")||`<div class="muted">${T("wellEmpty")}</div>`}</div>`:"";
-  return `<section class="card well-card">${head}
-    <div class="well-pool"><span class="well-ic">⛲</span><div><b>🪙 ${total.toLocaleString()}</b><small class="muted">${T("wellPeople",{n:L.length})}${days?` · ${T("wellDays",{n:days})}`:""}</small></div></div>
+  return `<section class="card well-card">${head}${win}
+    <div class="well-pool"><span class="well-ic">⛲</span><div><b>🪙 ${total.toLocaleString()}</b><small class="muted">${T("wellPeople",{n:L.length})}${days?` · ${T("wellDays",{n:days})}`:""}</small>${carry?`<small class="well-carry">${T("wcCarry",{n:carry.toLocaleString()})}</small>`:""}</div></div>
     <div class="well-prizes">${split}</div>
     <p class="sm-t">${mine?T("wellMine",{n:mine.toLocaleString(),m:WELL.maxMonth.toLocaleString()})+` · <b>${T("wellChance",{p:Math.max(1,Math.round(ch*100))})}</b>`:T("wellNone",{m:WELL.maxMonth.toLocaleString()})}</p>
     ${left>0?`<div class="row well-picks">${picks}</div>
       ${W.ask?`<div class="gift-confirm"><b>${T("wellCheck",{n:W.n})}</b><p class="sm-t">${T("wellCheck2")}</p></div>`:""}
       <div class="row"><button class="btn${W.ask?" danger":""}" data-act="wltoss" ${W.busy||W.n>left||W.n>(g.gold||0)?"disabled":""}>${W.ask?T("wellSure",{n:W.n}):T("wellToss",{n:W.n})}</button>${W.ask?`<button class="btn ghost" data-act="wlcancel">${T("cancel")}</button>`:""}</div>`
       :`<p class="muted sm-t">${T("wellMax",{n:WELL.maxMonth})}</p>`}
-    <p class="muted sm-t">${T("wellRule")}</p>
+    <p class="muted sm-t">${T("wellRule2")}</p>
     ${L.length?`<h4>${T("wellTop")}</h4>${top}`:`<p class="muted sm-t">${T("wellEmpty")}</p>`}
     ${last}
-    ${DEV?`<div class="row"><button class="btn ghost sm" data-act="wlsim">${T("wellSim")}</button></div>${sim}`:""}
+    ${DEV?`<div class="row"><button class="btn ghost sm" data-act="wlsim">${T("wellSim")}</button><button class="btn ghost sm" data-act="wlpopdev">${T("wpDev")}</button></div>${sim}`:""}
   </section>`; }
 document.addEventListener("click",e=>{
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act; if(!/^wl/.test(a)) return; e.stopPropagation();
@@ -9136,6 +9201,9 @@ document.addEventListener("click",e=>{
   if(a==="wlcancel"){ W.ask=false; return render(); }
   if(a==="wlreload") return wellLoad(true);
   if(a==="wlsim"&&DEV){ S.wellSim=wellPick((WELL_IN&&WELL_IN.list)||[]); return render(); }
+  if(a==="wlclaim") return wellClaim();
+  if(a==="wlpopclose"){ const el=document.getElementById("wellPop"); if(el) el.remove(); return render(); }
+  if(a==="wlpopdev"&&DEV){ WELL_WIN={month:(WELL_IN&&WELL_IN.prev)||"2026-10", gold:1234, rank:1, exp:wellNow()+5*864e5, status:"won", dev:true}; wellPopShow(); return render(); }
 }, true);
 function viewVault(){
   setTimeout(()=>{ giftLoad(false); if(PAY_IN===null){ PAY_IN=[]; payLoad(); } },0);
@@ -11139,6 +11207,12 @@ Object.assign(STR.hi,{"syName": "अलग कौन?", "sySub": "4–6 खि�
 Object.assign(STR.es,{"syName": "El intruso", "sySub": "De 4 a 6 jugadores. Todos reciben una palabra en inglés parecida, menos el intruso, que tiene otra distinta (y no lo sabe). Por turnos describid vuestra palabra con un adjetivo y luego votad en secreto: el más votado recibe un golpe de todos y pierde 1 corazón. Cada uno tiene 2. Si el intruso se queda sin corazones, ganan los demás; si aguanta hasta el final, ¡gana él!", "syNeed4": "Hacen falta al menos 4 jugadores", "syRoundsSub": "Hasta {n} rondas, 2 corazones cada uno", "syYourWord": "Tu palabra", "syPhSay": "Describir", "syPhTalk": "Hablar", "syPhVote": "Votar", "syPhHit": "Resultado", "syTurn": "Turno de {n}", "syYourTurn": "¡Tu turno! Elige un adjetivo", "syCustom": "Escribir el mío", "syBackOpts": "← Volver a las opciones", "syWaitSay": "Esperando a {n}…", "syWaitNext": "¡Listo! Esperando al siguiente…", "sySkipped": "(no dijo nada)", "syTalkT": "Hora de hablar", "syTalkHint": "Charlad con las frases en inglés de abajo y luego votad", "syVoteT": "¡A votar!", "syVoteHint": "Toca a quien creas que es el intruso (secreto)", "syVoted": "Votos {a}/{b}", "syMyVote": "Votaste a {n}", "syHitT": "¡Todos golpean a {n}! −1 ❤️", "syTie": "¡Empate! Nadie sale herido esta ronda", "syNoVote": "Nadie votó", "syOut": "{n} queda fuera", "syDead": "Estás fuera, pero puedes seguir mirando", "syHistory": "Adjetivos hasta ahora", "syCivWin": "¡Ganan los demás!", "sySpyWin": "¡Gana el intruso!", "syCiv": "La palabra de todos", "sySpyWas": "La palabra de {n}, el intruso", "syRole": "Rol", "syLegend": "Equipo ganador +100, +20 por corazón restante, +15 por cada voto al intruso", "syBoth": "Vale para las dos", "syAdjReview": "Repaso de adjetivos", "syUsed": "Alguien ya lo dijo esta ronda, o tú ya lo usaste", "syNotWord": "No conocemos esa palabra en inglés", "syHasWord": "No puedes decir tu propia palabra", "syShort": "Al menos 3 letras", "syQ0": "¡Creo que es …!", "syQ1": "¡Yo no!", "syQ2": "¡Yo también!", "syQ3": "Mmm… qué raro.", "syQ4": "¡Buena!", "syQ5": "¡Confía en mí!", "syQ6": "No estoy seguro.", "syQ7": "¡Votemos!", "syRound": "Ronda {i} / {n}", "syRoundsQ": "¿Cuántas rondas como máximo?"});
 Object.assign(STR.ja,{"syName": "仲間はずれは誰？", "sySub": "4〜6人。みんな似た英単語をもらいますが、1人だけ違う単語（本人も知らない）。順番に英語の形容詞1つで自分の単語を説明し、匿名で投票。いちばん票の多い人はみんなに攻撃されてハート−1。全員ハート2つ。少数派のハートがなくなればみんなの勝ち、最後まで残れば少数派の勝ち！", "syNeed4": "4人以上必要です", "syRoundsSub": "最大 {n} ラウンド、全員ハート2つ", "syYourWord": "あなたの単語", "syPhSay": "説明", "syPhTalk": "話し合い", "syPhVote": "投票", "syPhHit": "結果", "syTurn": "{n} の番", "syYourTurn": "あなたの番！形容詞を選んでね", "syCustom": "自分で入力", "syBackOpts": "← 選択肢に戻る", "syWaitSay": "{n} を待っています…", "syWaitNext": "OK！次の人を待っています…", "sySkipped": "（何も言わなかった）", "syTalkT": "話し合いタイム", "syTalkHint": "下の英語フレーズで話して、そのあと投票", "syVoteT": "投票！", "syVoteHint": "少数派だと思う人をタップ（匿名）", "syVoted": "投票 {a}/{b}", "syMyVote": "{n} に投票しました", "syHitT": "{n} がみんなに攻撃された！−1 ❤️", "syTie": "同点！このラウンドは誰もダメージなし", "syNoVote": "誰も投票しませんでした", "syOut": "{n} が脱落", "syDead": "脱落しました。観戦は続けられます", "syHistory": "これまでの形容詞", "syCivWin": "みんなの勝ち！", "sySpyWin": "少数派の勝ち！", "syCiv": "みんなの単語", "sySpyWas": "少数派 {n} の単語", "syRole": "役", "syLegend": "勝ったチーム +100、残りハート1つにつき +20、少数派に投票するたび +15", "syBoth": "両方に合う", "syAdjReview": "形容詞の復習", "syUsed": "このラウンドで誰かが言ったか、前にあなたが使いました", "syNotWord": "その英単語は見つかりません", "syHasWord": "自分の単語は言えません", "syShort": "3文字以上", "syQ0": "… だと思う！", "syQ1": "私じゃない！", "syQ2": "私も！", "syQ3": "うーん…あやしい。", "syQ4": "いいね！", "syQ5": "信じて！", "syQ6": "わからないな。", "syQ7": "投票しよう！", "syRound": "ラウンド {i} / {n}", "syRoundsQ": "最大何ラウンド？"});
 Object.assign(STR.ko,{"syName": "누가 다를까?", "sySub": "4~6명. 모두 비슷한 영어 단어를 받지만 한 명만 다른 단어를 받아요(본인도 몰라요). 돌아가며 영어 형용사 하나로 단어를 설명하고 익명 투표: 가장 많이 뽑힌 사람은 모두에게 한 대 맞고 하트 1개를 잃어요. 모두 하트 2개. 라이어 하트가 다 떨어지면 나머지가 이기고, 끝까지 버티면 라이어가 이겨요!", "syNeed4": "최소 4명이 필요해요", "syRoundsSub": "최대 {n}라운드, 모두 하트 2개", "syYourWord": "내 단어", "syPhSay": "설명", "syPhTalk": "토론", "syPhVote": "투표", "syPhHit": "결과", "syTurn": "{n}의 차례", "syYourTurn": "내 차례! 형용사를 골라요", "syCustom": "직접 입력", "syBackOpts": "← 선택지로", "syWaitSay": "{n} 기다리는 중…", "syWaitNext": "완료! 다음 사람을 기다려요…", "sySkipped": "(말 안 함)", "syTalkT": "토론 시간", "syTalkHint": "아래 영어 문장으로 이야기하고 투표해요", "syVoteT": "투표!", "syVoteHint": "라이어라고 생각하는 사람을 눌러요(익명)", "syVoted": "투표 {a}/{b}", "syMyVote": "{n}에게 투표했어요", "syHitT": "{n}이(가) 모두에게 맞았어요! −1 ❤️", "syTie": "동점! 이번 라운드는 아무도 안 다쳐요", "syNoVote": "아무도 투표하지 않았어요", "syOut": "{n} 탈락", "syDead": "탈락했어요. 계속 구경할 수 있어요", "syHistory": "지금까지 나온 형용사", "syCivWin": "나머지 팀 승리!", "sySpyWin": "라이어 승리!", "syCiv": "모두의 단어", "sySpyWas": "라이어 {n}의 단어", "syRole": "역할", "syLegend": "이긴 팀 +100, 남은 하트당 +20, 라이어에게 투표할 때마다 +15", "syBoth": "둘 다 해당", "syAdjReview": "형용사 복습", "syUsed": "이번 라운드에 이미 나왔거나 전에 내가 쓴 말이에요", "syNotWord": "모르는 영어 단어예요", "syHasWord": "내 단어는 말할 수 없어요", "syShort": "3글자 이상", "syQ0": "… 같아!", "syQ1": "나 아니야!", "syQ2": "나도!", "syQ3": "음… 이상한데.", "syQ4": "좋은데!", "syQ5": "날 믿어!", "syQ6": "잘 모르겠어.", "syQ7": "투표하자!", "syRound": "{i} / {n} 라운드", "syRoundsQ": "최대 몇 라운드?"});
+Object.assign(STR.zh,{"wellRule2": "只用遊戲金幣，沒有真錢。開獎在每月 1 號（愛爾蘭時間），中獎的人要按「領獎」才會拿到金幣；7 天內沒領，獎金會回到許願池，加進下一次開獎。", "wpT": "恭喜中獎！", "wpGotT": "領到了！", "wpSub": "你抽中了 {m} 許願池 {r} 第 {k} 名", "wpDays": "還有 {n} 天可以領，沒領會回到許願池", "wpClaim": "領取 🪙 {n}", "wpClaiming": "領取中……", "wpLater": "晚點再領", "wpOk": "太好了", "wpLate": "已經超過 7 天，獎金回到許願池了", "wpFail": "領獎沒成功，請再試一次", "wcWin": "你中了上個月許願池 {r} 第 {k} 名！", "wcGot": "上個月的許願池獎金 🪙 {n} 已經領好了", "wcLate": "上個月的獎金 🪙 {n} 沒在 7 天內領，已經回到許願池。", "wcCarry": "含上期沒領回來的 🪙 {n}", "wpDev": "預覽中獎彈窗（開發者，不會發獎）"});
+Object.assign(STR.en,{"wellRule2": "Game gold only, no real money. The draw is on the 1st of each month (Irish time). Winners must tap Claim to get their gold; prizes not claimed within 7 days go back into the well for the next draw.", "wpT": "You won!", "wpGotT": "Claimed!", "wpSub": "You were drawn in the {m} wishing well: {r} place {k}", "wpDays": "{n} days left to claim, or it goes back into the well", "wpClaim": "Claim 🪙 {n}", "wpClaiming": "Claiming…", "wpLater": "Later", "wpOk": "Great", "wpLate": "More than 7 days passed; the prize went back into the well", "wpFail": "Couldn't claim. Please try again", "wcWin": "You won last month's wishing well: {r} place {k}!", "wcGot": "You've claimed last month's prize of 🪙 {n}", "wcLate": "Last month's prize of 🪙 {n} wasn't claimed within 7 days and went back into the well.", "wcCarry": "includes 🪙 {n} unclaimed from last time", "wpDev": "Preview win pop-up (developer, no prizes)"});
+Object.assign(STR.hi,{"wellRule2": "सिर्फ़ गेम का सोना, असली पैसा नहीं। ड्रॉ हर महीने की 1 तारीख़ (आयरलैंड समय) को। विजेता को सोना पाने के लिए \"लें\" दबाना होगा; 7 दिन में न लिया तो इनाम कुएँ में लौटकर अगले ड्रॉ में जुड़ जाता है।", "wpT": "बधाई हो, आप जीते!", "wpGotT": "मिल गया!", "wpSub": "{m} के इच्छा कुएँ में आप चुने गए: {r} स्थान {k}", "wpDays": "लेने के लिए {n} दिन बाकी, वरना यह कुएँ में लौट जाएगा", "wpClaim": "🪙 {n} लें", "wpClaiming": "ले रहे हैं…", "wpLater": "बाद में", "wpOk": "बढ़िया", "wpLate": "7 दिन बीत गए; इनाम कुएँ में लौट गया", "wpFail": "नहीं ले पाए। फिर कोशिश करें", "wcWin": "आप पिछले महीने का इच्छा कुआँ जीते: {r} स्थान {k}!", "wcGot": "पिछले महीने का इनाम 🪙 {n} आप ले चुके हैं", "wcLate": "पिछले महीने का इनाम 🪙 {n} 7 दिन में नहीं लिया गया, इसलिए कुएँ में लौट गया।", "wcCarry": "पिछली बार का बिना लिया 🪙 {n} शामिल", "wpDev": "जीत पॉप-अप देखें (डेवलपर, इनाम नहीं)"});
+Object.assign(STR.es,{"wellRule2": "Solo oro del juego, nada de dinero real. El sorteo es el día 1 de cada mes (hora de Irlanda). Los ganadores deben tocar Reclamar para recibir el oro; si no lo reclaman en 7 días, vuelve al pozo para el siguiente sorteo.", "wpT": "¡Has ganado!", "wpGotT": "¡Reclamado!", "wpSub": "Te tocó el pozo de {m}: {r} puesto {k}", "wpDays": "Te quedan {n} días para reclamarlo; si no, vuelve al pozo", "wpClaim": "Reclamar 🪙 {n}", "wpClaiming": "Reclamando…", "wpLater": "Más tarde", "wpOk": "¡Genial!", "wpLate": "Pasaron más de 7 días; el premio volvió al pozo", "wpFail": "No se pudo reclamar. Inténtalo de nuevo", "wcWin": "¡Ganaste el pozo del mes pasado: {r} puesto {k}!", "wcGot": "Ya reclamaste el premio del mes pasado: 🪙 {n}", "wcLate": "El premio del mes pasado (🪙 {n}) no se reclamó en 7 días y volvió al pozo.", "wcCarry": "incluye 🪙 {n} sin reclamar de la vez anterior", "wpDev": "Ver ventana de premio (desarrollador, sin premios)"});
+Object.assign(STR.ja,{"wellRule2": "ゲームの金貨だけ、本物のお金は使いません。抽選は毎月1日（アイルランド時間）。当選者は「受け取る」を押すと金貨がもらえます。7日以内に受け取らないと、賞金は泉に戻り次の抽選に加わります。", "wpT": "おめでとう、当選！", "wpGotT": "受け取りました！", "wpSub": "{m} の願いの泉で当選：{r} {k} 位", "wpDays": "受け取り期限まであと {n} 日。過ぎると泉に戻ります", "wpClaim": "🪙 {n} 受け取る", "wpClaiming": "受け取り中…", "wpLater": "あとで", "wpOk": "やった！", "wpLate": "7日を過ぎたため、賞金は泉に戻りました", "wpFail": "受け取れませんでした。もう一度お試しください", "wcWin": "先月の願いの泉で当選：{r} {k} 位！", "wcGot": "先月の賞金 🪙 {n} は受け取り済みです", "wcLate": "先月の賞金 🪙 {n} は7日以内に受け取られず、泉に戻りました。", "wcCarry": "前回の未受け取り 🪙 {n} を含む", "wpDev": "当選ポップアップを見る（開発者・賞品なし）"});
+Object.assign(STR.ko,{"wellRule2": "게임 금화만 사용하고 실제 돈은 없어요. 추첨은 매달 1일(아일랜드 시간). 당첨자는 「받기」를 눌러야 금화를 받아요. 7일 안에 받지 않으면 상금은 샘으로 돌아가 다음 추첨에 더해져요.", "wpT": "축하해요, 당첨!", "wpGotT": "받았어요!", "wpSub": "{m} 소원의 샘 당첨: {r} {k}등", "wpDays": "받을 수 있는 기간 {n}일 남음, 지나면 샘으로 돌아가요", "wpClaim": "🪙 {n} 받기", "wpClaiming": "받는 중…", "wpLater": "나중에", "wpOk": "좋아요", "wpLate": "7일이 지나 상금이 샘으로 돌아갔어요", "wpFail": "받지 못했어요. 다시 시도해 주세요", "wcWin": "지난달 소원의 샘 당첨: {r} {k}등!", "wcGot": "지난달 상금 🪙 {n}을 받았어요", "wcLate": "지난달 상금 🪙 {n}을 7일 안에 받지 않아 샘으로 돌아갔어요.", "wcCarry": "지난번에 받지 않은 🪙 {n} 포함", "wpDev": "당첨 팝업 미리보기 (개발자, 상품 없음)"});
 Object.assign(STR.zh,{"plzNbT": "公告", "plzNbNews": "今日", "plzNbFar": "走近佈告欄才拿得到字", "plzNbTaken": "這個字已經被別人舉走了", "plzNbLift": "舉起字", "plzNbPut": "放回去", "plzNbLook": "查字典中…", "plzNbNoMean": "字典裡還沒有這個字", "plzNbDevT": "廣場佈告欄公告", "plzNbDevSave": "存公告", "plzNbDevNote": "寫英文，玩家可以把每個字舉起來學。留空 = 預設歡迎詞。", "plzNoteGet": "撿音符", "plzNotePut": "放回地上", "plzNoteCarry": "拿到音樂台階梯前面，就會換成這首", "plzNoteHere": "音符放這裡", "plzSongNow": "🎵 現在播放：{s}", "plzSongBy": "🎵 {n} 換了音樂：{s}", "plzMusicOff": "背景音樂關著，到「設定 → 聲音」打開才聽得到", "plzSong_pzWaltz": "豎琴華爾滋", "plzSong_pzLofi": "Lo-fi 咖啡", "plzSong_pzChip": "8-bit 冒險", "plzSong_pzHorn": "愛爾蘭角笛", "plzSong_pzLull": "晚安搖籃曲", "plzZd2_gate": "大佈告欄：走過去把字舉起來學", "plzZd2_band": "撿音符放上音樂台換音樂，也能聽新聞"});
 Object.assign(STR.en,{"plzNbT": "Notice", "plzNbNews": "Today", "plzNbFar": "Walk up to the board to reach the words", "plzNbTaken": "Someone else is holding that word", "plzNbLift": "Lift word", "plzNbPut": "Put back", "plzNbLook": "Looking it up…", "plzNbNoMean": "Not in the dictionary yet", "plzNbDevT": "Plaza notice board", "plzNbDevSave": "Save notice", "plzNbDevNote": "Write it in English; players can lift each word to learn it. Empty = the default welcome.", "plzNoteGet": "Pick up", "plzNotePut": "Put down", "plzNoteCarry": "Carry it to the bandstand steps to play this tune", "plzNoteHere": "Drop notes here", "plzSongNow": "🎵 Now playing: {s}", "plzSongBy": "🎵 {n} changed the music: {s}", "plzMusicOff": "Music is off. Turn it on in Settings → Sound to hear it", "plzSong_pzWaltz": "Harp Waltz", "plzSong_pzLofi": "Lo-fi Café", "plzSong_pzChip": "8-bit Quest", "plzSong_pzHorn": "Irish Hornpipe", "plzSong_pzLull": "Goodnight Lullaby", "plzZd2_gate": "Big notice board: lift the words to learn them", "plzZd2_band": "Bring a note to the bandstand to change the music; today's news too"});
 Object.assign(STR.hi,{"plzNbT": "सूचना", "plzNbNews": "आज", "plzNbFar": "शब्द लेने के लिए बोर्ड के पास जाओ", "plzNbTaken": "यह शब्द किसी और ने उठा रखा है", "plzNbLift": "शब्द उठाओ", "plzNbPut": "वापस रखो", "plzNbLook": "ढूँढ रहे हैं…", "plzNbNoMean": "यह शब्द अभी शब्दकोश में नहीं है", "plzNbDevT": "प्लाज़ा सूचना बोर्ड", "plzNbDevSave": "सूचना सहेजें", "plzNbDevNote": "अंग्रेज़ी में लिखें; खिलाड़ी हर शब्द उठाकर सीख सकते हैं। खाली = डिफ़ॉल्ट स्वागत।", "plzNoteGet": "उठाओ", "plzNotePut": "नीचे रखो", "plzNoteCarry": "इसे बैंडस्टैंड की सीढ़ियों तक ले जाओ, यही धुन बजेगी", "plzNoteHere": "सुर यहाँ रखो", "plzSongNow": "🎵 अभी बज रहा है: {s}", "plzSongBy": "🎵 {n} ने संगीत बदला: {s}", "plzMusicOff": "संगीत बंद है। सुनने के लिए सेटिंग → ध्वनि में चालू करें", "plzSong_pzWaltz": "हार्प वाल्ट्ज़", "plzSong_pzLofi": "लो-फ़ाई कैफ़े", "plzSong_pzChip": "8-बिट सफ़र", "plzSong_pzHorn": "आयरिश हॉर्नपाइप", "plzSong_pzLull": "शुभ रात्रि लोरी", "plzZd2_gate": "बड़ा सूचना बोर्ड: शब्द उठाकर सीखो", "plzZd2_band": "सुर बैंडस्टैंड पर रखकर संगीत बदलो; आज की खबर भी"});
