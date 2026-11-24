@@ -1059,6 +1059,7 @@ body.onb-open{overflow:hidden}
 .pz-hold.w::after{content:"";position:absolute;left:50%;top:100%;margin-left:-1.5px;width:3px;height:9px;background:#1B2421}
 .pz-hold.n{width:38px;height:38px;border-radius:50%;background:var(--c);border:2px solid #1B2421;display:grid;place-items:center;color:#fff;font:900 22px/1 system-ui,sans-serif;box-shadow:0 0 12px var(--c)}
 .pz-holding .pz-bub{bottom:136px}
+.pz-load{position:absolute;inset:0;z-index:40;background:#1B2421;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .28s}.pz-load.out{opacity:0;pointer-events:none}.pz-load b{font:800 22px/1.3 system-ui,sans-serif}.pz-load small{font:600 13px/1.3 system-ui,sans-serif;opacity:.7}.pz-lbar{width:min(220px,60vw);height:8px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}.pz-lbar i{display:block;height:100%;width:0;border-radius:99px;background:#2ECC71;transition:width .15s}#plazaRoom{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}#plazaRoom *{-webkit-touch-callout:none}.pz-big>*{pointer-events:none}.pz-piano,.pz-piano *{touch-action:none;-webkit-user-select:none;user-select:none}#plazaRoom.pz-pi .pz-stage,#plazaRoom.pz-pi .pz-fx,#plazaRoom.pz-pi .pz-tint{visibility:hidden}.pz-ghost{position:fixed!important;left:-9999px!important;top:0;width:1px!important;height:1px!important;overflow:hidden;opacity:0;pointer-events:none}
 .pz-note{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:opacity .3s,transform .3s}
 .pz-note>b{width:46px;height:46px;border-radius:50%;background:var(--c);border:3px solid #1B2421;color:#fff;font:900 28px/1 system-ui,sans-serif;display:grid;place-items:center;box-shadow:0 0 14px var(--c);animation:pzNote 2.2s ease-in-out infinite}
 .pz-note small{margin-top:4px;font:800 12px/1.4 system-ui,sans-serif;background:rgba(255,255,255,.92);color:#1B2421;border-radius:999px;padding:0 8px;white-space:nowrap}
@@ -2159,7 +2160,7 @@ window.addEventListener("unhandledrejection",e=>{ try{ const r=e.reason; if(r&&/
 /* pinch-zoom is allowed everywhere (easier reading) except in the multiplayer games, where quick taps must not zoom the page,
    and in the 小教室 lesson player (zooming its 1080x1920 scaled iframe again and again made iOS run out of memory and reload the page) */
 let VP_LOCK=null;
-function vpApply(){ let lsn=false, plz=false; try{ lsn=!!LSN.on; }catch(_){} try{ plz=!!(ROOM&&!ROOM.away); }catch(_){} const lock=S.view==="play"||lsn||plz; if(lock===VP_LOCK) return; VP_LOCK=lock; const m=document.getElementById("vpMeta");
+function vpApply(){ let lsn=false; try{ lsn=!!LSN.on; }catch(_){} let pz=false; try{ pz=!!ROOM; }catch(_){} const lock=S.view==="play"||lsn||pz; if(lock===VP_LOCK) return; VP_LOCK=lock; const m=document.getElementById("vpMeta");
   if(m) m.setAttribute("content","width=device-width,initial-scale=1,viewport-fit=cover"+(lock?",maximum-scale=1,user-scalable=no":"")); document.body.classList.toggle("vp-lock",lock); }
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>{ if(VP_LOCK) e.preventDefault(); },{passive:false}));   // iOS Safari ignores user-scalable=no
 function renderInner(){
@@ -9612,6 +9613,12 @@ function plzBlur(a,w,h,r){ const t=new Float32Array(w*h), f=new Float32Array(w*h
   for(let y=0;y<h;y++) for(let x=0;x<w;x++){ let s=0; for(let i=-r;i<=r;i++){ const xx=x+i; s+=xx<0||xx>=w?0:a[y*w+xx]; } t[y*w+x]=s*k; }
   for(let y=0;y<h;y++) for(let x=0;x<w;x++){ let s=0; for(let i=-r;i<=r;i++){ const yy=y+i; s+=yy<0||yy>=h?0:t[yy*w+x]; } f[y*w+x]=s*k; }
   return f; }
+// everything an area needs before it is shown: background, the see-through objects, the podium, the walk map (decoded, kept in memory)
+const PLZ_PRE={};
+function plzPreload(zone){ if(PLZ_PRE[zone]) return PLZ_PRE[zone];
+  const urls=[`assets/art/plaza/${zone}.webp`,...(PLZ_OCC[zone]||[]).map(q=>`assets/art/plaza/${q.f}.webp`),...(zone==="fountain"?["assets/art/plaza/podium.webp"]:[])], P={n:urls.length+1, done:0, imgs:[], ok:false};
+  const one=u=>new Promise(ok=>{ const im=new Image(); P.imgs.push(im); im.onload=()=>{ (im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(ok); }; im.onerror=ok; im.src=u; }).then(()=>{ P.done++; });
+  P.p=Promise.all([...urls.map(one), plzMaskLoad(zone).then(()=>{ P.done++; })]).then(()=>{ P.ok=true; }); PLZ_PRE[zone]=P; return P; }
 function plzMaskLoad(zone){ if(PLZ_MASK[zone]) return Promise.resolve(PLZ_MASK[zone]);
   return new Promise(ok=>{ const im=new Image(); im.onload=async()=>{ try{ const c=document.createElement("canvas"); c.width=im.width; c.height=im.height; const x=c.getContext("2d"); x.drawImage(im,0,0);
       const d=x.getImageData(0,0,im.width,im.height).data, a=new Uint8Array(im.width*im.height); for(let i=0;i<a.length;i++) a[i]=d[i*4]>127?1:0;
@@ -9705,6 +9712,11 @@ async function plazaOpen(zone,at){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD
   document.body.appendChild(box); document.body.classList.add("pz-open");
   const stage=box.querySelector(".pz-stage"), world=box.querySelector(".pz-world"); world.style.width=PLZ_W+"px"; world.style.height=PLZ_H+"px"; plzGround(box.querySelector(".pz-ground"),zone);
   ROOM={zone, box, stage, world, ents:new Map(), live:new Map(), rows:(PLAZA.rows||[]), top:PLAZA.top||[], star:PLAZA.star||null, keys:{}, J:null, last:performance.now(), cam:null, sendAt:0, sent:"", db:null, ch:0, want:(at&&at.ch)||0, pick:!!(at&&at.pick), act:Date.now()};
+  // loading screen (CheChe 2026-11-24): the area's pictures and walk map load first, so nothing pops in or stutters while you walk
+  { const pre=plzPreload(zone); if(!pre.ok){ const L=document.createElement("div"), zz=PLZ_ZONES.find(z=>z.k===zone); L.className="pz-load"; L.innerHTML=`<b>${zz.ic} ${T("plzZ_"+zone)}</b><div class="pz-lbar"><i></i></div><small>${T("loading")}</small>`; box.appendChild(L); ROOM.loading=L; const R0=ROOM, bar=L.querySelector("i");
+      const iv=setInterval(()=>{ bar.style.width=Math.round(pre.done/pre.n*100)+"%"; },80);
+      Promise.race([pre.p,new Promise(ok=>setTimeout(ok,8000))]).then(()=>{ clearInterval(iv); bar.style.width="100%"; setTimeout(()=>{ if(R0.loading===L) R0.loading=null; L.classList.add("out"); setTimeout(()=>L.remove(),300);
+        const bn=box.querySelector(".pz-banner"); if(bn){ bn.style.animation="none"; void bn.offsetWidth; bn.style.animation=""; } },120); }); } }
   for(const sp of PLZ_SPOTS[zone]||[]){ const e=document.createElement("div"); e.className="pz-spot"; e.style.cssText=`left:${sp.x}px;top:${sp.y-sp.h}px;z-index:${sp.y+400}`; e.innerHTML=`<b>${sp.ic}</b><span>${T("plzSpot_"+sp.k)}</span>`; world.appendChild(e); }
   if(zone==="gate"){ plzNbBuild(); plzNoticeLoad(); } if(zone==="band") plzNotesBuild(); if(zone==="lawn") plzLawnBuild();
   if(zone==="fountain"){ for(const pd of PLZ_PODS){ const e=document.createElement("div"); e.className="pz-podl"; e.style.cssText=`left:${pd.x+192}px;top:${pd.y-64}px;z-index:${pd.y+400}`; e.textContent=`${pd.ic} ${T("plzPod_"+pd.k)}`; world.appendChild(e); } setTimeout(plzTopsLoad,0); }
@@ -9715,11 +9727,16 @@ async function plazaOpen(zone,at){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD
     e.className="pz-exit"; e.style.cssText=`left:${ex}px;top:${ey}px;z-index:${Math.round(ey)+2000}`; e.innerHTML=`<b>${{n:"▲",s:"▼",w:"◀",e:"▶"}[x.d]}</b>${PLZ_ZONES.find(z=>z.k===x.to).ic} ${T("plzZ_"+x.to)}`; world.appendChild(e); }
   const me=plzMeRow(), sp=PLZ_GEO[zone].sp; let sx=sp[0]*PLZ_U+plzRnd(-60,60), sy=sp[1]*PLZ_U; if(plzBlocked(sx,sy)) sx=sp[0]*PLZ_U; if(at){ [sx,sy]=plzFree(at.x,at.y); }
   ROOM.me=plzEnt({...me,x:sx,y:sy,d:at&&at.face||1},"me"); if(at) ROOM.me.face=at.face||1; ROOM.ents.set(me.id,ROOM.me); ROOM.cam={x:sx,y:sy};
-  plzRebuild(); plzInput(); ROOM.raf=requestAnimationFrame(plzStep); vpApply();   // plaza: no pinch / double-tap zoom
+  plzRebuild(); plzInput(); vpApply(); ROOM.raf=requestAnimationFrame(plzStep);
   plazaLoad(true).then(()=>{ if(!ROOM) return; ROOM.rows=PLAZA.rows||[]; ROOM.top=PLAZA.top||[]; ROOM.star=PLAZA.star||null; plzRebuild(); });
   plzJoin(); }
-function plazaClose(){ const R=ROOM; if(!R) return; plzLawnClose(R); ROOM=null; vpApply(); cancelAnimationFrame(R.raf); clearInterval(R.hb); plzRadioStop(R); plzBackPill(false); if(R.away&&S.battle&&S.battle.plz) S.battle.plz=false; removeEventListener("keydown",R.kd); removeEventListener("keyup",R.ku);
-  try{ if(R.unsub) R.unsub.forEach(f=>f()); if(R.myRef) R.dbM.remove(R.myRef); }catch(e){} R.box.remove(); document.body.classList.remove("pz-open"); if(SND.ctx) musicForView(); }
+function plazaClose(){ const R=ROOM; if(!R) return; plzLawnClose(R); ROOM=null; cancelAnimationFrame(R.raf); clearInterval(R.hb); plzRadioStop(R); plzBackPill(false); if(R.away&&S.battle&&S.battle.plz) S.battle.plz=false; removeEventListener("keydown",R.kd); removeEventListener("keyup",R.ku);
+  if(R.wIn) R.wIn.forEach(([t,f])=>removeEventListener(t,f));
+  try{ if(R.unsub) R.unsub.forEach(f=>f()); if(R.myRef) R.dbM.remove(R.myRef); }catch(e){}
+  // walking into the next area with a finger still on the joystick: iPhone keeps sending that finger's events to the element it first touched,
+  // so the old room is kept (hidden, off screen) until the finger lifts; otherwise the lift is lost and the joystick sticks
+  if(R.keepBox){ R.box.removeAttribute("id"); R.box.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id")); R.box.className="pz-ghost"; setTimeout(()=>R.box.remove(),60e3); } else R.box.remove();
+  document.body.classList.remove("pz-open"); vpApply(); if(SND.ctx) musicForView(); }
 // live part: Realtime Database (loaded only when the room opens)
 async function plzJoin(){ const R=ROOM; try{
     const dbM=PLZ_DBM||await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-database.js`); if(ROOM!==R) return;
@@ -9755,12 +9772,16 @@ async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; cons
 function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"), knob=joy.firstElementChild;
   const rest=()=>{ joy.classList.add("rest"); joy.style.left=R.box.clientWidth/2+"px"; joy.style.top=(R.box.clientHeight-Math.max(96,R.box.clientHeight*.13))+"px"; }; R.joyRest=rest; rest();
   st.addEventListener("pointerdown",ev=>{ if(R.J&&R.J.moved) return; R.J={id:ev.pointerId,x0:ev.clientX,y0:ev.clientY,dx:0,dy:0,moved:false}; R.dragged=false; R.box.querySelector(".pz-acts").hidden=true; });
-  st.addEventListener("pointermove",ev=>{ const J=R.J; if(!J||ev.pointerId!==J.id) return; let dx=ev.clientX-J.x0, dy=ev.clientY-J.y0; const d=Math.hypot(dx,dy);
+  const wIn=R.wIn=[]; const on=(t,f)=>{ addEventListener(t,f,{passive:true}); wIn.push([t,f]); };
+  on("pointermove",ev=>{ const J=R.J; if(ROOM!==R||!J||ev.pointerId!==J.id) return; let dx=ev.clientX-J.x0, dy=ev.clientY-J.y0; const d=Math.hypot(dx,dy);
     if(!J.moved&&d>6){ J.moved=true; R.dragged=true; try{ st.setPointerCapture(ev.pointerId); }catch(e){} joy.classList.remove("rest"); joy.style.display="block"; joy.style.left=J.x0+"px"; joy.style.top=J.y0+"px"; const h=R.box.querySelector(".pz-hint"); if(h) h.style.opacity=0; }
     if(d>45){ J.x0+=dx-dx*45/d; J.y0+=dy-dy*45/d; dx*=45/d; dy*=45/d; joy.style.left=J.x0+"px"; joy.style.top=J.y0+"px"; }
     const f=Math.min(1,Math.max(d,0)/18)/(Math.hypot(dx,dy)||1); J.dx=dx*f; J.dy=dy*f; knob.style.transform=`translate(${dx}px,${dy}px)`; });
-  const end=ev=>{ if(!R.J||ev.pointerId!==R.J.id) return; R.J=null; rest(); knob.style.transform=""; setTimeout(()=>{ R.dragged=false; },0); };
-  st.addEventListener("pointerup",end); st.addEventListener("pointercancel",end);
+  const stop=()=>{ R.J=null; rest(); knob.style.transform=""; setTimeout(()=>{ R.dragged=false; },0); document.querySelectorAll(".pz-ghost").forEach(e=>e.remove()); };
+  const end=ev=>{ if(!R.J||ev.pointerId!==R.J.id) return; stop(); };
+  on("pointerup",end); on("pointercancel",end);
+  on("touchend",ev=>{ if(R.J&&!ev.touches.length) stop(); }); on("touchcancel",ev=>{ if(R.J&&!ev.touches.length) stop(); });
+  on("blur",()=>{ if(R.J) stop(); });
   R.kd=e=>{ if(/INPUT|TEXTAREA/.test(e.target.tagName)) return; R.act=Date.now(); R.keys[e.key.toLowerCase()]=1; if(e.key==="Escape") plazaClose(); }; R.ku=e=>{ R.keys[e.key.toLowerCase()]=0; };
   addEventListener("keydown",R.kd); addEventListener("keyup",R.ku);
   R.box.addEventListener("pointerdown",()=>{ R.act=Date.now(); },true);
@@ -9770,7 +9791,7 @@ function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"
     if(a==="zone"){ const z=b.dataset.k; if(z!==R.zone) plazaOpen(z); else R.box.querySelector(".pz-zones").hidden=true; return; }
     if(a==="line"){ const c=+b.dataset.k; if(c===R.ch){ R.box.querySelector(".pz-zones").hidden=true; return; } if(b.classList.contains("full")) return toast(T("plzLineFullT",{c})); return plzLineGo(c); }
     if(a==="acts"){ const p=R.box.querySelector(".pz-acts"); p.hidden=!p.hidden; return; }
-    if(a==="int"){ const go=()=>setTimeout(()=>{ if(ROOM===R) plzInteract(); },90); b.addEventListener("pointerup",go,{once:true}); return; }   // open the card after the tap ends, so the same tap does not close it
+    if(a==="int"){ if(!R.enc&&!R.piano){ const c=plzCtx(); if(c&&!c.o){ plzCtxGo(c); return; } } const go=()=>setTimeout(()=>{ if(ROOM===R) plzInteract(); },90); b.addEventListener("pointerup",go,{once:true}); return; }   // open the card after the tap ends, so the same tap does not close it
     const hideActs=()=>setTimeout(()=>{ R.box.querySelector(".pz-acts").hidden=true; },300);
     if(a==="act"){ hideActs(); plzDo(R.me,b.dataset.k); plzSend(false,{b:"@"+b.dataset.k, bt:Date.now()}); return; }
     if(a==="emo"){ hideActs(); plzSay(R.me,b.dataset.k); plzSend(false,{b:b.dataset.k, bt:Date.now()}); }
@@ -9797,20 +9818,22 @@ function plzInteract(){ const R=ROOM; if(R.enc||R.piano) return; const c=plzCtx(
 function plzExitCheck(m,ix,iy){ const R=ROOM; if(R.switching) return true;
   for(const x of PLZ_EXITS[R.zone]||[]){ const v=x.d==="n"||x.d==="s", along=v?m.x:m.y, across=v?m.y:m.x, push=x.d==="n"?-iy:x.d==="s"?iy:x.d==="w"?-ix:ix;
     if(along<x.a0-24||along>x.a1+24) continue; const dist=Math.abs(across-x.e);
-    if(dist<300&&!(R.pre||{})[x.to]){ (R.pre=R.pre||{})[x.to]=1; plzMaskLoad(x.to); const im=new Image(); im.src=`assets/art/plaza/${x.to}.webp`; }
+    if(dist<300&&!(R.pre||{})[x.to]){ (R.pre=R.pre||{})[x.to]=1; plzPreload(x.to); }
     if(dist<44&&push>.3){ plzSwitch(x,along); return true; } }
   return false; }
 function plzSwitch(x,along){ const R=ROOM; R.switching=true; const back=(PLZ_EXITS[x.to]||[]).find(y=>y.to===R.zone&&y.d===PLZ_OPP[x.d]);
   const t=Math.max(0,Math.min(1,(along-x.a0)/Math.max(1,x.a1-x.a0))), b=back||{d:PLZ_OPP[x.d],a0:along,a1:along,e:x.d==="n"?PLZ_H-8:x.d==="s"?8:x.d==="w"?PLZ_W-8:8};
   const a=b.a0+t*(b.a1-b.a0), sg=b.d==="n"||b.d==="w"?1:-1, c=b.e+sg*(b.in||80), at=b.d==="n"||b.d==="s"?{x:a,y:c}:{x:c,y:a}; at.face=x.d==="w"?-1:x.d==="e"?1:R.me.face; at.ch=R.ch;
-  const J=R.J&&R.J.moved?{...R.J}:null, keys={...R.keys}, kt=R.box.querySelector(".pz-joy i").style.transform;
+  const keys={...R.keys};
   let f=document.getElementById("pzFade"); if(!f){ f=document.createElement("div"); f.id="pzFade"; document.body.appendChild(f); } void f.offsetWidth; f.classList.add("on");
   setTimeout(()=>{ if(ROOM!==R) { f.classList.remove("on"); return; }
+    // the finger may have lifted during the fade: only carry the joystick over if it is still down
+    const J=R.J&&R.J.moved?{...R.J}:null, kt=R.box.querySelector(".pz-joy i").style.transform; R.keepBox=!!J;
     plazaOpen(x.to,at); const N=ROOM; if(N){ N.keys=keys; if(J){ N.J=J; N.dragged=true; const joy=N.box.querySelector(".pz-joy"); joy.classList.remove("rest"); joy.style.display="block"; joy.style.left=J.x0+"px"; joy.style.top=J.y0+"px"; joy.firstElementChild.style.transform=kt; const h=N.box.querySelector(".pz-hint"); if(h) h.style.opacity=0; } }
     requestAnimationFrame(()=>requestAnimationFrame(()=>f.classList.remove("on"))); },170); }
-function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R.last)/1000); R.last=now; const K=R.keys, m=R.me;
+function plzStep(now){ const R=ROOM; if(!R) return; if(R.piano){ R.last=now; R.raf=requestAnimationFrame(plzStep); return; } const dt=Math.min(.05,(now-R.last)/1000); R.last=now; const K=R.keys, m=R.me;
   let ix=(K.arrowright||K.d?1:0)-(K.arrowleft||K.a?1:0), iy=(K.arrowdown||K.s?1:0)-(K.arrowup||K.w?1:0);
-  if(R.J&&R.J.moved){ ix=R.J.dx; iy=R.J.dy; } if(R.enc){ ix=iy=0; } const mg=Math.hypot(ix,iy); if(mg>1){ ix/=mg; iy/=mg; }
+  if(R.J&&R.J.moved){ ix=R.J.dx; iy=R.J.dy; } if(R.enc||R.loading){ ix=iy=0; } const mg=Math.hypot(ix,iy); if(mg>1){ ix/=mg; iy/=mg; }
   const spd=m.h==="m"?PLZ_LN.spd:m.terr==="water"?130:190; m.vx=ix*spd; m.vy=iy*spd; m.mv=mg>.05; if(m.mv) R.act=Date.now(); const ox=m.x, oy=m.y; plzMove(m,m.vx,m.vy,dt);
   const walked=Math.hypot(m.x-ox,m.y-oy), terr=plzTerr(m.x,m.y); if(m.mv&&!R.enc&&plzExitCheck(m,ix,iy)) return;
   if(terr&&walked>0&&!R.enc&&!plzNoEnc(m)){ R.encD=(R.encD||0)+walked; if(R.encD>=PLZ_ENC.step){ R.encD=0; if(now/1000>(R.encCool||0)&&Math.random()<PLZ_ENC.p) plzEncounter(terr); } }
@@ -9851,7 +9874,7 @@ function plzStep(now){ const R=ROOM; if(!R) return; const dt=Math.min(.05,(now-R
   // anyone standing behind a tree / lamp / bench makes it see-through, so nobody vanishes (CheChe 2026-11-24, option 2)
   const behind=(q,e)=>e.y<plzOccZ(q,e.x)&&e.x>q.x-20&&e.x<q.x+q.w+20&&e.y-80<q.y+q.h&&e.y>q.y;
   for(const o of R.occ||[]){ const q=o.q; let hid=false; for(const e of R.ents.values()) if(e.kind!=="pod"&&behind(q,e)){ hid=true; break; } if(hid!==o.hid){ o.hid=hid; o.el.classList.toggle("pz-see",hid); } }
-  if(R.nb) plzNbSync(); if(R.notes){ if((m.h||"")[0]==="n"&&Math.hypot(m.x-PLZ_STAGE.x,(m.y-PLZ_STAGE.y)*1.3)<PLZ_STAGE.r) plzNotePlace(); plzNotesSync(); }
+  if(R.nb) plzNbSync(); if(R.notes){ if((m.h||"")[0]==="n"&&plzAtStage(m)) plzNotePlace(); plzNotesSync(); }
   const nr=plzNear(), cx0=plzCtx(), spn=cx0?null:plzSpotNear(), far=!nr||Math.hypot(nr.x-m.x,nr.y-m.y)>90, useC=!!cx0, useSp=spn&&far,   /* at the board or a note, the button always lifts / picks up (tap a person to see them) */ ck=useC?cx0.k:"";
   if(nr!==R.nearO||spn!==R.nearS||ck!==R.nearC){ if(R.nearO) R.nearO.el.classList.remove("pz-near"); if(nr) nr.el.classList.add("pz-near"); R.nearO=nr; R.nearS=spn; R.nearC=ck;
     const ib=R.box.querySelector(".pz-intb"); ib.classList.toggle("on",!!(nr||spn||cx0)); ib.innerHTML=useC?`<b>${cx0.ic}</b><span>${cx0.t}</span>`:useSp?`<b>${spn.ic}</b><span>${T("plzSpot_"+spn.k)}</span>`:`<b>👋</b><span>${T("plzInt")}</span>`; }
@@ -10231,7 +10254,9 @@ function plzHoldSet(o){ const h=o.h||"", k=h+"|"+(o.hw||""); if(k===o.holdK) ret
 
 /* ---- 音符點歌 at the bandstand ---- */
 const PLZ_NOTES=[{tr:"pzWaltz",ic:"♪",c:"#E5484D",x:300,y:470},{tr:"pzLofi",ic:"♫",c:"#8E4EC6",x:1236,y:470},{tr:"pzChip",ic:"♪",c:"#3E63DD",x:430,y:900},{tr:"pzHorn",ic:"♫",c:"#F76B15",x:1106,y:900},{tr:"pzLull",ic:"♪",c:"#12A594",x:768,y:190},{tr:"pzJazz",ic:"♫",c:"#B8860B",x:190,y:700},{tr:"pzBossa",ic:"♪",c:"#D6409F",x:1346,y:700},{tr:"pzPenta",ic:"♫",c:"#0090FF",x:560,y:240},{tr:"pzRain",ic:"♪",c:"#5B7BA6",x:976,y:240},{tr:"pzSea",ic:"♫",c:"#0D9488",x:280,y:890},{tr:"pzSamba",ic:"♪",c:"#E5A000",x:1256,y:890},{tr:"pzReel",ic:"♫",c:"#2F9E44",x:1272,y:306}];
-const PLZ_STAGE={x:768, y:800, r:105, nx:768, ny:520};   // drop ring in front of the bandstand steps; nx,ny = where the playing note floats
+const PLZ_STAGE={x:768, y:800, r:105, nx:768, ny:520};
+// at the stage = the ring in front of the steps, or anywhere on the gazebo floor (CheChe 2026-11-24)
+const plzAtStage=(m,pad)=>Math.hypot(m.x-PLZ_STAGE.x,(m.y-PLZ_STAGE.y)*1.3)<PLZ_STAGE.r+(pad||0)||Math.hypot((m.x-768)/215,(m.y-675)/125)<1;   // drop ring in front of the bandstand steps; nx,ny = where the playing note floats
 function plzNotesBuild(){ const R=ROOM; if(!R||R.zone!=="band") return; R.notes=PLZ_NOTES.map((n,i)=>{ const e=document.createElement("div"); e.className="pz-note"; e.style.cssText=`left:${n.x}px;top:${n.y}px;z-index:${n.y};--c:${n.c}`; e.innerHTML=`<b>${n.ic}</b><small>${T("plzSong_"+n.tr)}<em>${plzStarTxt(n.tr)}</em></small>`; R.world.appendChild(e); return e; });
   const d=document.createElement("div"); d.className="pz-drop"; d.style.cssText=`left:${PLZ_STAGE.x}px;top:${PLZ_STAGE.y}px;z-index:${PLZ_STAGE.y-60}`; d.innerHTML=`<span>🎵 ${T("plzNoteHere")}</span>`; R.world.appendChild(d); R.drop=d;
   const s=document.createElement("div"); s.className="pz-snote"; s.style.cssText=`left:${PLZ_STAGE.nx}px;top:${PLZ_STAGE.ny}px;z-index:900`; s.hidden=true; R.world.appendChild(s); R.snote=s;
@@ -10258,19 +10283,21 @@ function plzNotesSync(force){ const R=ROOM; if(!R||!R.notes) return; const tk=pl
    tap (one row), double (two lanes in the same row, hit both) and long (several rows: press and keep holding, every row you hold
    scores). Tapping a white spot or letting a tile pass ends the run. Each tune has a star level (PLZ_STARS) that sets the speed
    and how often doubles and long tiles show up. Best score kept in g.plzPiano. ---- */
-const PLZ_PIANO={lanes:4, rows:4.6};
+const PLZ_PIANO={lanes:4, rows:4.6, half:.5};
 const PLZ_STARS={pzLull:1, pzRain:1, pzWaltz:2, pzLofi:2, town:2, pzBossa:3, pzPenta:3, pzJazz:3, pzSea:3, pzHorn:4, pzSamba:4, pzChip:5, pzReel:5};
 const plzStarsOf=tr=>PLZ_STARS[tr]||2, plzStarTxt=tr=>"★".repeat(plzStarsOf(tr))+"☆".repeat(5-plzStarsOf(tr));
 // speed (rows a second) and tile mix for each star level
-const plzPianoLv=st=>({v0:1.5+st*.35, dv:.025+st*.008, vmax:2.6+st*.85, dbl:[0,.04,.1,.16,.22,.3][st], lng:[0,.55,.5,.45,.4,.35][st]});
+const plzPianoLv=st=>({v0:1.5+st*.35, dv:.025+st*.008, vmax:2.6+st*.85, dbl:[0,0,0,.12,.2,.28][st], lng:[0,.55,.5,.45,.4,.35][st]});
 function plzPianoOpen(){ const R=ROOM; if(!R||R.piano) return; sndInit(); const tk=plzTrack()||"town", tr=TRACKS[tk]||TRACKS.town, st=plzStarsOf(tk);
   const el=document.createElement("div"); el.className="pz-piano"; el.innerHTML=`<div class="pz-pih"><button data-pz="pianox" aria-label="${T("plzBack")}">✕</button><span class="pz-pit"><small>${esc(T("plzSong_"+tk))} <em>${plzStarTxt(tk)}</em></small><b id="pzPiS">0</b></span><small>${T("plzPianoBest",{n:(game().plzPiano||0)})}</small></div><canvas></canvas><div class="pz-pio" hidden></div>`;
-  R.box.appendChild(el); const cv=el.querySelector("canvas");
+  R.box.appendChild(el); R.box.classList.add("pz-pi"); const cv=el.querySelector("canvas");
+  ["touchstart","touchmove","dblclick","contextmenu"].forEach(t=>el.addEventListener(t,e=>{ if(!e.target.closest("button")) e.preventDefault(); },{passive:false}));
   const P=R.piano={el, cv, tr, tk, st, lv:plzPianoLv(st), mel:tr.mel.filter(n=>n[0]), mi:0, ev:[], nextRow:0, off:0, v:0, score:0, on:false, over:false, last:performance.now(), flash:null, holds:{}};
   P.v=P.lv.v0; while(P.nextRow<40) plzPianoEv(P);
   musicDuck(true); plzSay(R.me,"🎹"); plzSend(false,{b:"🎹", bt:Date.now()});
   cv.addEventListener("pointerdown",ev=>{ ev.preventDefault(); try{ cv.setPointerCapture(ev.pointerId); }catch(e){} plzPianoTap(ev); });
   const up=ev=>plzPianoUp(ev.pointerId); cv.addEventListener("pointerup",up); cv.addEventListener("pointercancel",up);
+  cv.addEventListener("pointermove",ev=>{ const h=P.holds[ev.pointerId]; if(!h) return; const r=cv.getBoundingClientRect(); h.t.fy=Math.max(0,(r.height-(ev.clientY-r.top))/(r.height/PLZ_PIANO.rows)); });
   const loop=now=>{ if(ROOM!==R||R.piano!==P) return; plzPianoStep(P,now); P.raf=requestAnimationFrame(loop); }; P.raf=requestAnimationFrame(loop); }
 // next event from the melody: a long note may become a long tile, some notes a double; the first one is always a plain tap
 function plzPianoEv(P){ const n=P.mel[P.mi++%P.mel.length], first=!P.ev.length, prev=P.ev.length?P.ev[P.ev.length-1].tiles.map(t=>t.lane):[];
@@ -10280,23 +10307,37 @@ function plzPianoEv(P){ const n=P.mel[P.mi++%P.mel.length], first=!P.ev.length, 
   else if(!first&&Math.random()<P.lv.dbl){ const a=pick([[0,2],[1,3],[0,3],[0,1],[2,3],[1,2]]); tiles=a.map(l=>({lane:l, len:1})); }
   else tiles=[{lane:pick(free.length?free:[0,1,2,3]), len:1}];
   const len=Math.max(...tiles.map(t=>t.len)); P.ev.push({r0, len, m:n[0], tiles:tiles.map(t=>({...t, hit:0, held:0, done:false}))}); P.nextRow+=len; }
-function plzPianoClose(){ const R=ROOM, P=R&&R.piano; if(!P) return; cancelAnimationFrame(P.raf); P.el.remove(); R.piano=null; musicDuck(false); if(SND.ctx) musicForView(); }
+function plzPianoClose(){ const R=ROOM, P=R&&R.piano; if(!P) return; cancelAnimationFrame(P.raf); P.el.remove(); R.piano=null; R.box.classList.remove("pz-pi"); musicDuck(false); if(SND.ctx) musicForView(); }
 function plzPianoNote(P,m,len,chord){ const c=sndInit(); if(!c) return; const t=c.currentTime+.005, L=P.tr.lead||{}, sq=L.type==="square", d=len>1?.25*len+.2:.42;
   tone(SND.master, t, hz(m), d, {type:sq?"square":"triangle", v:sq?.12:.26, vib:!!L.vib||len>1, a:.006, r:d*.95}); tone(SND.master, t, hz(m-12), d+.08, {type:"sine", v:.1});
   if(chord) tone(SND.master, t, hz(m-5), d, {type:"triangle", v:.14}); }
 const plzPianoCur=P=>P.ev.find(e=>e.tiles.some(t=>!t.hit));   // the lowest event that still has a tile to hit
 function plzPianoTap(ev){ const R=ROOM, P=R&&R.piano; if(!P||P.over) return; const r=P.cv.getBoundingClientRect(), lane=Math.floor((ev.clientX-r.left)/r.width*PLZ_PIANO.lanes), rh=r.height/PLZ_PIANO.rows, yRow=(r.height-(ev.clientY-r.top))/rh+P.off;
+  const now=performance.now(), fy=yRow-P.off;
+  // pressing the dark part of a long tile again (before it ends) is fine: it picks the hold back up. A second quick tap on a tile you just hit is ignored too.
+  for(const F of P.ev){ if(F.r0+F.len<P.off-.5) continue; if(F.r0>P.off+PLZ_PIANO.rows+1) break;
+    for(const x of F.tiles){ if(!x.hit||x.lane!==lane||yRow<F.r0-.4||yRow>F.r0+x.len+.4) continue;
+      if(x.len>1){ if(!x.ok){ x.fy=fy; P.holds[ev.pointerId]={t:x, E:F}; } return; }
+      if(now-x.hit<300) return; } }
   const E=plzPianoCur(P); if(!E) return; const t=E.tiles.find(x=>!x.hit&&x.lane===lane);
-  if(t&&yRow>E.r0-.6&&yRow<E.r0+t.len+.9){ t.hit=performance.now(); P.score++; if(!P.on){ P.on=true; P.last=performance.now(); }
+  if(t&&yRow>E.r0-.6&&yRow<E.r0+t.len+.9){ t.hit=now; P.score++; if(!P.on){ P.on=true; P.last=now; }
     const dbl=E.tiles.length>1; if(!dbl||E.tiles.every(x=>x.hit)) plzPianoNote(P,E.m,t.len,dbl); else if(dbl) plzPianoNote(P,E.m,1,false);
-    if(t.len>1) P.holds[ev.pointerId]={t, E}; else t.done=true;
+    if(t.len>1){ t.fy=fy; P.holds[ev.pointerId]={t, E}; } else t.done=true;
     const s=document.getElementById("pzPiS"); if(s) s.textContent=P.score; return; }
   if(!P.on) return; P.flash={lane, y:Math.floor(yRow)}; plzPianoEnd(P); }
-function plzPianoUp(id){ const P=ROOM&&ROOM.piano, h=P&&P.holds[id]; if(!h) return; h.t.done=true; delete P.holds[id]; }
+// let go after half the tile has passed your finger: it counts (like Piano Tiles, holding on only adds points).
+// let go before half: the tile waits; press its dark part again before its end passes, or the run ends
+function plzPianoUp(id){ const P=ROOM&&ROOM.piano, h=P&&P.holds[id]; if(!h) return; delete P.holds[id]; const {t,E}=h;
+  if(!t.ok&&(P.off+(t.fy||0)-E.r0)/t.len>=PLZ_PIANO.half&&!Object.values(P.holds).some(x=>x.t===t)){ t.ok=true; t.done=true; } }
 function plzPianoStep(P,now){ const dt=Math.min(.05,(now-P.last)/1000); P.last=now;
   if(P.on&&!P.over){ P.v=Math.min(P.lv.vmax,P.lv.v0+P.score*P.lv.dv); P.off+=P.v*dt;
     // holding a long tile: +1 for every row of it that passes while you hold
-    for(const id in P.holds){ const {t,E}=P.holds[id], rows=Math.min(t.len-1,Math.floor(P.off-E.r0)); if(rows>t.held){ P.score+=rows-t.held; t.held=rows; const s=document.getElementById("pzPiS"); if(s) s.textContent=P.score; } if(P.off>=E.r0+t.len){ t.done=true; delete P.holds[id]; } }
+    // a long tile is done once its top end has passed your finger (you held it the whole way)
+    for(const id in P.holds){ const {t,E}=P.holds[id]; let rows=Math.min(t.len-1,Math.floor(P.off-E.r0)); const fin=P.off+(t.fy||0)>=E.r0+t.len-.45; if(fin) rows=t.len-1;
+      if(rows>t.held){ P.score+=rows-t.held; t.held=rows; const s=document.getElementById("pzPiS"); if(s) s.textContent=P.score; } if(fin){ t.ok=true; t.done=true; delete P.holds[id]; } }
+    // let go too early and never pressed again: when its top end reaches the bottom, the run ends
+    for(const F of P.ev){ if(F.r0>P.off) break; if(F.r0+F.len<P.off-1) continue;
+      for(const t of F.tiles) if(t.len>1&&t.hit&&!t.ok&&P.off>=F.r0+t.len-.15&&!Object.values(P.holds).some(h=>h.t===t)){ P.flash={lane:t.lane, y:F.r0+t.len-1, miss:1}; P.off=Math.max(0,F.r0+t.len-1.6); plzPianoEnd(P); return plzPianoDraw(P,now); } }
     const E=plzPianoCur(P); if(E&&E.r0<P.off-.05){ const t=E.tiles.find(x=>!x.hit); P.flash={lane:t.lane, y:E.r0, miss:1}; P.off=Math.max(0,E.r0-.6); plzPianoEnd(P); }
     while(P.nextRow<P.off+14) plzPianoEv(P); }
   plzPianoDraw(P,now); }
@@ -10307,9 +10348,9 @@ function plzPianoDraw(P,now){ const cv=P.cv, W=cv.clientWidth, H=cv.clientHeight
   for(const E of P.ev){ if(E.r0+E.len<P.off-1) continue; if(E.r0>P.off+PLZ_PIANO.rows+1) break;
     for(const t of E.tiles){ const x=t.lane*lw, y=H-(E.r0-P.off+t.len)*rh, h=t.len*rh;
       if(t.hit&&t.len===1){ const a=Math.max(0,1-(now-t.hit)/260); c.fillStyle=`rgba(27,36,33,${(.12+.5*a).toFixed(2)})`; c.fillRect(x+3,y+3,lw-6,h-6); continue; }
-      c.fillStyle="#1B2421"; rr(x+3,y+3,lw-6,h-6,10); c.fill();
+      c.fillStyle=t.ok?"rgba(27,36,33,.35)":"#1B2421"; rr(x+3,y+3,lw-6,h-6,10); c.fill();
       if(t.len>1){ // long tile: a coloured bar fills up while you hold it
-        const p=t.hit?Math.min(1,Math.max(0,(P.off-E.r0)/t.len)):0; c.fillStyle=col; c.globalAlpha=t.hit&&t.done&&p<1?.35:.9; rr(x+lw/2-5,y+h-6-(h-12)*p,10,(h-12)*p,5); c.fill(); c.globalAlpha=1;
+        const p=t.ok?1:t.hit?Math.min(1,Math.max(0,(P.off+(t.fy||0)-E.r0)/t.len)):0; c.fillStyle=col; c.globalAlpha=.9; rr(x+lw/2-5,y+h-6-(h-12)*p,10,(h-12)*p,5); c.fill(); c.globalAlpha=1;
         c.fillStyle="rgba(255,255,255,.75)"; c.beginPath(); c.arc(x+lw/2,y+h-26,9,0,7); c.fill(); c.strokeStyle="rgba(255,255,255,.35)"; c.lineWidth=3; c.beginPath(); c.moveTo(x+lw/2,y+h-40); c.lineTo(x+lw/2,y+16); c.stroke(); }
       else { c.fillStyle=col; c.fillRect(x+3,y+h-12,lw-6,6); }
       if(E.tiles.length>1&&!t.hit){ c.strokeStyle=col; c.lineWidth=3; rr(x+6,y+6,lw-12,h-12,8); c.stroke(); }
@@ -10321,10 +10362,10 @@ function plzPianoEnd(P){ P.over=true; P.holds={}; const R=ROOM, g=game(), best=g
 function plzPianoAgain(){ plzPianoClose(); plzPianoOpen(); }
 // 🎹 high scores per tune (CheChe 2026-11-24): pianoTop/{tune} {a_n,a_s,a_u = all-time name/score/uid, m_n,m_s,m_u,mk = this month}.
 // Shown on a little sign above each note (and by the steps for the town tune, played when no note is on the stage).
-let PLZ_PTOP={at:0, t:{}};
-async function plzPianoTopLoad(force){ if(!CLOUD.fb||(!force&&Date.now()-PLZ_PTOP.at<5*60e3)) return plzPianoTopShow(); PLZ_PTOP.at=Date.now(); const {fsM,db}=CLOUD.fb;
-  await Promise.all(["town",...PLZ_NOTES.map(n=>n.tr)].map(async tr=>{ try{ const d=await fsM.getDoc(fsM.doc(db,"pianoTop",tr)); if(d&&d.exists()) PLZ_PTOP.t[tr]=safeDoc(d.data()); }catch(e){} }));
-  plzPianoTopShow(); }
+let PLZ_PTOP={at:0, t:(()=>{ try{ return JSON.parse(localStorage.getItem("plzPTop")||"{}")||{}; }catch(e){ return {}; } })()};
+async function plzPianoTopLoad(force){ plzPianoTopShow(); if(!CLOUD.fb||(!force&&Date.now()-PLZ_PTOP.at<5*60e3)) return; PLZ_PTOP.at=Date.now(); const {fsM,db}=CLOUD.fb;
+  await Promise.all(["town",...PLZ_NOTES.map(n=>n.tr)].map(async tr=>{ try{ const d=await fsM.getDoc(fsM.doc(db,"pianoTop",tr)); if(d&&d.exists()){ PLZ_PTOP.t[tr]=safeDoc(d.data()); plzPianoTopShow(); } }catch(e){} }));
+  try{ localStorage.setItem("plzPTop",JSON.stringify(PLZ_PTOP.t)); }catch(e){} plzPianoTopShow(); }
 function plzPianoTopHtml(tr){ const x=PLZ_PTOP.t[tr]||{}, mk=monthKey(), m=x.mk===mk&&x.m_s>0;
   return `<span>🏆 ${x.a_s>0?`${esc(x.a_n||"?")} <b>${x.a_s}</b>`:T("plzPianoNone")}</span><span>📅 ${m?`${esc(x.m_n||"?")} <b>${x.m_s}</b>`:T("plzPianoNone")}</span>`; }
 function plzPianoTopShow(){ const R=ROOM; if(!R||R.zone!=="band"||!R.notes) return;
@@ -10345,7 +10386,7 @@ function plzRadioOn(){ try{ const R=ROOM; return !!(R&&!R.away&&R.radio&&!R.radi
 function plzCtx(){ const R=ROOM, m=R.me, h=m.h||"";
   if(R.zone==="gate"&&R.nb){ if(h[0]==="w"){ const o=plzGiveTarget(); if(o) return {k:"give"+o.id, ic:"🎁", t:T("plzGive"), o}; if(plzNbReach()) return {k:"wput", ic:"↩️", t:T("plzNbPut")}; }
     else if(!h){ const i=plzNbTarget(); if(i>=0) return {k:"w"+i, ic:"🙌", t:T("plzNbLift")}; } }
-  if(R.zone==="band"){ const i=plzNoteNear(); if(i>=0) return {k:"n"+i, ic:PLZ_NOTES[i].ic, t:T("plzNoteGet")}; if(!h&&Math.hypot(m.x-PLZ_STAGE.x,(m.y-PLZ_STAGE.y)*1.3)<PLZ_STAGE.r+20) return {k:"piano", ic:"🎹", t:T("plzPiano")}; }
+  if(R.zone==="band"){ const i=plzNoteNear(); if(i>=0) return {k:"n"+i, ic:PLZ_NOTES[i].ic, t:T("plzNoteGet")}; if(!h&&plzAtStage(m,20)) return {k:"piano", ic:"🎹", t:T("plzPiano")}; }
   if(R.lawn) return plzLawnCtx();
   return null; }
 function plzCtxGo(c){ if(c.lawn) return plzLawnGo(c); if(c.o) return plzGive(c.o); if(c.k==="piano") return plzPianoOpen(); if(c.k==="wput") return plzWordPut(); if(c.k[0]==="w") return plzWordLift(+c.k.slice(1)); if(c.k[0]==="n") return plzNoteGet(+c.k.slice(1)); }
