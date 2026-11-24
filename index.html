@@ -10125,7 +10125,7 @@ function plzNotesSync(force){ const R=ROOM; if(!R||!R.notes) return; const tk=pl
    tap (one row), double (two lanes in the same row, hit both) and long (several rows: press and keep holding, every row you hold
    scores). Tapping a white spot or letting a tile pass ends the run. Each tune has a star level (PLZ_STARS) that sets the speed
    and how often doubles and long tiles show up. Best score kept in g.plzPiano. ---- */
-const PLZ_PIANO={lanes:4, rows:4.6};
+const PLZ_PIANO={lanes:4, rows:4.6, half:.5};
 const PLZ_STARS={pzLull:1, pzRain:1, pzWaltz:2, pzLofi:2, town:2, pzBossa:3, pzPenta:3, pzJazz:3, pzSea:3, pzHorn:4, pzSamba:4, pzChip:5, pzReel:5};
 const plzStarsOf=tr=>PLZ_STARS[tr]||2, plzStarTxt=tr=>"★".repeat(plzStarsOf(tr))+"☆".repeat(5-plzStarsOf(tr));
 // speed (rows a second) and tile mix for each star level
@@ -10167,7 +10167,10 @@ function plzPianoTap(ev){ const R=ROOM, P=R&&R.piano; if(!P||P.over) return; con
     if(t.len>1){ t.fy=fy; P.holds[ev.pointerId]={t, E}; } else t.done=true;
     const s=document.getElementById("pzPiS"); if(s) s.textContent=P.score; return; }
   if(!P.on) return; P.flash={lane, y:Math.floor(yRow)}; plzPianoEnd(P); }
-function plzPianoUp(id){ const P=ROOM&&ROOM.piano, h=P&&P.holds[id]; if(!h) return; delete P.holds[id]; }   // let go early: the tile waits; press its dark part again before its end passes, or the run ends
+// let go after half the tile has passed your finger: it counts (like Piano Tiles, holding on only adds points).
+// let go before half: the tile waits; press its dark part again before its end passes, or the run ends
+function plzPianoUp(id){ const P=ROOM&&ROOM.piano, h=P&&P.holds[id]; if(!h) return; delete P.holds[id]; const {t,E}=h;
+  if(!t.ok&&(P.off+(t.fy||0)-E.r0)/t.len>=PLZ_PIANO.half&&!Object.values(P.holds).some(x=>x.t===t)){ t.ok=true; t.done=true; } }
 function plzPianoStep(P,now){ const dt=Math.min(.05,(now-P.last)/1000); P.last=now;
   if(P.on&&!P.over){ P.v=Math.min(P.lv.vmax,P.lv.v0+P.score*P.lv.dv); P.off+=P.v*dt;
     // holding a long tile: +1 for every row of it that passes while you hold
