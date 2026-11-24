@@ -48,7 +48,8 @@ jobs:
           git add -A lessons/audio lessons/index.json
           if git diff --cached --quiet; then echo "no audio changes"; else
             git commit -qm "Update lesson audio"
-            for i in 1 2 3; do git pull --rebase -q origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && break; sleep 5; done
+            ok=0; for i in 1 2 3; do git pull --rebase -q origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME" && ok=1 && break; sleep 5; done
+            [ "$ok" = 1 ] || { echo "::error::Could not push lesson audio after 3 tries"; exit 1; }
           fi
       - name: Pick videos
         id: pick
