@@ -4417,7 +4417,7 @@ function devPanel(){
     ${devErrHtml()}
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.94";
+const APP_VERSION="2026.11.95";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5280,7 +5280,16 @@ function lookCard(r){ if(!r) return; const me=r.id===(CLOUD.user&&CLOUD.user.uid
     <h2>${/^[A-Z]{2}$/.test(r.flag||"")?flagOf(r.flag)+" ":""}${esc(r.name||"?")}</h2>
     <div class="muted sm-t">Lv ${r.lv||1} · ${T("rkPower")} ${r.power||0} · ${T("rkConq",{n:r.conq||0})}</div>
     ${L?`<div class="rk-gear"><div><small class="muted">${T("weapon")}</small>${gear(L.w,L.ws)}</div><div><small class="muted">${T("armor")}</small>${gear(L.a,L.as)}</div></div>`:`<p class="muted sm-t">${T("rkNoLook")}</p>`}
+    ${!me&&r.id&&CLOUD.user?`<button class="btn sm ghost rk-report" data-report="${esc(r.id)}" data-rn="${esc(String(r.name||"").slice(0,16))}">🚩 ${T("rptNick")}</button>`:""}
     <button class="btn" data-act="rklookclose">${T("genYes")}</button></div>`; }
+// report a player's name (it is the only text players choose themselves); lands in the dev panel's feedback list as type "report"
+async function reportNick(uid,name){ if(!CLOUD.fb||!CLOUD.user) return toast(T("rkNeedLogin"));
+  let done={}; try{ done=JSON.parse(localStorage.getItem("che-pro-rpt")||"{}")||{}; }catch(e){} if(done[uid]) return toast(T("rptDone"));
+  const g=game(), d={type:"report", msg:`暱稱檢舉 name report: "${name}" uid=${uid}`.slice(0,1000), nick:g.nick||"", lv:Math.max(1,Math.min(99,g.lv|0||1)), lang:LANG, uid:CLOUD.user.uid, at:new Date().toISOString()};
+  try{ const {fsM,db}=CLOUD.fb; await fsM.setDoc(fsM.doc(db,"feedback",Date.now()+"-"+Math.random().toString(36).slice(2,8)), d);
+    done[uid]=1; try{ localStorage.setItem("che-pro-rpt",JSON.stringify(done)); }catch(e){} toast(T("rptThanks")); }
+  catch(e){ console.warn("report",e&&e.code); toast(T("fbFail")); } }
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-report]"); if(!b) return; e.stopPropagation(); b.disabled=true; reportNick(b.dataset.report,b.dataset.rn||""); }, true);
 document.addEventListener("click",e=>{ const t=e.target.closest('[data-act="rklook"],[data-act="rklookclose"]'); if(!t) return; e.stopPropagation();
   if(t.dataset.act==="rklook") return rkLookOpen(+t.dataset.k); const el=document.getElementById("rkLook"); if(el) el.remove(); }, true);
 function viewRank(){
@@ -9613,6 +9622,13 @@ const PLZ_EXITS={fountain:[{d:"n",a0:440,a1:1092,e:8,to:"band",sg:[530,118]},{d:
   band:[{d:"s",a0:712,a1:824,e:1144,to:"fountain"}], gate:[{d:"n",a0:716,a1:816,e:208,to:"fountain",in:170}], pond:[{d:"e",a0:740,a1:780,e:1532,to:"fountain"}], lawn:[{d:"w",a0:700,a1:932,e:8,to:"fountain"}]};
 const PLZ_OPP={n:"s",s:"n",w:"e",e:"w"};
 const PLZ_EMO=["👋","😄","🔥","📚","👍","☕"];
+// speech bubbles travel as short codes, never as text, so a changed client cannot put its own words above a head
+// (the Realtime Database rule only accepts these codes): @act, e<emoji>, m<mark>, s<quick phrase>, p<piano score>
+const PLZ_MARK=["👋","✊","❗","🎧","🎵","🎹","🏆","📖","⚔️","🌠","😊","🎁"];
+function plzBEnc(t){ t=String(t||""); if(/^@(jump|dance|sit|spin)$/.test(t)) return t; let i=PLZ_EMO.indexOf(t); if(i>=0) return "e"+i; i=PLZ_MARK.indexOf(t); if(i>=0) return "m"+i;
+  i=PLZ_SAY.findIndex(x=>x[0]===t); if(i>=0) return "s"+i; const m=/^🎹 (\d{1,7})$/.exec(t); return m?"p"+m[1]:""; }
+function plzBDec(c){ c=String(c||""); if(/^@(jump|dance|sit|spin)$/.test(c)) return c; const m=/^([emsp])(\d{1,7})$/.exec(c); if(!m) return ""; const i=+m[2];
+  if(m[1]==="p") return "🎹 "+i; const x=m[1]==="e"?PLZ_EMO[i]:m[1]==="m"?PLZ_MARK[i]:(PLZ_SAY[i]||[])[0]; return x||""; }
 const PLZ_ACTS=[{k:"jump",ic:"🦘",t:.7},{k:"dance",ic:"💃",t:2.6},{k:"sit",ic:"🪑",t:6},{k:"spin",ic:"🌀",t:.9}];   // actions everyone in the room sees (sent as b:"@jump")
 let ROOM=null, PLZ_DBM=null;   // PLZ_DBM: a stand-in database module for tests
 const plzRnd=(a,b)=>a+Math.random()*(b-a);
@@ -9769,7 +9785,7 @@ async function plzJoin(){ const R=ROOM; try{
     await dbM.onDisconnect(R.myRef).remove(); await plzSend(true);
     const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
         const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
-        if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); if(v.g||v.gv) plzGrabSeen(v,me); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; if(v.b[0]==="@") plzDo(o,v.b.slice(1)); else plzSay(o,v.b); } } };
+        if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); if(v.g||v.gv) plzGrabSeen(v,me); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; const bt=plzBDec(v.b); if(bt[0]==="@") plzDo(o,bt.slice(1)); else if(bt) plzSay(o,bt); } } };
     R.unsub=[dbM.onChildAdded(room,up), dbM.onChildChanged(room,up), dbM.onChildRemoved(room,sn=>{ if(!ROOM) return; R.live.delete(sn.key); const o=R.ents.get(sn.key); if(o&&o.kind==="live"){ o.el.remove(); if(o.edge) o.edge.remove(); R.ents.delete(sn.key); } plzRebuild(); })];
     if(R.zone==="lawn") plzLawnJoin(dbM,db);
     R.hb=setInterval(()=>{ if(ROOM!==R) return clearInterval(R.hb); if(R.away&&Date.now()-R.away.at>15*60e3) return plazaClose();
@@ -9777,7 +9793,7 @@ async function plzJoin(){ const R=ROOM; try{
       plzSend(true); },15e3);
     plzRebuild();
   }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
-async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
+async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; if(extra&&"b" in extra){ const b=plzBEnc(extra.b); if(!b) return; extra={...extra, b}; } const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
   const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
   const pos={x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv};
   const core={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, h:m.h||"", hw:(m.hw||"").slice(0,18), ...(m.pt?{pn:m.pn|0, pt:m.pt}:{}), ...(m.g&&t-m.g.t<8000?{g:m.g}:{}), ...(m.gv&&t-m.gv.t<8000?{gv:m.gv}:{})};
@@ -11473,6 +11489,12 @@ Object.assign(STR.hi,{"plzMowLbl": "घास काटने की मशी�
 Object.assign(STR.es,{"plzMowLbl": "Cortacésped", "plzMowT": "¡Toca rápido en cualquier parte para coger el cortacésped!", "plzMowGo": "¡A cortar! Te bajas en {s} s", "plzMowLost": "{n} cogió el cortacésped primero", "plzMowHop": "Bajar", "plzMowEnd": "Se acabó el tiempo, te bajaste del cortacésped", "plzSeedLbl": "Plantones", "plzSeedGet": "Coger plantones", "plzSeedWait": "Los plantones aún crecen, vuelve en {s} s", "plzSeedGot": "¡{n} plantones! Mientras los llevas no salen bestias", "plzSeedDone": "¡Todo plantado! Vuelven las bestias en la hierba", "plzSeedDrop": "Tirar plantones", "plzSeedDropped": "Plantones tirados. Vuelven las bestias en la hierba", "plzPlant": "Plantar", "plzPlantNo": "Aquí no se puede plantar", "plzPlantHas": "Aquí ya hay hierba", "plzPlantFull": "El césped de esta línea está lleno, espera al cortacésped"});
 Object.assign(STR.ja,{"plzMowLbl": "芝刈り機", "plzMowT": "画面のどこでも連打して芝刈り機を取れ！", "plzMowGo": "出発！{s} 秒で自動で降ります", "plzMowLost": "{n} が先に芝刈り機を取った", "plzMowHop": "降りる", "plzMowEnd": "時間切れ、芝刈り機から降りました", "plzSeedLbl": "苗", "plzSeedGet": "苗をもらう", "plzSeedWait": "苗はまだ育っています。{s} 秒後にまた来てね", "plzSeedGot": "苗を {n} 本ゲット！持っている間は野生のモンスターに会いません", "plzSeedDone": "植え終わった！草むらでまたモンスターに会います", "plzSeedDrop": "苗を捨てる", "plzSeedDropped": "苗を捨てました。草むらでまたモンスターに会います", "plzPlant": "植える", "plzPlantNo": "ここには植えられません", "plzPlantHas": "ここにはもう草があります", "plzPlantFull": "このラインの芝生はいっぱい。芝刈り機を待とう"});
 Object.assign(STR.ko,{"plzMowLbl": "잔디깎이", "plzMowT": "화면 아무 곳이나 연타해서 잔디깎이를 잡아!", "plzMowGo": "출발! {s}초 후 자동으로 내려요", "plzMowLost": "{n}님이 먼저 잔디깎이를 잡았어요", "plzMowHop": "내리기", "plzMowEnd": "시간 끝, 잔디깎이에서 내렸어요", "plzSeedLbl": "모종", "plzSeedGet": "모종 받기", "plzSeedWait": "모종이 아직 자라는 중, {s}초 후에 다시 와요", "plzSeedGot": "모종 {n}개 획득! 들고 있는 동안 야생 몬스터를 만나지 않아요", "plzSeedDone": "다 심었어요! 풀숲에서 다시 몬스터를 만나요", "plzSeedDrop": "모종 버리기", "plzSeedDropped": "모종을 버렸어요. 풀숲에서 다시 몬스터를 만나요", "plzPlant": "심기", "plzPlantNo": "여기는 심을 수 없어요", "plzPlantHas": "여기는 이미 풀이 있어요", "plzPlantFull": "이 라인의 잔디가 꽉 찼어요, 잔디깎이를 기다려요"});
+Object.assign(STR.zh,{"rptNick": "檢舉這個暱稱", "rptThanks": "謝謝，我們會看看這個暱稱", "rptDone": "你已經檢舉過這個玩家了"});
+Object.assign(STR.en,{"rptNick": "Report this name", "rptThanks": "Thanks, we'll take a look at this name", "rptDone": "You already reported this player"});
+Object.assign(STR.hi,{"rptNick": "इस नाम की शिकायत करें", "rptThanks": "धन्यवाद, हम इस नाम को देखेंगे", "rptDone": "आप इस खिलाड़ी की शिकायत पहले ही कर चुके हैं"});
+Object.assign(STR.es,{"rptNick": "Denunciar este nombre", "rptThanks": "Gracias, revisaremos este nombre", "rptDone": "Ya denunciaste a este jugador"});
+Object.assign(STR.ja,{"rptNick": "この名前を報告", "rptThanks": "ありがとう、この名前を確認します", "rptDone": "このプレイヤーはもう報告済みです"});
+Object.assign(STR.ko,{"rptNick": "이 이름 신고", "rptThanks": "고마워요, 이 이름을 확인할게요", "rptDone": "이미 신고한 플레이어예요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
