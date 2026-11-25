@@ -4563,7 +4563,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.113";
+const APP_VERSION="2026.11.114";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5173,6 +5173,22 @@ Object.assign(STR.en,{acctTitle:"Cloud save", acctOff:"Sign in to save your word
 Object.assign(STR.hi,{acctTitle:"क्लाउड सेव", acctOff:"साइन इन करें ताकि आपके शब्द, क्विज़ और खेल की प्रगति क्लाउड में सहेजी जाए। फ़ोन बदलने या ब्राउज़र डेटा मिटाने पर भी कुछ नहीं खोएगा, और साइन इन सिर्फ़ एक बार करना है।", signIn:"Google से साइन इन करें", signOut:"साइन आउट", signedAs:"{n} के रूप में साइन इन", synced:"क्लाउड में सहेजा गया", syncing:"सहेजा जा रहा है…", syncFail:"क्लाउड से कनेक्ट नहीं हो सका। प्रगति इस फ़ोन पर है और ऑनलाइन होने पर सिंक होगी।", loginFail:"साइन इन पूरा नहीं हुआ। फिर कोशिश करें।", merged:"इस फ़ोन की प्रगति क्लाउड में जोड़ दी गई", signedOut:"साइन आउट हो गया। प्रगति इस फ़ोन पर बनी है।", cloudOff:"अभी क्लाउड सेवा उपलब्ध नहीं है", acctShort:"प्रगति सहेजने के लिए साइन इन करें"});
 Object.assign(STR.es,{acctTitle:"Guardado en la nube", acctOff:"Inicia sesión para guardar tus palabras, tests y partida en la nube. Si cambias de móvil o borras los datos del navegador no perderás nada, y solo tienes que iniciar sesión una vez.", signIn:"Iniciar sesión con Google", signOut:"Cerrar sesión", signedAs:"Sesión iniciada: {n}", synced:"Guardado en la nube", syncing:"Guardando…", syncFail:"No se pudo conectar con la nube. Tu progreso está en este móvil y se sincronizará cuando haya conexión.", loginFail:"No se completó el inicio de sesión. Inténtalo de nuevo.", merged:"El progreso de este móvil se ha unido a tu partida en la nube", signedOut:"Sesión cerrada. Tu progreso sigue en este móvil.", cloudOff:"El servicio en la nube no está disponible ahora", acctShort:"Inicia sesión para guardar"});
 
+/* App Check renders one invisible reCAPTCHA widget. Some browsers (e.g. with extensions that also load reCAPTCHA) fire its ready
+   callback twice, so the SDK tried to render into the same box again ("reCAPTCHA has already been rendered in this element").
+   Load reCAPTCHA once ourselves and make render() return the existing widget for a box that already has one.
+   Resolves false if reCAPTCHA can't load (blocked/offline): App Check is skipped for this visit (it only monitors for now). */
+function acPrep(){ return new Promise(res=>{ let done=false;
+  const fin=ok=>{ if(done) return; done=true;
+    if(ok){ try{ const g=window.grecaptcha&&window.grecaptcha.enterprise; if(g&&typeof g.render==="function"&&!g.render._bbOnce){ const orig=g.render, ids=new Map();
+      const once=function(el,opt){ if(ids.has(el)) return ids.get(el); const id=orig.call(g,el,opt); ids.set(el,id); return id; };
+      once._bbOnce=1; g.render=once; } }catch(e){} }
+    res(!!ok); };
+  const go=()=>{ try{ window.grecaptcha.enterprise.ready(()=>fin(true)); }catch(e){ fin(false); } };
+  if(window.grecaptcha&&window.grecaptcha.enterprise&&window.grecaptcha.enterprise.ready) go();
+  else { let sc=document.querySelector('script[src^="https://www.google.com/recaptcha/enterprise.js"]');
+    if(!sc){ sc=document.createElement("script"); sc.src="https://www.google.com/recaptcha/enterprise.js"; sc.async=true; document.head.appendChild(sc); }
+    sc.addEventListener("load",go); sc.addEventListener("error",()=>fin(false)); }
+  setTimeout(()=>fin(false),10000); }); }
 const CLOUD={ready:false, user:null, status:"idle", fb:null, dirtyWords:new Set(), delWords:new Set(), dirtyMain:false, timer:null};
 async function cloudInit(){
   try{
@@ -5182,7 +5198,7 @@ async function cloudInit(){
       import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-firestore.js`)]);
     const app=appM.initializeApp(FB_CONFIG);
     if(APPCHECK_KEY&&/^(binbindaily\.com|www\.binbindaily\.com|binbin-daily\.pages\.dev|cheche0102\.github\.io)$/.test(location.hostname)){
-      try{ const acM=await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-app-check.js`); acM.initializeAppCheck(app,{provider:new acM.ReCaptchaEnterpriseProvider(APPCHECK_KEY), isTokenAutoRefreshEnabled:true}); }
+      try{ const acM=await import(`https://www.gstatic.com/firebasejs/${FB_V}/firebase-app-check.js`); if(await acPrep()) acM.initializeAppCheck(app,{provider:new acM.ReCaptchaEnterpriseProvider(APPCHECK_KEY), isTokenAutoRefreshEnabled:true}); }
       catch(e){ console.warn("appcheck",e&&e.message); } }
     const auth=authM.getAuth(app);
     const db=fsM.getFirestore(app);
