@@ -9737,7 +9737,7 @@ const PLZ_U=2.56, PLZ_GEO={
   band:{w:[{e:[300,225,268,200]},{r:[276,0,326,40]},{r:[276,410,326,450]}], s:[{e:[300,205,86,92]}], sp:[300,395]},
   fountain:{w:[{r:[0,135,600,312]},{r:[182,0,420,450]}], s:[{e:[300,224,56,38]},{e:[300,66,70,16]}], sp:[300,385]},
   lawn:{w:[{e:[300,238,262,195]},{e:[505,365,62,30]}], s:[], sp:[300,380]}};
-const PLZ_PODIUM=[{x:768,y:157,m:"🥇"},{x:667,y:181,m:"🥈"},{x:869,y:191,m:"🥉"}];   // fountain area only, top of the path
+const PLZ_PODIUM=[{x:766,y:161,m:"🥇"},{x:646,y:185,m:"🥈"},{x:886,y:195,m:"🥉"}];   // fountain area only, top of the path
 // four podiums in the fountain garden (CheChe 2026-11-24): power at the top of the path, IELTS west, TOEIC east, reading south.
 // x,y = top-left of the podium picture (384x176); each spot stands where PLZ_PODIUM stands on the first one
 const PLZ_PODS=[{k:"power",ic:"⚔️",x:576,y:136},{k:"ielts",ic:"🎓",x:24,y:340},{k:"toeic",ic:"💼",x:1128,y:340},{k:"read",ic:"📖",x:576,y:890}];
@@ -9852,7 +9852,7 @@ function plzSpot(){ const v=plzView();
 // The painted ground is a plain <img>, not a canvas (CheChe 2026-11-25 "破圖"): iPhone Safari caps the memory of all canvases together,
 // and once the plaza, lawn and fight canvases fill it a new canvas silently stays blank, so the ground showed as plain green.
 function plzGround(el,zone){ el.src=`assets/art/plaza/${zone}.webp`;
-  // podium: a painted three-step stand (assets/art/plaza/podium.webp, 384x176 world px), lying on the ground under everyone
+  // podium: Codex's three-step stand (assets/art/plaza/podium.webp, 384x176 world px; PLZ_PODIUM = the middle of each top), lying on the ground under everyone
   if(zone==="fountain"){ let at=el; for(const pd of PLZ_PODS){ const im=document.createElement("img"); im.className="pz-podimg"; im.alt=""; im.draggable=false; im.src="assets/art/plaza/podium.webp"; im.style.cssText=`left:${pd.x}px;top:${pd.y}px`; at.after(im); at=im; } } }
 // one person on the map; kind: me | live | off | pod
 function plzEnt(p,kind){ const R=ROOM, e=document.createElement("div"); e.className="pz-ent pz-"+kind+(R.star&&R.star.id===p.id?" pz-star":"");
