@@ -158,6 +158,10 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .zh-sum{font-size:14px;color:var(--muted);border-left:3px solid var(--gorse);padding-left:10px}
 .article{font-family:var(--f-read);font-size:20px;line-height:1.62;max-width:65ch}
 .article p{margin:0 0 1em}
+/* No text selection / iOS long-press callout anywhere, except reading passages and text fields */
+html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+.art-head h1,.zh-sum,.article:not(.co-text),.ie-passage,.tk-passage p{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 .w{border-radius:3px;padding:0 1px;margin:0 -1px;cursor:pointer;transition:background .15s}
 .w:active{background:var(--accent-soft)}
 .w.known{text-decoration:underline dotted var(--accent);text-underline-offset:4px}
@@ -4529,7 +4533,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.104";
+const APP_VERSION="2026.11.105";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
