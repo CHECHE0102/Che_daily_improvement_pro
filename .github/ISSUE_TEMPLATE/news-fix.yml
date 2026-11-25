@@ -1,0 +1,13 @@
+name: 新聞校對回報 (news-fix)
+description: 貼上 ChatGPT 每日新聞校對的 JSON 報告，Claude 會自動修正並上線
+title: "[news-fix] "
+labels: ["news-fix"]
+body:
+  - type: textarea
+    id: report
+    attributes:
+      label: ChatGPT 報告（整段 JSON 直接貼上）
+      description: 在 ChatGPT 按 JSON 區塊的「複製」，貼在這裡，然後按 Submit。
+      render: json
+    validations:
+      required: true
