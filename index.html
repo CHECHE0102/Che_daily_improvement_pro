@@ -4390,7 +4390,7 @@ const BETA_MAX=100, BETA_ON=true;
 /* CheChe 2026-11-25: 100 spots really exist, but players are told 50 first; once 50 are taken the card "opens" the next 50
    (shows x / 100). betaShow() is the number players see; BETA_MAX is the real cap (also in the Firestore rules). */
 const BETA_PUBLIC=50, betaShow=()=>BETA.n<BETA_PUBLIC?BETA_PUBLIC:BETA_MAX;
-let BETA={n:0, e:{}, at:0};
+let BETA={n:0, e:{}, at:0}, BETA_BUSY=false;
 async function betaLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDoc(fsM.doc(db,"beta","list")); const d=sn.exists()?sn.data():{};
   const e={}; for(const [u,v] of Object.entries(d.e||{})) if(+v>=1&&+v<=BETA_MAX) e[u]=+v; BETA={n:Math.min(BETA_MAX,+d.n||0), e, at:Date.now()}; render(); }catch(e){ console.warn("beta",e&&e.code); } }
 const betaNo=uid=>{ const me=CLOUD.user&&(uid==="me"||uid===CLOUD.user.uid); return BETA.e[me?CLOUD.user.uid:uid]||0; };
@@ -4399,12 +4399,20 @@ const betaB=(uid,size)=>{ const n=betaNo(uid); return n?`<span class="sb-wrap be
 const betaEligible=()=>[...S.days.values()].some(d=>d&&d.postDone);
 async function betaClaim(){ if(!BETA_ON||!CLOUD.fb||!CLOUD.user||DEV||SANDBOX()||isAdminUser()||!betaEligible()) return; const me=CLOUD.user.uid;
   if(BETA.e[me]||(BETA.at&&BETA.n>=BETA_MAX)) return;
+  if(BETA_BUSY) return; BETA_BUSY=true;
   const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"beta","list"); let got=0;
-  try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():{n:0,e:{}}; const n=+d.n||0;
-      if(d.e&&d.e[me]){ got=+d.e[me]; return; } if(n>=BETA_MAX) return;
-      got=n+1; if(sn.exists()) tx.update(ref,{n:got, ["e."+me]:got}); else tx.set(ref,{n:got, e:{[me]:got}}); });
-    await betaLoad(); if(got&&BETA.e[me]===got){ S.betaNew=got; toast(T("betaGot",{n:got})); render(); } }
-  catch(e){ console.warn("beta claim",e&&(e.code||e.message)); } }
+  // load test 2026-11-25: when many players take a spot in the same second, a transaction that read an old count is refused by the
+  // rule (n must go up by exactly one) as permission-denied, which the SDK does not retry. So wait a little and try again (up to 10 times).
+  for(let k=0;k<10;k++){ let full=false;
+    try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():{n:0,e:{}}; const n=+d.n||0;
+        if(d.e&&d.e[me]){ got=+d.e[me]; return; } if(n>=BETA_MAX){ full=true; return; }
+        got=n+1; if(sn.exists()) tx.update(ref,{n:got, ["e."+me]:got}); else tx.set(ref,{n:got, e:{[me]:got}}); });
+      break; }
+    catch(e){ got=0; console.warn("beta claim",k,e&&(e.code||e.message)); if(!/permission|aborted|precondition|unavailable|deadline/i.test(String(e&&(e.code||e.message)))) break;
+      await new Promise(ok=>setTimeout(ok,300+Math.random()*1500*(k+1))); }
+    if(full) break; }
+  BETA_BUSY=false;
+  try{ await betaLoad(); if(got&&BETA.e[me]===got){ S.betaNew=got; toast(T("betaGot",{n:got})); render(); } }catch(e){} }
 function betaCard(){ if(!BETA_ON||SANDBOX()||!BETA.at) return ""; const mine=betaNo("me"), left=Math.max(0,betaShow()-BETA.n);
   if(mine){ let hide=false; try{ hide=localStorage.getItem("che-pro-betax")==="1"; }catch(e){} if(hide&&!S.betaNew) return "";
     return `<section class="card beta-card mine"><div class="beta-ic">${betaSvg(56)}</div><div><b>${T("betaMine",{n:mine})}</b><p class="muted sm-t">${T("betaMineSub")}</p></div><button class="beta-x" data-act="betax" aria-label="close">×</button></section>`; }
@@ -4563,7 +4571,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.113";
+const APP_VERSION="2026.11.114";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -9962,6 +9970,16 @@ async function plzJoin(){ const R=ROOM; try{
     if(!ch) for(ch=1;ch<PLZ_CHS;ch++) if(await cnt(ch)<PLZ_CAP) break;
     if(ROOM!==R) return; R.ch=Math.min(ch,PLZ_CHS); R.myRef=dbM.ref(db,`plaza/${R.zone}-${R.ch}/${me}`);
     await dbM.onDisconnect(R.myRef).remove(); await plzSend(true);
+    // load test 2026-11-25: players who tap in at the same moment all see room in the same line and all join it. So look again a
+    // moment later: if the line now has more than PLZ_CAP, the ones who came in last (by the server's time) move on to the next line.
+    for(let k=0;k<3&&R.ch<PLZ_CHS;k++){ await new Promise(ok=>setTimeout(ok,1000+Math.random()*500)); if(ROOM!==R) return;
+      const t=Date.now(), v=(await dbM.get(dbM.ref(db,`plaza/${R.zone}-${R.ch}`))).val()||{};
+      const L=Object.entries(v).filter(([u,x])=>x&&t-(x.ts||0)<PLZ_STALE).sort((a,b)=>((a[1].ts||0)-(b[1].ts||0))||(a[0]<b[0]?-1:1));
+      if(L.length<=PLZ_CAP||L.findIndex(([u])=>u===me)<PLZ_CAP) break;
+      let nc; for(nc=R.ch+1;nc<PLZ_CHS;nc++) if(await cnt(nc)<PLZ_CAP) break;
+      if(ROOM!==R) return; try{ await dbM.onDisconnect(R.myRef).cancel(); await dbM.remove(R.myRef); }catch(e){}
+      R.ch=nc; R.myRef=dbM.ref(db,`plaza/${R.zone}-${R.ch}/${me}`); await dbM.onDisconnect(R.myRef).remove(); await plzSend(true); }
+    if(ROOM!==R) return;
     const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
         const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
         if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); if(v.g||v.gv) plzGrabSeen(v,me); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; const bt=plzBDec(v.b); if(bt[0]==="@") plzDo(o,bt.slice(1)); else if(bt) plzSay(o,bt); } } };
