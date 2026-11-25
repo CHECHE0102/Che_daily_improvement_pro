@@ -1749,6 +1749,10 @@ img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;
 .sy-pair>div:not(.sy-vs){display:flex;flex-direction:column;align-items:center;min-width:96px;padding:6px 10px;border-radius:12px;background:var(--card)}
 .sy-pair b{font-size:22px}.sy-pair small{color:var(--muted)}.sy-vs{font-weight:900;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.rt-pl.hit .rt-fig,.rt-bub.chat{animation:none}}
+.reg-lock{margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--accent-soft);font-size:13px}
+.reg-ask{margin-top:8px;padding:10px;border-radius:10px;border:1.5px solid var(--accent);font-size:14px;display:flex;flex-direction:column;gap:8px}
+.reg-ask .row{gap:8px}
+select.search:disabled{opacity:.55}
 </style>
 
 </head>
@@ -4571,7 +4575,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.115";
+const APP_VERSION="2026.11.116";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -4669,10 +4673,34 @@ function artPrio(a){ // lower = shown first on the same day
   if(key.startsWith("IE-")) return a.rank===1?0:a.rank===2?2:3;
   return 5+(a.rank||1)*0.1;
 }
+/* region lock: once a region is chosen it can't change for REG_LOCK_D days, so players hopping
+   between regions don't make the daily regional-news task write stories for many places.
+   Dev mode, testers and the admin account are not locked. The choice syncs with the account (game.reg). */
+const REG_LOCK_D=3, REG_AT_KEY="che-pro-region-at";
+const regKeyOf=r=>r.c==="IE"?(r.county?"IE-"+r.county.toLowerCase():"IE"):r.c;
+function regFree(){ return !!((DEV&&DEV.on)||S.payTester||isAdminUser()); }
+function regLsAt(){ try{ return +localStorage.getItem(REG_AT_KEY)||0; }catch(e){ return 0; } }
+function regLockLeft(){ if(regFree()) return 0; const g=S.game&&S.game.reg, at=Math.max(regLsAt(), g&&g.at||0); return at?Math.max(0, at+REG_LOCK_D*864e5-Date.now()):0; }
+function regAsk(c, county){
+  const left=regLockLeft(); S.regAsk=null;
+  if(left){ toast(T("regLockLeft",{n:Math.ceil(left/864e5)})); return render(); }
+  const r={c, county:c==="IE"?(county||""):""};
+  if(regKeyOf(r)===regionKey()) return render();
+  if(regFree()) return setRegion(r.c, r.county);
+  S.regAsk=r; render();
+}
 function setRegion(c, county){
   REGION={c, county:c==="IE"?(county||""):""};
-  try{ localStorage.setItem("che-pro-region", JSON.stringify(REGION)); }catch(e){}
+  const at=Date.now();
+  try{ localStorage.setItem("che-pro-region", JSON.stringify(REGION)); localStorage.setItem(REG_AT_KEY, String(at)); }catch(e){}
+  game().reg={c:REGION.c, county:REGION.county, at}; saveGame();
   regionPing(true); rebuildIndex(); render();
+}
+function regAdopt(){ // a newer region choice made on another device wins
+  const g=S.game&&S.game.reg; if(!g||!g.at||!COUNTRIES.includes(g.c)||g.at<=regLsAt()) return;
+  const r={c:g.c, county:g.c==="IE"&&COUNTIES.includes(g.county)?g.county:""}, moved=regKeyOf(r)!==regionKey();
+  REGION=r; try{ localStorage.setItem("che-pro-region", JSON.stringify(REGION)); localStorage.setItem(REG_AT_KEY, String(g.at)); }catch(e){}
+  if(moved) rebuildIndex();
 }
 async function regionPing(force){
   const key=regionKey(), stamp=today()+"|"+key;
@@ -4690,11 +4718,16 @@ function rebuildIndex(){
 }
 async function loadArticleQuiet(id){ if(S.articles.some(a=>a.id===id)) return; try{ const r=await fetch(ART_BASE+encodeURIComponent(id)+".json",{cache:"no-cache"}); if(r.ok){ const a=await r.json(); a.id=id; S.articles.push(a); S.articles.sort(byOrder); } }catch(e){} }
 function regionSection(){
-  const opts=COUNTRIES.map(c=>`<option value="${c}"${c===REGION.c?" selected":""}>${esc(countryName(c))}${c!=="IE"&&LANG!=="en"?"":""}</option>`).join("");
-  const counties=`<option value="">${T("regNational")}</option>`+COUNTIES.map(c=>`<option value="${c}"${c===REGION.county?" selected":""}>${T("countyOf",{c})}</option>`).join("");
-  return `<details class="card set-sec set-fold" data-fold="reg"${S.fold&&S.fold.reg?" open":""}><summary><b>${T("regTitle")}</b><span class="fold-v">${esc(regionLabel(regionKey()))}</span></summary><span class="muted sm-t">${T("regSub")}</span>
-    <select id="regCountry" class="search">${opts}</select>
-    ${REGION.c==="IE"?`<select id="regCounty" class="search">${counties}</select><span class="muted sm-t">${T("regIEnote")}</span>`:""}</details>`;
+  const P=S.regAsk||REGION, left=regLockLeft(), dis=left?" disabled":"";
+  const opts=COUNTRIES.map(c=>`<option value="${c}"${c===P.c?" selected":""}>${esc(countryName(c))}</option>`).join("");
+  const counties=`<option value="">${T("regNational")}</option>`+COUNTIES.map(c=>`<option value="${c}"${c===P.county?" selected":""}>${T("countyOf",{c})}</option>`).join("");
+  let until=""; if(left){ try{ until=new Date(Date.now()+left).toLocaleString(LOCALE[LANG]||"en",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}); }catch(e){} }
+  return `<details class="card set-sec set-fold" data-fold="reg"${S.fold&&S.fold.reg?" open":""}><summary><b>${T("regTitle")}</b><span class="fold-v">${left?"🔒 ":""}${esc(regionLabel(regionKey()))}</span></summary><span class="muted sm-t">${T("regSub")}</span>
+    ${regFree()?`<span class="muted sm-t">${T("regFreeNote")}</span>`:left?"":`<span class="muted sm-t">${T("regLockNote",{n:REG_LOCK_D})}</span>`}
+    <select id="regCountry" class="search"${dis}>${opts}</select>
+    ${P.c==="IE"?`<select id="regCounty" class="search"${dis}>${counties}</select><span class="muted sm-t">${T("regIEnote")}</span>`:""}
+    ${left?`<div class="reg-lock">🔒 ${T("regLocked",{n:Math.ceil(left/864e5), d:esc(until)})}</div>`:""}
+    ${S.regAsk?`<div class="reg-ask"><span>${T("regAsk",{r:esc(regionLabel(regKeyOf(S.regAsk))), n:REG_LOCK_D})}</span><div class="row"><button class="btn" data-act="regok">${T("regOk")}</button><button class="btn ghost" data-act="regno">${T("cancel")}</button></div></div>`:""}</details>`;
 }
 function regionNotice(){
   const key=regionKey(); if(key==="IE") return "";
@@ -5130,6 +5163,8 @@ document.addEventListener("click", e=>{
   if(a==="advback"&&S.battle&&S.battle.plz) return plzReturn();
   if(a==="advback"){ clearInterval(S.btimer); S.battle=null; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
   if(a==="nodel"){ S.confirmDel=null; return render(); }
+  if(a==="regok"){ const r=S.regAsk; S.regAsk=null; if(r&&!regLockLeft()){ setRegion(r.c,r.county); toast(T("regSaved",{n:REG_LOCK_D})); } else render(); return; }
+  if(a==="regno"){ S.regAsk=null; return render(); }
   if(a==="home"){ S.tab="today"; S.view="today"; S.quiz=null; render(); window.scrollTo(0,0); return; }
   if(a==="back"){ const b=S.backTo||"today"; S.tab=b; S.view=b; render(); window.scrollTo(0,0); return; }
   if(a==="pre") return startQuiz("pre");
@@ -5144,7 +5179,7 @@ document.addEventListener("click", e=>{
   if(a==="finishx") return startQuiz("post", currentArticle());
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
-document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ setRegion(e.target.value,""); return; } if(e.target.id==="regCounty"){ setRegion("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
+document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ regAsk(e.target.value,""); return; } if(e.target.id==="regCounty"){ regAsk("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
 document.addEventListener("click", e=>{
   const ac=e.target.closest("[data-acal],[data-aday]"); if(ac){
     if(ac.dataset.aday!==undefined){ const v=ac.dataset.aday||null; S.archDay=(v&&v===S.archDay)?null:v; }
@@ -5283,7 +5318,8 @@ function mergeGame(a,b){ if(!a) return b; if(!b) return a;
     taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, login:loginMerge(base.login,o.login), battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null,
     ...invMergeG(base,o)}; }
 function invMergeG(a,b){ const r={}, c=a.invCode||b.invCode, p=[a.invPaid,b.invPaid].filter(Boolean).sort((x,y)=>(x.m||"").localeCompare(y.m||"")||(x.n||0)-(y.n||0)).pop();
-  if(c) r.invCode=c; if(a.invGot||b.invGot) r.invGot=1; if(p) r.invPaid=p; return r; }
+  if(c) r.invCode=c; if(a.invGot||b.invGot) r.invGot=1; if(p) r.invPaid=p;
+  const rg=[a.reg,b.reg].filter(x=>x&&x.at).sort((x,y)=>x.at-y.at).pop(); if(rg) r.reg=rg; return r; }
 /* Word sync reads only what changed: every word doc carries _u (time written); deleted words leave a
    tombstone {_del:1,_u}. A full read happens on the first sync on a device and then once a week. */
 const WSYNC_KEY="che-pro-wsync", DIRTY_KEY="che-pro-dirty", WSYNC_FULL=7*864e5, WSYNC_MARGIN=15*60e3;
@@ -5316,6 +5352,7 @@ async function cloudPull(){
     else for(const [k,v] of S.words) if(!tomb.has(k)&&(!cw.has(k)||wScore(v)>wScore(cw.get(k)))) CLOUD.dirtyWords.add(k);
     for(const [k,v] of Object.entries(cloud.days||{})) S.days.set(k, mergeDay(S.days.get(k),v));
     S.game=mergeGame(S.game, cloud.game?newGame(cloud.game):null) || S.game;
+    regAdopt();
     CLOUD.dirtyMain=true; lsSave();
     await cloudFlush();
     wsyncSet({at:started, full:delta?info.full:started});
@@ -11809,7 +11846,7 @@ Object.assign(STR.hi,{"ulLock": "तीनों दैनिक कदम {n} �
 Object.assign(STR.es,{"ulLock": "Se abre tras completar los tres pasos diarios {n} día(s) más", "ulBanT": "⚔️ La aventura se abre al terminar los tres pasos de hoy", "ulBanS": "Lee la noticia y haz el test, y el anciano Ciarán te llevará de aventura", "u1": "¡Bien hecho! Has completado los tres pasos de tu primer día. La aventura ya está abierta: ataca ciudades con pases, entrena en la naturaleza y compra equipo en la tienda. ¡Sígueme!", "u2": "¡Segundo día completado! Hoy se abren tres lugares nuevos: Clases tiene lecciones cortas de inglés que dan oro, el Campo de práctica te deja probar golpes con monstruos, y la Casa de la Suerte, que te explico ahora.", "u3": "¡Tres días leyendo noticias, impresionante! Se abren la Clasificación, los Exámenes y la Plaza: elige un apodo y pasea por la Plaza saludando a jugadores de todo el mundo.", "u5a": "¡Cinco días! Ya eres un aventurero de verdad. Se abre la tienda de Estilo: viste a tu personaje con monedas de estilo.", "u5b": "También se abre la Bóveda Arcoíris: envía regalos a tus amigos y prueba el pozo de los deseos mensual. Razonamiento te espera en el menú de Aventura. ¡Ve a verlo!", "stGoAdv": "A la aventura →", "stLook": "Echar un vistazo →"});
 Object.assign(STR.ja,{"ulLock": "毎日の3ステップをあと{n}日終えると開放", "ulBanT": "⚔️ 今日の3ステップを終えると冒険が開放", "ulBanS": "ニュースを読んでテストを終えれば、長老キーランが冒険に連れて行ってくれます", "u1": "よくやった！初日の3ステップを終えたな。冒険が開放されたぞ：出撃券で町を攻め、野外で修行し、ショップで装備を買うのじゃ。ついて来なさい！", "u2": "2日目も達成じゃ！今日は新しい場所が3つ開く：「小教室」は短い英語レッスンでゴールドがもらえる、「練習場」では魔物で技を試せる、そして「ラッキーハウス」じゃ。説明しよう。", "u3": "3日間ニュースを読んだとは見事！「ランキング」「検定」「広場」が開放された：ニックネームを決めれば、広場で世界中のプレイヤーと歩いたり挨拶したりできるぞ。", "u5a": "5日目じゃ！もう立派な冒険者じゃな。「スタイル屋」が開放された：スタイルコインでキャラクターを着飾れるぞ。", "u5b": "「虹の宝庫」も開放じゃ：友だちにプレゼントを贈ったり、毎月の願いの泉に挑戦できる。冒険メニューでは「推理読解」も待っておる。見てきなさい！", "stGoAdv": "冒険へ →", "stLook": "見てみる →"});
 Object.assign(STR.ko,{"ulLock": "하루 3단계를 {n}일 더 마치면 열려요", "ulBanT": "⚔️ 오늘 3단계를 마치면 모험이 열려요", "ulBanS": "뉴스를 읽고 퀴즈를 마치면 키어런 장로가 모험으로 안내해 줄 거예요", "u1": "잘했다! 첫날 3단계를 모두 마쳤구나. 이제 모험이 열렸어: 출정권으로 마을을 공격하고, 야외에서 수련하고, 상점에서 장비를 사렴. 나를 따라오너라!", "u2": "둘째 날도 해냈구나! 오늘은 새로운 곳 세 군데가 열려: '소교실'은 짧은 영어 수업으로 골드를 주고, '연습장'에서는 괴물에게 기술을 시험할 수 있고, 그리고 '행운의 집'이 있지. 설명해 주마.", "u3": "사흘 연속 뉴스를 읽다니 대단하구나! '랭킹', '검정', '광장'이 열렸어: 닉네임을 정하면 광장에서 전 세계 플레이어와 걷고 인사할 수 있단다.", "u5a": "닷새째구나! 이제 진짜 모험가야. '스타일 숍'이 열렸어: 스타일 코인으로 캐릭터를 꾸며 보렴.", "u5b": "'무지개 보물고'도 열렸어: 친구에게 선물을 보내고 매달 소원의 우물에 도전할 수 있지. 모험 메뉴에서 '추론 읽기'도 기다리고 있단다. 가서 보렴!", "stGoAdv": "모험하러 →", "stLook": "보러 가기 →"});
-Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
+Object.assign(STR.zh,{"regLockNote": "選好後 {n} 天內不能再改，請選你最常想讀的地區。", "regFreeNote": "開發者／測試員模式：地區可隨時更改，不受 3 天限制。", "regLocked": "地區已鎖定，還要 {n} 天才能再改（{d} 後可改）。", "regLockLeft": "地區還要 {n} 天才能再改", "regAsk": "改成「{r}」之後，{n} 天內不能再改。確定嗎？", "regOk": "確定更改", "regSaved": "已改好，{n} 天內不能再改地區"});Object.assign(STR.en,{"regLockNote": "Once chosen, the region can't be changed for {n} days, so pick the one you'll read most.", "regFreeNote": "Developer / tester mode: you can change the region any time (no 3-day lock).", "regLocked": "Region locked. You can change it again in {n} days ({d}).", "regLockLeft": "You can change the region again in {n} days", "regAsk": "After switching to {r} you can't change the region for {n} days. Continue?", "regOk": "Change region", "regSaved": "Region changed. It stays locked for {n} days"});Object.assign(STR.hi,{"regLockNote": "एक बार चुनने के बाद क्षेत्र {n} दिन तक नहीं बदला जा सकता, इसलिए वही चुनें जिसे आप सबसे ज़्यादा पढ़ेंगे।", "regFreeNote": "डेवलपर / टेस्टर मोड: क्षेत्र कभी भी बदला जा सकता है (3 दिन की रोक नहीं)।", "regLocked": "क्षेत्र लॉक है। आप इसे {n} दिन बाद ({d}) फिर बदल सकते हैं।", "regLockLeft": "क्षेत्र {n} दिन बाद फिर बदल सकते हैं", "regAsk": "{r} चुनने के बाद आप {n} दिन तक क्षेत्र नहीं बदल पाएँगे। जारी रखें?", "regOk": "क्षेत्र बदलें", "regSaved": "क्षेत्र बदल गया। यह {n} दिन तक लॉक रहेगा"});Object.assign(STR.es,{"regLockNote": "Una vez elegida, la región no se puede cambiar durante {n} días; elige la que más vayas a leer.", "regFreeNote": "Modo desarrollador / probador: puedes cambiar la región cuando quieras (sin bloqueo de 3 días).", "regLocked": "Región bloqueada. Podrás cambiarla dentro de {n} días ({d}).", "regLockLeft": "Podrás cambiar la región dentro de {n} días", "regAsk": "Si cambias a {r}, no podrás cambiar la región durante {n} días. ¿Continuar?", "regOk": "Cambiar región", "regSaved": "Región cambiada. Queda bloqueada {n} días"});Object.assign(STR.ja,{"regLockNote": "一度選ぶと {n} 日間は地域を変更できません。いちばん読みたい地域を選んでください。", "regFreeNote": "開発者／テスター モード：地域はいつでも変更できます（3 日間の制限なし）。", "regLocked": "地域はロック中です。あと {n} 日で変更できます（{d} 以降）。", "regLockLeft": "地域はあと {n} 日で変更できます", "regAsk": "「{r}」に変えると、{n} 日間は地域を変更できません。よろしいですか？", "regOk": "変更する", "regSaved": "地域を変更しました。{n} 日間はロックされます"});Object.assign(STR.ko,{"regLockNote": "한 번 고르면 {n}일 동안 지역을 바꿀 수 없어요. 가장 많이 읽을 지역을 고르세요.", "regFreeNote": "개발자 / 테스터 모드: 지역을 언제든 바꿀 수 있어요 (3일 제한 없음).", "regLocked": "지역이 잠겨 있어요. {n}일 뒤({d})에 다시 바꿀 수 있어요.", "regLockLeft": "{n}일 뒤에 지역을 다시 바꿀 수 있어요", "regAsk": "'{r}'(으)로 바꾸면 {n}일 동안 지역을 바꿀 수 없어요. 계속할까요?", "regOk": "지역 바꾸기", "regSaved": "지역을 바꿨어요. {n}일 동안 잠겨요"});Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
 Object.assign(STR.zh,{"grT": "學習曲線", "grWords": "學過的單字", "grLooks": "查詢次數", "grD": "{n} 天", "grAll": "全部", "grWordsU": "個單字", "grLooksU": "次查詢", "grNone": "多查幾天字，這裡就會長出你的曲線。"});
