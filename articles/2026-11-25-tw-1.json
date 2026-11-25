@@ -32,8 +32,8 @@
  "levels": {
   "A2": {
    "paragraphs": [
-    "How much money do you need when you stop working? People in Taiwan think the answer is getting bigger. A new report says they need about NT$16.14 million. That is about US$490,000.",
-    "The report is called the 2027 Ageless Society White Paper. DBS Foundation and CommonWealth Magazine made it. They asked 1,406 people. All of them were between 40 and 64 years old.",
+    "How much money do you need when you stop working? People in Taiwan think they will need more money than before. A new report says they need about NT$16.14 million. That is about US$490,000.",
+    "The report is called the 2027 Ageless Society White Paper. DBS Foundation and CommonWealth Magazine made it. They got 1,406 valid answers. All of them were between 40 and 64 years old.",
     "Last year, people said they needed NT$15.61 million. This year, the number is higher. People worry about the cost of doctors and care. They also worry that prices keep going up.",
     "More people now want to invest their money. The number went from 39.4% to 46.1%. But 41.2% of people do not feel ready.",
     "A bank boss said people should start saving early. Even small amounts can grow over time."
@@ -41,14 +41,14 @@
    "sentZh": [
     [
      "你停止工作時需要多少錢？",
-     "台灣人認為這個答案越來越大。",
+     "台灣人認為他們會比以前需要更多錢。",
      "一份新報告說，他們大約需要新台幣1,614萬元。",
      "那大約是49萬美元。"
     ],
     [
      "這份報告叫做《2027無齡社會白皮書》。",
      "星展基金會和《天下雜誌》製作了這份報告。",
-     "他們詢問了1,406個人。",
+     "他們收到了1,406份有效回答。",
      "這些人都在40到64歲之間。"
     ],
     [
@@ -96,7 +96,7 @@
      "說自己睡眠充足、規律運動和飲食均衡的人也變少了。"
     ],
     [
-     "台灣星展銀行總經理伍維漢說，大家應該早點開始，讓複利幫助自己，就算金額很小也一樣。",
+     "台灣星展銀行總經理黃思翰說，大家應該早點開始，讓複利幫助自己，就算金額很小也一樣。",
      "一位勞動部官員說，這份報告有助於勞動政策的討論。"
     ]
    ]
@@ -127,7 +127,7 @@
      "在健康方面，對晚年身體狀況感到沒把握的比例從36.5%降到30.7%，但表示睡眠充足、規律運動或飲食均衡的人卻變少了。"
     ],
     [
-     "台灣星展銀行總經理伍維漢呼籲大家及早開始、善用複利，即使只能存小額也一樣。",
+     "台灣星展銀行總經理黃思翰呼籲大家及早開始、善用複利，即使只能存小額也一樣。",
      "他認為，變老不是真正的問題，沒有做好準備才是。",
      "一位勞動部官員表示，這些調查結果可以作為勞動政策討論的參考。"
     ]
@@ -158,7 +158,7 @@
      "受訪者對老年健康稍微沒那麼悲觀，缺乏信心的比例從36.5%降至30.7%，不過表示睡眠充足、規律運動或飲食均衡的人變少了。"
     ],
     [
-     "台灣星展銀行總經理伍維漢強調及早開始、善用複利的價值，無論金額多麼微小，他認為老化本身的威脅不如準備不足來得大。",
+     "台灣星展銀行總經理黃思翰強調及早開始、善用複利的價值，無論金額多麼微小，他認為老化本身的威脅不如準備不足來得大。",
      "一位勞動部高階官員補充說，這些結果可以為未來的政策辯論提供參考。"
     ]
    ]
@@ -184,11 +184,11 @@
      "因此，理財策略出現明顯轉變：打算依靠投資的受訪者比例從39.4%攀升到46.1%，定期存款和指數股票型基金也越來越受青睞。"
     ],
     [
-     "儘管如此，仍有41.2%這個不小的少數承認，對自己的財務準備缺乏信心。",
+     "儘管如此，仍有多達41.2%的受訪者承認，對自己的財務準備缺乏信心。",
      "對健康的態度則好壞參半：雖然對晚年身體狀況感到悲觀的比例從36.5%降到30.7%，但表示能維持充足睡眠、規律運動或均衡飲食的受訪者變少了。"
     ],
     [
-     "台灣星展銀行總經理伍維漢主張及早開始，善用複利的力量，不論投入的金額多麼有限，他認為真正的風險在於準備不足，而不是老化本身。",
+     "台灣星展銀行總經理黃思翰主張及早開始，善用複利的力量，不論投入的金額多麼有限，他認為真正的風險在於準備不足，而不是老化本身。",
      "一位勞動部高階官員表示，這份報告可以為勞動政策的審議提供有用的參考。"
     ]
    ]
@@ -511,10 +511,10 @@
   },
   "ageless": {
    "zh": "無齡的；不受年齡限制的",
-   "hi": "आयु-रहित",
+   "hi": "उम्र से अप्रभावित",
    "es": "sin edad",
    "ja": "年齢にとらわれない",
-   "ko": "나이 없는",
+   "ko": "나이에 구애받지 않는",
    "en": "not affected by age",
    "pos": "adj.",
    "base": "ageless",
@@ -1794,7 +1794,7 @@
    "es": "compuesto",
    "ja": "複利の；複合の",
    "ko": "복리의; 복합의",
-   "en": "(compound interest) interest also earned on past interest",
+   "en": "(of interest) worked out on the original amount and on interest already earned",
    "pos": "adj.",
    "base": "compound",
    "lvl": "C1",
@@ -3332,7 +3332,7 @@
    "hi": "निश्चित अवधि का",
    "es": "a plazo fijo",
    "ja": "定期の",
-   "ko": "정기의",
+   "ko": "기간이 정해진",
    "en": "lasting for a set period of time",
    "pos": "adj.",
    "base": "fixed-term",
@@ -3485,7 +3485,7 @@
   },
   "fund": {
    "zh": "為…提供資金",
-   "hi": "धन जुटाना",
+   "hi": "धन उपलब्ध कराना",
    "es": "financiar",
    "ja": "資金を出す",
    "ko": "자금을 대다",
@@ -3584,7 +3584,7 @@
    "es": "general",
    "ja": "総〜",
    "ko": "총-",
-   "en": "(general manager) the top manager of a company",
+   "en": "(general manager) the manager in charge of a whole company or branch",
    "pos": "adj.",
    "base": "general",
    "lvl": "B1",
@@ -4534,7 +4534,7 @@
   "labour": {
    "zh": "勞動；勞工（英式拼法）",
    "hi": "श्रम",
-   "es": "trabajo; laboral",
+   "es": "trabajo; mano de obra",
    "ja": "労働",
    "ko": "노동",
    "en": "work, especially paid work (UK spelling)",
@@ -6470,7 +6470,7 @@
     "experts reckon"
    ],
    "en": "think or estimate",
-   "es": "calculan; creen",
+   "es": "calcular; creer",
    "ex": "I reckon the trip will take two hours.",
    "hi": "अनुमान लगाना",
    "ja": "見積もる；思う",
