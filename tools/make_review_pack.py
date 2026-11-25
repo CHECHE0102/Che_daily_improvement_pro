@@ -7,12 +7,13 @@ Writes, for each of the last DAYS news dates (default 3):
   OUT_DIR/DATE/<id>.md         title, summaries, every level's text (numbered P/S), sentZh, questions
   OUT_DIR/DATE/<id>-words-N.md the word glossary in parts (all 6 languages, one line per word)
 and OUT_DIR/latest.md = copy of the newest DATE/index.md.
-The workflow news-review.yml publishes OUT_DIR to the branch "news-review".
+The workflow news-review.yml copies OUT_DIR to review/ on main (served at https://binbindaily.com/review/).
 """
 import json, os, re, sys, glob
 
 REPO = "CHECHE0102/Che_daily_improvement_pro"
-RAW = f"https://raw.githubusercontent.com/{REPO}/news-review"
+# served by GitHub Pages from main/review/ (ChatGPT can't open raw.githubusercontent.com)
+RAW = "https://binbindaily.com/review"
 LEVELS = ["A2", "B1", "B2", "C1", "IELTS"]
 SPLIT = re.compile(r"(?<=[.!?])\s+")
 

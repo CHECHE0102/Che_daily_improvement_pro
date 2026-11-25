@@ -1,7 +1,7 @@
 name: News proofreading pack
 # Builds plain-text pages of the last 3 days' news (all levels, zh sentences, glossary, questions)
-# for the outside proofreader (ChatGPT task) and publishes them to the branch "news-review".
-# Read: https://raw.githubusercontent.com/CHECHE0102/Che_daily_improvement_pro/news-review/latest.md
+# for the outside proofreader (ChatGPT task) and publishes them to review/ on main.
+# Read: https://binbindaily.com/review/latest.md
 on:
   workflow_run:
     workflows: ['Publish daily articles']
@@ -24,12 +24,17 @@ jobs:
         with:
           ref: main
       - run: python3 tools/make_review_pack.py out 3
-      - name: Publish to branch "news-review" (replaced every run)
+      - name: Publish to review/ on main (GitHub Pages serves it at binbindaily.com/review/)
         run: |
-          cd out
-          git init -q -b news-review
           git config user.name "CHECHE0102"
           git config user.email "CHECHE0102@users.noreply.github.com"
-          git add -A
-          git commit -q -m "News proofreading pack $(date -u +%F' '%H:%M)"
-          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" news-review
+          for i in 1 2 3 4; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            rm -rf review && mkdir -p review && cp -r out/. review/
+            git add -A review
+            git diff --cached --quiet && { echo "no change"; exit 0; }
+            git commit -q -m "News proofreading pack $(date -u +%F' '%H:%M)"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i*7))
+          done
+          exit 1
