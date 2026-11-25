@@ -1,0 +1,21 @@
+name: One-off delete-account check (read only)
+on:
+  push:
+    branches: [claude/project-thread-hc7vwc]
+    paths: [tools/check-deleted.mjs, .github/workflows/check-deleted.yml]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: cd functions && npm ci --omit=dev --no-audit --no-fund
+      - run: cp tools/check-deleted.mjs functions/ && node functions/check-deleted.mjs
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
+          CHECK_NAME: Accha
