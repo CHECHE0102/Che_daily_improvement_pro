@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-25",
+ "items": {
+  "2026-11-25": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Ireland has finished restoring its wetlands and peatlands ahead of an EU deadline.",
+     "The European Commission has rejected Ireland's nature restoration plan for lacking targets.",
+     "Ireland has published a legally required draft plan with concrete restoration targets, though critics say its success depends on long-term funding.",
+     "Ireland has decided to plant three billion trees by 2030 to meet its climate goals."
+    ],
+    "a": 2,
+    "exp": "The passage describes a draft plan that is \"a statutory obligation rather than a discretionary policy\", lists \"quantifiable targets\", and ends with groups warning that success is \"contingent upon multi-annual funding\". Restoration is not finished (A), the Commission has not rejected it (B), and three billion trees is the EU-wide figure, with Ireland's share about 30 million (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the comparison with County Offaly?",
+    "opts": [
+     "The upper estimate for the restoration area is large enough to be significant on a national scale.",
+     "All of the restoration work will take place in County Offaly.",
+     "County Offaly has the most degraded land in Ireland.",
+     "The lower estimate of 476 square kilometres is larger than County Offaly."
+    ],
+    "a": 0,
+    "exp": "The area \"ranges from 476 to 2,039 square kilometres, the latter exceeding the total area of County Offaly\", so the comparison shows how sizeable the upper figure is. Only \"the latter\" (2,039) exceeds Offaly, ruling out (D), and nothing says the work is located in Offaly (B) or that its land is the most degraded (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention BirdWatch Ireland and the Climate Change Advisory Council in the final paragraph?",
+    "opts": [
+     "To show that environmental groups oppose the EU regulation.",
+     "To explain who designed the pilot projects.",
+     "To praise the €20 million pathfinder fund as sufficient.",
+     "To introduce a reservation about whether the plan can succeed without secure long-term funding."
+    ],
+    "a": 3,
+    "exp": "The paragraph opens with \"Nevertheless\" and reports that these organisations \"maintain that the success of the plan is contingent upon multi-annual funding\", adding a note of caution after the minister's positive view. They do not oppose the regulation (A), design the pilots (B) or call the fund sufficient (C)."
+   }
+  ],
+  "2026-11-25-2": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Ireland must close its child and adolescent psychiatric units by 2040.",
+     "An ESRI study projects that Ireland may need up to 641 more mental health beds by 2040, mainly because of population growth and ageing.",
+     "The Department of Health has already funded 641 new psychiatric beds.",
+     "Community mental health services are no longer needed because of extra beds."
+    ],
+    "a": 1,
+    "exp": "The passage reports that services \"will require up to 641 additional beds over the next 14 years\", an increase \"attributable primarily to population growth and demographic ageing\". The beds are a projection, not already funded (C); child provision is expected not to grow, not to close (A); and the lead author stresses community care too (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What does the ESRI's comment about community waiting lists suggest?",
+    "opts": [
+     "Waiting lists prove that demand will fall in future.",
+     "The projected figures are exact and need no review.",
+     "Some current demand may be hidden, so actual future needs could differ from the projections.",
+     "Community services will be replaced by inpatient beds."
+    ],
+    "a": 2,
+    "exp": "The ESRI notes that \"substantial waiting lists in community services render future demand inherently uncertain\", implying that unmet need could change the real figures. This contradicts (B), does not prove demand will fall (A), and says nothing about replacing community services (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the tone of Dr Aoife Brick's remarks as reported in the passage?",
+    "opts": [
+     "Measured and cautionary, stressing balance rather than numbers alone.",
+     "Alarmed and accusatory towards the Government.",
+     "Dismissive of the study's findings.",
+     "Celebratory about the current state of services."
+    ],
+    "a": 0,
+    "exp": "She \"emphasised that an effective response is contingent upon an appropriate balance between inpatient and community care, rather than bed numbers alone\" — a careful, qualified point. There is no blame (B), rejection of the findings (C) or celebration (D)."
+   }
+  ],
+  "2026-11-25-3": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A plan to raise the lifetime tax-free allowance above €200,000.",
+     "The abolition of Personal Retirement Savings Accounts.",
+     "A penalty for financial advisers who used the PRSA gap.",
+     "A Finance Bill measure to close a gap that let some people claim the tax-free lump-sum allowance twice by moving pensions into PRSAs."
+    ],
+    "a": 3,
+    "exp": "The Government \"intends to eliminate a loophole which has enabled certain workers to claim the tax-free lump-sum allowance on two separate occasions\", and \"the Finance Bill will extend the waiver to encompass PRSAs\". The allowance is not raised (A), PRSAs are not abolished (B), and no penalties are mentioned (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about why the loophole existed?",
+    "opts": [
+     "The waiver was written to cover only the pension linked to a particular job, so other products were not caught.",
+     "Redundancy payments were never counted towards the allowance.",
+     "PRSAs were introduced in 2027 with no rules.",
+     "Advisers deliberately wrote the original legislation to allow double claims."
+    ],
+    "a": 0,
+    "exp": "The waiver \"applies exclusively to the pension associated with that particular employment\", and a PRSA \"was not subject to the waiver\", which created the gap. Redundancy payments do count (B), PRSAs date from 2002 (C), and nothing says advisers wrote the law (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the comments from Jim Connolly and Munro O'Dwyer?",
+    "opts": [
+     "To prove that thousands of people broke the law.",
+     "To show that advisers think the loophole should remain open.",
+     "To indicate that the gap affected relatively few people and that its use was not always clear-cut wrongdoing.",
+     "To explain how the Finance Bill will be enacted."
+    ],
+    "a": 2,
+    "exp": "Advisers \"estimate that the number of beneficiaries is relatively limited\"; Connolly says some \"may have benefited unintentionally\" and O'Dwyer calls deliberate use \"a grey area\". This rules out large-scale law-breaking (A), support for keeping the gap (B), and details of enactment (D)."
+   }
+  ],
+  "2026-11-25-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "A Dublin hospital has opened a new Aids treatment unit.",
+     "St Teresa's Church has been closed for its centenary.",
+     "Oscar Wilde designed two windows for a Dublin church.",
+     "A Dublin church has installed two stained-glass windows remembering people who died from Aids, rich in symbolism and open to personal interpretation."
+    ],
+    "a": 3,
+    "exp": "The passage reports that \"a church in Dublin has installed two stained-glass windows in commemoration of individuals who died as a result of Aids\", describes their symbols, and says \"visitors are free to interpret the windows as they consider appropriate\". No treatment unit (A) or closure (B) is mentioned, and the green carnation honours Wilde; he did not design the windows (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the alphabet along the base of the second window?",
+    "opts": [
+     "The windows are intended to be personal and interactive for those who are grieving.",
+     "The windows were designed mainly for teaching children to read.",
+     "Only the names of famous people are recorded in the windows.",
+     "The alphabet lists the names of all parishioners."
+    ],
+    "a": 0,
+    "exp": "The alphabet \"enables visitors to spell out the name of a deceased loved one\", suggesting a personal, participatory memorial. It is not for teaching reading (B), and it records no fixed list of famous people (C) or parishioners (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which word best describes the overall tone of the passage?",
+    "opts": [
+     "Critical",
+     "Respectful",
+     "Humorous",
+     "Indifferent"
+    ],
+    "a": 1,
+    "exp": "The windows are presented \"in commemoration\" of the dead, \"in honour of Oscar Wilde\" and \"as an acknowledgement of healthcare professionals\", and the parish calls the installation \"a considerable honour\". The passage neither criticises (A), jokes (C) nor seems uninterested (D)."
+   }
+  ]
+ }
+}
