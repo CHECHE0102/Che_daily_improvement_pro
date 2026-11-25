@@ -5,7 +5,7 @@ Usage: python tools/make_review_pack.py OUT_DIR [DAYS]
 Writes, for each of the last DAYS news dates (default 3):
   OUT_DIR/DATE/index.md        list of that day's articles with links
   OUT_DIR/DATE/<id>.md         title, summaries, every level's text (numbered P/S), sentZh, questions
-  OUT_DIR/DATE/<id>-words-N.md the word glossary in parts (all 6 languages, one line per word)
+  OUT_DIR/DATE/words-new-N.md  the day's NEW glossary entries (deduplicated, all 6 languages), in parts
 and OUT_DIR/latest.md = copy of the newest DATE/index.md.
 The workflow news-review.yml copies OUT_DIR to review/ on main (served at https://binbindaily.com/review/).
 """
@@ -81,24 +81,56 @@ def text_pack(a, questions):
     return "\n".join(L) + "\n"
 
 
-WORDS_PER_PART = 130
+GLOSS_FIELDS = ["base", "pos", "lvl", "en", "zh", "ja", "ko", "es", "hi", "ex", "syn", "ant", "col"]
+WORDS_PER_PART = 110
 
 
-def words_packs(a):
-    """The glossary split into parts of WORDS_PER_PART words, so each page stays small enough to read whole."""
-    items = list((a.get("gloss") or {}).items())
-    parts = [items[i:i + WORDS_PER_PART] for i in range(0, len(items), WORDS_PER_PART)] or [[]]
-    return [words_pack(a, part, n + 1, len(parts)) for n, part in enumerate(parts)]
+def gloss_key(g):
+    return json.dumps([g.get(f) for f in GLOSS_FIELDS], ensure_ascii=False)
 
 
-def words_pack(a, items, n, total):
-    L = [f"# {a.get('id')} word glossary part {n} of {total} (field \"gloss\" in articles/{a.get('id')}.json)",
-         "format: key | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col", ""]
-    for k, g in items:
-        def j(x):
-            return ", ".join(x) if isinstance(x, list) else (x or "")
-        L.append(" | ".join([k] + [j(g.get(f)) for f in ["base", "pos", "lvl", "en", "zh", "ja", "ko", "es", "hi", "ex", "syn", "ant", "col"]]))
-    return "\n".join(L) + "\n"
+def gloss_line(ids, g):
+    def j(x):
+        return ", ".join(x) if isinstance(x, list) else (x or "")
+    return " | ".join([" ".join(ids)] + [j(g.get(f)) for f in GLOSS_FIELDS])
+
+
+def seen_before(date):
+    """Glossary entries (exact, all fields) already published on an earlier day: those were proofread then."""
+    old = set()
+    for p in glob.glob("articles/*.json"):
+        m = re.match(r"(\d{4}-\d{2}-\d{2})", os.path.basename(p))
+        if not m or m.group(1) >= date:
+            continue
+        try:
+            for g in (load(p).get("gloss") or {}).values():
+                old.add(gloss_key(g))
+        except Exception:
+            pass
+    return old
+
+
+def new_words_parts(date, arts):
+    """One deduplicated list of the day's glossary entries that never appeared before, split into parts."""
+    old = seen_before(date)
+    entries = {}
+    for a in arts:
+        for k, g in (a.get("gloss") or {}).items():
+            gk = gloss_key(g)
+            if gk in old:
+                continue
+            entries.setdefault(gk, ([], g))[0].append(f"{a['id']}:{k}")
+    items = list(entries.values())
+    parts = [items[i:i + WORDS_PER_PART] for i in range(0, len(items), WORDS_PER_PART)]
+    out = []
+    for n, part in enumerate(parts, 1):
+        L = [f"# {date} NEW glossary entries, part {n} of {len(parts)}",
+             "Only entries that are new today (older identical entries were checked on earlier days).",
+             "format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col",
+             "In a report use article = the first article id of the line and where = \"gloss:<key>.<field>\".", ""]
+        L += [gloss_line(ids, g) for ids, g in part]
+        out.append("\n".join(L) + "\n")
+    return out, len(items)
 
 
 def main():
@@ -118,21 +150,30 @@ def main():
         idx = [f"# BinBin news proofreading pack — {date}", "",
                f"{len(files)} articles. For each article read ALL its files (text, then every words part).",
                f"Paths are files on the main branch of GitHub repo {REPO} (read them with the GitHub connector); the same files are also at {RAW}/<path after review/>.", ""]
+        arts = []
         for p in files:
             a = load(p)
-            aid = a.get("id") or os.path.basename(p)[:-5]
-            a["id"] = aid
+            a["id"] = a.get("id") or os.path.basename(p)[:-5]
+            arts.append(a)
+        idx[2:4] = [f"{len(arts)} articles. Two jobs: (1) TEXT job = read every text file below; (2) WORDS job = read every words part below.",
+                    f"Paths are files on the main branch of GitHub repo {REPO} (read them with the GitHub connector); the same files are also at {RAW}/<path after review/>."]
+        idx.append("## TEXT job: one file per article (all 5 levels, zh lines, summaries, questions)")
+        for a in arts:
+            aid = a["id"]
             with open(f"{out}/{date}/{aid}.md", "w", encoding="utf-8") as f:
                 f.write(text_pack(a, rq.get(aid)))
-            wp = words_packs(a)
-            for n, w in enumerate(wp, 1):
-                with open(f"{out}/{date}/{aid}-words-{n}.md", "w", encoding="utf-8") as f:
-                    f.write(w)
             where = f"region {a['region']}" if a.get("region") else "Ireland national"
             idx.append(f"- {aid} ({where}, {a.get('topic')}): {a.get('title')}")
-            idx.append(f"  - text:  review/{date}/{aid}.md")
-            for n in range(1, len(wp) + 1):
-                idx.append(f"  - words part {n}/{len(wp)}: review/{date}/{aid}-words-{n}.md")
+            idx.append(f"  - review/{date}/{aid}.md")
+        wp, nw = new_words_parts(date, arts)
+        idx.append("")
+        idx.append(f"## WORDS job: {nw} new glossary entries today, in {len(wp)} part(s)")
+        for n, w in enumerate(wp, 1):
+            with open(f"{out}/{date}/words-new-{n}.md", "w", encoding="utf-8") as f:
+                f.write(w)
+            idx.append(f"- review/{date}/words-new-{n}.md")
+        if not wp:
+            idx.append("- (none: every glossary entry today was already checked on an earlier day)")
         body = "\n".join(idx) + "\n"
         with open(f"{out}/{date}/index.md", "w", encoding="utf-8") as f:
             f.write(body)
