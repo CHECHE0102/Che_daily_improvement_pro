@@ -45,6 +45,14 @@ def main():
             out[w] = ["", "", a[0], a[5], a[1], a[2], a[3], a[4], "", "", ""]
     except Exception as e:
         print("meanings.json skipped:", e)
+    try:   # words of the Irish stories (games/hunt.json, read at the plaza newsstand) that no article glossed
+        m = json.load(open(os.path.join(ROOT, "games", "hunt-gloss.json"), encoding="utf-8"))
+        for w, a in m.items():          # [zh, hi, es, ja, ko, en]
+            w = norm(w)
+            if w in out or w in forms or len(a) < 6: continue
+            out[w] = ["", "", a[0], a[5], a[1], a[2], a[3], a[4], "", "", ""]
+    except Exception as e:
+        print("hunt-gloss.json skipped:", e)
     forms = dict(sorted((k, v) for k, v in forms.items() if k not in out and v in out))
     os.makedirs(os.path.join(ROOT, "assets", "dict"), exist_ok=True)
     for i, l in enumerate(LANGS):        # one file per app language: only that language's meaning + English
