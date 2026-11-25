@@ -854,6 +854,8 @@ body.maint-lock{overflow:hidden}
 #inboxPop .pd-scrim{z-index:74}#inboxPop .pd-card{z-index:75}.ib-ic{font-size:44px}.ib-item{text-align:left;padding:8px 10px;border-radius:10px;background:var(--paper);display:flex;flex-direction:column;gap:4px}
 .fn{display:flex;flex-direction:column;gap:4px}.fn-row{display:grid;grid-template-columns:7.5em 1fr 3em 6.5em;gap:6px;align-items:center;font-size:13px}.fn-bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}.fn-bar i{display:block;height:100%;background:var(--accent)}.fn-row b{text-align:right}
 .dev-tabs{margin:8px 0 4px;flex-wrap:wrap}.dev-tabs button{flex:1 1 40%;white-space:nowrap}.dev-body{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+.beta-card{display:flex;gap:12px;align-items:center;position:relative;background:linear-gradient(135deg,#EEF1FA,var(--card));border:1px solid #2B3A67}.beta-card .beta-ic{flex:none}.beta-card p{margin:4px 0 0}.beta-card.mine{border-color:var(--gorse)}.beta-x{position:absolute;top:6px;right:8px;border:0;background:none;font-size:18px;color:inherit;opacity:.6;cursor:pointer}
+@media (prefers-color-scheme:dark){.beta-card{background:linear-gradient(135deg,#1C2340,var(--card))}}
 .dev-ann{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--accent);border-radius:12px;margin:8px 0}.dev-ann textarea{min-height:60px}
 .maint-bn{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(70px + env(safe-area-inset-bottom,0px));z-index:99;background:var(--bad);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;pointer-events:none;opacity:.92;white-space:nowrap}
 .dev-maint{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px dashed var(--bad);border-radius:12px;margin:8px 0}
@@ -1263,6 +1265,11 @@ img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;
 .ha-attack .cos-neck,.ha-hurt .cos-neck{display:none}
 .cos-burst{position:absolute;left:50%;top:48%;width:0;height:0;z-index:9;pointer-events:none}
 @keyframes cosspin{to{transform:rotate(360deg)}}
+.cos-back.cb-b-beta::before{content:"";position:absolute;inset:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(143,180,255,.42),rgba(43,58,103,.18) 60%,transparent 76%);animation:cospulse 3s ease-in-out infinite}
+.cos-back.cb-b-beta .bt-em{position:absolute;left:50%;top:50%;width:74%;opacity:.92;transform:translate(-50%,-50%);filter:drop-shadow(0 0 6px rgba(240,190,69,.75));animation:btfloat 3.2s ease-in-out infinite}.cos-back.cb-b-beta .bt-em svg{width:100%;height:auto;display:block}
+.cos-back.cb-b-beta .bt-st b{color:#FFE08A;text-shadow:0 0 6px #F0BE45,0 0 2px #fff}
+@keyframes btfloat{50%{transform:translate(-50%,-56%)}}
+@media (prefers-reduced-motion:reduce){.cos-back.cb-b-beta .bt-em{animation:none}}
 @keyframes cospulse{50%{opacity:.6;filter:brightness(1.35)}}
 @keyframes cosrise{0%{opacity:0;transform:scaleY(3.3) translateY(0)}20%{opacity:1}100%{opacity:0;transform:scaleY(3.3) translateY(-60%)}}
 @keyframes coswingl{50%{transform:rotate(-9deg)}}@keyframes coswingr{50%{transform:rotate(9deg)}}
@@ -2217,7 +2224,7 @@ function viewToday(){
   return `<div class="view">
     ${regionNotice()}
     <section class="hero"><div class="eyebrow">${art.region?`📍 ${esc(regionLabel(art.region))} · `:""}${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
-    ${onbCoach()}${statsAskToday()}
+    ${onbCoach()}${statsAskToday()}${betaCard()}
     ${PLANS_ON?"":loginStrip()}
     <div class="steps">
       ${!preNeeded&&!d.preDone?(lvtDone()?step(1,"done",T("lvtTitle"),T("lvtDone",{l:lvtDone()==="IELTS"?"IELTS 7–8":lvtDone()}),"lvtest"):step(1,"now",T("lvtTitle"),T("lvtSub"),"lvtest")):step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):(()=>{ const due=srsDueList().filter(w=>w.firstSeen<today()).length; return due?T("preDue",{d:Math.min(10,due),k:Math.min(10,el.length)}):T("preDraw",{n:el.length,k:Math.min(10,el.length)}); })()):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
@@ -2828,7 +2835,7 @@ function startQuiz(kind, art){
 }
 function finishPost(art, score, total){
   const d=dayRec();
-  actFirstQuiz();
+  actFirstQuiz(); setTimeout(betaClaim,1500);
   if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
   if(isMain(art)) styleDaily();
   if(isMain(art)&&INV.ref) setTimeout(invTick,600);
@@ -4343,6 +4350,31 @@ function devBadgeHtml(){
 /* ----- supporter badges (supporters/{uid} in Firestore, set by the admin in developer mode) ----- */
 let SUP={}, SUP_N=0;
 const SUP_TIERS=[1,2,3,4,5];
+/* ----- 封測先鋒 (closed beta, CheChe 2026-11-24): the first 50 accounts that sign in and finish a day's three steps get a
+   numbered badge for good. beta/list = {n, e:{uid:no}}; the Firestore rules only allow taking the next number, once, up to 50. ----- */
+const BETA_MAX=50, BETA_ON=true;
+let BETA={n:0, e:{}, at:0};
+async function betaLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDoc(fsM.doc(db,"beta","list")); const d=sn.exists()?sn.data():{};
+  const e={}; for(const [u,v] of Object.entries(d.e||{})) if(+v>=1&&+v<=BETA_MAX) e[u]=+v; BETA={n:Math.min(BETA_MAX,+d.n||0), e, at:Date.now()}; render(); }catch(e){ console.warn("beta",e&&e.code); } }
+const betaNo=uid=>{ const me=CLOUD.user&&(uid==="me"||uid===CLOUD.user.uid); return BETA.e[me?CLOUD.user.uid:uid]||0; };
+const betaSvg=(size)=>`<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"><path d="M12 1.6 21 5v6.4c0 5.3-3.8 9.6-9 11-5.2-1.4-9-5.7-9-11V5z" fill="#2B3A67" stroke="#F0BE45" stroke-width="1.6"/><path d="M12 5.2l1.7 3.5 3.8.5-2.8 2.6.7 3.8L12 13.8l-3.4 1.8.7-3.8-2.8-2.6 3.8-.5z" fill="#F0BE45"/><text x="12" y="20.3" text-anchor="middle" font-size="5.2" font-weight="800" fill="#fff" font-family="system-ui,sans-serif">β</text></svg>`;
+const betaB=(uid,size)=>{ const n=betaNo(uid); return n?`<span class="sb-wrap beta-b" title="${esc(T("betaN",{n}))}">${betaSvg(size||18)}</span>`:""; };
+const betaEligible=()=>[...S.days.values()].some(d=>d&&d.postDone);
+async function betaClaim(){ if(!BETA_ON||!CLOUD.fb||!CLOUD.user||DEV||SANDBOX()||!betaEligible()) return; const me=CLOUD.user.uid;
+  if(BETA.e[me]||(BETA.at&&BETA.n>=BETA_MAX)) return;
+  const {fsM,db}=CLOUD.fb, ref=fsM.doc(db,"beta","list"); let got=0;
+  try{ await fsM.runTransaction(db, async tx=>{ const sn=await tx.get(ref); const d=sn.exists()?sn.data():{n:0,e:{}}; const n=+d.n||0;
+      if(d.e&&d.e[me]){ got=+d.e[me]; return; } if(n>=BETA_MAX) return;
+      got=n+1; if(sn.exists()) tx.update(ref,{n:got, ["e."+me]:got}); else tx.set(ref,{n:got, e:{[me]:got}}); });
+    await betaLoad(); if(got&&BETA.e[me]===got){ S.betaNew=got; toast(T("betaGot",{n:got})); render(); } }
+  catch(e){ console.warn("beta claim",e&&(e.code||e.message)); } }
+function betaCard(){ if(!BETA_ON||SANDBOX()||!BETA.at) return ""; const mine=betaNo("me"), left=Math.max(0,BETA_MAX-BETA.n);
+  if(mine){ let hide=false; try{ hide=localStorage.getItem("che-pro-betax")==="1"; }catch(e){} if(hide&&!S.betaNew) return "";
+    return `<section class="card beta-card mine"><div class="beta-ic">${betaSvg(56)}</div><div><b>${T("betaMine",{n:mine})}</b><p class="muted sm-t">${T("betaMineSub")}</p></div><button class="beta-x" data-act="betax" aria-label="close">×</button></section>`; }
+  if(!left) return "";
+  return `<section class="card beta-card"><div class="beta-ic">${betaSvg(56)}</div><div><b>${T("betaLeft",{n:left,t:BETA_MAX})}</b><p class="muted sm-t">${T(CLOUD.user?"betaHowIn":"betaHowOut")}</p><p class="muted sm-t">${T("betaKeep")}</p></div></section>`; }
+function betaDevHtml(){ const L=Object.entries(BETA.e).sort((a,b)=>a[1]-b[1]);
+  return `<div class="card set-sec"><b>🎖 ${T("betaDevT",{n:BETA.n,t:BETA_MAX})}</b>${L.length?`<div class="sm-t">${L.map(([u,n])=>`#${n} ${esc((SUP[u]&&SUP[u].n)||u.slice(0,8))}`).join(" · ")}</div>`:`<p class="muted sm-t">–</p>`}<button class="btn ghost sm" data-act="betareload">${T("dsReload")}</button></div>`; }
 async function supLoad(){ if(!CLOUD.fb) return; try{ const {fsM,db}=CLOUD.fb; const sn=await fsM.getDocs(fsM.collection(db,"supporters")); const m={}; sn.forEach(d=>{ const x=d.data(); if(x&&x.tier>=1&&x.tier<=5) m[d.id]={tier:x.tier, n:x.n||"", sub:x.sub===true, plus:x.plus===true, months:x.months||0}; }); SUP=m; render(); }catch(e){} }
 function supSvg(t,size){
   const id="sp"+t+"_"+(++SUP_N), z=size||22;
@@ -4392,7 +4424,7 @@ const ttOf=uid=>{ const me=uid==="me"||(CLOUD.user&&uid===CLOUD.user.uid), x=me?
 const supB=(uid,size,noIe)=>{ if(PLANS_ON){ const t=supTier(uid), pl=supPlus(uid); return t?`<span class="sb-wrap" title="${esc(sbName(t,pl))}">${sbArt(t,size||18,pl)}</span>`:""; }
   // plans off: the badge is the login-streak title; a hand-given supporter badge still wins when it is higher
   const {x,t}=ttOf(uid);
-  return (t?`<span class="sb-wrap" title="${esc(t>x.t?sbName(t,false):T("lgTitleN",{t:titleName(t)}))}">${sbArt(t,size||18,false)}</span>`:"")+(!noIe&&x.ie>=6?`<span class="sb-wrap ie-b" title="IELTS ${fmtBand(x.ie)}">${badgeSvg(fmtBand(x.ie),0,size||18)}</span>`:""); };
+  return betaB(uid,size)+(t?`<span class="sb-wrap" title="${esc(t>x.t?sbName(t,false):T("lgTitleN",{t:titleName(t)}))}">${sbArt(t,size||18,false)}</span>`:"")+(!noIe&&x.ie>=6?`<span class="sb-wrap ie-b" title="IELTS ${fmtBand(x.ie)}">${badgeSvg(fmtBand(x.ie),0,size||18)}</span>`:""); };
 function supMineCard(){ const u=CLOUD.user; const t=u?supTier(u.uid):0; if(!t) return ""; const pl=supPlus(u.uid); return `<section class="card sup-mine"><div class="sup-mine-b">${sbArt(t,72,pl)}</div><div><b>${T("sbMine",{b:esc(sbName(t,pl))})}</b><p class="muted sm-t" style="margin:4px 0 0">${T("sbThanks")}</p></div></section>`; }
 function devSupHtml(){
   const list=Object.entries(SUP).sort((a,b)=>b[1].tier-a[1].tier);
@@ -4489,12 +4521,12 @@ function devPanel(){
     ${devBadgeHtml()}`
    :tab==="watch"?`<p class="muted sm-t">${T("dtWatchSub")}</p>${devStatsHtml()}${devErrHtml()}`
    :tab==="run"?`<p class="muted sm-t">${T("dtRunSub")}</p><div id="devMaint" class="dev-maint">${devMaintInner()}</div><div id="devAnn" class="dev-ann">${devAnnInner()}</div>${devFeatHtml()}${plzNoticeDev()}`
-   :`<p class="muted sm-t">${T("dtPlayersSub")}</p>${devFbCard()}${cheatAdmin()}${memAdmin()}${devSupHtml()}`;
+   :`<p class="muted sm-t">${T("dtPlayersSub")}</p>${devFbCard()}${betaDevHtml()}${cheatAdmin()}${memAdmin()}${devSupHtml()}`;
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${tabs}
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.98";
+const APP_VERSION="2026.11.100";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5014,6 +5046,8 @@ document.addEventListener("click", e=>{
   if(a==="devstats") return devLoadStats();
   if(a==="devstatsnow") return devLoadStats(true);
   if(a==="devfbload") return devFbLoad();
+  if(a==="betareload") return betaLoad();
+  if(a==="betax"){ S.betaNew=0; try{ localStorage.setItem("che-pro-betax","1"); }catch(_){} return render(); }
   if(a==="devtab"){ S.devTab=t.dataset.k; try{ localStorage.setItem("che-pro-devtab",S.devTab); }catch(_){} return render(); }
   if(a==="errpush") return devErrPush();
   if(a==="deverr") return devLoadErrors();
@@ -5118,14 +5152,14 @@ async function cloudInit(){
     CLOUD.fb={authM,fsM,auth,db,app};
     setTimeout(()=>actPing(),2500);
     setTimeout(pushRefresh,1200);
-    setTimeout(supLoad,0);
+    setTimeout(supLoad,0); setTimeout(betaLoad,600);
     try{ fsM.onSnapshot(fsM.doc(db,"config","site"), sn=>{ S.maint=sn.exists()?sn.data():null; maintApply(); }, ()=>{}); }catch(e){}
     try{ fsM.onSnapshot(fsM.doc(db,"config","notice"), sn=>{ S.notice=sn.exists()?sn.data():null; annApply(); }, ()=>{}); }catch(e){}
     try{ fsM.onSnapshot(fsM.doc(db,"config","features"), sn=>{ S.feat=sn.exists()?sn.data():null; render(); }, ()=>{}); }catch(e){}
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(inboxCheck,5000); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(inboxCheck,5000); setTimeout(betaClaim,6000); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
     });
   }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
 }
@@ -5295,10 +5329,10 @@ const powerOf=s=>s.hp+s.atk*3+s.def*2;
 /* "look": how my character appears to others — gender | weapon | armour | weapon gems | armour gems */
 function myLook(){ const g=game(); if(!g||!g.gender) return "";
   const sk=id=>id?socketsOf(id).filter(Boolean).join("."):"";
-  const c=g.cos||{}, cc=["feet","back","neck"].map(k=>COS_CODE[c[k]]||"").join("");
+  const c=g.cos||{}, cc=["feet","back","neck"].map(k=>c[k]==="b-beta"&&!betaNo("me")?"":COS_CODE[c[k]]||"").join("");
   const ex=PLANS_ON?"":"|s"+streakTier(g)+(ieShowBand()>=6?"|i"+Math.round(ieShowBand()*10):"");   const base=[g.gender, g.weapon||"", g.armor||"", sk(g.weapon), sk(g.armor), cc].join("|");   return (base.length+ex.length<=100?base+ex:base).slice(0,100); }
 // styles travel to the leaderboard as two-letter codes (the look field is limited to 100 characters)
-const COS_CODE={"f-leaf":"fl","f-gold":"fg","f-helix":"fh","f-rainbow":"fr","f-rhelix":"fx","b-halo":"bh","b-gears":"bg","b-rune":"br","b-moon":"bm","b-abyss":"ba","b-wings":"bw","b-phoenix":"bp","n-fire":"nf","n-frost":"ni","n-thunder":"nt","n-dark":"nd","n-star":"ns","f-galaxy":"fv","b-aurora":"bu","b-sun":"bs","n-prism":"np","f-sakura":"fs","f-flame":"ff","f-thunder":"ft","f-eternal":"fe","b-bubble":"bb","b-cosmos":"bc","n-leaf":"nl","n-wave":"nw","n-moon":"nm","n-cosmic":"nc"};
+const COS_CODE={"f-leaf":"fl","f-gold":"fg","f-helix":"fh","f-rainbow":"fr","f-rhelix":"fx","b-halo":"bh","b-gears":"bg","b-rune":"br","b-moon":"bm","b-abyss":"ba","b-wings":"bw","b-phoenix":"bp","n-fire":"nf","n-frost":"ni","n-thunder":"nt","n-dark":"nd","n-star":"ns","f-galaxy":"fv","b-aurora":"bu","b-sun":"bs","n-prism":"np","f-sakura":"fs","f-flame":"ff","f-thunder":"ft","f-eternal":"fe","b-bubble":"bb","b-cosmos":"bc","n-leaf":"nl","n-wave":"nw","n-moon":"nm","n-cosmic":"nc","b-beta":"bt"};
 const COS_DECODE=Object.fromEntries(Object.entries(COS_CODE).map(([k,v])=>[v,k]));
 function parseLook(str){ if(typeof str!=="string") return null; const [g,w,a,ws,as,cc]=str.split("|");
   if(g!=="m"&&g!=="f") return null; const gem=x=>(x||"").split(".").filter(k=>/^(metal|wood|water|fire|earth)-[0-3]$/.test(k)).slice(0,4);
@@ -10832,6 +10866,8 @@ const COSMETICS=[
   {id:"f-eternal", slot:"feet", price:2200, c1:"#FFD54A", c2:"#B98CFF", plus:true, days:365},
   {id:"b-bubble",  slot:"back", price:460,  c1:"#4FC3F7", c2:"#E6FBFF", need:"sub", days:20},
   {id:"b-cosmos",  slot:"back", price:2500, c1:"#B98CFF", c2:"#7FD4FF", plus:true, days:365},
+  // closed beta: only the first BETA_MAX players get it (owned when beta/list has their number); never sold
+  {id:"b-beta",    slot:"back", price:0,    c1:"#F0BE45", c2:"#8FB4FF", beta:true},
   {id:"n-leaf",    slot:"neck", price:500,  c1:"#5CCB6A", c2:"#E4FFB0", fx:"leaf",    pow:3, need:"sub", days:10},
   {id:"n-wave",    slot:"neck", price:650,  c1:"#29A8E8", c2:"#E6FBFF", fx:"wave",    pow:4, plus:true, days:30},
   {id:"n-moon",    slot:"neck", price:1100, c1:"#EAF2FF", c2:"#7FA8FF", fx:"moon",    pow:5, plus:true, days:100},
@@ -10861,7 +10897,7 @@ function cosFix(g){ if(g.cosFixed===2) return; g.cosFixed=2;
   if(back) saveGame(); }
 const cosOf=id=>COSMETICS.find(c=>c.id===id);
 const COS_POW_MAX=Math.max(...COSMETICS.map(c=>c.pow||0));
-const cosOwned=id=>(game().cosOwn||[]).includes(id);
+const cosOwned=id=>id==="b-beta"?!!betaNo("me"):(game().cosOwn||[]).includes(id);
 const cosStyleCss=c=>`--c1:${c.c1||"#fff"};--c2:${c.c2||"#fff"}`;
 function cosWorn(){ cosFix(game()); const w={...(game().cos||{})}; if(S.view==="adv"&&S.advTab==="style"&&S.cosTry) for(const [k,v] of Object.entries(S.cosTry)) w[k]=v; return w; }
 // small runes drawn as strokes (no font needed): the wheel spins behind the hero
@@ -10899,6 +10935,7 @@ function cosLayers(w){
         :b.id==="b-aurora"?`<i class="au a1"></i><i class="au a2"></i><i class="au a3"></i><i class="stars">${"<b>✦</b>".repeat(6)}</i>`
         :b.id==="b-sun"?`<i class="rays"></i><i class="rays r2"></i><i class="core"></i>${runeWheel()}<i class="orb"><b></b></i><i class="orb o2"><b></b></i><i class="orb o3"><b></b></i>`
         :b.id==="b-bubble"?`<i class="ring"></i>${"<s></s>".repeat(8)}`
+        :b.id==="b-beta"?`<i class="ring"></i><i class="bt-em">${betaSvg(100)}</i><i class="stars bt-st">${"<b>★</b>".repeat(6)}</i>`
         :b.id==="b-cosmos"?`<i class="rays"></i><i class="rays r2"></i>${runeWheel()}<i class="wg l">${WING}</i><i class="wg r">${WING}</i><i class="orb"><b></b></i><i class="orb o2"><b></b></i><i class="orb o3"><b></b></i><i class="stars">${"<b>✦</b>".repeat(6)}</i>`
         :b.id==="b-phoenix"?`<i class="ring"></i><i class="fw">${Array.from({length:12},(_,i)=>`<em style="--a:${i*30}deg;--d:${-(i%4)*.18}s"></em>`).join("")}</i>${"<s></s>".repeat(6)}`
         :`<i class="ring"></i><i class="ring r2"></i>`;
@@ -10998,14 +11035,14 @@ function viewStyle(){
   const anyTry=Object.keys(tryOn).some(k=>tryOn[k]&&tryOn[k]!==(g.cos||{})[k]);
   const hero=g.gender?rigHeroHtml(g.gender, g.weapon&&ITEMS[g.weapon], g.armor&&ITEMS[g.armor], ()=>heroArt(S.cosHit?"attack":"idle"), cosLayers(cosWorn())):heroArt(S.cosHit?"attack":"idle"), rig=hero.includes("rig-host");
   const stage=`<div class="sty-stage${rig?" rig-on":""}${S.cosHit?cosArenaFx():""}">${S.cosHit?cosFlash():""}<div class="sty-fig${S.cosHit&&!rig?" hitting":""}">${hero}</div><div class="sty-dummy">${S.cosHit?cosBurst():""}<span class="dm">🎯</span></div></div>`;
-  const cosRank=c=>c.plus?2:c.need==="sub"?1:0;   // free first, then member, then premium (catalog order within each)
+  const cosRank=c=>c.beta?3:c.plus?2:c.need==="sub"?1:0;   // free first, then member, then premium (catalog order within each)
   const items=COSMETICS.filter(c=>c.slot===slot).map((c,i)=>[c,i]).sort((x,y)=>cosRank(x[0])-cosRank(y[0])||(x[0].days||0)-(y[0].days||0)||x[0].price-y[0].price||x[1]-y[1]).map(x=>x[0]).map(c=>{
     const own=cosOwned(c.id), on=(g.cos||{})[slot]===c.id, trying=tryOn[slot]===c.id&&!on, lockPlus=((cosNeed(c)&&!planHas(cosNeed(c)))||cosDayLock(c))&&!own;
     const btns=[];
     if(own) btns.push(on?`<button class="btn ghost sm" data-act="csoff" data-k="${slot}">${T("cosOff")}</button>`:`<button class="btn sm" data-act="cswear" data-k="${c.id}">${T("cosWear")}</button>`);
     else { btns.push(`<button class="btn ghost sm" data-act="cstry" data-k="${c.id}">${trying?T("cosTryOff"):T(c.slot==="sfx"?"cosListen":"cosTry")}</button>`);
-      if(!lockPlus) btns.push(`<button class="btn sm" data-act="csbuy" data-k="${c.id}" ${(g.style||0)<c.price?"disabled":""}>${STYLE_IC} ${c.price}</button>`); }
-    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${cosNeed(c)?`<span class="plan-tag ${cosNeed(c)}">${T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly")}</span>`:""}${cosDays(c)?`<span class="plan-tag days${cosDayLock(c)?"":" ok"}">${cosDayLock(c)?"🔒":"✓"} ${T("cosDaysTag",{n:c.days})}</span>`:""}<small class="muted">${T("cosDi_"+c.id)}</small>${c.pow?`<small class="cos-pow">${T("cosPow")} ${"★".repeat(c.pow)}<i>${"★".repeat(Math.max(0,COS_POW_MAX-c.pow))}</i></small>`:""}${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
+      if(!lockPlus&&!c.beta) btns.push(`<button class="btn sm" data-act="csbuy" data-k="${c.id}" ${(g.style||0)<c.price?"disabled":""}>${STYLE_IC} ${c.price}</button>`); }
+    return `<div class="cos-item${on?" on":""}${trying?" trying":""}${c.plus?" plus":""}">${cosPreviewIc(c)}<div class="cos-txt"><b>${T("cos_"+c.id)}</b>${c.beta?`<span class="plan-tag days${own?" ok":""}">${own?"✓":"🔒"} ${T("cosBetaTag",{t:BETA_MAX})}</span>`:""}${cosNeed(c)?`<span class="plan-tag ${cosNeed(c)}">${T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly")}</span>`:""}${cosDays(c)?`<span class="plan-tag days${cosDayLock(c)?"":" ok"}">${cosDayLock(c)?"🔒":"✓"} ${T("cosDaysTag",{n:c.days})}</span>`:""}<small class="muted">${T("cosDi_"+c.id)}</small>${c.pow?`<small class="cos-pow">${T("cosPow")} ${"★".repeat(c.pow)}<i>${"★".repeat(Math.max(0,COS_POW_MAX-c.pow))}</i></small>`:""}${on?`<small class="cos-on">✓ ${T("cosWorn")}</small>`:own?`<small class="muted">✓ ${T("cosOwn")}</small>`:""}</div><div class="cos-btns">${btns.join("")}</div></div>`; }).join("");
   const earn=(PLANS_ON?[["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}],["styEarn3",{n:STYLE_EARN.sub}],["styEarn4",{n:STYLE_EARN.plus}]]:[["styEarnL",{}],["styEarnM",{}],["styEarn1",{n:STYLE_EARN.day}],["styEarn2",{d:STYLE_EARN.weekDays,n:STYLE_EARN.week}]])
     .map(([k,o],i)=>`<li class="${(i===2&&plan==="sub")||(i===3&&plan==="plus")?"mine":""}">${T(k,o)}</li>`).join("");
   return `<section class="card sty-card">
@@ -11036,7 +11073,7 @@ document.addEventListener("click",e=>{
   if(a==="cstry"){ const c=cosOf(k); S.cosTry=S.cosTry||{}; if(S.cosTry[c.slot]===k){ delete S.cosTry[c.slot]; return render(); } S.cosTry[c.slot]=k; if(c.slot==="sfx"||c.slot==="neck") return cosTest(); return render(); }
   if(a==="cstryclr"){ S.cosTry={}; return render(); }
   if(a==="cstest") return cosTest();
-  if(a==="csbuy"){ const c=cosOf(k); if(!c||cosOwned(k)) return; if(cosNeed(c)&&!planHas(cosNeed(c))) return toast(T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly"));     if(cosDayLock(c)) return toast(T("cosDaysLock",{n:c.days,m:streakBest()}));
+  if(a==="csbuy"){ const c=cosOf(k); if(!c||cosOwned(k)||c.beta) return; if(cosNeed(c)&&!planHas(cosNeed(c))) return toast(T(cosNeed(c)==="plus"?"cosPlusOnly":"cosSubOnly"));     if(cosDayLock(c)) return toast(T("cosDaysLock",{n:c.days,m:streakBest()}));
     if((g.style||0)<c.price) return toast(T("cosNoCoin",{n:c.price-(g.style||0)}));
     if(!t.dataset.sure){ return askBuy({name:T("cos_"+c.id), cost:c.price, have:g.style||0, cur:STYLE_IC, pic:`<div class="ba-cos">${cosPreviewIc(c)}</div>`, note:T("cosDi_"+c.id)}, ()=>{ const f=document.createElement("button"); f.dataset.act="csbuy"; f.dataset.k=k; f.dataset.sure="1"; f.style.display="none"; document.body.appendChild(f); f.click(); f.remove(); }); }
     g.style-=c.price; g.cosOwn=[...(g.cosOwn||[]),k]; g.cos={...(g.cos||{}),[c.slot]:k}; if(S.cosTry) delete S.cosTry[c.slot]; saveGame(); cosPush(); sfx("prize"); toast(T("cosBought")); return render(); }
@@ -11616,6 +11653,18 @@ Object.assign(STR.hi,{"dtTest": "टेस्ट", "dtWatch": "निगरा�
 Object.assign(STR.es,{"dtTest": "Pruebas", "dtWatch": "Monitor", "dtRun": "Sitio", "dtPlayers": "Jugadores", "dtTestSub": "Solo cambia la partida de prueba de este móvil.", "dtWatchSub": "Estadísticas de todos los jugadores y errores.", "dtRunSub": "Afecta a todos: mantenimiento, avisos, funciones.", "dtPlayersSub": "Comentarios, denuncias, antitrampas, insignias."});
 Object.assign(STR.ja,{"dtTest": "テスト", "dtWatch": "監視", "dtRun": "運営", "dtPlayers": "プレイヤー", "dtTestSub": "この端末のテスト用データだけを変更します。", "dtWatchSub": "全プレイヤーの統計とエラー。", "dtRunSub": "全員に影響：メンテナンス、お知らせ、機能公開。", "dtPlayersSub": "意見・報告、不正対策、会員申請、バッジ。"});
 Object.assign(STR.ko,{"dtTest": "테스트", "dtWatch": "모니터링", "dtRun": "운영", "dtPlayers": "플레이어", "dtTestSub": "이 폰의 테스트 저장만 바뀌어요.", "dtWatchSub": "전체 플레이어 통계와 오류.", "dtRunSub": "모든 플레이어에 영향: 점검, 공지, 기능 공개.", "dtPlayersSub": "의견·신고, 부정 방지, 회원 신청, 배지."});
+Object.assign(STR.zh,{"betaN": "封測先鋒 #{n}", "betaGot": "🎉 你是封測先鋒 #{n}！", "betaMine": "🎖 你是封測先鋒 #{n}", "betaMineSub": "徽章會一直顯示在你的名字旁邊、資料卡和排行榜上。限定背飾「封測先鋒之盾」已經放進造型屋，去穿上吧！謝謝你陪 BinBin 一起成長！", "betaLeft": "🎖 封測先鋒：還剩 {n} / {t} 個名額", "betaHowIn": "完成今天的三個步驟（複習、閱讀、讀後測驗），就能拿到專屬的封測徽章、編號，還有只有前 50 名才有的背飾「封測先鋒之盾」。", "betaHowOut": "用 Google 登入並完成今天的三個步驟，就能拿到專屬的封測徽章、編號，還有只有前 50 名才有的背飾「封測先鋒之盾」。", "betaKeep": "封測期間的進度在正式上線後全部保留。", "betaDevT": "封測先鋒 {n} / {t}"});
+Object.assign(STR.en,{"betaN": "Beta pioneer #{n}", "betaGot": "🎉 You're beta pioneer #{n}!", "betaMine": "🎖 You're beta pioneer #{n}", "betaMineSub": "Your badge stays next to your name, on your card and on the leaderboards. The Beta pioneer shield is waiting in the Style shop, go put it on! Thanks for helping BinBin grow!", "betaLeft": "🎖 Beta pioneers: {n} of {t} spots left", "betaHowIn": "Finish today's three steps (review, read, quiz) to get the beta badge, your number, and the Beta pioneer shield, a back piece only the first 50 players get.", "betaHowOut": "Sign in with Google and finish today's three steps to get the beta badge, your number, and the Beta pioneer shield, a back piece only the first 50 players get.", "betaKeep": "Everything you do during the beta is kept after the official launch.", "betaDevT": "Beta pioneers {n} / {t}"});
+Object.assign(STR.hi,{"betaN": "बीटा अग्रणी #{n}", "betaGot": "🎉 आप बीटा अग्रणी #{n} हैं!", "betaMine": "🎖 आप बीटा अग्रणी #{n} हैं", "betaMineSub": "यह बैज हमेशा आपके नाम के साथ रहेगा। बीटा अग्रणी ढाल स्टाइल में आपका इंतज़ार कर रही है। धन्यवाद!", "betaLeft": "🎖 बीटा अग्रणी: {t} में से {n} जगह बाकी", "betaHowIn": "आज के तीन कदम पूरे करें और बीटा बैज, अपना नंबर और सिर्फ़ पहले 50 के लिए बीटा अग्रणी ढाल पाएँ।", "betaHowOut": "Google से साइन इन करें और आज के तीन कदम पूरे करें: बीटा बैज, नंबर और बीटा अग्रणी ढाल मिलेगी।", "betaKeep": "बीटा की प्रगति लॉन्च के बाद भी रहेगी।", "betaDevT": "बीटा अग्रणी {n} / {t}"});
+Object.assign(STR.es,{"betaN": "Pionero beta #{n}", "betaGot": "🎉 ¡Eres el pionero beta #{n}!", "betaMine": "🎖 Eres el pionero beta #{n}", "betaMineSub": "Tu insignia se queda junto a tu nombre para siempre. El Escudo de pionero beta te espera en la tienda de estilo, ¡póntelo! ¡Gracias por ayudar a BinBin!", "betaLeft": "🎖 Pioneros beta: quedan {n} de {t} plazas", "betaHowIn": "Completa los tres pasos de hoy para conseguir la insignia beta, tu número y el Escudo de pionero beta, solo para los primeros 50.", "betaHowOut": "Inicia sesión con Google y completa los tres pasos de hoy para conseguir la insignia, tu número y el Escudo de pionero beta.", "betaKeep": "Tu progreso de la beta se conserva tras el lanzamiento.", "betaDevT": "Pioneros beta {n} / {t}"});
+Object.assign(STR.ja,{"betaN": "βテスター #{n}", "betaGot": "🎉 あなたは βテスター #{n} です！", "betaMine": "🎖 あなたは βテスター #{n}", "betaMineSub": "このバッジはずっと名前の横に表示されます。「βテスターの盾」がおしゃれに届いています。着てみてね！BinBin を応援してくれてありがとう！", "betaLeft": "🎖 βテスター：残り {n} / {t} 枠", "betaHowIn": "今日の3ステップを終えると、βバッジと番号、そして先着50名限定の背中アイテム「βテスターの盾」がもらえます。", "betaHowOut": "Google でログインして今日の3ステップを終えると、βバッジと番号、限定の「βテスターの盾」がもらえます。", "betaKeep": "β期間の進行状況は正式リリース後もそのまま残ります。", "betaDevT": "βテスター {n} / {t}"});
+Object.assign(STR.ko,{"betaN": "베타 개척자 #{n}", "betaGot": "🎉 베타 개척자 #{n}이 되었어요!", "betaMine": "🎖 베타 개척자 #{n}", "betaMineSub": "이 배지는 계속 이름 옆에 표시돼요. '베타 개척자의 방패'가 꾸미기에 도착했어요. 입어 보세요! BinBin과 함께해 줘서 고마워요!", "betaLeft": "🎖 베타 개척자: {t}명 중 {n}자리 남음", "betaHowIn": "오늘의 세 단계를 마치면 베타 배지와 번호, 그리고 선착순 50명 한정 등 장식 '베타 개척자의 방패'를 받아요.", "betaHowOut": "Google로 로그인하고 오늘의 세 단계를 마치면 베타 배지와 번호, 한정 '베타 개척자의 방패'를 받아요.", "betaKeep": "베타 기간의 진행 상황은 정식 출시 후에도 그대로 남아요.", "betaDevT": "베타 개척자 {n} / {t}"});
+Object.assign(STR.zh,{"cos_b-beta": "封測先鋒之盾", "cosDi_b-beta": "藍金色盾牌在背後發光，金色星星繞著轉。只有前 50 名封測玩家擁有", "cosBetaTag": "封測限定 · 前 {t} 名"});
+Object.assign(STR.en,{"cos_b-beta": "Beta pioneer shield", "cosDi_b-beta": "A glowing navy-and-gold shield behind you, ringed by gold stars. Only the first 50 beta players have it", "cosBetaTag": "Beta only · first {t}"});
+Object.assign(STR.hi,{"cos_b-beta": "बीटा अग्रणी ढाल", "cosDi_b-beta": "आपके पीछे चमकती नीली-सुनहरी ढाल, चारों ओर सुनहरे तारे। सिर्फ़ पहले 50 बीटा खिलाड़ियों के पास", "cosBetaTag": "सिर्फ़ बीटा · पहले {t}"});
+Object.assign(STR.es,{"cos_b-beta": "Escudo de pionero beta", "cosDi_b-beta": "Un escudo azul y dorado brilla a tu espalda, rodeado de estrellas doradas. Solo lo tienen los primeros 50 jugadores beta", "cosBetaTag": "Solo beta · primeros {t}"});
+Object.assign(STR.ja,{"cos_b-beta": "βテスターの盾", "cosDi_b-beta": "背中で光る紺と金の盾のまわりを金の星が回ります。最初の 50 人のβテスターだけの限定品", "cosBetaTag": "β限定・先着 {t} 名"});
+Object.assign(STR.ko,{"cos_b-beta": "베타 개척자의 방패", "cosDi_b-beta": "등 뒤에서 빛나는 남색·금색 방패 주위로 금빛 별이 돌아요. 첫 50명의 베타 플레이어만 가질 수 있어요", "cosBetaTag": "베타 한정 · 선착순 {t}명"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
