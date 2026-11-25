@@ -1246,7 +1246,7 @@ img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;
 .sock-row{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.sock{width:28px;height:28px;border-radius:50%;border:2px dashed var(--line,#9aa);background:transparent;color:var(--muted,#789);font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0;font-size:15px}
 .sock.full{border-style:solid;border-color:transparent}.gem{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:30% 30% 50% 50%;color:#fff;font-size:11px;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
 .gem-pick{margin:-4px 0 10px}.gem-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}.gem-opt{display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line,#ccd);border-radius:12px;padding:8px 10px;text-align:left;color:inherit;font:inherit}.gem-opt small{margin-left:auto;color:var(--muted,#789)}
-.lvt-link{width:100%;margin-top:10px}nav.tabs button.locked{opacity:.45}button.locked{opacity:.55}.hu-title{margin:10px 0 4px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
+.lvt-link{width:100%;margin-top:10px}nav.tabs button.locked{opacity:.45;position:relative}nav.tabs button.locked::after{content:"🔒";position:absolute;top:2px;left:calc(50% + 6px);font-size:10px}.ul-ban{opacity:.8;cursor:default}button.locked{opacity:.55}.hu-title{margin:10px 0 4px}.lvt-ans summary{cursor:pointer;list-style:none}.lvt-ans summary::before{content:"▸ ";color:var(--muted,#6b7a76)}.lvt-ans[open] summary::before{content:"▾ "}.lvt-res{text-align:center;padding:22px}.lvt-pick{display:flex;flex-direction:column;gap:8px;margin-top:10px}.lvt-big{font-size:44px;font-weight:800;color:var(--accent,#1d6b5a);margin:4px 0}
 /* ----- plans, cosmetics, completion card, weekly review, close listening ----- */
 .plan-tag{display:inline-block;font-size:11px;font-weight:800;padding:1px 8px;border-radius:99px;background:color-mix(in srgb,#E3B341 22%,transparent);color:#8A6410;white-space:nowrap;vertical-align:middle}.plan-tag.plus{background:linear-gradient(90deg,#FFE58A,#FFC8E6);color:#7A3E00}
 .sty-ic{width:18px;height:18px;vertical-align:-4px;flex:none}.vt-style .vt-ic .sty-ic{width:40px;height:40px}
@@ -2161,9 +2161,19 @@ function postFor(d, art){ return isMain(art) ? (d.postDone?{score:d.postScore,to
 const FEAT_DEF={vault:"all", style:"all"};
 const featLevel=k=>((S.feat||{})[k])||FEAT_DEF[k];
 function featOpen(k){ const l=featLevel(k); return !!DEV||l==="all"||(l==="testers"&&!!S.payTester); }
-function featLock(k){ if((k==="vault"||k==="style")&&!featOpen(k)) return k==="vault"?"lockVault":"lockStyle";   // the Rainbow Vault now only has gifting and the wishing well, so it is open to everyone by default
-  const st=(game().story)||{}; if(!st.lock) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
-function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+T(lk)); try{ if(ROOM&&ROOM.away){ if(S.battle&&S.battle.plz) S.battle=null; plazaClose(); } }catch(e){} S.monInfo=null; S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
+/* new players: features open step by step, counted in days whose three daily steps are done (not necessarily in a row).
+   Accounts that played before this existed (elder intro before UL_FROM, Lv 5+, or 3+ done days) and developer mode see everything. */
+const UL_FROM="2026-11-25", UL_DAY={adv:1,luck:2,lsn:2,train:2,rank:3,coop:3,plaza:3,style:5,vault:5,think:5};
+const UL_ADV=new Set(["go","rank","coop","think","vault","style","shop","luck","bag","train"]);
+function ulDays(){ let n=0; for(const [k,d] of S.days) if(k.startsWith("day~")&&d&&d.postDone) n++; return n; }
+function ulAll(){ if(DEV) return true; const g=game(), st=g.story||{}; if(st.ul) return false;
+  return !!(st.intro&&st.intro<UL_FROM)||(g.lv||1)>=5||ulDays()>=3; }
+function ulLeft(k){ let need=UL_DAY[k]||0; if(UL_ADV.has(k)) need=Math.max(need,UL_DAY.adv); if(!need||ulAll()) return 0; return Math.max(0,need-ulDays()); }
+const lockMsg=lk=>String(lk).startsWith("ul:")?T("ulLock",{n:lk.slice(3)}):T(lk);
+function featLock(k){ const ul=ulLeft(k); if(ul) return "ul:"+ul;
+  if((k==="vault"||k==="style")&&!featOpen(k)) return k==="vault"?"lockVault":"lockStyle";   // the Rainbow Vault now only has gifting and the wishing well, so it is open to everyone by default
+  const st=(game().story)||{}; if(!st.lock||st.ul) return null; if(k==="luck"&&!st.d2) return "lockLuck"; return null; }
+function setTab(t){ const lk=featLock(t); if(lk) return toast("🔒 "+lockMsg(lk)); try{ if(ROOM&&ROOM.away){ if(S.battle&&S.battle.plz) S.battle=null; plazaClose(); } }catch(e){} S.monInfo=null; S.tab=t; S.view=t; S.open=null; render(); window.scrollTo(0,0); }
 /* a page that fails to draw shows what went wrong instead of silently doing nothing */
 function render(){ try{ renderInner(); loginHint(); if(!PLANS_ON) setTimeout(loginPop,0); quizKeep(); if(S.view==="read"&&window.LS&&LS.on) setTimeout(lsHighlight,0); if(S.story&&S.story.u!==!!CLOUD.user) storyRender(); if(typeof SND!=="undefined"&&SND.ctx) musicForView(); setTimeout(()=>{ if(typeof storyCheck==="function") storyCheck(); },0); }catch(e){ console.error(e); errReport(e,"render:"+S.view+"/"+(S.view==="adv"?S.advTab||"":"")); const app=$("#app"); if(app) app.innerHTML=`<div class="view"><section class="card err-card"><b>⚠️ ${T("errTitle")}</b><button class="btn sm" data-tab="today" style="align-self:flex-start">${T("errBack")}</button>${DEV?`<pre class="err-pre">${esc(String(e&&e.message||e))}\n${esc(String(e&&e.stack||"").split("\n").slice(1,6).join("\n"))}\nview=${esc(S.view)} tab=${esc(S.tab)} sub=${esc(S.advTab||"")} v${APP_VERSION}</pre>`:""}</section></div>`; } }
 /* errors are saved to the cloud (errors/{id}) so the developer can see them in developer mode; players only see a short notice */
@@ -2242,7 +2252,7 @@ function viewToday(){
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
     ${pushPrompt()}
-    <button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>
+    ${featLock("adv")?`<div class="adv-banner ul-ban"><span><b>${T("ulBanT")}</b><span class="muted">${T("ulBanS")}</span></span><span class="go">🔒</span></div>`:`<button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>`}
     <div class="stats">
       <div class="stat"><b>${S.words.size}</b><span>${T("statWords")}</span></div>
       <div class="stat"><b>${tested?Math.round(right/tested*100)+"%":"—"}</b><span>${T("statAcc")}</span></div>
@@ -3914,7 +3924,7 @@ function advMenuToggle(open, kind){ let el=document.getElementById("advMenu"); c
   if(!on){ if(el&&!el.classList.contains("closing")){ el.classList.add("closing"); setTimeout(()=>{ if(el.classList.contains("closing")) el.remove(); },190); } return; }
   if(!el){ el=document.createElement("div"); el.id="advMenu"; document.body.appendChild(el); } el.classList.remove("closing"); el.dataset.k=k; el.innerHTML=k==="play"?playMenuHtml():k==="read"?readMenuHtml():advMenuHtml(); }
 document.addEventListener("click",e=>{
-  const nav=e.target.closest("#tab-adv"); if(nav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(); return; }
+  const nav=e.target.closest("#tab-adv"); if(nav){ e.stopPropagation(); e.preventDefault(); if(featLock("adv")){ advMenuToggle(false); toast("🔒 "+lockMsg(featLock("adv"))); return; } advMenuToggle(); return; }
   const rnav=e.target.closest("#tab-read"); if(rnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(undefined,"read"); return; }
   const pnav=e.target.closest("#tab-play"); if(pnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(undefined,"play"); return; }
   if(e.target.closest("[data-tab]")) advMenuToggle(false);   // another bottom tab: close the menu and go there
@@ -3922,16 +3932,19 @@ document.addEventListener("click",e=>{
   if(a==="amclose"){ e.stopPropagation(); advMenuToggle(false); return; }
   if(a==="rmgo"){ e.stopPropagation(); advMenuToggle(false); setTab(t.dataset.k); return; }
   if(a==="pmgo"){ e.stopPropagation(); advMenuToggle(false); S.playMode=t.dataset.k; S.tab="play"; S.view="play"; S.open=null; render(); window.scrollTo(0,0); return; }
-  if(a==="amgo"){ e.stopPropagation(); const k=t.dataset.k, lk=featLock(k); if(lk){ toast("🔒 "+T(lk)); return; } advMenuToggle(false);
+  if(a==="amgo"){ e.stopPropagation(); const k=t.dataset.k, lk=featLock(k); if(lk){ toast("🔒 "+lockMsg(lk)); return; } advMenuToggle(false);
     S.quiz=null; S.battle=null; if(S.view==="ielts"){ ieStopAudio(); S.ieResult=null; } if(S.view==="toeic"){ toStop(); S.toResult=null; }
     S.advTab=k; setTab("adv"); return; }
 }, true);
 function viewAdv(){ restCheck();
   const g=game(), s=stats(), need=expNeed(g.lv);
   const sub=S.advTab||"go";
+  if(featLock("adv")) return `<div class="view"><section class="card"><p class="muted">🔒 ${lockMsg(featLock("adv"))}</p><button class="btn ghost" data-tab="today" style="align-self:flex-start">${T("backToday")}</button></section></div>`;
   const seg=(k,l)=>`<button data-advtab="${k}" aria-pressed="${sub===k}"${featLock(k)?' class="locked"':""}>${featLock(k)?"🔒 ":""}${l}</button>`;
   let body="";
-  if(sub==="go"){
+  if(featLock(sub)&&String(featLock(sub)).startsWith("ul:")){
+    body=`<section class="card"><p class="muted">🔒 ${lockMsg(featLock(sub))}</p></section>`;
+  } else if(sub==="go"){
     body=viewConquest();
   } else if(sub==="shop"){
     const f=S.shopEl||"all";
@@ -4963,7 +4976,7 @@ document.addEventListener("click", e=>{
   if(t.dataset.town){ S.selTown=S.selTown===t.dataset.town?null:t.dataset.town; render(); if(S.selTown&&t.tagName==="BUTTON"){ const m=document.querySelector(".map-wrap"); if(m) m.scrollIntoView({behavior:"smooth",block:"start"}); } return; }
   if(t.dataset.co!==undefined) return coTap(+t.dataset.co);
   if(t.dataset.rkby){ S.rkBy=t.dataset.rkby; S.rk=null; return render(); }
-  if(t.dataset.advtab){ const lk=featLock(t.dataset.advtab); if(lk) return toast("🔒 "+T(lk)); S.advTab=t.dataset.advtab; if(t.dataset.advtab==="rank") S.rk=null; return render(); }
+  if(t.dataset.advtab){ const lk=featLock(t.dataset.advtab); if(lk) return toast("🔒 "+lockMsg(lk)); S.advTab=t.dataset.advtab; if(t.dataset.advtab==="rank") S.rk=null; return render(); }
   if(t.dataset.shopel){ S.shopEl=t.dataset.shopel; return render(); }
   if(t.dataset.buy) return buy(t.dataset.buy);
   if(t.dataset.equip) return equip(t.dataset.equip);
@@ -5060,7 +5073,7 @@ document.addEventListener("click", e=>{
   if(a==="deverr") return devLoadErrors();
   if(a==="dev") return devAct(t.dataset.k);
   if(a==="rev") return startQuiz("rev");
-  if(a==="goluck"){ if(featLock("luck")) return toast("🔒 "+T("lockLuck")); S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
+  if(a==="goluck"){ if(featLock("luck")) return toast("🔒 "+lockMsg(featLock("luck"))); S.quiz=null; S.tab="adv"; S.view="adv"; S.advTab="luck"; render(); window.scrollTo(0,0); return; }
   if(a==="spin") return spinWheel();
   if(a==="scbuy") return buyScratch(t.dataset.k);
   if(a==="scall") return scratchReveal();
@@ -8407,18 +8420,25 @@ Object.assign(STR.ja,{"stName": "ドルイドの長老キーラン", "stNext": "
 Object.assign(STR.ko,{"stName": "드루이드 장로 키어런", "stNext": "다음", "stGift": "출정권 5장 받기", "stOk": "알겠어요", "stGo": "출발!", "stSkip": "건너뛰기", "in1": "젊은 여행자여, 드디어 왔구나! 나는 이 섬을 지키는 드루이드 장로 키어런이다. 마안의 발로르가 바다 밑에서 깨어나 괴물들이 아일랜드의 마을을 점령했어. 도전자가 필요하단다!", "in2": "괴물들은 지식의 힘을 두려워해. 매일 '오늘'의 영어 뉴스를 읽고 퀴즈를 마치면 기사마다 출정권 1장 (하루 최대 4장). 하루 3단계를 모두 마치면 내가 2장을 더 주마.", "in3": "출정권으로 마을을 공격하렴. 이기면 마을은 네 것이 되고 매일 세금도 들어온다. 오행 상극을 기억해: 금은 목을, 목은 토를, 토는 수를, 수는 화를, 화는 금을 이긴다.", "in4": "야생 짐승에게는 출정권이 필요 없고 체력만 든단다 (최대 6, 4시간마다 1 회복). 사냥해서 레벨을 올리고 골드를 벌어. 단, 같은 짐승은 잡을수록 골드가 줄어.", "in5": "이 출정권 5장으로 첫 번째 마을 딩글을 되찾으렴! Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "d21": "다시 왔구나! 오늘은 행운의 클로버 ☘️를 알려 주마. 단어장에서 간격 복습 (5단어 이상)을 한 번 끝내면 1장, 하루 최대 3장 받을 수 있어.", "d22": "클로버는 '행운의 집'에서 운명의 룰렛을 돌리는 데 쓴단다. 골드, 출정권, 장비 조각이 나와. 2장 이상이면 스크래치 카드도 살 수 있지.", "d23": "같은 속성·등급의 조각 3개를 모으면 네 레벨에 가까운 장비를 만들 수 있어. 잘 모으면 골드를 많이 아낄 수 있단다!", "d31": "제법 모험가다워졌구나! Lv 24가 되면 야생의 강적과 함께 싸울 동료가 생겨. 친구를 동료로 초대할 수도 있단다.", "d32": "심심할 땐 '멀티플레이'에서 친구들과 놀아 보렴. 무료지만 보상은 적어. 진짜 강해지는 길은 하나뿐, 매일 뉴스를 읽는 거야. 더블린에서 좋은 소식을 기다리마!", "stGot": "출정권 5장을 받았어요!"});
 /* ===== Story: Ciarán the druid elder. Day 1 (first visit to Adventure): the quest + basics + 5 quest passes.
    Later days: shamrocks & the Wheel of Fate, then allies & multiplayer. ===== */
-const STORY={intro:["in1","in2","in3","in4","in5"], d2:["d21","d22","d23"], d3:["d31","d3n","d32","d33"]};
+const STORY={u1:["u1"], intro:["in1","in2","in3","in4","in5"], d2:["u2","d21","d22","d23"], d3:["u3","d31","d3n","d32","d33"], d5:["u5a","u5b"]};
 // day 3: the elder introduces the leaderboard and asks for a nickname (skipped if the player already has one)
-const storySteps=k=>STORY[k].filter(x=>x!=="d3n"||!S.story||!S.story.hadNick);
+const storySteps=k=>STORY[k].filter(x=>(x!=="d3n"||!S.story||!S.story.hadNick)&&((x!=="u2"&&x!=="u3")||(S.story&&S.story.nb)));
 function elderArt(mood){ const k="elder-"+(mood||"talk"); return PICS.has(k)?`<img src="assets/art/${k}.webp" alt="" class="st-elder">`:`<div class="st-elder st-elder-ph" aria-hidden="true">🧙‍♂️</div>`; }
 function storyDue(){
   const g=game(), st=g.story||{};
+  if(!ulAll()){ const n=ulDays(), home=S.view==="today"&&!S.quiz&&!document.getElementById("lgPop");   // new players: each unlock is introduced on the 今日 page
+    if(n>=1&&!st.u1) return home?"u1":null;
+    if(!st.intro) return S.view==="adv"&&g.gender?"intro":null;
+    if(n>=2&&!st.d2) return home?"d2":null;
+    if(n>=3&&st.d2&&!st.d3) return home?"d3":null;
+    if(n>=5&&st.d3&&!st.d5) return home?"d5":null;
+    return null; }
   if(!st.intro) return S.view==="adv"&&g.gender?"intro":null;
   if(!st.d2&&st.intro<today()) return "d2";
   if(st.d2&&!st.d3&&st.d2<today()) return "d3";
   return null;
 }
-function storyCheck(){ if(S.onb||S.story) return; const k=storyDue(); if(k){ S.story={k,step:0,hadNick:!!game().nick}; storyRender(); } }
+function storyCheck(){ if(S.onb||S.story) return; const k=storyDue(); if(k){ S.story={k,step:0,hadNick:!!game().nick,nb:!ulAll()}; storyRender(); } }
 function storyRender(){
   let el=document.getElementById("story");
   if(!S.story){ if(el) el.remove(); return; }
@@ -8428,22 +8448,24 @@ function storyRender(){
   const nickStep=P[i]==="d3n"&&!game().nick;
   const nickBox=!nickStep?"":CLOUD.user?`<div class="st-nick"><input id="stNick" class="search" maxlength="16" placeholder="${T("nickSet")}" autocomplete="off" value="${esc(S.story.draft||"")}"><button class="btn" data-st="nick">${T("stNickSave")}</button></div><p class="sm-t st-nick-note">🏷️ ${T("stNickNote")}</p>`
     :`<p class="sm-t st-nick-note">${T("stNickLogin")}</p><button class="btn gbtn st-signin" data-act="signin">${G_SVG}<span>${T("signIn")}</span></button>`;
-  const btn=nickStep?T("stNickLater"):last?(S.story.k==="intro"?T("stGift"):S.story.k==="d2"?T("stOk"):T("stGo")):T("stNext");
-  el.innerHTML=`<div class="onb-card st-card">${S.story.k!=="intro"?`<button class="onb-skip" data-st="skip">${T("stSkip")}</button>`:""}
+  const btn=nickStep?T("stNickLater"):last?(S.story.k==="intro"?T("stGift"):S.story.k==="u1"?T("stGoAdv"):S.story.k==="d5"?T("stLook"):S.story.k==="d2"?T("stOk"):T("stGo")):T("stNext");
+  el.innerHTML=`<div class="onb-card st-card">${S.story.k!=="intro"&&S.story.k!=="u1"?`<button class="onb-skip" data-st="skip">${T("stSkip")}</button>`:""}
     ${elderArt(mood)}<div class="st-name">${T("stName")}</div><p class="st-text">${T(P[i])}</p>${nickBox}
     <div class="onb-dots">${P.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("")}</div>
     <div class="onb-nav"><button class="btn${nickStep?" ghost":""}" data-st="${last?"done":"next"}">${btn}</button>${i>0?`<button class="btn ghost" data-st="back">‹</button>`:""}</div></div>`;
 }
-function storyDone(){ const g=game(); g.story=g.story||{}; const k=S.story.k;
-  g.story[k]=today(); if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5;
+function storyDone(go){ const g=game(); g.story=g.story||{}; const k=S.story.k, nb=S.story.nb;
+  g.story[k]=today(); if(nb) g.story.ul=1; if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5;
     for(const [slot,id] of [["weapon","w-metal-0"],["armor","a-water-0"]]){ if(!ITEMS[id]) continue; if(!(g.inv||[]).includes(id)) (g.inv=g.inv||[]).push(id); if(!g[slot]) g[slot]=id; }
     toast(T("stGot")); if(!S.words.size&&(g.lv||1)<=1) g.story.lock=1; }
-  saveGame(); S.story=null; storyRender(); render(); }
+  saveGame(); S.story=null; storyRender();
+  if(go&&k==="u1"){ S.advTab="go"; return setTab("adv"); } if(go&&k==="d5"){ S.advTab="style"; return setTab("adv"); }
+  render(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("#story [data-st]"); if(!t||!S.story) return; e.stopPropagation(); const a=t.dataset.st;
   if(a==="nick"){ const inp=document.getElementById("stNick"), n=((inp&&inp.value)||"").trim().replace(/\s+/g," "); S.story.draft=n;
     if(n.length<1||n.length>16) return toast(T("nickBad")); if(!nickOk(n)) return toast(T("nickChars"));
     t.disabled=true; nickClaim(n).then(ok=>{ if(!S.story) return; if(ok){ S.story.step++; } storyRender(); }); return; }
-  if(a==="next"){ S.story.step++; storyRender(); } else if(a==="back"){ S.story.step=Math.max(0,S.story.step-1); storyRender(); } else storyDone(); });
+  if(a==="next"){ S.story.step++; storyRender(); } else if(a==="back"){ S.story.step=Math.max(0,S.story.step-1); storyRender(); } else storyDone(a==="done"); });
 async function fetchT(url,ms){ const c=new AbortController(), t=setTimeout(()=>c.abort(),ms||12000); try{ return await fetch(url,{cache:"no-cache",signal:c.signal}); } finally{ clearTimeout(t); } }
 async function loadArticles(){
   S.artFail=false;
@@ -8903,7 +8925,7 @@ let LSN_INDEX=null; const LSN={on:false};
 function lsnLoadIndex(){ if(lsnLoadIndex.busy) return; lsnLoadIndex.busy=1;
   fetch("lessons/index.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{lessons:[]}).then(j=>{ LSN_INDEX=j.lessons||[]; }).catch(()=>{ LSN_INDEX=[]; }).then(()=>{ lsnLoadIndex.busy=0; if(S.view==="lsn"||S.view==="adv") render(); }); }
 // 小教室 has its own bottom tab
-function viewLsn(){ return `<div class="view"><div class="ie-lobby">${lsnLobby()}</div></div>`; }
+function viewLsn(){ if(featLock("lsn")) return `<div class="view"><section class="card"><p class="muted">🔒 ${lockMsg(featLock("lsn"))}</p><button class="btn ghost" data-tab="today" style="align-self:flex-start">${T("backToday")}</button></section></div>`; return `<div class="view"><div class="ie-lobby">${lsnLobby()}</div></div>`; }
 function lsnLobby(){
   if(!LSN_INDEX){ lsnLoadIndex(); return `<p class="muted">${T("loading")}</p>`; }
   const done=game().lessons||{}, kind=S.lsnKind==="grammar"?"grammar":"phrase";
@@ -9713,7 +9735,7 @@ function plazaList(){ const me=CLOUD.user&&CLOUD.user.uid, g=game(), mine=myLook
   const rows=(PLAZA.rows||[]).filter(r=>r.id!==me);
   if(mine&&g.nick){ const e=lbEntry(); rows.unshift({id:me, name:g.nick, look:mine, lv:e.lv, power:e.power, conq:e.conq, flag:e.flag, me:true}); }
   return rows; }
-function plazaCard(){ if(!CLOUD.user||SANDBOX()) return "";
+function plazaCard(){ if(!CLOUD.user||SANDBOX()||featLock("plaza")) return "";
   if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(plazaLoad,0);
   const L=plazaList();
   if(!L.length) return PLAZA.rows?"":`<section class="card plaza"><b>🏞️ ${T("plzT")}</b><span class="muted sm-t">${T("loading")}</span></section>`;
@@ -9874,7 +9896,7 @@ function plzRebuild(){ const R=ROOM; if(!R) return; const keep=new Set([R.me.id]
   for(const p of R.rows||[]){ if(n>=PLZ_MAX) break; if(p.id===R.me.id||R.live.has(p.id)) continue; keep.add(p.id); if(!R.ents.has(p.id)) R.ents.set(p.id,plzEnt(p,"off")); n++; }
   for(const [k,o] of R.ents) if(!keep.has(k)&&o!==R.me){ o.el.remove(); if(o.edge) o.edge.remove(); R.ents.delete(k); }
   const live=[...R.live.keys()].length+1, el=document.getElementById("pzCount"); if(el) el.textContent=T("plzRoomN",{n:live, cap:PLZ_CAP, c:R.ch||1}); }
-async function plazaOpen(zone,at){ if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD.fb) return; zone=PLZ_ZONES.some(z=>z.k===zone)?zone:"fountain"; if(!game().nick||!myLook()) return toast(T("plzNoNick"));
+async function plazaOpen(zone,at){ if(featLock("plaza")) return toast("🔒 "+lockMsg(featLock("plaza"))); if(ROOM) plazaClose(); if(!CLOUD.user||!CLOUD.fb) return; zone=PLZ_ZONES.some(z=>z.k===zone)?zone:"fountain"; if(!game().nick||!myLook()) return toast(T("plzNoNick"));
   const box=document.createElement("div"); box.id="plazaRoom";
   box.innerHTML=`<div class="pz-stage"><div class="pz-world"><img class="pz-ground" alt="" draggable="false"></div></div>
     <div class="pz-tint"></div><div class="pz-fx"></div>
@@ -11674,6 +11696,12 @@ Object.assign(STR.hi,{"cos_b-beta": "बीटा अग्रणी ढाल",
 Object.assign(STR.es,{"cos_b-beta": "Escudo de pionero beta", "cosDi_b-beta": "Un escudo azul y dorado brilla a tu espalda, rodeado de estrellas doradas. Solo lo tienen los primeros {t} jugadores beta", "cosBetaTag": "Solo beta · primeros {t}"});
 Object.assign(STR.ja,{"cos_b-beta": "βテスターの盾", "cosDi_b-beta": "背中で光る紺と金の盾のまわりを金の星が回ります。最初の {t} 人のβテスターだけの限定品", "cosBetaTag": "β限定・先着 {t} 名"});
 Object.assign(STR.ko,{"cos_b-beta": "베타 개척자의 방패", "cosDi_b-beta": "등 뒤에서 빛나는 남색·금색 방패 주위로 금빛 별이 돌아요. 첫 {t}명의 베타 플레이어만 가질 수 있어요", "cosBetaTag": "베타 한정 · 선착순 {t}명"});
+Object.assign(STR.zh,{"ulLock": "還要再完成 {n} 天的三個步驟才會開放", "ulBanT": "⚔️ 冒險：完成今天的三個步驟就開放", "ulBanS": "讀完新聞、做完測驗，基蘭長老就會帶你去冒險", "u1": "做得好！你完成了第一天的三個步驟。冒險現在開放了：用出征令攻打城鎮、到野外練等、在商店買裝備。跟我來吧！", "u2": "第二天也完成了！今天開放三個新地方：「小教室」有短短的英文課，看完還有金幣；「練習場」可以試打怪物、熟悉招式；還有「幸運屋」，我來說明。", "u3": "連續讀了三天新聞，真了不起！「排行榜」、「檢定」和「廣場」開放了：取個暱稱，就能在廣場跟世界各地的玩家走走、打招呼。", "u5a": "五天了！你已經是真正的冒險者。「造型屋」開放了，可以用造型幣把角色打扮得與眾不同。", "u5b": "「彩虹寶庫」也開放了：可以送禮物給朋友，還有每個月的許願池。「推理閱讀」也在冒險選單裡等你挑戰。去看看吧！", "stGoAdv": "去冒險 →", "stLook": "去看看 →"});
+Object.assign(STR.en,{"ulLock": "Opens after {n} more day(s) of finishing the three daily steps", "ulBanT": "⚔️ Adventure opens when you finish today's three steps", "ulBanS": "Read the news and do the quiz, and Elder Ciarán will take you on your adventure", "u1": "Well done! You've finished your first day's three steps. Adventure is now open: attack towns with quest passes, train in the wild and buy gear in the shop. Follow me!", "u2": "Day two done too! Three new places open today: the Lessons tab has short English lessons that give gold, the Practice arena lets you try moves on monsters, and then there's the Lucky House. Let me explain.", "u3": "Three days of news, impressive! Ranking, Exams and the Plaza are open: pick a nickname and you can walk around the Plaza and wave to players from all over the world.", "u5a": "Five days! You're a real adventurer now. The Style shop is open: dress your character up with style coins.", "u5b": "The Rainbow Vault is open too: send gifts to friends and try the monthly wishing well. Reasoning is waiting in the Adventure menu as well. Go and have a look!", "stGoAdv": "To adventure →", "stLook": "Take a look →"});
+Object.assign(STR.hi,{"ulLock": "तीनों दैनिक कदम {n} और दिन पूरे करने पर खुलेगा", "ulBanT": "⚔️ आज के तीन कदम पूरे करने पर रोमांच खुलेगा", "ulBanS": "ख़बर पढ़ें और क्विज़ करें, फिर बुज़ुर्ग कीरान आपको रोमांच पर ले जाएँगे", "u1": "शाबाश! आपने पहले दिन के तीनों कदम पूरे कर लिए। अब रोमांच खुल गया है: अभियान पास से शहरों पर हमला करें, जंगल में अभ्यास करें और दुकान से सामान ख़रीदें। मेरे साथ चलो!", "u2": "दूसरा दिन भी पूरा! आज तीन नई जगहें खुलीं: पाठ में छोटे अंग्रेज़ी पाठ हैं जो सोना देते हैं, अभ्यास मैदान में दानवों पर चालें आज़माएँ, और लकी हाउस — मैं समझाता हूँ।", "u3": "लगातार तीन दिन ख़बरें, कमाल! रैंकिंग, परीक्षा और प्लाज़ा खुल गए: उपनाम चुनें और प्लाज़ा में दुनिया भर के खिलाड़ियों से मिलें।", "u5a": "पाँच दिन! अब आप असली साहसी हैं। स्टाइल शॉप खुल गई है: स्टाइल सिक्कों से अपने किरदार को सजाएँ।", "u5b": "रेनबो वॉल्ट भी खुल गया: दोस्तों को उपहार भेजें और मासिक इच्छा-कूप आज़माएँ। रोमांच मेनू में तर्क चुनौती भी इंतज़ार कर रही है। जाकर देखें!", "stGoAdv": "रोमांच पर →", "stLook": "देखें →"});
+Object.assign(STR.es,{"ulLock": "Se abre tras completar los tres pasos diarios {n} día(s) más", "ulBanT": "⚔️ La aventura se abre al terminar los tres pasos de hoy", "ulBanS": "Lee la noticia y haz el test, y el anciano Ciarán te llevará de aventura", "u1": "¡Bien hecho! Has completado los tres pasos de tu primer día. La aventura ya está abierta: ataca ciudades con pases, entrena en la naturaleza y compra equipo en la tienda. ¡Sígueme!", "u2": "¡Segundo día completado! Hoy se abren tres lugares nuevos: Clases tiene lecciones cortas de inglés que dan oro, el Campo de práctica te deja probar golpes con monstruos, y la Casa de la Suerte, que te explico ahora.", "u3": "¡Tres días leyendo noticias, impresionante! Se abren la Clasificación, los Exámenes y la Plaza: elige un apodo y pasea por la Plaza saludando a jugadores de todo el mundo.", "u5a": "¡Cinco días! Ya eres un aventurero de verdad. Se abre la tienda de Estilo: viste a tu personaje con monedas de estilo.", "u5b": "También se abre la Bóveda Arcoíris: envía regalos a tus amigos y prueba el pozo de los deseos mensual. Razonamiento te espera en el menú de Aventura. ¡Ve a verlo!", "stGoAdv": "A la aventura →", "stLook": "Echar un vistazo →"});
+Object.assign(STR.ja,{"ulLock": "毎日の3ステップをあと{n}日終えると開放", "ulBanT": "⚔️ 今日の3ステップを終えると冒険が開放", "ulBanS": "ニュースを読んでテストを終えれば、長老キーランが冒険に連れて行ってくれます", "u1": "よくやった！初日の3ステップを終えたな。冒険が開放されたぞ：出撃券で町を攻め、野外で修行し、ショップで装備を買うのじゃ。ついて来なさい！", "u2": "2日目も達成じゃ！今日は新しい場所が3つ開く：「小教室」は短い英語レッスンでゴールドがもらえる、「練習場」では魔物で技を試せる、そして「ラッキーハウス」じゃ。説明しよう。", "u3": "3日間ニュースを読んだとは見事！「ランキング」「検定」「広場」が開放された：ニックネームを決めれば、広場で世界中のプレイヤーと歩いたり挨拶したりできるぞ。", "u5a": "5日目じゃ！もう立派な冒険者じゃな。「スタイル屋」が開放された：スタイルコインでキャラクターを着飾れるぞ。", "u5b": "「虹の宝庫」も開放じゃ：友だちにプレゼントを贈ったり、毎月の願いの泉に挑戦できる。冒険メニューでは「推理読解」も待っておる。見てきなさい！", "stGoAdv": "冒険へ →", "stLook": "見てみる →"});
+Object.assign(STR.ko,{"ulLock": "하루 3단계를 {n}일 더 마치면 열려요", "ulBanT": "⚔️ 오늘 3단계를 마치면 모험이 열려요", "ulBanS": "뉴스를 읽고 퀴즈를 마치면 키어런 장로가 모험으로 안내해 줄 거예요", "u1": "잘했다! 첫날 3단계를 모두 마쳤구나. 이제 모험이 열렸어: 출정권으로 마을을 공격하고, 야외에서 수련하고, 상점에서 장비를 사렴. 나를 따라오너라!", "u2": "둘째 날도 해냈구나! 오늘은 새로운 곳 세 군데가 열려: '소교실'은 짧은 영어 수업으로 골드를 주고, '연습장'에서는 괴물에게 기술을 시험할 수 있고, 그리고 '행운의 집'이 있지. 설명해 주마.", "u3": "사흘 연속 뉴스를 읽다니 대단하구나! '랭킹', '검정', '광장'이 열렸어: 닉네임을 정하면 광장에서 전 세계 플레이어와 걷고 인사할 수 있단다.", "u5a": "닷새째구나! 이제 진짜 모험가야. '스타일 숍'이 열렸어: 스타일 코인으로 캐릭터를 꾸며 보렴.", "u5b": "'무지개 보물고'도 열렸어: 친구에게 선물을 보내고 매달 소원의 우물에 도전할 수 있지. 모험 메뉴에서 '추론 읽기'도 기다리고 있단다. 가서 보렴!", "stGoAdv": "모험하러 →", "stLook": "보러 가기 →"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
