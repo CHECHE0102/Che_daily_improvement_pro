@@ -1053,17 +1053,17 @@ body.onb-open{overflow:hidden}
 
 
 .pz-turf{position:absolute;left:0;pointer-events:none}
-.pz-mower{position:absolute;left:0;top:0;width:124px;height:80px;margin:-76px 0 0 -40px;pointer-events:none}
-.pz-mwb{width:124px;height:80px;transform-origin:40px 50%}
-.pz-mower.run svg{animation:pzMowRun .11s linear infinite alternate}
+.pz-mower{position:absolute;left:0;top:0;width:113px;height:78px;margin:-77px 0 0 -35px;pointer-events:none}
+.pz-mwb{width:113px;height:78px;transform-origin:35px 50%}.pz-mwb img{display:block;width:113px;height:78px}
+.pz-mower.run img{animation:pzMowRun .11s linear infinite alternate}
 @keyframes pzMowRun{to{transform:translateY(-1.5px)}}
-.pz-lwl{position:absolute;left:40px;top:-30px;transform:translateX(-50%);font:800 15px/1.4 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.88);border-radius:999px;padding:1px 10px;white-space:nowrap;box-shadow:0 2px 5px rgba(0,0,0,.15)}
+.pz-lwl{position:absolute;left:35px;top:-30px;transform:translateX(-50%);font:800 15px/1.4 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.88);border-radius:999px;padding:1px 10px;white-space:nowrap;box-shadow:0 2px 5px rgba(0,0,0,.15)}
 .pz-mower.run .pz-lwl{display:none}
-.pz-seedbox{position:absolute;left:0;top:0;width:110px;height:84px;margin:-80px 0 0 -55px;pointer-events:none}
-.pz-seedbox .pz-lwl{left:55px;top:-34px}
-.pz-ride .pz-bob{top:-36px}.pz-ride .pz-sh,.pz-ride .pz-tuft,.pz-ride.pz-me::before{display:none}.pz-ride .pz-tag{top:-58px}.pz-ride .pz-bub{bottom:150px}
+.pz-seedbox{position:absolute;left:0;top:0;width:110px;height:80px;margin:-78px 0 0 -55px;pointer-events:none}.pz-seedbox img{display:block;width:110px;height:80px}
+.pz-seedbox .pz-lwl{left:55px;top:-34px}.pz-seedbox img{transition:opacity .3s}.pz-seedbox.cd img{opacity:.45}.pz-scd{position:absolute;left:55px;top:30px;transform:translate(-50%,-50%);display:none;min-width:40px;height:40px;border-radius:50%;background:rgba(27,36,33,.78);color:#fff;font:900 22px/40px system-ui,sans-serif;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.25)}.pz-seedbox.cd .pz-scd{display:block}
+.pz-ride .pz-bob{top:-14px}.pz-ride .pz-sh,.pz-ride .pz-tuft,.pz-ride.pz-me::before{display:none}.pz-ride .pz-tag{top:-58px}.pz-ride .pz-bub{bottom:150px}
 .pz-hold.s{font:800 17px/1 system-ui,sans-serif;background:#FFFDF6;color:#1F6F5C;border:2px solid #1B2421;border-radius:999px;padding:3px 9px 4px 6px;white-space:nowrap;display:flex;align-items:center;gap:1px;box-shadow:0 3px 0 rgba(27,36,33,.3)}
-.pz-hold.s b{font-size:19px}
+.pz-hold.s{width:max-content;gap:3px}.pz-hold.s img{width:48px;height:auto;display:block}
 .pz-clip{position:absolute;left:0;top:0;width:7px;height:3px;margin:-2px 0 0 -3px;border-radius:2px;background:#4aa843;pointer-events:none;animation:pzClip .6s ease-out forwards}
 @keyframes pzClip{to{opacity:0;margin-top:-30px;margin-left:var(--dx)}}
 .pz-sdrop{position:absolute;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:2;border:0;border-radius:999px;padding:7px 12px;font:800 13px/1.2 system-ui,sans-serif;color:#fff;background:rgba(27,36,33,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);touch-action:manipulation}
@@ -4546,7 +4546,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.107";
+const APP_VERSION="2026.11.109";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -9811,7 +9811,7 @@ function plzBlur(a,w,h,r){ const t=new Float32Array(w*h), f=new Float32Array(w*h
 // everything an area needs before it is shown: background, the see-through objects, the podium, the walk map (decoded, kept in memory)
 const PLZ_PRE={};
 function plzPreload(zone){ if(PLZ_PRE[zone]) return PLZ_PRE[zone];
-  const urls=[`assets/art/plaza/${zone}.webp`,...(PLZ_OCC[zone]||[]).map(q=>`assets/art/plaza/${q.f}.webp`),...(zone==="fountain"?["assets/art/plaza/podium.webp"]:[])], P={n:urls.length+1, done:0, imgs:[], ok:false};
+  const urls=[`assets/art/plaza/${zone}.webp`,...(PLZ_OCC[zone]||[]).map(q=>`assets/art/plaza/${q.f}.webp`),...(zone==="fountain"?["assets/art/plaza/podium.webp"]:[]),...(zone==="lawn"?["lawn-mower","lawn-mower-front","lawn-seedbox","lawn-seedtray"].map(f=>`assets/art/plaza/${f}.webp`):[])], P={n:urls.length+1, done:0, imgs:[], ok:false};
   const one=u=>new Promise(ok=>{ const im=new Image(); P.imgs.push(im); im.onload=()=>{ (im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(ok); }; im.onerror=ok; im.src=u; }).then(()=>{ P.done++; });
   P.p=Promise.all([...urls.map(one), plzMaskLoad(zone).then(()=>{ P.done++; })]).then(()=>{ P.ok=true; }); PLZ_PRE[zone]=P; return P; }
 function plzMaskLoad(zone){ if(PLZ_MASK[zone]) return Promise.resolve(PLZ_MASK[zone]);
@@ -10150,7 +10150,7 @@ function plzGrassDraw(c){ let sd=7; const rnd=()=>{ sd=(sd*16807)%2147483647; re
    cut, and dies by itself after a day. The seedling box next to the mower gives packs of 10; while you carry seedlings
    (or ride the mower) no wild beast jumps out. No rewards (CheChe). Shared per line in Realtime DB plazaLawn/{line}:
    mow = {u,n,t} who drives, c/{cell} = cut time (>0) or -planted time (<0). ===== */
-const PLZ_LN={c:48, cols:32, rows:24, ty:120, y1:1040, regrow:[5*60e3,10*60e3], life:24*3600e3, cap:300, pack:10, packCd:60e3, ride:30e3, need:15, extra:5,
+const PLZ_LN={c:48, cols:32, rows:24, ty:120, y1:1040, regrow:[5*60e3,10*60e3], life:24*3600e3, cap:300, pack:10, packCd:15e3, ride:30e3, need:15, extra:5,
   home:{x:690,y:1064}, box:{x:880,y:1060}, near:120, boxR:100, blade:44, spd:250, back:190};
 let PLZ_ORIG=null, PLZ_RODE=0, PLZ_SEED_AT=0;
 function plzOrigInit(){ if(PLZ_ORIG) return; const Q=PLZ_LN; PLZ_ORIG=new Uint8Array(Q.cols*Q.rows);
@@ -10165,17 +10165,15 @@ function plzPlantable(k){ const Q=PLZ_LN, x=(k%Q.cols+.5)*Q.c, y=((k/Q.cols|0)+.
   if(y<200||y>1000||plzBlocked(x,y)) return false; if(Math.hypot(x-Q.home.x,y-Q.home.y)<140||Math.hypot(x-Q.box.x,y-Q.box.y)<120) return false;
   return !(x>1170&&x<1450&&y>850&&y<1020); }   // not on the picnic blanket
 function plzNoEnc(m){ const h=m.h||""; return h==="m"||h[0]==="s"; }   // riding the mower or carrying seedlings: the grass stays quiet
-const PLZ_MOWER_SVG=`<svg viewBox="0 0 124 80" width="124" height="80"><ellipse cx="62" cy="75" rx="56" ry="6" fill="rgba(20,40,20,.28)"/><g stroke="#1B2421" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M22 60h78q8 0 8 6v2q0 3-3 3H20q-4 0-4-4v-1q0-6 6-6z" fill="#5F6B68"/><path d="M14 59q-3-17 10-21h30l8 6h38q15 0 19 15z" fill="#E5484D"/><path d="M66 48h31q8 0 11 7" fill="none" stroke="#FF9A9D" stroke-width="3"/><circle cx="114" cy="53" r="4" fill="#FFD66B"/><path d="M26 41q0-9 8-9h14q6 0 6 6v3z" fill="#2B3A36"/><path d="M71 44 63 22" fill="none" stroke-width="3.5"/><ellipse cx="62" cy="20" rx="9" ry="3.5" fill="#2B3A36"/><circle cx="30" cy="62" r="14" fill="#2B3A36"/><circle cx="30" cy="62" r="5.5" fill="#C9D1CF"/><circle cx="100" cy="67" r="9" fill="#2B3A36"/><circle cx="100" cy="67" r="3.5" fill="#C9D1CF"/></g></svg>`;
-const PLZ_SEEDBOX_SVG=`<svg viewBox="0 0 110 84" width="110" height="84"><ellipse cx="55" cy="79" rx="50" ry="5" fill="rgba(20,40,20,.28)"/><g stroke="#1B2421" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">${[20,37,55,73,90].map((x,i)=>`<path d="M${x} 40V${28-i%2*4}" fill="none"/><path d="M${x} ${30-i%2*4}q-10-1-12-11q9 0 12 9z" fill="#4AA843"/><path d="M${x} ${28-i%2*4}q10-1 12-11q-9 0-12 9z" fill="#5CB84F"/>`).join("")}<path d="M10 42q45-10 90 0z" fill="#6B4A2B"/><path d="M8 41h94v33q0 5-5 5H13q-5 0-5-5z" fill="#C98B4F"/><path d="M8 41h94v9H8z" fill="#A86F3A"/><path d="M8 64h94M30 50v29M80 50v29" fill="none"/></g></svg>`;
 function plzLawnBuild(){ const R=ROOM, Q=PLZ_LN; plzOrigInit(); const D=Math.min(1.5,devicePixelRatio||1), H=Q.y1-Q.ty, cv=document.createElement("canvas"); cv.className="pz-turf";
   cv.width=Math.round(PLZ_W*D); cv.height=Math.round(H*D); cv.style.cssText=`width:${PLZ_W}px;height:${H}px;top:${Q.ty}px`; R.world.querySelector(".pz-ground").after(cv);
   const lo=()=>{ const c=document.createElement("canvas"); c.width=PLZ_W/8; c.height=PLZ_H/8; return c; };
-  const mw=document.createElement("div"); mw.className="pz-mower"; mw.innerHTML=`<div class="pz-mwb">${PLZ_MOWER_SVG}</div><span class="pz-lwl">🚜 ${T("plzMowLbl")}</span>`; R.world.appendChild(mw);
-  const bx=document.createElement("div"); bx.className="pz-seedbox"; bx.style.cssText=`transform:translate(${Q.box.x}px,${Q.box.y}px);z-index:${Math.round(Q.box.y/4)*4}`; bx.innerHTML=`${PLZ_SEEDBOX_SVG}<span class="pz-lwl">🌱 ${T("plzSeedLbl")}</span>`; R.world.appendChild(bx);
+  const mw=document.createElement("div"); mw.className="pz-mower"; mw.innerHTML=`<div class="pz-mwb"><img src="assets/art/plaza/lawn-mower.webp" alt=""></div><span class="pz-lwl">🚜 ${T("plzMowLbl")}</span>`; R.world.appendChild(mw); const mf=document.createElement("div"); mf.className="pz-mower pz-mowf"; mf.innerHTML=`<div class="pz-mwb"><img src="assets/art/plaza/lawn-mower-front.webp" alt=""></div>`; R.world.appendChild(mf);   // front half: the rider sits between the two layers
+  const bx=document.createElement("div"); bx.className="pz-seedbox"; bx.style.cssText=`transform:translate(${Q.box.x}px,${Q.box.y}px);z-index:${Math.round(Q.box.y/4)*4}`; bx.innerHTML=`<img src="assets/art/plaza/lawn-seedbox.webp" alt=""><b class="pz-scd"></b><span class="pz-lwl">🌱 ${T("plzSeedLbl")}</span>`; R.world.appendChild(bx);
   const dr=document.createElement("button"); dr.className="pz-sdrop"; dr.dataset.pzl="sdrop"; dr.hidden=true; dr.innerHTML=`🗑️ ${T("plzSeedDrop")}`; R.box.appendChild(dr);
   R.stage.addEventListener("pointerdown",()=>{ if(ROOM===R&&R.lawn&&R.lawn.race) plzMowTap(); });   // while the mower race shows, a tap anywhere on the map counts too (CheChe)
   R.box.addEventListener("pointerdown",e=>{ const b=e.target.closest("[data-pzl]"); if(!b) return; e.preventDefault(); e.stopPropagation(); const a=b.dataset.pzl; if(a==="mgrab") plzMowTap(); else if(a==="sdrop") plzSeedDrop(); });
-  R.lawn={cells:new Map(), st:new Uint8Array(Q.cols*Q.rows), dirty:new Set(), pend:{}, flushAt:0, drawAt:0, chkAt:0, cv, x:cv.getContext("2d"), D, tint:lo(), stub:lo(), el:mw, mwb:mw.firstElementChild, drop:dr, mx:Q.home.x, my:Q.home.y, mf:1, mow:null, riding:null};
+  R.lawn={cells:new Map(), st:new Uint8Array(Q.cols*Q.rows), dirty:new Set(), pend:{}, flushAt:0, drawAt:0, chkAt:0, cv, x:cv.getContext("2d"), D, tint:lo(), stub:lo(), el:mw, mwb:mw.firstElementChild, bx, bxcd:bx.querySelector(".pz-scd"), fr:mf, frb:mf.firstElementChild, drop:dr, mx:Q.home.x, my:Q.home.y, mf:1, mow:null, riding:null};
   plzTurfDraw(true); }
 async function plzLawnJoin(dbM,db){ const R=ROOM, L=R&&R.lawn; if(!L) return; const base=`plazaLawn/${R.ch}`, me=R.me.id; L.dbM=dbM; L.mowRef=dbM.ref(db,base+"/mow"); L.cRef=dbM.ref(db,base+"/c");
   const cell=sn=>{ const k=+sn.key, v=sn.val(); if(!(k>=0&&k<L.st.length)) return; if(typeof v==="number") L.cells.set(k,v); else L.cells.delete(k); L.dirty.add(k); };
@@ -10193,11 +10191,12 @@ function plzLawnStep(cx,cy,z,vw,vh,now){ const R=ROOM, L=R.lawn, m=R.me, Q=PLZ_L
   const dv=plzMowDriver(t);
   if(dv){ L.mx=dv.x; L.my=dv.y; L.mf=dv.face<0?-1:1; }
   else { const dx=Q.home.x-L.mx, dy=Q.home.y-L.my, d=Math.hypot(dx,dy); if(d>2){ const s=Math.min(d,Q.back*dt); L.mx+=dx/d*s; L.my+=dy/d*s; if(Math.abs(dx)>3) L.mf=dx<0?-1:1; } else { L.mx=Q.home.x; L.my=Q.home.y; L.mf=1; } }   // nobody on it: it drives itself home
-  const run=!!dv||Math.hypot(Q.home.x-L.mx,Q.home.y-L.my)>2, tr=`translate(${L.mx.toFixed(1)}px,${L.my.toFixed(1)}px)`, fl=L.mf<0?"scaleX(-1)":"", zi=dv?(dv.zI||Math.round(dv.y/4)*4)+2:Math.round(L.my/4)*4+1;
-  if(tr!==L.tr){ L.tr=tr; L.el.style.transform=tr; } if(fl!==L.fl){ L.fl=fl; L.mwb.style.transform=fl; } if(zi!==L.zi){ L.zi=zi; L.el.style.zIndex=zi; } if(run!==L.run){ L.run=run; L.el.classList.toggle("run",run); }
+  const run=!!dv||Math.hypot(Q.home.x-L.mx,Q.home.y-L.my)>2, tr=`translate(${L.mx.toFixed(1)}px,${L.my.toFixed(1)}px)`, fl=L.mf<0?"scaleX(-1)":"", zi=dv?(dv.zI||Math.round(dv.y/4)*4)-1:Math.round(L.my/4)*4+1;
+  if(tr!==L.tr){ L.tr=tr; L.el.style.transform=tr; L.fr.style.transform=tr; } if(fl!==L.fl){ L.fl=fl; L.mwb.style.transform=fl; L.frb.style.transform=fl; } if(zi!==L.zi){ L.zi=zi; L.el.style.zIndex=zi; L.fr.style.zIndex=zi+2; } if(run!==L.run){ L.run=run; L.el.classList.toggle("run",run); L.fr.classList.toggle("run",run); }
   if(L.riding){ if(t-L.riding.t0>=Q.ride) plzMowHop(true); else plzMowCut(m,t); }
   plzLawnFlush(t);
   plzMowRaceUi(cx,cy,z,vw,vh,now,t);
+  const cd=Math.max(0,Math.ceil((PLZ_SEED_AT+Q.packCd-t)/1000)); if(cd!==L.cd){ L.cd=cd; L.bx.classList.toggle("cd",cd>0); L.bxcd.textContent=cd?cd+"":""; }   // seedling box refilling: see-through with a countdown on it
   const hs=(m.h||"")[0]==="s"; if(hs!==L.dropOn){ L.dropOn=hs; L.drop.hidden=!hs; }
   if(t-L.chkAt>1000){ L.chkAt=t; for(const k of L.cells.keys()) if(plzCellSt(k,t)!==L.st[k]) L.dirty.add(k); }   // grass growing back, planted grass dying
   if(L.dirty.size&&now-L.drawAt>180) plzTurfDraw(); }
@@ -10444,7 +10443,7 @@ function plzHoldSet(o){ const h=o.h||"", k=h+"|"+(o.hw||""); if(k===o.holdK) ret
   if(!h||h==="m"){ if(el) el.remove(); o.el.classList.remove("pz-holding"); return; }
   if(!el){ el=document.createElement("div"); el.className="pz-hold"; o.bob.appendChild(el); } o.el.classList.add("pz-holding");
   if(h[0]==="w"){ el.className="pz-hold w"; el.textContent=o.hw||"?"; }
-  else if(h[0]==="s"){ el.className="pz-hold s"; el.innerHTML=`<b>🌱</b>×${+h.slice(1)||0}`; }
+  else if(h[0]==="s"){ el.className="pz-hold s"; el.innerHTML=`<img src="assets/art/plaza/lawn-seedtray.webp" alt="">×${+h.slice(1)||0}`; }
   else { const n=PLZ_NOTES[+h.slice(1)]; el.className="pz-hold n"; el.style.setProperty("--c",n?n.c:"#888"); el.innerHTML=`<b>${n?n.ic:"♪"}</b>`; } }
 
 /* ---- 音符點歌 at the bandstand ---- */
