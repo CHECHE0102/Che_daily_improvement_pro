@@ -1,0 +1,23 @@
+name: Daily short upload
+# Uploads social/daily/<date>/out/short.mp4 to YouTube when its meta.json is pushed (skips dates that already have youtube.json).
+on:
+  push:
+    paths: ['social/daily/*/meta.json']
+permissions:
+  contents: write
+concurrency: {group: daily-short-upload, cancel-in-progress: false}
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: for d in social/daily/*/; do [ -f "$d/meta.json" ] && [ -f "$d/out/short.mp4" ] && python3 tools/youtube_upload.py "${d%/}"; done
+      - run: |
+          git config user.name "CHECHE0102"; git config user.email "CHECHE0102@users.noreply.github.com"
+          git add social/daily && git commit -qm "Daily short uploaded" && git push -q origin HEAD:${GITHUB_REF_NAME} || echo nothing
