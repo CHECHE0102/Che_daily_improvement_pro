@@ -1053,14 +1053,14 @@ body.onb-open{overflow:hidden}
 
 
 .pz-turf{position:absolute;left:0;pointer-events:none}
-.pz-mower{position:absolute;left:0;top:0;width:125px;height:78px;margin:-77px 0 0 -35px;pointer-events:none}
-.pz-mwb{width:125px;height:78px;transform-origin:35px 50%}.pz-mwb img{display:block;width:125px;height:78px}
+.pz-mower{position:absolute;left:0;top:0;width:113px;height:78px;margin:-77px 0 0 -35px;pointer-events:none}
+.pz-mwb{width:113px;height:78px;transform-origin:35px 50%}.pz-mwb img{display:block;width:113px;height:78px}
 .pz-mower.run img{animation:pzMowRun .11s linear infinite alternate}
 @keyframes pzMowRun{to{transform:translateY(-1.5px)}}
 .pz-lwl{position:absolute;left:35px;top:-30px;transform:translateX(-50%);font:800 15px/1.4 system-ui,sans-serif;color:#1B2421;background:rgba(255,255,255,.88);border-radius:999px;padding:1px 10px;white-space:nowrap;box-shadow:0 2px 5px rgba(0,0,0,.15)}
 .pz-mower.run .pz-lwl{display:none}
 .pz-seedbox{position:absolute;left:0;top:0;width:110px;height:80px;margin:-78px 0 0 -55px;pointer-events:none}.pz-seedbox img{display:block;width:110px;height:80px}
-.pz-seedbox .pz-lwl{left:55px;top:-34px}
+.pz-seedbox .pz-lwl{left:55px;top:-34px}.pz-seedbox img{transition:opacity .3s}.pz-seedbox.cd img{opacity:.45}.pz-scd{position:absolute;left:55px;top:30px;transform:translate(-50%,-50%);display:none;min-width:40px;height:40px;border-radius:50%;background:rgba(27,36,33,.78);color:#fff;font:900 22px/40px system-ui,sans-serif;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.25)}.pz-seedbox.cd .pz-scd{display:block}
 .pz-ride .pz-bob{top:-14px}.pz-ride .pz-sh,.pz-ride .pz-tuft,.pz-ride.pz-me::before{display:none}.pz-ride .pz-tag{top:-58px}.pz-ride .pz-bub{bottom:150px}
 .pz-hold.s{font:800 17px/1 system-ui,sans-serif;background:#FFFDF6;color:#1F6F5C;border:2px solid #1B2421;border-radius:999px;padding:3px 9px 4px 6px;white-space:nowrap;display:flex;align-items:center;gap:1px;box-shadow:0 3px 0 rgba(27,36,33,.3)}
 .pz-hold.s{width:max-content;gap:3px}.pz-hold.s img{width:48px;height:auto;display:block}
@@ -4533,7 +4533,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.107";
+const APP_VERSION="2026.11.108";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -10128,7 +10128,7 @@ function plzGrassDraw(c){ let sd=7; const rnd=()=>{ sd=(sd*16807)%2147483647; re
    cut, and dies by itself after a day. The seedling box next to the mower gives packs of 10; while you carry seedlings
    (or ride the mower) no wild beast jumps out. No rewards (CheChe). Shared per line in Realtime DB plazaLawn/{line}:
    mow = {u,n,t} who drives, c/{cell} = cut time (>0) or -planted time (<0). ===== */
-const PLZ_LN={c:48, cols:32, rows:24, ty:120, y1:1040, regrow:[5*60e3,10*60e3], life:24*3600e3, cap:300, pack:10, packCd:60e3, ride:30e3, need:15, extra:5,
+const PLZ_LN={c:48, cols:32, rows:24, ty:120, y1:1040, regrow:[5*60e3,10*60e3], life:24*3600e3, cap:300, pack:10, packCd:15e3, ride:30e3, need:15, extra:5,
   home:{x:690,y:1064}, box:{x:880,y:1060}, near:120, boxR:100, blade:44, spd:250, back:190};
 let PLZ_ORIG=null, PLZ_RODE=0, PLZ_SEED_AT=0;
 function plzOrigInit(){ if(PLZ_ORIG) return; const Q=PLZ_LN; PLZ_ORIG=new Uint8Array(Q.cols*Q.rows);
@@ -10147,11 +10147,11 @@ function plzLawnBuild(){ const R=ROOM, Q=PLZ_LN; plzOrigInit(); const D=Math.min
   cv.width=Math.round(PLZ_W*D); cv.height=Math.round(H*D); cv.style.cssText=`width:${PLZ_W}px;height:${H}px;top:${Q.ty}px`; R.world.querySelector(".pz-ground").after(cv);
   const lo=()=>{ const c=document.createElement("canvas"); c.width=PLZ_W/8; c.height=PLZ_H/8; return c; };
   const mw=document.createElement("div"); mw.className="pz-mower"; mw.innerHTML=`<div class="pz-mwb"><img src="assets/art/plaza/lawn-mower.webp" alt=""></div><span class="pz-lwl">🚜 ${T("plzMowLbl")}</span>`; R.world.appendChild(mw); const mf=document.createElement("div"); mf.className="pz-mower pz-mowf"; mf.innerHTML=`<div class="pz-mwb"><img src="assets/art/plaza/lawn-mower-front.webp" alt=""></div>`; R.world.appendChild(mf);   // front half: the rider sits between the two layers
-  const bx=document.createElement("div"); bx.className="pz-seedbox"; bx.style.cssText=`transform:translate(${Q.box.x}px,${Q.box.y}px);z-index:${Math.round(Q.box.y/4)*4}`; bx.innerHTML=`<img src="assets/art/plaza/lawn-seedbox.webp" alt=""><span class="pz-lwl">🌱 ${T("plzSeedLbl")}</span>`; R.world.appendChild(bx);
+  const bx=document.createElement("div"); bx.className="pz-seedbox"; bx.style.cssText=`transform:translate(${Q.box.x}px,${Q.box.y}px);z-index:${Math.round(Q.box.y/4)*4}`; bx.innerHTML=`<img src="assets/art/plaza/lawn-seedbox.webp" alt=""><b class="pz-scd"></b><span class="pz-lwl">🌱 ${T("plzSeedLbl")}</span>`; R.world.appendChild(bx);
   const dr=document.createElement("button"); dr.className="pz-sdrop"; dr.dataset.pzl="sdrop"; dr.hidden=true; dr.innerHTML=`🗑️ ${T("plzSeedDrop")}`; R.box.appendChild(dr);
   R.stage.addEventListener("pointerdown",()=>{ if(ROOM===R&&R.lawn&&R.lawn.race) plzMowTap(); });   // while the mower race shows, a tap anywhere on the map counts too (CheChe)
   R.box.addEventListener("pointerdown",e=>{ const b=e.target.closest("[data-pzl]"); if(!b) return; e.preventDefault(); e.stopPropagation(); const a=b.dataset.pzl; if(a==="mgrab") plzMowTap(); else if(a==="sdrop") plzSeedDrop(); });
-  R.lawn={cells:new Map(), st:new Uint8Array(Q.cols*Q.rows), dirty:new Set(), pend:{}, flushAt:0, drawAt:0, chkAt:0, cv, x:cv.getContext("2d"), D, tint:lo(), stub:lo(), el:mw, mwb:mw.firstElementChild, fr:mf, frb:mf.firstElementChild, drop:dr, mx:Q.home.x, my:Q.home.y, mf:1, mow:null, riding:null};
+  R.lawn={cells:new Map(), st:new Uint8Array(Q.cols*Q.rows), dirty:new Set(), pend:{}, flushAt:0, drawAt:0, chkAt:0, cv, x:cv.getContext("2d"), D, tint:lo(), stub:lo(), el:mw, mwb:mw.firstElementChild, bx, bxcd:bx.querySelector(".pz-scd"), fr:mf, frb:mf.firstElementChild, drop:dr, mx:Q.home.x, my:Q.home.y, mf:1, mow:null, riding:null};
   plzTurfDraw(true); }
 async function plzLawnJoin(dbM,db){ const R=ROOM, L=R&&R.lawn; if(!L) return; const base=`plazaLawn/${R.ch}`, me=R.me.id; L.dbM=dbM; L.mowRef=dbM.ref(db,base+"/mow"); L.cRef=dbM.ref(db,base+"/c");
   const cell=sn=>{ const k=+sn.key, v=sn.val(); if(!(k>=0&&k<L.st.length)) return; if(typeof v==="number") L.cells.set(k,v); else L.cells.delete(k); L.dirty.add(k); };
@@ -10174,6 +10174,7 @@ function plzLawnStep(cx,cy,z,vw,vh,now){ const R=ROOM, L=R.lawn, m=R.me, Q=PLZ_L
   if(L.riding){ if(t-L.riding.t0>=Q.ride) plzMowHop(true); else plzMowCut(m,t); }
   plzLawnFlush(t);
   plzMowRaceUi(cx,cy,z,vw,vh,now,t);
+  const cd=Math.max(0,Math.ceil((PLZ_SEED_AT+Q.packCd-t)/1000)); if(cd!==L.cd){ L.cd=cd; L.bx.classList.toggle("cd",cd>0); L.bxcd.textContent=cd?cd+"":""; }   // seedling box refilling: see-through with a countdown on it
   const hs=(m.h||"")[0]==="s"; if(hs!==L.dropOn){ L.dropOn=hs; L.drop.hidden=!hs; }
   if(t-L.chkAt>1000){ L.chkAt=t; for(const k of L.cells.keys()) if(plzCellSt(k,t)!==L.st[k]) L.dirty.add(k); }   // grass growing back, planted grass dying
   if(L.dirty.size&&now-L.drawAt>180) plzTurfDraw(); }
