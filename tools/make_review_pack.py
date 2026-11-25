@@ -116,7 +116,8 @@ def main():
             rq = load(f"reason/{date}.json").get("items", {})
         os.makedirs(f"{out}/{date}", exist_ok=True)
         idx = [f"# BinBin news proofreading pack — {date}", "",
-               f"{len(files)} articles. For each article open ALL its links (text, then every words part).", ""]
+               f"{len(files)} articles. For each article read ALL its files (text, then every words part).",
+               f"Paths are files on the main branch of GitHub repo {REPO} (read them with the GitHub connector); the same files are also at {RAW}/<path after review/>.", ""]
         for p in files:
             a = load(p)
             aid = a.get("id") or os.path.basename(p)[:-5]
@@ -129,9 +130,9 @@ def main():
                     f.write(w)
             where = f"region {a['region']}" if a.get("region") else "Ireland national"
             idx.append(f"- {aid} ({where}, {a.get('topic')}): {a.get('title')}")
-            idx.append(f"  - text:  {RAW}/{date}/{aid}.md")
+            idx.append(f"  - text:  review/{date}/{aid}.md")
             for n in range(1, len(wp) + 1):
-                idx.append(f"  - words part {n}/{len(wp)}: {RAW}/{date}/{aid}-words-{n}.md")
+                idx.append(f"  - words part {n}/{len(wp)}: review/{date}/{aid}-words-{n}.md")
         body = "\n".join(idx) + "\n"
         with open(f"{out}/{date}/index.md", "w", encoding="utf-8") as f:
             f.write(body)
