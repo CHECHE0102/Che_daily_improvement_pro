@@ -69,6 +69,8 @@ export async function eraseUser(db, uid, { rtdb = null, log = () => {} } = {}) {
     ["wellWin", () => delQuery(db, col("wellWin").where("uid", "==", uid))],
     ["wellSum", async () => { for (const d of await col("wellSum").listDocuments())
       await d.update(new FieldPath("e", uid), FieldValue.delete()).catch(e => { if (e && e.code !== 5) throw e; }); }],   // 5 = no such month
+    // closed-beta list: the number is the player's own; the spot itself stays taken (n is not lowered)
+    ["beta", () => col("beta").doc("list").update(new FieldPath("e", uid), FieldValue.delete()).catch(e => { if (e && e.code !== 5) throw e; })],
     ["wellDraw", async () => { const snap = await col("wellDraw").get();
       for (const d of snap.docs) { const w = d.data().winners;
         if (Array.isArray(w) && w.some(x => x && x.uid === uid)) await d.ref.update({ winners: w.map(x => x && x.uid === uid ? { ...x, uid: GONE, nick: GONE } : x) }); } }],
