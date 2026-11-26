@@ -168,6 +168,19 @@ input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:tex
 .w.hit{background:var(--gorse-soft);box-shadow:inset 0 -2px 0 var(--gorse)}
 .tip{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center}
 .tip i{display:inline-block;width:18px;height:12px;background:var(--gorse-soft);box-shadow:inset 0 -2px 0 var(--gorse);border-radius:2px}
+/* 新聞表情 reactions */
+.nr{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:14px}
+.nr-q{font-size:13px;color:var(--muted)}
+.nr-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;max-width:440px}
+.nr-b{display:inline-flex;align-items:center;gap:3px;min-width:0;justify-content:center;padding:7px 2px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:15px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform .12s,background .12s,border-color .12s}
+.nr-b:active{transform:scale(.92)}
+.nr-b i{font-style:normal;font-size:19px;line-height:1}
+.nr-b b{font-weight:600;font-size:13px;font-variant-numeric:tabular-nums;color:var(--muted);min-width:1ch}
+.nr-b.on{background:var(--accent-soft);border-color:var(--accent)}
+.nr-b.on b{color:var(--accent)}
+.nr-b.pop i{animation:nrpop .32s ease-out}
+@keyframes nrpop{40%{transform:scale(1.45)}}
+.nr-note{font-size:12px;color:var(--muted)}
 .lock{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;padding:28px 16px}
 /* Bottom sheet */
 .scrim{position:fixed;inset:0;background:rgba(10,16,14,.35);z-index:20}
@@ -2311,9 +2324,74 @@ function viewRead(){
     <div class="tip"><i></i>${T("tip")}</div>
     ${window.speechSynthesis?`<div class="read-bar" id="readBar">${readBarInner()}</div><div id="lsBox">${window.LS?lsInner():""}</div>`:""}
     <article class="article" id="article">${paras}</article>
+    ${nrBox(art)}
     ${end}
   </div>`;
 }
+
+/* ---------- 新聞表情 news reactions ----------
+   One emoji per player per article (tap again to take it back, tap another to switch).
+   Firestore: newsReact/{art.id} {up,love,wow,lol,sad,hmm: counts} + newsReact/{art.id}/u/{uid} {e}.
+   Both are written in one transaction; the rules check each counter moves by exactly the player's change. */
+const NR_KINDS=[["up","👍"],["love","❤️"],["wow","😮"],["lol","😂"],["sad","😢"],["hmm","🤔"]];
+const NR={};   // art.id -> {c:{k:n}, me:"", at, busy, pop}
+const nrId=art=>art&&art.id&&/^[A-Za-z0-9_.-]{1,60}$/.test(art.id)?art.id:null;
+function nrInner(id){
+  const r=NR[id]||{c:{},me:""};
+  return `<div class="nr-q">${T("nrAsk")}</div><div class="nr-row">${NR_KINDS.map(([k,e])=>{ const n=r.c[k]||0;
+    return `<button type="button" class="nr-b${r.me===k?" on":""}${r.pop===k?" pop":""}" data-nr="${k}" data-nrid="${id}" aria-pressed="${r.me===k}" aria-label="${e} ${n}"><i>${e}</i><b>${n||""}</b></button>`; }).join("")}</div>`
+    +(CLOUD.fb&&!CLOUD.user?`<div class="nr-note">${T("nrLoginNote")}</div>`:"");
+}
+function nrBox(art){
+  const id=nrId(art); if(!id) return "";
+  const r=NR[id]; if(!r||(!r.busy&&Date.now()-(r.at||0)>60000)) setTimeout(()=>nrLoad(id),0);
+  return `<section class="nr" id="nrBox" data-id="${id}">${nrInner(id)}</section>`;
+}
+function nrPaint(id){ const el=document.getElementById("nrBox"); if(el&&el.dataset.id===id) el.innerHTML=nrInner(id); }
+async function nrLoad(id){
+  const r=NR[id]||(NR[id]={c:{},me:""}); r.at=Date.now();
+  if(!CLOUD.fb) return; const {fsM,db}=CLOUD.fb, uid=CLOUD.user&&CLOUD.user.uid;
+  try{
+    const [c,u]=await Promise.all([fsM.getDoc(fsM.doc(db,"newsReact",id)), uid?fsM.getDoc(fsM.doc(db,"newsReact",id,"u",uid)):null]);
+    if(r.busy) return;
+    r.c=c.exists()?{...c.data()}:{}; r.me=u&&u.exists()?(u.data().e||""):"";
+    nrPaint(id);
+  }catch(e){}
+}
+async function nrTap(id,k){
+  if(!NR_KINDS.some(x=>x[0]===k)) return;
+  if(!CLOUD.fb) return toast(T("cloudOff"));
+  if(!CLOUD.user) return toast(T("nrLogin"));
+  const r=NR[id]||(NR[id]={c:{},me:""}); if(r.busy) return;
+  const old=r.me, nw=old===k?"":k, prev={c:{...r.c}, me:old};
+  // instant: change the screen first, then save
+  if(old) r.c[old]=Math.max(0,(r.c[old]||0)-1);
+  if(nw) r.c[nw]=(r.c[nw]||0)+1;
+  r.me=nw; r.pop=nw; r.busy=true; nrPaint(id); r.pop="";
+  const {fsM,db}=CLOUD.fb, uid=CLOUD.user.uid, cref=fsM.doc(db,"newsReact",id), uref=fsM.doc(db,"newsReact",id,"u",uid);
+  let ok=false;
+  for(let t=0;t<4&&!ok;t++){
+    try{
+      const res=await fsM.runTransaction(db, async tx=>{
+        const c=await tx.get(cref), u=await tx.get(uref);
+        const cnt=c.exists()?{...c.data()}:{}, b=u.exists()?(u.data().e||""):"";
+        const a=b===k?"":k;   // decide from the saved choice, so a second tap always toggles cleanly
+        if(b) cnt[b]=Math.max(0,(cnt[b]||0)-1);
+        if(a) cnt[a]=(cnt[a]||0)+1;
+        for(const x of Object.keys(cnt)) if(!cnt[x]) delete cnt[x];
+        if(a===b) return {cnt, a};
+        tx.set(cref,cnt);
+        if(a) tx.set(uref,{e:a}); else tx.delete(uref);
+        return {cnt, a};
+      });
+      r.c=res.cnt; r.me=res.a; ok=true;
+    }catch(e){ if(t<3) await new Promise(f=>setTimeout(f,200+Math.random()*400*Math.pow(2,t))); }
+  }
+  r.busy=false; r.at=Date.now();
+  if(!ok){ r.c=prev.c; r.me=prev.me; toast(T("syncFail")); }
+  nrPaint(id);
+}
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-nr]"); if(!b) return; e.stopPropagation(); nrTap(b.dataset.nrid,b.dataset.nr); },true);
 
 /* ---------- dictionary ---------- */
 // 總覽 overview (閱讀 menu): review, weakness report, word calendar and growth chart, so 字典 is just the word list
@@ -4575,7 +4653,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.117";
+const APP_VERSION="2026.11.118";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -11931,6 +12009,7 @@ Object.assign(STR.hi,{"plzSpot_news": "किताब लो", "plzNewsT": "प
 Object.assign(STR.es,{"plzSpot_news": "Coger un libro", "plzNewsT": "Rincón de lectura", "plzNewsSub": "Elige un libro y te sentarás en un sillón a leerlo. Leídas {n}/{t}", "plzNewsAll": "Todas", "plzNewsList": "Todas las historias", "plzNewsTip": "Toca una palabra para ver su significado, 🔊 lee el párrafo", "plzNewsFin": "Terminado", "plzNewsDone": "Leída", "plzZd2_pond": "Date un baño, lee historias irlandesas en el rincón de lectura", "plzNewsSub2": "Elige otro libro. Leídas {n}/{t}", "plzNewsClose": "Cerrar libro", "plzSpot_seat": "Coge un libro y siéntate aquí"});
 Object.assign(STR.ja,{"plzSpot_news": "本を取る", "plzNewsT": "読書コーナー", "plzNewsSub": "本を選ぶと、近くの椅子に座って読みます。既読 {n}/{t}", "plzNewsAll": "すべて", "plzNewsList": "お話一覧", "plzNewsTip": "単語をタップで意味、🔊 で段落を読み上げ", "plzNewsFin": "読み終えた", "plzNewsDone": "既読", "plzZd2_pond": "泳いだり、読書コーナーでアイルランドのお話を読もう", "plzNewsSub2": "別の本を選ぶ。既読 {n}/{t}", "plzNewsClose": "本を閉じる", "plzSpot_seat": "本を取ってここに座る"});
 Object.assign(STR.ko,{"plzSpot_news": "책 가져오기", "plzNewsT": "독서 코너", "plzNewsSub": "책을 고르면 옆 의자에 앉아서 읽어요. 읽음 {n}/{t}", "plzNewsAll": "전체", "plzNewsList": "모든 이야기", "plzNewsTip": "단어를 누르면 뜻, 🔊 은 문단 읽기", "plzNewsFin": "다 읽었어요", "plzNewsDone": "읽음", "plzZd2_pond": "수영하고, 독서 코너에서 아일랜드 이야기를 읽어요", "plzNewsSub2": "다른 책 고르기. 읽음 {n}/{t}", "plzNewsClose": "책 덮기", "plzSpot_seat": "책 들고 여기 앉기"});
+Object.assign(STR.zh,{"nrAsk": "你覺得這篇新聞怎麼樣？按個表情吧", "nrLogin": "登入後就能對新聞按表情", "nrLoginNote": "登入後就能按表情，現在先看看大家的反應"});Object.assign(STR.en,{"nrAsk": "How do you feel about this story? Tap an emoji", "nrLogin": "Sign in to react to news", "nrLoginNote": "Sign in to react. For now you can see how others reacted"});Object.assign(STR.hi,{"nrAsk": "यह खबर आपको कैसी लगी? एक इमोजी दबाएँ", "nrLogin": "खबरों पर प्रतिक्रिया देने के लिए साइन इन करें", "nrLoginNote": "प्रतिक्रिया देने के लिए साइन इन करें। अभी आप देख सकते हैं कि दूसरों ने क्या चुना"});Object.assign(STR.es,{"nrAsk": "¿Qué te parece esta noticia? Toca un emoji", "nrLogin": "Inicia sesión para reaccionar a las noticias", "nrLoginNote": "Inicia sesión para reaccionar. Por ahora puedes ver cómo reaccionaron los demás"});Object.assign(STR.ja,{"nrAsk": "このニュース、どう思いましたか？絵文字でリアクション", "nrLogin": "ログインするとニュースにリアクションできます", "nrLoginNote": "ログインするとリアクションできます。今はみんなの反応を見られます"});Object.assign(STR.ko,{"nrAsk": "이 뉴스 어땠어요? 이모지를 눌러 주세요", "nrLogin": "로그인하면 뉴스에 반응을 남길 수 있어요", "nrLoginNote": "로그인하면 반응을 남길 수 있어요. 지금은 다른 사람들의 반응을 볼 수 있어요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.en,{"legalT": "About, terms and refunds", "legalSub": "Who runs the app, Rainbow Vault items and prices, payment and refund policy, terms of use and privacy policy.", "legalOpen": "Open", "vtLegal": "By buying you ask for immediate delivery and accept that the 14-day right of withdrawal ends once items are delivered. If an item doesn't arrive or you're charged twice, you'll always get a refund.", "vtLegalLink": "Payment and refund policy"});
 Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और रिफ़ंड", "legalSub": "ऐप कौन चलाता है, इंद्रधनुष ख़ज़ाने की चीज़ें और कीमतें, भुगतान व रिफ़ंड नीति, उपयोग की शर्तें और गोपनीयता नीति।", "legalOpen": "खोलें", "vtLegal": "खरीदकर आप तुरंत डिलीवरी माँगते हैं और मानते हैं कि डिलीवरी के बाद 14 दिन का वापसी अधिकार नहीं रहता। चीज़ न मिले या दो बार पैसे कटें तो रिफ़ंड ज़रूर मिलेगा।", "vtLegalLink": "भुगतान और रिफ़ंड नीति"});
