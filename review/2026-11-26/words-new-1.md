@@ -1,4 +1,4 @@
-# 2026-11-26 NEW glossary entries, part 1 of 2
+# 2026-11-26 NEW glossary entries, part 1 of 4
 Only entries that are new today (older identical entries were checked on earlier days).
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
@@ -17,7 +17,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26:brought | bring | v. | A2 | asked someone to come and help | 引進（brought in：請來） | 呼び入れた | 데려왔다 | trajo | लाया | The council brought in experts to help. | called in, hired, engaged | dismissed | bring in experts, bring in rules
 2026-11-26:budget | budget | adj. | B1 | cheap and low in price | 平價的；低價的 | 格安の | 저가의 | económico; de bajo coste | सस्ता; बजट | We flew with a budget airline. | cheap, low-cost, discount | luxury, premium | budget airline, budget retailer
 2026-11-26:carry | carry | v. | A2 | continue doing something | 繼續（carry on：繼續進行） | 続ける | 계속하다 | continuar | जारी रखना | Please carry on with your work. | continue, keep, go on | stop, halt | carry on working, carry on as normal
-2026-11-26:chain | chain | n. | B1 | a group of shops with one owner | 連鎖店 | チェーン店 | 체인점 | cadena (de tiendas) | शृंखला (दुकानों की) | The coffee chain opened ten new cafés. | group, franchise, network |  | retail chain, supermarket chain
+2026-11-26:chain 2026-11-26-tw-2:chain | chain | n. | B1 | a group of shops with one owner | 連鎖店 | チェーン店 | 체인점 | cadena (de tiendas) | शृंखला (दुकानों की) | The coffee chain opened ten new cafés. | group, franchise, network |  | retail chain, supermarket chain
 2026-11-26:chains | chain | n. | B1 | groups of shops with one owner | 連鎖店（複數） | チェーン店 | 체인점들 | cadenas | दुकान शृंखलाएँ | Big chains often pay lower prices to suppliers. | groups, franchises, networks |  | discount chains, hotel chains
 2026-11-26:collaborate | collaborate | v. | C1 | work together with others | 合作 | 協力する | 협력하다 | colaborar | सहयोग करना | The two universities collaborate on research. | cooperate, work together, partner | compete | collaborate closely, collaborate with partners
 2026-11-26:collapsed | collapse | v. | B2 | failed suddenly and completely | 倒閉；垮台 | 破綻した | 무너졌다 | quebró | ढह गया | The travel firm collapsed with large debts. | failed, folded, crashed | thrived, succeeded | collapse into administration, company collapsed
@@ -43,7 +43,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26:indeed | indeed | adv. | B2 | used to add a stronger point | 確實；的確 | 実際 | 실제로 | de hecho | वास्तव में | Prices rose sharply; indeed, rent doubled. | in fact, really, certainly |  | indeed so, very much indeed
 2026-11-26:johnny | Johnny | n. | PN | first name of Johnny Guirke | 強尼（人名） | ジョニー | 조니 | Johnny | जॉनी |  |  |  | 
 2026-11-26:management | management | n. | B1 | the people who run a company | 管理層 | 経営陣 | 경영진 | dirección | प्रबंधन | Management agreed to meet the union. | bosses, executives, leadership | staff | senior management, management team
-2026-11-26:means | mean | v. | A2 | has a particular meaning | 意思是；表示 | 〜という意味だ | 의미하다 | significa | मतलब है | A red light means stop. | signifies, shows, indicates |  | this means, what it means
+2026-11-26:means 2026-11-26-tw-1:means | mean | v. | A2 | has a particular meaning | 意思是；表示 | 〜という意味だ | 의미하다 | significa | मतलब है | A red light means stop. | signifies, shows, indicates |  | this means, what it means
 2026-11-26:nash | Nash | n. | PN | surname of politician Ged Nash | 納許（姓） | ナッシュ | 내시 | Nash | नैश |  |  |  | 
 2026-11-26:once | once | adv. | A2 | immediately (at once) | 立刻（at once） | すぐに | 즉시 | enseguida (at once) | तुरंत | Please call me at once. | immediately, right away, now | later | at once, do it at once
 2026-11-26:order 2026-11-26-4:order | order | n. | B1 | used to show purpose | in order to：為了 | 〜するために | ~하기 위해 | para (in order to) | ताकि | We left early in order to catch the bus. | purpose, aim |  | in order to, in order that
@@ -93,7 +93,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26-2:peers | peer | n. | C1 | people of the same age or group | 同齡人；同輩 | 同年代の人 | 또래 | compañeros; pares | हमउम्र | Teenagers often copy their peers. | equals, contemporaries, counterparts |  | female peers, peer pressure
 2026-11-26-2:professing | profess | v. | C2 | saying openly that something is true | 聲稱；表示 | 公言する | 공언하는 | declarando | दावा करते हुए | Few voters were professing strong support. | claiming, declaring, stating | denying | profess to feel, profess support
 2026-11-26-2:report | report | v. | B1 | say in answer to a question | 表示；報告說 | 報告する | 응답하다 | declarar | बताना | Few people report feeling lonely. | say, state, describe | conceal | report feeling, report a problem
-2026-11-26-2:reported | report | v. | B1 | said in a survey | 表示；回報 | 回答した | 응답했다 | declararon | बताया | Half of students reported feeling stressed. | said, stated, indicated | concealed | reported feeling, reported that
+2026-11-26-2:reported 2026-11-26-tw-1:reported 2026-11-26-tw-2:reported | report | v. | B1 | said in a survey | 表示；回報 | 回答した | 응답했다 | declararon | बताया | Half of students reported feeling stressed. | said, stated, indicated | concealed | reported feeling, reported that
 2026-11-26-2:surroundings | surroundings | n. | B2 | the area and things around you | 周遭環境 | 周囲 | 주변 환경 | entorno | आसपास का माहौल | Children feel calm in familiar surroundings. | environment, setting, area |  | immediate surroundings, familiar surroundings
 2026-11-26-2:topped | top | v. | B2 | was first in a list | 居首（top the table） | 首位になった | 1위를 차지했다 | encabezó | शीर्ष पर रहा | Cork topped the list of cleanest towns. | led, headed, ranked first | trailed | top the table, top the list
 2026-11-26-2:victimisation | victimisation | n. | C2 | being harmed by crime | 受害（犯罪受害情況） | 犯罪被害 | 범죄 피해 | victimización | पीड़ित होना | The survey measures crime and victimisation. | being targeted, harm, abuse |  | crime and victimisation, victimisation survey
