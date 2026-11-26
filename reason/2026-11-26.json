@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-26",
+ "items": {
+  "2026-11-26": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Poundland, which trades as Dealz in Ireland, has gone into administration, putting about 11,000 jobs at risk while administrators try to save the viable parts.",
+     "Gordon Brothers has closed all 40 Dealz stores in Ireland with immediate effect.",
+     "The UK government has agreed to buy Poundland to protect its workers.",
+     "Dealz has cut £100 million in costs and is now growing quickly."
+    ],
+    "a": 0,
+    "exp": "The passage opens by saying Poundland, \"which operates as Dealz in Ireland, has entered administration, thereby jeopardising approximately 11,000 jobs\", and adds that administrators aim at \"preserving those elements of the company that remain viable\". Stores are not closed (B) — \"trading will continue as normal\"; no government purchase is mentioned (C); and despite the cuts the firm \"remains highly susceptible\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the fact that Gordon Brothers bought the company for £1?",
+    "opts": [
+     "The company was thought to be very valuable at the time.",
+     "The UK tax increase had made the company profitable.",
+     "The business was seen as being in serious financial trouble when it changed hands.",
+     "Pepco Group wanted to keep a share of the business."
+    ],
+    "a": 2,
+    "exp": "The passage says the previous owner admitted the business \"was already in a precarious position\" and that pressure was \"consequently intensified\" before Gordon Brothers \"acquired the company for a nominal sum of £1\" — a price that signals a struggling firm, not a valuable (A) or profitable (B) one. Nothing suggests Pepco kept a share (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the tone of the Irish politicians quoted in the final paragraphs?",
+    "opts": [
+     "Relaxed and confident that the jobs are safe.",
+     "Critical of the workers for not saving the company.",
+     "Indifferent, since only UK jobs are affected.",
+     "Concerned and urgent, pressing for quick action to protect jobs."
+    ],
+    "a": 3,
+    "exp": "The announcement \"generated considerable concern\"; Ged Nash spoke of \"profound uncertainty\" and asked the minister to act \"immediately\", and Johnny Guirke urged parties to engage \"without delay in order to safeguard jobs\". This is urgent concern, not relaxation (A), blame of workers (B) or indifference (C) — Irish jobs are clearly at stake."
+   }
+  ],
+  "2026-11-26-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "CSO data showing that women in Ireland are much more likely than men to feel unsafe in their local area.",
+     "A rise in crime in Dublin between 2019 and 2025.",
+     "A new Government plan to make streets safer for women.",
+     "Evidence that most people in Ireland feel unsafe at home."
+    ],
+    "a": 0,
+    "exp": "The passage opens with the finding that \"Women in Ireland are almost twice as likely as men to perceive their local area as unsafe\" and then gives the survey figures. It reports perceptions, not a crime rise (B); no plan is mentioned (C); and \"85% in total, felt very or fairly safe\" contradicts (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about young people aged 18 to 29?",
+    "opts": [
+     "Young women in this group feel safer than older women.",
+     "The difference between men's and women's sense of safety is larger in this age group than in others.",
+     "Young men in this group feel less safe than any other group.",
+     "Most young women in this group feel very safe."
+    ],
+    "a": 1,
+    "exp": "The gap \"was particularly pronounced among those aged 18 to 29\": 65% of young men but \"merely 35%\" of young women felt very safe, so the gender gap is widest here. Only 35% of young women felt very safe, so (D) is wrong, and the passage makes no comparison supporting (A) or (C)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the final figure that 85% of respondents felt very or fairly safe?",
+    "opts": [
+     "To show that the gender gap has disappeared.",
+     "To argue that the CSO survey was inaccurate.",
+     "To show that men feel less safe than women.",
+     "To give balance by showing that most people still feel safe overall, despite the differences."
+    ],
+    "a": 3,
+    "exp": "The sentence begins with \"Nevertheless\" and says \"a substantial majority of respondents, 85% in total, felt very or fairly safe\", putting the earlier worrying figures in context. It does not cancel the gap (A), question the survey (B) or reverse the finding about men and women (C)."
+   }
+  ],
+  "2026-11-26-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "TFI is raising the price of Leap card fares from Thursday.",
+     "TFI has stopped new sign-ups for Leap card auto top-up, citing low use and high costs, though current users can keep it for now.",
+     "All Leap cards using auto top-up will be blocked on Thursday.",
+     "TFI is replacing the mobile app with automatic top-ups."
+    ],
+    "a": 1,
+    "exp": "TFI \"will no longer accept new registrations for the Leap card auto top-up facility\", blaming \"declining usage, substantial operating costs\", while \"Existing users may retain the service until their card expires\". Fares (A) are not discussed, existing cards are not all blocked (C), and the app is the popular option, not being replaced (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about an existing auto top-up user who changes bank account?",
+    "opts": [
+     "They will lose the auto top-up service and cannot sign up again.",
+     "They can simply re-register for the service online.",
+     "Their card will receive an extra €50 credit.",
+     "They will be moved to the mobile app automatically."
+    ],
+    "a": 0,
+    "exp": "Continuation is \"contingent upon there being no interruption, since a change of bank account ... would terminate it permanently\", and new registrations are no longer accepted, so they could not rejoin. Re-registering (B), extra credit (C) or an automatic move to the app (D) are not mentioned."
+   },
+   {
+    "type": "tone",
+    "q": "What attitude do some commuters show towards the change, according to the final sentence?",
+    "opts": [
+     "Grateful, because the amounts were too high.",
+     "Neutral, as they rarely use Leap cards.",
+     "Disapproving, seeing it as a step backwards.",
+     "Excited about the new technology."
+    ],
+    "a": 2,
+    "exp": "The passage ends: \"some commuters criticised the change as a regressive step\" — a regressive step means going backwards, which shows disapproval. This is not gratitude (A), neutrality (B) or excitement (D)."
+   }
+  ],
+  "2026-11-26-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "HBO and the BBC have stopped filming in Northern Ireland.",
+     "The Extras Department is moving its headquarters from Belfast to Dublin.",
+     "Extras in the Republic will now be paid travel costs.",
+     "A Belfast extras agency is withdrawing from the Republic of Ireland because UK Right to Work rules have made its paperwork much heavier."
+    ],
+    "a": 3,
+    "exp": "The agency \"has announced its withdrawal from the Republic of Ireland\" and \"attributed its decision to the UK's Right to Work legislation, which has substantially increased its administrative obligations\". The broadcasters are its clients, not leaving (A); there is no move to Dublin (B); and travel costs \"could prove prohibitive\" for members, not be paid (C)."
+   },
+   {
+    "type": "infer",
+    "q": "Why is the new rule especially difficult for this agency?",
+    "opts": [
+     "Because extras must now be paid more per day.",
+     "Because checks must be done before every engagement, and many extras work only for a single day.",
+     "Because the rule bans contractors from working in film.",
+     "Because the agency has fewer than 2,000 members."
+    ],
+    "a": 1,
+    "exp": "Employers must \"verify an individual's eligibility to work prior to the commencement of any engagement\" and, \"given that many extras are engaged for a single day, compliance has become increasingly burdensome\" — many short jobs mean many checks. Pay (A) and a ban (C) are not mentioned, and the register has \"more than 20,000\" people (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention clients such as HBO, Universal, RTÉ and the BBC?",
+    "opts": [
+     "To show the agency's size and importance in the industry.",
+     "To suggest these companies caused the agency's withdrawal.",
+     "To criticise broadcasters for using extras.",
+     "To explain how extras verify their identity."
+    ],
+    "a": 0,
+    "exp": "The names follow the facts that it was \"the only large-scale agency of its kind in Northern Ireland\" with \"more than 20,000 extras\", and are described as \"prominent broadcasters and studios\" — they underline how significant the agency is. The withdrawal is blamed on the legislation, not the clients (B); there is no criticism (C); and identity checks are done \"through an external provider\" (D)."
+   }
+  ]
+ }
+}
