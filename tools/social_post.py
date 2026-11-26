@@ -11,7 +11,9 @@ Data lives on the `social` branch (checked out to SOCIAL_DIR):
   posted.json    {"P11:fb": {"at": "...", "id": "..."}, ...}  written back by the workflow
 
 Media is passed to Meta as public raw.githubusercontent.com URLs of the social branch
-(Instagram only accepts media by URL).
+(Instagram only accepts media by URL). The branch only holds media for the next few days:
+once an item is posted everywhere its files are deleted here, and the workflow squashes the
+branch to a single commit so old media does not stay in git history.
 
 Env: META_TOKEN (system-user or page token, GitHub secret), FB_PAGE_ID, IG_USER_ID,
      SOCIAL_DIR, MEDIA_BASE (raw URL prefix), ONLY (optional item id to post now), DRY_RUN=1.
@@ -185,6 +187,12 @@ def main():
         for it, dest in due:
             print("[dry run] would post", it["id"], it["type"], "to", dest, [media_url(p) for p in it["media"]])
         return 0
+    missing = {p for it, _ in due for p in it["media"] if not os.path.exists(os.path.join(SOCIAL_DIR, p))}
+    if missing:
+        print("::warning::media not uploaded yet:", ", ".join(sorted(missing)))
+    due = [(it, d) for it, d in due if not any(p in missing for p in it["media"])]
+    if not due:
+        return 1 if missing else 0
     token = os.environ["META_TOKEN"]
     ptok = page_token(token)
     failed = 0
@@ -199,7 +207,19 @@ def main():
             print(f"::error::{key} failed: {e}")
         with open(posted_path, "w", encoding="utf-8") as f:
             json.dump(posted, f, ensure_ascii=False, indent=1, sort_keys=True)
-    return 1 if failed else 0
+    prune(sched, posted)
+    return 1 if failed or missing else 0
+
+
+def prune(sched, posted):
+    """Delete media of items already posted to every destination (CheChe: delete after upload)."""
+    for it in sched:
+        if all(f"{it['id']}:{d}" in posted for d in it.get("to", ["fb", "ig"])):
+            for p in it["media"]:
+                fp = os.path.join(SOCIAL_DIR, p)
+                if os.path.exists(fp):
+                    os.remove(fp)
+                    print("deleted", p)
 
 
 if __name__ == "__main__":

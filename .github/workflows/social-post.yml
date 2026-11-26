@@ -34,10 +34,6 @@ jobs:
         with:
           ref: social
           path: social
-          sparse-checkout: |
-            schedule.json
-            posted.json
-          sparse-checkout-cone-mode: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -49,14 +45,16 @@ jobs:
           ONLY: ${{ github.event.inputs.only }}
           DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
         run: python tools/social_post.py
-      - name: Save posted.json
+      - name: Save posted.json and drop posted media
+        # The branch is squashed to one commit so deleted media leaves no copy in git history.
         if: always()
         working-directory: social
         run: |
           git config user.name "CHECHE0102"
           git config user.email "CHECHE0102@users.noreply.github.com"
-          git add posted.json 2>/dev/null || true
+          git add -A
           if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
-          git commit -qm "Record social posts"
-          for i in 1 2 3; do git pull --rebase -q origin social && git push -q origin HEAD:social && exit 0; sleep 5; done
-          echo "::error::could not save posted.json"; exit 1
+          base=$(git rev-parse HEAD)
+          git checkout -q --orphan squashed
+          git commit -qm "Social queue (posted items removed)"
+          git push -q --force-with-lease=social:$base origin HEAD:social || { echo "::error::social branch changed meanwhile, will retry next run"; exit 1; }
