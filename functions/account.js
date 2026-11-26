@@ -53,7 +53,7 @@ export async function eraseUser(db, uid, { rtdb = null, log = () => {} } = {}) {
     // own documents (recursiveDelete also removes users/{uid}/words/*)
     ["users", () => db.recursiveDelete(col("users").doc(uid))],
     ["own docs", async () => { const b = db.batch();
-      for (const c of ["leaderboard", "allies", "referrals", "memberReq", "members", "supporters", "cheat", "banned"]) b.delete(col(c).doc(uid));
+      for (const c of ["leaderboard", "allies", "referrals", "memberReq", "members", "supporters", "cheat", "banned", "cvUse"]) b.delete(col(c).doc(uid));
       await b.commit(); }],
     ["nicks", () => delQuery(db, col("nicks").where("uid", "==", uid))],
     ["inviteCodes", () => delQuery(db, col("inviteCodes").where("uid", "==", uid))],
