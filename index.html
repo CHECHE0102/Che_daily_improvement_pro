@@ -161,7 +161,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 /* No text selection / iOS long-press callout anywhere, except reading passages and text fields */
 html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
-.art-head h1,.zh-sum,.article:not(.co-text),.ie-passage,.tk-passage p{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+.art-head h1,.zh-sum,.article:not(.co-text),.ie-passage,.tk-passage p,.ls-cur,#plazaRoom .pz-nbody p{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 .w{border-radius:3px;padding:0 1px;margin:0 -1px;cursor:pointer;transition:background .15s}
 .w:active{background:var(--accent-soft)}
 .w.known{text-decoration:underline dotted var(--accent);text-underline-offset:4px}
@@ -3656,7 +3656,7 @@ function migrateLv50(g){
   g.lvScale=LV_MAX; return g;
 }   // deep copy so no two saves share arrays or maps
 function game(){ return S.game || (S.game=newGame()); }
-function saveGame(){ lsSave(); cloudMark(null); }
+function saveGame(){ if(S.game) S.game._t=Date.now(); lsSave(); cloudMark(null); }
 const EXP_CURVE={k:50,p:1.52};   // EXP needed for the next level = k × lv^p (tuned by simulation: a regular player ≈ 7 months, a very keen one ≈ 4.5)
 const expNeed=lv=>Math.round(EXP_CURVE.k*Math.pow(lv,EXP_CURVE.p));
 function stats(g=game()){
@@ -4690,7 +4690,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.124";
+const APP_VERSION="2026.11.125";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5413,7 +5413,7 @@ async function nickVerify(){
     if(taken){ game().nick=""; saveGame(); toast(T("nickTakenOld")); render(); } }catch(e){}
 }
 const OWNER_KEY="che-pro-owner";
-function localReset(){ S.words.clear(); S.days.clear(); if(typeof plazaClose==="function") plazaClose(); PLAZA={rows:null, at:0, busy:false, top:[], star:null}; INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
+function localReset(){ S.words.clear(); S.days.clear(); if(typeof plazaClose==="function") plazaClose(); PLAZA={rows:null, at:0, busy:false, top:[], star:null}; INV={list:null, ref:undefined, busy:false, err:false}; MEM={on:undefined, req:undefined, busy:false}; try{ localStorage.removeItem("che-pro-wsync"); localStorage.removeItem("che-pro-dirty"); localStorage.removeItem("che-pro-region-at"); }catch(e){} S.game=JSON.parse(JSON.stringify(G_DEFAULT)); if(DEV){ DEV=null; devSave(); applyMast(); } lsSave(); }
 async function cloudSignOut(){ if(!CLOUD.fb) return; await cloudFlush(); await CLOUD.fb.authM.signOut(CLOUD.fb.auth);
   localReset(); try{ localStorage.removeItem(OWNER_KEY); }catch(e){} toast(T("signedOut")); render(); }
 const userRef=()=>CLOUD.fb.fsM.doc(CLOUD.fb.db,"users",CLOUD.user.uid);
@@ -5427,11 +5427,18 @@ function mergeDay(a,b){ if(!a) return b; if(!b) return a; const base=dScore(b)>d
   return {...base, preDone:!!(a.preDone||b.preDone), preScore:pre.preScore, preTotal:pre.preTotal, postDone:!!(a.postDone||b.postDone), postScore:post.postScore, postTotal:post.postTotal,
     read:base.read||o.read||null, lookedUp:[...new Set([...(base.lookedUp||[]),...(o.lookedUp||[])])], lookedUpBy:lb, postBy:{...(o.postBy||{}),...(base.postBy||{})}, bonus:!!(a.bonus||b.bonus), oldPaid:[...new Set([...(a.oldPaid||[]),...(b.oldPaid||[])])], seenW:[...new Set([...(a.seenW||[]),...(b.seenW||[])])]}; }
 function mergeGame(a,b){ if(!a) return b; if(!b) return a;
-  const base=(b.lv>a.lv||(b.lv===a.lv&&(b.exp||0)>(a.exp||0)))?b:a, o=base===a?b:a;
+  // the further-along save is the base; on the same level and exp the one saved last wins (gold from today's puzzle etc.)
+  const base=(b.lv>a.lv||(b.lv===a.lv&&((b.exp||0)>(a.exp||0)||((b.exp||0)===(a.exp||0)&&(b._t||0)>(a._t||0)))))?b:a, o=base===a?b:a;
   const wins={...(o.wins||{})}; for(const [k,v] of Object.entries(base.wins||{})) wins[k]=Math.max(v,wins[k]||0);
   return {...newGame(base), inv:[...new Set([...(base.inv||[]),...(o.inv||[])])], cosOwn:[...new Set([...(base.cosOwn||[]),...(o.cosOwn||[])])], conq:{...(o.conq||{}),...(base.conq||{})}, wins,
     taxDate:[base.taxDate,o.taxDate].filter(Boolean).sort().pop()||null, login:loginMerge(base.login,o.login), battles:Math.max(base.battles||0,o.battles||0), gender:base.gender||o.gender||null,
-    ...invMergeG(base,o)}; }
+    ...invMergeG(base,o), ...pzMergeG(base,o)}; }
+// puzzles of the day, the elder's talks and stories read are kept from both devices
+function pzMergeG(a,b){ const r={}, u=(x,y)=>[...new Set([...(x||[]),...(y||[])])];
+  if(a.story||b.story) r.story={...(b.story||{}),...(a.story||{})};
+  const pa=a.pz, pb=b.pz; if(pa||pb) r.pz=!pa?pb:!pb?pa:pa.d===pb.d?{d:pa.d, ok:u(pa.ok,pb.ok), h:u(pa.h,pb.h)}:(pa.d>pb.d?pa:pb);
+  if(a.pzN||b.pzN) r.pzN=Math.max(a.pzN||0,b.pzN||0);
+  if(a.plzNews||b.plzNews) r.plzNews=u(a.plzNews,b.plzNews); return r; }
 function invMergeG(a,b){ const r={}, c=a.invCode||b.invCode, p=[a.invPaid,b.invPaid].filter(Boolean).sort((x,y)=>(x.m||"").localeCompare(y.m||"")||(x.n||0)-(y.n||0)).pop();
   if(c) r.invCode=c; if(a.invGot||b.invGot) r.invGot=1; if(p) r.invPaid=p;
   const rg=[a.reg,b.reg].filter(x=>x&&x.at).sort((x,y)=>x.at-y.at).pop(); if(rg) r.reg=rg; return r; }
@@ -5923,7 +5930,14 @@ async function pgJoin(code){
     if(!inRoom){
       if(d.state!=="wait"){ S.pgBusy=null; pgRender(); return toast(T("pgStarted")); }
       if(Object.keys(d.players||{}).length>=(d.game==="duel"?2:d.game==="five"?FV.max:PG.max)){ S.pgBusy=null; pgRender(); return toast(T(d.game==="duel"?"duFull":"pgFull")); }
-      await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
+      const cap=x=>x.game==="duel"?2:x.game==="five"?FV.max:PG.max;
+      if(fsM.runTransaction&&!(S.pg&&S.pg.local)){
+        const why=await fsM.runTransaction(CLOUD.fb.db, async tx=>{ const sn=await tx.get(pgRef(code)); const x=sn.exists()?sn.data():null;
+          if(!x||x.state!=="wait") return "pgStarted"; if((x.players||{})[pgMe()]) return null;
+          if(Object.keys(x.players||{}).length>=cap(x)) return x.game==="duel"?"duFull":"pgFull";
+          tx.update(pgRef(code),{["players."+pgMe()]:pgName()}); return null; });
+        if(why){ S.pgBusy=null; pgRender(); return toast(T(why)); }
+      } else await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
       await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
     }
     S.pgBusy=null; pgListen(code);
@@ -8317,8 +8331,18 @@ const READ={on:false,paused:false,i:0,cur:-1,chunks:[],art:null,tok:0,rate:(()=>
 // recorded news audio (made daily by .github/workflows/news-audio.yml, served from the "audio" branch via jsDelivr)
 let NEWS_AUDIO=null;
 fetch("news-audio.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{ NEWS_AUDIO=j; if(S.view==="read") readUi(); }).catch(()=>{});
+/* each recording carries h = sha1(voice + rate + sentences) from tools/make_news_audio.py; if the article text was corrected
+   after recording, the hash no longer matches and the phone's voice reads it instead until the new recording is out */
+const REC_OK=new Map(), REC_SPLIT=/(?<=[.!?…])\s+(?=["“‘(]?[A-Z0-9])/;
+function recMatch(art,lv,it){ if(!it||!it.h||!(window.crypto&&crypto.subtle&&window.TextEncoder)) return true; const key=art.id+"|"+lv+"|"+it.h;
+  if(REC_OK.has(key)) return REC_OK.get(key); REC_OK.set(key,false);
+  const paras=lv==="base"?(art.paragraphs||[]):((art.levels||{})[lv]||{}).paragraphs||[], ss=[];
+  paras.forEach(p=>String(p).split(REC_SPLIT).forEach(t=>{ t=t.trim(); if(t) ss.push(t); }));
+  crypto.subtle.digest("SHA-1",new TextEncoder().encode((NEWS_AUDIO.voice||"en-IE-EmilyNeural")+"-6%"+ss.join("\n"))).then(b=>{
+    const hx=[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("").slice(0,16); REC_OK.set(key,hx===it.h); if(hx===it.h&&S.view==="read") readUi(); }).catch(()=>REC_OK.set(key,true));
+  return false; }
 function readRec(){ const art=currentArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDIO.sha) return null;
-  const it=(NEWS_AUDIO.items||{})[art.id+"|"+(levelOf(art)||"base")]; return it?{...it, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
+  const lv=levelOf(art)||"base", it=(NEWS_AUDIO.items||{})[art.id+"|"+lv]; if(it&&!recMatch(art,lv,it)) return null; return it?{...it, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
 function readBarInner(){
   const playing=READ.on&&!READ.paused, rec=READ.on?!!READ.audio:!!readRec();
   return `${rec?`<span class="read-rec">🎙 ${T("readRec")}</span>`:""}<button class="btn sm" data-act="readgo">${!READ.on?"🔊 "+T("readAloud"):playing?"⏸ "+T("readPause"):"▶ "+T("readResume")}</button>${READ.on?`<button class="btn ghost sm" data-act="readstop" aria-label="${esc(T("readStop"))}">⏹</button>`:""}<button class="btn ghost sm" data-act="readrate">${T("readSpeed",{r:READ.rate})}</button>${window.LS?`<button class="btn ghost sm${LS.on?" on":""}" data-act="lstoggle" aria-pressed="${LS.on}">🎧 ${T("lsBtn")}${planHas("sub")?"":" 🔒"}</button>${lsMini()}`:""}${READ.on?`<span class="muted sm-t">${Math.min(READ.i+1,READ.chunks.length)} / ${READ.chunks.length}</span>`:""}`;
@@ -9977,7 +10001,7 @@ const PLZ_OPP={n:"s",s:"n",w:"e",e:"w"};
 const PLZ_EMO=["👋","😄","🔥","📚","👍","☕"];
 // speech bubbles travel as short codes, never as text, so a changed client cannot put its own words above a head
 // (the Realtime Database rule only accepts these codes): @act, e<emoji>, m<mark>, s<quick phrase>, p<piano score>
-const PLZ_MARK=["👋","✊","❗","🎧","🎵","🎹","🏆","📖","⚔️","🌠","😊","🎁"];
+const PLZ_MARK=["👋","✊","❗","🎧","🎵","🎹","🏆","📖","⚔️","🌠","😊","🎁","🍀"];
 function plzBEnc(t){ t=String(t||""); if(/^@(jump|dance|sit|spin)$/.test(t)) return t; let i=PLZ_EMO.indexOf(t); if(i>=0) return "e"+i; i=PLZ_MARK.indexOf(t); if(i>=0) return "m"+i;
   i=PLZ_SAY.findIndex(x=>x[0]===t); if(i>=0) return "s"+i; const m=/^🎹 (\d{1,7})$/.exec(t); return m?"p"+m[1]:""; }
 function plzBDec(c){ c=String(c||""); if(/^@(jump|dance|sit|spin)$/.test(c)) return c; const m=/^([emsp])(\d{1,7})$/.exec(c); if(!m) return ""; const i=+m[2];
@@ -10136,17 +10160,18 @@ async function plzJoin(){ const R=ROOM; try{
     // lines: the line you picked (or the line you walked in from) if it has room, otherwise the first line with room
     const cnt=async c=>{ const v=(await dbM.get(dbM.ref(db,`plaza/${R.zone}-${c}`))).val()||{}; return Object.entries(v).filter(([u,x])=>u!==me&&x&&now-(x.ts||0)<PLZ_STALE).length; };
     let ch=0; if(R.want>=1&&R.want<=PLZ_CHS){ if(await cnt(R.want)<PLZ_CAP) ch=R.want; else if(R.pick) toast(T("plzLineFullT",{c:R.want})); }
-    if(!ch) for(ch=1;ch<PLZ_CHS;ch++) if(await cnt(ch)<PLZ_CAP) break;
-    if(ROOM!==R) return; R.ch=Math.min(ch,PLZ_CHS); R.myRef=dbM.ref(db,`plaza/${R.zone}-${R.ch}/${me}`);
+    if(!ch){ for(ch=1;ch<=PLZ_CHS;ch++) if(await cnt(ch)<PLZ_CAP) break; if(ch>PLZ_CHS) throw {code:"plaza-full"}; }
+    if(ROOM!==R) return; R.ch=ch; R.myRef=dbM.ref(db,`plaza/${R.zone}-${R.ch}/${me}`);
     await dbM.onDisconnect(R.myRef).remove(); await plzSend(true);
     // load test 2026-11-25: players who tap in at the same moment all see room in the same line and all join it. So look again a
     // moment later: if the line now has more than PLZ_CAP, the ones who came in last (by the server's time) move on to the next line.
-    for(let k=0;k<3&&R.ch<PLZ_CHS;k++){ await new Promise(ok=>setTimeout(ok,1000+Math.random()*500)); if(ROOM!==R) return;
+    for(let k=0;k<3;k++){ await new Promise(ok=>setTimeout(ok,1000+Math.random()*500)); if(ROOM!==R) return;
       const t=Date.now(), v=(await dbM.get(dbM.ref(db,`plaza/${R.zone}-${R.ch}`))).val()||{};
       const L=Object.entries(v).filter(([u,x])=>x&&t-(x.ts||0)<PLZ_STALE).sort((a,b)=>((a[1].ts||0)-(b[1].ts||0))||(a[0]<b[0]?-1:1));
       if(L.length<=PLZ_CAP||L.findIndex(([u])=>u===me)<PLZ_CAP) break;
-      let nc; for(nc=R.ch+1;nc<PLZ_CHS;nc++) if(await cnt(nc)<PLZ_CAP) break;
+      let nc; for(nc=R.ch+1;nc<=PLZ_CHS;nc++) if(await cnt(nc)<PLZ_CAP) break;
       if(ROOM!==R) return; try{ await dbM.onDisconnect(R.myRef).cancel(); await dbM.remove(R.myRef); }catch(e){}
+      if(nc>PLZ_CHS){ R.myRef=null; throw {code:"plaza-full"}; }
       R.ch=nc; R.myRef=dbM.ref(db,`plaza/${R.zone}-${R.ch}/${me}`); await dbM.onDisconnect(R.myRef).remove(); await plzSend(true); }
     if(ROOM!==R) return;
     const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
@@ -10158,7 +10183,7 @@ async function plzJoin(){ const R=ROOM; try{
       if(!R.away&&Date.now()-R.act>PLZ_IDLE){ plazaClose(); toast(T("plzIdleOut")); return; }   // standing still 10 minutes frees your spot in the line
       plzSend(true); },15e3);
     plzRebuild();
-  }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
+  }catch(e){ console.warn("plaza live",e&&(e.code||e.message)); if(ROOM===R){ R.ch=0; if(e&&e.code==="plaza-full") toast(T("plzAllFull")); const el=document.getElementById("pzCount"); if(el) el.textContent=T("plzSolo"); } } }
 async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; if(extra&&"b" in extra){ const b=plzBEnc(extra.b); if(!b) return; extra={...extra, b}; } const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
   const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
   const pos={x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv};
@@ -10655,6 +10680,7 @@ function pzCheck(el){ const inp=el.querySelector(".pz-in"); if(!inp) return; con
   if(v!==p.a){ sfx("wrong"); const card=el.querySelector(".pz-pin"); card.classList.remove("pz-shake"); void card.offsetWidth; card.classList.add("pz-shake"); inp.select();
     const w=(+el.dataset.wrong||0)+1; el.dataset.wrong=w; const hb=el.querySelector(".pz-hb"); if(w>=2&&hb) hb.classList.add("pulse"); toast(T("pzWrong")); return; }
   const st=pzState(), g=game(), dev=!!el.dataset.dev; let gold=0;
+  if(!dev&&!pzToday(lib).some(e=>e.p.id===p.id)){ el.remove(); toast(T("pzNewDay")); const R0=ROOM; if(R0&&R0.eggs){ R0.eggs.forEach(e=>e.el.remove()); R0.eggs=null; pzEggsBuild(); } return; }
   if(!dev&&!st.ok.includes(p.id)){ gold=st.h.includes(p.id)?PZ_GOLD_H:PZ_GOLD; st.ok.push(p.id); g.gold+=gold; g.pzN=(g.pzN||0)+1;
     if(st.ok.length===5){ g.lotto=(g.lotto||0)+1; setTimeout(()=>toast(T("pzAll")),900); } saveGame(); sfx(st.ok.length===5?"prize":"coin"); } else sfx("right");
   const R=ROOM; if(R&&R.eggs){ const e=R.eggs.find(x=>x.p.id===p.id); if(e) e.el.classList.add("ok"); } if(R&&!dev){ plzSay(R.me,"🍀"); plzSend(false,{b:"🍀", bt:Date.now()}); }
@@ -10676,7 +10702,11 @@ function plzBookTake(id){ const R=ROOM; if(!R) return; const lib=HU_LIB||[], i=l
   R.me.h="b"+i; R.me.hw=String(id).slice(0,18); plzHoldSet(R.me); sfx("tap"); plzSend(true,{b:"📖", bt:Date.now()}); plzSay(R.me,"📖");
   const st=had&&R.seat?R.seat:plzSeatFree(); R.seat=st;
   if(!st||had) return plzNews(id);
-  R.goTo={x:st.x, y:st.y, cb:()=>{ if(ROOM!==R) return; R.me.face=st.f; plzSend(true); plzNews(id); }}; }
+  plzSeatGo(R,st,id,0); }
+function plzSeatGo(R,st,id,k){ R.goTo={x:st.x, y:st.y, cb:()=>{ if(ROOM!==R) return;
+    const clash=k<4&&[...R.ents.values()].some(o=>o!==R.me&&o.kind==="live"&&(o.h||"")[0]==="b"&&Math.hypot((o.tx??o.x)-st.x,(o.ty??o.y)-st.y)<30&&String(o.id)<String(R.me.id));
+    if(clash){ const ns=plzSeatFree(); if(ns&&ns!==st){ R.seat=ns; return plzSeatGo(R,ns,id,k+1); } }
+    R.me.face=st.f; plzSend(true); plzNews(id); }}; }
 function plzBookPut(){ const R=ROOM; if(!R) return; R.goTo=null; R.seat=null; R.wantSeat=null; if((R.me.h||"")[0]==="b"){ R.me.h=""; R.me.hw=""; plzHoldSet(R.me); R.me.y=Math.min(R.me.y+48,640); plzSend(true); } }
 async function plzNews(id){ const R=ROOM; if(!R) return; let el=R.box.querySelector(".pz-news"); if(!el){ el=document.createElement("div"); el.className="pz-news"; R.box.appendChild(el);
     el.addEventListener("click",e=>{ const b=e.target.closest("[data-pzn]"); if(!b) return; e.stopPropagation(); const a=b.dataset.pzn, v=b.dataset.v;
@@ -10719,7 +10749,8 @@ function plzBoard(){ const R=ROOM; if(!R) return; const old=R.box.querySelector(
     <div class="row" style="justify-content:center;flex-wrap:wrap">${n<3?`<button class="btn" data-pz="boardgo">📖 ${T("plzBoardGo")}</button>`:""}${lg}<button class="btn ghost" data-pz="boardx">${T("plzBack")}</button></div></div>`;
   R.box.appendChild(el); }
 // 音樂台: today's news recording plays over the park while you stay in the room
-function plzNewsRec(){ const art=mainArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDIO.sha) return null; const it=(NEWS_AUDIO.items||{})[art.id+"|"+(levelOf(art)||"base")]||(NEWS_AUDIO.items||{})[art.id+"|base"];
+function plzNewsRec(){ const art=mainArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDIO.sha) return null; const I=NEWS_AUDIO.items||{}, lv0=levelOf(art)||"base", lv=I[art.id+"|"+lv0]?lv0:"base", it=I[art.id+"|"+lv];
+  if(it&&!recMatch(art,lv,it)) return null;
   return it?{art, url:`https://cdn.jsdelivr.net/gh/${NEWS_AUDIO.repo}@${NEWS_AUDIO.sha}/${it.f}`}:null; }
 function plzRadio(){ const R=ROOM; if(!R) return; if(R.radio){ const a=R.radio.a; if(a.paused) a.play().then(()=>{ if(SND.ctx) musicForView(); }).catch(()=>{}); else a.pause(); if(SND.ctx) musicForView(); plzRadioBar(); return; }
   const rec=plzNewsRec(); if(!rec) return toast(T("plzNoRec"));
@@ -10882,7 +10913,7 @@ function plzPianoEv(P){ const n=P.mel[P.mi++%P.mel.length], first=!P.ev.length, 
   else if(!first&&Math.random()<P.lv.dbl){ const a=pick([[0,2],[1,3],[0,3],[0,1],[2,3],[1,2]]); tiles=a.map(l=>({lane:l, len:1})); }
   else tiles=[{lane:pick(free.length?free:[0,1,2,3]), len:1}];
   const len=Math.max(...tiles.map(t=>t.len)); P.ev.push({r0, len, m:n[0], tiles:tiles.map(t=>({...t, hit:0, held:0, done:false}))}); P.nextRow+=len; }
-function plzPianoClose(){ const R=ROOM, P=R&&R.piano; if(!P) return; cancelAnimationFrame(P.raf); P.el.remove(); R.piano=null; R.box.classList.remove("pz-pi"); musicDuck(false); if(SND.ctx) musicForView(); }
+function plzPianoClose(){ const R=ROOM, P=R&&R.piano; if(!P) return; cancelAnimationFrame(P.raf); if(P.cv){ P.cv.width=0; P.cv.height=0; } P.el.remove(); R.piano=null; R.box.classList.remove("pz-pi"); musicDuck(false); if(SND.ctx) musicForView(); }
 function plzPianoNote(P,m,len,chord){ const c=sndInit(); if(!c) return; const t=c.currentTime+.005, L=P.tr.lead||{}, sq=L.type==="square", d=len>1?.25*len+.2:.42;
   tone(SND.master, t, hz(m), d, {type:sq?"square":"triangle", v:sq?.12:.26, vib:!!L.vib||len>1, a:.006, r:d*.95}); tone(SND.master, t, hz(m-12), d+.08, {type:"sine", v:.1});
   if(chord) tone(SND.master, t, hz(m-5), d, {type:"triangle", v:.14}); }
@@ -12080,7 +12111,13 @@ Object.assign(STR.hi,{"ulLock": "तीनों दैनिक कदम {n} �
 Object.assign(STR.es,{"ulLock": "Se abre tras completar los tres pasos diarios {n} día(s) más", "ulBanT": "⚔️ La aventura se abre al terminar los tres pasos de hoy", "ulBanS": "Lee la noticia y haz el test, y el anciano Ciarán te llevará de aventura", "u1": "¡Bien hecho! Has completado los tres pasos de tu primer día. La aventura ya está abierta: ataca ciudades con pases, entrena en la naturaleza y compra equipo en la tienda. ¡Sígueme!", "u2": "¡Segundo día completado! Hoy se abren tres lugares nuevos: Clases tiene lecciones cortas de inglés que dan oro, el Campo de práctica te deja probar golpes con monstruos, y la Casa de la Suerte, que te explico ahora.", "u3": "¡Tres días leyendo noticias, impresionante! Se abren la Clasificación, los Exámenes y la Plaza: elige un apodo y pasea por la Plaza saludando a jugadores de todo el mundo.", "u5a": "¡Cinco días! Ya eres un aventurero de verdad. Se abre la tienda de Estilo: viste a tu personaje con monedas de estilo.", "u5b": "También se abre la Bóveda Arcoíris: envía regalos a tus amigos y prueba el pozo de los deseos mensual. Razonamiento te espera en el menú de Aventura. ¡Ve a verlo!", "stGoAdv": "A la aventura →", "stLook": "Echar un vistazo →"});
 Object.assign(STR.ja,{"ulLock": "毎日の3ステップをあと{n}日終えると開放", "ulBanT": "⚔️ 今日の3ステップを終えると冒険が開放", "ulBanS": "ニュースを読んでテストを終えれば、長老キーランが冒険に連れて行ってくれます", "u1": "よくやった！初日の3ステップを終えたな。冒険が開放されたぞ：出撃券で町を攻め、野外で修行し、ショップで装備を買うのじゃ。ついて来なさい！", "u2": "2日目も達成じゃ！今日は新しい場所が3つ開く：「小教室」は短い英語レッスンでゴールドがもらえる、「練習場」では魔物で技を試せる、そして「ラッキーハウス」じゃ。説明しよう。", "u3": "3日間ニュースを読んだとは見事！「ランキング」「検定」「広場」が開放された：ニックネームを決めれば、広場で世界中のプレイヤーと歩いたり挨拶したりできるぞ。", "u5a": "5日目じゃ！もう立派な冒険者じゃな。「スタイル屋」が開放された：スタイルコインでキャラクターを着飾れるぞ。", "u5b": "「虹の宝庫」も開放じゃ：友だちにプレゼントを贈ったり、毎月の願いの泉に挑戦できる。冒険メニューでは「推理読解」も待っておる。見てきなさい！", "stGoAdv": "冒険へ →", "stLook": "見てみる →"});
 Object.assign(STR.ko,{"ulLock": "하루 3단계를 {n}일 더 마치면 열려요", "ulBanT": "⚔️ 오늘 3단계를 마치면 모험이 열려요", "ulBanS": "뉴스를 읽고 퀴즈를 마치면 키어런 장로가 모험으로 안내해 줄 거예요", "u1": "잘했다! 첫날 3단계를 모두 마쳤구나. 이제 모험이 열렸어: 출정권으로 마을을 공격하고, 야외에서 수련하고, 상점에서 장비를 사렴. 나를 따라오너라!", "u2": "둘째 날도 해냈구나! 오늘은 새로운 곳 세 군데가 열려: '소교실'은 짧은 영어 수업으로 골드를 주고, '연습장'에서는 괴물에게 기술을 시험할 수 있고, 그리고 '행운의 집'이 있지. 설명해 주마.", "u3": "사흘 연속 뉴스를 읽다니 대단하구나! '랭킹', '검정', '광장'이 열렸어: 닉네임을 정하면 광장에서 전 세계 플레이어와 걷고 인사할 수 있단다.", "u5a": "닷새째구나! 이제 진짜 모험가야. '스타일 숍'이 열렸어: 스타일 코인으로 캐릭터를 꾸며 보렴.", "u5b": "'무지개 보물고'도 열렸어: 친구에게 선물을 보내고 매달 소원의 우물에 도전할 수 있지. 모험 메뉴에서 '추론 읽기'도 기다리고 있단다. 가서 보렴!", "stGoAdv": "모험하러 →", "stLook": "보러 가기 →"});
-Object.assign(STR.zh,{"regLockNote": "選好後 {n} 天內不能再改，請選你最常想讀的地區。", "regFreeNote": "開發者／測試員模式：地區可隨時更改，不受 3 天限制。", "regLocked": "地區已鎖定，還要 {n} 天才能再改（{d} 後可改）。", "regLockLeft": "地區還要 {n} 天才能再改", "regAsk": "改成「{r}」之後，{n} 天內不能再改。確定嗎？", "regOk": "確定更改", "regSaved": "已改好，{n} 天內不能再改地區"});Object.assign(STR.en,{"regLockNote": "Once chosen, the region can't be changed for {n} days, so pick the one you'll read most.", "regFreeNote": "Developer / tester mode: you can change the region any time (no 3-day lock).", "regLocked": "Region locked. You can change it again in {n} days ({d}).", "regLockLeft": "You can change the region again in {n} days", "regAsk": "After switching to {r} you can't change the region for {n} days. Continue?", "regOk": "Change region", "regSaved": "Region changed. It stays locked for {n} days"});Object.assign(STR.hi,{"regLockNote": "एक बार चुनने के बाद क्षेत्र {n} दिन तक नहीं बदला जा सकता, इसलिए वही चुनें जिसे आप सबसे ज़्यादा पढ़ेंगे।", "regFreeNote": "डेवलपर / टेस्टर मोड: क्षेत्र कभी भी बदला जा सकता है (3 दिन की रोक नहीं)।", "regLocked": "क्षेत्र लॉक है। आप इसे {n} दिन बाद ({d}) फिर बदल सकते हैं।", "regLockLeft": "क्षेत्र {n} दिन बाद फिर बदल सकते हैं", "regAsk": "{r} चुनने के बाद आप {n} दिन तक क्षेत्र नहीं बदल पाएँगे। जारी रखें?", "regOk": "क्षेत्र बदलें", "regSaved": "क्षेत्र बदल गया। यह {n} दिन तक लॉक रहेगा"});Object.assign(STR.es,{"regLockNote": "Una vez elegida, la región no se puede cambiar durante {n} días; elige la que más vayas a leer.", "regFreeNote": "Modo desarrollador / probador: puedes cambiar la región cuando quieras (sin bloqueo de 3 días).", "regLocked": "Región bloqueada. Podrás cambiarla dentro de {n} días ({d}).", "regLockLeft": "Podrás cambiar la región dentro de {n} días", "regAsk": "Si cambias a {r}, no podrás cambiar la región durante {n} días. ¿Continuar?", "regOk": "Cambiar región", "regSaved": "Región cambiada. Queda bloqueada {n} días"});Object.assign(STR.ja,{"regLockNote": "一度選ぶと {n} 日間は地域を変更できません。いちばん読みたい地域を選んでください。", "regFreeNote": "開発者／テスター モード：地域はいつでも変更できます（3 日間の制限なし）。", "regLocked": "地域はロック中です。あと {n} 日で変更できます（{d} 以降）。", "regLockLeft": "地域はあと {n} 日で変更できます", "regAsk": "「{r}」に変えると、{n} 日間は地域を変更できません。よろしいですか？", "regOk": "変更する", "regSaved": "地域を変更しました。{n} 日間はロックされます"});Object.assign(STR.ko,{"regLockNote": "한 번 고르면 {n}일 동안 지역을 바꿀 수 없어요. 가장 많이 읽을 지역을 고르세요.", "regFreeNote": "개발자 / 테스터 모드: 지역을 언제든 바꿀 수 있어요 (3일 제한 없음).", "regLocked": "지역이 잠겨 있어요. {n}일 뒤({d})에 다시 바꿀 수 있어요.", "regLockLeft": "{n}일 뒤에 지역을 다시 바꿀 수 있어요", "regAsk": "'{r}'(으)로 바꾸면 {n}일 동안 지역을 바꿀 수 없어요. 계속할까요?", "regOk": "지역 바꾸기", "regSaved": "지역을 바꿨어요. {n}일 동안 잠겨요"});Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
+Object.assign(STR.zh,{"regLockNote": "選好後 {n} 天內不能再改，請選你最常想讀的地區。", "regFreeNote": "開發者／測試員模式：地區可隨時更改，不受 3 天限制。", "regLocked": "地區已鎖定，還要 {n} 天才能再改（{d} 後可改）。", "regLockLeft": "地區還要 {n} 天才能再改", "regAsk": "改成「{r}」之後，{n} 天內不能再改。確定嗎？", "regOk": "確定更改", "regSaved": "已改好，{n} 天內不能再改地區"});Object.assign(STR.en,{"regLockNote": "Once chosen, the region can't be changed for {n} days, so pick the one you'll read most.", "regFreeNote": "Developer / tester mode: you can change the region any time (no 3-day lock).", "regLocked": "Region locked. You can change it again in {n} days ({d}).", "regLockLeft": "You can change the region again in {n} days", "regAsk": "After switching to {r} you can't change the region for {n} days. Continue?", "regOk": "Change region", "regSaved": "Region changed. It stays locked for {n} days"});Object.assign(STR.hi,{"regLockNote": "एक बार चुनने के बाद क्षेत्र {n} दिन तक नहीं बदला जा सकता, इसलिए वही चुनें जिसे आप सबसे ज़्यादा पढ़ेंगे।", "regFreeNote": "डेवलपर / टेस्टर मोड: क्षेत्र कभी भी बदला जा सकता है (3 दिन की रोक नहीं)।", "regLocked": "क्षेत्र लॉक है। आप इसे {n} दिन बाद ({d}) फिर बदल सकते हैं।", "regLockLeft": "क्षेत्र {n} दिन बाद फिर बदल सकते हैं", "regAsk": "{r} चुनने के बाद आप {n} दिन तक क्षेत्र नहीं बदल पाएँगे। जारी रखें?", "regOk": "क्षेत्र बदलें", "regSaved": "क्षेत्र बदल गया। यह {n} दिन तक लॉक रहेगा"});Object.assign(STR.es,{"regLockNote": "Una vez elegida, la región no se puede cambiar durante {n} días; elige la que más vayas a leer.", "regFreeNote": "Modo desarrollador / probador: puedes cambiar la región cuando quieras (sin bloqueo de 3 días).", "regLocked": "Región bloqueada. Podrás cambiarla dentro de {n} días ({d}).", "regLockLeft": "Podrás cambiar la región dentro de {n} días", "regAsk": "Si cambias a {r}, no podrás cambiar la región durante {n} días. ¿Continuar?", "regOk": "Cambiar región", "regSaved": "Región cambiada. Queda bloqueada {n} días"});Object.assign(STR.ja,{"regLockNote": "一度選ぶと {n} 日間は地域を変更できません。いちばん読みたい地域を選んでください。", "regFreeNote": "開発者／テスター モード：地域はいつでも変更できます（3 日間の制限なし）。", "regLocked": "地域はロック中です。あと {n} 日で変更できます（{d} 以降）。", "regLockLeft": "地域はあと {n} 日で変更できます", "regAsk": "「{r}」に変えると、{n} 日間は地域を変更できません。よろしいですか？", "regOk": "変更する", "regSaved": "地域を変更しました。{n} 日間はロックされます"});Object.assign(STR.ko,{"regLockNote": "한 번 고르면 {n}일 동안 지역을 바꿀 수 없어요. 가장 많이 읽을 지역을 고르세요.", "regFreeNote": "개발자 / 테스터 모드: 지역을 언제든 바꿀 수 있어요 (3일 제한 없음).", "regLocked": "지역이 잠겨 있어요. {n}일 뒤({d})에 다시 바꿀 수 있어요.", "regLockLeft": "{n}일 뒤에 지역을 다시 바꿀 수 있어요", "regAsk": "'{r}'(으)로 바꾸면 {n}일 동안 지역을 바꿀 수 없어요. 계속할까요?", "regOk": "지역 바꾸기", "regSaved": "지역을 바꿨어요. {n}일 동안 잠겨요"});Object.assign(STR.zh,{"pzNewDay": "又過了一天，今天的題目換新的了，再找找三葉草吧", "plzAllFull": "每一條線都滿了，現在只能和離線玩家一起逛"});
+Object.assign(STR.en,{"pzNewDay": "It's a new day: today's puzzles are different, find the clovers again", "plzAllFull": "Every line is full right now, so you're with offline players only"});
+Object.assign(STR.hi,{"pzNewDay": "नया दिन आ गया: आज की पहेलियाँ अलग हैं, तिपतिया फिर से ढूँढें", "plzAllFull": "अभी हर लाइन भरी है, इसलिए आप सिर्फ़ ऑफ़लाइन खिलाड़ियों के साथ हैं"});
+Object.assign(STR.es,{"pzNewDay": "Es un nuevo día: los acertijos de hoy son otros, busca otra vez los tréboles", "plzAllFull": "Todas las líneas están llenas, así que solo verás jugadores desconectados"});
+Object.assign(STR.ja,{"pzNewDay": "日付が変わりました。今日の謎は新しくなったので、もう一度クローバーを探してね", "plzAllFull": "今はどのラインも満員なので、オフラインのプレイヤーとだけ過ごせます"});
+Object.assign(STR.ko,{"pzNewDay": "날짜가 바뀌었어요. 오늘의 퍼즐이 새로 나왔으니 클로버를 다시 찾아보세요", "plzAllFull": "지금은 모든 라인이 가득 차서 오프라인 플레이어하고만 함께해요"});
+Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
 Object.assign(STR.zh,{"grT": "學習曲線", "grWords": "學過的單字", "grLooks": "查詢次數", "grD": "{n} 天", "grAll": "全部", "grWordsU": "個單字", "grLooksU": "次查詢", "grNone": "多查幾天字，這裡就會長出你的曲線。"});
