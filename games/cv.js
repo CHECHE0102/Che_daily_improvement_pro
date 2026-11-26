@@ -9,12 +9,20 @@
 (function () {
   "use strict";
   const KEY = "che-cv", JSPDF = "games/vendor/jspdf.umd.min.js";   // jsPDF 2.5.2 (MIT), served by us so no other site sees the player
-  let O = {}, D = null, box = null, busy = false, edit = false, left = null;
+  let O = {}, D = null, box = null, busy = false, edit = false, left = null, sample = null;
+  // two real AI outputs for the same made-up player (Taiwanese barista looking for work in Dublin), shown on the intro so players see what they get
+  const SAMPLE_C = {"name": "Mei-Ling Chen", "loc": "Dublin 8", "phone": "+353 83 000 0000", "email": "meiling.chen@example.com"};
+  const SAMPLES = { std: {"headline": "Barista | Café and Restaurant Service Experience", "statement": "Barista with two years of hands-on café experience in Taipei, preparing around 150 drinks a day and training new staff through busy peak periods. Skilled in espresso preparation, latte art and POS cash handling, with a reliable record in opening, closing and stocktaking. Available for full-time hours from immediately, including weekends, and keen to bring this experience to a busy Dublin café or restaurant.", "skills": ["Espresso and coffee machine operation", "Latte art", "POS and cash handling", "Customer service", "Staff training", "Opening and closing procedures", "Stocktaking", "Excel"], "experience": [{"title": "Barista", "org": "Louisa Coffee (Taiwanese café chain)", "place": "Taipei, Taiwan", "dates": "Mar 2022 – Aug 2024", "bullets": ["Prepared around 150 drinks daily, working alone on the bar during peak periods", "Trained 3 new staff members on drink preparation and service standards", "Handled cash transactions, daily opening and closing, and stocktaking", "Created latte art and kept drink quality consistent during busy shifts"]}, {"title": "Administrative Assistant", "org": "Small international trading company", "place": "New Taipei, Taiwan", "dates": "Jul 2020 – Feb 2022", "bullets": ["Processed customer orders and shipments accurately and on schedule", "Responded to customer enquiries by email", "Prepared monthly reports in Excel"]}], "education": [{"qual": "Bachelor's degree (BA/BSc equivalent) in International Trade", "school": "Ming Chuan University", "place": "Taipei, Taiwan", "dates": "2016 – 2020", "notes": "Led student association activities"}], "certs": ["Beverage Preparation Technician Certificate, Class C (Taiwan)"], "languages": ["Mandarin Chinese – native", "Taiwanese Hokkien – spoken", "English – IELTS 6.0 overall"], "extras": ["Enjoys hiking and photography"], "workRight": "Working Holiday Authorisation – eligible to work full-time in Ireland until September 2027. PPS number held. Available immediately."},
+    pro: {"headline": "Experienced Barista | Café & Restaurant Front of House", "statement": "Barista with over two years' experience at one of Taiwan's largest coffee chains, making around 150 drinks a day and running the bar on my own during peak hours. Skilled in espresso preparation, latte art, cash handling and opening and closing procedures, with experience training new staff. Previous office role built strong organisation, email communication and Excel skills. Now based in Dublin, available to start immediately on a full-time basis, including weekends, and looking for barista or waiting staff roles.", "skills": ["Espresso machine operation", "Latte art", "Coffee and beverage preparation", "POS systems and cash handling", "Opening and closing procedures", "Stock-taking", "Staff training", "Customer service", "Working under pressure at peak times", "Microsoft Excel"], "experience": [{"title": "Barista", "org": "Louisa Coffee (one of Taiwan's largest coffee shop chains)", "place": "Taipei, Taiwan", "dates": "Mar 2022 – Aug 2024", "bullets": ["Prepared around 150 espresso-based and speciality drinks per day to consistent brand standards.", "Ran the coffee bar single-handedly during peak hours, keeping service fast and accurate.", "Trained 3 new team members in drink preparation, bar workflow and customer service.", "Handled cash and card payments on the POS system and carried out opening and closing procedures.", "Conducted regular stock-takes and produced latte art for customer orders."]}, {"title": "Administrative Assistant", "org": "Small trading company (import/export)", "place": "New Taipei City, Taiwan", "dates": "Jul 2020 – Feb 2022", "bullets": ["Processed customer orders and coordinated shipments to ensure on-time delivery.", "Responded to customer enquiries by email in a professional and timely manner.", "Prepared monthly reports in Microsoft Excel for management."]}], "education": [{"qual": "Bachelor's degree in International Trade (BA)", "school": "Ming Chuan University", "place": "Taipei, Taiwan", "dates": "2016 – 2020", "notes": "Head of Events, departmental Student Association"}], "certs": ["Beverage Preparation Technician Certificate – Level C (Taiwan national skills certification)"], "languages": ["Mandarin Chinese – native", "Taiwanese Hokkien – fluent", "English – professional working proficiency (IELTS 6.0)"], "extras": ["Interests: hiking and photography"], "workRight": "Working Holiday Authorisation – eligible to work full-time in Ireland until September 2027. PPS number held. Available immediately, including weekends."} };
 
   // ---------- words (Chinese + English; other languages use English) ----------
   const W = {
     title: ["履歷桌", "CV Desk"],
     sub: ["用愛爾蘭的方式做一份英文履歷", "Make an English CV the Irish way"],
+    sampleH: ["📄 先看看範例", "📄 See an example"], sampleP: ["同一個人（台灣咖啡師，想在都柏林找工作）的回答，一般版和精修版各寫一份給你比較。", "The same answers (a Taiwanese barista looking for work in Dublin), written by the standard and the premium AI."],
+    sample_std: ["✨ 一般版範例", "✨ Standard example"], sample_pro: ["🌟 精修版範例", "🌟 Premium example"],
+    sampleNote: ["這是範例，名字和聯絡方式都是假的。", "This is an example; the name and contact details are made up."],
+    sampleStd: ["一般版：每天可以寫 3 次，重點清楚、簡潔。", "Standard: up to 3 a day, clear and to the point."], sampleProT: ["精修版：用最強的 AI，句子更完整、技能和成果寫得更具體。每人每月 1 次。", "Premium: our strongest AI, fuller sentences and more specific skills and results. Once a month."],
     start: ["開始", "Start"], next: ["下一步", "Next"], back: ["上一步", "Back"], close: ["關閉", "Close"],
     introH: ["愛爾蘭的履歷長這樣", "What a CV looks like in Ireland"],
     intro: [["最多 2 頁，經驗少的話 1 頁就好", "不放照片、生日、年齡、婚姻狀況", "最上面是一段 Personal Statement（自我介紹）", "寫清楚你的簽證和能不能工作", "工作經驗放在學歷前面，最新的在最上面", "英式拼寫，結尾寫 References available on request"],
@@ -157,6 +165,7 @@
     const a = D.a;
     if (s === "intro") return `<div class="cvb-hero"><div class="ic">📝</div><h3>${t("title")}</h3><p>${t("sub")}</p></div>
       <div class="cvb-card"><b>🇮🇪 ${t("introH")}</b><ul class="cvb-l">${t("intro").map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="cvb-card"><b>${t("sampleH")}</b><small class="mut">${t("sampleP")}</small><div class="cvb-bar"><button class="btn ghost" data-sample="std">${t("sample_std")}</button><button class="btn ghost" data-sample="pro">${t("sample_pro")}</button></div></div>
       <div class="cvb-gift">${t("gift")}</div><div class="cvb-tip">${t("how")}</div><small class="mut">${t("privacy")}</small>
       ${leftHtml()}`;
     if (s === "target") return `<h3>🎯 ${t("s_target")}</h3>${tip("target")}${inp("a.target.jobs", t("jobs"), t("jobsPh"))}
@@ -181,12 +190,12 @@
   }
 
   // ---------- the CV itself ----------
-  const contactLine = () => [D.c.loc, D.c.phone, D.c.email, D.c.link].map(x => (x || "").trim()).filter(Boolean);
-  function paperHtml(cv, tpl) {
+  const contactLine = (c = D.c) => [c.loc, c.phone, c.email, c.link].map(x => (x || "").trim()).filter(Boolean);
+  function paperHtml(cv, tpl, c = D.c) {
     const sec = (h, inner) => inner ? `<div class="sh">${h}</div>${inner}` : "";
     const ul = arr => arr && arr.length ? `<ul>${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
-    return `<div class="cvb-paper ${tpl === "fresh" ? "f" : "c"}"><div class="hd0"><div class="nm">${esc(D.c.name || "Your Name")}</div>${cv.headline ? `<div class="hl">${esc(cv.headline)}</div>` : ""}
-      <div class="ct">${contactLine().map(esc).join("  |  ")}</div>${cv.workRight ? `<div class="wr">${esc(cv.workRight)}</div>` : ""}</div>
+    return `<div class="cvb-paper ${tpl === "fresh" ? "f" : "c"}"><div class="hd0"><div class="nm">${esc(c.name || "Your Name")}</div>${cv.headline ? `<div class="hl">${esc(cv.headline)}</div>` : ""}
+      <div class="ct">${contactLine(c).map(esc).join("  |  ")}</div>${cv.workRight ? `<div class="wr">${esc(cv.workRight)}</div>` : ""}</div>
       ${sec("Personal Statement", cv.statement ? `<div>${esc(cv.statement)}</div>` : "")}
       ${sec("Key Skills", cv.skills && cv.skills.length ? `<ul class="sk">${cv.skills.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "")}
       ${sec("Work Experience", (cv.experience || []).map(j => `<div class="jb"><div class="jt"><b>${esc(j.title)}</b><span>${esc(j.dates)}</span></div><div class="jo">${esc([j.org, j.place].filter(Boolean).join(", "))}</div>${ul(j.bullets)}</div>`).join(""))}
@@ -210,6 +219,11 @@
   const leftHtml = () => left ? `<small class="mut">✨ ${t("leftN", { d: Math.max(0, left.day), m: Math.max(0, left.month), p: Math.max(0, left.pro ?? 1) })}</small>` : "";
   const writeBtns = again => `<button class="btn ${again ? "ghost" : ""}" data-go="write">${again ? t("rewrite") : t("write")}</button>
       <button class="btn ghost" data-go="writePro" ${left && left.pro <= 0 ? "disabled" : ""}>${t("writePro")}</button><small class="mut">${t("proInfo")}${left && left.proAll != null ? " " + t("proAll", { n: left.proAll }) : ""}</small>`;
+  function sampleHtml() {
+    return `<div class="cvb-bar"><div class="cvb-chips">${["std", "pro"].map(k => `<button data-sample="${k}" class="${sample === k ? "on" : ""}">${t("sample_" + k)}</button>`).join("")}</div></div>
+      <div class="cvb-tip">${t(sample === "pro" ? "sampleProT" : "sampleStd")}</div>
+      <div class="cvb-paperw"><div class="cvb-paperbox">${paperHtml(SAMPLES[sample], "classic", SAMPLE_C)}</div></div><small class="mut cvb-pages"></small><small class="mut">${t("sampleNote")}</small>`;
+  }
   function resultHtml() {
     const cv = D.cv;
     if (busy) return `<div class="cvb-wait"><div class="cvb-spin"></div><b>${t("writing")}</b><small class="mut">${t("tip_target")}</small></div>`;
@@ -321,8 +335,10 @@
   function draw(keepScroll) {
     const s = STEPS[D.step] || "intro", b = box.querySelector(".cvb-b"), top = keepScroll && b ? b.scrollTop : 0;
     box.querySelector(".cvb-dots").innerHTML = STEPS.slice(1).map((x, i) => `<i class="${i < D.step ? "on" : ""}"></i>`).join("");
+    const f = box.querySelector(".cvb-f");
+    if (sample) { b.innerHTML = sampleHtml(); f.innerHTML = `<button class="btn" data-go="unsample">‹ ${t("back")}</button>`; b.scrollTop = 0; return requestAnimationFrame(fitPaper); }
     b.innerHTML = stepHtml(s);
-    const f = box.querySelector(".cvb-f"), last = s === "result", first = s === "intro";
+    const last = s === "result", first = s === "intro";
     const started = D.step > 0 || D.cv || D.a.work.some(w => w.title || w.did);
     f.innerHTML = first ? (started && D.cv ? `<button class="btn ghost" data-go="clear">${t("fresh")}</button><button class="btn" data-step="7">${t("resume")}</button>` : `${started ? `<button class="btn ghost" data-go="clear">${t("fresh")}</button>` : ""}<button class="btn" data-step="1">${t("start")}</button>`)
       : last ? `<button class="btn ghost" data-step="${D.step - 1}" ${busy ? "disabled" : ""}>‹ ${t("back")}</button>`
@@ -341,8 +357,10 @@
     if (b.dataset.job) { const cur = (D.a.target.jobs || "").split(/\s*[,，、]\s*/).filter(Boolean), j = b.dataset.job, i = cur.indexOf(j); if (i < 0) cur.push(j); else cur.splice(i, 1); D.a.target.jobs = cur.join(", "); save(); return draw(true); }
     if (b.dataset.add) { D.a[b.dataset.add].push({}); save(); draw(true); const c = box.querySelectorAll(".cvb-card"); if (c.length) c[c.length - 1].scrollIntoView({ behavior: "smooth", block: "start" }); return; }
     if (b.dataset.del) { D.a[b.dataset.del].splice(+b.dataset.i, 1); save(); return draw(true); }
+    if (b.dataset.sample) { sample = b.dataset.sample; sfx("tap"); return draw(); }
     if (b.dataset.tpl) { D.tpl = b.dataset.tpl; save(); return draw(true); }
     const g = b.dataset.go;
+    if (g === "unsample") { sample = null; return draw(); }
     if (g === "write") return write(false);
     if (g === "writePro") return write(true);
     if (g === "edit") { edit = !edit; return draw(); }
@@ -355,7 +373,7 @@
 
   window.CVB = {
     open(opt) {
-      O = opt || {}; D = load(); edit = false;
+      O = opt || {}; D = load(); edit = false; sample = null;
       if (!document.getElementById("cvbCss")) { const st = document.createElement("style"); st.id = "cvbCss"; st.textContent = CSS; document.head.appendChild(st); }
       if (box) box.remove();
       box = document.createElement("div"); box.className = "cvb";
