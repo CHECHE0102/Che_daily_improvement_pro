@@ -269,6 +269,7 @@
     const doc = buildPdf(lib.jsPDF, D.cv, D.tpl), name = fileName(), blob = doc.output("blob");
     if (dropped) toast(t("nonLatin"));
     sfx("coin");
+    if (O.onPdf) return O.onPdf(blob, name);   // preview / tests
     try { const f = new File([blob], name, { type: "application/pdf" }); if (navigator.canShare && navigator.canShare({ files: [f] }) && /iPhone|iPad|Android/i.test(navigator.userAgent)) { await navigator.share({ files: [f], title: name }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
     const u = URL.createObjectURL(blob), a = document.createElement("a"); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 30e3);
   }
