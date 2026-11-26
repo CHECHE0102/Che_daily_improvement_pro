@@ -1808,6 +1808,35 @@ select.search:disabled{opacity:.55}
 
 </head>
 <body>
+<!-- loading screen: shows at once, ticks through main program → today's news → sign-in & save, then fades.
+     Never waits more than 10 s (a blocked network must not leave the player stuck) -->
+<div id="boot" style="position:fixed;inset:0;z-index:300;background:#F2F5F3;color:#18221F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-family:system-ui,-apple-system,sans-serif;transition:opacity .35s">
+  <img src="assets/binbin-head.webp" width="96" height="96" alt="" style="animation:bootBob 1.6s ease-in-out infinite">
+  <b style="font-size:24px;letter-spacing:.3px">BinBin daily</b>
+  <div style="width:220px;height:10px;border-radius:99px;background:#D3DCD8;overflow:hidden"><i id="bootBar" style="display:block;height:100%;width:6%;background:#1D6A5A;border-radius:99px;transition:width .35s"></i></div>
+  <small id="bootTxt" style="color:#5B6A66;font-size:13px;min-height:18px"></small>
+</div>
+<style>@keyframes bootBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style>
+<script>
+/* tiny on purpose: runs before the big game script has even arrived */
+var BOOT=(function(){
+  var L="zh"; try{ L=localStorage.getItem("che-pro-lang")||"zh"; }catch(e){}
+  var TX={zh:["載入遊戲中…","下載今日新聞…","連線登入和存檔…","準備好了！"],cn:["载入游戏中…","下载今日新闻…","连线登录和存档…","准备好了！"],
+    en:["Loading the game…","Getting today's news…","Connecting your save…","Ready!"],hi:["गेम लोड हो रहा है…","आज की खबरें आ रही हैं…","आपका सेव जोड़ रहे हैं…","तैयार!"],
+    es:["Cargando el juego…","Trayendo las noticias de hoy…","Conectando tu partida…","¡Listo!"],ja:["ゲームを読み込み中…","今日のニュースを取得中…","セーブデータに接続中…","準備完了！"],
+    ko:["게임 불러오는 중…","오늘의 뉴스 받는 중…","저장 데이터 연결 중…","준비 완료!"]};
+  var t=TX[L]||TX.zh, steps=["app","news","cloud"], done={}, over=false, t0=Date.now();
+  function el(id){ return document.getElementById(id); }
+  function show(){ var n=0; for(var i=0;i<steps.length;i++) if(done[steps[i]]) n++;
+    var b=el("bootBar"), x=el("bootTxt"); if(b) b.style.width=(6+n*94/steps.length)+"%";
+    if(x){ var k=0; while(k<steps.length&&done[steps[k]]) k++; x.textContent=k<steps.length?t[k]:t[3]; } }
+  function end(){ if(over) return; over=true; show(); var d=el("boot"); if(!d) return;
+    setTimeout(function(){ d.style.opacity="0"; d.style.pointerEvents="none"; setTimeout(function(){ d.remove(); },400); }, Math.max(0,500-(Date.now()-t0))); }
+  function step(k){ if(over||done[k]) return; done[k]=1; show(); for(var i=0;i<steps.length;i++) if(!done[steps[i]]) return; end(); }
+  show(); setTimeout(end,10000);
+  return {step:step, end:end};
+})();
+</script>
 <div class="wrap">
   <header class="mast"><div class="mast-l"><button id="setBtn" class="set-btn" data-tab="set" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><div class="brand" data-tab="today" role="link" tabindex="0" aria-label="BinBin daily">BinBin <span>daily</span><img src="assets/binbin-head.webp" class="brand-dog" alt="" width="48" height="36"></div></div><span class="mast-r"><small id="mastInfo"></small><button id="helpBtn" class="help-btn" data-act="help" aria-label="Help">?</button></span></header>
   <main id="app"><div class="view"><p class="muted">…</p></div></main>
@@ -4691,7 +4720,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.126";
+const APP_VERSION="2026.11.127";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5371,9 +5400,9 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(inboxCheck,5000); setTimeout(betaClaim,6000); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ try{ await cloudPull(); }finally{ BOOT.step("cloud"); } regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(inboxCheck,5000); setTimeout(betaClaim,6000); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); BOOT.step("cloud"); }
     });
-  }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
+  }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); BOOT.step("cloud"); }
 }
 async function cloudSignIn(){
   if(!CLOUD.fb){ toast(T("cloudOff")); return; }
@@ -12192,7 +12221,9 @@ render();
   S.ready.personal=true; render();
   if(SANDBOX()){ if(!DEV.onbDone){ S.onb={step:0}; onbPreload(); onbRender(); } }
   else { onbMaybe(); cloudInit(); }
-  await loadArticles();
+  BOOT.step("app");
+  if(SANDBOX()) BOOT.step("cloud");
+  try{ await loadArticles(); } finally { BOOT.step("news"); }
   quizRestore();
   setTimeout(waLoad,1500);
 })();
