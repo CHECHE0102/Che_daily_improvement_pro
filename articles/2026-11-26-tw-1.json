@@ -32,7 +32,7 @@
     "Today, many AI tools need big computers far away. Your phone sends data over the internet and waits for an answer. These new chips let a device do the work by itself.",
     "The team leader is Professor Yang Chia-hsiang. His idea is simple. The chip should only do the work it needs. It should also move less data.",
     "The second chip is better than the first. It can do a lot of work with a small amount of power. This is good for batteries.",
-    "The team is now making a third chip. The government helps pay for the work."
+    "The team made a third chip in October. The government helps pay for the work."
    ],
    "sentZh": [
     [
@@ -57,7 +57,7 @@
      "這對電池很有好處。"
     ],
     [
-     "這個團隊現在正在做第三款晶片。",
+     "這個團隊在10月做出了第三款晶片。",
      "政府幫忙出錢支持這項工作。"
     ]
    ]
@@ -67,8 +67,8 @@
     "Researchers at National Taiwan University (NTU) have developed two generations of computer chips that let phones, cars, robots and machines run generative AI on their own, Taiwan's National Science and Technology Council said on Wednesday.",
     "Most AI tools today run in large data centers. A device has to send information over the internet and wait for a reply. Chips that work inside the device can respond faster, keep personal data private and still work when the connection is poor.",
     "The team is led by Professor Yang Chia-hsiang from the electrical engineering department. He explained that the main idea is to calculate only what is necessary and to move less data around inside the chip. Moving data uses a lot of energy.",
-    "The first chip can both use and train an AI model, which the council says no earlier chip of its kind had done. The second chip is even more efficient. It does up to 7.6 times more work per watt than similar chips reported at the time.",
-    "The results were presented at a major international chip conference in 2024 and 2025. A third chip, made with a more advanced process, is now being developed."
+    "The first chip can both use and train an AI model, which the council says no earlier chip of its kind had done. The second chip is even more efficient. It does up to 7.6 times as much work per watt as similar chips reported at the time.",
+    "The results were presented at a major international chip conference in 2024 and 2025. A third chip, made with a more advanced process, was produced in October."
    ],
    "sentZh": [
     [
@@ -91,7 +91,7 @@
     ],
     [
      "這些成果在2024年和2025年的一場重要國際晶片會議上發表。",
-     "用更先進製程製造的第三款晶片，目前正在研發中。"
+     "用更先進製程製造的第三款晶片，已在10月製造完成。"
     ]
    ]
   },
@@ -954,7 +954,7 @@
    "es": "ancho de banda",
    "ja": "帯域幅",
    "ko": "대역폭",
-   "en": "the amount of data that can move at once",
+   "en": "the amount of data that can move in a given time",
    "pos": "n.",
    "base": "bandwidth",
    "lvl": "C1",
@@ -1503,7 +1503,7 @@
    "lvl": "B1",
    "syn": [
     "online servers",
-    "internet"
+    "cloud computing"
    ],
    "ant": [
     "local device"
@@ -3989,7 +3989,7 @@
    "base": "inference",
    "lvl": "C1",
    "syn": [
-    "deduction",
+    "prediction",
     "reasoning"
    ],
    "ant": [],
@@ -7426,7 +7426,7 @@
    "zh": "聲明"
   },
   "still": {
-   "zh": "仍然",
+   "zh": "仍然；儘管如此",
    "hi": "अभी भी",
    "es": "todavía; aún",
    "ja": "まだ；それでも",
