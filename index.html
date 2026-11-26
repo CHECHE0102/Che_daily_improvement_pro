@@ -4720,7 +4720,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.127";
+const APP_VERSION="2026.11.128";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5743,26 +5743,26 @@ async function coCreate(){
   const {fsM,db}=CLOUD.fb; S.co={busy:T("coOpening")}; render();
   try{
     let code, ref;
-    for(let k=0;k<6;k++){ code=String(1000+Math.floor(Math.random()*9000)); ref=fsM.doc(db,"rooms",code); const s=await fsM.getDoc(ref); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
+    for(let k=0;k<6;k++){ code=String(1000+Math.floor(Math.random()*9000)); ref=fsM.doc(db,"rooms",code); const s=await netTO(fsM.getDoc(ref)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
     if(!coSpendTicket()){ S.co=null; render(); return; }
-    await fsM.setDoc(ref,{host:CLOUD.user.uid, guest:null, names:{[CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P1"}, state:"wait", created:Date.now(), ...p, found:{}, misses:{}, endAt:0, lang:LANG});
+    await netTO(fsM.setDoc(ref,{host:CLOUD.user.uid, guest:null, names:{[CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P1"}, state:"wait", created:Date.now(), ...p, found:{}, misses:{}, endAt:0, lang:LANG}));
     coListen(code);
-  }catch(e){ S.co=null; toast(T("syncFail")); render(); }
+  }catch(e){ S.co=null; toast(netFailMsg(e,"syncFail")); render(); }
 }
 async function coJoin(code){
   if(!CLOUD.user) return; code=(code||"").trim(); if(!/^\d{4}$/.test(code)){ toast(T("coNoRoom")); return; }
   const {fsM,db}=CLOUD.fb; const ref=fsM.doc(db,"rooms",code); S.co={busy:T("coJoining")}; render();
   try{
-    const s=await fsM.getDoc(ref);
+    const s=await netTO(fsM.getDoc(ref));
     if(!s.exists()||s.data().state==="done"){ S.co=null; toast(T("coNoRoom")); render(); return; }
     const d=s.data();
     if(d.host!==CLOUD.user.uid && d.guest && d.guest!==CLOUD.user.uid){ S.co=null; toast(T("coFull")); render(); return; }
     if(d.host!==CLOUD.user.uid && !d.guest){
-      await fsM.updateDoc(ref,{guest:CLOUD.user.uid, ["names."+CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P2", state:"play", endAt:Date.now()+CO_TIME*1000+3000});
+      await netTO(fsM.updateDoc(ref,{guest:CLOUD.user.uid, ["names."+CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P2", state:"play", endAt:Date.now()+CO_TIME*1000+3000}));
       coSpendTicket();
     }
     coListen(code);
-  }catch(e){ S.co=null; toast(e&&e.code==="permission-denied"?T("coFull"):T("syncFail")); render(); }
+  }catch(e){ S.co=null; toast(e&&e.code==="permission-denied"?T("coFull"):netFailMsg(e,"syncFail")); render(); }
 }
 function coListen(code){
   const {fsM,db}=CLOUD.fb; coStop();
@@ -5931,33 +5931,37 @@ function botDots(w){ try{ const c=document.createElement("canvas"); c.width=c.he
   const px=x.getImageData(0,0,200,200).data, out=[]; for(let i=4;i<200;i+=5) for(let j=4;j<200;j+=5) if(px[(j*200+i)*4+3]>140) out.push([i*5+(Math.random()*6-3), j*5+(Math.random()*6-3)]); return out; }catch(e){ return []; } }
 
 /* ----- room ----- */
+/* a Firestore write never settles while the database can't be reached (e.g. school/office Wi-Fi blocking Google servers),
+   so room open/join give up after 12 s with a clear message instead of an endless "opening room…" */
+function netTO(p,ms=12000){ return Promise.race([p,new Promise((_,no)=>setTimeout(()=>no({code:"net-timeout"}),ms))]); }
+function netFailMsg(e,fb){ return e&&e.code==="net-timeout"?T("netBlocked"):T(fb); }
 async function pgCreate(kind){
   if(!CLOUD.user||!CLOUD.fb) return;
   const fsM=pgFs(); S.pgBusy=T("coOpening"); pgRender();
   try{
     let code;
-    for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await fsM.getDoc(pgRef(code)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
-    await fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}, ...(kind==="root"?{rr:3}:kind==="spy"?{rr:6}:{})});
-    await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
+    for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await netTO(fsM.getDoc(pgRef(code))); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
+    await netTO(fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}, ...(kind==="root"?{rr:3}:kind==="spy"?{rr:6}:{})}));
+    await netTO(fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)}));
     S.pgBusy=null; pgListen(code);
-  }catch(e){ S.pgBusy=null; toast(T("syncFail")); pgRender(); }
+  }catch(e){ S.pgBusy=null; toast(netFailMsg(e,"syncFail")); pgRender(); }
 }
 async function pgJoin(code){
   if(!CLOUD.user||!CLOUD.fb) return; code=(code||"").trim();
   if(!/^\d{4}$/.test(code)) return toast(T("pgNoRoom"));
   const fsM=pgFs(); S.pgBusy=T("coJoining"); pgRender();
   try{
-    const s=await fsM.getDoc(pgRef(code)); const d=s.exists()?s.data():null;
+    const s=await netTO(fsM.getDoc(pgRef(code))); const d=s.exists()?s.data():null;
     if(!d||d.state==="done"||Date.now()-(d.created||0)>3600e3){ S.pgBusy=null; pgLastClear(); pgRender(); return toast(T("pgNoRoom")); }
     const inRoom=d.players&&d.players[pgMe()];
     if(!inRoom){
       if(d.state!=="wait"){ S.pgBusy=null; pgRender(); return toast(T("pgStarted")); }
       if(Object.keys(d.players||{}).length>=(d.game==="duel"?2:d.game==="five"?FV.max:PG.max)){ S.pgBusy=null; pgRender(); return toast(T(d.game==="duel"?"duFull":"pgFull")); }
-      await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
-      await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
+      await netTO(fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()}));
+      await netTO(fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)}));
     }
     S.pgBusy=null; pgListen(code);
-  }catch(e){ S.pgBusy=null; errReport({message:"pgJoin "+String(e&&(e.code||e.message)||e)},"pgJoin"); toast(T("pgJoinFail")); pgRender(); }
+  }catch(e){ S.pgBusy=null; errReport({message:"pgJoin "+String(e&&(e.code||e.message)||e)},"pgJoin"); toast(netFailMsg(e,"pgJoinFail")); pgRender(); }
 }
 function pgStop(){ if(S.pg){ (S.pg.unsubs||[]).forEach(f=>{ try{ f(); }catch(e){} }); } clearInterval(S.pgTimer); S.pgTimer=null; }
 function pgListen(code){
@@ -12208,6 +12212,12 @@ Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और र�
 Object.assign(STR.es,{"legalT": "Información, condiciones y reembolsos", "legalSub": "Quién gestiona la app, artículos y precios de la Cámara del Arcoíris, política de pagos y reembolsos, condiciones de uso y privacidad.", "legalOpen": "Abrir", "vtLegal": "Al comprar pides la entrega inmediata y aceptas que el derecho de desistimiento de 14 días termina al entregarse los artículos. Si no llegan o se te cobra dos veces, siempre te reembolsamos.", "vtLegalLink": "Política de pagos y reembolsos"});
 Object.assign(STR.ja,{"legalT": "運営者情報・規約・返金", "legalSub": "運営者、虹の宝庫の商品と価格、支払いと返金のポリシー、利用規約、プライバシーポリシー。", "legalOpen": "見る", "vtLegal": "購入すると即時の引き渡しに同意し、引き渡し後は14日間の撤回権がなくなることを了承したものとみなされます。届かない・二重請求の場合は必ず返金します。", "vtLegalLink": "支払いと返金のポリシー"});
 Object.assign(STR.ko,{"legalT": "소개, 약관 및 환불", "legalSub": "운영자 정보, 무지개 보물고 상품과 가격, 결제 및 환불 정책, 이용약관, 개인정보처리방침.", "legalOpen": "보기", "vtLegal": "구매하면 즉시 지급에 동의하고, 지급 후에는 14일 청약철회권이 적용되지 않음을 확인한 것으로 봅니다. 아이템을 받지 못했거나 이중 결제된 경우 반드시 환불해 드려요.", "vtLegalLink": "결제 및 환불 정책"});
+Object.assign(STR.zh,{"netBlocked": "連不上遊戲伺服器。學校或公司的 Wi-Fi 可能擋住了，換成手機網路再試試。"});
+Object.assign(STR.en,{"netBlocked": "Can't reach the game server. School or work Wi-Fi may be blocking it. Try mobile data."});
+Object.assign(STR.hi,{"netBlocked": "गेम सर्वर से नहीं जुड़ पा रहे। स्कूल या ऑफिस का Wi-Fi इसे रोक रहा हो सकता है। मोबाइल डेटा से आज़माएँ।"});
+Object.assign(STR.es,{"netBlocked": "No se puede conectar con el servidor del juego. Puede que el Wi-Fi del centro o del trabajo lo bloquee. Prueba con datos móviles."});
+Object.assign(STR.ja,{"netBlocked": "ゲームサーバーにつながりません。学校や会社のWi-Fiがブロックしている可能性があります。モバイルデータで試してください。"});
+Object.assign(STR.ko,{"netBlocked": "게임 서버에 연결할 수 없어요. 학교나 회사 Wi-Fi가 막고 있을 수 있어요. 모바일 데이터로 다시 시도해 보세요."});
 Object.assign(STR.zh,{"rkNoLook": "這位玩家還沒有展示角色。"});
 Object.assign(STR.en,{"rkNoLook": "This player hasn't shown their character yet."});
 Object.assign(STR.hi,{"rkNoLook": "इस खिलाड़ी ने अभी अपना किरदार नहीं दिखाया है।"});
