@@ -9,13 +9,15 @@
 (function () {
   "use strict";
   const KEY = "che-cv", JSPDF = "games/vendor/jspdf.umd.min.js";   // jsPDF 2.5.2 (MIT), served by us so no other site sees the player
-  let O = {}, D = null, box = null, busy = false, edit = false, left = null, sample = null;
+  let O = {}, D = null, box = null, busy = false, edit = false, left = null, sample = null, L = null;
+  // ja / ko / es / hi words live in games/cv-lang/<lang>.json, fetched once when the desk opens in that language
+  const PACKS = {}, PACK_LANGS = ["ja", "ko", "es", "hi"], VER = ((document.currentScript && document.currentScript.src) || "").split("?v=")[1] || "";
   // two real AI outputs for the same made-up player (Taiwanese barista looking for work in Dublin), shown on the intro so players see what they get
   const SAMPLE_C = {"name": "Mei-Ling Chen", "loc": "Dublin 8", "phone": "+353 83 000 0000", "email": "meiling.chen@example.com"};
   const SAMPLES = { std: {"headline": "Barista | Café and Restaurant Service Experience", "statement": "Barista with two years of hands-on café experience in Taipei, preparing around 150 drinks a day and training new staff through busy peak periods. Skilled in espresso preparation, latte art and POS cash handling, with a reliable record in opening, closing and stocktaking. Available for full-time hours from immediately, including weekends, and keen to bring this experience to a busy Dublin café or restaurant.", "skills": ["Espresso and coffee machine operation", "Latte art", "POS and cash handling", "Customer service", "Staff training", "Opening and closing procedures", "Stocktaking", "Excel"], "experience": [{"title": "Barista", "org": "Louisa Coffee (Taiwanese café chain)", "place": "Taipei, Taiwan", "dates": "Mar 2022 – Aug 2024", "bullets": ["Prepared around 150 drinks daily, working alone on the bar during peak periods", "Trained 3 new staff members on drink preparation and service standards", "Handled cash transactions, daily opening and closing, and stocktaking", "Created latte art and kept drink quality consistent during busy shifts"]}, {"title": "Administrative Assistant", "org": "Small international trading company", "place": "New Taipei, Taiwan", "dates": "Jul 2020 – Feb 2022", "bullets": ["Processed customer orders and shipments accurately and on schedule", "Responded to customer enquiries by email", "Prepared monthly reports in Excel"]}], "education": [{"qual": "Bachelor's degree (BA/BSc equivalent) in International Trade", "school": "Ming Chuan University", "place": "Taipei, Taiwan", "dates": "2016 – 2020", "notes": "Led student association activities"}], "certs": ["Beverage Preparation Technician Certificate, Class C (Taiwan)"], "languages": ["Mandarin Chinese – native", "Taiwanese Hokkien – spoken", "English – IELTS 6.0 overall"], "extras": ["Enjoys hiking and photography"], "workRight": "Working Holiday Authorisation – eligible to work full-time in Ireland until September 2027. PPS number held. Available immediately."},
     pro: {"headline": "Experienced Barista | Café & Restaurant Front of House", "statement": "Barista with over two years' experience at one of Taiwan's largest coffee chains, making around 150 drinks a day and running the bar on my own during peak hours. Skilled in espresso preparation, latte art, cash handling and opening and closing procedures, with experience training new staff. Previous office role built strong organisation, email communication and Excel skills. Now based in Dublin, available to start immediately on a full-time basis, including weekends, and looking for barista or waiting staff roles.", "skills": ["Espresso machine operation", "Latte art", "Coffee and beverage preparation", "POS systems and cash handling", "Opening and closing procedures", "Stock-taking", "Staff training", "Customer service", "Working under pressure at peak times", "Microsoft Excel"], "experience": [{"title": "Barista", "org": "Louisa Coffee (one of Taiwan's largest coffee shop chains)", "place": "Taipei, Taiwan", "dates": "Mar 2022 – Aug 2024", "bullets": ["Prepared around 150 espresso-based and speciality drinks per day to consistent brand standards.", "Ran the coffee bar single-handedly during peak hours, keeping service fast and accurate.", "Trained 3 new team members in drink preparation, bar workflow and customer service.", "Handled cash and card payments on the POS system and carried out opening and closing procedures.", "Conducted regular stock-takes and produced latte art for customer orders."]}, {"title": "Administrative Assistant", "org": "Small trading company (import/export)", "place": "New Taipei City, Taiwan", "dates": "Jul 2020 – Feb 2022", "bullets": ["Processed customer orders and coordinated shipments to ensure on-time delivery.", "Responded to customer enquiries by email in a professional and timely manner.", "Prepared monthly reports in Microsoft Excel for management."]}], "education": [{"qual": "Bachelor's degree in International Trade (BA)", "school": "Ming Chuan University", "place": "Taipei, Taiwan", "dates": "2016 – 2020", "notes": "Head of Events, departmental Student Association"}], "certs": ["Beverage Preparation Technician Certificate – Level C (Taiwan national skills certification)"], "languages": ["Mandarin Chinese – native", "Taiwanese Hokkien – fluent", "English – professional working proficiency (IELTS 6.0)"], "extras": ["Interests: hiking and photography"], "workRight": "Working Holiday Authorisation – eligible to work full-time in Ireland until September 2027. PPS number held. Available immediately, including weekends."} };
 
-  // ---------- words (Chinese + English; other languages use English) ----------
+  // ---------- words (Chinese + English here; ja/ko/es/hi in games/cv-lang/, English if a word is missing) ----------
   const W = {
     title: ["履歷桌", "CV Desk"],
     sub: ["用愛爾蘭的方式做一份英文履歷", "Make an English CV the Irish way"],
@@ -79,7 +81,7 @@
     tip_contact: ["用護照上的英文名字。電話最好是愛爾蘭號碼 +353。地址寫到區就好（例：Dublin 8）。", "Use the name on your passport. An Irish +353 number is best. Area is enough for the address (e.g. Dublin 8)."],
   };
   const zh = () => (O.lang || "zh") === "zh";
-  const t = (k, v) => { const w = W[k]; let s = w ? (zh() ? w[0] : w[1]) : k; if (v && typeof s === "string") for (const [a, b] of Object.entries(v)) s = s.split("{" + a + "}").join(b); return s; };
+  const t = (k, v) => { const w = W[k]; let s = L && L.W && L.W[k] != null ? L.W[k] : w ? (zh() ? w[0] : w[1]) : k; if (v && typeof s === "string") for (const [a, b] of Object.entries(v)) s = s.split("{" + a + "}").join(b); return s; };
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const toast = m => (O.toast || (x => alert(x)))(m), sfx = n => { try { O.sfx && O.sfx(n); } catch (e) { } };
 
@@ -158,7 +160,8 @@
   // ---------- form pieces ----------
   const inp = (p, lab, ph, type) => `<label>${lab}<input data-f="${p}" value="${esc(get(D, p) || "")}" placeholder="${esc(ph || "")}" ${type ? `type="${type}" inputmode="${type === "email" ? "email" : "tel"}"` : ""} autocomplete="off"></label>`;
   const area = (p, lab, ph) => `<label>${lab}<textarea data-f="${p}" placeholder="${esc(ph || "")}">${esc(get(D, p) || "")}</textarea></label>`;
-  const sel = (p, lab, opts) => `<label>${lab}<select data-f="${p}">${opts.map(o => `<option value="${esc(o[0])}" ${get(D, p) === o[0] ? "selected" : ""}>${esc(zh() ? o[1] : o[2])}</option>`).join("")}</select></label>`;
+  const optLab = (opts, i, o) => { const tr = L && L[opts === VISAS ? "VISAS" : opts === PPS ? "PPS" : opts === HOURS ? "HOURS" : ""]; return tr && tr[i] ? tr[i] : zh() ? o[1] : o[2]; };
+  const sel = (p, lab, opts) => `<label>${lab}<select data-f="${p}">${opts.map((o, i) => `<option value="${esc(o[0])}" ${get(D, p) === o[0] ? "selected" : ""}>${esc(optLab(opts, i, o))}</option>`).join("")}</select></label>`;
   const tip = k => `<div class="cvb-tip">💡 ${t("tip_" + k)}</div>`;
 
   function stepHtml(s) {
@@ -169,7 +172,7 @@
       <div class="cvb-gift">${t("gift")}</div><div class="cvb-tip">${t("how")}</div><small class="mut">${t("privacy")}</small>
       ${leftHtml()}`;
     if (s === "target") return `<h3>🎯 ${t("s_target")}</h3>${tip("target")}${inp("a.target.jobs", t("jobs"), t("jobsPh"))}
-      <small class="mut">${t("jobsPick")}</small><div class="cvb-chips">${JOBS.map(j => `<button data-job="${esc(j[0])}" class="${(a.target.jobs || "").includes(j[0]) ? "on" : ""}">${esc(zh() ? j[1] : j[0])}</button>`).join("")}</div>
+      <small class="mut">${t("jobsPick")}</small><div class="cvb-chips">${JOBS.map((j, i) => `<button data-job="${esc(j[0])}" class="${(a.target.jobs || "").includes(j[0]) ? "on" : ""}">${esc(L && L.JOBS && L.JOBS[i] ? L.JOBS[i] : zh() ? j[1] : j[0])}</button>`).join("")}</div>
       ${inp("a.target.industry", t("industry"), t("industryPh"))}${area("a.target.notes", t("tnotes"), t("tnotesPh"))}`;
     if (s === "visa") return `<h3>🛂 ${t("s_visa")}</h3>${tip("visa")}
       <label>${t("city")}<input data-f="a.city" list="cvbCities" value="${esc(a.city || "")}" autocomplete="off"></label><datalist id="cvbCities">${CITIES.map(c => `<option value="${c}">`).join("")}</datalist>
@@ -372,7 +375,10 @@
   const onKey = e => { if (e.key === "Escape") close(); };
 
   window.CVB = {
-    open(opt) {
+    async open(opt) {
+      const lg = (opt && opt.lang) || "zh";
+      if (PACK_LANGS.includes(lg) && !PACKS[lg]) { try { const r = await fetch("games/cv-lang/" + lg + ".json?v=" + VER); if (r.ok) PACKS[lg] = await r.json(); } catch (e) { } }
+      L = PACKS[lg] || null;
       O = opt || {}; D = load(); edit = false; sample = null;
       if (!document.getElementById("cvbCss")) { const st = document.createElement("style"); st.id = "cvbCss"; st.textContent = CSS; document.head.appendChild(st); }
       if (box) box.remove();
