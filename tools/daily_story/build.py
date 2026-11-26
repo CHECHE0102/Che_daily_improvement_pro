@@ -75,19 +75,23 @@ counts = {}
 for a in arts: counts[a["region"]] = counts.get(a["region"], 0) + 1
 regions = [dict(code=c, name=ZH.get(c, c), count=n) for c, n in sorted(counts.items(), key=lambda x: (x[0] != "IE", -x[1]))]
 
-# ---------- host (same pick per date as the first samples) ----------
+# ---------- hosts: one man (reads English) and one woman (reads Chinese), picked by date ----------
 cast = [dict(key=k, name=n.split("（")[0], country=c, g="f" if s == "女" else "m")
         for k, _, n, c, s, *_ in json.load(open(os.path.join(HERE, "cast.json"), encoding="utf-8"))]
 cast.append(dict(key="niamh", name="Niamh", country="愛爾蘭", g="f"))
 BG = ["cafe", "office", "pub", "kitchen", "livingroom", "airport", "canteen", "event"]
 hsh = int(hashlib.sha1(DATE.encode()).hexdigest(), 16)
-host = cast[hsh % len(cast)]; host["bg"] = BG[(hsh // 97) % len(BG)]
-k = host["key"]
-host["poses"] = ({"base": "niamh-hi", "hi": "niamh-hi", "talk": "niamh-talk", "think": "niamh-point", "happy": "niamh-cheer"}
-                 if k == "niamh" else {"base": k, "hi": k + "-happy", "talk": k + "-talk", "think": k + "-think", "happy": k + "-happy"})
+men = [c for c in cast if c["g"] == "m"]; women = [c for c in cast if c["g"] == "f"]
+hosts = [men[hsh % len(men)], women[(hsh // 7) % len(women)]]
+for h in hosts:
+    h["bg"] = BG[(hsh // 97) % len(BG)]
+    k = h["key"]
+    h["poses"] = ({"base": "niamh-hi", "hi": "niamh-hi", "talk": "niamh-talk", "think": "niamh-point", "happy": "niamh-cheer"}
+                  if k == "niamh" else {"base": k, "hi": k + "-happy", "talk": k + "-talk", "think": k + "-think", "happy": k + "-happy"})
+host = hosts[0]
 
 y, m, d = map(int, DATE.split("-"))
-day = dict(date=DATE, dateZh=f"{m}月{d}日", news=news, regions=regions, host=host,
+day = dict(date=DATE, dateZh=f"{m}月{d}日", news=news, regions=regions, host=host, hosts=hosts,
            more=[dict(region=a["region"], zh=zh_short(a)) for a in rest[:3]],
            rn={c: ZH.get(c, c) for c in counts})
 json.dump(day, open(os.path.join(HERE, "day.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -96,7 +100,7 @@ json.dump(day, open(os.path.join(HERE, "day.json"), "w", encoding="utf-8"), ensu
 parts = [f"{NUM[n] if n < len(NUM) else n} {'story' if n == 1 else 'stories'} from {EN.get(c, c)}" for c, n in
          [(r["code"], r["count"]) for r in regions]]
 said = parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
-lines = [["s1", "en", f"Hi, I'm {host['name']}! Here's today's news from the BinBin game, {MONTH[m]} the {ordinal(d)}."]]
+lines = [["s1", "en", f"Hi, I'm {hosts[0]['name']}, and this is {hosts[1]['name']}! Here's today's news from the BinBin game, {MONTH[m]} the {ordinal(d)}."]]
 for i, n in enumerate(news):
     lines += [[f"s{i + 2}e", "en", n["en"] + "."], [f"s{i + 2}z", "zh", n["zh"] + "。"]]
 lines += [["s5", "en", f"Today, the game has {said}. Can't see your area? Pick it in the game, and your local news starts the next morning!"],
@@ -105,9 +109,30 @@ json.dump(dict(date=DATE, lines=lines), open(os.path.join(OUT, "script.json"), "
 
 # ---------- voice ----------
 import edge_tts
-VOICE = {"f": {"zh": "zh-TW-HsiaoChenNeural", "en": "en-IE-EmilyNeural"},
-         "m": {"zh": "zh-TW-YunJheNeural", "en": "en-IE-ConnorNeural"}}
-RATE = {"zh": "+22%", "en": "+4%"}
+# Each host gets their own voice: the English accent of their country (he reads English),
+# or a different voice/pitch for the Chinese lines (she reads Chinese). (voice, pitch, rate)
+EN_VOICE = {"conor": ("en-IE-ConnorNeural", "+0Hz", "+4%"), "arjun": ("en-IN-PrabhatNeural", "+0Hz", "+4%"),
+            "tunde": ("en-NG-AbeoNeural", "+0Hz", "+2%"), "sipho": ("en-ZA-LukeNeural", "+0Hz", "+4%"),
+            "hafiz": ("en-SG-WayneNeural", "+0Hz", "+4%"), "jay": ("en-HK-SamNeural", "+0Hz", "+4%"),
+            "javier": ("en-GB-RyanNeural", "-4Hz", "+6%"), "luca": ("en-GB-RyanNeural", "+6Hz", "+10%"),
+            "mateo": ("en-US-ChristopherNeural", "+0Hz", "+6%"), "diego": ("en-US-GuyNeural", "+0Hz", "+6%")}
+ZH_VOICE = {"ting": ("zh-TW-HsiaoChenNeural", "+0Hz"), "aisyah": ("zh-CN-XiaoyiNeural", "+0Hz"),
+            "priya": ("zh-TW-HsiaoYuNeural", "-6Hz"), "amara": ("zh-CN-XiaoxiaoNeural", "-8Hz"),
+            "zanele": ("zh-TW-HsiaoYuNeural", "-10Hz"), "valeria": ("zh-TW-HsiaoChenNeural", "+8Hz"),
+            "giulia": ("zh-CN-XiaoxiaoNeural", "+6Hz"), "carmen": ("zh-TW-HsiaoYuNeural", "+4Hz"),
+            "camila": ("zh-TW-HsiaoChenNeural", "-6Hz"), "niamh": ("zh-TW-HsiaoYuNeural", "+0Hz")}
+FALLBACK = {"en": ("en-IE-ConnorNeural", "+0Hz", "+4%"), "zh": ("zh-TW-HsiaoChenNeural", "+0Hz", "+22%")}
+
+
+def voice_for(lang, attempt):
+    if attempt >= 3:
+        return FALLBACK[lang]  # a voice sometimes returns no audio; use the steady default for that line
+    if lang == "en":
+        return EN_VOICE.get(hosts[0]["key"], FALLBACK["en"])
+    v, pitch = ZH_VOICE.get(hosts[1]["key"], FALLBACK["zh"][:2])
+    return (v, pitch, "+22%")
+
+
 AUD = os.path.join(OUT, "audio"); os.makedirs(AUD, exist_ok=True)
 
 
@@ -115,10 +140,11 @@ async def tts():
     for key, lang, text in lines:
         p = os.path.join(AUD, key + ".mp3")
         for a in range(6):
-            voice = VOICE[host["g"]][lang] if a < 3 else VOICE["f"][lang]  # male zh voice sometimes returns nothing
+            voice, pitch, rate = voice_for(lang, a)  # he reads English, she reads Chinese
             try:
-                await edge_tts.Communicate(text, voice, rate=RATE[lang]).save(p)
-                if os.path.getsize(p) > 500: break
+                await edge_tts.Communicate(text, voice, rate=rate, pitch=pitch).save(p)
+                if os.path.getsize(p) > 500:
+                    print("voice", key, voice, pitch); break
             except Exception as e:
                 print("retry", key, e); await asyncio.sleep(3 + a * 5)
         else:
@@ -130,4 +156,4 @@ FR = os.path.join(OUT, "frames")
 subprocess.run(["node", os.path.join(HERE, "shot.js"), FR, "story", "intro", "n0", "n1", "n2", "regions", "cta"], check=True)
 subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", os.path.join(FR, "story.png"), "-q:v", "2", os.path.join(OUT, "story.jpg")], check=True)
 subprocess.run([sys.executable, os.path.join(HERE, "make_short.py"), FR, AUD, os.path.join(OUT, "story.mp4")], check=True)
-print("built", DATE, [n["en"] for n in news], "host", host["name"])
+print("built", DATE, [n["en"] for n in news], "hosts", [h["name"] for h in hosts])
