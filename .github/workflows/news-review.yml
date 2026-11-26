@@ -23,13 +23,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - run: python3 tools/make_review_pack.py out 3
-      - name: Publish to review/ on main (GitHub Pages serves it at binbindaily.com/review/)
+      - name: Build and publish to review/ on main (GitHub Pages serves it at binbindaily.com/review/)
+        # the pack is rebuilt after every fetch, so a news fix pushed in the meantime is never covered by an older pack
         run: |
           git config user.name "CHECHE0102"
           git config user.email "CHECHE0102@users.noreply.github.com"
           for i in 1 2 3 4; do
             git fetch -q origin main && git reset -q --hard origin/main
+            rm -rf out && python3 tools/make_review_pack.py out 3
             rm -rf review && mkdir -p review && cp -r out/. review/
             git add -A review
             git diff --cached --quiet && { echo "no change"; exit 0; }
