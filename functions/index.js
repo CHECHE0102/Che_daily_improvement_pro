@@ -18,6 +18,7 @@ import { runPlaza } from "./plaza.js";
 import { runCheatScan } from "./cheat.js";
 import { eraseUser, runCleanup, RTDB_URL } from "./account.js";
 import { runStats, runErrWatch } from "./ops.js";
+import { runCv, cvLeft } from "./cv.js";
 import { getDatabaseWithUrl } from "firebase-admin/database";
 import { defineSecret } from "firebase-functions/params";
 import { logger } from "firebase-functions";
@@ -31,6 +32,7 @@ const db = getFirestore();
 const STRIPE_KEY = defineSecret("STRIPE_SECRET_KEY");
 const WEBHOOK_SECRET = defineSecret("STRIPE_WEBHOOK_SECRET");
 const VAPID_PRIVATE = defineSecret("VAPID_PRIVATE");
+const AI_KEY = defineSecret("ANTHROPIC_API_KEY");
 const REGION = "europe-west1";
 const STRIPE_VERSION = "2026-04-22.dahlia";
 const SITE = "https://binbindaily.com/";
@@ -312,4 +314,27 @@ export const adminStats = onRequest({ region: REGION, cors: ORIGINS, maxInstance
   const user = await getAuth().verifyIdToken(tok).catch(() => null);
   if (!user || !user.email_verified || sha(user.email) !== ADMIN_SHA) return res.status(403).json({ error: "admin" });
   try { return res.json(await runStats(db)); } catch (e) { logger.error("adminStats", e && e.message); return res.status(500).json({ error: "stats" }); }
+});
+
+// 履歷桌 AI CV writer (functions/cv.js). POST {answers} → {cv, left}; POST {check:true} → {left} (how many tries are left).
+// Signed-in players only; 3 per day and 10 per month each. Nothing the player wrote is stored or logged.
+export const cvWrite = onRequest({ region: REGION, secrets: [AI_KEY], cors: ORIGINS, maxInstances: 5, concurrency: 20, timeoutSeconds: 120, memory: "256MiB" }, async (req, res) => {
+  if (req.method !== "POST") return res.status(405).json({ error: "method" });
+  const tok = (req.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  const user = await getAuth().verifyIdToken(tok).catch(() => null);
+  if (!user) return res.status(401).json({ error: "login" });
+  const key = AI_KEY.value() || "";
+  if (!key.startsWith("sk-ant-")) return res.status(503).json({ error: "setup" });
+  try {
+    if (req.body?.check) return res.json({ left: await cvLeft(db, user.uid) });
+    const banned = await db.doc("banned/" + user.uid).get();
+    if (banned.exists) return res.status(403).json({ error: "banned" });
+    const admin = !!(user.email_verified && sha(user.email) === ADMIN_SHA);
+    const r = await runCv(db, user.uid, req.body?.answers, key, admin);
+    if (r.status === 200) logger.info("cvWrite", { tokens: r.json.usage });   // counts only, never the text
+    return res.status(r.status).json(r.json);
+  } catch (e) {
+    logger.error("cvWrite", e && e.cvStatus, e && e.detail);
+    return res.status(e && e.cvStatus === "busy" ? 429 : 500).json({ error: e && e.cvStatus || "server" });
+  }
 });
