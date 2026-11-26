@@ -52,9 +52,9 @@ h1{position:absolute;left:60px;right:60px;text-align:center;font-weight:900;font
 .win{position:absolute;left:60px;right:60px;border-radius:44px;overflow:hidden;background:#dcebe5 center/cover;box-shadow:0 14px 0 rgba(0,0,0,.16)}
 .win:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.25))}
 .win .host{position:absolute;bottom:auto}
-.win .tag{position:absolute;left:28px;bottom:26px;background:#1c6a55;color:#fff;border-radius:999px;padding:10px 26px;font-size:34px;font-weight:900}
+.win .tag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;bottom:26px;background:#1c6a55;color:#fff;border-radius:999px;padding:10px 26px;font-size:34px;font-weight:900}
 .win .tag b{color:#f0be45}
-.win .bubble{right:34px;left:auto}
+.win .bubble{left:50%;right:auto;transform:translateX(-50%);white-space:nowrap;text-align:center}
 .win .bubble:after{display:none}
 </style></head>
 <body><div class="dots"></div><div id="root"></div>
@@ -67,9 +67,13 @@ let RN={IE:'愛爾蘭',TW:'台灣'};
 const flag=c=>FLAG[c]?'<span class="flag">'+FLAG[c]+'</span>':'';
 const q=new URLSearchParams(location.search), S=q.get('s')||'story';
 // host window: background + long-video character, pose per scene
-const win=(H,pose,top,ht,extra='')=>{const src=H.poses[pose]||H.poses.base;
- return `<div class="win" style="top:${top}px;height:${ht}px;background-image:url(cast/bg-${H.bg}.webp)"><img class="host" src="cast/${src}.webp" style="width:${ht*1.0}px;left:${H.left||40}px;top:${Math.round(ht*0.06)}px">${extra}<div class="tag">今日主播 <b>${H.name}</b>・${H.country}</div></div>`};
+const win=(H,pose,top,ht,extra='')=>{const HS=(window.DAY.hosts||[H]);const w=Math.round(ht*0.92);
+ const pz=Array.isArray(pose)?pose:[pose,pose];
+ const imgs=HS.map((h,k)=>{const src=h.poses[pz[k]]||h.poses.base;const side=HS.length>1?(k?'right':'left'):'left';
+  return `<img class="host" src="cast/${src}.webp" style="width:${HS.length>1?w:ht}px;${side}:${HS.length>1?-Math.round(ht*0.1):(H.left||40)}px;top:${Math.round(ht*0.06)}px${k?';transform:scaleX(-1)':''}">`}).join('');
+ return `<div class="win" style="top:${top}px;height:${ht}px;background-image:url(cast/bg-${HS[0].bg}.webp)">${imgs}${extra}<div class="tag">今日主播 ${HS.map(h=>`<b>${h.name}</b>`).join('・')}</div></div>`};
 fetch('day.json').then(r=>r.json()).then(D=>{
+ window.DAY=D;
  RN=Object.assign(RN,D.rn||{});
  const top=`<div class="top"><div class="brand"><img src="icon-shamrock.webp">BinBin<b>每日英文</b></div><div class="date">${D.dateZh}</div></div>`;
  const site=`<div class="site">▶ <b>binbindaily.com</b></div>`;
