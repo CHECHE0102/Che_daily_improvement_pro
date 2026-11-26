@@ -17,7 +17,7 @@ Paths are files on the main branch of GitHub repo CHECHE0102/Che_daily_improveme
 - 2026-11-24-tw-2 (region TW, 政治): Taiwan Says US Policy Is Unchanged After Chinese Report on Trump
   - review/2026-11-24/2026-11-24-tw-2.md
 
-## WORDS job: 405 new glossary entries today, in 4 part(s)
+## WORDS job: 406 new glossary entries today, in 4 part(s)
 - review/2026-11-24/words-new-1.md
 - review/2026-11-24/words-new-2.md
 - review/2026-11-24/words-new-3.md
