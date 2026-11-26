@@ -1,0 +1,62 @@
+name: Social posts (FB + IG)
+# Posts whatever is due in schedule.json on the `social` branch (times are Europe/Dublin) to the
+# Facebook Page and Instagram through the Meta Graph API, then records it in posted.json there.
+# Needs the META_TOKEN secret (a never-expiring system-user token, pasted by CheChe).
+on:
+  schedule:
+    - cron: '3,33 * * * *'   # GitHub may start runs late; each run posts everything already due
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Post this item id right now (e.g. P11), even if it is not due yet'
+        default: ''
+      dry_run:
+        description: 'Only print what would be posted'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: social-post
+  cancel-in-progress: false
+env:
+  FB_PAGE_ID: '1486940854501435'
+  IG_USER_ID: '17841413170219566'
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+      - uses: actions/checkout@v4
+        with:
+          ref: social
+          path: social
+          sparse-checkout: |
+            schedule.json
+            posted.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Post what is due
+        env:
+          META_TOKEN: ${{ secrets.META_TOKEN }}
+          SOCIAL_DIR: social
+          MEDIA_BASE: https://raw.githubusercontent.com/${{ github.repository }}/social
+          ONLY: ${{ github.event.inputs.only }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
+        run: python tools/social_post.py
+      - name: Save posted.json
+        if: always()
+        working-directory: social
+        run: |
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git add posted.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -qm "Record social posts"
+          for i in 1 2 3; do git pull --rebase -q origin social && git push -q origin HEAD:social && exit 0; sleep 5; done
+          echo "::error::could not save posted.json"; exit 1
