@@ -51,7 +51,10 @@ def text_pack(a, questions):
     L.append("\n## sources")
     for s in a.get("sources", []):
         L.append(f"- {s.get('name')}: {s.get('url')}")
-    if a.get("paragraphs"):
+    b2 = ((a.get("levels") or {}).get("B2") or {}).get("paragraphs")
+    if a.get("paragraphs") and a["paragraphs"] == b2:
+        L.append("\n## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)")
+    elif a.get("paragraphs"):
         L.append("\n## top-level paragraphs (field \"paragraphs\", shown when no level is chosen)")
         for i, p in enumerate(a["paragraphs"], 1):
             L.append(f"P{i}: {p}")
@@ -178,9 +181,21 @@ def main():
         with open(f"{out}/{date}/index.md", "w", encoding="utf-8") as f:
             f.write(body)
         newest = body
+        # one fixed-name file per job for the newest day, so a scheduled ChatGPT run needs a single read
+        head = (f"# BinBin {{job}} — {date}\n"
+                f"date: {date} | {len(arts)} articles | read this WHOLE file, it is the complete job for today\n\n")
+        today_text = head.format(job="TEXT proofreading") + "\n\n".join(
+            text_pack(a, rq.get(a["id"])) for a in arts)
+        today_words = head.format(job=f"WORDS proofreading ({nw} new entries)") + (
+            "".join(w.split("\n", 1)[1] if n == 0 else w.split("\n", 5)[5] for n, w in enumerate(wp))
+            if wp else "(none: every glossary entry today was already checked on an earlier day)\n")
     if newest:
         with open(f"{out}/latest.md", "w", encoding="utf-8") as f:
             f.write(newest)
+        with open(f"{out}/today-text.md", "w", encoding="utf-8") as f:
+            f.write(today_text)
+        with open(f"{out}/today-words.md", "w", encoding="utf-8") as f:
+            f.write(today_words)
 
 
 if __name__ == "__main__":

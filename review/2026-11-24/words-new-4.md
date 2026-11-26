@@ -3,6 +3,7 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-24-tw-2:alterations | alteration | n. | C1 | changes | 變更 | 変更 | 변경 | alteraciones | परिवर्तन | Unilateral alterations are not allowed. | changes, modifications, adjustments |  | make alterations, minor alterations
 2026-11-24-tw-2:america | America | n. | PN | the United States of America | 美國 | アメリカ | 미국 | Estados Unidos | अमेरिका |  |  |  | 
 2026-11-24-tw-2:apec | APEC | n. | PN | Asia-Pacific Economic Cooperation, a regional group | 亞太經合會（APEC） | APEC（アジア太平洋経済協力） | APEC(아시아태평양경제협력체) | APEC | एपेक |  |  |  | 
 2026-11-24-tw-2:assurance | assurance | n. | C1 | a promise that makes someone less worried | 保證 | 保証；確約 | 보장; 확언 | garantía | आश्वासन | He gave an assurance that jobs were safe. | promise, guarantee, pledge |  | give an assurance, written assurance

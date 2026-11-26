@@ -1,0 +1,8672 @@
+{
+ "id": "2026-11-26-tw-1",
+ "date": "2026-11-26",
+ "rank": 1,
+ "region": "TW",
+ "topic": "科技",
+ "title": "NTU Team Builds Low-Power Chips That Run AI on Your Phone",
+ "level": "B2",
+ "summaryZh": "台大研發兩代節能晶片，讓AI直接在裝置上運作",
+ "summaryHi": "NTU ने दो पीढ़ियों के कम बिजली वाले चिप बनाए, जिनसे AI सीधे फ़ोन और कारों पर चल सके।",
+ "summaryEs": "La NTU crea dos generaciones de chips de bajo consumo para ejecutar IA en el propio dispositivo.",
+ "summaryJa": "台湾大学が端末上でAIを動かす省電力チップを2世代開発。",
+ "summaryKo": "대만대, 기기에서 직접 AI를 구동하는 저전력 칩 2세대 개발.",
+ "summaryEn": "NTU researchers built two generations of energy-efficient chips that run generative AI directly on devices.",
+ "sources": [
+  {
+   "name": "Focus Taiwan (CNA)",
+   "url": "https://focustaiwan.tw/sci-tech/202611250014"
+  }
+ ],
+ "paragraphs": [
+  "A research team at National Taiwan University (NTU) has developed two generations of energy-efficient processors designed to run generative AI directly on devices, the National Science and Technology Council (NSTC) announced on Wednesday.",
+  "Most generative AI services currently depend on remote data centers, which means a phone or car must send data over a network and wait for a response. Processing on the device itself, the NSTC said, allows robots, vehicles, smartphones and factory equipment to react quickly, protect users' privacy and keep working where connections are unreliable.",
+  "The project is led by Professor Yang Chia-hsiang of NTU's electrical engineering department, whose guiding principle is to compute only what is necessary and to move as little data as possible. The first chip, built on a 40-nanometer process, identifies the most important relationships in the data before doing any heavy calculation.",
+  "According to the council, it was the first reported processor able to speed up both the training and the use of Transformer models, the technology behind tools such as chatbots. The second chip simplifies training further and delivers 1.6 to 7.6 times the energy efficiency of comparable processors reported at the time.",
+  "The findings were presented at the IEEE Symposium on VLSI Technology and Circuits, a leading chip conference. A third chip, produced in October on a 16-nanometer process, aims to overcome memory limits."
+ ],
+ "levels": {
+  "A2": {
+   "paragraphs": [
+    "A team at National Taiwan University has made two new computer chips. The chips help phones, cars and robots use AI. They use very little power.",
+    "Today, many AI tools need big computers far away. Your phone sends data over the internet and waits for an answer. These new chips let a device do the work by itself.",
+    "The team leader is Professor Yang Chia-hsiang. His idea is simple. The chip should only do the work it needs. It should also move less data.",
+    "The second chip is better than the first. It can do a lot of work with a small amount of power. This is good for batteries.",
+    "The team is now making a third chip. The government helps pay for the work."
+   ],
+   "sentZh": [
+    [
+     "台灣大學的一個團隊做出了兩款新的電腦晶片。",
+     "這些晶片幫助手機、汽車和機器人使用AI。",
+     "它們用的電非常少。"
+    ],
+    [
+     "現在，很多AI工具需要遠方的大型電腦。",
+     "你的手機透過網路傳送資料，然後等待回答。",
+     "這些新晶片讓裝置可以自己完成工作。"
+    ],
+    [
+     "團隊的負責人是楊家驤教授。",
+     "他的想法很簡單。",
+     "晶片應該只做需要做的工作。",
+     "它也應該少搬動資料。"
+    ],
+    [
+     "第二款晶片比第一款更好。",
+     "它可以用很少的電完成很多工作。",
+     "這對電池很有好處。"
+    ],
+    [
+     "這個團隊現在正在做第三款晶片。",
+     "政府幫忙出錢支持這項工作。"
+    ]
+   ]
+  },
+  "B1": {
+   "paragraphs": [
+    "Researchers at National Taiwan University (NTU) have developed two generations of computer chips that let phones, cars, robots and machines run generative AI on their own, Taiwan's National Science and Technology Council said on Wednesday.",
+    "Most AI tools today run in large data centers. A device has to send information over the internet and wait for a reply. Chips that work inside the device can respond faster, keep personal data private and still work when the connection is poor.",
+    "The team is led by Professor Yang Chia-hsiang from the electrical engineering department. He explained that the main idea is to calculate only what is necessary and to move less data around inside the chip. Moving data uses a lot of energy.",
+    "The first chip can both use and train an AI model, which the council says no earlier chip of its kind had done. The second chip is even more efficient. It does up to 7.6 times more work per watt than similar chips reported at the time.",
+    "The results were presented at a major international chip conference in 2024 and 2025. A third chip, made with a more advanced process, is now being developed."
+   ],
+   "sentZh": [
+    [
+     "國科會週三表示，台灣大學的研究人員研發出兩代電腦晶片，讓手機、汽車、機器人和機器能自己執行生成式AI。"
+    ],
+    [
+     "現在大多數AI工具都在大型資料中心運行。",
+     "裝置必須透過網路傳送資訊並等待回覆。",
+     "在裝置內部運作的晶片反應更快、能保護個人資料隱私，而且在連線不佳時仍能運作。"
+    ],
+    [
+     "這個團隊由電機工程學系的楊家驤教授帶領。",
+     "他解釋說，主要的想法是只計算必要的部分，並減少晶片內部搬動的資料。",
+     "搬動資料會消耗很多能源。"
+    ],
+    [
+     "第一款晶片既能使用AI模型，也能訓練AI模型，國科會說以前沒有同類晶片做到這一點。",
+     "第二款晶片的效率更高。",
+     "它每瓦特能完成的工作，最多是當時類似晶片的7.6倍。"
+    ],
+    [
+     "這些成果在2024年和2025年的一場重要國際晶片會議上發表。",
+     "用更先進製程製造的第三款晶片，目前正在研發中。"
+    ]
+   ]
+  },
+  "B2": {
+   "paragraphs": [
+    "A research team at National Taiwan University (NTU) has developed two generations of energy-efficient processors designed to run generative AI directly on devices, the National Science and Technology Council (NSTC) announced on Wednesday.",
+    "Most generative AI services currently depend on remote data centers, which means a phone or car must send data over a network and wait for a response. Processing on the device itself, the NSTC said, allows robots, vehicles, smartphones and factory equipment to react quickly, protect users' privacy and keep working where connections are unreliable.",
+    "The project is led by Professor Yang Chia-hsiang of NTU's electrical engineering department, whose guiding principle is to compute only what is necessary and to move as little data as possible. The first chip, built on a 40-nanometer process, identifies the most important relationships in the data before doing any heavy calculation.",
+    "According to the council, it was the first reported processor able to speed up both the training and the use of Transformer models, the technology behind tools such as chatbots. The second chip simplifies training further and delivers 1.6 to 7.6 times the energy efficiency of comparable processors reported at the time.",
+    "The findings were presented at the IEEE Symposium on VLSI Technology and Circuits, a leading chip conference. A third chip, produced in October on a 16-nanometer process, aims to overcome memory limits."
+   ],
+   "sentZh": [
+    [
+     "國科會週三宣布，台灣大學的研究團隊研發出兩代節能處理器，專為在裝置上直接執行生成式AI而設計。"
+    ],
+    [
+     "目前大多數生成式AI服務都依賴遠端資料中心，這表示手機或汽車必須透過網路傳送資料並等待回應。",
+     "國科會表示，在裝置本身進行運算，能讓機器人、車輛、智慧型手機和工廠設備快速反應、保護使用者隱私，並在連線不穩的地方持續運作。"
+    ],
+    [
+     "這項計畫由台大電機系的楊家驤教授主持，他的指導原則是只計算必要的部分，並盡量少搬動資料。",
+     "第一款晶片採用40奈米製程，會在進行大量計算之前，先找出資料中最重要的關係。"
+    ],
+    [
+     "據國科會表示，這是首款被報導能同時加速Transformer模型訓練與使用的處理器，而Transformer正是聊天機器人等工具背後的技術。",
+     "第二款晶片進一步簡化訓練，能源效率是當時同類處理器的1.6到7.6倍。"
+    ],
+    [
+     "這些研究成果在頂尖晶片會議「IEEE超大型積體電路技術與電路研討會」上發表。",
+     "第三款晶片已於10月以16奈米製程製造，目標是突破記憶體的限制。"
+    ]
+   ]
+  },
+  "C1": {
+   "paragraphs": [
+    "Engineers at National Taiwan University (NTU) have unveiled two successive generations of low-power processors capable of running generative AI entirely on a device, according to a statement released on Wednesday by the National Science and Technology Council (NSTC).",
+    "The work addresses a growing bottleneck. Today's generative AI largely relies on distant data centers, so phones and vehicles must transmit data and await a reply. On-device processing, the council argued, enables robots, cars, handsets and industrial machinery to respond almost instantly, safeguard sensitive information and function even when connectivity is patchy.",
+    "Professor Yang Chia-hsiang, who heads the team, summed up its philosophy as computing only what is essential while minimising the movement of data, which consumes a disproportionate share of a chip's energy. Accordingly, the first-generation chip, fabricated on a 40-nanometer process, pinpoints the key relationships within data before committing to intensive computation.",
+    "The NSTC described it as the first reported learning processor able to accelerate both inference and training for Transformer models, the architecture underpinning modern chatbots. Its successor streamlines training still further, achieving between 1.6 and 7.6 times the efficiency of comparable processors published at the time.",
+    "Both designs were showcased at the prestigious IEEE Symposium on VLSI Technology and Circuits. A third chip, manufactured in October on a 16-nanometer process, is intended to ease memory bandwidth constraints."
+   ],
+   "sentZh": [
+    [
+     "根據國科會週三發布的聲明，台灣大學的工程師發表了連續兩代低功耗處理器，能完全在裝置上執行生成式AI。"
+    ],
+    [
+     "這項研究針對的是一個日益嚴重的瓶頸。",
+     "如今的生成式AI大多依賴遙遠的資料中心，因此手機和車輛必須傳送資料並等待回覆。",
+     "國科會主張，裝置端運算能讓機器人、汽車、手機和工業機械幾乎即時反應、保護敏感資訊，即使連線時好時壞也能運作。"
+    ],
+    [
+     "帶領團隊的楊家驤教授將其理念總結為：只計算必要的部分，同時盡量減少資料搬移，因為資料搬移會消耗晶片中不成比例的大量能源。",
+     "因此，以40奈米製程製造的第一代晶片，會在投入密集運算之前，先精準找出資料中的關鍵關係。"
+    ],
+    [
+     "國科會形容，這是首款被報導能同時加速Transformer模型推論與訓練的學習型處理器，而Transformer正是現代聊天機器人的基礎架構。",
+     "其後繼晶片進一步精簡訓練，效率達到當時已發表同類處理器的1.6到7.6倍。"
+    ],
+    [
+     "兩款設計都在享有盛譽的IEEE超大型積體電路技術與電路研討會上展示。",
+     "第三款晶片於10月以16奈米製程製造，目的在於緩解記憶體頻寬的限制。"
+    ]
+   ]
+  },
+  "IELTS": {
+   "paragraphs": [
+    "A research group at National Taiwan University (NTU) has created two consecutive generations of energy-efficient processors that allow generative artificial intelligence to operate directly on devices rather than in the cloud, the National Science and Technology Council (NSTC) reported on Wednesday.",
+    "At present, the vast majority of generative AI applications are dependent on remote data centers, obliging smartphones and vehicles to transmit information and wait for a response. By contrast, on-device processing, the council maintained, permits robots, cars, phones and industrial equipment to react rapidly, preserve user privacy and remain operational in locations with unreliable connectivity.",
+    "The team, headed by Professor Yang Chia-hsiang, is guided by a deceptively simple principle: perform only the calculations that are strictly necessary and minimise data transfer, since moving data is a major source of energy consumption. Consistent with this approach, the first chip, built on a 40-nanometer process, identifies the crucial relationships in a dataset before undertaking any intensive computation.",
+    "The council asserted that this was the first documented processor capable of accelerating both the training and the deployment of Transformer models, the framework on which contemporary chatbots are built. The second generation simplifies training even further and attains up to 7.6 times the energy efficiency of equivalent processors reported at the time.",
+    "The findings were disseminated at a highly regarded international symposium on chip technology. A third prototype, fabricated in October using a 16-nanometer process, is designed to tackle limitations in memory bandwidth."
+   ],
+   "sentZh": [
+    [
+     "國科會週三報告指出，台灣大學的一個研究團隊打造出連續兩代節能處理器，讓生成式人工智慧能直接在裝置上運作，而不必依賴雲端。"
+    ],
+    [
+     "目前，絕大多數生成式AI應用都依賴遠端資料中心，迫使智慧型手機和車輛必須傳送資訊並等待回應。",
+     "國科會堅稱，相比之下，裝置端運算能讓機器人、汽車、手機和工業設備迅速反應、保護使用者隱私，並在連線不可靠的地點維持運作。"
+    ],
+    [
+     "由楊家驤教授帶領的團隊，遵循一個看似簡單的原則：只執行絕對必要的計算，並將資料傳輸降到最低，因為搬移資料是能源消耗的主要來源。",
+     "依照這個做法，採用40奈米製程的第一款晶片，會在進行任何密集運算之前，先找出資料集中的關鍵關係。"
+    ],
+    [
+     "國科會斷言，這是第一款有紀錄可同時加速Transformer模型訓練與實際應用的處理器，而當代的聊天機器人正是建立在這個架構上。",
+     "第二代晶片進一步簡化訓練，能源效率最高可達當時同等處理器的7.6倍。"
+    ],
+    [
+     "這些研究成果在一場備受推崇的國際晶片技術研討會上發表。",
+     "第三款原型晶片於10月以16奈米製程製造，旨在解決記憶體頻寬的限制。"
+    ]
+   ]
+  }
+ },
+ "gloss": {
+  "a": {
+   "base": "a",
+   "en": "one; any (article)",
+   "es": "un; una",
+   "hi": "एक",
+   "ja": "一つの；ある",
+   "ko": "하나의",
+   "lvl": "A1",
+   "pos": "art.",
+   "zh": "一個"
+  },
+  "able": {
+   "ant": [
+    "unable"
+   ],
+   "base": "able",
+   "col": [
+    "be able to",
+    "able to manage"
+   ],
+   "en": "having the power to do something",
+   "es": "capaz (be able to: poder)",
+   "ex": "She was able to finish the work early.",
+   "hi": "सक्षम (be able to: कर पाना)",
+   "ja": "できる（be able to）",
+   "ko": "할 수 있는 (be able to)",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "capable",
+    "allowed"
+   ],
+   "zh": "能夠（be able to）"
+  },
+  "accelerate": {
+   "ant": [
+    "slow",
+    "delay"
+   ],
+   "base": "accelerate",
+   "col": [
+    "accelerate growth",
+    "accelerate the pace"
+   ],
+   "en": "to make something happen faster",
+   "es": "acelerar",
+   "ex": "The city wants to accelerate house building.",
+   "hi": "तेज़ करना",
+   "ja": "加速させる",
+   "ko": "가속하다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "speed up",
+    "quicken",
+    "hasten"
+   ],
+   "zh": "加快"
+  },
+  "accelerating": {
+   "ant": [
+    "slowing",
+    "delaying"
+   ],
+   "base": "accelerate",
+   "col": [
+    "accelerate growth",
+    "accelerate the use"
+   ],
+   "en": "making something happen faster",
+   "es": "acelerando",
+   "ex": "The firm is accelerating its move to online sales.",
+   "hi": "तेज़ करना",
+   "ja": "加速している",
+   "ko": "가속하는",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "speeding up",
+    "hastening",
+    "stepping up"
+   ],
+   "zh": "加速；加快"
+  },
+  "according": {
+   "ant": [],
+   "base": "according",
+   "col": [
+    "according to experts",
+    "according to figures"
+   ],
+   "en": "as stated by (according to)",
+   "es": "según (according to)",
+   "ex": "According to the report, prices rose again.",
+   "hi": "के अनुसार (according to)",
+   "ja": "〜によると（according to）",
+   "ko": "~에 따르면 (according to)",
+   "lvl": "B1",
+   "pos": "adv.",
+   "syn": [
+    "as stated by",
+    "as reported by"
+   ],
+   "zh": "根據（according to）"
+  },
+  "accordingly": {
+   "ant": [],
+   "base": "accordingly",
+   "col": [
+    "act accordingly",
+    "adjust accordingly"
+   ],
+   "en": "as a result; so",
+   "es": "en consecuencia",
+   "ex": "Prices rose, and accordingly sales fell.",
+   "hi": "तदनुसार",
+   "ja": "それに応じて",
+   "ko": "따라서",
+   "lvl": "C1",
+   "pos": "adv.",
+   "syn": [
+    "therefore",
+    "consequently",
+    "so"
+   ],
+   "zh": "因此；據此"
+  },
+  "achieving": {
+   "zh": "達成",
+   "hi": "हासिल करना",
+   "es": "lograr",
+   "ja": "達成すること",
+   "ko": "달성하는 것",
+   "en": "succeeding in reaching a goal",
+   "pos": "v.",
+   "base": "achieve",
+   "lvl": "B1",
+   "syn": [
+    "reaching",
+    "attaining",
+    "accomplishing"
+   ],
+   "ant": [
+    "failing"
+   ],
+   "ex": "She is close to achieving her dream.",
+   "col": [
+    "achieve a goal",
+    "achieve success"
+   ]
+  },
+  "addresses": {
+   "zh": "處理；應對",
+   "hi": "संबोधित करता है",
+   "es": "aborda",
+   "ja": "対処する",
+   "ko": "다루다",
+   "en": "deals with a problem",
+   "pos": "v.",
+   "base": "address",
+   "lvl": "B2",
+   "syn": [
+    "tackles",
+    "handles",
+    "deals with"
+   ],
+   "ant": [
+    "ignores"
+   ],
+   "ex": "The plan addresses the problem of traffic.",
+   "col": [
+    "addresses a concern",
+    "addresses the issue"
+   ]
+  },
+  "advanced": {
+   "zh": "先進的",
+   "hi": "उन्नत",
+   "es": "avanzado",
+   "ja": "先端の",
+   "ko": "첨단의",
+   "en": "modern and highly developed",
+   "pos": "adj.",
+   "base": "advanced",
+   "lvl": "B1",
+   "syn": [
+    "cutting-edge",
+    "sophisticated",
+    "modern"
+   ],
+   "ant": [
+    "basic"
+   ],
+   "ex": "The factory makes advanced chips.",
+   "col": [
+    "advanced chips",
+    "advanced technology"
+   ]
+  },
+  "ai": {
+   "ant": [],
+   "base": "AI",
+   "col": [
+    "use AI",
+    "AI tools"
+   ],
+   "en": "computer systems that can do tasks like humans",
+   "es": "IA",
+   "ex": "AI can help doctors read X-rays.",
+   "hi": "एआई",
+   "ja": "AI；人工知能",
+   "ko": "인공지능",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "artificial intelligence",
+    "machine learning"
+   ],
+   "zh": "人工智慧（AI）"
+  },
+  "aims": {
+   "ant": [],
+   "base": "aim",
+   "col": [
+    "aims to finish",
+    "aims to reduce"
+   ],
+   "en": "plans or hopes to",
+   "es": "pretende",
+   "ex": "The school aims to open a new library next year.",
+   "hi": "लक्ष्य रखना",
+   "ja": "〜を目指す",
+   "ko": "~을 목표로 하다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "plans",
+    "intends",
+    "hopes"
+   ],
+   "zh": "目標是；旨在"
+  },
+  "allow": {
+   "ant": [
+    "forbid",
+    "prevent"
+   ],
+   "base": "allow",
+   "col": [
+    "allow access",
+    "allow time"
+   ],
+   "en": "to let something happen",
+   "es": "permitir",
+   "ex": "The rules allow small shops to open on Sundays.",
+   "hi": "अनुमति देना",
+   "ja": "許す",
+   "ko": "허용하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "let",
+    "permit",
+    "enable"
+   ],
+   "zh": "允許"
+  },
+  "allows": {
+   "ant": [
+    "forbids",
+    "prohibits"
+   ],
+   "base": "allow",
+   "col": [
+    "allows people to",
+    "allows for"
+   ],
+   "en": "lets something happen",
+   "es": "permite",
+   "ex": "The park allows dogs on a lead.",
+   "hi": "अनुमति देता है",
+   "ja": "認める；許す",
+   "ko": "허용하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "permits",
+    "lets",
+    "enables"
+   ],
+   "zh": "允許"
+  },
+  "almost": {
+   "ant": [],
+   "base": "almost",
+   "col": [
+    "almost everything",
+    "almost always"
+   ],
+   "en": "nearly",
+   "es": "casi",
+   "ex": "The bus was almost empty this morning.",
+   "hi": "लगभग",
+   "ja": "ほとんど",
+   "ko": "거의",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "nearly",
+    "practically",
+    "just about"
+   ],
+   "zh": "幾乎"
+  },
+  "also": {
+   "ant": [],
+   "base": "also",
+   "col": [
+    "also known as",
+    "also included"
+   ],
+   "en": "as well",
+   "es": "también",
+   "ex": "She speaks French and also some Spanish.",
+   "hi": "भी",
+   "ja": "〜も",
+   "ko": "또한",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "too",
+    "as well",
+    "besides"
+   ],
+   "zh": "也"
+  },
+  "amount": {
+   "ant": [],
+   "base": "amount",
+   "col": [
+    "a large amount",
+    "the amount of money"
+   ],
+   "en": "a quantity of money or something",
+   "es": "cantidad; importe",
+   "ex": "A large amount of rain fell overnight.",
+   "hi": "राशि; मात्रा",
+   "ja": "額；量",
+   "ko": "액수；양",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "quantity",
+    "sum",
+    "volume"
+   ],
+   "zh": "數額；金額"
+  },
+  "an": {
+   "base": "an",
+   "en": "one; any (article)",
+   "es": "un; una",
+   "hi": "एक",
+   "ja": "一つの；ある",
+   "ko": "하나의",
+   "lvl": "A1",
+   "pos": "art.",
+   "zh": "一個"
+  },
+  "and": {
+   "base": "and",
+   "en": "used to join words",
+   "es": "y",
+   "hi": "और",
+   "ja": "そして",
+   "ko": "그리고",
+   "lvl": "A2",
+   "pos": "conj.",
+   "zh": "和；而且"
+  },
+  "announced": {
+   "ant": [
+    "concealed"
+   ],
+   "base": "announce",
+   "col": [
+    "announced plans",
+    "announced on Monday"
+   ],
+   "en": "said officially",
+   "es": "anunció",
+   "ex": "The school announced a new head teacher.",
+   "hi": "घोषणा की",
+   "ja": "発表した",
+   "ko": "발표했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "declared",
+    "stated",
+    "revealed"
+   ],
+   "zh": "宣布"
+  },
+  "answer": {
+   "ant": [
+    "ask"
+   ],
+   "base": "answer",
+   "en": "to reply to a question",
+   "es": "responder",
+   "ex": "Please answer all the questions on the form.",
+   "hi": "जवाब देना",
+   "ja": "答える",
+   "ko": "답하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "respond to",
+    "reply to",
+    "address"
+   ],
+   "zh": "回答",
+   "col": [
+    "give an answer",
+    "the right answer"
+   ]
+  },
+  "any": {
+   "base": "any",
+   "en": "one or some, of whatever kind",
+   "es": "cualquier",
+   "hi": "कोई भी",
+   "ja": "どんな〜でも",
+   "ko": "어떤 ~라도",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "任何"
+  },
+  "applications": {
+   "zh": "應用程式；應用",
+   "hi": "अनुप्रयोग",
+   "es": "aplicaciones",
+   "ja": "アプリケーション；応用",
+   "ko": "응용 프로그램",
+   "en": "computer programs or practical uses",
+   "pos": "n.",
+   "base": "application",
+   "lvl": "B2",
+   "syn": [
+    "apps",
+    "programs",
+    "uses"
+   ],
+   "ant": [],
+   "ex": "AI applications are changing many jobs.",
+   "col": [
+    "AI applications",
+    "mobile applications"
+   ]
+  },
+  "approach": {
+   "ant": [],
+   "base": "approach",
+   "col": [
+    "a new approach",
+    "take an approach"
+   ],
+   "en": "a way of dealing with something",
+   "es": "enfoque",
+   "ex": "We need a new approach to teaching maths.",
+   "hi": "दृष्टिकोण",
+   "ja": "取り組み方",
+   "ko": "접근 방식",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "method",
+    "strategy",
+    "way"
+   ],
+   "zh": "方法；做法"
+  },
+  "architecture": {
+   "zh": "架構",
+   "hi": "ढांचा (आर्किटेक्चर)",
+   "es": "arquitectura",
+   "ja": "構成；アーキテクチャ",
+   "ko": "구조(아키텍처)",
+   "en": "the overall design of a computer system",
+   "pos": "n.",
+   "base": "architecture",
+   "lvl": "C1",
+   "syn": [
+    "structure",
+    "design",
+    "framework"
+   ],
+   "ant": [],
+   "ex": "The bank rebuilt its network architecture last year.",
+   "col": [
+    "security architecture",
+    "system architecture"
+   ]
+  },
+  "are": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "there are",
+    "are expected"
+   ],
+   "en": "to exist; to have a quality",
+   "es": "ser; estar",
+   "ex": "There are three parks near my home.",
+   "hi": "है; होना",
+   "ja": "〜である",
+   "ko": "~이다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "exist",
+    "remain"
+   ],
+   "zh": "是"
+  },
+  "argued": {
+   "ant": [
+    "denied"
+   ],
+   "base": "argue",
+   "col": [
+    "argue convincingly",
+    "argue a case"
+   ],
+   "en": "gave reasons for an opinion",
+   "es": "sostuvo",
+   "ex": "She argued that the plan was too costly.",
+   "hi": "तर्क दिया",
+   "ja": "主張した",
+   "ko": "주장했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "claimed",
+    "maintained",
+    "contended"
+   ],
+   "zh": "主張；認為"
+  },
+  "around": {
+   "ant": [
+    "exactly"
+   ],
+   "base": "around",
+   "col": [
+    "around 1,000",
+    "around the same"
+   ],
+   "en": "about; roughly",
+   "es": "alrededor de",
+   "ex": "Around fifty people came to the party.",
+   "hi": "लगभग",
+   "ja": "約",
+   "ko": "약",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "about",
+    "roughly",
+    "approximately"
+   ],
+   "zh": "大約"
+  },
+  "artificial": {
+   "ant": [
+    "natural",
+    "real"
+   ],
+   "base": "artificial",
+   "col": [
+    "artificial intelligence",
+    "artificial light"
+   ],
+   "en": "made by people, not natural",
+   "es": "artificial",
+   "ex": "The park has an artificial lake.",
+   "hi": "कृत्रिम",
+   "ja": "人工の",
+   "ko": "인공의",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "man-made",
+    "synthetic"
+   ],
+   "zh": "人工的（artificial intelligence：人工智慧）"
+  },
+  "as": {
+   "base": "as",
+   "en": "in the same way; in the role of",
+   "es": "como",
+   "hi": "जैसे; के रूप में",
+   "ja": "〜として；〜のように",
+   "ko": "~로서；~처럼",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "如同；作為"
+  },
+  "asserted": {
+   "ant": [
+    "denied"
+   ],
+   "base": "assert",
+   "col": [
+    "assert that",
+    "firmly assert"
+   ],
+   "en": "stated firmly that something is true",
+   "es": "afirmó; aseguró",
+   "ex": "The lawyer asserted that her client was innocent.",
+   "hi": "ज़ोर देकर कहा",
+   "ja": "断言した；主張した",
+   "ko": "단언했다; 주장했다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "claimed",
+    "stated",
+    "declared",
+    "maintained"
+   ],
+   "zh": "斷言；堅稱",
+   "note": {
+    "meaning": "斷言；堅稱。",
+    "usage": "assert that + 子句；語氣比 say 強，表示很有把握。",
+    "collocations": [
+     "assert that",
+     "firmly asserted",
+     "assert one’s rights"
+    ],
+    "example": {
+     "en": "The company asserted that its product was safe.",
+     "zh": "該公司堅稱其產品是安全的。"
+    }
+   },
+   "noteHi": {
+    "meaning": "दृढ़ता से कहा या दावा किया।",
+    "usage": "assert that + वाक्य; say से अधिक ज़ोरदार।",
+    "exampleTr": "कंपनी ने दावा किया कि उसका उत्पाद सुरक्षित है।"
+   },
+   "noteEs": {
+    "meaning": "afirmar con firmeza.",
+    "usage": "assert that + oración; más fuerte que say.",
+    "exampleTr": "La empresa afirmó que su producto era seguro."
+   },
+   "noteJa": {
+    "meaning": "断言した、強く主張した。",
+    "usage": "assert that ～ の形。say より強い確信を表す。",
+    "exampleTr": "その会社は自社製品が安全だと断言した。"
+   },
+   "noteKo": {
+    "meaning": "단언했다, 강하게 주장했다.",
+    "usage": "assert that ~ 형태; say보다 강한 확신.",
+    "exampleTr": "그 회사는 자사 제품이 안전하다고 단언했다."
+   },
+   "noteEn": {
+    "meaning": "stated something firmly and confidently.",
+    "usage": "Use 'assert that + clause'; stronger than 'say'."
+   }
+  },
+  "at": {
+   "ant": [],
+   "base": "at",
+   "col": [
+    "at the back",
+    "at least"
+   ],
+   "en": "in a place, time or level",
+   "es": "en; a",
+   "ex": "The shop opens at nine.",
+   "hi": "पर",
+   "ja": "〜で；〜に",
+   "ko": "~에",
+   "lvl": "A1",
+   "pos": "prep.",
+   "syn": [
+    "in",
+    "on"
+   ],
+   "zh": "在（地點、時間）；在…（價格）"
+  },
+  "attains": {
+   "zh": "達到",
+   "hi": "प्राप्त करता है",
+   "es": "alcanza",
+   "ja": "達成する",
+   "ko": "달성하다",
+   "en": "reaches or achieves",
+   "pos": "v.",
+   "base": "attain",
+   "lvl": "C1",
+   "syn": [
+    "reaches",
+    "achieves",
+    "gains"
+   ],
+   "ant": [
+    "misses"
+   ],
+   "ex": "She attained her goal after years of practice.",
+   "col": [
+    "attain a level",
+    "attain success"
+   ]
+  },
+  "await": {
+   "zh": "等待",
+   "hi": "प्रतीक्षा करना",
+   "es": "esperar",
+   "ja": "待つ",
+   "ko": "기다리다",
+   "en": "to wait for",
+   "pos": "v.",
+   "base": "await",
+   "lvl": "C1",
+   "syn": [
+    "wait for",
+    "expect"
+   ],
+   "ant": [],
+   "ex": "Passengers await news about the delayed flight.",
+   "col": [
+    "await a reply",
+    "eagerly await"
+   ]
+  },
+  "away": {
+   "zh": "在遠處；離開",
+   "hi": "दूर",
+   "es": "lejos",
+   "ja": "離れて",
+   "ko": "멀리",
+   "en": "at a distance",
+   "pos": "adv.",
+   "base": "away",
+   "lvl": "A1",
+   "syn": [
+    "off",
+    "distant"
+   ],
+   "ant": [
+    "near"
+   ],
+   "ex": "The station is two kilometers away.",
+   "col": [
+    "far away",
+    "go away"
+   ]
+  },
+  "bandwidth": {
+   "zh": "頻寬",
+   "hi": "बैंडविड्थ",
+   "es": "ancho de banda",
+   "ja": "帯域幅",
+   "ko": "대역폭",
+   "en": "the amount of data that can move at once",
+   "pos": "n.",
+   "base": "bandwidth",
+   "lvl": "C1",
+   "syn": [
+    "capacity",
+    "data rate"
+   ],
+   "ant": [],
+   "ex": "Video calls need a lot of bandwidth.",
+   "col": [
+    "memory bandwidth",
+    "high bandwidth"
+   ]
+  },
+  "batteries": {
+   "ant": [],
+   "base": "battery",
+   "en": "things that store and give electric power",
+   "es": "baterías",
+   "ex": "The remote control needs new batteries.",
+   "hi": "बैटरियाँ",
+   "ja": "電池",
+   "ko": "배터리",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "cells",
+    "power packs"
+   ],
+   "zh": "電池",
+   "col": [
+    "charge batteries",
+    "battery life"
+   ]
+  },
+  "before": {
+   "ant": [
+    "after",
+    "later"
+   ],
+   "base": "before",
+   "col": [
+    "the day before",
+    "never before"
+   ],
+   "en": "at an earlier time",
+   "es": "antes",
+   "ex": "I had never seen snow before.",
+   "hi": "पहले",
+   "ja": "以前は",
+   "ko": "전에는",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "previously",
+    "earlier",
+    "formerly"
+   ],
+   "zh": "以前"
+  },
+  "behind": {
+   "zh": "在…背後",
+   "hi": "के पीछे",
+   "es": "detrás de",
+   "ja": "〜の背後に",
+   "ko": "~뒤에",
+   "en": "causing or supporting something",
+   "pos": "prep.",
+   "base": "behind",
+   "lvl": "A2",
+   "syn": [
+    "supporting",
+    "underlying"
+   ],
+   "ant": [
+    "in front of"
+   ],
+   "ex": "Who is behind the new app?",
+   "col": [
+    "the idea behind",
+    "the technology behind"
+   ]
+  },
+  "being": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "being tested",
+    "being built"
+   ],
+   "en": "form of 'be' (passive, now)",
+   "es": "siendo",
+   "ex": "The road is being repaired.",
+   "hi": "किया जा रहा",
+   "ja": "〜されている",
+   "ko": "~되고 있는",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "getting"
+   ],
+   "zh": "正在被"
+  },
+  "better": {
+   "ant": [
+    "worse"
+   ],
+   "base": "good",
+   "col": [
+    "better for",
+    "much better"
+   ],
+   "en": "more good; more helpful",
+   "es": "mejor",
+   "ex": "Tuesday was better for Republicans.",
+   "hi": "बेहतर",
+   "ja": "より良い",
+   "ko": "더 나은",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "improved",
+    "finer",
+    "superior"
+   ],
+   "zh": "較好的；較有利"
+  },
+  "between": {
+   "base": "between",
+   "en": "in the space or time separating two things",
+   "es": "entre",
+   "hi": "के बीच",
+   "ja": "〜の間に",
+   "ko": "~ 사이에",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "在…之間"
+  },
+  "big": {
+   "ant": [
+    "small",
+    "little"
+   ],
+   "base": "big",
+   "col": [
+    "big problem",
+    "big group"
+   ],
+   "en": "large",
+   "es": "grande",
+   "ex": "They live in a big house.",
+   "hi": "बड़ा",
+   "ja": "大きい",
+   "ko": "큰",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "large",
+    "huge",
+    "major"
+   ],
+   "zh": "大的"
+  },
+  "both": {
+   "base": "both",
+   "en": "the two together",
+   "es": "ambos",
+   "hi": "दोनों",
+   "ja": "両方",
+   "ko": "양쪽 모두",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "雙方；兩者都"
+  },
+  "bottleneck": {
+   "ant": [
+    "shortcut"
+   ],
+   "base": "bottleneck",
+   "col": [
+    "a major bottleneck",
+    "remove bottlenecks"
+   ],
+   "en": "a point where work slows down",
+   "es": "cuello de botella",
+   "ex": "Old software is a bottleneck in the office.",
+   "hi": "अड़चन",
+   "ja": "ボトルネック",
+   "ko": "병목",
+   "lvl": "C1",
+   "pos": "n.",
+   "syn": [
+    "obstacle",
+    "hold-up",
+    "blockage"
+   ],
+   "zh": "瓶頸"
+  },
+  "built": {
+   "ant": [
+    "demolished"
+   ],
+   "base": "build",
+   "col": [
+    "newly built",
+    "purpose-built"
+   ],
+   "en": "made (a building)",
+   "es": "construido",
+   "ex": "The bridge was built in 1990.",
+   "hi": "बनाया गया",
+   "ja": "建てられた",
+   "ko": "지어진",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "constructed",
+    "erected",
+    "put up"
+   ],
+   "zh": "建造（build 的過去分詞）"
+  },
+  "by": {
+   "base": "by",
+   "en": "showing who did something",
+   "es": "por",
+   "hi": "द्वारा",
+   "ja": "〜によって",
+   "ko": "~에 의해",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "由；被"
+  },
+  "calculate": {
+   "zh": "計算",
+   "hi": "गणना करना",
+   "es": "calcular",
+   "ja": "計算する",
+   "ko": "계산하다",
+   "en": "to work out using numbers",
+   "pos": "v.",
+   "base": "calculate",
+   "lvl": "B1",
+   "syn": [
+    "compute",
+    "work out",
+    "count"
+   ],
+   "ant": [
+    "guess"
+   ],
+   "ex": "Can you calculate the total cost?",
+   "col": [
+    "calculate the cost",
+    "carefully calculate"
+   ]
+  },
+  "calculation": {
+   "zh": "計算",
+   "hi": "गणना",
+   "es": "cálculo",
+   "ja": "計算",
+   "ko": "계산",
+   "en": "the process of working something out with numbers",
+   "pos": "n.",
+   "base": "calculation",
+   "lvl": "B2",
+   "syn": [
+    "computation",
+    "sum",
+    "reckoning"
+   ],
+   "ant": [
+    "estimate"
+   ],
+   "ex": "The calculation took only a few seconds.",
+   "col": [
+    "heavy calculation",
+    "simple calculation"
+   ]
+  },
+  "calculations": {
+   "zh": "計算（複數）",
+   "hi": "गणनाएँ",
+   "es": "cálculos",
+   "ja": "計算",
+   "ko": "계산들",
+   "en": "acts of working things out with numbers",
+   "pos": "n.",
+   "base": "calculation",
+   "lvl": "B2",
+   "syn": [
+    "computations",
+    "sums"
+   ],
+   "ant": [
+    "estimates"
+   ],
+   "ex": "The calculations show the plan is too expensive.",
+   "col": [
+    "perform calculations",
+    "complex calculations"
+   ]
+  },
+  "can": {
+   "ant": [
+    "cannot"
+   ],
+   "base": "can",
+   "col": [
+    "can help",
+    "can block"
+   ],
+   "en": "to be able to",
+   "es": "poder",
+   "ex": "Anyone can join the club for free.",
+   "hi": "सकना",
+   "ja": "〜できる",
+   "ko": "~할 수 있다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "is able to",
+    "may"
+   ],
+   "zh": "能夠"
+  },
+  "capable": {
+   "ant": [
+    "incapable",
+    "unable"
+   ],
+   "base": "capable",
+   "col": [
+    "capable of",
+    "highly capable"
+   ],
+   "en": "able to do something well",
+   "es": "capaz",
+   "ex": "She is capable of running a big team.",
+   "hi": "सक्षम",
+   "ja": "〜できる；有能な",
+   "ko": "~할 수 있는",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "able",
+    "competent",
+    "qualified"
+   ],
+   "zh": "有能力的（capable of）"
+  },
+  "car": {
+   "ant": [],
+   "base": "car",
+   "col": [
+    "armoured car",
+    "small car"
+   ],
+   "en": "a vehicle with four wheels",
+   "es": "coche",
+   "ex": "The Serval is a small armoured car.",
+   "hi": "कार",
+   "ja": "車",
+   "ko": "자동차",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "vehicle",
+    "automobile",
+    "motor"
+   ],
+   "zh": "汽車"
+  },
+  "cars": {
+   "ant": [],
+   "base": "car",
+   "col": [
+    "electric cars",
+    "drive cars"
+   ],
+   "en": "road vehicles with engines",
+   "es": "coches",
+   "ex": "Too many cars use this narrow street.",
+   "hi": "कारें",
+   "ja": "車",
+   "ko": "자동차",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "vehicles",
+    "automobiles",
+    "motors"
+   ],
+   "zh": "汽車"
+  },
+  "centers": {
+   "zh": "中心",
+   "hi": "केंद्र",
+   "es": "centros",
+   "ja": "センター",
+   "ko": "센터",
+   "en": "buildings used for a special purpose",
+   "pos": "n.",
+   "base": "center",
+   "lvl": "A2",
+   "syn": [
+    "facilities",
+    "hubs",
+    "sites"
+   ],
+   "ant": [],
+   "ex": "Data centers use huge amounts of power.",
+   "col": [
+    "data centers",
+    "city centers"
+   ]
+  },
+  "chatbots": {
+   "zh": "聊天機器人",
+   "hi": "चैटबॉट",
+   "es": "chatbots",
+   "ja": "チャットボット",
+   "ko": "챗봇",
+   "en": "computer programs that talk with people",
+   "pos": "n.",
+   "base": "chatbot",
+   "lvl": "B2",
+   "syn": [
+    "AI assistants",
+    "virtual assistants"
+   ],
+   "ant": [],
+   "ex": "Many banks use chatbots to answer questions.",
+   "col": [
+    "AI chatbots",
+    "use chatbots"
+   ]
+  },
+  "chia-hsiang": {
+   "zh": "家驤（人名）",
+   "hi": "चिया-श्यांग (नाम)",
+   "es": "Chia-hsiang (nombre)",
+   "ja": "家驤（人名）",
+   "ko": "자샹 (이름)",
+   "en": "part of a Taiwanese name",
+   "pos": "n.",
+   "base": "Chia-hsiang",
+   "lvl": "PN"
+  },
+  "chip": {
+   "ant": [],
+   "base": "chip",
+   "en": "a small electronic part in computers",
+   "es": "chip",
+   "ex": "Every phone has a tiny computer chip inside.",
+   "hi": "चिप",
+   "ja": "半導体チップ",
+   "ko": "칩",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "microchip",
+    "semiconductor",
+    "processor"
+   ],
+   "zh": "晶片",
+   "col": [
+    "chip maker",
+    "computer chip"
+   ]
+  },
+  "chip's": {
+   "zh": "晶片的",
+   "hi": "चिप का",
+   "es": "del chip",
+   "ja": "チップの",
+   "ko": "칩의",
+   "en": "belonging to a chip",
+   "pos": "n.",
+   "base": "chip",
+   "lvl": "B1",
+   "syn": [
+    "processor’s",
+    "microchip’s"
+   ],
+   "ant": [],
+   "ex": "The chip's design saves a lot of power.",
+   "col": [
+    "a chip's energy",
+    "a chip's speed"
+   ]
+  },
+  "chips": {
+   "zh": "晶片",
+   "hi": "चिप्स",
+   "es": "chips",
+   "ja": "チップ；半導体",
+   "ko": "칩; 반도체",
+   "en": "small electronic parts that make computers work",
+   "pos": "n.",
+   "base": "chip",
+   "lvl": "A2",
+   "syn": [
+    "semiconductors",
+    "microchips",
+    "processors"
+   ],
+   "ant": [],
+   "ex": "Taiwan makes many of the world's chips.",
+   "col": [
+    "computer chips",
+    "advanced chips"
+   ]
+  },
+  "circuits": {
+   "zh": "電路",
+   "hi": "सर्किट",
+   "es": "circuitos",
+   "ja": "回路",
+   "ko": "회로",
+   "en": "paths that electricity flows through",
+   "pos": "n.",
+   "base": "circuit",
+   "lvl": "B2",
+   "syn": [
+    "electronics",
+    "wiring"
+   ],
+   "ant": [],
+   "ex": "The engineer tested the circuits one by one.",
+   "col": [
+    "electric circuits",
+    "integrated circuits"
+   ]
+  },
+  "cloud": {
+   "zh": "雲端",
+   "hi": "क्लाउड",
+   "es": "la nube",
+   "ja": "クラウド",
+   "ko": "클라우드",
+   "en": "internet-based computer services",
+   "pos": "n.",
+   "base": "cloud",
+   "lvl": "B1",
+   "syn": [
+    "online servers",
+    "internet"
+   ],
+   "ant": [
+    "local device"
+   ],
+   "ex": "I save my photos in the cloud.",
+   "col": [
+    "in the cloud",
+    "cloud storage"
+   ]
+  },
+  "committing": {
+   "zh": "投入；著手",
+   "hi": "प्रतिबद्ध करना",
+   "es": "comprometerse",
+   "ja": "踏み切る；投入する",
+   "ko": "착수하다",
+   "en": "deciding to start using effort or resources",
+   "pos": "v.",
+   "base": "commit",
+   "lvl": "C1",
+   "syn": [
+    "devoting",
+    "starting",
+    "pledging"
+   ],
+   "ant": [
+    "withholding"
+   ],
+   "ex": "Think carefully before committing your money.",
+   "col": [
+    "commit to",
+    "commit resources"
+   ]
+  },
+  "comparable": {
+   "ant": [
+    "different",
+    "dissimilar"
+   ],
+   "base": "comparable",
+   "col": [
+    "broadly comparable",
+    "comparable to"
+   ],
+   "en": "similar; able to be compared",
+   "es": "comparables; similares",
+   "ex": "Prices here are comparable to those in Paris.",
+   "hi": "समान; तुलनीय",
+   "ja": "同様の",
+   "ko": "비슷한",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "similar",
+    "equivalent",
+    "alike"
+   ],
+   "zh": "類似的；可相比的"
+  },
+  "computation": {
+   "zh": "運算",
+   "hi": "संगणना",
+   "es": "cálculo; computación",
+   "ja": "演算",
+   "ko": "연산",
+   "en": "the work of calculating, especially by computer",
+   "pos": "n.",
+   "base": "computation",
+   "lvl": "C1",
+   "syn": [
+    "calculation",
+    "processing"
+   ],
+   "ant": [],
+   "ex": "The computation needs a powerful machine.",
+   "col": [
+    "intensive computation",
+    "fast computation"
+   ]
+  },
+  "compute": {
+   "zh": "運算；計算",
+   "hi": "गणना करना",
+   "es": "calcular",
+   "ja": "計算する",
+   "ko": "계산하다",
+   "en": "to calculate, especially by computer",
+   "pos": "v.",
+   "base": "compute",
+   "lvl": "C1",
+   "syn": [
+    "calculate",
+    "work out",
+    "process"
+   ],
+   "ant": [
+    "estimate"
+   ],
+   "ex": "The program can compute the answer instantly.",
+   "col": [
+    "compute the cost",
+    "compute data"
+   ]
+  },
+  "computer": {
+   "ant": [],
+   "base": "computer",
+   "col": [
+    "computer system",
+    "computer project"
+   ],
+   "en": "an electronic machine that processes data",
+   "es": "informático",
+   "ex": "The school bought new computers.",
+   "hi": "कंप्यूटर",
+   "ja": "コンピューター",
+   "ko": "컴퓨터",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "PC",
+    "machine"
+   ],
+   "zh": "電腦"
+  },
+  "computers": {
+   "ant": [],
+   "base": "computer",
+   "col": [
+    "personal computers",
+    "powerful computers"
+   ],
+   "en": "electronic machines that process data",
+   "es": "ordenadores",
+   "ex": "Our school bought new computers this year.",
+   "hi": "कंप्यूटर",
+   "ja": "コンピューター",
+   "ko": "컴퓨터",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "machines",
+    "PCs",
+    "devices"
+   ],
+   "zh": "電腦"
+  },
+  "computing": {
+   "zh": "運算；計算",
+   "hi": "गणना करना",
+   "es": "calculando",
+   "ja": "計算すること",
+   "ko": "연산",
+   "en": "calculating, especially by computer",
+   "pos": "v.",
+   "base": "compute",
+   "lvl": "B2",
+   "syn": [
+    "calculating",
+    "processing"
+   ],
+   "ant": [],
+   "ex": "Computing the result took one second.",
+   "col": [
+    "cloud computing",
+    "computing power"
+   ]
+  },
+  "conference": {
+   "zh": "會議；研討會",
+   "hi": "सम्मेलन",
+   "es": "conferencia",
+   "ja": "会議",
+   "ko": "회의",
+   "en": "a large formal meeting",
+   "pos": "n.",
+   "base": "conference",
+   "lvl": "B1",
+   "syn": [
+    "meeting",
+    "symposium",
+    "convention"
+   ],
+   "ant": [],
+   "ex": "She spoke at a science conference.",
+   "col": [
+    "international conference",
+    "attend a conference"
+   ]
+  },
+  "connection": {
+   "zh": "連線",
+   "hi": "कनेक्शन",
+   "es": "conexión",
+   "ja": "接続",
+   "ko": "연결",
+   "en": "a link to the internet or a network",
+   "pos": "n.",
+   "base": "connection",
+   "lvl": "B1",
+   "syn": [
+    "link",
+    "signal"
+   ],
+   "ant": [
+    "disconnection"
+   ],
+   "ex": "The internet connection is slow today.",
+   "col": [
+    "internet connection",
+    "poor connection"
+   ]
+  },
+  "connections": {
+   "zh": "連線",
+   "hi": "कनेक्शन",
+   "es": "conexiones",
+   "ja": "接続",
+   "ko": "연결",
+   "en": "links to the internet or a network",
+   "pos": "n.",
+   "base": "connection",
+   "lvl": "B1",
+   "syn": [
+    "links",
+    "signals"
+   ],
+   "ant": [],
+   "ex": "Connections are weak in the countryside.",
+   "col": [
+    "network connections",
+    "unreliable connections"
+   ]
+  },
+  "connectivity": {
+   "zh": "連線能力",
+   "hi": "कनेक्टिविटी",
+   "es": "conectividad",
+   "ja": "接続性",
+   "ko": "연결성",
+   "en": "the ability to connect to a network",
+   "pos": "n.",
+   "base": "connectivity",
+   "lvl": "C1",
+   "syn": [
+    "connection",
+    "network access",
+    "coverage"
+   ],
+   "ant": [
+    "isolation"
+   ],
+   "ex": "Rural areas often have poor connectivity.",
+   "col": [
+    "internet connectivity",
+    "poor connectivity"
+   ]
+  },
+  "consecutive": {
+   "zh": "連續的",
+   "hi": "लगातार",
+   "es": "consecutivo",
+   "ja": "連続した",
+   "ko": "연속된",
+   "en": "following one after another without a break",
+   "pos": "adj.",
+   "base": "consecutive",
+   "lvl": "B2",
+   "syn": [
+    "successive",
+    "straight",
+    "in a row",
+    "running"
+   ],
+   "ant": [
+    "interrupted",
+    "broken"
+   ],
+   "ex": "It rained for five consecutive days.",
+   "col": [
+    "consecutive days",
+    "second consecutive"
+   ],
+   "note": {
+    "collocations": [
+     "consecutive months",
+     "consecutive years",
+     "for the third consecutive"
+    ],
+    "example": {
+     "en": "Exports grew for the fifth consecutive month.",
+     "zh": "出口連續第五個月成長。"
+    },
+    "meaning": "連續的。",
+    "usage": "常見 the third consecutive year；for X consecutive months。"
+   },
+   "noteHi": {
+    "exampleTr": "निर्यात लगातार पाँचवें महीने बढ़ा।",
+    "meaning": "लगातार; बिना रुके एक के बाद एक।",
+    "usage": "for the third consecutive month जैसे प्रयोग आम हैं।"
+   },
+   "noteEs": {
+    "exampleTr": "Las exportaciones crecieron por quinto mes consecutivo.",
+    "meaning": "consecutivo.",
+    "usage": "Se usa for the third consecutive year."
+   },
+   "noteJa": {
+    "exampleTr": "輸出は5か月連続で伸びた。",
+    "meaning": "連続した。",
+    "usage": "for the third consecutive year の形が多い。"
+   },
+   "noteKo": {
+    "exampleTr": "수출이 5개월 연속 증가했다.",
+    "meaning": "연속적인.",
+    "usage": "for the third consecutive month 형태가 흔하다."
+   },
+   "noteEn": {
+    "meaning": "following one after another without a break.",
+    "usage": "Common: 'for the 21st consecutive month', 'consecutive days'."
+   }
+  },
+  "consistent": {
+   "ant": [
+    "inconsistent",
+    "uneven"
+   ],
+   "base": "consistent",
+   "col": [
+    "consistent treatment",
+    "consistent approach"
+   ],
+   "en": "the same in every case",
+   "es": "coherente; uniforme",
+   "ex": "Rules should be consistent across schools.",
+   "hi": "सुसंगत; एक जैसा",
+   "ja": "一貫した",
+   "ko": "일관된",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "uniform",
+    "equal",
+    "standard"
+   ],
+   "zh": "一致的"
+  },
+  "constraints": {
+   "ant": [
+    "freedoms"
+   ],
+   "base": "constraint",
+   "col": [
+    "budget constraints",
+    "financial constraints"
+   ],
+   "en": "things that limit what you can do",
+   "es": "restricciones",
+   "ex": "Budget constraints delayed the new hospital.",
+   "hi": "बाधाएँ",
+   "ja": "制約",
+   "ko": "제약들",
+   "lvl": "C1",
+   "pos": "n.",
+   "syn": [
+    "limitations",
+    "restrictions",
+    "limits"
+   ],
+   "zh": "限制；約束",
+   "note": {
+    "collocations": [
+     "budget constraints",
+     "financial constraints",
+     "capacity constraints"
+    ],
+    "example": {
+     "en": "Budget constraints forced the council to cut services.",
+     "zh": "預算限制迫使議會削減服務。"
+    },
+    "meaning": "限制；約束條件。",
+    "usage": "常見 budget/financial constraints；under constraints。"
+   },
+   "noteHi": {
+    "exampleTr": "बजट की सीमाओं ने परिषद को सेवाएँ घटाने पर मजबूर किया।",
+    "meaning": "बाधा; सीमा।",
+    "usage": "budget/financial constraints आम हैं।"
+   },
+   "noteEs": {
+    "exampleTr": "Las restricciones presupuestarias obligaron al ayuntamiento a recortar servicios.",
+    "meaning": "restricción; limitación.",
+    "usage": "Se usa budget/financial constraints."
+   },
+   "noteJa": {
+    "exampleTr": "予算の制約で市はサービスを削減した。",
+    "meaning": "制約；制限。",
+    "usage": "budget/financial constraints の形が多い。"
+   },
+   "noteKo": {
+    "exampleTr": "예산 제약으로 시의회는 서비스를 줄였다.",
+    "meaning": "제약; 제한.",
+    "usage": "budget/financial constraints 형태가 흔하다."
+   },
+   "noteEn": {
+    "meaning": "a limit on what you can do.",
+    "usage": "Common: \"budget constraints\"."
+   }
+  },
+  "consumes": {
+   "zh": "消耗",
+   "hi": "खपत करता है",
+   "es": "consume",
+   "ja": "消費する",
+   "ko": "소비하다",
+   "en": "uses up energy or resources",
+   "pos": "v.",
+   "base": "consume",
+   "lvl": "B2",
+   "syn": [
+    "uses",
+    "uses up",
+    "burns"
+   ],
+   "ant": [
+    "saves"
+   ],
+   "ex": "An old fridge consumes a lot of electricity.",
+   "col": [
+    "consume energy",
+    "consume time"
+   ]
+  },
+  "consumption": {
+   "ant": [
+    "saving",
+    "conservation"
+   ],
+   "base": "consumption",
+   "col": [
+    "energy consumption",
+    "domestic consumption"
+   ],
+   "en": "the amount of something used",
+   "es": "consumo",
+   "ex": "Fuel consumption drops at lower speeds.",
+   "hi": "खपत",
+   "ja": "消費",
+   "ko": "소비",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "use",
+    "usage",
+    "intake"
+   ],
+   "zh": "消耗量"
+  },
+  "contemporary": {
+   "ant": [
+    "past",
+    "historic"
+   ],
+   "base": "contemporary",
+   "col": [
+    "contemporary society",
+    "contemporary standards"
+   ],
+   "en": "belonging to the present time",
+   "es": "contemporáneo",
+   "ex": "Contemporary life moves very fast.",
+   "hi": "समकालीन",
+   "ja": "現代の",
+   "ko": "현대의",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "modern",
+    "current",
+    "present-day"
+   ],
+   "zh": "當代的；現今的",
+   "note": {
+    "meaning": "當代的；現今的。",
+    "usage": "形容詞放名詞前：contemporary art/society；比 modern 更正式。",
+    "collocations": [
+     "contemporary society",
+     "contemporary art",
+     "contemporary issues"
+    ],
+    "example": {
+     "en": "Smartphones shape contemporary life in many ways.",
+     "zh": "智慧型手機在許多方面塑造了當代生活。"
+    }
+   },
+   "noteHi": {
+    "meaning": "वर्तमान समय का; समकालीन।",
+    "usage": "संज्ञा से पहले: contemporary art/society।",
+    "exampleTr": "स्मार्टफ़ोन कई तरह से समकालीन जीवन को आकार देते हैं।"
+   },
+   "noteEs": {
+    "meaning": "actual; de nuestra época.",
+    "usage": "Delante del sustantivo: contemporary art/society; más formal que modern.",
+    "exampleTr": "Los teléfonos inteligentes moldean la vida contemporánea de muchas formas."
+   },
+   "noteJa": {
+    "meaning": "現代の、同時代の。",
+    "usage": "名詞の前で：contemporary art/society。modern より硬い。",
+    "exampleTr": "スマートフォンはさまざまな形で現代生活を形作っている。"
+   },
+   "noteKo": {
+    "meaning": "현대의, 동시대의.",
+    "usage": "명사 앞: contemporary art/society; modern보다 격식체.",
+    "exampleTr": "스마트폰은 여러 면에서 현대 생활을 형성한다."
+   },
+   "noteEn": {
+    "meaning": "belonging to the present time.",
+    "usage": "Before a noun: 'contemporary art/society'; more formal than 'modern'."
+   }
+  },
+  "contrast": {
+   "ant": [
+    "similarity"
+   ],
+   "base": "contrast",
+   "col": [
+    "by contrast",
+    "in contrast to"
+   ],
+   "en": "a clear difference (by contrast)",
+   "es": "contraste (por el contrario)",
+   "ex": "By contrast, rents in the west fell.",
+   "hi": "विपरीत (by contrast)",
+   "ja": "対照（by contrast：対照的に）",
+   "ko": "대조(by contrast: 대조적으로)",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "difference",
+    "comparison"
+   ],
+   "zh": "對比（by contrast：相比之下）"
+  },
+  "council": {
+   "ant": [],
+   "base": "council",
+   "col": [
+    "advisory council",
+    "council meeting"
+   ],
+   "en": "an official group that gives advice or decides",
+   "es": "consejo",
+   "ex": "The council will publish a report.",
+   "hi": "परिषद",
+   "ja": "評議会；委員会",
+   "ko": "위원회",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "board",
+    "committee",
+    "body"
+   ],
+   "zh": "委員會；理事會"
+  },
+  "created": {
+   "ant": [
+    "removed"
+   ],
+   "base": "create",
+   "col": [
+    "create paperwork",
+    "create problems"
+   ],
+   "en": "caused something to exist",
+   "es": "creó",
+   "ex": "The new law created lots of paperwork.",
+   "hi": "पैदा किया",
+   "ja": "生み出した",
+   "ko": "만들어 냈다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "caused",
+    "produced",
+    "made"
+   ],
+   "zh": "造成；產生"
+  },
+  "crucial": {
+   "ant": [
+    "minor"
+   ],
+   "base": "crucial",
+   "col": [
+    "crucial meeting",
+    "crucial role"
+   ],
+   "en": "very important",
+   "es": "crucial; decisivo",
+   "ex": "This is a crucial moment for the team.",
+   "hi": "महत्वपूर्ण",
+   "ja": "極めて重要な",
+   "ko": "결정적인; 중요한",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "vital",
+    "key",
+    "critical",
+    "decisive"
+   ],
+   "zh": "關鍵的"
+  },
+  "currently": {
+   "ant": [
+    "previously"
+   ],
+   "base": "currently",
+   "col": [
+    "currently available",
+    "is currently"
+   ],
+   "en": "now",
+   "es": "actualmente",
+   "ex": "The road is currently closed.",
+   "hi": "वर्तमान में",
+   "ja": "現在",
+   "ko": "현재",
+   "lvl": "B1",
+   "pos": "adv.",
+   "syn": [
+    "now",
+    "at present",
+    "presently"
+   ],
+   "zh": "目前"
+  },
+  "data": {
+   "ant": [],
+   "base": "data",
+   "col": [
+    "user data",
+    "data centres"
+   ],
+   "en": "facts and numbers collected for study",
+   "es": "datos",
+   "ex": "The app collects data about your location.",
+   "hi": "डेटा; आँकड़े",
+   "ja": "データ",
+   "ko": "데이터",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "information",
+    "figures",
+    "statistics"
+   ],
+   "zh": "數據；資料"
+  },
+  "dataset": {
+   "zh": "資料集",
+   "hi": "डेटासेट",
+   "es": "conjunto de datos",
+   "ja": "データセット",
+   "ko": "데이터 세트",
+   "en": "a collection of related data",
+   "pos": "n.",
+   "base": "dataset",
+   "lvl": "C1",
+   "syn": [
+    "data collection",
+    "database"
+   ],
+   "ant": [],
+   "ex": "The team trained the model on a large dataset.",
+   "col": [
+    "large dataset",
+    "training dataset"
+   ]
+  },
+  "deceptively": {
+   "zh": "看似…實則不然地",
+   "hi": "भ्रामक रूप से",
+   "es": "engañosamente",
+   "ja": "一見〜だが実は",
+   "ko": "겉보기에",
+   "en": "in a way that seems one thing but is another",
+   "pos": "adv.",
+   "base": "deceptively",
+   "lvl": "C2",
+   "syn": [
+    "misleadingly",
+    "surprisingly"
+   ],
+   "ant": [],
+   "ex": "The test is deceptively easy.",
+   "col": [
+    "deceptively simple",
+    "deceptively easy"
+   ]
+  },
+  "delivers": {
+   "ant": [
+    "withholds"
+   ],
+   "base": "deliver",
+   "col": [
+    "delivers rain",
+    "delivers results"
+   ],
+   "en": "brings or produces something",
+   "es": "trae; entrega",
+   "ex": "The storm delivers heavy rain to the coast.",
+   "hi": "लाता है; पहुँचाता है",
+   "ja": "もたらす",
+   "ko": "가져오다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "brings",
+    "produces",
+    "provides"
+   ],
+   "zh": "帶來；遞送"
+  },
+  "department": {
+   "ant": [],
+   "base": "department",
+   "col": [
+    "Department of Health",
+    "government department"
+   ],
+   "en": "a part of the government",
+   "es": "departamento",
+   "ex": "The Department of Education sets the rules.",
+   "hi": "विभाग",
+   "ja": "省",
+   "ko": "부처",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "ministry",
+    "office",
+    "section"
+   ],
+   "zh": "（政府）部"
+  },
+  "depend": {
+   "ant": [
+    "be independent"
+   ],
+   "base": "depend",
+   "col": [
+    "depend on",
+    "heavily depend"
+   ],
+   "en": "to need for support",
+   "es": "depender",
+   "ex": "Many families depend on one income.",
+   "hi": "निर्भर होना",
+   "ja": "頼る",
+   "ko": "의존하다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "rely",
+    "count on",
+    "need"
+   ],
+   "zh": "依靠"
+  },
+  "dependent": {
+   "zh": "依賴的（dependent on）",
+   "hi": "निर्भर",
+   "es": "dependiente",
+   "ja": "依存している",
+   "ko": "의존하는",
+   "en": "needing something in order to work",
+   "pos": "adj.",
+   "base": "dependent",
+   "lvl": "B2",
+   "syn": [
+    "reliant",
+    "relying"
+   ],
+   "ant": [
+    "independent"
+   ],
+   "ex": "The town is dependent on tourism.",
+   "col": [
+    "dependent on",
+    "heavily dependent"
+   ]
+  },
+  "deployment": {
+   "zh": "部署；實際應用",
+   "hi": "तैनाती; उपयोग",
+   "es": "despliegue; uso",
+   "ja": "展開；運用",
+   "ko": "배치; 활용",
+   "en": "putting something into use",
+   "pos": "n.",
+   "base": "deployment",
+   "lvl": "C1",
+   "syn": [
+    "use",
+    "rollout",
+    "application"
+   ],
+   "ant": [
+    "withdrawal"
+   ],
+   "ex": "The deployment of new software took a week.",
+   "col": [
+    "AI deployment",
+    "rapid deployment"
+   ]
+  },
+  "described": {
+   "ant": [],
+   "base": "describe",
+   "col": [
+    "described as",
+    "describe a trend"
+   ],
+   "en": "said what something is like",
+   "es": "describió",
+   "ex": "She described the city as noisy.",
+   "hi": "वर्णन किया",
+   "ja": "説明した",
+   "ko": "묘사했다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "portrayed",
+    "explained",
+    "called"
+   ],
+   "zh": "描述"
+  },
+  "designed": {
+   "ant": [],
+   "base": "design",
+   "en": "planned for a purpose",
+   "es": "diseñado",
+   "ex": "The course is designed for beginners.",
+   "hi": "बनाया गया",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "intended",
+    "meant",
+    "planned"
+   ],
+   "zh": "設計用來",
+   "ja": "〜のために設計された",
+   "ko": "~하도록 설계된",
+   "col": [
+    "designed to",
+    "well designed"
+   ]
+  },
+  "designs": {
+   "base": "design",
+   "pos": "v.",
+   "lvl": "B1",
+   "zh": "設計",
+   "hi": "डिज़ाइन करता है",
+   "es": "diseña",
+   "ja": "設計する",
+   "ko": "설계하다",
+   "en": "plans and makes something",
+   "syn": [
+    "plans",
+    "creates",
+    "develops"
+   ],
+   "ant": [],
+   "ex": "She designs houses for families.",
+   "col": [
+    "design a product",
+    "design and build"
+   ]
+  },
+  "developed": {
+   "zh": "研發；開發",
+   "hi": "विकसित किया",
+   "es": "desarrollado",
+   "ja": "開発した",
+   "ko": "개발했다",
+   "en": "created or made something new",
+   "pos": "v.",
+   "base": "develop",
+   "lvl": "A2",
+   "syn": [
+    "created",
+    "built",
+    "designed"
+   ],
+   "ant": [],
+   "ex": "The team developed a new app.",
+   "col": [
+    "develop a product",
+    "newly developed"
+   ]
+  },
+  "device": {
+   "ant": [],
+   "base": "device",
+   "col": [
+    "a medical device",
+    "an electronic device"
+   ],
+   "en": "a machine or tool made for a purpose",
+   "es": "dispositivo",
+   "ex": "This small device measures your heart rate.",
+   "hi": "उपकरण",
+   "ja": "装置",
+   "ko": "장치",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "gadget",
+    "tool",
+    "instrument",
+    "machine"
+   ],
+   "zh": "裝置"
+  },
+  "devices": {
+   "ant": [],
+   "base": "device",
+   "col": [
+    "recording devices",
+    "smart devices"
+   ],
+   "en": "machines or tools with a special use",
+   "es": "dispositivos",
+   "ex": "Turn off all devices in class.",
+   "hi": "उपकरण",
+   "ja": "機器",
+   "ko": "기기",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "gadgets",
+    "machines",
+    "tools"
+   ],
+   "zh": "裝置"
+  },
+  "directly": {
+   "ant": [
+    "indirectly"
+   ],
+   "base": "directly",
+   "col": [
+    "directly to",
+    "flow directly"
+   ],
+   "en": "without going through others",
+   "es": "directamente",
+   "ex": "The money goes directly to the school.",
+   "hi": "सीधे",
+   "ja": "直接に",
+   "ko": "직접",
+   "lvl": "B1",
+   "pos": "adv.",
+   "syn": [
+    "straight",
+    "immediately"
+   ],
+   "zh": "直接地"
+  },
+  "disproportionate": {
+   "ant": [
+    "proportionate",
+    "balanced"
+   ],
+   "base": "disproportionate",
+   "col": [
+    "disproportionate share",
+    "disproportionate impact"
+   ],
+   "en": "too large compared with something else",
+   "es": "desproporcionado",
+   "ex": "Poor families pay a disproportionate share of costs.",
+   "hi": "असमान",
+   "ja": "不釣り合いな",
+   "ko": "불균형적인",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "excessive",
+    "unequal",
+    "uneven"
+   ],
+   "zh": "不成比例的",
+   "note": {
+    "collocations": [
+     "disproportionate share",
+     "disproportionate impact",
+     "disproportionate to"
+    ],
+    "example": {
+     "en": "Low-income families bear a disproportionate share of energy costs.",
+     "zh": "低收入家庭承擔了不成比例的能源成本。"
+    },
+    "meaning": "不成比例的、過多的。",
+    "usage": "常見 a disproportionate share/impact/number；後接 to。"
+   },
+   "noteHi": {
+    "exampleTr": "कम आय वाले परिवार ऊर्जा लागत का असमान रूप से बड़ा हिस्सा उठाते हैं।",
+    "meaning": "अनुपात से अधिक; असमान।",
+    "usage": "a disproportionate share/impact आम प्रयोग है।"
+   },
+   "noteEs": {
+    "exampleTr": "Las familias con bajos ingresos soportan una parte desproporcionada del coste energético.",
+    "meaning": "desproporcionado; excesivo en relación con algo.",
+    "usage": "Común: a disproportionate share/impact; seguido de to."
+   },
+   "noteJa": {
+    "exampleTr": "低所得世帯はエネルギー費の不釣り合いな負担を負っている。",
+    "meaning": "不釣り合いな；過大な。",
+    "usage": "a disproportionate share/impact の形が多い。"
+   },
+   "noteKo": {
+    "exampleTr": "저소득 가정이 에너지 비용을 불균형적으로 많이 부담한다.",
+    "meaning": "불균형적인; 지나치게 큰.",
+    "usage": "a disproportionate share/impact 형태가 흔하다."
+   },
+   "noteEn": {
+    "meaning": "too large compared with something else.",
+    "usage": "Common: 'a disproportionate share', 'disproportionate impact'."
+   }
+  },
+  "disseminated": {
+   "zh": "發表；傳播",
+   "hi": "प्रसारित किया",
+   "es": "difundidos",
+   "ja": "発表された；広められた",
+   "ko": "발표된; 전파된",
+   "en": "spread or shared widely",
+   "pos": "v.",
+   "base": "disseminate",
+   "lvl": "C2",
+   "syn": [
+    "spread",
+    "shared",
+    "circulated",
+    "published"
+   ],
+   "ant": [
+    "withheld",
+    "concealed"
+   ],
+   "ex": "The results were disseminated to doctors nationwide.",
+   "col": [
+    "disseminate information",
+    "widely disseminated"
+   ],
+   "note": {
+    "meaning": "傳播；發表（研究成果、資訊）。",
+    "usage": "多用被動：be disseminated to/through；學術寫作常見，比 spread 正式。",
+    "collocations": [
+     "disseminate information",
+     "widely disseminated",
+     "disseminate findings"
+    ],
+    "example": {
+     "en": "The findings were widely disseminated through journals.",
+     "zh": "這些研究結果透過期刊廣泛傳播。"
+    }
+   },
+   "noteHi": {
+    "meaning": "जानकारी या शोध को व्यापक रूप से फैलाया गया।",
+    "usage": "अक्सर passive में: be disseminated to/through।",
+    "exampleTr": "शोध के परिणाम पत्रिकाओं के माध्यम से व्यापक रूप से प्रसारित किए गए।"
+   },
+   "noteEs": {
+    "meaning": "difundir información o resultados.",
+    "usage": "Suele usarse en pasiva: be disseminated to/through.",
+    "exampleTr": "Los resultados se difundieron ampliamente a través de revistas."
+   },
+   "noteJa": {
+    "meaning": "（情報・研究成果を）広める、発表する。",
+    "usage": "受動態 be disseminated to/through が多い。spread より硬い表現。",
+    "exampleTr": "研究結果は学術誌を通じて広く発表された。"
+   },
+   "noteKo": {
+    "meaning": "(정보·연구 결과를) 퍼뜨리다, 발표하다.",
+    "usage": "수동태 be disseminated to/through 형태가 흔함.",
+    "exampleTr": "연구 결과는 학술지를 통해 널리 알려졌다."
+   },
+   "noteEn": {
+    "meaning": "spread information or research widely.",
+    "usage": "Often passive: 'be disseminated to/through'; more formal than 'spread'."
+   }
+  },
+  "distant": {
+   "ant": [
+    "close",
+    "near"
+   ],
+   "base": "distant",
+   "col": [
+    "a distant prospect",
+    "remain distant"
+   ],
+   "en": "far away in time",
+   "es": "lejano",
+   "ex": "A deal is a distant hope.",
+   "hi": "दूर का",
+   "ja": "遠い",
+   "ko": "먼",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "remote",
+    "far-off"
+   ],
+   "zh": "遙遠的"
+  },
+  "do": {
+   "ant": [],
+   "base": "do",
+   "col": [
+    "do work",
+    "do business"
+   ],
+   "en": "helping verb",
+   "es": "(auxiliar)",
+   "ex": "Do you want to join us?",
+   "hi": "(सहायक क्रिया)",
+   "ja": "（助動詞）",
+   "ko": "(조동사)",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "perform",
+    "carry out",
+    "act"
+   ],
+   "zh": "（助動詞）"
+  },
+  "documented": {
+   "ant": [],
+   "base": "document",
+   "col": [
+    "well documented",
+    "documented cases"
+   ],
+   "en": "recorded in writing or photos",
+   "es": "documentado",
+   "ex": "The changes were documented in a report.",
+   "hi": "दर्ज किया गया",
+   "ja": "記録された",
+   "ko": "기록된",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "recorded",
+    "logged",
+    "noted"
+   ],
+   "zh": "記錄在案"
+  },
+  "does": {
+   "ant": [],
+   "base": "do",
+   "col": [
+    "does not matter",
+    "does well"
+   ],
+   "en": "carries out; performs",
+   "es": "hace; realiza",
+   "ex": "He does his homework after dinner.",
+   "hi": "करता है",
+   "ja": "行う",
+   "ko": "실시한다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "carries out",
+    "conducts",
+    "performs"
+   ],
+   "zh": "做；進行（does a survey：做調查）"
+  },
+  "doing": {
+   "base": "do",
+   "pos": "v.",
+   "lvl": "A1",
+   "zh": "做",
+   "hi": "कर रहा",
+   "es": "haciendo",
+   "ja": "している",
+   "ko": "하고 있는",
+   "en": "performing an action",
+   "syn": [
+    "performing",
+    "carrying out"
+   ],
+   "ant": [],
+   "ex": "He is doing his homework.",
+   "col": [
+    "doing a good job",
+    "doing well"
+   ]
+  },
+  "done": {
+   "ant": [],
+   "base": "do",
+   "col": [
+    "have done nothing",
+    "done well"
+   ],
+   "en": "carried out; performed",
+   "es": "hecho",
+   "ex": "Have you done your homework?",
+   "hi": "किया",
+   "ja": "行った",
+   "ko": "해 왔다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "completed",
+    "carried out",
+    "finished"
+   ],
+   "zh": "做；完成（have done nothing）"
+  },
+  "earlier": {
+   "ant": [
+    "later"
+   ],
+   "base": "earlier",
+   "col": [
+    "earlier this year",
+    "as mentioned earlier"
+   ],
+   "en": "at a time before now",
+   "es": "anteriormente",
+   "ex": "She had called earlier that day.",
+   "hi": "पहले",
+   "ja": "以前に",
+   "ko": "앞서",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "previously",
+    "before",
+    "formerly"
+   ],
+   "zh": "先前"
+  },
+  "ease": {
+   "zh": "緩解；減輕",
+   "hi": "कम करना",
+   "es": "aliviar",
+   "ja": "緩和する",
+   "ko": "완화하다",
+   "en": "to make a problem less serious",
+   "pos": "v.",
+   "base": "ease",
+   "lvl": "B2",
+   "syn": [
+    "relieve",
+    "reduce",
+    "lessen"
+   ],
+   "ant": [
+    "worsen"
+   ],
+   "ex": "A new road will ease traffic.",
+   "col": [
+    "ease pressure",
+    "ease constraints"
+   ]
+  },
+  "efficiency": {
+   "ant": [
+    "waste"
+   ],
+   "base": "efficiency",
+   "col": [
+    "energy efficiency",
+    "improve efficiency"
+   ],
+   "en": "using less energy or waste",
+   "es": "eficiencia",
+   "ex": "Better insulation raises energy efficiency.",
+   "hi": "दक्षता",
+   "ja": "効率",
+   "ko": "효율",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "effectiveness",
+    "economy"
+   ],
+   "zh": "效率（energy efficiency：能源效率）"
+  },
+  "efficient": {
+   "ant": [
+    "inefficient"
+   ],
+   "base": "efficient",
+   "col": [
+    "more efficient",
+    "highly efficient"
+   ],
+   "en": "working well without wasting time",
+   "es": "eficiente",
+   "ex": "The new system is more efficient.",
+   "hi": "कुशल",
+   "ja": "効率的な",
+   "ko": "효율적인",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "effective",
+    "productive",
+    "quick"
+   ],
+   "zh": "有效率的"
+  },
+  "electrical": {
+   "zh": "電的；電氣的",
+   "hi": "विद्युत",
+   "es": "eléctrico",
+   "ja": "電気の",
+   "ko": "전기의",
+   "en": "connected with electricity",
+   "pos": "adj.",
+   "base": "electrical",
+   "lvl": "B1",
+   "syn": [
+    "electric",
+    "power"
+   ],
+   "ant": [],
+   "ex": "An electrical fault stopped the lift.",
+   "col": [
+    "electrical systems",
+    "electrical fault"
+   ]
+  },
+  "enables": {
+   "ant": [
+    "prevents",
+    "stops"
+   ],
+   "base": "enable",
+   "col": [
+    "enables someone to",
+    "enables growth"
+   ],
+   "en": "makes it possible for someone",
+   "es": "permite",
+   "ex": "The app enables users to pay by phone.",
+   "hi": "सक्षम बनाता है",
+   "ja": "可能にする",
+   "ko": "가능하게 하다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "allows",
+    "permits",
+    "lets"
+   ],
+   "zh": "使能夠"
+  },
+  "energy": {
+   "ant": [],
+   "base": "energy",
+   "col": [
+    "battery energy",
+    "energy storage"
+   ],
+   "en": "power such as electricity or gas",
+   "es": "energía",
+   "ex": "Energy prices rose this winter.",
+   "hi": "ऊर्जा",
+   "ja": "エネルギー",
+   "ko": "에너지",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "power",
+    "electricity",
+    "fuel"
+   ],
+   "zh": "能源"
+  },
+  "energy-efficient": {
+   "zh": "節能的",
+   "hi": "ऊर्जा-कुशल",
+   "es": "eficiente energéticamente",
+   "ja": "省エネの",
+   "ko": "에너지 효율적인",
+   "en": "using little energy to do a job",
+   "pos": "adj.",
+   "base": "energy-efficient",
+   "lvl": "B2",
+   "syn": [
+    "low-power",
+    "power-saving",
+    "economical"
+   ],
+   "ant": [
+    "wasteful"
+   ],
+   "ex": "We bought an energy-efficient washing machine.",
+   "col": [
+    "energy-efficient design",
+    "energy-efficient homes"
+   ]
+  },
+  "engineering": {
+   "ant": [],
+   "base": "engineering",
+   "col": [
+    "engineering firm",
+    "civil engineering"
+   ],
+   "en": "designing and building machines or roads",
+   "es": "ingeniería",
+   "ex": "She studied engineering at university.",
+   "hi": "इंजीनियरिंग",
+   "ja": "エンジニアリング",
+   "ko": "공학",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "design",
+    "construction"
+   ],
+   "zh": "工程"
+  },
+  "engineers": {
+   "ant": [],
+   "base": "engineer",
+   "col": [
+    "chip engineers",
+    "software engineers"
+   ],
+   "en": "people who design or build machines and systems",
+   "es": "ingenieros",
+   "ex": "Engineers tested the bridge after the storm.",
+   "hi": "इंजीनियर",
+   "ja": "技術者",
+   "ko": "엔지니어들",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "technicians",
+    "designers",
+    "developers"
+   ],
+   "zh": "工程師"
+  },
+  "entirely": {
+   "ant": [
+    "partly"
+   ],
+   "base": "entirely",
+   "en": "completely",
+   "es": "completamente",
+   "ex": "I entirely agree.",
+   "hi": "पूरी तरह",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "completely",
+    "totally",
+    "wholly"
+   ],
+   "zh": "完全地",
+   "ja": "完全に",
+   "ko": "완전히",
+   "col": [
+    "entirely new",
+    "entirely on"
+   ]
+  },
+  "equipment": {
+   "ant": [],
+   "base": "equipment",
+   "col": [
+    "gym equipment",
+    "sports equipment"
+   ],
+   "en": "tools and machines for a purpose",
+   "es": "equipos",
+   "ex": "The gym has modern equipment.",
+   "hi": "उपकरण",
+   "ja": "機器；装置",
+   "ko": "장비",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "devices",
+    "gear",
+    "apparatus"
+   ],
+   "zh": "設備；器材"
+  },
+  "equivalent": {
+   "ant": [
+    "different"
+   ],
+   "base": "equivalent",
+   "col": [
+    "equivalent treatment",
+    "equivalent to"
+   ],
+   "en": "equal in value or time",
+   "es": "equivalente",
+   "ex": "Pay is equivalent to ten euro an hour.",
+   "hi": "समकक्ष",
+   "ja": "同等の；同期の",
+   "ko": "동등한；같은 기간의",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "corresponding",
+    "equal",
+    "comparable"
+   ],
+   "zh": "相等的；同期的",
+   "note": {
+    "meaning": "相等的；相當於。",
+    "usage": "equivalent to + 名詞；名詞用法 the equivalent of。",
+    "collocations": [
+     "equivalent to",
+     "roughly equivalent",
+     "the equivalent of"
+    ],
+    "example": {
+     "en": "The fee is equivalent to two days of wages.",
+     "zh": "這筆費用相當於兩天的工資。"
+    }
+   },
+   "noteHi": {
+    "meaning": "के बराबर; समतुल्य।",
+    "usage": "equivalent to + संज्ञा; the equivalent of।",
+    "exampleTr": "यह शुल्क दो दिन की मज़दूरी के बराबर है।"
+   },
+   "noteEs": {
+    "meaning": "equivalente.",
+    "usage": "equivalent to + sustantivo; the equivalent of.",
+    "exampleTr": "La tarifa equivale a dos días de salario."
+   },
+   "noteJa": {
+    "meaning": "同等の、〜に相当する。",
+    "usage": "equivalent to ～、名詞 the equivalent of。",
+    "exampleTr": "その料金は2日分の賃金に相当する。"
+   },
+   "noteKo": {
+    "meaning": "동등한, ~에 상당하는.",
+    "usage": "equivalent to ~; 명사 the equivalent of.",
+    "exampleTr": "그 요금은 이틀치 임금에 해당한다."
+   },
+   "noteEn": {
+    "meaning": "equal in value or amount.",
+    "usage": "Use 'equivalent to'; noun: 'the equivalent of'."
+   }
+  },
+  "essential": {
+   "ant": [
+    "unnecessary"
+   ],
+   "base": "essential",
+   "col": [
+    "essential for",
+    "absolutely essential"
+   ],
+   "en": "very important and needed",
+   "es": "esencial",
+   "ex": "Water is essential for life.",
+   "hi": "आवश्यक",
+   "ja": "不可欠な",
+   "ko": "필수적인",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "vital",
+    "necessary",
+    "crucial"
+   ],
+   "zh": "必要的"
+  },
+  "even": {
+   "ant": [],
+   "base": "even",
+   "col": [
+    "even more",
+    "even if"
+   ],
+   "en": "used to show something surprising",
+   "es": "incluso",
+   "ex": "Even the logos looked the same.",
+   "hi": "तक; भी",
+   "ja": "〜さえ",
+   "ko": "심지어",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "also",
+    "still",
+    "indeed"
+   ],
+   "zh": "甚至；連"
+  },
+  "explained": {
+   "ant": [],
+   "base": "explain",
+   "col": [
+    "explain that",
+    "explain clearly"
+   ],
+   "en": "made something clear",
+   "es": "explicó",
+   "ex": "The teacher explained the rules clearly.",
+   "hi": "समझाया",
+   "ja": "説明した",
+   "ko": "설명했다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "described",
+    "set out",
+    "outlined"
+   ],
+   "zh": "說明；解釋"
+  },
+  "fabricated": {
+   "zh": "製造；製作",
+   "hi": "निर्मित किया गया",
+   "es": "fabricado",
+   "ja": "製造された",
+   "ko": "제조된",
+   "en": "made, especially in a factory",
+   "pos": "v.",
+   "base": "fabricate",
+   "lvl": "C1",
+   "syn": [
+    "manufactured",
+    "made",
+    "produced"
+   ],
+   "ant": [],
+   "ex": "The parts were fabricated in a factory in Hsinchu.",
+   "col": [
+    "fabricated on a process",
+    "fabricated by a foundry"
+   ]
+  },
+  "factory": {
+   "ant": [],
+   "base": "factory",
+   "col": [
+    "new factory",
+    "factory workers"
+   ],
+   "en": "a building where goods are made",
+   "es": "fábrica",
+   "ex": "Her father works in a shoe factory.",
+   "hi": "कारख़ाना",
+   "ja": "工場",
+   "ko": "공장",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "plant",
+    "works",
+    "mill"
+   ],
+   "zh": "工廠"
+  },
+  "far": {
+   "zh": "遠",
+   "hi": "दूर",
+   "es": "lejos",
+   "ja": "遠く",
+   "ko": "멀리",
+   "en": "at a great distance",
+   "pos": "adv.",
+   "base": "far",
+   "lvl": "A1",
+   "syn": [
+    "distant",
+    "a long way"
+   ],
+   "ant": [
+    "near"
+   ],
+   "ex": "My school is not far from here.",
+   "col": [
+    "far away",
+    "far from"
+   ]
+  },
+  "faster": {
+   "ant": [
+    "slower"
+   ],
+   "base": "fast",
+   "col": [
+    "faster process",
+    "faster service"
+   ],
+   "en": "quicker",
+   "es": "más rápido",
+   "ex": "We need a faster way to pay.",
+   "hi": "अधिक तेज़",
+   "ja": "より速い",
+   "ko": "더 빠른",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "quicker",
+    "speedier",
+    "swifter"
+   ],
+   "zh": "更快地"
+  },
+  "findings": {
+   "ant": [],
+   "base": "finding",
+   "col": [
+    "the findings show",
+    "key findings"
+   ],
+   "en": "the results of research",
+   "es": "resultados; hallazgos",
+   "ex": "The findings will be shared next month.",
+   "hi": "निष्कर्ष",
+   "ja": "調査結果",
+   "ko": "조사 결과",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "results",
+    "conclusions",
+    "discoveries"
+   ],
+   "zh": "研究結果"
+  },
+  "first": {
+   "ant": [
+    "last"
+   ],
+   "base": "first",
+   "col": [
+    "first novel",
+    "first time"
+   ],
+   "en": "coming before all others",
+   "es": "primero",
+   "ex": "Her first job was in a shop.",
+   "hi": "पहला",
+   "ja": "最初の",
+   "ko": "첫 번째의",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "earliest",
+    "opening",
+    "initial"
+   ],
+   "zh": "第一的"
+  },
+  "first-generation": {
+   "zh": "第一代的",
+   "hi": "पहली पीढ़ी का",
+   "es": "de primera generación",
+   "ja": "第1世代の",
+   "ko": "1세대의",
+   "en": "belonging to the first version of a product",
+   "pos": "adj.",
+   "base": "first-generation",
+   "lvl": "B2",
+   "syn": [
+    "original",
+    "earliest"
+   ],
+   "ant": [
+    "latest"
+   ],
+   "ex": "The first-generation phone had no camera.",
+   "col": [
+    "first-generation model",
+    "first-generation chip"
+   ]
+  },
+  "for": {
+   "base": "for",
+   "en": "intended for",
+   "es": "para; por",
+   "hi": "के लिए",
+   "ja": "〜のために",
+   "ko": "~을 위해",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "為了；給"
+  },
+  "framework": {
+   "ant": [],
+   "base": "framework",
+   "col": [
+    "legal framework",
+    "commercial framework"
+   ],
+   "en": "a basic structure or plan",
+   "es": "marco",
+   "ex": "The two sides agreed a framework for future talks.",
+   "hi": "ढाँचा",
+   "ja": "枠組み",
+   "ko": "틀",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "structure",
+    "system",
+    "plan"
+   ],
+   "zh": "框架"
+  },
+  "from": {
+   "base": "from",
+   "en": "starting at",
+   "es": "de; desde",
+   "hi": "से",
+   "ja": "〜から",
+   "ko": "~부터",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "從"
+  },
+  "function": {
+   "zh": "運作",
+   "hi": "काम करना",
+   "es": "funcionar",
+   "ja": "機能する",
+   "ko": "작동하다",
+   "en": "to work in the right way",
+   "pos": "v.",
+   "base": "function",
+   "lvl": "B2",
+   "syn": [
+    "work",
+    "operate",
+    "run"
+   ],
+   "ant": [
+    "fail",
+    "break down"
+   ],
+   "ex": "The phone can still function offline.",
+   "col": [
+    "function properly",
+    "function normally"
+   ]
+  },
+  "further": {
+   "ant": [],
+   "base": "further",
+   "col": [
+    "a further €10 million",
+    "further savings"
+   ],
+   "en": "more; additional",
+   "es": "adicional",
+   "ex": "A further ten jobs will be created.",
+   "hi": "अतिरिक्त",
+   "ja": "さらなる",
+   "ko": "추가의",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "more",
+    "additional",
+    "extra"
+   ],
+   "zh": "額外的；進一步的"
+  },
+  "generation": {
+   "zh": "一代；世代",
+   "hi": "पीढ़ी",
+   "es": "generación",
+   "ja": "世代",
+   "ko": "세대",
+   "en": "one version in a series of products",
+   "pos": "n.",
+   "base": "generation",
+   "lvl": "B1",
+   "syn": [
+    "version",
+    "model"
+   ],
+   "ant": [],
+   "ex": "The second generation is much faster.",
+   "col": [
+    "next generation",
+    "second generation"
+   ]
+  },
+  "generations": {
+   "ant": [],
+   "base": "generation",
+   "col": [
+    "for generations",
+    "future generations"
+   ],
+   "en": "groups of people born around the same time",
+   "es": "generaciones",
+   "ex": "The farm has been in the family for generations.",
+   "hi": "पीढ़ियाँ",
+   "ja": "世代",
+   "ko": "세대",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "age groups",
+    "eras",
+    "lifetimes"
+   ],
+   "zh": "世代"
+  },
+  "generative": {
+   "ant": [],
+   "base": "generative",
+   "col": [
+    "generative AI",
+    "generative tool"
+   ],
+   "en": "able to create new text or images",
+   "es": "generativa",
+   "ex": "Generative AI can write simple emails.",
+   "hi": "जनरेटिव",
+   "ja": "生成型の",
+   "ko": "생성형",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "creative",
+    "content-making"
+   ],
+   "zh": "生成式的"
+  },
+  "good": {
+   "ant": [
+    "bad",
+    "negative"
+   ],
+   "base": "good",
+   "col": [
+    "good news",
+    "good idea"
+   ],
+   "en": "positive",
+   "es": "buena",
+   "ex": "The new park is good for the area.",
+   "hi": "अच्छा",
+   "ja": "良い",
+   "ko": "좋은",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "positive",
+    "beneficial",
+    "favourable"
+   ],
+   "zh": "好的"
+  },
+  "government": {
+   "ant": [
+    "opposition"
+   ],
+   "base": "government",
+   "col": [
+    "the Irish Government",
+    "government policy"
+   ],
+   "en": "the group that runs a country",
+   "es": "Gobierno",
+   "ex": "The government plans to build more homes.",
+   "hi": "सरकार",
+   "ja": "政府",
+   "ko": "정부",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "administration",
+    "state",
+    "cabinet"
+   ],
+   "zh": "政府"
+  },
+  "group": {
+   "ant": [
+    "individual"
+   ],
+   "base": "group",
+   "col": [
+    "steering group",
+    "working group"
+   ],
+   "en": "a number of people or things together",
+   "es": "grupo",
+   "ex": "A group of students visited the museum.",
+   "hi": "समूह",
+   "ja": "グループ",
+   "ko": "그룹",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "team",
+    "body",
+    "bloc"
+   ],
+   "zh": "團體；小組"
+  },
+  "growing": {
+   "ant": [
+    "falling",
+    "shrinking"
+   ],
+   "base": "grow",
+   "col": [
+    "growing fast",
+    "growing demand"
+   ],
+   "en": "getting bigger in number",
+   "es": "creciendo",
+   "ex": "The number of cyclists is growing.",
+   "hi": "बढ़ रहा",
+   "ja": "増えている",
+   "ko": "늘어나는",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "rising",
+    "increasing",
+    "expanding"
+   ],
+   "zh": "成長；增加"
+  },
+  "guided": {
+   "ant": [
+    "misled"
+   ],
+   "base": "guide",
+   "col": [
+    "guided by",
+    "guided tour"
+   ],
+   "en": "showed the way",
+   "es": "guiaron",
+   "ex": "A worker guided us to our seats.",
+   "hi": "मार्गदर्शन किया",
+   "ja": "誘導した",
+   "ko": "유도했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "led",
+    "directed",
+    "escorted"
+   ],
+   "zh": "引導"
+  },
+  "guiding": {
+   "zh": "指導的",
+   "hi": "मार्गदर्शक",
+   "es": "rector; guía",
+   "ja": "指針となる",
+   "ko": "지도하는",
+   "en": "giving direction or advice",
+   "pos": "adj.",
+   "base": "guiding",
+   "lvl": "B2",
+   "syn": [
+    "leading",
+    "directing",
+    "main"
+   ],
+   "ant": [],
+   "ex": "Safety is our guiding rule.",
+   "col": [
+    "guiding principle",
+    "guiding light"
+   ]
+  },
+  "had": {
+   "ant": [
+    "lacked"
+   ],
+   "base": "have",
+   "col": [
+    "had already",
+    "had to"
+   ],
+   "en": "past tense of \"have\"",
+   "es": "había",
+   "ex": "The council had already made its decision.",
+   "hi": "था; थे",
+   "ja": "（過去完了の助動詞）",
+   "ko": "(과거완료 조동사)",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "possessed",
+    "held",
+    "owned"
+   ],
+   "zh": "（過去完成式助動詞）；有"
+  },
+  "handsets": {
+   "zh": "手機",
+   "hi": "हैंडसेट",
+   "es": "teléfonos móviles",
+   "ja": "携帯端末",
+   "ko": "휴대폰 단말기",
+   "en": "mobile phones",
+   "pos": "n.",
+   "base": "handset",
+   "lvl": "C1",
+   "syn": [
+    "phones",
+    "mobile phones",
+    "smartphones"
+   ],
+   "ant": [],
+   "ex": "New handsets go on sale next week.",
+   "col": [
+    "mobile handsets",
+    "sell handsets"
+   ]
+  },
+  "has": {
+   "ant": [
+    "lacks"
+   ],
+   "base": "have",
+   "col": [
+    "has been",
+    "has to"
+   ],
+   "en": "used to form the present perfect",
+   "es": "ha (presente perfecto)",
+   "ex": "The town has a long history.",
+   "hi": "है (present perfect)",
+   "ja": "（現在完了の助動詞）",
+   "ko": "(현재완료 조동사)",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "holds",
+    "owns",
+    "possesses"
+   ],
+   "zh": "有；已經（現在完成式）"
+  },
+  "have": {
+   "ant": [
+    "lack"
+   ],
+   "base": "have",
+   "col": [
+    "have to",
+    "have got"
+   ],
+   "en": "to own; (have to: must)",
+   "es": "tener (have to: tener que)",
+   "ex": "We have to leave early tomorrow.",
+   "hi": "होना; (have to: करना पड़ना)",
+   "ja": "持つ（have to：〜しなければならない）",
+   "ko": "가지다 (have to: ~해야 한다)",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "hold",
+    "own",
+    "possess"
+   ],
+   "zh": "有；必須（have to）"
+  },
+  "he": {
+   "base": "he",
+   "en": "that man",
+   "es": "él",
+   "hi": "वह",
+   "ja": "彼",
+   "ko": "그",
+   "lvl": "A1",
+   "pos": "pron.",
+   "zh": "他"
+  },
+  "headed": {
+   "ant": [
+    "followed"
+   ],
+   "base": "head",
+   "col": [
+    "headed a delegation",
+    "headed by"
+   ],
+   "en": "led a group",
+   "es": "encabezó",
+   "ex": "She headed a team of ten engineers.",
+   "hi": "नेतृत्व किया",
+   "ja": "率いた",
+   "ko": "이끌었다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "led",
+    "ran",
+    "directed"
+   ],
+   "zh": "率領；帶領"
+  },
+  "heads": {
+   "zh": "領導；擔任…負責人",
+   "hi": "प्रमुख है",
+   "es": "dirige",
+   "ja": "率いる",
+   "ko": "이끈다",
+   "en": "leads or is in charge of",
+   "pos": "v.",
+   "base": "head",
+   "lvl": "B2",
+   "syn": [
+    "leads",
+    "runs",
+    "manages"
+   ],
+   "ant": [
+    "follows"
+   ],
+   "ex": "She heads the science department.",
+   "col": [
+    "head a group",
+    "head a team"
+   ]
+  },
+  "heavy": {
+   "zh": "繁重的；大量的",
+   "hi": "भारी",
+   "es": "pesado; intenso",
+   "ja": "重い；大量の",
+   "ko": "무거운; 많은",
+   "en": "large in amount or effort",
+   "pos": "adj.",
+   "base": "heavy",
+   "lvl": "A1",
+   "syn": [
+    "intensive",
+    "demanding"
+   ],
+   "ant": [
+    "light"
+   ],
+   "ex": "The job needs heavy computing.",
+   "col": [
+    "heavy calculation",
+    "heavy rain"
+   ]
+  },
+  "help": {
+   "ant": [
+    "hinder",
+    "block"
+   ],
+   "base": "help",
+   "col": [
+    "help pay",
+    "help someone"
+   ],
+   "en": "to make easier",
+   "es": "ayudar",
+   "ex": "The money will help pay for new schools.",
+   "hi": "मदद करना",
+   "ja": "助ける",
+   "ko": "돕다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "assist",
+    "support",
+    "aid"
+   ],
+   "zh": "幫助"
+  },
+  "helps": {
+   "ant": [
+    "hinders"
+   ],
+   "base": "help",
+   "col": [
+    "help to",
+    "help a lot"
+   ],
+   "en": "makes something easier",
+   "es": "ayuda",
+   "ex": "Exercise helps you sleep.",
+   "hi": "मदद करता है",
+   "ja": "役立つ",
+   "ko": "돕는다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "assists",
+    "aids",
+    "contributes"
+   ],
+   "zh": "有助於"
+  },
+  "highly": {
+   "ant": [
+    "slightly"
+   ],
+   "base": "highly",
+   "col": [
+    "highly relevant",
+    "highly pertinent"
+   ],
+   "en": "very; to a great degree",
+   "es": "muy",
+   "ex": "The book is highly popular.",
+   "hi": "अत्यधिक",
+   "ja": "非常に",
+   "ko": "매우",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "very",
+    "extremely",
+    "greatly"
+   ],
+   "zh": "高度地"
+  },
+  "his": {
+   "base": "his",
+   "en": "belonging to him",
+   "es": "su",
+   "hi": "उसका",
+   "ja": "彼の",
+   "ko": "그의",
+   "lvl": "A1",
+   "pos": "det.",
+   "zh": "他的"
+  },
+  "idea": {
+   "ant": [],
+   "base": "idea",
+   "col": [
+    "good idea",
+    "an idea for"
+   ],
+   "en": "a plan",
+   "es": "idea",
+   "ex": "The idea of a new tax is popular.",
+   "hi": "विचार",
+   "ja": "考え",
+   "ko": "생각",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "plan",
+    "proposal",
+    "suggestion",
+    "concept"
+   ],
+   "zh": "想法"
+  },
+  "identifies": {
+   "ant": [
+    "overlooks"
+   ],
+   "base": "identify",
+   "en": "names or points out",
+   "es": "identifica",
+   "ex": "The report identifies three main risks.",
+   "hi": "पहचानता है",
+   "ja": "特定する",
+   "ko": "지적하다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "names",
+    "pinpoints",
+    "recognises"
+   ],
+   "zh": "指出；認定",
+   "col": [
+    "identifies the cause",
+    "clearly identifies"
+   ]
+  },
+  "ieee": {
+   "zh": "IEEE（電機電子工程師學會）",
+   "hi": "आईईईई",
+   "es": "IEEE",
+   "ja": "IEEE（米国電気電子学会）",
+   "ko": "IEEE(전기전자공학자협회)",
+   "en": "a world organisation for electrical engineers",
+   "pos": "n.",
+   "base": "IEEE",
+   "lvl": "PN"
+  },
+  "important": {
+   "ant": [
+    "unimportant",
+    "minor"
+   ],
+   "base": "important",
+   "col": [
+    "very important",
+    "important for"
+   ],
+   "en": "matters a lot",
+   "es": "importante",
+   "ex": "Water is important for health.",
+   "hi": "महत्वपूर्ण",
+   "ja": "重要な",
+   "ko": "중요한",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "significant",
+    "major",
+    "key",
+    "vital"
+   ],
+   "zh": "重要的"
+  },
+  "in": {
+   "base": "in",
+   "en": "inside",
+   "es": "en",
+   "hi": "में",
+   "ja": "〜の中で",
+   "ko": "~ 안에",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "在…裡"
+  },
+  "industrial": {
+   "ant": [
+    "residential"
+   ],
+   "base": "industrial",
+   "col": [
+    "industrial growth",
+    "industrial estate"
+   ],
+   "en": "relating to factories and industry",
+   "es": "industrial",
+   "ex": "The town has a large industrial area.",
+   "hi": "औद्योगिक",
+   "ja": "産業の",
+   "ko": "산업의",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "manufacturing",
+    "commercial",
+    "business"
+   ],
+   "zh": "工業的"
+  },
+  "inference": {
+   "zh": "推論",
+   "hi": "अनुमान (इन्फरेंस)",
+   "es": "inferencia",
+   "ja": "推論",
+   "ko": "추론",
+   "en": "when an AI model uses what it learned to give answers",
+   "pos": "n.",
+   "base": "inference",
+   "lvl": "C1",
+   "syn": [
+    "deduction",
+    "reasoning"
+   ],
+   "ant": [],
+   "ex": "Inference on a phone must be fast.",
+   "col": [
+    "AI inference",
+    "run inference"
+   ]
+  },
+  "information": {
+   "ant": [],
+   "base": "information",
+   "col": [
+    "new information",
+    "share information"
+   ],
+   "en": "facts about something",
+   "es": "información",
+   "ex": "We need more information.",
+   "hi": "जानकारी",
+   "ja": "情報",
+   "ko": "정보",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "data",
+    "details",
+    "facts"
+   ],
+   "zh": "資訊"
+  },
+  "inside": {
+   "ant": [
+    "outside"
+   ],
+   "base": "inside",
+   "col": [
+    "inside the bank",
+    "inside the house"
+   ],
+   "en": "in something",
+   "es": "dentro",
+   "ex": "Life inside the company is changing.",
+   "hi": "अंदर",
+   "ja": "中に",
+   "ko": "안에",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "within",
+    "internally",
+    "indoors"
+   ],
+   "zh": "在裡面"
+  },
+  "instantly": {
+   "zh": "立即地",
+   "hi": "तुरंत",
+   "es": "al instante",
+   "ja": "即座に",
+   "ko": "즉시",
+   "en": "immediately",
+   "pos": "adv.",
+   "base": "instantly",
+   "lvl": "B2",
+   "syn": [
+    "immediately",
+    "at once",
+    "right away"
+   ],
+   "ant": [
+    "slowly",
+    "later"
+   ],
+   "ex": "The message arrived instantly.",
+   "col": [
+    "respond instantly",
+    "almost instantly"
+   ]
+  },
+  "intelligence": {
+   "zh": "智慧（artificial intelligence：人工智慧）",
+   "hi": "बुद्धि",
+   "es": "inteligencia",
+   "ja": "知能",
+   "ko": "지능",
+   "en": "the ability to learn and think",
+   "pos": "n.",
+   "base": "intelligence",
+   "lvl": "B2",
+   "syn": [
+    "intellect",
+    "smartness"
+   ],
+   "ant": [],
+   "ex": "Artificial intelligence can write simple emails.",
+   "col": [
+    "artificial intelligence",
+    "human intelligence"
+   ]
+  },
+  "intended": {
+   "ant": [],
+   "base": "intend",
+   "col": [
+    "intended to",
+    "intended for"
+   ],
+   "en": "planned for a purpose",
+   "es": "destinado",
+   "ex": "The money is intended for schools.",
+   "hi": "उद्देश्य से",
+   "ja": "意図された",
+   "ko": "의도된",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "designed",
+    "meant",
+    "planned"
+   ],
+   "zh": "旨在"
+  },
+  "intensive": {
+   "ant": [
+    "light",
+    "relaxed"
+   ],
+   "base": "intensive",
+   "col": [
+    "intensive effort",
+    "intensive campaign"
+   ],
+   "en": "involving a lot of effort in a short time",
+   "es": "intensivo",
+   "ex": "She took an intensive English course.",
+   "hi": "गहन",
+   "ja": "集中的な",
+   "ko": "집중적인",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "concentrated",
+    "vigorous",
+    "demanding"
+   ],
+   "zh": "密集的；大力的"
+  },
+  "international": {
+   "ant": [
+    "domestic",
+    "national"
+   ],
+   "base": "international",
+   "col": [
+    "international partners",
+    "international team"
+   ],
+   "en": "between or from different countries",
+   "es": "internacionales",
+   "ex": "The festival attracts international visitors.",
+   "hi": "अंतर्राष्ट्रीय",
+   "ja": "国際的な",
+   "ko": "국제적인",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "global",
+    "worldwide",
+    "foreign"
+   ],
+   "zh": "國際的"
+  },
+  "internet": {
+   "ant": [],
+   "base": "internet",
+   "col": [
+    "on the internet",
+    "internet access"
+   ],
+   "en": "the worldwide computer network",
+   "es": "internet",
+   "ex": "I found the recipe on the internet.",
+   "hi": "इंटरनेट",
+   "ja": "インターネット",
+   "ko": "인터넷",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "web",
+    "net",
+    "online world"
+   ],
+   "zh": "網路"
+  },
+  "is": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "is located",
+    "is expected"
+   ],
+   "en": "to exist; to have a quality",
+   "es": "ser; estar",
+   "ex": "The shop is on the main street.",
+   "hi": "है; होना",
+   "ja": "〜である",
+   "ko": "~이다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "exists",
+    "remains",
+    "stands"
+   ],
+   "zh": "是"
+  },
+  "it": {
+   "base": "it",
+   "en": "that thing",
+   "es": "ello; lo",
+   "hi": "यह",
+   "ja": "それ",
+   "ko": "그것",
+   "lvl": "A1",
+   "pos": "pron.",
+   "zh": "它"
+  },
+  "its": {
+   "base": "its",
+   "en": "belonging to it",
+   "es": "su",
+   "hi": "उसका",
+   "ja": "その",
+   "ko": "그것의",
+   "lvl": "A1",
+   "pos": "det.",
+   "zh": "它的"
+  },
+  "itself": {
+   "base": "itself",
+   "en": "it (used again for emphasis)",
+   "es": "sí misma",
+   "hi": "स्वयं",
+   "lvl": "A2",
+   "pos": "pron.",
+   "zh": "自己",
+   "ja": "それ自体",
+   "ko": "그 자체"
+  },
+  "keep": {
+   "ant": [
+    "stop"
+   ],
+   "base": "keep",
+   "col": [
+    "keep doing",
+    "keep something low"
+   ],
+   "en": "continue or hold at a level",
+   "es": "seguir; mantener",
+   "ex": "Keep costs as low as you can.",
+   "hi": "जारी रखना; बनाए रखना",
+   "ja": "〜し続ける；保つ",
+   "ko": "계속하다; 유지하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "continue",
+    "maintain",
+    "hold"
+   ],
+   "zh": "持續；保持"
+  },
+  "key": {
+   "ant": [
+    "minor",
+    "unimportant"
+   ],
+   "base": "key",
+   "col": [
+    "key issue",
+    "key factor"
+   ],
+   "en": "very important; main",
+   "es": "clave; principal",
+   "ex": "Trust is a key part of the deal.",
+   "hi": "मुख्य",
+   "ja": "主要な",
+   "ko": "주요한",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "main",
+    "major",
+    "crucial",
+    "central"
+   ],
+   "zh": "主要的；關鍵的"
+  },
+  "kind": {
+   "ant": [],
+   "base": "kind",
+   "col": [
+    "of its kind",
+    "the first of its kind"
+   ],
+   "en": "a type of something",
+   "es": "tipo",
+   "ex": "It is the only shop of its kind here.",
+   "hi": "प्रकार",
+   "ja": "種類",
+   "ko": "종류",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "type",
+    "sort",
+    "category"
+   ],
+   "zh": "類型（of its kind：同類）"
+  },
+  "large": {
+   "ant": [
+    "small",
+    "little"
+   ],
+   "base": "large",
+   "col": [
+    "large companies",
+    "large numbers"
+   ],
+   "en": "big",
+   "es": "grande",
+   "ex": "Large firms pay most of the tax.",
+   "hi": "बड़ा",
+   "ja": "大きな",
+   "ko": "큰",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "big",
+    "major",
+    "huge",
+    "sizeable"
+   ],
+   "zh": "大型的"
+  },
+  "largely": {
+   "ant": [
+    "slightly"
+   ],
+   "base": "largely",
+   "col": [
+    "largely due to",
+    "largely ignored"
+   ],
+   "en": "mostly",
+   "es": "en gran parte",
+   "ex": "The delay was largely due to bad weather.",
+   "hi": "काफ़ी हद तक",
+   "ja": "大部分は",
+   "ko": "대체로",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "mostly",
+    "mainly",
+    "chiefly"
+   ],
+   "zh": "大部分；大多"
+  },
+  "leader": {
+   "ant": [
+    "follower"
+   ],
+   "base": "leader",
+   "col": [
+    "party leader",
+    "Sinn Féin leader"
+   ],
+   "en": "the person in charge of a group",
+   "es": "líder",
+   "ex": "She is the party leader.",
+   "hi": "नेता",
+   "ja": "指導者",
+   "ko": "지도자",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "head",
+    "chief",
+    "boss"
+   ],
+   "zh": "領袖"
+  },
+  "leading": {
+   "zh": "頂尖的；領先的",
+   "hi": "अग्रणी",
+   "es": "líder",
+   "ja": "一流の",
+   "ko": "선도적인",
+   "en": "most important or successful",
+   "pos": "adj.",
+   "base": "leading",
+   "lvl": "B2",
+   "syn": [
+    "top",
+    "foremost",
+    "main"
+   ],
+   "ant": [
+    "minor"
+   ],
+   "ex": "She is a leading expert on climate.",
+   "col": [
+    "leading research",
+    "leading expert"
+   ]
+  },
+  "learning": {
+   "ant": [],
+   "base": "learning",
+   "en": "gaining knowledge or skills",
+   "es": "aprendizaje",
+   "ex": "Games can make learning fun.",
+   "hi": "सीखना",
+   "ja": "学習",
+   "ko": "학습",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "education",
+    "study",
+    "development"
+   ],
+   "zh": "學習",
+   "col": [
+    "machine learning",
+    "learning process"
+   ]
+  },
+  "led": {
+   "ant": [
+    "followed"
+   ],
+   "base": "lead",
+   "col": [
+    "led by",
+    "led calls for"
+   ],
+   "en": "guided by (past of lead)",
+   "es": "liderado",
+   "ex": "The protest was led by local students.",
+   "hi": "नेतृत्व में",
+   "ja": "率いられた",
+   "ko": "주도된",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "headed",
+    "guided",
+    "directed"
+   ],
+   "zh": "領導（lead 的過去分詞）"
+  },
+  "less": {
+   "ant": [
+    "more"
+   ],
+   "base": "less",
+   "col": [
+    "cost less",
+    "much less"
+   ],
+   "en": "a smaller amount",
+   "es": "menos",
+   "ex": "This model costs less than the old one.",
+   "hi": "कम",
+   "ja": "より少なく",
+   "ko": "덜",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "not as much",
+    "a lower amount"
+   ],
+   "zh": "較少地"
+  },
+  "let": {
+   "zh": "讓；允許",
+   "hi": "देना; करने देना",
+   "es": "dejar",
+   "ja": "〜させる",
+   "ko": "~하게 하다",
+   "en": "to allow",
+   "pos": "v.",
+   "base": "let",
+   "lvl": "A1",
+   "syn": [
+    "allow",
+    "permit"
+   ],
+   "ant": [
+    "stop"
+   ],
+   "ex": "Let the soup cool before eating.",
+   "col": [
+    "let someone do",
+    "let it grow"
+   ]
+  },
+  "limitations": {
+   "ant": [
+    "strengths",
+    "advantages"
+   ],
+   "base": "limitation",
+   "col": [
+    "serious limitations",
+    "recognise limitations"
+   ],
+   "en": "weak points or limits that stop something being fully useful",
+   "es": "limitaciones",
+   "ex": "Every study has some limitations.",
+   "hi": "सीमाएँ",
+   "ja": "限界",
+   "ko": "한계",
+   "lvl": "C1",
+   "pos": "n.",
+   "syn": [
+    "limits",
+    "weaknesses",
+    "drawbacks"
+   ],
+   "zh": "侷限；限制"
+  },
+  "limits": {
+   "ant": [],
+   "base": "limit",
+   "col": [
+    "new limits",
+    "tight limits"
+   ],
+   "en": "rules that stop too much of something",
+   "es": "límites",
+   "ex": "There are new limits on hiring.",
+   "hi": "सीमाएँ",
+   "ja": "制限",
+   "ko": "제한",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "restrictions",
+    "caps",
+    "controls"
+   ],
+   "zh": "限制"
+  },
+  "little": {
+   "ant": [
+    "much",
+    "a lot of"
+   ],
+   "base": "little",
+   "col": [
+    "little fanfare",
+    "little notice"
+   ],
+   "en": "not much",
+   "es": "poco",
+   "ex": "The change happened with little warning.",
+   "hi": "थोड़ा; कम",
+   "ja": "ほとんどない",
+   "ko": "거의 없는",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "not much",
+    "minimal",
+    "scant"
+   ],
+   "zh": "很少的（with little fanfare：低調地）"
+  },
+  "locations": {
+   "ant": [],
+   "base": "location",
+   "col": [
+    "other locations",
+    "the only locations"
+   ],
+   "en": "places where something is",
+   "es": "ubicaciones; centros",
+   "ex": "The shop has two locations in the city.",
+   "hi": "स्थान",
+   "ja": "拠点；所在地",
+   "ko": "지점; 위치",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "sites",
+    "places",
+    "branches"
+   ],
+   "zh": "據點；地點"
+  },
+  "lot": {
+   "ant": [
+    "little"
+   ],
+   "base": "lot",
+   "col": [
+    "a lot of",
+    "quite a lot"
+   ],
+   "en": "a large amount (in 'a lot of')",
+   "es": "mucho",
+   "ex": "The town has changed a lot since 1990.",
+   "hi": "बहुत",
+   "ja": "たくさん",
+   "ko": "많음",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "great deal",
+    "plenty",
+    "much"
+   ],
+   "zh": "很多（a lot of：大量）"
+  },
+  "low-power": {
+   "zh": "低功耗的",
+   "hi": "कम बिजली वाला",
+   "es": "de bajo consumo",
+   "ja": "低消費電力の",
+   "ko": "저전력의",
+   "en": "using little electricity",
+   "pos": "adj.",
+   "base": "low-power",
+   "lvl": "B2",
+   "syn": [
+    "energy-efficient",
+    "power-saving"
+   ],
+   "ant": [
+    "power-hungry"
+   ],
+   "ex": "Smart watches use low-power chips.",
+   "col": [
+    "low-power chip",
+    "low-power mode"
+   ]
+  },
+  "machinery": {
+   "zh": "機械；機器",
+   "hi": "मशीनरी",
+   "es": "maquinaria",
+   "ja": "機械類",
+   "ko": "기계류",
+   "en": "large machines as a group",
+   "pos": "n.",
+   "base": "machinery",
+   "lvl": "B2",
+   "syn": [
+    "machines",
+    "equipment"
+   ],
+   "ant": [],
+   "ex": "The factory bought new machinery.",
+   "col": [
+    "industrial machinery",
+    "heavy machinery"
+   ]
+  },
+  "machines": {
+   "ant": [],
+   "base": "machine",
+   "col": [
+    "exercise machines",
+    "vending machine"
+   ],
+   "en": "pieces of equipment that do work",
+   "es": "máquinas",
+   "ex": "The gym bought new running machines.",
+   "hi": "मशीनें",
+   "ja": "マシン",
+   "ko": "기계",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "equipment",
+    "devices",
+    "apparatus"
+   ],
+   "zh": "器材；機器"
+  },
+  "made": {
+   "zh": "製造",
+   "hi": "बनाया",
+   "es": "hecho",
+   "ja": "作った",
+   "ko": "만들었다",
+   "en": "created or produced",
+   "pos": "v.",
+   "base": "make",
+   "lvl": "A1",
+   "syn": [
+    "built",
+    "produced",
+    "created"
+   ],
+   "ant": [
+    "destroyed"
+   ],
+   "ex": "The team has made two chips.",
+   "col": [
+    "made with",
+    "made by"
+   ]
+  },
+  "main": {
+   "ant": [
+    "minor"
+   ],
+   "base": "main",
+   "col": [
+    "main limit",
+    "main problem"
+   ],
+   "en": "most important",
+   "es": "principales",
+   "ex": "The main problem is cost.",
+   "hi": "मुख्य",
+   "ja": "主な",
+   "ko": "주요한",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "chief",
+    "principal",
+    "key"
+   ],
+   "zh": "主要的"
+  },
+  "maintained": {
+   "ant": [
+    "denied"
+   ],
+   "base": "maintain",
+   "col": [
+    "maintain that",
+    "maintain innocence"
+   ],
+   "en": "kept saying firmly",
+   "es": "sostuvo",
+   "ex": "She maintained that she had done nothing wrong.",
+   "hi": "कहा",
+   "ja": "主張した",
+   "ko": "주장했다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "insisted",
+    "claimed",
+    "asserted"
+   ],
+   "zh": "堅稱"
+  },
+  "major": {
+   "ant": [
+    "minor"
+   ],
+   "base": "major",
+   "col": [
+    "major concern",
+    "major problem"
+   ],
+   "en": "big and important",
+   "es": "importantes",
+   "ex": "The city is planning a major new park.",
+   "hi": "प्रमुख",
+   "ja": "主要な",
+   "ko": "주요한",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "big",
+    "important",
+    "large-scale"
+   ],
+   "zh": "主要的；大型的"
+  },
+  "majority": {
+   "ant": [
+    "minority"
+   ],
+   "base": "majority",
+   "col": [
+    "by a majority",
+    "the majority of"
+   ],
+   "en": "more than half of a group",
+   "es": "mayoría",
+   "ex": "The majority of students passed the test.",
+   "hi": "बहुमत",
+   "ja": "大多数",
+   "ko": "대다수",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "most",
+    "bulk",
+    "greater part"
+   ],
+   "zh": "多數；大多數"
+  },
+  "making": {
+   "ant": [],
+   "base": "make",
+   "col": [
+    "making shows",
+    "making films"
+   ],
+   "en": "creating or producing",
+   "es": "producción; hacer",
+   "ex": "She loves making short videos.",
+   "hi": "बनाने में",
+   "ja": "制作すること",
+   "ko": "제작하는 것",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "producing",
+    "creating",
+    "filming"
+   ],
+   "zh": "製作"
+  },
+  "manufactured": {
+   "ant": [
+    "destroyed"
+   ],
+   "base": "manufacture",
+   "col": [
+    "manufactured by",
+    "locally manufactured"
+   ],
+   "en": "made, often by a company",
+   "es": "fabricadas",
+   "ex": "The glass was manufactured in Dublin.",
+   "hi": "निर्मित",
+   "ja": "製造された",
+   "ko": "제조된",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "made",
+    "produced",
+    "built"
+   ],
+   "zh": "製造"
+  },
+  "many": {
+   "ant": [
+    "few"
+   ],
+   "base": "many",
+   "col": [
+    "many people",
+    "for many"
+   ],
+   "en": "a lot of",
+   "es": "muchos",
+   "ex": "Many people work from home now.",
+   "hi": "कई",
+   "ja": "多くの",
+   "ko": "많은",
+   "lvl": "A2",
+   "pos": "det.",
+   "syn": [
+    "lots of",
+    "numerous"
+   ],
+   "zh": "許多"
+  },
+  "means": {
+   "ant": [],
+   "base": "mean",
+   "col": [
+    "this means",
+    "what it means"
+   ],
+   "en": "has a particular meaning",
+   "es": "significa",
+   "ex": "A red light means stop.",
+   "hi": "मतलब है",
+   "ja": "〜という意味だ",
+   "ko": "의미하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "signifies",
+    "shows",
+    "indicates"
+   ],
+   "zh": "意思是；表示"
+  },
+  "memory": {
+   "zh": "記憶體",
+   "hi": "मेमोरी",
+   "es": "memoria",
+   "ja": "メモリ",
+   "ko": "메모리",
+   "en": "the part of a computer that stores data",
+   "pos": "n.",
+   "base": "memory",
+   "lvl": "B1",
+   "syn": [
+    "storage",
+    "RAM"
+   ],
+   "ant": [],
+   "ex": "This phone has more memory.",
+   "col": [
+    "memory chip",
+    "memory bandwidth"
+   ]
+  },
+  "minimise": {
+   "ant": [
+    "maximise"
+   ],
+   "base": "minimise",
+   "col": [
+    "minimise disruption",
+    "minimise risk"
+   ],
+   "en": "to make as small as possible",
+   "es": "minimizar",
+   "ex": "Wear a helmet to minimise the risk.",
+   "hi": "न्यूनतम करना",
+   "ja": "最小限にする",
+   "ko": "최소화하다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "reduce",
+    "limit",
+    "cut"
+   ],
+   "zh": "減到最低"
+  },
+  "minimising": {
+   "ant": [
+    "maximising",
+    "increasing"
+   ],
+   "base": "minimise",
+   "col": [
+    "minimising disruption",
+    "minimising risk"
+   ],
+   "en": "making something as small as possible",
+   "es": "minimizar",
+   "ex": "The council is focused on minimising traffic delays.",
+   "hi": "कम से कम करना",
+   "ja": "最小限にすること",
+   "ko": "최소화하는 것",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "reducing",
+    "limiting",
+    "cutting"
+   ],
+   "zh": "減到最低"
+  },
+  "model": {
+   "zh": "模型",
+   "hi": "मॉडल",
+   "es": "modelo",
+   "ja": "モデル",
+   "ko": "모델",
+   "en": "a computer system that has learned from data",
+   "pos": "n.",
+   "base": "model",
+   "lvl": "B1",
+   "syn": [
+    "system",
+    "program"
+   ],
+   "ant": [],
+   "ex": "The AI model learned from millions of pages.",
+   "col": [
+    "AI model",
+    "train a model"
+   ]
+  },
+  "models": {
+   "zh": "模型（複數）",
+   "hi": "मॉडल",
+   "es": "maquetas",
+   "ja": "模型",
+   "ko": "모형들",
+   "en": "small copies of objects",
+   "pos": "n.",
+   "base": "model",
+   "lvl": "A2",
+   "syn": [
+    "replicas",
+    "copies"
+   ],
+   "ant": [],
+   "ex": "The shop sells models of trains.",
+   "col": [
+    "scale models",
+    "model kits"
+   ]
+  },
+  "modern": {
+   "ant": [
+    "old",
+    "traditional"
+   ],
+   "base": "modern",
+   "col": [
+    "modern products",
+    "modern pension"
+   ],
+   "en": "new, of the present time",
+   "es": "moderno",
+   "ex": "The town has a modern library.",
+   "hi": "आधुनिक",
+   "ja": "現代の",
+   "ko": "현대의",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "new",
+    "current",
+    "contemporary"
+   ],
+   "zh": "現代的；新型的"
+  },
+  "more": {
+   "ant": [
+    "less",
+    "fewer"
+   ],
+   "base": "more",
+   "col": [
+    "more than",
+    "more money"
+   ],
+   "en": "a larger amount",
+   "es": "más",
+   "ex": "We need more time to finish.",
+   "hi": "अधिक",
+   "ja": "より多く",
+   "ko": "더 많이",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "extra",
+    "additional",
+    "further"
+   ],
+   "zh": "更多"
+  },
+  "most": {
+   "ant": [
+    "least"
+   ],
+   "base": "most",
+   "col": [
+    "most recent",
+    "most important"
+   ],
+   "en": "to the greatest degree",
+   "es": "más",
+   "ex": "This is the most recent version.",
+   "hi": "सबसे",
+   "ja": "最も",
+   "ko": "가장",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "very",
+    "extremely"
+   ],
+   "zh": "最（most recent：最近的）"
+  },
+  "move": {
+   "zh": "移動；搬移",
+   "hi": "स्थानांतरित करना",
+   "es": "mover",
+   "ja": "移動させる",
+   "ko": "옮기다",
+   "en": "to change the place of something",
+   "pos": "v.",
+   "base": "move",
+   "lvl": "A1",
+   "syn": [
+    "transfer",
+    "shift",
+    "carry"
+   ],
+   "ant": [
+    "keep"
+   ],
+   "ex": "Please move the boxes to the car.",
+   "col": [
+    "move data",
+    "move around"
+   ]
+  },
+  "movement": {
+   "ant": [
+    "standstill"
+   ],
+   "base": "movement",
+   "col": [
+    "animal movement",
+    "movement restrictions"
+   ],
+   "en": "moving from one place to another",
+   "es": "movimiento; traslado",
+   "ex": "Movement of animals was stopped during the outbreak.",
+   "hi": "आवाजाही",
+   "ja": "移動",
+   "ko": "이동",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "transport",
+    "moving"
+   ],
+   "zh": "移動"
+  },
+  "moving": {
+   "ant": [
+    "staying"
+   ],
+   "base": "move",
+   "col": [
+    "goods moving",
+    "moving between"
+   ],
+   "en": "going from one place to another",
+   "es": "que circulan",
+   "ex": "Goods moving between countries need checks.",
+   "hi": "आवागमन",
+   "ja": "移動する",
+   "ko": "이동하는",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "travelling",
+    "going",
+    "passing"
+   ],
+   "zh": "移動；流通"
+  },
+  "must": {
+   "ant": [
+    "needn't"
+   ],
+   "base": "must",
+   "col": [
+    "must agree",
+    "must be"
+   ],
+   "en": "have to",
+   "es": "deben",
+   "ex": "Visitors must show a ticket.",
+   "hi": "ज़रूरी है",
+   "ja": "〜しなければならない",
+   "ko": "~해야 한다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "have to",
+    "need to",
+    "should"
+   ],
+   "zh": "必須"
+  },
+  "nanometer": {
+   "zh": "奈米",
+   "hi": "नैनोमीटर",
+   "es": "nanómetro",
+   "ja": "ナノメートル",
+   "ko": "나노미터",
+   "en": "one billionth of a meter",
+   "pos": "n.",
+   "base": "nanometer",
+   "lvl": "C1",
+   "syn": [
+    "nm"
+   ],
+   "ant": [],
+   "ex": "Chip parts are measured in nanometers.",
+   "col": [
+    "nanometer process",
+    "a few nanometers"
+   ]
+  },
+  "national": {
+   "ant": [
+    "local",
+    "regional"
+   ],
+   "base": "national",
+   "col": [
+    "national level",
+    "national average"
+   ],
+   "en": "of the whole country",
+   "es": "nacional",
+   "ex": "The national team won the match.",
+   "hi": "राष्ट्रीय",
+   "ja": "全国的な",
+   "ko": "전국적인",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "countrywide",
+    "nationwide",
+    "state"
+   ],
+   "zh": "全國的；國家的"
+  },
+  "necessary": {
+   "ant": [
+    "unnecessary"
+   ],
+   "base": "necessary",
+   "col": [
+    "necessary experience",
+    "if necessary"
+   ],
+   "en": "needed",
+   "es": "necesaria",
+   "ex": "Is it necessary to book a table?",
+   "hi": "आवश्यक",
+   "ja": "必要な",
+   "ko": "필요한",
+   "lvl": "B1",
+   "pos": "adj.",
+   "syn": [
+    "required",
+    "needed",
+    "essential"
+   ],
+   "zh": "必要的"
+  },
+  "need": {
+   "ant": [
+    "have"
+   ],
+   "base": "need",
+   "col": [
+    "need to",
+    "no need"
+   ],
+   "en": "to require",
+   "es": "necesitar",
+   "ex": "We need more nurses.",
+   "hi": "ज़रूरत होना",
+   "ja": "必要とする",
+   "ko": "필요로 하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "require",
+    "must have"
+   ],
+   "zh": "需要"
+  },
+  "needs": {
+   "ant": [],
+   "base": "need",
+   "col": [
+    "needs to",
+    "needs more"
+   ],
+   "en": "must have",
+   "es": "necesita",
+   "ex": "The plan needs more support.",
+   "hi": "चाहिए",
+   "ja": "必要とする",
+   "ko": "필요하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "requires",
+    "must have",
+    "demands"
+   ],
+   "zh": "需要"
+  },
+  "network": {
+   "ant": [],
+   "base": "network",
+   "col": [
+    "rail network",
+    "transport network"
+   ],
+   "en": "a system of connected lines",
+   "es": "red",
+   "ex": "The city has a good bus network.",
+   "hi": "नेटवर्क",
+   "ja": "網；ネットワーク",
+   "ko": "망",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "system",
+    "web",
+    "grid"
+   ],
+   "zh": "網絡"
+  },
+  "new": {
+   "ant": [
+    "old"
+   ],
+   "base": "new",
+   "col": [
+    "new law",
+    "new tax"
+   ],
+   "en": "recently made",
+   "es": "nuevo",
+   "ex": "The city opened a new library.",
+   "hi": "नया",
+   "ja": "新しい",
+   "ko": "새로운",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "fresh",
+    "recent",
+    "novel"
+   ],
+   "zh": "新的"
+  },
+  "no": {
+   "ant": [],
+   "base": "no",
+   "col": [
+    "no presence",
+    "no newcomer"
+   ],
+   "en": "not any; not a",
+   "es": "ningún",
+   "ex": "There is no bus today.",
+   "hi": "कोई नहीं",
+   "ja": "〜がない",
+   "ko": "~없는; 아닌",
+   "lvl": "A1",
+   "pos": "det.",
+   "syn": [
+    "none",
+    "not any"
+   ],
+   "zh": "沒有的"
+  },
+  "now": {
+   "ant": [
+    "then"
+   ],
+   "base": "now",
+   "col": [
+    "right now",
+    "now has"
+   ],
+   "en": "at this time",
+   "es": "ahora",
+   "ex": "They now live in Cork.",
+   "hi": "अब",
+   "ja": "今",
+   "ko": "지금",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "currently",
+    "today",
+    "at present"
+   ],
+   "zh": "現在"
+  },
+  "nstc": {
+   "zh": "國科會",
+   "hi": "एनएसटीसी",
+   "es": "NSTC",
+   "ja": "国家科学技術委員会",
+   "ko": "국가과학기술위원회",
+   "en": "Taiwan's National Science and Technology Council",
+   "pos": "n.",
+   "base": "NSTC",
+   "lvl": "PN"
+  },
+  "ntu": {
+   "zh": "台大",
+   "hi": "एनटीयू",
+   "es": "NTU",
+   "ja": "台湾大学",
+   "ko": "대만대",
+   "en": "National Taiwan University",
+   "pos": "n.",
+   "base": "NTU",
+   "lvl": "PN"
+  },
+  "ntu's": {
+   "zh": "台大的",
+   "hi": "एनटीयू का",
+   "es": "de la NTU",
+   "ja": "台湾大学の",
+   "ko": "대만대의",
+   "en": "belonging to National Taiwan University",
+   "pos": "n.",
+   "base": "NTU",
+   "lvl": "PN"
+  },
+  "obliging": {
+   "ant": [
+    "allowing"
+   ],
+   "base": "oblige",
+   "col": [
+    "oblige someone to",
+    "be obliged to"
+   ],
+   "en": "forcing someone to do something",
+   "es": "obligándole",
+   "ex": "The rain obliged us to cancel the picnic.",
+   "hi": "बाध्य करते हुए",
+   "ja": "余儀なくさせる",
+   "ko": "~하게 만드는",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "forcing",
+    "requiring",
+    "compelling"
+   ],
+   "zh": "迫使"
+  },
+  "october": {
+   "base": "October",
+   "en": "the tenth month",
+   "es": "octubre",
+   "hi": "अक्टूबर",
+   "ja": "10月",
+   "ko": "10월",
+   "lvl": "PN",
+   "pos": "n.",
+   "zh": "十月"
+  },
+  "of": {
+   "base": "of",
+   "en": "belonging to",
+   "es": "de",
+   "hi": "का",
+   "ja": "〜の",
+   "ko": "~의",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "…的"
+  },
+  "on": {
+   "ant": [
+    "off"
+   ],
+   "base": "on",
+   "col": [
+    "go on",
+    "carry on"
+   ],
+   "en": "about",
+   "es": "sobre",
+   "ex": "Voting will go on for nine days.",
+   "hi": "के बारे में",
+   "ja": "〜に関する",
+   "ko": "~에 관한",
+   "lvl": "A1",
+   "pos": "prep.",
+   "syn": [
+    "ahead",
+    "forward"
+   ],
+   "zh": "關於"
+  },
+  "on-device": {
+   "zh": "裝置端的",
+   "hi": "डिवाइस पर",
+   "es": "en el dispositivo",
+   "ja": "端末上の",
+   "ko": "온디바이스의",
+   "en": "happening on the device itself, not in the cloud",
+   "pos": "adj.",
+   "base": "on-device",
+   "lvl": "C1",
+   "syn": [
+    "local",
+    "built-in"
+   ],
+   "ant": [
+    "cloud-based"
+   ],
+   "ex": "On-device AI keeps your photos private.",
+   "col": [
+    "on-device AI",
+    "on-device processing"
+   ]
+  },
+  "only": {
+   "ant": [],
+   "base": "only",
+   "col": [
+    "only if",
+    "the only"
+   ],
+   "en": "no more than",
+   "es": "solo",
+   "ex": "The museum is only open on weekends.",
+   "hi": "केवल",
+   "ja": "〜だけ",
+   "ko": "~만",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "just",
+    "solely",
+    "merely"
+   ],
+   "zh": "只；僅"
+  },
+  "operate": {
+   "zh": "運作",
+   "hi": "काम करना",
+   "es": "funcionar",
+   "ja": "動作する",
+   "ko": "작동하다",
+   "en": "to work or function",
+   "pos": "v.",
+   "base": "operate",
+   "lvl": "B1",
+   "syn": [
+    "work",
+    "function",
+    "run"
+   ],
+   "ant": [
+    "fail"
+   ],
+   "ex": "The robot can operate without internet.",
+   "col": [
+    "operate safely",
+    "operate directly"
+   ]
+  },
+  "operational": {
+   "ant": [
+    "out of service"
+   ],
+   "base": "operational",
+   "col": [
+    "fully operational",
+    "become operational"
+   ],
+   "en": "working and ready for use",
+   "es": "operativo",
+   "ex": "The new airport will be operational next year.",
+   "hi": "चालू",
+   "ja": "運用可能な",
+   "ko": "운행 가능한",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "working",
+    "running",
+    "functional"
+   ],
+   "zh": "運作中的",
+   "note": {
+    "collocations": [
+     "fully operational",
+     "become operational",
+     "operational costs"
+    ],
+    "example": {
+     "en": "The new hospital wing will be fully operational next year.",
+     "zh": "新的醫院側樓明年將全面啟用。"
+    },
+    "meaning": "運作中的；可以投入使用的。",
+    "usage": "常用 become/be fully operational；也可指營運上的，如 operational costs。"
+   },
+   "noteHi": {
+    "exampleTr": "अस्पताल की नई इमारत अगले साल पूरी तरह चालू होगी।",
+    "meaning": "चालू; काम करने के लिए तैयार।",
+    "usage": "become/be fully operational आम है।"
+   },
+   "noteEs": {
+    "exampleTr": "El nuevo pabellón del hospital estará plenamente operativo el próximo año.",
+    "meaning": "operativo; en funcionamiento.",
+    "usage": "Frecuente: become/be fully operational."
+   },
+   "noteJa": {
+    "exampleTr": "新しい病棟は来年に全面稼働する。",
+    "meaning": "稼働している；運用可能な。",
+    "usage": "become/be fully operational の形が多い。"
+   },
+   "noteKo": {
+    "exampleTr": "새 병동은 내년에 전면 가동될 것이다.",
+    "meaning": "가동 중인; 운용 가능한.",
+    "usage": "become/be fully operational 형태가 흔하다."
+   },
+   "noteEn": {
+    "meaning": "working and ready to be used.",
+    "usage": "Common: 'become fully operational'."
+   }
+  },
+  "or": {
+   "base": "or",
+   "en": "used for choices",
+   "es": "o",
+   "hi": "या",
+   "ja": "または",
+   "ko": "또는",
+   "lvl": "A1",
+   "pos": "conj.",
+   "zh": "或者"
+  },
+  "over": {
+   "ant": [
+    "under"
+   ],
+   "base": "over",
+   "col": [
+    "over half",
+    "just over"
+   ],
+   "en": "more than",
+   "es": "más de",
+   "ex": "Over half of the students passed.",
+   "hi": "से अधिक",
+   "ja": "〜以上",
+   "ko": "~이상",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "more than",
+    "above",
+    "in excess of"
+   ],
+   "zh": "超過"
+  },
+  "overcome": {
+   "zh": "克服",
+   "hi": "पार पाना",
+   "es": "superar",
+   "ja": "克服する",
+   "ko": "극복하다",
+   "en": "to deal with and defeat a problem",
+   "pos": "v.",
+   "base": "overcome",
+   "lvl": "B2",
+   "syn": [
+    "beat",
+    "conquer",
+    "get over"
+   ],
+   "ant": [
+    "give in to"
+   ],
+   "ex": "She overcame her fear of flying.",
+   "col": [
+    "overcome fear",
+    "overcome problems"
+   ]
+  },
+  "own": {
+   "ant": [],
+   "base": "own",
+   "col": [
+    "their own",
+    "own home"
+   ],
+   "en": "belonging to oneself",
+   "es": "propio",
+   "ex": "She has her own business.",
+   "hi": "अपना",
+   "ja": "自分の",
+   "ko": "자신의",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "personal",
+    "private"
+   ],
+   "zh": "自己的"
+  },
+  "patchy": {
+   "zh": "時有時無的；不穩定的",
+   "hi": "अनियमित; टुकड़ों में",
+   "es": "irregular; intermitente",
+   "ja": "むらのある",
+   "ko": "고르지 않은",
+   "en": "not good everywhere or all the time",
+   "pos": "adj.",
+   "base": "patchy",
+   "lvl": "C1",
+   "syn": [
+    "uneven",
+    "spotty",
+    "irregular"
+   ],
+   "ant": [
+    "reliable",
+    "steady"
+   ],
+   "ex": "Mobile signal is patchy in the mountains.",
+   "col": [
+    "patchy signal",
+    "patchy coverage"
+   ]
+  },
+  "pay": {
+   "ant": [
+    "save"
+   ],
+   "base": "pay",
+   "col": [
+    "pay for",
+    "pay extra"
+   ],
+   "en": "to give money for something",
+   "es": "pagar",
+   "ex": "You can pay by card at the gate.",
+   "hi": "भुगतान करना",
+   "ja": "支払う",
+   "ko": "지불하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "purchase",
+    "buy",
+    "spend"
+   ],
+   "zh": "付錢；付費"
+  },
+  "per": {
+   "zh": "每",
+   "hi": "प्रति",
+   "es": "por",
+   "ja": "〜あたり",
+   "ko": "~당",
+   "en": "for each",
+   "pos": "prep.",
+   "base": "per",
+   "lvl": "B1",
+   "syn": [
+    "for each",
+    "a"
+   ],
+   "ant": [],
+   "ex": "The ticket costs NT$100 per person.",
+   "col": [
+    "per person",
+    "per watt"
+   ]
+  },
+  "perform": {
+   "ant": [
+    "neglect"
+   ],
+   "base": "perform",
+   "col": [
+    "perform duties",
+    "perform a task"
+   ],
+   "en": "do (a task)",
+   "es": "realizar",
+   "ex": "Robots perform simple tasks in the factory.",
+   "hi": "करना",
+   "ja": "行う",
+   "ko": "수행하다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "carry out",
+    "do",
+    "complete"
+   ],
+   "zh": "執行；履行"
+  },
+  "permits": {
+   "zh": "允許；使能夠",
+   "hi": "अनुमति देता है",
+   "es": "permite",
+   "ja": "可能にする",
+   "ko": "허용하다",
+   "en": "allows",
+   "pos": "v.",
+   "base": "permit",
+   "lvl": "B2",
+   "syn": [
+    "allows",
+    "enables",
+    "lets"
+   ],
+   "ant": [
+    "prevents",
+    "forbids"
+   ],
+   "ex": "The new system permits faster payments.",
+   "col": [
+    "permit access",
+    "time permits"
+   ]
+  },
+  "personal": {
+   "ant": [
+    "public",
+    "general"
+   ],
+   "base": "personal",
+   "col": [
+    "personal training",
+    "personal trainer"
+   ],
+   "en": "relating to one particular person",
+   "es": "personal",
+   "ex": "The gift had a personal touch.",
+   "hi": "व्यक्तिगत",
+   "ja": "個人的な",
+   "ko": "개인적인",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "individual",
+    "private",
+    "own"
+   ],
+   "zh": "個人的"
+  },
+  "philosophy": {
+   "zh": "理念；哲學",
+   "hi": "दर्शन; सिद्धांत",
+   "es": "filosofía",
+   "ja": "理念；哲学",
+   "ko": "철학",
+   "en": "a set of ideas that guide how you work",
+   "pos": "n.",
+   "base": "philosophy",
+   "lvl": "B2",
+   "syn": [
+    "approach",
+    "belief",
+    "principle"
+   ],
+   "ant": [],
+   "ex": "Our company philosophy is to keep things simple.",
+   "col": [
+    "design philosophy",
+    "business philosophy"
+   ]
+  },
+  "phone": {
+   "ant": [],
+   "base": "phone",
+   "col": [
+    "mobile phone",
+    "one phone"
+   ],
+   "en": "a mobile telephone",
+   "es": "teléfono",
+   "ex": "My phone needs charging.",
+   "hi": "फ़ोन",
+   "ja": "電話；スマホ",
+   "ko": "휴대폰",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "mobile",
+    "cellphone",
+    "telephone"
+   ],
+   "zh": "手機（phone charger：手機充電器）"
+  },
+  "phones": {
+   "zh": "手機（複數）",
+   "hi": "फ़ोन",
+   "es": "teléfonos",
+   "ja": "携帯電話",
+   "ko": "휴대폰",
+   "en": "mobile telephones",
+   "pos": "n.",
+   "base": "phone",
+   "lvl": "A1",
+   "syn": [
+    "mobiles",
+    "handsets"
+   ],
+   "ant": [],
+   "ex": "Keep your phones charged in a storm.",
+   "col": [
+    "charge phones",
+    "mobile phones"
+   ]
+  },
+  "pinpoints": {
+   "zh": "精準找出",
+   "hi": "सटीक पहचान करता है",
+   "es": "localiza con precisión",
+   "ja": "正確に特定する",
+   "ko": "정확히 찾아내다",
+   "en": "finds or identifies exactly",
+   "pos": "v.",
+   "base": "pinpoint",
+   "lvl": "C1",
+   "syn": [
+    "identifies",
+    "locates",
+    "spots"
+   ],
+   "ant": [
+    "misses"
+   ],
+   "ex": "The app pinpoints your exact location.",
+   "col": [
+    "pinpoint the cause",
+    "pinpoint a problem"
+   ]
+  },
+  "poor": {
+   "zh": "不佳的",
+   "hi": "खराब",
+   "es": "malo; deficiente",
+   "ja": "悪い",
+   "ko": "나쁜",
+   "en": "not good in quality",
+   "pos": "adj.",
+   "base": "poor",
+   "lvl": "A1",
+   "syn": [
+    "bad",
+    "weak"
+   ],
+   "ant": [
+    "good",
+    "strong"
+   ],
+   "ex": "The signal here is poor.",
+   "col": [
+    "poor connection",
+    "poor quality"
+   ]
+  },
+  "possible": {
+   "ant": [
+    "impossible"
+   ],
+   "base": "possible",
+   "col": [
+    "possible collapse",
+    "as soon as possible"
+   ],
+   "en": "that might happen",
+   "es": "posible",
+   "ex": "There is a possible delay.",
+   "hi": "संभावित",
+   "ja": "起こり得る",
+   "ko": "가능한",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "potential",
+    "likely",
+    "feasible"
+   ],
+   "zh": "可能的"
+  },
+  "power": {
+   "zh": "電力；能量",
+   "hi": "बिजली",
+   "es": "energía",
+   "ja": "電力",
+   "ko": "전력",
+   "en": "electricity or energy used by a machine",
+   "pos": "n.",
+   "base": "power",
+   "lvl": "A2",
+   "syn": [
+    "energy",
+    "electricity"
+   ],
+   "ant": [],
+   "ex": "The new laptop uses less power.",
+   "col": [
+    "use power",
+    "low power"
+   ]
+  },
+  "present": {
+   "ant": [
+    "past",
+    "future"
+   ],
+   "base": "present",
+   "col": [
+    "at present",
+    "for the present"
+   ],
+   "en": "now (at present)",
+   "es": "actualmente (at present)",
+   "ex": "At present, the bridge is closed.",
+   "hi": "वर्तमान (at present: अभी)",
+   "ja": "現在（at present：現在は）",
+   "ko": "현재 (at present: 현재)",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "now",
+    "the moment",
+    "the time being"
+   ],
+   "zh": "現在（at present：目前）"
+  },
+  "presented": {
+   "ant": [
+    "withdrew"
+   ],
+   "base": "present",
+   "col": [
+    "presented an offer",
+    "presented a report"
+   ],
+   "en": "formally offered",
+   "es": "presentó",
+   "ex": "She presented her plan to the board.",
+   "hi": "प्रस्तुत किया",
+   "ja": "提示した",
+   "ko": "제시했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "offered",
+    "submitted",
+    "tabled"
+   ],
+   "zh": "提出"
+  },
+  "preserve": {
+   "ant": [
+    "lose",
+    "destroy"
+   ],
+   "base": "preserve",
+   "col": [
+    "preserve stability",
+    "preserve nature"
+   ],
+   "en": "to keep safe from loss",
+   "es": "conservar",
+   "ex": "We must preserve these old photos.",
+   "hi": "संरक्षित करना",
+   "ja": "保存する",
+   "ko": "보존하다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "keep",
+    "save",
+    "retain"
+   ],
+   "zh": "保存"
+  },
+  "prestigious": {
+   "zh": "享有盛譽的",
+   "hi": "प्रतिष्ठित",
+   "es": "prestigioso",
+   "ja": "権威ある",
+   "ko": "권위 있는",
+   "en": "respected and admired",
+   "pos": "adj.",
+   "base": "prestigious",
+   "lvl": "C1",
+   "syn": [
+    "respected",
+    "famous",
+    "renowned"
+   ],
+   "ant": [
+    "unknown",
+    "obscure"
+   ],
+   "ex": "She studied at a prestigious university.",
+   "col": [
+    "prestigious award",
+    "prestigious competition"
+   ]
+  },
+  "principle": {
+   "ant": [],
+   "base": "principle",
+   "col": [
+    "in principle",
+    "a basic principle"
+   ],
+   "en": "a basic rule or belief",
+   "es": "principio",
+   "ex": "Equality is a key principle of the law.",
+   "hi": "सिद्धांत",
+   "ja": "原則",
+   "ko": "원칙",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "rule",
+    "tenet",
+    "standard"
+   ],
+   "zh": "原則"
+  },
+  "privacy": {
+   "ant": [
+    "exposure",
+    "publicity"
+   ],
+   "base": "privacy",
+   "col": [
+    "protect privacy",
+    "invasion of privacy"
+   ],
+   "en": "the right to keep your life private",
+   "es": "privacidad",
+   "ex": "Everyone has a right to privacy.",
+   "hi": "निजता",
+   "ja": "プライバシー",
+   "ko": "사생활",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "confidentiality",
+    "seclusion"
+   ],
+   "zh": "隱私"
+  },
+  "private": {
+   "zh": "私人的",
+   "hi": "निजी",
+   "es": "privado",
+   "ja": "私的な",
+   "ko": "사적인",
+   "en": "personal and not for the public",
+   "pos": "adj.",
+   "base": "private",
+   "lvl": "A2",
+   "syn": [
+    "personal",
+    "intimate"
+   ],
+   "ant": [
+    "public"
+   ],
+   "ex": "He keeps his private life quiet.",
+   "col": [
+    "private life",
+    "private matter"
+   ]
+  },
+  "process": {
+   "zh": "製程",
+   "hi": "प्रक्रिया",
+   "es": "proceso (de fabricación)",
+   "ja": "製造プロセス",
+   "ko": "공정",
+   "en": "the method used to make chips",
+   "pos": "n.",
+   "base": "process",
+   "lvl": "B1",
+   "syn": [
+    "method",
+    "technology",
+    "technique"
+   ],
+   "ant": [],
+   "ex": "The chip uses a 3-nanometer process.",
+   "col": [
+    "manufacturing process",
+    "advanced process"
+   ]
+  },
+  "processing": {
+   "ant": [],
+   "base": "processing",
+   "col": [
+    "central processing unit",
+    "data processing"
+   ],
+   "en": "doing a series of actions on data or materials",
+   "es": "procesamiento",
+   "ex": "Data processing needs fast chips.",
+   "hi": "प्रसंस्करण",
+   "ja": "処理",
+   "ko": "처리",
+   "lvl": "B2",
+   "pos": "n.",
+   "syn": [
+    "handling",
+    "computing",
+    "treatment"
+   ],
+   "zh": "處理"
+  },
+  "processor": {
+   "zh": "處理器",
+   "hi": "प्रोसेसर",
+   "es": "procesador",
+   "ja": "プロセッサー",
+   "ko": "프로세서",
+   "en": "the main chip that does the work in a computer",
+   "pos": "n.",
+   "base": "processor",
+   "lvl": "B2",
+   "syn": [
+    "chip",
+    "CPU",
+    "microprocessor"
+   ],
+   "ant": [],
+   "ex": "This laptop has a fast processor.",
+   "col": [
+    "fast processor",
+    "AI processor"
+   ]
+  },
+  "processors": {
+   "zh": "處理器（複數）",
+   "hi": "प्रोसेसर",
+   "es": "procesadores",
+   "ja": "プロセッサー",
+   "ko": "프로세서들",
+   "en": "chips that do the work in computers",
+   "pos": "n.",
+   "base": "processor",
+   "lvl": "B2",
+   "syn": [
+    "chips",
+    "CPUs",
+    "microprocessors"
+   ],
+   "ant": [],
+   "ex": "Modern processors are very small.",
+   "col": [
+    "design processors",
+    "powerful processors"
+   ]
+  },
+  "produced": {
+   "ant": [],
+   "base": "produce",
+   "col": [
+    "mass produced",
+    "produced locally"
+   ],
+   "en": "made, especially in large amounts",
+   "es": "producido; fabricado",
+   "ex": "These cars are produced in Germany.",
+   "hi": "उत्पादित",
+   "ja": "生産される",
+   "ko": "생산되는",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "made",
+    "manufactured",
+    "created"
+   ],
+   "zh": "生產；製造"
+  },
+  "professor": {
+   "ant": [
+    "student"
+   ],
+   "base": "professor",
+   "col": [
+    "professor of literature",
+    "university professor"
+   ],
+   "en": "a senior university teacher",
+   "es": "catedrático",
+   "ex": "She is a professor of history.",
+   "hi": "प्रोफ़ेसर",
+   "ja": "教授",
+   "ko": "교수",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "academic",
+    "lecturer",
+    "scholar"
+   ],
+   "zh": "教授"
+  },
+  "project": {
+   "ant": [],
+   "base": "project",
+   "col": [
+    "building project",
+    "major project"
+   ],
+   "en": "a planned piece of work",
+   "es": "proyecto",
+   "ex": "The project will take three years.",
+   "hi": "परियोजना",
+   "ja": "事業",
+   "ko": "사업",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "scheme",
+    "plan",
+    "undertaking"
+   ],
+   "zh": "項目；工程"
+  },
+  "protect": {
+   "ant": [
+    "harm",
+    "endanger"
+   ],
+   "base": "protect",
+   "col": [
+    "protect from",
+    "protect rights"
+   ],
+   "en": "keep safe from harm",
+   "es": "proteger",
+   "ex": "We must protect our rivers.",
+   "hi": "रक्षा करना",
+   "ja": "保護する",
+   "ko": "보호하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "defend",
+    "guard",
+    "safeguard"
+   ],
+   "zh": "保護"
+  },
+  "prototype": {
+   "ant": [
+    "final product"
+   ],
+   "base": "prototype",
+   "col": [
+    "a working prototype",
+    "latest prototype"
+   ],
+   "en": "the first model of a new product",
+   "es": "prototipo",
+   "ex": "They tested the prototype for months.",
+   "hi": "प्रोटोटाइप; नमूना",
+   "ja": "試作品",
+   "ko": "시제품",
+   "lvl": "C1",
+   "pos": "n.",
+   "syn": [
+    "model",
+    "sample",
+    "trial version"
+   ],
+   "zh": "原型",
+   "note": {
+    "collocations": [
+     "a working prototype",
+     "test a prototype",
+     "build a prototype"
+    ],
+    "example": {
+     "en": "Engineers tested the prototype for a year.",
+     "zh": "工程師測試這台原型機一年。"
+    },
+    "meaning": "原型；樣機。",
+    "usage": "a prototype of/for sth；常見 build/test/develop a prototype。"
+   },
+   "noteHi": {
+    "exampleTr": "इंजीनियरों ने एक साल प्रोटोटाइप का परीक्षण किया।",
+    "meaning": "प्रोटोटाइप; पहला नमूना।",
+    "usage": "build/test a prototype।"
+   },
+   "noteEs": {
+    "exampleTr": "Los ingenieros probaron el prototipo un año.",
+    "meaning": "prototipo.",
+    "usage": "build/test/develop a prototype."
+   },
+   "noteJa": {
+    "exampleTr": "技術者たちは試作品を1年間試験した。",
+    "meaning": "試作品；原型。",
+    "usage": "build/test a prototype の形。"
+   },
+   "noteKo": {
+    "exampleTr": "엔지니어들은 시제품을 1년간 시험했다.",
+    "meaning": "시제품, 원형.",
+    "usage": "build/test a prototype 형태."
+   },
+   "noteEn": {
+    "meaning": "the first model of something new, made for testing.",
+    "usage": "Common: 'build a prototype', 'test a prototype'."
+   }
+  },
+  "published": {
+   "ant": [
+    "withheld"
+   ],
+   "base": "publish",
+   "col": [
+    "published reports",
+    "be published online"
+   ],
+   "en": "made public",
+   "es": "publicados",
+   "ex": "The report was published on Monday.",
+   "hi": "प्रकाशित किया",
+   "ja": "公表された",
+   "ko": "공개된",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "released",
+    "issued",
+    "announced"
+   ],
+   "zh": "公布"
+  },
+  "quickly": {
+   "ant": [
+    "slowly"
+   ],
+   "base": "quickly",
+   "col": [
+    "move quickly",
+    "act quickly"
+   ],
+   "en": "fast",
+   "es": "rápidamente",
+   "ex": "The town grew quickly.",
+   "hi": "जल्दी से",
+   "ja": "すばやく",
+   "ko": "빠르게",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "fast",
+    "rapidly",
+    "swiftly"
+   ],
+   "zh": "迅速地"
+  },
+  "rapidly": {
+   "ant": [
+    "slowly",
+    "gradually"
+   ],
+   "base": "rapidly",
+   "col": [
+    "grow rapidly",
+    "rapidly changing"
+   ],
+   "en": "very quickly",
+   "es": "rápidamente",
+   "ex": "Prices are rising rapidly this year.",
+   "hi": "तेज़ी से",
+   "ja": "急速に",
+   "ko": "빠르게",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "quickly",
+    "swiftly",
+    "fast"
+   ],
+   "zh": "迅速地"
+  },
+  "rather": {
+   "ant": [],
+   "base": "rather",
+   "col": [
+    "rather than",
+    "or rather"
+   ],
+   "en": "rather than = instead of",
+   "es": "en lugar de",
+   "ex": "Walk rather than drive if you can.",
+   "hi": "के बजाय",
+   "ja": "〜よりむしろ",
+   "ko": "~보다는",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "instead"
+   ],
+   "zh": "而非（rather than）"
+  },
+  "react": {
+   "zh": "反應",
+   "hi": "प्रतिक्रिया देना",
+   "es": "reaccionar",
+   "ja": "反応する",
+   "ko": "반응하다",
+   "en": "to act or feel in response to something",
+   "pos": "v.",
+   "base": "react",
+   "lvl": "B1",
+   "syn": [
+    "respond",
+    "answer"
+   ],
+   "ant": [
+    "ignore"
+   ],
+   "ex": "How did your parents react?",
+   "col": [
+    "react to",
+    "react quickly"
+   ]
+  },
+  "regarded": {
+   "ant": [
+    "disregarded"
+   ],
+   "base": "regard",
+   "col": [
+    "regarded as",
+    "widely regarded"
+   ],
+   "en": "thought of something in a certain way",
+   "es": "consideró",
+   "ex": "Many regarded him as a hero.",
+   "hi": "माना",
+   "ja": "みなした",
+   "ko": "여겼다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "considered",
+    "viewed",
+    "saw"
+   ],
+   "zh": "視為；認為"
+  },
+  "relationships": {
+   "ant": [],
+   "base": "relationship",
+   "col": [
+    "working relationships",
+    "build relationships"
+   ],
+   "en": "ways people connect and behave together",
+   "es": "relaciones",
+   "ex": "Good relationships make work easier.",
+   "hi": "संबंध; रिश्ते",
+   "ja": "関係",
+   "ko": "관계들",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "connections",
+    "ties",
+    "relations"
+   ],
+   "zh": "關係（複數）"
+  },
+  "released": {
+   "ant": [
+    "withheld"
+   ],
+   "base": "release",
+   "col": [
+    "figures released",
+    "release data"
+   ],
+   "en": "made available to the public",
+   "es": "publicadas",
+   "ex": "New figures were released today.",
+   "hi": "जारी किया गया",
+   "ja": "公表された",
+   "ko": "공개된",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "published",
+    "issued",
+    "announced"
+   ],
+   "zh": "公布"
+  },
+  "relies": {
+   "zh": "依靠",
+   "hi": "निर्भर है",
+   "es": "depende",
+   "ja": "頼る",
+   "ko": "의존한다",
+   "en": "depends on",
+   "pos": "v.",
+   "base": "rely",
+   "lvl": "B1",
+   "syn": [
+    "depends",
+    "counts"
+   ],
+   "ant": [],
+   "ex": "The film industry relies on audiences.",
+   "col": [
+    "relies on",
+    "heavily relies"
+   ]
+  },
+  "remain": {
+   "ant": [
+    "change",
+    "leave"
+   ],
+   "base": "remain",
+   "col": [
+    "remain open",
+    "remain active"
+   ],
+   "en": "to stay",
+   "es": "permanecer",
+   "ex": "Roads will remain icy tonight.",
+   "hi": "रहना",
+   "ja": "とどまる",
+   "ko": "머무르다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "stay",
+    "continue",
+    "persist"
+   ],
+   "zh": "停留；保持"
+  },
+  "remote": {
+   "zh": "遠端的；遙遠的",
+   "hi": "दूरस्थ",
+   "es": "remoto",
+   "ja": "遠隔の",
+   "ko": "원격의",
+   "en": "far away",
+   "pos": "adj.",
+   "base": "remote",
+   "lvl": "B2",
+   "syn": [
+    "distant",
+    "faraway"
+   ],
+   "ant": [
+    "local",
+    "nearby"
+   ],
+   "ex": "Files are stored on a remote server.",
+   "col": [
+    "remote server",
+    "remote area"
+   ]
+  },
+  "reply": {
+   "ant": [
+    "question"
+   ],
+   "base": "reply",
+   "col": [
+    "written reply",
+    "parliamentary reply"
+   ],
+   "en": "an answer",
+   "es": "respuesta",
+   "ex": "She sent a short reply.",
+   "hi": "उत्तर",
+   "ja": "回答",
+   "ko": "답변",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "answer",
+    "response",
+    "statement"
+   ],
+   "zh": "答覆"
+  },
+  "reported": {
+   "ant": [
+    "concealed"
+   ],
+   "base": "report",
+   "col": [
+    "reported feeling",
+    "reported that"
+   ],
+   "en": "said in a survey",
+   "es": "declararon",
+   "ex": "Half of students reported feeling stressed.",
+   "hi": "बताया",
+   "ja": "回答した",
+   "ko": "응답했다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "said",
+    "stated",
+    "indicated"
+   ],
+   "zh": "表示；回報"
+  },
+  "research": {
+   "ant": [],
+   "base": "research",
+   "col": [
+    "research institute",
+    "carry out research"
+   ],
+   "en": "careful study",
+   "es": "investigación",
+   "ex": "Research shows that exercise helps sleep.",
+   "hi": "शोध",
+   "ja": "研究",
+   "ko": "연구",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "study",
+    "investigation"
+   ],
+   "zh": "研究"
+  },
+  "researchers": {
+   "ant": [],
+   "base": "researcher",
+   "col": [
+    "university researchers",
+    "researchers found"
+   ],
+   "en": "people who study something carefully",
+   "es": "investigadores",
+   "ex": "Researchers studied 2,000 workers.",
+   "hi": "शोधकर्ता",
+   "ja": "研究者",
+   "ko": "연구원들",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "scientists",
+    "scholars",
+    "investigators"
+   ],
+   "zh": "研究人員"
+  },
+  "respond": {
+   "ant": [
+    "ignore"
+   ],
+   "base": "respond",
+   "en": "to react or answer",
+   "es": "responder",
+   "ex": "How will the minister respond to the report?",
+   "hi": "प्रतिक्रिया देना",
+   "ja": "対応する",
+   "ko": "대응하다",
+   "lvl": "B1",
+   "pos": "v.",
+   "syn": [
+    "react",
+    "reply",
+    "answer"
+   ],
+   "zh": "回應",
+   "col": [
+    "respond quickly",
+    "respond to"
+   ]
+  },
+  "response": {
+   "ant": [
+    "question"
+   ],
+   "base": "response",
+   "col": [
+    "in response to",
+    "a response to"
+   ],
+   "en": "a reaction to something",
+   "es": "respuesta",
+   "ex": "The council gave no response to the letter.",
+   "hi": "प्रतिक्रिया",
+   "ja": "反応",
+   "ko": "반응",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "reply",
+    "reaction",
+    "answer"
+   ],
+   "zh": "反應；回應"
+  },
+  "results": {
+   "ant": [],
+   "base": "result",
+   "col": [
+    "survey results",
+    "the results show"
+   ],
+   "en": "the figures or findings",
+   "es": "resultados",
+   "ex": "The test results came out today.",
+   "hi": "परिणाम",
+   "ja": "結果",
+   "ko": "결과",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "outcomes",
+    "findings",
+    "figures"
+   ],
+   "zh": "結果"
+  },
+  "robots": {
+   "zh": "機器人",
+   "hi": "रोबोट",
+   "es": "robots",
+   "en": "machines that do work",
+   "pos": "n.",
+   "base": "robot",
+   "lvl": "A2",
+   "syn": [
+    "machine",
+    "android"
+   ],
+   "ant": [
+    "human"
+   ],
+   "ex": "Robots now pick fruit on some farms.",
+   "ja": "ロボット",
+   "ko": "로봇",
+   "col": [
+    "industrial robots",
+    "build robots"
+   ]
+  },
+  "run": {
+   "zh": "運行；執行",
+   "hi": "चलना; चलाना",
+   "es": "funcionar; ejecutar",
+   "ja": "動作する；動かす",
+   "ko": "실행되다",
+   "en": "to work or operate (of a program or machine)",
+   "pos": "v.",
+   "base": "run",
+   "lvl": "A1",
+   "syn": [
+    "operate",
+    "work",
+    "execute"
+   ],
+   "ant": [
+    "stop"
+   ],
+   "ex": "This app can run on old phones.",
+   "col": [
+    "run a program",
+    "run on a device"
+   ]
+  },
+  "running": {
+   "zh": "執行；運行",
+   "hi": "चलाना",
+   "es": "ejecutar",
+   "ja": "実行する",
+   "ko": "실행하다",
+   "en": "making a program or machine work",
+   "pos": "v.",
+   "base": "run",
+   "lvl": "A2",
+   "syn": [
+    "operating",
+    "executing"
+   ],
+   "ant": [
+    "stopping"
+   ],
+   "ex": "The laptop is running an AI program.",
+   "col": [
+    "running software",
+    "keep running"
+   ]
+  },
+  "safeguard": {
+   "ant": [
+    "endanger"
+   ],
+   "base": "safeguard",
+   "col": [
+    "safeguard children",
+    "safeguard rights"
+   ],
+   "en": "protect from harm",
+   "es": "salvaguardar",
+   "ex": "We must safeguard the environment.",
+   "hi": "सुरक्षा करना",
+   "ja": "守る",
+   "ko": "보호하다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "protect",
+    "shield",
+    "defend"
+   ],
+   "zh": "保護",
+   "note": {
+    "collocations": [
+     "safeguard jobs",
+     "safeguard interests",
+     "safeguard against"
+    ],
+    "example": {
+     "en": "New rules will safeguard workers' pensions.",
+     "zh": "新規定將保障勞工的退休金。"
+    },
+    "meaning": "保護；捍衛（使免受損害）。",
+    "usage": "動詞 safeguard + jobs / interests / rights；也可作名詞「保障措施」。"
+   },
+   "noteHi": {
+    "exampleTr": "नए नियम कर्मचारियों की पेंशन की रक्षा करेंगे।",
+    "meaning": "सुरक्षा करना।",
+    "usage": "safeguard jobs / rights आम प्रयोग हैं।"
+   },
+   "noteEs": {
+    "exampleTr": "Las nuevas normas protegerán las pensiones de los trabajadores.",
+    "meaning": "proteger; salvaguardar.",
+    "usage": "Se usa safeguard jobs / interests / rights."
+   },
+   "noteJa": {
+    "exampleTr": "新しい規則は労働者の年金を守る。",
+    "meaning": "守る；保護する。",
+    "usage": "safeguard jobs / rights の形が多い。名詞では「保護策」。"
+   },
+   "noteKo": {
+    "exampleTr": "새 규정은 노동자의 연금을 보호할 것이다.",
+    "meaning": "보호하다.",
+    "usage": "safeguard jobs / rights 형태가 흔하다. 명사로는 '안전장치'."
+   },
+   "noteEn": {
+    "meaning": "protect something from harm or loss.",
+    "usage": "Common: 'safeguard jobs', 'safeguard against risk'."
+   }
+  },
+  "said": {
+   "ant": [],
+   "base": "say",
+   "col": [
+    "said that",
+    "officials said"
+   ],
+   "en": "past tense of \"say\"",
+   "es": "dijo",
+   "ex": "She said the bus was late again.",
+   "hi": "कहा",
+   "ja": "言った",
+   "ko": "말했다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "stated",
+    "told",
+    "explained"
+   ],
+   "zh": "說（say 的過去式）"
+  },
+  "says": {
+   "ant": [],
+   "base": "say",
+   "col": [
+    "says that",
+    "the report says"
+   ],
+   "en": "to state",
+   "es": "decir",
+   "ex": "The sign says the shop opens at nine.",
+   "hi": "कहना",
+   "ja": "言う",
+   "ko": "말하다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "states",
+    "claims",
+    "reports"
+   ],
+   "zh": "說"
+  },
+  "science": {
+   "ant": [],
+   "base": "science",
+   "col": [
+    "science park",
+    "political science"
+   ],
+   "en": "study of the natural world",
+   "es": "ciencia",
+   "ex": "She has loved science since she was a child.",
+   "hi": "विज्ञान",
+   "ja": "科学",
+   "ko": "과학",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "research",
+    "knowledge",
+    "study"
+   ],
+   "zh": "科學"
+  },
+  "second": {
+   "ant": [
+    "first"
+   ],
+   "base": "second",
+   "col": [
+    "a second warning",
+    "second time"
+   ],
+   "en": "next after the first",
+   "es": "segundo",
+   "ex": "This is my second visit to Paris.",
+   "hi": "दूसरा",
+   "ja": "二つ目の",
+   "ko": "두 번째의",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "another",
+    "next",
+    "following"
+   ],
+   "zh": "第二的"
+  },
+  "send": {
+   "ant": [
+    "recall",
+    "withdraw"
+   ],
+   "base": "send",
+   "col": [
+    "send troops",
+    "send abroad"
+   ],
+   "en": "to make money go to someone",
+   "es": "enviar",
+   "ex": "The country will send doctors to help.",
+   "hi": "भेजना",
+   "ja": "送る",
+   "ko": "보내다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "dispatch",
+    "deploy",
+    "post"
+   ],
+   "zh": "寄；匯（款）"
+  },
+  "sends": {
+   "ant": [
+    "receives"
+   ],
+   "base": "send",
+   "col": [
+    "sends reports",
+    "sends emails"
+   ],
+   "en": "delivers to someone",
+   "es": "envía",
+   "ex": "The app sends a reminder every morning.",
+   "hi": "भेजता है",
+   "ja": "送信する",
+   "ko": "보내다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "dispatches",
+    "transmits",
+    "delivers",
+    "forwards"
+   ],
+   "zh": "發送"
+  },
+  "sensitive": {
+   "ant": [],
+   "base": "sensitive",
+   "col": [
+    "sensitive issue",
+    "sensitive time"
+   ],
+   "en": "needing careful handling",
+   "es": "delicado",
+   "ex": "This is a sensitive issue.",
+   "hi": "संवेदनशील",
+   "ja": "微妙な",
+   "ko": "민감한",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "delicate",
+    "tricky",
+    "touchy"
+   ],
+   "zh": "敏感的"
+  },
+  "services": {
+   "ant": [],
+   "base": "service",
+   "col": [
+    "digital services",
+    "public services"
+   ],
+   "en": "work done for people",
+   "es": "servicios",
+   "ex": "Online services are now used by everyone.",
+   "hi": "सेवाएँ",
+   "ja": "サービス",
+   "ko": "서비스",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "facilities",
+    "provision",
+    "work"
+   ],
+   "zh": "服務"
+  },
+  "share": {
+   "ant": [
+    "whole"
+   ],
+   "base": "share",
+   "col": [
+    "fair share",
+    "share of"
+   ],
+   "en": "the part that belongs to one person or group",
+   "es": "parte; cuota",
+   "ex": "Each family paid its share of the cost.",
+   "hi": "हिस्सा",
+   "ja": "分担分；割り当て",
+   "ko": "몫; 할당분",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "portion",
+    "part",
+    "quota"
+   ],
+   "zh": "份額"
+  },
+  "should": {
+   "ant": [],
+   "base": "should",
+   "col": [
+    "should help",
+    "should be"
+   ],
+   "en": "used to give advice or say what is likely",
+   "es": "debería",
+   "ex": "You should see a doctor.",
+   "hi": "चाहिए",
+   "ja": "〜すべきだ；〜はずだ",
+   "ko": "~해야 한다",
+   "lvl": "A2",
+   "pos": "v.",
+   "syn": [
+    "ought to",
+    "must"
+   ],
+   "zh": "應該"
+  },
+  "showcased": {
+   "zh": "展示",
+   "hi": "प्रदर्शित किया गया",
+   "es": "exhibido",
+   "ja": "披露された",
+   "ko": "선보여진",
+   "en": "shown in an attractive way",
+   "pos": "v.",
+   "base": "showcase",
+   "lvl": "C1",
+   "syn": [
+    "displayed",
+    "presented",
+    "featured"
+   ],
+   "ant": [
+    "hidden"
+   ],
+   "ex": "Local food will be showcased at the fair.",
+   "col": [
+    "showcased at",
+    "showcased products"
+   ]
+  },
+  "similar": {
+   "zh": "類似的",
+   "hi": "समान",
+   "es": "similar",
+   "ja": "似ている",
+   "ko": "비슷한",
+   "en": "almost the same",
+   "pos": "adj.",
+   "base": "similar",
+   "lvl": "A2",
+   "syn": [
+    "alike",
+    "comparable"
+   ],
+   "ant": [
+    "different"
+   ],
+   "ex": "The two phones look similar.",
+   "col": [
+    "similar to",
+    "very similar"
+   ]
+  },
+  "simple": {
+   "ant": [
+    "complex",
+    "difficult"
+   ],
+   "base": "simple",
+   "col": [
+    "simple advice",
+    "simple steps"
+   ],
+   "en": "easy to understand or do",
+   "es": "sencillo",
+   "ex": "Here are some simple tips.",
+   "hi": "सरल",
+   "ja": "簡単な",
+   "ko": "간단한",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "easy",
+    "basic",
+    "plain"
+   ],
+   "zh": "簡單的"
+  },
+  "simplifies": {
+   "zh": "簡化",
+   "hi": "सरल बनाता है",
+   "es": "simplifica",
+   "ja": "簡素化する",
+   "ko": "단순화하다",
+   "en": "makes easier or less complicated",
+   "pos": "v.",
+   "base": "simplify",
+   "lvl": "B2",
+   "syn": [
+    "streamlines",
+    "eases"
+   ],
+   "ant": [
+    "complicates"
+   ],
+   "ex": "The new form simplifies the process.",
+   "col": [
+    "simplify the process",
+    "greatly simplify"
+   ]
+  },
+  "since": {
+   "base": "since",
+   "en": "from a past time; because",
+   "es": "desde; ya que",
+   "hi": "से; क्योंकि",
+   "ja": "〜以来；〜なので",
+   "ko": "~ 이후；~이므로",
+   "lvl": "A2",
+   "pos": "conj.",
+   "zh": "自從；因為"
+  },
+  "small": {
+   "ant": [
+    "big",
+    "large"
+   ],
+   "base": "small",
+   "col": [
+    "small change",
+    "small business"
+   ],
+   "en": "little",
+   "es": "pequeño",
+   "ex": "They live in a small house by the sea.",
+   "hi": "छोटा",
+   "ja": "小さい",
+   "ko": "작은",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "little",
+    "minor",
+    "tiny"
+   ],
+   "zh": "小的"
+  },
+  "smartphones": {
+   "zh": "智慧型手機（複數）",
+   "hi": "स्मार्टफ़ोन",
+   "es": "teléfonos inteligentes",
+   "ja": "スマートフォン",
+   "ko": "스마트폰들",
+   "en": "mobile phones that work like small computers",
+   "pos": "n.",
+   "base": "smartphone",
+   "lvl": "A2",
+   "syn": [
+    "mobile phones",
+    "phones"
+   ],
+   "ant": [],
+   "ex": "Most students own smartphones.",
+   "col": [
+    "smartphones and tablets",
+    "use smartphones"
+   ]
+  },
+  "so": {
+   "ant": [],
+   "base": "so",
+   "col": [
+    "and so",
+    "so that"
+   ],
+   "en": "for that reason",
+   "es": "así que",
+   "ex": "It was raining, so we stayed home.",
+   "hi": "इसलिए",
+   "ja": "だから",
+   "ko": "그래서",
+   "lvl": "A1",
+   "pos": "conj.",
+   "syn": [
+    "therefore",
+    "thus"
+   ],
+   "zh": "所以"
+  },
+  "source": {
+   "zh": "來源",
+   "hi": "स्रोत",
+   "es": "fuente",
+   "ja": "源",
+   "ko": "원천",
+   "en": "where something comes from",
+   "pos": "n.",
+   "base": "source",
+   "lvl": "B1",
+   "syn": [
+    "origin",
+    "cause",
+    "root"
+   ],
+   "ant": [
+    "result"
+   ],
+   "ex": "Money is a common source of stress.",
+   "col": [
+    "main source",
+    "source of"
+   ]
+  },
+  "speed": {
+   "zh": "加速（speed up）",
+   "hi": "गति बढ़ाना",
+   "es": "acelerar",
+   "ja": "速める",
+   "ko": "속도를 높이다",
+   "en": "to make faster (speed up)",
+   "pos": "v.",
+   "base": "speed",
+   "lvl": "B1",
+   "syn": [
+    "accelerate",
+    "hurry"
+   ],
+   "ant": [
+    "slow down"
+   ],
+   "ex": "The new road will speed up travel.",
+   "col": [
+    "speed up",
+    "speed things up"
+   ]
+  },
+  "statement": {
+   "ant": [],
+   "base": "statement",
+   "col": [
+    "issue a statement",
+    "in a statement"
+   ],
+   "en": "formal words said publicly",
+   "es": "comunicado; declaración",
+   "ex": "The club released a statement this morning.",
+   "hi": "बयान",
+   "ja": "声明",
+   "ko": "성명",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "announcement",
+    "declaration",
+    "comment"
+   ],
+   "zh": "聲明"
+  },
+  "still": {
+   "zh": "仍然",
+   "hi": "अभी भी",
+   "es": "todavía; aún",
+   "ja": "まだ；それでも",
+   "ko": "여전히",
+   "en": "continuing; even so",
+   "pos": "adv.",
+   "base": "still",
+   "lvl": "A1",
+   "syn": [
+    "yet",
+    "even so"
+   ],
+   "ant": [
+    "no longer"
+   ],
+   "ex": "It was late, but the shop was still open.",
+   "col": [
+    "still work",
+    "still further"
+   ]
+  },
+  "streamlines": {
+   "zh": "精簡；使更有效率",
+   "hi": "सुव्यवस्थित करता है",
+   "es": "agiliza; simplifica",
+   "ja": "合理化する",
+   "ko": "간소화하다",
+   "en": "makes simpler and more efficient",
+   "pos": "v.",
+   "base": "streamline",
+   "lvl": "C1",
+   "syn": [
+    "simplifies",
+    "speeds up",
+    "refines"
+   ],
+   "ant": [
+    "complicates"
+   ],
+   "ex": "The app streamlines online shopping.",
+   "col": [
+    "streamline the process",
+    "streamline operations"
+   ]
+  },
+  "strictly": {
+   "ant": [
+    "loosely"
+   ],
+   "base": "strictly",
+   "col": [
+    "strictly speaking",
+    "strictly necessary"
+   ],
+   "en": "exactly and only",
+   "es": "estrictamente",
+   "ex": "Smoking is strictly forbidden here.",
+   "hi": "सख़्ती से",
+   "ja": "厳密に",
+   "ko": "엄격히",
+   "lvl": "B2",
+   "pos": "adv.",
+   "syn": [
+    "exactly",
+    "precisely",
+    "rigidly"
+   ],
+   "zh": "嚴格地；確實地"
+  },
+  "successive": {
+   "ant": [
+    "interrupted"
+   ],
+   "base": "successive",
+   "en": "following one after another",
+   "es": "sucesivo; consecutivo",
+   "ex": "Prices rose for four successive years.",
+   "hi": "लगातार",
+   "ja": "連続した",
+   "ko": "연속적인",
+   "lvl": "C1",
+   "pos": "adj.",
+   "syn": [
+    "consecutive",
+    "straight",
+    "in a row"
+   ],
+   "zh": "連續的",
+   "col": [
+    "successive months",
+    "successive governments"
+   ]
+  },
+  "successor": {
+   "ant": [
+    "predecessor"
+   ],
+   "base": "successor",
+   "col": [
+    "successor to",
+    "chosen successor"
+   ],
+   "en": "a person who takes over",
+   "es": "sucesor",
+   "ex": "The farmer has no successor.",
+   "hi": "उत्तराधिकारी",
+   "ja": "後継者",
+   "ko": "후계자",
+   "lvl": "C1",
+   "pos": "n.",
+   "syn": [
+    "replacement",
+    "heir"
+   ],
+   "zh": "接班人"
+  },
+  "such": {
+   "base": "such",
+   "en": "for example (such as)",
+   "es": "como (such as: por ejemplo)",
+   "hi": "जैसे (such as)",
+   "ja": "（such as：例えば）",
+   "ko": "(such as: 예를 들어)",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "例如（such as）"
+  },
+  "summed": {
+   "zh": "總結（sum up）",
+   "hi": "संक्षेप में कहा",
+   "es": "resumió",
+   "ja": "要約した",
+   "ko": "요약했다",
+   "en": "gave a short summary (summed up)",
+   "pos": "v.",
+   "base": "sum",
+   "lvl": "B2",
+   "syn": [
+    "summarised",
+    "described",
+    "outlined"
+   ],
+   "ant": [
+    "expanded"
+   ],
+   "ex": "She summed up the meeting in one sentence.",
+   "col": [
+    "sum up",
+    "summed it up"
+   ]
+  },
+  "symposium": {
+   "zh": "研討會",
+   "hi": "संगोष्ठी",
+   "es": "simposio",
+   "ja": "シンポジウム",
+   "ko": "심포지엄",
+   "en": "a formal meeting where experts discuss a subject",
+   "pos": "n.",
+   "base": "symposium",
+   "lvl": "C1",
+   "syn": [
+    "conference",
+    "seminar",
+    "forum"
+   ],
+   "ant": [],
+   "ex": "Scientists met at a symposium in Kyoto.",
+   "col": [
+    "international symposium",
+    "attend a symposium"
+   ]
+  },
+  "tackle": {
+   "ant": [
+    "ignore",
+    "avoid"
+   ],
+   "base": "tackle",
+   "col": [
+    "tackle a problem",
+    "tackle an issue"
+   ],
+   "en": "to deal with a problem",
+   "es": "abordar",
+   "ex": "The city must tackle air pollution.",
+   "hi": "निपटना",
+   "ja": "取り組む",
+   "ko": "해결하다",
+   "lvl": "B2",
+   "pos": "v.",
+   "syn": [
+    "address",
+    "deal with",
+    "handle"
+   ],
+   "zh": "處理；應對"
+  },
+  "taiwan": {
+   "zh": "台灣",
+   "hi": "ताइवान",
+   "es": "Taiwán",
+   "ja": "台湾",
+   "ko": "대만",
+   "en": "an island country in East Asia",
+   "pos": "n.",
+   "base": "Taiwan",
+   "lvl": "PN"
+  },
+  "taiwan's": {
+   "zh": "台灣的",
+   "hi": "ताइवान का",
+   "es": "de Taiwán",
+   "ja": "台湾の",
+   "ko": "대만의",
+   "en": "belonging to Taiwan",
+   "pos": "n.",
+   "base": "Taiwan",
+   "lvl": "PN"
+  },
+  "team": {
+   "ant": [],
+   "base": "team",
+   "col": [
+    "film team",
+    "wonderful team"
+   ],
+   "en": "a group of people working together",
+   "es": "equipo",
+   "ex": "The director thanked his whole team.",
+   "hi": "टीम",
+   "ja": "チーム",
+   "ko": "팀",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "crew",
+    "group",
+    "staff"
+   ],
+   "zh": "團隊"
+  },
+  "technology": {
+   "ant": [],
+   "base": "technology",
+   "col": [
+    "current technology",
+    "battery technology"
+   ],
+   "en": "machines and science used in practice",
+   "es": "tecnología",
+   "ex": "New technology can help farmers.",
+   "hi": "प्रौद्योगिकी",
+   "ja": "技術",
+   "ko": "기술",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "tech",
+    "machinery",
+    "equipment"
+   ],
+   "zh": "科技"
+  },
+  "than": {
+   "base": "than",
+   "en": "used in comparisons",
+   "es": "que (comparación)",
+   "hi": "से (तुलना)",
+   "ja": "〜より",
+   "ko": "~보다",
+   "lvl": "A2",
+   "pos": "conj.",
+   "zh": "比"
+  },
+  "that": {
+   "base": "that",
+   "en": "used to begin a clause",
+   "es": "que",
+   "hi": "कि; वह",
+   "ja": "〜ということ；あの",
+   "ko": "~라는 것；그",
+   "lvl": "A2",
+   "pos": "conj.",
+   "zh": "那個；（引導子句）"
+  },
+  "the": {
+   "base": "the",
+   "en": "used before a known thing",
+   "es": "el; la",
+   "hi": "(निश्चित आर्टिकल)",
+   "ja": "その",
+   "ko": "그",
+   "lvl": "A2",
+   "pos": "art.",
+   "zh": "這個；那個"
+  },
+  "their": {
+   "base": "their",
+   "en": "belonging to them",
+   "es": "su; sus",
+   "hi": "उनका",
+   "ja": "彼らの",
+   "ko": "그들의",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "他們的"
+  },
+  "these": {
+   "base": "these",
+   "en": "the ones here or just mentioned",
+   "es": "estos",
+   "hi": "ये",
+   "ja": "これらの",
+   "ko": "이러한",
+   "lvl": "A1",
+   "pos": "det.",
+   "zh": "這些"
+  },
+  "they": {
+   "base": "they",
+   "en": "those people",
+   "es": "ellos",
+   "hi": "वे",
+   "ja": "彼ら",
+   "ko": "그들",
+   "lvl": "A2",
+   "pos": "pron.",
+   "zh": "他們"
+  },
+  "third": {
+   "ant": [
+    "first"
+   ],
+   "base": "third",
+   "col": [
+    "the third requirement",
+    "third time"
+   ],
+   "en": "coming after the second",
+   "es": "tercero",
+   "ex": "Our office is on the third floor.",
+   "hi": "तीसरा",
+   "ja": "3番目の",
+   "ko": "세 번째",
+   "lvl": "A1",
+   "pos": "adj.",
+   "syn": [
+    "final"
+   ],
+   "zh": "第三的"
+  },
+  "this": {
+   "base": "this",
+   "en": "the thing here",
+   "es": "este; esto",
+   "hi": "यह",
+   "ja": "これ；この",
+   "ko": "이것；이",
+   "lvl": "A2",
+   "pos": "det.",
+   "zh": "這個；這"
+  },
+  "time": {
+   "zh": "時候；時期",
+   "hi": "समय",
+   "es": "momento; época",
+   "ja": "当時；時",
+   "ko": "때; 당시",
+   "en": "a particular moment or period",
+   "pos": "n.",
+   "base": "time",
+   "lvl": "A1",
+   "syn": [
+    "moment",
+    "period"
+   ],
+   "ant": [],
+   "ex": "At the time, the chip was the fastest.",
+   "col": [
+    "at the time",
+    "over time"
+   ]
+  },
+  "times": {
+   "ant": [],
+   "base": "time",
+   "col": [
+    "31,000 times",
+    "many times"
+   ],
+   "en": "occasions",
+   "es": "veces",
+   "ex": "I called her three times.",
+   "hi": "बार",
+   "ja": "回",
+   "ko": "번",
+   "lvl": "A1",
+   "pos": "n.",
+   "syn": [
+    "occasions",
+    "instances"
+   ],
+   "zh": "次"
+  },
+  "to": {
+   "base": "to",
+   "en": "towards",
+   "es": "a; para",
+   "hi": "को; तक",
+   "ja": "〜へ",
+   "ko": "~으로",
+   "lvl": "A1",
+   "pos": "prep.",
+   "zh": "到；去"
+  },
+  "today": {
+   "ant": [
+    "yesterday",
+    "tomorrow"
+   ],
+   "base": "today",
+   "col": [
+    "today's news",
+    "until today"
+   ],
+   "en": "now; this day",
+   "es": "hoy; hoy en día",
+   "ex": "The museum is closed today.",
+   "hi": "आज; आजकल",
+   "ja": "今日；現在",
+   "ko": "오늘；오늘날",
+   "lvl": "A2",
+   "pos": "adv.",
+   "syn": [
+    "now",
+    "this day"
+   ],
+   "zh": "如今；今天"
+  },
+  "today's": {
+   "ant": [
+    "yesterday's",
+    "tomorrow's"
+   ],
+   "base": "today",
+   "col": [
+    "today's meeting",
+    "today's news"
+   ],
+   "en": "of the present time",
+   "es": "de hoy; actuales",
+   "ex": "Today's meeting starts at ten o'clock.",
+   "hi": "आज के",
+   "ja": "今日の；現在の",
+   "ko": "오늘날의",
+   "lvl": "A2",
+   "pos": "adj.",
+   "syn": [
+    "this day's",
+    "current"
+   ],
+   "zh": "今日的；現在的"
+  },
+  "tools": {
+   "ant": [],
+   "base": "tool",
+   "col": [
+    "kitchen tools",
+    "use tools"
+   ],
+   "en": "things used to do a job",
+   "es": "utensilios; herramientas",
+   "ex": "Put the kitchen tools in the drawer.",
+   "hi": "उपकरण",
+   "ja": "道具",
+   "ko": "도구",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "utensils",
+    "implements",
+    "devices"
+   ],
+   "zh": "工具"
+  },
+  "train": {
+   "zh": "訓練",
+   "hi": "प्रशिक्षित करना",
+   "es": "entrenar",
+   "ja": "学習させる；訓練する",
+   "ko": "학습시키다",
+   "en": "to teach a person or an AI model",
+   "pos": "v.",
+   "base": "train",
+   "lvl": "A2",
+   "syn": [
+    "teach",
+    "educate",
+    "coach"
+   ],
+   "ant": [],
+   "ex": "Companies train AI with huge amounts of text.",
+   "col": [
+    "train a model",
+    "train staff"
+   ]
+  },
+  "training": {
+   "zh": "訓練",
+   "hi": "प्रशिक्षण",
+   "es": "entrenamiento",
+   "ja": "学習；訓練",
+   "ko": "학습; 훈련",
+   "en": "teaching an AI model using data",
+   "pos": "n.",
+   "base": "training",
+   "lvl": "B1",
+   "syn": [
+    "teaching",
+    "learning"
+   ],
+   "ant": [],
+   "ex": "Training a large AI model costs a lot.",
+   "col": [
+    "model training",
+    "AI training"
+   ]
+  },
+  "transfer": {
+   "zh": "傳輸；轉移",
+   "hi": "स्थानांतरण",
+   "es": "transferencia",
+   "ja": "転送",
+   "ko": "전송",
+   "en": "moving something from one place to another",
+   "pos": "n.",
+   "base": "transfer",
+   "lvl": "B1",
+   "syn": [
+    "movement",
+    "transmission"
+   ],
+   "ant": [],
+   "ex": "Data transfer is faster with fibre.",
+   "col": [
+    "data transfer",
+    "money transfer"
+   ]
+  },
+  "transformer": {
+   "zh": "Transformer（AI 模型架構）",
+   "hi": "ट्रांसफॉर्मर (एआई मॉडल)",
+   "es": "Transformer (modelo de IA)",
+   "ja": "トランスフォーマー（AIモデル）",
+   "ko": "트랜스포머 (AI 모델)",
+   "en": "a type of AI model used in chatbots",
+   "pos": "n.",
+   "base": "transformer",
+   "lvl": "C1",
+   "syn": [
+    "AI model",
+    "neural network"
+   ],
+   "ant": [],
+   "ex": "Transformer models power many chatbots.",
+   "col": [
+    "Transformer model",
+    "Transformer architecture"
+   ]
+  },
+  "transmit": {
+   "ant": [
+    "receive"
+   ],
+   "base": "transmit",
+   "en": "to send signals or data",
+   "es": "transmitir",
+   "ex": "The sensors transmit data every minute.",
+   "hi": "भेजना",
+   "ja": "送信する",
+   "ko": "전송하다",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "send",
+    "relay",
+    "broadcast"
+   ],
+   "zh": "傳送",
+   "col": [
+    "transmit data",
+    "transmit signals"
+   ]
+  },
+  "two": {
+   "base": "two",
+   "en": "the number 2",
+   "es": "dos",
+   "hi": "दो",
+   "ja": "二つ",
+   "ko": "둘",
+   "lvl": "A1",
+   "pos": "num.",
+   "zh": "二"
+  },
+  "underpinning": {
+   "ant": [
+    "undermining"
+   ],
+   "base": "underpin",
+   "en": "supporting something from below; forming its base",
+   "es": "que sustenta",
+   "ex": "Strong data is underpinning the new policy.",
+   "hi": "आधार देने वाला",
+   "ja": "支える",
+   "ko": "뒷받침하는",
+   "lvl": "C2",
+   "pos": "v.",
+   "syn": [
+    "supporting",
+    "sustaining",
+    "propping up"
+   ],
+   "zh": "支撐；作為基礎",
+   "col": [
+    "underpinning technology",
+    "underpinning growth"
+   ]
+  },
+  "undertaking": {
+   "ant": [],
+   "base": "undertaking",
+   "col": [
+    "a major undertaking",
+    "a costly undertaking"
+   ],
+   "en": "a big project or task",
+   "es": "proyecto; empresa",
+   "ex": "Building the tunnel was a huge undertaking.",
+   "hi": "उपक्रम; परियोजना",
+   "ja": "事業；大仕事",
+   "ko": "사업; 대형 과제",
+   "lvl": "C1",
+   "pos": "n.",
+   "syn": [
+    "project",
+    "venture",
+    "enterprise"
+   ],
+   "zh": "工程；事業"
+  },
+  "university": {
+   "ant": [],
+   "base": "university",
+   "col": [
+    "university students",
+    "at university"
+   ],
+   "en": "a place for higher education",
+   "es": "universidad",
+   "ex": "She wants to study law at university.",
+   "hi": "विश्वविद्यालय",
+   "ja": "大学",
+   "ko": "대학",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "college",
+    "academy",
+    "institution"
+   ],
+   "zh": "大學"
+  },
+  "unreliable": {
+   "ant": [
+    "reliable"
+   ],
+   "base": "unreliable",
+   "col": [
+    "highly unreliable",
+    "rendered unreliable"
+   ],
+   "en": "cannot be trusted to work well",
+   "es": "poco fiable",
+   "ex": "The old bus service is very unreliable.",
+   "hi": "अविश्वसनीय",
+   "ja": "信頼できない",
+   "ko": "신뢰할 수 없는",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "undependable",
+    "unstable",
+    "erratic"
+   ],
+   "zh": "不可靠的"
+  },
+  "unveiled": {
+   "ant": [
+    "covered",
+    "hidden"
+   ],
+   "base": "unveil",
+   "col": [
+    "unveil a plaque",
+    "unveil a plan"
+   ],
+   "en": "shown to the public for the first time",
+   "es": "descubierta",
+   "ex": "A new statue was unveiled today.",
+   "hi": "अनावरण किया गया",
+   "ja": "除幕された",
+   "ko": "제막된",
+   "lvl": "C1",
+   "pos": "v.",
+   "syn": [
+    "revealed",
+    "uncovered",
+    "launched"
+   ],
+   "zh": "揭幕"
+  },
+  "up": {
+   "ant": [
+    "down"
+   ],
+   "base": "up",
+   "col": [
+    "go up",
+    "close up"
+   ],
+   "en": "towards a higher level",
+   "es": "arriba",
+   "ex": "Prices went up again.",
+   "hi": "ऊपर",
+   "ja": "上へ",
+   "ko": "위로",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "higher",
+    "upward"
+   ],
+   "zh": "向上"
+  },
+  "use": {
+   "ant": [],
+   "base": "use",
+   "col": [
+    "use the line",
+    "use daily"
+   ],
+   "en": "do something with",
+   "es": "usar",
+   "ex": "Many students use the bus.",
+   "hi": "उपयोग करना",
+   "ja": "使う",
+   "ko": "이용하다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "operate on",
+    "employ",
+    "utilise"
+   ],
+   "zh": "使用"
+  },
+  "user": {
+   "ant": [],
+   "base": "user",
+   "col": [
+    "user data",
+    "internet user"
+   ],
+   "en": "a person who uses a product",
+   "es": "usuario",
+   "ex": "Each user has a private password.",
+   "hi": "उपयोगकर्ता",
+   "ja": "ユーザー；利用者",
+   "ko": "사용자",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "customer",
+    "consumer",
+    "client"
+   ],
+   "zh": "用戶；使用者"
+  },
+  "users": {
+   "ant": [],
+   "base": "user",
+   "col": [
+    "users include",
+    "new users"
+   ],
+   "en": "people or groups who use something",
+   "es": "usuarios",
+   "ex": "The app has over a million users.",
+   "hi": "उपयोगकर्ता",
+   "ja": "利用者",
+   "ko": "사용자",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "customers",
+    "clients"
+   ],
+   "zh": "使用者"
+  },
+  "uses": {
+   "ant": [],
+   "base": "use",
+   "col": [
+    "uses AI",
+    "uses tools"
+   ],
+   "en": "puts something to work",
+   "es": "usa",
+   "ex": "Bank of Taiwan uses AI to detect threats.",
+   "hi": "उपयोग करता है",
+   "ja": "使う",
+   "ko": "사용한다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "employs",
+    "applies",
+    "utilises"
+   ],
+   "zh": "使用"
+  },
+  "using": {
+   "ant": [
+    "avoiding"
+   ],
+   "base": "use",
+   "col": [
+    "by using",
+    "using more"
+   ],
+   "en": "making use of",
+   "es": "usar",
+   "ex": "Using a map helped us find the hotel.",
+   "hi": "उपयोग करना",
+   "ja": "使うこと",
+   "ko": "사용하는 것",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "employing",
+    "applying",
+    "relying on"
+   ],
+   "zh": "使用"
+  },
+  "vast": {
+   "ant": [
+    "tiny",
+    "small"
+   ],
+   "base": "vast",
+   "col": [
+    "vast numbers",
+    "vast majority"
+   ],
+   "en": "very large",
+   "es": "gran (vast majority)",
+   "ex": "The vast majority agreed.",
+   "hi": "विशाल",
+   "ja": "膨大な（vast majority：大多数）",
+   "ko": "막대한 (vast majority: 대다수)",
+   "lvl": "B2",
+   "pos": "adj.",
+   "syn": [
+    "huge",
+    "enormous",
+    "great"
+   ],
+   "zh": "巨大的（vast majority：絕大多數）"
+  },
+  "vehicles": {
+   "ant": [],
+   "base": "vehicle",
+   "col": [
+    "similar vehicles",
+    "seize vehicles"
+   ],
+   "en": "cars, trucks, etc.",
+   "es": "vehículos",
+   "ex": "Police seized several vehicles.",
+   "hi": "वाहन",
+   "ja": "車両",
+   "ko": "차량",
+   "lvl": "B1",
+   "pos": "n.",
+   "syn": [
+    "cars",
+    "machines",
+    "transport"
+   ],
+   "zh": "車輛"
+  },
+  "very": {
+   "ant": [
+    "slightly"
+   ],
+   "base": "very",
+   "col": [
+    "very similar",
+    "very expensive"
+   ],
+   "en": "to a high degree",
+   "es": "muy",
+   "ex": "The test was very easy.",
+   "hi": "बहुत",
+   "ja": "とても",
+   "ko": "매우",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "extremely",
+    "really",
+    "highly"
+   ],
+   "zh": "非常"
+  },
+  "vlsi": {
+   "zh": "超大型積體電路（VLSI）",
+   "hi": "वीएलएसआई",
+   "es": "VLSI",
+   "ja": "超大規模集積回路（VLSI）",
+   "ko": "초고밀도 집적회로(VLSI)",
+   "en": "very-large-scale integration (chip design)",
+   "pos": "n.",
+   "base": "VLSI",
+   "lvl": "PN"
+  },
+  "wait": {
+   "ant": [
+    "go ahead"
+   ],
+   "base": "wait",
+   "col": [
+    "wait before",
+    "wait for"
+   ],
+   "en": "stay until something happens",
+   "es": "esperar",
+   "ex": "New staff must wait six months.",
+   "hi": "प्रतीक्षा करना",
+   "ja": "待つ",
+   "ko": "기다리다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "hold on",
+    "stay",
+    "delay"
+   ],
+   "zh": "等待"
+  },
+  "waits": {
+   "ant": [
+    "acts"
+   ],
+   "base": "wait",
+   "col": [
+    "wait for",
+    "wait until"
+   ],
+   "en": "stays until something happens",
+   "es": "espera",
+   "ex": "She waits for the bus every day.",
+   "hi": "इंतज़ार करती है",
+   "ja": "待つ",
+   "ko": "기다린다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "holds off",
+    "delays",
+    "pauses"
+   ],
+   "zh": "等待"
+  },
+  "was": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "was open",
+    "was born"
+   ],
+   "en": "past tense of \"be\"",
+   "es": "era; estaba (pasado de be)",
+   "ex": "The shop was open every day.",
+   "hi": "था; थे",
+   "ja": "be の過去形",
+   "ko": "be의 과거형",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "existed",
+    "remained"
+   ],
+   "zh": "是（be 的過去式）"
+  },
+  "watt": {
+   "zh": "瓦（功率單位）",
+   "hi": "वाट",
+   "es": "vatio",
+   "ja": "ワット",
+   "ko": "와트",
+   "en": "a unit of electrical power",
+   "pos": "n.",
+   "base": "watt",
+   "lvl": "B2",
+   "syn": [
+    "unit of power",
+    "W"
+   ],
+   "ant": [],
+   "ex": "This bulb uses only nine watts.",
+   "col": [
+    "per watt",
+    "watt of power"
+   ]
+  },
+  "wednesday": {
+   "base": "Wednesday",
+   "en": "the day after Tuesday",
+   "es": "miércoles",
+   "hi": "बुधवार",
+   "ja": "水曜日",
+   "ko": "수요일",
+   "lvl": "PN",
+   "pos": "n.",
+   "zh": "星期三"
+  },
+  "were": {
+   "ant": [],
+   "base": "be",
+   "col": [
+    "were closed",
+    "were cancelled"
+   ],
+   "en": "past plural form of 'be'",
+   "es": "fueran; eran",
+   "ex": "The shops were closed on Sunday.",
+   "hi": "थे",
+   "ja": "〜だった",
+   "ko": "~였다",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "existed as",
+    "remained"
+   ],
+   "zh": "是（過去式）；被（被動）"
+  },
+  "what": {
+   "base": "what",
+   "en": "the thing that",
+   "es": "lo que",
+   "hi": "जो",
+   "ja": "〜もの",
+   "ko": "~것",
+   "lvl": "A1",
+   "pos": "pron.",
+   "zh": "……的事物"
+  },
+  "when": {
+   "base": "when",
+   "en": "at the time that",
+   "es": "cuando",
+   "hi": "जब",
+   "ja": "〜するとき",
+   "ko": "~할 때",
+   "lvl": "A1",
+   "pos": "conj.",
+   "zh": "當…時"
+  },
+  "where": {
+   "ant": [],
+   "base": "where",
+   "col": [
+    "the place where",
+    "where to"
+   ],
+   "en": "at which place",
+   "es": "donde",
+   "ex": "This is the café where we met.",
+   "hi": "जहाँ",
+   "ja": "そこで（関係副詞）",
+   "ko": "그곳에서",
+   "lvl": "A1",
+   "pos": "adv.",
+   "syn": [
+    "in which",
+    "at which"
+   ],
+   "zh": "在那裡（關係副詞）"
+  },
+  "which": {
+   "base": "which",
+   "en": "used to add information",
+   "es": "lo cual; que",
+   "hi": "जो",
+   "ja": "それは（関係代名詞）",
+   "ko": "그것은 (관계대명사)",
+   "lvl": "A2",
+   "pos": "pron.",
+   "zh": "這（引導子句）"
+  },
+  "while": {
+   "base": "while",
+   "en": "at the same time as",
+   "es": "mientras",
+   "hi": "जबकि",
+   "ja": "〜する一方で",
+   "ko": "~하는 한편",
+   "lvl": "B1",
+   "pos": "conj.",
+   "zh": "同時"
+  },
+  "who": {
+   "base": "who",
+   "en": "used to add information about a person",
+   "es": "quien",
+   "hi": "जो",
+   "ja": "〜する人",
+   "ko": "~하는 사람",
+   "lvl": "A1",
+   "pos": "pron.",
+   "zh": "（關係代名詞）誰"
+  },
+  "whose": {
+   "base": "whose",
+   "en": "of whom; belonging to whom",
+   "es": "cuyo",
+   "hi": "जिसका",
+   "ja": "その人の",
+   "ko": "그의",
+   "lvl": "B1",
+   "pos": "pron.",
+   "zh": "其；…的（關係代名詞）"
+  },
+  "with": {
+   "base": "with",
+   "en": "together",
+   "es": "con",
+   "hi": "के साथ",
+   "ja": "〜と一緒に",
+   "ko": "~와 함께",
+   "lvl": "A2",
+   "pos": "prep.",
+   "zh": "和；跟"
+  },
+  "within": {
+   "base": "within",
+   "en": "inside",
+   "es": "dentro de",
+   "hi": "के भीतर",
+   "ja": "〜の中で",
+   "ko": "~안에서",
+   "lvl": "B1",
+   "pos": "prep.",
+   "zh": "在…之內"
+  },
+  "work": {
+   "ant": [
+    "fail",
+    "break down"
+   ],
+   "base": "work",
+   "col": [
+    "work well",
+    "does not work"
+   ],
+   "en": "a job; labour",
+   "es": "trabajo",
+   "ex": "The old machine still works well.",
+   "hi": "काम",
+   "ja": "仕事",
+   "ko": "일",
+   "lvl": "A2",
+   "pos": "n.",
+   "syn": [
+    "function",
+    "operate",
+    "perform"
+   ],
+   "zh": "工作"
+  },
+  "working": {
+   "ant": [
+    "resting"
+   ],
+   "base": "work",
+   "col": [
+    "working in",
+    "working for"
+   ],
+   "en": "doing a job",
+   "es": "trabajando",
+   "ex": "He enjoys working with young people.",
+   "hi": "काम करना",
+   "ja": "働くこと",
+   "ko": "일하기",
+   "lvl": "A1",
+   "pos": "v.",
+   "syn": [
+    "employed",
+    "serving",
+    "labouring"
+   ],
+   "zh": "工作"
+  },
+  "yang": {
+   "zh": "楊（姓）",
+   "hi": "यांग (उपनाम)",
+   "es": "Yang (apellido)",
+   "ja": "楊（姓）",
+   "ko": "양 (성)",
+   "en": "a Chinese family name",
+   "pos": "n.",
+   "base": "Yang",
+   "lvl": "PN"
+  },
+  "your": {
+   "base": "your",
+   "en": "belonging to you",
+   "es": "tu; su",
+   "hi": "आपका",
+   "ja": "あなたの",
+   "ko": "당신의",
+   "lvl": "A1",
+   "pos": "det.",
+   "zh": "你的"
+  }
+ }
+}
