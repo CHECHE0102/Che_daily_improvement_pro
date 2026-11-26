@@ -131,6 +131,9 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .view{display:flex;flex-direction:column;gap:18px;padding-top:18px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.pre-ask .row{gap:8px;flex-wrap:wrap}
+.ff-card{border:2px solid var(--accent);background:var(--accent-soft)}
+.bq-today{font-size:11px;padding:1px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
 .muted{color:var(--muted)}
 .btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:12px 20px;font-weight:600;font-size:15px}
 .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
@@ -2349,9 +2352,10 @@ function viewToday(){
     <section class="hero"><div class="eyebrow">${art.region?`📍 ${esc(regionLabel(art.region))} · `:""}${isToday?T("todayHead"):T("latestHead",{d:esc(fmtDate(art.date))})}</div><h1>${esc(art.title)}</h1></section>
     ${onbCoach()}${statsAskToday()}${betaCard()}
     ${PLANS_ON?"":loginStrip()}
+    ${preNeeded&&!d.preDone&&!readDone?preAsk(el):""}
     <div class="steps">
-      ${!preNeeded&&!d.preDone?(lvtDone()?step(1,"done",T("lvtTitle"),T("lvtDone",{l:lvtDone()==="IELTS"?"IELTS 7–8":lvtDone()}),"lvtest"):step(1,"now",T("lvtTitle"),T("lvtSub"),"lvtest")):step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):(()=>{ const due=srsDueList().filter(w=>w.firstSeen<today()).length; return due?T("preDue",{d:Math.min(10,due),k:Math.min(10,el.length)}):T("preDraw",{n:el.length,k:Math.min(10,el.length)}); })()):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
-      ${step(2, readDone?"done":(preDone?"now":"locked"), T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), preDone?"read":null)}
+      ${!preNeeded&&!d.preDone?(lvtDone()?step(1,"done",T("lvtTitle"),T("lvtDone",{l:lvtDone()==="IELTS"?"IELTS 7–8":lvtDone()}),"lvtest"):step(1,"now",T("lvtTitle"),T("lvtSub"),"lvtest")):step(1, preDone?"done":"now", T("stepPre"), preNeeded?(d.preDone?T("preScore",{s:d.preScore,t:d.preTotal}):(()=>{ const due=srsDueList().filter(w=>w.firstSeen<today()).length; const h=preHeld(); return h?T("preResume",{i:h.i,n:h.qs.length}):(due?T("preDue",{d:Math.min(10,due),k:Math.min(10,el.length)}):T("preDraw",{n:el.length,k:Math.min(10,el.length)}))+" · "+T("preOpt"); })()):T("preNone"), preNeeded&&!d.preDone?"pre":null)}
+      ${step(2, readDone?"done":"now", T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), "read")}
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
     ${preDone&&readDone&&postDone?doneCard(d):""}
@@ -2359,7 +2363,7 @@ function viewToday(){
     ${plazaCard()}
     ${easyHint()||""}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
-      ${preDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked")}</p>`}</section>`:""}
+      ${preDone||readDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked2")}</p>`}</section>`:""}
     ${pushPrompt()}
     ${featLock("adv")?`<div class="adv-banner ul-ban"><span><b>${T("ulBanT")}</b><span class="muted">${T("ulBanS")}</span></span><span class="go">🔒</span></div>`:`<button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>`}
     <div class="stats">
@@ -2374,8 +2378,7 @@ function viewToday(){
 
 function viewRead(){
   const art=currentArticle(); if(!art) return `<div class="view"><p class="muted">${T("notFound")}</p></div>`;
-  const d=dayRec(); const preDone = d.preDone || eligible().length===0;
-  if(art.date===(mainArticle()||{}).date && !preDone) return `<div class="view"><div class="card lock"><h3>${T("lockTitle")}</h3><p class="muted">${T("lockSub")}</p><button class="btn" data-act="pre">${T("lockBtn")}</button></div></div>`;
+  const d=dayRec();
   const lu=lookedUpFor(d,art), post=postFor(d,art);
   const hits=new Set(lu);
   const known=new Set([...S.words.values()].flatMap(w=>w.forms||[]));
@@ -2995,17 +2998,25 @@ function lvtResult(Q){   // highest band where at least half the words were righ
 const QUIZ_KEY="che-pro-quiz"; let QUIZ_READY=false;   // nothing is saved or cleared until the saved quiz had its chance to come back
 function quizKeep(){ if(!QUIZ_READY) return; try{ const Q=S.quiz;
   if(S.view==="quiz"&&Q&&Q.kind!=="lvl"&&Q.reward===undefined&&Q.i<Q.qs.length) localStorage.setItem(QUIZ_KEY,JSON.stringify({d:today(),q:Q}));
+  else if(!Q&&preHeld()){ const o=JSON.parse(localStorage.getItem(QUIZ_KEY)); if(!o.held){ o.held=1; localStorage.setItem(QUIZ_KEY,JSON.stringify(o)); } }
   else if(!Q||Q.reward!==undefined) localStorage.removeItem(QUIZ_KEY); }catch(e){} }
+/* an unfinished review quiz of today that the player left (to read first): it waits on the 今日 page instead of being thrown away */
+const PRE_ACC_MIN=5;
+function preHeld(){ try{ const o=JSON.parse(localStorage.getItem(QUIZ_KEY)||"null"); if(!o||o.d!==today()||!o.q||o.q.kind!=="pre"||!Array.isArray(o.q.qs)) return null;
+  if(dayRec().preDone) return null; const q=o.q; if(q.picked!=null){ q.i++; q.picked=null; } return q.i<q.qs.length?q:null; }catch(e){ return null; } }
+function preAsk(el){ const h=preHeld(), due=srsDueList().filter(w=>w.firstSeen<today()).length, n=h?h.qs.length-h.i:Math.min(10,el.length);
+  return `<section class="card pre-ask"><b>${due&&!h?T("preAskDue",{n:Math.min(10,due)}):T("preAskT",{n})}</b><p class="muted sm-t" style="margin:4px 0 10px">${T("preAskS")}</p>
+    <div class="row"><button class="btn sm" data-act="pre">${h?T("preAskResume",{n}):T("preAskGo")}</button><button class="btn ghost sm" data-act="read">${T("preAskRead")}</button></div></section>`; }
 function quizRestore(){ QUIZ_READY=true; try{ const o=JSON.parse(localStorage.getItem(QUIZ_KEY)||"null"); if(!o||o.d!==today()||!o.q||!Array.isArray(o.q.qs)){ localStorage.removeItem(QUIZ_KEY); return; }
-  if(S.onb||S.view!=="today") return; if(o.q.picked!=null){ o.q.i++; o.q.picked=null; }   // the shown answer was already counted: continue with the next question
+  if(S.onb||S.view!=="today"||o.held) return; if(o.q.picked!=null){ o.q.i++; o.q.picked=null; }   // the shown answer was already counted: continue with the next question
   if(o.q.i>=o.q.qs.length){ localStorage.removeItem(QUIZ_KEY); return; }
   S.quiz=o.q; S.tab="today"; S.view="quiz"; render(); toast(T("quizResumed")); }catch(e){} }
 function startQuiz(kind, art){
   let words;
   const d=dayRec();
   if(kind==="pre"){ const el=eligible(), due=srsDueList().filter(w=>w.firstSeen<today()).slice(0,10), dk=new Set(due.map(w=>w.key)); words=due.concat(weightedPick(el.filter(w=>!dk.has(w.key)), Math.max(0,Math.min(10,el.length)-due.length)));
-    // a short dictionary should not mean an easy reward: top up to 10 with hard words from today's headline
-    const ma=mainArticle(); if(words.length&&words.length<10&&ma) words=words.concat(fillerWords(ma, words.map(w=>(w.word||"").toLowerCase()), 10-words.length)); }
+    // the review only asks the player's own old words (no headline top-up); an unfinished review of today comes back where it stopped
+    const h=preHeld(); if(h){ S.quiz=h; S.view="quiz"; render(); window.scrollTo(0,0); return; } }
   else if(kind==="weak"){ words=wkAnalyze().train; if(!words.length) return toast(T("wkNoWeak")); }
   else if(kind==="srs"){ words=srsDueList().slice(0,SRS_MAX); if(!words.length) return toast(T("srsNone")); }
   else if(kind==="rev"){ const all=[...S.words.values()]; if(all.length<LUCK.reviewMinWords) return toast(T("revNeed",{n:LUCK.reviewMinWords})); words=weightedPick(all, Math.min(LUCK.reviewQ, all.length)); }
@@ -3021,12 +3032,22 @@ function startQuiz(kind, art){
   S.quiz={kind, artId:art&&art.id, qs:words.map(makeQuestion), i:0, score:0, picked:null, answers:[], hasFill:words.some(w=>w.filler)};
   S.view="quiz"; render(); window.scrollTo(0,0);
 }
+/* first fight: after the first story's quiz, a player who has never fought goes straight to a little wild beast,
+   and the battle asks the words they just looked up in the news */
+function ffReady(){ return !(game().battles||0)&&!featLock("adv"); }
+function luToday(){ const d=dayRec(); return new Set([...(d.lookedUp||[]), ...Object.values(d.lookedUpBy||{}).flat()].map(l=>keyOf(String(l))).filter(k=>S.words.has(k))); }
+function ffCard(){ const n=luToday().size;
+  return `<section class="card ff-card"><b>${n?T("ffTitle",{n}):T("ffTitle0")}</b><p class="muted sm-t" style="margin:4px 0 10px">${T(n?"ffSub":"ffSub0")}</p>
+    <button class="btn" data-act="firstfight">${T("ffBtn")}</button></section>`; }
+const FF_MON="wd0-0";
+function ffGo(){ const g=game(); g.story=g.story||{}; if(!g.story.u1) g.story.u1=today(); saveGame(); S.quiz=null; S.advTab="go"; setTab("adv");
+  if(g.gender&&g.story.intro&&!(g.battles||0)) startBattle(FF_MON,{first:true}); }
 function finishPost(art, score, total){
   const d=dayRec();
   actFirstQuiz(); setTimeout(betaClaim,1500);
   if(isMain(art)) saveDay({...d, read:d.read||art.id, postDone:true, postScore:score, postTotal:total});
   if(isMain(art)) styleDaily();
-  if(isMain(art)&&INV.ref) setTimeout(invTick,600);
+  if(isMain(art)){ if(INV.ref) setTimeout(invTick,600); }   // (was "if(isMain&&INV.ref) … else saveDay(postBy)": that else also ran for the main story and wiped postDone)
   else saveDay({...d, postBy:{...(d.postBy||{}), [art.id]:{score,total}}});
   seenAdd(art);
   setTimeout(rdPush,500);
@@ -3050,11 +3071,11 @@ function viewQuiz(){
   }
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn" data-act="home">${T("backToday")}</button>`;
+    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn${ffReady()?" ghost":""}" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card quiz-done"><img src="assets/art/${Q.score>=Q.qs.length*0.7?"scene-win":"scene-quiz"}.webp" alt="" class="qd-art"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
       ${Q.kind==="lvl"?"":`<div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>`}${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
-      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="weak"?`<div class="card muted sm-t">${T("wkTrainNote")}</div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:rewardBox(Q.reward)}
+      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="weak"?`<div class="card muted sm-t">${T("wkTrainNote")}</div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:Q.kind==="post"&&ffReady()?ffCard()+rewardBox(Q.reward):rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
@@ -3719,7 +3740,7 @@ function gainExp(g,n){ const before=g.lv; g.exp+=n; while(g.lv<LV_MAX&&g.exp>=ex
 function awardQuiz(kind, score, total, isMainPost, art){
   if(!total) return null;
   const g=game(), acc=score/total;
-  const r={kind, base:score*10, acc:(acc>=0.8?20:0)+(acc===1?20:0), tickets:kind==="post"&&isTicketArt(art)?1:0, bonus:0, bonusTickets:0, acc100:Math.round(acc*100), old:kind==="post"&&!isTicketArt(art)};
+  const r={kind, base:score*10, acc:kind==="pre"&&total<PRE_ACC_MIN?0:(acc>=0.8?20:0)+(acc===1?20:0), tickets:kind==="post"&&isTicketArt(art)?1:0, bonus:0, bonusTickets:0, acc100:Math.round(acc*100), old:kind==="post"&&!isTicketArt(art)};
   if(r.old&&art){ const d=dayRec(), paid=d.oldPaid||[];
     if(paid.includes(art.id)||oldArtPaidBefore(art.id)){ r.noPay="lootOldDone"; return r; }
     if(paid.length>=OLD_ART_DAY){ r.noPay="lootOldCap"; return r; }
@@ -3858,10 +3879,10 @@ function startBattle(mid, opt){
   const g=game(), m=MONS[mid]; if(!m) return; opt=opt||{};
   if(m.wild){ if(stamina().v<1&&!opt.free) return toast(T("noStam",{m:stamNextMin()})); }
   else if(g.tickets<1) return toast(T("noTicket"));
-  S.battle={m:foeOf(m), stage:"spell", plz:!!opt.plz, free:!!opt.free};
+  S.battle={m:foeOf(m), stage:"spell", plz:!!opt.plz, free:!!opt.free, first:!!opt.first};
   // spell question needs at least one word in the dictionary
   if(!S.words.size) S.battle.stage="ready";
-  else { const w=weightedPick([...S.words.values()],1)[0]; S.battle.q=makeQuestion(w); }
+  else { const lu=luToday(), tw=opt.first?[...S.words.values()].filter(x=>lu.has(x.key)):[]; const w=weightedPick(tw.length?tw:[...S.words.values()],1)[0]; S.battle.q=makeQuestion(w); }
   S.view="battle"; render(); window.scrollTo(0,0);
   clearInterval(S.qtimer); if(S.battle.stage==="spell"&&S.battle.m.qSec){ const B=S.battle; B.qEnd=Date.now()+B.m.qSec*1000;
     S.qtimer=setInterval(()=>{ if(S.battle!==B||B.stage!=="spell"||B.picked!=null){ clearInterval(S.qtimer); return; } const left=Math.ceil((B.qEnd-Date.now())/1000), el=document.getElementById("qTime");
@@ -3908,7 +3929,8 @@ function quizOn(){ return S.words.size>=QB.minWords; }
 function quizStart(B){ B.quiz={n:0, ok:0, best:0, miss:[], used:new Set()}; B.gen=simGen(B.m, !!B.spellOk); const r=B.gen.next();
   B.res={ev:r.value.ev, win:false, maxP:r.value.maxP, ally:r.value.ally}; B.stage="fight"; B.idx=-1; quizAsk(B,r.value); saveGame(); render(); }
 function quizAsk(B,a){ const all=[...S.words.values()], Q=B.quiz, fresh=all.filter(x=>!Q.used.has(x.key)); if(!fresh.length) Q.used.clear();
-  const w=weightedPick(fresh.length?fresh:all,1)[0]; Q.used.add(w.key); B.ask={kind:a.ask, combo:a.combo, q:makeQuestion(w), picked:null, end:Date.now()+(a.ask==="def"?QB.defSec:QB.atkSec)*1000};
+  const lu=B.first?luToday():null, tw=lu?fresh.filter(x=>lu.has(x.key)):[];
+  const w=weightedPick(tw.length?tw:fresh.length?fresh:all,1)[0]; Q.used.add(w.key); B.ask={kind:a.ask, combo:a.combo, q:makeQuestion(w), picked:null, end:Date.now()+(a.ask==="def"?QB.defSec:QB.atkSec)*1000};
   clearInterval(S.qtimer); S.qtimer=setInterval(()=>{ const A=S.battle&&S.battle.ask; if(!A||A.picked!=null||S.battle!==B){ clearInterval(S.qtimer); return; }
     const left=(A.end-Date.now())/1000, bar=document.getElementById("bqBar"); if(bar) bar.style.transform=`scaleX(${Math.max(0,left/(A.kind==="def"?QB.defSec:QB.atkSec))})`;
     if(left<=0){ clearInterval(S.qtimer); quizAnswer(-1); } },100); }
@@ -3989,7 +4011,7 @@ function viewBattle(){
   const m=B.m, s=stats(), g=game();
   if(B.stage==="spell"||B.stage==="ready"){ if(g.gender) rigLoad();   // fetch the rig early so the fight starts animated
     const q=B.q, p=B.picked;
-    const spell = B.stage==="spell" ? `<div class="card qcard">${m.qSec&&p==null?`<div class="q-timer" id="qTime">⏱ ${Math.max(1,Math.ceil(((B.qEnd||Date.now()+m.qSec*1000)-Date.now())/1000))}</div>`:""}<div class="eyebrow">${T("spell")}</div><div class="muted" style="font-size:14px">${T("spellSub")}</div>
+    const spell = B.stage==="spell" ? `<div class="card qcard">${m.qSec&&p==null?`<div class="q-timer" id="qTime">⏱ ${Math.max(1,Math.ceil(((B.qEnd||Date.now()+m.qSec*1000)-Date.now())/1000))}</div>`:""}<div class="eyebrow">${T("spell")}${luToday().has(q.w.key)?` <span class="chip new bq-today">${T("bqToday")}</span>`:""}</div><div class="muted" style="font-size:14px">${T("spellSub")}</div>
       ${q.type==="cloze"?`<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"),"<u></u>")}</div>`:`<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`}
       <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(p!=null){ if(o.ok) c+=" right"; else if(i===p) c+=" wrong"; } return `<button class="${c}" data-spell="${i}" ${p!=null?"disabled":""}>${esc(o.label)}</button>`; }).join("")}</div>
       ${p!=null?`<div class="fb ${B.spellOk?"ok":"no"}">${B.qOut?T("plzQOut")+" ":""}${B.spellOk?T("spellOk"):T("spellFail",{w:esc(q.w.word),m:esc(mean(q.w))})}</div>`:""}</div>` : "";
@@ -4015,7 +4037,7 @@ function viewBattle(){
     : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p>${B.scarNew?`<p class="sm-t" style="margin:6px 0 0">🩹 ${T("scarNew",{m:esc(monName(m)),p:B.scarNew})}</p>`:""}</div>`) : "";
   const A=B.stage==="fight"&&B.ask, Q=B.quiz, asking=A&&(A.picked==null||!A.go);   // after answering, keep the last round's hit hidden until the new events play (else the monster's old hit replays first)
   const qcard=A?(()=>{ const q=A.q, p=A.picked, ok=p!=null&&p>=0&&q.opts[p].ok;
-    return `<div class="card qcard bq${A.kind==="def"?" def":""}"><div class="bq-top"><b>${A.kind==="def"?T("bqDef"):T("bqAtk")}</b>${A.kind==="atk"&&A.combo?`<span class="bq-combo${A.combo>=3?" hot":""}">${T("bqCombo",{n:A.combo})}</span>`:""}</div>
+    return `<div class="card qcard bq${A.kind==="def"?" def":""}"><div class="bq-top"><b>${A.kind==="def"?T("bqDef"):T("bqAtk")}</b>${luToday().has(q.w.key)?`<span class="chip new bq-today">${T("bqToday")}</span>`:""}${A.kind==="atk"&&A.combo?`<span class="bq-combo${A.combo>=3?" hot":""}">${T("bqCombo",{n:A.combo})}</span>`:""}</div>
       <div class="bq-time"><i id="bqBar"></i></div>
       ${q.type==="cloze"?`<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"),"<u></u>")}</div>`:`<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`}
       <div class="opts">${q.opts.map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(p!=null){ if(o.ok) c+=" right"; else if(i===p) c+=" wrong"; } return `<button class="${c}" data-bq="${i}" ${p!=null?"disabled":""}>${esc(o.label)}</button>`; }).join("")}</div>
@@ -4728,7 +4750,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.134";
+const APP_VERSION="2026.11.135";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5330,6 +5352,7 @@ document.addEventListener("click", e=>{
   if(a==="read"){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle()&&mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); return; }
   if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); setTimeout(rdPush,500); actFirstRead(); return startQuiz("post", mainArticle()); }
   if(a==="finishx") return startQuiz("post", currentArticle());
+  if(a==="firstfight") return ffGo();
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ regAsk(e.target.value,""); return; } if(e.target.id==="regCounty"){ regAsk("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
@@ -8166,6 +8189,8 @@ Object.assign(STR.ja,{tabPlay:"みんなで遊ぶ", playSub:"友だちと遊ぼ�
 Object.assign(STR.ko,{tabPlay:"함께 놀기", playSub:"친구와 함께 놀아요! 방을 만들고 코드를 공유하면 바로 시작, 레벨업은 필요 없어요."});
 /* ================= onboarding (first launch) ================= */
 const ONB_KEY="che-pro-onb";
+// 4 pages: welcome · language · level · how to play. The funnel on the server counts page 4 as "finished intro", so the last page still reports 4.
+const ONB_N=4, onbO=st=>st>=ONB_N-1?4:st;
 function onbMaybe(){
   let done=null; try{ done=localStorage.getItem(ONB_KEY); }catch(e){}
   const g=S.game, fresh=!S.words.size&&!S.days.size&&(!g||((g.lv||1)<=1&&!g.exp));
@@ -8177,12 +8202,11 @@ const ONB_IMGS=[];
 function onbPreload(){
   if(ONB_IMGS.length) return;
   const srcs=["welcome","read","study","party"].map(n=>"assets/art/scene-"+n+".webp");
-  try{ (genderPick(true).match(/src="([^"]+)"/g)||[]).forEach(m=>srcs.push(m.slice(5,-1))); }catch(e){}
   for(const src of new Set(srcs)){ const im=new Image(); im.decoding="async"; im.src=src; ONB_IMGS.push(im); if(im.decode) im.decode().catch(()=>{}); }
 }
 function onbClose(start){
   if(SANDBOX()){ DEV.onbDone=true; devSave(); } else try{ localStorage.setItem(ONB_KEY,"1"); }catch(e){}
-  actPing({o:S.onb?S.onb.step:0});
+  actPing({o:S.onb?onbO(S.onb.step):0});
   S.onb=null; onbRender();
   if(start&&mainArticle()){ S.tab="today"; S.backTo="today"; S.articleId=mainArticle().id; S.view="read"; S.quiz=null; render(); window.scrollTo(0,0); } else { S.tab="today"; S.view="today"; render(); }
 }
@@ -8191,14 +8215,13 @@ function onbRender(){
   if(!S.onb){ if(el) el.remove(); document.body.classList.remove("onb-open"); return; }
   if(!el){ el=document.createElement("div"); el.id="onb"; el.className="onb"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); document.body.append(el); }
   document.body.classList.add("onb-open");
-  const st=S.onb.step, N=5, dots=`<div class="onb-dots">${Array.from({length:N},(_,i)=>`<i class="${i===st?"on":""}"></i>`).join("")}</div>`;
+  const st=S.onb.step, N=ONB_N, dots=`<div class="onb-dots">${Array.from({length:N},(_,i)=>`<i class="${i===st?"on":""}"></i>`).join("")}</div>`;
   let body="";
   const bi=k=>`${STR.zh[k]}<span class="onb-en">${STR.en[k]}</span>`;   // first page: Chinese + English, before a language is chosen
   if(st===0) body=`<img src="assets/art/scene-welcome.webp" alt="" class="onb-art"><h2>${bi("onbHi")}</h2><p>${bi("onbHiSub")}</p>`;
   else if(st===1) body=`<img src="assets/art/scene-read.webp" alt="" class="onb-art sm"><h2>${T("onbLang")}</h2><div class="onb-opts">${LANGS.map(l=>`<button class="opt set-opt${l.k===langKey()?" right":""}" data-act="onblang" data-k="${l.k}" data-nosc><b>${l.label}</b></button>`).join("")}</div>`;
   else if(st===2) body=`<img src="assets/art/scene-study.webp" alt="" class="onb-art sm"><h2>${T("onbLevel")}</h2><p class="sm-t">${T("onbLevelSub")}</p><div class="onb-opts">${LEVELS.map(l=>`<button class="opt set-opt${l.k===LEVEL?" right":""}" data-act="onblvl" data-k="${l.k}"><b>${l.k==="IELTS"?"IELTS 7–8":l.k}</b><span class="optm">${T("lv"+l.k)}</span></button>`).join("")}</div>`;
-  else if(st===3) body=`<h2>${T("onbGender")}</h2>${genderPick(true)}`;
-  else body=`<img src="assets/art/scene-party.webp" alt="" class="onb-art xs"><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>🎮</b><span>${T("onbHow4")}</span></li></ol>${statsAskHtml(false,true)}`;
+  else body=`<img src="assets/art/scene-party.webp" alt="" class="onb-art xs"><h2>${T("onbHow")}</h2><ol class="onb-steps"><li><b>📰</b><span>${T("onbHow1")}</span></li><li><b>✅</b><span>${T("onbHow2")}</span></li><li><b>🧠</b><span>${T("onbHow3")}</span></li><li><b>⚔️</b><span>${T("onbHow4f")}</span></li></ol>${statsAskHtml(false,true)}`;
   const nav=st===0?`<button class="btn" data-act="onbnext">${STR.zh.onbNext} · ${STR.en.onbNext}</button>`:st<N-1?`<button class="btn" data-act="onbnext">${T("onbNext")}</button>`:`<button class="btn" data-act="onbstart">${T("onbStart")}</button><button class="btn ghost" data-act="onblvt">🧭 ${T("onbLvt")}</button><button class="btn ghost" data-act="onblook">${T("onbLook")}</button>`;
   el.innerHTML=`<div class="onb-card">${st>0?`<button class="onb-back" data-act="onbback" aria-label="back">‹</button>`:""}<button class="onb-skip" data-act="onbskip">${st===0?`${STR.zh.onbSkip} · ${STR.en.onbSkip}`:T("onbSkip")}</button>${body}${dots}<div class="onb-nav">${nav}</div></div>`;
   scApply&&scApply();
@@ -8225,7 +8248,7 @@ function onbCoach(){
   return everRead?"":`<div class="card onb-coach">👇 ${T("onbCoach")}</div>`;
 }
 document.addEventListener("click",e=>{ const t=e.target.closest("#onb [data-act]"); if(!t||!S.onb) return; const a=t.dataset.act; e.stopPropagation();
-  if(a==="onbnext"){ if(S.onb.step===3){ if(!S.genPick&&!game().gender) return toast(T("onbGenderNeed")); if(S.genPick) genderSet(S.genPick); } S.onb.step=Math.min(4,S.onb.step+1); actPing({o:S.onb.step}); return onbRender(); }
+  if(a==="onbnext"){ S.onb.step=Math.min(ONB_N-1,S.onb.step+1); actPing({o:onbO(S.onb.step)}); return onbRender(); }
   if(a==="genpick"){ S.genPick=t.dataset.k; return onbRender(); }
   if(a==="onbback"){ S.onb.step=Math.max(0,S.onb.step-1); return onbRender(); }
   if(a==="onbskip"||a==="onblook") return onbClose(false);
@@ -8679,25 +8702,27 @@ Object.assign(STR.ja,{"stName": "ドルイドの長老キーラン", "stNext": "
 Object.assign(STR.ko,{"stName": "드루이드 장로 키어런", "stNext": "다음", "stGift": "출정권 5장 받기", "stOk": "알겠어요", "stGo": "출발!", "stSkip": "건너뛰기", "in1": "젊은 여행자여, 드디어 왔구나! 나는 이 섬을 지키는 드루이드 장로 키어런이다. 마안의 발로르가 바다 밑에서 깨어나 괴물들이 아일랜드의 마을을 점령했어. 도전자가 필요하단다!", "in2": "괴물들은 지식의 힘을 두려워해. 매일 '오늘'의 영어 뉴스를 읽고 퀴즈를 마치면 기사마다 출정권 1장 (하루 최대 4장). 하루 3단계를 모두 마치면 내가 2장을 더 주마.", "in3": "출정권으로 마을을 공격하렴. 이기면 마을은 네 것이 되고 매일 세금도 들어온다. 오행 상극을 기억해: 금은 목을, 목은 토를, 토는 수를, 수는 화를, 화는 금을 이긴다.", "in4": "야생 짐승에게는 출정권이 필요 없고 체력만 든단다 (최대 6, 4시간마다 1 회복). 사냥해서 레벨을 올리고 골드를 벌어. 단, 같은 짐승은 잡을수록 골드가 줄어.", "in5": "이 출정권 5장으로 첫 번째 마을 딩글을 되찾으렴! Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "d21": "다시 왔구나! 오늘은 행운의 클로버 ☘️를 알려 주마. 단어장에서 간격 복습 (5단어 이상)을 한 번 끝내면 1장, 하루 최대 3장 받을 수 있어.", "d22": "클로버는 '행운의 집'에서 운명의 룰렛을 돌리는 데 쓴단다. 골드, 출정권, 장비 조각이 나와. 2장 이상이면 스크래치 카드도 살 수 있지.", "d23": "같은 속성·등급의 조각 3개를 모으면 네 레벨에 가까운 장비를 만들 수 있어. 잘 모으면 골드를 많이 아낄 수 있단다!", "d31": "제법 모험가다워졌구나! Lv 24가 되면 야생의 강적과 함께 싸울 동료가 생겨. 친구를 동료로 초대할 수도 있단다.", "d32": "심심할 땐 '멀티플레이'에서 친구들과 놀아 보렴. 무료지만 보상은 적어. 진짜 강해지는 길은 하나뿐, 매일 뉴스를 읽는 거야. 더블린에서 좋은 소식을 기다리마!", "stGot": "출정권 5장을 받았어요!"});
 /* ===== Story: Ciarán the druid elder. Day 1 (first visit to Adventure): the quest + basics + 5 quest passes.
    Later days: shamrocks & the Wheel of Fate, then allies & multiplayer. ===== */
-const STORY={u1:["u1"], intro:["in1","in2","in3","in4","in5"], d2:["u2","d21","d22","d23"], d3:["u3","d31","d3n","d32","d33"], d5:["u5a","u5b"]};
+const STORY={u1:["u1"], intro:["in1","in2","in3","in4","in5"], introS:["in1","inW","inG"], intro2:["in2","in3","in4","in5b"], d2:["u2","d21","d22","d23"], d3:["u3","d31","d3n","d32","d33"], d5:["u5a","u5b"]};
 // day 3: the elder introduces the leaderboard and asks for a nickname (skipped if the player already has one)
-const storySteps=k=>STORY[k].filter(x=>(x!=="d3n"||!S.story||!S.story.hadNick)&&((x!=="u2"&&x!=="u3")||(S.story&&S.story.nb)));
+const storySteps=k=>STORY[k==="intro"&&S.story&&S.story.short?"introS":k].filter(x=>(x!=="d3n"||!S.story||!S.story.hadNick)&&((x!=="u2"&&x!=="u3")||(S.story&&S.story.nb)));
 function elderArt(mood){ const k="elder-"+(mood||"talk"); return PICS.has(k)?`<img src="assets/art/${k}.webp" alt="" class="st-elder">`:`<div class="st-elder st-elder-ph" aria-hidden="true">🧙‍♂️</div>`; }
 function storyDue(){
   const g=game(), st=g.story||{};
   if(!ulAll()){ const n=ulDays(), home=S.view==="today"&&!S.quiz&&!document.getElementById("lgPop");   // new players: each unlock is introduced on the 今日 page
     if(n>=1&&!st.u1) return home?"u1":null;
     if(!st.intro) return S.view==="adv"&&g.gender?"intro":null;
+    if(st.ffS&&!st.intro2) return S.view==="adv"&&(g.battles||0)>=1?"intro2":null;
     if(n>=2&&!st.d2) return home?"d2":null;
     if(n>=3&&st.d2&&!st.d3) return home?"d3":null;
     if(n>=5&&st.d3&&!st.d5) return home?"d5":null;
     return null; }
   if(!st.intro) return S.view==="adv"&&g.gender?"intro":null;
+  if(st.ffS&&!st.intro2) return S.view==="adv"&&(g.battles||0)>=1?"intro2":null;
   if(!st.d2&&st.intro<today()) return "d2";
   if(st.d2&&!st.d3&&st.d2<today()) return "d3";
   return null;
 }
-function storyCheck(){ if(S.onb||S.story) return; const k=storyDue(); if(k){ S.story={k,step:0,hadNick:!!game().nick,nb:!ulAll()}; storyRender(); } }
+function storyCheck(){ if(S.onb||S.story) return; const k=storyDue(); if(k){ S.story={k,step:0,hadNick:!!game().nick,nb:!ulAll(),short:k==="intro"&&!(game().battles||0)}; storyRender(); } }
 function storyRender(){
   let el=document.getElementById("story");
   if(!S.story){ if(el) el.remove(); return; }
@@ -8707,17 +8732,18 @@ function storyRender(){
   const nickStep=P[i]==="d3n"&&!game().nick;
   const nickBox=!nickStep?"":CLOUD.user?`<div class="st-nick"><input id="stNick" class="search" maxlength="16" placeholder="${T("nickSet")}" autocomplete="off" value="${esc(S.story.draft||"")}"><button class="btn" data-st="nick">${T("stNickSave")}</button></div><p class="sm-t st-nick-note">🏷️ ${T("stNickNote")}</p>`
     :`<p class="sm-t st-nick-note">${T("stNickLogin")}</p><button class="btn gbtn st-signin" data-act="signin">${G_SVG}<span>${T("signIn")}</span></button>`;
-  const btn=nickStep?T("stNickLater"):last?(S.story.k==="intro"?T("stGift"):S.story.k==="u1"?T("stGoAdv"):S.story.k==="d5"?T("stLook"):S.story.k==="d2"?T("stOk"):T("stGo")):T("stNext");
-  el.innerHTML=`<div class="onb-card st-card">${S.story.k!=="intro"&&S.story.k!=="u1"?`<button class="onb-skip" data-st="skip">${T("stSkip")}</button>`:""}
+  const btn=nickStep?T("stNickLater"):last?(S.story.k==="intro"?T(S.story.short?"stGiftGo":"stGift"):S.story.k==="intro2"?T("stOk"):S.story.k==="u1"?T("stGoAdv"):S.story.k==="d5"?T("stLook"):S.story.k==="d2"?T("stOk"):T("stGo")):T("stNext");
+  el.innerHTML=`<div class="onb-card st-card">${S.story.k!=="intro"&&S.story.k!=="u1"&&S.story.k!=="intro2"?`<button class="onb-skip" data-st="skip">${T("stSkip")}</button>`:""}
     ${elderArt(mood)}<div class="st-name">${T("stName")}</div><p class="st-text">${T(P[i])}</p>${nickBox}
     <div class="onb-dots">${P.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("")}</div>
     <div class="onb-nav"><button class="btn${nickStep?" ghost":""}" data-st="${last?"done":"next"}">${btn}</button>${i>0?`<button class="btn ghost" data-st="back">‹</button>`:""}</div></div>`;
 }
-function storyDone(go){ const g=game(); g.story=g.story||{}; const k=S.story.k, nb=S.story.nb;
+function storyDone(go){ const g=game(); g.story=g.story||{}; const k=S.story.k, nb=S.story.nb, short=S.story.short; if(short) g.story.ffS=1;
   g.story[k]=today(); if(nb) g.story.ul=1; if(k==="intro"&&!g.story.gift){ g.story.gift=1; g.tickets+=5;
     for(const [slot,id] of [["weapon","w-metal-0"],["armor","a-water-0"]]){ if(!ITEMS[id]) continue; if(!(g.inv||[]).includes(id)) (g.inv=g.inv||[]).push(id); if(!g[slot]) g[slot]=id; }
     toast(T("stGot")); if(!S.words.size&&(g.lv||1)<=1) g.story.lock=1; }
   saveGame(); S.story=null; storyRender();
+  if(short&&!(g.battles||0)){ S.advTab="go"; S.tab="adv"; return startBattle(FF_MON,{first:true}); }
   if(go&&k==="u1"){ S.advTab="go"; return setTab("adv"); } if(go&&k==="d5"){ S.advTab="style"; return setTab("adv"); }
   render(); }
 document.addEventListener("click",e=>{ const t=e.target.closest("#story [data-st]"); if(!t||!S.story) return; e.stopPropagation(); const a=t.dataset.st;
@@ -12166,6 +12192,12 @@ Object.assign(STR.hi,{"pzNewDay": "नया दिन आ गया: आज क
 Object.assign(STR.es,{"pzNewDay": "Es un nuevo día: los acertijos de hoy son otros, busca otra vez los tréboles", "plzAllFull": "Todas las líneas están llenas, así que solo verás jugadores desconectados"});
 Object.assign(STR.ja,{"pzNewDay": "日付が変わりました。今日の謎は新しくなったので、もう一度クローバーを探してね", "plzAllFull": "今はどのラインも満員なので、オフラインのプレイヤーとだけ過ごせます"});
 Object.assign(STR.ko,{"pzNewDay": "날짜가 바뀌었어요. 오늘의 퍼즐이 새로 나왔으니 클로버를 다시 찾아보세요", "plzAllFull": "지금은 모든 라인이 가득 차서 오프라인 플레이어하고만 함께해요"});
+Object.assign(STR.zh,{"preAskT": "有 {n} 個舊字可以複習", "preAskDue": "今天有 {n} 個字該複習了", "preAskS": "可以先複習，也可以直接讀新聞，晚點再回來做。做到一半離開也會幫你記住進度。", "preAskGo": "🧠 先複習", "preAskResume": "🧠 繼續複習（剩 {n} 題）", "preAskRead": "📰 直接讀新聞", "preOpt": "可以晚點做", "preResume": "已做 {i}/{n} 題，點一下接著做", "moreLocked2": "讀完今天的頭條或做完複習，就能讀這些。", "ffTitle": "⚔️ 你剛查了 {n} 個字，拿它們去打第一場仗吧！", "ffTitle0": "⚔️ 去打你的第一場仗吧！", "ffSub": "戰鬥裡會考你剛剛在新聞查過的字：答對打得更重，答錯妖怪會反擊。", "ffSub0": "戰鬥會考你查過的英文字。下一篇新聞，記得點點看不會的字！", "ffBtn": "出發，打第一場仗", "bqToday": "📰 今天查過", "inW": "你剛剛在新聞裡查過的字，就是對付妖怪的咒語！戰鬥時會考這些字：答對打得更重，答錯妖怪會趁機反擊。", "inG": "這 5 張出征令和一套新手裝備（青銅劍、海豹皮衣）先送給你。我們先拿野外的小野兔練練手吧！", "stGiftGo": "收下，開打！", "in5b": "第一場打完了！之後可以在野外多練幾隻，準備好了就用出征令打下第一座城鎮丁格爾。從 1 級一路變強到 50 級，最後打敗都柏林的巴洛爾，拯救整個愛爾蘭！", "onbHow4f": "讀完第一篇，就用剛查的字打第一場仗"});
+Object.assign(STR.en,{"preAskT": "{n} old words ready to review", "preAskDue": "{n} words are due for review today", "preAskS": "Review first, or go straight to the news and come back later. If you stop halfway, your progress is kept.", "preAskGo": "🧠 Review first", "preAskResume": "🧠 Continue review ({n} left)", "preAskRead": "📰 Read the news now", "preOpt": "can wait", "preResume": "Stopped at {i}/{n}, tap to continue", "moreLocked2": "Read today's headline or finish the review to open these.", "ffTitle": "⚔️ You just looked up {n} words. Use them in your first battle!", "ffTitle0": "⚔️ Time for your first battle!", "ffSub": "The battle asks the words you just looked up in the news: right answers hit harder, wrong ones let the monster strike back.", "ffSub0": "Battles ask the English words you look up. In the next story, tap any word you don't know!", "ffBtn": "Go to my first battle", "bqToday": "📰 looked up today", "inW": "The words you just looked up in the news are your spells against the monsters! Battles ask these words: answer right and you hit harder, answer wrong and the monster strikes back.", "inG": "Take these 5 quest passes and a starter set of gear (a bronze sword and a sealskin coat). Let's warm up on a little hare in the Wilds!", "stGiftGo": "Take them and fight!", "in5b": "Your first battle is done! Train on a few more beasts in the Wilds, and when you're ready, use a quest pass to free Dingle, the first town. Grow from Lv 1 to Lv 50, defeat Balor in Dublin and save all of Ireland!", "onbHow4f": "After your first story, fight your first battle with the words you just looked up"});
+Object.assign(STR.hi,{"preAskT": "दोहराने के लिए {n} पुराने शब्द", "preAskDue": "आज {n} शब्द दोहराने हैं", "preAskS": "पहले दोहराएँ, या सीधे ख़बर पढ़ें और बाद में लौटें। बीच में छोड़ें तो प्रगति सहेजी रहेगी।", "preAskGo": "🧠 पहले दोहराएँ", "preAskResume": "🧠 दोहराव जारी रखें ({n} बाकी)", "preAskRead": "📰 सीधे ख़बर पढ़ें", "preOpt": "बाद में भी कर सकते हैं", "preResume": "{i}/{n} पर रुके थे, जारी रखने के लिए टैप करें", "moreLocked2": "आज की मुख्य ख़बर पढ़ें या दोहराव पूरा करें, फिर ये खुलेंगी।", "ffTitle": "⚔️ आपने अभी {n} शब्द देखे। पहली लड़ाई में उन्हें आज़माएँ!", "ffTitle0": "⚔️ अपनी पहली लड़ाई लड़ें!", "ffSub": "लड़ाई में वही शब्द पूछे जाएँगे जो आपने ख़बर में देखे: सही जवाब से वार ज़्यादा, ग़लत से दानव पलटवार करेगा।", "ffSub0": "लड़ाई में आपके देखे गए अंग्रेज़ी शब्द पूछे जाते हैं। अगली ख़बर में अनजान शब्दों पर टैप करें!", "ffBtn": "पहली लड़ाई पर चलें", "bqToday": "📰 आज देखा", "inW": "तुमने अभी ख़बर में जो शब्द देखे, वही दानवों के ख़िलाफ़ तुम्हारे मंत्र हैं! लड़ाई में यही शब्द पूछे जाएँगे: सही जवाब से वार ज़्यादा, ग़लत जवाब पर दानव पलटवार करेगा।", "inG": "ये 5 अभियान पास और शुरुआती सामान (काँसे की तलवार, सील-खाल कोट) लो। चलो पहले जंगल के छोटे ख़रगोश से अभ्यास करें!", "stGiftGo": "लो और लड़ो!", "in5b": "पहली लड़ाई पूरी! जंगल में कुछ और जानवरों से अभ्यास करो, फिर तैयार होकर अभियान पास से पहला शहर डिंगल आज़ाद करो। Lv 1 से Lv 50 तक बढ़ो, डबलिन में बलोर को हराओ और पूरा आयरलैंड बचाओ!", "onbHow4f": "पहली ख़बर के बाद, देखे गए शब्दों से पहली लड़ाई लड़ें"});
+Object.assign(STR.es,{"preAskT": "{n} palabras antiguas para repasar", "preAskDue": "Hoy toca repasar {n} palabras", "preAskS": "Repasa primero, o lee la noticia ya y vuelve después. Si lo dejas a medias, se guarda tu progreso.", "preAskGo": "🧠 Repasar primero", "preAskResume": "🧠 Seguir repasando (quedan {n})", "preAskRead": "📰 Leer la noticia ya", "preOpt": "puede esperar", "preResume": "Te quedaste en {i}/{n}, toca para seguir", "moreLocked2": "Lee el titular de hoy o termina el repaso para abrirlas.", "ffTitle": "⚔️ Acabas de consultar {n} palabras. ¡Úsalas en tu primera batalla!", "ffTitle0": "⚔️ ¡A tu primera batalla!", "ffSub": "La batalla pregunta las palabras que consultaste en la noticia: si aciertas golpeas más fuerte, si fallas el monstruo contraataca.", "ffSub0": "Las batallas preguntan las palabras en inglés que consultas. En la próxima noticia, ¡toca las que no sepas!", "ffBtn": "Ir a mi primera batalla", "bqToday": "📰 consultada hoy", "inW": "¡Las palabras que acabas de consultar en la noticia son tus hechizos contra los monstruos! En la batalla te preguntarán esas palabras: si aciertas golpeas más fuerte, si fallas el monstruo contraataca.", "inG": "Toma estos 5 pases y un equipo de principiante (espada de bronce y abrigo de piel de foca). ¡Calentemos con una pequeña liebre de las Tierras salvajes!", "stGiftGo": "¡Acepto, a luchar!", "in5b": "¡Primera batalla terminada! Entrena con algunas bestias más en las Tierras salvajes y, cuando estés listo, usa un pase para liberar Dingle, la primera ciudad. ¡Crece del Lv 1 al Lv 50, derrota a Balor en Dublín y salva toda Irlanda!", "onbHow4f": "Tras tu primera noticia, lucha tu primera batalla con las palabras que consultaste"});
+Object.assign(STR.ja,{"preAskT": "復習できる単語が {n} 語あります", "preAskDue": "今日復習する単語が {n} 語あります", "preAskS": "先に復習しても、すぐニュースを読んで後で戻ってきてもOK。途中でやめても進み具合は残ります。", "preAskGo": "🧠 先に復習", "preAskResume": "🧠 復習の続き（残り {n} 問）", "preAskRead": "📰 すぐニュースを読む", "preOpt": "後でもOK", "preResume": "{i}/{n} 問目まで済み。タップで続きから", "moreLocked2": "今日のトップ記事を読むか復習を終えると読めます。", "ffTitle": "⚔️ 今 {n} 語調べたね。その単語で初めてのバトルへ！", "ffTitle0": "⚔️ 初めてのバトルへ行こう！", "ffSub": "バトルでは今ニュースで調べた単語が出ます。正解すると強い攻撃、間違えると魔物が反撃します。", "ffSub0": "バトルでは調べた英単語が出題されます。次の記事ではわからない単語をタップしてみてね！", "ffBtn": "初めてのバトルへ", "bqToday": "📰 今日調べた", "inW": "今ニュースで調べた単語こそ、魔物と戦う呪文じゃ！バトルではその単語が出る。正解すれば強い一撃、間違えれば魔物が反撃してくるぞ。", "inG": "この出撃券5枚と初心者装備（青銅の剣・アザラシ皮のコート）を授けよう。まずは荒野の小さなウサギで腕試しじゃ！", "stGiftGo": "受け取って戦う！", "in5b": "初めてのバトルを終えたな！荒野でもう少し鍛えたら、出撃券で最初の町ディングルを取り戻すのじゃ。Lv1からLv50まで強くなり、ダブリンのバロールを倒してアイルランドを救ってくれ！", "onbHow4f": "最初の記事を読んだら、調べた単語で初めてのバトルへ"});
+Object.assign(STR.ko,{"preAskT": "복습할 수 있는 예전 단어 {n}개", "preAskDue": "오늘 복습할 단어가 {n}개 있어요", "preAskS": "먼저 복습해도 되고, 바로 뉴스를 읽고 나중에 와도 돼요. 중간에 그만둬도 진행 상황은 저장돼요.", "preAskGo": "🧠 먼저 복습", "preAskResume": "🧠 복습 계속하기 ({n}문제 남음)", "preAskRead": "📰 바로 뉴스 읽기", "preOpt": "나중에 해도 돼요", "preResume": "{i}/{n}번까지 했어요. 눌러서 계속", "moreLocked2": "오늘의 헤드라인을 읽거나 복습을 마치면 열려요.", "ffTitle": "⚔️ 방금 {n}개 단어를 찾았어요. 그 단어로 첫 전투에 나가요!", "ffTitle0": "⚔️ 첫 전투에 나가 봐요!", "ffSub": "전투에서는 방금 뉴스에서 찾은 단어가 나와요. 맞히면 더 세게 치고, 틀리면 괴물이 반격해요.", "ffSub0": "전투에서는 내가 찾은 영어 단어가 나와요. 다음 기사에서 모르는 단어를 눌러 보세요!", "ffBtn": "첫 전투 하러 가기", "bqToday": "📰 오늘 찾은 단어", "inW": "방금 뉴스에서 찾은 단어가 바로 괴물을 물리치는 주문이란다! 전투에서 그 단어들이 나와: 맞히면 더 세게 치고, 틀리면 괴물이 반격하지.", "inG": "출정권 5장과 초보자 장비(청동 검, 물개 가죽 코트)를 주마. 먼저 야생의 작은 토끼로 몸을 풀어 보자!", "stGiftGo": "받고 싸우기!", "in5b": "첫 전투를 마쳤구나! 야생에서 조금 더 단련하고, 준비가 되면 출정권으로 첫 마을 딩글을 되찾으렴. Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "onbHow4f": "첫 기사를 읽고 나면, 찾은 단어로 첫 전투를 해요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
