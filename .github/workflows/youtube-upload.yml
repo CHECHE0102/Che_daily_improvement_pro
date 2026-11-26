@@ -1,0 +1,46 @@
+name: YouTube upload (manual)
+# Uploads one video to the BinBin channel through the YouTube Data API.
+# Needs secrets YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN.
+on:
+  workflow_dispatch:
+    inputs:
+      video_url:
+        description: 'Public URL of the .mp4 (e.g. a raw.githubusercontent.com link)'
+        required: true
+      title:
+        description: 'Title'
+        required: true
+      description:
+        description: 'Description'
+        default: ''
+      privacy:
+        description: 'private / unlisted / public (forced to private until the API audit passes)'
+        default: 'private'
+permissions:
+  contents: read
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+      - name: Upload
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          VIDEO_URL: ${{ github.event.inputs.video_url }}
+          TITLE: ${{ github.event.inputs.title }}
+          DESC: ${{ github.event.inputs.description }}
+          PRIVACY: ${{ github.event.inputs.privacy }}
+        run: |
+          curl -sSfL "$VIDEO_URL" -o /tmp/v.mp4
+          python - <<'PY'
+          import json, os
+          json.dump({"title": os.environ["TITLE"], "description": os.environ["DESC"],
+                     "privacy": os.environ["PRIVACY"] or "private",
+                     "tags": ["英文學習", "每日英文", "BinBin"]}, open("/tmp/meta.json", "w"), ensure_ascii=False)
+          PY
+          python tools/youtube_upload.py /tmp/v.mp4 /tmp/meta.json
