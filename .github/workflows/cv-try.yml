@@ -1,0 +1,17 @@
+# One-off: try the 履歷桌 CV writer with sample answers (Haiku vs Opus). Remove before merging.
+name: cv-try
+on:
+  push:
+    branches: [claude/project-thread-rtctg0]
+    paths: [functions/test/cv-try.mjs, .github/workflows/cv-try.yml]
+jobs:
+  try:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: cd functions && npm ci --omit=dev --no-audit --no-fund
+      - run: node functions/test/cv-try.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

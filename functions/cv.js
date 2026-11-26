@@ -55,7 +55,7 @@ Also give:
 - missing: up to 5 questions in "tipsLang" whose answers would make the CV stronger (missing dates, numbers, results). Empty if nothing important is missing.`;
 
 const clip = (v, n) => String(v == null ? "" : v).slice(0, n);
-function cleanAnswers(a) {
+export function cleanAnswers(a) {
   // keep only the fields the form has, with length limits (also keeps contact details out if an old app version sends them)
   const L = (x, n, f) => (Array.isArray(x) ? x : []).slice(0, n).map(f);
   return {
@@ -96,6 +96,18 @@ export async function cvLeft(db, uid) {
   return { day: CV_LIMITS.day - (x.d === d ? x.n || 0 : 0), month: CV_LIMITS.month - (x.m === d.slice(0, 7) ? x.mn || 0 : 0) };
 }
 
+// one AI call (also used by functions/test/cv-try.mjs to try models)
+export function callAi(key, body, model = MODEL) {
+  const client = new Anthropic({ apiKey: key, maxRetries: 1, timeout: 100e3 });
+  return client.messages.create({
+    model,
+    max_tokens: 16000,
+    output_config: { effort: "medium", format: { type: "json_schema", schema: SCHEMA } },
+    system: SYSTEM,
+    messages: [{ role: "user", content: body }],
+  });
+}
+
 export async function runCv(db, uid, answers, key, admin) {
   const a = cleanAnswers(answers || {}), body = JSON.stringify(a);
   if (body.length > MAX_IN + 1500) return { status: 413, json: { error: "long" } };
@@ -103,14 +115,7 @@ export async function runCv(db, uid, answers, key, admin) {
   const use = await useOne(db, uid, admin);
   if (!use.ok) return { status: 429, json: { error: use.why, limits: CV_LIMITS } };
   try {
-    const client = new Anthropic({ apiKey: key, maxRetries: 1, timeout: 100e3 });
-    const r = await client.messages.create({
-      model: MODEL,
-      max_tokens: 16000,
-      output_config: { effort: "medium", format: { type: "json_schema", schema: SCHEMA } },
-      system: SYSTEM,
-      messages: [{ role: "user", content: body }],
-    });
+    const r = await callAi(key, body);
     if (r.stop_reason === "refusal") { await giveBack(db, uid); return { status: 422, json: { error: "refused" } }; }
     if (r.stop_reason === "max_tokens") { await giveBack(db, uid); return { status: 502, json: { error: "ai" } }; }
     const txt = r.content.filter(b => b.type === "text").map(b => b.text).join("");
