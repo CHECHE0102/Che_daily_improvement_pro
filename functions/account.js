@@ -93,6 +93,15 @@ export async function eraseUser(db, uid, { rtdb = null, log = () => {} } = {}) {
         if (x.a_u === uid) Object.assign(up, { a_u: GONE, a_n: GONE });
         if (x.m_u === uid) Object.assign(up, { m_u: GONE, m_n: GONE });
         if (Object.keys(up).length) await d.ref.update(up); } }],
+    // news emoji: your reaction on each article goes and its count is lowered by one (safe to repeat: no doc, no change)
+    ["newsReact", async () => { const arts = await col("newsReact").listDocuments();
+      for (let i = 0; i < arts.length; i += 100) {
+        const mine = await db.getAll(...arts.slice(i, i + 100).map(a => a.collection("u").doc(uid)));
+        for (const d of mine) if (d.exists) await db.runTransaction(async tx => { const s = await tx.get(d.ref); if (!s.exists) return;
+          const k = s.data().e, top = d.ref.parent.parent;
+          if (typeof k === "string" && /^[a-z]{2,5}$/.test(k)) { const t = await tx.get(top); const v = t.exists ? (+t.data()[k] || 0) : 0; if (v > 1) tx.update(top, { [k]: FieldValue.increment(-1) }); else if (t.exists) tx.update(top, { [k]: FieldValue.delete() }); }
+          tx.delete(d.ref); });
+      } }],
     // messages you sent us and error reports from your account
     ["feedback", () => delQuery(db, col("feedback").where("uid", "==", uid))],
     ["inbox", () => db.recursiveDelete(col("inbox").doc(uid))],   // our replies to the player's feedback
@@ -114,7 +123,7 @@ export async function eraseUser(db, uid, { rtdb = null, log = () => {} } = {}) {
   return { failed, blocking };
 }
 const CORE = new Set(["users", "own docs", "nicks", "inviteCodes", "readMonths", "ieltsMonths", "ieltsWeeks", "toeicMonths",
-  "likeWeeks", "likeGiven", "well", "wellWin", "wellSum", "gifts to", "feedback", "inbox"]);
+  "likeWeeks", "likeGiven", "well", "wellWin", "wellSum", "gifts to", "feedback", "inbox", "newsReact"]);
 
 export { RTDB_URL };
 
