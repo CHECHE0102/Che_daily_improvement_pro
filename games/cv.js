@@ -19,6 +19,7 @@
     introH: ["愛爾蘭的履歷長這樣", "What a CV looks like in Ireland"],
     intro: [["最多 2 頁，經驗少的話 1 頁就好", "不放照片、生日、年齡、婚姻狀況", "最上面是一段 Personal Statement（自我介紹）", "寫清楚你的簽證和能不能工作", "工作經驗放在學歷前面，最新的在最上面", "英式拼寫，結尾寫 References available on request"],
       ["1 page with little experience, never more than 2", "No photo, date of birth, age or marital status", "A short personal statement at the top", "Say clearly what visa you have and that you can work", "Experience before education, newest first", "Irish/UK spelling, and \"References available on request\" at the end"]],
+    gift: ["💛 寫履歷的 AI 費用由 BinBin 的創作者幫你付。等你真的找到工作，也請把這份好意傳下去，好好回饋社會 🍀", "💛 The AI cost of your CV is paid for by BinBin's creator. When you land a job, please pass the kindness on and give back to your community 🍀"],
     how: ["你用中文回答就可以，AI 會寫成英文履歷，還會告訴你哪裡可以更好。", "Answer in Chinese or English: the AI writes the English CV and tells you what could be better."],
     privacy: ["隱私：回答只存在這支手機。按「AI 幫我寫」時，除了姓名和聯絡方式以外的回答會傳給 AI 寫成英文，伺服器不會留存。姓名、電話、Email 永遠不會離開手機。", "Privacy: your answers stay on this phone. When you press \"Write it for me\", everything except your name and contact details is sent to the AI to be written in English; our server keeps none of it. Name, phone and e-mail never leave the phone."],
     leftN: ["今天還可以讓 AI 寫 {d} 次（本月 {m} 次）", "AI writes left: {d} today ({m} this month)"],
@@ -104,6 +105,7 @@
 .cvb input,.cvb select,.cvb textarea{font:inherit;font-size:16px;color:var(--ink,#18221F);background:var(--paper,#F2F5F3);border:1px solid var(--line,#D3DCD8);border-radius:10px;padding:9px 10px;width:100%;font-weight:400}
 .cvb textarea{min-height:84px;resize:vertical}
 .cvb .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cvb-gift{background:var(--accent-soft,#DCEDE7);color:var(--ink,#18221F);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.5}
 .cvb-tip{background:var(--gorse-soft,#FBEBC0);border-radius:12px;padding:9px 11px;font-size:13.5px;line-height:1.45}
 .cvb-card{border:1px solid var(--line,#D3DCD8);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px}
 .cvb-card .hd{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px}
@@ -149,7 +151,7 @@
     const a = D.a;
     if (s === "intro") return `<div class="cvb-hero"><div class="ic">📝</div><h3>${t("title")}</h3><p>${t("sub")}</p></div>
       <div class="cvb-card"><b>🇮🇪 ${t("introH")}</b><ul class="cvb-l">${t("intro").map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
-      <div class="cvb-tip">${t("how")}</div><small class="mut">${t("privacy")}</small>
+      <div class="cvb-gift">${t("gift")}</div><div class="cvb-tip">${t("how")}</div><small class="mut">${t("privacy")}</small>
       ${left ? `<small class="mut">✨ ${t("leftN", { d: Math.max(0, left.day), m: Math.max(0, left.month) })}</small>` : ""}`;
     if (s === "target") return `<h3>🎯 ${t("s_target")}</h3>${tip("target")}${inp("a.target.jobs", t("jobs"), t("jobsPh"))}
       <small class="mut">${t("jobsPick")}</small><div class="cvb-chips">${JOBS.map(j => `<button data-job="${esc(j[0])}" class="${(a.target.jobs || "").includes(j[0]) ? "on" : ""}">${esc(zh() ? j[1] : j[0])}</button>`).join("")}</div>
@@ -208,6 +210,7 @@
         <span style="flex:1"></span><button class="btn ghost" data-go="edit">${edit ? t("editDone") : t("edit")}</button></div>
       ${edit ? editHtml(cv) : `<div class="cvb-paperw"><div class="cvb-paperbox">${paperHtml(cv, D.tpl)}</div></div><small class="mut cvb-pages"></small>`}
       <div class="cvb-bar"><button class="btn" data-go="pdf">${t("pdf")}</button><button class="btn ghost" data-go="copy">${t("copy")}</button></div>
+      <div class="cvb-gift">${t("gift")}</div>
       ${cv.tips && cv.tips.length ? `<div class="cvb-card"><b>${t("tips")}</b><ul class="cvb-l">${cv.tips.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
       ${cv.missing && cv.missing.length ? `<div class="cvb-card"><b>${t("missing")}</b><ul class="cvb-l">${cv.missing.map(x => `<li>${esc(x)}</li>`).join("")}</ul><button class="btn ghost" data-step="3">${t("fixAns")}</button></div>` : ""}
       <div class="cvb-card"><b>${t("nextT")}</b><ul class="cvb-l">${t("nextL").map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
