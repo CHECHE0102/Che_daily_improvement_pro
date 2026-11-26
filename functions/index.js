@@ -317,7 +317,7 @@ export const adminStats = onRequest({ region: REGION, cors: ORIGINS, maxInstance
 });
 
 // 履歷桌 AI CV writer (functions/cv.js). POST {answers} → {cv, left}; POST {check:true} → {left} (how many tries are left).
-// Signed-in players only; 3 per day and 10 per month each. Nothing the player wrote is stored or logged.
+// Signed-in players only; 3 per day and 10 per month each (Haiku), plus {pro:true} once a month (Opus 精修版). Nothing the player wrote is stored or logged.
 export const cvWrite = onRequest({ region: REGION, secrets: [AI_KEY], cors: ORIGINS, maxInstances: 5, concurrency: 20, timeoutSeconds: 120, memory: "256MiB" }, async (req, res) => {
   if (req.method !== "POST") return res.status(405).json({ error: "method" });
   const tok = (req.get("Authorization") || "").replace(/^Bearer\s+/i, "");
@@ -330,7 +330,7 @@ export const cvWrite = onRequest({ region: REGION, secrets: [AI_KEY], cors: ORIG
     const banned = await db.doc("banned/" + user.uid).get();
     if (banned.exists) return res.status(403).json({ error: "banned" });
     const admin = !!(user.email_verified && sha(user.email) === ADMIN_SHA);
-    const r = await runCv(db, user.uid, req.body?.answers, key, admin);
+    const r = await runCv(db, user.uid, req.body?.answers, key, admin, req.body?.pro === true);
     if (r.status === 200) logger.info("cvWrite", { tokens: r.json.usage });   // counts only, never the text
     return res.status(r.status).json(r.json);
   } catch (e) {

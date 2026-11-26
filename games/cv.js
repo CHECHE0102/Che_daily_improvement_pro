@@ -22,7 +22,11 @@
     gift: ["💛 寫履歷的 AI 費用由 BinBin 的創作者幫你付。等你真的找到工作，也請把這份好意傳下去，好好回饋社會 🍀", "💛 The AI cost of your CV is paid for by BinBin's creator. When you land a job, please pass the kindness on and give back to your community 🍀"],
     how: ["你用中文回答就可以，AI 會寫成英文履歷，還會告訴你哪裡可以更好。", "Answer in Chinese or English: the AI writes the English CV and tells you what could be better."],
     privacy: ["隱私：回答只存在這支手機。按「AI 幫我寫」時，除了姓名和聯絡方式以外的回答會傳給 AI 寫成英文，伺服器不會留存。姓名、電話、Email 永遠不會離開手機。", "Privacy: your answers stay on this phone. When you press \"Write it for me\", everything except your name and contact details is sent to the AI to be written in English; our server keeps none of it. Name, phone and e-mail never leave the phone."],
-    leftN: ["今天還可以讓 AI 寫 {d} 次（本月 {m} 次）", "AI writes left: {d} today ({m} this month)"],
+    leftN: ["今天還可以讓 AI 寫 {d} 次（本月 {m} 次）· 🌟 精修版本月 {p} 次", "AI writes left: {d} today ({m} this month) · 🌟 premium: {p} this month"],
+    writePro: ["🌟 精修版（每月 1 次）", "🌟 Premium write (1 a month)"],
+    proInfo: ["精修版用最強的 AI，寫得更細、建議更具體。每月 1 次，不扣一般次數。", "Premium uses our strongest AI: richer wording and more specific advice. Once a month, on top of the normal writes."],
+    proTag: ["🌟 這份是精修版", "🌟 Premium version"],
+    e_pro: ["這個月的精修版用過了，下個月再來（一般版還可以用）", "You've used this month's premium write; normal writes still work"],
     resume: ["繼續上次的履歷", "Continue my CV"], fresh: ["重新開始", "Start over"], clearAsk: ["確定清除所有回答和履歷？", "Clear all answers and the CV?"],
     s_target: ["想做什麼工作", "Target job"], s_visa: ["簽證與工作", "Visa & availability"], s_work: ["工作經驗", "Work experience"], s_edu: ["學歷", "Education"], s_skills: ["技能與語言", "Skills & languages"], s_contact: ["聯絡方式", "Contact details"], s_result: ["你的履歷", "Your CV"],
     jobs: ["想應徵的工作", "Jobs you want"], jobsPh: ["例：咖啡師、餐廳外場", "e.g. barista, waiter"], jobsPick: ["常見工作（點一下加入）", "Common jobs (tap to add)"],
@@ -152,7 +156,7 @@
     if (s === "intro") return `<div class="cvb-hero"><div class="ic">📝</div><h3>${t("title")}</h3><p>${t("sub")}</p></div>
       <div class="cvb-card"><b>🇮🇪 ${t("introH")}</b><ul class="cvb-l">${t("intro").map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
       <div class="cvb-gift">${t("gift")}</div><div class="cvb-tip">${t("how")}</div><small class="mut">${t("privacy")}</small>
-      ${left ? `<small class="mut">✨ ${t("leftN", { d: Math.max(0, left.day), m: Math.max(0, left.month) })}</small>` : ""}`;
+      ${leftHtml()}`;
     if (s === "target") return `<h3>🎯 ${t("s_target")}</h3>${tip("target")}${inp("a.target.jobs", t("jobs"), t("jobsPh"))}
       <small class="mut">${t("jobsPick")}</small><div class="cvb-chips">${JOBS.map(j => `<button data-job="${esc(j[0])}" class="${(a.target.jobs || "").includes(j[0]) ? "on" : ""}">${esc(zh() ? j[1] : j[0])}</button>`).join("")}</div>
       ${inp("a.target.industry", t("industry"), t("industryPh"))}${area("a.target.notes", t("tnotes"), t("tnotesPh"))}`;
@@ -201,12 +205,15 @@
         <div class="row2"><label>School<input data-cv="education.${i}.school" value="${esc(e.school)}"></label><label>Place<input data-cv="education.${i}.place" value="${esc(e.place)}"></label></div><label>Notes<input data-cv="education.${i}.notes" value="${esc(e.notes)}"></label></div>`).join("")}
       ${ta("certs", "Certifications" + ln, lines(cv.certs))}${ta("languages", "Languages" + ln, lines(cv.languages))}${ta("extras", "Additional Information" + ln, lines(cv.extras))}</div>`;
   }
+  const leftHtml = () => left ? `<small class="mut">✨ ${t("leftN", { d: Math.max(0, left.day), m: Math.max(0, left.month), p: Math.max(0, left.pro ?? 1) })}</small>` : "";
+  const writeBtns = again => `<button class="btn ${again ? "ghost" : ""}" data-go="write">${again ? t("rewrite") : t("write")}</button>
+      <button class="btn ghost" data-go="writePro" ${left && left.pro <= 0 ? "disabled" : ""}>${t("writePro")}</button><small class="mut">${t("proInfo")}</small>`;
   function resultHtml() {
     const cv = D.cv;
     if (busy) return `<div class="cvb-wait"><div class="cvb-spin"></div><b>${t("writing")}</b><small class="mut">${t("tip_target")}</small></div>`;
-    if (!cv) return `<h3>✨ ${t("s_result")}</h3><div class="cvb-tip">${t("how")}</div><small class="mut">${t("privacy")}</small>${left ? `<small class="mut">✨ ${t("leftN", { d: Math.max(0, left.day), m: Math.max(0, left.month) })}</small>` : ""}
-      <button class="btn" data-go="write">${t("write")}</button>`;
-    return `<div class="cvb-bar"><b style="font-size:14px">${t("tpl")}</b><div class="cvb-chips">${["classic", "fresh"].map(k => `<button data-tpl="${k}" class="${D.tpl === k ? "on" : ""}">${t("tpl_" + k)}</button>`).join("")}</div>
+    if (!cv) return `<h3>✨ ${t("s_result")}</h3><div class="cvb-tip">${t("how")}</div><small class="mut">${t("privacy")}</small>${leftHtml()}
+      ${writeBtns(false)}`;
+    return `${D.pro ? `<div class="cvb-gift" style="padding:6px 10px">${t("proTag")}</div>` : ""}<div class="cvb-bar"><b style="font-size:14px">${t("tpl")}</b><div class="cvb-chips">${["classic", "fresh"].map(k => `<button data-tpl="${k}" class="${D.tpl === k ? "on" : ""}">${t("tpl_" + k)}</button>`).join("")}</div>
         <span style="flex:1"></span><button class="btn ghost" data-go="edit">${edit ? t("editDone") : t("edit")}</button></div>
       ${edit ? editHtml(cv) : `<div class="cvb-paperw"><div class="cvb-paperbox">${paperHtml(cv, D.tpl)}</div></div><small class="mut cvb-pages"></small>`}
       <div class="cvb-bar"><button class="btn" data-go="pdf">${t("pdf")}</button><button class="btn ghost" data-go="copy">${t("copy")}</button></div>
@@ -214,7 +221,7 @@
       ${cv.tips && cv.tips.length ? `<div class="cvb-card"><b>${t("tips")}</b><ul class="cvb-l">${cv.tips.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
       ${cv.missing && cv.missing.length ? `<div class="cvb-card"><b>${t("missing")}</b><ul class="cvb-l">${cv.missing.map(x => `<li>${esc(x)}</li>`).join("")}</ul><button class="btn ghost" data-step="3">${t("fixAns")}</button></div>` : ""}
       <div class="cvb-card"><b>${t("nextT")}</b><ul class="cvb-l">${t("nextL").map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
-      ${left ? `<small class="mut">✨ ${t("leftN", { d: Math.max(0, left.day), m: Math.max(0, left.month) })}</small>` : ""}<button class="btn ghost" data-go="write">${t("rewrite")}</button>`;
+      ${leftHtml()}${writeBtns(true)}`;
   }
   // scale the A4 paper preview to the card width and mark where page 2 starts
   function fitPaper() {
@@ -294,17 +301,17 @@
     catch (e) { return { error: "net" }; }
   }
   async function checkLeft() { const r = await call({ check: true }); if (r && r.left) { left = r.left; if (box) draw(true); } }
-  async function write() {
+  async function write(pro) {
     if (busy) return;
     const a = JSON.parse(JSON.stringify(D.a)), has = o => Object.values(o || {}).some(v => String(v || "").trim());
     a.work = a.work.filter(has); a.education = a.education.filter(has); a.tipsLang = tipsLang();
     if (!a.work.length && !a.education.length) return toast(t("needSome"));
     busy = true; edit = false; D.step = STEPS.indexOf("result"); draw();
-    const r = await call({ answers: a });   // contact details (D.c) are never sent
+    const r = await call(pro ? { answers: a, pro: true } : { answers: a });   // contact details (D.c) are never sent
     busy = false;
-    if (r && r.cv) { D.cv = r.cv; if (r.left) left = r.left; save(); sfx("prize"); }
+    if (r && r.cv) { D.cv = r.cv; D.pro = !!r.pro; if (r.left) left = r.left; save(); sfx("prize"); }
     else if (r.error === "empty") toast(t("needSome"));
-    else toast(t("e_" + (["login", "setup", "day", "month", "busy", "refused", "banned"].includes(r.error) ? r.error : "net")));
+    else toast(t("e_" + (["login", "setup", "day", "month", "busy", "refused", "banned", "pro"].includes(r.error) ? r.error : "net")));
     draw();
   }
 
@@ -317,7 +324,7 @@
     const started = D.step > 0 || D.cv || D.a.work.some(w => w.title || w.did);
     f.innerHTML = first ? (started && D.cv ? `<button class="btn ghost" data-go="clear">${t("fresh")}</button><button class="btn" data-step="7">${t("resume")}</button>` : `${started ? `<button class="btn ghost" data-go="clear">${t("fresh")}</button>` : ""}<button class="btn" data-step="1">${t("start")}</button>`)
       : last ? `<button class="btn ghost" data-step="${D.step - 1}" ${busy ? "disabled" : ""}>‹ ${t("back")}</button>`
-        : `<button class="btn ghost" data-step="${D.step - 1}">‹ ${t("back")}</button>${s === "contact" && !D.cv ? `<button class="btn" data-go="write">${t("write")}</button>` : `<button class="btn" data-step="${D.step + 1}">${t("next")} ›</button>`}`;
+        : `<button class="btn ghost" data-step="${D.step - 1}">‹ ${t("back")}</button><button class="btn" data-step="${D.step + 1}">${t("next")} ›</button>`;
     b.scrollTop = top; if (s === "result" && D.cv && !edit) requestAnimationFrame(fitPaper);
   }
   function onInput(e) {
@@ -334,7 +341,8 @@
     if (b.dataset.del) { D.a[b.dataset.del].splice(+b.dataset.i, 1); save(); return draw(true); }
     if (b.dataset.tpl) { D.tpl = b.dataset.tpl; save(); return draw(true); }
     const g = b.dataset.go;
-    if (g === "write") return write();
+    if (g === "write") return write(false);
+    if (g === "writePro") return write(true);
     if (g === "edit") { edit = !edit; return draw(); }
     if (g === "pdf") return makePdf();
     if (g === "copy") { try { await navigator.clipboard.writeText(plainText(D.cv)); toast(t("copied")); } catch (er) { toast("✕"); } return; }

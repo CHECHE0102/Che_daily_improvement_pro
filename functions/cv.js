@@ -13,8 +13,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { FieldValue } from "firebase-admin/firestore";
 
-export const CV_LIMITS = { day: 3, month: 10, allDay: 300 };   // per player per day / per month; everyone together per day
-const MODEL = "claude-haiku-5-5";   // CheChe 2026-11-26: cheapest Claude, about US$0.001-0.002 per CV
+export const CV_LIMITS = { day: 3, month: 10, allDay: 300, pro: 1, proAllDay: 100 };   // Haiku: per player per day / month, everyone per day; 精修版 (Opus): per player per month, everyone per day
+const MODEL = "claude-haiku-5-5";   // CheChe 2026-11-26: cheapest Claude, about US$0.002 per CV
+const PRO_MODEL = "claude-opus-5-5";   // 精修版: once a month per player, about US$0.05 per CV
 const MAX_IN = 9000;   // characters of answers we accept
 
 const S = { type: "string" }, A = { type: "array", items: S };
@@ -69,31 +70,34 @@ export function cleanAnswers(a) {
   };
 }
 
-// one transaction: check and count. Returns {ok, left} or {ok:false, why}
-async function useOne(db, uid, admin) {
-  const now = new Date(), d = now.toISOString().slice(0, 10), m = d.slice(0, 7);
+// one transaction: check and count. pro = the monthly 精修版 try (Opus), a separate pool from the everyday Haiku tries.
+// cvUse/{uid}: {d, n, m, mn, pm (month of last pro), pn}; cvUse/_all: {d, n, pn}. Returns {ok, left} or {ok:false, why}
+const leftOf = (x, d, m) => ({ day: Math.max(0, CV_LIMITS.day - (x.d === d ? x.n || 0 : 0)), month: Math.max(0, CV_LIMITS.month - (x.m === m ? x.mn || 0 : 0)), pro: Math.max(0, CV_LIMITS.pro - (x.pm === m ? x.pn || 0 : 0)) });
+async function useOne(db, uid, admin, pro) {
+  const d = new Date().toISOString().slice(0, 10), m = d.slice(0, 7);
   const me = db.doc("cvUse/" + uid), all = db.doc("cvUse/_all");
   return db.runTransaction(async t => {
     const [a, b] = await Promise.all([t.get(me), t.get(all)]);
     const x = a.exists ? a.data() : {}, y = b.exists ? b.data() : {};
-    const n = x.d === d ? x.n || 0 : 0, mn = x.m === m ? x.mn || 0 : 0, an = y.d === d ? y.n || 0 : 0;
+    const L = leftOf(x, d, m), an = y.d === d ? y.n || 0 : 0, ap = y.d === d ? y.pn || 0 : 0;
     if (!admin) {
-      if (an >= CV_LIMITS.allDay) return { ok: false, why: "busy" };
-      if (mn >= CV_LIMITS.month) return { ok: false, why: "month" };
-      if (n >= CV_LIMITS.day) return { ok: false, why: "day" };
+      if (pro) { if (ap >= CV_LIMITS.proAllDay) return { ok: false, why: "busy" }; if (L.pro <= 0) return { ok: false, why: "pro" }; }
+      else { if (an >= CV_LIMITS.allDay) return { ok: false, why: "busy" }; if (L.month <= 0) return { ok: false, why: "month" }; if (L.day <= 0) return { ok: false, why: "day" }; }
     }
-    t.set(me, { d, n: n + 1, m, mn: mn + 1, at: FieldValue.serverTimestamp() });
-    t.set(all, { d, n: an + 1 });
-    return { ok: true, left: { day: Math.max(0, CV_LIMITS.day - n - 1), month: Math.max(0, CV_LIMITS.month - mn - 1) } };
+    const nx = pro ? { ...x, pm: m, pn: (x.pm === m ? x.pn || 0 : 0) + 1 } : { ...x, d, n: (x.d === d ? x.n || 0 : 0) + 1, m, mn: (x.m === m ? x.mn || 0 : 0) + 1 };
+    t.set(me, { d: nx.d || d, n: nx.d === d ? nx.n || 0 : 0, m: nx.m || m, mn: nx.m === m ? nx.mn || 0 : 0, pm: nx.pm || "", pn: nx.pn || 0, at: FieldValue.serverTimestamp() });
+    t.set(all, pro ? { d, n: an, pn: ap + 1 } : { d, n: an + 1, pn: ap });
+    return { ok: true, left: leftOf(nx, d, m) };
   });
 }
-async function giveBack(db, uid) {   // the AI call failed: the player keeps that try
-  try { await db.doc("cvUse/" + uid).update({ n: FieldValue.increment(-1), mn: FieldValue.increment(-1) }); await db.doc("cvUse/_all").update({ n: FieldValue.increment(-1) }); } catch (e) { /* ignore */ }
+async function giveBack(db, uid, pro) {   // the AI call failed: the player keeps that try
+  const f = pro ? "pn" : "n";
+  try { await db.doc("cvUse/" + uid).update(pro ? { pn: FieldValue.increment(-1) } : { n: FieldValue.increment(-1), mn: FieldValue.increment(-1) }); await db.doc("cvUse/_all").update({ [f]: FieldValue.increment(-1) }); } catch (e) { /* ignore */ }
 }
 
 export async function cvLeft(db, uid) {
-  const s = await db.doc("cvUse/" + uid).get(), x = s.exists ? s.data() : {}, d = new Date().toISOString().slice(0, 10);
-  return { day: CV_LIMITS.day - (x.d === d ? x.n || 0 : 0), month: CV_LIMITS.month - (x.m === d.slice(0, 7) ? x.mn || 0 : 0) };
+  const s = await db.doc("cvUse/" + uid).get(), d = new Date().toISOString().slice(0, 10);
+  return leftOf(s.exists ? s.data() : {}, d, d.slice(0, 7));
 }
 
 // one AI call (also used by functions/test/cv-try.mjs to try models)
@@ -108,21 +112,22 @@ export function callAi(key, body, model = MODEL) {
   });
 }
 
-export async function runCv(db, uid, answers, key, admin) {
+export async function runCv(db, uid, answers, key, admin, pro) {
+  pro = !!pro;
   const a = cleanAnswers(answers || {}), body = JSON.stringify(a);
   if (body.length > MAX_IN + 1500) return { status: 413, json: { error: "long" } };
   if (!a.work.length && !a.education.length) return { status: 400, json: { error: "empty" } };
-  const use = await useOne(db, uid, admin);
+  const use = await useOne(db, uid, admin, pro);
   if (!use.ok) return { status: 429, json: { error: use.why, limits: CV_LIMITS } };
   try {
-    const r = await callAi(key, body);
-    if (r.stop_reason === "refusal") { await giveBack(db, uid); return { status: 422, json: { error: "refused" } }; }
-    if (r.stop_reason === "max_tokens") { await giveBack(db, uid); return { status: 502, json: { error: "ai" } }; }
+    const r = await callAi(key, body, pro ? PRO_MODEL : MODEL);
+    if (r.stop_reason === "refusal") { await giveBack(db, uid, pro); return { status: 422, json: { error: "refused" } }; }
+    if (r.stop_reason === "max_tokens") { await giveBack(db, uid, pro); return { status: 502, json: { error: "ai" } }; }
     const txt = r.content.filter(b => b.type === "text").map(b => b.text).join("");
     const cv = JSON.parse(txt);
-    return { status: 200, json: { cv, left: use.left, usage: { in: r.usage?.input_tokens || 0, out: r.usage?.output_tokens || 0 } } };
+    return { status: 200, json: { cv, pro, left: use.left, usage: { in: r.usage?.input_tokens || 0, out: r.usage?.output_tokens || 0 } } };
   } catch (e) {
-    await giveBack(db, uid);
+    await giveBack(db, uid, pro);
     const st = e instanceof Anthropic.RateLimitError ? "busy" : e instanceof Anthropic.AuthenticationError ? "setup" : "ai";
     const err = new Error(st); err.cvStatus = st; err.detail = e && (e.status || e.name); throw err;
   }
