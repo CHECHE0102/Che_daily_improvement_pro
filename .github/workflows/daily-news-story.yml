@@ -69,6 +69,12 @@ jobs:
             out/story.mp4
             out/script.json
           retention-days: 3
+      - name: Preview branch (build only)
+        if: github.event.inputs.build_only == 'true'
+        run: |
+          mkdir -p /tmp/pv && cp out/story.jpg out/story.mp4 out/script.json /tmp/pv/ && cd /tmp/pv && git init -q -b story-preview
+          git config user.name "CHECHE0102"; git config user.email "CHECHE0102@users.noreply.github.com"
+          git add -A && git commit -qm "Story preview" && git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" story-preview
       - name: Queue
         if: steps.day.outputs.done != '1' && github.event.inputs.build_only != 'true'
         run: |
