@@ -1808,6 +1808,43 @@ select.search:disabled{opacity:.55}
 
 </head>
 <body>
+<!-- loading screen: shows at once, ticks through main program → today's news → sign-in & save, then fades.
+     Never waits more than 10 s (a blocked network must not leave the player stuck) -->
+<div id="boot" style="position:fixed;inset:0;z-index:300;background:#F2F5F3;color:#18221F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-family:system-ui,-apple-system,sans-serif;transition:opacity .35s">
+  <b style="font-size:24px;letter-spacing:.3px">BinBin daily</b>
+  <div id="bootStage" style="position:relative;width:280px;height:150px">
+    <div id="bootDogs" style="position:absolute;left:0;bottom:0;width:150px;height:136px;background:url(assets/boot/run.webp) 0 0/900px 136px no-repeat;animation:bootRun .55s steps(6) infinite;transition:left .35s"></div>
+    <img id="bootBall" src="assets/boot/ball.webp" alt="" width="36" height="36" style="position:absolute;left:154px;bottom:2px;animation:bootRoll .5s linear infinite;transition:left .35s">
+    <img id="bootCatch" src="assets/boot/catch.webp" alt="" width="202" height="150" style="position:absolute;left:39px;bottom:0;opacity:0;transform:scale(.85);transition:opacity .25s,transform .3s cubic-bezier(.3,1.6,.5,1)">
+  </div>
+  <div style="width:280px;height:10px;border-radius:99px;background:#D3DCD8;overflow:hidden"><i id="bootBar" style="display:block;height:100%;width:6%;background:#1D6A5A;border-radius:99px;transition:width .35s"></i></div>
+  <small id="bootTxt" style="color:#5B6A66;font-size:13px;min-height:18px"></small>
+</div>
+<style>@keyframes bootRun{to{background-position:-900px 0}}@keyframes bootRoll{to{transform:rotate(360deg)}}</style>
+<script>
+/* tiny on purpose: runs before the big game script has even arrived */
+var BOOT=(function(){
+  var L="zh"; try{ L=localStorage.getItem("che-pro-lang")||"zh"; }catch(e){}
+  var TX={zh:["載入遊戲中…","下載今日新聞…","連線登入和存檔…","準備好了！"],cn:["载入游戏中…","下载今日新闻…","连线登录和存档…","准备好了！"],
+    en:["Loading the game…","Getting today's news…","Connecting your save…","Ready!"],hi:["गेम लोड हो रहा है…","आज की खबरें आ रही हैं…","आपका सेव जोड़ रहे हैं…","तैयार!"],
+    es:["Cargando el juego…","Trayendo las noticias de hoy…","Conectando tu partida…","¡Listo!"],ja:["ゲームを読み込み中…","今日のニュースを取得中…","セーブデータに接続中…","準備完了！"],
+    ko:["게임 불러오는 중…","오늘의 뉴스 받는 중…","저장 데이터 연결 중…","준비 완료!"]};
+  var t=TX[L]||TX.zh, steps=["app","news","cloud"], done={}, over=false, t0=Date.now();
+  function el(id){ return document.getElementById(id); }
+  function show(){ var n=0; for(var i=0;i<steps.length;i++) if(done[steps[i]]) n++;
+    var f=n/steps.length, b=el("bootBar"), x=el("bootTxt"), dg=el("bootDogs"), bl=el("bootBall");
+    if(b) b.style.width=(6+f*94)+"%";
+    if(dg) dg.style.left=Math.round(f*90)+"px"; if(bl) bl.style.left=Math.round(154+f*90)+"px";
+    if(x){ var k=0; while(k<steps.length&&done[steps[k]]) k++; x.textContent=k<steps.length?t[k]:t[3]; } }
+  function end(){ if(over) return; over=true; show(); var d=el("boot"); if(!d) return;
+    var dg=el("bootDogs"), bl=el("bootBall"), c=el("bootCatch");   // "got it!": the pair sits with the ball
+    if(dg) dg.style.opacity="0"; if(bl) bl.style.opacity="0"; if(c){ c.style.opacity="1"; c.style.transform="scale(1)"; }
+    setTimeout(function(){ d.style.opacity="0"; d.style.pointerEvents="none"; setTimeout(function(){ d.remove(); },400); }, Math.max(700,1000-(Date.now()-t0))); }
+  function step(k){ if(over||done[k]) return; done[k]=1; show(); for(var i=0;i<steps.length;i++) if(!done[steps[i]]) return; end(); }
+  show(); setTimeout(end,10000);
+  return {step:step, end:end};
+})();
+</script>
 <div class="wrap">
   <header class="mast"><div class="mast-l"><button id="setBtn" class="set-btn" data-tab="set" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><div class="brand" data-tab="today" role="link" tabindex="0" aria-label="BinBin daily">BinBin <span>daily</span><img src="assets/binbin-head.webp" class="brand-dog" alt="" width="48" height="36"></div></div><span class="mast-r"><small id="mastInfo"></small><button id="helpBtn" class="help-btn" data-act="help" aria-label="Help">?</button></span></header>
   <main id="app"><div class="view"><p class="muted">…</p></div></main>
@@ -4691,7 +4728,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.128";
+const APP_VERSION="2026.11.129";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5371,9 +5408,9 @@ async function cloudInit(){
     authM.getRedirectResult(auth).catch(()=>{});
     authM.onAuthStateChanged(auth, async u=>{
       CLOUD.user=u; CLOUD.ready=true; maintApply();
-      if(u){ await cloudPull(); regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(inboxCheck,5000); setTimeout(betaClaim,6000); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); }
+      if(u){ try{ await cloudPull(); }finally{ BOOT.step("cloud"); } regionPing(false); nickVerify(); payTesterCheck(u); setTimeout(invLoad,1500); setTimeout(()=>{ if(typeof lbPush==="function") lbPush(); },4000); setTimeout(memLoad,900); setTimeout(wellWinCheck,3500); setTimeout(inboxCheck,5000); setTimeout(betaClaim,6000); setTimeout(()=>payLoad(PAY_RET&&PAY_RET.sid),800); if(PAY_RET&&PAY_RET.pay==="portal") setTimeout(subSyncNow,1200); } else { CLOUD.status="idle"; render(); BOOT.step("cloud"); }
     });
-  }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); }
+  }catch(e){ CLOUD.ready=true; CLOUD.status="off"; render(); BOOT.step("cloud"); }
 }
 async function cloudSignIn(){
   if(!CLOUD.fb){ toast(T("cloudOff")); return; }
@@ -5721,26 +5758,26 @@ async function coCreate(){
   const {fsM,db}=CLOUD.fb; S.co={busy:T("coOpening")}; render();
   try{
     let code, ref;
-    for(let k=0;k<6;k++){ code=String(1000+Math.floor(Math.random()*9000)); ref=fsM.doc(db,"rooms",code); const s=await fsM.getDoc(ref); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
+    for(let k=0;k<6;k++){ code=String(1000+Math.floor(Math.random()*9000)); ref=fsM.doc(db,"rooms",code); const s=await netTO(fsM.getDoc(ref)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
     if(!coSpendTicket()){ S.co=null; render(); return; }
-    await fsM.setDoc(ref,{host:CLOUD.user.uid, guest:null, names:{[CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P1"}, state:"wait", created:Date.now(), ...p, found:{}, misses:{}, endAt:0, lang:LANG});
+    await netTO(fsM.setDoc(ref,{host:CLOUD.user.uid, guest:null, names:{[CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P1"}, state:"wait", created:Date.now(), ...p, found:{}, misses:{}, endAt:0, lang:LANG}));
     coListen(code);
-  }catch(e){ S.co=null; toast(T("syncFail")); render(); }
+  }catch(e){ S.co=null; toast(netFailMsg(e,"syncFail")); render(); }
 }
 async function coJoin(code){
   if(!CLOUD.user) return; code=(code||"").trim(); if(!/^\d{4}$/.test(code)){ toast(T("coNoRoom")); return; }
   const {fsM,db}=CLOUD.fb; const ref=fsM.doc(db,"rooms",code); S.co={busy:T("coJoining")}; render();
   try{
-    const s=await fsM.getDoc(ref);
+    const s=await netTO(fsM.getDoc(ref));
     if(!s.exists()||s.data().state==="done"){ S.co=null; toast(T("coNoRoom")); render(); return; }
     const d=s.data();
     if(d.host!==CLOUD.user.uid && d.guest && d.guest!==CLOUD.user.uid){ S.co=null; toast(T("coFull")); render(); return; }
     if(d.host!==CLOUD.user.uid && !d.guest){
-      await fsM.updateDoc(ref,{guest:CLOUD.user.uid, ["names."+CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P2", state:"play", endAt:Date.now()+CO_TIME*1000+3000});
+      await netTO(fsM.updateDoc(ref,{guest:CLOUD.user.uid, ["names."+CLOUD.user.uid]:game().nick||CLOUD.user.displayName||"P2", state:"play", endAt:Date.now()+CO_TIME*1000+3000}));
       coSpendTicket();
     }
     coListen(code);
-  }catch(e){ S.co=null; toast(e&&e.code==="permission-denied"?T("coFull"):T("syncFail")); render(); }
+  }catch(e){ S.co=null; toast(e&&e.code==="permission-denied"?T("coFull"):netFailMsg(e,"syncFail")); render(); }
 }
 function coListen(code){
   const {fsM,db}=CLOUD.fb; coStop();
@@ -5909,23 +5946,27 @@ function botDots(w){ try{ const c=document.createElement("canvas"); c.width=c.he
   const px=x.getImageData(0,0,200,200).data, out=[]; for(let i=4;i<200;i+=5) for(let j=4;j<200;j+=5) if(px[(j*200+i)*4+3]>140) out.push([i*5+(Math.random()*6-3), j*5+(Math.random()*6-3)]); return out; }catch(e){ return []; } }
 
 /* ----- room ----- */
+/* a Firestore write never settles while the database can't be reached (e.g. school/office Wi-Fi blocking Google servers),
+   so room open/join give up after 12 s with a clear message instead of an endless "opening room…" */
+function netTO(p,ms=12000){ return Promise.race([p,new Promise((_,no)=>setTimeout(()=>no({code:"net-timeout"}),ms))]); }
+function netFailMsg(e,fb){ return e&&e.code==="net-timeout"?T("netBlocked"):T(fb); }
 async function pgCreate(kind){
   if(!CLOUD.user||!CLOUD.fb) return;
   const fsM=pgFs(); S.pgBusy=T("coOpening"); pgRender();
   try{
     let code;
-    for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await fsM.getDoc(pgRef(code)); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
-    await fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}, ...(kind==="root"?{rr:3}:kind==="spy"?{rr:6}:{})});
-    await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
+    for(let k=0;k<8;k++){ code=String(1000+Math.floor(Math.random()*9000)); const s=await netTO(fsM.getDoc(pgRef(code))); if(!s.exists()||s.data().state==="done"||Date.now()-(s.data().created||0)>3600e3) break; }
+    await netTO(fsM.setDoc(pgRef(code),{host:pgMe(), game:kind, state:"wait", created:Date.now(), players:{[pgMe()]:pgName()}, ...(kind==="root"?{rr:3}:kind==="spy"?{rr:6}:{})}));
+    await netTO(fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)}));
     S.pgBusy=null; pgListen(code);
-  }catch(e){ S.pgBusy=null; toast(T("syncFail")); pgRender(); }
+  }catch(e){ S.pgBusy=null; toast(netFailMsg(e,"syncFail")); pgRender(); }
 }
 async function pgJoin(code){
   if(!CLOUD.user||!CLOUD.fb) return; code=(code||"").trim();
   if(!/^\d{4}$/.test(code)) return toast(T("pgNoRoom"));
   const fsM=pgFs(); S.pgBusy=T("coJoining"); pgRender();
   try{
-    const s=await fsM.getDoc(pgRef(code)); const d=s.exists()?s.data():null;
+    const s=await netTO(fsM.getDoc(pgRef(code))); const d=s.exists()?s.data():null;
     if(!d||d.state==="done"||Date.now()-(d.created||0)>3600e3){ S.pgBusy=null; pgLastClear(); pgRender(); return toast(T("pgNoRoom")); }
     const inRoom=d.players&&d.players[pgMe()];
     if(!inRoom){
@@ -5933,16 +5974,16 @@ async function pgJoin(code){
       if(Object.keys(d.players||{}).length>=(d.game==="duel"?2:d.game==="five"?FV.max:PG.max)){ S.pgBusy=null; pgRender(); return toast(T(d.game==="duel"?"duFull":"pgFull")); }
       const cap=x=>x.game==="duel"?2:x.game==="five"?FV.max:PG.max;
       if(fsM.runTransaction&&!(S.pg&&S.pg.local)){
-        const why=await fsM.runTransaction(CLOUD.fb.db, async tx=>{ const sn=await tx.get(pgRef(code)); const x=sn.exists()?sn.data():null;
+        const why=await netTO(fsM.runTransaction(CLOUD.fb.db, async tx=>{ const sn=await tx.get(pgRef(code)); const x=sn.exists()?sn.data():null;
           if(!x||x.state!=="wait") return "pgStarted"; if((x.players||{})[pgMe()]) return null;
           if(Object.keys(x.players||{}).length>=cap(x)) return x.game==="duel"?"duFull":"pgFull";
-          tx.update(pgRef(code),{["players."+pgMe()]:pgName()}); return null; });
+          tx.update(pgRef(code),{["players."+pgMe()]:pgName()}); return null; }));
         if(why){ S.pgBusy=null; pgRender(); return toast(T(why)); }
-      } else await fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()});
-      await fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)});
+      } else await netTO(fsM.updateDoc(pgRef(code),{["players."+pgMe()]:pgName()}));
+      await netTO(fsM.setDoc(pgRef(code,"p",pgMe()),{n:pgName(), seenSp:pgSeen().sp.slice(-200)}));
     }
     S.pgBusy=null; pgListen(code);
-  }catch(e){ S.pgBusy=null; errReport({message:"pgJoin "+String(e&&(e.code||e.message)||e)},"pgJoin"); toast(T("pgJoinFail")); pgRender(); }
+  }catch(e){ S.pgBusy=null; errReport({message:"pgJoin "+String(e&&(e.code||e.message)||e)},"pgJoin"); toast(netFailMsg(e,"pgJoinFail")); pgRender(); }
 }
 function pgStop(){ if(S.pg){ (S.pg.unsubs||[]).forEach(f=>{ try{ f(); }catch(e){} }); } clearInterval(S.pgTimer); S.pgTimer=null; }
 function pgListen(code){
@@ -12229,6 +12270,12 @@ Object.assign(STR.hi,{"legalT": "परिचय, शर्तें और र�
 Object.assign(STR.es,{"legalT": "Información, condiciones y reembolsos", "legalSub": "Quién gestiona la app, artículos y precios de la Cámara del Arcoíris, política de pagos y reembolsos, condiciones de uso y privacidad.", "legalOpen": "Abrir", "vtLegal": "Al comprar pides la entrega inmediata y aceptas que el derecho de desistimiento de 14 días termina al entregarse los artículos. Si no llegan o se te cobra dos veces, siempre te reembolsamos.", "vtLegalLink": "Política de pagos y reembolsos"});
 Object.assign(STR.ja,{"legalT": "運営者情報・規約・返金", "legalSub": "運営者、虹の宝庫の商品と価格、支払いと返金のポリシー、利用規約、プライバシーポリシー。", "legalOpen": "見る", "vtLegal": "購入すると即時の引き渡しに同意し、引き渡し後は14日間の撤回権がなくなることを了承したものとみなされます。届かない・二重請求の場合は必ず返金します。", "vtLegalLink": "支払いと返金のポリシー"});
 Object.assign(STR.ko,{"legalT": "소개, 약관 및 환불", "legalSub": "운영자 정보, 무지개 보물고 상품과 가격, 결제 및 환불 정책, 이용약관, 개인정보처리방침.", "legalOpen": "보기", "vtLegal": "구매하면 즉시 지급에 동의하고, 지급 후에는 14일 청약철회권이 적용되지 않음을 확인한 것으로 봅니다. 아이템을 받지 못했거나 이중 결제된 경우 반드시 환불해 드려요.", "vtLegalLink": "결제 및 환불 정책"});
+Object.assign(STR.zh,{"netBlocked": "連不上遊戲伺服器。學校或公司的 Wi-Fi 可能擋住了，換成手機網路再試試。"});
+Object.assign(STR.en,{"netBlocked": "Can't reach the game server. School or work Wi-Fi may be blocking it. Try mobile data."});
+Object.assign(STR.hi,{"netBlocked": "गेम सर्वर से नहीं जुड़ पा रहे। स्कूल या ऑफिस का Wi-Fi इसे रोक रहा हो सकता है। मोबाइल डेटा से आज़माएँ।"});
+Object.assign(STR.es,{"netBlocked": "No se puede conectar con el servidor del juego. Puede que el Wi-Fi del centro o del trabajo lo bloquee. Prueba con datos móviles."});
+Object.assign(STR.ja,{"netBlocked": "ゲームサーバーにつながりません。学校や会社のWi-Fiがブロックしている可能性があります。モバイルデータで試してください。"});
+Object.assign(STR.ko,{"netBlocked": "게임 서버에 연결할 수 없어요. 학교나 회사 Wi-Fi가 막고 있을 수 있어요. 모바일 데이터로 다시 시도해 보세요."});
 Object.assign(STR.zh,{"rkNoLook": "這位玩家還沒有展示角色。"});
 Object.assign(STR.en,{"rkNoLook": "This player hasn't shown their character yet."});
 Object.assign(STR.hi,{"rkNoLook": "इस खिलाड़ी ने अभी अपना किरदार नहीं दिखाया है।"});
@@ -12242,7 +12289,9 @@ render();
   S.ready.personal=true; render();
   if(SANDBOX()){ if(!DEV.onbDone){ S.onb={step:0}; onbPreload(); onbRender(); } }
   else { onbMaybe(); cloudInit(); }
-  await loadArticles();
+  BOOT.step("app");
+  if(SANDBOX()) BOOT.step("cloud");
+  try{ await loadArticles(); } finally { BOOT.step("news"); }
   quizRestore();
   setTimeout(waLoad,1500);
 })();
