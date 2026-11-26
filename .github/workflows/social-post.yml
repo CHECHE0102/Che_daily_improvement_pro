@@ -1,0 +1,60 @@
+name: Social posts (FB + IG)
+# Posts whatever is due in schedule.json on the `social` branch (times are Europe/Dublin) to the
+# Facebook Page and Instagram through the Meta Graph API, then records it in posted.json there.
+# Needs the META_TOKEN secret (a never-expiring system-user token, pasted by CheChe).
+on:
+  schedule:
+    - cron: '3,33 * * * *'   # GitHub may start runs late; each run posts everything already due
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Post this item id right now (e.g. P11), even if it is not due yet'
+        default: ''
+      dry_run:
+        description: 'Only print what would be posted'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: social-post
+  cancel-in-progress: false
+env:
+  FB_PAGE_ID: '1486940854501435'
+  IG_USER_ID: '17841413170219566'
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+      - uses: actions/checkout@v4
+        with:
+          ref: social
+          path: social
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Post what is due
+        env:
+          META_TOKEN: ${{ secrets.META_TOKEN }}
+          SOCIAL_DIR: social
+          MEDIA_BASE: https://raw.githubusercontent.com/${{ github.repository }}/social
+          ONLY: ${{ github.event.inputs.only }}
+          DRY_RUN: ${{ github.event.inputs.dry_run == 'true' && '1' || '0' }}
+        run: python tools/social_post.py
+      - name: Save posted.json and drop posted media
+        # The branch is squashed to one commit so deleted media leaves no copy in git history.
+        if: always()
+        working-directory: social
+        run: |
+          git config user.name "CHECHE0102"
+          git config user.email "CHECHE0102@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          base=$(git rev-parse HEAD)
+          git checkout -q --orphan squashed
+          git commit -qm "Social queue (posted items removed)"
+          git push -q --force-with-lease=social:$base origin HEAD:social || { echo "::error::social branch changed meanwhile, will retry next run"; exit 1; }
