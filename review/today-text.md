@@ -14,7 +14,7 @@ Thousands of Jobs at Risk as Dealz Owner Enters Administration
 - summaryJa: Dealzの親会社が経営破綻し、アイルランドで1150人の雇用が危機にさらされている。
 - summaryKo: Dealz 모회사가 법정관리에 들어가 아일랜드 일자리 1,150개가 위기에 처했다.
 - summaryEs: La empresa dueña de Dealz entra en administración y pone en riesgo 1.150 empleos en Irlanda.
-- summaryHi: Dealz की मालिक कंपनी प्रशासन में चली गई, आयरलैंड में 1,150 नौकरियाँ खतरे में हैं।
+- summaryHi: Dealz की मालिक कंपनी दिवाला प्रशासन में चली गई, आयरलैंड में 1,150 नौकरियाँ खतरे में हैं।
 
 ## sources
 - TheJournal.ie: https://www.thejournal.ie/dealz-administration-7238092-Nov2026/
@@ -22,8 +22,8 @@ Thousands of Jobs at Risk as Dealz Owner Enters Administration
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Poundland is a cheap shop company.
-    zh: Poundland是一家平價商店公司。
+A2 P1 S1: Poundland is a company that runs cheap shops.
+    zh: Poundland是一家經營平價商店的公司。
 A2 P1 S2: In Ireland, its shops are called Dealz.
     zh: 在愛爾蘭，它的店叫做Dealz。
 A2 P1 S3: Now the company is in serious money trouble.
@@ -133,7 +133,7 @@ C1 P4 S2: Its former parent, the Polish discounter Pepco Group, had acknowledged
 C1 P4 S3: Gordon Brothers snapped it up for a nominal £1, together with a portfolio of more than 800 stores.
     zh: Gordon Brothers以象徵性的1英鎊將其買下，連同800多家門市的資產組合。
 C1 P5 S1: The owner maintained that management and employees had wrung £100 million in savings out of the business over the past year, yet conceded that it remained exposed to inflation and to any erosion of sales or margins.
-    zh: 業主堅稱，管理層和員工在過去一年從業務中硬擠出了1億英鎊的節省，但也承認公司仍易受通膨以及銷售或利潤率下滑的衝擊。
+    zh: 業主堅稱，管理層和員工在過去一年設法從營運中省下了1億英鎊，但也承認公司仍易受通膨以及銷售或利潤率下滑的衝擊。
 C1 P5 S2: Discounters have been squeezed by persistent inflation and cut-throat competition from supermarkets.
     zh: 折扣商一直受到持續通膨和超市殘酷競爭的雙重擠壓。
 C1 P6 S1: The development has alarmed Irish politicians.
@@ -207,7 +207,7 @@ Women Almost Twice as Likely as Men to Feel Unsafe Walking Locally, CSO Data Sho
 - summaryJa: 統計によると、アイルランドの女性は近所を歩く際に不安を感じる割合が男性のほぼ2倍だ。
 - summaryKo: 통계에 따르면 아일랜드 여성은 동네를 걸을 때 불안을 느끼는 비율이 남성의 거의 두 배다.
 - summaryEs: Las mujeres en Irlanda casi duplican a los hombres en sentirse inseguras al caminar por su barrio.
-- summaryHi: आँकड़ों के अनुसार आयरलैंड में महिलाएँ अपने इलाके में चलते समय पुरुषों से लगभग दोगुना असुरक्षित महसूस करती हैं।
+- summaryHi: आँकड़ों के अनुसार आयरलैंड में महिलाओं के अपने इलाके में चलते समय असुरक्षित महसूस करने की संभावना पुरुषों की तुलना में लगभग दोगुनी है।
 
 ## sources
 - TheJournal.ie: https://www.thejournal.ie/women-safety-statistics-ireland-7237730-Nov2026/
@@ -255,8 +255,8 @@ B1 P4 S1: There were also regional differences.
     zh: 各地區之間也有差異。
 B1 P4 S2: Women felt least safe in Dublin, at 24%, and in the Mideast, at 23%.
     zh: 女性在都柏林（24%）和中東部地區（23%）感到最不安全。
-B1 P4 S3: For men, Dublin was also the place where most people felt unsafe, at 15%.
-    zh: 對男性而言，都柏林也是感到不安全的人最多的地方，比例為15%。
+B1 P4 S3: For men, Dublin also had the highest share who felt unsafe, at 15%.
+    zh: 對男性而言，都柏林感到不安全的比例也是最高的，為15%。
 B1 P5 S1: Crime also affects daily life.
     zh: 犯罪也影響日常生活。
 B1 P5 S2: About 18% of women and 14% of men said crime had affected their lives in the past year.
@@ -301,8 +301,8 @@ C1 P5 S2: Even so, the overwhelming majority, 85%, felt very or fairly safe on t
     zh: 即便如此，絕大多數人（85%）在當地街道上仍感到非常或相當安全。
 
 ## level IELTS
-IELTS P1 S1: Women in Ireland are almost twice as likely as men to perceive their local area as unsafe, according to Central Statistics Office (CSO) data obtained by The Journal.
-    zh: 根據The Journal取得的中央統計局（CSO）數據，愛爾蘭女性認為自己所在地區不安全的可能性幾乎是男性的兩倍。
+IELTS P1 S1: Women in Ireland are almost twice as likely as men to feel unsafe walking in their local area, according to Central Statistics Office (CSO) data obtained by The Journal.
+    zh: 根據The Journal取得的中央統計局（CSO）數據，愛爾蘭女性在所在地區步行時感到不安全的可能性幾乎是男性的兩倍。
 IELTS P2 S1: The statistics, derived from the CSO's crime and victimisation survey for the period 2019 to 2025, indicate that 20% of women felt unsafe walking in their locality during the preceding twelve months, in comparison with 11% of men.
     zh: 這些統計數據源自CSO 2019年至2025年期間的犯罪與受害調查，顯示前十二個月有20%的女性在所在地區步行時感到不安全，相較之下男性為11%。
 IELTS P2 S2: Furthermore, women in every adult age cohort were less likely than men to report feeling very safe.
@@ -324,7 +324,7 @@ Q1 [main]: What is the passage mainly about?
    B. A rise in crime in Dublin between 2019 and 2025.
    C. A new Government plan to make streets safer for women.
    D. Evidence that most people in Ireland feel unsafe at home.
-   explanation: The passage opens with the finding that "Women in Ireland are almost twice as likely as men to perceive their local area as unsafe" and then gives the survey figures. It reports perceptions, not a crime rise (B); no plan is mentioned (C); and "85% in total, felt very or fairly safe" contradicts (D).
+   explanation: The passage opens with the finding that "Women in Ireland are almost twice as likely as men to feel unsafe walking in their local area" and then gives the survey figures. It reports perceptions, not a crime rise (B); no plan is mentioned (C); and "85% in total, felt very or fairly safe" contradicts (D).
 Q2 [infer]: What can be inferred about young people aged 18 to 29?
    A. Young women in this group feel safer than older women.
    B. The difference between men's and women's sense of safety is larger in this age group than in others.  <- answer
@@ -372,7 +372,7 @@ A2 P2 S3: It adds €30, €40 or €50.
     zh: 它會加值30、40或50歐元。
 A2 P3 S1: From Thursday, new users cannot sign up for auto top-up.
     zh: 從週四起，新用戶無法申請自動儲值。
-A2 P3 S2: People who already use it can keep it until their card ends.
+A2 P3 S2: People who already use it can keep it until their card expires.
     zh: 已經在使用的人可以保留到卡片到期為止。
 A2 P4 S1: But if it stops, for example when a card is lost, you cannot start it again.
     zh: 但如果它停止了，例如卡片遺失時，就不能再重新開始。
@@ -576,7 +576,7 @@ B2 P3 S2: The law requires businesses to verify that a person is legally entitle
 B2 P3 S3: Since many extras work for only a single day, compliance has proved difficult.
     zh: 由於許多臨演只工作一天，遵守規定變得很困難。
 B2 P4 S1: Members based in the Republic who already hold the right to work in the UK can still accept bookings in Northern Ireland, although travel costs may be high.
-    zh: 已擁有英國工作權的共和國會員仍可接受北愛爾蘭的工作預約，不過交通費可能很高。
+    zh: 已擁有英國工作權的共和國會員仍可接受北愛爾蘭的工作邀約，不過交通費可能很高。
 B2 P4 S2: To remain on the books, they must complete an identity check through an external provider, followed by a video call with the agency.
     zh: 若要留在名冊上，他們必須透過外部供應商完成身分檢查，之後再與公司進行視訊通話。
 
@@ -684,8 +684,8 @@ A2 P4 S2: It can do a lot of work with a small amount of power.
     zh: 它可以用很少的電完成很多工作。
 A2 P4 S3: This is good for batteries.
     zh: 這對電池很有好處。
-A2 P5 S1: The team is now making a third chip.
-    zh: 這個團隊現在正在做第三款晶片。
+A2 P5 S1: The team made a third chip in October.
+    zh: 這個團隊在10月做出了第三款晶片。
 A2 P5 S2: The government helps pay for the work.
     zh: 政府幫忙出錢支持這項工作。
 
@@ -708,12 +708,12 @@ B1 P4 S1: The first chip can both use and train an AI model, which the council s
     zh: 第一款晶片既能使用AI模型，也能訓練AI模型，國科會說以前沒有同類晶片做到這一點。
 B1 P4 S2: The second chip is even more efficient.
     zh: 第二款晶片的效率更高。
-B1 P4 S3: It does up to 7.6 times more work per watt than similar chips reported at the time.
+B1 P4 S3: It does up to 7.6 times as much work per watt as similar chips reported at the time.
     zh: 它每瓦特能完成的工作，最多是當時類似晶片的7.6倍。
 B1 P5 S1: The results were presented at a major international chip conference in 2024 and 2025.
     zh: 這些成果在2024年和2025年的一場重要國際晶片會議上發表。
-B1 P5 S2: A third chip, made with a more advanced process, is now being developed.
-    zh: 用更先進製程製造的第三款晶片，目前正在研發中。
+B1 P5 S2: A third chip, made with a more advanced process, was produced in October.
+    zh: 用更先進製程製造的第三款晶片，已在10月製造完成。
 
 ## level B2
 B2 P1 S1: A research team at National Taiwan University (NTU) has developed two generations of energy-efficient processors designed to run generative AI directly on devices, the National Science and Technology Council (NSTC) announced on Wednesday.
@@ -864,16 +864,16 @@ B2 P3 S1: President Chain Store Corp., the operator of 7-Eleven, reported four s
     zh: 經營7-Eleven的統一超商表示，有四位特別獎得主，消費金額從新台幣10元到231元不等。
 B2 P3 S2: FamilyMart said two of its customers, in Nantou and Tainan, had won NT$10 million after paying just NT$46 and NT$88.
     zh: 全家表示，旗下兩位分別在南投和台南的顧客，只付了新台幣46元和88元就贏得1,000萬元。
-B2 P4 S1: PX Mart, a supermarket chain, said one shopper in Toufen, Miaoli County, became a millionaire after buying groceries worth NT$2,244, and another in New Taipei won NT$2 million with a NT$340 purchase.
-    zh: 連鎖超市全聯說，苗栗縣頭份一位顧客買了新台幣2,244元的食品雜貨後成為千萬富翁，另一位新北市的顧客則以新台幣340元的消費贏得200萬元。
+B2 P4 S1: PX Mart, a supermarket chain, said one shopper in Toufen, Miaoli County, won NT$10 million after buying groceries worth NT$2,244, and another in New Taipei won NT$2 million with an NT$340 purchase.
+    zh: 連鎖超市全聯說，苗栗縣頭份一位顧客買了新台幣2,244元的食品雜貨後贏得1,000萬元，另一位新北市的顧客則以新台幣340元的消費贏得200萬元。
 B2 P5 S1: Prizes can be claimed from December 6 to March 5.
     zh: 獎金可在12月6日至3月5日之間領取。
 B2 P5 S2: Amounts up to NT$1,000 can be collected at convenience stores, while larger sums are paid at designated banks.
     zh: 新台幣1,000元以下的金額可在便利商店領取，較大的金額則由指定銀行支付。
 
 ## level C1
-C1 P1 S1: Receipts were scrutinised across Taiwan on Wednesday after the Ministry of Finance unveiled the winning numbers for the September–October uniform invoice lottery, and leading retailers were quick to announce that several jackpots had been claimed by customers making the most modest of purchases.
-    zh: 財政部週三揭曉九至十月統一發票中獎號碼後，全台民眾仔細檢查手上的發票，各大零售商也迅速宣布，數個頭獎都由消費金額極少的顧客抱走。
+C1 P1 S1: Receipts were scrutinised across Taiwan on Wednesday after the Ministry of Finance unveiled the winning numbers for the September–October uniform invoice lottery, and leading retailers were quick to announce that several jackpots had been won by customers making the most modest of purchases.
+    zh: 財政部週三揭曉九至十月統一發票中獎號碼後，全台民眾仔細檢查手上的發票，各大零售商也迅速宣布，數個大獎都由消費金額極少的顧客抱走。
 C1 P2 S1: The scheme, a long-standing feature of everyday life in Taiwan, was introduced to motivate consumers to request official receipts, thereby making it harder for businesses to evade tax.
     zh: 這項制度長期以來是台灣日常生活的一部分，當初推出是為了促使消費者索取正式發票，讓企業更難逃漏稅。
 C1 P2 S2: Every receipt bears an eight-digit number, and draws take place bimonthly.
@@ -884,7 +884,7 @@ C1 P3 S1: President Chain Store Corp., which operates 7-Eleven, disclosed that f
     zh: 經營7-Eleven的統一超商透露，有四位顧客摘下特別獎，消費金額從區區新台幣10元到231元不等。
 C1 P3 S2: FamilyMart, meanwhile, reported two such winners in Nantou and Tainan, who had spent only NT$46 and NT$88 respectively.
     zh: 與此同時，全家也報告有兩位這樣的得主，分別在南投和台南，各只花了新台幣46元和88元。
-C1 P4 S1: At supermarket operator PX Mart, a shopper in Toufen, Miaoli County, landed NT$10 million on a NT$2,244 grocery bill.
+C1 P4 S1: At supermarket operator PX Mart, a shopper in Toufen, Miaoli County, landed NT$10 million on an NT$2,244 grocery bill.
     zh: 在超市業者全聯，苗栗縣頭份的一位顧客以新台幣2,244元的食品帳單贏得1,000萬元。
 C1 P5 S1: Winnings may be collected between December 6 and March 5.
     zh: 獎金可在12月6日至3月5日之間領取。
@@ -897,7 +897,7 @@ IELTS P1 S1: Consumers throughout Taiwan were examining their receipts on Wednes
 IELTS P1 S2: Shortly afterwards, major retailers announced that a number of the largest prizes had been won by customers whose purchases were remarkably inexpensive.
     zh: 不久之後，各大零售商宣布，多個最大獎項是由消費金額格外低廉的顧客贏得。
 IELTS P2 S1: The lottery was established with a clear fiscal objective: to give consumers an incentive to obtain official receipts, which in turn makes it considerably more difficult for businesses to under-report their sales and avoid taxation.
-    zh: 這項抽獎制度的設立有明確的財政目標：給消費者索取正式發票的誘因，進而讓企業更難短報營業額和逃稅。
+    zh: 這項抽獎制度的設立有明確的財政目標：給消費者索取正式發票的誘因，進而讓企業更難少報營業額和逃稅。
 IELTS P2 S2: Each receipt displays an eight-digit number, and a draw is held every two months.
     zh: 每張發票都印有一組八位數號碼，每兩個月開獎一次。
 IELTS P2 S3: The special prize amounts to NT$10 million, equivalent to roughly US$300,000, while the grand prize is NT$2 million.
