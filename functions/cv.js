@@ -13,7 +13,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { FieldValue } from "firebase-admin/firestore";
 
-export const CV_LIMITS = { day: 3, month: 10, allDay: 300, pro: 1, proAllMonth: 20 };   // Haiku: per player per day / month, everyone per day; 精修版 (Opus): per player per month, everyone per month (CheChe 2026-11-26)
+export const CV_LIMITS = { day: 3, month: 10, allDay: 100, pro: 1, proAllMonth: 20 };   // Haiku: per player per day / month, everyone per day; 精修版 (Opus): per player per month, everyone per month (CheChe 2026-11-26)
 const MODEL = "claude-haiku-5-5";   // CheChe 2026-11-26: cheapest Claude, about US$0.002 per CV
 const PRO_MODEL = "claude-opus-5-5";   // 精修版: once a month per player, about US$0.05 per CV
 const MAX_IN = 9000;   // characters of answers we accept
