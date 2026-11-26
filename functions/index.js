@@ -317,7 +317,7 @@ export const adminStats = onRequest({ region: REGION, cors: ORIGINS, maxInstance
 });
 
 // 履歷桌 AI CV writer (functions/cv.js). POST {answers} → {cv, left}; POST {check:true} → {left} (how many tries are left).
-// Signed-in players only; 3 per day and 10 per month each (Haiku), plus {pro:true} once a month (Opus 精修版). Nothing the player wrote is stored or logged.
+// Signed-in players only; 3 per day and 10 per month each (Haiku), plus {pro:true} once a month (Opus 精修版, 20 a month for everyone). Nothing the player wrote is stored or logged.
 export const cvWrite = onRequest({ region: REGION, secrets: [AI_KEY], cors: ORIGINS, maxInstances: 5, concurrency: 20, timeoutSeconds: 120, memory: "256MiB" }, async (req, res) => {
   if (req.method !== "POST") return res.status(405).json({ error: "method" });
   const tok = (req.get("Authorization") || "").replace(/^Bearer\s+/i, "");

@@ -13,7 +13,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { FieldValue } from "firebase-admin/firestore";
 
-export const CV_LIMITS = { day: 3, month: 10, allDay: 300, pro: 1, proAllDay: 100 };   // Haiku: per player per day / month, everyone per day; 精修版 (Opus): per player per month, everyone per day
+export const CV_LIMITS = { day: 3, month: 10, allDay: 300, pro: 1, proAllMonth: 20 };   // Haiku: per player per day / month, everyone per day; 精修版 (Opus): per player per month, everyone per month (CheChe 2026-11-26)
 const MODEL = "claude-haiku-5-5";   // CheChe 2026-11-26: cheapest Claude, about US$0.002 per CV
 const PRO_MODEL = "claude-opus-5-5";   // 精修版: once a month per player, about US$0.05 per CV
 const MAX_IN = 9000;   // characters of answers we accept
@@ -71,7 +71,7 @@ export function cleanAnswers(a) {
 }
 
 // one transaction: check and count. pro = the monthly 精修版 try (Opus), a separate pool from the everyday Haiku tries.
-// cvUse/{uid}: {d, n, m, mn, pm (month of last pro), pn}; cvUse/_all: {d, n, pn}. Returns {ok, left} or {ok:false, why}
+// cvUse/{uid}: {d, n, m, mn, pm (month of last pro), pn}; cvUse/_all: {d, n, pm, pn} (pn = pro writes this month, everyone). Returns {ok, left} or {ok:false, why}
 const leftOf = (x, d, m) => ({ day: Math.max(0, CV_LIMITS.day - (x.d === d ? x.n || 0 : 0)), month: Math.max(0, CV_LIMITS.month - (x.m === m ? x.mn || 0 : 0)), pro: Math.max(0, CV_LIMITS.pro - (x.pm === m ? x.pn || 0 : 0)) });
 async function useOne(db, uid, admin, pro) {
   const d = new Date().toISOString().slice(0, 10), m = d.slice(0, 7);
@@ -79,14 +79,14 @@ async function useOne(db, uid, admin, pro) {
   return db.runTransaction(async t => {
     const [a, b] = await Promise.all([t.get(me), t.get(all)]);
     const x = a.exists ? a.data() : {}, y = b.exists ? b.data() : {};
-    const L = leftOf(x, d, m), an = y.d === d ? y.n || 0 : 0, ap = y.d === d ? y.pn || 0 : 0;
+    const L = leftOf(x, d, m), an = y.d === d ? y.n || 0 : 0, ap = y.pm === m ? y.pn || 0 : 0;
     if (!admin) {
-      if (pro) { if (ap >= CV_LIMITS.proAllDay) return { ok: false, why: "busy" }; if (L.pro <= 0) return { ok: false, why: "pro" }; }
+      if (pro) { if (ap >= CV_LIMITS.proAllMonth) return { ok: false, why: "proOut" }; if (L.pro <= 0) return { ok: false, why: "pro" }; }
       else { if (an >= CV_LIMITS.allDay) return { ok: false, why: "busy" }; if (L.month <= 0) return { ok: false, why: "month" }; if (L.day <= 0) return { ok: false, why: "day" }; }
     }
     const nx = pro ? { ...x, pm: m, pn: (x.pm === m ? x.pn || 0 : 0) + 1 } : { ...x, d, n: (x.d === d ? x.n || 0 : 0) + 1, m, mn: (x.m === m ? x.mn || 0 : 0) + 1 };
     t.set(me, { d: nx.d || d, n: nx.d === d ? nx.n || 0 : 0, m: nx.m || m, mn: nx.m === m ? nx.mn || 0 : 0, pm: nx.pm || "", pn: nx.pn || 0, at: FieldValue.serverTimestamp() });
-    t.set(all, pro ? { d, n: an, pn: ap + 1 } : { d, n: an + 1, pn: ap });
+    t.set(all, pro ? { d, n: an, pm: m, pn: ap + 1 } : { d, n: an + 1, pm: m, pn: ap });
     return { ok: true, left: leftOf(nx, d, m) };
   });
 }
@@ -96,8 +96,11 @@ async function giveBack(db, uid, pro) {   // the AI call failed: the player keep
 }
 
 export async function cvLeft(db, uid) {
-  const s = await db.doc("cvUse/" + uid).get(), d = new Date().toISOString().slice(0, 10);
-  return leftOf(s.exists ? s.data() : {}, d, d.slice(0, 7));
+  const [s, g] = await Promise.all([db.doc("cvUse/" + uid).get(), db.doc("cvUse/_all").get()]), d = new Date().toISOString().slice(0, 10), m = d.slice(0, 7);
+  const L = leftOf(s.exists ? s.data() : {}, d, m), y = g.exists ? g.data() : {};
+  L.proAll = Math.max(0, CV_LIMITS.proAllMonth - (y.pm === m ? y.pn || 0 : 0));   // premium writes left for everyone this month
+  if (!L.proAll) L.pro = 0;
+  return L;
 }
 
 // one AI call (also used by functions/test/cv-try.mjs to try models)

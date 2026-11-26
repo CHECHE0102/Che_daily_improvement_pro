@@ -24,8 +24,10 @@
     privacy: ["隱私：回答只存在這支手機。按「AI 幫我寫」時，除了姓名和聯絡方式以外的回答會傳給 AI 寫成英文，伺服器不會留存。姓名、電話、Email 永遠不會離開手機。", "Privacy: your answers stay on this phone. When you press \"Write it for me\", everything except your name and contact details is sent to the AI to be written in English; our server keeps none of it. Name, phone and e-mail never leave the phone."],
     leftN: ["今天還可以讓 AI 寫 {d} 次（本月 {m} 次）· 🌟 精修版本月 {p} 次", "AI writes left: {d} today ({m} this month) · 🌟 premium: {p} this month"],
     writePro: ["🌟 精修版（每月 1 次）", "🌟 Premium write (1 a month)"],
-    proInfo: ["精修版用最強的 AI，寫得更細、建議更具體。每月 1 次，不扣一般次數。", "Premium uses our strongest AI: richer wording and more specific advice. Once a month, on top of the normal writes."],
+    proInfo: ["精修版用最強的 AI，寫得更細、建議更具體。每人每月 1 次，全站每月限量 20 份，不扣一般次數。", "Premium uses our strongest AI: richer wording and more specific advice. Once a month each, 20 a month for everyone, on top of the normal writes."],
     proTag: ["🌟 這份是精修版", "🌟 Premium version"],
+    e_proOut: ["這個月的 20 份精修版已經被大家用完了，下個月 1 號再來（一般版還可以用）", "This month's 20 premium writes are all taken; try again next month (normal writes still work)"],
+    proAll: ["全站本月精修版剩 {n} 份", "{n} premium writes left this month for everyone"],
     e_pro: ["這個月的精修版用過了，下個月再來（一般版還可以用）", "You've used this month's premium write; normal writes still work"],
     resume: ["繼續上次的履歷", "Continue my CV"], fresh: ["重新開始", "Start over"], clearAsk: ["確定清除所有回答和履歷？", "Clear all answers and the CV?"],
     s_target: ["想做什麼工作", "Target job"], s_visa: ["簽證與工作", "Visa & availability"], s_work: ["工作經驗", "Work experience"], s_edu: ["學歷", "Education"], s_skills: ["技能與語言", "Skills & languages"], s_contact: ["聯絡方式", "Contact details"], s_result: ["你的履歷", "Your CV"],
@@ -207,7 +209,7 @@
   }
   const leftHtml = () => left ? `<small class="mut">✨ ${t("leftN", { d: Math.max(0, left.day), m: Math.max(0, left.month), p: Math.max(0, left.pro ?? 1) })}</small>` : "";
   const writeBtns = again => `<button class="btn ${again ? "ghost" : ""}" data-go="write">${again ? t("rewrite") : t("write")}</button>
-      <button class="btn ghost" data-go="writePro" ${left && left.pro <= 0 ? "disabled" : ""}>${t("writePro")}</button><small class="mut">${t("proInfo")}</small>`;
+      <button class="btn ghost" data-go="writePro" ${left && left.pro <= 0 ? "disabled" : ""}>${t("writePro")}</button><small class="mut">${t("proInfo")}${left && left.proAll != null ? " " + t("proAll", { n: left.proAll }) : ""}</small>`;
   function resultHtml() {
     const cv = D.cv;
     if (busy) return `<div class="cvb-wait"><div class="cvb-spin"></div><b>${t("writing")}</b><small class="mut">${t("tip_target")}</small></div>`;
@@ -311,7 +313,7 @@
     busy = false;
     if (r && r.cv) { D.cv = r.cv; D.pro = !!r.pro; if (r.left) left = r.left; save(); sfx("prize"); }
     else if (r.error === "empty") toast(t("needSome"));
-    else toast(t("e_" + (["login", "setup", "day", "month", "busy", "refused", "banned", "pro"].includes(r.error) ? r.error : "net")));
+    else toast(t("e_" + (["login", "setup", "day", "month", "busy", "refused", "banned", "pro", "proOut"].includes(r.error) ? r.error : "net")));
     draw();
   }
 
