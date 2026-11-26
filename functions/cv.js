@@ -14,7 +14,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { FieldValue } from "firebase-admin/firestore";
 
 export const CV_LIMITS = { day: 3, month: 10, allDay: 300 };   // per player per day / per month; everyone together per day
-const MODEL = "claude-opus-5-5";
+const MODEL = "claude-haiku-5-5";   // CheChe 2026-11-26: cheapest Claude, about US$0.001-0.002 per CV
 const MAX_IN = 9000;   // characters of answers we accept
 
 const S = { type: "string" }, A = { type: "array", items: S };
@@ -104,11 +104,9 @@ export async function runCv(db, uid, answers, key, admin) {
   if (!use.ok) return { status: 429, json: { error: use.why, limits: CV_LIMITS } };
   try {
     const client = new Anthropic({ apiKey: key, maxRetries: 1, timeout: 100e3 });
-    const r = await client.beta.messages.create({
+    const r = await client.messages.create({
       model: MODEL,
       max_tokens: 16000,
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
       output_config: { effort: "medium", format: { type: "json_schema", schema: SCHEMA } },
       system: SYSTEM,
       messages: [{ role: "user", content: body }],
