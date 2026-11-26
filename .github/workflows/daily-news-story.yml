@@ -1,0 +1,109 @@
+name: Daily news story (IG + FB)
+# Every morning: builds today's news Story picture + voiced Story video from articles/<date>*.json
+# (tools/daily_story/build.py) and posts both to the Instagram and Facebook Stories through
+# tools/social_post.py. Media goes onto the `social` branch only until it is posted.
+on:
+  schedule:
+    - cron: '5 9 * * *'    # after the news is published and checked
+    - cron: '5 12 * * *'   # second try if the news was late
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to build (YYYY-MM-DD, default today in Dublin)'
+        default: ''
+      build_only:
+        description: 'Only build (no posting); the files are kept as a run artifact'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: social-post
+  cancel-in-progress: false
+env:
+  FB_PAGE_ID: '1486940854501435'
+  IG_USER_ID: '17841413170219566'
+jobs:
+  story:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            articles
+      - uses: actions/checkout@v4
+        with:
+          ref: social
+          path: social
+      - name: Which day
+        id: day
+        run: |
+          D="${{ github.event.inputs.date }}"; [ -n "$D" ] || D=$(TZ=Europe/Dublin date +%F)
+          K=$(echo $D | tr -d -)
+          echo "date=$D" >> $GITHUB_OUTPUT; echo "key=$K" >> $GITHUB_OUTPUT
+          if [ "${{ github.event.inputs.build_only }}" != "true" ] && grep -q "\"S$K:ig\"" social/posted.json && grep -q "\"V$K:ig\"" social/posted.json; then echo "done=1" >> $GITHUB_OUTPUT; echo "already posted"; fi
+      - if: steps.day.outputs.done != '1'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Tools
+        if: steps.day.outputs.done != '1'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk >/dev/null
+          pip install -q "edge-tts>=7,<8"
+          cd tools/daily_story && npm init -y >/dev/null && npm i -s playwright@1.49.1 && npx playwright install --with-deps chromium >/dev/null
+      - name: Build
+        if: steps.day.outputs.done != '1'
+        env:
+          CAST_DIR: ${{ github.workspace }}/social/cast
+        run: python tools/daily_story/build.py ${{ steps.day.outputs.date }} out
+      - name: Keep the build
+        if: steps.day.outputs.done != '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: story-${{ steps.day.outputs.date }}
+          path: |
+            out/story.jpg
+            out/story.mp4
+            out/script.json
+          retention-days: 3
+      - name: Queue
+        if: steps.day.outputs.done != '1' && github.event.inputs.build_only != 'true'
+        run: |
+          K=${{ steps.day.outputs.key }}
+          mkdir -p social/stories
+          cp out/story.jpg social/stories/S$K.jpg; cp out/story.mp4 social/stories/V$K.mp4
+          python - <<PY
+          import json, datetime, zoneinfo
+          p = "social/schedule.json"; s = json.load(open(p, encoding="utf-8"))
+          now = datetime.datetime.now(zoneinfo.ZoneInfo("Europe/Dublin")).strftime("%Y-%m-%d %H:%M")
+          ids = {it["id"] for it in s}
+          for i, m in (("S$K", "stories/S$K.jpg"), ("V$K", "stories/V$K.mp4")):
+              if i not in ids:
+                  s.append({"id": i, "when": now, "type": "story", "to": ["fb", "ig"], "media": [m], "caption": ""})
+          json.dump(s, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+          PY
+      - name: Post
+        if: steps.day.outputs.done != '1' && github.event.inputs.build_only != 'true'
+        env:
+          META_TOKEN: ${{ secrets.META_TOKEN }}
+          SOCIAL_DIR: social
+          MEDIA_BASE: https://raw.githubusercontent.com/${{ github.repository }}/social
+        run: |
+          # Meta fetches media by URL, so the files must be on the social branch first
+          cd social && git config user.name "CHECHE0102" && git config user.email "CHECHE0102@users.noreply.github.com"
+          git add -A && git commit -qm "Queue news story ${{ steps.day.outputs.date }}" && git push -q origin HEAD:social
+          cd .. && sleep 20
+          bad=0; for id in S${{ steps.day.outputs.key }} V${{ steps.day.outputs.key }}; do ONLY=$id python tools/social_post.py || bad=1; done; exit $bad
+      - name: Save posted.json and drop posted media
+        if: always() && steps.day.outputs.done != '1' && github.event.inputs.build_only != 'true'
+        working-directory: social
+        run: |
+          git add -A
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          base=$(git rev-parse HEAD)
+          git checkout -q --orphan squashed
+          git commit -qm "Social queue (posted items removed)"
+          git push -q --force-with-lease=social:$base origin HEAD:social || { echo "::error::social branch changed meanwhile"; exit 1; }

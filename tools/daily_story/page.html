@@ -1,0 +1,115 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Poppins:wght@600;700;800&display=block');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;overflow:hidden;position:relative;font-family:'Noto Sans TC',sans-serif;color:#fff;
+ background:radial-gradient(circle at 50% 40%,#23785f 0%,#1c6a55 55%,#154f40 100%)}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 2px,transparent 2px);background-size:44px 44px}
+.top{position:absolute;top:120px;left:70px;right:70px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:Poppins;font-weight:800;font-size:52px;letter-spacing:-1px;display:flex;align-items:center;gap:14px}
+.brand img{width:62px}
+.brand b{color:#f0be45;font-family:'Noto Sans TC';font-weight:900;font-size:36px;margin-left:4px}
+.date{background:#f0be45;color:#1d2a26;font-weight:900;font-size:36px;border-radius:999px;padding:10px 30px}
+.flag{display:inline-block;width:66px;height:44px;border-radius:6px;overflow:hidden;vertical-align:middle;box-shadow:0 0 0 3px rgba(0,0,0,.12)}
+.flag svg{display:block;width:100%;height:100%}
+.card{position:absolute;left:60px;right:60px;background:#fffdf6;color:#1d2a26;border-radius:44px;padding:56px 56px 50px;box-shadow:0 18px 0 rgba(0,0,0,.14)}
+.tagrow{display:flex;align-items:center;gap:18px;font-size:34px;font-weight:900}
+.topic{background:#dcebe5;color:#1c6a55;border-radius:999px;padding:6px 24px;font-size:30px}
+.num{margin-left:auto;font-family:Poppins;color:#9aa8a2;font-size:32px}
+.en{font-family:Poppins;font-weight:800;font-size:66px;line-height:1.16;margin:34px 0 30px;letter-spacing:-.5px}
+.zh{font-size:50px;line-height:1.45;font-weight:700;color:#2b3a35;border-top:4px dashed #dcebe5;padding-top:30px}
+.word{margin-top:36px;display:flex;align-items:center;gap:18px;background:#fff3d1;border-radius:24px;padding:20px 28px;font-size:36px;font-weight:700}
+.word .k{background:#f0be45;color:#1d2a26;border-radius:12px;padding:4px 14px;font-size:28px;font-weight:900}
+.word .w{font-family:Poppins;font-weight:800;font-size:44px;color:#1c6a55}
+.word .l{margin-left:auto;font-family:Poppins;font-size:28px;color:#9a7a20}
+.teacher{position:absolute;width:520px;height:520px;border-radius:50%;background:#dcebe5;overflow:hidden}
+.teacher img{width:100%;position:absolute;bottom:-30px}
+.bubble{position:absolute;background:#fff;color:#1d2a26;border-radius:36px;padding:26px 36px;font-size:44px;font-weight:900;line-height:1.35}
+.bubble:after{content:"";position:absolute;left:-26px;top:50%;margin-top:-18px;border:18px solid transparent;border-right:30px solid #fff;border-left:0}
+.site{position:absolute;bottom:150px;left:0;right:0;text-align:center;font-family:Poppins;font-weight:700;font-size:40px;color:#cfe7de}
+.site b{color:#f0be45}
+h1{position:absolute;left:60px;right:60px;text-align:center;font-weight:900;font-size:104px;line-height:1.2}
+.sub{position:absolute;left:70px;right:70px;text-align:center;font-size:46px;line-height:1.55;color:#e8f3ef;font-weight:700}
+.hl{color:#f0be45}
+.pill{position:absolute;left:50%;transform:translateX(-50%);background:#f0be45;color:#1d2a26;border-radius:999px;padding:26px 64px;font-family:Poppins;font-size:58px;font-weight:800;white-space:nowrap;box-shadow:0 10px 0 #b98d22}
+.reg{position:absolute;left:60px;right:60px;display:flex;gap:28px}
+.rc{flex:1;background:#fffdf6;color:#1d2a26;border-radius:36px;padding:34px;text-align:center;box-shadow:0 14px 0 rgba(0,0,0,.14)}
+.rc .flag{width:120px;height:80px;border-radius:10px}
+.rc .n{font-size:50px;font-weight:900;margin-top:18px}
+.rc .c{font-size:38px;font-weight:700;color:#1c6a55}
+.rc .c b{font-family:Poppins;font-size:64px;color:#e0a21a;margin:0 6px}
+.list{position:absolute;left:60px;right:60px;background:rgba(255,255,255,.1);border-radius:36px;padding:30px 40px}
+.li{display:flex;align-items:center;gap:22px;font-size:40px;font-weight:700;line-height:1.35;padding:16px 0}
+.li+.li{border-top:2px solid rgba(255,255,255,.14)}
+.li .flag{flex:none;width:54px;height:36px}
+.new{position:absolute;left:60px;right:60px;background:#f0be45;color:#1d2a26;border-radius:36px;padding:34px 40px;font-size:42px;font-weight:900;line-height:1.45;text-align:center}
+.mini{position:absolute;left:60px;right:60px}
+.mc{background:#fffdf6;color:#1d2a26;border-radius:32px;padding:24px 34px;margin-bottom:22px;box-shadow:0 10px 0 rgba(0,0,0,.14)}
+.mc .tagrow{font-size:30px}
+.mc .z{font-size:42px;font-weight:900;line-height:1.38;margin-top:14px}
+.mc .e{font-family:Poppins;font-weight:600;font-size:28px;color:#6d7c76;margin-top:8px;line-height:1.3}
+.win{position:absolute;left:60px;right:60px;border-radius:44px;overflow:hidden;background:#dcebe5 center/cover;box-shadow:0 14px 0 rgba(0,0,0,.16)}
+.win:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.25))}
+.win .host{position:absolute;bottom:auto}
+.win .tag{position:absolute;left:28px;bottom:26px;background:#1c6a55;color:#fff;border-radius:999px;padding:10px 26px;font-size:34px;font-weight:900}
+.win .tag b{color:#f0be45}
+.win .bubble{right:34px;left:auto}
+.win .bubble:after{display:none}
+</style></head>
+<body><div class="dots"></div><div id="root"></div>
+<script>
+const FLAG={
+ IE:'<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#169B62"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#FF883E"/></svg>',
+ TW:(()=>{let p=[];for(let i=0;i<24;i++){const a=Math.PI*2*i/24-Math.PI/2,r=i%2?7.6:15;p.push((30+r*Math.cos(a)).toFixed(2)+','+(20+r*Math.sin(a)).toFixed(2))}
+  return '<svg viewBox="0 0 120 80"><rect width="120" height="80" fill="#FE0000"/><rect width="60" height="40" fill="#000095"/><polygon points="'+p.join(' ')+'" fill="#fff"/><circle cx="30" cy="20" r="8.5" fill="#000095"/><circle cx="30" cy="20" r="7.2" fill="#fff"/></svg>'})()};
+let RN={IE:'愛爾蘭',TW:'台灣'};
+const flag=c=>FLAG[c]?'<span class="flag">'+FLAG[c]+'</span>':'';
+const q=new URLSearchParams(location.search), S=q.get('s')||'story';
+// host window: background + long-video character, pose per scene
+const win=(H,pose,top,ht,extra='')=>{const src=H.poses[pose]||H.poses.base;
+ return `<div class="win" style="top:${top}px;height:${ht}px;background-image:url(cast/bg-${H.bg}.webp)"><img class="host" src="cast/${src}.webp" style="width:${ht*1.0}px;left:${H.left||40}px;top:${Math.round(ht*0.06)}px">${extra}<div class="tag">今日主播 <b>${H.name}</b>・${H.country}</div></div>`};
+fetch('day.json').then(r=>r.json()).then(D=>{
+ RN=Object.assign(RN,D.rn||{});
+ const top=`<div class="top"><div class="brand"><img src="icon-shamrock.webp">BinBin<b>每日英文</b></div><div class="date">${D.dateZh}</div></div>`;
+ const site=`<div class="site">▶ <b>binbindaily.com</b></div>`;
+ let h=top;
+ if(S==='intro'){
+  h+=`<h1 style="top:420px">今天遊戲裡的<br><span class="hl">英文新聞</span></h1>
+   <div class="sub" style="top:700px">${D.regions.map(r=>flag(r.code)+' '+r.name).join('　')}</div>
+   `+win(D.host,'hi',800,860)+site;
+ } else if(/^n\d$/.test(S)){
+  const i=+S[1], n=D.news[i];
+  h+=`<div class="card" style="top:300px">
+    <div class="tagrow">${flag(n.region)} ${RN[n.region]}<span class="topic">${n.topic}</span><span class="num">${i+1} / ${D.news.length}</span></div>
+    <div class="en">${n.en}</div><div class="zh">${n.zh}</div>
+    <div class="word"><span class="k">今日單字</span><span class="w">${n.word}</span>${n.wordZh}<span class="l">${n.lvl}</span></div></div>
+   `+win(D.host,['talk','think','talk'][i%3],1120,640,'<div class="bubble" style="top:60px">完整文章＋測驗<br>在遊戲裡 👉</div>');
+ } else if(S==='regions'){
+  h+=`<h1 style="top:290px;font-size:84px">今天遊戲裡有</h1>
+   <div class="reg" style="top:440px">${D.regions.map(r=>`<div class="rc">${flag(r.code)}<div class="n">${r.name}</div><div class="c"><b>${r.count}</b>篇</div></div>`).join('')}</div>
+   <div class="list" style="top:860px">${D.more.map(m=>`<div class="li">${flag(m.region)}<span>${m.zh}</span></div>`).join('')}</div>
+   <div class="new" style="top:1230px;padding:26px 30px;font-size:40px">還沒有你的地區？遊戲裡選一下<br><span style="color:#1c6a55">隔天早上就有當地新聞！</span></div>`+win(D.host,'happy',1420,330);
+ } else if(S==='cta'){
+  h+=`<h1 style="top:330px;font-size:92px">每天一則新聞<br><span class="hl">練英文</span></h1>
+   <div class="sub" style="top:610px">跟同事多點話題 💬<br>小遊戲約朋友一起玩 🎮</div>
+   `+win(D.host,'happy',800,640)+`<div class="pill" style="top:1500px">binbindaily.com</div>`;
+ } else { // story image: all in one
+  h+=`<h1 style="top:250px;font-size:76px">今天遊戲裡的<span class="hl">新聞</span></h1>
+   <div class="mini" style="top:370px">${D.news.map(n=>`<div class="mc"><div class="tagrow">${flag(n.region)} ${RN[n.region]}<span class="topic">${n.topic}</span></div><div class="z">${n.zh}</div><div class="e">${n.en}</div></div>`).join('')}</div>
+   <div class="reg" style="top:1340px;gap:20px">${D.regions.map(r=>`<div class="rc" style="padding:20px;display:flex;align-items:center;justify-content:center;gap:16px">${flag(r.code)}<div class="n" style="margin:0;font-size:42px">${r.name}</div><div class="c"><b style="font-size:52px">${r.count}</b>篇</div></div>`).join('')}</div>
+   <div class="sub" style="top:1490px;font-size:38px">還沒有你的地區？遊戲裡選地區，<span class="hl">隔天就有當地新聞</span></div>
+   <div class="pill" style="top:1600px;font-size:52px;padding:22px 56px">binbindaily.com</div>`;
+ }
+ document.getElementById('root').innerHTML=h;
+ // long headlines: shrink text until a box no longer runs into the box below it
+ const fit=(box,below,sel,gap)=>{if(!box||!below)return;const els=[...box.querySelectorAll(sel)];
+  for(let k=0;k<30&&box.getBoundingClientRect().bottom>below.getBoundingClientRect().top-gap;k++)
+   els.forEach(e=>{const f=parseFloat(getComputedStyle(e).fontSize);e.style.fontSize=(f*0.95)+'px'})};
+ const R=document.getElementById('root');
+ fit(R.querySelector('.card'),R.querySelector('.win'),'.en,.zh',24);
+ fit(R.querySelector('.mini'),R.querySelector('.reg'),'.z,.e',10);
+ fit(R.querySelector('.list'),R.querySelector('.new'),'.li',24);
+ document.fonts.ready.then(()=>setTimeout(()=>document.body.dataset.ready=1,300));
+});
+</script></body></html>
