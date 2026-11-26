@@ -82,7 +82,7 @@ async function useOne(db, uid, admin, pro) {
     const L = leftOf(x, d, m), an = y.d === d ? y.n || 0 : 0, ap = y.pm === m ? y.pn || 0 : 0;
     if (!admin) {
       if (pro) { if (ap >= CV_LIMITS.proAllMonth) return { ok: false, why: "proOut" }; if (L.pro <= 0) return { ok: false, why: "pro" }; }
-      else { if (an >= CV_LIMITS.allDay) return { ok: false, why: "busy" }; if (L.month <= 0) return { ok: false, why: "month" }; if (L.day <= 0) return { ok: false, why: "day" }; }
+      else { if (an >= CV_LIMITS.allDay) return { ok: false, why: "full" }; if (L.month <= 0) return { ok: false, why: "month" }; if (L.day <= 0) return { ok: false, why: "day" }; }
     }
     const nx = pro ? { ...x, pm: m, pn: (x.pm === m ? x.pn || 0 : 0) + 1 } : { ...x, d, n: (x.d === d ? x.n || 0 : 0) + 1, m, mn: (x.m === m ? x.mn || 0 : 0) + 1 };
     t.set(me, { d: nx.d || d, n: nx.d === d ? nx.n || 0 : 0, m: nx.m || m, mn: nx.m === m ? nx.mn || 0 : 0, pm: nx.pm || "", pn: nx.pn || 0, at: FieldValue.serverTimestamp() });

@@ -59,7 +59,7 @@
     nonLatin: ["PDF 只能放英文字，中文字已拿掉：請把姓名、地點改成英文", "The PDF only takes English letters: Chinese characters were left out, write names and places in English"],
     e_login: ["要先登入 Google 才能用 AI 寫履歷", "Sign in with Google to use the AI writer"], e_setup: ["AI 還沒開通，請稍後再試", "The AI writer is not switched on yet"],
     e_day: ["今天的 3 次用完了，明天再來", "You've used today's 3 writes, come back tomorrow"], e_month: ["這個月的 10 次用完了", "You've used this month's 10 writes"],
-    e_busy: ["現在太多人在用，等一下再試", "Too busy right now, try again soon"], e_refused: ["AI 沒辦法處理這些內容，請修改後再試", "The AI couldn't write this, change your answers and try again"],
+    e_full: ["今天大家寫的份數已經滿了，明天再來", "Today's writes for everyone are used up, come back tomorrow"], e_busy: ["現在太多人在用，等一下再試", "Too busy right now, try again soon"], e_refused: ["AI 沒辦法處理這些內容，請修改後再試", "The AI couldn't write this, change your answers and try again"],
     e_net: ["連線失敗或 AI 出錯，請再試一次（AI 出錯不扣次數）", "Connection or AI error, try again (AI errors are not counted)"], e_banned: ["這個帳號不能使用", "This account can't use it"],
     nextT: ["📌 接下來", "📌 Next steps"], nextL: [["每種工作各存一版，標題寫你要應徵的職位", "咖啡店、餐廳、零售店：印幾份 PDF 直接走進店裡問", "線上投：Indeed.ie、IrishJobs.ie、Jobs.ie、LinkedIn", "附一段短短的 Cover letter／Email 說明你為什麼想做這份工作"],
       ["Keep one version per kind of job, with that job in the headline", "Cafés, restaurants, shops: print a few copies and walk in", "Online: Indeed.ie, IrishJobs.ie, Jobs.ie, LinkedIn", "Add a short cover letter or e-mail saying why you want this job"]],
@@ -313,7 +313,7 @@
     busy = false;
     if (r && r.cv) { D.cv = r.cv; D.pro = !!r.pro; if (r.left) left = r.left; save(); sfx("prize"); }
     else if (r.error === "empty") toast(t("needSome"));
-    else toast(t("e_" + (["login", "setup", "day", "month", "busy", "refused", "banned", "pro", "proOut"].includes(r.error) ? r.error : "net")));
+    else toast(t("e_" + (["login", "setup", "day", "month", "busy", "full", "refused", "banned", "pro", "proOut"].includes(r.error) ? r.error : "net")));
     draw();
   }
 
