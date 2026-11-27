@@ -3,6 +3,7 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-25-3:accounts | account | n. | A2 | places in a bank to keep money | 帳戶（複數） | 口座（複数） | 계좌들 | cuentas | खाते | These accounts have low fees. | funds, plans |  | savings accounts, open accounts
 2026-11-25-3:allowance | allowance | n. | B2 | an amount you may have without paying tax | （免稅）額度 | 控除枠；非課税枠 | 공제 한도 | desgravación; asignación | छूट सीमा | The tax-free allowance is €200,000. | limit, entitlement, exemption |  | tax-free allowance, personal allowance
 2026-11-25-3:applied | apply | v. | B1 | used for a purpose | 用於；運用 | 充てられた | 적용된 | aplicado | लागू किया गया | The money was applied to the debt. | used, put, allocated | withheld | applied to, applied directly
 2026-11-25-3:applies | apply | v. | B1 | is relevant to | 適用 | 適用される；充てる | 적용된다 | se aplica | लागू होता है | The rule applies to all workers. | relates, pertains, concerns |  | applies to, applies only
@@ -112,4 +113,3 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-25-4:portray | portray | v. | C1 | show someone in art | 描繪 | 描写する | 묘사하다 | retratar | चित्रित करना | The windows portray ordinary people. | depict, show, represent | hide | portray people, portray as
 2026-11-25-4:rainbow | rainbow | n. | A2 | an arc of colours in the sky | 彩虹 | 虹 | 무지개 | arcoíris | इंद्रधनुष | We saw a rainbow after the rain. | arc of colours, spectrum |  | rainbow flag, colours of the rainbow
 2026-11-25-4:red | red | adj. | A1 | having the colour of blood | 紅色的 | 赤い | 빨간 | rojo | लाल | She wore a red coat. | crimson, scarlet |  | red ribbon, red rose
-2026-11-25-4:remembrance | remembrance | n. | C1 | remembering people who died | 紀念（in remembrance of） | 追悼 | 추모 | recuerdo; memoria | स्मरण | Candles were lit in remembrance of the victims. | memory, commemoration, tribute | forgetting | in remembrance of, day of remembrance

@@ -17,7 +17,7 @@ Paths are files on the main branch of GitHub repo CHECHE0102/Che_daily_improveme
 - 2026-11-25-tw-2 (region TW, 科技): Taiwan's Top Research Institute Renews Science Partnership With France
   - review/2026-11-25/2026-11-25-tw-2.md
 
-## WORDS job: 390 new glossary entries today, in 4 part(s)
+## WORDS job: 392 new glossary entries today, in 4 part(s)
 - review/2026-11-25/words-new-1.md
 - review/2026-11-25/words-new-2.md
 - review/2026-11-25/words-new-3.md

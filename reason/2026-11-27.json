@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-27",
+ "items": {
+  "2026-11-27": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "The HSE board will appear before an Oireachtas committee to explain its disputed decision to dismiss its chief executive, a move that has drawn political criticism.",
+     "Anne O'Connor has been reinstated as HSE chief executive after a High Court ruling.",
+     "The Health Minister has admitted ordering the dismissal of the HSE chief executive.",
+     "The HSE board has resigned following criticism from the Taoiseach."
+    ],
+    "a": 0,
+    "exp": "The passage opens by saying the board \"will be required to justify its contentious decision to dismiss the organisation's chief executive\" and then sets out the political reaction. There is no reinstatement (B); Sinn Féin only \"alleged\" the minister was involved (C); and the board is accepting an invitation, not resigning (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the Taoiseach's refusal to express confidence in the board?",
+    "opts": [
+     "He has already decided to dismiss the board's members.",
+     "He believes Ms O'Connor's dismissal was entirely justified.",
+     "He is keeping his distance from the board until it gives a fuller explanation.",
+     "He agrees with Sinn Féin that the minister orchestrated the dismissal."
+    ],
+    "a": 2,
+    "exp": "Martin \"requested a more comprehensive account from the board and notably declined to express confidence in its members\", suggesting he is withholding support pending an explanation. Nothing says he will sack the board (A) or that he backs the decision (B), and the Sinn Féin claim is presented \"by contrast\" (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that any costs \"would ultimately be borne by the Exchequer\"?",
+    "opts": [
+     "To argue that Ms O'Connor should withdraw her legal challenge.",
+     "To point out that the dispute could end up costing public money whatever happens.",
+     "To show that the HSE has already paid compensation to Ms O'Connor.",
+     "To suggest that the High Court will order the Government to pay."
+    ],
+    "a": 1,
+    "exp": "The final paragraph says that \"irrespective of the eventual outcome, mediation or litigation is likely to entail substantial costs\" that fall on the Exchequer, i.e. public funds. The writer does not urge her to drop the case (A), report a payment (C), or predict a court order (D)."
+   }
+  ],
+  "2026-11-27-2": [
+   {
+    "type": "main",
+    "q": "What is the passage mainly about?",
+    "opts": [
+     "A newly discovered cave in Co Clare containing human remains.",
+     "The extinction of the giant deer at the end of the Ice Age.",
+     "A plan by the National Museum of Ireland to return bones to Co Waterford.",
+     "A study suggesting, though not yet proving, that people were in Ireland about 1,000 years earlier than previously confirmed."
+    ],
+    "a": 3,
+    "exp": "The opening states that hunter-gatherers \"may have inhabited southern Ireland almost 1,000 years earlier than has previously been confirmed\", and later the researchers admit the marks \"cannot be definitively identified as human-made\". The Clare cave is only the earlier record (A); deer extinction (B) and returning bones (C) are not the topic."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about why further excavations are planned?",
+    "opts": [
+     "The researchers hope to find artefacts that would confirm the marks were made by humans.",
+     "The bones held by the National Museum were found to be fakes.",
+     "Oxford University rejected the radiocarbon dates.",
+     "The Co Clare bear bone has been redated to a later period."
+    ],
+    "a": 0,
+    "exp": "The researchers say the marks cannot be confirmed \"in the absence of further artefacts\", and \"consequently, further excavations are planned\", implying they want such evidence. There is no suggestion of fakes (B), rejected dates (C) or redating of the Clare bone (D)."
+   },
+   {
+    "type": "tone",
+    "q": "Which best describes the researchers' attitude to their own findings, as presented in the passage?",
+    "opts": [
+     "Dismissive — they doubt the bones are of any value.",
+     "Cautiously optimistic — the evidence is promising but not conclusive.",
+     "Triumphant — they claim to have rewritten Irish history.",
+     "Indifferent — they see no need for further work."
+    ],
+    "a": 1,
+    "exp": "They \"acknowledge that the marks cannot be definitively identified as human-made\", yet note the timing \"is, however, consistent with hunter-gatherer activity\", and Jennings says confirmation \"would\" alter the chronology. That is hopeful but hedged, not triumphant (C), dismissive (A) or indifferent, since more digs are planned (D)."
+   }
+  ],
+  "2026-11-27-3": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Mortgage approvals fell sharply in 2026 because of rising interest rates.",
+     "Movers now account for the majority of mortgage approvals in Ireland.",
+     "Mortgage approvals are running at their highest level for the period since 2011, with first-time buyers making up most of them.",
+     "The BPFI has stopped publishing mortgage data on a monthly basis."
+    ],
+    "a": 2,
+    "exp": "Brian Hayes \"observed that both figures were the highest recorded for this period since the series commenced in 2011\", and first-time buyers accounted for \"58.4%\" of October approvals. Approvals rose year-on-year (A); movers were only 21.9% by value (B); nothing suggests data publication ended (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the figures for October compared with September?",
+    "opts": [
+     "The month-on-month dip does not change the picture of strong growth over the year.",
+     "The housing market is entering a long decline.",
+     "First-time buyers stopped applying for mortgages in October.",
+     "October's figures were the highest ever recorded for a single month."
+    ],
+    "a": 0,
+    "exp": "Approvals \"declined by 2% relative to September\" but were \"10.3% higher than in the corresponding month of the previous year\", and the year-to-date totals are record highs. A long decline (B) is not supported; first-time buyers got 3,077 approvals (C); and the record refers to the January–October period, not one month (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer explain what a mortgage \"approval\" represents in the first paragraph?",
+    "opts": [
+     "To warn readers that most approvals are later cancelled.",
+     "To criticise lenders for making too many offers.",
+     "To argue that approvals are a poor guide to house prices.",
+     "To clarify a technical term so readers can interpret the statistics that follow."
+    ],
+    "a": 3,
+    "exp": "The sentence \"An approval represents a formal offer of finance from a lender in respect of a specific residential property\" simply defines the term before the figures are given. The passage says nothing about cancellations (A), criticism of lenders (B) or house prices (C)."
+   }
+  ],
+  "2026-11-27-4": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "The Government has cancelled the school transport scheme for post-primary pupils.",
+     "A planned rise in school bus fares faces growing pressure to be reconsidered, despite the scheme's rising cost to the State.",
+     "School bus fares will be reduced permanently from next September.",
+     "Taxis for children with special needs will no longer be funded."
+    ],
+    "a": 1,
+    "exp": "Crowe says the fare increase \"will need to be revisited\", opposition is \"substantial\" and Martin indicated increases \"might be reconsidered\", while officials note costs have \"increased by 58% since 2020\". The scheme is not cancelled (A); fares are due to rise, not fall (C); and taxi funding of €143 million continues (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the Government's position on the fare increase?",
+    "opts": [
+     "Senior Government figures appear to be giving mixed signals about it.",
+     "All ministers agree that the increase must go ahead unchanged.",
+     "The Government has already reversed the increase.",
+     "The Government plans to raise fares further in 2028."
+    ],
+    "a": 0,
+    "exp": "Martin \"indicated on Wednesday that certain increases might be reconsidered, notwithstanding the fact that\" Harris \"had explicitly ruled out a reversal the previous week\" — the two leaders are not saying the same thing. That rules out unanimity (B) and an actual reversal (C); further rises (D) are not mentioned."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer include the officials' figures on the cost of transporting each child?",
+    "opts": [
+     "To show that parents already pay most of the cost of the scheme.",
+     "To prove that the €350 fare would cover the full cost of each place.",
+     "To give context for the Government's decision by showing how much the State spends on the scheme.",
+     "To argue that the school bus scheme should be abolished."
+    ],
+    "a": 2,
+    "exp": "Officials said each child costs \"between €1,400 and €1,500 per year, with the State subsidising 93%\" at primary and 75% at post-primary, and the scheme will cost €687 million. This explains the financial pressure behind the decision. Parents do not pay most of it (A), €350 is well below €1,400 (B), and no one argues for abolition (D)."
+   }
+  ]
+ }
+}
