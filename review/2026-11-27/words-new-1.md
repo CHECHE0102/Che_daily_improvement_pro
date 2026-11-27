@@ -1,4 +1,4 @@
-# 2026-11-27 NEW glossary entries, part 1 of 2
+# 2026-11-27 NEW glossary entries, part 1 of 4
 Only entries that are new today (older identical entries were checked on earlier days).
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
@@ -6,7 +6,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-27:account | account | n. | B2 | an explanation of what happened | 說明；陳述 | 説明；経緯 | 설명; 해명 | explicación; versión | विवरण | He gave a clear account of the meeting. | explanation, report, version |  | a fuller account, give an account
 2026-11-27:adopted | adopt | v. | B2 | took or chose (a position) | 採取（立場） | 取った（姿勢を） | 취했다 | adoptó | अपनाया | She adopted a firm position on the issue. | took, assumed, chose | abandoned | adopt a position, adopt an approach
 2026-11-27:agreed | agree | v. | A2 | had the same opinion | 同意 | 賛成した | 동의했다 | estuvieron de acuerdo | सहमत हुए | Everyone agreed with the plan. | accepted, consented, approved | disagreed | agree with, agree to
-2026-11-27:appear | appear | v. | B1 | to come before a group to answer questions | 出席；出面 | 出席する | 출석하다 | comparecer | पेश होना | The minister will appear before the committee. | attend, come before, present oneself | be absent | appear before, appear in court
+2026-11-27:appear 2026-11-27-tw-2:appear | appear | v. | B1 | to come before a group to answer questions | 出席；出面 | 出席する | 출석하다 | comparecer | पेश होना | The minister will appear before the committee. | attend, come before, present oneself | be absent | appear before, appear in court
 2026-11-27:ascertain | ascertain | v. | C2 | to find out for certain | 查明；弄清楚 | 確かめる；突き止める | 알아내다 | averiguar | पता लगाना | Police are trying to ascertain the cause. | determine, establish, discover | ignore | ascertain the facts, ascertain whether
 2026-11-27:board's | board | n. | B1 | belonging to the board | 董事會的 | 理事会の | 이사회의 | de la junta | बोर्ड का | The board's report was short. | committee's, council's |  | the board's decision, the board's chair
 2026-11-27:borne | bear | v. | C1 | paid for or carried (cost) | 承擔（bear 的過去分詞） | 負担される | 부담되다 | asumido | वहन किया गया | The cost will be borne by the State. | carried, paid, shouldered |  | borne by, costs borne
@@ -14,7 +14,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-27:cooler | cool | adj. | B2 | less friendly or supportive | 較冷淡的；較保留的 | より冷ややかな | 더 냉담한 | más frío; más distante | ठंडा; कम उत्साही | She took a cooler view of the plan. | more distant, more reserved, less warm | warmer | a cooler line, cooler response
 2026-11-27:counsel | counsel | n. | C1 | a lawyer who speaks in court | 律師（senior counsel：資深大律師） | 弁護士 | 변호사 | abogado | वकील | Her counsel spoke to the judge. | lawyer, barrister, advocate |  | senior counsel, legal counsel
 2026-11-27:decent | decent | adj. | B1 | honest and good | 正派的；善良的 | まともな；誠実な | 품위 있는; 괜찮은 | decente | सभ्य | He is a decent and fair man. | honest, good, respectable | dishonest | decent person, decent people
-2026-11-27:declined | decline | v. | B2 | said no to doing something | 拒絕 | 断った | 거절했다 | se negó | मना कर दिया | He declined to comment. | refused, rejected, turned down | accepted, agreed | decline to comment, declined an offer
+2026-11-27:declined 2026-11-27-tw-2:declined | decline | v. | B2 | said no to doing something | 拒絕 | 断った | 거절했다 | se negó | मना कर दिया | He declined to comment. | refused, rejected, turned down | accepted, agreed | decline to comment, declined an offer
 2026-11-27:determine | determine | v. | B2 | to find out the facts | 查明；確定 | 突き止める | 밝히다 | determinar | निर्धारित करना | We must determine what went wrong. | establish, ascertain, find out | guess | determine why, determine the cause
 2026-11-27:dismiss | dismiss | v. | B2 | to remove from a job | 解僱；免職 | 解任する | 해임하다 | despedir | बर्ख़ास्त करना | The company may dismiss the manager. | sack, fire, remove | appoint, hire | dismiss a worker, decision to dismiss
 2026-11-27:early | early | adv. | A1 | near the start of the day | 一大早地 | 早く | 일찍 | temprano | सुबह जल्दी | She got up early on Monday. | soon, at dawn | late | early in the morning, early on
@@ -26,7 +26,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-27:held | hold | v. | B1 | had a job or position | 擔任 | 務めた | 맡았다 | ocupado | संभाला | She has held the post since 2020. | occupied, had, filled | left | hold a post, hold office
 2026-11-27:hiding | hide | v. | B1 | keeping yourself out of sight | 躲藏 | 隠れる | 숨다 | esconderse | छिपना | The cat is hiding under the bed. | concealing, sheltering, taking cover | appearing | hiding behind, go into hiding
 2026-11-27:high | high | adj. | A1 | part of the name High Court | 高等（High Court：高等法院） | 高等（高等裁判所） | 고등(고등법원) | alto (Tribunal Superior) | उच्च | The case went to the High Court. | superior, senior | low | High Court, high office
-2026-11-27:indicated | indicate | v. | B2 | showed or said | 表示；示意 | 示した | 밝혔다 | indicó | संकेत दिया | She indicated that she would stay. | signalled, stated, suggested | concealed | indicate an intention, indicated that
+2026-11-27:indicated 2026-11-27-tw-2:indicated | indicate | v. | B2 | showed or said | 表示；示意 | 示した | 밝혔다 | indicó | संकेत दिया | She indicated that she would stay. | signalled, stated, suggested | concealed | indicate an intention, indicated that
 2026-11-27:inkling | inkling | n. | C2 | a slight idea or feeling | 模糊的感覺；略知 | うすうす感じること | 낌새 | sospecha; idea | आभास | I had no inkling of the plan. | hint, idea, suspicion | certainty | have no inkling, the faintest inkling
 2026-11-27:invitation | invitation | n. | B1 | a request to come or take part | 邀請 | 招待 | 초대 | invitación | निमंत्रण | She accepted the invitation to speak. | request, call, summons | refusal | accept an invitation, formal invitation
 2026-11-27:issues | issue | n. | B1 | important problems | 問題 | 問題 | 문제 | cuestiones | मुद्दे | The report raised several issues. | matters, problems, concerns |  | serious issues, raise issues
@@ -46,7 +46,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-27:orchestrated | orchestrate | v. | C2 | planned and organised secretly | 策劃；精心安排 | 画策した | 획책했다 | orquestó | रचा | The protest was orchestrated by a small group. | organised, arranged, masterminded |  | orchestrate a campaign, carefully orchestrated
 2026-11-27:orchestrating | orchestrate | v. | C2 | planning and organising secretly | 策劃 | 画策する | 획책하는 | orquestar | रचने | He was accused of orchestrating the plan. | organising, arranging, masterminding |  | orchestrating a move, accused of orchestrating
 2026-11-27:ousted | oust | v. | C2 | forced out of a job | 撤換；驅逐 | 追放された；解任された | 축출된 | destituido | हटाया गया | The manager was ousted after a bad season. | removed, dismissed, expelled | appointed | ousted from power, ousted leader
-2026-11-27:part | part | n. | A2 | a role in something | 角色（play a part） | 役割 | 역할 | papel | भूमिका | He played a part in the plan. | role, share, hand |  | play a part, take part
+2026-11-27:part 2026-11-27-tw-1:part | part | n. | A2 | a role in something | 角色（play a part） | 役割 | 역할 | papel | भूमिका | He played a part in the plan. | role, share, hand |  | play a part, take part
 2026-11-27:position | position | n. | B1 | a job or role | 職位；職務 | 職；ポスト | 직위 | puesto | पद | She applied for the position of manager. | post, job, role |  | position at risk, hold a position
 2026-11-27:post | post | n. | B2 | a job, especially an important one | 職位 | 職；ポスト | 직책 | cargo | पद | He took up the post in March. | position, job, role |  | take up a post, hold a post
 2026-11-27:raised | raise | v. | B1 | brought up for discussion | 提出（問題） | 提起した | 제기했다 | planteó | उठाए | She raised the problem at the meeting. | brought up, highlighted, put forward | ignored | raise issues, raise concerns

@@ -1,5 +1,5 @@
 # BinBin TEXT proofreading — 2026-11-27
-date: 2026-11-27 | 4 articles | read this WHOLE file, it is the complete job for today
+date: 2026-11-27 | 6 articles | read this WHOLE file, it is the complete job for today
 
 # 2026-11-27  (Ireland national)
 date: 2026-11-27 | rank: 1 | topic: 政治 | main level: B2
@@ -641,3 +641,285 @@ Q3 [purpose]: Why does the writer include the officials' figures on the cost of 
    C. To give context for the Government's decision by showing how much the State spends on the scheme.  <- answer
    D. To argue that the school bus scheme should be abolished.
    explanation: Officials said each child costs "between €1,400 and €1,500 per year, with the State subsidising 93%" at primary and 75% at post-primary, and the scheme will cost €687 million. This explains the financial pressure behind the decision. Parents do not pay most of it (A), €350 is well below €1,400 (B), and no one argues for abolition (D).
+
+
+# 2026-11-27-tw-1  (region TW)
+date: 2026-11-27 | rank: 1 | topic: 經濟 | main level: B2
+file: articles/2026-11-27-tw-1.json
+
+## title
+322 Taiwanese Farm Products Escape New US Tariffs
+
+## summaries
+- summaryEn: Taiwan says 322 of its farm products will stay free of extra US tariffs under Washington's latest trade plan.
+- summaryZh: 美國新關稅豁免台灣322項農產品
+- summaryJa: 台湾の農産品322品目、米国の追加関税を免除。
+- summaryKo: 대만 농산물 322개 품목, 미국 추가 관세 면제.
+- summaryEs: 322 productos agrícolas de Taiwán quedan exentos de los nuevos aranceles de EE. UU.
+- summaryHi: अमेरिका के नए टैरिफ़ से ताइवान के 322 कृषि उत्पादों को छूट मिली।
+
+## sources
+- Focus Taiwan (CNA): https://focustaiwan.tw/politics/202611260013
+
+## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
+
+## level A2
+A2 P1 S1: Taiwan sells many farm products to the United States.
+    zh: 台灣賣很多農產品給美國。
+A2 P1 S2: Now there is good news for farmers.
+    zh: 現在農民有好消息。
+A2 P1 S3: The US will not add new taxes on 322 of these products.
+    zh: 美國不會對其中322項產品加徵新稅。
+A2 P2 S1: A tax on things from another country is called a tariff.
+    zh: 對來自其他國家的東西課的稅叫做關稅。
+A2 P2 S2: The US is checking trade with 14 places, like China, Japan and Taiwan.
+    zh: 美國正在檢查與14個地方的貿易，例如中國、日本和台灣。
+A2 P2 S3: It wants to stop countries from making too many goods.
+    zh: 它想阻止各國生產太多商品。
+A2 P3 S1: Taiwan's farm minister, Chen Chun-chi, shared the news on Thursday.
+    zh: 台灣的農業部長陳駿季在星期四公布了這個消息。
+A2 P3 S2: The 322 products are about 36 to 40 percent of Taiwan's farm sales to the US.
+    zh: 這322項產品約占台灣對美農產品銷售的36%到40%。
+A2 P4 S1: Some Taiwanese products now have a big price advantage.
+    zh: 有些台灣產品現在有很大的價格優勢。
+A2 P4 S2: Taiwanese orchids pay no tax in the US.
+    zh: 台灣蘭花在美國不用繳稅。
+A2 P4 S3: Orchids from the Netherlands pay 10 percent.
+    zh: 來自荷蘭的蘭花要繳10%。
+A2 P4 S4: Fish called tilapia from Taiwan pay 10 percent, but tilapia from China pay 37.5 percent.
+    zh: 台灣的吳郭魚繳10%，但中國的吳郭魚要繳37.5%。
+A2 P5 S1: The government will also give NT$18 billion to help farmers sell their food abroad.
+    zh: 政府也會拿出180億新台幣，幫助農民把食物賣到國外。
+
+## level B1
+B1 P1 S1: Good news arrived for Taiwan's farmers this week.
+    zh: 本週台灣農民迎來好消息。
+B1 P1 S2: Agriculture Minister Chen Chun-chi said on Thursday that 322 Taiwanese farm products will not face any extra tariffs in the United States.
+    zh: 農業部長陳駿季星期四表示，台灣有322項農產品在美國不會被加徵任何額外關稅。
+B1 P2 S1: The US is running an investigation into 14 economies, including China, Japan, South Korea, the EU and Taiwan.
+    zh: 美國正在對14個經濟體進行調查，包括中國、日本、南韓、歐盟和台灣。
+B1 P2 S2: It says their government policies have helped factories produce far more goods than the world needs.
+    zh: 美方說，這些經濟體的政府政策讓工廠生產的商品遠超過世界所需。
+B1 P2 S3: As a result, the US has proposed new tariffs of up to 15 percent on many Taiwanese goods.
+    zh: 因此，美國提議對許多台灣商品課徵最高15%的新關稅。
+B1 P3 S1: However, the 322 farm products are protected.
+    zh: 不過，這322項農產品受到保護。
+B1 P3 S2: Together they make up between 36 and 40 percent of the value of Taiwan's farm exports to the US.
+    zh: 它們合計占台灣對美農產品出口總值的36%到40%。
+B1 P3 S3: Twenty-six of them, such as moth orchids, have special exemptions just for Taiwan.
+    zh: 其中26項，例如蝴蝶蘭，享有台灣專屬的豁免。
+B1 P4 S1: These exemptions give Taiwanese farmers an advantage.
+    zh: 這些豁免讓台灣農民占有優勢。
+B1 P4 S2: For example, Taiwanese edamame beans face a 10 percent tariff, while Chinese edamame faces 41.3 percent.
+    zh: 例如，台灣毛豆的關稅是10%，而中國毛豆則是41.3%。
+B1 P5 S1: The ministry has also set aside NT$18 billion to support exporters.
+    zh: 農業部也撥出180億新台幣支持出口業者。
+B1 P5 S2: The final tariff decision is expected early next year.
+    zh: 最終的關稅決定預計在明年初出爐。
+
+## level B2
+B2 P1 S1: Taiwanese farmers received welcome news on Thursday when Agriculture Minister Chen Chun-chi announced that 322 agricultural products would remain exempt from additional US tariffs.
+    zh: 農業部長陳駿季星期四宣布，322項農產品將持續免徵美國的額外關稅，讓台灣農民收到好消息。
+B2 P2 S1: The announcement follows a proposal by the Office of the US Trade Representative to impose tariffs of up to 15 percent on Taiwanese goods.
+    zh: 這項宣布是在美國貿易代表署提議對台灣商品課徵最高15%關稅之後。
+B2 P2 S2: The move is part of an investigation into 14 economies whose industrial policies, Washington argues, have created structural overcapacity.
+    zh: 此舉是對14個經濟體調查的一部分，華府認為這些經濟體的產業政策造成了結構性產能過剩。
+B2 P2 S3: If talks prove unsatisfactory, the rate could rise to as much as 25 percent.
+    zh: 如果談判結果不理想，稅率可能升高到25%。
+B2 P3 S1: The exempt products account for 36 to 40 percent of Taiwan's agricultural export value to the US.
+    zh: 這些豁免產品占台灣對美農產品出口值的36%到40%。
+B2 P3 S2: Twenty-six of them, including moth orchids and anthuriums, enjoy exemptions specific to Taiwan, giving growers a clear edge over foreign rivals.
+    zh: 其中26項，包括蝴蝶蘭和火鶴花，享有台灣專屬的豁免，讓種植者比外國對手擁有明顯優勢。
+B2 P3 S3: Taiwanese orchids enter the US duty-free, whereas Dutch competitors pay 10 percent.
+    zh: 台灣蘭花免稅進入美國，而荷蘭競爭者則要繳10%。
+B2 P4 S1: To cushion any impact, the ministry has earmarked NT$18 billion from a special resilience budget for exporters and plans to expand its NT$30 billion Agricultural Safety Fund.
+    zh: 為了減緩衝擊，農業部已從特別韌性預算中撥出180億新台幣給出口業者，並計畫擴大規模300億新台幣的農業安全基金。
+B2 P5 S1: The proposals are not yet final.
+    zh: 這些提案還不是最終版本。
+B2 P5 S2: Public hearings in the US are due to begin in January, and Taipei hopes the outcome will match its existing trade agreement with Washington.
+    zh: 美國的公聽會預定明年一月開始，台北希望結果能與現有的對美貿易協定一致。
+
+## level C1
+C1 P1 S1: Taiwan's agricultural sector has been spared the worst of Washington's latest trade offensive.
+    zh: 台灣農業部門躲過了華府最新貿易攻勢中最嚴重的衝擊。
+C1 P1 S2: Agriculture Minister Chen Chun-chi confirmed on Thursday that 322 farm products will continue to enter the United States without any additional tariffs.
+    zh: 農業部長陳駿季星期四證實，322項農產品將繼續免徵任何額外關稅進入美國。
+C1 P2 S1: His remarks came a day after the US Trade Representative unveiled proposed duties of up to 15 percent on Taiwanese goods, the outcome of a Section 301 probe into what it calls structural excess capacity across 14 economies.
+    zh: 他發言的前一天，美國貿易代表署公布了對台灣商品最高15%的擬議關稅，這是一項針對14個經濟體所謂「結構性產能過剩」的301條款調查結果。
+C1 P2 S2: Should consultations falter, the ceiling could climb to 25 percent.
+    zh: 如果磋商不順，上限可能攀升到25%。
+C1 P3 S1: The shielded items represent roughly 36 to 40 percent of the value of Taiwan's farm exports to the US, and 26 of them benefit from Taiwan-specific carve-outs.
+    zh: 這些受保護的品項約占台灣對美農產品出口值的36%到40%，其中26項享有台灣專屬的例外條款。
+C1 P3 S2: The resulting price gaps are striking: Taiwanese tilapia faces a 10 percent levy, compared with 37.5 percent for its Chinese counterpart.
+    zh: 由此產生的價差相當驚人：台灣吳郭魚的稅率是10%，而中國吳郭魚是37.5%。
+C1 P4 S1: Even so, the ministry is hedging its bets.
+    zh: 即便如此，農業部仍在預留後路。
+C1 P4 S2: It has ring-fenced NT$18 billion from a special resilience budget to support exporters and intends to enlarge its NT$30 billion Agricultural Safety Fund.
+    zh: 它已從特別韌性預算中專款保留180億新台幣支持出口業者，並打算擴大300億新台幣的農業安全基金。
+C1 P5 S1: Vice Premier Cheng Li-chiun stressed that nothing will be settled until the US process concludes early next year, with Taipei pressing for terms consistent with its reciprocal trade agreement.
+    zh: 副院長鄭麗君強調，在美國程序明年初結束之前，一切都還沒定案，台北將力爭符合雙方對等貿易協定的條件。
+
+## level IELTS
+IELTS P1 S1: For Taiwan's farmers, the latest round of American trade measures has delivered an unexpected reprieve.
+    zh: 對台灣農民而言，美國最新一輪貿易措施帶來了意外的喘息機會。
+IELTS P1 S2: On Thursday, Agriculture Minister Chen Chun-chi announced that 322 agricultural products would remain exempt from any additional US tariffs.
+    zh: 星期四，農業部長陳駿季宣布，322項農產品將持續免徵任何額外的美國關稅。
+IELTS P2 S1: The exemption must be viewed against a broader backdrop.
+    zh: 這項豁免必須放在更廣泛的背景下來看。
+IELTS P2 S2: A day earlier, the US Trade Representative had proposed tariffs of up to 15 percent on Taiwanese imports, following an investigation into 14 economies accused of fostering structural overcapacity through industrial subsidies.
+    zh: 前一天，美國貿易代表署提議對台灣進口商品課徵最高15%的關稅，起因是一項針對14個經濟體的調查，這些經濟體被指控透過產業補貼助長結構性產能過剩。
+IELTS P2 S3: Officials also warned that the rate could escalate to 25 percent if negotiations proved unsatisfactory.
+    zh: 官員也警告，如果談判結果不理想，稅率可能升高到25%。
+IELTS P3 S1: The protected goods are economically significant, accounting for between 36 and 40 percent of Taiwan's agricultural export value to the US.
+    zh: 這些受保護的商品在經濟上意義重大，占台灣對美農產品出口值的36%到40%。
+IELTS P3 S2: Moreover, 26 items, notably moth orchids, enjoy country-specific exemptions, which confer a considerable competitive advantage.
+    zh: 此外，26項品項（特別是蝴蝶蘭）享有國家專屬的豁免，帶來相當大的競爭優勢。
+IELTS P3 S3: Taiwanese edamame, for instance, is subject to a 10 percent duty, whereas Chinese producers face 41.3 percent.
+    zh: 例如，台灣毛豆的關稅為10%，而中國生產者則要面對41.3%。
+IELTS P4 S1: Nevertheless, the government is taking precautions.
+    zh: 儘管如此，政府仍在採取預防措施。
+IELTS P4 S2: It has allocated NT$18 billion from a special resilience budget to assist exporters and intends to expand its NT$30 billion Agricultural Safety Fund.
+    zh: 它已從特別韌性預算中撥出180億新台幣協助出口業者，並打算擴大300億新台幣的農業安全基金。
+IELTS P5 S1: Ultimately, the arrangement remains provisional.
+    zh: 說到底，這項安排仍是暫時性的。
+IELTS P5 S2: Public hearings in Washington are scheduled for January, and Taipei will seek an outcome consistent with its existing reciprocal trade agreement.
+    zh: 華府的公聽會預定在一月舉行，台北將尋求與現有對等貿易協定一致的結果。
+
+
+# 2026-11-27-tw-2  (region TW)
+date: 2026-11-27 | rank: 2 | topic: 政治 | main level: B2
+file: articles/2026-11-27-tw-2.json
+
+## title
+Taiwan's Mayoral Candidates Make Final Push Before Saturday's Vote
+
+## summaries
+- summaryEn: Candidates in New Taipei and Taipei made a final push for votes ahead of Saturday's local elections.
+- summaryZh: 選前衝刺：新北、台北候選人全力拚最後一票
+- summaryJa: 土曜の統一地方選を前に、新北・台北の候補が最後の追い込み。
+- summaryKo: 토요일 지방선거 앞두고 신베이·타이베이 후보들 막판 총력전.
+- summaryEs: Los candidatos a alcalde de Taiwán hacen su último esfuerzo antes de las elecciones locales del sábado.
+- summaryHi: शनिवार के स्थानीय चुनाव से पहले ताइवान के मेयर उम्मीदवारों ने आख़िरी ज़ोर लगाया।
+
+## sources
+- Focus Taiwan (CNA): https://focustaiwan.tw/politics/202611260020
+
+## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
+
+## level A2
+A2 P1 S1: Taiwan has local elections on Saturday.
+    zh: 台灣星期六有地方選舉。
+A2 P1 S2: People will choose new mayors and city leaders.
+    zh: 人們會選出新的市長和城市領袖。
+A2 P1 S3: The candidates are very busy this week.
+    zh: 這個星期候選人都非常忙。
+A2 P2 S1: In New Taipei, Lee Shu-chuan visited his 100th market.
+    zh: 在新北，李四川走訪了他的第100個市場。
+A2 P2 S2: He shook hands with shoppers.
+    zh: 他和買菜的民眾握手。
+A2 P2 S3: His rival, Su Chiao-hui, rode in a long line of cars through seven areas of the city.
+    zh: 他的對手蘇巧慧坐在長長的車隊裡，經過市內七個地區。
+A2 P3 S1: In Taipei, Mayor Chiang Wan-an also drove around the city.
+    zh: 在台北，市長蔣萬安也開車繞行全市。
+A2 P3 S2: He wants to win again.
+    zh: 他想再次勝選。
+A2 P3 S3: His rival, Puma Shen, cancelled his big event on a main road on Friday night.
+    zh: 他的對手沈伯洋取消了星期五晚上在一條主要道路上的大型活動。
+A2 P3 S4: He said it would cause too much traffic.
+    zh: 他說那會造成太多交通。
+A2 P4 S1: Party leaders are helping too.
+    zh: 政黨領袖也在幫忙。
+A2 P4 S2: President Lai Ching-te and former President Tsai Ing-wen will join a big event for Su on Friday.
+    zh: 賴清德總統和前總統蔡英文將在星期五參加蘇巧慧的大型活動。
+A2 P4 S3: Speaker Han Kuo-yu will help Lee.
+    zh: 立法院長韓國瑜將幫李四川助選。
+A2 P5 S1: On Saturday, people will vote.
+    zh: 星期六，人們會去投票。
+A2 P5 S2: Then the counting starts.
+    zh: 然後就開始計票。
+
+## level B1
+B1 P1 S1: Taiwan will hold local elections on Saturday, and candidates spent Thursday making a final effort to win votes.
+    zh: 台灣將在星期六舉行地方選舉，候選人星期四做最後努力爭取選票。
+B1 P1 S2: Voters across the country will choose mayors, county leaders and local councillors.
+    zh: 全國選民將選出市長、縣長和地方議員。
+B1 P2 S1: In New Taipei, the Kuomintang (KMT) candidate Lee Shu-chuan made his 100th visit to a market during the campaign.
+    zh: 在新北，國民黨候選人李四川在競選期間第100次走訪市場。
+B1 P2 S2: Mayor Hou Yu-ih joined him and said Lee understood the problems of ordinary people.
+    zh: 市長侯友宜陪同他，並說李四川了解一般民眾的問題。
+B1 P2 S3: Su Chiao-hui of the Democratic Progressive Party (DPP) led a motorcade through seven districts.
+    zh: 民主進步黨（民進黨）的蘇巧慧帶領車隊遊行，經過七個行政區。
+B1 P3 S1: In Taipei, Mayor Chiang Wan-an finished a three-day tour of the city by car.
+    zh: 在台北，市長蔣萬安完成了為期三天的全市車隊巡迴。
+B1 P3 S2: His DPP rival, Puma Shen, cancelled a big rally planned on Ren'ai Road for Friday night.
+    zh: 他的民進黨對手沈伯洋取消了原定星期五晚上在仁愛路舉行的大型造勢晚會。
+B1 P3 S3: He said the traffic plans would still cause serious jams.
+    zh: 他說交通規劃仍會造成嚴重塞車。
+B1 P3 S4: His team said the event would probably move online.
+    zh: 他的團隊說，活動可能改到線上舉行。
+B1 P4 S1: Big names are joining the final rallies.
+    zh: 重量級人物將加入最後的造勢活動。
+B1 P4 S2: President Lai Ching-te and former President Tsai Ing-wen will appear with Su on Friday evening.
+    zh: 賴清德總統和前總統蔡英文將在星期五晚上與蘇巧慧同台。
+B1 P4 S3: Legislative Speaker Han Kuo-yu will support Lee.
+    zh: 立法院長韓國瑜將支持李四川。
+B1 P5 S1: Votes will be counted on Saturday night.
+    zh: 選票將在星期六晚上開出。
+
+## level B2
+B2 P1 S1: With Taiwan's local elections set for Saturday, candidates and party leaders intensified their campaigns on Thursday in a last bid to win over undecided voters.
+    zh: 台灣地方選舉定於星期六舉行，候選人和政黨領袖星期四加強了競選活動，做最後努力爭取尚未決定的選民。
+B2 P2 S1: The closely watched New Taipei mayoral race saw Kuomintang (KMT) candidate Lee Shu-chuan make his 100th market visit, accompanied by current Mayor Hou Yu-ih, who praised his grasp of everyday hardships.
+    zh: 備受關注的新北市長選戰中，國民黨候選人李四川完成第100場市場拜票，現任市長侯友宜陪同，並稱讚他了解民眾日常的辛苦。
+B2 P2 S2: Meanwhile, Su Chiao-hui of the Democratic Progressive Party (DPP) staged a motorcade through seven districts, describing her campaign as a journey of nearly 900 days.
+    zh: 與此同時，民主進步黨（民進黨）的蘇巧慧進行車隊掃街，走遍七個行政區，並形容她的競選是一段將近900天的旅程。
+B2 P3 S1: In Taipei, incumbent Mayor Chiang Wan-an wrapped up a three-day citywide motorcade.
+    zh: 在台北，現任市長蔣萬安結束了為期三天的全市車隊掃街。
+B2 P3 S2: His DPP challenger, Puma Shen, called off an election-eve rally on Ren'ai Road, arguing that the city's traffic arrangements would still cause congestion.
+    zh: 他的民進黨挑戰者沈伯洋取消了在仁愛路舉行的選前之夜造勢晚會，認為市府的交通安排仍會造成壅塞。
+B2 P3 S3: Chiang had offered to give up his own road use to make room, but Shen's team declined and said the event would likely be held online.
+    zh: 蔣萬安曾提議讓出自己的道路使用權來騰出空間，但沈伯洋團隊婉拒，並表示活動可能改在線上舉行。
+B2 P4 S1: Heavyweights are lining up for Friday's final rallies.
+    zh: 重量級人物正為星期五最後的造勢晚會做準備。
+B2 P4 S2: President Lai Ching-te and former President Tsai Ing-wen will appear alongside Su, while Legislative Speaker Han Kuo-yu and former mayor Eric Chu will back Lee.
+    zh: 賴清德總統和前總統蔡英文將與蘇巧慧同台，而立法院長韓國瑜和前市長朱立倫將為李四川站台。
+B2 P5 S1: Elsewhere, party chiefs fanned out to Taoyuan, Hsinchu County and Tainan to support their candidates.
+    zh: 在其他地方，各黨主席分頭前往桃園、新竹縣和台南，為自家候選人助選。
+
+## level C1
+C1 P1 S1: Taiwan's candidates threw everything into the final stretch of campaigning on Thursday, two days before Saturday's local elections, as party heavyweights fanned out across the island to rally their supporters.
+    zh: 星期四，也就是星期六地方選舉前兩天，台灣候選人在競選最後階段全力衝刺，各黨重量級人物分赴全島為支持者打氣。
+C1 P2 S1: In New Taipei, the most populous municipality, KMT hopeful Lee Shu-chuan notched up his 100th market walkabout with Mayor Hou Yu-ih at his side, while the DPP's Su Chiao-hui wound her way through seven districts by motorcade, capping what she called a campaign of almost 900 days.
+    zh: 在人口最多的直轄市新北，國民黨參選人李四川在市長侯友宜陪同下完成第100場市場拜票，而民進黨的蘇巧慧則以車隊穿梭七個行政區，為她所說將近900天的競選畫下句點。
+C1 P3 S1: The Taipei contest, meanwhile, was overshadowed by a dispute over road use.
+    zh: 與此同時，台北的選戰被一場道路使用爭議蓋過鋒頭。
+C1 P3 S2: DPP challenger Puma Shen scrapped his planned election-eve rally on Ren'ai Road, insisting that the city's traffic plan would still cause gridlock.
+    zh: 民進黨挑戰者沈伯洋取消了原定在仁愛路舉行的選前之夜造勢晚會，堅稱市府的交通計畫仍會造成交通癱瘓。
+C1 P3 S3: Incumbent Chiang Wan-an had offered to forgo his own event to free up space, a gesture Shen's camp acknowledged but declined, opting instead for an online gathering.
+    zh: 現任市長蔣萬安曾表示願意放棄自己的活動來騰出空間，沈伯洋陣營對此表示感謝但婉拒，改為舉辦線上集會。
+C1 P4 S1: Friday's closing rallies promise star power: President Lai Ching-te and his predecessor, Tsai Ing-wen, will stand beside Su, while Legislative Speaker Han Kuo-yu and Eric Chu will lend their weight to Lee.
+    zh: 星期五的收尾造勢晚會可望星光熠熠：賴清德總統和前任總統蔡英文將站在蘇巧慧身旁，而立法院長韓國瑜和朱立倫將為李四川加持。
+C1 P5 S1: Ballots will be counted on Saturday evening.
+    zh: 選票將在星期六晚上開出。
+
+## level IELTS
+IELTS P1 S1: As Taiwan prepares to vote in Saturday's local elections, candidates across the country made a final, concerted effort on Thursday to persuade undecided voters.
+    zh: 隨著台灣準備在星期六的地方選舉中投票，全國各地的候選人星期四齊心做最後努力，試圖說服尚未決定的選民。
+IELTS P2 S1: The contest in New Taipei, the nation's most populous city, has attracted particular attention.
+    zh: 全國人口最多的城市新北的選戰格外受到關注。
+IELTS P2 S2: Kuomintang candidate Lee Shu-chuan completed his 100th market visit, accompanied by Mayor Hou Yu-ih, who emphasised Lee's understanding of ordinary people's difficulties.
+    zh: 國民黨候選人李四川完成第100場市場拜訪，市長侯友宜陪同，並強調李四川了解一般民眾的困難。
+IELTS P2 S3: His opponent, Su Chiao-hui of the Democratic Progressive Party, led a motorcade through seven districts.
+    zh: 他的對手、民主進步黨的蘇巧慧則帶領車隊走遍七個行政區。
+IELTS P3 S1: In Taipei, by contrast, the campaign was complicated by a dispute over public space.
+    zh: 相較之下，台北的競選因一場公共空間的爭議而變得複雜。
+IELTS P3 S2: Puma Shen, who is challenging the incumbent Chiang Wan-an, cancelled a large rally scheduled for Ren'ai Road, maintaining that the proposed traffic arrangements would inevitably lead to congestion.
+    zh: 挑戰現任市長蔣萬安的沈伯洋取消了原定在仁愛路舉行的大型造勢晚會，堅稱擬議的交通安排必然導致壅塞。
+IELTS P3 S3: Although Chiang offered to relinquish his own road access, Shen's team declined and indicated that the event would probably take place online.
+    zh: 雖然蔣萬安提議讓出自己的道路使用權，沈伯洋團隊仍予婉拒，並表示活動可能改在線上舉行。
+IELTS P4 S1: Prominent figures are expected at Friday's final rallies.
+    zh: 預計星期五最後的造勢晚會將有知名人物出席。
+IELTS P4 S2: President Lai Ching-te and former President Tsai Ing-wen will appear with Su, whereas Legislative Speaker Han Kuo-yu will support Lee.
+    zh: 賴清德總統和前總統蔡英文將與蘇巧慧同台，而立法院長韓國瑜則將支持李四川。
+IELTS P5 S1: Ultimately, the results will be counted on Saturday evening, and they are widely seen as a test for both major parties.
+    zh: 最終，選票將在星期六晚上開出，這次結果普遍被視為兩大黨的一次考驗。
