@@ -133,6 +133,11 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
 .pre-ask .row{gap:8px;flex-wrap:wrap}
 .ff-card{border:2px solid var(--accent);background:var(--accent-soft)}
+.ln-next{display:flex;flex-direction:column;gap:8px;margin-top:8px}.ln-next p{margin:0}.ln-next .btn{align-self:flex-start}
+.old7{margin:8px 0 0;line-height:1.6}
+.gist-q{font-size:20px;line-height:1.45}
+.gist-ev{margin:8px 0 0;padding:10px 12px;border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:8px;font-style:italic}.gist-ev small{display:block;font-style:normal;margin-top:4px;opacity:.8}.gist-ev .lab{display:block;font-style:normal}
+.plz-mini{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer}.plz-mini .go{color:var(--accent);font-weight:600;white-space:nowrap}
 .bq-today{font-size:11px;padding:1px 7px;margin-left:6px;vertical-align:middle;font-weight:600}
 .muted{color:var(--muted)}
 .btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:12px 20px;font-weight:600;font-size:15px}
@@ -2226,6 +2231,11 @@ function remove(id){
 }
 function dayRec(d=today()){ return S.days.get("day~"+d) || {type:"day", date:d, preDone:false, postDone:false, read:null, lookedUp:[], lookedUpBy:{}, postBy:{}}; }
 function saveDay(rec){ persist("day~"+rec.date, rec); }
+/* a right answer today on a word first looked up at least OLD7 days ago is kept in day~DATE.old7 (shown on the daily card and quiz results) */
+const OLD7=7;
+function old7Hit(w,ok){ if(!ok||!w||w.filler||w.lvTest||!w.firstSeen||daysBetween(w.firstSeen,today())<OLD7) return; const d=dayRec(), had=d.old7||[]; if(had.includes(w.key)) return; saveDay({...d, old7:[...had,w.key]}); }
+function old7Line(){ const ws=(dayRec().old7||[]).map(k=>S.words.get(k)).filter(Boolean); if(!ws.length) return "";
+  return `<p class="sm-t old7">🧠 ${T("old7",{n:ws.length,d:OLD7})}<br><b>${ws.slice(0,8).map(w=>esc(w.word)).join("、")}</b></p>`; }
 
 /* ---------- weighting: how likely each word is drawn in the review quiz ---------- */
 function weightOf(w, ref=today()){
@@ -2275,7 +2285,7 @@ const featLevel=k=>((S.feat||{})[k])||FEAT_DEF[k];
 function featOpen(k){ const l=featLevel(k); return !!DEV||l==="all"||(l==="testers"&&!!S.payTester); }
 /* new players: features open step by step, counted in days whose three daily steps are done (not necessarily in a row).
    Accounts that played before this existed (elder intro before UL_FROM, Lv 5+, or 3+ done days) and developer mode see everything. */
-const UL_FROM="2026-11-25", UL_DAY={adv:1,luck:2,lsn:2,train:2,rank:3,coop:3,plaza:3,style:5,vault:5,think:5};
+const UL_FROM="2026-11-25", UL_DAY={adv:1,luck:5,lsn:2,train:2,rank:3,coop:3,plaza:3,style:5,vault:5,think:5};
 const UL_ADV=new Set(["go","rank","coop","think","vault","style","shop","luck","bag","train"]);
 function ulDays(){ let n=0; for(const [k,d] of S.days) if(k.startsWith("day~")&&d&&d.postDone) n++; return n; }
 function ulAll(){ if(DEV) return true; const g=game(), st=g.story||{}; if(st.ul) return false;
@@ -2328,6 +2338,7 @@ function renderInner(){
   else if(S.view==="think") app.innerHTML=viewThinkRun();
   renderSheet();
 }
+function advBanner(){ return featLock("adv")?`<div class="adv-banner ul-ban"><span><b>${T("ulBanT")}</b><span class="muted">${T("ulBanS")}</span></span><span class="go">🔒</span></div>`:`<button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>`; }
 function artCard(a, d){
   const lu=lookedUpFor(d,a).length, post=postFor(d,a);
   const status = post ? `<span class="chip done">${T("chipDone",{r:post.total?post.score+"/"+post.total:T("chipDoneNone")})}</span>` : (lu?`<span class="chip new">${T("chipRead",{n:lu})}</span>`:"");
@@ -2358,14 +2369,14 @@ function viewToday(){
       ${step(2, readDone?"done":"now", T("stepRead"), readDone?T("readDone",{n:(d.lookedUp||[]).length}):T("readHint"), "read")}
       ${step(3, postDone?"done":(readDone?"now":"locked"), T("stepPost"), postDone?(d.postTotal?T("postScore",{s:d.postScore,t:d.postTotal}):T("postNone")):T("postHint"), readDone&&!postDone?"post":null)}
     </div>
-    ${preDone&&readDone&&postDone?doneCard(d):""}
-    ${invTodayCard()}
-    ${plazaCard()}
+    ${readDone&&postDone?doneCard(d):""}
+    ${advBanner()}
+    ${invPending()?invTodayCard():""}
     ${easyHint()||""}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone||readDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked2")}</p>`}</section>`:""}
+    ${plazaMini()}
     ${pushPrompt()}
-    ${featLock("adv")?`<div class="adv-banner ul-ban"><span><b>${T("ulBanT")}</b><span class="muted">${T("ulBanS")}</span></span><span class="go">🔒</span></div>`:`<button class="adv-banner" data-tab="adv"><span><b>${T("banner",{t:game().tickets,g:game().gold})}</b><span class="muted">${T("bannerSub")}</span></span><span class="go">${T("bannerGo")}</span></button>`}
     <div class="stats">
       <div class="stat"><b>${S.words.size}</b><span>${T("statWords")}</span></div>
       <div class="stat"><b>${tested?Math.round(right/tested*100)+"%":"—"}</b><span>${T("statAcc")}</span></div>
@@ -2917,11 +2928,12 @@ function fillMeanings(){
     if(JSON.stringify(nw)!==JSON.stringify(w)){ S.words.set(k,nw); changed=true; } }
   if(changed) lsSave();
 }
-function explainAnswer(ans){
+function explainAnswer(ans){ if(ans.gq) return;
   const w=S.words.get(ans.w.key)||ans.w; const n=findNote(w);
   if(n) ans.exp=n;
 }
 function answerBlock(ans, full){
+  if(ans.gq) return gistBlock(ans);
   const w=S.words.get(ans.w.key)||ans.w;
   const head=`<div class="exp-head"><span class="mark ${ans.ok?"ok":"no"}">${ans.ok?"✓":"✗"}</span><span class="en">${esc(w.word)}</span><span class="pos">${esc(w.pos||"")}</span><span class="z">${esc(mean(w))}</span><button class="say" data-say="${esc(w.word)}" aria-label="${T("pron")}">${SPEAK_SVG}</button></div>`;
   const wrong = !ans.ok ? `<p class="mist"><span class="lab">${T("youPicked")}</span>${ans.picked.meaning?T("pickedMeans",{a:esc(ans.picked.label),b:esc(ans.picked.meaning)}):T("pickedPlain",{a:esc(ans.picked.label)})} ${T("correctIs",{w:esc(w.word),m:esc(mean(w))})}</p>` : "";
@@ -3018,11 +3030,13 @@ function startQuiz(kind, art){
     // the review only asks the player's own old words (no headline top-up); an unfinished review of today comes back where it stopped
     const h=preHeld(); if(h){ S.quiz=h; S.view="quiz"; render(); window.scrollTo(0,0); return; } }
   else if(kind==="weak"){ words=wkAnalyze().train; if(!words.length) return toast(T("wkNoWeak")); }
+  else if(kind==="miss"){ words=(S.missW||[]).map(w=>S.words.get(w.key)||w).filter(Boolean); if(!words.length) return; }
   else if(kind==="srs"){ words=srsDueList().slice(0,SRS_MAX); if(!words.length) return toast(T("srsNone")); }
   else if(kind==="rev"){ const all=[...S.words.values()]; if(all.length<LUCK.reviewMinWords) return toast(T("revNeed",{n:LUCK.reviewMinWords})); words=weightedPick(all, Math.min(LUCK.reviewQ, all.length)); }
   else {
     words=shuffle(lookedUpFor(d,art).map(l=>S.words.get(keyOf(l))).filter(Boolean)).slice(0,10);
     if(words.length<10) words=words.concat(fillerWords(art, words.map(w=>w.word.toLowerCase()), 10-words.length));
+    const gq=gistQ(art); if(gq){ S.quiz={kind, artId:art&&art.id, qs:[...words.map(makeQuestion), gq], i:0, score:0, picked:null, answers:[], hasFill:words.some(w=>w.filler)}; S.view="quiz"; render(); window.scrollTo(0,0); return; }
   }
   if(!words.length){
     if(kind==="pre") saveDay({...d, preDone:true, preScore:0, preTotal:0});
@@ -3042,6 +3056,14 @@ function ffCard(){ const n=luToday().size;
 const FF_MON="wd0-0";
 function ffGo(){ const g=game(); g.story=g.story||{}; if(!g.story.u1) g.story.u1=today(); saveGame(); S.quiz=null; S.advTab="go"; setTab("adv");
   if(g.gender&&g.story.intro&&!(g.battles||0)) startBattle(FF_MON,{first:true}); }
+/* 讀懂題: art.gist = {a: right option, q:{lang:text}, o:{lang:[4 options]}, ev:{level: the sentence that answers it}} */
+const gTxt=o=>o&&(o[LANG]||o.en||o.zh)||"";
+function gistQ(art){ const g=art&&art.gist; if(!g||!g.q||!g.o) return null; const os=g.o[LANG]||g.o.en||g.o.zh; if(!Array.isArray(os)||!os[g.a]) return null;
+  const ev=g.ev&&(g.ev[levelOf(art)]||Object.values(g.ev)[0])||"";
+  return {type:"gist", w:{key:"gist~"+art.id, word:"", gist:true}, prompt:gTxt(g.q), ev, evZh:sentZhIn(art,ev), opts:shuffle(os.map((label,i)=>({label, ok:i===g.a})))}; }
+function gistBlock(ans){ const q=ans.gq;
+  return `<div class="gist-exp"><div class="exp-head"><span class="mark ${ans.ok?"ok":"no"}">${ans.ok?"✓":"✗"}</span><span class="z">${esc(q.prompt)}</span></div>
+    <p><span class="lab">${T("gistAns")}</span>${esc((q.opts.find(o=>o.ok)||{}).label||"")}</p>${q.ev?`<blockquote class="gist-ev"><span class="lab">${T("gistEv")}</span>${esc(q.ev)}${q.evZh&&LANG!=="en"?`<small>${esc(q.evZh)}</small>`:""}</blockquote>`:""}</div>`; }
 function finishPost(art, score, total){
   const d=dayRec();
   actFirstQuiz(); setTimeout(betaClaim,1500);
@@ -3060,7 +3082,7 @@ function seenAdd(art){
 }
 function viewQuiz(){
   const Q=S.quiz; if(!Q) return "";
-  const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):Q.kind==="weak"?T("wkTrainT"):T("postTitle");
+  const title=Q.kind==="lvl"?T("lvtTitle"):Q.kind==="srs"?T("srsTitle"):Q.kind==="pre"?T("preTitle"):Q.kind==="rev"?T("revTitle"):Q.kind==="weak"?T("wkTrainT"):Q.kind==="miss"?T("lnMissT"):T("postTitle");
   if(Q.i>=Q.qs.length&&Q.kind==="lvl"){
     const nm=k=>k==="IELTS"?"IELTS 7–8":k;
     return `<div class="view"><div class="card lvt-res"><img src="assets/art/scene-win.webp" alt="" class="qd-art"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${esc(nm(Q.lvl))}</div><div>${T("lv"+Q.lvl)}</div><p class="muted sm-t">${T("lvtSet")}</p></div>
@@ -3071,35 +3093,38 @@ function viewQuiz(){
   }
   if(Q.i>=Q.qs.length){
     const order=[...Q.answers].sort((a,b)=>a.ok-b.ok);
-    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn${ffReady()?" ghost":""}" data-act="home">${T("backToday")}</button>`;
+    const nextBtn = Q.kind==="lvl" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : Q.kind==="miss" ? `<button class="btn" data-tab="adv">${T("backAdv")}</button>` : Q.kind==="weak" ? `<div class="row"><button class="btn" data-act="weak">${T("wkBack")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="rev" ? `<div class="row"><button class="btn" data-act="goluck">${T("goLuck")}</button><button class="btn ghost" data-tab="ovw">${T("backOvw")}</button></div>` : Q.kind==="pre" ? `<button class="btn" data-act="read">${T("readNow")}</button>` : `<button class="btn${ffReady()?" ghost":""}" data-act="home">${T("backToday")}</button>`;
     return `<div class="view"><div class="eyebrow">${T("done",{t:title})}</div>
       <div class="card quiz-done"><img src="assets/art/${Q.score>=Q.qs.length*0.7?"scene-win":"scene-quiz"}.webp" alt="" class="qd-art"><div class="score">${Q.score}<span class="muted" style="font-size:28px">/${Q.qs.length}</span></div>
-      ${Q.kind==="lvl"?"":`<div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>`}${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}</div>
-      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="weak"?`<div class="card muted sm-t">${T("wkTrainNote")}</div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:Q.kind==="post"&&ffReady()?ffCard()+rewardBox(Q.reward):rewardBox(Q.reward)}
+      ${Q.kind==="lvl"?"":`<div class="muted">${Q.score<Q.qs.length?T("sumWrong"):T("sumAll")}</div>`}${Q.hasFill?`<div class="muted sm-t">${T("fillNote")}</div>`:""}${Q.kind!=="lvl"?old7Line():""}</div>
+      ${Q.kind==="lvl"?`<div class="card lvt-res"><div class="eyebrow">${T("lvtYour")}</div><div class="lvt-big">${Q.lvl==="IELTS"?"IELTS 7–8":esc(Q.lvl)}</div><div>${T("lv"+Q.lvl)}</div><div class="muted sm-t">${T("lvtSet")}</div></div>`:Q.kind==="weak"||Q.kind==="miss"?`<div class="card muted sm-t">${T("wkTrainNote")}</div>`:Q.kind==="rev"?lottoBox(Q.reward):Q.kind==="srs"?lottoBox(Q.reward)+`<div class="card srs-after">${T("srsAfter",{n:srsDueList().length,t:srsCountOn(srsAdd(today(),1))})}</div>`:Q.kind==="post"&&ffReady()?ffCard()+rewardBox(Q.reward):rewardBox(Q.reward)}
       <h2 style="font-size:20px">${T("explainAll")}</h2>
       <div style="display:flex;flex-direction:column;gap:12px">${order.map(a=>answerBlock(a,true)).join("")}</div>
       ${nextBtn}</div>`;
   }
   const q=Q.qs[Q.i], pickedI=Q.picked, ans=Q.answers[Q.i];
   const prompt = q.type==="cloze" ? `<div class="qprompt cloze">${esc(q.prompt).replace(new RegExp("\\b"+reEsc(esc(q.blank))+"\\b"), "<u></u>")}</div>`
-    : `<div class="qprompt ${q.type==="zh2en"?"zh":""}">${esc(q.prompt)}</div>`;
-  const lead={en2zh:T("qMeaning"),zh2en:T("qWord"),cloze:T("qCloze")}[q.type];
+    : `<div class="qprompt ${q.type==="zh2en"||q.type==="gist"?"zh":""}${q.type==="gist"?" gist-q":""}">${esc(q.prompt)}</div>`;
+  const lead={en2zh:T("qMeaning"),zh2en:T("qWord"),cloze:T("qCloze"),gist:"📰 "+T("gistLead")}[q.type];
   return `<div class="view"><div class="row" style="justify-content:space-between"><span class="eyebrow">${title}</span><span class="muted" style="font-size:13px;font-variant-numeric:tabular-nums">${Q.i+1} / ${Q.qs.length}</span></div>
     <div class="qbar"><i style="width:${(Q.i+(pickedI!=null?1:0))/Q.qs.length*100}%"></i></div>
     <div class="qcard"><div class="muted" style="font-size:14px">${lead}${q.w.filler?` <span class="chip new">${T("fillTag")}</span>`:""}</div>${prompt}
     ${Q.kind==="lvl"?`<div class="muted sm-t" style="margin-top:6px">${T("lvtCalm")}</div>`:""}
-    <div class="opts">${(Q.kind==="lvl"?[...q.opts,{label:T("lvtSkip")}]:q.opts).map((o,i)=>{ let c="opt"+(q.type==="en2zh"?"":" en"); if(pickedI!=null){ if(o.ok) c+=" right"; else if(i===pickedI) c+=" wrong"; } return `<button class="${c}" data-pick="${i}" ${pickedI!=null?"disabled":""}>${esc(o.label)}${pickedI!=null&&!o.ok&&o.meaning?`<span class="optm">${esc(o.meaning)}</span>`:""}</button>`; }).join("")}</div>
+    <div class="opts">${(Q.kind==="lvl"?[...q.opts,{label:T("lvtSkip")}]:q.opts).map((o,i)=>{ let c="opt"+(q.type==="en2zh"||q.type==="gist"?"":" en"); if(pickedI!=null){ if(o.ok) c+=" right"; else if(i===pickedI) c+=" wrong"; } return `<button class="${c}" data-pick="${i}" ${pickedI!=null?"disabled":""}>${esc(o.label)}${pickedI!=null&&!o.ok&&o.meaning?`<span class="optm">${esc(o.meaning)}</span>`:""}</button>`; }).join("")}</div>
     ${ans?`<div class="fb ${ans.ok?"ok":"no"}">${ans.ok?T("right"):T("wrong")}</div>${answerBlock(ans,false)}<button class="btn" data-act="next">${Q.i+1<Q.qs.length?T("next"):T("seeAll")}</button>`:""}</div></div>`;
 }
 function pick(i){
   const Q=S.quiz, q=Q.qs[Q.i]; if(Q.picked!=null) return;
+  if(q.type==="gist"){ Q.picked=i; const ok=!!q.opts[i].ok; sfx(ok?"right":"wrong"); if(ok) Q.score++; Q.answers[Q.i]={w:q.w, ok, picked:q.opts[i], gq:q};
+    if(Q.i+1>=Q.qs.length){ const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art),art); }
+    return render(); }
   if(Q.kind==="lvl"){ const o=q.opts[i]||{label:T("lvtSkip")}, ok=!!o.ok; if(ok) Q.score++; Q.answers[Q.i]={w:q.w, ok, picked:o};
     if(Q.i+1>=Q.qs.length){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     Q.i++; render(); window.scrollTo(0,0); return; }
   Q.picked=i; const opt=q.opts[i], ok=!!opt.ok; sfx(ok?"right":"wrong");
   const w=S.words.get(q.w.key)||q.w;
   if(w.lvTest){}
-  else if(!w.filler) persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
+  else if(!w.filler){ old7Hit(w,ok); persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)}); }
   else if(!ok){ const {filler,...rec}=w; persist(w.key,{...rec, firstSeen:today(), lookups:0, lastLookup:new Date().toISOString(), correct:0, wrong:1, lastTested:today(), srsB:1, srsDue:srsAdd(today(),1)}); }
   if(ok) Q.score++;
   const ans={w, ok, picked:opt}; Q.answers[Q.i]=ans;
@@ -3108,7 +3133,7 @@ function pick(i){
     if(Q.kind==="lvl"){ Q.lvl=lvtResult(Q); try{ localStorage.setItem(lvtKey(),Q.lvl); }catch(e){} LEVEL=Q.lvl; try{ localStorage.setItem("che-pro-level",Q.lvl); }catch(e){} applyStaticText(); actPing({lt:Q.lvl}); }
     else if(Q.kind==="srs"){ Q.reward=Q.qs.length>=SRS_TICKET_MIN?awardSrs(Q.score):null; }   // spaced review replaces the old dictionary review: same lucky-ticket reward
     else if(Q.kind==="rev"){ Q.reward=awardReview(); }
-    else if(Q.kind==="weak"){ Q.reward=null; }   // practice only: no ticket, so it cannot be farmed
+    else if(Q.kind==="weak"||Q.kind==="miss"){ Q.reward=null; }   // practice only: no ticket, so it cannot be farmed
     else if(Q.kind==="pre"){ saveDay({...d, preDone:true, preScore:Q.score, preTotal:Q.qs.length}); Q.reward=awardQuiz("pre",Q.score,Q.qs.length,false); }
     else { const art=S.articles.find(a=>a.id===Q.artId)||mainArticle(); finishPost(art, Q.score, Q.qs.length); Q.reward=awardQuiz("post",Q.score,Q.qs.length,isMain(art),art); }
   }
@@ -3891,7 +3916,7 @@ function startBattle(mid, opt){
 function castSpell(i){
   const B=S.battle; if(!B||B.stage!=="spell"||B.picked!=null) return;
   B.picked=i; const opt=B.q.opts[i]; B.spellOk=!!opt.ok; sfx(B.spellOk?"spellOk":"spellNo");
-  const w=S.words.get(B.q.w.key)||B.q.w;
+  const w=S.words.get(B.q.w.key)||B.q.w; old7Hit(w,B.spellOk);
   persist(w.key,{...w, correct:(w.correct||0)+(B.spellOk?1:0), wrong:(w.wrong||0)+(B.spellOk?0:1), lastTested:today(), ...srsNext(w,B.spellOk)});
   render();
 }
@@ -3924,6 +3949,15 @@ function battleSettle(B,res){ const g=game();
   }
   if(!res.win&&!B.m.wild&&!conquered()[B.m.id]){ g.scar=g.scar||{}; const n0=g.scar[B.m.id]||0; if(SCAR.per*n0<SCAR.max-1e-9){ g.scar[B.m.id]=n0+1; B.scarNew=Math.round(Math.min(SCAR.max,SCAR.per*(n0+1))*100); } }
 }
+/* after a lost battle: the most useful next step, as one line and a button (equip the counter weapon you own, buy one, or practise the missed words) */
+function loseNext(B){ const m=B.m, g=game(), c=Object.keys(BEATS).find(k=>BEATS[k]===m.el), s=stats(), out=[];
+  if(c&&s.wEl!==c){ const own=(g.inv||[]).map(id=>ITEMS[id]).filter(it=>it&&it.slot==="weapon"&&it.el===c&&it.lv<=g.lv).sort((a,b)=>b.tier-a.tier)[0];
+    if(own) out.push(`<p>${T("lnEquip",{c:elName(c),m:esc(monName(m)),i:esc(itemName(own))})}</p><button class="btn sm" data-act="lnequip" data-k="${own.id}">⚔️ ${T("lnEquipB",{i:esc(itemName(own))})}</button>`);
+    else out.push(`<p>${T("lnShop",{c:elName(c),m:esc(monName(m))})}</p><button class="btn sm" data-act="lnshop" data-k="${c}">🏪 ${T("lnShopB",{c:elName(c)})}</button>`); }
+  const miss=B.quiz?[...new Map(B.quiz.miss.map(w=>[w.key,w])).values()]:[];
+  if(miss.length) out.push(`<p>${T("lnMiss",{n:miss.length,w:miss.slice(0,3).map(w=>esc(w.word)).join("、")})}</p><button class="btn ${out.length?"ghost ":""}sm" data-act="lnmiss">🧠 ${T("lnMissB",{n:miss.length})}</button>`);
+  if(!out.length) return "";
+  B.missW=miss; return `<div class="ln-next"><b>${T("lnTitle")}</b>${out.join("")}</div>`; }
 /* ----- quiz battle flow: question → answer → play the events it produced → next question ----- */
 function quizOn(){ return S.words.size>=QB.minWords; }
 function quizStart(B){ B.quiz={n:0, ok:0, best:0, miss:[], used:new Set()}; B.gen=simGen(B.m, !!B.spellOk); const r=B.gen.next();
@@ -3936,7 +3970,7 @@ function quizAsk(B,a){ const all=[...S.words.values()], Q=B.quiz, fresh=all.filt
     if(left<=0){ clearInterval(S.qtimer); quizAnswer(-1); } },100); }
 function quizAnswer(i){ const B=S.battle, A=B&&B.ask; if(!A||A.picked!=null||B.stage!=="fight") return; clearInterval(S.qtimer);
   A.picked=i; const ok=i>=0&&!!A.q.opts[i].ok, Q=B.quiz; Q.n++; if(ok){ Q.ok++; } else Q.miss.push(A.q.w);
-  sfx(ok?"spellOk":"spellNo"); const w=S.words.get(A.q.w.key)||A.q.w;
+  sfx(ok?"spellOk":"spellNo"); const w=S.words.get(A.q.w.key)||A.q.w; old7Hit(w,ok);
   persist(w.key,{...w, correct:(w.correct||0)+(ok?1:0), wrong:(w.wrong||0)+(ok?0:1), lastTested:today(), ...srsNext(w,ok)});
   const from=B.res.ev.length, r=B.gen.next(ok); if(A.kind==="atk") Q.best=Math.max(Q.best, ok?(B.res.ev[from]&&B.res.ev[from].combo)||0:0);
   renderBattleOnly(); setTimeout(()=>{ if(S.battle===B) quizPlay(B,r); }, ok?500:1100); }
@@ -4034,7 +4068,7 @@ function viewBattle(){
   const last=ev[upto-1];
   const end = B.stage==="end" ? (B.res.win
     ? `<div class="reward win"><div class="eyebrow">${T("win")}</div>${B.free?`<div class="rw-row"><span>${T("exp")}</span><b>+0</b><small class="muted"> ${T("plzNoExp")}</small></div>`:""}<div class="rw-row"${B.free?" hidden":""}><span>${T("exp")}${B.rest?` <small class="chip rest">😴 ×${REST.mult}</small>`:""}</span><b>+${B.exp||m.exp}</b></div><div class="rw-row"><span>${T("gold")}</span><b>+${B.gold!=null?B.gold:m.gold}</b>${m.wild&&B.gold<m.gold?`<small class="muted"> ${T("wildLess")}</small>`:""}</div>${B.lvUp?`<div class="rw-row lvup"><span>${T("lvUp")}</span><b>Lv ${g.lv}</b></div>`:""}${B.shard?`<div class="rw-row lvup"><span>💎 ${esc(T("pShard",{e:elName(B.shard.el),t:TIER[B.shard.t].n,n:1}))}</span></div>`:""}${B.conquered?`<div class="rw-row lvup"><span>${T("conqNew",{c:esc(townName(m))})}</span></div><div class="rw-row muted"><span>${T("taxLine",{n:m.tax})}</span></div>`:""}</div>`
-    : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div><p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p>${B.scarNew?`<p class="sm-t" style="margin:6px 0 0">🩹 ${T("scarNew",{m:esc(monName(m)),p:B.scarNew})}</p>`:""}</div>`) : "";
+    : `<div class="reward lose"><div class="eyebrow">${T("lose")}</div>${loseNext(B)||`<p style="margin:0">${T("loseTip",{m:esc(monName(m)),e:elName(m.el),c:elName(Object.keys(BEATS).find(k=>BEATS[k]===m.el))})}</p>`}${B.scarNew?`<p class="sm-t" style="margin:6px 0 0">🩹 ${T("scarNew",{m:esc(monName(m)),p:B.scarNew})}</p>`:""}</div>`) : "";
   const A=B.stage==="fight"&&B.ask, Q=B.quiz, asking=A&&(A.picked==null||!A.go);   // after answering, keep the last round's hit hidden until the new events play (else the monster's old hit replays first)
   const qcard=A?(()=>{ const q=A.q, p=A.picked, ok=p!=null&&p>=0&&q.opts[p].ok;
     return `<div class="card qcard bq${A.kind==="def"?" def":""}"><div class="bq-top"><b>${A.kind==="def"?T("bqDef"):T("bqAtk")}</b>${luToday().has(q.w.key)?`<span class="chip new bq-today">${T("bqToday")}</span>`:""}${A.kind==="atk"&&A.combo?`<span class="bq-combo${A.combo>=3?" hot":""}">${T("bqCombo",{n:A.combo})}</span>`:""}</div>
@@ -4750,7 +4784,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.137";
+const APP_VERSION="2026.11.138";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5353,6 +5387,9 @@ document.addEventListener("click", e=>{
   if(a==="finish"){ const d=dayRec(); saveDay({...d, read:mainArticle().id}); setTimeout(rdPush,500); actFirstRead(); return startQuiz("post", mainArticle()); }
   if(a==="finishx") return startQuiz("post", currentArticle());
   if(a==="firstfight") return ffGo();
+  if(a==="lnequip"){ const g=game(), it=ITEMS[t.dataset.k]; if(it&&g.inv.includes(it.id)&&g.weapon!==it.id){ g.weapon=it.id; saveGame(); toast(T("lnEquipped",{i:itemName(it)})); } renderBattleOnly(); return; }
+  if(a==="lnshop"){ clearInterval(S.btimer); S.battle=null; S.shopEl=t.dataset.k; S.advTab="shop"; S.tab="adv"; S.view="adv"; render(); window.scrollTo(0,0); return; }
+  if(a==="lnmiss"){ const B=S.battle; S.missW=(B&&B.missW)||[]; clearInterval(S.btimer); S.battle=null; return startQuiz("miss"); }
   if(a==="next"){ S.quiz.i++; S.quiz.picked=null; render(); window.scrollTo(0,0); return; }
 });
 document.addEventListener("change", e=>{ if(e.target.dataset&&e.target.dataset.allygear){ const g=game(); const cur=g.allyGear&&g.allyGear.date===today()?g.allyGear:{date:today()}; cur[e.target.dataset.allygear==="weapon"?"w":"a"]=e.target.value||null; g.allyGear=cur; saveGame(); render(); return; } if(e.target.id==="ieVoiceF"||e.target.id==="ieVoiceM"){ let v={}; try{ v=JSON.parse(localStorage.getItem("che-pro-voice")||"{}"); }catch(_){} v[e.target.id==="ieVoiceF"?"F":"M"]=e.target.value; try{ localStorage.setItem("che-pro-voice",JSON.stringify(v)); }catch(_){} return; } if(e.target.id==="flagSel"){ game().flag=e.target.value; saveGame(); CLOUD.lbSig=null; lbPush(); render(); return; } if(e.target.id==="regCountry"){ regAsk(e.target.value,""); return; } if(e.target.id==="regCounty"){ regAsk("IE",e.target.value); return; } if(e.target.id==="importFile" && e.target.files[0]) importData(e.target.files[0]); });
@@ -8702,9 +8739,9 @@ Object.assign(STR.ja,{"stName": "ドルイドの長老キーラン", "stNext": "
 Object.assign(STR.ko,{"stName": "드루이드 장로 키어런", "stNext": "다음", "stGift": "출정권 5장 받기", "stOk": "알겠어요", "stGo": "출발!", "stSkip": "건너뛰기", "in1": "젊은 여행자여, 드디어 왔구나! 나는 이 섬을 지키는 드루이드 장로 키어런이다. 마안의 발로르가 바다 밑에서 깨어나 괴물들이 아일랜드의 마을을 점령했어. 도전자가 필요하단다!", "in2": "괴물들은 지식의 힘을 두려워해. 매일 '오늘'의 영어 뉴스를 읽고 퀴즈를 마치면 기사마다 출정권 1장 (하루 최대 4장). 하루 3단계를 모두 마치면 내가 2장을 더 주마.", "in3": "출정권으로 마을을 공격하렴. 이기면 마을은 네 것이 되고 매일 세금도 들어온다. 오행 상극을 기억해: 금은 목을, 목은 토를, 토는 수를, 수는 화를, 화는 금을 이긴다.", "in4": "야생 짐승에게는 출정권이 필요 없고 체력만 든단다 (최대 6, 4시간마다 1 회복). 사냥해서 레벨을 올리고 골드를 벌어. 단, 같은 짐승은 잡을수록 골드가 줄어.", "in5": "이 출정권 5장으로 첫 번째 마을 딩글을 되찾으렴! Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "d21": "다시 왔구나! 오늘은 행운의 클로버 ☘️를 알려 주마. 단어장에서 간격 복습 (5단어 이상)을 한 번 끝내면 1장, 하루 최대 3장 받을 수 있어.", "d22": "클로버는 '행운의 집'에서 운명의 룰렛을 돌리는 데 쓴단다. 골드, 출정권, 장비 조각이 나와. 2장 이상이면 스크래치 카드도 살 수 있지.", "d23": "같은 속성·등급의 조각 3개를 모으면 네 레벨에 가까운 장비를 만들 수 있어. 잘 모으면 골드를 많이 아낄 수 있단다!", "d31": "제법 모험가다워졌구나! Lv 24가 되면 야생의 강적과 함께 싸울 동료가 생겨. 친구를 동료로 초대할 수도 있단다.", "d32": "심심할 땐 '멀티플레이'에서 친구들과 놀아 보렴. 무료지만 보상은 적어. 진짜 강해지는 길은 하나뿐, 매일 뉴스를 읽는 거야. 더블린에서 좋은 소식을 기다리마!", "stGot": "출정권 5장을 받았어요!"});
 /* ===== Story: Ciarán the druid elder. Day 1 (first visit to Adventure): the quest + basics + 5 quest passes.
    Later days: shamrocks & the Wheel of Fate, then allies & multiplayer. ===== */
-const STORY={u1:["u1"], intro:["in1","in2","in3","in4","in5"], introS:["in1","inW","inG"], intro2:["in2","in3","in4","in5b"], d2:["u2","d21","d22","d23"], d3:["u3","d31","d3n","d32","d33"], d5:["u5a","u5b"]};
+const STORY={u1:["u1"], intro:["in1","in2","in3","in4","in5"], introS:["in1","inW","inG"], intro2:["in2","in3","in4","in5b"], d2:["u2b","d2a","d2b","d2c"], d3:["u3","d31","d3n","d32","d33"], d5:["u5a","u5c"]};
 // day 3: the elder introduces the leaderboard and asks for a nickname (skipped if the player already has one)
-const storySteps=k=>STORY[k==="intro"&&S.story&&S.story.short?"introS":k].filter(x=>(x!=="d3n"||!S.story||!S.story.hadNick)&&((x!=="u2"&&x!=="u3")||(S.story&&S.story.nb)));
+const storySteps=k=>STORY[k==="intro"&&S.story&&S.story.short?"introS":k].filter(x=>(x!=="d3n"||!S.story||!S.story.hadNick)&&(!/^u[23]/.test(x)||(S.story&&S.story.nb)));
 function elderArt(mood){ const k="elder-"+(mood||"talk"); return PICS.has(k)?`<img src="assets/art/${k}.webp" alt="" class="st-elder">`:`<div class="st-elder st-elder-ph" aria-hidden="true">🧙‍♂️</div>`; }
 function storyDue(){
   const g=game(), st=g.story||{};
@@ -10020,6 +10057,11 @@ function plazaList(){ const me=CLOUD.user&&CLOUD.user.uid, g=game(), mine=myLook
   const rows=(PLAZA.rows||[]).filter(r=>r.id!==me);
   if(mine&&g.nick){ const e=lbEntry(); rows.unshift({id:me, name:g.nick, look:mine, lv:e.lv, power:e.power, conq:e.conq, flag:e.flag, me:true}); }
   return rows; }
+/* 今日 page: the plaza is one small row (the full card with everyone's figures is too much for the first screen) */
+function plazaMini(){ if(!CLOUD.user||SANDBOX()||featLock("plaza")) return "";
+  if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(plazaLoad,0);
+  const n=plazaList().length;
+  return `<button class="card plz-mini" data-act="plzgo"><span>🏞️ <b>${T("plzT")}</b>${n?` <span class="muted sm-t">${T("plzMiniN",{n})}</span>`:""}</span><span class="go">${T("plzGo")} →</span></button>`; }
 function plazaCard(){ if(!CLOUD.user||SANDBOX()||featLock("plaza")) return "";
   if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(plazaLoad,0);
   const L=plazaList();
@@ -11616,7 +11658,7 @@ function doneCard(d){
   return `<section class="card done-card">
     <div class="dc-top">${PICS.has("scene-party")?`<img src="assets/art/scene-party.webp" alt="" class="dc-art">`:""}<div><div class="eyebrow">${T("dcEyebrow")}</div><h3>${T("dcTitle")}</h3></div></div>
     <div class="dc-sec"><div class="muted sm-t">${T("dcWords")}</div>${chips?`<div class="dc-ws">${chips}</div>`:`<p class="sm-t">${T("dcNoWords")}</p>`}</div>
-    ${fixed.length?`<p class="sm-t dc-fixed">💪 ${T("dcFixed",{w:fixed.map(w=>esc(w.word||w.key)).join(", ")})}</p>`:""}
+    ${fixed.length?`<p class="sm-t dc-fixed">💪 ${T("dcFixed",{w:fixed.map(w=>esc(w.word||w.key)).join(", ")})}</p>`:""}${old7Line()}
     <div class="dc-stats">${d.preTotal?`<span>📝 ${T("dcPre",{s:d.preScore,t:d.preTotal})}</span>`:""}${d.postTotal?`<span>✅ ${T("dcPost",{s:d.postScore,t:d.postTotal})}</span>`:""}<span>📅 ${T("dcWeek",{n:weekStudyDays()})}</span></div>
     ${got&&!featLock("style")?`<div class="dc-rw">${STYLE_IC}<b>${T("dcStyle",{n:got.n})}</b>${got.bonus?`<span class="dc-bonus">${T("dcBonus",{d:STYLE_EARN.weekDays,n:got.bonus})}</span>`:""}</div>`:""}
     <p class="dc-bye">${T("dcBye")}</p></section>`;
@@ -12198,6 +12240,12 @@ Object.assign(STR.hi,{"preAskT": "दोहराने के लिए {n} प
 Object.assign(STR.es,{"preAskT": "{n} palabras antiguas para repasar", "preAskDue": "Hoy toca repasar {n} palabras", "preAskS": "Repasa primero, o lee la noticia ya y vuelve después. Si lo dejas a medias, se guarda tu progreso.", "preAskGo": "🧠 Repasar primero", "preAskResume": "🧠 Seguir repasando (quedan {n})", "preAskRead": "📰 Leer la noticia ya", "preOpt": "puede esperar", "preResume": "Te quedaste en {i}/{n}, toca para seguir", "moreLocked2": "Lee el titular de hoy o termina el repaso para abrirlas.", "ffTitle": "⚔️ Acabas de consultar {n} palabras. ¡Úsalas en tu primera batalla!", "ffTitle0": "⚔️ ¡A tu primera batalla!", "ffSub": "La batalla pregunta las palabras que consultaste en la noticia: si aciertas golpeas más fuerte, si fallas el monstruo contraataca.", "ffSub0": "Las batallas preguntan las palabras en inglés que consultas. En la próxima noticia, ¡toca las que no sepas!", "ffBtn": "Ir a mi primera batalla", "bqToday": "📰 consultada hoy", "inW": "¡Las palabras que acabas de consultar en la noticia son tus hechizos contra los monstruos! En la batalla te preguntarán esas palabras: si aciertas golpeas más fuerte, si fallas el monstruo contraataca.", "inG": "Toma estos 5 pases y un equipo de principiante (espada de bronce y abrigo de piel de foca). ¡Calentemos con una pequeña liebre de las Tierras salvajes!", "stGiftGo": "¡Acepto, a luchar!", "in5b": "¡Primera batalla terminada! Entrena con algunas bestias más en las Tierras salvajes y, cuando estés listo, usa un pase para liberar Dingle, la primera ciudad. ¡Crece del Lv 1 al Lv 50, derrota a Balor en Dublín y salva toda Irlanda!", "onbHow4f": "Tras tu primera noticia, lucha tu primera batalla con las palabras que consultaste"});
 Object.assign(STR.ja,{"preAskT": "復習できる単語が {n} 語あります", "preAskDue": "今日復習する単語が {n} 語あります", "preAskS": "先に復習しても、すぐニュースを読んで後で戻ってきてもOK。途中でやめても進み具合は残ります。", "preAskGo": "🧠 先に復習", "preAskResume": "🧠 復習の続き（残り {n} 問）", "preAskRead": "📰 すぐニュースを読む", "preOpt": "後でもOK", "preResume": "{i}/{n} 問目まで済み。タップで続きから", "moreLocked2": "今日のトップ記事を読むか復習を終えると読めます。", "ffTitle": "⚔️ 今 {n} 語調べたね。その単語で初めてのバトルへ！", "ffTitle0": "⚔️ 初めてのバトルへ行こう！", "ffSub": "バトルでは今ニュースで調べた単語が出ます。正解すると強い攻撃、間違えると魔物が反撃します。", "ffSub0": "バトルでは調べた英単語が出題されます。次の記事ではわからない単語をタップしてみてね！", "ffBtn": "初めてのバトルへ", "bqToday": "📰 今日調べた", "inW": "今ニュースで調べた単語こそ、魔物と戦う呪文じゃ！バトルではその単語が出る。正解すれば強い一撃、間違えれば魔物が反撃してくるぞ。", "inG": "この出撃券5枚と初心者装備（青銅の剣・アザラシ皮のコート）を授けよう。まずは荒野の小さなウサギで腕試しじゃ！", "stGiftGo": "受け取って戦う！", "in5b": "初めてのバトルを終えたな！荒野でもう少し鍛えたら、出撃券で最初の町ディングルを取り戻すのじゃ。Lv1からLv50まで強くなり、ダブリンのバロールを倒してアイルランドを救ってくれ！", "onbHow4f": "最初の記事を読んだら、調べた単語で初めてのバトルへ"});
 Object.assign(STR.ko,{"preAskT": "복습할 수 있는 예전 단어 {n}개", "preAskDue": "오늘 복습할 단어가 {n}개 있어요", "preAskS": "먼저 복습해도 되고, 바로 뉴스를 읽고 나중에 와도 돼요. 중간에 그만둬도 진행 상황은 저장돼요.", "preAskGo": "🧠 먼저 복습", "preAskResume": "🧠 복습 계속하기 ({n}문제 남음)", "preAskRead": "📰 바로 뉴스 읽기", "preOpt": "나중에 해도 돼요", "preResume": "{i}/{n}번까지 했어요. 눌러서 계속", "moreLocked2": "오늘의 헤드라인을 읽거나 복습을 마치면 열려요.", "ffTitle": "⚔️ 방금 {n}개 단어를 찾았어요. 그 단어로 첫 전투에 나가요!", "ffTitle0": "⚔️ 첫 전투에 나가 봐요!", "ffSub": "전투에서는 방금 뉴스에서 찾은 단어가 나와요. 맞히면 더 세게 치고, 틀리면 괴물이 반격해요.", "ffSub0": "전투에서는 내가 찾은 영어 단어가 나와요. 다음 기사에서 모르는 단어를 눌러 보세요!", "ffBtn": "첫 전투 하러 가기", "bqToday": "📰 오늘 찾은 단어", "inW": "방금 뉴스에서 찾은 단어가 바로 괴물을 물리치는 주문이란다! 전투에서 그 단어들이 나와: 맞히면 더 세게 치고, 틀리면 괴물이 반격하지.", "inG": "출정권 5장과 초보자 장비(청동 검, 물개 가죽 코트)를 주마. 먼저 야생의 작은 토끼로 몸을 풀어 보자!", "stGiftGo": "받고 싸우기!", "in5b": "첫 전투를 마쳤구나! 야생에서 조금 더 단련하고, 준비가 되면 출정권으로 첫 마을 딩글을 되찾으렴. Lv 1부터 Lv 50까지 강해져서 더블린의 발로르를 물리치고 아일랜드를 구해 다오!", "onbHow4f": "첫 기사를 읽고 나면, 찾은 단어로 첫 전투를 해요"});
+Object.assign(STR.zh,{"lnTitle": "下次可以這樣打：", "lnEquip": "{m}是怕「{c}」的屬性。你背包裡有「{i}」，換上它傷害多 1.5 倍。", "lnEquipB": "換上{i}", "lnEquipped": "已換上{i}", "lnShop": "{m}怕「{c}」屬性。到商店買一把{c}屬性的武器，傷害多 1.5 倍。", "lnShopB": "去商店看{c}屬性武器", "lnMiss": "這場答錯了 {n} 個字（{w}）。答錯時妖怪會反擊，先把它們練熟再來。", "lnMissB": "先練這 {n} 個字", "lnMissT": "練習剛答錯的字", "old7": "你今天答對了 {n} 個至少 {d} 天前查過的字，真的記住了：", "gistLead": "讀懂了嗎？", "gistAns": "答案", "gistEv": "文章裡這句話告訴你答案", "u2b": "第二天也完成了！今天開放兩個新地方：「小教室」有短短的英文課，看完還有金幣；「練習場」可以試打怪物、熟悉招式。", "d2a": "金幣拿來做什麼？到「商店」買五行裝備。用剋制敵人屬性的武器，傷害多 1.5 倍；選對防具，挨打也比較輕。", "d2b": "出征令拿來攻打城鎮：每讀完一篇新聞、做完測驗就有 1 張。打下的城鎮每天會給你稅金，讓你買更好的裝備。", "d2c": "最重要的是：你在新聞裡查過的字，都會在戰鬥裡出題。每天多讀一篇，你就更強。明天見！", "u5c": "「推理閱讀」也開放了，就在冒險選單裡等你挑戰。另外「幸運屋」和「彩虹寶庫」也打開了，想碰碰運氣或送禮物給朋友時再去逛就好。", "plzMiniN": "最近 {n} 位冒險者上線"});
+Object.assign(STR.en,{"lnTitle": "Next time, try this:", "lnEquip": "{m} is weak to {c}. You have {i} in your bag: equip it for 1.5× damage.", "lnEquipB": "Equip {i}", "lnEquipped": "{i} equipped", "lnShop": "{m} is weak to {c}. Buy a {c} weapon in the shop for 1.5× damage.", "lnShopB": "See {c} weapons in the shop", "lnMiss": "You missed {n} word(s) in this fight ({w}). Wrong answers let the monster strike back, so practise them first.", "lnMissB": "Practise these {n} words", "lnMissT": "Practise the words you missed", "old7": "Today you got {n} word(s) right that you first looked up at least {d} days ago. They stuck:", "gistLead": "Did you get the story?", "gistAns": "Answer", "gistEv": "This sentence in the story gives the answer", "u2b": "Day two done too! Two new places open today: the Lessons tab has short English lessons that give gold, and the Practice arena lets you try moves on monsters.", "d2a": "What is gold for? Buy elemental gear in the Shop. A weapon that beats the enemy's element does 1.5× damage, and the right armour softens their hits.", "d2b": "Quest passes are for attacking towns: every story you read and finish the quiz for gives you one. Towns you free pay you tax every day, so you can buy better gear.", "d2c": "Most important of all: the words you look up in the news come back as questions in battle. Read one more story each day and you grow stronger. See you tomorrow!", "u5c": "Reasoning is open too: it's waiting in the Adventure menu. The Lucky House and the Rainbow Vault have opened as well; drop in whenever you fancy a bit of luck or want to send a friend a gift.", "plzMiniN": "{n} adventurers online lately"});
+Object.assign(STR.hi,{"lnTitle": "अगली बार ऐसे लड़ें:", "lnEquip": "{m} {c} से कमज़ोर है। आपके थैले में {i} है: इसे पहनें, 1.5× नुक़सान।", "lnEquipB": "{i} पहनें", "lnEquipped": "{i} पहन लिया", "lnShop": "{m} {c} से कमज़ोर है। दुकान से {c} हथियार ख़रीदें, 1.5× नुक़सान।", "lnShopB": "दुकान में {c} हथियार देखें", "lnMiss": "इस लड़ाई में {n} शब्द ग़लत हुए ({w})। ग़लत जवाब पर दानव पलटवार करता है, पहले इनका अभ्यास करें।", "lnMissB": "इन {n} शब्दों का अभ्यास", "lnMissT": "ग़लत शब्दों का अभ्यास", "old7": "आज आपने {n} ऐसे शब्द सही किए जो कम से कम {d} दिन पहले देखे थे। ये याद रह गए:", "gistLead": "ख़बर समझ आई?", "gistAns": "उत्तर", "gistEv": "ख़बर का यह वाक्य उत्तर बताता है", "u2b": "दूसरा दिन भी पूरा! आज दो नई जगहें खुलीं: पाठ में छोटे अंग्रेज़ी पाठ हैं जो सोना देते हैं, और अभ्यास मैदान में दानवों पर चालें आज़माओ।", "d2a": "सोना किस काम का? दुकान से पंचतत्व सामान ख़रीदो। दुश्मन के तत्व को हराने वाला हथियार 1.5× नुक़सान करता है, और सही कवच से चोट कम लगती है।", "d2b": "अभियान पास शहरों पर हमले के लिए हैं: हर ख़बर पढ़कर क्विज़ पूरा करने पर एक मिलता है। जीते हुए शहर रोज़ कर देते हैं, जिससे बेहतर सामान ख़रीद सको।", "d2c": "सबसे ज़रूरी बात: ख़बरों में देखे गए शब्द लड़ाई में सवाल बनकर आते हैं। रोज़ एक ख़बर ज़्यादा पढ़ो और ताक़तवर बनो। कल मिलते हैं!", "u5c": "तर्क चुनौती भी खुल गई, रोमांच मेनू में इंतज़ार कर रही है। लकी हाउस और रेनबो वॉल्ट भी खुल गए हैं; जब क़िस्मत आज़मानी हो या दोस्त को उपहार भेजना हो, तब जाना।", "plzMiniN": "हाल में {n} साहसी ऑनलाइन"});
+Object.assign(STR.es,{"lnTitle": "La próxima vez, prueba esto:", "lnEquip": "{m} es débil contra {c}. Tienes {i} en la mochila: equípalo para hacer 1,5× de daño.", "lnEquipB": "Equipar {i}", "lnEquipped": "{i} equipado", "lnShop": "{m} es débil contra {c}. Compra un arma de {c} en la tienda para hacer 1,5× de daño.", "lnShopB": "Ver armas de {c} en la tienda", "lnMiss": "Fallaste {n} palabra(s) en esta batalla ({w}). Al fallar, el monstruo contraataca: practícalas primero.", "lnMissB": "Practicar estas {n} palabras", "lnMissT": "Practicar las palabras falladas", "old7": "Hoy acertaste {n} palabra(s) que consultaste por primera vez hace al menos {d} días. Ya las recuerdas:", "gistLead": "¿Entendiste la noticia?", "gistAns": "Respuesta", "gistEv": "Esta frase de la noticia da la respuesta", "u2b": "¡Segundo día completado! Hoy se abren dos lugares nuevos: Clases tiene lecciones cortas de inglés que dan oro, y el Campo de práctica te deja probar golpes con monstruos.", "d2a": "¿Para qué sirve el oro? Compra equipo elemental en la Tienda. Un arma que vence el elemento del enemigo hace 1,5× de daño, y la armadura adecuada suaviza sus golpes.", "d2b": "Los pases sirven para atacar ciudades: cada noticia que lees y cuyo test terminas te da uno. Las ciudades que liberas te pagan impuestos cada día para comprar mejor equipo.", "d2c": "Lo más importante: las palabras que consultas en las noticias vuelven como preguntas en la batalla. Lee una noticia más cada día y serás más fuerte. ¡Hasta mañana!", "u5c": "También se abre Razonamiento: te espera en el menú de Aventura. La Casa de la Suerte y la Bóveda Arcoíris también están abiertas; pásate cuando quieras probar suerte o enviar un regalo a un amigo.", "plzMiniN": "{n} aventureros conectados últimamente"});
+Object.assign(STR.ja,{"lnTitle": "次はこう戦おう：", "lnEquip": "{m}は「{c}」に弱い。バッグの「{i}」を装備すればダメージ1.5倍。", "lnEquipB": "{i}を装備", "lnEquipped": "{i}を装備しました", "lnShop": "{m}は「{c}」に弱い。ショップで{c}属性の武器を買えばダメージ1.5倍。", "lnShopB": "ショップで{c}属性の武器を見る", "lnMiss": "このバトルで{n}語まちがえた（{w}）。まちがえると魔物が反撃するので、先に練習しよう。", "lnMissB": "この{n}語を練習", "lnMissT": "まちがえた単語の練習", "old7": "今日は、{d}日以上前に調べた単語を{n}語正解。ちゃんと覚えています：", "gistLead": "記事の内容、わかった？", "gistAns": "答え", "gistEv": "記事のこの文が答えの根拠", "u2b": "2日目も達成じゃ！今日は新しい場所が2つ開く：「小教室」は短い英語レッスンでゴールドがもらえる、「練習場」では魔物で技を試せるぞ。", "d2a": "ゴールドの使い道？「ショップ」で五行の装備を買うのじゃ。敵の属性に勝つ武器ならダメージ1.5倍、合った防具なら受けるダメージも軽くなる。", "d2b": "出撃券は町を攻めるためのもの。記事を1本読んでテストを終えるごとに1枚。取り戻した町は毎日税金をくれるから、もっと良い装備が買える。", "d2c": "一番大事なこと：ニュースで調べた単語は、バトルで問題として出てくる。毎日1本多く読めば、それだけ強くなれる。また明日な！", "u5c": "「推理読解」も開放じゃ。冒険メニューで待っておる。「ラッキーハウス」と「虹の宝庫」も開いたぞ。運試しをしたい時や友だちに贈り物をしたい時に、のぞいてみるといい。", "plzMiniN": "最近 {n} 人の冒険者がオンライン"});
+Object.assign(STR.ko,{"lnTitle": "다음엔 이렇게 싸워 봐요:", "lnEquip": "{m}은(는) '{c}' 속성에 약해요. 가방에 있는 '{i}'을(를) 장착하면 피해 1.5배.", "lnEquipB": "{i} 장착", "lnEquipped": "{i} 장착 완료", "lnShop": "{m}은(는) '{c}' 속성에 약해요. 상점에서 {c} 속성 무기를 사면 피해 1.5배.", "lnShopB": "상점에서 {c} 속성 무기 보기", "lnMiss": "이번 전투에서 {n}개 단어를 틀렸어요 ({w}). 틀리면 괴물이 반격하니 먼저 연습해요.", "lnMissB": "이 {n}개 단어 연습", "lnMissT": "틀린 단어 연습", "old7": "오늘 적어도 {d}일 전에 찾은 단어 {n}개를 맞혔어요. 확실히 기억하고 있어요:", "gistLead": "기사 내용을 이해했나요?", "gistAns": "정답", "gistEv": "기사의 이 문장이 답을 알려 줘요", "u2b": "둘째 날도 해냈구나! 오늘은 새로운 곳 두 군데가 열려: '소교실'은 짧은 영어 수업으로 골드를 주고, '연습장'에서는 괴물에게 기술을 시험할 수 있지.", "d2a": "골드는 어디에 쓰냐고? '상점'에서 오행 장비를 사렴. 적의 속성을 이기는 무기는 피해가 1.5배, 알맞은 방어구는 받는 피해를 줄여 준단다.", "d2b": "출정권은 마을을 공격할 때 쓰지. 기사 하나를 읽고 퀴즈를 마칠 때마다 1장. 되찾은 마을은 매일 세금을 줘서 더 좋은 장비를 살 수 있어.", "d2c": "가장 중요한 건: 뉴스에서 찾은 단어가 전투에서 문제로 나온다는 거야. 매일 기사 하나를 더 읽으면 그만큼 강해진단다. 내일 보자!", "u5c": "'추론 읽기'도 열렸어. 모험 메뉴에서 기다리고 있단다. '행운의 집'과 '무지개 보물고'도 열렸으니, 운을 시험해 보고 싶거나 친구에게 선물을 보내고 싶을 때 들러 보렴.", "plzMiniN": "최근 접속한 모험가 {n}명"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
