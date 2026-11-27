@@ -24,16 +24,16 @@ HSE Board to Face Questions From TDs Over Sacking of Chief Executive
 ## level A2
 A2 P1 S1: The HSE runs Ireland's public health service.
     zh: HSE負責經營愛爾蘭的公共醫療服務。
-A2 P1 S2: Its board sacked the boss of the HSE, Anne O'Connor, on Monday.
-    zh: HSE的董事會在星期一開除了HSE的負責人安妮・歐康納。
+A2 P1 S2: Its board said on Monday that it had sacked the boss of the HSE, Anne O'Connor.
+    zh: HSE的董事會於星期一宣布已開除HSE的負責人安妮・歐康納。
 A2 P1 S3: Now the board will answer questions from politicians next week.
     zh: 現在董事會下週將回答政治人物的提問。
 A2 P2 S1: Ms O'Connor started the job in March.
     zh: 歐康納女士在三月開始這份工作。
 A2 P2 S2: She had a contract for five years.
     zh: 她簽了五年的合約。
-A2 P2 S3: She says nobody told her that her job was in danger.
-    zh: 她說沒有人告訴她，她的工作有危險。
+A2 P2 S3: She says she did not know her job was in danger until a call on Saturday.
+    zh: 她說直到星期六的一通電話，她才知道自己可能失去工作。
 A2 P2 S4: She wants to fight the decision.
     zh: 她想要對抗這個決定。
 A2 P3 S1: A group of TDs looks at health issues.
@@ -65,7 +65,7 @@ B1 P2 S2: She had a five-year contract, but the board announced on Monday that i
 B1 P2 S3: All members of the board agreed with the decision.
     zh: 董事會所有成員都同意這個決定。
 B1 P3 S1: Ms O'Connor says she did not know her job was in danger until a video call early on Saturday morning.
-    zh: 歐康納女士說，直到星期六清晨的一通視訊電話，她才知道自己的工作有危險。
+    zh: 歐康納女士說，直到星期六清晨的一通視訊電話，她才知道自己可能失去工作。
 B1 P3 S2: She has said she will challenge what she calls an unlawful decision.
     zh: 她表示將對她所稱的違法決定提出挑戰。
 B1 P3 S3: Her lawyer told the High Court that the HSE has now invited her to try mediation, where both sides talk with the help of a neutral person.
@@ -89,7 +89,7 @@ B1 P7 S1: Any court case or mediation could be expensive, and the cost would be 
 
 ## level B2
 B2 P1 S1: The board of the Health Service Executive (HSE) is expected to appear before an Oireachtas committee next week to explain its controversial decision to dismiss the organisation's chief executive, Anne O'Connor.
-    zh: 衛生服務執行署（HSE）董事會預計下週將出席國會委員會，說明其解僱該機構執行長安妮・歐康納這一具爭議性的決定。
+    zh: 衛生服務執行署（HSE）董事會預計下週將出席國會委員會，說明其解僱該機構執行長安妮・歐康納這項具爭議性的決定。
 B2 P2 S1: Ms O'Connor, who took up the post in March, had been appointed on a five-year contract.
     zh: 歐康納女士於三月就任，當時獲得五年任期的合約。
 B2 P2 S2: The board's unanimous decision to terminate it, announced on Monday, caused widespread shock across the political system and the health service.
@@ -141,7 +141,7 @@ C1 P7 S1: Regardless of how the dispute is resolved, mediation or litigation thr
 
 ## level IELTS
 IELTS P1 S1: The board of the Health Service Executive is scheduled to appear before an Oireachtas committee next week, where it will be required to justify its contentious decision to dismiss the organisation's chief executive, Anne O'Connor.
-    zh: 衛生服務執行署董事會預定於下週出席國會委員會，屆時必須為其解僱該機構執行長安妮・歐康納這一具爭議的決定提出正當理由。
+    zh: 衛生服務執行署董事會預定於下週出席國會委員會，屆時必須為其解僱該機構執行長安妮・歐康納這項具爭議的決定提出正當理由。
 IELTS P2 S1: Ms O'Connor had occupied the position only since March, having been appointed on a five-year contract.
     zh: 歐康納女士自三月起才擔任此職，當時獲任命簽下五年合約。
 IELTS P2 S2: The board's unanimous decision to terminate this arrangement, announced on Monday, generated considerable shock within both the political sphere and the health service.
@@ -199,7 +199,7 @@ Old Cave Bones Suggest People Reached Ireland 1,000 Years Earlier
 - summaryJa: ウォーターフォードの洞窟の骨から、人類が千年早くアイルランドに来ていた可能性が示された。
 - summaryKo: 워터퍼드 동굴의 뼈는 인류가 천 년 더 일찍 아일랜드에 왔을 가능성을 보여 준다.
 - summaryEs: Huesos de una cueva de Waterford sugieren que los humanos llegaron a Irlanda mil años antes.
-- summaryHi: वॉटरफ़ोर्ड की गुफा की हड्डियाँ बताती हैं कि इंसान शायद 1,000 साल पहले ही आयरलैंड पहुँच गए थे।
+- summaryHi: वॉटरफ़ोर्ड की गुफा की हड्डियाँ बताती हैं कि इंसान शायद पहले के अनुमान से लगभग 1,000 साल पहले आयरलैंड पहुँच गए थे।
 
 ## sources
 - RTÉ News: https://www.rte.ie/news/2026/1126/1600681-animal-bones-waterford/
@@ -229,8 +229,8 @@ A2 P3 S3: So people may have come 1,000 years earlier.
     zh: 所以人類可能早了一千年來到這裡。
 A2 P4 S1: But the scientists are not sure yet.
     zh: 但是科學家還不確定。
-A2 P4 S2: They need to find more tools in the cave.
-    zh: 他們需要在洞穴裡找到更多工具。
+A2 P4 S2: They need to find tools or other objects in the cave.
+    zh: 他們需要在洞穴裡找到工具或其他人工物品。
 A2 P4 S3: They will dig there again.
     zh: 他們會再去那裡挖掘。
 A2 P4 S4: The work is exciting for Irish history.
@@ -271,8 +271,8 @@ B2 P2 S1: Researchers re-examined animal bones excavated from Ballynamintra Cave
     zh: 研究人員重新檢視了1878年至1882年間從沃特福德郡巴利納明特拉洞穴挖出、由愛爾蘭國家博物館收藏的動物骨頭。
 B2 P2 S2: They also analysed material from new excavations at the site.
     zh: 他們也分析了該遺址新發掘出的材料。
-B2 P2 S3: Two leg bones from the extinct giant deer show marks consistent with butchery, including a clean chopping surface made by a heavy stone tool and fractures suggesting the bone was split for its marrow.
-    zh: 兩根已滅絕的大角鹿腿骨上有符合宰割的痕跡，包括由沉重石器劈出的平整切面，以及顯示骨頭曾被劈開取骨髓的裂痕。
+B2 P2 S3: Two leg bones from the extinct giant deer show marks consistent with butchery, including a clean chopping surface possibly made by a heavy stone tool and fractures suggesting the bone was split for its marrow.
+    zh: 兩根已滅絕的大角鹿腿骨上有符合宰割的痕跡，包括可能由重型石器劈出的平整切面，以及顯示骨頭曾被劈開取骨髓的裂痕。
 B2 P3 S1: Radiocarbon dating at the University of Oxford placed one of the bones at between 13,321 and 13,573 years old.
     zh: 牛津大學的放射性碳定年將其中一根骨頭的年代判定在一萬三千三百二十一年到一萬三千五百七十三年之間。
 B2 P3 S2: Until now, the earliest evidence of humans in Ireland was a butchered brown bear bone from a cave in Co Clare, dated to around 12,700 years ago.
@@ -291,8 +291,8 @@ C1 P1 S1: Hunter-gatherers may have roamed southern Ireland almost a millennium 
     zh: 一項刊登於《愛爾蘭皇家學院學報》的研究指出，狩獵採集者可能比先前確認的時間早了將近一千年就在愛爾蘭南部活動。
 C1 P2 S1: The researchers revisited animal remains unearthed at Ballynamintra Cave in Co Waterford in the late nineteenth century, now housed in the National Museum of Ireland, and supplemented them with finds from fresh excavations.
     zh: 研究人員重新檢視了十九世紀末在沃特福德郡巴利納明特拉洞穴出土、現收藏於愛爾蘭國家博物館的動物遺骸，並以新發掘的出土物加以補充。
-C1 P2 S2: Two limb bones of the extinct giant deer bear marks consistent with butchery of fresh carcasses: one displays a uniform chopping plane left by a heavy stone implement, while the other exhibits fractures indicative of being split open for marrow.
-    zh: 兩根已滅絕大角鹿的肢骨帶有符合宰割新鮮屍體的痕跡：其中一根呈現沉重石器留下的均勻劈砍平面，另一根則有顯示曾被劈開取髓的裂痕。
+C1 P2 S2: Two limb bones of the extinct giant deer bear marks consistent with butchery of fresh carcasses: one displays a uniform chopping plane consistent with the use of a heavy stone implement, while the other exhibits fractures indicative of being split open for marrow.
+    zh: 兩根已滅絕大角鹿的肢骨帶有符合宰割新鮮動物屍身的痕跡：其中一根呈現與重型石器劈砍痕跡相符的平整切面，另一根則有顯示曾被劈開取髓的裂痕。
 C1 P3 S1: Radiocarbon analysis at the University of Oxford dated one bone to between 13,321 and 13,573 years ago.
     zh: 牛津大學的放射性碳分析將一根骨頭的年代測定為一萬三千三百二十一年至一萬三千五百七十三年前。
 C1 P3 S2: Hitherto, the earliest evidence of human presence was a butchered brown bear bone from a cave in Co Clare, dating to roughly 12,700 years ago.
@@ -311,8 +311,8 @@ IELTS P1 S1: A study published in the Proceedings of the Royal Irish Academy ind
     zh: 一項刊登於《愛爾蘭皇家學院學報》的研究指出，狩獵採集者居住在愛爾蘭南部的時間，可能比先前證實的早了將近一千年。
 IELTS P2 S1: The researchers re-analysed animal bones excavated from Ballynamintra Cave in Co Waterford between 1878 and 1882, which are currently held by the National Museum of Ireland, and complemented this with material from new excavations.
     zh: 研究人員重新分析了1878年至1882年間從沃特福德郡巴利納明特拉洞穴發掘、目前由愛爾蘭國家博物館收藏的動物骨頭，並輔以新發掘的材料。
-IELTS P2 S2: Two leg bones belonging to the extinct giant deer display marks consistent with butchery, including a uniform cutting surface attributable to a heavy stone tool and fractures suggesting that the bone was deliberately split to extract marrow.
-    zh: 兩根屬於已滅絕大角鹿的腿骨呈現符合宰割的痕跡，包括可歸因於沉重石器的均勻切面，以及顯示骨頭曾被刻意劈開以取出骨髓的裂痕。
+IELTS P2 S2: Two leg bones belonging to the extinct giant deer display marks consistent with butchery, including a uniform cutting surface potentially attributable to a heavy stone tool and fractures suggesting that the bone was deliberately split to extract marrow.
+    zh: 兩根屬於已滅絕大角鹿的腿骨呈現符合宰割的痕跡，包括可能由重型石器造成的均勻切面，以及顯示骨頭曾被刻意劈開以取出骨髓的裂痕。
 IELTS P3 S1: High-precision radiocarbon dating conducted at the University of Oxford established that one bone is between 13,321 and 13,573 years old.
     zh: 牛津大學進行的高精度放射性碳定年確定，其中一根骨頭的年代介於一萬三千三百二十一年至一萬三千五百七十三年之間。
 IELTS P3 S2: Previously, the earliest evidence of human activity in Ireland was a butchered brown bear bone from a cave in Co Clare, dated to approximately 12,700 years ago.
@@ -355,7 +355,7 @@ file: articles/2026-11-27-3.json
 First-Time Buyers Drive Rise in Mortgage Approvals
 
 ## summaries
-- summaryEn: More people got home loans this year, and most were first-time buyers.
+- summaryEn: More people were approved for home loans this year, and most were first-time buyers.
 - summaryZh: 十月房貸核准約17億歐元，首購族占近六成。
 - summaryJa: 10月の住宅ローン承認額は約17億ユーロで、初めての購入者が6割近くを占めた。
 - summaryKo: 10월 주택담보대출 승인액은 약 17억 유로였고, 생애 첫 구매자가 약 60%를 차지했다.
@@ -382,8 +382,8 @@ A2 P2 S3: But it is 2% less than in September.
     zh: 但比九月少了2%。
 A2 P3 S1: First-time buyers are people buying their first home.
     zh: 首購族是指買第一間房子的人。
-A2 P3 S2: They got 3,077 of the loans, almost six in ten.
-    zh: 他們拿到其中3,077筆貸款，將近十分之六。
+A2 P3 S2: They were approved for 3,077 of the loans, almost six in ten.
+    zh: 他們獲准其中3,077筆貸款，將近十分之六。
 A2 P3 S3: Their loans were worth just over €1 billion.
     zh: 他們的貸款價值略高於10億歐元。
 A2 P4 S1: From January to October, banks approved 49,213 mortgages.
@@ -416,8 +416,8 @@ B1 P4 S3: These are the highest figures for this period since the records began 
     zh: 這是自2011年開始有紀錄以來，這段期間的最高數字。
 B1 P5 S1: Brian Hayes, the head of the BPFI, said approvals kept growing in October and that first-time buyers made up almost six in ten of them.
     zh: BPFI負責人布萊恩・海斯說，十月的核准數持續成長，首購族占了將近六成。
-B1 P5 S2: Loans for people moving to a new home also rose, by 7.5% in value, to more than €3.5 billion.
-    zh: 換屋者的貸款金額也上升了7.5%，超過35億歐元。
+B1 P5 S2: Between January and October, the value of mortgage approvals for people moving to a new home also rose by 7.5%, to more than €3.5 billion.
+    zh: 一月至十月換屋者的房貸核准金額也上升了7.5%，超過35億歐元。
 
 ## level B2
 B2 P1 S1: Around €1.7 billion worth of mortgages were approved in October, according to the latest report from the Banking and Payments Federation Ireland (BPFI).
@@ -493,7 +493,7 @@ Q2 [infer]: What can be inferred from the figures for October compared with Sept
    B. The housing market is entering a long decline.
    C. First-time buyers stopped applying for mortgages in October.
    D. October's figures were the highest ever recorded for a single month.
-   explanation: Approvals "declined by 2% relative to September" but were "10.3% higher than in the corresponding month of the previous year", and the year-to-date totals are record highs. A long decline (B) is not supported; first-time buyers got 3,077 approvals (C); and the record refers to the January–October period, not one month (D).
+   explanation: The value of approvals "declined by 2% relative to September" but were "10.3% higher than in the corresponding month of the previous year", and the year-to-date totals are record highs. A long decline (B) is not supported; first-time buyers got 3,077 approvals (C); and the record refers to the January–October period, not one month (D).
 Q3 [purpose]: Why does the writer explain what a mortgage "approval" represents in the first paragraph?
    A. To warn readers that most approvals are later cancelled.
    B. To criticise lenders for making too many offers.
@@ -574,7 +574,7 @@ B2 P1 S1: The chair of the Oireachtas Education Committee has said the Governmen
 B2 P1 S2: Fianna Fáil TD Cathal Crowe described the move as an unrealistic burden on families who are already struggling with renewed cost-of-living pressures.
     zh: 共和黨議員卡哈爾・克羅形容此舉是對已在生活成本壓力再起中掙扎的家庭施加不切實際的負擔。
 B2 P2 S1: Fares were reduced in 2022 as a cost-of-living measure, but in October's budget the Government announced that they would return to their previous levels from next September.
-    zh: 票價曾於2022年作為生活成本措施而調降，但政府在十月的預算案中宣布，從明年九月起票價將恢復到先前的水準。
+    zh: 票價曾於2022年為減輕生活費負擔而調降，但政府在十月的預算案中宣布，從明年九月起票價將恢復到先前的水準。
 B2 P2 S2: As a result, the annual fare for post-primary pupils will rise from €100 to €350 for the 2027/2028 school year.
     zh: 因此，2027/2028學年中學生的年票價將從100歐元漲到350歐元。
 B2 P3 S1: The plan has met opposition from Independent TDs and ministers who support the Government.
@@ -610,7 +610,7 @@ IELTS P1 S1: The chair of the Oireachtas Education Committee has stated that the
 IELTS P1 S2: Fianna Fáil TD Cathal Crowe characterised the measure as an unrealistic financial burden for families who are already contending with renewed cost-of-living pressures.
     zh: 共和黨議員卡哈爾・克羅將此舉定性為對已在應付生活成本壓力再起的家庭而言不切實際的財務負擔。
 IELTS P2 S1: Fares were reduced in 2022 as a temporary cost-of-living intervention; however, the October budget determined that they would revert to their previous levels from next September.
-    zh: 票價曾於2022年作為臨時的生活成本干預措施而調降；然而，十月的預算案決定從明年九月起將其恢復至先前的水準。
+    zh: 票價曾於2022年為暫時減輕生活費負擔而調降；然而，十月的預算案決定從明年九月起將其恢復至先前的水準。
 IELTS P2 S2: Consequently, the annual fare for post-primary pupils is scheduled to increase from €100 to €350 in the 2027/2028 academic year.
     zh: 因此，2027/2028學年中學生的年票價預定從100歐元調漲至350歐元。
 IELTS P3 S1: The proposal has encountered substantial opposition from Independent TDs and the ministers who support the coalition.
@@ -682,10 +682,10 @@ A2 P3 S2: The 322 products are about 36 to 40 percent of Taiwan's farm sales to 
     zh: 這322項產品約占台灣對美農產品銷售的36%到40%。
 A2 P4 S1: Some Taiwanese products now have a big price advantage.
     zh: 有些台灣產品現在有很大的價格優勢。
-A2 P4 S2: Taiwanese orchids pay no tax in the US.
-    zh: 台灣蘭花在美國不用繳稅。
-A2 P4 S3: Orchids from the Netherlands pay 10 percent.
-    zh: 來自荷蘭的蘭花要繳10%。
+A2 P4 S2: Taiwanese moth orchids pay no import tax in the US.
+    zh: 台灣蝴蝶蘭進入美國免徵關稅。
+A2 P4 S3: Moth orchids from the Netherlands pay 10 percent.
+    zh: 來自荷蘭的蝴蝶蘭須繳10%關稅。
 A2 P4 S4: Fish called tilapia from Taiwan pay 10 percent, but tilapia from China pay 37.5 percent.
     zh: 台灣的吳郭魚繳10%，但中國的吳郭魚要繳37.5%。
 A2 P5 S1: The government will also give NT$18 billion to help farmers sell their food abroad.
@@ -730,8 +730,8 @@ B2 P3 S1: The exempt products account for 36 to 40 percent of Taiwan's agricultu
     zh: 這些豁免產品占台灣對美農產品出口值的36%到40%。
 B2 P3 S2: Twenty-six of them, including moth orchids and anthuriums, enjoy exemptions specific to Taiwan, giving growers a clear edge over foreign rivals.
     zh: 其中26項，包括蝴蝶蘭和火鶴花，享有台灣專屬的豁免，讓種植者比外國對手擁有明顯優勢。
-B2 P3 S3: Taiwanese orchids enter the US duty-free, whereas Dutch competitors pay 10 percent.
-    zh: 台灣蘭花免稅進入美國，而荷蘭競爭者則要繳10%。
+B2 P3 S3: Taiwanese moth orchids enter the US duty-free, whereas Dutch competitors pay 10 percent.
+    zh: 台灣蝴蝶蘭免稅進入美國，而荷蘭競爭者則要繳10%。
 B2 P4 S1: To cushion any impact, the ministry has earmarked NT$18 billion from a special resilience budget for exporters and plans to expand its NT$30 billion Agricultural Safety Fund.
     zh: 為了減緩衝擊，農業部已從特別韌性預算中撥出180億新台幣給出口業者，並計畫擴大規模300億新台幣的農業安全基金。
 B2 P5 S1: The proposals are not yet final.
@@ -757,7 +757,7 @@ C1 P4 S1: Even so, the ministry is hedging its bets.
 C1 P4 S2: It has ring-fenced NT$18 billion from a special resilience budget to support exporters and intends to enlarge its NT$30 billion Agricultural Safety Fund.
     zh: 它已從特別韌性預算中專款保留180億新台幣支持出口業者，並打算擴大300億新台幣的農業安全基金。
 C1 P5 S1: Vice Premier Cheng Li-chiun stressed that nothing will be settled until the US process concludes early next year, with Taipei pressing for terms consistent with its reciprocal trade agreement.
-    zh: 副院長鄭麗君強調，在美國程序明年初結束之前，一切都還沒定案，台北將力爭符合雙方對等貿易協定的條件。
+    zh: 行政院副院長鄭麗君強調，在美國程序明年初結束之前，一切都還沒定案，台北將力爭符合雙方對等貿易協定的條件。
 
 ## level IELTS
 IELTS P1 S1: For Taiwan's farmers, the latest round of American trade measures has delivered an unexpected reprieve.
@@ -766,8 +766,8 @@ IELTS P1 S2: On Thursday, Agriculture Minister Chen Chun-chi announced that 322 
     zh: 星期四，農業部長陳駿季宣布，322項農產品將持續免徵任何額外的美國關稅。
 IELTS P2 S1: The exemption must be viewed against a broader backdrop.
     zh: 這項豁免必須放在更廣泛的背景下來看。
-IELTS P2 S2: A day earlier, the US Trade Representative had proposed tariffs of up to 15 percent on Taiwanese imports, following an investigation into 14 economies accused of fostering structural overcapacity through industrial subsidies.
-    zh: 前一天，美國貿易代表署提議對台灣進口商品課徵最高15%的關稅，起因是一項針對14個經濟體的調查，這些經濟體被指控透過產業補貼助長結構性產能過剩。
+IELTS P2 S2: A day earlier, the US Trade Representative had proposed tariffs of up to 15 percent on imports from Taiwan, following an investigation into 14 economies accused of fostering structural overcapacity through industrial subsidies.
+    zh: 前一天，美國貿易代表署提議對自台灣進口的商品課徵最高15%的關稅，起因是一項針對14個經濟體的調查，這些經濟體被指控透過產業補貼助長結構性產能過剩。
 IELTS P2 S3: Officials also warned that the rate could escalate to 25 percent if negotiations proved unsatisfactory.
     zh: 官員也警告，如果談判結果不理想，稅率可能升高到25%。
 IELTS P3 S1: The protected goods are economically significant, accounting for between 36 and 40 percent of Taiwan's agricultural export value to the US.
@@ -813,8 +813,8 @@ A2 P1 S2: People will choose new mayors and city leaders.
     zh: 人們會選出新的市長和城市領袖。
 A2 P1 S3: The candidates are very busy this week.
     zh: 這個星期候選人都非常忙。
-A2 P2 S1: In New Taipei, Lee Shu-chuan visited his 100th market.
-    zh: 在新北，李四川走訪了他的第100個市場。
+A2 P2 S1: In New Taipei, Lee Shu-chuan made his 100th market visit.
+    zh: 在新北，李四川完成競選期間第100次市場拜票。
 A2 P2 S2: He shook hands with shoppers.
     zh: 他和買菜的民眾握手。
 A2 P2 S3: His rival, Su Chiao-hui, rode in a long line of cars through seven areas of the city.
@@ -826,7 +826,7 @@ A2 P3 S2: He wants to win again.
 A2 P3 S3: His rival, Puma Shen, cancelled his big event on a main road on Friday night.
     zh: 他的對手沈伯洋取消了星期五晚上在一條主要道路上的大型活動。
 A2 P3 S4: He said it would cause too much traffic.
-    zh: 他說那會造成太多交通。
+    zh: 他說那會造成交通壅塞。
 A2 P4 S1: Party leaders are helping too.
     zh: 政黨領袖也在幫忙。
 A2 P4 S2: President Lai Ching-te and former President Tsai Ing-wen will join a big event for Su on Friday.
@@ -895,8 +895,8 @@ C1 P3 S1: The Taipei contest, meanwhile, was overshadowed by a dispute over road
     zh: 與此同時，台北的選戰被一場道路使用爭議蓋過鋒頭。
 C1 P3 S2: DPP challenger Puma Shen scrapped his planned election-eve rally on Ren'ai Road, insisting that the city's traffic plan would still cause gridlock.
     zh: 民進黨挑戰者沈伯洋取消了原定在仁愛路舉行的選前之夜造勢晚會，堅稱市府的交通計畫仍會造成交通癱瘓。
-C1 P3 S3: Incumbent Chiang Wan-an had offered to forgo his own event to free up space, a gesture Shen's camp acknowledged but declined, opting instead for an online gathering.
-    zh: 現任市長蔣萬安曾表示願意放棄自己的活動來騰出空間，沈伯洋陣營對此表示感謝但婉拒，改為舉辦線上集會。
+C1 P3 S3: Incumbent Chiang Wan-an had offered to forgo his own event to free up space, a gesture Shen's camp acknowledged but declined, with his team saying an online gathering was likely.
+    zh: 現任市長蔣萬安曾表示願意放棄自己的活動來騰出空間，沈伯洋陣營對此表示感謝但婉拒，並表示可能改為舉辦線上集會。
 C1 P4 S1: Friday's closing rallies promise star power: President Lai Ching-te and his predecessor, Tsai Ing-wen, will stand beside Su, while Legislative Speaker Han Kuo-yu and Eric Chu will lend their weight to Lee.
     zh: 星期五的收尾造勢晚會可望星光熠熠：賴清德總統和前任總統蔡英文將站在蘇巧慧身旁，而立法院長韓國瑜和朱立倫將為李四川加持。
 C1 P5 S1: Ballots will be counted on Saturday evening.
@@ -921,5 +921,5 @@ IELTS P4 S1: Prominent figures are expected at Friday's final rallies.
     zh: 預計星期五最後的造勢晚會將有知名人物出席。
 IELTS P4 S2: President Lai Ching-te and former President Tsai Ing-wen will appear with Su, whereas Legislative Speaker Han Kuo-yu will support Lee.
     zh: 賴清德總統和前總統蔡英文將與蘇巧慧同台，而立法院長韓國瑜則將支持李四川。
-IELTS P5 S1: Ultimately, the results will be counted on Saturday evening, and they are widely seen as a test for both major parties.
+IELTS P5 S1: Ultimately, the votes will be counted on Saturday evening, and the results are widely seen as a test for both major parties.
     zh: 最終，選票將在星期六晚上開出，這次結果普遍被視為兩大黨的一次考驗。
