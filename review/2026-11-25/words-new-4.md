@@ -3,6 +3,8 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-25-tw-2:cells | cell | n. | B1 | the smallest living units of a body | 細胞 | 細胞 | 세포 | células | कोशिकाएँ | Nerve cells carry messages around the body. | units |  | nerve cells, brain cells
+2026-11-25-tw-2:channels | channel | n. | B2 | passages that let things move through (ion channels) | 通道 | チャネル | 통로; 채널 | canales | चैनल | Ion channels control signals in nerve cells. | passages, routes, pathways |  | ion channels, communication channels
 2026-11-25-tw-2:chen | Chen | PN | PN | a family name; here Chen Chien-jen, president of Academia Sinica | 陳（姓） | 陳（姓） | 천(성) | Chen (apellido) | चेन (उपनाम) |  |  |  | 
 2026-11-25-tw-2:chien-jen | Chien-jen | PN | PN | given name of Chen Chien-jen, president of Academia Sinica | 建仁（名字） | 建仁（名） | 젠런(이름) | Chien-jen (nombre) | चिएन-जेन (नाम) |  |  |  | 
 2026-11-25-tw-2:cnrs | CNRS | PN | PN | France's National Centre for Scientific Research | 法國國家科學研究中心 | フランス国立科学研究センター | 프랑스 국립과학연구센터 | CNRS | सीएनआरएस |  |  |  | 

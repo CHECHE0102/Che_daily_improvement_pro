@@ -3,6 +3,7 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-26-tw-1:circuits | circuit | n. | B2 | paths that electricity flows through | 電路 | 回路 | 회로 | circuitos | सर्किट | The engineer tested the circuits one by one. | electronics, wiring |  | electric circuits, integrated circuits
 2026-11-26-tw-1:cloud | cloud | n. | B1 | internet-based computer services | 雲端 | クラウド | 클라우드 | la nube | क्लाउड | I save my photos in the cloud. | online servers, cloud computing | local device | in the cloud, cloud storage
 2026-11-26-tw-1:committing | commit | v. | C1 | deciding to start using effort or resources | 投入；著手 | 踏み切る；投入する | 착수하다 | comprometerse | प्रतिबद्ध करना | Think carefully before committing your money. | devoting, starting, pledging | withholding | commit to, commit resources
 2026-11-26-tw-1:computation | computation | n. | C1 | the work of calculating, especially by computer | 運算 | 演算 | 연산 | cálculo; computación | संगणना | The computation needs a powerful machine. | calculation, processing |  | intensive computation, fast computation
@@ -86,6 +87,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26-tw-2:carries | carry | v. | A2 | has on it | 印有；帶有 | 記載されている | 담고 있다 | lleva | रखता है; अंकित है | Each ticket carries a number. | bears, has, shows |  | carry a number, carry a message
 2026-11-26-tw-2:checked | check | v. | A1 | looked at to see if something is correct | 檢查；核對 | 確認した | 확인했다 | revisaron | जाँच की | She checked her ticket twice. | examined, looked at, inspected | ignored | check a receipt, check carefully
 2026-11-26-tw-2:convenience | convenience | n. | B1 | being easy and useful; convenience store = small shop open long hours | 便利（convenience store：便利商店） | 便利（コンビニ） | 편의 | conveniencia | सुविधा | There is a convenience store on every corner. | ease, comfort, usefulness | inconvenience | convenience store, for convenience
+2026-11-26-tw-2:corp | Corp | n. | PN | short for Corporation, in Taiwan Railway Corp. | 公司（Corporation 縮寫） | 社（コーポレーション） | 공사 | Corp. (corporación) | कॉर्प |  |  |  | 
 2026-11-26-tw-2:distributed | distribute | v. | B2 | given out to people | 發放；分配 | 分配される | 배분된 | distribuidos | वितरित किया | Food was distributed to families. | handed out, paid out, shared | collected | distributed to, widely distributed
 2026-11-26-tw-2:draw | draw | n. | B1 | an event where winners are chosen by chance | 抽獎 | 抽選 | 추첨 | sorteo | ड्रॉ; लॉटरी निकालना | The draw will take place on Friday. | lottery, raffle |  | prize draw, hold a draw
 2026-11-26-tw-2:draws | draw | n. | B1 | events where winners are chosen by chance | 抽獎（複數） | 抽選 | 추첨 | sorteos | ड्रॉ | Draws are held every two months. | lotteries, raffles |  | regular draws, lottery draws
@@ -111,5 +113,3 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26-tw-2:picks | pick | v. | A2 | chooses | 挑選 | 選ぶ | 고르다 | elige | चुनता है | He always picks the red one. | chooses, selects | rejects | pick a number, pick a winner
 2026-11-26-tw-2:place | place | n. | A1 | happens (take place) | 舉行（take place） | 行われる（take place） | 열리다 (take place) | tener lugar (take place) | होना (take place) | The draw takes place on the 25th. | happen, occur |  | take place, in place
 2026-11-26-tw-2:president | President | n. | PN | part of a company name (President Chain Store) | 統一（President Chain Store：統一超商） | 統一（統一超商） | 퉁이 (기업명) | President (nombre de empresa) | प्रेसिडेंट (कंपनी नाम) |  |  |  | 
-2026-11-26-tw-2:px | PX | n. | PN | part of a shop name (PX Mart) | 全聯（PX Mart） | 全聯（PX） | PX | PX | पीएक्स |  |  |  | 
-2026-11-26-tw-2:receipt | receipt | n. | A2 | a paper showing what you bought and paid | 收據；發票 | レシート | 영수증 | recibo | रसीद | Keep the receipt in case you return it. | invoice, bill, slip |  | keep the receipt, ask for a receipt

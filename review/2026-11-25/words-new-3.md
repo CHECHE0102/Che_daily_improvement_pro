@@ -3,6 +3,7 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-25-4:remembrance | remembrance | n. | C1 | remembering people who died | 紀念（in remembrance of） | 追悼 | 추모 | recuerdo; memoria | स्मरण | Candles were lit in remembrance of the victims. | memory, commemoration, tribute | forgetting | in remembrance of, day of remembrance
 2026-11-25-4:reminds | remind | v. | B1 | helps someone remember | 提醒 | 思い出させる | 상기시키다 | recuerda | याद दिलाता है | This photo reminds me of home. | tells, alerts, prompts | forgets | reminds us, reminds people
 2026-11-25-4:representation | representation | n. | C1 | a picture or sign of something | 象徵；描繪 | 表現；描写 | 표현; 묘사 | representación | प्रतिरूप; चित्रण | The statue is a representation of peace. | depiction, image, portrayal |  | visual representation, a representation of
 2026-11-25-4:result | result | n. | A2 | effect (as a result of = because of) | 結果（as a result of：由於） | 結果（as a result of：〜の結果） | 결과(as a result of: ~의 결과로) | resultado (como resultado de) | परिणाम (as a result of) | Roads closed as a result of the storm. | outcome, effect, consequence | cause | as a result of, direct result
@@ -97,6 +98,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-25-tw-1:share | share | n. | B1 | a part or percentage of a group | 比例；佔比 | 割合 | 비율 | proporción | हिस्सा | The share of older workers is growing. | proportion, part, percentage | whole | the share of, market share
 2026-11-25-tw-1:sharply | sharply | adv. | C1 | suddenly and by a lot | 急遽地 | 急激に | 급격히 | bruscamente | तेज़ी से | Prices fell sharply in March. | steeply, suddenly, dramatically | slightly, gradually | rose sharply, fell sharply
 2026-11-25-tw-1:sier | Sier | PN | PN | part of the name Ng Sier Han | 維（名字一部分） | シア（名前） | 시어(이름) | Sier (nombre) | सियर (नाम) |  |  |  | 
+2026-11-25-tw-1:slept | sleep | v. | A1 | rested with eyes closed at night | 睡覺 | 寝た | 잤다 | durmieron | सोए | I slept for eight hours. | rested, stayed | woke | slept well, slept outside
 2026-11-25-tw-1:society | society | n. | A2 | people living together in a country | 社會 | 社会 | 사회 | sociedad | समाज | An ageing society needs more care workers. | community, the public |  | ageing society, modern society
 2026-11-25-tw-1:source | source | n. | B1 | where something comes from | 來源 | 源 | 원천 | fuente | स्रोत | Money is a common source of stress. | origin, cause, root | result | main source, source of
 2026-11-25-tw-1:treatment | treatment | n. | B1 | medical care for an illness | 治療 | 治療 | 치료 | tratamiento | इलाज | Cancer treatment can be very expensive. | care, therapy, cure |  | medical treatment, receive treatment
@@ -111,5 +113,3 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-25-tw-2:biofuels | biofuel | n. | C1 | fuels made from plants or other living matter | 生質燃料 | バイオ燃料 | 바이오연료 | biocombustibles | जैव ईंधन | Some planes now use biofuels. | green fuels, renewable fuels | fossil fuels | develop biofuels, biofuels research
 2026-11-25-tw-2:builds | build | v. | B1 | (builds on) develops from earlier work | （builds on）以…為基礎發展 | 〜を土台にする | ~을 토대로 하다 | se basa en | आगे बढ़ाता है | The new plan builds on last year's success. | develops, extends, expands |  | builds on, builds up
 2026-11-25-tw-2:campus | campus | n. | B1 | the land and buildings of a university | 校園 | キャンパス | 캠퍼스 | campus | परिसर, कैंपस | Most first-year students live on campus. | grounds, university site, college grounds |  | on campus, university campus
-2026-11-25-tw-2:cells | cell | n. | B1 | the smallest living units of a body | 細胞 | 細胞 | 세포 | células | कोशिकाएँ | Nerve cells carry messages around the body. | units |  | nerve cells, brain cells
-2026-11-25-tw-2:channels | channel | n. | B2 | passages that let things move through (ion channels) | 通道 | チャネル | 통로; 채널 | canales | चैनल | Ion channels control signals in nerve cells. | passages, routes, pathways |  | ion channels, communication channels

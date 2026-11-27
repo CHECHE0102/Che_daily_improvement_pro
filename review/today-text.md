@@ -1,914 +1,643 @@
-# BinBin TEXT proofreading — 2026-11-26
-date: 2026-11-26 | 6 articles | read this WHOLE file, it is the complete job for today
+# BinBin TEXT proofreading — 2026-11-27
+date: 2026-11-27 | 4 articles | read this WHOLE file, it is the complete job for today
 
-# 2026-11-26  (Ireland national)
-date: 2026-11-26 | rank: 1 | topic: 經濟 | main level: B2
-file: articles/2026-11-26.json
+# 2026-11-27  (Ireland national)
+date: 2026-11-27 | rank: 1 | topic: 政治 | main level: B2
+file: articles/2026-11-27.json
 
 ## title
-Thousands of Jobs at Risk as Dealz Owner Enters Administration
+HSE Board to Face Questions From TDs Over Sacking of Chief Executive
 
 ## summaries
-- summaryEn: The company that owns Dealz shops is in deep money trouble, and many jobs are at risk.
-- summaryZh: Dealz母公司進入破產管理，愛爾蘭1150個工作岌岌可危。
-- summaryJa: Dealzの親会社が経営破綻し、アイルランドで1150人の雇用が危機にさらされている。
-- summaryKo: Dealz 모회사가 법정관리에 들어가 아일랜드 일자리 1,150개가 위기에 처했다.
-- summaryEs: La empresa dueña de Dealz entra en administración y pone en riesgo 1.150 empleos en Irlanda.
-- summaryHi: Dealz की मालिक कंपनी दिवाला प्रशासन में चली गई, आयरलैंड में 1,150 नौकरियाँ खतरे में हैं।
+- summaryEn: The HSE board will tell politicians why it sacked its boss.
+- summaryZh: HSE董事會將赴國會委員會說明為何解僱執行長。
+- summaryJa: HSEの理事会が、最高経営責任者を解任した理由について議会委員会で説明する予定だ。
+- summaryKo: HSE 이사회가 최고경영자를 해임한 이유를 의회 위원회에서 설명할 예정이다.
+- summaryEs: La junta del HSE comparecerá ante una comisión parlamentaria para explicar el despido de su directora ejecutiva.
+- summaryHi: HSE बोर्ड अगले सप्ताह संसदीय समिति के सामने बताएगा कि उसने मुख्य कार्यकारी को क्यों हटाया।
 
 ## sources
-- TheJournal.ie: https://www.thejournal.ie/dealz-administration-7238092-Nov2026/
+- RTÉ News: https://www.rte.ie/news/politics/2026/1126/1600709-politics-hse-ireland/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Poundland is a company that runs cheap shops.
-    zh: Poundland是一家經營平價商店的公司。
-A2 P1 S2: In Ireland, its shops are called Dealz.
-    zh: 在愛爾蘭，它的店叫做Dealz。
-A2 P1 S3: Now the company is in serious money trouble.
-    zh: 現在這家公司陷入嚴重的財務困境。
-A2 P2 S1: On Wednesday, the company went into administration.
-    zh: 週三，公司進入了破產管理程序。
-A2 P2 S2: This means outside experts now control it.
-    zh: 這表示現在由外部專家接管公司。
-A2 P2 S3: They will try to save some of the shops.
-    zh: 他們會設法保住部分門市。
-A2 P3 S1: About 11,000 jobs are at risk in the UK and Ireland.
-    zh: 英國和愛爾蘭約有1萬1000個工作岌岌可危。
-A2 P3 S2: There are about 600 shops.
-    zh: 門市大約有600家。
-A2 P3 S3: In Ireland, Dealz has about 40 shops and 1,150 workers.
-    zh: 在愛爾蘭，Dealz約有40家店和1150名員工。
-A2 P4 S1: The shops will stay open for now.
-    zh: 目前這些商店會繼續營業。
-A2 P4 S2: But workers do not know if they will have a job in January.
-    zh: 但員工不知道一月時是否還有工作。
-A2 P5 S1: Politicians want the Government to help.
-    zh: 政治人物希望政府出手幫忙。
-A2 P5 S2: They asked a government minister, Peter Burke, to talk to the owners quickly.
-    zh: 他們要求政府部長彼得·伯克盡快與業主談話。
+A2 P1 S1: The HSE runs Ireland's public health service.
+    zh: HSE負責經營愛爾蘭的公共醫療服務。
+A2 P1 S2: Its board sacked the boss of the HSE, Anne O'Connor, on Monday.
+    zh: HSE的董事會在星期一開除了HSE的負責人安妮・歐康納。
+A2 P1 S3: Now the board will answer questions from politicians next week.
+    zh: 現在董事會下週將回答政治人物的提問。
+A2 P2 S1: Ms O'Connor started the job in March.
+    zh: 歐康納女士在三月開始這份工作。
+A2 P2 S2: She had a contract for five years.
+    zh: 她簽了五年的合約。
+A2 P2 S3: She says nobody told her that her job was in danger.
+    zh: 她說沒有人告訴她，她的工作有危險。
+A2 P2 S4: She wants to fight the decision.
+    zh: 她想要對抗這個決定。
+A2 P3 S1: A group of TDs looks at health issues.
+    zh: 有一群國會議員負責研究健康議題。
+A2 P3 S2: This group wants to know why she lost her job.
+    zh: 這個小組想知道她為什麼丟了工作。
+A2 P3 S3: It also wants to know if the Health Minister played a part.
+    zh: 它也想知道衛生部長是否參與其中。
+A2 P4 S1: The Taoiseach, Micheál Martin, wants the board to explain more.
+    zh: 總理米霍爾・馬丁希望董事會多做說明。
+A2 P4 S2: He did not say that he trusts the board.
+    zh: 他沒有說他信任董事會。
+A2 P4 S3: The Tánaiste, Simon Harris, said she is a good person.
+    zh: 副總理賽門・哈里斯說她是個好人。
+A2 P5 S1: A court case could cost a lot of money.
+    zh: 一場官司可能要花很多錢。
+A2 P5 S2: The taxpayer would pay.
+    zh: 納稅人將會買單。
 
 ## level B1
-B1 P1 S1: Poundland, the discount shop company that trades as Dealz in Ireland, has gone into administration.
-    zh: 在愛爾蘭以Dealz名義經營的折扣商店公司Poundland已進入破產管理。
-B1 P1 S2: About 11,000 jobs and 600 shops in the UK and Ireland are now at risk.
-    zh: 英國和愛爾蘭約1萬1000個工作和600家商店如今面臨風險。
-B1 P2 S1: In Ireland, Dealz has about 40 shops and employs 1,150 people.
-    zh: 在愛爾蘭，Dealz約有40家店，僱用1150人。
-B1 P2 S2: Its owner, the American investment company Gordon Brothers, has asked a firm called AlixPartners to manage the business and try to save parts of it.
-    zh: 其業主美國投資公司Gordon Brothers已請AlixPartners公司管理業務，並設法挽救部分事業。
-B1 P3 S1: AlixPartners said the shops will keep trading as normal for now.
-    zh: AlixPartners表示，商店目前將照常營業。
-B1 P3 S2: It said it wants to work with the UK government, trade unions and others to find the best way forward.
-    zh: 它說希望與英國政府、工會及其他各方合作，找出最佳的前進方向。
-B1 P4 S1: The company has had problems for some time.
-    zh: 這家公司的問題已存在一段時間。
-B1 P4 S2: Its last owner, the Polish company Pepco Group, said the business was already weak.
-    zh: 其前任業主波蘭的Pepco集團表示，這項業務原本就很疲弱。
-B1 P4 S3: A rise in business taxes in the UK made things harder.
-    zh: 英國調高營業稅讓情況更加困難。
-B1 P4 S4: Gordon Brothers bought it for just one pound.
-    zh: Gordon Brothers只用一英鎊就買下了它。
-B1 P5 S1: The owner said staff had saved £100 million in costs over the past year.
-    zh: 業主表示，員工在過去一年節省了1億英鎊的成本。
-B1 P5 S2: But high prices and strong competition from supermarkets still hurt the business.
-    zh: 但高物價和超市的激烈競爭仍然打擊了業務。
-B1 P6 S1: Irish politicians are worried.
-    zh: 愛爾蘭政治人物感到憂心。
-B1 P6 S2: Ged Nash of the Labour Party said workers are going to work just weeks before Christmas without knowing if they will still have a job in January.
-    zh: 工黨的格德·納許說，員工在耶誕節前幾週去上班，卻不知道一月是否還保得住工作。
-B1 P6 S3: He asked Enterprise Minister Peter Burke to contact the owners at once.
-    zh: 他要求企業部長彼得·伯克立即聯絡業主。
-B1 P7 S1: Sinn Féin's Johnny Guirke also called on the company and the Government to act quickly to protect jobs.
-    zh: 新芬黨的強尼·吉爾克也呼籲公司和政府迅速採取行動保護工作。
+B1 P1 S1: The board of the HSE, which runs Ireland's public health service, is expected to answer questions from politicians next week.
+    zh: 負責經營愛爾蘭公共醫療服務的HSE，其董事會預計下週將回答政治人物的提問。
+B1 P1 S2: The board decided to sack the HSE's chief executive, Anne O'Connor, and many people were shocked by the news.
+    zh: 董事會決定開除HSE執行長安妮・歐康納，許多人對這個消息感到震驚。
+B1 P2 S1: Ms O'Connor only started in the job in March.
+    zh: 歐康納女士三月才開始做這份工作。
+B1 P2 S2: She had a five-year contract, but the board announced on Monday that it was ending it.
+    zh: 她有一份五年合約，但董事會在星期一宣布要終止合約。
+B1 P2 S3: All members of the board agreed with the decision.
+    zh: 董事會所有成員都同意這個決定。
+B1 P3 S1: Ms O'Connor says she did not know her job was in danger until a video call early on Saturday morning.
+    zh: 歐康納女士說，直到星期六清晨的一通視訊電話，她才知道自己的工作有危險。
+B1 P3 S2: She has said she will challenge what she calls an unlawful decision.
+    zh: 她表示將對她所稱的違法決定提出挑戰。
+B1 P3 S3: Her lawyer told the High Court that the HSE has now invited her to try mediation, where both sides talk with the help of a neutral person.
+    zh: 她的律師告訴高等法院，HSE現在已邀請她嘗試調解，也就是雙方在一位中立人士協助下進行對話。
+B1 P4 S1: The Oireachtas health committee, a group of TDs and senators, has invited the board to a meeting.
+    zh: 由國會議員和參議員組成的國會衛生委員會，已邀請董事會出席會議。
+B1 P4 S2: Its chair, Pádraig Rice, said the committee needs to find out why she was sacked and whether the Health Minister, Jennifer Carroll MacNeill, had any role.
+    zh: 委員會主席帕德里格・萊斯說，委員會需要查明她為何被開除，以及衛生部長珍妮佛・卡洛・麥克尼爾是否扮演了任何角色。
+B1 P5 S1: The Tánaiste, Simon Harris, told the Dáil that the board chair would lead a group to the committee.
+    zh: 副總理賽門・哈里斯在眾議院表示，董事會主席將率領一個小組前往委員會。
+B1 P5 S2: He said Ms O'Connor was a good and decent person, but he would wait for all the facts before making a judgment.
+    zh: 他說歐康納女士是個善良正派的人，但他會等所有事實釐清後再做判斷。
+B1 P6 S1: The Taoiseach, Micheál Martin, said her statement raised serious issues, and he wants the board to give a fuller explanation.
+    zh: 總理米霍爾・馬丁說，她的聲明提出了嚴重的問題，他希望董事會給出更完整的解釋。
+B1 P6 S2: However, he did not say that he had confidence in the board.
+    zh: 不過，他沒有表示對董事會有信心。
+B1 P6 S3: Sinn Féin claimed the minister was behind the sacking.
+    zh: 新芬黨聲稱，部長才是這次開除事件的幕後推手。
+B1 P7 S1: Any court case or mediation could be expensive, and the cost would be paid by the State.
+    zh: 任何官司或調解都可能所費不貲，而費用將由國家支付。
 
 ## level B2
-B2 P1 S1: Poundland, the budget retailer that operates as Dealz in Ireland, has entered administration, putting around 11,000 jobs and 600 stores across the UK and Ireland at risk.
-    zh: 在愛爾蘭以Dealz名義營運的平價零售商Poundland已進入破產管理，使英國和愛爾蘭約1萬1000個工作和600家門市面臨風險。
-B2 P2 S1: The chain employs 1,150 people in about 40 stores in Ireland.
-    zh: 該連鎖店在愛爾蘭約40家門市中僱用1150人。
-B2 P2 S2: Its owner, US investment firm Gordon Brothers, has appointed administrators AlixPartners to try to rescue parts of the business.
-    zh: 其業主美國投資公司Gordon Brothers已任命AlixPartners為破產管理人，設法挽救部分業務。
-B2 P3 S1: AlixPartners said the stores would continue trading as normal while it explores options to keep at least some of the company running.
-    zh: AlixPartners表示，在探討讓公司至少部分業務繼續運作的方案期間，門市將照常營業。
-B2 P3 S2: Its priority, it said, is to work with all stakeholders, including the UK government and trade unions.
-    zh: 它說，首要任務是與所有利害關係人合作，包括英國政府和工會。
-B2 P4 S1: The retailer has been struggling for some time.
-    zh: 這家零售商已苦撐一段時間。
-B2 P4 S2: Its previous owner, Polish discount group Pepco, said the business was already under pressure before a rise in UK business taxes added further strain.
-    zh: 其前任業主波蘭折扣集團Pepco表示，在英國營業稅調漲進一步加重壓力之前，這項業務就已承受壓力。
-B2 P4 S3: Gordon Brothers acquired it for a symbolic £1, along with more than 800 stores.
-    zh: Gordon Brothers以象徵性的1英鎊收購了它，連同800多家門市。
-B2 P5 S1: According to the owner, management and staff delivered £100 million in cost savings over the past 12 months.
-    zh: 據業主表示，管理層和員工在過去12個月內節省了1億英鎊的成本。
-B2 P5 S2: However, it warned that the company remained vulnerable to inflation and any fall in sales.
-    zh: 然而，它警告公司仍容易受到通膨及銷售下滑的影響。
-B2 P5 S3: Discount chains have faced high inflation and fierce competition from supermarkets in recent years.
-    zh: 近年來，折扣連鎖店面臨高通膨和來自超市的激烈競爭。
-B2 P6 S1: The news prompted concern among Irish politicians.
-    zh: 這則消息引起愛爾蘭政治人物的關切。
-B2 P6 S2: Labour's finance spokesperson, Ged Nash, said staff were heading into work weeks before Christmas unsure whether they would have a job in January.
-    zh: 工黨財政發言人格德·納許表示，員工在耶誕節前幾週上班，卻不確定一月是否還有工作。
-B2 P6 S3: He urged Enterprise Minister Peter Burke to contact Gordon Brothers and AlixPartners immediately.
-    zh: 他敦促企業部長彼得·伯克立即聯絡Gordon Brothers和AlixPartners。
-B2 P7 S1: Sinn Féin's workers' rights spokesperson, Johnny Guirke, called on the administrators, the company and the Government to engage urgently to protect jobs and stores.
-    zh: 新芬黨勞工權益發言人強尼·吉爾克呼籲破產管理人、公司和政府緊急協商，以保護工作和門市。
+B2 P1 S1: The board of the Health Service Executive (HSE) is expected to appear before an Oireachtas committee next week to explain its controversial decision to dismiss the organisation's chief executive, Anne O'Connor.
+    zh: 衛生服務執行署（HSE）董事會預計下週將出席國會委員會，說明其解僱該機構執行長安妮・歐康納這一具爭議性的決定。
+B2 P2 S1: Ms O'Connor, who took up the post in March, had been appointed on a five-year contract.
+    zh: 歐康納女士於三月就任，當時獲得五年任期的合約。
+B2 P2 S2: The board's unanimous decision to terminate it, announced on Monday, caused widespread shock across the political system and the health service.
+    zh: 董事會在星期一宣布一致決定終止合約，在政界和醫療體系中引發廣泛震驚。
+B2 P3 S1: In two public statements, Ms O'Connor has said she was unaware that her position was under threat until a Teams call at 7.30am on Saturday.
+    zh: 歐康納女士在兩份公開聲明中表示，直到星期六上午七點半的一通Teams通話，她才知道自己的職位受到威脅。
+B2 P3 S2: She has vowed to challenge what she describes as her unlawful termination, and her senior counsel told the High Court that the HSE had invited her to enter mediation.
+    zh: 她誓言要對她所稱的違法解僱提出挑戰，而她的資深大律師告訴高等法院，HSE已邀請她進行調解。
+B2 P4 S1: The chair of the Oireachtas health committee, Social Democrats TD Pádraig Rice, said members needed to establish why she had been removed and what role, if any, the Health Minister, Jennifer Carroll MacNeill, had played.
+    zh: 國會衛生委員會主席、社會民主黨議員帕德里格・萊斯表示，委員們需要查明她為何被撤職，以及衛生部長珍妮佛・卡洛・麥克尼爾在其中扮演了什麼角色（如果有的話）。
+B2 P5 S1: In the Dáil, Tánaiste Simon Harris confirmed that a delegation led by the board's chair would accept the committee's invitation.
+    zh: 副總理賽門・哈里斯在眾議院證實，由董事會主席率領的代表團將接受委員會的邀請。
+B2 P5 S2: He praised Ms O'Connor as a good and decent public servant but said he was withholding judgment until the facts were clear.
+    zh: 他稱讚歐康納女士是一位善良正派的公僕，但表示在事實釐清之前他將保留判斷。
+B2 P6 S1: Taoiseach Micheál Martin has taken a cooler line on the board.
+    zh: 總理米霍爾・馬丁對董事會的態度則較為冷淡。
+B2 P6 S2: He said Ms O'Connor's statement raised serious issues and called for a fuller account, but stopped short of expressing confidence in its members.
+    zh: 他說歐康納女士的聲明提出了嚴重問題，並要求更完整的說明，但沒有進一步表示對董事會成員有信心。
+B2 P6 S3: Sinn Féin's health spokesperson, David Cullinane, accused the minister of orchestrating the dismissal and hiding behind the board.
+    zh: 新芬黨衛生事務發言人大衛・庫利南指控部長策劃了這次解僱，並躲在董事會背後。
+B2 P7 S1: Whatever the outcome, any mediation or legal action is likely to prove costly for the HSE, with the bill ultimately falling on the taxpayer.
+    zh: 無論結果如何，任何調解或法律行動都可能讓HSE付出高昂代價，而帳單最終將落在納稅人身上。
 
 ## level C1
-C1 P1 S1: Poundland, the discount retailer that trades under the Dealz banner in Ireland, has collapsed into administration, leaving some 11,000 jobs and 600 outlets across the UK and Ireland hanging in the balance.
-    zh: 在愛爾蘭以Dealz品牌經營的折扣零售商Poundland已倒閉並進入破產管理，使英國和愛爾蘭約1萬1000個工作和600家門市前途未卜。
-C1 P2 S1: In Ireland, the chain operates roughly 40 stores and employs 1,150 staff.
-    zh: 在愛爾蘭，該連鎖店經營約40家門市，僱用1150名員工。
-C1 P2 S2: Its owner, the American investment house Gordon Brothers, has brought in AlixPartners as administrators in a bid to salvage viable parts of the business.
-    zh: 其業主美國投資公司Gordon Brothers已請來AlixPartners擔任破產管理人，力圖搶救仍可存活的業務。
-C1 P3 S1: The administrators stressed that the shops would carry on trading as usual while they weigh up ways of keeping at least a portion of the operation afloat.
-    zh: 破產管理人強調，在他們權衡如何讓至少一部分業務撐下去的同時，商店將照常營業。
-C1 P3 S2: They pledged to work closely with stakeholders, among them the UK government and trade unions.
-    zh: 他們承諾與包括英國政府和工會在內的利害關係人密切合作。
-C1 P4 S1: The retailer's troubles are far from new.
-    zh: 這家零售商的困境絕非新鮮事。
-C1 P4 S2: Its former parent, the Polish discounter Pepco Group, had acknowledged that the business was already floundering before an increase in UK business taxes compounded its difficulties.
-    zh: 其前母公司波蘭折扣商Pepco集團曾承認，在英國營業稅調漲令困難雪上加霜之前，業務就已陷入掙扎。
-C1 P4 S3: Gordon Brothers snapped it up for a nominal £1, together with a portfolio of more than 800 stores.
-    zh: Gordon Brothers以象徵性的1英鎊將其買下，連同800多家門市的資產組合。
-C1 P5 S1: The owner maintained that management and employees had wrung £100 million in savings out of the business over the past year, yet conceded that it remained exposed to inflation and to any erosion of sales or margins.
-    zh: 業主堅稱，管理層和員工在過去一年設法從營運中省下了1億英鎊，但也承認公司仍易受通膨以及銷售或利潤率下滑的衝擊。
-C1 P5 S2: Discounters have been squeezed by persistent inflation and cut-throat competition from supermarkets.
-    zh: 折扣商一直受到持續通膨和超市殘酷競爭的雙重擠壓。
-C1 P6 S1: The development has alarmed Irish politicians.
-    zh: 這一事態令愛爾蘭政治人物深感憂慮。
-C1 P6 S2: Labour's finance spokesperson, Ged Nash, lamented that staff were turning up for work mere weeks before Christmas with no certainty of a job in January, and urged Enterprise Minister Peter Burke to contact the owners without delay.
-    zh: 工黨財政發言人格德·納許感嘆，員工在耶誕節前短短幾週上班，卻無法確定一月是否還有工作，並敦促企業部長彼得·伯克立刻聯絡業主。
-C1 P7 S1: Sinn Féin's Johnny Guirke likewise demanded urgent engagement between the administrators, the company and the Government to safeguard jobs.
-    zh: 新芬黨的強尼·吉爾克同樣要求破產管理人、公司與政府緊急協商，以保障工作。
+C1 P1 S1: The board of the Health Service Executive is poised to appear before an Oireachtas committee next week, where it will face intense scrutiny over its abrupt dismissal of the organisation's chief executive, Anne O'Connor.
+    zh: 衛生服務執行署董事會準備於下週出席國會委員會，屆時將因突然解僱該機構執行長安妮・歐康納而面臨嚴格審查。
+C1 P2 S1: Ms O'Connor had held the post only since March, having been appointed on a five-year contract.
+    zh: 歐康納女士自三月起才擔任此職，當時獲任命簽下五年合約。
+C1 P2 S2: The board's unanimous decision to terminate that contract, made public on Monday, sent shockwaves through both the political establishment and the health service itself.
+    zh: 董事會在星期一公布一致決定終止該合約，在政治建制圈和醫療體系內部都引發了震撼。
+C1 P3 S1: In two strongly worded statements, Ms O'Connor has insisted that she had no inkling her position was in jeopardy until a Teams call at 7.30am on Saturday.
+    zh: 歐康納女士在兩份措辭強硬的聲明中堅稱，直到星期六上午七點半的一通Teams通話之前，她完全不知道自己的職位岌岌可危。
+C1 P3 S2: She has pledged to contest what she regards as an unlawful termination, and her senior counsel informed the High Court that the HSE had since proposed mediation.
+    zh: 她承諾要對她所認定的違法解僱提出抗辯，而她的資深大律師告知高等法院，HSE此後已提議進行調解。
+C1 P4 S1: The committee's chair, Social Democrats TD Pádraig Rice, said members were determined to ascertain why she had been ousted and what part, if any, the Health Minister, Jennifer Carroll MacNeill, had played in the affair.
+    zh: 委員會主席、社會民主黨議員帕德里格・萊斯說，委員們決心查明她為何被撤換，以及衛生部長珍妮佛・卡洛・麥克尼爾在這起事件中扮演了什麼角色（如果有的話）。
+C1 P5 S1: Tánaiste Simon Harris told the Dáil that a delegation headed by the board's chair would take up the invitation.
+    zh: 副總理賽門・哈里斯告訴眾議院，由董事會主席率領的代表團將接受邀請。
+C1 P5 S2: While lauding Ms O'Connor as a good and decent public servant, he said he was reserving judgment until the full facts emerged.
+    zh: 他雖讚揚歐康納女士是善良正派的公僕，但表示在全部事實浮現前將保留判斷。
+C1 P6 S1: The Taoiseach, Micheál Martin, struck a noticeably more guarded tone.
+    zh: 總理米霍爾・馬丁的語氣則明顯更為謹慎。
+C1 P6 S2: Acknowledging that Ms O'Connor's account raised grave issues, he demanded a fuller explanation from the board, yet pointedly refrained from voicing confidence in it.
+    zh: 他承認歐康納女士的說法引發了嚴重問題，要求董事會提出更完整的解釋，卻刻意避免表態對董事會有信心。
+C1 P6 S3: Sinn Féin went further, alleging that the minister had orchestrated the sacking while sheltering behind the board.
+    zh: 新芬黨則更進一步，指稱部長策劃了這次解僱，同時躲在董事會背後。
+C1 P7 S1: Regardless of how the dispute is resolved, mediation or litigation threatens to be a costly undertaking, with the bill ultimately landing on the Exchequer.
+    zh: 無論這場爭議如何解決，調解或訴訟都可能是一項代價高昂的事，而帳單最終將落到國庫頭上。
 
 ## level IELTS
-IELTS P1 S1: Poundland, the discount retailer which operates as Dealz in Ireland, has entered administration, thereby jeopardising approximately 11,000 jobs and 600 stores across the United Kingdom and Ireland.
-    zh: 在愛爾蘭以Dealz名義經營的折扣零售商Poundland已進入破產管理，從而危及英國和愛爾蘭約1萬1000個工作和600家門市。
-IELTS P2 S1: The Irish arm of the business comprises around 40 stores and 1,150 employees.
-    zh: 該公司的愛爾蘭分支包括約40家門市和1150名員工。
-IELTS P2 S2: Its owner, the American investment firm Gordon Brothers, has appointed AlixPartners as administrators with a view to preserving those elements of the company that remain viable.
-    zh: 其業主美國投資公司Gordon Brothers已任命AlixPartners為破產管理人，以期保留公司中仍可存續的部分。
-IELTS P3 S1: The administrators have indicated that trading will continue as normal while alternative options are evaluated.
-    zh: 破產管理人表示，在評估其他方案期間將照常營業。
-IELTS P3 S2: They have further stated that their primary objective is to collaborate with all relevant stakeholders, including the UK government and trade unions.
-    zh: 他們進一步表示，其首要目標是與所有相關利害關係人合作，包括英國政府和工會。
-IELTS P4 S1: The retailer's difficulties are by no means unprecedented.
-    zh: 這家零售商的困難絕非前所未見。
-IELTS P4 S2: Its previous owner, Pepco Group, had acknowledged that the business was already in a precarious position prior to an increase in UK business taxation, which consequently intensified the pressure.
-    zh: 其前任業主Pepco集團曾承認，在英國營業稅提高之前，業務就已處於岌岌可危的境地，而加稅因此加劇了壓力。
-IELTS P4 S3: Gordon Brothers subsequently acquired the company for a nominal sum of £1.
-    zh: Gordon Brothers隨後以1英鎊的象徵性金額收購了該公司。
-IELTS P5 S1: According to the owner, cost reductions amounting to £100 million were achieved over the preceding twelve months.
-    zh: 據業主表示，過去十二個月內共削減了1億英鎊的成本。
-IELTS P5 S2: Nevertheless, the company remains highly susceptible to inflation and to any substantial decline in sales or profit margins.
-    zh: 儘管如此，公司仍極易受到通膨以及銷售或利潤率大幅下滑的影響。
-IELTS P5 S3: Indeed, discount retailers have been adversely affected by sustained inflation and intense competition from supermarkets.
-    zh: 事實上，折扣零售商一直受到持續通膨和超市激烈競爭的不利影響。
-IELTS P6 S1: The announcement has generated considerable concern among Irish politicians.
-    zh: 這項宣布在愛爾蘭政界引發相當大的關切。
-IELTS P6 S2: Ged Nash, the Labour Party's finance spokesperson, emphasised that employees face profound uncertainty regarding their employment prospects in January, and called upon Enterprise Minister Peter Burke to contact the owners immediately.
-    zh: 工黨財政發言人格德·納許強調，員工對一月的就業前景深感不確定，並呼籲企業部長彼得·伯克立即聯絡業主。
-IELTS P7 S1: Similarly, Sinn Féin's Johnny Guirke urged all parties to engage without delay in order to safeguard jobs.
-    zh: 同樣地，新芬黨的強尼·吉爾克敦促各方毫不拖延地進行協商，以保障工作。
+IELTS P1 S1: The board of the Health Service Executive is scheduled to appear before an Oireachtas committee next week, where it will be required to justify its contentious decision to dismiss the organisation's chief executive, Anne O'Connor.
+    zh: 衛生服務執行署董事會預定於下週出席國會委員會，屆時必須為其解僱該機構執行長安妮・歐康納這一具爭議的決定提出正當理由。
+IELTS P2 S1: Ms O'Connor had occupied the position only since March, having been appointed on a five-year contract.
+    zh: 歐康納女士自三月起才擔任此職，當時獲任命簽下五年合約。
+IELTS P2 S2: The board's unanimous decision to terminate this arrangement, announced on Monday, generated considerable shock within both the political sphere and the health service.
+    zh: 董事會在星期一宣布一致決定終止此項安排，在政治領域和醫療體系內都引發了相當大的震驚。
+IELTS P3 S1: According to two statements she has issued, Ms O'Connor was entirely unaware that her role was at risk until a Teams call at 7.30am on Saturday.
+    zh: 根據她發表的兩份聲明，歐康納女士直到星期六上午七點半的一通Teams通話前，完全不知道自己的職位面臨風險。
+IELTS P3 S2: She has indicated her intention to challenge what she characterises as an unlawful termination, and her senior counsel informed the High Court that the HSE had subsequently offered mediation.
+    zh: 她已表明有意對她所定性的違法解僱提出挑戰，而她的資深大律師告知高等法院，HSE隨後提出了調解。
+IELTS P4 S1: The committee's chair, Social Democrats TD Pádraig Rice, stated that members were obliged to determine the rationale for her removal and the extent, if any, of the Health Minister's involvement.
+    zh: 委員會主席、社會民主黨議員帕德里格・萊斯表示，委員們有責任釐清將她撤職的理由，以及衛生部長介入的程度（如果有的話）。
+IELTS P5 S1: In the Dáil, Tánaiste Simon Harris confirmed that a delegation led by the board's chair would accept the invitation.
+    zh: 副總理賽門・哈里斯在眾議院證實，由董事會主席率領的代表團將接受邀請。
+IELTS P5 S2: Although he commended Ms O'Connor as a good and decent public servant, he emphasised that any judgment would be contingent upon a full establishment of the facts.
+    zh: 雖然他讚揚歐康納女士是善良正派的公僕，但他強調任何判斷都取決於事實能否完整確立。
+IELTS P6 S1: The Taoiseach, Micheál Martin, adopted a considerably more cautious position.
+    zh: 總理米霍爾・馬丁則採取了明顯更為審慎的立場。
+IELTS P6 S2: While conceding that Ms O'Connor's statement raised serious issues, he requested a more comprehensive account from the board and notably declined to express confidence in its members.
+    zh: 他雖承認歐康納女士的聲明提出了嚴重問題，但要求董事會提出更全面的說明，並且明顯拒絕對其成員表示信心。
+IELTS P6 S3: Sinn Féin, by contrast, alleged that the minister had orchestrated the dismissal.
+    zh: 相較之下，新芬黨指稱是部長策劃了這次解僱。
+IELTS P7 S1: Irrespective of the eventual outcome, mediation or litigation is likely to entail substantial costs for the HSE, which would ultimately be borne by the Exchequer.
+    zh: 無論最終結果如何，調解或訴訟都可能為HSE帶來龐大的費用，而這些費用最終將由國庫承擔。
 
-## reading questions (file reason/2026-11-26.json)
+## reading questions (file reason/2026-11-27.json)
 Q1 [main]: Which statement best captures the main point of the passage?
-   A. Poundland, which trades as Dealz in Ireland, has gone into administration, putting about 11,000 jobs at risk while administrators try to save the viable parts.  <- answer
-   B. Gordon Brothers has closed all 40 Dealz stores in Ireland with immediate effect.
-   C. The UK government has agreed to buy Poundland to protect its workers.
-   D. Dealz has cut £100 million in costs and is now growing quickly.
-   explanation: The passage opens by saying Poundland, "which operates as Dealz in Ireland, has entered administration, thereby jeopardising approximately 11,000 jobs", and adds that administrators aim at "preserving those elements of the company that remain viable". Stores are not closed (B) — "trading will continue as normal"; no government purchase is mentioned (C); and despite the cuts the firm "remains highly susceptible" (D).
-Q2 [infer]: What can be inferred from the fact that Gordon Brothers bought the company for £1?
-   A. The company was thought to be very valuable at the time.
-   B. The UK tax increase had made the company profitable.
-   C. The business was seen as being in serious financial trouble when it changed hands.  <- answer
-   D. Pepco Group wanted to keep a share of the business.
-   explanation: The passage says the previous owner admitted the business "was already in a precarious position" and that pressure was "consequently intensified" before Gordon Brothers "acquired the company for a nominal sum of £1" — a price that signals a struggling firm, not a valuable (A) or profitable (B) one. Nothing suggests Pepco kept a share (D).
-Q3 [tone]: How would you describe the tone of the Irish politicians quoted in the final paragraphs?
-   A. Relaxed and confident that the jobs are safe.
-   B. Critical of the workers for not saving the company.
-   C. Indifferent, since only UK jobs are affected.
-   D. Concerned and urgent, pressing for quick action to protect jobs.  <- answer
-   explanation: The announcement "generated considerable concern"; Ged Nash spoke of "profound uncertainty" and asked the minister to act "immediately", and Johnny Guirke urged parties to engage "without delay in order to safeguard jobs". This is urgent concern, not relaxation (A), blame of workers (B) or indifference (C) — Irish jobs are clearly at stake.
+   A. The HSE board will appear before an Oireachtas committee to explain its disputed decision to dismiss its chief executive, a move that has drawn political criticism.  <- answer
+   B. Anne O'Connor has been reinstated as HSE chief executive after a High Court ruling.
+   C. The Health Minister has admitted ordering the dismissal of the HSE chief executive.
+   D. The HSE board has resigned following criticism from the Taoiseach.
+   explanation: The passage opens by saying the board "will be required to justify its contentious decision to dismiss the organisation's chief executive" and then sets out the political reaction. There is no reinstatement (B); Sinn Féin only "alleged" the minister was involved (C); and the board is accepting an invitation, not resigning (D).
+Q2 [infer]: What can be inferred from the Taoiseach's refusal to express confidence in the board?
+   A. He has already decided to dismiss the board's members.
+   B. He believes Ms O'Connor's dismissal was entirely justified.
+   C. He is keeping his distance from the board until it gives a fuller explanation.  <- answer
+   D. He agrees with Sinn Féin that the minister orchestrated the dismissal.
+   explanation: Martin "requested a more comprehensive account from the board and notably declined to express confidence in its members", suggesting he is withholding support pending an explanation. Nothing says he will sack the board (A) or that he backs the decision (B), and the Sinn Féin claim is presented "by contrast" (D).
+Q3 [purpose]: Why does the writer mention that any costs "would ultimately be borne by the Exchequer"?
+   A. To argue that Ms O'Connor should withdraw her legal challenge.
+   B. To point out that the dispute could end up costing public money whatever happens.  <- answer
+   C. To show that the HSE has already paid compensation to Ms O'Connor.
+   D. To suggest that the High Court will order the Government to pay.
+   explanation: The final paragraph says that "irrespective of the eventual outcome, mediation or litigation is likely to entail substantial costs" that fall on the Exchequer, i.e. public funds. The writer does not urge her to drop the case (A), report a payment (C), or predict a court order (D).
 
 
-# 2026-11-26-2  (Ireland national)
-date: 2026-11-26 | rank: 2 | topic: 社會 | main level: B2
-file: articles/2026-11-26-2.json
+# 2026-11-27-2  (Ireland national)
+date: 2026-11-27 | rank: 2 | topic: 科技 | main level: B2
+file: articles/2026-11-27-2.json
 
 ## title
-Women Almost Twice as Likely as Men to Feel Unsafe Walking Locally, CSO Data Shows
+Old Cave Bones Suggest People Reached Ireland 1,000 Years Earlier
 
 ## summaries
-- summaryEn: More women than men in Ireland feel unsafe walking near their homes.
-- summaryZh: 統計顯示，愛爾蘭女性在住家附近步行時感到不安全的比例幾乎是男性兩倍。
-- summaryJa: 統計によると、アイルランドの女性は近所を歩く際に不安を感じる割合が男性のほぼ2倍だ。
-- summaryKo: 통계에 따르면 아일랜드 여성은 동네를 걸을 때 불안을 느끼는 비율이 남성의 거의 두 배다.
-- summaryEs: Las mujeres en Irlanda casi duplican a los hombres en sentirse inseguras al caminar por su barrio.
-- summaryHi: आँकड़ों के अनुसार आयरलैंड में महिलाओं के अपने इलाके में चलते समय असुरक्षित महसूस करने की संभावना पुरुषों की तुलना में लगभग दोगुनी है।
+- summaryEn: Old bones show people may have lived in Ireland much earlier than we thought.
+- summaryZh: 沃特福德洞穴獸骨顯示人類可能早一千年就來到愛爾蘭。
+- summaryJa: ウォーターフォードの洞窟の骨から、人類が千年早くアイルランドに来ていた可能性が示された。
+- summaryKo: 워터퍼드 동굴의 뼈는 인류가 천 년 더 일찍 아일랜드에 왔을 가능성을 보여 준다.
+- summaryEs: Huesos de una cueva de Waterford sugieren que los humanos llegaron a Irlanda mil años antes.
+- summaryHi: वॉटरफ़ोर्ड की गुफा की हड्डियाँ बताती हैं कि इंसान शायद 1,000 साल पहले ही आयरलैंड पहुँच गए थे।
 
 ## sources
-- TheJournal.ie: https://www.thejournal.ie/women-safety-statistics-ireland-7237730-Nov2026/
+- RTÉ News: https://www.rte.ie/news/2026/1126/1600681-animal-bones-waterford/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: New numbers from the Central Statistics Office look at how safe people feel.
-    zh: 中央統計局的新數據調查了人們感到多安全。
-A2 P1 S2: The office is called the CSO.
-    zh: 這個機構叫做CSO。
-A2 P2 S1: In the last year, 20% of women felt unsafe walking in their area.
-    zh: 在過去一年，20%的女性在住家附近走路時感到不安全。
-A2 P2 S2: Only 11% of men felt the same.
-    zh: 只有11%的男性有同樣感受。
-A2 P3 S1: The gap is biggest for young people.
-    zh: 年輕人之間的差距最大。
-A2 P3 S2: Among people aged 18 to 29, 65% of men felt very safe.
-    zh: 在18至29歲的人當中，65%的男性感到非常安全。
-A2 P3 S3: But only 35% of women felt very safe.
-    zh: 但只有35%的女性感到非常安全。
-A2 P4 S1: Women in Dublin felt the least safe.
-    zh: 都柏林的女性感到最不安全。
-A2 P4 S2: Still, most people, 85%, said they feel safe in their area.
-    zh: 不過，大多數人（85%）說他們在自己的地區感到安全。
-A2 P5 S1: Some people also said crime changed their life.
-    zh: 也有人說犯罪改變了他們的生活。
-A2 P5 S2: This was true for 18% of women and 14% of men.
-    zh: 18%的女性和14%的男性是這樣說的。
+A2 P1 S1: Scientists studied old animal bones from a cave in Co Waterford.
+    zh: 科學家研究了沃特福德郡一個洞穴裡的古老動物骨頭。
+A2 P1 S2: Workers dug up the bones in the 1800s.
+    zh: 工人在1800年代挖出了這些骨頭。
+A2 P1 S3: The bones may show that people lived in Ireland very early.
+    zh: 這些骨頭可能顯示人類很早就住在愛爾蘭。
+A2 P2 S1: The bones come from a giant deer.
+    zh: 這些骨頭來自一種巨型鹿。
+A2 P2 S2: This animal does not live today.
+    zh: 這種動物今天已經不存在了。
+A2 P2 S3: The bones have cuts.
+    zh: 骨頭上有切痕。
+A2 P2 S4: People may have made the cuts with stone tools.
+    zh: 可能是人用石頭工具切出來的。
+A2 P3 S1: Tests show one bone is about 13,500 years old.
+    zh: 檢測顯示其中一根骨頭約有一萬三千五百年歷史。
+A2 P3 S2: Before, the oldest sign of people in Ireland was about 12,700 years old.
+    zh: 之前，愛爾蘭最古老的人類跡象約有一萬兩千七百年。
+A2 P3 S3: So people may have come 1,000 years earlier.
+    zh: 所以人類可能早了一千年來到這裡。
+A2 P4 S1: But the scientists are not sure yet.
+    zh: 但是科學家還不確定。
+A2 P4 S2: They need to find more tools in the cave.
+    zh: 他們需要在洞穴裡找到更多工具。
+A2 P4 S3: They will dig there again.
+    zh: 他們會再去那裡挖掘。
+A2 P4 S4: The work is exciting for Irish history.
+    zh: 這項研究對愛爾蘭歷史來說令人興奮。
 
 ## level B1
-B1 P1 S1: Women in Ireland are almost twice as likely as men to feel unsafe when they walk in their local area, according to figures from the Central Statistics Office (CSO).
-    zh: 根據中央統計局（CSO）的數據，愛爾蘭女性在住家附近走路時感到不安全的可能性幾乎是男性的兩倍。
-B1 P2 S1: The numbers, which The Journal obtained from the CSO, come from a study of crime and victims carried out between 2019 and 2025.
-    zh: The Journal從CSO取得的這些數字，來自2019年至2025年間進行的一項犯罪與受害者研究。
-B1 P2 S2: They show that 20% of women felt unsafe walking in their area in the past year, compared with 11% of men.
-    zh: 數據顯示，過去一年有20%的女性在住家附近走路時感到不安全，男性則為11%。
-B1 P2 S3: In every age group, women were less likely than men to say they felt very safe.
-    zh: 在每個年齡層中，女性說自己感到非常安全的比例都低於男性。
-B1 P3 S1: The biggest difference was among young adults.
-    zh: 差異最大的是年輕成人。
-B1 P3 S2: Of people aged 18 to 29, 65% of men said they felt very safe, but only 35% of women said the same.
-    zh: 在18至29歲的人中，65%的男性說他們感到非常安全，但只有35%的女性這麼說。
-B1 P4 S1: There were also regional differences.
-    zh: 各地區之間也有差異。
-B1 P4 S2: Women felt least safe in Dublin, at 24%, and in the Mideast, at 23%.
-    zh: 女性在都柏林（24%）和中東部地區（23%）感到最不安全。
-B1 P4 S3: For men, Dublin also had the highest share who felt unsafe, at 15%.
-    zh: 對男性而言，都柏林感到不安全的比例也是最高的，為15%。
-B1 P5 S1: Crime also affects daily life.
-    zh: 犯罪也影響日常生活。
-B1 P5 S2: About 18% of women and 14% of men said crime had affected their lives in the past year.
-    zh: 約18%的女性和14%的男性說，過去一年犯罪影響了他們的生活。
-B1 P5 S3: However, most people, 85% in total, said they felt very or fairly safe walking near their homes.
-    zh: 不過，大多數人（共85%）說他們在住家附近走路時感到非常或相當安全。
+B1 P1 S1: A new study suggests that people may have lived in Ireland almost 1,000 years earlier than experts thought.
+    zh: 一項新研究顯示，人類可能比專家原先認為的早了將近一千年就住在愛爾蘭。
+B1 P1 S2: The research looked at animal bones from Ballynamintra Cave in Co Waterford.
+    zh: 這項研究檢視了沃特福德郡巴利納明特拉洞穴的動物骨頭。
+B1 P2 S1: The bones were dug up between 1878 and 1882 and are kept by the National Museum of Ireland.
+    zh: 這些骨頭是在1878年到1882年間挖出的，由愛爾蘭國家博物館保存。
+B1 P2 S2: The researchers studied them again and also dug in the cave themselves.
+    zh: 研究人員重新研究這些骨頭，也親自在洞穴裡挖掘。
+B1 P2 S3: They found two leg bones from a giant deer, an animal that no longer exists.
+    zh: 他們找到兩根來自巨型鹿的腿骨，這種動物已經不存在了。
+B1 P2 S4: The bones have marks that look like cuts from heavy stone tools.
+    zh: 骨頭上的痕跡看起來像是沉重石器造成的切痕。
+B1 P2 S5: One bone also seems to have been broken open to get the soft marrow inside.
+    zh: 其中一根骨頭似乎還被敲開，以取出裡面柔軟的骨髓。
+B1 P3 S1: Scientists at the University of Oxford tested one bone and found that it is between 13,321 and 13,573 years old.
+    zh: 牛津大學的科學家檢測了一根骨頭，發現它有一萬三千三百二十一年到一萬三千五百七十三年的歷史。
+B1 P3 S2: Until now, the oldest proof of people in Ireland was a bear bone from a cave in Co Clare, which is about 12,700 years old.
+    zh: 在此之前，愛爾蘭最古老的人類證據是克萊爾郡一個洞穴裡的熊骨，約有一萬兩千七百年歷史。
+B1 P4 S1: However, the team says the marks cannot be proved to be human-made without more tools or objects.
+    zh: 不過，研究團隊表示，如果沒有更多工具或物品，就無法證明這些痕跡是人為造成的。
+B1 P4 S2: Weather has removed tiny details on the bones.
+    zh: 天氣已經抹去了骨頭上的細微特徵。
+B1 P4 S3: Lead researcher Richard Jennings said that if the date is confirmed, it would push back the arrival of people in Ireland.
+    zh: 首席研究員理查・詹寧斯說，如果年代獲得證實，人類抵達愛爾蘭的時間將被往前推。
+B1 P4 S4: More digging is planned.
+    zh: 研究人員計畫進行更多挖掘。
 
 ## level B2
-B2 P1 S1: Women in Ireland are almost twice as likely as men to feel unsafe walking in their local area, according to Central Statistics Office (CSO) figures obtained by The Journal.
-    zh: 根據The Journal取得的中央統計局（CSO）數據，愛爾蘭女性在住家附近步行時感到不安全的可能性幾乎是男性的兩倍。
-B2 P2 S1: The data, drawn from the CSO's crime and victimisation study covering 2019 to 2025, shows that 20% of women felt unsafe walking in their neighbourhood over the previous 12 months, compared with 11% of men.
-    zh: 這些數據取自CSO涵蓋2019年至2025年的犯罪與受害研究，顯示過去12個月有20%的女性在住家附近步行時感到不安全，男性則為11%。
-B2 P2 S2: Across all adult age groups, women were less likely than men to describe themselves as feeling very safe.
-    zh: 在所有成人年齡層中，女性形容自己感到非常安全的比例都低於男性。
-B2 P3 S1: The gender gap was widest among 18 to 29-year-olds: 65% of young men reported feeling very safe, against just 35% of young women.
-    zh: 性別差距在18至29歲族群最大：65%的年輕男性表示感到非常安全，年輕女性則只有35%。
-B2 P4 S1: There were also regional differences.
-    zh: 各地區也有差異。
-B2 P4 S2: Women felt least safe in Dublin (24%) and the Mideast (23%), while Dublin also recorded the highest share of men feeling unsafe, at 15%.
-    zh: 女性在都柏林（24%）和中東部（23%）感到最不安全，而都柏林也是男性感到不安全比例最高的地方，為15%。
-B2 P5 S1: Beyond perceptions of safety, 18% of women and 14% of men said crime had affected their lives in the past year.
-    zh: 除了安全感之外，18%的女性和14%的男性表示過去一年犯罪影響了他們的生活。
-B2 P5 S2: Overall, however, 85% of people said they felt very or fairly safe walking locally.
-    zh: 不過整體而言，85%的人表示在住家附近步行時感到非常或相當安全。
+B2 P1 S1: Hunter-gatherers may have been living in southern Ireland nearly 1,000 years earlier than previously confirmed, according to a study published in the Proceedings of the Royal Irish Academy.
+    zh: 根據刊登於《愛爾蘭皇家學院學報》的一項研究，狩獵採集者可能比先前證實的時間早了將近一千年就生活在愛爾蘭南部。
+B2 P2 S1: Researchers re-examined animal bones excavated from Ballynamintra Cave in Co Waterford between 1878 and 1882, which are held by the National Museum of Ireland.
+    zh: 研究人員重新檢視了1878年至1882年間從沃特福德郡巴利納明特拉洞穴挖出、由愛爾蘭國家博物館收藏的動物骨頭。
+B2 P2 S2: They also analysed material from new excavations at the site.
+    zh: 他們也分析了該遺址新發掘出的材料。
+B2 P2 S3: Two leg bones from the extinct giant deer show marks consistent with butchery, including a clean chopping surface made by a heavy stone tool and fractures suggesting the bone was split for its marrow.
+    zh: 兩根已滅絕的大角鹿腿骨上有符合宰割的痕跡，包括由沉重石器劈出的平整切面，以及顯示骨頭曾被劈開取骨髓的裂痕。
+B2 P3 S1: Radiocarbon dating at the University of Oxford placed one of the bones at between 13,321 and 13,573 years old.
+    zh: 牛津大學的放射性碳定年將其中一根骨頭的年代判定在一萬三千三百二十一年到一萬三千五百七十三年之間。
+B2 P3 S2: Until now, the earliest evidence of humans in Ireland was a butchered brown bear bone from a cave in Co Clare, dated to around 12,700 years ago.
+    zh: 在此之前，愛爾蘭最早的人類證據是克萊爾郡一個洞穴中一根被宰割過的棕熊骨頭，年代約為一萬兩千七百年前。
+B2 P4 S1: The team stressed that the marks cannot be proven to be human-made without further artefacts, as weathering has erased the tiny traces that tools usually leave.
+    zh: 研究團隊強調，若沒有更多人工製品，就無法證明這些痕跡是人為的，因為風化已抹去工具通常會留下的細微痕跡。
+B2 P4 S2: Even so, the timing fits with hunter-gatherer activity across Britain and north-west Europe during a warm period near the end of the Ice Age.
+    zh: 即便如此，這個時間點與冰河時期末期一段溫暖期間，英國及歐洲西北部的狩獵採集者活動相吻合。
+B2 P5 S1: Study lead Richard Jennings said confirmation would significantly push back the arrival of people in Ireland.
+    zh: 研究負責人理查・詹寧斯說，一旦證實，人類抵達愛爾蘭的時間將大幅往前推。
+B2 P5 S2: Further excavations are planned.
+    zh: 研究人員計畫進行更多發掘。
 
 ## level C1
-C1 P1 S1: Women in Ireland are close to twice as likely as men to feel unsafe walking in their own neighbourhoods, according to Central Statistics Office (CSO) data obtained by The Journal.
-    zh: 根據The Journal取得的中央統計局（CSO）數據，愛爾蘭女性在自家社區步行時感到不安全的可能性接近男性的兩倍。
-C1 P2 S1: The figures, gleaned from the CSO's crime and victimisation survey spanning 2019 to 2025, reveal that one in five women felt unsafe on local streets over the preceding year, as against 11% of men.
-    zh: 這些數字搜集自CSO涵蓋2019年至2025年的犯罪與受害調查，顯示過去一年有五分之一的女性在當地街道上感到不安全，男性則為11%。
-C1 P2 S2: In every adult age bracket, women were less inclined than men to report feeling very safe.
-    zh: 在每個成人年齡層中，女性都比男性更不傾向表示自己感到非常安全。
-C1 P3 S1: The disparity was most pronounced among 18 to 29-year-olds, with 65% of young men professing to feel very safe, compared with a mere 35% of their female peers.
-    zh: 這種差距在18至29歲族群中最為明顯：65%的年輕男性聲稱感到非常安全，而同齡女性僅有35%。
-C1 P4 S1: Geography also played a part.
-    zh: 地理因素也有影響。
-C1 P4 S2: Women's unease was most acute in Dublin (24%) and the Mideast (23%), and the capital likewise topped the table for men who felt unsafe, at 15%.
-    zh: 女性的不安在都柏林（24%）和中東部（23%）最為強烈，而首都同樣在男性感到不安全的比例上居首，為15%。
-C1 P5 S1: Crime left its mark on daily life too, with 18% of women and 14% of men saying it had affected them.
-    zh: 犯罪也在日常生活中留下了影響，18%的女性和14%的男性表示曾受其影響。
-C1 P5 S2: Even so, the overwhelming majority, 85%, felt very or fairly safe on their local streets.
-    zh: 即便如此，絕大多數人（85%）在當地街道上仍感到非常或相當安全。
+C1 P1 S1: Hunter-gatherers may have roamed southern Ireland almost a millennium earlier than previously established, a study published in the Proceedings of the Royal Irish Academy has suggested.
+    zh: 一項刊登於《愛爾蘭皇家學院學報》的研究指出，狩獵採集者可能比先前確認的時間早了將近一千年就在愛爾蘭南部活動。
+C1 P2 S1: The researchers revisited animal remains unearthed at Ballynamintra Cave in Co Waterford in the late nineteenth century, now housed in the National Museum of Ireland, and supplemented them with finds from fresh excavations.
+    zh: 研究人員重新檢視了十九世紀末在沃特福德郡巴利納明特拉洞穴出土、現收藏於愛爾蘭國家博物館的動物遺骸，並以新發掘的出土物加以補充。
+C1 P2 S2: Two limb bones of the extinct giant deer bear marks consistent with butchery of fresh carcasses: one displays a uniform chopping plane left by a heavy stone implement, while the other exhibits fractures indicative of being split open for marrow.
+    zh: 兩根已滅絕大角鹿的肢骨帶有符合宰割新鮮屍體的痕跡：其中一根呈現沉重石器留下的均勻劈砍平面，另一根則有顯示曾被劈開取髓的裂痕。
+C1 P3 S1: Radiocarbon analysis at the University of Oxford dated one bone to between 13,321 and 13,573 years ago.
+    zh: 牛津大學的放射性碳分析將一根骨頭的年代測定為一萬三千三百二十一年至一萬三千五百七十三年前。
+C1 P3 S2: Hitherto, the earliest evidence of human presence was a butchered brown bear bone from a cave in Co Clare, dating to roughly 12,700 years ago.
+    zh: 迄今為止，最早的人類存在證據是克萊爾郡一個洞穴中一根被宰割的棕熊骨頭，年代約為一萬兩千七百年前。
+C1 P4 S1: The authors concede that the marks cannot be conclusively attributed to humans without corroborating artefacts, since weathering has obliterated the microscopic striations that tools typically leave.
+    zh: 作者們承認，若沒有佐證的人工製品，就無法確定這些痕跡出自人類之手，因為風化已抹除了工具通常會留下的微小條痕。
+C1 P4 S2: Nonetheless, the dates dovetail with hunter-gatherer activity across Britain and north-west Europe during a mild interlude late in the Ice Age.
+    zh: 儘管如此，這些年代與冰河時期晚期一段溫和間歇期中，英國及歐洲西北部的狩獵採集者活動相契合。
+C1 P5 S1: Lead author Richard Jennings said that verifying human activity at this date would significantly push back the arrival of people in Ireland.
+    zh: 主要作者理查・詹寧斯說，若能證實這個年代有人類活動，人類抵達愛爾蘭的時間將大幅提前。
+C1 P5 S2: Further digs are scheduled.
+    zh: 後續發掘已排定進行。
 
 ## level IELTS
-IELTS P1 S1: Women in Ireland are almost twice as likely as men to feel unsafe walking in their local area, according to Central Statistics Office (CSO) data obtained by The Journal.
-    zh: 根據The Journal取得的中央統計局（CSO）數據，愛爾蘭女性在所在地區步行時感到不安全的可能性幾乎是男性的兩倍。
-IELTS P2 S1: The statistics, derived from the CSO's crime and victimisation survey for the period 2019 to 2025, indicate that 20% of women felt unsafe walking in their locality during the preceding twelve months, in comparison with 11% of men.
-    zh: 這些統計數據源自CSO 2019年至2025年期間的犯罪與受害調查，顯示前十二個月有20%的女性在所在地區步行時感到不安全，相較之下男性為11%。
-IELTS P2 S2: Furthermore, women in every adult age cohort were less likely than men to report feeling very safe.
-    zh: 此外，在每個成人年齡層中，女性表示感到非常安全的比例都低於男性。
-IELTS P3 S1: This gender disparity was particularly pronounced among those aged 18 to 29: whereas 65% of young men reported feeling very safe, the corresponding figure for young women was merely 35%.
-    zh: 這種性別差距在18至29歲族群中尤其明顯：65%的年輕男性表示感到非常安全，而年輕女性的相應數字僅為35%。
-IELTS P4 S1: Considerable regional variation was also evident.
-    zh: 地區之間也明顯存在相當大的差異。
-IELTS P4 S2: Women's perceived insecurity was highest in Dublin (24%) and the Mideast (23%), while the capital similarly recorded the highest proportion of men who felt unsafe (15%).
-    zh: 女性感受到的不安全感在都柏林（24%）和中東部（23%）最高，而首都同樣記錄了最高比例的男性感到不安全（15%）。
-IELTS P5 S1: Moreover, 18% of women and 14% of men stated that crime had affected their lives.
-    zh: 此外，18%的女性和14%的男性表示犯罪影響了他們的生活。
-IELTS P5 S2: Nevertheless, a substantial majority of respondents, 85% in total, felt very or fairly safe in their immediate surroundings.
-    zh: 儘管如此，絕大多數受訪者（共85%）在周遭環境中感到非常或相當安全。
+IELTS P1 S1: A study published in the Proceedings of the Royal Irish Academy indicates that hunter-gatherers may have inhabited southern Ireland almost 1,000 years earlier than has previously been confirmed.
+    zh: 一項刊登於《愛爾蘭皇家學院學報》的研究指出，狩獵採集者居住在愛爾蘭南部的時間，可能比先前證實的早了將近一千年。
+IELTS P2 S1: The researchers re-analysed animal bones excavated from Ballynamintra Cave in Co Waterford between 1878 and 1882, which are currently held by the National Museum of Ireland, and complemented this with material from new excavations.
+    zh: 研究人員重新分析了1878年至1882年間從沃特福德郡巴利納明特拉洞穴發掘、目前由愛爾蘭國家博物館收藏的動物骨頭，並輔以新發掘的材料。
+IELTS P2 S2: Two leg bones belonging to the extinct giant deer display marks consistent with butchery, including a uniform cutting surface attributable to a heavy stone tool and fractures suggesting that the bone was deliberately split to extract marrow.
+    zh: 兩根屬於已滅絕大角鹿的腿骨呈現符合宰割的痕跡，包括可歸因於沉重石器的均勻切面，以及顯示骨頭曾被刻意劈開以取出骨髓的裂痕。
+IELTS P3 S1: High-precision radiocarbon dating conducted at the University of Oxford established that one bone is between 13,321 and 13,573 years old.
+    zh: 牛津大學進行的高精度放射性碳定年確定，其中一根骨頭的年代介於一萬三千三百二十一年至一萬三千五百七十三年之間。
+IELTS P3 S2: Previously, the earliest evidence of human activity in Ireland was a butchered brown bear bone from a cave in Co Clare, dated to approximately 12,700 years ago.
+    zh: 先前，愛爾蘭最早的人類活動證據是克萊爾郡一個洞穴中一根被宰割的棕熊骨頭，年代約為一萬兩千七百年前。
+IELTS P4 S1: Nevertheless, the researchers acknowledge that the marks cannot be definitively identified as human-made in the absence of further artefacts, since weathering has eroded the microscopic traces typically left by tools.
+    zh: 然而，研究人員承認，在缺乏更多人工製品的情況下，這些痕跡無法明確認定為人為所致，因為風化已侵蝕了工具通常留下的微小痕跡。
+IELTS P4 S2: Their timing is, however, consistent with hunter-gatherer activity throughout Britain and north-west Europe during a warmer phase towards the end of the Ice Age.
+    zh: 不過，其年代與冰河時期接近尾聲時一段較溫暖階段中，英國及歐洲西北部各地的狩獵採集者活動是一致的。
+IELTS P5 S1: The study's lead author, Richard Jennings, stated that confirmation would substantially alter the accepted chronology of human arrival in Ireland.
+    zh: 該研究的主要作者理查・詹寧斯表示，一旦證實，將大幅改變人類抵達愛爾蘭的公認年代順序。
+IELTS P5 S2: Consequently, further excavations are planned.
+    zh: 因此，研究人員計畫進行更多發掘。
 
-## reading questions (file reason/2026-11-26.json)
+## reading questions (file reason/2026-11-27.json)
 Q1 [main]: What is the passage mainly about?
-   A. CSO data showing that women in Ireland are much more likely than men to feel unsafe in their local area.  <- answer
-   B. A rise in crime in Dublin between 2019 and 2025.
-   C. A new Government plan to make streets safer for women.
-   D. Evidence that most people in Ireland feel unsafe at home.
-   explanation: The passage opens with the finding that "Women in Ireland are almost twice as likely as men to feel unsafe walking in their local area" and then gives the survey figures. It reports perceptions, not a crime rise (B); no plan is mentioned (C); and "85% in total, felt very or fairly safe" contradicts (D).
-Q2 [infer]: What can be inferred about young people aged 18 to 29?
-   A. Young women in this group feel safer than older women.
-   B. The difference between men's and women's sense of safety is larger in this age group than in others.  <- answer
-   C. Young men in this group feel less safe than any other group.
-   D. Most young women in this group feel very safe.
-   explanation: The gap "was particularly pronounced among those aged 18 to 29": 65% of young men but "merely 35%" of young women felt very safe, so the gender gap is widest here. Only 35% of young women felt very safe, so (D) is wrong, and the passage makes no comparison supporting (A) or (C).
-Q3 [purpose]: Why does the writer include the final figure that 85% of respondents felt very or fairly safe?
-   A. To show that the gender gap has disappeared.
-   B. To argue that the CSO survey was inaccurate.
-   C. To show that men feel less safe than women.
-   D. To give balance by showing that most people still feel safe overall, despite the differences.  <- answer
-   explanation: The sentence begins with "Nevertheless" and says "a substantial majority of respondents, 85% in total, felt very or fairly safe", putting the earlier worrying figures in context. It does not cancel the gap (A), question the survey (B) or reverse the finding about men and women (C).
+   A. A newly discovered cave in Co Clare containing human remains.
+   B. The extinction of the giant deer at the end of the Ice Age.
+   C. A plan by the National Museum of Ireland to return bones to Co Waterford.
+   D. A study suggesting, though not yet proving, that people were in Ireland about 1,000 years earlier than previously confirmed.  <- answer
+   explanation: The opening states that hunter-gatherers "may have inhabited southern Ireland almost 1,000 years earlier than has previously been confirmed", and later the researchers admit the marks "cannot be definitively identified as human-made". The Clare cave is only the earlier record (A); deer extinction (B) and returning bones (C) are not the topic.
+Q2 [infer]: What can be inferred about why further excavations are planned?
+   A. The researchers hope to find artefacts that would confirm the marks were made by humans.  <- answer
+   B. The bones held by the National Museum were found to be fakes.
+   C. Oxford University rejected the radiocarbon dates.
+   D. The Co Clare bear bone has been redated to a later period.
+   explanation: The researchers say the marks cannot be confirmed "in the absence of further artefacts", and "consequently, further excavations are planned", implying they want such evidence. There is no suggestion of fakes (B), rejected dates (C) or redating of the Clare bone (D).
+Q3 [tone]: Which best describes the researchers' attitude to their own findings, as presented in the passage?
+   A. Dismissive — they doubt the bones are of any value.
+   B. Cautiously optimistic — the evidence is promising but not conclusive.  <- answer
+   C. Triumphant — they claim to have rewritten Irish history.
+   D. Indifferent — they see no need for further work.
+   explanation: They "acknowledge that the marks cannot be definitively identified as human-made", yet note the timing "is, however, consistent with hunter-gatherer activity", and Jennings says confirmation "would" alter the chronology. That is hopeful but hedged, not triumphant (C), dismissive (A) or indifferent, since more digs are planned (D).
 
 
-# 2026-11-26-3  (Ireland national)
-date: 2026-11-26 | rank: 3 | topic: 社會 | main level: B2
-file: articles/2026-11-26-3.json
+# 2026-11-27-3  (Ireland national)
+date: 2026-11-27 | rank: 3 | topic: 住房 | main level: B2
+file: articles/2026-11-27-3.json
 
 ## title
-Leap Card Users Can No Longer Sign Up for Automatic Top-Ups
+First-Time Buyers Drive Rise in Mortgage Approvals
 
 ## summaries
-- summaryEn: New users can no longer choose automatic top-up for their Leap travel card.
-- summaryZh: Leap卡自即日起停止受理自動儲值的新申請。
-- summaryJa: Leapカードの自動チャージは新規登録の受付を終了した。
-- summaryKo: Leap 카드 자동 충전 서비스의 신규 등록이 중단됐다.
-- summaryEs: Los usuarios de la tarjeta Leap ya no pueden darse de alta en la recarga automática.
-- summaryHi: Leap कार्ड उपयोगकर्ता अब ऑटो टॉप-अप के लिए नया पंजीकरण नहीं कर सकते।
+- summaryEn: More people got home loans this year, and most were first-time buyers.
+- summaryZh: 十月房貸核准約17億歐元，首購族占近六成。
+- summaryJa: 10月の住宅ローン承認額は約17億ユーロで、初めての購入者が6割近くを占めた。
+- summaryKo: 10월 주택담보대출 승인액은 약 17억 유로였고, 생애 첫 구매자가 약 60%를 차지했다.
+- summaryEs: En octubre se aprobaron unos 1.700 millones de euros en hipotecas, casi seis de cada diez para compradores primerizos.
+- summaryHi: अक्टूबर में लगभग €1.7 अरब के होम लोन मंज़ूर हुए, जिनमें लगभग 60% पहली बार घर खरीदने वालों के थे।
 
 ## sources
-- TheJournal.ie: https://www.thejournal.ie/leap-card-auto-top-up-7237102-Nov2026/
+- RTÉ News: https://www.rte.ie/news/business/2026/1127/1600840-banking-payments-federation-ireland-mortgages/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Many people in Ireland use a Leap card on buses and trains.
-    zh: 愛爾蘭許多人搭公車和火車時使用Leap卡。
-A2 P1 S2: You put money on the card before you travel.
-    zh: 你在搭車前把錢存進卡裡。
-A2 P2 S1: Some people use auto top-up.
-    zh: 有些人使用自動儲值。
-A2 P2 S2: When the card has less than €10, money goes on it from the bank.
-    zh: 當卡片餘額少於10歐元時，錢會從銀行轉入卡中。
-A2 P2 S3: It adds €30, €40 or €50.
-    zh: 它會加值30、40或50歐元。
-A2 P3 S1: From Thursday, new users cannot sign up for auto top-up.
-    zh: 從週四起，新用戶無法申請自動儲值。
-A2 P3 S2: People who already use it can keep it until their card expires.
-    zh: 已經在使用的人可以保留到卡片到期為止。
-A2 P4 S1: But if it stops, for example when a card is lost, you cannot start it again.
-    zh: 但如果它停止了，例如卡片遺失時，就不能再重新開始。
-A2 P5 S1: Transport for Ireland says only about 1% of users have auto top-up.
-    zh: 愛爾蘭交通局表示，只有約1%的用戶使用自動儲值。
-A2 P5 S2: Most people, about 70%, use the phone app.
-    zh: 大多數人（約70%）使用手機應用程式。
-A2 P5 S3: The old system is also expensive to run.
-    zh: 舊系統的營運費用也很高。
+A2 P1 S1: Banks in Ireland said yes to 5,265 home loans in October.
+    zh: 愛爾蘭的銀行在十月同意了5,265筆住房貸款。
+A2 P1 S2: A home loan to buy a house is called a mortgage.
+    zh: 用來買房子的住房貸款叫做房貸。
+A2 P1 S3: The figures come from a banking group.
+    zh: 這些數字來自一個銀行業團體。
+A2 P2 S1: The loans were worth about €1.7 billion in total.
+    zh: 這些貸款總共價值約17億歐元。
+A2 P2 S2: That is 10.3% more than in October last year.
+    zh: 這比去年十月多了10.3%。
+A2 P2 S3: But it is 2% less than in September.
+    zh: 但比九月少了2%。
+A2 P3 S1: First-time buyers are people buying their first home.
+    zh: 首購族是指買第一間房子的人。
+A2 P3 S2: They got 3,077 of the loans, almost six in ten.
+    zh: 他們拿到其中3,077筆貸款，將近十分之六。
+A2 P3 S3: Their loans were worth just over €1 billion.
+    zh: 他們的貸款價值略高於10億歐元。
+A2 P4 S1: From January to October, banks approved 49,213 mortgages.
+    zh: 從一月到十月，銀行核准了49,213筆房貸。
+A2 P4 S2: This is the highest number for these months since 2011.
+    zh: 這是自2011年以來這幾個月的最高數字。
+A2 P4 S3: Brian Hayes leads the banking group BPFI.
+    zh: 布萊恩・海斯是銀行業團體BPFI的負責人。
+A2 P4 S4: He said the numbers keep growing.
+    zh: 他說數字持續成長。
 
 ## level B1
-B1 P1 S1: From Thursday, Leap card users in Ireland can no longer sign up for auto top-up.
-    zh: 從週四起，愛爾蘭的Leap卡用戶不能再申請自動儲值。
-B1 P1 S2: The Leap card is used to pay for buses, trains and trams.
-    zh: Leap卡用來支付公車、火車和輕軌的車資。
-B1 P2 S1: With auto top-up, money is added to the card from a bank account when the balance falls below €10.
-    zh: 使用自動儲值時，當卡片餘額低於10歐元，錢會從銀行帳戶轉入卡片。
-B1 P2 S2: The card is topped up with €30, €40 or €50.
-    zh: 卡片會被儲值30、40或50歐元。
-B1 P2 S3: Some people liked it because they did not need to remember to add money, and it was useful for children's cards.
-    zh: 有些人喜歡它，因為不必記得加值，而且很適合孩子的卡片。
-B1 P2 S4: But if there was not enough money in the bank account, the card was blocked.
-    zh: 但如果銀行帳戶裡的錢不夠，卡片就會被停用。
-B1 P3 S1: Transport for Ireland (TFI) said people who already use auto top-up can keep it until their card expires.
-    zh: 愛爾蘭交通局（TFI）表示，已在使用自動儲值的人可以保留到卡片到期。
-B1 P3 S2: However, if it stops for any reason, such as a new bank account or a lost card, it cannot be set up again.
-    zh: 然而，如果它因任何原因停止，例如換了新銀行帳戶或卡片遺失，就無法再重新設定。
-B1 P4 S1: TFI said only about 1% of users have auto top-up, while about 70% add money through the app.
-    zh: TFI表示，只有約1%的用戶使用自動儲值，而約70%透過應用程式加值。
-B1 P4 S2: It said the service is expensive, the old technology is difficult to maintain, and signing up was slow and difficult.
-    zh: 它說這項服務成本高、舊技術難以維護，而且申請過程又慢又麻煩。
-B1 P5 S1: Some readers were unhappy and called the change a step backwards.
-    zh: 有些讀者感到不滿，稱這項改變是一種倒退。
+B1 P1 S1: Banks and other lenders in Ireland approved about €1.7 billion in mortgages in October, according to new figures from the Banking and Payments Federation Ireland (BPFI).
+    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）的最新數據，愛爾蘭的銀行和其他放款機構在十月核准了約17億歐元的房貸。
+B1 P1 S2: A mortgage approval is an official offer of a loan to buy a particular home.
+    zh: 房貸核准是指正式提供一筆貸款，用來購買某一間特定的房子。
+B1 P2 S1: There were 5,265 approvals in the month.
+    zh: 當月共有5,265筆核准。
+B1 P2 S2: First-time buyers got 3,077 of them, or 58.4%.
+    zh: 首購族拿到其中3,077筆，占58.4%。
+B1 P2 S3: The value of their loans went up by 8.5% compared with October last year, to just over €1 billion.
+    zh: 他們的貸款金額比去年十月增加了8.5%，略高於10億歐元。
+B1 P3 S1: The total value of approvals was 2% lower than in September, but it was 10.3% higher than a year earlier.
+    zh: 核准總金額比九月低了2%，但比一年前高了10.3%。
+B1 P4 S1: Between January and October, there were 49,213 approvals, an increase of 8.1%.
+    zh: 從一月到十月，共有49,213筆核准，增加了8.1%。
+B1 P4 S2: Their value rose by 10.9% to more than €16 billion.
+    zh: 核准金額上升了10.9%，超過160億歐元。
+B1 P4 S3: These are the highest figures for this period since the records began in 2011.
+    zh: 這是自2011年開始有紀錄以來，這段期間的最高數字。
+B1 P5 S1: Brian Hayes, the head of the BPFI, said approvals kept growing in October and that first-time buyers made up almost six in ten of them.
+    zh: BPFI負責人布萊恩・海斯說，十月的核准數持續成長，首購族占了將近六成。
+B1 P5 S2: Loans for people moving to a new home also rose, by 7.5% in value, to more than €3.5 billion.
+    zh: 換屋者的貸款金額也上升了7.5%，超過35億歐元。
 
 ## level B2
-B2 P1 S1: Leap card users can no longer register for auto top-up from Thursday, Transport for Ireland (TFI) has confirmed.
-    zh: 愛爾蘭交通局（TFI）已確認，從週四起Leap卡用戶不能再登記自動儲值。
-B2 P2 S1: The feature automatically adds €30, €40 or €50 to a card when its balance drops below €10.
-    zh: 這項功能會在卡片餘額降至10歐元以下時自動加值30、40或50歐元。
-B2 P2 S2: While some users valued it as a way to avoid last-minute top-ups, particularly on children's cards, others disliked the large sums involved.
-    zh: 雖然有些用戶重視它能避免臨時加值，特別是孩子的卡片，但也有人不喜歡涉及的金額過大。
-B2 P2 S3: If a bank account lacked sufficient funds, the card was blocked.
-    zh: 如果銀行帳戶資金不足，卡片就會被停用。
-B2 P3 S1: Existing users will be able to keep the service until their card expires.
-    zh: 現有用戶可以保留這項服務直到卡片到期。
-B2 P3 S2: However, if auto top-up ends for any reason, including a change of bank account, a lost or stolen card, or a failed direct debit, it cannot be reactivated.
-    zh: 然而，如果自動儲值因任何原因結束，包括更換銀行帳戶、卡片遺失或被竊，或自動扣款失敗，就無法重新啟用。
-B2 P4 S1: A TFI spokesperson said only around 1% of users rely on auto top-up, while roughly 70% top up through the app.
-    zh: TFI發言人表示，只有約1%的用戶依賴自動儲值，約70%透過應用程式加值。
-B2 P4 S2: The authority said it was closing registrations because use of the service was falling, it was costly to operate and the older Leap technology was difficult to maintain.
-    zh: 該機構表示，停止受理登記是因為這項服務的使用量下降、營運成本高，而且舊的Leap技術難以維護。
-B2 P4 S3: It also pointed to the poor experience of the manual, multi-step sign-up process.
-    zh: 它也提到人工多步驟申請流程的使用體驗不佳。
-B2 P5 S1: Some readers criticised the move as a step backwards for public transport.
-    zh: 有些讀者批評此舉是公共交通的一大退步。
+B2 P1 S1: Around €1.7 billion worth of mortgages were approved in October, according to the latest report from the Banking and Payments Federation Ireland (BPFI).
+    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）的最新報告，十月核准的房貸總值約17億歐元。
+B2 P1 S2: An approval is a formal offer of finance from a lender for a specific residential property.
+    zh: 所謂核准，是指放款機構針對某一特定住宅物業正式提供融資。
+B2 P2 S1: A total of 5,265 mortgages were approved during the month, with first-time buyers accounting for 3,077, or 58.4%.
+    zh: 當月共核准5,265筆房貸，其中首購族占3,077筆，即58.4%。
+B2 P2 S2: By value, first-time buyers made up 59.6% of the total and movers 21.9%.
+    zh: 以金額計，首購族占總額的59.6%，換屋者占21.9%。
+B2 P2 S3: The value of first-time buyer approvals rose by 8.5% year-on-year to just over €1 billion.
+    zh: 首購族的核准金額年增8.5%，略高於10億歐元。
+B2 P3 S1: Overall, the value of approvals fell by 2% compared with September but was 10.3% higher than in October 2025.
+    zh: 整體而言，核准金額比九月下降2%，但比2025年十月高出10.3%。
+B2 P4 S1: In the first ten months of the year, 49,213 mortgages were approved, up 8.1%, while their value climbed 10.9% to more than €16 billion.
+    zh: 今年前十個月共核准49,213筆房貸，增加8.1%，金額則攀升10.9%至超過160億歐元。
+B2 P4 S2: According to BPFI chief executive Brian Hayes, both figures are the highest for that period since the series began in 2011.
+    zh: BPFI執行長布萊恩・海斯表示，這兩個數字都是自2011年開始統計以來同期的最高紀錄。
+B2 P5 S1: First-time buyers secured 29,314 approvals between January and October, a record for the period, worth over €9.7 billion.
+    zh: 首購族在一月至十月間獲得29,314筆核准，創下同期紀錄，總值逾97億歐元。
+B2 P5 S2: Meanwhile, the value of approvals for movers rose 7.5% to more than €3.5 billion.
+    zh: 與此同時，換屋者的核准金額上升7.5%，超過35億歐元。
 
 ## level C1
-C1 P1 S1: Transport for Ireland (TFI) has stopped accepting new registrations for Leap card auto top-up as of Thursday, quietly retiring a feature that had divided commuters.
-    zh: 愛爾蘭交通局（TFI）自週四起停止受理Leap卡自動儲值的新登記，悄悄淘汰了這項讓通勤者意見分歧的功能。
-C1 P2 S1: The facility tops up a card with €30, €40 or €50 whenever its balance dips below €10.
-    zh: 每當卡片餘額跌破10歐元，這項服務就會為卡片儲值30、40或50歐元。
-C1 P2 S2: Devotees prized it for sparing them frantic last-minute top-ups, not least on children's cards, whereas detractors balked at the hefty sums.
-    zh: 愛用者珍視它免去了手忙腳亂的臨時加值，尤其是孩子的卡片；批評者則對高額款項望而卻步。
-C1 P2 S3: A shortfall in the linked bank account would leave the card blocked.
-    zh: 綁定的銀行帳戶若餘額不足，卡片就會被停用。
-C1 P3 S1: Current users may hold on to the service until their card expires.
-    zh: 現有用戶可以保留這項服務直到卡片到期。
-C1 P3 S2: Should it lapse for any reason, however, whether through a switch of bank account, a lost or stolen card or a bounced direct debit, it cannot be revived.
-    zh: 不過，若它因任何原因失效，無論是更換銀行帳戶、卡片遺失或被竊，還是自動扣款被退回，都無法恢復。
-C1 P4 S1: According to a TFI spokesperson, a mere 1% or so of users avail of auto top-up, while some 70% top up via the app.
-    zh: 據TFI發言人表示，只有大約1%的用戶使用自動儲值，約70%透過應用程式加值。
-C1 P4 S2: The authority attributed the decision to dwindling uptake, steep running costs and the burden of maintaining ageing Leap technology, as well as a cumbersome manual registration process.
-    zh: 該機構將這項決定歸因於使用率逐漸下降、營運成本高昂、維護老舊Leap技術的負擔，以及繁瑣的人工登記流程。
-C1 P5 S1: Some readers were scathing, branding the change a retrograde step.
-    zh: 有些讀者言辭尖刻，斥這項改變為開倒車之舉。
+C1 P1 S1: Lenders sanctioned roughly €1.7 billion in mortgages in October, according to the latest data from the Banking and Payments Federation Ireland (BPFI).
+    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）的最新數據，放款機構十月核准了約17億歐元的房貸。
+C1 P1 S2: An approval constitutes a formal offer of finance from a lender for a particular residential property.
+    zh: 核准即放款機構針對某一特定住宅物業提出的正式融資要約。
+C1 P2 S1: Some 5,265 mortgages were approved over the month, with first-time buyers accounting for 3,077, or 58.4% of the total.
+    zh: 當月約有5,265筆房貸獲得核准，其中首購族占3,077筆，即總數的58.4%。
+C1 P2 S2: In value terms, first-time buyers represented 59.6% of the market and movers 21.9%.
+    zh: 以金額而言，首購族占市場的59.6%，換屋者占21.9%。
+C1 P2 S3: The value of first-time buyer approvals climbed 8.5% year-on-year to just over €1 billion.
+    zh: 首購族的核准金額年增8.5%，略高於10億歐元。
+C1 P3 S1: Although the overall value of approvals dipped by 2% on September, it was up a robust 10.3% on the same month last year.
+    zh: 雖然整體核准金額比九月小幅下滑2%，但比去年同月強勁成長10.3%。
+C1 P4 S1: Over the first ten months of 2026, approvals rose 8.1% to 49,213, while their value surged 10.9% to in excess of €16 billion.
+    zh: 2026年前十個月，核准數上升8.1%至49,213筆，金額則激增10.9%至逾160億歐元。
+C1 P4 S2: BPFI chief executive Brian Hayes noted that both figures are the highest for the period since records commenced in 2011.
+    zh: BPFI執行長布萊恩・海斯指出，這兩個數字都是自2011年開始記錄以來同期的最高水準。
+C1 P5 S1: First-time buyers secured an unprecedented 29,314 approvals during that timeframe, worth upwards of €9.7 billion, underscoring their growing weight in the market.
+    zh: 首購族在這段期間獲得史無前例的29,314筆核准，總值超過97億歐元，凸顯他們在市場中日益增加的分量。
 
 ## level IELTS
-IELTS P1 S1: With effect from Thursday, Transport for Ireland (TFI) will no longer accept new registrations for the Leap card auto top-up facility.
-    zh: 自週四起，愛爾蘭交通局（TFI）將不再受理Leap卡自動儲值功能的新登記。
-IELTS P2 S1: This function automatically credits a card with €30, €40 or €50 once its balance falls below €10.
-    zh: 一旦卡片餘額低於10歐元，這項功能就會自動為卡片存入30、40或50歐元。
-IELTS P2 S2: Although certain users regarded it as a convenient means of avoiding last-minute top-ups, particularly for children, others considered the amounts excessive.
-    zh: 雖然某些用戶認為它是避免臨時加值的便利方式，特別是對孩子而言，但其他人認為金額過高。
-IELTS P2 S3: Furthermore, insufficient funds in the associated bank account resulted in the card being blocked.
-    zh: 此外，綁定的銀行帳戶資金不足會導致卡片被停用。
-IELTS P3 S1: Existing users may retain the service until their card expires.
-    zh: 現有用戶可以保留這項服務直到卡片到期。
-IELTS P3 S2: However, its continuation is contingent upon there being no interruption, since a change of bank account, a lost card or an unsuccessful direct debit would terminate it permanently.
-    zh: 然而，服務能否持續取決於不出現任何中斷，因為更換銀行帳戶、卡片遺失或自動扣款失敗都會使其永久終止。
-IELTS P4 S1: A TFI spokesperson indicated that approximately 1% of users currently utilise auto top-up, whereas roughly 70% top up via the mobile application.
-    zh: TFI發言人指出，目前約1%的用戶使用自動儲值，而約70%透過手機應用程式加值。
-IELTS P4 S2: The authority attributed the decision to declining usage, substantial operating costs and the difficulty of maintaining outdated technology, in addition to an inefficient manual registration procedure.
-    zh: 該機構將這項決定歸因於使用量下降、可觀的營運成本以及維護過時技術的困難，此外還有效率低落的人工登記程序。
-IELTS P5 S1: Consequently, some commuters criticised the change as a regressive step.
-    zh: 因此，部分通勤者批評這項改變是一種倒退。
+IELTS P1 S1: According to the most recent data published by the Banking and Payments Federation Ireland (BPFI), approximately €1.7 billion in mortgages were approved in October.
+    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）公布的最新數據，十月約有17億歐元的房貸獲得核准。
+IELTS P1 S2: An approval represents a formal offer of finance from a lender in respect of a specific residential property.
+    zh: 核准代表放款機構就某一特定住宅物業提出的正式融資要約。
+IELTS P2 S1: In total, 5,265 mortgages were approved during the month, of which first-time buyers accounted for 3,077, or 58.4%.
+    zh: 當月總共核准了5,265筆房貸，其中首購族占3,077筆，即58.4%。
+IELTS P2 S2: In terms of value, first-time buyers comprised 59.6% of the total, while movers constituted 21.9%.
+    zh: 就金額而言，首購族占總額的59.6%，換屋者則占21.9%。
+IELTS P2 S3: The value of first-time buyer approvals increased by 8.5% year-on-year to slightly more than €1 billion.
+    zh: 首購族的核准金額年增8.5%，略高於10億歐元。
+IELTS P3 S1: Although the aggregate value of approvals declined by 2% relative to September, it was 10.3% higher than in the corresponding month of the previous year.
+    zh: 雖然核准總額相較九月下降了2%，但比去年同月高出10.3%。
+IELTS P4 S1: Between January and October, the number of approvals rose by 8.1% to 49,213, and their value increased by 10.9% to over €16 billion.
+    zh: 一月至十月間，核准件數上升8.1%至49,213筆，金額則增加10.9%至超過160億歐元。
+IELTS P4 S2: The BPFI's chief executive, Brian Hayes, observed that both figures were the highest recorded for this period since the series commenced in 2011.
+    zh: BPFI執行長布萊恩・海斯指出，這兩個數字都是自2011年開始統計以來該期間的最高紀錄。
+IELTS P5 S1: Notably, first-time buyers obtained 29,314 approvals during this period, a record figure, with a combined value exceeding €9.7 billion.
+    zh: 值得注意的是，首購族在此期間取得29,314筆核准，創下紀錄，合計金額超過97億歐元。
 
-## reading questions (file reason/2026-11-26.json)
+## reading questions (file reason/2026-11-27.json)
 Q1 [main]: Which statement best summarises the passage?
-   A. TFI is raising the price of Leap card fares from Thursday.
-   B. TFI has stopped new sign-ups for Leap card auto top-up, citing low use and high costs, though current users can keep it for now.  <- answer
-   C. All Leap cards using auto top-up will be blocked on Thursday.
-   D. TFI is replacing the mobile app with automatic top-ups.
-   explanation: TFI "will no longer accept new registrations for the Leap card auto top-up facility", blaming "declining usage, substantial operating costs", while "Existing users may retain the service until their card expires". Fares (A) are not discussed, existing cards are not all blocked (C), and the app is the popular option, not being replaced (D).
-Q2 [infer]: What can be inferred about an existing auto top-up user who changes bank account?
-   A. They will lose the auto top-up service and cannot sign up again.  <- answer
-   B. They can simply re-register for the service online.
-   C. Their card will receive an extra €50 credit.
-   D. They will be moved to the mobile app automatically.
-   explanation: Continuation is "contingent upon there being no interruption, since a change of bank account ... would terminate it permanently", and new registrations are no longer accepted, so they could not rejoin. Re-registering (B), extra credit (C) or an automatic move to the app (D) are not mentioned.
-Q3 [tone]: What attitude do some commuters show towards the change, according to the final sentence?
-   A. Grateful, because the amounts were too high.
-   B. Neutral, as they rarely use Leap cards.
-   C. Disapproving, seeing it as a step backwards.  <- answer
-   D. Excited about the new technology.
-   explanation: The passage ends: "some commuters criticised the change as a regressive step" — a regressive step means going backwards, which shows disapproval. This is not gratitude (A), neutrality (B) or excitement (D).
+   A. Mortgage approvals fell sharply in 2026 because of rising interest rates.
+   B. Movers now account for the majority of mortgage approvals in Ireland.
+   C. Mortgage approvals are running at their highest level for the period since 2011, with first-time buyers making up most of them.  <- answer
+   D. The BPFI has stopped publishing mortgage data on a monthly basis.
+   explanation: Brian Hayes "observed that both figures were the highest recorded for this period since the series commenced in 2011", and first-time buyers accounted for "58.4%" of October approvals. Approvals rose year-on-year (A); movers were only 21.9% by value (B); nothing suggests data publication ended (D).
+Q2 [infer]: What can be inferred from the figures for October compared with September?
+   A. The month-on-month dip does not change the picture of strong growth over the year.  <- answer
+   B. The housing market is entering a long decline.
+   C. First-time buyers stopped applying for mortgages in October.
+   D. October's figures were the highest ever recorded for a single month.
+   explanation: Approvals "declined by 2% relative to September" but were "10.3% higher than in the corresponding month of the previous year", and the year-to-date totals are record highs. A long decline (B) is not supported; first-time buyers got 3,077 approvals (C); and the record refers to the January–October period, not one month (D).
+Q3 [purpose]: Why does the writer explain what a mortgage "approval" represents in the first paragraph?
+   A. To warn readers that most approvals are later cancelled.
+   B. To criticise lenders for making too many offers.
+   C. To argue that approvals are a poor guide to house prices.
+   D. To clarify a technical term so readers can interpret the statistics that follow.  <- answer
+   explanation: The sentence "An approval represents a formal offer of finance from a lender in respect of a specific residential property" simply defines the term before the figures are given. The passage says nothing about cancellations (A), criticism of lenders (B) or house prices (C).
 
 
-# 2026-11-26-4  (Ireland national)
-date: 2026-11-26 | rank: 4 | topic: 勞資 | main level: B2
-file: articles/2026-11-26-4.json
+# 2026-11-27-4  (Ireland national)
+date: 2026-11-27 | rank: 4 | topic: 教育 | main level: B2
+file: articles/2026-11-27-4.json
 
 ## title
-Major Extras Agency Pulls Out of the Republic Over New UK Work Rules
+Committee Chair Says School Bus Fare Rise Should Be Reconsidered
 
 ## summaries
-- summaryEn: A big agency for film extras is leaving the Republic because of new UK work checks.
-- summaryZh: 北愛大型臨演經紀公司因英國新工作權法規退出愛爾蘭共和國。
-- summaryJa: 北アイルランドの大手エキストラ事務所が、英国の新たな就労規則を理由にアイルランド共和国から撤退する。
-- summaryKo: 북아일랜드의 대형 엑스트라 에이전시가 영국의 새 취업 규정 때문에 아일랜드 공화국에서 철수한다.
-- summaryEs: Una gran agencia de figurantes deja la República de Irlanda por las nuevas normas laborales británicas.
-- summaryHi: ब्रिटेन के नए कार्य-अधिकार नियमों के कारण एक बड़ी एक्स्ट्रा एजेंसी आयरलैंड गणराज्य से हट रही है।
+- summaryEn: A politician says the higher school bus price is too much for families.
+- summaryZh: 國會教育委員會主席認為校車票價調漲應重新檢討。
+- summaryJa: 議会教育委員会の委員長が、スクールバス運賃の値上げを見直すべきだと述べた。
+- summaryKo: 의회 교육위원회 위원장은 통학버스 요금 인상을 재검토해야 한다고 말했다.
+- summaryEs: El presidente de la comisión de Educación pide revisar la subida del precio del autobús escolar.
+- summaryHi: संसदीय शिक्षा समिति के अध्यक्ष का कहना है कि स्कूल बस किराया बढ़ाने के फ़ैसले पर दोबारा विचार होना चाहिए।
 
 ## sources
-- TheJournal.ie: https://www.thejournal.ie/the-extras-department-ireland-7237421-Nov2026/
+- RTÉ News: https://www.rte.ie/news/education/2026/1126/1600805-school-transport-fee-increases/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Extras are people in the background of films and TV shows.
-    zh: 臨時演員是出現在電影和電視節目背景中的人。
-A2 P1 S2: The Extras Department is a big agency for extras.
-    zh: Extras Department是一家大型臨演經紀公司。
-A2 P1 S3: It is based in Belfast.
-    zh: 它的總部在貝爾法斯特。
-A2 P2 S1: The agency has more than 20,000 members.
-    zh: 這家公司有超過2萬名會員。
-A2 P2 S2: It works for big companies like HBO, the BBC and RTÉ.
-    zh: 它為HBO、BBC和RTÉ等大公司工作。
-A2 P3 S1: Now it will stop working in the Republic of Ireland.
-    zh: 現在它將停止在愛爾蘭共和國的業務。
-A2 P3 S2: It told its members by email on Tuesday.
-    zh: 它在週二用電子郵件通知了會員。
-A2 P4 S1: The reason is a new UK law.
-    zh: 原因是英國的一項新法律。
-A2 P4 S2: Before a job starts, companies must check that each worker is allowed to work in the UK.
-    zh: 在工作開始前，公司必須確認每位工作者可以合法在英國工作。
-A2 P4 S3: Many extras work for just one day, so this is a lot of extra work.
-    zh: 許多臨演只工作一天，所以這帶來很多額外工作。
-A2 P5 S1: Members in the Republic can still work in Northern Ireland if they pass the check.
-    zh: 共和國的會員如果通過檢查，仍可在北愛爾蘭工作。
-A2 P5 S2: But the trip can be expensive.
-    zh: 但交通費可能很貴。
+A2 P1 S1: Many children in Ireland go to school by bus.
+    zh: 愛爾蘭有很多孩子搭公車上學。
+A2 P1 S2: The Government wants families to pay more for the school bus.
+    zh: 政府希望家庭為校車付更多錢。
+A2 P2 S1: From next September, a secondary school pupil will pay €350 a year.
+    zh: 從明年九月起，中學生每年要付350歐元。
+A2 P2 S2: Now they pay €100.
+    zh: 現在他們付100歐元。
+A2 P2 S3: The price was cut in 2022 to help families.
+    zh: 票價在2022年被調降，以幫助家庭。
+A2 P3 S1: Cathal Crowe leads a group of TDs that looks at education.
+    zh: 卡哈爾・克羅領導一個負責教育議題的國會議員小組。
+A2 P3 S2: He says the rise is too much for families.
+    zh: 他說這次漲價對家庭來說太多了。
+A2 P3 S3: He thinks the Government should look at it again.
+    zh: 他認為政府應該重新考慮。
+A2 P3 S4: The Taoiseach said some price rises might change.
+    zh: 總理說有些漲價可能會改變。
+A2 P4 S1: The bus is expensive for the State.
+    zh: 校車對國家來說很昂貴。
+A2 P4 S2: It costs €1,400 to €1,500 a year for each child.
+    zh: 每個孩子每年要花1,400到1,500歐元。
+A2 P4 S3: Next year the service will cost €687 million.
+    zh: 明年這項服務將花費6億8,700萬歐元。
 
 ## level B1
-B1 P1 S1: The Extras Department, one of the biggest agencies for film and TV extras on the island of Ireland, is stopping its work in the Republic.
-    zh: Extras Department是愛爾蘭島上最大的影視臨演經紀公司之一，正停止在共和國的業務。
-B1 P1 S2: The agency is based in Belfast and told members in the Republic by email on Tuesday.
-    zh: 這家公司位於貝爾法斯特，週二用電子郵件通知了共和國的會員。
-B1 P2 S1: The agency has more than 20,000 extras and stand-ins on its books.
-    zh: 這家公司登記在冊的臨演和替身超過2萬人。
-B1 P2 S2: Its clients include HBO, Universal, RTÉ and the BBC.
-    zh: 客戶包括HBO、環球影業、RTÉ和BBC。
-B1 P2 S3: Its website had said that a Dublin office would open soon.
-    zh: 它的網站曾說都柏林辦公室很快就會開設。
-B1 P3 S1: The agency said the reason is a UK law called Right to Work.
-    zh: 公司表示，原因是英國一項叫做「工作權」的法律。
-B1 P3 S2: Under this law, companies must check that a person is allowed to work in the UK before the job begins.
-    zh: 根據這項法律，公司必須在工作開始前確認一個人獲准在英國工作。
-B1 P3 S3: Since 1 October, the rule also covers contractors.
-    zh: 自10月1日起，這項規定也涵蓋承包人。
-B1 P3 S4: Because many extras only work for one day, the checks have created a lot of paperwork.
-    zh: 由於許多臨演只工作一天，這些檢查造成大量文書工作。
-B1 P4 S1: Members in the Republic who already have the right to work in the UK can still take jobs in Northern Ireland, although travel may be expensive.
-    zh: 已擁有英國工作權的共和國會員仍可在北愛爾蘭接工作，不過交通費可能很高。
-B1 P4 S2: To stay with the agency, they must show ID to an outside company and then have a video call with the agency.
-    zh: 若要留在公司，他們必須向一家外部公司出示身分證件，然後與公司進行視訊通話。
+B1 P1 S1: The head of the Oireachtas Education Committee says the Government's plan to raise school bus fares will have to be looked at again.
+    zh: 國會教育委員會主席表示，政府調漲校車票價的計畫必須重新檢視。
+B1 P1 S2: Fianna Fáil TD Cathal Crowe said it was unrealistic to put this extra cost on families at a time when living costs are rising again.
+    zh: 共和黨議員卡哈爾・克羅說，在生活費再度上漲的時候，把這筆額外費用加在家庭身上是不切實際的。
+B1 P2 S1: Fares were cut in 2022 to help families with the cost of living.
+    zh: 票價在2022年被調降，以幫助家庭應付生活費。
+B1 P2 S2: But in October's budget, the Government decided to bring them back to their old level from next September.
+    zh: 但在十月的預算案中，政府決定從明年九月起將票價恢復到原來的水準。
+B1 P2 S3: For secondary school pupils, the yearly fare will rise from €100 to €350.
+    zh: 中學生的每年票價將從100歐元漲到350歐元。
+B1 P3 S1: Some Independent TDs and ministers have spoken out against the plan.
+    zh: 一些無黨籍議員和部長已公開反對這項計畫。
+B1 P3 S2: On Wednesday, the Taoiseach, Micheál Martin, said some of the increases might be reviewed, although the Tánaiste, Simon Harris, had earlier said the decision would not be reversed.
+    zh: 總理米霍爾・馬丁星期三表示，部分漲幅可能會重新檢討，不過副總理賽門・哈里斯先前曾說這項決定不會撤回。
+B1 P4 S1: Officials from the Department of Education told the committee that it costs between €1,400 and €1,500 a year to bring one child to school by bus.
+    zh: 教育部官員告訴委員會，用校車載一個孩子上學每年要花1,400到1,500歐元。
+B1 P4 S2: The cost of the scheme has gone up by 58% since 2020 and is expected to reach €687 million next year, including €143 million for taxis for children with special needs.
+    zh: 這項計畫的成本自2020年以來上漲了58%，預計明年將達到6億8,700萬歐元，其中包括為特殊需求兒童支付的1億4,300萬歐元計程車費用。
 
 ## level B2
-B2 P1 S1: The Extras Department, a Belfast-based agency that supplies extras for film and television across the island, is ending its operations in the Republic of Ireland.
-    zh: Extras Department是一家總部位於貝爾法斯特、為全島影視作品提供臨演的經紀公司，正結束在愛爾蘭共和國的業務。
-B2 P1 S2: It informed members there in an email on Tuesday.
-    zh: 它在週二透過電子郵件通知了當地會員。
-B2 P2 S1: The agency, which has been the only large-scale business of its kind in Northern Ireland since 2007, has more than 20,000 extras, featured extras and stand-ins on its books.
-    zh: 這家公司自2007年起就是北愛爾蘭唯一的同類大型業者，登記在冊的臨演、特約臨演和替身超過2萬人。
-B2 P2 S2: Its clients include HBO, Universal, RTÉ and the BBC, and its website had previously advertised the upcoming launch of a Dublin office.
-    zh: 其客戶包括HBO、環球影業、RTÉ和BBC，而它的網站先前還宣傳都柏林辦公室即將開設。
-B2 P3 S1: The agency blamed the UK's Right to Work legislation, which has significantly increased its administrative workload.
-    zh: 公司將原因歸咎於英國的工作權法規，該法大幅增加了它的行政工作量。
-B2 P3 S2: The law requires businesses to verify that a person is legally entitled to work before a job begins, and on 1 October the requirement was extended to contractors and directly engaged workers.
-    zh: 這項法律要求企業在工作開始前核實一個人是否依法有權工作，而在10月1日，這項要求擴大到承包人和直接受僱的工作者。
-B2 P3 S3: Since many extras work for only a single day, compliance has proved difficult.
-    zh: 由於許多臨演只工作一天，遵守規定變得很困難。
-B2 P4 S1: Members based in the Republic who already hold the right to work in the UK can still accept bookings in Northern Ireland, although travel costs may be high.
-    zh: 已擁有英國工作權的共和國會員仍可接受北愛爾蘭的工作邀約，不過交通費可能很高。
-B2 P4 S2: To remain on the books, they must complete an identity check through an external provider, followed by a video call with the agency.
-    zh: 若要留在名冊上，他們必須透過外部供應商完成身分檢查，之後再與公司進行視訊通話。
+B2 P1 S1: The chair of the Oireachtas Education Committee has said the Government's decision to increase school transport fares will have to be revisited.
+    zh: 國會教育委員會主席表示，政府調漲學童交通票價的決定將必須重新檢討。
+B2 P1 S2: Fianna Fáil TD Cathal Crowe described the move as an unrealistic burden on families who are already struggling with renewed cost-of-living pressures.
+    zh: 共和黨議員卡哈爾・克羅形容此舉是對已在生活成本壓力再起中掙扎的家庭施加不切實際的負擔。
+B2 P2 S1: Fares were reduced in 2022 as a cost-of-living measure, but in October's budget the Government announced that they would return to their previous levels from next September.
+    zh: 票價曾於2022年作為生活成本措施而調降，但政府在十月的預算案中宣布，從明年九月起票價將恢復到先前的水準。
+B2 P2 S2: As a result, the annual fare for post-primary pupils will rise from €100 to €350 for the 2027/2028 school year.
+    zh: 因此，2027/2028學年中學生的年票價將從100歐元漲到350歐元。
+B2 P3 S1: The plan has met opposition from Independent TDs and ministers who support the Government.
+    zh: 這項計畫遭到無黨籍議員和支持政府的部長反對。
+B2 P3 S2: On Wednesday, Taoiseach Micheál Martin signalled that some of the increases could be reviewed, even though Tánaiste Simon Harris had ruled out a reversal the previous week.
+    zh: 總理米霍爾・馬丁星期三暗示，部分漲幅可能會重新檢討，儘管副總理賽門・哈里斯前一週才排除撤回的可能。
+B2 P4 S1: Department of Education officials told the committee that carrying one child on a school bus costs between €1,400 and €1,500 a year, with the State covering 93% of the cost at primary level and 75% at post-primary level.
+    zh: 教育部官員告訴委員會，用校車載送一名孩童每年花費1,400到1,500歐元，國家在小學階段負擔93%的成本，中學階段負擔75%。
+B2 P4 S2: The scheme's cost has risen by 58% since 2020 and is projected to reach €687 million next year, of which €143 million goes on taxis for children with special needs.
+    zh: 這項計畫的成本自2020年以來上升了58%，預計明年將達6億8,700萬歐元，其中1億4,300萬歐元用於特殊需求兒童的計程車。
 
 ## level C1
-C1 P1 S1: The Extras Department, a Belfast-based agency that supplies background performers to film and television productions across the island, is pulling out of the Republic of Ireland, having broken the news to members there by email on Tuesday.
-    zh: Extras Department是一家總部設在貝爾法斯特、為全島影視製作提供背景演員的經紀公司，正撤出愛爾蘭共和國，並已在週二以電子郵件向當地會員宣布此消息。
-C1 P2 S1: Since 2007 it has been the sole large-scale outfit of its kind in Northern Ireland, boasting a roster of more than 20,000 extras, featured extras and stand-ins.
-    zh: 自2007年以來，它一直是北愛爾蘭唯一的同類大型業者，旗下名單有超過2萬名臨演、特約臨演和替身。
-C1 P2 S2: Its client list includes HBO, Universal, RTÉ and the BBC, and it had even trailed the imminent opening of a Dublin office.
-    zh: 其客戶名單包括HBO、環球影業、RTÉ和BBC，它甚至曾預告都柏林辦公室即將開幕。
-C1 P3 S1: The agency laid the blame squarely on the UK's Right to Work legislation, which has saddled it with a heavier administrative load.
-    zh: 公司把責任直接歸咎於英國的工作權法規，該法讓它背負更沉重的行政負擔。
-C1 P3 S2: Employers must now confirm that individuals are entitled to work before any engagement starts, and since 1 October that obligation has extended to contractors.
-    zh: 雇主如今必須在任何聘用開始前確認當事人有權工作，而自10月1日起，這項義務已擴及承包人。
-C1 P3 S3: With many extras hired for a single day, keeping pace with the paperwork has become onerous.
-    zh: 由於許多臨演只受僱一天，要跟上文書作業變得十分吃力。
-C1 P4 S1: Members in the Republic who already possess UK work entitlement may still take on bookings in Northern Ireland, albeit at considerable travel expense.
-    zh: 已具備英國工作資格的共和國會員仍可接北愛爾蘭的工作，只是交通開支相當可觀。
-C1 P4 S2: To retain their membership, they must undergo identity verification via a third-party provider, followed by a video call.
-    zh: 若要保留會員資格，他們必須透過第三方供應商接受身分核實，之後再進行視訊通話。
+C1 P1 S1: The chair of the Oireachtas Education Committee has warned that the Government's decision to hike school transport fares will have to be revisited.
+    zh: 國會教育委員會主席警告，政府大幅調漲學童交通票價的決定將必須重新審視。
+C1 P1 S2: Fianna Fáil TD Cathal Crowe branded it an unrealistic burden to heap on families already grappling with a resurgence in cost-of-living pressures.
+    zh: 共和黨議員卡哈爾・克羅斥之為硬加在家庭身上的不切實際負擔，而這些家庭本已在努力應付再度升高的生活成本壓力。
+C1 P2 S1: Fares were slashed in 2022 as a temporary relief measure, but October's budget stipulated that they would revert to their former levels from next September.
+    zh: 票價曾於2022年作為臨時紓困措施而大幅調降，但十月的預算案規定，從明年九月起票價將回復到以往的水準。
+C1 P2 S2: Consequently, the annual charge for post-primary pupils is set to soar from €100 to €350 in the 2027/2028 academic year.
+    zh: 因此，2027/2028學年中學生的年費將從100歐元飆升至350歐元。
+C1 P3 S1: The proposal has drawn fierce resistance from Independent TDs and the ministers who prop up the coalition.
+    zh: 這項提案遭到無黨籍議員以及支撐聯合政府的部長們強烈抵制。
+C1 P3 S2: On Wednesday, Taoiseach Micheál Martin intimated that certain increases might be reconsidered, despite Tánaiste Simon Harris having categorically ruled out a U-turn only a week earlier.
+    zh: 總理米霍爾・馬丁星期三暗示某些漲幅可能會重新考慮，儘管副總理賽門・哈里斯僅一週前才斷然排除政策大轉彎。
+C1 P4 S1: Officials from the Department of Education informed the committee that conveying a single child by school bus costs between €1,400 and €1,500 annually, with the State subsidising 93% of the outlay at primary level and 75% at post-primary level.
+    zh: 教育部官員告知委員會，以校車載送一名孩童每年花費1,400到1,500歐元，國家在小學階段補貼93%的支出，中學階段補貼75%。
+C1 P4 S2: Expenditure on the scheme has ballooned by 58% since 2020 and is forecast to reach €687 million next year, €143 million of which is earmarked for taxis for children with special needs.
+    zh: 這項計畫的開支自2020年以來暴增58%，預計明年將達6億8,700萬歐元，其中1億4,300萬歐元指定用於特殊需求兒童的計程車。
 
 ## level IELTS
-IELTS P1 S1: The Extras Department, a Belfast-based agency which supplies extras to film and television productions throughout the island, has announced its withdrawal from the Republic of Ireland, notifying members there by email on Tuesday.
-    zh: Extras Department是一家總部位於貝爾法斯特、為全島影視製作提供臨演的經紀公司，已宣布退出愛爾蘭共和國，並於週二以電子郵件通知當地會員。
-IELTS P2 S1: Having been the only large-scale agency of its kind in Northern Ireland since 2007, the organisation maintains a register of more than 20,000 extras and stand-ins.
-    zh: 該機構自2007年起就是北愛爾蘭唯一的同類大型經紀公司，名冊上登記有超過2萬名臨演和替身。
-IELTS P2 S2: Its clients include prominent broadcasters and studios such as HBO, Universal, RTÉ and the BBC.
-    zh: 其客戶包括HBO、環球影業、RTÉ和BBC等知名廣播公司和製片廠。
-IELTS P3 S1: The agency attributed its decision to the UK's Right to Work legislation, which has substantially increased its administrative obligations.
-    zh: 該公司將這項決定歸因於英國的工作權法規，該法大幅增加了其行政義務。
-IELTS P3 S2: Under this legislation, employers are required to verify an individual's eligibility to work prior to the commencement of any engagement, and this requirement was extended to contractors on 1 October.
-    zh: 根據這項法規，雇主必須在任何聘用開始之前核實個人的工作資格，而這項要求已於10月1日擴大到承包人。
-IELTS P3 S3: Consequently, given that many extras are engaged for a single day, compliance has become increasingly burdensome.
-    zh: 因此，鑒於許多臨演只受聘一天，遵守規定變得越來越繁重。
-IELTS P4 S1: Members residing in the Republic who already possess the right to work in the UK may nevertheless continue to accept assignments in Northern Ireland, although travel costs could prove prohibitive.
-    zh: 然而，已擁有英國工作權、居住在共和國的會員仍可繼續接受北愛爾蘭的工作，只是交通費可能高得令人卻步。
-IELTS P4 S2: In order to retain their membership, they must undergo identity verification through an external provider.
-    zh: 為了保留會員資格，他們必須透過外部供應商接受身分核實。
+IELTS P1 S1: The chair of the Oireachtas Education Committee has stated that the Government's decision to increase school transport fares will need to be revisited.
+    zh: 國會教育委員會主席表示，政府調漲學童交通票價的決定需要重新檢討。
+IELTS P1 S2: Fianna Fáil TD Cathal Crowe characterised the measure as an unrealistic financial burden for families who are already contending with renewed cost-of-living pressures.
+    zh: 共和黨議員卡哈爾・克羅將此舉定性為對已在應付生活成本壓力再起的家庭而言不切實際的財務負擔。
+IELTS P2 S1: Fares were reduced in 2022 as a temporary cost-of-living intervention; however, the October budget determined that they would revert to their previous levels from next September.
+    zh: 票價曾於2022年作為臨時的生活成本干預措施而調降；然而，十月的預算案決定從明年九月起將其恢復至先前的水準。
+IELTS P2 S2: Consequently, the annual fare for post-primary pupils is scheduled to increase from €100 to €350 in the 2027/2028 academic year.
+    zh: 因此，2027/2028學年中學生的年票價預定從100歐元調漲至350歐元。
+IELTS P3 S1: The proposal has encountered substantial opposition from Independent TDs and the ministers who support the coalition.
+    zh: 這項提案遭到無黨籍議員及支持聯合政府的部長們相當大的反對。
+IELTS P3 S2: Nevertheless, Taoiseach Micheál Martin indicated on Wednesday that certain increases might be reconsidered, notwithstanding the fact that Tánaiste Simon Harris had explicitly ruled out a reversal the previous week.
+    zh: 儘管如此，總理米霍爾・馬丁星期三表示某些漲幅可能會重新考慮，即使副總理賽門・哈里斯前一週曾明確排除撤回的可能。
+IELTS P4 S1: Department of Education officials informed the committee that transporting a single child by school bus costs between €1,400 and €1,500 per year, with the State subsidising 93% of the expenditure at primary level and 75% at post-primary level.
+    zh: 教育部官員告知委員會，以校車運送一名孩童每年花費1,400到1,500歐元，國家在小學階段補貼93%的支出，中學階段補貼75%。
+IELTS P4 S2: The cost of the scheme has increased by 58% since 2020 and is projected to reach €687 million next year, of which €143 million is allocated to taxis for children with special needs.
+    zh: 這項計畫的成本自2020年以來增加了58%，預計明年將達到6億8,700萬歐元，其中1億4,300萬歐元撥給特殊需求兒童的計程車。
 
-## reading questions (file reason/2026-11-26.json)
+## reading questions (file reason/2026-11-27.json)
 Q1 [main]: What is the main point of the passage?
-   A. HBO and the BBC have stopped filming in Northern Ireland.
-   B. The Extras Department is moving its headquarters from Belfast to Dublin.
-   C. Extras in the Republic will now be paid travel costs.
-   D. A Belfast extras agency is withdrawing from the Republic of Ireland because UK Right to Work rules have made its paperwork much heavier.  <- answer
-   explanation: The agency "has announced its withdrawal from the Republic of Ireland" and "attributed its decision to the UK's Right to Work legislation, which has substantially increased its administrative obligations". The broadcasters are its clients, not leaving (A); there is no move to Dublin (B); and travel costs "could prove prohibitive" for members, not be paid (C).
-Q2 [infer]: Why is the new rule especially difficult for this agency?
-   A. Because extras must now be paid more per day.
-   B. Because checks must be done before every engagement, and many extras work only for a single day.  <- answer
-   C. Because the rule bans contractors from working in film.
-   D. Because the agency has fewer than 2,000 members.
-   explanation: Employers must "verify an individual's eligibility to work prior to the commencement of any engagement" and, "given that many extras are engaged for a single day, compliance has become increasingly burdensome" — many short jobs mean many checks. Pay (A) and a ban (C) are not mentioned, and the register has "more than 20,000" people (D).
-Q3 [purpose]: Why does the writer mention clients such as HBO, Universal, RTÉ and the BBC?
-   A. To show the agency's size and importance in the industry.  <- answer
-   B. To suggest these companies caused the agency's withdrawal.
-   C. To criticise broadcasters for using extras.
-   D. To explain how extras verify their identity.
-   explanation: The names follow the facts that it was "the only large-scale agency of its kind in Northern Ireland" with "more than 20,000 extras", and are described as "prominent broadcasters and studios" — they underline how significant the agency is. The withdrawal is blamed on the legislation, not the clients (B); there is no criticism (C); and identity checks are done "through an external provider" (D).
-
-
-# 2026-11-26-tw-1  (region TW)
-date: 2026-11-26 | rank: 1 | topic: 科技 | main level: B2
-file: articles/2026-11-26-tw-1.json
-
-## title
-NTU Team Builds Low-Power Chips That Run AI on Your Phone
-
-## summaries
-- summaryEn: NTU researchers built two generations of energy-efficient chips that run generative AI directly on devices.
-- summaryZh: 台大研發兩代節能晶片，讓AI直接在裝置上運作
-- summaryJa: 台湾大学が端末上でAIを動かす省電力チップを2世代開発。
-- summaryKo: 대만대, 기기에서 직접 AI를 구동하는 저전력 칩 2세대 개발.
-- summaryEs: La NTU crea dos generaciones de chips de bajo consumo para ejecutar IA en el propio dispositivo.
-- summaryHi: NTU ने दो पीढ़ियों के कम बिजली वाले चिप बनाए, जिनसे AI सीधे फ़ोन और कारों पर चल सके।
-
-## sources
-- Focus Taiwan (CNA): https://focustaiwan.tw/sci-tech/202611250014
-
-## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
-
-## level A2
-A2 P1 S1: A team at National Taiwan University has made two new computer chips.
-    zh: 台灣大學的一個團隊做出了兩款新的電腦晶片。
-A2 P1 S2: The chips help phones, cars and robots use AI.
-    zh: 這些晶片幫助手機、汽車和機器人使用AI。
-A2 P1 S3: They use very little power.
-    zh: 它們用的電非常少。
-A2 P2 S1: Today, many AI tools need big computers far away.
-    zh: 現在，很多AI工具需要遠方的大型電腦。
-A2 P2 S2: Your phone sends data over the internet and waits for an answer.
-    zh: 你的手機透過網路傳送資料，然後等待回答。
-A2 P2 S3: These new chips let a device do the work by itself.
-    zh: 這些新晶片讓裝置可以自己完成工作。
-A2 P3 S1: The team leader is Professor Yang Chia-hsiang.
-    zh: 團隊的負責人是楊家驤教授。
-A2 P3 S2: His idea is simple.
-    zh: 他的想法很簡單。
-A2 P3 S3: The chip should only do the work it needs.
-    zh: 晶片應該只做需要做的工作。
-A2 P3 S4: It should also move less data.
-    zh: 它也應該少搬動資料。
-A2 P4 S1: The second chip is better than the first.
-    zh: 第二款晶片比第一款更好。
-A2 P4 S2: It can do a lot of work with a small amount of power.
-    zh: 它可以用很少的電完成很多工作。
-A2 P4 S3: This is good for batteries.
-    zh: 這對電池很有好處。
-A2 P5 S1: The team made a third chip in October.
-    zh: 這個團隊在10月做出了第三款晶片。
-A2 P5 S2: The government helps pay for the work.
-    zh: 政府幫忙出錢支持這項工作。
-
-## level B1
-B1 P1 S1: Researchers at National Taiwan University (NTU) have developed two generations of computer chips that let phones, cars, robots and machines run generative AI on their own, Taiwan's National Science and Technology Council said on Wednesday.
-    zh: 國科會週三表示，台灣大學的研究人員研發出兩代電腦晶片，讓手機、汽車、機器人和機器能自己執行生成式AI。
-B1 P2 S1: Most AI tools today run in large data centers.
-    zh: 現在大多數AI工具都在大型資料中心運行。
-B1 P2 S2: A device has to send information over the internet and wait for a reply.
-    zh: 裝置必須透過網路傳送資訊並等待回覆。
-B1 P2 S3: Chips that work inside the device can respond faster, keep personal data private and still work when the connection is poor.
-    zh: 在裝置內部運作的晶片反應更快、能保護個人資料隱私，而且在連線不佳時仍能運作。
-B1 P3 S1: The team is led by Professor Yang Chia-hsiang from the electrical engineering department.
-    zh: 這個團隊由電機工程學系的楊家驤教授帶領。
-B1 P3 S2: He explained that the main idea is to calculate only what is necessary and to move less data around inside the chip.
-    zh: 他解釋說，主要的想法是只計算必要的部分，並減少晶片內部搬動的資料。
-B1 P3 S3: Moving data uses a lot of energy.
-    zh: 搬動資料會消耗很多能源。
-B1 P4 S1: The first chip can both use and train an AI model, which the council says no earlier chip of its kind had done.
-    zh: 第一款晶片既能使用AI模型，也能訓練AI模型，國科會說以前沒有同類晶片做到這一點。
-B1 P4 S2: The second chip is even more efficient.
-    zh: 第二款晶片的效率更高。
-B1 P4 S3: It does up to 7.6 times as much work per watt as similar chips reported at the time.
-    zh: 它每瓦特能完成的工作，最多是當時類似晶片的7.6倍。
-B1 P5 S1: The results were presented at a major international chip conference in 2024 and 2025.
-    zh: 這些成果在2024年和2025年的一場重要國際晶片會議上發表。
-B1 P5 S2: A third chip, made with a more advanced process, was produced in October.
-    zh: 用更先進製程製造的第三款晶片，已在10月製造完成。
-
-## level B2
-B2 P1 S1: A research team at National Taiwan University (NTU) has developed two generations of energy-efficient processors designed to run generative AI directly on devices, the National Science and Technology Council (NSTC) announced on Wednesday.
-    zh: 國科會週三宣布，台灣大學的研究團隊研發出兩代節能處理器，專為在裝置上直接執行生成式AI而設計。
-B2 P2 S1: Most generative AI services currently depend on remote data centers, which means a phone or car must send data over a network and wait for a response.
-    zh: 目前大多數生成式AI服務都依賴遠端資料中心，這表示手機或汽車必須透過網路傳送資料並等待回應。
-B2 P2 S2: Processing on the device itself, the NSTC said, allows robots, vehicles, smartphones and factory equipment to react quickly, protect users' privacy and keep working where connections are unreliable.
-    zh: 國科會表示，在裝置本身進行運算，能讓機器人、車輛、智慧型手機和工廠設備快速反應、保護使用者隱私，並在連線不穩的地方持續運作。
-B2 P3 S1: The project is led by Professor Yang Chia-hsiang of NTU's electrical engineering department, whose guiding principle is to compute only what is necessary and to move as little data as possible.
-    zh: 這項計畫由台大電機系的楊家驤教授主持，他的指導原則是只計算必要的部分，並盡量少搬動資料。
-B2 P3 S2: The first chip, built on a 40-nanometer process, identifies the most important relationships in the data before doing any heavy calculation.
-    zh: 第一款晶片採用40奈米製程，會在進行大量計算之前，先找出資料中最重要的關係。
-B2 P4 S1: According to the council, it was the first reported processor able to speed up both the training and the use of Transformer models, the technology behind tools such as chatbots.
-    zh: 據國科會表示，這是首款被報導能同時加速Transformer模型訓練與使用的處理器，而Transformer正是聊天機器人等工具背後的技術。
-B2 P4 S2: The second chip simplifies training further and delivers 1.6 to 7.6 times the energy efficiency of comparable processors reported at the time.
-    zh: 第二款晶片進一步簡化訓練，能源效率是當時同類處理器的1.6到7.6倍。
-B2 P5 S1: The findings were presented at the IEEE Symposium on VLSI Technology and Circuits, a leading chip conference.
-    zh: 這些研究成果在頂尖晶片會議「IEEE超大型積體電路技術與電路研討會」上發表。
-B2 P5 S2: A third chip, produced in October on a 16-nanometer process, aims to overcome memory limits.
-    zh: 第三款晶片已於10月以16奈米製程製造，目標是突破記憶體的限制。
-
-## level C1
-C1 P1 S1: Engineers at National Taiwan University (NTU) have unveiled two successive generations of low-power processors capable of running generative AI entirely on a device, according to a statement released on Wednesday by the National Science and Technology Council (NSTC).
-    zh: 根據國科會週三發布的聲明，台灣大學的工程師發表了連續兩代低功耗處理器，能完全在裝置上執行生成式AI。
-C1 P2 S1: The work addresses a growing bottleneck.
-    zh: 這項研究針對的是一個日益嚴重的瓶頸。
-C1 P2 S2: Today's generative AI largely relies on distant data centers, so phones and vehicles must transmit data and await a reply.
-    zh: 如今的生成式AI大多依賴遙遠的資料中心，因此手機和車輛必須傳送資料並等待回覆。
-C1 P2 S3: On-device processing, the council argued, enables robots, cars, handsets and industrial machinery to respond almost instantly, safeguard sensitive information and function even when connectivity is patchy.
-    zh: 國科會主張，裝置端運算能讓機器人、汽車、手機和工業機械幾乎即時反應、保護敏感資訊，即使連線時好時壞也能運作。
-C1 P3 S1: Professor Yang Chia-hsiang, who heads the team, summed up its philosophy as computing only what is essential while minimising the movement of data, which consumes a disproportionate share of a chip's energy.
-    zh: 帶領團隊的楊家驤教授將其理念總結為：只計算必要的部分，同時盡量減少資料搬移，因為資料搬移會消耗晶片中不成比例的大量能源。
-C1 P3 S2: Accordingly, the first-generation chip, fabricated on a 40-nanometer process, pinpoints the key relationships within data before committing to intensive computation.
-    zh: 因此，以40奈米製程製造的第一代晶片，會在投入密集運算之前，先精準找出資料中的關鍵關係。
-C1 P4 S1: The NSTC described it as the first reported learning processor able to accelerate both inference and training for Transformer models, the architecture underpinning modern chatbots.
-    zh: 國科會形容，這是首款被報導能同時加速Transformer模型推論與訓練的學習型處理器，而Transformer正是現代聊天機器人的基礎架構。
-C1 P4 S2: Its successor streamlines training still further, achieving between 1.6 and 7.6 times the efficiency of comparable processors published at the time.
-    zh: 其後繼晶片進一步精簡訓練，效率達到當時已發表同類處理器的1.6到7.6倍。
-C1 P5 S1: Both designs were showcased at the prestigious IEEE Symposium on VLSI Technology and Circuits.
-    zh: 兩款設計都在享有盛譽的IEEE超大型積體電路技術與電路研討會上展示。
-C1 P5 S2: A third chip, manufactured in October on a 16-nanometer process, is intended to ease memory bandwidth constraints.
-    zh: 第三款晶片於10月以16奈米製程製造，目的在於緩解記憶體頻寬的限制。
-
-## level IELTS
-IELTS P1 S1: A research group at National Taiwan University (NTU) has created two consecutive generations of energy-efficient processors that allow generative artificial intelligence to operate directly on devices rather than in the cloud, the National Science and Technology Council (NSTC) reported on Wednesday.
-    zh: 國科會週三報告指出，台灣大學的一個研究團隊打造出連續兩代節能處理器，讓生成式人工智慧能直接在裝置上運作，而不必依賴雲端。
-IELTS P2 S1: At present, the vast majority of generative AI applications are dependent on remote data centers, obliging smartphones and vehicles to transmit information and wait for a response.
-    zh: 目前，絕大多數生成式AI應用都依賴遠端資料中心，迫使智慧型手機和車輛必須傳送資訊並等待回應。
-IELTS P2 S2: By contrast, on-device processing, the council maintained, permits robots, cars, phones and industrial equipment to react rapidly, preserve user privacy and remain operational in locations with unreliable connectivity.
-    zh: 國科會堅稱，相比之下，裝置端運算能讓機器人、汽車、手機和工業設備迅速反應、保護使用者隱私，並在連線不可靠的地點維持運作。
-IELTS P3 S1: The team, headed by Professor Yang Chia-hsiang, is guided by a deceptively simple principle: perform only the calculations that are strictly necessary and minimise data transfer, since moving data is a major source of energy consumption.
-    zh: 由楊家驤教授帶領的團隊，遵循一個看似簡單的原則：只執行絕對必要的計算，並將資料傳輸降到最低，因為搬移資料是能源消耗的主要來源。
-IELTS P3 S2: Consistent with this approach, the first chip, built on a 40-nanometer process, identifies the crucial relationships in a dataset before undertaking any intensive computation.
-    zh: 依照這個做法，採用40奈米製程的第一款晶片，會在進行任何密集運算之前，先找出資料集中的關鍵關係。
-IELTS P4 S1: The council asserted that this was the first documented processor capable of accelerating both the training and the deployment of Transformer models, the framework on which contemporary chatbots are built.
-    zh: 國科會斷言，這是第一款有紀錄可同時加速Transformer模型訓練與實際應用的處理器，而當代的聊天機器人正是建立在這個架構上。
-IELTS P4 S2: The second generation simplifies training even further and attains up to 7.6 times the energy efficiency of equivalent processors reported at the time.
-    zh: 第二代晶片進一步簡化訓練，能源效率最高可達當時同等處理器的7.6倍。
-IELTS P5 S1: The findings were disseminated at a highly regarded international symposium on chip technology.
-    zh: 這些研究成果在一場備受推崇的國際晶片技術研討會上發表。
-IELTS P5 S2: A third prototype, fabricated in October using a 16-nanometer process, is designed to tackle limitations in memory bandwidth.
-    zh: 第三款原型晶片於10月以16奈米製程製造，旨在解決記憶體頻寬的限制。
-
-
-# 2026-11-26-tw-2  (region TW)
-date: 2026-11-26 | rank: 2 | topic: 社會 | main level: B2
-file: articles/2026-11-26-tw-2.json
-
-## title
-Tiny Purchases Win NT$10 Million in Taiwan's Receipt Lottery
-
-## summaries
-- summaryEn: Shoppers who spent as little as NT$10 won NT$10 million in Taiwan's September–October receipt lottery.
-- summaryZh: 統一發票開獎，10元消費也中千萬特別獎
-- summaryJa: 台湾の統一発票抽選、10元の買い物で1000万元の特別賞。
-- summaryKo: 대만 영수증 복권, 10대만달러 구매로 1000만 대만달러 특별상 당첨.
-- summaryEs: En la lotería de recibos de Taiwán, compras de apenas NT$10 ganaron el premio de NT$10 millones.
-- summaryHi: ताइवान की रसीद लॉटरी में NT$10 जैसी छोटी खरीद पर भी NT$1 करोड़ का इनाम निकला।
-
-## sources
-- Focus Taiwan (CNA): https://focustaiwan.tw/society/202611250018
-- Focus Taiwan (CNA): https://focustaiwan.tw/business/202611250015
-
-## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
-
-## level A2
-A2 P1 S1: In Taiwan, every shop receipt has a number.
-    zh: 在台灣，每張商店的發票都有一個號碼。
-A2 P1 S2: Every two months, the government picks winning numbers.
-    zh: 每兩個月，政府會選出中獎號碼。
-A2 P1 S3: On Wednesday, it showed the numbers for September and October.
-    zh: 週三，政府公布了九月和十月的號碼。
-A2 P2 S1: The top prize is NT$10 million.
-    zh: 最高獎金是新台幣1,000萬元。
-A2 P2 S2: That is about US$300,000.
-    zh: 那大約是30萬美元。
-A2 P2 S3: Some people won it after buying very cheap things.
-    zh: 有些人買了很便宜的東西就中了這個獎。
-A2 P3 S1: 7-Eleven said four of its shoppers won the top prize.
-    zh: 7-Eleven說，它有四位顧客中了最高獎。
-A2 P3 S2: Some of them spent only NT$10 to NT$231.
-    zh: 其中有些人只花了新台幣10元到231元。
-A2 P3 S3: FamilyMart also had two big winners.
-    zh: 全家也有兩位大獎得主。
-A2 P3 S4: One person paid NT$46.
-    zh: 一個人付了新台幣46元。
-A2 P3 S5: Another paid NT$88.
-    zh: 另一個人付了88元。
-A2 P4 S1: At PX Mart, one shopper in Miaoli spent NT$2,244 on food and won NT$10 million.
-    zh: 在全聯，苗栗的一位顧客花了新台幣2,244元買食物，中了1,000萬元。
-A2 P5 S1: People can get their money from December 6 to March 5.
-    zh: 大家可以從12月6日到3月5日領取獎金。
-A2 P5 S2: Small prizes can be collected at a convenience store.
-    zh: 小額獎金可以在便利商店領取。
-
-## level B1
-B1 P1 S1: Taiwan's Ministry of Finance announced the winning numbers for the September–October receipt lottery on Wednesday, and several shops quickly reported that their customers had won the biggest prizes.
-    zh: 財政部週三公布了九至十月統一發票的中獎號碼，幾家商店很快就宣布他們的顧客中了最大獎。
-B1 P2 S1: In Taiwan, every official shop receipt, called a uniform invoice, has an eight-digit number.
-    zh: 在台灣，每張正式的商店收據都叫做統一發票，上面有一組八位數號碼。
-B1 P2 S2: The government holds a draw every two months.
-    zh: 政府每兩個月舉辦一次開獎。
-B1 P2 S3: The special prize is NT$10 million, which is worth about US$300,000, and the grand prize is NT$2 million.
-    zh: 特別獎是新台幣1,000萬元，約合30萬美元，特獎則是新台幣200萬元。
-B1 P3 S1: President Chain Store, which runs 7-Eleven, said four of its customers won the special prize.
-    zh: 經營7-Eleven的統一超商說，有四位顧客中了特別獎。
-B1 P3 S2: Their purchases cost between NT$10 and NT$231.
-    zh: 他們的消費金額在新台幣10元到231元之間。
-B1 P3 S3: FamilyMart had two special prize winners in Nantou and Tainan, who spent just NT$46 and NT$88.
-    zh: 全家有兩位特別獎得主，分別在南投和台南，只花了新台幣46元和88元。
-B1 P4 S1: Supermarket chain PX Mart said one shopper in Toufen, Miaoli County, won NT$10 million after buying NT$2,244 of groceries.
-    zh: 連鎖超市全聯說，苗栗縣頭份的一位顧客買了新台幣2,244元的食品雜貨，中了1,000萬元。
-B1 P5 S1: Winners can collect their money from December 6 until March 5 next year.
-    zh: 得獎者可以從12月6日到明年3月5日領取獎金。
-B1 P5 S2: Prizes of NT$1,000 or less can be picked up at convenience stores, while larger prizes are paid at certain banks.
-    zh: 新台幣1,000元以下的獎金可以在便利商店領取，較高的獎金則要到指定的銀行領取。
-
-## level B2
-B2 P1 S1: Shoppers across Taiwan checked their receipts on Wednesday after the Ministry of Finance released the winning numbers for the September–October uniform invoice lottery, with major retailers soon revealing that some top prizes had gone to customers who spent only small amounts.
-    zh: 財政部週三公布九至十月統一發票中獎號碼後，全台購物者紛紛核對發票，各大零售商隨即透露，有些大獎得主只花了一點點錢。
-B2 P2 S1: Taiwan's receipt lottery was created to encourage shoppers to ask for official receipts, which helps the government collect business tax.
-    zh: 台灣的發票抽獎制度是為了鼓勵購物者索取正式收據而設立，這有助於政府徵收營業稅。
-B2 P2 S2: Each receipt carries an eight-digit number, and draws are held every two months.
-    zh: 每張發票都有一組八位數號碼，每兩個月開獎一次。
-B2 P2 S3: The special prize is worth NT$10 million, roughly US$300,000, while the grand prize is NT$2 million.
-    zh: 特別獎獎金為新台幣1,000萬元，約30萬美元，特獎則為新台幣200萬元。
-B2 P3 S1: President Chain Store Corp., the operator of 7-Eleven, reported four special prize winners whose purchases ranged from NT$10 to NT$231.
-    zh: 經營7-Eleven的統一超商表示，有四位特別獎得主，消費金額從新台幣10元到231元不等。
-B2 P3 S2: FamilyMart said two of its customers, in Nantou and Tainan, had won NT$10 million after paying just NT$46 and NT$88.
-    zh: 全家表示，旗下兩位分別在南投和台南的顧客，只付了新台幣46元和88元就贏得1,000萬元。
-B2 P4 S1: PX Mart, a supermarket chain, said one shopper in Toufen, Miaoli County, won NT$10 million after buying groceries worth NT$2,244, and another in New Taipei won NT$2 million with an NT$340 purchase.
-    zh: 連鎖超市全聯說，苗栗縣頭份一位顧客買了新台幣2,244元的食品雜貨後贏得1,000萬元，另一位新北市的顧客則以新台幣340元的消費贏得200萬元。
-B2 P5 S1: Prizes can be claimed from December 6 to March 5.
-    zh: 獎金可在12月6日至3月5日之間領取。
-B2 P5 S2: Amounts up to NT$1,000 can be collected at convenience stores, while larger sums are paid at designated banks.
-    zh: 新台幣1,000元以下的金額可在便利商店領取，較大的金額則由指定銀行支付。
-
-## level C1
-C1 P1 S1: Receipts were scrutinised across Taiwan on Wednesday after the Ministry of Finance unveiled the winning numbers for the September–October uniform invoice lottery, and leading retailers were quick to announce that several jackpots had been won by customers making the most modest of purchases.
-    zh: 財政部週三揭曉九至十月統一發票中獎號碼後，全台民眾仔細檢查手上的發票，各大零售商也迅速宣布，數個大獎都由消費金額極少的顧客抱走。
-C1 P2 S1: The scheme, a long-standing feature of everyday life in Taiwan, was introduced to motivate consumers to request official receipts, thereby making it harder for businesses to evade tax.
-    zh: 這項制度長期以來是台灣日常生活的一部分，當初推出是為了促使消費者索取正式發票，讓企業更難逃漏稅。
-C1 P2 S2: Every receipt bears an eight-digit number, and draws take place bimonthly.
-    zh: 每張發票都印有一組八位數號碼，每兩個月開獎一次。
-C1 P2 S3: The special prize stands at NT$10 million, approximately US$300,000, with a grand prize of NT$2 million.
-    zh: 特別獎為新台幣1,000萬元，約30萬美元，特獎則為新台幣200萬元。
-C1 P3 S1: President Chain Store Corp., which operates 7-Eleven, disclosed that four of its customers had scooped the special prize with purchases ranging from a mere NT$10 to NT$231.
-    zh: 經營7-Eleven的統一超商透露，有四位顧客摘下特別獎，消費金額從區區新台幣10元到231元不等。
-C1 P3 S2: FamilyMart, meanwhile, reported two such winners in Nantou and Tainan, who had spent only NT$46 and NT$88 respectively.
-    zh: 與此同時，全家也報告有兩位這樣的得主，分別在南投和台南，各只花了新台幣46元和88元。
-C1 P4 S1: At supermarket operator PX Mart, a shopper in Toufen, Miaoli County, landed NT$10 million on an NT$2,244 grocery bill.
-    zh: 在超市業者全聯，苗栗縣頭份的一位顧客以新台幣2,244元的食品帳單贏得1,000萬元。
-C1 P5 S1: Winnings may be collected between December 6 and March 5.
-    zh: 獎金可在12月6日至3月5日之間領取。
-C1 P5 S2: Sums of up to NT$1,000 can be redeemed at convenience stores, whereas larger amounts must be claimed at designated financial institutions.
-    zh: 新台幣1,000元以內的金額可在便利商店兌領，較大的金額則必須到指定的金融機構領取。
-
-## level IELTS
-IELTS P1 S1: Consumers throughout Taiwan were examining their receipts on Wednesday after the Ministry of Finance published the winning numbers for the September–October uniform invoice lottery.
-    zh: 財政部週三公布九至十月統一發票的中獎號碼後，全台消費者都在檢查自己的發票。
-IELTS P1 S2: Shortly afterwards, major retailers announced that a number of the largest prizes had been won by customers whose purchases were remarkably inexpensive.
-    zh: 不久之後，各大零售商宣布，多個最大獎項是由消費金額格外低廉的顧客贏得。
-IELTS P2 S1: The lottery was established with a clear fiscal objective: to give consumers an incentive to obtain official receipts, which in turn makes it considerably more difficult for businesses to under-report their sales and avoid taxation.
-    zh: 這項抽獎制度的設立有明確的財政目標：給消費者索取正式發票的誘因，進而讓企業更難少報營業額和逃稅。
-IELTS P2 S2: Each receipt displays an eight-digit number, and a draw is held every two months.
-    zh: 每張發票都印有一組八位數號碼，每兩個月開獎一次。
-IELTS P2 S3: The special prize amounts to NT$10 million, equivalent to roughly US$300,000, while the grand prize is NT$2 million.
-    zh: 特別獎金額為新台幣1,000萬元，相當於約30萬美元，特獎則為新台幣200萬元。
-IELTS P3 S1: President Chain Store Corp., the operator of 7-Eleven, stated that four of its customers had secured the special prize with transactions ranging from NT$10 to NT$231.
-    zh: 經營7-Eleven的統一超商表示，有四位顧客以新台幣10元到231元不等的交易獲得特別獎。
-IELTS P3 S2: Similarly, FamilyMart indicated that two winners, in Nantou and Tainan, had paid merely NT$46 and NT$88.
-    zh: 同樣地，全家指出，有兩位分別在南投和台南的得主，只付了新台幣46元和88元。
-IELTS P4 S1: Meanwhile, PX Mart reported that a shopper in Toufen, Miaoli County, had obtained the top prize after a grocery purchase of NT$2,244.
-    zh: 與此同時，全聯報告，苗栗縣頭份的一位顧客在購買了新台幣2,244元的食品雜貨後獲得最高獎。
-IELTS P5 S1: The claim period runs from December 6 until March 5.
-    zh: 領獎期間從12月6日至3月5日。
-IELTS P5 S2: Prizes not exceeding NT$1,000 may be collected at convenience stores, whereas larger sums are distributed through designated banks.
-    zh: 不超過新台幣1,000元的獎金可在便利商店領取，較大的金額則透過指定銀行發放。
+   A. The Government has cancelled the school transport scheme for post-primary pupils.
+   B. A planned rise in school bus fares faces growing pressure to be reconsidered, despite the scheme's rising cost to the State.  <- answer
+   C. School bus fares will be reduced permanently from next September.
+   D. Taxis for children with special needs will no longer be funded.
+   explanation: Crowe says the fare increase "will need to be revisited", opposition is "substantial" and Martin indicated increases "might be reconsidered", while officials note costs have "increased by 58% since 2020". The scheme is not cancelled (A); fares are due to rise, not fall (C); and taxi funding of €143 million continues (D).
+Q2 [infer]: What can be inferred about the Government's position on the fare increase?
+   A. Senior Government figures appear to be giving mixed signals about it.  <- answer
+   B. All ministers agree that the increase must go ahead unchanged.
+   C. The Government has already reversed the increase.
+   D. The Government plans to raise fares further in 2028.
+   explanation: Martin "indicated on Wednesday that certain increases might be reconsidered, notwithstanding the fact that" Harris "had explicitly ruled out a reversal the previous week" — the two leaders are not saying the same thing. That rules out unanimity (B) and an actual reversal (C); further rises (D) are not mentioned.
+Q3 [purpose]: Why does the writer include the officials' figures on the cost of transporting each child?
+   A. To show that parents already pay most of the cost of the scheme.
+   B. To prove that the €350 fare would cover the full cost of each place.
+   C. To give context for the Government's decision by showing how much the State spends on the scheme.  <- answer
+   D. To argue that the school bus scheme should be abolished.
+   explanation: Officials said each child costs "between €1,400 and €1,500 per year, with the State subsidising 93%" at primary and 75% at post-primary, and the scheme will cost €687 million. This explains the financial pressure behind the decision. Parents do not pay most of it (A), €350 is well below €1,400 (B), and no one argues for abolition (D).
