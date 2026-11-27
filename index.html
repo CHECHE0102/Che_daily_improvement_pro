@@ -1316,6 +1316,7 @@ img.mflip,.rig-mon.mflip{transform:scaleX(-1)}.mon-cv{position:absolute;inset:0;
 .gift-card{border:1px solid var(--line,#ccd);border-radius:12px;padding:10px;margin:8px 0;display:flex;flex-direction:column;gap:6px}.gift-card.pending{border-color:#E3B341}.gift-card.accepted{border-color:#2f9e6e}.gift-doneq{font-weight:600}.gift-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .am-scrim{position:fixed;inset:0;bottom:calc(65px + env(safe-area-inset-bottom,0px));z-index:30;background:rgba(10,16,14,.25);animation:amFade .22s ease-out both}#advMenu.closing .am-scrim{animation:amFadeOut .18s ease-in both}@keyframes amFade{from{opacity:0}}@keyframes amFadeOut{to{opacity:0}}
 .adv-menu{position:fixed;z-index:31;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 32px));background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.22);padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;transform-origin:50% calc(100% + 14px);animation:amIn .28s cubic-bezier(.2,.9,.25,1.12) both;will-change:transform,opacity}.adv-menu::after{content:"";position:absolute;left:50%;bottom:-7px;width:14px;height:14px;margin-left:-7px;background:var(--card);border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}#advMenu.closing .adv-menu{animation:amOut .18s cubic-bezier(.4,0,1,1) both}@keyframes amIn{from{opacity:0;transform:translateX(-50%) translateY(18px) scale(.4)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}@keyframes amOut{from{opacity:1;transform:translateX(-50%) scale(1)}to{opacity:0;transform:translateX(-50%) translateY(14px) scale(.5)}}@media (prefers-reduced-motion:reduce){.adv-menu,#advMenu.closing .adv-menu{animation-duration:.01s}}
+.am-plz{grid-column:1/-1;display:flex;flex-direction:column;gap:8px;padding:10px 10px 8px;border-radius:14px;border:1px solid var(--line);background:var(--paper);color:inherit;font:inherit;text-align:left}.am-plz.locked{opacity:.55}.amp-h{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer}.amp-h>span:first-child{display:flex;flex-direction:column;gap:1px;min-width:0}.amp-h b{font-size:16px}.amp-go{flex:0 0 auto;color:#fff;background:var(--accent);border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;white-space:nowrap}.amp-ground{padding:10px 6px 6px;margin:0;min-height:96px;align-items:flex-end}.amp-p{width:66px;position:relative}.amp-p .plz-art{width:66px;height:66px}.amp-p .plz-n{max-width:66px;font-size:11px;padding:1px 6px}.amp-like{position:absolute;top:-4px;right:2px;font-style:normal;font-size:15px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}.amp-empty{align-self:center;margin:auto}
 .am-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:inherit;font:inherit;font-weight:700;font-size:14px}.am-ic{font-size:24px}.am-item.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--paper))}.am-item.locked{opacity:.5}
 .page-h h2{margin:4px 0 2px;font-size:24px}.sub-h{display:flex;align-items:center;justify-content:space-between;gap:8px}.sub-h b{font-size:18px}
 .am-snd{grid-column:1/-1;display:flex;gap:6px}.am-snd button{flex:1;border:1px dashed var(--line);border-radius:10px;padding:8px 4px;background:none;color:var(--muted);font:inherit;font-size:13px;font-weight:700}.am-snd button.on{border-style:solid;color:var(--accent);border-color:var(--accent)}
@@ -2375,7 +2376,6 @@ function viewToday(){
     ${easyHint()||""}
     ${extras.length?`<section style="display:flex;flex-direction:column;gap:10px"><div><div class="eyebrow">${T("moreRead")}</div><h2 style="font-size:20px">${T("moreCount",{n:extras.length})}</h2></div>
       ${preDone||readDone?`<div class="arch">${extras.map(a=>artCard(a,d)).join("")}</div>`:`<p class="muted" style="font-size:14px">${T("moreLocked2")}</p>`}</section>`:""}
-    ${plazaMini()}
     ${pushPrompt()}
     <div class="stats">
       <div class="stat"><b>${S.words.size}</b><span>${T("statWords")}</span></div>
@@ -4142,9 +4142,34 @@ const ADV_PAGES={coop:["🎓","tabExam"], think:["🧠","tabThink"], rank:["🏆
 /* the 冒險 tab in the bottom bar opens a small menu: adventure, exams, reasoning, leaderboard */
 const ADV_MENU=[["go","⚔️","tabAdv"],["rank","🏆","tabRank"],["coop","🎓","tabExam"],["think","🧠","tabThink"]];
 function advMenuHtml(){ const cur=S.tab==="adv"?(ADV_PAGES[S.advTab]?S.advTab:"go"):null;
-  return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu" role="menu">${ADV_MENU.map(([k,ic,l])=>{ const lk=featLock(k);
+  return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu" role="menu">${amPlaza()}${ADV_MENU.map(([k,ic,l])=>{ const lk=featLock(k);
     return `<button role="menuitem" class="am-item${cur===k?" on":""}${lk?" locked":""}" data-act="amgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${lk?"🔒 ":""}${T(l)}</span></button>`; }).join("")}
     </div>`; }
+/* 廣場 card at the top of the 冒險 menu: players who liked you this week first (👍), then players online lately */
+function amPlzList(){ const me=CLOUD.user&&CLOUD.user.uid, seen=new Set([me]), out=[];
+  for(const r of PLAZA.likers||[]) if(!seen.has(r.id)&&r.look){ seen.add(r.id); out.push({...r, liked:true}); }
+  for(const r of PLAZA.rows||[]) if(!seen.has(r.id)&&r.look){ seen.add(r.id); out.push(r); }
+  return out.slice(0,12); }
+function amPlaza(){ if(!CLOUD.user||SANDBOX()) return "";
+  const lk=featLock("plaza"); if(lk) return `<button role="menuitem" class="am-plz locked" data-act="amplz"><div class="amp-h"><b>🏞️ 🔒 ${T("plzT")}</b><span class="muted sm-t">${lockMsg(lk)}</span></div></button>`;
+  if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(()=>plazaLoad().then(amPlzRefresh),0);
+  if(!PLAZA.likBusy&&Date.now()-(PLAZA.likAt||0)>10*60e3) setTimeout(plzLikersLoad,0);
+  const L=amPlzList(), nl=(PLAZA.likers||[]).filter(r=>r.look).length;
+  const sub=nl?T("amPlzLiked",{n:nl}):L.length?T("plzMiniN",{n:L.length}):"";
+  const figs=L.map((r,i)=>`<span class="plz-p amp-p" data-act="amlook" data-k="${i}" style="--d:${(i*0.37)%2}s"><span class="plz-fig">${lookArt(r.look,"plz-art")}</span>${r.liked?`<i class="amp-like">👍</i>`:""}<span class="plz-n">${/^[A-Z]{2}$/.test(r.flag||"")?flagOf(r.flag)+" ":""}${esc(r.name||"")}</span></span>`).join("");
+  return `<div class="am-plz" role="menuitem"><div class="amp-h" data-act="amplz"><span><b>🏞️ ${T("plzT")}</b>${sub?`<span class="muted sm-t">${sub}</span>`:""}</span><span class="amp-go">${T("amPlzGo")} →</span></div><div class="plz-ground amp-ground">${figs||`<span class="muted sm-t amp-empty">${PLAZA.rows?"":T("loading")}</span>`}</div></div>`; }
+function amPlzRefresh(){ const m=document.querySelector('#advMenu:not(.closing)[data-k="adv"] .am-plz'); if(!m) return;
+  const sc=(m.querySelector(".amp-ground")||{}).scrollLeft||0; m.outerHTML=amPlaza(); const g=document.querySelector("#advMenu .amp-ground"); if(g) g.scrollLeft=sc; }
+/* who liked me this week: likeGiven docs with to = me (needs the rule that lets you read likes given TO you; without it the list stays empty) */
+async function plzLikersLoad(){ if(!CLOUD.fb||!CLOUD.user||PLAZA.likBusy) return; PLAZA.likBusy=true; const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid;
+  try{ const q=await fsM.getDocs(fsM.query(fsM.collection(db,"likeGiven"),fsM.where("to","==",me),fsM.where("w","==",plzWeek()),fsM.limit(12)));
+    const ids=[...new Set(q.docs.map(d=>d.data().from).filter(x=>typeof x==="string"&&x!==me))], byId={};
+    for(const r of PLAZA.rows||[]) byId[r.id]=r;
+    PLAZA.likers=(await Promise.all(ids.map(async id=>{ if(byId[id]) return byId[id];
+      try{ const d=await fsM.getDoc(fsM.doc(db,"leaderboard",id)); if(!d.exists()) return null; const x=safeDoc(d.data()); return {id, name:x.name, look:typeof x.look==="string"?x.look:"", lv:x.lv, power:x.power, conq:x.conq, flag:x.flag}; }catch(e){ return null; } }))).filter(Boolean);
+    for(const r of PLAZA.likers) if(r.look) LOOKS[r.id]=r.look; }
+  catch(e){ console.warn("likers",e&&(e.code||e.message)); PLAZA.likers=PLAZA.likers||[]; }
+  PLAZA.likAt=Date.now(); PLAZA.likBusy=false; amPlzRefresh(); }
 const PLAY_MENU=[["party","🎉","pmParty"],["duo","⚔️","pmDuo"]];
 function playMenuHtml(){ const cur=S.view==="play"?(S.playMode||"party"):null;
   return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-right" role="menu">${PLAY_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${cur===k?" on":""}" data-act="pmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
@@ -4160,6 +4185,8 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-tab]")) advMenuToggle(false);   // another bottom tab: close the menu and go there
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
   if(a==="amclose"){ e.stopPropagation(); advMenuToggle(false); return; }
+  if(a==="amplz"){ e.stopPropagation(); const lk=featLock("plaza"); if(lk){ toast("🔒 "+lockMsg(lk)); return; } advMenuToggle(false); plazaOpen(); return; }
+  if(a==="amlook"){ e.stopPropagation(); const r=amPlzList()[+t.dataset.k]; advMenuToggle(false); if(r) lookCard(r); return; }
   if(a==="rmgo"){ e.stopPropagation(); advMenuToggle(false); setTab(t.dataset.k); return; }
   if(a==="pmgo"){ e.stopPropagation(); advMenuToggle(false); S.playMode=t.dataset.k; S.tab="play"; S.view="play"; S.open=null; render(); window.scrollTo(0,0); return; }
   if(a==="amgo"){ e.stopPropagation(); const k=t.dataset.k, lk=featLock(k); if(lk){ toast("🔒 "+lockMsg(lk)); return; } advMenuToggle(false);
@@ -4784,7 +4811,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.140";
+const APP_VERSION="2026.11.141";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -10057,11 +10084,6 @@ function plazaList(){ const me=CLOUD.user&&CLOUD.user.uid, g=game(), mine=myLook
   const rows=(PLAZA.rows||[]).filter(r=>r.id!==me);
   if(mine&&g.nick){ const e=lbEntry(); rows.unshift({id:me, name:g.nick, look:mine, lv:e.lv, power:e.power, conq:e.conq, flag:e.flag, me:true}); }
   return rows; }
-/* 今日 page: the plaza is one small row (the full card with everyone's figures is too much for the first screen) */
-function plazaMini(){ if(!CLOUD.user||SANDBOX()||featLock("plaza")) return "";
-  if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(plazaLoad,0);
-  const n=plazaList().length;
-  return `<button class="card plz-mini" data-act="plzgo"><span>🏞️ <b>${T("plzT")}</b>${n?` <span class="muted sm-t">${T("plzMiniN",{n})}</span>`:""}</span><span class="go">${T("plzGo")} →</span></button>`; }
 function plazaCard(){ if(!CLOUD.user||SANDBOX()||featLock("plaza")) return "";
   if(!PLAZA.busy&&(!PLAZA.rows||Date.now()-PLAZA.at>10*60e3)) setTimeout(plazaLoad,0);
   const L=plazaList();
@@ -12252,6 +12274,12 @@ Object.assign(STR.hi,{"lnTitle": "अगली बार ऐसे लड़े�
 Object.assign(STR.es,{"lnTitle": "La próxima vez, prueba esto:", "lnEquip": "{m} es débil contra {c}. Tienes {i} en la mochila: equípalo para hacer 1,5× de daño.", "lnEquipB": "Equipar {i}", "lnEquipped": "{i} equipado", "lnShop": "{m} es débil contra {c}. Compra un arma de {c} en la tienda para hacer 1,5× de daño.", "lnShopB": "Ver armas de {c} en la tienda", "lnMiss": "Fallaste {n} palabra(s) en esta batalla ({w}). Al fallar, el monstruo contraataca: practícalas primero.", "lnMissB": "Practicar estas {n} palabras", "lnMissT": "Practicar las palabras falladas", "old7": "Hoy acertaste {n} palabra(s) que consultaste por primera vez hace al menos {d} días. Ya las recuerdas:", "gistLead": "¿Entendiste la noticia?", "gistAns": "Respuesta", "gistEv": "Esta frase de la noticia da la respuesta", "u2b": "¡Segundo día completado! Hoy se abren dos lugares nuevos: Clases tiene lecciones cortas de inglés que dan oro, y el Campo de práctica te deja probar golpes con monstruos.", "d2a": "¿Para qué sirve el oro? Compra equipo elemental en la Tienda. Un arma que vence el elemento del enemigo hace 1,5× de daño, y la armadura adecuada suaviza sus golpes.", "d2b": "Los pases sirven para atacar ciudades: cada noticia que lees y cuyo test terminas te da uno. Las ciudades que liberas te pagan impuestos cada día para comprar mejor equipo.", "d2c": "Lo más importante: las palabras que consultas en las noticias vuelven como preguntas en la batalla. Lee una noticia más cada día y serás más fuerte. ¡Hasta mañana!", "u5c": "También se abre Razonamiento: te espera en el menú de Aventura. La Casa de la Suerte y la Bóveda Arcoíris también están abiertas; pásate cuando quieras probar suerte o enviar un regalo a un amigo.", "plzMiniN": "{n} aventureros conectados últimamente"});
 Object.assign(STR.ja,{"lnTitle": "次はこう戦おう：", "lnEquip": "{m}は「{c}」に弱い。バッグの「{i}」を装備すればダメージ1.5倍。", "lnEquipB": "{i}を装備", "lnEquipped": "{i}を装備しました", "lnShop": "{m}は「{c}」に弱い。ショップで{c}属性の武器を買えばダメージ1.5倍。", "lnShopB": "ショップで{c}属性の武器を見る", "lnMiss": "このバトルで{n}語まちがえた（{w}）。まちがえると魔物が反撃するので、先に練習しよう。", "lnMissB": "この{n}語を練習", "lnMissT": "まちがえた単語の練習", "old7": "今日は、{d}日以上前に調べた単語を{n}語正解。ちゃんと覚えています：", "gistLead": "記事の内容、わかった？", "gistAns": "答え", "gistEv": "記事のこの文が答えの根拠", "u2b": "2日目も達成じゃ！今日は新しい場所が2つ開く：「小教室」は短い英語レッスンでゴールドがもらえる、「練習場」では魔物で技を試せるぞ。", "d2a": "ゴールドの使い道？「ショップ」で五行の装備を買うのじゃ。敵の属性に勝つ武器ならダメージ1.5倍、合った防具なら受けるダメージも軽くなる。", "d2b": "出撃券は町を攻めるためのもの。記事を1本読んでテストを終えるごとに1枚。取り戻した町は毎日税金をくれるから、もっと良い装備が買える。", "d2c": "一番大事なこと：ニュースで調べた単語は、バトルで問題として出てくる。毎日1本多く読めば、それだけ強くなれる。また明日な！", "u5c": "「推理読解」も開放じゃ。冒険メニューで待っておる。「ラッキーハウス」と「虹の宝庫」も開いたぞ。運試しをしたい時や友だちに贈り物をしたい時に、のぞいてみるといい。", "plzMiniN": "最近 {n} 人の冒険者がオンライン"});
 Object.assign(STR.ko,{"lnTitle": "다음엔 이렇게 싸워 봐요:", "lnEquip": "{m}은(는) '{c}' 속성에 약해요. 가방에 있는 '{i}'을(를) 장착하면 피해 1.5배.", "lnEquipB": "{i} 장착", "lnEquipped": "{i} 장착 완료", "lnShop": "{m}은(는) '{c}' 속성에 약해요. 상점에서 {c} 속성 무기를 사면 피해 1.5배.", "lnShopB": "상점에서 {c} 속성 무기 보기", "lnMiss": "이번 전투에서 {n}개 단어를 틀렸어요 ({w}). 틀리면 괴물이 반격하니 먼저 연습해요.", "lnMissB": "이 {n}개 단어 연습", "lnMissT": "틀린 단어 연습", "old7": "오늘 적어도 {d}일 전에 찾은 단어 {n}개를 맞혔어요. 확실히 기억하고 있어요:", "gistLead": "기사 내용을 이해했나요?", "gistAns": "정답", "gistEv": "기사의 이 문장이 답을 알려 줘요", "u2b": "둘째 날도 해냈구나! 오늘은 새로운 곳 두 군데가 열려: '소교실'은 짧은 영어 수업으로 골드를 주고, '연습장'에서는 괴물에게 기술을 시험할 수 있지.", "d2a": "골드는 어디에 쓰냐고? '상점'에서 오행 장비를 사렴. 적의 속성을 이기는 무기는 피해가 1.5배, 알맞은 방어구는 받는 피해를 줄여 준단다.", "d2b": "출정권은 마을을 공격할 때 쓰지. 기사 하나를 읽고 퀴즈를 마칠 때마다 1장. 되찾은 마을은 매일 세금을 줘서 더 좋은 장비를 살 수 있어.", "d2c": "가장 중요한 건: 뉴스에서 찾은 단어가 전투에서 문제로 나온다는 거야. 매일 기사 하나를 더 읽으면 그만큼 강해진단다. 내일 보자!", "u5c": "'추론 읽기'도 열렸어. 모험 메뉴에서 기다리고 있단다. '행운의 집'과 '무지개 보물고'도 열렸으니, 운을 시험해 보고 싶거나 친구에게 선물을 보내고 싶을 때 들러 보렴.", "plzMiniN": "최근 접속한 모험가 {n}명"});
+Object.assign(STR.zh,{"amPlzGo": "進去走走", "amPlzLiked": "這週有 {n} 人按你讚 👍"});
+Object.assign(STR.en,{"amPlzGo": "Walk in", "amPlzLiked": "{n} liked you this week 👍"});
+Object.assign(STR.hi,{"amPlzGo": "अंदर चलें", "amPlzLiked": "इस हफ़्ते {n} ने आपको पसंद किया 👍"});
+Object.assign(STR.es,{"amPlzGo": "Entrar", "amPlzLiked": "{n} te dieron me gusta esta semana 👍"});
+Object.assign(STR.ja,{"amPlzGo": "入る", "amPlzLiked": "今週 {n} 人がいいねしてくれた 👍"});
+Object.assign(STR.ko,{"amPlzGo": "들어가기", "amPlzLiked": "이번 주 {n}명이 좋아요를 눌렀어요 👍"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
