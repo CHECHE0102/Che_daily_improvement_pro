@@ -31,3 +31,14 @@ for i in range(1, len(parts)):
 subprocess.run(["ffmpeg","-y","-v","error",*inp,"-filter_complex",fv+fa.rstrip(";"),"-map",f"[{pv}]","-map",f"[{pa}]",
   "-c:v","libx264","-preset","medium","-crf","20","-pix_fmt","yuv420p","-c:a","aac","-b:a","160k","-movflags","+faststart",OUT], check=True)
 print("done", OUT, round(dur(OUT),2), "s")
+# IG/FB Stories reject videos over 60 s: speed the whole video up slightly to fit.
+MAX = 58.5
+d = dur(OUT)
+if d > MAX:
+    f = d / MAX
+    fast = OUT + ".fast.mp4"
+    subprocess.run(["ffmpeg","-y","-v","error","-i",OUT,"-filter_complex",f"[0:v]setpts=PTS/{f:.4f}[v];[0:a]atempo={f:.4f}[a]",
+      "-map","[v]","-map","[a]","-r","30","-c:v","libx264","-preset","medium","-crf","20","-pix_fmt","yuv420p","-c:a","aac","-b:a","160k",
+      "-movflags","+faststart",fast], check=True)
+    os.replace(fast, OUT)
+    print("sped up x%.3f to fit Stories:" % f, round(dur(OUT), 2), "s")
