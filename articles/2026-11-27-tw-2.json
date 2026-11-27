@@ -29,7 +29,7 @@
   "A2": {
    "paragraphs": [
     "Taiwan has local elections on Saturday. People will choose new mayors and city leaders. The candidates are very busy this week.",
-    "In New Taipei, Lee Shu-chuan visited his 100th market. He shook hands with shoppers. His rival, Su Chiao-hui, rode in a long line of cars through seven areas of the city.",
+    "In New Taipei, Lee Shu-chuan made his 100th market visit. He shook hands with shoppers. His rival, Su Chiao-hui, rode in a long line of cars through seven areas of the city.",
     "In Taipei, Mayor Chiang Wan-an also drove around the city. He wants to win again. His rival, Puma Shen, cancelled his big event on a main road on Friday night. He said it would cause too much traffic.",
     "Party leaders are helping too. President Lai Ching-te and former President Tsai Ing-wen will join a big event for Su on Friday. Speaker Han Kuo-yu will help Lee.",
     "On Saturday, people will vote. Then the counting starts."
@@ -41,7 +41,7 @@
      "這個星期候選人都非常忙。"
     ],
     [
-     "在新北，李四川走訪了他的第100個市場。",
+     "在新北，李四川完成競選期間第100次市場拜票。",
      "他和買菜的民眾握手。",
      "他的對手蘇巧慧坐在長長的車隊裡，經過市內七個地區。"
     ],
@@ -49,7 +49,7 @@
      "在台北，市長蔣萬安也開車繞行全市。",
      "他想再次勝選。",
      "他的對手沈伯洋取消了星期五晚上在一條主要道路上的大型活動。",
-     "他說那會造成太多交通。"
+     "他說那會造成交通壅塞。"
     ],
     [
      "政黨領袖也在幫忙。",
@@ -130,7 +130,7 @@
    "paragraphs": [
     "Taiwan's candidates threw everything into the final stretch of campaigning on Thursday, two days before Saturday's local elections, as party heavyweights fanned out across the island to rally their supporters.",
     "In New Taipei, the most populous municipality, KMT hopeful Lee Shu-chuan notched up his 100th market walkabout with Mayor Hou Yu-ih at his side, while the DPP's Su Chiao-hui wound her way through seven districts by motorcade, capping what she called a campaign of almost 900 days.",
-    "The Taipei contest, meanwhile, was overshadowed by a dispute over road use. DPP challenger Puma Shen scrapped his planned election-eve rally on Ren'ai Road, insisting that the city's traffic plan would still cause gridlock. Incumbent Chiang Wan-an had offered to forgo his own event to free up space, a gesture Shen's camp acknowledged but declined, opting instead for an online gathering.",
+    "The Taipei contest, meanwhile, was overshadowed by a dispute over road use. DPP challenger Puma Shen scrapped his planned election-eve rally on Ren'ai Road, insisting that the city's traffic plan would still cause gridlock. Incumbent Chiang Wan-an had offered to forgo his own event to free up space, a gesture Shen's camp acknowledged but declined, with his team saying an online gathering was likely.",
     "Friday's closing rallies promise star power: President Lai Ching-te and his predecessor, Tsai Ing-wen, will stand beside Su, while Legislative Speaker Han Kuo-yu and Eric Chu will lend their weight to Lee.",
     "Ballots will be counted on Saturday evening."
    ],
@@ -144,7 +144,7 @@
     [
      "與此同時，台北的選戰被一場道路使用爭議蓋過鋒頭。",
      "民進黨挑戰者沈伯洋取消了原定在仁愛路舉行的選前之夜造勢晚會，堅稱市府的交通計畫仍會造成交通癱瘓。",
-     "現任市長蔣萬安曾表示願意放棄自己的活動來騰出空間，沈伯洋陣營對此表示感謝但婉拒，改為舉辦線上集會。"
+     "現任市長蔣萬安曾表示願意放棄自己的活動來騰出空間，沈伯洋陣營對此表示感謝但婉拒，並表示可能改為舉辦線上集會。"
     ],
     [
      "星期五的收尾造勢晚會可望星光熠熠：賴清德總統和前任總統蔡英文將站在蘇巧慧身旁，而立法院長韓國瑜和朱立倫將為李四川加持。"
@@ -160,7 +160,7 @@
     "The contest in New Taipei, the nation's most populous city, has attracted particular attention. Kuomintang candidate Lee Shu-chuan completed his 100th market visit, accompanied by Mayor Hou Yu-ih, who emphasised Lee's understanding of ordinary people's difficulties. His opponent, Su Chiao-hui of the Democratic Progressive Party, led a motorcade through seven districts.",
     "In Taipei, by contrast, the campaign was complicated by a dispute over public space. Puma Shen, who is challenging the incumbent Chiang Wan-an, cancelled a large rally scheduled for Ren'ai Road, maintaining that the proposed traffic arrangements would inevitably lead to congestion. Although Chiang offered to relinquish his own road access, Shen's team declined and indicated that the event would probably take place online.",
     "Prominent figures are expected at Friday's final rallies. President Lai Ching-te and former President Tsai Ing-wen will appear with Su, whereas Legislative Speaker Han Kuo-yu will support Lee.",
-    "Ultimately, the results will be counted on Saturday evening, and they are widely seen as a test for both major parties."
+    "Ultimately, the votes will be counted on Saturday evening, and the results are widely seen as a test for both major parties."
    ],
    "sentZh": [
     [
@@ -4134,7 +4134,7 @@
    "base": "off",
    "lvl": "A2",
    "syn": [
-    "away"
+    "(call off) cancel"
    ],
    "ant": [],
    "ex": "They called off the match because of rain.",
@@ -4642,7 +4642,7 @@
   },
   "populous": {
    "zh": "人口眾多的",
-   "hi": "घनी आबादी वाला",
+   "hi": "अधिक आबादी वाला",
    "es": "poblado",
    "ja": "人口の多い",
    "ko": "인구가 많은",
@@ -4651,9 +4651,8 @@
    "base": "populous",
    "lvl": "C1",
    "syn": [
-    "crowded",
-    "densely populated",
-    "heavily populated"
+    "heavily populated",
+    "having a large population"
    ],
    "ant": [
     "sparsely populated"
@@ -4947,7 +4946,7 @@
   },
   "promise": {
    "zh": "預示；可望",
-   "hi": "वादा करना",
+   "hi": "संकेत देना; संभावना जताना",
    "es": "prometen",
    "ja": "約束する；期待させる",
    "ko": "약속하다; 예고하다",
@@ -4956,10 +4955,9 @@
    "base": "promise",
    "lvl": "B1",
    "syn": [
-    "offer",
-    "guarantee",
     "suggest",
-    "pledge"
+    "indicate",
+    "hold out the prospect of"
    ],
    "ant": [],
    "ex": "The talks promise to be difficult.",
@@ -5249,8 +5247,7 @@
    "lvl": "A2",
    "syn": [
     "travelled",
-    "drove",
-    "went"
+    "went by"
    ],
    "ant": [],
    "ex": "She rode the bus to work.",
