@@ -6,7 +6,7 @@ Paths are files on the main branch of GitHub repo CHECHE0102/Che_daily_improveme
 ## TEXT job: one file per article (all 5 levels, zh lines, summaries, questions)
 - 2026-11-28 (Ireland national, 社會): 'End of an Era' as Last Irish UN Battalion Returns From Lebanon
   - review/2026-11-28/2026-11-28.md
-- 2026-11-28-2 (Ireland national, 教育): Schools to Get Guidance on Pupils Who Skip Religion Class
+- 2026-11-28-2 (Ireland national, 教育): Schools to Get Guidance on Pupils Who Opt Out of Religion Class
   - review/2026-11-28/2026-11-28-2.md
 - 2026-11-28-3 (Ireland national, 環境): Food-Snatching Gulls Annoy Dubliners, but Experts Say Humans Are to Blame
   - review/2026-11-28/2026-11-28-3.md

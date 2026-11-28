@@ -45,22 +45,22 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:succeeded | succeed | v. | B2 | replaced by someone or something that follows | 被接替 | 後を継がれる | 계승되다 | sustituido | उत्तराधिकारी हुआ | The old leader was succeeded by his deputy. | replaced, followed, superseded | preceded | succeeded by, be succeeded
 2026-11-28:supplying | supply | v. | B1 | giving or providing | 提供 | 提供して | 공급하며 | aportando | प्रदान करते हुए | The farm is supplying milk to local shops. | providing, giving, contributing | withholding | supplying the largest, supplying food
 2026-11-28:support | support | n. | A2 | help given to people | 支援 | 支援 | 지원 | apoyo | सहायता | The charity gives support to families. | help, aid, assistance | opposition | support for, give support
-2026-11-28:sustained | sustained | adj. | C1 | continuing for a long time | 持續的 | 鳴り止まない | 지속적인 | prolongados | लगातार | There was sustained rain all week. | continuous, prolonged, lasting | brief | sustained applause, sustained effort
-2026-11-28:taking | take | v. | A1 | (take over) getting control from another | 接管（take over） | 引き継いでいる | 넘겨받는 | tomando | लेना | She is taking over the business. | assuming, replacing, inheriting | giving up | taking over, taking part
+2026-11-28:sustained | sustained | adj. | C1 | continuing for a long time | 持續的 | 持続的な | 지속적인 | prolongados | लगातार | There was sustained rain all week. | continuous, prolonged, lasting | brief | sustained applause, sustained effort
+2026-11-28:taking | take | v. | A1 | (take over) getting control from another | 接管（take over） | 引き継いでいる | 넘겨받는 | asumiendo el control (take over) | नियंत्रण अपने हाथ में लेना (take over) | She is taking over the business. | assuming, replacing, inheriting | giving up | taking over, taking part
 2026-11-28:tensions | tension | n. | B2 | feelings of anger or worry between groups | 緊張局勢 | 緊張 | 긴장 | tensiones | तनाव | Tensions rose after the vote. | strain, friction, hostility | calm | tensions eased, rising tensions
-2026-11-28:th | th | num. | A1 | ending used after a number to show order | （序數字尾，如 128th 第128） | 〜番目（序数） | 번째 | º (ordinal) | वाँ (क्रमसूचक) |  |  |  | 
-2026-11-28:that | that | conj. | A1 | used to introduce a clause | 那；（關係詞） | それ；〜という | 그; ~라는 | que; ese | वह; कि |  |  |  | 
+2026-11-28:th | th | suffix | A1 | ending used after a number to show order | （序數字尾，如 128th 第128） | 〜番目（序数） | 번째 | º (ordinal) | वाँ (क्रमसूचक) |  |  |  | 
+2026-11-28:that | that | conj. | A1 | used to introduce a clause | 那；（關係詞） | 〜という（接続詞） | 그; ~라는 | que | वह; कि |  |  |  | 
 2026-11-28:the | the | art. | A1 | used before a known noun | 這；那（定冠詞） | その | 그 | el; la | यह (निश्चयवाचक) |  |  |  | 
 2026-11-28:there | there | adv. | A1 | in that place; used to say something exists | 那裡；有 | そこ；〜がある | 거기; 있다 | allí; hay | वहाँ |  |  |  | 
 2026-11-28:this | this | det. | A1 | the thing here or now | 這 | この | 이 | esto; este | यह |  |  |  | 
 2026-11-28:though 2026-11-28-tw-2:though | though | adv. | B1 | however | 不過 | でも | 하지만 | sin embargo | हालाँकि | It was late. We stayed, though. | however, nevertheless, but |  | though, the, even though
-2026-11-28:three-year-old | three-year-old | adj. | A2 | aged three years | 三歲的 | 3歳の | 세 살배기 | de tres años | तीन साल का | Her three-year-old daughter loves books. | three-aged, toddler |  | three-year-old son, three-year-old child
+2026-11-28:three-year-old | three-year-old | adj. | A2 | aged three years | 三歲的 | 3歳の | 세 살배기 | de tres años | तीन साल का | Her three-year-old daughter loves books. | aged three, three years of age |  | three-year-old son, three-year-old child
 2026-11-28:time | time | n. | A1 | minutes, hours or days; an occasion | 時間；次 | 時間；回 | 시간; 번 | tiempo; vez | समय | It was the first time I flew. | period, moment, occasion |  | for the first time, spend time
 2026-11-28:to | to | prep. | A1 | towards; used before a verb | 到；去 | 〜へ | ~로 | a; para | को; तक |  |  |  | 
-2026-11-28:took | take | v. | A1 | became (less important) | （take a back seat：退居次要） | （後回しに）なった | (뒷전이) 되었다 | pasó | लिया | Work took a back seat to family. | became, moved |  | took a back seat, took part
+2026-11-28:took | take | v. | A1 | became (less important) | （take a back seat：退居次要） | （後回しに）なった | (뒷전이) 되었다 | pasó | गौण हो गया (take a back seat) | Work took a back seat to family. | became, moved |  | took a back seat, took part
 2026-11-28:touched | touch | v. | A2 | (touched down) landed | （touch down：降落） | 着陸した | 착륙했다 | aterrizó | उतरे | The plane touched down at noon. | landed, arrived | took off | touched down, touched the ground
 2026-11-28:tour | tour | n. | B1 | a period of duty abroad | 服役期（tour of duty） | 任務期間 | 복무 기간 | misión; período de servicio | दौरा; ड्यूटी अवधि | He finished his tour of duty in June. | stint, posting, deployment |  | tour of duty, six-month tour
-2026-11-28:transported | transport | v. | B1 | carried from one place to another | 運送 | 輸送される | 운송되다 | transportado | ले जाया जाएगा | The goods were transported by ship. | carried, moved, shipped | left | transported back, transported by
+2026-11-28:transported | transport | v. | B1 | carried from one place to another | 運送 | 輸送される | 운송되다 | transportado | ले जाया गया | The goods were transported by ship. | carried, moved, shipped | left | transported back, transported by
 2026-11-28:trip | trip | n. | A1 | a journey to a place | 行程；旅行 | 旅 | 여행 | viaje | यात्रा | It was her first trip to Asia. | journey, visit, tour |  | first trip, business trip
 2026-11-28:troops | troop | n. | B2 | soldiers | 部隊；士兵 | 部隊 | 부대; 병력 | tropas | सैनिक | The troops returned to base. | soldiers, forces, personnel | civilians | Irish troops, send troops
 2026-11-28:un | UN | n. | PN | United Nations (short form) | 聯合國（UN） | 国連 | 유엔 | ONU | संयुक्त राष्ट्र |  |  |  | 
@@ -84,7 +84,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:will | will | v. | A1 | used for the future | 將 | 〜する予定 | ~할 것이다 | (futuro) | गा (भविष्य) |  |  |  | 
 2026-11-28:wind | wind | v. | C1 | (wind down) slowly reduce and end | （wind down：逐步結束） | 縮小する | 축소하다 | reducir | समेटना | The company will wind down its work here. | reduce, scale back, wrap up | expand | wind down, wind up
 2026-11-28:with | with | prep. | A1 | together; having | 和；帶著 | 〜と一緒に | ~와 함께 | con | के साथ |  |  |  | 
-2026-11-28:withdraw | withdraw | v. | B2 | leave a place, especially soldiers | 撤離 | 撤退する | 철수하다 | retirarse | वापस लेना | The army will withdraw next year. | pull out, leave, retreat | deploy | withdraw from, withdraw troops
+2026-11-28:withdraw | withdraw | v. | B2 | leave a place, especially soldiers | 撤離 | 撤退する | 철수하다 | retirarse | पीछे हटना | The army will withdraw next year. | pull out, leave, retreat | deploy | withdraw from, withdraw troops
 2026-11-28:witnessed | witness | v. | B2 | saw something happen | 見證 | 目撃した | 목격했다 | fue testigo de | देखे | The city witnessed big changes. | saw, observed, experienced | missed | witnessed scenes, witnessed a rise
 2026-11-28:women | woman | n. | A1 | adult female people | 女性 | 女性 | 여성 | mujeres | महिलाएँ | Sixteen women served in the group. | ladies, females | men | 16 women, young women
 2026-11-28:worked | work | v. | A1 | did a job | 工作 | 働いてきた | 일해 왔다 | han trabajado | काम किया | She has worked here for years. | served, operated, laboured | rested | worked in, worked hard
@@ -95,7 +95,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28-2:account | account | v. | B2 | form a part of (account for) | account for：占（比例） | 〜を占める (account for) | 차지하다 (account for) | representar (account for) | हिस्सा होना | Young people account for half of all users. | make up, represent, constitute |  | account for most, account for a share
 2026-11-28-2:after 2026-11-28-tw-2:after | after | prep. | A1 | following in time | 在…之後 | 〜の後で | ~후에 | después de | के बाद | We had dinner after the film. | following, subsequent to | before | after a survey, soon after
 2026-11-28-2:all 2026-11-28-tw-1:all | all | det. | A1 | every one of | 所有的 | すべての | 모든 | todos | सभी | All students must wear a uniform. | every, each | none | all schools, all faiths
-2026-11-28-2:alone | alone | adj. | A2 | without other people; lonely | 孤單的 | ひとりぼっちの | 외로운 | solo | अकेला | She felt alone in the new city. | lonely, isolated, by yourself | together, accompanied | feel alone, leave alone
+2026-11-28-2:alone | alone | adj. | A2 | without other people; lonely | 孤單的 | ひとりぼっちの | 혼자인; 외로운 | solo | अकेला | She felt alone in the new city. | lonely, isolated, by yourself | together, accompanied | feel alone, leave alone
 2026-11-28-2:alter | alter | v. | B2 | change something | 改變 | 変える | 바꾸다 | modificar | बदलना | They altered the plan after the meeting. | change, modify, adjust, amend | keep, preserve | alter course, alter the rules
 2026-11-28-2:and | and | conj. | A1 | also; plus | 和；並且 | そして；と | 그리고; ~와 | y | और |  |  |  | 
 2026-11-28-2:approximately | approximately | adv. | B2 | close to an exact number | 大約 | およそ | 대략 | aproximadamente | लगभग | The trip takes approximately two hours. | about, roughly, around, nearly | exactly, precisely | approximately half, approximately 40 per cent
