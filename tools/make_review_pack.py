@@ -5,7 +5,8 @@ Usage: python tools/make_review_pack.py OUT_DIR [DAYS]
 Writes, for each of the last DAYS news dates (default 3):
   OUT_DIR/DATE/index.md        list of that day's articles with links
   OUT_DIR/DATE/<id>.md         title, summaries, every level's text (numbered P/S), sentZh, questions
-  OUT_DIR/DATE/words-new-N.md  the day's NEW glossary entries (deduplicated, all 6 languages), in parts
+  OUT_DIR/DATE/words-new-N.md  the day's NEW word senses (deduplicated, all 6 languages), in parts
+and updates tools/review-seen-words.tsv (every word sense ever published + first date; old news gets deleted).
 and OUT_DIR/latest.md = copy of the newest DATE/index.md.
 The workflow news-review.yml copies OUT_DIR to review/ on main (served at https://binbindaily.com/review/).
 """
@@ -88,38 +89,63 @@ GLOSS_FIELDS = ["base", "pos", "lvl", "en", "zh", "ja", "ko", "es", "hi", "ex", 
 WORDS_PER_PART = 110
 
 
-def gloss_key(g):
-    return json.dumps([g.get(f) for f in GLOSS_FIELDS], ensure_ascii=False)
-
-
 def gloss_line(ids, g):
     def j(x):
         return ", ".join(x) if isinstance(x, list) else (x or "")
     return " | ".join([" ".join(ids)] + [j(g.get(f)) for f in GLOSS_FIELDS])
 
 
-def seen_before(date):
-    """Glossary entries (exact, all fields) already published on an earlier day: those were proofread then."""
-    old = set()
+SEEN_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "review-seen-words.tsv")
+
+
+def word_key(g):
+    """A word sense: base form + part of speech + Chinese meaning. The news task writes each day's glossary
+    from scratch, so the same sense comes back with slightly different en/ja/ko/ex wording; comparing every
+    field made almost every word look new (2026-11-28: 1,280 entries). Same base+pos+zh = already checked."""
+    return "|".join([(g.get("base") or "").strip().lower(), (g.get("pos") or "").strip(),
+                     (g.get("zh") or "").strip()]).replace("\t", " ").replace("\n", " ")
+
+
+def load_seen():
+    """{word_key: first date}. Kept in a file because old news gets deleted from articles/."""
+    seen = {}
+    if os.path.exists(SEEN_FILE):
+        with open(SEEN_FILE, encoding="utf-8") as f:
+            for line in f:
+                k, _, d = line.rstrip("\n").rpartition("\t")
+                if k and d:
+                    seen[k] = min(d, seen.get(k, d))
+    return seen
+
+
+def update_seen(seen):
+    """Add every published glossary entry (with its first date) and save the file."""
     for p in glob.glob("articles/*.json"):
         m = re.match(r"(\d{4}-\d{2}-\d{2})", os.path.basename(p))
-        if not m or m.group(1) >= date:
+        if not m:
             continue
         try:
             for g in (load(p).get("gloss") or {}).values():
-                old.add(gloss_key(g))
+                k = word_key(g)
+                seen[k] = min(m.group(1), seen.get(k, m.group(1)))
         except Exception:
             pass
-    return old
+    with open(SEEN_FILE, "w", encoding="utf-8") as f:
+        f.write("".join(f"{k}\t{seen[k]}\n" for k in sorted(seen)))
 
 
-def new_words_parts(date, arts):
-    """One deduplicated list of the day's glossary entries that never appeared before, split into parts."""
-    old = seen_before(date)
+def seen_before(date, seen):
+    """Word senses already published on an earlier day: those were proofread then."""
+    return {k for k, d in seen.items() if d < date}
+
+
+def new_words_parts(date, arts, seen):
+    """One list of the day's word senses that never appeared before (one line per sense), split into parts."""
+    old = seen_before(date, seen)
     entries = {}
     for a in arts:
         for k, g in (a.get("gloss") or {}).items():
-            gk = gloss_key(g)
+            gk = word_key(g)
             if gk in old:
                 continue
             entries.setdefault(gk, ([], g))[0].append(f"{a['id']}:{k}")
@@ -128,7 +154,8 @@ def new_words_parts(date, arts):
     out = []
     for n, part in enumerate(parts, 1):
         L = [f"# {date} NEW glossary entries, part {n} of {len(parts)}",
-             "Only entries that are new today (older identical entries were checked on earlier days).",
+             "Only word senses that are new today (same base + part of speech + zh meaning on an earlier day = already checked).",
+             "A line lists every article that uses this sense; a confirmed fix applies to all of them.",
              "format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col",
              "In a report use article = the first article id of the line and where = \"gloss:<key>.<field>\".", ""]
         L += [gloss_line(ids, g) for ids, g in part]
@@ -142,6 +169,7 @@ def main():
     dates = sorted({m.group(1) for p in glob.glob("articles/*.json")
                     for m in [re.match(r"(\d{4}-\d{2}-\d{2})", os.path.basename(p))] if m})[-days:]
     newest = None
+    seen = load_seen()
     for date in dates:
         files = article_files(date)
         if not files:
@@ -168,7 +196,7 @@ def main():
             where = f"region {a['region']}" if a.get("region") else "Ireland national"
             idx.append(f"- {aid} ({where}, {a.get('topic')}): {a.get('title')}")
             idx.append(f"  - review/{date}/{aid}.md")
-        wp, nw = new_words_parts(date, arts)
+        wp, nw = new_words_parts(date, arts, seen)
         idx.append("")
         idx.append(f"## WORDS job: {nw} new glossary entries today, in {len(wp)} part(s)")
         for n, w in enumerate(wp, 1):
@@ -187,8 +215,9 @@ def main():
         today_text = head.format(job="TEXT proofreading") + "\n\n".join(
             text_pack(a, rq.get(a["id"])) for a in arts)
         today_words = head.format(job=f"WORDS proofreading ({nw} new entries)") + (
-            "".join(w.split("\n", 1)[1] if n == 0 else w.split("\n", 5)[5] for n, w in enumerate(wp))
+            "".join(w.split("\n", 1)[1] if n == 0 else w.split("\n", 6)[6] for n, w in enumerate(wp))
             if wp else "(none: every glossary entry today was already checked on an earlier day)\n")
+    update_seen(seen)
     if newest:
         with open(f"{out}/latest.md", "w", encoding="utf-8") as f:
             f.write(newest)
