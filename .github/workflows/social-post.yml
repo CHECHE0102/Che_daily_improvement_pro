@@ -3,8 +3,7 @@ name: Social posts (FB + IG)
 # Facebook Page and Instagram through the Meta Graph API, then records it in posted.json there.
 # Needs the META_TOKEN secret (a never-expiring system-user token, pasted by CheChe).
 on:
-  schedule:
-    - cron: '3,33 * * * *'   # GitHub may start runs late; each run posts everything already due
+  # Started at :03 and :33 every hour by the Cloudflare Worker "binbin-timer" (GitHub's own schedule ran hours late).
   workflow_dispatch:
     inputs:
       only:
