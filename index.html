@@ -662,6 +662,24 @@ u.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--accent
 .bs-item{display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--muted)}
 /* party games */
 .pg-game{display:flex;gap:12px;align-items:flex-start}
+.pg-ppl{float:right;font-size:11px;font-weight:700;color:var(--muted);background:var(--accent-soft);border-radius:99px;padding:2px 8px;margin:0 0 4px 6px}
+.pg-cathint{margin:14px 2px 8px}
+.pg-cats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px}
+.pg-cat{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:14px 12px 12px;margin-top:10px;cursor:pointer;min-height:150px;-webkit-tap-highlight-color:transparent;transition:transform .12s}
+.pg-cat:active{transform:scale(.97)}
+.pg-cats .pg-cat:last-child:nth-child(odd){grid-column:1/-1;min-height:0}
+.pg-cattab{position:absolute;left:-1px;top:-11px;width:46%;height:12px;background:var(--card);border:1px solid var(--line);border-bottom:none;border-radius:10px 14px 0 0}
+.pg-cattab::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;background:var(--card)}
+.pg-catic{font-size:30px;line-height:1;width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:var(--accent-soft);margin-bottom:6px}
+.pg-catnew{position:absolute;top:12px;right:12px}
+.pg-cat b{font-size:16px}
+.pg-catsub{font-size:12px;line-height:1.4}
+.pg-catfoot{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center;width:100%;gap:6px}
+.pg-catmini{font-size:15px;letter-spacing:1px}
+.pg-catn{font-size:11px;font-weight:700;color:var(--accent)}
+.pg-cathead{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:14px 0 10px}
+.pg-catttl{display:flex;gap:12px;align-items:center}
+.pg-catbig{font-size:30px;width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:var(--accent-soft);flex:none}
 .pg-ic{font-size:34px;line-height:1;flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:var(--accent-soft)}
 .pg-board{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}
 /* 五行字母牌 */
@@ -4170,7 +4188,7 @@ async function plzLikersLoad(){ if(!CLOUD.fb||!CLOUD.user||PLAZA.likBusy) return
     for(const r of PLAZA.likers) if(r.look) LOOKS[r.id]=r.look; }
   catch(e){ console.warn("likers",e&&(e.code||e.message)); PLAZA.likers=PLAZA.likers||[]; }
   PLAZA.likAt=Date.now(); PLAZA.likBusy=false; amPlzRefresh(); }
-const PLAY_MENU=[["party","🎉","pmParty"],["duo","⚔️","pmDuo"]];
+const PLAY_MENU=[["party","🎉","pmParty"]];
 function playMenuHtml(){ const cur=S.view==="play"?(S.playMode||"party"):null;
   return `<div class="am-scrim" data-act="amclose"></div><div class="adv-menu pm-right" role="menu">${PLAY_MENU.map(([k,ic,l])=>`<button role="menuitem" class="am-item${cur===k?" on":""}" data-act="pmgo" data-k="${k}"><span class="am-ic">${ic}</span><span>${T(l)}</span></button>`).join("")}</div>`; }
 const READ_MENU=[["ovw","📊","tabOvw"],["dict","📖","tabDict"],["arch","📰","tabArch"]];
@@ -4181,7 +4199,7 @@ function advMenuToggle(open, kind){ let el=document.getElementById("advMenu"); c
 document.addEventListener("click",e=>{
   const nav=e.target.closest("#tab-adv"); if(nav){ e.stopPropagation(); e.preventDefault(); if(featLock("adv")){ advMenuToggle(false); toast("🔒 "+lockMsg(featLock("adv"))); return; } advMenuToggle(); return; }
   const rnav=e.target.closest("#tab-read"); if(rnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(undefined,"read"); return; }
-  const pnav=e.target.closest("#tab-play"); if(pnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(undefined,"play"); return; }
+  const pnav=e.target.closest("#tab-play"); if(pnav){ e.stopPropagation(); e.preventDefault(); advMenuToggle(false); if(S.view==="play"&&!pgPlaying()) S.pgCat=null; S.playMode="party"; S.tab="play"; S.view="play"; S.open=null; render(); window.scrollTo(0,0); return; }
   if(e.target.closest("[data-tab]")) advMenuToggle(false);   // another bottom tab: close the menu and go there
   const t=e.target.closest("[data-act]"); if(!t) return; const a=t.dataset.act;
   if(a==="amclose"){ e.stopPropagation(); advMenuToggle(false); return; }
@@ -4811,7 +4829,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.142";
+const APP_VERSION="2026.11.143";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5958,7 +5976,7 @@ function viewCoop(){ const m=S.compMode==="toeic"?"toeic":"ielts";
   return `<div class="seg exam-seg" role="group"><button data-act="compmode" data-k="ielts" aria-pressed="${m==="ielts"}">🎓 IELTS</button><button data-act="compmode" data-k="toeic" aria-pressed="${m==="toeic"}">💼 TOEIC</button></div><div class="ie-lobby">${m==="toeic"?toLobby():ieLobby()}</div>`; }
 // multiplayer games get their own bottom tab (open to everyone from day one)
 function viewPlay(){
-  if(!["party","duo"].includes(S.playMode)) S.playMode="party"; const duo=S.playMode==="duo";
+  if(S.playMode==="duo"){ S.playMode="party"; S.pgCat=S.pgCat||"battle"; } if(S.playMode!=="party") S.playMode="party"; const duo=false;
   const seg="";
   return `<div class="view play-view">${pgPlaying()?"":`<div class="play-head"><div><div class="eyebrow">BinBin daily</div><h2 style="font-size:24px">${T(duo?"pmDuo":"pmParty")}</h2><p class="muted sm-t" style="margin:4px 0 0">${T(duo?"pmDuoSub":"playSub")}</p></div><img src="assets/art/scene-party.webp" alt="" class="play-art"></div>`}${seg}${`<div id="pgBox" class="co-box${pgPlaying()?" pg-full":""}">${pgInner()}</div>`}</div>`;
 }
@@ -7570,12 +7588,12 @@ function pgSections(){
   const pg=S.pg;
   if(!pg){
     const login=CLOUD.user?"":`<p class="muted sm-t">${T("pgNeedLogin")}</p>${accountCard(true)}`;
-    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName",spy:"syName",five:"feName"}[k])}${k==="spy"||k==="five"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub",root:"rtSub",spy:"sySub",five:"feSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw"||k==="root"||k==="spy"||k==="five")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
+    const card=(k,ic)=>`<div class="card pg-game"><div class="pg-ic">${ic}</div><div style="flex:1"><span class="pg-ppl">👥 ${T("pgPpl",{n:PG_PPL[k]||"2–6"})}</span><b>${T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName",spy:"syName",five:"feName"}[k])}${k==="spy"||k==="five"?` <span class="chip new">NEW</span>`:""}</b><p class="muted sm-t" style="margin:4px 0 8px">${T({spell:"pgSpellSub",drop:"pgDropSub",bomb:"bmSub",quiz:"qzSub",hunt:"huSub",duel:"duSub",draw:"drSub",root:"rtSub",spy:"sySub",five:"feSub"}[k],{s:PG.life})}</p>${CLOUD.user?`<button class="btn sm" data-act="pgcreate" data-k="${k}">${T("pgCreate")}</button>`:""}${DEV&&(k==="duel"||k==="draw"||k==="root"||k==="spy"||k==="five")?` <button class="btn ghost sm" data-act="pgbot" data-k="${k}">🤖 ${T("botPractice")}</button>`:""}</div></div>`;
     const last=CLOUD.user&&pgLastRoom();
     const back=last?`<div class="card pg-back"><div><b>${T("pgBackT",{c:esc(last)})}</b><p class="muted sm-t" style="margin:2px 0 0">${T("pgBackSub")}</p></div><button class="btn sm" data-act="pgrejoin" data-k="${esc(last)}">${T("pgBackBtn")}</button></div>`:"";
     const joinBox=CLOUD.user?back+`<div class="card pg-joinbox"><b>${T("pgJoinTitle")}</b><div class="row" style="flex-wrap:nowrap;margin-top:8px"><input id="pgCode" class="search" inputmode="numeric" maxlength="4" placeholder="${T("pgCodePh")}" autocomplete="off"><button class="btn" data-act="pgjoin" style="flex:none">${T("pgJoin")}</button></div></div>`:"";
     return [["pgMain",`${S.playMode==="duo"?"":`<div class="card co-hero"><div><h3>${T("pgTitle")}</h3><p class="muted" style="margin:4px 0 0">${T("pgSub")}</p></div></div>`}${login}${joinBox}
-      ${S.playMode==="duo"?card("duel","⚔️"):`${card("five","🃏")}${card("spy","🕵️")}${card("root","🌱")}${card("draw","🌀")}${card("hunt","🔍")}${card("bomb","💣")}${card("quiz","🎯")}${card("spell","🟩")}${card("drop","🌧")}`}`]];
+      ${pgCatsHtml(card)}`]];
   }
   const P=pg.party; if(!P) return [["pgMain",`<p class="muted">${T("loading")}</p>`]];
   const kind=T({spell:"pgSpell",drop:"pgDrop",bomb:"bmName",quiz:"qzName",hunt:"huName",duel:"duName",draw:"drName",root:"rtName",spy:"syName",five:"feName"}[P.game]||"pgDrop");
@@ -7594,6 +7612,15 @@ function pgSections(){
   if(P.state==="done") return [["pgMain",pgResults()]];
   const secs=({spell:spSections, drop:dpSections, bomb:bmSections, quiz:qzSections, hunt:huSections, duel:duSections, draw:drSections, root:rtSections, spy:sySections, five:feSections}[P.game]||dpSections)();
   return [["pgHead",`<div class="row" style="justify-content:space-between"><b>${kind}</b><button class="btn ghost sm" data-act="pgquit">${T("pgLeave")}</button></div>${S.pgQuitAsk?`<div class="ie-exitask"><b>${T("pgQuitQ")}</b><div class="row"><button class="btn danger sm" data-act="pgleave">${T("pgLeave")}</button><button class="btn ghost sm" data-act="pgquitno">${T("ieExitNo")}</button></div></div>`:""}`], ...secs];
+}
+/* game folders: grouped by how you play, so new games slot into a folder instead of a longer list */
+const PG_CATS=[["race","⚡",[["root","🌱"],["quiz","🎯"]]],["guess","🎭",[["spy","🕵️"],["draw","🌀"],["spell","🟩"]]],["battle","⚔️",[["duel","⚔️"],["bomb","💣"],["drop","🌧"]]],["cards","🃏",[["five","🃏"]]],["coop","🤝",[["hunt","🔍"]]]];
+const PG_PPL={duel:"2",spy:"4–6",five:"2–5",draw:"2–6",root:"2–6",spell:"1–6",drop:"1–6",bomb:"1–6",quiz:"1–6",hunt:"1–6"}, PG_NEW=new Set(["spy","five"]);
+const pgCatKey=k=>"pgCat_"+k;
+function pgCatsHtml(card){
+  const cat=PG_CATS.find(c=>c[0]===S.pgCat);
+  if(cat) return `<div class="pg-cathead"><button class="btn ghost sm" data-act="pgcat" data-k="">← ${T("pgCatBack")}</button><div class="pg-catttl"><span class="pg-catbig">${cat[1]}</span><div><b>${T(pgCatKey(cat[0]))}</b><p class="muted sm-t" style="margin:2px 0 0">${T(pgCatKey(cat[0])+"Sub")}</p></div></div></div>${cat[2].map(([k,ic])=>card(k,ic)).join("")}`;
+  return `<p class="muted sm-t pg-cathint">${T("pgCatHint")}</p><div class="pg-cats">${PG_CATS.map(([k,ic,gs])=>`<button class="pg-cat" data-act="pgcat" data-k="${k}"><span class="pg-cattab"></span><span class="pg-catic">${ic}</span>${gs.some(g=>PG_NEW.has(g[0]))?`<span class="chip new pg-catnew">NEW</span>`:""}<b>${T(pgCatKey(k))}</b><span class="muted pg-catsub">${T(pgCatKey(k)+"Sub")}</span><span class="pg-catfoot"><span class="pg-catmini">${gs.map(g=>g[1]).join("")}</span><span class="pg-catn">${T("pgCatN",{n:gs.length})}</span></span></button>`).join("")}</div>`;
 }
 function pgInner(){ return pgSections().map(([id,h])=>`<div id="${id}">${h}</div>`).join(""); }
 const pgPlaying=()=>!!(S.pg&&S.pg.party&&S.pg.party.state==="play"&&S.view==="play"&&["party","duo"].includes(S.playMode||"party"));
@@ -7614,6 +7641,7 @@ document.addEventListener("touchstart",()=>{},{passive:true});   // lets iOS sho
 function pgAct(a,t){
   sfxUnlock();
   if(a.startsWith("fe")) return feAct(a,t);
+  if(a==="pgcat"){ S.pgCat=t.dataset.k||null; pgRender(); const b=document.getElementById("pgBox"); if(b&&b.getBoundingClientRect().top<0) b.scrollIntoView({block:"start"}); return; }
   if(a==="pgcreate") return pgCreate(t.dataset.k);
   if(a==="pgbot") return pgBotRoom(t.dataset.k);
   if(a==="pgrejoin") return pgJoin(t.dataset.k);
@@ -12280,6 +12308,12 @@ Object.assign(STR.hi,{"followT": "BinBin को फ़ॉलो करें", "
 Object.assign(STR.es,{"followT": "Sigue a BinBin", "followSub": "Noticias del día, mini lecciones de inglés y novedades del juego en Instagram y YouTube."});
 Object.assign(STR.ja,{"followT": "BinBin をフォロー", "followSub": "毎日のニュースのまとめ、英語ミニ講座、ゲームのお知らせを Instagram と YouTube で発信中。"});
 Object.assign(STR.ko,{"followT": "BinBin 팔로우", "followSub": "매일 뉴스 요약, 영어 미니 강의, 게임 소식을 Instagram과 YouTube에 올려요."});
+Object.assign(STR.zh,{"pgCatHint": "選一個分類資料夾，打開看看裡面的遊戲 👇", "pgCatBack": "所有分類", "pgCatN": "{n} 款", "pgPpl": "{n} 人", "pgCat_race": "搶答競速", "pgCat_raceSub": "看誰拼得快、答得準", "pgCat_guess": "猜字推理", "pgCat_guessSub": "猜單字、看畫猜字、找出臥底", "pgCat_battle": "對戰生存", "pgCat_battleSub": "1 對 1 決鬥、傳炸彈，撐到最後", "pgCat_cards": "卡牌桌遊", "pgCat_cardsSub": "出牌算計，比策略", "pgCat_coop": "合作闖關", "pgCat_coopSub": "大家同一隊，一起過關"});
+Object.assign(STR.en,{"pgCatHint": "Pick a folder to see its games 👇", "pgCatBack": "All categories", "pgCatN": "{n} games", "pgPpl": "{n} players", "pgCat_race": "Speed races", "pgCat_raceSub": "Spell and answer faster than everyone", "pgCat_guess": "Guess & deduce", "pgCat_guessSub": "Guess words, read drawings, find the spy", "pgCat_battle": "Battle & survive", "pgCat_battleSub": "1v1 duels and bomb passing: last one standing", "pgCat_cards": "Card games", "pgCat_cardsSub": "Play your cards right: strategy wins", "pgCat_coop": "Team up", "pgCat_coopSub": "Everyone on one team, clear it together"});
+Object.assign(STR.hi,{"pgCatHint": "कोई फ़ोल्डर चुनें और उसके गेम देखें 👇", "pgCatBack": "सभी श्रेणियाँ", "pgCatN": "{n} गेम", "pgPpl": "{n} खिलाड़ी", "pgCat_race": "तेज़ दौड़", "pgCat_raceSub": "सबसे तेज़ स्पेलिंग और सही जवाब", "pgCat_guess": "अंदाज़ा और जासूसी", "pgCat_guessSub": "शब्द बूझो, चित्र पहचानो, जासूस ढूँढो", "pgCat_battle": "मुकाबला और सर्वाइवल", "pgCat_battleSub": "1 बनाम 1 मुकाबले और बम पास: आख़िर तक टिके रहो", "pgCat_cards": "कार्ड गेम", "pgCat_cardsSub": "पत्ते चलो, रणनीति से जीतो", "pgCat_coop": "मिलकर खेलो", "pgCat_coopSub": "सब एक टीम में, साथ मिलकर पार करो"});
+Object.assign(STR.es,{"pgCatHint": "Elige una carpeta para ver sus juegos 👇", "pgCatBack": "Todas las categorías", "pgCatN": "{n} juegos", "pgPpl": "{n} jugadores", "pgCat_race": "Carreras de rapidez", "pgCat_raceSub": "Deletrea y responde antes que nadie", "pgCat_guess": "Adivinar y deducir", "pgCat_guessSub": "Adivina palabras y dibujos, encuentra al infiltrado", "pgCat_battle": "Duelo y supervivencia", "pgCat_battleSub": "Duelos 1 contra 1 y bombas: gana quien resista", "pgCat_cards": "Juegos de cartas", "pgCat_cardsSub": "Juega bien tus cartas: gana la estrategia", "pgCat_coop": "En equipo", "pgCat_coopSub": "Todos en el mismo equipo, a superarlo juntos"});
+Object.assign(STR.ja,{"pgCatHint": "フォルダを選んでゲームを見よう 👇", "pgCatBack": "カテゴリ一覧", "pgCatN": "{n}種類", "pgPpl": "{n}人", "pgCat_race": "早押し・スピード", "pgCat_raceSub": "誰より速く綴って答えよう", "pgCat_guess": "推理・当てっこ", "pgCat_guessSub": "単語当て、お絵かき当て、スパイ探し", "pgCat_battle": "対戦・サバイバル", "pgCat_battleSub": "1対1の決闘や爆弾回し、最後まで生き残れ", "pgCat_cards": "カードゲーム", "pgCat_cardsSub": "手札で勝負、作戦がカギ", "pgCat_coop": "協力プレイ", "pgCat_coopSub": "みんな同じチームでクリアを目指そう"});
+Object.assign(STR.ko,{"pgCatHint": "폴더를 골라 게임을 확인하세요 👇", "pgCatBack": "전체 분류", "pgCatN": "{n}개", "pgPpl": "{n}명", "pgCat_race": "스피드 퀴즈", "pgCat_raceSub": "누구보다 빠르게 철자·정답 맞히기", "pgCat_guess": "추리·맞히기", "pgCat_guessSub": "단어 맞히기, 그림 맞히기, 스파이 찾기", "pgCat_battle": "대결·서바이벌", "pgCat_battleSub": "1대1 결투와 폭탄 돌리기, 끝까지 살아남기", "pgCat_cards": "카드 게임", "pgCat_cardsSub": "카드로 승부, 전략이 핵심", "pgCat_coop": "협동 플레이", "pgCat_coopSub": "모두 한 팀, 함께 클리어"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
