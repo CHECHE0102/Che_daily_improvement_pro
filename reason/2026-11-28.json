@@ -1,0 +1,157 @@
+{
+ "date": "2026-11-28",
+ "items": {
+  "2026-11-28": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Irish peacekeepers were withdrawn from Lebanon early because several of them were killed in March.",
+     "Camp Shamrock has already closed and all Irish equipment is back in Ireland.",
+     "The return of the last Irish UNIFIL battalion marks the end of a long chapter of Irish service in Lebanon.",
+     "The 128th Infantry Battalion was the largest Irish force ever sent overseas."
+    ],
+    "a": 2,
+    "exp": "The passage describes \"the final Irish battalion to serve with ... UNIFIL\" returning home and says this \"represents the conclusion of a substantial chapter in the history of the Defence Forces\". The peacekeepers killed in March were \"international\" peacekeepers, not specifically Irish (A); the camp is only \"scheduled to close next month\" (B); and nothing says this was the largest force (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about the Irish presence in southern Lebanon after this battalion's return?",
+    "opts": [
+     "It will continue for a short time on a reduced scale before ending.",
+     "It will be expanded once the security situation improves further.",
+     "It ended completely on the day the battalion landed in Dublin.",
+     "It will be replaced by a new six-month battalion in May."
+    ],
+    "a": 0,
+    "exp": "The battalion \"is being succeeded by a considerably smaller infantry group\", Camp Shamrock \"is scheduled to close next month\" and UNIFIL is expected \"to withdraw progressively ... during 2027\". So a smaller Irish presence remains for now, ruling out an immediate end (C), expansion (B) or a new full battalion (D)."
+   },
+   {
+    "type": "tone",
+    "q": "How would you describe the tone of the final paragraph?",
+    "opts": [
+     "Critical and accusatory",
+     "Detached and statistical",
+     "Anxious and uncertain",
+     "Warm and relieved"
+    ],
+    "a": 3,
+    "exp": "The final paragraph says \"the principal sentiment was one of relief\" and describes a soldier \"greeted by his three-year-old son\" and others looking forward to time \"with partners and children\" — a warm, relieved tone. There are no figures (B), no criticism (A) and no worry (C)."
+   }
+  ],
+  "2026-11-28-2": [
+   {
+    "type": "main",
+    "q": "Which statement best summarises the passage?",
+    "opts": [
+     "Parents have voted to remove religious instruction from all Irish primary schools.",
+     "Following parental complaints, the Department of Education plans national guidance on how schools treat pupils withdrawn from religion classes.",
+     "Catholic schools have been ordered to stop preparing pupils for First Communion during class time.",
+     "The Constitution has been changed to give parents the right to withdraw children from religion classes."
+    ],
+    "a": 1,
+    "exp": "The passage opens by stating that the Department \"intends to develop formal guidance on the treatment of pupils who have been withdrawn from religious instruction\", \"prompted by a substantial number of parental complaints\". No vote (A), order (C) or constitutional change (D) is reported; the right to withdraw already exists."
+   },
+   {
+    "type": "infer",
+    "q": "Why might it be difficult for the Department to know how many pupils opt out of religion classes?",
+    "opts": [
+     "Because schools are not obliged to keep records of withdrawals.",
+     "Because most parents refuse to answer the national survey.",
+     "Because Catholic patrons forbid schools from sharing information.",
+     "Because opt-outs only began in early 2027."
+    ],
+    "a": 0,
+    "exp": "The passage notes that \"the Department does not maintain mandatory records of withdrawals\", so reliable figures are unlikely to exist. Nothing is said about parents refusing the survey (B) or patrons forbidding disclosure (C), and early 2027 is when consultation begins, not opt-outs (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention that pupils are \"often being seated at the back of the classroom\"?",
+    "opts": [
+     "To show that schools have found an effective solution to opt-outs.",
+     "To explain why the Department keeps records of withdrawals.",
+     "To illustrate the social isolation that some parents complain about.",
+     "To argue that religious instruction should be removed from the timetable."
+    ],
+    "a": 2,
+    "exp": "The detail directly follows the claim that \"their children have been socially isolated\", giving a concrete example of that isolation. It is not presented as a solution (A), the Department keeps no mandatory records (B), and the writer does not argue for removing religion classes (D)."
+   }
+  ],
+  "2026-11-28-3": [
+   {
+    "type": "main",
+    "q": "What is the main point of the passage?",
+    "opts": [
+     "Dublin councils plan to remove gulls from St Stephen's Green.",
+     "Gull attacks in Dublin have risen sharply because the gull population has grown.",
+     "Business groups say the gull problem in Dublin has been completely solved.",
+     "Although gulls annoy many Dubliners, experts argue that human activity has driven the birds into the city."
+    ],
+    "a": 3,
+    "exp": "The passage describes complaints about \"aggressive gulls\" but stresses that conservationists \"maintain that responsibility rests primarily with humans\", explaining how lost food sources pushed gulls to \"urban areas\". The population has actually \"declined by approximately 90 per cent\" (B), no removal plan is mentioned (A), and Dublin Town says the problem has only \"diminished to some extent\" (C)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred about why gulls are legally protected?",
+    "opts": [
+     "Because they help councils clean up food waste in cities.",
+     "Because their numbers have fallen so steeply that the species is under threat.",
+     "Because they rarely attack people or pets.",
+     "Because fishing vessels depend on them to find fish."
+    ],
+    "a": 1,
+    "exp": "The herring gull population \"has declined by approximately 90 per cent within three decades\", described as \"a crisis for the species\"; \"Consequently, gulls remain protected\". The protection follows from the decline, not from cleaning (A) or harmlessness (C), and the passage says gulls depended on vessels, not the reverse (D)."
+   },
+   {
+    "type": "purpose",
+    "q": "Why does the writer mention modern freezer trawlers?",
+    "opts": [
+     "To explain why gulls lost one of their traditional sources of food.",
+     "To show that the fishing industry is responsible for most gull attacks.",
+     "To suggest that trawlers should return to discarding waste at sea.",
+     "To compare the size of old and new fishing fleets."
+    ],
+    "a": 0,
+    "exp": "Ní Lamhna links the problem to \"the depletion of the birds' traditional food sources\": gulls \"historically depended on fishing vessels, yet contemporary freezer trawlers discard no waste at sea\". The detail explains a lost food source; it does not assign blame for attacks (B), make a recommendation (C) or compare fleet sizes (D)."
+   }
+  ],
+  "2026-11-28-4": [
+   {
+    "type": "main",
+    "q": "Which statement best captures the main point of the passage?",
+    "opts": [
+     "Most employers have stopped using AI because it rejects too many good candidates.",
+     "Recruiters in Ireland receive fewer applications than those in other countries.",
+     "AI is now used heavily on both sides of recruitment, filtering out most applications and creating mistrust.",
+     "AI-written CVs have made it easier for recruiters to find qualified people."
+    ],
+    "a": 2,
+    "exp": "The survey finds \"merely one in 20 job applications\" reaches interview, most \"eliminated by artificial intelligence screening systems\", while candidates \"utilise AI to produce their CVs\", which \"has generated considerable mistrust\". Employers are expanding AI use, not stopping (A); no country comparison is made (B); and AI CVs often contain \"inaccurate assertions\" (D)."
+   },
+   {
+    "type": "infer",
+    "q": "What can be inferred from the finding that about 90 per cent of respondents probably rejected genuine applications?",
+    "opts": [
+     "Recruiters can always tell which CVs were written by AI.",
+     "Genuine applicants may be losing out because recruiters suspect AI involvement.",
+     "Most applications sent today are entirely fake.",
+     "Recruiters no longer read any CVs themselves."
+    ],
+    "a": 1,
+    "exp": "Respondents admitted they \"had probably rejected legitimate applications on the assumption that these had been generated by AI\", so real candidates are being turned down because of suspicion. This contradicts (A); the passage does not say most applications are fake (C) or that no CVs are read (D) — 49 per cent are adding earlier human oversight."
+   },
+   {
+    "type": "tone",
+    "q": "What is the tone of Daniel Chait's view as reported at the end of the passage?",
+    "opts": [
+     "Enthusiastic about replacing recruiters with AI",
+     "Indifferent to how hiring decisions are made",
+     "Mocking towards job candidates who use AI",
+     "Cautious, insisting that people stay responsible for hiring"
+    ],
+    "a": 3,
+    "exp": "Chait \"maintains that accountability for recruitment decisions must ultimately rest with people\" — a cautious position that keeps humans responsible. He does not welcome replacing recruiters (A), is clearly concerned rather than indifferent (B), and says nothing mocking about candidates (C)."
+   }
+  ]
+ }
+}
