@@ -3,6 +3,9 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-26-tw-2:picks | pick | v. | A2 | chooses | 挑選 | 選ぶ | 고르다 | elige | चुनता है | He always picks the red one. | chooses, selects | rejects | pick a number, pick a winner
+2026-11-26-tw-2:place | place | n. | A1 | happens (take place) | 舉行（take place） | 行われる（take place） | 열리다 (take place) | tener lugar (take place) | होना (take place) | The draw takes place on the 25th. | happen, occur |  | take place, in place
+2026-11-26-tw-2:president | President | n. | PN | part of a company name (President Chain Store) | 統一（President Chain Store：統一超商） | 統一（統一超商） | 퉁이 (기업명) | President (nombre de empresa) | प्रेसिडेंट (कंपनी नाम) |  |  |  | 
 2026-11-26-tw-2:px | PX | n. | PN | part of a shop name (PX Mart) | 全聯（PX Mart） | 全聯（PX） | PX | PX | पीएक्स |  |  |  | 
 2026-11-26-tw-2:receipt | receipt | n. | A2 | a paper showing what you bought and paid | 收據；發票 | レシート | 영수증 | recibo | रसीद | Keep the receipt in case you return it. | invoice, bill, slip |  | keep the receipt, ask for a receipt
 2026-11-26-tw-2:receipts | receipt | n. | A2 | papers showing what you bought and paid | 收據；發票 | レシート | 영수증 | recibos | रसीदें | Keep all your receipts in a box. | invoices, bills, slips |  | check receipts, official receipts

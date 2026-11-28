@@ -1,925 +1,983 @@
-# BinBin TEXT proofreading — 2026-11-27
-date: 2026-11-27 | 6 articles | read this WHOLE file, it is the complete job for today
+# BinBin TEXT proofreading — 2026-11-28
+date: 2026-11-28 | 6 articles | read this WHOLE file, it is the complete job for today
 
-# 2026-11-27  (Ireland national)
-date: 2026-11-27 | rank: 1 | topic: 政治 | main level: B2
-file: articles/2026-11-27.json
+# 2026-11-28  (Ireland national)
+date: 2026-11-28 | rank: 1 | topic: 社會 | main level: B2
+file: articles/2026-11-28.json
 
 ## title
-HSE Board to Face Questions From TDs Over Sacking of Chief Executive
+'End of an Era' as Last Irish UN Battalion Returns From Lebanon
 
 ## summaries
-- summaryEn: The HSE board will tell politicians why it sacked its boss.
-- summaryZh: HSE董事會將赴國會委員會說明為何解僱執行長。
-- summaryJa: HSEの理事会が、最高経営責任者を解任した理由について議会委員会で説明する予定だ。
-- summaryKo: HSE 이사회가 최고경영자를 해임한 이유를 의회 위원회에서 설명할 예정이다.
-- summaryEs: La junta del HSE comparecerá ante una comisión parlamentaria para explicar el despido de su directora ejecutiva.
-- summaryHi: HSE बोर्ड अगले सप्ताह संसदीय समिति के सामने बताएगा कि उसने मुख्य कार्यकारी को क्यों हटाया।
+- summaryEn: The last full Irish battalion on the UN mission in Lebanon came home.
+- summaryZh: 最後一支駐黎巴嫩聯合國維和愛爾蘭營返國，象徵時代結束。
+- summaryJa: レバノンの国連平和維持活動に参加した最後のアイルランド大隊が帰国し、一つの時代が終わった。
+- summaryKo: 레바논 유엔 평화유지 임무의 마지막 아일랜드 대대가 귀국하며 한 시대가 끝났다.
+- summaryEs: El último batallón irlandés de la misión de paz de la ONU en Líbano volvió a casa, el fin de una era.
+- summaryHi: लेबनान में संयुक्त राष्ट्र मिशन की आख़िरी आयरिश बटालियन घर लौट आई, जिसे एक युग का अंत कहा गया।
 
 ## sources
-- RTÉ News: https://www.rte.ie/news/politics/2026/1126/1600709-politics-hse-ireland/
+- RTÉ News: https://www.rte.ie/news/ireland/2026/1127/1600950-irish-troops-return-home/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: The HSE runs Ireland's public health service.
-    zh: HSE負責經營愛爾蘭的公共醫療服務。
-A2 P1 S2: Its board said on Monday that it had sacked the boss of the HSE, Anne O'Connor.
-    zh: HSE的董事會於星期一宣布已開除HSE的負責人安妮・歐康納。
-A2 P1 S3: Now the board will answer questions from politicians next week.
-    zh: 現在董事會下週將回答政治人物的提問。
-A2 P2 S1: Ms O'Connor started the job in March.
-    zh: 歐康納女士在三月開始這份工作。
-A2 P2 S2: She had a contract for five years.
-    zh: 她簽了五年的合約。
-A2 P2 S3: She says she did not know her job was in danger until a call on Saturday.
-    zh: 她說直到星期六的一通電話，她才知道自己可能失去工作。
-A2 P2 S4: She wants to fight the decision.
-    zh: 她想要對抗這個決定。
-A2 P3 S1: A group of TDs looks at health issues.
-    zh: 有一群國會議員負責研究健康議題。
-A2 P3 S2: This group wants to know why she lost her job.
-    zh: 這個小組想知道她為什麼丟了工作。
-A2 P3 S3: It also wants to know if the Health Minister played a part.
-    zh: 它也想知道衛生部長是否參與其中。
-A2 P4 S1: The Taoiseach, Micheál Martin, wants the board to explain more.
-    zh: 總理米霍爾・馬丁希望董事會多做說明。
-A2 P4 S2: He did not say that he trusts the board.
-    zh: 他沒有說他信任董事會。
-A2 P4 S3: The Tánaiste, Simon Harris, said she is a good person.
-    zh: 副總理賽門・哈里斯說她是個好人。
-A2 P5 S1: A court case could cost a lot of money.
-    zh: 一場官司可能要花很多錢。
-A2 P5 S2: The taxpayer would pay.
-    zh: 納稅人將會買單。
+A2 P1 S1: Irish soldiers came home from Lebanon on Friday.
+    zh: 愛爾蘭士兵星期五從黎巴嫩回家了。
+A2 P1 S2: They landed at Dublin Airport at about 2pm.
+    zh: 他們大約下午兩點在都柏林機場降落。
+A2 P1 S3: Their families were waiting for them.
+    zh: 他們的家人正在等他們。
+A2 P2 S1: The soldiers were part of a United Nations peace mission.
+    zh: 這些士兵是聯合國和平任務的一部分。
+A2 P2 S2: They spent six months in the south of Lebanon.
+    zh: 他們在黎巴嫩南部待了六個月。
+A2 P2 S3: It is a dangerous area.
+    zh: 那是一個危險的地區。
+A2 P3 S1: This group was the last Irish battalion with the mission.
+    zh: 這支部隊是參與該任務的最後一個愛爾蘭營。
+A2 P3 S2: There were about 344 soldiers.
+    zh: 共有約344名士兵。
+A2 P3 S3: Sixteen of them were women.
+    zh: 其中16人是女性。
+A2 P3 S4: For 114 soldiers, it was their first trip abroad with the army.
+    zh: 對114名士兵來說，這是他們第一次隨軍隊出國。
+A2 P4 S1: Their leader, Lieutenant Colonel Damian Carroll, said it was the end of an era.
+    zh: 他們的指揮官達米安・卡羅爾中校說，這是一個時代的結束。
+A2 P4 S2: A smaller Irish group will now go to Lebanon.
+    zh: 現在將有一支規模較小的愛爾蘭部隊前往黎巴嫩。
+A2 P4 S3: The Irish camp there will close in December.
+    zh: 當地的愛爾蘭營地將在十二月關閉。
+A2 P5 S1: Many soldiers were very happy and emotional.
+    zh: 許多士兵非常開心又激動。
+A2 P5 S2: One soldier from Cork was met by his young son.
+    zh: 一名來自科克的士兵由他年幼的兒子迎接。
 
 ## level B1
-B1 P1 S1: The board of the HSE, which runs Ireland's public health service, is expected to answer questions from politicians next week.
-    zh: 負責經營愛爾蘭公共醫療服務的HSE，其董事會預計下週將回答政治人物的提問。
-B1 P1 S2: The board decided to sack the HSE's chief executive, Anne O'Connor, and many people were shocked by the news.
-    zh: 董事會決定開除HSE執行長安妮・歐康納，許多人對這個消息感到震驚。
-B1 P2 S1: Ms O'Connor only started in the job in March.
-    zh: 歐康納女士三月才開始做這份工作。
-B1 P2 S2: She had a five-year contract, but the board announced on Monday that it was ending it.
-    zh: 她有一份五年合約，但董事會在星期一宣布要終止合約。
-B1 P2 S3: All members of the board agreed with the decision.
-    zh: 董事會所有成員都同意這個決定。
-B1 P3 S1: Ms O'Connor says she did not know her job was in danger until a video call early on Saturday morning.
-    zh: 歐康納女士說，直到星期六清晨的一通視訊電話，她才知道自己可能失去工作。
-B1 P3 S2: She has said she will challenge what she calls an unlawful decision.
-    zh: 她表示將對她所稱的違法決定提出挑戰。
-B1 P3 S3: Her lawyer told the High Court that the HSE has now invited her to try mediation, where both sides talk with the help of a neutral person.
-    zh: 她的律師告訴高等法院，HSE現在已邀請她嘗試調解，也就是雙方在一位中立人士協助下進行對話。
-B1 P4 S1: The Oireachtas health committee, a group of TDs and senators, has invited the board to a meeting.
-    zh: 由國會議員和參議員組成的國會衛生委員會，已邀請董事會出席會議。
-B1 P4 S2: Its chair, Pádraig Rice, said the committee needs to find out why she was sacked and whether the Health Minister, Jennifer Carroll MacNeill, had any role.
-    zh: 委員會主席帕德里格・萊斯說，委員會需要查明她為何被開除，以及衛生部長珍妮佛・卡洛・麥克尼爾是否扮演了任何角色。
-B1 P5 S1: The Tánaiste, Simon Harris, told the Dáil that the board chair would lead a group to the committee.
-    zh: 副總理賽門・哈里斯在眾議院表示，董事會主席將率領一個小組前往委員會。
-B1 P5 S2: He said Ms O'Connor was a good and decent person, but he would wait for all the facts before making a judgment.
-    zh: 他說歐康納女士是個善良正派的人，但他會等所有事實釐清後再做判斷。
-B1 P6 S1: The Taoiseach, Micheál Martin, said her statement raised serious issues, and he wants the board to give a fuller explanation.
-    zh: 總理米霍爾・馬丁說，她的聲明提出了嚴重的問題，他希望董事會給出更完整的解釋。
-B1 P6 S2: However, he did not say that he had confidence in the board.
-    zh: 不過，他沒有表示對董事會有信心。
-B1 P6 S3: Sinn Féin claimed the minister was behind the sacking.
-    zh: 新芬黨聲稱，部長才是這次開除事件的幕後推手。
-B1 P7 S1: Any court case or mediation could be expensive, and the cost would be paid by the State.
-    zh: 任何官司或調解都可能所費不貲，而費用將由國家支付。
+B1 P1 S1: Families and friends cheered loudly at Dublin Airport on Friday afternoon as Irish soldiers returned home from Lebanon.
+    zh: 星期五下午，愛爾蘭士兵從黎巴嫩返國時，家人和朋友在都柏林機場大聲歡呼。
+B1 P1 S2: The soldiers had spent six months in the south of the country with UNIFIL, the United Nations peacekeeping mission there.
+    zh: 這些士兵隨當地的聯合國維和任務 UNIFIL 在該國南部駐守了六個月。
+B1 P2 S1: The group, called the 128th Infantry Battalion, is the last Irish battalion that will serve with the mission.
+    zh: 這支名為第128步兵營的部隊，是最後一支參與該任務的愛爾蘭營。
+B1 P2 S2: Irish troops have worked in southern Lebanon since 1978, so many people see this as a very important moment.
+    zh: 愛爾蘭部隊自1978年起就在黎巴嫩南部服務，因此許多人認為這是非常重要的時刻。
+B1 P3 S1: About 344 people were in the battalion, including 16 women.
+    zh: 該營約有344人，其中包括16名女性。
+B1 P3 S2: They came from 28 counties, and Dublin had the largest number, with 43.
+    zh: 他們來自28個郡，其中都柏林人數最多，有43人。
+B1 P3 S3: For 114 of them, this was their first time working overseas with the Defence Forces.
+    zh: 對其中114人而言，這是他們第一次隨國防軍到海外工作。
+B1 P4 S1: The commanding officer, Lieutenant Colonel Damian Carroll, said it was the end of an era for the Defence Forces.
+    zh: 指揮官達米安・卡羅爾中校說，對國防軍而言這是一個時代的結束。
+B1 P4 S2: He also called it the beginning of the end for the UN mission, which will start to close in 2027.
+    zh: 他也稱這是聯合國任務走向終點的開始，該任務將於2027年開始撤收。
+B1 P5 S1: The soldiers arrived in May, soon after fighting started in southern Lebanon in March.
+    zh: 士兵們在五月抵達，當時黎巴嫩南部在三月爆發戰鬥不久。
+B1 P5 S2: Some peacekeepers from other countries were killed before they arrived.
+    zh: 在他們抵達之前，一些來自其他國家的維和人員遇害。
+B1 P5 S3: Later, the situation became calmer, and the soldiers helped people who had to leave their homes.
+    zh: 後來局勢趨於平靜，士兵們協助了被迫離家的民眾。
+B1 P6 S1: A smaller Irish unit will now replace the battalion, and Camp Shamrock, the main Irish base, will close in December.
+    zh: 現在將由一支規模較小的愛爾蘭部隊接替該營，而愛爾蘭的主要基地沙姆洛克營地將在十二月關閉。
+B1 P6 S2: The battalion will bring all its equipment back to Ireland.
+    zh: 該營會把所有裝備帶回愛爾蘭。
+B1 P7 S1: At the airport, there were many emotional moments.
+    zh: 機場裡有許多感人的時刻。
+B1 P7 S2: One soldier from Cork was met by his three-year-old son, and others said they were looking forward to spending time with their families.
+    zh: 一名來自科克的士兵由他三歲的兒子迎接，其他人則說他們很期待和家人共度時光。
 
 ## level B2
-B2 P1 S1: The board of the Health Service Executive (HSE) is expected to appear before an Oireachtas committee next week to explain its controversial decision to dismiss the organisation's chief executive, Anne O'Connor.
-    zh: 衛生服務執行署（HSE）董事會預計下週將出席國會委員會，說明其解僱該機構執行長安妮・歐康納這項具爭議性的決定。
-B2 P2 S1: Ms O'Connor, who took up the post in March, had been appointed on a five-year contract.
-    zh: 歐康納女士於三月就任，當時獲得五年任期的合約。
-B2 P2 S2: The board's unanimous decision to terminate it, announced on Monday, caused widespread shock across the political system and the health service.
-    zh: 董事會在星期一宣布一致決定終止合約，在政界和醫療體系中引發廣泛震驚。
-B2 P3 S1: In two public statements, Ms O'Connor has said she was unaware that her position was under threat until a Teams call at 7.30am on Saturday.
-    zh: 歐康納女士在兩份公開聲明中表示，直到星期六上午七點半的一通Teams通話，她才知道自己的職位受到威脅。
-B2 P3 S2: She has vowed to challenge what she describes as her unlawful termination, and her senior counsel told the High Court that the HSE had invited her to enter mediation.
-    zh: 她誓言要對她所稱的違法解僱提出挑戰，而她的資深大律師告訴高等法院，HSE已邀請她進行調解。
-B2 P4 S1: The chair of the Oireachtas health committee, Social Democrats TD Pádraig Rice, said members needed to establish why she had been removed and what role, if any, the Health Minister, Jennifer Carroll MacNeill, had played.
-    zh: 國會衛生委員會主席、社會民主黨議員帕德里格・萊斯表示，委員們需要查明她為何被撤職，以及衛生部長珍妮佛・卡洛・麥克尼爾在其中扮演了什麼角色（如果有的話）。
-B2 P5 S1: In the Dáil, Tánaiste Simon Harris confirmed that a delegation led by the board's chair would accept the committee's invitation.
-    zh: 副總理賽門・哈里斯在眾議院證實，由董事會主席率領的代表團將接受委員會的邀請。
-B2 P5 S2: He praised Ms O'Connor as a good and decent public servant but said he was withholding judgment until the facts were clear.
-    zh: 他稱讚歐康納女士是一位善良正派的公僕，但表示在事實釐清之前他將保留判斷。
-B2 P6 S1: Taoiseach Micheál Martin has taken a cooler line on the board.
-    zh: 總理米霍爾・馬丁對董事會的態度則較為冷淡。
-B2 P6 S2: He said Ms O'Connor's statement raised serious issues and called for a fuller account, but stopped short of expressing confidence in its members.
-    zh: 他說歐康納女士的聲明提出了嚴重問題，並要求更完整的說明，但沒有進一步表示對董事會成員有信心。
-B2 P6 S3: Sinn Féin's health spokesperson, David Cullinane, accused the minister of orchestrating the dismissal and hiding behind the board.
-    zh: 新芬黨衛生事務發言人大衛・庫利南指控部長策劃了這次解僱，並躲在董事會背後。
-B2 P7 S1: Whatever the outcome, any mediation or legal action is likely to prove costly for the HSE, with the bill ultimately falling on the taxpayer.
-    zh: 無論結果如何，任何調解或法律行動都可能讓HSE付出高昂代價，而帳單最終將落在納稅人身上。
+B2 P1 S1: There were emotional scenes at Dublin Airport on Friday afternoon as the last Irish battalion to serve with the United Nations Interim Force in Lebanon (UNIFIL) returned home after a six-month deployment.
+    zh: 星期五下午，最後一支在聯合國駐黎巴嫩臨時部隊（UNIFIL）服役的愛爾蘭營結束六個月的派駐返國，都柏林機場出現許多感人場面。
+B2 P2 S1: The 128th Infantry Battalion was greeted with loud applause when it arrived at around 2pm.
+    zh: 第128步兵營約在下午兩點抵達時，受到熱烈掌聲歡迎。
+B2 P2 S2: Ireland has contributed troops to the peacekeeping mission in southern Lebanon since 1978, and the homecoming marks the end of a long chapter in the history of the Defence Forces.
+    zh: 愛爾蘭自1978年起便派兵參與黎巴嫩南部的維和任務，這次歸來象徵國防軍歷史上漫長篇章的結束。
+B2 P3 S1: The battalion had about 344 members, 16 of them women.
+    zh: 該營約有344名成員，其中16名是女性。
+B2 P3 S2: Its personnel came from 28 counties, with Dublin providing the largest number at 43, and 114 soldiers were serving overseas for the first time.
+    zh: 成員來自28個郡，都柏林人數最多，有43人，另有114名士兵是首次在海外服役。
+B2 P4 S1: Their commanding officer, Lieutenant Colonel Damian Carroll, described the return as the end of an era.
+    zh: 他們的指揮官達米安・卡羅爾中校形容這次歸國是一個時代的結束。
+B2 P4 S2: He said it was also the beginning of the end for UNIFIL, which is preparing to withdraw from the region in 2027.
+    zh: 他說這也是UNIFIL走向終點的開始，該部隊正準備在2027年撤出該地區。
+B2 P5 S1: The troops deployed in May, shortly after hostilities broke out in southern Lebanon in March, and several international peacekeepers were killed just before they arrived.
+    zh: 部隊在五月派駐，當時黎巴嫩南部三月才剛爆發敵對行動，而且就在他們抵達前，有數名國際維和人員遇害。
+B2 P5 S2: As tensions later eased, the mission returned to local duties, including support for displaced people.
+    zh: 隨著後來緊張局勢緩和，任務恢復了地方職責，包括支援流離失所的民眾。
+B2 P6 S1: The battalion is being replaced by a smaller infantry group, and Camp Shamrock, the Irish headquarters in the area, is due to close next month.
+    zh: 該營將由一支規模較小的步兵部隊接替，而愛爾蘭在當地的總部沙姆洛克營地預定下個月關閉。
+B2 P6 S2: All of the battalion's equipment will be brought back to Ireland.
+    zh: 該營所有裝備都將運回愛爾蘭。
+B2 P7 S1: For the families waiting in the arrivals hall, however, the main feeling was relief.
+    zh: 不過，對在入境大廳等候的家人來說，最主要的感受是鬆了一口氣。
+B2 P7 S2: A soldier from Cork was welcomed by his three-year-old son, while others spoke of looking forward to time with their partners and children.
+    zh: 一名來自科克的士兵受到三歲兒子的迎接，其他人則談到很期待與伴侶和孩子相處的時光。
 
 ## level C1
-C1 P1 S1: The board of the Health Service Executive is poised to appear before an Oireachtas committee next week, where it will face intense scrutiny over its abrupt dismissal of the organisation's chief executive, Anne O'Connor.
-    zh: 衛生服務執行署董事會準備於下週出席國會委員會，屆時將因突然解僱該機構執行長安妮・歐康納而面臨嚴格審查。
-C1 P2 S1: Ms O'Connor had held the post only since March, having been appointed on a five-year contract.
-    zh: 歐康納女士自三月起才擔任此職，當時獲任命簽下五年合約。
-C1 P2 S2: The board's unanimous decision to terminate that contract, made public on Monday, sent shockwaves through both the political establishment and the health service itself.
-    zh: 董事會在星期一公布一致決定終止該合約，在政治建制圈和醫療體系內部都引發了震撼。
-C1 P3 S1: In two strongly worded statements, Ms O'Connor has insisted that she had no inkling her position was in jeopardy until a Teams call at 7.30am on Saturday.
-    zh: 歐康納女士在兩份措辭強硬的聲明中堅稱，直到星期六上午七點半的一通Teams通話之前，她完全不知道自己的職位岌岌可危。
-C1 P3 S2: She has pledged to contest what she regards as an unlawful termination, and her senior counsel informed the High Court that the HSE had since proposed mediation.
-    zh: 她承諾要對她所認定的違法解僱提出抗辯，而她的資深大律師告知高等法院，HSE此後已提議進行調解。
-C1 P4 S1: The committee's chair, Social Democrats TD Pádraig Rice, said members were determined to ascertain why she had been ousted and what part, if any, the Health Minister, Jennifer Carroll MacNeill, had played in the affair.
-    zh: 委員會主席、社會民主黨議員帕德里格・萊斯說，委員們決心查明她為何被撤換，以及衛生部長珍妮佛・卡洛・麥克尼爾在這起事件中扮演了什麼角色（如果有的話）。
-C1 P5 S1: Tánaiste Simon Harris told the Dáil that a delegation headed by the board's chair would take up the invitation.
-    zh: 副總理賽門・哈里斯告訴眾議院，由董事會主席率領的代表團將接受邀請。
-C1 P5 S2: While lauding Ms O'Connor as a good and decent public servant, he said he was reserving judgment until the full facts emerged.
-    zh: 他雖讚揚歐康納女士是善良正派的公僕，但表示在全部事實浮現前將保留判斷。
-C1 P6 S1: The Taoiseach, Micheál Martin, struck a noticeably more guarded tone.
-    zh: 總理米霍爾・馬丁的語氣則明顯更為謹慎。
-C1 P6 S2: Acknowledging that Ms O'Connor's account raised grave issues, he demanded a fuller explanation from the board, yet pointedly refrained from voicing confidence in it.
-    zh: 他承認歐康納女士的說法引發了嚴重問題，要求董事會提出更完整的解釋，卻刻意避免表態對董事會有信心。
-C1 P6 S3: Sinn Féin went further, alleging that the minister had orchestrated the sacking while sheltering behind the board.
-    zh: 新芬黨則更進一步，指稱部長策劃了這次解僱，同時躲在董事會背後。
-C1 P7 S1: Regardless of how the dispute is resolved, mediation or litigation threatens to be a costly undertaking, with the bill ultimately landing on the Exchequer.
-    zh: 無論這場爭議如何解決，調解或訴訟都可能是一項代價高昂的事，而帳單最終將落到國庫頭上。
+C1 P1 S1: Dublin Airport witnessed poignant scenes on Friday afternoon as the final Irish battalion to serve with the United Nations Interim Force in Lebanon (UNIFIL) arrived home following a six-month tour of duty.
+    zh: 星期五下午，最後一支在聯合國駐黎巴嫩臨時部隊（UNIFIL）服役的愛爾蘭營結束六個月的服役期返國，都柏林機場上演了令人動容的一幕。
+C1 P2 S1: The 128th Infantry Battalion touched down at around 2pm to rapturous applause.
+    zh: 第128步兵營約在下午兩點降落，迎來熱烈的掌聲。
+C1 P2 S2: Irish peacekeepers have been stationed in southern Lebanon since 1978, and their homecoming draws a line under one of the most enduring commitments in the history of the Defence Forces.
+    zh: 愛爾蘭維和人員自1978年起駐紮在黎巴嫩南部，他們的歸來為國防軍史上最持久的承諾之一畫下句點。
+C1 P3 S1: The contingent numbered roughly 344, including 16 women.
+    zh: 這支分遣隊約有344人，其中包括16名女性。
+C1 P3 S2: Its ranks were drawn from 28 counties, with Dublin supplying the largest share at 43, while 114 personnel were embarking on their maiden overseas posting.
+    zh: 成員來自28個郡，都柏林占比最大，有43人，另有114名人員是首次派駐海外。
+C1 P4 S1: Lieutenant Colonel Damian Carroll, the commanding officer, characterised the occasion as the end of an era, adding that it heralded the beginning of the end for UNIFIL, which is slated to wind down its operations in 2027.
+    zh: 指揮官達米安・卡羅爾中校形容此刻是一個時代的結束，並補充說這預示著UNIFIL走向終點的開始，該部隊預定於2027年逐步結束行動。
+C1 P5 S1: The troops were deployed in May, in the wake of hostilities that erupted in southern Lebanon in March and claimed the lives of several international peacekeepers shortly before their arrival.
+    zh: 部隊於五月派駐，當時黎巴嫩南部在三月爆發敵對行動，並在他們抵達前不久奪走了數名國際維和人員的性命。
+C1 P5 S2: Once the volatile situation subsided, the mission reverted to local operations, notably assisting displaced civilians.
+    zh: 動盪局勢平息後，任務回歸地方行動，尤其是協助流離失所的平民。
+C1 P6 S1: A pared-back infantry group is taking over from the battalion, and Camp Shamrock, the Irish base in the region, is set to close next month.
+    zh: 一支縮編的步兵部隊將接手該營的工作，而愛爾蘭在該地區的基地沙姆洛克營地將於下個月關閉。
+C1 P6 S2: The unit's entire stock of equipment is to be repatriated.
+    zh: 該部隊的全部裝備都將運回本國。
+C1 P7 S1: In the arrivals hall, though, geopolitics took a back seat to heartfelt reunions.
+    zh: 不過在入境大廳裡，地緣政治退居次要，取而代之的是真摯的團聚。
+C1 P7 S2: One Cork soldier was embraced by his three-year-old son, while comrades spoke of savouring long-awaited time with loved ones.
+    zh: 一名科克士兵被三歲兒子緊緊擁抱，戰友們則談到要好好享受期待已久、與親人相處的時光。
 
 ## level IELTS
-IELTS P1 S1: The board of the Health Service Executive is scheduled to appear before an Oireachtas committee next week, where it will be required to justify its contentious decision to dismiss the organisation's chief executive, Anne O'Connor.
-    zh: 衛生服務執行署董事會預定於下週出席國會委員會，屆時必須為其解僱該機構執行長安妮・歐康納這項具爭議的決定提出正當理由。
-IELTS P2 S1: Ms O'Connor had occupied the position only since March, having been appointed on a five-year contract.
-    zh: 歐康納女士自三月起才擔任此職，當時獲任命簽下五年合約。
-IELTS P2 S2: The board's unanimous decision to terminate this arrangement, announced on Monday, generated considerable shock within both the political sphere and the health service.
-    zh: 董事會在星期一宣布一致決定終止此項安排，在政治領域和醫療體系內都引發了相當大的震驚。
-IELTS P3 S1: According to two statements she has issued, Ms O'Connor was entirely unaware that her role was at risk until a Teams call at 7.30am on Saturday.
-    zh: 根據她發表的兩份聲明，歐康納女士直到星期六上午七點半的一通Teams通話前，完全不知道自己的職位面臨風險。
-IELTS P3 S2: She has indicated her intention to challenge what she characterises as an unlawful termination, and her senior counsel informed the High Court that the HSE had subsequently offered mediation.
-    zh: 她已表明有意對她所定性的違法解僱提出挑戰，而她的資深大律師告知高等法院，HSE隨後提出了調解。
-IELTS P4 S1: The committee's chair, Social Democrats TD Pádraig Rice, stated that members were obliged to determine the rationale for her removal and the extent, if any, of the Health Minister's involvement.
-    zh: 委員會主席、社會民主黨議員帕德里格・萊斯表示，委員們有責任釐清將她撤職的理由，以及衛生部長介入的程度（如果有的話）。
-IELTS P5 S1: In the Dáil, Tánaiste Simon Harris confirmed that a delegation led by the board's chair would accept the invitation.
-    zh: 副總理賽門・哈里斯在眾議院證實，由董事會主席率領的代表團將接受邀請。
-IELTS P5 S2: Although he commended Ms O'Connor as a good and decent public servant, he emphasised that any judgment would be contingent upon a full establishment of the facts.
-    zh: 雖然他讚揚歐康納女士是善良正派的公僕，但他強調任何判斷都取決於事實能否完整確立。
-IELTS P6 S1: The Taoiseach, Micheál Martin, adopted a considerably more cautious position.
-    zh: 總理米霍爾・馬丁則採取了明顯更為審慎的立場。
-IELTS P6 S2: While conceding that Ms O'Connor's statement raised serious issues, he requested a more comprehensive account from the board and notably declined to express confidence in its members.
-    zh: 他雖承認歐康納女士的聲明提出了嚴重問題，但要求董事會提出更全面的說明，並且明顯拒絕對其成員表示信心。
-IELTS P6 S3: Sinn Féin, by contrast, alleged that the minister had orchestrated the dismissal.
-    zh: 相較之下，新芬黨指稱是部長策劃了這次解僱。
-IELTS P7 S1: Irrespective of the eventual outcome, mediation or litigation is likely to entail substantial costs for the HSE, which would ultimately be borne by the Exchequer.
-    zh: 無論最終結果如何，調解或訴訟都可能為HSE帶來龐大的費用，而這些費用最終將由國庫承擔。
+IELTS P1 S1: Dublin Airport was the scene of considerable emotion on Friday afternoon as the final Irish battalion to serve with the United Nations Interim Force in Lebanon (UNIFIL) returned home after a six-month deployment.
+    zh: 星期五下午，最後一支在聯合國駐黎巴嫩臨時部隊（UNIFIL）服役的愛爾蘭營結束六個月的派駐返國，都柏林機場充滿了強烈的情感。
+IELTS P2 S1: The 128th Infantry Battalion arrived at approximately 2pm and was received with sustained applause.
+    zh: 第128步兵營約於下午兩點抵達，並受到持續不斷的掌聲迎接。
+IELTS P2 S2: Irish personnel have participated in the peacekeeping mission in southern Lebanon since 1978; consequently, this return represents the conclusion of a substantial chapter in the history of the Defence Forces.
+    zh: 愛爾蘭人員自1978年起參與黎巴嫩南部的維和任務；因此，這次歸來代表國防軍歷史上一個重要篇章的結束。
+IELTS P3 S1: The battalion comprised approximately 344 members, of whom 16 were women.
+    zh: 該營約由344名成員組成，其中16名為女性。
+IELTS P3 S2: Its personnel originated from 28 counties, with Dublin accounting for the largest number, at 43, and 114 soldiers were undertaking their first overseas assignment.
+    zh: 成員來自28個郡，都柏林人數最多，有43人，另有114名士兵是首次執行海外任務。
+IELTS P4 S1: The commanding officer, Lieutenant Colonel Damian Carroll, characterised the occasion as the end of an era.
+    zh: 指揮官達米安・卡羅爾中校形容此刻是一個時代的結束。
+IELTS P4 S2: He further observed that it signified the beginning of the end for UNIFIL, which is anticipated to withdraw progressively from the region during 2027.
+    zh: 他進一步指出，這意味著UNIFIL走向終點的開始，該部隊預計於2027年逐步撤出該地區。
+IELTS P5 S1: The troops were deployed in May, following the outbreak of hostilities in southern Lebanon in March, during which several international peacekeepers were killed.
+    zh: 部隊於五月派駐，當時黎巴嫩南部於三月爆發敵對行動，期間有數名國際維和人員遇害。
+IELTS P5 S2: Nevertheless, as the security situation stabilised, the mission was able to resume local operations, including the provision of assistance to displaced civilians.
+    zh: 然而，隨著安全局勢穩定下來，任務得以恢復地方行動，包括向流離失所的平民提供協助。
+IELTS P6 S1: The battalion is being succeeded by a considerably smaller infantry group, and Camp Shamrock, the principal Irish base in the area, is scheduled to close next month.
+    zh: 該營將由一支規模小得多的步兵部隊接替，而愛爾蘭在當地的主要基地沙姆洛克營地預定下個月關閉。
+IELTS P6 S2: All associated equipment will subsequently be transported back to Ireland.
+    zh: 所有相關裝備隨後都將運回愛爾蘭。
+IELTS P7 S1: For the families assembled in the arrivals hall, however, the principal sentiment was one of relief.
+    zh: 不過，對聚集在入境大廳的家人來說，最主要的情緒是如釋重負。
+IELTS P7 S2: One soldier from Cork was greeted by his three-year-old son, while others expressed their anticipation of spending time with partners and children.
+    zh: 一名來自科克的士兵由三歲的兒子迎接，其他人則表達了對與伴侶和孩子共度時光的期待。
 
-## reading questions (file reason/2026-11-27.json)
+## reading questions (file reason/2026-11-28.json)
 Q1 [main]: Which statement best captures the main point of the passage?
-   A. The HSE board will appear before an Oireachtas committee to explain its disputed decision to dismiss its chief executive, a move that has drawn political criticism.  <- answer
-   B. Anne O'Connor has been reinstated as HSE chief executive after a High Court ruling.
-   C. The Health Minister has admitted ordering the dismissal of the HSE chief executive.
-   D. The HSE board has resigned following criticism from the Taoiseach.
-   explanation: The passage opens by saying the board "will be required to justify its contentious decision to dismiss the organisation's chief executive" and then sets out the political reaction. There is no reinstatement (B); Sinn Féin only "alleged" the minister was involved (C); and the board is accepting an invitation, not resigning (D).
-Q2 [infer]: What can be inferred from the Taoiseach's refusal to express confidence in the board?
-   A. He has already decided to dismiss the board's members.
-   B. He believes Ms O'Connor's dismissal was entirely justified.
-   C. He is keeping his distance from the board until it gives a fuller explanation.  <- answer
-   D. He agrees with Sinn Féin that the minister orchestrated the dismissal.
-   explanation: Martin "requested a more comprehensive account from the board and notably declined to express confidence in its members", suggesting he is withholding support pending an explanation. Nothing says he will sack the board (A) or that he backs the decision (B), and the Sinn Féin claim is presented "by contrast" (D).
-Q3 [purpose]: Why does the writer mention that any costs "would ultimately be borne by the Exchequer"?
-   A. To argue that Ms O'Connor should withdraw her legal challenge.
-   B. To point out that the dispute could end up costing public money whatever happens.  <- answer
-   C. To show that the HSE has already paid compensation to Ms O'Connor.
-   D. To suggest that the High Court will order the Government to pay.
-   explanation: The final paragraph says that "irrespective of the eventual outcome, mediation or litigation is likely to entail substantial costs" that fall on the Exchequer, i.e. public funds. The writer does not urge her to drop the case (A), report a payment (C), or predict a court order (D).
+   A. Irish peacekeepers were withdrawn from Lebanon early because several of them were killed in March.
+   B. Camp Shamrock has already closed and all Irish equipment is back in Ireland.
+   C. The return of the last Irish UNIFIL battalion marks the end of a long chapter of Irish service in Lebanon.  <- answer
+   D. The 128th Infantry Battalion was the largest Irish force ever sent overseas.
+   explanation: The passage describes "the final Irish battalion to serve with ... UNIFIL" returning home and says this "represents the conclusion of a substantial chapter in the history of the Defence Forces". The peacekeepers killed in March were "international" peacekeepers, not specifically Irish (A); the camp is only "scheduled to close next month" (B); and nothing says this was the largest force (D).
+Q2 [infer]: What can be inferred about the Irish presence in southern Lebanon after this battalion's return?
+   A. It will continue for a short time on a reduced scale before ending.  <- answer
+   B. It will be expanded once the security situation improves further.
+   C. It ended completely on the day the battalion landed in Dublin.
+   D. It will be replaced by a new six-month battalion in May.
+   explanation: The battalion "is being succeeded by a considerably smaller infantry group", Camp Shamrock "is scheduled to close next month" and UNIFIL is expected "to withdraw progressively ... during 2027". So a smaller Irish presence remains for now, ruling out an immediate end (C), expansion (B) or a new full battalion (D).
+Q3 [tone]: How would you describe the tone of the final paragraph?
+   A. Critical and accusatory
+   B. Detached and statistical
+   C. Anxious and uncertain
+   D. Warm and relieved  <- answer
+   explanation: The final paragraph says "the principal sentiment was one of relief" and describes a soldier "greeted by his three-year-old son" and others looking forward to time "with partners and children" — a warm, relieved tone. There are no figures (B), no criticism (A) and no worry (C).
 
 
-# 2026-11-27-2  (Ireland national)
-date: 2026-11-27 | rank: 2 | topic: 科技 | main level: B2
-file: articles/2026-11-27-2.json
+# 2026-11-28-2  (Ireland national)
+date: 2026-11-28 | rank: 2 | topic: 教育 | main level: B2
+file: articles/2026-11-28-2.json
 
 ## title
-Old Cave Bones Suggest People Reached Ireland 1,000 Years Earlier
+Schools to Get Guidance on Pupils Who Opt Out of Religion Class
 
 ## summaries
-- summaryEn: Old bones show people may have lived in Ireland much earlier than we thought.
-- summaryZh: 沃特福德洞穴獸骨顯示人類可能早一千年就來到愛爾蘭。
-- summaryJa: ウォーターフォードの洞窟の骨から、人類が千年早くアイルランドに来ていた可能性が示された。
-- summaryKo: 워터퍼드 동굴의 뼈는 인류가 천 년 더 일찍 아일랜드에 왔을 가능성을 보여 준다.
-- summaryEs: Huesos de una cueva de Waterford sugieren que los humanos llegaron a Irlanda mil años antes.
-- summaryHi: वॉटरफ़ोर्ड की गुफा की हड्डियाँ बताती हैं कि इंसान शायद पहले के अनुमान से लगभग 1,000 साल पहले आयरलैंड पहुँच गए थे।
+- summaryEn: Schools will get new guidance on how to treat children who do not take religion class.
+- summaryZh: 教育部將制定指引，規範學校如何對待退出宗教課的學生。
+- summaryJa: 教育省が、宗教の授業を受けない児童への対応について学校向け指針を作る。
+- summaryKo: 교육부가 종교 수업에서 빠지는 학생을 학교가 어떻게 대해야 하는지 지침을 만든다.
+- summaryEs: Educación elaborará pautas sobre cómo tratar a los alumnos que no asisten a clase de religión.
+- summaryHi: शिक्षा विभाग स्कूलों के लिए दिशानिर्देश बनाएगा कि धर्म कक्षा छोड़ने वाले बच्चों के साथ कैसा व्यवहार हो।
 
 ## sources
-- RTÉ News: https://www.rte.ie/news/2026/1126/1600681-animal-bones-waterford/
+- The Irish Times: https://www.irishtimes.com/ireland/2026/11/28/new-guidelines-due-for-schools-on-how-to-treat-children-opted-out-of-religious-instruction/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Scientists studied old animal bones from a cave in Co Waterford.
-    zh: 科學家研究了沃特福德郡一個洞穴裡的古老動物骨頭。
-A2 P1 S2: Workers dug up the bones in the 1800s.
-    zh: 工人在1800年代挖出了這些骨頭。
-A2 P1 S3: The bones may show that people lived in Ireland very early.
-    zh: 這些骨頭可能顯示人類很早就住在愛爾蘭。
-A2 P2 S1: The bones come from a giant deer.
-    zh: 這些骨頭來自一種巨型鹿。
-A2 P2 S2: This animal does not live today.
-    zh: 這種動物今天已經不存在了。
-A2 P2 S3: The bones have cuts.
-    zh: 骨頭上有切痕。
-A2 P2 S4: People may have made the cuts with stone tools.
-    zh: 可能是人用石頭工具切出來的。
-A2 P3 S1: Tests show one bone is about 13,500 years old.
-    zh: 檢測顯示其中一根骨頭約有一萬三千五百年歷史。
-A2 P3 S2: Before, the oldest sign of people in Ireland was about 12,700 years old.
-    zh: 之前，愛爾蘭最古老的人類跡象約有一萬兩千七百年。
-A2 P3 S3: So people may have come 1,000 years earlier.
-    zh: 所以人類可能早了一千年來到這裡。
-A2 P4 S1: But the scientists are not sure yet.
-    zh: 但是科學家還不確定。
-A2 P4 S2: They need to find tools or other objects in the cave.
-    zh: 他們需要在洞穴裡找到工具或其他人工物品。
-A2 P4 S3: They will dig there again.
-    zh: 他們會再去那裡挖掘。
-A2 P4 S4: The work is exciting for Irish history.
-    zh: 這項研究對愛爾蘭歷史來說令人興奮。
+A2 P1 S1: Most primary schools in Ireland are religious schools.
+    zh: 愛爾蘭大多數小學是宗教學校。
+A2 P1 S2: Nearly nine in ten of them are Catholic.
+    zh: 其中將近九成是天主教學校。
+A2 P1 S3: Children learn about the Catholic faith during the school day.
+    zh: 孩子們在上學時間學習天主教信仰。
+A2 P2 S1: Parents can take their children out of religion classes.
+    zh: 家長可以讓孩子不上宗教課。
+A2 P2 S2: This is a right in the Irish Constitution.
+    zh: 這是愛爾蘭憲法賦予的權利。
+A2 P3 S1: But some parents are unhappy.
+    zh: 但有些家長不滿意。
+A2 P3 S2: They say their children feel alone and left out.
+    zh: 他們說孩子覺得孤單、被排除在外。
+A2 P3 S3: Often the children sit at the back of the room during the class.
+    zh: 上課時，這些孩子常常坐在教室後面。
+A2 P4 S1: Now the Department of Education will write new guidance for schools.
+    zh: 現在教育部將為學校制定新指引。
+A2 P4 S2: It wants schools to treat these children in a fair way.
+    zh: 它希望學校公平對待這些孩子。
+A2 P4 S3: The work will start early in 2027.
+    zh: 這項工作將在2027年初開始。
+A2 P4 S4: Parents, teachers and students will give their ideas.
+    zh: 家長、老師和學生都會提供意見。
+A2 P5 S1: Until then, each school can choose what to do.
+    zh: 在那之前，每所學校可以自己決定怎麼做。
+A2 P5 S2: But every school must help parents who ask.
+    zh: 但每所學校都必須協助提出要求的家長。
 
 ## level B1
-B1 P1 S1: A new study suggests that people may have lived in Ireland almost 1,000 years earlier than experts thought.
-    zh: 一項新研究顯示，人類可能比專家原先認為的早了將近一千年就住在愛爾蘭。
-B1 P1 S2: The research looked at animal bones from Ballynamintra Cave in Co Waterford.
-    zh: 這項研究檢視了沃特福德郡巴利納明特拉洞穴的動物骨頭。
-B1 P2 S1: The bones were dug up between 1878 and 1882 and are kept by the National Museum of Ireland.
-    zh: 這些骨頭是在1878年到1882年間挖出的，由愛爾蘭國家博物館保存。
-B1 P2 S2: The researchers studied them again and also dug in the cave themselves.
-    zh: 研究人員重新研究這些骨頭，也親自在洞穴裡挖掘。
-B1 P2 S3: They found two leg bones from a giant deer, an animal that no longer exists.
-    zh: 他們找到兩根來自巨型鹿的腿骨，這種動物已經不存在了。
-B1 P2 S4: The bones have marks that look like cuts from heavy stone tools.
-    zh: 骨頭上的痕跡看起來像是沉重石器造成的切痕。
-B1 P2 S5: One bone also seems to have been broken open to get the soft marrow inside.
-    zh: 其中一根骨頭似乎還被敲開，以取出裡面柔軟的骨髓。
-B1 P3 S1: Scientists at the University of Oxford tested one bone and found that it is between 13,321 and 13,573 years old.
-    zh: 牛津大學的科學家檢測了一根骨頭，發現它有一萬三千三百二十一年到一萬三千五百七十三年的歷史。
-B1 P3 S2: Until now, the oldest proof of people in Ireland was a bear bone from a cave in Co Clare, which is about 12,700 years old.
-    zh: 在此之前，愛爾蘭最古老的人類證據是克萊爾郡一個洞穴裡的熊骨，約有一萬兩千七百年歷史。
-B1 P4 S1: However, the team says the marks cannot be proved to be human-made without more tools or objects.
-    zh: 不過，研究團隊表示，如果沒有更多工具或物品，就無法證明這些痕跡是人為造成的。
-B1 P4 S2: Weather has removed tiny details on the bones.
-    zh: 天氣已經抹去了骨頭上的細微特徵。
-B1 P4 S3: Lead researcher Richard Jennings said that if the date is confirmed, it would push back the arrival of people in Ireland.
-    zh: 首席研究員理查・詹寧斯說，如果年代獲得證實，人類抵達愛爾蘭的時間將被往前推。
-B1 P4 S4: More digging is planned.
-    zh: 研究人員計畫進行更多挖掘。
+B1 P1 S1: The Department of Education is planning new guidelines for schools.
+    zh: 教育部正在規劃給學校的新指引。
+B1 P1 S2: They will explain how schools should treat children who do not take part in religion classes.
+    zh: 指引將說明學校應如何對待不上宗教課的孩子。
+B1 P2 S1: More than 90% of primary schools in Ireland have a religious ethos, and 88% of these are Catholic.
+    zh: 愛爾蘭超過90%的小學具有宗教辦學理念，其中88%是天主教學校。
+B1 P2 S2: Children learn Catholic teaching during the school day and prepare for First Communion and Confirmation in class.
+    zh: 孩子們在上學時間學習天主教教義，並在課堂上準備初領聖體和堅振禮。
+B1 P2 S3: Under the Constitution, parents have the right to take their children out of these lessons.
+    zh: 根據憲法，家長有權讓孩子不上這些課。
+B1 P3 S1: At the moment, there are no official guidelines on how schools should handle these requests.
+    zh: 目前尚無處理這類要求的官方指引。
+B1 P3 S2: Some parents say their children feel left out because they often have to sit at the back of the room while the lesson continues.
+    zh: 有些家長說孩子覺得被排除在外，因為上課時他們常常得坐在教室後面。
+B1 P4 S1: The Department says each school must help parents who ask for this.
+    zh: 教育部表示，每所學校都必須協助提出這項要求的家長。
+B1 P4 S2: It will start talking to parents, teachers, students and school owners in early 2027.
+    zh: 它將在2027年初開始與家長、老師、學生和學校主辦者對話。
+B1 P4 S3: It does not keep official records of how many children opt out.
+    zh: 教育部並未保存有多少孩子選擇退出的官方紀錄。
+B1 P5 S1: Separately, schools have until Monday to say if they want to be among the first schools to make changes following a survey.
+    zh: 另外，學校須在星期一前表明是否願意成為根據調查結果率先改變辦學安排的學校。
+B1 P5 S2: About 40% of parents said they want their religious school to welcome all faiths.
+    zh: 約40%的家長表示，希望自己的宗教學校接納所有信仰。
 
 ## level B2
-B2 P1 S1: Hunter-gatherers may have been living in southern Ireland nearly 1,000 years earlier than previously confirmed, according to a study published in the Proceedings of the Royal Irish Academy.
-    zh: 根據刊登於《愛爾蘭皇家學院學報》的一項研究，狩獵採集者可能比先前證實的時間早了將近一千年就生活在愛爾蘭南部。
-B2 P2 S1: Researchers re-examined animal bones excavated from Ballynamintra Cave in Co Waterford between 1878 and 1882, which are held by the National Museum of Ireland.
-    zh: 研究人員重新檢視了1878年至1882年間從沃特福德郡巴利納明特拉洞穴挖出、由愛爾蘭國家博物館收藏的動物骨頭。
-B2 P2 S2: They also analysed material from new excavations at the site.
-    zh: 他們也分析了該遺址新發掘出的材料。
-B2 P2 S3: Two leg bones from the extinct giant deer show marks consistent with butchery, including a clean chopping surface possibly made by a heavy stone tool and fractures suggesting the bone was split for its marrow.
-    zh: 兩根已滅絕的大角鹿腿骨上有符合宰割的痕跡，包括可能由重型石器劈出的平整切面，以及顯示骨頭曾被劈開取骨髓的裂痕。
-B2 P3 S1: Radiocarbon dating at the University of Oxford placed one of the bones at between 13,321 and 13,573 years old.
-    zh: 牛津大學的放射性碳定年將其中一根骨頭的年代判定在一萬三千三百二十一年到一萬三千五百七十三年之間。
-B2 P3 S2: Until now, the earliest evidence of humans in Ireland was a butchered brown bear bone from a cave in Co Clare, dated to around 12,700 years ago.
-    zh: 在此之前，愛爾蘭最早的人類證據是克萊爾郡一個洞穴中一根被宰割過的棕熊骨頭，年代約為一萬兩千七百年前。
-B2 P4 S1: The team stressed that the marks cannot be proven to be human-made without further artefacts, as weathering has erased the tiny traces that tools usually leave.
-    zh: 研究團隊強調，若沒有更多人工製品，就無法證明這些痕跡是人為的，因為風化已抹去工具通常會留下的細微痕跡。
-B2 P4 S2: Even so, the timing fits with hunter-gatherer activity across Britain and north-west Europe during a warm period near the end of the Ice Age.
-    zh: 即便如此，這個時間點與冰河時期末期一段溫暖期間，英國及歐洲西北部的狩獵採集者活動相吻合。
-B2 P5 S1: Study lead Richard Jennings said confirmation would significantly push back the arrival of people in Ireland.
-    zh: 研究負責人理查・詹寧斯說，一旦證實，人類抵達愛爾蘭的時間將大幅往前推。
-B2 P5 S2: Further excavations are planned.
-    zh: 研究人員計畫進行更多發掘。
+B2 P1 S1: The Department of Education is to draw up guidance for schools on how to deal with pupils who have been withdrawn from religious instruction, following complaints from parents.
+    zh: 教育部將起草指引，說明學校該如何處理被家長要求退出宗教教學的學生，起因是家長的投訴。
+B2 P2 S1: More than 90 per cent of Irish primary schools are run by religious bodies, and 88 per cent of those are Catholic.
+    zh: 愛爾蘭超過百分之九十的小學由宗教團體經營，其中百分之八十八是天主教學校。
+B2 P2 S2: In these schools, Catholic teaching is part of the school day, and pupils prepare for First Communion and Confirmation in class.
+    zh: 在這些學校，天主教教義是上學日的一部分，學生在課堂上準備初領聖體和堅振禮。
+B2 P2 S3: The Constitution gives parents the right to opt their children out.
+    zh: 憲法賦予家長讓孩子退出的權利。
+B2 P3 S1: However, there are currently no official guidelines on how schools should handle these requests.
+    zh: 然而，目前並沒有關於學校應如何處理這類要求的官方指引。
+B2 P3 S2: Several parents say their children have been isolated, often left sitting at the back of the classroom while religion is taught around them.
+    zh: 數位家長說，他們的孩子被孤立，常常被留在教室後方坐著，而宗教課就在他們周圍進行。
+B2 P4 S1: The Department says it is committed to developing best-practice guidance.
+    zh: 教育部表示致力於制定最佳做法指引。
+B2 P4 S2: Work will begin in early 2027 with a broad consultation involving patrons, school leaders, parents and students.
+    zh: 工作將於2027年初展開，進行涵蓋主辦團體、學校領導、家長和學生的廣泛諮詢。
+B2 P4 S3: Until then, each school decides how to manage opt-outs, although all schools are required to facilitate parents' requests.
+    zh: 在此之前，由各校自行決定如何處理退出事宜，但所有學校都必須配合家長的要求。
+B2 P4 S4: The Department does not keep compulsory records of how many children are withdrawn.
+    zh: 教育部並未保存有多少孩子退出的強制性紀錄。
+B2 P5 S1: Meanwhile, schools have until Monday to say whether they want to be among the first schools to change their ethos following a national survey, in which about 40 per cent of parents backed a move to multi-denominational education.
+    zh: 與此同時，學校須在星期一前表明是否願意成為依據全國調查結果率先改變辦學理念的學校；該調查中約百分之四十的家長支持轉為多宗派教育。
 
 ## level C1
-C1 P1 S1: Hunter-gatherers may have roamed southern Ireland almost a millennium earlier than previously established, a study published in the Proceedings of the Royal Irish Academy has suggested.
-    zh: 一項刊登於《愛爾蘭皇家學院學報》的研究指出，狩獵採集者可能比先前確認的時間早了將近一千年就在愛爾蘭南部活動。
-C1 P2 S1: The researchers revisited animal remains unearthed at Ballynamintra Cave in Co Waterford in the late nineteenth century, now housed in the National Museum of Ireland, and supplemented them with finds from fresh excavations.
-    zh: 研究人員重新檢視了十九世紀末在沃特福德郡巴利納明特拉洞穴出土、現收藏於愛爾蘭國家博物館的動物遺骸，並以新發掘的出土物加以補充。
-C1 P2 S2: Two limb bones of the extinct giant deer bear marks consistent with butchery of fresh carcasses: one displays a uniform chopping plane consistent with the use of a heavy stone implement, while the other exhibits fractures indicative of being split open for marrow.
-    zh: 兩根已滅絕大角鹿的肢骨帶有符合宰割新鮮動物屍身的痕跡：其中一根呈現與重型石器劈砍痕跡相符的平整切面，另一根則有顯示曾被劈開取髓的裂痕。
-C1 P3 S1: Radiocarbon analysis at the University of Oxford dated one bone to between 13,321 and 13,573 years ago.
-    zh: 牛津大學的放射性碳分析將一根骨頭的年代測定為一萬三千三百二十一年至一萬三千五百七十三年前。
-C1 P3 S2: Hitherto, the earliest evidence of human presence was a butchered brown bear bone from a cave in Co Clare, dating to roughly 12,700 years ago.
-    zh: 迄今為止，最早的人類存在證據是克萊爾郡一個洞穴中一根被宰割的棕熊骨頭，年代約為一萬兩千七百年前。
-C1 P4 S1: The authors concede that the marks cannot be conclusively attributed to humans without corroborating artefacts, since weathering has obliterated the microscopic striations that tools typically leave.
-    zh: 作者們承認，若沒有佐證的人工製品，就無法確定這些痕跡出自人類之手，因為風化已抹除了工具通常會留下的微小條痕。
-C1 P4 S2: Nonetheless, the dates dovetail with hunter-gatherer activity across Britain and north-west Europe during a mild interlude late in the Ice Age.
-    zh: 儘管如此，這些年代與冰河時期晚期一段溫和間歇期中，英國及歐洲西北部的狩獵採集者活動相契合。
-C1 P5 S1: Lead author Richard Jennings said that verifying human activity at this date would significantly push back the arrival of people in Ireland.
-    zh: 主要作者理查・詹寧斯說，若能證實這個年代有人類活動，人類抵達愛爾蘭的時間將大幅提前。
-C1 P5 S2: Further digs are scheduled.
-    zh: 後續發掘已排定進行。
+C1 P1 S1: The Department of Education is set to devise guidance on how schools should accommodate pupils withdrawn from religious instruction, in response to mounting complaints from parents.
+    zh: 由於家長的投訴日益增多，教育部將制定指引，說明學校應如何照顧退出宗教教學的學生。
+C1 P2 S1: Denominational schools account for more than 90 per cent of the primary sector, and 88 per cent of these are under Catholic patronage.
+    zh: 教會學校占小學體系的百分之九十以上，其中百分之八十八由天主教會主辦。
+C1 P2 S2: Religious formation is woven into the school day, with preparation for First Communion and Confirmation taking place in the classroom.
+    zh: 宗教培育融入上學日之中，初領聖體和堅振禮的準備都在教室裡進行。
+C1 P2 S3: Parents' entitlement to withdraw their children is enshrined in the Constitution.
+    zh: 家長讓孩子退出的權利載於憲法。
+C1 P3 S1: Yet no departmental guidelines currently govern how such requests should be handled.
+    zh: 然而，目前並沒有部會指引規範這類要求應如何處理。
+C1 P3 S2: A number of parents contend that their children have been marginalised, frequently relegated to the back of the classroom while lessons carry on around them.
+    zh: 不少家長主張，他們的孩子被邊緣化，經常被安排到教室後方，而課程就在他們周圍照常進行。
+C1 P4 S1: The Department insists it is committed to formulating best-practice guidance, with work commencing in early 2027 through an extensive consultation with patrons, management bodies, principals, parents and pupils.
+    zh: 教育部堅稱致力於擬定最佳做法指引，工作將於2027年初展開，透過與主辦團體、管理機構、校長、家長和學生進行廣泛諮詢。
+C1 P4 S2: In the interim, arrangements remain at each school's discretion, although schools are obliged to facilitate parental requests.
+    zh: 在此期間，相關安排仍由各校自行決定，但學校有義務配合家長的要求。
+C1 P4 S3: Strikingly, no mandatory records of opt-outs are kept.
+    zh: 引人注目的是，目前並未保存任何退出情況的強制性紀錄。
+C1 P5 S1: Separately, Monday marks the deadline for schools to signal whether they wish to be among the first schools to alter their ethos in light of a national survey, in which roughly 40 per cent of parents favoured multi-denominational status.
+    zh: 另外，星期一是學校表明是否希望成為依據全國調查結果率先改變辦學理念的學校的截止日；該調查中約百分之四十的家長支持轉為多宗派學校。
 
 ## level IELTS
-IELTS P1 S1: A study published in the Proceedings of the Royal Irish Academy indicates that hunter-gatherers may have inhabited southern Ireland almost 1,000 years earlier than has previously been confirmed.
-    zh: 一項刊登於《愛爾蘭皇家學院學報》的研究指出，狩獵採集者居住在愛爾蘭南部的時間，可能比先前證實的早了將近一千年。
-IELTS P2 S1: The researchers re-analysed animal bones excavated from Ballynamintra Cave in Co Waterford between 1878 and 1882, which are currently held by the National Museum of Ireland, and complemented this with material from new excavations.
-    zh: 研究人員重新分析了1878年至1882年間從沃特福德郡巴利納明特拉洞穴發掘、目前由愛爾蘭國家博物館收藏的動物骨頭，並輔以新發掘的材料。
-IELTS P2 S2: Two leg bones belonging to the extinct giant deer display marks consistent with butchery, including a uniform cutting surface potentially attributable to a heavy stone tool and fractures suggesting that the bone was deliberately split to extract marrow.
-    zh: 兩根屬於已滅絕大角鹿的腿骨呈現符合宰割的痕跡，包括可能由重型石器造成的均勻切面，以及顯示骨頭曾被刻意劈開以取出骨髓的裂痕。
-IELTS P3 S1: High-precision radiocarbon dating conducted at the University of Oxford established that one bone is between 13,321 and 13,573 years old.
-    zh: 牛津大學進行的高精度放射性碳定年確定，其中一根骨頭的年代介於一萬三千三百二十一年至一萬三千五百七十三年之間。
-IELTS P3 S2: Previously, the earliest evidence of human activity in Ireland was a butchered brown bear bone from a cave in Co Clare, dated to approximately 12,700 years ago.
-    zh: 先前，愛爾蘭最早的人類活動證據是克萊爾郡一個洞穴中一根被宰割的棕熊骨頭，年代約為一萬兩千七百年前。
-IELTS P4 S1: Nevertheless, the researchers acknowledge that the marks cannot be definitively identified as human-made in the absence of further artefacts, since weathering has eroded the microscopic traces typically left by tools.
-    zh: 然而，研究人員承認，在缺乏更多人工製品的情況下，這些痕跡無法明確認定為人為所致，因為風化已侵蝕了工具通常留下的微小痕跡。
-IELTS P4 S2: Their timing is, however, consistent with hunter-gatherer activity throughout Britain and north-west Europe during a warmer phase towards the end of the Ice Age.
-    zh: 不過，其年代與冰河時期接近尾聲時一段較溫暖階段中，英國及歐洲西北部各地的狩獵採集者活動是一致的。
-IELTS P5 S1: The study's lead author, Richard Jennings, stated that confirmation would substantially alter the accepted chronology of human arrival in Ireland.
-    zh: 該研究的主要作者理查・詹寧斯表示，一旦證實，將大幅改變人類抵達愛爾蘭的公認年代順序。
-IELTS P5 S2: Consequently, further excavations are planned.
-    zh: 因此，研究人員計畫進行更多發掘。
+IELTS P1 S1: The Department of Education intends to develop formal guidance on the treatment of pupils who have been withdrawn from religious instruction, a measure prompted by a substantial number of parental complaints.
+    zh: 教育部打算針對退出宗教教學的學生該如何對待制定正式指引，這項措施是由大量家長投訴所促成的。
+IELTS P2 S1: Denominational institutions constitute more than 90 per cent of Irish primary schools, and approximately 88 per cent of these operate under Catholic patronage.
+    zh: 教會辦學的機構占愛爾蘭小學的百分之九十以上，其中約百分之八十八由天主教會主辦。
+IELTS P2 S2: Consequently, religious instruction is integrated into the daily timetable, and preparation for the sacraments of First Communion and Confirmation occurs during class time.
+    zh: 因此，宗教教學被納入每日課表，而初領聖體和堅振禮等聖事的準備也在上課時間進行。
+IELTS P2 S3: Nevertheless, the Constitution guarantees parents the right to withdraw their children from such instruction.
+    zh: 儘管如此，憲法保障家長讓孩子退出此類教學的權利。
+IELTS P3 S1: At present, however, there is no national framework governing how these requests should be managed.
+    zh: 然而，目前並沒有全國性的框架規範這些要求該如何處理。
+IELTS P3 S2: Several parents maintain that their children have been socially isolated, often being seated at the back of the classroom while religious lessons proceed around them.
+    zh: 數位家長主張，他們的孩子在社交上被孤立，常被安排坐在教室後方，而宗教課就在他們周圍進行。
+IELTS P4 S1: The Department has stated that it is committed to establishing best-practice guidance, beginning with a comprehensive consultation process in early 2027.
+    zh: 教育部表示致力於建立最佳做法指引，將從2027年初的全面諮詢程序開始。
+IELTS P4 S2: In the meantime, the implementation of opt-outs is contingent upon the resources of individual schools, although all schools are required to accommodate parental requests.
+    zh: 在此期間，退出安排的執行取決於個別學校的資源，但所有學校都必須配合家長的要求。
+IELTS P4 S3: Notably, the Department does not maintain mandatory records of withdrawals.
+    zh: 值得注意的是，教育部並未保存退出情況的強制性紀錄。
+IELTS P5 S1: In a related development, schools must indicate by Monday whether they wish to be among the first schools to modify their ethos following a national survey, in which approximately 40 per cent of parents expressed a preference for multi-denominational education.
+    zh: 在一項相關進展中，學校必須在星期一前表明是否希望成為依據全國調查結果率先調整辦學理念的學校；該調查中約百分之四十的家長表示偏好多宗派教育。
 
-## reading questions (file reason/2026-11-27.json)
-Q1 [main]: What is the passage mainly about?
-   A. A newly discovered cave in Co Clare containing human remains.
-   B. The extinction of the giant deer at the end of the Ice Age.
-   C. A plan by the National Museum of Ireland to return bones to Co Waterford.
-   D. A study suggesting, though not yet proving, that people were in Ireland about 1,000 years earlier than previously confirmed.  <- answer
-   explanation: The opening states that hunter-gatherers "may have inhabited southern Ireland almost 1,000 years earlier than has previously been confirmed", and later the researchers admit the marks "cannot be definitively identified as human-made". The Clare cave is only the earlier record (A); deer extinction (B) and returning bones (C) are not the topic.
-Q2 [infer]: What can be inferred about why further excavations are planned?
-   A. The researchers hope to find artefacts that would confirm the marks were made by humans.  <- answer
-   B. The bones held by the National Museum were found to be fakes.
-   C. Oxford University rejected the radiocarbon dates.
-   D. The Co Clare bear bone has been redated to a later period.
-   explanation: The researchers say the marks cannot be confirmed "in the absence of further artefacts", and "consequently, further excavations are planned", implying they want such evidence. There is no suggestion of fakes (B), rejected dates (C) or redating of the Clare bone (D).
-Q3 [tone]: Which best describes the researchers' attitude to their own findings, as presented in the passage?
-   A. Dismissive — they doubt the bones are of any value.
-   B. Cautiously optimistic — the evidence is promising but not conclusive.  <- answer
-   C. Triumphant — they claim to have rewritten Irish history.
-   D. Indifferent — they see no need for further work.
-   explanation: They "acknowledge that the marks cannot be definitively identified as human-made", yet note the timing "is, however, consistent with hunter-gatherer activity", and Jennings says confirmation "would" alter the chronology. That is hopeful but hedged, not triumphant (C), dismissive (A) or indifferent, since more digs are planned (D).
-
-
-# 2026-11-27-3  (Ireland national)
-date: 2026-11-27 | rank: 3 | topic: 住房 | main level: B2
-file: articles/2026-11-27-3.json
-
-## title
-First-Time Buyers Drive Rise in Mortgage Approvals
-
-## summaries
-- summaryEn: More people were approved for home loans this year, and most were first-time buyers.
-- summaryZh: 十月房貸核准約17億歐元，首購族占近六成。
-- summaryJa: 10月の住宅ローン承認額は約17億ユーロで、初めての購入者が6割近くを占めた。
-- summaryKo: 10월 주택담보대출 승인액은 약 17억 유로였고, 생애 첫 구매자가 약 60%를 차지했다.
-- summaryEs: En octubre se aprobaron unos 1.700 millones de euros en hipotecas, casi seis de cada diez para compradores primerizos.
-- summaryHi: अक्टूबर में लगभग €1.7 अरब के होम लोन मंज़ूर हुए, जिनमें लगभग 60% पहली बार घर खरीदने वालों के थे।
-
-## sources
-- RTÉ News: https://www.rte.ie/news/business/2026/1127/1600840-banking-payments-federation-ireland-mortgages/
-
-## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
-
-## level A2
-A2 P1 S1: Banks in Ireland said yes to 5,265 home loans in October.
-    zh: 愛爾蘭的銀行在十月同意了5,265筆住房貸款。
-A2 P1 S2: A home loan to buy a house is called a mortgage.
-    zh: 用來買房子的住房貸款叫做房貸。
-A2 P1 S3: The figures come from a banking group.
-    zh: 這些數字來自一個銀行業團體。
-A2 P2 S1: The loans were worth about €1.7 billion in total.
-    zh: 這些貸款總共價值約17億歐元。
-A2 P2 S2: That is 10.3% more than in October last year.
-    zh: 這比去年十月多了10.3%。
-A2 P2 S3: But it is 2% less than in September.
-    zh: 但比九月少了2%。
-A2 P3 S1: First-time buyers are people buying their first home.
-    zh: 首購族是指買第一間房子的人。
-A2 P3 S2: They were approved for 3,077 of the loans, almost six in ten.
-    zh: 他們獲准其中3,077筆貸款，將近十分之六。
-A2 P3 S3: Their loans were worth just over €1 billion.
-    zh: 他們的貸款價值略高於10億歐元。
-A2 P4 S1: From January to October, banks approved 49,213 mortgages.
-    zh: 從一月到十月，銀行核准了49,213筆房貸。
-A2 P4 S2: This is the highest number for these months since 2011.
-    zh: 這是自2011年以來這幾個月的最高數字。
-A2 P4 S3: Brian Hayes leads the banking group BPFI.
-    zh: 布萊恩・海斯是銀行業團體BPFI的負責人。
-A2 P4 S4: He said the numbers keep growing.
-    zh: 他說數字持續成長。
-
-## level B1
-B1 P1 S1: Banks and other lenders in Ireland approved about €1.7 billion in mortgages in October, according to new figures from the Banking and Payments Federation Ireland (BPFI).
-    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）的最新數據，愛爾蘭的銀行和其他放款機構在十月核准了約17億歐元的房貸。
-B1 P1 S2: A mortgage approval is an official offer of a loan to buy a particular home.
-    zh: 房貸核准是指正式提供一筆貸款，用來購買某一間特定的房子。
-B1 P2 S1: There were 5,265 approvals in the month.
-    zh: 當月共有5,265筆核准。
-B1 P2 S2: First-time buyers got 3,077 of them, or 58.4%.
-    zh: 首購族拿到其中3,077筆，占58.4%。
-B1 P2 S3: The value of their loans went up by 8.5% compared with October last year, to just over €1 billion.
-    zh: 他們的貸款金額比去年十月增加了8.5%，略高於10億歐元。
-B1 P3 S1: The total value of approvals was 2% lower than in September, but it was 10.3% higher than a year earlier.
-    zh: 核准總金額比九月低了2%，但比一年前高了10.3%。
-B1 P4 S1: Between January and October, there were 49,213 approvals, an increase of 8.1%.
-    zh: 從一月到十月，共有49,213筆核准，增加了8.1%。
-B1 P4 S2: Their value rose by 10.9% to more than €16 billion.
-    zh: 核准金額上升了10.9%，超過160億歐元。
-B1 P4 S3: These are the highest figures for this period since the records began in 2011.
-    zh: 這是自2011年開始有紀錄以來，這段期間的最高數字。
-B1 P5 S1: Brian Hayes, the head of the BPFI, said approvals kept growing in October and that first-time buyers made up almost six in ten of them.
-    zh: BPFI負責人布萊恩・海斯說，十月的核准數持續成長，首購族占了將近六成。
-B1 P5 S2: Between January and October, the value of mortgage approvals for people moving to a new home also rose by 7.5%, to more than €3.5 billion.
-    zh: 一月至十月換屋者的房貸核准金額也上升了7.5%，超過35億歐元。
-
-## level B2
-B2 P1 S1: Around €1.7 billion worth of mortgages were approved in October, according to the latest report from the Banking and Payments Federation Ireland (BPFI).
-    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）的最新報告，十月核准的房貸總值約17億歐元。
-B2 P1 S2: An approval is a formal offer of finance from a lender for a specific residential property.
-    zh: 所謂核准，是指放款機構針對某一特定住宅物業正式提供融資。
-B2 P2 S1: A total of 5,265 mortgages were approved during the month, with first-time buyers accounting for 3,077, or 58.4%.
-    zh: 當月共核准5,265筆房貸，其中首購族占3,077筆，即58.4%。
-B2 P2 S2: By value, first-time buyers made up 59.6% of the total and movers 21.9%.
-    zh: 以金額計，首購族占總額的59.6%，換屋者占21.9%。
-B2 P2 S3: The value of first-time buyer approvals rose by 8.5% year-on-year to just over €1 billion.
-    zh: 首購族的核准金額年增8.5%，略高於10億歐元。
-B2 P3 S1: Overall, the value of approvals fell by 2% compared with September but was 10.3% higher than in October 2025.
-    zh: 整體而言，核准金額比九月下降2%，但比2025年十月高出10.3%。
-B2 P4 S1: In the first ten months of the year, 49,213 mortgages were approved, up 8.1%, while their value climbed 10.9% to more than €16 billion.
-    zh: 今年前十個月共核准49,213筆房貸，增加8.1%，金額則攀升10.9%至超過160億歐元。
-B2 P4 S2: According to BPFI chief executive Brian Hayes, both figures are the highest for that period since the series began in 2011.
-    zh: BPFI執行長布萊恩・海斯表示，這兩個數字都是自2011年開始統計以來同期的最高紀錄。
-B2 P5 S1: First-time buyers secured 29,314 approvals between January and October, a record for the period, worth over €9.7 billion.
-    zh: 首購族在一月至十月間獲得29,314筆核准，創下同期紀錄，總值逾97億歐元。
-B2 P5 S2: Meanwhile, the value of approvals for movers rose 7.5% to more than €3.5 billion.
-    zh: 與此同時，換屋者的核准金額上升7.5%，超過35億歐元。
-
-## level C1
-C1 P1 S1: Lenders sanctioned roughly €1.7 billion in mortgages in October, according to the latest data from the Banking and Payments Federation Ireland (BPFI).
-    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）的最新數據，放款機構十月核准了約17億歐元的房貸。
-C1 P1 S2: An approval constitutes a formal offer of finance from a lender for a particular residential property.
-    zh: 核准即放款機構針對某一特定住宅物業提出的正式融資要約。
-C1 P2 S1: Some 5,265 mortgages were approved over the month, with first-time buyers accounting for 3,077, or 58.4% of the total.
-    zh: 當月約有5,265筆房貸獲得核准，其中首購族占3,077筆，即總數的58.4%。
-C1 P2 S2: In value terms, first-time buyers represented 59.6% of the market and movers 21.9%.
-    zh: 以金額而言，首購族占市場的59.6%，換屋者占21.9%。
-C1 P2 S3: The value of first-time buyer approvals climbed 8.5% year-on-year to just over €1 billion.
-    zh: 首購族的核准金額年增8.5%，略高於10億歐元。
-C1 P3 S1: Although the overall value of approvals dipped by 2% on September, it was up a robust 10.3% on the same month last year.
-    zh: 雖然整體核准金額比九月小幅下滑2%，但比去年同月強勁成長10.3%。
-C1 P4 S1: Over the first ten months of 2026, approvals rose 8.1% to 49,213, while their value surged 10.9% to in excess of €16 billion.
-    zh: 2026年前十個月，核准數上升8.1%至49,213筆，金額則激增10.9%至逾160億歐元。
-C1 P4 S2: BPFI chief executive Brian Hayes noted that both figures are the highest for the period since records commenced in 2011.
-    zh: BPFI執行長布萊恩・海斯指出，這兩個數字都是自2011年開始記錄以來同期的最高水準。
-C1 P5 S1: First-time buyers secured an unprecedented 29,314 approvals during that timeframe, worth upwards of €9.7 billion, underscoring their growing weight in the market.
-    zh: 首購族在這段期間獲得史無前例的29,314筆核准，總值超過97億歐元，凸顯他們在市場中日益增加的分量。
-
-## level IELTS
-IELTS P1 S1: According to the most recent data published by the Banking and Payments Federation Ireland (BPFI), approximately €1.7 billion in mortgages were approved in October.
-    zh: 根據愛爾蘭銀行與支付聯合會（BPFI）公布的最新數據，十月約有17億歐元的房貸獲得核准。
-IELTS P1 S2: An approval represents a formal offer of finance from a lender in respect of a specific residential property.
-    zh: 核准代表放款機構就某一特定住宅物業提出的正式融資要約。
-IELTS P2 S1: In total, 5,265 mortgages were approved during the month, of which first-time buyers accounted for 3,077, or 58.4%.
-    zh: 當月總共核准了5,265筆房貸，其中首購族占3,077筆，即58.4%。
-IELTS P2 S2: In terms of value, first-time buyers comprised 59.6% of the total, while movers constituted 21.9%.
-    zh: 就金額而言，首購族占總額的59.6%，換屋者則占21.9%。
-IELTS P2 S3: The value of first-time buyer approvals increased by 8.5% year-on-year to slightly more than €1 billion.
-    zh: 首購族的核准金額年增8.5%，略高於10億歐元。
-IELTS P3 S1: Although the aggregate value of approvals declined by 2% relative to September, it was 10.3% higher than in the corresponding month of the previous year.
-    zh: 雖然核准總額相較九月下降了2%，但比去年同月高出10.3%。
-IELTS P4 S1: Between January and October, the number of approvals rose by 8.1% to 49,213, and their value increased by 10.9% to over €16 billion.
-    zh: 一月至十月間，核准件數上升8.1%至49,213筆，金額則增加10.9%至超過160億歐元。
-IELTS P4 S2: The BPFI's chief executive, Brian Hayes, observed that both figures were the highest recorded for this period since the series commenced in 2011.
-    zh: BPFI執行長布萊恩・海斯指出，這兩個數字都是自2011年開始統計以來該期間的最高紀錄。
-IELTS P5 S1: Notably, first-time buyers obtained 29,314 approvals during this period, a record figure, with a combined value exceeding €9.7 billion.
-    zh: 值得注意的是，首購族在此期間取得29,314筆核准，創下紀錄，合計金額超過97億歐元。
-
-## reading questions (file reason/2026-11-27.json)
+## reading questions (file reason/2026-11-28.json)
 Q1 [main]: Which statement best summarises the passage?
-   A. Mortgage approvals fell sharply in 2026 because of rising interest rates.
-   B. Movers now account for the majority of mortgage approvals in Ireland.
-   C. Mortgage approvals are running at their highest level for the period since 2011, with first-time buyers making up most of them.  <- answer
-   D. The BPFI has stopped publishing mortgage data on a monthly basis.
-   explanation: Brian Hayes "observed that both figures were the highest recorded for this period since the series commenced in 2011", and first-time buyers accounted for "58.4%" of October approvals. Approvals rose year-on-year (A); movers were only 21.9% by value (B); nothing suggests data publication ended (D).
-Q2 [infer]: What can be inferred from the figures for October compared with September?
-   A. The month-on-month dip does not change the picture of strong growth over the year.  <- answer
-   B. The housing market is entering a long decline.
-   C. First-time buyers stopped applying for mortgages in October.
-   D. October's figures were the highest ever recorded for a single month.
-   explanation: The value of approvals "declined by 2% relative to September" but were "10.3% higher than in the corresponding month of the previous year", and the year-to-date totals are record highs. A long decline (B) is not supported; first-time buyers got 3,077 approvals (C); and the record refers to the January–October period, not one month (D).
-Q3 [purpose]: Why does the writer explain what a mortgage "approval" represents in the first paragraph?
-   A. To warn readers that most approvals are later cancelled.
-   B. To criticise lenders for making too many offers.
-   C. To argue that approvals are a poor guide to house prices.
-   D. To clarify a technical term so readers can interpret the statistics that follow.  <- answer
-   explanation: The sentence "An approval represents a formal offer of finance from a lender in respect of a specific residential property" simply defines the term before the figures are given. The passage says nothing about cancellations (A), criticism of lenders (B) or house prices (C).
+   A. Parents have voted to remove religious instruction from all Irish primary schools.
+   B. Following parental complaints, the Department of Education plans national guidance on how schools treat pupils withdrawn from religion classes.  <- answer
+   C. Catholic schools have been ordered to stop preparing pupils for First Communion during class time.
+   D. The Constitution has been changed to give parents the right to withdraw children from religion classes.
+   explanation: The passage opens by stating that the Department "intends to develop formal guidance on the treatment of pupils who have been withdrawn from religious instruction", "prompted by a substantial number of parental complaints". No vote (A), order (C) or constitutional change (D) is reported; the right to withdraw already exists.
+Q2 [infer]: Why might it be difficult for the Department to know how many pupils opt out of religion classes?
+   A. Because schools are not obliged to keep records of withdrawals.  <- answer
+   B. Because most parents refuse to answer the national survey.
+   C. Because Catholic patrons forbid schools from sharing information.
+   D. Because opt-outs only began in early 2027.
+   explanation: The passage notes that "the Department does not maintain mandatory records of withdrawals", so reliable figures are unlikely to exist. Nothing is said about parents refusing the survey (B) or patrons forbidding disclosure (C), and early 2027 is when consultation begins, not opt-outs (D).
+Q3 [purpose]: Why does the writer mention that pupils are "often being seated at the back of the classroom"?
+   A. To show that schools have found an effective solution to opt-outs.
+   B. To explain why the Department keeps records of withdrawals.
+   C. To illustrate the social isolation that some parents complain about.  <- answer
+   D. To argue that religious instruction should be removed from the timetable.
+   explanation: The detail directly follows the claim that "their children have been socially isolated", giving a concrete example of that isolation. It is not presented as a solution (A), the Department keeps no mandatory records (B), and the writer does not argue for removing religion classes (D).
 
 
-# 2026-11-27-4  (Ireland national)
-date: 2026-11-27 | rank: 4 | topic: 教育 | main level: B2
-file: articles/2026-11-27-4.json
+# 2026-11-28-3  (Ireland national)
+date: 2026-11-28 | rank: 3 | topic: 環境 | main level: B2
+file: articles/2026-11-28-3.json
 
 ## title
-Committee Chair Says School Bus Fare Rise Should Be Reconsidered
+Food-Snatching Gulls Annoy Dubliners, but Experts Say Humans Are to Blame
 
 ## summaries
-- summaryEn: A politician says the higher school bus price is too much for families.
-- summaryZh: 國會教育委員會主席認為校車票價調漲應重新檢討。
-- summaryJa: 議会教育委員会の委員長が、スクールバス運賃の値上げを見直すべきだと述べた。
-- summaryKo: 의회 교육위원회 위원장은 통학버스 요금 인상을 재검토해야 한다고 말했다.
-- summaryEs: El presidente de la comisión de Educación pide revisar la subida del precio del autobús escolar.
-- summaryHi: संसदीय शिक्षा समिति के अध्यक्ष का कहना है कि स्कूल बस किराया बढ़ाने के फ़ैसले पर दोबारा विचार होना चाहिए।
+- summaryEn: Gulls take people's food in Dublin, but experts say people caused the problem.
+- summaryZh: 都柏林海鷗搶食惹民怨，專家卻說人類才是禍首。
+- summaryJa: ダブリンで食べ物を奪うカモメに苦情が相次ぐが、専門家は人間こそ原因だと言う。
+- summaryKo: 더블린에서 음식을 낚아채는 갈매기에 불만이 많지만, 전문가들은 인간이 원인이라고 말한다.
+- summaryEs: Las gaviotas que roban comida molestan en Dublín, pero los expertos culpan a los humanos.
+- summaryHi: डबलिन में खाना छीनने वाले गल पक्षियों से लोग परेशान हैं, पर विशेषज्ञ कहते हैं कि असली दोष इंसानों का है।
 
 ## sources
-- RTÉ News: https://www.rte.ie/news/education/2026/1126/1600805-school-transport-fee-increases/
+- The Irish Times: https://www.irishtimes.com/ireland/dublin/2026/11/28/theyre-not-seagulls-theyre-vermin-theyre-scavenger-gulls-the-threat-from-above-in-dublins-skies/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Many children in Ireland go to school by bus.
-    zh: 愛爾蘭有很多孩子搭公車上學。
-A2 P1 S2: The Government wants families to pay more for the school bus.
-    zh: 政府希望家庭為校車付更多錢。
-A2 P2 S1: From next September, a secondary school pupil will pay €350 a year.
-    zh: 從明年九月起，中學生每年要付350歐元。
-A2 P2 S2: Now they pay €100.
-    zh: 現在他們付100歐元。
-A2 P2 S3: The price was cut in 2022 to help families.
-    zh: 票價在2022年被調降，以幫助家庭。
-A2 P3 S1: Cathal Crowe leads a group of TDs that looks at education.
-    zh: 卡哈爾・克羅領導一個負責教育議題的國會議員小組。
-A2 P3 S2: He says the rise is too much for families.
-    zh: 他說這次漲價對家庭來說太多了。
-A2 P3 S3: He thinks the Government should look at it again.
-    zh: 他認為政府應該重新考慮。
-A2 P3 S4: The Taoiseach said some price rises might change.
-    zh: 總理說有些漲價可能會改變。
-A2 P4 S1: The bus is expensive for the State.
-    zh: 校車對國家來說很昂貴。
-A2 P4 S2: It costs €1,400 to €1,500 a year for each child.
-    zh: 每個孩子每年要花1,400到1,500歐元。
-A2 P4 S3: Next year the service will cost €687 million.
-    zh: 明年這項服務將花費6億8,700萬歐元。
+A2 P1 S1: Gulls are a big problem for some people in Dublin.
+    zh: 海鷗對都柏林的一些人來說是個大問題。
+A2 P1 S2: In St Stephen's Green, the birds fly down and take food from people's hands.
+    zh: 在聖史蒂芬綠地公園，這些鳥會飛下來從人們手中搶食物。
+A2 P1 S3: They take sandwiches, pizza and ice cream.
+    zh: 牠們會搶三明治、披薩和冰淇淋。
+A2 P2 S1: Last summer, many people wrote to the city councils about the birds.
+    zh: 去年夏天，很多人寫信給市議會抱怨海鷗。
+A2 P2 S2: Some birds made nests on roofs and chimneys.
+    zh: 有些鳥在屋頂和煙囪上築巢。
+A2 P2 S3: They made a lot of noise and attacked people near their homes.
+    zh: 牠們製造很多噪音，還在住家附近攻擊人。
+A2 P3 S1: But bird experts say people are the real problem.
+    zh: 但鳥類專家說，人類才是真正的問題。
+A2 P3 S2: The number of herring gulls in Ireland is down by about 90% in 30 years.
+    zh: 愛爾蘭銀鷗的數量在30年內減少了約90%。
+A2 P3 S3: These birds once found food behind fishing boats.
+    zh: 這些鳥以前在漁船後面找食物。
+A2 P3 S4: Now boats throw nothing away.
+    zh: 現在漁船什麼都不丟。
+A2 P3 S5: Many rubbish dumps also closed, so the hungry birds moved into towns.
+    zh: 許多垃圾場也關閉了，所以飢餓的鳥兒搬進了城鎮。
+A2 P4 S1: The birds are protected by EU law.
+    zh: 這些鳥受到歐盟法律保護。
+A2 P4 S2: A city business group says people should be careful with food outside.
+    zh: 一個城市商業團體說，人們在戶外吃東西時要小心。
 
 ## level B1
-B1 P1 S1: The head of the Oireachtas Education Committee says the Government's plan to raise school bus fares will have to be looked at again.
-    zh: 國會教育委員會主席表示，政府調漲校車票價的計畫必須重新檢視。
-B1 P1 S2: Fianna Fáil TD Cathal Crowe said it was unrealistic to put this extra cost on families at a time when living costs are rising again.
-    zh: 共和黨議員卡哈爾・克羅說，在生活費再度上漲的時候，把這筆額外費用加在家庭身上是不切實際的。
-B1 P2 S1: Fares were cut in 2022 to help families with the cost of living.
-    zh: 票價在2022年被調降，以幫助家庭應付生活費。
-B1 P2 S2: But in October's budget, the Government decided to bring them back to their old level from next September.
-    zh: 但在十月的預算案中，政府決定從明年九月起將票價恢復到原來的水準。
-B1 P2 S3: For secondary school pupils, the yearly fare will rise from €100 to €350.
-    zh: 中學生的每年票價將從100歐元漲到350歐元。
-B1 P3 S1: Some Independent TDs and ministers have spoken out against the plan.
-    zh: 一些無黨籍議員和部長已公開反對這項計畫。
-B1 P3 S2: On Wednesday, the Taoiseach, Micheál Martin, said some of the increases might be reviewed, although the Tánaiste, Simon Harris, had earlier said the decision would not be reversed.
-    zh: 總理米霍爾・馬丁星期三表示，部分漲幅可能會重新檢討，不過副總理賽門・哈里斯先前曾說這項決定不會撤回。
-B1 P4 S1: Officials from the Department of Education told the committee that it costs between €1,400 and €1,500 a year to bring one child to school by bus.
-    zh: 教育部官員告訴委員會，用校車載一個孩子上學每年要花1,400到1,500歐元。
-B1 P4 S2: The cost of the scheme has gone up by 58% since 2020 and is expected to reach €687 million next year, including €143 million for taxis for children with special needs.
-    zh: 這項計畫的成本自2020年以來上漲了58%，預計明年將達到6億8,700萬歐元，其中包括為特殊需求兒童支付的1億4,300萬歐元計程車費用。
+B1 P1 S1: If you eat lunch outside in Dublin, you may need to watch the sky.
+    zh: 如果你在都柏林戶外吃午餐，可能得注意天空。
+B1 P1 S2: In St Stephen's Green, gulls often dive down and grab sandwiches, pizza and ice cream from people's hands.
+    zh: 在聖史蒂芬綠地公園，海鷗常常俯衝下來，從人們手中搶走三明治、披薩和冰淇淋。
+B1 P2 S1: The problem is not new.
+    zh: 這個問題並不新鮮。
+B1 P2 S2: Last summer, residents sent many complaints to Dublin City Council and Fingal County Council.
+    zh: 去年夏天，居民向都柏林市議會和芬戈郡議會提出許多投訴。
+B1 P2 S3: Some said gulls built nests behind their chimneys and kept them awake for weeks.
+    zh: 有些人說海鷗在他們的煙囪後面築巢，讓他們好幾個星期睡不著。
+B1 P2 S4: Others said the birds attacked children, dog walkers and even pets.
+    zh: 也有人說這些鳥攻擊兒童、遛狗的人，甚至寵物。
+B1 P3 S1: However, wildlife groups say humans are to blame.
+    zh: 然而，野生動物團體說該怪的是人類。
+B1 P3 S2: Niall Hatch of BirdWatch Ireland says the number of herring gulls has fallen by about 90% in just three decades.
+    zh: 愛爾蘭鳥類保育組織的尼爾．哈奇說，銀鷗的數量在短短三十年內減少了約90%。
+B1 P3 S3: He calls them a species in crisis.
+    zh: 他稱牠們為陷入危機的物種。
+B1 P4 S1: Biologist Éanna Ní Lamhna explains why the birds came to towns.
+    zh: 生物學家艾安娜．尼．拉夫納解釋了這些鳥為什麼來到城鎮。
+B1 P4 S2: In the past, gulls followed fishing boats and ate the fish that crews threw away.
+    zh: 過去，海鷗跟著漁船，吃船員丟掉的魚。
+B1 P4 S3: Modern boats waste nothing.
+    zh: 現代漁船什麼都不浪費。
+B1 P4 S4: When rubbish dumps closed, the gulls moved into towns to find food.
+    zh: 垃圾場關閉後，海鷗就搬進城鎮找食物。
+B1 P5 S1: Gulls are protected under EU law.
+    zh: 海鷗受到歐盟法律保護。
+B1 P5 S2: Gerry Farrell of the business group Dublin Town says people should simply be careful with their food in public places.
+    zh: 商業團體「都柏林鎮」的傑瑞．法瑞爾說，人們在公共場所只要小心自己的食物就好。
 
 ## level B2
-B2 P1 S1: The chair of the Oireachtas Education Committee has said the Government's decision to increase school transport fares will have to be revisited.
-    zh: 國會教育委員會主席表示，政府調漲學童交通票價的決定將必須重新檢討。
-B2 P1 S2: Fianna Fáil TD Cathal Crowe described the move as an unrealistic burden on families who are already struggling with renewed cost-of-living pressures.
-    zh: 共和黨議員卡哈爾・克羅形容此舉是對已在生活成本壓力再起中掙扎的家庭施加不切實際的負擔。
-B2 P2 S1: Fares were reduced in 2022 as a cost-of-living measure, but in October's budget the Government announced that they would return to their previous levels from next September.
-    zh: 票價曾於2022年為減輕生活費負擔而調降，但政府在十月的預算案中宣布，從明年九月起票價將恢復到先前的水準。
-B2 P2 S2: As a result, the annual fare for post-primary pupils will rise from €100 to €350 for the 2027/2028 school year.
-    zh: 因此，2027/2028學年中學生的年票價將從100歐元漲到350歐元。
-B2 P3 S1: The plan has met opposition from Independent TDs and ministers who support the Government.
-    zh: 這項計畫遭到無黨籍議員和支持政府的部長反對。
-B2 P3 S2: On Wednesday, Taoiseach Micheál Martin signalled that some of the increases could be reviewed, even though Tánaiste Simon Harris had ruled out a reversal the previous week.
-    zh: 總理米霍爾・馬丁星期三暗示，部分漲幅可能會重新檢討，儘管副總理賽門・哈里斯前一週才排除撤回的可能。
-B2 P4 S1: Department of Education officials told the committee that carrying one child on a school bus costs between €1,400 and €1,500 a year, with the State covering 93% of the cost at primary level and 75% at post-primary level.
-    zh: 教育部官員告訴委員會，用校車載送一名孩童每年花費1,400到1,500歐元，國家在小學階段負擔93%的成本，中學階段負擔75%。
-B2 P4 S2: The scheme's cost has risen by 58% since 2020 and is projected to reach €687 million next year, of which €143 million goes on taxis for children with special needs.
-    zh: 這項計畫的成本自2020年以來上升了58%，預計明年將達6億8,700萬歐元，其中1億4,300萬歐元用於特殊需求兒童的計程車。
+B2 P1 S1: Eating lunch outdoors in Dublin can be risky.
+    zh: 在都柏林戶外吃午餐可能有風險。
+B2 P1 S2: In St Stephen's Green, gulls regularly swoop down and snatch sandwiches, slices of pizza and ice creams straight from people's hands.
+    zh: 在聖史蒂芬綠地公園，海鷗經常俯衝而下，直接從人們手中搶走三明治、披薩片和冰淇淋。
+B2 P2 S1: Freedom of information records show that aggressive gulls led to a large number of complaints to Dublin City and Fingal councils last summer.
+    zh: 資訊公開紀錄顯示，去年夏天具攻擊性的海鷗讓都柏林市議會和芬戈郡議會收到大量投訴。
+B2 P2 S2: Residents described birds nesting behind chimneys, weeks of lost sleep, and gulls diving at children, dog walkers and pets.
+    zh: 居民描述了海鷗在煙囪後築巢、好幾週睡眠不足，以及海鷗俯衝攻擊兒童、遛狗者和寵物的情形。
+B2 P3 S1: Conservation groups, however, argue that people are the real problem.
+    zh: 然而，保育團體認為人類才是真正的問題。
+B2 P3 S2: Niall Hatch of BirdWatch Ireland points out that the herring gull population has dropped by around 90 per cent in only three decades, and he describes the bird as a species in crisis.
+    zh: 愛爾蘭鳥類保育組織的尼爾．哈奇指出，銀鷗的數量在僅僅三十年內下降了約九成，他形容這是一個陷入危機的物種。
+B2 P3 S3: Gulls are protected under the EU Birds Directive.
+    zh: 海鷗受到歐盟《鳥類指令》保護。
+B2 P4 S1: According to biologist Éanna Ní Lamhna, the birds' traditional food sources have disappeared.
+    zh: 生物學家艾安娜．尼．拉夫納表示，這些鳥的傳統食物來源已經消失。
+B2 P4 S2: Gulls once followed fishing boats, but modern trawlers freeze their catch and throw nothing overboard.
+    zh: 海鷗過去跟隨漁船覓食，但現代拖網漁船會把漁獲冷凍，什麼都不丟進海裡。
+B2 P4 S3: When landfill sites closed, many gulls moved into towns in search of food.
+    zh: 垃圾掩埋場關閉後，許多海鷗搬進城鎮尋找食物。
+B2 P5 S1: Gerry Farrell of the business group Dublin Town says the problem has eased in recent years, but he advises people to take care with food in public spaces.
+    zh: 商業團體「都柏林鎮」的傑瑞．法瑞爾說，問題近年來已有所緩和，但他建議民眾在公共空間吃東西時要小心。
 
 ## level C1
-C1 P1 S1: The chair of the Oireachtas Education Committee has warned that the Government's decision to hike school transport fares will have to be revisited.
-    zh: 國會教育委員會主席警告，政府大幅調漲學童交通票價的決定將必須重新審視。
-C1 P1 S2: Fianna Fáil TD Cathal Crowe branded it an unrealistic burden to heap on families already grappling with a resurgence in cost-of-living pressures.
-    zh: 共和黨議員卡哈爾・克羅斥之為硬加在家庭身上的不切實際負擔，而這些家庭本已在努力應付再度升高的生活成本壓力。
-C1 P2 S1: Fares were slashed in 2022 as a temporary relief measure, but October's budget stipulated that they would revert to their former levels from next September.
-    zh: 票價曾於2022年作為臨時紓困措施而大幅調降，但十月的預算案規定，從明年九月起票價將回復到以往的水準。
-C1 P2 S2: Consequently, the annual charge for post-primary pupils is set to soar from €100 to €350 in the 2027/2028 academic year.
-    zh: 因此，2027/2028學年中學生的年費將從100歐元飆升至350歐元。
-C1 P3 S1: The proposal has drawn fierce resistance from Independent TDs and the ministers who prop up the coalition.
-    zh: 這項提案遭到無黨籍議員以及支撐聯合政府的部長們強烈抵制。
-C1 P3 S2: On Wednesday, Taoiseach Micheál Martin intimated that certain increases might be reconsidered, despite Tánaiste Simon Harris having categorically ruled out a U-turn only a week earlier.
-    zh: 總理米霍爾・馬丁星期三暗示某些漲幅可能會重新考慮，儘管副總理賽門・哈里斯僅一週前才斷然排除政策大轉彎。
-C1 P4 S1: Officials from the Department of Education informed the committee that conveying a single child by school bus costs between €1,400 and €1,500 annually, with the State subsidising 93% of the outlay at primary level and 75% at post-primary level.
-    zh: 教育部官員告知委員會，以校車載送一名孩童每年花費1,400到1,500歐元，國家在小學階段補貼93%的支出，中學階段補貼75%。
-C1 P4 S2: Expenditure on the scheme has ballooned by 58% since 2020 and is forecast to reach €687 million next year, €143 million of which is earmarked for taxis for children with special needs.
-    zh: 這項計畫的開支自2020年以來暴增58%，預計明年將達6億8,700萬歐元，其中1億4,300萬歐元指定用於特殊需求兒童的計程車。
+C1 P1 S1: Lunching al fresco in Dublin is not without its hazards.
+    zh: 在都柏林露天享用午餐並非毫無風險。
+C1 P1 S2: In St Stephen's Green, gulls routinely swoop on unsuspecting diners, making off with sandwiches, pizza and ice cream in broad daylight.
+    zh: 在聖史蒂芬綠地公園，海鷗經常撲向毫無防備的用餐者，光天化日之下叼走三明治、披薩和冰淇淋。
+C1 P2 S1: Records released under freedom of information legislation reveal that Dublin City and Fingal councils were inundated with complaints about aggressive gulls last summer.
+    zh: 依據資訊公開法公布的紀錄顯示，去年夏天都柏林市議會與芬戈郡議會被大量關於兇猛海鷗的投訴淹沒。
+C1 P2 S2: Exasperated residents reported birds nesting behind chimneys, weeks of disrupted sleep, and gulls dive-bombing children, dog walkers and even pets.
+    zh: 不堪其擾的居民反映海鷗在煙囪後築巢、好幾週睡眠受擾，以及海鷗俯衝攻擊兒童、遛狗者甚至寵物。
+C1 P3 S1: Wildlife campaigners, however, insist that the blame lies squarely with humans.
+    zh: 然而，野生動物倡議人士堅稱，責任完全在於人類。
+C1 P3 S2: Niall Hatch of BirdWatch Ireland notes that the herring gull population has plummeted by roughly 90 per cent in a mere three decades, describing it as a species in crisis.
+    zh: 愛爾蘭鳥類保育組織的尼爾．哈奇指出，銀鷗數量在短短三十年間暴跌約九成，並形容牠們是陷入危機的物種。
+C1 P3 S3: The birds are protected under the EU Birds Directive.
+    zh: 這些鳥受到歐盟《鳥類指令》保護。
+C1 P4 S1: Biologist Éanna Ní Lamhna attributes the shift to the loss of the gulls' traditional food supply.
+    zh: 生物學家艾安娜．尼．拉夫納將這種轉變歸因於海鷗傳統食物來源的喪失。
+C1 P4 S2: The birds once trailed fishing vessels, but today's freezer trawlers discard nothing overboard.
+    zh: 這些鳥過去尾隨漁船，但如今的冷凍拖網漁船不會把任何東西丟棄到海裡。
+C1 P4 S3: Once landfill sites were shut down, the gulls migrated into towns to forage.
+    zh: 垃圾掩埋場一關閉，海鷗便遷入城鎮覓食。
+C1 P5 S1: Gerry Farrell of the business group Dublin Town acknowledges that the nuisance has abated somewhat, yet he urges the public to remain vigilant with food in public spaces.
+    zh: 商業團體「都柏林鎮」的傑瑞．法瑞爾承認，這種滋擾已稍有減輕，但他敦促民眾在公共空間對食物保持警覺。
 
 ## level IELTS
-IELTS P1 S1: The chair of the Oireachtas Education Committee has stated that the Government's decision to increase school transport fares will need to be revisited.
-    zh: 國會教育委員會主席表示，政府調漲學童交通票價的決定需要重新檢討。
-IELTS P1 S2: Fianna Fáil TD Cathal Crowe characterised the measure as an unrealistic financial burden for families who are already contending with renewed cost-of-living pressures.
-    zh: 共和黨議員卡哈爾・克羅將此舉定性為對已在應付生活成本壓力再起的家庭而言不切實際的財務負擔。
-IELTS P2 S1: Fares were reduced in 2022 as a temporary cost-of-living intervention; however, the October budget determined that they would revert to their previous levels from next September.
-    zh: 票價曾於2022年為暫時減輕生活費負擔而調降；然而，十月的預算案決定從明年九月起將其恢復至先前的水準。
-IELTS P2 S2: Consequently, the annual fare for post-primary pupils is scheduled to increase from €100 to €350 in the 2027/2028 academic year.
-    zh: 因此，2027/2028學年中學生的年票價預定從100歐元調漲至350歐元。
-IELTS P3 S1: The proposal has encountered substantial opposition from Independent TDs and the ministers who support the coalition.
-    zh: 這項提案遭到無黨籍議員及支持聯合政府的部長們相當大的反對。
-IELTS P3 S2: Nevertheless, Taoiseach Micheál Martin indicated on Wednesday that certain increases might be reconsidered, notwithstanding the fact that Tánaiste Simon Harris had explicitly ruled out a reversal the previous week.
-    zh: 儘管如此，總理米霍爾・馬丁星期三表示某些漲幅可能會重新考慮，即使副總理賽門・哈里斯前一週曾明確排除撤回的可能。
-IELTS P4 S1: Department of Education officials informed the committee that transporting a single child by school bus costs between €1,400 and €1,500 per year, with the State subsidising 93% of the expenditure at primary level and 75% at post-primary level.
-    zh: 教育部官員告知委員會，以校車運送一名孩童每年花費1,400到1,500歐元，國家在小學階段補貼93%的支出，中學階段補貼75%。
-IELTS P4 S2: The cost of the scheme has increased by 58% since 2020 and is projected to reach €687 million next year, of which €143 million is allocated to taxis for children with special needs.
-    zh: 這項計畫的成本自2020年以來增加了58%，預計明年將達到6億8,700萬歐元，其中1億4,300萬歐元撥給特殊需求兒童的計程車。
+IELTS P1 S1: Consuming food outdoors in central Dublin has become increasingly problematic.
+    zh: 在都柏林市中心戶外進食已變得越來越麻煩。
+IELTS P1 S2: In St Stephen's Green, gulls frequently descend upon members of the public and seize sandwiches, pizza and ice cream, often without warning.
+    zh: 在聖史蒂芬綠地公園，海鷗經常撲向民眾，搶走三明治、披薩和冰淇淋，而且往往毫無預警。
+IELTS P2 S1: Documents obtained under freedom of information legislation indicate that Dublin City and Fingal councils received a substantial volume of complaints regarding aggressive gulls last summer.
+    zh: 依資訊公開法取得的文件顯示，去年夏天都柏林市議會與芬戈郡議會收到大量有關兇猛海鷗的投訴。
+IELTS P2 S2: Residents cited birds nesting behind chimneys, prolonged sleep deprivation, and attacks on children, dog walkers and domestic animals.
+    zh: 居民列舉了海鷗在煙囪後築巢、長期睡眠不足，以及攻擊兒童、遛狗者和家中寵物等問題。
+IELTS P3 S1: Nevertheless, conservationists maintain that responsibility rests primarily with humans.
+    zh: 儘管如此，保育人士堅持認為，責任主要在於人類。
+IELTS P3 S2: Niall Hatch of BirdWatch Ireland observes that the herring gull population has declined by approximately 90 per cent within three decades, a trend he characterises as a crisis for the species.
+    zh: 愛爾蘭鳥類保育組織的尼爾．哈奇指出，銀鷗數量在三十年內下降約九成，他將此趨勢形容為該物種的危機。
+IELTS P3 S3: Gulls are also protected under the EU Birds Directive.
+    zh: 海鷗也受到歐盟《鳥類指令》保護。
+IELTS P4 S1: The biologist Éanna Ní Lamhna attributes this phenomenon to the depletion of the birds' traditional food sources.
+    zh: 生物學家艾安娜．尼．拉夫納將這一現象歸因於這些鳥傳統食物來源的枯竭。
+IELTS P4 S2: Gulls historically depended on fishing vessels, yet contemporary freezer trawlers discard no waste at sea.
+    zh: 海鷗過去依賴漁船，但當代冷凍拖網漁船不在海上丟棄任何廢棄物。
+IELTS P4 S3: Following the closure of landfill sites, the birds relocated to urban areas in pursuit of sustenance.
+    zh: 隨著垃圾掩埋場關閉，這些鳥遷移到城市地區尋找食物。
+IELTS P5 S1: Gerry Farrell of the business group Dublin Town concedes that the problem has diminished to some extent, although he recommends that the public exercise caution with food in shared spaces.
+    zh: 商業團體「都柏林鎮」的傑瑞．法瑞爾承認問題已在某種程度上減輕，但他建議民眾在共用空間對食物保持謹慎。
 
-## reading questions (file reason/2026-11-27.json)
+## reading questions (file reason/2026-11-28.json)
 Q1 [main]: What is the main point of the passage?
-   A. The Government has cancelled the school transport scheme for post-primary pupils.
-   B. A planned rise in school bus fares faces growing pressure to be reconsidered, despite the scheme's rising cost to the State.  <- answer
-   C. School bus fares will be reduced permanently from next September.
-   D. Taxis for children with special needs will no longer be funded.
-   explanation: Crowe says the fare increase "will need to be revisited", opposition is "substantial" and Martin indicated increases "might be reconsidered", while officials note costs have "increased by 58% since 2020". The scheme is not cancelled (A); fares are due to rise, not fall (C); and taxi funding of €143 million continues (D).
-Q2 [infer]: What can be inferred about the Government's position on the fare increase?
-   A. Senior Government figures appear to be giving mixed signals about it.  <- answer
-   B. All ministers agree that the increase must go ahead unchanged.
-   C. The Government has already reversed the increase.
-   D. The Government plans to raise fares further in 2028.
-   explanation: Martin "indicated on Wednesday that certain increases might be reconsidered, notwithstanding the fact that" Harris "had explicitly ruled out a reversal the previous week" — the two leaders are not saying the same thing. That rules out unanimity (B) and an actual reversal (C); further rises (D) are not mentioned.
-Q3 [purpose]: Why does the writer include the officials' figures on the cost of transporting each child?
-   A. To show that parents already pay most of the cost of the scheme.
-   B. To prove that the €350 fare would cover the full cost of each place.
-   C. To give context for the Government's decision by showing how much the State spends on the scheme.  <- answer
-   D. To argue that the school bus scheme should be abolished.
-   explanation: Officials said each child costs "between €1,400 and €1,500 per year, with the State subsidising 93%" at primary and 75% at post-primary, and the scheme will cost €687 million. This explains the financial pressure behind the decision. Parents do not pay most of it (A), €350 is well below €1,400 (B), and no one argues for abolition (D).
+   A. Dublin councils plan to remove gulls from St Stephen's Green.
+   B. Gull attacks in Dublin have risen sharply because the gull population has grown.
+   C. Business groups say the gull problem in Dublin has been completely solved.
+   D. Although gulls annoy many Dubliners, experts argue that human activity has driven the birds into the city.  <- answer
+   explanation: The passage describes complaints about "aggressive gulls" but stresses that conservationists "maintain that responsibility rests primarily with humans", explaining how lost food sources pushed gulls to "urban areas". The population has actually "declined by approximately 90 per cent" (B), no removal plan is mentioned (A), and Dublin Town says the problem has only "diminished to some extent" (C).
+Q2 [infer]: Why are conservationists concerned about herring gulls?
+   A. Because they help councils clean up food waste in cities.
+   B. Because their numbers have fallen so steeply that the species is under threat.  <- answer
+   C. Because they rarely attack people or pets.
+   D. Because fishing vessels depend on them to find fish.
+   explanation: The herring gull population "has declined by approximately 90 per cent within three decades", described as "a crisis for the species". Such a steep decline explains conservationists' concern. The passage does not link that concern to cleaning (A) or harmlessness (C), and it says gulls depended on vessels, not the reverse (D).
+Q3 [purpose]: Why does the writer mention modern freezer trawlers?
+   A. To explain why gulls lost one of their traditional sources of food.  <- answer
+   B. To show that the fishing industry is responsible for most gull attacks.
+   C. To suggest that trawlers should return to discarding waste at sea.
+   D. To compare the size of old and new fishing fleets.
+   explanation: Ní Lamhna links the problem to "the depletion of the birds' traditional food sources": gulls "historically depended on fishing vessels, yet contemporary freezer trawlers discard no waste at sea". The detail explains a lost food source; it does not assign blame for attacks (B), make a recommendation (C) or compare fleet sizes (D).
 
 
-# 2026-11-27-tw-1  (region TW)
-date: 2026-11-27 | rank: 1 | topic: 經濟 | main level: B2
-file: articles/2026-11-27-tw-1.json
+# 2026-11-28-4  (Ireland national)
+date: 2026-11-28 | rank: 4 | topic: 科技 | main level: B2
+file: articles/2026-11-28-4.json
 
 ## title
-322 Taiwanese Farm Products Escape New US Tariffs
+Only One in 20 Job Applications Reaches an Interview, Survey Finds
 
 ## summaries
-- summaryEn: Taiwan says 322 of its farm products will stay free of extra US tariffs under Washington's latest trade plan.
-- summaryZh: 美國新關稅豁免台灣322項農產品
-- summaryJa: 台湾の農産品322品目、米国の追加関税を免除。
-- summaryKo: 대만 농산물 322개 품목, 미국 추가 관세 면제.
-- summaryEs: 322 productos agrícolas de Taiwán quedan exentos de los nuevos aranceles de EE. UU.
-- summaryHi: अमेरिका के नए टैरिफ़ से ताइवान के 322 कृषि उत्पादों को छूट मिली।
+- summaryEn: Most job applications are rejected by AI before a person reads them.
+- summaryZh: 調查：每20份求職申請僅一份進面試，多數遭AI篩掉。
+- summaryJa: 調査によると、求人応募の20件に1件しか面接に進めず、大半はAIにふるい落とされている。
+- summaryKo: 조사에 따르면 입사 지원서 20건 중 1건만 면접에 가며, 대부분은 AI가 걸러낸다.
+- summaryEs: Según una encuesta, solo una de cada 20 solicitudes de empleo llega a entrevista; la IA descarta la mayoría.
+- summaryHi: एक सर्वे के अनुसार हर 20 नौकरी आवेदनों में से सिर्फ़ एक इंटरव्यू तक पहुँचता है, ज़्यादातर AI द्वारा छाँट दिए जाते हैं।
 
 ## sources
-- Focus Taiwan (CNA): https://focustaiwan.tw/politics/202611260013
+- The Irish Times: https://www.irishtimes.com/business/work/2026/11/27/just-one-in-20-job-applications-gets-as-far-the-interview-stage/
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Taiwan sells many farm products to the United States.
-    zh: 台灣賣很多農產品給美國。
-A2 P1 S2: Now there is good news for farmers.
-    zh: 現在農民有好消息。
-A2 P1 S3: The US will not add new taxes on 322 of these products.
-    zh: 美國不會對其中322項產品加徵新稅。
-A2 P2 S1: A tax on things from another country is called a tariff.
-    zh: 對來自其他國家的東西課的稅叫做關稅。
-A2 P2 S2: The US is checking trade with 14 places, like China, Japan and Taiwan.
-    zh: 美國正在檢查與14個地方的貿易，例如中國、日本和台灣。
-A2 P2 S3: It wants to stop countries from making too many goods.
-    zh: 它想阻止各國生產太多商品。
-A2 P3 S1: Taiwan's farm minister, Chen Chun-chi, shared the news on Thursday.
-    zh: 台灣的農業部長陳駿季在星期四公布了這個消息。
-A2 P3 S2: The 322 products are about 36 to 40 percent of Taiwan's farm sales to the US.
-    zh: 這322項產品約占台灣對美農產品銷售的36%到40%。
-A2 P4 S1: Some Taiwanese products now have a big price advantage.
-    zh: 有些台灣產品現在有很大的價格優勢。
-A2 P4 S2: Taiwanese moth orchids pay no import tax in the US.
-    zh: 台灣蝴蝶蘭進入美國免徵關稅。
-A2 P4 S3: Moth orchids from the Netherlands pay 10 percent.
-    zh: 來自荷蘭的蝴蝶蘭須繳10%關稅。
-A2 P4 S4: Fish called tilapia from Taiwan pay 10 percent, but tilapia from China pay 37.5 percent.
-    zh: 台灣的吳郭魚繳10%，但中國的吳郭魚要繳37.5%。
-A2 P5 S1: The government will also give NT$18 billion to help farmers sell their food abroad.
-    zh: 政府也會拿出180億新台幣，幫助農民把食物賣到國外。
+A2 P1 S1: Looking for a job is hard.
+    zh: 找工作很難。
+A2 P1 S2: A new survey shows that only one in 20 job applications gets to an interview.
+    zh: 一項新調查顯示，每20份求職申請中只有一份能進入面試。
+A2 P2 S1: The company Greenhouse asked 1,347 people who hire workers.
+    zh: Greenhouse公司詢問了1,347位負責招人的人。
+A2 P2 S2: They live in the US, the UK, Germany, Australia and Ireland.
+    zh: 他們住在美國、英國、德國、澳洲和愛爾蘭。
+A2 P3 S1: Companies get too many applications.
+    zh: 公司收到太多申請。
+A2 P3 S2: So they use AI computer programs to check them.
+    zh: 所以他們用AI電腦程式來檢查。
+A2 P3 S3: AI rejects most applications before a person sees them.
+    zh: 在有人看到之前，AI就拒絕了大部分申請。
+A2 P4 S1: Some people use AI to write their CVs.
+    zh: 有些人用AI寫履歷。
+A2 P4 S2: These CVs often say things that are not true.
+    zh: 這些履歷常常寫些不真實的內容。
+A2 P4 S3: Almost nine in ten managers said they probably said no to real applications by mistake.
+    zh: 將近十分之九的經理說，他們可能誤拒了真實的申請。
+A2 P4 S4: They thought AI wrote them.
+    zh: 他們以為那些是AI寫的。
+A2 P5 S1: Now 41% of the managers use AI for first interviews.
+    zh: 現在有41%的經理用AI進行初次面試。
+A2 P5 S2: Next year, this may be 63%.
+    zh: 明年這個數字可能達到63%。
+A2 P5 S3: About half of the managers now check AI decisions earlier.
+    zh: 大約一半的經理現在會更早檢查AI的決定。
 
 ## level B1
-B1 P1 S1: Good news arrived for Taiwan's farmers this week.
-    zh: 本週台灣農民迎來好消息。
-B1 P1 S2: Agriculture Minister Chen Chun-chi said on Thursday that 322 Taiwanese farm products will not face any extra tariffs in the United States.
-    zh: 農業部長陳駿季星期四表示，台灣有322項農產品在美國不會被加徵任何額外關稅。
-B1 P2 S1: The US is running an investigation into 14 economies, including China, Japan, South Korea, the EU and Taiwan.
-    zh: 美國正在對14個經濟體進行調查，包括中國、日本、南韓、歐盟和台灣。
-B1 P2 S2: It says their government policies have helped factories produce far more goods than the world needs.
-    zh: 美方說，這些經濟體的政府政策讓工廠生產的商品遠超過世界所需。
-B1 P2 S3: As a result, the US has proposed new tariffs of up to 15 percent on many Taiwanese goods.
-    zh: 因此，美國提議對許多台灣商品課徵最高15%的新關稅。
-B1 P3 S1: However, the 322 farm products are protected.
-    zh: 不過，這322項農產品受到保護。
-B1 P3 S2: Together they make up between 36 and 40 percent of the value of Taiwan's farm exports to the US.
-    zh: 它們合計占台灣對美農產品出口總值的36%到40%。
-B1 P3 S3: Twenty-six of them, such as moth orchids, have special exemptions just for Taiwan.
-    zh: 其中26項，例如蝴蝶蘭，享有台灣專屬的豁免。
-B1 P4 S1: These exemptions give Taiwanese farmers an advantage.
-    zh: 這些豁免讓台灣農民占有優勢。
-B1 P4 S2: For example, Taiwanese edamame beans face a 10 percent tariff, while Chinese edamame faces 41.3 percent.
-    zh: 例如，台灣毛豆的關稅是10%，而中國毛豆則是41.3%。
-B1 P5 S1: The ministry has also set aside NT$18 billion to support exporters.
-    zh: 農業部也撥出180億新台幣支持出口業者。
-B1 P5 S2: The final tariff decision is expected early next year.
-    zh: 最終的關稅決定預計在明年初出爐。
+B1 P1 S1: Finding a new job is getting harder.
+    zh: 找新工作越來越難。
+B1 P1 S2: According to a new international survey, only about one in every 20 job applications reaches the interview stage.
+    zh: 根據一項新的國際調查，每20份求職申請中只有大約一份能進入面試階段。
+B1 P2 S1: The survey was carried out by Greenhouse, a company that makes software for hiring.
+    zh: 這項調查由製作招聘軟體的Greenhouse公司進行。
+B1 P2 S2: It asked 1,347 recruiters and hiring managers in the US, the UK, Germany, Australia and Ireland.
+    zh: 它詢問了美國、英國、德國、澳洲和愛爾蘭的1,347位招募人員和招聘經理。
+B1 P3 S1: Employers say they now receive far more applications than their staff can read.
+    zh: 雇主表示，他們現在收到的申請遠多於員工能看完的數量。
+B1 P3 S2: Because of this, many companies use artificial intelligence, or AI, to filter applications.
+    zh: 因此，許多公司使用人工智慧（AI）來篩選申請。
+B1 P3 S3: Most applications are rejected by these AI systems before a person ever looks at them.
+    zh: 大多數申請在有人看過之前就被這些AI系統拒絕了。
+B1 P4 S1: There is another problem.
+    zh: 還有另一個問題。
+B1 P4 S2: Many applicants now use AI to write their CVs and cover letters, and these often include false claims about their skills.
+    zh: 許多求職者現在用AI寫履歷和求職信，其中常含有關於自身技能的不實說法。
+B1 P4 S3: Almost 90% of the managers admitted they had probably rejected real applications because they believed AI had written them.
+    zh: 將近90%的經理承認，他們可能因為以為是AI寫的而拒絕了真實的申請。
+B1 P5 S1: AI is also doing more interviews.
+    zh: AI也在進行更多面試。
+B1 P5 S2: At the moment, 41% of the managers use it for first interviews, and this is expected to rise to 63% next year.
+    zh: 目前41%的經理用它進行初次面試，預計明年將升至63%。
+B1 P5 S3: However, almost half say they are adding human checks earlier.
+    zh: 不過，將近一半表示他們正更早加入人工檢查。
+B1 P5 S4: Greenhouse's chief executive, Daniel Chait, says people must still be responsible for hiring decisions.
+    zh: Greenhouse執行長丹尼爾．柴特說，人仍必須為招聘決定負責。
 
 ## level B2
-B2 P1 S1: Taiwanese farmers received welcome news on Thursday when Agriculture Minister Chen Chun-chi announced that 322 agricultural products would remain exempt from additional US tariffs.
-    zh: 農業部長陳駿季星期四宣布，322項農產品將持續免徵美國的額外關稅，讓台灣農民收到好消息。
-B2 P2 S1: The announcement follows a proposal by the Office of the US Trade Representative to impose tariffs of up to 15 percent on Taiwanese goods.
-    zh: 這項宣布是在美國貿易代表署提議對台灣商品課徵最高15%關稅之後。
-B2 P2 S2: The move is part of an investigation into 14 economies whose industrial policies, Washington argues, have created structural overcapacity.
-    zh: 此舉是對14個經濟體調查的一部分，華府認為這些經濟體的產業政策造成了結構性產能過剩。
-B2 P2 S3: If talks prove unsatisfactory, the rate could rise to as much as 25 percent.
-    zh: 如果談判結果不理想，稅率可能升高到25%。
-B2 P3 S1: The exempt products account for 36 to 40 percent of Taiwan's agricultural export value to the US.
-    zh: 這些豁免產品占台灣對美農產品出口值的36%到40%。
-B2 P3 S2: Twenty-six of them, including moth orchids and anthuriums, enjoy exemptions specific to Taiwan, giving growers a clear edge over foreign rivals.
-    zh: 其中26項，包括蝴蝶蘭和火鶴花，享有台灣專屬的豁免，讓種植者比外國對手擁有明顯優勢。
-B2 P3 S3: Taiwanese moth orchids enter the US duty-free, whereas Dutch competitors pay 10 percent.
-    zh: 台灣蝴蝶蘭免稅進入美國，而荷蘭競爭者則要繳10%。
-B2 P4 S1: To cushion any impact, the ministry has earmarked NT$18 billion from a special resilience budget for exporters and plans to expand its NT$30 billion Agricultural Safety Fund.
-    zh: 為了減緩衝擊，農業部已從特別韌性預算中撥出180億新台幣給出口業者，並計畫擴大規模300億新台幣的農業安全基金。
-B2 P5 S1: The proposals are not yet final.
-    zh: 這些提案還不是最終版本。
-B2 P5 S2: Public hearings in the US are due to begin in January, and Taipei hopes the outcome will match its existing trade agreement with Washington.
-    zh: 美國的公聽會預定明年一月開始，台北希望結果能與現有的對美貿易協定一致。
+B2 P1 S1: Only around one in 20 job applications now makes it to the interview stage, according to an international survey of employers, with the vast majority screened out by artificial intelligence.
+    zh: 根據一項針對雇主的國際調查，如今每20份求職申請中只有約一份能走到面試階段，絕大多數被人工智慧篩掉。
+B2 P2 S1: The research, compiled by the hiring platform Greenhouse, gathered responses from 1,347 recruiters and hiring managers in the US, the UK, Germany, Australia and Ireland.
+    zh: 這項由招聘平台Greenhouse彙整的研究，收集了美國、英國、德國、澳洲和愛爾蘭1,347位招募人員與招聘經理的回覆。
+B2 P2 S2: It found that application numbers have grown so large that staff can no longer deal with them in the traditional way.
+    zh: 研究發現，申請數量已大到員工無法再用傳統方式處理。
+B2 P3 S1: As a result, firms are increasingly relying on AI tools to sort candidates, and most applications are filtered out automatically before anyone reads them.
+    zh: 因此，企業越來越依賴AI工具來篩選候選人，大部分申請在有人閱讀前就被自動剔除。
+B2 P3 S2: Meanwhile, many jobseekers are using AI to write their CVs, and managers say these documents often contain inaccurate claims about qualifications.
+    zh: 與此同時，許多求職者用AI撰寫履歷，經理們表示這些文件常含有關於資格的不實說法。
+B2 P4 S1: This creates a problem of trust.
+    zh: 這造成了信任問題。
+B2 P4 S2: Almost 90 per cent of respondents admitted they had probably turned down genuine applications because they suspected they were AI-generated.
+    zh: 將近九成受訪者承認，他們可能因懷疑是AI生成而拒絕了真正的申請。
+B2 P5 S1: Some 41 per cent of employers already use AI to carry out early interviews, a figure expected to reach 63 per cent next year.
+    zh: 約41%的雇主已用AI進行初期面試，預計明年將達63%。
+B2 P5 S2: At the same time, 49 per cent said they were bringing in human reviewers earlier to monitor AI decisions.
+    zh: 同時，49%表示他們正更早引進人工審查員來監督AI的決定。
+B2 P5 S3: Daniel Chait, the company's chief executive, argued that people must remain accountable for who gets hired.
+    zh: 該公司執行長丹尼爾．柴特主張，誰被錄用必須仍由人來負責。
 
 ## level C1
-C1 P1 S1: Taiwan's agricultural sector has been spared the worst of Washington's latest trade offensive.
-    zh: 台灣農業部門躲過了華府最新貿易攻勢中最嚴重的衝擊。
-C1 P1 S2: Agriculture Minister Chen Chun-chi confirmed on Thursday that 322 farm products will continue to enter the United States without any additional tariffs.
-    zh: 農業部長陳駿季星期四證實，322項農產品將繼續免徵任何額外關稅進入美國。
-C1 P2 S1: His remarks came a day after the US Trade Representative unveiled proposed duties of up to 15 percent on Taiwanese goods, the outcome of a Section 301 probe into what it calls structural excess capacity across 14 economies.
-    zh: 他發言的前一天，美國貿易代表署公布了對台灣商品最高15%的擬議關稅，這是一項針對14個經濟體所謂「結構性產能過剩」的301條款調查結果。
-C1 P2 S2: Should consultations falter, the ceiling could climb to 25 percent.
-    zh: 如果磋商不順，上限可能攀升到25%。
-C1 P3 S1: The shielded items represent roughly 36 to 40 percent of the value of Taiwan's farm exports to the US, and 26 of them benefit from Taiwan-specific carve-outs.
-    zh: 這些受保護的品項約占台灣對美農產品出口值的36%到40%，其中26項享有台灣專屬的例外條款。
-C1 P3 S2: The resulting price gaps are striking: Taiwanese tilapia faces a 10 percent levy, compared with 37.5 percent for its Chinese counterpart.
-    zh: 由此產生的價差相當驚人：台灣吳郭魚的稅率是10%，而中國吳郭魚是37.5%。
-C1 P4 S1: Even so, the ministry is hedging its bets.
-    zh: 即便如此，農業部仍在預留後路。
-C1 P4 S2: It has ring-fenced NT$18 billion from a special resilience budget to support exporters and intends to enlarge its NT$30 billion Agricultural Safety Fund.
-    zh: 它已從特別韌性預算中專款保留180億新台幣支持出口業者，並打算擴大300億新台幣的農業安全基金。
-C1 P5 S1: Vice Premier Cheng Li-chiun stressed that nothing will be settled until the US process concludes early next year, with Taipei pressing for terms consistent with its reciprocal trade agreement.
-    zh: 行政院副院長鄭麗君強調，在美國程序明年初結束之前，一切都還沒定案，台北將力爭符合雙方對等貿易協定的條件。
+C1 P1 S1: Jobseekers face daunting odds: barely one in 20 applications now progresses to interview, according to a cross-border survey of employers, with the overwhelming majority weeded out by artificial intelligence before reaching a human.
+    zh: 求職者面臨極為不利的求職形勢：根據一項跨國雇主調查，如今每20份申請勉強只有一份能進入面試，壓倒性多數在送到人手中之前就被人工智慧剔除。
+C1 P2 S1: The study, compiled by the recruitment platform Greenhouse, canvassed 1,347 recruiters and hiring managers across the US, the UK, Germany, Australia and Ireland.
+    zh: 這項由招聘平台Greenhouse彙整的研究，徵詢了美國、英國、德國、澳洲和愛爾蘭的1,347位招募人員與招聘經理。
+C1 P2 S2: Respondents reported being inundated with applications on a scale that conventional screening simply cannot absorb.
+    zh: 受訪者表示，他們收到的申請如潮水般湧來，規模之大是傳統篩選根本無法消化的。
+C1 P3 S1: Consequently, AI filtering has become the principal gatekeeper, discarding the bulk of submissions automatically.
+    zh: 因此，AI篩選已成為主要的把關者，自動淘汰大部分投遞的申請。
+C1 P3 S2: Compounding matters, applicants are increasingly enlisting AI to draft their CVs, which managers say are frequently peppered with embellished or inaccurate claims about qualifications.
+    zh: 更糟的是，求職者越來越常借助AI起草履歷，而經理們說這些履歷常充斥誇大或不實的資格說法。
+C1 P4 S1: The upshot is a corrosive mistrust.
+    zh: 結果是一種侵蝕性的不信任。
+C1 P4 S2: Nearly nine in ten respondents conceded they had probably discarded bona fide applications in the mistaken belief that they were machine-generated.
+    zh: 近十分之九的受訪者承認，他們可能誤以為是機器生成而淘汰了真正的申請。
+C1 P5 S1: Automated interviewing is also gaining ground: 41 per cent of employers already deploy AI for initial interviews, a share projected to climb to 63 per cent next year.
+    zh: 自動化面試也日益普及：41%的雇主已運用AI進行初次面試，預計明年這一比例將攀升至63%。
+C1 P5 S2: Nevertheless, almost half are reinstating human oversight earlier in the process, and Greenhouse's chief executive, Daniel Chait, insists that people must remain answerable for hiring decisions.
+    zh: 儘管如此，近一半雇主正在流程中更早恢復人工監督，而Greenhouse執行長丹尼爾．柴特堅持，招聘決定必須仍由人來承擔責任。
 
 ## level IELTS
-IELTS P1 S1: For Taiwan's farmers, the latest round of American trade measures has delivered an unexpected reprieve.
-    zh: 對台灣農民而言，美國最新一輪貿易措施帶來了意外的喘息機會。
-IELTS P1 S2: On Thursday, Agriculture Minister Chen Chun-chi announced that 322 agricultural products would remain exempt from any additional US tariffs.
-    zh: 星期四，農業部長陳駿季宣布，322項農產品將持續免徵任何額外的美國關稅。
-IELTS P2 S1: The exemption must be viewed against a broader backdrop.
-    zh: 這項豁免必須放在更廣泛的背景下來看。
-IELTS P2 S2: A day earlier, the US Trade Representative had proposed tariffs of up to 15 percent on imports from Taiwan, following an investigation into 14 economies accused of fostering structural overcapacity through industrial subsidies.
-    zh: 前一天，美國貿易代表署提議對自台灣進口的商品課徵最高15%的關稅，起因是一項針對14個經濟體的調查，這些經濟體被指控透過產業補貼助長結構性產能過剩。
-IELTS P2 S3: Officials also warned that the rate could escalate to 25 percent if negotiations proved unsatisfactory.
-    zh: 官員也警告，如果談判結果不理想，稅率可能升高到25%。
-IELTS P3 S1: The protected goods are economically significant, accounting for between 36 and 40 percent of Taiwan's agricultural export value to the US.
-    zh: 這些受保護的商品在經濟上意義重大，占台灣對美農產品出口值的36%到40%。
-IELTS P3 S2: Moreover, 26 items, notably moth orchids, enjoy country-specific exemptions, which confer a considerable competitive advantage.
-    zh: 此外，26項品項（特別是蝴蝶蘭）享有國家專屬的豁免，帶來相當大的競爭優勢。
-IELTS P3 S3: Taiwanese edamame, for instance, is subject to a 10 percent duty, whereas Chinese producers face 41.3 percent.
-    zh: 例如，台灣毛豆的關稅為10%，而中國生產者則要面對41.3%。
-IELTS P4 S1: Nevertheless, the government is taking precautions.
-    zh: 儘管如此，政府仍在採取預防措施。
-IELTS P4 S2: It has allocated NT$18 billion from a special resilience budget to assist exporters and intends to expand its NT$30 billion Agricultural Safety Fund.
-    zh: 它已從特別韌性預算中撥出180億新台幣協助出口業者，並打算擴大300億新台幣的農業安全基金。
-IELTS P5 S1: Ultimately, the arrangement remains provisional.
-    zh: 說到底，這項安排仍是暫時性的。
-IELTS P5 S2: Public hearings in Washington are scheduled for January, and Taipei will seek an outcome consistent with its existing reciprocal trade agreement.
-    zh: 華府的公聽會預定在一月舉行，台北將尋求與現有對等貿易協定一致的結果。
+IELTS P1 S1: According to a recent international survey, merely one in 20 job applications now proceeds to the interview stage, with the substantial majority eliminated by artificial intelligence screening systems.
+    zh: 根據近期一項國際調查，如今每20份求職申請中僅有一份能進入面試階段，絕大多數被人工智慧篩選系統淘汰。
+IELTS P2 S1: The research, conducted by the recruitment platform Greenhouse, surveyed 1,347 recruiters and hiring managers in the United States, the United Kingdom, Germany, Australia and Ireland.
+    zh: 這項由招聘平台Greenhouse進行的研究，調查了美國、英國、德國、澳洲和愛爾蘭的1,347位招募人員與招聘經理。
+IELTS P2 S2: Respondents indicated that the volume of applications has increased to such an extent that it can no longer be processed through traditional methods.
+    zh: 受訪者指出，申請數量已增加到無法再以傳統方法處理的程度。
+IELTS P3 S1: Consequently, organisations have become increasingly reliant upon automated filtering, which eliminates the majority of applications before any human evaluation takes place.
+    zh: 因此，各機構越來越依賴自動化篩選，在任何人工評估進行之前就淘汰了多數申請。
+IELTS P3 S2: Simultaneously, a significant proportion of candidates now utilise AI to produce their CVs, which frequently contain inaccurate assertions regarding their qualifications.
+    zh: 同時，相當比例的求職者如今利用AI製作履歷，而這些履歷經常含有關於其資格的不實陳述。
+IELTS P4 S1: This phenomenon has generated considerable mistrust.
+    zh: 這一現象造成了相當程度的不信任。
+IELTS P4 S2: Approximately 90 per cent of respondents acknowledged that they had probably rejected legitimate applications on the assumption that these had been generated by AI.
+    zh: 約90%的受訪者承認，他們可能因認定申請是AI生成而拒絕了正當的申請。
+IELTS P5 S1: Furthermore, 41 per cent of employers currently employ AI to conduct preliminary interviews, a proportion anticipated to reach 63 per cent next year.
+    zh: 此外，目前41%的雇主採用AI進行初步面試，預計明年這一比例將達63%。
+IELTS P5 S2: Nevertheless, 49 per cent reported introducing human oversight at an earlier stage, and the company's chief executive, Daniel Chait, maintains that accountability for recruitment decisions must ultimately rest with people.
+    zh: 儘管如此，49%表示已在較早階段引入人工監督，而該公司執行長丹尼爾．柴特堅稱，招聘決定的責任最終必須由人承擔。
+
+## reading questions (file reason/2026-11-28.json)
+Q1 [main]: Which statement best captures the main point of the passage?
+   A. Most employers have stopped using AI because it rejects too many good candidates.
+   B. Recruiters in Ireland receive fewer applications than those in other countries.
+   C. AI is now used heavily on both sides of recruitment, filtering out most applications and creating mistrust.  <- answer
+   D. AI-written CVs have made it easier for recruiters to find qualified people.
+   explanation: The survey finds "merely one in 20 job applications" reaches interview, most "eliminated by artificial intelligence screening systems", while candidates "utilise AI to produce their CVs", which "has generated considerable mistrust". Employers are expanding AI use, not stopping (A); no country comparison is made (B); and AI CVs often contain "inaccurate assertions" (D).
+Q2 [infer]: What can be inferred from the finding that about 90 per cent of respondents probably rejected genuine applications?
+   A. Recruiters can always tell which CVs were written by AI.
+   B. Genuine applicants may be losing out because recruiters suspect AI involvement.  <- answer
+   C. Most applications sent today are entirely fake.
+   D. Recruiters no longer read any CVs themselves.
+   explanation: Respondents admitted they "had probably rejected legitimate applications on the assumption that these had been generated by AI", so real candidates are being turned down because of suspicion. This contradicts (A); the passage does not say most applications are fake (C) or that no CVs are read (D) — 49 per cent are adding earlier human oversight.
+Q3 [tone]: What is the tone of Daniel Chait's view as reported at the end of the passage?
+   A. Enthusiastic about replacing recruiters with AI
+   B. Indifferent to how hiring decisions are made
+   C. Mocking towards job candidates who use AI
+   D. Cautious, insisting that people stay responsible for hiring  <- answer
+   explanation: Chait "maintains that accountability for recruitment decisions must ultimately rest with people" — a cautious position that keeps humans responsible. He does not welcome replacing recruiters (A), is clearly concerned rather than indifferent (B), and says nothing mocking about candidates (C).
 
 
-# 2026-11-27-tw-2  (region TW)
-date: 2026-11-27 | rank: 2 | topic: 政治 | main level: B2
-file: articles/2026-11-27-tw-2.json
+# 2026-11-28-tw-1  (region TW)
+date: 2026-11-28 | rank: 1 | topic: 政治 | main level: B2
+file: articles/2026-11-28-tw-1.json
 
 ## title
-Taiwan's Mayoral Candidates Make Final Push Before Saturday's Vote
+Taiwan Votes in Local Elections and a Nuclear Power Referendum
 
 ## summaries
-- summaryEn: Candidates in New Taipei and Taipei made a final push for votes ahead of Saturday's local elections.
-- summaryZh: 選前衝刺：新北、台北候選人全力拚最後一票
-- summaryJa: 土曜の統一地方選を前に、新北・台北の候補が最後の追い込み。
-- summaryKo: 토요일 지방선거 앞두고 신베이·타이베이 후보들 막판 총력전.
-- summaryEs: Los candidatos a alcalde de Taiwán hacen su último esfuerzo antes de las elecciones locales del sábado.
-- summaryHi: शनिवार के स्थानीय चुनाव से पहले ताइवान के मेयर उम्मीदवारों ने आख़िरी ज़ोर लगाया।
+- summaryEn: Taiwan held its '9-in-1' local elections on Saturday, along with a referendum on returning to nuclear power.
+- summaryZh: 九合一選舉投票日 同場公投是否重啟核能
+- summaryJa: 台湾で統一地方選の投票、原発政策を問う住民投票も同時実施。
+- summaryKo: 대만 지방선거 투표일, 원전 정책 국민투표도 함께 실시.
+- summaryEs: Taiwán vota en sus elecciones locales y en un referéndum sobre la energía nuclear.
+- summaryHi: ताइवान में स्थानीय चुनाव और परमाणु ऊर्जा पर जनमत संग्रह के लिए मतदान हुआ।
 
 ## sources
-- Focus Taiwan (CNA): https://focustaiwan.tw/politics/202611260020
+- Focus Taiwan (CNA): https://focustaiwan.tw/politics/202611280002
 
 ## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
 
 ## level A2
-A2 P1 S1: Taiwan has local elections on Saturday.
-    zh: 台灣星期六有地方選舉。
-A2 P1 S2: People will choose new mayors and city leaders.
-    zh: 人們會選出新的市長和城市領袖。
-A2 P1 S3: The candidates are very busy this week.
-    zh: 這個星期候選人都非常忙。
-A2 P2 S1: In New Taipei, Lee Shu-chuan made his 100th market visit.
-    zh: 在新北，李四川完成競選期間第100次市場拜票。
-A2 P2 S2: He shook hands with shoppers.
-    zh: 他和買菜的民眾握手。
-A2 P2 S3: His rival, Su Chiao-hui, rode in a long line of cars through seven areas of the city.
-    zh: 他的對手蘇巧慧坐在長長的車隊裡，經過市內七個地區。
-A2 P3 S1: In Taipei, Mayor Chiang Wan-an also drove around the city.
-    zh: 在台北，市長蔣萬安也開車繞行全市。
-A2 P3 S2: He wants to win again.
-    zh: 他想再次勝選。
-A2 P3 S3: His rival, Puma Shen, cancelled his big event on a main road on Friday night.
-    zh: 他的對手沈伯洋取消了星期五晚上在一條主要道路上的大型活動。
-A2 P3 S4: He said it would cause too much traffic.
-    zh: 他說那會造成交通壅塞。
-A2 P4 S1: Party leaders are helping too.
-    zh: 政黨領袖也在幫忙。
-A2 P4 S2: President Lai Ching-te and former President Tsai Ing-wen will join a big event for Su on Friday.
-    zh: 賴清德總統和前總統蔡英文將在星期五參加蘇巧慧的大型活動。
-A2 P4 S3: Speaker Han Kuo-yu will help Lee.
-    zh: 立法院長韓國瑜將幫李四川助選。
-A2 P5 S1: On Saturday, people will vote.
-    zh: 星期六，人們會去投票。
-A2 P5 S2: Then the counting starts.
-    zh: 然後就開始計票。
+A2 P1 S1: Today is election day in Taiwan.
+    zh: 今天是台灣的選舉日。
+A2 P1 S2: Polls opened at 8 in the morning and close at 4 in the afternoon.
+    zh: 投票所早上8點開放，下午4點關閉。
+A2 P1 S3: About 19.6 million people can vote.
+    zh: 大約有1,960萬人可以投票。
+A2 P2 S1: People are choosing many local leaders.
+    zh: 人們要選出許多地方領袖。
+A2 P2 S2: People vote for mayors or county leaders in 22 cities and counties.
+    zh: 22個縣市的選民要選出縣市首長。
+A2 P2 S3: Voters also choose city council members and village chiefs.
+    zh: 選民也要選市議員和村里長。
+A2 P3 S1: In Taipei, Mayor Chiang Wan-an wants to win again.
+    zh: 在台北，市長蔣萬安希望再次當選。
+A2 P3 S2: His rival is Puma Shen.
+    zh: 他的對手是沈伯洋。
+A2 P3 S3: In Kaohsiung, two new people want to be mayor.
+    zh: 在高雄，有兩位新人想當市長。
+A2 P4 S1: There is also one big question for all voters.
+    zh: 所有選民還要回答一個大問題。
+A2 P4 S2: Should Taiwan use nuclear power again?
+    zh: 台灣應該再次使用核能嗎？
+A2 P4 S3: People can vote yes or no.
+    zh: 人們可以投同意或不同意。
+A2 P5 S1: Voters must bring their ID card.
+    zh: 選民必須帶身分證。
+A2 P5 S2: They must turn off their phones.
+    zh: 他們必須把手機關機。
+A2 P5 S3: Taking photos of the ballot is not allowed.
+    zh: 不可以拍攝選票。
+A2 P5 S4: The results will come on Saturday night.
+    zh: 結果將在星期六晚上出爐。
 
 ## level B1
-B1 P1 S1: Taiwan will hold local elections on Saturday, and candidates spent Thursday making a final effort to win votes.
-    zh: 台灣將在星期六舉行地方選舉，候選人星期四做最後努力爭取選票。
-B1 P1 S2: Voters across the country will choose mayors, county leaders and local councillors.
-    zh: 全國選民將選出市長、縣長和地方議員。
-B1 P2 S1: In New Taipei, the Kuomintang (KMT) candidate Lee Shu-chuan made his 100th visit to a market during the campaign.
-    zh: 在新北，國民黨候選人李四川在競選期間第100次走訪市場。
-B1 P2 S2: Mayor Hou Yu-ih joined him and said Lee understood the problems of ordinary people.
-    zh: 市長侯友宜陪同他，並說李四川了解一般民眾的問題。
-B1 P2 S3: Su Chiao-hui of the Democratic Progressive Party (DPP) led a motorcade through seven districts.
-    zh: 民主進步黨（民進黨）的蘇巧慧帶領車隊遊行，經過七個行政區。
-B1 P3 S1: In Taipei, Mayor Chiang Wan-an finished a three-day tour of the city by car.
-    zh: 在台北，市長蔣萬安完成了為期三天的全市車隊巡迴。
-B1 P3 S2: His DPP rival, Puma Shen, cancelled a big rally planned on Ren'ai Road for Friday night.
-    zh: 他的民進黨對手沈伯洋取消了原定星期五晚上在仁愛路舉行的大型造勢晚會。
-B1 P3 S3: He said the traffic plans would still cause serious jams.
-    zh: 他說交通規劃仍會造成嚴重塞車。
-B1 P3 S4: His team said the event would probably move online.
-    zh: 他的團隊說，活動可能改到線上舉行。
-B1 P4 S1: Big names are joining the final rallies.
-    zh: 重量級人物將加入最後的造勢活動。
-B1 P4 S2: President Lai Ching-te and former President Tsai Ing-wen will appear with Su on Friday evening.
-    zh: 賴清德總統和前總統蔡英文將在星期五晚上與蘇巧慧同台。
-B1 P4 S3: Legislative Speaker Han Kuo-yu will support Lee.
-    zh: 立法院長韓國瑜將支持李四川。
-B1 P5 S1: Votes will be counted on Saturday night.
-    zh: 選票將在星期六晚上開出。
+B1 P1 S1: Voters across Taiwan went to the polls on Saturday for the local elections, often called the "9-in-1" elections.
+    zh: 星期六，台灣各地選民前往投票所參加地方選舉，也就是俗稱的「九合一」選舉。
+B1 P1 S2: Polling stations opened at 8 am and were due to close at 4 pm.
+    zh: 投票所上午8點開放，預定下午4點關閉。
+B1 P1 S3: About 19.58 million people were able to vote, including around 600,000 first-time voters.
+    zh: 約有1,958萬人可以投票，其中包括約60萬名首投族。
+B1 P2 S1: More than 11,000 positions were on the ballot.
+    zh: 共有超過1萬1千個職位要改選。
+B1 P2 S2: These included mayors in six large special municipalities and magistrates or mayors in 16 other cities and counties, as well as hundreds of council seats and thousands of neighbourhood chiefs.
+    zh: 其中包括六個直轄市市長、其他16個縣市的縣市長，以及數百個議員席次和數千名里長。
+B1 P3 S1: In Taipei, Mayor Chiang Wan-an of the Kuomintang was hoping to win a second term against Puma Shen of the Democratic Progressive Party.
+    zh: 在台北，國民黨籍市長蔣萬安希望擊敗民進黨的沈伯洋，爭取連任。
+B1 P3 S2: In Kaohsiung, Lai Jui-lung and Ko Chih-en were the main candidates to replace Mayor Chen Chi-mai.
+    zh: 在高雄，賴瑞隆和柯志恩是接替市長陳其邁的主要候選人。
+B1 P4 S1: Voters also answered a referendum question: should Taiwan give up its "nuclear-free homeland" policy?
+    zh: 選民也要回答一道公投題目：台灣是否應放棄「非核家園」政策？
+B1 P4 S2: For the proposal to pass, "yes" votes must beat "no" votes and reach at least a quarter of all eligible voters.
+    zh: 公投提案要通過，同意票必須多於不同意票，且至少達到全體有投票權人的四分之一。
+B1 P5 S1: Officials reminded people to bring their ID and to switch off their phones.
+    zh: 官員提醒民眾攜帶身分證並將手機關機。
+B1 P5 S2: Taking photos inside polling stations can lead to a large fine.
+    zh: 在投票所內拍照可能被處以高額罰款。
+B1 P5 S3: Results were expected on Saturday evening.
+    zh: 選舉結果預計在星期六晚上揭曉。
 
 ## level B2
-B2 P1 S1: With Taiwan's local elections set for Saturday, candidates and party leaders intensified their campaigns on Thursday in a last bid to win over undecided voters.
-    zh: 台灣地方選舉定於星期六舉行，候選人和政黨領袖星期四加強了競選活動，做最後努力爭取尚未決定的選民。
-B2 P2 S1: The closely watched New Taipei mayoral race saw Kuomintang (KMT) candidate Lee Shu-chuan make his 100th market visit, accompanied by current Mayor Hou Yu-ih, who praised his grasp of everyday hardships.
-    zh: 備受關注的新北市長選戰中，國民黨候選人李四川完成第100場市場拜票，現任市長侯友宜陪同，並稱讚他了解民眾日常的辛苦。
-B2 P2 S2: Meanwhile, Su Chiao-hui of the Democratic Progressive Party (DPP) staged a motorcade through seven districts, describing her campaign as a journey of nearly 900 days.
-    zh: 與此同時，民主進步黨（民進黨）的蘇巧慧進行車隊掃街，走遍七個行政區，並形容她的競選是一段將近900天的旅程。
-B2 P3 S1: In Taipei, incumbent Mayor Chiang Wan-an wrapped up a three-day citywide motorcade.
-    zh: 在台北，現任市長蔣萬安結束了為期三天的全市車隊掃街。
-B2 P3 S2: His DPP challenger, Puma Shen, called off an election-eve rally on Ren'ai Road, arguing that the city's traffic arrangements would still cause congestion.
-    zh: 他的民進黨挑戰者沈伯洋取消了在仁愛路舉行的選前之夜造勢晚會，認為市府的交通安排仍會造成壅塞。
-B2 P3 S3: Chiang had offered to give up his own road use to make room, but Shen's team declined and said the event would likely be held online.
-    zh: 蔣萬安曾提議讓出自己的道路使用權來騰出空間，但沈伯洋團隊婉拒，並表示活動可能改在線上舉行。
-B2 P4 S1: Heavyweights are lining up for Friday's final rallies.
-    zh: 重量級人物正為星期五最後的造勢晚會做準備。
-B2 P4 S2: President Lai Ching-te and former President Tsai Ing-wen will appear alongside Su, while Legislative Speaker Han Kuo-yu and former mayor Eric Chu will back Lee.
-    zh: 賴清德總統和前總統蔡英文將與蘇巧慧同台，而立法院長韓國瑜和前市長朱立倫將為李四川站台。
-B2 P5 S1: Elsewhere, party chiefs fanned out to Taoyuan, Hsinchu County and Tainan to support their candidates.
-    zh: 在其他地方，各黨主席分頭前往桃園、新竹縣和台南，為自家候選人助選。
+B2 P1 S1: Taiwan held its "9-in-1" local elections on Saturday, with polls opening at 8 am and closing at 4 pm.
+    zh: 台灣星期六舉行「九合一」地方選舉，投票所上午8點開放、下午4點關閉。
+B2 P1 S2: According to the Central Election Commission, about 19.58 million people were eligible to vote, roughly 600,000 of them for the first time, at more than 18,000 polling stations.
+    zh: 根據中選會，約1,958萬人具投票資格，其中約60萬人是首次投票，投票所超過1萬8千個。
+B2 P2 S1: Over 11,000 posts were up for grabs.
+    zh: 共有超過1萬1千個職位待爭取。
+B2 P2 S2: Voters chose mayors in Taiwan's six special municipalities and leaders in 16 other cities and counties, along with 919 city and county councillors, township chiefs and nearly 7,800 borough chiefs.
+    zh: 選民選出六都市長、其他16個縣市的首長，以及919名縣市議員、鄉鎮市長和近7,800名里長。
+B2 P3 S1: The most closely watched race was in Taipei, where Kuomintang (KMT) Mayor Chiang Wan-an sought re-election against Democratic Progressive Party (DPP) legislator Puma Shen.
+    zh: 最受矚目的選戰在台北，國民黨籍市長蔣萬安尋求連任，對手是民進黨立委沈伯洋。
+B2 P3 S2: In Kaohsiung, a long-time DPP stronghold, the DPP's Lai Jui-lung faced the KMT's Ko Chih-en in the contest to succeed Chen Chi-mai.
+    zh: 在長期為民進黨大本營的高雄，民進黨的賴瑞隆與國民黨的柯志恩角逐接替陳其邁。
+B2 P4 S1: Alongside the elections, about 20 million people could vote in a referendum on whether to abandon the "nuclear-free homeland" policy.
+    zh: 除了選舉，約2,000萬人還可就是否放棄「非核家園」政策進行公投。
+B2 P4 S2: It is the fourth vote on nuclear power since 2018.
+    zh: 這是2018年以來第四次核能公投。
+B2 P4 S3: To pass, "yes" votes must outnumber "no" votes and equal at least a quarter of all eligible voters.
+    zh: 要通過，同意票必須多於不同意票，且至少達到全體有投票權人的四分之一。
+B2 P5 S1: Voters were told to keep their phones switched off, as photographing ballots can bring fines of up to NT$300,000.
+    zh: 選民被告知要將手機關機，因為拍攝選票最高可罰新台幣30萬元。
+B2 P5 S2: Election results were expected on Saturday evening, with the referendum count possibly later.
+    zh: 選舉結果預計在星期六晚上出爐，公投計票可能較晚。
 
 ## level C1
-C1 P1 S1: Taiwan's candidates threw everything into the final stretch of campaigning on Thursday, two days before Saturday's local elections, as party heavyweights fanned out across the island to rally their supporters.
-    zh: 星期四，也就是星期六地方選舉前兩天，台灣候選人在競選最後階段全力衝刺，各黨重量級人物分赴全島為支持者打氣。
-C1 P2 S1: In New Taipei, the most populous municipality, KMT hopeful Lee Shu-chuan notched up his 100th market walkabout with Mayor Hou Yu-ih at his side, while the DPP's Su Chiao-hui wound her way through seven districts by motorcade, capping what she called a campaign of almost 900 days.
-    zh: 在人口最多的直轄市新北，國民黨參選人李四川在市長侯友宜陪同下完成第100場市場拜票，而民進黨的蘇巧慧則以車隊穿梭七個行政區，為她所說將近900天的競選畫下句點。
-C1 P3 S1: The Taipei contest, meanwhile, was overshadowed by a dispute over road use.
-    zh: 與此同時，台北的選戰被一場道路使用爭議蓋過鋒頭。
-C1 P3 S2: DPP challenger Puma Shen scrapped his planned election-eve rally on Ren'ai Road, insisting that the city's traffic plan would still cause gridlock.
-    zh: 民進黨挑戰者沈伯洋取消了原定在仁愛路舉行的選前之夜造勢晚會，堅稱市府的交通計畫仍會造成交通癱瘓。
-C1 P3 S3: Incumbent Chiang Wan-an had offered to forgo his own event to free up space, a gesture Shen's camp acknowledged but declined, with his team saying an online gathering was likely.
-    zh: 現任市長蔣萬安曾表示願意放棄自己的活動來騰出空間，沈伯洋陣營對此表示感謝但婉拒，並表示可能改為舉辦線上集會。
-C1 P4 S1: Friday's closing rallies promise star power: President Lai Ching-te and his predecessor, Tsai Ing-wen, will stand beside Su, while Legislative Speaker Han Kuo-yu and Eric Chu will lend their weight to Lee.
-    zh: 星期五的收尾造勢晚會可望星光熠熠：賴清德總統和前任總統蔡英文將站在蘇巧慧身旁，而立法院長韓國瑜和朱立倫將為李四川加持。
-C1 P5 S1: Ballots will be counted on Saturday evening.
-    zh: 選票將在星期六晚上開出。
+C1 P1 S1: Polls opened across Taiwan at 8 am on Saturday for the "9-in-1" local elections, a contest widely seen as a mid-term test for President Lai Ching-te's Democratic Progressive Party (DPP).
+    zh: 星期六上午8點，台灣各地投票所開放，進行「九合一」地方選舉，這場選戰被普遍視為賴清德總統所屬民進黨的期中考。
+C1 P1 S2: The Central Election Commission said roughly 19.58 million citizens were eligible to cast ballots, about 600,000 of them for the first time.
+    zh: 中選會表示，約1,958萬名公民具投票資格，其中約60萬人是首次投票。
+C1 P2 S1: The sheer scale of the exercise is striking: more than 11,000 offices across 8,906 electoral districts, staffed by over 300,000 election workers at 18,244 polling stations.
+    zh: 這場選舉的規模之大令人驚嘆：8,906個選區中有超過1萬1千個公職，由逾30萬名選務人員在18,244個投票所執行。
+C1 P2 S2: At the top of the ticket were the mayors of six special municipalities and the heads of 16 other cities and counties.
+    zh: 選票上最重要的是六個直轄市市長，以及其他16個縣市的首長。
+C1 P3 S1: Attention centred on Taipei, where the Kuomintang's (KMT) Chiang Wan-an was defending his seat against DPP legislator Puma Shen, and on Kaohsiung, a DPP heartland in which Lai Jui-lung and the KMT's Ko Chih-en were vying to succeed the term-limited Chen Chi-mai.
+    zh: 焦點集中在台北，國民黨的蔣萬安力守市長寶座，對手是民進黨立委沈伯洋；另一焦點是民進黨大本營高雄，賴瑞隆與國民黨的柯志恩角逐接替任期屆滿的陳其邁。
+C1 P3 S2: In 2022, the KMT captured 14 of the 22 top posts.
+    zh: 2022年，國民黨拿下22席首長中的14席。
+C1 P4 S1: Voters were simultaneously asked whether Taiwan should abandon its "nuclear-free homeland" policy, the fourth nuclear referendum since 2018.
+    zh: 選民同時被問及台灣是否應放棄「非核家園」政策，這是2018年以來第四次核能公投。
+C1 P4 S2: Passage requires a simple majority of valid votes as well as affirmative votes from at least a quarter of all eligible referendum voters.
+    zh: 通過門檻除了有效票簡單多數，有效同意票還須達全體公投有投票權人數的四分之一。
+C1 P5 S1: Mayoral results were expected by Saturday evening, although the referendum tally could take longer.
+    zh: 市長選舉結果預計星期六晚上出爐，但公投計票可能需要更長時間。
 
 ## level IELTS
-IELTS P1 S1: As Taiwan prepares to vote in Saturday's local elections, candidates across the country made a final, concerted effort on Thursday to persuade undecided voters.
-    zh: 隨著台灣準備在星期六的地方選舉中投票，全國各地的候選人星期四齊心做最後努力，試圖說服尚未決定的選民。
-IELTS P2 S1: The contest in New Taipei, the nation's most populous city, has attracted particular attention.
-    zh: 全國人口最多的城市新北的選戰格外受到關注。
-IELTS P2 S2: Kuomintang candidate Lee Shu-chuan completed his 100th market visit, accompanied by Mayor Hou Yu-ih, who emphasised Lee's understanding of ordinary people's difficulties.
-    zh: 國民黨候選人李四川完成第100場市場拜訪，市長侯友宜陪同，並強調李四川了解一般民眾的困難。
-IELTS P2 S3: His opponent, Su Chiao-hui of the Democratic Progressive Party, led a motorcade through seven districts.
-    zh: 他的對手、民主進步黨的蘇巧慧則帶領車隊走遍七個行政區。
-IELTS P3 S1: In Taipei, by contrast, the campaign was complicated by a dispute over public space.
-    zh: 相較之下，台北的競選因一場公共空間的爭議而變得複雜。
-IELTS P3 S2: Puma Shen, who is challenging the incumbent Chiang Wan-an, cancelled a large rally scheduled for Ren'ai Road, maintaining that the proposed traffic arrangements would inevitably lead to congestion.
-    zh: 挑戰現任市長蔣萬安的沈伯洋取消了原定在仁愛路舉行的大型造勢晚會，堅稱擬議的交通安排必然導致壅塞。
-IELTS P3 S3: Although Chiang offered to relinquish his own road access, Shen's team declined and indicated that the event would probably take place online.
-    zh: 雖然蔣萬安提議讓出自己的道路使用權，沈伯洋團隊仍予婉拒，並表示活動可能改在線上舉行。
-IELTS P4 S1: Prominent figures are expected at Friday's final rallies.
-    zh: 預計星期五最後的造勢晚會將有知名人物出席。
-IELTS P4 S2: President Lai Ching-te and former President Tsai Ing-wen will appear with Su, whereas Legislative Speaker Han Kuo-yu will support Lee.
-    zh: 賴清德總統和前總統蔡英文將與蘇巧慧同台，而立法院長韓國瑜則將支持李四川。
-IELTS P5 S1: Ultimately, the votes will be counted on Saturday evening, and the results are widely seen as a test for both major parties.
-    zh: 最終，選票將在星期六晚上開出，這次結果普遍被視為兩大黨的一次考驗。
+IELTS P1 S1: Taiwanese voters went to the polls on Saturday in the "9-in-1" local elections, a nationwide contest that is widely interpreted as a referendum on the governing Democratic Progressive Party (DPP) midway through President Lai Ching-te's term.
+    zh: 台灣選民星期六前往投票，參加「九合一」地方選舉，這場全國性選戰普遍被解讀為對賴清德總統任期過半之際執政民進黨的信任投票。
+IELTS P1 S2: Some 19.58 million people were eligible to participate, including approximately 600,000 first-time voters.
+    zh: 約1,958萬人具投票資格，其中包括約60萬名首投族。
+IELTS P2 S1: The logistical undertaking was considerable.
+    zh: 這次的後勤工作相當龐大。
+IELTS P2 S2: More than 11,000 offices, ranging from municipal mayors to borough chiefs, were contested across 8,906 districts, with over 300,000 officials deployed to 18,244 polling stations between 8 am and 4 pm.
+    zh: 從直轄市市長到里長，共有超過1萬1千個公職在8,906個選區競逐，逾30萬名選務人員於上午8點至下午4點間派駐18,244個投票所。
+IELTS P3 S1: The most consequential races were arguably those in Taipei and Kaohsiung.
+    zh: 影響最深遠的選戰可說是台北與高雄。
+IELTS P3 S2: In the capital, Kuomintang (KMT) incumbent Chiang Wan-an sought a second term against DPP legislator Puma Shen, while in Kaohsiung, traditionally a DPP stronghold, Lai Jui-lung and the KMT's Ko Chih-en competed to replace the outgoing Chen Chi-mai.
+    zh: 在首都，國民黨籍現任市長蔣萬安尋求連任，對手是民進黨立委沈伯洋；而在傳統上是民進黨大本營的高雄，賴瑞隆與國民黨的柯志恩競逐接替即將卸任的陳其邁。
+IELTS P3 S3: The KMT, which secured 14 of the 22 mayoral and magistrate posts in 2022, hoped to consolidate its position.
+    zh: 國民黨在2022年拿下22席縣市長中的14席，希望鞏固其地位。
+IELTS P4 S1: In parallel, the electorate was asked to decide whether Taiwan should abandon its "nuclear-free homeland" policy.
+    zh: 同時，選民也被要求決定台灣是否應放棄「非核家園」政策。
+IELTS P4 S2: For the proposal to be adopted, affirmative votes must not only exceed negative ones but also represent at least a quarter of all eligible voters, a threshold that previous referendums have struggled to meet.
+    zh: 提案要通過，同意票不僅須多於不同意票，還必須至少達到全體有投票權人的四分之一，而過去的公投往往難以跨過這個門檻。
+IELTS P5 S1: Authorities warned that photographing ballots was prohibited and punishable by substantial fines.
+    zh: 當局警告，拍攝選票是被禁止的，可處以高額罰款。
+IELTS P5 S2: Mayoral outcomes were anticipated on Saturday evening, with the referendum result possibly following later.
+    zh: 市長選舉結果預計在星期六晚上出爐，公投結果可能稍後才公布。
+
+
+# 2026-11-28-tw-2  (region TW)
+date: 2026-11-28 | rank: 2 | topic: 經濟 | main level: B2
+file: articles/2026-11-28-tw-2.json
+
+## title
+Taiwan Raises 2026 Growth Forecast to 13.28%, Fastest in 48 Years
+
+## summaries
+- summaryEn: Taiwan's statistics agency now expects the economy to grow 13.28% in 2026, driven by booming AI-related exports.
+- summaryZh: 主計總處上修今年經濟成長率預測至13.28%
+- summaryJa: 台湾、今年の成長率予測を13.28％に上方修正、48年ぶりの高さ。
+- summaryKo: 대만, 올해 성장률 전망 13.28%로 상향…48년 만에 최고.
+- summaryEs: Taiwán eleva su previsión de crecimiento para 2026 al 13,28 %, la más alta en 48 años.
+- summaryHi: ताइवान ने 2026 का विकास अनुमान बढ़ाकर 13.28% किया, जो 48 साल में सबसे तेज़ है।
+
+## sources
+- Taipei Times: https://www.taipeitimes.com/News/front/archives/2026/11/28/2003868528
+
+## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
+
+## level A2
+A2 P1 S1: Taiwan's economy is growing very fast this year.
+    zh: 台灣今年經濟成長得非常快。
+A2 P1 S2: On Friday, the government's statistics office gave a new number.
+    zh: 星期五，政府的統計機關公布了新數字。
+A2 P1 S3: It thinks the economy will grow by 13.28% in 2026.
+    zh: 它認為2026年經濟將成長13.28%。
+A2 P2 S1: In August, the office said 11.05%.
+    zh: 8月時，該機關說是11.05%。
+A2 P2 S2: Now the number is higher.
+    zh: 現在數字更高了。
+A2 P2 S3: If this happens, it will be the fastest growth in 48 years.
+    zh: 如果實現，這將是48年來最快的成長。
+A2 P3 S1: Why?
+    zh: 為什麼？
+A2 P3 S2: Taiwan sells a lot of computer chips and AI products to other countries.
+    zh: 台灣賣很多電腦晶片和AI產品給其他國家。
+A2 P3 S3: Exports may grow by almost 24% this year.
+    zh: 今年出口可能成長將近24%。
+A2 P3 S4: Companies are also spending more money on new factories and machines.
+    zh: 企業也花更多錢在新工廠和機器上。
+A2 P4 S1: Prices are going up a little too.
+    zh: 物價也上漲了一點。
+A2 P4 S2: Oil, food and electronics cost more.
+    zh: 石油、食物和電子產品變貴了。
+A2 P4 S3: Prices may rise by about 2% this year.
+    zh: 今年物價可能上漲約2%。
+A2 P5 S1: Next year, the economy may grow by 6.51%.
+    zh: 明年經濟可能成長6.51%。
+A2 P5 S2: But there are some risks, like new US rules on chips.
+    zh: 但也有一些風險，例如美國對晶片的新規定。
+
+## level B1
+B1 P1 S1: Taiwan's statistics agency, the DGBAS, has raised its forecast for economic growth this year to 13.28%.
+    zh: 台灣的統計機關主計總處，把今年的經濟成長預測上調到13.28%。
+B1 P1 S2: If this happens, it will be the fastest growth since 1978, nearly 48 years ago.
+    zh: 如果實現，這將是自1978年、將近48年前以來最快的成長。
+B1 P1 S3: In August, the agency had expected growth of 11.05%.
+    zh: 8月時，該機關預估成長率為11.05%。
+B1 P2 S1: The main reason is the huge demand for artificial intelligence.
+    zh: 主要原因是對人工智慧的龐大需求。
+B1 P2 S2: Taiwan makes many of the chips and servers that AI needs.
+    zh: 台灣生產許多AI需要的晶片和伺服器。
+B1 P2 S3: The agency now expects exports of goods and services to rise by almost 24%, and goods exports alone to reach a record US$938.64 billion.
+    zh: 該機關現在預估商品與服務出口將成長將近24%，光是商品出口就將達到創紀錄的9,386.4億美元。
+B1 P3 S1: The economy grew by 14.39% in the third quarter, and growth in the last three months of the year is expected to be 10.42%.
+    zh: 第三季經濟成長14.39%，今年最後三個月的成長預計為10.42%。
+B1 P3 S2: Private investment should increase by 14.9%, but spending by families is growing more slowly, at about 4.74%.
+    zh: 民間投資預計增加14.9%，但家庭支出成長較慢，約4.74%。
+B1 P4 S1: Prices are also rising.
+    zh: 物價也在上漲。
+B1 P4 S2: Consumer prices may go up 2.07% this year, slightly above the central bank's 2% inflation threshold, because of oil, food and electronics.
+    zh: 受石油、食物和電子產品影響，今年消費者物價可能上漲2.07%，略高於央行衡量通膨壓力的2%門檻。
+B1 P5 S1: An official said there were still risks, such as new US limits on chip sales to China.
+    zh: 一名官員表示仍有風險，例如美國對晶片銷往中國的新限制。
+B1 P5 S2: Growth next year is forecast at 6.51%.
+    zh: 明年成長率預測為6.51%。
+
+## level B2
+B2 P1 S1: Taiwan's economy is on course for its fastest expansion in nearly half a century, after the Directorate-General of Budget, Accounting and Statistics (DGBAS) raised its 2026 growth forecast to 13.28% on Friday.
+    zh: 主計總處星期五將2026年經濟成長預測上修至13.28%，台灣經濟可望迎來近半世紀以來最快的擴張。
+B2 P1 S2: The figure is 2.23 percentage points higher than its August estimate and would be the strongest since 1978.
+    zh: 這個數字比8月的預估高出2.23個百分點，將是1978年以來最強勁的成長。
+B2 P2 S1: The upgrade reflects the global rush for artificial intelligence hardware, much of which is made in Taiwan.
+    zh: 這次上修反映全球搶購人工智慧硬體的熱潮，而這些硬體多在台灣製造。
+B2 P2 S2: Exports of goods and services are now expected to jump 23.96%, with merchandise exports reaching a record US$938.64 billion and potentially topping US$1.11 trillion next year.
+    zh: 商品與服務出口現在預計大增23.96%，商品出口將達創紀錄的9,386.4億美元，明年可能突破1.11兆美元。
+B2 P3 S1: Gross domestic product grew 14.39% in the third quarter, and the agency sharply revised its fourth-quarter forecast up to 10.42%.
+    zh: 第三季國內生產毛額成長14.39%，主計總處也將第四季預測大幅上修至10.42%。
+B2 P3 S2: Private investment is projected to rise 14.9%, although the forecast for household spending growth was trimmed slightly to 4.74% amid stock market swings.
+    zh: 民間投資預計成長14.9%，但受股市波動影響，家庭支出成長率預測小幅下修至4.74%。
+B2 P4 S1: Inflation is also edging up.
+    zh: 通膨也在緩步上升。
+B2 P4 S2: Consumer prices are forecast to rise 2.07% this year, just above the central bank's 2% threshold, driven by crude oil, consumer electronics and food.
+    zh: 受原油、消費性電子產品和食物推升，今年消費者物價預計上漲2.07%，略高於央行2%的門檻。
+B2 P5 S1: Tsai Yu-tai, a senior DGBAS statistician, warned of downside risks, including tighter US export controls on chips to China and possible stricter AI regulation.
+    zh: 主計總處資深統計官員蔡鈺泰警告下行風險，包括美國收緊對中國的晶片出口管制，以及可能更嚴格的AI監管。
+B2 P5 S2: Growth is expected to slow to 6.51% in 2027.
+    zh: 預計2027年成長將放緩至6.51%。
+
+## level C1
+C1 P1 S1: Taiwan is poised to record its most rapid economic expansion in almost five decades after the Directorate-General of Budget, Accounting and Statistics (DGBAS) lifted its 2026 growth projection to 13.28%, a hefty 2.23 percentage points above its August forecast.
+    zh: 主計總處將2026年成長預測上調至13.28%，比8月預估大幅高出2.23個百分點，台灣即將創下近五十年來最快的經濟擴張。
+C1 P1 S2: Only 1978, when growth reached 13.56%, would rank higher.
+    zh: 只有成長率達13.56%的1978年排名更高。
+C1 P2 S1: The revision underscores how thoroughly the AI boom has reshaped the island's economy.
+    zh: 這次上修凸顯AI熱潮已徹底重塑台灣經濟。
+C1 P2 S2: Exports of goods and services are now expected to surge 23.96%, while merchandise exports are set to hit an unprecedented US$938.64 billion before potentially surpassing US$1.11 trillion in 2027.
+    zh: 商品與服務出口現在預計激增23.96%，商品出口將達前所未有的9,386.4億美元，2027年更可能超過1.11兆美元。
+C1 P3 S1: Third-quarter output expanded 14.39%, and the agency raised its fourth-quarter estimate by more than five points to 10.42%.
+    zh: 第三季產出擴張14.39%，主計總處將第四季預估上調超過五個百分點至10.42%。
+C1 P3 S2: Private investment is forecast to climb 14.9%, though the forecast for private consumption growth was nudged down to 4.74%, reflecting volatility in equity markets.
+    zh: 民間投資預計攀升14.9%，不過民間消費成長率預測微幅下修至4.74%，反映股市的波動。
+C1 P4 S1: Price pressures are building as well, with consumer inflation projected at 2.07%, marginally above the central bank's 2% comfort level, owing to costlier crude oil, electronics and food.
+    zh: 物價壓力也在累積，由於原油、電子產品和食物變貴，消費者物價預計上漲2.07%，略高於央行2%的可接受範圍。
+C1 P5 S1: DGBAS official Tsai Yu-tai cautioned that further US curbs on chip exports to China, or tougher AI rules, could weigh on demand, adding that the agency had taken a somewhat conservative view of exports.
+    zh: 主計總處官員蔡鈺泰提醒，美國若進一步限制晶片出口至中國，或AI規範趨嚴，都可能壓抑需求；他並表示，主計總處對出口的看法略為保守。
+C1 P5 S2: Growth is forecast to moderate to 6.51% next year.
+    zh: 明年成長預計趨緩至6.51%。
+
+## level IELTS
+IELTS P1 S1: Taiwan's economy is set to achieve its most remarkable growth rate in almost half a century.
+    zh: 台灣經濟今年將創下近半世紀以來最亮眼的成長率。
+IELTS P1 S2: On Friday, the Directorate-General of Budget, Accounting and Statistics (DGBAS) revised its 2026 projection upward to 13.28%, an increase of 2.23 percentage points on its August estimate and second only to the 13.56% recorded in 1978.
+    zh: 主計總處星期五將2026年預測上修至13.28%，比8月預估增加2.23個百分點，僅次於1978年的13.56%。
+IELTS P2 S1: This exceptional performance is attributable primarily to the worldwide demand for artificial intelligence infrastructure, a substantial proportion of which is manufactured in Taiwan.
+    zh: 如此出色的表現主要歸因於全球對人工智慧基礎設施的需求，而其中相當大的比例在台灣製造。
+IELTS P2 S2: Exports of goods and services are anticipated to expand by 23.96%, with merchandise exports projected to reach an unprecedented US$938.64 billion this year.
+    zh: 商品與服務出口預計擴張23.96%，今年商品出口預計將達前所未有的9,386.4億美元。
+IELTS P3 S1: Domestic indicators present a more nuanced picture.
+    zh: 國內指標呈現的面貌則較為複雜。
+IELTS P3 S2: While private investment is forecast to rise by 14.9%, the forecast for household consumption growth was revised marginally downward to 4.74%, which officials linked to fluctuations in the stock market.
+    zh: 民間投資預計成長14.9%，但家庭消費成長率預測小幅下修至4.74%，官員認為這與股市波動有關。
+IELTS P3 S3: Meanwhile, consumer inflation is expected to reach 2.07%, slightly exceeding the central bank's 2% threshold as a consequence of higher prices for crude oil, electronics and food.
+    zh: 同時，由於原油、電子產品和食物價格上漲，消費者物價預計上漲2.07%，略高於央行2%的門檻。
+IELTS P4 S1: Nevertheless, the outlook is not without uncertainty.
+    zh: 儘管如此，前景並非沒有不確定性。
+IELTS P4 S2: Tsai Yu-tai, a senior DGBAS statistician, identified potential headwinds, notably additional US restrictions on semiconductor exports to China and the prospect of more stringent AI regulation.
+    zh: 主計總處資深統計官員蔡鈺泰指出潛在的不利因素，特別是美國對中國半導體出口的進一步限制，以及AI監管可能更加嚴格。
+IELTS P5 S1: Consequently, the agency expects growth to moderate to 6.51% in 2027, a respectable figure by international standards.
+    zh: 因此，主計總處預計2027年成長將放緩至6.51%，以國際標準而言仍是可觀的數字。

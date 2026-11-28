@@ -3,6 +3,8 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-26-tw-1:chia-hsiang | Chia-hsiang | n. | PN | part of a Taiwanese name | 家驤（人名） | 家驤（人名） | 자샹 (이름) | Chia-hsiang (nombre) | चिया-श्यांग (नाम) |  |  |  | 
+2026-11-26-tw-1:chip's | chip | n. | B1 | belonging to a chip | 晶片的 | チップの | 칩의 | del chip | चिप का | The chip's design saves a lot of power. | processor’s, microchip’s |  | a chip's energy, a chip's speed
 2026-11-26-tw-1:circuits | circuit | n. | B2 | paths that electricity flows through | 電路 | 回路 | 회로 | circuitos | सर्किट | The engineer tested the circuits one by one. | electronics, wiring |  | electric circuits, integrated circuits
 2026-11-26-tw-1:cloud | cloud | n. | B1 | internet-based computer services | 雲端 | クラウド | 클라우드 | la nube | क्लाउड | I save my photos in the cloud. | online servers, cloud computing | local device | in the cloud, cloud storage
 2026-11-26-tw-1:committing | commit | v. | C1 | deciding to start using effort or resources | 投入；著手 | 踏み切る；投入する | 착수하다 | comprometerse | प्रतिबद्ध करना | Think carefully before committing your money. | devoting, starting, pledging | withholding | commit to, commit resources
@@ -47,6 +49,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26-tw-1:ntu's | NTU | n. | PN | belonging to National Taiwan University | 台大的 | 台湾大学の | 대만대의 | de la NTU | एनटीयू का |  |  |  | 
 2026-11-26-tw-1:on-device | on-device | adj. | C1 | happening on the device itself, not in the cloud | 裝置端的 | 端末上の | 온디바이스의 | en el dispositivo | डिवाइस पर | On-device AI keeps your photos private. | local, built-in | cloud-based | on-device AI, on-device processing
 2026-11-26-tw-1:operate | operate | v. | B1 | to work or function | 運作 | 動作する | 작동하다 | funcionar | काम करना | The robot can operate without internet. | work, function, run | fail | operate safely, operate directly
+2026-11-26-tw-1:overcome | overcome | v. | B2 | to deal with and defeat a problem | 克服 | 克服する | 극복하다 | superar | पार पाना | She overcame her fear of flying. | beat, conquer, get over | give in to | overcome fear, overcome problems
 2026-11-26-tw-1:patchy | patchy | adj. | C1 | not good everywhere or all the time | 時有時無的；不穩定的 | むらのある | 고르지 않은 | irregular; intermitente | अनियमित; टुकड़ों में | Mobile signal is patchy in the mountains. | uneven, spotty, irregular | reliable, steady | patchy signal, patchy coverage
 2026-11-26-tw-1:per | per | prep. | B1 | for each | 每 | 〜あたり | ~당 | por | प्रति | The ticket costs NT$100 per person. | for each, a |  | per person, per watt
 2026-11-26-tw-1:permits | permit | v. | B2 | allows | 允許；使能夠 | 可能にする | 허용하다 | permite | अनुमति देता है | The new system permits faster payments. | allows, enables, lets | prevents, forbids | permit access, time permits
@@ -110,6 +113,3 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26-tw-2:official | official | adj. | B1 | approved by the government or an authority | 正式的；官方的 | 公式の | 공식적인 | oficial | आधिकारिक | Ask the shop for an official receipt. | formal, authorised, legal | unofficial | official receipt, official figures
 2026-11-26-tw-2:operates | operate | v. | B1 | manages or runs a business | 經營；營運 | 運営する | 운영하다 | opera; gestiona | संचालित करता है | The company operates 7,000 stores. | runs, manages | closes | operate a business, operate stores
 2026-11-26-tw-2:picked | pick | v. | A2 | collected (picked up) | 領取（pick up） | 受け取られる | 찾아가다 | recogido | उठाया; लिया | Your parcel can be picked up at the store. | collected, fetched | dropped off | pick up, picked up a prize
-2026-11-26-tw-2:picks | pick | v. | A2 | chooses | 挑選 | 選ぶ | 고르다 | elige | चुनता है | He always picks the red one. | chooses, selects | rejects | pick a number, pick a winner
-2026-11-26-tw-2:place | place | n. | A1 | happens (take place) | 舉行（take place） | 行われる（take place） | 열리다 (take place) | tener lugar (take place) | होना (take place) | The draw takes place on the 25th. | happen, occur |  | take place, in place
-2026-11-26-tw-2:president | President | n. | PN | part of a company name (President Chain Store) | 統一（President Chain Store：統一超商） | 統一（統一超商） | 퉁이 (기업명) | President (nombre de empresa) | प्रेसिडेंट (कंपनी नाम) |  |  |  | 
