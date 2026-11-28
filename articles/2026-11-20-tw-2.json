@@ -37,7 +37,7 @@
    "sentZh": [
     [
      "台北市立動物園週四做了一件新鮮事。",
-     "牠的企鵝出去散步了！"
+     "園內的企鵝出去散步了！"
     ],
     [
      "四十三隻非洲企鵝離開了牠們的家。",
@@ -428,8 +428,8 @@
    ],
    "zh": "回答",
    "col": [
-    "give an answer",
-    "the right answer"
+    "answer questions",
+    "answer the phone"
    ]
   },
   "anticipated": {
@@ -1525,9 +1525,7 @@
    "ko": "일",
    "lvl": "A1",
    "pos": "n.",
-   "syn": [
-    "-"
-   ],
+   "syn": [],
    "zh": "天"
   },
   "delivered": {
@@ -2288,9 +2286,7 @@
    "ko": "발(계속 압박하다)",
    "lvl": "A1",
    "pos": "n.",
-   "syn": [
-    "pressure"
-   ],
+   "syn": [],
    "zh": "腳（keep sb's feet to the fire：持續施壓）"
   },
   "first-ever": {
@@ -2606,26 +2602,24 @@
    "zh": "給予"
   },
   "given": {
-   "ant": [
-    "withheld"
-   ],
+   "ant": [],
    "base": "given",
    "col": [
-    "given a reason",
-    "given a budget"
+    "given that",
+    "given the circumstances"
    ],
    "en": "because of; considering",
    "es": "dado que",
-   "ex": "No reason was given for the delay.",
+   "ex": "Given the cost, the plan was dropped.",
    "hi": "चूँकि",
    "ja": "〜を考えると",
    "ko": "~을 고려하면",
    "lvl": "B2",
    "pos": "prep.",
    "syn": [
-    "provided",
-    "offered",
-    "stated"
+    "considering",
+    "in view of",
+    "in light of"
    ],
    "zh": "鑑於（given that）"
   },
@@ -4102,15 +4096,15 @@
    "ant": [],
    "base": "movement",
    "col": [
-    "train movements",
-    "track movements"
+    "troop movements",
+    "military movements"
    ],
    "en": "changes of place",
    "es": "movimientos",
-   "ex": "Train movements were stopped by snow.",
+   "ex": "The army watched troop movements near the border.",
    "hi": "आवाजाही",
-   "ja": "運行",
-   "ko": "운행",
+   "ja": "移動",
+   "ko": "이동",
    "lvl": "B1",
    "pos": "n.",
    "syn": [
@@ -4343,25 +4337,23 @@
    "zh": "提供"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -4517,8 +4509,7 @@
    "pos": "adj.",
    "syn": [
     "sore",
-    "aching",
-    "hurtful"
+    "aching"
    ],
    "zh": "疼痛的"
   },
@@ -5735,26 +5726,24 @@
    "zh": "社會的"
   },
   "some": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "some",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ],
    "en": "a number of, but not all",
    "es": "algunos",
-   "ex": "Some 300 people came.",
+   "ex": "Some parents may still hesitate to use the plan.",
    "hi": "कुछ",
    "ja": "いくつかの",
    "ko": "일부",
    "lvl": "A1",
    "pos": "det.",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
    "zh": "一些"
   },
@@ -6506,8 +6495,7 @@
    "lvl": "B2",
    "syn": [
     "suddenly",
-    "surprisingly",
-    "by chance"
+    "surprisingly"
    ],
    "ant": [
     "predictably"

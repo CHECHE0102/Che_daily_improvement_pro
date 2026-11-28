@@ -396,7 +396,7 @@
    ]
   },
   "all-time": {
-   "zh": "all-time low：歷史新低",
+   "zh": "空前的；歷來（all-time high：歷史新高）",
    "hi": "अब तक का",
    "es": "histórico",
    "ja": "史上最",
@@ -1261,61 +1261,56 @@
    "base": "certain",
    "lvl": "B1",
    "syn": [
-    "sure",
-    "bound",
-    "definite"
+    "some",
+    "particular",
+    "specific"
    ],
-   "ant": [
-    "uncertain",
-    "doubtful"
-   ],
-   "ex": "It is not certain that the plan will work.",
+   "ant": [],
+   "ex": "Certain shops close early on Sundays.",
    "col": [
-    "certain to happen",
-    "almost certain"
+    "certain people",
+    "in certain cases"
    ]
   },
   "chain": {
-   "zh": "連鎖店",
-   "hi": "चेन (दुकानों की श्रृंखला)",
-   "es": "cadena",
-   "ja": "チェーン",
-   "ko": "체인",
-   "en": "a group of shops owned by one company",
+   "zh": "鏈（supply chain：供應鏈）",
+   "hi": "श्रृंखला (supply chain: आपूर्ति श्रृंखला)",
+   "es": "cadena (de suministro)",
+   "ja": "（サプライ）チェーン；供給網",
+   "ko": "망(supply chain: 공급망)",
+   "en": "a series of linked companies or steps (supply chain)",
    "pos": "n.",
    "base": "chain",
    "lvl": "B1",
    "syn": [
     "group",
     "company",
-    "franchise"
+    "network"
    ],
    "ant": [],
-   "ex": "The chain has stores in every town.",
+   "ex": "Taiwan plays a key role in the AI supply chain.",
    "col": [
-    "supermarket chain",
-    "retail chain"
+    "supply chain",
+    "global supply chain"
    ]
   },
   "challenge": {
-   "zh": "（法律上的）異議；挑戰",
+   "zh": "挑戰；難題",
    "hi": "चुनौती",
-   "es": "impugnación; recurso",
-   "ja": "異議申し立て",
-   "ko": "이의 제기",
-   "en": "a legal action questioning a decision",
+   "es": "reto; desafío",
+   "ja": "課題；難題",
+   "ko": "도전; 과제",
+   "en": "something difficult that causes problems",
    "pos": "n.",
    "base": "challenge",
    "lvl": "B2",
    "syn": [
-    "objection",
-    "dispute",
-    "appeal"
+    "difficulty",
+    "problem",
+    "test"
    ],
-   "ant": [
-    "acceptance"
-   ],
-   "ex": "The group lost its challenge to the new law.",
+   "ant": [],
+   "ex": "Cheap imports remain a challenge for local firms.",
    "col": [
     "a considerable challenge",
     "face a challenge"
@@ -1540,27 +1535,27 @@
    ]
   },
   "compelling": {
-   "zh": "迫使",
-   "hi": "मजबूर करते हुए",
-   "es": "obligando",
-   "ja": "〜を余儀なくさせて",
-   "ko": "~하도록 강요하며",
-   "en": "forcing someone to do something",
-   "pos": "v.",
+   "zh": "令人信服的",
+   "hi": "ठोस; विश्वसनीय",
+   "es": "convincente",
+   "ja": "説得力のある",
+   "ko": "설득력 있는",
+   "en": "very convincing",
+   "pos": "adj.",
    "base": "compel",
    "lvl": "C1",
    "syn": [
-    "forcing",
-    "obliging",
-    "pushing"
+    "convincing",
+    "persuasive",
+    "strong"
    ],
    "ant": [
-    "allowing"
+    "weak"
    ],
-   "ex": "Debt is compelling many families to sell their homes.",
+   "ex": "The study offers compelling evidence that the plan works.",
    "col": [
-    "compel sb to do",
-    "be compelled to"
+    "compelling evidence",
+    "compelling case"
    ],
    "note": {
     "collocations": [
@@ -1600,7 +1595,7 @@
    }
   },
   "competition": {
-   "zh": "競爭（Competition and Consumer Protection Commission：競爭與消費者保護委員會）",
+   "zh": "競爭",
    "hi": "प्रतिस्पर्धा",
    "es": "competencia",
    "ja": "競争",
@@ -1855,28 +1850,28 @@
    ]
   },
   "continued": {
-   "zh": "持續的",
-   "hi": "निरंतर",
-   "es": "continuada",
-   "ja": "継続的な",
-   "ko": "계속된",
-   "en": "going on without stopping",
-   "pos": "adj.",
+   "zh": "持續；繼續",
+   "hi": "जारी रहा",
+   "es": "continuó",
+   "ja": "続いた；〜し続けた",
+   "ko": "계속했다",
+   "en": "kept happening or kept doing something",
+   "pos": "v.",
    "base": "continued",
    "lvl": "B2",
    "syn": [
-    "ongoing",
-    "further",
-    "sustained"
+    "carried on",
+    "went on",
+    "kept on"
    ],
    "ant": [
     "stopped",
     "discontinued"
    ],
-   "ex": "Thanks for your continued support.",
+   "ex": "Prices continued to rise in May.",
    "col": [
-    "continued momentum",
-    "continued growth"
+    "continued to rise",
+    "continued to grow"
    ]
   },
   "continues": {
@@ -2036,7 +2031,7 @@
    "es": "datos",
    "ja": "データ",
    "ko": "데이터",
-   "en": "information stored on a computer",
+   "en": "facts and numbers collected for study",
    "pos": "n.",
    "base": "data",
    "lvl": "B1",
@@ -2046,7 +2041,7 @@
     "files"
    ],
    "ant": [],
-   "ex": "Back up your data every week.",
+   "ex": "The latest data show strong growth.",
    "col": [
     "personal data",
     "data breach"
@@ -2201,7 +2196,6 @@
    "base": "double",
    "lvl": "B1",
    "syn": [
-    "doubled up",
     "multiplied by two"
    ],
    "ant": [
@@ -2293,8 +2287,7 @@
    "base": "economic",
    "lvl": "B2",
    "syn": [
-    "financial",
-    "economical"
+    "financial"
    ],
    "ant": [],
    "ex": "The country faces economic problems.",
@@ -2410,24 +2403,24 @@
    }
   },
   "encouraging": {
-   "zh": "鼓勵",
-   "hi": "प्रोत्साहित करना",
-   "es": "animar",
-   "ja": "促す；奨励する",
-   "ko": "장려하다",
-   "en": "helping someone want to do something",
-   "pos": "v.",
+   "zh": "令人鼓舞的",
+   "hi": "उत्साहजनक",
+   "es": "alentador",
+   "ja": "励みになる；明るい",
+   "ko": "고무적인",
+   "en": "giving hope or confidence",
+   "pos": "adj.",
    "base": "encourage",
    "lvl": "B1",
    "syn": [
-    "support",
-    "promote",
-    "motivate"
+    "promising",
+    "positive",
+    "hopeful"
    ],
    "ant": [
-    "discourage"
+    "discouraging"
    ],
-   "ex": "Teachers encourage students to read.",
+   "ex": "The sales figures are very encouraging.",
    "col": [
     "encouraging signs",
     "far from encouraging"
@@ -2747,13 +2740,13 @@
    ]
   },
   "faster": {
-   "zh": "更快地",
+   "zh": "更快的",
    "hi": "अधिक तेज़",
    "es": "más rápido",
    "ja": "より速い",
    "ko": "더 빠른",
    "en": "quicker",
-   "pos": "adv.",
+   "pos": "adj.",
    "base": "fast",
    "lvl": "A1",
    "syn": [
@@ -2921,25 +2914,25 @@
    ]
   },
   "forecasts": {
-   "zh": "預報",
-   "hi": "पूर्वानुमान",
-   "es": "pronósticos",
-   "ja": "予報",
-   "ko": "예보",
-   "en": "statements about future weather",
-   "pos": "n.",
+   "zh": "預測",
+   "hi": "पूर्वानुमान लगाता है",
+   "es": "pronostica; prevé",
+   "ja": "予測する",
+   "ko": "예측하다",
+   "en": "says what it expects to happen in the future",
+   "pos": "v.",
    "base": "forecast",
    "lvl": "B1",
    "syn": [
-    "predictions",
-    "outlooks",
-    "projections"
+    "predicts",
+    "expects",
+    "projects"
    ],
    "ant": [],
-   "ex": "The forecasts say it will be sunny.",
+   "ex": "The ministry forecasts strong orders next month.",
    "col": [
-    "weather forecasts",
-    "head of forecasts"
+    "forecasts growth",
+    "forecasts a rise"
    ]
   },
   "foreign": {
@@ -3271,12 +3264,12 @@
    ]
   },
   "hardware": {
-   "zh": "（軍事）裝備",
-   "hi": "सैन्य साज़ो-सामान",
-   "es": "material; equipo",
-   "ja": "装備",
-   "ko": "장비",
-   "en": "military equipment such as vehicles and weapons",
+   "zh": "硬體",
+   "hi": "हार्डवेयर",
+   "es": "hardware; equipos informáticos",
+   "ja": "ハードウェア",
+   "ko": "하드웨어",
+   "en": "computer machines and equipment",
    "pos": "n.",
    "base": "hardware",
    "lvl": "B2",
@@ -3286,10 +3279,10 @@
     "kit"
    ],
    "ant": [],
-   "ex": "The army moved its hardware by ship.",
+   "ex": "Demand for AI hardware is growing fast.",
    "col": [
-    "military hardware",
-    "heavy hardware"
+    "AI hardware",
+    "computer hardware"
    ]
   },
   "have": {
@@ -3608,25 +3601,21 @@
    ]
   },
   "intelligence": {
-   "zh": "情報（intelligence service：情報機構）",
-   "hi": "ख़ुफ़िया",
-   "es": "inteligencia (servicio secreto)",
-   "ja": "諜報；情報",
-   "ko": "정보 (첩보)",
-   "en": "secret information about other countries",
+   "zh": "智慧（artificial intelligence：人工智慧）",
+   "hi": "बुद्धिमत्ता (कृत्रिम बुद्धिमत्ता)",
+   "es": "inteligencia (artificial)",
+   "ja": "知能（人工知能）",
+   "ko": "지능(인공지능)",
+   "en": "the ability of machines to think and learn (artificial intelligence)",
    "pos": "n.",
    "base": "intelligence",
    "lvl": "C1",
-   "syn": [
-    "spying",
-    "espionage",
-    "secret service"
-   ],
+   "syn": [],
    "ant": [],
-   "ex": "The intelligence service warned of a cyber attack.",
+   "ex": "Artificial intelligence is changing many jobs.",
    "col": [
-    "intelligence service",
-    "intelligence agency"
+    "artificial intelligence",
+    "human intelligence"
    ]
   },
   "investment": {
@@ -3789,26 +3778,26 @@
    ]
   },
   "last": {
-   "zh": "最後的",
-   "hi": "अंतिम",
-   "es": "último",
-   "ja": "最後の",
-   "ko": "마지막의",
-   "en": "coming at the end (at the last minute: very late)",
+   "zh": "上一個的（last year：去年）",
+   "hi": "पिछला",
+   "es": "pasado (last year: el año pasado)",
+   "ja": "前の；昨〜（last year：昨年）",
+   "ko": "지난",
+   "en": "the one just before now (last year)",
    "pos": "adj.",
    "base": "last",
    "lvl": "A1",
    "syn": [
-    "final",
-    "latest"
+    "previous",
+    "past"
    ],
    "ant": [
-    "first"
+    "next"
    ],
-   "ex": "He packed his bag at the last minute.",
+   "ex": "Sales are higher than last year.",
    "col": [
-    "at the last minute",
-    "last train"
+    "last year",
+    "last month"
    ]
   },
   "led": {
@@ -4003,12 +3992,12 @@
    ]
   },
   "machinery": {
-   "zh": "機械（公司名）",
+   "zh": "機械",
    "hi": "मशीनरी",
    "es": "maquinaria",
    "ja": "機械",
    "ko": "기계",
-   "en": "machines; here part of a company name",
+   "en": "machines, especially large ones used in industry",
    "pos": "n.",
    "base": "machinery",
    "lvl": "B2",
@@ -4120,49 +4109,46 @@
    ]
   },
   "market": {
-   "zh": "推銷；銷售",
-   "hi": "बेचने के लिए प्रचार करना",
-   "es": "comercializar",
-   "ja": "売り込む",
-   "ko": "판매에 내놓다",
-   "en": "to try to sell",
-   "pos": "v.",
+   "zh": "市場（stock market：股市）",
+   "hi": "बाज़ार (शेयर बाज़ार)",
+   "es": "mercado (bursátil)",
+   "ja": "市場（stock market：株式市場）",
+   "ko": "시장(stock market: 주식 시장)",
+   "en": "a place where shares are bought and sold (stock market)",
+   "pos": "n.",
    "base": "market",
    "lvl": "B2",
    "syn": [
-    "sell",
-    "promote",
-    "advertise"
+    "exchange",
+    "bourse"
    ],
    "ant": [],
-   "ex": "The firm markets its products online.",
+   "ex": "The stock market fell sharply this week.",
    "col": [
-    "market a property",
-    "market a product"
+    "stock market",
+    "market fall"
    ]
   },
   "marking": {
-   "zh": "紀念（週年）",
-   "hi": "मना रहा",
-   "es": "conmemorando",
-   "ja": "記念している",
-   "ko": "기념하는",
-   "en": "celebrating a special date",
+   "zh": "標誌著；創下",
+   "hi": "दर्शाते हुए",
+   "es": "marcando",
+   "ja": "〜を記録して；〜となって",
+   "ko": "기록하며",
+   "en": "being or representing (a record or turning point)",
    "pos": "v.",
    "base": "mark",
    "lvl": "B2",
    "syn": [
-    "celebrating",
-    "commemorating",
-    "observing"
+    "representing",
+    "signalling",
+    "showing"
    ],
-   "ant": [
-    "ignoring"
-   ],
-   "ex": "The school is marking its 100th year.",
+   "ant": [],
+   "ex": "Sales rose again, marking a new record.",
    "col": [
-    "mark an anniversary",
-    "marking the occasion"
+    "marking a record",
+    "marking the first time"
    ]
   },
   "materials": {
@@ -4411,7 +4397,7 @@
    ]
   },
   "news": {
-   "zh": "新聞（news organisations：新聞機構）",
+   "zh": "消息；新聞",
    "hi": "समाचार",
    "es": "noticias",
    "ja": "ニュース；報道",
@@ -4680,17 +4666,12 @@
    "pos": "prep.",
    "base": "on",
    "lvl": "A1",
-   "syn": [
-    "ahead",
-    "forward"
-   ],
-   "ant": [
-    "off"
-   ],
-   "ex": "Voting will go on for nine days.",
+   "syn": [],
+   "ant": [],
+   "ex": "He accepted the award on behalf of the team.",
    "col": [
-    "go on",
-    "carry on"
+    "on behalf of",
+    "on the sidelines of"
    ]
   },
   "ongoing": {
@@ -4846,7 +4827,7 @@
    ]
   },
   "phone": {
-   "zh": "手機（phone charger：手機充電器）",
+   "zh": "手機；電話",
    "hi": "फ़ोन",
    "es": "teléfono",
    "ja": "電話；スマホ",
@@ -5040,24 +5021,24 @@
    ]
   },
   "priced": {
-   "zh": "（因價高）被排擠",
-   "hi": "कीमत की वजह से बाहर",
-   "es": "expulsados por los precios",
-   "ja": "価格面で締め出された",
-   "ko": "가격 때문에 밀려난",
-   "en": "(priced out) unable to buy because prices are too high",
+   "zh": "定價的",
+   "hi": "कीमत तय की गई",
+   "es": "con un precio",
+   "ja": "価格設定された",
+   "ko": "가격이 매겨진",
+   "en": "given a particular price",
    "pos": "v.",
    "base": "price",
    "lvl": "C1",
    "syn": [
-    "squeezed",
-    "forced"
+    "valued",
+    "costed"
    ],
    "ant": [],
-   "ex": "Young people are being priced out of the city.",
+   "ex": "The new phones are aggressively priced.",
    "col": [
-    "priced out",
-    "priced out of the market"
+    "aggressively priced",
+    "competitively priced"
    ]
   },
   "probably": {
@@ -5218,8 +5199,8 @@
    ],
    "ex": "The purchase of the land was finally agreed.",
    "col": [
-    "purchase tickets",
-    "purchase online"
+    "make a purchase",
+    "purchase price"
    ]
   },
   "put": {
@@ -5248,26 +5229,23 @@
    ]
   },
   "putting": {
-   "zh": "架設（putting up）",
-   "hi": "लगाना",
-   "es": "poner",
-   "ja": "設置すること",
-   "ko": "설치하기",
-   "en": "(putting up) building or fixing in place",
+   "zh": "施加（putting pressure on：施加壓力）",
+   "hi": "(दबाव) डालना",
+   "es": "ejerciendo (presión)",
+   "ja": "（圧力を）かけて",
+   "ko": "(압력을) 가하는",
+   "en": "causing (putting pressure on)",
    "pos": "v.",
    "base": "put",
    "lvl": "A1",
    "syn": [
-    "installing",
-    "building",
-    "erecting"
+    "applying",
+    "exerting"
    ],
-   "ant": [
-    "removing"
-   ],
-   "ex": "They are putting up new signs.",
+   "ant": [],
+   "ex": "High costs are putting pressure on small firms.",
    "col": [
-    "putting up fences",
+    "putting pressure on",
     "putting in place"
    ]
   },
@@ -5429,7 +5407,7 @@
     "registered"
    ],
    "ant": [],
-   "ex": "The show was recorded last week.",
+   "ex": "It was the biggest rise ever recorded.",
    "col": [
     "be recorded",
     "recorded a figure"
@@ -6252,17 +6230,15 @@
    "base": "some",
    "lvl": "A1",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
-   "ant": [
-    "exactly"
-   ],
-   "ex": "Some 300 people came.",
+   "ant": [],
+   "ex": "Some parents may still hesitate to use the plan.",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ]
   },
   "sounded": {
@@ -6337,23 +6313,23 @@
    ]
   },
   "st": {
-   "zh": "St：聖（Saint 的縮寫）",
-   "hi": "संत",
-   "es": "San; Santo",
-   "ja": "聖（セント）",
-   "ko": "성(聖)",
-   "en": "short for Saint, in a church name",
+   "zh": "序數詞尾（21st：第21）",
+   "hi": "क्रमसूचक प्रत्यय (21st: इक्कीसवाँ)",
+   "es": "sufijo ordinal (21st: vigésimo primero)",
+   "ja": "序数の語尾（21st：21番目）",
+   "ko": "서수 접미사(21st: 21번째)",
+   "en": "ending of ordinal numbers (21st = twenty-first)",
    "pos": "n.",
    "base": "St",
    "lvl": "PN"
   },
   "states": {
-   "zh": "國家",
-   "hi": "देश; राज्य",
-   "es": "estados",
-   "ja": "国家",
-   "ko": "국가",
-   "en": "countries",
+   "zh": "州（United States：美國）",
+   "hi": "राज्य (United States: अमेरिका)",
+   "es": "estados (United States: Estados Unidos)",
+   "ja": "州（United States：アメリカ合衆国）",
+   "ko": "주(United States: 미국)",
+   "en": "parts of a country (United States = the USA)",
    "pos": "n.",
    "base": "state",
    "lvl": "B1",
@@ -6362,10 +6338,10 @@
     "nations"
    ],
    "ant": [],
-   "ex": "EU states agreed on the plan.",
+   "ex": "Most orders came from the United States.",
    "col": [
     "member states",
-    "non-EU states"
+    "the United States"
    ]
   },
   "statistics": {
@@ -6526,7 +6502,7 @@
    "ex": "A strong current pulled the boat away.",
    "col": [
     "strong winds",
-    "a strong jet stream"
+    "strong demand"
    ]
   },
   "stronger": {
@@ -6689,26 +6665,24 @@
    ]
   },
   "sustainability": {
-   "zh": "永續性",
+   "zh": "可持續性；能否持續",
    "hi": "स्थिरता; टिकाऊपन",
    "es": "sostenibilidad",
    "ja": "持続可能性",
    "ko": "지속 가능성",
-   "en": "using resources without harming the future",
+   "en": "the ability to continue at the same level",
    "pos": "n.",
    "base": "sustainability",
    "lvl": "C1",
    "syn": [
-    "eco-friendliness",
-    "green living",
-    "conservation"
+    "durability",
+    "viability",
+    "continuity"
    ],
-   "ant": [
-    "waste"
-   ],
-   "ex": "The festival is about sustainability.",
+   "ant": [],
+   "ex": "Investors worry about the sustainability of high spending.",
    "col": [
-    "sustainability festival",
+    "the sustainability of",
     "environmental sustainability"
    ],
    "note": {
@@ -6781,7 +6755,7 @@
    "ja": "台湾加権指数",
    "ko": "대만 가권지수",
    "en": "Taiwan's main stock market index",
-   "pos": "proper n.",
+   "pos": "n.",
    "base": "Taiex",
    "lvl": "PN"
   },

@@ -130,7 +130,7 @@
    "paragraphs": [
     "Mountainous areas of Yilan and Hualien are under a heavy rain advisory after the Central Weather Administration warned on Thursday that a strengthening northeasterly flow could unleash intense downpours along Taiwan's eastern ranges.",
     "Accumulated rainfall could top 200 millimetres over 24 hours, or hit 100 millimetres within a three-hour window, according to the agency. Such totals raise the risk of landslides and rockfalls, and residents have been urged to remain vigilant. Motorists heading along mountain routes and hikers bound for eastern trails would be wise to check conditions beforehand or delay their plans.",
-    "Elsewhere, showers are forecast across the north and east, the Hengchun Peninsula and the central and southern highlands, with snow likely on summits above 3,500 metres overnight.",
+    "Elsewhere, showers are forecast across the north and east, the Hengchun Peninsula and the central and southern highlands, with snow possible on summits above 3,500 metres overnight.",
     "Once the rain eases, colder and drier air will settle over the island. Early on Friday, temperatures in some low-lying districts may dip to roughly 11 degrees Celsius, a figure echoed by independent meteorologist Wu Der-rong.",
     "A gradual recovery is expected over the weekend, but another system arriving on Tuesday should bring renewed rain and cooling. As the alert falls well short of a typhoon warning, offices and schools remain open."
    ],
@@ -199,26 +199,24 @@
    "zh": "一個"
   },
   "about": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "about",
    "col": [
-    "about half",
-    "about 100 people"
+    "talk about",
+    "worried about"
    ],
    "en": "on the subject of",
    "es": "sobre",
-   "ex": "The trip takes about two hours.",
+   "ex": "The report is about a data breach.",
    "hi": "के बारे में",
    "ja": "〜について",
    "ko": "~에 대해",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "around",
-    "roughly",
-    "approximately"
+    "regarding",
+    "concerning",
+    "on"
    ],
    "zh": "關於"
   },
@@ -1240,27 +1238,24 @@
    "zh": "核心的"
   },
   "certain": {
-   "ant": [
-    "uncertain",
-    "doubtful"
-   ],
+   "ant": [],
    "base": "certain",
    "col": [
-    "certain to happen",
-    "almost certain"
+    "certain people",
+    "in certain cases"
    ],
    "en": "some, but not all",
    "es": "ciertos",
-   "ex": "It is not certain that the plan will work.",
+   "ex": "Certain shops close early on Sundays.",
    "hi": "कुछ",
    "ja": "一部の；ある",
    "ko": "일부의",
    "lvl": "B1",
    "pos": "det.",
    "syn": [
-    "sure",
-    "bound",
-    "definite"
+    "some",
+    "particular",
+    "specific"
    ],
    "zh": "某些"
   },
@@ -1355,7 +1350,6 @@
    "pos": "adv.",
    "syn": [
     "tightly",
-    "nearly",
     "narrowly"
    ],
    "zh": "緊密地（followed closely：緊隨其後）"
@@ -1440,7 +1434,7 @@
     "colder weather",
     "colder months"
    ],
-   "en": "more cold",
+   "en": "having a lower temperature",
    "es": "más frío",
    "ex": "It gets colder at night in November.",
    "hi": "अधिक ठंडा",
@@ -1852,9 +1846,7 @@
    "ko": "일",
    "lvl": "A1",
    "pos": "n.",
-   "syn": [
-    "-"
-   ],
+   "syn": [],
    "zh": "天"
   },
   "debris": {
@@ -2947,7 +2939,7 @@
    "ja": "恒春",
    "ko": "헝춘",
    "en": "a town and peninsula at the southern tip of Taiwan",
-   "pos": "PN",
+   "pos": "n.",
    "base": "Hengchun",
    "lvl": "PN"
   },
@@ -3162,7 +3154,7 @@
    ],
    "en": "rises in amount or pay",
    "es": "aumentos; aumenta",
-   "ex": "The fee increases after January.",
+   "ex": "There were big increases in rent this year.",
    "hi": "वृद्धि; बढ़ता है",
    "ja": "増加；増える",
    "ko": "증가; 늘어난다",
@@ -4426,25 +4418,23 @@
    "zh": "官方的"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -5893,26 +5883,24 @@
    "zh": "如此；（even so：儘管如此；so many：這麼多）"
   },
   "some": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "some",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ],
    "en": "a number of, but not all",
    "es": "algunos",
-   "ex": "Some 300 people came.",
+   "ex": "Some parents may still hesitate to use the plan.",
    "hi": "कुछ",
    "ja": "いくつかの",
    "ko": "일부",
    "lvl": "A1",
    "pos": "det.",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
    "zh": "一些"
   },
@@ -6740,23 +6728,23 @@
    "ant": [],
    "base": "update",
    "col": [
-    "software updates",
-    "test updates"
+    "monitor updates",
+    "weather updates"
    ],
-   "en": "new versions or changes to software",
+   "en": "new pieces of information about a situation",
    "es": "actualizaciones",
-   "ex": "Install the updates before you restart.",
+   "ex": "Listen to the radio for weather updates.",
    "hi": "अपडेट",
    "ja": "アップデート",
    "ko": "업데이트",
    "lvl": "B1",
    "pos": "n.",
    "syn": [
-    "upgrades",
-    "patches",
+    "news",
+    "reports",
     "changes"
    ],
-   "zh": "（軟體）更新"
+   "zh": "最新消息；最新資訊"
   },
   "urged": {
    "ant": [
@@ -7072,7 +7060,6 @@
    "lvl": "A1",
    "pos": "n.",
    "syn": [
-    "climate",
     "conditions"
    ],
    "zh": "天氣"
@@ -7383,7 +7370,7 @@
    "es": "Wu (apellido)",
    "ja": "呉（姓）",
    "ko": "우(성)",
-   "en": "a family name; here Wu Dachrahn, a Taiwanese economist",
+   "en": "a family name; here Wu Der-rong, a Taiwanese meteorologist",
    "pos": "n.",
    "base": "Wu",
    "lvl": "PN"

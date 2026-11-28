@@ -106,7 +106,7 @@
    ],
    "sentZh": [
     [
-     "台股週五經歷近年來最慘烈的一天，加權指數暴跌 2,393.60 點、跌幅 6.23%，收在 36,033.29 點。",
+     "台股週五經歷近年來最慘烈的日子之一，加權指數暴跌 2,393.60 點、跌幅 6.23%，收在 36,033.29 點。",
      "成交金額達新台幣 8,770 億元（約 266 億美元）。"
     ],
     [
@@ -202,26 +202,24 @@
    "zh": "一個"
   },
   "about": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "about",
    "col": [
-    "about half",
-    "about 100 people"
+    "talk about",
+    "worried about"
    ],
    "en": "on the subject of",
    "es": "sobre",
-   "ex": "The trip takes about two hours.",
+   "ex": "The report is about a data breach.",
    "hi": "के बारे में",
    "ja": "〜について",
    "ko": "~에 대해",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "around",
-    "roughly",
-    "approximately"
+    "regarding",
+    "concerning",
+    "on"
    ],
    "zh": "關於"
   },
@@ -1830,9 +1828,7 @@
    "ko": "일",
    "lvl": "A1",
    "pos": "n.",
-   "syn": [
-    "-"
-   ],
+   "syn": [],
    "zh": "天"
   },
   "decline": {
@@ -2244,8 +2240,7 @@
    "lvl": "B2",
    "pos": "adj.",
    "syn": [
-    "financial",
-    "economical"
+    "financial"
    ],
    "zh": "經濟的"
   },
@@ -4142,9 +4137,7 @@
    "pos": "n.",
    "base": "market",
    "lvl": "A2",
-   "syn": [
-    "the market's"
-   ],
+   "syn": [],
    "ant": [],
    "ex": "The market's mood changed quickly.",
    "col": [
@@ -4520,25 +4513,23 @@
    "zh": "辦公室；（政府）辦事處"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -5091,8 +5082,8 @@
    ],
    "base": "purchase",
    "col": [
-    "purchase tickets",
-    "purchase online"
+    "make a purchase",
+    "purchase price"
    ],
    "en": "the act of buying",
    "es": "compra",
@@ -5758,7 +5749,7 @@
     "seeking redress"
    ],
    "en": "trying to get",
-   "es": "reclamando",
+   "es": "buscando",
    "ex": "The club is seeking new members.",
    "hi": "माँग रहा है",
    "ja": "求めている",
@@ -6380,26 +6371,24 @@
    "zh": "穩固的"
   },
   "some": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "some",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ],
    "en": "a number of, but not all",
    "es": "algunos",
-   "ex": "Some 300 people came.",
+   "ex": "Some parents may still hesitate to use the plan.",
    "hi": "कुछ",
    "ja": "いくつかの",
    "ko": "일부",
    "lvl": "A1",
    "pos": "det.",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
    "zh": "一些"
   },
@@ -6557,8 +6546,7 @@
    "pos": "adv.",
    "syn": [
     "yet",
-    "even now",
-    "nevertheless"
+    "even now"
    ],
    "zh": "仍然"
   },
@@ -6845,7 +6833,7 @@
    "ja": "台湾加権指数",
    "ko": "대만 가권지수",
    "en": "Taiwan's main stock market index",
-   "pos": "proper n.",
+   "pos": "n.",
    "base": "Taiex",
    "lvl": "PN"
   },
@@ -7827,7 +7815,7 @@
    "es": "peor",
    "ja": "最悪の",
    "ko": "최악의",
-   "en": "the most bad",
+   "en": "worse than all others",
    "pos": "adj.",
    "base": "worst",
    "lvl": "A2",

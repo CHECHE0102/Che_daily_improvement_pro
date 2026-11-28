@@ -68,7 +68,7 @@
     "The contest was started in 2022 by the UK Tea Academy to promote good tea and tea culture. Professional judges taste hundreds of teas in several rounds without knowing who made them.",
     "The prize for the best black tea went to Mi Ying Black Tea from Fusensen, a Tainan company founded in 1985. The tea has a honey smell, and its leaves are grown in eastern Taiwan.",
     "Two smaller businesses, the Riverbank Cat teahouse in Hsinchu and the Tsengs Tea farm in Miaoli, shared the prize for the best retail tea. One entered a black tea and the other an oolong.",
-    "Altogether, Taiwan collected 7 gold, 22 silver and 26 bronze awards. The contest is run with Fortnum & Mason, a famous London food shop, which may sell the winners. The ceremony will take place in London in January 2027."
+    "Altogether, Taiwan collected 7 gold, 22 silver and 26 bronze awards. The contest is run with Fortnum & Mason, a famous London food shop, which may sell the winning teas. The ceremony will take place in London in January 2027."
    ],
    "sentZh": [
     [
@@ -422,7 +422,7 @@
    ],
    "en": "the purpose of something",
    "es": "objetivo",
-   "ex": "The new policy aims to reduce traffic.",
+   "ex": "The main aim of the policy is to reduce traffic.",
    "hi": "लक्ष्य",
    "ja": "目的；狙い",
    "ko": "목표",
@@ -431,8 +431,7 @@
    "syn": [
     "goal",
     "purpose",
-    "objective",
-    "intend"
+    "objective"
    ],
    "zh": "目標"
   },
@@ -1905,7 +1904,7 @@
    ],
    "en": "making certain",
    "es": "garantizando",
-   "ex": "The rules help ensuring fair play.",
+   "ex": "Ensuring fair play is the referee's main job.",
    "hi": "सुनिश्चित करना",
    "ja": "確保する",
    "ko": "보장하는",
@@ -1924,22 +1923,22 @@
    ],
    "base": "enter",
    "col": [
-    "entered the system",
-    "entered the room"
+    "entered a competition",
+    "entered a tea"
    ],
-   "en": "went into",
-   "es": "entraron",
-   "ex": "Thousands entered the country last year.",
-   "hi": "प्रवेश किया",
-   "ja": "入った",
-   "ko": "들어갔다",
+   "en": "put forward for a competition",
+   "es": "inscribió",
+   "ex": "One farm entered a black tea in the contest.",
+   "hi": "प्रतियोगिता में भेजा",
+   "ja": "出品した",
+   "ko": "출품했다",
    "lvl": "B1",
    "pos": "v.",
    "syn": [
     "submitted",
     "put forward"
    ],
-   "zh": "進入"
+   "zh": "報名參賽（送出參賽作品）"
   },
   "enterprise": {
    "base": "Enterprise",
@@ -3730,25 +3729,23 @@
    "zh": "舊的"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -4003,21 +4000,21 @@
    "base": "party",
    "pos": "n.",
    "lvl": "A2",
-   "zh": "政黨",
-   "hi": "पार्टी (दल)",
-   "es": "partido",
-   "ja": "政党",
-   "ko": "정당",
-   "en": "a political group",
+   "zh": "派對；聚會",
+   "hi": "पार्टी (समारोह)",
+   "es": "fiesta",
+   "ja": "パーティー",
+   "ko": "파티",
+   "en": "a social event where people celebrate",
    "syn": [
-    "political group",
-    "political party"
+    "celebration",
+    "event"
    ],
    "ant": [],
-   "ex": "Which party will win?",
+   "ex": "The prize party is in London in January.",
    "col": [
-    "political party",
-    "own party"
+    "prize party",
+    "birthday party"
    ]
   },
   "pass": {
@@ -5248,26 +5245,24 @@
    "zh": "如此；（even so：儘管如此；so many：這麼多）"
   },
   "some": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "some",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ],
    "en": "a number of, but not all",
    "es": "algunos",
-   "ex": "Some 300 people came.",
+   "ex": "Some parents may still hesitate to use the plan.",
    "hi": "कुछ",
    "ja": "いくつかの",
    "ko": "일부",
    "lvl": "A1",
    "pos": "det.",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
    "zh": "一些"
   },
