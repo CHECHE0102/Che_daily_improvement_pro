@@ -1,5 +1,5 @@
 # BinBin TEXT proofreading — 2026-11-28
-date: 2026-11-28 | 4 articles | read this WHOLE file, it is the complete job for today
+date: 2026-11-28 | 6 articles | read this WHOLE file, it is the complete job for today
 
 # 2026-11-28  (Ireland national)
 date: 2026-11-28 | rank: 1 | topic: 社會 | main level: B2
@@ -689,3 +689,295 @@ Q3 [tone]: What is the tone of Daniel Chait's view as reported at the end of the
    C. Mocking towards job candidates who use AI
    D. Cautious, insisting that people stay responsible for hiring  <- answer
    explanation: Chait "maintains that accountability for recruitment decisions must ultimately rest with people" — a cautious position that keeps humans responsible. He does not welcome replacing recruiters (A), is clearly concerned rather than indifferent (B), and says nothing mocking about candidates (C).
+
+
+# 2026-11-28-tw-1  (region TW)
+date: 2026-11-28 | rank: 1 | topic: 政治 | main level: B2
+file: articles/2026-11-28-tw-1.json
+
+## title
+Taiwan Votes in Local Elections and a Nuclear Power Referendum
+
+## summaries
+- summaryEn: Taiwan held its '9-in-1' local elections on Saturday, along with a referendum on returning to nuclear power.
+- summaryZh: 九合一選舉投票日 同場公投是否重啟核能
+- summaryJa: 台湾で統一地方選の投票、原発政策を問う住民投票も同時実施。
+- summaryKo: 대만 지방선거 투표일, 원전 정책 국민투표도 함께 실시.
+- summaryEs: Taiwán vota en sus elecciones locales y en un referéndum sobre la energía nuclear.
+- summaryHi: ताइवान में स्थानीय चुनाव और परमाणु ऊर्जा पर जनमत संग्रह के लिए मतदान हुआ।
+
+## sources
+- Focus Taiwan (CNA): https://focustaiwan.tw/politics/202611280002
+
+## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
+
+## level A2
+A2 P1 S1: Today is election day in Taiwan.
+    zh: 今天是台灣的選舉日。
+A2 P1 S2: Polls opened at 8 in the morning and close at 4 in the afternoon.
+    zh: 投票所早上8點開放，下午4點關閉。
+A2 P1 S3: About 19.6 million people can vote.
+    zh: 大約有1,960萬人可以投票。
+A2 P2 S1: People are choosing many local leaders.
+    zh: 人們要選出許多地方領袖。
+A2 P2 S2: There are new mayors for 22 cities and counties.
+    zh: 22個縣市會有新的首長。
+A2 P2 S3: Voters also choose city council members and village chiefs.
+    zh: 選民也要選市議員和村里長。
+A2 P3 S1: In Taipei, Mayor Chiang Wan-an wants to win again.
+    zh: 在台北，市長蔣萬安希望再次當選。
+A2 P3 S2: His rival is Puma Shen.
+    zh: 他的對手是沈伯洋。
+A2 P3 S3: In Kaohsiung, two new people want to be mayor.
+    zh: 在高雄，有兩位新人想當市長。
+A2 P4 S1: There is also one big question for all voters.
+    zh: 所有選民還要回答一個大問題。
+A2 P4 S2: Should Taiwan use nuclear power again?
+    zh: 台灣應該再次使用核能嗎？
+A2 P4 S3: People can vote yes or no.
+    zh: 人們可以投同意或不同意。
+A2 P5 S1: Voters must bring their ID card.
+    zh: 選民必須帶身分證。
+A2 P5 S2: They must turn off their phones.
+    zh: 他們必須把手機關機。
+A2 P5 S3: Taking photos of the ballot is not allowed.
+    zh: 不可以拍攝選票。
+A2 P5 S4: The results will come on Saturday night.
+    zh: 結果將在星期六晚上出爐。
+
+## level B1
+B1 P1 S1: Voters across Taiwan went to the polls on Saturday for the local elections, often called the "9-in-1" elections.
+    zh: 星期六，台灣各地選民前往投票所參加地方選舉，也就是俗稱的「九合一」選舉。
+B1 P1 S2: Polling stations opened at 8 am and were due to close at 4 pm.
+    zh: 投票所上午8點開放，預定下午4點關閉。
+B1 P1 S3: About 19.58 million people were able to vote, including around 600,000 first-time voters.
+    zh: 約有1,958萬人可以投票，其中包括約60萬名首投族。
+B1 P2 S1: More than 11,000 positions were on the ballot.
+    zh: 共有超過1萬1千個職位要改選。
+B1 P2 S2: These included mayors in six large special municipalities and magistrates or mayors in 16 other cities and counties, as well as hundreds of council seats and thousands of neighbourhood chiefs.
+    zh: 其中包括六個直轄市市長、其他16個縣市的縣市長，以及數百個議員席次和數千名里長。
+B1 P3 S1: In Taipei, Mayor Chiang Wan-an of the Kuomintang was hoping to win a second term against Puma Shen of the Democratic Progressive Party.
+    zh: 在台北，國民黨籍市長蔣萬安希望擊敗民進黨的沈伯洋，爭取連任。
+B1 P3 S2: In Kaohsiung, Lai Jui-lung and Ko Chih-en were the main candidates to replace Mayor Chen Chi-mai.
+    zh: 在高雄，賴瑞隆和柯志恩是接替市長陳其邁的主要候選人。
+B1 P4 S1: Voters also answered a referendum question: should Taiwan give up its "nuclear-free homeland" policy?
+    zh: 選民也要回答一道公投題目：台灣是否應放棄「非核家園」政策？
+B1 P4 S2: For the result to count, "yes" votes must beat "no" votes and reach at least a quarter of all eligible voters.
+    zh: 公投要有效，同意票必須多於不同意票，且至少達到全體有投票權人的四分之一。
+B1 P5 S1: Officials reminded people to bring their ID and to switch off their phones.
+    zh: 官員提醒民眾攜帶身分證並將手機關機。
+B1 P5 S2: Taking photos inside polling stations can lead to a large fine.
+    zh: 在投票所內拍照可能被處以高額罰款。
+B1 P5 S3: Results were expected on Saturday evening.
+    zh: 選舉結果預計在星期六晚上揭曉。
+
+## level B2
+B2 P1 S1: Taiwan held its "9-in-1" local elections on Saturday, with polls opening at 8 am and closing at 4 pm.
+    zh: 台灣星期六舉行「九合一」地方選舉，投票所上午8點開放、下午4點關閉。
+B2 P1 S2: According to the Central Election Commission, about 19.58 million people were eligible to vote, roughly 600,000 of them for the first time, at more than 18,000 polling stations.
+    zh: 根據中選會，約1,958萬人具投票資格，其中約60萬人是首次投票，投票所超過1萬8千個。
+B2 P2 S1: Over 11,000 posts were up for grabs.
+    zh: 共有超過1萬1千個職位待爭取。
+B2 P2 S2: Voters chose mayors in Taiwan's six special municipalities and leaders in 16 other cities and counties, along with 919 city and county councillors, township chiefs and nearly 7,800 borough chiefs.
+    zh: 選民選出六都市長、其他16個縣市的首長，以及919名縣市議員、鄉鎮市長和近7,800名里長。
+B2 P3 S1: The most closely watched race was in Taipei, where Kuomintang (KMT) Mayor Chiang Wan-an sought re-election against Democratic Progressive Party (DPP) legislator Puma Shen.
+    zh: 最受矚目的選戰在台北，國民黨籍市長蔣萬安尋求連任，對手是民進黨立委沈伯洋。
+B2 P3 S2: In Kaohsiung, a long-time DPP stronghold, the DPP's Lai Jui-lung faced the KMT's Ko Chih-en in the contest to succeed Chen Chi-mai.
+    zh: 在長期為民進黨大本營的高雄，民進黨的賴瑞隆與國民黨的柯志恩角逐接替陳其邁。
+B2 P4 S1: Alongside the elections, about 20 million people could vote in a referendum on whether to abandon the "nuclear-free homeland" policy.
+    zh: 除了選舉，約2,000萬人還可就是否放棄「非核家園」政策進行公投。
+B2 P4 S2: It is the fourth vote on nuclear power since 2018.
+    zh: 這是2018年以來第四次核能公投。
+B2 P4 S3: To pass, "yes" votes must outnumber "no" votes and equal at least a quarter of all eligible voters.
+    zh: 要通過，同意票必須多於不同意票，且至少達到全體有投票權人的四分之一。
+B2 P5 S1: Voters were told to keep their phones switched off, as photographing ballots can bring fines of up to NT$300,000.
+    zh: 選民被告知要將手機關機，因為拍攝選票最高可罰新台幣30萬元。
+B2 P5 S2: Election results were expected on Saturday evening, with the referendum count possibly later.
+    zh: 選舉結果預計在星期六晚上出爐，公投計票可能較晚。
+
+## level C1
+C1 P1 S1: Polls opened across Taiwan at 8 am on Saturday for the "9-in-1" local elections, a contest widely seen as a mid-term test for President Lai Ching-te's Democratic Progressive Party (DPP).
+    zh: 星期六上午8點，台灣各地投票所開放，進行「九合一」地方選舉，這場選戰被普遍視為賴清德總統所屬民進黨的期中考。
+C1 P1 S2: The Central Election Commission said roughly 19.58 million citizens were eligible to cast ballots, about 600,000 of them for the first time.
+    zh: 中選會表示，約1,958萬名公民具投票資格，其中約60萬人是首次投票。
+C1 P2 S1: The sheer scale of the exercise is striking: more than 11,000 offices across 8,906 electoral districts, staffed by over 300,000 election workers at 18,244 polling stations.
+    zh: 這場選舉的規模之大令人驚嘆：8,906個選區中有超過1萬1千個公職，由逾30萬名選務人員在18,244個投票所執行。
+C1 P2 S2: At the top of the ticket were the mayors of six special municipalities and the heads of 16 other cities and counties.
+    zh: 選票上最重要的是六個直轄市市長，以及其他16個縣市的首長。
+C1 P3 S1: Attention centred on Taipei, where the Kuomintang's (KMT) Chiang Wan-an was defending his seat against DPP legislator Puma Shen, and on Kaohsiung, a DPP heartland in which Lai Jui-lung and the KMT's Ko Chih-en were vying to succeed the term-limited Chen Chi-mai.
+    zh: 焦點集中在台北，國民黨的蔣萬安力守市長寶座，對手是民進黨立委沈伯洋；另一焦點是民進黨大本營高雄，賴瑞隆與國民黨的柯志恩角逐接替任期屆滿的陳其邁。
+C1 P3 S2: In 2022, the KMT captured 14 of the 22 top posts.
+    zh: 2022年，國民黨拿下22席首長中的14席。
+C1 P4 S1: Voters were simultaneously asked whether Taiwan should abandon its "nuclear-free homeland" policy, the fourth nuclear referendum since 2018.
+    zh: 選民同時被問及台灣是否應放棄「非核家園」政策，這是2018年以來第四次核能公投。
+C1 P4 S2: Passage requires a simple majority of valid votes as well as a turnout threshold of a quarter of the electorate.
+    zh: 通過門檻除了有效票簡單多數，還須達到選民總數四分之一的投票門檻。
+C1 P5 S1: Mayoral results were expected by Saturday evening, although the referendum tally could take longer.
+    zh: 市長選舉結果預計星期六晚上出爐，但公投計票可能需要更長時間。
+
+## level IELTS
+IELTS P1 S1: Taiwanese voters went to the polls on Saturday in the "9-in-1" local elections, a nationwide contest that is widely interpreted as a referendum on the governing Democratic Progressive Party (DPP) midway through President Lai Ching-te's term.
+    zh: 台灣選民星期六前往投票，參加「九合一」地方選舉，這場全國性選戰普遍被解讀為對賴清德總統任期過半之際執政民進黨的信任投票。
+IELTS P1 S2: Some 19.58 million people were eligible to participate, including approximately 600,000 first-time voters.
+    zh: 約1,958萬人具投票資格，其中包括約60萬名首投族。
+IELTS P2 S1: The logistical undertaking was considerable.
+    zh: 這次的後勤工作相當龐大。
+IELTS P2 S2: More than 11,000 offices, ranging from municipal mayors to borough chiefs, were contested across 8,906 districts, with over 300,000 officials deployed to 18,244 polling stations between 8 am and 4 pm.
+    zh: 從直轄市市長到里長，共有超過1萬1千個公職在8,906個選區競逐，逾30萬名選務人員於上午8點至下午4點間派駐18,244個投票所。
+IELTS P3 S1: The most consequential races were arguably those in Taipei and Kaohsiung.
+    zh: 影響最深遠的選戰可說是台北與高雄。
+IELTS P3 S2: In the capital, Kuomintang (KMT) incumbent Chiang Wan-an sought a second term against DPP legislator Puma Shen, while in Kaohsiung, traditionally a DPP stronghold, Lai Jui-lung and the KMT's Ko Chih-en competed to replace the outgoing Chen Chi-mai.
+    zh: 在首都，國民黨籍現任市長蔣萬安尋求連任，對手是民進黨立委沈伯洋；而在傳統上是民進黨大本營的高雄，賴瑞隆與國民黨的柯志恩競逐接替即將卸任的陳其邁。
+IELTS P3 S3: The KMT, which secured 14 of the 22 mayoral and magistrate posts in 2022, hoped to consolidate its position.
+    zh: 國民黨在2022年拿下22席縣市長中的14席，希望鞏固其地位。
+IELTS P4 S1: In parallel, the electorate was asked to decide whether Taiwan should abandon its "nuclear-free homeland" policy.
+    zh: 同時，選民也被要求決定台灣是否應放棄「非核家園」政策。
+IELTS P4 S2: For the proposal to be adopted, affirmative votes must not only exceed negative ones but also represent at least a quarter of all eligible voters, a threshold that previous referendums have struggled to meet.
+    zh: 提案要通過，同意票不僅須多於不同意票，還必須至少達到全體有投票權人的四分之一，而過去的公投往往難以跨過這個門檻。
+IELTS P5 S1: Authorities warned that photographing ballots was prohibited and punishable by substantial fines.
+    zh: 當局警告，拍攝選票是被禁止的，可處以高額罰款。
+IELTS P5 S2: Mayoral outcomes were anticipated on Saturday evening, with the referendum result possibly following later.
+    zh: 市長選舉結果預計在星期六晚上出爐，公投結果可能稍後才公布。
+
+
+# 2026-11-28-tw-2  (region TW)
+date: 2026-11-28 | rank: 2 | topic: 經濟 | main level: B2
+file: articles/2026-11-28-tw-2.json
+
+## title
+Taiwan Raises 2026 Growth Forecast to 13.28%, Fastest in 48 Years
+
+## summaries
+- summaryEn: Taiwan's statistics agency now expects the economy to grow 13.28% in 2026, driven by booming AI-related exports.
+- summaryZh: 主計總處上修今年經濟成長至13.28%
+- summaryJa: 台湾、今年の成長率予測を13.28％に上方修正、48年ぶりの高さ。
+- summaryKo: 대만, 올해 성장률 전망 13.28%로 상향…48년 만에 최고.
+- summaryEs: Taiwán eleva su previsión de crecimiento para 2026 al 13,28 %, la más alta en 48 años.
+- summaryHi: ताइवान ने 2026 का विकास अनुमान बढ़ाकर 13.28% किया, जो 48 साल में सबसे तेज़ है।
+
+## sources
+- Taipei Times: https://www.taipeitimes.com/News/front/archives/2026/11/28/2003868528
+
+## top-level paragraphs: same text as level B2 (a fix in B2 also fixes them)
+
+## level A2
+A2 P1 S1: Taiwan's economy is growing very fast this year.
+    zh: 台灣今年經濟成長得非常快。
+A2 P1 S2: On Friday, the government's statistics office gave a new number.
+    zh: 星期五，政府的統計機關公布了新數字。
+A2 P1 S3: It thinks the economy will grow by 13.28% in 2026.
+    zh: 它認為2026年經濟將成長13.28%。
+A2 P2 S1: In August, the office said 11.05%.
+    zh: 8月時，該機關說是11.05%。
+A2 P2 S2: Now the number is higher.
+    zh: 現在數字更高了。
+A2 P2 S3: This is the fastest growth in 48 years.
+    zh: 這是48年來最快的成長。
+A2 P3 S1: Why?
+    zh: 為什麼？
+A2 P3 S2: Taiwan sells a lot of computer chips and AI products to other countries.
+    zh: 台灣賣很多電腦晶片和AI產品給其他國家。
+A2 P3 S3: Exports may grow by almost 24% this year.
+    zh: 今年出口可能成長將近24%。
+A2 P3 S4: Companies are also spending more money on new factories and machines.
+    zh: 企業也花更多錢在新工廠和機器上。
+A2 P4 S1: Prices are going up a little too.
+    zh: 物價也上漲了一點。
+A2 P4 S2: Oil, food and electronics cost more.
+    zh: 石油、食物和電子產品變貴了。
+A2 P4 S3: Prices may rise by about 2% this year.
+    zh: 今年物價可能上漲約2%。
+A2 P5 S1: Next year, the economy may grow by 6.51%.
+    zh: 明年經濟可能成長6.51%。
+A2 P5 S2: But there are some risks, like new US rules on chips.
+    zh: 但也有一些風險，例如美國對晶片的新規定。
+
+## level B1
+B1 P1 S1: Taiwan's statistics agency, the DGBAS, has raised its forecast for economic growth this year to 13.28%.
+    zh: 台灣的統計機關主計總處，把今年的經濟成長預測上調到13.28%。
+B1 P1 S2: If this happens, it will be the fastest growth since 1978, nearly 48 years ago.
+    zh: 如果實現，這將是自1978年、將近48年前以來最快的成長。
+B1 P1 S3: In August, the agency had expected growth of 11.05%.
+    zh: 8月時，該機關預估成長率為11.05%。
+B1 P2 S1: The main reason is the huge demand for artificial intelligence.
+    zh: 主要原因是對人工智慧的龐大需求。
+B1 P2 S2: Taiwan makes many of the chips and servers that AI needs.
+    zh: 台灣生產許多AI需要的晶片和伺服器。
+B1 P2 S3: The agency now expects exports of goods and services to rise by almost 24%, and goods exports alone to reach a record US$938.64 billion.
+    zh: 該機關現在預估商品與服務出口將成長將近24%，光是商品出口就將達到創紀錄的9,386.4億美元。
+B1 P3 S1: The economy grew by 14.39% in the third quarter, and growth in the last three months of the year is expected to be 10.42%.
+    zh: 第三季經濟成長14.39%，今年最後三個月的成長預計為10.42%。
+B1 P3 S2: Private investment should increase by 14.9%, but spending by families is growing more slowly, at about 4.74%.
+    zh: 民間投資預計增加14.9%，但家庭支出成長較慢，約4.74%。
+B1 P4 S1: Prices are also rising.
+    zh: 物價也在上漲。
+B1 P4 S2: Consumer prices may go up 2.07% this year, slightly above the central bank's 2% target, because of oil, food and electronics.
+    zh: 受石油、食物和電子產品影響，今年消費者物價可能上漲2.07%，略高於央行2%的目標。
+B1 P5 S1: An official said there were still risks, such as new US limits on chip sales to China.
+    zh: 一名官員表示仍有風險，例如美國對晶片銷往中國的新限制。
+B1 P5 S2: Growth next year is forecast at 6.51%.
+    zh: 明年成長率預測為6.51%。
+
+## level B2
+B2 P1 S1: Taiwan's economy is on course for its fastest expansion in nearly half a century, after the Directorate-General of Budget, Accounting and Statistics (DGBAS) raised its 2026 growth forecast to 13.28% on Friday.
+    zh: 主計總處星期五將2026年經濟成長預測上修至13.28%，台灣經濟可望迎來近半世紀以來最快的擴張。
+B2 P1 S2: The figure is 2.23 percentage points higher than its August estimate and would be the strongest since 1978.
+    zh: 這個數字比8月的預估高出2.23個百分點，將是1978年以來最強勁的成長。
+B2 P2 S1: The upgrade reflects the global rush for artificial intelligence hardware, much of which is made in Taiwan.
+    zh: 這次上修反映全球搶購人工智慧硬體的熱潮，而這些硬體多在台灣製造。
+B2 P2 S2: Exports of goods and services are now expected to jump 23.96%, with merchandise exports reaching a record US$938.64 billion and potentially topping US$1.11 trillion next year.
+    zh: 商品與服務出口現在預計大增23.96%，商品出口將達創紀錄的9,386.4億美元，明年可能突破1.11兆美元。
+B2 P3 S1: Gross domestic product grew 14.39% in the third quarter, and the agency sharply revised its fourth-quarter forecast up to 10.42%.
+    zh: 第三季國內生產毛額成長14.39%，主計總處也將第四季預測大幅上修至10.42%。
+B2 P3 S2: Private investment is projected to rise 14.9%, although household spending was trimmed slightly to 4.74% amid stock market swings.
+    zh: 民間投資預計成長14.9%，但受股市波動影響，家庭支出預測小幅下修至4.74%。
+B2 P4 S1: Inflation is also edging up.
+    zh: 通膨也在緩步上升。
+B2 P4 S2: Consumer prices are forecast to rise 2.07% this year, just above the central bank's 2% threshold, driven by crude oil, consumer electronics and food.
+    zh: 受原油、消費性電子產品和食物推升，今年消費者物價預計上漲2.07%，略高於央行2%的門檻。
+B2 P5 S1: Tsai Yu-tai, a senior DGBAS statistician, warned of downside risks, including tighter US export controls on chips to China and possible stricter AI regulation.
+    zh: 主計總處資深統計官員蔡鈺泰警告下行風險，包括美國收緊對中國的晶片出口管制，以及可能更嚴格的AI監管。
+B2 P5 S2: Growth is expected to slow to 6.51% in 2027.
+    zh: 預計2027年成長將放緩至6.51%。
+
+## level C1
+C1 P1 S1: Taiwan is poised to record its most rapid economic expansion in almost five decades after the Directorate-General of Budget, Accounting and Statistics (DGBAS) lifted its 2026 growth projection to 13.28%, a hefty 2.23 percentage points above its August forecast.
+    zh: 主計總處將2026年成長預測上調至13.28%，比8月預估大幅高出2.23個百分點，台灣即將創下近五十年來最快的經濟擴張。
+C1 P1 S2: Only 1978, when growth reached 13.56%, would rank higher.
+    zh: 只有成長率達13.56%的1978年排名更高。
+C1 P2 S1: The revision underscores how thoroughly the AI boom has reshaped the island's economy.
+    zh: 這次上修凸顯AI熱潮已徹底重塑台灣經濟。
+C1 P2 S2: Outbound shipments of goods and services are now expected to surge 23.96%, while merchandise exports are set to hit an unprecedented US$938.64 billion before potentially surpassing US$1.11 trillion in 2027.
+    zh: 商品與服務出口現在預計激增23.96%，商品出口將達前所未有的9,386.4億美元，2027年更可能超過1.11兆美元。
+C1 P3 S1: Third-quarter output expanded 14.39%, and the agency raised its fourth-quarter estimate by more than five points to 10.42%.
+    zh: 第三季產出擴張14.39%，主計總處將第四季預估上調超過五個百分點至10.42%。
+C1 P3 S2: Private investment is forecast to climb 14.9%, though private consumption was nudged down to 4.74%, reflecting volatility in equity markets.
+    zh: 民間投資預計攀升14.9%，不過民間消費微幅下修至4.74%，反映股市的波動。
+C1 P4 S1: Price pressures are building as well, with consumer inflation projected at 2.07%, marginally above the central bank's 2% comfort level, owing to costlier crude oil, electronics and food.
+    zh: 物價壓力也在累積，由於原油、電子產品和食物變貴，消費者物價預計上漲2.07%，略高於央行2%的可接受範圍。
+C1 P5 S1: DGBAS official Tsai Yu-tai cautioned that further US curbs on chip exports to China, or tougher AI rules, could weigh on demand, adding that the agency had taken a somewhat conservative view of exports.
+    zh: 主計總處官員蔡鈺泰提醒，美國若進一步限制晶片出口至中國，或AI規範趨嚴，都可能壓抑需求；他並表示，主計總處對出口的看法略為保守。
+C1 P5 S2: Growth is forecast to moderate to 6.51% next year.
+    zh: 明年成長預計趨緩至6.51%。
+
+## level IELTS
+IELTS P1 S1: Taiwan's economy is set to achieve its most remarkable growth rate in almost half a century.
+    zh: 台灣經濟今年將創下近半世紀以來最亮眼的成長率。
+IELTS P1 S2: On Friday, the Directorate-General of Budget, Accounting and Statistics (DGBAS) revised its 2026 projection upward to 13.28%, an increase of 2.23 percentage points on its August estimate and second only to the 13.56% recorded in 1978.
+    zh: 主計總處星期五將2026年預測上修至13.28%，比8月預估增加2.23個百分點，僅次於1978年的13.56%。
+IELTS P2 S1: This exceptional performance is attributable primarily to the worldwide demand for artificial intelligence infrastructure, a substantial proportion of which is manufactured in Taiwan.
+    zh: 如此出色的表現主要歸因於全球對人工智慧基礎設施的需求，而其中相當大的比例在台灣製造。
+IELTS P2 S2: Exports of goods and services are anticipated to expand by 23.96%, with merchandise exports projected to reach an unprecedented US$938.64 billion this year.
+    zh: 商品與服務出口預計擴張23.96%，今年商品出口預計將達前所未有的9,386.4億美元。
+IELTS P3 S1: Domestic indicators present a more nuanced picture.
+    zh: 國內指標呈現的面貌則較為複雜。
+IELTS P3 S2: While private investment is forecast to rise by 14.9%, household consumption was revised marginally downward to 4.74%, which officials linked to fluctuations in the stock market.
+    zh: 民間投資預計成長14.9%，但家庭消費小幅下修至4.74%，官員認為這與股市波動有關。
+IELTS P3 S3: Meanwhile, consumer inflation is expected to reach 2.07%, slightly exceeding the central bank's 2% threshold as a consequence of higher prices for crude oil, electronics and food.
+    zh: 同時，由於原油、電子產品和食物價格上漲，消費者物價預計上漲2.07%，略高於央行2%的門檻。
+IELTS P4 S1: Nevertheless, the outlook is not without uncertainty.
+    zh: 儘管如此，前景並非沒有不確定性。
+IELTS P4 S2: Tsai Yu-tai, a senior DGBAS statistician, identified potential headwinds, notably additional US restrictions on semiconductor exports to China and the prospect of more stringent AI regulation.
+    zh: 主計總處資深統計官員蔡鈺泰指出潛在的不利因素，特別是美國對中國半導體出口的進一步限制，以及AI監管可能更加嚴格。
+IELTS P5 S1: Consequently, the agency expects growth to moderate to 6.51% in 2027, a respectable figure by international standards.
+    zh: 因此，主計總處預計2027年成長將放緩至6.51%，以國際標準而言仍是可觀的數字。

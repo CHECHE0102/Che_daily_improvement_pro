@@ -1,4 +1,4 @@
-# 2026-11-28 NEW glossary entries, part 4 of 11
+# 2026-11-28 NEW glossary entries, part 4 of 12
 Only entries that are new today (older identical entries were checked on earlier days).
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".

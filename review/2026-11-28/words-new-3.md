@@ -1,4 +1,4 @@
-# 2026-11-28 NEW glossary entries, part 3 of 11
+# 2026-11-28 NEW glossary entries, part 3 of 12
 Only entries that are new today (older identical entries were checked on earlier days).
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
@@ -53,7 +53,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:the | the | art. | A1 | used before a known noun | 這；那（定冠詞） | その | 그 | el; la | यह (निश्चयवाचक) |  |  |  | 
 2026-11-28:there | there | adv. | A1 | in that place; used to say something exists | 那裡；有 | そこ；〜がある | 거기; 있다 | allí; hay | वहाँ |  |  |  | 
 2026-11-28:this | this | det. | A1 | the thing here or now | 這 | この | 이 | esto; este | यह |  |  |  | 
-2026-11-28:though | though | adv. | B1 | however | 不過 | でも | 하지만 | sin embargo | हालाँकि | It was late. We stayed, though. | however, nevertheless, but |  | though, the, even though
+2026-11-28:though 2026-11-28-tw-2:though | though | adv. | B1 | however | 不過 | でも | 하지만 | sin embargo | हालाँकि | It was late. We stayed, though. | however, nevertheless, but |  | though, the, even though
 2026-11-28:three-year-old | three-year-old | adj. | A2 | aged three years | 三歲的 | 3歳の | 세 살배기 | de tres años | तीन साल का | Her three-year-old daughter loves books. | three-aged, toddler |  | three-year-old son, three-year-old child
 2026-11-28:time | time | n. | A1 | minutes, hours or days; an occasion | 時間；次 | 時間；回 | 시간; 번 | tiempo; vez | समय | It was the first time I flew. | period, moment, occasion |  | for the first time, spend time
 2026-11-28:to | to | prep. | A1 | towards; used before a verb | 到；去 | 〜へ | ~로 | a; para | को; तक |  |  |  | 
@@ -93,8 +93,8 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28-2:about | about | adv. | A1 | close to; around (a number) | 大約 | 約 | 약 | aproximadamente | लगभग | About fifty people came to the meeting. | around, roughly, approximately | exactly | about half, about 40 per cent
 2026-11-28-2:accommodate | accommodate | v. | C1 | make arrangements for someone's needs | 照顧；配合（需求） | 対応する；配慮する | 수용하다; 배려하다 | atender; acomodar | समायोजित करना | The hotel can accommodate guests with special needs. | cater for, meet, provide for, support | ignore, refuse | accommodate needs, accommodate requests
 2026-11-28-2:account | account | v. | B2 | form a part of (account for) | account for：占（比例） | 〜を占める (account for) | 차지하다 (account for) | representar (account for) | हिस्सा होना | Young people account for half of all users. | make up, represent, constitute |  | account for most, account for a share
-2026-11-28-2:after | after | prep. | A1 | following in time | 在…之後 | 〜の後で | ~후에 | después de | के बाद | We had dinner after the film. | following, subsequent to | before | after a survey, soon after
-2026-11-28-2:all | all | det. | A1 | every one of | 所有的 | すべての | 모든 | todos | सभी | All students must wear a uniform. | every, each | none | all schools, all faiths
+2026-11-28-2:after 2026-11-28-tw-2:after | after | prep. | A1 | following in time | 在…之後 | 〜の後で | ~후에 | después de | के बाद | We had dinner after the film. | following, subsequent to | before | after a survey, soon after
+2026-11-28-2:all 2026-11-28-tw-1:all | all | det. | A1 | every one of | 所有的 | すべての | 모든 | todos | सभी | All students must wear a uniform. | every, each | none | all schools, all faiths
 2026-11-28-2:alone | alone | adj. | A2 | without other people; lonely | 孤單的 | ひとりぼっちの | 외로운 | solo | अकेला | She felt alone in the new city. | lonely, isolated, by yourself | together, accompanied | feel alone, leave alone
 2026-11-28-2:alter | alter | v. | B2 | change something | 改變 | 変える | 바꾸다 | modificar | बदलना | They altered the plan after the meeting. | change, modify, adjust, amend | keep, preserve | alter course, alter the rules
 2026-11-28-2:and | and | conj. | A1 | also; plus | 和；並且 | そして；と | 그리고; ~와 | y | और |  |  |  | 

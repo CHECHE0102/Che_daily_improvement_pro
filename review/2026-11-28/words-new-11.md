@@ -1,4 +1,4 @@
-# 2026-11-28 NEW glossary entries, part 11 of 11
+# 2026-11-28 NEW glossary entries, part 11 of 12
 Only entries that are new today (older identical entries were checked on earlier days).
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
@@ -112,3 +112,4 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28-4:written | write | v. | A1 | past participle of "write" | 寫（過去分詞） | 書いた | 썼다 | escrito | लिखा | The letter was written by hand. | composed, drafted, produced | read | written by, well written
 2026-11-28-4:wrote | write | v. | A1 | past form of "write" | 寫（過去式） | 書いた | 썼다 | escribió | लिखा | She wrote a short note. | composed, drafted, produced | read | wrote a letter, wrote it
 2026-11-28-4:year | year | n. | A1 | twelve months | 年 | 年 | 해 | año | वर्ष | Next year will be busy. | twelve months, annum, period |  | next year, this year
+2026-11-28-tw-1:affirmative | affirmative | adj. | C1 | showing agreement; saying yes | 贊成的；肯定的 | 賛成の；肯定の | 찬성의; 긍정의 | afirmativo | सकारात्मक; पक्ष में | Most members gave an affirmative answer. | positive, approving, favourable | negative | affirmative vote, affirmative answer
