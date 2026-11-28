@@ -880,7 +880,7 @@
     "embarking"
    ],
    "ant": [
-    "landing"
+    "disembarking"
    ],
    "ex": "Boarding begins thirty minutes before take-off.",
    "col": [
@@ -1273,9 +1273,9 @@
     "covered the area"
    ],
    "en": "included",
-   "es": "abarcara; cubriera",
+   "es": "abarcó; cubrió",
    "ex": "The warning covered five counties.",
-   "hi": "शामिल करता",
+   "hi": "शामिल किया",
    "ja": "対象とした",
    "ko": "포함했다",
    "lvl": "B1",
@@ -1832,7 +1832,7 @@
    "base": "extremely",
    "col": [
     "extremely heavy",
-    "extremely torrential"
+    "extremely cold"
    ],
    "en": "very, very much",
    "es": "extremadamente",
@@ -1996,7 +1996,6 @@
    "lvl": "A1",
    "pos": "v.",
    "syn": [
-    "flew",
     "travelled",
     "went"
    ],
@@ -3972,25 +3971,23 @@
    "zh": "舊的"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -5042,7 +5039,7 @@
    "ex": "We bought souvenirs at the airport.",
    "col": [
     "buy souvenirs",
-    "souvenirs shop"
+    "souvenir shop"
    ]
   },
   "speaking": {

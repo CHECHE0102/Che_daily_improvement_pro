@@ -255,28 +255,28 @@
    "lvl": "A2"
   },
   "admission": {
-   "zh": "加入；接納",
+   "zh": "入場",
    "hi": "प्रवेश",
-   "es": "ingreso; admisión",
-   "ja": "加盟；加入",
-   "ko": "가입; 가입 허가",
-   "en": "being allowed to join a group",
+   "es": "entrada",
+   "ja": "入場",
+   "ko": "입장",
+   "en": "permission to enter a place; entry",
    "pos": "n.",
    "base": "admission",
    "lvl": "C1",
    "syn": [
     "entry",
-    "membership",
-    "acceptance"
+    "entrance",
+    "access"
    ],
    "ant": [
     "exclusion",
     "rejection"
    ],
-   "ex": "Her admission to the club took a year.",
+   "ex": "Admission to the exhibition is free.",
    "col": [
-    "admission to the EU",
-    "gain admission"
+    "free admission",
+    "admission fee"
    ]
   },
   "admitted": {
@@ -1017,25 +1017,25 @@
    ]
   },
   "blanket": {
-   "zh": "全面覆蓋",
-   "hi": "पूरी तरह ढकना",
-   "es": "cubrir",
-   "ja": "覆う",
-   "ko": "뒤덮다",
-   "en": "cover a whole area",
-   "pos": "v.",
+   "zh": "毯子",
+   "hi": "कंबल",
+   "es": "manta",
+   "ja": "毛布",
+   "ko": "담요",
+   "en": "a thick warm cover, e.g. for a bed",
+   "pos": "n.",
    "base": "blanket",
-   "lvl": "C1",
+   "lvl": "A2",
    "syn": [
     "cover",
-    "envelop",
-    "span"
+    "throw",
+    "quilt"
    ],
    "ant": [],
-   "ex": "Snow blanketed the hills overnight.",
+   "ex": "She wrapped herself in a warm blanket.",
    "col": [
-    "blanket the country",
-    "blanket an area"
+    "warm blanket",
+    "wrapped in a blanket"
    ]
   },
   "both": {
@@ -1413,27 +1413,25 @@
    ]
   },
   "collection": {
-   "zh": "收取；徵收",
-   "hi": "वसूली",
-   "es": "recaudación",
-   "ja": "徴収",
-   "ko": "징수",
-   "en": "the act of taking money people owe",
+   "zh": "系列；全套收藏品",
+   "hi": "संग्रह",
+   "es": "colección",
+   "ja": "コレクション；シリーズ",
+   "ko": "컬렉션",
+   "en": "a group of similar things sold or kept together",
    "pos": "n.",
    "base": "collection",
    "lvl": "B2",
    "syn": [
-    "gathering",
-    "taking",
-    "recovery"
+    "set",
+    "series",
+    "range"
    ],
-   "ant": [
-    "payment"
-   ],
-   "ex": "Tax collection improved this year.",
+   "ant": [],
+   "ex": "She bought the full stamp collection.",
    "col": [
-    "collection of the levy",
-    "tax collection"
+    "full collection",
+    "stamp collection"
    ]
   },
   "collectors": {
@@ -1590,28 +1588,28 @@
    ]
   },
   "complete": {
-   "zh": "完成的；完工的",
+   "zh": "完整的；全套的",
    "hi": "पूरा",
-   "es": "terminado",
-   "ja": "完了した",
-   "ko": "완료된",
-   "en": "finished",
+   "es": "completo",
+   "ja": "全部そろった；完全な",
+   "ko": "완전한; 전부 갖춘",
+   "en": "having all its parts; whole",
    "pos": "adj.",
    "base": "complete",
    "lvl": "B1",
    "syn": [
-    "finished",
-    "done",
-    "over"
+    "full",
+    "whole",
+    "entire"
    ],
    "ant": [
     "incomplete",
-    "unfinished"
+    "partial"
    ],
-   "ex": "The new library is now complete.",
+   "ex": "She bought the complete set of stamps.",
    "col": [
-    "complete the work",
-    "construction is complete"
+    "complete set",
+    "complete collection"
    ]
   },
   "conceded": {
@@ -1958,27 +1956,27 @@
    }
   },
   "devoted": {
-   "zh": "致力於；專用於",
+   "zh": "忠實的；熱愛的",
    "hi": "समर्पित किया",
-   "es": "dedicó",
-   "ja": "捧げた；充てた",
-   "ko": "바쳤다",
-   "en": "gave time or effort to one purpose",
-   "pos": "v.",
+   "es": "devoto; fiel",
+   "ja": "熱心な；献身的な",
+   "ko": "헌신적인; 열성적인",
+   "en": "very loving and loyal",
+   "pos": "adj.",
    "base": "devote",
    "lvl": "B2",
    "syn": [
     "dedicated",
     "committed",
-    "gave"
+    "loyal"
    ],
    "ant": [
-    "neglected"
+    "indifferent"
    ],
-   "ex": "He devoted his life to teaching.",
+   "ex": "Devoted fans waited all night.",
    "col": [
-    "devoted time to",
-    "devote attention to"
+    "devoted fans",
+    "devoted to"
    ]
   },
   "directly": {
@@ -2600,27 +2598,27 @@
    ]
   },
   "full": {
-   "zh": "滿的",
-   "hi": "भरा हुआ",
-   "es": "lleno",
-   "ja": "満ちた",
-   "ko": "가득 찬",
-   "en": "holding as much as possible",
+   "zh": "完整的；全套的",
+   "hi": "पूरा",
+   "es": "completo",
+   "ja": "全部の；完全な",
+   "ko": "전체의; 완전한",
+   "en": "complete; with nothing missing",
    "pos": "adj.",
    "base": "full",
    "lvl": "A1",
    "syn": [
-    "filled",
-    "overflowing",
-    "brimming"
+    "complete",
+    "whole",
+    "entire"
    ],
    "ant": [
-    "empty"
+    "partial"
    ],
-   "ex": "The river is very full after the rain.",
+   "ex": "They bought the full set of stamps.",
    "col": [
-    "full capacity",
-    "very full"
+    "full set",
+    "full collection"
    ]
   },
   "further": {
@@ -2784,11 +2782,11 @@
    ]
   },
   "handed": {
-   "zh": "移交（handed over）",
+   "zh": "分發（handed out）；交給",
    "hi": "सौंपा गया",
    "es": "entregado",
-   "ja": "引き渡された",
-   "ko": "넘겨진",
+   "ja": "配った（hand out）",
+   "ko": "나눠 주었다(hand out)",
    "en": "given to someone else to keep",
    "pos": "v.",
    "base": "hand",
@@ -2801,30 +2799,27 @@
    "ant": [
     "kept"
    ],
-   "ex": "The keys were handed over to the new owner.",
+   "ex": "Staff handed out tickets at the door.",
    "col": [
     "handed over",
-    "handed in"
+    "handed out"
    ]
   },
   "hands": {
-   "zh": "手（hands are tied：無能為力）",
-   "hi": "हाथ",
-   "es": "manos",
-   "ja": "手",
-   "ko": "손",
-   "en": "ability to act (hands are tied)",
+   "zh": "手（get one's hands on：設法得到）",
+   "hi": "हाथ (get one's hands on: हासिल करना)",
+   "es": "manos (get one's hands on: conseguir)",
+   "ja": "手（get one's hands on：手に入れる）",
+   "ko": "손(get one's hands on: 손에 넣다)",
+   "en": "used in \"get your hands on\" (manage to get)",
    "pos": "n.",
    "base": "hand",
    "lvl": "A1",
-   "syn": [
-    "power",
-    "control"
-   ],
+   "syn": [],
    "ant": [],
-   "ex": "My hands are tied by the rules.",
+   "ex": "Fans waited all night to get their hands on the stamps.",
    "col": [
-    "hands are tied",
+    "get your hands on",
     "in safe hands"
    ]
   },
@@ -2862,27 +2857,25 @@
    ]
   },
   "headed": {
-   "zh": "率領；帶領",
-   "hi": "नेतृत्व किया",
-   "es": "encabezó",
-   "ja": "率いた",
-   "ko": "이끌었다",
-   "en": "led a group",
+   "zh": "前往",
+   "hi": "की ओर गया",
+   "es": "se dirigió",
+   "ja": "向かった",
+   "ko": "향했다",
+   "en": "went towards a place",
    "pos": "v.",
    "base": "head",
    "lvl": "B2",
    "syn": [
-    "led",
-    "ran",
-    "directed"
+    "went",
+    "made for",
+    "travelled"
    ],
-   "ant": [
-    "followed"
-   ],
-   "ex": "She headed a team of ten engineers.",
+   "ant": [],
+   "ex": "She headed to the station after work.",
    "col": [
-    "headed a delegation",
-    "headed by"
+    "headed to",
+    "headed home"
    ]
   },
   "her": {
@@ -3253,27 +3246,21 @@
    ]
   },
   "leaving": {
-   "zh": "使…交由（leave to：交給）",
-   "hi": "छोड़ना (को सौंपना)",
+   "zh": "剩下；留下",
+   "hi": "बचा छोड़ते हुए",
    "es": "dejando",
-   "ja": "〜に委ねて",
-   "ko": "~에 맡기며",
-   "en": "letting someone else decide (leave something to)",
+   "ja": "残して",
+   "ko": "남기며",
+   "en": "causing something to remain",
    "pos": "v.",
    "base": "leave",
    "lvl": "A2",
-   "syn": [
-    "handing",
-    "giving",
-    "entrusting"
-   ],
-   "ant": [
-    "keeping"
-   ],
-   "ex": "They left the decision to the court.",
+   "syn": [],
+   "ant": [],
+   "ex": "Most tickets were sold online, leaving few for the shop.",
    "col": [
-    "leave to",
-    "leave it up to"
+    "leaving just",
+    "leaving little"
    ]
   },
   "left": {
@@ -3287,13 +3274,10 @@
    "base": "leave",
    "lvl": "A2",
    "syn": [
-    "holiday",
-    "time off"
+    "remaining"
    ],
-   "ant": [
-    "work"
-   ],
-   "ex": "She is on annual leave this week.",
+   "ant": [],
+   "ex": "Only a few tickets were left.",
    "col": [
     "left the station",
     "train left"
@@ -3436,28 +3420,27 @@
    ]
   },
   "little": {
-   "zh": "a little：稍微；一點",
-   "hi": "थोड़ा",
-   "es": "un poco",
-   "ja": "少し",
-   "ko": "조금",
-   "en": "slightly; by a small amount",
-   "pos": "adv.",
+   "zh": "很少；不多",
+   "hi": "बहुत कम",
+   "es": "poco",
+   "ja": "わずか（しか〜ない）",
+   "ko": "거의 없음; 얼마 안 됨",
+   "en": "not much",
+   "pos": "pron.",
    "base": "little",
    "lvl": "A1",
    "syn": [
-    "slightly",
-    "a bit",
-    "somewhat"
+    "not much",
+    "hardly any"
    ],
    "ant": [
     "a lot",
-    "greatly"
+    "much"
    ],
-   "ex": "She feels a little tired today.",
+   "ex": "There was little left for visitors.",
    "col": [
-    "a little more",
-    "a little better"
+    "very little",
+    "relatively little"
    ]
   },
   "logistics": {
@@ -3542,12 +3525,12 @@
    ]
   },
   "m": {
-   "zh": "M（M9高速公路的M）",
-   "hi": "M",
-   "es": "M",
-   "ja": "M（高速道路）",
-   "ko": "M",
-   "en": "M in the motorway name M9",
+   "zh": "a.m. 的 m（上午）",
+   "hi": "(a.m.) सुबह",
+   "es": "(a.m.) de la mañana",
+   "ja": "（a.m.）午前",
+   "ko": "(a.m.) 오전",
+   "en": "used in \"a.m.\" (in the morning)",
    "pos": "n.",
    "base": "M",
    "lvl": "PN"
@@ -3885,7 +3868,7 @@
    "lvl": "A1"
   },
   "office": {
-   "zh": "辦公室；（政府）機關（Office of Public Works：公共工程局）",
+   "zh": "辦公室；機關（post office：郵局）",
    "hi": "कार्यालय",
    "es": "oficina; organismo",
    "ja": "事務所；官庁",
@@ -3938,17 +3921,12 @@
    "pos": "prep.",
    "base": "on",
    "lvl": "A1",
-   "syn": [
-    "ahead",
-    "forward"
-   ],
-   "ant": [
-    "off"
-   ],
-   "ex": "Voting will go on for nine days.",
+   "syn": [],
+   "ant": [],
+   "ex": "He accepted the award on behalf of the team.",
    "col": [
-    "go on",
-    "carry on"
+    "on behalf of",
+    "on the sidelines of"
    ]
   },
   "on-site": {
@@ -3957,7 +3935,7 @@
    "es": "en el lugar",
    "ja": "現場での",
    "ko": "현장의",
-   "en": "happening at the work place",
+   "en": "happening at the place itself (e.g. the venue)",
    "pos": "adj.",
    "base": "on-site",
    "lvl": "B2",
@@ -3988,7 +3966,7 @@
   "online": {
    "zh": "在線上；上網",
    "hi": "ऑनलाइन",
-   "es": "conectado",
+   "es": "en línea; por internet",
    "ja": "オンラインで",
    "ko": "온라인에",
    "en": "using the internet",
@@ -3997,7 +3975,6 @@
    "lvl": "A2",
    "syn": [
     "on the internet",
-    "connected",
     "on the web"
    ],
    "ant": [
@@ -4032,12 +4009,12 @@
    ]
   },
   "open": {
-   "zh": "公開的（open market：公開市場）",
-   "hi": "खुला (open market: खुला बाज़ार)",
-   "es": "abierto (mercado abierto)",
-   "ja": "公開の（open market：自由市場）",
-   "ko": "공개된 (open market: 공개 시장)",
-   "en": "available to anyone to buy",
+   "zh": "開放的；營業中",
+   "hi": "खुला",
+   "es": "abierto",
+   "ja": "開いている；開催中の",
+   "ko": "열려 있는",
+   "en": "letting people come in; not closed",
    "pos": "adj.",
    "base": "open",
    "lvl": "B1",
@@ -4050,34 +4027,34 @@
     "closed",
     "restricted"
    ],
-   "ex": "Fresh fish is sold on the open market each morning.",
+   "ex": "The exhibition is open until November 25.",
    "col": [
-    "open market",
-    "open competition"
+    "open to the public",
+    "open until"
    ]
   },
   "opening": {
-   "zh": "開設",
-   "hi": "खोलना",
-   "es": "abrir",
-   "ja": "開店すること",
-   "ko": "개점하는 것",
-   "en": "starting a new shop",
-   "pos": "v.",
+   "zh": "開始；開門",
+   "hi": "शुरुआत; खुलने का समय",
+   "es": "apertura",
+   "ja": "開始；開場",
+   "ko": "개장; 시작",
+   "en": "the time when something starts or opens",
+   "pos": "n.",
    "base": "open",
    "lvl": "A2",
    "syn": [
-    "launching",
-    "setting up",
-    "starting"
+    "start",
+    "beginning",
+    "launch"
    ],
    "ant": [
     "closing"
    ],
-   "ex": "The firm is opening a new branch.",
+   "ex": "Fans queued long before the opening at eleven.",
    "col": [
-    "opening stores",
-    "opening a branch"
+    "opening time",
+    "before the opening"
    ]
   },
   "orders": {
@@ -4660,8 +4637,8 @@
    ],
    "ex": "The purchase of the land was finally agreed.",
    "col": [
-    "purchase tickets",
-    "purchase online"
+    "make a purchase",
+    "purchase price"
    ]
   },
   "quantities": {
@@ -4853,22 +4830,22 @@
    ]
   },
   "related": {
-   "zh": "涉及；有關",
+   "zh": "相關的",
    "hi": "से संबंधित",
-   "es": "correspondían",
-   "ja": "関係した",
-   "ko": "관련되었다",
-   "en": "were connected with",
-   "pos": "v.",
+   "es": "relacionado",
+   "ja": "関連する",
+   "ko": "관련된",
+   "en": "connected with something",
+   "pos": "adj.",
    "base": "relate",
    "lvl": "B1",
    "syn": [
-    "referred",
-    "applied",
+    "linked",
+    "associated",
     "connected"
    ],
    "ant": [],
-   "ex": "Most complaints related to delays.",
+   "ex": "The shop sells stamps and related products.",
    "col": [
     "related to",
     "closely related"
@@ -4899,25 +4876,25 @@
    ]
   },
   "release": {
-   "zh": "新聞稿；公告",
-   "hi": "विज्ञप्ति",
-   "es": "comunicado",
-   "ja": "発表；リリース",
-   "ko": "발표문",
-   "en": "an official statement given to the public",
+   "zh": "發行；推出（的新品）",
+   "hi": "रिलीज़; नया उत्पाद",
+   "es": "lanzamiento",
+   "ja": "発売（品）",
+   "ko": "출시(품)",
+   "en": "a new product made available to the public",
    "pos": "n.",
    "base": "release",
    "lvl": "B2",
    "syn": [
-    "statement",
-    "announcement",
-    "notice"
+    "launch",
+    "issue",
+    "edition"
    ],
    "ant": [],
-   "ex": "The details were in a news release.",
+   "ex": "The company may plan a second Pokémon release.",
    "col": [
-    "press release",
-    "news release"
+    "new release",
+    "second release"
    ]
   },
   "released": {
@@ -5113,25 +5090,25 @@
    ]
   },
   "rule": {
-   "zh": "規則",
-   "hi": "नियम",
-   "es": "regla",
-   "ja": "規則",
-   "ko": "규칙",
-   "en": "an official instruction",
-   "pos": "n.",
+   "zh": "排除（rule out）",
+   "hi": "असंभव कर देना (rule out)",
+   "es": "descartar (rule out)",
+   "ja": "排除する（rule out）",
+   "ko": "배제하다(rule out)",
+   "en": "to make something impossible (rule out)",
+   "pos": "v.",
    "base": "rule",
    "lvl": "A2",
    "syn": [
-    "regulation",
-    "law",
-    "condition"
+    "exclude",
+    "prevent",
+    "prohibit"
    ],
    "ant": [],
-   "ex": "There is an important rule to remember.",
+   "ex": "The contract rules out restocking.",
    "col": [
-    "new rule",
-    "follow a rule"
+    "rule out",
+    "rule something out"
    ]
   },
   "runs": {
@@ -5322,7 +5299,7 @@
    ]
   },
   "service": {
-   "zh": "服務；（政府）機構（intelligence service：情報機構）",
+   "zh": "服務；機構（postal service：郵政服務）",
    "hi": "सेवा",
    "es": "servicio",
    "ja": "サービス；機関",
@@ -5339,8 +5316,8 @@
    "ant": [],
    "ex": "The new service lets you pay by phone.",
    "col": [
-    "intelligence service",
-    "password service"
+    "postal service",
+    "public service"
    ]
   },
   "set": {
@@ -5390,28 +5367,27 @@
    ]
   },
   "shared": {
-   "zh": "共用的；共同的",
-   "hi": "साझा",
-   "es": "compartido",
-   "ja": "共有の；共通の",
-   "ko": "공유된",
-   "en": "used by or common to two or more",
-   "pos": "adj.",
+   "zh": "分配；分給",
+   "hi": "बाँटा गया",
+   "es": "repartido",
+   "ja": "分けられた；配分された",
+   "ko": "나뉜; 배분된",
+   "en": "divided between people or places",
+   "pos": "v.",
    "base": "shared",
    "lvl": "B1",
    "syn": [
-    "common",
-    "joint",
-    "mutual"
+    "divided",
+    "split",
+    "distributed"
    ],
    "ant": [
-    "separate",
-    "individual"
+    "kept"
    ],
-   "ex": "They have a shared interest in music.",
+   "ex": "The money was shared among five schools.",
    "col": [
-    "shared code",
-    "shared values"
+    "shared among",
+    "shared between"
    ]
   },
   "she": {
@@ -5470,11 +5446,11 @@
    ]
   },
   "single": {
-   "zh": "單一的；一次的",
+   "zh": "單一的；單件的",
    "hi": "एकल",
    "es": "único",
-   "ja": "たった一回の",
-   "ko": "단 한 번의",
+   "ja": "単品の；一つの",
+   "ko": "단일의; 낱개의",
    "en": "only one",
    "pos": "adj.",
    "base": "single",
@@ -5563,17 +5539,15 @@
    "base": "some",
    "lvl": "A1",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
-   "ant": [
-    "exactly"
-   ],
-   "ex": "Some 300 people came.",
+   "ant": [],
+   "ex": "Some parents may still hesitate to use the plan.",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ]
   },
   "sorry": {
@@ -5859,27 +5833,24 @@
    ]
   },
   "stretched": {
-   "zh": "stretched to breaking point：不堪負荷",
-   "hi": "अत्यधिक दबाव में",
-   "es": "al límite",
-   "ja": "限界まで追い込まれた",
-   "ko": "한계까지 몰린",
-   "en": "having too much to do with too little",
-   "pos": "adj.",
+   "zh": "延伸",
+   "hi": "फैली",
+   "es": "se extendía",
+   "ja": "伸びた",
+   "ko": "뻗어 있었다",
+   "en": "reached over a long distance",
+   "pos": "v.",
    "base": "stretched",
-   "lvl": "C1",
+   "lvl": "B2",
    "syn": [
-    "overloaded",
-    "strained",
-    "overstretched"
+    "extended",
+    "ran",
+    "reached"
    ],
-   "ant": [
-    "relaxed",
-    "well-resourced"
-   ],
-   "ex": "Hospital staff are stretched to the limit this winter.",
+   "ant": [],
+   "ex": "The queue stretched down the street.",
    "col": [
-    "stretched to",
+    "stretched for",
     "stretched across"
    ]
   },
@@ -6125,24 +6096,24 @@
    "lvl": "A1"
   },
   "trade": {
-   "zh": "行業（trade union：工會）",
-   "hi": "व्यापार (ट्रेड यूनियन)",
-   "es": "oficio (sindicato)",
-   "ja": "職業（trade union：労働組合）",
-   "ko": "직종(trade union: 노동조합)",
-   "en": "a type of work (trade union = workers' union)",
+   "zh": "貿易（World Trade Center：世界貿易中心）",
+   "hi": "व्यापार (वर्ल्ड ट्रेड सेंटर)",
+   "es": "comercio",
+   "ja": "貿易（World Trade Center：世界貿易センター）",
+   "ko": "무역(World Trade Center: 세계무역센터)",
+   "en": "buying and selling goods (World Trade Center)",
    "pos": "n.",
    "base": "trade",
    "lvl": "B1",
    "syn": [
-    "occupation",
-    "industry"
+    "commerce",
+    "business"
    ],
    "ant": [],
-   "ex": "He learned his trade as a young carpenter.",
+   "ex": "Trade between the two countries is growing.",
    "col": [
-    "trade union",
-    "trade unions"
+    "trade center",
+    "world trade"
    ]
   },
   "travelled": {

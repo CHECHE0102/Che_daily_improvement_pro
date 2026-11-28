@@ -35,7 +35,7 @@
    ],
    "sentZh": [
     [
-     "科學家本週在兩隻蝴蝶身上裝上了非常小的無線電發射器。",
+     "台灣的科學家本週在兩隻蝴蝶身上裝上了非常小的無線電發射器。",
      "這是亞洲第一次有人這麼做。"
     ],
     [
@@ -196,26 +196,24 @@
    "zh": "一個"
   },
   "about": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "about",
    "col": [
-    "about half",
-    "about 100 people"
+    "talk about",
+    "worried about"
    ],
    "en": "on the subject of",
    "es": "sobre",
-   "ex": "The trip takes about two hours.",
+   "ex": "The report is about a data breach.",
    "hi": "के बारे में",
    "ja": "〜について",
    "ko": "~에 대해",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "around",
-    "roughly",
-    "approximately"
+    "regarding",
+    "concerning",
+    "on"
    ],
    "zh": "關於"
   },
@@ -3639,7 +3637,7 @@
    "base": "life",
    "col": [
     "everyday life",
-    "cost of life"
+    "way of life"
    ],
    "en": "daily living",
    "es": "la vida",
@@ -4038,20 +4036,20 @@
     "stay"
    ],
    "base": "migrate",
-   "en": "to move to another system",
+   "en": "(of animals) to travel to another place each season",
    "es": "migrar",
-   "ex": "Our files will migrate to the new server.",
-   "hi": "स्थानांतरित होना",
-   "ja": "移行する",
-   "ko": "이전되다",
+   "ex": "Many birds migrate south in winter.",
+   "hi": "प्रवास करना",
+   "ja": "渡る；移動する",
+   "ko": "이동하다",
    "lvl": "C1",
    "pos": "v.",
    "syn": [
     "move",
     "transfer",
-    "shift"
+    "journey"
    ],
-   "zh": "遷移；轉移",
+   "zh": "遷徙",
    "col": [
     "migrate south",
     "birds migrate"
@@ -4071,8 +4069,8 @@
    "es": "migratorio; que migra",
    "ex": "Migrating birds rest on the lake each autumn.",
    "hi": "प्रवास करती हुई",
-   "ja": "回遊する",
-   "ko": "회유하는; 이주하는",
+   "ja": "渡りをする",
+   "ko": "이동하는; 이주하는",
    "lvl": "B2",
    "pos": "adj.",
    "syn": [
@@ -4080,7 +4078,7 @@
     "moving",
     "roaming"
    ],
-   "zh": "洄游的；遷徙的"
+   "zh": "遷徙的"
   },
   "migration": {
    "ant": [],
@@ -4693,25 +4691,23 @@
    "zh": "較舊的"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -5217,7 +5213,7 @@
     "plan",
     "undertaking"
    ],
-   "zh": "項目；工程"
+   "zh": "計畫；工程"
   },
   "protection": {
    "ant": [
@@ -6484,8 +6480,7 @@
    "base": "state",
    "lvl": "A2",
    "syn": [
-    "regions",
-    "nations"
+    "regions"
    ],
    "ant": [],
    "ex": "He has visited all fifty states.",
@@ -6686,9 +6681,7 @@
    "ko": "태양",
    "lvl": "A1",
    "pos": "n.",
-   "syn": [
-    "solar"
-   ],
+   "syn": [],
    "zh": "太陽（sun power：太陽能）"
   },
   "sunlight": {
@@ -7055,7 +7048,7 @@
    "hi": "बाघ; टाइगर तितली",
    "es": "tigre; mariposa tigre",
    "ja": "トラ；アサギマダラ類",
-   "ko": "호랑이; 호랑나비류",
+   "ko": "호랑이; 왕나비류",
    "en": "a big striped wild cat; \"dark blue tiger\" is a butterfly",
    "pos": "n.",
    "base": "tiger",

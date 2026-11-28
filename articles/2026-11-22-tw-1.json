@@ -853,23 +853,22 @@
   "behind": {
    "ant": [
     "ahead",
-    "on time"
+    "included"
    ],
    "base": "behind",
-   "en": "late; slower than planned",
-   "es": "atrasado",
-   "ex": "The builders are two weeks behind.",
+   "en": "not included; in a worse position (leave behind)",
+   "es": "atrás (dejar atrás)",
+   "ex": "No country should be left behind.",
    "hi": "पीछे",
-   "ja": "遅れて",
+   "ja": "取り残されて",
    "ko": "뒤처진",
    "lvl": "B1",
    "pos": "adv.",
    "syn": [
-    "late",
-    "delayed",
-    "overdue"
+    "excluded",
+    "left out"
    ],
-   "zh": "behind schedule：落後於進度"
+   "zh": "落在後面（leave behind：拋下）"
   },
   "belize": {
    "zh": "貝里斯",
@@ -1085,7 +1084,7 @@
     "justification",
     "rationale"
    ],
-   "zh": "business case：商業論證（可行性論證）"
+   "zh": "主張；論點"
   },
   "castellanos": {
    "zh": "卡斯特亞諾斯（姓氏）",
@@ -1163,24 +1162,22 @@
   },
   "clean": {
    "ant": [
-    "dirty",
-    "mess up"
+    "polluting"
    ],
    "base": "clean",
-   "en": "remove dirt from",
-   "es": "limpiar",
-   "ex": "We clean the kitchen every evening.",
-   "hi": "साफ़ करना",
-   "ja": "掃除する",
-   "ko": "청소하다",
+   "en": "not causing pollution",
+   "es": "limpio",
+   "ex": "The country is investing in clean energy.",
+   "hi": "स्वच्छ",
+   "ja": "クリーンな",
+   "ko": "청정한",
    "lvl": "A1",
-   "pos": "v.",
+   "pos": "adj.",
    "syn": [
-    "tidy",
-    "wash",
-    "scrub"
+    "green",
+    "renewable"
    ],
-   "zh": "clean up：清理"
+   "zh": "潔淨的（clean energy：潔淨能源）"
   },
   "clear": {
    "ant": [
@@ -1303,12 +1300,12 @@
   "conference": {
    "ant": [],
    "base": "conference",
-   "en": "a formal group or meeting (bishops' conference)",
+   "en": "a large formal meeting (climate conference)",
    "es": "conferencia",
    "ex": "The teachers' conference starts on Monday.",
    "hi": "सम्मेलन",
-   "ja": "会議；司教協議会",
-   "ko": "회의; 주교회의",
+   "ja": "会議",
+   "ko": "회의",
    "lvl": "B1",
    "pos": "n.",
    "syn": [
@@ -1316,7 +1313,7 @@
     "assembly",
     "meeting"
    ],
-   "zh": "會議（bishops' conference：主教團）"
+   "zh": "會議；大會"
   },
   "conference's": {
    "zh": "會議的",
@@ -1358,30 +1355,29 @@
    "zh": "被認為"
   },
   "contending": {
-   "zh": "應付；對抗（contend with）",
-   "hi": "जूझना",
-   "es": "lidiando con",
-   "en": "dealing with difficulties",
+   "zh": "主張；聲稱",
+   "hi": "तर्क देते हुए",
+   "es": "sosteniendo",
+   "en": "arguing; claiming",
    "pos": "v.",
    "base": "contend",
    "lvl": "C1",
    "syn": [
     "argue",
     "claim",
-    "maintain",
-    "deal with"
+    "maintain"
    ],
    "ant": [],
-   "ex": "Farmers have to contend with bad weather.",
-   "ja": "（困難に）対処する（contend with）",
-   "ko": "(어려움에) 맞서다 (contend with)"
+   "ex": "He kept contending that the plan was unfair.",
+   "ja": "主張する",
+   "ko": "주장하는"
   },
   "contribute": {
    "ant": [
     "withhold"
    ],
    "base": "contribute",
-   "en": "to give money to help pay",
+   "en": "to give help, money or ideas to something",
    "es": "contribuir",
    "ex": "Every parent will contribute ten euros to the trip.",
    "hi": "योगदान देना",
@@ -1423,12 +1419,12 @@
   "contribution": {
    "ant": [],
    "base": "contribution",
-   "en": "money paid as a share of a cost",
-   "es": "aportación",
+   "en": "something given to help achieve a result",
+   "es": "contribución; aportación",
    "ex": "Each member makes a monthly contribution to the fund.",
-   "hi": "अंशदान, योगदान",
-   "ja": "負担金",
-   "ko": "분담금",
+   "hi": "योगदान",
+   "ja": "貢献",
+   "ko": "기여",
    "lvl": "B2",
    "pos": "n.",
    "syn": [
@@ -1436,7 +1432,7 @@
     "fee",
     "share"
    ],
-   "zh": "student contribution fee：學生分攤費"
+   "zh": "貢獻"
   },
   "contributors": {
    "ant": [
@@ -1694,12 +1690,12 @@
     "failed"
    ],
    "base": "do",
-   "en": "performed (did better)",
-   "es": "les fue (mejor)",
+   "en": "performed an action (did so: did this)",
+   "es": "hizo (did so: lo hizo)",
    "ex": "Our team did well in the final.",
    "hi": "किया",
-   "ja": "（よく）やった",
-   "ko": "(더 잘)했다",
+   "ja": "（did so：そうした）",
+   "ko": "(did so: 그렇게 했다)",
    "lvl": "A1",
    "pos": "v.",
    "syn": [
@@ -1707,7 +1703,7 @@
     "fared",
     "managed"
    ],
-   "zh": "表現（did better：表現較好）"
+   "zh": "做（did so：這樣做）"
   },
   "diplomatic": {
    "ant": [],
@@ -1949,27 +1945,27 @@
   },
   "equity": {
    "ant": [
-    "debt"
+    "inequity"
    ],
    "base": "equity",
    "col": [
-    "equity awards",
-    "equity stake"
+    "social equity",
+    "in terms of equity"
    ],
-   "en": "shares in a company",
-   "es": "renta variable; acciones",
-   "ex": "Staff receive equity as part of their pay.",
-   "hi": "इक्विटी",
-   "ja": "株式",
-   "ko": "주식",
+   "en": "fairness",
+   "es": "equidad",
+   "ex": "The plan is based on equity and justice.",
+   "hi": "समानता; न्याय",
+   "ja": "公平",
+   "ko": "형평성",
    "lvl": "C1",
    "pos": "n.",
    "syn": [
-    "stock",
-    "shares",
-    "securities"
+    "fairness",
+    "justice",
+    "impartiality"
    ],
-   "zh": "股權；股票",
+   "zh": "公平；公正",
    "note": {
     "collocations": [
      "social equity",
@@ -2084,10 +2080,10 @@
    ],
    "en": "keeping people out",
    "es": "exclusión",
-   "ex": "An exclusion zone was set up around the site.",
-   "hi": "निषेध",
-   "ja": "立入禁止",
-   "ko": "출입 금지",
+   "ex": "Taiwan's exclusion from the UN system is a problem.",
+   "hi": "बहिष्कार",
+   "ja": "排除",
+   "ko": "배제",
    "lvl": "C1",
    "pos": "n.",
    "syn": [
@@ -2095,7 +2091,7 @@
     "barring",
     "prohibition"
    ],
-   "zh": "禁入（區）"
+   "zh": "排除；被排斥在外"
   },
   "expertise": {
    "ant": [
@@ -2273,7 +2269,7 @@
     "enemies"
    ],
    "base": "friend",
-   "en": "people you know and like (in a book title)",
+   "en": "people or countries that support you",
    "es": "amigos",
    "ex": "I met my friends at the park.",
    "hi": "दोस्त",
@@ -2286,7 +2282,7 @@
     "companions",
     "mates"
    ],
-   "zh": "朋友（書名 Conversations with Friends）"
+   "zh": "朋友；友邦"
   },
   "from": {
    "zh": "從",
@@ -2302,37 +2298,36 @@
   "function": {
    "ant": [],
    "base": "function",
-   "en": "to work or be used as something",
-   "es": "funcionar",
-   "ex": "The garage will function as a music room.",
-   "hi": "काम करना",
-   "ja": "機能する",
-   "ko": "기능하다",
+   "en": "a role or job",
+   "es": "función",
+   "ex": "The allies performed an important function.",
+   "hi": "भूमिका",
+   "ja": "役割",
+   "ko": "역할",
    "lvl": "B2",
-   "pos": "v.",
+   "pos": "n.",
    "syn": [
-    "serve",
-    "act",
-    "work"
+    "role",
+    "job",
+    "duty"
    ],
-   "zh": "發揮作用；充當"
+   "zh": "職能；作用（perform a function：履行職責）"
   },
   "gas": {
    "ant": [],
    "base": "gas",
-   "en": "a fuel used for heating and power",
+   "en": "an air-like substance (greenhouse gas)",
    "es": "gas",
-   "ex": "We use gas to heat our house.",
+   "ex": "Carbon dioxide is a greenhouse gas.",
    "hi": "गैस",
    "ja": "ガス",
    "ko": "가스",
    "lvl": "A2",
    "pos": "n.",
    "syn": [
-    "natural gas",
-    "fuel"
+    "vapour"
    ],
-   "zh": "天然氣"
+   "zh": "氣體（greenhouse gas：溫室氣體）"
   },
   "gases": {
    "ant": [],
@@ -2587,24 +2582,18 @@
    "lvl": "PN"
   },
   "had": {
-   "ant": [
-    "lacked"
-   ],
+   "ant": [],
    "base": "have",
-   "en": "possessed; was involved (had a hand in)",
-   "es": "tuvo",
-   "ex": "She had a key role in the project.",
-   "hi": "था",
-   "ja": "持っていた",
-   "ko": "가졌다",
+   "en": "used to form the past perfect",
+   "es": "había",
+   "ex": "The allies had already spoken for Taiwan.",
+   "hi": "था; थे",
+   "ja": "（過去完了の助動詞）",
+   "ko": "(과거완료 조동사)",
    "lvl": "A1",
    "pos": "v.",
-   "syn": [
-    "possessed",
-    "held",
-    "took"
-   ],
-   "zh": "有（had a hand in：參與）"
+   "syn": [],
+   "zh": "（過去完成式助動詞）"
   },
   "happy": {
    "zh": "開心的；滿意的",
@@ -3141,20 +3130,20 @@
   "just": {
    "ant": [],
    "base": "just",
-   "en": "only; a little",
-   "es": "justo; apenas",
-   "ex": "Just over half the class passed.",
-   "hi": "बस; थोड़ा",
-   "lvl": "A1",
-   "pos": "adv.",
+   "en": "fair and morally right",
+   "es": "justo",
+   "ex": "Everyone deserves a just system.",
+   "hi": "न्यायसंगत",
+   "lvl": "B2",
+   "pos": "adj.",
    "syn": [
-    "only",
-    "merely",
-    "slightly"
+    "fair",
+    "equitable",
+    "right"
    ],
-   "zh": "只是；剛好",
-   "ja": "ほんの；ちょうど",
-   "ko": "단지；겨우"
+   "zh": "公正的",
+   "ja": "公正な",
+   "ko": "공정한"
   },
   "latest": {
    "zh": "最新的",
@@ -3217,23 +3206,23 @@
    "zh": "使處於（某狀態）；留給"
   },
   "left": {
-   "zh": "離開；剩下",
-   "hi": "चले गए; बचे",
-   "es": "se fueron; quedan",
-   "en": "went away; remaining",
+   "zh": "被排除（left out：排除在外）",
+   "hi": "छूट गए (left out)",
+   "es": "excluidos (left out)",
+   "en": "not included (left out)",
    "pos": "v.",
    "base": "leave",
    "lvl": "A2",
    "syn": [
-    "holiday",
-    "time off"
+    "excluded",
+    "omitted"
    ],
    "ant": [
-    "work"
+    "included"
    ],
-   "ex": "She is on annual leave this week.",
-   "ja": "去った；残った",
-   "ko": "떠났다；남은"
+   "ex": "No country should be left out.",
+   "ja": "除外された（left out）",
+   "ko": "제외된 (left out)"
   },
   "made": {
    "zh": "使得（make 的過去式）",
@@ -3287,9 +3276,9 @@
     "producing",
     "creating"
    ],
-   "zh": "做到（make savings：節省）",
-   "ja": "（節約などを）する",
-   "ko": "(절감 등을) 하다"
+   "zh": "製造；做",
+   "ja": "作る",
+   "ko": "만들다"
   },
   "many": {
    "zh": "許多",
@@ -3416,20 +3405,20 @@
   "measures": {
    "ant": [],
    "base": "measure",
-   "en": "finds the size or amount of something",
-   "es": "mide",
-   "ex": "This test measures your reading speed.",
-   "hi": "मापता है",
-   "ja": "測定する",
-   "ko": "측정한다",
+   "en": "actions taken to deal with a problem",
+   "es": "medidas",
+   "ex": "The government took new measures to cut pollution.",
+   "hi": "उपाय",
+   "ja": "対策",
+   "ko": "조치",
    "lvl": "B1",
-   "pos": "v.",
+   "pos": "n.",
    "syn": [
-    "gauges",
-    "assesses",
-    "tracks"
+    "steps",
+    "actions",
+    "policies"
    ],
-   "zh": "衡量；測量"
+   "zh": "措施"
   },
   "meeting": {
    "ant": [],
@@ -3489,20 +3478,18 @@
   "ministry": {
    "ant": [],
    "base": "ministry",
-   "en": "church work or roles",
+   "en": "a government department",
    "es": "ministerio",
-   "ex": "He spent forty years in ministry.",
-   "hi": "सेवा (चर्च)",
-   "ja": "奉仕職",
-   "ko": "사역",
+   "ex": "The Ministry of Foreign Affairs issued a statement.",
+   "hi": "मंत्रालय",
+   "ja": "省",
+   "ko": "부(정부 부처)",
    "lvl": "C1",
    "pos": "n.",
    "syn": [
-    "service",
-    "priesthood",
-    "church work"
+    "department"
    ],
-   "zh": "（教會）事工；聖職"
+   "zh": "（政府）部"
   },
   "mitigation": {
    "zh": "減緩（氣候變遷）",
@@ -4030,7 +4017,7 @@
   },
   "permitted": {
    "zh": "被允許",
-   "hi": "अनुमति दी जाएगी",
+   "hi": "अनुमति दी गई",
    "es": "permitido",
    "en": "allowed",
    "pos": "v.",
@@ -5360,7 +5347,6 @@
    "lvl": "A1",
    "pos": "v.",
    "syn": [
-    "praised",
     "acknowledged",
     "credited"
    ],

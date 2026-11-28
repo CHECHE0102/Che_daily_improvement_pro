@@ -1019,12 +1019,12 @@
    ],
    "base": "back",
    "col": [
-    "come back",
+    "hold back",
     "roll back"
    ],
    "en": "(in \"hold back\") stopping progress",
    "es": "atrás (hold back: frenar)",
-   "ex": "The lights came back after an hour.",
+   "ex": "High costs are holding back new building.",
    "hi": "पीछे (hold back: रोकना)",
    "ja": "（hold back：妨げる）",
    "ko": "(hold back: 막다)",
@@ -1348,8 +1348,7 @@
    "lvl": "C1",
    "syn": [
     "limited",
-    "restricted",
-    "capped at"
+    "restricted"
    ],
    "ant": [
     "unlimited"
@@ -2094,9 +2093,7 @@
    "ko": "일",
    "lvl": "A1",
    "pos": "n.",
-   "syn": [
-    "-"
-   ],
+   "syn": [],
    "zh": "天"
   },
   "decline": {
@@ -2154,21 +2151,19 @@
    "ant": [],
    "base": "demographic",
    "col": [
-    "key demographic",
-    "this demographic"
+    "demographic decline",
+    "demographic trend"
    ],
    "en": "relating to the structure of a population",
    "es": "demográfico",
-   "ex": "Young adults are a key demographic.",
+   "ex": "The country faces a serious demographic decline.",
    "hi": "जनसांख्यिकीय",
    "ja": "人口統計の",
    "ko": "인구의",
    "lvl": "C1",
    "pos": "adj.",
    "syn": [
-    "population group",
-    "age group",
-    "segment"
+    "population-related"
    ],
    "zh": "人口的"
   },
@@ -2998,7 +2993,7 @@
    "es": "perder",
    "ja": "失うこと",
    "ko": "잃는 것",
-   "en": "losing something, often as a result",
+   "en": "losing something, often as a result of breaking a rule",
    "pos": "v.",
    "base": "forfeit",
    "lvl": "C2",
@@ -4311,7 +4306,6 @@
    "lvl": "A1",
    "pos": "n.",
    "syn": [
-    "weeks",
     "periods"
    ],
    "zh": "月（複數）"
@@ -4584,25 +4578,23 @@
    "zh": "提供"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -5699,7 +5691,7 @@
    "es": "sustituto",
    "ex": "The council found a replacement for the old bus.",
    "hi": "प्रतिस्थापन",
-   "ja": "後継の",
+   "ja": "代わり；後任",
    "ko": "대체",
    "lvl": "B2",
    "pos": "n.",
@@ -5708,7 +5700,7 @@
     "successor",
     "alternative"
    ],
-   "zh": "替代的（事物）"
+   "zh": "替代者；替代品"
   },
   "responsibilities": {
    "zh": "責任",
@@ -6140,26 +6132,24 @@
    "zh": "較小的"
   },
   "some": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "some",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ],
    "en": "a number of, but not all",
    "es": "algunos",
-   "ex": "Some 300 people came.",
+   "ex": "Some parents may still hesitate to use the plan.",
    "hi": "कुछ",
    "ja": "いくつかの",
    "ko": "일부",
    "lvl": "A1",
    "pos": "det.",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
    "zh": "一些"
   },
@@ -6254,8 +6244,7 @@
    "pos": "adv.",
    "syn": [
     "yet",
-    "even now",
-    "nevertheless"
+    "even now"
    ],
    "zh": "仍然"
   },
@@ -6263,23 +6252,23 @@
    "ant": [],
    "base": "strain",
    "col": [
-    "virus strain",
-    "new strain"
+    "ease the strain",
+    "put a strain on"
    ],
-   "en": "a type of a virus",
-   "es": "cepa",
-   "ex": "Doctors found a new strain of flu.",
-   "hi": "स्ट्रेन (वायरस का प्रकार)",
-   "ja": "株（ウイルスの型）",
-   "ko": "변종; 균주",
+   "en": "pressure or worry caused by a difficult situation",
+   "es": "presión; tensión",
+   "ex": "Long working hours put a strain on families.",
+   "hi": "दबाव; तनाव",
+   "ja": "負担；重圧",
+   "ko": "부담; 압박",
    "lvl": "C1",
    "pos": "n.",
    "syn": [
-    "type",
-    "variant",
-    "serotype"
+    "pressure",
+    "stress",
+    "burden"
    ],
-   "zh": "（病毒）株；品系"
+   "zh": "壓力；負擔"
   },
   "stringent": {
    "ant": [
@@ -6876,23 +6865,22 @@
    ],
    "base": "unpaid",
    "col": [
-    "unpaid rent",
-    "unpaid bills"
+    "unpaid leave",
+    "unpaid work"
    ],
-   "en": "not yet paid",
-   "es": "impagado",
-   "ex": "She has unpaid bills.",
-   "hi": "बकाया",
-   "ja": "未払いの",
-   "ko": "미납된",
+   "en": "without pay",
+   "es": "no remunerado",
+   "ex": "She took six months of unpaid leave.",
+   "hi": "अवैतनिक",
+   "ja": "無給の",
+   "ko": "무급의",
    "lvl": "B1",
    "pos": "adj.",
    "syn": [
-    "owed",
-    "outstanding",
-    "overdue"
+    "unsalaried",
+    "without pay"
    ],
-   "zh": "未付的"
+   "zh": "無薪的"
   },
   "unsupportive": {
    "zh": "不支持的",

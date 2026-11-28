@@ -6,7 +6,7 @@
  "topic": "科技",
  "title": "Taiwan Banks Turn to AI as Cyberattacks Double",
  "level": "B2",
- "summaryZh": "網攻倍增，台灣銀行加強運用AI防禦。",
+ "summaryZh": "網攻倍增，台灣多家銀行加強運用AI防禦。",
  "summaryHi": "साइबर हमले दोगुने होने पर ताइवान के बैंक बचाव के लिए AI का सहारा ले रहे हैं।",
  "summaryEs": "Los bancos de Taiwán recurren a la IA ante el doble de ciberataques.",
  "summaryJa": "サイバー攻撃が倍増、台湾の銀行がAIで防御強化。",
@@ -1385,7 +1385,7 @@
   },
   "chen": {
    "base": "Chen",
-   "en": "family name of Chen Yen-chung, an urban planning professor",
+   "en": "family name of Chen Chia-hung, a cybersecurity consultant",
    "es": "Chen",
    "hi": "चेन",
    "ja": "陳（チェン）",
@@ -2449,8 +2449,7 @@
    "pos": "adj.",
    "syn": [
     "false",
-    "bogus",
-    "hoax"
+    "bogus"
    ],
    "zh": "假的"
   },
@@ -2982,7 +2981,7 @@
    ],
    "en": "used to form the present perfect",
    "es": "ha (presente perfecto)",
-   "ex": "The town has a long history.",
+   "ex": "The council has become dysfunctional.",
    "hi": "है (present perfect)",
    "ja": "（現在完了の助動詞）",
    "ko": "(현재완료 조동사)",
@@ -4156,7 +4155,6 @@
    "lvl": "A1",
    "pos": "n.",
    "syn": [
-    "weeks",
     "periods"
    ],
    "zh": "月（複數）"
@@ -4241,7 +4239,7 @@
     "web",
     "grid"
    ],
-   "zh": "網絡"
+   "zh": "網路；路網"
   },
   "new": {
    "ant": [
@@ -4492,25 +4490,23 @@
    "lvl": "A1"
   },
   "on": {
-   "ant": [
-    "off"
-   ],
+   "ant": [],
    "base": "on",
    "col": [
-    "go on",
-    "carry on"
+    "information on",
+    "a report on"
    ],
    "en": "about",
    "es": "sobre",
-   "ex": "Voting will go on for nine days.",
+   "ex": "She wrote a report on the data breach.",
    "hi": "के बारे में",
    "ja": "〜に関する",
    "ko": "~에 관한",
    "lvl": "A1",
    "pos": "prep.",
    "syn": [
-    "ahead",
-    "forward"
+    "about",
+    "regarding"
    ],
    "zh": "關於"
   },
@@ -5974,26 +5970,24 @@
    "zh": "智慧型的"
   },
   "some": {
-   "ant": [
-    "exactly"
-   ],
+   "ant": [],
    "base": "some",
    "col": [
-    "some two decades",
-    "some 50 people"
+    "some of",
+    "some people"
    ],
    "en": "a number of, but not all",
    "es": "algunos",
-   "ex": "Some 300 people came.",
+   "ex": "Some parents may still hesitate to use the plan.",
    "hi": "कुछ",
    "ja": "いくつかの",
    "ko": "일부",
    "lvl": "A1",
    "pos": "det.",
    "syn": [
-    "about",
-    "roughly",
-    "approximately"
+    "several",
+    "a few",
+    "certain"
    ],
    "zh": "一些"
   },
@@ -6702,9 +6696,7 @@
    "ko": "세 번째",
    "lvl": "A1",
    "pos": "adj.",
-   "syn": [
-    "final"
-   ],
+   "syn": [],
    "zh": "第三的"
   },
   "this": {
