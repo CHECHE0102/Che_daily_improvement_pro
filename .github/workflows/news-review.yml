@@ -30,9 +30,10 @@ jobs:
           git config user.email "CHECHE0102@users.noreply.github.com"
           for i in 1 2 3 4; do
             git fetch -q origin main && git reset -q --hard origin/main
+            git checkout -q -- tools/review-seen-words.tsv 2>/dev/null || true
             rm -rf out && python3 tools/make_review_pack.py out 3
             rm -rf review && mkdir -p review && cp -r out/. review/
-            git add -A review
+            git add -A review tools/review-seen-words.tsv
             git diff --cached --quiet && { echo "no change"; exit 0; }
             git commit -q -m "News proofreading pack $(date -u +%F' '%H:%M)"
             git push -q origin HEAD:main && exit 0
