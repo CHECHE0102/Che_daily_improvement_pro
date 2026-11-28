@@ -1099,6 +1099,26 @@ body.onb-open{overflow:hidden}
 .pz-encin>b{font-size:18px}
 .pz-enccost{color:#1F6F5C;font-weight:700}
 .pz-boardt{font-size:18px}
+.pz-evin{width:min(430px,100%)!important;max-height:calc(100% - 24px);padding:0!important;overflow:hidden;gap:0!important;align-items:stretch!important;text-align:left!important}
+.pz-evh{display:flex;align-items:center;gap:10px;padding:12px 12px 10px 14px;background:var(--bd);color:#fff}
+.pz-evic{font-size:26px;width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:#fff;display:grid;place-items:center;border:2px solid #1B2421}
+.pz-evh b{display:block;font:800 17px/1.25 system-ui,sans-serif}.pz-evh small{display:block;font:600 12px/1.3 system-ui,sans-serif;opacity:.95}
+.pz-evx{margin-left:auto;align-self:flex-start;flex:0 0 32px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.25);color:#fff;font:800 15px/1 system-ui,sans-serif;cursor:pointer}
+.pz-evf{display:flex;flex-direction:column;gap:7px;padding:10px 12px 6px}
+.pz-evcity{display:flex;gap:6px;flex-wrap:wrap}
+.pz-evcity button{border:2px solid #1B2421;background:#fff;color:#1B2421;border-radius:999px;font:800 12.5px/1 system-ui,sans-serif;padding:6px 11px;cursor:pointer}
+.pz-evcity button.on{background:#1B2421;color:#fff}
+.pz-evcc{display:flex;align-items:center;gap:6px;border:2px solid #1B2421;border-radius:12px;padding:2px 4px 2px 10px;background:#fff}
+.pz-evcc select{flex:1;min-width:0;border:0;background:transparent;font:800 14px/1.2 system-ui,sans-serif;color:#1B2421;padding:7px 4px;outline:none}
+.pz-evl{flex:1 1 auto;min-height:120px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:4px 12px 10px;display:flex;flex-direction:column;gap:8px}
+.pz-evi{display:flex;gap:10px;border-radius:14px;padding:9px 10px;background:var(--bds);color:#1B2421}
+.pz-evd{flex:0 0 54px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:#fff;border:2px solid #1B2421;padding:4px 2px;text-align:center;align-self:flex-start}
+.pz-evd b{font:800 15px/1.15 system-ui,sans-serif}.pz-evd small{font:700 10.5px/1.2 system-ui,sans-serif;color:#58646b}
+.pz-evt{min-width:0;display:flex;flex-direction:column;gap:2px}
+.pz-evt b{font:800 14px/1.3 system-ui,sans-serif;overflow-wrap:anywhere}.pz-evt small{font:600 12px/1.35 system-ui,sans-serif;color:#4a565c;overflow-wrap:anywhere}
+.pz-evt a{margin-top:3px;font:800 12.5px/1.35 system-ui,sans-serif;color:#1F64B5;text-decoration:underline;overflow-wrap:anywhere}
+.pz-evnone{margin:18px 8px;text-align:center;font:600 13.5px/1.5 system-ui,sans-serif;color:#58646b}.pz-evnone .btn{margin-top:8px}.pz-evsm{margin:2px 4px 4px;font-size:12px}
+.pz-evfoot{padding:8px 12px 11px;font:600 11px/1.4 system-ui,sans-serif;color:#7a858b;text-align:center;border-top:1px solid rgba(0,0,0,.08)}
 .pz-boardh{margin:0;font:700 15px/1.4 Georgia,serif}
 .pz-boardst{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
 .pz-boardst span{font:700 12px/1.6 system-ui,sans-serif;border-radius:999px;padding:0 9px;background:#EEF1EF;color:#58646b}
@@ -4823,13 +4843,13 @@ function devPanel(){
     <div class="dev-grid">${b("gold","dGold")}${b("tickets","dTickets")}${b("lotto","dLotto")}${b("shards","dShards")}${b("lvup","dLvUp")}${b("lv20","dLv20")}${b("items","dItems")}${b("conq","dConq")}${b("unconq","dUnconq")}${b("today","dToday")}${b("style","dStyle")}</div><button class="btn sm" style="width:100%;margin-top:8px" data-act="dev" data-k="fresh">🐣 ${T("dFresh")}</button>
     ${devBadgeHtml()}`
    :tab==="watch"?`<p class="muted sm-t">${T("dtWatchSub")}</p>${devStatsHtml()}${devErrHtml()}`
-   :tab==="run"?`<p class="muted sm-t">${T("dtRunSub")}</p><div id="devMaint" class="dev-maint">${devMaintInner()}</div><div id="devAnn" class="dev-ann">${devAnnInner()}</div>${devFeatHtml()}${plzNoticeDev()}`
+   :tab==="run"?`<p class="muted sm-t">${T("dtRunSub")}</p><div id="devMaint" class="dev-maint">${devMaintInner()}</div><div id="devAnn" class="dev-ann">${devAnnInner()}</div>${devFeatHtml()}`
    :`<p class="muted sm-t">${T("dtPlayersSub")}</p>${devFbCard()}${betaDevHtml()}${cheatAdmin()}${memAdmin()}${devSupHtml()}`;
   return `<section class="card dev-card"><b>🛠 ${T("devOn")}</b><span class="muted sm-t">${T("devSub")}</span>${tabs}
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.148";
+const APP_VERSION="2026.11.149";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -5357,7 +5377,6 @@ document.addEventListener("click", e=>{
   if(a==="fbreply"){ S.fbReplyId=S.fbReplyId===t.dataset.k?null:t.dataset.k; render(); setTimeout(()=>{ const x=$("#fbReplyTx"); if(x) x.focus(); },0); return; }
   if(a==="fbreplysend") return devFbReply(t.dataset.k);
   if(a==="fball"){ S.fbAll=t.dataset.k==="1"; return render(); }
-  if(a==="plznotice") return plzNoticeSave();
   if(a==="devfeat"){ const [k,v]=t.dataset.k.split("|"); return devFeatSet(k,v); }
   if(a==="supgive") return supGive();
   if(a==="plook") return lookCard(plazaList()[+t.dataset.k]);
@@ -10169,7 +10188,7 @@ function plzIn(sh,u,v){ if(Array.isArray(sh)){ let ins=false; for(let i=0,j=sh.l
 // Walk masks: assets/art/plaza/{zone}-walk.png, one pixel per 4x4 world px, white = walkable, traced from the painting.
 // Until a mask loads, the rough shapes in PLZ_GEO are used. Occluders: cut-outs of the painting (gate arch, bandstand,
 // fountain) laid over the players, so you can walk behind them; z is the world y of the thing's base.
-const PLZ_MASK={}, PLZ_MC=4, PLZ_OCC={"gate":[{"f":"gate-arch","x":497,"y":0,"w":542,"h":366,"z":361},{"f":"gate-lampl","x":36,"y":814,"w":97,"h":274,"z":1080},{"f":"gate-lampr","x":1403,"y":814,"w":97,"h":274,"z":1080},{"f":"gate-lamptl","x":282,"y":141,"w":82,"h":284,"z":415},{"f":"gate-lamptr","x":1172,"y":141,"w":82,"h":284,"z":415},{"f":"gate-benchl","x":118,"y":456,"w":148,"h":174,"z":622},{"f":"gate-benchr","x":1270,"y":456,"w":148,"h":174,"z":622}],"pond":[{"f":"pond-willowl","x":0,"y":0,"w":164,"h":389,"z":389},{"f":"pond-willowr","x":1398,"y":92,"w":138,"h":533,"z":620},{"f":"pond-pinkr","x":1357,"y":481,"w":159,"h":133,"z":609},{"f":"pond-lampl","x":179,"y":38,"w":72,"h":228,"z":261},{"f":"pond-lampr","x":1293,"y":38,"w":71,"h":228,"z":261},{"f":"pond-bed","x":584,"y":23,"w":368,"h":184,"z":205},{"f":"pond-bush","x":927,"y":594,"w":189,"h":128,"z":717},{"f":"pond-bridge","x":1116,"y":543,"w":292,"h":271,"z":768},{"f":"pond-news","x":474,"y":3,"w":533,"h":341,"z":338},{"f":"pond-chairl","x":397,"y":330,"w":140,"h":124,"z":428},{"f":"pond-chairl","x":507,"y":490,"w":140,"h":124,"z":588},{"f":"pond-chairr","x":999,"y":330,"w":140,"h":125,"z":428},{"f":"pond-chairr","x":893,"y":460,"w":140,"h":125,"z":558},{"f":"pond-chairl","x":247,"y":260,"w":140,"h":124,"z":358},{"f":"pond-chairl","x":187,"y":420,"w":140,"h":124,"z":518},{"f":"pond-chairr","x":1183,"y":280,"w":140,"h":125,"z":378},{"f":"pond-chairr","x":1133,"y":400,"w":140,"h":125,"z":498}],"band":[{"f":"band-back","x":568,"y":225,"w":400,"h":517,"z":586},{"f":"band-front","x":573,"y":225,"w":390,"h":471,"z":748},{"f":"band-lampbl","x":328,"y":901,"w":66,"h":184,"z":1075},{"f":"band-lampbr","x":1142,"y":901,"w":66,"h":184,"z":1075},{"f":"band-lamptl","x":333,"y":0,"w":61,"h":174,"z":169},{"f":"band-lamptr","x":1142,"y":0,"w":61,"h":174,"z":169},{"f":"band-benchtl","x":61,"y":169,"w":175,"h":154,"z":317},{"f":"band-benchtr","x":1300,"y":169,"w":175,"h":154,"z":317},{"f":"band-benchbl","x":51,"y":799,"w":159,"h":164,"z":957},{"f":"band-benchbr","x":1326,"y":799,"w":164,"h":153,"z":947},{"f":"band-bushbl","x":399,"y":1014,"w":297,"h":123,"z":1132},{"f":"band-bushbr","x":840,"y":1014,"w":297,"h":123,"z":1132}],"fountain":[{"f":"fountain-f","x":609,"y":399,"w":318,"h":287,"z":671,"b":[[609,560],[633,578],[641,603],[657,624],[673,637],[689,646],[705,653],[721,658],[737,661],[769,664],[801,662],[817,657],[833,652],[849,644],[865,634],[881,620],[897,596],[905,578],[927,560]]},{"f":"fountain-tree-tl","x":0,"y":0,"w":332,"h":292,"z":285,"b":[[0,284],[8,285],[16,285],[24,284],[32,283],[40,283],[48,282],[56,279],[64,276],[72,272],[80,268],[88,260],[96,249],[104,203],[112,200],[120,196],[128,193],[136,185],[144,171],[152,168],[160,167],[168,163],[176,159],[184,149],[192,122],[200,113],[208,103],[216,98],[224,97],[232,95],[240,92],[248,91],[256,89],[264,84],[272,80],[280,78],[288,75],[296,68],[304,47],[312,42],[320,23]]},{"f":"fountain-lamp-tl","x":340,"y":0,"w":88,"h":160,"z":156},{"f":"fountain-lamp-tr","x":1132,"y":0,"w":88,"h":160,"z":157},{"f":"fountain-tree-tr","x":1224,"y":0,"w":312,"h":296,"z":292,"b":[[1224,40],[1232,57],[1240,62],[1248,64],[1256,69],[1264,79],[1272,84],[1280,87],[1288,88],[1296,92],[1304,94],[1312,97],[1320,98],[1328,98],[1336,98],[1344,98],[1352,101],[1360,103],[1368,107],[1376,114],[1384,120],[1392,177],[1400,186],[1408,188],[1416,189],[1424,198],[1432,205],[1440,207],[1448,211],[1456,262],[1464,268],[1472,279],[1480,283],[1488,284],[1496,287],[1504,290],[1512,290],[1520,291],[1528,292]]},{"f":"fountain-bed-tl","x":140,"y":128,"w":224,"h":160,"z":282,"b":[[140,250],[148,257],[156,264],[164,268],[172,270],[180,275],[188,277],[196,278],[204,279],[212,280],[220,281],[228,282],[236,282],[244,282],[252,282],[260,279],[268,279],[276,278],[284,276],[292,274],[300,271],[308,268],[316,263],[324,260],[332,251],[340,248],[348,241],[356,230]]},{"f":"fountain-bed-tr","x":1180,"y":128,"w":220,"h":160,"z":282,"b":[[1180,236],[1188,245],[1196,250],[1204,257],[1212,263],[1220,266],[1228,271],[1236,273],[1244,274],[1252,278],[1260,278],[1268,281],[1276,281],[1284,282],[1292,282],[1300,282],[1308,282],[1316,280],[1324,280],[1332,278],[1340,277],[1348,275],[1356,272],[1364,269],[1372,266],[1380,259],[1388,254],[1396,239]]},{"f":"fountain-bed-br","x":1184,"y":848,"w":216,"h":140,"z":984,"b":[[1184,946],[1192,956],[1200,964],[1208,970],[1216,974],[1224,975],[1232,978],[1240,981],[1248,982],[1256,982],[1264,982],[1272,983],[1280,983],[1288,984],[1296,983],[1304,983],[1312,983],[1320,981],[1328,980],[1336,979],[1344,977],[1352,975],[1360,971],[1368,967],[1376,963],[1384,956],[1392,949]]},{"f":"fountain-bed-bl","x":136,"y":852,"w":220,"h":136,"z":984,"b":[[136,942],[144,952],[152,958],[160,965],[168,968],[176,972],[184,975],[192,977],[200,979],[208,979],[216,982],[224,983],[232,983],[240,984],[248,983],[256,983],[264,983],[272,983],[280,982],[288,981],[296,979],[304,976],[312,975],[320,973],[328,967],[336,963],[344,956]]},{"f":"fountain-tree-bl","x":0,"y":904,"w":232,"h":248,"z":1149,"b":[[0,1149],[8,1149],[16,1149],[24,1149],[32,1149],[40,1149],[48,1149],[56,1149],[64,1149],[72,1149],[80,1149],[88,1149],[96,1149],[104,1149],[112,1149],[120,1149],[128,1149],[136,1149],[144,1149],[152,1149],[160,1149],[168,1149],[176,1149],[184,1149],[192,1149],[200,1149],[208,1149],[216,1149],[224,1149]]},{"f":"fountain-tree-br","x":1296,"y":904,"w":240,"h":248,"z":1149,"b":[[1296,1149],[1304,1149],[1312,1149],[1320,1149],[1328,1149],[1336,1149],[1344,1149],[1352,1149],[1360,1149],[1368,1149],[1376,1149],[1384,1149],[1392,1149],[1400,1149],[1408,1149],[1416,1149],[1424,1149],[1432,1149],[1440,1149],[1448,1149],[1456,1145],[1464,1149],[1472,1149],[1480,1149],[1488,1149],[1496,1146],[1504,1144],[1512,1144],[1520,1144],[1528,1144]]},{"f":"fountain-lamp-bl","x":332,"y":964,"w":92,"h":160,"z":1121},{"f":"fountain-lamp-br","x":1136,"y":964,"w":88,"h":160,"z":1121}],"lawn":[{"f":"lawn-treel","x":0,"y":256,"w":159,"h":358,"z":604},{"f":"lawn-treer","x":1352,"y":269,"w":184,"h":358,"z":620},{"f":"lawn-lampl","x":302,"y":0,"w":72,"h":184,"z":179},{"f":"lawn-lampr","x":1162,"y":0,"w":72,"h":184,"z":179},{"f":"lawn-benchl","x":159,"y":92,"w":158,"h":144,"z":230},{"f":"lawn-benchr","x":1219,"y":92,"w":158,"h":144,"z":230},{"f":"lawn-basket","x":1311,"y":840,"w":112,"h":123,"z":957},{"f":"lawn-bushbl","x":0,"y":934,"w":243,"h":218,"z":1152},{"f":"lawn-bushbr","x":1293,"y":934,"w":243,"h":218,"z":1152}]};
+const PLZ_MASK={}, PLZ_MC=4, PLZ_OCC={"gate":[{"f":"gate-arch","x":497,"y":0,"w":542,"h":366,"z":361},{"f":"gate-lampl","x":36,"y":814,"w":97,"h":274,"z":1080},{"f":"gate-lampr","x":1403,"y":814,"w":97,"h":274,"z":1080},{"f":"gate-lamptl","x":282,"y":141,"w":82,"h":284,"z":415},{"f":"gate-lamptr","x":1172,"y":141,"w":82,"h":284,"z":415},{"f":"gate-benchl","x":118,"y":456,"w":148,"h":174,"z":622},{"f":"gate-benchr","x":1270,"y":456,"w":148,"h":174,"z":622},{"f":"gate-boardl","x":250,"y":404,"w":260,"h":300,"z":700},{"f":"gate-boardm","x":638,"y":364,"w":260,"h":300,"z":660},{"f":"gate-boardr","x":1026,"y":404,"w":260,"h":300,"z":700}],"pond":[{"f":"pond-willowl","x":0,"y":0,"w":164,"h":389,"z":389},{"f":"pond-willowr","x":1398,"y":92,"w":138,"h":533,"z":620},{"f":"pond-pinkr","x":1357,"y":481,"w":159,"h":133,"z":609},{"f":"pond-lampl","x":179,"y":38,"w":72,"h":228,"z":261},{"f":"pond-lampr","x":1293,"y":38,"w":71,"h":228,"z":261},{"f":"pond-bed","x":584,"y":23,"w":368,"h":184,"z":205},{"f":"pond-bush","x":927,"y":594,"w":189,"h":128,"z":717},{"f":"pond-bridge","x":1116,"y":543,"w":292,"h":271,"z":768},{"f":"pond-news","x":474,"y":3,"w":533,"h":341,"z":338},{"f":"pond-chairl","x":397,"y":330,"w":140,"h":124,"z":428},{"f":"pond-chairl","x":507,"y":490,"w":140,"h":124,"z":588},{"f":"pond-chairr","x":999,"y":330,"w":140,"h":125,"z":428},{"f":"pond-chairr","x":893,"y":460,"w":140,"h":125,"z":558},{"f":"pond-chairl","x":247,"y":260,"w":140,"h":124,"z":358},{"f":"pond-chairl","x":187,"y":420,"w":140,"h":124,"z":518},{"f":"pond-chairr","x":1183,"y":280,"w":140,"h":125,"z":378},{"f":"pond-chairr","x":1133,"y":400,"w":140,"h":125,"z":498}],"band":[{"f":"band-back","x":568,"y":225,"w":400,"h":517,"z":586},{"f":"band-front","x":573,"y":225,"w":390,"h":471,"z":748},{"f":"band-lampbl","x":328,"y":901,"w":66,"h":184,"z":1075},{"f":"band-lampbr","x":1142,"y":901,"w":66,"h":184,"z":1075},{"f":"band-lamptl","x":333,"y":0,"w":61,"h":174,"z":169},{"f":"band-lamptr","x":1142,"y":0,"w":61,"h":174,"z":169},{"f":"band-benchtl","x":61,"y":169,"w":175,"h":154,"z":317},{"f":"band-benchtr","x":1300,"y":169,"w":175,"h":154,"z":317},{"f":"band-benchbl","x":51,"y":799,"w":159,"h":164,"z":957},{"f":"band-benchbr","x":1326,"y":799,"w":164,"h":153,"z":947},{"f":"band-bushbl","x":399,"y":1014,"w":297,"h":123,"z":1132},{"f":"band-bushbr","x":840,"y":1014,"w":297,"h":123,"z":1132}],"fountain":[{"f":"fountain-f","x":609,"y":399,"w":318,"h":287,"z":671,"b":[[609,560],[633,578],[641,603],[657,624],[673,637],[689,646],[705,653],[721,658],[737,661],[769,664],[801,662],[817,657],[833,652],[849,644],[865,634],[881,620],[897,596],[905,578],[927,560]]},{"f":"fountain-tree-tl","x":0,"y":0,"w":332,"h":292,"z":285,"b":[[0,284],[8,285],[16,285],[24,284],[32,283],[40,283],[48,282],[56,279],[64,276],[72,272],[80,268],[88,260],[96,249],[104,203],[112,200],[120,196],[128,193],[136,185],[144,171],[152,168],[160,167],[168,163],[176,159],[184,149],[192,122],[200,113],[208,103],[216,98],[224,97],[232,95],[240,92],[248,91],[256,89],[264,84],[272,80],[280,78],[288,75],[296,68],[304,47],[312,42],[320,23]]},{"f":"fountain-lamp-tl","x":340,"y":0,"w":88,"h":160,"z":156},{"f":"fountain-lamp-tr","x":1132,"y":0,"w":88,"h":160,"z":157},{"f":"fountain-tree-tr","x":1224,"y":0,"w":312,"h":296,"z":292,"b":[[1224,40],[1232,57],[1240,62],[1248,64],[1256,69],[1264,79],[1272,84],[1280,87],[1288,88],[1296,92],[1304,94],[1312,97],[1320,98],[1328,98],[1336,98],[1344,98],[1352,101],[1360,103],[1368,107],[1376,114],[1384,120],[1392,177],[1400,186],[1408,188],[1416,189],[1424,198],[1432,205],[1440,207],[1448,211],[1456,262],[1464,268],[1472,279],[1480,283],[1488,284],[1496,287],[1504,290],[1512,290],[1520,291],[1528,292]]},{"f":"fountain-bed-tl","x":140,"y":128,"w":224,"h":160,"z":282,"b":[[140,250],[148,257],[156,264],[164,268],[172,270],[180,275],[188,277],[196,278],[204,279],[212,280],[220,281],[228,282],[236,282],[244,282],[252,282],[260,279],[268,279],[276,278],[284,276],[292,274],[300,271],[308,268],[316,263],[324,260],[332,251],[340,248],[348,241],[356,230]]},{"f":"fountain-bed-tr","x":1180,"y":128,"w":220,"h":160,"z":282,"b":[[1180,236],[1188,245],[1196,250],[1204,257],[1212,263],[1220,266],[1228,271],[1236,273],[1244,274],[1252,278],[1260,278],[1268,281],[1276,281],[1284,282],[1292,282],[1300,282],[1308,282],[1316,280],[1324,280],[1332,278],[1340,277],[1348,275],[1356,272],[1364,269],[1372,266],[1380,259],[1388,254],[1396,239]]},{"f":"fountain-bed-br","x":1184,"y":848,"w":216,"h":140,"z":984,"b":[[1184,946],[1192,956],[1200,964],[1208,970],[1216,974],[1224,975],[1232,978],[1240,981],[1248,982],[1256,982],[1264,982],[1272,983],[1280,983],[1288,984],[1296,983],[1304,983],[1312,983],[1320,981],[1328,980],[1336,979],[1344,977],[1352,975],[1360,971],[1368,967],[1376,963],[1384,956],[1392,949]]},{"f":"fountain-bed-bl","x":136,"y":852,"w":220,"h":136,"z":984,"b":[[136,942],[144,952],[152,958],[160,965],[168,968],[176,972],[184,975],[192,977],[200,979],[208,979],[216,982],[224,983],[232,983],[240,984],[248,983],[256,983],[264,983],[272,983],[280,982],[288,981],[296,979],[304,976],[312,975],[320,973],[328,967],[336,963],[344,956]]},{"f":"fountain-tree-bl","x":0,"y":904,"w":232,"h":248,"z":1149,"b":[[0,1149],[8,1149],[16,1149],[24,1149],[32,1149],[40,1149],[48,1149],[56,1149],[64,1149],[72,1149],[80,1149],[88,1149],[96,1149],[104,1149],[112,1149],[120,1149],[128,1149],[136,1149],[144,1149],[152,1149],[160,1149],[168,1149],[176,1149],[184,1149],[192,1149],[200,1149],[208,1149],[216,1149],[224,1149]]},{"f":"fountain-tree-br","x":1296,"y":904,"w":240,"h":248,"z":1149,"b":[[1296,1149],[1304,1149],[1312,1149],[1320,1149],[1328,1149],[1336,1149],[1344,1149],[1352,1149],[1360,1149],[1368,1149],[1376,1149],[1384,1149],[1392,1149],[1400,1149],[1408,1149],[1416,1149],[1424,1149],[1432,1149],[1440,1149],[1448,1149],[1456,1145],[1464,1149],[1472,1149],[1480,1149],[1488,1149],[1496,1146],[1504,1144],[1512,1144],[1520,1144],[1528,1144]]},{"f":"fountain-lamp-bl","x":332,"y":964,"w":92,"h":160,"z":1121},{"f":"fountain-lamp-br","x":1136,"y":964,"w":88,"h":160,"z":1121}],"lawn":[{"f":"lawn-treel","x":0,"y":256,"w":159,"h":358,"z":604},{"f":"lawn-treer","x":1352,"y":269,"w":184,"h":358,"z":620},{"f":"lawn-lampl","x":302,"y":0,"w":72,"h":184,"z":179},{"f":"lawn-lampr","x":1162,"y":0,"w":72,"h":184,"z":179},{"f":"lawn-benchl","x":159,"y":92,"w":158,"h":144,"z":230},{"f":"lawn-benchr","x":1219,"y":92,"w":158,"h":144,"z":230},{"f":"lawn-basket","x":1311,"y":840,"w":112,"h":123,"z":957},{"f":"lawn-bushbl","x":0,"y":934,"w":243,"h":218,"z":1152},{"f":"lawn-bushbr","x":1293,"y":934,"w":243,"h":218,"z":1152}]};
 // stacking order of a person: by their feet, except in front of a round thing's base (the fountain) they must be above all of it,
 // even where its deepest point is lower than their feet, or the round part would cut through them
 function plzZ(o){ let z=Math.round(o.y/4)*4; for(const c of ROOM.occ||[]){ const q=c.q; if(q.b&&o.y<q.z&&o.x>q.x-40&&o.x<q.x+q.w+40&&o.y>=plzOccZ(q,o.x)) z=Math.max(z,q.z+1+Math.round((o.y-q.y)/24)); } return z; }
@@ -10192,7 +10211,7 @@ function plzMaskLoad(zone){ if(PLZ_MASK[zone]) return Promise.resolve(PLZ_MASK[z
       const d=x.getImageData(0,0,im.width,im.height).data, a=new Uint8Array(im.width*im.height); c.width=c.height=0; for(let i=0;i<a.length;i++) a[i]=d[i*4]>127?1:0;
       const sw=zone==="pond"?await plzSwimLoad(im.width,im.height):null; if(sw) for(let i=0;i<a.length;i++) if(sw[i]) a[i]=1;   // the lake is walkable too (you swim in it)
       PLZ_MASK[zone]={w:im.width,h:im.height,a,f:plzBlur(a,im.width,im.height,3),sw}; }catch(e){} ok(PLZ_MASK[zone]); };
-    im.onerror=()=>ok(null); im.src=`assets/art/plaza/${zone}-walk.png${zone==="fountain"?"?v=2":""}`;   /* ?v=2: the four lawns are walkable now (2026-11-26) */ }); }
+    im.onerror=()=>ok(null); im.src=`assets/art/plaza/${zone}-walk.png${zone==="fountain"||zone==="gate"?"?v=2":""}`;   /* ?v=2: the four lawns are walkable now (2026-11-26) */ }); }
 // pond-swim.png (same grid as the walk mask): 255 = water you swim in, 128 = the stone rim between path and water
 function plzSwimLoad(w,h){ return new Promise(ok=>{ const im=new Image(); im.onload=()=>{ try{ const c=document.createElement("canvas"); c.width=w; c.height=h; const x=c.getContext("2d"); x.drawImage(im,0,0,w,h);
       const d=x.getImageData(0,0,w,h).data, a=new Uint8Array(w*h); c.width=c.height=0; for(let i=0;i<a.length;i++) a[i]=d[i*4]>200?2:d[i*4]>60?1:0; ok(a); }catch(e){ ok(null); } };
@@ -10276,7 +10295,7 @@ async function plazaOpen(zone,at){ if(featLock("plaza")) return toast("🔒 "+lo
     <div class="pz-minibox" data-pz="zones"><canvas class="pz-mini"></canvas><span>${T("plzMap")}</span></div>${zone==="lawn"||zone==="pond"?`<button class="pz-rchip" data-pz="rbook">✨ ${Object.keys(plzRareGot()).length}/${plzRareAll().length}</button>`:""}<div class="pz-zones" hidden></div>
     <div class="pz-acts" hidden>${PLZ_EMO.map(x=>`<button data-pz="emo" data-k="${x}">${x}</button>`).join("")}${PLZ_ACTS.map(a=>`<button data-pz="act" data-k="${a.k}" class="pz-actb"><b>${a.ic}</b><small>${T("plzA_"+a.k)}</small></button>`).join("")}<div class="pz-says"><small>${T("plzSayT")}</small>${PLZ_SAY.map((x,i)=>`<button data-pz="say" data-k="${i}"><b>${esc(x[0])}</b><small>${esc(plzSayMean(x))}</small></button>`).join("")}</div></div>
     <button class="pz-big pz-intb" data-pz="int"><b>👋</b><span>${T("plzInt")}</span></button><button class="pz-big pz-actsb" data-pz="acts"><b>✨</b><span>${T("plzAct")}</span></button>
-    <div class="pz-joy rest"><i></i></div><div class="pz-hint">${T("plzHint")}</div><div class="pz-banner">${PLZ_ZONES.find(z=>z.k===zone).ic} ${T("plzZ_"+zone)}<small>${T("plzZd2_"+zone)}</small></div>`;
+    <div class="pz-joy rest"><i></i></div><div class="pz-hint">${T("plzHint")}</div><div class="pz-banner">${PLZ_ZONES.find(z=>z.k===zone).ic} ${T("plzZ_"+zone)}<small>${T(zone==="gate"?"plzZd3_gate":"plzZd2_"+zone)}</small></div>`;
   document.body.appendChild(box); document.body.classList.add("pz-open");
   const stage=box.querySelector(".pz-stage"), world=box.querySelector(".pz-world"); world.style.width=PLZ_W+"px"; world.style.height=PLZ_H+"px"; plzGround(box.querySelector(".pz-ground"),zone);
   ROOM={zone, box, stage, world, ents:new Map(), live:new Map(), rows:(PLAZA.rows||[]), top:PLAZA.top||[], star:PLAZA.star||null, keys:{}, J:null, last:performance.now(), cam:null, sendAt:0, sent:"", db:null, ch:0, want:(at&&at.ch)||0, pick:!!(at&&at.pick), act:Date.now()};
@@ -10287,7 +10306,7 @@ async function plazaOpen(zone,at){ if(featLock("plaza")) return toast("🔒 "+lo
         const bn=box.querySelector(".pz-banner"); if(bn){ bn.style.animation="none"; void bn.offsetWidth; bn.style.animation=""; } },120); }); } }
   if(zone==="fountain") pzEggsBuild();   // 🍀 puzzle clovers hidden on the four lawns
   for(const sp of PLZ_SPOTS[zone]||[]){ const e=document.createElement("div"); e.className="pz-spot"; e.style.cssText=`left:${sp.x}px;top:${sp.y-sp.h}px;z-index:${sp.y+400}`; e.innerHTML=`<b>${sp.ic}</b><span>${T("plzSpot_"+sp.k)}</span>`; world.appendChild(e); }
-  if(zone==="gate"){ plzNbBuild(); plzNoticeLoad(); } if(zone==="band") plzNotesBuild(); if(zone==="lawn") plzLawnBuild();
+  if(zone==="gate") plzEvLoad(); if(zone==="band") plzNotesBuild(); if(zone==="lawn") plzLawnBuild();
   if(zone==="fountain"){ for(const pd of PLZ_PODS){ const e=document.createElement("div"); e.className="pz-podl"; e.style.cssText=`left:${pd.x+192}px;top:${pd.y-64}px;z-index:${pd.y+400}`; e.textContent=`${pd.ic} ${T("plzPod_"+pd.k)}`; world.appendChild(e); } setTimeout(plzTopsLoad,0); }
   for(const q of PLZ_OCC[zone]||[]){
     const im=document.createElement("img"); im.className="pz-occ"; im.alt=""; im.src=`assets/art/plaza/${q.f}.webp`; im.style.cssText=`left:${q.x}px;top:${q.y}px;width:${q.w}px;height:${q.h}px;z-index:${q.z}`; world.appendChild(im); (ROOM.occ=ROOM.occ||[]).push({el:im,q}); }
@@ -10331,7 +10350,7 @@ async function plzJoin(){ const R=ROOM; try{
     if(ROOM!==R) return;
     const room=dbM.ref(db,`plaza/${R.zone}-${R.ch}`), up=sn=>{ const u=sn.key, v=sn.val(); if(!ROOM||u===me||!v) return; if(Date.now()-(v.ts||0)>PLZ_STALE+30e3) return;
         const had=R.live.has(u); R.live.set(u,v); if(!had){ const off=R.ents.get(u); if(off&&off.kind==="off"){ off.el.remove(); R.ents.delete(u); } plzRebuild(); }
-        if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); if(v.g||v.gv) plzGrabSeen(v,me); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; const bt=plzBDec(v.b); if(bt[0]==="@") plzDo(o,bt.slice(1)); else if(bt) plzSay(o,bt); } } };
+        if(v.pn!=null&&v.pt) plzSongSet(v.pn,v.pt,v.n||"?"); const o=R.ents.get(u); if(o){ o.tx=v.x; o.ty=v.y; o.face=v.d||o.face; o.mv=!!v.mv; o.h=v.h||""; o.hw=v.hw||""; plzHoldSet(o); if(v.b&&v.bt&&v.bt!==o.bt){ o.bt=v.bt; const bt=plzBDec(v.b); if(bt[0]==="@") plzDo(o,bt.slice(1)); else if(bt) plzSay(o,bt); } } };
     R.unsub=[dbM.onChildAdded(room,up), dbM.onChildChanged(room,up), dbM.onChildRemoved(room,sn=>{ if(!ROOM) return; R.live.delete(sn.key); const o=R.ents.get(sn.key); if(o&&o.kind==="live"){ o.el.remove(); if(o.edge) o.edge.remove(); R.ents.delete(sn.key); } plzRebuild(); })];
     if(R.zone==="lawn") plzLawnJoin(dbM,db);
     R.hb=setInterval(()=>{ if(ROOM!==R) return clearInterval(R.hb); if(R.away&&Date.now()-R.away.at>15*60e3) return plazaClose();
@@ -10342,7 +10361,7 @@ async function plzJoin(){ const R=ROOM; try{
 async function plzSend(force,extra){ const R=ROOM; if(!R||!R.myRef) return; if(extra&&"b" in extra){ const b=plzBEnc(extra.b); if(!b) return; extra={...extra, b}; } const m=R.me, t=Date.now(); if(!force&&!extra&&t-R.sendAt<PLZ_SEND) return;
   const st=`${Math.round(m.x)},${Math.round(m.y)},${m.face},${m.mv?1:0}`; if(!force&&!extra&&st===R.sent) return; R.sendAt=t; R.sent=st;
   const pos={x:Math.round(m.x), y:Math.round(m.y), d:m.face<0?-1:1, mv:!!m.mv};
-  const core={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, h:m.h||"", hw:(m.hw||"").slice(0,18), ...(m.pt?{pn:m.pn|0, pt:m.pt}:{}), ...(m.g&&t-m.g.t<8000?{g:m.g}:{}), ...(m.gv&&t-m.gv.t<8000?{gv:m.gv}:{})};
+  const core={n:m.name.slice(0,16), l:m.look.slice(0,100), f:(m.flag||"").slice(0,2), s:m.s|0, h:m.h||"", hw:(m.hw||"").slice(0,18), ...(m.pt?{pn:m.pn|0, pt:m.pt}:{})};
   const cs=JSON.stringify(core);
   // traffic (Realtime Database bills every byte sent to the others in the line): the whole row only when joining, every
   // 15 s heartbeat, or when name/look/held word/song/grab changes; plain walking sends just the position fields that changed
@@ -10380,12 +10399,10 @@ function plzInput(){ const R=ROOM, st=R.stage, joy=R.box.querySelector(".pz-joy"
     if(a==="say"){ const x=PLZ_SAY[+b.dataset.k]; if(!x) return; hideActs(); plzSay(R.me,x[0]); plzSend(false,{b:x[0], bt:Date.now()}); }
     if(a==="encgo") return plzFight();
     if(a==="encrun") return plzEncEnd();
-    if(a==="boardx"||a==="boardgo"||a==="boardlg"){ const el=R.box.querySelector(".pz-board"); if(el) el.remove(); if(a==="boardgo"){ plzAway("📖"); S.tab="today"; S.view="today"; render(); window.scrollTo(0,0); } if(a==="boardlg") loginPop(true); return; }
-    if(a==="grab") return plzGrabTap();
+    if(a==="boardx"){ const el=b.closest(".pz-board")||R.box.querySelector(".pz-board"); if(el) el.remove(); return; }
     if(a==="pianox") return plzPianoClose();
     if(a==="pianore") return plzPianoAgain();
     if(a==="wput") return plzWordPut();
-    if(a==="wsay"){ const w=(R.me.hw||"").toLowerCase().replace(/[^a-z'-]/g,""); if(w) speak(w); return; }
     if(a==="radio"){ return plzRadio(); }
     if(a==="rbook"){ return plzRareBook(); }
     if(a==="radiox"){ return plzRadioStop(); } }); }
@@ -10454,11 +10471,11 @@ function plzStep(now){ const R=ROOM; if(!R) return; if(R.piano){ R.last=now; R.r
       const sx=(o.x-cx)*z+vw/2, sy=(o.y-50-cy)*z+vh/2, ex=Math.max(46,Math.min(vw-46,sx)), ey=Math.max(90,Math.min(vh-40,sy));
       o.edge.style.transform=`translate(${ex.toFixed(0)}px,${ey.toFixed(0)}px)`; o.edge.firstChild.style.transform=`rotate(${Math.atan2(sy-ey,sx-ex).toFixed(2)}rad)`; o.edge.hidden=false; }
     else if(o.edge) o.edge.hidden=true; }
-  if(R.zone==="gate") plzGrabUi(cx,cy,z,vw,vh,now); if(R.lawn) plzLawnStep(cx,cy,z,vw,vh,now);
+  if(R.lawn) plzLawnStep(cx,cy,z,vw,vh,now);
   // anyone standing behind a tree / lamp / bench makes it see-through, so nobody vanishes (CheChe 2026-11-24, option 2)
   const behind=(q,e)=>e.y<plzOccZ(q,e.x)&&e.x>q.x-20&&e.x<q.x+q.w+20&&e.y-80<q.y+q.h&&e.y>q.y;
   for(const o of R.occ||[]){ const q=o.q; let hid=false; for(const e of R.ents.values()) if(e.kind!=="pod"&&behind(q,e)){ hid=true; break; } if(hid!==o.hid){ o.hid=hid; o.el.classList.toggle("pz-see",hid); } }
-  if(R.nb) plzNbSync(); if(R.notes){ if((m.h||"")[0]==="n"&&plzAtStage(m)) plzNotePlace(); plzNotesSync(); }
+  if(R.notes){ if((m.h||"")[0]==="n"&&plzAtStage(m)) plzNotePlace(); plzNotesSync(); }
   const nr=plzNear(), cx0=plzCtx(), spn=cx0?null:plzSpotNear(), far=!nr||Math.hypot(nr.x-m.x,nr.y-m.y)>90, useC=!!cx0, useSp=spn&&far,   /* at the board or a note, the button always lifts / picks up (tap a person to see them) */ ck=useC?cx0.k:"";
   if(nr!==R.nearO||spn!==R.nearS||ck!==R.nearC){ if(R.nearO) R.nearO.el.classList.remove("pz-near"); if(nr) nr.el.classList.add("pz-near"); R.nearO=nr; R.nearS=spn; R.nearC=ck;
     plzAlert(!!(spn||cx0)&&!(cx0&&cx0.lawn&&cx0.k!=="seed"),(spn?spn.k:"")+ck);   /* no "!" while on the mower or carrying seedlings (CheChe 2026-11-26) */ const ib=R.box.querySelector(".pz-intb"); ib.classList.toggle("on",!!(nr||spn||cx0)); ib.innerHTML=useC?`<b>${cx0.ic}</b><span>${cx0.t}</span>`:useSp?`<b>${spn.ic}</b><span>${T("plzSpot_"+spn.k)}</span>`:`<b>👋</b><span>${T("plzInt")}</span>`; }
@@ -10524,7 +10541,7 @@ const PLZ_SAY=[["Hi there!","嗨！","Hi!","नमस्ते!","¡Hola!","や�
   ["Grand!","沒問題、很好！（愛爾蘭口語）","Fine / great! (Irish)","बढ़िया! (आयरिश)","¡Genial! (irlandés)","いいね！（アイルランド英語）","좋아! (아일랜드 말)"],["See you later!","待會見！","Bye for now!","फिर मिलेंगे!","¡Hasta luego!","またね！","나중에 봐!"]];
 const plzSayMean=x=>x[{zh:1,en:2,hi:3,es:4,ja:5,ko:6}[LANG]||1];
 // landmarks: walk up to them and the 互動 button turns into the landmark (h = how high the marker floats above x,y)
-const PLZ_SPOTS={fountain:[{k:"well",ic:"🌠",x:768,y:560,h:150,r:230}], pond:[{k:"news",ic:"📚",x:658,y:340,h:330,r:180},{k:"cv",ic:"📝",x:880,y:365,h:200,r:95}]};   /* 履歷桌 right of the book hut (CheChe 2026-11-26): AI CV writer, games/cv.js */   /* 閱讀角 north of the duck lake (CheChe 2026-11-25): take a book at the hut, then you sit down in a reading chair */
+const PLZ_SPOTS={gate:[{k:"bdc",ic:"🌏",x:380,y:700,h:304,r:150},{k:"bdl",ic:"☘️",x:768,y:660,h:304,r:150},{k:"bds",ic:"⚽",x:1156,y:700,h:304,r:150}], fountain:[{k:"well",ic:"🌠",x:768,y:560,h:150,r:230}], pond:[{k:"news",ic:"📚",x:658,y:340,h:330,r:180},{k:"cv",ic:"📝",x:880,y:365,h:200,r:95}]};   /* 履歷桌 right of the book hut (CheChe 2026-11-26): AI CV writer, games/cv.js */   /* 閱讀角 north of the duck lake (CheChe 2026-11-25): take a book at the hut, then you sit down in a reading chair */
 const PLZ_SEATS=[{x:450,y:430,f:1},{x:560,y:590,f:1},{x:1086,y:430,f:-1},{x:980,y:560,f:-1},{x:300,y:360,f:1},{x:240,y:520,f:1},{x:1270,y:380,f:-1},{x:1220,y:500,f:-1}];   // the reading chairs: where you sit (feet) and which way you face   /* the bandstand: no news radio any more (CheChe 2026-11-24), notes + 🎹 instead */   // the gate's notice board is a real board now (plzNbBuild)
 function plzSpotNear(){ const R=ROOM; if(!R||!R.me) return null; let best=null, bd=1e9;
   if(R.zone==="pond"&&(R.me.h||"")[0]!=="b") for(const st of PLZ_SEATS){ const d=Math.hypot(st.x-R.me.x,(st.y-R.me.y)*1.2); if(d<75&&d<bd&&plzSeatOk(st)){ bd=d; best={k:"seat",ic:"📚",st}; } }   // stand by an empty reading chair: take a book and sit right there
@@ -10727,7 +10744,7 @@ function plzSpotGo(sp){ const R=ROOM; if(!R) return;
   if(sp.k==="well"){ plzAway("🌠"); S.tab="adv"; S.view="adv"; S.advTab="vault"; render(); setTimeout(()=>{ const w=document.querySelector(".well-card"); if(w) w.scrollIntoView({block:"start"}); else window.scrollTo(0,0); },60); return; }
   if(sp.k==="egg") return pzOpen(sp.egg);
   if(sp.k==="radio") return plzRadio();
-  if(sp.k==="board") return plzBoard();
+  if(PLZ_BD[sp.k]) return plzEvOpen(sp.k);
   if(sp.k==="news"){ R.wantSeat=null; return plzNews(); }
   if(sp.k==="cv") return cvOpen();
   if(sp.k==="seat"){ R.wantSeat=sp.st; return plzNews(); } }
@@ -10903,16 +10920,6 @@ async function plzNewsApi(w){ const R=ROOM, el=R&&R.box.querySelector(".pz-nword
   let r=DX.api[w]; if(!r){ try{ const res=await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/"+encodeURIComponent(w)); if(res.status===404) r={none:1}; else if(!res.ok) throw 0; else { const j=await res.json(), defs=[]; for(const e of j||[]) for(const m of e.meanings||[]) for(const d of (m.definitions||[]).slice(0,1)) if(defs.length<2) defs.push({pos:m.partOfSpeech||"", def:d.definition||""}); r=defs.length?{defs}:{none:1}; } DX.api[w]=r; }catch(e){ r={err:1}; } }
   if(!el.isConnected||dxNorm(el.dataset.w)!==w) return; const s2=el.querySelector("small"), gt=`<span class="pz-nacts"><a href="${dxGtUrl(w)}" target="_blank" rel="noopener noreferrer">${T("dxGt")} ↗</a></span>`;
   if(s2) s2.innerHTML=r.defs?r.defs.map(d=>`<span class="pz-nmut">${esc(d.pos)}</span> ${esc(d.def)}`).join("<br>")+gt:`<span class="pz-nmut">${T(r.err?"dxErr":"dxApiNone")}</span>`+gt; }
-// 公告板 at the gate: today's headline, today's three steps and the daily login reward
-function plzBoard(){ const R=ROOM; if(!R) return; const old=R.box.querySelector(".pz-board"); if(old) return old.remove();
-  const art=mainArticle(), d=dayRec(), done=[!!(d.preDone||!eligible().length),!!d.read,!!d.postDone], n=done.filter(Boolean).length;
-  let lg=""; if(!PLANS_ON){ const L=loginSt(), claimed=!!L.last&&L.last>=(loginDay()||today()); if(!claimed) lg=`<button class="btn" data-pz="boardlg">🎁 ${T("plzBoardLogin")}</button>`; }
-  const el=document.createElement("div"); el.className="pz-board";
-  el.innerHTML=`<div class="pz-boardin"><b class="pz-boardt">📰 ${T("plzBoardT")}</b>${art?`<small class="muted">${T("plzBoardToday")}</small><p class="pz-boardh">${esc(art.title)}</p>`:""}
-    <div class="pz-boardst">${[T("stepPre"),T("stepRead"),T("stepPost")].map((t,i)=>`<span class="${done[i]?"ok":""}">${done[i]?"✓":i+1} ${esc(t)}</span>`).join("")}</div>
-    <small class="muted">${T("plzBoardSteps",{n})}</small>
-    <div class="row" style="justify-content:center;flex-wrap:wrap">${n<3?`<button class="btn" data-pz="boardgo">📖 ${T("plzBoardGo")}</button>`:""}${lg}<button class="btn ghost" data-pz="boardx">${T("plzBack")}</button></div></div>`;
-  R.box.appendChild(el); }
 // 音樂台: today's news recording plays over the park while you stay in the room
 function plzNewsRec(){ const art=mainArticle(); if(!art||!NEWS_AUDIO||!NEWS_AUDIO.sha) return null; const I=NEWS_AUDIO.items||{}, lv0=levelOf(art)||"base", lv=I[art.id+"|"+lv0]?lv0:"base", it=I[art.id+"|"+lv];
   if(it&&!recMatch(art,lv,it)) return null;
@@ -10924,96 +10931,12 @@ function plzRadioBar(){ const R=ROOM; if(!R) return; let el=R.box.querySelector(
   if(!el){ el=document.createElement("div"); el.className="pz-radio"; R.box.appendChild(el); }
   el.innerHTML=`<span>📻</span><span class="pz-radiot"><small>${T("plzNowPlay")}</small><b>${esc(R.radio.art.title)}</b></span><button data-pz="radio">${R.radio.a.paused?"▶":"⏸"}</button><button data-pz="radiox">✕</button>`; }
 function plzRadioStop(R0){ const R=R0||ROOM; if(!R||!R.radio) return; try{ R.radio.a.pause(); }catch(e){} R.radio=null; const el=R.box&&R.box.querySelector(".pz-radio"); if(el) el.remove(); if(SND.ctx) musicForView(); }
-/* ===== 大佈告欄 & 音符點歌 (CheChe 2026-11-23) =====
-   Gate: a big notice board stands in the middle with the announcement written on it as word cards. Walk up to it and lift a
-   word: it rides above your head (everyone in the room sees it), you hear it and see what it means; put it back on the board,
-   or lift another. Bandstand: five music notes lie on the ground. Pick one up, carry it to the steps of the bandstand and
+/* ===== 音符點歌 (CheChe 2026-11-23; the gate's word rug was replaced by three notice boards on 2026-11-28, see 大門公告欄) =====
+   Bandstand: five music notes lie on the ground. Pick one up, carry it to the steps of the bandstand and
    the park's music changes for everyone in that room. What you hold and the last note you placed ride in your presence row
    (h = "w3" / "n2", hw = the word, pn / pt = note placed and when), so nothing else is written to the database.
    The announcement is config/plaza {notice} in Firestore (developer panel), or PLZ_NOTICE_DEF. */
-const PLZ_NB={x0:280, x1:1256, y0:500, top:96, row:92, gap:46, pad:50};   // the rug: left, right, top edge (world px); top = first row of words below the edge, row = row spacing, gap = space between words
-const PLZ_NOTICE_DEF="Welcome to BinBin Park! Lift a word to learn it. Carry a music note to the bandstand and change the song for everyone.";
-let PLZ_NOTICE={t:null, at:0};
-const plzNoticeText=()=>String(PLZ_NOTICE.t||PLZ_NOTICE_DEF).replace(/\s+/g," ").trim().slice(0,240);
-// the words on the board: split on spaces (a sentence without spaces, e.g. Chinese, is cut into 2-letter pieces), at most 32
-function plzNoticeWords(){ const t=plzNoticeText(); let w=t.split(" ").filter(Boolean); if(w.length<3&&t.length>8) w=t.replace(/ /g,"").match(/.{1,2}/gu)||[t]; return w.slice(0,32).map(x=>x.slice(0,18)); }
-async function plzNoticeLoad(){ if(!CLOUD.fb||Date.now()-PLZ_NOTICE.at<5*60e3) return; PLZ_NOTICE.at=Date.now();
-  try{ const {fsM,db}=CLOUD.fb, sn=await fsM.getDoc(fsM.doc(db,"config","plaza")); const t=sn&&sn.exists()?String((sn.data()||{}).notice||"").trim():"";
-    if((t||null)!==PLZ_NOTICE.t){ PLZ_NOTICE.t=t||null; const R=ROOM; if(R&&R.zone==="gate"){ if(R.me) R.me.h=""; plzNbBuild(); } } }catch(e){} }
-async function plzNoticeSave(){ if(!CLOUD.fb||!isAdminUser()) return toast(T("mtNeedAdmin")); const el=document.getElementById("plzNoticeIn"); const t=((el&&el.value)||"").replace(/\s+/g," ").trim().slice(0,240);
-  const {fsM,db}=CLOUD.fb; try{ await fsM.setDoc(fsM.doc(db,"config","plaza"),{notice:t, at:Date.now()},{merge:true}); PLZ_NOTICE={t:t||null, at:Date.now()}; toast(T("dDone")); }
-  catch(e){ toast(e&&e.code==="permission-denied"?T("dsDenied"):T("syncFail")); } }
-function plzNoticeDev(){ return `<div class="dev-plan"><b>📢 ${T("plzNbDevT")}</b><textarea id="plzNoticeIn" class="search" rows="3" maxlength="240" placeholder="${esc(PLZ_NOTICE_DEF)}">${esc(PLZ_NOTICE.t||"")}</textarea><button class="btn sm" data-act="plznotice">${T("plzNbDevSave")}</button><span class="muted sm-t">${T("plzNbDevNote")}</span></div>`; }
-// the board is a big rug lying on the paving; every word stands on it as a little card. Stand on a word (your feet on it) to lift it.
-function plzNbBuild(){ const R=ROOM; if(!R||R.zone!=="gate") return; if(R.nb){ R.nb.el.remove(); R.nb.cards.forEach(c=>c.remove()); }
-  const words=plzNoticeWords(), Q=PLZ_NB, cv=document.createElement("canvas").getContext("2d"); cv.font="800 26px system-ui,sans-serif";
-  const ws=words.map(w=>Math.ceil(cv.measureText(w).width)+28), maxW=Q.x1-Q.x0-Q.pad*2, rows=[[]]; let rw=0;
-  ws.forEach((w,i)=>{ if(rows[rows.length-1].length&&rw+w>maxW){ rows.push([]); rw=0; } rows[rows.length-1].push(i); rw+=w+Q.gap; });
-  const pos=[]; rows.forEach((r,ri)=>{ const tot=r.reduce((a,i)=>a+ws[i],0)+Q.gap*(r.length-1); let x=(Q.x0+Q.x1)/2-tot/2; const y=Q.y0+Q.top+ri*Q.row;
-    r.forEach(i=>{ pos[i]=[x+ws[i]/2, y, ws[i]]; x+=ws[i]+Q.gap; }); });
-  const H=Q.top+(rows.length-1)*Q.row+Q.pad; Q.y1=Q.y0+H;
-  const el=document.createElement("div"); el.className="pz-rug"; el.style.cssText=`left:${Q.x0}px;top:${Q.y0}px;width:${Q.x1-Q.x0}px;height:${H}px`;
-  el.innerHTML=`<div class="pz-rugh"><b>📢 ${T("plzNbT")}</b><button data-nb="news">📰 ${T("plzNbNews")}</button></div>`+pos.map(([x,y,w])=>`<i class="pz-rugs" style="left:${(x-w/2-Q.x0).toFixed(0)}px;top:${(y-Q.y0-14).toFixed(0)}px;width:${w}px"></i>`).join("");
-  R.world.appendChild(el);
-  const cards=words.map((w,i)=>{ const c=document.createElement("button"); c.className="pz-wc"; c.dataset.w=i; c.textContent=w; c.style.cssText=`left:${pos[i][0].toFixed(0)}px;top:${pos[i][1]}px;z-index:${Math.round(pos[i][1]/4)*4}`; R.world.appendChild(c); return c; });
-  R.nb={el, words, cards, tiles:cards, pos, taken:"", tg:-1, seeAt:0};
-  const tap=ev=>{ if(R.dragged) return; const b=ev.target.closest("[data-w],[data-nb]"); if(!b) return; ev.stopPropagation();
-    if(b.dataset.nb==="news") return plzBoard();
-    const i=+b.dataset.w; if(plzNbTarget(true)!==i) return toast(T("plzNbFar")); if(R.me.h==="w"+i) return plzWordPut(); plzWordLift(i); };
-  el.addEventListener("click",tap); cards.forEach(c=>c.addEventListener("click",tap)); }
-function plzNbPos(){ const N=ROOM&&ROOM.nb; return N?N.pos:null; }
-function plzNbReach(){ const R=ROOM, m=R&&R.me, Q=PLZ_NB; return !!(m&&R.nb&&R.zone==="gate"&&m.x>Q.x0-20&&m.x<Q.x1+20&&m.y>Q.y0&&m.y<(Q.y1||Q.y0)+40); }
-// which words someone is holding right now (so their card shows as an empty slot on the board)
-function plzTakenSet(kind){ const R=ROOM, s=new Set(); for(const o of R.ents.values()) if(o.kind==="me"||o.kind==="live"){ const h=o.h||""; if(h[0]===kind) s.add(+h.slice(1)); } return s; }
-// the word under your feet (any = also one somebody holds, for a tap on its slot)
-function plzNbTarget(any){ const R=ROOM, N=R&&R.nb; if(!N||!R.me||!plzNbReach()) return -1; const tk=any?new Set():plzTakenSet("w"), m=R.me; let best=-1, bd=1e9;
-  N.pos.forEach(([x,y,w],i)=>{ if(tk.has(i)) return; const dx=Math.abs(m.x-x), dy=m.y-y; if(dx<w/2+8&&dy>-30&&dy<28){ const d=dx+Math.abs(dy); if(d<bd){ bd=d; best=i; } } }); return best; }
-function plzWordLift(i){ const R=ROOM, N=R&&R.nb; if(!N||N.words[i]==null) return; if(plzTakenSet("w").has(i)&&R.me.h!=="w"+i) return toast(T("plzNbTaken"));
-  const w=N.words[i]; R.me.h="w"+i; R.me.hw=w; plzHoldSet(R.me); plzSend(true); sfx("tap");
-  const clean=w.toLowerCase().replace(/[^a-z'-]/g,"").replace(/^'+|'+$/g,""); if(clean&&/^[a-z]/.test(clean)) speak(clean);
-  plzWordCard(w,clean); plzNbSync(true); }
-function plzWordPut(){ const R=ROOM; if(!R||!R.me.h) return; R.me.h=""; R.me.hw=""; plzHoldSet(R.me); plzSend(true); const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzNbSync(true); plzNotesSync(true); }   // puts back a word or a note
-// the card at the bottom: the word you hold, what it means (BinBin dictionary), listen, put back
-async function plzWordCard(w,clean){ const R=ROOM; let el=R.box.querySelector(".pz-hcard"); if(!el){ el=document.createElement("div"); el.className="pz-hcard"; R.box.appendChild(el); }
-  const draw=mean=>{ if(ROOM!==R||R.me.hw!==w) return; el.innerHTML=`<span class="pz-hcw">🙌 <b>${esc(w)}</b>${clean?`<button data-pz="wsay" aria-label="🔊">🔊</button>`:""}</span>${mean?`<small>${esc(mean)}</small>`:clean?`<small class="muted">${T("plzNbLook")}</small>`:""}<button data-pz="wput">↩️ ${T("plzNbPut")}</button>`; };
-  draw(""); if(!clean) return; try{ await dxLoad(); const b=dxBase(clean), e=b&&dxEntry(b); const mean=e?(e[DX.lang]||e.zh||e.en||""):""; draw(mean?String(mean).split(/[;；]/)[0].slice(0,40):(LANG==="en"?"":T("plzNbNoMean"))); }catch(e){} }
-// the board's cards follow who holds what; the one under your feet glows; a card fades while someone stands on it or right behind it
-function plzNbSync(force){ const R=ROOM, N=R&&R.nb; if(!N) return; const tk=plzTakenSet("w"), key=[...tk].sort().join(","), tg=!R.me||(R.me.h||"")[0]==="w"?-1:plzNbTarget();
-  if(force||key!==N.taken){ N.taken=key; N.cards.forEach((t,i)=>t.classList.toggle("gone",tk.has(i))); }
-  if(force||tg!==N.tg){ if(N.cards[N.tg]) N.cards[N.tg].classList.remove("tg"); N.tg=tg; if(N.cards[tg]) N.cards[tg].classList.add("tg"); }
-  const now=performance.now(); if(!force&&now-N.seeAt<90) return; N.seeAt=now; const ppl=[...R.ents.values()];
-  N.pos.forEach(([x,y,w],i)=>{ const see=ppl.some(o=>Math.abs(o.x-x)<w/2+26&&o.y>y-100&&o.y<y+34); const c=N.cards[i]; if(see!==!!c.see){ c.see=see; c.classList.toggle("see",see); } }); }
-
-/* ---- 搶字 / 送字: no word on your head? walk up to someone holding one and a ✊ button appears on each side of them: tap fast to
-   take it. The closer you stand, the fewer taps (5 at arm's length, 8 at the edge of reach); every bit the holder walks while you
-   try adds more, and stopping lets your count slip back. Holding a word, walk up to someone with none and put it on their head.
-   The other player's phone gives up / takes the word when it sees g / gv {to, w, t} in your presence row. ---- */
-const PLZ_GRAB={reach:130, near:45, min:5, max:8, walk:70, extra:6, slip:1100};
-function plzGrabTarget(){ const R=ROOM, m=R.me; if(R.zone!=="gate"||(m.h||"")||R.enc) return null; let best=null, bd=PLZ_GRAB.reach;
-  for(const o of R.ents.values()){ if(o.kind!=="live"||(o.h||"")[0]!=="w") continue; const d=Math.hypot(o.x-m.x,(o.y-m.y)*1.2); if(d<bd){ bd=d; best=o; } } return best; }
-function plzGiveTarget(){ const R=ROOM, m=R.me; if(R.zone!=="gate"||(m.h||"")[0]!=="w") return null; let best=null, bd=110;
-  for(const o of R.ents.values()){ if(o.kind!=="live"||o.h) continue; const d=Math.hypot(o.x-m.x,(o.y-m.y)*1.2); if(d<bd){ bd=d; best=o; } } return best; }
-function plzGrabUi(cx,cy,z,vw,vh,now){ const R=ROOM, o=plzGrabTarget(); let el=R.box.querySelector(".pz-grab");
-  if(!o){ if(el) el.remove(); R.grab=null; return; }
-  let G=R.grab; if(!G||G.o!==o){ G=R.grab={o, taps:0, moved:0, lx:o.x, ly:o.y, last:now}; }
-  G.moved+=Math.hypot(o.x-G.lx,o.y-G.ly); G.lx=o.x; G.ly=o.y;
-  if(G.taps>0&&now-G.last>PLZ_GRAB.slip){ G.taps=Math.max(0,G.taps-1); G.last=now-PLZ_GRAB.slip+350; }
-  const d=Math.hypot(o.x-R.me.x,(o.y-R.me.y)*1.2), base=Math.round(Math.min(PLZ_GRAB.max,Math.max(PLZ_GRAB.min,PLZ_GRAB.min+(PLZ_GRAB.max-PLZ_GRAB.min)*(d-PLZ_GRAB.near)/(PLZ_GRAB.reach-PLZ_GRAB.near)))); G.need=base+Math.min(PLZ_GRAB.extra,Math.floor(G.moved/PLZ_GRAB.walk));
-  if(!el){ el=document.createElement("div"); el.className="pz-grab"; el.innerHTML=`<button data-pz="grab" class="l">✊</button><span></span><button data-pz="grab" class="r">✊</button>`; R.box.appendChild(el); }
-  const sx=(o.x-cx)*z+vw/2, sy=(o.y-46-cy)*z+vh/2, k=`${Math.round(sx)},${Math.round(sy)},${Math.floor(G.taps)}/${G.need}`;
-  if(k!==G.k){ G.k=k; el.style.transform=`translate(${Math.max(112,Math.min(vw-112,sx)).toFixed(0)}px,${Math.max(190,Math.min(vh-120,sy)).toFixed(0)}px)`; el.children[1].innerHTML=`<b>${Math.floor(G.taps)}/${G.need}</b><small>${T("plzGrabT")}</small>`; el.style.setProperty("--p",(G.taps/G.need).toFixed(2)); } }
-function plzGrabTap(){ const R=ROOM, G=R&&R.grab; if(!G||!G.o||(R.me.h||"")) return; const o=G.o; G.taps=Math.floor(G.taps)+1; G.last=performance.now(); G.k=""; sfx("tap");
-  const el=R.box.querySelector(".pz-grab"); if(el){ el.classList.remove("hit"); void el.offsetWidth; el.classList.add("hit"); }
-  if(G.taps===1){ plzSay(R.me,"✊"); plzSend(false,{b:"✊", bt:Date.now()}); }
-  if(G.taps<G.need) return;
-  const h=o.h, hw=o.hw; R.me.h=h; R.me.hw=hw; R.me.g={to:o.id, w:h, t:Date.now()}; o.h=""; o.hw=""; plzHoldSet(o); plzHoldSet(R.me); R.grab=null; if(el) el.remove();
-  plzSend(true); sfx("coin"); toast(T("plzGrabOk",{w:hw})); const clean=(hw||"").toLowerCase().replace(/[^a-z'-]/g,""); plzWordCard(hw,clean); plzNbSync(true); }
-function plzGive(o){ const R=ROOM; if(!o||(R.me.h||"")[0]!=="w"||o.h) return; const h=R.me.h, hw=R.me.hw; R.me.gv={to:o.id, w:h, hw, t:Date.now()}; o.h=h; o.hw=hw; plzHoldSet(o);
-  R.me.h=""; R.me.hw=""; plzHoldSet(R.me); const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzSend(true); plzSay(R.me,"🎁"); toast(T("plzGiveOk",{n:o.name||"?",w:hw})); plzNbSync(true); }
-// someone else's row says they took my word, or put one on my head
-function plzGrabSeen(v,me){ const R=ROOM; if(!R) return;
-  if(v.g&&v.g.to===me&&v.g.t>(R.gotG||0)){ R.gotG=v.g.t; if(R.me.h===v.g.w){ R.me.h=""; R.me.hw=""; plzHoldSet(R.me); const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzSend(true); toast(T("plzGrabbed",{n:v.n||"?"})); } }
-  if(v.gv&&v.gv.to===me&&v.gv.t>(R.gotGv||0)){ R.gotGv=v.gv.t; if(!R.me.h&&R.zone==="gate"){ R.me.h=String(v.gv.w||""); R.me.hw=String(v.gv.hw||"").slice(0,18); plzHoldSet(R.me); plzSend(true); toast(T("plzGiven",{n:v.n||"?",w:R.me.hw})); plzWordCard(R.me.hw,R.me.hw.toLowerCase().replace(/[^a-z'-]/g,"")); } } }
+function plzWordPut(){ const R=ROOM; if(!R||!R.me.h) return; R.me.h=""; R.me.hw=""; plzHoldSet(R.me); plzSend(true); const c=R.box.querySelector(".pz-hcard"); if(c) c.remove(); plzNotesSync(true); }   // puts back the note you hold
 // what a person holds, drawn above their head
 function plzHoldSet(o){ const h=o.h||"", k=h+"|"+(o.hw||""); if(k===o.holdK) return; o.holdK=k; o.el.classList.toggle("pz-ride",h==="m"); let el=o.el.querySelector(".pz-hold");
   if(!h||h==="m"){ if(el) el.remove(); o.el.classList.remove("pz-holding"); return; }
@@ -11155,14 +11078,60 @@ async function plzPianoTopSave(tr,score){ if(!CLOUD.fb||!CLOUD.user||score<1) re
 // which plaza tune should play (null = the usual town music); safe to call before the plaza code has run
 function plzTrack(){ try{ const R=ROOM; return R&&!R.away&&R.zone==="band"&&R.song!=null&&PLZ_NOTES[R.song]?PLZ_NOTES[R.song].tr:null; }catch(e){ return null; } }
 function plzRadioOn(){ try{ const R=ROOM; return !!(R&&!R.away&&R.radio&&!R.radio.a.paused); }catch(e){ return false; } }
+/* ===== 大門公告欄 (CheChe 2026-11-28) =====
+   Three notice boards stand at the gate. Left 🌏 同鄉會佈告欄: what each country's community in Ireland is doing (opens on the
+   player's own flag); middle ☘️ 翡翠島好去處: events around Ireland; right ⚽ 賽事看板: upcoming matches. Walk up and press 互動.
+   Data: boards/boards.json, rewritten every morning by a scheduled task (branch claude/articles-DATE-boards → publish-articles).
+   {updated, community:[{t,d,d2,tm,w,c,u,cc,n}], local:[…], sports:[…]}: t title (English), d / d2 first / last day (YYYY-MM-DD,
+   optional for news), tm time, w venue, c city (dublin/cork/galway/limerick, or ie = all of Ireland / online), u link, cc country
+   (community only), n one short note. Past items hide themselves; a board shows at most 10 for the chosen city. */
+const PLZ_BD={bdc:{key:"community", col:"#E86A5C", soft:"#FDE4DF"}, bdl:{key:"local", col:"#3FA34D", soft:"#E1F3DC"}, bds:{key:"sports", col:"#3B7DD8", soft:"#E0ECFB"}};
+const BD_CITIES=["dublin","cork","galway","limerick"];
+let BD={at:0, d:null, busy:null};
+function bdLs(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){} return null; }
+function plzEvLoad(force){ if(BD.busy) return BD.busy; if(!force&&BD.d&&Date.now()-BD.at<10*60e3) return Promise.resolve(BD.d);
+  BD.busy=fetchT("boards/boards.json",15000).then(r=>r.ok?r.json():null).then(j=>{ if(j&&typeof j==="object"){ BD.d=j; BD.at=Date.now(); } return BD.d; }).catch(()=>BD.d).finally(()=>{ BD.busy=null; });
+  return BD.busy; }
+function bdDay(s){ const d=new Date(s+"T12:00:00"); return isNaN(d)?null:d; }
+function bdWhen(it){ const loc=LOCALE[LANG]||"en-IE", a=bdDay(it.d), b=it.d2&&it.d2!==it.d?bdDay(it.d2):null;
+  if(!a) return {big:"📌", sm:T("bdNews")};
+  const big=a.toLocaleDateString(loc,{month:"numeric",day:"numeric"}), wk=a.toLocaleDateString(loc,{weekday:"short"});
+  return {big, sm:b?"– "+b.toLocaleDateString(loc,{month:"numeric",day:"numeric"}):wk+(it.tm?" "+it.tm:"")}; }
+const bdCcs=it=>(Array.isArray(it.cc)?it.cc:it.cc?[it.cc]:[]).filter(c=>/^[A-Z]{2}$/.test(c||""));
+function bdHost(u){ try{ return new URL(u).hostname.replace(/^www\./,""); }catch(e){ return ""; } }
+function plzEvOpen(k){ const R=ROOM; if(!R||!PLZ_BD[k]) return; let el=R.box.querySelector(".pz-evb");
+  if(!el){ el=document.createElement("div"); el.className="pz-board pz-evb"; R.box.appendChild(el);
+    el.addEventListener("click",ev=>{ const b=ev.target.closest("[data-bd]"); if(!b) return; ev.stopPropagation(); const v=b.dataset.v;
+      if(b.dataset.bd==="city"){ bdLs("bdCity",v); sfx("tap"); plzEvDraw(el); }
+      else if(b.dataset.bd==="allcc"){ bdLs("bdCc","all"); sfx("tap"); plzEvDraw(el); } });
+    el.addEventListener("change",ev=>{ const s=ev.target.closest("select[data-bd='cc']"); if(!s) return; bdLs("bdCc",s.value); plzEvDraw(el); }); }
+  el.dataset.k=k; plzEvDraw(el); sfx("tap"); plzSay(R.me,"📋");
+  plzEvLoad().then(()=>{ if(el.isConnected) plzEvDraw(el); }); }
+function plzEvDraw(el){ const k=el.dataset.k, B=PLZ_BD[k], D=BD.d, td=today(), cityRaw=bdLs("bdCity")||"all", city=cityRaw==="all"||BD_CITIES.includes(cityRaw)?cityRaw:"all";
+  let all=(D&&Array.isArray(D[B.key])?D[B.key]:[]).filter(it=>it&&it.t&&/^https:\/\//.test(it.u||"")&&!((it.d2||it.d)&&(it.d2||it.d)<td));
+  let ccHtml="", cc="all";
+  if(k==="bdc"){ const mine=myFlag(), ccs=[...new Set(all.flatMap(bdCcs))];
+    const saved=bdLs("bdCc"); cc=saved==="all"||ccs.includes(saved)?saved:(/^[A-Z]{2}$/.test(mine)&&mine!=="IE"?mine:"all");
+    const opts=[...new Set([...ccs,...(/^[A-Z]{2}$/.test(mine)&&mine!=="IE"?[mine]:[])])].map(c=>[c,ccName(c)]).sort((a,b)=>a[1].localeCompare(b[1]));
+    ccHtml=`<div class="pz-evcc"><select data-bd="cc" aria-label="${esc(T("bdCountry"))}"><option value="all"${cc==="all"?" selected":""}>🌍 ${esc(T("bdAllCc"))}</option>${opts.map(([c,n])=>`<option value="${c}"${c===cc?" selected":""}>${flagOf(c)} ${esc(n)}</option>`).join("")}</select></div>`;
+    all=all.filter(it=>{ const l=bdCcs(it); return cc==="all"||!l.length||l.includes(cc); }); }   // no country = for everyone (multicultural events)
+  const own=k==="bdc"&&cc!=="all"?all.filter(it=>bdCcs(it).includes(cc)).length:1;
+  const list=all.filter(it=>city==="all"||it.c===city||it.c==="ie").sort((a,b)=>(a.d||"9")<(b.d||"9")?-1:(a.d||"9")>(b.d||"9")?1:0).slice(0,10);
+  const chips=["all",...BD_CITIES].map(c=>`<button data-bd="city" data-v="${c}" class="${c===city?"on":""}">${T(c==="all"?"bdAll":"bdCity_"+c)}</button>`).join("");
+  const items=list.map(it=>{ const w=bdWhen(it), cn=BD_CITIES.includes(it.c)?T("bdCity_"+it.c):it.c==="ie"?T("bdCity_ie"):"";
+    return `<div class="pz-evi"><span class="pz-evd"><b>${esc(w.big)}</b><small>${esc(w.sm)}</small></span><span class="pz-evt"><b>${k==="bdc"&&bdCcs(it).length?bdCcs(it).slice(0,3).map(flagOf).join("")+" ":""}${esc(String(it.t).slice(0,120))}</b>${it.w||cn?`<small>📍 ${esc(String(it.w||"").slice(0,80))}${it.w&&cn?" · ":""}${esc(cn)}</small>`:""}${it.n?`<small>${esc(String(it.n).slice(0,140))}</small>`:""}<a href="${esc(it.u)}" target="_blank" rel="noopener noreferrer">🔗 ${esc(T("bdOpen"))} · ${esc(bdHost(it.u))} ↗</a></span></div>`; }).join("");
+  const none=!D?(BD.busy?`<p class="pz-evnone">${T("loading")}</p>`:`<p class="pz-evnone">${T("bdFail")}</p>`)
+    :`<p class="pz-evnone">${k==="bdc"&&cc!=="all"?T("bdNoneCc",{c:ccName(cc)})+`<br><button class="btn sm ghost" data-bd="allcc">🌍 ${T("bdAllCc")}</button>`:T("bdNone")}</p>`;
+  const upd=D&&D.updated?fmtShort(String(D.updated).slice(0,10)):"";
+  el.innerHTML=`<div class="pz-boardin pz-evin" style="--bd:${B.col};--bds:${B.soft}"><div class="pz-evh"><span class="pz-evic">${PLZ_SPOTS.gate.find(s=>s.k===k).ic}</span><span><b>${T("plzSpot_"+k)}</b><small>${T("bdSub_"+k)}</small></span><button class="pz-evx" data-pz="boardx" aria-label="✕">✕</button></div>
+    <div class="pz-evf">${ccHtml}<div class="pz-evcity">${chips}</div></div><div class="pz-evl">${items&&!own?`<p class="pz-evnone pz-evsm">${T("bdNoneCc",{c:ccName(cc)})}</p>`:""}${items||none}</div>
+    <div class="pz-evfoot">${upd?T("bdUpd",{d:upd})+" · ":""}${T("bdNote")}</div></div>`; }
 // what the 互動 button does here (board / notes), or null
 function plzCtx(){ const R=ROOM, m=R.me, h=m.h||"";
-  if(R.zone==="gate"&&R.nb){ if(h[0]==="w"){ const o=plzGiveTarget(); if(o) return {k:"give"+o.id, ic:"🎁", t:T("plzGive"), o}; if(plzNbReach()) return {k:"wput", ic:"↩️", t:T("plzNbPut")}; }
-    else if(!h){ const i=plzNbTarget(); if(i>=0) return {k:"w"+i, ic:"🙌", t:T("plzNbLift")}; } }
   if(R.zone==="band"){ const i=plzNoteNear(); if(i>=0) return {k:"n"+i, ic:PLZ_NOTES[i].ic, t:T("plzNoteGet")}; if(!h&&plzAtStage(m,20)) return {k:"piano", ic:"🎹", t:T("plzPiano")}; }
   if(R.lawn) return plzLawnCtx();
   return null; }
-function plzCtxGo(c){ if(c.lawn) return plzLawnGo(c); if(c.o) return plzGive(c.o); if(c.k==="piano") return plzPianoOpen(); if(c.k==="wput") return plzWordPut(); if(c.k[0]==="w") return plzWordLift(+c.k.slice(1)); if(c.k[0]==="n") return plzNoteGet(+c.k.slice(1)); }
+function plzCtxGo(c){ if(c.lawn) return plzLawnGo(c); if(c.k==="piano") return plzPianoOpen(); if(c.k[0]==="n") return plzNoteGet(+c.k.slice(1)); }
 
 // player card + likes (one like per player per week)
 const plzWeek=()=>isoWeek().id;
@@ -12319,6 +12288,12 @@ Object.assign(STR.hi,{"pgCatHint": "कोई फ़ोल्डर चुने
 Object.assign(STR.es,{"pgCatHint": "Elige una carpeta para ver sus juegos 👇", "pgCatBack": "Todas las categorías", "pgCatN": "{n} juegos", "pgPpl": "{n} jugadores", "pgCat_race": "Carreras de rapidez", "pgCat_raceSub": "Deletrea y responde antes que nadie", "pgCat_guess": "Adivinar y deducir", "pgCat_guessSub": "Adivina palabras y dibujos, encuentra al infiltrado", "pgCat_battle": "Duelo y supervivencia", "pgCat_battleSub": "Duelos 1 contra 1 y bombas: gana quien resista", "pgCat_cards": "Juegos de cartas", "pgCat_cardsSub": "Juega bien tus cartas: gana la estrategia", "pgCat_coop": "En equipo", "pgCat_coopSub": "Todos en el mismo equipo, a superarlo juntos"});
 Object.assign(STR.ja,{"pgCatHint": "フォルダを選んでゲームを見よう 👇", "pgCatBack": "カテゴリ一覧", "pgCatN": "{n}種類", "pgPpl": "{n}人", "pgCat_race": "早押し・スピード", "pgCat_raceSub": "誰より速く綴って答えよう", "pgCat_guess": "推理・当てっこ", "pgCat_guessSub": "単語当て、お絵かき当て、スパイ探し", "pgCat_battle": "対戦・サバイバル", "pgCat_battleSub": "1対1の決闘や爆弾回し、最後まで生き残れ", "pgCat_cards": "カードゲーム", "pgCat_cardsSub": "手札で勝負、作戦がカギ", "pgCat_coop": "協力プレイ", "pgCat_coopSub": "みんな同じチームでクリアを目指そう"});
 Object.assign(STR.ko,{"pgCatHint": "폴더를 골라 게임을 확인하세요 👇", "pgCatBack": "전체 분류", "pgCatN": "{n}개", "pgPpl": "{n}명", "pgCat_race": "스피드 퀴즈", "pgCat_raceSub": "누구보다 빠르게 철자·정답 맞히기", "pgCat_guess": "추리·맞히기", "pgCat_guessSub": "단어 맞히기, 그림 맞히기, 스파이 찾기", "pgCat_battle": "대결·서바이벌", "pgCat_battleSub": "1대1 결투와 폭탄 돌리기, 끝까지 살아남기", "pgCat_cards": "카드 게임", "pgCat_cardsSub": "카드로 승부, 전략이 핵심", "pgCat_coop": "협동 플레이", "pgCat_coopSub": "모두 한 팀, 함께 클리어"});
+Object.assign(STR.zh,{"plzZd3_gate": "三個公告欄：同鄉會、愛爾蘭活動、運動賽事", "plzSpot_bdc": "同鄉會佈告欄", "plzSpot_bdl": "翡翠島好去處", "plzSpot_bds": "賽事看板", "bdSub_bdc": "各國社群在愛爾蘭的活動和消息", "bdSub_bdl": "愛爾蘭各地最近有什麼好玩的", "bdSub_bds": "最近的運動賽事", "bdAll": "全部", "bdAllCc": "所有國家", "bdCountry": "國家", "bdCity_dublin": "都柏林", "bdCity_cork": "科克", "bdCity_galway": "高威", "bdCity_limerick": "利默里克", "bdCity_ie": "全愛爾蘭", "bdOpen": "打開網址", "bdNews": "消息", "bdNone": "這裡最近沒有活動，換個城市看看", "bdNoneCc": "最近還沒找到{c}社群的活動", "bdUpd": "每天早上更新，最後更新 {d}", "bdNote": "時間地點以官方網站為準", "bdFail": "公告暫時載入不了，等一下再試"});
+Object.assign(STR.en,{"plzZd3_gate": "Three notice boards: communities, events, sport", "plzSpot_bdc": "Home Communities", "plzSpot_bdl": "Emerald Isle What's On", "plzSpot_bds": "Match Day", "bdSub_bdc": "Events and news from each country's community in Ireland", "bdSub_bdl": "What's happening around Ireland", "bdSub_bds": "Upcoming games and matches", "bdAll": "All", "bdAllCc": "All countries", "bdCountry": "Country", "bdCity_dublin": "Dublin", "bdCity_cork": "Cork", "bdCity_galway": "Galway", "bdCity_limerick": "Limerick", "bdCity_ie": "All Ireland", "bdOpen": "Open link", "bdNews": "News", "bdNone": "Nothing coming up here. Try another city", "bdNoneCc": "No events from the {c} community yet", "bdUpd": "Updated every morning, last {d}", "bdNote": "Check times and places on the official site", "bdFail": "The boards can't load right now. Try again soon"});
+Object.assign(STR.hi,{"plzZd3_gate": "तीन सूचना बोर्ड: समुदाय, कार्यक्रम, खेल", "plzSpot_bdc": "अपने देश के समुदाय", "plzSpot_bdl": "एमरल्ड आइल में क्या है", "plzSpot_bds": "मैच डे", "bdSub_bdc": "आयरलैंड में हर देश के समुदाय के कार्यक्रम और खबरें", "bdSub_bdl": "आयरलैंड में आजकल क्या हो रहा है", "bdSub_bds": "आने वाले खेल और मैच", "bdAll": "सभी", "bdAllCc": "सभी देश", "bdCountry": "देश", "bdCity_dublin": "डबलिन", "bdCity_cork": "कॉर्क", "bdCity_galway": "गॉलवे", "bdCity_limerick": "लिमरिक", "bdCity_ie": "पूरा आयरलैंड", "bdOpen": "लिंक खोलो", "bdNews": "खबर", "bdNone": "यहाँ अभी कुछ नहीं है, दूसरा शहर देखो", "bdNoneCc": "{c} समुदाय का अभी कोई कार्यक्रम नहीं मिला", "bdUpd": "हर सुबह अपडेट, आखिरी {d}", "bdNote": "समय और जगह आधिकारिक साइट पर देखो", "bdFail": "बोर्ड अभी लोड नहीं हो रहे, थोड़ी देर बाद कोशिश करो"});
+Object.assign(STR.es,{"plzZd3_gate": "Tres tablones: comunidades, eventos y deporte", "plzSpot_bdc": "Comunidades", "plzSpot_bdl": "Qué hacer en la Isla Esmeralda", "plzSpot_bds": "Día de partido", "bdSub_bdc": "Eventos y noticias de las comunidades de cada país en Irlanda", "bdSub_bdl": "Qué pasa por Irlanda estos días", "bdSub_bds": "Próximos partidos", "bdAll": "Todo", "bdAllCc": "Todos los países", "bdCountry": "País", "bdCity_dublin": "Dublín", "bdCity_cork": "Cork", "bdCity_galway": "Galway", "bdCity_limerick": "Limerick", "bdCity_ie": "Toda Irlanda", "bdOpen": "Abrir enlace", "bdNews": "Noticia", "bdNone": "No hay nada próximamente aquí. Prueba otra ciudad", "bdNoneCc": "Aún no hay eventos de la comunidad de {c}", "bdUpd": "Se actualiza cada mañana, última vez {d}", "bdNote": "Confirma horarios y lugares en la web oficial", "bdFail": "Los tablones no cargan ahora. Inténtalo luego"});
+Object.assign(STR.ja,{"plzZd3_gate": "3つの掲示板：コミュニティ・イベント・スポーツ", "plzSpot_bdc": "同郷コミュニティ", "plzSpot_bdl": "エメラルド島おでかけ情報", "plzSpot_bds": "試合カレンダー", "bdSub_bdc": "アイルランドにある各国コミュニティのイベントとお知らせ", "bdSub_bdl": "アイルランド各地の最近のイベント", "bdSub_bds": "これからの試合", "bdAll": "すべて", "bdAllCc": "すべての国", "bdCountry": "国", "bdCity_dublin": "ダブリン", "bdCity_cork": "コーク", "bdCity_galway": "ゴールウェイ", "bdCity_limerick": "リムリック", "bdCity_ie": "アイルランド全体", "bdOpen": "リンクを開く", "bdNews": "お知らせ", "bdNone": "近くのイベントはまだないよ。別の街を見てみて", "bdNoneCc": "{c}コミュニティのイベントはまだ見つかっていません", "bdUpd": "毎朝更新・最終更新 {d}", "bdNote": "日時と場所は公式サイトで確認してね", "bdFail": "掲示板を読み込めませんでした。少ししてからもう一度"});
+Object.assign(STR.ko,{"plzZd3_gate": "게시판 세 개: 커뮤니티, 행사, 스포츠", "plzSpot_bdc": "고향 커뮤니티", "plzSpot_bdl": "에메랄드 섬 나들이", "plzSpot_bds": "경기 일정", "bdSub_bdc": "아일랜드에 있는 각국 커뮤니티의 행사와 소식", "bdSub_bdl": "아일랜드 곳곳의 요즘 행사", "bdSub_bds": "다가오는 경기", "bdAll": "전체", "bdAllCc": "모든 나라", "bdCountry": "나라", "bdCity_dublin": "더블린", "bdCity_cork": "코크", "bdCity_galway": "골웨이", "bdCity_limerick": "리머릭", "bdCity_ie": "아일랜드 전체", "bdOpen": "링크 열기", "bdNews": "소식", "bdNone": "여기는 곧 있을 행사가 없어요. 다른 도시를 골라 보세요", "bdNoneCc": "아직 {c} 커뮤니티 행사를 찾지 못했어요", "bdUpd": "매일 아침 업데이트, 마지막 {d}", "bdNote": "시간과 장소는 공식 사이트에서 확인하세요", "bdFail": "게시판을 지금 불러올 수 없어요. 잠시 후 다시 해 보세요"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
