@@ -4829,7 +4829,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.147";
+const APP_VERSION="2026.11.148";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -11057,13 +11057,15 @@ function plzNotesSync(force){ const R=ROOM; if(!R||!R.notes) return; const tk=pl
 const PLZ_PIANO={lanes:4, rows:4.6, half:.5};
 const PLZ_STARS={pzLull:1, pzRain:1, pzWaltz:2, pzLofi:2, town:2, pzBossa:3, pzPenta:3, pzJazz:3, pzSea:3, pzHorn:4, pzSamba:4, pzChip:5, pzReel:5};
 const plzStarsOf=tr=>PLZ_STARS[tr]||2, plzStarTxt=tr=>"★".repeat(plzStarsOf(tr))+"☆".repeat(5-plzStarsOf(tr));
-// speed (rows a second) and tile mix for each star level
-const plzPianoLv=st=>({v0:1.5+st*.35, dv:.025+st*.008, vmax:2.6+st*.85, dbl:[0,0,0,.12,.2,.28][st], lng:[0,.55,.5,.45,.4,.35][st]});
+// speed (rows a second) and tile mix for each star level. Warm-up: speed grows with the score up to vmax.
+// After that (CheChe 2026-11-28: every tune must keep speeding up, or a run never ends) it keeps rising by acc rows/s every second
+// of play, for every tune, until it hits the hard ceiling vtop.
+const plzPianoLv=st=>({v0:1.5+st*.35, dv:.025+st*.008, vmax:2.6+st*.85, acc:.035+st*.005, vtop:14, dbl:[0,0,0,.12,.2,.28][st], lng:[0,.55,.5,.45,.4,.35][st]});
 function plzPianoOpen(){ const R=ROOM; if(!R||R.piano) return; sndInit(); const tk=plzTrack()||"town", tr=TRACKS[tk]||TRACKS.town, st=plzStarsOf(tk);
   const el=document.createElement("div"); el.className="pz-piano"; el.innerHTML=`<div class="pz-pih"><button data-pz="pianox" aria-label="${T("plzBack")}">✕</button><span class="pz-pit"><small>${esc(T("plzSong_"+tk))} <em>${plzStarTxt(tk)}</em></small><b id="pzPiS">0</b></span><small>${T("plzPianoBest",{n:(game().plzPiano||0)})}</small></div><canvas></canvas><div class="pz-pio" hidden></div>`;
   R.box.appendChild(el); R.box.classList.add("pz-pi"); const cv=el.querySelector("canvas");
   ["touchstart","touchmove","dblclick","contextmenu"].forEach(t=>el.addEventListener(t,e=>{ if(!e.target.closest("button")) e.preventDefault(); },{passive:false}));
-  const P=R.piano={el, cv, tr, tk, st, lv:plzPianoLv(st), mel:tr.mel.filter(n=>n[0]), mi:0, ev:[], nextRow:0, off:0, v:0, score:0, on:false, over:false, last:performance.now(), flash:null, holds:{}};
+  const P=R.piano={el, cv, tr, tk, st, lv:plzPianoLv(st), mel:tr.mel.filter(n=>n[0]), mi:0, ev:[], nextRow:0, off:0, v:0, tp:0, score:0, on:false, over:false, last:performance.now(), flash:null, holds:{}};
   P.v=P.lv.v0; while(P.nextRow<40) plzPianoEv(P);
   musicDuck(true); plzSay(R.me,"🎹"); plzSend(false,{b:"🎹", bt:Date.now()});
   cv.addEventListener("pointerdown",ev=>{ ev.preventDefault(); try{ cv.setPointerCapture(ev.pointerId); }catch(e){} plzPianoTap(ev); });
@@ -11101,7 +11103,7 @@ function plzPianoTap(ev){ const R=ROOM, P=R&&R.piano; if(!P||P.over) return; con
 function plzPianoUp(id){ const P=ROOM&&ROOM.piano, h=P&&P.holds[id]; if(!h) return; delete P.holds[id]; const {t,E}=h;
   if(!t.ok&&(P.off+(t.fy||0)-E.r0)/t.len>=PLZ_PIANO.half&&!Object.values(P.holds).some(x=>x.t===t)){ t.ok=true; t.done=true; } }
 function plzPianoStep(P,now){ const dt=Math.min(.05,(now-P.last)/1000); P.last=now;
-  if(P.on&&!P.over){ P.v=Math.min(P.lv.vmax,P.lv.v0+P.score*P.lv.dv); P.off+=P.v*dt;
+  if(P.on&&!P.over){ P.tp+=dt; P.v=Math.min(P.lv.vtop,Math.min(P.lv.vmax,P.lv.v0+P.score*P.lv.dv)+P.tp*P.lv.acc); P.off+=P.v*dt;
     // holding a long tile: +1 for every row of it that passes while you hold
     // a long tile is done once its top end has passed your finger (you held it the whole way)
     for(const id in P.holds){ const {t,E}=P.holds[id]; let rows=Math.min(t.len-1,Math.floor(P.off-E.r0)); const fin=P.off+(t.fy||0)>=E.r0+t.len-.45; if(fin) rows=t.len-1;
