@@ -17,8 +17,7 @@ Paths are files on the main branch of GitHub repo CHECHE0102/Che_daily_improveme
 - 2026-11-27-tw-2 (region TW, 政治): Taiwan's Mayoral Candidates Make Final Push Before Saturday's Vote
   - review/2026-11-27/2026-11-27-tw-2.md
 
-## WORDS job: 377 new glossary entries today, in 4 part(s)
+## WORDS job: 298 new glossary entries today, in 3 part(s)
 - review/2026-11-27/words-new-1.md
 - review/2026-11-27/words-new-2.md
 - review/2026-11-27/words-new-3.md
-- review/2026-11-27/words-new-4.md
