@@ -1,28 +1,187 @@
 {
  "updated": "2026-11-28",
+ "heat": {
+  "dublin": 5,
+  "east": 2,
+  "southeast": 3,
+  "cork": 3,
+  "kerry": 1,
+  "shannon": 3,
+  "galway": 4,
+  "northwest": 1,
+  "midlands": 2,
+  "ni": 4
+ },
  "community": [
-  {"t":"Latin American Christmas \"All together\" 2026","d":"2026-12-06","tm":"13:00","w":"D Two, 60 Harcourt Street","c":"dublin","cc":["MX","CO","AR","CL","PE","VE"],"n":"Live Latin music, dancing and food with the Latin American community.","u":"https://www.eventbrite.ie/e/latin-american-christmas-all-together-2026-tickets-2002977420383"},
-  {"t":"New In Dublin Christmas Party","d":"2026-12-12","tm":"20:00","w":"Turk's Head, Dublin 2","c":"dublin","n":"International Christmas party for newcomers from every country.","u":"https://www.eventbrite.ie/e/christmas-party-tickets-2003816304508"},
-  {"t":"Taipei Representative Office in Ireland: news and events","c":"ie","cc":["TW"],"n":"Latest news and Taiwanese community events in Ireland.","u":"https://www.roc-taiwan.org/ie_en/index.html"}
+  {
+   "t": "Latin American Christmas \"All together\" 2026",
+   "d": "2026-12-06",
+   "tm": "13:00",
+   "w": "D Two, 60 Harcourt Street",
+   "c": "dublin",
+   "cc": [
+    "MX",
+    "CO",
+    "AR",
+    "CL",
+    "PE",
+    "VE"
+   ],
+   "n": "Live Latin music, dancing and food with the Latin American community.",
+   "u": "https://www.eventbrite.ie/e/latin-american-christmas-all-together-2026-tickets-2002977420383"
+  },
+  {
+   "t": "New In Dublin Christmas Party",
+   "d": "2026-12-12",
+   "tm": "20:00",
+   "w": "Turk's Head, Dublin 2",
+   "c": "dublin",
+   "n": "International Christmas party for newcomers from every country.",
+   "u": "https://www.eventbrite.ie/e/christmas-party-tickets-2003816304508"
+  },
+  {
+   "t": "Taipei Representative Office in Ireland: news and events",
+   "c": "ie",
+   "cc": [
+    "TW"
+   ],
+   "n": "Latest news and Taiwanese community events in Ireland.",
+   "u": "https://www.roc-taiwan.org/ie_en/index.html"
+  }
  ],
  "local": [
-  {"t":"TwinkleTown Christmas Festival","d":"2026-11-20","d2":"2026-12-31","w":"Smithfield Square","c":"dublin","n":"Free festival with an ice rink, big wheel and craft stalls.","u":"https://www.theirishroadtrip.com/the-smithfield-christmas-market/"},
-  {"t":"South Dublin Christmas Markets","d":"2026-11-27","d2":"2026-12-12","w":"Various locations, South Dublin","c":"dublin","n":"Free entry.","u":"https://dublin.ie/?p=91679"},
-  {"t":"SoCircular Christmas Market","d":"2026-12-06","c":"dublin","n":"Free, family-friendly market.","u":"https://www.visitdublin.com/socircular-christmas-market-2026"},
-  {"t":"Ireland's Christmas Traditions Walking Tour","d":"2026-12-08","d2":"2026-12-09","tm":"14:30","c":"dublin","n":"Two-hour walking tour, €27.","u":"https://www.visitdublin.com/ireland-s-christmas-traditions-walking-tour-dec-2026"},
-  {"t":"The Fumbally Christmas Market","c":"dublin","w":"The Fumbally, Dublin 8","u":"https://www.visitdublin.com/the-fumbally-christmas-market-2026"},
-  {"t":"Corkmas Christmas Markets","d":"2026-11-13","d2":"2026-12-31","w":"Cork city centre","c":"cork","n":"Expected dates; check the official site.","u":"https://www.theirishroadtrip.com/christmas-markets-in-ireland/"},
-  {"t":"Galway Christmas Market","d":"2026-11-15","d2":"2026-12-31","w":"Eyre Square","c":"galway","n":"Expected dates; check the official site.","u":"https://www.galwaytourism.ie/event/galway-christmas-market/"},
-  {"t":"Galway Skates","d":"2026-11-06","d2":"2027-01-03","w":"Leisureland, Salthill","c":"galway","n":"Ice skating by the sea.","u":"https://www.theirishroadtrip.com/galway-christmas-markets/"},
-  {"t":"Christmas at Limerick Milk Market","d":"2026-11-28","d2":"2026-12-24","w":"Milk Market, Limerick","c":"limerick","n":"Markets, Santa, live music on select dates.","u":"https://www.limerick.ie/node/112283"}
+  {
+   "t": "TwinkleTown Christmas Festival",
+   "d": "2026-11-20",
+   "d2": "2026-12-31",
+   "w": "Smithfield Square",
+   "c": "dublin",
+   "n": "Free festival with an ice rink, big wheel and craft stalls.",
+   "u": "https://www.theirishroadtrip.com/the-smithfield-christmas-market/"
+  },
+  {
+   "t": "South Dublin Christmas Markets",
+   "d": "2026-11-27",
+   "d2": "2026-12-12",
+   "w": "Various locations, South Dublin",
+   "c": "dublin",
+   "n": "Free entry.",
+   "u": "https://dublin.ie/?p=91679"
+  },
+  {
+   "t": "SoCircular Christmas Market",
+   "d": "2026-12-06",
+   "c": "dublin",
+   "n": "Free, family-friendly market.",
+   "u": "https://www.visitdublin.com/socircular-christmas-market-2026"
+  },
+  {
+   "t": "Ireland's Christmas Traditions Walking Tour",
+   "d": "2026-12-08",
+   "d2": "2026-12-09",
+   "tm": "14:30",
+   "c": "dublin",
+   "n": "Two-hour walking tour, €27.",
+   "u": "https://www.visitdublin.com/ireland-s-christmas-traditions-walking-tour-dec-2026"
+  },
+  {
+   "t": "The Fumbally Christmas Market",
+   "c": "dublin",
+   "w": "The Fumbally, Dublin 8",
+   "u": "https://www.visitdublin.com/the-fumbally-christmas-market-2026"
+  },
+  {
+   "t": "Corkmas Christmas Markets",
+   "d": "2026-11-13",
+   "d2": "2026-12-31",
+   "w": "Cork city centre",
+   "c": "cork",
+   "n": "Expected dates; check the official site.",
+   "u": "https://www.theirishroadtrip.com/christmas-markets-in-ireland/"
+  },
+  {
+   "t": "Galway Christmas Market",
+   "d": "2026-11-15",
+   "d2": "2026-12-31",
+   "w": "Eyre Square",
+   "c": "galway",
+   "n": "Expected dates; check the official site.",
+   "u": "https://www.galwaytourism.ie/event/galway-christmas-market/"
+  },
+  {
+   "t": "Galway Skates",
+   "d": "2026-11-06",
+   "d2": "2027-01-03",
+   "w": "Leisureland, Salthill",
+   "c": "galway",
+   "n": "Ice skating by the sea.",
+   "u": "https://www.theirishroadtrip.com/galway-christmas-markets/"
+  },
+  {
+   "t": "Christmas at Limerick Milk Market",
+   "d": "2026-11-28",
+   "d2": "2026-12-24",
+   "w": "Milk Market, Limerick",
+   "c": "limerick",
+   "n": "Markets, Santa, live music on select dates.",
+   "u": "https://www.limerick.ie/node/112283"
+  }
  ],
  "sports": [
-  {"t":"Republic of Ireland v Poland (Women's World Cup play-off)","d":"2026-12-05","tm":"17:00","w":"Aviva Stadium","c":"dublin","u":"https://www.transportforireland.ie/events/2026-events-at-the-aviva-stadium/"},
-  {"t":"GAA Leinster Club Hurling and Football Finals","d":"2026-12-05","d2":"2026-12-06","w":"Croke Park","c":"dublin","u":"https://crokepark.ie/BlankSite/media/Images/GAA%20Museum/Croke-Park-Master-Fixture-List-2026.pdf"},
-  {"t":"Leinster v Sale Sharks (Champions Cup)","d":"2026-12-12","tm":"17:30","w":"Laya Arena (RDS)","c":"dublin","u":"https://www.ticketmaster.ie/discover/dublin?categoryId=KZFzniwnSyZfZ7v7nE"},
-  {"t":"LGFA Club Finals","d":"2026-12-12","w":"Croke Park","c":"dublin","u":"https://crokepark.ie/BlankSite/media/Images/GAA%20Museum/Croke-Park-Master-Fixture-List-2026.pdf"},
-  {"t":"AIB Camogie All-Ireland Club Finals","d":"2026-12-13","tm":"14:00","w":"Croke Park","c":"dublin","u":"https://www.ticketmaster.ie/discover/dublin?categoryId=KZFzniwnSyZfZ7v7nE"},
-  {"t":"Munster Senior Challenge Cup Final","d":"2026-12-19","w":"Thomond Park","c":"limerick","u":"https://www.ticketmaster.ie/munster-rugby-tickets/artist/33318"},
-  {"t":"Munster v Leinster (URC)","d":"2026-12-27","tm":"19:45","w":"Thomond Park","c":"limerick","n":"Live on TG4.","u":"https://www.limerick.ie/discover/whats-on/sport/munster-rugby-v-leinster-rugby-4"}
+  {
+   "t": "Republic of Ireland v Poland (Women's World Cup play-off)",
+   "d": "2026-12-05",
+   "tm": "17:00",
+   "w": "Aviva Stadium",
+   "c": "dublin",
+   "u": "https://www.transportforireland.ie/events/2026-events-at-the-aviva-stadium/"
+  },
+  {
+   "t": "GAA Leinster Club Hurling and Football Finals",
+   "d": "2026-12-05",
+   "d2": "2026-12-06",
+   "w": "Croke Park",
+   "c": "dublin",
+   "u": "https://crokepark.ie/BlankSite/media/Images/GAA%20Museum/Croke-Park-Master-Fixture-List-2026.pdf"
+  },
+  {
+   "t": "Leinster v Sale Sharks (Champions Cup)",
+   "d": "2026-12-12",
+   "tm": "17:30",
+   "w": "Laya Arena (RDS)",
+   "c": "dublin",
+   "u": "https://www.ticketmaster.ie/discover/dublin?categoryId=KZFzniwnSyZfZ7v7nE"
+  },
+  {
+   "t": "LGFA Club Finals",
+   "d": "2026-12-12",
+   "w": "Croke Park",
+   "c": "dublin",
+   "u": "https://crokepark.ie/BlankSite/media/Images/GAA%20Museum/Croke-Park-Master-Fixture-List-2026.pdf"
+  },
+  {
+   "t": "AIB Camogie All-Ireland Club Finals",
+   "d": "2026-12-13",
+   "tm": "14:00",
+   "w": "Croke Park",
+   "c": "dublin",
+   "u": "https://www.ticketmaster.ie/discover/dublin?categoryId=KZFzniwnSyZfZ7v7nE"
+  },
+  {
+   "t": "Munster Senior Challenge Cup Final",
+   "d": "2026-12-19",
+   "w": "Thomond Park",
+   "c": "limerick",
+   "u": "https://www.ticketmaster.ie/munster-rugby-tickets/artist/33318"
+  },
+  {
+   "t": "Munster v Leinster (URC)",
+   "d": "2026-12-27",
+   "tm": "19:45",
+   "w": "Thomond Park",
+   "c": "limerick",
+   "n": "Live on TG4.",
+   "u": "https://www.limerick.ie/discover/whats-on/sport/munster-rugby-v-leinster-rugby-4"
+  }
  ]
 }
