@@ -4864,7 +4864,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.150";
+const APP_VERSION="2026.11.151";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -11159,8 +11159,11 @@ async function plzCard(o){ lookCard({id:o.id, name:o.kind==="me"?game().nick:o.n
   const el=document.getElementById("rkLook"); if(!el) return; const card=el.querySelector(".pd-card"); if(!card||!CLOUD.fb) return;
   const row=document.createElement("div"); row.className="pz-like"; row.innerHTML=`<span class="muted sm-t">${T("loading")}</span>`; card.insertBefore(row,card.querySelector(".btn:last-child"));
   const {fsM,db}=CLOUD.fb, me=CLOUD.user.uid, wk=plzWeek(), mine=o.id===me;
-  try{ const [c,g]=await Promise.all([fsM.getDoc(fsM.doc(db,"likeWeeks",wk,"u",o.id)), mine?null:fsM.getDoc(fsM.doc(db,"likeGiven",`${wk}_${me}_${o.id}`))]);
-    const n=c.exists()?(c.data().n||0):0, done=g&&g.exists(), star=ROOM&&ROOM.star&&ROOM.star.id===o.id;
+  /* "did I already like them?" is a query on from==me, not a getDoc: the likeGiven read rule looks at resource.data,
+     which is null for a like that doesn't exist yet, so a getDoc was always denied and the whole like row vanished */
+  try{ const [c,g]=await Promise.all([fsM.getDoc(fsM.doc(db,"likeWeeks",wk,"u",o.id)),
+      mine?null:fsM.getDocs(fsM.query(fsM.collection(db,"likeGiven"),fsM.where("from","==",me),fsM.where("to","==",o.id),fsM.where("w","==",wk),fsM.limit(1))).catch(()=>null)]);
+    const n=c.exists()?(c.data().n||0):0, done=!!(g&&!g.empty), star=ROOM&&ROOM.star&&ROOM.star.id===o.id;
     row.innerHTML=`${star?`<span class="pz-starTag">✨ ${T("plzStar")}</span>`:""}<span class="pz-likeN">👍 ${T("plzLikes",{n})}</span>${mine?"":`<button class="btn sm${done?" ghost":""}" ${done?"disabled":""} data-like="${esc(o.id)}">${done?T("plzLiked"):T("plzLike")}</button>`}`;
     const b=row.querySelector("[data-like]"); if(b) b.onclick=async ev=>{ ev.stopPropagation(); b.disabled=true;
       try{ const B=fsM.writeBatch(db), ref=fsM.doc(db,"likeWeeks",wk,"u",o.id);
