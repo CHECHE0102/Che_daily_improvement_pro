@@ -1099,6 +1099,7 @@ body.onb-open{overflow:hidden}
 .pz-encin>b{font-size:18px}
 .pz-enccost{color:#1F6F5C;font-weight:700}
 .pz-boardt{font-size:18px}
+.pz-ie .ie-in,.pz-evb .pz-evin{background:#fff!important;color:#1B2421!important}   /* light card in dark mode too (text colours here are fixed dark) */
 .pz-ie .ie-in{width:min(460px,100%)!important;max-height:calc(100% - 20px);padding:0!important;overflow:hidden;gap:0!important;align-items:stretch!important;text-align:left!important}
 .ie-h{position:relative;padding:12px 50px 10px 14px;background:#2E9E5B;color:#fff}.ie-h b{display:block;font:800 17px/1.25 system-ui,sans-serif}.ie-h small{display:block;font:600 12px/1.35 system-ui,sans-serif;opacity:.95;margin-top:2px}.ie-h .pz-evx{position:absolute;right:10px;top:10px}
 .ie-mapw{background:#CFE8F5;padding:6px;display:flex;justify-content:center;min-height:0;flex:1 1 auto}
@@ -4864,7 +4865,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.150";
+const APP_VERSION="2026.11.152";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
