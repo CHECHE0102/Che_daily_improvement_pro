@@ -1113,7 +1113,8 @@ body.onb-open{overflow:hidden}
 .ie-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.ie-chips span{font:700 12px/1.5 system-ui,sans-serif;border-radius:999px;padding:1px 9px;background:#EEF1EF}.ie-chips .ie-hc{border:1.5px solid #1B2421}
 .ie-ev{display:flex;gap:9px;align-items:flex-start;padding:7px 9px;border-radius:12px;background:#F3F6F4;margin-bottom:6px}.ie-ev>b{flex:0 0 auto;font:800 13px/1.3 system-ui,sans-serif;background:#fff;border:2px solid #1B2421;border-radius:8px;padding:2px 6px}.ie-ev span{display:flex;flex-direction:column;min-width:0}.ie-ev i{font:700 13px/1.35 system-ui,sans-serif;font-style:normal;overflow-wrap:anywhere}.ie-ev a{font:800 12px/1.4 system-ui,sans-serif;color:#1F64B5}
 .ie-none{margin:12px 0;text-align:center;font:600 13px/1.5 system-ui,sans-serif;color:#58646b}
-.ie-mon{display:flex;flex-wrap:wrap;gap:4px}.ie-mon span{font:700 11.5px/1.6 system-ui,sans-serif;border-radius:8px;padding:0 7px;background:#EEF1EF;color:#8a949a}.ie-mon span.on{background:#2E9E5B;color:#fff}
+.ie-mon{display:flex;flex-wrap:wrap;gap:4px}.ie-mon span{font:700 11.5px/1.6 system-ui,sans-serif;border-radius:8px;padding:0 7px;background:#EEF1EF;color:#8a949a}.ie-mon span.on{background:#2E9E5B;color:#fff}.ie-mon button{font:800 11.5px/1.6 system-ui,sans-serif;border-radius:8px;padding:0 7px;background:#2E9E5B;color:#fff;border:2px solid #2E9E5B;cursor:pointer}.ie-mon button.sel{background:#fff;color:#1F7A45}
+.ie-whym{margin:8px 0 0;padding:8px 10px;border-radius:12px;background:#E1F3DC;font:600 13px/1.5 system-ui,sans-serif;color:#1B2421}.ie-whym b{color:#1F7A45;margin-right:4px}.ie-whyh{margin:6px 0 0;font:600 11.5px/1.4 system-ui,sans-serif;color:#7a858b}
 .ie-btns{display:flex;gap:8px;justify-content:center;padding:10px 12px 12px;border-top:1px solid rgba(0,0,0,.08)}
 .pz-evin{width:min(430px,100%)!important;max-height:calc(100% - 24px);padding:0!important;overflow:hidden;gap:0!important;align-items:stretch!important;text-align:left!important}
 .pz-evh{display:flex;align-items:center;gap:10px;padding:12px 12px 10px 14px;background:var(--bd);color:#fff}
@@ -4865,7 +4866,7 @@ function devPanel(){
     <div class="dev-body">${body}</div>
     <button class="btn" data-act="devexit" style="background:var(--bad)">${T("devExit")}</button></section>`;
 }
-const APP_VERSION="2026.11.152";
+const APP_VERSION="2026.11.153";
 const SUPPORT_ON=false;   // 「贊助開發者」card: hidden until the official release (still shown in developer mode for preview)   // 年份.月份.版號 — bump the build number on every release, reset to 1 each new month
 function devFooter(){
   return `<div class="dev-foot"><button class="ver" data-act="devtap">${T("version")} ${APP_VERSION}</button><div class="muted sm-t copy-foot">© 2026 BinBin daily · All rights reserved</div>
@@ -12321,6 +12322,12 @@ Object.assign(STR.hi,{"plzSpot_bus": "बस में बैठो", "plzZd4_ga
 Object.assign(STR.es,{"plzSpot_bus": "Subir al bus", "plzZd4_gate": "Tablones y un bus: comunidades, eventos, deporte y un mapa de Irlanda"});
 Object.assign(STR.ja,{"plzSpot_bus": "バスに乗る", "plzZd4_gate": "掲示板とバス：コミュニティ・イベント・スポーツ・アイルランド地図"});
 Object.assign(STR.ko,{"plzSpot_bus": "버스 타기", "plzZd4_gate": "게시판과 버스: 커뮤니티, 행사, 스포츠, 아일랜드 지도"});
+Object.assign(STR.zh,{"bdCity_dublin":"Dublin","bdCity_cork":"Cork","bdCity_galway":"Galway","bdCity_limerick":"Limerick"});
+Object.assign(STR.en,{"bdCity_dublin":"Dublin","bdCity_cork":"Cork","bdCity_galway":"Galway","bdCity_limerick":"Limerick"});
+Object.assign(STR.hi,{"bdCity_dublin":"Dublin","bdCity_cork":"Cork","bdCity_galway":"Galway","bdCity_limerick":"Limerick"});
+Object.assign(STR.es,{"bdCity_dublin":"Dublin","bdCity_cork":"Cork","bdCity_galway":"Galway","bdCity_limerick":"Limerick"});
+Object.assign(STR.ja,{"bdCity_dublin":"Dublin","bdCity_cork":"Cork","bdCity_galway":"Galway","bdCity_limerick":"Limerick"});
+Object.assign(STR.ko,{"bdCity_dublin":"Dublin","bdCity_cork":"Cork","bdCity_galway":"Galway","bdCity_limerick":"Limerick"});
 Object.assign(STR.zh,{"legalT": "關於、條款與退款", "legalSub": "營運者資訊、彩虹寶庫商品與價格、付款與退款政策、使用條款和隱私權政策。", "legalOpen": "查看", "vtLegal": "購買即表示你同意道具立即交付，並了解交付後不再適用 14 天撤回權。沒收到道具或重複扣款一定退款。", "vtLegalLink": "付款與退款政策"});
 Object.assign(STR.zh,{"grLooksNote":"你在字典查過單字的次數（同一個字再查也算）。","grWordsNote":"讀過的文章裡出現的單字，加上你查過的字，每個字只算一次。"});
 Object.assign(STR.zh,{"backOvw":"回總覽","tabOvw":"總覽","ovwToDict":"打開字典（{n} 個單字）"});
