@@ -3,9 +3,7 @@ name: Daily news story (IG + FB)
 # (tools/daily_story/build.py) and posts both to the Instagram and Facebook Stories through
 # tools/social_post.py. Media goes onto the `social` branch only until it is posted.
 on:
-  schedule:
-    - cron: '5 9 * * *'    # after the news is published and checked
-    - cron: '5 12 * * *'   # second try if the news was late
+  # Started at 09:07 and 12:07 UTC by the Cloudflare Worker "binbin-timer" (GitHub's own schedule ran hours late).
   workflow_dispatch:
     inputs:
       date:
