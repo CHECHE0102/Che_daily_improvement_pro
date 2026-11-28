@@ -3,6 +3,8 @@ Only entries that are new today (older identical entries were checked on earlier
 format: article:key (one or more) | base | pos | lvl | en | zh | ja | ko | es | hi | ex | syn | ant | col
 In a report use article = the first article id of the line and where = "gloss:<key>.<field>".
 
+2026-11-26-3:continuation | continuation | n. | C1 | keeping something going | 持續；延續 | 継続 | 지속 | continuidad | जारी रहना | The continuation of the scheme depends on funding. | continuance, extension, persistence | end, termination | continuation of a service, ensure continuation
+2026-11-26-3:credits | credit | v. | C1 | adds money to an account | 存入（款項） | 入金する | 입금하다 | abona | जमा करता है | The bank credits interest every month. | adds, deposits, pays in | debits, charges | credit an account, credit with money
 2026-11-26-3:debit | debit | n. | B2 | money taken from a bank account | 扣款（direct debit：自動扣款） | 引き落とし | 출금 (direct debit: 자동이체) | débito; cargo (direct debit: domiciliación) | डेबिट | Bills are paid by direct debit. | withdrawal, charge, payment | credit | direct debit, debit card
 2026-11-26-3:declining | declining | adj. | B2 | getting smaller or lower | 下降的；減少的 | 減少する | 감소하는 | en descenso | घटता हुआ | Declining sales forced the shop to close. | falling, shrinking, dwindling | rising, growing | declining numbers, declining usage
 2026-11-26-3:devotees | devotee | n. | C1 | people who like something very much | 熱衷者；擁護者 | 愛用者 | 애호가 | devotos; fans | प्रशंसक | Devotees of the café queue every morning. | fans, enthusiasts, supporters | critics | loyal devotees, devotees of
@@ -111,5 +113,3 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-26-tw-1:calculations | calculation | n. | B2 | acts of working things out with numbers | 計算（複數） | 計算 | 계산들 | cálculos | गणनाएँ | The calculations show the plan is too expensive. | computations, sums | estimates | perform calculations, complex calculations
 2026-11-26-tw-1:centers | center | n. | A2 | buildings used for a special purpose | 中心 | センター | 센터 | centros | केंद्र | Data centers use huge amounts of power. | facilities, hubs, sites |  | data centers, city centers
 2026-11-26-tw-1:chatbots | chatbot | n. | B2 | computer programs that talk with people | 聊天機器人 | チャットボット | 챗봇 | chatbots | चैटबॉट | Many banks use chatbots to answer questions. | AI assistants, virtual assistants |  | AI chatbots, use chatbots
-2026-11-26-tw-1:chia-hsiang | Chia-hsiang | n. | PN | part of a Taiwanese name | 家驤（人名） | 家驤（人名） | 자샹 (이름) | Chia-hsiang (nombre) | चिया-श्यांग (नाम) |  |  |  | 
-2026-11-26-tw-1:chip's | chip | n. | B1 | belonging to a chip | 晶片的 | チップの | 칩의 | del chip | चिप का | The chip's design saves a lot of power. | processor’s, microchip’s |  | a chip's energy, a chip's speed
