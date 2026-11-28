@@ -8,7 +8,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:abroad | abroad | adv. | A2 | in or to another country | 到國外 | 海外へ | 해외로 | al extranjero | विदेश में | He wants to study abroad next year. | overseas, away, in a foreign country | at home | travel abroad, work abroad
 2026-11-28:accounting | account | v. | B2 | forming a part of a total | （account for）占（比例） | 〜を占める | 차지하는 | representar | हिस्सा होना | Young people account for half of the users. | making up, representing, constituting |  | account for, accounting for most
 2026-11-28:adding | add | v. | A2 | saying something more | 補充說 | 付け加えて | 덧붙이며 | añadiendo | जोड़ते हुए | He agreed, adding that more work was needed. | continuing, remarking, going on to say | removing | adding that, add a comment
-2026-11-28:afternoon | afternoon | n. | A1 | the time between noon and evening | 下午 | 午後 | 오후 | tarde | दोपहर | We met for coffee in the afternoon. | midday, post-noon | morning | Friday afternoon, late afternoon
+2026-11-28:afternoon | afternoon | n. | A1 | the time between noon and evening | 下午 | 午後 | 오후 | tarde | दोपहर | We met for coffee in the afternoon. | post-noon | morning | Friday afternoon, late afternoon
 2026-11-28:airport | airport | n. | A1 | a place where planes land and take off | 機場 | 空港 | 공항 | aeropuerto | हवाई अड्डा | The airport was busy before Christmas. | airfield, air terminal |  | Dublin Airport, at the airport
 2026-11-28:all | all | det. | A1 | every one; the whole amount | 全部 | すべての | 모든 | todo | सभी |  |  |  | 
 2026-11-28:also | also | adv. | A1 | in addition | 也 | また | 또한 | también | भी |  |  |  | 
@@ -24,7 +24,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:arrival | arrival | n. | B1 | the act of reaching a place | 抵達 | 到着 | 도착 | llegada | आगमन | We waited for the arrival of the train. | coming, landing, entrance | departure | on arrival, shortly before arrival
 2026-11-28:arrivals | arrival | n. | B1 | the airport area where people come in | 入境大廳（arrivals hall） | 到着ロビー | 입국장 | llegadas | आगमन (हॉल) | I'll meet you in arrivals at noon. | incoming area, arrival lounge | departures | arrivals hall, arrivals area
 2026-11-28:arrived | arrive | v. | A1 | reached a place | 抵達 | 到着した | 도착했다 | llegaron | पहुँचे | The bus arrived late again. | came, landed, got there | left | arrive at, arrive home
-2026-11-28:as | as | conj. | A1 | while; in the role of | 當…時；作為 | 〜とき；〜として | ~할 때; ~로서 | cuando; como | जब; के रूप में |  |  |  | 
+2026-11-28:as | as | conj.; prep. | A1 | while; in the role of | 當…時；作為 | 〜とき；〜として | ~할 때; ~로서 | cuando; como | जब; के रूप में |  |  |  | 
 2026-11-28:assembled | assemble | v. | C1 | gathered together in one place | 聚集的 | 集まった | 모인 | reunidas | इकट्ठे | A crowd assembled outside the hall. | gathered, collected, congregated | scattered | assembled crowd, assembled guests
 2026-11-28:assignment | assignment | n. | B2 | a job or task someone is sent to do | 任務；派駐 | 任務 | 임무 | destino; misión | कार्यभार; तैनाती | Her first assignment was in Brussels. | posting, task, mission |  | overseas assignment, on assignment
 2026-11-28:assistance | assistance | n. | B2 | help or support | 協助 | 支援 | 지원 | ayuda; asistencia | सहायता | They asked the council for assistance. | help, aid, support | hindrance | provide assistance, financial assistance
@@ -32,13 +32,13 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:associated | associated | adj. | B2 | connected with something | 相關的 | 関連する | 관련된 | relacionado | संबंधित | The plan has some associated costs. | related, connected, linked | unrelated | associated costs, associated with
 2026-11-28:back | back | adv. | A1 | to the place where you were before; at the rear | 回來；後面（take a back seat：退居次要） | 戻って；後ろ | 다시; 뒤 | de vuelta; atrás | वापस; पीछे | She came back from Spain last week. | home, behind, to the rear | forward | bring back, take a back seat
 2026-11-28:base | base | n. | B1 | a place where soldiers live and work | 基地 | 基地 | 기지 | base | अड्डा | The army base is near the coast. | camp, station, headquarters |  | military base, army base
-2026-11-28:battalion | battalion | n. | C1 | a large group of soldiers | 營（軍隊單位） | 大隊 | 대대 | batallón | बटालियन | The battalion trained for six weeks. | unit, regiment, force |  | infantry battalion, Irish battalion
+2026-11-28:battalion | battalion | n. | C1 | a large group of soldiers | 營（軍隊單位） | 大隊 | 대대 | batallón | बटालियन | The battalion trained for six weeks. | unit, force |  | infantry battalion, Irish battalion
 2026-11-28:battalion's | battalion | n. | C1 | belonging to the battalion | 營的 | 大隊の | 대대의 | del batallón | बटालियन का | The battalion's camp was near the border. | unit's, regiment's |  | the battalion's equipment, the battalion's return
 2026-11-28:became | become | v. | A1 | started to be | 變得 | 〜になった | ~이 되었다 | se volvió | हो गया | The weather became colder at night. | grew, turned, got |  | became clear, became calmer
 2026-11-28:been | be | v. | A1 | past participle of be | 是（be 的過去分詞） | be の過去分詞 | be의 과거분사 | sido; estado | रहे (be का रूप) |  |  |  | 
 2026-11-28:beginning | beginning | n. | A2 | the first part of something | 開始 | 始まり | 시작 | comienzo | शुरुआत | It was the beginning of a new life. | start, opening, outset | end | the beginning of the end, at the beginning
 2026-11-28:being | be | v. | A1 | used in continuous passive forms | 正被 | 〜されている | ~되고 있는 | siendo | हो रहा |  |  |  | 
-2026-11-28:bring | bring | v. | A1 | take something to a place | 帶回 | 持ってくる | 가져오다 | traer | लाना | Please bring your passport. | carry, take, transport | take away | bring back, bring home
+2026-11-28:bring | bring | v. | A1 | take something to a place | 帶來；帶到 | 持ってくる | 가져오다 | traer | लाना | Please bring your passport. | carry, take, transport | take away | bring back, bring home
 2026-11-28:broke | break | v. | B1 | started suddenly (of war or fighting) | 爆發（break out） | 勃発した | 발발했다 | estalló | छिड़ गई | Fighting broke out last night. | erupted, started, began | ended | broke out, war broke out
 2026-11-28:brought | bring | v. | A1 | carried to a place | 被帶（回） | 持ち帰られた | 가져와진 | traído | लाया गया | The boxes were brought back by truck. | carried, taken, transported | removed | brought back, brought home
 2026-11-28:by | by | prep. | A1 | used to show who does something | 被；由 | 〜によって | ~에 의해 | por | द्वारा |  |  |  | 
@@ -66,7 +66,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:contingent | contingent | n. | C2 | a group sent from a larger group | 分遣隊；代表團 | 派遣団 | 파견대 | contingente | दस्ता | A small contingent of police stayed behind. | group, detachment, unit |  | Irish contingent, a large contingent
 2026-11-28:contributed | contribute | v. | B2 | gave something to a shared effort | 派出；貢獻 | 派遣してきた；貢献した | 기여했다; 파견했다 | ha aportado | योगदान दिया | Many countries contributed money to the fund. | provided, given, supplied | withheld | contribute to, contributed troops
 2026-11-28:cork | Cork | n. | PN | a county and city in Ireland | 科克（郡） | コーク | 코크 | Cork | कॉर्क |  |  |  | 
-2026-11-28:counties | county | n. | B1 | areas of local government in Ireland | 郡 | 郡 | 카운티 | condados | काउंटियाँ | Ireland has 32 counties. | districts, regions, provinces |  | from 28 counties, rural counties
+2026-11-28:counties | county | n. | B1 | areas of local government in Ireland | 郡 | 郡 | 카운티 | condados | काउंटियाँ | Ireland has 32 counties. | districts, regions |  | from 28 counties, rural counties
 2026-11-28:countries | country | n. | A1 | nations | 國家 | 国々 | 나라들 | países | देश | Many countries sent help. | nations, states, lands |  | other countries, European countries
 2026-11-28:country | country | n. | A1 | a nation with its own land | 國家 | 国 | 나라 | país | देश | The country has a small army. | nation, state, land |  | the south of the country, home country
 2026-11-28:damian | Damian | n. | PN | a man's first name | 達米安（名） | ダミアン | 데미언 | Damian | डेमियन |  |  |  | 
@@ -76,7 +76,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:deployed | deploy | v. | C1 | sent to a place for military work | 部署；派駐 | 派遣された | 배치되었다 | desplegados | तैनात किए गए | Extra police were deployed in the city. | sent, stationed, posted | withdrawn | deployed overseas, troops deployed
 2026-11-28:deployment | deployment | n. | C1 | sending soldiers to a place for duty | 部署；派駐期 | 派遣；展開 | 배치; 파병 | despliegue | तैनाती | The deployment lasted six months. | posting, assignment, tour of duty | withdrawal | overseas deployment, six-month deployment
 2026-11-28:described | describe | v. | A2 | said what something was like | 描述 | 〜と表現した | 묘사했다 | describió | वर्णन किया | She described the trip as amazing. | called, portrayed, characterised |  | described as, described the scene
-2026-11-28:displaced | displaced | adj. | C1 | forced to leave their home | 流離失所的 | 避難を余儀なくされた | 난민이 된 | desplazados | विस्थापित | The war left many displaced families. | uprooted, homeless, evacuated | settled | displaced people, displaced persons
+2026-11-28:displaced | displaced | adj. | C1 | forced to leave their home | 流離失所的 | 避難を余儀なくされた | 살던 곳을 강제로 떠난 | desplazados | विस्थापित | The war left many displaced families. | uprooted, homeless, evacuated | settled | displaced people, displaced persons
 2026-11-28:down | down | adv. | A1 | toward a lower place; ending | （touch down：降落；wind down：逐步結束） | 下へ | 아래로 | abajo | नीचे | The plane touched down safely. | downward, to an end | up | touch down, wind down
 2026-11-28:drawn | draw | v. | B2 | taken from a group or place | （從…）選出；招募 | 集められた | 뽑힌 | procedentes | लिए गए | Players were drawn from many clubs. | taken, chosen, recruited |  | drawn from, drawn up
 2026-11-28:draws | draw | v. | B1 | marks; makes (here: ends something) | 劃（draw a line under：為…畫下句點） | 線を引く | 선을 긋다 | marca | खींचता है | The deal draws a line under the dispute. | marks, ends, closes | opens | draw a line under, draws attention
@@ -86,7 +86,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:duty | duty | n. | B1 | work you must do, especially as a soldier | 值勤（tour of duty：服役期） | 任務 | 복무 | servicio | ड्यूटी | She was on duty all night. | service, work, task |  | tour of duty, on duty
 2026-11-28:eased | ease | v. | B2 | became less serious | 緩和 | 和らいだ | 완화되었다 | se calmaron | कम हुए | The pain eased after an hour. | lessened, calmed, relaxed | worsened | tensions eased, pressure eased
 2026-11-28:embarking | embark | v. | C1 | starting something new or important | 開始（embark on：展開） | 乗り出す | 시작하는 | emprendiendo | शुरू कर रहे | She is embarking on a new career. | starting, beginning, setting out | finishing | embark on, embarking upon
-2026-11-28:embraced | embrace | v. | C1 | held someone closely in your arms | 擁抱 | 抱きしめられた | 안겼다 | abrazado | गले लगाया | She embraced her mother at the gate. | hugged, held, clasped | pushed away | warmly embraced, embraced by
+2026-11-28:embraced | embrace | v. | C1 | held someone closely in your arms | 擁抱 | 抱きしめた | 껴안았다 | abrazado | गले लगाया | She embraced her mother at the gate. | hugged, held, clasped | pushed away | warmly embraced, embraced by
 2026-11-28:emotion | emotion | n. | B1 | a strong feeling | 情感；激動 | 感情；感動 | 감정 | emoción | भावना | Her voice was full of emotion. | feeling, sentiment, passion | indifference | considerable emotion, show emotion
 2026-11-28:emotional | emotional | adj. | B1 | showing or causing strong feelings | 感人的；激動的 | 感動的な | 감동적인 | emotivo | भावुक | It was an emotional goodbye. | moving, touching, tearful | unemotional | emotional scenes, emotional moment
 2026-11-28:end | end | n. | A1 | the final part of something | 結束；終點 | 終わり | 끝 | fin | अंत | We left at the end of the film. | finish, close, conclusion | beginning | the end of an era, come to an end
@@ -100,7 +100,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:feeling | feeling | n. | A2 | an emotion | 感受 | 気持ち | 감정 | sentimiento | भावना | I have a good feeling about this. | emotion, sentiment, sense |  | main feeling, a feeling of relief
 2026-11-28:fighting | fighting | n. | B1 | violent conflict between groups | 戰鬥 | 戦闘 | 전투 | combates | लड़ाई | The fighting stopped after a week. | conflict, combat, hostilities | peace | heavy fighting, fighting started
 2026-11-28:final | final | adj. | A2 | last | 最後的 | 最後の | 마지막 | último | अंतिम | This is the final game of the season. | last, closing, concluding | first | final battalion, final stage
-2026-11-28:first | first | adj. | A1 | coming before all others | 第一次 | 初めての | 첫 | primero | पहला | It was my first visit to Spain. | initial, earliest, maiden | last | for the first time, first trip
+2026-11-28:first | first | adj. | A1 | coming before all others | 第一個的；首次的 | 初めての | 첫 | primero | पहला | It was my first visit to Spain. | initial, earliest, maiden | last | for the first time, first trip
 2026-11-28:following | following | prep. | B1 | after | 在…之後 | 〜の後で | ~후에 | tras | के बाद |  |  |  | 
 2026-11-28:for | for | prep. | A1 | used to show purpose or who something is for | 為了；對於 | 〜のために | ~을 위해 | para; por | के लिए |  |  |  | 
 2026-11-28:force | force | n. | B1 | a group of soldiers or police | 部隊 | 部隊 | 군 | fuerza | बल | A UN force keeps the peace there. | unit, army, contingent |  | peacekeeping force, interim force

@@ -5,7 +5,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 
 2026-11-28-2:management | management | n. | B1 | the people or work of running an organisation | 管理 | 管理；経営 | 관리; 운영 | gestión; dirección | प्रबंधन | The school management made the decision. | administration, leadership, direction, running |  | management bodies, school management
 2026-11-28-2:mandatory | mandatory | adj. | C1 | required by law or rules | 強制的；法定的 | 義務的な | 의무적인 | obligatorio | अनिवार्य | Wearing a helmet is mandatory on building sites. | compulsory, obligatory, required, binding | optional, voluntary | mandatory records, mandatory training
-2026-11-28-2:many | many | det. | A1 | a large number of | 許多 | 多くの | 많은 | cuántos; muchos | कितने |  |  |  | 
+2026-11-28-2:many | many | det. | A1 | a large number of | 許多 | 多くの | 많은 | muchos; muchas | बहुत से |  |  |  | 
 2026-11-28-2:marginalised | marginalise | v. | C2 | treated as unimportant and pushed aside | 被邊緣化 | 疎外された | 소외된 | marginado | हाशिए पर धकेला गया | Poor families often feel marginalised. | excluded, sidelined, isolated, neglected | included, integrated | marginalised groups, feel marginalised
 2026-11-28-2:marks | mark | v. | B1 | is (an important date or event) | 標誌著；是 | 〜にあたる | ~이다; 기념하다 | marca | चिह्नित करता है | Friday marks the end of the term. | signals, denotes, represents, indicates |  | marks the deadline, marks the start
 2026-11-28-2:meantime | meantime | n. | B2 | the time until something happens (in the meantime) | in the meantime：與此同時 | その間 (in the meantime) | 그동안 (in the meantime) | mientras tanto (in the meantime) | इस बीच (in the meantime) | In the meantime, please wait here. | meanwhile, interim, interval |  | in the meantime, for the meantime

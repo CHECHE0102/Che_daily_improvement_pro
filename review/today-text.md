@@ -9,7 +9,7 @@ file: articles/2026-11-28.json
 'End of an Era' as Last Irish UN Battalion Returns From Lebanon
 
 ## summaries
-- summaryEn: The last Irish soldiers on the UN mission in Lebanon came home.
+- summaryEn: The last full Irish battalion on the UN mission in Lebanon came home.
 - summaryZh: 最後一支駐黎巴嫩聯合國維和愛爾蘭營返國，象徵時代結束。
 - summaryJa: レバノンの国連平和維持活動に参加した最後のアイルランド大隊が帰国し、一つの時代が終わった。
 - summaryKo: 레바논 유엔 평화유지 임무의 마지막 아일랜드 대대가 귀국하며 한 시대가 끝났다.
@@ -150,8 +150,8 @@ IELTS P2 S2: Irish personnel have participated in the peacekeeping mission in so
     zh: 愛爾蘭人員自1978年起參與黎巴嫩南部的維和任務；因此，這次歸來代表國防軍歷史上一個重要篇章的結束。
 IELTS P3 S1: The battalion comprised approximately 344 members, of whom 16 were women.
     zh: 該營約由344名成員組成，其中16名為女性。
-IELTS P3 S2: Its personnel originated from 28 counties, with Dublin accounting for the largest proportion at 43, and 114 soldiers were undertaking their first overseas assignment.
-    zh: 成員來自28個郡，都柏林所占比例最大，有43人，另有114名士兵是首次執行海外任務。
+IELTS P3 S2: Its personnel originated from 28 counties, with Dublin accounting for the largest number, at 43, and 114 soldiers were undertaking their first overseas assignment.
+    zh: 成員來自28個郡，都柏林人數最多，有43人，另有114名士兵是首次執行海外任務。
 IELTS P4 S1: The commanding officer, Lieutenant Colonel Damian Carroll, characterised the occasion as the end of an era.
     zh: 指揮官達米安・卡羅爾中校形容此刻是一個時代的結束。
 IELTS P4 S2: He further observed that it signified the beginning of the end for UNIFIL, which is anticipated to withdraw progressively from the region during 2027.
@@ -195,10 +195,10 @@ date: 2026-11-28 | rank: 2 | topic: 教育 | main level: B2
 file: articles/2026-11-28-2.json
 
 ## title
-Schools to Get Guidance on Pupils Who Skip Religion Class
+Schools to Get Guidance on Pupils Who Opt Out of Religion Class
 
 ## summaries
-- summaryEn: Schools will get new rules on how to treat children who do not take religion class.
+- summaryEn: Schools will get new guidance on how to treat children who do not take religion class.
 - summaryZh: 教育部將制定指引，規範學校如何對待退出宗教課的學生。
 - summaryJa: 教育省が、宗教の授業を受けない児童への対応について学校向け指針を作る。
 - summaryKo: 교육부가 종교 수업에서 빠지는 학생을 학교가 어떻게 대해야 하는지 지침을 만든다.
@@ -227,8 +227,8 @@ A2 P3 S2: They say their children feel alone and left out.
     zh: 他們說孩子覺得孤單、被排除在外。
 A2 P3 S3: Often the children sit at the back of the room during the class.
     zh: 上課時，這些孩子常常坐在教室後面。
-A2 P4 S1: Now the Department of Education will write new rules for schools.
-    zh: 現在教育部將為學校制定新規定。
+A2 P4 S1: Now the Department of Education will write new guidance for schools.
+    zh: 現在教育部將為學校制定新指引。
 A2 P4 S2: It wants schools to treat these children in a fair way.
     zh: 它希望學校公平對待這些孩子。
 A2 P4 S3: The work will start early in 2027.
@@ -251,8 +251,8 @@ B1 P2 S2: Children learn Catholic teaching during the school day and prepare for
     zh: 孩子們在上學時間學習天主教教義，並在課堂上準備初領聖體和堅振禮。
 B1 P2 S3: Under the Constitution, parents have the right to take their children out of these lessons.
     zh: 根據憲法，家長有權讓孩子不上這些課。
-B1 P3 S1: At the moment, there are no official rules for schools.
-    zh: 目前學校沒有任何官方規定。
+B1 P3 S1: At the moment, there are no official guidelines on how schools should handle these requests.
+    zh: 目前尚無處理這類要求的官方指引。
 B1 P3 S2: Some parents say their children feel left out because they often have to sit at the back of the room while the lesson continues.
     zh: 有些家長說孩子覺得被排除在外，因為上課時他們常常得坐在教室後面。
 B1 P4 S1: The Department says each school must help parents who ask for this.
@@ -261,8 +261,8 @@ B1 P4 S2: It will start talking to parents, teachers, students and school owners
     zh: 它將在2027年初開始與家長、老師、學生和學校主辦者對話。
 B1 P4 S3: It does not keep official records of how many children opt out.
     zh: 教育部並未保存有多少孩子選擇退出的官方紀錄。
-B1 P5 S1: Separately, schools have until Monday to say if they want to change after a survey.
-    zh: 另外，學校須在星期一前表明是否想根據一項調查做出改變。
+B1 P5 S1: Separately, schools have until Monday to say if they want to be among the first schools to make changes following a survey.
+    zh: 另外，學校須在星期一前表明是否願意成為根據調查結果率先改變辦學安排的學校。
 B1 P5 S2: About 40% of parents said they want their religious school to welcome all faiths.
     zh: 約40%的家長表示，希望自己的宗教學校接納所有信仰。
 
@@ -287,8 +287,8 @@ B2 P4 S3: Until then, each school decides how to manage opt-outs, although all s
     zh: 在此之前，由各校自行決定如何處理退出事宜，但所有學校都必須配合家長的要求。
 B2 P4 S4: The Department does not keep compulsory records of how many children are withdrawn.
     zh: 教育部並未保存有多少孩子退出的強制性紀錄。
-B2 P5 S1: Meanwhile, schools have until Monday to say whether they want to change their ethos after a national survey, in which about 40 per cent of parents backed a move to multi-denominational education.
-    zh: 與此同時，學校須在星期一前表明是否要依據一項全國調查改變辦學理念；該調查中約百分之四十的家長支持轉為多宗派教育。
+B2 P5 S1: Meanwhile, schools have until Monday to say whether they want to be among the first schools to change their ethos following a national survey, in which about 40 per cent of parents backed a move to multi-denominational education.
+    zh: 與此同時，學校須在星期一前表明是否願意成為依據全國調查結果率先改變辦學理念的學校；該調查中約百分之四十的家長支持轉為多宗派教育。
 
 ## level C1
 C1 P1 S1: The Department of Education is set to devise guidance on how schools should accommodate pupils withdrawn from religious instruction, in response to mounting complaints from parents.
@@ -309,8 +309,8 @@ C1 P4 S2: In the interim, arrangements remain at each school's discretion, altho
     zh: 在此期間，相關安排仍由各校自行決定，但學校有義務配合家長的要求。
 C1 P4 S3: Strikingly, no mandatory records of opt-outs are kept.
     zh: 引人注目的是，目前並未保存任何退出情況的強制性紀錄。
-C1 P5 S1: Separately, Monday marks the deadline for schools to signal whether they wish to alter their ethos in light of a national survey, in which roughly 40 per cent of parents favoured multi-denominational status.
-    zh: 另外，星期一是學校表明是否希望依據一項全國調查改變辦學理念的截止日；該調查中約百分之四十的家長支持轉為多宗派學校。
+C1 P5 S1: Separately, Monday marks the deadline for schools to signal whether they wish to be among the first schools to alter their ethos in light of a national survey, in which roughly 40 per cent of parents favoured multi-denominational status.
+    zh: 另外，星期一是學校表明是否希望成為依據全國調查結果率先改變辦學理念的學校的截止日；該調查中約百分之四十的家長支持轉為多宗派學校。
 
 ## level IELTS
 IELTS P1 S1: The Department of Education intends to develop formal guidance on the treatment of pupils who have been withdrawn from religious instruction, a measure prompted by a substantial number of parental complaints.
@@ -331,8 +331,8 @@ IELTS P4 S2: In the meantime, the implementation of opt-outs is contingent upon 
     zh: 在此期間，退出安排的執行取決於個別學校的資源，但所有學校都必須配合家長的要求。
 IELTS P4 S3: Notably, the Department does not maintain mandatory records of withdrawals.
     zh: 值得注意的是，教育部並未保存退出情況的強制性紀錄。
-IELTS P5 S1: In a related development, schools must indicate by Monday whether they wish to modify their ethos following a national survey, in which approximately 40 per cent of parents expressed a preference for multi-denominational education.
-    zh: 在一項相關進展中，學校必須在星期一前表明是否希望依據一項全國調查修改辦學理念；該調查中約百分之四十的家長表示偏好多宗派教育。
+IELTS P5 S1: In a related development, schools must indicate by Monday whether they wish to be among the first schools to modify their ethos following a national survey, in which approximately 40 per cent of parents expressed a preference for multi-denominational education.
+    zh: 在一項相關進展中，學校必須在星期一前表明是否希望成為依據全國調查結果率先調整辦學理念的學校；該調查中約百分之四十的家長表示偏好多宗派教育。
 
 ## reading questions (file reason/2026-11-28.json)
 Q1 [main]: Which statement best summarises the passage?
@@ -496,8 +496,8 @@ IELTS P3 S1: Nevertheless, conservationists maintain that responsibility rests p
     zh: 儘管如此，保育人士堅持認為，責任主要在於人類。
 IELTS P3 S2: Niall Hatch of BirdWatch Ireland observes that the herring gull population has declined by approximately 90 per cent within three decades, a trend he characterises as a crisis for the species.
     zh: 愛爾蘭鳥類保育組織的尼爾．哈奇指出，銀鷗數量在三十年內下降約九成，他將此趨勢形容為該物種的危機。
-IELTS P3 S3: Consequently, gulls remain protected under the EU Birds Directive.
-    zh: 因此，海鷗仍受歐盟《鳥類指令》保護。
+IELTS P3 S3: Gulls are also protected under the EU Birds Directive.
+    zh: 海鷗也受到歐盟《鳥類指令》保護。
 IELTS P4 S1: The biologist Éanna Ní Lamhna attributes this phenomenon to the depletion of the birds' traditional food sources.
     zh: 生物學家艾安娜．尼．拉夫納將這一現象歸因於這些鳥傳統食物來源的枯竭。
 IELTS P4 S2: Gulls historically depended on fishing vessels, yet contemporary freezer trawlers discard no waste at sea.
@@ -514,12 +514,12 @@ Q1 [main]: What is the main point of the passage?
    C. Business groups say the gull problem in Dublin has been completely solved.
    D. Although gulls annoy many Dubliners, experts argue that human activity has driven the birds into the city.  <- answer
    explanation: The passage describes complaints about "aggressive gulls" but stresses that conservationists "maintain that responsibility rests primarily with humans", explaining how lost food sources pushed gulls to "urban areas". The population has actually "declined by approximately 90 per cent" (B), no removal plan is mentioned (A), and Dublin Town says the problem has only "diminished to some extent" (C).
-Q2 [infer]: What can be inferred about why gulls are legally protected?
+Q2 [infer]: Why are conservationists concerned about herring gulls?
    A. Because they help councils clean up food waste in cities.
    B. Because their numbers have fallen so steeply that the species is under threat.  <- answer
    C. Because they rarely attack people or pets.
    D. Because fishing vessels depend on them to find fish.
-   explanation: The herring gull population "has declined by approximately 90 per cent within three decades", described as "a crisis for the species"; "Consequently, gulls remain protected". The protection follows from the decline, not from cleaning (A) or harmlessness (C), and the passage says gulls depended on vessels, not the reverse (D).
+   explanation: The herring gull population "has declined by approximately 90 per cent within three decades", described as "a crisis for the species". Such a steep decline explains conservationists' concern. The passage does not link that concern to cleaning (A) or harmlessness (C), and it says gulls depended on vessels, not the reverse (D).
 Q3 [purpose]: Why does the writer mention modern freezer trawlers?
    A. To explain why gulls lost one of their traditional sources of food.  <- answer
    B. To show that the fishing industry is responsible for most gull attacks.
@@ -632,7 +632,7 @@ B2 P5 S3: Daniel Chait, the company's chief executive, argued that people must r
 
 ## level C1
 C1 P1 S1: Jobseekers face daunting odds: barely one in 20 applications now progresses to interview, according to a cross-border survey of employers, with the overwhelming majority weeded out by artificial intelligence before reaching a human.
-    zh: 求職者面臨嚴峻的機率：根據一項跨國雇主調查，如今每20份申請勉強只有一份能進入面試，壓倒性多數在送到人手中之前就被人工智慧剔除。
+    zh: 求職者面臨極為不利的求職形勢：根據一項跨國雇主調查，如今每20份申請勉強只有一份能進入面試，壓倒性多數在送到人手中之前就被人工智慧剔除。
 C1 P2 S1: The study, compiled by the recruitment platform Greenhouse, canvassed 1,347 recruiters and hiring managers across the US, the UK, Germany, Australia and Ireland.
     zh: 這項由招聘平台Greenhouse彙整的研究，徵詢了美國、英國、德國、澳洲和愛爾蘭的1,347位招募人員與招聘經理。
 C1 P2 S2: Respondents reported being inundated with applications on a scale that conventional screening simply cannot absorb.
@@ -720,8 +720,8 @@ A2 P1 S3: About 19.6 million people can vote.
     zh: 大約有1,960萬人可以投票。
 A2 P2 S1: People are choosing many local leaders.
     zh: 人們要選出許多地方領袖。
-A2 P2 S2: There are new mayors for 22 cities and counties.
-    zh: 22個縣市會有新的首長。
+A2 P2 S2: People vote for mayors or county leaders in 22 cities and counties.
+    zh: 22個縣市的選民要選出縣市首長。
 A2 P2 S3: Voters also choose city council members and village chiefs.
     zh: 選民也要選市議員和村里長。
 A2 P3 S1: In Taipei, Mayor Chiang Wan-an wants to win again.
@@ -762,8 +762,8 @@ B1 P3 S2: In Kaohsiung, Lai Jui-lung and Ko Chih-en were the main candidates to 
     zh: 在高雄，賴瑞隆和柯志恩是接替市長陳其邁的主要候選人。
 B1 P4 S1: Voters also answered a referendum question: should Taiwan give up its "nuclear-free homeland" policy?
     zh: 選民也要回答一道公投題目：台灣是否應放棄「非核家園」政策？
-B1 P4 S2: For the result to count, "yes" votes must beat "no" votes and reach at least a quarter of all eligible voters.
-    zh: 公投要有效，同意票必須多於不同意票，且至少達到全體有投票權人的四分之一。
+B1 P4 S2: For the proposal to pass, "yes" votes must beat "no" votes and reach at least a quarter of all eligible voters.
+    zh: 公投提案要通過，同意票必須多於不同意票，且至少達到全體有投票權人的四分之一。
 B1 P5 S1: Officials reminded people to bring their ID and to switch off their phones.
     zh: 官員提醒民眾攜帶身分證並將手機關機。
 B1 P5 S2: Taking photos inside polling stations can lead to a large fine.
@@ -810,8 +810,8 @@ C1 P3 S2: In 2022, the KMT captured 14 of the 22 top posts.
     zh: 2022年，國民黨拿下22席首長中的14席。
 C1 P4 S1: Voters were simultaneously asked whether Taiwan should abandon its "nuclear-free homeland" policy, the fourth nuclear referendum since 2018.
     zh: 選民同時被問及台灣是否應放棄「非核家園」政策，這是2018年以來第四次核能公投。
-C1 P4 S2: Passage requires a simple majority of valid votes as well as a turnout threshold of a quarter of the electorate.
-    zh: 通過門檻除了有效票簡單多數，還須達到選民總數四分之一的投票門檻。
+C1 P4 S2: Passage requires a simple majority of valid votes as well as affirmative votes from at least a quarter of all eligible referendum voters.
+    zh: 通過門檻除了有效票簡單多數，有效同意票還須達全體公投有投票權人數的四分之一。
 C1 P5 S1: Mayoral results were expected by Saturday evening, although the referendum tally could take longer.
     zh: 市長選舉結果預計星期六晚上出爐，但公投計票可能需要更長時間。
 
@@ -849,7 +849,7 @@ Taiwan Raises 2026 Growth Forecast to 13.28%, Fastest in 48 Years
 
 ## summaries
 - summaryEn: Taiwan's statistics agency now expects the economy to grow 13.28% in 2026, driven by booming AI-related exports.
-- summaryZh: 主計總處上修今年經濟成長至13.28%
+- summaryZh: 主計總處上修今年經濟成長率預測至13.28%
 - summaryJa: 台湾、今年の成長率予測を13.28％に上方修正、48年ぶりの高さ。
 - summaryKo: 대만, 올해 성장률 전망 13.28%로 상향…48년 만에 최고.
 - summaryEs: Taiwán eleva su previsión de crecimiento para 2026 al 13,28 %, la más alta en 48 años.
@@ -871,8 +871,8 @@ A2 P2 S1: In August, the office said 11.05%.
     zh: 8月時，該機關說是11.05%。
 A2 P2 S2: Now the number is higher.
     zh: 現在數字更高了。
-A2 P2 S3: This is the fastest growth in 48 years.
-    zh: 這是48年來最快的成長。
+A2 P2 S3: If this happens, it will be the fastest growth in 48 years.
+    zh: 如果實現，這將是48年來最快的成長。
 A2 P3 S1: Why?
     zh: 為什麼？
 A2 P3 S2: Taiwan sells a lot of computer chips and AI products to other countries.
@@ -911,8 +911,8 @@ B1 P3 S2: Private investment should increase by 14.9%, but spending by families 
     zh: 民間投資預計增加14.9%，但家庭支出成長較慢，約4.74%。
 B1 P4 S1: Prices are also rising.
     zh: 物價也在上漲。
-B1 P4 S2: Consumer prices may go up 2.07% this year, slightly above the central bank's 2% target, because of oil, food and electronics.
-    zh: 受石油、食物和電子產品影響，今年消費者物價可能上漲2.07%，略高於央行2%的目標。
+B1 P4 S2: Consumer prices may go up 2.07% this year, slightly above the central bank's 2% inflation threshold, because of oil, food and electronics.
+    zh: 受石油、食物和電子產品影響，今年消費者物價可能上漲2.07%，略高於央行衡量通膨壓力的2%門檻。
 B1 P5 S1: An official said there were still risks, such as new US limits on chip sales to China.
     zh: 一名官員表示仍有風險，例如美國對晶片銷往中國的新限制。
 B1 P5 S2: Growth next year is forecast at 6.51%.
@@ -929,8 +929,8 @@ B2 P2 S2: Exports of goods and services are now expected to jump 23.96%, with me
     zh: 商品與服務出口現在預計大增23.96%，商品出口將達創紀錄的9,386.4億美元，明年可能突破1.11兆美元。
 B2 P3 S1: Gross domestic product grew 14.39% in the third quarter, and the agency sharply revised its fourth-quarter forecast up to 10.42%.
     zh: 第三季國內生產毛額成長14.39%，主計總處也將第四季預測大幅上修至10.42%。
-B2 P3 S2: Private investment is projected to rise 14.9%, although household spending was trimmed slightly to 4.74% amid stock market swings.
-    zh: 民間投資預計成長14.9%，但受股市波動影響，家庭支出預測小幅下修至4.74%。
+B2 P3 S2: Private investment is projected to rise 14.9%, although the forecast for household spending growth was trimmed slightly to 4.74% amid stock market swings.
+    zh: 民間投資預計成長14.9%，但受股市波動影響，家庭支出成長率預測小幅下修至4.74%。
 B2 P4 S1: Inflation is also edging up.
     zh: 通膨也在緩步上升。
 B2 P4 S2: Consumer prices are forecast to rise 2.07% this year, just above the central bank's 2% threshold, driven by crude oil, consumer electronics and food.
@@ -947,12 +947,12 @@ C1 P1 S2: Only 1978, when growth reached 13.56%, would rank higher.
     zh: 只有成長率達13.56%的1978年排名更高。
 C1 P2 S1: The revision underscores how thoroughly the AI boom has reshaped the island's economy.
     zh: 這次上修凸顯AI熱潮已徹底重塑台灣經濟。
-C1 P2 S2: Outbound shipments of goods and services are now expected to surge 23.96%, while merchandise exports are set to hit an unprecedented US$938.64 billion before potentially surpassing US$1.11 trillion in 2027.
+C1 P2 S2: Exports of goods and services are now expected to surge 23.96%, while merchandise exports are set to hit an unprecedented US$938.64 billion before potentially surpassing US$1.11 trillion in 2027.
     zh: 商品與服務出口現在預計激增23.96%，商品出口將達前所未有的9,386.4億美元，2027年更可能超過1.11兆美元。
 C1 P3 S1: Third-quarter output expanded 14.39%, and the agency raised its fourth-quarter estimate by more than five points to 10.42%.
     zh: 第三季產出擴張14.39%，主計總處將第四季預估上調超過五個百分點至10.42%。
-C1 P3 S2: Private investment is forecast to climb 14.9%, though private consumption was nudged down to 4.74%, reflecting volatility in equity markets.
-    zh: 民間投資預計攀升14.9%，不過民間消費微幅下修至4.74%，反映股市的波動。
+C1 P3 S2: Private investment is forecast to climb 14.9%, though the forecast for private consumption growth was nudged down to 4.74%, reflecting volatility in equity markets.
+    zh: 民間投資預計攀升14.9%，不過民間消費成長率預測微幅下修至4.74%，反映股市的波動。
 C1 P4 S1: Price pressures are building as well, with consumer inflation projected at 2.07%, marginally above the central bank's 2% comfort level, owing to costlier crude oil, electronics and food.
     zh: 物價壓力也在累積，由於原油、電子產品和食物變貴，消費者物價預計上漲2.07%，略高於央行2%的可接受範圍。
 C1 P5 S1: DGBAS official Tsai Yu-tai cautioned that further US curbs on chip exports to China, or tougher AI rules, could weigh on demand, adding that the agency had taken a somewhat conservative view of exports.
@@ -971,8 +971,8 @@ IELTS P2 S2: Exports of goods and services are anticipated to expand by 23.96%, 
     zh: 商品與服務出口預計擴張23.96%，今年商品出口預計將達前所未有的9,386.4億美元。
 IELTS P3 S1: Domestic indicators present a more nuanced picture.
     zh: 國內指標呈現的面貌則較為複雜。
-IELTS P3 S2: While private investment is forecast to rise by 14.9%, household consumption was revised marginally downward to 4.74%, which officials linked to fluctuations in the stock market.
-    zh: 民間投資預計成長14.9%，但家庭消費小幅下修至4.74%，官員認為這與股市波動有關。
+IELTS P3 S2: While private investment is forecast to rise by 14.9%, the forecast for household consumption growth was revised marginally downward to 4.74%, which officials linked to fluctuations in the stock market.
+    zh: 民間投資預計成長14.9%，但家庭消費成長率預測小幅下修至4.74%，官員認為這與股市波動有關。
 IELTS P3 S3: Meanwhile, consumer inflation is expected to reach 2.07%, slightly exceeding the central bank's 2% threshold as a consequence of higher prices for crude oil, electronics and food.
     zh: 同時，由於原油、電子產品和食物價格上漲，消費者物價預計上漲2.07%，略高於央行2%的門檻。
 IELTS P4 S1: Nevertheless, the outlook is not without uncertainty.

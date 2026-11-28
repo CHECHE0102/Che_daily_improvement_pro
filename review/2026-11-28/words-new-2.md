@@ -40,7 +40,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:local | local | adj. | A2 | of a particular area | 當地的 | 地元の | 현지의 | locales | स्थानीय | They work with local groups. | regional, community, nearby | national | local operations, local duties
 2026-11-28:long | long | adj. | A1 | lasting a great amount of time | 長的 | 長い | 긴 | largo | लंबा | It was a long journey. | lengthy, extended, prolonged | short | long chapter, long time
 2026-11-28:long-awaited | long-awaited | adj. | C1 | expected for a long time | 期待已久的 | 待ちに待った | 오래 기다려 온 | tan esperado | लंबे इंतज़ार वाला | The long-awaited report came out today. | much-anticipated, eagerly awaited | unexpected | long-awaited return, long-awaited time
-2026-11-28:looking | look | v. | A1 | (look forward to) feeling happy about something coming | （look forward to：期待） | 楽しみにしている | 기대하는 | esperando | देख रहे | I'm looking forward to the summer. | anticipating, awaiting, hoping | dreading | looking forward to, looking at
+2026-11-28:looking | look | v. | A1 | (look forward to) feeling happy about something coming | （look forward to：期待） | 楽しみにしている | 기대하는 | esperando | उत्सुकता से प्रतीक्षा करना (look forward to) | I'm looking forward to the summer. | anticipating, awaiting, hoping | dreading | looking forward to, looking at
 2026-11-28:loud | loud | adj. | A2 | making a lot of noise | 響亮的 | 大きな | 큰 소리의 | fuerte | ज़ोरदार | There was a loud bang outside. | noisy, booming, thunderous | quiet | loud applause, loud music
 2026-11-28:loudly | loudly | adv. | B1 | in a loud way | 大聲地 | 大声で | 크게 | con fuerza | ज़ोर से | The fans sang loudly. | noisily, strongly, vigorously | quietly | cheered loudly, speak loudly
 2026-11-28:loved | loved | adj. | A2 | cared about deeply | 所愛的（loved ones：親人） | 愛する | 사랑하는 | queridos | प्रिय | Spend time with your loved ones. | beloved, dear, cherished | hated | loved ones, much loved
@@ -53,7 +53,7 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:mission | mission | n. | B1 | a special job, often abroad | 任務 | 任務；ミッション | 임무 | misión | मिशन | The mission lasted two years. | operation, task, assignment |  | peacekeeping mission, UN mission
 2026-11-28:moment | moment | n. | A2 | a particular point in time | 時刻 | 瞬間 | 순간 | momento | पल | It was a special moment for us. | time, occasion, instant |  | important moment, at the moment
 2026-11-28:moments | moment | n. | A2 | particular points in time | 時刻 | 瞬間 | 순간들 | momentos | पल | There were many funny moments. | times, instances, occasions |  | emotional moments, happy moments
-2026-11-28:month | month | n. | A1 | one of twelve parts of a year | 月 | 月 | 달 | mes | महीना | We will move next month. | four weeks |  | next month, each month
+2026-11-28:month | month | n. | A1 | one of twelve parts of a year | 月 | 月 | 달 | mes | महीना | We will move next month. | calendar month |  | next month, each month
 2026-11-28:months | month | n. | A1 | periods of about four weeks | 月 | か月 | 개월 | meses | महीने | She lived there for six months. | periods, spells |  | six months, in recent months
 2026-11-28:most | most | adv. | A1 | to the greatest degree | 最 | 最も | 가장 | más | सबसे |  |  |  | 
 2026-11-28:nations | nation | n. | B1 | countries | 國家（United Nations：聯合國） | 国家 | 국가들 | naciones | राष्ट्र | Many nations signed the deal. | countries, states |  | United Nations, member nations
@@ -75,12 +75,12 @@ In a report use article = the first article id of the line and where = "gloss:<k
 2026-11-28:others | other | pron. | A1 | other people | 其他人 | 他の人々 | 다른 사람들 | otros | अन्य लोग |  |  |  | 
 2026-11-28:out | out | adv. | A1 | used with verbs (break out = start suddenly) | （break out：爆發） | 外へ | 밖으로 | fuera | बाहर |  |  |  | 
 2026-11-28:outbreak | outbreak | n. | C1 | the sudden start of war or disease | 爆發 | 勃発 | 발발 | estallido | प्रकोप; छिड़ना | The outbreak of war shocked everyone. | start, eruption, onset | end | outbreak of hostilities, outbreak of war
-2026-11-28:over | over | adv. | A1 | used with verbs (take over = take control) | （take over：接管） | 〜を引き継ぐ | 넘겨받다 | sobre | ऊपर |  |  |  | 
-2026-11-28:overseas | overseas | adj. | B1 | in or to a foreign country | 海外的；在海外 | 海外の；海外で | 해외의; 해외에서 | en el extranjero | विदेशी; विदेश में | He got an overseas job offer. | abroad, foreign, international | domestic | overseas posting, serve overseas
+2026-11-28:over | over | adv. | A1 | used with verbs (take over = take control) | （take over：接管） | 〜を引き継ぐ | 넘겨받다 | asumir el control (take over) | नियंत्रण संभालना (take over) |  |  |  | 
+2026-11-28:overseas | overseas | adj.; adv. | B1 | in or to a foreign country | 海外的；在海外 | 海外の；海外で | 해외의; 해외에서 | en el extranjero | विदेशी; विदेश में | He got an overseas job offer. | abroad, foreign, international | domestic | overseas posting, serve overseas
 2026-11-28:pared-back | pared-back | adj. | C2 | made smaller or simpler | 縮減的 | 縮小された | 축소된 | reducido | घटाया हुआ | The company offers a pared-back service now. | reduced, scaled-down, slimmed-down | expanded | pared-back team, pared-back design
 2026-11-28:part | part | n. | A1 | a piece of a whole | 一部分 | 一部 | 일부 | parte | हिस्सा | She was part of the team. | piece, section, member | whole | part of, take part
 2026-11-28:participated | participate | v. | B2 | took part in | 參與 | 参加してきた | 참여해 왔다 | han participado | भाग लिया | Twenty schools participated in the event. | taken part, been involved, joined |  | participate in, actively participated
-2026-11-28:partners | partner | n. | B1 | people you live with or are married to | 伴侶 | パートナー | 배우자 | parejas | साथी | Guests can bring their partners. | spouses, companions, husbands and wives |  | partners and children, life partners
+2026-11-28:partners | partner | n. | B1 | people you live with or are married to | 伴侶 | パートナー | 배우자; 연인 | parejas | साथी | Guests can bring their partners. | spouses, companions, husbands and wives |  | partners and children, life partners
 2026-11-28:peace | peace | n. | A2 | a time without war | 和平 | 平和 | 평화 | paz | शांति | People want peace in the region. | calm, harmony, order | war | peace mission, keep the peace
 2026-11-28:peacekeepers | peacekeeper | n. | C1 | soldiers sent to keep peace in another country | 維和人員 | 平和維持要員 | 평화유지군 | fuerzas de paz | शांति सैनिक | The peacekeepers patrolled the border. | UN soldiers, troops | fighters | UN peacekeepers, international peacekeepers
 2026-11-28:peacekeeping | peacekeeping | adj. | C1 | keeping peace between enemies | 維和的 | 平和維持の | 평화 유지의 | de mantenimiento de la paz | शांति स्थापना | Ireland is proud of its peacekeeping work. | peace-support, stabilising |  | peacekeeping mission, peacekeeping force

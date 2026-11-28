@@ -92,7 +92,7 @@
    },
    {
     "type": "infer",
-    "q": "What can be inferred about why gulls are legally protected?",
+    "q": "Why are conservationists concerned about herring gulls?",
     "opts": [
      "Because they help councils clean up food waste in cities.",
      "Because their numbers have fallen so steeply that the species is under threat.",
@@ -100,7 +100,7 @@
      "Because fishing vessels depend on them to find fish."
     ],
     "a": 1,
-    "exp": "The herring gull population \"has declined by approximately 90 per cent within three decades\", described as \"a crisis for the species\"; \"Consequently, gulls remain protected\". The protection follows from the decline, not from cleaning (A) or harmlessness (C), and the passage says gulls depended on vessels, not the reverse (D)."
+    "exp": "The herring gull population \"has declined by approximately 90 per cent within three decades\", described as \"a crisis for the species\". Such a steep decline explains conservationists' concern. The passage does not link that concern to cleaning (A) or harmlessness (C), and it says gulls depended on vessels, not the reverse (D)."
    },
    {
     "type": "purpose",
